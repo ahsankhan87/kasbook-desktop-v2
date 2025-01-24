@@ -1,0 +1,237 @@
+﻿namespace pos
+{
+    partial class frm_addAccount
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addAccount));
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.lbl_header_title = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.txt_id = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbl_edit_status = new System.Windows.Forms.Label();
+            this.txt_description = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_account_code = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_op_dr_balance = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_op_cr_balance = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmb_group_id = new System.Windows.Forms.ComboBox();
+            this.txt_name_2 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // txt_name
+            // 
+            resources.ApplyResources(this.txt_name, "txt_name");
+            this.txt_name.Name = "txt_name";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // btn_save
+            // 
+            resources.ApplyResources(this.btn_save, "btn_save");
+            this.btn_save.Name = "btn_save";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // lbl_header_title
+            // 
+            resources.ApplyResources(this.lbl_header_title, "lbl_header_title");
+            this.lbl_header_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_header_title.Name = "lbl_header_title";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel1.Controls.Add(this.lbl_header_title);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.ForeColor = System.Drawing.Color.Coral;
+            this.panel1.Name = "panel1";
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // txt_id
+            // 
+            resources.ApplyResources(this.txt_id, "txt_id");
+            this.txt_id.Name = "txt_id";
+            this.txt_id.ReadOnly = true;
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // lbl_edit_status
+            // 
+            resources.ApplyResources(this.lbl_edit_status, "lbl_edit_status");
+            this.lbl_edit_status.Name = "lbl_edit_status";
+            // 
+            // txt_description
+            // 
+            resources.ApplyResources(this.txt_description, "txt_description");
+            this.txt_description.Name = "txt_description";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // txt_account_code
+            // 
+            resources.ApplyResources(this.txt_account_code, "txt_account_code");
+            this.txt_account_code.Name = "txt_account_code";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // txt_op_dr_balance
+            // 
+            resources.ApplyResources(this.txt_op_dr_balance, "txt_op_dr_balance");
+            this.txt_op_dr_balance.Name = "txt_op_dr_balance";
+            this.txt_op_dr_balance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_op_dr_balance_KeyPress);
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // txt_op_cr_balance
+            // 
+            resources.ApplyResources(this.txt_op_cr_balance, "txt_op_cr_balance");
+            this.txt_op_cr_balance.Name = "txt_op_cr_balance";
+            this.txt_op_cr_balance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_op_cr_balance_KeyPress);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // cmb_group_id
+            // 
+            this.cmb_group_id.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_group_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_group_id, "cmb_group_id");
+            this.cmb_group_id.Name = "cmb_group_id";
+            // 
+            // txt_name_2
+            // 
+            resources.ApplyResources(this.txt_name_2, "txt_name_2");
+            this.txt_name_2.Name = "txt_name_2";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // frm_addAccount
+            // 
+            resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_cancel;
+            this.Controls.Add(this.cmb_group_id);
+            this.Controls.Add(this.lbl_edit_status);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btn_save);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txt_id);
+            this.Controls.Add(this.txt_description);
+            this.Controls.Add(this.txt_account_code);
+            this.Controls.Add(this.txt_op_cr_balance);
+            this.Controls.Add(this.txt_op_dr_balance);
+            this.Controls.Add(this.txt_name_2);
+            this.Controls.Add(this.txt_name);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.Name = "frm_addAccount";
+            this.Load += new System.EventHandler(this.frm_addAccount_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_addAccount_KeyDown);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.Label lbl_header_title;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.TextBox txt_id;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbl_edit_status;
+        private System.Windows.Forms.TextBox txt_description;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txt_account_code;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt_op_dr_balance;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_op_cr_balance;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmb_group_id;
+        private System.Windows.Forms.TextBox txt_name_2;
+        private System.Windows.Forms.Label label7;
+    }
+}

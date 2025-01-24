@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9CEBB48-25EA-4004-B410-C78F15E470B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POS.BLL</RootNamespace>
+    <AssemblyName>POS.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounts\ExpenseBLL.cs" />
+    <Compile Include="Accounts\JournalsBLL.cs" />
+    <Compile Include="Accounts\AccountsBLL.cs" />
+    <Compile Include="Accounts\GroupsBLL.cs" />
+    <Compile Include="POS\BankBLL.cs" />
+    <Compile Include="POS\FiscalyearsBLL.cs" />
+    <Compile Include="POS\BranchesBLL.cs" />
+    <Compile Include="POS\PaymentMethodBLL.cs" />
+    <Compile Include="POS\ProductGroupsBLL.cs" />
+    <Compile Include="POS\OriginBLL.cs" />
+    <Compile Include="POS\ModulesBLL.cs" />
+    <Compile Include="POS\EstimatesBLL.cs" />
+    <Compile Include="POS\Purchases_orderBLL.cs" />
+    <Compile Include="POS\PaymentTermsBLL.cs" />
+    <Compile Include="POS\ICTBLL.cs" />
+    <Compile Include="POS\UsersBLL.cs" />
+    <Compile Include="POS\CompaniesBLL.cs" />
+    <Compile Include="POS\BrandsBLL.cs" />
+    <Compile Include="POS\LocationsBLL.cs" />
+    <Compile Include="Reports\PurchasesReportBLL.cs" />
+    <Compile Include="Reports\WarehouseReportBLL.cs" />
+    <Compile Include="Reports\SalesReportBLL.cs" />
+    <Compile Include="POS\UnitsBLL.cs" />
+    <Compile Include="POS\PurchasesBLL.cs" />
+    <Compile Include="POS\CategoriesBLL.cs" />
+    <Compile Include="POS\TaxBLL.cs" />
+    <Compile Include="POS\SalesBLL.cs" />
+    <Compile Include="POS\ProductBLL.cs" />
+    <Compile Include="POS\EmloyeeBLL.cs" />
+    <Compile Include="POS\SupplierBLL.cs" />
+    <Compile Include="POS\CustomerBLL.cs" />
+    <Compile Include="GeneralBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\POS.Core\POS.Core.csproj">
+      <Project>{c7ef0a4c-69d0-493e-8494-9c216ca973f2}</Project>
+      <Name>POS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\POS.DLL\POS.DLL.csproj">
+      <Project>{30e20f2a-2cbb-460f-bbd2-0832a8f3a214}</Project>
+      <Name>POS.DLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

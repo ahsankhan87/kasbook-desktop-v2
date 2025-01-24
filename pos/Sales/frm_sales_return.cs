@@ -1,0 +1,423 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using POS.BLL;
+using POS.Core;
+
+namespace pos
+{
+    public partial class frm_sales_return : Form
+    {
+        SalesBLL objSalesBLL = new SalesBLL();
+        DataTable sales_dt;
+        //string _invoice_no = "";
+        
+        public int cash_account_id = 0;
+        public int sales_account_id = 0;
+        public int receivable_account_id = 0;
+        public int tax_account_id = 0;
+        public int sales_discount_acc_id = 0;
+        public int inventory_acc_id = 0;
+        public int purchases_acc_id = 0;
+
+        public double employee_commission_percent = 0;
+        public double user_commission_percent = 0;
+        
+        public frm_sales_return()
+        {
+            InitializeComponent();
+            Get_AccountID_From_Company();
+            
+            //_invoice_no = invoice_no;
+        }
+
+
+        public void frm_sales_return_Load(object sender, EventArgs e)
+        {
+            //load_sales_return_grid(sale_id);
+            autoCompleteInvoice();
+            txt_invoice_no.Focus();
+            Get_user_total_commission();
+            
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                grid_sales_return.DataSource = null;
+                grid_sales_return.AutoGenerateColumns = false;
+                grid_sales_return.DataSource = load_sales_items_return_grid(txt_invoice_no.Text);
+                sales_dt = load_sales_return_grid(txt_invoice_no.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+        
+        public bool item_checked = false;
+        private void btn_return_Click(object sender, EventArgs e)
+        {
+            ////Checking item is selected or not
+            for (int i = 0; i < grid_sales_return.Rows.Count; i++)
+            {
+                if (grid_sales_return.Rows[i].Cells["id"].Value != null)
+                {
+                    if (Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value))
+                    {
+                        item_checked = true;
+                    }
+                }
+            }
+            if (!item_checked)
+            {
+                MessageBox.Show("Please select product", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /////////
+
+            DialogResult result = MessageBox.Show("Are you sure you want to return", "Sale Return Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                if (grid_sales_return.Rows.Count > 0)
+                {
+                    
+                    string new_invoice_no = GetMAXInvoiceNo();
+
+                    double total_tax = 0;
+                    double total_amount = 0;
+                    double total_cost_amount = 0;
+                    double total_discount = 0;
+                    double sub_total = 0;
+
+                    int employee_id = 0;
+                    string description = "Sale Return Inv #:"+ txt_invoice_no.Text;
+                    
+                    DateTime sale_date = DateTime.Now;
+
+                    //GET VALUES FROM LOADED GRID
+                    for (int i = 0; i < grid_sales_return.RowCount; i++)
+                    {
+                        if (Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value))
+                        {
+                            double tax_rate = (grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString()));
+                            sub_total = (Convert.ToDouble(grid_sales_return.Rows[i].Cells["return_qty"].Value) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["unit_price"].Value)- Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value));
+                            double tax = (sub_total * tax_rate / 100);
+
+                            total_tax += tax;
+
+                            //total_tax += Convert.ToInt32(grid_sales_return.Rows[i].Cells["vat"].Value) / Convert.ToInt32(grid_sales_return.Rows[i].Cells["quantity_sold"].Value) * Convert.ToInt32(grid_sales_return.Rows[i].Cells["return_qty"].Value);
+                            total_amount += sub_total+ Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
+                            total_discount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
+                            total_cost_amount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["cost_price"].Value.ToString()) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["return_qty"].Value.ToString());
+
+                        } 
+                    }
+
+                    List<SalesModalHeader> sales_model_header = new List<SalesModalHeader> { };
+                    List<SalesModal> sales_model_detail = new List<SalesModal> { };
+
+                    //GET ALREADY SAVED SALES 
+                    foreach (DataRow sales_dr in sales_dt.Rows)
+                    {
+                        
+                        employee_id = (sales_dr["employee_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["employee_id"].ToString()));
+                        int customer_id = (sales_dr["customer_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["customer_id"].ToString()));
+                        string sale_type = sales_dr["sale_type"].ToString();
+
+                        /////Added sales header into the List
+                        sales_model_header.Add(new SalesModalHeader
+                        {
+                            customer_id = customer_id,
+                            employee_id = employee_id,
+                            invoice_no = new_invoice_no,
+                            total_amount = total_amount,
+                            total_tax = total_tax,
+                            total_discount = total_discount,
+                            //total_discount_percent = (string.IsNullOrEmpty(txt_total_disc_percent.Text) ? 0 : Convert.ToDouble(txt_total_disc_percent.Text)),
+                            sale_type = sale_type,
+                            sale_date = sale_date,
+                            sale_time = sale_date,
+                            description = description,
+                            //payment_terms_id = payment_terms_id,
+                            //payment_method_id = payment_method_id,
+                            account = "Return",
+                            //is_return = false,
+                            old_invoice_no = txt_invoice_no.Text,
+
+                            total_cost_amount = total_cost_amount,
+                            cash_account_id = cash_account_id,
+                            receivable_account_id = receivable_account_id,
+                            tax_account_id = tax_account_id,
+                            sales_discount_acc_id = sales_discount_acc_id,
+                            inventory_acc_id = inventory_acc_id,
+                            purchases_acc_id = purchases_acc_id,
+                            sales_account_id = sales_account_id,
+
+                        });
+                        //////
+                    }
+                    
+                    for (int i = 0; i < grid_sales_return.Rows.Count; i++)
+                    {
+                        if (grid_sales_return.Rows[i].Cells["id"].Value != null)
+                        {
+                            if (Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value))
+                            {
+                                ///// Added sales detail in to List
+                                sales_model_detail.Add(new SalesModal
+                                {
+                                    invoice_no = new_invoice_no,
+                                    code = grid_sales_return.Rows[i].Cells["item_code"].Value.ToString(),
+                                    name = grid_sales_return.Rows[i].Cells["product_name"].Value.ToString(),
+                                    quantity_sold = double.Parse(grid_sales_return.Rows[i].Cells["return_qty"].Value.ToString()),
+                                    packet_qty = double.Parse(grid_sales_return.Rows[i].Cells["packet_qty"].Value.ToString()),
+                                    unit_price = double.Parse(grid_sales_return.Rows[i].Cells["unit_price"].Value.ToString()),
+                                    discount = double.Parse(grid_sales_return.Rows[i].Cells["discount_value"].Value.ToString()),
+                                    //discount_percent = double.Parse(grid_sales.Rows[i].Cells["discount_percent"].Value.ToString()),
+                                    cost_price = Convert.ToDouble(grid_sales_return.Rows[i].Cells["cost_price"].Value.ToString()),// its avg cost actually ,
+                                    //item_type = grid_sales.Rows[i].Cells["item_type"].Value.ToString(),
+                                    location_code = grid_sales_return.Rows[i].Cells["loc_code"].Value.ToString(),
+                                    tax_id = Convert.ToInt16(grid_sales_return.Rows[i].Cells["tax_id"].Value.ToString()),
+                                    tax_rate = Convert.ToDouble(grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString()),
+                                    sale_date = sale_date,
+                                });
+                                //////////////
+                            }
+                        }
+
+                    }
+
+                    int sale_id = objSalesBLL.InsertReturnSales(sales_model_header, sales_model_detail);
+
+                    //Employee commission entry
+                    if (employee_id != 0)
+                    {
+                        employee_commission_percent = Get_emp_total_commission(employee_id);
+                        double emp_commission_amount = employee_commission_percent * total_amount / 100;
+                        Insert_emp_commission(new_invoice_no, 0, emp_commission_amount, 0, sale_date, description, employee_id);
+                    }
+                    /////
+
+                    //User commission entry
+                    if (user_commission_percent > 0)
+                    {
+                        double user_commission_amount = user_commission_percent * total_amount / 100;
+                        Insert_user_commission(new_invoice_no, 0, user_commission_amount, 0, sale_date, description);
+                    }
+                    /////
+
+                    if (sale_id > 0)
+                    {
+                        MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        grid_sales_return.DataSource = null;
+                        grid_sales_return.Rows.Clear();
+                        grid_sales_return.Refresh();
+                        txt_invoice_no.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please search for invoice", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
+            string description, int customer_id, int supplier_id, int entry_id)
+        {
+            int journal_id = 0;
+            JournalsModal JournalsModal_obj = new JournalsModal();
+            JournalsBLL JournalsObj = new JournalsBLL();
+
+            JournalsModal_obj.invoice_no = invoice_no;
+            JournalsModal_obj.entry_date = date;
+            JournalsModal_obj.debit = debit;
+            JournalsModal_obj.credit = credit;
+            JournalsModal_obj.account_id = account_id;
+            JournalsModal_obj.description = description;
+            JournalsModal_obj.customer_id = customer_id;
+            JournalsModal_obj.supplier_id = supplier_id;
+            JournalsModal_obj.entry_id = entry_id;
+
+            journal_id = JournalsObj.Insert(JournalsModal_obj);
+            return journal_id;
+        }
+
+        private int Insert_emp_commission(string invoice_no, int account_id, double debit, double credit, DateTime date,
+            string description, int employee_id = 0)
+        {
+            int journal_id = 0;
+            JournalsModal JournalsModal_obj = new JournalsModal();
+            EmployeeBLL emp_Obj = new EmployeeBLL();
+
+            JournalsModal_obj.invoice_no = invoice_no;
+            JournalsModal_obj.entry_date = date;
+            JournalsModal_obj.debit = debit;
+            JournalsModal_obj.credit = credit;
+            JournalsModal_obj.account_id = account_id;
+            JournalsModal_obj.description = description;
+            JournalsModal_obj.employee_id = employee_id;
+
+            journal_id = emp_Obj.InsertEmpCommission(JournalsModal_obj);
+            return journal_id;
+        }
+
+        private int Insert_user_commission(string invoice_no, int account_id, double debit, double credit, DateTime date,
+            string description)
+        {
+            int journal_id = 0;
+            JournalsModal JournalsModal_obj = new JournalsModal();
+            UsersBLL emp_Obj = new UsersBLL();
+
+            JournalsModal_obj.invoice_no = invoice_no;
+            JournalsModal_obj.entry_date = date;
+            JournalsModal_obj.debit = debit;
+            JournalsModal_obj.credit = credit;
+            JournalsModal_obj.account_id = account_id;
+            JournalsModal_obj.description = description;
+
+            journal_id = emp_Obj.InsertUserCommission(JournalsModal_obj);
+            return journal_id;
+        }
+        
+        private void Get_AccountID_From_Company()
+        {
+            GeneralBLL objBLL = new GeneralBLL();
+
+            String keyword = "TOP 1 *";
+            String table = "pos_companies";
+            DataTable companies_dt = objBLL.GetRecord(keyword, table);
+            foreach (DataRow dr in companies_dt.Rows)
+            {
+                cash_account_id = (int)dr["cash_acc_id"];
+                sales_account_id = (int)dr["sales_acc_id"];
+                receivable_account_id = (int)dr["receivable_acc_id"];
+                tax_account_id = (int)dr["tax_acc_id"];
+                sales_discount_acc_id = (int)dr["sales_discount_acc_id"];
+                inventory_acc_id = (int)dr["inventory_acc_id"];
+                purchases_acc_id = (int)dr["purchases_acc_id"];
+            }
+        }
+
+        public DataTable load_sales_items_return_grid(string invoice_no)
+        {
+              
+            //bind data in data grid view  
+            DataTable dt = objSalesBLL.GetReturnSaleItems(invoice_no);
+            return dt;
+            
+        }
+
+        public DataTable load_sales_return_grid(string invoice_no)
+        {
+
+            //bind data in data grid view  
+            DataTable dt = objSalesBLL.GetReturnSales(invoice_no);
+            return dt;
+
+        }
+
+        public string GetMAXInvoiceNo()
+        {
+            SalesBLL salesBLL_obj = new SalesBLL();
+            return salesBLL_obj.GetMaxSalesReturnInvoiceNo();
+        }
+
+        public void autoCompleteInvoice()
+        {
+            try
+            {
+                txt_invoice_no.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                txt_invoice_no.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+                GeneralBLL invoicesBLL_obj = new GeneralBLL();
+                string keyword = "TOP 500 invoice_no ";
+                string table = "pos_sales WHERE account = 'Sale' AND branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY id desc";
+                DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        coll.Add(dr["invoice_no"].ToString());
+
+                    }
+
+                }
+
+                txt_invoice_no.AutoCompleteCustomSource = coll;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        
+        private void frm_sales_return_KeyDown(object sender, KeyEventArgs e)
+        {
+            //when you enter in textbox it will goto next textbox, work like TAB key
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+            if (e.KeyCode == Keys.Escape)
+            {
+                txt_close.PerformClick();
+            }
+
+            if (e.KeyCode == Keys.F3)
+            {
+                btn_return.PerformClick();
+            }
+        }
+
+        private void txt_close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private void Get_user_total_commission()
+        {
+            UsersBLL obj = new UsersBLL();
+            DataTable users = obj.GetUser(UsersModal.logged_in_userid);
+
+            foreach (DataRow dr in users.Rows)
+            {
+                user_commission_percent = double.Parse(dr["commission_percent"].ToString());
+            }
+
+        }
+
+        private double Get_emp_total_commission(int employee_id)
+        {
+            EmployeeBLL obj = new EmployeeBLL();
+            DataTable employees = obj.SearchRecordByID(employee_id);
+            double commission_percent = 0;
+            
+            foreach (DataRow dr in employees.Rows)
+            {
+                commission_percent = double.Parse(dr["commission_percent"].ToString());
+            }
+            return commission_percent;
+        }
+    }
+}

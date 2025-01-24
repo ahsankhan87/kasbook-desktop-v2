@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30E20F2A-2CBB-460F-BBD2-0832A8F3A214}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POS.DLL</RootNamespace>
+    <AssemblyName>POS.DLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounts\ExpenseDLL.cs" />
+    <Compile Include="Accounts\JournalsDLL.cs" />
+    <Compile Include="Accounts\AccountsDLL.cs" />
+    <Compile Include="Accounts\GroupsDLL.cs" />
+    <Compile Include="POS\BanksDLL.cs" />
+    <Compile Include="POS\CustomerDLL.cs" />
+    <Compile Include="POS\CustomerDLL_old.cs" />
+    <Compile Include="POS\FiscalYearsDLL.cs" />
+    <Compile Include="POS\BranchesDLL.cs" />
+    <Compile Include="POS\Log.cs" />
+    <Compile Include="POS\PaymentMethodDLL.cs" />
+    <Compile Include="POS\ProductGroupsDLL.cs" />
+    <Compile Include="POS\OriginDLL.cs" />
+    <Compile Include="POS\ModulesDLL.cs" />
+    <Compile Include="POS\EstimatesDLL.cs" />
+    <Compile Include="POS\ProductsDLL.cs" />
+    <Compile Include="POS\ProductsDLL_old.cs" />
+    <Compile Include="POS\Purchases_orderDLL.cs" />
+    <Compile Include="POS\PaymentTermsDLL.cs" />
+    <Compile Include="POS\ICTDLL.cs" />
+    <Compile Include="POS\UsersDLL.cs" />
+    <Compile Include="POS\CompaniesDLL.cs" />
+    <Compile Include="POS\BrandsDLL.cs" />
+    <Compile Include="POS\LocationsDLL.cs" />
+    <Compile Include="Reports\PurchaseReportDLL.cs" />
+    <Compile Include="Reports\AccountReportDLL.cs" />
+    <Compile Include="Reports\WarehouseReportDLL.cs" />
+    <Compile Include="Reports\SalesReportDLL.cs" />
+    <Compile Include="POS\UnitsDLL.cs" />
+    <Compile Include="POS\PurchasesDLL.cs" />
+    <Compile Include="POS\CategoriesDLL.cs" />
+    <Compile Include="POS\TaxDLL.cs" />
+    <Compile Include="POS\SalesDLL.cs" />
+    <Compile Include="POS\EmployeeDLL.cs" />
+    <Compile Include="POS\SupplierDLL.cs" />
+    <Compile Include="dbConnection.cs" />
+    <Compile Include="GeneralDLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\POS.Core\POS.Core.csproj">
+      <Project>{c7ef0a4c-69d0-493e-8494-9c216ca973f2}</Project>
+      <Name>POS.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

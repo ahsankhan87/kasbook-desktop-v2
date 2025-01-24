@@ -1,0 +1,1145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 19</value>
+  </data>
+  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 25</value>
+  </data>
+  <data name="label21.Text" xml:space="preserve">
+    <value>فاتورة مبيعات</value>
+  </data>
+  <data name="btn_save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btn_save.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAl9JREFUOE990VlIVFEcBvB5CaLXnsJKbA9NbTEo8UEwycpEq6HEBXOBRPNBKkxT
+        G1xwZnSQTJgpbLreq2MajhRKQoOVS1I2Nporct1apEzM9NSk83U8d7opNX7wg8Ph///g3KtYTuzDQT6K
+        axMXlxxiRcewaH47LjocDhGAzDL0UYwwvhyOqhvQBmbo17HFP4mp7SPh+mY6BwRoGxDPtbDzyjT3TSDU
+        0IILpl6cN/Xed65KiTTZyHFdPRs8oBIQaWhk55VptIkIutWEc0I3c5a3ZjnXFQol30X8C01Y+PkLrcOT
+        sI5NOdf+xiSmodAaA21PIjS2BCgFy3ffuMz1rCDc2EkO5VXB64YRPjncf+n6t6B0wE2mFOrhezHLnRWE
+        6J8TJdcBJdfuUvE7d5T0bZad4R5gX2yGVHDs9lNCYS1FNg9oerbKwiqq4Rl9VSoILH1CKKwl/812FHR7
+        yE4aKrEnMl0qCCh5TBKFVlxveO3SzVe7qB2y4HIjggvipYIjajP5RuyYnVvA9Myc7MvMLIo6g5DZvtsV
+        KyvwK6gj8/QXfv46i/dT06v0fujEtWfeuNLiuUq6xRtxVf5HWcF+VTUtsGNk/BNsA6P/ELq0uNzss0ro
+        3TS4RyRJT/DKriTzP1wXWPtHkNGkRNKjg4ymPQFhZQ1wO50oFezNvEemxRcgk20ujQ3W4JLZD8nmw5gY
+        qsWpYgGbQulHzNOVbQjJN3Ykq1X2VHXuIrXEaBiHE7uLLk+hUhdT1Ln2E3mG0exS/UYFz/PbqHgqm9JR
+        Boqjqqgap2rn3R1qeSaHSuB5fudvZRCR+kEXOEEAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>794, 9</value>
+  </data>
+  <data name="btn_save.Text" xml:space="preserve">
+    <value>حفظ (F3)</value>
+  </data>
+  <data name="btn_new.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btn_new.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAZBJREFUOE+N0M9LwmAYB/D9A0J3MUgwsEMSEXTqEkG3Dt3Ev6CMOiUkJCF5SVTs
+        IHgoghl0MwOFiMpJg5H1MpTZVk0SRipqh4gu4dOzsUpcEx/4wPvr+x2M+pl2ux3vdDrETKvVIh6PZ0V/
+        bhwsIAgG8Xq9Xbfb/X+J+gUEg0SjUfD5fF2/328saTabBMEwGo3Gox77m3q9ThAMyVigKApBMCRjQa1W
+        IwgGqdYkJKprY4EsywSBuWc4lGfhQJ6BJ1k0FkiSRBCYEaUKxB6smorEGwsEQSAI+vHCLdwLDNwJV7BX
+        HtVwQra6c7xk9YTsI3qconieJwj67ZfmIFKe1oSIHY397iOlqXc9TlHFYpEg6Bfm5iHIuTTbnEMT5Ca/
+        Atz4W4BziHqcoliWJQjM3LAF2MxPaPLshfEfMAxDCoUCmMkz17B27tJcMj0FiUTCQtO0M5PJHOVyOQm9
+        IAW99srmsspGevFzPb3wkTk7PUmlUs5kMmmhMGxDy2gVbaFdFEYxFNepa/VMvfMj9S1maNs37RWF51id
+        ENYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btn_new.Location" type="System.Drawing.Point, System.Drawing">
+    <value>886, 9</value>
+  </data>
+  <data name="btn_new.Text" xml:space="preserve">
+    <value>الجديد (F1)</value>
+  </data>
+  <data name="btn_movements.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btn_movements.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAr5JREFUOE+tk1tI03EUx39OLLdpuXBOIUtISynxLQLNtDDTMnzxUl4SLHSRF7xl
+        Qr2k1kNCD5aoXRSdipcWlilp2ipHVqa4ZVPHprsqTrc5x7bUvv1dhvUSSH3hAz9+5/c95/w4HPLPup3i
+        xuRl7wpquMIK3Aq8LFbQvUssJvlcyckwdHCga90a+jYOZHWemeRaogvX0OEJFe8vNLpD1UDx290i5bl5
+        YQeXJB+nZ5meev0R/IWyzgWKagJV016oW3ztZ2UdnYpxsMT3wsVoRg5Ji6DnmPjU40YOVWmT6VqCWUEG
+        VtYA9fIaFEYr1rUwVIppKpGR+jY3mp5DUk8yc5e71it4Q9lM0bQbykfOmB+9D60FaJXEoHEqHJUSf1z/
+        wMHI3CiMkwIs1NCQdoKRS86Fu+ZZXh6ApsPPjrbdB0r+ESx+A/iyCEyqh2ExAjYD8GamHneHoyBdnIPl
+        fRrSIrblkeQodv7qpzDo+kN+0hsErZgPoaoK77Q3YKRaF8wnoWeGC5iBIfVzVImjYNWKkH7aOZ+kxPoU
+        QJEKszgBZlEiLCOnIBePoFuVhXZZHDoVMejUnEWL4gwa5dGol8ahYvwgFrVGpMeyCknkIVrhq2wmnmUy
+        0HWZju5MAmHPC3TPFmBQXY8Vqv22CS7KJG4YkDag+ksSeMoYyMcViPQlRST+qPPVpU4vSB+z7chr6eit
+        z4bWpkPdRAKmdcNY1gMqjQErJqDi6x4obSKMv32A8yGkmMQEs/IVDUEwD4dCLwzB0lAwxtr2Q6YCpKZB
+        FI454O5EIJpl8SiXMCBaaIV1Fegr80N82M6CjY0gZKqKDW2tOzQ17tA/dEX/nQBo5r/bZ69Y+gipXgCr
+        DXZCQ48Vbdg2RXMgntsdSACFP51GApwI8XZ0dNpXXFLypK9PoBt4LTSUlt/qZXt4HN6w/A8R8gMP2SNo
+        DWYjIgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btn_movements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 9</value>
+  </data>
+  <data name="btn_movements.Text" xml:space="preserve">
+    <value>حركة المنتج (F4)</value>
+  </data>
+  <data name="btn_round_prices.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btn_round_prices.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAANhJREFUOE+90j0LQWEYxvGDRFLKYrcxKrtksBiwSVn4Bj6BFQsbk5cvYBGZjbL4
+        AIpJNjaF/6371MlwXkqu+g3P3Xmuek638c+EMED8c3KZMHyQy0vM4YerlHDFFhtMEYBjgujhgCKOeKEK
+        V1lBLjQgRTOs8UQLtklCLosJokjgrLMdbJOGWSBOuFnO8izbWAsuKKCNh848FVRUFkOdeSooQ/58E3ud
+        eSoYoYM8ujpzLEjBLKgjp7OxzhwLIpDtk4/vqEF2QXZAZrKNjslAdn7xpY8YfhnDeANn/EPMF9IGswAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btn_round_prices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>590, 9</value>
+  </data>
+  <data name="btn_round_prices.Text" xml:space="preserve">
+    <value>مبلغ ثابت (F5)</value>
+  </data>
+  <data name="chk_print_invoice.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="chk_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 26</value>
+  </data>
+  <data name="chk_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="chk_print_invoice.Text" xml:space="preserve">
+    <value>فاتورة طباعة (F6)</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 4</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>973, 51</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="txt_user_commission_balance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_user_commission_balance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>598, 52</value>
+  </data>
+  <data name="txt_user_commission_balance.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="txt_user_commission_balance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>733, 55</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>العموله</value>
+  </data>
+  <data name="btn_search_invioces.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btn_search_invioces.Location" type="System.Drawing.Point, System.Drawing">
+    <value>770, 10</value>
+  </data>
+  <data name="link_load_estimates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="link_load_estimates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>831, 33</value>
+  </data>
+  <data name="link_load_estimates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="link_load_estimates.Text" xml:space="preserve">
+    <value>اقتباسات الحمل
+</value>
+  </data>
+  <data name="cmb_sale_type.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_sale_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>598, 11</value>
+  </data>
+  <data name="cmb_sale_type.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="cmb_sale_type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 21</value>
+  </data>
+  <data name="label19.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>532, 38</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 59</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>مصلحات</value>
+  </data>
+  <data name="lbl_employee.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lbl_employee.Location" type="System.Drawing.Point, System.Drawing">
+    <value>545, 15</value>
+  </data>
+  <data name="lbl_employee.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lbl_employee.Text" xml:space="preserve">
+    <value>الموظفين</value>
+  </data>
+  <data name="cmb_payment_method.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_payment_method.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 30</value>
+  </data>
+  <data name="cmb_payment_terms.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_payment_terms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 54</value>
+  </data>
+  <data name="cmb_employees.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_employees.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 7</value>
+  </data>
+  <data name="cmb_employees.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_sale_date.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_sale_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>793, 51</value>
+  </data>
+  <data name="txt_sale_date.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_sale_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 20</value>
+  </data>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>939, 55</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>تاريخ</value>
+  </data>
+  <data name="label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>910, 14</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>رقم الفاتورة</value>
+  </data>
+  <data name="lbl_sale_type.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lbl_sale_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>723, 15</value>
+  </data>
+  <data name="lbl_sale_type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lbl_sale_type.Text" xml:space="preserve">
+    <value>نوع البيع
+</value>
+  </data>
+  <data name="txt_invoice_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
+    <value>797, 11</value>
+  </data>
+  <data name="txt_invoice_no.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 55</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>974, 79</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="lbl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 48</value>
+  </data>
+  <data name="lbl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="lbl.Text" xml:space="preserve">
+    <value>ضريبة:</value>
+  </data>
+  <data name="txt_cust_balance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 93</value>
+  </data>
+  <data name="txt_cust_balance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 20</value>
+  </data>
+  <data name="txt_cust_credit_limit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 69</value>
+  </data>
+  <data name="txt_cust_credit_limit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 20</value>
+  </data>
+  <data name="txt_customer_vat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 45</value>
+  </data>
+  <data name="txt_customer_vat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 20</value>
+  </data>
+  <data name="cmb_customers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_customers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 19</value>
+  </data>
+  <data name="cmb_customers.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="cmb_customers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 21</value>
+  </data>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 96</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>الرصيد</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 72</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>الحد الائتماني
+</value>
+  </data>
+  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 22</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>عميل</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 4</value>
+  </data>
+  <data name="groupBox1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 122</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>تفاصيل العميل
+</value>
+  </data>
+  <data name="groupBox_products.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 27</value>
+  </data>
+  <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 27</value>
+  </data>
+  <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 27</value>
+  </data>
+  <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 27</value>
+  </data>
+  <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 27</value>
+  </data>
+  <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>37, 27</value>
+  </data>
+  <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 12</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>المجموعه</value>
+  </data>
+  <data name="txt_barcode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>392, 27</value>
+  </data>
+  <data name="txt_barcode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 20</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 12</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>ماركه</value>
+  </data>
+  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 12</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>الصناع</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 30</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>الباركود</value>
+  </data>
+  <data name="groupBox_products.Location" type="System.Drawing.Point, System.Drawing">
+    <value>686, 140</value>
+  </data>
+  <data name="groupBox_products.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="groupBox_products.Size" type="System.Drawing.Size, System.Drawing">
+    <value>595, 58</value>
+  </data>
+  <data name="groupBox_products.Text" xml:space="preserve">
+    <value>منتجات</value>
+  </data>
+  <data name="txt_description.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 131</value>
+  </data>
+  <data name="txt_description.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_description.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 65</value>
+  </data>
+  <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 134</value>
+  </data>
+  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="label17.Text" xml:space="preserve">
+    <value>وصف</value>
+  </data>
+  <data name="panel_header.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="panel_header.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 202</value>
+  </data>
+  <data name="grid_sales.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="code.HeaderText" xml:space="preserve">
+    <value>رقم الصنف</value>
+  </data>
+  <data name="name.HeaderText" xml:space="preserve">
+    <value>اسم الصنف</value>
+  </data>
+  <data name="Qty.HeaderText" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Qty.Width" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="unit_price.HeaderText" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="unit_price.Width" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="discount.HeaderText" xml:space="preserve">
+    <value>خصم</value>
+  </data>
+  <data name="discount.Width" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="discount_percent.HeaderText" xml:space="preserve">
+    <value>خصم %</value>
+  </data>
+  <data name="tax.HeaderText" xml:space="preserve">
+    <value>ضريبة</value>
+  </data>
+  <data name="tax.Width" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="sub_total.HeaderText" xml:space="preserve">
+    <value>المجموع</value>
+  </data>
+  <data name="sub_total.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="location_code.HeaderText" xml:space="preserve">
+    <value>الموقع</value>
+  </data>
+  <data name="location_code.Width" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="unit.HeaderText" xml:space="preserve">
+    <value>الوحدة</value>
+  </data>
+  <data name="unit.Width" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="category.HeaderText" xml:space="preserve">
+    <value>الصناعه</value>
+  </data>
+  <data name="category.Width" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="total_without_vat.HeaderText" xml:space="preserve">
+    <value>بدون ضريبة</value>
+  </data>
+  <data name="total_without_vat.Width" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
+  <data name="btn_delete.HeaderText" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="btn_delete.Width" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="grid_sales.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="grid_sales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="grid_sales.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="grid_sales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 336</value>
+  </data>
+  <data name="panel_grid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 202</value>
+  </data>
+  <data name="panel_grid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 336</value>
+  </data>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="product_pic.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="product_pic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 11</value>
+  </data>
+  <data name="product_pic.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="product_pic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 116</value>
+  </data>
+  <data name="txt_order_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="txt_order_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 62</value>
+  </data>
+  <data name="txt_order_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="txt_company_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="txt_company_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 38</value>
+  </data>
+  <data name="txt_company_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="txt_shop_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="txt_shop_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 14</value>
+  </data>
+  <data name="txt_shop_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 65</value>
+  </data>
+  <data name="label4.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>الكمية النظام:</value>
+  </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 41</value>
+  </data>
+  <data name="label3.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>شركة الكمية:</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 17</value>
+  </data>
+  <data name="label2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>متجر الكمية:</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>880, 7</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 132</value>
+  </data>
+  <data name="txt_cost_price_with_vat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>684, 50</value>
+  </data>
+  <data name="txt_single_cost_evat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>684, 98</value>
+  </data>
+  <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
+    <value>684, 26</value>
+  </data>
+  <data name="txt_cost_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_total_cost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>684, 74</value>
+  </data>
+  <data name="txt_total_cost.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_total_amount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_total_amount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="txt_total_amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 102</value>
+  </data>
+  <data name="txt_total_amount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="txt_total_tax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_total_tax.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="txt_total_tax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 73</value>
+  </data>
+  <data name="txt_total_tax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="txt_total_discount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_total_discount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="txt_total_discount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="txt_total_discount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="chk_show_total_cost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>712, 5</value>
+  </data>
+  <data name="chk_show_total_cost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <data name="chk_show_total_cost.Text" xml:space="preserve">
+    <value>عرض التكلفة</value>
+  </data>
+  <data name="txt_change_amount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_change_amount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="txt_change_amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 103</value>
+  </data>
+  <data name="txt_change_amount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="txt_amount_received.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_amount_received.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="txt_amount_received.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 75</value>
+  </data>
+  <data name="txt_amount_received.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="txt_total_disc_percent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_total_disc_percent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 51</value>
+  </data>
+  <data name="txt_total_disc_percent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 20</value>
+  </data>
+  <data name="txt_total_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_total_qty.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt, style=Bold</value>
+  </data>
+  <data name="txt_total_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 30</value>
+  </data>
+  <data name="txt_total_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 18</value>
+  </data>
+  <data name="txt_sub_total_2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_sub_total_2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt, style=Bold</value>
+  </data>
+  <data name="txt_sub_total_2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 10</value>
+  </data>
+  <data name="txt_sub_total_2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 18</value>
+  </data>
+  <data name="txt_sub_total.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txt_sub_total.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="txt_sub_total.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 7</value>
+  </data>
+  <data name="txt_sub_total.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="lbl_cost_vat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>772, 53</value>
+  </data>
+  <data name="lbl_cost_vat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="lbl_cost_vat.Text" xml:space="preserve">
+    <value>التكلفة مع ضريبة:</value>
+  </data>
+  <data name="label25.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label25.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 107</value>
+  </data>
+  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 20</value>
+  </data>
+  <data name="label25.Text" xml:space="preserve">
+    <value>يتغيرون:</value>
+  </data>
+  <data name="lbl_total_cost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>772, 77</value>
+  </data>
+  <data name="lbl_total_cost.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="lbl_total_cost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lbl_total_cost.Text" xml:space="preserve">
+    <value>التكلفة الإجمالية:</value>
+  </data>
+  <data name="lbl_cost_price_evat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>773, 101</value>
+  </data>
+  <data name="lbl_cost_price_evat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="lbl_cost_price_evat.Text" xml:space="preserve">
+    <value>الإجمالي مع ضريبة</value>
+  </data>
+  <data name="label24.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label24.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 79</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>مستلم:</value>
+  </data>
+  <data name="lbl_cost_price.Location" type="System.Drawing.Point, System.Drawing">
+    <value>773, 29</value>
+  </data>
+  <data name="lbl_cost_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="lbl_cost_price.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lbl_cost_price.Text" xml:space="preserve">
+    <value>سعر التكلفة:</value>
+  </data>
+  <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 54</value>
+  </data>
+  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="label26.Text" xml:space="preserve">
+    <value>الخصم: %</value>
+  </data>
+  <data name="label23.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label23.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 35</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>إجمالي الكمية:
+</value>
+  </data>
+  <data name="chkbox_is_taxable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="chkbox_is_taxable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 80</value>
+  </data>
+  <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label22.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 15</value>
+  </data>
+  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="label22.Text" xml:space="preserve">
+    <value>قبل ضريبة:</value>
+  </data>
+  <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label14.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 10</value>
+  </data>
+  <data name="label14.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>قبل ضريبة:</value>
+  </data>
+  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label13.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 39</value>
+  </data>
+  <data name="label13.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>خصم:</value>
+  </data>
+  <data name="label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 76</value>
+  </data>
+  <data name="label12.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>ضريبة:</value>
+  </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 105</value>
+  </data>
+  <data name="label9.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 20</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>المجموع:</value>
+  </data>
+  <data name="panel_footer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 538</value>
+  </data>
+  <data name="panel_footer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 152</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 690</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>مبيعات</value>
+  </data>
+</root>

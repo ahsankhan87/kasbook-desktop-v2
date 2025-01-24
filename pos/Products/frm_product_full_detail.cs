@@ -1,0 +1,1259 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using POS.BLL;
+using POS.Core;
+using System.IO;
+using System.Net;
+using System.Web;
+
+namespace pos
+{
+    public partial class frm_product_full_detail : Form
+    {
+        public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
+        ProductBLL objBLL = new ProductBLL();
+        private readonly frm_sales salesForm;
+        private readonly frm_purchases PurchaseForm;
+        private readonly frm_searchSaleProducts searchsalesForm;
+        private readonly frm_searchPurchaseProducts searchPurchaseForm;
+
+        private DataGridView brandsDataGridView = new DataGridView();
+        private DataGridView categoriesDataGridView = new DataGridView();
+        private DataGridView groupsDataGridView = new DataGridView();
+
+        public string _product_code="";
+        public string _keyword;
+        public string _status;
+        public string picture_name = "";
+
+        public frm_product_full_detail(frm_sales salesForm = null,frm_purchases PurchaseForm = null,string product_code = "",frm_searchSaleProducts searchsalesForm = null, frm_searchPurchaseProducts searchPurchaseForm = null, string keyword = "")
+        {
+            this.salesForm = salesForm;
+            this.PurchaseForm = PurchaseForm;
+
+            _product_code = product_code;
+            _keyword = keyword;
+            this.searchsalesForm = searchsalesForm;
+            InitializeComponent();
+        }
+
+        public frm_product_full_detail()
+        {
+            InitializeComponent();
+            
+        }
+        
+        public void frm_product_full_detail_Load(object sender, EventArgs e)
+        {
+            txt_item_number.Focus();
+            this.ActiveControl = txt_item_number;
+            cmb_item_type.SelectedIndex = 0;
+            cmb_tax.SelectedIndex = 1;
+
+            get_taxes_dropdownlist();
+            get_suppliers_dropdownlist();
+            //get_brands_dropdownlist();
+            //get_origin_dropdownlist();
+            //get_product_group_dropdownlist();
+            //get_locations_dropdownlist();
+            get_units_dropdownlist();
+            //get_categories_dropdownlist();
+
+            if (_keyword != "")
+            {
+                txt_item_number.Text = _keyword;
+                txt_item_number.Focus();
+            }
+
+            if (_product_code != "")
+            {
+                load_product_detail(_product_code);
+            }
+    
+        }
+
+        public void load_product_detail(string product_code)
+        {
+            DataTable dt = objBLL.GetAllByProductCode(product_code);
+            foreach (DataRow myProductView in dt.Rows)
+            {
+                txt_id.Text = myProductView["id"].ToString();
+                txt_name.Text = myProductView["name"].ToString();
+                txt_name_ar.Text = myProductView["name_ar"].ToString();
+                txt_barcode.Text = myProductView["barcode"].ToString();
+                txt_code.Text = myProductView["code"].ToString();
+                txt_item_number.Text = myProductView["item_number"].ToString();
+                txt_item_number.ReadOnly = true;
+                txt_alt_item_number.Text = myProductView["item_number_2"].ToString();
+                cmb_item_type.Text = myProductView["item_type"].ToString();
+                txt_cost_price.Text = Math.Round(Convert.ToDecimal(myProductView["avg_cost"]), 4).ToString();
+                txt_unit_price.Text = Math.Round(Convert.ToDecimal( myProductView["unit_price"]), 4).ToString();
+                txt_unit_price_2.Text = Math.Round(Convert.ToDecimal(myProductView["unit_price_2"]), 4).ToString();
+                txt_description.Text = myProductView["description"].ToString();
+                txt_expiry_date.Text = myProductView["expiry_date"].ToString();
+
+                //txt_brand_code.Text = myProductView["brand_code"].ToString();
+                //txt_category_code.Text = myProductView["category_code"].ToString();
+                //txt_group_code.Text = myProductView["group_code"].ToString();
+                txt_packet_qty.Text = myProductView["packet_qty"].ToString();
+                txt_def_location.Text = myProductView["location_code"].ToString();
+                
+                ///
+                fetch_brands_by_code(myProductView["brand_code"].ToString());
+                fetch_categories_by_code(myProductView["category_code"].ToString());
+                fetch_groups_by_code(myProductView["group_code"].ToString());
+                ///
+
+                cmb_units.SelectedValue = (String.IsNullOrEmpty(myProductView["unit_id"].ToString()) ? 0 : myProductView["unit_id"]); 
+                //cmb_locations.SelectedValue = myProductView["location_code"].ToString();
+                cmb_tax.SelectedValue = (String.IsNullOrEmpty(myProductView["tax_id"].ToString()) ? 0 : myProductView["tax_id"]); 
+                cmb_supplier.SelectedValue = (String.IsNullOrEmpty(myProductView["supplier_id"].ToString()) ? 0 : myProductView["supplier_id"]); 
+                //cmb_origin.SelectedValue = myProductView["origin"].ToString();
+
+                txt_demand_qty.Text = myProductView["demand_qty"].ToString();
+                txt_pur_dmnd_qty.Text =myProductView["purchase_demand_qty"].ToString();
+                txt_sale_dmnd_qty.Text = myProductView["sale_demand_qty"].ToString();
+                txt_restock_level.Text = myProductView["reorder_level"].ToString();
+
+                if (myProductView["picture"].ToString() != "")
+                {
+                    byte[] myImage = new byte[0];
+                    myImage = (byte[])myProductView["Picture"];
+                    MemoryStream stream = new MemoryStream(myImage);
+                    if (stream.Length > 0)
+                    {
+                        pictureBox1.Image = Image.FromStream(stream);
+
+                    }
+                    else
+                    {
+                        pictureBox1.Image = null;
+                    }
+
+                }
+
+                load_product_movements(product_code);
+                load_product_location_qty(product_code);
+            }
+            lbl_product_name.Visible = true;
+            lbl_product_name.Text = txt_code.Text+' '+txt_name.Text;
+            btn_other_stock.Enabled = true;
+        }
+        
+        private void fetch_brands_by_code(string brand_code)
+        {
+            GeneralBLL brandBLL = new GeneralBLL();
+            String keyword = "*";
+            String table = "pos_brands WHERE code = '" + brand_code + "'";
+            DataTable dt_1 = brandBLL.GetRecord(keyword, table);
+            foreach (DataRow dr in dt_1.Rows)
+            {
+                txt_brand_code.Text = dr["code"].ToString();
+                txt_brands.Text = dr["name"].ToString();
+                    
+            }
+        }
+
+        private void fetch_categories_by_code(string category_code)
+        {
+            GeneralBLL BLL = new GeneralBLL();
+            String keyword = "*";
+            String table = "pos_categories WHERE code = '" + category_code + "'";
+            DataTable dt_1 = BLL.GetRecord(keyword, table);
+            if(dt_1.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt_1.Rows)
+                {
+                    txt_category_code.Text = dr["code"].ToString();
+                    txt_categories.Text = dr["name"].ToString();
+
+                }
+            }
+            else
+            {
+                txt_category_code.Text = "";
+                txt_categories.Text = "";
+            }
+        }
+
+        private void fetch_groups_by_code(string group_code)
+        {
+            GeneralBLL BLL = new GeneralBLL();
+            String keyword = "*";
+            String table = "pos_product_groups WHERE code = '" + group_code + "'";
+            DataTable dt_1 = BLL.GetRecord(keyword, table);
+            if(dt_1.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt_1.Rows)
+                {
+                    txt_group_code.Text = dr["code"].ToString();
+                    txt_groups.Text = dr["name"].ToString();
+
+                }
+            }
+            else
+            {
+                txt_group_code.Text = "";
+                txt_groups.Text = "";
+            }
+            
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (objBLL.IsProductExist(txt_item_number.Text, txt_category_code.Text))
+                {
+                    MessageBox.Show("Product already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (objBLL.CheckDuplicateBarcode(txt_barcode.Text) && !string.IsNullOrEmpty(txt_barcode.Text))
+                {
+                    MessageBox.Show("Product barcode already exist", "Duplicate barcode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                FileStream fs;
+                BinaryReader br;
+
+                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_item_number.Text != string.Empty)
+                {
+                    ProductModal info = new ProductModal();
+
+                    //string FileName = openFileDialog1.FileName; 
+                    if (picture_name != "")
+                    {
+
+                        byte[] ImageData;
+                        fs = new FileStream(picture_name, FileMode.Open, FileAccess.Read);
+                        br = new BinaryReader(fs);
+                        ImageData = br.ReadBytes((int)fs.Length);
+                        br.Close();
+                        fs.Close();
+
+                        info.picture = ImageData;
+
+                    }
+
+                    info.barcode = txt_barcode.Text;
+                    info.code = txt_code.Text;
+                    info.item_number = txt_item_number.Text;
+                    info.alt_item_number = txt_alt_item_number.Text;
+                    //info.origin = (cmb_origin.SelectedValue != null ? cmb_origin.SelectedValue.ToString() : "" );
+                    info.group_code = txt_group_code.Text;
+                    info.category_code = txt_category_code.Text;
+                    info.brand_code = txt_brand_code.Text;
+
+                    info.name = txt_name.Text;
+                    info.name_ar = txt_name_ar.Text;
+                    info.cost_price = (String.IsNullOrEmpty(txt_cost_price.Text)) ? 0 : double.Parse(txt_cost_price.Text);
+                    info.unit_price = (String.IsNullOrEmpty(txt_unit_price.Text)) ? 0 : double.Parse(txt_unit_price.Text);
+                    info.unit_price_2 = (String.IsNullOrEmpty(txt_unit_price_2.Text)) ? 0 : double.Parse(txt_unit_price_2.Text);
+                    info.item_type = cmb_item_type.Text;
+                    info.description = txt_description.Text;
+                    info.tax_id = (cmb_tax.SelectedValue == null ? 0 : Convert.ToInt32(cmb_tax.SelectedValue.ToString()));
+                    info.supplier_id = (cmb_supplier.SelectedValue == null ? 0 : Convert.ToInt32(cmb_supplier.SelectedValue.ToString()));
+                    info.unit_id = (cmb_units.SelectedValue == null ? 0 : Convert.ToInt32(cmb_units.SelectedValue.ToString()));
+                    //info.location_code = (cmb_locations.SelectedValue != null ? cmb_locations.SelectedValue.ToString() : "");
+                    info.location_code = txt_def_location.Text;
+                    info.demand_qty = (txt_demand_qty.Text != "" ? decimal.Parse(txt_demand_qty.Text) : 0);
+                    info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
+                    info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
+                    info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
+                    info.expiry_date = txt_expiry_date.Value.Date;
+                    info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
+
+                    int result = objBLL.Insert(info);
+                    if (result > 0)
+                    {
+
+                        MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        clear_all();
+                        txt_item_number.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Code and Name are required field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+       
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("Are you sure you want to save", "Save Record", buttons, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    btn_save.PerformClick();
+                }
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        public void get_taxes_dropdownlist()
+        {
+            TaxBLL taxBLL = new TaxBLL();
+            
+            DataTable taxes = taxBLL.GetAll(); 
+            DataRow emptyRow = taxes.NewRow();
+            //emptyRow[0] = 0;              // Set Column Value
+            //emptyRow[1] = "Please Select";              // Set Column Value
+            //taxes.Rows.InsertAt(emptyRow, 0);
+
+            cmb_tax.DisplayMember = "title";
+            cmb_tax.ValueMember = "id";
+            cmb_tax.DataSource = taxes;
+
+        }
+
+
+        public void get_suppliers_dropdownlist()
+        {
+            SupplierBLL supplierBLL = new SupplierBLL();
+            
+            DataTable suppliers = supplierBLL.GetAll(); // generalBLL_obj.GetRecord(keyword, table);
+            DataRow emptyRow = suppliers.NewRow();
+            emptyRow[0] = 0;              // Set Column Value
+            emptyRow[2] = "Please Select";              // Set Column Value
+            suppliers.Rows.InsertAt(emptyRow, 0);
+
+            cmb_supplier.DisplayMember = "first_name";
+            cmb_supplier.ValueMember = "id";
+            cmb_supplier.DataSource = suppliers;
+
+        }
+
+        public void get_units_dropdownlist()
+        {
+            UnitsBLL unitsBLL = new UnitsBLL();
+
+            DataTable units = unitsBLL.GetAll();
+            DataRow emptyRow = units.NewRow();
+            emptyRow[0] = 0;              // Set Column Value
+            emptyRow[3] = "Please Select";              // Set Column Value
+            units.Rows.InsertAt(emptyRow, 0);
+
+            DataRow emptyRow1 = units.NewRow();
+            emptyRow1[0] = "-1";              // Set Column Value
+            emptyRow1[3] = "ADD NEW";              // Set Column Value
+            units.Rows.InsertAt(emptyRow1, 1);
+
+            cmb_units.DisplayMember = "name";
+            cmb_units.ValueMember = "id";
+            cmb_units.DataSource = units;
+
+        }
+
+        public DataTable get_GL_accounts_dt()
+        {
+            AccountsBLL accountsBLL = new AccountsBLL();
+            
+            DataTable dt = accountsBLL.GetAll();
+            DataRow emptyRow = dt.NewRow();
+            emptyRow[0] = 0;              // Set Column Value
+            emptyRow[1] = "Select Account";              // Set Column Value
+            dt.Rows.InsertAt(emptyRow, 0);
+            return dt;
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            //this.Dispose(); 
+            this.Close();
+        }
+
+        private void frm_product_full_detail_KeyDown(object sender, KeyEventArgs e)
+        {
+            //when you enter in textbox it will goto next textbox, work like TAB key
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+            if(e.KeyData == Keys.Down)
+            {
+                brandsDataGridView.Focus();
+                categoriesDataGridView.Focus();
+                groupsDataGridView.Focus();
+            }
+            if (e.KeyData == Keys.F3)
+            {
+                btn_save.PerformClick();
+            }
+            if (e.KeyData == Keys.F4)
+            {
+                btn_update.PerformClick();
+            }
+            if (e.KeyData == Keys.F5)
+            {
+                btn_refresh.PerformClick();
+            }
+            if (e.KeyData == Keys.F6)
+            {
+                btn_delete.PerformClick();
+            }
+            if (e.KeyData == Keys.F9)
+            {
+                txt_product_code.Focus();
+            }
+        }
+
+        private void txt_cost_price_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_unit_price_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cmb_units_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_units.SelectedValue != null && cmb_units.SelectedValue.ToString() == "-1")
+            {
+                frm_addUnit frm = new frm_addUnit(null);
+                frm.ShowDialog();
+
+                get_units_dropdownlist();
+            }
+        }
+
+        private void txt_code_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (objBLL.IsProductExist(txt_code.Text,txt_category_code.Text) && e.KeyData == Keys.Enter)
+            {
+                MessageBox.Show("Item code already exist","Product",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                btn_save.Enabled = false;
+                lbl_errors.Visible = true;
+                lbl_errors.Text = "*Item code already exist";
+            }
+            else
+            {
+                btn_save.Enabled = true;
+                lbl_errors.Text = "";
+                lbl_errors.Visible = false;
+
+            }
+        }
+
+        private void txt_item_number_KeyUp(object sender, KeyEventArgs e)
+        {
+            generate_item_code();
+        }
+
+        private void generate_item_code()
+        {
+            string brand_code = txt_brand_code.Text;
+            string item_number = txt_item_number.Text;
+
+            txt_code.Text = brand_code +item_number;
+        }
+
+        
+        private void btn_upload_picture_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opnfd = new OpenFileDialog();
+            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif";
+            if (opnfd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = new Bitmap(opnfd.FileName);
+                picture_name = opnfd.FileName;
+            }  
+  
+        }
+
+        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (txt_product_code.Text != "" && e.KeyData == Keys.Enter)
+            {
+                frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, txt_product_code.Text, "", "", 0, false, false, null,this);
+                search_product_obj.ShowDialog();
+
+            }
+        }
+
+        private void btn_search_products_Click(object sender, EventArgs e)
+        {
+            frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, txt_product_code.Text, "", "", 0, false, false, null, this);
+            search_product_obj.ShowDialog();
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (String.IsNullOrEmpty(txt_id.Text))
+                {
+                    MessageBox.Show("Record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                FileStream fs;
+                BinaryReader br;
+
+                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_item_number.Text != string.Empty)
+                {
+                    ProductModal info = new ProductModal();
+
+                    //string FileName = openFileDialog1.FileName; 
+                    if (picture_name != "")
+                    {
+
+                        byte[] ImageData;
+                        fs = new FileStream(picture_name, FileMode.Open, FileAccess.Read);
+                        br = new BinaryReader(fs);
+                        ImageData = br.ReadBytes((int)fs.Length);
+                        br.Close();
+                        fs.Close();
+
+                        info.picture = ImageData;
+
+                    }
+
+                    info.barcode = txt_barcode.Text;
+                    info.code = txt_code.Text;
+                    info.item_number = txt_item_number.Text;
+                    info.alt_item_number = txt_alt_item_number.Text;
+                    //info.origin = (cmb_origin.SelectedValue != null ? cmb_origin.SelectedValue.ToString() : "" );
+
+                    info.group_code = txt_group_code.Text;
+                    info.category_code = txt_category_code.Text;
+                    info.brand_code = txt_brand_code.Text;
+
+                    info.name = txt_name.Text;
+                    info.name_ar = txt_name_ar.Text;
+                    info.cost_price = (String.IsNullOrEmpty(txt_cost_price.Text)) ? 0 : double.Parse(txt_cost_price.Text);
+                    info.unit_price = (String.IsNullOrEmpty(txt_unit_price.Text)) ? 0 : double.Parse(txt_unit_price.Text);
+                    info.unit_price_2 = (String.IsNullOrEmpty(txt_unit_price_2.Text)) ? 0 : double.Parse(txt_unit_price_2.Text);
+                    info.item_type = cmb_item_type.Text;
+                    info.description = txt_description.Text;
+                    info.tax_id = (cmb_tax.SelectedValue == null ? 0 : Convert.ToInt32(cmb_tax.SelectedValue.ToString()));
+                    info.unit_id = Convert.ToInt32(cmb_units.SelectedValue.ToString());
+                    info.supplier_id = (cmb_supplier.SelectedValue == null ? 0 : Convert.ToInt32(cmb_supplier.SelectedValue.ToString()));
+                    //info.location_code = (cmb_locations.SelectedValue != null ? cmb_locations.SelectedValue.ToString() : "");
+                    info.location_code = txt_def_location.Text;
+                    info.demand_qty = (txt_demand_qty.Text != "" ? decimal.Parse(txt_demand_qty.Text) : 0);
+                    info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
+                    info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
+                    info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
+                    info.expiry_date = txt_expiry_date.Value.Date;
+                    info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
+
+
+                    info.id = int.Parse(txt_id.Text);
+                    int result = objBLL.Update(info);
+
+                    ///////////
+                    //RE STOCK LEVEL UPDATE
+                    //for (int i = 0; i < grid_location_qty.Rows.Count; i++)
+                    //{
+                    //    if (grid_location_qty.Rows[i].Cells["location_code"].Value != null)
+                    //    {
+
+                    //        info.re_stock_level = (grid_location_qty.Rows[i].Cells["re_order_qty"].Value.ToString() != "" ? decimal.Parse(grid_location_qty.Rows[i].Cells["re_order_qty"].Value.ToString()) : 0);
+                    //        info.location_code = grid_location_qty.Rows[i].Cells["location_code"].Value.ToString();
+
+                    //        objBLL.UpdateReorder_level(info);
+                    //    }
+
+                    //}
+                    /////////////
+
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        clear_all();
+                        txt_item_number.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_blank_Click(object sender, EventArgs e)
+        {
+            clear_all();
+            txt_item_number.Focus();
+        }
+        private void clear_all()
+        {
+            txt_barcode.Text = "";
+            txt_code.Text = "";
+            txt_item_number.Text = "";
+            txt_item_number.ReadOnly = false;
+            txt_alt_item_number.Text = "";
+            txt_packet_qty.Text = "";
+
+            lbl_product_name.Text = "";
+            grid_movements.Rows.Clear();
+            //grid_location_qty.Rows.Clear();
+
+            txt_name.Text = ""; ;
+            txt_name_ar.Text = ""; ;
+            txt_cost_price.Text = "";
+            txt_unit_price.Text = "";
+            txt_unit_price_2.Text = "";
+            cmb_item_type.Text = "";
+            txt_description.Text = "";
+            cmb_units.SelectedIndex = 0;
+            cmb_supplier.SelectedIndex = -1;
+            //cmb_locations.SelectedValue = "";
+            txt_def_location.Text = "";
+            
+            txt_brand_code.Text= "";
+            txt_brands.Text = "";
+            txt_category_code.Text = "";
+            txt_categories.Text = "";
+            txt_groups.Text = "";
+            txt_group_code.Text = "";
+            
+            txt_demand_qty.Text = "";
+            txt_pur_dmnd_qty.Text = "";
+            txt_sale_dmnd_qty.Text = "";
+            txt_restock_level.Text = "";
+            txt_id.Text = "";
+            cmb_tax.SelectedIndex = 0;
+            pictureBox1.Image = null;
+
+            
+        }
+
+        private void load_product_movements(string product_code)
+        {
+            try
+            {
+                grid_movements.Rows.Clear();
+
+                //bind data in data grid view  
+                GeneralBLL objBLL = new GeneralBLL();
+                grid_movements.AutoGenerateColumns = false;
+
+                String keyword = "TOP 1000 I.id,I.item_code,I.qty,I.unit_price,I.cost_price,I.loc_code,I.invoice_no,I.description,trans_date,C.first_name AS customer, S.first_name AS supplier";
+                String table = "pos_inventory I LEFT JOIN pos_customers C ON C.id=I.customer_id LEFT JOIN pos_suppliers S ON S.id=I.supplier_id"+
+                " WHERE I.item_code = '" + product_code + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " ORDER BY I.id DESC";
+                //grid_movements.DataSource = objBLL.GetRecord(keyword, table);
+
+                DataTable product_dt = objBLL.GetRecord(keyword, table);
+                if (product_dt.Rows.Count > 0)
+                {
+                    int RowIndex = 0;
+                    foreach (DataRow myProductView in product_dt.Rows)
+                    {
+                        int id = Convert.ToInt32(myProductView["id"]);
+                        string invoice_no = myProductView["invoice_no"].ToString();
+                        //string name = myProductView["product_name"].ToString();
+                        string qty = myProductView["qty"].ToString();
+                        double cost_price = Convert.ToDouble(myProductView["cost_price"]);
+                        double unit_price = Convert.ToDouble(myProductView["unit_price"]);
+                        string loc_code = myProductView["loc_code"].ToString();
+                        string description = myProductView["description"].ToString();
+                        string supplier = myProductView["supplier"].ToString();
+                        string customer = myProductView["customer"].ToString();
+                        string date = myProductView["trans_date"].ToString();
+
+                        string[] row0 = { id.ToString(), invoice_no, qty,cost_price.ToString(), unit_price.ToString(),
+                                          loc_code,description, supplier, customer,date};
+
+                        grid_movements.Rows.Add(row0);
+
+                        if (description == "Sale")
+                        {
+                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+                        }
+                        if (description == "Purchase")
+                        {
+                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+
+                        }
+                        if (description == "Adjustment")
+                        {
+                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+
+                        }
+
+
+                        RowIndex++;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
+
+        private void load_product_location_qty(string product_code)
+        {
+            //try
+            //{
+            //    grid_location_qty.Rows.Clear();
+
+            //    //bind data in data grid view  
+            //    GeneralBLL objBLL = new GeneralBLL();
+            //    grid_location_qty.AutoGenerateColumns = false;
+
+            //    //String keyword = "L.name AS location_name, PS.loc_code AS location_code, SUM(PS.qty) AS location_qty";
+            //    //String table = "pos_product_stocks PS LEFT JOIN pos_locations L ON PS.loc_code=L.code WHERE PS.item_id = " + product_id + " GROUP BY L.name,PS.loc_code";
+            //    //grid_movements.DataSource = objBLL.GetRecord(keyword, table);
+
+            //    String keyword = "loc_code AS location_name, loc_code AS location_code, qty AS location_qty";
+            //    String table = "pos_products_location_view WHERE id = " + product_id + "";
+                
+            //    DataTable product_dt = objBLL.GetRecord(keyword, table);
+            //    if (product_dt.Rows.Count > 0)
+            //    {
+                   
+            //        foreach (DataRow myProductView in product_dt.Rows)
+            //        {
+            //            string location_name = myProductView["location_name"].ToString();
+            //            string location_code = myProductView["location_code"].ToString();
+            //            string location_qty = myProductView["location_qty"].ToString();
+
+            //            string[] row0 = { location_code,location_name, location_qty};
+
+            //            grid_location_qty.Rows.Add(row0);
+
+            //        }
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    throw;
+            //}
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            string id = txt_id.Text;
+
+            if(id != "")
+            {
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    ProductBLL objBLL = new ProductBLL();
+                    objBLL.Delete(int.Parse(id));
+
+                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clear_all();
+                    txt_item_number.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+        }
+
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            string product_code = txt_id.Text;
+
+            if (product_code != "")
+            {
+                load_product_detail(product_code);
+                load_product_movements(product_code);
+                load_product_location_qty(product_code);
+            }
+            txt_item_number.Focus();
+        }
+
+        private void SetupBrandDataGridView()
+        {
+            var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
+            brandsDataGridView.ColumnCount = 2;
+            int xLocation = tabPage1.Location.X + txt_brands.Location.X;
+            int yLocation = tabPage1.Location.Y + txt_brands.Location.Y;
+
+            brandsDataGridView.Name = "brandsDataGridView";
+            if (lang == "en-US")
+            {
+                brandsDataGridView.Location = new Point(xLocation, yLocation);
+                brandsDataGridView.Size = new Size(300, 250);
+            }
+            else if (lang == "ar-SA")
+            {
+                brandsDataGridView.Location = new Point(xLocation, yLocation);
+                brandsDataGridView.Size = new Size(300, 250);
+            }
+            
+            brandsDataGridView.AutoSizeRowsMode =
+                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            brandsDataGridView.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.Single;
+            brandsDataGridView.Columns[0].Name = "Code";
+            brandsDataGridView.Columns[1].Name = "Name";
+            brandsDataGridView.Columns[0].ReadOnly = true;  
+            brandsDataGridView.Columns[1].ReadOnly = true;  
+            brandsDataGridView.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+            brandsDataGridView.MultiSelect = false;
+            brandsDataGridView.AllowUserToAddRows = false;
+            brandsDataGridView.AllowUserToDeleteRows = false;
+
+            brandsDataGridView.RowHeadersVisible = false;
+            //brandsDataGridView.ColumnHeadersVisible = false;
+            brandsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            brandsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; 
+            brandsDataGridView.AutoResizeColumns();
+
+            brandsDataGridView.CellClick += new DataGridViewCellEventHandler(brandsDataGridView_CellClick);
+            this.brandsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(brandsDataGridView_KeyDown);
+
+            this.tabPage1.Controls.Add(brandsDataGridView);
+            brandsDataGridView.BringToFront();
+            
+            
+
+        }
+
+        void brandsDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                
+                txt_brand_code.Text = brandsDataGridView.CurrentRow.Cells[0].Value.ToString();
+                txt_brands.Text = brandsDataGridView.CurrentRow.Cells[1].Value.ToString();
+                this.tabPage1.Controls.Remove(brandsDataGridView);
+                txt_brands.Focus();
+
+                e.Handled = true;
+            }
+        }
+
+        private void brandsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txt_brand_code.Text = brandsDataGridView.CurrentRow.Cells[0].Value.ToString();
+            txt_brands.Text = brandsDataGridView.CurrentRow.Cells[1].Value.ToString();
+            this.tabPage1.Controls.Remove(brandsDataGridView);
+            txt_brands.Focus();
+        }
+
+        private void txt_brands_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (txt_brands.Text != "")
+                {
+                    SetupBrandDataGridView();
+
+                    BrandsBLL brandsBLL_obj = new BrandsBLL();
+                    string brand_name = txt_brands.Text;
+
+                    DataTable dt = brandsBLL_obj.SearchRecord(brand_name);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        brandsDataGridView.Rows.Clear();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string code = dr["code"].ToString();
+                            string name = dr["name"].ToString();
+
+                            string[] row0 = { code, name };
+
+                            brandsDataGridView.Rows.Add(row0);
+                        }
+                        //brandsDataGridView.CurrentCell = brandsDataGridView.Rows[0].Cells[0];
+                        brandsDataGridView.ClearSelection();
+                        brandsDataGridView.CurrentCell = null;
+
+                    }
+                        
+                }
+                else
+                {
+                    txt_brand_code.Text = "";
+                    this.tabPage1.Controls.Remove(brandsDataGridView);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txt_brands_Leave(object sender, EventArgs e)
+        {
+           if(!brandsDataGridView.Focused)
+           {
+               this.tabPage1.Controls.Remove(brandsDataGridView);
+           }
+            
+        }
+
+        private void txt_brands_TextChanged(object sender, EventArgs e)
+        {
+            generate_item_code();
+
+            if (txt_brand_code.Text != "")
+            {
+                BrandsBLL brandsBLL = new BrandsBLL();
+                DataTable dt = brandsBLL.SearchRecordByBrandsCode(txt_brand_code.Text);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    fetch_categories_by_code(dr["category_code"].ToString());
+                    fetch_groups_by_code(dr["group_code"].ToString());
+                }
+            }
+            else
+            {
+                txt_category_code.Text = "";
+                txt_group_code.Text = "";
+            }
+        }
+
+        private void SetupCategoriesDataGridView()
+        {
+            var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
+            categoriesDataGridView.ColumnCount = 2;
+            categoriesDataGridView.Name = "categoriesDataGridView";
+            int xLocation = tabPage1.Location.X + txt_categories.Location.X;
+            int yLocation = tabPage1.Location.Y + txt_categories.Location.Y;
+
+            if (lang == "en-US")
+            {
+                categoriesDataGridView.Location = new Point(xLocation, yLocation);
+                categoriesDataGridView.Size = new Size(300, 250);
+            }
+            else if (lang == "ar-SA")
+            {
+                categoriesDataGridView.Location = new Point(xLocation, yLocation);
+                categoriesDataGridView.Size = new Size(300, 250);
+            }
+          
+            categoriesDataGridView.AutoSizeRowsMode =
+                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            categoriesDataGridView.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.Single;
+            categoriesDataGridView.Columns[0].Name = "Code";
+            categoriesDataGridView.Columns[1].Name = "Name";
+            categoriesDataGridView.Columns[0].ReadOnly = true;
+            categoriesDataGridView.Columns[1].ReadOnly = true;
+            categoriesDataGridView.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+            categoriesDataGridView.MultiSelect = false;
+            categoriesDataGridView.AllowUserToAddRows = false;
+            categoriesDataGridView.AllowUserToDeleteRows = false;
+
+            categoriesDataGridView.RowHeadersVisible = false;
+            //categoriesDataGridView.ColumnHeadersVisible = false;
+            categoriesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            categoriesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            categoriesDataGridView.AutoResizeColumns();
+
+            this.categoriesDataGridView.CellClick += new DataGridViewCellEventHandler(categoriesDataGridView_CellClick);
+            this.categoriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(categoriesDataGridView_KeyDown);
+
+            this.tabPage1.Controls.Add(categoriesDataGridView);
+            categoriesDataGridView.BringToFront();
+
+        }
+
+        void categoriesDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txt_category_code.Text = categoriesDataGridView.CurrentRow.Cells[0].Value.ToString();
+                txt_categories.Text = categoriesDataGridView.CurrentRow.Cells[1].Value.ToString();
+                this.tabPage1.Controls.Remove(categoriesDataGridView);
+                txt_categories.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void categoriesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txt_category_code.Text = categoriesDataGridView.CurrentRow.Cells[0].Value.ToString();
+            txt_categories.Text = categoriesDataGridView.CurrentRow.Cells[1].Value.ToString();
+            this.tabPage1.Controls.Remove(categoriesDataGridView);
+            txt_categories.Focus();
+
+        }
+
+        private void txt_categories_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (txt_categories.Text != "")
+                {
+                    SetupCategoriesDataGridView();
+
+                    CategoriesBLL categoryBLL_obj = new CategoriesBLL();
+                    string category_name = txt_categories.Text;
+
+                    DataTable dt = categoryBLL_obj.SearchRecord(category_name);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        categoriesDataGridView.Rows.Clear();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string code = dr["code"].ToString();
+                            string name = dr["name"].ToString();
+
+                            string[] row0 = { code, name };
+
+                            categoriesDataGridView.Rows.Add(row0);
+                        }
+                        //categoriesDataGridView.CurrentCell = categoriesDataGridView.Rows[0].Cells[0];
+                        categoriesDataGridView.ClearSelection();
+                        categoriesDataGridView.CurrentCell = null;
+                    }
+
+                }
+                else
+                {
+                    txt_category_code.Text = "";
+                    this.tabPage1.Controls.Remove(categoriesDataGridView);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txt_categories_Leave(object sender, EventArgs e)
+        {
+            if (!categoriesDataGridView.Focused)
+            {
+                this.tabPage1.Controls.Remove(categoriesDataGridView);
+            }
+
+        }
+
+        private void SetupGroupsDataGridView()
+        {
+            var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
+            groupsDataGridView.ColumnCount = 2;
+            int xLocation = tabPage1.Location.X + txt_groups.Location.X;
+            int yLocation = tabPage1.Location.Y + txt_groups.Location.Y;
+            
+            groupsDataGridView.Name = "groupsDataGridView";
+            if (lang == "en-US")
+            {
+                groupsDataGridView.Location = new Point(xLocation, yLocation);
+                groupsDataGridView.Size = new Size(300, 250);
+            }
+            else if (lang == "ar-SA")
+            {
+                groupsDataGridView.Location = new Point(xLocation, yLocation);
+                groupsDataGridView.Size = new Size(300, 250);
+            }
+            
+            groupsDataGridView.AutoSizeRowsMode =
+                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            groupsDataGridView.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.Single;
+            groupsDataGridView.Columns[0].Name = "Code";
+            groupsDataGridView.Columns[1].Name = "Name";
+            groupsDataGridView.Columns[0].ReadOnly = true;
+            groupsDataGridView.Columns[1].ReadOnly = true;
+            groupsDataGridView.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+            groupsDataGridView.MultiSelect = false;
+            groupsDataGridView.AllowUserToAddRows = false;
+            groupsDataGridView.AllowUserToDeleteRows = false;
+
+            groupsDataGridView.RowHeadersVisible = false;
+            //groupsDataGridView.ColumnHeadersVisible = false;
+            groupsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            groupsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            groupsDataGridView.AutoResizeColumns();
+
+            this.groupsDataGridView.CellClick += new DataGridViewCellEventHandler(groupsDataGridView_CellClick);
+            this.groupsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(groupsDataGridView_KeyDown);
+
+            this.tabPage1.Controls.Add(groupsDataGridView);
+            groupsDataGridView.BringToFront();
+
+        }
+
+        void groupsDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txt_group_code.Text = groupsDataGridView.CurrentRow.Cells[0].Value.ToString();
+                txt_groups.Text = groupsDataGridView.CurrentRow.Cells[1].Value.ToString();
+                this.tabPage1.Controls.Remove(groupsDataGridView);
+                txt_groups.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void groupsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txt_group_code.Text = groupsDataGridView.CurrentRow.Cells[0].Value.ToString();
+            txt_groups.Text = groupsDataGridView.CurrentRow.Cells[1].Value.ToString();
+            this.tabPage1.Controls.Remove(groupsDataGridView);
+            txt_groups.Focus();
+
+        }
+
+        private void txt_groups_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (txt_groups.Text != "")
+                {
+                    SetupGroupsDataGridView();
+
+                    ProductGroupsBLL pg_BLL_obj = new ProductGroupsBLL();
+                    string grp_name = txt_groups.Text;
+
+                    DataTable dt = pg_BLL_obj.SearchRecordByName(grp_name);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        groupsDataGridView.Rows.Clear();
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string code = dr["code"].ToString();
+                            string name = dr["name"].ToString();
+
+                            string[] row0 = { code, name };
+
+                            groupsDataGridView.Rows.Add(row0);
+                        }
+                        //groupsDataGridView.CurrentCell = groupsDataGridView.Rows[0].Cells[0];
+                        groupsDataGridView.ClearSelection();
+                        groupsDataGridView.CurrentCell = null;
+                    }
+
+                }
+                else
+                {
+                    txt_group_code.Text = "";
+                    this.tabPage1.Controls.Remove(groupsDataGridView);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txt_groups_Leave(object sender, EventArgs e)
+        {
+            if (!groupsDataGridView.Focused)
+            {
+                this.tabPage1.Controls.Remove(groupsDataGridView);
+            }
+
+        }
+
+        private void btn_other_stock_Click(object sender, EventArgs e)
+        {
+            string product_id="";
+            string product_code="";
+            string product_name = "";
+            if(!string.IsNullOrEmpty(txt_id.Text))
+            {
+                product_id = txt_id.Text;
+                product_code = txt_code.Text;
+                product_name = txt_name.Text;
+            }
+            frm_other_stocks frm_other_stock_obj = new frm_other_stocks(product_id,product_code, product_name);
+            frm_other_stock_obj.ShowDialog();
+        }
+
+        private void btn_translate_Click(object sender, EventArgs e)
+        {
+            txt_name_ar.Text = Translate(txt_name.Text);
+        }
+        public String Translate(String word)
+        {
+            var result = "";
+            try
+            {
+                var toLanguage = "ar";//English
+                var fromLanguage = "en";//Deutsch
+                var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={fromLanguage}&tl={toLanguage}&dt=t&q={HttpUtility.UrlEncode(word)}";
+                var webClient = new WebClient
+                {
+                    Encoding = System.Text.Encoding.UTF8
+                };
+                result = webClient.DownloadString(url);
+                
+                    result = result.Substring(4, result.IndexOf("\"", 4, StringComparison.Ordinal) - 4);
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return result;
+        }
+    }
+}
