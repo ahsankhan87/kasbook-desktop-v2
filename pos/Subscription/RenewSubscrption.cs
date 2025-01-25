@@ -23,6 +23,10 @@ namespace pos
         {
             int userID = GetUserID();
             txtUserID.Text = userID.ToString();
+
+            HardwareIdentifier systemID_obj = new HardwareIdentifier();
+            string systemID = systemID_obj.GetUniqueHardwareId();
+            txtSystemID.Text = systemID;
         }
 
         private int GetUserID()
@@ -76,5 +80,9 @@ namespace pos
             this.Close();
         }
 
+        private void txtSubscriptionKey_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
