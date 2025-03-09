@@ -172,6 +172,17 @@ namespace pos
                     //}
                 }
 
+                // Handle the end of editing for numeric columns (3, 4, 5, 6, 7)
+                if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7)
+                {
+                    var cell = grid_sales.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    // If the cell value is null or empty, set it to 0
+                    if (cell.Value == null || string.IsNullOrEmpty(cell.Value.ToString()))
+                    {
+                        cell.Value = 0;
+                    }
+                }
+
                 double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value == null || grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
                 double sub_total = (Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value)) - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
                 double tax = (sub_total * tax_rate / 100);
@@ -1545,9 +1556,27 @@ namespace pos
 
         void tb_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox tb = sender as TextBox;
+
+            // Allow only digits, control keys (Backspace, Delete), and one decimal point
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
+                return;
+            }
+
+            // Prevent multiple decimal points
+            if (e.KeyChar == '.' && tb.Text.Contains("."))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Prevent entering "." as the first character
+            if (e.KeyChar == '.' && tb.Text.Length == 0)
+            {
+                e.Handled = true;
+                return;
             }
         }
 
@@ -2827,6 +2856,31 @@ namespace pos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void grid_sales_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // Validate only the numeric columns (3, 4, 5, 6, 7)
+            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7)
+            {
+                // Check if the value is null or empty
+                if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
+                {
+                    e.Cancel = true; // Prevent the cell from losing focus
+                    grid_sales.Rows[e.RowIndex].ErrorText = "Value cannot be null or empty";
+                }
+                // Check if the value is a valid numeric value
+                else if (!decimal.TryParse(e.FormattedValue.ToString(), out _))
+                {
+                    e.Cancel = true; // Prevent the cell from losing focus
+                    grid_sales.Rows[e.RowIndex].ErrorText = "Value must be a numeric value";
+                }
+                else
+                {
+                    // Clear any previous error messages
+                    grid_sales.Rows[e.RowIndex].ErrorText = string.Empty;
+                }
             }
         }
     }
