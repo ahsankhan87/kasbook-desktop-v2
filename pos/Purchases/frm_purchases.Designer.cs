@@ -524,6 +524,7 @@
             this.grid_purchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_purchases.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_purchases_CellContentClick);
             this.grid_purchases.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_purchases_CellEndEdit);
+            this.grid_purchases.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.grid_purchases_CellValidating);
             this.grid_purchases.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grid_purchases_DataError);
             this.grid_purchases.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_purchases_EditingControlShowing);
             this.grid_purchases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grid_purchases_RowPostPaint);

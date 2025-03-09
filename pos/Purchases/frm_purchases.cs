@@ -154,6 +154,15 @@ namespace pos
 
                 }
 
+                if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6)
+                {
+                    var cell = grid_purchases.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    if (cell.Value == null || string.IsNullOrEmpty(cell.Value.ToString()))
+                    {
+                        cell.Value = 0; // Set default value to 0 if null or empty
+                    }
+                }
+
                 if (columnName == "Qty") // if qty is changed
                 {
                     double tax_rate = (grid_purchases.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
@@ -1158,9 +1167,26 @@ namespace pos
 
         void tb_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox tb = sender as TextBox;
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
+                return;
+            }
+           
+            // Allow only one decimal point
+            if (e.KeyChar == '.' && tb.Text.Contains("."))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Prevent entering "." as the first character
+            if (e.KeyChar == '.' && tb.Text.Length == 0)
+            {
+                e.Handled = true;
+                return;
             }
         }
 
@@ -1945,7 +1971,7 @@ namespace pos
 
                                 ///// Added sales detail in to List
                                 decimal tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
-
+                                
                                 purchase_model_detail.Add(new PurchasesModal
                                 {
                                     serialNo = sno++,
@@ -2108,6 +2134,27 @@ namespace pos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void grid_purchases_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6)
+            {
+                if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
+                {
+                    e.Cancel = true;
+                    grid_purchases.Rows[e.RowIndex].ErrorText = "Value cannot be null or empty";
+                }
+                else if (!decimal.TryParse(e.FormattedValue.ToString(), out _))
+                {
+                    e.Cancel = true;
+                    grid_purchases.Rows[e.RowIndex].ErrorText = "Value must be a numeric value";
+                }
+                else
+                {
+                    grid_purchases.Rows[e.RowIndex].ErrorText = string.Empty;
+                }
             }
         }
     }
