@@ -173,7 +173,7 @@ namespace pos
 
                     foreach (DataRow myProductView in dt.Rows)
                     {
-                        string id = myProductView["code"].ToString(); // Convert.ToInt32(myProductView["item_id"]);
+                        string id =  myProductView["id"].ToString(); //myProductView["code"].ToString(); /
                         string code = myProductView["code"].ToString();
                         string category = myProductView["category"].ToString();
                         string name = myProductView["name"].ToString();
@@ -208,7 +208,7 @@ namespace pos
         private void btn_invoice_search_Click(object sender, EventArgs e)
         {
             string invoice_no = txt_purchase_inv_no.Text;
-            DataTable dt = new DataTable();
+            DataTable dt; 
 
             PurchasesBLL purchasesObj = new PurchasesBLL();
 

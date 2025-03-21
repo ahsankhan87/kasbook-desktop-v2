@@ -114,7 +114,7 @@ namespace pos
                     }
                     else if (frm_pro_labels != null)
                     {
-                        frm_pro_labels.load_products(code);
+                        frm_pro_labels.load_products(product_id);
 
                     }
                     else if (frm_pro_detail != null)
