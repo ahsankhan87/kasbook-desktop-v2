@@ -56,11 +56,12 @@ namespace pos
                 return false;
             }
 
-            if (decryptedParts[2].ToString() != systemID)
-            {
-                MessageBox.Show("This computer system is not registered, please contact vendor", "Computer Registration", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false; // Check Computer System ID mismatch
-            }
+            ///bypass the system id by commenting the follwing code
+            //if (decryptedParts[2].ToString() != systemID)
+            //{
+            //    MessageBox.Show("This computer system is not registered, please contact vendor", "Computer Registration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return false; // Check Computer System ID mismatch
+            //}
             // Optionally, perform additional checks on the newExpirationDate, e.g., ensure it's in the future
 
             return true; // Renewal key is valid
