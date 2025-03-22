@@ -83,7 +83,6 @@ namespace pos
                SendKeys.Send("{TAB}");
             }
         }
-
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             HardwareIdentifier systemID_obj = new HardwareIdentifier();
