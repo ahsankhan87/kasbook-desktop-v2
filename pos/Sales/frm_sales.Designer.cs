@@ -46,8 +46,8 @@
             this.txt_user_commission_balance = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.txt_description = new System.Windows.Forms.TextBox();
             this.txtPONumber = new System.Windows.Forms.TextBox();
+            this.txt_description = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.SalesToolStrip = new System.Windows.Forms.ToolStrip();
@@ -81,10 +81,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox_products = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.rd_btn_bytotal_price = new System.Windows.Forms.RadioButton();
             this.rd_btn_by_unitprice = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.rd_btn_with_vat = new System.Windows.Forms.RadioButton();
             this.rd_btn_without_vat = new System.Windows.Forms.RadioButton();
             this.txt_brand_code = new System.Windows.Forms.TextBox();
@@ -140,6 +140,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_cost_price_with_vat = new System.Windows.Forms.TextBox();
             this.txt_single_cost_evat = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.txt_cost_price = new System.Windows.Forms.TextBox();
             this.txt_total_cost = new System.Windows.Forms.TextBox();
             this.txt_total_amount = new System.Windows.Forms.TextBox();
@@ -157,7 +158,6 @@
             this.lbl_cost_price_evat = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.lbl_cost_price = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -173,8 +173,8 @@
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_products.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales)).BeginInit();
             this.contextMenuStrip_Sales.SuspendLayout();
             this.panel_grid.SuspendLayout();
@@ -202,8 +202,8 @@
             this.groupBox3.Controls.Add(this.txt_user_commission_balance);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.txt_description);
             this.groupBox3.Controls.Add(this.txtPONumber);
+            this.groupBox3.Controls.Add(this.txt_description);
             this.groupBox3.Controls.Add(this.label17);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
@@ -225,15 +225,15 @@
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
             // 
-            // txt_description
-            // 
-            resources.ApplyResources(this.txt_description, "txt_description");
-            this.txt_description.Name = "txt_description";
-            // 
             // txtPONumber
             // 
             resources.ApplyResources(this.txtPONumber, "txtPONumber");
             this.txtPONumber.Name = "txtPONumber";
+            // 
+            // txt_description
+            // 
+            resources.ApplyResources(this.txt_description, "txt_description");
+            this.txt_description.Name = "txt_description";
             // 
             // label17
             // 
@@ -476,7 +476,6 @@
             // groupBox_products
             // 
             this.groupBox_products.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox_products.Controls.Add(this.groupBox6);
             this.groupBox_products.Controls.Add(this.groupBox5);
             this.groupBox_products.Controls.Add(this.txt_brand_code);
             this.groupBox_products.Controls.Add(this.txt_category_code);
@@ -492,6 +491,15 @@
             resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.groupBox6);
+            this.groupBox5.Controls.Add(this.rd_btn_with_vat);
+            this.groupBox5.Controls.Add(this.rd_btn_without_vat);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.TabStop = false;
             // 
             // groupBox6
             // 
@@ -514,14 +522,6 @@
             this.rd_btn_by_unitprice.Name = "rd_btn_by_unitprice";
             this.rd_btn_by_unitprice.TabStop = true;
             this.rd_btn_by_unitprice.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.rd_btn_with_vat);
-            this.groupBox5.Controls.Add(this.rd_btn_without_vat);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
             // 
             // rd_btn_with_vat
             // 
@@ -899,6 +899,7 @@
             this.panel_footer.Controls.Add(this.groupBox2);
             this.panel_footer.Controls.Add(this.txt_cost_price_with_vat);
             this.panel_footer.Controls.Add(this.txt_single_cost_evat);
+            this.panel_footer.Controls.Add(this.label28);
             this.panel_footer.Controls.Add(this.txt_cost_price);
             this.panel_footer.Controls.Add(this.txt_total_cost);
             this.panel_footer.Controls.Add(this.txt_total_amount);
@@ -916,7 +917,6 @@
             this.panel_footer.Controls.Add(this.lbl_cost_price_evat);
             this.panel_footer.Controls.Add(this.label24);
             this.panel_footer.Controls.Add(this.lbl_cost_price);
-            this.panel_footer.Controls.Add(this.label28);
             this.panel_footer.Controls.Add(this.label27);
             this.panel_footer.Controls.Add(this.label26);
             this.panel_footer.Controls.Add(this.label23);
@@ -1043,6 +1043,11 @@
             this.txt_single_cost_evat.Name = "txt_single_cost_evat";
             this.txt_single_cost_evat.ReadOnly = true;
             // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
+            // 
             // txt_cost_price
             // 
             resources.ApplyResources(this.txt_cost_price, "txt_cost_price");
@@ -1140,11 +1145,6 @@
             resources.ApplyResources(this.lbl_cost_price, "lbl_cost_price");
             this.lbl_cost_price.Name = "lbl_cost_price";
             // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
-            // 
             // label27
             // 
             resources.ApplyResources(this.label27, "label27");
@@ -1219,10 +1219,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox_products.ResumeLayout(false);
             this.groupBox_products.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales)).EndInit();
             this.contextMenuStrip_Sales.ResumeLayout(false);
             this.panel_grid.ResumeLayout(false);

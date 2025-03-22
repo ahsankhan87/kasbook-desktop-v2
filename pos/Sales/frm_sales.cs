@@ -37,7 +37,7 @@ namespace pos
         public double total_sub_total = 0;
         string invoice_status = "";
         string product_code = "";
-        
+
         public double cash_sales_amount_limit = 0;
         //public double cash_purchase_amount_limit= 0;
         public bool allow_credit_sales = false;
@@ -89,7 +89,7 @@ namespace pos
             get_employees_dropdownlist();
             get_payment_terms_dropdownlist();
             get_payment_method_dropdownlist();
-            
+
             get_saletype_dropdownlist();
             if (lang == "en-US")
             {
@@ -99,7 +99,7 @@ namespace pos
             {
                 cmb_sale_type.SelectedIndex = 0;
             }
-            
+
             Get_user_total_commission();
 
             //disable sorting in grid
@@ -117,14 +117,14 @@ namespace pos
         }
 
         Form frm_searchSaleProducts_obj;
-                    
+
         private void grid_sales_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
             try
             {
                 int iColumn = grid_sales.CurrentCell.ColumnIndex;
-                int iRow = grid_sales.CurrentCell.RowIndex; 
+                int iRow = grid_sales.CurrentCell.RowIndex;
                 string columnName = grid_sales.Columns[e.ColumnIndex].Name;
                 if (columnName == "code")
                 {
@@ -135,9 +135,9 @@ namespace pos
                     //}
                     //else
                     //{
-                        //string product_code = grid_sales[e.ColumnIndex, e.RowIndex].Value.ToString();
+                    //string product_code = grid_sales[e.ColumnIndex, e.RowIndex].Value.ToString();
                     product_code = (grid_sales.CurrentRow.Cells["code"].Value != null ? grid_sales.CurrentRow.Cells["code"].Value.ToString() : "");
-                    
+
                     bool isGrid = true;
                     var brand_code = txt_brand_code.Text; // (cmb_brands.SelectedValue != null ? cmb_brands.SelectedValue.ToString() : "");
                     var category_code = txt_category_code.Text; // (cmb_categories.SelectedValue != null ? cmb_categories.SelectedValue.ToString() : "");
@@ -148,7 +148,7 @@ namespace pos
                     {
                         frm_searchSaleProducts_obj = new frm_searchSaleProducts(this, product_code, category_code, brand_code, isGrid, group_code);
                         frm_searchSaleProducts_obj.FormClosed += new FormClosedEventHandler(frm_searchSaleProducts_obj_FormClosed);
-                        
+
                         //frm_cust.Dock = DockStyle.Fill;
                         frm_searchSaleProducts_obj.ShowDialog();
                     }
@@ -159,16 +159,16 @@ namespace pos
                         frm_searchSaleProducts_obj.Visible = true;
                     }
                     ////////////
-                    
+
                     //frm_searchSaleProducts search_product_obj = new frm_searchSaleProducts(this, product_code, category_code, brand_code, e.RowIndex, isGrid, group_code);
                     //search_product_obj.ShowDialog();
 
                     //if(search_product_obj._returnStatus)
                     //{
-                            
-                            
+
+
                     //}
-                        //grid_sales.BeginEdit(true);
+                    //grid_sales.BeginEdit(true);
                     //}
                 }
 
@@ -210,7 +210,7 @@ namespace pos
                         //double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
                         string pre_tax = "1." + tax_rate.ToString();
                         double single_unitPrice = (total_unitPrice_1 / qty_1);
-                         tax = (single_unitPrice * tax_rate / 100);
+                        tax = (single_unitPrice * tax_rate / 100);
                         double new_tax_value = (tax * qty_1);
 
                         grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value = single_unitPrice;
@@ -325,12 +325,12 @@ namespace pos
         {
 
             try
-            { 
-            DataTable product_dt = new DataTable();
-        
-            product_dt = productsBLL_obj.SearchRecordByProductID(product_id);
+            {
+                DataTable product_dt = new DataTable();
 
-            int RowIndex = grid_sales.CurrentCell.RowIndex;
+                product_dt = productsBLL_obj.SearchRecordByProductID(product_id);
+
+                int RowIndex = grid_sales.CurrentCell.RowIndex;
 
                 if (product_dt.Rows.Count > 0)
                 {
@@ -410,7 +410,7 @@ namespace pos
             }
         }
 
-        public void fill_locations_grid_combo(int RowIndex, string SelectedValue = "DEF",string product_id = "")
+        public void fill_locations_grid_combo(int RowIndex, string SelectedValue = "DEF", string product_id = "")
         {
             DataTable dt = new DataTable();
             var locationComboCell = new DataGridViewComboBoxCell();
@@ -421,7 +421,7 @@ namespace pos
             dt = generalBLL_obj.GetRecord(keyword, table);
 
             //WHEN NO LOCATION ASSIGNED TO PRODUCT THEN ALL LOCATIONS SHALL BE LOADED
-            if(dt.Rows.Count <= 0)
+            if (dt.Rows.Count <= 0)
             {
                 string keyword1 = "L.code as location_code,L.name";
                 string table1 = "pos_locations L";
@@ -438,8 +438,8 @@ namespace pos
             grid_sales.Rows[RowIndex].Cells["location_code"] = locationComboCell;
             //grid_sales.Rows[RowIndex].Cells["location_code"].Value = SelectedValue;
             grid_sales.Rows[RowIndex].Cells["location_code"].Value = dt.Rows[0]["location_code"].ToString(); // GET FIRST COLUMN OF DT TO SHOW FIRST VALUE AS SELECTED
-            
-                        
+
+
         }
 
         private void txt_barcode_KeyDown(object sender, KeyEventArgs e)
@@ -475,7 +475,7 @@ namespace pos
 
             if (product_dt.Rows.Count > 0)
             {
-                
+
                 foreach (DataRow myProductView in product_dt.Rows)
                 {
                     double qty = Convert.ToDouble(myProductView["sale_demand_qty"].ToString() == string.Empty || (decimal)myProductView["sale_demand_qty"] == 0 ? "1" : myProductView["sale_demand_qty"].ToString());
@@ -515,10 +515,10 @@ namespace pos
                     //Remove the first empty row
                     if (grid_sales.RowCount > 0 && grid_sales.Rows[0].Cells["id"].Value == null)
                     {
-                       grid_sales.Rows.RemoveAt(0);
+                        grid_sales.Rows.RemoveAt(0);
                     }
                     //
-                        int RowIndex = grid_sales.Rows.Add(row0);
+                    int RowIndex = grid_sales.Rows.Add(row0);
 
                     if (Convert.ToDouble(myProductView["qty"]) <= 0 || myProductView["qty"].ToString() == string.Empty)
                     {
@@ -553,15 +553,15 @@ namespace pos
         {
             total_sub_total = 0;
 
-            for (int i = 0; i <= grid_sales.Rows.Count-1; i++ )
+            for (int i = 0; i <= grid_sales.Rows.Count - 1; i++)
             {
                 total_sub_total += Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value) * Convert.ToDouble(grid_sales.Rows[i].Cells["unit_price"].Value);
             }
 
-            txt_sub_total.Text = Math.Round(total_sub_total,2).ToString();
+            txt_sub_total.Text = Math.Round(total_sub_total, 2).ToString();
             txt_sub_total_2.Text = Math.Round((total_sub_total - total_discount), 2).ToString();
         }
-        
+
         private void get_total_cost_amount()
         {
             total_cost_amount = 0;
@@ -569,13 +569,15 @@ namespace pos
             double total_cost = 0;
             double tax_rate = 0;
 
-            for (int i = 0; i <= grid_sales.Rows.Count-1; i++)
+            for (int i = 0; i <= grid_sales.Rows.Count - 1; i++)
             {
                 //if tax is not assigned with product then assign zero
                 if (grid_sales.Rows[i].Cells["tax_rate"].Value == null || grid_sales.Rows[i].Cells["tax_rate"].Value == DBNull.Value || String.IsNullOrWhiteSpace(grid_sales.Rows[i].Cells["tax_rate"].Value.ToString()))
-                { 
+                {
                     tax_rate = 0;
-                }else{
+                }
+                else
+                {
                     tax_rate = double.Parse(grid_sales.Rows[i].Cells["tax_rate"].Value.ToString());
                 }
                 ////
@@ -585,7 +587,7 @@ namespace pos
                 total_cost_amount += total_cost;
                 total_cost_amount_e_vat += (total_cost + (total_cost * tax_rate / 100));
             }
-            
+
         }
 
         private void get_total_amount()
@@ -596,9 +598,9 @@ namespace pos
             {
                 total_amount += Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value) * Convert.ToDouble(grid_sales.Rows[i].Cells["unit_price"].Value);
             }
-            double net = (total_amount + total_tax-total_discount);
-            txt_total_amount.Text = Math.Round(net,2).ToString();
-            
+            double net = (total_amount + total_tax - total_discount);
+            txt_total_amount.Text = Math.Round(net, 2).ToString();
+
             ///Checking customer credit limit
             if (txt_cust_credit_limit.Text != "")
             {
@@ -609,9 +611,9 @@ namespace pos
                     return;
                 }
             }
-           
+
             ///
-            
+
         }
 
         private void get_total_tax()
@@ -623,7 +625,7 @@ namespace pos
                 total_tax += Convert.ToDouble(grid_sales.Rows[i].Cells["tax"].Value);
             }
 
-            txt_total_tax.Text = Math.Round(total_tax,2).ToString();
+            txt_total_tax.Text = Math.Round(total_tax, 2).ToString();
         }
 
         private void get_total_discount()
@@ -631,24 +633,24 @@ namespace pos
             total_discount = 0;
             //double flatDiscountValue = Convert.ToDouble(txtTotalFlatDiscountValue.Value);
             //double new_total_discount =Convert.ToDouble(txt_total_disc_percent.Value);
-           // double flatDiscountPercent = (total_amount * new_total_discount / 100);
+            // double flatDiscountPercent = (total_amount * new_total_discount / 100);
 
             for (int i = 0; i <= grid_sales.Rows.Count - 1; i++)
             {
                 total_discount += Convert.ToDouble(grid_sales.Rows[i].Cells["discount"].Value);
             }
-           // total_discount += flatDiscountValue;
+            // total_discount += flatDiscountValue;
             //total_discount += flatDiscountPercent;
 
             txt_total_discount.Text = Math.Round(total_discount, 2).ToString();
-            
+
             //double total_disc_percent = (string.IsNullOrEmpty(txt_total_disc_percent.Text) ? 0 : Convert.ToDouble(txt_total_disc_percent.Text));
             //if (total_disc_percent == 0)
             //{
             //    txt_total_discount.Text = Math.Round(total_discount,2).ToString();
             //}
 
-           
+
         }
 
         private void get_total_qty()
@@ -660,20 +662,20 @@ namespace pos
                 total_qty += Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value);
             }
 
-            txt_total_qty.Text = Math.Round(total_qty,2).ToString();
+            txt_total_qty.Text = Math.Round(total_qty, 2).ToString();
         }
-        
+
         private void btn_save_Click(object sender, EventArgs e)
         {
-            
+
 
 
         }
 
-        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date, 
-            string description,int customer_id, int supplier_id,int entry_id, int employee_id=0)
+        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
+            string description, int customer_id, int supplier_id, int entry_id, int employee_id = 0)
         {
-            int journal_id =0;
+            int journal_id = 0;
             JournalsModal JournalsModal_obj = new JournalsModal();
             JournalsBLL JournalsObj = new JournalsBLL();
 
@@ -724,11 +726,11 @@ namespace pos
             JournalsModal_obj.credit = credit;
             JournalsModal_obj.account_id = account_id;
             JournalsModal_obj.description = description;
-            
+
             journal_id = emp_Obj.InsertUserCommission(JournalsModal_obj);
             return journal_id;
         }
-        
+
         private void Get_AccountID_From_Company()
         {
             GeneralBLL objBLL = new GeneralBLL();
@@ -766,10 +768,10 @@ namespace pos
 
         }
 
-        
-        
+
+
         private void frm_sales_KeyDown(object sender, KeyEventArgs e)
-       {
+        {
             try
             {
                 //when you enter in textbox it will goto next textbox, work like TAB key
@@ -807,7 +809,7 @@ namespace pos
                 }
                 if (e.KeyCode == Keys.Escape)
                 {
-                    
+
                 }
                 if (e.KeyData == Keys.Down)
                 {
@@ -837,7 +839,7 @@ namespace pos
             {
                 string name = grid_sales.Columns[e.ColumnIndex].Name;
                 if (name == "btn_delete")
-                { 
+                {
                     grid_sales.Rows.RemoveAt(e.RowIndex);
 
                     get_total_tax();
@@ -846,38 +848,38 @@ namespace pos
                     get_total_cost_amount();
                     get_total_amount();
                     get_total_qty();
-                
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
 
         public void autoCompleteProductCode()
         {
             try
             {
-            //    txt_product_code.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    txt_product_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //    AutoCompleteStringCollection Products_coll = new AutoCompleteStringCollection();
+                //    txt_product_code.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //    txt_product_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                //    AutoCompleteStringCollection Products_coll = new AutoCompleteStringCollection();
 
-            //    ProductBLL productsBLL_obj = new ProductBLL();
-            //    DataTable dt = productsBLL_obj.GetAllProductCodes();
-                
-            //    if (dt.Rows.Count > 0)
-            //    {
-            //        foreach (DataRow dr in dt.Rows)
-            //        {
-            //            Products_coll.Add(dr["code"].ToString() +" - "+ dr["name"].ToString());
+                //    ProductBLL productsBLL_obj = new ProductBLL();
+                //    DataTable dt = productsBLL_obj.GetAllProductCodes();
 
-            //        }
+                //    if (dt.Rows.Count > 0)
+                //    {
+                //        foreach (DataRow dr in dt.Rows)
+                //        {
+                //            Products_coll.Add(dr["code"].ToString() +" - "+ dr["name"].ToString());
 
-            //    }
+                //        }
 
-            //    txt_product_code.AutoCompleteCustomSource = Products_coll;
+                //    }
+
+                //    txt_product_code.AutoCompleteCustomSource = Products_coll;
             }
             catch (Exception ex)
             {
@@ -885,7 +887,7 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
+
         }
 
         private void chkbox_is_taxable_CheckedChanged(object sender, EventArgs e)
@@ -906,7 +908,7 @@ namespace pos
 
         private void btn_movements_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void clear_form()
@@ -918,7 +920,7 @@ namespace pos
             grid_sales.Rows.Add();
 
             txt_description.Text = "";
-            
+
             //cmb_brands.SelectedValue = 0;
             //cmb_customers.Refresh();
 
@@ -928,11 +930,11 @@ namespace pos
             txt_categories.Text = "";
             txt_brands.Text = "";
             txt_brand_code.Text = "";
-            
+
             invoice_status = "";
             //btn_save.Text = "Save (F3)";
             txt_invoice_no.Text = "";
-            
+
             total_amount = 0;
             total_discount = 0;
             total_tax = 0;
@@ -942,7 +944,7 @@ namespace pos
 
             txt_sale_date.Refresh();
             txt_sale_date.Value = DateTime.Now;
-            
+
             txt_cust_balance.Text = "";
             txt_cust_credit_limit.Text = "";
             txt_customer_vat.Text = "";
@@ -965,12 +967,12 @@ namespace pos
             txt_cost_price_with_vat.Text = "";
             txt_single_cost_evat.Text = "";
             txt_single_cost_evat.Text = "";
-            
+
             txt_shop_qty.Text = "";
             txt_company_qty.Text = "";
             txtPONumber.Text = "";
             txt_user_commission_balance.Text = "";
-            
+
             cmb_employees.SelectedValue = 0;
             cmb_sale_type.SelectedValue = "Cash";
             cmb_customers.SelectedValue = 0;
@@ -982,7 +984,7 @@ namespace pos
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void txt_customer_id_KeyPress(object sender, KeyPressEventArgs e)
@@ -1018,7 +1020,7 @@ namespace pos
             cmb_customers.ValueMember = "id";
             cmb_customers.DataSource = customers;
 
-           
+
         }
 
         public void get_employees_dropdownlist()
@@ -1030,8 +1032,8 @@ namespace pos
             emptyRow[0] = 0;              // Set Column Value
             emptyRow[2] = "Select Employee";              // Set Column Value
             employees.Rows.InsertAt(emptyRow, 0);
-            
-            
+
+
             cmb_employees.DisplayMember = "first_name";
             cmb_employees.ValueMember = "id";
             cmb_employees.DataSource = employees;
@@ -1061,7 +1063,7 @@ namespace pos
         {
             PaymentMethodBLL paymentMethodBLL = new PaymentMethodBLL();
 
-            DataTable payment_method = paymentMethodBLL.GetAll(); 
+            DataTable payment_method = paymentMethodBLL.GetAll();
             DataRow emptyRow = payment_method.NewRow();
             //emptyRow[0] = 0;              // Set Column Value
             //emptyRow[1] = "";              // Set Column Value
@@ -1124,10 +1126,10 @@ namespace pos
 
         private void btn_round_prices_Click(object sender, EventArgs e)
         {
-            
+
         }
 
-        public void round_total_amount(double new_amount,double old_total_amount,double sub_total)
+        public void round_total_amount(double new_amount, double old_total_amount, double sub_total)
         {
             try
             {
@@ -1276,10 +1278,10 @@ namespace pos
             {
                 _row_4["name"] = "ICT";
             }
-            
+
             dt.Rows.Add(_row_4);
 
-           
+
             //DataRow _row_4 = dt.NewRow();
             //_row_4["id"] = "Return";
             //if (lang == "en-US")
@@ -1297,7 +1299,7 @@ namespace pos
             cmb_sale_type.DataSource = dt;
 
         }
-        
+
         public void load_user_rights(int user_id)
         {
             UsersBLL userBLL_obj = new UsersBLL();
@@ -1340,10 +1342,10 @@ namespace pos
                         get_total_qty();
                     }
                 }
-  
+
                 if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
                 {
-                    e.SuppressKeyPress = true; 
+                    e.SuppressKeyPress = true;
                     int iColumn = grid_sales.CurrentCell.ColumnIndex;
                     int iRow = grid_sales.CurrentCell.RowIndex;
 
@@ -1368,14 +1370,14 @@ namespace pos
                             grid_sales.CurrentCell.Selected = true;
                             grid_sales.BeginEdit(true);
                         }
-                        
+
                     }
-                } 
+                }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -1383,7 +1385,7 @@ namespace pos
         private void txt_invoice_no_KeyDown(object sender, KeyEventArgs e)
         {
             try
-            { 
+            {
                 if (txt_invoice_no.Text != "" && e.KeyCode == Keys.Enter)
                 {
                     string invoice_no = txt_invoice_no.Text;
@@ -1391,7 +1393,7 @@ namespace pos
                     SalesBLL salesObj = new SalesBLL();
                     DataTable estimates_dt = new DataTable();
 
-                    if(invoice_chr.ToUpper() == "S")
+                    if (invoice_chr.ToUpper() == "S")
                     {
                         estimates_dt = salesObj.GetSaleAndSalesItems(invoice_no);
                         Load_products_to_grid_by_invoiceno(estimates_dt, invoice_no);
@@ -1406,9 +1408,9 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-           
+
         }
 
         public void Load_products_to_grid_by_invoiceno(DataTable _dt, string invoice_no)
@@ -1420,7 +1422,7 @@ namespace pos
                 txt_invoice_no.Text = invoice_no;
 
                 string invoice_chr = invoice_no.Substring(0, 1);
-                    
+
                 if (invoice_chr.ToUpper() == "S")// for invoice edit
                 {
                     invoice_status = "Update"; //"Estimate";// 
@@ -1446,7 +1448,7 @@ namespace pos
                         //txt_sale_date.Value = Convert.ToDateTime(myProductView["sale_date"].ToString());
                         txt_description.Text = myProductView["description"].ToString();
                         total_amount = Convert.ToDouble(myProductView["total_amount"].ToString());
-                        txt_total_disc_percent.Value = (myProductView["total_disc_percent"] == null || myProductView["total_disc_percent"].ToString() == "" ? 0 : Math.Round(Convert.ToDecimal(myProductView["total_disc_percent"]),2));
+                        txt_total_disc_percent.Value = (myProductView["total_disc_percent"] == null || myProductView["total_disc_percent"].ToString() == "" ? 0 : Math.Round(Convert.ToDecimal(myProductView["total_disc_percent"]), 2));
                         txtTotalFlatDiscountValue.Value = (myProductView["flatDiscountValue"] == null || myProductView["flatDiscountValue"].ToString() == "" ? 0 : Math.Round(Convert.ToDecimal(myProductView["flatDiscountValue"]), 2));
 
                         double qty = Convert.ToDouble(myProductView["quantity_sold"].ToString());
@@ -1455,14 +1457,14 @@ namespace pos
                         double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
                         double tax = ((total - discount) * tax_rate / 100);
                         double sub_total = tax + total;
-                        double sub_total_without_vat = total-discount;
+                        double sub_total_without_vat = total - discount;
 
                         int id = Convert.ToInt32(myProductView["id"]);
                         string code = myProductView["code"].ToString();
                         string name = myProductView["name"].ToString();
-                        double cost_price = Math.Round(Convert.ToDouble(myProductView["cost_price"]),2);
-                        double unit_price = Math.Round( Convert.ToDouble(myProductView["unit_price"]),3);
-                        
+                        double cost_price = Math.Round(Convert.ToDouble(myProductView["cost_price"]), 2);
+                        double unit_price = Math.Round(Convert.ToDouble(myProductView["unit_price"]), 3);
+
                         double total_value = Convert.ToDouble(myProductView["unit_price"]) * Convert.ToDouble(myProductView["quantity_sold"].ToString());
                         double discount_percent = Convert.ToDouble(myProductView["discount_percent"]); //Convert.ToDouble(myProductView["discount_value"]) / total_value * 100;
 
@@ -1476,9 +1478,9 @@ namespace pos
                         string shop_qty = ""; // myProductView["qty"].ToString();
                         string category_code = myProductView["category_code"].ToString();
 
-                        double current_sub_total = Convert.ToDouble(qty) * unit_price + tax-discount;
+                        double current_sub_total = Convert.ToDouble(qty) * unit_price + tax - discount;
 
-                        
+
                         string[] row0 = { id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
                                             sub_total_without_vat.ToString(),tax.ToString(), current_sub_total.ToString(),location_code,unit,category,
                                             btn_delete, shop_qty,tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
@@ -1488,7 +1490,7 @@ namespace pos
                         ////////
                         //fill_locations_grid_combo(rowIndex, "", id.ToString());
                         //////
-                    
+
                     }
                     //grid_sales.Rows.Add();
 
@@ -1504,7 +1506,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -1513,7 +1515,7 @@ namespace pos
             try
             {
                 //MessageBox.Show(grid_sales.CurrentRow.Cells["code"].Value.ToString());
-                if(grid_sales.RowCount > 0)
+                if (grid_sales.RowCount > 0)
                 {
                     if (grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
                     {
@@ -1530,17 +1532,17 @@ namespace pos
                     }
 
                 }
-                                
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void grid_sales_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            
+
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
             if (grid_sales.CurrentCell.ColumnIndex == 3 || grid_sales.CurrentCell.ColumnIndex == 4 || grid_sales.CurrentCell.ColumnIndex == 5
@@ -1585,7 +1587,7 @@ namespace pos
             HistoryToolStripButton.PerformClick();
         }
 
-        public class Grid  : DataGridView
+        public class Grid : DataGridView
         {
             protected override void OnHandleCreated(EventArgs e)
             {
@@ -1602,12 +1604,12 @@ namespace pos
 
         private void btn_search_invioces_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void chk_show_total_cost_CheckedChanged(object sender, EventArgs e)
         {
-            if(chk_show_total_cost.Checked)
+            if (chk_show_total_cost.Checked)
             {
                 txt_cost_price_with_vat.Visible = true;
                 lbl_cost_vat.Visible = true;
@@ -1617,7 +1619,9 @@ namespace pos
                 txt_total_cost.Visible = true;
                 txt_cost_price.Visible = true;
                 txt_single_cost_evat.Visible = true;
-            }else{
+            }
+            else
+            {
                 //txt_total_cost.Text = "0";
                 lbl_cost_price_evat.Visible = false;
                 lbl_cost_vat.Visible = false;
@@ -1634,17 +1638,17 @@ namespace pos
         {
             try
             {
-                if(grid_sales.RowCount > 0)
+                if (grid_sales.RowCount > 0)
                 {
                     if (grid_sales.CurrentRow.Cells["code"].Value != null)
                     {
                         string product_code = grid_sales.CurrentRow.Cells["code"].Value.ToString();
-                        
-                        frm_product_full_detail obj = new frm_product_full_detail(this,null, product_code);
+
+                        frm_product_full_detail obj = new frm_product_full_detail(this, null, product_code);
                         obj.ShowDialog();
                     }
                 }
-                
+
 
             }
             catch (Exception ex)
@@ -1659,14 +1663,14 @@ namespace pos
             {
                 string product_code = grid_sales.CurrentRow.Cells["code"].Value.ToString();
                 double tax_rate = (grid_sales.CurrentRow.Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.CurrentRow.Cells["tax_rate"].Value.ToString()));
-                if(product_code != null)
+                if (product_code != null)
                 {
                     string shop_qty = "";
                     string company_qty = "";
                     string avg_cost = "";
-                    
+
                     DataTable dt = productsBLL_obj.GetAllByProductCode(product_code);
-                    if(dt.Rows.Count > 0)
+                    if (dt.Rows.Count > 0)
                     {
                         foreach (DataRow myProductView in dt.Rows)
                         {
@@ -1706,10 +1710,10 @@ namespace pos
                         Purchases_orderBLL poBLL = new Purchases_orderBLL();
                         txt_order_qty.Text = poBLL.GetPOrder_qty(product_code).ToString();
                     }
-                    
+
                 }
-             }
-                
+            }
+
         }
 
         private void grid_sales_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -1718,7 +1722,7 @@ namespace pos
             using (SolidBrush b = new SolidBrush(grid_sales.RowHeadersDefaultCellStyle.ForeColor))
             {
                 e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
-            } 
+            }
             //grid_sales.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
         }
 
@@ -1730,7 +1734,7 @@ namespace pos
                 if (grid_sales.CurrentRow.Cells["code"].Value != null)
                 {
                     string product_id = grid_sales.CurrentRow.Cells["id"].Value.ToString();
-                    frm_addProduct frm_addProduct_obj = new frm_addProduct(null, int.Parse(product_id), "true",null,"",this);
+                    frm_addProduct frm_addProduct_obj = new frm_addProduct(null, int.Parse(product_id), "true", null, "", this);
                     frm_addProduct_obj.WindowState = FormWindowState.Maximized;
                     frm_addProduct_obj.ShowDialog();
                 }
@@ -1761,7 +1765,7 @@ namespace pos
                 //long emp_total_balance = obj.GetEmpCommissionBalance(employee_id);
                 //txt_cust_balance.Text = emp_total_balance.ToString();
                 ///
-                
+
             }
         }
 
@@ -1785,14 +1789,14 @@ namespace pos
         {
             grid_sales.Rows.Add();
         }
-        
+
         private void SetupBrandDataGridView()
         {
             var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
 
             brandsDataGridView.ColumnCount = 2;
             int xLocation = groupBox_products.Location.X + txt_brands.Location.X;
-            int yLocation = groupBox_products.Location.Y + txt_brands.Location.Y+22;
+            int yLocation = groupBox_products.Location.Y + txt_brands.Location.Y + 22;
 
             brandsDataGridView.Name = "brandsDataGridView";
             if (current_lang_code == "en-US")
@@ -1805,15 +1809,15 @@ namespace pos
                 brandsDataGridView.Location = new Point(xLocation, yLocation);
                 brandsDataGridView.Size = new Size(250, 250);
             }
-           
+
             brandsDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             brandsDataGridView.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.Single;
             brandsDataGridView.Columns[0].Name = "Code";
             brandsDataGridView.Columns[1].Name = "Name";
-            brandsDataGridView.Columns[0].ReadOnly = true;  
-            brandsDataGridView.Columns[1].ReadOnly = true;  
+            brandsDataGridView.Columns[0].ReadOnly = true;
+            brandsDataGridView.Columns[1].ReadOnly = true;
             brandsDataGridView.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
             brandsDataGridView.MultiSelect = false;
@@ -1928,7 +1932,7 @@ namespace pos
                 categoriesDataGridView.Location = new Point(xLocation, yLocation);
                 categoriesDataGridView.Size = new Size(250, 250);
             }
-       
+
             categoriesDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             categoriesDataGridView.ColumnHeadersBorderStyle =
@@ -2038,10 +2042,10 @@ namespace pos
         {
             var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
 
-               groupsDataGridView.ColumnCount = 2;
+            groupsDataGridView.ColumnCount = 2;
 
             int xLocation = groupBox_products.Location.X + txt_groups.Location.X;
-            int yLocation = groupBox_products.Location.Y + txt_groups.Location.Y+22;
+            int yLocation = groupBox_products.Location.Y + txt_groups.Location.Y + 22;
 
             groupsDataGridView.Name = "groupsDataGridView";
             if (current_lang_code == "en-US")
@@ -2173,7 +2177,7 @@ namespace pos
             txt_change_amount.Text = (total_amount - received_amount).ToString();
         }
 
-       
+
         private void grid_sales_DataError(object sender, DataGridViewDataErrorEventArgs anError)
         {
             MessageBox.Show("Error happened " + anError.Context.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -2207,12 +2211,12 @@ namespace pos
 
         private void btn_ict_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void radioDiscValue_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioDiscValue.Checked)
+            if (radioDiscValue.Checked)
             {
                 txtTotalFlatDiscountValue.Enabled = true;
                 txt_total_disc_percent.Value = 0;
@@ -2288,7 +2292,7 @@ namespace pos
                     grid_sales.Rows[i].Cells["discount"].Value = diff_amount_per_item;
 
                     discount_percent = diff_amount_per_item / total_amount * 100;
-                    grid_sales.Rows[i].Cells["discount_percent"].Value = Math.Round(discount_percent,4).ToString();
+                    grid_sales.Rows[i].Cells["discount_percent"].Value = Math.Round(discount_percent, 4).ToString();
 
                     //new_amount_single = (double.Parse(grid_sales.Rows[i].Cells["sub_total"].Value.ToString()) / double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString())) - (diff_amount_per_item / double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString()));
                     //new_amount_total = new_amount_single * total_item_share / 100;
@@ -2310,7 +2314,7 @@ namespace pos
                     ////grid_sales.Rows[i].Cells["total_without_vat"].Value = (sub_total_1 - tax_1);
                     grid_sales.Rows[i].Cells["tax"].Value = (tax_1);
 
-                   
+
                 }
 
             }
@@ -2371,7 +2375,7 @@ namespace pos
                     grid_sales.Rows[i].Cells["discount_percent"].Value = diff_percent_per_item;
 
                     discount_value = total_amount * diff_percent_per_item / 100;
-                    grid_sales.Rows[i].Cells["discount"].Value = Math.Round(discount_value,4).ToString();
+                    grid_sales.Rows[i].Cells["discount"].Value = Math.Round(discount_value, 4).ToString();
 
                     //new_amount_single = (double.Parse(grid_sales.Rows[i].Cells["sub_total"].Value.ToString()) / double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString())) - (diff_amount_per_item / double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString()));
                     //new_amount_total = new_amount_single * total_item_share / 100;
@@ -2393,7 +2397,7 @@ namespace pos
                     ////grid_sales.Rows[i].Cells["total_without_vat"].Value = (sub_total_1 - tax_1);
                     grid_sales.Rows[i].Cells["tax"].Value = (tax_1);
 
-                    
+
                 }
 
             }
@@ -2413,7 +2417,7 @@ namespace pos
 
         private void frm_sales_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
+            if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
             {
                 if (MessageBox.Show("Are you sure you want to close sale?",
                       "Close Sale Transaction",
@@ -2424,7 +2428,7 @@ namespace pos
 
                 }
             }
-            
+
         }
 
         private void NewToolStripButton_Click(object sender, EventArgs e)
@@ -2613,7 +2617,7 @@ namespace pos
                             is_return = false,
                             estimate_invoice_no = estimate_invoice_no,
                             estimate_status = estimate_status,
-                            
+
                             total_cost_amount = total_cost_amount,
                             cash_account_id = cash_account_id,
                             receivable_account_id = receivable_account_id,
@@ -2803,7 +2807,7 @@ namespace pos
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-}
+        }
 
         private void AmountFixToolStripButton_Click(object sender, EventArgs e)
         {
@@ -2818,7 +2822,7 @@ namespace pos
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-}
+        }
 
         private void ICTToolStripButton_Click(object sender, EventArgs e)
         {
@@ -2883,5 +2887,8 @@ namespace pos
                 }
             }
         }
+
+      
     }
+  
 }
