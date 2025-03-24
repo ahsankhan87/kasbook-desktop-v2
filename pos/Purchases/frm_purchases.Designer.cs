@@ -540,7 +540,7 @@
             // code
             // 
             this.code.DataPropertyName = "code";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.code.DefaultCellStyle = dataGridViewCellStyle13;
             resources.ApplyResources(this.code, "code");
@@ -1064,6 +1064,14 @@
         private System.Windows.Forms.TextBox txt_shipping_cost;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.CheckBox chkbox_is_taxable;
+        private System.Windows.Forms.ToolStrip PurchaseToolStrip;
+        private System.Windows.Forms.ToolStripButton NewToolStripButton;
+        private System.Windows.Forms.ToolStripButton SaveToolStripButton;
+        private System.Windows.Forms.ToolStripButton SearchToolStripButton;
+        private System.Windows.Forms.ToolStripButton HistoryToolStripButton;
+        private System.Windows.Forms.ToolStripButton LoadPOToolStripButton;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -1080,13 +1088,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn shop_qty;
-        private System.Windows.Forms.ToolStrip PurchaseToolStrip;
-        private System.Windows.Forms.ToolStripButton NewToolStripButton;
-        private System.Windows.Forms.ToolStripButton SaveToolStripButton;
-        private System.Windows.Forms.ToolStripButton SearchToolStripButton;
-        private System.Windows.Forms.ToolStripButton HistoryToolStripButton;
-        private System.Windows.Forms.ToolStripButton LoadPOToolStripButton;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.GroupBox groupBox5;
     }
 }

@@ -117,21 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txt_first_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_first_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 54</value>
   </data>
+  <data name="txt_last_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_last_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 80</value>
+  </data>
+  <data name="txt_email.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_email.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 132</value>
   </data>
+  <data name="txt_address.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_address.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 251</value>
   </data>
+  <data name="txt_contact_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_contact_no.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 158</value>
+  </data>
+  <data name="txt_vatno.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_vatno.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 106</value>
@@ -148,6 +167,9 @@
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
+  <data name="txt_id.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 28</value>
   </data>
@@ -155,14 +177,26 @@
   <data name="txt_id.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="txt_credit_limit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_credit_limit.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 182</value>
+  </data>
+  <data name="txt_vin_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_vin_no.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 205</value>
   </data>
+  <data name="txt_car_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_car_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 228</value>
+  </data>
+  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>463, 185</value>
@@ -177,7 +211,9 @@
     <value>الحد الائتماني
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -192,6 +228,9 @@
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>رقم الاتصال</value>
+  </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -208,6 +247,9 @@
   <data name="label4.Text" xml:space="preserve">
     <value>عنوان</value>
   </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -223,6 +265,9 @@
   <data name="label3.Text" xml:space="preserve">
     <value>البريد الإلكتروني</value>
   </data>
+  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -237,6 +282,9 @@
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>الرقم الضريبي</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -268,6 +316,9 @@
   <data name="label8.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>463, 231</value>
   </data>
@@ -281,6 +332,9 @@
     <value>اسم السيارة
 </value>
   </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>463, 205</value>
   </data>
@@ -293,6 +347,9 @@
   <data name="label9.Text" xml:space="preserve">
     <value>رقم الشاسيه
 </value>
+  </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

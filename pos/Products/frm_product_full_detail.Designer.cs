@@ -128,6 +128,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_product_name);
             this.panel1.Controls.Add(this.txt_product_code);
@@ -135,7 +136,6 @@
             this.panel1.Controls.Add(this.label21);
             this.panel1.Controls.Add(this.txt_id);
             this.panel1.Controls.Add(this.label40);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
@@ -153,8 +153,8 @@
             // 
             // btn_search_products
             // 
-            this.btn_search_products.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.btn_search_products, "btn_search_products");
+            this.btn_search_products.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_search_products.Name = "btn_search_products";
             this.btn_search_products.UseVisualStyleBackColor = true;
             this.btn_search_products.Click += new System.EventHandler(this.btn_search_products_Click);
@@ -178,8 +178,8 @@
             // 
             // lbl_errors
             // 
-            this.lbl_errors.ForeColor = System.Drawing.Color.Red;
             resources.ApplyResources(this.lbl_errors, "lbl_errors");
+            this.lbl_errors.ForeColor = System.Drawing.Color.Red;
             this.lbl_errors.Name = "lbl_errors";
             // 
             // btn_save
@@ -205,14 +205,15 @@
             // 
             // Products_tab
             // 
+            resources.ApplyResources(this.Products_tab, "Products_tab");
             this.Products_tab.Controls.Add(this.tabPage1);
             this.Products_tab.Controls.Add(this.tabPage3);
-            resources.ApplyResources(this.Products_tab, "Products_tab");
             this.Products_tab.Name = "Products_tab";
             this.Products_tab.SelectedIndex = 0;
             // 
             // tabPage1
             // 
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Controls.Add(this.btn_translate);
             this.tabPage1.Controls.Add(this.txt_expiry_date);
             this.tabPage1.Controls.Add(this.txt_group_code);
@@ -268,7 +269,6 @@
             this.tabPage1.Controls.Add(this.txt_cost_price);
             this.tabPage1.Controls.Add(this.txt_unit_price_2);
             this.tabPage1.Controls.Add(this.txt_unit_price);
-            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -281,8 +281,8 @@
             // 
             // txt_expiry_date
             // 
-            this.txt_expiry_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_expiry_date, "txt_expiry_date");
+            this.txt_expiry_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_expiry_date.Name = "txt_expiry_date";
             // 
             // txt_group_code
@@ -339,8 +339,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
@@ -446,8 +446,8 @@
             // 
             // cmb_item_type
             // 
-            this.cmb_item_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmb_item_type, "cmb_item_type");
+            this.cmb_item_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_item_type.FormattingEnabled = true;
             this.cmb_item_type.Items.AddRange(new object[] {
             resources.GetString("cmb_item_type.Items"),
@@ -471,18 +471,18 @@
             // 
             // cmb_supplier
             // 
+            resources.ApplyResources(this.cmb_supplier, "cmb_supplier");
             this.cmb_supplier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_supplier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            resources.ApplyResources(this.cmb_supplier, "cmb_supplier");
             this.cmb_supplier.FormattingEnabled = true;
             this.cmb_supplier.Name = "cmb_supplier";
             this.cmb_supplier.SelectedIndexChanged += new System.EventHandler(this.cmb_units_SelectedIndexChanged);
             // 
             // cmb_units
             // 
+            resources.ApplyResources(this.cmb_units, "cmb_units");
             this.cmb_units.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_units.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            resources.ApplyResources(this.cmb_units, "cmb_units");
             this.cmb_units.FormattingEnabled = true;
             this.cmb_units.Items.AddRange(new object[] {
             resources.GetString("cmb_units.Items"),
@@ -492,10 +492,10 @@
             // 
             // cmb_tax
             // 
+            resources.ApplyResources(this.cmb_tax, "cmb_tax");
             this.cmb_tax.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_tax.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_tax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmb_tax, "cmb_tax");
             this.cmb_tax.FormattingEnabled = true;
             this.cmb_tax.Items.AddRange(new object[] {
             resources.GetString("cmb_tax.Items"),
@@ -589,13 +589,14 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.grid_movements);
             resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Controls.Add(this.grid_movements);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // grid_movements
             // 
+            resources.ApplyResources(this.grid_movements, "grid_movements");
             this.grid_movements.AllowUserToAddRows = false;
             this.grid_movements.AllowUserToDeleteRows = false;
             this.grid_movements.AllowUserToOrderColumns = true;
@@ -611,7 +612,6 @@
             this.supplier,
             this.customer,
             this.trans_date});
-            resources.ApplyResources(this.grid_movements, "grid_movements");
             this.grid_movements.Name = "grid_movements";
             this.grid_movements.ReadOnly = true;
             this.grid_movements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -696,6 +696,7 @@
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.btn_cancel);
             this.groupBox2.Controls.Add(this.btn_save);
             this.groupBox2.Controls.Add(this.btn_refresh);
@@ -703,14 +704,13 @@
             this.groupBox2.Controls.Add(this.btn_delete);
             this.groupBox2.Controls.Add(this.btn_update);
             this.groupBox2.Controls.Add(this.btn_blank);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // btn_refresh
             // 
-            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_refresh, "btn_refresh");
+            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
@@ -745,8 +745,8 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Name = "panel3";
             // 
             // frm_product_full_detail

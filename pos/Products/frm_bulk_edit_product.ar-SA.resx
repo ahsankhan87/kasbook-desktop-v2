@@ -120,6 +120,52 @@
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث</value>
   </data>
+  <data name="code.HeaderText" xml:space="preserve">
+    <value>رقم الصنف</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="code.Width" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="name.HeaderText" xml:space="preserve">
+    <value>اسم الصنف</value>
+  </data>
+  <data name="name_ar.HeaderText" xml:space="preserve">
+    <value>الاسم العربي</value>
+  </data>
+  <data name="name_ar.Width" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="qty.HeaderText" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="qty.Width" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="cost_price.HeaderText" xml:space="preserve">
+    <value>سعر التكلفة</value>
+  </data>
+  <data name="cost_price.Width" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="unit_price.HeaderText" xml:space="preserve">
+    <value>سعر البيع</value>
+  </data>
+  <data name="unit_price.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="description.HeaderText" xml:space="preserve">
+    <value>وصف</value>
+  </data>
+  <data name="description.Width" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="location_code.HeaderText" xml:space="preserve">
+    <value>الموقع</value>
+  </data>
+  <data name="category.HeaderText" xml:space="preserve">
+    <value>الصناع</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -179,16 +225,15 @@
   <data name="btn_products_print.Text" xml:space="preserve">
     <value>مطبعة</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="edit_desc.Text" xml:space="preserve">
     <value>تحرير وصف المنتج
 </value>
   </data>
   <data name="loc_transfer.Text" xml:space="preserve">
     <value>نقل الموقع</value>
+  </data>
+  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="product_code.HeaderText" xml:space="preserve">
     <value>رقم الصنف</value>
@@ -347,51 +392,6 @@
   </data>
   <data name="btn_transfer_search.Text" xml:space="preserve">
     <value>يبحث</value>
-  </data>
-  <data name="code.HeaderText" xml:space="preserve">
-    <value>رقم الصنف</value>
-  </data>
-  <data name="code.Width" type="System.Int32, mscorlib">
-    <value>79</value>
-  </data>
-  <data name="name.HeaderText" xml:space="preserve">
-    <value>اسم الصنف</value>
-  </data>
-  <data name="name_ar.HeaderText" xml:space="preserve">
-    <value>الاسم العربي</value>
-  </data>
-  <data name="name_ar.Width" type="System.Int32, mscorlib">
-    <value>89</value>
-  </data>
-  <data name="qty.HeaderText" xml:space="preserve">
-    <value>الكمية</value>
-  </data>
-  <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="cost_price.HeaderText" xml:space="preserve">
-    <value>سعر التكلفة</value>
-  </data>
-  <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>85</value>
-  </data>
-  <data name="unit_price.HeaderText" xml:space="preserve">
-    <value>سعر البيع</value>
-  </data>
-  <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>76</value>
-  </data>
-  <data name="description.HeaderText" xml:space="preserve">
-    <value>وصف</value>
-  </data>
-  <data name="description.Width" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="location_code.HeaderText" xml:space="preserve">
-    <value>الموقع</value>
-  </data>
-  <data name="category.HeaderText" xml:space="preserve">
-    <value>الصناع</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
