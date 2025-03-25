@@ -554,13 +554,13 @@
     <value>سعر التكلفة</value>
   </data>
   <data name="avg_cost.Width" type="System.Int32, mscorlib">
-    <value>96</value>
+    <value>88</value>
   </data>
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>سعر البيع</value>
   </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>85</value>
+    <value>78</value>
   </data>
   <data name="discount.HeaderText" xml:space="preserve">
     <value>خصم</value>
@@ -697,14 +697,11 @@
   <data name="txt_total_qty.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 54</value>
   </data>
-  <data name="grid_product_history.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="grid_product_history.Location" type="System.Drawing.Point, System.Drawing">
-    <value>644, 30</value>
+    <value>582, 30</value>
   </data>
   <data name="grid_product_history.Size" type="System.Drawing.Size, System.Drawing">
-    <value>514, 78</value>
+    <value>576, 78</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
@@ -756,25 +753,25 @@
     <value>Bottom, Left</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 16</value>
+    <value>450, 15</value>
   </data>
   <data name="groupBox2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 89</value>
+    <value>127, 102</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>أدخل سعر التكلفة</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 48</value>
+    <value>3, 47</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 35</value>
+    <value>120, 49</value>
   </data>
   <data name="rd_btn_bytotal_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 20</value>
+    <value>-1, 27</value>
   </data>
   <data name="rd_btn_bytotal_price.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 17</value>
@@ -784,7 +781,7 @@
 </value>
   </data>
   <data name="rd_btn_by_unitprice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 5</value>
+    <value>9, 12</value>
   </data>
   <data name="rd_btn_by_unitprice.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 17</value>
@@ -909,9 +906,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1167, 682</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>

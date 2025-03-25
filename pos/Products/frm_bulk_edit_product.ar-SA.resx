@@ -225,15 +225,15 @@
   <data name="btn_products_print.Text" xml:space="preserve">
     <value>مطبعة</value>
   </data>
+  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="edit_desc.Text" xml:space="preserve">
     <value>تحرير وصف المنتج
 </value>
   </data>
   <data name="loc_transfer.Text" xml:space="preserve">
     <value>نقل الموقع</value>
-  </data>
-  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="product_code.HeaderText" xml:space="preserve">
     <value>رقم الصنف</value>
