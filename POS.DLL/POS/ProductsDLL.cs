@@ -608,7 +608,7 @@ namespace POS.DLL
                             string query = "SELECT P.id,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost," +
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no," +
                                 " C.name AS category, C.id AS category_id," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty" + //branch wise qty
                                 " FROM pos_products P" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                                 //" LEFT JOIN pos_product_stocks PS ON PS.item_id=P.id" +
@@ -654,6 +654,7 @@ namespace POS.DLL
                             //cmd.Parameters.AddWithValue("@id", condition);
                             cmd.Parameters.AddWithValue("@code", string.Format("%{0}%", condition));
                             //cmd.Parameters.AddWithValue("@name", string.Format("%{0}%", condition));
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                             cmd.CommandText = query;
                             cmd.Connection = cn;
