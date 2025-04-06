@@ -1826,6 +1826,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Products\Labels\product_labels.xsc">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>

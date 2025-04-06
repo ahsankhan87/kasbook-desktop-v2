@@ -617,6 +617,7 @@ namespace pos
             //txt_supplier_id.Text = "";
             //txt_supplier_name.Text = "";
             //txt_supplier_vat.Text = "";
+            invoice_status = "";
             cmb_suppliers.SelectedValue = 0;
             cmb_suppliers.Refresh();
             //cmb_categories.SelectedValue = 0;
@@ -1536,33 +1537,46 @@ namespace pos
         {
             string product_code = "";
 
-            if (grid_purchases_order.Rows.Count > 0)
+            if (grid_purchases_order.Rows.Count > 0 && grid_purchases_order.CurrentRow.Cells["code"].Value != null)
             {
                 product_code = grid_purchases_order.CurrentRow.Cells["code"].Value.ToString();
+
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
+                frm_prod_move_obj.load_Products_grid();
+                frm_prod_move_obj.ShowDialog();
             }
 
 
-            frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
-            frm_prod_move_obj.load_Products_grid();
-            frm_prod_move_obj.ShowDialog();
+            
         }
 
         private void PurchaseHistoryToolStripButton_Click(object sender, EventArgs e)
         {
-            if (global_product_id == 0)
+            //if (global_product_id == 0)
+            //{
+            //    if (grid_purchases_order.Rows.Count > 0)
+            //    {
+            //        global_product_id = Convert.ToInt32(grid_purchases_order.CurrentRow.Cells["id"].Value);
+            //    }
+
+            //}
+
+            string product_code = "";
+
+            if (grid_purchases_order.Rows.Count > 0 && grid_purchases_order.CurrentRow.Cells["code"].Value != null)
             {
-                if (grid_purchases_order.Rows.Count > 0)
-                {
-                    global_product_id = Convert.ToInt32(grid_purchases_order.CurrentRow.Cells["id"].Value);
-                }
+                product_code = grid_purchases_order.CurrentRow.Cells["code"].Value.ToString();
+
+                frm_purchase_product_history frm_prod_move_obj = new frm_purchase_product_history(product_code);
+
+                frm_prod_move_obj.ShowDialog();
 
             }
-            frm_purchase_product_history frm_prod_move_obj = new frm_purchase_product_history(global_product_id);
-
-            frm_prod_move_obj.ShowDialog();
 
 
-            global_product_id = 0;
+
+
+            //global_product_id = 0;
         }
     }
 }
