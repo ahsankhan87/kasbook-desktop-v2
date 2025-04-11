@@ -71,6 +71,7 @@
             // 
             // grid_search_products
             // 
+            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.AllowUserToAddRows = false;
             this.grid_search_products.AllowUserToDeleteRows = false;
             this.grid_search_products.AllowUserToOrderColumns = true;
@@ -82,7 +83,6 @@
             this.name_ar,
             this.qty,
             this.transfer_qty});
-            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             // 
@@ -132,6 +132,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.cmb_from_locations);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.cmb_to_locations);
@@ -147,15 +148,14 @@
             this.panel1.Controls.Add(this.btn_close);
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.btn_search);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // cmb_from_locations
             // 
+            resources.ApplyResources(this.cmb_from_locations, "cmb_from_locations");
             this.cmb_from_locations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_from_locations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_from_locations.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_from_locations, "cmb_from_locations");
             this.cmb_from_locations.Name = "cmb_from_locations";
             this.cmb_from_locations.SelectedIndexChanged += new System.EventHandler(this.cmb_from_locations_SelectedIndexChanged);
             // 
@@ -166,10 +166,10 @@
             // 
             // cmb_to_locations
             // 
+            resources.ApplyResources(this.cmb_to_locations, "cmb_to_locations");
             this.cmb_to_locations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_to_locations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_to_locations.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_to_locations, "cmb_to_locations");
             this.cmb_to_locations.Name = "cmb_to_locations";
             // 
             // label15
