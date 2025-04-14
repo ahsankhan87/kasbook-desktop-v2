@@ -1593,7 +1593,6 @@ namespace POS.DLL
                             cmd.CommandType = CommandType.StoredProcedure;
                            
                             cmd.Parameters.AddWithValue("@code", obj.code);
-                            cmd.Parameters.AddWithValue("@id", obj.id);
                             cmd.Parameters.AddWithValue("@qty", obj.qty);
                             cmd.Parameters.AddWithValue("@from_location_code", obj.from_location_code);
                             cmd.Parameters.AddWithValue("@location_code", obj.location_code);

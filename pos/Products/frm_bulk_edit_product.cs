@@ -357,12 +357,7 @@ namespace pos
 
                     //String keyword = "P.id,P.code,P.name,(select sum(PS.qty) from  pos_product_stocks PS where PS.id=P.id AND PS.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "') as qty";
                     String keyword = "P.id, P.code,P.name,P.qty,P.qty as transfer_qty";
-                    String table = "pos_products_location_view P";
-                    if (cmb_from_locations.SelectedValue.ToString() != "0")
-                    {
-                        table += " where P.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "'";
-                    }
-                    table += " Group by P.id, P.code,P.name,P.qty HAVING P.qty > 0";
+                    String table = "pos_products_location_view P where P.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "' ";
                     //String table = "pos_products AS P";
                     grid_loc_transfer.DataSource = objBLL.GetRecord(keyword, table);
                 }
@@ -399,7 +394,7 @@ namespace pos
 
                     if (by_code)
                     {
-                        table += " WHERE (P.code LIKE '%" + condition + "%' OR replace(code,'-',' ') LIKE '%" + condition + "%')";
+                        table += " WHERE (P.code LIKE '%" + condition + "%' OR replace(code,'-','') LIKE '%" + condition + "%')";
 
                     }
                     else if (by_name)
@@ -407,11 +402,7 @@ namespace pos
                         table += " WHERE P.name LIKE '%" + condition + "%'";
 
                     }
-                    if(cmb_from_locations.SelectedValue.ToString() != "0")
-                    {
-                        table += " AND P.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "'";
-                    }
-                    
+                    table += " AND P.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "'";
                     grid_loc_transfer.DataSource = objBLL.GetRecord(keyword, table);
                 }
 
@@ -450,8 +441,7 @@ namespace pos
                             {
 
                                 info.invoice_no = txt_ref_no.Text;
-                                info.id = int.Parse(grid_loc_transfer.Rows[i].Cells["product_id"].Value.ToString());
-                                info.code = grid_loc_transfer.Rows[i].Cells["product_code"].Value.ToString();
+                                info.id = int.Parse(grid_loc_transfer.Rows[i].Cells["product_id"].Value.ToString()); ;
                                 info.qty = (grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString() != "" ? double.Parse(grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString()) : 0);
                                 info.location_code = cmb_to_locations.SelectedValue.ToString();
                                 info.from_location_code = cmb_from_locations.SelectedValue.ToString();

@@ -16,12 +16,12 @@ namespace pos
     public partial class frm_purchase_product_history : Form
     {
 
-        string _product_code;
+        int _product_id;
         public bool _returnStatus = false;
         
-        public frm_purchase_product_history(string product_code)
+        public frm_purchase_product_history(int product_id)
         {
-            _product_code = product_code;
+            _product_id = product_id;
             InitializeComponent();
         }
         
@@ -41,8 +41,8 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_search_products.AutoGenerateColumns = false;
 
-                String keyword = "I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date, S.first_name AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_code = '" + _product_code + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
+                String keyword = "I.id,P.name AS product_name,I.item_id,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date, S.first_name AS supplier";
+                String table = "pos_inventory I LEFT JOIN pos_products P ON P.id=I.item_id LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_id = " + _product_id + " AND I.description = 'Purchase' ORDER BY I.id DESC";
                 grid_search_products.DataSource = objBLL.GetRecord(keyword, table);
 
                 if(grid_search_products.Rows.Count < 0)
@@ -54,7 +54,7 @@ namespace pos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+                throw;
             }
 
         }

@@ -243,6 +243,12 @@
     <Compile Include="Accounts\Reports\frm_journal_daybook.Designer.cs">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.Designer.cs">
+      <DependentUpon>FrmCustomerLedgerReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customers\CustomerNameChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1146,6 +1152,9 @@
     <EmbeddedResource Include="Accounts\Reports\frm_journal_daybook.resx">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.resx">
+      <DependentUpon>FrmCustomerLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customers\CustomerNameChange.resx">
       <DependentUpon>CustomerNameChange.cs</DependentUpon>
     </EmbeddedResource>
@@ -1826,9 +1835,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
+    <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
     <None Include="Products\Labels\product_labels.xsc">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>

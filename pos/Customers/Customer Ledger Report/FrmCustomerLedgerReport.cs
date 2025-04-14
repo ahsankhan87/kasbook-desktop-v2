@@ -1,7 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using pos.Reports;
 using POS.BLL;
-using POS.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,35 +12,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace pos.Accounts.Reports.AR
+namespace pos.Customers.Customer_Ledger_Report
 {
-    public partial class AccountReceivable : Form
+    public partial class FrmCustomerLedgerReport : Form
     {
-        public AccountReceivable()
+        string _customer_id;
+
+        public FrmCustomerLedgerReport(string customer_id)
+        {
+            _customer_id = customer_id;
+            InitializeComponent();
+        }
+
+        public FrmCustomerLedgerReport()
         {
             InitializeComponent();
         }
 
-        private void AccountReceivable_Load(object sender, EventArgs e)
+        private void FrmCustomerLedgerReport_Load(object sender, EventArgs e)
         {
             CmbCondition.Items.AddRange(new string[]
-            {
+           {
                 "Custom", "Today", "Yesterday", "This Week", "Last Week",
                 "This Month", "Last Month", "This Quarter", "Last Quarter",
                 "This Year", "Last Year", "Year to Date (YTD)", "Last 7 Days",
                 "Last 30 Days", "Last 90 Days", "Last 6 Months",
                 "Previous Fiscal Year", "Next Fiscal Year"
-            });
+           });
             CmbCondition.SelectedIndex = 0;
-
-            //LoadReport(UsersModal.fy_from_date.ToString(), UsersModal.fy_to_date.ToString(), false);
         }
-        public void LoadReport(string fromDate, string toDate, bool _isPrint)
+
+        public void LoadReport(string customer_id,string fromDate, string toDate, bool _isPrint)
         {
             // Create an instance of your report
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             ReportDocument reportDoc = new ReportDocument();
-            reportDoc.Load(appPath + @"\\reports\\Accounts\\Customers\\AccountReceiableReport.rpt");
+            reportDoc.Load(appPath + @"\\reports\\Accounts\\\Customers\\CustomerLedger.rpt");
 
             // Use the centralized connection method
             ReportConnectionManager.SetDatabaseLogon(reportDoc);
@@ -57,7 +63,7 @@ namespace pos.Accounts.Reports.AR
             }
 
             // Set the parameter value
-            reportDoc.SetParameterValue("CompanyName", company_name);
+            reportDoc.SetParameterValue("customer_id", customer_id);
             reportDoc.SetParameterValue("start_date", fromDate);
             reportDoc.SetParameterValue("end_date", toDate);
 
@@ -68,11 +74,6 @@ namespace pos.Accounts.Reports.AR
             {
                 reportDoc.PrintToPrinter(1, true, 0, 0);
             }
-        }
-
-        private void BtnSubmit_Click(object sender, EventArgs e)
-        {
-            LoadReport(txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString(), false);
         }
 
         private void CmbCondition_SelectedIndexChanged(object sender, EventArgs e)
@@ -170,7 +171,7 @@ namespace pos.Accounts.Reports.AR
             txt_to_date.Value = endDate;
         }
 
-        private void AccountReceivable_KeyDown(object sender, KeyEventArgs e)
+        private void FrmCustomerLedgerReport_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -189,6 +190,11 @@ namespace pos.Accounts.Reports.AR
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void BtnSubmit_Click(object sender, EventArgs e)
+        {
+            LoadReport(_customer_id,txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString(), false);
         }
     }
 }
