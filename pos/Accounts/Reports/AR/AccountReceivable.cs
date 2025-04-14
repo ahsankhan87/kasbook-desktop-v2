@@ -41,7 +41,7 @@ namespace pos.Accounts.Reports.AR
             // Create an instance of your report
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             ReportDocument reportDoc = new ReportDocument();
-            reportDoc.Load(appPath + @"\\reports\\Accounts\\Customers\\AccountReceiableReport.rpt");
+            reportDoc.Load(appPath + @"\\reports\\Accounts\\AR\\AccountReceiableReport.rpt");
 
             // Use the centralized connection method
             ReportConnectionManager.SetDatabaseLogon(reportDoc);

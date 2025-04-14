@@ -123,59 +123,116 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 79</value>
+    <value>445, 97</value>
+  </data>
+  <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>415, 22</value>
   </data>
   <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 78</value>
+    <value>321, 96</value>
+  </data>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 25</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="id.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="code.HeaderText" xml:space="preserve">
     <value>رقم الصنف</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="code.Width" type="System.Int32, mscorlib">
-    <value>79</value>
+    <value>89</value>
   </data>
   <data name="name.HeaderText" xml:space="preserve">
     <value>اسم الصنف</value>
   </data>
+  <data name="name.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="name_ar.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="name_ar.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="qty.HeaderText" xml:space="preserve">
     <value>كمية</value>
   </data>
+  <data name="qty.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>53</value>
+    <value>56</value>
   </data>
   <data name="transfer_qty.HeaderText" xml:space="preserve">
     <value>نقل الكمية</value>
   </data>
+  <data name="transfer_qty.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="transfer_qty.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>80</value>
+  </data>
+  <data name="grid_search_products.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 170</value>
+  </data>
+  <data name="grid_search_products.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grid_search_products.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="grid_search_products.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 381</value>
   </data>
   <data name="cmb_from_locations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="cmb_from_locations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>458, 11</value>
+    <value>611, 14</value>
+  </data>
+  <data name="cmb_from_locations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_from_locations.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
+  </data>
+  <data name="cmb_from_locations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 24</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>594, 14</value>
+    <value>792, 17</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label4.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>55, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>من الموقع:</value>
@@ -184,22 +241,31 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_to_locations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>458, 39</value>
+    <value>611, 48</value>
+  </data>
+  <data name="cmb_to_locations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_to_locations.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
+  </data>
+  <data name="cmb_to_locations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 24</value>
   </data>
   <data name="label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>589, 42</value>
+    <value>785, 52</value>
+  </data>
+  <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label15.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="label15.Text" xml:space="preserve">
     <value>إلى الموقع:</value>
@@ -208,31 +274,46 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 12</value>
+    <value>316, 15</value>
+  </data>
+  <data name="txt_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_date.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
+  </data>
+  <data name="txt_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 22</value>
   </data>
   <data name="txt_ref_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_ref_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 39</value>
+    <value>316, 48</value>
+  </data>
+  <data name="txt_ref_no.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_ref_no.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
+  </data>
+  <data name="txt_ref_no.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 22</value>
   </data>
   <data name="rb_by_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="rb_by_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 114</value>
+    <value>588, 140</value>
+  </data>
+  <data name="rb_by_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="rb_by_name.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="rb_by_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 17</value>
+    <value>56, 21</value>
   </data>
   <data name="rb_by_name.Text" xml:space="preserve">
     <value>بالاسم
@@ -242,13 +323,16 @@
     <value>Top, Right</value>
   </data>
   <data name="rb_by_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>487, 114</value>
+    <value>668, 140</value>
+  </data>
+  <data name="rb_by_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="rb_by_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="rb_by_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
+    <value>82, 21</value>
   </data>
   <data name="rb_by_code.Text" xml:space="preserve">
     <value>طريق الكود</value>
@@ -257,13 +341,13 @@
     <value>Top, Right</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 14</value>
+    <value>515, 17</value>
   </data>
   <data name="label3.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>36, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>تاريخ:</value>
@@ -272,13 +356,13 @@
     <value>Top, Right</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 42</value>
+    <value>509, 52</value>
   </data>
   <data name="label2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+    <value>56, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>المرجع #:</value>
@@ -287,13 +371,13 @@
     <value>Top, Right</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>567, 116</value>
+    <value>756, 143</value>
   </data>
   <data name="label1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+    <value>87, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>البحث عن المنتج:</value>
@@ -302,10 +386,13 @@
     <value>Top, Left</value>
   </data>
   <data name="btn_close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 48</value>
+    <value>47, 59</value>
+  </data>
+  <data name="btn_close.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_close.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 34</value>
+    <value>97, 42</value>
   </data>
   <data name="btn_close.Text" xml:space="preserve">
     <value>خروج</value>
@@ -314,13 +401,31 @@
     <value>Top, Left</value>
   </data>
   <data name="btn_update.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 12</value>
+    <value>47, 15</value>
+  </data>
+  <data name="btn_update.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 30</value>
+    <value>97, 37</value>
   </data>
   <data name="btn_update.Text" xml:space="preserve">
     <value>تحويل (F3)</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 170</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>880, 551</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>

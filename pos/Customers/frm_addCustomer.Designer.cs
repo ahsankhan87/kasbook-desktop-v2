@@ -63,7 +63,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Detail = new System.Windows.Forms.TabPage();
             this.Transactions = new System.Windows.Forms.TabPage();
-            this.Btn_ledger_report = new System.Windows.Forms.Button();
             this.btn_payment = new System.Windows.Forms.Button();
             this.btn_trans_refresh = new System.Windows.Forms.Button();
             this.grid_customer_transactions = new System.Windows.Forms.DataGridView();
@@ -124,12 +123,12 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_customer_name);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.label21);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
@@ -146,8 +145,8 @@
             // 
             // btn_search
             // 
-            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_search.Name = "btn_search";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
@@ -160,8 +159,8 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -244,20 +243,21 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.tabControl1);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Name = "panel2";
             // 
             // tabControl1
             // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.Detail);
             this.tabControl1.Controls.Add(this.Transactions);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // Detail
             // 
+            resources.ApplyResources(this.Detail, "Detail");
             this.Detail.Controls.Add(this.label1);
             this.Detail.Controls.Add(this.txt_first_name);
             this.Detail.Controls.Add(this.label6);
@@ -279,26 +279,17 @@
             this.Detail.Controls.Add(this.label9);
             this.Detail.Controls.Add(this.txt_credit_limit);
             this.Detail.Controls.Add(this.lbl_edit_status);
-            resources.ApplyResources(this.Detail, "Detail");
             this.Detail.Name = "Detail";
             this.Detail.UseVisualStyleBackColor = true;
             // 
             // Transactions
             // 
-            this.Transactions.Controls.Add(this.Btn_ledger_report);
+            resources.ApplyResources(this.Transactions, "Transactions");
             this.Transactions.Controls.Add(this.btn_payment);
             this.Transactions.Controls.Add(this.btn_trans_refresh);
             this.Transactions.Controls.Add(this.grid_customer_transactions);
-            resources.ApplyResources(this.Transactions, "Transactions");
             this.Transactions.Name = "Transactions";
             this.Transactions.UseVisualStyleBackColor = true;
-            // 
-            // Btn_ledger_report
-            // 
-            resources.ApplyResources(this.Btn_ledger_report, "Btn_ledger_report");
-            this.Btn_ledger_report.Name = "Btn_ledger_report";
-            this.Btn_ledger_report.UseVisualStyleBackColor = true;
-            this.Btn_ledger_report.Click += new System.EventHandler(this.Btn_ledger_report_Click);
             // 
             // btn_payment
             // 
@@ -316,10 +307,10 @@
             // 
             // grid_customer_transactions
             // 
+            resources.ApplyResources(this.grid_customer_transactions, "grid_customer_transactions");
             this.grid_customer_transactions.AllowUserToAddRows = false;
             this.grid_customer_transactions.AllowUserToDeleteRows = false;
             this.grid_customer_transactions.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_customer_transactions, "grid_customer_transactions");
             this.grid_customer_transactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_customer_transactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_customer_transactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -402,19 +393,19 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Name = "panel3";
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.btn_save);
             this.groupBox2.Controls.Add(this.btn_refresh);
             this.groupBox2.Controls.Add(this.btn_delete);
             this.groupBox2.Controls.Add(this.btn_update);
             this.groupBox2.Controls.Add(this.btn_blank);
             this.groupBox2.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -427,8 +418,8 @@
             // 
             // btn_refresh
             // 
-            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_refresh, "btn_refresh");
+            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
@@ -533,6 +524,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn credit;
         private System.Windows.Forms.DataGridViewTextBoxColumn balance;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
-        private System.Windows.Forms.Button Btn_ledger_report;
     }
 }
