@@ -341,6 +341,16 @@ namespace pos
             }
 
         }
-        
+
+        private void Btn_ledger_report_Click(object sender, EventArgs e)
+        {
+            string customer_id = txt_id.Text;
+            if (customer_id != "")
+            {
+                pos.Customers.Customer_Ledger_Report.FrmCustomerLedgerReport obj = new Customers.Customer_Ledger_Report.FrmCustomerLedgerReport(customer_id);
+                obj.ShowDialog();
+
+            }
+        }
     }
 }
