@@ -96,7 +96,7 @@ namespace pos
             {
                 cmb_purchase_type.SelectedIndex = 0;
             }
-            
+            Cmb_zero_qty.SelectedIndex = 0;
             //btn_movements.Enabled = false;
             get_suppliers_dropdownlist();
             get_employees_dropdownlist();
@@ -167,28 +167,28 @@ namespace pos
                     double tax_rate = (grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
                     double tax = (Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * tax_rate / 100);
                      
-                    grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value));
+                    //grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value));
                     double sub_total = Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
                     grid_purchases_order.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
                 }
-                if (columnName == "avg_cost")//if avg_cost is changed
-                {
-                    double tax_rate = (grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
-                    double tax = (Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * tax_rate / 100);
-                    grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value));
+                //if (columnName == "avg_cost")//if avg_cost is changed
+                //{
+                //    double tax_rate = (grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
+                //    double tax = (Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * tax_rate / 100);
+                //    grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value));
                     
-                    double sub_total = Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
-                    grid_purchases_order.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
-                }
+                //    double sub_total = Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
+                //    grid_purchases_order.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
+                //}
 
-                if (columnName == "discount")//if discount is changed
-                {
-                    double sub_total = Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
-                    //total_discount += Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
-                    //txt_total_discount.Text = total_amount.ToString();
+                //if (columnName == "discount")//if discount is changed
+                //{
+                //    double sub_total = Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
+                //    //total_discount += Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["discount"].Value);
+                //    //txt_total_discount.Text = total_amount.ToString();
 
-                    grid_purchases_order.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
-                }
+                //    grid_purchases_order.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
+                //}
 
                 get_total_tax();
                 get_total_discount();
@@ -227,11 +227,11 @@ namespace pos
                     grid_purchases_order.Rows[RowIndex].Cells["code"].Value = myProductView["code"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["name"].Value = myProductView["name"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["qty"].Value = (myProductView["demand_qty"].ToString() == string.Empty || (decimal)myProductView["demand_qty"] == 0 ? "1" : myProductView["demand_qty"].ToString());
-                    grid_purchases_order.Rows[RowIndex].Cells["avg_cost"].Value = myProductView["avg_cost"].ToString();
-                    grid_purchases_order.Rows[RowIndex].Cells["unit_price"].Value = myProductView["unit_price"].ToString();
+                    grid_purchases_order.Rows[RowIndex].Cells["avg_cost"].Value = Math.Round(double.Parse(myProductView["avg_cost"].ToString()),3);
+                    grid_purchases_order.Rows[RowIndex].Cells["unit_price"].Value = Math.Round(double.Parse(myProductView["unit_price"].ToString()),3);
                     grid_purchases_order.Rows[RowIndex].Cells["discount"].Value = 0.00;
-                    grid_purchases_order.Rows[RowIndex].Cells["tax"].Value = tax;
-                    grid_purchases_order.Rows[RowIndex].Cells["sub_total"].Value = sub_total;
+                    grid_purchases_order.Rows[RowIndex].Cells["tax"].Value = Math.Round(tax,3);
+                    grid_purchases_order.Rows[RowIndex].Cells["sub_total"].Value = Math.Round(sub_total,3);
                     grid_purchases_order.Rows[RowIndex].Cells["location_code"].Value = ""; // myProductView["location_code"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["unit"].Value = myProductView["unit"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["category"].Value = myProductView["category"].ToString();
@@ -239,6 +239,7 @@ namespace pos
                     grid_purchases_order.Rows[RowIndex].Cells["tax_id"].Value = myProductView["tax_id"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["tax_rate"].Value = myProductView["tax_rate"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["available_qty"].Value = myProductView["qty"].ToString();
+                    grid_purchases_order.Rows[RowIndex].Cells["qty_sold"].Value = 0;
 
                 }
 
@@ -1340,6 +1341,7 @@ namespace pos
                         string code = myProductView["item_code"].ToString();
                         string name = myProductView["name"].ToString();
                         string available_qty = "1";
+                        string qty_sold = "1";
                         double cost_price = Convert.ToDouble(myProductView["cost_price"]);
                         double unit_price = Convert.ToDouble(myProductView["unit_price"]);
                         double discount = Convert.ToDouble(myProductView["discount_value"]); ;
@@ -1351,10 +1353,10 @@ namespace pos
                         string tax_id = myProductView["tax_id"].ToString();
 
 
-                        string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), qty.ToString(),
-                                            available_qty,category,unit_price.ToString(), discount.ToString(), 
-                                            tax.ToString(), current_sub_total.ToString(),location_code,unit, 
-                                            btn_delete, tax_id.ToString(), tax_rate.ToString(), unit_price.ToString() };
+                        string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold,
+                                            available_qty,qty.ToString(),category,unit_price.ToString(), discount.ToString(),
+                            current_sub_total.ToString(),location_code,unit,btn_delete,
+                            tax_id.ToString(), tax_rate.ToString() };
                         int RowIndex = grid_purchases_order.Rows.Add(row0);
 
                         //GET / SET Location Dropdown list
@@ -1546,8 +1548,6 @@ namespace pos
                 frm_prod_move_obj.ShowDialog();
             }
 
-
-            
         }
 
         private void PurchaseHistoryToolStripButton_Click(object sender, EventArgs e)
@@ -1573,10 +1573,74 @@ namespace pos
 
             }
 
-
-
-
             //global_product_id = 0;
         }
+
+        private void Btn_load_products_Click(object sender, EventArgs e)
+        {
+            ProductBLL productsBLL_obj = new ProductBLL();
+            bool is_zero = (Cmb_zero_qty.SelectedIndex == 1 ? true : false);
+            DataTable _dt = productsBLL_obj.GetProductsSummary(Start_date.Value.Date,End_date.Value.Date,is_zero);
+            //grid_purchases_order.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            try
+            {
+                grid_purchases_order.Rows.Clear();
+                grid_purchases_order.Refresh();
+
+                if (_dt.Rows.Count > 0)
+                {
+
+                    foreach (DataRow myProductView in _dt.Rows)
+                    {
+                        double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
+                        double tax = (double.Parse(myProductView["avg_cost"].ToString()) * tax_rate / 100);
+                        double sub_total = tax + double.Parse(myProductView["avg_cost"].ToString());
+
+                        double qty = Convert.ToDouble(myProductView["qty_on_hand"].ToString());
+                        double total = qty * double.Parse(myProductView["avg_cost"].ToString());
+                        double current_sub_total = tax + total;
+
+                        int id = Convert.ToInt32(myProductView["id"]);
+                        string code = myProductView["code"].ToString();
+                        string name = myProductView["name"].ToString();
+                        double cost_price = Convert.ToDouble(myProductView["avg_cost"]);
+                        double qty_sold = Math.Round(double.Parse(myProductView["qty_sold"].ToString()),3);
+                        string available_qty = myProductView["qty_on_hand"].ToString();
+                        string required_qty = "0";
+                        string category = ""; //myProductView["category"].ToString();
+                        double unit_price = Convert.ToDouble(myProductView["unit_price"]);
+                        double discount = 0; //Convert.ToDouble(myProductView["discount_value"]);
+                        string btn_delete = "Del";
+                        string location_code = ""; // myProductView["location_code"].ToString();
+                        string unit = ""; //myProductView["unit"].ToString();
+                        string tax_id = myProductView["tax_id"].ToString();
+
+
+                        string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
+                                            available_qty,required_qty,category,unit_price.ToString(), discount.ToString(),
+                            sub_total.ToString(),location_code,unit,btn_delete,tax_id,
+                            tax_rate.ToString()    };
+
+                        int RowIndex = grid_purchases_order.Rows.Add(row0);
+
+                        //GET / SET Location Dropdown list
+                        //fill_locations_grid_combo(RowIndex);
+                        //////
+                    }
+                    //grid_purchases_order.Rows.Add();
+                    get_total_tax();
+                    get_total_discount();
+                    get_sub_total_amount();
+                    get_total_amount();
+                    get_total_qty();
+                    grid_purchases_order.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
     }
 }

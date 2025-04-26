@@ -56,13 +56,11 @@
             this.تقريرعنصنفToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editItemDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.تسجيلسندجردToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.عرضToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.قائمهلسداتالجردToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.اجماليالمخزونToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lowStockInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.تقريرعنالمخزونToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quantityOnHandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowStockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.الاصنافالمتحركهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.الاصنافغيرالمتحركهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,7 +148,6 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
-            this.lowStockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -359,28 +356,10 @@
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.تسجيلسندجردToolStripMenuItem,
-            this.عرضToolStripMenuItem,
-            this.قائمهلسداتالجردToolStripMenuItem,
             this.اجماليالمخزونToolStripMenuItem,
             this.lowStockInventoryToolStripMenuItem});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
-            // 
-            // تسجيلسندجردToolStripMenuItem
-            // 
-            this.تسجيلسندجردToolStripMenuItem.Name = "تسجيلسندجردToolStripMenuItem";
-            resources.ApplyResources(this.تسجيلسندجردToolStripMenuItem, "تسجيلسندجردToolStripMenuItem");
-            // 
-            // عرضToolStripMenuItem
-            // 
-            this.عرضToolStripMenuItem.Name = "عرضToolStripMenuItem";
-            resources.ApplyResources(this.عرضToolStripMenuItem, "عرضToolStripMenuItem");
-            // 
-            // قائمهلسداتالجردToolStripMenuItem
-            // 
-            this.قائمهلسداتالجردToolStripMenuItem.Name = "قائمهلسداتالجردToolStripMenuItem";
-            resources.ApplyResources(this.قائمهلسداتالجردToolStripMenuItem, "قائمهلسداتالجردToolStripMenuItem");
             // 
             // اجماليالمخزونToolStripMenuItem
             // 
@@ -407,6 +386,12 @@
             this.quantityOnHandToolStripMenuItem.Name = "quantityOnHandToolStripMenuItem";
             resources.ApplyResources(this.quantityOnHandToolStripMenuItem, "quantityOnHandToolStripMenuItem");
             this.quantityOnHandToolStripMenuItem.Click += new System.EventHandler(this.quantityOnHandToolStripMenuItem_Click);
+            // 
+            // lowStockReportToolStripMenuItem
+            // 
+            this.lowStockReportToolStripMenuItem.Name = "lowStockReportToolStripMenuItem";
+            resources.ApplyResources(this.lowStockReportToolStripMenuItem, "lowStockReportToolStripMenuItem");
+            this.lowStockReportToolStripMenuItem.Click += new System.EventHandler(this.lowStockReportToolStripMenuItem_Click);
             // 
             // الاصنافالمتحركهToolStripMenuItem
             // 
@@ -993,12 +978,6 @@
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
             // 
-            // lowStockReportToolStripMenuItem
-            // 
-            this.lowStockReportToolStripMenuItem.Name = "lowStockReportToolStripMenuItem";
-            resources.ApplyResources(this.lowStockReportToolStripMenuItem, "lowStockReportToolStripMenuItem");
-            this.lowStockReportToolStripMenuItem.Click += new System.EventHandler(this.lowStockReportToolStripMenuItem_Click);
-            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1103,9 +1082,6 @@
         private System.Windows.Forms.ToolStripMenuItem تقريرعنصنفToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editItemDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem تسجيلسندجردToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem عرضToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem قائمهلسداتالجردToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem اجماليالمخزونToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lowStockInventoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem تقريرعنالمخزونToolStripMenuItem;

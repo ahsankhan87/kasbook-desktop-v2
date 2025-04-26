@@ -366,6 +366,15 @@ namespace pos
 
         }
 
+        private void Btn_ledger_report_Click(object sender, EventArgs e)
+        {
+            string supplier_id = txt_id.Text;
+            if (supplier_id != "")
+            {
+                pos.Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport obj = new Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport(supplier_id);
+                obj.ShowDialog();
 
+            }
+        }
     }
 }

@@ -212,6 +212,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.GetProductsSummary(StartDate,EndDate, is_zero);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
         public DataTable SearchProductBySupplier(string supplierID)
         {
             try

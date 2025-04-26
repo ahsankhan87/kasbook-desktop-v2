@@ -1,7 +1,7 @@
 ﻿
-namespace pos.Customers.Customer_Ledger_Report
+namespace pos.Suppliers.Supplier_Ledger_Report
 {
-    partial class FrmCustomerLedgerReport
+    partial class FrmSupplierLedgerReport
     {
         /// <summary>
         /// Required designer variable.
@@ -39,6 +39,7 @@ namespace pos.Customers.Customer_Ledger_Report
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
+            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,10 +49,11 @@ namespace pos.Customers.Customer_Ledger_Report
             this.panel2.Controls.Add(this.crystalReportViewer1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 81);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(737, 478);
-            this.panel2.TabIndex = 2;
+            this.panel2.Size = new System.Drawing.Size(889, 503);
+            this.panel2.TabIndex = 4;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // crystalReportViewer1
             // 
@@ -60,9 +62,9 @@ namespace pos.Customers.Customer_Ledger_Report
             this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(2);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(737, 478);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(889, 503);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
@@ -77,17 +79,18 @@ namespace pos.Customers.Customer_Ledger_Report
             this.panel1.Controls.Add(this.txt_to_date);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(737, 81);
-            this.panel1.TabIndex = 1;
+            this.panel1.Size = new System.Drawing.Size(889, 81);
+            this.panel1.TabIndex = 3;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // CmbCondition
             // 
             this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCondition.FormattingEnabled = true;
             this.CmbCondition.Location = new System.Drawing.Point(75, 24);
-            this.CmbCondition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbCondition.Margin = new System.Windows.Forms.Padding(2);
             this.CmbCondition.Name = "CmbCondition";
             this.CmbCondition.Size = new System.Drawing.Size(116, 21);
             this.CmbCondition.TabIndex = 1;
@@ -96,7 +99,7 @@ namespace pos.Customers.Customer_Ledger_Report
             // BtnSubmit
             // 
             this.BtnSubmit.Location = new System.Drawing.Point(610, 19);
-            this.BtnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnSubmit.Margin = new System.Windows.Forms.Padding(2);
             this.BtnSubmit.Name = "BtnSubmit";
             this.BtnSubmit.Size = new System.Drawing.Size(86, 45);
             this.BtnSubmit.TabIndex = 4;
@@ -108,7 +111,7 @@ namespace pos.Customers.Customer_Ledger_Report
             // 
             this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_from_date.Location = new System.Drawing.Point(229, 25);
-            this.txt_from_date.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_from_date.Margin = new System.Windows.Forms.Padding(2);
             this.txt_from_date.Name = "txt_from_date";
             this.txt_from_date.Size = new System.Drawing.Size(99, 20);
             this.txt_from_date.TabIndex = 2;
@@ -147,26 +150,25 @@ namespace pos.Customers.Customer_Ledger_Report
             // 
             this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_to_date.Location = new System.Drawing.Point(355, 25);
-            this.txt_to_date.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_to_date.Margin = new System.Windows.Forms.Padding(2);
             this.txt_to_date.Name = "txt_to_date";
             this.txt_to_date.Size = new System.Drawing.Size(118, 20);
             this.txt_to_date.TabIndex = 3;
             // 
-            // FrmCustomerLedgerReport
+            // FrmSupplierLedgerReport
             // 
-            this.AcceptButton = this.BtnSubmit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 559);
+            this.ClientSize = new System.Drawing.Size(889, 584);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "FrmCustomerLedgerReport";
+            this.Name = "FrmSupplierLedgerReport";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Customer Ledger Report";
-            this.Load += new System.EventHandler(this.FrmCustomerLedgerReport_Load);
+            this.Text = "Supplier Ledger Report";
+            this.Load += new System.EventHandler(this.FrmSupplierLedgerReport_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmSupplierLedgerReport_KeyDown);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -186,5 +188,6 @@ namespace pos.Customers.Customer_Ledger_Report
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker txt_to_date;
+        private System.DirectoryServices.DirectoryEntry directoryEntry1;
     }
 }

@@ -1084,6 +1084,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.Designer.cs">
+      <DependentUpon>FrmSupplierLedgerReport.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Accounts\Accounts\frm_accounts.ar-SA.resx">
       <DependentUpon>frm_accounts.cs</DependentUpon>
     </EmbeddedResource>
@@ -1835,9 +1841,13 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.resx">
+      <DependentUpon>FrmSupplierLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
     <None Include="Products\Labels\product_labels.xsc">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>
@@ -1920,7 +1930,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Accounts\Reports\Trial Balance\" />
-    <Folder Include="Customers\Customer Ledger Report\NewFolder1\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
