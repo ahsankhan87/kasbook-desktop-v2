@@ -151,7 +151,18 @@ namespace POS.BLL
                 throw;
             }
         }
+        public int InsertPurchaseOrderBLL(List<Purchases_orderModal> purchases, List<PurchaseOrderDetailModal> purchase_detail)
+        {
+            try
+            {
+                return objDLL.InsertPurchaseOrder(purchases, purchase_detail);
+            }
+            catch
+            {
 
+                throw;
+            }
+        }
         public int InsertPurchases_orderItems(Purchases_orderModal obj)
         {
             try
@@ -229,18 +240,7 @@ namespace POS.BLL
             }
         }
 
-        public int InsertReturnPurchaseItems(Purchases_orderModal obj)
-        {
-            try
-            {
-                return objDLL.InsertReturnPurchaseItems(obj);
-            }
-            catch
-            {
-
-                throw;
-            }
-        }
+        
 
 
         public int DeletePurchasesOrder(string invoice_no)

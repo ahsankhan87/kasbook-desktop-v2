@@ -110,7 +110,6 @@ namespace pos
             {
                 grid_search_products.DataSource = null;
 
-
                 // set it to false if not needed for fast load
                 grid_search_products.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
                 // or even better, use .DisableResizing. Most time consuming enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -126,7 +125,7 @@ namespace pos
 
                 if (grid_search_products.Rows.Count <= 0)
                 {
-                    DialogResult result = MessageBox.Show("Product not found, want to create new product?", "Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    DialogResult result = MessageBox.Show("Product not found, want to create new product?", "Purchase Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
                     if (result == DialogResult.Yes)
                     {

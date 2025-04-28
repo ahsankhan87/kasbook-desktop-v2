@@ -38,7 +38,7 @@ namespace POS.DLL
             }
             
         }
-        public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero)
+        public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero, string group_code, string brand_code, string category_code)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             using (SqlCommand cmd = new SqlCommand("sp_ProductsCrud", cn))
@@ -49,6 +49,9 @@ namespace POS.DLL
                 cmd.Parameters.AddWithValue("@fromDate", StartDate);
                 cmd.Parameters.AddWithValue("@toDate", EndDate);
                 cmd.Parameters.AddWithValue("@is_zero", is_zero);
+                cmd.Parameters.AddWithValue("@brand_code", string.IsNullOrEmpty(brand_code) ? (object)DBNull.Value : brand_code);
+                cmd.Parameters.AddWithValue("@category_code", string.IsNullOrEmpty(category_code) ? (object)DBNull.Value : category_code);
+                cmd.Parameters.AddWithValue("@group_code", string.IsNullOrEmpty(group_code) ? (object)DBNull.Value : group_code);
 
                 DataTable dt = new DataTable();
                 try
@@ -1385,7 +1388,7 @@ namespace POS.DLL
                                 " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
                                 " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE P.supplier_id = @supplierId";
+                                " WHERE P.supplier_id = @supplierId AND P.deleted = 0";
 
                              cmd.Parameters.AddWithValue("@supplierId", supplierId);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);

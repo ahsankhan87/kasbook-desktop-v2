@@ -2888,7 +2888,18 @@ namespace pos
             }
         }
 
-      
+        private void PrinttoolStripButton_Click(object sender, EventArgs e)
+        {
+            if(!String.IsNullOrEmpty(txt_invoice_no.Text))
+            {
+                using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
+                {
+                    obj.load_print(); // send print direct to printer without showing dialog
+                    obj.ShowDialog();
+                }
+            }
+            
+        }
     }
   
 }

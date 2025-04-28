@@ -1581,16 +1581,33 @@ namespace pos
 
         private void grid_purchases_SelectionChanged(object sender, EventArgs e)
         {
-            if (grid_purchases.Rows.Count > 0)
+            if (grid_purchases.Rows.Count > 0 && grid_purchases.Focused)
             {
                 string product_code = (grid_purchases.CurrentRow.Cells["code"].Value != null ? grid_purchases.CurrentRow.Cells["code"].Value.ToString() : "");
                 if (product_code != "")
                 {
-                    load_product_purchase_history(product_code);
-                    txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
+                    if (grid_product_history.Rows.Count > 0) // if history grid is empty then load product history 
+                    {
+                        //if product history grid has already same product the don not load but 
+                        //if history gird has different product the load
+                        //it will improve performance
+                        if (product_code != grid_product_history.CurrentRow.Cells["item_code"].Value.ToString())
+                        {
+                            load_product_purchase_history(product_code);
+                            txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
+
+                        }
+                    }
+                    else
+                    {
+                        load_product_purchase_history(product_code);
+                        txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
+
+                    }
                 }
 
             }
+            
         }
 
         public void load_product_purchase_history(string product_code)
@@ -1603,7 +1620,7 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_product_history.AutoGenerateColumns = false;
 
-                String keyword = "TOP 500 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,I.trans_date, S.first_name AS supplier";
+                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,I.trans_date, S.first_name AS supplier";
                 String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_code = '" + product_code + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
                 grid_product_history.DataSource = objBLL.GetRecord(keyword, table);
 
@@ -1924,7 +1941,7 @@ namespace pos
                         txt_purchase_date.Value = new DateTime(txt_purchase_date.Value.Year, txt_purchase_date.Value.Month, txt_purchase_date.Value.Day, now.Hour, now.Minute, now.Second);
                         /////////////////////
 
-                        /////Added sales header into the List
+                        /////Add sales header into the List
                         purchase_model_header.Add(new PurchaseModalHeader
                         {
                             supplier_id = supplier_id,

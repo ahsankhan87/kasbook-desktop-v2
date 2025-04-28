@@ -212,12 +212,12 @@ namespace POS.BLL
                 throw;
             }
         }
-        public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero)
+        public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero, string group_code, string brand_code, string category_code)
         {
             try
             {
                 ProductDLL objDLL = new ProductDLL();
-                return objDLL.GetProductsSummary(StartDate,EndDate, is_zero);
+                return objDLL.GetProductsSummary(StartDate,EndDate, is_zero, group_code, brand_code, category_code);
             }
             catch
             {

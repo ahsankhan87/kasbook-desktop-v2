@@ -32,7 +32,8 @@ namespace pos
             try
             {
                 grid_all_purchases_orders.DataSource = null;
-
+                grid_all_purchases_orders.Rows.Clear();
+                grid_all_purchases_orders.Refresh();
                 //bind data in data grid view  
                 grid_all_purchases_orders.AutoGenerateColumns = false;
 
@@ -128,16 +129,19 @@ namespace pos
 
             }
             
-
         }
 
         private void btn_print_invoice_Click(object sender, EventArgs e)
         {
             if (grid_all_purchases_orders.Rows.Count > 0)
             {
-                using (frm_purchase_order_report obj = new frm_purchase_order_report(load_sales_receipt(), false))
+                string invoice_no = grid_all_purchases_orders.CurrentRow.Cells["invoice_no"].Value.ToString();
+                if (!string.IsNullOrEmpty(invoice_no))
                 {
-                    obj.ShowDialog();
+                    using (frm_purchase_order_report obj = new frm_purchase_order_report(invoice_no, false))
+                    {
+                        obj.ShowDialog();
+                    }
                 }
             }
         }
@@ -152,7 +156,6 @@ namespace pos
                 dt = objPurchases_orderBLL.GetAllPurchaseOrder(invoice_no);
             }
             return dt;
-
 
         }
 

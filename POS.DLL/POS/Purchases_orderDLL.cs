@@ -50,10 +50,11 @@ namespace POS.DLL
             {
                 try
                 {
+                    DataTable dt1 = new DataTable();
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT TOP 10000 p.*,(p.total_tax+p.total_amount-p.discount_value) as total, CONCAT(sp.first_name,' ',sp.last_name) as supplier_name " +
+                        String query = "SELECT TOP 2000 p.*,(p.total_tax+p.total_amount-p.discount_value) as total, CONCAT(sp.first_name,' ',sp.last_name) as supplier_name " +
                             " FROM pos_purchases_order p LEFT JOIN pos_suppliers sp ON p.supplier_id=sp.id" +
                             " WHERE p.purchase_date BETWEEN @FY_from_date AND @FY_to_date AND p.branch_id = @branch_id order by p.id desc";
 
@@ -66,8 +67,8 @@ namespace POS.DLL
                     }
 
                     da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                    return dt;
+                    da.Fill(dt1);
+                    return dt1;
                 }
                 catch
                 {
@@ -88,7 +89,8 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT PI.invoice_no,PI.id,PI.item_code,PI.quantity,PI.cost_price,PI.discount_value,"+
-                            "(PI.cost_price*PI.quantity-PI.discount_value) AS total, P.name AS product_name " +
+                            "(PI.cost_price*PI.quantity-PI.discount_value) AS total, P.name AS product_name," +
+                            "(PI.cost_price*PI.tax_rate/100) AS tax " +
                             "FROM pos_purchases_order_items PI " +
                             "LEFT JOIN pos_products P ON P.code=PI.item_code " +
                             "WHERE PI.branch_id = @branch_id AND purchase_id = @purchase_id AND PI.status=0";
@@ -98,7 +100,7 @@ namespace POS.DLL
 
                         cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
                         //cmd.Parameters.AddWithValue("@OperationType", "5");
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                     }
 
@@ -328,6 +330,89 @@ namespace POS.DLL
             }
 
         }
+        public int InsertPurchaseOrder(List<Purchases_orderModal> purchases, List<PurchaseOrderDetailModal> purchase_detail)
+        {
+            Int32 newProdID = 0;
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlTransaction transaction;
+
+                if (cn.State == ConnectionState.Closed)
+                {
+                    cn.Open();
+                    transaction = cn.BeginTransaction();
+
+                    try
+                    {
+                        cmd = new SqlCommand("sp_Purchases_order", cn, transaction);
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        foreach (Purchases_orderModal purchase_header in purchases)
+                        {
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                            cmd.Parameters.AddWithValue("@employee_id", purchase_header.employee_id);
+                            cmd.Parameters.AddWithValue("@supplier_id", purchase_header.supplier_id);
+                            cmd.Parameters.AddWithValue("@purchase_type", purchase_header.purchase_type);
+                            cmd.Parameters.AddWithValue("@delivery_date", purchase_header.delivery_date);
+                            cmd.Parameters.AddWithValue("@supplier_invoice_no", purchase_header.supplier_invoice_no);
+                            cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
+                            cmd.Parameters.AddWithValue("@total_amount", purchase_header.total_amount);
+                            cmd.Parameters.AddWithValue("@total_tax", purchase_header.total_tax);
+                            cmd.Parameters.AddWithValue("@discount_value", purchase_header.total_discount);
+                            cmd.Parameters.AddWithValue("@purchase_date", purchase_header.purchase_date);
+                            cmd.Parameters.AddWithValue("@description", purchase_header.description);
+                            cmd.Parameters.AddWithValue("@account", purchase_header.account);
+                            cmd.Parameters.AddWithValue("@category_code", purchase_header.category_code);
+                            //cmd.Parameters.AddWithValue("@purchase_time", obj.purchase_time);
+                            cmd.Parameters.AddWithValue("@OperationType", "1");
+
+                        }
+
+                        newProdID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        foreach (PurchaseOrderDetailModal detail in purchase_detail)
+                        {
+                            cmd = new SqlCommand("sp_Purchases_order_items", cn, transaction);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.Parameters.AddWithValue("@item_code", detail.code);
+                            cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
+                            cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
+                            cmd.Parameters.AddWithValue("@purchase_id", newProdID);
+                            cmd.Parameters.AddWithValue("@tax_id", detail.tax_id);
+                            cmd.Parameters.AddWithValue("@unit_price", detail.unit_price);
+                            cmd.Parameters.AddWithValue("@quantity", detail.quantity);
+                            cmd.Parameters.AddWithValue("@discount_value", detail.discount);
+                            cmd.Parameters.AddWithValue("@tax_rate", detail.tax_rate);
+                            cmd.Parameters.AddWithValue("@cost_price", detail.cost_price);
+                            cmd.Parameters.AddWithValue("@supplier_id", detail.supplier_id);
+                            cmd.Parameters.AddWithValue("@purchase_date", detail.purchase_date);
+
+                            cmd.Parameters.AddWithValue("@OperationType", "1");
+
+                            cmd.ExecuteScalar();
+                        }
+
+                        
+                        transaction.Commit();
+
+                        //insert log when trans commit
+                        foreach (Purchases_orderModal purchase_header in purchases)
+                        {
+                            Log.LogAction("Add Purchase Order", $"InvoiceNo: {purchase_header.invoice_no}, Purchase Date: {purchase_header.purchase_date}, Total Amount: {((purchase_header.total_amount + purchase_header.total_tax) - purchase_header.total_discount)}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                        }
+                        //
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+                return newProdID;
+            }
+        }
 
         public int InsertPurchases_order(Purchases_orderModal obj)
         {
@@ -387,22 +472,22 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("sp_Purchases_order_items", cn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                        cmd.Parameters.AddWithValue("@item_code", obj.code);
-                        cmd.Parameters.AddWithValue("@serialNo", obj.serialNo);
-                        cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
-                        cmd.Parameters.AddWithValue("@purchase_id", obj.purchase_id);
-                        cmd.Parameters.AddWithValue("@tax_id", obj.tax_id);
-                        cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
-                        cmd.Parameters.AddWithValue("@quantity", obj.quantity);
-                        cmd.Parameters.AddWithValue("@discount_value", obj.discount);
-                        cmd.Parameters.AddWithValue("@tax_rate", obj.tax_rate);
-                        cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
-                        cmd.Parameters.AddWithValue("@supplier_id", obj.supplier_id);
-                        cmd.Parameters.AddWithValue("@purchase_date", obj.purchase_date);
-                        cmd.Parameters.AddWithValue("@OperationType", "1");
+                        //cmd = new SqlCommand("sp_Purchases_order_items", cn);
+                        //cmd.CommandType = CommandType.StoredProcedure;
+                        //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        //cmd.Parameters.AddWithValue("@item_code", obj.code);
+                        //cmd.Parameters.AddWithValue("@serialNo", obj.serialNo);
+                        //cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
+                        //cmd.Parameters.AddWithValue("@purchase_id", obj.purchase_id);
+                        //cmd.Parameters.AddWithValue("@tax_id", obj.tax_id);
+                        //cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
+                        //cmd.Parameters.AddWithValue("@quantity", obj.quantity);
+                        //cmd.Parameters.AddWithValue("@discount_value", obj.discount);
+                        //cmd.Parameters.AddWithValue("@tax_rate", obj.tax_rate);
+                        //cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
+                        //cmd.Parameters.AddWithValue("@supplier_id", obj.supplier_id);
+                        //cmd.Parameters.AddWithValue("@purchase_date", obj.purchase_date);
+                        //cmd.Parameters.AddWithValue("@OperationType", "1");
 
                         
 
@@ -510,21 +595,21 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("sp_Purchases_order", cn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id", obj.id);
-                        //cmd.Parameters.AddWithValue("@branch_id", 0);
-                        cmd.Parameters.AddWithValue("@code", obj.code);
-                        cmd.Parameters.AddWithValue("@name", obj.name);
-                        cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
-                        cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
-                        cmd.Parameters.AddWithValue("@avg_cost", obj.cost_price);
-                        cmd.Parameters.AddWithValue("@item_type", obj.item_type);
-                        cmd.Parameters.AddWithValue("@status", 1);
-                        cmd.Parameters.AddWithValue("@description", obj.description);
+                        //cmd = new SqlCommand("sp_Purchases_order", cn);
+                        //cmd.CommandType = CommandType.StoredProcedure;
+                        //cmd.Parameters.AddWithValue("@id", obj.id);
+                        ////cmd.Parameters.AddWithValue("@branch_id", 0);
+                        //cmd.Parameters.AddWithValue("@code", obj.code);
+                        //cmd.Parameters.AddWithValue("@name", obj.name);
+                        //cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
+                        //cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
+                        //cmd.Parameters.AddWithValue("@avg_cost", obj.cost_price);
+                        //cmd.Parameters.AddWithValue("@item_type", obj.item_type);
+                        //cmd.Parameters.AddWithValue("@status", 1);
+                        //cmd.Parameters.AddWithValue("@description", obj.description);
                        
-                        cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@OperationType", "2");
+                        //cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
+                        //cmd.Parameters.AddWithValue("@OperationType", "2");
                         
                         //--operation types   
                         //-- 1) Insert  
@@ -703,47 +788,7 @@ namespace POS.DLL
             return (int)newProdID;
         }
 
-        public int InsertReturnPurchaseItems(Purchases_orderModal obj)
-        {
-
-            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            {
-                try
-                {
-                    if (cn.State == ConnectionState.Closed)
-                    {
-                        cn.Open();
-
-                        cmd = new SqlCommand("sp_Purchase_items", cn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                        cmd.Parameters.AddWithValue("@item_code", obj.code);
-                        cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
-                        cmd.Parameters.AddWithValue("@purchase_id", obj.purchase_id);
-                        cmd.Parameters.AddWithValue("@tax_id", obj.tax_id);
-                        cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
-                        cmd.Parameters.AddWithValue("@quantity", obj.quantity);
-                        cmd.Parameters.AddWithValue("@discount_value", obj.discount);
-                        cmd.Parameters.AddWithValue("@tax_rate", obj.tax_rate);
-                        cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
-                        cmd.Parameters.AddWithValue("@purchase_date", obj.purchase_date);
-                        cmd.Parameters.AddWithValue("@supplier_id", obj.supplier_id);
-                        cmd.Parameters.AddWithValue("@OperationType", "2");
-
-
-                    }
-
-                    int result = Convert.ToInt32(cmd.ExecuteScalar());
-                    return result;
-                }
-                catch
-                {
-
-                    throw;
-                }
-            }
-        }
-
+        
         public int DeletePurchasesOrder(string invoice_no)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -758,7 +803,6 @@ namespace POS.DLL
                         String query = "DELETE FROM pos_purchases_order WHERE invoice_no = @invoice_no AND branch_id = @branch_id" +
                                 " DELETE FROM pos_purchases_order_items WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
                               
-
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@invoice_no", invoice_no);

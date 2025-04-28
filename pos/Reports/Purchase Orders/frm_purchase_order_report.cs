@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using pos.Reports;
 using POS.BLL;
 using System;
 using System.Collections.Generic;
@@ -15,22 +16,22 @@ namespace pos
 {
     public partial class frm_purchase_order_report : Form
     {
-        DataTable _dt;
-        bool _isPrint = false;
+        string _InvoiceNo;
+        bool _isDirectPrint=false;
 
-        public frm_purchase_order_report(DataTable sales_detail, bool isPrint)
+        public frm_purchase_order_report(string InvoiceNo,bool DirectPrint)
         {
             InitializeComponent();
-            _dt = sales_detail;
-            _isPrint = isPrint;
+            _InvoiceNo = InvoiceNo;
+            _isDirectPrint = DirectPrint;
         }
 
         private void frm_purchase_order_report_Load(object sender, EventArgs e)
         {
-            load_print();
+            load_print(_InvoiceNo, _isDirectPrint);
         }
 
-        public void load_print()
+        public void load_print(string InvoiceNo, bool IsDirectPrint)
         {
             
             CompaniesBLL company_obj = new CompaniesBLL();
@@ -39,6 +40,7 @@ namespace pos
             string company_address = "";
             string company_vat_no = "";
             string company_contact_no = "";
+            string company_email = "";
 
             foreach (DataRow dr_company in company_dt.Rows)
             {
@@ -46,34 +48,27 @@ namespace pos
                 company_address = dr_company["address"].ToString();
                 company_vat_no = dr_company["vat_no"].ToString();
                 company_contact_no = dr_company["contact_no"].ToString();
+                company_email = dr_company["email"].ToString();
             }
 
-           
+            // Create an instance of your report
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             ReportDocument rptDoc = new ReportDocument();
-            rptDoc.Load(appPath + @"\\reports\\purchase_order.rpt");
-           // rptDoc.Load("D:\\desktop app\\pos\\pos\\Reports\\Purchase Orders\\purchase_order.rpt");
-            rptDoc.SetDataSource(_dt);
+            rptDoc.Load(appPath + @"\\reports\\Accounts\\Purchases\\Orders\\PurchaseOrder.rpt");
 
+            // Use the centralized connection method
+            ReportConnectionManager.SetDatabaseLogon(rptDoc);
+
+            rptDoc.SetParameterValue("InvoiceNo", InvoiceNo);
             rptDoc.SetParameterValue("company_name", company_name);
-            //rptDoc.SetParameterValue("company_vat", company_vat_no);
-            //rptDoc.SetParameterValue("company_address", company_address);
-            //rptDoc.SetParameterValue("company_contact", company_contact_no);
+            rptDoc.SetParameterValue("company_vat", company_vat_no);
+            rptDoc.SetParameterValue("company_address", company_address);
+            rptDoc.SetParameterValue("company_contact", company_contact_no);
+            rptDoc.SetParameterValue("company_email", company_email);
 
-           crystalReportViewer.ReportSource = rptDoc;
+            crystalReportViewer.ReportSource = rptDoc;
 
-            //sales_invoice1.SetDataSource(_dt);
-            //sales_invoice1.SetParameterValue("company_name",company_name);
-            //sales_invoice1.SetParameterValue("company_vat",company_vat_no);
-            //sales_invoice1.SetParameterValue("company_address",company_address);
-            //sales_invoice1.SetParameterValue("company_contact",company_contact_no);
-
-            //sales_invoice1.SetParameterValue("subtotal", total_amount);
-            //sales_invoice1.SetParameterValue("total_discount", total_discount);
-            //sales_invoice1.SetParameterValue("total_vat", total_tax);
-            //sales_invoice1.SetParameterValue("net_total", net_total);
-
-            if (_isPrint)
+            if (IsDirectPrint)
             {
                 rptDoc.PrintToPrinter(1, true, 0, 0);
             }

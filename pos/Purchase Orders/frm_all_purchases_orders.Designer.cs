@@ -38,8 +38,11 @@
             this.btn_search = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_all_purchases_orders = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplier_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchase_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delivery_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchase_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +50,6 @@
             this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_purchases_orders)).BeginInit();
             this.panel2.SuspendLayout();
@@ -103,6 +104,7 @@
             this.grid_all_purchases_orders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.invoice_no,
+            this.supplier_name,
             this.purchase_date,
             this.delivery_date,
             this.purchase_type,
@@ -116,6 +118,19 @@
             this.grid_all_purchases_orders.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_purchases_orders_CellContentClick);
             this.grid_all_purchases_orders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_purchases_orders_CellDoubleClick);
             this.grid_all_purchases_orders.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_all_purchases_orders_KeyDown);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
             // id
             // 
@@ -131,6 +146,13 @@
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
+            // 
+            // supplier_name
+            // 
+            this.supplier_name.DataPropertyName = "supplier_name";
+            resources.ApplyResources(this.supplier_name, "supplier_name");
+            this.supplier_name.Name = "supplier_name";
+            this.supplier_name.ReadOnly = true;
             // 
             // purchase_date
             // 
@@ -197,19 +219,6 @@
             this.detail.Name = "detail";
             this.detail.ReadOnly = true;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
-            // 
             // frm_all_purchases_orders
             // 
             resources.ApplyResources(this, "$this");
@@ -239,8 +248,10 @@
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.Button btn_print_invoice;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn supplier_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchase_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn delivery_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchase_type;
@@ -248,7 +259,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total_tax;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
         private System.Windows.Forms.DataGridViewImageColumn detail;
-        private System.Windows.Forms.Button btn_print_invoice;
     }
 }
 

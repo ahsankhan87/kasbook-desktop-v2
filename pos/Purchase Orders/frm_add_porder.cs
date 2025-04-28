@@ -81,6 +81,8 @@ namespace pos
         {
             try
             {
+                PurchaseOrderDetailModal PurchaseOrderDetailModal_obj = new PurchaseOrderDetailModal();
+
                 Int32 purchase_id = 0;
                 DialogResult result = MessageBox.Show("Are you sure you want to order", "Purchase Order Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -91,7 +93,7 @@ namespace pos
                         foreach (DataRow dr in PO_dt.Rows)
                         {
                             purchase_id = int.Parse(dr["id"].ToString());
-                            Purchases_orderModal_obj.invoice_no = txt_invoice_no.Text;
+                            PurchaseOrderDetailModal_obj.invoice_no = txt_invoice_no.Text;
                     
                         }
                     }
@@ -99,16 +101,16 @@ namespace pos
                         purchase_id = this.Insert_new_purchase_order();
                     }
 
-                    Purchases_orderModal_obj.purchase_id = purchase_id;
-                    Purchases_orderModal_obj.code = _product_code;
+                    PurchaseOrderDetailModal_obj.purchase_id = purchase_id;
+                    PurchaseOrderDetailModal_obj.code = _product_code;
                     //Purchases_orderModal_obj.name = grid_purchases_order.Rows[i].Cells["name"].Value.ToString();
-                    Purchases_orderModal_obj.quantity = double.Parse(txt_order_qty.Value.ToString());
-                    Purchases_orderModal_obj.cost_price = _cost_price;
-                    Purchases_orderModal_obj.unit_price = _unit_price;
-                    Purchases_orderModal_obj.discount = 0;
-                    Purchases_orderModal_obj.tax_id = 0;
+                    PurchaseOrderDetailModal_obj.quantity = double.Parse(txt_order_qty.Value.ToString());
+                    PurchaseOrderDetailModal_obj.cost_price = _cost_price;
+                    PurchaseOrderDetailModal_obj.unit_price = _unit_price;
+                    PurchaseOrderDetailModal_obj.discount = 0;
+                    PurchaseOrderDetailModal_obj.tax_id = 0;
                     double tax_rate = 0;
-                    Purchases_orderModal_obj.tax_rate = tax_rate;
+                    PurchaseOrderDetailModal_obj.tax_rate = tax_rate;
 
                     purchases_orderObj.InsertPurchases_orderItems(Purchases_orderModal_obj);
                 }

@@ -146,6 +146,21 @@
   <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="invoice_no.Width" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <metadata name="item_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="item_code.HeaderText" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="item_code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="item_code.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
   <metadata name="product_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -164,6 +179,9 @@
   <data name="quantity.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="quantity.Width" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
   <metadata name="cost_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -173,14 +191,20 @@
   <data name="cost_price.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="cost_price.Width" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <metadata name="tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="discount_value.HeaderText" xml:space="preserve">
-    <value>Discount</value>
+  <data name="tax.HeaderText" xml:space="preserve">
+    <value>Tax</value>
   </data>
-  <data name="discount_value.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="tax.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="tax.Width" type="System.Int32, mscorlib">
+    <value>60</value>
   </data>
   <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -190,6 +214,9 @@
   </data>
   <data name="total.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="total.Width" type="System.Int32, mscorlib">
+    <value>69</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="grid_purchases_orders_detail.Location" type="System.Drawing.Point, System.Drawing">
@@ -286,13 +313,13 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 25</value>
+    <value>222, 25</value>
   </data>
   <data name="lbl_taxes_title.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="lbl_taxes_title.Text" xml:space="preserve">
-    <value>Purchases Items</value>
+    <value>Purchase Order Items</value>
   </data>
   <data name="&gt;&gt;lbl_taxes_title.Name" xml:space="preserve">
     <value>lbl_taxes_title</value>
@@ -373,7 +400,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Purchases Transactions</value>
+    <value>Purchase Order Items</value>
   </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
@@ -385,6 +412,12 @@
     <value>invoice_no</value>
   </data>
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;item_code.Name" xml:space="preserve">
+    <value>item_code</value>
+  </data>
+  <data name="&gt;&gt;item_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;product_name.Name" xml:space="preserve">
@@ -405,10 +438,10 @@
   <data name="&gt;&gt;cost_price.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;discount_value.Name" xml:space="preserve">
-    <value>discount_value</value>
+  <data name="&gt;&gt;tax.Name" xml:space="preserve">
+    <value>tax</value>
   </data>
-  <data name="&gt;&gt;discount_value.Type" xml:space="preserve">
+  <data name="&gt;&gt;tax.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;total.Name" xml:space="preserve">
