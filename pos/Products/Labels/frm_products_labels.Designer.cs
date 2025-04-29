@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_products_labels));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_purchase_inv_no = new System.Windows.Forms.TextBox();
             this.txt_product_code = new System.Windows.Forms.TextBox();
@@ -55,6 +55,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_purchase_inv_no);
             this.panel1.Controls.Add(this.txt_product_code);
@@ -65,7 +66,6 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.grid_product_groups);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_purchase_inv_no
@@ -121,10 +121,10 @@
             // 
             // grid_product_groups
             // 
+            resources.ApplyResources(this.grid_product_groups, "grid_product_groups");
             this.grid_product_groups.AllowUserToAddRows = false;
             this.grid_product_groups.AllowUserToDeleteRows = false;
             this.grid_product_groups.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_product_groups, "grid_product_groups");
             this.grid_product_groups.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_product_groups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_product_groups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -192,8 +192,8 @@
             // label_qty
             // 
             this.label_qty.DataPropertyName = "label_qty";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label_qty.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_qty.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.label_qty, "label_qty");
             this.label_qty.Name = "label_qty";
             // 

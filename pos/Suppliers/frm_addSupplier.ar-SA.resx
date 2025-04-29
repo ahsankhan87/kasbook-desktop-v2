@@ -244,18 +244,18 @@
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="chk_vat_status.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 17</value>
-  </data>
-  <data name="chk_vat_status.Text" xml:space="preserve">
-    <value>التكلفة مع ضريبة</value>
-  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 20</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>معلمة الشراء
 </value>
+  </data>
+  <data name="chk_vat_status.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 17</value>
+  </data>
+  <data name="chk_vat_status.Text" xml:space="preserve">
+    <value>التكلفة مع ضريبة</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -273,28 +273,18 @@
     <value>التفاصيل
 </value>
   </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>المعاملات
+</value>
+  </data>
+  <data name="Btn_ledger_report.Text" xml:space="preserve">
+    <value>تقرير الموردين</value>
+  </data>
   <data name="btn_payment.Text" xml:space="preserve">
     <value>يدفع</value>
   </data>
   <data name="btn_trans_refresh.Text" xml:space="preserve">
     <value>ينعش</value>
-  </data>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة
-</value>
-  </data>
-  <data name="entry_date.HeaderText" xml:space="preserve">
-    <value>موعد الدخول</value>
-  </data>
-  <data name="account_name.HeaderText" xml:space="preserve">
-    <value>حساب</value>
-  </data>
-  <data name="description.HeaderText" xml:space="preserve">
-    <value>وصف</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>المعاملات
-</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
     <value>حفظ</value>
@@ -313,6 +303,28 @@
   </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
+  </data>
+  <data name="invoice_no.HeaderText" xml:space="preserve">
+    <value>رقم الفاتورة
+</value>
+  </data>
+  <data name="entry_date.HeaderText" xml:space="preserve">
+    <value>موعد الدخول</value>
+  </data>
+  <data name="account_name.HeaderText" xml:space="preserve">
+    <value>حساب</value>
+  </data>
+  <data name="debit.HeaderText" xml:space="preserve">
+    <value>دَين</value>
+  </data>
+  <data name="credit.HeaderText" xml:space="preserve">
+    <value>ائتمان</value>
+  </data>
+  <data name="balance.HeaderText" xml:space="preserve">
+    <value>حساب</value>
+  </data>
+  <data name="description.HeaderText" xml:space="preserve">
+    <value>وصف</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

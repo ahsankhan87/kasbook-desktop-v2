@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_searchPurchaseProducts));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_ok = new System.Windows.Forms.Button();
@@ -42,13 +42,6 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_group_products = new System.Windows.Forms.DataGridView();
-            this.g_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.g_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.g_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.g_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.g_avg_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.g_location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.g_category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +53,13 @@
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.group_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alternate_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_avg_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.g_category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -69,10 +69,10 @@
             // 
             // grid_search_products
             // 
+            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.AllowUserToAddRows = false;
             this.grid_search_products.AllowUserToDeleteRows = false;
             this.grid_search_products.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_search_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -93,6 +93,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
             this.panel1.Controls.Add(this.rb_by_name);
@@ -100,21 +101,20 @@
             this.panel1.Controls.Add(this.rb_by_code);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txt_search);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // btn_ok
             // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -151,17 +151,17 @@
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.grid_group_products);
             this.panel2.Controls.Add(this.label2);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // grid_group_products
             // 
+            resources.ApplyResources(this.grid_group_products, "grid_group_products");
             this.grid_group_products.AllowUserToAddRows = false;
             this.grid_group_products.AllowUserToDeleteRows = false;
             this.grid_group_products.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_group_products, "grid_group_products");
             this.grid_group_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_group_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.g_id,
@@ -176,6 +176,92 @@
             this.grid_group_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_group_products.DoubleClick += new System.EventHandler(this.grid_group_products_DoubleClick);
             this.grid_group_products.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_group_products_KeyDown);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // panel3
+            // 
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.grid_search_products);
+            this.panel3.Name = "panel3";
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            resources.ApplyResources(this.id, "id");
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // code
+            // 
+            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.code.DataPropertyName = "code";
+            resources.ApplyResources(this.code, "code");
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.DataPropertyName = "name";
+            resources.ApplyResources(this.name, "name");
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.qty.DataPropertyName = "qty";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.qty.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.qty, "qty");
+            this.qty.Name = "qty";
+            this.qty.ReadOnly = true;
+            // 
+            // avg_cost
+            // 
+            this.avg_cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.avg_cost.DataPropertyName = "avg_cost";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.avg_cost.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.avg_cost, "avg_cost");
+            this.avg_cost.Name = "avg_cost";
+            this.avg_cost.ReadOnly = true;
+            // 
+            // location_code
+            // 
+            this.location_code.DataPropertyName = "location_code";
+            resources.ApplyResources(this.location_code, "location_code");
+            this.location_code.Name = "location_code";
+            this.location_code.ReadOnly = true;
+            // 
+            // category
+            // 
+            this.category.DataPropertyName = "category";
+            resources.ApplyResources(this.category, "category");
+            this.category.Name = "category";
+            this.category.ReadOnly = true;
+            // 
+            // group_code
+            // 
+            this.group_code.DataPropertyName = "group_code";
+            resources.ApplyResources(this.group_code, "group_code");
+            this.group_code.Name = "group_code";
+            this.group_code.ReadOnly = true;
+            // 
+            // alternate_no
+            // 
+            this.alternate_no.DataPropertyName = "alt_no";
+            resources.ApplyResources(this.alternate_no, "alternate_no");
+            this.alternate_no.Name = "alternate_no";
+            this.alternate_no.ReadOnly = true;
             // 
             // g_id
             // 
@@ -230,92 +316,6 @@
             this.g_category.Name = "g_category";
             this.g_category.ReadOnly = true;
             // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.grid_search_products);
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Name = "panel3";
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            resources.ApplyResources(this.id, "id");
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // code
-            // 
-            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.code.DataPropertyName = "code";
-            resources.ApplyResources(this.code, "code");
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.DataPropertyName = "name";
-            resources.ApplyResources(this.name, "name");
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // qty
-            // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.qty, "qty");
-            this.qty.Name = "qty";
-            this.qty.ReadOnly = true;
-            // 
-            // avg_cost
-            // 
-            this.avg_cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.avg_cost.DataPropertyName = "avg_cost";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.avg_cost.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.avg_cost, "avg_cost");
-            this.avg_cost.Name = "avg_cost";
-            this.avg_cost.ReadOnly = true;
-            // 
-            // location_code
-            // 
-            this.location_code.DataPropertyName = "location_code";
-            resources.ApplyResources(this.location_code, "location_code");
-            this.location_code.Name = "location_code";
-            this.location_code.ReadOnly = true;
-            // 
-            // category
-            // 
-            this.category.DataPropertyName = "category";
-            resources.ApplyResources(this.category, "category");
-            this.category.Name = "category";
-            this.category.ReadOnly = true;
-            // 
-            // group_code
-            // 
-            this.group_code.DataPropertyName = "group_code";
-            resources.ApplyResources(this.group_code, "group_code");
-            this.group_code.Name = "group_code";
-            this.group_code.ReadOnly = true;
-            // 
-            // alternate_no
-            // 
-            this.alternate_no.DataPropertyName = "alt_no";
-            resources.ApplyResources(this.alternate_no, "alternate_no");
-            this.alternate_no.Name = "alternate_no";
-            this.alternate_no.ReadOnly = true;
-            // 
             // frm_searchPurchaseProducts
             // 
             resources.ApplyResources(this, "$this");
@@ -355,13 +355,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_avg_cost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_location_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn g_category;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -371,5 +364,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn group_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn alternate_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_avg_cost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_location_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn g_category;
     }
 }

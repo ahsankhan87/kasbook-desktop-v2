@@ -160,5 +160,6 @@ namespace pos.Master.Banks
                 SendKeys.Send("{TAB}");
             }
         }
+
     }
 }

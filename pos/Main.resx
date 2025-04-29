@@ -231,19 +231,19 @@
     <value>&amp;Master</value>
   </data>
   <data name="تقريرعنصنفToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="تقريرعنصنفToolStripMenuItem.Text" xml:space="preserve">
     <value>Class Report</value>
   </data>
   <data name="editItemDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="editItemDataToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit Item Data</value>
   </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="toolStripMenuItem3.Text" xml:space="preserve">
     <value>Item Files</value>
@@ -261,37 +261,37 @@
     <value>Low Stock Inventory</value>
   </data>
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="toolStripMenuItem4.Text" xml:space="preserve">
     <value>Inventory</value>
   </data>
   <data name="quantityOnHandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="quantityOnHandToolStripMenuItem.Text" xml:space="preserve">
     <value>Quantity on hand</value>
   </data>
   <data name="lowStockReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="lowStockReportToolStripMenuItem.Text" xml:space="preserve">
     <value>Low Stock Report</value>
   </data>
   <data name="تقريرعنالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="تقريرعنالمخزونToolStripMenuItem.Text" xml:space="preserve">
     <value>Inventory Report</value>
   </data>
   <data name="الاصنافالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="الاصنافالمتحركهToolStripMenuItem.Text" xml:space="preserve">
     <value>Moving Items</value>
   </data>
   <data name="الاصنافغيرالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="الاصنافغيرالمتحركهToolStripMenuItem.Text" xml:space="preserve">
     <value>Non-Moving Items</value>
@@ -820,7 +820,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_sales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 43</value>
+    <value>77, 43</value>
   </data>
   <data name="toolStripButton_sales.Text" xml:space="preserve">
     <value>Sales</value>
@@ -832,7 +832,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_purchase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 43</value>
+    <value>77, 43</value>
   </data>
   <data name="toolStripButton_purchase.Text" xml:space="preserve">
     <value>Purchases</value>
@@ -844,7 +844,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_products.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 43</value>
+    <value>77, 43</value>
   </data>
   <data name="toolStripButton_products.Text" xml:space="preserve">
     <value>Products</value>
@@ -856,7 +856,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_customers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 43</value>
+    <value>77, 43</value>
   </data>
   <data name="toolStripButton_customers.Text" xml:space="preserve">
     <value>Customers</value>
@@ -868,7 +868,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_suppliers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 43</value>
+    <value>77, 43</value>
   </data>
   <data name="toolStripButton_suppliers.Text" xml:space="preserve">
     <value>Suppliers</value>
@@ -883,7 +883,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonDailySaleReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 43</value>
+    <value>77, 43</value>
   </data>
   <data name="toolStripButtonDailySaleReport.Text" xml:space="preserve">
     <value>Sale Report</value>
@@ -964,7 +964,7 @@
     <value>0, 0, 2, 0</value>
   </data>
   <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 560</value>
+    <value>82, 560</value>
   </data>
   <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

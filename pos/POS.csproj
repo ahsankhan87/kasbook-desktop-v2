@@ -1242,6 +1242,9 @@
     <EmbeddedResource Include="Main_1.resx">
       <DependentUpon>Main_1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master\Banks\frm_banks.ar-SA.resx">
+      <DependentUpon>frm_banks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Master\Banks\frm_banks.resx">
       <DependentUpon>frm_banks.cs</DependentUpon>
     </EmbeddedResource>
@@ -1250,6 +1253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Banks\frm_banks_search.resx">
       <DependentUpon>frm_banks_search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Banks\frm_bank_payment.ar-SA.resx">
+      <DependentUpon>frm_bank_payment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Banks\frm_bank_payment.resx">
       <DependentUpon>frm_bank_payment.cs</DependentUpon>
