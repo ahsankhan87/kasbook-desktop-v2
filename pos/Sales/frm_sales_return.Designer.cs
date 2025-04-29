@@ -37,6 +37,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grid_sales_return = new System.Windows.Forms.DataGridView();
+            this.txt_close = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_return = new System.Windows.Forms.Button();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.txt_invoice_no = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,12 +60,6 @@
             this.tax_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_close = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btn_return = new System.Windows.Forms.Button();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.txt_invoice_no = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -100,6 +100,51 @@
             this.packet_qty});
             this.grid_sales_return.Name = "grid_sales_return";
             this.grid_sales_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grid_sales_return.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_sales_return_EditingControlShowing);
+            // 
+            // txt_close
+            // 
+            resources.ApplyResources(this.txt_close, "txt_close");
+            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.txt_close.Name = "txt_close";
+            this.txt_close.UseVisualStyleBackColor = true;
+            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.txt_close);
+            this.panel2.Controls.Add(this.btn_return);
+            this.panel2.Controls.Add(this.btn_search);
+            this.panel2.Controls.Add(this.txt_invoice_no);
+            this.panel2.Controls.Add(this.label1);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // btn_return
+            // 
+            resources.ApplyResources(this.btn_return, "btn_return");
+            this.btn_return.Name = "btn_return";
+            this.btn_return.UseVisualStyleBackColor = true;
+            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
+            // 
+            // btn_search
+            // 
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // txt_invoice_no
+            // 
+            resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
+            this.txt_invoice_no.Name = "txt_invoice_no";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Name = "label1";
             // 
             // id
             // 
@@ -195,6 +240,7 @@
             this.loc_code.DataPropertyName = "loc_code";
             resources.ApplyResources(this.loc_code, "loc_code");
             this.loc_code.Name = "loc_code";
+            this.loc_code.ReadOnly = true;
             // 
             // vat
             // 
@@ -242,50 +288,6 @@
             this.packet_qty.DataPropertyName = "packet_qty";
             resources.ApplyResources(this.packet_qty, "packet_qty");
             this.packet_qty.Name = "packet_qty";
-            // 
-            // txt_close
-            // 
-            resources.ApplyResources(this.txt_close, "txt_close");
-            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.txt_close.Name = "txt_close";
-            this.txt_close.UseVisualStyleBackColor = true;
-            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.txt_close);
-            this.panel2.Controls.Add(this.btn_return);
-            this.panel2.Controls.Add(this.btn_search);
-            this.panel2.Controls.Add(this.txt_invoice_no);
-            this.panel2.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // btn_return
-            // 
-            resources.ApplyResources(this.btn_return, "btn_return");
-            this.btn_return.Name = "btn_return";
-            this.btn_return.UseVisualStyleBackColor = true;
-            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
-            // 
-            // btn_search
-            // 
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
-            // txt_invoice_no
-            // 
-            resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
-            this.txt_invoice_no.Name = "txt_invoice_no";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Name = "label1";
             // 
             // frm_sales_return
             // 

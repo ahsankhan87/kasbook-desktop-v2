@@ -17,7 +17,7 @@ namespace pos
     {
         SalesBLL objSalesBLL = new SalesBLL();
         DataTable sales_dt;
-        //string _invoice_no = "";
+        string _invoice_no = "";
         
         public int cash_account_id = 0;
         public int sales_account_id = 0;
@@ -33,29 +33,41 @@ namespace pos
         public frm_sales_return()
         {
             InitializeComponent();
-            Get_AccountID_From_Company();
-            
             //_invoice_no = invoice_no;
         }
-
+        public frm_sales_return(string invoiceNo)
+        {
+            InitializeComponent();
+            _invoice_no = invoiceNo;
+            txt_invoice_no.Text = _invoice_no;
+        }
 
         public void frm_sales_return_Load(object sender, EventArgs e)
         {
             //load_sales_return_grid(sale_id);
+            Get_AccountID_From_Company();
             autoCompleteInvoice();
             txt_invoice_no.Focus();
             Get_user_total_commission();
-            
+            LoadSalesReturnGrid();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
+            LoadSalesReturnGrid();
+        }
+        public void LoadSalesReturnGrid()
+        {
             try
             {
-                grid_sales_return.DataSource = null;
-                grid_sales_return.AutoGenerateColumns = false;
-                grid_sales_return.DataSource = load_sales_items_return_grid(txt_invoice_no.Text);
-                sales_dt = load_sales_return_grid(txt_invoice_no.Text);
+                if(!string.IsNullOrEmpty(txt_invoice_no.Text))
+                {
+                    grid_sales_return.DataSource = null;
+                    grid_sales_return.AutoGenerateColumns = false;
+                    grid_sales_return.DataSource = load_sales_items_return_grid(txt_invoice_no.Text);
+                    sales_dt = load_sales_return_grid(txt_invoice_no.Text);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -63,7 +75,7 @@ namespace pos
 
             }
         }
-        
+
         public bool item_checked = false;
         private void btn_return_Click(object sender, EventArgs e)
         {
@@ -347,7 +359,7 @@ namespace pos
                 AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
 
                 GeneralBLL invoicesBLL_obj = new GeneralBLL();
-                string keyword = "TOP 500 invoice_no ";
+                string keyword = "TOP 1000 invoice_no ";
                 string table = "pos_sales WHERE account = 'Sale' AND branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY id desc";
                 DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
 
@@ -419,5 +431,45 @@ namespace pos
             }
             return commission_percent;
         }
+
+        private void grid_sales_return_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+
+            if (grid_sales_return.CurrentCell.ColumnIndex == 5 || grid_sales_return.CurrentCell.ColumnIndex == 6) //qty, unit price and discount Column will accept only numeric
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+                }
+            }
+        }
+        void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            // Allow only digits, control keys (Backspace, Delete), and one decimal point
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Prevent multiple decimal points
+            if (e.KeyChar == '.' && tb.Text.Contains("."))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Prevent entering "." as the first character
+            if (e.KeyChar == '.' && tb.Text.Length == 0)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
     }
 }

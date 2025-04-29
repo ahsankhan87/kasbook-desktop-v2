@@ -920,7 +920,8 @@ namespace pos
             grid_sales.Rows.Add();
 
             txt_description.Text = "";
-
+            PrinttoolStripButton.Enabled = false;
+            SaleReturnToolStripButton.Enabled = false;
             //cmb_brands.SelectedValue = 0;
             //cmb_customers.Refresh();
 
@@ -1427,7 +1428,8 @@ namespace pos
                 {
                     invoice_status = "Update"; //"Estimate";// 
                     //btn_save.Text = "Update (F3)"; //"Save"; //
-
+                    PrinttoolStripButton.Enabled = true;
+                    SaleReturnToolStripButton.Enabled = true;
                 }
                 else // for estimates 
                 {
@@ -2894,11 +2896,24 @@ namespace pos
             {
                 using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
                 {
-                    obj.load_print(); // send print direct to printer without showing dialog
+                    //obj.load_print(); // send print direct to printer without showing dialog
                     obj.ShowDialog();
                 }
             }
             
+        }
+
+        private void SaleReturnToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txt_invoice_no.Text))
+            {
+                using (frm_sales_return obj = new frm_sales_return(txt_invoice_no.Text))
+                {
+                    obj.ShowDialog();
+                    //obj.LoadSalesReturnGrid(); // send print direct to printer without showing dialog
+
+                }
+            }
         }
     }
   

@@ -263,6 +263,16 @@ namespace pos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Print_32 {
+            get {
+                object obj = ResourceManager.GetObject("Print-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Products {
             get {
                 object obj = ResourceManager.GetObject("Products", resourceCulture);
@@ -276,6 +286,16 @@ namespace pos.Properties {
         internal static System.Drawing.Bitmap Products1 {
             get {
                 object obj = ResourceManager.GetObject("Products1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap return_32 {
+            get {
+                object obj = ResourceManager.GetObject("return-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
