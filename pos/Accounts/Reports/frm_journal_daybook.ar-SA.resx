@@ -122,10 +122,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
+    <value>99, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>تاريخ الدخول:</value>
+    <value>اختر تاريخ الإدخال:</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
@@ -135,15 +135,18 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="account_name.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+    <value>66</value>
   </data>
   <data name="debit.HeaderText" xml:space="preserve">
-    <value>دين</value>
+    <value>مدين</value>
   </data>
   <data name="credit.HeaderText" xml:space="preserve">
     <value>ائتمان</value>
   </data>
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>دفتر اليومية للمجلة</value>
   </data>
 </root>

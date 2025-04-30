@@ -131,18 +131,26 @@
   <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;AccountID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btn_close.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 23</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;grid_trialbalance_report.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_print.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
   <data name="&gt;&gt;CmbCondition.Name" xml:space="preserve">
     <value>CmbCondition</value>
@@ -150,17 +158,14 @@
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AccountName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>frm_trialbalance_report</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_close.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;AccountName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grid_trialbalance_report.Name" xml:space="preserve">
     <value>grid_trialbalance_report</value>
@@ -171,8 +176,11 @@
   <data name="&gt;&gt;btn_print.Name" xml:space="preserve">
     <value>btn_print</value>
   </data>
-  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
-    <value>btn_search</value>
+  <data name="TotalDebit.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;grid_trialbalance_report.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -180,32 +188,27 @@
   <data name="&gt;&gt;CmbCondition.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txt_to_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
+  <data name="&gt;&gt;CmbCondition.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ClosingBalance.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
-  <data name="TotalDebit.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 44</value>
+    <value>1155, 54</value>
   </data>
   <data name="grid_trialbalance_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom</value>
   </data>
-  <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
-    <value>750, 11</value>
-  </data>
   <data name="&gt;&gt;txt_to_date.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btn_print.Text" xml:space="preserve">
-    <value>Print</value>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;ClosingBalance.Name" xml:space="preserve">
     <value>ClosingBalance</value>
@@ -213,8 +216,8 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="TotalCredit.HeaderText" xml:space="preserve">
-    <value>Credit</value>
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -231,26 +234,35 @@
   <data name="txt_from_date.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="btn_print.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>622, 11</value>
+    <value>829, 14</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="txt_from_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
+    <value>220, 22</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>78, 17</value>
   </data>
   <data name="btn_close.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
     <value>panel1</value>
+  </data>
+  <data name="TotalCredit.HeaderText" xml:space="preserve">
+    <value>Credit</value>
   </data>
   <data name="TotalCredit.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -261,14 +273,20 @@
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grid_trialbalance_report.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="grid_trialbalance_report.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 4</value>
+  </data>
+  <data name="&gt;&gt;txt_from_date.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+    <value>63, 17</value>
   </data>
   <data name="&gt;&gt;txt_to_date.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -276,8 +294,8 @@
   <data name="&gt;&gt;txt_from_date.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grid_trialbalance_report.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="btn_close.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -300,17 +318,23 @@
   <data name="AccountID.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
+  <data name="&gt;&gt;ClosingBalance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TotalCredit.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
-  <data name="&gt;&gt;txt_from_date.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="txt_to_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 22</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
+    <value>btn_search</value>
+  </data>
+  <data name="txt_to_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="CmbCondition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 12</value>
-  </data>
-  <data name="grid_trialbalance_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 3</value>
+    <value>37, 15</value>
   </data>
   <data name="AccountID.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -325,13 +349,13 @@
     <value>125</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 478</value>
+    <value>1155, 588</value>
   </data>
   <data name="btn_print.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 23</value>
+    <value>77, 28</value>
   </data>
   <data name="btn_close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>687, 11</value>
+    <value>916, 14</value>
   </data>
   <data name="&gt;&gt;txt_to_date.Name" xml:space="preserve">
     <value>txt_to_date</value>
@@ -342,11 +366,17 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;grid_trialbalance_report.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;btn_print.Parent" xml:space="preserve">
     <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grid_trialbalance_report.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="&gt;&gt;TotalDebit.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -360,8 +390,8 @@
   <data name="&gt;&gt;btn_print.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 12</value>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="CmbCondition.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -373,7 +403,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 23</value>
+    <value>77, 28</value>
   </data>
   <data name="txt_to_date.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -384,14 +414,14 @@
   <data name="AccountName.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="btn_print.Text" xml:space="preserve">
+    <value>Print</value>
   </data>
-  <data name="&gt;&gt;ClosingBalance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="grid_trialbalance_report.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 15</value>
+    <value>212, 18</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Trial Balance Report</value>
@@ -406,10 +436,10 @@
     <value>txt_from_date</value>
   </data>
   <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 12</value>
+    <value>601, 15</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 15</value>
+    <value>528, 18</value>
   </data>
   <data name="&gt;&gt;btn_print.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -417,11 +447,8 @@
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="ClosingBalance.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
   <data name="grid_trialbalance_report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>628, 471</value>
+    <value>837, 580</value>
   </data>
   <data name="TotalDebit.HeaderText" xml:space="preserve">
     <value>Debit</value>
@@ -429,14 +456,14 @@
   <data name="AccountID.HeaderText" xml:space="preserve">
     <value>AccountID</value>
   </data>
-  <data name="AccountID.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>299, 15</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="CmbCondition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="&gt;&gt;TotalCredit.Name" xml:space="preserve">
     <value>TotalCredit</value>
@@ -444,50 +471,56 @@
   <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CmbCondition.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1000, 14</value>
   </data>
   <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 44</value>
+    <value>0, 54</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;btn_close.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
+  <data name="btn_close.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 28</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>866, 522</value>
+    <value>1155, 642</value>
   </data>
-  <data name="CmbCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 21</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_trialbalance_report</value>
   </data>
   <data name="&gt;&gt;TotalDebit.Name" xml:space="preserve">
     <value>TotalDebit</value>
   </data>
-  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="AccountName.HeaderText" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="AccountID.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="grid_trialbalance_report.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txt_from_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;AccountID.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>From Date:</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
   <data name="&gt;&gt;AccountID.Name" xml:space="preserve">
     <value>AccountID</value>
   </data>
-  <data name="AccountName.HeaderText" xml:space="preserve">
-    <value>Account</value>
+  <data name="CmbCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 24</value>
   </data>
   <metadata name="TotalDebit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

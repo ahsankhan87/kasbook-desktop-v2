@@ -117,63 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btn_close.Text" xml:space="preserve">
-    <value>أغلق</value>
-  </data>
-  <data name="btn_print.Text" xml:space="preserve">
-    <value>طباعة</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث</value>
+  <data name="BtnSubmit.Text" xml:space="preserve">
+    <value>قدم (F3)</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>حدد تاريخ:</value>
-  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 17</value>
+    <value>31, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>الحسابات:</value>
+    <value>شرط</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 17</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>شرط:</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>من تاريخ</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
+    <value>54, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>من التاريخ:</value>
+    <value>حدد تاريخ</value>
   </data>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة</value>
-  </data>
-  <data name="account_name.HeaderText" xml:space="preserve">
-    <value>حساب</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="account_name.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="debit.HeaderText" xml:space="preserve">
-    <value>مدين</value>
-  </data>
-  <data name="credit.HeaderText" xml:space="preserve">
-    <value>ائتمان</value>
-  </data>
-  <data name="balance.HeaderText" xml:space="preserve">
-    <value>رصيد حساب</value>
-  </data>
-  <data name="description.HeaderText" xml:space="preserve">
-    <value>وصف</value>
+  <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>501, 31</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>تقرير الحسابات</value>
+    <value>تقرير الحسابات المستحقة</value>
   </data>
 </root>

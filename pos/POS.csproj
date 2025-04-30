@@ -1123,6 +1123,9 @@
     <EmbeddedResource Include="Accounts\Accounts\frm_coa.resx">
       <DependentUpon>frm_coa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\AP\AccountPayable.ar-SA.resx">
+      <DependentUpon>AccountPayable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\AP\AccountPayable.resx">
       <DependentUpon>AccountPayable.cs</DependentUpon>
     </EmbeddedResource>
@@ -1134,17 +1137,38 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AccountReceiableReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\AR\AccountReceivable.ar-SA.resx">
+      <DependentUpon>AccountReceivable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\AR\AccountReceivable.resx">
       <DependentUpon>AccountReceivable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\FrmAccountDetail.resx">
       <DependentUpon>FrmAccountDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\frm_account_report.ar-SA.resx">
+      <DependentUpon>frm_account_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\frm_balancesheet_report.ar-SA.resx">
+      <DependentUpon>frm_balancesheet_report.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\frm_balancesheet_report.resx">
       <DependentUpon>frm_balancesheet_report.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\frm_group_report.ar-SA.resx">
+      <DependentUpon>frm_group_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\frm_journal_daybook.ar-SA.resx">
+      <DependentUpon>frm_journal_daybook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\frm_profitandloss_report.ar-SA.resx">
+      <DependentUpon>frm_profitandloss_report.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\frm_profitandloss_report.resx">
       <DependentUpon>frm_profitandloss_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reports\frm_trialbalance_report.ar-SA.resx">
+      <DependentUpon>frm_trialbalance_report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\frm_trialbalance_report.resx">
       <DependentUpon>frm_trialbalance_report.cs</DependentUpon>

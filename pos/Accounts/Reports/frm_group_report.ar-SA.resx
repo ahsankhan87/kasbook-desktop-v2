@@ -128,19 +128,19 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+    <value>58, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>حدد تاريخ</value>
+    <value>حدد تاريخ:</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>63, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>المجموعات:</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+    <value>58, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>من التاريخ:</value>
@@ -149,12 +149,15 @@
     <value>حساب</value>
   </data>
   <data name="debit.HeaderText" xml:space="preserve">
-    <value>دين</value>
+    <value>مدين</value>
   </data>
   <data name="credit.HeaderText" xml:space="preserve">
     <value>ائتمان</value>
   </data>
   <data name="balance.HeaderText" xml:space="preserve">
     <value>رصيد حساب</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>تقرير حساب المجموعة</value>
   </data>
 </root>

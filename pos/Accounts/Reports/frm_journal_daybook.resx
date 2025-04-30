@@ -127,6 +127,12 @@
   <data name="&gt;&gt;description.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btn_print.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -134,8 +140,8 @@
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;account_name.Name" xml:space="preserve">
-    <value>account_name</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -152,27 +158,30 @@
   <data name="&gt;&gt;grid_journal_daybook.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="grid_journal_daybook.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 44</value>
+    <value>1155, 54</value>
   </data>
   <data name="&gt;&gt;description.Name" xml:space="preserve">
     <value>description</value>
   </data>
-  <data name="credit.HeaderText" xml:space="preserve">
-    <value>Credit</value>
+  <data name="debit.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -180,14 +189,11 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;account_name.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btn_print.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_entry_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
-  </data>
-  <data name="btn_print.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 23</value>
+    <value>220, 22</value>
   </data>
   <data name="account_name.HeaderText" xml:space="preserve">
     <value>Account</value>
@@ -196,16 +202,16 @@
     <value>6</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 482</value>
+    <value>1155, 593</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
+    <value>131, 17</value>
   </data>
   <data name="&gt;&gt;credit.Name" xml:space="preserve">
     <value>credit</value>
   </data>
   <data name="txt_entry_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 10</value>
+    <value>336, 12</value>
   </data>
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -214,7 +220,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="grid_journal_daybook.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 3</value>
+    <value>184, 4</value>
   </data>
   <data name="&gt;&gt;txt_entry_date.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -228,8 +234,14 @@
   <data name="&gt;&gt;grid_journal_daybook.Name" xml:space="preserve">
     <value>grid_journal_daybook</value>
   </data>
+  <data name="credit.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="&gt;&gt;txt_entry_date.Parent" xml:space="preserve">
     <value>panel1</value>
+  </data>
+  <data name="invoice_no.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
   <data name="&gt;&gt;txt_entry_date.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -237,11 +249,20 @@
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="debit.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="btn_print.Text" xml:space="preserve">
     <value>Print</value>
   </data>
   <data name="&gt;&gt;credit.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
+    <value>892, 11</value>
+  </data>
+  <data name="grid_journal_daybook.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -261,17 +282,20 @@
   <data name="description.HeaderText" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="credit.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;txt_entry_date.Name" xml:space="preserve">
     <value>txt_entry_date</value>
   </data>
   <data name="&gt;&gt;debit.Name" xml:space="preserve">
     <value>debit</value>
+  </data>
+  <data name="&gt;&gt;account_name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -283,13 +307,22 @@
     <value>0</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 14</value>
+    <value>184, 17</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Journal Daybook</value>
   </data>
   <data name="description.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;account_name.Name" xml:space="preserve">
+    <value>account_name</value>
   </data>
   <data name="&gt;&gt;btn_print.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -303,20 +336,32 @@
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="credit.HeaderText" xml:space="preserve">
+    <value>Credit</value>
+  </data>
   <data name="grid_journal_daybook.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 476</value>
+    <value>785, 586</value>
   </data>
-  <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
-    <value>669, 9</value>
+  <data name="btn_print.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 28</value>
   </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
-    <value>panel2</value>
+  <data name="account_name.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="txt_entry_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 44</value>
+    <value>0, 54</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>866, 526</value>
+    <value>1155, 647</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_journal_daybook</value>
@@ -334,7 +379,7 @@
     <value>0</value>
   </data>
   <data name="account_name.Width" type="System.Int32, mscorlib">
-    <value>72</value>
+    <value>88</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

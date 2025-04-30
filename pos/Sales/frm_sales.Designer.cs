@@ -51,6 +51,15 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.SalesToolStrip = new System.Windows.Forms.ToolStrip();
+            this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.AmountFixToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ICTToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.LoadQuotationToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SaleReturnToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cmb_sale_type = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -124,6 +133,7 @@
             this.radioDiscPercent = new System.Windows.Forms.RadioButton();
             this.radioDiscValue = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.product_pic = new System.Windows.Forms.PictureBox();
             this.txt_order_qty = new System.Windows.Forms.TextBox();
             this.txt_company_qty = new System.Windows.Forms.TextBox();
             this.txt_shop_qty = new System.Windows.Forms.TextBox();
@@ -159,16 +169,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.product_pic = new System.Windows.Forms.PictureBox();
-            this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.AmountFixToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ICTToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.LoadQuotationToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SaleReturnToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.panel_header.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SalesToolStrip.SuspendLayout();
@@ -189,6 +189,7 @@
             // 
             // panel_header
             // 
+            resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.BackColor = System.Drawing.SystemColors.Control;
             this.panel_header.Controls.Add(this.groupBox3);
             this.panel_header.Controls.Add(this.label29);
@@ -196,18 +197,17 @@
             this.panel_header.Controls.Add(this.groupBox4);
             this.panel_header.Controls.Add(this.groupBox1);
             this.panel_header.Controls.Add(this.groupBox_products);
-            resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Name = "panel_header";
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.txt_user_commission_balance);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.txtPONumber);
             this.groupBox3.Controls.Add(this.txt_description);
             this.groupBox3.Controls.Add(this.label17);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -250,8 +250,8 @@
             // 
             // SalesToolStrip
             // 
-            this.SalesToolStrip.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.SalesToolStrip, "SalesToolStrip");
+            this.SalesToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.SalesToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.SalesToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewToolStripButton,
@@ -265,8 +265,79 @@
             this.SaleReturnToolStripButton});
             this.SalesToolStrip.Name = "SalesToolStrip";
             // 
+            // NewToolStripButton
+            // 
+            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
+            this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
+            this.NewToolStripButton.Name = "NewToolStripButton";
+            this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
+            // 
+            // SaveToolStripButton
+            // 
+            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
+            this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
+            this.SaveToolStripButton.Name = "SaveToolStripButton";
+            this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
+            // 
+            // SearchToolStripButton
+            // 
+            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
+            this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
+            this.SearchToolStripButton.Name = "SearchToolStripButton";
+            this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
+            // 
+            // AmountFixToolStripButton
+            // 
+            resources.ApplyResources(this.AmountFixToolStripButton, "AmountFixToolStripButton");
+            this.AmountFixToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.AmountFixToolStripButton.Image = global::pos.Properties.Resources.Stack_of_Coins;
+            this.AmountFixToolStripButton.Name = "AmountFixToolStripButton";
+            this.AmountFixToolStripButton.Click += new System.EventHandler(this.AmountFixToolStripButton_Click);
+            // 
+            // HistoryToolStripButton
+            // 
+            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
+            this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
+            this.HistoryToolStripButton.Name = "HistoryToolStripButton";
+            this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
+            // 
+            // ICTToolStripButton
+            // 
+            resources.ApplyResources(this.ICTToolStripButton, "ICTToolStripButton");
+            this.ICTToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ICTToolStripButton.Image = global::pos.Properties.Resources.Data_Transfer;
+            this.ICTToolStripButton.Name = "ICTToolStripButton";
+            this.ICTToolStripButton.Click += new System.EventHandler(this.ICTToolStripButton_Click);
+            // 
+            // LoadQuotationToolStripButton
+            // 
+            resources.ApplyResources(this.LoadQuotationToolStripButton, "LoadQuotationToolStripButton");
+            this.LoadQuotationToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.LoadQuotationToolStripButton.Image = global::pos.Properties.Resources.Estimate;
+            this.LoadQuotationToolStripButton.Name = "LoadQuotationToolStripButton";
+            this.LoadQuotationToolStripButton.Click += new System.EventHandler(this.LosdQuotationToolStripButton_Click);
+            // 
+            // PrinttoolStripButton
+            // 
+            resources.ApplyResources(this.PrinttoolStripButton, "PrinttoolStripButton");
+            this.PrinttoolStripButton.Image = global::pos.Properties.Resources.Print_32;
+            this.PrinttoolStripButton.Name = "PrinttoolStripButton";
+            this.PrinttoolStripButton.Click += new System.EventHandler(this.PrinttoolStripButton_Click);
+            // 
+            // SaleReturnToolStripButton
+            // 
+            resources.ApplyResources(this.SaleReturnToolStripButton, "SaleReturnToolStripButton");
+            this.SaleReturnToolStripButton.Image = global::pos.Properties.Resources.return_32;
+            this.SaleReturnToolStripButton.Name = "SaleReturnToolStripButton";
+            this.SaleReturnToolStripButton.Click += new System.EventHandler(this.SaleReturnToolStripButton_Click);
+            // 
             // groupBox4
             // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox4.Controls.Add(this.cmb_sale_type);
             this.groupBox4.Controls.Add(this.label19);
@@ -280,15 +351,14 @@
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.lbl_sale_type);
             this.groupBox4.Controls.Add(this.txt_invoice_no);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
             // cmb_sale_type
             // 
+            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_type.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.Name = "cmb_sale_type";
             // 
             // label19
@@ -308,28 +378,28 @@
             // 
             // cmb_payment_method
             // 
+            resources.ApplyResources(this.cmb_payment_method, "cmb_payment_method");
             this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_payment_method.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_payment_method, "cmb_payment_method");
             this.cmb_payment_method.Name = "cmb_payment_method";
             // 
             // cmb_payment_terms
             // 
+            resources.ApplyResources(this.cmb_payment_terms, "cmb_payment_terms");
             this.cmb_payment_terms.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payment_terms.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payment_terms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_payment_terms.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_payment_terms, "cmb_payment_terms");
             this.cmb_payment_terms.Name = "cmb_payment_terms";
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.Name = "cmb_employees";
             this.cmb_employees.SelectedIndexChanged += new System.EventHandler(this.cmb_employees_SelectedIndexChanged);
             // 
@@ -362,6 +432,7 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.lbl);
             this.groupBox1.Controls.Add(this.txt_cust_balance);
@@ -371,7 +442,6 @@
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label6);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -399,10 +469,10 @@
             // 
             // cmb_customers
             // 
+            resources.ApplyResources(this.cmb_customers, "cmb_customers");
             this.cmb_customers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_customers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_customers.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_customers, "cmb_customers");
             this.cmb_customers.Name = "cmb_customers";
             this.cmb_customers.SelectedIndexChanged += new System.EventHandler(this.cmb_customers_SelectedIndexChanged);
             // 
@@ -423,6 +493,7 @@
             // 
             // groupBox_products
             // 
+            resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox_products.Controls.Add(this.groupBox5);
             this.groupBox_products.Controls.Add(this.txt_brand_code);
@@ -436,24 +507,23 @@
             this.groupBox_products.Controls.Add(this.label18);
             this.groupBox_products.Controls.Add(this.label7);
             this.groupBox_products.Controls.Add(this.label8);
-            resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.groupBox6);
             this.groupBox5.Controls.Add(this.rd_btn_with_vat);
             this.groupBox5.Controls.Add(this.rd_btn_without_vat);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
             // groupBox6
             // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Controls.Add(this.rd_btn_bytotal_price);
             this.groupBox6.Controls.Add(this.rd_btn_by_unitprice);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
@@ -558,6 +628,7 @@
             // 
             // grid_sales
             // 
+            resources.ApplyResources(this.grid_sales, "grid_sales");
             this.grid_sales.AllowUserToAddRows = false;
             dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(248)))));
             this.grid_sales.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
@@ -572,7 +643,6 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.grid_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            resources.ApplyResources(this.grid_sales, "grid_sales");
             this.grid_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.grid_sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -797,6 +867,7 @@
             // 
             // contextMenuStrip_Sales
             // 
+            resources.ApplyResources(this.contextMenuStrip_Sales, "contextMenuStrip_Sales");
             this.contextMenuStrip_Sales.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip_Sales.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToPurchaseOrderToolStripMenuItem,
@@ -804,37 +875,36 @@
             this.toolStripMenuItem1,
             this.productDetailToolStripMenuItem});
             this.contextMenuStrip_Sales.Name = "contextMenuStrip_Sales";
-            resources.ApplyResources(this.contextMenuStrip_Sales, "contextMenuStrip_Sales");
             // 
             // addToPurchaseOrderToolStripMenuItem
             // 
-            this.addToPurchaseOrderToolStripMenuItem.Name = "addToPurchaseOrderToolStripMenuItem";
             resources.ApplyResources(this.addToPurchaseOrderToolStripMenuItem, "addToPurchaseOrderToolStripMenuItem");
+            this.addToPurchaseOrderToolStripMenuItem.Name = "addToPurchaseOrderToolStripMenuItem";
             this.addToPurchaseOrderToolStripMenuItem.Click += new System.EventHandler(this.addToPurchaseOrderToolStripMenuItem_Click);
             // 
             // addNewRowToolStripMenuItem
             // 
-            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             resources.ApplyResources(this.addNewRowToolStripMenuItem, "addNewRowToolStripMenuItem");
+            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             this.addNewRowToolStripMenuItem.Click += new System.EventHandler(this.addNewRowToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // productDetailToolStripMenuItem
             // 
-            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             resources.ApplyResources(this.productDetailToolStripMenuItem, "productDetailToolStripMenuItem");
+            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             this.productDetailToolStripMenuItem.Click += new System.EventHandler(this.productDetailToolStripMenuItem_Click);
             // 
             // panel_grid
             // 
+            resources.ApplyResources(this.panel_grid, "panel_grid");
             this.panel_grid.BackColor = System.Drawing.SystemColors.Control;
             this.panel_grid.Controls.Add(this.grid_sales);
-            resources.ApplyResources(this.panel_grid, "panel_grid");
             this.panel_grid.Name = "panel_grid";
             // 
             // panel_footer
@@ -938,6 +1008,13 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // product_pic
+            // 
+            resources.ApplyResources(this.product_pic, "product_pic");
+            this.product_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.product_pic.Name = "product_pic";
+            this.product_pic.TabStop = false;
             // 
             // txt_order_qty
             // 
@@ -1134,83 +1211,6 @@
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            // 
-            // product_pic
-            // 
-            this.product_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.product_pic, "product_pic");
-            this.product_pic.Name = "product_pic";
-            this.product_pic.TabStop = false;
-            // 
-            // NewToolStripButton
-            // 
-            this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
-            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
-            this.NewToolStripButton.Name = "NewToolStripButton";
-            this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
-            // 
-            // SaveToolStripButton
-            // 
-            this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
-            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
-            this.SaveToolStripButton.Name = "SaveToolStripButton";
-            this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
-            // 
-            // SearchToolStripButton
-            // 
-            this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
-            this.SearchToolStripButton.Name = "SearchToolStripButton";
-            this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
-            // 
-            // AmountFixToolStripButton
-            // 
-            this.AmountFixToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.AmountFixToolStripButton.Image = global::pos.Properties.Resources.Stack_of_Coins;
-            resources.ApplyResources(this.AmountFixToolStripButton, "AmountFixToolStripButton");
-            this.AmountFixToolStripButton.Name = "AmountFixToolStripButton";
-            this.AmountFixToolStripButton.Click += new System.EventHandler(this.AmountFixToolStripButton_Click);
-            // 
-            // HistoryToolStripButton
-            // 
-            this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
-            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
-            this.HistoryToolStripButton.Name = "HistoryToolStripButton";
-            this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
-            // 
-            // ICTToolStripButton
-            // 
-            this.ICTToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ICTToolStripButton.Image = global::pos.Properties.Resources.Data_Transfer;
-            resources.ApplyResources(this.ICTToolStripButton, "ICTToolStripButton");
-            this.ICTToolStripButton.Name = "ICTToolStripButton";
-            this.ICTToolStripButton.Click += new System.EventHandler(this.ICTToolStripButton_Click);
-            // 
-            // LoadQuotationToolStripButton
-            // 
-            this.LoadQuotationToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.LoadQuotationToolStripButton.Image = global::pos.Properties.Resources.Estimate;
-            resources.ApplyResources(this.LoadQuotationToolStripButton, "LoadQuotationToolStripButton");
-            this.LoadQuotationToolStripButton.Name = "LoadQuotationToolStripButton";
-            this.LoadQuotationToolStripButton.Click += new System.EventHandler(this.LosdQuotationToolStripButton_Click);
-            // 
-            // PrinttoolStripButton
-            // 
-            resources.ApplyResources(this.PrinttoolStripButton, "PrinttoolStripButton");
-            this.PrinttoolStripButton.Image = global::pos.Properties.Resources.Print_32;
-            this.PrinttoolStripButton.Name = "PrinttoolStripButton";
-            this.PrinttoolStripButton.Click += new System.EventHandler(this.PrinttoolStripButton_Click);
-            // 
-            // SaleReturnToolStripButton
-            // 
-            resources.ApplyResources(this.SaleReturnToolStripButton, "SaleReturnToolStripButton");
-            this.SaleReturnToolStripButton.Image = global::pos.Properties.Resources.return_32;
-            this.SaleReturnToolStripButton.Name = "SaleReturnToolStripButton";
-            this.SaleReturnToolStripButton.Click += new System.EventHandler(this.SaleReturnToolStripButton_Click);
             // 
             // frm_sales
             // 

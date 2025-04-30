@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_trialbalance_report));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
             this.btn_print = new System.Windows.Forms.Button();
@@ -152,10 +152,10 @@
             // TotalDebit
             // 
             this.TotalDebit.DataPropertyName = "TotalDebit";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.TotalDebit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.TotalDebit.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.TotalDebit, "TotalDebit");
             this.TotalDebit.Name = "TotalDebit";
             this.TotalDebit.ReadOnly = true;
@@ -163,10 +163,10 @@
             // TotalCredit
             // 
             this.TotalCredit.DataPropertyName = "TotalCredit";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.TotalCredit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.TotalCredit.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.TotalCredit, "TotalCredit");
             this.TotalCredit.Name = "TotalCredit";
             this.TotalCredit.ReadOnly = true;
@@ -174,10 +174,10 @@
             // ClosingBalance
             // 
             this.ClosingBalance.DataPropertyName = "ClosingBalance";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.ClosingBalance.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.ClosingBalance.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.ClosingBalance, "ClosingBalance");
             this.ClosingBalance.Name = "ClosingBalance";
             this.ClosingBalance.ReadOnly = true;
