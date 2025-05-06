@@ -43,7 +43,8 @@ namespace pos
                 txt_email.Text = myProductView["email"].ToString();
                 txt_vin_no.Text = myProductView["vin_no"].ToString();
                 txt_car_name.Text = myProductView["car_name"].ToString();
-                
+                txt_credit_limit.Text = myProductView["credit_limit"].ToString();
+
             }
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
@@ -67,7 +68,7 @@ namespace pos
         {
             try
             {
-                if (txt_first_name.Text != string.Empty && txt_last_name.Text != string.Empty)
+                if (txt_first_name.Text != string.Empty)
                 {
                     CustomerModal info = new CustomerModal
                     {
@@ -168,7 +169,7 @@ namespace pos
                     return;
                 }
 
-                if (txt_first_name.Text != string.Empty && txt_last_name.Text != string.Empty)
+                if (txt_first_name.Text != string.Empty)
                 {
                     CustomerModal info = new CustomerModal
                     {
@@ -198,6 +199,10 @@ namespace pos
                         MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
+                }
+                else
+                {
+                    MessageBox.Show("Please enter first name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)

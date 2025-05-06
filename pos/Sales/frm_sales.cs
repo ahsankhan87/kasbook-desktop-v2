@@ -600,12 +600,13 @@ namespace pos
             }
             double net = (total_amount + total_tax - total_discount);
             txt_total_amount.Text = Math.Round(net, 2).ToString();
+            double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
 
             ///Checking customer credit limit
             if (txt_cust_credit_limit.Text != "")
             {
                 double customer_credit_limit = (txt_cust_credit_limit.Text == "" ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
-                if (cmb_sale_type.SelectedValue.ToString() == "Credit" && total_amount > customer_credit_limit)
+                if (cmb_sale_type.SelectedValue.ToString() == "Credit" && netAmount > customer_credit_limit)
                 {
                     MessageBox.Show("Customer credit limit has exceeded " + txt_cust_credit_limit.Text, "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -2505,7 +2506,8 @@ namespace pos
 
                     ///Checking customer credit limit
                     double customer_credit_limit = (txt_cust_credit_limit.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
-                    if (sale_type == "Credit" && total_amount > customer_credit_limit)
+                    double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
+                    if (sale_type == "Credit" && netAmount > customer_credit_limit)
                     {
                         MessageBox.Show("Customer credit limit has exceeded " + txt_cust_credit_limit.Text, "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;

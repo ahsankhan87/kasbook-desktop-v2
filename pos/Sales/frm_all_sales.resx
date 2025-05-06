@@ -135,9 +135,6 @@
   <data name="button1.Text" xml:space="preserve">
     <value>Test auth</value>
   </data>
-  <data name="button1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
@@ -161,9 +158,6 @@
   </data>
   <data name="BtnUBLInvoice.Text" xml:space="preserve">
     <value>UBL Invoice</value>
-  </data>
-  <data name="BtnUBLInvoice.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;BtnUBLInvoice.Name" xml:space="preserve">
     <value>BtnUBLInvoice</value>
