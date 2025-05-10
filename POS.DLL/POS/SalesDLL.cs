@@ -663,7 +663,7 @@ namespace POS.DLL
                                 //// 
 
 
-                                if (sale_header.total_discount > 0)
+                                if (sale_header.total_discount > 0) 
                                 {
                                     /// SALES DISCOUNT JOURNAL ENTRY (DEBIT)
                                     //Int32 entry_id = Insert_Journal_entry(invoice_no, sales_discount_acc_id, net_total_discount, 0, sale_date, txt_description.Text, 0, 0, 0);
