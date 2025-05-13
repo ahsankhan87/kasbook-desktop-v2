@@ -135,6 +135,9 @@
   <data name="button1.Text" xml:space="preserve">
     <value>Test auth</value>
   </data>
+  <data name="button1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="BtnUBLInvoice.Text" xml:space="preserve">
     <value>UBL Invoice</value>
+  </data>
+  <data name="BtnUBLInvoice.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;BtnUBLInvoice.Name" xml:space="preserve">
     <value>BtnUBLInvoice</value>
@@ -472,7 +478,7 @@
     <value>False</value>
   </data>
   <data name="btn_delete.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>55</value>
   </data>
   <metadata name="sale_time.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -657,6 +663,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>All Sales </value>
   </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -668,12 +680,6 @@
   </data>
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customer_name.Name" xml:space="preserve">
     <value>customer_name</value>
