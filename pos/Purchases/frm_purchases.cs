@@ -766,6 +766,7 @@ namespace pos
             //cmb_brands.SelectedValue = 0;
             invoice_status = "";
             //btn_save.Text = "Create (F3)";
+            PrinttoolStripButton.Enabled = false;
 
             txt_brand_code.Text = "";
             txt_brands.Text = "";
@@ -996,7 +997,6 @@ namespace pos
             }
         }
 
-
         private void grid_purchases_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -1080,6 +1080,7 @@ namespace pos
                 else
                 {
                     invoice_status = "PO"; // "Update";
+                    PrinttoolStripButton.Enabled = true;
                 }
 
                 //btn_save.Text = "Save (F3)";
@@ -2173,6 +2174,26 @@ namespace pos
                     grid_purchases.Rows[e.RowIndex].ErrorText = string.Empty;
                 }
             }
+        }
+
+        private void PrinttoolStripButton_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txt_invoice_no.Text))
+            {
+                using (frm_purchase_invoice obj = new frm_purchase_invoice(Load_purchase_receipt(txt_invoice_no.Text), true))
+                {
+                    //obj.load_print(); // send print direct to printer without showing dialog
+                    obj.ShowDialog();
+                }
+            }
+        }
+        public DataTable Load_purchase_receipt(string invoice_no)
+        {
+            //bind data in data grid view  
+            PurchasesBLL purchasesBLL= new PurchasesBLL();
+            DataTable dt = purchasesBLL.PurchaseReceipt(invoice_no);
+            return dt;
+
         }
     }
 }

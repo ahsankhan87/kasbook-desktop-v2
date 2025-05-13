@@ -591,7 +591,7 @@ namespace pos
         }
 
         private void get_total_amount()
-        {
+        { 
             total_amount = 0;
 
             for (int i = 0; i <= grid_sales.Rows.Count - 1; i++)
@@ -600,15 +600,18 @@ namespace pos
             }
             double net = (total_amount + total_tax - total_discount);
             txt_total_amount.Text = Math.Round(net, 2).ToString();
+            double customerBalance = (txt_cust_balance.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_balance.Text));
+            double customer_credit_limit = (txt_cust_credit_limit.Text == "" ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
             double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
+            double netCreditLimit = customer_credit_limit - customerBalance;
+            double limitExceededBy = netAmount - netCreditLimit;
 
             ///Checking customer credit limit
             if (txt_cust_credit_limit.Text != "")
             {
-                double customer_credit_limit = (txt_cust_credit_limit.Text == "" ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
-                if (cmb_sale_type.SelectedValue.ToString() == "Credit" && netAmount > customer_credit_limit)
+                if (cmb_sale_type.SelectedValue.ToString() == "Credit" && netAmount > netCreditLimit)
                 {
-                    MessageBox.Show("Customer credit limit has exceeded " + txt_cust_credit_limit.Text, "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Sales transaction cannot be saved, because customer credit limit has exceeded by " + limitExceededBy, "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -2506,10 +2509,14 @@ namespace pos
 
                     ///Checking customer credit limit
                     double customer_credit_limit = (txt_cust_credit_limit.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
+                    double customerBalance = (txt_cust_balance.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_balance.Text));
                     double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
-                    if (sale_type == "Credit" && netAmount > customer_credit_limit)
+                    double netCreditLimit = customer_credit_limit - customerBalance;
+                    double limitExceededBy = netAmount - netCreditLimit;
+                    
+                    if (sale_type == "Credit" && netAmount > netCreditLimit)
                     {
-                        MessageBox.Show("Customer credit limit has exceeded " + txt_cust_credit_limit.Text, "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Sales transaction cannot be saved, because customer credit limit has exceeded by " + limitExceededBy.ToString(), "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     ////
