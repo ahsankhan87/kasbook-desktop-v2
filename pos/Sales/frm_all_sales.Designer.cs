@@ -43,10 +43,12 @@
             this.btn_print_invoice = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_all_sales = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,8 +60,6 @@
             this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.sale_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Zetca_qrcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_sales)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -163,6 +163,33 @@
             this.grid_all_sales.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_sales_CellDoubleClick);
             this.grid_all_sales.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_all_sales_KeyDown);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -177,20 +204,6 @@
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // customer_name
             // 
@@ -280,19 +293,6 @@
             this.Zetca_qrcode.Name = "Zetca_qrcode";
             this.Zetca_qrcode.ReadOnly = true;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
-            // 
             // frm_all_sales
             // 
             resources.ApplyResources(this, "$this");
@@ -328,6 +328,8 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnCustomerNameChange;
+        private System.Windows.Forms.Button BtnUBLInvoice;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
@@ -341,8 +343,6 @@
         private System.Windows.Forms.DataGridViewImageColumn btn_delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Zetca_qrcode;
-        private System.Windows.Forms.Button BtnUBLInvoice;
-        private System.Windows.Forms.Button button1;
     }
 }
 
