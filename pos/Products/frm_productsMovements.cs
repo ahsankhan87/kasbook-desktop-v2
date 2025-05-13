@@ -64,57 +64,64 @@ namespace pos
             {
                 grid_search_products.Rows.Clear();
 
-                //bind data in data grid view  
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_search_products.AutoGenerateColumns = false;
 
-                String keyword = "TOP 1000 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer, S.first_name AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_customers C ON C.id=I.customer_id LEFT JOIN pos_suppliers S ON S.id=I.supplier_id "+
-                    " WHERE I.item_code = '" + _product_code + "' AND I.branch_id = "+ UsersModal.logged_in_branch_id + " ORDER BY I.id DESC";
-                //grid_search_products.DataSource = objBLL.GetRecord(keyword, table);
+                string keyword = "TOP 1000 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer,S.first_name AS supplier";
+                string table = "pos_inventory I " +
+                               "LEFT JOIN pos_products P ON P.code = I.item_code " +
+                               "LEFT JOIN pos_customers C ON C.id = I.customer_id " +
+                               "LEFT JOIN pos_suppliers S ON S.id = I.supplier_id " +
+                               "WHERE I.item_code = '" + _product_code + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " " +
+                               "ORDER BY I.id ASC";
 
                 DataTable product_dt = objBLL.GetRecord(keyword, table);
+
                 if (product_dt.Rows.Count > 0)
                 {
-                    int RowIndex = 0;
-                    foreach (DataRow myProductView in product_dt.Rows)
+                    // ✅ Add balance_qty column manually to avoid error
+                    if (!product_dt.Columns.Contains("balance_qty"))
+                        product_dt.Columns.Add("balance_qty", typeof(double));
+
+                    // Calculate running balance
+                    double balance_qty = 0;
+                    foreach (DataRow row in product_dt.Rows)
                     {
-                        int id = Convert.ToInt32(myProductView["id"]);
-                        string invoice_no = myProductView["invoice_no"].ToString();
-                        string name = myProductView["product_name"].ToString();
-                        string qty = myProductView["qty"].ToString();
-                        double cost_price = Convert.ToDouble(myProductView["cost_price"]);
-                        double unit_price = Convert.ToDouble(myProductView["unit_price"]);
-                        string description = myProductView["description"].ToString();
-                        string supplier = myProductView["supplier"].ToString();
-                        string customer = myProductView["customer"].ToString();
-                        string date = myProductView["trans_date"].ToString();
-                       
-                        string[] row0 = { id.ToString(), invoice_no, name, qty,cost_price.ToString(), unit_price.ToString(),
-                                          description, supplier, customer,date};
+                        balance_qty += Convert.ToDouble(row["qty"]);
+                        row["balance_qty"] = balance_qty;
+                    }
+
+                    // Display in DESC order
+                    int RowIndex = 0;
+                    foreach (DataRow row in product_dt.Select("", "id DESC"))
+                    {
+                        int id = Convert.ToInt32(row["id"]);
+                        string invoice_no = row["invoice_no"].ToString();
+                        string name = row["product_name"].ToString();
+                        string qty = row["qty"].ToString();
+                        string balance = row["balance_qty"].ToString();
+                        double cost_price = Convert.ToDouble(row["cost_price"]);
+                        double unit_price = Convert.ToDouble(row["unit_price"]);
+                        string description = row["description"].ToString();
+                        string supplier = row["supplier"].ToString();
+                        string customer = row["customer"].ToString();
+                        string date = row["trans_date"].ToString();
+
+                        string[] row0 = { id.ToString(), invoice_no, name, qty, balance, cost_price.ToString(), unit_price.ToString(),
+                                  description, supplier, customer, date };
 
                         grid_search_products.Rows.Add(row0);
 
                         if (description == "Sale")
-                        {
                             grid_search_products.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
-                        }
-                        if(description == "Purchase")
-                        {
+                        else if (description == "Purchase")
                             grid_search_products.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
-
-                        }
-                        if (description == "Adjustment")
-                        {
+                        else if (description == "Adjustment")
                             grid_search_products.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
 
-                        }
-
-                        
                         RowIndex++;
                     }
                 }
-                   
             }
             catch (Exception ex)
             {
@@ -122,6 +129,8 @@ namespace pos
                 throw;
             }
         }
+
+
 
         private void btn_close_Click(object sender, EventArgs e)
         {
