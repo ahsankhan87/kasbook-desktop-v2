@@ -186,6 +186,7 @@ namespace pos
                             if (grid_search_products.Rows[i].Cells["code"].Value != null)
                             {
                                 info.id = int.Parse(grid_search_products.Rows[i].Cells["id"].Value.ToString());
+                                info.item_number = (string.IsNullOrEmpty(grid_search_products.Rows[i].Cells["item_number"].Value.ToString()) ? "" : grid_search_products.Rows[i].Cells["item_number"].Value.ToString());
                                 info.code = (string.IsNullOrEmpty(grid_search_products.Rows[i].Cells["code"].Value.ToString()) ? "" : grid_search_products.Rows[i].Cells["code"].Value.ToString()); 
                                 info.name = (string.IsNullOrEmpty(grid_search_products.Rows[i].Cells["name"].Value.ToString()) ? "" : grid_search_products.Rows[i].Cells["name"].Value.ToString());
                                 info.name_ar = (string.IsNullOrEmpty(grid_search_products.Rows[i].Cells["name_ar"].Value.ToString()) ? "" : grid_search_products.Rows[i].Cells["name_ar"].Value.ToString());
@@ -356,13 +357,13 @@ namespace pos
                     grid_loc_transfer.AutoGenerateColumns = false;
 
                     //String keyword = "P.id,P.code,P.name,(select sum(PS.qty) from  pos_product_stocks PS where PS.id=P.id AND PS.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "') as qty";
-                    String keyword = "P.id, P.code,P.name,P.qty,P.qty as transfer_qty";
+                    String keyword = "P.id, P.code,P.name,P.qty,P.qty as transfer_qty, P.item_number";
                     String table = "pos_products_location_view P";
                     if (cmb_from_locations.SelectedValue.ToString() != "0")
                     {
-                        table += " where P.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "'";
+                        table += " WHERE P.deleted=0 AND P.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "'";
                     }
-                    table += " Group by P.id, P.code,P.name,P.qty HAVING P.qty > 0";
+                    table += " Group by P.id, P.code,P.name,P.qty, P.item_number HAVING P.qty > 0";
                     //String table = "pos_products AS P";
                     grid_loc_transfer.DataSource = objBLL.GetRecord(keyword, table);
                 }
@@ -394,17 +395,17 @@ namespace pos
                     GeneralBLL objBLL = new GeneralBLL();
                     grid_loc_transfer.AutoGenerateColumns = false;
 
-                    String keyword = "P.id, P.code,P.name,P.qty,P.qty as transfer_qty";
+                    String keyword = "P.id, P.code,P.name,P.item_number,P.qty,P.qty as transfer_qty";
                     String table = "pos_products_location_view P";
 
                     if (by_code)
                     {
-                        table += " WHERE (P.code LIKE '%" + condition + "%' OR replace(code,'-',' ') LIKE '%" + condition + "%')";
+                        table += " WHERE P.deleted=0 AND (P.code LIKE '%" + condition + "%' OR replace(code,'-',' ') LIKE '%" + condition + "%')";
 
                     }
                     else if (by_name)
                     {
-                        table += " WHERE P.name LIKE '%" + condition + "%'";
+                        table += " WHERE P.deleted=0 AND P.name LIKE '%" + condition + "%'";
 
                     }
                     if(cmb_from_locations.SelectedValue.ToString() != "0")
@@ -448,18 +449,21 @@ namespace pos
                         {
                             if (grid_loc_transfer.Rows[i].Cells["product_id"].Value != null && grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value != "")
                             {
+                                if (double.Parse(grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString()) > 0)
+                                {
 
-                                info.invoice_no = txt_ref_no.Text;
-                                info.id = int.Parse(grid_loc_transfer.Rows[i].Cells["product_id"].Value.ToString());
-                                info.code = grid_loc_transfer.Rows[i].Cells["product_code"].Value.ToString();
-                                info.qty = (grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString() != "" ? double.Parse(grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString()) : 0);
-                                info.location_code = cmb_to_locations.SelectedValue.ToString();
-                                info.from_location_code = cmb_from_locations.SelectedValue.ToString();
-                                info.description = "Product Location Transfer";
+                                    info.invoice_no = txt_ref_no.Text;
+                                    info.id = int.Parse(grid_loc_transfer.Rows[i].Cells["product_id"].Value.ToString());
+                                    info.item_number = grid_loc_transfer.Rows[i].Cells["loc_transfer_item_number"].Value.ToString();
+                                    info.code = grid_loc_transfer.Rows[i].Cells["product_code"].Value.ToString();
+                                    info.qty = (grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString() != "" ? double.Parse(grid_loc_transfer.Rows[i].Cells["transfer_qty"].Value.ToString()) : 0);
+                                    info.location_code = cmb_to_locations.SelectedValue.ToString();
+                                    info.from_location_code = cmb_from_locations.SelectedValue.ToString();
+                                    info.description = "Product Location Transfer";
 
-                                qresult = Convert.ToInt32(productBLLObj.UpdateProductLocationTransfer(info));
+                                    qresult = Convert.ToInt32(productBLLObj.UpdateProductLocationTransfer(info));
 
-
+                                }
                             }
 
                         }
@@ -771,8 +775,8 @@ namespace pos
                         grid_search_products.AutoGenerateColumns = false;
 
                         //String keyword = "P.id,P.code,P.name,(select sum(PS.qty) from  pos_product_stocks PS where PS.id=P.id AND PS.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "') as qty";
-                        String keyword = "P.id, P.code,P.name,P.name_ar,COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id="+ UsersModal.logged_in_branch_id + "),0) as qty,P.qty as transfer_qty,P.avg_cost,P.cost_price,P.unit_price,P.location_code,P.description,P.item_type ";
-                        String table = "pos_products P where P.location_code = '" + cmb_edit_pro_loc.SelectedValue.ToString() + "' ";
+                        String keyword = "P.id,P.item_number, P.code,P.name,P.name_ar,COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=" + UsersModal.logged_in_branch_id + "),0) as qty,P.qty as transfer_qty,P.avg_cost,P.cost_price,P.unit_price,P.location_code,P.description,P.item_type ";
+                        String table = "pos_products P WHERE P.deleted=0 AND P.location_code = '" + cmb_edit_pro_loc.SelectedValue.ToString() + "' ";
                         //String table = "pos_products AS P";
                         products_dt = objBLL.GetRecord(keyword, table);
                         grid_search_products.DataSource = products_dt;
@@ -830,12 +834,14 @@ namespace pos
                         string qty = Math.Round(Convert.ToDecimal(myProductView["quantity"]),2).ToString();
                         string cost_price = Math.Round(Convert.ToDecimal(myProductView["cost_price"]),2).ToString();
                         string unit_price = Math.Round(Convert.ToDecimal(myProductView["unit_price"]), 2).ToString();
-                        string description = "";
+                        string description = myProductView["description"].ToString();
                         string location_code = myProductView["location_code"].ToString();
                         string category = myProductView["category"].ToString();
                         string item_type = "";
+                        string item_number = myProductView["item_number"].ToString();
 
-                        string[] row0 = { id, code, name, name_ar, qty, cost_price, unit_price, description, location_code,category, item_type };
+
+                        string[] row0 = { id, code, name, name_ar, qty, cost_price, unit_price, description, location_code,category, item_type, item_number };
 
                         grid_search_products.Rows.Add(row0);
                         

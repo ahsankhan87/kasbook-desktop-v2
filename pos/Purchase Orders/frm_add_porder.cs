@@ -16,7 +16,7 @@ namespace pos
     {
         private frm_sales main_sale_frm;
 
-        public string _product_code;
+        public string _item_number;
         public string _product_name;
         public int _product_id;
         public string _category_code;
@@ -27,11 +27,11 @@ namespace pos
         Purchases_orderModal Purchases_orderModal_obj = new Purchases_orderModal();
         Purchases_orderBLL purchases_orderObj = new Purchases_orderBLL();
 
-        public frm_add_porder(frm_sales main_sale_frm, int product_id, string product_code, string product_name, string category_code, double cost_price, double unit_price)
+        public frm_add_porder(frm_sales main_sale_frm, int product_id, string item_number, string product_name, string category_code, double cost_price, double unit_price)
         {
             this.main_sale_frm = main_sale_frm;
             _product_id = product_id;
-            _product_code = product_code;
+            _item_number = item_number;
             _product_name = product_name;
             _category_code = category_code;
             _cost_price= cost_price;
@@ -51,7 +51,7 @@ namespace pos
             txt_order_qty.Focus();
             txt_product_id.Text = _product_id.ToString();
             txt_product_name.Text = _product_name.ToString();
-            txt_product_code.Text = _product_code.ToString();
+            txt_product_code.Text = _item_number.ToString();
 
             GetMAXInvoiceNo();
 
@@ -102,7 +102,7 @@ namespace pos
                     }
 
                     PurchaseOrderDetailModal_obj.purchase_id = purchase_id;
-                    PurchaseOrderDetailModal_obj.code = _product_code;
+                    PurchaseOrderDetailModal_obj.code = _item_number;
                     //Purchases_orderModal_obj.name = grid_purchases_order.Rows[i].Cells["name"].Value.ToString();
                     PurchaseOrderDetailModal_obj.quantity = double.Parse(txt_order_qty.Value.ToString());
                     PurchaseOrderDetailModal_obj.cost_price = _cost_price;

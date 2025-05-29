@@ -11,6 +11,7 @@ namespace POS.Core
         public DateTime transfer_date { get; set; }
         public DateTime release_date { get; set; }
 
+        public int id{ get; set; }
         public int destination_branch_id{ get; set; }
         public int source_branch_id { get; set; }
         public double quantity { get; set; }
@@ -18,7 +19,7 @@ namespace POS.Core
         public double requested_qty { get; set; }
         public bool status { get; set; }
         public string item_code { get; set; }
-
+        public string item_number { get; set; }
 
 
     }

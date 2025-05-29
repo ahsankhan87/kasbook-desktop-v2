@@ -76,7 +76,6 @@
             this.taxesVATToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loosePurchaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allPurchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
@@ -122,7 +121,6 @@
             this.accountReceivableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountPayableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testRadisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.humanResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -474,7 +472,6 @@
             // 
             this.pOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTransactionToolStripMenuItem,
-            this.loosePurchaseToolStripMenuItem,
             this.purchaseReturnToolStripMenuItem,
             this.allPurchasesToolStripMenuItem,
             this.toolStripSeparator12,
@@ -488,11 +485,6 @@
             this.newTransactionToolStripMenuItem.Name = "newTransactionToolStripMenuItem";
             resources.ApplyResources(this.newTransactionToolStripMenuItem, "newTransactionToolStripMenuItem");
             this.newTransactionToolStripMenuItem.Click += new System.EventHandler(this.newTransactionToolStripMenuItem_Click);
-            // 
-            // loosePurchaseToolStripMenuItem
-            // 
-            this.loosePurchaseToolStripMenuItem.Name = "loosePurchaseToolStripMenuItem";
-            resources.ApplyResources(this.loosePurchaseToolStripMenuItem, "loosePurchaseToolStripMenuItem");
             // 
             // purchaseReturnToolStripMenuItem
             // 
@@ -792,15 +784,8 @@
             // 
             // purchasesToolStripMenuItem
             // 
-            this.purchasesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testRadisToolStripMenuItem});
             this.purchasesToolStripMenuItem.Name = "purchasesToolStripMenuItem";
             resources.ApplyResources(this.purchasesToolStripMenuItem, "purchasesToolStripMenuItem");
-            // 
-            // testRadisToolStripMenuItem
-            // 
-            this.testRadisToolStripMenuItem.Name = "testRadisToolStripMenuItem";
-            resources.ApplyResources(this.testRadisToolStripMenuItem, "testRadisToolStripMenuItem");
             // 
             // humanResourceToolStripMenuItem
             // 
@@ -1105,7 +1090,6 @@
         private System.Windows.Forms.ToolStripMenuItem allQuotationsEstimatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taxesVATToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem loosePurchaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_purchasesV1;
         private System.Windows.Forms.ToolStripMenuItem shortcutsKeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iCTToolStripMenuItem;
@@ -1114,7 +1098,6 @@
         private System.Windows.Forms.ToolStripMenuItem iCTReleaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem branchSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem banksToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem testRadisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowsMenu;
         private System.Windows.Forms.ToolStripMenuItem CascadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TileVerticalToolStripMenuItem;

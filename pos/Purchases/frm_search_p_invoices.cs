@@ -140,43 +140,16 @@ namespace pos
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if(grid_sales_report.RowCount > 0)
-                {
-                    var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-                    PurchasesBLL PurchasesObj = new PurchasesBLL();
-                    DataTable _dt = new DataTable();
+                LoadPurchaseByInvoiceNo(); 
+                this.Close();
 
-                    if (chk_hold_purchases.Checked)
-                    {
-                        _dt = PurchasesObj.GetAll_Hold_PurchaseByInvoice(invoice_no);
-                    }
-                    else
-                    {
-                        _dt = PurchasesObj.GetAllPurchaseByInvoice(invoice_no);
-                    }
-                    mainForm.Load_products_to_grid_by_invoiceno(_dt, invoice_no);
-                    this.Close();
-                }
-                
             }
             
         }
 
         private void grid_sales_report_DoubleClick(object sender, EventArgs e)
         {
-            var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-            PurchasesBLL PurchasesObj = new PurchasesBLL();
-            DataTable _dt = new DataTable();
-
-            if (chk_hold_purchases.Checked)
-            {
-                _dt = PurchasesObj.GetAll_Hold_PurchaseByInvoice(invoice_no);
-            }
-            else
-            {
-                _dt = PurchasesObj.GetAllPurchaseByInvoice(invoice_no);
-            }
-            mainForm.Load_products_to_grid_by_invoiceno(_dt, invoice_no);
+            LoadPurchaseByInvoiceNo();
             this.Close();
         }
 
@@ -192,24 +165,36 @@ namespace pos
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if(grid_sales_report.Rows.Count > 0)
+            LoadPurchaseByInvoiceNo();
+            this.Close();
+        }
+        private void LoadPurchaseByInvoiceNo()
+        {
+            try
             {
-                var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-                PurchasesBLL PurchasesObj = new PurchasesBLL();
-                DataTable _dt = new DataTable();
+                if (grid_sales_report.Rows.Count > 0)
+                {
+                    var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
+                    PurchasesBLL PurchasesObj = new PurchasesBLL();
+                    DataTable _dt = new DataTable();
 
-                if (chk_hold_purchases.Checked)
-                {
-                    _dt = PurchasesObj.GetAll_Hold_PurchaseByInvoice(invoice_no);
+                    if (chk_hold_purchases.Checked)
+                    {
+                        _dt = PurchasesObj.GetAll_Hold_PurchaseByInvoice(invoice_no);
+                    }
+                    else
+                    {
+                        _dt = PurchasesObj.GetAllPurchaseByInvoice(invoice_no);
+                    }
+                    mainForm.Load_products_to_grid_by_invoiceno(_dt, invoice_no);
+                    
                 }
-                else
-                {
-                    _dt = PurchasesObj.GetAllPurchaseByInvoice(invoice_no);
-                }
-                mainForm.Load_products_to_grid_by_invoiceno(_dt, invoice_no);
-                this.Close();
             }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)

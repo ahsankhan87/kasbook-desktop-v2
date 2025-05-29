@@ -128,14 +128,20 @@ namespace pos
         {
             if (e.KeyCode == Keys.Enter)
             {
-                var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-                SalesBLL salesObj = new SalesBLL();
-                DataTable _dt = new DataTable();
+                if (grid_sales_report.Rows.Count > 0)
+                {
+                    if (string.IsNullOrEmpty(grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString()))
+                    {
+                        var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
+                        SalesBLL salesObj = new SalesBLL();
+                        DataTable _dt = new DataTable();
 
-                _dt = salesObj.GetSaleAndSalesItems(invoice_no);
-                load_sales_grid_products(_dt, invoice_no);
+                        _dt = salesObj.GetSaleAndSalesItems(invoice_no);
+                        load_sales_grid_products(_dt, invoice_no);
+                        this.Close();
+                    }
+                }
                 
-                this.Close();
             }
             
         }

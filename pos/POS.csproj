@@ -1937,6 +1937,7 @@
     <None Include="Resources\edit.png" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\shortcuts.png" />
+    <None Include="Suppliers\Supplier Ledger Report\SupplierLedger.rpt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

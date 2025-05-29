@@ -124,12 +124,12 @@
             // Listbox_method
             // 
             this.Listbox_method.FormattingEnabled = true;
+            resources.ApplyResources(this.Listbox_method, "Listbox_method");
             this.Listbox_method.Items.AddRange(new object[] {
             resources.GetString("Listbox_method.Items"),
             resources.GetString("Listbox_method.Items1"),
             resources.GetString("Listbox_method.Items2"),
             resources.GetString("Listbox_method.Items3")});
-            resources.ApplyResources(this.Listbox_method, "Listbox_method");
             this.Listbox_method.Name = "Listbox_method";
             // 
             // button3
@@ -197,6 +197,7 @@
             // 
             // copyContextMenuStrip
             // 
+            this.copyContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.copyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
             this.copyContextMenuStrip.Name = "copyContextMenuStrip";
@@ -243,7 +244,7 @@
             // 
             // total_amount
             // 
-            this.total_amount.DataPropertyName = "total_amount";
+            this.total_amount.DataPropertyName = "total";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle1.Format = "N2";
             dataGridViewCellStyle1.NullValue = null;
@@ -295,11 +296,11 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip copyContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
-        private System.Windows.Forms.ContextMenuStrip copyContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
     }

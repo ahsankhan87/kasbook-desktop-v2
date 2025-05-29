@@ -18,7 +18,6 @@ namespace POS.Core
         public string description { get; set; }
 
 
-
         public int supplier_id { get; set; }
 
         public string invoice_no { get; set; }
@@ -51,6 +50,7 @@ namespace POS.Core
         public int item_id { get; set; }
 
         public int purchase_id { get; set; }
+        public string item_number { get; set; }
 
         public double quantity { get; set; }
         public int supplier_id { get; set; }

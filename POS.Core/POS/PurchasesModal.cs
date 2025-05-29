@@ -79,6 +79,8 @@ namespace POS.Core
 
         public string code { get; set; }
 
+        public string item_number { get; set; }
+
         public string name { get; set; }
 
         public string item_type { get; set; }

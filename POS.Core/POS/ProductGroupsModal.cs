@@ -15,6 +15,8 @@ namespace POS.Core
         public int alt_no { get; set; }
 
         public string group_code { get; set; }
+        public string item_number { get; set; }
+
         public string code { get; set; }
 
         public string name { get; set; }

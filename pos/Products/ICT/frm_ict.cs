@@ -84,6 +84,7 @@ namespace pos.Products.ICT
 
                                     quantity = qty,
                                     item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
+                                    item_number = grid_ict.Rows[i].Cells["item_number"].Value.ToString(),
                                     destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
                                     source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
                                     //status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),
@@ -166,6 +167,7 @@ namespace pos.Products.ICT
 
                                     quantity = qty,
                                     item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
+                                    item_number = grid_ict.Rows[i].Cells["item_number"].Value.ToString(),
                                     destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
                                     source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
                                     //status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),

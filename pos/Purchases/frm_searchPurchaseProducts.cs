@@ -59,17 +59,18 @@ namespace pos
             {
                 string product_id = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
                 string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
+                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
 
 
                 if (_isGrid)
                 {
                     if(purchase_orderForm == null)
                     {
-                        mainForm.Load_products_to_grid(product_id, _grid_row_index);
+                        mainForm.Load_products_to_grid(item_number, _grid_row_index);
                     }
                     else
                     {
-                        purchase_orderForm.Load_products_to_grid(code, _grid_row_index);
+                        purchase_orderForm.Load_products_to_grid(item_number, _grid_row_index);
                         _returnStatus = true;
                     }
                     
@@ -78,11 +79,11 @@ namespace pos
                 {
                     if (purchase_orderForm == null)
                     {
-                        mainForm.load_products(code);
+                        mainForm.load_products(item_number);
                     }
                     else
                     {
-                        purchase_orderForm.load_products(code);
+                        purchase_orderForm.load_products(item_number);
                     }
                    
                 }

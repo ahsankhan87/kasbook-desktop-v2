@@ -29,7 +29,7 @@ namespace POS.DLL
                         cn.Open();
                         cmd = new SqlCommand();
 
-                        String query = "SELECT S.purchase_date,S.invoice_no,S.total_amount,S.total_tax, (S.total_amount+S.total_tax) as total, S.description,S.supplier_invoice_no," +
+                        String query = "SELECT S.purchase_date,S.invoice_no,S.total_amount,S.total_tax,S.discount_value, (S.total_amount+S.total_tax-discount_value) as total, S.description,S.supplier_invoice_no," +
                             //" SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.discount_value," +
                             //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             //" SI.tax_rate," +
@@ -72,8 +72,8 @@ namespace POS.DLL
 
                         if (total_amount != 0)
                         {
-                            query += " AND S.total_amount = @amount";
-                            cmd.Parameters.AddWithValue("@amount", total_amount);
+                            query += " AND (S.total_amount+S.total_tax-discount_value) LIKE @amount";
+                            cmd.Parameters.AddWithValue("@amount", string.Format("{0}%", total_amount));
 
                         }
                         query += " ORDER BY S.id DESC";
@@ -108,11 +108,11 @@ namespace POS.DLL
                             " ((SI.cost_price*SI.quantity-SI.discount_value)+((SI.cost_price*SI.quantity-SI.discount_value)*SI.tax_rate/100)) AS total," +
                             " SI.tax_rate," +
                             " ((SI.cost_price*SI.quantity-SI.discount_value)*SI.tax_rate/100) AS vat," +
-                            " P.name AS product_name,SI.loc_code," +
+                            " P.name AS product_name,SI.loc_code,SI.item_number," +
                             " C.first_name AS supplier_name" +
                             " FROM pos_purchases S" +
                             " LEFT JOIN pos_purchases_items SI ON S.id=SI.purchase_id" +
-                            " LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_suppliers C ON C.id=S.supplier_id" +
                             " WHERE S.branch_id=@branch_id AND S.purchase_date BETWEEN @from_date AND @to_date";
 
@@ -185,7 +185,7 @@ namespace POS.DLL
                         cn.Open();
                         cmd = new SqlCommand();
 
-                        String query = "SELECT S.purchase_date,S.invoice_no,S.total_amount,S.total_tax, (S.total_amount+S.total_tax) as total, S.description,S.supplier_invoice_no," +
+                        String query = "SELECT S.purchase_date,S.invoice_no,S.total_amount,S.total_tax,discount_value, (S.total_amount+S.total_tax-discount_value) as total, S.description,S.supplier_invoice_no," +
                             //" SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.discount_value," +
                             //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             //" SI.tax_rate," +
@@ -228,8 +228,8 @@ namespace POS.DLL
 
                         if (total_amount != 0)
                         {
-                            query += " AND (S.total_amount+S.total_tax) = @amount";
-                            cmd.Parameters.AddWithValue("@amount", total_amount);
+                            query += " AND (S.total_amount+S.total_tax-discount_value) LIKE @amount";
+                            cmd.Parameters.AddWithValue("@amount", string.Format("{0}%", total_amount));
 
                         }
                         query += " ORDER BY S.id DESC";

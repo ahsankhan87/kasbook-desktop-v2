@@ -32,12 +32,12 @@ namespace POS.DLL
                         string category = "cat";
 
                         String query = "SELECT P.code,P.name,"+
-                            " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                            " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                             " P.avg_cost as cost_price,P.unit_price,P.brand_code,P.item_type,P.location_code," +
                             " C.name AS category_name," +
                             " U.name AS unit," +
                             " B.name AS brand," +
-                            " (COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0)*avg_cost) AS total_cost" +
+                            " (COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0)*avg_cost) AS total_cost" +
                             " FROM pos_products P" +
                             " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                             " LEFT JOIN pos_categories C ON C.code=P.category_code" +
@@ -124,7 +124,7 @@ namespace POS.DLL
                         }
                         if (qty_onhand)
                         {
-                            query += " AND COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) > 0";
+                            query += " AND COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) > 0";
                         }
 
 
@@ -164,9 +164,9 @@ namespace POS.DLL
                         string location = "loc";
                         string category = "cat";
 
-                        String query = "SELECT COALESCE((select TOP 1 s.qty from pos_product_stocks s where s.item_code = P.code and s.branch_id = @branch_id),0) as qty," + //branch wise qty" +
+                        String query = "SELECT COALESCE((select TOP 1 s.qty from pos_product_stocks s where s.item_number = P.item_number and s.branch_id = @branch_id),0) as qty," + //branch wise qty" +
                             " SUM(P.avg_cost) AS cost_price,SUM(P.unit_price) as unit_price," +
-                            " SUM(COALESCE((select s.qty from pos_product_stocks s where s.item_code = P.code and s.branch_id = @branch_id),0)*P.avg_cost) as total_cost" +
+                            " SUM(COALESCE((select s.qty from pos_product_stocks s where s.item_number = P.item_number and s.branch_id = @branch_id),0)*P.avg_cost) as total_cost" +
                             " FROM pos_products P" +
                             " WHERE ("; // 4 empty spaces is needed, it further remove in below code
 
@@ -250,7 +250,7 @@ namespace POS.DLL
                         }
                         if (qty_onhand)
                         {
-                            query += " AND COALESCE((select TOP 1 s.qty from pos_product_stocks s where s.item_code = P.code and s.branch_id = @branch_id),0) 0";
+                            query += " AND COALESCE((select TOP 1 s.qty from pos_product_stocks s where s.item_number = P.item_number and s.branch_id = @branch_id),0) 0";
                         }
 
 

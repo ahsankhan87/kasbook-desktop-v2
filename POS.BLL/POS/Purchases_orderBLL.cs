@@ -39,11 +39,11 @@ namespace POS.BLL
             }
         }
 
-        public double GetPOrder_qty(string item_code)
+        public double GetPOrder_qty(string item_number)
         {
             try
             {
-                return objDLL.GetPOrder_qty(item_code);
+                return objDLL.GetPOrder_qty(item_number);
             }
             catch
             {

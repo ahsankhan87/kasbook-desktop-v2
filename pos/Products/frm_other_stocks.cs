@@ -13,14 +13,14 @@ namespace pos
 {
     public partial class frm_other_stocks : Form
     {
-        public string _product_code;
+        public string _item_number;
         public string _product_id;
         public string _product_name;
 
-        public frm_other_stocks(string product_id, string product_code, string product_name)
+        public frm_other_stocks(string product_id, string item_number, string product_name)
         {
             _product_id = product_id;
-            _product_code = product_code;
+            _item_number = item_number;
             _product_name = product_name;
             InitializeComponent();
         }
@@ -32,20 +32,20 @@ namespace pos
 
         private void frm_other_stocks_Load(object sender, EventArgs e)
         {
-            if (_product_code.Length != 0)
+            if (_item_number.Length != 0)
             {
-                load_product_detail(_product_id,_product_code, _product_name);
+                load_product_detail(_product_id, _item_number, _product_name);
             }
         }
 
-        public void load_product_detail(string product_id, string product_code, string product_name)
+        public void load_product_detail(string product_id, string item_number, string product_name)
         {
             ProductBLL objBLL = new ProductBLL();
             
-            DataTable dt = objBLL.Get_otherStock(product_id,product_code);
+            DataTable dt = objBLL.Get_otherStock(product_id, item_number);
             foreach (DataRow myProductView in dt.Rows)
             {
-                lbl_product_name.Text = product_code+" "+ product_name;
+                lbl_product_name.Text = myProductView["item_code"].ToString() + " "+ product_name;
                 string compnay_name = myProductView["branch_name"].ToString();
                 string qty = myProductView["qty"].ToString();
 

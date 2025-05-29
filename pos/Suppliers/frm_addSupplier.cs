@@ -243,7 +243,7 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_supplier_transactions.AutoGenerateColumns = false;
 
-                String keyword = "id,invoice_no,debit,credit,(debit-credit) AS balance,description,entry_date,account_id,account_name";
+                String keyword = "id,invoice_no,debit,credit,(credit-debit) AS balance,description,entry_date,account_id,account_name";
                 String table = "pos_suppliers_payments WHERE supplier_id = " + supplier_id + "";
 
                 DataTable dt = new DataTable();
@@ -263,7 +263,7 @@ namespace pos
                 newRow[8] = "Total";
                 newRow[2] = _dr_total;
                 newRow[3] = _cr_total;
-                newRow[4] = (_dr_total - _cr_total);
+                newRow[4] = (_cr_total - _dr_total);
                 dt.Rows.InsertAt(newRow, dt.Rows.Count);
 
                 grid_supplier_transactions.DataSource = dt;

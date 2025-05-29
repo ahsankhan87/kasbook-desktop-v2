@@ -68,7 +68,7 @@ namespace pos.Products.ICT
                     {
                         if (grid_ict.Rows[i].Cells["chk"].Value != null)
                         {
-                            if (Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value))
+                            if (Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value) && Convert.ToDouble(grid_ict.Rows[i].Cells["released_qty"].Value.ToString()) > 0)
                             {
                                 double qty = 0;
                                 if (grid_ict.Rows[i].Cells["qty"].Value != null)
@@ -78,29 +78,42 @@ namespace pos.Products.ICT
                                         qty = double.Parse(grid_ict.Rows[i].Cells["qty"].Value.ToString());
                                     }
                                 }
-                                ///// Added sales detail in to List
-                                ict_list.Add(new ICTModal
+                                if(qty > 0)// transfer qty should be greater than zero
                                 {
-                                    quantity = qty,
-                                    item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
-                                    destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
-                                    source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
-                                    status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),
-                                    transfer_date = DateTime.Now,
-                                });
-                                //////////////
+                                    ///// Added sales detail in to List
+                                    ict_list.Add(new ICTModal
+                                    {
+                                        id = int.Parse(grid_ict.Rows[i].Cells["id"].Value.ToString()),
+                                        quantity = qty,
+                                        item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
+                                        item_number = grid_ict.Rows[i].Cells["item_number"].Value.ToString(),
+                                        destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
+                                        source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
+                                        status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),
+                                        transfer_date = DateTime.Now,
+                                    });
+                                    //////////////
+                                }
+
                             }
                         }
 
                     }
-
-                    int sale_id = objSalesBLL.save_ict_transfer_qty(ict_list);
-
-                    if (sale_id > 0)
+                    if(ict_list.Count> 0)
                     {
-                        MessageBox.Show("ICT quantity transferred successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        load_all_ict_grid();
+                        int sale_id = objSalesBLL.save_ict_transfer_qty(ict_list);
+
+                        if (sale_id > 0)
+                        {
+                            MessageBox.Show("ICT quantity transferred successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            load_all_ict_grid();
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("Transaction not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
 
 
@@ -169,6 +182,7 @@ namespace pos.Products.ICT
 
                                     quantity = qty,
                                     item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
+                                    item_number = grid_ict.Rows[i].Cells["item_number"].Value.ToString(),
                                     destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
                                     source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
                                     //status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),

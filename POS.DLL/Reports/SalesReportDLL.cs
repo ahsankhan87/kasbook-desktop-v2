@@ -21,7 +21,7 @@ namespace POS.DLL
             double total_amount= 0, int branch_id = 0)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            {
+            { 
                 try
                 {
                     if (cn.State == ConnectionState.Closed) 
@@ -29,7 +29,7 @@ namespace POS.DLL
                         cn.Open();
                         cmd = new SqlCommand();
 
-                        String query = "SELECT S.sale_date,S.invoice_no,S.total_amount,S.description," +
+                        String query = "SELECT S.sale_date,S.invoice_no,(S.total_amount+S.total_tax-discount_value) as total,S.description," +
                             //" SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.discount_value," +
                             //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             //" SI.tax_rate," +
@@ -65,8 +65,8 @@ namespace POS.DLL
                          
                         if (total_amount != 0)
                         {
-                            query += " AND S.total_amount = @amount";
-                            cmd.Parameters.AddWithValue("@amount", total_amount);
+                            query += " AND (S.total_amount+S.total_tax-discount_value) LIKE @amount";
+                            cmd.Parameters.AddWithValue("@amount", string.Format("{0}%", total_amount));
 
                         }
 
@@ -104,11 +104,11 @@ namespace POS.DLL
                             //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             " SI.tax_rate," +
                             " IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100)) AS vat," +
-                            " SI.item_name AS product_name,SI.loc_code," +
+                            " SI.item_name AS product_name,SI.loc_code,SI.item_number," +
                             " C.first_name AS customer_name" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
-                            //" LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE S.branch_id = @branch_id AND S.sale_date BETWEEN @from_date AND @to_date";
                             
@@ -284,7 +284,7 @@ namespace POS.DLL
                             //" C.first_name AS customer_name" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.invoice_no=SI.invoice_no" +
-                            //" LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             //" LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE S.branch_id = @branch_id AND S.sale_date BETWEEN @from_date AND @to_date";
 
@@ -373,7 +373,7 @@ namespace POS.DLL
                             //" C.first_name AS customer_name" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
-                            " LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                             " WHERE S.branch_id = @branch_id AND S.sale_date BETWEEN @from_date AND @to_date";
 

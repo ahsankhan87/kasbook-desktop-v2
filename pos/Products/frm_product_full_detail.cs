@@ -29,19 +29,23 @@ namespace pos
         private DataGridView categoriesDataGridView = new DataGridView();
         private DataGridView groupsDataGridView = new DataGridView();
 
-        public string _product_code="";
+        public string _item_number = "";
         public string _keyword;
         public string _status;
         public string picture_name = "";
-
-        public frm_product_full_detail(frm_sales salesForm = null,frm_purchases PurchaseForm = null,string product_code = "",frm_searchSaleProducts searchsalesForm = null, frm_searchPurchaseProducts searchPurchaseForm = null, string keyword = "")
+        private bool _loadMovementHistory;
+            
+        public frm_product_full_detail(frm_sales salesForm = null,frm_purchases PurchaseForm = null,string item_number = "",
+            frm_searchSaleProducts searchsalesForm = null, frm_searchPurchaseProducts searchPurchaseForm = null, string keyword = "",
+            bool loadMovementHistory = false)
         {
             this.salesForm = salesForm;
             this.PurchaseForm = PurchaseForm;
 
-            _product_code = product_code;
+            _item_number = item_number;
             _keyword = keyword;
             this.searchsalesForm = searchsalesForm;
+            _loadMovementHistory = loadMovementHistory;
             InitializeComponent();
         }
 
@@ -53,11 +57,11 @@ namespace pos
         
         public void frm_product_full_detail_Load(object sender, EventArgs e)
         {
-            txt_item_number.Focus();
-            this.ActiveControl = txt_item_number;
+            txt_part_number.Focus();
+            this.ActiveControl = txt_part_number;
             cmb_item_type.SelectedIndex = 0;
             cmb_tax.SelectedIndex = 1;
-
+            
             get_taxes_dropdownlist();
             get_suppliers_dropdownlist();
             //get_brands_dropdownlist();
@@ -69,20 +73,26 @@ namespace pos
 
             if (_keyword != "")
             {
-                txt_item_number.Text = _keyword;
-                txt_item_number.Focus();
+                txt_part_number.Text = _keyword;
+                txt_part_number.Focus();
             }
 
-            if (_product_code != "")
+            if (_item_number != "")
             {
-                load_product_detail(_product_code);
+                load_product_detail(_item_number);
+                
             }
-    
+            //when this is true it will focus on history tab
+            if (_loadMovementHistory)
+            {
+                Products_tab.SelectedTab = tabPage3; // Switch to history tab
+                
+            }
         }
 
-        public void load_product_detail(string product_code)
+        public void load_product_detail(string item_number)
         {
-            DataTable dt = objBLL.GetAllByProductCode(product_code);
+            DataTable dt = objBLL.GetAllByProductByItemNumber(item_number);
             foreach (DataRow myProductView in dt.Rows)
             {
                 txt_id.Text = myProductView["id"].ToString();
@@ -90,8 +100,9 @@ namespace pos
                 txt_name_ar.Text = myProductView["name_ar"].ToString();
                 txt_barcode.Text = myProductView["barcode"].ToString();
                 txt_code.Text = myProductView["code"].ToString();
-                txt_item_number.Text = myProductView["item_number"].ToString();
-                txt_item_number.ReadOnly = true;
+                txt_part_number.Text = myProductView["part_number"].ToString();
+                txtItemNumber.Text = myProductView["item_number"].ToString();
+                //txt_item_number.ReadOnly = true;
                 txt_alt_item_number.Text = myProductView["item_number_2"].ToString();
                 cmb_item_type.Text = myProductView["item_type"].ToString();
                 txt_cost_price.Text = Math.Round(Convert.ToDecimal(myProductView["avg_cost"]), 4).ToString();
@@ -140,8 +151,8 @@ namespace pos
 
                 }
 
-                load_product_movements(product_code);
-                load_product_location_qty(product_code);
+                Load_product_movements_with_balance_qty(item_number);
+                //load_product_location_qty(item_number);
             }
             lbl_product_name.Visible = true;
             lbl_product_name.Text = txt_code.Text+' '+txt_name.Text;
@@ -211,7 +222,8 @@ namespace pos
         {
             try
             {
-                if (objBLL.IsProductExist(txt_item_number.Text, txt_category_code.Text))
+                
+                if (objBLL.IsProductExist(txt_part_number.Text, txt_category_code.Text))
                 {
                     MessageBox.Show("Product already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -225,7 +237,7 @@ namespace pos
                 FileStream fs;
                 BinaryReader br;
 
-                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_item_number.Text != string.Empty)
+                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_part_number.Text != string.Empty)
                 {
                     ProductModal info = new ProductModal();
 
@@ -244,9 +256,13 @@ namespace pos
 
                     }
 
+                    //Unique item number / id 
+                    string maxItemNumber = objBLL.GetMaxProductNumber();
+
                     info.barcode = txt_barcode.Text;
                     info.code = txt_code.Text;
-                    info.item_number = txt_item_number.Text;
+                    info.part_number = txt_part_number.Text;
+                    info.item_number = maxItemNumber;
                     info.alt_item_number = txt_alt_item_number.Text;
                     //info.origin = (cmb_origin.SelectedValue != null ? cmb_origin.SelectedValue.ToString() : "" );
                     info.group_code = txt_group_code.Text;
@@ -278,7 +294,7 @@ namespace pos
 
                         MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         clear_all();
-                        txt_item_number.Focus();
+                        txt_part_number.Focus();
                     }
                     else
                     {
@@ -487,7 +503,7 @@ namespace pos
         private void generate_item_code()
         {
             string brand_code = txt_brand_code.Text;
-            string item_number = txt_item_number.Text;
+            string item_number = txt_part_number.Text;
 
             txt_code.Text = brand_code +item_number;
         }
@@ -535,7 +551,7 @@ namespace pos
                 FileStream fs;
                 BinaryReader br;
 
-                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_item_number.Text != string.Empty)
+                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_part_number.Text != string.Empty)
                 {
                     ProductModal info = new ProductModal();
 
@@ -556,7 +572,7 @@ namespace pos
 
                     info.barcode = txt_barcode.Text;
                     info.code = txt_code.Text;
-                    info.item_number = txt_item_number.Text;
+                    info.part_number = txt_part_number.Text;
                     info.alt_item_number = txt_alt_item_number.Text;
                     //info.origin = (cmb_origin.SelectedValue != null ? cmb_origin.SelectedValue.ToString() : "" );
 
@@ -607,7 +623,7 @@ namespace pos
                     {
                         MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         clear_all();
-                        txt_item_number.Focus();
+                        txt_part_number.Focus();
                     }
                     else
                     {
@@ -625,14 +641,14 @@ namespace pos
         private void btn_blank_Click(object sender, EventArgs e)
         {
             clear_all();
-            txt_item_number.Focus();
+            txt_part_number.Focus();
         }
         private void clear_all()
         {
             txt_barcode.Text = "";
             txt_code.Text = "";
-            txt_item_number.Text = "";
-            txt_item_number.ReadOnly = false;
+            txt_part_number.Text = "";
+            txt_part_number.ReadOnly = false;
             txt_alt_item_number.Text = "";
             txt_packet_qty.Text = "";
 
@@ -670,7 +686,7 @@ namespace pos
             
         }
 
-        private void load_product_movements(string product_code)
+        private void load_product_movements(string item_number)
         {
             try
             {
@@ -680,9 +696,9 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_movements.AutoGenerateColumns = false;
 
-                String keyword = "TOP 1000 I.id,I.item_code,I.qty,I.unit_price,I.cost_price,I.loc_code,I.invoice_no,I.description,trans_date,C.first_name AS customer, S.first_name AS supplier";
+                String keyword = "TOP 1000 I.id,I.item_code,I.item_number,I.qty,I.unit_price,I.cost_price,I.loc_code,I.invoice_no,I.description,trans_date,C.first_name AS customer, S.first_name AS supplier";
                 String table = "pos_inventory I LEFT JOIN pos_customers C ON C.id=I.customer_id LEFT JOIN pos_suppliers S ON S.id=I.supplier_id"+
-                " WHERE I.item_code = '" + product_code + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " ORDER BY I.id DESC";
+                " WHERE I.item_number = '" + item_number + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " ORDER BY I.id DESC";
                 //grid_movements.DataSource = objBLL.GetRecord(keyword, table);
 
                 DataTable product_dt = objBLL.GetRecord(keyword, table);
@@ -736,6 +752,78 @@ namespace pos
             }
         }
 
+        private void Load_product_movements_with_balance_qty(string item_number)
+        {
+            try
+            {
+                grid_movements.Rows.Clear();
+
+                GeneralBLL objBLL = new GeneralBLL();
+                grid_movements.AutoGenerateColumns = false;
+
+                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.loc_code,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer,S.first_name AS supplier";
+                string table = "pos_inventory I " +
+                               "LEFT JOIN pos_products P ON P.item_number = I.item_number " +
+                               "LEFT JOIN pos_customers C ON C.id = I.customer_id " +
+                               "LEFT JOIN pos_suppliers S ON S.id = I.supplier_id " +
+                               "WHERE I.item_number = '" + item_number + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " " +
+                               "ORDER BY I.id ASC";
+
+                DataTable product_dt = objBLL.GetRecord(keyword, table);
+
+                if (product_dt.Rows.Count > 0)
+                {
+                    // ✅ Add balance_qty column manually to avoid error
+                    if (!product_dt.Columns.Contains("balance_qty"))
+                        product_dt.Columns.Add("balance_qty", typeof(double));
+
+                    // Calculate running balance
+                    double balance_qty = 0;
+                    foreach (DataRow row in product_dt.Rows)
+                    {
+                        balance_qty += Convert.ToDouble(row["qty"]);
+                        row["balance_qty"] = balance_qty;
+                    }
+
+                    // Display in DESC order
+                    int RowIndex = 0;
+                    foreach (DataRow row in product_dt.Select("", "id DESC"))
+                    {
+                        int id = Convert.ToInt32(row["id"]);
+                        string invoice_no = row["invoice_no"].ToString();
+                        //string name = row["product_name"].ToString();
+                        string qty = row["qty"].ToString();
+                        string balance = row["balance_qty"].ToString();
+                        double cost_price = Convert.ToDouble(row["cost_price"]);
+                        double unit_price = Convert.ToDouble(row["unit_price"]);
+                        string location = row["loc_code"].ToString();
+                        string description = row["description"].ToString();
+                        string supplier = row["supplier"].ToString();
+                        string customer = row["customer"].ToString();
+                        string date = row["trans_date"].ToString();
+
+                        string[] row0 = { id.ToString(), invoice_no, qty, balance, cost_price.ToString(), unit_price.ToString(),
+                                  location,description, supplier, customer, date };
+
+                        grid_movements.Rows.Add(row0);
+
+                        if (description == "Sale")
+                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+                        else if (description == "Purchase")
+                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+                        else if (description == "Adjustment")
+                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+
+                        RowIndex++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
 
         private void load_product_location_qty(string product_code)
         {
@@ -795,7 +883,7 @@ namespace pos
 
                     MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     clear_all();
-                    txt_item_number.Focus();
+                    txt_part_number.Focus();
                 }
                 else
                 {
@@ -808,14 +896,15 @@ namespace pos
         private void btn_refresh_Click(object sender, EventArgs e)
         {
             string product_code = txt_id.Text;
+            string product_number = txtItemNumber.Text;
 
-            if (product_code != "")
+            if (!string.IsNullOrEmpty(product_number))
             {
-                load_product_detail(product_code);
-                load_product_movements(product_code);
-                load_product_location_qty(product_code);
+                load_product_detail(product_number);
+                //Load_product_movements_with_balance_qty(product_number);
+                load_product_location_qty(product_number);
             }
-            txt_item_number.Focus();
+            txt_part_number.Focus();
         }
 
         private void SetupBrandDataGridView()
@@ -1216,14 +1305,15 @@ namespace pos
         {
             string product_id="";
             string product_code="";
+            string item_number="";
             string product_name = "";
             if(!string.IsNullOrEmpty(txt_id.Text))
             {
                 product_id = txt_id.Text;
-                product_code = txt_code.Text;
+                item_number = txtItemNumber.Text;
                 product_name = txt_name.Text;
             }
-            frm_other_stocks frm_other_stock_obj = new frm_other_stocks(product_id,product_code, product_name);
+            frm_other_stocks frm_other_stock_obj = new frm_other_stocks(product_id, item_number, product_name);
             frm_other_stock_obj.ShowDialog();
         }
 
@@ -1254,6 +1344,11 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return result;
+        }
+
+        private void txt_part_number_KeyUp(object sender, KeyEventArgs e)
+        {
+            generate_item_code();
         }
     }
 }

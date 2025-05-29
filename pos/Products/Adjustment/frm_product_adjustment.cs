@@ -49,6 +49,7 @@ namespace pos
                                 double unit_price = (grid_search_products.Rows[i].Cells["unit_price"].Value != null ? double.Parse(grid_search_products.Rows[i].Cells["unit_price"].Value.ToString()) : 0); 
                                 
                                 info.invoice_no = txt_ref_no.Text;
+                                info.item_number = grid_search_products.Rows[i].Cells["item_number"].Value.ToString();
                                 info.code = grid_search_products.Rows[i].Cells["code"].Value.ToString();
                                 info.id = int.Parse(grid_search_products.Rows[i].Cells["id"].Value.ToString()); 
                                 info.cost_price = avg_cost;
@@ -170,7 +171,7 @@ namespace pos
 
                 if (product_code != "")
                 {
-                    product_dt = productsBLL_obj.SearchRecordByProductCode(product_code);
+                    product_dt = productsBLL_obj.SearchRecordByProductNumber(product_code);
                 }
                 
                 //grid_search_products.Rows.Clear();
@@ -194,8 +195,11 @@ namespace pos
                         string description = myProductView["description"].ToString();
                         string item_type = myProductView["item_type"].ToString();
                         string btn_delete = "Del";
+                        string item_number = myProductView["item_number"].ToString();
 
-                        string[] row0 = { id.ToString(), code,category, name, name_ar, location_code, qty.ToString(), adjustment_qty.ToString(), avg_cost.ToString(), unit_price.ToString(),btn_delete, description, item_type };
+
+                        string[] row0 = { id.ToString(), code,category, name, name_ar, location_code, qty.ToString(), adjustment_qty.ToString(), 
+                            avg_cost.ToString(), unit_price.ToString(),btn_delete, description, item_type,item_number };
 
                         grid_search_products.Rows.Add(row0);
 

@@ -35,15 +35,17 @@ namespace pos.Products.ICT
             this.btn_refresh = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.source_branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receiving_branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.source_branch_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.destination_branch_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty_requested = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty_released = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.released_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_ict)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,29 +59,31 @@ namespace pos.Products.ICT
             this.grid_ict.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_ict.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.source_branch,
+            this.id,
             this.receiving_branch,
             this.source_branch_id,
             this.destination_branch_id,
             this.item_code,
             this.product_name,
             this.qty_requested,
-            this.qty_released,
+            this.released_qty,
             this.qty,
-            this.chk});
-            this.grid_ict.Location = new System.Drawing.Point(0, 92);
-            this.grid_ict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chk,
+            this.item_number});
+            this.grid_ict.Location = new System.Drawing.Point(0, 74);
+            this.grid_ict.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grid_ict.Name = "grid_ict";
             this.grid_ict.RowHeadersWidth = 62;
-            this.grid_ict.Size = new System.Drawing.Size(1148, 592);
+            this.grid_ict.Size = new System.Drawing.Size(1020, 474);
             this.grid_ict.TabIndex = 0;
             // 
             // btn_transfer
             // 
             this.btn_transfer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_transfer.Location = new System.Drawing.Point(862, 8);
-            this.btn_transfer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_transfer.Location = new System.Drawing.Point(766, 6);
+            this.btn_transfer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_transfer.Name = "btn_transfer";
-            this.btn_transfer.Size = new System.Drawing.Size(130, 75);
+            this.btn_transfer.Size = new System.Drawing.Size(116, 60);
             this.btn_transfer.TabIndex = 2;
             this.btn_transfer.Text = "Receive Qty (F3)";
             this.btn_transfer.UseVisualStyleBackColor = true;
@@ -88,10 +92,10 @@ namespace pos.Products.ICT
             // btn_refresh
             // 
             this.btn_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_refresh.Location = new System.Drawing.Point(1002, 8);
-            this.btn_refresh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_refresh.Location = new System.Drawing.Point(891, 6);
+            this.btn_refresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(130, 37);
+            this.btn_refresh.Size = new System.Drawing.Size(116, 30);
             this.btn_refresh.TabIndex = 2;
             this.btn_refresh.Text = "Refresh (F5)";
             this.btn_refresh.UseVisualStyleBackColor = true;
@@ -100,10 +104,10 @@ namespace pos.Products.ICT
             // btn_cancel
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancel.Location = new System.Drawing.Point(1002, 46);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_cancel.Location = new System.Drawing.Point(891, 37);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(130, 37);
+            this.btn_cancel.Size = new System.Drawing.Size(116, 30);
             this.btn_cancel.TabIndex = 2;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
@@ -117,6 +121,15 @@ namespace pos.Products.ICT
             this.source_branch.MinimumWidth = 8;
             this.source_branch.Name = "source_branch";
             this.source_branch.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.Visible = false;
+            this.id.Width = 125;
             // 
             // receiving_branch
             // 
@@ -170,17 +183,17 @@ namespace pos.Products.ICT
             this.qty_requested.MinimumWidth = 8;
             this.qty_requested.Name = "qty_requested";
             this.qty_requested.ReadOnly = true;
-            this.qty_requested.Width = 140;
+            this.qty_requested.Width = 121;
             // 
-            // qty_released
+            // released_qty
             // 
-            this.qty_released.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.qty_released.DataPropertyName = "released_qty";
-            this.qty_released.HeaderText = "Qty Released";
-            this.qty_released.MinimumWidth = 8;
-            this.qty_released.Name = "qty_released";
-            this.qty_released.ReadOnly = true;
-            this.qty_released.Width = 130;
+            this.released_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.released_qty.DataPropertyName = "released_qty";
+            this.released_qty.HeaderText = "Qty Released";
+            this.released_qty.MinimumWidth = 8;
+            this.released_qty.Name = "released_qty";
+            this.released_qty.ReadOnly = true;
+            this.released_qty.Width = 113;
             // 
             // qty
             // 
@@ -192,7 +205,7 @@ namespace pos.Products.ICT
             this.qty.MinimumWidth = 8;
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
-            this.qty.Width = 143;
+            this.qty.Width = 127;
             // 
             // chk
             // 
@@ -202,16 +215,25 @@ namespace pos.Products.ICT
             this.chk.Name = "chk";
             this.chk.Width = 150;
             // 
+            // item_number
+            // 
+            this.item_number.DataPropertyName = "item_number";
+            this.item_number.HeaderText = "item_number";
+            this.item_number.MinimumWidth = 6;
+            this.item_number.Name = "item_number";
+            this.item_number.Visible = false;
+            this.item_number.Width = 125;
+            // 
             // frm_receive_ict
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 692);
+            this.ClientSize = new System.Drawing.Size(1022, 554);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_transfer);
             this.Controls.Add(this.grid_ict);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frm_receive_ict";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -230,14 +252,16 @@ namespace pos.Products.ICT
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn source_branch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn receiving_branch;
         private System.Windows.Forms.DataGridViewTextBoxColumn source_branch_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn destination_branch_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty_requested;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty_released;
+        private System.Windows.Forms.DataGridViewTextBoxColumn released_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
     }
 }

@@ -40,6 +40,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_header = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_cust_balance = new System.Windows.Forms.TextBox();
@@ -60,6 +63,7 @@
             this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.LoadPOToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
@@ -86,22 +90,6 @@
             this.productMovementF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grid_purchases = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.avg_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sub_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.tax_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tax_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shop_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_grid = new System.Windows.Forms.Panel();
             this.panel_footer = new System.Windows.Forms.Panel();
             this.chkbox_is_taxable = new System.Windows.Forms.CheckBox();
@@ -114,16 +102,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txt_total_qty = new System.Windows.Forms.TextBox();
             this.grid_product_history = new System.Windows.Forms.DataGridView();
-            this.product_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.trans_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.item_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -141,7 +119,33 @@
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.locationsdtDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.avg_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sub_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tax_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tax_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shop_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.trans_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_header.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -306,6 +310,13 @@
             resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
             this.LoadPOToolStripButton.Name = "LoadPOToolStripButton";
             this.LoadPOToolStripButton.Click += new System.EventHandler(this.LoadPOToolStripButton_Click);
+            // 
+            // PrinttoolStripButton
+            // 
+            resources.ApplyResources(this.PrinttoolStripButton, "PrinttoolStripButton");
+            this.PrinttoolStripButton.Image = global::pos.Properties.Resources.Print_32;
+            this.PrinttoolStripButton.Name = "PrinttoolStripButton";
+            this.PrinttoolStripButton.Click += new System.EventHandler(this.PrinttoolStripButton_Click);
             // 
             // groupBox4
             // 
@@ -511,7 +522,8 @@
             this.btn_delete,
             this.tax_id,
             this.tax_rate,
-            this.shop_qty});
+            this.shop_qty,
+            this.item_number});
             this.grid_purchases.ContextMenuStrip = this.contextMenuStrip_purchases;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
@@ -533,6 +545,214 @@
             this.grid_purchases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grid_purchases_RowPostPaint);
             this.grid_purchases.SelectionChanged += new System.EventHandler(this.grid_purchases_SelectionChanged);
             this.grid_purchases.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_purchases_KeyDown);
+            // 
+            // panel_grid
+            // 
+            this.panel_grid.Controls.Add(this.grid_purchases);
+            resources.ApplyResources(this.panel_grid, "panel_grid");
+            this.panel_grid.Name = "panel_grid";
+            // 
+            // panel_footer
+            // 
+            resources.ApplyResources(this.panel_footer, "panel_footer");
+            this.panel_footer.Controls.Add(this.chkbox_is_taxable);
+            this.panel_footer.Controls.Add(this.txt_shipping_cost);
+            this.panel_footer.Controls.Add(this.txt_total_disc_value);
+            this.panel_footer.Controls.Add(this.label22);
+            this.panel_footer.Controls.Add(this.txt_shop_qty);
+            this.panel_footer.Controls.Add(this.label20);
+            this.panel_footer.Controls.Add(this.label19);
+            this.panel_footer.Controls.Add(this.label10);
+            this.panel_footer.Controls.Add(this.txt_total_qty);
+            this.panel_footer.Controls.Add(this.grid_product_history);
+            this.panel_footer.Controls.Add(this.label15);
+            this.panel_footer.Controls.Add(this.groupBox2);
+            this.panel_footer.Controls.Add(this.txt_total_amount);
+            this.panel_footer.Controls.Add(this.txt_total_tax);
+            this.panel_footer.Controls.Add(this.txt_total_discount);
+            this.panel_footer.Controls.Add(this.txt_sub_total);
+            this.panel_footer.Controls.Add(this.label14);
+            this.panel_footer.Controls.Add(this.label13);
+            this.panel_footer.Controls.Add(this.label12);
+            this.panel_footer.Controls.Add(this.label9);
+            this.panel_footer.Name = "panel_footer";
+            // 
+            // chkbox_is_taxable
+            // 
+            resources.ApplyResources(this.chkbox_is_taxable, "chkbox_is_taxable");
+            this.chkbox_is_taxable.Checked = true;
+            this.chkbox_is_taxable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkbox_is_taxable.Name = "chkbox_is_taxable";
+            this.chkbox_is_taxable.UseVisualStyleBackColor = true;
+            this.chkbox_is_taxable.CheckedChanged += new System.EventHandler(this.chkbox_is_taxable_CheckedChanged);
+            // 
+            // txt_shipping_cost
+            // 
+            resources.ApplyResources(this.txt_shipping_cost, "txt_shipping_cost");
+            this.txt_shipping_cost.Name = "txt_shipping_cost";
+            this.txt_shipping_cost.TextChanged += new System.EventHandler(this.txt_total_disc_value_TextChanged);
+            // 
+            // txt_total_disc_value
+            // 
+            resources.ApplyResources(this.txt_total_disc_value, "txt_total_disc_value");
+            this.txt_total_disc_value.Name = "txt_total_disc_value";
+            this.txt_total_disc_value.TextChanged += new System.EventHandler(this.txt_total_disc_value_TextChanged);
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // txt_shop_qty
+            // 
+            resources.ApplyResources(this.txt_shop_qty, "txt_shop_qty");
+            this.txt_shop_qty.Name = "txt_shop_qty";
+            this.txt_shop_qty.ReadOnly = true;
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // txt_total_qty
+            // 
+            resources.ApplyResources(this.txt_total_qty, "txt_total_qty");
+            this.txt_total_qty.Name = "txt_total_qty";
+            this.txt_total_qty.ReadOnly = true;
+            // 
+            // grid_product_history
+            // 
+            this.grid_product_history.AllowUserToAddRows = false;
+            this.grid_product_history.AllowUserToDeleteRows = false;
+            this.grid_product_history.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_product_history, "grid_product_history");
+            this.grid_product_history.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_product_history.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.product_id,
+            this.invoice_no,
+            this.product_name,
+            this.dataGridViewTextBoxColumn2,
+            this.cost_price,
+            this.dataGridViewTextBoxColumn3,
+            this.description,
+            this.supplier,
+            this.trans_date,
+            this.item_code});
+            this.grid_product_history.Name = "grid_product_history";
+            this.grid_product_history.ReadOnly = true;
+            this.grid_product_history.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // groupBox2
+            // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.groupBox3);
+            this.groupBox2.Controls.Add(this.rd_btn_with_vat);
+            this.groupBox2.Controls.Add(this.rd_btn_without_vat);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.rd_btn_bytotal_price);
+            this.groupBox3.Controls.Add(this.rd_btn_by_unitprice);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // rd_btn_bytotal_price
+            // 
+            resources.ApplyResources(this.rd_btn_bytotal_price, "rd_btn_bytotal_price");
+            this.rd_btn_bytotal_price.Name = "rd_btn_bytotal_price";
+            this.rd_btn_bytotal_price.UseVisualStyleBackColor = true;
+            // 
+            // rd_btn_by_unitprice
+            // 
+            resources.ApplyResources(this.rd_btn_by_unitprice, "rd_btn_by_unitprice");
+            this.rd_btn_by_unitprice.Checked = true;
+            this.rd_btn_by_unitprice.Name = "rd_btn_by_unitprice";
+            this.rd_btn_by_unitprice.TabStop = true;
+            this.rd_btn_by_unitprice.UseVisualStyleBackColor = true;
+            // 
+            // rd_btn_with_vat
+            // 
+            resources.ApplyResources(this.rd_btn_with_vat, "rd_btn_with_vat");
+            this.rd_btn_with_vat.Name = "rd_btn_with_vat";
+            this.rd_btn_with_vat.UseVisualStyleBackColor = true;
+            // 
+            // rd_btn_without_vat
+            // 
+            resources.ApplyResources(this.rd_btn_without_vat, "rd_btn_without_vat");
+            this.rd_btn_without_vat.Checked = true;
+            this.rd_btn_without_vat.Name = "rd_btn_without_vat";
+            this.rd_btn_without_vat.TabStop = true;
+            this.rd_btn_without_vat.UseVisualStyleBackColor = true;
+            // 
+            // txt_total_amount
+            // 
+            resources.ApplyResources(this.txt_total_amount, "txt_total_amount");
+            this.txt_total_amount.Name = "txt_total_amount";
+            this.txt_total_amount.ReadOnly = true;
+            // 
+            // txt_total_tax
+            // 
+            resources.ApplyResources(this.txt_total_tax, "txt_total_tax");
+            this.txt_total_tax.Name = "txt_total_tax";
+            this.txt_total_tax.ReadOnly = true;
+            // 
+            // txt_total_discount
+            // 
+            resources.ApplyResources(this.txt_total_discount, "txt_total_discount");
+            this.txt_total_discount.Name = "txt_total_discount";
+            this.txt_total_discount.ReadOnly = true;
+            // 
+            // txt_sub_total
+            // 
+            resources.ApplyResources(this.txt_sub_total, "txt_sub_total");
+            this.txt_sub_total.Name = "txt_sub_total";
+            this.txt_sub_total.ReadOnly = true;
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.dataGridViewImageColumn1, "dataGridViewImageColumn1");
+            this.dataGridViewImageColumn1.Image = global::pos.Properties.Resources.delete;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // id
             // 
@@ -671,111 +891,11 @@
             resources.ApplyResources(this.shop_qty, "shop_qty");
             this.shop_qty.Name = "shop_qty";
             // 
-            // panel_grid
+            // item_number
             // 
-            this.panel_grid.Controls.Add(this.grid_purchases);
-            resources.ApplyResources(this.panel_grid, "panel_grid");
-            this.panel_grid.Name = "panel_grid";
-            // 
-            // panel_footer
-            // 
-            resources.ApplyResources(this.panel_footer, "panel_footer");
-            this.panel_footer.Controls.Add(this.chkbox_is_taxable);
-            this.panel_footer.Controls.Add(this.txt_shipping_cost);
-            this.panel_footer.Controls.Add(this.txt_total_disc_value);
-            this.panel_footer.Controls.Add(this.label22);
-            this.panel_footer.Controls.Add(this.txt_shop_qty);
-            this.panel_footer.Controls.Add(this.label20);
-            this.panel_footer.Controls.Add(this.label19);
-            this.panel_footer.Controls.Add(this.label10);
-            this.panel_footer.Controls.Add(this.txt_total_qty);
-            this.panel_footer.Controls.Add(this.grid_product_history);
-            this.panel_footer.Controls.Add(this.label15);
-            this.panel_footer.Controls.Add(this.groupBox2);
-            this.panel_footer.Controls.Add(this.txt_total_amount);
-            this.panel_footer.Controls.Add(this.txt_total_tax);
-            this.panel_footer.Controls.Add(this.txt_total_discount);
-            this.panel_footer.Controls.Add(this.txt_sub_total);
-            this.panel_footer.Controls.Add(this.label14);
-            this.panel_footer.Controls.Add(this.label13);
-            this.panel_footer.Controls.Add(this.label12);
-            this.panel_footer.Controls.Add(this.label9);
-            this.panel_footer.Name = "panel_footer";
-            // 
-            // chkbox_is_taxable
-            // 
-            resources.ApplyResources(this.chkbox_is_taxable, "chkbox_is_taxable");
-            this.chkbox_is_taxable.Checked = true;
-            this.chkbox_is_taxable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkbox_is_taxable.Name = "chkbox_is_taxable";
-            this.chkbox_is_taxable.UseVisualStyleBackColor = true;
-            this.chkbox_is_taxable.CheckedChanged += new System.EventHandler(this.chkbox_is_taxable_CheckedChanged);
-            // 
-            // txt_shipping_cost
-            // 
-            resources.ApplyResources(this.txt_shipping_cost, "txt_shipping_cost");
-            this.txt_shipping_cost.Name = "txt_shipping_cost";
-            this.txt_shipping_cost.TextChanged += new System.EventHandler(this.txt_total_disc_value_TextChanged);
-            // 
-            // txt_total_disc_value
-            // 
-            resources.ApplyResources(this.txt_total_disc_value, "txt_total_disc_value");
-            this.txt_total_disc_value.Name = "txt_total_disc_value";
-            this.txt_total_disc_value.TextChanged += new System.EventHandler(this.txt_total_disc_value_TextChanged);
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
-            // 
-            // txt_shop_qty
-            // 
-            resources.ApplyResources(this.txt_shop_qty, "txt_shop_qty");
-            this.txt_shop_qty.Name = "txt_shop_qty";
-            this.txt_shop_qty.ReadOnly = true;
-            // 
-            // label20
-            // 
-            resources.ApplyResources(this.label20, "label20");
-            this.label20.Name = "label20";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            // 
-            // txt_total_qty
-            // 
-            resources.ApplyResources(this.txt_total_qty, "txt_total_qty");
-            this.txt_total_qty.Name = "txt_total_qty";
-            this.txt_total_qty.ReadOnly = true;
-            // 
-            // grid_product_history
-            // 
-            this.grid_product_history.AllowUserToAddRows = false;
-            this.grid_product_history.AllowUserToDeleteRows = false;
-            this.grid_product_history.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_product_history, "grid_product_history");
-            this.grid_product_history.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_product_history.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.product_id,
-            this.invoice_no,
-            this.product_name,
-            this.dataGridViewTextBoxColumn2,
-            this.cost_price,
-            this.dataGridViewTextBoxColumn3,
-            this.description,
-            this.supplier,
-            this.trans_date,
-            this.item_code});
-            this.grid_product_history.Name = "grid_product_history";
-            this.grid_product_history.ReadOnly = true;
-            this.grid_product_history.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.item_number, "item_number");
+            this.item_number.Name = "item_number";
             // 
             // product_id
             // 
@@ -804,6 +924,10 @@
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn2.DataPropertyName = "qty";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -812,6 +936,10 @@
             // 
             this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cost_price.DataPropertyName = "cost_price";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
@@ -820,6 +948,10 @@
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn3.DataPropertyName = "unit_price";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle13;
             resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -854,115 +986,6 @@
             resources.ApplyResources(this.item_code, "item_code");
             this.item_code.Name = "item_code";
             this.item_code.ReadOnly = true;
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // groupBox2
-            // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Controls.Add(this.rd_btn_with_vat);
-            this.groupBox2.Controls.Add(this.rd_btn_without_vat);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // groupBox3
-            // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Controls.Add(this.rd_btn_bytotal_price);
-            this.groupBox3.Controls.Add(this.rd_btn_by_unitprice);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // rd_btn_bytotal_price
-            // 
-            resources.ApplyResources(this.rd_btn_bytotal_price, "rd_btn_bytotal_price");
-            this.rd_btn_bytotal_price.Name = "rd_btn_bytotal_price";
-            this.rd_btn_bytotal_price.UseVisualStyleBackColor = true;
-            // 
-            // rd_btn_by_unitprice
-            // 
-            resources.ApplyResources(this.rd_btn_by_unitprice, "rd_btn_by_unitprice");
-            this.rd_btn_by_unitprice.Checked = true;
-            this.rd_btn_by_unitprice.Name = "rd_btn_by_unitprice";
-            this.rd_btn_by_unitprice.TabStop = true;
-            this.rd_btn_by_unitprice.UseVisualStyleBackColor = true;
-            // 
-            // rd_btn_with_vat
-            // 
-            resources.ApplyResources(this.rd_btn_with_vat, "rd_btn_with_vat");
-            this.rd_btn_with_vat.Name = "rd_btn_with_vat";
-            this.rd_btn_with_vat.UseVisualStyleBackColor = true;
-            // 
-            // rd_btn_without_vat
-            // 
-            resources.ApplyResources(this.rd_btn_without_vat, "rd_btn_without_vat");
-            this.rd_btn_without_vat.Checked = true;
-            this.rd_btn_without_vat.Name = "rd_btn_without_vat";
-            this.rd_btn_without_vat.TabStop = true;
-            this.rd_btn_without_vat.UseVisualStyleBackColor = true;
-            // 
-            // txt_total_amount
-            // 
-            resources.ApplyResources(this.txt_total_amount, "txt_total_amount");
-            this.txt_total_amount.Name = "txt_total_amount";
-            this.txt_total_amount.ReadOnly = true;
-            // 
-            // txt_total_tax
-            // 
-            resources.ApplyResources(this.txt_total_tax, "txt_total_tax");
-            this.txt_total_tax.Name = "txt_total_tax";
-            this.txt_total_tax.ReadOnly = true;
-            // 
-            // txt_total_discount
-            // 
-            resources.ApplyResources(this.txt_total_discount, "txt_total_discount");
-            this.txt_total_discount.Name = "txt_total_discount";
-            this.txt_total_discount.ReadOnly = true;
-            // 
-            // txt_sub_total
-            // 
-            resources.ApplyResources(this.txt_sub_total, "txt_sub_total");
-            this.txt_sub_total.Name = "txt_sub_total";
-            this.txt_sub_total.ReadOnly = true;
-            // 
-            // label14
-            // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.Name = "label14";
-            // 
-            // label13
-            // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Name = "label13";
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.dataGridViewImageColumn1, "dataGridViewImageColumn1");
-            this.dataGridViewImageColumn1.Image = global::pos.Properties.Resources.delete;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // PrinttoolStripButton
-            // 
-            resources.ApplyResources(this.PrinttoolStripButton, "PrinttoolStripButton");
-            this.PrinttoolStripButton.Image = global::pos.Properties.Resources.Print_32;
-            this.PrinttoolStripButton.Name = "PrinttoolStripButton";
-            this.PrinttoolStripButton.Click += new System.EventHandler(this.PrinttoolStripButton_Click);
             // 
             // frm_purchases
             // 
@@ -1081,6 +1104,7 @@
         private System.Windows.Forms.ToolStripButton LoadPOToolStripButton;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ToolStripButton PrinttoolStripButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -1097,6 +1121,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn shop_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
@@ -1107,6 +1132,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn trans_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
-        private System.Windows.Forms.ToolStripButton PrinttoolStripButton;
     }
 }

@@ -32,6 +32,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rb_by_name = new System.Windows.Forms.RadioButton();
+            this.rb_by_code = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_ok = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,14 +48,7 @@
             this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alternate_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rb_by_name = new System.Windows.Forms.RadioButton();
-            this.rb_by_code = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_search = new System.Windows.Forms.TextBox();
-            this.btn_ok = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -66,13 +67,72 @@
             this.unit_price,
             this.location_code,
             this.category,
-            this.alternate_no});
+            this.alternate_no,
+            this.item_number});
             resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.ReadOnly = true;
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_search_products.DoubleClick += new System.EventHandler(this.grid_search_products_DoubleClick);
             this.grid_search_products.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_search_products_KeyDown);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rb_by_name);
+            this.panel1.Controls.Add(this.rb_by_code);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.txt_search);
+            this.panel1.Controls.Add(this.btn_ok);
+            this.panel1.Controls.Add(this.btn_cancel);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // rb_by_name
+            // 
+            resources.ApplyResources(this.rb_by_name, "rb_by_name");
+            this.rb_by_name.Checked = true;
+            this.rb_by_name.Name = "rb_by_name";
+            this.rb_by_name.TabStop = true;
+            this.rb_by_name.UseVisualStyleBackColor = true;
+            // 
+            // rb_by_code
+            // 
+            resources.ApplyResources(this.rb_by_code, "rb_by_code");
+            this.rb_by_code.Name = "rb_by_code";
+            this.rb_by_code.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // txt_search
+            // 
+            resources.ApplyResources(this.txt_search, "txt_search");
+            this.txt_search.Name = "txt_search";
+            this.txt_search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyUp);
+            // 
+            // btn_ok
+            // 
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.Name = "btn_ok";
+            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // id
             // 
@@ -143,63 +203,12 @@
             this.alternate_no.Name = "alternate_no";
             this.alternate_no.ReadOnly = true;
             // 
-            // panel1
+            // item_number
             // 
-            this.panel1.Controls.Add(this.rb_by_name);
-            this.panel1.Controls.Add(this.rb_by_code);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_search);
-            this.panel1.Controls.Add(this.btn_ok);
-            this.panel1.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // rb_by_name
-            // 
-            resources.ApplyResources(this.rb_by_name, "rb_by_name");
-            this.rb_by_name.Checked = true;
-            this.rb_by_name.Name = "rb_by_name";
-            this.rb_by_name.TabStop = true;
-            this.rb_by_name.UseVisualStyleBackColor = true;
-            // 
-            // rb_by_code
-            // 
-            resources.ApplyResources(this.rb_by_code, "rb_by_code");
-            this.rb_by_code.Name = "rb_by_code";
-            this.rb_by_code.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // txt_search
-            // 
-            resources.ApplyResources(this.txt_search, "txt_search");
-            this.txt_search.Name = "txt_search";
-            this.txt_search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyUp);
-            // 
-            // btn_ok
-            // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_ok, "btn_ok");
-            this.btn_ok.Name = "btn_ok";
-            this.btn_ok.UseVisualStyleBackColor = true;
-            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
-            // 
-            // btn_cancel
-            // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            this.item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.item_number, "item_number");
+            this.item_number.Name = "item_number";
+            this.item_number.ReadOnly = true;
             // 
             // frm_searchProducts
             // 
@@ -230,6 +239,7 @@
         private System.Windows.Forms.RadioButton rb_by_name;
         private System.Windows.Forms.RadioButton rb_by_code;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -238,6 +248,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn location_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn alternate_no;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
     }
 }

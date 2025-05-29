@@ -1891,7 +1891,7 @@
     <value>False</value>
   </data>
   <data name="shop_qty.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>101</value>
   </data>
   <metadata name="tax_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1951,6 +1951,18 @@
     <value>6</value>
   </data>
   <data name="category_code.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="item_number.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="item_number.HeaderText" xml:space="preserve">
+    <value>item_number</value>
+  </data>
+  <data name="item_number.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="item_number.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <metadata name="contextMenuStrip_Sales.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -3609,6 +3621,30 @@
   <data name="&gt;&gt;SaleReturnToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Name" xml:space="preserve">
+    <value>addToPurchaseOrderToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addNewRowToolStripMenuItem.Name" xml:space="preserve">
+    <value>addNewRowToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addNewRowToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;productDetailToolStripMenuItem.Name" xml:space="preserve">
+    <value>productDetailToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;productDetailToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -3729,29 +3765,11 @@
   <data name="&gt;&gt;category_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Name" xml:space="preserve">
-    <value>addToPurchaseOrderToolStripMenuItem</value>
+  <data name="&gt;&gt;item_number.Name" xml:space="preserve">
+    <value>item_number</value>
   </data>
-  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addNewRowToolStripMenuItem.Name" xml:space="preserve">
-    <value>addNewRowToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;addNewRowToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
-    <value>toolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;productDetailToolStripMenuItem.Name" xml:space="preserve">
-    <value>productDetailToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;productDetailToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;item_number.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_sales</value>

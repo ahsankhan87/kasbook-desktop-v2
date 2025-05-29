@@ -17,6 +17,7 @@ namespace POS.Core
         public string group_code { get; set; }
 
         public string item_number { get; set; }
+        public string part_number { get; set; }
 
         public string alt_item_number { get; set; }
         

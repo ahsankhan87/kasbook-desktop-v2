@@ -88,11 +88,11 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT PI.invoice_no,PI.id,PI.item_code,PI.quantity,PI.cost_price,PI.discount_value,"+
+                        String query = "SELECT PI.invoice_no,PI.id,PI.item_code,PI.item_number,PI.quantity,PI.cost_price,PI.discount_value,"+
                             "(PI.cost_price*PI.quantity-PI.discount_value) AS total, P.name AS product_name," +
                             "(PI.cost_price*PI.tax_rate/100) AS tax " +
                             "FROM pos_purchases_order_items PI " +
-                            "LEFT JOIN pos_products P ON P.code=PI.item_code " +
+                            "LEFT JOIN pos_products P ON P.item_number=PI.item_number " +
                             "WHERE PI.branch_id = @branch_id AND purchase_id = @purchase_id AND PI.status=0";
 
                         cmd = new SqlCommand(query, cn);
@@ -118,7 +118,7 @@ namespace POS.DLL
         }
 
 
-        public double GetPOrder_qty(string item_code)
+        public double GetPOrder_qty(string item_number)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -131,10 +131,10 @@ namespace POS.DLL
                         cn.Open();
                         String query = "SELECT COALESCE(SUM(PI.quantity),0) AS porder_qty" +
                             " FROM pos_purchases_order_items PI" +
-                            " WHERE PI.branch_id = @branch_id AND PI.item_code = @item_code AND PI.status=0";
+                            " WHERE PI.branch_id = @branch_id AND PI.item_number = @item_number AND PI.status=0";
 
                         cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@item_code", item_code);
+                        cmd.Parameters.AddWithValue("@item_number", item_number);
                         //cmd.Parameters.AddWithValue("@OperationType", "5");
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -193,7 +193,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,S.delivery_date,'0' AS shipping_cost," +
-                            " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price," +
+                            " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price,SI.item_number," +
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity*SI.tax_rate/100) AS vat," +
                             " P.name AS name,P.code,P.location_code,P.item_type," +
@@ -202,7 +202,7 @@ namespace POS.DLL
                             " CT.name AS category" +
                             " FROM pos_purchases_order S" +
                             " LEFT JOIN pos_purchases_order_items SI ON S.id=SI.purchase_id" +
-                            " LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                             " LEFT JOIN pos_categories CT ON CT.code=P.category_code" +
                             " LEFT JOIN pos_suppliers C ON C.id=S.supplier_id" +
@@ -376,6 +376,7 @@ namespace POS.DLL
                             cmd = new SqlCommand("sp_Purchases_order_items", cn, transaction);
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
                             cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
                             cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
@@ -549,6 +550,7 @@ namespace POS.DLL
                                     cmd = new SqlCommand("sp_Purchases_order_items", cn, trans);
                                     cmd.CommandType = CommandType.StoredProcedure;
                                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                                    cmd.Parameters.AddWithValue("@item_number", int.Parse(dr["item_number"].ToString()));
                                     cmd.Parameters.AddWithValue("@item_code", int.Parse(dr["id"].ToString()));
                                     cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
                                     cmd.Parameters.AddWithValue("@purchase_id", newPurchaseID);
@@ -720,7 +722,7 @@ namespace POS.DLL
                             //" C.first_name AS customer_name" +
                             " FROM pos_purchases_order_items SI" +
                             //" LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
-                            " LEFT JOIN pos_products P ON P.id=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             //" LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE SI.branch_id = @branch_id AND SI.invoice_no = @invoice_no";
 

@@ -38,6 +38,44 @@ namespace POS.DLL
             }
             
         }
+        public String GetMaxProductNumber()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+
+                        SqlCommand cmd = new SqlCommand("SELECT item_number FROM pos_products ORDER BY id desc", cn);
+                        
+                        string maxId = Convert.ToString(cmd.ExecuteScalar());
+
+                        if (string.IsNullOrEmpty(maxId))
+                        {
+                            return maxId = "1";
+                        }
+                        else
+                        {
+                            decimal intval = int.Parse(maxId);
+                            intval++;
+                            maxId = intval.ToString(); // String.Format("S-{0:000000}", intval);
+                            return maxId;
+                        }
+
+                    }
+                    return "";
+                }
+                catch
+                {
+
+                    throw;
+                }
+            }
+
+        }
+
         public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero, string group_code, string brand_code, string category_code)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -78,12 +116,12 @@ namespace POS.DLL
             {
                 string query = "SELECT p.id,p.item_number, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id,P.location_code," +
                             " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, p.picture, p.packet_qty," +
-                            " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id="+ UsersModal.logged_in_branch_id + "),0) as qty," + //branch wise qty
-                            " ISNULL(C.name,'') AS category, ISNULL(C.id,'') AS category_id" +
+                            " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=" + UsersModal.logged_in_branch_id + "),0) as qty," + //branch wise qty
+                            " ISNULL(C.name,'') AS category, ISNULL(C.id,'') AS category_id,P.part_number" +
                             " FROM pos_products AS P" +
                             " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                             //" WHERE (contains(P.name,@keyword_name) OR contains(P.item_number,@item_number) OR contains(P.item_number_2,@item_number_2) OR contains(P.description,@keyword_desc) OR contains(P.code,@keyword_code)) AND P.branch_id = @branch_id";
-                            " WHERE contains(P.*,'" + keyword + "')"+
+                            " WHERE p.deleted=0 AND contains(P.*,'" + keyword + "')"+
                             " ORDER BY qty desc";
 
                 SqlCommand command = new SqlCommand(query, connection);
@@ -101,6 +139,7 @@ namespace POS.DLL
                             {
                                 id = reader.GetInt32(0), 
                                 item_number = reader.GetString(1),
+                                
                                 code = reader.GetString(2), 
                                 name = reader.GetString(3), 
                                 name_ar = reader.GetString(4), 
@@ -131,7 +170,7 @@ namespace POS.DLL
                                 qty = (double)reader.GetDecimal(31),
                                 category = (reader.GetString(32) == string.Empty ? "" : reader.GetString(32)),
                                 category_id = reader.GetInt32(33),
-
+                                part_number = reader.GetString(34),
                             });
                         }
                     }
@@ -152,12 +191,12 @@ namespace POS.DLL
             using (SqlCommand cmd = new SqlCommand())
             {
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT p.id,p.item_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                cmd.CommandText = "SELECT p.id,p.item_number,P.part_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
                     " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no," +
                     " p.picture, p.packet_qty, p.expiry_date,p.location_code,p.supplier_id," +
-                    " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty" + //branch wise qty
+                    " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty" + //branch wise qty
                     " FROM pos_products p" +
-                    " WHERE p.id = @Product_id ";
+                    " WHERE p.deleted=0 AND p.id = @Product_id ";
                 // "AND P.branch_id = @branch_id";
 
                 cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -199,19 +238,66 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            string query = "SELECT p.id,p.item_number, p.item_number_2,p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                            string query = "SELECT p.id,p.item_number,p.part_number, p.item_number_2,p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
                                 " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, " +
                                 "p.picture, p.packet_qty, p.expiry_date,p.location_code,p.supplier_id," +
-                                " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
-                                " COALESCE((select TOP 1 SUM(s.qty) as qty from pos_product_stocks s where s.item_code=p.code),0) as company_qty, " + //branch wise qty
+                                " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select TOP 1 SUM(s.qty) as qty from pos_product_stocks s where s.item_number=p.item_number),0) as company_qty, " + //branch wise qty
                                 " ps.reorder_level " +
                                 " FROM pos_products p " +
                                 " LEFT JOIN pos_product_stocks ps ON p.id = ps.item_id" +
-                                " WHERE p.code = @code "+
-                                " AND ps.branch_id = @branch_id";
+                                " WHERE p.deleted=0 AND p.code = @code ";
+                               // " AND ps.branch_id = @branch_id";
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@code", Product_code);
+                            cmd.CommandText = query;
+                            cmd.Connection = cn;
+
+                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                da.Fill(dt);
+                            }
+
+                        }
+
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception as necessary
+                        throw new Exception("Error: " + ex.Message);
+                    }
+                }
+            }
+
+        }
+        public DataTable GetAllByProductByItemNumber(string item_number)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        DataTable dt = new DataTable();
+                        if (cn.State == ConnectionState.Closed)
+                        {
+                            cn.Open();
+
+                            string query = "SELECT p.id,p.item_number,p.part_number, p.item_number_2,p.part_number, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                                " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, " +
+                                "p.picture, p.packet_qty, p.expiry_date,p.location_code,p.supplier_id," +
+                                " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select TOP 1 SUM(s.qty) as qty from pos_product_stocks s where s.item_number=p.item_number),0) as company_qty, " + //branch wise qty
+                                " ps.reorder_level " +
+                                " FROM pos_products p " +
+                                " LEFT JOIN pos_product_stocks ps ON p.id = ps.item_id" +
+                                " WHERE p.deleted=0 AND p.item_number = @item_number ";
+                                //" AND ps.branch_id = @branch_id";
+
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
                             cmd.CommandText = query;
                             cmd.Connection = cn;
 
@@ -248,11 +334,11 @@ namespace POS.DLL
                             cn.Open();
 
                             string query = "SELECT P.id,P.code,P.name,P.avg_cost,P.unit_price,P.cost_price,P.category_code, " +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " C.name AS category, C.id AS category_id" +
                                 " FROM pos_products P" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE P.alt_no = @alt_no";
+                                " WHERE P.deleted=0 AND P.alt_no = @alt_no";
                             //" AND P.branch_id = @branch_id";
 
                             //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -302,14 +388,14 @@ namespace POS.DLL
                             }
                             keyword = keyword.Substring(0, keyword.Length - 4);// remove last 3 letter i.e. AND from query
 
-                            string query = "SELECT p.id,p.item_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                            string query = "SELECT p.id,p.item_number,p.part_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
                                 " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, p.picture, p.packet_qty," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty" + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty" + //branch wise qty
                                 " FROM pos_products AS p";
 
                             if (by_code)
                             {
-                                query += " WHERE contains(p.item_number,@code)";
+                                query += " WHERE p.deleted=0 AND contains(p.part_number,@code)";
                                 cmd.Parameters.AddWithValue("@code", keyword);
                                 // cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -317,7 +403,7 @@ namespace POS.DLL
                             }
                             else if (by_name)
                             {
-                                query += " WHERE contains(p.name,@keyword_name) OR contains(p.description,@keyword_desc)";
+                                query += " WHERE p.deleted=0 AND contains(p.name,@keyword_name) OR contains(p.description,@keyword_desc)";
                                 cmd.Parameters.AddWithValue("@keyword_name", keyword);
                                 cmd.Parameters.AddWithValue("@keyword_desc", keyword);
                                 //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -325,7 +411,7 @@ namespace POS.DLL
                             }
                             else
                             {
-                                query += " WHERE contains(p.name,@keyword_name) OR contains(p.description,@keyword_desc)";
+                                query += " WHERE p.deleted=0 AND contains(p.name,@keyword_name) OR contains(p.description,@keyword_desc)";
                                 cmd.Parameters.AddWithValue("@keyword_name", keyword);
                                 cmd.Parameters.AddWithValue("@keyword_desc", keyword);
                                 //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -367,29 +453,29 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            string query = "SELECT p.id,p.item_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                            string query = "SELECT p.id,p.item_number,part_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
                                 " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, p.picture, p.packet_qty," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty" + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty" + //branch wise qty
                                 " FROM pos_products as p";
                             //" FROM pos_products_location_view";
 
                             if (by_code)
                             {
-                                query += " WHERE p.code LIKE @code OR replace(p.code,'-','') LIKE @code";
+                                query += " WHERE p.deleted=0 AND p.code LIKE @code OR replace(p.code,'-','') LIKE @code";
                                 cmd.Parameters.AddWithValue("@code", string.Format("%{0}%", condition));
                                 //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                             }
                             else if (by_name)
                             {
-                                query += " WHERE p.name LIKE @name";
+                                query += " WHERE p.deleted=0 AND p.name LIKE @name";
                                 cmd.Parameters.AddWithValue("@name", string.Format("%{0}%", condition));
                                 //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                             }
                             else
                             {
-                                query += " WHERE p.name LIKE @name";
+                                query += " WHERE deleted=0 AND p.name LIKE @name";
                                 cmd.Parameters.AddWithValue("@name", string.Format("%{0}%", condition));
                                 //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -533,7 +619,7 @@ namespace POS.DLL
                             cn.Open();
 
                             // Base query - optimized with NOLOCK hints
-                            string query = @"SELECT p.id, p.item_number, p.code, p.name, p.name_ar, p.category_code, 
+                            string query = @"SELECT p.id, p.item_number,p.part_number, p.code, p.name, p.name_ar, p.category_code, 
                                     p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, 
                                     p.unit_price, p.unit_price_2, p.tax_id, P.location_code, p.unit_id, 
                                     p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, 
@@ -541,11 +627,11 @@ namespace POS.DLL
                                     p.group_code, p.alt_no, p.picture, p.packet_qty,
                                     COALESCE((SELECT TOP 1 COALESCE(s.qty,0) 
                                     FROM pos_product_stocks s WITH (NOLOCK)
-                                    WHERE s.item_code=p.code AND s.branch_id=@branch_id),0) as qty,
+                                    WHERE s.item_number=p.item_number AND s.branch_id=@branch_id),0) as qty,
                                     C.name AS category, C.id AS category_id
                                     FROM pos_products AS P WITH (NOLOCK)
                                     LEFT JOIN pos_categories C WITH (NOLOCK) ON C.code=P.category_code
-                                    WHERE P.branch_id = @branch_id";
+                                    WHERE p.deleted=0 ";
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -553,7 +639,7 @@ namespace POS.DLL
                             if (!string.IsNullOrEmpty(condition))
                             {
                                 // Use FREETEXT for more flexible searching
-                                query += " AND FREETEXT((P.name, P.code, P.item_number, P.description), @searchTerm)";
+                                query += " AND FREETEXT((P.name, P.code, P.part_number, P.description), @searchTerm)";
                                 cmd.Parameters.AddWithValue("@searchTerm", condition);
 
                                 //Fallback for short search terms(FREETEXT ignores words < 3 chars)
@@ -619,7 +705,7 @@ namespace POS.DLL
                             cn.Open();
 
                             // Base query
-                            string query = @"SELECT p.id, p.item_number, p.code, p.name, p.name_ar, p.category_code, 
+                            string query = @"SELECT p.id, p.item_number,p.part_number, p.code, p.name, p.name_ar, p.category_code, 
                                     p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, 
                                     p.unit_price, p.unit_price_2, p.tax_id, P.location_code, p.unit_id, 
                                     p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, 
@@ -627,11 +713,11 @@ namespace POS.DLL
                                     p.group_code, p.alt_no, p.picture, p.packet_qty,
                                     COALESCE((SELECT TOP 1 COALESCE(s.qty,0) 
                                     FROM pos_product_stocks s WITH (NOLOCK)
-                                    WHERE s.item_code=p.code AND s.branch_id=@branch_id),0) as qty,
+                                    WHERE s.item_number=p.item_number AND s.branch_id=@branch_id),0) as qty,
                                     C.name AS category, C.id AS category_id
                                     FROM pos_products AS P WITH (NOLOCK)
                                     LEFT JOIN pos_categories C WITH (NOLOCK) ON C.code=P.category_code
-                                    WHERE P.branch_id = @branch_id";
+                                    WHERE p.deleted=0 ";
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -696,7 +782,7 @@ namespace POS.DLL
                     {
                         // Log error and return empty table or rethrow
                         // Consider logging the actual query for debugging
-                        throw new ApplicationException("Search failed. See inner exception for details.", ex);
+                        throw new ApplicationException("Search failed. See inner exception for details. " + ex, ex);
                     }
                 }
             }
@@ -718,7 +804,7 @@ namespace POS.DLL
 
                 // Create CONTAINS condition for each part (split by +)
                 var containsTerms = words.Select(word => $"\"{word}*\"");
-                allConditions.Add($"CONTAINS((P.name, P.code, P.item_number, P.description), '{string.Join(" AND ", containsTerms)}')");
+                allConditions.Add($"CONTAINS((P.name, P.code, P.part_number, P.description), '{string.Join(" AND ", containsTerms)}')");
             }
 
             return allConditions.Count > 0 ? string.Join(" AND ", allConditions) : "1=1";
@@ -770,7 +856,7 @@ namespace POS.DLL
 
                             //WHEN the keyword has + sign then it will separate left and right into two keyword 
                             string query = @"
-                                    SELECT p.id, p.item_number, p.code, p.name, p.name_ar, p.category_code, p.item_type, 
+                                    SELECT p.id, p.item_number,p.part_number, p.code, p.name, p.name_ar, p.category_code, p.item_type, 
                                            p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, 
                                            p.unit_price_2, p.tax_id, p.location_code, p.unit_id, p.re_stock_level, 
                                            p.description, p.deleted, p.date_created, p.date_updated, p.user_id, 
@@ -778,11 +864,11 @@ namespace POS.DLL
                                            p.group_code, p.alt_no, p.picture, p.packet_qty, 
                                            COALESCE((SELECT TOP 1 COALESCE(s.qty, 0) 
                                                      FROM pos_product_stocks s 
-                                                     WHERE s.item_code = p.code AND s.branch_id = @branch_id), 0) AS qty, 
+                                                     WHERE s.item_number = p.item_number AND s.branch_id = @branch_id), 0) AS qty, 
                                            C.name AS category, C.id AS category_id
                                     FROM pos_products AS P
                                     LEFT JOIN pos_categories C ON C.code = P.category_code
-                                    WHERE 
+                                    WHERE p.deleted=0 AND 
                                 ";
 
                             // Conditions for search types (part number suffix, name, combined search)
@@ -792,14 +878,14 @@ namespace POS.DLL
                                 string partNumberCondition = condition.Substring(0, condition_index_len).Trim();
                                 string partNameCondition = condition.Substring(condition_index_len + 1).Trim();
 
-                                query += " (CONTAINS(P.item_number, @partNumberQuery) AND CONTAINS(P.name, @partNameQuery)) ";
+                                query += " (CONTAINS(P.part_number, @partNumberQuery) AND CONTAINS(P.name, @partNameQuery)) ";
 
                                 cmd.Parameters.AddWithValue("@partNumberQuery", "\"" + partNumberCondition + "*\"");
                                 cmd.Parameters.AddWithValue("@partNameQuery", "\"" + partNameCondition + "*\"");
                             }
                             else if (condition.Any(char.IsDigit))
                             {
-                                query += " CONTAINS(P.item_number, @partNumberQuery)";
+                                query += " CONTAINS(P.part_number, @partNumberQuery)";
                                 //query += " OR P.code LIKE '%' + @partCode + '%' ";
                                 cmd.Parameters.AddWithValue("@partNumberQuery", "\"" + condition + "*\"");
                                 //cmd.Parameters.AddWithValue("@partNumber", "\"*" + condition + "\"");
@@ -874,14 +960,14 @@ namespace POS.DLL
                             string description = "description";
                             int i = 0;
 
-                            string query = "SELECT P.id,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.location_code," +
+                            string query = "SELECT P.id,P.code,P.part_number,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.location_code," +
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no," +
                                 " C.name AS category, C.id AS category_id," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=p.code and s.branch_id=@branch_id),0) as qty" + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty" + //branch wise qty
                                 " FROM pos_products P" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                                 //" LEFT JOIN pos_product_stocks PS ON PS.item_id=P.id" +
-                                " WHERE ((replace(P.code,'-','') LIKE @code OR P.code LIKE @code OR ";
+                                " WHERE p.deleted=0 AND ((replace(P.code,'-','') LIKE @code OR P.code LIKE @code OR ";
 
                             foreach (string word in words)
                             {
@@ -978,7 +1064,7 @@ namespace POS.DLL
             }
         }
 
-        public bool IsProductExist(string item_number, string category_code)
+        public bool IsProductExist(string part_number, string category_code)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -992,9 +1078,9 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            cmd.CommandText = @"SELECT code FROM pos_products WHERE item_number = @item_number AND category_code=@category_code";
+                            cmd.CommandText = @"SELECT code FROM pos_products WHERE part_number = @part_number AND category_code=@category_code";
                             cmd.Connection = cn;
-                            cmd.Parameters.AddWithValue("@item_number", item_number);
+                            cmd.Parameters.AddWithValue("@part_number", part_number);
                             cmd.Parameters.AddWithValue("@category_code", category_code);
                             //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -1094,7 +1180,7 @@ namespace POS.DLL
             }
         }
 
-        public DataTable SearchRecordByProductCode_1(string product_code)
+        public DataTable SearchRecordByProductCode_1(string item_number)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1108,8 +1194,8 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.name,P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,P.category_code," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                            cmd.CommandText = @"SELECT P.id,P.item_number,P.part_number,P.name,P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,P.category_code," +
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " T.title AS tax_title,T.rate AS tax_rate," +
                                 " U.name AS unit," +
                                 " C.name AS category" +
@@ -1117,9 +1203,9 @@ namespace POS.DLL
                                 " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
                                 " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE P.code = @code AND P.item_type = 'Purchased'";
+                                " WHERE P.deleted=0 AND P.item_number = @item_number AND P.item_type = 'Purchased'";
 
-                            cmd.Parameters.AddWithValue("@code", product_code);
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -1153,9 +1239,9 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
+                            cmd.CommandText = @"SELECT P.id,P.code,P.part_number,P.item_number,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no,demand_qty,purchase_demand_qty,sale_demand_qty," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " P.category_code,P.picture,P.packet_qty," +
                                 " T.title AS tax_title,T.rate AS tax_rate," +
                                 " U.name AS unit," +
@@ -1164,7 +1250,7 @@ namespace POS.DLL
                                 " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
                                 " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE P.id = @id";
+                                " WHERE p.deleted=0 AND P.id = @id";
 
                             cmd.Parameters.AddWithValue("@id", product_id);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -1184,7 +1270,7 @@ namespace POS.DLL
                 }
             }
         }
-        public DataTable SearchRecordByProductCode(string product_code)
+        public DataTable SearchRecordByProductCode(string product_code) 
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1197,9 +1283,9 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
+                            cmd.CommandText = @"SELECT P.id,P.code,P.part_number,P.item_number,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no,demand_qty,purchase_demand_qty,sale_demand_qty," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " P.category_code,P.picture,P.location_code,P.packet_qty," +
                                 " T.title AS tax_title,T.rate AS tax_rate," +
                                 " U.name AS unit," +
@@ -1208,7 +1294,7 @@ namespace POS.DLL
                                 " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
                                 " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE P.code = @code";
+                                " WHERE p.deleted=0 AND P.code = @code";
 
                             cmd.Parameters.AddWithValue("@code", product_code);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -1243,9 +1329,9 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
+                            cmd.CommandText = @"SELECT P.id,P.code,P.part_number,P.item_number,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no,demand_qty,purchase_demand_qty,sale_demand_qty," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " P.category_code," +
                                " T.title AS tax_title,T.rate AS tax_rate," +
                                " U.name AS unit," +
@@ -1254,7 +1340,7 @@ namespace POS.DLL
                                " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
                                " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                               " WHERE P.barcode = @barcode";
+                               " WHERE p.deleted=0 AND P.barcode = @barcode";
 
                             cmd.Parameters.AddWithValue("@barcode", string.Format("{0}", barcode));
                             //cmd.Parameters.AddWithValue("@name", product_name);
@@ -1290,12 +1376,12 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.name, P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,,P.location_code," +
-                                 " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                            cmd.CommandText = @"SELECT P.id,P.name,P.part_number,P.item_number, P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,,P.location_code," +
+                                 " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " T.title AS tax_title,T.rate AS tax_rate" +
                                 " FROM pos_products P" +
                                 " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
-                                " WHERE P.name like @product_name AND P.item_type = 'Purchased'";
+                                " WHERE p.deleted=0 AND P.name like @product_name AND P.item_type = 'Purchased'";
 
                             cmd.Parameters.AddWithValue("@name", string.Format("{0}", product_name));
                             //cmd.Parameters.AddWithValue("@name", product_name);
@@ -1333,18 +1419,20 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.name,P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,P.location_code," +
-                                 " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty" + //branch wise qty
-                                                                                                                                                                                 //" T.title AS tax_title,T.rate AS tax_rate," +
-                                                                                                                                                                                 //" U.name AS unit," +
-                                                                                                                                                                                 //" C.name AS category" +
+                            cmd.CommandText = @"SELECT P.id,P.item_number,P.part_number,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
+                                " P.unit_price,P.cost_price,P.description,P.group_code,alt_no,demand_qty,purchase_demand_qty,sale_demand_qty," +
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " P.category_code,P.picture,P.packet_qty,P.item_number_2,P.unit_price_2,P.expiry_date,P.unit_id,P.supplier_id," +
+                                " T.title AS tax_title,T.rate AS tax_rate," +
+                                " U.name AS unit," +
+                                " C.name AS category, C.id AS category_id" +
                                 " FROM pos_products P" +
-                                //" LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
-                                //" LEFT JOIN pos_units U ON U.id=P.unit_id" +
-                                //" LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE contains(P.item_number,@item_number)";
-
-                            cmd.Parameters.AddWithValue("@item_number", string.Format("%{0}%", item_number));
+                                " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
+                                " LEFT JOIN pos_units U ON U.id=P.unit_id" +
+                                " LEFT JOIN pos_categories C ON C.code=P.category_code" +
+                                " WHERE p.deleted=0 AND P.item_number = @item_number";
+                            
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
 
@@ -1377,9 +1465,9 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.code,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
+                            cmd.CommandText = @"SELECT P.id,P.code,P.part_number,P.item_number,P.name,P.name_ar,P.brand_code,P.item_type,P.barcode,P.avg_cost,P.tax_id,P.location_code," +
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no,demand_qty,purchase_demand_qty,sale_demand_qty," +
-                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_code=P.code and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                                " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " P.category_code,P.picture,P.location_code,P.packet_qty," +
                                 " T.title AS tax_title,T.rate AS tax_rate," +
                                 " U.name AS unit," +
@@ -1409,7 +1497,7 @@ namespace POS.DLL
             }
         }
 
-        public DataTable Get_otherStock(string productID, string productCode)
+        public DataTable Get_otherStock(string productID, string item_number)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1423,15 +1511,15 @@ namespace POS.DLL
                             cn.Open();
 
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT S.qty, B.name AS branch_name FROM pos_product_stocks S" +
+                            cmd.CommandText = @"SELECT S.qty,S.item_code, B.name AS branch_name FROM pos_product_stocks S" +
                                 " LEFT JOIN pos_branches B ON S.branch_id=B.id" +
-                                " WHERE (S.item_id = @productID OR S.item_code = @productCode) AND S.branch_id <> @branch_id";
+                                " WHERE (S.item_number = @item_number) AND S.branch_id <> @branch_id";
                             // "AND P.branch_id = @branch_id";
 
                             //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@productID", productID);
-                            cmd.Parameters.AddWithValue("@productCode", productCode);
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
 
                             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                             {
@@ -1468,6 +1556,7 @@ namespace POS.DLL
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@barcode", obj.barcode);
+                            cmd.Parameters.AddWithValue("@part_number", obj.part_number);
                             cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                             cmd.Parameters.AddWithValue("@item_number_2", obj.alt_item_number);
                             cmd.Parameters.AddWithValue("@origin", obj.origin);
@@ -1538,7 +1627,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@id", obj.id);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@item_number", obj.item_number);
+                            cmd.Parameters.AddWithValue("@part_number", obj.part_number);
                             cmd.Parameters.AddWithValue("@item_number_2", obj.alt_item_number);
                             cmd.Parameters.AddWithValue("@origin", obj.origin);
                             cmd.Parameters.AddWithValue("@barcode", obj.barcode);
@@ -1649,6 +1738,7 @@ namespace POS.DLL
                             //cmd.Parameters.AddWithValue("@qty", obj.qty);
                             //cmd.Parameters.AddWithValue("@adjustment_qty", obj.adjustment_qty);
                             cmd.Parameters.AddWithValue("@code", obj.code);
+                            cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                             cmd.Parameters.AddWithValue("@name", obj.name);
                             cmd.Parameters.AddWithValue("@name_ar", obj.name_ar);
                             //cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
@@ -1704,6 +1794,7 @@ namespace POS.DLL
                             cn.Open();
 
                             cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                             cmd.Parameters.AddWithValue("@code", obj.code);
                             cmd.Parameters.AddWithValue("@qty", obj.qty);
                             cmd.Parameters.AddWithValue("@adjustment_qty", obj.adjustment_qty);
@@ -1861,6 +1952,7 @@ namespace POS.DLL
 
                             cmd.CommandType = CommandType.StoredProcedure;
                            
+                            cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                             cmd.Parameters.AddWithValue("@code", obj.code);
                             cmd.Parameters.AddWithValue("@id", obj.id);
                             cmd.Parameters.AddWithValue("@qty", obj.qty);

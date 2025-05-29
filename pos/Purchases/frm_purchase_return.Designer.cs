@@ -37,6 +37,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grid_purchase_return = new System.Windows.Forms.DataGridView();
+            this.txt_close = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_return = new System.Windows.Forms.Button();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
+            this.txt_invoice_no = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,13 +61,7 @@
             this.tax_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_close = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btn_return = new System.Windows.Forms.Button();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
-            this.txt_invoice_no = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_search = new System.Windows.Forms.Button();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_purchase_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -98,10 +99,58 @@
             this.tax_id,
             this.tax_rate,
             this.item_id,
-            this.packet_qty});
+            this.packet_qty,
+            this.item_number});
             this.grid_purchase_return.Name = "grid_purchase_return";
             this.grid_purchase_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_purchase_return.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grid_purchase_return_DataError);
+            // 
+            // txt_close
+            // 
+            resources.ApplyResources(this.txt_close, "txt_close");
+            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.txt_close.Name = "txt_close";
+            this.txt_close.UseVisualStyleBackColor = true;
+            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
+            // 
+            // panel2
+            // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.btn_return);
+            this.panel2.Controls.Add(this.txt_close);
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            this.panel2.Name = "panel2";
+            // 
+            // btn_return
+            // 
+            resources.ApplyResources(this.btn_return, "btn_return");
+            this.btn_return.Name = "btn_return";
+            this.btn_return.UseVisualStyleBackColor = true;
+            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
+            // 
+            // txt_invoice_no
+            // 
+            resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
+            this.txt_invoice_no.Name = "txt_invoice_no";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // btn_search
+            // 
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // id
             // 
@@ -245,52 +294,11 @@
             resources.ApplyResources(this.packet_qty, "packet_qty");
             this.packet_qty.Name = "packet_qty";
             // 
-            // txt_close
+            // item_number
             // 
-            resources.ApplyResources(this.txt_close, "txt_close");
-            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.txt_close.Name = "txt_close";
-            this.txt_close.UseVisualStyleBackColor = true;
-            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.btn_return);
-            this.panel2.Controls.Add(this.txt_close);
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            this.panel2.Name = "panel2";
-            // 
-            // btn_return
-            // 
-            resources.ApplyResources(this.btn_return, "btn_return");
-            this.btn_return.Name = "btn_return";
-            this.btn_return.UseVisualStyleBackColor = true;
-            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
-            // 
-            // txt_invoice_no
-            // 
-            resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
-            this.txt_invoice_no.Name = "txt_invoice_no";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // btn_search
-            // 
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            this.item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.item_number, "item_number");
+            this.item_number.Name = "item_number";
             // 
             // frm_purchase_return
             // 
@@ -344,6 +352,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
     }
 }
 

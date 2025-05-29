@@ -64,7 +64,20 @@ namespace POS.BLL
                 throw;
             }
         }
-        
+        public DataTable GetAllByProductByItemNumber(string item_number)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.GetAllByProductByItemNumber(item_number);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
+
         public bool CheckDuplicateBarcode(string barcode)
         { 
             try
@@ -78,12 +91,12 @@ namespace POS.BLL
                 throw;
             }
         }
-        public bool IsProductExist(string item_number, string category_code)
+        public bool IsProductExist(string part_number, string category_code)
         {
             try
             {
                 ProductDLL objDLL = new ProductDLL();
-                return objDLL.IsProductExist(item_number, category_code);
+                return objDLL.IsProductExist(part_number, category_code);
             }
             catch
             {
@@ -277,12 +290,25 @@ namespace POS.BLL
                 throw;
             }
         }
-        public DataTable Get_otherStock(string productID, string productCode)
+        public DataTable Get_otherStock(string productID, string item_number)
         {
             try
             {
                 ProductDLL objDLL = new ProductDLL();
-                return objDLL.Get_otherStock(productID, productCode);
+                return objDLL.Get_otherStock(productID, item_number);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
+        public string GetMaxProductNumber()
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.GetMaxProductNumber();
             }
             catch
             {

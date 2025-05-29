@@ -107,9 +107,10 @@ namespace pos
                     {
                         string productID = (grid_search_products.CurrentRow.Cells["id"].Value != null ? grid_search_products.CurrentRow.Cells["id"].Value.ToString() : "");
                         string product_code = (grid_search_products.CurrentRow.Cells["code"].Value != null ? grid_search_products.CurrentRow.Cells["code"].Value.ToString() : "");
+                        string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
                         int alternate_no = (grid_search_products.CurrentRow.Cells["alternate_no"].Value != null ? Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value) : 0);
                         load_alternate_product(alternate_no);//load alternate products
-                        load_other_stock(productID,product_code);
+                        load_other_stock(productID, item_number);
 
                     }
 
@@ -130,17 +131,18 @@ namespace pos
             {
                 string product_id = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
                 string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
+                string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
 
                 if (_isGrid)
                 {
 
-                    mainForm.Load_products_to_grid(product_id);
+                    mainForm.Load_products_to_grid(item_number);
                     _returnStatus = true;
 
                 }
                 else
                 {
-                    mainForm.load_products(code);
+                    mainForm.load_products(item_number);
                 }
 
                 this.Visible = false;
@@ -166,8 +168,8 @@ namespace pos
         {
             if (grid_search_products.RowCount > 0)
             {
-                string product_code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
+                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number);
 
                 frm_prod_move_obj.ShowDialog();
             }
@@ -193,7 +195,7 @@ namespace pos
         {
             try
             {
-                if (txt_search.Text != "")
+                if (!string.IsNullOrEmpty(txt_search.Text) && txt_search.Text.Length > 3)
                 {
                     //grid_search_products.DataSource = null;
                     bool by_code = rb_by_code.Checked;
@@ -237,18 +239,19 @@ namespace pos
             if (grid_group_products.SelectedCells.Count > 0)
             {
                 string g_product_id = grid_group_products.CurrentRow.Cells["g_id"].Value.ToString();
+                string alt_item_number = grid_group_products.CurrentRow.Cells["alt_item_number"].Value.ToString();
 
                 if (_isGrid)
                 {
 
-                    mainForm.Load_products_to_grid(g_product_id);
+                    mainForm.Load_products_to_grid(alt_item_number);
                     _returnStatus = true;
 
                 }
                 else
                 {
 
-                    mainForm.load_products(g_product_id);
+                    mainForm.load_products(alt_item_number);
 
 
                 }
@@ -271,8 +274,9 @@ namespace pos
                     string productID = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
                     string product_code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
                     int alternate_no = (grid_search_products.CurrentRow.Cells["alternate_no"].Value != null ? Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value) : 0);
+                    string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
                     load_alternate_product(alternate_no);
-                    load_other_stock(productID, product_code);
+                    load_other_stock(productID, item_number);
                 }
 
             }
@@ -354,7 +358,7 @@ namespace pos
                 }
             }
         }
-        public void load_other_stock(string productID, string productCode)
+        public void load_other_stock(string productID, string ProductNumber)
         {
             if(grid_search_products.RowCount > 0)
             {
@@ -362,7 +366,7 @@ namespace pos
                 grid_other_stock.DataSource = null;
                 grid_other_stock.Rows.Clear();
 
-                DataTable dt = objBLL.Get_otherStock(productID, productCode);
+                DataTable dt = objBLL.Get_otherStock(productID, ProductNumber);
                 foreach (DataRow myProductView in dt.Rows)
                 {
                     string compnay_name = myProductView["branch_name"].ToString();

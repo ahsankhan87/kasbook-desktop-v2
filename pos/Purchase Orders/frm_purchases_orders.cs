@@ -200,10 +200,10 @@ namespace pos
             //throw new NotImplementedException();
         }
 
-        public void Load_products_to_grid(string product_id, int RowIndex1)
+        public void Load_products_to_grid(string item_number, int RowIndex1)
         {
             ProductBLL productsBLL_obj = new ProductBLL();
-            DataTable dt = productsBLL_obj.SearchRecordByProductCode(product_id);
+            DataTable dt = productsBLL_obj.SearchRecordByProductNumber(item_number);
             //grid_purchases_order.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             int RowIndex = grid_purchases_order.CurrentCell.RowIndex;
 
@@ -211,8 +211,8 @@ namespace pos
             {
                 for (int i = 0; i < grid_purchases_order.RowCount; i++)
                 {
-                    var item_code = (grid_purchases_order.Rows[i].Cells["code"].Value != null ? grid_purchases_order.Rows[i].Cells["code"].Value : "");
-                    if (item_code.ToString() == product_id)
+                    var grid_item_number = (grid_purchases_order.Rows[i].Cells["item_number"].Value != null ? grid_purchases_order.Rows[i].Cells["item_number"].Value : "");
+                    if (grid_item_number.ToString() == item_number)
                     {
                         MessageBox.Show("Product already added", "Already exist", MessageBoxButtons.OK, MessageBoxIcon.Question);
                         //DataView dvProducts = products_dt.DefaultView;
@@ -238,6 +238,7 @@ namespace pos
                     double sub_total = tax + double.Parse(myProductView["avg_cost"].ToString());
 
                     grid_purchases_order.Rows[RowIndex].Cells["id"].Value = myProductView["id"].ToString();
+                    grid_purchases_order.Rows[RowIndex].Cells["item_number"].Value = myProductView["item_number"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["code"].Value = myProductView["code"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["name"].Value = myProductView["name"].ToString();
                     grid_purchases_order.Rows[RowIndex].Cells["qty"].Value = (myProductView["demand_qty"].ToString() == string.Empty || (decimal)myProductView["demand_qty"] == 0 ? "1" : myProductView["demand_qty"].ToString());
@@ -272,16 +273,16 @@ namespace pos
 
             }
         }
-        public void load_products(string product_id = "", string product_name = "", string barcode = "")
+        public void load_products(string item_number = "", string product_name = "", string barcode = "")
         {
 
             ProductBLL productsBLL_obj = new ProductBLL();
             //DataTable product_dt = productsBLL_obj.SearchRecordByProductCode(txt_product_code.Text);
             DataTable product_dt = new DataTable();
 
-            if (product_id != string.Empty)
+            if (item_number != string.Empty)
             {
-                product_dt = productsBLL_obj.SearchRecordByProductCode(product_id);
+                product_dt = productsBLL_obj.SearchRecordByProductNumber(item_number);
             }
 
             if (product_name != string.Empty)
@@ -317,11 +318,12 @@ namespace pos
                     double tax = (Convert.ToDouble(qty) * avg_cost * tax_rate / 100);
 
                     double current_sub_total = Convert.ToDouble(qty) * avg_cost + tax;
+                    string item_number1 = myProductView["item_number"].ToString();
 
                     string[] row0 = { id.ToString(), code, name, 
                                             qty, avg_cost.ToString(),unit_price.ToString(), discount.ToString(), 
                                             tax.ToString(), current_sub_total.ToString(),location_code,unit,category, 
-                                            btn_delete, tax_id.ToString(), tax_rate.ToString(), unit_price.ToString() };
+                                            btn_delete, tax_id.ToString(), tax_rate.ToString(), unit_price.ToString(),item_number1 };
                     int RowIndex = grid_purchases_order.Rows.Add(row0);
 
                     
@@ -648,11 +650,12 @@ namespace pos
                                 string location_code = myProductView["location_code"].ToString();
                                 string unit = myProductView["unit"].ToString();
                                 string tax_id = myProductView["tax_id"].ToString();
+                                string item_number = myProductView["item_number"].ToString();
 
 
                                 string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
                                             available_qty,required_qty.ToString(),category,unit_price.ToString(), discount.ToString(),
-                                sub_total.ToString(),location_code,unit,btn_delete,tax_id, tax_rate.ToString()    };
+                                sub_total.ToString(),location_code,unit,btn_delete,tax_id, tax_rate.ToString(),item_number    };
 
                                 int RowIndex = grid_purchases_order.Rows.Add(row0);
 
@@ -1251,12 +1254,12 @@ namespace pos
                         string item_type = myProductView["item_type"].ToString();
                         string btn_delete = "Del";
                         string tax_id = myProductView["tax_id"].ToString();
-
+                        string item_number = myProductView["item_number"].ToString();
 
                         string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold,
                                             available_qty,qty.ToString(),category,unit_price.ToString(), discount.ToString(),
                             current_sub_total.ToString(),location_code,unit,btn_delete,
-                            tax_id.ToString(), tax_rate.ToString() };
+                            tax_id.ToString(), tax_rate.ToString(),item_number };
                         int RowIndex = grid_purchases_order.Rows.Add(row0);
 
                         //GET / SET Location Dropdown list
@@ -1360,8 +1363,8 @@ namespace pos
                         DateTime purchase_date = txt_purchase_date.Value.Date;
                         DateTime delivery_date = txt_delivery_date.Value.Date;
 
-                        int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
-                        int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
+                        int supplier_id = (cmb_suppliers.SelectedValue == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
+                        int employee_id = (cmb_employees.SelectedValue == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
 
                         string invoice_no = "";
 
@@ -1416,6 +1419,7 @@ namespace pos
                                         invoice_no = invoice_no,
                                         supplier_id = supplier_id,
                                         purchase_date = purchase_date.ToString("yyyy-MM-dd"),
+                                        item_number = grid_purchases_order.Rows[i].Cells["item_number"].Value.ToString(),
                                         code = grid_purchases_order.Rows[i].Cells["code"].Value.ToString(),
                                         //name = grid_purchases_order.Rows[i].Cells["name"].Value.ToString(),
                                         quantity = double.Parse(grid_purchases_order.Rows[i].Cells["qty"].Value.ToString()),
@@ -1558,12 +1562,13 @@ namespace pos
                         string location_code = ""; // myProductView["location_code"].ToString();
                         string unit = ""; //myProductView["unit"].ToString();
                         string tax_id = myProductView["tax_id"].ToString();
+                        string item_number = myProductView["item_number"].ToString();
 
 
                         string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
                                             available_qty,required_qty.ToString(),category,unit_price.ToString(), discount.ToString(),
                             sub_total.ToString(),location_code,unit,btn_delete,tax_id,
-                            tax_rate.ToString()    };
+                            tax_rate.ToString(),item_number    };
 
                         int RowIndex = grid_purchases_order.Rows.Add(row0);
 

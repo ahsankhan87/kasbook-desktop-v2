@@ -145,6 +145,7 @@ namespace pos
                                 purchase_model_detail.Add(new PurchasesModal
                                 {
                                     invoice_no = new_invoice_no,
+                                    item_number = grid_purchase_return.Rows[i].Cells["item_number"].Value.ToString(),
                                     code = grid_purchase_return.Rows[i].Cells["item_code"].Value.ToString(),
                                     //name = grid_purchases.Rows[i].Cells["name"].Value.ToString(),
                                     quantity = decimal.Parse(grid_purchase_return.Rows[i].Cells["return_qty"].Value.ToString()),

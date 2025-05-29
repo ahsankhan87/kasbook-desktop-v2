@@ -43,6 +43,7 @@
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alternate_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_product_groups)).BeginInit();
@@ -50,7 +51,6 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_source_code);
             this.panel1.Controls.Add(this.txt_product_code);
@@ -61,6 +61,7 @@
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.txt_item_code);
             this.panel1.Controls.Add(this.grid_product_groups);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_source_code
@@ -116,10 +117,10 @@
             // 
             // grid_product_groups
             // 
-            resources.ApplyResources(this.grid_product_groups, "grid_product_groups");
             this.grid_product_groups.AllowUserToAddRows = false;
             this.grid_product_groups.AllowUserToDeleteRows = false;
             this.grid_product_groups.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_product_groups, "grid_product_groups");
             this.grid_product_groups.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_product_groups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_product_groups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -127,6 +128,7 @@
             this.code,
             this.name,
             this.alternate_no,
+            this.item_number,
             this.btn_delete});
             this.grid_product_groups.Name = "grid_product_groups";
             this.grid_product_groups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -155,6 +157,12 @@
             this.alternate_no.DataPropertyName = "alternate_no";
             resources.ApplyResources(this.alternate_no, "alternate_no");
             this.alternate_no.Name = "alternate_no";
+            // 
+            // item_number
+            // 
+            this.item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.item_number, "item_number");
+            this.item_number.Name = "item_number";
             // 
             // btn_delete
             // 
@@ -198,6 +206,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn alternate_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.DataGridViewImageColumn btn_delete;
     }
 }

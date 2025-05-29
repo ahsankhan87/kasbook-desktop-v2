@@ -93,13 +93,13 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.invoice_no,SI.id,SI.item_code,SI.item_name,SI.quantity_sold,SI.unit_price,SI.loc_code," +
+                        String query = "SELECT SI.invoice_no,SI.id,SI.item_code,SI.item_number,SI.item_name,SI.quantity_sold,SI.unit_price,SI.loc_code," +
                             " SI.discount_value,ABS(SI.unit_price*SI.quantity_sold-SI.discount_value) AS total," +
                             " ((SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))*SI.tax_rate/100) AS vat," +
                             " (ABS((SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))*SI.tax_rate/100) + ABS(SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))) AS net_total, " +
                             " P.name AS product_name, P.code AS product_code " +
                             "FROM pos_sales_items SI " +
-                            "LEFT JOIN pos_products P ON P.code=SI.item_code " +
+                            "LEFT JOIN pos_products P ON P.item_number=SI.item_number " +
                             "WHERE invoice_no = @invoice_no AND SI.branch_id = @branch_id";
 
                         cmd = new SqlCommand(query, cn);
@@ -133,7 +133,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,S.branch_id," +
-                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.item_name AS product_name,SI.tax_rate,SI.tax_id," +
+                            " SI.id,SI.item_code,SI.item_number,SI.quantity_sold,SI.unit_price,SI.item_name AS product_name,SI.tax_rate,SI.tax_id," +
                             " SI.discount_value, " +
                             " S.discount_value AS total_discount, S.total_tax, S.total_amount, " +
                             " (SI.unit_price*SI.quantity_sold) AS total, " +
@@ -143,7 +143,7 @@ namespace POS.DLL
                             " SI.loc_code,S.description,SI.item_code as code" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
-                            //" LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " LEFT JOIN pos_users U ON U.id=S.user_id" +
                             " WHERE S.invoice_no = @invoice_no AND S.branch_id = @branch_id";
@@ -178,7 +178,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account," +
-                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price," +
+                            " SI.id,SI.item_code,SI.item_number,SI.quantity_sold,SI.unit_price," +
                             " S.discount_value AS total_discount, S.total_tax, S.total_amount, " + 
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat," +
@@ -186,7 +186,7 @@ namespace POS.DLL
                             " C.first_name AS customer_name, C.vat_no AS customer_vat" +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.id=SI.sale_id" +
-                            //" LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE S.invoice_no = @invoice_no AND S.branch_id = @branch_id";
 
@@ -442,6 +442,7 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                 cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
                                 cmd.Parameters.AddWithValue("@item_id", detail.item_id);
+                                cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                                 cmd.Parameters.AddWithValue("@item_code", detail.code);
                                 cmd.Parameters.AddWithValue("@item_name", detail.name);
                                 cmd.Parameters.AddWithValue("@item_type", detail.item_type);
@@ -959,6 +960,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@source_branch_id", detail.source_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
+                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@destination_branch_id", detail.destination_branch_id);
                             cmd.Parameters.AddWithValue("@quantity_requested", detail.quantity_sold);
                             cmd.Parameters.AddWithValue("@requested_date", detail.sale_date);
@@ -1136,7 +1138,7 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.id,SI.item_code,CAST(1 AS BIT) AS chk, SI.invoice_no,SI.quantity_sold AS return_qty,SI.packet_qty," +
+                        String query = "SELECT SI.id,SI.item_code,SI.item_number,CAST(1 AS BIT) AS chk, SI.invoice_no,SI.quantity_sold AS return_qty,SI.packet_qty," +
                             " SI.quantity_sold,SI.unit_price,SI.cost_price,SI.tax_rate,SI.tax_id,SI.discount_value,SI.loc_code," +
                             " (SI.unit_price*SI.quantity_sold-SI.discount_value)+((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS total," +
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
@@ -1219,6 +1221,7 @@ namespace POS.DLL
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
                             cmd.Parameters.AddWithValue("@item_name", detail.name);
                             cmd.Parameters.AddWithValue("@item_type", detail.item_type);
@@ -1624,6 +1627,7 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                         cmd.Parameters.AddWithValue("@item_code", obj.code);
+                        cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                         cmd.Parameters.AddWithValue("@item_name", obj.name);
                         cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
                         cmd.Parameters.AddWithValue("@sale_id", obj.sale_id);
@@ -1812,6 +1816,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
+                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@item_name", detail.name);
                             cmd.Parameters.AddWithValue("@item_type", detail.item_type);
                             cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
@@ -1867,15 +1872,15 @@ namespace POS.DLL
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,S.customer_id,S.employee_id,S.description,S.account," +
                             " S.discount_percent AS total_disc_percent,S.discount_value AS total_disc_value,S.total_amount,S.flatDiscountValue," +
-                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.packet_qty," +
+                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.packet_qty,SI.item_number," +
                             " SI.discount_value,SI.discount_percent,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
-                            " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat," +
+                            " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat, SI.item_number," +
                             " P.name AS name,P.code,P.item_type,P.qty,P.category_code," +
                             " U.name AS unit," +
                             " CT.name AS category, CT.id AS category_id" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.invoice_no = SI.invoice_no" +
-                            " LEFT JOIN pos_products P ON P.code = SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number = SI.item_number" +
                             " LEFT JOIN pos_units U ON U.id = SI.unit_id" +
                             " LEFT JOIN pos_categories CT ON CT.code = P.category_code" +
                             " WHERE S.invoice_no = @invoice_no AND S.account = 'Sale' AND S.branch_id = @branch_id"+
@@ -1913,15 +1918,15 @@ namespace POS.DLL
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,S.customer_id,S.employee_id,S.description,S.account," +
                             " S.discount_percent AS total_disc_percent,S.discount_value AS total_disc_value,S.total_amount,S.flatDiscountValue," +
-                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code," +
+                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.item_number," +
                             " SI.discount_value,SI.discount_percent,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
-                            " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat," +
+                            " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat, SI.item_number," +
                             " P.name AS name,P.code,P.item_type,P.category_code," +
                             " U.name AS unit," +
                             " CT.name AS category, CT.id AS category_id" +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.invoice_no=SI.invoice_no" +
-                            " LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_units U ON U.id=SI.unit_id" +
                             " LEFT JOIN pos_categories CT ON CT.code=P.category_code" +
                             " WHERE S.invoice_no = @invoice_no AND S.status != 1 AND S.branch_id = @branch_id"+
@@ -1992,18 +1997,19 @@ namespace POS.DLL
                         foreach (DataRow dr in sales_dt.Rows)
                         {
                             //String query_2 = "UPDATE pos_products SET qty= (SELECT qty FROM pos_products WHERE code = @item_code)+@quantity_sold WHERE code=@item_code ";
-                            String query_2 = "UPDATE pos_product_stocks SET qty= (SELECT TOP 1 qty FROM pos_product_stocks WHERE item_code = @item_code AND branch_id = @branch_id)+@quantity WHERE item_code=@item_code AND branch_id = @branch_id ";
+                            String query_2 = "UPDATE pos_product_stocks SET qty= (SELECT TOP 1 qty FROM pos_product_stocks WHERE item_number = @item_number AND branch_id = @branch_id)+@quantity WHERE item_number=@item_number AND branch_id = @branch_id ";
                             //String query_2 = "INSERT INTO pos_product_stocks VALUES (0,0,'" + dr["loc_code"].ToString() + "'," + dr["item_code"].ToString() + "," + double.Parse(dr["quantity_sold"].ToString()) + ",0,'" + date_now + "','" + date_now + "')";
                             //String query_2 = "UPDATE pos_product_stocks SET qty= (SELECT qty FROM pos_product_stocks WHERE item_code = " + dr["item_code"].ToString() + " AND loc_code = '" + dr["loc_code"].ToString() + "')+" + double.Parse(dr["quantity_sold"].ToString()) + " WHERE item_code=" + dr["item_code"].ToString() + " AND loc_code = '" + dr["loc_code"].ToString() + "'";
                             cmd = new SqlCommand(query_2, cn, transaction);
-                            cmd.Parameters.AddWithValue("@item_code", dr["item_code"].ToString());
+                            cmd.Parameters.AddWithValue("@item_number", dr["item_number"].ToString());
                             cmd.Parameters.AddWithValue("@quantity", double.Parse(dr["quantity_sold"].ToString()));
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.ExecuteNonQuery();
 
-                            String query_3 = "INSERT INTO pos_inventory VALUES (@item_code,@quantity,@cost_price,@unit_price,@branch_id,@user_id,'Sales Delete',@invoice_no, @sale_date,GETDATE(),0,0,0,@sale_date,@location_code,-@packet_qty)";
+                            String query_3 = "INSERT INTO pos_inventory VALUES (@item_code,@quantity,@cost_price,@unit_price,@branch_id,@user_id,'Sales Delete',@invoice_no, @sale_date,GETDATE(),0,0,0,@sale_date,@location_code,-@packet_qty,@item_number)";
                             cmd = new SqlCommand(query_3, cn, transaction);
                             cmd.Parameters.AddWithValue("@item_code", dr["item_code"].ToString());
+                            cmd.Parameters.AddWithValue("@item_number", dr["item_number"].ToString());
                             cmd.Parameters.AddWithValue("@location_code", dr["loc_code"].ToString());
                             cmd.Parameters.AddWithValue("@cost_price", double.Parse(dr["cost_price"].ToString()));
                             cmd.Parameters.AddWithValue("@unit_price", double.Parse(dr["unit_price"].ToString()));

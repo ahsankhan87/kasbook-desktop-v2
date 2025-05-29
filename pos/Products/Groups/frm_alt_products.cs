@@ -57,31 +57,40 @@ namespace pos
 
         public void Load_alternateProductsToGrid(int alt_no)
         {
-            grid_product_groups.Rows.Clear();
-            grid_product_groups.Refresh();
-
-            ProductGroupsBLL objBLL = new ProductGroupsBLL();
-            DataTable product_dt = new DataTable();
-            product_dt = objBLL.SearchAlternateProducts(alt_no);
-            
-            if (product_dt.Rows.Count > 0)
+            try
             {
-                foreach (DataRow myProductView in product_dt.Rows)
+                grid_product_groups.Rows.Clear();
+                grid_product_groups.Refresh();
+
+                ProductGroupsBLL objBLL = new ProductGroupsBLL();
+                DataTable product_dt = new DataTable();
+                product_dt = objBLL.SearchAlternateProducts(alt_no);
+
+                if (product_dt.Rows.Count > 0)
                 {
+                    foreach (DataRow myProductView in product_dt.Rows)
+                    {
 
-                    int id = Convert.ToInt32(myProductView["id"]);
-                    string code = myProductView["code"].ToString();
-                    string name = myProductView["name"].ToString();
-                    string alternate_no = myProductView["alternate_no"].ToString();
+                        int id = Convert.ToInt32(myProductView["id"]);
+                        string code = myProductView["code"].ToString();
+                        string name = myProductView["name"].ToString();
+                        string alternate_no = myProductView["alternate_no"].ToString();
+                        string item_number = myProductView["item_number"].ToString();
 
-                    string[] row0 = { id.ToString(), code, name, alternate_no };
+                        string[] row0 = { id.ToString(), code, name, alternate_no, item_number };
 
-                    grid_product_groups.Rows.Add(row0);
+                        grid_product_groups.Rows.Add(row0);
+
+                    }
+
 
                 }
-
-
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            }
+            
         }
 
         
@@ -91,42 +100,49 @@ namespace pos
             {
                 if(txt_item_code.Text != "")
                 {
-                    string result = "";
-                    ProductGroupsModal info = new ProductGroupsModal();
-                    ProductGroupsBLL objBLL = new ProductGroupsBLL();
+                    DialogResult result = MessageBox.Show("Are you sure you want to save", "Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    for (int i = 0; i < grid_product_groups.Rows.Count; i++)
+                    if (result == DialogResult.Yes)
                     {
-                        if (grid_product_groups.Rows[i].Cells["code"].Value != null)
+                        string result_1 = "";
+                        ProductGroupsModal info = new ProductGroupsModal();
+                        ProductGroupsBLL objBLL = new ProductGroupsBLL();
+
+                        for (int i = 0; i < grid_product_groups.Rows.Count; i++)
                         {
-                            info.alt_no = int.Parse(grid_product_groups.Rows[i].Cells["alternate_no"].Value.ToString());
-                            info.product_id = grid_product_groups.Rows[i].Cells["code"].Value.ToString();
-                            info.code = global_product_code;
-                            result = objBLL.InsertProductAlternate(info); // 
+                            if (grid_product_groups.Rows[i].Cells["code"].Value != null)
+                            {
+                                info.alt_no = int.Parse(grid_product_groups.Rows[i].Cells["alternate_no"].Value.ToString());
+                                info.product_id = grid_product_groups.Rows[i].Cells["code"].Value.ToString();
+                                info.item_number = grid_product_groups.Rows[i].Cells["item_number"].Value.ToString();
+                                info.code = global_product_code;
+                                result_1 = objBLL.InsertProductAlternate(info); // 
+
+                            }
 
                         }
-
-                    }
-                    if(result.ToString().Length > 0)
-                    {
-                        MessageBox.Show("Record Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        grid_product_groups.DataSource = null;
-                        grid_product_groups.Rows.Clear();
-                        txt_product_code.Text = "";
-                        txt_source_code.Text ="";
-                        txt_item_code.Text = "";
-                        txt_source_code.Focus();
+                        if (result_1.ToString().Length > 0)
+                        {
+                            MessageBox.Show("Record Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            grid_product_groups.DataSource = null;
+                            grid_product_groups.Rows.Clear();
+                            txt_product_code.Text = "";
+                            txt_source_code.Text = "";
+                            txt_item_code.Text = "";
+                            txt_source_code.Focus();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Please select group", "Group", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
                 }
-                else
-                {
-                    MessageBox.Show("Please select group", "Group", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            
+
             }
             catch (Exception ex)
             {
@@ -165,7 +181,7 @@ namespace pos
 
             if (product_id != string.Empty)
             {
-                product_dt = productsBLL_obj.SearchRecordByProductCode(product_id);
+                product_dt = productsBLL_obj.SearchRecordByProductNumber(product_id);
             }
 
             if (product_dt.Rows.Count > 0)
@@ -176,6 +192,7 @@ namespace pos
                     int id = Convert.ToInt32(myProductView["id"]);
                     string code = myProductView["code"].ToString();
                     string name = myProductView["name"].ToString();
+                    string item_number = myProductView["item_number"].ToString();
                     int alt_no = global_alt_id; // (myProductView["alt_no"] != null ? Convert.ToInt32(myProductView["alt_no"]) : 0);
 
                     if (alt_no == 0)
@@ -186,7 +203,7 @@ namespace pos
                         alt_no = maxAltNo;
                     }
 
-                    string[] row0 = { id.ToString(), code, name, alt_no.ToString() };
+                    string[] row0 = { id.ToString(), code, name, alt_no.ToString(), item_number };
 
                     grid_product_groups.Rows.Add(row0);
 

@@ -154,11 +154,11 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.invoice_no,SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,"+
+                        String query = "SELECT SI.invoice_no,SI.id,SI.item_number,SI.item_code,SI.quantity_sold,SI.unit_price,"+
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold-SI.discount_value) AS total,"+
                             " P.name AS product_name, P.code AS product_code " +
                             "FROM pos_estimates_items SI " +
-                            "LEFT JOIN pos_products P ON P.code=SI.item_code " +
+                            "LEFT JOIN pos_products P ON P.item_number=SI.item_number " +
                             "WHERE sale_id LIKE @sale_id";
 
                         cmd = new SqlCommand(query, cn);
@@ -190,7 +190,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,"+
-                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price," +
+                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.item_number," +
                              " S.discount_value AS total_discount, S.total_tax, S.total_amount, " + 
                              " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             " S.total_tax as vat,"+
@@ -199,7 +199,7 @@ namespace POS.DLL
                             " C.first_name AS customer_name, C.vat_no AS customer_vat" +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.id=SI.sale_id" +
-                            " LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE S.invoice_no LIKE @invoice_no";
 
@@ -232,14 +232,14 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account," +
-                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price," +
+                            " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.item_number," +
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat," +
                             " P.name AS product_name," +
                             " C.first_name AS customer_name, C.vat_no AS customer_vat" +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.id=SI.sale_id" +
-                            " LEFT JOIN pos_products P ON P.code=SI.item_code" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE S.invoice_no LIKE @invoice_no";
 

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addSupplier));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_first_name = new System.Windows.Forms.TextBox();
             this.txt_last_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,14 +62,6 @@
             this.btn_payment = new System.Windows.Forms.Button();
             this.btn_trans_refresh = new System.Windows.Forms.Button();
             this.grid_supplier_transactions = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btn_save = new System.Windows.Forms.Button();
-            this.btn_refresh = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
-            this.btn_update = new System.Windows.Forms.Button();
-            this.btn_blank = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entry_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +70,14 @@
             this.credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_refresh = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
+            this.btn_blank = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -146,12 +146,12 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_customer_name);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.label21);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel1.Name = "panel1";
             // 
@@ -168,8 +168,8 @@
             // 
             // btn_search
             // 
-            resources.ApplyResources(this.btn_search, "btn_search");
             this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.btn_search, "btn_search");
             this.btn_search.Name = "btn_search";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
@@ -198,8 +198,8 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.chk_vat_status);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -216,21 +216,20 @@
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.tabControl1);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // tabControl1
             // 
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // tabPage1
             // 
-            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Controls.Add(this.txt_id);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.label3);
@@ -247,16 +246,17 @@
             this.tabPage1.Controls.Add(this.txt_contact_no);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.lbl_edit_status);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Controls.Add(this.Btn_ledger_report);
             this.tabPage2.Controls.Add(this.btn_payment);
             this.tabPage2.Controls.Add(this.btn_trans_refresh);
             this.tabPage2.Controls.Add(this.grid_supplier_transactions);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -283,10 +283,10 @@
             // 
             // grid_supplier_transactions
             // 
-            resources.ApplyResources(this.grid_supplier_transactions, "grid_supplier_transactions");
             this.grid_supplier_transactions.AllowUserToAddRows = false;
             this.grid_supplier_transactions.AllowUserToDeleteRows = false;
             this.grid_supplier_transactions.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_supplier_transactions, "grid_supplier_transactions");
             this.grid_supplier_transactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_supplier_transactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_supplier_transactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -301,68 +301,6 @@
             this.grid_supplier_transactions.Name = "grid_supplier_transactions";
             this.grid_supplier_transactions.ReadOnly = true;
             this.grid_supplier_transactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // panel3
-            // 
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Controls.Add(this.groupBox2);
-            this.panel3.Name = "panel3";
-            // 
-            // groupBox2
-            // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.btn_save);
-            this.groupBox2.Controls.Add(this.btn_refresh);
-            this.groupBox2.Controls.Add(this.btn_delete);
-            this.groupBox2.Controls.Add(this.btn_update);
-            this.groupBox2.Controls.Add(this.btn_blank);
-            this.groupBox2.Controls.Add(this.btn_cancel);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // btn_save
-            // 
-            resources.ApplyResources(this.btn_save, "btn_save");
-            this.btn_save.Name = "btn_save";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
-            // 
-            // btn_refresh
-            // 
-            resources.ApplyResources(this.btn_refresh, "btn_refresh");
-            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.UseVisualStyleBackColor = true;
-            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
-            // 
-            // btn_delete
-            // 
-            resources.ApplyResources(this.btn_delete, "btn_delete");
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
-            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
-            // 
-            // btn_update
-            // 
-            resources.ApplyResources(this.btn_update, "btn_update");
-            this.btn_update.Name = "btn_update";
-            this.btn_update.UseVisualStyleBackColor = true;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
-            // 
-            // btn_blank
-            // 
-            resources.ApplyResources(this.btn_blank, "btn_blank");
-            this.btn_blank.Name = "btn_blank";
-            this.btn_blank.UseVisualStyleBackColor = true;
-            this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
-            // 
-            // btn_cancel
-            // 
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // id
             // 
@@ -395,9 +333,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -405,9 +343,9 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -415,9 +353,9 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
@@ -428,6 +366,68 @@
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
             this.description.ReadOnly = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.groupBox2);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btn_save);
+            this.groupBox2.Controls.Add(this.btn_refresh);
+            this.groupBox2.Controls.Add(this.btn_delete);
+            this.groupBox2.Controls.Add(this.btn_update);
+            this.groupBox2.Controls.Add(this.btn_blank);
+            this.groupBox2.Controls.Add(this.btn_cancel);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // btn_save
+            // 
+            resources.ApplyResources(this.btn_save, "btn_save");
+            this.btn_save.Name = "btn_save";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // btn_refresh
+            // 
+            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_refresh, "btn_refresh");
+            this.btn_refresh.Name = "btn_refresh";
+            this.btn_refresh.UseVisualStyleBackColor = true;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
+            // 
+            // btn_delete
+            // 
+            resources.ApplyResources(this.btn_delete, "btn_delete");
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // btn_update
+            // 
+            resources.ApplyResources(this.btn_update, "btn_update");
+            this.btn_update.Name = "btn_update";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
+            // 
+            // btn_blank
+            // 
+            resources.ApplyResources(this.btn_blank, "btn_blank");
+            this.btn_blank.Name = "btn_blank";
+            this.btn_blank.UseVisualStyleBackColor = true;
+            this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // frm_addSupplier
             // 

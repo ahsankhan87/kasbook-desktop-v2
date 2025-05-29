@@ -190,6 +190,7 @@ namespace pos
                                 sales_model_detail.Add(new SalesModal
                                 {
                                     invoice_no = new_invoice_no,
+                                    item_number= grid_sales_return.Rows[i].Cells["item_number"].Value.ToString(),
                                     code = grid_sales_return.Rows[i].Cells["item_code"].Value.ToString(),
                                     name = grid_sales_return.Rows[i].Cells["product_name"].Value.ToString(),
                                     quantity_sold = double.Parse(grid_sales_return.Rows[i].Cells["return_qty"].Value.ToString()),

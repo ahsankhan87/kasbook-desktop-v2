@@ -1273,7 +1273,7 @@
     <value>Product Detail</value>
   </data>
   <data name="contextMenuStrip_purchases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 76</value>
+    <value>254, 104</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip_purchases.Name" xml:space="preserve">
     <value>contextMenuStrip_purchases</value>
@@ -1333,7 +1333,7 @@
     <value>6</value>
   </data>
   <data name="avg_cost.Width" type="System.Int32, mscorlib">
-    <value>102</value>
+    <value>111</value>
   </data>
   <metadata name="unit_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1343,6 +1343,9 @@
   </data>
   <data name="unit_price.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="unit_price.Width" type="System.Int32, mscorlib">
+    <value>108</value>
   </data>
   <metadata name="discount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1375,7 +1378,7 @@
     <value>6</value>
   </data>
   <data name="sub_total.Width" type="System.Int32, mscorlib">
-    <value>99</value>
+    <value>107</value>
   </data>
   <metadata name="location_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1462,7 +1465,19 @@
     <value>False</value>
   </data>
   <data name="shop_qty.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>103</value>
+  </data>
+  <metadata name="item_number.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="item_number.HeaderText" xml:space="preserve">
+    <value>Item Number</value>
+  </data>
+  <data name="item_number.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="item_number.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="grid_purchases.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1876,7 +1891,7 @@
     <value>6</value>
   </data>
   <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>93</value>
+    <value>101</value>
   </data>
   <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1891,7 +1906,7 @@
     <value>False</value>
   </data>
   <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>101</value>
   </data>
   <metadata name="description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1906,7 +1921,7 @@
     <value>False</value>
   </data>
   <data name="description.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>108</value>
   </data>
   <metadata name="supplier.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2601,6 +2616,12 @@
   <data name="&gt;&gt;LoadPOToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;PrinttoolStripButton.Name" xml:space="preserve">
+    <value>PrinttoolStripButton</value>
+  </data>
+  <data name="&gt;&gt;PrinttoolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;addNewRowToolStripMenuItem.Name" xml:space="preserve">
     <value>addNewRowToolStripMenuItem</value>
   </data>
@@ -2618,6 +2639,18 @@
   </data>
   <data name="&gt;&gt;productDetailToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;locationsdtDataTableBindingSource.Name" xml:space="preserve">
+    <value>locationsdtDataTableBindingSource</value>
+  </data>
+  <data name="&gt;&gt;locationsdtDataTableBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
@@ -2715,6 +2748,12 @@
   <data name="&gt;&gt;shop_qty.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;item_number.Name" xml:space="preserve">
+    <value>item_number</value>
+  </data>
+  <data name="&gt;&gt;item_number.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;product_id.Name" xml:space="preserve">
     <value>product_id</value>
   </data>
@@ -2774,24 +2813,6 @@
   </data>
   <data name="&gt;&gt;item_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;locationsdtDataTableBindingSource.Name" xml:space="preserve">
-    <value>locationsdtDataTableBindingSource</value>
-  </data>
-  <data name="&gt;&gt;locationsdtDataTableBindingSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PrinttoolStripButton.Name" xml:space="preserve">
-    <value>PrinttoolStripButton</value>
-  </data>
-  <data name="&gt;&gt;PrinttoolStripButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_purchases</value>

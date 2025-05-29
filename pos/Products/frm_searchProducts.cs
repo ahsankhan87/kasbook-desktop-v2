@@ -19,7 +19,7 @@ namespace pos
         private frm_assign_products assign_product_frm;
         private frm_alt_products frm_alt_products;
         private frm_products_labels frm_pro_labels;
-        private frm_product_full_detail frm_pro_detail;
+        private frm_product_full_detail frm_product_detail;
         private frm_product_adjustment frm_pro_adjmt;
 
         string _product_code = "";
@@ -39,7 +39,7 @@ namespace pos
             this.assign_product_frm = assign_product_frm;
             this.frm_alt_products = frm_alt_products;
             this.frm_pro_labels = frm_pro_labels;
-            this.frm_pro_detail = frm_pro_detail;
+            this.frm_product_detail = frm_pro_detail;
             this.frm_pro_adjmt = frm_pro_adjmt;
 
             _product_code = product_code;
@@ -72,32 +72,32 @@ namespace pos
                 string product_id = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
                 string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
                 string name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
+                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
                 int alternate_no = Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value);
 
                 if (_isGrid)
                 {
                     if (assign_product_frm == null)
                     {
-                        mainForm.Load_products_to_grid(code);
+                        mainForm.Load_products_to_grid(item_number);
                         _returnStatus = true;
                     }
                     else
                     {
-                        assign_product_frm.load_products(code);
+                        assign_product_frm.load_products(item_number);
                         _returnStatus = true;
                     }
-
                 }
                 else
                 {
                     if (mainForm != null)
                     {
-                        mainForm.load_products(code);
+                        mainForm.load_products(item_number);
 
                     }
                     else if (assign_product_frm != null)
                     {
-                        assign_product_frm.load_products(code);
+                        assign_product_frm.load_products(item_number);
 
                     }
                     else if (frm_alt_products != null)
@@ -108,7 +108,7 @@ namespace pos
                         }
                         else
                         {
-                            frm_alt_products.load_products(code);
+                            frm_alt_products.load_products(item_number);
                         }
 
                     }
@@ -117,18 +117,17 @@ namespace pos
                         frm_pro_labels.load_products(product_id);
 
                     }
-                    else if (frm_pro_detail != null)
+                    else if (frm_product_detail != null)
                     {
-                        frm_pro_detail.load_product_detail(code);
+                        frm_product_detail.load_product_detail(item_number);
 
                     }
                     else if (frm_pro_adjmt != null)
                     {
-                        frm_pro_adjmt.Load_product_to_grid(code);
+                        frm_pro_adjmt.Load_product_to_grid(item_number);
 
                     }
                 }
-
 
                 this.Close();
             }
@@ -189,8 +188,8 @@ namespace pos
         {
             if (grid_search_products.RowCount > 0)
             {
-                string product_code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
+                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number);
 
                 frm_prod_move_obj.ShowDialog();
             }

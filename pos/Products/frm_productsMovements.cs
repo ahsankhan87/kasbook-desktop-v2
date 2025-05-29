@@ -17,12 +17,12 @@ namespace pos
     public partial class frm_productsMovements : Form
     {
 
-        string _product_code;
+        string _item_number;
         
-        public frm_productsMovements(string product_code)
+        public frm_productsMovements(string item_number)
         {
             InitializeComponent();
-            _product_code = product_code;
+            _item_number = item_number;
         }
         
         private void frm_productsMovements_Load(object sender, EventArgs e)
@@ -67,12 +67,12 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_search_products.AutoGenerateColumns = false;
 
-                string keyword = "I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer,S.first_name AS supplier";
+                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer,S.first_name AS supplier";
                 string table = "pos_inventory I " +
                                "LEFT JOIN pos_products P ON P.code = I.item_code " +
                                "LEFT JOIN pos_customers C ON C.id = I.customer_id " +
                                "LEFT JOIN pos_suppliers S ON S.id = I.supplier_id " +
-                               "WHERE I.item_code = '" + _product_code + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " " +
+                               "WHERE I.item_number = '" + _item_number + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " " +
                                "ORDER BY I.id ASC";
 
                 DataTable product_dt = objBLL.GetRecord(keyword, table);

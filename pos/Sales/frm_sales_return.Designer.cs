@@ -60,6 +60,7 @@
             this.tax_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -97,7 +98,8 @@
             this.tax_id,
             this.tax_rate,
             this.item_id,
-            this.packet_qty});
+            this.packet_qty,
+            this.item_number});
             this.grid_sales_return.Name = "grid_sales_return";
             this.grid_sales_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_sales_return.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_sales_return_EditingControlShowing);
@@ -289,6 +291,12 @@
             resources.ApplyResources(this.packet_qty, "packet_qty");
             this.packet_qty.Name = "packet_qty";
             // 
+            // item_number
+            // 
+            this.item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.item_number, "item_number");
+            this.item_number.Name = "item_number";
+            // 
             // frm_sales_return
             // 
             resources.ApplyResources(this, "$this");
@@ -336,6 +344,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
     }
 }
 

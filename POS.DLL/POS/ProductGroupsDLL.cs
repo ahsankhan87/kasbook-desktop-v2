@@ -183,10 +183,10 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        string query = "SELECT P.id,P.name,P.code,alt_no As alternate_no" +
+                        string query = "SELECT P.id,P.item_number,P.name,P.code,alt_no As alternate_no" +
                             " FROM pos_products P" +
                             
-                            " WHERE P.alt_no = @alt_no ";
+                            " WHERE P.deleted=0 AND P.alt_no = @alt_no ";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@alt_no ", alt_no);
@@ -260,6 +260,7 @@ namespace POS.DLL
 
                         cmd = new SqlCommand("sp_product_groupsCrud", cn);
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                         cmd.Parameters.AddWithValue("@code", obj.code);
                         cmd.Parameters.AddWithValue("@alt_no", obj.alt_no);
                         cmd.Parameters.AddWithValue("@product_id", obj.product_id);
@@ -305,6 +306,8 @@ namespace POS.DLL
                         //cmd.Parameters.AddWithValue("@id", obj.id);
                         cmd.Parameters.AddWithValue("@group_code", obj.group_code);
                         cmd.Parameters.AddWithValue("@product_id", obj.product_id);
+                        cmd.Parameters.AddWithValue("@item_number", obj.item_number);
+
                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
@@ -344,6 +347,8 @@ namespace POS.DLL
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@id", obj.id);
                         cmd.Parameters.AddWithValue("@code", obj.code);
+                        cmd.Parameters.AddWithValue("@item_number", obj.item_number);
+
                         cmd.Parameters.AddWithValue("@name", obj.name);
                         cmd.Parameters.AddWithValue("@user_id", obj.user_id);
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);

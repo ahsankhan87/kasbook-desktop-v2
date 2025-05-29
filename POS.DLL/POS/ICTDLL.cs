@@ -24,7 +24,7 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT *,B.name as source_branch, B_1.name as receiving_branch," +
+                        String query = "SELECT ict.*,B.name as source_branch, B_1.name as receiving_branch," +
                             " IIF(ict.status > 0,1,0) as transfer_status" +
                             " FROM pos_inter_company_transfer ict" +
                             " LEFT JOIN pos_branches B ON B.id=ict.source_branch_id" +
@@ -58,11 +58,11 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT *,B.name as source_branch, B_1.name as receiving_branch" +
+                        String query = "SELECT ict.*,B.name as source_branch, B_1.name as receiving_branch" +
                             " FROM pos_inter_company_transfer ict" +
                             " LEFT JOIN pos_branches B ON B.id=ict.source_branch_id" +
                             " LEFT JOIN pos_branches B_1 ON B_1.id=ict.destination_branch_id" +
-                            " where ict.destination_branch_id = @branch_id AND ict.status=0";
+                            " where ict.destination_branch_id = @branch_id AND ict.released_qty < ict.requested_qty AND ict.status=0";
 
 
                         cmd = new SqlCommand(query, cn);
@@ -91,7 +91,7 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT *,B.name as source_branch, B_1.name as receiving_branch," +
+                        String query = "SELECT ict.*,B.name as source_branch, B_1.name as receiving_branch," +
                             " IIF(ict.released_qty>0,1,0) as release_status, ict.released_qty as qty_transferred" +
                             " FROM pos_inter_company_transfer ict" +
                             " LEFT JOIN pos_branches B ON B.id=ict.source_branch_id" +
@@ -136,10 +136,12 @@ namespace POS.DLL
                             cmd = new SqlCommand("sp_ict_transfer", cn, transaction);
                             cmd.CommandType = CommandType.StoredProcedure;
 
+                            cmd.Parameters.AddWithValue("@id", detail.id);
                             cmd.Parameters.AddWithValue("@source_branch_id", detail.source_branch_id);
                             cmd.Parameters.AddWithValue("@destination_branch_id", detail.destination_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             cmd.Parameters.AddWithValue("@item_code", detail.item_code);
+                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@quantity_released", detail.quantity);
                             cmd.Parameters.AddWithValue("@release_date", detail.release_date);
                             //cmd.Parameters.AddWithValue("@status", detail.status);
@@ -186,10 +188,12 @@ namespace POS.DLL
                             cmd = new SqlCommand("sp_ict_transfer", cn, transaction);
                             cmd.CommandType = CommandType.StoredProcedure;
 
+                            cmd.Parameters.AddWithValue("@id", detail.id);
                             cmd.Parameters.AddWithValue("@source_branch_id", detail.source_branch_id);
                             cmd.Parameters.AddWithValue("@destination_branch_id", detail.destination_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             cmd.Parameters.AddWithValue("@item_code", detail.item_code);
+                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@quantity_transferred", detail.quantity);
                             cmd.Parameters.AddWithValue("@transfer_date", detail.transfer_date);
                             cmd.Parameters.AddWithValue("@status", detail.status);
