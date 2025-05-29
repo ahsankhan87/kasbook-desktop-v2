@@ -1064,7 +1064,7 @@ namespace POS.DLL
             }
         }
 
-        public bool IsProductExist(string part_number, string category_code)
+        public bool IsProductExist(string productCode, string category_code)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1078,9 +1078,9 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            cmd.CommandText = @"SELECT code FROM pos_products WHERE part_number = @part_number AND category_code=@category_code";
+                            cmd.CommandText = @"SELECT code FROM pos_products WHERE code = @productCode AND category_code=@category_code";
                             cmd.Connection = cn;
-                            cmd.Parameters.AddWithValue("@part_number", part_number);
+                            cmd.Parameters.AddWithValue("@productCode", productCode);
                             cmd.Parameters.AddWithValue("@category_code", category_code);
                             //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 

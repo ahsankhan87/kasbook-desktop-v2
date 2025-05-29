@@ -223,7 +223,7 @@ namespace pos
             try
             {
                 
-                if (objBLL.IsProductExist(txt_part_number.Text, txt_category_code.Text))
+                if (objBLL.IsProductExist(txt_code.Text.Trim(), txt_category_code.Text.Trim()))
                 {
                     MessageBox.Show("Product already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
