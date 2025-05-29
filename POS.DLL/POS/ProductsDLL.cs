@@ -765,7 +765,7 @@ namespace POS.DLL
                             }
 
                             //query += " ORDER BY qty DESC";
-                            query = "SELECT TOP 200 * FROM (" + query + ") AS Results ORDER BY qty DESC";
+                            query = "SELECT TOP 200 * FROM (" + query + ") AS Results ORDER BY name ASC";
 
                             cmd.CommandText = query;
                             cmd.Connection = cn;
@@ -1078,7 +1078,7 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            cmd.CommandText = @"SELECT code FROM pos_products WHERE code = @productCode AND category_code=@category_code";
+                            cmd.CommandText = @"SELECT code FROM pos_products WHERE code = @productCode AND category_code=@category_code AND deleted=0";
                             cmd.Connection = cn;
                             cmd.Parameters.AddWithValue("@productCode", productCode);
                             cmd.Parameters.AddWithValue("@category_code", category_code);
