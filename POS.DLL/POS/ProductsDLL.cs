@@ -333,7 +333,7 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            string query = "SELECT P.id,P.code,P.name,P.avg_cost,P.unit_price,P.cost_price,P.category_code, " +
+                            string query = "SELECT P.id,P.item_number,P.code,P.name,P.avg_cost,P.unit_price,P.cost_price,P.category_code, " +
                                 " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " C.name AS category, C.id AS category_id" +
                                 " FROM pos_products P" +
