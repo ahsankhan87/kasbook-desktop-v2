@@ -1467,6 +1467,9 @@
     <EmbeddedResource Include="Products\frm_product_full_detail.ar-SA.resx">
       <DependentUpon>frm_product_full_detail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\frm_product_full_detail.ar-SO.resx">
+      <DependentUpon>frm_product_full_detail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\frm_product_full_detail.resx">
       <DependentUpon>frm_product_full_detail.cs</DependentUpon>
     </EmbeddedResource>

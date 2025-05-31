@@ -123,43 +123,43 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_first_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 54</value>
+    <value>114, 58</value>
   </data>
   <data name="txt_last_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_last_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 80</value>
+    <value>114, 88</value>
   </data>
   <data name="txt_email.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_email.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 132</value>
+    <value>114, 148</value>
   </data>
   <data name="txt_address.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_address.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 251</value>
+    <value>114, 298</value>
   </data>
   <data name="txt_contact_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_contact_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 158</value>
+    <value>114, 178</value>
   </data>
   <data name="txt_vatno.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_vatno.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 106</value>
+    <value>114, 118</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>يبحث</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>63, 17</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>بحث العملاء</value>
@@ -171,7 +171,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 28</value>
+    <value>114, 28</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txt_id.Visible" type="System.Boolean, mscorlib">
@@ -181,28 +181,28 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_credit_limit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 182</value>
+    <value>114, 208</value>
   </data>
   <data name="txt_vin_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_vin_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 205</value>
+    <value>114, 238</value>
   </data>
   <data name="txt_car_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_car_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 228</value>
+    <value>114, 268</value>
   </data>
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 185</value>
+    <value>463, 211</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>67, 17</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -218,10 +218,10 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 161</value>
+    <value>463, 181</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>64, 17</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -236,10 +236,10 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 254</value>
+    <value>463, 298</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>35, 17</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -254,10 +254,10 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 135</value>
+    <value>463, 151</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+    <value>83, 17</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -272,10 +272,10 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 109</value>
+    <value>463, 121</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+    <value>73, 17</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -290,10 +290,10 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 83</value>
+    <value>463, 91</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 13</value>
+    <value>31, 17</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -320,10 +320,10 @@
     <value>Top, Right</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 231</value>
+    <value>463, 271</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>59, 17</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -336,10 +336,10 @@
     <value>Top, Right</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 205</value>
+    <value>463, 241</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
+    <value>61, 17</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -355,10 +355,10 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 57</value>
+    <value>463, 61</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>60, 17</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -381,18 +381,6 @@
   <data name="btn_trans_refresh.Text" xml:space="preserve">
     <value>ينعش</value>
   </data>
-  <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
-  </data>
-  <data name="btn_delete.Text" xml:space="preserve">
-    <value>حذف</value>
-  </data>
-  <data name="btn_update.Text" xml:space="preserve">
-    <value>تحديث (F4)</value>
-  </data>
-  <data name="btn_blank.Text" xml:space="preserve">
-    <value>فارغ</value>
-  </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة.</value>
   </data>
@@ -413,6 +401,18 @@
   </data>
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
+  </data>
+  <data name="btn_save.Text" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="btn_delete.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="btn_update.Text" xml:space="preserve">
+    <value>تحديث (F4)</value>
+  </data>
+  <data name="btn_blank.Text" xml:space="preserve">
+    <value>فارغ</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -437,12 +437,6 @@
         //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAA==
 </value>
-  </data>
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>عميل جديد</value>

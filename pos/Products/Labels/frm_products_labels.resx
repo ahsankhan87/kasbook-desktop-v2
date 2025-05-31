@@ -147,8 +147,8 @@
   <data name="category.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 34</value>
   </data>
   <data name="&gt;&gt;txt_product_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -188,6 +188,9 @@
   </data>
   <data name="&gt;&gt;txt_purchase_inv_no.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="location_code.Width" type="System.Int32, mscorlib">
+    <value>60</value>
   </data>
   <data name="&gt;&gt;qty.Name" xml:space="preserve">
     <value>qty</value>
@@ -257,9 +260,6 @@
   </data>
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>Sale Price</value>
-  </data>
-  <data name="&gt;&gt;txt_purchase_inv_no.Name" xml:space="preserve">
-    <value>txt_purchase_inv_no</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -348,9 +348,6 @@
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 34</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -369,6 +366,9 @@
   <data name="name.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="btn_invoice_search.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 23</value>
   </data>
@@ -386,6 +386,9 @@
   </data>
   <data name="btn_search_products.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 23</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;btn_save.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -498,9 +501,6 @@
   <data name="btn_invoice_search.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 34</value>
-  </data>
   <data name="&gt;&gt;txt_product_code.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
@@ -564,14 +564,14 @@
   <data name="grid_product_groups.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name="location_code.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+  <data name="&gt;&gt;txt_purchase_inv_no.Name" xml:space="preserve">
+    <value>txt_purchase_inv_no</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 34</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>862, 590</value>
@@ -594,16 +594,16 @@
   <metadata name="label_qty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="barcode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="location_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

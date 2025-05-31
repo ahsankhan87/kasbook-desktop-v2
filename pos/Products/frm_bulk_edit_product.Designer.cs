@@ -29,12 +29,24 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_bulk_edit_product));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name_ar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_search_purchase_invoice = new System.Windows.Forms.Button();
             this.txt_purchase_inv_no = new System.Windows.Forms.TextBox();
@@ -56,6 +68,13 @@
             this.edit_desc = new System.Windows.Forms.TabPage();
             this.loc_transfer = new System.Windows.Forms.TabPage();
             this.grid_loc_transfer = new System.Windows.Forms.DataGridView();
+            this.product_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_name_ar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transfer_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loc_transfer_item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmb_from_locations = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -71,25 +90,6 @@
             this.txt_transfer_search = new System.Windows.Forms.TextBox();
             this.btn_transfer = new System.Windows.Forms.Button();
             this.btn_transfer_search = new System.Windows.Forms.Button();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name_ar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name_ar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transfer_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loc_transfer_item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -113,6 +113,7 @@
             // 
             // grid_search_products
             // 
+            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.AllowUserToAddRows = false;
             this.grid_search_products.AllowUserToDeleteRows = false;
             this.grid_search_products.AllowUserToOrderColumns = true;
@@ -130,12 +131,98 @@
             this.category,
             this.item_type,
             this.item_number});
-            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            resources.ApplyResources(this.id, "id");
+            this.id.Name = "id";
+            // 
+            // code
+            // 
+            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.code.DataPropertyName = "code";
+            resources.ApplyResources(this.code, "code");
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.DataPropertyName = "name";
+            resources.ApplyResources(this.name, "name");
+            this.name.Name = "name";
+            // 
+            // name_ar
+            // 
+            this.name_ar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.name_ar.DataPropertyName = "name_ar";
+            resources.ApplyResources(this.name_ar, "name_ar");
+            this.name_ar.Name = "name_ar";
+            // 
+            // qty
+            // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.qty.DataPropertyName = "qty";
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.qty.DefaultCellStyle = dataGridViewCellStyle7;
+            resources.ApplyResources(this.qty, "qty");
+            this.qty.Name = "qty";
+            this.qty.ReadOnly = true;
+            // 
+            // cost_price
+            // 
+            this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.cost_price.DataPropertyName = "avg_cost";
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle8;
+            resources.ApplyResources(this.cost_price, "cost_price");
+            this.cost_price.Name = "cost_price";
+            this.cost_price.ReadOnly = true;
+            // 
+            // unit_price
+            // 
+            this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.unit_price.DataPropertyName = "unit_price";
+            resources.ApplyResources(this.unit_price, "unit_price");
+            this.unit_price.Name = "unit_price";
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.description.DataPropertyName = "description";
+            resources.ApplyResources(this.description, "description");
+            this.description.Name = "description";
+            // 
+            // location_code
+            // 
+            this.location_code.DataPropertyName = "location_code";
+            resources.ApplyResources(this.location_code, "location_code");
+            this.location_code.Name = "location_code";
+            // 
+            // category
+            // 
+            this.category.DataPropertyName = "category";
+            resources.ApplyResources(this.category, "category");
+            this.category.Name = "category";
+            // 
+            // item_type
+            // 
+            this.item_type.DataPropertyName = "item_type";
+            resources.ApplyResources(this.item_type, "item_type");
+            this.item_type.Name = "item_type";
+            // 
+            // item_number
+            // 
+            this.item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.item_number, "item_number");
+            this.item_number.Name = "item_number";
+            // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.btn_search_purchase_invoice);
             this.panel1.Controls.Add(this.txt_purchase_inv_no);
             this.panel1.Controls.Add(this.label9);
@@ -154,7 +241,6 @@
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.btn_products_print);
             this.panel1.Controls.Add(this.btn_search);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // btn_search_purchase_invoice
@@ -202,10 +288,10 @@
             // 
             // cmb_edit_pro_loc
             // 
+            resources.ApplyResources(this.cmb_edit_pro_loc, "cmb_edit_pro_loc");
             this.cmb_edit_pro_loc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_edit_pro_loc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_edit_pro_loc.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_edit_pro_loc, "cmb_edit_pro_loc");
             this.cmb_edit_pro_loc.Name = "cmb_edit_pro_loc";
             this.cmb_edit_pro_loc.SelectedIndexChanged += new System.EventHandler(this.cmb_edit_pro_loc_SelectedIndexChanged);
             // 
@@ -235,8 +321,8 @@
             // 
             // btn_close
             // 
-            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_close, "btn_close");
+            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_close.Name = "btn_close";
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
@@ -257,31 +343,32 @@
             // 
             // tabControl1
             // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.edit_desc);
             this.tabControl1.Controls.Add(this.loc_transfer);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // edit_desc
             // 
+            resources.ApplyResources(this.edit_desc, "edit_desc");
             this.edit_desc.Controls.Add(this.grid_search_products);
             this.edit_desc.Controls.Add(this.panel1);
-            resources.ApplyResources(this.edit_desc, "edit_desc");
             this.edit_desc.Name = "edit_desc";
             this.edit_desc.UseVisualStyleBackColor = true;
             // 
             // loc_transfer
             // 
+            resources.ApplyResources(this.loc_transfer, "loc_transfer");
             this.loc_transfer.Controls.Add(this.grid_loc_transfer);
             this.loc_transfer.Controls.Add(this.panel2);
-            resources.ApplyResources(this.loc_transfer, "loc_transfer");
             this.loc_transfer.Name = "loc_transfer";
             this.loc_transfer.UseVisualStyleBackColor = true;
             // 
             // grid_loc_transfer
             // 
+            resources.ApplyResources(this.grid_loc_transfer, "grid_loc_transfer");
             this.grid_loc_transfer.AllowUserToAddRows = false;
             this.grid_loc_transfer.AllowUserToDeleteRows = false;
             this.grid_loc_transfer.AllowUserToOrderColumns = true;
@@ -294,12 +381,62 @@
             this.product_qty,
             this.transfer_qty,
             this.loc_transfer_item_number});
-            resources.ApplyResources(this.grid_loc_transfer, "grid_loc_transfer");
             this.grid_loc_transfer.Name = "grid_loc_transfer";
             this.grid_loc_transfer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             // 
+            // product_id
+            // 
+            this.product_id.DataPropertyName = "id";
+            resources.ApplyResources(this.product_id, "product_id");
+            this.product_id.Name = "product_id";
+            // 
+            // product_code
+            // 
+            this.product_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.product_code.DataPropertyName = "code";
+            resources.ApplyResources(this.product_code, "product_code");
+            this.product_code.Name = "product_code";
+            this.product_code.ReadOnly = true;
+            // 
+            // product_name
+            // 
+            this.product_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.product_name.DataPropertyName = "name";
+            resources.ApplyResources(this.product_name, "product_name");
+            this.product_name.Name = "product_name";
+            this.product_name.ReadOnly = true;
+            // 
+            // product_name_ar
+            // 
+            this.product_name_ar.DataPropertyName = "name_ar";
+            resources.ApplyResources(this.product_name_ar, "product_name_ar");
+            this.product_name_ar.Name = "product_name_ar";
+            // 
+            // product_qty
+            // 
+            this.product_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.product_qty.DataPropertyName = "qty";
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            this.product_qty.DefaultCellStyle = dataGridViewCellStyle9;
+            resources.ApplyResources(this.product_qty, "product_qty");
+            this.product_qty.Name = "product_qty";
+            // 
+            // transfer_qty
+            // 
+            this.transfer_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.transfer_qty.DataPropertyName = "transfer_qty";
+            resources.ApplyResources(this.transfer_qty, "transfer_qty");
+            this.transfer_qty.Name = "transfer_qty";
+            // 
+            // loc_transfer_item_number
+            // 
+            this.loc_transfer_item_number.DataPropertyName = "item_number";
+            resources.ApplyResources(this.loc_transfer_item_number, "loc_transfer_item_number");
+            this.loc_transfer_item_number.Name = "loc_transfer_item_number";
+            // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.cmb_from_locations);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.cmb_to_locations);
@@ -314,15 +451,14 @@
             this.panel2.Controls.Add(this.txt_transfer_search);
             this.panel2.Controls.Add(this.btn_transfer);
             this.panel2.Controls.Add(this.btn_transfer_search);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // cmb_from_locations
             // 
+            resources.ApplyResources(this.cmb_from_locations, "cmb_from_locations");
             this.cmb_from_locations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_from_locations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_from_locations.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_from_locations, "cmb_from_locations");
             this.cmb_from_locations.Name = "cmb_from_locations";
             this.cmb_from_locations.SelectedIndexChanged += new System.EventHandler(this.cmb_from_locations_SelectedIndexChanged);
             // 
@@ -333,10 +469,10 @@
             // 
             // cmb_to_locations
             // 
+            resources.ApplyResources(this.cmb_to_locations, "cmb_to_locations");
             this.cmb_to_locations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_to_locations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_to_locations.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_to_locations, "cmb_to_locations");
             this.cmb_to_locations.Name = "cmb_to_locations";
             // 
             // label15
@@ -403,142 +539,6 @@
             this.btn_transfer_search.Name = "btn_transfer_search";
             this.btn_transfer_search.UseVisualStyleBackColor = true;
             this.btn_transfer_search.Click += new System.EventHandler(this.btn_transfer_search_Click);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            resources.ApplyResources(this.id, "id");
-            this.id.Name = "id";
-            // 
-            // code
-            // 
-            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.code.DataPropertyName = "code";
-            resources.ApplyResources(this.code, "code");
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.DataPropertyName = "name";
-            resources.ApplyResources(this.name, "name");
-            this.name.Name = "name";
-            // 
-            // name_ar
-            // 
-            this.name_ar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.name_ar.DataPropertyName = "name_ar";
-            resources.ApplyResources(this.name_ar, "name_ar");
-            this.name_ar.Name = "name_ar";
-            // 
-            // qty
-            // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.qty, "qty");
-            this.qty.Name = "qty";
-            this.qty.ReadOnly = true;
-            // 
-            // cost_price
-            // 
-            this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.cost_price.DataPropertyName = "avg_cost";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.cost_price, "cost_price");
-            this.cost_price.Name = "cost_price";
-            this.cost_price.ReadOnly = true;
-            // 
-            // unit_price
-            // 
-            this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.unit_price.DataPropertyName = "unit_price";
-            resources.ApplyResources(this.unit_price, "unit_price");
-            this.unit_price.Name = "unit_price";
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.description.DataPropertyName = "description";
-            resources.ApplyResources(this.description, "description");
-            this.description.Name = "description";
-            // 
-            // location_code
-            // 
-            this.location_code.DataPropertyName = "location_code";
-            resources.ApplyResources(this.location_code, "location_code");
-            this.location_code.Name = "location_code";
-            // 
-            // category
-            // 
-            this.category.DataPropertyName = "category";
-            resources.ApplyResources(this.category, "category");
-            this.category.Name = "category";
-            // 
-            // item_type
-            // 
-            this.item_type.DataPropertyName = "item_type";
-            resources.ApplyResources(this.item_type, "item_type");
-            this.item_type.Name = "item_type";
-            // 
-            // item_number
-            // 
-            this.item_number.DataPropertyName = "item_number";
-            resources.ApplyResources(this.item_number, "item_number");
-            this.item_number.Name = "item_number";
-            // 
-            // product_id
-            // 
-            this.product_id.DataPropertyName = "id";
-            resources.ApplyResources(this.product_id, "product_id");
-            this.product_id.Name = "product_id";
-            // 
-            // product_code
-            // 
-            this.product_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.product_code.DataPropertyName = "code";
-            resources.ApplyResources(this.product_code, "product_code");
-            this.product_code.Name = "product_code";
-            this.product_code.ReadOnly = true;
-            // 
-            // product_name
-            // 
-            this.product_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.product_name.DataPropertyName = "name";
-            resources.ApplyResources(this.product_name, "product_name");
-            this.product_name.Name = "product_name";
-            this.product_name.ReadOnly = true;
-            // 
-            // product_name_ar
-            // 
-            this.product_name_ar.DataPropertyName = "name_ar";
-            resources.ApplyResources(this.product_name_ar, "product_name_ar");
-            this.product_name_ar.Name = "product_name_ar";
-            // 
-            // product_qty
-            // 
-            this.product_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.product_qty.DataPropertyName = "qty";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            this.product_qty.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.product_qty, "product_qty");
-            this.product_qty.Name = "product_qty";
-            // 
-            // transfer_qty
-            // 
-            this.transfer_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.transfer_qty.DataPropertyName = "transfer_qty";
-            resources.ApplyResources(this.transfer_qty, "transfer_qty");
-            this.transfer_qty.Name = "transfer_qty";
-            // 
-            // loc_transfer_item_number
-            // 
-            this.loc_transfer_item_number.DataPropertyName = "item_number";
-            resources.ApplyResources(this.loc_transfer_item_number, "loc_transfer_item_number");
-            this.loc_transfer_item_number.Name = "loc_transfer_item_number";
             // 
             // frm_bulk_edit_product
             // 

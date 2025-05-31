@@ -795,66 +795,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Search Sales Products</value>
   </data>
-  <data name="&gt;&gt;branch.Name" xml:space="preserve">
-    <value>branch</value>
-  </data>
-  <data name="&gt;&gt;branch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;branch_qty.Name" xml:space="preserve">
-    <value>branch_qty</value>
-  </data>
-  <data name="&gt;&gt;branch_qty.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_id.Name" xml:space="preserve">
-    <value>g_id</value>
-  </data>
-  <data name="&gt;&gt;g_id.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_code.Name" xml:space="preserve">
-    <value>g_code</value>
-  </data>
-  <data name="&gt;&gt;g_code.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_name.Name" xml:space="preserve">
-    <value>g_name</value>
-  </data>
-  <data name="&gt;&gt;g_name.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_qty.Name" xml:space="preserve">
-    <value>g_qty</value>
-  </data>
-  <data name="&gt;&gt;g_qty.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_unit_price.Name" xml:space="preserve">
-    <value>g_unit_price</value>
-  </data>
-  <data name="&gt;&gt;g_unit_price.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_location_code.Name" xml:space="preserve">
-    <value>g_location_code</value>
-  </data>
-  <data name="&gt;&gt;g_location_code.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;g_category.Name" xml:space="preserve">
-    <value>g_category</value>
-  </data>
-  <data name="&gt;&gt;g_category.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;alt_item_number.Name" xml:space="preserve">
-    <value>alt_item_number</value>
-  </data>
-  <data name="&gt;&gt;alt_item_number.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -919,6 +859,66 @@
     <value>item_number</value>
   </data>
   <data name="&gt;&gt;item_number.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_id.Name" xml:space="preserve">
+    <value>g_id</value>
+  </data>
+  <data name="&gt;&gt;g_id.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_code.Name" xml:space="preserve">
+    <value>g_code</value>
+  </data>
+  <data name="&gt;&gt;g_code.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_name.Name" xml:space="preserve">
+    <value>g_name</value>
+  </data>
+  <data name="&gt;&gt;g_name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_qty.Name" xml:space="preserve">
+    <value>g_qty</value>
+  </data>
+  <data name="&gt;&gt;g_qty.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_unit_price.Name" xml:space="preserve">
+    <value>g_unit_price</value>
+  </data>
+  <data name="&gt;&gt;g_unit_price.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_location_code.Name" xml:space="preserve">
+    <value>g_location_code</value>
+  </data>
+  <data name="&gt;&gt;g_location_code.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;g_category.Name" xml:space="preserve">
+    <value>g_category</value>
+  </data>
+  <data name="&gt;&gt;g_category.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;alt_item_number.Name" xml:space="preserve">
+    <value>alt_item_number</value>
+  </data>
+  <data name="&gt;&gt;alt_item_number.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;branch.Name" xml:space="preserve">
+    <value>branch</value>
+  </data>
+  <data name="&gt;&gt;branch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;branch_qty.Name" xml:space="preserve">
+    <value>branch_qty</value>
+  </data>
+  <data name="&gt;&gt;branch_qty.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

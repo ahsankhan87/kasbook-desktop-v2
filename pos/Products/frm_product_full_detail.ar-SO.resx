@@ -117,98 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txt_source_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="txt_source_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 21</value>
-  </data>
-  <data name="txt_source_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_product_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_product_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 48</value>
-  </data>
-  <data name="txt_product_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="btn_search_products.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btn_search_products.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 47</value>
-  </data>
-  <data name="btn_search_products.Text" xml:space="preserve">
-    <value>يضيف</value>
-  </data>
-  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 26</value>
-  </data>
-  <data name="btn_cancel.Text" xml:space="preserve">
-    <value>إلغاء (ESC)</value>
-  </data>
-  <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ (F3)</value>
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 54</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 17</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>عدد البديل
-</value>
-  </data>
-  <data name="label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>425, 24</value>
-  </data>
-  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
-  </data>
-  <data name="label18.Text" xml:space="preserve">
-    <value>المنتج المصدر
-</value>
-  </data>
-  <data name="txt_item_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_item_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 21</value>
-  </data>
-  <data name="txt_item_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_item_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
-  </data>
-  <data name="code.HeaderText" xml:space="preserve">
-    <value>رقم الصنف</value>
-  </data>
-  <data name="name.HeaderText" xml:space="preserve">
-    <value>اسم الصنف</value>
-  </data>
-  <data name="alternate_no.HeaderText" xml:space="preserve">
-    <value>رقم قديم</value>
-  </data>
-  <data name="btn_delete.HeaderText" xml:space="preserve">
-    <value>حذف</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btn_delete.Width" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
@@ -231,10 +140,6 @@
         /v////7///////HGcv/tt07/7rhQ/+63TP/uuFL/7bpW/+66Vf/uulX/7rpV/+67V//tt07/8cZy////
         //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAA==
-</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>إنشاء أرقام بديلة
 </value>
   </data>
 </root>
