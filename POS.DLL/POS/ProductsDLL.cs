@@ -733,18 +733,18 @@ namespace POS.DLL
                                 //string containsClause1 = OptimizeSearchTerm(condition);
 
                                 // Fallback for short words (full-text ignores words < 3 chars)
-                                //if (condition.Length > 3)
-                                //{
-                                //    string likeClause = BuildLikeClause(condition,
-                                //    new[] { "P.code" }); //{ "P.name", "P.code", "P.item_number", "P.description" }
+                                if (condition.Length > 3)
+                                {
+                                    string likeClause = BuildLikeClause(condition,
+                                    new[] { "P.code" }); //{ "P.name", "P.code", "P.item_number", "P.description" }
 
-                                //    query += " OR "+ likeClause;
-                                //    // Add LIKE pattern parameter
-                                //    cmd.Parameters.AddWithValue("@likePattern", "%" + condition + "%");
+                                    query += " OR " + likeClause;
+                                    // Add LIKE pattern parameter
+                                    cmd.Parameters.AddWithValue("@likePattern", "%" + condition + "%");
 
-                                //    //query += " OR P.code LIKE @exactCode";
-                                //    //cmd.Parameters.AddWithValue("@exactCode", "%" + condition + "%");
-                                //}
+                                    //query += " OR P.code LIKE @exactCode";
+                                    //cmd.Parameters.AddWithValue("@exactCode", "%" + condition + "%");
+                                }
                             }
 
                             // Add optional filters
@@ -815,9 +815,10 @@ namespace POS.DLL
             if (string.IsNullOrWhiteSpace(searchTerm))
                 return "1=1";
 
-            // Create OR conditions for each column with LIKE pattern
-            return "(" + string.Join(" OR ", columns.Select(c => $"{c} LIKE @likePattern")) + ")";
+            // Remove dashes from searchTerm before assigning it to the parameter (do this in your parameter assignment code)
+            return "(" + string.Join(" OR ", columns.Select(c => $"REPLACE({c}, '-', '') LIKE @likePattern")) + ")";
         }
+
         private string OptimizeSearchTerm(string searchTerm)
         {
             // Convert to lowercase and remove special characters
