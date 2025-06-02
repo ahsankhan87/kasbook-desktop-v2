@@ -65,21 +65,6 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.Text">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\IKVM.OpenJDK.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.Util">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\IKVM.OpenJDK.Util.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.XML.API">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\IKVM.OpenJDK.XML.API.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.Runtime">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\IKVM.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.5\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -102,12 +87,6 @@
     </Reference>
     <Reference Include="RestSharp, Version=112.1.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.112.1.0\lib\netstandard2.0\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="saxon-he-10.8">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\saxon-he-10.8.dll</HintPath>
-    </Reference>
-    <Reference Include="saxon-he-api-10.8">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\saxon-he-api-10.8.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -191,8 +170,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="ZatcaIntegrationSDK">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\ZatcaIntegrationSDK.dll</HintPath>
+    <Reference Include="ZatcaIntegrationSDK, Version=1.0.8329.43146, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\zatca dlls\ZatcaIntegrationSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
