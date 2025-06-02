@@ -51,6 +51,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_source_code);
             this.panel1.Controls.Add(this.txt_product_code);
@@ -61,7 +62,6 @@
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.txt_item_code);
             this.panel1.Controls.Add(this.grid_product_groups);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_source_code
@@ -117,10 +117,10 @@
             // 
             // grid_product_groups
             // 
+            resources.ApplyResources(this.grid_product_groups, "grid_product_groups");
             this.grid_product_groups.AllowUserToAddRows = false;
             this.grid_product_groups.AllowUserToDeleteRows = false;
             this.grid_product_groups.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_product_groups, "grid_product_groups");
             this.grid_product_groups.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_product_groups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_product_groups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

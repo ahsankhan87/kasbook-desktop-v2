@@ -125,7 +125,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="code.Width" type="System.Int32, mscorlib">
-    <value>79</value>
+    <value>89</value>
   </data>
   <data name="name.HeaderText" xml:space="preserve">
     <value>اسم الصنف</value>
@@ -134,31 +134,31 @@
     <value>الاسم العربي</value>
   </data>
   <data name="name_ar.Width" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>94</value>
   </data>
   <data name="qty.HeaderText" xml:space="preserve">
     <value>الكمية</value>
   </data>
   <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>62</value>
   </data>
   <data name="cost_price.HeaderText" xml:space="preserve">
     <value>سعر التكلفة</value>
   </data>
   <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>88</value>
   </data>
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>سعر البيع</value>
   </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>70</value>
+    <value>79</value>
   </data>
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
   </data>
   <data name="description.Width" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>66</value>
   </data>
   <data name="location_code.HeaderText" xml:space="preserve">
     <value>الموقع</value>
@@ -166,42 +166,45 @@
   <data name="category.HeaderText" xml:space="preserve">
     <value>الصناع</value>
   </data>
+  <data name="btn_search_purchase_invoice.Text" xml:space="preserve">
+    <value>بحث</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+    <value>42, 17</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>أو بحث</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
+    <value>85, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>فاتورة الشراء #:</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>584, 11</value>
+    <value>766, 11</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
+    <value>51, 17</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>المجموعه</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 11</value>
+    <value>525, 15</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
+    <value>40, 17</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>الصناع</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 11</value>
+    <value>235, 11</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
+    <value>65, 17</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>حسب الموقع</value>
@@ -209,11 +212,14 @@
   <data name="cmb_edit_pro_loc.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 8</value>
   </data>
+  <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>710, 10</value>
+  </data>
   <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 8</value>
+    <value>605, 10</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 20</value>
+    <value>108, 22</value>
   </data>
   <data name="btn_close.Text" xml:space="preserve">
     <value>خروج</value>
@@ -239,7 +245,7 @@
     <value>رقم الصنف</value>
   </data>
   <data name="product_code.Width" type="System.Int32, mscorlib">
-    <value>79</value>
+    <value>89</value>
   </data>
   <data name="product_name.HeaderText" xml:space="preserve">
     <value>اسم الصنف</value>
@@ -248,29 +254,29 @@
     <value>الكمية</value>
   </data>
   <data name="product_qty.Width" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>62</value>
   </data>
   <data name="transfer_qty.HeaderText" xml:space="preserve">
     <value>نقل الكمية</value>
   </data>
   <data name="transfer_qty.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>80</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmb_from_locations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="cmb_from_locations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 9</value>
+    <value>528, 8</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 12</value>
+    <value>707, 11</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>55, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>من الموقع:</value>
@@ -279,16 +285,16 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_to_locations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 37</value>
+    <value>528, 36</value>
   </data>
   <data name="label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 40</value>
+    <value>707, 39</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="label15.Text" xml:space="preserve">
     <value>إلى الموقع:</value>
@@ -297,22 +303,22 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 9</value>
+    <value>202, 11</value>
   </data>
   <data name="txt_ref_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_ref_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 37</value>
+    <value>202, 39</value>
   </data>
   <data name="rb_by_name_trans.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="rb_by_name_trans.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 91</value>
+    <value>410, 103</value>
   </data>
   <data name="rb_by_name_trans.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 17</value>
+    <value>56, 21</value>
   </data>
   <data name="rb_by_name_trans.Text" xml:space="preserve">
     <value>بالاسم</value>
@@ -321,10 +327,10 @@
     <value>Top, Right</value>
   </data>
   <data name="rb_by_code_trans.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 91</value>
+    <value>480, 103</value>
   </data>
   <data name="rb_by_code_trans.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
+    <value>63, 21</value>
   </data>
   <data name="rb_by_code_trans.Text" xml:space="preserve">
     <value>بالا رقم</value>
@@ -336,7 +342,7 @@
     <value>395, 12</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>36, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>تاريخ:</value>
@@ -348,7 +354,7 @@
     <value>395, 40</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+    <value>56, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>المرجع #:</value>
@@ -357,10 +363,10 @@
     <value>Top, Right</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 93</value>
+    <value>554, 105</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+    <value>87, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>البحث عن المنتج:</value>
@@ -369,7 +375,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_transfer_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 65</value>
+    <value>356, 68</value>
   </data>
   <data name="btn_transfer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
@@ -378,7 +384,7 @@
     <value>7, 8</value>
   </data>
   <data name="btn_transfer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
+    <value>80, 53</value>
   </data>
   <data name="btn_transfer.Text" xml:space="preserve">
     <value>التحويل (F4)
