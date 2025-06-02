@@ -60,9 +60,11 @@ namespace pos
         {
             try
             {
-                    
-                    String condition = txt_search.Text;
-                    grid_all_purchases_orders.DataSource = objPurchases_orderBLL.SearchRecord(condition);
+                grid_all_purchases_orders.DataSource = null;
+                grid_all_purchases_orders.Rows.Clear();
+                grid_all_purchases_orders.Refresh();
+                String condition = txt_search.Text;
+                grid_all_purchases_orders.DataSource = objPurchases_orderBLL.SearchRecord(condition);
 
             }
             catch (Exception ex)
@@ -121,11 +123,36 @@ namespace pos
 
                     load_purchases_items_detail(Convert.ToInt16(sale_id));
                 }
+                if (name == "delete")
+                {
+                    
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete", "Purchase Order", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+
+                        var id = grid_all_purchases_orders.CurrentRow.Cells["id"].Value.ToString(); // retreive the current row
+                        var invoice_no = grid_all_purchases_orders.CurrentRow.Cells["invoice_no"].Value.ToString(); // retreive the current row
+                        Purchases_orderBLL purchases_OrderBLL = new Purchases_orderBLL();
+                        
+                        int qresult = purchases_OrderBLL.DeletePurchasesOrder(invoice_no);
+                        if (qresult > 0)
+                        {
+                            MessageBox.Show("Purchase order deleted successfully", "Purchase Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            load_all_purchases_orders_grid();
+                        }
+                        else
+                        {
+                            MessageBox.Show(invoice_no + " not deleted, please try again", "Delete Purchase Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                    }
+                }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Products", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Purchase Order", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             

@@ -50,6 +50,7 @@
             this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewImageColumn();
+            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_purchases_orders)).BeginInit();
             this.panel2.SuspendLayout();
@@ -111,7 +112,8 @@
             this.discount_value,
             this.total_tax,
             this.total_amount,
-            this.detail});
+            this.detail,
+            this.delete});
             this.grid_all_purchases_orders.Name = "grid_all_purchases_orders";
             this.grid_all_purchases_orders.ReadOnly = true;
             this.grid_all_purchases_orders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -216,8 +218,17 @@
             // 
             this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.detail, "detail");
+            this.detail.Image = global::pos.Properties.Resources.Detail_16;
             this.detail.Name = "detail";
             this.detail.ReadOnly = true;
+            // 
+            // delete
+            // 
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.delete, "delete");
+            this.delete.Image = global::pos.Properties.Resources.Trash_16;
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
             // 
             // frm_all_purchases_orders
             // 
@@ -259,6 +270,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total_tax;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
         private System.Windows.Forms.DataGridViewImageColumn detail;
+        private System.Windows.Forms.DataGridViewImageColumn delete;
     }
 }
 

@@ -159,8 +159,11 @@ namespace POS.DLL
             {
                 try
                 {
+                    DataTable dt1 = new DataTable();
+
                     if (cn.State == ConnectionState.Closed)
                     {
+                        
                         cn.Open();
 
                         cmd = new SqlCommand("SELECT * FROM pos_purchases_order WHERE invoice_no LIKE @invoice_no AND branch_id = @branch_id", cn);
@@ -169,12 +172,12 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                         da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-                        return dt;
+                        da.Fill(dt1);
+                        return dt1;
 
                     }
 
-                    return dt;
+                    return dt1;
                 }
                 catch
                 {
@@ -812,7 +815,7 @@ namespace POS.DLL
 
                     }
 
-                    int result = cmd.ExecuteNonQuery();
+                    int result = Convert.ToInt32(cmd.ExecuteNonQuery());
                     Log.LogAction("Delete Purchase Order", $"InvoiceNo: {invoice_no}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 
                     return result;

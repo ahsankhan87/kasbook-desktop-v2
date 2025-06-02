@@ -351,6 +351,18 @@
   <data name="detail.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
+  <metadata name="delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="delete.HeaderText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="delete.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="delete.Width" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
   <data name="grid_all_purchases_orders.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 50</value>
   </data>
@@ -568,6 +580,12 @@
     <value>detail</value>
   </data>
   <data name="&gt;&gt;detail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;delete.Name" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="&gt;&gt;delete.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
