@@ -192,7 +192,7 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="ZatcaIntegrationSDK">
-      <HintPath>C:\Users\Ali Hamza\Downloads\ZatcaIntegration-master\ZatcaIntegration-master\bin_files\ZatcaIntegrationSDK.dll</HintPath>
+      <HintPath>..\zatca dlls\ZatcaIntegrationSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
