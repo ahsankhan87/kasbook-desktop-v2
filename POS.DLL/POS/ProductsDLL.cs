@@ -1030,6 +1030,7 @@ namespace POS.DLL
             }
         }
 
+        //
         public DataTable GetAllProductCodes()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -1063,6 +1064,7 @@ namespace POS.DLL
                 }
             }
         }
+
 
         public bool IsProductExist(string productCode, string category_code)
         {

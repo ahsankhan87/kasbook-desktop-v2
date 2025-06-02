@@ -78,9 +78,11 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cmb_sales_acc_id = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_save
@@ -100,7 +102,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel1.Controls.Add(this.lblExpiryDate);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.lbl_header_title);
             this.panel1.Controls.Add(this.btn_cancel);
             this.panel1.Controls.Add(this.btn_save);
@@ -428,6 +430,13 @@
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.lblExpiryDate);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
             // frm_updateCompany
             // 
             resources.ApplyResources(this, "$this");
@@ -448,6 +457,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -503,5 +514,6 @@
         private System.Windows.Forms.ComboBox cmb_item_variance_acc_id;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblExpiryDate;
+        private System.Windows.Forms.Panel panel2;
     }
 }
