@@ -58,6 +58,7 @@ namespace pos
             if (tabControl1.SelectedTab == tabControl1.TabPages["edit_desc"])//your specific tabname
             {
                 get_product_locations_dropdownlist();
+                get_product_to_locations_dropdownlist();
             }
         }
 
@@ -154,12 +155,33 @@ namespace pos
                 emptyRow[1] = "All";              // Set Column Value
                 locations.Rows.InsertAt(emptyRow, 0);
 
-                cmb_edit_pro_loc.DisplayMember = "name";
-                cmb_edit_pro_loc.ValueMember = "code";
-                cmb_edit_pro_loc.DataSource = locations;
+                cmb_from_pro_loc.DisplayMember = "name";
+                cmb_from_pro_loc.ValueMember = "code";
+                cmb_from_pro_loc.DataSource = locations;
+
             }
         }
+        public void get_product_to_locations_dropdownlist()
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages["edit_desc"])//your specific tabname
+            {
+                GeneralBLL generalBLL_obj = new GeneralBLL();
+                string keyword = "code,name";
+                string table = "pos_locations";
 
+                DataTable locations = generalBLL_obj.GetRecord(keyword, table);
+
+                DataRow emptyRow = locations.NewRow();
+                emptyRow[0] = "all";              // Set Column Value
+                emptyRow[1] = "All";              // Set Column Value
+                locations.Rows.InsertAt(emptyRow, 0);
+
+                //To Location Drop down list
+                cmb_to_pro_loc.DisplayMember = "name";
+                cmb_to_pro_loc.ValueMember = "code";
+                cmb_to_pro_loc.DataSource = locations;
+            }
+        }
         private void GetMAXInvoiceNo()
         {
             ProductBLL objBLL = new ProductBLL();
@@ -241,8 +263,8 @@ namespace pos
             String condition = txt_search.Text.Trim();
             try
             {
-                if (condition != string.Empty)
-                {
+                //if (condition != string.Empty)
+               // {
                     //bool by_code = rb_by_code.Checked;
                     //bool by_name = rb_by_name.Checked;
                     
@@ -255,7 +277,7 @@ namespace pos
                     var brand_code = "";
                     var category_code = txt_category_code.Text;
                     var group_code = txt_group_code.Text;
-
+                    bool qty_onhand = chk_qty_on_hand.Checked;
 
                     grid_search_products.DataSource = null;
 
@@ -265,12 +287,12 @@ namespace pos
                     
                     //String keyword = "id,code,name,qty,avg_cost,unit_price,loc_code, (1) AS purchase_order_qty";
                     //String table = string.Format("pos_products_location_view where brand_code LIKE '%{0}%' ORDER BY id desc", brand_code);
-                    products_dt = ProductBLL.SearchProductByBrandAndCategory(condition, category_code, brand_code, group_code);
+                    products_dt = ProductBLL.SearchProductByLocations(condition, category_code, brand_code, group_code,cmb_from_pro_loc.Text,cmb_to_pro_loc.Text, qty_onhand);
                     grid_search_products.DataSource = products_dt;
 
                     txt_search.Text = "";
                     lbl_total_rows.Text = "Total Rows: " + grid_search_products.RowCount.ToString();
-                }
+                //}
                 
             }
             catch (Exception ex)
@@ -514,15 +536,18 @@ namespace pos
         {
             var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
             groupsDataGridView.ColumnCount = 2;
+            int xLocation = txt_groups.Location.X;
+            int yLocation = txt_groups.Location.Y + 45;
+            
             groupsDataGridView.Name = "groupsDataGridView";
             if (lang == "en-US")
             {
-                groupsDataGridView.Location = new Point(540, 60);
+                groupsDataGridView.Location = new Point(xLocation, yLocation);
                 groupsDataGridView.Size = new Size(250, 250);
             }
             else if (lang == "ar-SA")
             {
-                groupsDataGridView.Location = new Point(16, 95);
+                groupsDataGridView.Location = new Point(xLocation, yLocation);
                 groupsDataGridView.Size = new Size(250, 250);
             }
             groupsDataGridView.AutoSizeRowsMode =
@@ -634,15 +659,18 @@ namespace pos
         {
             var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
             categoriesDataGridView.ColumnCount = 2;
+            int xLocation = txt_categories.Location.X;
+            int yLocation = txt_categories.Location.Y+45;
+
             categoriesDataGridView.Name = "categoriesDataGridView";
             if (lang == "en-US")
             {
-                categoriesDataGridView.Location = new Point(320, 60);
+                categoriesDataGridView.Location = new Point(xLocation, yLocation);
                 categoriesDataGridView.Size = new Size(250, 250);
             }
             else if (lang == "ar-SA")
             {
-                categoriesDataGridView.Location = new Point(250, 95);
+                categoriesDataGridView.Location = new Point(xLocation, yLocation);
                 categoriesDataGridView.Size = new Size(250, 250);
             }
 
@@ -767,21 +795,21 @@ namespace pos
             {
                 if (tabControl1.SelectedTab == tabControl1.TabPages["edit_desc"])//your specific tabname
                 {
-                    if (cmb_edit_pro_loc.SelectedValue != null || cmb_edit_pro_loc.SelectedValue.ToString() != "all")
-                    {
-                        grid_search_products.DataSource = null;
-                        //bind data in data grid view  
-                        GeneralBLL objBLL = new GeneralBLL();
-                        grid_search_products.AutoGenerateColumns = false;
+                    //if (cmb_from_pro_loc.SelectedValue != null || cmb_from_pro_loc.SelectedValue.ToString() != "all")
+                    //{
+                    //    grid_search_products.DataSource = null;
+                    //    //bind data in data grid view  
+                    //    GeneralBLL objBLL = new GeneralBLL();
+                    //    grid_search_products.AutoGenerateColumns = false;
 
-                        //String keyword = "P.id,P.code,P.name,(select sum(PS.qty) from  pos_product_stocks PS where PS.id=P.id AND PS.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "') as qty";
-                        String keyword = "P.id,P.item_number, P.code,P.name,P.name_ar,COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=" + UsersModal.logged_in_branch_id + "),0) as qty,P.qty as transfer_qty,P.avg_cost,P.cost_price,P.unit_price,P.location_code,P.description,P.item_type ";
-                        String table = "pos_products P WHERE P.deleted=0 AND P.location_code = '" + cmb_edit_pro_loc.SelectedValue.ToString() + "' ";
-                        //String table = "pos_products AS P";
-                        products_dt = objBLL.GetRecord(keyword, table);
-                        grid_search_products.DataSource = products_dt;
-                        lbl_total_rows.Text = "Total Rows: " + grid_search_products.RowCount.ToString();
-                    }
+                    //    //String keyword = "P.id,P.code,P.name,(select sum(PS.qty) from  pos_product_stocks PS where PS.id=P.id AND PS.loc_code = '" + cmb_from_locations.SelectedValue.ToString() + "') as qty";
+                    //    String keyword = "P.id,P.item_number, P.code,P.name,P.name_ar,COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=" + UsersModal.logged_in_branch_id + "),0) as qty,P.qty as transfer_qty,P.avg_cost,P.cost_price,P.unit_price,P.location_code,P.description,P.item_type ";
+                    //    String table = "pos_products P WHERE P.deleted=0 AND P.location_code = '" + cmb_from_pro_loc.SelectedValue.ToString() + "' ";
+                    //    //String table = "pos_products AS P";
+                    //    products_dt = objBLL.GetRecord(keyword, table);
+                    //    grid_search_products.DataSource = products_dt;
+                    //    lbl_total_rows.Text = "Total Rows: " + grid_search_products.RowCount.ToString();
+                    //}
                 }
             }
             catch (Exception ex)
@@ -798,12 +826,12 @@ namespace pos
             {
                 if(invoiceSearch_dt.Rows.Count > 0)
                 {
-                    pos.Reports.Products.frm_products_report frm_product_obj = new Reports.Products.frm_products_report(invoiceSearch_dt, false, cmb_edit_pro_loc.SelectedValue.ToString());
+                    pos.Reports.Products.frm_products_report frm_product_obj = new Reports.Products.frm_products_report(invoiceSearch_dt, false, cmb_from_pro_loc.SelectedValue.ToString());
                     frm_product_obj.Show();
 
                 }else if(products_dt.Rows.Count > 0)
                 {
-                    pos.Reports.Products.frm_products_report frm_product_obj = new Reports.Products.frm_products_report(products_dt, false, cmb_edit_pro_loc.SelectedValue.ToString());
+                    pos.Reports.Products.frm_products_report frm_product_obj = new Reports.Products.frm_products_report(products_dt, false, cmb_from_pro_loc.SelectedValue.ToString());
                     frm_product_obj.Show();
                 }
             }

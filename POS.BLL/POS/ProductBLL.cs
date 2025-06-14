@@ -145,6 +145,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        static public DataTable SearchProductByLocations(String condition, string category_code, string brand_code, string group_code, string fromLocation, string toLocation, bool qty_onhand)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.SearchProductByLocations(condition, category_code, brand_code, group_code,fromLocation,toLocation, qty_onhand);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
 
         public DataTable SearchRecordByProductNumber(String condition)
         {

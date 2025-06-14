@@ -14,6 +14,8 @@ using System.Globalization;
 
 namespace pos
 {
+    
+
     public partial class frm_purchases_order : Form
     {
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
@@ -100,9 +102,9 @@ namespace pos
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
+            LoadBrandList();
         }
-
+        
         private void btn_search_products_Click(object sender, EventArgs e)
         {
             frm_searchProducts frm_search_product_obj = new frm_searchProducts();
@@ -124,32 +126,36 @@ namespace pos
                 string columnName = grid_purchases_order.Columns[e.ColumnIndex].Name;
                 if (columnName == "code")
                 {
-                       // string product_code = grid_purchases_order[e.ColumnIndex, e.RowIndex].Value.ToString();
+                    // string product_code = grid_purchases_order[e.ColumnIndex, e.RowIndex].Value.ToString();
 
-                        product_code = (grid_purchases_order.CurrentRow.Cells["code"].Value != null ? grid_purchases_order.CurrentRow.Cells["code"].Value.ToString() : "");    
-                        bool isGrid = true;
-                        var brand_code = txt_brand_code.Text; // (cmb_brands.SelectedValue != null ? cmb_brands.SelectedValue.ToString() : "");
-                        var category_code = txt_category_code.Text; // (cmb_categories.SelectedValue != null ? cmb_categories.SelectedValue.ToString() : "");
-                        var group_code = txt_group_code.Text; // (cmb_groups.SelectedValue != null ? cmb_groups.SelectedValue.ToString() : "");
+                    product_code = (grid_purchases_order.CurrentRow.Cells["code"].Value != null ? grid_purchases_order.CurrentRow.Cells["code"].Value.ToString() : "");    
+                    bool isGrid = true;
+                    //var brand_code = txt_brand_code.Text; // (cmb_brands.SelectedValue != null ? cmb_brands.SelectedValue.ToString() : "");
+                    var category_code = txt_category_code.Text; // (cmb_categories.SelectedValue != null ? cmb_categories.SelectedValue.ToString() : "");
+                    var group_code = txt_group_code.Text; // (cmb_groups.SelectedValue != null ? cmb_groups.SelectedValue.ToString() : "");
+                    
+                    // Get selected brand codes
+                    var selectedBrands = GetSelectedBrandCodes();
+                    string brand_code = string.Join(",", selectedBrands); // comma-separated
 
-                        ////////////////////////
-                        if (purchaseSearchObj == null || product_code != "")
-                        {
-                            purchaseSearchObj = new frm_searchPurchaseProducts(null, this, product_code, category_code, brand_code, e.RowIndex, isGrid, group_code);
-                            purchaseSearchObj.FormClosed += new FormClosedEventHandler(purchaseSearchObj_FormClosed);
-                            //frm_cust.Dock = DockStyle.Fill;
-                            purchaseSearchObj.ShowDialog();
-                        }
-                        else
-                        {
-                            //frm_searchSaleProducts_obj.ShowDialog();
-                            //frm_searchSaleProducts_obj.BringToFront();
-                            purchaseSearchObj.Visible = true;
-                        }
-                        ////////////
+                                                                        ////////////////////////
+                    if (purchaseSearchObj == null || product_code != "")
+                    {
+                        purchaseSearchObj = new frm_searchPurchaseProducts(null, this, product_code, category_code, brand_code, e.RowIndex, isGrid, group_code);
+                        purchaseSearchObj.FormClosed += new FormClosedEventHandler(purchaseSearchObj_FormClosed);
+                        //frm_cust.Dock = DockStyle.Fill;
+                        purchaseSearchObj.ShowDialog();
+                    }
+                    else
+                    {
+                        //frm_searchSaleProducts_obj.ShowDialog();
+                        //frm_searchSaleProducts_obj.BringToFront();
+                        purchaseSearchObj.Visible = true;
+                    }
+                    ////////////
                         
-                        //show product purchase history form
-                        //btn_product_purchase_history.PerformClick();
+                    //show product purchase history form
+                    //btn_product_purchase_history.PerformClick();
 
                     
                 }
@@ -300,33 +306,67 @@ namespace pos
             {
                 foreach (DataRow myProductView in product_dt.Rows)
                 {
-                    
+                    double qty = (myProductView["purchase_demand_qty"].ToString() == "0" || (decimal)myProductView["purchase_demand_qty"] == 0 ? 1 : Convert.ToDouble(myProductView["purchase_demand_qty"].ToString()));
+                    double total = qty * double.Parse(myProductView["cost_price"].ToString());
+                    double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
+                    double tax = (total * tax_rate / 100);
+                    double current_sub_total = tax + total;
+
                     int id = Convert.ToInt32(myProductView["id"]);
                     string code = myProductView["code"].ToString();
                     string name = myProductView["name"].ToString();
-                    string qty = (myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? "1" : myProductView["purchase_demand_qty"].ToString());
+                    string available_qty = "1";
+                    string qty_sold = "0";
                     double avg_cost = Convert.ToDouble(myProductView["avg_cost"]);
                     double unit_price = Convert.ToDouble(myProductView["unit_price"]);
-                    double discount = 0.00;
-                    string location_code = "";// myProductView["location_code"].ToString();
+                    double discount = 0.00;// Convert.ToDouble(myProductView["discount_value"]); ;
+                    string location_code = ""; // myProductView["location_code"].ToString();
                     string unit = myProductView["unit"].ToString();
                     string category = myProductView["category"].ToString();
+                    string item_type = myProductView["item_type"].ToString();
                     string btn_delete = "Del";
                     string tax_id = myProductView["tax_id"].ToString();
-                    double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : Convert.ToDouble(myProductView["tax_rate"]));
-
-                    double tax = (Convert.ToDouble(qty) * avg_cost * tax_rate / 100);
-
-                    double current_sub_total = Convert.ToDouble(qty) * avg_cost + tax;
                     string item_number1 = myProductView["item_number"].ToString();
 
-                    string[] row0 = { id.ToString(), code, name, 
-                                            qty, avg_cost.ToString(),unit_price.ToString(), discount.ToString(), 
-                                            tax.ToString(), current_sub_total.ToString(),location_code,unit,category, 
-                                            btn_delete, tax_id.ToString(), tax_rate.ToString(), unit_price.ToString(),item_number1 };
+                    string[] row0 = { id.ToString(), code, name,  avg_cost.ToString(), tax.ToString(), qty_sold,
+                                            available_qty,qty.ToString(),category,unit_price.ToString(), discount.ToString(),
+                            current_sub_total.ToString(),location_code,unit,btn_delete,
+                            tax_id.ToString(), tax_rate.ToString(),item_number1 };
+
+                    //Remove the first empty row
+                    if (grid_purchases_order.RowCount > 0 && grid_purchases_order.Rows[0].Cells["id"].Value == null)
+                    {
+                        grid_purchases_order.Rows.RemoveAt(0);
+                    }
+                    //
                     int RowIndex = grid_purchases_order.Rows.Add(row0);
 
-                    
+                    //int id = Convert.ToInt32(myProductView["id"]);
+                    //string code = myProductView["code"].ToString();
+                    //string name = myProductView["name"].ToString();
+                    //string qty = (myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? "1" : myProductView["purchase_demand_qty"].ToString());
+                    //double avg_cost = Convert.ToDouble(myProductView["avg_cost"]);
+                    //double unit_price = Convert.ToDouble(myProductView["unit_price"]);
+                    //double discount = 0.00;
+                    //string location_code = "";// myProductView["location_code"].ToString();
+                    //string unit = myProductView["unit"].ToString();
+                    //string category = myProductView["category"].ToString();
+                    //string btn_delete = "Del";
+                    //string tax_id = myProductView["tax_id"].ToString();
+                    //double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : Convert.ToDouble(myProductView["tax_rate"]));
+
+                    //double tax = (Convert.ToDouble(qty) * avg_cost * tax_rate / 100);
+
+                    //double current_sub_total = Convert.ToDouble(qty) * avg_cost + tax;
+                    //string item_number1 = myProductView["item_number"].ToString();
+
+                    //string[] row0 = { id.ToString(), code, name, 
+                    //                        qty, avg_cost.ToString(),unit_price.ToString(), discount.ToString(), 
+                    //                        tax.ToString(), current_sub_total.ToString(),location_code,unit,category, 
+                    //                        btn_delete, tax_id.ToString(), tax_rate.ToString(), unit_price.ToString(),item_number1 };
+                    //int RowIndex = grid_purchases_order.Rows.Add(row0);
+
+
                     get_total_tax();
                     get_total_discount();
                     get_sub_total_amount();
@@ -599,10 +639,10 @@ namespace pos
             emptyRow[2] = "Select Supplier";              // Set Column Value
             suppliers.Rows.InsertAt(emptyRow, 0);
 
-            DataRow emptyRow1 = suppliers.NewRow();
-            emptyRow1[0] = "-1";              // Set Column Value
-            emptyRow1[2] = "ADD NEW";              // Set Column Value
-            suppliers.Rows.InsertAt(emptyRow1, 1);
+            //DataRow emptyRow1 = suppliers.NewRow();
+            //emptyRow1[0] = "-1";              // Set Column Value
+            //emptyRow1[2] = "ADD NEW";              // Set Column Value
+            //suppliers.Rows.InsertAt(emptyRow1, 1);
             
             cmb_suppliers.DisplayMember = "first_name";
             cmb_suppliers.ValueMember = "id";
@@ -1589,6 +1629,64 @@ namespace pos
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+        private void LoadBrandList(string search = "")
+        {
+            BrandsBLL brandsBLL = new BrandsBLL();
+
+            // Store checked codes before reload
+            HashSet<string> checkedCodes = new HashSet<string>();
+            foreach (var item in chkListBrands.CheckedItems)
+            {
+                if (item is ListItem li)
+                {
+                    checkedCodes.Add(li.Code);
+                }
+            }
+
+            DataTable dt = brandsBLL.SearchRecord(search);
+            chkListBrands.Items.Clear();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string name = row["name"].ToString();
+                string code = row["code"].ToString();
+
+                ListItem item = new ListItem(name, code);
+                int index = chkListBrands.Items.Add(item);
+
+                // Restore checkmark if previously selected
+                if (checkedCodes.Contains(code))
+                {
+                    chkListBrands.SetItemChecked(index, true);
+                }
+            }
+        }
+        private List<string> GetSelectedBrandCodes()
+        {
+            List<string> selectedCodes = new List<string>();
+            foreach (var item in chkListBrands.CheckedItems)
+            {
+                if (item is ListItem brand)
+                {
+                    selectedCodes.Add(brand.Code);
+                }
+            }
+            return selectedCodes;
+        }
+
+        private void txtSearchBrand_KeyUp(object sender, KeyEventArgs e)
+        {
+            debounceTimer.Stop();  // Stop the timer once triggered
+
+            string searchText = txtSearchBrand.Text.Trim();
+            LoadBrandList(searchText);
+        }
+
+        private void debounceTimer_Tick(object sender, EventArgs e)
+        {
+            debounceTimer.Stop();   // Restart the timer
+            debounceTimer.Start();
         }
     }
 }

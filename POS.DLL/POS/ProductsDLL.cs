@@ -690,7 +690,7 @@ namespace POS.DLL
                 }
             }
         }
-        public DataTable SearchProductByBrandAndCategory_2(string condition, string category_id, string brand_id, string group_code = "")
+        public DataTable SearchProductByBrandAndCategory_2(string condition, string category_code, string brand_code, string group_code = "")
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -728,7 +728,7 @@ namespace POS.DLL
                                 string containsClause = BuildContainsClause(condition);
                                 
                                 // Combine both approaches with OR
-                                query += " AND (" + containsClause +  ")";
+                                query += " AND (" + containsClause ;
 
                                 //string containsClause1 = OptimizeSearchTerm(condition);
 
@@ -738,7 +738,7 @@ namespace POS.DLL
                                     string likeClause = BuildLikeClause(condition,
                                     new[] { "P.code" }); //{ "P.name", "P.code", "P.item_number", "P.description" }
 
-                                    query += " OR " + likeClause;
+                                    query += " OR " + likeClause + ")";
                                     // Add LIKE pattern parameter
                                     cmd.Parameters.AddWithValue("@likePattern", "%" + condition + "%");
 
@@ -748,15 +748,25 @@ namespace POS.DLL
                             }
 
                             // Add optional filters
-                            if (!string.IsNullOrEmpty(category_id))
+                            if (!string.IsNullOrEmpty(category_code))
                             {
                                 query += " AND P.category_code = @category_code";
-                                cmd.Parameters.AddWithValue("@category_code", category_id);
+                                cmd.Parameters.AddWithValue("@category_code", category_code);
                             }
-                            if (!string.IsNullOrEmpty(brand_id))
+                            if (!string.IsNullOrEmpty(brand_code))
                             {
-                                query += " AND P.brand_code = @brand_code";
-                                cmd.Parameters.AddWithValue("@brand_code", brand_id);
+                                var brandCodes = brand_code.Split(',').Select((code, index) =>
+                                {
+                                    string param = $"@brand_code_{index}";
+                                    cmd.Parameters.AddWithValue(param, code);
+                                    return param;
+                                });
+
+                                string brandInClause = string.Join(",", brandCodes);
+                                query += $" AND P.brand_code IN ({brandInClause})";
+
+                                //query += " AND P.brand_code = @brand_code";
+                                //cmd.Parameters.AddWithValue("@brand_code", brand_code);
                             }
                             if (!string.IsNullOrEmpty(group_code))
                             {
@@ -1032,6 +1042,121 @@ namespace POS.DLL
         }
 
         //
+        public DataTable SearchProductByLocations(string condition, string category_id, string brand_id, string group_code, string fromLocation, string toLocation, bool qty_onhand)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        DataTable dt = new DataTable();
+
+                        if (cn.State == ConnectionState.Closed)
+                        {
+                            cn.Open();
+
+                            // Base query
+                            string query = @"SELECT p.id, p.item_number,p.part_number, p.code, p.name, p.name_ar, p.category_code, 
+                                    p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, 
+                                    p.unit_price, p.unit_price_2, p.tax_id, P.location_code, p.unit_id, 
+                                    p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, 
+                                    p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, 
+                                    p.group_code, p.alt_no, p.picture, p.packet_qty,
+                                    COALESCE((SELECT TOP 1 COALESCE(s.qty,0) 
+                                    FROM pos_product_stocks s WITH (NOLOCK)
+                                    WHERE s.item_number=p.item_number AND s.branch_id=@branch_id),0) as qty,
+                                    C.name AS category, C.id AS category_id
+                                    FROM pos_products AS P WITH (NOLOCK)
+                                    LEFT JOIN pos_categories C WITH (NOLOCK) ON C.code=P.category_code
+                                    WHERE p.deleted=0 ";
+
+                            
+                            if(fromLocation == "All" && toLocation == "All")
+                            {
+                                query += ""; //search all locations
+                            }
+                            else if(!string.IsNullOrEmpty(fromLocation) && fromLocation != "all")
+                            {
+                                query += " AND p.location_code >= @fromLocation AND p.location_code <= @toLocation";
+
+                            }
+                            if (qty_onhand)
+                            {
+                                query += " AND COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) > 0";
+                            }
+
+                            cmd.Parameters.AddWithValue("@fromLocation", fromLocation);
+                            cmd.Parameters.AddWithValue("@toLocation", toLocation);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                            // Handle search condition
+                            if (!string.IsNullOrEmpty(condition))
+                            {
+                                // First try with CONTAINS (more efficient if full-text index exists)
+                                string containsClause = BuildContainsClause(condition);
+
+                                // Combine both approaches with OR
+                                query += " AND (" + containsClause + ")";
+
+                                //string containsClause1 = OptimizeSearchTerm(condition);
+
+                                // Fallback for short words (full-text ignores words < 3 chars)
+                                if (condition.Length > 3)
+                                {
+                                    string likeClause = BuildLikeClause(condition,
+                                    new[] { "P.code" }); //{ "P.name", "P.code", "P.item_number", "P.description" }
+
+                                    query += " OR " + likeClause;
+                                    // Add LIKE pattern parameter
+                                    cmd.Parameters.AddWithValue("@likePattern", "%" + condition + "%");
+
+                                    //query += " OR P.code LIKE @exactCode";
+                                    //cmd.Parameters.AddWithValue("@exactCode", "%" + condition + "%");
+                                }
+                            }
+
+                            // Add optional filters
+                            if (!string.IsNullOrEmpty(category_id))
+                            {
+                                query += " AND P.category_code = @category_code";
+                                cmd.Parameters.AddWithValue("@category_code", category_id);
+                            }
+                            if (!string.IsNullOrEmpty(brand_id))
+                            {
+                                query += " AND P.brand_code = @brand_code";
+                                cmd.Parameters.AddWithValue("@brand_code", brand_id);
+                            }
+                            if (!string.IsNullOrEmpty(group_code))
+                            {
+                                query += " AND P.group_code = @group_code";
+                                cmd.Parameters.AddWithValue("@group_code", group_code);
+                            }
+
+                            //query += " ORDER BY qty DESC";
+                            query = "SELECT TOP 1000 * FROM (" + query + ") AS Results ORDER BY name ASC";
+
+                            cmd.CommandText = query;
+                            cmd.Connection = cn;
+
+                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                da.Fill(dt);
+                            }
+                        }
+
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log error and return empty table or rethrow
+                        // Consider logging the actual query for debugging
+                        throw new ApplicationException("Search failed. See inner exception for details. " + ex, ex);
+                    }
+                }
+            }
+        }
+
         public DataTable GetAllProductCodes()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

@@ -110,10 +110,10 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("SELECT id,code,name, date_created FROM pos_brands WHERE name LIKE @name", cn);
-                        //cmd.Parameters.AddWithValue("@id", condition);
-                        cmd.Parameters.AddWithValue("@name", string.Format("%{0}%", condition));
-                        
+                        cmd = new SqlCommand("SELECT id, code, name, date_created FROM pos_brands WHERE @name = '' OR name LIKE @name OR code LIKE @code", cn);
+                        cmd.Parameters.AddWithValue("@name", string.IsNullOrWhiteSpace(condition) ? "" : $"%{condition}%");
+                        cmd.Parameters.AddWithValue("@code", string.IsNullOrWhiteSpace(condition) ? "" : $"%{condition}%");
+
                         da = new SqlDataAdapter(cmd);
                         da.Fill(dt);
                         return dt;

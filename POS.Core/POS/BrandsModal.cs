@@ -26,4 +26,22 @@ namespace POS.Core
 
         public string date_updated { get; set; }
     }
+    // Custom helper class for display/value
+    public class ListItem
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
+
+        public ListItem(string name, string code)
+        {
+            Name = name;
+            Code = code;
+        }
+
+        public override string ToString()
+        {
+            // This is what gets displayed in the CheckedListBox
+            return $"{Code} - {Name}";
+        }
+    }
 }
