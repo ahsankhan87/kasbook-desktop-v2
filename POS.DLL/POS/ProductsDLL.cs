@@ -87,7 +87,14 @@ namespace POS.DLL
                 cmd.Parameters.AddWithValue("@fromDate", StartDate);
                 cmd.Parameters.AddWithValue("@toDate", EndDate);
                 cmd.Parameters.AddWithValue("@is_zero", is_zero);
-                cmd.Parameters.AddWithValue("@brand_code", string.IsNullOrEmpty(brand_code) ? (object)DBNull.Value : brand_code);
+
+                // Convert brand code list to comma-separated string
+                string brandCodesCsv = (brand_code != null && brand_code != "")
+                    ? string.Join(",", brand_code)
+                    : null;
+
+                cmd.Parameters.AddWithValue("@brand_codes", string.IsNullOrEmpty(brandCodesCsv) ? (object)DBNull.Value : brandCodesCsv);
+                //cmd.Parameters.AddWithValue("@brand_code", string.IsNullOrEmpty(brand_code) ? (object)DBNull.Value : brand_code);
                 cmd.Parameters.AddWithValue("@category_code", string.IsNullOrEmpty(category_code) ? (object)DBNull.Value : category_code);
                 cmd.Parameters.AddWithValue("@group_code", string.IsNullOrEmpty(group_code) ? (object)DBNull.Value : group_code);
 

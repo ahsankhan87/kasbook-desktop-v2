@@ -1568,7 +1568,10 @@ namespace pos
         {
             ProductBLL productsBLL_obj = new ProductBLL();
             bool is_zero = (Cmb_zero_qty.SelectedIndex == 1 ? true : false);
-            DataTable _dt = productsBLL_obj.GetProductsSummary(Start_date.Value.Date,End_date.Value.Date,is_zero,txt_group_code.Text.Trim(),txt_brand_code.Text.Trim(),txt_category_code.Text.Trim());
+            
+            var selectedBrands = GetSelectedBrandCodes();
+            string brand_code = string.Join(",", selectedBrands); // comma-separated
+            DataTable _dt = productsBLL_obj.GetProductsSummary(Start_date.Value.Date,End_date.Value.Date,is_zero,txt_group_code.Text.Trim(), brand_code, txt_category_code.Text.Trim());
             //grid_purchases_order.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             try
             {
