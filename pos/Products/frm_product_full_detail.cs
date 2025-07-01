@@ -923,7 +923,7 @@ namespace pos
             else if (lang == "ar-SA")
             {
                 brandsDataGridView.Location = new Point(xLocation, yLocation);
-                brandsDataGridView.Size = new Size(300, 250);
+                brandsDataGridView.Size = new Size(200, 250);
             }
             
             brandsDataGridView.AutoSizeRowsMode =
@@ -1071,7 +1071,7 @@ namespace pos
             else if (lang == "ar-SA")
             {
                 categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(300, 250);
+                categoriesDataGridView.Size = new Size(200, 250);
             }
           
             categoriesDataGridView.AutoSizeRowsMode =
@@ -1194,7 +1194,7 @@ namespace pos
             else if (lang == "ar-SA")
             {
                 groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(300, 250);
+                groupsDataGridView.Size = new Size(200, 250);
             }
             
             groupsDataGridView.AutoSizeRowsMode =
