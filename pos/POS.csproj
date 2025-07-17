@@ -2043,6 +2043,7 @@
     <Content Include="Resources\kasbook logo 80x80.ico" />
     <None Include="Resources\kasbook logo 80x80.png" />
     <Content Include="Resources\Male User.png" />
+    <None Include="Resources\nozum.png" />
     <Content Include="Resources\Password.png" />
     <None Include="Resources\Products.png" />
     <None Include="Resources\Products1.png" />
