@@ -913,10 +913,11 @@ namespace POS.DLL
                             {
                                 // Part name search only
 
-                                //query += " P.name LIKE '%' + @partName + '%' ";
-                                //cmd.Parameters.AddWithValue("@partName", condition);
-                                query += " CONTAINS(P.name, @partNameQuery) ";
-                                cmd.Parameters.AddWithValue("@partNameQuery", "\"" + condition + "*\"");
+                                query += " P.name LIKE @partName + '%' OR  P.code LIKE '%' + @partCode + '%' ";
+                                cmd.Parameters.AddWithValue("@partName", condition);
+                                cmd.Parameters.AddWithValue("@partCode", condition);
+                                //query += " CONTAINS(P.name, @partNameQuery) ";
+                                //cmd.Parameters.AddWithValue("@partNameQuery", "\"" + condition + "*\"");
                             }
 
                             // Filters for category, brand, and group codes

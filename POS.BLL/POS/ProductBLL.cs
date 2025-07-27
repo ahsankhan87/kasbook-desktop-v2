@@ -137,7 +137,7 @@ namespace POS.BLL
             try
             {
                 ProductDLL objDLL = new ProductDLL();
-                return objDLL.SearchProductByBrandAndCategory_2(condition, category_code, brand_code, group_code);
+                return objDLL.SearchProductByBrandAndCategory(condition, category_code, brand_code, group_code);
             }
             catch
             {
