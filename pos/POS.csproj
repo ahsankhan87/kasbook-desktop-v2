@@ -1807,6 +1807,9 @@
     <EmbeddedResource Include="Sales\frm_all_sales.ar-SA.resx">
       <DependentUpon>frm_all_sales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\Frm_print_options.ar-SA.resx">
+      <DependentUpon>Frm_print_options.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\Frm_print_options.resx">
       <DependentUpon>Frm_print_options.cs</DependentUpon>
     </EmbeddedResource>
