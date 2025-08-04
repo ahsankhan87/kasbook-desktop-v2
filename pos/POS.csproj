@@ -1841,6 +1841,9 @@
     <EmbeddedResource Include="Sales\frm_all_sales.ar-SA.resx">
       <DependentUpon>frm_all_sales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\Frm_print_options.ar-SA.resx">
+      <DependentUpon>Frm_print_options.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\Frm_print_options.resx">
       <DependentUpon>Frm_print_options.cs</DependentUpon>
     </EmbeddedResource>
@@ -2079,6 +2082,7 @@
     <Content Include="Resources\kasbook logo 80x80.ico" />
     <None Include="Resources\kasbook logo 80x80.png" />
     <Content Include="Resources\Male User.png" />
+    <None Include="Resources\nozum.png" />
     <Content Include="Resources\Password.png" />
     <None Include="Resources\Products.png" />
     <None Include="Resources\Products1.png" />

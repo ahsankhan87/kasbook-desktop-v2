@@ -29,8 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_searchPurchaseProducts));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_ok = new System.Windows.Forms.Button();
@@ -203,6 +213,8 @@
             // 
             this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.code.DataPropertyName = "code";
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.code.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.code, "code");
             this.code.Name = "code";
             this.code.ReadOnly = true;
@@ -211,6 +223,8 @@
             // 
             this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.name.DataPropertyName = "name";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.name, "name");
             this.name.Name = "name";
             this.name.ReadOnly = true;
@@ -220,6 +234,7 @@
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty.DataPropertyName = "qty";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
             this.qty.DefaultCellStyle = dataGridViewCellStyle3;
@@ -232,6 +247,7 @@
             this.avg_cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.avg_cost.DataPropertyName = "avg_cost";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.Format = "N2";
             dataGridViewCellStyle4.NullValue = null;
             this.avg_cost.DefaultCellStyle = dataGridViewCellStyle4;
@@ -242,6 +258,8 @@
             // location_code
             // 
             this.location_code.DataPropertyName = "location_code";
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.location_code.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.location_code, "location_code");
             this.location_code.Name = "location_code";
             this.location_code.ReadOnly = true;
@@ -249,6 +267,8 @@
             // category
             // 
             this.category.DataPropertyName = "category";
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.category.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.category, "category");
             this.category.Name = "category";
             this.category.ReadOnly = true;
@@ -285,6 +305,8 @@
             // 
             this.g_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_code.DataPropertyName = "code";
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_code.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.g_code, "g_code");
             this.g_code.Name = "g_code";
             this.g_code.ReadOnly = true;
@@ -293,6 +315,8 @@
             // 
             this.g_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.g_name.DataPropertyName = "name";
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_name.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.g_name, "g_name");
             this.g_name.Name = "g_name";
             this.g_name.ReadOnly = true;
@@ -301,6 +325,8 @@
             // 
             this.g_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_qty.DataPropertyName = "qty";
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_qty.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.g_qty, "g_qty");
             this.g_qty.Name = "g_qty";
             this.g_qty.ReadOnly = true;
@@ -309,6 +335,8 @@
             // 
             this.g_avg_cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_avg_cost.DataPropertyName = "avg_cost";
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_avg_cost.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.g_avg_cost, "g_avg_cost");
             this.g_avg_cost.Name = "g_avg_cost";
             this.g_avg_cost.ReadOnly = true;
@@ -316,6 +344,8 @@
             // g_location_code
             // 
             this.g_location_code.DataPropertyName = "location_code";
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_location_code.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.g_location_code, "g_location_code");
             this.g_location_code.Name = "g_location_code";
             this.g_location_code.ReadOnly = true;
@@ -323,6 +353,8 @@
             // g_category
             // 
             this.g_category.DataPropertyName = "category";
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_category.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.g_category, "g_category");
             this.g_category.Name = "g_category";
             this.g_category.ReadOnly = true;

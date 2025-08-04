@@ -30,14 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_purchases_order));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_header = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_description = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chkListBrands = new System.Windows.Forms.CheckedListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtSearchBrand = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.PurchaseToolStrip = new System.Windows.Forms.ToolStrip();
             this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -45,8 +50,6 @@
             this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PurchaseHistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txt_description = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.SearchBySupplierCheckbox = new System.Windows.Forms.CheckBox();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
@@ -124,12 +127,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.debounceTimer = new System.Windows.Forms.Timer(this.components);
-            this.txtSearchBrand = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panel_header.SuspendLayout();
-            this.PurchaseToolStrip.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PurchaseToolStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_products.SuspendLayout();
@@ -137,12 +139,11 @@
             this.panel_grid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_product_history)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_header
             // 
+            resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Controls.Add(this.groupBox3);
             this.panel_header.Controls.Add(this.groupBox4);
             this.panel_header.Controls.Add(this.label29);
@@ -150,15 +151,50 @@
             this.panel_header.Controls.Add(this.groupBox2);
             this.panel_header.Controls.Add(this.groupBox1);
             this.panel_header.Controls.Add(this.groupBox_products);
-            resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Name = "panel_header";
+            // 
+            // groupBox3
+            // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.txt_description);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // txt_description
+            // 
+            resources.ApplyResources(this.txt_description, "txt_description");
+            this.txt_description.Name = "txt_description";
+            // 
+            // groupBox4
+            // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.chkListBrands);
+            this.groupBox4.Controls.Add(this.pictureBox1);
+            this.groupBox4.Controls.Add(this.txtSearchBrand);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
             // 
             // chkListBrands
             // 
+            resources.ApplyResources(this.chkListBrands, "chkListBrands");
             this.chkListBrands.CheckOnClick = true;
             this.chkListBrands.FormattingEnabled = true;
-            resources.ApplyResources(this.chkListBrands, "chkListBrands");
             this.chkListBrands.Name = "chkListBrands";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox1.Image = global::pos.Properties.Resources.Search;
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // txtSearchBrand
+            // 
+            resources.ApplyResources(this.txtSearchBrand, "txtSearchBrand");
+            this.txtSearchBrand.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearchBrand.Name = "txtSearchBrand";
+            this.txtSearchBrand.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchBrand_KeyUp);
             // 
             // label29
             // 
@@ -168,8 +204,8 @@
             // 
             // PurchaseToolStrip
             // 
-            this.PurchaseToolStrip.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.PurchaseToolStrip, "PurchaseToolStrip");
+            this.PurchaseToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.PurchaseToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.PurchaseToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewToolStripButton,
@@ -181,58 +217,47 @@
             // 
             // NewToolStripButton
             // 
+            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
-            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.Name = "NewToolStripButton";
             this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
             // 
             // SaveToolStripButton
             // 
+            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
-            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.Name = "SaveToolStripButton";
             this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
             // 
             // SearchToolStripButton
             // 
+            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.Name = "SearchToolStripButton";
             this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
             // 
             // HistoryToolStripButton
             // 
+            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
-            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.Name = "HistoryToolStripButton";
             this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
             // 
             // PurchaseHistoryToolStripButton
             // 
+            resources.ApplyResources(this.PurchaseHistoryToolStripButton, "PurchaseHistoryToolStripButton");
             this.PurchaseHistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.PurchaseHistoryToolStripButton.Image = global::pos.Properties.Resources.Estimate;
-            resources.ApplyResources(this.PurchaseHistoryToolStripButton, "PurchaseHistoryToolStripButton");
             this.PurchaseHistoryToolStripButton.Name = "PurchaseHistoryToolStripButton";
             this.PurchaseHistoryToolStripButton.Click += new System.EventHandler(this.PurchaseHistoryToolStripButton_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txt_description);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // txt_description
-            // 
-            resources.ApplyResources(this.txt_description, "txt_description");
-            this.txt_description.Name = "txt_description";
-            // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.SearchBySupplierCheckbox);
             this.groupBox2.Controls.Add(this.cmb_employees);
             this.groupBox2.Controls.Add(this.txt_delivery_date);
@@ -244,7 +269,6 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label16);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -256,10 +280,10 @@
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.Name = "cmb_employees";
             // 
             // txt_delivery_date
@@ -270,10 +294,10 @@
             // 
             // cmb_suppliers
             // 
+            resources.ApplyResources(this.cmb_suppliers, "cmb_suppliers");
             this.cmb_suppliers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_suppliers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_suppliers.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_suppliers, "cmb_suppliers");
             this.cmb_suppliers.Name = "cmb_suppliers";
             this.cmb_suppliers.SelectedIndexChanged += new System.EventHandler(this.cmb_suppliers_SelectedIndexChanged);
             // 
@@ -316,6 +340,7 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.Btn_load_products);
             this.groupBox1.Controls.Add(this.End_date);
             this.groupBox1.Controls.Add(this.Start_date);
@@ -323,7 +348,6 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.label20);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -348,11 +372,11 @@
             // 
             // Cmb_zero_qty
             // 
+            resources.ApplyResources(this.Cmb_zero_qty, "Cmb_zero_qty");
             this.Cmb_zero_qty.FormattingEnabled = true;
             this.Cmb_zero_qty.Items.AddRange(new object[] {
             resources.GetString("Cmb_zero_qty.Items"),
             resources.GetString("Cmb_zero_qty.Items1")});
-            resources.ApplyResources(this.Cmb_zero_qty, "Cmb_zero_qty");
             this.Cmb_zero_qty.Name = "Cmb_zero_qty";
             // 
             // label10
@@ -372,6 +396,7 @@
             // 
             // groupBox_products
             // 
+            resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.Controls.Add(this.txt_group_code);
             this.groupBox_products.Controls.Add(this.txt_category_code);
             this.groupBox_products.Controls.Add(this.txt_groups);
@@ -383,7 +408,6 @@
             this.groupBox_products.Controls.Add(this.label4);
             this.groupBox_products.Controls.Add(this.txt_barcode);
             this.groupBox_products.Controls.Add(this.label8);
-            resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
             // 
@@ -454,8 +478,8 @@
             // 
             // grid_purchases_order
             // 
-            this.grid_purchases_order.AllowUserToAddRows = false;
             resources.ApplyResources(this.grid_purchases_order, "grid_purchases_order");
+            this.grid_purchases_order.AllowUserToAddRows = false;
             this.grid_purchases_order.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_purchases_order.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_purchases_order.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -495,8 +519,8 @@
             // code
             // 
             this.code.DataPropertyName = "code";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.code.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.code.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.code, "code");
             this.code.Name = "code";
             // 
@@ -511,10 +535,10 @@
             // 
             this.avg_cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.avg_cost.DataPropertyName = "avg_cost";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.avg_cost.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.avg_cost.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.avg_cost, "avg_cost");
             this.avg_cost.Name = "avg_cost";
             this.avg_cost.ReadOnly = true;
@@ -523,10 +547,10 @@
             // 
             this.tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tax.DataPropertyName = "tax";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.tax.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.tax.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.tax, "tax");
             this.tax.Name = "tax";
             this.tax.ReadOnly = true;
@@ -535,9 +559,9 @@
             // 
             this.qty_sold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty_sold.DataPropertyName = "qty_sold";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.qty_sold.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.qty_sold.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.qty_sold, "qty_sold");
             this.qty_sold.Name = "qty_sold";
             this.qty_sold.ReadOnly = true;
@@ -546,9 +570,9 @@
             // 
             this.available_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.available_qty.DataPropertyName = "qty";
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.available_qty.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.available_qty.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.available_qty, "available_qty");
             this.available_qty.Name = "available_qty";
             this.available_qty.ReadOnly = true;
@@ -557,8 +581,8 @@
             // 
             this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Qty.DataPropertyName = "qty";
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.Qty, "Qty");
             this.Qty.Name = "Qty";
             // 
@@ -636,18 +660,18 @@
             // 
             // panel_grid
             // 
+            resources.ApplyResources(this.panel_grid, "panel_grid");
             this.panel_grid.Controls.Add(this.grid_product_history);
             this.panel_grid.Controls.Add(this.grid_purchases_order);
             this.panel_grid.Controls.Add(this.label15);
-            resources.ApplyResources(this.panel_grid, "panel_grid");
             this.panel_grid.Name = "panel_grid";
             // 
             // grid_product_history
             // 
+            resources.ApplyResources(this.grid_product_history, "grid_product_history");
             this.grid_product_history.AllowUserToAddRows = false;
             this.grid_product_history.AllowUserToDeleteRows = false;
             this.grid_product_history.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_product_history, "grid_product_history");
             this.grid_product_history.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_product_history.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.product_id,
@@ -749,6 +773,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.txt_total_qty);
             this.panel1.Controls.Add(this.txt_total_amount);
@@ -759,7 +784,6 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label9);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // label19
@@ -830,30 +854,6 @@
             this.debounceTimer.Interval = 300;
             this.debounceTimer.Tick += new System.EventHandler(this.debounceTimer_Tick);
             // 
-            // txtSearchBrand
-            // 
-            this.txtSearchBrand.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.txtSearchBrand, "txtSearchBrand");
-            this.txtSearchBrand.Name = "txtSearchBrand";
-            this.txtSearchBrand.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchBrand_KeyUp);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.chkListBrands);
-            this.groupBox4.Controls.Add(this.pictureBox1);
-            this.groupBox4.Controls.Add(this.txtSearchBrand);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
-            // 
             // frm_purchases_order
             // 
             resources.ApplyResources(this, "$this");
@@ -869,10 +869,13 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_purchases_order_KeyDown);
             this.panel_header.ResumeLayout(false);
             this.panel_header.PerformLayout();
-            this.PurchaseToolStrip.ResumeLayout(false);
-            this.PurchaseToolStrip.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.PurchaseToolStrip.ResumeLayout(false);
+            this.PurchaseToolStrip.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -885,9 +888,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid_product_history)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }

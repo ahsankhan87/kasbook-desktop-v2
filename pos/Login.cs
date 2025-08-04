@@ -240,5 +240,7 @@ namespace pos
             frm_register_company registerfrm = new frm_register_company();
             registerfrm.ShowDialog();
         }
+
+        
     }
 }
