@@ -135,9 +135,6 @@
   <data name="button1.Text" xml:space="preserve">
     <value>Test auth</value>
   </data>
-  <data name="button1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
@@ -161,9 +158,6 @@
   </data>
   <data name="BtnUBLInvoice.Text" xml:space="preserve">
     <value>UBL Invoice</value>
-  </data>
-  <data name="BtnUBLInvoice.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;BtnUBLInvoice.Name" xml:space="preserve">
     <value>BtnUBLInvoice</value>
@@ -390,13 +384,22 @@
   <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <metadata name="customer_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="invoice_subtype_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="customer_name.HeaderText" xml:space="preserve">
+  <data name="invoice_subtype_code.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="invoice_subtype_code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="customer.HeaderText" xml:space="preserve">
     <value>Customer</value>
   </data>
-  <data name="customer_name.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="customer.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -453,6 +456,15 @@
   <data name="total.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <metadata name="zatca_status.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="zatca_status.HeaderText" xml:space="preserve">
+    <value>Zacta Status</value>
+  </data>
+  <data name="zatca_status.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <metadata name="detail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -503,6 +515,54 @@
   </data>
   <data name="Zetca_qrcode.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <metadata name="btn_send_zatca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btn_send_zatca.HeaderText" xml:space="preserve">
+    <value>ZATCA Sign</value>
+  </data>
+  <data name="btn_send_zatca.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="btn_zatca_compliance_check.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btn_zatca_compliance_check.HeaderText" xml:space="preserve">
+    <value>ZATCA Compliance Check</value>
+  </data>
+  <data name="btn_zatca_compliance_check.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="btn_download_ubl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btn_download_ubl.HeaderText" xml:space="preserve">
+    <value>UBL</value>
+  </data>
+  <data name="btn_download_ubl.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="btn_report_to_zatca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btn_report_to_zatca.HeaderText" xml:space="preserve">
+    <value>Report to Zatca</value>
+  </data>
+  <data name="btn_report_to_zatca.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btn_report_to_zatca.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="btn_show_qrcode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btn_show_qrcode.HeaderText" xml:space="preserve">
+    <value>Show QR</value>
+  </data>
+  <data name="btn_show_qrcode.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="grid_all_sales.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 57</value>
@@ -681,10 +741,16 @@
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;customer_name.Name" xml:space="preserve">
-    <value>customer_name</value>
+  <data name="&gt;&gt;invoice_subtype_code.Name" xml:space="preserve">
+    <value>invoice_subtype_code</value>
   </data>
-  <data name="&gt;&gt;customer_name.Type" xml:space="preserve">
+  <data name="&gt;&gt;invoice_subtype_code.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customer.Name" xml:space="preserve">
+    <value>customer</value>
+  </data>
+  <data name="&gt;&gt;customer.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sale_date.Name" xml:space="preserve">
@@ -723,6 +789,12 @@
   <data name="&gt;&gt;total.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;zatca_status.Name" xml:space="preserve">
+    <value>zatca_status</value>
+  </data>
+  <data name="&gt;&gt;zatca_status.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;detail.Name" xml:space="preserve">
     <value>detail</value>
   </data>
@@ -746,6 +818,36 @@
   </data>
   <data name="&gt;&gt;Zetca_qrcode.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_send_zatca.Name" xml:space="preserve">
+    <value>btn_send_zatca</value>
+  </data>
+  <data name="&gt;&gt;btn_send_zatca.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_zatca_compliance_check.Name" xml:space="preserve">
+    <value>btn_zatca_compliance_check</value>
+  </data>
+  <data name="&gt;&gt;btn_zatca_compliance_check.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_download_ubl.Name" xml:space="preserve">
+    <value>btn_download_ubl</value>
+  </data>
+  <data name="&gt;&gt;btn_download_ubl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_report_to_zatca.Name" xml:space="preserve">
+    <value>btn_report_to_zatca</value>
+  </data>
+  <data name="&gt;&gt;btn_report_to_zatca.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_show_qrcode.Name" xml:space="preserve">
+    <value>btn_show_qrcode</value>
+  </data>
+  <data name="&gt;&gt;btn_show_qrcode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_all_sales</value>

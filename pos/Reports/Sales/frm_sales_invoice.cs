@@ -35,7 +35,7 @@ namespace pos
             double total_discount = 0;
             double net_total = 0;
             string sale_date = "";
-            //string username = "";
+            byte[] zatca_qrcode_phase2 = null;
 
             foreach (DataRow dr in _dt.Rows)
             {
@@ -43,7 +43,7 @@ namespace pos
                 total_tax = Convert.ToDouble(dr["total_tax"]);
                 total_discount = Convert.ToDouble(dr["total_discount"]);
                 sale_date = dr["sale_time"].ToString();
-                //sale_date_1 = sale_date.Date.ToString("d");
+                zatca_qrcode_phase2 =  (dr["zatca_qrcode_phase2"] == DBNull.Value ? null : (byte[])dr["zatca_qrcode_phase2"]);
             }
             net_total = total_amount - total_discount + total_tax;
             string s_date = Convert.ToDateTime(sale_date).ToString("yyyy-MM-ddTHH:mm:ss");
@@ -74,10 +74,13 @@ namespace pos
 
 
             byte[] imageData = GenerateQrCode(HexToBase64(qtcode_String));//GIVE DATA TO FUNCTION AND GET QRCODE
+            byte[] imageData_phase2 = GeneratePhase2QrCode(zatca_qrcode_phase2);  //GIVE DATA TO FUNCTION AND GET PHASE 2 QRCODE
             _dt.Columns.Add("qrcode_image", typeof(byte[]));// INSERT QRCODE DATA TO DATATABLE
+            _dt.Columns.Add("qrcode_image_phase2", typeof(byte[]));// INSERT QRCODE DATA TO DATATABLE
             foreach (DataRow dr in _dt.Rows)
             {
                 dr["qrcode_image"] = imageData;
+                dr["qrcode_image_phase2"] = imageData_phase2;
             }
 
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
@@ -120,7 +123,7 @@ namespace pos
             QRCoder.QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(qrmsg, QRCoder.QRCodeGenerator.ECCLevel.Q);
             QRCoder.QRCode qRCode = new QRCoder.QRCode(qRCodeData);
 
-            using (Bitmap bmp = qRCode.GetGraphic(5))
+            using (Bitmap bmp = qRCode.GetGraphic(20))
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -136,6 +139,36 @@ namespace pos
                     //return image;
                 }
             }
+        }
+        private byte[] GeneratePhase2QrCode(byte[] qrBytes)
+        {
+            byte[] byteImage = null;
+            if (qrBytes != null)
+            {
+                string base64String = Convert.ToBase64String(qrBytes);
+
+                QRCoder.QRCodeGenerator qRCodeGenerator = new QRCoder.QRCodeGenerator();
+                QRCoder.QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(base64String, QRCoder.QRCodeGenerator.ECCLevel.Q);
+                QRCoder.QRCode qRCode = new QRCoder.QRCode(qRCodeData);
+
+                using (Bitmap bmp = qRCode.GetGraphic(20))
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+
+                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        byteImage = ms.ToArray();
+                        
+                        //FileStream fileStream = new FileStream(appPath + "qrcode.jpg", FileMode.Open);
+
+                        //BinaryReader binaryReader = new BinaryReader(fileStream);
+                        //return binaryReader.ReadBytes((int)binaryReader.BaseStream.Length);
+                        //Image image = Image.FromStream(ms);
+                        //return image;
+                    }
+                }
+            }
+            return byteImage;
         }
 
         static string gethexstring(Int32 TagNo, string TagValue)

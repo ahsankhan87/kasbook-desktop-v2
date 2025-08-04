@@ -56,9 +56,9 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT TOP 10000 SI.invoice_no,SI.id,SI.discount_value,SI.total_amount,SI.total_tax," +
-                            "(SI.total_tax+SI.total_amount-SI.discount_value) as total, SI.sale_date,SI.sale_time,SI.account,SI.sale_type,SI.Zetca_qrcode," +
-                            "CONCAT(C.first_name,' ',C.last_name) AS customer_name " +
+                        String query = "SELECT TOP 10000 SI.*,IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype, " +
+                            "(SI.total_tax+SI.total_amount-SI.discount_value) as total, " +
+                            "CONCAT(C.first_name,' ',C.last_name) AS customer " +
                             "FROM pos_sales SI " +
                             "LEFT JOIN pos_customers C ON C.id=SI.customer_id" +
                             " WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id Order by id desc ";
@@ -132,10 +132,10 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,S.branch_id," +
+                        String query = "SELECT S.*," +
                             " SI.id,SI.item_code,SI.item_number,SI.quantity_sold,SI.unit_price,SI.item_name AS product_name,SI.tax_rate,SI.tax_id," +
                             " SI.discount_value, " +
-                            " S.discount_value AS total_discount, S.total_tax, S.total_amount, " +
+                            " S.discount_value AS total_discount, " +
                             " (SI.unit_price*SI.quantity_sold) AS total, " +
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " C.first_name AS customer_name, C.vat_no AS customer_vat," +
@@ -222,7 +222,7 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("SELECT s.id,s.invoice_no,sale_type,sale_date,total_amount,discount_value,total_tax,CONCAT(C.first_name,' ',C.last_name) AS customer_name " +
+                        cmd = new SqlCommand("SELECT s.*,CONCAT(C.first_name,' ',C.last_name) AS customer_name " +
                             "FROM pos_sales s LEFT JOIN pos_customers C ON C.id=S.customer_id WHERE invoice_no LIKE @invoice_no AND s.branch_id = @branch_id", cn);
                         //cmd.Parameters.AddWithValue("@invoice_no", condition);
                         cmd.Parameters.AddWithValue("@invoice_no", string.Format("%{0}%", condition));
@@ -411,6 +411,7 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@employee_id", sale_header.employee_id);
                                 cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
                                 cmd.Parameters.AddWithValue("@sale_type", sale_header.sale_type);
+                                cmd.Parameters.AddWithValue("@invoice_subtype_code", sale_header.invoice_subtype);
                                 cmd.Parameters.AddWithValue("@total_amount", sale_header.total_amount);
                                 cmd.Parameters.AddWithValue("@total_tax", sale_header.total_tax);
                                 cmd.Parameters.AddWithValue("@discount_value", sale_header.total_discount);
@@ -1193,6 +1194,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@employee_id", sale_header.employee_id);
                             cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
                             cmd.Parameters.AddWithValue("@sale_type", sale_header.sale_type);
+                            cmd.Parameters.AddWithValue("@invoice_subtype_code", sale_header.invoice_subtype);
                             cmd.Parameters.AddWithValue("@total_amount", sale_header.total_amount);
                             cmd.Parameters.AddWithValue("@total_tax", sale_header.total_tax);
                             cmd.Parameters.AddWithValue("@discount_value", sale_header.total_discount);
@@ -1857,6 +1859,96 @@ namespace POS.DLL
 
                 return newSaleID;
 
+            }
+        }
+        public void UpdateZatcaStatus(string invoiceNo, string status, string ublPath, string errorMessage)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"UPDATE pos_sales
+                SET zatca_status = @status,
+                    zatca_ubl_path = @path,
+                    zatca_error_message = @error
+                WHERE invoice_no = @invoice", cn))
+            {
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@path", (object)ublPath ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@error", (object)errorMessage ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@invoice", invoiceNo);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void UpdateZatcaQrCode(string invoiceNo, byte[] qrCode)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand("UPDATE pos_sales SET zatca_qrcode_phase2 = @qr WHERE invoice_no = @invoice", cn))
+            {
+                cmd.Parameters.AddWithValue("@qr", qrCode);
+                cmd.Parameters.AddWithValue("@invoice", invoiceNo);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public string GetUblPath(string invoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand("SELECT zatca_ubl_path FROM pos_sales WHERE invoice_no = @invoice", cn))
+            {
+                cmd.Parameters.AddWithValue("@invoice", invoiceNo);
+                cn.Open();
+                return Convert.ToString(cmd.ExecuteScalar());
+            }
+        }
+        public string GetInvoiceTypeCode(string invoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand("SELECT invoice_subtype_code FROM pos_sales WHERE invoice_no = @invoice", cn))
+            {
+                cmd.Parameters.AddWithValue("@invoice", invoiceNo);
+                cn.Open();
+                return Convert.ToString(cmd.ExecuteScalar());
+            }
+        }
+        public DataSet GetSaleAndItemsDataSet(string invoice_no)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+
+                // Query 1: Sale Header
+                string headerSql = "SELECT * FROM pos_sales WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
+                // Query 2: Items
+                string itemsSql = "SELECT SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.packet_qty,SI.item_number," +
+                            " SI.discount_value,SI.discount_percent,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
+                            " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat, SI.item_number, " +
+                                  "P.name, P.code, U.name AS unit_name, CT.name AS category_name " +
+                                  "FROM pos_sales_items SI " +
+                                  "LEFT JOIN pos_products P ON P.item_number = SI.item_number " +
+                                  "LEFT JOIN pos_units U ON U.id = SI.unit_id " +
+                                  "LEFT JOIN pos_categories CT ON CT.code = P.category_code " +
+                                  "WHERE SI.invoice_no = @invoice_no";
+
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.CommandText = headerSql;
+                cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                da.SelectCommand = cmd;
+                DataSet ds = new DataSet();
+
+                da.Fill(ds, "Sale");
+
+                cmd.CommandText = itemsSql;
+                da.SelectCommand = cmd;
+
+                da.Fill(ds, "SalesItems");
+
+                return ds;
             }
         }
 

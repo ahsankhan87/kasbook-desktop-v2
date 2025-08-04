@@ -32,13 +32,20 @@ namespace pos.Master.Companies.zatca
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoGenerateCSR));
             this.txt_seller_citysubdiv = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label47 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
             this.txt_seller_postalzone = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
             this.txt_seller_cityname = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
             this.txt_seller_buildingnumber = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.txt_seller_street = new System.Windows.Forms.TextBox();
@@ -93,6 +100,10 @@ namespace pos.Master.Companies.zatca
             this.txt_organizationIdentifier = new System.Windows.Forms.TextBox();
             this.txt_serialNumber = new System.Windows.Forms.TextBox();
             this.csid_tabPage = new System.Windows.Forms.TabPage();
+            this.btn_info = new System.Windows.Forms.Button();
+            this.btn_refresh2 = new System.Windows.Forms.Button();
+            this.btn_refresh1 = new System.Windows.Forms.Button();
+            this.Btn_save = new System.Windows.Forms.Button();
             this.txt_commonName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -109,14 +120,20 @@ namespace pos.Master.Companies.zatca
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.txt_buyyer_cityname = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.txt_buyyer_postalzone = new System.Windows.Forms.TextBox();
-            this.btn_info = new System.Windows.Forms.Button();
-            this.btn_refresh2 = new System.Windows.Forms.Button();
-            this.btn_refresh1 = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.csid_tabPage.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -126,110 +143,180 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_seller_citysubdiv
             // 
-            this.txt_seller_citysubdiv.Location = new System.Drawing.Point(7, 148);
+            this.txt_seller_citysubdiv.Location = new System.Drawing.Point(165, 169);
             this.txt_seller_citysubdiv.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_seller_citysubdiv.Name = "txt_seller_citysubdiv";
-            this.txt_seller_citysubdiv.Size = new System.Drawing.Size(701, 22);
+            this.txt_seller_citysubdiv.Size = new System.Drawing.Size(544, 22);
             this.txt_seller_citysubdiv.TabIndex = 92;
             this.txt_seller_citysubdiv.Text = "جدة";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label47);
             this.groupBox2.Controls.Add(this.label36);
             this.groupBox2.Controls.Add(this.txt_seller_citysubdiv);
+            this.groupBox2.Controls.Add(this.label56);
+            this.groupBox2.Controls.Add(this.label46);
             this.groupBox2.Controls.Add(this.label41);
+            this.groupBox2.Controls.Add(this.label45);
             this.groupBox2.Controls.Add(this.label32);
+            this.groupBox2.Controls.Add(this.label44);
             this.groupBox2.Controls.Add(this.txt_seller_postalzone);
             this.groupBox2.Controls.Add(this.label33);
+            this.groupBox2.Controls.Add(this.label43);
             this.groupBox2.Controls.Add(this.txt_seller_cityname);
             this.groupBox2.Controls.Add(this.label34);
+            this.groupBox2.Controls.Add(this.label42);
             this.groupBox2.Controls.Add(this.txt_seller_buildingnumber);
             this.groupBox2.Controls.Add(this.label35);
             this.groupBox2.Controls.Add(this.txt_seller_street);
             this.groupBox2.Controls.Add(this.txt_seller_otherid);
             this.groupBox2.Location = new System.Drawing.Point(10, 75);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(880, 219);
+            this.groupBox2.Size = new System.Drawing.Size(880, 236);
             this.groupBox2.TabIndex = 98;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "بيانات البائع";
             // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(7, 172);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(138, 17);
+            this.label47.TabIndex = 93;
+            this.label47.Text = "neighbouhodd name";
+            // 
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(778, 152);
+            this.label36.Location = new System.Drawing.Point(767, 173);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(50, 17);
             this.label36.TabIndex = 93;
             this.label36.Text = "اسم الحى";
             // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(90, 18);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(78, 17);
+            this.label56.TabIndex = 91;
+            this.label56.Text = "Seller Data";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(7, 52);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(86, 17);
+            this.label46.TabIndex = 91;
+            this.label46.Text = "Reg number";
+            // 
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(719, 32);
+            this.label41.Location = new System.Drawing.Point(720, 53);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(97, 17);
             this.label41.TabIndex = 91;
             this.label41.Text = "رقم السجل التجارى";
             // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(7, 202);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(81, 17);
+            this.label45.TabIndex = 89;
+            this.label45.Text = "postal code";
+            // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(767, 182);
+            this.label32.Location = new System.Drawing.Point(747, 203);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(70, 17);
             this.label32.TabIndex = 89;
             this.label32.Text = "الرمز البريدى";
             // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(7, 142);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(70, 17);
+            this.label44.TabIndex = 87;
+            this.label44.Text = "City name";
+            // 
             // txt_seller_postalzone
             // 
-            this.txt_seller_postalzone.Location = new System.Drawing.Point(7, 178);
+            this.txt_seller_postalzone.Location = new System.Drawing.Point(165, 199);
             this.txt_seller_postalzone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_seller_postalzone.Name = "txt_seller_postalzone";
-            this.txt_seller_postalzone.Size = new System.Drawing.Size(701, 22);
+            this.txt_seller_postalzone.Size = new System.Drawing.Size(544, 22);
             this.txt_seller_postalzone.TabIndex = 88;
             this.txt_seller_postalzone.Text = "15385";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(767, 122);
+            this.label33.Location = new System.Drawing.Point(762, 143);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(55, 17);
             this.label33.TabIndex = 87;
             this.label33.Text = "اسم المدينة";
             // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(7, 112);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(81, 17);
+            this.label43.TabIndex = 85;
+            this.label43.Text = "building no.";
+            // 
             // txt_seller_cityname
             // 
-            this.txt_seller_cityname.Location = new System.Drawing.Point(7, 118);
+            this.txt_seller_cityname.Location = new System.Drawing.Point(165, 139);
             this.txt_seller_cityname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_seller_cityname.Name = "txt_seller_cityname";
-            this.txt_seller_cityname.Size = new System.Drawing.Size(701, 22);
+            this.txt_seller_cityname.Size = new System.Drawing.Size(544, 22);
             this.txt_seller_cityname.TabIndex = 86;
             this.txt_seller_cityname.Text = "Alfalah";
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(775, 92);
+            this.label34.Location = new System.Drawing.Point(764, 113);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(53, 17);
             this.label34.TabIndex = 85;
             this.label34.Text = "رقم المبنى";
             // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(7, 82);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(46, 17);
+            this.label42.TabIndex = 83;
+            this.label42.Text = "Street";
+            // 
             // txt_seller_buildingnumber
             // 
-            this.txt_seller_buildingnumber.Location = new System.Drawing.Point(7, 88);
+            this.txt_seller_buildingnumber.Location = new System.Drawing.Point(165, 109);
             this.txt_seller_buildingnumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_seller_buildingnumber.Name = "txt_seller_buildingnumber";
-            this.txt_seller_buildingnumber.Size = new System.Drawing.Size(701, 22);
+            this.txt_seller_buildingnumber.Size = new System.Drawing.Size(544, 22);
             this.txt_seller_buildingnumber.TabIndex = 84;
             this.txt_seller_buildingnumber.Text = "3724";
             // 
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(805, 62);
+            this.label35.Location = new System.Drawing.Point(777, 83);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(40, 17);
             this.label35.TabIndex = 83;
@@ -237,35 +324,35 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_seller_street
             // 
-            this.txt_seller_street.Location = new System.Drawing.Point(7, 58);
+            this.txt_seller_street.Location = new System.Drawing.Point(165, 79);
             this.txt_seller_street.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_seller_street.Name = "txt_seller_street";
-            this.txt_seller_street.Size = new System.Drawing.Size(701, 22);
+            this.txt_seller_street.Size = new System.Drawing.Size(544, 22);
             this.txt_seller_street.TabIndex = 82;
             this.txt_seller_street.Text = "شارع الامير نايف";
             // 
             // txt_seller_otherid
             // 
-            this.txt_seller_otherid.Location = new System.Drawing.Point(7, 28);
+            this.txt_seller_otherid.Location = new System.Drawing.Point(165, 49);
             this.txt_seller_otherid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_seller_otherid.Name = "txt_seller_otherid";
-            this.txt_seller_otherid.Size = new System.Drawing.Size(701, 22);
+            this.txt_seller_otherid.Size = new System.Drawing.Size(544, 22);
             this.txt_seller_otherid.TabIndex = 76;
             this.txt_seller_otherid.Text = "3402101667";
             // 
             // txt_buyyer_otherid
             // 
-            this.txt_buyyer_otherid.Location = new System.Drawing.Point(9, 27);
+            this.txt_buyyer_otherid.Location = new System.Drawing.Point(160, 59);
             this.txt_buyyer_otherid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_otherid.Name = "txt_buyyer_otherid";
-            this.txt_buyyer_otherid.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_otherid.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_otherid.TabIndex = 76;
             this.txt_buyyer_otherid.Text = "123456";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(15, 762);
+            this.label13.Location = new System.Drawing.Point(15, 810);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(0, 17);
             this.label13.TabIndex = 118;
@@ -279,6 +366,7 @@ namespace pos.Master.Companies.zatca
             this.btn_publickey_save.Text = "Save حفظ";
             this.btn_publickey_save.UseVisualStyleBackColor = true;
             this.btn_publickey_save.Visible = false;
+            this.btn_publickey_save.Click += new System.EventHandler(this.btn_publickey_save_Click);
             // 
             // label25
             // 
@@ -306,18 +394,20 @@ namespace pos.Master.Companies.zatca
             this.btn_secretkey_save.Text = "Save حفظ";
             this.btn_secretkey_save.UseVisualStyleBackColor = true;
             this.btn_secretkey_save.Visible = false;
+            this.btn_secretkey_save.Click += new System.EventHandler(this.btn_secretkey_save_Click);
             // 
             // txt_buyyer_VatNumber
             // 
-            this.txt_buyyer_VatNumber.Location = new System.Drawing.Point(9, 56);
+            this.txt_buyyer_VatNumber.Location = new System.Drawing.Point(160, 88);
             this.txt_buyyer_VatNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_VatNumber.Name = "txt_buyyer_VatNumber";
-            this.txt_buyyer_VatNumber.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_VatNumber.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_VatNumber.TabIndex = 78;
             this.txt_buyyer_VatNumber.Text = "310424415000003";
             // 
             // txt_secret
             // 
+            this.txt_secret.BackColor = System.Drawing.SystemColors.Window;
             this.txt_secret.Location = new System.Drawing.Point(16, 700);
             this.txt_secret.Name = "txt_secret";
             this.txt_secret.ReadOnly = true;
@@ -327,7 +417,7 @@ namespace pos.Master.Companies.zatca
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(725, 762);
+            this.label12.Location = new System.Drawing.Point(725, 810);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(0, 17);
             this.label12.TabIndex = 110;
@@ -341,6 +431,7 @@ namespace pos.Master.Companies.zatca
             this.btn_privatekey_save.Text = "Save حفظ";
             this.btn_privatekey_save.UseVisualStyleBackColor = true;
             this.btn_privatekey_save.Visible = false;
+            this.btn_privatekey_save.Click += new System.EventHandler(this.btn_privatekey_save_Click);
             // 
             // btn_csr_save
             // 
@@ -351,6 +442,7 @@ namespace pos.Master.Companies.zatca
             this.btn_csr_save.Text = "Save حفظ";
             this.btn_csr_save.UseVisualStyleBackColor = true;
             this.btn_csr_save.Visible = false;
+            this.btn_csr_save.Click += new System.EventHandler(this.btn_csr_save_Click);
             // 
             // label10
             // 
@@ -363,17 +455,17 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_buyyer_orgnizationname
             // 
-            this.txt_buyyer_orgnizationname.Location = new System.Drawing.Point(9, 85);
+            this.txt_buyyer_orgnizationname.Location = new System.Drawing.Point(160, 117);
             this.txt_buyyer_orgnizationname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_orgnizationname.Name = "txt_buyyer_orgnizationname";
-            this.txt_buyyer_orgnizationname.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_orgnizationname.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_orgnizationname.TabIndex = 80;
             this.txt_buyyer_orgnizationname.Text = "مؤسسة المشترى";
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(711, 60);
+            this.label31.Location = new System.Drawing.Point(716, 92);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(103, 17);
             this.label31.TabIndex = 79;
@@ -390,10 +482,10 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_buyyer_street
             // 
-            this.txt_buyyer_street.Location = new System.Drawing.Point(9, 114);
+            this.txt_buyyer_street.Location = new System.Drawing.Point(160, 146);
             this.txt_buyyer_street.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_street.Name = "txt_buyyer_street";
-            this.txt_buyyer_street.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_street.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_street.TabIndex = 82;
             this.txt_buyyer_street.Text = "street name";
             // 
@@ -425,17 +517,19 @@ namespace pos.Master.Companies.zatca
             // rdb_simulation
             // 
             this.rdb_simulation.AutoSize = true;
+            this.rdb_simulation.Checked = true;
             this.rdb_simulation.Location = new System.Drawing.Point(8, 11);
             this.rdb_simulation.Name = "rdb_simulation";
             this.rdb_simulation.Size = new System.Drawing.Size(133, 21);
             this.rdb_simulation.TabIndex = 100;
+            this.rdb_simulation.TabStop = true;
             this.rdb_simulation.Text = "Simulation(محاكاة)";
             this.rdb_simulation.UseVisualStyleBackColor = true;
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(749, 89);
+            this.label30.Location = new System.Drawing.Point(753, 121);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(66, 17);
             this.label30.TabIndex = 81;
@@ -461,7 +555,7 @@ namespace pos.Master.Companies.zatca
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(810, 131);
+            this.label23.Location = new System.Drawing.Point(804, 131);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(53, 17);
             this.label23.TabIndex = 98;
@@ -470,7 +564,7 @@ namespace pos.Master.Companies.zatca
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(775, 161);
+            this.label22.Location = new System.Drawing.Point(791, 161);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(66, 17);
             this.label22.TabIndex = 97;
@@ -479,7 +573,7 @@ namespace pos.Master.Companies.zatca
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(815, 191);
+            this.label21.Location = new System.Drawing.Point(801, 191);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(56, 17);
             this.label21.TabIndex = 96;
@@ -488,7 +582,7 @@ namespace pos.Master.Companies.zatca
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(807, 220);
+            this.label20.Location = new System.Drawing.Point(795, 220);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(62, 17);
             this.label20.TabIndex = 95;
@@ -497,7 +591,7 @@ namespace pos.Master.Companies.zatca
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(725, 251);
+            this.label19.Location = new System.Drawing.Point(739, 251);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(118, 17);
             this.label19.TabIndex = 94;
@@ -506,7 +600,7 @@ namespace pos.Master.Companies.zatca
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(793, 281);
+            this.label18.Location = new System.Drawing.Point(792, 281);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(65, 17);
             this.label18.TabIndex = 93;
@@ -524,7 +618,7 @@ namespace pos.Master.Companies.zatca
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(744, 11);
+            this.label16.Location = new System.Drawing.Point(747, 11);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(110, 17);
             this.label16.TabIndex = 91;
@@ -533,7 +627,7 @@ namespace pos.Master.Companies.zatca
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(781, 205);
+            this.label27.Location = new System.Drawing.Point(769, 237);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(50, 17);
             this.label27.TabIndex = 87;
@@ -542,7 +636,7 @@ namespace pos.Master.Companies.zatca
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(777, 147);
+            this.label28.Location = new System.Drawing.Point(766, 179);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(53, 17);
             this.label28.TabIndex = 85;
@@ -550,17 +644,17 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_buyyer_buildingnumber
             // 
-            this.txt_buyyer_buildingnumber.Location = new System.Drawing.Point(9, 143);
+            this.txt_buyyer_buildingnumber.Location = new System.Drawing.Point(160, 175);
             this.txt_buyyer_buildingnumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_buildingnumber.Name = "txt_buyyer_buildingnumber";
-            this.txt_buyyer_buildingnumber.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_buildingnumber.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_buildingnumber.TabIndex = 84;
             this.txt_buyyer_buildingnumber.Text = "3724";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(807, 118);
+            this.label29.Location = new System.Drawing.Point(779, 150);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(40, 17);
             this.label29.TabIndex = 83;
@@ -569,7 +663,7 @@ namespace pos.Master.Companies.zatca
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(763, 44);
+            this.label15.Location = new System.Drawing.Point(780, 44);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(77, 17);
             this.label15.TabIndex = 90;
@@ -577,10 +671,10 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_buyyer_citysubdiv
             // 
-            this.txt_buyyer_citysubdiv.Location = new System.Drawing.Point(9, 201);
+            this.txt_buyyer_citysubdiv.Location = new System.Drawing.Point(160, 233);
             this.txt_buyyer_citysubdiv.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_citysubdiv.Name = "txt_buyyer_citysubdiv";
-            this.txt_buyyer_citysubdiv.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_citysubdiv.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_citysubdiv.TabIndex = 86;
             this.txt_buyyer_citysubdiv.Text = "Alfalah";
             // 
@@ -609,6 +703,7 @@ namespace pos.Master.Companies.zatca
             this.btn_csid.TabIndex = 87;
             this.btn_csid.Text = "Generate CSID انشاء المفتاح العام";
             this.btn_csid.UseVisualStyleBackColor = true;
+            this.btn_csid.Click += new System.EventHandler(this.btn_csid_Click);
             // 
             // rdb_production
             // 
@@ -623,12 +718,10 @@ namespace pos.Master.Companies.zatca
             // rdb_compliance
             // 
             this.rdb_compliance.AutoSize = true;
-            this.rdb_compliance.Checked = true;
             this.rdb_compliance.Location = new System.Drawing.Point(173, 11);
             this.rdb_compliance.Name = "rdb_compliance";
             this.rdb_compliance.Size = new System.Drawing.Size(148, 21);
             this.rdb_compliance.TabIndex = 85;
-            this.rdb_compliance.TabStop = true;
             this.rdb_compliance.Text = "Compliance(مطورين)";
             this.rdb_compliance.UseVisualStyleBackColor = true;
             // 
@@ -648,6 +741,7 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_countryName
             // 
+            this.txt_countryName.BackColor = System.Drawing.SystemColors.Window;
             this.txt_countryName.Location = new System.Drawing.Point(176, 188);
             this.txt_countryName.Name = "txt_countryName";
             this.txt_countryName.ReadOnly = true;
@@ -685,7 +779,7 @@ namespace pos.Master.Companies.zatca
             // 
             // csid_tabPage
             // 
-            this.csid_tabPage.BackColor = System.Drawing.Color.DarkGray;
+            this.csid_tabPage.BackColor = System.Drawing.SystemColors.Control;
             this.csid_tabPage.Controls.Add(this.label13);
             this.csid_tabPage.Controls.Add(this.btn_info);
             this.csid_tabPage.Controls.Add(this.btn_publickey_save);
@@ -717,6 +811,7 @@ namespace pos.Master.Companies.zatca
             this.csid_tabPage.Controls.Add(this.label15);
             this.csid_tabPage.Controls.Add(this.txt_otp);
             this.csid_tabPage.Controls.Add(this.label11);
+            this.csid_tabPage.Controls.Add(this.Btn_save);
             this.csid_tabPage.Controls.Add(this.btn_csid);
             this.csid_tabPage.Controls.Add(this.rdb_production);
             this.csid_tabPage.Controls.Add(this.rdb_compliance);
@@ -743,6 +838,50 @@ namespace pos.Master.Companies.zatca
             this.csid_tabPage.Size = new System.Drawing.Size(922, 873);
             this.csid_tabPage.TabIndex = 0;
             this.csid_tabPage.Text = "CSID Config";
+            // 
+            // btn_info
+            // 
+            this.btn_info.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_info.BackgroundImage")));
+            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_info.Location = new System.Drawing.Point(731, 621);
+            this.btn_info.Name = "btn_info";
+            this.btn_info.Size = new System.Drawing.Size(35, 27);
+            this.btn_info.TabIndex = 117;
+            this.btn_info.UseVisualStyleBackColor = true;
+            this.btn_info.Visible = false;
+            this.btn_info.Click += new System.EventHandler(this.btn_info_Click);
+            // 
+            // btn_refresh2
+            // 
+            this.btn_refresh2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_refresh2.BackgroundImage")));
+            this.btn_refresh2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_refresh2.Location = new System.Drawing.Point(139, 68);
+            this.btn_refresh2.Name = "btn_refresh2";
+            this.btn_refresh2.Size = new System.Drawing.Size(37, 25);
+            this.btn_refresh2.TabIndex = 103;
+            this.btn_refresh2.UseVisualStyleBackColor = true;
+            this.btn_refresh2.Click += new System.EventHandler(this.btn_refresh2_Click);
+            // 
+            // btn_refresh1
+            // 
+            this.btn_refresh1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_refresh1.BackgroundImage")));
+            this.btn_refresh1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_refresh1.Location = new System.Drawing.Point(722, 68);
+            this.btn_refresh1.Name = "btn_refresh1";
+            this.btn_refresh1.Size = new System.Drawing.Size(37, 25);
+            this.btn_refresh1.TabIndex = 102;
+            this.btn_refresh1.UseVisualStyleBackColor = true;
+            this.btn_refresh1.Click += new System.EventHandler(this.btn_refresh1_Click);
+            // 
+            // Btn_save
+            // 
+            this.Btn_save.Location = new System.Drawing.Point(239, 742);
+            this.Btn_save.Name = "Btn_save";
+            this.Btn_save.Size = new System.Drawing.Size(273, 31);
+            this.Btn_save.TabIndex = 87;
+            this.Btn_save.Text = "Save All Certificates  حفظ ";
+            this.Btn_save.UseVisualStyleBackColor = true;
+            this.Btn_save.Click += new System.EventHandler(this.Btn_save_Click);
             // 
             // txt_commonName
             // 
@@ -853,7 +992,7 @@ namespace pos.Master.Companies.zatca
             this.xmlinfo_tabPage.Location = new System.Drawing.Point(4, 25);
             this.xmlinfo_tabPage.Name = "xmlinfo_tabPage";
             this.xmlinfo_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.xmlinfo_tabPage.Size = new System.Drawing.Size(901, 799);
+            this.xmlinfo_tabPage.Size = new System.Drawing.Size(922, 873);
             this.xmlinfo_tabPage.TabIndex = 1;
             this.xmlinfo_tabPage.Text = "XML Info";
             // 
@@ -869,7 +1008,7 @@ namespace pos.Master.Companies.zatca
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(91, 12);
+            this.label38.Location = new System.Drawing.Point(171, 14);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(495, 17);
             this.label38.TabIndex = 100;
@@ -878,6 +1017,13 @@ namespace pos.Master.Companies.zatca
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label49);
+            this.groupBox3.Controls.Add(this.label50);
+            this.groupBox3.Controls.Add(this.label51);
+            this.groupBox3.Controls.Add(this.label57);
+            this.groupBox3.Controls.Add(this.label52);
+            this.groupBox3.Controls.Add(this.label53);
+            this.groupBox3.Controls.Add(this.label54);
             this.groupBox3.Controls.Add(this.label37);
             this.groupBox3.Controls.Add(this.txt_buyyer_cityname);
             this.groupBox3.Controls.Add(this.label40);
@@ -890,21 +1036,86 @@ namespace pos.Master.Companies.zatca
             this.groupBox3.Controls.Add(this.label29);
             this.groupBox3.Controls.Add(this.txt_buyyer_street);
             this.groupBox3.Controls.Add(this.label30);
+            this.groupBox3.Controls.Add(this.label55);
+            this.groupBox3.Controls.Add(this.label48);
             this.groupBox3.Controls.Add(this.txt_buyyer_orgnizationname);
             this.groupBox3.Controls.Add(this.label31);
             this.groupBox3.Controls.Add(this.txt_buyyer_VatNumber);
             this.groupBox3.Controls.Add(this.txt_buyyer_otherid);
             this.groupBox3.Location = new System.Drawing.Point(15, 317);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(878, 283);
+            this.groupBox3.Size = new System.Drawing.Size(878, 315);
             this.groupBox3.TabIndex = 99;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "بيانات المشترى";
             // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(16, 233);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(138, 17);
+            this.label49.TabIndex = 99;
+            this.label49.Text = "neighbouhodd name";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(17, 63);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(86, 17);
+            this.label50.TabIndex = 98;
+            this.label50.Text = "Reg number";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(17, 262);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(81, 17);
+            this.label51.TabIndex = 97;
+            this.label51.Text = "postal code";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(85, 28);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(79, 17);
+            this.label57.TabIndex = 91;
+            this.label57.Text = "Buyer Data";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(16, 204);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(70, 17);
+            this.label52.TabIndex = 96;
+            this.label52.Text = "City name";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(17, 178);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(81, 17);
+            this.label53.TabIndex = 95;
+            this.label53.Text = "building no.";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(17, 149);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(46, 17);
+            this.label54.TabIndex = 94;
+            this.label54.Text = "Street";
+            // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(769, 176);
+            this.label37.Location = new System.Drawing.Point(764, 208);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(55, 17);
             this.label37.TabIndex = 92;
@@ -912,17 +1123,17 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_buyyer_cityname
             // 
-            this.txt_buyyer_cityname.Location = new System.Drawing.Point(9, 172);
+            this.txt_buyyer_cityname.Location = new System.Drawing.Point(160, 204);
             this.txt_buyyer_cityname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_cityname.Name = "txt_buyyer_cityname";
-            this.txt_buyyer_cityname.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_cityname.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_cityname.TabIndex = 91;
             this.txt_buyyer_cityname.Text = "Alfalah";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(721, 31);
+            this.label40.Location = new System.Drawing.Point(722, 63);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(97, 17);
             this.label40.TabIndex = 90;
@@ -931,7 +1142,7 @@ namespace pos.Master.Companies.zatca
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(769, 234);
+            this.label26.Location = new System.Drawing.Point(749, 266);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(70, 17);
             this.label26.TabIndex = 89;
@@ -939,43 +1150,32 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_buyyer_postalzone
             // 
-            this.txt_buyyer_postalzone.Location = new System.Drawing.Point(9, 230);
+            this.txt_buyyer_postalzone.Location = new System.Drawing.Point(160, 262);
             this.txt_buyyer_postalzone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_buyyer_postalzone.Name = "txt_buyyer_postalzone";
-            this.txt_buyyer_postalzone.Size = new System.Drawing.Size(694, 22);
+            this.txt_buyyer_postalzone.Size = new System.Drawing.Size(544, 22);
             this.txt_buyyer_postalzone.TabIndex = 88;
             this.txt_buyyer_postalzone.Text = "15385";
             // 
-            // btn_info
+            // label55
             // 
-            this.btn_info.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_info.BackgroundImage")));
-            this.btn_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_info.Location = new System.Drawing.Point(731, 621);
-            this.btn_info.Name = "btn_info";
-            this.btn_info.Size = new System.Drawing.Size(35, 27);
-            this.btn_info.TabIndex = 117;
-            this.btn_info.UseVisualStyleBackColor = true;
-            this.btn_info.Visible = false;
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(17, 121);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(106, 17);
+            this.label55.TabIndex = 79;
+            this.label55.Text = "Compnay name";
+            this.label55.Click += new System.EventHandler(this.label48_Click);
             // 
-            // btn_refresh2
+            // label48
             // 
-            this.btn_refresh2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_refresh2.BackgroundImage")));
-            this.btn_refresh2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_refresh2.Location = new System.Drawing.Point(139, 67);
-            this.btn_refresh2.Name = "btn_refresh2";
-            this.btn_refresh2.Size = new System.Drawing.Size(37, 25);
-            this.btn_refresh2.TabIndex = 103;
-            this.btn_refresh2.UseVisualStyleBackColor = true;
-            // 
-            // btn_refresh1
-            // 
-            this.btn_refresh1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_refresh1.BackgroundImage")));
-            this.btn_refresh1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_refresh1.Location = new System.Drawing.Point(722, 68);
-            this.btn_refresh1.Name = "btn_refresh1";
-            this.btn_refresh1.Size = new System.Drawing.Size(37, 25);
-            this.btn_refresh1.TabIndex = 102;
-            this.btn_refresh1.UseVisualStyleBackColor = true;
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(17, 92);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(78, 17);
+            this.label48.TabIndex = 79;
+            this.label48.Text = "tax number";
+            this.label48.Click += new System.EventHandler(this.label48_Click);
             // 
             // AutoGenerateCSR
             // 
@@ -984,6 +1184,8 @@ namespace pos.Master.Companies.zatca
             this.ClientSize = new System.Drawing.Size(930, 902);
             this.Controls.Add(this.tabControl1);
             this.Name = "AutoGenerateCSR";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ZATCA CSID Generator";
             this.Load += new System.EventHandler(this.AutoGenerateCSR_Load);
             this.groupBox2.ResumeLayout(false);
@@ -1088,5 +1290,22 @@ namespace pos.Master.Companies.zatca
         internal System.Windows.Forms.Label label40;
         internal System.Windows.Forms.Label label26;
         internal System.Windows.Forms.TextBox txt_buyyer_postalzone;
+        internal System.Windows.Forms.Label label47;
+        internal System.Windows.Forms.Label label46;
+        internal System.Windows.Forms.Label label45;
+        internal System.Windows.Forms.Label label44;
+        internal System.Windows.Forms.Label label43;
+        internal System.Windows.Forms.Label label42;
+        internal System.Windows.Forms.Label label49;
+        internal System.Windows.Forms.Label label50;
+        internal System.Windows.Forms.Label label51;
+        internal System.Windows.Forms.Label label52;
+        internal System.Windows.Forms.Label label53;
+        internal System.Windows.Forms.Label label54;
+        internal System.Windows.Forms.Label label48;
+        internal System.Windows.Forms.Label label55;
+        internal System.Windows.Forms.Label label56;
+        internal System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Button Btn_save;
     }
 }

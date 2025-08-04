@@ -32,6 +32,7 @@
             this.btn_save = new System.Windows.Forms.Button();
             this.lbl_header_title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.lblExpiryDate = new System.Windows.Forms.Label();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -78,11 +79,11 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cmb_sales_acc_id = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.GenerateCSR = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_save
@@ -109,6 +110,13 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.lblExpiryDate);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
             // 
             // lblExpiryDate
             // 
@@ -430,12 +438,13 @@
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
             // 
-            // panel2
+            // GenerateCSR
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.lblExpiryDate);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
+            resources.ApplyResources(this.GenerateCSR, "GenerateCSR");
+            this.GenerateCSR.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.GenerateCSR.Name = "GenerateCSR";
+            this.GenerateCSR.UseVisualStyleBackColor = true;
+            this.GenerateCSR.Click += new System.EventHandler(this.GenerateCSR_Click);
             // 
             // frm_updateCompany
             // 
@@ -445,6 +454,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.GenerateCSR);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.Name = "frm_updateCompany";
@@ -453,12 +463,12 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_updateCompany_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -515,5 +525,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblExpiryDate;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button GenerateCSR;
     }
 }

@@ -91,6 +91,7 @@
               <xs:element name="item_code" msprop:Generator_ColumnVarNameInTable="columnitem_code" msprop:Generator_ColumnPropNameInRow="item_code" msprop:Generator_ColumnPropNameInTable="item_codeColumn" msprop:Generator_UserColumnName="item_code" type="xs:string" minOccurs="0" />
               <xs:element name="product_name_2" msprop:Generator_ColumnVarNameInTable="columnproduct_name_2" msprop:Generator_ColumnPropNameInRow="product_name_2" msprop:Generator_ColumnPropNameInTable="product_name_2Column" msprop:Generator_UserColumnName="product_name_2" type="xs:string" minOccurs="0" />
               <xs:element name="PONumber" msprop:Generator_ColumnVarNameInTable="columnPONumber" msprop:Generator_ColumnPropNameInRow="PONumber" msprop:Generator_ColumnPropNameInTable="PONumberColumn" msprop:Generator_UserColumnName="PONumber" type="xs:string" minOccurs="0" />
+              <xs:element name="qrcode_image_phase2" msprop:Generator_ColumnVarNameInTable="columnqrcode_image_phase2" msprop:Generator_ColumnPropNameInRow="qrcode_image_phase2" msprop:Generator_ColumnPropNameInTable="qrcode_image_phase2Column" msprop:Generator_UserColumnName="qrcode_image_phase2" type="xs:base64Binary" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

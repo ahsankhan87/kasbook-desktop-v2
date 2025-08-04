@@ -49,17 +49,24 @@
             this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_subtype_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zatca_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewImageColumn();
             this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.sale_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Zetca_qrcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_send_zatca = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btn_zatca_compliance_check = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btn_download_ubl = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btn_report_to_zatca = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btn_show_qrcode = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_sales)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -145,17 +152,24 @@
             this.grid_all_sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.invoice_no,
-            this.customer_name,
+            this.invoice_subtype_code,
+            this.customer,
             this.sale_date,
             this.sale_type,
             this.account,
             this.discount_value,
             this.total_tax,
             this.total,
+            this.zatca_status,
             this.detail,
             this.btn_delete,
             this.sale_time,
-            this.Zetca_qrcode});
+            this.Zetca_qrcode,
+            this.btn_send_zatca,
+            this.btn_zatca_compliance_check,
+            this.btn_download_ubl,
+            this.btn_report_to_zatca,
+            this.btn_show_qrcode});
             this.grid_all_sales.Name = "grid_all_sales";
             this.grid_all_sales.ReadOnly = true;
             this.grid_all_sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -205,12 +219,19 @@
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
             // 
-            // customer_name
+            // invoice_subtype_code
             // 
-            this.customer_name.DataPropertyName = "customer_name";
-            resources.ApplyResources(this.customer_name, "customer_name");
-            this.customer_name.Name = "customer_name";
-            this.customer_name.ReadOnly = true;
+            this.invoice_subtype_code.DataPropertyName = "invoice_subtype";
+            resources.ApplyResources(this.invoice_subtype_code, "invoice_subtype_code");
+            this.invoice_subtype_code.Name = "invoice_subtype_code";
+            this.invoice_subtype_code.ReadOnly = true;
+            // 
+            // customer
+            // 
+            this.customer.DataPropertyName = "customer";
+            resources.ApplyResources(this.customer, "customer");
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
             // 
             // sale_date
             // 
@@ -263,6 +284,13 @@
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
+            // zatca_status
+            // 
+            this.zatca_status.DataPropertyName = "zatca_status";
+            resources.ApplyResources(this.zatca_status, "zatca_status");
+            this.zatca_status.Name = "zatca_status";
+            this.zatca_status.ReadOnly = true;
+            // 
             // detail
             // 
             this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -292,6 +320,43 @@
             resources.ApplyResources(this.Zetca_qrcode, "Zetca_qrcode");
             this.Zetca_qrcode.Name = "Zetca_qrcode";
             this.Zetca_qrcode.ReadOnly = true;
+            // 
+            // btn_send_zatca
+            // 
+            resources.ApplyResources(this.btn_send_zatca, "btn_send_zatca");
+            this.btn_send_zatca.Name = "btn_send_zatca";
+            this.btn_send_zatca.ReadOnly = true;
+            this.btn_send_zatca.Text = "Send";
+            // 
+            // btn_zatca_compliance_check
+            // 
+            resources.ApplyResources(this.btn_zatca_compliance_check, "btn_zatca_compliance_check");
+            this.btn_zatca_compliance_check.Name = "btn_zatca_compliance_check";
+            this.btn_zatca_compliance_check.ReadOnly = true;
+            this.btn_zatca_compliance_check.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btn_zatca_compliance_check.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // btn_download_ubl
+            // 
+            resources.ApplyResources(this.btn_download_ubl, "btn_download_ubl");
+            this.btn_download_ubl.Name = "btn_download_ubl";
+            this.btn_download_ubl.ReadOnly = true;
+            this.btn_download_ubl.Text = "Download";
+            // 
+            // btn_report_to_zatca
+            // 
+            resources.ApplyResources(this.btn_report_to_zatca, "btn_report_to_zatca");
+            this.btn_report_to_zatca.Name = "btn_report_to_zatca";
+            this.btn_report_to_zatca.ReadOnly = true;
+            this.btn_report_to_zatca.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btn_report_to_zatca.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.btn_report_to_zatca.Text = "Report to Zatca";
+            // 
+            // btn_show_qrcode
+            // 
+            resources.ApplyResources(this.btn_show_qrcode, "btn_show_qrcode");
+            this.btn_show_qrcode.Name = "btn_show_qrcode";
+            this.btn_show_qrcode.ReadOnly = true;
             // 
             // frm_all_sales
             // 
@@ -332,17 +397,24 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoice_subtype_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn account;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_tax;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn zatca_status;
         private System.Windows.Forms.DataGridViewImageColumn detail;
         private System.Windows.Forms.DataGridViewImageColumn btn_delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Zetca_qrcode;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_send_zatca;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_zatca_compliance_check;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_download_ubl;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_report_to_zatca;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_show_qrcode;
     }
 }
 

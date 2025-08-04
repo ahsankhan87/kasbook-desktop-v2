@@ -1,4 +1,6 @@
-﻿using Org.BouncyCastle.Crypto.Tls;
+﻿using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto.Tls;
+using POS.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,12 +8,14 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ZatcaIntegrationSDK;
-using ZatcaIntegrationSDK.APIHelper;
-using ZatcaIntegrationSDK.HelperContracts;
+using Zatca.EInvoice.SDK;
+using Zatca.EInvoice.SDK.Contracts;
+using Zatca.EInvoice.SDK.Contracts.Models;
 
 namespace pos.Master.Companies.zatca
 {
@@ -22,13 +26,17 @@ namespace pos.Master.Companies.zatca
         public AutoGenerateCSR()
         {
             InitializeComponent();
-            label12.Text = "Mobile : +201090838734";
-            label13.Text = "Copyright ©. All rights reserved. Developed by Amr Sobhy";
+            label12.Text = "Mobile : +923459079213";
+            label13.Text = "Copyright ©. All rights reserved. Developed by Ahsan Khan (khybersoft.com)";
             fillcontrols();
         }
 
         private void AutoGenerateCSR_Load(object sender, EventArgs e)
         {
+            
+            Zatca.EInvoice.SDK.CsrGenerator csrGenerator = new CsrGenerator();
+            //csrGenerator.GenerateCsr();
+
             FillInvoiceTypes();
             btn_csr_save.Visible = false;
             btn_privatekey_save.Visible = false;
@@ -46,32 +54,127 @@ namespace pos.Master.Companies.zatca
             txt_countryName.Text = "SA";
             txt_serialNumber.Text = "1-TST|2-TST|3-" + Guid.NewGuid().ToString();
             txt_organizationIdentifier.Text = "300589284900003";
-            txt_location.Text = "Makka";
-            txt_industry.Text = "Medical Laboratories";
+            txt_location.Text = "Makkah";
+            txt_industry.Text = "Auto Parts";
         }
-        //private CertificateRequest GetCSRRequest()
-        //{
-        //    CertificateRequest certrequest = new CertificateRequest();
-        //    certrequest.OTP = txt_otp.Text;
-        //    certrequest.CommonName = txt_commonName.Text;
-        //    certrequest.OrganizationName = txt_organizationName.Text;
-        //    certrequest.OrganizationUnitName = txt_organizationUnitName.Text;
-        //    certrequest.CountryName = txt_countryName.Text;
-        //    certrequest.SerialNumber = txt_serialNumber.Text;
-        //    certrequest.OrganizationIdentifier = txt_organizationIdentifier.Text;
-        //    certrequest.Location = txt_location.Text;
-        //    certrequest.BusinessCategory = txt_industry.Text;
-        //    certrequest.InvoiceType = cmb_invoicetype.SelectedValue.ToString();
-        //    return certrequest;
-        //}
+       
+        private async void GenerateCSRAsync()
+        {
+            try
+            {
+                var csrGenerator = new CsrGenerator();
+
+                // Example values; replace with your actual data
+                string commonName = txt_commonName.Text; // "TST-2050012095-300589284900003";
+                string serialNumber = txt_serialNumber.Text; // "1-TST|2-TST|3-" + Guid.NewGuid().ToString();
+                string organizationIdentifier = txt_organizationIdentifier.Text; // "300589284900003"; // ✅ valid
+                string organizationUnit = txt_organizationName.Text; // "Main Branch";
+                string organizationUnitName = txt_organizationUnitName.Text; // "Riyadh Branch"; // actual 10-digit TIN
+                string countryName = txt_countryName.Text; //"SA";
+                string invoiceType = cmb_invoicetype.SelectedValue.ToString(); // "1100";
+                string locationAddress = txt_location.Text; // "Makka";
+                string industryCategory = txt_industry.Text; // "Medical Laboratories";
+
+                // Instantiate DTO with all parameters (no public setters)
+                var csrDto = new CsrGenerationDto(
+                    commonName,
+                    serialNumber,
+                    organizationIdentifier,
+                    organizationUnit,
+                    organizationUnitName,
+                    countryName,
+                    invoiceType,
+                    locationAddress,
+                    industryCategory
+                );
+
+                bool pemFormat = false; // set to false if you want base64 only
+                EnvironmentType environment = rdb_simulation.Checked ? EnvironmentType.Simulation :
+                                              rdb_production.Checked ? EnvironmentType.Production :
+                                              EnvironmentType.NonProduction;
+
+                var result = csrGenerator.GenerateCsr(csrDto, environment, pemFormat);
+
+                if (result.IsValid)
+                {
+                    txt_csr.Text = result.Csr;
+                    txt_privatekey.Text = result.PrivateKey;
+
+                    btn_csr_save.Visible = true;
+                    btn_privatekey_save.Visible = true;
+                    string otp = txt_otp.Text.Trim(); // from Fatoora Portal
+                        
+                    var payload = new
+                    {
+                        csr = txt_csr.Text.Trim()  // Base64 CSR (no PEM headers)
+                    };
+
+                    var json = JsonConvert.SerializeObject(payload);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    using (var client = new HttpClient())
+                    {
+                        // Choose endpoint
+                        string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance"; // sandbox
+                        // string url = "https://gw-apic.gazt.gov.sa/e-invoicing/production/compliance"; // production
+
+                        client.DefaultRequestHeaders.Clear();
+                        client.DefaultRequestHeaders.Add("OTP", otp); 
+                        client.DefaultRequestHeaders.Add("accept", "application/json"); 
+                        client.DefaultRequestHeaders.Add("Accept-Version", "V2");
+                        var response = await client.PostAsync(url, content);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var resultString = await response.Content.ReadAsStringAsync();
+
+                            // Parse the JSON
+                            var jsonResponse = JsonConvert.DeserializeObject<dynamic>(resultString);
+
+                            // Assign values to textboxes
+                            txt_publickey.Text = jsonResponse.binarySecurityToken;
+                            txt_secret.Text = jsonResponse.secret;
+
+                            btn_publickey_save.Visible = true;
+                            btn_secretkey_save.Visible = true;
+                            btn_info.Visible = true;
+                            
+                            // Optional: If you also want the certificate
+                            string cert = jsonResponse.certificate;
+
+                            //MessageBox.Show("Response:\n" + resultString);
+                        }
+                        else
+                        {
+                            var error = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show($"Failed to get CSID: {response.ReasonPhrase} - {error}");
+                            return;
+                        }
+                    }
+
+                    MessageBox.Show("CSID generated successfully.");
+                }
+                else
+                {
+                    string message = string.Join(Environment.NewLine, result.ErrorMessages);
+                    MessageBox.Show("Failed to generate CSR. " + Environment.NewLine + message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("CSR Error: " + ex.Message);
+            }
+            
+        }
+
         private void FillInvoiceTypes()
         {
             Dictionary<string, string> types = new Dictionary<string, string>()
-                    {
-                        {"Standard &Simplified Invoices ** فاتورة ضريبية & مبسطة ","1100" },
-                        {"Standard Invoices Only ** فاتورة ضريبية فقط ","1000" },
-                        {"Simplified Invoices Only ** فاتورة مبسطة فقط ","0100" }
-                        };
+            {
+                {"Standard & Simplified Invoices ** فاتورة ضريبية & مبسطة ","1100" },
+                {"Standard Invoices Only ** فاتورة ضريبية فقط ","1000" },
+                {"Simplified Invoices Only ** فاتورة مبسطة فقط ","0100" }
+            };
 
             cmb_invoicetype.DataSource = new BindingSource(types, null);
             cmb_invoicetype.DisplayMember = "Key";
@@ -102,126 +205,38 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
-                saveFileDialog1.Filter = "csr files (*.pem)|*.pem";
-                saveFileDialog1.FileName = "key.pem";
+                saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
+                saveFileDialog1.FileName = "private_key.pem";
                 DialogResult result = saveFileDialog1.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
                     string filename = saveFileDialog1.FileName;
-                    string privatekey = txt_privatekey.Text.Trim().Replace("-----BEGIN EC PRIVATE KEY-----", "").Replace(Environment.NewLine, "").Replace("-----END EC PRIVATE KEY-----", "");
-                    File.WriteAllText(filename, privatekey);
+
+                    string keyBase64 = txt_privatekey.Text.Trim();
+                    //string pem = "-----BEGIN EC PRIVATE KEY-----\n" +
+                    //             BreakLines(keyBase64) +
+                    //             "\n-----END EC PRIVATE KEY-----";
+
+                    File.WriteAllText(filename, keyBase64);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.InnerException.ToString());
+                MessageBox.Show("Error saving private key: " + ex.Message);
             }
-
         }
 
-        //private void btn_csid_Click(object sender, EventArgs e)
-        //{
-        //    Invoice inv = new Invoice();
 
-        //    inv.ID = "INV00001"; // مثال SME00010
-
-        //    inv.IssueDate = DateTime.Now.ToString("yyyy-MM-dd");
-        //    inv.IssueTime = DateTime.Now.ToString("HH:mm:ss"); // "09:32:40"
-
-        //    inv.DocumentCurrencyCode = "SAR";
-        //    inv.TaxCurrencyCode = "SAR";
-
-        //    // فى حالة ان اشعار دائن او مدين فقط هانكتب رقم الفاتورة اللى اصدرنا الاشعار ليها
-        //    InvoiceDocumentReference invoiceDocumentReference = new InvoiceDocumentReference();
-        //    invoiceDocumentReference.ID = "Invoice Number: 354; Invoice Issue Date: 2021-02-10"; // اجبارى
-        //    inv.billingReference.invoiceDocumentReferences.Add(invoiceDocumentReference);
-        //    inv.AdditionalDocumentReferencePIH.EmbeddedDocumentBinaryObject = "NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==";
-
-        //    inv.AdditionalDocumentReferenceICV.UUID = 1;
-        //    PaymentMeans paymentMeans = new PaymentMeans();
-        //    paymentMeans.PaymentMeansCode = "10";
-        //    paymentMeans.InstructionNote = "Payment Notes";
-        //    inv.paymentmeans.Add(paymentMeans);
-        //    // بيانات البائع 
-        //    inv.SupplierParty.partyIdentification.ID = txt_seller_otherid.Text.Trim();// 300038065900003; //هنا رقم السجل التجارى للشركة
-        //    inv.SupplierParty.partyIdentification.schemeID = "CRN";
-        //    inv.SupplierParty.postalAddress.StreetName = txt_seller_street.Text.Trim(); // اجبارى
-        //    inv.SupplierParty.postalAddress.AdditionalStreetName = ""; // اختيارى
-        //    inv.SupplierParty.postalAddress.BuildingNumber = txt_seller_buildingnumber.Text.Trim(); // اجبارى رقم المبنى
-        //    inv.SupplierParty.postalAddress.PlotIdentification = "";
-        //    inv.SupplierParty.postalAddress.CityName = txt_seller_citysubdiv.Text.Trim();
-        //    inv.SupplierParty.postalAddress.PostalZone = txt_seller_postalzone.Text.Trim(); // الرقم البريدي
-        //    inv.SupplierParty.postalAddress.CountrySubentity = ""; // اسم المحافظة او المدينة مثال (مكة) اختيارى
-        //    inv.SupplierParty.postalAddress.CitySubdivisionName = txt_seller_cityname.Text.Trim(); // اسم المنطقة او الحى 
-        //    inv.SupplierParty.postalAddress.country.IdentificationCode = "SA";
-        //    inv.SupplierParty.partyLegalEntity.RegistrationName = txt_organizationName.Text.Trim(); // "شركة الصناعات الغذائية المتحده"; // اسم الشركة المسجل فى الهيئة
-        //    inv.SupplierParty.partyTaxScheme.CompanyID = txt_organizationIdentifier.Text.Trim();// "300518376300003";  // رقم التسجيل الضريبي
-
-        //    inv.CustomerParty.partyIdentification.ID = txt_buyyer_otherid.Text.Trim(); // رقم القومى الخاض بالمشترى
-        //    inv.CustomerParty.partyIdentification.schemeID = "CRN"; // الرقم القومى
-        //    inv.CustomerParty.postalAddress.StreetName = txt_buyyer_street.Text.Trim(); // اجبارى
-        //    inv.CustomerParty.postalAddress.AdditionalStreetName = ""; // اختيارى
-        //    inv.CustomerParty.postalAddress.BuildingNumber = txt_buyyer_buildingnumber.Text.Trim(); // اجبارى رقم المبنى
-        //    inv.CustomerParty.postalAddress.PlotIdentification = ""; // اختيارى رقم القطعة
-        //    inv.CustomerParty.postalAddress.CityName = txt_buyyer_cityname.Text.Trim(); // اسم المدينة
-        //    inv.CustomerParty.postalAddress.PostalZone = txt_buyyer_postalzone.Text.Trim(); // الرقم البريدي
-        //    inv.CustomerParty.postalAddress.CountrySubentity = ""; // اسم المحافظة او المدينة مثال (مكة) اختيارى
-        //    inv.CustomerParty.postalAddress.CitySubdivisionName = txt_buyyer_citysubdiv.Text.Trim(); // اسم المنطقة او الحى 
-        //    inv.CustomerParty.postalAddress.country.IdentificationCode = "SA";
-        //    inv.CustomerParty.partyLegalEntity.RegistrationName = txt_buyyer_orgnizationname.Text.Trim(); // اسم الشركة المسجل فى الهيئة
-        //    inv.CustomerParty.partyTaxScheme.CompanyID = txt_buyyer_VatNumber.Text.Trim(); // رقم التسجيل الضريبي
-
-
-        //    inv.legalMonetaryTotal.PrepaidAmount = 0;
-        //    inv.legalMonetaryTotal.PayableAmount = 0;
-
-        //    InvoiceLine invline = new InvoiceLine();
-        //    invline.InvoiceQuantity = 1;
-        //    invline.item.Name = "منتج تجربة";
-        //    invline.item.classifiedTaxCategory.ID = "S"; // كود الضريبة
-        //    invline.taxTotal.TaxSubtotal.taxCategory.ID = "S"; // كود الضريبة
-        //    invline.item.classifiedTaxCategory.Percent = 15; // نسبة الضريبة
-        //    invline.taxTotal.TaxSubtotal.taxCategory.Percent = 15; // نسبة الضريبة
-        //    invline.price.PriceAmount = 1;
-        //    inv.InvoiceLines.Add(invline);
-
-
-        //    CertificateRequest certrequest = GetCSRRequest();
-
-        //    if (rdb_simulation.Checked)
-        //        mode = Mode.Simulation;
-        //    else if (rdb_production.Checked)
-        //        mode = Mode.Production;
-        //    else
-        //        mode = Mode.developer;
-        //    CSIDGenerator generator = new CSIDGenerator(mode);
-        //    CertificateResponse response = generator.GenerateCSID(certrequest, inv, Directory.GetCurrentDirectory());
-        //    if (response.IsSuccess)
-        //    {
-        //        //save to db zatcaCSID table
-        //        // get all certificate data
-        //        txt_csr.Text = response.CSR;
-        //        txt_privatekey.Text = response.PrivateKey;
-        //        txt_publickey.Text = response.CSID;
-        //        txt_secret.Text = response.SecretKey;
-        //        btn_publickey_save.Visible = true;
-        //        btn_info.Visible = true;
-        //        btn_privatekey_save.Visible = true;
-        //        btn_csr_save.Visible = true;
-        //        btn_secretkey_save.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show(response.ErrorMessage);
-        //    }
-        //}
+        private void btn_csid_Click(object sender, EventArgs e)
+        {
+            GenerateCSRAsync();
+        }
 
         private void btn_refresh1_Click(object sender, EventArgs e)
         {
             RefreshSerialNumber();
         }
-
 
         private void btn_refresh2_Click(object sender, EventArgs e)
         {
@@ -242,22 +257,28 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
-                saveFileDialog1.Filter = "cert files (*.pem)|*.pem";
+                saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
                 saveFileDialog1.FileName = "cert.pem";
                 DialogResult result = saveFileDialog1.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
                     string filename = saveFileDialog1.FileName;
-                    string publickey = txt_publickey.Text.Trim();
-                    File.WriteAllText(filename, publickey);
+
+                    string certBase64 = txt_publickey.Text.Trim();
+                    //string pem = "-----BEGIN CERTIFICATE-----\n" +
+                    //             BreakLines(certBase64) +
+                    //             "\n-----END CERTIFICATE-----";
+
+                    File.WriteAllText(filename, certBase64);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.InnerException.ToString());
+                MessageBox.Show("Error saving certificate: " + ex.Message);
             }
         }
+
 
         private void btn_secretkey_save_Click(object sender, EventArgs e)
         {
@@ -279,38 +300,81 @@ namespace pos.Master.Companies.zatca
                 MessageBox.Show(ex.InnerException.ToString());
             }
         }
+        private string BreakLines(string base64, int lineLength = 64)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < base64.Length; i += lineLength)
+            {
+                int len = Math.Min(lineLength, base64.Length - i);
+                sb.AppendLine(base64.Substring(i, len));
+            }
+            return sb.ToString().TrimEnd();
+        }
 
         private void btn_info_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txt_publickey.Text))
             {
-                try
-                {
-                    sbyte[] certificateBytes = (from x in Encoding.UTF8.GetBytes(txt_publickey.Text)
-                                                select (sbyte)x).ToArray();
-                    System.Security.Cryptography.X509Certificates.X509Certificate2 cert = new System.Security.Cryptography.X509Certificates.X509Certificate2((byte[])(object)certificateBytes);
-                    MessageBox.Show(GetCertificateInfo(cert));
-                }
-                catch
-                {
-
-
-                }
+                GetCertInfo();
+                
             }
 
         }
-        private string GetCertificateInfo(System.Security.Cryptography.X509Certificates.X509Certificate2 cert)
+       
+        private void GetCertInfo()
         {
-            string info = "";
-            //12/24/2023 3:24:15 PM
+            if (!string.IsNullOrEmpty(txt_publickey.Text))
+            {
+                string pemText = txt_publickey.Text.Trim();
 
-            DateTime dt = cert.NotAfter;
-            DateTime dt1 = cert.NotBefore;
-            info = "Valid From :" + cert.GetEffectiveDateString() + "\n";
-            info += "Valid To :" + cert.GetExpirationDateString() + "\n";
-            return info;
+                // Remove PEM headers
+                string base64 = pemText
+                    .Replace("-----BEGIN CERTIFICATE-----", "")
+                    .Replace("-----END CERTIFICATE-----", "")
+                    .Replace("\r", "")
+                    .Replace("\n", "")
+                    .Trim();
+
+                // Decode Base64
+                byte[] certBytes = Convert.FromBase64String(base64);
+
+                // Save to a .cer or .der file
+                //File.WriteAllBytes(pemText, certBytes);
+
+                // Optional: Load it into an X509Certificate2 object
+                var certificate = new X509Certificate2(certBytes);
+
+                // Print info
+                string info = "";
+                info = "Subject :" + certificate.Subject + "\n";
+                info += "Issuer :" + certificate.Issuer + "\n";
+                info += "Valid From :" + certificate.NotBefore + "\n";
+                info += "Valid To :" + certificate.NotAfter + "\n";
+                MessageBox.Show(info);
+                
+            }
+        }
+        private void BtnGenerateCSR_Click(object sender, EventArgs e)
+        {
+           GenerateCSRAsync();
         }
 
+        private void label48_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Btn_save_Click(object sender, EventArgs e)
+        {
+            EnvironmentType mode = rdb_simulation.Checked ? EnvironmentType.Simulation :
+                                             rdb_production.Checked ? EnvironmentType.Production :
+                                             EnvironmentType.NonProduction;
+            // Create generator instance
+            int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials(UsersModal.logged_in_branch_id, mode.ToString(),txt_publickey.Text.Trim(),txt_privatekey.Text.Trim(),txt_secret.Text.Trim(),txt_csr.Text.Trim());
+            if (result > 0)
+            {
+                MessageBox.Show("Updated successfully", "Zatca Credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

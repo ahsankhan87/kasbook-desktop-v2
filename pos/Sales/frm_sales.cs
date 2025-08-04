@@ -89,15 +89,18 @@ namespace pos
             get_employees_dropdownlist();
             get_payment_terms_dropdownlist();
             get_payment_method_dropdownlist();
-
             get_saletype_dropdownlist();
+            get_invoice_subtype_dropdownlist();
+
             if (lang == "en-US")
             {
                 cmb_sale_type.SelectedValue = "Cash";
+                cmb_invoice_subtype_code.SelectedValue = "02"; // 02 = Simplified invoice
             }
             else if (lang == "ar-SA")
             {
                 cmb_sale_type.SelectedIndex = 0;
+                cmb_invoice_subtype_code.SelectedIndex = 0;
             }
 
             Get_user_total_commission();
@@ -1412,6 +1415,46 @@ namespace pos
             cmb_sale_type.DataSource = dt;
 
         }
+        private void get_invoice_subtype_dropdownlist()
+        {
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("id");
+            dt.Columns.Add("name");
+            DataRow _row_1 = dt.NewRow();
+            _row_1["id"] = "02";
+
+            if (lang == "en-US")
+            {
+                _row_1["name"] = "Simplified";
+            }
+            else if (lang == "ar-SA")
+            {
+                _row_1["name"] = "مبسطة";
+            }
+
+            dt.Rows.Add(_row_1);
+
+           
+            DataRow _row_2 = dt.NewRow();
+            _row_2["id"] = "01";
+
+            if (lang == "en-US")
+            {
+                _row_2["name"] = "Standard";
+            }
+            else if (lang == "ar-SA")
+            {
+                _row_2["name"] = "ضريبية";
+            }
+
+            dt.Rows.Add(_row_2);
+
+            cmb_invoice_subtype_code.DisplayMember = "name";
+            cmb_invoice_subtype_code.ValueMember = "id";
+            cmb_invoice_subtype_code.DataSource = dt;
+
+        }
 
         public void load_user_rights(int user_id)
         {
@@ -2702,6 +2745,7 @@ namespace pos
                         int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
                         int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : int.Parse(cmb_payment_terms.SelectedValue.ToString()));
                         int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : int.Parse(cmb_payment_method.SelectedValue.ToString()));
+                        string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
                         string PONumber = txtPONumber.Text;
 
                         //set the date from datetimepicker and set time to te current time
@@ -2723,6 +2767,7 @@ namespace pos
                             total_discount_percent = Convert.ToDouble(txt_total_disc_percent.Value),
                             flat_discount_value = Convert.ToDouble(txtTotalFlatDiscountValue.Value),
                             sale_type = sale_type,
+                            invoice_subtype = invoice_subtype,
                             sale_date = sale_date,
                             sale_time = txt_sale_date.Value,
                             description = txt_description.Text,

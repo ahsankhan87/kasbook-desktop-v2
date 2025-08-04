@@ -531,8 +531,32 @@
   <data name="&gt;&gt;SalesToolStrip.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cmb_invoice_subtype_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 95</value>
+  </data>
+  <data name="cmb_invoice_subtype_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmb_invoice_subtype_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 24</value>
+  </data>
+  <data name="cmb_invoice_subtype_code.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cmb_invoice_subtype_code.Name" xml:space="preserve">
+    <value>cmb_invoice_subtype_code</value>
+  </data>
+  <data name="&gt;&gt;cmb_invoice_subtype_code.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmb_invoice_subtype_code.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;cmb_invoice_subtype_code.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cmb_sale_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 81</value>
+    <value>146, 66</value>
   </data>
   <data name="cmb_sale_type.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -553,7 +577,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;cmb_sale_type.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -562,7 +586,7 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 172</value>
+    <value>18, 184</value>
   </data>
   <data name="label19.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -586,7 +610,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -595,7 +619,7 @@
     <value>NoControl</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 144</value>
+    <value>25, 156</value>
   </data>
   <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -619,7 +643,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lbl_employee.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -628,7 +652,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_employee.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 116</value>
+    <value>62, 128</value>
   </data>
   <data name="lbl_employee.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -652,10 +676,10 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;lbl_employee.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmb_payment_method.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 169</value>
+    <value>146, 182</value>
   </data>
   <data name="cmb_payment_method.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -676,10 +700,10 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;cmb_payment_method.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="cmb_payment_terms.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 140</value>
+    <value>146, 153</value>
   </data>
   <data name="cmb_payment_terms.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -700,10 +724,10 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;cmb_payment_terms.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmb_employees.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 111</value>
+    <value>146, 124</value>
   </data>
   <data name="cmb_employees.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -724,7 +748,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;cmb_employees.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="txt_sale_date.CustomFormat" xml:space="preserve">
     <value />
@@ -733,7 +757,7 @@
     <value>False</value>
   </data>
   <data name="txt_sale_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 55</value>
+    <value>146, 39</value>
   </data>
   <data name="txt_sale_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -754,7 +778,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;txt_sale_date.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -763,19 +787,19 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 60</value>
+    <value>44, 44</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Sale Date:</value>
+    <value>Invoice Date:</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -787,7 +811,40 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="label30.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 100</value>
+  </data>
+  <data name="label30.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="label30.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="label30.Text" xml:space="preserve">
+    <value>Invoice Sub Type:</value>
+  </data>
+  <data name="&gt;&gt;label30.Name" xml:space="preserve">
+    <value>label30</value>
+  </data>
+  <data name="&gt;&gt;label30.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label30.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -796,7 +853,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 32</value>
+    <value>58, 16</value>
   </data>
   <data name="label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -820,7 +877,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lbl_sale_type.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -829,19 +886,19 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_sale_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 87</value>
+    <value>44, 72</value>
   </data>
   <data name="lbl_sale_type.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="lbl_sale_type.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
+    <value>92, 17</value>
   </data>
   <data name="lbl_sale_type.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
   <data name="lbl_sale_type.Text" xml:space="preserve">
-    <value>Sale Type:</value>
+    <value>Invoice Type:</value>
   </data>
   <data name="&gt;&gt;lbl_sale_type.Name" xml:space="preserve">
     <value>lbl_sale_type</value>
@@ -853,10 +910,10 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;lbl_sale_type.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 28</value>
+    <value>146, 12</value>
   </data>
   <data name="txt_invoice_no.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -877,7 +934,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;txt_invoice_no.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 81</value>
@@ -1891,7 +1948,7 @@
     <value>False</value>
   </data>
   <data name="shop_qty.Width" type="System.Int32, mscorlib">
-    <value>101</value>
+    <value>125</value>
   </data>
   <metadata name="tax_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3621,30 +3678,6 @@
   <data name="&gt;&gt;SaleReturnToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Name" xml:space="preserve">
-    <value>addToPurchaseOrderToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addNewRowToolStripMenuItem.Name" xml:space="preserve">
-    <value>addNewRowToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;addNewRowToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
-    <value>toolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;productDetailToolStripMenuItem.Name" xml:space="preserve">
-    <value>productDetailToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;productDetailToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -3770,6 +3803,30 @@
   </data>
   <data name="&gt;&gt;item_number.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Name" xml:space="preserve">
+    <value>addToPurchaseOrderToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addToPurchaseOrderToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addNewRowToolStripMenuItem.Name" xml:space="preserve">
+    <value>addNewRowToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addNewRowToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;productDetailToolStripMenuItem.Name" xml:space="preserve">
+    <value>productDetailToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;productDetailToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_sales</value>

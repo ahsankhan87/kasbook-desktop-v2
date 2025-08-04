@@ -1486,6 +1486,8 @@ namespace pos.Reports.Sales {
             
             private global::System.Data.DataColumn columnPONumber;
             
+            private global::System.Data.DataColumn columnqrcode_image_phase2;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public sales_receipt_dtDataTable() {
@@ -1705,6 +1707,14 @@ namespace pos.Reports.Sales {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn qrcode_image_phase2Column {
+                get {
+                    return this.columnqrcode_image_phase2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1763,7 +1773,8 @@ namespace pos.Reports.Sales {
                         string username, 
                         string item_code, 
                         string product_name_2, 
-                        string PONumber) {
+                        string PONumber, 
+                        byte[] qrcode_image_phase2) {
                 sales_receipt_dtRow rowsales_receipt_dtRow = ((sales_receipt_dtRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -1788,7 +1799,8 @@ namespace pos.Reports.Sales {
                         username,
                         item_code,
                         product_name_2,
-                        PONumber};
+                        PONumber,
+                        qrcode_image_phase2};
                 rowsales_receipt_dtRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsales_receipt_dtRow);
                 return rowsales_receipt_dtRow;
@@ -1834,6 +1846,7 @@ namespace pos.Reports.Sales {
                 this.columnitem_code = base.Columns["item_code"];
                 this.columnproduct_name_2 = base.Columns["product_name_2"];
                 this.columnPONumber = base.Columns["PONumber"];
+                this.columnqrcode_image_phase2 = base.Columns["qrcode_image_phase2"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1885,6 +1898,8 @@ namespace pos.Reports.Sales {
                 base.Columns.Add(this.columnproduct_name_2);
                 this.columnPONumber = new global::System.Data.DataColumn("PONumber", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPONumber);
+                this.columnqrcode_image_phase2 = new global::System.Data.DataColumn("qrcode_image_phase2", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnqrcode_image_phase2);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3573,6 +3588,23 @@ namespace pos.Reports.Sales {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public byte[] qrcode_image_phase2 {
+                get {
+                    try {
+                        return ((byte[])(this[this.tablesales_receipt_dt.qrcode_image_phase2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'qrcode_image_phase2\' in table \'sales_receipt_dt\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_receipt_dt.qrcode_image_phase2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isinvoice_noNull() {
                 return this.IsNull(this.tablesales_receipt_dt.invoice_noColumn);
             }
@@ -3845,6 +3877,18 @@ namespace pos.Reports.Sales {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetPONumberNull() {
                 this[this.tablesales_receipt_dt.PONumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isqrcode_image_phase2Null() {
+                return this.IsNull(this.tablesales_receipt_dt.qrcode_image_phase2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setqrcode_image_phase2Null() {
+                this[this.tablesales_receipt_dt.qrcode_image_phase2Column] = global::System.Convert.DBNull;
             }
         }
         

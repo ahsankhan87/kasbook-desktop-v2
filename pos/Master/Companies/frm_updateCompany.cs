@@ -272,5 +272,10 @@ namespace pos
             }
         }
 
+        private void GenerateCSR_Click(object sender, EventArgs e)
+        {
+            pos.Master.Companies.zatca.AutoGenerateCSR autoGenerateCSR = new Master.Companies.zatca.AutoGenerateCSR();
+            autoGenerateCSR.Show();
+        }
     }
 }

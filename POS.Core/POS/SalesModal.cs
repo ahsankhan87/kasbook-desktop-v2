@@ -22,6 +22,7 @@ namespace POS.Core
         public string invoice_no { get; set; }
 
         public string sale_type { get; set; }
+        public string invoice_subtype { get; set; }
 
         public double total_amount { get; set; }
         public double total_cost_amount { get; set; }

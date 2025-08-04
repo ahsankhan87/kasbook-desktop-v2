@@ -32,12 +32,24 @@ namespace pos.Sales
         private static readonly HttpClient client = new HttpClient();
         private string csrPem;
         private string privateKeyPem;
+        byte[] _qr_code;
+        string _qr_code_1;
 
+        public ZatcaInvoiceApp(string qr_code_1, byte[] qr_code = null)
+        {
+            _qr_code = qr_code;
+            _qr_code_1 = qr_code_1;
+            InitializeComponent();
+        }
         public ZatcaInvoiceApp()
         {
             InitializeComponent();
         }
-
+        private void ZatcaInvoiceApp_Load(object sender, EventArgs e)
+        {
+            ShowQRCode(_qr_code);
+            ShowQRCode1(_qr_code_1);
+        }
         private void btnSubmitInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -48,7 +60,7 @@ namespace pos.Sales
 
                 // Step 2: Generate QR Code from Invoice Data
                 string qrData = GenerateQRCode(invoiceData);
-                ShowQRCode(qrData);
+                //ShowQRCode(qrData);
                 //ShowQRCode(GenerateQRCode(invoiceData));//GIVE DATA TO FUNCTION AND GET QRCODE
 
                 // Step 3: Send Invoice to ZATCA Compliance API
@@ -132,14 +144,55 @@ namespace pos.Sales
         }
 
         // Display the QR code in the PictureBox
-        private void ShowQRCode(string qrData)
+        private void ShowQRCode1(string qrData)
         {
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrData, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            if (!string.IsNullOrEmpty(qrData))
+            {
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrData, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                Bitmap qrCodeImage = qrCode.GetGraphic(20);
 
-            pbQRCode.Image = qrCodeImage;
+                pbQRCode.Image = qrCodeImage;
+            }
+        }
+        public void ShowQRCode(byte[] qrBytes)
+        {
+            try
+            {
+                if(qrBytes != null)
+                {
+                    string base64String = Convert.ToBase64String(qrBytes);
+
+                    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(base64String, QRCodeGenerator.ECCLevel.Q);
+                    QRCode qrCode = new QRCode(qrCodeData);
+                    Bitmap qrCodeImage = qrCode.GetGraphic(20);
+
+                    pbQRCode.Image = qrCodeImage;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid QR image data: " + ex.Message);
+            }
+        }
+        public static string HexToBase64(string strInput)
+        {
+            try
+            {
+                var bytes = new byte[strInput.Length / 2];
+                for (var i = 0; i < bytes.Length; i++)
+                {
+                    bytes[i] = Convert.ToByte(strInput.Substring(i * 2, 2), 16);
+                }
+                return Convert.ToBase64String(bytes);
+            }
+            catch (Exception)
+            {
+                return "-1";
+            }
         }
 
         // Sends invoice data to ZATCA Compliance API
@@ -436,6 +489,8 @@ namespace pos.Sales
                 
             }
         }
+
+       
     }
    
 }

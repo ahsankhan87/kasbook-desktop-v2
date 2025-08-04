@@ -51,6 +51,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        public DataSet GetSaleAndItemsDataSet(string invoice_no)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetSaleAndItemsDataSet(invoice_no);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
 
         public DataTable GetSaleAndSalesItems(string invoice_no)
         {
@@ -281,7 +294,6 @@ namespace POS.BLL
                 throw;
             }
         }
-
         public int DeleteSales(string invoice_no)
         {
             try
@@ -295,8 +307,56 @@ namespace POS.BLL
                 throw;
             }
         }
+        public void UpdateZatcaStatus(string invoiceNo, string status, string ublPath, string errorMessage)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                objDLL.UpdateZatcaStatus(invoiceNo, status, ublPath, errorMessage);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public void UpdateZatcaQrCode(string invoiceNo, byte[] qrCode)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                objDLL.UpdateZatcaQrCode(invoiceNo, qrCode);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public string GetUblPath(string invoice_no)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetUblPath(invoice_no);
+            }
+            catch
+            {
 
+                throw;
+            }
+        }
+        public string GetInvoiceTypeCode(string invoice_no)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetInvoiceTypeCode(invoice_no);
+            }
+            catch
+            {
 
+                throw;
+            }
+        }
         public int InsertEstimates(List<SalesModalHeader> sales, List<SalesModal> sales_detail)
         {
             try

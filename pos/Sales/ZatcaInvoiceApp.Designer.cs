@@ -44,7 +44,7 @@ namespace pos.Sales
             // 
             // btnSubmitInvoice
             // 
-            this.btnSubmitInvoice.Location = new System.Drawing.Point(409, 242);
+            this.btnSubmitInvoice.Location = new System.Drawing.Point(470, 254);
             this.btnSubmitInvoice.Name = "btnSubmitInvoice";
             this.btnSubmitInvoice.Size = new System.Drawing.Size(133, 48);
             this.btnSubmitInvoice.TabIndex = 0;
@@ -54,7 +54,7 @@ namespace pos.Sales
             // 
             // txtResult
             // 
-            this.txtResult.Location = new System.Drawing.Point(349, 12);
+            this.txtResult.Location = new System.Drawing.Point(452, 12);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.Size = new System.Drawing.Size(336, 214);
@@ -62,16 +62,16 @@ namespace pos.Sales
             // 
             // pbQRCode
             // 
-            this.pbQRCode.Location = new System.Drawing.Point(56, 12);
+            this.pbQRCode.Location = new System.Drawing.Point(16, 12);
             this.pbQRCode.Name = "pbQRCode";
-            this.pbQRCode.Size = new System.Drawing.Size(261, 214);
+            this.pbQRCode.Size = new System.Drawing.Size(420, 303);
             this.pbQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbQRCode.TabIndex = 2;
             this.pbQRCode.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(552, 242);
+            this.button1.Location = new System.Drawing.Point(613, 254);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 48);
             this.button1.TabIndex = 0;
@@ -150,6 +150,7 @@ namespace pos.Sales
             this.Controls.Add(this.btnSubmitInvoice);
             this.Name = "ZatcaInvoiceApp";
             this.Text = "ZatcaInvoiceApp";
+            this.Load += new System.EventHandler(this.ZatcaInvoiceApp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbQRCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
