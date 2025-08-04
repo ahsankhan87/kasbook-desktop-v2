@@ -364,7 +364,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox4.Controls.Add(this.cmb_invoice_subtype_code);
+//            this.groupBox4.Controls.Add(this.cmb_invoice_subtype_code);
             this.groupBox4.Controls.Add(this.cmb_sale_type);
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Controls.Add(this.label15);
@@ -374,7 +374,7 @@
             this.groupBox4.Controls.Add(this.cmb_employees);
             this.groupBox4.Controls.Add(this.txt_sale_date);
             this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.label30);
+//            this.groupBox4.Controls.Add(this.label30);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.lbl_sale_type);
             this.groupBox4.Controls.Add(this.txt_invoice_no);

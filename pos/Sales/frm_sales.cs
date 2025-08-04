@@ -95,7 +95,7 @@ namespace pos
             if (lang == "en-US")
             {
                 cmb_sale_type.SelectedValue = "Cash";
-                cmb_invoice_subtype_code.SelectedValue = "02"; // 02 = Simplified invoice
+                //cmb_invoice_subtype_code.SelectedValue = "02"; // 02 = Simplified invoice
             }
             else if (lang == "ar-SA")
             {
@@ -1450,9 +1450,9 @@ namespace pos
 
             dt.Rows.Add(_row_2);
 
-            cmb_invoice_subtype_code.DisplayMember = "name";
-            cmb_invoice_subtype_code.ValueMember = "id";
-            cmb_invoice_subtype_code.DataSource = dt;
+            //cmb_invoice_subtype_code.DisplayMember = "name";
+           // cmb_invoice_subtype_code.ValueMember = "id";
+           // cmb_invoice_subtype_code.DataSource = dt;
 
         }
 
