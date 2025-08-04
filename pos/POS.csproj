@@ -50,8 +50,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>nozum.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
@@ -2069,6 +2068,7 @@
   <ItemGroup>
     <Content Include="Data\Rules\schematrons\20210819_ZATCA_E-invoice_Validation_Rules.xsl" />
     <Content Include="Data\Rules\schematrons\CEN-EN16931-UBL.xsl" />
+    <Content Include="nozum.ico" />
     <Content Include="Resources\Add.png" />
     <None Include="Resources\Trash 16.png" />
     <None Include="Resources\Checkout.png" />
