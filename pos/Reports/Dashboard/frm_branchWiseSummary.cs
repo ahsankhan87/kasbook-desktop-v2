@@ -36,6 +36,8 @@ namespace pos.Reports.Dashboard
             {
                 totalSales += Convert.ToDecimal(row["TotalSales"]);
                 totalPurchases += Convert.ToDecimal(row["TotalPurchases"]);
+                lbl_total_sales.Text = Convert.ToDecimal(row["totalSales"]).ToString();
+                lbl_total_purchases.Text = Convert.ToDecimal(row["TotalPurchases"]).ToString();
             }
 
             // Add a new row for totals
@@ -45,9 +47,13 @@ namespace pos.Reports.Dashboard
             totalRow["TotalPurchases"] = totalPurchases;
             dt.Rows.Add(totalRow);
 
+           
+
             dataGridViewBranchSummary.DataSource = dt;
 
             CustomizeDataGridView();
+
+          
         }
         private void CustomizeDataGridView()
         {

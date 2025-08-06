@@ -163,7 +163,7 @@ namespace pos.Master.Companies.zatca
 
             // Tax scheme
             XmlElement partyTaxScheme = xmlDoc.CreateElement("cac", "PartyTaxScheme", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, partyTaxScheme, "cbc:CompanyID", "300589284900003");
+            AddElement(xmlDoc, partyTaxScheme, "cbc:CompanyID", "311123711600003");
             XmlElement taxScheme = xmlDoc.CreateElement("cac", "TaxScheme", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             AddElement(xmlDoc, taxScheme, "cbc:ID", "VAT");
             partyTaxScheme.AppendChild(taxScheme);

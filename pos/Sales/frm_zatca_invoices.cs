@@ -110,7 +110,7 @@ namespace pos.Sales
                             url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";
                             break;
                         case "Simulation":
-                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/simulation/invoices";
+                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/compliance/invoices";
                             break;
                         default:
                             url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";

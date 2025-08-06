@@ -65,7 +65,7 @@ namespace pos
                 txt_contact_no.Text = dr["contact_no"].ToString();
                 txt_email.Text = dr["email"].ToString();
                 txt_vat_no.Text = dr["vat_no"].ToString();
-                chk_use_zatca_e_invoice.Checked = Convert.ToBoolean(dr["useZatcaEinvoice"].ToString());
+                chk_use_zatca_e_invoice.Checked = (string.IsNullOrEmpty(dr["useZatcaEInvoice"].ToString()) ? false : Convert.ToBoolean(dr["useZatcaEInvoice"]));
 
                 //HardwareIdentifier systemID_obj = new HardwareIdentifier();
                 //string systemID = systemID_obj.GetUniqueHardwareId();

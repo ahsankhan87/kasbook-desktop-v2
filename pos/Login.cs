@@ -99,7 +99,7 @@ namespace pos
             foreach (DataRow dr_company in company_dt.Rows)
             {
                 UsersModal.loggedIncompanyID = Convert.ToInt32(dr_company["id"].ToString());
-                UsersModal.useZatcaEInvoice = Convert.ToBoolean(dr_company["useZatcaEInvoice"]);
+                UsersModal.useZatcaEInvoice = (string.IsNullOrEmpty(dr_company["useZatcaEInvoice"].ToString()) ? false : Convert.ToBoolean(dr_company["useZatcaEInvoice"]));
                 string company_name = dr_company["name"].ToString();
                 locked = Convert.ToInt32(dr_company["locked"]);
                 //expiry_date = Convert.ToDateTime(dr_company["ex_date"]);
