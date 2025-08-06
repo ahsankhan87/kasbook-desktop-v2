@@ -68,6 +68,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtSystemID = new System.Windows.Forms.TextBox();
+            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,7 +78,7 @@
             // txt_name
             // 
             this.txt_name.Location = new System.Drawing.Point(127, 36);
-            this.txt_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_name.Margin = new System.Windows.Forms.Padding(4);
             this.txt_name.Name = "txt_name";
             this.txt_name.Size = new System.Drawing.Size(333, 22);
             this.txt_name.TabIndex = 0;
@@ -88,14 +89,14 @@
             this.label1.Location = new System.Drawing.Point(32, 39);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 17);
+            this.label1.Size = new System.Drawing.Size(52, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Name*:";
             // 
             // btn_save
             // 
             this.btn_save.Location = new System.Drawing.Point(821, 511);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(4);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(100, 28);
             this.btn_save.TabIndex = 15;
@@ -122,7 +123,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1049, 58);
             this.panel1.TabIndex = 6;
@@ -131,7 +132,7 @@
             // 
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Location = new System.Drawing.Point(928, 511);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(100, 28);
             this.btn_cancel.TabIndex = 17;
@@ -142,7 +143,7 @@
             // txt_vat_no
             // 
             this.txt_vat_no.Location = new System.Drawing.Point(127, 68);
-            this.txt_vat_no.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_vat_no.Margin = new System.Windows.Forms.Padding(4);
             this.txt_vat_no.Name = "txt_vat_no";
             this.txt_vat_no.Size = new System.Drawing.Size(333, 22);
             this.txt_vat_no.TabIndex = 1;
@@ -153,14 +154,14 @@
             this.label2.Location = new System.Drawing.Point(32, 71);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 17);
+            this.label2.Size = new System.Drawing.Size(58, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "VAT No:";
             // 
             // txt_email
             // 
             this.txt_email.Location = new System.Drawing.Point(127, 100);
-            this.txt_email.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_email.Margin = new System.Windows.Forms.Padding(4);
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(333, 22);
             this.txt_email.TabIndex = 2;
@@ -171,14 +172,14 @@
             this.label3.Location = new System.Drawing.Point(32, 103);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.Size = new System.Drawing.Size(44, 16);
             this.label3.TabIndex = 1;
             this.label3.Text = "Email:";
             // 
             // txt_contact_no
             // 
             this.txt_contact_no.Location = new System.Drawing.Point(127, 132);
-            this.txt_contact_no.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_contact_no.Margin = new System.Windows.Forms.Padding(4);
             this.txt_contact_no.Name = "txt_contact_no";
             this.txt_contact_no.Size = new System.Drawing.Size(333, 22);
             this.txt_contact_no.TabIndex = 3;
@@ -189,14 +190,14 @@
             this.label4.Location = new System.Drawing.Point(32, 135);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 17);
+            this.label4.Size = new System.Drawing.Size(76, 16);
             this.label4.TabIndex = 1;
             this.label4.Text = "Contact No:";
             // 
             // txt_currency_id
             // 
             this.txt_currency_id.Location = new System.Drawing.Point(127, 284);
-            this.txt_currency_id.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_currency_id.Margin = new System.Windows.Forms.Padding(4);
             this.txt_currency_id.Name = "txt_currency_id";
             this.txt_currency_id.ReadOnly = true;
             this.txt_currency_id.Size = new System.Drawing.Size(333, 22);
@@ -209,7 +210,7 @@
             this.label5.Location = new System.Drawing.Point(32, 289);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 17);
+            this.label5.Size = new System.Drawing.Size(63, 16);
             this.label5.TabIndex = 1;
             this.label5.Text = "Currency:";
             this.label5.Visible = false;
@@ -217,7 +218,7 @@
             // txt_image
             // 
             this.txt_image.Location = new System.Drawing.Point(127, 316);
-            this.txt_image.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_image.Margin = new System.Windows.Forms.Padding(4);
             this.txt_image.Name = "txt_image";
             this.txt_image.Size = new System.Drawing.Size(333, 22);
             this.txt_image.TabIndex = 5;
@@ -229,7 +230,7 @@
             this.label6.Location = new System.Drawing.Point(32, 321);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 17);
+            this.label6.Size = new System.Drawing.Size(48, 16);
             this.label6.TabIndex = 1;
             this.label6.Text = "Image:";
             this.label6.Visible = false;
@@ -237,7 +238,7 @@
             // txt_address
             // 
             this.txt_address.Location = new System.Drawing.Point(127, 161);
-            this.txt_address.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_address.Margin = new System.Windows.Forms.Padding(4);
             this.txt_address.Multiline = true;
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(333, 117);
@@ -249,7 +250,7 @@
             this.label7.Location = new System.Drawing.Point(32, 165);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 17);
+            this.label7.Size = new System.Drawing.Size(61, 16);
             this.label7.TabIndex = 1;
             this.label7.Text = "Address:";
             // 
@@ -270,9 +271,9 @@
             this.groupBox1.Controls.Add(this.lbl_pwd);
             this.groupBox1.Controls.Add(this.lbl_cpwd);
             this.groupBox1.Location = new System.Drawing.Point(513, 79);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(515, 258);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -285,7 +286,7 @@
             this.label9.Location = new System.Drawing.Point(28, 132);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 17);
+            this.label9.Size = new System.Drawing.Size(76, 16);
             this.label9.TabIndex = 22;
             this.label9.Text = "User Role*:";
             // 
@@ -296,14 +297,14 @@
             this.label10.Location = new System.Drawing.Point(28, 101);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(105, 17);
+            this.label10.Size = new System.Drawing.Size(99, 16);
             this.label10.TabIndex = 23;
             this.label10.Text = "App Language:";
             // 
             // txt_full_name
             // 
             this.txt_full_name.Location = new System.Drawing.Point(157, 36);
-            this.txt_full_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_full_name.Margin = new System.Windows.Forms.Padding(4);
             this.txt_full_name.Name = "txt_full_name";
             this.txt_full_name.Size = new System.Drawing.Size(333, 22);
             this.txt_full_name.TabIndex = 7;
@@ -315,14 +316,14 @@
             this.label11.Location = new System.Drawing.Point(28, 70);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 17);
+            this.label11.Size = new System.Drawing.Size(57, 16);
             this.label11.TabIndex = 24;
             this.label11.Text = "Branch*:";
             // 
             // txt_username
             // 
             this.txt_username.Location = new System.Drawing.Point(157, 158);
-            this.txt_username.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_username.Margin = new System.Windows.Forms.Padding(4);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(333, 22);
             this.txt_username.TabIndex = 11;
@@ -332,7 +333,7 @@
             this.cmb_user_role.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_user_role.FormattingEnabled = true;
             this.cmb_user_role.Location = new System.Drawing.Point(157, 127);
-            this.cmb_user_role.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_user_role.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_user_role.Name = "cmb_user_role";
             this.cmb_user_role.Size = new System.Drawing.Size(333, 24);
             this.cmb_user_role.TabIndex = 10;
@@ -342,7 +343,7 @@
             this.cmb_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_lang.FormattingEnabled = true;
             this.cmb_lang.Location = new System.Drawing.Point(157, 97);
-            this.cmb_lang.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_lang.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_lang.Name = "cmb_lang";
             this.cmb_lang.Size = new System.Drawing.Size(333, 24);
             this.cmb_lang.TabIndex = 9;
@@ -350,7 +351,7 @@
             // txt_password
             // 
             this.txt_password.Location = new System.Drawing.Point(157, 188);
-            this.txt_password.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_password.Margin = new System.Windows.Forms.Padding(4);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(333, 22);
             this.txt_password.TabIndex = 12;
@@ -361,7 +362,7 @@
             this.cmb_branches.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_branches.FormattingEnabled = true;
             this.cmb_branches.Location = new System.Drawing.Point(157, 66);
-            this.cmb_branches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_branches.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_branches.Name = "cmb_branches";
             this.cmb_branches.Size = new System.Drawing.Size(333, 24);
             this.cmb_branches.TabIndex = 8;
@@ -369,7 +370,7 @@
             // txt_confirm_pwd
             // 
             this.txt_confirm_pwd.Location = new System.Drawing.Point(157, 218);
-            this.txt_confirm_pwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_confirm_pwd.Margin = new System.Windows.Forms.Padding(4);
             this.txt_confirm_pwd.Name = "txt_confirm_pwd";
             this.txt_confirm_pwd.Size = new System.Drawing.Size(333, 22);
             this.txt_confirm_pwd.TabIndex = 13;
@@ -382,7 +383,7 @@
             this.label12.Location = new System.Drawing.Point(28, 39);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(75, 17);
+            this.label12.Size = new System.Drawing.Size(71, 16);
             this.label12.TabIndex = 12;
             this.label12.Text = "Full Name:";
             // 
@@ -393,7 +394,7 @@
             this.label13.Location = new System.Drawing.Point(28, 160);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(82, 17);
+            this.label13.Size = new System.Drawing.Size(78, 16);
             this.label13.TabIndex = 13;
             this.label13.Text = "Username*:";
             // 
@@ -404,7 +405,7 @@
             this.lbl_pwd.Location = new System.Drawing.Point(28, 191);
             this.lbl_pwd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_pwd.Name = "lbl_pwd";
-            this.lbl_pwd.Size = new System.Drawing.Size(78, 17);
+            this.lbl_pwd.Size = new System.Drawing.Size(75, 16);
             this.lbl_pwd.TabIndex = 14;
             this.lbl_pwd.Text = "Password*:";
             // 
@@ -415,12 +416,13 @@
             this.lbl_cpwd.Location = new System.Drawing.Point(28, 220);
             this.lbl_cpwd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_cpwd.Name = "lbl_cpwd";
-            this.lbl_cpwd.Size = new System.Drawing.Size(125, 17);
+            this.lbl_cpwd.Size = new System.Drawing.Size(118, 16);
             this.lbl_cpwd.TabIndex = 15;
             this.lbl_cpwd.Text = "Confirm Password:";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chk_use_zatca_e_invoice);
             this.groupBox2.Controls.Add(this.txt_address);
             this.groupBox2.Controls.Add(this.txt_name);
             this.groupBox2.Controls.Add(this.txt_vat_no);
@@ -436,9 +438,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(16, 79);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(489, 398);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
@@ -449,7 +451,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(25, 480);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(174, 17);
+            this.label8.Size = new System.Drawing.Size(161, 16);
             this.label8.TabIndex = 12;
             this.label8.Text = "Note: * are required fields.";
             // 
@@ -460,9 +462,9 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.txtSystemID);
             this.groupBox3.Location = new System.Drawing.Point(513, 345);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(515, 132);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
@@ -471,7 +473,7 @@
             // txtSubscriptionKey
             // 
             this.txtSubscriptionKey.Location = new System.Drawing.Point(157, 55);
-            this.txtSubscriptionKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSubscriptionKey.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubscriptionKey.Multiline = true;
             this.txtSubscriptionKey.Name = "txtSubscriptionKey";
             this.txtSubscriptionKey.Size = new System.Drawing.Size(333, 68);
@@ -483,7 +485,7 @@
             this.label15.Location = new System.Drawing.Point(28, 23);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(75, 17);
+            this.label15.Size = new System.Drawing.Size(71, 16);
             this.label15.TabIndex = 1;
             this.label15.Text = "System ID:";
             // 
@@ -493,18 +495,29 @@
             this.label14.Location = new System.Drawing.Point(28, 59);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(36, 17);
+            this.label14.Size = new System.Drawing.Size(33, 16);
             this.label14.TabIndex = 1;
             this.label14.Text = "Key:";
             // 
             // txtSystemID
             // 
             this.txtSystemID.Location = new System.Drawing.Point(157, 20);
-            this.txtSystemID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSystemID.Margin = new System.Windows.Forms.Padding(4);
             this.txtSystemID.Name = "txtSystemID";
             this.txtSystemID.ReadOnly = true;
             this.txtSystemID.Size = new System.Drawing.Size(333, 22);
             this.txtSystemID.TabIndex = 11;
+            // 
+            // chk_use_zatca_e_invoice
+            // 
+            this.chk_use_zatca_e_invoice.AutoSize = true;
+            this.chk_use_zatca_e_invoice.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.chk_use_zatca_e_invoice.Location = new System.Drawing.Point(35, 358);
+            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
+            this.chk_use_zatca_e_invoice.Size = new System.Drawing.Size(146, 20);
+            this.chk_use_zatca_e_invoice.TabIndex = 113;
+            this.chk_use_zatca_e_invoice.Text = "Use Zatca EInvoice";
+            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
             // 
             // frm_register_company
             // 
@@ -521,7 +534,7 @@
             this.Controls.Add(this.btn_save);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frm_register_company";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -583,5 +596,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtSystemID;
+        private System.Windows.Forms.CheckBox chk_use_zatca_e_invoice;
     }
 }

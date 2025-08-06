@@ -33,6 +33,7 @@
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateZATCACSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.countryOriginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +85,7 @@
             this.salesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zatcaInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTransactionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.allQuotationsEstimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -174,6 +176,7 @@
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator10,
             this.profileToolStripMenuItem,
+            this.generateZATCACSIDToolStripMenuItem,
             this.toolStripSeparator6,
             this.countryOriginToolStripMenuItem,
             this.branchToolStripMenuItem,
@@ -202,6 +205,12 @@
             this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
             resources.ApplyResources(this.profileToolStripMenuItem, "profileToolStripMenuItem");
             this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
+            // 
+            // generateZATCACSIDToolStripMenuItem
+            // 
+            this.generateZATCACSIDToolStripMenuItem.Name = "generateZATCACSIDToolStripMenuItem";
+            resources.ApplyResources(this.generateZATCACSIDToolStripMenuItem, "generateZATCACSIDToolStripMenuItem");
+            this.generateZATCACSIDToolStripMenuItem.Click += new System.EventHandler(this.generateZATCACSIDToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
@@ -520,6 +529,7 @@
             this.salesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTransactionToolStripMenuItem2,
             this.salesReturnToolStripMenuItem,
+            this.zatcaInvoicesToolStripMenuItem,
             this.allTransactionToolStripMenuItem1,
             this.toolStripSeparator2,
             this.allQuotationsEstimatesToolStripMenuItem,
@@ -540,6 +550,12 @@
             this.salesReturnToolStripMenuItem.Name = "salesReturnToolStripMenuItem";
             resources.ApplyResources(this.salesReturnToolStripMenuItem, "salesReturnToolStripMenuItem");
             this.salesReturnToolStripMenuItem.Click += new System.EventHandler(this.salesReturnToolStripMenuItem_Click);
+            // 
+            // zatcaInvoicesToolStripMenuItem
+            // 
+            this.zatcaInvoicesToolStripMenuItem.Name = "zatcaInvoicesToolStripMenuItem";
+            resources.ApplyResources(this.zatcaInvoicesToolStripMenuItem, "zatcaInvoicesToolStripMenuItem");
+            this.zatcaInvoicesToolStripMenuItem.Click += new System.EventHandler(this.zatcaInvoicesToolStripMenuItem_Click);
             // 
             // allTransactionToolStripMenuItem1
             // 
@@ -1108,5 +1124,7 @@
         private System.Windows.Forms.ToolStripMenuItem accountPayableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quantityOnHandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lowStockReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateZATCACSIDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zatcaInvoicesToolStripMenuItem;
     }
 }

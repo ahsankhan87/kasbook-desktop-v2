@@ -1816,5 +1816,51 @@ namespace pos
         {
             LowStockReport = null;
         }
+
+        Form ShowZatcaCSID;
+        private void generateZATCACSIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ShowZatcaCSID == null)
+            {
+                ShowZatcaCSID = new pos.Master.Companies.zatca.ShowZatcaCSID()
+                {
+                    MdiParent = this
+                };
+                ShowZatcaCSID.FormClosed += new FormClosedEventHandler(AutoGenerateCSID_FormClosed);
+                ShowZatcaCSID.Show();
+            }
+            else
+            {
+                ShowZatcaCSID.Activate();
+            }
+        }
+
+        private void AutoGenerateCSID_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ShowZatcaCSID = null;
+        }
+
+        Form ZatcaInvoices;
+        private void zatcaInvoicesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ZatcaInvoices == null)
+            {
+                ZatcaInvoices = new pos.Sales.frm_zatca_invoices()
+                {
+                    MdiParent = this
+                };
+                ZatcaInvoices.FormClosed += new FormClosedEventHandler(ZatcaInvoices_FormClosed);
+                ZatcaInvoices.Show();
+            }
+            else
+            {
+                ZatcaInvoices.Activate();
+            }
+        }
+
+        private void ZatcaInvoices_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ZatcaInvoices = null;
+        }
     }
 }

@@ -50,6 +50,7 @@ namespace pos
                     info.contact_no = txt_contact_no.Text;
                     info.currency_id = 0; // Convert.ToInt16(txt_currency_id.Text);
                     //info.image = txt_image.Text;
+                    info.useZatcaEInvoice = chk_use_zatca_e_invoice.Checked;
                     info.email = txt_email.Text;
                     info.locked = 0;
                     info.systemID = txtSystemID.Text;

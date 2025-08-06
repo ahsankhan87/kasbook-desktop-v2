@@ -405,13 +405,19 @@
     <Compile Include="Master\Companies\zatca\AutoGenerateCSR.Designer.cs">
       <DependentUpon>AutoGenerateCSR.cs</DependentUpon>
     </Compile>
-    <Compile Include="Master\Companies\zatca\CertificateRequest.cs" />
     <Compile Include="Master\Companies\zatca\ShowQRCodePhase2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Master\Companies\zatca\ShowQRCodePhase2.Designer.cs">
       <DependentUpon>ShowQRCodePhase2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Master\Companies\zatca\ShowZatcaCSID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Companies\zatca\ShowZatcaCSID.Designer.cs">
+      <DependentUpon>ShowZatcaCSID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Companies\zatca\ZatcaHelper.cs" />
     <Compile Include="Master\Companies\zatca\ZatcaInvoiceGenerator.cs" />
     <Compile Include="Master\Logs\Logs.cs">
       <SubType>Form</SubType>
@@ -1085,6 +1091,12 @@
     <Compile Include="Sales\frm_searchSaleProducts.Designer.cs">
       <DependentUpon>frm_searchSaleProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\frm_zatca_invoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frm_zatca_invoices.Designer.cs">
+      <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\ZatcaAuth.cs" />
     <Compile Include="Sales\ZatcaComplianceApi.cs" />
     <Compile Include="Sales\ZatcaInvoice.cs" />
@@ -1374,6 +1386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Companies\zatca\ShowQRCodePhase2.resx">
       <DependentUpon>ShowQRCodePhase2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Companies\zatca\ShowZatcaCSID.resx">
+      <DependentUpon>ShowZatcaCSID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Country Origin\frm_addOrigin.ar-SA.resx">
       <DependentUpon>frm_addOrigin.cs</DependentUpon>
@@ -1902,6 +1917,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_searchSaleProducts.resx">
       <DependentUpon>frm_searchSaleProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_zatca_invoices.resx">
+      <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\Report_sales_receipt.rdlc" />
     <EmbeddedResource Include="Reports\Sales\sales_invoice.rpt">

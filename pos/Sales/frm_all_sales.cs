@@ -265,102 +265,129 @@ namespace pos
         {
             try
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to check Zatca Compliance Invoice", "Zatca Compliance Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                if (UsersModal.useZatcaEInvoice == false)
                 {
-                    // 1. Get signed XML first
-                    XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
-
-                    //ublXml.Save("UBL\\debug_ubl" + invoiceNo + ".xml");
-
-                    // 3. Get Certificates
-                    string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, "Simulation"); // GetPublicKeyFromFile();
-                    string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, "Simulation"); // GetSecretFromFile();
-
-                    //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
-                    //string secret = GetSecretFromFile();
-
-                    var invoiceRequest = new RequestGenerator();
-                    RequestResult requestResult = invoiceRequest.GenerateRequest(ublXml);
-
-                    
-                    if (requestResult.IsValid)
-                    {
-
-                        using (var client = new HttpClient())
-                        {
-                            // Choose endpoint
-                            string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices"; // sandbox
-                                                                                                                             // string url = "https://gw-apic.gazt.gov.sa/e-invoicing/production/compliance"; // production
-                            var invoiceHash = new EInvoiceHashGenerator();
-                            var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
-
-                            // Prepare the request body
-                            var requestBody = new
-                            {
-                                invoiceHash = hashResult.Hash,
-                                uuid = requestResult.InvoiceRequest.Uuid,
-                                invoice = requestResult.InvoiceRequest.Invoice
-                            };
-
-                            var jsonBody = JsonConvert.SerializeObject(requestBody);
-                            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-                            string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
-
-                            client.DefaultRequestHeaders.Clear();
-                            client.DefaultRequestHeaders.Add("Authorization", $"Basic {credentials}");
-                            client.DefaultRequestHeaders.Add("accept", "application/json");
-                            client.DefaultRequestHeaders.Add("Accept-Version", "V2");
-                            client.DefaultRequestHeaders.Add("Accept-Language", "EN");
-
-                            var response = await client.PostAsync(url, content);
-
-                            if (response.IsSuccessStatusCode)
-                            {
-                                var resultString = await response.Content.ReadAsStringAsync();
-
-                                // Parse the JSON
-                                var jsonResponse = JsonConvert.DeserializeObject<dynamic>(resultString);
-
-                                //ShowZatcaResponse(jsonResponse);
-
-                                string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? jsonResponse?.clearanceStatus : jsonResponse?.reportingStatus); //01=Standard Invoice
-                                // Save successful submission
-                                ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
-                                    invoiceNo,
-                                    requestResult.InvoiceRequest.Uuid,
-                                    hashResult.Hash,
-                                    zatcaStatus,
-                                    resultString.ToString());
-
-                                //ShowZatcaResponse(jsonResponse);
-                                MessageBox.Show($"Successfully submitted to ZATCA:\n{jsonResponse}");
-                                
-
-                            }
-                            else
-                            {
-                                var responseContent = await response.Content.ReadAsStringAsync();
-                                
-                                var error = JsonConvert.DeserializeObject<dynamic>(responseContent);
-                                string errorDetails = error?.validationResults?.errorMessages?[0]?.message ?? responseContent;
-                               
-                                //MessageBox.Show($"Successfully submitted to ZATCA:\n{responseContent}");
-
-                                string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? error?.clearanceStatus : error?.reportingStatus); //01=Standard Invoice
-
-                                objSalesBLL.UpdateZatcaStatus(invoiceNo, zatcaStatus, null, errorDetails);
-                                throw new Exception($"ZATCA Error: {errorDetails}");
-
-                                //MessageBox.Show($"Failed to get invoiceRequest: {response.ReasonPhrase} - {error}");
-                                //return;
-                            }
-                        }
-                        load_all_sales_grid();
-                    }
+                    //MessageBox.Show("ZATCA E-Invoice is not enabled for this branch. Please enable it in profile/settings.");
+                    return;
                 }
+
+                // 1. Get signed XML first
+                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
+                //ublXml.Save("UBL\\debug_ubl" + invoiceNo + ".xml");
+
+                // Check if ZATCA credentials are configured
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    return;
+                }
+
+                // 3. Get Certificates
+                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+
+                //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
+                //string secret = GetSecretFromFile();
+
+                var invoiceRequest = new RequestGenerator();
+                RequestResult requestResult = invoiceRequest.GenerateRequest(ublXml);
+
+
+                if (requestResult.IsValid)
+                {
+
+                    using (var client = new HttpClient())
+                    {
+                        // Choose endpoint
+                        string url;
+                        switch (activeZatcaCredential["mode"].ToString())
+                        {
+                            case "Production":
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";
+                                break;
+                            case "Simulation":
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/simulation/invoices";
+                                break;
+                            default:
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";
+                                break;
+                        }
+
+                        var invoiceHash = new EInvoiceHashGenerator();
+                        var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
+
+                        // Prepare the request body
+                        var requestBody = new
+                        {
+                            invoiceHash = hashResult.Hash,
+                            uuid = requestResult.InvoiceRequest.Uuid,
+                            invoice = requestResult.InvoiceRequest.Invoice
+                        };
+
+                        var jsonBody = JsonConvert.SerializeObject(requestBody);
+                        var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                        string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
+
+                        client.DefaultRequestHeaders.Clear();
+                        client.DefaultRequestHeaders.Add("Authorization", $"Basic {credentials}");
+                        client.DefaultRequestHeaders.Add("accept", "application/json");
+                        client.DefaultRequestHeaders.Add("Accept-Version", "V2");
+                        client.DefaultRequestHeaders.Add("Accept-Language", "EN");
+
+                        var response = await client.PostAsync(url, content);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var resultString = await response.Content.ReadAsStringAsync();
+
+                            // Parse the JSON
+                            var jsonResponse = JsonConvert.DeserializeObject<dynamic>(resultString);
+
+                            //ShowZatcaResponse(jsonResponse);
+
+                            string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? jsonResponse?.clearanceStatus : jsonResponse?.reportingStatus); //01=Standard Invoice
+                                                                                                                                                          // Save successful submission
+                            ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
+                                invoiceNo,
+                                requestResult.InvoiceRequest.Uuid,
+                                hashResult.Hash,
+                                requestResult.InvoiceRequest.Invoice,
+                                zatcaStatus,
+                                resultString.ToString());
+
+                            //ShowZatcaResponse(jsonResponse);
+                            MessageBox.Show($"Successfully submitted to ZATCA:\n{jsonResponse}");
+
+
+                        }
+                        else
+                        {
+                            var responseContent = await response.Content.ReadAsStringAsync();
+
+                            var error = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                            string errorDetails = error?.validationResults?.errorMessages?[0]?.message ?? responseContent;
+
+                            //MessageBox.Show($"Successfully submitted to ZATCA:\n{responseContent}");
+
+                            string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? error?.clearanceStatus : error?.reportingStatus); //01=Standard Invoice
+
+                            objSalesBLL.UpdateZatcaStatus(invoiceNo, zatcaStatus, null, errorDetails);
+                            throw new Exception($"ZATCA Error: {errorDetails}");
+
+                            //MessageBox.Show($"Failed to get invoiceRequest: {response.ReasonPhrase} - {error}");
+                            //return;
+                        }
+                    }
+                    load_all_sales_grid();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to generate request: " + requestResult.ErrorMessages);
+                    return;
+                }
+
             }
             catch (Exception ex)
             {
@@ -390,15 +417,29 @@ namespace pos
         {
             try
             {
+                if (UsersModal.useZatcaEInvoice == false)
+                {
+                    MessageBox.Show("ZATCA E-Invoice is not enabled for this branch. Please enable it in profile/settings.");
+                    return;
+                }
+                // 1. Get sale data
                 XmlDocument ublXml = GenerateUBLXMLInvoice(invoiceNo);
-                ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
+                //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
+
+                // Check if ZATCA credentials are configured
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    return;
+                }
 
                 // 3. Sign XML
                 //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
                 //string privateKey = GetPrivateKeyFromFile();
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, "Simulation"); // GetPublicKeyFromFile();
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, "Simulation"); // GetSecretFromFile();
-                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, "Simulation");  //GetPrivateKeyFromFile();
+                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
 
                 byte[] bytes = Convert.FromBase64String(cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);
@@ -463,21 +504,21 @@ namespace pos
                     objSalesBLL.UpdateZatcaQrCode(invoiceNo, qrBytes);
                     //MessageBox.Show($"Base64 QRCode : {Base64QrCode}\n");
 
-                    //GetRequestApi Payload
-                    RequestGenerator RequestGenerator = new RequestGenerator();
-                    RequestResult RequestResult = RequestGenerator.GenerateRequest(signResult.SignedEInvoice);
+                    ////GetRequestApi Payload
+                    //RequestGenerator RequestGenerator = new RequestGenerator();
+                    //RequestResult RequestResult = RequestGenerator.GenerateRequest(signResult.SignedEInvoice);
 
-                    if (RequestResult.IsValid)
-                    {
-                        var jsonPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_ApiRequestPayload.json");
-                        RequestResult.SaveRequestToFile(jsonPath);
-                        //MessageBox.Show($"Request Api Payload : \n{ RequestResult.InvoiceRequest.Serialize()}");
-                    }
+                    //if (RequestResult.IsValid)
+                    //{
+                    //    var jsonPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_ApiRequestPayload.json");
+                    //    RequestResult.SaveRequestToFile(jsonPath);
+                    //    //MessageBox.Show($"Request Api Payload : \n{ RequestResult.InvoiceRequest.Serialize()}");
+                    //}
 
                     // Save base64 string in DB (optional)
                     objSalesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"UBL signed and saved. QR generated.");
+                    MessageBox.Show($"Invoice signed by Zatca and saved.");
 
                 }
                 else
@@ -572,6 +613,7 @@ namespace pos
                         invoiceNo,
                         requestResult.InvoiceRequest.Uuid,
                         hashResult.Hash,
+                        requestResult.InvoiceRequest.Invoice,
                         zatcaStatus,
                         responseContent.ToString());
 

@@ -139,6 +139,7 @@ namespace pos.Master.Companies.zatca
 
         private void AddSupplierParty(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
+            //seller
             XmlElement supplierParty = xmlDoc.CreateElement("cac", "AccountingSupplierParty", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             XmlElement party = xmlDoc.CreateElement("cac", "Party", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 
@@ -179,6 +180,7 @@ namespace pos.Master.Companies.zatca
 
         private void AddCustomerParty(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
+            //buyer
             XmlElement customerParty = xmlDoc.CreateElement("cac", "AccountingCustomerParty", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             XmlElement party = xmlDoc.CreateElement("cac", "Party", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 
@@ -517,15 +519,127 @@ namespace pos.Master.Companies.zatca
             parent.AppendChild(transform);
         }
 
+        public XmlDocument GenerateZatcaCreditNoteXmlDocument(DataSet ds, string invoiceNo, string prevInvoiceNo = null, DateTime? prevInvoiceDate = null)
+        {
+            DataTable invoiceHeader = ds.Tables["Sale"];
+            DataTable invoiceItems = ds.Tables["SalesItems"];
+
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            xmlDoc.AppendChild(xmlDeclaration);
+
+            XmlElement invoiceElement = xmlDoc.CreateElement("Invoice", "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2");
+            invoiceElement.SetAttribute("xmlns:cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            invoiceElement.SetAttribute("xmlns:cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+            invoiceElement.SetAttribute("xmlns:ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+            xmlDoc.AppendChild(invoiceElement);
+
+            AddUBLExtensions(xmlDoc, invoiceElement);
+
+            // Set InvoiceTypeCode for Credit Note (381)
+            AddElement(xmlDoc, invoiceElement, "cbc:ProfileID", "reporting:1.0");
+            AddElement(xmlDoc, invoiceElement, "cbc:ID", invoiceNo);
+            AddElement(xmlDoc, invoiceElement, "cbc:UUID", Guid.NewGuid().ToString());
+            DateTime issueDate = Convert.ToDateTime(invoiceHeader.Rows[0]["sale_time"]);
+            AddElement(xmlDoc, invoiceElement, "cbc:IssueDate", issueDate.ToString("yyyy-MM-dd"));
+            AddElement(xmlDoc, invoiceElement, "cbc:IssueTime", issueDate.ToString("HH:mm:ss"));
+            XmlElement invoiceTypeCodeXML = AddElement(xmlDoc, invoiceElement, "cbc:InvoiceTypeCode", "381");
+            invoiceTypeCodeXML.SetAttribute("name", "0300000"); // Credit Note
+
+            AddElement(xmlDoc, invoiceElement, "cbc:DocumentCurrencyCode", "SAR");
+            AddElement(xmlDoc, invoiceElement, "cbc:TaxCurrencyCode", "SAR");
+
+            // Add BillingReference for previous invoice
+            if (!string.IsNullOrEmpty(prevInvoiceNo) && prevInvoiceDate.HasValue)
+            {
+                XmlElement billingReference = xmlDoc.CreateElement("cac", "BillingReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                XmlElement invoiceDocRef = xmlDoc.CreateElement("cac", "InvoiceDocumentReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                string idValue = $"Invoice Number: {prevInvoiceNo}; Invoice Issue Date: {prevInvoiceDate.Value:yyyy-MM-dd}";
+                AddElement(xmlDoc, invoiceDocRef, "cbc:ID", idValue);
+                billingReference.AppendChild(invoiceDocRef);
+                invoiceElement.AppendChild(billingReference);
+            }
+
+            AddDocumentReferences(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddSupplierParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddCustomerParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddDeliveryInfo(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddPaymentMeans(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddAllowanceCharge(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddTaxTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddLegalMonetaryTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddInvoiceLines(xmlDoc, invoiceElement, invoiceItems);
+
+            return xmlDoc;
+        }
+
+        public XmlDocument GenerateZatcaDebitNoteXmlDocument(DataSet ds, string invoiceNo, string prevInvoiceNo = null, DateTime? prevInvoiceDate = null)
+        {
+            DataTable invoiceHeader = ds.Tables["Sale"];
+            DataTable invoiceItems = ds.Tables["SalesItems"];
+
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            xmlDoc.AppendChild(xmlDeclaration);
+
+            XmlElement invoiceElement = xmlDoc.CreateElement("Invoice", "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2");
+            invoiceElement.SetAttribute("xmlns:cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            invoiceElement.SetAttribute("xmlns:cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+            invoiceElement.SetAttribute("xmlns:ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+            xmlDoc.AppendChild(invoiceElement);
+
+            AddUBLExtensions(xmlDoc, invoiceElement);
+
+            // Set InvoiceTypeCode for Debit Note (383)
+            AddElement(xmlDoc, invoiceElement, "cbc:ProfileID", "reporting:1.0");
+            AddElement(xmlDoc, invoiceElement, "cbc:ID", invoiceNo);
+            AddElement(xmlDoc, invoiceElement, "cbc:UUID", Guid.NewGuid().ToString());
+            DateTime issueDate = Convert.ToDateTime(invoiceHeader.Rows[0]["sale_time"]);
+            AddElement(xmlDoc, invoiceElement, "cbc:IssueDate", issueDate.ToString("yyyy-MM-dd"));
+            AddElement(xmlDoc, invoiceElement, "cbc:IssueTime", issueDate.ToString("HH:mm:ss"));
+            XmlElement invoiceTypeCodeXML = AddElement(xmlDoc, invoiceElement, "cbc:InvoiceTypeCode", "383");
+            invoiceTypeCodeXML.SetAttribute("name", "0400000"); // Debit Note
+
+            AddElement(xmlDoc, invoiceElement, "cbc:DocumentCurrencyCode", "SAR");
+            AddElement(xmlDoc, invoiceElement, "cbc:TaxCurrencyCode", "SAR");
+
+            // Add BillingReference for previous invoice
+            if (!string.IsNullOrEmpty(prevInvoiceNo) && prevInvoiceDate.HasValue)
+            {
+                XmlElement billingReference = xmlDoc.CreateElement("cac", "BillingReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                XmlElement invoiceDocRef = xmlDoc.CreateElement("cac", "InvoiceDocumentReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                string idValue = $"Invoice Number: {prevInvoiceNo}; Invoice Issue Date: {prevInvoiceDate.Value:yyyy-MM-dd}";
+                AddElement(xmlDoc, invoiceDocRef, "cbc:ID", idValue);
+                billingReference.AppendChild(invoiceDocRef);
+                invoiceElement.AppendChild(billingReference);
+            }
+
+            AddDocumentReferences(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddSupplierParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddCustomerParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddDeliveryInfo(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddPaymentMeans(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddAllowanceCharge(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddTaxTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddLegalMonetaryTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddInvoiceLines(xmlDoc, invoiceElement, invoiceItems);
+
+            return xmlDoc;
+        }
+
         // Step 1: Save UUID, Hash, and Status to DB
-        public static void SaveZatcaStatusToDatabase(string invoiceNo, string uuid, string invoiceHash, string status, string message = null)
+        public static void SaveZatcaStatusToDatabase(string invoiceNo, string uuid, string invoiceHash, string invoiceBase64,
+            string status, string env, string message = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("UPDATE pos_sales SET zatca_uuid = @uuid, zatca_hash = @hash, zatca_status = @status, zatca_message = @message, zatca_updated_at = GETDATE() WHERE invoice_no = @invoice_no", cn);
+                SqlCommand cmd = new SqlCommand("UPDATE pos_sales SET zatca_uuid = @uuid, zatca_hash = @hash, zatca_mode = @mode, " +
+                    "zatca_status = @status, zatcaInvoiceBase64 = @invoiceBase64, zatca_message = @message, zatca_updated_at = GETDATE() WHERE invoice_no = @invoice_no", cn);
                 cmd.Parameters.AddWithValue("@uuid", (object)uuid ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@hash", (object)invoiceHash ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@status", (object)status ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@mode", (object)env?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@invoiceBase64", (object)invoiceBase64 ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@message", (object)message ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
 
@@ -590,7 +704,7 @@ namespace pos.Master.Companies.zatca
             }
         }
 
-        public static int UpsertZatcaCredentials(int branchId, string mode, string cert, string privateKey, string secret,string csr)
+        public static int UpsertZatcaCredentials(int branchId, string mode, string cert, string privateKey, string secret,string csr,string otp,string compliance_request_id)
         {
             int newID = 0;
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -599,11 +713,11 @@ namespace pos.Master.Companies.zatca
                 SqlCommand cmd = new SqlCommand(@"
             IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode)
                 UPDATE zatca_credentials 
-                SET cert_base64 = @cert, private_key = @privateKey, secret_key = @secret, updated_at = GETDATE(), csr_text=@csr_text
+                SET cert_base64 = @cert, private_key = @privateKey, secret_key = @secret, updated_at = GETDATE(), csr_text=@csr_text, otp=@otp, compliance_request_id=@compliance_request_id
                 WHERE branch_id = @branchId AND mode = @mode
             ELSE
-                INSERT INTO zatca_credentials (company_id, user_id, branch_id, mode, cert_base64, private_key, secret_key, updated_at,csr_text,created_at)
-                VALUES (@companyID,@userID,@branchId, @mode, @cert, @privateKey, @secret, GETDATE(),@csr_text,GETDATE())", cn);
+                INSERT INTO zatca_credentials (company_id, user_id, branch_id, mode, cert_base64, private_key, secret_key, updated_at,csr_text,created_at,otp,compliance_request_id)
+                VALUES (@companyID,@userID,@branchId, @mode, @cert, @privateKey, @secret, GETDATE(),@csr_text,GETDATE(),@otp,@compliance_request_id)", cn);
 
                 cmd.Parameters.AddWithValue("@branchId", branchId); 
                 cmd.Parameters.AddWithValue("@companyID", UsersModal.loggedIncompanyID);
@@ -613,11 +727,67 @@ namespace pos.Master.Companies.zatca
                 cmd.Parameters.AddWithValue("@privateKey", privateKey);
                 cmd.Parameters.AddWithValue("@secret", secret);
                 cmd.Parameters.AddWithValue("@csr_text", csr);
+                cmd.Parameters.AddWithValue("@otp", otp);
+                cmd.Parameters.AddWithValue("@compliance_request_id", compliance_request_id);
 
                 newID = cmd.ExecuteNonQuery();
                 newID += Convert.ToInt32(cmd.ExecuteScalar());
 
                 return newID;
+            }
+        }
+        public static int UpdateZatcaStatus(int id)
+        {
+            int affectedRows = 0;
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                // 1. Set all credentials for this branch to inactive (status = 0)
+                using (SqlCommand cmd = new SqlCommand(@"
+                    UPDATE zatca_credentials 
+                    SET status = 0 
+                    WHERE branch_id = @branchId", cn))
+                {
+                    cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                    affectedRows += cmd.ExecuteNonQuery();
+                }
+
+                // 2. Set the selected credential to active (status = 1)
+                using (SqlCommand cmd_1 = new SqlCommand(@"
+                    UPDATE zatca_credentials 
+                    SET status = 1 
+                    WHERE branch_id = @branchId AND id = @ID", cn))
+                {
+                    cmd_1.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                    cmd_1.Parameters.AddWithValue("@ID", id);
+                    affectedRows += cmd_1.ExecuteNonQuery();
+                }
+            }
+            return affectedRows;
+        }
+        public static DataRow GetActiveZatcaCredential()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                string query = @"
+                    SELECT TOP 1 *
+                    FROM zatca_credentials
+                    WHERE branch_id = @branchId AND status = 1";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                            return dt.Rows[0];
+                        else
+                            return null;
+                    }
+                }
             }
         }
     }

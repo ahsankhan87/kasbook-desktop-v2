@@ -9,6 +9,7 @@ namespace POS.Core
     public class UsersModal
     {
         public static int logged_in_user_id;
+        public static bool useZatcaEInvoice;
 
         ///
         public static int logged_in_userid { get; set; }

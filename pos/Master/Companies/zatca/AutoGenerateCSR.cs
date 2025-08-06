@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Tls;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -44,18 +45,29 @@ namespace pos.Master.Companies.zatca
             btn_publickey_save.Visible = false;
             btn_info.Visible = false;
         }
-       
+
+
         private void fillcontrols()
         {
-            //txt_commonName.Text = "TST-886431145-311111111101113";
-            txt_commonName.Text = "TST-2050012095-300589284900003";
-            txt_organizationName.Text = "TST";
-            txt_organizationUnitName.Text = "Riyadh Branch";
-            txt_countryName.Text = "SA";
-            txt_serialNumber.Text = "1-TST|2-TST|3-" + Guid.NewGuid().ToString();
-            txt_organizationIdentifier.Text = "300589284900003";
-            txt_location.Text = "Makkah";
-            txt_industry.Text = "Auto Parts";
+            GeneralBLL objBLL = new GeneralBLL();
+
+            string keyword = "TOP 1 *";
+            string table = "pos_companies";
+            DataTable companies_dt = objBLL.GetRecord(keyword, table);
+            foreach (DataRow dr in companies_dt.Rows)
+            {       
+                string vatNo = dr["vat_no"].ToString();
+                string prefix = rdb_simulation.Checked ? "TST" : rdb_production.Checked ? "PRD" : "TST";
+                string commonName = $"{prefix}-{vatNo}";
+                txt_commonName.Text = commonName;
+                txt_organizationName.Text = dr["name"].ToString();
+                txt_organizationUnitName.Text = "Riyadh Branch";
+                txt_countryName.Text = "SA";
+                txt_serialNumber.Text = $"1-{prefix}|2-{prefix}|3-" + Guid.NewGuid().ToString();
+                txt_organizationIdentifier.Text = vatNo;
+                txt_location.Text = dr["address"].ToString();
+                txt_industry.Text = "Auto Parts";
+            }
         }
        
         private async void GenerateCSRAsync()
@@ -114,10 +126,22 @@ namespace pos.Master.Companies.zatca
 
                     using (var client = new HttpClient())
                     {
-                        // Choose endpoint
-                        string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance"; // sandbox
-                        // string url = "https://gw-apic.gazt.gov.sa/e-invoicing/production/compliance"; // production
+                        string url;
+                        // Set the base address for the client
+                        switch (environment)
+                        {
+                            case EnvironmentType.Simulation:
+                               url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/compliance";
+                                break;
+                            case EnvironmentType.Production:
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/production/csids";
+                                break;
+                            default:
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance";
+                                break;
+                        }
 
+                        
                         client.DefaultRequestHeaders.Clear();
                         client.DefaultRequestHeaders.Add("OTP", otp); 
                         client.DefaultRequestHeaders.Add("accept", "application/json"); 
@@ -134,6 +158,7 @@ namespace pos.Master.Companies.zatca
                             // Assign values to textboxes
                             txt_publickey.Text = jsonResponse.binarySecurityToken;
                             txt_secret.Text = jsonResponse.secret;
+                            txt_compliance_request_id.Text = jsonResponse.requestID;
 
                             btn_publickey_save.Visible = true;
                             btn_secretkey_save.Visible = true;
@@ -142,7 +167,7 @@ namespace pos.Master.Companies.zatca
                             // Optional: If you also want the certificate
                             string cert = jsonResponse.certificate;
 
-                            //MessageBox.Show("Response:\n" + resultString);
+                            MessageBox.Show("Response:\n" + resultString);
                         }
                         else
                         {
@@ -162,7 +187,7 @@ namespace pos.Master.Companies.zatca
             }
             catch (Exception ex)
             {
-                MessageBox.Show("CSR Error: " + ex.Message);
+                MessageBox.Show("CSR Error: \n" + ex.Message + "\n" + ex.InnerException.Message);
             }
             
         }
@@ -244,13 +269,9 @@ namespace pos.Master.Companies.zatca
         }
         private void RefreshSerialNumber()
         {
-            string input = txt_serialNumber.Text.Trim();
-            int index = input.LastIndexOf("|3-");
-            if (index >= 0)
-            {
-                input = input.Substring(0, index + 3);
-                txt_serialNumber.Text = input + Guid.NewGuid().ToString();
-            }
+            string prefix = rdb_simulation.Checked ? "TST" : rdb_production.Checked ? "PRD" : "TST";
+            string orgName = txt_organizationName.Text;
+            txt_serialNumber.Text = $"1-{prefix}|2-{orgName}|3-{Guid.NewGuid()}";
         }
 
         private void btn_publickey_save_Click(object sender, EventArgs e)
@@ -370,11 +391,23 @@ namespace pos.Master.Companies.zatca
                                              rdb_production.Checked ? EnvironmentType.Production :
                                              EnvironmentType.NonProduction;
             // Create generator instance
-            int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials(UsersModal.logged_in_branch_id, mode.ToString(),txt_publickey.Text.Trim(),txt_privatekey.Text.Trim(),txt_secret.Text.Trim(),txt_csr.Text.Trim());
+            int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials(UsersModal.logged_in_branch_id, mode.ToString(),
+                txt_publickey.Text.Trim(),txt_privatekey.Text.Trim(),txt_secret.Text.Trim(),txt_csr.Text.Trim(),
+                txt_otp.Text,txt_compliance_request_id.Text);
             if (result > 0)
             {
                 MessageBox.Show("Updated successfully", "Zatca Credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void rdb_simulation_CheckedChanged(object sender, EventArgs e)
+        {
+            fillcontrols();
+        }
+
+        private void rdb_production_CheckedChanged(object sender, EventArgs e)
+        {
+            fillcontrols();
         }
     }
 }

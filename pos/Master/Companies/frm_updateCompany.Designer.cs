@@ -79,7 +79,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cmb_sales_acc_id = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.GenerateCSR = new System.Windows.Forms.Button();
+            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -135,6 +135,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chk_use_zatca_e_invoice);
             this.groupBox2.Controls.Add(this.txt_address);
             this.groupBox2.Controls.Add(this.txt_name);
             this.groupBox2.Controls.Add(this.txt_vat_no);
@@ -438,13 +439,11 @@
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
             // 
-            // GenerateCSR
+            // chk_use_zatca_e_invoice
             // 
-            resources.ApplyResources(this.GenerateCSR, "GenerateCSR");
-            this.GenerateCSR.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.GenerateCSR.Name = "GenerateCSR";
-            this.GenerateCSR.UseVisualStyleBackColor = true;
-            this.GenerateCSR.Click += new System.EventHandler(this.GenerateCSR_Click);
+            resources.ApplyResources(this.chk_use_zatca_e_invoice, "chk_use_zatca_e_invoice");
+            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
+            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
             // 
             // frm_updateCompany
             // 
@@ -454,7 +453,6 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.GenerateCSR);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.Name = "frm_updateCompany";
@@ -525,6 +523,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblExpiryDate;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button GenerateCSR;
+        private System.Windows.Forms.CheckBox chk_use_zatca_e_invoice;
     }
 }

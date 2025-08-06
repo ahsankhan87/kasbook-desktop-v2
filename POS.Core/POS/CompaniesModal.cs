@@ -29,6 +29,9 @@ namespace POS.Core
         public int user_id { get; set; }
         
         public int locked { get; set; }
+
+        public bool useZatcaEInvoice { get; set; }
+
         public DateTime expiry_date { get; set; }
 
         public string date_created { get; set; }

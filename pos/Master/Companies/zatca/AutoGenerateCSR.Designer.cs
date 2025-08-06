@@ -91,7 +91,7 @@ namespace pos.Master.Companies.zatca
             this.label11 = new System.Windows.Forms.Label();
             this.btn_csid = new System.Windows.Forms.Button();
             this.rdb_production = new System.Windows.Forms.RadioButton();
-            this.rdb_compliance = new System.Windows.Forms.RadioButton();
+            this.rdb_sandbox = new System.Windows.Forms.RadioButton();
             this.txt_industry = new System.Windows.Forms.TextBox();
             this.txt_location = new System.Windows.Forms.TextBox();
             this.txt_countryName = new System.Windows.Forms.TextBox();
@@ -134,6 +134,7 @@ namespace pos.Master.Companies.zatca
             this.txt_buyyer_postalzone = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
+            this.txt_compliance_request_id = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.csid_tabPage.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -183,7 +184,7 @@ namespace pos.Master.Companies.zatca
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(7, 172);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(138, 17);
+            this.label47.Size = new System.Drawing.Size(131, 16);
             this.label47.TabIndex = 93;
             this.label47.Text = "neighbouhodd name";
             // 
@@ -192,7 +193,7 @@ namespace pos.Master.Companies.zatca
             this.label36.AutoSize = true;
             this.label36.Location = new System.Drawing.Point(767, 173);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(50, 17);
+            this.label36.Size = new System.Drawing.Size(51, 16);
             this.label36.TabIndex = 93;
             this.label36.Text = "اسم الحى";
             // 
@@ -201,7 +202,7 @@ namespace pos.Master.Companies.zatca
             this.label56.AutoSize = true;
             this.label56.Location = new System.Drawing.Point(90, 18);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(78, 17);
+            this.label56.Size = new System.Drawing.Size(74, 16);
             this.label56.TabIndex = 91;
             this.label56.Text = "Seller Data";
             // 
@@ -210,7 +211,7 @@ namespace pos.Master.Companies.zatca
             this.label46.AutoSize = true;
             this.label46.Location = new System.Drawing.Point(7, 52);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(86, 17);
+            this.label46.Size = new System.Drawing.Size(81, 16);
             this.label46.TabIndex = 91;
             this.label46.Text = "Reg number";
             // 
@@ -219,7 +220,7 @@ namespace pos.Master.Companies.zatca
             this.label41.AutoSize = true;
             this.label41.Location = new System.Drawing.Point(720, 53);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(97, 17);
+            this.label41.Size = new System.Drawing.Size(99, 16);
             this.label41.TabIndex = 91;
             this.label41.Text = "رقم السجل التجارى";
             // 
@@ -228,7 +229,7 @@ namespace pos.Master.Companies.zatca
             this.label45.AutoSize = true;
             this.label45.Location = new System.Drawing.Point(7, 202);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(81, 17);
+            this.label45.Size = new System.Drawing.Size(78, 16);
             this.label45.TabIndex = 89;
             this.label45.Text = "postal code";
             // 
@@ -237,7 +238,7 @@ namespace pos.Master.Companies.zatca
             this.label32.AutoSize = true;
             this.label32.Location = new System.Drawing.Point(747, 203);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(70, 17);
+            this.label32.Size = new System.Drawing.Size(69, 16);
             this.label32.TabIndex = 89;
             this.label32.Text = "الرمز البريدى";
             // 
@@ -246,7 +247,7 @@ namespace pos.Master.Companies.zatca
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(7, 142);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(70, 17);
+            this.label44.Size = new System.Drawing.Size(66, 16);
             this.label44.TabIndex = 87;
             this.label44.Text = "City name";
             // 
@@ -264,7 +265,7 @@ namespace pos.Master.Companies.zatca
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(762, 143);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(55, 17);
+            this.label33.Size = new System.Drawing.Size(57, 16);
             this.label33.TabIndex = 87;
             this.label33.Text = "اسم المدينة";
             // 
@@ -273,7 +274,7 @@ namespace pos.Master.Companies.zatca
             this.label43.AutoSize = true;
             this.label43.Location = new System.Drawing.Point(7, 112);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(81, 17);
+            this.label43.Size = new System.Drawing.Size(75, 16);
             this.label43.TabIndex = 85;
             this.label43.Text = "building no.";
             // 
@@ -291,7 +292,7 @@ namespace pos.Master.Companies.zatca
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(764, 113);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(53, 17);
+            this.label34.Size = new System.Drawing.Size(57, 16);
             this.label34.TabIndex = 85;
             this.label34.Text = "رقم المبنى";
             // 
@@ -300,7 +301,7 @@ namespace pos.Master.Companies.zatca
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(7, 82);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(46, 17);
+            this.label42.Size = new System.Drawing.Size(42, 16);
             this.label42.TabIndex = 83;
             this.label42.Text = "Street";
             // 
@@ -318,7 +319,7 @@ namespace pos.Master.Companies.zatca
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(777, 83);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(40, 17);
+            this.label35.Size = new System.Drawing.Size(41, 16);
             this.label35.TabIndex = 83;
             this.label35.Text = "الشارع";
             // 
@@ -354,7 +355,7 @@ namespace pos.Master.Companies.zatca
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(15, 810);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(0, 17);
+            this.label13.Size = new System.Drawing.Size(0, 16);
             this.label13.TabIndex = 118;
             // 
             // btn_publickey_save
@@ -363,7 +364,7 @@ namespace pos.Master.Companies.zatca
             this.btn_publickey_save.Name = "btn_publickey_save";
             this.btn_publickey_save.Size = new System.Drawing.Size(123, 27);
             this.btn_publickey_save.TabIndex = 116;
-            this.btn_publickey_save.Text = "Save حفظ";
+            this.btn_publickey_save.Text = "Save to File حفظ";
             this.btn_publickey_save.UseVisualStyleBackColor = true;
             this.btn_publickey_save.Visible = false;
             this.btn_publickey_save.Click += new System.EventHandler(this.btn_publickey_save_Click);
@@ -371,18 +372,18 @@ namespace pos.Master.Companies.zatca
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(15, 572);
+            this.label25.Location = new System.Drawing.Point(17, 555);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(126, 17);
+            this.label25.Size = new System.Drawing.Size(130, 16);
             this.label25.TabIndex = 115;
             this.label25.Text = "PublicKey المفتاح العام";
             // 
             // txt_publickey
             // 
-            this.txt_publickey.Location = new System.Drawing.Point(16, 592);
+            this.txt_publickey.Location = new System.Drawing.Point(18, 575);
             this.txt_publickey.Multiline = true;
             this.txt_publickey.Name = "txt_publickey";
-            this.txt_publickey.Size = new System.Drawing.Size(714, 87);
+            this.txt_publickey.Size = new System.Drawing.Size(714, 73);
             this.txt_publickey.TabIndex = 114;
             // 
             // btn_secretkey_save
@@ -391,7 +392,7 @@ namespace pos.Master.Companies.zatca
             this.btn_secretkey_save.Name = "btn_secretkey_save";
             this.btn_secretkey_save.Size = new System.Drawing.Size(137, 27);
             this.btn_secretkey_save.TabIndex = 113;
-            this.btn_secretkey_save.Text = "Save حفظ";
+            this.btn_secretkey_save.Text = "Save to File حفظ";
             this.btn_secretkey_save.UseVisualStyleBackColor = true;
             this.btn_secretkey_save.Visible = false;
             this.btn_secretkey_save.Click += new System.EventHandler(this.btn_secretkey_save_Click);
@@ -408,7 +409,7 @@ namespace pos.Master.Companies.zatca
             // txt_secret
             // 
             this.txt_secret.BackColor = System.Drawing.SystemColors.Window;
-            this.txt_secret.Location = new System.Drawing.Point(16, 700);
+            this.txt_secret.Location = new System.Drawing.Point(20, 674);
             this.txt_secret.Name = "txt_secret";
             this.txt_secret.ReadOnly = true;
             this.txt_secret.Size = new System.Drawing.Size(710, 22);
@@ -419,7 +420,7 @@ namespace pos.Master.Companies.zatca
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(725, 810);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(0, 17);
+            this.label12.Size = new System.Drawing.Size(0, 16);
             this.label12.TabIndex = 110;
             // 
             // btn_privatekey_save
@@ -428,7 +429,7 @@ namespace pos.Master.Companies.zatca
             this.btn_privatekey_save.Name = "btn_privatekey_save";
             this.btn_privatekey_save.Size = new System.Drawing.Size(137, 27);
             this.btn_privatekey_save.TabIndex = 109;
-            this.btn_privatekey_save.Text = "Save حفظ";
+            this.btn_privatekey_save.Text = "Save to File حفظ";
             this.btn_privatekey_save.UseVisualStyleBackColor = true;
             this.btn_privatekey_save.Visible = false;
             this.btn_privatekey_save.Click += new System.EventHandler(this.btn_privatekey_save_Click);
@@ -439,7 +440,7 @@ namespace pos.Master.Companies.zatca
             this.btn_csr_save.Name = "btn_csr_save";
             this.btn_csr_save.Size = new System.Drawing.Size(137, 28);
             this.btn_csr_save.TabIndex = 108;
-            this.btn_csr_save.Text = "Save حفظ";
+            this.btn_csr_save.Text = "Save to File حفظ";
             this.btn_csr_save.UseVisualStyleBackColor = true;
             this.btn_csr_save.Visible = false;
             this.btn_csr_save.Click += new System.EventHandler(this.btn_csr_save_Click);
@@ -447,9 +448,9 @@ namespace pos.Master.Companies.zatca
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 466);
+            this.label10.Location = new System.Drawing.Point(17, 449);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(145, 17);
+            this.label10.Size = new System.Drawing.Size(147, 16);
             this.label10.TabIndex = 107;
             this.label10.Text = "PrivateKey المفتاح الخاص";
             // 
@@ -467,16 +468,16 @@ namespace pos.Master.Companies.zatca
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(716, 92);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(103, 17);
+            this.label31.Size = new System.Drawing.Size(104, 16);
             this.label31.TabIndex = 79;
             this.label31.Text = "رقم السجل الضريبيى";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 680);
+            this.label14.Location = new System.Drawing.Point(19, 654);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(109, 17);
+            this.label14.Size = new System.Drawing.Size(106, 16);
             this.label14.TabIndex = 111;
             this.label14.Text = "Secret الرقم السرى";
             // 
@@ -491,10 +492,10 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_privatekey
             // 
-            this.txt_privatekey.Location = new System.Drawing.Point(16, 487);
+            this.txt_privatekey.Location = new System.Drawing.Point(18, 470);
             this.txt_privatekey.Multiline = true;
             this.txt_privatekey.Name = "txt_privatekey";
-            this.txt_privatekey.Size = new System.Drawing.Size(714, 82);
+            this.txt_privatekey.Size = new System.Drawing.Size(714, 73);
             this.txt_privatekey.TabIndex = 106;
             // 
             // label1
@@ -502,7 +503,7 @@ namespace pos.Master.Companies.zatca
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 343);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 17);
+            this.label1.Size = new System.Drawing.Size(128, 16);
             this.label1.TabIndex = 105;
             this.label1.Text = "CSR طلب توقيع الشهادة";
             // 
@@ -511,7 +512,7 @@ namespace pos.Master.Companies.zatca
             this.txt_csr.Location = new System.Drawing.Point(16, 363);
             this.txt_csr.Multiline = true;
             this.txt_csr.Name = "txt_csr";
-            this.txt_csr.Size = new System.Drawing.Size(710, 100);
+            this.txt_csr.Size = new System.Drawing.Size(710, 73);
             this.txt_csr.TabIndex = 104;
             // 
             // rdb_simulation
@@ -520,18 +521,19 @@ namespace pos.Master.Companies.zatca
             this.rdb_simulation.Checked = true;
             this.rdb_simulation.Location = new System.Drawing.Point(8, 11);
             this.rdb_simulation.Name = "rdb_simulation";
-            this.rdb_simulation.Size = new System.Drawing.Size(133, 21);
+            this.rdb_simulation.Size = new System.Drawing.Size(136, 20);
             this.rdb_simulation.TabIndex = 100;
             this.rdb_simulation.TabStop = true;
             this.rdb_simulation.Text = "Simulation(محاكاة)";
             this.rdb_simulation.UseVisualStyleBackColor = true;
+            this.rdb_simulation.CheckedChanged += new System.EventHandler(this.rdb_simulation_CheckedChanged);
             // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(753, 121);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(66, 17);
+            this.label30.Size = new System.Drawing.Size(68, 16);
             this.label30.TabIndex = 81;
             this.label30.Text = "اسم المؤسسة";
             // 
@@ -548,7 +550,7 @@ namespace pos.Master.Companies.zatca
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(781, 101);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(76, 17);
+            this.label24.Size = new System.Drawing.Size(77, 16);
             this.label24.TabIndex = 99;
             this.label24.Text = "الرقم الضريبيى";
             // 
@@ -557,7 +559,7 @@ namespace pos.Master.Companies.zatca
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(804, 131);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(53, 17);
+            this.label23.Size = new System.Drawing.Size(52, 16);
             this.label23.TabIndex = 98;
             this.label23.Text = "اسم الفرع";
             // 
@@ -566,7 +568,7 @@ namespace pos.Master.Companies.zatca
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(791, 161);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(66, 17);
+            this.label22.Size = new System.Drawing.Size(68, 16);
             this.label22.TabIndex = 97;
             this.label22.Text = "اسم المؤسسة";
             // 
@@ -575,7 +577,7 @@ namespace pos.Master.Companies.zatca
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(801, 191);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(56, 17);
+            this.label21.Size = new System.Drawing.Size(53, 16);
             this.label21.TabIndex = 96;
             this.label21.Text = "رمز الدولة";
             // 
@@ -584,7 +586,7 @@ namespace pos.Master.Companies.zatca
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(795, 220);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(62, 17);
+            this.label20.Size = new System.Drawing.Size(66, 16);
             this.label20.TabIndex = 95;
             this.label20.Text = "نوع الفاتورة";
             // 
@@ -593,7 +595,7 @@ namespace pos.Master.Companies.zatca
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(739, 251);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(118, 17);
+            this.label19.Size = new System.Drawing.Size(118, 16);
             this.label19.TabIndex = 94;
             this.label19.Text = "العنوان الوطنى المختصر";
             // 
@@ -602,7 +604,7 @@ namespace pos.Master.Companies.zatca
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(792, 281);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(65, 17);
+            this.label18.Size = new System.Drawing.Size(64, 16);
             this.label18.TabIndex = 93;
             this.label18.Text = "اسم الصناعة";
             // 
@@ -611,7 +613,7 @@ namespace pos.Master.Companies.zatca
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(792, 71);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(65, 17);
+            this.label17.Size = new System.Drawing.Size(68, 16);
             this.label17.TabIndex = 92;
             this.label17.Text = "رقم السيريال";
             // 
@@ -620,7 +622,7 @@ namespace pos.Master.Companies.zatca
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(747, 11);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(110, 17);
+            this.label16.Size = new System.Drawing.Size(109, 16);
             this.label16.TabIndex = 91;
             this.label16.Text = "الرمز المتغير(6 ارقام)";
             // 
@@ -629,7 +631,7 @@ namespace pos.Master.Companies.zatca
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(769, 237);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(50, 17);
+            this.label27.Size = new System.Drawing.Size(51, 16);
             this.label27.TabIndex = 87;
             this.label27.Text = "اسم الحى";
             // 
@@ -638,7 +640,7 @@ namespace pos.Master.Companies.zatca
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(766, 179);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(53, 17);
+            this.label28.Size = new System.Drawing.Size(57, 16);
             this.label28.TabIndex = 85;
             this.label28.Text = "رقم المبنى";
             // 
@@ -656,7 +658,7 @@ namespace pos.Master.Companies.zatca
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(779, 150);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(40, 17);
+            this.label29.Size = new System.Drawing.Size(41, 16);
             this.label29.TabIndex = 83;
             this.label29.Text = "الشارع";
             // 
@@ -665,7 +667,7 @@ namespace pos.Master.Companies.zatca
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(780, 44);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(77, 17);
+            this.label15.Size = new System.Drawing.Size(82, 16);
             this.label15.TabIndex = 90;
             this.label15.Text = "أسم الحل التقنى";
             // 
@@ -691,7 +693,7 @@ namespace pos.Master.Companies.zatca
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(507, 11);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 17);
+            this.label11.Size = new System.Drawing.Size(35, 16);
             this.label11.TabIndex = 88;
             this.label11.Text = "OTP";
             // 
@@ -710,20 +712,20 @@ namespace pos.Master.Companies.zatca
             this.rdb_production.AutoSize = true;
             this.rdb_production.Location = new System.Drawing.Point(350, 11);
             this.rdb_production.Name = "rdb_production";
-            this.rdb_production.Size = new System.Drawing.Size(127, 21);
+            this.rdb_production.Size = new System.Drawing.Size(124, 20);
             this.rdb_production.TabIndex = 86;
             this.rdb_production.Text = "Production(فعلية)";
             this.rdb_production.UseVisualStyleBackColor = true;
             // 
-            // rdb_compliance
+            // rdb_sandbox
             // 
-            this.rdb_compliance.AutoSize = true;
-            this.rdb_compliance.Location = new System.Drawing.Point(173, 11);
-            this.rdb_compliance.Name = "rdb_compliance";
-            this.rdb_compliance.Size = new System.Drawing.Size(148, 21);
-            this.rdb_compliance.TabIndex = 85;
-            this.rdb_compliance.Text = "Compliance(مطورين)";
-            this.rdb_compliance.UseVisualStyleBackColor = true;
+            this.rdb_sandbox.AutoSize = true;
+            this.rdb_sandbox.Location = new System.Drawing.Point(173, 11);
+            this.rdb_sandbox.Name = "rdb_sandbox";
+            this.rdb_sandbox.Size = new System.Drawing.Size(82, 20);
+            this.rdb_sandbox.TabIndex = 85;
+            this.rdb_sandbox.Text = "Sandbox";
+            this.rdb_sandbox.UseVisualStyleBackColor = true;
             // 
             // txt_industry
             // 
@@ -786,6 +788,7 @@ namespace pos.Master.Companies.zatca
             this.csid_tabPage.Controls.Add(this.label25);
             this.csid_tabPage.Controls.Add(this.txt_publickey);
             this.csid_tabPage.Controls.Add(this.btn_secretkey_save);
+            this.csid_tabPage.Controls.Add(this.txt_compliance_request_id);
             this.csid_tabPage.Controls.Add(this.txt_secret);
             this.csid_tabPage.Controls.Add(this.label14);
             this.csid_tabPage.Controls.Add(this.label12);
@@ -814,7 +817,7 @@ namespace pos.Master.Companies.zatca
             this.csid_tabPage.Controls.Add(this.Btn_save);
             this.csid_tabPage.Controls.Add(this.btn_csid);
             this.csid_tabPage.Controls.Add(this.rdb_production);
-            this.csid_tabPage.Controls.Add(this.rdb_compliance);
+            this.csid_tabPage.Controls.Add(this.rdb_sandbox);
             this.csid_tabPage.Controls.Add(this.txt_industry);
             this.csid_tabPage.Controls.Add(this.txt_location);
             this.csid_tabPage.Controls.Add(this.txt_countryName);
@@ -895,7 +898,7 @@ namespace pos.Master.Companies.zatca
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(13, 281);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 17);
+            this.label9.Size = new System.Drawing.Size(53, 16);
             this.label9.TabIndex = 76;
             this.label9.Text = "industry";
             // 
@@ -904,7 +907,7 @@ namespace pos.Master.Companies.zatca
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(13, 251);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 17);
+            this.label8.Size = new System.Drawing.Size(54, 16);
             this.label8.TabIndex = 75;
             this.label8.Text = "location";
             // 
@@ -913,7 +916,7 @@ namespace pos.Master.Companies.zatca
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(13, 220);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 17);
+            this.label7.Size = new System.Drawing.Size(82, 16);
             this.label7.TabIndex = 74;
             this.label7.Text = "invoiceType";
             // 
@@ -922,7 +925,7 @@ namespace pos.Master.Companies.zatca
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(13, 191);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 17);
+            this.label6.Size = new System.Drawing.Size(87, 16);
             this.label6.TabIndex = 73;
             this.label6.Text = "countryName";
             // 
@@ -931,7 +934,7 @@ namespace pos.Master.Companies.zatca
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(13, 161);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 17);
+            this.label5.Size = new System.Drawing.Size(117, 16);
             this.label5.TabIndex = 72;
             this.label5.Text = "organizationName";
             // 
@@ -940,7 +943,7 @@ namespace pos.Master.Companies.zatca
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 131);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(148, 17);
+            this.label4.Size = new System.Drawing.Size(140, 16);
             this.label4.TabIndex = 71;
             this.label4.Text = "organizationUnitName";
             // 
@@ -949,7 +952,7 @@ namespace pos.Master.Companies.zatca
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 101);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 17);
+            this.label3.Size = new System.Drawing.Size(130, 16);
             this.label3.TabIndex = 70;
             this.label3.Text = "organizationIdentifier";
             // 
@@ -958,7 +961,7 @@ namespace pos.Master.Companies.zatca
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 17);
+            this.label2.Size = new System.Drawing.Size(93, 16);
             this.label2.TabIndex = 69;
             this.label2.Text = "Serial Number";
             // 
@@ -967,7 +970,7 @@ namespace pos.Master.Companies.zatca
             this.lable1.AutoSize = true;
             this.lable1.Location = new System.Drawing.Point(13, 44);
             this.lable1.Name = "lable1";
-            this.lable1.Size = new System.Drawing.Size(104, 17);
+            this.lable1.Size = new System.Drawing.Size(101, 16);
             this.lable1.TabIndex = 68;
             this.lable1.Text = "Common Name";
             // 
@@ -1001,7 +1004,7 @@ namespace pos.Master.Companies.zatca
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(160, 44);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(518, 17);
+            this.label39.Size = new System.Drawing.Size(492, 16);
             this.label39.TabIndex = 101;
             this.label39.Text = "This data will be used to create compliance documents to complete CSID process";
             // 
@@ -1010,7 +1013,7 @@ namespace pos.Master.Companies.zatca
             this.label38.AutoSize = true;
             this.label38.Location = new System.Drawing.Point(171, 14);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(495, 17);
+            this.label38.Size = new System.Drawing.Size(515, 16);
             this.label38.TabIndex = 100;
             this.label38.Text = "يرجى العلم ان هذة البيانات سوف تستخدم فى انشاء ملفات xml بغرض الامتثال والحصول عل" +
     "ى CSID النهائى";
@@ -1054,7 +1057,7 @@ namespace pos.Master.Companies.zatca
             this.label49.AutoSize = true;
             this.label49.Location = new System.Drawing.Point(16, 233);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(138, 17);
+            this.label49.Size = new System.Drawing.Size(131, 16);
             this.label49.TabIndex = 99;
             this.label49.Text = "neighbouhodd name";
             // 
@@ -1063,7 +1066,7 @@ namespace pos.Master.Companies.zatca
             this.label50.AutoSize = true;
             this.label50.Location = new System.Drawing.Point(17, 63);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(86, 17);
+            this.label50.Size = new System.Drawing.Size(81, 16);
             this.label50.TabIndex = 98;
             this.label50.Text = "Reg number";
             // 
@@ -1072,7 +1075,7 @@ namespace pos.Master.Companies.zatca
             this.label51.AutoSize = true;
             this.label51.Location = new System.Drawing.Point(17, 262);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(81, 17);
+            this.label51.Size = new System.Drawing.Size(78, 16);
             this.label51.TabIndex = 97;
             this.label51.Text = "postal code";
             // 
@@ -1081,7 +1084,7 @@ namespace pos.Master.Companies.zatca
             this.label57.AutoSize = true;
             this.label57.Location = new System.Drawing.Point(85, 28);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(79, 17);
+            this.label57.Size = new System.Drawing.Size(74, 16);
             this.label57.TabIndex = 91;
             this.label57.Text = "Buyer Data";
             // 
@@ -1090,7 +1093,7 @@ namespace pos.Master.Companies.zatca
             this.label52.AutoSize = true;
             this.label52.Location = new System.Drawing.Point(16, 204);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(70, 17);
+            this.label52.Size = new System.Drawing.Size(66, 16);
             this.label52.TabIndex = 96;
             this.label52.Text = "City name";
             // 
@@ -1099,7 +1102,7 @@ namespace pos.Master.Companies.zatca
             this.label53.AutoSize = true;
             this.label53.Location = new System.Drawing.Point(17, 178);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(81, 17);
+            this.label53.Size = new System.Drawing.Size(75, 16);
             this.label53.TabIndex = 95;
             this.label53.Text = "building no.";
             // 
@@ -1108,7 +1111,7 @@ namespace pos.Master.Companies.zatca
             this.label54.AutoSize = true;
             this.label54.Location = new System.Drawing.Point(17, 149);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(46, 17);
+            this.label54.Size = new System.Drawing.Size(42, 16);
             this.label54.TabIndex = 94;
             this.label54.Text = "Street";
             // 
@@ -1117,7 +1120,7 @@ namespace pos.Master.Companies.zatca
             this.label37.AutoSize = true;
             this.label37.Location = new System.Drawing.Point(764, 208);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(55, 17);
+            this.label37.Size = new System.Drawing.Size(57, 16);
             this.label37.TabIndex = 92;
             this.label37.Text = "اسم المدينة";
             // 
@@ -1135,7 +1138,7 @@ namespace pos.Master.Companies.zatca
             this.label40.AutoSize = true;
             this.label40.Location = new System.Drawing.Point(722, 63);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(97, 17);
+            this.label40.Size = new System.Drawing.Size(99, 16);
             this.label40.TabIndex = 90;
             this.label40.Text = "رقم السجل التجارى";
             // 
@@ -1144,7 +1147,7 @@ namespace pos.Master.Companies.zatca
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(749, 266);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(70, 17);
+            this.label26.Size = new System.Drawing.Size(69, 16);
             this.label26.TabIndex = 89;
             this.label26.Text = "الرمز البريدى";
             // 
@@ -1162,7 +1165,7 @@ namespace pos.Master.Companies.zatca
             this.label55.AutoSize = true;
             this.label55.Location = new System.Drawing.Point(17, 121);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(106, 17);
+            this.label55.Size = new System.Drawing.Size(102, 16);
             this.label55.TabIndex = 79;
             this.label55.Text = "Compnay name";
             this.label55.Click += new System.EventHandler(this.label48_Click);
@@ -1172,10 +1175,19 @@ namespace pos.Master.Companies.zatca
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(17, 92);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(78, 17);
+            this.label48.Size = new System.Drawing.Size(72, 16);
             this.label48.TabIndex = 79;
             this.label48.Text = "tax number";
             this.label48.Click += new System.EventHandler(this.label48_Click);
+            // 
+            // txt_compliance_request_id
+            // 
+            this.txt_compliance_request_id.BackColor = System.Drawing.SystemColors.Window;
+            this.txt_compliance_request_id.Location = new System.Drawing.Point(20, 700);
+            this.txt_compliance_request_id.Name = "txt_compliance_request_id";
+            this.txt_compliance_request_id.ReadOnly = true;
+            this.txt_compliance_request_id.Size = new System.Drawing.Size(710, 22);
+            this.txt_compliance_request_id.TabIndex = 112;
             // 
             // AutoGenerateCSR
             // 
@@ -1260,7 +1272,7 @@ namespace pos.Master.Companies.zatca
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btn_csid;
         private System.Windows.Forms.RadioButton rdb_production;
-        private System.Windows.Forms.RadioButton rdb_compliance;
+        private System.Windows.Forms.RadioButton rdb_sandbox;
         private System.Windows.Forms.TextBox txt_industry;
         private System.Windows.Forms.TextBox txt_location;
         private System.Windows.Forms.TextBox txt_countryName;
@@ -1307,5 +1319,6 @@ namespace pos.Master.Companies.zatca
         internal System.Windows.Forms.Label label56;
         internal System.Windows.Forms.Label label57;
         private System.Windows.Forms.Button Btn_save;
+        private System.Windows.Forms.TextBox txt_compliance_request_id;
     }
 }

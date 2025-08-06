@@ -1,5 +1,9 @@
-﻿using POS.BLL;
+﻿using com.sun.org.apache.bcel.@internal.generic;
+using pos.Master.Companies.zatca;
+using pos.Sales;
+using POS.BLL;
 using POS.Core;
+using POS.DLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +15,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using Zatca.EInvoice.SDK;
+using Zatca.EInvoice.SDK.Contracts.Models;
 
 
 namespace pos
@@ -95,7 +102,7 @@ namespace pos
             if (lang == "en-US")
             {
                 cmb_sale_type.SelectedValue = "Cash";
-                //cmb_invoice_subtype_code.SelectedValue = "02"; // 02 = Simplified invoice
+                cmb_invoice_subtype_code.SelectedValue = "02"; // 02 = Simplified invoice
             }
             else if (lang == "ar-SA")
             {
@@ -1450,9 +1457,9 @@ namespace pos
 
             dt.Rows.Add(_row_2);
 
-            //cmb_invoice_subtype_code.DisplayMember = "name";
-           // cmb_invoice_subtype_code.ValueMember = "id";
-           // cmb_invoice_subtype_code.DataSource = dt;
+            cmb_invoice_subtype_code.DisplayMember = "name";
+            cmb_invoice_subtype_code.ValueMember = "id";
+            cmb_invoice_subtype_code.DataSource = dt;
 
         }
 
@@ -2866,6 +2873,7 @@ namespace pos
                             sale_id = salesObj.InsertSales(sales_model_header, sales_model_detail);// for sales items
                             if (sale_id > 0)
                             {
+                                ZatcaHelper.SignInvoiceToZatca(invoice_no);
                                 MessageBox.Show(invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             }
@@ -2957,7 +2965,7 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        
         private void HistoryToolStripButton_Click(object sender, EventArgs e)
         {
             try
@@ -3095,6 +3103,9 @@ namespace pos
                 }
             }
         }
+
+        
+        
     }
-  
+
 }

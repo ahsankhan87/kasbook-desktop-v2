@@ -213,6 +213,8 @@ namespace POS.DLL
                         //cmd.Parameters.AddWithValue("@currency_id", obj.name);
                         cmd.Parameters.AddWithValue("@user_id", obj.user_id);
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@useZatcaEInvoice", obj.useZatcaEInvoice);
+
                         cmd.Parameters.AddWithValue("@OperationType", "2");
 
                         cmd.Parameters.AddWithValue("@cash_acc_id", obj.cash_acc_id);
@@ -272,6 +274,8 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@contact_no", obj.contact_no);
                         cmd.Parameters.AddWithValue("@subscriptionKey", obj.subscriptionKey);
                         cmd.Parameters.AddWithValue("@systemID", obj.systemID);
+                        cmd.Parameters.AddWithValue("@useZatcaEInvoice", obj.useZatcaEInvoice);
+
                         //cmd.Parameters.AddWithValue("@image", obj.image);
                         //cmd.Parameters.AddWithValue("@currency_id", obj.name);
                         //cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
