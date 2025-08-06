@@ -36,6 +36,7 @@
             this.lblExpiryDate = new System.Windows.Forms.Label();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.txt_address = new System.Windows.Forms.TextBox();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.txt_vat_no = new System.Windows.Forms.TextBox();
@@ -79,11 +80,24 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cmb_sales_acc_id = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txt_StreetName = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txt_buildingNumber = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_citySubdivisionName = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txt_cityName = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txt_postalCode = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txt_countryName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_save
@@ -138,6 +152,7 @@
             this.groupBox2.Controls.Add(this.chk_use_zatca_e_invoice);
             this.groupBox2.Controls.Add(this.txt_address);
             this.groupBox2.Controls.Add(this.txt_name);
+            this.groupBox2.Controls.Add(this.txt_countryName);
             this.groupBox2.Controls.Add(this.txt_vat_no);
             this.groupBox2.Controls.Add(this.txt_email);
             this.groupBox2.Controls.Add(this.txt_contact_no);
@@ -148,6 +163,7 @@
             this.groupBox2.Controls.Add(this.txt_id);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label27);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label4);
@@ -155,6 +171,12 @@
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // chk_use_zatca_e_invoice
+            // 
+            resources.ApplyResources(this.chk_use_zatca_e_invoice, "chk_use_zatca_e_invoice");
+            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
+            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
             // 
             // txt_address
             // 
@@ -439,17 +461,88 @@
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
             // 
-            // chk_use_zatca_e_invoice
+            // label22
             // 
-            resources.ApplyResources(this.chk_use_zatca_e_invoice, "chk_use_zatca_e_invoice");
-            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
-            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // txt_StreetName
+            // 
+            resources.ApplyResources(this.txt_StreetName, "txt_StreetName");
+            this.txt_StreetName.Name = "txt_StreetName";
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            // 
+            // txt_buildingNumber
+            // 
+            resources.ApplyResources(this.txt_buildingNumber, "txt_buildingNumber");
+            this.txt_buildingNumber.Name = "txt_buildingNumber";
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            // 
+            // txt_citySubdivisionName
+            // 
+            resources.ApplyResources(this.txt_citySubdivisionName, "txt_citySubdivisionName");
+            this.txt_citySubdivisionName.Name = "txt_citySubdivisionName";
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            // 
+            // txt_cityName
+            // 
+            resources.ApplyResources(this.txt_cityName, "txt_cityName");
+            this.txt_cityName.Name = "txt_cityName";
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            // 
+            // txt_postalCode
+            // 
+            resources.ApplyResources(this.txt_postalCode, "txt_postalCode");
+            this.txt_postalCode.Name = "txt_postalCode";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txt_buildingNumber);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.txt_postalCode);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.txt_cityName);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.txt_citySubdivisionName);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.txt_StreetName);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            // 
+            // txt_countryName
+            // 
+            resources.ApplyResources(this.txt_countryName, "txt_countryName");
+            this.txt_countryName.Name = "txt_countryName";
             // 
             // frm_updateCompany
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
@@ -467,6 +560,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -524,5 +619,18 @@
         private System.Windows.Forms.Label lblExpiryDate;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox chk_use_zatca_e_invoice;
+        private System.Windows.Forms.TextBox txt_cityName;
+        private System.Windows.Forms.TextBox txt_citySubdivisionName;
+        private System.Windows.Forms.TextBox txt_buildingNumber;
+        private System.Windows.Forms.TextBox txt_StreetName;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox txt_postalCode;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txt_countryName;
+        private System.Windows.Forms.Label label27;
     }
 }

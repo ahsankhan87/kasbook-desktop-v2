@@ -61,8 +61,8 @@ namespace pos.Master.Companies.zatca
                 string commonName = $"{prefix}-{vatNo}";
                 txt_commonName.Text = commonName;
                 txt_organizationName.Text = dr["name"].ToString();
-                txt_organizationUnitName.Text = "Riyadh Branch";
-                txt_countryName.Text = "SA";
+                txt_organizationUnitName.Text = UsersModal.logged_in_branch_name; // "Riyadh Branch";
+                txt_countryName.Text = dr["CountryName"].ToString(); 
                 txt_serialNumber.Text = $"1-{prefix}|2-{prefix}|3-" + Guid.NewGuid().ToString();
                 txt_organizationIdentifier.Text = vatNo;
                 txt_location.Text = dr["address"].ToString();

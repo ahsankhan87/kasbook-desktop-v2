@@ -66,6 +66,13 @@ namespace pos
                 txt_email.Text = dr["email"].ToString();
                 txt_vat_no.Text = dr["vat_no"].ToString();
                 chk_use_zatca_e_invoice.Checked = (string.IsNullOrEmpty(dr["useZatcaEInvoice"].ToString()) ? false : Convert.ToBoolean(dr["useZatcaEInvoice"]));
+                txt_buildingNumber.Text = dr["BuildingNumber"].ToString();
+                txt_citySubdivisionName.Text = dr["CitySubdivisionName"].ToString();
+                txt_StreetName.Text = dr["StreetName"].ToString();
+                txt_cityName.Text = dr["CityName"].ToString();
+                txt_postalCode.Text = dr["PostalCode"].ToString();
+                txt_countryName.Text = dr["CountryName"].ToString();
+
 
                 //HardwareIdentifier systemID_obj = new HardwareIdentifier();
                 //string systemID = systemID_obj.GetUniqueHardwareId();
@@ -101,14 +108,21 @@ namespace pos
         private void btn_save_Click(object sender, EventArgs e)
         {
 
-            if (txt_name.Text != string.Empty)
+            if (txt_name.Text != string.Empty && txt_vat_no.Text != string.Empty && txt_StreetName.Text != string.Empty &&
+                txt_cityName.Text != string.Empty && txt_postalCode.Text != string.Empty)
             {
                 CompaniesModal info = new CompaniesModal();
-                info.name = txt_name.Text;
-                info.vat_no = txt_vat_no.Text;
-                info.address = txt_address.Text;
-                info.contact_no = txt_contact_no.Text;
-                info.email = txt_email.Text;
+                info.name = txt_name.Text.Trim();
+                info.vat_no = txt_vat_no.Text.Trim();
+                info.address = txt_address.Text.Trim();
+                info.contact_no = txt_contact_no.Text.Trim();
+                info.email = txt_email.Text.Trim();
+                info.streetName = txt_StreetName.Text.Trim();
+                info.cityName = txt_cityName.Text.Trim();
+                info.buildingNumber = txt_buildingNumber.Text.Trim();
+                info.citySubdivisionName = txt_citySubdivisionName.Text.Trim();
+                info.postalCode = txt_postalCode.Text.Trim();
+                info.countryName = txt_countryName.Text.Trim();
                 info.useZatcaEInvoice = chk_use_zatca_e_invoice.Checked;
                 info.tax_acc_id = Convert.ToInt32(cmb_tax_acc_id.SelectedValue.ToString());
                 info.cash_acc_id = Convert.ToInt32(cmb_cash_acc_id.SelectedValue.ToString());

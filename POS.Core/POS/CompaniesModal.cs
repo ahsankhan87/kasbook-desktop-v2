@@ -24,6 +24,16 @@ namespace POS.Core
         
         public string image{ get; set; }
 
+        public string cityName { get; set; }
+
+        public string countryName { get; set; }
+
+        public string streetName { get; set; }
+        public string postalCode { get; set; }
+        public string buildingNumber { get; set; }
+        public string citySubdivisionName { get; set; }
+
+
         public int branch_id { get; set; }
 
         public int user_id { get; set; }

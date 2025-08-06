@@ -8,6 +8,7 @@ using POS.DLL;
 using System.IO;
 using System.Windows.Forms;
 using POS.Core;
+using POS.BLL;
 
 namespace pos.Master.Companies.zatca
 {
@@ -140,22 +141,51 @@ namespace pos.Master.Companies.zatca
         private void AddSupplierParty(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
             //seller
+            string organizationName = "";
+            string organizationUnitName = UsersModal.logged_in_branch_name;
+            string countryName = "SA";
+            string organizationIdentifier = "";
+            string location = "";
+            string StreetName = "";
+            string BuildingNumber = "";
+            string CitySubdivisionName = "";
+            string CityName = "";
+            string PostalCode = "";
+
+            GeneralBLL objBLL = new GeneralBLL();
+            string keyword = "TOP 1 *";
+            string table = "pos_companies";
+            DataTable companies_dt = objBLL.GetRecord(keyword, table);
+            foreach (DataRow dr in companies_dt.Rows)
+            {
+                organizationName = dr["name"].ToString(); ;
+                countryName = "SA";
+                organizationIdentifier = dr["vat_no"].ToString(); ;
+                location = dr["address"].ToString();
+                StreetName = dr["StreetName"].ToString();
+                BuildingNumber = dr["BuildingNumber"].ToString();
+                CitySubdivisionName = dr["CitySubdivisionName"].ToString();
+                CityName = dr["CityName"].ToString();
+                PostalCode = dr["PostalCode"].ToString();
+
+            }
+
             XmlElement supplierParty = xmlDoc.CreateElement("cac", "AccountingSupplierParty", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             XmlElement party = xmlDoc.CreateElement("cac", "Party", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 
             // Party identification (CRN - Commercial Registration Number)
             XmlElement partyIdentification = xmlDoc.CreateElement("cac", "PartyIdentification", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            XmlElement id = AddElement(xmlDoc, partyIdentification, "cbc:ID", "1010010000");
+            XmlElement id = AddElement(xmlDoc, partyIdentification, "cbc:ID", organizationIdentifier);
             id.SetAttribute("schemeID", "CRN");
             party.AppendChild(partyIdentification);
 
             // Postal address
             XmlElement postalAddress = xmlDoc.CreateElement("cac", "PostalAddress", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, postalAddress, "cbc:StreetName", "شارع الامير نايف");
-            AddElement(xmlDoc, postalAddress, "cbc:BuildingNumber", "3724");
-            AddElement(xmlDoc, postalAddress, "cbc:CitySubdivisionName", "جدة");
-            AddElement(xmlDoc, postalAddress, "cbc:CityName", "Alfalah");
-            AddElement(xmlDoc, postalAddress, "cbc:PostalZone", "15385");
+            AddElement(xmlDoc, postalAddress, "cbc:StreetName", StreetName);
+            AddElement(xmlDoc, postalAddress, "cbc:BuildingNumber", BuildingNumber);
+            AddElement(xmlDoc, postalAddress, "cbc:CitySubdivisionName", CitySubdivisionName);
+            AddElement(xmlDoc, postalAddress, "cbc:CityName", CityName);
+            AddElement(xmlDoc, postalAddress, "cbc:PostalZone", PostalCode);
             XmlElement country = xmlDoc.CreateElement("cac", "Country", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             AddElement(xmlDoc, country, "cbc:IdentificationCode", "SA");
             postalAddress.AppendChild(country);
@@ -163,7 +193,7 @@ namespace pos.Master.Companies.zatca
 
             // Tax scheme
             XmlElement partyTaxScheme = xmlDoc.CreateElement("cac", "PartyTaxScheme", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, partyTaxScheme, "cbc:CompanyID", "311123711600003");
+            AddElement(xmlDoc, partyTaxScheme, "cbc:CompanyID", organizationIdentifier);
             XmlElement taxScheme = xmlDoc.CreateElement("cac", "TaxScheme", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             AddElement(xmlDoc, taxScheme, "cbc:ID", "VAT");
             partyTaxScheme.AppendChild(taxScheme);
@@ -171,7 +201,7 @@ namespace pos.Master.Companies.zatca
 
             // Legal entity
             XmlElement partyLegalEntity = xmlDoc.CreateElement("cac", "PartyLegalEntity", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, partyLegalEntity, "cbc:RegistrationName", "شركة التوريد السريع");
+            AddElement(xmlDoc, partyLegalEntity, "cbc:RegistrationName", organizationName);
             party.AppendChild(partyLegalEntity);
 
             supplierParty.AppendChild(party);

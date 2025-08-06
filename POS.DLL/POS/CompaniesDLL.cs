@@ -215,6 +215,14 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
                         cmd.Parameters.AddWithValue("@useZatcaEInvoice", obj.useZatcaEInvoice);
 
+                        cmd.Parameters.AddWithValue("@StreetName", obj.streetName);
+                        cmd.Parameters.AddWithValue("@CityName", obj.cityName);
+                        cmd.Parameters.AddWithValue("@BuildingNumber", obj.buildingNumber);
+                        cmd.Parameters.AddWithValue("@CitySubdivisionName", obj.citySubdivisionName);
+                        cmd.Parameters.AddWithValue("@PostalCode", obj.postalCode);
+                        cmd.Parameters.AddWithValue("@CountryName", obj.countryName);
+
+
                         cmd.Parameters.AddWithValue("@OperationType", "2");
 
                         cmd.Parameters.AddWithValue("@cash_acc_id", obj.cash_acc_id);
