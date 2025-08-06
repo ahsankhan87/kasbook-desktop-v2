@@ -143,7 +143,7 @@ namespace pos.Master.Companies.zatca
             //seller
             string organizationName = "";
             string organizationUnitName = UsersModal.logged_in_branch_name;
-            string countryName = "SA";
+            string countryName = "";
             string organizationIdentifier = "";
             string location = "";
             string StreetName = "";
@@ -158,9 +158,9 @@ namespace pos.Master.Companies.zatca
             DataTable companies_dt = objBLL.GetRecord(keyword, table);
             foreach (DataRow dr in companies_dt.Rows)
             {
-                organizationName = dr["name"].ToString(); ;
-                countryName = "SA";
-                organizationIdentifier = dr["vat_no"].ToString(); ;
+                organizationName = dr["name"].ToString();
+                countryName = dr["CountryName"].ToString();
+                organizationIdentifier = dr["vat_no"].ToString();
                 location = dr["address"].ToString();
                 StreetName = dr["StreetName"].ToString();
                 BuildingNumber = dr["BuildingNumber"].ToString();
