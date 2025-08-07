@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
 using POS.Core;
+using pos.Master.Companies.zatca;
 
 namespace pos
 {
@@ -46,10 +47,13 @@ namespace pos
         {
             //load_sales_return_grid(sale_id);
             Get_AccountID_From_Company();
+            LoadReturnReasonsDDL();
+            cmbReturnReason.SelectedIndex = 0; // Set default selection to the first item
             autoCompleteInvoice();
             txt_invoice_no.Focus();
             Get_user_total_commission();
             LoadSalesReturnGrid();
+
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -103,8 +107,19 @@ namespace pos
             {
                 if (grid_sales_return.Rows.Count > 0)
                 {
-                    
+                    string returnReasonCode = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Key;
+                    string returnReason = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Value;
+
+                    string prev_invoice_no = txt_invoice_no.Text.Trim();
+                    DateTime prev_invoice_date = Convert.ToDateTime(sales_dt.Rows[0]["sale_date"].ToString()).Date;
                     string new_invoice_no = GetMAXInvoiceNo();
+                    string invoice_subtype_code = sales_dt.Rows[0]["invoice_subtype_code"].ToString();
+                    
+                    if (string.IsNullOrEmpty(new_invoice_no))
+                    {
+                        MessageBox.Show("No invoice number found, please check your settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
                     double total_tax = 0;
                     double total_amount = 0;
@@ -113,7 +128,7 @@ namespace pos
                     double sub_total = 0;
 
                     int employee_id = 0;
-                    string description = "Sale Return Inv #:"+ txt_invoice_no.Text;
+                    string description = "Sale Return Prev Inv #:"+ prev_invoice_no+" Prev Date: "+prev_invoice_date.Date;
                     
                     DateTime sale_date = DateTime.Now;
 
@@ -153,6 +168,7 @@ namespace pos
                             customer_id = customer_id,
                             employee_id = employee_id,
                             invoice_no = new_invoice_no,
+                            invoice_subtype = invoice_subtype_code,
                             total_amount = total_amount,
                             total_tax = total_tax,
                             total_discount = total_discount,
@@ -165,7 +181,10 @@ namespace pos
                             //payment_method_id = payment_method_id,
                             account = "Return",
                             //is_return = false,
-                            old_invoice_no = txt_invoice_no.Text,
+                            old_invoice_no = prev_invoice_no,
+                            previousInvoiceDate = prev_invoice_date,
+                            returnReasonCode = returnReasonCode,
+                            returnReason = returnReason,
 
                             total_cost_amount = total_cost_amount,
                             cash_account_id = cash_account_id,
@@ -232,6 +251,9 @@ namespace pos
 
                     if (sale_id > 0)
                     {
+                        //sign the credit note invoice to ZATCA
+                        ZatcaHelper.SignCreditNoteToZatca(new_invoice_no,prev_invoice_no,prev_invoice_date);
+
                         MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grid_sales_return.DataSource = null;
                         grid_sales_return.Rows.Clear();
@@ -471,6 +493,26 @@ namespace pos
                 return;
             }
         }
+        private void LoadReturnReasonsDDL()
+        {
+            // Example reasons; replace with your actual codes and reasons
+            var reasons = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("01", "Goods returned"),
+                new KeyValuePair<string, string>("02", "Invoice correction"),
+                new KeyValuePair<string, string>("03", "Service not provided"),
+                new KeyValuePair<string, string>("04", "Duplicate invoice"),
+                new KeyValuePair<string, string>("05", "Incorrect amount"),
+                new KeyValuePair<string, string>("06", "Cancellation of order"),
+                new KeyValuePair<string, string>("07", "Price adjustment"),
+                new KeyValuePair<string, string>("08", "Damaged goods"),
+                new KeyValuePair<string, string>("09", "Incorrect tax calculation"),
+                new KeyValuePair<string, string>("10", "Other")
+            };
 
+            cmbReturnReason.DataSource = new BindingSource(reasons, null);
+            cmbReturnReason.DisplayMember = "Value";
+            cmbReturnReason.ValueMember = "Key";
+        }
     }
 }

@@ -1204,7 +1204,11 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@account", sale_header.account);
                             cmd.Parameters.AddWithValue("@is_return", sale_header.is_return);
                             cmd.Parameters.AddWithValue("@description", sale_header.description);
+
                             cmd.Parameters.AddWithValue("@old_invoice_no", sale_header.old_invoice_no);
+                            cmd.Parameters.AddWithValue("@previousInvoiceDate", sale_header.previousInvoiceDate);
+                            cmd.Parameters.AddWithValue("@returnReasonCode", sale_header.returnReasonCode);
+                            cmd.Parameters.AddWithValue("@returnReason", sale_header.returnReason);
                             //cmd.Parameters.AddWithValue("@estimate_status", sale_header.estimate_status);
                             //cmd.Parameters.AddWithValue("@estimate_invoice_no", sale_header.estimate_invoice_no);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);

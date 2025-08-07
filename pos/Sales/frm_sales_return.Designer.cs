@@ -43,9 +43,12 @@
             this.btn_search = new System.Windows.Forms.Button();
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbReturnReason = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity_sold = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +64,7 @@
             this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_subtype_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -85,6 +89,7 @@
             this.id,
             this.chk,
             this.invoice_no,
+            this.sale_date,
             this.item_code,
             this.product_name,
             this.quantity_sold,
@@ -99,7 +104,8 @@
             this.tax_rate,
             this.item_id,
             this.packet_qty,
-            this.item_number});
+            this.item_number,
+            this.invoice_subtype_code});
             this.grid_sales_return.Name = "grid_sales_return";
             this.grid_sales_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_sales_return.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_sales_return_EditingControlShowing);
@@ -115,10 +121,12 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.cmbReturnReason);
             this.panel2.Controls.Add(this.txt_close);
             this.panel2.Controls.Add(this.btn_return);
             this.panel2.Controls.Add(this.btn_search);
             this.panel2.Controls.Add(this.txt_invoice_no);
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
@@ -148,6 +156,18 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Name = "label1";
             // 
+            // cmbReturnReason
+            // 
+            this.cmbReturnReason.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
+            this.cmbReturnReason.Name = "cmbReturnReason";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Name = "label2";
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -167,6 +187,12 @@
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
+            // 
+            // sale_date
+            // 
+            this.sale_date.DataPropertyName = "sale_date";
+            resources.ApplyResources(this.sale_date, "sale_date");
+            this.sale_date.Name = "sale_date";
             // 
             // item_code
             // 
@@ -297,6 +323,12 @@
             resources.ApplyResources(this.item_number, "item_number");
             this.item_number.Name = "item_number";
             // 
+            // invoice_subtype_code
+            // 
+            this.invoice_subtype_code.DataPropertyName = "invoice_subtype_code";
+            resources.ApplyResources(this.invoice_subtype_code, "invoice_subtype_code");
+            this.invoice_subtype_code.Name = "invoice_subtype_code";
+            // 
             // frm_sales_return
             // 
             resources.ApplyResources(this, "$this");
@@ -327,9 +359,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.Button btn_return;
+        private System.Windows.Forms.ComboBox cmbReturnReason;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sale_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity_sold;
@@ -345,6 +380,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoice_subtype_code;
     }
 }
 

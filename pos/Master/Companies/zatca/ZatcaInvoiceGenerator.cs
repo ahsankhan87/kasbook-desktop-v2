@@ -1,14 +1,16 @@
-﻿using System;
-using System.Data;
-using System.Xml;
-using System.Text;
-using System.Globalization;
-using System.Data.SqlClient;
-using POS.DLL;
-using System.IO;
-using System.Windows.Forms;
-using POS.Core;
+﻿using pos.Sales;
 using POS.BLL;
+using POS.Core;
+using POS.DLL;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml;
+using static java.security.cert.CertPathValidatorException;
 
 namespace pos.Master.Companies.zatca
 {
@@ -100,7 +102,7 @@ namespace pos.Master.Companies.zatca
             else
                 invoiceTypeCode = "388"; // 
 
-            string invoiceTypeName = subtype == "02" ? "0200000" : "0100000";
+            string invoiceTypeName = (subtype == "02" ? "0200000" : "0100000");
 
             // Invoice type code (388 for standard invoice)
             XmlElement invoiceTypeCodeXML = AddElement(xmlDoc, parent, "cbc:InvoiceTypeCode", invoiceTypeCode);
@@ -250,33 +252,44 @@ namespace pos.Master.Companies.zatca
             AddElement(xmlDoc, delivery, "cbc:ActualDeliveryDate", deliveryDate.ToString("yyyy-MM-dd"));
             parent.AppendChild(delivery);
         }
-
-        private void AddPaymentMeans(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
+        private void AddPaymentMeans(XmlDocument xmlDoc, XmlElement parent, DataRow invoice, string invoiceTypeCode="")
         {
             XmlElement paymentMeans = xmlDoc.CreateElement("cac", "PaymentMeans", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 
-            string paymentMethod = invoice["sale_type"].ToString();
+            string paymentMethod = invoice.Table.Columns.Contains("sale_type") ? invoice["sale_type"].ToString() : "Cash";
             string paymentMeansCode = paymentMethod == "Cash" ? "10" : "30"; // 10=Cash, 30=Credit
 
-            AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
-
-            if (paymentMeansCode == "30") // Credit
+            // For credit/debit notes, use code 42 and add InstructionNote for reason
+            //string invoiceTypeCode = invoice.Table.Columns.Contains("invoice_type_code") ? invoice["invoice_type_code"].ToString() : "388";
+            if (invoiceTypeCode == "381" || invoiceTypeCode == "383") // 381=Credit Note, 383=Debit Note
             {
-                XmlElement paymentTerms = xmlDoc.CreateElement("cac", "PaymentTerms", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                paymentMeansCode = "42"; // ZATCA code for credit/debit note
+                                         // Get the reason from the DataRow, or set a default if not present
+                
+                string reason = invoice.Table.Columns.Contains("returnReason") ? invoice["returnReason"].ToString() : "Reason for issuing credit/debit note";
+                //string reason = "Reason for issuing credit/debit note"; // Default reason, can be customized
+                AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
+                AddElement(xmlDoc, paymentMeans, "cbc:InstructionNote", reason);
+            }
+            else
+            {
+                AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
 
-                // Add required elements
-                AddElement(xmlDoc, paymentTerms, "cbc:Note", "Payment due within 30 days");
-                AddElement(xmlDoc, paymentTerms, "cbc:PaymentDueDate",
-                    DateTime.Now.AddDays(30).ToString("yyyy-MM-dd"));
-
-                paymentMeans.AppendChild(paymentTerms);
+                if (paymentMeansCode == "30") // Credit
+                {
+                    XmlElement paymentTerms = xmlDoc.CreateElement("cac", "PaymentTerms", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                    AddElement(xmlDoc, paymentTerms, "cbc:Note", "Payment due within 30 days");
+                    AddElement(xmlDoc, paymentTerms, "cbc:PaymentDueDate", DateTime.Now.AddDays(30).ToString("yyyy-MM-dd"));
+                    paymentMeans.AppendChild(paymentTerms);
+                }
             }
 
             parent.AppendChild(paymentMeans);
         }
+        
         private void AddAllowanceCharge(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
-            decimal discount = Convert.ToDecimal(invoice["discount_value"]);
+            decimal discount = Math.Abs(Convert.ToDecimal(invoice["discount_value"]));
 
             if (discount > 0)
             {
@@ -308,16 +321,16 @@ namespace pos.Master.Companies.zatca
 
             // First TaxTotal (summary)
             XmlElement taxTotal1 = xmlDoc.CreateElement("cac", "TaxTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, taxTotal1, "cbc:TaxAmount", taxAmount.ToString("F2"), "SAR");
+            AddElement(xmlDoc, taxTotal1, "cbc:TaxAmount", Math.Abs(taxAmount).ToString("F2"), "SAR");
             parent.AppendChild(taxTotal1);
 
             // Second TaxTotal (detailed)
             XmlElement taxTotal2 = xmlDoc.CreateElement("cac", "TaxTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, taxTotal2, "cbc:TaxAmount", taxAmount.ToString("F2"), "SAR");
+            AddElement(xmlDoc, taxTotal2, "cbc:TaxAmount", Math.Abs(taxAmount).ToString("F2"), "SAR");
 
             XmlElement taxSubtotal = xmlDoc.CreateElement("cac", "TaxSubtotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, taxSubtotal, "cbc:TaxableAmount", taxableAmount.ToString("F2"), "SAR");
-            AddElement(xmlDoc, taxSubtotal, "cbc:TaxAmount", taxAmount.ToString("F2"), "SAR");
+            AddElement(xmlDoc, taxSubtotal, "cbc:TaxableAmount", Math.Abs(taxableAmount).ToString("F2"), "SAR");
+            AddElement(xmlDoc, taxSubtotal, "cbc:TaxAmount", Math.Abs(taxAmount).ToString("F2"), "SAR");
 
             XmlElement taxCategory = xmlDoc.CreateElement("cac", "TaxCategory", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             XmlElement categoryId = AddElement(xmlDoc, taxCategory, "cbc:ID", "S");
@@ -343,12 +356,12 @@ namespace pos.Master.Companies.zatca
             decimal payableAmount = lineTotal + taxAmount;
 
             XmlElement monetaryTotal = xmlDoc.CreateElement("cac", "LegalMonetaryTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, monetaryTotal, "cbc:LineExtensionAmount", lineTotal.ToString("F2"), "SAR");
-            AddElement(xmlDoc, monetaryTotal, "cbc:TaxExclusiveAmount", lineTotal.ToString("F2"), "SAR");
-            AddElement(xmlDoc, monetaryTotal, "cbc:TaxInclusiveAmount", payableAmount.ToString("F2"), "SAR");
-            AddElement(xmlDoc, monetaryTotal, "cbc:AllowanceTotalAmount", discount.ToString("F2"), "SAR");
+            AddElement(xmlDoc, monetaryTotal, "cbc:LineExtensionAmount", Math.Abs(lineTotal).ToString("F2"), "SAR");
+            AddElement(xmlDoc, monetaryTotal, "cbc:TaxExclusiveAmount", Math.Abs(lineTotal).ToString("F2"), "SAR");
+            AddElement(xmlDoc, monetaryTotal, "cbc:TaxInclusiveAmount", Math.Abs(payableAmount).ToString("F2"), "SAR");
+            AddElement(xmlDoc, monetaryTotal, "cbc:AllowanceTotalAmount", Math.Abs(discount).ToString("F2"), "SAR");
             AddElement(xmlDoc, monetaryTotal, "cbc:PrepaidAmount", "0.00", "SAR");
-            AddElement(xmlDoc, monetaryTotal, "cbc:PayableAmount", payableAmount.ToString("F2"), "SAR");
+            AddElement(xmlDoc, monetaryTotal, "cbc:PayableAmount", Math.Abs(payableAmount).ToString("F2"), "SAR");
             parent.AppendChild(monetaryTotal);
         }
 
@@ -365,19 +378,19 @@ namespace pos.Master.Companies.zatca
                 decimal taxAmount = Convert.ToDecimal(item["vat"]);
 
                 XmlElement invoiceLine = xmlDoc.CreateElement("cac", "InvoiceLine", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-                AddElement(xmlDoc, invoiceLine, "cbc:ID", lineNumber.ToString());
+                AddElement(xmlDoc, invoiceLine, "cbc:ID", Math.Abs(lineNumber).ToString());
 
                 // Invoiced quantity
-                XmlElement invoicedQuantity = AddElement(xmlDoc, invoiceLine, "cbc:InvoicedQuantity", quantity.ToString("F6"));
+                XmlElement invoicedQuantity = AddElement(xmlDoc, invoiceLine, "cbc:InvoicedQuantity", Math.Abs(quantity).ToString("F6"));
                 invoicedQuantity.SetAttribute("unitCode", "PCE"); // PCE = pieces
 
                 // Line extension amount
-                AddElement(xmlDoc, invoiceLine, "cbc:LineExtensionAmount", lineTotal.ToString("F2"), "SAR");
+                AddElement(xmlDoc, invoiceLine, "cbc:LineExtensionAmount", Math.Abs(lineTotal).ToString("F2"), "SAR");
 
                 // Tax total for line
                 XmlElement lineTaxTotal = xmlDoc.CreateElement("cac", "TaxTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-                AddElement(xmlDoc, lineTaxTotal, "cbc:TaxAmount", taxAmount.ToString("F2"), "SAR");
-                AddElement(xmlDoc, lineTaxTotal, "cbc:RoundingAmount", (lineTotal + taxAmount).ToString("F2"), "SAR");
+                AddElement(xmlDoc, lineTaxTotal, "cbc:TaxAmount", Math.Abs(taxAmount).ToString("F2"), "SAR");
+                AddElement(xmlDoc, lineTaxTotal, "cbc:RoundingAmount", Math.Abs(lineTotal + taxAmount).ToString("F2"), "SAR");
                 invoiceLine.AppendChild(lineTaxTotal);
 
                 // Item information
@@ -397,7 +410,7 @@ namespace pos.Master.Companies.zatca
 
                 // Price information
                 XmlElement priceElement = xmlDoc.CreateElement("cac", "Price", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-                AddElement(xmlDoc, priceElement, "cbc:PriceAmount", price.ToString("F2"), "SAR");
+                AddElement(xmlDoc, priceElement, "cbc:PriceAmount", Math.Abs(price).ToString("F2"), "SAR");
                 invoiceLine.AppendChild(priceElement);
 
                 parent.AppendChild(invoiceLine);
@@ -434,103 +447,6 @@ namespace pos.Master.Companies.zatca
             // Create UBLExtensions element
             XmlElement ublExtensions = xmlDoc.CreateElement("ext", "UBLExtensions", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
 
-            //// Create UBLExtension
-            //XmlElement ublExtension = xmlDoc.CreateElement("ext", "UBLExtension", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
-
-            //// Create ExtensionURI
-            //XmlElement extensionURI = xmlDoc.CreateElement("ext", "ExtensionURI", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
-            //extensionURI.InnerText = "urn:oasis:names:specification:ubl:dsig:enveloped:xades";
-            //ublExtension.AppendChild(extensionURI);
-
-            //// Create ExtensionContent with proper structure
-            //XmlElement extensionContent = xmlDoc.CreateElement("ext", "ExtensionContent", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
-
-            //// Create UBLDocumentSignatures with all required namespaces
-            //XmlElement signatureExtension = xmlDoc.CreateElement("sig", "UBLDocumentSignatures", "urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2");
-            //signatureExtension.SetAttribute("xmlns:sig", "urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2");
-            //signatureExtension.SetAttribute("xmlns:sac", "urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2");
-            //signatureExtension.SetAttribute("xmlns:sbc", "urn:oasis:names:specification:ubl:schema:xsd:SignatureBasicComponents-2");
-            //signatureExtension.SetAttribute("xmlns:ds", "http://www.w3.org/2000/09/xmldsig#");
-
-            //// Create SignatureInformation
-            //XmlElement signatureInfo = xmlDoc.CreateElement("sac", "SignatureInformation", "urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2");
-
-            //// Add ID element
-            //XmlElement idElement = xmlDoc.CreateElement("cbc", "ID", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
-            //idElement.InnerText = "urn:oasis:names:specification:ubl:signature:1";
-            //signatureInfo.AppendChild(idElement);
-
-            //// Add ReferencedSignatureID with correct namespace
-            //XmlElement refSignatureId = xmlDoc.CreateElement("sbc", "ReferencedSignatureID", "urn:oasis:names:specification:ubl:schema:xsd:SignatureBasicComponents-2");
-            //refSignatureId.InnerText = "urn:oasis:names:specification:ubl:signature:Invoice";
-            //signatureInfo.AppendChild(refSignatureId);
-
-            //// Add minimal signature placeholder
-            //XmlElement dsSignature = xmlDoc.CreateElement("ds", "Signature", "http://www.w3.org/2000/09/xmldsig#");
-            //dsSignature.SetAttribute("Id", "signature");
-
-            //// Add minimal required signature structure
-            //XmlElement signedInfo = xmlDoc.CreateElement("ds", "SignedInfo", "http://www.w3.org/2000/09/xmldsig#");
-
-            //// CanonicalizationMethod
-            //XmlElement canonMethod = xmlDoc.CreateElement("ds", "CanonicalizationMethod", "http://www.w3.org/2000/09/xmldsig#");
-            //canonMethod.SetAttribute("Algorithm", "http://www.w3.org/2006/12/xml-c14n11");
-            //signedInfo.AppendChild(canonMethod);
-
-            //// SignatureMethod
-            //XmlElement sigMethod = xmlDoc.CreateElement("ds", "SignatureMethod", "http://www.w3.org/2000/09/xmldsig#");
-            //sigMethod.SetAttribute("Algorithm", "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256");
-            //signedInfo.AppendChild(sigMethod);
-
-            //// Reference
-            //XmlElement reference = xmlDoc.CreateElement("ds", "Reference", "http://www.w3.org/2000/09/xmldsig#");
-            //reference.SetAttribute("Id", "invoiceSignedData");
-            //reference.SetAttribute("URI", "");
-
-            //// Transforms
-            //XmlElement transforms = xmlDoc.CreateElement("ds", "Transforms", "http://www.w3.org/2000/09/xmldsig#");
-
-            //// Add required transforms
-            //AddTransform(xmlDoc, transforms, "http://www.w3.org/TR/1999/REC-xpath-19991116", "not(//ancestor-or-self::ext:UBLExtensions)");
-            //AddTransform(xmlDoc, transforms, "http://www.w3.org/TR/1999/REC-xpath-19991116", "not(//ancestor-or-self::cac:Signature)");
-            //AddTransform(xmlDoc, transforms, "http://www.w3.org/TR/1999/REC-xpath-19991116", "not(//ancestor-or-self::cac:AdditionalDocumentReference[cbc:ID='QR'])");
-            //AddTransform(xmlDoc, transforms, "http://www.w3.org/2006/12/xml-c14n11", null);
-
-            //reference.AppendChild(transforms);
-
-            //// DigestMethod
-            //XmlElement digestMethod = xmlDoc.CreateElement("ds", "DigestMethod", "http://www.w3.org/2000/09/xmldsig#");
-            //digestMethod.SetAttribute("Algorithm", "http://www.w3.org/2001/04/xmlenc#sha256");
-            //reference.AppendChild(digestMethod);
-
-            //// DigestValue (placeholder)
-            //XmlElement digestValue = xmlDoc.CreateElement("ds", "DigestValue", "http://www.w3.org/2000/09/xmldsig#");
-            //digestValue.InnerText = "20+7kdZgFAtIBs6vlOThRd/i8EXnKFO6pNfl+4o/dzk=";
-            //reference.AppendChild(digestValue);
-
-            //signedInfo.AppendChild(reference);
-            //dsSignature.AppendChild(signedInfo);
-
-            //// SignatureValue (placeholder)
-            //XmlElement sigValue = xmlDoc.CreateElement("ds", "SignatureValue", "http://www.w3.org/2000/09/xmldsig#");
-            //sigValue.InnerText = "MEUCIBxyR8rc4K8728wdSF4XSDqPs+rIL+3TFh9m+aNxQPtSAiEA6cHapItvp13yMSu66NbOg2CpomHwUSnYJ9h6uGQ65aY=";
-            //dsSignature.AppendChild(sigValue);
-
-            //// KeyInfo (placeholder)
-            //XmlElement keyInfo = xmlDoc.CreateElement("ds", "KeyInfo", "http://www.w3.org/2000/09/xmldsig#");
-            //XmlElement x509Data = xmlDoc.CreateElement("ds", "X509Data", "http://www.w3.org/2000/09/xmldsig#");
-            //XmlElement x509Cert = xmlDoc.CreateElement("ds", "X509Certificate", "http://www.w3.org/2000/09/xmldsig#");
-            //x509Cert.InnerText = certBase64;
-
-            //x509Data.AppendChild(x509Cert);
-            //keyInfo.AppendChild(x509Data);
-            //dsSignature.AppendChild(keyInfo);
-
-            //signatureInfo.AppendChild(dsSignature);
-            //signatureExtension.AppendChild(signatureInfo);
-            //extensionContent.AppendChild(signatureExtension);
-            //ublExtension.AppendChild(extensionContent);
-            //ublExtensions.AppendChild(ublExtension);
             parent.AppendChild(ublExtensions);
         }
 
@@ -573,9 +489,24 @@ namespace pos.Master.Companies.zatca
             DateTime issueDate = Convert.ToDateTime(invoiceHeader.Rows[0]["sale_time"]);
             AddElement(xmlDoc, invoiceElement, "cbc:IssueDate", issueDate.ToString("yyyy-MM-dd"));
             AddElement(xmlDoc, invoiceElement, "cbc:IssueTime", issueDate.ToString("HH:mm:ss"));
-            XmlElement invoiceTypeCodeXML = AddElement(xmlDoc, invoiceElement, "cbc:InvoiceTypeCode", "381");
-            invoiceTypeCodeXML.SetAttribute("name", "0300000"); // Credit Note
 
+            string accountType = invoiceHeader.Rows[0].Table.Columns.Contains("account") ? invoiceHeader.Rows[0]["account"].ToString().ToLower() : "sale";
+            string subtype = invoiceHeader.Rows[0].Table.Columns.Contains("invoice_subtype_code") ? invoiceHeader.Rows[0]["invoice_subtype_code"].ToString() : "01"; // 01: Standard, 02: Simplified
+
+            //string invoiceTypeCode = "388"; // Default: Tax Invoice
+            //if (accountType == "return")
+            //    invoiceTypeCode = "381"; // Credit Note
+            //else if (accountType == "sale")
+            //    invoiceTypeCode = "388"; // Standard Sale
+            //else
+            //    invoiceTypeCode = "388"; // 
+
+            string invoiceTypeName = (subtype == "02" ? "0200000" : "0100000");
+
+            XmlElement invoiceTypeCodeXML = AddElement(xmlDoc, invoiceElement, "cbc:InvoiceTypeCode", "381");
+            invoiceTypeCodeXML.SetAttribute("name", invoiceTypeName); // Credit Note
+                                                                      // Assuming 'reason' is a string variable containing the reason for the note
+            
             AddElement(xmlDoc, invoiceElement, "cbc:DocumentCurrencyCode", "SAR");
             AddElement(xmlDoc, invoiceElement, "cbc:TaxCurrencyCode", "SAR");
 
@@ -594,7 +525,7 @@ namespace pos.Master.Companies.zatca
             AddSupplierParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddCustomerParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddDeliveryInfo(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
-            AddPaymentMeans(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddPaymentMeans(xmlDoc, invoiceElement, invoiceHeader.Rows[0], "381");// 381=Credit Note, 383=Debit Note
             AddAllowanceCharge(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddTaxTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddLegalMonetaryTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
@@ -627,8 +558,22 @@ namespace pos.Master.Companies.zatca
             DateTime issueDate = Convert.ToDateTime(invoiceHeader.Rows[0]["sale_time"]);
             AddElement(xmlDoc, invoiceElement, "cbc:IssueDate", issueDate.ToString("yyyy-MM-dd"));
             AddElement(xmlDoc, invoiceElement, "cbc:IssueTime", issueDate.ToString("HH:mm:ss"));
+
+            string accountType = invoiceHeader.Rows[0].Table.Columns.Contains("account") ? invoiceHeader.Rows[0]["account"].ToString().ToLower() : "sale";
+            string subtype = invoiceHeader.Rows[0].Table.Columns.Contains("invoice_subtype_code") ? invoiceHeader.Rows[0]["invoice_subtype_code"].ToString() : "01"; // 01: Standard, 02: Simplified
+
+            //string invoiceTypeCode = "388"; // Default: Tax Invoice
+            //if (accountType == "return")
+            //    invoiceTypeCode = "381"; // Credit Note
+            //else if (accountType == "sale")
+            //    invoiceTypeCode = "388"; // Standard Sale
+            //else
+            //    invoiceTypeCode = "388"; // 
+
+            string invoiceTypeName = (subtype == "02" ? "0200000" : "0100000");
+
             XmlElement invoiceTypeCodeXML = AddElement(xmlDoc, invoiceElement, "cbc:InvoiceTypeCode", "383");
-            invoiceTypeCodeXML.SetAttribute("name", "0400000"); // Debit Note
+            invoiceTypeCodeXML.SetAttribute("name", invoiceTypeName); // Debit Note
 
             AddElement(xmlDoc, invoiceElement, "cbc:DocumentCurrencyCode", "SAR");
             AddElement(xmlDoc, invoiceElement, "cbc:TaxCurrencyCode", "SAR");
@@ -648,7 +593,7 @@ namespace pos.Master.Companies.zatca
             AddSupplierParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddCustomerParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddDeliveryInfo(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
-            AddPaymentMeans(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
+            AddPaymentMeans(xmlDoc, invoiceElement, invoiceHeader.Rows[0], "383");// 381=Credit Note, 383=Debit Note
             AddAllowanceCharge(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddTaxTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddLegalMonetaryTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);

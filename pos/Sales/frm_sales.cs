@@ -2873,6 +2873,7 @@ namespace pos
                             sale_id = salesObj.InsertSales(sales_model_header, sales_model_detail);// for sales items
                             if (sale_id > 0)
                             {
+                                // Sign invoice to ZATCA
                                 ZatcaHelper.SignInvoiceToZatca(invoice_no);
                                 MessageBox.Show(invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

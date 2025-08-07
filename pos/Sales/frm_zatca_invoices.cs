@@ -143,7 +143,7 @@ namespace pos.Sales
                         );
 
                     MessageBox.Show($"Successfully submitted to ZATCA ({env}):\n{jsonResponse}");
-                    LoadZatcaInvoices();
+                    //LoadZatcaInvoices();
                 }
             }
             catch (Exception ex)
@@ -201,9 +201,18 @@ namespace pos.Sales
         {
             if (gridZatcaInvoices.CurrentRow == null) return;
             string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+            string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
+            string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
+            DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
 
-            ZatcaHelper.SignInvoiceToZatca(invoiceNo);
-            LoadZatcaInvoices();
+            if (account.ToLower() == "sale")
+            {
+                ZatcaHelper.SignInvoiceToZatca(invoiceNo);
+            }else if (account.ToLower() == "return")
+            {
+                ZatcaHelper.SignCreditNoteToZatca(invoiceNo, prevInvoiceNo, prevSaleDate);
+            }
+            //LoadZatcaInvoices();
         }
     }
 }

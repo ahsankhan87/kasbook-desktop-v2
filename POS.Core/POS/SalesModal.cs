@@ -15,6 +15,10 @@ namespace POS.Core
         public string account { get; set; }
 
         public bool is_return { get; set; }
+
+        public string returnReasonCode { get; set; }
+        public string returnReason { get; set; }
+        
         public int customer_id { get; set; }
         public string customer_name { get; set; }
         public string customer_vat { get; set; }
@@ -50,6 +54,9 @@ namespace POS.Core
         public int inventory_acc_id { get; set; }
 
         public string old_invoice_no { get; set; }
+        public DateTime previousInvoiceDate { get; set; }
+
+
         public double flat_discount_value { get; set; }
         public string payment_method_text{get; set;}
         public int bank_id{get; set;}

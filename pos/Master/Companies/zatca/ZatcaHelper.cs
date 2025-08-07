@@ -160,6 +160,141 @@ namespace pos.Master.Companies.zatca
                 salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
             }
         }
+        public static void SignCreditNoteToZatca(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
+        {
+            SalesBLL salesBLL = new SalesBLL();
+            try
+            {
+                if (UsersModal.useZatcaEInvoice == false)
+                {
+                    MessageBox.Show("ZATCA E-Invoice is not enabled for this branch. Please enable it in profile/settings.");
+                    return;
+                }
+                // 1. Get sale data
+                XmlDocument ublXml = GenerateUBLXMLCreditNote(invoiceNo, previousInvoiceNo, previousInvoiceDate);
+                //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
+
+                // Check if ZATCA credentials are configured
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    return;
+                }
+
+                // 3. Sign XML
+                //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
+                //string privateKey = GetPrivateKeyFromFile();
+                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+
+                byte[] bytes = Convert.FromBase64String(cert);
+                string decodedCert = Encoding.UTF8.GetString(bytes);
+
+                //XmlDocument ublXml = LoadSampleUBL();
+                //ublXml.Save("UBL\\debug_ubl1.xml");
+
+                var signer = new EInvoiceSigner();
+                SignResult signResult = signer.SignDocument(ublXml, decodedCert, privateKey);
+
+                //ShowSignResult(signResult);
+
+                if (signResult.IsValid)
+                {
+                    // Make sure "UBL" folder exists
+                    string ublFolder = Path.Combine(Application.StartupPath, "UBL");
+                    if (!Directory.Exists(ublFolder))
+                        Directory.CreateDirectory(ublFolder);
+
+                    //var invoiceHash = new EInvoiceHashGenerator();
+                    //var hashResult = invoiceHash.GenerateEInvoiceHashing(signResult.SignedEInvoice);
+
+                    //Get Invoice Hash for Next PIH
+                    var SignedInvoiceHash = ZatcaHelper.GetInvoiceHash(signResult);
+                    //MessageBox.Show($"Invoice Hash : {SignedInvoiceHash}\n");
+                    ZatcaHelper.InsertInvoiceHashToSignedXml(signResult.SignedEInvoice, SignedInvoiceHash);
+
+                    var qrGen = new EInvoiceQRGenerator();
+                    QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
+                    string qrBase64 = qrResult.QR;
+
+                    // Insert QR into Signed XML before submission
+                    ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase64);
+
+                    // Save signed XML
+                    string ublPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_signed.xml");
+                    signResult.SignedEInvoice.Save(ublPath);
+                    //signResult.SaveSignedEInvoice(ublPath);
+
+                    //EInvoiceValidator eInvoiceValidator = new EInvoiceValidator();
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, cert, secret);
+
+                    //if (!resultValidator.IsValid)
+                    //{
+                    //    var failedSteps = resultValidator.ValidationSteps
+                    //       .Where(step => !step.IsValid)
+                    //       .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                    //       .ToList();
+
+                    //    string fullError = failedSteps.Any()
+                    //        ? string.Join("\n\n", failedSteps)
+                    //        : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+
+                    //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    //}
+
+
+
+                    //Get QRCode from SignedInvoice
+                    var Base64QrCode = ZatcaHelper.GetBase64QrCode(signResult);
+                    byte[] qrBytes = Convert.FromBase64String(Base64QrCode);
+                    salesBLL.UpdateZatcaQrCode(invoiceNo, qrBytes);
+                    //MessageBox.Show($"Base64 QRCode : {Base64QrCode}\n");
+
+                    ////GetRequestApi Payload
+                    //RequestGenerator RequestGenerator = new RequestGenerator();
+                    //RequestResult RequestResult = RequestGenerator.GenerateRequest(signResult.SignedEInvoice);
+
+                    //if (RequestResult.IsValid)
+                    //{
+                    //    var jsonPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_ApiRequestPayload.json");
+                    //    RequestResult.SaveRequestToFile(jsonPath);
+                    //    //MessageBox.Show($"Request Api Payload : \n{ RequestResult.InvoiceRequest.Serialize()}");
+                    //}
+
+                    // Save base64 string in DB (optional)
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
+
+                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+
+                }
+                else
+                {
+                    var failedSteps = signResult.Steps
+                    .Where(step => !step.IsValid)
+                    .Select(step => $"{step.StepName}: {step.Exception.Message}")
+                    .ToList();
+
+                    string fullError = failedSteps.Any()
+                        ? string.Join("\n", failedSteps)
+                        : signResult.ErrorMessage ?? "Signing failed with unknown error.";
+
+                    MessageBox.Show("Signing failed:\n" + fullError);
+
+                    MessageBox.Show("Signing failed:\n" + string.Join("\n", signResult.ErrorMessage));
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, signResult.ErrorMessage);
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error signing to ZATCA:\n" + ex.Message);
+                salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
+            }
+        }
+
         // Change the method signature to static
         public static XmlDocument GenerateUBLXMLInvoice(string invoiceNo)
         {
@@ -173,6 +308,21 @@ namespace pos.Master.Companies.zatca
 
             // Generate XML document
             XmlDocument ublXml = generator.GenerateZatcaInvoiceXmlDocument(ds, invoiceNo);
+
+            return ublXml;
+        }
+        public static XmlDocument GenerateUBLXMLCreditNote(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
+        {
+            // 1. Generate UBL XML 
+            SalesBLL salesBLL = new SalesBLL();
+            DataSet ds = salesBLL.GetSaleAndItemsDataSet(invoiceNo);
+            //XmlDocument ublXml = pos.Master.Companies.zatca.ZatcaHelper.BuildUblXml(ds);
+
+            // Create generator instance
+            var generator = new ZatcaInvoiceGenerator();
+
+            // Generate XML document
+            XmlDocument ublXml = generator.GenerateZatcaCreditNoteXmlDocument(ds, invoiceNo, previousInvoiceNo, previousInvoiceDate);
 
             return ublXml;
         }
