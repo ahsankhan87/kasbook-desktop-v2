@@ -1,15 +1,16 @@
-using System;
-using System.Data;
-using System.Windows.Forms;
-using POS.BLL;
-using System.Xml;
-using System.Text;
-using System.Net.Http;
 using Newtonsoft.Json;
 using pos.Master.Companies.zatca;
-using Zatca.EInvoice.SDK;
+using POS.BLL;
 using POS.Core;
+using System;
+using System.Data;
+using System.Net.Http;
+using System.Runtime.ConstrainedExecution;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
+using Zatca.EInvoice.SDK;
 
 namespace pos.Sales
 {
@@ -80,9 +81,22 @@ namespace pos.Sales
                     return;
                 }
 
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, _env);
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, _env);
-                string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
+                string cert_CSID = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, _env);
+                string secret_CSID = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, _env);
+                string complainceRequestID = ZatcaInvoiceGenerator.GetComplainceRequestIDFromDb(UsersModal.logged_in_branch_id, _env);
+                string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert_CSID}:{secret_CSID}"));
+
+                var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(complainceRequestID, credentials, _env);
+                string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
+                string secret1 = ProductionCSIDResponse.Secret;
+                string requestID1 = ProductionCSIDResponse.RequestID;
+
+                //If csid is not null, assign values to textboxes
+                // and make buttons visible
+                string cert = binarySecurityToken1 ?? "";
+                string secret = secret1 ?? "";
+                string PCSID_credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
+
 
                 var invoiceHash = new EInvoiceHashGenerator();
                 var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
@@ -95,7 +109,7 @@ namespace pos.Sales
                 };
 
                 // Fix for CS4014 and IDE0058: Await the async call and handle the result
-                var response = await ZatcaHelper.CallSingleInvoiceClearanceAsync(requestBody, credentials);
+                var response = await ZatcaHelper.CallSingleInvoiceClearanceAsync(requestBody, PCSID_credentials);
                 MessageBox.Show($"Successfully submitted to ZATCA ({_env}):\n{response}");
                 // Optionally, you can process 'response' or show a message if needed
             }
@@ -316,6 +330,13 @@ namespace pos.Sales
             if(gridZatcaInvoices.CurrentRow == null) return;
             string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
             ZatcaInvoiceReportingAsync(invoiceNo);
+        }
+
+        private void btn_PCSID_sign_Click(object sender, EventArgs e)
+        {
+            if (gridZatcaInvoices.CurrentRow == null) return;
+            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString(); 
+            ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
         }
     }
 }

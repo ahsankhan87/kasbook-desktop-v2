@@ -252,7 +252,15 @@ namespace pos
                     if (sale_id > 0)
                     {
                         //sign the credit note invoice to ZATCA
-                        ZatcaHelper.SignCreditNoteToZatca(new_invoice_no,prev_invoice_no,prev_invoice_date);
+                        if(chkDebitNote.Checked)
+                        {
+                            ZatcaHelper.SignDebitNoteToZatca(new_invoice_no, prev_invoice_no, prev_invoice_date);
+
+                        }
+                        else
+                        {
+                            ZatcaHelper.SignCreditNoteToZatca(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                        }
 
                         MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grid_sales_return.DataSource = null;

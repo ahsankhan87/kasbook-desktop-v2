@@ -51,6 +51,7 @@ namespace pos.Sales
             this.btn_signInvoice = new System.Windows.Forms.Button();
             this.btn_invoice_report = new System.Windows.Forms.Button();
             this.btn_Invoice_clearance = new System.Windows.Forms.Button();
+            this.btn_PCSID_sign = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).BeginInit();
             this.SuspendLayout();
             // 
@@ -254,7 +255,7 @@ namespace pos.Sales
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(389, 15);
+            this.lblTitle.Location = new System.Drawing.Point(227, 15);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(337, 32);
             this.lblTitle.TabIndex = 7;
@@ -284,7 +285,7 @@ namespace pos.Sales
             // 
             // btn_invoice_report
             // 
-            this.btn_invoice_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_invoice_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_invoice_report.Location = new System.Drawing.Point(908, 12);
             this.btn_invoice_report.Name = "btn_invoice_report";
             this.btn_invoice_report.Size = new System.Drawing.Size(120, 37);
@@ -295,7 +296,7 @@ namespace pos.Sales
             // 
             // btn_Invoice_clearance
             // 
-            this.btn_Invoice_clearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Invoice_clearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Invoice_clearance.Location = new System.Drawing.Point(782, 10);
             this.btn_Invoice_clearance.Name = "btn_Invoice_clearance";
             this.btn_Invoice_clearance.Size = new System.Drawing.Size(120, 37);
@@ -303,6 +304,17 @@ namespace pos.Sales
             this.btn_Invoice_clearance.Text = "Clearance";
             this.btn_Invoice_clearance.UseVisualStyleBackColor = true;
             this.btn_Invoice_clearance.Click += new System.EventHandler(this.btn_Invoice_clearance_Click);
+            // 
+            // btn_PCSID_sign
+            // 
+            this.btn_PCSID_sign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_PCSID_sign.Location = new System.Drawing.Point(656, 10);
+            this.btn_PCSID_sign.Name = "btn_PCSID_sign";
+            this.btn_PCSID_sign.Size = new System.Drawing.Size(120, 37);
+            this.btn_PCSID_sign.TabIndex = 3;
+            this.btn_PCSID_sign.Text = "PCSID Sign";
+            this.btn_PCSID_sign.UseVisualStyleBackColor = true;
+            this.btn_PCSID_sign.Click += new System.EventHandler(this.btn_PCSID_sign_Click);
             // 
             // frm_zatca_invoices
             // 
@@ -315,6 +327,7 @@ namespace pos.Sales
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnReport);
             this.Controls.Add(this.btn_signInvoice);
+            this.Controls.Add(this.btn_PCSID_sign);
             this.Controls.Add(this.btn_Invoice_clearance);
             this.Controls.Add(this.btn_invoice_report);
             this.Controls.Add(this.btnSend);
@@ -354,5 +367,6 @@ namespace pos.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn prevInvoiceNo;
         private System.Windows.Forms.Button btn_invoice_report;
         private System.Windows.Forms.Button btn_Invoice_clearance;
+        private System.Windows.Forms.Button btn_PCSID_sign;
     }
 }

@@ -140,18 +140,25 @@ namespace pos.Master.Companies.zatca
                         MessageBox.Show("Failed to retrieve CSID. Please check your CSR and OTP.");
                         return;
                     }
+                    string binarySecurityToken = authDetails.BinarySecurityToken;
+                    string secret = authDetails.Secret;
+                    string requestID = authDetails.RequestID;
+                    txt_publickey.Text = binarySecurityToken ?? "";
+                    txt_secret.Text = secret ?? "";
+                    txt_compliance_request_id.Text = requestID ?? "";
+
                     string authorizationToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{authDetails.BinarySecurityToken}:{authDetails.Secret}"));
 
-                    var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(authDetails.RequestID, authorizationToken, environment.ToString());
-                    string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
-                    string secret1 = ProductionCSIDResponse.Secret;
-                    string requestID1 = ProductionCSIDResponse.RequestID;
+                    //var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(authDetails.RequestID, authorizationToken, environment.ToString());
+                    //string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
+                    //string secret1 = ProductionCSIDResponse.Secret;
+                    //string requestID1 = ProductionCSIDResponse.RequestID;
 
                     // If csid is not null, assign values to textboxes 
                     // and make buttons visible
-                    txt_publickey.Text = binarySecurityToken1 ?? "";
-                    txt_secret.Text = secret1 ?? "";
-                    txt_compliance_request_id.Text = requestID1 ?? "";
+                    //txt_publickey.Text = binarySecurityToken1 ?? "";
+                    //txt_secret.Text = secret1 ?? "";
+                    //txt_compliance_request_id.Text = requestID1 ?? "";
 
                     btn_publickey_save.Visible = true;
                     btn_secretkey_save.Visible = true;

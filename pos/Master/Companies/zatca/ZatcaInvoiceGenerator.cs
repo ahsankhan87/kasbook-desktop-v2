@@ -654,7 +654,17 @@ namespace pos.Master.Companies.zatca
                 return cmd.ExecuteScalar()?.ToString();
             }
         }
-
+        public static string GetComplainceRequestIDFromDb(int branchId, string mode)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT compliance_request_id FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode", cn);
+                cmd.Parameters.AddWithValue("@branchId", branchId);
+                cmd.Parameters.AddWithValue("@mode", mode);
+                cn.Open();
+                return cmd.ExecuteScalar()?.ToString();
+            }
+        }
         public static string GetPrivateKeyFromDb(int branchId, string mode)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -686,7 +696,7 @@ namespace pos.Master.Companies.zatca
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(@"
-            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode)
+            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode AND otp=@otp)
                 UPDATE zatca_credentials 
                 SET cert_base64 = @cert, private_key = @privateKey, secret_key = @secret, updated_at = GETDATE(), csr_text=@csr_text, otp=@otp, compliance_request_id=@compliance_request_id
                 WHERE branch_id = @branchId AND mode = @mode

@@ -343,7 +343,7 @@
     <value>51</value>
   </data>
   <data name="grid_sales_return.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1084, 428</value>
+    <value>1084, 409</value>
   </data>
   <data name="grid_sales_return.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -364,13 +364,13 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
+    <value>0, 67</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1092, 438</value>
+    <value>1092, 419</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -418,7 +418,34 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;txt_close.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="chkDebitNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkDebitNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>545, 40</value>
+  </data>
+  <data name="chkDebitNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="chkDebitNote.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="chkDebitNote.Text" xml:space="preserve">
+    <value>Debit Note</value>
+  </data>
+  <data name="&gt;&gt;chkDebitNote.Name" xml:space="preserve">
+    <value>chkDebitNote</value>
+  </data>
+  <data name="&gt;&gt;chkDebitNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkDebitNote.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;chkDebitNote.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cmbReturnReason.Location" type="System.Drawing.Point, System.Drawing">
     <value>545, 14</value>
@@ -439,7 +466,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;cmbReturnReason.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btn_return.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -472,7 +499,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;btn_return.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>333, 11</value>
@@ -499,7 +526,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
     <value>135, 14</value>
@@ -523,7 +550,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;txt_invoice_no.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -556,7 +583,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -586,7 +613,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -598,7 +625,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1092, 48</value>
+    <value>1092, 67</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
