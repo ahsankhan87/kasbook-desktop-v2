@@ -1,4 +1,15 @@
 ﻿using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Asn1.Pkcs;
+using Org.BouncyCastle.Asn1.Sec;
+using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Generators;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Crypto.Prng;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Pkcs;
+using Org.BouncyCastle.Security;
 using QRCoder;
 using RestSharp;
 using System;
@@ -9,21 +20,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Org.BouncyCastle.Asn1.X509;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Pkcs;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Crypto.Prng;
-using Org.BouncyCastle.Asn1.Pkcs;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Asn1;
-using Org.BouncyCastle.Asn1.Sec;
 
 namespace pos.Sales
 {
@@ -224,7 +225,7 @@ namespace pos.Sales
             try
             {
                 
-                var authDetails = await ZatcaAuth.GetComplianceCSIDAsync();
+                var authDetails = await ZatcaAuth.GetComplianceCSIDAsync("alsdjfadj","Simulation");
                 string binarySecurityToken = authDetails.BinarySecurityToken;
                 string secret = authDetails.Secret;
                 
@@ -244,19 +245,15 @@ namespace pos.Sales
 
                 // Set required headers
                 // Create the authorization token in the required format
-                //string authorizationToken = $"Bearer {binarySecurityToken}:{secret}";
-                //string authorizationToken = "VFVsSlExQlVRME5CWlU5blFYZEpRa0ZuU1VkQldYcDZaMFZvVGsxQmIwZERRM0ZIVTAwME9VSkJUVU5OUWxWNFJYcEJVa0puVGxaQ1FVMU5RMjFXU21KdVduWmhWMDV3WW0xamQwaG9ZMDVOYWxGM1RWUkZkMDFVVFhoTlZGVXdWMmhqVGsxcWEzZE5WRUUxVFdwRmQwMUVRWGRYYWtJeFRWRnpkME5SV1VSV1VWRkhSWGRLVkZGVVJWZE5RbEZIUVRGVlJVTjNkMDVWYld3MVdWZFNiMGxGU25sWlZ6VnFZVVJGYlUxRFVVZEJNVlZGUTJkM1pGUlhSalJoVnpFeFlsTkNWR05IVm14YVEwSlZXbGRPYjBsR1RqRmpTRUp6WlZOQ1RWWkZVWGhLYWtGclFtZE9Wa0pCVFUxSVZsSlVWa013TkU5RVdUQk5la1Y0VGtSVmRFMTZhelZQVkdzMVQxUnJOVTlVUVhkTlJFRjZUVVpaZDBWQldVaExiMXBKZW1vd1EwRlJXVVpMTkVWRlFVRnZSRkZuUVVWdlYwTkxZVEJUWVRsR1NVVnlWRTkyTUhWQmEwTXhWa2xMV0hoVk9XNVFjSGd5ZG14bU5IbG9UV1ZxZVRoak1ESllTbUpzUkhFM2RGQjVaRzg0YlhFd1lXaFBUVzFPYnpobmQyNXBOMWgwTVV0VU9WVmxTMDlDZDFSRFFuWnFRVTFDWjA1V1NGSk5Ra0ZtT0VWQmFrRkJUVWxIZEVKblRsWklVa1ZGWjJGVmQyZGhTMnRuV2poM1oxcDNlRTk2UVRWQ1owNVdRa0ZSVFUxcVJYUldSazVWWmtSSmRGWkdUbFZtUkUxMFdsZFJlVTF0V1hoYVJHZDBXbFJhYUUxcE1IaE5WRVUwVEZSc2FVNVVaM1JhUkd4b1QwZFplRTFYVlRCT1JGWnRUVkk0ZDBoUldVdERXa2x0YVZwUWVVeEhVVUpCVVhkUVRYcHJOVTlVYXpWUFZHczFUMVJCZDAxRVFYcE5VVEIzUTNkWlJGWlJVVTFFUVZGNFRWUkJkMDFTUlhkRWQxbEVWbEZSWVVSQmFGTlZiRXBGVFdwcmVVOVVSV0ZOUW1kSFFURlZSVVIzZDFKVk0xWjNZMGQ0TlVsSFJtcGtSMnd5WVZoU2NGcFlUWGREWjFsSlMyOWFTWHBxTUVWQmQwbEVVMEZCZDFKUlNXaEJTVVk0YWtsamVIcDJRM2x4VlVSVWNEVlBiWFkzTWxWd2VGQkJURzF2VW5sME9VUlpNalJxVjIxQ1VVRnBRVEJpWVZvMldYSndjRFY1U2pSaGFHOXZiMWN6SzA5aE9HdHJZak14WlhaQmIwaGtkbWRFT0RBMk0zYzlQUT09OlBLb0dzU3dwUHgyMzZ5TlM3Q1dEb2pWNGRvZTFpMFcrNW1Qb2RiTUVXNWs9";
-                string token = GenerateAuthorizationCode(binarySecurityToken, secret);
-                string authorizationToken = $"Basic {token}"; 
-
+                
+                string authorizationToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{binarySecurityToken}:{secret}"));
+                
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Accept-Language", "en");
                 client.DefaultRequestHeaders.Add("accept", "application/json");
                 client.DefaultRequestHeaders.Add("Accept-Version", "V2");
-                client.DefaultRequestHeaders.Add("Authorization", authorizationToken);
-                //httpclient.DefaultRequestHeaders.Add("Username", binarySecurityToken);
-                //httpclient.DefaultRequestHeaders.Add("Password", secret);
-
+                client.DefaultRequestHeaders.Add("Authorization", $"Basic {authorizationToken}");
+                
                 // Send POST request
                 HttpResponseMessage response = await client.PostAsync(apiUrl, content);
 
@@ -286,12 +283,12 @@ namespace pos.Sales
             try
             {
                 // Step 1: Authenticate and get the binarySecurityToken and secret
-                var authDetails = await ZatcaAuth.GetComplianceCSIDAsync();
+                var authDetails = await ZatcaAuth.GetComplianceCSIDAsync("alsdjfadj","Simulation");
                 string binarySecurityToken = authDetails.BinarySecurityToken;
                 string secret = authDetails.Secret;
-                string requestID = authDetails.requestID;
-                string authorizationToken = GenerateAuthorizationCode(binarySecurityToken, secret);
-                //string authorizationToken = "VFVsSlExQlVRME5CWlU5blFYZEpRa0ZuU1VkQldYcDZaMFZvVGsxQmIwZERRM0ZIVTAwME9VSkJUVU5OUWxWNFJYcEJVa0puVGxaQ1FVMU5RMjFXU21KdVduWmhWMDV3WW0xamQwaG9ZMDVOYWxGM1RWUkZkMDFVVFhoTlZGVXdWMmhqVGsxcWEzZE5WRUUxVFdwRmQwMUVRWGRYYWtJeFRWRnpkME5SV1VSV1VWRkhSWGRLVkZGVVJWZE5RbEZIUVRGVlJVTjNkMDVWYld3MVdWZFNiMGxGU25sWlZ6VnFZVVJGYlUxRFVVZEJNVlZGUTJkM1pGUlhSalJoVnpFeFlsTkNWR05IVm14YVEwSlZXbGRPYjBsR1RqRmpTRUp6WlZOQ1RWWkZVWGhLYWtGclFtZE9Wa0pCVFUxSVZsSlVWa013TkU5RVdUQk5la1Y0VGtSVmRFMTZhelZQVkdzMVQxUnJOVTlVUVhkTlJFRjZUVVpaZDBWQldVaExiMXBKZW1vd1EwRlJXVVpMTkVWRlFVRnZSRkZuUVVWdlYwTkxZVEJUWVRsR1NVVnlWRTkyTUhWQmEwTXhWa2xMV0hoVk9XNVFjSGd5ZG14bU5IbG9UV1ZxZVRoak1ESllTbUpzUkhFM2RGQjVaRzg0YlhFd1lXaFBUVzFPYnpobmQyNXBOMWgwTVV0VU9WVmxTMDlDZDFSRFFuWnFRVTFDWjA1V1NGSk5Ra0ZtT0VWQmFrRkJUVWxIZEVKblRsWklVa1ZGWjJGVmQyZGhTMnRuV2poM1oxcDNlRTk2UVRWQ1owNVdRa0ZSVFUxcVJYUldSazVWWmtSSmRGWkdUbFZtUkUxMFdsZFJlVTF0V1hoYVJHZDBXbFJhYUUxcE1IaE5WRVUwVEZSc2FVNVVaM1JhUkd4b1QwZFplRTFYVlRCT1JGWnRUVkk0ZDBoUldVdERXa2x0YVZwUWVVeEhVVUpCVVhkUVRYcHJOVTlVYXpWUFZHczFUMVJCZDAxRVFYcE5VVEIzUTNkWlJGWlJVVTFFUVZGNFRWUkJkMDFTUlhkRWQxbEVWbEZSWVVSQmFGTlZiRXBGVFdwcmVVOVVSV0ZOUW1kSFFURlZSVVIzZDFKVk0xWjNZMGQ0TlVsSFJtcGtSMnd5WVZoU2NGcFlUWGREWjFsSlMyOWFTWHBxTUVWQmQwbEVVMEZCZDFKUlNXaEJTVVk0YWtsamVIcDJRM2x4VlVSVWNEVlBiWFkzTWxWd2VGQkJURzF2VW5sME9VUlpNalJxVjIxQ1VVRnBRVEJpWVZvMldYSndjRFY1U2pSaGFHOXZiMWN6SzA5aE9HdHJZak14WlhaQmIwaGtkbWRFT0RBMk0zYzlQUT09OlBLb0dzU3dwUHgyMzZ5TlM3Q1dEb2pWNGRvZTFpMFcrNW1Qb2RiTUVXNWs9";
+                string requestID = authDetails.RequestID;
+                string authorizationToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{binarySecurityToken}:{secret}"));
+
                 //// Step 2: Prepare invoice data
                 //string invoiceXml = ZatcaInvoice.GenerateInvoiceXml();
                 //string invoiceHash = ZatcaInvoice.CalculateInvoiceHash(invoiceXml);
@@ -299,10 +296,10 @@ namespace pos.Sales
                 //string uuid = Guid.NewGuid().ToString();
 
                 // Step 3: Submit the invoice
-                var response = await ZatcaAuth.GetProductionCSIDAsync(requestID, authorizationToken);
+                var response = await ZatcaAuth.GetProductionCSIDAsync(requestID, authorizationToken,"Simulation");
                 string binarySecurityToken1 = response.BinarySecurityToken;
                 string secret1 = response.Secret;
-                string requestID1 = response.requestID;
+                string requestID1 = response.RequestID;
                 // Display the response
                 MessageBox.Show("Token: "+binarySecurityToken1, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -311,24 +308,6 @@ namespace pos.Sales
                 MessageBox.Show(ex.Message, "Submission Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static string GenerateAuthorizationCode(string binarySecurityToken, string secret)
-        {
-            // Convert BinarySecurityToken and Secret to byte arrays
-            byte[] tokenBytes = Encoding.UTF8.GetBytes(binarySecurityToken);
-            byte[] secretBytes = Encoding.UTF8.GetBytes(secret);
-
-            // Use HMACSHA256 to generate the hash
-            using (var hmac = new HMACSHA256(secretBytes))
-            {
-                byte[] hashBytes = hmac.ComputeHash(tokenBytes);
-
-                // Convert the byte array to Base64 string
-                string base64Hash = Convert.ToBase64String(hashBytes);
-
-                return base64Hash;
-            }
-        }
-
        
         private void button2_Click(object sender, EventArgs e)
         {

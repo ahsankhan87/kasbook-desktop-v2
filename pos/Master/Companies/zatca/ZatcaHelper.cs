@@ -1,10 +1,12 @@
-﻿using POS.BLL;
+﻿using Newtonsoft.Json;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -326,6 +328,69 @@ namespace pos.Master.Companies.zatca
 
             return ublXml;
         }
+        
+        /// <summary>
+        /// Calls the ZATCA single invoice clearance API.
+        /// </summary>
+        /// <param name="requestBody">The request object to be serialized as JSON.</param>
+        /// <param name="base64Credentials">Base64 encoded "cert:secret" string.</param>
+        /// <returns>API response as string.</returns>
+        public static async Task<string> CallSingleInvoiceClearanceAsync(object requestBody, string base64Credentials)
+        {
+            const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/clearance/single";
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", $"Basic {base64Credentials}");
+                client.DefaultRequestHeaders.Add("accept", "application/json");
+                client.DefaultRequestHeaders.Add("Accept-Version", "V2");
+                client.DefaultRequestHeaders.Add("Accept-Language", "EN");
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"ZATCA API Error: {response.StatusCode} - {responseContent}");
+                }
+
+                return responseContent;
+            }
+        }
+
+        /// <summary>
+        /// Calls the ZATCA single invoice reporing API.
+        /// </summary>
+        /// <param name="requestBody">The request object to be serialized as JSON.</param>
+        /// <param name="base64Credentials">Base64 encoded "cert:secret" string.</param>
+        /// <returns>API response as string.</returns>
+        public static async Task<string> CallSingleInvoiceReportingAsync(object requestBody, string base64Credentials)
+        {
+            const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/reporting/single";
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", $"Basic {base64Credentials}");
+                client.DefaultRequestHeaders.Add("accept", "application/json");
+                client.DefaultRequestHeaders.Add("Accept-Version", "V2");
+                client.DefaultRequestHeaders.Add("Accept-Language", "EN");
+
+                var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"ZATCA API Error: {response.StatusCode} - {responseContent}");
+                }
+
+                return responseContent;
+            }
+        }
+
         public static string GetBase64QrCode(SignResult signResult)
         {
             XmlDocument xmlDoc = new XmlDocument() { PreserveWhitespace = true };

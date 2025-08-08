@@ -86,6 +86,17 @@ namespace pos.Master.Companies.zatca
                 string invoiceType = cmb_invoicetype.SelectedValue.ToString(); // "1100";
                 string locationAddress = txt_location.Text; // "Makka";
                 string industryCategory = txt_industry.Text; // "Medical Laboratories";
+                                                             // Validate required fields
+                if (string.IsNullOrWhiteSpace(commonName) ||
+                    string.IsNullOrWhiteSpace(serialNumber) ||
+                    string.IsNullOrWhiteSpace(organizationIdentifier) ||
+                    string.IsNullOrWhiteSpace(organizationUnit) ||
+                    string.IsNullOrWhiteSpace(organizationUnitName) ||
+                    string.IsNullOrWhiteSpace(countryName))
+                {
+                    MessageBox.Show("Please fill all required fields before generating CSR.");
+                    return;
+                }
 
                 // Instantiate DTO with all parameters (no public setters)
                 var csrDto = new CsrGenerationDto(
@@ -115,79 +126,48 @@ namespace pos.Master.Companies.zatca
                     btn_csr_save.Visible = true;
                     btn_privatekey_save.Visible = true;
                     string otp = txt_otp.Text.Trim(); // from Fatoora Portal
-                        
-                    var payload = new
+                    if (string.IsNullOrWhiteSpace(otp))
                     {
-                        csr = txt_csr.Text.Trim()  // Base64 CSR (no PEM headers)
-                    };
-
-                    var json = JsonConvert.SerializeObject(payload);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    using (var client = new HttpClient())
-                    {
-                        string url;
-                        // Set the base address for the client
-                        switch (environment)
-                        {
-                            case EnvironmentType.Simulation:
-                               url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/compliance";
-                                break;
-                            case EnvironmentType.Production:
-                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/production/csids";
-                                break;
-                            default:
-                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance";
-                                break;
-                        }
-
-                        
-                        client.DefaultRequestHeaders.Clear();
-                        client.DefaultRequestHeaders.Add("OTP", otp); 
-                        client.DefaultRequestHeaders.Add("accept", "application/json"); 
-                        client.DefaultRequestHeaders.Add("Accept-Version", "V2");
-                        var response = await client.PostAsync(url, content);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var resultString = await response.Content.ReadAsStringAsync();
-
-                            // Parse the JSON
-                            var jsonResponse = JsonConvert.DeserializeObject<dynamic>(resultString);
-
-                            // Assign values to textboxes
-                            txt_publickey.Text = jsonResponse.binarySecurityToken;
-                            txt_secret.Text = jsonResponse.secret;
-                            txt_compliance_request_id.Text = jsonResponse.requestID;
-
-                            btn_publickey_save.Visible = true;
-                            btn_secretkey_save.Visible = true;
-                            btn_info.Visible = true;
-                            
-                            // Optional: If you also want the certificate
-                            string cert = jsonResponse.certificate;
-
-                            MessageBox.Show("Response:\n" + resultString);
-                        }
-                        else
-                        {
-                            var error = await response.Content.ReadAsStringAsync();
-                            MessageBox.Show($"Failed to get CSID: {response.ReasonPhrase} - {error}");
-                            return;
-                        }
+                        MessageBox.Show("OTP is required from Fatoora Portal for CSID request.");
+                        return;
                     }
 
+                    var authDetails = await ZatcaAuth.GetComplianceCSIDAsync(txt_csr.Text.Trim(), environment.ToString(), otp);
+                    // Check if CSID was successfully retrieved
+                    if (authDetails == null || string.IsNullOrWhiteSpace(authDetails.BinarySecurityToken) || string.IsNullOrWhiteSpace(authDetails.Secret))
+                    {
+                        // If csid is null or does not contain required fields, show error
+                        MessageBox.Show("Failed to retrieve CSID. Please check your CSR and OTP.");
+                        return;
+                    }
+                    string authorizationToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{authDetails.BinarySecurityToken}:{authDetails.Secret}"));
+
+                    var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(authDetails.RequestID, authorizationToken, environment.ToString());
+                    string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
+                    string secret1 = ProductionCSIDResponse.Secret;
+                    string requestID1 = ProductionCSIDResponse.RequestID;
+
+                    // If csid is not null, assign values to textboxes 
+                    // and make buttons visible
+                    txt_publickey.Text = binarySecurityToken1 ?? "";
+                    txt_secret.Text = secret1 ?? "";
+                    txt_compliance_request_id.Text = requestID1 ?? "";
+
+                    btn_publickey_save.Visible = true;
+                    btn_secretkey_save.Visible = true;
+                    btn_info.Visible = true;
                     MessageBox.Show("CSID generated successfully.");
+
                 }
                 else
                 {
                     string message = string.Join(Environment.NewLine, result.ErrorMessages);
-                    MessageBox.Show("Failed to generate CSR. " + Environment.NewLine + message);
+                    MessageBox.Show("Failed to generate CSID. " + Environment.NewLine + message);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("CSR Error: \n" + ex.Message + "\n" + ex.InnerException.Message);
+                MessageBox.Show("CSID Error: \n" + ex.Message);
             }
             
         }

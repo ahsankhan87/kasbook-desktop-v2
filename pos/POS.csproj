@@ -1097,7 +1097,7 @@
     <Compile Include="Sales\frm_zatca_invoices.Designer.cs">
       <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ZatcaAuth.cs" />
+    <Compile Include="Master\Companies\zatca\ZatcaAuth.cs" />
     <Compile Include="Sales\ZatcaComplianceApi.cs" />
     <Compile Include="Sales\ZatcaInvoice.cs" />
     <Compile Include="Sales\ZatcaInvoiceApp.cs">
