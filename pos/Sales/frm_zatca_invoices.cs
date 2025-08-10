@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using com.sun.security.ntlm;
+using Newtonsoft.Json;
 using pos.Master.Companies.zatca;
 using POS.BLL;
 using POS.Core;
@@ -115,7 +116,7 @@ namespace pos.Sales
                 }
 
                 string cert = activeZatcaCredential["cert_base64"].ToString(); 
-                string secret = activeZatcaCredential["secret"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, env);
+                string secret = activeZatcaCredential["secret_key"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, env);
                 string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
 
                 var invoiceHash = new EInvoiceHashGenerator();
@@ -247,13 +248,16 @@ namespace pos.Sales
                     MessageBox.Show("No response received from ZATCA.");
                     return;
                 }
+               
                 var responseContent = JsonConvert.DeserializeObject<dynamic>(response);
                 if (responseContent == null)
                 {
                     MessageBox.Show("Invalid response format from ZATCA.");
                     return;
                 }
+
                 string zatcaStatus = responseContent?.clearanceStatus;
+                string clearedInvoice = responseContent?.clearedInvoice;
 
                 if (string.IsNullOrEmpty(zatcaStatus))
                 {
@@ -266,14 +270,14 @@ namespace pos.Sales
                        invoiceNo,
                        requestResult.InvoiceRequest.Uuid,
                        hashResult.Hash,
-                       responseContent?.clearedInvoice,      //requestResult.InvoiceRequest.Invoice,
+                       clearedInvoice,      //requestResult.InvoiceRequest.Invoice,
                        zatcaStatus,
                        env,
                        responseContent.ToString()
                        );
                 // Optionally, you can save the response content to the database or process it further
                 // Show a success message
-                if (zatcaStatus == "Success")
+                if (zatcaStatus == "CLEARED")
                 {
                     MessageBox.Show($"Invoice {invoiceNo} has been successfully cleared by ZATCA.");
                 }
@@ -381,7 +385,7 @@ namespace pos.Sales
                        );
                 // Optionally, you can save the response content to the database or process it further
                 // Show a success message
-                if (zatcaStatus == "Success")
+                if (zatcaStatus == "REPORTED")
                 {
                     MessageBox.Show($"Invoice {invoiceNo} has been successfully reported by ZATCA.");
                 }
@@ -459,7 +463,8 @@ namespace pos.Sales
                 ZatcaHelper.SignInvoiceToZatca(invoiceNo);
             }else if (account.ToLower() == "return")
             {
-                ZatcaHelper.PCSID_SignCreditToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                ZatcaHelper.SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                
             }
             //LoadZatcaInvoices();
         }
@@ -492,7 +497,7 @@ namespace pos.Sales
             }
             else if (account.ToLower() == "return")
             {
-                ZatcaHelper.PCSID_SignCreditToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
             }
         }
     }

@@ -259,7 +259,7 @@ namespace pos
                         }
                         else
                         {
-                            ZatcaHelper.PCSID_SignCreditToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                            ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
                         }
 
                         MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -78,7 +78,7 @@ namespace pos.Master.Companies.zatca
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        protected async Task GeneratePCSIDAsync()
+        protected async Task RenewPCSIDAsync()
         {
             try
             {
@@ -88,16 +88,16 @@ namespace pos.Master.Companies.zatca
                     MessageBox.Show("Please fill in all fields before generating PCSID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+                string base64Csr = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(txt_csr.Text.Trim()));
                 //string authorizationToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{txt_publickey.Text}:{txt_secret.Text}"));
-                var ProductionCSIDResponse = await ZatcaAuth.RenewProductionCSIDAsync(txt_csr.Text, txt_otp.Text, lbl_mode.Text);
+                var ProductionCSIDResponse = await ZatcaAuth.RenewProductionCSIDAsync(base64Csr, txt_otp.Text.Trim(), lbl_mode.Text);
                 string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
                 string secret1 = ProductionCSIDResponse.Secret;
                 string requestID1 = ProductionCSIDResponse.RequestID;
 
                 if (string.IsNullOrEmpty(binarySecurityToken1) || string.IsNullOrEmpty(secret1) || string.IsNullOrEmpty(requestID1))
                 {
-                    MessageBox.Show("Failed to generate PCSID. Please check your inputs and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to renew PCSID. Please check your inputs and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -128,7 +128,7 @@ namespace pos.Master.Companies.zatca
                 btn_generate_pcsid.Text = "Generating...";
                 btn_generate_pcsid.Cursor = Cursors.WaitCursor;
                 btn_generate_pcsid.Refresh();
-                await GeneratePCSIDAsync();
+                await RenewPCSIDAsync();
             }
             catch (Exception ex)
             {

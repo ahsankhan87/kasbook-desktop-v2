@@ -696,11 +696,11 @@ namespace pos.Master.Companies.zatca
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(@"
-            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type)
+            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode AND  otp=@otp AND cert_type=@cert_type)
                 UPDATE zatca_credentials 
                 SET cert_base64 = @cert, private_key = @privateKey, secret_key = @secret, updated_at = GETDATE(), csr_text=@csr_text, 
                 otp=@otp, compliance_request_id=@compliance_request_id, cert_type=@cert_type
-                WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type
+                WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type AND otp=@otp
             ELSE
                 INSERT INTO zatca_credentials (company_id, user_id, branch_id, mode, cert_base64, private_key, secret_key, updated_at,csr_text,created_at,otp,compliance_request_id, cert_type)
                 VALUES (@companyID,@userID,@branchId, @mode, @cert, @privateKey, @secret, GETDATE(),@csr_text,GETDATE(),@otp,@compliance_request_id, @cert_type)", cn);

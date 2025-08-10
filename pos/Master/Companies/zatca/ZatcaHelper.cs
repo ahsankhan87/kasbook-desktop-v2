@@ -160,7 +160,7 @@ namespace pos.Master.Companies.zatca
                 salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
             }
         }
-        public static void PCSID_SignCreditToZatcaAsync(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
+        public static void SignCreditNoteToZatcaAsync(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
         {
             SalesBLL salesBLL = new SalesBLL();
             try
