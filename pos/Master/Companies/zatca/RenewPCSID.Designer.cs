@@ -41,10 +41,8 @@
             this.txt_csr = new System.Windows.Forms.TextBox();
             this.btn_secretkey_save = new System.Windows.Forms.Button();
             this.txt_production_secretkey = new System.Windows.Forms.TextBox();
-            this.txt_compliance_request_id = new System.Windows.Forms.TextBox();
             this.txt_otp = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.Btn_save = new System.Windows.Forms.Button();
             this.btn_info = new System.Windows.Forms.Button();
@@ -52,12 +50,13 @@
             // 
             // btn_generate_pcsid
             // 
-            this.btn_generate_pcsid.Location = new System.Drawing.Point(215, 309);
+            this.btn_generate_pcsid.Location = new System.Drawing.Point(217, 270);
             this.btn_generate_pcsid.Name = "btn_generate_pcsid";
             this.btn_generate_pcsid.Size = new System.Drawing.Size(412, 44);
             this.btn_generate_pcsid.TabIndex = 145;
             this.btn_generate_pcsid.Text = "Generate Production CSID انشاء المفتاح للإنتاج";
             this.btn_generate_pcsid.UseVisualStyleBackColor = true;
+            this.btn_generate_pcsid.Click += new System.EventHandler(this.btn_csid_Click);
             // 
             // btn_publickey_save
             // 
@@ -68,6 +67,7 @@
             this.btn_publickey_save.Text = "Save to File حفظ";
             this.btn_publickey_save.UseVisualStyleBackColor = true;
             this.btn_publickey_save.Visible = false;
+            this.btn_publickey_save.Click += new System.EventHandler(this.btn_publickey_save_Click);
             // 
             // label6
             // 
@@ -112,9 +112,9 @@
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(25, 86);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(138, 16);
+            this.label25.Size = new System.Drawing.Size(43, 16);
             this.label25.TabIndex = 138;
-            this.label25.Text = "PublicKey المفتاح العام *";
+            this.label25.Text = "CSR *";
             // 
             // txt_production_publickey
             // 
@@ -143,6 +143,7 @@
             this.btn_secretkey_save.Text = "Save to File حفظ";
             this.btn_secretkey_save.UseVisualStyleBackColor = true;
             this.btn_secretkey_save.Visible = false;
+            this.btn_secretkey_save.Click += new System.EventHandler(this.btn_secretkey_save_Click);
             // 
             // txt_production_secretkey
             // 
@@ -152,15 +153,6 @@
             this.txt_production_secretkey.ReadOnly = true;
             this.txt_production_secretkey.Size = new System.Drawing.Size(665, 22);
             this.txt_production_secretkey.TabIndex = 134;
-            // 
-            // txt_compliance_request_id
-            // 
-            this.txt_compliance_request_id.BackColor = System.Drawing.SystemColors.Window;
-            this.txt_compliance_request_id.Location = new System.Drawing.Point(28, 254);
-            this.txt_compliance_request_id.Name = "txt_compliance_request_id";
-            this.txt_compliance_request_id.ReadOnly = true;
-            this.txt_compliance_request_id.Size = new System.Drawing.Size(665, 22);
-            this.txt_compliance_request_id.TabIndex = 132;
             // 
             // txt_otp
             // 
@@ -180,23 +172,14 @@
             this.label3.TabIndex = 130;
             this.label3.Text = "Secret الرقم السرى *";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 235);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 16);
-            this.label1.TabIndex = 129;
-            this.label1.Text = "Compliance Request ID *";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(27, 185);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(114, 16);
+            this.label14.Size = new System.Drawing.Size(43, 16);
             this.label14.TabIndex = 131;
-            this.label14.Text = "Secret الرقم السرى *";
+            this.label14.Text = "OTP *";
             // 
             // Btn_save
             // 
@@ -206,6 +189,7 @@
             this.Btn_save.TabIndex = 128;
             this.Btn_save.Text = "Save All Production Certificates  حفظ ";
             this.Btn_save.UseVisualStyleBackColor = true;
+            this.Btn_save.Click += new System.EventHandler(this.Btn_save_Click);
             // 
             // btn_info
             // 
@@ -217,6 +201,7 @@
             this.btn_info.TabIndex = 144;
             this.btn_info.UseVisualStyleBackColor = true;
             this.btn_info.Visible = false;
+            this.btn_info.Click += new System.EventHandler(this.btn_info_Click);
             // 
             // RenewPCSID
             // 
@@ -235,10 +220,8 @@
             this.Controls.Add(this.txt_csr);
             this.Controls.Add(this.btn_secretkey_save);
             this.Controls.Add(this.txt_production_secretkey);
-            this.Controls.Add(this.txt_compliance_request_id);
             this.Controls.Add(this.txt_otp);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.Btn_save);
             this.Name = "RenewPCSID";
@@ -265,10 +248,8 @@
         private System.Windows.Forms.TextBox txt_csr;
         private System.Windows.Forms.Button btn_secretkey_save;
         private System.Windows.Forms.TextBox txt_production_secretkey;
-        private System.Windows.Forms.TextBox txt_compliance_request_id;
         private System.Windows.Forms.TextBox txt_otp;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button Btn_save;
     }

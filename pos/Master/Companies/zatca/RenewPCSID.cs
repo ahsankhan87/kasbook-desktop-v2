@@ -104,11 +104,9 @@ namespace pos.Master.Companies.zatca
                 // Clear previous values in the textboxes
                 txt_production_publickey.Clear();
                 txt_production_secretkey.Clear();
-                txt_compliance_request_id.Clear();
                 // Assign the values from the response to the textboxes
                 txt_production_publickey.Text = binarySecurityToken1;
                 txt_production_secretkey.Text = secret1;
-                txt_compliance_request_id.Text = requestID1;
 
 
                 // Make buttons visible
@@ -139,7 +137,7 @@ namespace pos.Master.Companies.zatca
             finally
             {
                 btn_generate_pcsid.Enabled = true;
-                btn_generate_pcsid.Text = "Generate Production CSID انشاء المفتاح للإنتاج";
+                btn_generate_pcsid.Text = "Renew Production CSID انشاء المفتاح للإنتاج";
                 btn_generate_pcsid.Cursor = Cursors.Default;
             }
         }

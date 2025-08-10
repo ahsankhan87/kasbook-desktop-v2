@@ -100,5 +100,25 @@ namespace pos.Master.Companies.zatca
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btn_renew_PCSID_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (grid_zatca_csids.CurrentRow == null) return;
+                string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
+                if (string.IsNullOrEmpty(id))
+                {
+                    MessageBox.Show("Please select a valid CSID record.", "Renew PCSID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                RenewPCSID renewPCSID = new RenewPCSID(int.Parse(id));
+                renewPCSID.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

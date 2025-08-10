@@ -33,8 +33,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_zatca_csids = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_generatePCSID = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cert_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +41,9 @@
             this.otp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.activate = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_generatePCSID = new System.Windows.Forms.Button();
+            this.btn_renew_PCSID = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_zatca_csids)).BeginInit();
             this.panel1.SuspendLayout();
@@ -126,32 +127,6 @@
             this.grid_zatca_csids.TabIndex = 6;
             this.grid_zatca_csids.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_fiscal_years_CellContentClick);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.btn_generatePCSID);
-            this.panel1.Controls.Add(this.btn_refresh);
-            this.panel1.Controls.Add(this.grid_zatca_csids);
-            this.panel1.Controls.Add(this.btn_new);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 62);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(862, 455);
-            this.panel1.TabIndex = 2;
-            // 
-            // btn_generatePCSID
-            // 
-            this.btn_generatePCSID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_generatePCSID.Location = new System.Drawing.Point(235, 14);
-            this.btn_generatePCSID.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_generatePCSID.Name = "btn_generatePCSID";
-            this.btn_generatePCSID.Size = new System.Drawing.Size(145, 28);
-            this.btn_generatePCSID.TabIndex = 4;
-            this.btn_generatePCSID.Text = "Generate PCSID";
-            this.btn_generatePCSID.UseVisualStyleBackColor = true;
-            this.btn_generatePCSID.Click += new System.EventHandler(this.btn_generatePCSID_Click);
-            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -220,6 +195,45 @@
             this.activate.ReadOnly = true;
             this.activate.Width = 61;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btn_renew_PCSID);
+            this.panel1.Controls.Add(this.btn_generatePCSID);
+            this.panel1.Controls.Add(this.btn_refresh);
+            this.panel1.Controls.Add(this.grid_zatca_csids);
+            this.panel1.Controls.Add(this.btn_new);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 62);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(862, 455);
+            this.panel1.TabIndex = 2;
+            // 
+            // btn_generatePCSID
+            // 
+            this.btn_generatePCSID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_generatePCSID.Location = new System.Drawing.Point(235, 14);
+            this.btn_generatePCSID.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_generatePCSID.Name = "btn_generatePCSID";
+            this.btn_generatePCSID.Size = new System.Drawing.Size(145, 28);
+            this.btn_generatePCSID.TabIndex = 4;
+            this.btn_generatePCSID.Text = "Generate PCSID";
+            this.btn_generatePCSID.UseVisualStyleBackColor = true;
+            this.btn_generatePCSID.Click += new System.EventHandler(this.btn_generatePCSID_Click);
+            // 
+            // btn_renew_PCSID
+            // 
+            this.btn_renew_PCSID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_renew_PCSID.Location = new System.Drawing.Point(388, 14);
+            this.btn_renew_PCSID.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_renew_PCSID.Name = "btn_renew_PCSID";
+            this.btn_renew_PCSID.Size = new System.Drawing.Size(145, 28);
+            this.btn_renew_PCSID.TabIndex = 4;
+            this.btn_renew_PCSID.Text = "Renew PCSID";
+            this.btn_renew_PCSID.UseVisualStyleBackColor = true;
+            this.btn_renew_PCSID.Click += new System.EventHandler(this.btn_renew_PCSID_Click);
+            // 
             // ShowZatcaCSID
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -257,5 +271,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn otp;
         private System.Windows.Forms.DataGridViewCheckBoxColumn status;
         private System.Windows.Forms.DataGridViewImageColumn activate;
+        private System.Windows.Forms.Button btn_renew_PCSID;
     }
 }
