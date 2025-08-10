@@ -21,6 +21,7 @@ namespace pos.Master.Companies.zatca
 
         private void grid_fiscal_years_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (grid_zatca_csids.CurrentRow == null) return;
             string name = grid_zatca_csids.Columns[e.ColumnIndex].Name;
             if (name == "activate")
             {
@@ -76,8 +77,28 @@ namespace pos.Master.Companies.zatca
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-            AutoGenerateCSR autoGenerateCSR = new AutoGenerateCSR();
+            AutoGenerateCSID autoGenerateCSR = new AutoGenerateCSID();
             autoGenerateCSR.ShowDialog();
+        }
+
+        private void btn_generatePCSID_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (grid_zatca_csids.CurrentRow == null) return;
+                string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
+                if (string.IsNullOrEmpty(id))
+                {
+                    MessageBox.Show("Please select a valid CSID record.", "Generate PCSID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                GeneratePCSID generatePCSID = new GeneratePCSID(int.Parse(id));
+                generatePCSID.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

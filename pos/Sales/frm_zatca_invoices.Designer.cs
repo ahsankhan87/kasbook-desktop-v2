@@ -29,6 +29,15 @@ namespace pos.Sales
         private void InitializeComponent()
         {
             this.gridZatcaInvoices = new System.Windows.Forms.DataGridView();
+            this.btnComplianceChecks = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnViewResponse = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.btn_viewQR = new System.Windows.Forms.Button();
+            this.btn_signInvoice = new System.Windows.Forms.Button();
+            this.btn_invoice_report = new System.Windows.Forms.Button();
+            this.btn_Invoice_clearance = new System.Windows.Forms.Button();
+            this.btn_PCSID_sign = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,16 +51,6 @@ namespace pos.Sales
             this.zatca_message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prevSaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prevInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSend = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnViewResponse = new System.Windows.Forms.Button();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.btn_viewQR = new System.Windows.Forms.Button();
-            this.btn_signInvoice = new System.Windows.Forms.Button();
-            this.btn_invoice_report = new System.Windows.Forms.Button();
-            this.btn_Invoice_clearance = new System.Windows.Forms.Button();
-            this.btn_PCSID_sign = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +85,105 @@ namespace pos.Sales
             this.gridZatcaInvoices.Size = new System.Drawing.Size(1019, 338);
             this.gridZatcaInvoices.TabIndex = 0;
             // 
+            // btnComplianceChecks
+            // 
+            this.btnComplianceChecks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnComplianceChecks.Location = new System.Drawing.Point(149, 404);
+            this.btnComplianceChecks.Name = "btnComplianceChecks";
+            this.btnComplianceChecks.Size = new System.Drawing.Size(142, 37);
+            this.btnComplianceChecks.TabIndex = 4;
+            this.btnComplianceChecks.Text = "Compliance Checks";
+            this.btnComplianceChecks.UseVisualStyleBackColor = true;
+            this.btnComplianceChecks.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefresh.Location = new System.Drawing.Point(699, 410);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(80, 37);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnViewResponse
+            // 
+            this.btnViewResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnViewResponse.Location = new System.Drawing.Point(789, 410);
+            this.btnViewResponse.Name = "btnViewResponse";
+            this.btnViewResponse.Size = new System.Drawing.Size(161, 37);
+            this.btnViewResponse.TabIndex = 6;
+            this.btnViewResponse.Text = "View ZATCA Response";
+            this.btnViewResponse.UseVisualStyleBackColor = true;
+            this.btnViewResponse.Click += new System.EventHandler(this.btnViewResponse_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.Location = new System.Drawing.Point(227, 15);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(337, 32);
+            this.lblTitle.TabIndex = 7;
+            this.lblTitle.Text = "ZATCA Invoice Management";
+            // 
+            // btn_viewQR
+            // 
+            this.btn_viewQR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_viewQR.Location = new System.Drawing.Point(956, 410);
+            this.btn_viewQR.Name = "btn_viewQR";
+            this.btn_viewQR.Size = new System.Drawing.Size(72, 37);
+            this.btn_viewQR.TabIndex = 6;
+            this.btn_viewQR.Text = "View QR";
+            this.btn_viewQR.UseVisualStyleBackColor = true;
+            this.btn_viewQR.Click += new System.EventHandler(this.btn_viewQR_Click);
+            // 
+            // btn_signInvoice
+            // 
+            this.btn_signInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_signInvoice.Location = new System.Drawing.Point(12, 404);
+            this.btn_signInvoice.Name = "btn_signInvoice";
+            this.btn_signInvoice.Size = new System.Drawing.Size(131, 37);
+            this.btn_signInvoice.TabIndex = 3;
+            this.btn_signInvoice.Text = "CSID Sign Invoice";
+            this.btn_signInvoice.UseVisualStyleBackColor = true;
+            this.btn_signInvoice.Click += new System.EventHandler(this.btn_signInvoice_Click);
+            // 
+            // btn_invoice_report
+            // 
+            this.btn_invoice_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_invoice_report.Location = new System.Drawing.Point(908, 12);
+            this.btn_invoice_report.Name = "btn_invoice_report";
+            this.btn_invoice_report.Size = new System.Drawing.Size(120, 37);
+            this.btn_invoice_report.TabIndex = 3;
+            this.btn_invoice_report.Text = "Reporting";
+            this.btn_invoice_report.UseVisualStyleBackColor = true;
+            this.btn_invoice_report.Click += new System.EventHandler(this.btn_invoice_report_Click);
+            // 
+            // btn_Invoice_clearance
+            // 
+            this.btn_Invoice_clearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Invoice_clearance.Location = new System.Drawing.Point(782, 10);
+            this.btn_Invoice_clearance.Name = "btn_Invoice_clearance";
+            this.btn_Invoice_clearance.Size = new System.Drawing.Size(120, 37);
+            this.btn_Invoice_clearance.TabIndex = 3;
+            this.btn_Invoice_clearance.Text = "Clearance";
+            this.btn_Invoice_clearance.UseVisualStyleBackColor = true;
+            this.btn_Invoice_clearance.Click += new System.EventHandler(this.btn_Invoice_clearance_Click);
+            // 
+            // btn_PCSID_sign
+            // 
+            this.btn_PCSID_sign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_PCSID_sign.Location = new System.Drawing.Point(656, 10);
+            this.btn_PCSID_sign.Name = "btn_PCSID_sign";
+            this.btn_PCSID_sign.Size = new System.Drawing.Size(120, 37);
+            this.btn_PCSID_sign.TabIndex = 3;
+            this.btn_PCSID_sign.Text = "PCSID Sign";
+            this.btn_PCSID_sign.UseVisualStyleBackColor = true;
+            this.btn_PCSID_sign.Click += new System.EventHandler(this.btn_PCSID_sign_Click);
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -93,6 +191,7 @@ namespace pos.Sales
             this.id.MinimumWidth = 6;
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             this.id.Width = 125;
             // 
             // invoice_no
@@ -206,116 +305,6 @@ namespace pos.Sales
             this.prevInvoiceNo.Visible = false;
             this.prevInvoiceNo.Width = 125;
             // 
-            // btnSend
-            // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSend.Location = new System.Drawing.Point(280, 404);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(120, 37);
-            this.btnSend.TabIndex = 3;
-            this.btnSend.Text = "Send to ZATCA";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // btnReport
-            // 
-            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReport.Location = new System.Drawing.Point(410, 404);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(120, 37);
-            this.btnReport.TabIndex = 4;
-            this.btnReport.Text = "Report to ZATCA";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.Location = new System.Drawing.Point(540, 404);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(80, 37);
-            this.btnRefresh.TabIndex = 5;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnViewResponse
-            // 
-            this.btnViewResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnViewResponse.Location = new System.Drawing.Point(630, 404);
-            this.btnViewResponse.Name = "btnViewResponse";
-            this.btnViewResponse.Size = new System.Drawing.Size(161, 37);
-            this.btnViewResponse.TabIndex = 6;
-            this.btnViewResponse.Text = "View ZATCA Response";
-            this.btnViewResponse.UseVisualStyleBackColor = true;
-            this.btnViewResponse.Click += new System.EventHandler(this.btnViewResponse_Click);
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(227, 15);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(337, 32);
-            this.lblTitle.TabIndex = 7;
-            this.lblTitle.Text = "ZATCA Invoice Management";
-            // 
-            // btn_viewQR
-            // 
-            this.btn_viewQR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_viewQR.Location = new System.Drawing.Point(797, 404);
-            this.btn_viewQR.Name = "btn_viewQR";
-            this.btn_viewQR.Size = new System.Drawing.Size(72, 37);
-            this.btn_viewQR.TabIndex = 6;
-            this.btn_viewQR.Text = "View QR";
-            this.btn_viewQR.UseVisualStyleBackColor = true;
-            this.btn_viewQR.Click += new System.EventHandler(this.btn_viewQR_Click);
-            // 
-            // btn_signInvoice
-            // 
-            this.btn_signInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_signInvoice.Location = new System.Drawing.Point(154, 404);
-            this.btn_signInvoice.Name = "btn_signInvoice";
-            this.btn_signInvoice.Size = new System.Drawing.Size(120, 37);
-            this.btn_signInvoice.TabIndex = 3;
-            this.btn_signInvoice.Text = "Sign Invoice";
-            this.btn_signInvoice.UseVisualStyleBackColor = true;
-            this.btn_signInvoice.Click += new System.EventHandler(this.btn_signInvoice_Click);
-            // 
-            // btn_invoice_report
-            // 
-            this.btn_invoice_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_invoice_report.Location = new System.Drawing.Point(908, 12);
-            this.btn_invoice_report.Name = "btn_invoice_report";
-            this.btn_invoice_report.Size = new System.Drawing.Size(120, 37);
-            this.btn_invoice_report.TabIndex = 3;
-            this.btn_invoice_report.Text = "Report";
-            this.btn_invoice_report.UseVisualStyleBackColor = true;
-            this.btn_invoice_report.Click += new System.EventHandler(this.btn_invoice_report_Click);
-            // 
-            // btn_Invoice_clearance
-            // 
-            this.btn_Invoice_clearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Invoice_clearance.Location = new System.Drawing.Point(782, 10);
-            this.btn_Invoice_clearance.Name = "btn_Invoice_clearance";
-            this.btn_Invoice_clearance.Size = new System.Drawing.Size(120, 37);
-            this.btn_Invoice_clearance.TabIndex = 3;
-            this.btn_Invoice_clearance.Text = "Clearance";
-            this.btn_Invoice_clearance.UseVisualStyleBackColor = true;
-            this.btn_Invoice_clearance.Click += new System.EventHandler(this.btn_Invoice_clearance_Click);
-            // 
-            // btn_PCSID_sign
-            // 
-            this.btn_PCSID_sign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_PCSID_sign.Location = new System.Drawing.Point(656, 10);
-            this.btn_PCSID_sign.Name = "btn_PCSID_sign";
-            this.btn_PCSID_sign.Size = new System.Drawing.Size(120, 37);
-            this.btn_PCSID_sign.TabIndex = 3;
-            this.btn_PCSID_sign.Text = "PCSID Sign";
-            this.btn_PCSID_sign.UseVisualStyleBackColor = true;
-            this.btn_PCSID_sign.Click += new System.EventHandler(this.btn_PCSID_sign_Click);
-            // 
             // frm_zatca_invoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -325,14 +314,14 @@ namespace pos.Sales
             this.Controls.Add(this.btn_viewQR);
             this.Controls.Add(this.btnViewResponse);
             this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.btnReport);
+            this.Controls.Add(this.btnComplianceChecks);
             this.Controls.Add(this.btn_signInvoice);
             this.Controls.Add(this.btn_PCSID_sign);
             this.Controls.Add(this.btn_Invoice_clearance);
             this.Controls.Add(this.btn_invoice_report);
-            this.Controls.Add(this.btnSend);
             this.Controls.Add(this.gridZatcaInvoices);
             this.Name = "frm_zatca_invoices";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ZATCA Invoice Management";
             this.Load += new System.EventHandler(this.frm_zatca_invoices_Load);
@@ -345,13 +334,15 @@ namespace pos.Sales
         #endregion
 
         private System.Windows.Forms.DataGridView gridZatcaInvoices;
-        private System.Windows.Forms.Button btnSend;
-        private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button btnComplianceChecks;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnViewResponse;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btn_viewQR;
         private System.Windows.Forms.Button btn_signInvoice;
+        private System.Windows.Forms.Button btn_invoice_report;
+        private System.Windows.Forms.Button btn_Invoice_clearance;
+        private System.Windows.Forms.Button btn_PCSID_sign;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
@@ -365,8 +356,5 @@ namespace pos.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn zatca_message;
         private System.Windows.Forms.DataGridViewTextBoxColumn prevSaleDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn prevInvoiceNo;
-        private System.Windows.Forms.Button btn_invoice_report;
-        private System.Windows.Forms.Button btn_Invoice_clearance;
-        private System.Windows.Forms.Button btn_PCSID_sign;
     }
 }

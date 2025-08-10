@@ -1,7 +1,7 @@
 ﻿
 namespace pos.Master.Companies.zatca
 {
-    partial class AutoGenerateCSR
+    partial class AutoGenerateCSID
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace pos.Master.Companies.zatca
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoGenerateCSR));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoGenerateCSID));
             this.txt_seller_citysubdiv = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label47 = new System.Windows.Forms.Label();
@@ -101,6 +101,7 @@ namespace pos.Master.Companies.zatca
             this.txt_serialNumber = new System.Windows.Forms.TextBox();
             this.csid_tabPage = new System.Windows.Forms.TabPage();
             this.btn_info = new System.Windows.Forms.Button();
+            this.txt_compliance_request_id = new System.Windows.Forms.TextBox();
             this.btn_refresh2 = new System.Windows.Forms.Button();
             this.btn_refresh1 = new System.Windows.Forms.Button();
             this.Btn_save = new System.Windows.Forms.Button();
@@ -134,7 +135,7 @@ namespace pos.Master.Companies.zatca
             this.txt_buyyer_postalzone = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
-            this.txt_compliance_request_id = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.csid_tabPage.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -372,7 +373,7 @@ namespace pos.Master.Companies.zatca
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(17, 555);
+            this.label25.Location = new System.Drawing.Point(19, 555);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(130, 16);
             this.label25.TabIndex = 115;
@@ -380,10 +381,10 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_publickey
             // 
-            this.txt_publickey.Location = new System.Drawing.Point(18, 575);
+            this.txt_publickey.Location = new System.Drawing.Point(19, 575);
             this.txt_publickey.Multiline = true;
             this.txt_publickey.Name = "txt_publickey";
-            this.txt_publickey.Size = new System.Drawing.Size(714, 73);
+            this.txt_publickey.Size = new System.Drawing.Size(710, 73);
             this.txt_publickey.TabIndex = 114;
             // 
             // btn_secretkey_save
@@ -409,7 +410,7 @@ namespace pos.Master.Companies.zatca
             // txt_secret
             // 
             this.txt_secret.BackColor = System.Drawing.SystemColors.Window;
-            this.txt_secret.Location = new System.Drawing.Point(20, 674);
+            this.txt_secret.Location = new System.Drawing.Point(19, 674);
             this.txt_secret.Name = "txt_secret";
             this.txt_secret.ReadOnly = true;
             this.txt_secret.Size = new System.Drawing.Size(710, 22);
@@ -448,7 +449,7 @@ namespace pos.Master.Companies.zatca
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 449);
+            this.label10.Location = new System.Drawing.Point(19, 449);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(147, 16);
             this.label10.TabIndex = 107;
@@ -492,16 +493,16 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_privatekey
             // 
-            this.txt_privatekey.Location = new System.Drawing.Point(18, 470);
+            this.txt_privatekey.Location = new System.Drawing.Point(19, 470);
             this.txt_privatekey.Multiline = true;
             this.txt_privatekey.Name = "txt_privatekey";
-            this.txt_privatekey.Size = new System.Drawing.Size(714, 73);
+            this.txt_privatekey.Size = new System.Drawing.Size(710, 73);
             this.txt_privatekey.TabIndex = 106;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 343);
+            this.label1.Location = new System.Drawing.Point(19, 343);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 16);
             this.label1.TabIndex = 105;
@@ -509,7 +510,7 @@ namespace pos.Master.Companies.zatca
             // 
             // txt_csr
             // 
-            this.txt_csr.Location = new System.Drawing.Point(16, 363);
+            this.txt_csr.Location = new System.Drawing.Point(19, 363);
             this.txt_csr.Multiline = true;
             this.txt_csr.Name = "txt_csr";
             this.txt_csr.Size = new System.Drawing.Size(710, 73);
@@ -790,6 +791,7 @@ namespace pos.Master.Companies.zatca
             this.csid_tabPage.Controls.Add(this.btn_secretkey_save);
             this.csid_tabPage.Controls.Add(this.txt_compliance_request_id);
             this.csid_tabPage.Controls.Add(this.txt_secret);
+            this.csid_tabPage.Controls.Add(this.label58);
             this.csid_tabPage.Controls.Add(this.label14);
             this.csid_tabPage.Controls.Add(this.label12);
             this.csid_tabPage.Controls.Add(this.btn_privatekey_save);
@@ -854,6 +856,15 @@ namespace pos.Master.Companies.zatca
             this.btn_info.Visible = false;
             this.btn_info.Click += new System.EventHandler(this.btn_info_Click);
             // 
+            // txt_compliance_request_id
+            // 
+            this.txt_compliance_request_id.BackColor = System.Drawing.SystemColors.Window;
+            this.txt_compliance_request_id.Location = new System.Drawing.Point(19, 720);
+            this.txt_compliance_request_id.Name = "txt_compliance_request_id";
+            this.txt_compliance_request_id.ReadOnly = true;
+            this.txt_compliance_request_id.Size = new System.Drawing.Size(710, 22);
+            this.txt_compliance_request_id.TabIndex = 112;
+            // 
             // btn_refresh2
             // 
             this.btn_refresh2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_refresh2.BackgroundImage")));
@@ -878,7 +889,7 @@ namespace pos.Master.Companies.zatca
             // 
             // Btn_save
             // 
-            this.Btn_save.Location = new System.Drawing.Point(239, 742);
+            this.Btn_save.Location = new System.Drawing.Point(238, 757);
             this.Btn_save.Name = "Btn_save";
             this.Btn_save.Size = new System.Drawing.Size(273, 31);
             this.Btn_save.TabIndex = 87;
@@ -1180,22 +1191,22 @@ namespace pos.Master.Companies.zatca
             this.label48.Text = "tax number";
             this.label48.Click += new System.EventHandler(this.label48_Click);
             // 
-            // txt_compliance_request_id
+            // label58
             // 
-            this.txt_compliance_request_id.BackColor = System.Drawing.SystemColors.Window;
-            this.txt_compliance_request_id.Location = new System.Drawing.Point(20, 700);
-            this.txt_compliance_request_id.Name = "txt_compliance_request_id";
-            this.txt_compliance_request_id.ReadOnly = true;
-            this.txt_compliance_request_id.Size = new System.Drawing.Size(710, 22);
-            this.txt_compliance_request_id.TabIndex = 112;
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(19, 699);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(149, 16);
+            this.label58.TabIndex = 111;
+            this.label58.Text = "Compliance Request ID";
             // 
-            // AutoGenerateCSR
+            // AutoGenerateCSID
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 902);
             this.Controls.Add(this.tabControl1);
-            this.Name = "AutoGenerateCSR";
+            this.Name = "AutoGenerateCSID";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ZATCA CSID Generator";
@@ -1320,5 +1331,6 @@ namespace pos.Master.Companies.zatca
         internal System.Windows.Forms.Label label57;
         private System.Windows.Forms.Button Btn_save;
         private System.Windows.Forms.TextBox txt_compliance_request_id;
+        private System.Windows.Forms.Label label58;
     }
 }

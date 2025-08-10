@@ -276,16 +276,16 @@ namespace pos
                 //ublXml.Save("UBL\\debug_ubl" + invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                 if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
                     return;
                 }
 
                 // 3. Get Certificates
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                string cert = activeZatcaCredential["cert_base64"].ToString(); // GetPublicKeyFromFile();
+                string secret = activeZatcaCredential["secret_key"].ToString(); // GetSecretFromFile();
 
                 //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
                 //string secret = GetSecretFromFile();
@@ -427,19 +427,19 @@ namespace pos
                 //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                 if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
                     return;
                 }
 
                 // 3. Sign XML
                 //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
                 //string privateKey = GetPrivateKeyFromFile();
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
-                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+                string cert = activeZatcaCredential["cert_base64"].ToString(); // GetPublicKeyFromFile();
+                string secret = activeZatcaCredential["secret_key"].ToString(); // GetSecretFromFile();
+                string privateKey = activeZatcaCredential["private_key"].ToString();  //GetPrivateKeyFromFile();
 
                 byte[] bytes = Convert.FromBase64String(cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);

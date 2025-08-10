@@ -34,8 +34,10 @@
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_zatca_csids = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_generatePCSID = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cert_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.csr_text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cert_base64 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.otp = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,6 +110,7 @@
             this.grid_zatca_csids.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.mode,
+            this.cert_type,
             this.csr_text,
             this.cert_base64,
             this.otp,
@@ -126,6 +129,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btn_generatePCSID);
             this.panel1.Controls.Add(this.btn_refresh);
             this.panel1.Controls.Add(this.grid_zatca_csids);
             this.panel1.Controls.Add(this.btn_new);
@@ -135,6 +139,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(862, 455);
             this.panel1.TabIndex = 2;
+            // 
+            // btn_generatePCSID
+            // 
+            this.btn_generatePCSID.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_generatePCSID.Location = new System.Drawing.Point(235, 14);
+            this.btn_generatePCSID.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_generatePCSID.Name = "btn_generatePCSID";
+            this.btn_generatePCSID.Size = new System.Drawing.Size(145, 28);
+            this.btn_generatePCSID.TabIndex = 4;
+            this.btn_generatePCSID.Text = "Generate PCSID";
+            this.btn_generatePCSID.UseVisualStyleBackColor = true;
+            this.btn_generatePCSID.Click += new System.EventHandler(this.btn_generatePCSID_Click);
             // 
             // id
             // 
@@ -152,6 +168,14 @@
             this.mode.MinimumWidth = 6;
             this.mode.Name = "mode";
             this.mode.ReadOnly = true;
+            // 
+            // cert_type
+            // 
+            this.cert_type.DataPropertyName = "cert_type";
+            this.cert_type.HeaderText = "Type";
+            this.cert_type.MinimumWidth = 6;
+            this.cert_type.Name = "cert_type";
+            this.cert_type.ReadOnly = true;
             // 
             // csr_text
             // 
@@ -224,8 +248,10 @@
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.DataGridView grid_zatca_csids;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btn_generatePCSID;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn mode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cert_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn csr_text;
         private System.Windows.Forms.DataGridViewTextBoxColumn cert_base64;
         private System.Windows.Forms.DataGridViewTextBoxColumn otp;

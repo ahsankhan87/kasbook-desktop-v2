@@ -20,11 +20,11 @@ using Zatca.EInvoice.SDK.Contracts.Models;
 
 namespace pos.Master.Companies.zatca
 {
-    public partial class AutoGenerateCSR : Form
+    public partial class AutoGenerateCSID : Form
     {
         //private Mode mode { get; set; }
 
-        public AutoGenerateCSR()
+        public AutoGenerateCSID()
         {
             InitializeComponent();
             label12.Text = "Mobile : +923459079213";
@@ -69,8 +69,50 @@ namespace pos.Master.Companies.zatca
                 txt_industry.Text = "Auto Parts";
             }
         }
-       
-        private async void GenerateCSRAsync()
+        //private void btn_csid_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        btn_csid.Enabled = false;
+        //        btn_csid.Text = "Generating...";
+        //        btn_csid.Cursor = Cursors.WaitCursor;
+        //        btn_csid.Refresh();
+        //        Task.Run(() => GenerateCSRAsync()).Wait();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    finally
+        //    {
+        //        btn_csid.Enabled = true;
+        //        btn_csid.Text = "Generate CSID انشاء المفتاح العام";
+        //        btn_csid.Cursor = Cursors.Default;
+        //    }
+
+        //}
+        private async void btn_csid_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btn_csid.Enabled = false;
+                btn_csid.Text = "Generating...";
+                btn_csid.Cursor = Cursors.WaitCursor;
+                btn_csid.Refresh();
+                await GenerateCSRAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                btn_csid.Enabled = true;
+                btn_csid.Text = "Generate CSID انشاء المفتاح العام";
+                btn_csid.Cursor = Cursors.Default;
+            }
+        }
+        private async Task GenerateCSRAsync()
         {
             try
             {
@@ -240,11 +282,7 @@ namespace pos.Master.Companies.zatca
         }
 
 
-        private void btn_csid_Click(object sender, EventArgs e)
-        {
-            GenerateCSRAsync();
-        }
-
+       
         private void btn_refresh1_Click(object sender, EventArgs e)
         {
             RefreshSerialNumber();
@@ -374,17 +412,25 @@ namespace pos.Master.Companies.zatca
 
         private void Btn_save_Click(object sender, EventArgs e)
         {
-            EnvironmentType mode = rdb_simulation.Checked ? EnvironmentType.Simulation :
-                                             rdb_production.Checked ? EnvironmentType.Production :
-                                             EnvironmentType.NonProduction;
-            // Create generator instance
-            int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials(UsersModal.logged_in_branch_id, mode.ToString(),
-                txt_publickey.Text.Trim(),txt_privatekey.Text.Trim(),txt_secret.Text.Trim(),txt_csr.Text.Trim(),
-                txt_otp.Text,txt_compliance_request_id.Text);
-            if (result > 0)
+            try
             {
-                MessageBox.Show("Updated successfully", "Zatca Credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                EnvironmentType mode = rdb_simulation.Checked ? EnvironmentType.Simulation :
+                                            rdb_production.Checked ? EnvironmentType.Production :
+                                            EnvironmentType.NonProduction;
+                // Save CSID credentials to database
+                int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials("CSID", mode.ToString(),
+                    txt_publickey.Text.Trim(), txt_privatekey.Text.Trim(), txt_secret.Text.Trim(), txt_csr.Text.Trim(),
+                    txt_otp.Text, txt_compliance_request_id.Text);
+                if (result > 0)
+                {
+                    MessageBox.Show("Updated successfully", "Zatca Credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving certificate: " + ex.Message);
+            }
+           
         }
 
         private void rdb_simulation_CheckedChanged(object sender, EventArgs e)

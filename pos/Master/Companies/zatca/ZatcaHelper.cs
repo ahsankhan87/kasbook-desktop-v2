@@ -28,7 +28,7 @@ namespace pos.Master.Companies.zatca
             return $"https://zatca.gov.sa/{companyId}";
         }
 
-        public static void SignInvoiceToZatca(string invoiceNo)
+        public static void SignInvoiceToZatca(string invoiceNo) //CSID Signing
         {
             SalesBLL salesBLL = new SalesBLL();
             try
@@ -43,19 +43,17 @@ namespace pos.Master.Companies.zatca
                 //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                 if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
                     return;
                 }
 
-                // 3. Sign XML
-                //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
-                //string privateKey = GetPrivateKeyFromFile();
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
-                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+                // get CSID credentials from DB
+                string cert = activeZatcaCredential["cert_base64"].ToString(); // ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                string secret = activeZatcaCredential["secret_key"].ToString(); //  ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                string privateKey = activeZatcaCredential["private_key"].ToString(); // ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
 
                 byte[] bytes = Convert.FromBase64String(cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);
@@ -162,7 +160,7 @@ namespace pos.Master.Companies.zatca
                 salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
             }
         }
-        public static void SignCreditNoteToZatca(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
+        public static void PCSID_SignCreditToZatcaAsync(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
         {
             SalesBLL salesBLL = new SalesBLL();
             try
@@ -177,19 +175,19 @@ namespace pos.Master.Companies.zatca
                 //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                 if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
                     return;
                 }
 
                 // 3. Sign XML
                 //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
                 //string privateKey = GetPrivateKeyFromFile();
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
-                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+                string cert = activeZatcaCredential["cert_base64"].ToString(); // GetPublicKeyFromFile();
+                string secret = activeZatcaCredential["secret_key"].ToString(); // GetSecretFromFile();
+                string privateKey = activeZatcaCredential["private_key"].ToString();  //GetPrivateKeyFromFile();
 
                 byte[] bytes = Convert.FromBase64String(cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);
@@ -312,19 +310,19 @@ namespace pos.Master.Companies.zatca
                 //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                 if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
                     return;
                 }
 
                 // 3. Sign XML
                 //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
                 //string privateKey = GetPrivateKeyFromFile();
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
-                string privateKey = ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+                string cert = activeZatcaCredential["cert_base64"].ToString(); // GetPublicKeyFromFile();
+                string secret = activeZatcaCredential["secret_key"].ToString(); // GetSecretFromFile();
+                string privateKey = activeZatcaCredential["private_key"].ToString();  //GetPrivateKeyFromFile();
 
                 byte[] bytes = Convert.FromBase64String(cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);
@@ -479,14 +477,29 @@ namespace pos.Master.Companies.zatca
             return ublXml;
         }
         /// <summary>
-        /// Calls the ZATCA single invoice clearance API.
+        /// Calls the ZATCA single invoice production clearance API.
         /// </summary>
         /// <param name="requestBody">The request object to be serialized as JSON.</param>
         /// <param name="base64Credentials">Base64 encoded "cert:secret" string.</param>
         /// <returns>API response as string.</returns>
-        public static async Task<string> CallSingleInvoiceClearanceAsync(object requestBody, string base64Credentials)
+        public static async Task<string> CallSingleInvoiceClearanceAsync(object requestBody, string base64Credentials,string env)
         {
-            const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/invoices/clearance/single";
+            string url;
+            switch (env)
+            {
+                case "Production":
+                    url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core/invoices/clearance/single";
+                    break;
+                case "Simulation":
+                    url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/invoices/clearance/single";
+                    break;
+                default:
+                    url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/clearance/single";
+                    break;
+            }
+
+            //const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/invoices/clearance/single";
+            //const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/clearance/single";
 
             using (var client = new HttpClient())
             {
@@ -515,9 +528,24 @@ namespace pos.Master.Companies.zatca
         /// <param name="requestBody">The request object to be serialized as JSON.</param>
         /// <param name="base64Credentials">Base64 encoded "cert:secret" string.</param>
         /// <returns>API response as string.</returns>
-        public static async Task<string> CallSingleInvoiceReportingAsync(object requestBody, string base64Credentials)
+        public static async Task<string> CallSingleInvoiceReportingAsync(object requestBody, string base64Credentials,string env)
         {
-            const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/invoices/reporting/single";
+            string url;
+            switch (env)
+            {
+                case "Production":
+                    url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core/invoices/reporting/single";
+                    break;
+                case "Simulation":
+                    url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/invoices/reporting/single";
+                    break;
+                default:
+                    url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/reporting/single";
+                    break;
+            }
+
+            //const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/reporting/single";
+            //const string url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/invoices/reporting/single";
 
             using (var client = new HttpClient())
             {
@@ -661,36 +689,324 @@ namespace pos.Master.Companies.zatca
                 //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                 if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
                     return;
                 }
 
                 // 3. Sign XML
-                //string cert = GetPublicKeyFromFile(); // CSID token / binarySecurityToken
-                //string privateKey = GetPrivateKeyFromFile();
-                string cert_CSID = activeZatcaCredential["cert_base64"].ToString(); // ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
-                string secret_CSID = activeZatcaCredential["secret_key"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                //string cert_CSID = activeZatcaCredential["cert_base64"].ToString(); // ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                //string secret_CSID = activeZatcaCredential["secret_key"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
                 string privateKey_CSID = activeZatcaCredential["private_key"].ToString(); //ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
-                string complainceRequestID = activeZatcaCredential["compliance_request_id"].ToString(); //ZatcaInvoiceGenerator.GetComplainceRequestIDFromDb(UsersModal.logged_in_branch_id, _env);
-                string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert_CSID}:{secret_CSID}"));
+               // string complainceRequestID = activeZatcaCredential["compliance_request_id"].ToString(); //ZatcaInvoiceGenerator.GetComplainceRequestIDFromDb(UsersModal.logged_in_branch_id, _env);
+               // string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert_CSID}:{secret_CSID}"));
 
-                var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(complainceRequestID, credentials, activeZatcaCredential["mode"].ToString());
-                string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
-                string secret1 = ProductionCSIDResponse.Secret;
-                string requestID1 = ProductionCSIDResponse.RequestID;
-                
+                // Retrieve PCSID credentials from the database using the credentialId
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                if (PCSID_dataRow == null)
+                {
+                    MessageBox.Show("No PCSID credentials found for the selected ZATCA CSID.");
+                    return;
+                }
 
-                //If csid is not null, assign values to textboxes
-                // and make buttons visible
-                string cert = binarySecurityToken1 ?? "";
-                string secret = secret1 ?? "";
-                //string PCSID_credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
+                string PCISD_cert = PCSID_dataRow["cert_base64"].ToString();
+                ////
+
+                byte[] bytes = Convert.FromBase64String(PCISD_cert);
+                string decodedCert = Encoding.UTF8.GetString(bytes);
+
+                //XmlDocument ublXml = LoadSampleUBL();
+                //ublXml.Save("UBL\\debug_ubl1.xml");
+
+                var signer = new EInvoiceSigner();
+                SignResult signResult = signer.SignDocument(ublXml, decodedCert, privateKey_CSID);
+
+                //ShowSignResult(signResult);
+
+                if (signResult.IsValid)
+                {
+                    // Make sure "UBL" folder exists
+                    string ublFolder = Path.Combine(Application.StartupPath, "UBL");
+                    if (!Directory.Exists(ublFolder))
+                        Directory.CreateDirectory(ublFolder);
+
+                    //var invoiceHash = new EInvoiceHashGenerator();
+                    //var hashResult = invoiceHash.GenerateEInvoiceHashing(signResult.SignedEInvoice);
+
+                    //Get Invoice Hash for Next PIH
+                    var SignedInvoiceHash = ZatcaHelper.GetInvoiceHash(signResult);
+                    //MessageBox.Show($"Invoice Hash : {SignedInvoiceHash}\n");
+                    ZatcaHelper.InsertInvoiceHashToSignedXml(signResult.SignedEInvoice, SignedInvoiceHash);
+
+                    var qrGen = new EInvoiceQRGenerator();
+                    QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
+                    string qrBase64 = qrResult.QR;
+
+                    // Insert QR into Signed XML before submission
+                    ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase64);
+
+                    // Save signed XML
+                    string ublPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_signed.xml");
+                    signResult.SignedEInvoice.Save(ublPath);
+                    //signResult.SaveSignedEInvoice(ublPath);
+
+                    //EInvoiceValidator eInvoiceValidator = new EInvoiceValidator();
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, cert, secret);
+
+                    //if (!resultValidator.IsValid)
+                    //{
+                    //    var failedSteps = resultValidator.ValidationSteps
+                    //       .Where(step => !step.IsValid)
+                    //       .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                    //       .ToList();
+
+                    //    string fullError = failedSteps.Any()
+                    //        ? string.Join("\n\n", failedSteps)
+                    //        : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+
+                    //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    //}
 
 
-                byte[] bytes = Convert.FromBase64String(cert);
+
+                    //Get QRCode from SignedInvoice
+                    var Base64QrCode = ZatcaHelper.GetBase64QrCode(signResult);
+                    byte[] qrBytes = Convert.FromBase64String(Base64QrCode);
+                    salesBLL.UpdateZatcaQrCode(invoiceNo, qrBytes);
+                    //MessageBox.Show($"Base64 QRCode : {Base64QrCode}\n");
+
+                    ////GetRequestApi Payload
+                    //RequestGenerator RequestGenerator = new RequestGenerator();
+                    //RequestResult RequestResult = RequestGenerator.GenerateRequest(signResult.SignedEInvoice);
+
+                    //if (RequestResult.IsValid)
+                    //{
+                    //    var jsonPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_ApiRequestPayload.json");
+                    //    RequestResult.SaveRequestToFile(jsonPath);
+                    //    //MessageBox.Show($"Request Api Payload : \n{ RequestResult.InvoiceRequest.Serialize()}");
+                    //}
+
+                    // Save base64 string in DB (optional)
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
+
+                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+
+                }
+                else
+                {
+                    var failedSteps = signResult.Steps
+                    .Where(step => !step.IsValid)
+                    .Select(step => $"{step.StepName}: {step.Exception.Message}")
+                    .ToList();
+
+                    string fullError = failedSteps.Any()
+                        ? string.Join("\n", failedSteps)
+                        : signResult.ErrorMessage ?? "Signing failed with unknown error.";
+
+                    MessageBox.Show("Signing failed:\n" + fullError);
+
+                    MessageBox.Show("Signing failed:\n" + string.Join("\n", signResult.ErrorMessage));
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, signResult.ErrorMessage);
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error signing to ZATCA:\n" + ex.Message);
+                salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
+            }
+        }
+
+        public static async Task PCSID_SignCreditNoteToZatcaAsync(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
+        {
+            SalesBLL salesBLL = new SalesBLL();
+            try
+            {
+                if (UsersModal.useZatcaEInvoice == false)
+                {
+                    MessageBox.Show("ZATCA E-Invoice is not enabled for this branch. Please enable it in profile/settings.");
+                    return;
+                }
+                // 1. Get sale data
+                XmlDocument ublXml = GenerateUBLXMLCreditNote(invoiceNo, previousInvoiceNo, previousInvoiceDate);
+                //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
+
+                // Check if ZATCA credentials are configured
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
+                    return;
+                }
+
+                // 3. Sign XML
+                //string cert_CSID = activeZatcaCredential["cert_base64"].ToString(); // ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                //string secret_CSID = activeZatcaCredential["secret_key"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                string privateKey_CSID = activeZatcaCredential["private_key"].ToString(); //ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+                                                                                          // string complainceRequestID = activeZatcaCredential["compliance_request_id"].ToString(); //ZatcaInvoiceGenerator.GetComplainceRequestIDFromDb(UsersModal.logged_in_branch_id, _env);
+                                                                                          // string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert_CSID}:{secret_CSID}"));
+
+                // Retrieve PCSID credentials from the database using the credentialId
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                if (PCSID_dataRow == null)
+                {
+                    MessageBox.Show("No PCSID credentials found for the selected ZATCA CSID.");
+                    return;
+                }
+
+                string PCISD_cert = PCSID_dataRow["cert_base64"].ToString();
+                ////
+
+                byte[] bytes = Convert.FromBase64String(PCISD_cert);
+                string decodedCert = Encoding.UTF8.GetString(bytes);
+
+                //XmlDocument ublXml = LoadSampleUBL();
+                //ublXml.Save("UBL\\debug_ubl1.xml");
+
+                var signer = new EInvoiceSigner();
+                SignResult signResult = signer.SignDocument(ublXml, decodedCert, privateKey_CSID);
+
+                //ShowSignResult(signResult);
+
+                if (signResult.IsValid)
+                {
+                    // Make sure "UBL" folder exists
+                    string ublFolder = Path.Combine(Application.StartupPath, "UBL");
+                    if (!Directory.Exists(ublFolder))
+                        Directory.CreateDirectory(ublFolder);
+
+                    //var invoiceHash = new EInvoiceHashGenerator();
+                    //var hashResult = invoiceHash.GenerateEInvoiceHashing(signResult.SignedEInvoice);
+
+                    //Get Invoice Hash for Next PIH
+                    var SignedInvoiceHash = ZatcaHelper.GetInvoiceHash(signResult);
+                    //MessageBox.Show($"Invoice Hash : {SignedInvoiceHash}\n");
+                    ZatcaHelper.InsertInvoiceHashToSignedXml(signResult.SignedEInvoice, SignedInvoiceHash);
+
+                    var qrGen = new EInvoiceQRGenerator();
+                    QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
+                    string qrBase64 = qrResult.QR;
+
+                    // Insert QR into Signed XML before submission
+                    ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase64);
+
+                    // Save signed XML
+                    string ublPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_signed.xml");
+                    signResult.SignedEInvoice.Save(ublPath);
+                    //signResult.SaveSignedEInvoice(ublPath);
+
+                    //EInvoiceValidator eInvoiceValidator = new EInvoiceValidator();
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, cert, secret);
+
+                    //if (!resultValidator.IsValid)
+                    //{
+                    //    var failedSteps = resultValidator.ValidationSteps
+                    //       .Where(step => !step.IsValid)
+                    //       .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                    //       .ToList();
+
+                    //    string fullError = failedSteps.Any()
+                    //        ? string.Join("\n\n", failedSteps)
+                    //        : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+
+                    //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    //}
+
+
+
+                    //Get QRCode from SignedInvoice
+                    var Base64QrCode = ZatcaHelper.GetBase64QrCode(signResult);
+                    byte[] qrBytes = Convert.FromBase64String(Base64QrCode);
+                    salesBLL.UpdateZatcaQrCode(invoiceNo, qrBytes);
+                    //MessageBox.Show($"Base64 QRCode : {Base64QrCode}\n");
+
+                    ////GetRequestApi Payload
+                    //RequestGenerator RequestGenerator = new RequestGenerator();
+                    //RequestResult RequestResult = RequestGenerator.GenerateRequest(signResult.SignedEInvoice);
+
+                    //if (RequestResult.IsValid)
+                    //{
+                    //    var jsonPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_ApiRequestPayload.json");
+                    //    RequestResult.SaveRequestToFile(jsonPath);
+                    //    //MessageBox.Show($"Request Api Payload : \n{ RequestResult.InvoiceRequest.Serialize()}");
+                    //}
+
+                    // Save base64 string in DB (optional)
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
+
+                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+
+                }
+                else
+                {
+                    var failedSteps = signResult.Steps
+                    .Where(step => !step.IsValid)
+                    .Select(step => $"{step.StepName}: {step.Exception.Message}")
+                    .ToList();
+
+                    string fullError = failedSteps.Any()
+                        ? string.Join("\n", failedSteps)
+                        : signResult.ErrorMessage ?? "Signing failed with unknown error.";
+
+                    MessageBox.Show("Signing failed:\n" + fullError);
+
+                    MessageBox.Show("Signing failed:\n" + string.Join("\n", signResult.ErrorMessage));
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, signResult.ErrorMessage);
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error signing to ZATCA:\n" + ex.Message);
+                salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
+            }
+        }
+
+        public static async Task PCSID_SignDebitNoteToZatcaAsync(string invoiceNo, string previousInvoiceNo, DateTime previousInvoiceDate)
+        {
+            SalesBLL salesBLL = new SalesBLL();
+            try
+            {
+                if (UsersModal.useZatcaEInvoice == false)
+                {
+                    MessageBox.Show("ZATCA E-Invoice is not enabled for this branch. Please enable it in profile/settings.");
+                    return;
+                }
+                // 1. Get sale data
+                XmlDocument ublXml = GenerateUBLXMLDebitNote(invoiceNo, previousInvoiceNo, previousInvoiceDate);
+                //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
+
+                // Check if ZATCA credentials are configured
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA CSID found. Please configure them first.");
+                    return;
+                }
+
+                // 3. Sign XML
+                //string cert_CSID = activeZatcaCredential["cert_base64"].ToString(); // ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetPublicKeyFromFile();
+                //string secret_CSID = activeZatcaCredential["secret_key"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString()); // GetSecretFromFile();
+                string privateKey_CSID = activeZatcaCredential["private_key"].ToString(); //ZatcaInvoiceGenerator.GetPrivateKeyFromDb(UsersModal.logged_in_branch_id, activeZatcaCredential["mode"].ToString());  //GetPrivateKeyFromFile();
+                                                                                          // string complainceRequestID = activeZatcaCredential["compliance_request_id"].ToString(); //ZatcaInvoiceGenerator.GetComplainceRequestIDFromDb(UsersModal.logged_in_branch_id, _env);
+                                                                                          // string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert_CSID}:{secret_CSID}"));
+
+                // Retrieve PCSID credentials from the database using the credentialId
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                if (PCSID_dataRow == null)
+                {
+                    MessageBox.Show("No PCSID credentials found for the selected ZATCA CSID.");
+                    return;
+                }
+
+                string PCISD_cert = PCSID_dataRow["cert_base64"].ToString();
+                ////
+
+                byte[] bytes = Convert.FromBase64String(PCISD_cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);
 
                 //XmlDocument ublXml = LoadSampleUBL();

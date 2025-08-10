@@ -689,22 +689,23 @@ namespace pos.Master.Companies.zatca
             }
         }
 
-        public static int UpsertZatcaCredentials(int branchId, string mode, string cert, string privateKey, string secret,string csr,string otp,string compliance_request_id)
+        public static int UpsertZatcaCredentials(string cert_type, string mode, string cert, string privateKey, string secret,string csr,string otp,string compliance_request_id)
         {
             int newID = 0;
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(@"
-            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode AND otp=@otp)
+            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type)
                 UPDATE zatca_credentials 
-                SET cert_base64 = @cert, private_key = @privateKey, secret_key = @secret, updated_at = GETDATE(), csr_text=@csr_text, otp=@otp, compliance_request_id=@compliance_request_id
-                WHERE branch_id = @branchId AND mode = @mode
+                SET cert_base64 = @cert, private_key = @privateKey, secret_key = @secret, updated_at = GETDATE(), csr_text=@csr_text, 
+                otp=@otp, compliance_request_id=@compliance_request_id, cert_type=@cert_type
+                WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type
             ELSE
-                INSERT INTO zatca_credentials (company_id, user_id, branch_id, mode, cert_base64, private_key, secret_key, updated_at,csr_text,created_at,otp,compliance_request_id)
-                VALUES (@companyID,@userID,@branchId, @mode, @cert, @privateKey, @secret, GETDATE(),@csr_text,GETDATE(),@otp,@compliance_request_id)", cn);
+                INSERT INTO zatca_credentials (company_id, user_id, branch_id, mode, cert_base64, private_key, secret_key, updated_at,csr_text,created_at,otp,compliance_request_id, cert_type)
+                VALUES (@companyID,@userID,@branchId, @mode, @cert, @privateKey, @secret, GETDATE(),@csr_text,GETDATE(),@otp,@compliance_request_id, @cert_type)", cn);
 
-                cmd.Parameters.AddWithValue("@branchId", branchId); 
+                cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id); 
                 cmd.Parameters.AddWithValue("@companyID", UsersModal.loggedIncompanyID);
                 cmd.Parameters.AddWithValue("@userID", UsersModal.logged_in_userid);
                 cmd.Parameters.AddWithValue("@mode", mode);
@@ -714,6 +715,7 @@ namespace pos.Master.Companies.zatca
                 cmd.Parameters.AddWithValue("@csr_text", csr);
                 cmd.Parameters.AddWithValue("@otp", otp);
                 cmd.Parameters.AddWithValue("@compliance_request_id", compliance_request_id);
+                cmd.Parameters.AddWithValue("@cert_type", cert_type);
 
                 newID = cmd.ExecuteNonQuery();
                 newID += Convert.ToInt32(cmd.ExecuteScalar());
@@ -721,6 +723,37 @@ namespace pos.Master.Companies.zatca
                 return newID;
             }
         }
+        public static int UpsertZatcaPCSIDCredentials(string cert_type, string mode, string cert, string secret,int parent_id)
+        {
+            int newID = 0;
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(@"
+            IF EXISTS (SELECT 1 FROM zatca_credentials WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type)
+                UPDATE zatca_credentials 
+                SET cert_base64 = @cert, secret_key = @secret, updated_at = GETDATE(), parent_id = @parent_id
+                WHERE branch_id = @branchId AND mode = @mode AND cert_type=@cert_type
+            ELSE
+                INSERT INTO zatca_credentials (company_id, user_id, branch_id, mode, cert_base64, secret_key, updated_at, cert_type, parent_id)
+                VALUES (@companyID,@userID,@branchId, @mode, @cert, @secret, GETDATE(),@cert_type, @parent_id)", cn);
+
+                cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                cmd.Parameters.AddWithValue("@companyID", UsersModal.loggedIncompanyID);
+                cmd.Parameters.AddWithValue("@userID", UsersModal.logged_in_userid);
+                cmd.Parameters.AddWithValue("@mode", mode);
+                cmd.Parameters.AddWithValue("@cert", cert);
+                cmd.Parameters.AddWithValue("@secret", secret);
+                cmd.Parameters.AddWithValue("@cert_type", cert_type);
+                cmd.Parameters.AddWithValue("@parent_id", parent_id);
+
+                newID = cmd.ExecuteNonQuery();
+                newID += Convert.ToInt32(cmd.ExecuteScalar());
+
+                return newID;
+            }
+        }
+
         public static int UpdateZatcaStatus(int id)
         {
             int affectedRows = 0;
@@ -751,7 +784,7 @@ namespace pos.Master.Companies.zatca
             }
             return affectedRows;
         }
-        public static DataRow GetActiveZatcaCredential()
+        public static DataRow GetActiveZatcaCSID()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -763,6 +796,57 @@ namespace pos.Master.Companies.zatca
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
                     cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                            return dt.Rows[0];
+                        else
+                            return null;
+                    }
+                }
+            }
+        }
+        public static DataRow GetZatcaCredentialByParentID(int parentID)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                string query = @"
+                    SELECT TOP 1 *
+                    FROM zatca_credentials
+                    WHERE branch_id = @branchId AND parent_id = @parent_id";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                    cmd.Parameters.AddWithValue("@parent_id", parentID);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                            return dt.Rows[0];
+                        else
+                            return null;
+                    }
+                }
+            }
+        }
+
+        public static DataRow GetZatcaCredentialByID(int id)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                string query = @"
+                    SELECT TOP 1 *
+                    FROM zatca_credentials
+                    WHERE branch_id = @branchId AND status = 1 AND id = @ID";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@branchId", UsersModal.logged_in_branch_id);
+                    cmd.Parameters.AddWithValue("@ID", id);
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();

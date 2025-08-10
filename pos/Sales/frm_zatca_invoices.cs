@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using pos.Master.Companies.zatca;
 using POS.BLL;
 using POS.Core;
@@ -16,8 +16,6 @@ namespace pos.Sales
 {
     public partial class frm_zatca_invoices : Form
     {
-        private string _env = "NonProduction"; // Default to NonProduction, can be changed based on active credentials
-
         public frm_zatca_invoices()
         {
             InitializeComponent();
@@ -26,9 +24,7 @@ namespace pos.Sales
 
         private void frm_zatca_invoices_Load(object sender, EventArgs e)
         {
-            DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCredential();
            
-            _env = activeZatcaCredential["mode"].ToString();
             LoadZatcaInvoices();
         }
 
@@ -45,91 +41,70 @@ namespace pos.Sales
             gridZatcaInvoices.DataSource = dt;
         }
 
-        private async void btnSend_Click(object sender, EventArgs e)
-        {
-            if (gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-           
-            await SendOrReportToZatca(invoiceNo, _env, isReport: false);
-        }
+        
 
         private async void btnReport_Click(object sender, EventArgs e)
         {
-            if (gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-
-            await SendOrReportToZatca(invoiceNo, _env, isReport: true);
-        }
-        public async Task ZatcaInvoiceClearanceAsync(string invoiceNo)
-        {
             try
             {
-                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
+                if (gridZatcaInvoices.CurrentRow == null) return;
 
-                // Check if ZATCA credentials are configured
-                if (string.IsNullOrEmpty(_env))
+                // Get the selected invoice number from the grid
+                if (gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("Please select a valid invoice.");
                     return;
                 }
-
-                var requestGenerator = new RequestGenerator();
-                var requestResult = requestGenerator.GenerateRequest(ublXml);
-                if (!requestResult.IsValid)
+                // Assuming the invoice number is in the "invoice_no" column
+                if (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString()))
                 {
-                    MessageBox.Show("Failed to generate request: " + requestResult.ErrorMessages);
+                    MessageBox.Show("Selected invoice number is empty.");
                     return;
                 }
+            
+                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
 
-                string cert_CSID = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, _env);
-                string secret_CSID = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, _env);
-                string complainceRequestID = ZatcaInvoiceGenerator.GetComplainceRequestIDFromDb(UsersModal.logged_in_branch_id, _env);
-                string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert_CSID}:{secret_CSID}"));
-
-                var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(complainceRequestID, credentials, _env);
-                string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
-                string secret1 = ProductionCSIDResponse.Secret;
-                string requestID1 = ProductionCSIDResponse.RequestID;
-
-                //If csid is not null, assign values to textboxes
-                // and make buttons visible
-                string cert = binarySecurityToken1 ?? "";
-                string secret = secret1 ?? "";
-                string PCSID_credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
-
-
-                var invoiceHash = new EInvoiceHashGenerator();
-                var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
-
-                var requestBody = new
-                {
-                    invoiceHash = hashResult.Hash,
-                    uuid = requestResult.InvoiceRequest.Uuid,
-                    invoice = requestResult.InvoiceRequest.Invoice
-                };
-
-                // Fix for CS4014 and IDE0058: Await the async call and handle the result
-                var response = await ZatcaHelper.CallSingleInvoiceClearanceAsync(requestBody, PCSID_credentials);
-                MessageBox.Show($"Successfully submitted to ZATCA ({_env}):\n{response}");
-                // Optionally, you can process 'response' or show a message if needed
+                btnComplianceChecks.Enabled = false;
+                btnComplianceChecks.Text = "Checking...";
+                btnComplianceChecks.Cursor = Cursors.WaitCursor;
+                btnComplianceChecks.Refresh();
+                await ZatcaInvoiceComplianceChecks(invoiceNo);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error submitting to ZATCA:\n{ex.Message}");
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                btnComplianceChecks.Enabled = true;
+                btnComplianceChecks.Text = "Compliance checks";
+                btnComplianceChecks.Cursor = Cursors.Default;
+            }
+            
+            
         }
-        public async Task ZatcaInvoiceReportingAsync(string invoiceNo)
+        private async Task ZatcaInvoiceComplianceChecks(string invoiceNo)
         {
             try
             {
-                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
+                if (invoiceNo == null) return;
 
-                // Check if ZATCA credentials are configured
-                if (string.IsNullOrEmpty(_env))
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
                 {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    MessageBox.Show("No active ZATCA CSID credentials found. Please configure them first.");
                     return;
                 }
+                string env = activeZatcaCredential["mode"].ToString();
+               
+                // Check if ZATCA credentials are configured
+                if (string.IsNullOrEmpty(env))
+                {
+                    MessageBox.Show("No active ZATCA CSID credentials found. Please configure them first.");
+                    return;
+                }
+
+                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
 
                 var requestGenerator = new RequestGenerator();
                 var requestResult = requestGenerator.GenerateRequest(ublXml);
@@ -139,53 +114,8 @@ namespace pos.Sales
                     return;
                 }
 
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, _env);
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, _env);
-                string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
-
-                var invoiceHash = new EInvoiceHashGenerator();
-                var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
-
-                var requestBody = new
-                {
-                    invoiceHash = hashResult.Hash,
-                    uuid = requestResult.InvoiceRequest.Uuid,
-                    invoice = requestResult.InvoiceRequest.Invoice
-                };
-
-                // Fix for CS4014 and IDE0058: Await the async call and handle the result
-                var response = await ZatcaHelper.CallSingleInvoiceReportingAsync(requestBody, credentials);
-                MessageBox.Show($"Successfully submitted to ZATCA ({_env}):\n{response}");
-                // Optionally, you can process 'response' or show a message if needed
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error submitting to ZATCA:\n{ex.Message}");
-            }
-        }
-        private async Task SendOrReportToZatca(string invoiceNo, string env, bool isReport)
-        {
-            try
-            {
-                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
-
-                // Check if ZATCA credentials are configured
-                if (string.IsNullOrEmpty(_env))
-                {
-                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
-                    return;
-                }
-
-                var requestGenerator = new RequestGenerator();
-                var requestResult = requestGenerator.GenerateRequest(ublXml);
-                if (!requestResult.IsValid)
-                {
-                    MessageBox.Show("Failed to generate request: " + requestResult.ErrorMessages);
-                    return;
-                }
-
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, _env);
-                string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, _env);
+                string cert = activeZatcaCredential["cert_base64"].ToString(); 
+                string secret = activeZatcaCredential["secret"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, env);
                 string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
 
                 var invoiceHash = new EInvoiceHashGenerator();
@@ -207,10 +137,10 @@ namespace pos.Sales
                     client.DefaultRequestHeaders.Add("Accept-Language", "EN");
 
                     string url;
-                    switch (_env)
+                    switch (env)
                     {
                         case "Production":
-                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";
+                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core/compliance/invoices";
                             break;
                         case "Simulation":
                             url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/compliance/invoices";
@@ -234,7 +164,7 @@ namespace pos.Sales
 
                     var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseContent);
                     string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? jsonResponse?.clearanceStatus : jsonResponse?.reportingStatus); //01=Standard Invoice
-                    
+
                     ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
                         invoiceNo,
                         requestResult.InvoiceRequest.Uuid,
@@ -255,6 +185,222 @@ namespace pos.Sales
             }
         }
 
+        public async Task ZatcaInvoiceClearanceAsync(string invoiceNo)
+        {
+            try
+            {
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA CSID credentials found. Please configure them first.");
+                    return;
+                }
+
+                string env = activeZatcaCredential["mode"].ToString();
+                int credentialId = Convert.ToInt32(activeZatcaCredential["id"]);
+
+                // Check if ZATCA credentials are configured
+                if (string.IsNullOrEmpty(env))
+                {
+                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    return;
+                }
+
+                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
+
+                var requestGenerator = new RequestGenerator();
+                var requestResult = requestGenerator.GenerateRequest(ublXml);
+                if (!requestResult.IsValid)
+                {
+                    MessageBox.Show("Failed to generate request: " + requestResult.ErrorMessages);
+                    return;
+                }
+
+                // Retrieve PCSID credentials from the database using the credentialId
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(credentialId);
+                if (PCSID_dataRow == null)
+                {
+                    MessageBox.Show("No PCSID credentials found for the selected ZATCA credential.");
+                    return;
+                }
+
+                string cert = PCSID_dataRow["cert_base64"].ToString();
+                string secret = PCSID_dataRow["secret_key"].ToString();
+                string PCSID_credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
+                ////
+
+                var invoiceHash = new EInvoiceHashGenerator();
+                var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
+
+                var requestBody = new
+                {
+                    invoiceHash = hashResult.Hash,
+                    uuid = requestResult.InvoiceRequest.Uuid,
+                    invoice = requestResult.InvoiceRequest.Invoice
+                };
+
+                // Fix for CS4014 and IDE0058: Await the async call and handle the result
+                var response = await ZatcaHelper.CallSingleInvoiceClearanceAsync(requestBody, PCSID_credentials, env);
+
+                if (string.IsNullOrEmpty(response))
+                {
+                    MessageBox.Show("No response received from ZATCA.");
+                    return;
+                }
+                var responseContent = JsonConvert.DeserializeObject<dynamic>(response);
+                if (responseContent == null)
+                {
+                    MessageBox.Show("Invalid response format from ZATCA.");
+                    return;
+                }
+                string zatcaStatus = responseContent?.clearanceStatus;
+
+                if (string.IsNullOrEmpty(zatcaStatus))
+                {
+                    MessageBox.Show("ZATCA clearance status is empty or not found in the response.");
+                    return;
+                }
+
+                // Save the ZATCA status to the database
+                ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
+                       invoiceNo,
+                       requestResult.InvoiceRequest.Uuid,
+                       hashResult.Hash,
+                       responseContent?.clearedInvoice,      //requestResult.InvoiceRequest.Invoice,
+                       zatcaStatus,
+                       env,
+                       responseContent.ToString()
+                       );
+                // Optionally, you can save the response content to the database or process it further
+                // Show a success message
+                if (zatcaStatus == "Success")
+                {
+                    MessageBox.Show($"Invoice {invoiceNo} has been successfully cleared by ZATCA.");
+                }
+                else
+                {
+                    MessageBox.Show($"ZATCA clearance status for invoice {invoiceNo}: {zatcaStatus}");
+                }
+                // Show the response in a message box or process it as needed
+                // For example, you can show the response in a message box
+                MessageBox.Show($"ZATCA Response:\n{response}");
+                // Alternatively, you can log the response or save it to a file/database
+                LoadZatcaInvoices(); // Optionally reload the invoices grid
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error submitting to ZATCA:\n{ex.Message}");
+            }
+        }
+        public async Task ZatcaInvoiceReportingAsync(string invoiceNo)
+        {
+            try
+            {
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA CSID credentials found. Please configure them first.");
+                    return;
+                }
+
+                string env = activeZatcaCredential["mode"].ToString();
+                int credentialId = Convert.ToInt32(activeZatcaCredential["id"]);
+
+                // Check if ZATCA credentials are configured
+                if (string.IsNullOrEmpty(env))
+                {
+                    MessageBox.Show("No active ZATCA credentials found. Please configure them first.");
+                    return;
+                }
+                
+                XmlDocument ublXml = LoadSignedXMLInvoice(invoiceNo);
+
+                var requestGenerator = new RequestGenerator();
+                var requestResult = requestGenerator.GenerateRequest(ublXml);
+                if (!requestResult.IsValid)
+                {
+                    MessageBox.Show("Failed to generate request: " + requestResult.ErrorMessages);
+                    return;
+                }
+
+                // Retrieve PCSID credentials from the database using the credentialId
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(credentialId);
+                if (PCSID_dataRow == null)
+                {
+                    MessageBox.Show("No PCSID credentials found for the selected ZATCA credential.");
+                    return;
+                }
+
+                string cert = PCSID_dataRow["cert_base64"].ToString();
+                string secret = PCSID_dataRow["secret_key"].ToString();
+                string PCSID_credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
+                ////
+                ///
+
+                var invoiceHash = new EInvoiceHashGenerator();
+                var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
+
+                var requestBody = new
+                {
+                    invoiceHash = hashResult.Hash,
+                    uuid = requestResult.InvoiceRequest.Uuid,
+                    invoice = requestResult.InvoiceRequest.Invoice
+                };
+
+                // Fix for CS4014 and IDE0058: Await the async call and handle the result
+                var response = await ZatcaHelper.CallSingleInvoiceReportingAsync(requestBody, PCSID_credentials,env);
+                if (string.IsNullOrEmpty(response))
+                {
+                    MessageBox.Show("No response received from ZATCA.");
+                    return;
+                }
+                var responseContent = JsonConvert.DeserializeObject<dynamic>(response);
+                if (responseContent == null)
+                {
+                    MessageBox.Show("Invalid response format from ZATCA.");
+                    return;
+                }
+                string zatcaStatus = responseContent?.reportingStatus;
+
+                if (string.IsNullOrEmpty(zatcaStatus))
+                {
+                    MessageBox.Show("ZATCA reporting status is empty or not found in the response.");
+                    return;
+                }
+
+                // Save the ZATCA status to the database
+                ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
+                       invoiceNo,
+                       requestResult.InvoiceRequest.Uuid,
+                       hashResult.Hash,
+                       requestResult.InvoiceRequest.Invoice,
+                       zatcaStatus,
+                       env,
+                       responseContent.ToString()
+                       );
+                // Optionally, you can save the response content to the database or process it further
+                // Show a success message
+                if (zatcaStatus == "Success")
+                {
+                    MessageBox.Show($"Invoice {invoiceNo} has been successfully reported by ZATCA.");
+                }
+                else
+                {
+                    MessageBox.Show($"ZATCA clearance status for invoice {invoiceNo}: {zatcaStatus}");
+                }
+                // Show the response in a message box or process it as needed
+                // For example, you can show the response in a message box
+                MessageBox.Show($"ZATCA Response:\n{response}");
+                // Alternatively, you can log the response or save it to a file/database
+                LoadZatcaInvoices(); // Optionally reload the invoices grid
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error submitting to ZATCA:\n{ex.Message}");
+            }
+        }
+        
         private void btnViewResponse_Click(object sender, EventArgs e)
         {
             if (gridZatcaInvoices.CurrentRow == null) return;
@@ -313,7 +459,7 @@ namespace pos.Sales
                 ZatcaHelper.SignInvoiceToZatca(invoiceNo);
             }else if (account.ToLower() == "return")
             {
-                ZatcaHelper.SignCreditNoteToZatca(invoiceNo, prevInvoiceNo, prevSaleDate);
+                ZatcaHelper.PCSID_SignCreditToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
             }
             //LoadZatcaInvoices();
         }
@@ -332,11 +478,22 @@ namespace pos.Sales
             ZatcaInvoiceReportingAsync(invoiceNo);
         }
 
-        private void btn_PCSID_sign_Click(object sender, EventArgs e)
+        private async void btn_PCSID_sign_Click(object sender, EventArgs e)
         {
             if (gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString(); 
-            ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
+            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+            string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
+            string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
+            DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
+
+            if (account.ToLower() == "sale")
+            {
+                await ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
+            }
+            else if (account.ToLower() == "return")
+            {
+                ZatcaHelper.PCSID_SignCreditToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+            }
         }
     }
 }

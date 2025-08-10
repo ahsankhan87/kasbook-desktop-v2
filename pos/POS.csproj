@@ -399,11 +399,23 @@
     <Compile Include="Master\Banks\frm_bank_payment.Designer.cs">
       <DependentUpon>frm_bank_payment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Master\Companies\zatca\AutoGenerateCSR.cs">
+    <Compile Include="Master\Companies\zatca\AutoGenerateCSID.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Master\Companies\zatca\AutoGenerateCSR.Designer.cs">
-      <DependentUpon>AutoGenerateCSR.cs</DependentUpon>
+    <Compile Include="Master\Companies\zatca\AutoGenerateCSID.Designer.cs">
+      <DependentUpon>AutoGenerateCSID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Companies\zatca\GeneratePCSID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Companies\zatca\GeneratePCSID.Designer.cs">
+      <DependentUpon>GeneratePCSID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Companies\zatca\RenewPCSID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Companies\zatca\RenewPCSID.Designer.cs">
+      <DependentUpon>RenewPCSID.cs</DependentUpon>
     </Compile>
     <Compile Include="Master\Companies\zatca\ShowQRCodePhase2.cs">
       <SubType>Form</SubType>
@@ -1381,8 +1393,14 @@
     <EmbeddedResource Include="Master\Branches\frm_branches.resx">
       <DependentUpon>frm_branches.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Master\Companies\zatca\AutoGenerateCSR.resx">
-      <DependentUpon>AutoGenerateCSR.cs</DependentUpon>
+    <EmbeddedResource Include="Master\Companies\zatca\AutoGenerateCSID.resx">
+      <DependentUpon>AutoGenerateCSID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Companies\zatca\GeneratePCSID.resx">
+      <DependentUpon>GeneratePCSID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Companies\zatca\RenewPCSID.resx">
+      <DependentUpon>RenewPCSID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Companies\zatca\ShowQRCodePhase2.resx">
       <DependentUpon>ShowQRCodePhase2.cs</DependentUpon>

@@ -38,7 +38,7 @@ public class ZatcaAuth
                 Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation";
                 break;
             case "Production":
-                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal";
+                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core";
                 break;
             default:
                 Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal";
@@ -85,7 +85,7 @@ public class ZatcaAuth
                 Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation";
                 break;
             case "Production":
-                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal";
+                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core";
                 break;
             default:
                 Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal";
@@ -130,5 +130,59 @@ public class ZatcaAuth
         
     }
 
-    
+    public static async Task<AuthenticationResponse> RenewProductionCSIDAsync(string csr, string otp, string mode)
+    {
+        string api = "/production/csids";
+        string Server;
+        switch (mode)
+        {
+            case "Simulation":
+                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation";
+                break;
+            case "Production":
+                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core";
+                break;
+            default:
+                Server = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal";
+                break;
+        }
+        string apiLink = Server + api;
+
+        // Prepare the request body
+        var requestBody = new
+        {
+            csr = csr
+        };
+
+        var jsonBody = JsonConvert.SerializeObject(requestBody);
+        var content = new StringContent(jsonBody, System.Text.Encoding.UTF8, "application/json");
+
+        client.DefaultRequestHeaders.Clear();
+        // Set required headers
+        // Create the authorization token in the required format
+        //string authorizationToken = $"Bearer {binarySecurityToken}:{secret}";
+
+        client.DefaultRequestHeaders.Add("Accept-Language", "EN");
+        client.DefaultRequestHeaders.Add("accept", "application/json");
+        client.DefaultRequestHeaders.Add("Accept-Version", "V2");
+        client.DefaultRequestHeaders.Add("OTP", otp);
+
+        // Send the POST request
+        HttpResponseMessage response = await client.PostAsync(apiLink, content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            string responseContent = await response.Content.ReadAsStringAsync();
+            var tokenResponse = JsonConvert.DeserializeObject<AuthenticationResponse>(responseContent);
+            return tokenResponse;
+        }
+        else
+        {
+            string errorContent = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Failed to get Production CSID: {response.ReasonPhrase} - {errorContent}");
+        }
+
+
+    }
+
 }
