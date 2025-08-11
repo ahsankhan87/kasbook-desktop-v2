@@ -1103,6 +1103,12 @@
     <Compile Include="Sales\frm_searchSaleProducts.Designer.cs">
       <DependentUpon>frm_searchSaleProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\frm_debitnote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frm_debitnote.Designer.cs">
+      <DependentUpon>frm_debitnote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\frm_zatca_invoices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1935,6 +1941,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_searchSaleProducts.resx">
       <DependentUpon>frm_searchSaleProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_debitnote.resx">
+      <DependentUpon>frm_debitnote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_zatca_invoices.resx">
       <DependentUpon>frm_zatca_invoices.cs</DependentUpon>

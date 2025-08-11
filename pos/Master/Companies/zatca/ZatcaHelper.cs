@@ -132,7 +132,8 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+                    MessageBox.Show($"Invoice No: {invoiceNo} signed with ZATCA CSID.", "ZATCA Compliance CSID", MessageBoxButtons.OK);
+
 
                 }
                 else
@@ -266,7 +267,8 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+                    MessageBox.Show($"Credit Note No: {invoiceNo} signed with ZATCA CSID.", "ZATCA Compliance CSID", MessageBoxButtons.OK);
+
 
                 }
                 else
@@ -401,7 +403,8 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+                    MessageBox.Show($"Debit Note No: {invoiceNo} signed with ZATCA CSID.", "ZATCA Compliance CSID", MessageBoxButtons.OK);
+
 
                 }
                 else
@@ -791,7 +794,7 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+                    MessageBox.Show($"Invoice No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK);
 
                 }
                 else
@@ -937,7 +940,7 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+                    MessageBox.Show($"Credit Note No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK);
 
                 }
                 else
@@ -1083,7 +1086,8 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice signed by Zatca and saved.");
+                    MessageBox.Show($"Debit Note No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK);
+
 
                 }
                 else

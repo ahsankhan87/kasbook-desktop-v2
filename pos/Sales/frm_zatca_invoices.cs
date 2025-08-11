@@ -452,52 +452,154 @@ namespace pos.Sales
 
         private void btn_signInvoice_Click(object sender, EventArgs e)
         {
-            if (gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-            string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
-            string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
-            DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
+            try
+            {
+                if (gridZatcaInvoices.CurrentRow == null) return;
+                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
+                string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
+                DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
 
-            if (account.ToLower() == "sale")
+                btn_signInvoice.Enabled = false;
+                btn_signInvoice.Text = "Checking...";
+                btn_signInvoice.Cursor = Cursors.WaitCursor;
+                btn_signInvoice.Refresh();
+
+                if (account.ToLower() == "sale")
+                {
+                    ZatcaHelper.SignInvoiceToZatca(invoiceNo);
+                }
+                else if (account.ToLower() == "return")
+                {
+                    ZatcaHelper.SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+
+                }
+                else if (account.ToLower() == "debit")
+                {
+                    ZatcaHelper.SignDebitNoteToZatca(invoiceNo, prevInvoiceNo, prevSaleDate);
+
+                }
+            }
+            catch (Exception ex)
             {
-                ZatcaHelper.SignInvoiceToZatca(invoiceNo);
-            }else if (account.ToLower() == "return")
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
             {
-                ZatcaHelper.SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
-                
+                btn_signInvoice.Enabled = true;
+                btn_signInvoice.Text = "CSID Sign Invoice";
+                btn_signInvoice.Cursor = Cursors.Default;
             }
             //LoadZatcaInvoices();
         }
 
-        private void btn_Invoice_clearance_Click(object sender, EventArgs e)
+        private async void btn_Invoice_clearance_Click(object sender, EventArgs e)
         {
-            if (gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-            ZatcaInvoiceClearanceAsync(invoiceNo);
+            try
+            {
+                if (gridZatcaInvoices.CurrentRow == null) return;
+                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+               
+                btn_Invoice_clearance.Enabled = false;
+                btn_Invoice_clearance.Text = "Checking...";
+                btn_Invoice_clearance.Cursor = Cursors.WaitCursor;
+                btn_Invoice_clearance.Refresh();
+                await ZatcaInvoiceClearanceAsync(invoiceNo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                btn_Invoice_clearance.Enabled = true;
+                btn_Invoice_clearance.Text = "Clearance";
+                btn_Invoice_clearance.Cursor = Cursors.Default;
+            }
         }
 
-        private void btn_invoice_report_Click(object sender, EventArgs e)
+        private async void btn_invoice_report_Click(object sender, EventArgs e)
         {
-            if(gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-            ZatcaInvoiceReportingAsync(invoiceNo);
+            try
+            {
+                if (gridZatcaInvoices.CurrentRow == null) return;
+                // Get the selected invoice number from the grid
+                if (gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value == null)
+                {
+                    MessageBox.Show("Please select a valid invoice.");
+                    return;
+                }
+                // Assuming the invoice number is in the "invoice_no" column
+                if (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString()))
+                {
+                    MessageBox.Show("Selected invoice number is empty.");
+                    return;
+                }
+                btn_invoice_report.Enabled = false;
+                btn_invoice_report.Text = "Checking...";
+                btn_invoice_report.Cursor = Cursors.WaitCursor;
+                btn_invoice_report.Refresh();
+                await ZatcaInvoiceReportingAsync(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                btn_invoice_report.Enabled = true;
+                btn_invoice_report.Text = "Reporting";
+                btn_invoice_report.Cursor = Cursors.Default;
+            }
         }
 
         private async void btn_PCSID_sign_Click(object sender, EventArgs e)
         {
-            if (gridZatcaInvoices.CurrentRow == null) return;
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-            string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
-            string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
-            DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
+            try
+            {
+                // Check if the current row is selected
+                if (gridZatcaInvoices.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select an invoice to sign.");
+                    return;
+                }
+                // Get the invoice number and account type from the selected row
+                // Check if the current row is selected
+                if (gridZatcaInvoices.CurrentRow == null) return;
+                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
+                string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
+                DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
 
-            if (account.ToLower() == "sale")
-            {
-                await ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
+                btn_PCSID_sign.Enabled = false;
+                btn_PCSID_sign.Text = "Checking...";
+                btn_PCSID_sign.Cursor = Cursors.WaitCursor;
+                btn_PCSID_sign.Refresh();
+
+                if (account.ToLower() == "sale")
+                {
+                    await ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
+                }
+                else if (account.ToLower() == "return")
+                {
+                    await ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                }
+                else if (account.ToLower() == "debit")
+                {
+                    await ZatcaHelper.PCSID_SignDebitNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                }
+
+                
             }
-            else if (account.ToLower() == "return")
+            catch (Exception ex)
             {
-                ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                btn_PCSID_sign.Enabled = true;
+                btn_PCSID_sign.Text = "PCSID Sign";
+                btn_PCSID_sign.Cursor = Cursors.Default;
             }
         }
     }

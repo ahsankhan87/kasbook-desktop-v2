@@ -289,6 +289,11 @@ namespace pos.Master.Companies.zatca
         
         private void AddAllowanceCharge(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
+            if (invoice["discount_value"].ToString() == "")
+            {
+                return;
+            }
+
             decimal discount = Math.Abs(Convert.ToDecimal(invoice["discount_value"]));
 
             if (discount > 0)

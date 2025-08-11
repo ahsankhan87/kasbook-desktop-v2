@@ -442,5 +442,7 @@ namespace pos.Master.Companies.zatca
         {
             fillcontrols();
         }
+
+        
     }
 }

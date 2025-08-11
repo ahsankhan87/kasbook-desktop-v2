@@ -47,6 +47,7 @@
     <Compile Include="POS\BanksDLL.cs" />
     <Compile Include="POS\CustomerDLL.cs" />
     <Compile Include="POS\CustomerDLL_old.cs" />
+    <Compile Include="POS\DebitNoteDLL.cs" />
     <Compile Include="POS\FiscalYearsDLL.cs" />
     <Compile Include="POS\BranchesDLL.cs" />
     <Compile Include="POS\Log.cs" />

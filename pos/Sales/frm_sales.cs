@@ -2874,7 +2874,33 @@ namespace pos
                             if (sale_id > 0)
                             {
                                 // Sign invoice to ZATCA
-                                ZatcaHelper.SignInvoiceToZatca(invoice_no);
+                                if (UsersModal.useZatcaEInvoice == true)
+                                {
+                                    DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                                    if (activeZatcaCredential == null)
+                                    {
+                                        MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
+                                    }
+
+                                    // Retrieve PCSID credentials from the database using the credentialId
+                                    DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                                    if (PCSID_dataRow == null)
+                                    {
+                                        //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
+                                        
+                                        //Sign Invoice with CSID instead of Production CSID
+                                        ZatcaHelper.SignInvoiceToZatca(invoice_no);
+
+                                    } else
+                                    {
+                                        //If PCSID exist then sign it 
+                                        ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
+                                    }
+                                    
+
+                                }
+                                //////
+                                ///
                                 MessageBox.Show(invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             }

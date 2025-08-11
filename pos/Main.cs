@@ -1862,5 +1862,28 @@ namespace pos
         {
             ZatcaInvoices = null;
         }
+
+        Form DebitNote;
+        private void debitNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (DebitNote == null)
+            {
+                DebitNote = new pos.Sales.frm_debitnote()
+                {
+                    MdiParent = this
+                };
+                DebitNote.FormClosed += new FormClosedEventHandler(DebitNote_FormClosed);
+                DebitNote.Show();
+            }
+            else
+            {
+                DebitNote.Activate();
+            }
+        }
+
+        private void DebitNote_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DebitNote = null;
+        }
     }
 }

@@ -246,7 +246,7 @@ namespace pos.Sales
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(269, 15);
+            this.lblTitle.Location = new System.Drawing.Point(299, 15);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(337, 32);
             this.lblTitle.TabIndex = 7;
@@ -277,7 +277,7 @@ namespace pos.Sales
             // btn_invoice_report
             // 
             this.btn_invoice_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_invoice_report.Location = new System.Drawing.Point(908, 12);
+            this.btn_invoice_report.Location = new System.Drawing.Point(908, 10);
             this.btn_invoice_report.Name = "btn_invoice_report";
             this.btn_invoice_report.Size = new System.Drawing.Size(120, 37);
             this.btn_invoice_report.TabIndex = 3;

@@ -148,6 +148,7 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
+            this.debitNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -529,6 +530,7 @@
             this.salesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTransactionToolStripMenuItem2,
             this.salesReturnToolStripMenuItem,
+            this.debitNoteToolStripMenuItem,
             this.zatcaInvoicesToolStripMenuItem,
             this.allTransactionToolStripMenuItem1,
             this.toolStripSeparator2,
@@ -979,6 +981,12 @@
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
             // 
+            // debitNoteToolStripMenuItem
+            // 
+            this.debitNoteToolStripMenuItem.Name = "debitNoteToolStripMenuItem";
+            resources.ApplyResources(this.debitNoteToolStripMenuItem, "debitNoteToolStripMenuItem");
+            this.debitNoteToolStripMenuItem.Click += new System.EventHandler(this.debitNoteToolStripMenuItem_Click);
+            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1126,5 +1134,6 @@
         private System.Windows.Forms.ToolStripMenuItem lowStockReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateZATCACSIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zatcaInvoicesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debitNoteToolStripMenuItem;
     }
 }

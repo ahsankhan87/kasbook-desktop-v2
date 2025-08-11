@@ -44,6 +44,7 @@
     <Compile Include="Accounts\AccountsModal.cs" />
     <Compile Include="Accounts\GroupsModal.cs" />
     <Compile Include="POS\BankModal.cs" />
+    <Compile Include="POS\DebitNoteModal.cs" />
     <Compile Include="POS\FiscalYearsModal.cs" />
     <Compile Include="POS\BranchesModal.cs" />
     <Compile Include="POS\PaymentMethodModal.cs" />

@@ -44,6 +44,7 @@
     <Compile Include="Accounts\AccountsBLL.cs" />
     <Compile Include="Accounts\GroupsBLL.cs" />
     <Compile Include="POS\BankBLL.cs" />
+    <Compile Include="POS\DebitNoteBLL.cs" />
     <Compile Include="POS\FiscalyearsBLL.cs" />
     <Compile Include="POS\BranchesBLL.cs" />
     <Compile Include="POS\PaymentMethodBLL.cs" />

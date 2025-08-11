@@ -147,6 +147,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        public String GetMaxDebitNoteInvoiceNo()
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetMaxDebitNoteInvoiceNo();
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
         public String GetMaxEstimateInvoiceNo()
         {
             try

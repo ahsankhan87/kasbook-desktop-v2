@@ -320,7 +320,43 @@ namespace POS.DLL
             }
 
         }
+        public String GetMaxDebitNoteInvoiceNo()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
 
+                        cmd = new SqlCommand("SELECT MAX(invoice_no) FROM pos_sales WHERE SUBSTRING(invoice_no, 1,2) = 'DN' AND branch_id = @branch_id", cn);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                        string maxId = Convert.ToString(cmd.ExecuteScalar());
+
+                        if (maxId == "")
+                        {
+                            return maxId = "DN-000001";
+                        }
+                        else
+                        {
+                            int intval = int.Parse(maxId.Substring(3, 6));
+                            intval++;
+                            maxId = String.Format("DN-{00:000000}", intval);
+                            return maxId;
+                        }
+
+                    }
+                    return "";
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+
+        }
         public String GetMaxEstimateInvoiceNo()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

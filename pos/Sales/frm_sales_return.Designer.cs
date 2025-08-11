@@ -65,7 +65,6 @@
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkDebitNote = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -283,7 +282,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.chkDebitNote);
             this.panel2.Controls.Add(this.cmbReturnReason);
             this.panel2.Controls.Add(this.txt_close);
             this.panel2.Controls.Add(this.btn_return);
@@ -330,12 +328,6 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Name = "label1";
-            // 
-            // chkDebitNote
-            // 
-            resources.ApplyResources(this.chkDebitNote, "chkDebitNote");
-            this.chkDebitNote.Name = "chkDebitNote";
-            this.chkDebitNote.UseVisualStyleBackColor = true;
             // 
             // frm_sales_return
             // 
@@ -389,7 +381,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_subtype_code;
-        private System.Windows.Forms.CheckBox chkDebitNote;
     }
 }
 

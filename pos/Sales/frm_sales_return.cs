@@ -252,16 +252,36 @@ namespace pos
                     if (sale_id > 0)
                     {
                         //sign the credit note invoice to ZATCA
-                        if(chkDebitNote.Checked)
+                        if (UsersModal.useZatcaEInvoice == true)
                         {
-                            ZatcaHelper.SignDebitNoteToZatca(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                            DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                            if (activeZatcaCredential == null)
+                            {
+                                MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
+                            }
+
+                            // Retrieve PCSID credentials from the database using the credentialId
+                            DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                            if (PCSID_dataRow == null)
+                            {
+                                //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
+
+                                //Sign Invoice with CSID instead of Production CSID
+                                ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+
+                            }
+                            else
+                            {
+                                //If PCSID exist then sign it 
+                                ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                            }
+
 
                         }
-                        else
-                        {
-                            ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
-                        }
-
+                        //////
+                        ///
+                        
+                        
                         MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grid_sales_return.DataSource = null;
                         grid_sales_return.Rows.Clear();
