@@ -268,7 +268,6 @@ namespace pos
 
                                 //Sign Invoice with CSID instead of Production CSID
                                 ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
-
                             }
                             else
                             {
@@ -276,11 +275,9 @@ namespace pos
                                 ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
                             }
 
-
                         }
                         //////
                         ///
-                        
                         
                         MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grid_sales_return.DataSource = null;

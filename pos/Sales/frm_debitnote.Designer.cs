@@ -128,6 +128,7 @@ namespace pos.Sales
             // 
             // btnSubmitZatca
             // 
+            this.btnSubmitZatca.Enabled = false;
             this.btnSubmitZatca.Location = new System.Drawing.Point(170, 209);
             this.btnSubmitZatca.Name = "btnSubmitZatca";
             this.btnSubmitZatca.Size = new System.Drawing.Size(120, 32);
@@ -137,6 +138,7 @@ namespace pos.Sales
             // 
             // btnViewResponse
             // 
+            this.btnViewResponse.Enabled = false;
             this.btnViewResponse.Location = new System.Drawing.Point(310, 209);
             this.btnViewResponse.Name = "btnViewResponse";
             this.btnViewResponse.Size = new System.Drawing.Size(120, 32);

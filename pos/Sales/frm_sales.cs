@@ -98,18 +98,6 @@ namespace pos
             get_payment_method_dropdownlist();
             get_saletype_dropdownlist();
             get_invoice_subtype_dropdownlist();
-
-            if (lang == "en-US")
-            {
-                cmb_sale_type.SelectedValue = "Cash";
-                cmb_invoice_subtype_code.SelectedValue = "02"; // 02 = Simplified invoice
-            }
-            else if (lang == "ar-SA")
-            {
-                cmb_sale_type.SelectedIndex = 0;
-                cmb_invoice_subtype_code.SelectedIndex = 0;
-            }
-
             Get_user_total_commission();
 
             //disable sorting in grid
@@ -1421,6 +1409,8 @@ namespace pos
             cmb_sale_type.ValueMember = "id";
             cmb_sale_type.DataSource = dt;
 
+            cmb_sale_type.SelectedIndex = 0; //default value
+
         }
         private void get_invoice_subtype_dropdownlist()
         {
@@ -1461,6 +1451,7 @@ namespace pos
             cmb_invoice_subtype_code.ValueMember = "id";
             cmb_invoice_subtype_code.DataSource = dt;
 
+            cmb_invoice_subtype_code.SelectedIndex = 0; //default value
         }
 
         public void load_user_rights(int user_id)

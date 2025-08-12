@@ -242,6 +242,69 @@ namespace POS.DLL
                 }
             }
         }
+        public DataTable SearchInvoices(String invoiceNo,DateTime? fromdate, String type, String subtype, DateTime? todate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        cmd = new SqlCommand();
+                        cmd.Connection = cn;
+
+                        var query = new StringBuilder("SELECT s.*,IIF(s.invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype,CONCAT(C.first_name,' ',C.last_name) AS customer " +
+                            "FROM pos_sales s LEFT JOIN pos_customers C ON C.id=S.customer_id WHERE 1=1");
+
+                        if (!string.IsNullOrEmpty(invoiceNo))
+                        {
+                            query.Append(" AND s.invoice_no LIKE @InvoiceNo");
+                            cmd.Parameters.AddWithValue("@InvoiceNo", string.Format("%{0}%", invoiceNo));
+                        }
+                        if (!string.IsNullOrEmpty(type))
+                        {
+                            query.Append(" AND s.account = @Type");
+                            cmd.Parameters.AddWithValue("@Type", type);
+                        }
+                        if (!string.IsNullOrEmpty(subtype))
+                        {
+                            query.Append(" AND s.invoice_subtype_code = @Subtype");
+                            cmd.Parameters.AddWithValue("@Subtype", subtype);
+                        }
+                        if (fromdate.HasValue)
+                        {
+                            query.Append(" AND s.sale_date >= @FromDate");
+                            cmd.Parameters.AddWithValue("@FromDate", fromdate.Value.Date);
+                        }
+
+                        if (todate.HasValue)
+                        {
+                            query.Append(" AND s.sale_date <= @ToDate");
+                            cmd.Parameters.AddWithValue("@ToDate", todate.Value.Date);
+                        }
+
+                        query.Append(" AND s.branch_id = @branch_id");
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                        cmd.CommandText = query.ToString();
+
+                        da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        return dt;
+
+                    }
+
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
 
         public String GetMaxInvoiceNo()
         {

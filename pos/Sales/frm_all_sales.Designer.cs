@@ -34,8 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.BtnUBLInvoice = new System.Windows.Forms.Button();
             this.BtnCustomerNameChange = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
@@ -76,8 +74,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.BtnUBLInvoice);
             this.panel1.Controls.Add(this.BtnCustomerNameChange);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txt_search);
@@ -87,20 +83,6 @@
             this.panel1.Controls.Add(this.grid_all_sales);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // BtnUBLInvoice
-            // 
-            resources.ApplyResources(this.BtnUBLInvoice, "BtnUBLInvoice");
-            this.BtnUBLInvoice.Name = "BtnUBLInvoice";
-            this.BtnUBLInvoice.UseVisualStyleBackColor = true;
-            this.BtnUBLInvoice.Click += new System.EventHandler(this.BtnUBLInvoice_Click);
             // 
             // BtnCustomerNameChange
             // 
@@ -393,8 +375,6 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnCustomerNameChange;
-        private System.Windows.Forms.Button BtnUBLInvoice;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_subtype_code;

@@ -187,6 +187,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        public DataTable SearchInvoices(String invoiceNo, DateTime? date, String type, String subtype, DateTime? todate)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.SearchInvoices(invoiceNo, date, type, subtype, todate);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
 
         public int InsertSales(List<SalesModalHeader> sales, List<SalesModal> sales_detail)
         {
