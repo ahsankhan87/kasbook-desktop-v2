@@ -564,6 +564,19 @@ namespace pos.Sales
             {
                 if (gridZatcaInvoices.CurrentRow == null) return;
                 string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
+                string invoice_subtype = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
+
+                if (invoice_subtype.ToLower() == "02") // Simplified Invoice
+                {
+                    MessageBox.Show("Simplified invoices cannot be cleared. Please use the reporting option instead.", "ZATCA Clearance", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (string.IsNullOrEmpty(invoiceNo) || string.IsNullOrEmpty(account) || string.IsNullOrEmpty(invoice_subtype))
+                {
+                    MessageBox.Show("Please ensure all required fields are filled.");
+                    return;
+                }   
 
                 btn_Invoice_clearance.Enabled = false;
                 btn_Invoice_clearance.Text = "Checking...";
@@ -588,6 +601,15 @@ namespace pos.Sales
             try
             {
                 if (gridZatcaInvoices.CurrentRow == null) return;
+                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
+                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
+                string invoice_subtype = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
+                
+                if (invoice_subtype.ToLower() == "01") // 01=Standard Invoice
+                {
+                    MessageBox.Show("Standard invoices cannot be reported. Please use the clearance option instead.", "ZATCA Reporting", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 // Get the selected invoice number from the grid
                 if (gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value == null)
                 {
