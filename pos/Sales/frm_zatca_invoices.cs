@@ -27,6 +27,7 @@ namespace pos.Sales
 
         private void frm_zatca_invoices_Load(object sender, EventArgs e)
         {
+            StatusDDL();
             InvoiceSubTypeDDL();
             InvoiceTypeDDL();
             LoadZatcaInvoices();
@@ -41,7 +42,15 @@ namespace pos.Sales
         {
             // Example: get all invoices with ZATCA status from your DB
             gridZatcaInvoices.AutoGenerateColumns = false;
-            DataTable dt = new SalesBLL().GetAllSales(); // Implement this method in your BLL
+
+            string invoiceNo = txtInvoiceNo.Text.Trim();
+            string type = cmbType.SelectedValue?.ToString();
+            string subtype = cmbSubtype.SelectedValue?.ToString();
+            string status = cmb_status.SelectedValue?.ToString();
+            DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
+            DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
+
+            DataTable dt = new SalesBLL().SearchInvoices(invoiceNo,fromdate,type,subtype,todate,status); // Implement this method in your BLL
             gridZatcaInvoices.DataSource = dt;
         }
 
@@ -543,7 +552,7 @@ namespace pos.Sales
             finally
             {
                 btn_signInvoice.Enabled = true;
-                btn_signInvoice.Text = "CSID Sign Invoice";
+                btn_signInvoice.Text = "Sign Invoice";
                 btn_signInvoice.Cursor = Cursors.Default;
             }
             //LoadZatcaInvoices();
@@ -680,10 +689,11 @@ namespace pos.Sales
                 string invoiceNo = txtInvoiceNo.Text.Trim();
                 string type = cmbType.SelectedValue?.ToString();
                 string subtype = cmbSubtype.SelectedValue?.ToString();
+                string status = cmb_status.SelectedValue?.ToString();
                 DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
                 DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
 
-                var results = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate);
+                var results = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status);
                 gridZatcaInvoices.DataSource = results;
             }
             catch (Exception ex)
@@ -747,6 +757,48 @@ namespace pos.Sales
             xmlDoc.PreserveWhitespace = true; // important for signed XML
             xmlDoc.Load(path); // this reads the file and parses it into an XmlDocument
             return xmlDoc;
+        }
+
+        private void StatusDDL()
+        {
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("id");
+            dt.Columns.Add("name");
+            DataRow _row_0 = dt.NewRow();
+            _row_0["id"] = "";
+            _row_0["name"] = "All";
+            dt.Rows.Add(_row_0);
+            DataRow _row_1 = dt.NewRow();
+            _row_1["id"] = "Signed";
+            _row_1["name"] = "Signed";
+            dt.Rows.Add(_row_1);
+            DataRow _row_2 = dt.NewRow();
+            _row_2["id"] = "Cleared";
+            _row_2["name"] = "Cleared";
+            dt.Rows.Add(_row_2);
+            DataRow _row_3 = dt.NewRow();
+            _row_3["id"] = "Reported";
+            _row_3["name"] = "Reported";
+            dt.Rows.Add(_row_3);
+            DataRow _row_4 = dt.NewRow();
+            _row_4["id"] = "Pending";
+            _row_4["name"] = "Pending";
+            dt.Rows.Add(_row_4);
+            DataRow _row_5 = dt.NewRow();
+            _row_5["id"] = "Failed";
+            _row_5["name"] = "Failed";
+            dt.Rows.Add(_row_5);
+
+            cmb_status.DisplayMember = "name";
+            cmb_status.ValueMember = "id";
+            cmb_status.DataSource = dt;
+            cmb_status.SelectedIndex = 0; // Set default selection to "All"
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

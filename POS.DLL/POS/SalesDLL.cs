@@ -242,7 +242,7 @@ namespace POS.DLL
                 }
             }
         }
-        public DataTable SearchInvoices(String invoiceNo,DateTime? fromdate, String type, String subtype, DateTime? todate)
+        public DataTable SearchInvoices(String invoiceNo,DateTime? fromdate, String type, String subtype, DateTime? todate, String status)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -284,6 +284,11 @@ namespace POS.DLL
                         {
                             query.Append(" AND s.sale_date <= @ToDate");
                             cmd.Parameters.AddWithValue("@ToDate", todate.Value.Date);
+                        }
+                        if (!string.IsNullOrEmpty(status))
+                        {
+                            query.Append(" AND s.zatca_status = @Status");
+                            cmd.Parameters.AddWithValue("@Status", status);
                         }
 
                         query.Append(" AND s.branch_id = @branch_id");

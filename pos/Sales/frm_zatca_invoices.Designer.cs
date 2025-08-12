@@ -68,6 +68,8 @@ namespace pos.Sales
             this.prevSaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prevInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmb_status = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -102,7 +104,7 @@ namespace pos.Sales
             this.gridZatcaInvoices.ReadOnly = true;
             this.gridZatcaInvoices.RowHeadersWidth = 51;
             this.gridZatcaInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridZatcaInvoices.Size = new System.Drawing.Size(1082, 495);
+            this.gridZatcaInvoices.Size = new System.Drawing.Size(1142, 503);
             this.gridZatcaInvoices.TabIndex = 0;
             // 
             // btnComplianceChecks
@@ -110,7 +112,7 @@ namespace pos.Sales
             this.btnComplianceChecks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnComplianceChecks.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnComplianceChecks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnComplianceChecks.Location = new System.Drawing.Point(718, 10);
+            this.btnComplianceChecks.Location = new System.Drawing.Point(754, 11);
             this.btnComplianceChecks.Name = "btnComplianceChecks";
             this.btnComplianceChecks.Size = new System.Drawing.Size(126, 48);
             this.btnComplianceChecks.TabIndex = 5;
@@ -121,7 +123,7 @@ namespace pos.Sales
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(923, 9);
+            this.btnRefresh.Location = new System.Drawing.Point(972, 9);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(80, 37);
             this.btnRefresh.TabIndex = 6;
@@ -144,7 +146,7 @@ namespace pos.Sales
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(400, 7);
+            this.lblTitle.Location = new System.Drawing.Point(430, 7);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(337, 32);
             this.lblTitle.TabIndex = 7;
@@ -165,9 +167,9 @@ namespace pos.Sales
             this.btn_signInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_signInvoice.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btn_signInvoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_signInvoice.Location = new System.Drawing.Point(596, 11);
+            this.btn_signInvoice.Location = new System.Drawing.Point(625, 11);
             this.btn_signInvoice.Name = "btn_signInvoice";
-            this.btn_signInvoice.Size = new System.Drawing.Size(116, 48);
+            this.btn_signInvoice.Size = new System.Drawing.Size(123, 48);
             this.btn_signInvoice.TabIndex = 4;
             this.btn_signInvoice.Text = "Sign Invoice";
             this.btn_signInvoice.UseVisualStyleBackColor = false;
@@ -179,9 +181,9 @@ namespace pos.Sales
             this.btn_invoice_report.BackColor = System.Drawing.Color.YellowGreen;
             this.btn_invoice_report.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_invoice_report.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_invoice_report.Location = new System.Drawing.Point(963, 11);
+            this.btn_invoice_report.Location = new System.Drawing.Point(1012, 11);
             this.btn_invoice_report.Name = "btn_invoice_report";
-            this.btn_invoice_report.Size = new System.Drawing.Size(107, 48);
+            this.btn_invoice_report.Size = new System.Drawing.Size(118, 48);
             this.btn_invoice_report.TabIndex = 7;
             this.btn_invoice_report.Text = "Reporting";
             this.btn_invoice_report.UseVisualStyleBackColor = false;
@@ -193,9 +195,9 @@ namespace pos.Sales
             this.btn_Invoice_clearance.BackColor = System.Drawing.Color.YellowGreen;
             this.btn_Invoice_clearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Invoice_clearance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_Invoice_clearance.Location = new System.Drawing.Point(850, 11);
+            this.btn_Invoice_clearance.Location = new System.Drawing.Point(886, 11);
             this.btn_Invoice_clearance.Name = "btn_Invoice_clearance";
-            this.btn_Invoice_clearance.Size = new System.Drawing.Size(107, 48);
+            this.btn_Invoice_clearance.Size = new System.Drawing.Size(120, 48);
             this.btn_Invoice_clearance.TabIndex = 6;
             this.btn_Invoice_clearance.Text = "Clearance";
             this.btn_Invoice_clearance.UseVisualStyleBackColor = false;
@@ -254,7 +256,7 @@ namespace pos.Sales
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(886, 74);
+            this.btnSearch.Location = new System.Drawing.Point(1012, 76);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(121, 30);
             this.btnSearch.TabIndex = 5;
@@ -301,11 +303,13 @@ namespace pos.Sales
             // panel1
             // 
             this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.lblTitle);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cmb_status);
             this.panel1.Controls.Add(this.cmbSubtype);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnRefresh);
@@ -318,7 +322,7 @@ namespace pos.Sales
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1082, 108);
+            this.panel1.Size = new System.Drawing.Size(1142, 108);
             this.panel1.TabIndex = 15;
             // 
             // label5
@@ -344,7 +348,7 @@ namespace pos.Sales
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 108);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1082, 495);
+            this.panel2.Size = new System.Drawing.Size(1142, 503);
             this.panel2.TabIndex = 16;
             // 
             // panel3
@@ -357,20 +361,21 @@ namespace pos.Sales
             this.panel3.Controls.Add(this.btnComplianceChecks);
             this.panel3.Controls.Add(this.btn_viewQR);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 603);
+            this.panel3.Location = new System.Drawing.Point(0, 611);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1082, 77);
+            this.panel3.Size = new System.Drawing.Size(1142, 77);
             this.panel3.TabIndex = 17;
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(998, 9);
+            this.btnClose.Location = new System.Drawing.Point(1058, 9);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(80, 37);
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // id
             // 
@@ -393,12 +398,12 @@ namespace pos.Sales
             // 
             // customer
             // 
+            this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.customer.DataPropertyName = "customer";
             this.customer.HeaderText = "Customer";
             this.customer.MinimumWidth = 6;
             this.customer.Name = "customer";
             this.customer.ReadOnly = true;
-            this.customer.Width = 125;
             // 
             // zatca_mode
             // 
@@ -503,11 +508,28 @@ namespace pos.Sales
             this.sale_time.Visible = false;
             this.sale_time.Width = 125;
             // 
+            // cmb_status
+            // 
+            this.cmb_status.FormattingEnabled = true;
+            this.cmb_status.Location = new System.Drawing.Point(885, 78);
+            this.cmb_status.Name = "cmb_status";
+            this.cmb_status.Size = new System.Drawing.Size(121, 24);
+            this.cmb_status.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(883, 56);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 16);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Status";
+            // 
             // frm_zatca_invoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 680);
+            this.ClientSize = new System.Drawing.Size(1142, 688);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -569,5 +591,7 @@ namespace pos.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn prevSaleDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn prevInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_time;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmb_status;
     }
 }

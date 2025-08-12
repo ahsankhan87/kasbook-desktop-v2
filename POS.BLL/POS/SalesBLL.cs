@@ -187,12 +187,12 @@ namespace POS.BLL
                 throw;
             }
         }
-        public DataTable SearchInvoices(String invoiceNo, DateTime? date, String type, String subtype, DateTime? todate)
+        public DataTable SearchInvoices(String invoiceNo, DateTime? date, String type, String subtype, DateTime? todate, String status)
         {
             try
             {
                 SalesDLL objDLL = new SalesDLL();
-                return objDLL.SearchInvoices(invoiceNo, date, type, subtype, todate);
+                return objDLL.SearchInvoices(invoiceNo, date, type, subtype, todate, status);
             }
             catch
             {
