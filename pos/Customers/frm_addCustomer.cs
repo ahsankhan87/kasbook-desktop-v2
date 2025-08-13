@@ -44,6 +44,13 @@ namespace pos
                 txt_vin_no.Text = myProductView["vin_no"].ToString();
                 txt_car_name.Text = myProductView["car_name"].ToString();
                 txt_credit_limit.Text = myProductView["credit_limit"].ToString();
+                txt_StreetName.Text = myProductView["StreetName"].ToString();
+                txt_cityName.Text = myProductView["CityName"].ToString();
+                txt_buildingNumber.Text = myProductView["BuildingNumber"].ToString();
+                txt_citySubdivisionName.Text = myProductView["CitySubdivisionName"].ToString();
+                txt_postalCode.Text = myProductView["PostalCode"].ToString();
+                txt_countryName.Text = myProductView["CountryName"].ToString();
+                txt_registrationName.Text = myProductView["RegistrationName"].ToString();
 
             }
             lbl_customer_name.Visible = true;
@@ -80,7 +87,17 @@ namespace pos
                         contact_no = txt_contact_no.Text,
                         vin_no = txt_vin_no.Text,
                         car_name = txt_car_name.Text,
-                        credit_limit = (txt_credit_limit.Text != "" ? Convert.ToDouble(txt_credit_limit.Text) : 0)
+                        credit_limit = (txt_credit_limit.Text != "" ? Convert.ToDouble(txt_credit_limit.Text) : 0),
+                        StreetName = txt_StreetName.Text.Trim(),
+                        CityName = txt_cityName.Text.Trim(),
+                        BuildingNumber = txt_buildingNumber.Text.Trim(),
+                        CitySubdivisionName = txt_citySubdivisionName.Text.Trim(),
+                        PostalCode = txt_postalCode.Text.Trim(),
+                        CountryName = txt_countryName.Text.Trim(),
+                        registrationName = txt_registrationName.Text.Trim(),
+                        date_created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+
+
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();
@@ -94,7 +111,6 @@ namespace pos
                     {
                         MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
 
                 }
                 else
@@ -152,6 +168,13 @@ namespace pos
             grid_customer_transactions.DataSource = null;
             txt_credit_limit.Text = "";
 
+            txt_StreetName.Text = "";
+            txt_cityName.Text = "";
+            txt_buildingNumber.Text = "";
+            txt_citySubdivisionName.Text = "";
+            txt_postalCode.Text = "";
+            txt_countryName.Text = "";
+            txt_registrationName.Text = "";
         }
 
         private void btn_blank_Click(object sender, EventArgs e)
@@ -169,7 +192,7 @@ namespace pos
                     return;
                 }
 
-                if (txt_first_name.Text != string.Empty)
+                if (txt_first_name.Text != string.Empty && txt_registrationName.Text != string.Empty && txt_vatno.Text != string.Empty)
                 {
                     CustomerModal info = new CustomerModal
                     {
@@ -181,7 +204,15 @@ namespace pos
                         contact_no = txt_contact_no.Text,
                         vin_no = txt_vin_no.Text,
                         car_name = txt_car_name.Text,
-                        credit_limit = (txt_credit_limit.Text != "" ? Convert.ToDouble(txt_credit_limit.Text) : 0)
+                        credit_limit = (txt_credit_limit.Text != "" ? Convert.ToDouble(txt_credit_limit.Text) : 0),
+                        StreetName = txt_StreetName.Text.Trim(),
+                        CityName = txt_cityName.Text.Trim(),
+                        BuildingNumber = txt_buildingNumber.Text.Trim(),
+                        CitySubdivisionName = txt_citySubdivisionName.Text.Trim(),
+                        PostalCode = txt_postalCode.Text.Trim(),
+                        CountryName = txt_countryName.Text.Trim(),
+                        registrationName = txt_registrationName.Text.Trim(),
+                        date_updated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();

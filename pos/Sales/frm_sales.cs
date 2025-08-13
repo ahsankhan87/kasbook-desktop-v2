@@ -2609,6 +2609,20 @@ namespace pos
                     return;
                 }
 
+                if ((cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01") &&
+    (cmb_customers.SelectedValue == null || string.IsNullOrEmpty(cmb_customers.SelectedValue.ToString())))
+                {
+                    MessageBox.Show("Please select customer", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmb_customers.Focus();
+                    return;
+                }
+
+                if (cmb_sale_type.SelectedValue.ToString() == "0")
+                {
+                    MessageBox.Show("Please select sale type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string bankID = "";
                 string bankGLAccountID = "";
                 string sale_type;

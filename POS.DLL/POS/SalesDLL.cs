@@ -2028,7 +2028,9 @@ namespace POS.DLL
                 cmd.Connection = cn;
 
                 // Query 1: Sale Header
-                string headerSql = "SELECT * FROM pos_sales WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
+                string headerSql = "SELECT s.*, C.* FROM pos_sales s" +
+                    " LEFT JOIN pos_customers C ON C.id = s.customer_id" +
+                    " WHERE invoice_no = @invoice_no AND s.branch_id = @branch_id";
                 // Query 2: Items
                 string itemsSql = "SELECT SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.packet_qty,SI.item_number," +
                             " SI.discount_value,SI.discount_percent,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +

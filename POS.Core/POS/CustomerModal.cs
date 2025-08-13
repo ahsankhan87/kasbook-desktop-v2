@@ -40,6 +40,15 @@ namespace POS.Core
 
         public string car_name { get; set; }
 
+        public string CityName { get; set; }
 
+        public string CountryName { get; set; }
+
+        public string StreetName { get; set; }
+        public string PostalCode { get; set; }
+        public string BuildingNumber { get; set; }
+        public string CitySubdivisionName { get; set; }
+
+        public string registrationName { get; set; }
     }
 }

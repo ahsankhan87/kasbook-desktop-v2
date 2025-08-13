@@ -136,8 +136,31 @@ namespace POS.DLL
             using (SqlCommand cmd = new SqlCommand("sp_CustomersCrud", cn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                SetCommonParameters(cmd, obj);
+                //SetCommonParameters(cmd, obj);
+                cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+
+                cmd.Parameters.Add("first_name", SqlDbType.NVarChar).Value = obj.first_name;
+                cmd.Parameters.Add("last_name", SqlDbType.NVarChar).Value = obj.last_name;
+                cmd.Parameters.Add("email", SqlDbType.NVarChar).Value = obj.email;
+                cmd.Parameters.Add("address", SqlDbType.NVarChar).Value = obj.address;
+                cmd.Parameters.Add("status", SqlDbType.Int).Value = 1; // Assuming status is always active
+                cmd.Parameters.Add("contact_no", SqlDbType.NVarChar).Value = obj.contact_no;
+                cmd.Parameters.Add("vat_no", SqlDbType.NVarChar).Value = obj.vat_no;
+                cmd.Parameters.Add("credit_limit", SqlDbType.Decimal).Value = obj.credit_limit;
+                cmd.Parameters.Add("vin_no", SqlDbType.NVarChar).Value = obj.vin_no;
+                cmd.Parameters.Add("car_name", SqlDbType.NVarChar).Value = obj.car_name;
+
                 cmd.Parameters.Add("@OperationType", SqlDbType.VarChar).Value = "1";
+                cmd.Parameters.Add("@date_created", SqlDbType.DateTime).Value = obj.date_created;
+                cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
+                
+                cmd.Parameters.Add("@StreetName", SqlDbType.NVarChar).Value = obj.StreetName;
+                cmd.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = obj.PostalCode;
+                cmd.Parameters.Add("@BuildingNumber", SqlDbType.NVarChar).Value = obj.BuildingNumber;
+                cmd.Parameters.Add("@CitySubdivisionName", SqlDbType.NVarChar).Value = obj.CitySubdivisionName;
+                cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
+                cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
+                cmd.Parameters.Add("@RegistrationName", SqlDbType.NVarChar).Value = obj.registrationName;
 
                 try
                 {
@@ -161,8 +184,33 @@ namespace POS.DLL
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = obj.id;
-                SetCommonParameters(cmd, obj);
+                cmd.Parameters.Add("first_name", SqlDbType.NVarChar).Value = obj.first_name;
+                cmd.Parameters.Add("last_name", SqlDbType.NVarChar).Value = obj.last_name;
+                cmd.Parameters.Add("email", SqlDbType.NVarChar).Value = obj.email;
+                cmd.Parameters.Add("address", SqlDbType.NVarChar).Value = obj.address;
+                cmd.Parameters.Add("status", SqlDbType.Int).Value = 1; // Assuming status is always active
+                cmd.Parameters.Add("contact_no", SqlDbType.NVarChar).Value = obj.contact_no;
+                cmd.Parameters.Add("vat_no", SqlDbType.NVarChar).Value = obj.vat_no;
+                cmd.Parameters.Add("credit_limit", SqlDbType.Decimal).Value = obj.credit_limit;
+                cmd.Parameters.Add("vin_no", SqlDbType.NVarChar).Value = obj.vin_no;
+                cmd.Parameters.Add("car_name", SqlDbType.NVarChar).Value = obj.car_name;
+
                 cmd.Parameters.Add("@OperationType", SqlDbType.VarChar).Value = "2";
+                cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmd.Parameters.Add("@date_updated", SqlDbType.DateTime).Value = obj.date_updated;
+                cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
+                
+                cmd.Parameters.Add("@StreetName", SqlDbType.NVarChar).Value = obj.StreetName;
+                cmd.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = obj.PostalCode;
+                cmd.Parameters.Add("@BuildingNumber", SqlDbType.NVarChar).Value = obj.BuildingNumber;
+                cmd.Parameters.Add("@CitySubdivisionName", SqlDbType.NVarChar).Value = obj.CitySubdivisionName;
+                cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
+                cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
+                cmd.Parameters.Add("@RegistrationName", SqlDbType.NVarChar).Value = obj.registrationName;
+
+
+                //SetCommonParameters(cmd, obj);
+
 
                 try
                 {
