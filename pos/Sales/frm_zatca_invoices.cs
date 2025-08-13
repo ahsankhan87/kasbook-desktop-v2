@@ -555,7 +555,7 @@ namespace pos.Sales
                 btn_signInvoice.Text = "Sign Invoice";
                 btn_signInvoice.Cursor = Cursors.Default;
             }
-            //LoadZatcaInvoices();
+            LoadZatcaInvoices();
         }
 
         private async void btn_Invoice_clearance_Click(object sender, EventArgs e)
@@ -567,7 +567,7 @@ namespace pos.Sales
                 string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
                 string invoice_subtype = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
 
-                if (invoice_subtype.ToLower() == "02") // Simplified Invoice
+                if (invoice_subtype.ToLower() == "simplified") // Simplified Invoice
                 {
                     MessageBox.Show("Simplified invoices cannot be cleared. Please use the reporting option instead.", "ZATCA Clearance", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -604,8 +604,8 @@ namespace pos.Sales
                 string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
                 string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
                 string invoice_subtype = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
-                
-                if (invoice_subtype.ToLower() == "01") // 01=Standard Invoice
+
+                if (invoice_subtype.ToLower() == "standard") // 01=Standard Invoice
                 {
                     MessageBox.Show("Standard invoices cannot be reported. Please use the clearance option instead.", "ZATCA Reporting", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
