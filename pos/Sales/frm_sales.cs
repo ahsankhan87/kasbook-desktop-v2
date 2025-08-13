@@ -2601,9 +2601,9 @@ namespace pos
                 }
 
                 if ((cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01") &&
-    (cmb_customers.SelectedValue == null || string.IsNullOrEmpty(cmb_customers.SelectedValue.ToString())))
+    (cmb_customers.SelectedValue == null || cmb_customers.SelectedValue.ToString() == "0" || cmb_customers.SelectedValue.ToString() == "-1"))   
                 {
-                    MessageBox.Show("Please select customer", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select customer for Standard invoice type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cmb_customers.Focus();
                     return;
                 }
