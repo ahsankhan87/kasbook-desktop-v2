@@ -143,6 +143,11 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
+                if (string.IsNullOrEmpty(txt_production_publickey.Text))
+                {
+                    MessageBox.Show("Please generate PCSID before saving.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
                 saveFileDialog1.FileName = "cert.pem";
                 DialogResult result = saveFileDialog1.ShowDialog();
@@ -170,6 +175,12 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
+                if (string.IsNullOrEmpty(txt_production_secretkey.Text))
+                {
+                    MessageBox.Show("Please generate PCSID before saving.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // Save the secret key to a file
                 saveFileDialog1.Filter = "secretkey files (*.txt)|*.txt";
                 saveFileDialog1.FileName = "secret.txt";
                 DialogResult result = saveFileDialog1.ShowDialog();
@@ -206,7 +217,6 @@ namespace pos.Master.Companies.zatca
             }
 
         }
-
         private void GetCertInfo()
         {
             if (!string.IsNullOrEmpty(txt_production_publickey.Text))
@@ -245,6 +255,11 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
+                if (string.IsNullOrEmpty(txt_production_publickey.Text) || string.IsNullOrEmpty(txt_production_secretkey.Text))
+                {
+                    MessageBox.Show("Please generate PCSID before saving.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 // Save CSID credentials to database
                 int result = ZatcaInvoiceGenerator.UpsertZatcaPCSIDCredentials("PCSID", lbl_mode.Text,

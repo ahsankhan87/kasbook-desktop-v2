@@ -248,6 +248,16 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
+                if(string.IsNullOrEmpty(txt_production_publickey.Text) || string.IsNullOrEmpty(txt_production_secretkey.Text))
+                {
+                    MessageBox.Show("Please generate PCSID before saving.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (_csidId <= 0)
+                {
+                    MessageBox.Show("Invalid CSID ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 // Save CSID credentials to database
                 int result = ZatcaInvoiceGenerator.UpsertZatcaPCSIDCredentials("PCSID", lbl_mode.Text,

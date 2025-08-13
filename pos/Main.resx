@@ -157,17 +157,26 @@
   <data name="debitNoteToolStripMenuItem.Text" xml:space="preserve">
     <value>Debit Note</value>
   </data>
-  <data name="zatcaInvoicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="zatcaInvoicesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zatca Invoices</value>
-  </data>
   <data name="allTransactionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 26</value>
   </data>
   <data name="allTransactionToolStripMenuItem1.Text" xml:space="preserve">
     <value>All Sales</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="generateZATCACSIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="generateZATCACSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>ZATCA CSID</value>
+  </data>
+  <data name="zatcaInvoicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="zatcaInvoicesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Zatca Invoices</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -268,64 +277,58 @@
     <value>2</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="profileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="profileToolStripMenuItem.Text" xml:space="preserve">
     <value>Profile</value>
   </data>
-  <data name="generateZATCACSIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
-  </data>
-  <data name="generateZATCACSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>ZATCA CSID</value>
-  </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Text" xml:space="preserve">
     <value>Country Origin</value>
   </data>
   <data name="branchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="branchToolStripMenuItem.Text" xml:space="preserve">
     <value>Branches</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment Terms</value>
   </data>
   <data name="paymentMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="paymentMethodToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment Method</value>
   </data>
   <data name="financialYearsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="financialYearsToolStripMenuItem.Text" xml:space="preserve">
     <value>Financial Years</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>DB Backup</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="languageToolStripMenuItem.Text" xml:space="preserve">
     <value>Language</value>
@@ -343,34 +346,34 @@
     <value>Arabic</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Text" xml:space="preserve">
     <value>Application &amp;Logs</value>
   </data>
   <data name="usersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="usersToolStripMenuItem.Text" xml:space="preserve">
     <value>Users</value>
   </data>
   <data name="logoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="logoutToolStripMenuItem.Text" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -1492,12 +1495,6 @@
   <data name="&gt;&gt;profileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Name" xml:space="preserve">
-    <value>generateZATCACSIDToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
     <value>toolStripSeparator6</value>
   </data>
@@ -1804,16 +1801,28 @@
   <data name="&gt;&gt;salesReturnToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;zatcaInvoicesToolStripMenuItem.Name" xml:space="preserve">
-    <value>zatcaInvoicesToolStripMenuItem</value>
+  <data name="&gt;&gt;debitNoteToolStripMenuItem.Name" xml:space="preserve">
+    <value>debitNoteToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;zatcaInvoicesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;debitNoteToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;allTransactionToolStripMenuItem1.Name" xml:space="preserve">
     <value>allTransactionToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;allTransactionToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;zatcaInvoicesToolStripMenuItem.Name" xml:space="preserve">
+    <value>zatcaInvoicesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;zatcaInvoicesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
@@ -2170,10 +2179,10 @@
   <data name="&gt;&gt;toolStripButton_purchasesV1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;debitNoteToolStripMenuItem.Name" xml:space="preserve">
-    <value>debitNoteToolStripMenuItem</value>
+  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Name" xml:space="preserve">
+    <value>generateZATCACSIDToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;debitNoteToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

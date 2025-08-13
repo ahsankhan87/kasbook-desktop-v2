@@ -33,7 +33,6 @@
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateZATCACSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.countryOriginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,8 +84,10 @@
             this.salesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zatcaInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debitNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTransactionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.zatcaInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.allQuotationsEstimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iCTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,7 +149,7 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
-            this.debitNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateZATCACSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -177,7 +178,6 @@
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator10,
             this.profileToolStripMenuItem,
-            this.generateZATCACSIDToolStripMenuItem,
             this.toolStripSeparator6,
             this.countryOriginToolStripMenuItem,
             this.branchToolStripMenuItem,
@@ -206,12 +206,6 @@
             this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
             resources.ApplyResources(this.profileToolStripMenuItem, "profileToolStripMenuItem");
             this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
-            // 
-            // generateZATCACSIDToolStripMenuItem
-            // 
-            this.generateZATCACSIDToolStripMenuItem.Name = "generateZATCACSIDToolStripMenuItem";
-            resources.ApplyResources(this.generateZATCACSIDToolStripMenuItem, "generateZATCACSIDToolStripMenuItem");
-            this.generateZATCACSIDToolStripMenuItem.Click += new System.EventHandler(this.generateZATCACSIDToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
@@ -531,8 +525,10 @@
             this.newTransactionToolStripMenuItem2,
             this.salesReturnToolStripMenuItem,
             this.debitNoteToolStripMenuItem,
-            this.zatcaInvoicesToolStripMenuItem,
             this.allTransactionToolStripMenuItem1,
+            this.toolStripSeparator1,
+            this.generateZATCACSIDToolStripMenuItem,
+            this.zatcaInvoicesToolStripMenuItem,
             this.toolStripSeparator2,
             this.allQuotationsEstimatesToolStripMenuItem,
             this.iCTToolStripMenuItem,
@@ -553,17 +549,28 @@
             resources.ApplyResources(this.salesReturnToolStripMenuItem, "salesReturnToolStripMenuItem");
             this.salesReturnToolStripMenuItem.Click += new System.EventHandler(this.salesReturnToolStripMenuItem_Click);
             // 
-            // zatcaInvoicesToolStripMenuItem
+            // debitNoteToolStripMenuItem
             // 
-            this.zatcaInvoicesToolStripMenuItem.Name = "zatcaInvoicesToolStripMenuItem";
-            resources.ApplyResources(this.zatcaInvoicesToolStripMenuItem, "zatcaInvoicesToolStripMenuItem");
-            this.zatcaInvoicesToolStripMenuItem.Click += new System.EventHandler(this.zatcaInvoicesToolStripMenuItem_Click);
+            this.debitNoteToolStripMenuItem.Name = "debitNoteToolStripMenuItem";
+            resources.ApplyResources(this.debitNoteToolStripMenuItem, "debitNoteToolStripMenuItem");
+            this.debitNoteToolStripMenuItem.Click += new System.EventHandler(this.debitNoteToolStripMenuItem_Click);
             // 
             // allTransactionToolStripMenuItem1
             // 
             this.allTransactionToolStripMenuItem1.Name = "allTransactionToolStripMenuItem1";
             resources.ApplyResources(this.allTransactionToolStripMenuItem1, "allTransactionToolStripMenuItem1");
             this.allTransactionToolStripMenuItem1.Click += new System.EventHandler(this.allTransactionToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // zatcaInvoicesToolStripMenuItem
+            // 
+            this.zatcaInvoicesToolStripMenuItem.Name = "zatcaInvoicesToolStripMenuItem";
+            resources.ApplyResources(this.zatcaInvoicesToolStripMenuItem, "zatcaInvoicesToolStripMenuItem");
+            this.zatcaInvoicesToolStripMenuItem.Click += new System.EventHandler(this.zatcaInvoicesToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -981,11 +988,11 @@
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
             // 
-            // debitNoteToolStripMenuItem
+            // generateZATCACSIDToolStripMenuItem
             // 
-            this.debitNoteToolStripMenuItem.Name = "debitNoteToolStripMenuItem";
-            resources.ApplyResources(this.debitNoteToolStripMenuItem, "debitNoteToolStripMenuItem");
-            this.debitNoteToolStripMenuItem.Click += new System.EventHandler(this.debitNoteToolStripMenuItem_Click);
+            this.generateZATCACSIDToolStripMenuItem.Name = "generateZATCACSIDToolStripMenuItem";
+            resources.ApplyResources(this.generateZATCACSIDToolStripMenuItem, "generateZATCACSIDToolStripMenuItem");
+            this.generateZATCACSIDToolStripMenuItem.Click += new System.EventHandler(this.generateZATCACSIDToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1132,8 +1139,9 @@
         private System.Windows.Forms.ToolStripMenuItem accountPayableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quantityOnHandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lowStockReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem generateZATCACSIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zatcaInvoicesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debitNoteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem generateZATCACSIDToolStripMenuItem;
     }
 }

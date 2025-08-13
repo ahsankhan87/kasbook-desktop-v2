@@ -49,7 +49,7 @@
             this.txtPONumber = new System.Windows.Forms.TextBox();
             this.txt_description = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
+            this.lbl_title = new System.Windows.Forms.Label();
             this.SalesToolStrip = new System.Windows.Forms.ToolStrip();
             this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -194,7 +194,7 @@
             // 
             this.panel_header.BackColor = System.Drawing.SystemColors.Control;
             this.panel_header.Controls.Add(this.groupBox3);
-            this.panel_header.Controls.Add(this.label29);
+            this.panel_header.Controls.Add(this.lbl_title);
             this.panel_header.Controls.Add(this.SalesToolStrip);
             this.panel_header.Controls.Add(this.groupBox4);
             this.panel_header.Controls.Add(this.groupBox1);
@@ -245,11 +245,11 @@
             resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
             // 
-            // label29
+            // lbl_title
             // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.label29.Name = "label29";
+            resources.ApplyResources(this.lbl_title, "lbl_title");
+            this.lbl_title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.lbl_title.Name = "lbl_title";
             // 
             // SalesToolStrip
             // 
@@ -1376,7 +1376,7 @@
         private System.Windows.Forms.ToolStripButton AmountFixToolStripButton;
         private System.Windows.Forms.ToolStripButton ICTToolStripButton;
         private System.Windows.Forms.ToolStripButton LoadQuotationToolStripButton;
-        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.ToolStripButton SearchToolStripButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label21;

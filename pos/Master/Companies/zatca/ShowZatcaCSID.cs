@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -120,5 +121,52 @@ namespace pos.Master.Companies.zatca
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btn_info_Click(object sender, EventArgs e)
+        {
+            if (grid_zatca_csids.CurrentRow == null) return;
+            string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
+            string publicKey = grid_zatca_csids.CurrentRow.Cells["cert_base64"].Value.ToString(); 
+            
+            if (!string.IsNullOrEmpty(publicKey))
+            {
+                GetCertInfo(publicKey);
+
+            }
+        }
+        private void GetCertInfo(string publicKey)
+        {
+            if (!string.IsNullOrEmpty(publicKey))
+            {
+                string pemText = publicKey.Trim();
+
+                // Remove PEM headers
+                string base64 = pemText
+                    .Replace("-----BEGIN CERTIFICATE-----", "")
+                    .Replace("-----END CERTIFICATE-----", "")
+                    .Replace("\r", "")
+                    .Replace("\n", "")
+                    .Trim();
+
+                // Decode Base64
+                byte[] certBytes = Convert.FromBase64String(base64);
+
+                // Save to a .cer or .der file
+                //File.WriteAllBytes(pemText, certBytes);
+
+                // Optional: Load it into an X509Certificate2 object
+                var certificate = new X509Certificate2(certBytes);
+
+                // Print info
+                string info = "";
+                info = "Subject :" + certificate.Subject + "\n";
+                info += "Issuer :" + certificate.Issuer + "\n";
+                info += "Valid From :" + certificate.NotBefore + "\n";
+                info += "Valid To :" + certificate.NotAfter + "\n";
+                MessageBox.Show(info);
+
+            }
+        }
+
     }
 }

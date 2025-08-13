@@ -1328,6 +1328,7 @@ namespace pos
             dt.Clear();
             dt.Columns.Add("id");
             dt.Columns.Add("name");
+
             DataRow _row_1 = dt.NewRow();
             _row_1["id"] = "Cash";
             if (lang == "en-US")
@@ -1345,14 +1346,11 @@ namespace pos
             {
                 DataRow _row = dt.NewRow();
                 _row["id"] = "Credit";
-                if (lang == "en-US")
-                {
-                    _row["name"] = "Credit";
-                }
-                else if (lang == "ar-SA")
+                if (lang == "ar-SA")
                 {
                     _row["name"] = "اجل";
                 }
+                else { _row["name"] = "Credit"; }
 
                 dt.Rows.Add(_row);
 
@@ -1360,39 +1358,32 @@ namespace pos
 
             DataRow _row_2 = dt.NewRow();
             _row_2["id"] = "Quotation";
-            if (lang == "en-US")
-            {
-                _row_2["name"] = "Quotation";
-            }
-            else if (lang == "ar-SA")
+            if (lang == "ar-SA")
             {
                 _row_2["name"] = "عرض سعر";
             }
+            else { _row_2["name"] = "Quotation";  }
 
             dt.Rows.Add(_row_2);
 
             DataRow _row_3 = dt.NewRow();
             _row_3["id"] = "Gift";
-            if (lang == "en-US")
-            {
-                _row_3["name"] = "Gift";
-            }
-            else if (lang == "ar-SA")
+            
+            if (lang == "ar-SA")
             {
                 _row_3["name"] = "هدية";
             }
+            else { _row_3["name"] = "Gift"; }
+
             dt.Rows.Add(_row_3);
 
             DataRow _row_4 = dt.NewRow();
             _row_4["id"] = "ICT";
-            if (lang == "en-US")
-            {
+            
                 _row_4["name"] = "ICT";
-            }
-
             dt.Rows.Add(_row_4);
 
-
+            
             //DataRow _row_4 = dt.NewRow();
             //_row_4["id"] = "Return";
             //if (lang == "en-US")

@@ -551,6 +551,12 @@
     <Compile Include="Products\frm_low_stock_products.Designer.cs">
       <DependentUpon>frm_low_stock_products.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\frm_product_search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\frm_product_search.Designer.cs">
+      <DependentUpon>frm_product_search.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Groups\frm_addProductGroup.cs">
       <SubType>Form</SubType>
     </Compile>
