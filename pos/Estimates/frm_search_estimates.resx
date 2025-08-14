@@ -119,10 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 18</value>
+    <value>3, 14</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 26</value>
+    <value>507, 22</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
@@ -140,11 +144,44 @@
   <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>519, 10</value>
+  </data>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 30</value>
+  </data>
+  <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btn_search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
+    <value>btn_search</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>706, 12</value>
+    <value>628, 10</value>
+  </data>
+  <data name="btn_ok.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="btn_ok.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 38</value>
+    <value>103, 30</value>
   </data>
   <data name="btn_ok.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -162,13 +199,16 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btn_ok.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>826, 12</value>
+    <value>734, 10</value>
+  </data>
+  <data name="btn_cancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 38</value>
+    <value>103, 30</value>
   </data>
   <data name="btn_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -186,9 +226,8 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -196,10 +235,10 @@
     <value>0, 0</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>954, 55</value>
+    <value>848, 44</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -219,62 +258,41 @@
   <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="id.HeaderText" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="id.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>Invoice No.</value>
-  </data>
   <metadata name="customer_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="customer_name.HeaderText" xml:space="preserve">
-    <value>Customer</value>
-  </data>
   <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="sale_date.HeaderText" xml:space="preserve">
-    <value>Sale Date</value>
-  </data>
   <metadata name="sale_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="sale_type.HeaderText" xml:space="preserve">
-    <value>Sale Type</value>
-  </data>
   <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="discount_value.HeaderText" xml:space="preserve">
-    <value>Discount</value>
-  </data>
   <metadata name="total_tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="total_tax.HeaderText" xml:space="preserve">
-    <value>Total VAT</value>
-  </data>
   <metadata name="total_amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="total_amount.HeaderText" xml:space="preserve">
-    <value>Total Amount</value>
-  </data>
   <data name="grid_search_estimates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="grid_search_estimates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 55</value>
+    <value>0, 44</value>
+  </data>
+  <data name="grid_search_estimates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="grid_search_estimates.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="grid_search_estimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>954, 617</value>
+    <value>848, 494</value>
   </data>
   <data name="grid_search_estimates.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -291,20 +309,95 @@
   <data name="&gt;&gt;grid_search_estimates.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="id.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="id.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="invoice_no.HeaderText" xml:space="preserve">
+    <value>Invoice No.</value>
+  </data>
+  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="customer_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="customer_name.HeaderText" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="customer_name.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="sale_date.HeaderText" xml:space="preserve">
+    <value>Sale Date</value>
+  </data>
+  <data name="sale_date.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="sale_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="sale_type.HeaderText" xml:space="preserve">
+    <value>Sale Type</value>
+  </data>
+  <data name="sale_type.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="discount_value.HeaderText" xml:space="preserve">
+    <value>Discount</value>
+  </data>
+  <data name="discount_value.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="total_tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="total_tax.HeaderText" xml:space="preserve">
+    <value>Total VAT</value>
+  </data>
+  <data name="total_tax.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="total_amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="total_amount.HeaderText" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="total_amount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>954, 672</value>
+    <value>848, 538</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 52</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

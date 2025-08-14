@@ -126,7 +126,6 @@ namespace pos
         {
             btn_ok.PerformClick();
         }
-
     }
 }
      

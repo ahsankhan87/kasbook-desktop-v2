@@ -132,13 +132,15 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT S.*," +
+                        String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,S.customer_id,S.invoice_subtype_code,S.PONumber," +
+                            " IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype,S.zatca_qrcode_phase2," +
+                            " S.employee_id,S.description,S.account, S.total_amount, S.discount_value, S.total_tax, S.discount_value AS total_discount," +
+                            " S.discount_percent AS total_disc_percent,S.discount_value AS total_disc_value,S.flatDiscountValue, " +
                             " SI.id,SI.item_code,SI.item_number,SI.quantity_sold,SI.unit_price,SI.item_name AS product_name,SI.tax_rate,SI.tax_id," +
-                            " SI.discount_value, " +
-                            " S.discount_value AS total_discount, " +
                             " (SI.unit_price*SI.quantity_sold) AS total, " +
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
-                            " C.first_name AS customer_name, C.vat_no AS customer_vat," +
+                            " C.first_name AS customer_name, C.vat_no AS customer_vat, C.RegistrationName AS customer_company, " +
+                            " C.StreetName, C.BuildingNumber, C.CitySubdivisionName, C.CityName, C.PostalCode, C.CountryName," +
                             " U.name AS username," +
                             " SI.loc_code,S.description,SI.item_code as code" +
                             " FROM pos_sales S" +

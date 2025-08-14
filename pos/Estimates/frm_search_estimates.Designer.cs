@@ -42,6 +42,7 @@
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_search = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_estimates)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.txt_search);
+            this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
             resources.ApplyResources(this.panel1, "panel1");
@@ -153,6 +155,14 @@
             this.total_amount.Name = "total_amount";
             this.total_amount.ReadOnly = true;
             // 
+            // btn_search
+            // 
+            this.btn_search.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
             // frm_search_estimates
             // 
             resources.ApplyResources(this, "$this");
@@ -186,5 +196,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_tax;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
+        private System.Windows.Forms.Button btn_search;
     }
 }
