@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Org.BouncyCastle.Crypto.Tls;
-using POS.BLL;
+﻿using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;

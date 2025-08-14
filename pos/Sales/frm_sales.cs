@@ -99,6 +99,7 @@ namespace pos
             get_saletype_dropdownlist();
             get_invoice_subtype_dropdownlist();
             Get_user_total_commission();
+            get_sale_account_dropdownlist();
 
             //disable sorting in grid
             foreach (DataGridViewColumn column in grid_sales.Columns)
@@ -1412,30 +1413,21 @@ namespace pos
             DataRow _row_1 = dt.NewRow();
             _row_1["id"] = "02";
 
-            if (lang == "en-US")
-            {
-                _row_1["name"] = "Simplified";
-            }
-            else if (lang == "ar-SA")
+           if (lang == "ar-SA")
             {
                 _row_1["name"] = "مبسطة";
             }
-
+            else { _row_1["name"] = "Simplified"; }
             dt.Rows.Add(_row_1);
 
            
             DataRow _row_2 = dt.NewRow();
             _row_2["id"] = "01";
 
-            if (lang == "en-US")
-            {
-                _row_2["name"] = "Standard";
-            }
-            else if (lang == "ar-SA")
+             if (lang == "ar-SA")
             {
                 _row_2["name"] = "ضريبية";
-            }
-
+            }else { _row_2["name"] = "Standard"; }
             dt.Rows.Add(_row_2);
 
             cmb_invoice_subtype_code.DisplayMember = "name";
@@ -1443,6 +1435,30 @@ namespace pos
             cmb_invoice_subtype_code.DataSource = dt;
 
             cmb_invoice_subtype_code.SelectedIndex = 0; //default value
+        }
+        private void get_sale_account_dropdownlist()
+        {
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("id");
+            dt.Columns.Add("name");
+            
+            DataRow _row_1 = dt.NewRow();
+            _row_1["id"] = "Sale";
+            _row_1["name"] = "Sale";
+            dt.Rows.Add(_row_1);
+
+
+            DataRow _row_2 = dt.NewRow();
+            _row_2["id"] = "Debit";
+            _row_2["name"] = "Debit Note";
+            dt.Rows.Add(_row_2);
+
+            cmb_sale_account.DisplayMember = "name";
+            cmb_sale_account.ValueMember = "id";
+            cmb_sale_account.DataSource = dt;
+
+            cmb_sale_account.SelectedIndex = 0; //default value
         }
 
         public void load_user_rights(int user_id)
@@ -2599,9 +2615,25 @@ namespace pos
                     MessageBox.Show("Please add products ", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                
+                string sale_account = (cmb_sale_account.SelectedValue == null ? "Sale" : cmb_sale_account.SelectedValue.ToString());
+                if(sale_account == "0")
+                {
+                    MessageBox.Show("Please select sale account", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmb_sale_account.Focus();
+                    return;
+                }
+                if(sale_account == "Debit")
+                {
+                    MessageBox.Show("Debit account cannot be used for sale transaction", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtOriginalInvoice.Enabled = true;
+
+                    
+                }
 
                 if ((cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01") &&
-    (cmb_customers.SelectedValue == null || cmb_customers.SelectedValue.ToString() == "0" || cmb_customers.SelectedValue.ToString() == "-1"))   
+                    (cmb_customers.SelectedValue == null || cmb_customers.SelectedValue.ToString() == "0" 
+                    || cmb_customers.SelectedValue.ToString() == "-1"))
                 {
                     MessageBox.Show("Please select customer for Standard invoice type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cmb_customers.Focus();
@@ -2781,7 +2813,7 @@ namespace pos
                             bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
                             PONumber = PONumber,
 
-                            account = "Sale",
+                            account = sale_account,
                             is_return = false,
                             estimate_invoice_no = estimate_invoice_no,
                             estimate_status = estimate_status,

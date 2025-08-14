@@ -12,7 +12,6 @@ namespace pos.Sales
     public partial class frm_debitnote : Form
     {
         private DataGridView dgvDebitNotes;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
 
         public frm_debitnote()
         {
@@ -31,11 +30,11 @@ namespace pos.Sales
         private void btnSave_Click(object sender, EventArgs e)
         {
             // Validate fields
-            if (string.IsNullOrWhiteSpace(cmb_customers.Text))
-            {
-                MessageBox.Show("Please select a customer.");
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(cmb_customers.Text))
+            //{
+            //    MessageBox.Show("Please select a customer.");
+            //    return;
+            //}
             if (string.IsNullOrWhiteSpace(txtDebitNoteNumber.Text) ||
                 string.IsNullOrWhiteSpace(txtReferenceInvoice.Text) ||
                 string.IsNullOrWhiteSpace(txtAmount.Text) ||
@@ -57,7 +56,7 @@ namespace pos.Sales
                 TotalAmount = decimal.Parse(txtTotalAmount.Text),
                 Reason = cmbReason.Text,
                 InvoiceSubTypeCode = lbl_subtype_code.Text, // Assuming lbl_subtype_code is set based on the selected invoice type
-                // ZatcaUuid is no longer used based on prior changes
+                sale_type = lbl_saletype.Text, // Assuming lbl_saletype is set based on the selected sale type
             };
 
             var service = new DebitNoteBLL();
@@ -188,7 +187,7 @@ namespace pos.Sales
         private void txtReferenceInvoice_TextChanged(object sender, EventArgs e)
         {
             GeneralBLL invoicesBLL_obj = new GeneralBLL();
-            string keyword = "invoice_subtype_code, IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype ";
+            string keyword = "sale_type,invoice_subtype_code, IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype ";
             string table = "pos_sales WHERE invoice_no = '" + txtReferenceInvoice.Text + "' AND branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY id desc";
             DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
 
@@ -198,7 +197,7 @@ namespace pos.Sales
                 {
                     lbl_subtype_code.Text = dr["invoice_subtype_code"].ToString();
                     lbl_subtype_name.Text = dr["invoice_subtype"].ToString();
-
+                    lbl_saletype.Text = dr["sale_type"].ToString();
                 }
 
             }

@@ -87,6 +87,7 @@
             this.debitNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allTransactionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.generateZATCACSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zatcaInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.allQuotationsEstimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,7 +150,6 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
-            this.generateZATCACSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -565,6 +565,12 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // generateZATCACSIDToolStripMenuItem
+            // 
+            this.generateZATCACSIDToolStripMenuItem.Name = "generateZATCACSIDToolStripMenuItem";
+            resources.ApplyResources(this.generateZATCACSIDToolStripMenuItem, "generateZATCACSIDToolStripMenuItem");
+            this.generateZATCACSIDToolStripMenuItem.Click += new System.EventHandler(this.generateZATCACSIDToolStripMenuItem_Click);
             // 
             // zatcaInvoicesToolStripMenuItem
             // 
@@ -987,12 +993,6 @@
             resources.ApplyResources(this.toolStripButton_purchasesV1, "toolStripButton_purchasesV1");
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
-            // 
-            // generateZATCACSIDToolStripMenuItem
-            // 
-            this.generateZATCACSIDToolStripMenuItem.Name = "generateZATCACSIDToolStripMenuItem";
-            resources.ApplyResources(this.generateZATCACSIDToolStripMenuItem, "generateZATCACSIDToolStripMenuItem");
-            this.generateZATCACSIDToolStripMenuItem.Click += new System.EventHandler(this.generateZATCACSIDToolStripMenuItem_Click);
             // 
             // frm_main
             // 

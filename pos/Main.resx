@@ -121,217 +121,56 @@
     <value>21, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="masterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 24</value>
-  </data>
-  <data name="masterToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Master</value>
-  </data>
-  <data name="itemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
-  </data>
-  <data name="itemsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Items</value>
-  </data>
-  <data name="pOSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 24</value>
-  </data>
-  <data name="pOSToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Purchases</value>
-  </data>
-  <data name="newTransactionToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="newTransactionToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Sale Transaction</value>
-  </data>
-  <data name="salesReturnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="salesReturnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Credit Note / Sale Return</value>
-  </data>
-  <data name="debitNoteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="debitNoteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Debit Note</value>
-  </data>
-  <data name="allTransactionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="allTransactionToolStripMenuItem1.Text" xml:space="preserve">
-    <value>All Sales</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 6</value>
-  </data>
-  <data name="generateZATCACSIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="generateZATCACSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>ZATCA CSID</value>
-  </data>
-  <data name="zatcaInvoicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="zatcaInvoicesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zatca Invoices</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 6</value>
-  </data>
-  <data name="allQuotationsEstimatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="allQuotationsEstimatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>All Quotations / Estimates</value>
-  </data>
-  <data name="iCTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="iCTToolStripMenuItem.Text" xml:space="preserve">
-    <value>ICT Transactions</value>
-  </data>
-  <data name="iCTRequestToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="iCTRequestToolStripMenuItem.Text" xml:space="preserve">
-    <value>ICT Request</value>
-  </data>
-  <data name="iCTReleaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="iCTReleaseToolStripMenuItem.Text" xml:space="preserve">
-    <value>ICT Release</value>
-  </data>
-  <data name="salesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 24</value>
-  </data>
-  <data name="salesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Sales</value>
-  </data>
-  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 24</value>
-  </data>
-  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Accounts</value>
-  </data>
-  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 24</value>
-  </data>
-  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Reports</value>
-  </data>
-  <data name="purchasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 24</value>
-  </data>
-  <data name="purchasesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ser&amp;vices</value>
-  </data>
-  <data name="humanResourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 24</value>
-  </data>
-  <data name="humanResourceToolStripMenuItem.Text" xml:space="preserve">
-    <value>H&amp;uman Resource</value>
-  </data>
-  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 24</value>
-  </data>
-  <data name="windowsMenu.Text" xml:space="preserve">
-    <value>&amp;Windows</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 4, 0, 4</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1228, 32</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="profileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="profileToolStripMenuItem.Text" xml:space="preserve">
     <value>Profile</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Text" xml:space="preserve">
     <value>Country Origin</value>
   </data>
   <data name="branchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="branchToolStripMenuItem.Text" xml:space="preserve">
     <value>Branches</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment Terms</value>
   </data>
   <data name="paymentMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="paymentMethodToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment Method</value>
   </data>
   <data name="financialYearsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="financialYearsToolStripMenuItem.Text" xml:space="preserve">
     <value>Financial Years</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>DB Backup</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
-  </data>
-  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
-  </data>
-  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Language</value>
+    <value>201, 6</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 26</value>
@@ -345,50 +184,51 @@
   <data name="arabicToolStripMenuItem.Text" xml:space="preserve">
     <value>Arabic</value>
   </data>
-  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
+  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 26</value>
   </data>
+  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 6</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="applicationLogsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Text" xml:space="preserve">
     <value>Application &amp;Logs</value>
   </data>
   <data name="usersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="usersToolStripMenuItem.Text" xml:space="preserve">
     <value>Users</value>
   </data>
   <data name="logoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="logoutToolStripMenuItem.Text" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="warehousetoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 26</value>
+  <data name="masterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 24</value>
   </data>
-  <data name="warehousetoolStripMenuItem.Text" xml:space="preserve">
-    <value>Warehouse</value>
-  </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
-    <value>Item Files</value>
+  <data name="masterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Master</value>
   </data>
   <data name="تقريرعنصنفToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 26</value>
@@ -402,11 +242,11 @@
   <data name="editItemDataToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit Item Data</value>
   </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 26</value>
   </data>
-  <data name="toolStripMenuItem4.Text" xml:space="preserve">
-    <value>Inventory</value>
+  <data name="toolStripMenuItem3.Text" xml:space="preserve">
+    <value>Item Files</value>
   </data>
   <data name="اجماليالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 26</value>
@@ -420,11 +260,11 @@
   <data name="lowStockInventoryToolStripMenuItem.Text" xml:space="preserve">
     <value>Low Stock Inventory</value>
   </data>
-  <data name="تقريرعنالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 26</value>
   </data>
-  <data name="تقريرعنالمخزونToolStripMenuItem.Text" xml:space="preserve">
-    <value>Inventory Report</value>
+  <data name="toolStripMenuItem4.Text" xml:space="preserve">
+    <value>Inventory</value>
   </data>
   <data name="quantityOnHandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 26</value>
@@ -438,6 +278,12 @@
   <data name="lowStockReportToolStripMenuItem.Text" xml:space="preserve">
     <value>Low Stock Report</value>
   </data>
+  <data name="تقريرعنالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="تقريرعنالمخزونToolStripMenuItem.Text" xml:space="preserve">
+    <value>Inventory Report</value>
+  </data>
   <data name="الاصنافالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 26</value>
   </data>
@@ -449,6 +295,12 @@
   </data>
   <data name="الاصنافغيرالمتحركهToolStripMenuItem.Text" xml:space="preserve">
     <value>Non-Moving Items</value>
+  </data>
+  <data name="warehousetoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 26</value>
+  </data>
+  <data name="warehousetoolStripMenuItem.Text" xml:space="preserve">
+    <value>Warehouse</value>
   </data>
   <data name="productsServicesToolStripMenuItem.ShortcutKeyDisplayString" xml:space="preserve">
     <value />
@@ -522,6 +374,12 @@
   <data name="taxesVATToolStripMenuItem1.Text" xml:space="preserve">
     <value>Taxes / VAT</value>
   </data>
+  <data name="itemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 24</value>
+  </data>
+  <data name="itemsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Items</value>
+  </data>
   <data name="newTransactionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 26</value>
   </data>
@@ -554,6 +412,84 @@
   </data>
   <data name="allPurchaseOrdersToolStripMenuItem.Text" xml:space="preserve">
     <value>All Purchase Orders</value>
+  </data>
+  <data name="pOSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 24</value>
+  </data>
+  <data name="pOSToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Purchases</value>
+  </data>
+  <data name="newTransactionToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="newTransactionToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Sale Transaction</value>
+  </data>
+  <data name="salesReturnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="salesReturnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Credit Note / Sale Return</value>
+  </data>
+  <data name="debitNoteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="debitNoteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Debit Note</value>
+  </data>
+  <data name="allTransactionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="allTransactionToolStripMenuItem1.Text" xml:space="preserve">
+    <value>All Sales</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="generateZATCACSIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="generateZATCACSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Generate Zatca CSID</value>
+  </data>
+  <data name="zatcaInvoicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="zatcaInvoicesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Zatca E-Invoices</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="allQuotationsEstimatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="allQuotationsEstimatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>All Quotations / Estimates</value>
+  </data>
+  <data name="iCTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="iCTToolStripMenuItem.Text" xml:space="preserve">
+    <value>ICT Transactions</value>
+  </data>
+  <data name="iCTRequestToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="iCTRequestToolStripMenuItem.Text" xml:space="preserve">
+    <value>ICT Request</value>
+  </data>
+  <data name="iCTReleaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="iCTReleaseToolStripMenuItem.Text" xml:space="preserve">
+    <value>ICT Release</value>
+  </data>
+  <data name="salesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 24</value>
+  </data>
+  <data name="salesToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Sales</value>
   </data>
   <data name="customersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 26</value>
@@ -606,11 +542,11 @@
   <data name="accountsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Accounts</value>
   </data>
-  <data name="salesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 24</value>
   </data>
-  <data name="salesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sales</value>
+  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Accounts</value>
   </data>
   <data name="dailySaleReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>295, 26</value>
@@ -642,17 +578,23 @@
   <data name="categoryWiseSalesSummaryToolStripMenuItem.Text" xml:space="preserve">
     <value>Category Wise Sales Summary</value>
   </data>
-  <data name="purchasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="salesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 26</value>
   </data>
-  <data name="purchasesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Purchases</value>
+  <data name="salesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sales</value>
   </data>
   <data name="purchaseReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 26</value>
   </data>
   <data name="purchaseReportToolStripMenuItem.Text" xml:space="preserve">
     <value>Purchase Report</value>
+  </data>
+  <data name="purchasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 26</value>
+  </data>
+  <data name="purchasesToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Purchases</value>
   </data>
   <data name="warehouseToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 26</value>
@@ -720,11 +662,29 @@
   <data name="accountPayableToolStripMenuItem.Text" xml:space="preserve">
     <value>Account Payable</value>
   </data>
+  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 24</value>
+  </data>
+  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Reports</value>
+  </data>
+  <data name="purchasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 24</value>
+  </data>
+  <data name="purchasesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ser&amp;vices</value>
+  </data>
   <data name="employeesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 26</value>
   </data>
   <data name="employeesToolStripMenuItem.Text" xml:space="preserve">
     <value>Employees</value>
+  </data>
+  <data name="humanResourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 24</value>
+  </data>
+  <data name="humanResourceToolStripMenuItem.Text" xml:space="preserve">
+    <value>H&amp;uman Resource</value>
   </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 26</value>
@@ -750,42 +710,55 @@
   <data name="CloseAllToolStripMenuItem.Text" xml:space="preserve">
     <value>C&amp;lose All</value>
   </data>
+  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 24</value>
+  </data>
+  <data name="windowsMenu.Text" xml:space="preserve">
+    <value>&amp;Windows</value>
+  </data>
   <data name="shortcutsKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 26</value>
   </data>
   <data name="shortcutsKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>Shortcuts Keys</value>
   </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 4, 0, 4</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1228, 32</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 702</value>
-  </data>
-  <data name="statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 0, 18, 0</value>
-  </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1228, 26</value>
-  </data>
-  <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="statusStrip1.Text" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="toolStripStatusLabel_user.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
   </data>
@@ -822,6 +795,33 @@
   <data name="toolStripStatusLabel_fiscalyear.Text" xml:space="preserve">
     <value>fiscal year</value>
   </data>
+  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 702</value>
+  </data>
+  <data name="statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 18, 0</value>
+  </data>
+  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1228, 26</value>
+  </data>
+  <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="statusStrip1.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="sideMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>293, 17</value>
   </metadata>
@@ -830,33 +830,6 @@
   </data>
   <data name="sideMenu.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 32</value>
-  </data>
-  <data name="sideMenu.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 670</value>
-  </data>
-  <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="sideMenu.Text" xml:space="preserve">
-    <value>sideMenu</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.Name" xml:space="preserve">
-    <value>sideMenu</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="toolStripButton_sales.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -998,6 +971,33 @@
   </data>
   <data name="toolStripButton_purchasesV1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="sideMenu.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 670</value>
+  </data>
+  <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="sideMenu.Text" xml:space="preserve">
+    <value>sideMenu</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.Name" xml:space="preserve">
+    <value>sideMenu</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1819,6 +1819,12 @@
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Name" xml:space="preserve">
+    <value>generateZATCACSIDToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;zatcaInvoicesToolStripMenuItem.Name" xml:space="preserve">
     <value>zatcaInvoicesToolStripMenuItem</value>
   </data>
@@ -2178,12 +2184,6 @@
   </data>
   <data name="&gt;&gt;toolStripButton_purchasesV1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Name" xml:space="preserve">
-    <value>generateZATCACSIDToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;generateZATCACSIDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_main</value>

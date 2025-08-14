@@ -15,8 +15,6 @@ using System.Diagnostics;
 using System.Xml;
 using Zatca.EInvoice.SDK;
 using Zatca.EInvoice.SDK.Contracts.Models;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Crypto.Parameters;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -908,17 +906,6 @@ namespace pos
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                pos.Sales.ZatcaInvoiceApp zatcaInvoiceApp = new pos.Sales.ZatcaInvoiceApp();
-                zatcaInvoiceApp.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
+       
     }
 }
