@@ -25,6 +25,8 @@ namespace POS.Core.POS
 
         public string InvoiceSubtype { get; set; }
 
+        public string sale_type { get; set; } = "Cash"; // Default value for sale type
+
         // Add other ZATCA-required fields as needed
     }
 }

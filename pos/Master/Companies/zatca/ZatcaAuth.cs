@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;

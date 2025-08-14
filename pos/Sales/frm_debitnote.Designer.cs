@@ -12,7 +12,6 @@ namespace pos.Sales
         // No other changes are required for CS1061.
         private void InitializeComponent()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtDebitNoteNumber = new System.Windows.Forms.TextBox();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
@@ -41,6 +40,7 @@ namespace pos.Sales
             this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.lbl_subtype_name = new System.Windows.Forms.Label();
             this.lbl_subtype_code = new System.Windows.Forms.Label();
+            this.lbl_saletype = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridDebitNotes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,14 +67,14 @@ namespace pos.Sales
             this.dtpDate.Location = new System.Drawing.Point(250, 70);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 22);
-            this.dtpDate.TabIndex = 12;
+            this.dtpDate.TabIndex = 1;
             // 
             // txtReferenceInvoice
             // 
             this.txtReferenceInvoice.Location = new System.Drawing.Point(30, 120);
             this.txtReferenceInvoice.Name = "txtReferenceInvoice";
             this.txtReferenceInvoice.Size = new System.Drawing.Size(200, 22);
-            this.txtReferenceInvoice.TabIndex = 14;
+            this.txtReferenceInvoice.TabIndex = 3;
             this.txtReferenceInvoice.TextChanged += new System.EventHandler(this.txtReferenceInvoice_TextChanged);
             // 
             // txtAmount
@@ -82,7 +82,7 @@ namespace pos.Sales
             this.txtAmount.Location = new System.Drawing.Point(30, 169);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(120, 22);
-            this.txtAmount.TabIndex = 16;
+            this.txtAmount.TabIndex = 5;
             this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // txtVATAmount
@@ -91,7 +91,7 @@ namespace pos.Sales
             this.txtVATAmount.Name = "txtVATAmount";
             this.txtVATAmount.ReadOnly = true;
             this.txtVATAmount.Size = new System.Drawing.Size(120, 22);
-            this.txtVATAmount.TabIndex = 17;
+            this.txtVATAmount.TabIndex = 6;
             // 
             // txtTotalAmount
             // 
@@ -99,7 +99,7 @@ namespace pos.Sales
             this.txtTotalAmount.Name = "txtTotalAmount";
             this.txtTotalAmount.ReadOnly = true;
             this.txtTotalAmount.Size = new System.Drawing.Size(120, 22);
-            this.txtTotalAmount.TabIndex = 18;
+            this.txtTotalAmount.TabIndex = 7;
             // 
             // txtZatcaStatus
             // 
@@ -122,36 +122,36 @@ namespace pos.Sales
             this.btnSave.Location = new System.Drawing.Point(30, 209);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 32);
-            this.btnSave.TabIndex = 21;
+            this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnSubmitZatca
             // 
             this.btnSubmitZatca.Enabled = false;
-            this.btnSubmitZatca.Location = new System.Drawing.Point(170, 209);
+            this.btnSubmitZatca.Location = new System.Drawing.Point(670, 209);
             this.btnSubmitZatca.Name = "btnSubmitZatca";
             this.btnSubmitZatca.Size = new System.Drawing.Size(120, 32);
-            this.btnSubmitZatca.TabIndex = 22;
+            this.btnSubmitZatca.TabIndex = 11;
             this.btnSubmitZatca.Text = "Submit to ZATCA";
             this.btnSubmitZatca.Click += new System.EventHandler(this.btnSubmitZatca_Click);
             // 
             // btnViewResponse
             // 
             this.btnViewResponse.Enabled = false;
-            this.btnViewResponse.Location = new System.Drawing.Point(310, 209);
+            this.btnViewResponse.Location = new System.Drawing.Point(544, 209);
             this.btnViewResponse.Name = "btnViewResponse";
             this.btnViewResponse.Size = new System.Drawing.Size(120, 32);
-            this.btnViewResponse.TabIndex = 23;
+            this.btnViewResponse.TabIndex = 10;
             this.btnViewResponse.Text = "View Response";
             this.btnViewResponse.Click += new System.EventHandler(this.btnViewResponse_Click);
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(450, 209);
+            this.btnRefresh.Location = new System.Drawing.Point(418, 209);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(120, 32);
-            this.btnRefresh.TabIndex = 24;
+            this.btnRefresh.TabIndex = 9;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -262,7 +262,7 @@ namespace pos.Sales
             this.cmbReason.Location = new System.Drawing.Point(250, 120);
             this.cmbReason.Name = "cmbReason";
             this.cmbReason.Size = new System.Drawing.Size(420, 24);
-            this.cmbReason.TabIndex = 26;
+            this.cmbReason.TabIndex = 4;
             // 
             // cmb_customers
             // 
@@ -270,12 +270,12 @@ namespace pos.Sales
             this.cmb_customers.Location = new System.Drawing.Point(473, 70);
             this.cmb_customers.Name = "cmb_customers";
             this.cmb_customers.Size = new System.Drawing.Size(197, 24);
-            this.cmb_customers.TabIndex = 27;
+            this.cmb_customers.TabIndex = 2;
             // 
             // lbl_subtype_name
             // 
             this.lbl_subtype_name.AutoSize = true;
-            this.lbl_subtype_name.Location = new System.Drawing.Point(161, 15);
+            this.lbl_subtype_name.Location = new System.Drawing.Point(145, 15);
             this.lbl_subtype_name.Name = "lbl_subtype_name";
             this.lbl_subtype_name.Size = new System.Drawing.Size(117, 16);
             this.lbl_subtype_name.TabIndex = 0;
@@ -290,12 +290,23 @@ namespace pos.Sales
             this.lbl_subtype_code.TabIndex = 0;
             this.lbl_subtype_code.Text = "lbl sub type code";
             // 
+            // lbl_saletype
+            // 
+            this.lbl_saletype.AutoSize = true;
+            this.lbl_saletype.Location = new System.Drawing.Point(728, 9);
+            this.lbl_saletype.Name = "lbl_saletype";
+            this.lbl_saletype.Size = new System.Drawing.Size(80, 16);
+            this.lbl_saletype.TabIndex = 0;
+            this.lbl_saletype.Text = "lbl_saletype";
+            this.lbl_saletype.Visible = false;
+            // 
             // frm_debitnote
             // 
             this.ClientSize = new System.Drawing.Size(820, 520);
             this.Controls.Add(this.cmb_customers);
             this.Controls.Add(this.cmbReason);
             this.Controls.Add(this.lbl_subtype_code);
+            this.Controls.Add(this.lbl_saletype);
             this.Controls.Add(this.lbl_subtype_name);
             this.Controls.Add(this.lblDebitNoteNumber);
             this.Controls.Add(this.lbldate);
@@ -353,5 +364,6 @@ namespace pos.Sales
         private System.Windows.Forms.ComboBox cmb_customers;
         private System.Windows.Forms.Label lbl_subtype_name;
         private System.Windows.Forms.Label lbl_subtype_code;
+        private System.Windows.Forms.Label lbl_saletype;
     }
 }
