@@ -43,7 +43,14 @@ namespace pos
                 total_tax = Convert.ToDouble(dr["total_tax"]);
                 total_discount = Convert.ToDouble(dr["total_discount"]);
                 sale_date = dr["sale_time"].ToString();
-                zatca_qrcode_phase2 =  (dr["zatca_qrcode_phase2"] == DBNull.Value ? null : (byte[])dr["zatca_qrcode_phase2"]);
+                if (_dt.Columns.Contains("zatca_qrcode_phase2"))
+                {
+                    zatca_qrcode_phase2 = (dr["zatca_qrcode_phase2"] == DBNull.Value ? null : (byte[])dr["zatca_qrcode_phase2"]);
+                }
+                else
+                {
+                    zatca_qrcode_phase2 = null;
+                }
             }
             net_total = total_amount - total_discount + total_tax;
             string s_date = Convert.ToDateTime(sale_date).ToString("yyyy-MM-ddTHH:mm:ss");

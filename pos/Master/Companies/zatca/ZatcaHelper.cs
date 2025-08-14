@@ -794,7 +794,7 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Invoice No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK);
+                    MessageBox.Show($"Invoice No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK,MessageBoxIcon.Information);
 
                 }
                 else
@@ -940,7 +940,7 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Credit Note No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK);
+                    MessageBox.Show($"Credit Note No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK,MessageBoxIcon.Information);
 
                 }
                 else
@@ -1086,7 +1086,7 @@ namespace pos.Master.Companies.zatca
                     // Save base64 string in DB (optional)
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", ublPath, null);
 
-                    MessageBox.Show($"Debit Note No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK);
+                    MessageBox.Show($"Debit Note No: {invoiceNo} signed with ZATCA PCSID.", "ZATCA Production CSID", MessageBoxButtons.OK,MessageBoxIcon.Information);
 
 
                 }

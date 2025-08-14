@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_sales));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -40,7 +41,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_sales));
             this.panel_header = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_user_commission_balance = new System.Windows.Forms.TextBox();
@@ -172,10 +172,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.cmb_sale_account = new System.Windows.Forms.ComboBox();
-            this.txtOriginalInvoice = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
             this.panel_header.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SalesToolStrip.SuspendLayout();
@@ -197,16 +193,12 @@
             // panel_header
             // 
             this.panel_header.BackColor = System.Drawing.SystemColors.Control;
-            this.panel_header.Controls.Add(this.txtOriginalInvoice);
             this.panel_header.Controls.Add(this.groupBox3);
-            this.panel_header.Controls.Add(this.cmb_sale_account);
             this.panel_header.Controls.Add(this.lbl_title);
             this.panel_header.Controls.Add(this.SalesToolStrip);
             this.panel_header.Controls.Add(this.groupBox4);
             this.panel_header.Controls.Add(this.groupBox1);
             this.panel_header.Controls.Add(this.groupBox_products);
-            this.panel_header.Controls.Add(this.label32);
-            this.panel_header.Controls.Add(this.label29);
             resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Name = "panel_header";
             // 
@@ -330,7 +322,7 @@
             this.LoadQuotationToolStripButton.Image = global::pos.Properties.Resources.Estimate;
             resources.ApplyResources(this.LoadQuotationToolStripButton, "LoadQuotationToolStripButton");
             this.LoadQuotationToolStripButton.Name = "LoadQuotationToolStripButton";
-            this.LoadQuotationToolStripButton.Click += new System.EventHandler(this.LosdQuotationToolStripButton_Click);
+            this.LoadQuotationToolStripButton.Click += new System.EventHandler(this.LoadQuotationToolStripButton_Click);
             // 
             // PrinttoolStripButton
             // 
@@ -1244,28 +1236,6 @@
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
             // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            // 
-            // cmb_sale_account
-            // 
-            this.cmb_sale_account.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_sale_account.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
-            this.cmb_sale_account.Name = "cmb_sale_account";
-            // 
-            // txtOriginalInvoice
-            // 
-            resources.ApplyResources(this.txtOriginalInvoice, "txtOriginalInvoice");
-            this.txtOriginalInvoice.Name = "txtOriginalInvoice";
-            // 
-            // label32
-            // 
-            resources.ApplyResources(this.label32, "label32");
-            this.label32.Name = "label32";
-            // 
             // frm_sales
             // 
             resources.ApplyResources(this, "$this");
@@ -1444,9 +1414,5 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox cmb_invoice_subtype_code;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.ComboBox cmb_sale_account;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox txtOriginalInvoice;
-        private System.Windows.Forms.Label label32;
     }
 }

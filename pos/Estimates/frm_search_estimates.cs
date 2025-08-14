@@ -19,9 +19,10 @@ namespace pos
         
         public frm_search_estimates(frm_sales salesForm)
         {
-            this.salesForm = salesForm;
             
             InitializeComponent();
+            this.salesForm = salesForm;
+
         }
 
         public frm_search_estimates()
@@ -86,7 +87,26 @@ namespace pos
             }
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
+       
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void grid_search_estimates_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_ok.PerformClick();
+            }
+        }
+
+        private void grid_search_estimates_DoubleClick(object sender, EventArgs e)
+        {
+            btn_ok.PerformClick();
+        }
+
+        private void txt_search_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
@@ -106,25 +126,6 @@ namespace pos
 
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-
-        private void btn_cancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void grid_search_estimates_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_ok.PerformClick();
-            }
-        }
-
-        private void grid_search_estimates_DoubleClick(object sender, EventArgs e)
-        {
-            btn_ok.PerformClick();
         }
     }
 }

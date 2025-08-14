@@ -252,40 +252,104 @@ namespace pos.Master.Companies.zatca
             AddElement(xmlDoc, delivery, "cbc:ActualDeliveryDate", deliveryDate.ToString("yyyy-MM-dd"));
             parent.AppendChild(delivery);
         }
-        private void AddPaymentMeans(XmlDocument xmlDoc, XmlElement parent, DataRow invoice, string invoiceTypeCode="")
+        // FIX: Removed invalid nesting of <cac:PaymentTerms> inside <cac:PaymentMeans>.
+        //      Per UBL 2.1 (and ZATCA), PaymentTerms is a sibling of PaymentMeans (sequence: ... Delivery*, PaymentMeans*, PaymentTerms*, ...).
+        //      Added optional due date logic and safer handling for credit/debit notes (381/383) where PaymentMeans may be omitted or simplified.
+        private void AddPaymentMeans(XmlDocument xmlDoc, XmlElement parent, DataRow invoice, string invoiceTypeCode = "")
         {
-            XmlElement paymentMeans = xmlDoc.CreateElement("cac", "PaymentMeans", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            // Determine payment method
+            string paymentMethod = invoice.Table.Columns.Contains("sale_type")
+                ? (invoice["sale_type"]?.ToString() ?? "Cash")
+                : "Cash";
 
-            string paymentMethod = invoice.Table.Columns.Contains("sale_type") ? invoice["sale_type"].ToString() : "Cash";
-            string paymentMeansCode = paymentMethod == "Cash" ? "10" : "30"; // 10=Cash, 30=Credit
+            // Default UNCL 4461 codes: 10 = In cash, 30 = Credit transfer
+            string paymentMeansCode = (paymentMethod.Equals("Cash", StringComparison.OrdinalIgnoreCase)) ? "10" : "30";
 
-            // For credit/debit notes, use code 42 and add InstructionNote for reason
-            //string invoiceTypeCode = invoice.Table.Columns.Contains("invoice_type_code") ? invoice["invoice_type_code"].ToString() : "388";
-            if (invoiceTypeCode == "381" || invoiceTypeCode == "383") // 381=Credit Note, 383=Debit Note
+            bool isCreditOrDebitNote = invoiceTypeCode == "381" || invoiceTypeCode == "383";
+
+            // For credit/debit note (381/383) ZATCA does not mandate PaymentMeans; include only if you have a real settlement method.
+            // If you still want to show a reversal context, you can keep a simplified PaymentMeans with InstructionNote.
+            if (isCreditOrDebitNote)
             {
-                paymentMeansCode = "42"; // ZATCA code for credit/debit note
-                                         // Get the reason from the DataRow, or set a default if not present
-                
-                string reason = invoice.Table.Columns.Contains("returnReason") ? invoice["returnReason"].ToString() : "Reason for issuing credit/debit note";
-                //string reason = "Reason for issuing credit/debit note"; // Default reason, can be customized
-                AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
-                AddElement(xmlDoc, paymentMeans, "cbc:InstructionNote", reason);
-            }
-            else
-            {
+                XmlElement paymentMeans = xmlDoc.CreateElement("cac", "PaymentMeans", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                // Use same code logic (do NOT force 42 unless your mapped process requires that specific local code).
                 AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
 
-                if (paymentMeansCode == "30") // Credit
+                string reason = invoice.Table.Columns.Contains("returnReason")
+                    ? (invoice["returnReason"]?.ToString() ?? "").Trim()
+                    : "";
+
+                if (!string.IsNullOrEmpty(reason))
                 {
-                    XmlElement paymentTerms = xmlDoc.CreateElement("cac", "PaymentTerms", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-                    AddElement(xmlDoc, paymentTerms, "cbc:Note", "Payment due within 30 days");
-                    AddElement(xmlDoc, paymentTerms, "cbc:PaymentDueDate", DateTime.Now.AddDays(30).ToString("yyyy-MM-dd"));
-                    paymentMeans.AppendChild(paymentTerms);
+                    // cbc:InstructionNote is valid child of PaymentMeansType
+                    AddElement(xmlDoc, paymentMeans, "cbc:InstructionNote", reason);
                 }
+
+                parent.AppendChild(paymentMeans);
+                return; // No PaymentTerms for credit/debit notes (normally not applicable).
             }
 
-            parent.AppendChild(paymentMeans);
+            // Standard (normal invoice) PaymentMeans
+            XmlElement stdPaymentMeans = xmlDoc.CreateElement("cac", "PaymentMeans", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            AddElement(xmlDoc, stdPaymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
+
+            // Optional: for bank / credit transfer you could append PayeeFinancialAccount etc. here.
+
+            parent.AppendChild(stdPaymentMeans);
+
+            // If it's a credit (on-account) sale (we mapped to 30), add a sibling PaymentTerms (NOT nested).
+            if (paymentMeansCode == "30")
+            {
+                DateTime dueDate = DateTime.Now.AddDays(30);
+                if (invoice.Table.Columns.Contains("due_date"))
+                {
+                    // If you have a due_date column, prefer it
+                    DateTime parsed;
+                    if (DateTime.TryParse(invoice["due_date"]?.ToString(), out parsed))
+                        dueDate = parsed;
+                }
+
+                XmlElement paymentTerms = xmlDoc.CreateElement("cac", "PaymentTerms", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                AddElement(xmlDoc, paymentTerms, "cbc:Note", "Payment due within 30 days");
+                AddElement(xmlDoc, paymentTerms, "cbc:PaymentDueDate", dueDate.ToString("yyyy-MM-dd"));
+                parent.AppendChild(paymentTerms);
+            }
         }
+
+        //private void AddPaymentMeans(XmlDocument xmlDoc, XmlElement parent, DataRow invoice, string invoiceTypeCode = "")
+        //{
+        //    XmlElement paymentMeans = xmlDoc.CreateElement("cac", "PaymentMeans", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+
+        //    string paymentMethod = invoice.Table.Columns.Contains("sale_type") ? invoice["sale_type"].ToString() : "Cash";
+        //    string paymentMeansCode = paymentMethod == "Cash" ? "10" : "30"; // 10=Cash, 30=Credit
+
+        //    // For credit/debit notes, use code 42 and add InstructionNote for reason
+        //    //string invoiceTypeCode = invoice.Table.Columns.Contains("invoice_type_code") ? invoice["invoice_type_code"].ToString() : "388";
+        //    if (invoiceTypeCode == "381" || invoiceTypeCode == "383") // 381=Credit Note, 383=Debit Note
+        //    {
+        //        paymentMeansCode = "42"; // ZATCA code for credit/debit note
+        //                                 // Get the reason from the DataRow, or set a default if not present
+                
+        //        string reason = invoice.Table.Columns.Contains("returnReason") ? invoice["returnReason"].ToString() : "Reason for issuing credit/debit note";
+        //        //string reason = "Reason for issuing credit/debit note"; // Default reason, can be customized
+        //        AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
+        //        AddElement(xmlDoc, paymentMeans, "cbc:InstructionNote", reason);
+        //    }
+        //    else
+        //    {
+        //        AddElement(xmlDoc, paymentMeans, "cbc:PaymentMeansCode", paymentMeansCode);
+
+        //        if (paymentMeansCode == "30") // Credit
+        //        {
+        //            XmlElement paymentTerms = xmlDoc.CreateElement("cac", "PaymentTerms", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+        //            AddElement(xmlDoc, paymentTerms, "cbc:Note", "Payment due within 30 days");
+        //            AddElement(xmlDoc, paymentTerms, "cbc:PaymentDueDate", DateTime.Now.AddDays(30).ToString("yyyy-MM-dd"));
+        //            paymentMeans.AppendChild(paymentTerms);
+        //        }
+        //    }
+
+        //    parent.AppendChild(paymentMeans);
+        //}
         
         private void AddAllowanceCharge(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {

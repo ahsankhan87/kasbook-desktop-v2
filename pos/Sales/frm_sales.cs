@@ -99,8 +99,7 @@ namespace pos
             get_saletype_dropdownlist();
             get_invoice_subtype_dropdownlist();
             Get_user_total_commission();
-            get_sale_account_dropdownlist();
-
+            
             //disable sorting in grid
             foreach (DataGridViewColumn column in grid_sales.Columns)
             {
@@ -1436,31 +1435,7 @@ namespace pos
 
             cmb_invoice_subtype_code.SelectedIndex = 0; //default value
         }
-        private void get_sale_account_dropdownlist()
-        {
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
-            
-            DataRow _row_1 = dt.NewRow();
-            _row_1["id"] = "Sale";
-            _row_1["name"] = "Sale";
-            dt.Rows.Add(_row_1);
-
-
-            DataRow _row_2 = dt.NewRow();
-            _row_2["id"] = "Debit";
-            _row_2["name"] = "Debit Note";
-            dt.Rows.Add(_row_2);
-
-            cmb_sale_account.DisplayMember = "name";
-            cmb_sale_account.ValueMember = "id";
-            cmb_sale_account.DataSource = dt;
-
-            cmb_sale_account.SelectedIndex = 0; //default value
-        }
-
+        
         public void load_user_rights(int user_id)
         {
             UsersBLL userBLL_obj = new UsersBLL();
@@ -2616,21 +2591,6 @@ namespace pos
                     return;
                 }
                 
-                string sale_account = (cmb_sale_account.SelectedValue == null ? "Sale" : cmb_sale_account.SelectedValue.ToString());
-                if(sale_account == "0")
-                {
-                    MessageBox.Show("Please select sale account", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cmb_sale_account.Focus();
-                    return;
-                }
-                if(sale_account == "Debit")
-                {
-                    MessageBox.Show("Debit account cannot be used for sale transaction", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtOriginalInvoice.Enabled = true;
-
-                    
-                }
-
                 if ((cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01") &&
                     (cmb_customers.SelectedValue == null || cmb_customers.SelectedValue.ToString() == "0" 
                     || cmb_customers.SelectedValue.ToString() == "-1"))
@@ -2813,7 +2773,7 @@ namespace pos
                             bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
                             PONumber = PONumber,
 
-                            account = sale_account,
+                            account = "Sale",
                             is_return = false,
                             estimate_invoice_no = estimate_invoice_no,
                             estimate_status = estimate_status,
@@ -2881,6 +2841,12 @@ namespace pos
                         if (sale_type == "Quotation")
                         {
                             sale_id = salesObj.InsertEstimates(sales_model_header, sales_model_detail); // for quotation / estimates
+                            if (sale_id > 0)
+                            {
+                                MessageBox.Show(invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                txt_invoice_no.Text = invoice_no; // set the invoice no in textbox
+                                txt_invoice_no.Tag = sale_id; // set the sale id in tag
+                            }
                         }
                         else if (sale_type == "ICT")
                         {
@@ -2929,7 +2895,7 @@ namespace pos
                                 }
                                 //////
                                 ///
-                                MessageBox.Show(invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Invoice No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             }
                         }
@@ -3082,7 +3048,7 @@ namespace pos
             }
         }
 
-        private void LosdQuotationToolStripButton_Click(object sender, EventArgs e)
+        private void LoadQuotationToolStripButton_Click(object sender, EventArgs e)
         {
             try
             {

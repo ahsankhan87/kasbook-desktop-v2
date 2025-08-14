@@ -258,7 +258,8 @@ namespace POS.DLL
                         cmd = new SqlCommand();
                         cmd.Connection = cn;
 
-                        var query = new StringBuilder("SELECT s.*,IIF(s.invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype,CONCAT(C.first_name,' ',C.last_name) AS customer " +
+                        var query = new StringBuilder("SELECT s.*,(s.total_amount+total_tax-discount_value) AS total," +
+                            "IIF(s.invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype,CONCAT(C.first_name,' ',C.last_name) AS customer " +
                             "FROM pos_sales s LEFT JOIN pos_customers C ON C.id=S.customer_id WHERE 1=1");
 
                         if (!string.IsNullOrEmpty(invoiceNo))
@@ -296,6 +297,7 @@ namespace POS.DLL
                         query.Append(" AND s.branch_id = @branch_id");
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
+                        query.Append(" ORDER BY s.id DESC");
                         cmd.CommandText = query.ToString();
 
                         da = new SqlDataAdapter(cmd);
