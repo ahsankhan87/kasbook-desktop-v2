@@ -881,11 +881,13 @@ namespace POS.DLL
                             " SI.id,SI.item_code,SI.item_number,SI.quantity,SI.unit_price,SI.cost_price,SI.tax_rate,SI.tax_id,SI.discount_value," +
                             " (((SI.cost_price*SI.quantity-ABS(SI.discount_value))*SI.tax_rate/100) + (SI.cost_price*SI.quantity-ABS(SI.discount_value))) AS total," +
                             " ((SI.cost_price*SI.quantity-discount_value)*SI.tax_rate/100) AS vat," +
-                            " P.name AS product_name" +
+                            " P.name AS product_name," +
+                            " ISNULL(r.TotalReturnedQty,0) AS ReturnedQty,(SI.quantity - ISNULL(r.TotalReturnedQty,0)) AS ReturnableQty" +
                             //" C.first_name AS customer_name" +
                             " FROM pos_purchases_items SI" +
                             //" LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
                             " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
+                            " LEFT JOIN (SELECT ItemNumber, SUM(QtyReturned) AS TotalReturnedQty FROM pos_purchasesReturn WHERE OriginalInvoiceNo = @invoice_no GROUP BY ItemNumber) r ON r.ItemNumber = SI.item_number" +
                             //" LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE SI.invoice_no = @invoice_no AND SI.branch_id=@branch_id";
 
@@ -897,6 +899,13 @@ namespace POS.DLL
 
                     da = new SqlDataAdapter(cmd);
                     da.Fill(dt_1);
+
+                    // Add input column for new return qty (not persisted yet)
+                    if (!dt_1.Columns.Contains("ReturnQty"))
+                        dt_1.Columns.Add("ReturnQty", typeof(decimal));
+                    foreach (DataRow r in dt_1.Rows)
+                        r["ReturnQty"] = 0m;
+
                     return dt_1;
                 }
                 catch
@@ -955,6 +964,10 @@ namespace POS.DLL
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+
+                            cmd.Parameters.AddWithValue("@old_invoice_no", purchases[0].old_invoice_no);
+                            cmd.Parameters.AddWithValue("@returnReason", purchases[0].returnReason);
+
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
                             cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);

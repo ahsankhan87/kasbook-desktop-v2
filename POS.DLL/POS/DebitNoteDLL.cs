@@ -189,7 +189,7 @@ namespace POS.DLL.POS
         {
             var notes = new List<DebitNoteModal>();
             using (var conn = new SqlConnection(dbConnection.ConnectionString))
-            using (var cmd = new SqlCommand("SELECT * FROM pos_debitNotes", conn))
+            using (var cmd = new SqlCommand("SELECT * FROM pos_debitNotes order by DebitNoteId desc", conn))
             {
                 conn.Open();
                 using (var reader = cmd.ExecuteReader())

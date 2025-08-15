@@ -41,6 +41,7 @@ namespace pos.Sales
             this.lbl_subtype_name = new System.Windows.Forms.Label();
             this.lbl_subtype_code = new System.Windows.Forms.Label();
             this.lbl_saletype = new System.Windows.Forms.Label();
+            this.lbl_prevInvDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridDebitNotes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -300,12 +301,23 @@ namespace pos.Sales
             this.lbl_saletype.Text = "lbl_saletype";
             this.lbl_saletype.Visible = false;
             // 
+            // lbl_prevInvDate
+            // 
+            this.lbl_prevInvDate.AutoSize = true;
+            this.lbl_prevInvDate.Location = new System.Drawing.Point(707, 31);
+            this.lbl_prevInvDate.Name = "lbl_prevInvDate";
+            this.lbl_prevInvDate.Size = new System.Drawing.Size(101, 16);
+            this.lbl_prevInvDate.TabIndex = 0;
+            this.lbl_prevInvDate.Text = "lbl_prevInvDate";
+            this.lbl_prevInvDate.Visible = false;
+            // 
             // frm_debitnote
             // 
             this.ClientSize = new System.Drawing.Size(820, 520);
             this.Controls.Add(this.cmb_customers);
             this.Controls.Add(this.cmbReason);
             this.Controls.Add(this.lbl_subtype_code);
+            this.Controls.Add(this.lbl_prevInvDate);
             this.Controls.Add(this.lbl_saletype);
             this.Controls.Add(this.lbl_subtype_name);
             this.Controls.Add(this.lblDebitNoteNumber);
@@ -365,5 +377,6 @@ namespace pos.Sales
         private System.Windows.Forms.Label lbl_subtype_name;
         private System.Windows.Forms.Label lbl_subtype_code;
         private System.Windows.Forms.Label lbl_saletype;
+        private System.Windows.Forms.Label lbl_prevInvDate;
     }
 }

@@ -39,6 +39,7 @@ namespace pos
         public void frm_purchase_return_Load(object sender, EventArgs e)
         {
             //load_purchase_return_grid(Purchase_id);
+            LoadReturnReasonsDDL();
             autoCompleteInvoice();
             
         }
@@ -51,16 +52,42 @@ namespace pos
                  //grid_purchase_return.Rows.Clear();
                 grid_purchase_return.Refresh();
                 grid_purchase_return.AutoGenerateColumns = false;
-                grid_purchase_return.DataSource = load_Purchases_items_return_grid(txt_invoice_no.Text);
+                grid_purchase_return.DataSource = objPurchaseBLL.GetReturnPurchaseItems(txt_invoice_no.Text);
                 Purchases_dt = load_purchase_return_grid(txt_invoice_no.Text);
 
-                
-                
+                MarkFullyReturnedRows();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            }
+        }
+        private void MarkFullyReturnedRows()
+        {
+            foreach (DataGridViewRow row in grid_purchase_return.Rows)
+            {
+                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                if (avail <= 0)
+                {
+                    row.ReadOnly = true; // whole row
+                    row.Cells["ReturnQty"].Value = 0m;
+                }
+            }
+            ApplyRowStyles();
+        }
+
+        private void ApplyRowStyles()
+        {
+            foreach (DataGridViewRow row in grid_purchase_return.Rows)
+            {
+                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                if (avail <= 0)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
+                    row.DefaultCellStyle.ForeColor = Color.DarkGray;
+                }
             }
         }
 
@@ -72,6 +99,8 @@ namespace pos
             {
                 if (grid_purchase_return.Rows.Count > 0)
                 {
+                    string returnReason = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Value;
+                    string prev_invoice_no = txt_invoice_no.Text.Trim();
 
                     string new_invoice_no = GetMAXInvoiceNo();
 
@@ -86,13 +115,13 @@ namespace pos
                         if (Convert.ToBoolean(grid_purchase_return.Rows[i].Cells["chk"].Value))
                         {
                             decimal tax_rate = (grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString()));
-                            sub_total = (Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["return_qty"].Value) * Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value) - Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value));
+                            sub_total = (Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value) * Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value) - Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value));
 
                             // decimal tax = (Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value) * tax_rate / 100);
                             decimal tax = (sub_total * tax_rate / 100);
 
                             total_tax += tax;
-                            //total_tax += tax * Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["return_qty"].Value);
+                            //total_tax += tax * Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value);
                             total_amount += sub_total + Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value);
                             total_discount += Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value);
 
@@ -119,10 +148,14 @@ namespace pos
                             purchase_type = Purchases_dr["purchase_type"].ToString(),
                             purchase_date = DateTime.Now,
                             purchase_time = DateTime.Now,
-                            description = "Purchase Return Inv #:" + txt_invoice_no.Text,
+                            description = "Purchase Return Inv #:" + prev_invoice_no,
                             //shipping_cost = (string.IsNullOrEmpty(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text)),
                             account = "Return",
-                            
+
+                            old_invoice_no = prev_invoice_no,
+                            returnReason = returnReason,
+
+
                             cash_account_id = cash_account_id,
                             payable_account_id = payable_account_id,
                             tax_account_id = tax_account_id,
@@ -148,7 +181,7 @@ namespace pos
                                     item_number = grid_purchase_return.Rows[i].Cells["item_number"].Value.ToString(),
                                     code = grid_purchase_return.Rows[i].Cells["item_code"].Value.ToString(),
                                     //name = grid_purchases.Rows[i].Cells["name"].Value.ToString(),
-                                    quantity = decimal.Parse(grid_purchase_return.Rows[i].Cells["return_qty"].Value.ToString()),
+                                    quantity = decimal.Parse(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value.ToString()),
                                     packet_qty = decimal.Parse(grid_purchase_return.Rows[i].Cells["packet_qty"].Value.ToString()),
                                     cost_price = Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value.ToString()),// its avg cost actually ,
                                     unit_price = decimal.Parse(grid_purchase_return.Rows[i].Cells["unit_price"].Value.ToString()),
@@ -333,6 +366,56 @@ namespace pos
             }
         }
 
+        private void grid_purchase_return_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (grid_purchase_return.Columns[e.ColumnIndex].DataPropertyName == "ReturnQty")
+            {
+                var row = grid_purchase_return.Rows[e.RowIndex];
+                if (row.ReadOnly) return;
+
+                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                if (string.IsNullOrWhiteSpace(e.FormattedValue?.ToString()))
+                {
+                    row.Cells["ReturnQty"].Value = 0m;
+                    return;
+                }
+                if (!decimal.TryParse(e.FormattedValue.ToString(), out var entered) || entered < 0)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Invalid quantity.");
+                    return;
+                }
+                if (entered > avail)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show($"Cannot return more than available ({avail}).","Return",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void LoadReturnReasonsDDL()
+        {
+            // Example reasons; replace with your actual codes and reasons
+            var reasons = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("01", "Goods returned"),
+                new KeyValuePair<string, string>("02", "Invoice correction"),
+                new KeyValuePair<string, string>("03", "Service not provided"),
+                new KeyValuePair<string, string>("04", "Duplicate invoice"),
+                new KeyValuePair<string, string>("05", "Incorrect amount"),
+                new KeyValuePair<string, string>("06", "Cancellation of order"),
+                new KeyValuePair<string, string>("07", "Price adjustment"),
+                new KeyValuePair<string, string>("08", "Damaged goods"),
+                new KeyValuePair<string, string>("09", "Incorrect tax calculation"),
+                new KeyValuePair<string, string>("10", "Other")
+            };
+
+            cmbReturnReason.DataSource = new BindingSource(reasons, null);
+            cmbReturnReason.DisplayMember = "Value";
+            cmbReturnReason.ValueMember = "Key";
+
+            cmbReturnReason.SelectedIndex = 0;  // Set default selection
+        }
 
     }
 }

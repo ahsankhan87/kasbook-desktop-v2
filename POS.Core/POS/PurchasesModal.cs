@@ -41,6 +41,10 @@ namespace POS.Core
         public int purchases_discount_acc_id { get; set; }
         public int inventory_acc_id { get; set; }
         public int purchases_acc_id { get; set; }
+
+        public string old_invoice_no { get; set; }
+        public string returnReasonCode { get; set; }
+        public string returnReason { get; set; }
     }
 
     public class PurchasesModal
