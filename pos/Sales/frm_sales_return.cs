@@ -68,8 +68,9 @@ namespace pos
                 {
                     grid_sales_return.DataSource = null;
                     grid_sales_return.AutoGenerateColumns = false;
-                    grid_sales_return.DataSource = load_sales_items_return_grid(txt_invoice_no.Text);
+                    grid_sales_return.DataSource = objSalesBLL.GetReturnSaleItems(txt_invoice_no.Text);
                     sales_dt = load_sales_return_grid(txt_invoice_no.Text);
+                    MarkFullyReturnedRows();
                 }
                 
             }
@@ -77,6 +78,32 @@ namespace pos
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            }
+        }
+        private void MarkFullyReturnedRows()
+        {
+            foreach (DataGridViewRow row in grid_sales_return.Rows)
+            {
+                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                if (avail <= 0)
+                {
+                    row.ReadOnly = true; // whole row
+                    row.Cells["ReturnQty"].Value = 0m;
+                }
+            }
+            ApplyRowStyles();
+        }
+
+        private void ApplyRowStyles()
+        {
+            foreach (DataGridViewRow row in grid_sales_return.Rows)
+            {
+                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                if (avail <= 0)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGray;
+                    row.DefaultCellStyle.ForeColor = Color.DarkGray;
+                }
             }
         }
 
@@ -138,15 +165,15 @@ namespace pos
                         if (Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value))
                         {
                             double tax_rate = (grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString()));
-                            sub_total = (Convert.ToDouble(grid_sales_return.Rows[i].Cells["return_qty"].Value) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["unit_price"].Value)- Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value));
+                            sub_total = (Convert.ToDouble(grid_sales_return.Rows[i].Cells["ReturnQty"].Value) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["unit_price"].Value)- Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value));
                             double tax = (sub_total * tax_rate / 100);
 
                             total_tax += tax;
 
-                            //total_tax += Convert.ToInt32(grid_sales_return.Rows[i].Cells["vat"].Value) / Convert.ToInt32(grid_sales_return.Rows[i].Cells["quantity_sold"].Value) * Convert.ToInt32(grid_sales_return.Rows[i].Cells["return_qty"].Value);
+                            //total_tax += Convert.ToInt32(grid_sales_return.Rows[i].Cells["vat"].Value) / Convert.ToInt32(grid_sales_return.Rows[i].Cells["quantity_sold"].Value) * Convert.ToInt32(grid_sales_return.Rows[i].Cells["ReturnQty"].Value);
                             total_amount += sub_total+ Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
                             total_discount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
-                            total_cost_amount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["cost_price"].Value.ToString()) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["return_qty"].Value.ToString());
+                            total_cost_amount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["cost_price"].Value.ToString()) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["ReturnQty"].Value.ToString());
 
                         } 
                     }
@@ -212,7 +239,7 @@ namespace pos
                                     item_number= grid_sales_return.Rows[i].Cells["item_number"].Value.ToString(),
                                     code = grid_sales_return.Rows[i].Cells["item_code"].Value.ToString(),
                                     name = grid_sales_return.Rows[i].Cells["product_name"].Value.ToString(),
-                                    quantity_sold = double.Parse(grid_sales_return.Rows[i].Cells["return_qty"].Value.ToString()),
+                                    quantity_sold = double.Parse(grid_sales_return.Rows[i].Cells["ReturnQty"].Value.ToString()),
                                     packet_qty = double.Parse(grid_sales_return.Rows[i].Cells["packet_qty"].Value.ToString()),
                                     unit_price = double.Parse(grid_sales_return.Rows[i].Cells["unit_price"].Value.ToString()),
                                     discount = double.Parse(grid_sales_return.Rows[i].Cells["discount_value"].Value.ToString()),
@@ -484,7 +511,7 @@ namespace pos
         {
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
-            if (grid_sales_return.CurrentCell.ColumnIndex == 5 || grid_sales_return.CurrentCell.ColumnIndex == 6) //qty, unit price and discount Column will accept only numeric
+            if (grid_sales_return.CurrentCell.ColumnIndex == 7 || grid_sales_return.CurrentCell.ColumnIndex == 8) //qty, unit price and discount Column will accept only numeric
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -538,6 +565,33 @@ namespace pos
             cmbReturnReason.DataSource = new BindingSource(reasons, null);
             cmbReturnReason.DisplayMember = "Value";
             cmbReturnReason.ValueMember = "Key";
+        }
+
+        private void grid_sales_return_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (grid_sales_return.Columns[e.ColumnIndex].DataPropertyName == "ReturnQty")
+            {
+                var row = grid_sales_return.Rows[e.RowIndex];
+                if (row.ReadOnly) return;
+
+                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                if (string.IsNullOrWhiteSpace(e.FormattedValue?.ToString()))
+                {
+                    row.Cells["ReturnQty"].Value = 0m;
+                    return;
+                }
+                if (!decimal.TryParse(e.FormattedValue.ToString(), out var entered) || entered < 0)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Invalid quantity.");
+                    return;
+                }
+                if (entered > avail)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show($"Cannot return more than available ({avail}).");
+                }
+            }
         }
     }
 }

@@ -1251,13 +1251,56 @@ namespace POS.DLL
                             " SI.quantity_sold,SI.unit_price,SI.cost_price,SI.tax_rate,SI.tax_id,SI.discount_value,SI.loc_code," +
                             " (SI.unit_price*SI.quantity_sold-SI.discount_value)+((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS total," +
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
-                            " SI.item_name AS product_name" +
+                            " SI.item_name AS product_name," +
+                            " ISNULL(r.TotalReturnedQty,0) AS ReturnedQty,(SI.quantity_sold - ISNULL(r.TotalReturnedQty,0)) AS ReturnableQty" +
                             //" C.first_name AS customer_name" +
                             " FROM pos_sales_items SI" +
+                            " LEFT JOIN (SELECT ItemNumber, SUM(QtyReturned) AS TotalReturnedQty FROM pos_salesReturn WHERE OriginalInvoiceNo = @invoice_no GROUP BY ItemNumber) r ON r.ItemNumber = SI.item_number" +
                             //" LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
                             //" LEFT JOIN pos_products P ON P.code=SI.item_code" +
                             //" LEFT JOIN pos_customers C ON C.id=S.customer_id" +
-                            " WHERE SI.invoice_no = @invoice_no AND SI.branch_id=@branch_id";
+                            " WHERE SI.invoice_no = @invoice_no AND SI.branch_id=@branch_id" +
+                            " Order by SI.id";
+
+                        cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                        //cmd.Parameters.AddWithValue("@OperationType", "5");
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                    }
+
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                    // Add input column for new return qty (not persisted yet)
+                    if (!dt.Columns.Contains("ReturnQty"))
+                        dt.Columns.Add("ReturnQty", typeof(decimal));
+                    foreach (DataRow r in dt.Rows)
+                        r["ReturnQty"] = 0m;
+                    
+                    return dt;
+                }
+                catch
+                {
+
+                    throw;
+                }
+            }
+
+        }
+        public DataTable GetSalesReturnedItems(string invoice_no)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        String query = "SELECT *" +
+                            " FROM pos_salesReturn" +
+                            " WHERE invoice_no = @invoice_no AND branch_id=@branch_id";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
@@ -1278,7 +1321,6 @@ namespace POS.DLL
             }
 
         }
-
         public int InsertReturnSales(List<SalesModalHeader> sales, List<SalesModal> sales_detail)
         {
             Int32 newSaleID = 0;
@@ -1335,6 +1377,11 @@ namespace POS.DLL
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                            cmd.Parameters.AddWithValue("@old_invoice_no", sales[0].old_invoice_no);
+                            cmd.Parameters.AddWithValue("@previousInvoiceDate", sales[0].previousInvoiceDate);
+                            cmd.Parameters.AddWithValue("@returnReasonCode", sales[0].returnReasonCode);
+                            cmd.Parameters.AddWithValue("@returnReason", sales[0].returnReason);
+
                             cmd.Parameters.AddWithValue("@item_number", detail.item_number);
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
                             cmd.Parameters.AddWithValue("@item_name", detail.name);
