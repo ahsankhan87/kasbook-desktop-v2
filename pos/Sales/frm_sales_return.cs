@@ -48,7 +48,6 @@ namespace pos
             //load_sales_return_grid(sale_id);
             Get_AccountID_From_Company();
             LoadReturnReasonsDDL();
-            cmbReturnReason.SelectedIndex = 0; // Set default selection to the first item
             autoCompleteInvoice();
             txt_invoice_no.Focus();
             Get_user_total_commission();
@@ -565,6 +564,8 @@ namespace pos
             cmbReturnReason.DataSource = new BindingSource(reasons, null);
             cmbReturnReason.DisplayMember = "Value";
             cmbReturnReason.ValueMember = "Key";
+
+            cmbReturnReason.SelectedIndex = 0;  // Set default selection
         }
 
         private void grid_sales_return_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -583,13 +584,13 @@ namespace pos
                 if (!decimal.TryParse(e.FormattedValue.ToString(), out var entered) || entered < 0)
                 {
                     e.Cancel = true;
-                    MessageBox.Show("Invalid quantity.");
+                    MessageBox.Show("Invalid quantity.", "Return", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 if (entered > avail)
                 {
                     e.Cancel = true;
-                    MessageBox.Show($"Cannot return more than available ({avail}).");
+                    MessageBox.Show($"Cannot return more than available ({avail}).", "Return", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

@@ -1,9 +1,11 @@
+using pos.Master.Companies.zatca;
 using POS.BLL;
 using POS.BLL.POS;
 using POS.Core;
 using POS.Core.POS;
 using System;
 using System.Data;
+using System.Security.Principal;
 using System.Windows.Forms;
 using static jdk.nashorn.@internal.codegen.CompilerConstants;
 
@@ -61,8 +63,50 @@ namespace pos.Sales
 
             var service = new DebitNoteBLL();
             service.CreateDebitNote(debitNote);
-            MessageBox.Show("Debit Note created successfully.");
+            // Assuming CreateDebitNote method handles the database insertion and ZATCA submission
+            if (UsersModal.useZatcaEInvoice)
+            {
+                // Call ZATCA submission logic here
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
+                {
+                    MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
+                }
+
+                // Retrieve PCSID credentials from the database using the credentialId
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                if (PCSID_dataRow == null)
+                {
+                    ZatcaHelper.SignDebitNoteToZatca(txtDebitNoteNumber.Text, txtReferenceInvoice.Text, Convert.ToDateTime(lbl_prevInvDate.Text));
+                }
+                else
+                {
+                    
+                    ZatcaHelper.PCSID_SignDebitNoteToZatcaAsync(txtDebitNoteNumber.Text, txtReferenceInvoice.Text, Convert.ToDateTime(lbl_prevInvDate.Text));
+                    
+                }
+            }
+            
+            // Show success message
+            MessageBox.Show("Debit Note created successfully","Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
             LoadDebitNotes();
+            clearFields();
+            GetMaxInvoiceNo();
+        }
+
+        private void clearFields()
+        {
+            txtDebitNoteNumber.Clear();
+            dtpDate.Value = DateTime.Now;
+            cmb_customers.SelectedIndex = 0;
+            txtReferenceInvoice.Clear();
+            txtAmount.Clear();
+            txtVATAmount.Clear();
+            txtTotalAmount.Clear();
+            cmbReason.SelectedIndex = 0;
+            lbl_subtype_code.Text = string.Empty;
+            lbl_subtype_name.Text = string.Empty;
+            lbl_saletype.Text = string.Empty;
         }
 
         private void ReasonDDL()
@@ -101,6 +145,7 @@ namespace pos.Sales
             {
                 var service = new DebitNoteBLL();
                 var debitNotes = service.GetAllDebitNotes(); // Implement this method to return a list
+                //gridDebitNotes.AutoGenerateColumns = false;
                 gridDebitNotes.DataSource = debitNotes;
             }
             catch (Exception ex)
@@ -186,21 +231,30 @@ namespace pos.Sales
 
         private void txtReferenceInvoice_TextChanged(object sender, EventArgs e)
         {
-            GeneralBLL invoicesBLL_obj = new GeneralBLL();
-            string keyword = "sale_type,invoice_subtype_code, IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype ";
-            string table = "pos_sales WHERE invoice_no = '" + txtReferenceInvoice.Text + "' AND branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY id desc";
-            DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
-
-            if (dt.Rows.Count > 0)
+            try
             {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    lbl_subtype_code.Text = dr["invoice_subtype_code"].ToString();
-                    lbl_subtype_name.Text = dr["invoice_subtype"].ToString();
-                    lbl_saletype.Text = dr["sale_type"].ToString();
-                }
+                GeneralBLL invoicesBLL_obj = new GeneralBLL();
+                string keyword = "sale_date,sale_type,invoice_subtype_code, IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype ";
+                string table = "pos_sales WHERE invoice_no = '" + txtReferenceInvoice.Text + "' AND branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY id desc";
+                DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
 
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        lbl_subtype_code.Text = dr["invoice_subtype_code"].ToString();
+                        lbl_subtype_name.Text = dr["invoice_subtype"].ToString();
+                        lbl_saletype.Text = dr["sale_type"].ToString();
+                        lbl_prevInvDate.Text = dr["sale_date"].ToString();
+                    }
+
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }

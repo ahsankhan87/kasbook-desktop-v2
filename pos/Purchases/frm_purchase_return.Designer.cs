@@ -50,7 +50,9 @@
             this.item_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.return_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReturnedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReturnableQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReturnQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +64,8 @@
             this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbReturnReason = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_purchase_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -79,7 +83,6 @@
             this.grid_purchase_return.AllowUserToAddRows = false;
             this.grid_purchase_return.AllowUserToDeleteRows = false;
             this.grid_purchase_return.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_purchase_return, "grid_purchase_return");
             this.grid_purchase_return.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_purchase_return.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_purchase_return.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -89,7 +92,9 @@
             this.item_code,
             this.product_name,
             this.quantity,
-            this.return_qty,
+            this.ReturnedQty,
+            this.ReturnableQty,
+            this.ReturnQty,
             this.unit_price,
             this.cost_price,
             this.discount_value,
@@ -101,8 +106,10 @@
             this.item_id,
             this.packet_qty,
             this.item_number});
+            resources.ApplyResources(this.grid_purchase_return, "grid_purchase_return");
             this.grid_purchase_return.Name = "grid_purchase_return";
             this.grid_purchase_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grid_purchase_return.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.grid_purchase_return_CellValidating);
             this.grid_purchase_return.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grid_purchase_return_DataError);
             // 
             // txt_close
@@ -199,16 +206,28 @@
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
             // 
-            // return_qty
+            // ReturnedQty
             // 
-            this.return_qty.DataPropertyName = "return_qty";
+            this.ReturnedQty.DataPropertyName = "ReturnedQty";
+            resources.ApplyResources(this.ReturnedQty, "ReturnedQty");
+            this.ReturnedQty.Name = "ReturnedQty";
+            // 
+            // ReturnableQty
+            // 
+            this.ReturnableQty.DataPropertyName = "ReturnableQty";
+            resources.ApplyResources(this.ReturnableQty, "ReturnableQty");
+            this.ReturnableQty.Name = "ReturnableQty";
+            // 
+            // ReturnQty
+            // 
+            this.ReturnQty.DataPropertyName = "ReturnQty";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
-            this.return_qty.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.return_qty, "return_qty");
-            this.return_qty.Name = "return_qty";
+            this.ReturnQty.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.ReturnQty, "ReturnQty");
+            this.ReturnQty.Name = "ReturnQty";
             // 
             // unit_price
             // 
@@ -300,11 +319,25 @@
             resources.ApplyResources(this.item_number, "item_number");
             this.item_number.Name = "item_number";
             // 
+            // cmbReturnReason
+            // 
+            this.cmbReturnReason.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
+            this.cmbReturnReason.Name = "cmbReturnReason";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Name = "label2";
+            // 
             // frm_purchase_return
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.txt_close;
+            this.Controls.Add(this.cmbReturnReason);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_invoice_no);
@@ -341,7 +374,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn return_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReturnedQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReturnableQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReturnQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
@@ -353,6 +388,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
+        private System.Windows.Forms.ComboBox cmbReturnReason;
+        private System.Windows.Forms.Label label2;
     }
 }
 
