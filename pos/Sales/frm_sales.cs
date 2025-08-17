@@ -1380,7 +1380,13 @@ namespace pos
             DataRow _row_4 = dt.NewRow();
             _row_4["id"] = "ICT";
             
+            if (lang == "ar_SA")
+            {
+                _row_4["name"] = "نقل قطع الغيار بين الشركات";
+            }
+            else { 
                 _row_4["name"] = "ICT";
+            }
             dt.Rows.Add(_row_4);
 
             

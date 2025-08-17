@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 59</value>
+    <value>84, 59</value>
   </data>
   <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -138,20 +138,14 @@
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
   </data>
-  <data name="label29.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+  <data name="lbl_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 16</value>
   </data>
-  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 10</value>
-  </data>
-  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lbl_title.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 31</value>
   </data>
-  <data name="label29.Text" xml:space="preserve">
+  <data name="lbl_title.Text" xml:space="preserve">
     <value>فاتورة المبيعات</value>
-  </data>
-  <data name="SalesToolStrip.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="SalesToolStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>1426, 47</value>
@@ -172,7 +166,7 @@
     <value>Top, Right</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 59</value>
+    <value>411, 59</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
@@ -184,7 +178,7 @@
     <value>Yes</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 262</value>
+    <value>376, 262</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>تفاصيل العميل
@@ -340,6 +334,15 @@
   <data name="SaleReturnToolStripButton.Text" xml:space="preserve">
     <value>مرتجع</value>
   </data>
+  <data name="cmb_invoice_subtype_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_invoice_subtype_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 125</value>
+  </data>
+  <data name="cmb_invoice_subtype_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 28</value>
+  </data>
   <data name="cmb_sale_type.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -356,7 +359,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 163</value>
+    <value>225, 197</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 20</value>
@@ -368,7 +371,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 198</value>
+    <value>225, 232</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
@@ -380,7 +383,7 @@
     <value>Top, Right</value>
   </data>
   <data name="lbl_employee.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 128</value>
+    <value>225, 162</value>
   </data>
   <data name="lbl_employee.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
@@ -392,7 +395,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_payment_method.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 160</value>
+    <value>14, 194</value>
   </data>
   <data name="cmb_payment_method.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 28</value>
@@ -401,7 +404,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_payment_terms.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 194</value>
+    <value>14, 228</value>
   </data>
   <data name="cmb_payment_terms.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 28</value>
@@ -410,7 +413,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_employees.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 125</value>
+    <value>14, 159</value>
   </data>
   <data name="cmb_employees.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -441,6 +444,15 @@
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>تاريخ</value>
+  </data>
+  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 129</value>
+  </data>
+  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 20</value>
+  </data>
+  <data name="label31.Text" xml:space="preserve">
+    <value>نوع الفاتورة</value>
   </data>
   <data name="label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -480,7 +492,7 @@
     <value>203, 27</value>
   </data>
   <data name="lbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 59</value>
+    <value>281, 58</value>
   </data>
   <data name="lbl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -492,46 +504,46 @@
     <value>ضريبة:</value>
   </data>
   <data name="txt_cust_balance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 127</value>
+    <value>9, 126</value>
   </data>
   <data name="txt_cust_balance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_cust_balance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 27</value>
+    <value>264, 27</value>
   </data>
   <data name="txt_cust_credit_limit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 90</value>
+    <value>9, 89</value>
   </data>
   <data name="txt_cust_credit_limit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_cust_credit_limit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 27</value>
+    <value>264, 27</value>
   </data>
   <data name="txt_customer_vat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 58</value>
+    <value>9, 57</value>
   </data>
   <data name="txt_customer_vat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_customer_vat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 27</value>
+    <value>264, 27</value>
   </data>
   <data name="cmb_customers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="cmb_customers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 23</value>
+    <value>9, 23</value>
   </data>
   <data name="cmb_customers.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="cmb_customers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 28</value>
+    <value>264, 28</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 130</value>
+    <value>281, 129</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 20</value>
@@ -540,7 +552,7 @@
     <value>الرصيد</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 94</value>
+    <value>281, 93</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -553,7 +565,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 28</value>
+    <value>281, 28</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 20</value>
@@ -579,6 +591,30 @@
   <data name="groupBox5.Text" xml:space="preserve">
     <value>أدخل سعر</value>
   </data>
+  <data name="rd_btn_with_vat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 56</value>
+  </data>
+  <data name="rd_btn_with_vat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 1, 4, 1</value>
+  </data>
+  <data name="rd_btn_with_vat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 24</value>
+  </data>
+  <data name="rd_btn_with_vat.Text" xml:space="preserve">
+    <value>مع ضريبة</value>
+  </data>
+  <data name="rd_btn_without_vat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 34</value>
+  </data>
+  <data name="rd_btn_without_vat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 1, 4, 1</value>
+  </data>
+  <data name="rd_btn_without_vat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 24</value>
+  </data>
+  <data name="rd_btn_without_vat.Text" xml:space="preserve">
+    <value>بدون ضريبة</value>
+  </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>104, 29</value>
   </data>
@@ -598,7 +634,7 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="rd_btn_bytotal_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 27</value>
+    <value>114, 24</value>
   </data>
   <data name="rd_btn_bytotal_price.Text" xml:space="preserve">
     <value>السعر الإجمالي</value>
@@ -610,34 +646,10 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="rd_btn_by_unitprice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 27</value>
+    <value>94, 24</value>
   </data>
   <data name="rd_btn_by_unitprice.Text" xml:space="preserve">
     <value>سعر الوحدة</value>
-  </data>
-  <data name="rd_btn_with_vat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 56</value>
-  </data>
-  <data name="rd_btn_with_vat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 1, 4, 1</value>
-  </data>
-  <data name="rd_btn_with_vat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 27</value>
-  </data>
-  <data name="rd_btn_with_vat.Text" xml:space="preserve">
-    <value>مع ضريبة</value>
-  </data>
-  <data name="rd_btn_without_vat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 34</value>
-  </data>
-  <data name="rd_btn_without_vat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 1, 4, 1</value>
-  </data>
-  <data name="rd_btn_without_vat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 27</value>
-  </data>
-  <data name="rd_btn_without_vat.Text" xml:space="preserve">
-    <value>بدون ضريبة</value>
   </data>
   <data name="txt_brand_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -840,8 +852,8 @@
   <data name="btn_delete.HeaderText" xml:space="preserve">
     <value>حذف</value>
   </data>
-  <data name="shop_qty.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+  <data name="btn_delete.Width" type="System.Int32, mscorlib">
+    <value>39</value>
   </data>
   <data name="grid_sales.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>

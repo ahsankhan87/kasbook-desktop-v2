@@ -1941,6 +1941,9 @@
     <EmbeddedResource Include="Sales\frm_debitnote.resx">
       <DependentUpon>frm_debitnote.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_zatca_invoices.ar-SA.resx">
+      <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_zatca_invoices.resx">
       <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
     </EmbeddedResource>
