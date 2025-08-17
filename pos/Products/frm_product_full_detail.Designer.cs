@@ -168,8 +168,8 @@
             // 
             // btn_search_products
             // 
-            this.btn_search_products.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.btn_search_products, "btn_search_products");
+            this.btn_search_products.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_search_products.Name = "btn_search_products";
             this.btn_search_products.UseVisualStyleBackColor = true;
             this.btn_search_products.Click += new System.EventHandler(this.btn_search_products_Click);
