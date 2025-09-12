@@ -1347,6 +1347,9 @@
     <EmbeddedResource Include="Estimates\frm_search_estimates.resx">
       <DependentUpon>frm_search_estimates.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Expenses\frm_expenses.ar-SA.resx">
+      <DependentUpon>frm_expenses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Expenses\frm_expenses.resx">
       <DependentUpon>frm_expenses.cs</DependentUpon>
     </EmbeddedResource>
