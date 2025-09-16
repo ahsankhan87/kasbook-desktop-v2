@@ -70,7 +70,7 @@ namespace POS.DLL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = cn;
-                    cmd.CommandText = @"SELECT * 
+                    cmd.CommandText = @"SELECT id, first_name, last_name, email, vat_no, address, date_created, branch_id 
                                 FROM pos_customers 
                                 WHERE branch_id = @branch_id 
                                 AND (first_name LIKE @condition OR last_name LIKE @condition 
@@ -103,37 +103,32 @@ namespace POS.DLL
             return dt;
         }
 
-        public decimal GetCustomerAccountBalance(int customerId)
+        public DataTable GetCustomerAccountBalance(int customerId)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(@"
-        SELECT ISNULL(SUM(CAST(debit AS decimal(18,4)) - CAST(credit AS decimal(18,4))), 0) AS balance 
-        FROM pos_customers_payments 
-        WHERE customer_id = @id AND branch_id = @branch_id", cn))
+            using (SqlCommand cmd = new SqlCommand(@"SELECT SUM(debit - credit) AS balance FROM pos_customers_payments 
+                                                     WHERE customer_id = @id AND branch_id = @branch_id", cn))
             {
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = customerId;
                 cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
 
+                DataTable dt = new DataTable();
                 try
                 {
                     cn.Open();
-                    object scalar = cmd.ExecuteScalar();
-
-                    decimal balance = 0m;
-                    if (scalar != null && scalar != DBNull.Value)
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        balance = Convert.ToDecimal(scalar);
+                        da.Fill(dt);
                     }
-
-                    return Math.Round(balance, 2);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error fetching customer account balance: " + ex.Message, ex);
+                    // Log exception details here
+                    throw new Exception("Error fetching customer account balance: " + ex.Message);
                 }
+                return dt;
             }
         }
-
 
         public int Insert(CustomerModal obj)
         {

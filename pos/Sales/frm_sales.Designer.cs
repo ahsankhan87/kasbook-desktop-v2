@@ -75,12 +75,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.lbl_sale_type = new System.Windows.Forms.Label();
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
-            this.groupBoxCustomer = new System.Windows.Forms.GroupBox();
-            this.label29 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl = new System.Windows.Forms.Label();
             this.txt_cust_balance = new System.Windows.Forms.TextBox();
             this.txt_cust_credit_limit = new System.Windows.Forms.TextBox();
-            this.txtCustomerSearch = new System.Windows.Forms.TextBox();
             this.txt_customer_vat = new System.Windows.Forms.TextBox();
             this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -157,7 +155,7 @@
             this.groupBox3.SuspendLayout();
             this.SalesToolStrip.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBoxCustomer.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox_products.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -178,7 +176,7 @@
             this.panel_header.Controls.Add(this.lbl_title);
             this.panel_header.Controls.Add(this.SalesToolStrip);
             this.panel_header.Controls.Add(this.groupBox4);
-            this.panel_header.Controls.Add(this.groupBoxCustomer);
+            this.panel_header.Controls.Add(this.groupBox1);
             this.panel_header.Controls.Add(this.groupBox_products);
             resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Name = "panel_header";
@@ -428,29 +426,20 @@
             this.txt_invoice_no.Name = "txt_invoice_no";
             this.txt_invoice_no.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_invoice_no_KeyDown);
             // 
-            // groupBoxCustomer
+            // groupBox1
             // 
-            this.groupBoxCustomer.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBoxCustomer.Controls.Add(this.chk_sendInvoiceToZatca);
-            this.groupBoxCustomer.Controls.Add(this.label29);
-            this.groupBoxCustomer.Controls.Add(this.lbl);
-            this.groupBoxCustomer.Controls.Add(this.txt_cust_balance);
-            this.groupBoxCustomer.Controls.Add(this.txt_cust_credit_limit);
-            this.groupBoxCustomer.Controls.Add(this.txt_customerID);
-            this.groupBoxCustomer.Controls.Add(this.txtCustomerSearch);
-            this.groupBoxCustomer.Controls.Add(this.txt_customer_vat);
-            this.groupBoxCustomer.Controls.Add(this.cmb_customers);
-            this.groupBoxCustomer.Controls.Add(this.label20);
-            this.groupBoxCustomer.Controls.Add(this.label1);
-            this.groupBoxCustomer.Controls.Add(this.label6);
-            resources.ApplyResources(this.groupBoxCustomer, "groupBoxCustomer");
-            this.groupBoxCustomer.Name = "groupBoxCustomer";
-            this.groupBoxCustomer.TabStop = false;
-            // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.lbl);
+            this.groupBox1.Controls.Add(this.txt_cust_balance);
+            this.groupBox1.Controls.Add(this.txt_cust_credit_limit);
+            this.groupBox1.Controls.Add(this.txt_customer_vat);
+            this.groupBox1.Controls.Add(this.cmb_customers);
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label6);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
             // 
             // lbl
             // 
@@ -468,14 +457,6 @@
             resources.ApplyResources(this.txt_cust_credit_limit, "txt_cust_credit_limit");
             this.txt_cust_credit_limit.Name = "txt_cust_credit_limit";
             this.txt_cust_credit_limit.ReadOnly = true;
-            // 
-            // txtCustomerSearch
-            // 
-            resources.ApplyResources(this.txtCustomerSearch, "txtCustomerSearch");
-            this.txtCustomerSearch.Name = "txtCustomerSearch";
-            this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged);
-            this.txtCustomerSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCustomerSearch_KeyUp);
-            this.txtCustomerSearch.Leave += new System.EventHandler(this.txtCustomerSearch_Leave);
             // 
             // txt_customer_vat
             // 
@@ -644,19 +625,19 @@
             // grid_sales
             // 
             this.grid_sales.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(248)))));
-            this.grid_sales.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(248)))));
+            this.grid_sales.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
             this.grid_sales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_sales.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             resources.ApplyResources(this.grid_sales, "grid_sales");
             this.grid_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.grid_sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1255,8 +1236,8 @@
             this.SalesToolStrip.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBoxCustomer.ResumeLayout(false);
-            this.groupBoxCustomer.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox_products.ResumeLayout(false);
             this.groupBox_products.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1289,7 +1270,7 @@
         private System.Windows.Forms.TextBox txt_barcode;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.GroupBox groupBoxCustomer;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txt_cust_balance;
         private System.Windows.Forms.TextBox txt_customer_vat;
         private System.Windows.Forms.Label label20;
