@@ -53,9 +53,6 @@ namespace pos.Sales
             DataTable dt = new SalesBLL().SearchInvoices(invoiceNo,fromdate,type,subtype,todate,status); // Implement this method in your BLL
             gridZatcaInvoices.DataSource = dt;
         }
-
-
-
         private async void btnReport_Click(object sender, EventArgs e)
         {
             try

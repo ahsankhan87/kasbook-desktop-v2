@@ -58,7 +58,7 @@ namespace POS.BLL
             }
         }
 
-        public DataTable GetCustomerAccountBalance(int Customer_id)
+        public decimal GetCustomerAccountBalance(int Customer_id)
         {
             try
             {
