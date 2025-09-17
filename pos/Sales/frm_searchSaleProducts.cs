@@ -1,4 +1,5 @@
 ﻿using POS.BLL;
+using POS.Core;
 using System;
 using System.Data;
 using System.Drawing;
@@ -8,6 +9,7 @@ namespace pos
 {
     public partial class frm_searchSaleProducts : Form
     {
+        public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
         private frm_sales mainForm;
 
         string _product_code = "";
@@ -77,7 +79,19 @@ namespace pos
 
                     if (grid_search_products.Rows.Count <= 0)
                     {
-                        DialogResult result = MessageBox.Show("Product not found, want to create new product?", "Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                        string resultMsg = "";
+                        string resultMsgTitle = "";
+                        if (lang == "en-US")
+                        {
+                            resultMsg =  "Product not found, want to create new product?";
+                            resultMsgTitle = "Sale Transaction";
+                        }
+                        else if (lang == "ar-SA")
+                        {
+                            resultMsg = "لم يتم العثور على المنتج، هل تريد إنشاء منتج جديد؟";
+                            resultMsgTitle = "معاملة بيع";
+                        }
+                        DialogResult result = MessageBox.Show(resultMsg, resultMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
                         if (result == DialogResult.Yes)
                         {

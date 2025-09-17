@@ -112,8 +112,8 @@
             // 
             // txt_payment_date
             // 
-            this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_payment_date, "txt_payment_date");
+            this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_payment_date.Name = "txt_payment_date";
             // 
             // frm_customer_payment
