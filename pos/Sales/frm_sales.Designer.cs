@@ -1320,7 +1320,6 @@
         private System.Windows.Forms.ComboBox cmb_employees;
         private System.Windows.Forms.DateTimePicker txt_sale_date;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lbl_sale_type;
         private System.Windows.Forms.TextBox txt_invoice_no;
@@ -1372,7 +1371,7 @@
         
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox cmb_invoice_subtype_code;
-        //private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -1395,8 +1394,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn category_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         
-        //private System.Windows.Forms.Label label30;
-        //private System.Windows.Forms.ComboBox cmb_invoice_subtype_code;
-        //private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ComboBox cmb_invoice_subtype_code;
+        private System.Windows.Forms.Label label31;
     }
 }
