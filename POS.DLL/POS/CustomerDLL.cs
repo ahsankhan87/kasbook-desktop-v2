@@ -70,7 +70,7 @@ namespace POS.DLL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = cn;
-                    cmd.CommandText = @"SELECT id, first_name, last_name, email, vat_no, address, date_created, branch_id 
+                    cmd.CommandText = @"SELECT * 
                                 FROM pos_customers 
                                 WHERE branch_id = @branch_id 
                                 AND (first_name LIKE @condition OR last_name LIKE @condition 
@@ -103,32 +103,37 @@ namespace POS.DLL
             return dt;
         }
 
-        public DataTable GetCustomerAccountBalance(int customerId)
+        public decimal GetCustomerAccountBalance(int customerId)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(@"SELECT SUM(debit - credit) AS balance FROM pos_customers_payments 
-                                                     WHERE customer_id = @id AND branch_id = @branch_id", cn))
+            using (SqlCommand cmd = new SqlCommand(@"
+        SELECT ISNULL(SUM(CAST(debit AS decimal(18,4)) - CAST(credit AS decimal(18,4))), 0) AS balance 
+        FROM pos_customers_payments 
+        WHERE customer_id = @id AND branch_id = @branch_id", cn))
             {
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = customerId;
                 cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
 
-                DataTable dt = new DataTable();
                 try
                 {
                     cn.Open();
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    object scalar = cmd.ExecuteScalar();
+
+                    decimal balance = 0m;
+                    if (scalar != null && scalar != DBNull.Value)
                     {
-                        da.Fill(dt);
+                        balance = Convert.ToDecimal(scalar);
                     }
+
+                    return Math.Round(balance, 2);
                 }
                 catch (Exception ex)
                 {
-                    // Log exception details here
-                    throw new Exception("Error fetching customer account balance: " + ex.Message);
+                    throw new Exception("Error fetching customer account balance: " + ex.Message, ex);
                 }
-                return dt;
             }
         }
+
 
         public int Insert(CustomerModal obj)
         {
@@ -153,7 +158,7 @@ namespace POS.DLL
                 cmd.Parameters.Add("@OperationType", SqlDbType.VarChar).Value = "1";
                 cmd.Parameters.Add("@date_created", SqlDbType.DateTime).Value = obj.date_created;
                 cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
-                
+
                 cmd.Parameters.Add("@StreetName", SqlDbType.NVarChar).Value = obj.StreetName;
                 cmd.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = obj.PostalCode;
                 cmd.Parameters.Add("@BuildingNumber", SqlDbType.NVarChar).Value = obj.BuildingNumber;
@@ -199,7 +204,7 @@ namespace POS.DLL
                 cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
                 cmd.Parameters.Add("@date_updated", SqlDbType.DateTime).Value = obj.date_updated;
                 cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
-                
+
                 cmd.Parameters.Add("@StreetName", SqlDbType.NVarChar).Value = obj.StreetName;
                 cmd.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = obj.PostalCode;
                 cmd.Parameters.Add("@BuildingNumber", SqlDbType.NVarChar).Value = obj.BuildingNumber;

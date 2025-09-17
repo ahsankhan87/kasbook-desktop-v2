@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Zatca.EInvoice.SDK;
 using Zatca.EInvoice.SDK.Contracts.Models;
+using Timer = System.Windows.Forms.Timer; // added
 
 
 namespace pos
@@ -53,6 +54,10 @@ namespace pos
         private DataGridView brandsDataGridView = new DataGridView();
         private DataGridView categoriesDataGridView = new DataGridView();
         private DataGridView groupsDataGridView = new DataGridView();
+        private DataGridView customersDataGridView;
+
+        // ... inside class frm_sales
+        private Timer _customerSearchDebounceTimer;
 
         ProductBLL productsBLL_obj = new ProductBLL();
 
@@ -62,7 +67,13 @@ namespace pos
             txt_groups.Click += TextBoxOnClick;
             txt_categories.Click += TextBoxOnClick;
             txt_brands.Click += TextBoxOnClick;
+
+            // Debounce for customer search
+            SetupCustomersDataGridView(); // build it once here
+            _customerSearchDebounceTimer = new Timer { Interval = 300 };
+            _customerSearchDebounceTimer.Tick += CustomerSearchDebounceTimer_Tick;
         }
+
 
         private void TextBoxOnClick(object sender, EventArgs eventArgs)
         {
@@ -93,13 +104,14 @@ namespace pos
             load_user_rights(UsersModal.logged_in_userid);
             Get_AccountID_From_Company();
             get_customers_dropdownlist();
+
             get_employees_dropdownlist();
             get_payment_terms_dropdownlist();
             get_payment_method_dropdownlist();
             get_saletype_dropdownlist();
             get_invoice_subtype_dropdownlist();
             Get_user_total_commission();
-            
+
             //disable sorting in grid
             foreach (DataGridViewColumn column in grid_sales.Columns)
             {
@@ -128,7 +140,7 @@ namespace pos
                 string columnName = grid_sales.Columns[e.ColumnIndex].Name;
                 if (columnName == "code")
                 {
-                    
+
                     product_code = (grid_sales.CurrentRow.Cells["code"].Value != null ? grid_sales.CurrentRow.Cells["code"].Value.ToString() : "");
 
                     bool isGrid = true;
@@ -153,7 +165,7 @@ namespace pos
                     }
                     ////////////
 
-                   
+
                 }
 
                 // Handle the end of editing for numeric columns (3, 4, 5, 6, 7)
@@ -166,7 +178,7 @@ namespace pos
                         cell.Value = 0;
                     }
                 }
-                
+
                 // Safely get values from cells
                 double GetCellDouble(string colName)
                 {
@@ -284,125 +296,6 @@ namespace pos
                     grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = finalSubtotal - tax;
                     grid_sales.Rows[e.RowIndex].Cells["tax"].Value = tax;
                 }
-
-                //double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value == null || grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
-                //double sub_total = (Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value)) - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-                //double tax = (sub_total * tax_rate / 100);
-
-                //if (columnName == "Qty") // if qty is changed
-                //{
-                //    grid_sales.Rows[e.RowIndex].Cells["tax"].Value = tax;
-                //    grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total + tax;
-                //    grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = sub_total;
-                //}
-
-                //if (columnName == "unit_price")//if avg_cost is changed
-                //{
-                //    if (rd_btn_without_vat.Checked && rd_btn_by_unitprice.Checked)
-                //    {
-                //        grid_sales.Rows[e.RowIndex].Cells["tax"].Value = tax;
-                //        grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total + tax;
-                //        grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = sub_total;
-                //    }
-
-                //    if (rd_btn_without_vat.Checked && rd_btn_bytotal_price.Checked)
-                //    {
-                //        double total_unitPrice_1 = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value);
-                //        double qty_1 = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value) * 1;
-                //        //double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
-                //        string pre_tax = "1." + tax_rate.ToString();
-                //        double single_unitPrice = (total_unitPrice_1 / qty_1);
-                //        tax = (single_unitPrice * tax_rate / 100);
-                //        double new_tax_value = (tax * qty_1);
-
-                //        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value = single_unitPrice;
-
-                //        grid_sales.Rows[e.RowIndex].Cells["tax"].Value = new_tax_value;
-
-                //        sub_total = (single_unitPrice * qty_1) - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-
-                //        grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total + new_tax_value;
-                //        grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = sub_total;
-                //    }
-
-                //    if (rd_btn_with_vat.Checked && rd_btn_by_unitprice.Checked)
-                //    {
-                //        double total_unitPrice = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value);
-                //        double qty = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value) * 1;
-                //        //double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
-                //        string pre_tax = "1." + tax_rate.ToString();
-                //        double single_unitPrice = (total_unitPrice / double.Parse(pre_tax));
-                //        tax = (single_unitPrice * tax_rate / 100);
-                //        double new_tax_value = (tax * qty);
-                //        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value = single_unitPrice;
-
-                //        grid_sales.Rows[e.RowIndex].Cells["tax"].Value = new_tax_value;
-
-                //        sub_total = (single_unitPrice * qty) - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-
-                //        //grid_sales.Rows[e.RowIndex].Cells["avg_cost"].Value = (Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["avg_cost"].Value) - tax);
-                //        grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total + new_tax_value;
-                //        grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = sub_total;
-
-                //    }
-
-                //    if (rd_btn_with_vat.Checked && rd_btn_bytotal_price.Checked)
-                //    {
-                //        double total_unitPrice_1 = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value);
-                //        double qty_1 = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value) * 1;
-                //        //double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
-                //        string pre_tax = "1." + tax_rate.ToString();
-                //        double single_unitPrice = ((total_unitPrice_1 / double.Parse(pre_tax)) / qty_1);
-                //        tax = (single_unitPrice * tax_rate / 100);
-                //        double new_tax_value = (tax * qty_1);
-
-                //        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value = single_unitPrice;
-
-                //        grid_sales.Rows[e.RowIndex].Cells["tax"].Value = new_tax_value;
-
-                //        sub_total = (single_unitPrice * qty_1) - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-                //        grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total + new_tax_value;
-                //        grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = sub_total;
-
-                //    }
-                //}
-
-                //if (columnName == "discount")//if discount is changed
-                //{
-                //    double total_value = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value);
-                //    double discount_percent = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value) / total_value * 100;
-
-                //    double tax_1 = ((total_value - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value)) * tax_rate / 100);
-
-                //    double sub_total_1 = tax_1 + total_value - Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-                //    //total_discount += Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-                //    //txt_total_discount.Text = total_amount.ToString();
-
-                //    grid_sales.Rows[e.RowIndex].Cells["discount_percent"].Value = discount_percent;
-                //    grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total_1;
-                //    grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = (sub_total_1 - tax_1);
-                //    grid_sales.Rows[e.RowIndex].Cells["tax"].Value = (tax_1);
-
-
-                //}
-                //if (columnName == "discount_percent")//if discount is changed
-                //{
-                //    double total_value = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value);
-                //    double discount_value = Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount_percent"].Value) * total_value / 100;
-
-                //    //double tax_rate = (grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_sales.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
-                //    double tax_1 = ((total_value - discount_value) * tax_rate / 100);
-                //    //grid_sales.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["qty"].Value));
-
-                //    double sub_total_1 = (tax_1 + total_value - discount_value);
-                //    //total_discount += Convert.ToDouble(grid_sales.Rows[e.RowIndex].Cells["discount"].Value);
-                //    //txt_total_discount.Text = total_amount.ToString();
-
-                //    grid_sales.Rows[e.RowIndex].Cells["discount"].Value = discount_value;
-                //    grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total_1;
-                //    grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = (sub_total_1 - tax_1);
-                //    grid_sales.Rows[e.RowIndex].Cells["tax"].Value = (tax_1);
-                //}
 
                 get_total_tax();
                 get_total_discount();
@@ -635,11 +528,11 @@ namespace pos
                     //////////
 
                     get_total_tax();
-                    get_total_qty();
                     get_total_discount();
                     get_sub_total_amount();
                     get_total_cost_amount();
                     get_total_amount();
+                    get_total_qty();
 
                 }
 
@@ -695,7 +588,7 @@ namespace pos
         }
 
         private void get_total_amount()
-        { 
+        {
             total_amount = 0;
 
             for (int i = 0; i <= grid_sales.Rows.Count - 1; i++)
@@ -924,6 +817,7 @@ namespace pos
                     brandsDataGridView.Focus();
                     categoriesDataGridView.Focus();
                     groupsDataGridView.Focus();
+                    customersDataGridView.Focus();
                 }
                 if (e.Control && e.KeyCode == Keys.O)
                 {
@@ -937,7 +831,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -1003,7 +897,7 @@ namespace pos
             if (chkbox_is_taxable.Checked == false)
             {
                 txt_total_tax.Text = "0.00";
-                double netAmount = (total_amount + total_tax-total_discount);
+                double netAmount = (total_amount + total_tax - total_discount);
                 netAmount -= total_tax;
                 txt_total_amount.Text = netAmount.ToString();
             }
@@ -1056,6 +950,8 @@ namespace pos
             txt_sale_date.Refresh();
             txt_sale_date.Value = DateTime.Now;
 
+            txtCustomerSearch.Text = "";
+            txt_customerID.Text = "";
             txt_cust_balance.Text = "";
             txt_cust_credit_limit.Text = "";
             txt_customer_vat.Text = "";
@@ -1064,7 +960,7 @@ namespace pos
             txt_total_amount.Text = "0.00";
             txt_total_tax.Text = "0.00";
             txt_total_discount.Text = "0.00";
-            txt_total_amount.Text = "";
+            txt_total_amount.Text = "0.00";
 
             txt_total_disc_percent.Value = 0;
             txtTotalFlatDiscountValue.Value = 0;
@@ -1209,12 +1105,9 @@ namespace pos
                     }
 
                     ///customer balance
-                    DataTable customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(customer_id);
+                    decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(customer_id);
                     ///
-                    foreach (DataRow dr in customer_total_balance.Rows)
-                    {
-                        txt_cust_balance.Text = dr["balance"].ToString();
-                    }
+                    txt_cust_balance.Text = customer_total_balance.ToString();
                 }
 
 
@@ -1362,13 +1255,13 @@ namespace pos
             {
                 _row_2["name"] = "عرض سعر";
             }
-            else { _row_2["name"] = "Quotation";  }
+            else { _row_2["name"] = "Quotation"; }
 
             dt.Rows.Add(_row_2);
 
             DataRow _row_3 = dt.NewRow();
             _row_3["id"] = "Gift";
-            
+
             if (lang == "ar-SA")
             {
                 _row_3["name"] = "هدية";
@@ -1379,17 +1272,18 @@ namespace pos
 
             DataRow _row_4 = dt.NewRow();
             _row_4["id"] = "ICT";
-            
+
             if (lang == "ar_SA")
             {
                 _row_4["name"] = "نقل قطع الغيار بين الشركات";
             }
-            else { 
+            else
+            {
                 _row_4["name"] = "ICT";
             }
             dt.Rows.Add(_row_4);
 
-            
+
             //DataRow _row_4 = dt.NewRow();
             //_row_4["id"] = "Return";
             //if (lang == "en-US")
@@ -1418,21 +1312,21 @@ namespace pos
             DataRow _row_1 = dt.NewRow();
             _row_1["id"] = "02";
 
-           if (lang == "ar-SA")
+            if (lang == "ar-SA")
             {
                 _row_1["name"] = "مبسطة";
             }
             else { _row_1["name"] = "Simplified"; }
             dt.Rows.Add(_row_1);
 
-           
             DataRow _row_2 = dt.NewRow();
             _row_2["id"] = "01";
 
-             if (lang == "ar-SA")
+            if (lang == "ar-SA")
             {
                 _row_2["name"] = "ضريبية";
-            }else { _row_2["name"] = "Standard"; }
+            }
+            else { _row_2["name"] = "Standard"; }
             dt.Rows.Add(_row_2);
 
             cmb_invoice_subtype_code.DisplayMember = "name";
@@ -1441,7 +1335,7 @@ namespace pos
 
             cmb_invoice_subtype_code.SelectedIndex = 0; //default value
         }
-        
+
         public void load_user_rights(int user_id)
         {
             UsersBLL userBLL_obj = new UsersBLL();
@@ -1676,7 +1570,6 @@ namespace pos
                     }
 
                 }
-
             }
             catch (Exception ex)
             {
@@ -1788,7 +1681,8 @@ namespace pos
                     {
                         string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
 
-                        frm_product_full_detail obj = new frm_product_full_detail(this, null, item_number);
+                        frm_product_full_detail obj = new frm_product_full_detail(this, null, item_number, null, null, "", true);
+
                         obj.ShowDialog();
                     }
                 }
@@ -1906,10 +1800,9 @@ namespace pos
                 }
 
                 ///customer commission balance
-                //long emp_total_balance = obj.GetEmpCommissionBalance(employee_id);
-                //txt_cust_balance.Text = emp_total_balance.ToString();
+                long emp_total_balance = obj.GetEmpCommissionBalance(employee_id);
+                txt_cust_balance.Text = emp_total_balance.ToString();
                 ///
-
             }
         }
 
@@ -2561,6 +2454,8 @@ namespace pos
 
         private void frm_sales_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _customerSearchDebounceTimer?.Stop();
+
             if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
             {
                 if (MessageBox.Show("Are you sure you want to close sale?",
@@ -2596,13 +2491,12 @@ namespace pos
                     MessageBox.Show("Please add products ", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                
+
                 if ((cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01") &&
-                    (cmb_customers.SelectedValue == null || cmb_customers.SelectedValue.ToString() == "0" 
-                    || cmb_customers.SelectedValue.ToString() == "-1"))
+                    (string.IsNullOrWhiteSpace(txt_customerID.Text)))
                 {
                     MessageBox.Show("Please select customer for Standard invoice type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cmb_customers.Focus();
+                    txtCustomerSearch.Focus();
                     return;
                 }
 
@@ -2666,10 +2560,16 @@ namespace pos
                     double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
                     double netCreditLimit = customer_credit_limit - customerBalance;
                     double limitExceededBy = netAmount - netCreditLimit;
-                    
+
                     if (sale_type == "Credit" && netAmount > netCreditLimit)
                     {
-                        MessageBox.Show("Sales transaction cannot be saved, because customer credit limit has exceeded by " + limitExceededBy.ToString(), "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Cannot process sale. Customer credit limit would be exceeded!\n\n" +
+                                  $"Current Balance: {customerBalance:C}\n" +
+                                  $"Sale Amount: {netAmount:C}\n" +
+                                  $"Credit Limit: {customer_credit_limit:C}",
+                                  "Credit Limit Exceeded",
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                         return;
                     }
                     ////
@@ -2740,12 +2640,12 @@ namespace pos
                         double net_total_tax = Math.Round(return_minus_value * total_tax, 6);
 
                         DateTime sale_date = txt_sale_date.Value.Date;
-                        int customer_id = (cmb_customers.SelectedValue == null ? 0 : int.Parse(cmb_customers.SelectedValue.ToString()));
-                        string customer_name = cmb_customers.Text;
+                        int customer_id = (string.IsNullOrWhiteSpace(txt_customerID.Text) ? 0 : Convert.ToInt32(txt_customerID.Text));
+                        string customer_name = txtCustomerSearch.Text.Trim();
                         string customer_vat = txt_customer_vat.Text;
-                        int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
-                        int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : int.Parse(cmb_payment_terms.SelectedValue.ToString()));
-                        int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : int.Parse(cmb_payment_method.SelectedValue.ToString()));
+                        int employee_id = (cmb_employees.SelectedValue == null ? 0 : Convert.ToInt32(cmb_employees.SelectedValue));
+                        int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_terms.SelectedValue));
+                        int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
                         string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
                         string PONumber = txtPONumber.Text;
 
@@ -2887,16 +2787,17 @@ namespace pos
                                     if (PCSID_dataRow == null)
                                     {
                                         //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
-                                        
+
                                         //Sign Invoice with CSID instead of Production CSID
                                         ZatcaHelper.SignInvoiceToZatca(invoice_no);
 
-                                    } else
+                                    }
+                                    else
                                     {
                                         //If PCSID exist then sign it 
                                         ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
                                     }
-                                    
+
 
                                 }
                                 //////
@@ -2992,13 +2893,13 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void HistoryToolStripButton_Click(object sender, EventArgs e)
         {
             try
             {
                 //this will load the product movement 
-                
+
                 //string global_product_code = "";
                 //if (grid_sales.Rows.Count > 0 && grid_sales.CurrentRow.Cells["code"].Value != null)
                 //{
@@ -3014,8 +2915,8 @@ namespace pos
                     {
                         string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
 
-                        frm_product_full_detail obj = new frm_product_full_detail(this, null, item_number,null,null,"",true);
-                        
+                        frm_product_full_detail obj = new frm_product_full_detail(this, null, item_number, null, null, "", true);
+
                         obj.ShowDialog();
                     }
                 }
@@ -3107,7 +3008,7 @@ namespace pos
 
         private void PrinttoolStripButton_Click(object sender, EventArgs e)
         {
-            if(!String.IsNullOrEmpty(txt_invoice_no.Text))
+            if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
                 using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
                 {
@@ -3115,7 +3016,7 @@ namespace pos
                     obj.ShowDialog();
                 }
             }
-            
+
         }
 
         private void SaleReturnToolStripButton_Click(object sender, EventArgs e)
@@ -3131,8 +3032,254 @@ namespace pos
             }
         }
 
-        
-        
+        private void SetupCustomersDataGridView()
+        {
+            if (customersDataGridView != null) return; // already created
+
+            var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
+
+            customersDataGridView = new DataGridView();
+            customersDataGridView.ColumnCount = 5;
+
+            int xLocation = groupBoxCustomer.Location.X + txtCustomerSearch.Location.X;
+            int yLocation = groupBoxCustomer.Location.Y + txtCustomerSearch.Location.Y + 22;
+
+            customersDataGridView.Location = new Point(xLocation, yLocation);
+            customersDataGridView.Size = new Size(520, 240);
+            customersDataGridView.BorderStyle = BorderStyle.None;
+            customersDataGridView.BackgroundColor = Color.White;
+            customersDataGridView.AutoGenerateColumns = false;
+            customersDataGridView.ReadOnly = true;
+            customersDataGridView.AllowUserToAddRows = false;
+            customersDataGridView.AllowUserToDeleteRows = false;
+            customersDataGridView.AllowUserToResizeRows = false;
+            customersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            customersDataGridView.MultiSelect = false;
+            customersDataGridView.RowHeadersVisible = false;
+            //Dock = DockStyle.Fill
+
+            customersDataGridView.AutoSizeRowsMode =
+                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            customersDataGridView.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.Single;
+
+            customersDataGridView.Columns[0].Name = "ID";
+            customersDataGridView.Columns[1].Name = "Name";
+            customersDataGridView.Columns[2].Name = "Contact";
+            customersDataGridView.Columns[3].Name = "VAT No";
+            customersDataGridView.Columns[4].Name = "Credit Limit";
+
+            customersDataGridView.Columns[0].ReadOnly = true;
+            customersDataGridView.Columns[1].ReadOnly = true;
+            customersDataGridView.Columns[2].ReadOnly = true;
+            customersDataGridView.Columns[3].ReadOnly = true;
+            customersDataGridView.Columns[4].Visible = false;
+
+            customersDataGridView.Columns[0].Width = 40;
+            customersDataGridView.Columns[1].Width = 220;
+            customersDataGridView.Columns[2].Width = 130;
+            customersDataGridView.Columns[3].Width = 120;
+            //customersDataGridView.Columns[4].Width = 30;
+
+            //customersDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //customersDataGridView.AutoResizeColumns();
+
+            this.customersDataGridView.CellClick += new DataGridViewCellEventHandler(customersDataGridView_CellClick);
+            this.customersDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(customersDataGridView_KeyDown);
+
+            customersDataGridView.Visible = false;
+            this.Controls.Add(customersDataGridView);
+            customersDataGridView.BringToFront();
+
+        }
+
+        void customersDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+
+                txt_customerID.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
+                txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
+                txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+
+                ///customer balance
+                CustomerBLL customerBLL_obj = new CustomerBLL();
+                Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
+                txt_cust_balance.Text = customer_total_balance.ToString("N2");
+
+
+                customersDataGridView.Visible = false;
+                grid_sales.Focus();
+
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                customersDataGridView.Visible = false;
+                txtCustomerSearch.Focus();
+            }
+
+        }
+
+        private void customersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txt_customerID.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
+            txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+            txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
+            txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+            ///customer balance
+            CustomerBLL customerBLL_obj = new CustomerBLL();
+            Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
+            txt_cust_balance.Text = customer_total_balance.ToString("N2");
+
+
+            customersDataGridView.Visible = false;
+            grid_sales.Focus();
+
+        }
+
+        private void RefreshData()
+        {
+            try
+            {
+                string customerSearch = txtCustomerSearch.Text ?? string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(customerSearch))
+                {
+
+                    var bll = new CustomerBLL();
+                    DataTable dt = bll.SearchRecord(customerSearch) ?? new DataTable();
+
+                    customersDataGridView.Rows.Clear();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string[] row0 = {
+                                dr["id"].ToString(),
+                                dr["first_name"].ToString() + " " + dr["last_name"].ToString(),
+                                dr["contact_no"].ToString(),
+                                dr["vat_no"].ToString(),
+                                dr["credit_limit"].ToString()
+                            };
+                            customersDataGridView.Rows.Add(row0);
+                        }
+
+                        customersDataGridView.Visible = true;
+                        customersDataGridView.ClearSelection();
+                        customersDataGridView.CurrentCell = null;
+                        TrySelectCurrent();
+                    }
+                    else
+                    {
+                        customersDataGridView.Visible = false;
+                    }
+
+                }
+                else
+                {
+                    txtCustomerSearch.Text = "";
+                    customersDataGridView.Visible = false;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CustomerSearchDebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _customerSearchDebounceTimer.Stop();
+            RefreshData();
+        }
+        private void txtCustomerSearch_TextChanged(object sender, EventArgs e)
+        {
+            _customerSearchDebounceTimer.Stop();
+            _customerSearchDebounceTimer.Start();
+        }
+
+        private void txtCustomerSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                if (customersDataGridView.Visible && customersDataGridView.Rows.Count > 0)
+                {
+                    customersDataGridView.Focus();
+                    if (customersDataGridView.CurrentRow == null)
+                    {
+                        customersDataGridView.CurrentCell = customersDataGridView.Rows[0].Cells[0];
+                    }
+                }
+                return;
+            }
+            if (e.KeyCode == Keys.Escape)
+            {
+                customersDataGridView.Visible = false;
+                return;
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (customersDataGridView.Visible && customersDataGridView.Rows.Count > 0)
+                {
+                    txt_customerID.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
+                    txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                    txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
+                    txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+                    ///customer balance
+                    CustomerBLL customerBLL_obj = new CustomerBLL();
+                    Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
+                    txt_cust_balance.Text = customer_total_balance.ToString("N2");
+                }
+            }
+            _customerSearchDebounceTimer.Stop();
+            _customerSearchDebounceTimer.Start();
+        }
+
+        private void txtCustomerSearch_Leave(object sender, EventArgs e)
+        {
+            _customerSearchDebounceTimer.Stop();
+            if (!customersDataGridView.Focused)
+            {
+                customersDataGridView.Visible = false;
+            }
+        }
+
+        private void TrySelectCurrent()
+        {
+            if (customersDataGridView.CurrentRow == null && customersDataGridView.Rows.Count > 0)
+            {
+                customersDataGridView.CurrentCell = customersDataGridView.Rows[0].Cells[0];
+            }
+            if (customersDataGridView.CurrentRow == null) return;
+            var row = customersDataGridView.CurrentRow;
+
+            int id = 0;
+            // Try to read id if present
+            if (customersDataGridView.Columns.Contains("id"))
+            {
+                int.TryParse(Convert.ToString(row.Cells["id"].Value), out id);
+            }
+
+            string name = null;
+            if (customersDataGridView.Columns.Contains("name"))
+                name = Convert.ToString(row.Cells["Name"].Value);
+            if (string.IsNullOrWhiteSpace(name) && customersDataGridView.Columns.Contains("first_name"))
+            {
+                var first = Convert.ToString(row.Cells["first_name"].Value);
+                var last = customersDataGridView.Columns.Contains("last_name") ? Convert.ToString(row.Cells["last_name"].Value) : string.Empty;
+                name = (first + " " + last).Trim();
+            }
+
+            string phone = customersDataGridView.Columns.Contains("contact_no") ? Convert.ToString(row.Cells["contact_no"].Value) : string.Empty;
+            string vat = customersDataGridView.Columns.Contains("vat_no") ? Convert.ToString(row.Cells["vat_no"].Value) : string.Empty;
+
+        }
     }
 
 }
