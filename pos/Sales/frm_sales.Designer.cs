@@ -1394,7 +1394,7 @@
         
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox cmb_invoice_subtype_code;
-        private System.Windows.Forms.Label label31;
+        //private System.Windows.Forms.Label label31;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
