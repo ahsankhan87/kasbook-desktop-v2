@@ -1342,6 +1342,7 @@
         private System.Windows.Forms.ComboBox cmb_employees;
         private System.Windows.Forms.DateTimePicker txt_sale_date;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lbl_sale_type;
         private System.Windows.Forms.TextBox txt_invoice_no;
