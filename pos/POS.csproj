@@ -299,8 +299,6 @@
     <Compile Include="Accounts\Reports\frm_journal_daybook.Designer.cs">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CustomerGridDropDownCopy.cs" />
-    <Compile Include="Controls\CustomerGridDropDown.cs" />
     <Compile Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1348,6 +1346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Estimates\frm_search_estimates.resx">
       <DependentUpon>frm_search_estimates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Expenses\frm_expenses.ar-SA.resx">
+      <DependentUpon>frm_expenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Expenses\frm_expenses.resx">
       <DependentUpon>frm_expenses.cs</DependentUpon>
