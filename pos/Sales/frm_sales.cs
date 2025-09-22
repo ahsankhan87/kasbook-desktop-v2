@@ -3045,7 +3045,7 @@ namespace pos
             int yLocation = groupBoxCustomer.Location.Y + txtCustomerSearch.Location.Y + 22;
 
             customersDataGridView.Location = new Point(xLocation, yLocation);
-            customersDataGridView.Size = new Size(520, 240);
+            customersDataGridView.Size = new Size(405, 240);
             customersDataGridView.BorderStyle = BorderStyle.None;
             customersDataGridView.BackgroundColor = Color.White;
             customersDataGridView.AutoGenerateColumns = false;
@@ -3063,20 +3063,20 @@ namespace pos
             customersDataGridView.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.Single;
 
-            customersDataGridView.Columns[0].Name = "ID";
-            customersDataGridView.Columns[1].Name = "Name";
+            customersDataGridView.Columns[0].Name = "Name";
+            customersDataGridView.Columns[1].Name = "ID";
             customersDataGridView.Columns[2].Name = "Contact";
             customersDataGridView.Columns[3].Name = "VAT No";
             customersDataGridView.Columns[4].Name = "Credit Limit";
 
             customersDataGridView.Columns[0].ReadOnly = true;
-            customersDataGridView.Columns[1].ReadOnly = true;
+            customersDataGridView.Columns[1].Visible= false;
             customersDataGridView.Columns[2].ReadOnly = true;
             customersDataGridView.Columns[3].ReadOnly = true;
             customersDataGridView.Columns[4].Visible = false;
 
-            customersDataGridView.Columns[0].Width = 40;
-            customersDataGridView.Columns[1].Width = 220;
+            customersDataGridView.Columns[0].Width = 220;
+            //customersDataGridView.Columns[1].Width = 220;
             customersDataGridView.Columns[2].Width = 130;
             customersDataGridView.Columns[3].Width = 120;
             //customersDataGridView.Columns[4].Width = 30;
@@ -3099,8 +3099,8 @@ namespace pos
             {
                 e.Handled = true;
 
-                txt_customerID.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
-                txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                txt_customerID.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
                 txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
                 txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
 
@@ -3124,8 +3124,8 @@ namespace pos
 
         private void customersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txt_customerID.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
-            txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+            txt_customerID.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+            txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
             txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
             txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
             ///customer balance
@@ -3158,8 +3158,8 @@ namespace pos
                         foreach (DataRow dr in dt.Rows)
                         {
                             string[] row0 = {
-                                dr["id"].ToString(),
                                 dr["first_name"].ToString() + " " + dr["last_name"].ToString(),
+                                dr["id"].ToString(),
                                 dr["contact_no"].ToString(),
                                 dr["vat_no"].ToString(),
                                 dr["credit_limit"].ToString()
@@ -3181,6 +3181,10 @@ namespace pos
                 else
                 {
                     txtCustomerSearch.Text = "";
+                    txt_customerID.Text = "";
+                    txt_customer_vat.Text = "";
+                    txt_cust_credit_limit.Text = "";
+                    txt_cust_balance.Text = "";
                     customersDataGridView.Visible = false;
                 }
 
@@ -3227,8 +3231,8 @@ namespace pos
             {
                 if (customersDataGridView.Visible && customersDataGridView.Rows.Count > 0)
                 {
-                    txt_customerID.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
-                    txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                    txt_customerID.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                    txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
                     txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
                     txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
                     ///customer balance

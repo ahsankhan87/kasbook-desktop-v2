@@ -55,7 +55,9 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT TOP 10000 SI.invoice_no,SI.id,SI.discount_value,SI.total_amount,SI.total_tax,(SI.total_tax+SI.total_amount-SI.discount_value) as total, SI.sale_date,SI.account,SI.sale_type,CONCAT(C.first_name,' ',C.last_name) AS customer_name " +
+                        String query = "SELECT TOP 10000 SI.invoice_no,SI.id,SI.discount_value,SI.total_amount,SI.total_tax," +
+                            "(SI.total_tax+SI.total_amount-SI.discount_value) as total, SI.sale_date,SI.account,SI.sale_type," +
+                            "CONCAT(C.first_name,' ',C.last_name) AS customer " +
                             "FROM pos_sales SI " +
                             "LEFT JOIN pos_customers C ON C.id=SI.customer_id" +
                             " WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id Order by id desc ";
@@ -90,7 +92,7 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.*,C.first_name AS customer_name " +
+                        String query = "SELECT SI.*,CONCAT(C.first_name,' ',C.last_name) AS customer " +
                             "FROM pos_estimates SI " +
                             "LEFT JOIN pos_customers C ON C.id=SI.customer_id" +
                             " WHERE SI.status = 0 ORDER BY SI.id desc";

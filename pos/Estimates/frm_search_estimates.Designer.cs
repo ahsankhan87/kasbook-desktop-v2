@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_search_estimates));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_ok = new System.Windows.Forms.Button();
@@ -114,7 +117,7 @@
             // 
             // customer_name
             // 
-            this.customer_name.DataPropertyName = "customer_name";
+            this.customer_name.DataPropertyName = "customer";
             resources.ApplyResources(this.customer_name, "customer_name");
             this.customer_name.Name = "customer_name";
             this.customer_name.ReadOnly = true;
@@ -136,6 +139,10 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -143,6 +150,10 @@
             // total_tax
             // 
             this.total_tax.DataPropertyName = "total_tax";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.total_tax.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.total_tax, "total_tax");
             this.total_tax.Name = "total_tax";
             this.total_tax.ReadOnly = true;
@@ -150,6 +161,10 @@
             // total_amount
             // 
             this.total_amount.DataPropertyName = "total_amount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.total_amount.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.total_amount, "total_amount");
             this.total_amount.Name = "total_amount";
             this.total_amount.ReadOnly = true;

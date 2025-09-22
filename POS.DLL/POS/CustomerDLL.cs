@@ -74,7 +74,7 @@ namespace POS.DLL
                                 FROM pos_customers 
                                 WHERE branch_id = @branch_id 
                                 AND (first_name LIKE @condition OR last_name LIKE @condition 
-                                OR vat_no LIKE @condition OR address LIKE @condition OR id LIKE @condition)";
+                                OR vat_no LIKE @condition OR address LIKE @condition OR contact_no LIKE @condition)";
 
                     // Add parameters with precise type and value to prevent SQL injection
                     cmd.Parameters.Add("@condition", SqlDbType.NVarChar).Value = $"%{condition}%";
