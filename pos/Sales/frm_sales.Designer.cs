@@ -30,18 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_sales));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_header = new System.Windows.Forms.Panel();
+            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_user_commission_balance = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -76,18 +77,16 @@
             this.lbl_sale_type = new System.Windows.Forms.Label();
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.groupBoxCustomer = new System.Windows.Forms.GroupBox();
-            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
-            this.label29 = new System.Windows.Forms.Label();
+            this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.lbl = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.txt_cust_balance = new System.Windows.Forms.TextBox();
             this.txt_cust_credit_limit = new System.Windows.Forms.TextBox();
             this.txt_customerID = new System.Windows.Forms.TextBox();
-            this.txtCustomerSearch = new System.Windows.Forms.TextBox();
             this.txt_customer_vat = new System.Windows.Forms.TextBox();
-            this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtCustomerSearch = new System.Windows.Forms.TextBox();
             this.groupBox_products = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.rd_btn_with_vat = new System.Windows.Forms.RadioButton();
@@ -196,25 +195,32 @@
             // 
             // panel_header
             // 
+            resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.BackColor = System.Drawing.SystemColors.Control;
+            this.panel_header.Controls.Add(this.chk_sendInvoiceToZatca);
             this.panel_header.Controls.Add(this.groupBox3);
             this.panel_header.Controls.Add(this.lbl_title);
             this.panel_header.Controls.Add(this.SalesToolStrip);
             this.panel_header.Controls.Add(this.groupBox4);
             this.panel_header.Controls.Add(this.groupBoxCustomer);
             this.panel_header.Controls.Add(this.groupBox_products);
-            resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Name = "panel_header";
+            // 
+            // chk_sendInvoiceToZatca
+            // 
+            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
+            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
+            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.txt_user_commission_balance);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.txtPONumber);
             this.groupBox3.Controls.Add(this.txt_description);
             this.groupBox3.Controls.Add(this.label17);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -257,8 +263,8 @@
             // 
             // SalesToolStrip
             // 
-            this.SalesToolStrip.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.SalesToolStrip, "SalesToolStrip");
+            this.SalesToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.SalesToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.SalesToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewToolStripButton,
@@ -274,57 +280,57 @@
             // 
             // NewToolStripButton
             // 
+            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
-            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.Name = "NewToolStripButton";
             this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
             // 
             // SaveToolStripButton
             // 
+            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
-            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.Name = "SaveToolStripButton";
             this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
             // 
             // SearchToolStripButton
             // 
+            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.Name = "SearchToolStripButton";
             this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
             // 
             // AmountFixToolStripButton
             // 
+            resources.ApplyResources(this.AmountFixToolStripButton, "AmountFixToolStripButton");
             this.AmountFixToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.AmountFixToolStripButton.Image = global::pos.Properties.Resources.Stack_of_Coins;
-            resources.ApplyResources(this.AmountFixToolStripButton, "AmountFixToolStripButton");
             this.AmountFixToolStripButton.Name = "AmountFixToolStripButton";
             this.AmountFixToolStripButton.Click += new System.EventHandler(this.AmountFixToolStripButton_Click);
             // 
             // HistoryToolStripButton
             // 
+            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
-            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.Name = "HistoryToolStripButton";
             this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
             // 
             // ICTToolStripButton
             // 
+            resources.ApplyResources(this.ICTToolStripButton, "ICTToolStripButton");
             this.ICTToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ICTToolStripButton.Image = global::pos.Properties.Resources.Data_Transfer;
-            resources.ApplyResources(this.ICTToolStripButton, "ICTToolStripButton");
             this.ICTToolStripButton.Name = "ICTToolStripButton";
             this.ICTToolStripButton.Click += new System.EventHandler(this.ICTToolStripButton_Click);
             // 
             // LoadQuotationToolStripButton
             // 
+            resources.ApplyResources(this.LoadQuotationToolStripButton, "LoadQuotationToolStripButton");
             this.LoadQuotationToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.LoadQuotationToolStripButton.Image = global::pos.Properties.Resources.Estimate;
-            resources.ApplyResources(this.LoadQuotationToolStripButton, "LoadQuotationToolStripButton");
             this.LoadQuotationToolStripButton.Name = "LoadQuotationToolStripButton";
             this.LoadQuotationToolStripButton.Click += new System.EventHandler(this.LoadQuotationToolStripButton_Click);
             // 
@@ -344,6 +350,7 @@
             // 
             // groupBox4
             // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox4.Controls.Add(this.cmb_invoice_subtype_code);
             this.groupBox4.Controls.Add(this.cmb_sale_type);
@@ -359,22 +366,21 @@
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.lbl_sale_type);
             this.groupBox4.Controls.Add(this.txt_invoice_no);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
             // cmb_invoice_subtype_code
             // 
+            resources.ApplyResources(this.cmb_invoice_subtype_code, "cmb_invoice_subtype_code");
             this.cmb_invoice_subtype_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_invoice_subtype_code.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_invoice_subtype_code, "cmb_invoice_subtype_code");
             this.cmb_invoice_subtype_code.Name = "cmb_invoice_subtype_code";
             // 
             // cmb_sale_type
             // 
+            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_type.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.Name = "cmb_sale_type";
             // 
             // label19
@@ -394,27 +400,27 @@
             // 
             // cmb_payment_method
             // 
+            resources.ApplyResources(this.cmb_payment_method, "cmb_payment_method");
             this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmb_payment_method, "cmb_payment_method");
             this.cmb_payment_method.FormattingEnabled = true;
             this.cmb_payment_method.Name = "cmb_payment_method";
             // 
             // cmb_payment_terms
             // 
+            resources.ApplyResources(this.cmb_payment_terms, "cmb_payment_terms");
             this.cmb_payment_terms.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payment_terms.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payment_terms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmb_payment_terms, "cmb_payment_terms");
             this.cmb_payment_terms.FormattingEnabled = true;
             this.cmb_payment_terms.Name = "cmb_payment_terms";
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.FormattingEnabled = true;
             this.cmb_employees.Name = "cmb_employees";
             this.cmb_employees.SelectedIndexChanged += new System.EventHandler(this.cmb_employees_SelectedIndexChanged);
@@ -453,38 +459,36 @@
             // 
             // groupBoxCustomer
             // 
+            resources.ApplyResources(this.groupBoxCustomer, "groupBoxCustomer");
             this.groupBoxCustomer.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBoxCustomer.Controls.Add(this.chk_sendInvoiceToZatca);
-            this.groupBoxCustomer.Controls.Add(this.label29);
+            this.groupBoxCustomer.Controls.Add(this.cmb_customers);
             this.groupBoxCustomer.Controls.Add(this.lbl);
+            this.groupBoxCustomer.Controls.Add(this.label29);
             this.groupBoxCustomer.Controls.Add(this.txt_cust_balance);
             this.groupBoxCustomer.Controls.Add(this.txt_cust_credit_limit);
             this.groupBoxCustomer.Controls.Add(this.txt_customerID);
-            this.groupBoxCustomer.Controls.Add(this.txtCustomerSearch);
             this.groupBoxCustomer.Controls.Add(this.txt_customer_vat);
-            this.groupBoxCustomer.Controls.Add(this.cmb_customers);
             this.groupBoxCustomer.Controls.Add(this.label20);
             this.groupBoxCustomer.Controls.Add(this.label1);
-            this.groupBoxCustomer.Controls.Add(this.label6);
-            resources.ApplyResources(this.groupBoxCustomer, "groupBoxCustomer");
+            this.groupBoxCustomer.Controls.Add(this.txtCustomerSearch);
             this.groupBoxCustomer.Name = "groupBoxCustomer";
             this.groupBoxCustomer.TabStop = false;
             // 
-            // chk_sendInvoiceToZatca
+            // cmb_customers
             // 
-            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
-            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
-            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
-            // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
+            resources.ApplyResources(this.cmb_customers, "cmb_customers");
+            this.cmb_customers.FormattingEnabled = true;
+            this.cmb_customers.Name = "cmb_customers";
             // 
             // lbl
             // 
             resources.ApplyResources(this.lbl, "lbl");
             this.lbl.Name = "lbl";
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
             // 
             // txt_cust_balance
             // 
@@ -506,27 +510,10 @@
             this.txt_customerID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCustomerSearch_KeyUp);
             this.txt_customerID.Leave += new System.EventHandler(this.txtCustomerSearch_Leave);
             // 
-            // txtCustomerSearch
-            // 
-            resources.ApplyResources(this.txtCustomerSearch, "txtCustomerSearch");
-            this.txtCustomerSearch.Name = "txtCustomerSearch";
-            this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged);
-            this.txtCustomerSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCustomerSearch_KeyUp);
-            this.txtCustomerSearch.Leave += new System.EventHandler(this.txtCustomerSearch_Leave);
-            // 
             // txt_customer_vat
             // 
             resources.ApplyResources(this.txt_customer_vat, "txt_customer_vat");
             this.txt_customer_vat.Name = "txt_customer_vat";
-            // 
-            // cmb_customers
-            // 
-            this.cmb_customers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_customers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_customers.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_customers, "cmb_customers");
-            this.cmb_customers.Name = "cmb_customers";
-            this.cmb_customers.SelectedIndexChanged += new System.EventHandler(this.cmb_customers_SelectedIndexChanged);
             // 
             // label20
             // 
@@ -538,13 +525,17 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // label6
+            // txtCustomerSearch
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.txtCustomerSearch, "txtCustomerSearch");
+            this.txtCustomerSearch.Name = "txtCustomerSearch";
+            this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged);
+            this.txtCustomerSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCustomerSearch_KeyUp);
+            this.txtCustomerSearch.Leave += new System.EventHandler(this.txtCustomerSearch_Leave);
             // 
             // groupBox_products
             // 
+            resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox_products.Controls.Add(this.groupBox5);
             this.groupBox_products.Controls.Add(this.txt_brand_code);
@@ -558,16 +549,15 @@
             this.groupBox_products.Controls.Add(this.label18);
             this.groupBox_products.Controls.Add(this.label7);
             this.groupBox_products.Controls.Add(this.label8);
-            resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.rd_btn_with_vat);
             this.groupBox5.Controls.Add(this.rd_btn_without_vat);
             this.groupBox5.Controls.Add(this.groupBox6);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
@@ -587,9 +577,9 @@
             // 
             // groupBox6
             // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Controls.Add(this.rd_btn_bytotal_price);
             this.groupBox6.Controls.Add(this.rd_btn_by_unitprice);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
@@ -680,21 +670,21 @@
             // 
             // grid_sales
             // 
+            resources.ApplyResources(this.grid_sales, "grid_sales");
             this.grid_sales.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(248)))));
-            this.grid_sales.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(248)))));
+            this.grid_sales.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
             this.grid_sales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_sales.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.grid_sales, "grid_sales");
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.grid_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.grid_sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -719,14 +709,14 @@
             this.category_code,
             this.item_number});
             this.grid_sales.ContextMenuStrip = this.contextMenuStrip_Sales;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.ForestGreen;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_sales.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_sales.DefaultCellStyle = dataGridViewCellStyle22;
             this.grid_sales.EnableHeadersVisualStyles = false;
             this.grid_sales.Name = "grid_sales";
             this.grid_sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -750,10 +740,10 @@
             // code
             // 
             this.code.DataPropertyName = "code";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.code.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.code.DefaultCellStyle = dataGridViewCellStyle14;
             this.code.FillWeight = 50F;
             resources.ApplyResources(this.code, "code");
             this.code.Name = "code";
@@ -769,10 +759,10 @@
             // 
             this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Qty.DataPropertyName = "qty";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = "0";
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = "0";
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle15;
             this.Qty.FillWeight = 85.27919F;
             resources.ApplyResources(this.Qty, "Qty");
             this.Qty.Name = "Qty";
@@ -781,10 +771,10 @@
             // 
             this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = "0";
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = "0";
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle16;
             this.unit_price.FillWeight = 85.27919F;
             resources.ApplyResources(this.unit_price, "unit_price");
             this.unit_price.Name = "unit_price";
@@ -792,10 +782,10 @@
             // discount
             // 
             this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = "0";
-            this.discount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "N2";
+            dataGridViewCellStyle17.NullValue = "0";
+            this.discount.DefaultCellStyle = dataGridViewCellStyle17;
             this.discount.FillWeight = 85.27919F;
             resources.ApplyResources(this.discount, "discount");
             this.discount.Name = "discount";
@@ -803,20 +793,20 @@
             // discount_percent
             // 
             this.discount_percent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = "0";
-            this.discount_percent.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "N2";
+            dataGridViewCellStyle18.NullValue = "0";
+            this.discount_percent.DefaultCellStyle = dataGridViewCellStyle18;
             resources.ApplyResources(this.discount_percent, "discount_percent");
             this.discount_percent.Name = "discount_percent";
             // 
             // total_without_vat
             // 
             this.total_without_vat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = "0";
-            this.total_without_vat.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "N2";
+            dataGridViewCellStyle19.NullValue = "0";
+            this.total_without_vat.DefaultCellStyle = dataGridViewCellStyle19;
             resources.ApplyResources(this.total_without_vat, "total_without_vat");
             this.total_without_vat.Name = "total_without_vat";
             this.total_without_vat.ReadOnly = true;
@@ -825,10 +815,10 @@
             // 
             this.tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.tax.DataPropertyName = "tax";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = "0";
-            this.tax.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "N2";
+            dataGridViewCellStyle20.NullValue = "0";
+            this.tax.DefaultCellStyle = dataGridViewCellStyle20;
             this.tax.FillWeight = 85.27919F;
             resources.ApplyResources(this.tax, "tax");
             this.tax.Name = "tax";
@@ -837,10 +827,10 @@
             // sub_total
             // 
             this.sub_total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = "0";
-            this.sub_total.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "N2";
+            dataGridViewCellStyle21.NullValue = "0";
+            this.sub_total.DefaultCellStyle = dataGridViewCellStyle21;
             this.sub_total.FillWeight = 85.27919F;
             resources.ApplyResources(this.sub_total, "sub_total");
             this.sub_total.Name = "sub_total";
@@ -926,6 +916,7 @@
             // 
             // contextMenuStrip_Sales
             // 
+            resources.ApplyResources(this.contextMenuStrip_Sales, "contextMenuStrip_Sales");
             this.contextMenuStrip_Sales.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip_Sales.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToPurchaseOrderToolStripMenuItem,
@@ -933,37 +924,36 @@
             this.toolStripMenuItem1,
             this.productDetailToolStripMenuItem});
             this.contextMenuStrip_Sales.Name = "contextMenuStrip_Sales";
-            resources.ApplyResources(this.contextMenuStrip_Sales, "contextMenuStrip_Sales");
             // 
             // addToPurchaseOrderToolStripMenuItem
             // 
-            this.addToPurchaseOrderToolStripMenuItem.Name = "addToPurchaseOrderToolStripMenuItem";
             resources.ApplyResources(this.addToPurchaseOrderToolStripMenuItem, "addToPurchaseOrderToolStripMenuItem");
+            this.addToPurchaseOrderToolStripMenuItem.Name = "addToPurchaseOrderToolStripMenuItem";
             this.addToPurchaseOrderToolStripMenuItem.Click += new System.EventHandler(this.addToPurchaseOrderToolStripMenuItem_Click);
             // 
             // addNewRowToolStripMenuItem
             // 
-            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             resources.ApplyResources(this.addNewRowToolStripMenuItem, "addNewRowToolStripMenuItem");
+            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             this.addNewRowToolStripMenuItem.Click += new System.EventHandler(this.addNewRowToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // productDetailToolStripMenuItem
             // 
-            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             resources.ApplyResources(this.productDetailToolStripMenuItem, "productDetailToolStripMenuItem");
+            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             this.productDetailToolStripMenuItem.Click += new System.EventHandler(this.productDetailToolStripMenuItem_Click);
             // 
             // panel_grid
             // 
+            resources.ApplyResources(this.panel_grid, "panel_grid");
             this.panel_grid.BackColor = System.Drawing.SystemColors.Control;
             this.panel_grid.Controls.Add(this.grid_sales);
-            resources.ApplyResources(this.panel_grid, "panel_grid");
             this.panel_grid.Name = "panel_grid";
             // 
             // panel_footer
@@ -1070,8 +1060,8 @@
             // 
             // product_pic
             // 
-            this.product_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.product_pic, "product_pic");
+            this.product_pic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.product_pic.Name = "product_pic";
             this.product_pic.TabStop = false;
             // 
@@ -1320,8 +1310,6 @@
         private System.Windows.Forms.DataGridView grid_sales;
         private System.Windows.Forms.Panel panel_grid;
         private System.Windows.Forms.GroupBox groupBox_products;
-        private System.Windows.Forms.ComboBox cmb_customers;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txt_barcode;
         private System.Windows.Forms.Label label8;
@@ -1453,5 +1441,6 @@
         private System.Windows.Forms.TextBox txtCustomerSearch;
         private System.Windows.Forms.CheckBox chk_sendInvoiceToZatca;
         private System.Windows.Forms.TextBox txt_customerID;
+        private System.Windows.Forms.ComboBox cmb_customers;
     }
 }
