@@ -1475,11 +1475,14 @@ namespace pos
                 }
 
                 if (_dt.Rows.Count > 0)
-                {
+                 {
 
                     foreach (DataRow myProductView in _dt.Rows)
                     {
-                        cmb_customers.SelectedValue = myProductView["customer_id"];
+                        txtCustomerSearch.Text = myProductView["customer_name"].ToString();
+                        txt_customerID.Text = myProductView["customer_id"].ToString();
+                        customersDataGridView.Visible = false;
+
                         cmb_employees.SelectedValue = myProductView["employee_id"];
                         cmb_sale_type.SelectedValue = myProductView["sale_type"];
                         //txt_sale_date.Value = Convert.ToDateTime(myProductView["sale_date"].ToString());

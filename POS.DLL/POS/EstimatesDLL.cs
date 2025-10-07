@@ -123,7 +123,7 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.*,(SI.total_tax+SI.total_amount-SI.discount_value) as total,C.first_name AS customer_name " +
+                        String query = "SELECT SI.*,(SI.total_tax+SI.total_amount-SI.discount_value) as total,C.first_name AS customer " +
                             "FROM pos_estimates SI " +
                             "LEFT JOIN pos_customers C ON C.id=SI.customer_id "+
                             "WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id Order by id desc ";
@@ -198,7 +198,8 @@ namespace POS.DLL
                             " S.total_tax as vat,"+
                             //" ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " P.name AS product_name,P.code,S.description," +
-                            " C.first_name AS customer_name, C.vat_no AS customer_vat" +
+                            " C.first_name AS customer_name, C.RegistrationName as customer_company,C.PostalCode," +
+                            " C.CityName, C.CountryName,C.StreetName,C.BuildingNumber,C.CitySubdivisionName, C.vat_no AS customer_vat" +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.id=SI.sale_id" +
                             " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +

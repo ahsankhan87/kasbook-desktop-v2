@@ -38,6 +38,8 @@
             this.btn_print_invoice = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_all_estimates = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,8 +50,6 @@
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_estimates)).BeginInit();
             this.panel2.SuspendLayout();
@@ -119,6 +119,19 @@
             this.grid_all_estimates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_estimates_CellDoubleClick);
             this.grid_all_estimates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_all_estimates_KeyDown);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -135,7 +148,7 @@
             // 
             // customer_name
             // 
-            this.customer_name.DataPropertyName = "customer_name";
+            this.customer_name.DataPropertyName = "customer";
             resources.ApplyResources(this.customer_name, "customer_name");
             this.customer_name.Name = "customer_name";
             this.customer_name.ReadOnly = true;
@@ -197,19 +210,6 @@
             resources.ApplyResources(this.detail, "detail");
             this.detail.Name = "detail";
             this.detail.ReadOnly = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
             // frm_all_estimates
             // 

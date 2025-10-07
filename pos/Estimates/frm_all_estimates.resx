@@ -328,7 +328,7 @@
     <value>6</value>
   </data>
   <data name="detail.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>48</value>
   </data>
   <data name="grid_all_estimates.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 49</value>
