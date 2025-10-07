@@ -58,6 +58,7 @@ namespace pos
 
         // ... inside class frm_sales
         private Timer _customerSearchDebounceTimer;
+        private bool _suppressCustomerSearch;
 
         ProductBLL productsBLL_obj = new ProductBLL();
 
@@ -1479,9 +1480,14 @@ namespace pos
 
                     foreach (DataRow myProductView in _dt.Rows)
                     {
+                        // inside Load_products_to_grid_by_invoiceno(...) where the selected lines are
+                        _suppressCustomerSearch = true;
+                        _customerSearchDebounceTimer.Stop();
                         txtCustomerSearch.Text = myProductView["customer_name"].ToString();
                         txt_customerID.Text = myProductView["customer_id"].ToString();
-                        customersDataGridView.Visible = false;
+                        txt_customer_vat.Text = myProductView["vat_no"].ToString();
+                        txt_cust_credit_limit.Text = myProductView["credit_limit"].ToString();
+                        _suppressCustomerSearch = false;
 
                         cmb_employees.SelectedValue = myProductView["employee_id"];
                         cmb_sale_type.SelectedValue = myProductView["sale_type"];
@@ -3146,11 +3152,17 @@ namespace pos
         {
             try
             {
-                string customerSearch = txtCustomerSearch.Text ?? string.Empty;
+                var customerSearch = txtCustomerSearch.Text ?? string.Empty;
+
+                // If we are suppressing or the box isn't focused, do not show suggestions
+                if (_suppressCustomerSearch || !txtCustomerSearch.Focused)
+                {
+                    customersDataGridView.Visible = false;
+                    return;
+                }
 
                 if (!string.IsNullOrWhiteSpace(customerSearch))
                 {
-
                     var bll = new CustomerBLL();
                     DataTable dt = bll.SearchRecord(customerSearch) ?? new DataTable();
 
@@ -3161,16 +3173,16 @@ namespace pos
                         foreach (DataRow dr in dt.Rows)
                         {
                             string[] row0 = {
-                                dr["first_name"].ToString() + " " + dr["last_name"].ToString(),
-                                dr["id"].ToString(),
-                                dr["contact_no"].ToString(),
-                                dr["vat_no"].ToString(),
-                                dr["credit_limit"].ToString()
-                            };
+                        dr["first_name"].ToString() + " " + dr["last_name"].ToString(),
+                        dr["id"].ToString(),
+                        dr["contact_no"].ToString(),
+                        dr["vat_no"].ToString(),
+                        dr["credit_limit"].ToString()
+                    };
                             customersDataGridView.Rows.Add(row0);
                         }
 
-                        customersDataGridView.Visible = true;
+                        customersDataGridView.Visible = true; // textbox is focused here per the guard above
                         customersDataGridView.ClearSelection();
                         customersDataGridView.CurrentCell = null;
                         TrySelectCurrent();
@@ -3179,7 +3191,6 @@ namespace pos
                     {
                         customersDataGridView.Visible = false;
                     }
-
                 }
                 else
                 {
@@ -3190,12 +3201,9 @@ namespace pos
                     txt_cust_balance.Text = "";
                     customersDataGridView.Visible = false;
                 }
-
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -3203,10 +3211,12 @@ namespace pos
         private void CustomerSearchDebounceTimer_Tick(object sender, EventArgs e)
         {
             _customerSearchDebounceTimer.Stop();
+            if (_suppressCustomerSearch || !txtCustomerSearch.Focused) return;
             RefreshData();
         }
         private void txtCustomerSearch_TextChanged(object sender, EventArgs e)
         {
+            if (_suppressCustomerSearch || !txtCustomerSearch.Focused) return;
             _customerSearchDebounceTimer.Stop();
             _customerSearchDebounceTimer.Start();
         }

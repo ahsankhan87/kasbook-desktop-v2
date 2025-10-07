@@ -2131,7 +2131,7 @@ namespace POS.DLL
                             " P.name AS name,P.code,P.item_type,P.qty,P.category_code," +
                             " U.name AS unit," +
                             " CT.name AS category, CT.id AS category_id," +
-                            " C.first_name as customer_name"+
+                            " C.first_name as customer_name, C.vat_no, C.credit_limit"+
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.invoice_no = SI.invoice_no" +
                             " LEFT JOIN pos_products P ON P.item_number = SI.item_number" +
@@ -2178,10 +2178,12 @@ namespace POS.DLL
                             " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat, SI.item_number," +
                             " P.name AS name,P.code,P.item_type,P.category_code," +
                             " U.name AS unit," +
-                            " CT.name AS category, CT.id AS category_id" +
+                            " CT.name AS category, CT.id AS category_id," +
+                            " C.first_name as customer_name, C.vat_no, C.credit_limit" + 
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.invoice_no=SI.invoice_no" +
                             " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
+                            " LEFT JOIN pos_customers C ON C.id = S.customer_id" + 
                             " LEFT JOIN pos_units U ON U.id=SI.unit_id" +
                             " LEFT JOIN pos_categories CT ON CT.code=P.category_code" +
                             " WHERE S.invoice_no = @invoice_no AND S.status != 1 AND S.branch_id = @branch_id"+
