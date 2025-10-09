@@ -98,14 +98,14 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT S.sale_date,S.invoice_no,S.id,SI.item_code,SI.quantity_sold,SI.unit_price," +
+                        String query = "SELECT S.id,S.sale_date,S.invoice_no," +
+                            " C.first_name AS customer_name," +
+                            " SI.item_code,SI.item_number,SI.item_name AS product_name,SI.loc_code,SI.quantity_sold,SI.unit_price," +
                             " SI.discount_value,"+
-                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))+IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100))) AS total," +
-                            //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             " SI.tax_rate," +
                             " IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100)) AS vat," +
-                            " SI.item_name AS product_name,SI.loc_code,SI.item_number," +
-                            " C.first_name AS customer_name" +
+                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))+IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100))) AS total" +
+                            //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
                             //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
