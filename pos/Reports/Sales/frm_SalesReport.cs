@@ -164,12 +164,12 @@ namespace pos
                 }
 
                 DataRow newRow = sales_report_dt.NewRow();
-                newRow[10] = "Total";
-                newRow[4] = _quantity_sold_total;
-                newRow[5] = _unit_price_total;
-                newRow[6] = _discount_value_total;
-                newRow[9] = _vat_total;
-                newRow[7] = _total;
+                newRow[6] = "Total";
+                newRow[8] = _quantity_sold_total;
+                newRow[9] = _unit_price_total;
+                newRow[10] = _discount_value_total;
+                newRow[12] = _vat_total;
+                newRow[13] = _total;
                 sales_report_dt.Rows.InsertAt(newRow, sales_report_dt.Rows.Count);
 
                 grid_sales_report.DataSource = sales_report_dt;
@@ -306,7 +306,7 @@ namespace pos
                 string defaultName = $"SalesReport_{range}";
 
                 // Drop the appended "Total" row to avoid duplication (Excel can sum itself)
-                ExcelExportHelper.ExportDataTableToExcel(sales_report_dt, defaultName, this, includeLastRow: false);
+                ExcelExportHelper.ExportDataTableToExcel(sales_report_dt, defaultName, this, includeLastRow: true);
             }
             catch (Exception ex)
             {
