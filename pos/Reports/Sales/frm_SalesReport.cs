@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using pos.Reports.Common; // added for Excel export
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -249,6 +250,16 @@ namespace pos
                     btn_search.PerformClick();
                 }
                 
+                if (e.Control && e.KeyCode == Keys.P)
+                {
+                    btn_print.PerformClick();
+                }
+
+                //Export to Excel button
+                if (e.Control && e.KeyCode == Keys.E)
+                {
+                    btn_export.PerformClick();
+                }
             }
             catch (Exception ex)
             {
@@ -258,10 +269,49 @@ namespace pos
 
         private void btn_print_Click(object sender, EventArgs e)
         {
-            frm_sales_report obj = new frm_sales_report(sales_report_dt, false);
-            //obj.load_print();
-            obj.Show();
-           
+            try
+            {
+                if (sales_report_dt == null || sales_report_dt.Rows.Count <= 1)
+                {
+                    MessageBox.Show("No data to print. Please run a search first.", "Print", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string date_range = txt_from_date.Value.ToString("dd-MM-yyyy") + " To " + txt_to_date.Value.ToString("dd-MM-yyyy");
+                string sale_type = cmb_sale_type.Text;
+                string employee = cmb_employees.Text;
+                string sale_account = cmb_sale_account.Text;
+
+                frm_sales_report obj = new frm_sales_report(sales_report_dt, date_range, sale_type, employee, sale_account, false);
+                obj.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sales_report_dt == null || sales_report_dt.Rows.Count <= 1)
+                {
+                    MessageBox.Show("No data to export. Please run a search first.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Build filename with date range
+                string range = $"{txt_from_date.Value:yyyyMMdd}-{txt_to_date.Value:yyyyMMdd}";
+                string defaultName = $"SalesReport_{range}";
+
+                // Drop the appended "Total" row to avoid duplication (Excel can sum itself)
+                ExcelExportHelper.ExportDataTableToExcel(sales_report_dt, defaultName, this, includeLastRow: false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CmbCondition_SelectedIndexChanged(object sender, EventArgs e)

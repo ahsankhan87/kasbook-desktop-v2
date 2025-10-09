@@ -197,7 +197,6 @@
             // panel_header
             // 
             this.panel_header.BackColor = System.Drawing.SystemColors.Control;
-            this.panel_header.Controls.Add(this.chk_sendInvoiceToZatca);
             this.panel_header.Controls.Add(this.groupBox3);
             this.panel_header.Controls.Add(this.lbl_title);
             this.panel_header.Controls.Add(this.SalesToolStrip);
@@ -461,6 +460,7 @@
             // groupBoxCustomer
             // 
             this.groupBoxCustomer.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBoxCustomer.Controls.Add(this.chk_sendInvoiceToZatca);
             this.groupBoxCustomer.Controls.Add(this.cmb_customers);
             this.groupBoxCustomer.Controls.Add(this.lbl);
             this.groupBoxCustomer.Controls.Add(this.label29);

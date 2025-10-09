@@ -1,4 +1,6 @@
-﻿using POS.BLL;
+﻿using pos.Reports.Purchases.Report_Viewer;
+using pos.Reports.Common; // added for Excel export
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,8 @@ namespace pos
         ProductBLL productsBLL_obj = new ProductBLL();
         public int _product_id = 0;
         public string _product_name;
-        
+        DataTable purchase_report_dt = new DataTable();
+
         public frm_PurchasesReport()
         {
             InitializeComponent();
@@ -111,29 +114,28 @@ namespace pos
                 double _discount_value_total = 0;
                 double _vat_total = 0;
                 double _total = 0;
-                
-                DataTable accounts_dt = new DataTable();
-                accounts_dt = purchase_report_obj.PurchaseReport(from_date, to_date, supplier_id, product_id, purchase_type, employee_id, branch_id);
 
-                foreach (DataRow dr in accounts_dt.Rows)
+                purchase_report_dt = purchase_report_obj.PurchaseReport(from_date, to_date, supplier_id, product_id, purchase_type, employee_id, branch_id);
+
+                foreach (DataRow dr in purchase_report_dt.Rows)
                 {
-                    _quantity_total += Convert.ToDouble(dr["quantity"].ToString());
-                    _cost_price_total += Convert.ToDouble(dr["cost_price"].ToString());
-                    _discount_value_total += Convert.ToDouble(dr["discount_value"].ToString());
-                    _vat_total += Convert.ToDouble(dr["vat"].ToString());
-                    _total += Convert.ToDouble(dr["total"].ToString());
+                    _quantity_total += (string.IsNullOrWhiteSpace(dr["quantity"].ToString()) ? 0 : Convert.ToDouble(dr["quantity"].ToString()));
+                    _cost_price_total += (string.IsNullOrWhiteSpace(dr["cost_price"].ToString()) ? 0 : Convert.ToDouble(dr["cost_price"].ToString()));
+                    _discount_value_total += (string.IsNullOrWhiteSpace(dr["discount_value"].ToString()) ? 0 : Convert.ToDouble(dr["discount_value"].ToString()));
+                    _vat_total += (string.IsNullOrWhiteSpace(dr["vat"].ToString()) ? 0 : Convert.ToDouble(dr["vat"].ToString()));
+                    _total += (string.IsNullOrWhiteSpace(dr["total"].ToString()) ? 0 : Convert.ToDouble(dr["total"].ToString()));
                 }
 
-                DataRow newRow = accounts_dt.NewRow();
+                DataRow newRow = purchase_report_dt.NewRow();
                 newRow[10] = "Total";
                 newRow[4] = _quantity_total;
                 newRow[5] = _cost_price_total;
                 newRow[6] = _discount_value_total;
                 newRow[9] = _vat_total;
                 newRow[7] = _total;
-                accounts_dt.Rows.InsertAt(newRow, accounts_dt.Rows.Count);
+                purchase_report_dt.Rows.InsertAt(newRow, purchase_report_dt.Rows.Count);
 
-                grid_Purchases_report.DataSource = accounts_dt;
+                grid_Purchases_report.DataSource = purchase_report_dt;
                 CustomizeDataGridView();
                 
                 _product_id = 0;
@@ -218,6 +220,18 @@ namespace pos
                 if (e.KeyCode == Keys.F3)
                 {
                     btn_search.PerformClick();
+                }
+
+                //Print button
+                if (e.Control && e.KeyCode == Keys.P)
+                {
+                    Btn_print.PerformClick();
+                }
+
+                //Export to Excel button
+                if (e.Control && e.KeyCode == Keys.E)
+                {
+                    Btn_export.PerformClick();
                 }
 
             }
@@ -320,6 +334,51 @@ namespace pos
 
             txt_from_date.Value = startDate;
             txt_to_date.Value = endDate;
+        }
+
+        private void Btn_print_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (purchase_report_dt == null || purchase_report_dt.Rows.Count <= 1)
+                {
+                    MessageBox.Show("No data to print. Please run a search first.", "Print", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string date_range = txt_from_date.Value.ToString("dd-MM-yyyy") + " To " + txt_to_date.Value.ToString("dd-MM-yyyy");
+                string purchase_type = cmb_purchase_type.Text;
+                string employee = cmb_employees.Text;
+                frm_purchase_report_viewer frm_Purchase_Report_Viewer = new frm_purchase_report_viewer(purchase_report_dt, date_range, purchase_type, employee, false);
+                frm_Purchase_Report_Viewer.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Btn_export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (purchase_report_dt == null || purchase_report_dt.Rows.Count <= 1)
+                {
+                    MessageBox.Show("No data to export. Please run a search first.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Build filename with date range
+                string range = $"{txt_from_date.Value:yyyyMMdd}-{txt_to_date.Value:yyyyMMdd}";
+                string defaultName = $"PurchasesReport_{range}";
+
+                // Drop the appended "Total" row to avoid duplication (Excel can sum itself)
+                ExcelExportHelper.ExportDataTableToExcel(purchase_report_dt, defaultName, this, includeLastRow: false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -36,12 +36,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CmbCondition = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
             this.txt_product_name = new System.Windows.Forms.TextBox();
             this.txt_product_code = new System.Windows.Forms.TextBox();
             this.btn_print = new System.Windows.Forms.Button();
-            this.btn_search = new System.Windows.Forms.Button();
             this.cmb_sale_account = new System.Windows.Forms.ComboBox();
             this.cmb_sale_type = new System.Windows.Forms.ComboBox();
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
@@ -50,6 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -57,17 +58,17 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loc_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity_sold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loc_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CmbCondition = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.btn_export = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_report)).BeginInit();
@@ -86,6 +87,7 @@
             this.panel1.Controls.Add(this.txt_product_name);
             this.panel1.Controls.Add(this.txt_product_code);
             this.panel1.Controls.Add(this.btn_print);
+            this.panel1.Controls.Add(this.btn_export);
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.cmb_sale_account);
             this.panel1.Controls.Add(this.cmb_sale_type);
@@ -101,6 +103,14 @@
             this.panel1.Controls.Add(this.label4);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // CmbCondition
+            // 
+            this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbCondition.FormattingEnabled = true;
+            resources.ApplyResources(this.CmbCondition, "CmbCondition");
+            this.CmbCondition.Name = "CmbCondition";
+            this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -133,13 +143,6 @@
             this.btn_print.Name = "btn_print";
             this.btn_print.UseVisualStyleBackColor = true;
             this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
-            // 
-            // btn_search
-            // 
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // cmb_sale_account
             // 
@@ -198,6 +201,11 @@
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
@@ -226,15 +234,15 @@
             this.id,
             this.sale_date,
             this.invoice_no,
+            this.customer_name,
             this.product_code,
             this.product_name,
+            this.loc_code,
             this.quantity_sold,
             this.unit_price,
             this.discount_value,
             this.vat,
-            this.total,
-            this.customer_name,
-            this.loc_code});
+            this.total});
             this.grid_sales_report.Name = "grid_sales_report";
             this.grid_sales_report.ReadOnly = true;
             this.grid_sales_report.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -263,6 +271,14 @@
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
             // 
+            // customer_name
+            // 
+            this.customer_name.DataPropertyName = "customer_name";
+            this.customer_name.FillWeight = 54.6067F;
+            resources.ApplyResources(this.customer_name, "customer_name");
+            this.customer_name.Name = "customer_name";
+            this.customer_name.ReadOnly = true;
+            // 
             // product_code
             // 
             this.product_code.DataPropertyName = "item_code";
@@ -279,6 +295,13 @@
             resources.ApplyResources(this.product_name, "product_name");
             this.product_name.Name = "product_name";
             this.product_name.ReadOnly = true;
+            // 
+            // loc_code
+            // 
+            this.loc_code.DataPropertyName = "loc_code";
+            resources.ApplyResources(this.loc_code, "loc_code");
+            this.loc_code.Name = "loc_code";
+            this.loc_code.ReadOnly = true;
             // 
             // quantity_sold
             // 
@@ -338,33 +361,19 @@
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
-            // customer_name
+            // btn_search
             // 
-            this.customer_name.DataPropertyName = "customer_name";
-            this.customer_name.FillWeight = 54.6067F;
-            resources.ApplyResources(this.customer_name, "customer_name");
-            this.customer_name.Name = "customer_name";
-            this.customer_name.ReadOnly = true;
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
-            // loc_code
+            // btn_export
             // 
-            this.loc_code.DataPropertyName = "loc_code";
-            resources.ApplyResources(this.loc_code, "loc_code");
-            this.loc_code.Name = "loc_code";
-            this.loc_code.ReadOnly = true;
-            // 
-            // CmbCondition
-            // 
-            this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbCondition.FormattingEnabled = true;
-            resources.ApplyResources(this.CmbCondition, "CmbCondition");
-            this.CmbCondition.Name = "CmbCondition";
-            this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
+            resources.ApplyResources(this.btn_export, "btn_export");
+            this.btn_export.Name = "btn_export";
+            this.btn_export.UseVisualStyleBackColor = true;
+            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
             // 
             // frm_SalesReport
             // 
@@ -400,7 +409,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmb_sale_type;
-        private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.TextBox txt_product_code;
         private System.Windows.Forms.TextBox txt_product_name;
         private System.Windows.Forms.ComboBox cmb_sale_account;
@@ -408,19 +416,21 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmb_employees;
         private System.Windows.Forms.Button btn_print;
+        private System.Windows.Forms.ComboBox CmbCondition;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loc_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity_sold;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn loc_code;
-        private System.Windows.Forms.ComboBox CmbCondition;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btn_export;
+        private System.Windows.Forms.Button btn_search;
     }
 }

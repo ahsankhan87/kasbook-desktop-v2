@@ -11,44 +11,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace pos
+namespace pos.Reports.Purchases.Report_Viewer
 {
-    public partial class frm_sales_report : Form
+    public partial class frm_purchase_report_viewer : Form
     {
         DataTable _dt;
         bool _isPrint = false;
         string _date_range;
-        string _sale_type;
+        string _purchase_type;
         string _employee;
-        string _sale_account;
 
-        public frm_sales_report(DataTable sales_detail, string date_range, string sale_type, string employee,string sale_account, bool isPrint)
+        public frm_purchase_report_viewer(DataTable purchase_detail, string date_range, string purchase_type, string employee, bool isPrint)
         {
-            InitializeComponent();
-            _dt = sales_detail;
-            _date_range = date_range;
-            _sale_type = sale_type;
-            _employee = employee;
-            _sale_account = sale_account;
+            _dt = purchase_detail;
             _isPrint = isPrint;
+            _date_range = date_range;
+            _purchase_type = purchase_type;
+            _employee = employee;
+            InitializeComponent();
         }
-
-        public frm_sales_report()
+        public frm_purchase_report_viewer()
         {
             InitializeComponent();
         }
 
-        private void frm_sales_report_Load(object sender, EventArgs e)
+        private void frm_purchase_report_viewer_Load(object sender, EventArgs e)
         {
             load_print();
         }
-
         public void load_print()
         {
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             ReportDocument rptDoc = new ReportDocument();
-            rptDoc.Load(appPath + @"\\reports\\sales_report.rpt");
-            
+            rptDoc.Load(appPath + @"\\Reports\\Accounts\\Purchases\\PurchasesReport.rpt");
+
             // Make a copy and remove the last row (e.g., the "Total" row appended for grid display)
             DataTable dtForReport = _dt != null ? _dt.Copy() : new DataTable();
             if (dtForReport.Rows.Count > 0)
@@ -58,8 +54,7 @@ namespace pos
             }
 
             rptDoc.SetDataSource(dtForReport);
-
-            crystalReportViewer_sales_report.ReportSource = rptDoc;
+            crystalReportViewer1.ReportSource = rptDoc;
 
             CompaniesBLL company_obj = new CompaniesBLL();
             DataTable company_dt = company_obj.GetCompany();
@@ -76,18 +71,15 @@ namespace pos
                 company_contact_no = dr_company["contact_no"].ToString();
             }
 
-            //sales_invoice1.SetDataSource(_dt);
             rptDoc.SetParameterValue("company_name", company_name);
             rptDoc.SetParameterValue("date_range", _date_range);
-            rptDoc.SetParameterValue("sale_type", _sale_type);
+            rptDoc.SetParameterValue("purchase_type", _purchase_type);
             rptDoc.SetParameterValue("employee", _employee);
-            rptDoc.SetParameterValue("sale_account", _sale_account);
 
             if (_isPrint)
             {
                 rptDoc.PrintToPrinter(1, true, 0, 0);
             }
-            
         }
 
     }

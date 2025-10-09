@@ -266,7 +266,6 @@ namespace POS.DLL
 
         }
 
-
         public DataTable ProductWiseSaleReport(string from_date, string to_date, int customer_id = 0, string product_code = "", string sale_type = "", int employee_id = 0, string sale_account = "", int branch_id = 0)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

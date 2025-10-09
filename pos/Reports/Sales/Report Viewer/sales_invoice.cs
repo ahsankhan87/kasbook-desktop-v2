@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pos.Reports.Sales {
+namespace pos.Reports.Sales.Report_Viewer {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace pos.Reports.Sales {
         
         public override string FullResourceName {
             get {
-                return "pos.Reports.Sales.sales_invoice.rpt";
+                return "pos.Reports.Sales.Report Viewer.sales_invoice.rpt";
             }
             set {
                 // Do nothing

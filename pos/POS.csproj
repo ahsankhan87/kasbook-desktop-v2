@@ -708,6 +708,7 @@
     <Compile Include="Master\frm_shortcuts.Designer.cs">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Common\ExcelExportHelper.cs" />
     <Compile Include="Reports\Dashboard\frm_branchWiseSummary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -776,6 +777,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>purchase_invoice.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Purchases\Report Viewer\frm_purchase_report_viewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Purchases\Report Viewer\frm_purchase_report_viewer.Designer.cs">
+      <DependentUpon>frm_purchase_report_viewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportConnectionManager.cs" />
     <Compile Include="Reports\Sales\DataSet_SaleReceipt.Designer.cs">
@@ -1093,7 +1100,7 @@
     <Compile Include="Sales\frm_sales_receipt.Designer.cs">
       <DependentUpon>frm_sales_receipt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Sales\sales_invoice.cs">
+    <Compile Include="Reports\Sales\Report Viewer\sales_invoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>sales_invoice.rpt</DependentUpon>
@@ -1818,6 +1825,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>purchase_invoice.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\Report Viewer\frm_purchase_report_viewer.resx">
+      <DependentUpon>frm_purchase_report_viewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_categoryWiseSalesReport.resx">
       <DependentUpon>frm_categoryWiseSalesReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -1951,7 +1961,7 @@
       <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\Report_sales_receipt.rdlc" />
-    <EmbeddedResource Include="Reports\Sales\sales_invoice.rpt">
+    <EmbeddedResource Include="Reports\Sales\Report Viewer\sales_invoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.crystalReportViewer_sales_invoice = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.sales_invoice1 = new pos.Reports.Sales.sales_invoice();
             this.SuspendLayout();
             // 
             // crystalReportViewer_sales_invoice
@@ -41,7 +40,7 @@
             this.crystalReportViewer_sales_invoice.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer_sales_invoice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.crystalReportViewer_sales_invoice.Name = "crystalReportViewer_sales_invoice";
-            this.crystalReportViewer_sales_invoice.ReportSource = this.sales_invoice1;
+            this.crystalReportViewer_sales_invoice.ReportSource = null;
             this.crystalReportViewer_sales_invoice.Size = new System.Drawing.Size(876, 452);
             this.crystalReportViewer_sales_invoice.TabIndex = 0;
             this.crystalReportViewer_sales_invoice.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
@@ -66,6 +65,5 @@
         #endregion
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer_sales_invoice;
-        private Reports.Sales.sales_invoice sales_invoice1;
     }
 }

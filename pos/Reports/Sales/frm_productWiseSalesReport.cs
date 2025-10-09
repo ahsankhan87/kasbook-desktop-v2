@@ -76,7 +76,7 @@ namespace pos
                 grid_sales_report.AutoGenerateColumns = false;
 
                 DataTable accounts_dt = new DataTable();
-                accounts_dt = sale_report_obj.ProductWiseSaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account);
+                accounts_dt = sale_report_obj.ProductWiseSaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account,branch_id);
 
                 //double _quantity_sold_total = 0;
                 //double _unit_price_total = 0;

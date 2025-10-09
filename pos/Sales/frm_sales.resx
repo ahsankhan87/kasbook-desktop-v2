@@ -118,37 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chk_sendInvoiceToZatca.Location" type="System.Drawing.Point, System.Drawing">
-    <value>959, 41</value>
-  </data>
-  <data name="chk_sendInvoiceToZatca.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 24</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="chk_sendInvoiceToZatca.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="chk_sendInvoiceToZatca.Text" xml:space="preserve">
-    <value>Send Invoice to ZATCA</value>
-  </data>
-  <data name="chk_sendInvoiceToZatca.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="chk_sendInvoiceToZatca.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;chk_sendInvoiceToZatca.Name" xml:space="preserve">
-    <value>chk_sendInvoiceToZatca</value>
-  </data>
-  <data name="&gt;&gt;chk_sendInvoiceToZatca.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chk_sendInvoiceToZatca.Parent" xml:space="preserve">
-    <value>panel_header</value>
-  </data>
-  <data name="&gt;&gt;chk_sendInvoiceToZatca.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="txt_user_commission_balance.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 30</value>
   </data>
@@ -159,6 +128,7 @@
   <data name="txt_user_commission_balance.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 27</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txt_user_commission_balance.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -355,7 +325,7 @@
     <value>panel_header</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="lbl_title.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -370,7 +340,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>955, 7</value>
+    <value>1150, 9</value>
   </data>
   <data name="lbl_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -394,7 +364,7 @@
     <value>panel_header</value>
   </data>
   <data name="&gt;&gt;lbl_title.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="SalesToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>233, 11</value>
@@ -562,7 +532,7 @@
     <value>panel_header</value>
   </data>
   <data name="&gt;&gt;SalesToolStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="cmb_invoice_subtype_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 111</value>
@@ -1033,10 +1003,40 @@
     <value>panel_header</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
+  </data>
+  <data name="chk_sendInvoiceToZatca.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 196</value>
+  </data>
+  <data name="chk_sendInvoiceToZatca.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 24</value>
+  </data>
+  <data name="chk_sendInvoiceToZatca.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chk_sendInvoiceToZatca.Text" xml:space="preserve">
+    <value>Send Invoice to ZATCA</value>
+  </data>
+  <data name="chk_sendInvoiceToZatca.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
+  </data>
+  <data name="chk_sendInvoiceToZatca.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chk_sendInvoiceToZatca.Name" xml:space="preserve">
+    <value>chk_sendInvoiceToZatca</value>
+  </data>
+  <data name="&gt;&gt;chk_sendInvoiceToZatca.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chk_sendInvoiceToZatca.Parent" xml:space="preserve">
+    <value>groupBoxCustomer</value>
+  </data>
+  <data name="&gt;&gt;chk_sendInvoiceToZatca.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cmb_customers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 156</value>
+    <value>148, 162</value>
   </data>
   <data name="cmb_customers.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 28</value>
@@ -1057,7 +1057,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;cmb_customers.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lbl.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1087,7 +1087,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;lbl.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 32</value>
@@ -1099,7 +1099,7 @@
     <value>1</value>
   </data>
   <data name="label29.Text" xml:space="preserve">
-    <value>Customers:</value>
+    <value>Customer:</value>
   </data>
   <data name="&gt;&gt;label29.Name" xml:space="preserve">
     <value>label29</value>
@@ -1111,7 +1111,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="txt_cust_balance.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 111</value>
@@ -1135,7 +1135,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;txt_cust_balance.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="txt_cust_credit_limit.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 81</value>
@@ -1159,7 +1159,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;txt_cust_credit_limit.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="txt_customerID.Location" type="System.Drawing.Point, System.Drawing">
     <value>320, 142</value>
@@ -1183,7 +1183,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;txt_customerID.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="txt_customer_vat.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 53</value>
@@ -1210,7 +1210,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;txt_customer_vat.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1243,7 +1243,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1276,7 +1276,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="txtCustomerSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 26</value>
@@ -1297,7 +1297,7 @@
     <value>groupBoxCustomer</value>
   </data>
   <data name="&gt;&gt;txtCustomerSearch.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="groupBoxCustomer.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
@@ -1324,7 +1324,7 @@
     <value>panel_header</value>
   </data>
   <data name="&gt;&gt;groupBoxCustomer.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="rd_btn_with_vat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1846,7 +1846,7 @@
     <value>panel_header</value>
   </data>
   <data name="&gt;&gt;groupBox_products.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="panel_header.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
