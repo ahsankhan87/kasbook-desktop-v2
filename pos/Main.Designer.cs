@@ -141,6 +141,8 @@
             this.toolStripStatusLabel_branch_name = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_fyear = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_fiscalyear = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCompanyName = new System.Windows.Forms.ToolStripStatusLabel();
             this.sideMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_sales = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchase = new System.Windows.Forms.ToolStripButton();
@@ -150,8 +152,6 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelCompanyName = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -709,8 +709,8 @@
             // 
             // dailySaleReportToolStripMenuItem
             // 
-            this.dailySaleReportToolStripMenuItem.Name = "dailySaleReportToolStripMenuItem";
             resources.ApplyResources(this.dailySaleReportToolStripMenuItem, "dailySaleReportToolStripMenuItem");
+            this.dailySaleReportToolStripMenuItem.Name = "dailySaleReportToolStripMenuItem";
             this.dailySaleReportToolStripMenuItem.Click += new System.EventHandler(this.dailySaleReportToolStripMenuItem_Click);
             // 
             // salesReportToolStripMenuItem1
@@ -928,6 +928,17 @@
             this.toolStripStatusLabel_fiscalyear.Name = "toolStripStatusLabel_fiscalyear";
             resources.ApplyResources(this.toolStripStatusLabel_fiscalyear, "toolStripStatusLabel_fiscalyear");
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(100, 4, 0, 2);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            // 
+            // toolStripStatusLabelCompanyName
+            // 
+            this.toolStripStatusLabelCompanyName.Name = "toolStripStatusLabelCompanyName";
+            resources.ApplyResources(this.toolStripStatusLabelCompanyName, "toolStripStatusLabelCompanyName");
+            // 
             // sideMenu
             // 
             resources.ApplyResources(this.sideMenu, "sideMenu");
@@ -997,17 +1008,6 @@
             resources.ApplyResources(this.toolStripButton_purchasesV1, "toolStripButton_purchasesV1");
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(100, 4, 0, 2);
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
-            // 
-            // toolStripStatusLabelCompanyName
-            // 
-            this.toolStripStatusLabelCompanyName.Name = "toolStripStatusLabelCompanyName";
-            resources.ApplyResources(this.toolStripStatusLabelCompanyName, "toolStripStatusLabelCompanyName");
             // 
             // frm_main
             // 

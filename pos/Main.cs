@@ -1376,19 +1376,25 @@ namespace pos
             dsr_frm = null;
         }
 
+        frm_SalesReport frm_SalesReport;
         private void toolStripButtonDailySaleReport_Click(object sender, EventArgs e)
         {
-            if (dsr_frm == null)
+            if (frm_SalesReport == null)
             {
-                dsr_frm = new frm_daily_salesReport();
-                dsr_frm.MdiParent = this;
-                dsr_frm.FormClosed += new FormClosedEventHandler(dsr_frm_FormClosed);
-                dsr_frm.Show();
+                frm_SalesReport = new frm_SalesReport();
+                frm_SalesReport.MdiParent = this;
+                frm_SalesReport.FormClosed += new FormClosedEventHandler(Frm_SalesReport_FormClosed);
+                frm_SalesReport.Show();
             }
             else
             {
-                dsr_frm.Activate();
+                frm_SalesReport.Activate();
             }
+        }
+
+        private void Frm_SalesReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_SalesReport = null;
         }
 
         private void frm_main_KeyUp(object sender, KeyEventArgs e)
