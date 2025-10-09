@@ -772,6 +772,12 @@
     <Compile Include="Reports\Purchases\frm_purchase_invoice.Designer.cs">
       <DependentUpon>frm_purchase_invoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Purchases\PurchasesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchasesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Purchases\purchase_invoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1820,6 +1826,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Purchases\frm_purchase_invoice.resx">
       <DependentUpon>frm_purchase_invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\PurchasesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchasesReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Purchases\purchase_invoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
