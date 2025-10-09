@@ -87,8 +87,6 @@ namespace pos
         {
             try
             {
-
-
                 HardwareIdentifier systemID_obj = new HardwareIdentifier();
                 string systemID = systemID_obj.GetUniqueHardwareId();
 
@@ -98,13 +96,15 @@ namespace pos
                 //DateTime expiry_date = new DateTime();
 
                 int company_id = 0;
+                string company_name = "";
                 string subscriptionKey = "";
 
                 foreach (DataRow dr_company in company_dt.Rows)
                 {
                     UsersModal.loggedIncompanyID = Convert.ToInt32(dr_company["id"].ToString());
+                    UsersModal.logged_in_company_name = dr_company["name"].ToString();
                     UsersModal.useZatcaEInvoice = (string.IsNullOrEmpty(dr_company["useZatcaEInvoice"].ToString()) ? false : Convert.ToBoolean(dr_company["useZatcaEInvoice"]));
-                    string company_name = dr_company["name"].ToString();
+                    company_name = dr_company["name"].ToString();
                     locked = Convert.ToInt32(dr_company["locked"]);
                     //expiry_date = Convert.ToDateTime(dr_company["ex_date"]);
                     company_id = Convert.ToInt32(dr_company["id"]);

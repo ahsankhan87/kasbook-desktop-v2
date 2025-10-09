@@ -49,6 +49,7 @@ namespace pos
             toolStripStatusLabel_username.Text = UsersModal.logged_in_username;
             toolStripStatusLabel_branch_name.Text = UsersModal.logged_in_branch_name.ToString();
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
+            toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();  
 
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);

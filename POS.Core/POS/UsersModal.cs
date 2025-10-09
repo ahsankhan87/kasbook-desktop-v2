@@ -20,6 +20,7 @@ namespace POS.Core
         public static string logged_in_branch_name { get; set; }
 
         public static int loggedIncompanyID { get; set; }
+        public static string logged_in_company_name { get; set; }
 
         public static string logged_in_lang { get; set; }
         public static string logged_in_user_role { get; set; }

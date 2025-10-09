@@ -1477,6 +1477,7 @@ namespace pos
 
                 if (_dt.Rows.Count > 0)
                  {
+                    CustomerBLL customerBLL = new CustomerBLL();
 
                     foreach (DataRow myProductView in _dt.Rows)
                     {
@@ -1487,6 +1488,8 @@ namespace pos
                         txt_customerID.Text = myProductView["customer_id"].ToString();
                         txt_customer_vat.Text = myProductView["vat_no"].ToString();
                         txt_cust_credit_limit.Text = myProductView["credit_limit"].ToString();
+                        Decimal customer_total_balance = customerBLL.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
+                        txt_cust_balance.Text = customer_total_balance.ToString("N2");
                         _suppressCustomerSearch = false;
 
                         cmb_employees.SelectedValue = myProductView["employee_id"];
