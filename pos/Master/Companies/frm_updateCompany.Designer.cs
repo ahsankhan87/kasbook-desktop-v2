@@ -39,7 +39,6 @@
             this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.txt_address = new System.Windows.Forms.TextBox();
             this.txt_name = new System.Windows.Forms.TextBox();
-            this.txt_countryName = new System.Windows.Forms.TextBox();
             this.txt_vat_no = new System.Windows.Forms.TextBox();
             this.txt_email = new System.Windows.Forms.TextBox();
             this.txt_contact_no = new System.Windows.Forms.TextBox();
@@ -50,11 +49,12 @@
             this.txt_id = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.txt_countryName = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmb_payable_acc_id = new System.Windows.Forms.ComboBox();
             this.cmb_cash_acc_id = new System.Windows.Forms.ComboBox();
@@ -116,20 +116,20 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.lbl_header_title);
             this.panel1.Controls.Add(this.btn_cancel);
             this.panel1.Controls.Add(this.btn_save);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.lblExpiryDate);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // lblExpiryDate
@@ -149,7 +149,6 @@
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.chk_use_zatca_e_invoice);
             this.groupBox2.Controls.Add(this.txt_address);
             this.groupBox2.Controls.Add(this.txt_name);
@@ -167,6 +166,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -185,11 +185,6 @@
             // 
             resources.ApplyResources(this.txt_name, "txt_name");
             this.txt_name.Name = "txt_name";
-            // 
-            // txt_countryName
-            // 
-            resources.ApplyResources(this.txt_countryName, "txt_countryName");
-            this.txt_countryName.Name = "txt_countryName";
             // 
             // txt_vat_no
             // 
@@ -243,11 +238,6 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // label27
-            // 
-            resources.ApplyResources(this.label27, "label27");
-            this.label27.Name = "label27";
-            // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
@@ -268,9 +258,18 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
+            // txt_countryName
+            // 
+            resources.ApplyResources(this.txt_countryName, "txt_countryName");
+            this.txt_countryName.Name = "txt_countryName";
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.cmb_payable_acc_id);
             this.groupBox1.Controls.Add(this.cmb_cash_acc_id);
             this.groupBox1.Controls.Add(this.label11);
@@ -297,23 +296,24 @@
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.cmb_sales_acc_id);
             this.groupBox1.Controls.Add(this.label13);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // cmb_payable_acc_id
             // 
-            resources.ApplyResources(this.cmb_payable_acc_id, "cmb_payable_acc_id");
             this.cmb_payable_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payable_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payable_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_payable_acc_id, "cmb_payable_acc_id");
             this.cmb_payable_acc_id.Name = "cmb_payable_acc_id";
             // 
             // cmb_cash_acc_id
             // 
-            resources.ApplyResources(this.cmb_cash_acc_id, "cmb_cash_acc_id");
             this.cmb_cash_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_cash_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_cash_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_cash_acc_id, "cmb_cash_acc_id");
             this.cmb_cash_acc_id.Name = "cmb_cash_acc_id";
             // 
             // label11
@@ -328,10 +328,10 @@
             // 
             // cmb_receivable_acc_id
             // 
-            resources.ApplyResources(this.cmb_receivable_acc_id, "cmb_receivable_acc_id");
             this.cmb_receivable_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_receivable_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_receivable_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_receivable_acc_id, "cmb_receivable_acc_id");
             this.cmb_receivable_acc_id.Name = "cmb_receivable_acc_id";
             // 
             // label10
@@ -341,10 +341,10 @@
             // 
             // cmb_tax_acc_id
             // 
-            resources.ApplyResources(this.cmb_tax_acc_id, "cmb_tax_acc_id");
             this.cmb_tax_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_tax_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_tax_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_tax_acc_id, "cmb_tax_acc_id");
             this.cmb_tax_acc_id.Name = "cmb_tax_acc_id";
             // 
             // label9
@@ -354,10 +354,10 @@
             // 
             // cmb_commission_acc_id
             // 
-            resources.ApplyResources(this.cmb_commission_acc_id, "cmb_commission_acc_id");
             this.cmb_commission_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_commission_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_commission_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_commission_acc_id, "cmb_commission_acc_id");
             this.cmb_commission_acc_id.Name = "cmb_commission_acc_id";
             // 
             // label21
@@ -367,10 +367,10 @@
             // 
             // cmb_item_variance_acc_id
             // 
-            resources.ApplyResources(this.cmb_item_variance_acc_id, "cmb_item_variance_acc_id");
             this.cmb_item_variance_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_item_variance_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_item_variance_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_item_variance_acc_id, "cmb_item_variance_acc_id");
             this.cmb_item_variance_acc_id.Name = "cmb_item_variance_acc_id";
             // 
             // label20
@@ -380,10 +380,10 @@
             // 
             // cmb_purchases_disc_acc_id
             // 
-            resources.ApplyResources(this.cmb_purchases_disc_acc_id, "cmb_purchases_disc_acc_id");
             this.cmb_purchases_disc_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_purchases_disc_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_purchases_disc_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_purchases_disc_acc_id, "cmb_purchases_disc_acc_id");
             this.cmb_purchases_disc_acc_id.Name = "cmb_purchases_disc_acc_id";
             // 
             // label19
@@ -393,18 +393,18 @@
             // 
             // cmb_sales_disc_acc_id
             // 
-            resources.ApplyResources(this.cmb_sales_disc_acc_id, "cmb_sales_disc_acc_id");
             this.cmb_sales_disc_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_sales_disc_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_sales_disc_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_sales_disc_acc_id, "cmb_sales_disc_acc_id");
             this.cmb_sales_disc_acc_id.Name = "cmb_sales_disc_acc_id";
             // 
             // cmb_purchases_return_acc_id
             // 
-            resources.ApplyResources(this.cmb_purchases_return_acc_id, "cmb_purchases_return_acc_id");
             this.cmb_purchases_return_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_purchases_return_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_purchases_return_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_purchases_return_acc_id, "cmb_purchases_return_acc_id");
             this.cmb_purchases_return_acc_id.Name = "cmb_purchases_return_acc_id";
             // 
             // label17
@@ -419,10 +419,10 @@
             // 
             // cmb_sales_return_acc_id
             // 
-            resources.ApplyResources(this.cmb_sales_return_acc_id, "cmb_sales_return_acc_id");
             this.cmb_sales_return_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_sales_return_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_sales_return_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_sales_return_acc_id, "cmb_sales_return_acc_id");
             this.cmb_sales_return_acc_id.Name = "cmb_sales_return_acc_id";
             // 
             // label16
@@ -432,10 +432,10 @@
             // 
             // cmb_purchases_acc_id
             // 
-            resources.ApplyResources(this.cmb_purchases_acc_id, "cmb_purchases_acc_id");
             this.cmb_purchases_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_purchases_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_purchases_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_purchases_acc_id, "cmb_purchases_acc_id");
             this.cmb_purchases_acc_id.Name = "cmb_purchases_acc_id";
             // 
             // label15
@@ -445,10 +445,10 @@
             // 
             // cmb_inventory_acc_id
             // 
-            resources.ApplyResources(this.cmb_inventory_acc_id, "cmb_inventory_acc_id");
             this.cmb_inventory_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_inventory_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_inventory_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_inventory_acc_id, "cmb_inventory_acc_id");
             this.cmb_inventory_acc_id.Name = "cmb_inventory_acc_id";
             // 
             // label14
@@ -458,10 +458,10 @@
             // 
             // cmb_sales_acc_id
             // 
-            resources.ApplyResources(this.cmb_sales_acc_id, "cmb_sales_acc_id");
             this.cmb_sales_acc_id.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_sales_acc_id.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_sales_acc_id.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_sales_acc_id, "cmb_sales_acc_id");
             this.cmb_sales_acc_id.Name = "cmb_sales_acc_id";
             // 
             // label13
@@ -521,7 +521,6 @@
             // 
             // groupBox3
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.txt_buildingNumber);
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Controls.Add(this.label23);
@@ -534,6 +533,7 @@
             this.groupBox3.Controls.Add(this.label26);
             this.groupBox3.Controls.Add(this.txt_StreetName);
             this.groupBox3.Controls.Add(this.label27);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
