@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
@@ -72,18 +73,18 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(993, 137);
+            this.panel1.Size = new System.Drawing.Size(883, 110);
             this.panel1.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(416, 22);
+            this.label7.Location = new System.Drawing.Point(370, 18);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 20);
+            this.label7.Size = new System.Drawing.Size(79, 16);
             this.label7.TabIndex = 18;
             this.label7.Text = "Employees:";
             // 
@@ -92,18 +93,18 @@
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
-            this.cmb_employees.Location = new System.Drawing.Point(532, 17);
-            this.cmb_employees.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_employees.Location = new System.Drawing.Point(473, 14);
+            this.cmb_employees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmb_employees.Name = "cmb_employees";
-            this.cmb_employees.Size = new System.Drawing.Size(290, 28);
+            this.cmb_employees.Size = new System.Drawing.Size(258, 24);
             this.cmb_employees.TabIndex = 7;
             // 
             // btn_print
             // 
-            this.btn_print.Location = new System.Drawing.Point(862, 87);
-            this.btn_print.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_print.Location = new System.Drawing.Point(766, 70);
+            this.btn_print.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_print.Name = "btn_print";
-            this.btn_print.Size = new System.Drawing.Size(112, 40);
+            this.btn_print.Size = new System.Drawing.Size(100, 32);
             this.btn_print.TabIndex = 8;
             this.btn_print.Text = "Print";
             this.btn_print.UseVisualStyleBackColor = true;
@@ -111,10 +112,10 @@
             // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(862, 17);
-            this.btn_search.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_search.Location = new System.Drawing.Point(766, 14);
+            this.btn_search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(112, 63);
+            this.btn_search.Size = new System.Drawing.Size(100, 50);
             this.btn_search.TabIndex = 8;
             this.btn_search.Text = "Search (F3)";
             this.btn_search.UseVisualStyleBackColor = true;
@@ -128,10 +129,10 @@
             "All",
             "Sale",
             "Return"});
-            this.cmb_sale_account.Location = new System.Drawing.Point(532, 88);
-            this.cmb_sale_account.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_sale_account.Location = new System.Drawing.Point(473, 70);
+            this.cmb_sale_account.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmb_sale_account.Name = "cmb_sale_account";
-            this.cmb_sale_account.Size = new System.Drawing.Size(290, 28);
+            this.cmb_sale_account.Size = new System.Drawing.Size(258, 24);
             this.cmb_sale_account.TabIndex = 6;
             // 
             // cmb_sale_type
@@ -142,47 +143,47 @@
             "All",
             "Cash",
             "Credit"});
-            this.cmb_sale_type.Location = new System.Drawing.Point(102, 88);
-            this.cmb_sale_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_sale_type.Location = new System.Drawing.Point(91, 70);
+            this.cmb_sale_type.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmb_sale_type.Name = "cmb_sale_type";
-            this.cmb_sale_type.Size = new System.Drawing.Size(298, 28);
+            this.cmb_sale_type.Size = new System.Drawing.Size(265, 24);
             this.cmb_sale_type.TabIndex = 3;
             // 
             // txt_to_date
             // 
             this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_to_date.Location = new System.Drawing.Point(102, 52);
-            this.txt_to_date.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_to_date.Location = new System.Drawing.Point(91, 42);
+            this.txt_to_date.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_to_date.Name = "txt_to_date";
-            this.txt_to_date.Size = new System.Drawing.Size(298, 26);
+            this.txt_to_date.Size = new System.Drawing.Size(265, 22);
             this.txt_to_date.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(416, 92);
+            this.label6.Location = new System.Drawing.Point(370, 74);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 20);
+            this.label6.Size = new System.Drawing.Size(55, 16);
             this.label6.TabIndex = 6;
             this.label6.Text = "Account";
             // 
             // txt_from_date
             // 
             this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_from_date.Location = new System.Drawing.Point(102, 17);
-            this.txt_from_date.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_from_date.Location = new System.Drawing.Point(91, 14);
+            this.txt_from_date.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_from_date.Name = "txt_from_date";
-            this.txt_from_date.Size = new System.Drawing.Size(298, 26);
+            this.txt_from_date.Size = new System.Drawing.Size(265, 22);
             this.txt_from_date.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 92);
+            this.label2.Location = new System.Drawing.Point(9, 74);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 20);
+            this.label2.Size = new System.Drawing.Size(70, 16);
             this.label2.TabIndex = 6;
             this.label2.Text = "Sale Type";
             // 
@@ -191,39 +192,39 @@
             this.cmb_customers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_customers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_customers.FormattingEnabled = true;
-            this.cmb_customers.Location = new System.Drawing.Point(532, 52);
-            this.cmb_customers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmb_customers.Location = new System.Drawing.Point(473, 42);
+            this.cmb_customers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmb_customers.Name = "cmb_customers";
-            this.cmb_customers.Size = new System.Drawing.Size(290, 28);
+            this.cmb_customers.Size = new System.Drawing.Size(258, 24);
             this.cmb_customers.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 57);
+            this.label5.Location = new System.Drawing.Point(8, 46);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 20);
+            this.label5.Size = new System.Drawing.Size(56, 16);
             this.label5.TabIndex = 5;
             this.label5.Text = "To Date";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 22);
+            this.label3.Location = new System.Drawing.Point(8, 18);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 20);
+            this.label3.Size = new System.Drawing.Size(70, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "From Date";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(416, 57);
+            this.label1.Location = new System.Drawing.Point(370, 46);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 20);
+            this.label1.Size = new System.Drawing.Size(74, 16);
             this.label1.TabIndex = 6;
             this.label1.Text = "Customers:";
             // 
@@ -231,10 +232,10 @@
             // 
             this.panel2.Controls.Add(this.grid_sales_report);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 137);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel2.Location = new System.Drawing.Point(0, 110);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(993, 686);
+            this.panel2.Size = new System.Drawing.Size(883, 548);
             this.panel2.TabIndex = 9;
             // 
             // grid_sales_report
@@ -251,18 +252,20 @@
             this.category_name,
             this.qty,
             this.total_amount});
-            this.grid_sales_report.Location = new System.Drawing.Point(4, 5);
-            this.grid_sales_report.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grid_sales_report.Location = new System.Drawing.Point(4, 4);
+            this.grid_sales_report.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grid_sales_report.Name = "grid_sales_report";
             this.grid_sales_report.ReadOnly = true;
+            this.grid_sales_report.RowHeadersWidth = 51;
             this.grid_sales_report.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_sales_report.Size = new System.Drawing.Size(985, 681);
+            this.grid_sales_report.Size = new System.Drawing.Size(876, 544);
             this.grid_sales_report.TabIndex = 9;
             // 
             // category_name
             // 
             this.category_name.DataPropertyName = "category_name";
             this.category_name.HeaderText = "Category";
+            this.category_name.MinimumWidth = 6;
             this.category_name.Name = "category_name";
             this.category_name.ReadOnly = true;
             // 
@@ -273,25 +276,31 @@
             dataGridViewCellStyle1.NullValue = null;
             this.qty.DefaultCellStyle = dataGridViewCellStyle1;
             this.qty.HeaderText = "Total Quantity";
+            this.qty.MinimumWidth = 6;
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
             // 
             // total_amount
             // 
             this.total_amount.DataPropertyName = "total_amount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.total_amount.DefaultCellStyle = dataGridViewCellStyle2;
             this.total_amount.HeaderText = "Total Amount";
+            this.total_amount.MinimumWidth = 6;
             this.total_amount.Name = "total_amount";
             this.total_amount.ReadOnly = true;
             // 
             // frm_categoryWiseSalesReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(993, 823);
+            this.ClientSize = new System.Drawing.Size(883, 658);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frm_categoryWiseSalesReport";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -325,9 +334,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmb_employees;
+        private System.Windows.Forms.Button btn_print;
         private System.Windows.Forms.DataGridViewTextBoxColumn category_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
-        private System.Windows.Forms.Button btn_print;
     }
 }

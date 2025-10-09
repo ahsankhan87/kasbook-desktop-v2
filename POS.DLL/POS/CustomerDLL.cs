@@ -107,9 +107,9 @@ namespace POS.DLL
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(@"
-        SELECT ISNULL(SUM(CAST(debit AS decimal(18,4)) - CAST(credit AS decimal(18,4))), 0) AS balance 
-        FROM pos_customers_payments 
-        WHERE customer_id = @id AND branch_id = @branch_id", cn))
+            SELECT ISNULL(SUM(CAST(debit AS decimal(18,4)) - CAST(credit AS decimal(18,4))), 0) AS balance 
+            FROM pos_customers_payments 
+            WHERE customer_id = @id AND branch_id = @branch_id", cn))
             {
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = customerId;
                 cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;

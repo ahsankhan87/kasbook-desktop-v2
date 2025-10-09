@@ -150,6 +150,8 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCompanyName = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -887,7 +889,9 @@
             this.toolStripStatusLabel_branch,
             this.toolStripStatusLabel_branch_name,
             this.toolStripStatusLabel_fyear,
-            this.toolStripStatusLabel_fiscalyear});
+            this.toolStripStatusLabel_fiscalyear,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelCompanyName});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
@@ -993,6 +997,17 @@
             resources.ApplyResources(this.toolStripButton_purchasesV1, "toolStripButton_purchasesV1");
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(100, 4, 0, 2);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            // 
+            // toolStripStatusLabelCompanyName
+            // 
+            this.toolStripStatusLabelCompanyName.Name = "toolStripStatusLabelCompanyName";
+            resources.ApplyResources(this.toolStripStatusLabelCompanyName, "toolStripStatusLabelCompanyName");
             // 
             // frm_main
             // 
@@ -1143,5 +1158,7 @@
         private System.Windows.Forms.ToolStripMenuItem debitNoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem generateZATCACSIDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCompanyName;
     }
 }
