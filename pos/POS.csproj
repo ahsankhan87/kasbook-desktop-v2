@@ -329,6 +329,9 @@
     <Compile Include="Customers\frm_search_customers.Designer.cs">
       <DependentUpon>frm_search_customers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\frm_dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Employees\frm_emp_commission_payment.cs">
       <SubType>Form</SubType>
     </Compile>

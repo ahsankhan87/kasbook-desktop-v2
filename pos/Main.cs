@@ -18,6 +18,10 @@ namespace pos
     public partial class frm_main : Form
     {
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
+        
+        // Dashboard panel
+        private Panel dashboardPanel;
+        private FlowLayoutPanel quickAccessPanel;
 
         public frm_main()
         {
@@ -43,16 +47,293 @@ namespace pos
                 usersToolStripMenuItem.Enabled = false;
             }
 
-
             mark_checked_lang_menu(); // language menu mark checked
 
             toolStripStatusLabel_username.Text = UsersModal.logged_in_username;
             toolStripStatusLabel_branch_name.Text = UsersModal.logged_in_branch_name.ToString();
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
-            toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();  
+            toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();
+
+            // Show dashboard as MDI child
+            ShowDashboardAsMdi();
+
+            // When MDI children change, ensure dashboard exists if none open
+            this.MdiChildActivate += (s, eArgs) =>
+            {
+                if (this.MdiChildren.Length == 0)
+                {
+                    ShowDashboardAsMdi();
+                }
+            };
 
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+        }
+        private void CreateDashboardPanel()
+        {
+            // Main dashboard container
+            dashboardPanel = new Panel
+            {
+                Name = "dashboardPanel",
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(240, 244, 247),
+                AutoScroll = true
+            };
+
+            // Welcome banner
+            var welcomePanel = new Panel
+            {
+                Height = 100,
+                Dock = DockStyle.Top,
+                BackColor = Color.FromArgb(41, 128, 185),
+                Padding = new Padding(20)
+            };
+
+            var lblWelcome = new Label
+            {
+                Text = $"Welcome, {UsersModal.logged_in_username}!",
+                Font = new Font("Segoe UI", 18F, FontStyle.Bold),
+                ForeColor = Color.White,
+                AutoSize = true,
+                Location = new Point(20, 15)
+            };
+
+            var lblBranch = new Label
+            {
+                Text = $"Branch: {UsersModal.logged_in_branch_name} | Fiscal Year: {UsersModal.fiscal_year}",
+                Font = new Font("Segoe UI", 10F),
+                ForeColor = Color.FromArgb(236, 240, 241),
+                AutoSize = true,
+                Location = new Point(20, 50)
+            };
+
+            welcomePanel.Controls.AddRange(new Control[] { lblWelcome, lblBranch });
+
+            // Quick Access Panel
+            quickAccessPanel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(20),
+                AutoScroll = true,
+                BackColor = Color.FromArgb(240, 244, 247)
+            };
+
+            dashboardPanel.Controls.Add(quickAccessPanel);
+            dashboardPanel.Controls.Add(welcomePanel);
+
+            this.Controls.Add(dashboardPanel);
+            dashboardPanel.BringToFront();
+        }
+
+        private void LoadDashboardWidgets()
+        {
+            quickAccessPanel.Controls.Clear();
+
+            // Common operations for all users
+            var commonButtons = new List<DashboardButton>
+            {
+                new DashboardButton("New Sale", "Create a new sales transaction", Properties.Resources.Add, Color.FromArgb(46, 204, 113), () => newTransactionToolStripMenuItem2_Click(null, null)),
+                new DashboardButton("Products", "View and manage products", Properties.Resources.Search, Color.FromArgb(52, 152, 219), () => productsServicesToolStripMenuItem_Click(null, null)),
+                new DashboardButton("Customers", "Manage customer records", Properties.Resources.Add, Color.FromArgb(155, 89, 182), () => customersToolStripMenuItem_Click(null, null)),
+                new DashboardButton("Sales Report", "View sales reports", Properties.Resources.Print_32, Color.FromArgb(230, 126, 34), () => salesReportToolStripMenuItem1_Click(null, null))
+            };
+
+            // Admin/authorized operations
+            if (UsersModal.logged_in_user_level == 1)
+            {
+                commonButtons.AddRange(new[]
+                {
+                    new DashboardButton("Purchase", "Create purchase order", Properties.Resources.Add, Color.FromArgb(231, 76, 60), () => newTransactionToolStripMenuItem_Click(null, null)),
+                    new DashboardButton("Suppliers", "Manage suppliers", Properties.Resources.Add, Color.FromArgb(41, 128, 185), () => suppliersToolStripMenuItem_Click(null, null)),
+                    new DashboardButton("Reports", "View all reports", Properties.Resources.Time_Machine, Color.FromArgb(52, 73, 94), () => { }),
+                    new DashboardButton("Settings", "System settings", Properties.Resources.Data_Transfer, Color.FromArgb(127, 140, 141), () => profileToolStripMenuItem_Click(null, null))
+                });
+            }
+
+            foreach (var btn in commonButtons)
+            {
+                quickAccessPanel.Controls.Add(CreateDashboardCard(btn));
+            }
+
+            // Summary cards section
+            var summaryPanel = new Panel
+            {
+                Width = quickAccessPanel.Width - 40,
+                Height = 150,
+                Margin = new Padding(0, 20, 0, 20)
+            };
+
+            LoadSummaryCards(summaryPanel);
+            quickAccessPanel.Controls.Add(summaryPanel);
+        }
+
+        private Panel CreateDashboardCard(DashboardButton button)
+        {
+            var card = new Panel
+            {
+                Width = 200,
+                Height = 140,
+                Margin = new Padding(10),
+                BackColor = Color.White,
+                Cursor = Cursors.Hand
+            };
+
+            // Add shadow effect
+            card.Paint += (s, e) =>
+            {
+                var g = e.Graphics;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                using (var shadow = new System.Drawing.Drawing2D.GraphicsPath())
+                {
+                    shadow.AddRectangle(new Rectangle(2, 2, card.Width - 4, card.Height - 4));
+                    using (var brush = new System.Drawing.Drawing2D.PathGradientBrush(shadow))
+                    {
+                        brush.CenterColor = Color.FromArgb(10, 0, 0, 0);
+                        brush.SurroundColors = new[] { Color.FromArgb(0, 0, 0, 0) };
+                        g.FillPath(brush, shadow);
+                    }
+                }
+            };
+
+            // Color bar at top
+            var colorBar = new Panel
+            {
+                Height = 5,
+                Dock = DockStyle.Top,
+                BackColor = button.Color
+            };
+
+            // Icon
+            var icon = new PictureBox
+            {
+                Image = button.Icon,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Width = 48,
+                Height = 48,
+                Location = new Point((card.Width - 48) / 2, 20)
+            };
+
+            // Title
+            var title = new Label
+            {
+                Text = button.Title,
+                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+                AutoSize = false,
+                Width = card.Width - 20,
+                Height = 25,
+                Location = new Point(10, 75),
+                ForeColor = Color.FromArgb(44, 62, 80)
+            };
+
+            // Description
+            var description = new Label
+            {
+                Text = button.Description,
+                Font = new Font("Segoe UI", 8F),
+                TextAlign = ContentAlignment.TopCenter,
+                AutoSize = false,
+                Width = card.Width - 20,
+                Height = 30,
+                Location = new Point(10, 100),
+                ForeColor = Color.FromArgb(127, 140, 141)
+            };
+
+            card.Controls.AddRange(new Control[] { colorBar, icon, title, description });
+
+            // Hover effect
+            card.MouseEnter += (s, e) =>
+            {
+                card.BackColor = Color.FromArgb(250, 250, 250);
+                title.ForeColor = button.Color;
+            };
+            card.MouseLeave += (s, e) =>
+            {
+                card.BackColor = Color.White;
+                title.ForeColor = Color.FromArgb(44, 62, 80);
+            };
+
+            // Click handler
+            card.Click += (s, e) => button.Action?.Invoke();
+            icon.Click += (s, e) => button.Action?.Invoke();
+            title.Click += (s, e) => button.Action?.Invoke();
+            description.Click += (s, e) => button.Action?.Invoke();
+
+            return card;
+        }
+
+        private void LoadSummaryCards(Panel container)
+        {
+            try
+            {
+                // Fetch today's summary
+                var salesBLL = new SalesBLL();
+                var today = DateTime.Today;
+
+                // Get today's sales count and amount (you'll need to add these methods to your BLL)
+                int todaySalesCount = 0;
+                decimal todaySalesAmount = 0;
+                int lowStockCount = 0;
+
+                // Create summary cards
+                CreateSummaryCard(container, "Today's Sales", todaySalesCount.ToString(), Color.FromArgb(46, 204, 113), 10, 10);
+                CreateSummaryCard(container, "Total Amount", todaySalesAmount.ToString("C"), Color.FromArgb(52, 152, 219), 220, 10);
+                CreateSummaryCard(container, "Low Stock Items", lowStockCount.ToString(), Color.FromArgb(231, 76, 60), 430, 10);
+            }
+            catch
+            {
+                // Silently fail if data cannot be loaded
+            }
+        }
+
+        private void CreateSummaryCard(Panel parent, string title, string value, Color color, int x, int y)
+        {
+            var card = new Panel
+            {
+                Width = 200,
+                Height = 100,
+                Location = new Point(x, y),
+                BackColor = color
+            };
+
+            var lblTitle = new Label
+            {
+                Text = title,
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = Color.White,
+                Location = new Point(15, 15),
+                AutoSize = true
+            };
+
+            var lblValue = new Label
+            {
+                Text = value,
+                Font = new Font("Segoe UI", 20F, FontStyle.Bold),
+                ForeColor = Color.White,
+                Location = new Point(15, 40),
+                AutoSize = true
+            };
+
+            card.Controls.AddRange(new Control[] { lblTitle, lblValue });
+            parent.Controls.Add(card);
+        }
+        // Helper class for dashboard buttons
+        private class DashboardButton
+        {
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public Image Icon { get; set; }
+            public Color Color { get; set; }
+            public Action Action { get; set; }
+
+            public DashboardButton(string title, string description, Image icon, Color color, Action action)
+            {
+                Title = title;
+                Description = description;
+                Icon = icon;
+                Color = color;
+                Action = action;
+            }
         }
 
         private void load_modules()
@@ -171,6 +452,11 @@ namespace pos
                         break;
                 }
 
+            }
+             // Refresh dashboard after loading modules
+            if (dashboardPanel != null)
+            {
+                LoadDashboardWidgets();
             }
         }
 
@@ -1891,6 +2177,36 @@ namespace pos
         private void DebitNote_FormClosed(object sender, FormClosedEventArgs e)
         {
             DebitNote = null;
+        }
+
+        // Exposed actions used by dashboard
+        public void OpenNewSale() => newTransactionToolStripMenuItem2_Click(null, EventArgs.Empty);
+        public void OpenProducts() => ProductsToolStripButton_Click(null, EventArgs.Empty);
+        public void OpenCustomers() => CustomersToolStripButton_Click(null, EventArgs.Empty);
+        public void OpenSalesReport() => salesReportToolStripMenuItem1_Click(null, EventArgs.Empty);
+        public void OpenPurchase() => newTransactionToolStripMenuItem_Click(null, EventArgs.Empty);
+        public void OpenSuppliers() => SuppliersToolStripButton_Click(null, EventArgs.Empty);
+        public void OpenReportsHome() => salesReportToolStripMenuItem1_Click(null, EventArgs.Empty);
+        public void OpenSettings() => profileToolStripMenuItem_Click(null, EventArgs.Empty);
+
+        private Form _dashboardForm;
+
+        private void ShowDashboardAsMdi()
+        {
+            if (_dashboardForm == null || _dashboardForm.IsDisposed)
+            {
+                _dashboardForm = new pos.Dashboard.frm_dashboard(this)
+                {
+                    MdiParent = this,
+                    WindowState = FormWindowState.Maximized
+                };
+                _dashboardForm.FormClosed += (s, e) => _dashboardForm = null;
+                _dashboardForm.Show();
+            }
+            else
+            {
+                _dashboardForm.Activate();
+            }
         }
     }
 }
