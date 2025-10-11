@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_SalesReport));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
@@ -42,6 +42,8 @@
             this.txt_product_name = new System.Windows.Forms.TextBox();
             this.txt_product_code = new System.Windows.Forms.TextBox();
             this.btn_print = new System.Windows.Forms.Button();
+            this.btn_export = new System.Windows.Forms.Button();
+            this.btn_search = new System.Windows.Forms.Button();
             this.cmb_sale_account = new System.Windows.Forms.ComboBox();
             this.cmb_sale_type = new System.Windows.Forms.ComboBox();
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
@@ -67,8 +69,6 @@
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.btn_export = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_report)).BeginInit();
@@ -81,6 +81,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.CmbCondition);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.cmb_employees);
@@ -101,14 +102,13 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label4);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // CmbCondition
             // 
+            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCondition.FormattingEnabled = true;
-            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.Name = "CmbCondition";
             this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
             // 
@@ -119,10 +119,10 @@
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.Name = "cmb_employees";
             // 
             // txt_product_name
@@ -144,32 +144,46 @@
             this.btn_print.UseVisualStyleBackColor = true;
             this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
             // 
+            // btn_export
+            // 
+            resources.ApplyResources(this.btn_export, "btn_export");
+            this.btn_export.Name = "btn_export";
+            this.btn_export.UseVisualStyleBackColor = true;
+            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
+            // 
+            // btn_search
+            // 
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
             // cmb_sale_account
             // 
+            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_account.FormattingEnabled = true;
             this.cmb_sale_account.Items.AddRange(new object[] {
             resources.GetString("cmb_sale_account.Items"),
             resources.GetString("cmb_sale_account.Items1"),
             resources.GetString("cmb_sale_account.Items2")});
-            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.Name = "cmb_sale_account";
             // 
             // cmb_sale_type
             // 
+            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_type.FormattingEnabled = true;
             this.cmb_sale_type.Items.AddRange(new object[] {
             resources.GetString("cmb_sale_type.Items"),
             resources.GetString("cmb_sale_type.Items1"),
             resources.GetString("cmb_sale_type.Items2")});
-            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.Name = "cmb_sale_type";
             // 
             // txt_to_date
             // 
-            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_to_date, "txt_to_date");
+            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_to_date.Name = "txt_to_date";
             // 
             // label6
@@ -179,8 +193,8 @@
             // 
             // txt_from_date
             // 
-            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_from_date, "txt_from_date");
+            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_from_date.Name = "txt_from_date";
             // 
             // label2
@@ -190,10 +204,10 @@
             // 
             // cmb_customers
             // 
+            resources.ApplyResources(this.cmb_customers, "cmb_customers");
             this.cmb_customers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_customers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_customers.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_customers, "cmb_customers");
             this.cmb_customers.Name = "cmb_customers";
             // 
             // label5
@@ -218,16 +232,16 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_sales_report);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_sales_report);
             this.panel2.Name = "panel2";
             // 
             // grid_sales_report
             // 
+            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AllowUserToAddRows = false;
             this.grid_sales_report.AllowUserToDeleteRows = false;
             this.grid_sales_report.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sales_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -306,10 +320,10 @@
             // quantity_sold
             // 
             this.quantity_sold.DataPropertyName = "quantity_sold";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.quantity_sold.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.quantity_sold.DefaultCellStyle = dataGridViewCellStyle11;
             this.quantity_sold.FillWeight = 54.6067F;
             resources.ApplyResources(this.quantity_sold, "quantity_sold");
             this.quantity_sold.Name = "quantity_sold";
@@ -318,9 +332,9 @@
             // unit_price
             // 
             this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle12;
             this.unit_price.FillWeight = 54.6067F;
             resources.ApplyResources(this.unit_price, "unit_price");
             this.unit_price.Name = "unit_price";
@@ -329,9 +343,9 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle13;
             this.discount_value.FillWeight = 54.6067F;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
@@ -340,10 +354,10 @@
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.vat.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.vat.DefaultCellStyle = dataGridViewCellStyle14;
             this.vat.FillWeight = 54.6067F;
             resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
@@ -352,28 +366,14 @@
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle15;
             this.total.FillWeight = 54.6067F;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
             this.total.ReadOnly = true;
-            // 
-            // btn_search
-            // 
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
-            // btn_export
-            // 
-            resources.ApplyResources(this.btn_export, "btn_export");
-            this.btn_export.Name = "btn_export";
-            this.btn_export.UseVisualStyleBackColor = true;
-            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
             // 
             // frm_SalesReport
             // 
@@ -418,6 +418,8 @@
         private System.Windows.Forms.Button btn_print;
         private System.Windows.Forms.ComboBox CmbCondition;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btn_export;
+        private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
@@ -430,7 +432,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
-        private System.Windows.Forms.Button btn_export;
-        private System.Windows.Forms.Button btn_search;
     }
 }
