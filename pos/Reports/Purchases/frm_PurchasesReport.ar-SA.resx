@@ -118,43 +118,64 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 76</value>
+  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>48, 16</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>الموظفين</value>
   </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 17</value>
+  </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>58, 16</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>كود المنتج
 </value>
   </data>
+  <data name="Btn_print.Text" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="Btn_export.Text" xml:space="preserve">
+    <value>تصدير إلى إكسل</value>
+  </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث (F3)</value>
   </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 17</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
+    <value>50, 16</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>نوع البيع
 </value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>54, 16</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>الى تاريخ</value>
   </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 46</value>
+  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>51, 16</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>من تاريخ</value>
   </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 48</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>36, 16</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>المورد</value>
@@ -163,12 +184,11 @@
   <data name="grid_Purchases_report.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة
-</value>
-  </data>
   <data name="purchase_date.HeaderText" xml:space="preserve">
     <value>تاريخ</value>
+  </data>
+  <data name="invoice_no.HeaderText" xml:space="preserve">
+    <value>رقم الفاتورة</value>
   </data>
   <data name="supplier_name.HeaderText" xml:space="preserve">
     <value>المورد</value>
@@ -176,12 +196,14 @@
   <data name="product_name.HeaderText" xml:space="preserve">
     <value>اسم الصنف</value>
   </data>
+  <data name="loc_code.HeaderText" xml:space="preserve">
+    <value>موقع</value>
+  </data>
   <data name="quantity.HeaderText" xml:space="preserve">
     <value>الكمية</value>
   </data>
   <data name="cost_price.HeaderText" xml:space="preserve">
-    <value>سعر التكلفة
-</value>
+    <value>سعر التكلفة</value>
   </data>
   <data name="discount_value.HeaderText" xml:space="preserve">
     <value>خصم</value>
