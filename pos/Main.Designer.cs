@@ -144,6 +144,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelCompanyName = new System.Windows.Forms.ToolStripStatusLabel();
             this.sideMenu = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_dashboard = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_sales = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchase = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_products = new System.Windows.Forms.ToolStripButton();
@@ -945,6 +946,7 @@
             resources.ApplyResources(this.sideMenu, "sideMenu");
             this.sideMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.sideMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_dashboard,
             this.toolStripButton_sales,
             this.toolStripButton_purchase,
             this.toolStripButton_products,
@@ -956,6 +958,12 @@
             this.toolStripButton1});
             this.sideMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.sideMenu.Name = "sideMenu";
+            // 
+            // toolStripButton_dashboard
+            // 
+            resources.ApplyResources(this.toolStripButton_dashboard, "toolStripButton_dashboard");
+            this.toolStripButton_dashboard.Name = "toolStripButton_dashboard";
+            this.toolStripButton_dashboard.Click += new System.EventHandler(this.toolStripButton_dashboard_Click);
             // 
             // toolStripButton_sales
             // 
@@ -1168,5 +1176,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCompanyName;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton_dashboard;
     }
 }

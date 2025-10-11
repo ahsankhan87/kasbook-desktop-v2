@@ -1990,6 +1990,11 @@ namespace pos
             frm.Show();
         }
 
+        private void toolStripButton_dashboard_Click(object sender, EventArgs e)
+        {
+            ShowDashboardAsMdi();
+        }
+
         //private void CreateDashboardPanel()
         //{
         //    // Main dashboard container
