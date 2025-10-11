@@ -152,6 +152,7 @@
             this.toolStripButtonDailySaleReport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -951,7 +952,8 @@
             this.toolStripButton_suppliers,
             this.toolStripButtonDailySaleReport,
             this.toolStripButton_salesv1,
-            this.toolStripButton_purchasesV1});
+            this.toolStripButton_purchasesV1,
+            this.toolStripButton1});
             this.sideMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.sideMenu.Name = "sideMenu";
             // 
@@ -1008,6 +1010,11 @@
             resources.ApplyResources(this.toolStripButton_purchasesV1, "toolStripButton_purchasesV1");
             this.toolStripButton_purchasesV1.Name = "toolStripButton_purchasesV1";
             this.toolStripButton_purchasesV1.Click += new System.EventHandler(this.toolStripButton_purchasesV1_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Name = "toolStripButton1";
+            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             // 
             // frm_main
             // 
@@ -1160,5 +1167,6 @@
         private System.Windows.Forms.ToolStripMenuItem generateZATCACSIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCompanyName;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

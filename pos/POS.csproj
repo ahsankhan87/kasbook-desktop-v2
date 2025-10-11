@@ -711,6 +711,39 @@
     <Compile Include="Master\frm_shortcuts.Designer.cs">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Accounts\frm_AccountPayableAging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_AccountReceivableAging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_APAgingReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_ARAgingReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_CustomerLedgerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_DaybookReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_DuePaymentsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_OverdueReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\frm_SupplierLedgerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Common\BaseReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Common\DataGridReportViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\Common\ExcelExportHelper.cs" />
     <Compile Include="Reports\Dashboard\frm_branchWiseSummary.cs">
       <SubType>Form</SubType>
@@ -719,6 +752,33 @@
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\DGVPrinter.cs" />
+    <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_GeneralLedgerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_ProfitAndLossReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_TrialBalanceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Inventory\frm_AgingInventoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Inventory\frm_InventoryQohReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Inventory\frm_InventoryValuationReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Inventory\frm_LowStockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Inventory\frm_StockMovementReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\Products\frm_products_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -769,6 +829,9 @@
     <Compile Include="Reports\Purchase Orders\frm_purchase_order_report.Designer.cs">
       <DependentUpon>frm_purchase_order_report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Purchases\frm_PurchaseRegisterReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\Purchases\frm_purchase_invoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -804,6 +867,30 @@
     </Compile>
     <Compile Include="Reports\Sales\frm_daily_salesReport.Designer.cs">
       <DependentUpon>frm_daily_salesReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_PaymentMixReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_PromotionsDiscountsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_ReturnsRefundsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesByCategoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesByCustomerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesByEmployeeReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesByProductReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesRegisterReport.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\Sales\invoice_dataset.cs">
       <DependentUpon>invoice_dataset.xsd</DependentUpon>
@@ -1041,6 +1128,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>sales_invoice_ar.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_VatPurchasesSummaryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_VatSalesSummaryReport.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\Warehouse\frm_warehouse_report.cs">
       <SubType>Form</SubType>
@@ -1794,6 +1887,12 @@
     <EmbeddedResource Include="Master\frm_shortcuts.resx">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\frm_APAgingReport.resx">
+      <DependentUpon>frm_APAgingReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\frm_CustomerLedgerReport.resx">
+      <DependentUpon>frm_CustomerLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
     </EmbeddedResource>
@@ -1855,6 +1954,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_daily_salesReport.resx">
       <DependentUpon>frm_daily_salesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_PromotionsDiscountsReport.resx">
+      <DependentUpon>frm_PromotionsDiscountsReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.ar-SA.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>

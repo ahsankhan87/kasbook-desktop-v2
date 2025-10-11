@@ -1,10 +1,11 @@
+﻿using POS.BLL;
+using POS.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using POS.Core;
 
 namespace pos.Dashboard
 {
@@ -49,7 +50,7 @@ namespace pos.Dashboard
 
             var lblInfo = new Label
             {
-                Text = $"{UsersModal.logged_in_branch_name} � {UsersModal.fiscal_year} � {DateTime.Now:dddd, MMMM dd, yyyy}",
+                Text = $"{UsersModal.logged_in_branch_name} • {UsersModal.fiscal_year} • {DateTime.Now:dddd, MMMM dd, yyyy}",
                 Font = new Font("Segoe UI", 10F),
                 ForeColor = Color.FromArgb(220, 230, 240),
                 AutoSize = true,
@@ -79,6 +80,17 @@ namespace pos.Dashboard
             quickAccessPanel.Controls.Add(lblQuickAccess);
             LoadQuickAccessButtons();
 
+            //// Summary cards section
+            //var summaryPanel = new Panel
+            //{
+            //    Width = quickAccessPanel.Width - 40,
+            //    Height = 150,
+            //    Margin = new Padding(0, 20, 0, 20)
+            //};
+
+            //LoadSummaryCards(summaryPanel);
+            //quickAccessPanel.Controls.Add(summaryPanel);
+
             Controls.Add(quickAccessPanel);
             Controls.Add(welcomePanel);
         }
@@ -87,20 +99,20 @@ namespace pos.Dashboard
         {
             var buttons = new List<DashboardButtonInfo>
             {
-                new DashboardButtonInfo("New Sale", "Create a new sales invoice", Color.FromArgb(46, 204, 113), "??", _main.OpenNewSale),
-                new DashboardButtonInfo("Products", "View and manage products", Color.FromArgb(52, 152, 219), "??", _main.OpenProducts),
-                new DashboardButtonInfo("Customers", "Manage customer records", Color.FromArgb(155, 89, 182), "??", _main.OpenCustomers),
-                new DashboardButtonInfo("Sales Report", "View detailed sales reports", Color.FromArgb(230, 126, 34), "??", _main.OpenSalesReport)
+                new DashboardButtonInfo("New Sale", "Create a new sales invoice", Color.FromArgb(46, 204, 113), "💰", _main.OpenNewSale),
+                new DashboardButtonInfo("Products", "View and manage products", Color.FromArgb(52, 152, 219), "📦", _main.OpenProducts),
+                new DashboardButtonInfo("Customers", "Manage customer records", Color.FromArgb(155, 89, 182), "👥", _main.OpenCustomers),
+                new DashboardButtonInfo("Sales Report", "View detailed sales reports", Color.FromArgb(230, 126, 34), "📊", _main.OpenSalesReport)
             };
 
             if (UsersModal.logged_in_user_level == 1)
             {
                 buttons.AddRange(new[]
                 {
-                    new DashboardButtonInfo("Purchase", "Create purchase order", Color.FromArgb(231, 76, 60), "??", _main.OpenPurchase),
-                    new DashboardButtonInfo("Suppliers", "Manage suppliers", Color.FromArgb(41, 128, 185), "??", _main.OpenSuppliers),
-                    new DashboardButtonInfo("Reports", "Financial & inventory reports", Color.FromArgb(52, 73, 94), "??", _main.OpenReportsHome),
-                    new DashboardButtonInfo("Settings", "System configuration", Color.FromArgb(127, 140, 141), "??", _main.OpenSettings)
+                    new DashboardButtonInfo("Purchase", "Create purchase order", Color.FromArgb(231, 76, 60), "🛒", _main.OpenPurchase),
+                    new DashboardButtonInfo("Suppliers", "Manage suppliers", Color.FromArgb(41, 128, 185), "🏢", _main.OpenSuppliers),
+                    new DashboardButtonInfo("Reports", "Financial & inventory reports", Color.FromArgb(52, 73, 94), "📈", _main.OpenReportsHome),
+                    new DashboardButtonInfo("Settings", "System configuration", Color.FromArgb(127, 140, 141), "⚙️", _main.OpenSettings)
                 });
             }
 
@@ -172,6 +184,61 @@ namespace pos.Dashboard
             card.MouseLeave += (s, e) => { card.BackColor = Color.White; title.ForeColor = Color.FromArgb(44, 62, 80); card.Padding = new Padding(0); };
 
             return card;
+        }
+        private void LoadSummaryCards(Panel container)
+        {
+            try
+            {
+                // Fetch today's summary
+                var salesBLL = new SalesBLL();
+                var today = DateTime.Today;
+
+                // Get today's sales count and amount (you'll need to add these methods to your BLL)
+                int todaySalesCount = 0;
+                decimal todaySalesAmount = 0;
+                int lowStockCount = 0;
+
+                // Create summary cards
+                CreateSummaryCard(container, "Today's Sales", todaySalesCount.ToString(), Color.FromArgb(46, 204, 113), 10, 10);
+                CreateSummaryCard(container, "Total Amount", todaySalesAmount.ToString("C"), Color.FromArgb(52, 152, 219), 220, 10);
+                CreateSummaryCard(container, "Low Stock Items", lowStockCount.ToString(), Color.FromArgb(231, 76, 60), 430, 10);
+            }
+            catch
+            {
+                // Silently fail if data cannot be loaded
+            }
+        }
+
+        private void CreateSummaryCard(Panel parent, string title, string value, Color color, int x, int y)
+        {
+            var card = new Panel
+            {
+                Width = 200,
+                Height = 100,
+                Location = new Point(x, y),
+                BackColor = color
+            };
+
+            var lblTitle = new Label
+            {
+                Text = title,
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = Color.White,
+                Location = new Point(15, 15),
+                AutoSize = true
+            };
+
+            var lblValue = new Label
+            {
+                Text = value,
+                Font = new Font("Segoe UI", 20F, FontStyle.Bold),
+                ForeColor = Color.White,
+                Location = new Point(15, 40),
+                AutoSize = true
+            };
+
+            card.Controls.AddRange(new Control[] { lblTitle, lblValue });
+            parent.Controls.Add(card);
         }
 
         private class DashboardButtonInfo
