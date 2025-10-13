@@ -1646,6 +1646,7 @@ namespace POS.DLL
                 {
                     String query1 = "UPDATE pos_purchases SET supplier_id=@supplier_id, supplier_invoice_no=@supplierInvoiceNo WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
                     String query2 = "UPDATE pos_inventory SET supplier_id=@supplier_id  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
+                    String query3 = "UPDATE pos_suppliers_payments SET supplier_id=@supplier_id  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
 
                     if (cn.State == ConnectionState.Closed)
                     {
@@ -1666,6 +1667,13 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@supplier_id", supplier_id); 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); 
                             cmd.ExecuteNonQuery(); 
+                        }
+                        using (SqlCommand cmd = new SqlCommand(query3, cn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                            cmd.Parameters.AddWithValue("@supplier_id", supplier_id);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.ExecuteNonQuery();
                         }
 
                     }

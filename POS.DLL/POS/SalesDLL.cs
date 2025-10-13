@@ -2326,7 +2326,8 @@ namespace POS.DLL
                 {
                     String query1 = "UPDATE pos_sales SET customer_id=@customerId WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
                     String query2 = "UPDATE pos_inventory SET customer_id=@customerId  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
-                    
+                    String query3 = "UPDATE pos_customers_payments SET customer_id=@customerId  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
+
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
@@ -2343,6 +2344,7 @@ namespace POS.DLL
                         
                         using (SqlCommand cmd = new SqlCommand(query1, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@customerId", customerId); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
                         using (SqlCommand cmd = new SqlCommand(query2, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@customerId", customerId); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
+                        using (SqlCommand cmd = new SqlCommand(query3, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@customerId", customerId); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
 
                     }
 
