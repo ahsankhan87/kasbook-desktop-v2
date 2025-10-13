@@ -1325,6 +1325,9 @@
     <EmbeddedResource Include="Accounts\Groups\frm_groups.resx">
       <DependentUpon>frm_groups.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Journals\frm_journal_entries.ar-SA.resx">
+      <DependentUpon>frm_journal_entries.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Journals\frm_journal_entries.resx">
       <DependentUpon>frm_journal_entries.cs</DependentUpon>
     </EmbeddedResource>
