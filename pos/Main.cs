@@ -12,6 +12,7 @@ using System.Globalization;
 using POS.DLL;
 using POS.Core;
 using POS.BLL;
+using pos.Reports.Banks;
 
 namespace pos
 {
@@ -1939,60 +1940,35 @@ namespace pos
                 _dashboardForm.Activate();
             }
         }
-        private void salesByEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Sales.frm_SalesByEmployeeReport { MdiParent = this };
-            frm.Show();
-        }
-        private void returnsRefundsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Sales.frm_ReturnsRefundsReport { MdiParent = this };
-            frm.Show();
-        }
-        private void promotionsDiscountsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Sales.frm_PromotionsDiscountsReport { MdiParent = this };
-            frm.Show();
-        }
-        private void paymentMixToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Sales.frm_PaymentMixReport { MdiParent = this };
-            frm.Show();
-        }
-        private void inventoryValuationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Inventory.frm_InventoryValuationReport { MdiParent = this };
-            frm.Show();
-        }
-        private void stockMovementToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Inventory.frm_StockMovementReport { MdiParent = this };
-            frm.Show();
-        }
-        private void agingInventoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Inventory.frm_AgingInventoryReport { MdiParent = this };
-            frm.Show();
-        }
-        private void vatSalesSummaryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Taxes.frm_VatSalesSummaryReport { MdiParent = this };
-            frm.Show();
-        }
-        private void vatPurchasesSummaryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Taxes.frm_VatPurchasesSummaryReport { MdiParent = this };
-            frm.Show();
-        }
-        private void generalLedgerNewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frm = new pos.Reports.Financial.frm_GeneralLedgerReport { MdiParent = this };
-            frm.Show();
-        }
+        
 
         private void toolStripButton_dashboard_Click(object sender, EventArgs e)
         {
             ShowDashboardAsMdi();
+        }
+
+       
+        Form AllBankReport;
+        private void banksReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AllBankReport == null)
+            {
+                AllBankReport = new frm_AllBankReport
+                {
+                    MdiParent = this
+                };
+                AllBankReport.FormClosed += new FormClosedEventHandler(AllBankReport_FormClosed);
+                AllBankReport.Show();
+            }
+            else
+            {
+                AllBankReport.Activate();
+            }
+        }
+
+        private void AllBankReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            AllBankReport = null;
         }
 
         //private void CreateDashboardPanel()

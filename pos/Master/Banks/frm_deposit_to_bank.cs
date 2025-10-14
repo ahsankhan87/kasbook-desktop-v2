@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace pos.Master.Banks
 {
-    public partial class frm_bank_payment : Form
+    public partial class frm_deposit_to_bank : Form
     {
         private frm_banks mainForm;
         public int _bank_id;
@@ -20,7 +20,7 @@ namespace pos.Master.Banks
         public string _invoice_no;
         public string _bankName;
 
-        public frm_bank_payment(frm_banks mainForm, int bank_id,int bank_account_code,string bankName = "")
+        public frm_deposit_to_bank(frm_banks mainForm, int bank_id, int bank_account_code,string bankName="")
         {
             this.mainForm = mainForm;
             _bank_id = bank_id;
@@ -29,17 +29,17 @@ namespace pos.Master.Banks
 
             InitializeComponent();
         }
-        public frm_bank_payment()
+        
+        public frm_deposit_to_bank()
         {
             InitializeComponent();
         }
 
-        private void frm_bank_payment_Load(object sender, EventArgs e)
+        private void frm_payment_to_bank_Load(object sender, EventArgs e)
         {
-            lbl_header_title.Text = "Make payment from bank (" + _bankName + ")";
+            lbl_header_title.Text = "Deposit amount to bank ("+_bankName+")";
             get_accounts_dropdownlist();
         }
-
         public string GetMAXInvoiceNo()
         {
             JournalsBLL JournalsBLL_obj = new JournalsBLL();
@@ -69,7 +69,7 @@ namespace pos.Master.Banks
         {
             if (_invoice_no != string.Empty && _bank_id != 0)
             {
-                if (_bank_account_code == 0)
+                if(_bank_account_code == 0)
                 {
                     MessageBox.Show("Bank GL account not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -79,29 +79,30 @@ namespace pos.Master.Banks
 
                 if (cash_account_id == 0)
                 {
-                    MessageBox.Show("Please select transfer to GL Account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Please select transfer from GL Account (Cash Account).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                if (string.IsNullOrEmpty(txt_total_amount.Text) || Convert.ToDouble(txt_total_amount.Text) <= 0)
+                if (txt_total_amount.Text == string.Empty || Convert.ToDouble(txt_total_amount.Text) <= 0)
                 {
                     MessageBox.Show("Please enter valid amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+                ///GET MAX INVOICE NO
                 _invoice_no = GetMAXInvoiceNo();
-                
-                ///CASH JOURNAL ENTRY (DEBIT)
-                Insert_Journal_entry(_invoice_no, cash_account_id, Convert.ToDouble(txt_total_amount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
 
-                ///BANK JOURNAL ENTRY (CREDIT)
-                int entry_id = Insert_Journal_entry(_invoice_no, _bank_account_code, 0, Convert.ToDouble(txt_total_amount.Text), txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
+                ///BANK JOURNAL ENTRY (DEBIT)
+                Insert_Journal_entry(_invoice_no, _bank_account_code, Convert.ToDouble(txt_total_amount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
 
-                ///ADD ENTRY INTO bank PAYMENT(CREDIT)
-                Insert_Journal_entry(_invoice_no, cash_account_id, 0, Convert.ToDouble(txt_total_amount.Text), txt_payment_date.Value.Date, txt_description.Text, _bank_id, 0, entry_id);
+                ///CASH JOURNAL ENTRY (CREDIT)
+                int entry_id = Insert_Journal_entry(_invoice_no, cash_account_id, 0, Convert.ToDouble(txt_total_amount.Text), txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
 
-               
+                ///ADD ENTRY INTO BANK PAYMENT(DEBIT)
+                Insert_Journal_entry(_invoice_no, _bank_account_code,  Convert.ToDouble(txt_total_amount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, _bank_id, 0, entry_id);
+
+
                 if (entry_id > 0)
                 {
-                    MessageBox.Show("Entry saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Amount deposited successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -140,7 +141,7 @@ namespace pos.Master.Banks
             return journal_id;
         }
 
-       
+
         private void txt_total_amount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -169,7 +170,7 @@ namespace pos.Master.Banks
             }
         }
 
-        private void frm_bank_payment_KeyDown(object sender, KeyEventArgs e)
+        private void frm_deposit_to_bank_KeyDown(object sender, KeyEventArgs e)
         {
             //when you enter in textbox it will goto next textbox, work like TAB key
             if (e.KeyData == Keys.Enter)
@@ -177,6 +178,5 @@ namespace pos.Master.Banks
                 SendKeys.Send("{TAB}");
             }
         }
-
     }
 }

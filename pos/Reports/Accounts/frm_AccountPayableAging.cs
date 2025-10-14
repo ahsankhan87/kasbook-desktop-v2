@@ -14,5 +14,17 @@ namespace pos.Reports.Accounts
             // TODO: implement via AccountsBLL when available
             return new DataTable();
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_AccountPayableAging
+            // 
+            this.ClientSize = new System.Drawing.Size(978, 485);
+            this.Name = "frm_AccountPayableAging";
+            this.ResumeLayout(false);
+
+        }
     }
 }

@@ -22,5 +22,17 @@ namespace pos.Reports.Inventory
             dt.Columns.Add("90+", typeof(decimal));
             return dt;
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_AgingInventoryReport
+            // 
+            this.ClientSize = new System.Drawing.Size(993, 399);
+            this.Name = "frm_AgingInventoryReport";
+            this.ResumeLayout(false);
+
+        }
     }
 }

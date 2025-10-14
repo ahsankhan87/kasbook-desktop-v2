@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using pos.Reports.Banks;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -259,10 +260,12 @@ namespace pos.Master.Banks
         private void btn_payment_Click(object sender, EventArgs e)
         {
             string bank_id = txt_id.Text;
+            string bankName = lbl_bank_name.Text;
             int bank_account_code = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
+            
             if (bank_id != "")
             {
-                frm_bank_payment obj = new frm_bank_payment(this, int.Parse(bank_id), bank_account_code);
+                frm_bank_payment obj = new frm_bank_payment(this, int.Parse(bank_id), bank_account_code,bankName);
                 obj.ShowDialog();
                 
             }
@@ -315,6 +318,41 @@ namespace pos.Master.Banks
                 load_bank_detail(int.Parse(bank_id));
 
             }
+        }
+
+        private void Btn_deposit_Click(object sender, EventArgs e)
+        {
+            string bank_id = txt_id.Text;
+            string bankName = lbl_bank_name.Text;
+            int bank_account_code = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
+
+            if (bank_id != "")
+            {
+                frm_deposit_to_bank obj = new frm_deposit_to_bank(this, int.Parse(bank_id), bank_account_code, bankName);
+                obj.ShowDialog();
+
+            }
+        }
+
+        private void Btn_bank_report_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(txt_id.Text))
+                {
+                    MessageBox.Show("Please select bank to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                int bankId = int.Parse(txt_id.Text);
+
+                frm_bankLedgerReport bankLedger = new frm_bankLedgerReport(bankId);
+                bankLedger.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }

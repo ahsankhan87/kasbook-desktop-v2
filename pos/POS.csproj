@@ -399,6 +399,12 @@
     <Compile Include="Master\Banks\frm_bank_payment.Designer.cs">
       <DependentUpon>frm_bank_payment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Master\Banks\frm_deposit_to_bank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Banks\frm_deposit_to_bank.Designer.cs">
+      <DependentUpon>frm_deposit_to_bank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Master\Companies\zatca\AutoGenerateCSID.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -737,6 +743,30 @@
     </Compile>
     <Compile Include="Reports\Accounts\frm_SupplierLedgerReport.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Banks\BankLedger.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankLedger.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Banks\BanksReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BanksReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Banks\frm_AllBankReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Banks\frm_AllBankReport.Designer.cs">
+      <DependentUpon>frm_AllBankReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Banks\frm_bankLedgerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Banks\frm_bankLedgerReport.Designer.cs">
+      <DependentUpon>frm_bankLedgerReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Common\BaseReportForm.cs">
       <SubType>Form</SubType>
@@ -1501,6 +1531,9 @@
     <EmbeddedResource Include="Master\Banks\frm_bank_payment.resx">
       <DependentUpon>frm_bank_payment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master\Banks\frm_deposit_to_bank.resx">
+      <DependentUpon>frm_deposit_to_bank.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Master\Branches\frm_addBranch.ar-SA.resx">
       <DependentUpon>frm_addBranch.cs</DependentUpon>
     </EmbeddedResource>
@@ -1893,14 +1926,40 @@
     <EmbeddedResource Include="Master\frm_shortcuts.resx">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\frm_AccountPayableAging.resx">
+      <DependentUpon>frm_AccountPayableAging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\frm_AccountReceivableAging.resx">
+      <DependentUpon>frm_AccountReceivableAging.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Accounts\frm_APAgingReport.resx">
       <DependentUpon>frm_APAgingReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Accounts\frm_CustomerLedgerReport.resx">
       <DependentUpon>frm_CustomerLedgerReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Banks\BankLedger.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BankLedger.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Banks\BanksReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BanksReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Banks\frm_AllBankReport.resx">
+      <DependentUpon>frm_AllBankReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Banks\frm_bankLedgerReport.resx">
+      <DependentUpon>frm_bankLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Inventory\frm_AgingInventoryReport.resx">
+      <DependentUpon>frm_AgingInventoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Inventory\frm_LowStockReport.resx">
+      <DependentUpon>frm_LowStockReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\frm_products_report.resx">
       <DependentUpon>frm_products_report.cs</DependentUpon>
@@ -1963,6 +2022,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_PromotionsDiscountsReport.resx">
       <DependentUpon>frm_PromotionsDiscountsReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_SalesByCategoryReport.resx">
+      <DependentUpon>frm_SalesByCategoryReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.ar-SA.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>

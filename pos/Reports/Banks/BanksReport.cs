@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pos.Accounts.Reports.AP {
+namespace pos.Reports.Banks {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace pos.Accounts.Reports.AP {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AccountPayableReport : ReportClass {
+    public class BanksReport : ReportClass {
         
-        public AccountPayableReport() {
+        public BanksReport() {
         }
         
         public override string ResourceName {
             get {
-                return "AccountPayableReport.rpt";
+                return "BanksReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace pos.Accounts.Reports.AP {
         
         public override string FullResourceName {
             get {
-                return "pos.Accounts.Reports.AP.AccountPayableReport.rpt";
+                return "pos.Reports.Banks.BanksReport.rpt";
             }
             set {
                 // Do nothing
@@ -114,9 +114,9 @@ namespace pos.Accounts.Reports.AP {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAccountPayableReport : Component, ICachedReport {
+    public class CachedBanksReport : Component, ICachedReport {
         
-        public CachedAccountPayableReport() {
+        public CachedBanksReport() {
         }
         
         [Browsable(false)]
@@ -153,7 +153,7 @@ namespace pos.Accounts.Reports.AP {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AccountPayableReport rpt = new AccountPayableReport();
+            BanksReport rpt = new BanksReport();
             rpt.Site = this.Site;
             return rpt;
         }

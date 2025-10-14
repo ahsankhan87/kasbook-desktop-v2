@@ -22,5 +22,23 @@ namespace pos.Reports.Inventory
             var dt = ds != null && ds.Tables.Count > 0 ? ds.Tables["StockReport"] : new DataTable();
             return dt;
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_LowStockReport
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "frm_LowStockReport";
+            this.Load += new System.EventHandler(this.frm_LowStockReport_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void frm_LowStockReport_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,5 +28,17 @@ namespace pos.Reports.Sales
             var dt = bll.categoryWiseSaleReport(f, t, customer_id, product_code, sale_type, employee_id, sale_account, branch_id);
             return dt;
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_SalesByCategoryReport
+            // 
+            this.ClientSize = new System.Drawing.Size(930, 427);
+            this.Name = "frm_SalesByCategoryReport";
+            this.ResumeLayout(false);
+
+        }
     }
 }

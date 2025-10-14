@@ -380,12 +380,20 @@ namespace pos
 
         private void Btn_ledger_report_Click(object sender, EventArgs e)
         {
-            string customer_id = txt_id.Text;
-            if (customer_id != "")
+            try
             {
+                if (String.IsNullOrEmpty(txt_id.Text))
+                {
+                    MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string customer_id = txt_id.Text;
                 pos.Customers.Customer_Ledger_Report.FrmCustomerLedgerReport obj = new Customers.Customer_Ledger_Report.FrmCustomerLedgerReport(customer_id);
                 obj.ShowDialog();
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

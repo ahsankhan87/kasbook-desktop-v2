@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pos.Accounts.Reports.AP {
+namespace pos.Reports.Banks {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace pos.Accounts.Reports.AP {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AccountPayableReport : ReportClass {
+    public class BankLedger : ReportClass {
         
-        public AccountPayableReport() {
+        public BankLedger() {
         }
         
         public override string ResourceName {
             get {
-                return "AccountPayableReport.rpt";
+                return "BankLedger.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace pos.Accounts.Reports.AP {
         
         public override string FullResourceName {
             get {
-                return "pos.Accounts.Reports.AP.AccountPayableReport.rpt";
+                return "pos.Reports.Banks.BankLedger.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace pos.Accounts.Reports.AP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CompanyName {
+        public CrystalDecisions.Shared.IParameterField Parameter_end_date {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +98,7 @@ namespace pos.Accounts.Reports.AP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_end_date {
+        public CrystalDecisions.Shared.IParameterField Parameter_start_date {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +106,7 @@ namespace pos.Accounts.Reports.AP {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_start_date {
+        public CrystalDecisions.Shared.IParameterField Parameter_bank_id {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,9 +114,9 @@ namespace pos.Accounts.Reports.AP {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAccountPayableReport : Component, ICachedReport {
+    public class CachedBankLedger : Component, ICachedReport {
         
-        public CachedAccountPayableReport() {
+        public CachedBankLedger() {
         }
         
         [Browsable(false)]
@@ -153,7 +153,7 @@ namespace pos.Accounts.Reports.AP {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AccountPayableReport rpt = new AccountPayableReport();
+            BankLedger rpt = new BankLedger();
             rpt.Site = this.Site;
             return rpt;
         }

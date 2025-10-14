@@ -15,5 +15,17 @@ namespace pos.Reports.Accounts
             // Using AccountsBLL as placeholder, returning an empty table to avoid compile errors
             return new DataTable();
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_AccountReceivableAging
+            // 
+            this.ClientSize = new System.Drawing.Size(976, 448);
+            this.Name = "frm_AccountReceivableAging";
+            this.ResumeLayout(false);
+
+        }
     }
 }
