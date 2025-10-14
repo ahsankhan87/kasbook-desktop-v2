@@ -117,101 +117,104 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btn_trans_refresh.Text" xml:space="preserve">
-    <value>انتعش</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 16</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>حساب جي إل</value>
-  </data>
-  <data name="btn_blank.Text" xml:space="preserve">
-    <value>مسح الكل</value>
-  </data>
-  <data name="btn_delete.Text" xml:space="preserve">
-    <value>حذف</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 16</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>فرع البنك</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 16</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>اسم الحامل</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 16</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>رقم الحساب</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 16</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>اسم البنك</value>
+  <data name="btn_save.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
-    <value>إنشاء(F3)</value>
+    <value>يحفظ</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>فعل</value>
+  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
   </data>
-  <data name="btn_update.Text" xml:space="preserve">
-    <value>تحديث (F4)</value>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 19</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>وصف:</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 19</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>المبلغ الإجمالي:</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 19</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>تاريخ الدفع:</value>
+  </data>
+  <data name="txt_description.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 201</value>
+  </data>
+  <data name="txt_description.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 98</value>
+  </data>
+  <data name="txt_total_amount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="txt_total_amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 171</value>
+  </data>
+  <data name="txt_total_amount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 27</value>
+  </data>
+  <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 25</value>
+  </data>
+  <data name="lbl_header_title.Text" xml:space="preserve">
+    <value>إيداع المبلغ في الحساب البنكي</value>
+  </data>
+  <data name="cmb_cash_account_code.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="cmb_cash_account_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 124</value>
+  </data>
+  <data name="cmb_cash_account_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 27</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 19</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>التحويل من حساب الأستاذ العام</value>
+  </data>
+  <data name="txt_payment_date.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
+  </data>
+  <data name="txt_payment_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 94</value>
+  </data>
+  <data name="txt_payment_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 27</value>
+  </data>
+  <data name="btn_cancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
   </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
-  <data name="Detail.Text" xml:space="preserve">
-    <value>التفاصيل</value>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10.2pt</value>
   </data>
-  <data name="Transactions.Text" xml:space="preserve">
-    <value>المعاملات</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 19</value>
   </data>
-  <data name="Btn_bank_report.Text" xml:space="preserve">
-    <value>تقرير دفتر الأستاذ البنكي</value>
-  </data>
-  <data name="Btn_deposit.Text" xml:space="preserve">
-    <value>إيداع في البنك</value>
-  </data>
-  <data name="btn_payment.Text" xml:space="preserve">
-    <value>السحب من البنك</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
-  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 16</value>
-  </data>
-  <data name="label21.Text" xml:space="preserve">
-    <value>بحث البنك</value>
-  </data>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة</value>
-  </data>
-  <data name="entry_date.HeaderText" xml:space="preserve">
-    <value>تاريخ الدخول</value>
-  </data>
-  <data name="account_name.HeaderText" xml:space="preserve">
-    <value>حساب</value>
-  </data>
-  <data name="debit.HeaderText" xml:space="preserve">
-    <value>Debit / مدين</value>
-  </data>
-  <data name="credit.HeaderText" xml:space="preserve">
-    <value>Credit / ائتمان</value>
-  </data>
-  <data name="balance.HeaderText" xml:space="preserve">
-    <value>رصيد حساب</value>
-  </data>
-  <data name="description.HeaderText" xml:space="preserve">
-    <value>وصف</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>(حساب الدفتر النقدي)</value>
   </data>
 </root>

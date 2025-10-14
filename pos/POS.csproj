@@ -1531,6 +1531,9 @@
     <EmbeddedResource Include="Master\Banks\frm_bank_payment.resx">
       <DependentUpon>frm_bank_payment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master\Banks\frm_deposit_to_bank.ar-SA.resx">
+      <DependentUpon>frm_deposit_to_bank.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Master\Banks\frm_deposit_to_bank.resx">
       <DependentUpon>frm_deposit_to_bank.cs</DependentUpon>
     </EmbeddedResource>
