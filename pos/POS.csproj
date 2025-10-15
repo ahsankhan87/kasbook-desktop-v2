@@ -1459,6 +1459,9 @@
     <EmbeddedResource Include="Customers\frm_search_customers.resx">
       <DependentUpon>frm_search_customers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\frm_dashboard.ar-SA.resx">
+      <DependentUpon>frm_dashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\frm_dashboard.resx">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
     </EmbeddedResource>
