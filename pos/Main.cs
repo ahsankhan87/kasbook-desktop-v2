@@ -55,18 +55,6 @@ namespace pos
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
             toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();
 
-            // Show dashboard as MDI child
-            ShowDashboardAsMdi();
-
-            // When MDI children change, ensure dashboard exists if none open
-            this.MdiChildActivate += (s, eArgs) =>
-            {
-                if (this.MdiChildren.Length == 0)
-                {
-                    ShowDashboardAsMdi();
-                }
-            };
-
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
         }
@@ -1911,43 +1899,41 @@ namespace pos
             DebitNote = null;
         }
 
-        // Exposed actions used by dashboard
-        public void OpenNewSale() => newTransactionToolStripMenuItem2_Click(null, EventArgs.Empty);
-        public void OpenProducts() => ProductsToolStripButton_Click(null, EventArgs.Empty);
-        public void OpenCustomers() => CustomersToolStripButton_Click(null, EventArgs.Empty);
-        public void OpenSalesReport() => salesReportToolStripMenuItem1_Click(null, EventArgs.Empty);
-        public void OpenPurchase() => newTransactionToolStripMenuItem_Click(null, EventArgs.Empty);
-        public void OpenSuppliers() => SuppliersToolStripButton_Click(null, EventArgs.Empty);
-        public void OpenReportsHome() => salesReportToolStripMenuItem1_Click(null, EventArgs.Empty);
-        public void OpenSettings() => profileToolStripMenuItem_Click(null, EventArgs.Empty);
-
-        private Form _dashboardForm;
-
-        private void ShowDashboardAsMdi()
+       
+        Form _dashboardForm;
+        private void toolStripButton_dashboard_Click(object sender, EventArgs e)
         {
-            if (_dashboardForm == null || _dashboardForm.IsDisposed)
+            if (_dashboardForm == null)
             {
-                _dashboardForm = new pos.Dashboard.frm_dashboard(this)
+                var _dashboardForm = new pos.Dashboard.frm_dashboard
                 {
                     MdiParent = this,
                     WindowState = FormWindowState.Maximized
                 };
-                _dashboardForm.FormClosed += (s, e) => _dashboardForm = null;
+                _dashboardForm.OpenNewSale = () => newTransactionToolStripMenuItem2_Click(null, EventArgs.Empty);
+                _dashboardForm.OpenProducts = () => ProductsToolStripButton_Click(null, EventArgs.Empty);
+                _dashboardForm.OpenCustomers = () => CustomersToolStripButton_Click(null, EventArgs.Empty);
+                _dashboardForm.OpenSuppliers = () => SuppliersToolStripButton_Click(null, EventArgs.Empty);
+                _dashboardForm.OpenSalesReport = () => salesReportToolStripMenuItem1_Click(null, EventArgs.Empty);
+                _dashboardForm.OpenPurchasesReport = () => purchaseReportToolStripMenuItem_Click(null, EventArgs.Empty);
+                _dashboardForm.OpenSettings = () => profileToolStripMenuItem_Click(null, EventArgs.Empty);
+
+
+                _dashboardForm.FormClosed += new FormClosedEventHandler(_dashboardForm_FormClosed);
                 _dashboardForm.Show();
             }
             else
             {
                 _dashboardForm.Activate();
             }
+            
         }
-        
 
-        private void toolStripButton_dashboard_Click(object sender, EventArgs e)
+        private void _dashboardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ShowDashboardAsMdi();
+            _dashboardForm = null;
         }
 
-       
         Form AllBankReport;
         private void banksReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
