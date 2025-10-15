@@ -119,6 +119,7 @@ namespace pos.Dashboard
             // pnlSalesToday
             // 
             this.pnlSalesToday.BackColor = System.Drawing.Color.White;
+            this.pnlSalesToday.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlSalesToday.Controls.Add(this.panelSalesColor);
             this.pnlSalesToday.Controls.Add(this.lblSalesTitle);
             this.pnlSalesToday.Controls.Add(this.lblSalesValue);
@@ -146,6 +147,7 @@ namespace pos.Dashboard
             // pnlRevenueToday
             // 
             this.pnlRevenueToday.BackColor = System.Drawing.Color.White;
+            this.pnlRevenueToday.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlRevenueToday.Controls.Add(this.panelRevenueColor);
             this.pnlRevenueToday.Controls.Add(this.lblRevenueTitle);
             this.pnlRevenueToday.Controls.Add(this.lblRevenueValue);
@@ -173,6 +175,7 @@ namespace pos.Dashboard
             // pnlLowStock
             // 
             this.pnlLowStock.BackColor = System.Drawing.Color.White;
+            this.pnlLowStock.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlLowStock.Controls.Add(this.panelLowStockColor);
             this.pnlLowStock.Controls.Add(this.lblLowStockTitle);
             this.pnlLowStock.Controls.Add(this.lblLowStockValue);

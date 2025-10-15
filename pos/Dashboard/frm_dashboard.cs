@@ -66,9 +66,10 @@ namespace pos.Dashboard
             colInfo.Text = "Info";
             colDateTime.Text = "Date/Time";
 
+            var company = POS.Core.UsersModal.logged_in_company_name;
             var branch = POS.Core.UsersModal.logged_in_branch_name;
             var fy = POS.Core.UsersModal.fiscal_year;
-            lblSubtitle.Text = $"Branch: {branch} • Fiscal Year: {fy} • {DateTime.Now:dddd, MMM dd, yyyy}";
+            lblSubtitle.Text = $"Company: {company} • Branch: {branch} • Fiscal Year: {fy} • {DateTime.Now:dddd, MMM dd, yyyy}";
         }
 
         private void LoadDashboardMetrics()
