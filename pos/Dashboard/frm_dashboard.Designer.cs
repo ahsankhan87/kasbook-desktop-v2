@@ -196,9 +196,11 @@ namespace pos.Dashboard
             // 
             // lblLowStockValue
             // 
+            this.lblLowStockValue.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.lblLowStockValue, "lblLowStockValue");
             this.lblLowStockValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.lblLowStockValue.Name = "lblLowStockValue";
+            this.lblLowStockValue.Click += new System.EventHandler(this.lblLowStockValue_Click);
             // 
             // lblQuickAccess
             // 
@@ -225,6 +227,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnNewSale, "btnNewSale");
             this.btnNewSale.Name = "btnNewSale";
             this.btnNewSale.UseVisualStyleBackColor = false;
+            this.btnNewSale.Click += new System.EventHandler(this.btnNewSale_Click);
             // 
             // btnProducts
             // 
@@ -232,6 +235,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnProducts, "btnProducts");
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.UseVisualStyleBackColor = false;
+            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
             // 
             // btnCustomers
             // 
@@ -239,6 +243,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnCustomers, "btnCustomers");
             this.btnCustomers.Name = "btnCustomers";
             this.btnCustomers.UseVisualStyleBackColor = false;
+            this.btnCustomers.Click += new System.EventHandler(this.btnCustomers_Click);
             // 
             // btnSuppliers
             // 
@@ -246,6 +251,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnSuppliers, "btnSuppliers");
             this.btnSuppliers.Name = "btnSuppliers";
             this.btnSuppliers.UseVisualStyleBackColor = false;
+            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
             // 
             // btnSalesReport
             // 
@@ -253,6 +259,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnSalesReport, "btnSalesReport");
             this.btnSalesReport.Name = "btnSalesReport";
             this.btnSalesReport.UseVisualStyleBackColor = false;
+            this.btnSalesReport.Click += new System.EventHandler(this.btnSalesReport_Click);
             // 
             // btnPurchasesReport
             // 
@@ -260,6 +267,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnPurchasesReport, "btnPurchasesReport");
             this.btnPurchasesReport.Name = "btnPurchasesReport";
             this.btnPurchasesReport.UseVisualStyleBackColor = false;
+            this.btnPurchasesReport.Click += new System.EventHandler(this.btnPurchasesReport_Click);
             // 
             // btnSettings
             // 
@@ -267,6 +275,7 @@ namespace pos.Dashboard
             resources.ApplyResources(this.btnSettings, "btnSettings");
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // lblRecent
             // 

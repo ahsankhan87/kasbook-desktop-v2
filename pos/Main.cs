@@ -55,6 +55,8 @@ namespace pos
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
             toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();
 
+            toolStripButton_dashboard.PerformClick();
+
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
         }
@@ -1905,20 +1907,11 @@ namespace pos
         {
             if (_dashboardForm == null)
             {
-                var _dashboardForm = new pos.Dashboard.frm_dashboard
+                _dashboardForm = new pos.Dashboard.frm_dashboard
                 {
                     MdiParent = this,
                     WindowState = FormWindowState.Maximized
                 };
-                _dashboardForm.OpenNewSale = () => newTransactionToolStripMenuItem2_Click(null, EventArgs.Empty);
-                _dashboardForm.OpenProducts = () => ProductsToolStripButton_Click(null, EventArgs.Empty);
-                _dashboardForm.OpenCustomers = () => CustomersToolStripButton_Click(null, EventArgs.Empty);
-                _dashboardForm.OpenSuppliers = () => SuppliersToolStripButton_Click(null, EventArgs.Empty);
-                _dashboardForm.OpenSalesReport = () => salesReportToolStripMenuItem1_Click(null, EventArgs.Empty);
-                _dashboardForm.OpenPurchasesReport = () => purchaseReportToolStripMenuItem_Click(null, EventArgs.Empty);
-                _dashboardForm.OpenSettings = () => profileToolStripMenuItem_Click(null, EventArgs.Empty);
-
-
                 _dashboardForm.FormClosed += new FormClosedEventHandler(_dashboardForm_FormClosed);
                 _dashboardForm.Show();
             }

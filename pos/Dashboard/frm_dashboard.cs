@@ -1,8 +1,9 @@
-﻿using System;
+﻿using pos.Sales;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pos.Dashboard
 {
@@ -125,6 +126,170 @@ namespace pos.Dashboard
             public DateTime Timestamp { get; }
             public RecentItem(string area, string description, DateTime timestamp)
             { Area = area; Description = description; Timestamp = timestamp; }
+        }
+
+        Form ZatcaInvoices;
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            if (ZatcaInvoices == null)
+            {
+                ZatcaInvoices = new pos.Sales.frm_zatca_invoices()
+                {
+                    MdiParent = frm_main.ActiveForm,
+                };
+                ZatcaInvoices.FormClosed += new FormClosedEventHandler(ZatcaInvoices_FormClosed);
+                ZatcaInvoices.Show();
+            }
+            else
+            {
+                ZatcaInvoices.Activate();
+            }
+        }
+
+        private void ZatcaInvoices_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ZatcaInvoices = null;
+        }
+
+        Form frm_sales_obj;
+        private void btnNewSale_Click(object sender, EventArgs e)
+        {
+            frm_sales_obj = new frm_sales();
+            frm_sales_obj.MdiParent = frm_main.ActiveForm;
+
+            //frm_sales_obj.Dock = DockStyle.Fill;
+            //frm_sales_obj.FormClosed += new FormClosedEventHandler(frm_sales_obj_FormClosed);
+            frm_sales_obj.WindowState = FormWindowState.Maximized;
+            frm_sales_obj.Show();
+        }
+
+        Form frm_products;
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            if (frm_products == null)
+            {
+                frm_products = new frm_product_full_detail();
+                frm_products.MdiParent = frm_main.ActiveForm;
+                //frm_cust.Dock = DockStyle.Fill;
+                frm_products.FormClosed += new FormClosedEventHandler(Frm_products_FormClosed);
+                frm_products.Show();
+            }
+            else
+            {
+                frm_products.Activate();
+            }
+        }
+
+        private void Frm_products_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_products = null;
+        }
+
+        Form frmCustomers;
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            if (frmCustomers == null)
+            {
+                frmCustomers = new frm_customers();
+                frmCustomers.MdiParent = frm_main.ActiveForm;
+                //frm_cust.Dock = DockStyle.Fill;
+                frmCustomers.FormClosed += new FormClosedEventHandler(FrmCustomers_FormClosed);
+                frmCustomers.Show();
+            }
+            else
+            {
+                frmCustomers.Activate();
+            }
+
+        }
+        private void FrmCustomers_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmCustomers = null;
+        }
+
+        Form frmSuppliers;
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+            if (frmSuppliers == null)
+            {
+                frmSuppliers = new frm_suppliers();
+                frmSuppliers.MdiParent = frm_main.ActiveForm;
+                //frm_cust.Dock = DockStyle.Fill;
+                frmSuppliers.FormClosed += new FormClosedEventHandler(FrmSuppliers_FormClosed);
+                frmSuppliers.Show();
+            }
+            else
+            {
+                frmSuppliers.Activate();
+            }
+        }
+        private void FrmSuppliers_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmSuppliers = null;
+        }
+
+        Form frmSalesReport;
+        private void btnSalesReport_Click(object sender, EventArgs e)
+        {
+            if (frmSalesReport == null)
+            {
+                frmSalesReport = new frm_SalesReport();
+                frmSalesReport.MdiParent = frm_main.ActiveForm;
+                //frm_cust.Dock = DockStyle.Fill;
+                frmSalesReport.FormClosed += new FormClosedEventHandler(FrmSalesReport_FormClosed);
+                frmSalesReport.Show();
+            }
+            else
+            {
+                frmSalesReport.Activate();
+            }
+        }
+        private void FrmSalesReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmSalesReport = null;
+        }
+
+        Form frmPurchasesReport;
+        private void btnPurchasesReport_Click(object sender, EventArgs e)
+        {
+            if (frmPurchasesReport == null)
+            {
+                frmPurchasesReport = new frm_PurchasesReport();
+                frmPurchasesReport.MdiParent = frm_main.ActiveForm;
+                //frm_cust.Dock = DockStyle.Fill;
+                frmPurchasesReport.FormClosed += new FormClosedEventHandler(FrmPurchasesReport_FormClosed);
+                frmPurchasesReport.Show();
+            }
+            else
+            {
+                frmPurchasesReport.Activate();
+            }
+        }
+        private void FrmPurchasesReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmPurchasesReport = null;
+        }
+
+        Form LowStockReport;
+        private void lblLowStockValue_Click(object sender, EventArgs e)
+        {
+            if (LowStockReport == null)
+            {
+                LowStockReport = new pos.Reports.Products.Inventory.FrmLowStockReport
+                {
+                    MdiParent = frm_main.ActiveForm
+                };
+                LowStockReport.FormClosed += new FormClosedEventHandler(LowStockReport_FormClosed);
+                LowStockReport.Show();
+            }
+            else
+            {
+                LowStockReport.Activate();
+            }
+        }
+        private void LowStockReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LowStockReport = null;
         }
     }
 }

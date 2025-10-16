@@ -2332,6 +2332,8 @@
     <Content Include="Resources\Estimate.png" />
     <None Include="Resources\Invoice.png" />
     <None Include="Resources\Graph Report.png" />
+    <None Include="Resources\icons8_content_50px_2.png" />
+    <None Include="Resources\icons8_home_24px_1.png" />
     <Content Include="Resources\kasbook logo 80x80.ico" />
     <None Include="Resources\kasbook logo 80x80.png" />
     <Content Include="Resources\Male User.png" />
