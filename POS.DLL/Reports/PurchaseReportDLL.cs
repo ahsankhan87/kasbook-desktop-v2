@@ -104,11 +104,12 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.id,S.purchase_date,S.invoice_no,C.first_name AS supplier_name,SI.item_number,SI.item_code," +
+                         String query = "SELECT SI.id,S.purchase_date,S.invoice_no,C.first_name AS supplier_name,SI.item_number,SI.item_code," +
                             " P.name AS product_name,SI.loc_code,SI.quantity,SI.cost_price,SI.discount_value," +
                             " SI.tax_rate," +
                             " ((SI.cost_price*SI.quantity-SI.discount_value)*SI.tax_rate/100) AS vat," +
-                            " ((SI.cost_price*SI.quantity-SI.discount_value)+((SI.cost_price*SI.quantity-SI.discount_value)*SI.tax_rate/100)) AS total" +
+                            " ((SI.cost_price*SI.quantity-SI.discount_value)+((SI.cost_price*SI.quantity-SI.discount_value)*SI.tax_rate/100)) AS total_with_vat," +
+                            " (SI.cost_price*SI.quantity-SI.discount_value) AS total"+
                             " FROM pos_purchases S" +
                             " LEFT JOIN pos_purchases_items SI ON S.id=SI.purchase_id" +
                             " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +

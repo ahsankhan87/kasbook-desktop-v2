@@ -114,6 +114,7 @@ namespace pos
                 double _discount_value_total = 0;
                 double _vat_total = 0;
                 double _total = 0;
+                double _total_with_vat = 0;
 
                 purchase_report_dt = purchase_report_obj.PurchaseReport(from_date, to_date, supplier_id, product_id, purchase_type, employee_id, branch_id);
 
@@ -123,7 +124,8 @@ namespace pos
                     _cost_price_total += (string.IsNullOrWhiteSpace(dr["cost_price"].ToString()) ? 0 : Convert.ToDouble(dr["cost_price"].ToString()));
                     _discount_value_total += (string.IsNullOrWhiteSpace(dr["discount_value"].ToString()) ? 0 : Convert.ToDouble(dr["discount_value"].ToString()));
                     _vat_total += (string.IsNullOrWhiteSpace(dr["vat"].ToString()) ? 0 : Convert.ToDouble(dr["vat"].ToString()));
-                    _total += (string.IsNullOrWhiteSpace(dr["total"].ToString()) ? 0 : Convert.ToDouble(dr["total"].ToString()));
+                    _total_with_vat += (dr["total_with_vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["total_with_vat"].ToString()));
+                    _total += (dr["total"].ToString() == "" ? 0 : Convert.ToDouble(dr["total"].ToString())); ;
                 }
 
                 DataRow newRow = purchase_report_dt.NewRow();
@@ -132,7 +134,8 @@ namespace pos
                 newRow[9] = _cost_price_total;
                 newRow[10] = _discount_value_total;
                 newRow[12] = _vat_total;
-                newRow[13] = _total;
+                newRow[13] = _total_with_vat;
+                newRow[14] = _total;
                 purchase_report_dt.Rows.InsertAt(newRow, purchase_report_dt.Rows.Count);
 
                 grid_Purchases_report.DataSource = purchase_report_dt;

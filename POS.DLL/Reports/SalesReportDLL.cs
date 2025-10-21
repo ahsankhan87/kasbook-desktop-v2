@@ -104,7 +104,8 @@ namespace POS.DLL
                             " SI.discount_value,"+
                             " SI.tax_rate," +
                             " IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100)) AS vat," +
-                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))+IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100))) AS total" +
+                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))+IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100))) AS total_with_vat," +
+                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))) AS total" +
                             //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +

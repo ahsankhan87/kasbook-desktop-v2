@@ -153,6 +153,7 @@ namespace pos
                 double _discount_value_total = 0;
                 double _vat_total = 0;
                 double _total = 0;
+                double _total_with_vat = 0;
 
                 foreach (DataRow dr in sales_report_dt.Rows)
                 {
@@ -160,7 +161,8 @@ namespace pos
                     _unit_price_total += (dr["unit_price"].ToString() == "" ? 0 : Convert.ToDouble(dr["unit_price"].ToString()));
                     _discount_value_total += (dr["discount_value"].ToString() == "" ? 0 : Convert.ToDouble(dr["discount_value"].ToString()));
                     _vat_total += (dr["vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["vat"].ToString()));
-                    _total += (dr["total"].ToString() == "" ? 0 : Convert.ToDouble(dr["total"].ToString()));
+                    _total_with_vat += (dr["total_with_vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["total_with_vat"].ToString()));
+                    _total += (dr["total"].ToString() == "" ? 0 : Convert.ToDouble(dr["total"].ToString())); ;
                 }
 
                 DataRow newRow = sales_report_dt.NewRow();
@@ -169,7 +171,8 @@ namespace pos
                 newRow[9] = _unit_price_total;
                 newRow[10] = _discount_value_total;
                 newRow[12] = _vat_total;
-                newRow[13] = _total;
+                newRow[13] = _total_with_vat;
+                newRow[14] = _total;
                 sales_report_dt.Rows.InsertAt(newRow, sales_report_dt.Rows.Count);
 
                 grid_sales_report.DataSource = sales_report_dt;
