@@ -1,11 +1,12 @@
-﻿using System;
+﻿using POS.Core;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using POS.Core;
 
 namespace POS.DLL
 {
@@ -462,5 +463,59 @@ namespace POS.DLL
 
             }
         }
+
+        public IList<SalesByPaymentMethodDto> GetSalesByPaymentMethod(DateTime? startDate, DateTime? endDate)
+        {
+
+            const string sql = @"
+                SELECT
+                    ISNULL(pm.description, 'Unknown') AS PaymentMethod,
+                    COUNT(1)                           AS TransactionCount,
+                    SUM(s.total_amount)                 AS TotalAmount
+                FROM dbo.pos_sales s
+                LEFT JOIN dbo.pos_payment_method pm ON s.payment_method_id = pm.id
+                WHERE (@StartDate IS NULL OR s.sale_date >= @StartDate)
+                  AND (@EndDate   IS NULL OR s.sale_date < DATEADD(DAY, 1, @EndDate))
+                GROUP BY ISNULL(pm.description, 'Unknown')
+                ORDER BY PaymentMethod;";
+
+            var results = new List<SalesByPaymentMethodDto>();
+
+            using (SqlConnection conn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = (object)startDate ?? DBNull.Value;
+                cmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = (object)endDate ?? DBNull.Value;
+
+                conn.Open();
+                using (var rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    var paymentMethodOrdinal = rdr.GetOrdinal("PaymentMethod");
+                    var txCountOrdinal = rdr.GetOrdinal("TransactionCount");
+                    var totalAmountOrdinal = rdr.GetOrdinal("TotalAmount");
+
+                    while (rdr.Read())
+                    {
+                        results.Add(new SalesByPaymentMethodDto
+                        {
+                            PaymentMethod = rdr.IsDBNull(paymentMethodOrdinal) ? null : rdr.GetString(paymentMethodOrdinal),
+                            TransactionCount = rdr.GetInt32(txCountOrdinal),
+                            TotalAmount = rdr.GetDecimal(totalAmountOrdinal)
+                        });
+                    }
+                }
+            }
+
+            return results;
+        }
+        
+    }
+
+    public sealed class SalesByPaymentMethodDto
+    {
+        public string PaymentMethod { get; set; }
+        public int TransactionCount { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }

@@ -1152,6 +1152,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\Sales\SalesByPaymentMethodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\SalesByPaymentMethodForm.Designer.cs">
+      <DependentUpon>SalesByPaymentMethodForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Sales\sales_invoice_sans_code.cs">
       <DependentUpon>sales_invoice_sans_code.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2064,6 +2070,9 @@
     <EmbeddedResource Include="Reports\Sales\rpt\sales_report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_report.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\SalesByPaymentMethodForm.resx">
+      <DependentUpon>SalesByPaymentMethodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\sales_invoice_sans_code.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

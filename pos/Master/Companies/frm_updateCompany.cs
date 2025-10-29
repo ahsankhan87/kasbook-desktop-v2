@@ -140,6 +140,9 @@ namespace pos
                 info.item_variance_acc_id = Convert.ToInt32(cmb_item_variance_acc_id.SelectedValue.ToString());
                 info.commission_acc_id = Convert.ToInt32(cmb_commission_acc_id.SelectedValue.ToString());
 
+                // update static variable of E-Invoice usage
+                UsersModal.useZatcaEInvoice = chk_use_zatca_e_invoice.Checked;
+
                 CompaniesBLL objBLL = new CompaniesBLL();
 
 

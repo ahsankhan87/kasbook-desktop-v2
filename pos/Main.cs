@@ -1950,6 +1950,16 @@ namespace pos
             AllBankReport = null;
         }
 
+        private void byPaymentMethodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SalesByPaymentMethodForm salesByPaymentMethodForm = new SalesByPaymentMethodForm
+            {
+                MdiParent = this
+            };
+            salesByPaymentMethodForm.Show();
+
+        }
+
         //private void CreateDashboardPanel()
         //{
         //    // Main dashboard container

@@ -43,7 +43,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_header = new System.Windows.Forms.Panel();
-            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_user_commission_balance = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -78,6 +77,7 @@
             this.lbl_sale_type = new System.Windows.Forms.Label();
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.groupBoxCustomer = new System.Windows.Forms.GroupBox();
+            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
             this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.lbl = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -205,12 +205,6 @@
             this.panel_header.Controls.Add(this.groupBox_products);
             resources.ApplyResources(this.panel_header, "panel_header");
             this.panel_header.Name = "panel_header";
-            // 
-            // chk_sendInvoiceToZatca
-            // 
-            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
-            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
-            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -474,6 +468,12 @@
             resources.ApplyResources(this.groupBoxCustomer, "groupBoxCustomer");
             this.groupBoxCustomer.Name = "groupBoxCustomer";
             this.groupBoxCustomer.TabStop = false;
+            // 
+            // chk_sendInvoiceToZatca
+            // 
+            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
+            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
+            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
             // 
             // cmb_customers
             // 

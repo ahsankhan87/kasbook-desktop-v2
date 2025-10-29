@@ -1006,10 +1006,10 @@
     <value>3</value>
   </data>
   <data name="chk_sendInvoiceToZatca.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 196</value>
+    <value>14, 156</value>
   </data>
   <data name="chk_sendInvoiceToZatca.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 24</value>
+    <value>209, 24</value>
   </data>
   <data name="chk_sendInvoiceToZatca.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1019,9 +1019,6 @@
   </data>
   <data name="chk_sendInvoiceToZatca.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
-  </data>
-  <data name="chk_sendInvoiceToZatca.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;chk_sendInvoiceToZatca.Name" xml:space="preserve">
     <value>chk_sendInvoiceToZatca</value>
@@ -1036,7 +1033,7 @@
     <value>0</value>
   </data>
   <data name="cmb_customers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 162</value>
+    <value>265, 194</value>
   </data>
   <data name="cmb_customers.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 28</value>
@@ -1089,8 +1086,11 @@
   <data name="&gt;&gt;lbl.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 32</value>
+    <value>10, 29</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 23</value>
@@ -1162,7 +1162,7 @@
     <value>5</value>
   </data>
   <data name="txt_customerID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 142</value>
+    <value>340, 161</value>
   </data>
   <data name="txt_customerID.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 27</value>

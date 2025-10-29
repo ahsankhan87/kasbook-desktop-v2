@@ -829,6 +829,19 @@ namespace pos
                     frm_search_estimates obj_estimate = new frm_search_estimates(this);
                     obj_estimate.ShowDialog();
                 }
+                if(e.Control && e.Alt && e.KeyCode == Keys.B)
+                {
+                    txt_barcode.Focus();
+                }
+                if(e.Control && e.Alt && e.KeyCode == Keys.I)
+                {
+                    txt_invoice_no.Focus();
+                }
+
+                if (e.Control && e.Alt && e.KeyCode == Keys.C)
+                {
+                    txtCustomerSearch.Focus();
+                }
             }
             catch (Exception ex)
             {
@@ -2786,7 +2799,7 @@ namespace pos
                             if (sale_id > 0)
                             {
                                 // Sign invoice to ZATCA
-                                if (UsersModal.useZatcaEInvoice == true)
+                                if (UsersModal.useZatcaEInvoice == true && chk_sendInvoiceToZatca.Checked == true)
                                 {
                                     DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                                     if (activeZatcaCredential == null)
@@ -2800,16 +2813,42 @@ namespace pos
                                     {
                                         //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
 
+                                        // If PCSID not exist then sign with CSID
                                         //Sign Invoice with CSID instead of Production CSID
                                         ZatcaHelper.SignInvoiceToZatca(invoice_no);
+
+                                        // After signing with CSID, send invoice to ZATCA
+                                        // If invoice subtype is Standard then clear it from ZATCA
+                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                                        {
+                                            // Clear invoice from ZATCA
+                                            ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                        }
+                                        else //otherwise Report invoice to ZATCA
+                                        {
+                                            // Report invoice to ZATCA
+                                            ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                        }
 
                                     }
                                     else
                                     {
                                         //If PCSID exist then sign it 
                                         ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
-                                    }
 
+                                        // After signing with PCSID, send invoice to ZATCA
+                                        // If invoice subtype is Standard then clear it from ZATCA
+                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                                        {
+                                            // Clear invoice from ZATCA
+                                            ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                        }
+                                        else //otherwise Report invoice to ZATCA
+                                        {
+                                            // Report invoice to ZATCA
+                                            ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                        }
+                                    }
 
                                 }
                                 //////
