@@ -146,12 +146,6 @@
   <data name="cmb_sale_account.Items2" xml:space="preserve">
     <value>مرتجع</value>
   </data>
-  <data name="cmb_sale_type.Items1" xml:space="preserve">
-    <value>نقدي</value>
-  </data>
-  <data name="cmb_sale_type.Items2" xml:space="preserve">
-    <value>اجل</value>
-  </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 16</value>
   </data>
@@ -214,10 +208,13 @@
   <data name="discount_value.HeaderText" xml:space="preserve">
     <value>خصم</value>
   </data>
+  <data name="total.HeaderText" xml:space="preserve">
+    <value>المجموع بدون الضريبة</value>
+  </data>
   <data name="vat.HeaderText" xml:space="preserve">
     <value>ضريبة</value>
   </data>
-  <data name="total.HeaderText" xml:space="preserve">
-    <value>المجموع</value>
+  <data name="total_with_vat.HeaderText" xml:space="preserve">
+    <value>الإجمالي مع الضريبة</value>
   </data>
 </root>

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_PurchasesReport));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -75,6 +75,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.CmbCondition);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
@@ -93,14 +94,13 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // CmbCondition
             // 
+            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCondition.FormattingEnabled = true;
-            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.Name = "CmbCondition";
             this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
             // 
@@ -116,10 +116,10 @@
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.Name = "cmb_employees";
             // 
             // label6
@@ -161,25 +161,25 @@
             // 
             // cmb_purchase_type
             // 
+            resources.ApplyResources(this.cmb_purchase_type, "cmb_purchase_type");
             this.cmb_purchase_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_purchase_type.FormattingEnabled = true;
             this.cmb_purchase_type.Items.AddRange(new object[] {
             resources.GetString("cmb_purchase_type.Items"),
             resources.GetString("cmb_purchase_type.Items1"),
             resources.GetString("cmb_purchase_type.Items2")});
-            resources.ApplyResources(this.cmb_purchase_type, "cmb_purchase_type");
             this.cmb_purchase_type.Name = "cmb_purchase_type";
             // 
             // txt_to_date
             // 
-            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_to_date, "txt_to_date");
+            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_to_date.Name = "txt_to_date";
             // 
             // txt_from_date
             // 
-            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_from_date, "txt_from_date");
+            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_from_date.Name = "txt_from_date";
             // 
             // label2
@@ -189,10 +189,10 @@
             // 
             // cmb_suppliers
             // 
+            resources.ApplyResources(this.cmb_suppliers, "cmb_suppliers");
             this.cmb_suppliers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_suppliers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_suppliers.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_suppliers, "cmb_suppliers");
             this.cmb_suppliers.Name = "cmb_suppliers";
             // 
             // label5
@@ -212,16 +212,16 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_Purchases_report);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_Purchases_report);
             this.panel2.Name = "panel2";
             // 
             // grid_Purchases_report
             // 
+            resources.ApplyResources(this.grid_Purchases_report, "grid_Purchases_report");
             this.grid_Purchases_report.AllowUserToAddRows = false;
             this.grid_Purchases_report.AllowUserToDeleteRows = false;
             this.grid_Purchases_report.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_Purchases_report, "grid_Purchases_report");
             this.grid_Purchases_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_Purchases_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_Purchases_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -287,9 +287,9 @@
             // quantity
             // 
             this.quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.quantity.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.quantity.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.quantity, "quantity");
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
@@ -297,9 +297,9 @@
             // cost_price
             // 
             this.cost_price.DataPropertyName = "cost_price";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
@@ -307,10 +307,10 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -318,10 +318,10 @@
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
             this.total.ReadOnly = true;
@@ -329,10 +329,10 @@
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.vat.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.vat.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
             this.vat.ReadOnly = true;
@@ -340,10 +340,10 @@
             // total_with_vat
             // 
             this.total_with_vat.DataPropertyName = "total_with_vat";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.total_with_vat, "total_with_vat");
             this.total_with_vat.Name = "total_with_vat";
             this.total_with_vat.ReadOnly = true;
