@@ -243,7 +243,7 @@
             // 
             // ReturnQty
             // 
-            this.ReturnQty.DataPropertyName = "ReturnQty";
+            this.ReturnQty.DataPropertyName = "ReturnableQty";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle2.Format = "N2";

@@ -44,6 +44,8 @@
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
+            this.cmbReturnReason = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,8 +66,6 @@
             this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmbReturnReason = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_purchase_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -159,6 +159,18 @@
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
+            // cmbReturnReason
+            // 
+            this.cmbReturnReason.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
+            this.cmbReturnReason.Name = "cmbReturnReason";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Name = "label2";
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -220,7 +232,7 @@
             // 
             // ReturnQty
             // 
-            this.ReturnQty.DataPropertyName = "ReturnQty";
+            this.ReturnQty.DataPropertyName = "ReturnableQty";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle2.Format = "N2";
@@ -319,18 +331,6 @@
             resources.ApplyResources(this.item_number, "item_number");
             this.item_number.Name = "item_number";
             // 
-            // cmbReturnReason
-            // 
-            this.cmbReturnReason.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
-            this.cmbReturnReason.Name = "cmbReturnReason";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Name = "label2";
-            // 
             // frm_purchase_return
             // 
             resources.ApplyResources(this, "$this");
@@ -368,6 +368,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.Button btn_return;
+        private System.Windows.Forms.ComboBox cmbReturnReason;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
@@ -388,8 +390,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
-        private System.Windows.Forms.ComboBox cmbReturnReason;
-        private System.Windows.Forms.Label label2;
     }
 }
 

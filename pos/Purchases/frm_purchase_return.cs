@@ -368,7 +368,7 @@ namespace pos
 
         private void grid_purchase_return_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (grid_purchase_return.Columns[e.ColumnIndex].DataPropertyName == "ReturnQty")
+            if (grid_purchase_return.Columns[e.ColumnIndex].Name == "ReturnQty")
             {
                 var row = grid_purchase_return.Rows[e.RowIndex];
                 if (row.ReadOnly) return;
