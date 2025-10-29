@@ -19,7 +19,7 @@ namespace pos
         private async void SalesByPaymentMethodForm_Load(object sender, EventArgs e)
         {
             // Default: last 30 days
-            dtpStart.Value = DateTime.Today.AddDays(-30);
+            dtpStart.Value = DateTime.Today;
             dtpEnd.Value = DateTime.Today;
             dtpStart.Checked = true;
             dtpEnd.Checked = true;
