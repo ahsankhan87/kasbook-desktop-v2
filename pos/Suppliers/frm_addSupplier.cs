@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.Suppliers.Supplier_Ledger_Report;
 using POS.BLL;
 using POS.Core;
 
@@ -374,6 +375,37 @@ namespace pos
                 pos.Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport obj = new Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport(supplier_id);
                 obj.ShowDialog();
 
+            }
+        }
+
+        private void Btn_printPaymentReceipt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(grid_supplier_transactions.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select a payment record to print.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                //if(grid_supplier_transactions.SelectedRows[0].Cells["credit"].Value == null || Convert.ToDecimal(grid_supplier_transactions.SelectedRows[0].Cells["credit"].Value) <= 0)
+                //{
+                //    MessageBox.Show("The selected record is not a payment.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return;
+                //}
+
+                string payment_id = grid_supplier_transactions.SelectedRows[0].Cells["id"].Value.ToString();
+                if (string.IsNullOrEmpty(payment_id))
+                {
+                    MessageBox.Show("Invalid payment record selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Frm_SupplierPaymentReceipt reportForm = new Frm_SupplierPaymentReceipt(payment_id);
+                reportForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -299,11 +299,29 @@
     <Compile Include="Accounts\Reports\frm_journal_daybook.Designer.cs">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </Compile>
+    <Compile Include="bin\Debug\Reports\sales_invoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sales_invoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Customers\Customer Ledger Report\CustomerPayment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerPayment.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.Designer.cs">
       <DependentUpon>FrmCustomerLedgerReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customers\Customer Ledger Report\Frm_customerPaymentReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customers\Customer Ledger Report\Frm_customerPaymentReceipt.Designer.cs">
+      <DependentUpon>Frm_customerPaymentReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="Customers\CustomerNameChange.cs">
       <SubType>Form</SubType>
@@ -1158,6 +1176,12 @@
     <Compile Include="Reports\Sales\SalesByPaymentMethodForm.Designer.cs">
       <DependentUpon>SalesByPaymentMethodForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Sales\sales_invoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sales_invoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Sales\sales_invoice_sans_code.cs">
       <DependentUpon>sales_invoice_sans_code.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1340,6 +1364,18 @@
     <Compile Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.Designer.cs">
       <DependentUpon>FrmSupplierLedgerReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Suppliers\Supplier Ledger Report\Frm_SupplierPaymentReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Suppliers\Supplier Ledger Report\Frm_SupplierPaymentReceipt.Designer.cs">
+      <DependentUpon>Frm_SupplierPaymentReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Suppliers\Supplier Ledger Report\SupplierPaymentReceipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierPaymentReceipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Accounts\Accounts\frm_accounts.ar-SA.resx">
       <DependentUpon>frm_accounts.cs</DependentUpon>
     </EmbeddedResource>
@@ -1435,8 +1471,19 @@
     <EmbeddedResource Include="Accounts\Reports\frm_journal_daybook.resx">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="bin\Debug\Reports\sales_invoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>sales_invoice.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customers\Customer Ledger Report\CustomerPayment.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CustomerPayment.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customers\Customer Ledger Report\FrmCustomerLedgerReport.resx">
       <DependentUpon>FrmCustomerLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customers\Customer Ledger Report\Frm_customerPaymentReceipt.resx">
+      <DependentUpon>Frm_customerPaymentReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Customers\CustomerNameChange.resx">
       <DependentUpon>CustomerNameChange.cs</DependentUpon>
@@ -2074,6 +2121,10 @@
     <EmbeddedResource Include="Reports\Sales\SalesByPaymentMethodForm.resx">
       <DependentUpon>SalesByPaymentMethodForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\sales_invoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>sales_invoice.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\sales_invoice_sans_code.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice_sans_code.cs</LastGenOutput>
@@ -2219,6 +2270,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.resx">
       <DependentUpon>FrmSupplierLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Suppliers\Supplier Ledger Report\Frm_SupplierPaymentReceipt.resx">
+      <DependentUpon>Frm_SupplierPaymentReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Suppliers\Supplier Ledger Report\SupplierPaymentReceipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SupplierPaymentReceipt.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>

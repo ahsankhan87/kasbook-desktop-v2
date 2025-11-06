@@ -1502,6 +1502,10 @@ namespace pos.Reports.Sales {
             
             private global::System.Data.DataColumn columnCountryName;
             
+            private global::System.Data.DataColumn columninvoice_subtype;
+            
+            private global::System.Data.DataColumn columninvoice_subtype_code;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public sales_receipt_dtDataTable() {
@@ -1785,6 +1789,22 @@ namespace pos.Reports.Sales {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn invoice_subtypeColumn {
+                get {
+                    return this.columninvoice_subtype;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn invoice_subtype_codeColumn {
+                get {
+                    return this.columninvoice_subtype_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1851,7 +1871,9 @@ namespace pos.Reports.Sales {
                         string CitySubdivisionName, 
                         string CityName, 
                         string PostalCode, 
-                        string CountryName) {
+                        string CountryName, 
+                        string invoice_subtype, 
+                        string invoice_subtype_code) {
                 sales_receipt_dtRow rowsales_receipt_dtRow = ((sales_receipt_dtRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -1884,7 +1906,9 @@ namespace pos.Reports.Sales {
                         CitySubdivisionName,
                         CityName,
                         PostalCode,
-                        CountryName};
+                        CountryName,
+                        invoice_subtype,
+                        invoice_subtype_code};
                 rowsales_receipt_dtRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsales_receipt_dtRow);
                 return rowsales_receipt_dtRow;
@@ -1938,6 +1962,8 @@ namespace pos.Reports.Sales {
                 this.columnCityName = base.Columns["CityName"];
                 this.columnPostalCode = base.Columns["PostalCode"];
                 this.columnCountryName = base.Columns["CountryName"];
+                this.columninvoice_subtype = base.Columns["invoice_subtype"];
+                this.columninvoice_subtype_code = base.Columns["invoice_subtype_code"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2005,6 +2031,10 @@ namespace pos.Reports.Sales {
                 base.Columns.Add(this.columnPostalCode);
                 this.columnCountryName = new global::System.Data.DataColumn("CountryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCountryName);
+                this.columninvoice_subtype = new global::System.Data.DataColumn("invoice_subtype", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvoice_subtype);
+                this.columninvoice_subtype_code = new global::System.Data.DataColumn("invoice_subtype_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvoice_subtype_code);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3823,6 +3853,39 @@ namespace pos.Reports.Sales {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string invoice_subtype {
+                get {
+                    try {
+                        return ((string)(this[this.tablesales_receipt_dt.invoice_subtypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'invoice_subtype\' in table \'sales_receipt_dt\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_receipt_dt.invoice_subtypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string invoice_subtype_code {
+                get {
+                    try {
+                        return ((string)(this[this.tablesales_receipt_dt.invoice_subtype_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'invoice_subtype_code\' in table \'sales_receipt_dt\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_receipt_dt.invoice_subtype_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isinvoice_noNull() {
                 return this.IsNull(this.tablesales_receipt_dt.invoice_noColumn);
             }
@@ -4191,6 +4254,30 @@ namespace pos.Reports.Sales {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetCountryNameNull() {
                 this[this.tablesales_receipt_dt.CountryNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isinvoice_subtypeNull() {
+                return this.IsNull(this.tablesales_receipt_dt.invoice_subtypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setinvoice_subtypeNull() {
+                this[this.tablesales_receipt_dt.invoice_subtypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isinvoice_subtype_codeNull() {
+                return this.IsNull(this.tablesales_receipt_dt.invoice_subtype_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setinvoice_subtype_codeNull() {
+                this[this.tablesales_receipt_dt.invoice_subtype_codeColumn] = global::System.Convert.DBNull;
             }
         }
         

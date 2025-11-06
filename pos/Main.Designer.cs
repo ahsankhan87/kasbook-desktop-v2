@@ -111,6 +111,7 @@
             this.customerWiseSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoryWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byPaymentMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchasesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,7 +156,6 @@
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.byPaymentMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -743,6 +743,12 @@
             resources.ApplyResources(this.categoryWiseSalesSummaryToolStripMenuItem, "categoryWiseSalesSummaryToolStripMenuItem");
             this.categoryWiseSalesSummaryToolStripMenuItem.Click += new System.EventHandler(this.categoryWiseSalesSummaryToolStripMenuItem_Click);
             // 
+            // byPaymentMethodToolStripMenuItem
+            // 
+            this.byPaymentMethodToolStripMenuItem.Name = "byPaymentMethodToolStripMenuItem";
+            resources.ApplyResources(this.byPaymentMethodToolStripMenuItem, "byPaymentMethodToolStripMenuItem");
+            this.byPaymentMethodToolStripMenuItem.Click += new System.EventHandler(this.byPaymentMethodToolStripMenuItem_Click);
+            // 
             // purchasesToolStripMenuItem1
             // 
             this.purchasesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -764,8 +770,8 @@
             // 
             // branchSummaryToolStripMenuItem
             // 
-            resources.ApplyResources(this.branchSummaryToolStripMenuItem, "branchSummaryToolStripMenuItem");
             this.branchSummaryToolStripMenuItem.Name = "branchSummaryToolStripMenuItem";
+            resources.ApplyResources(this.branchSummaryToolStripMenuItem, "branchSummaryToolStripMenuItem");
             this.branchSummaryToolStripMenuItem.Click += new System.EventHandler(this.branchSummaryToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
@@ -1034,12 +1040,6 @@
             // 
             this.toolStripButton1.Name = "toolStripButton1";
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
-            // 
-            // byPaymentMethodToolStripMenuItem
-            // 
-            this.byPaymentMethodToolStripMenuItem.Name = "byPaymentMethodToolStripMenuItem";
-            resources.ApplyResources(this.byPaymentMethodToolStripMenuItem, "byPaymentMethodToolStripMenuItem");
-            this.byPaymentMethodToolStripMenuItem.Click += new System.EventHandler(this.byPaymentMethodToolStripMenuItem_Click);
             // 
             // frm_main
             // 

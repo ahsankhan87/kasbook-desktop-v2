@@ -31,6 +31,8 @@ namespace pos
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblStart = new System.Windows.Forms.Label();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
@@ -39,12 +41,11 @@ namespace pos
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
             this.bindingSales = new System.Windows.Forms.BindingSource(this.components);
+            this.colPaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            colPaymentMethod = new DataGridViewTextBoxColumn();
-            colTransactionCount = new DataGridViewTextBoxColumn();
-            colTotalAmount = new DataGridViewTextBoxColumn();
-
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSales)).BeginInit();
@@ -105,7 +106,7 @@ namespace pos
             // 
             this.btnRefresh.Location = new System.Drawing.Point(399, 10);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(90, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(90, 27);
             this.btnRefresh.TabIndex = 4;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -117,6 +118,10 @@ namespace pos
             this.grid.AllowUserToOrderColumns = true;
             this.grid.AutoGenerateColumns = false;
             this.grid.ColumnHeadersHeight = 29;
+            this.grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPaymentMethod,
+            this.colTransactionCount,
+            this.colTotalAmount});
             this.grid.DataSource = this.bindingSales;
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(0, 48);
@@ -128,31 +133,44 @@ namespace pos
             this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid.Size = new System.Drawing.Size(782, 379);
             this.grid.TabIndex = 0;
-
-            // Columns
-            colPaymentMethod.DataPropertyName = "PaymentMethod";
-            colPaymentMethod.HeaderText = "Payment Method";
-            colPaymentMethod.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            colTransactionCount.DataPropertyName = "TransactionCount";
-            colTransactionCount.HeaderText = "Transactions";
-            colTransactionCount.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            colTransactionCount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            colTotalAmount.DataPropertyName = "TotalAmount";
-            colTotalAmount.HeaderText = "Total Amount";
-            colTotalAmount.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            colTotalAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colTotalAmount.DefaultCellStyle.Format = "C2";
-
-            grid.Columns.AddRange(new DataGridViewColumn[]
-            {
-                colPaymentMethod, colTransactionCount, colTotalAmount
-            });
-
+            // 
             // bindingSales
-            bindingSales.DataSource = typeof(SalesByPaymentMethodDto);
-
+            // 
+            this.bindingSales.DataSource = typeof(POS.DLL.SalesByPaymentMethodDto);
+            // 
+            // colPaymentMethod
+            // 
+            this.colPaymentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colPaymentMethod.DataPropertyName = "PaymentMethod";
+            this.colPaymentMethod.HeaderText = "Payment Method";
+            this.colPaymentMethod.MinimumWidth = 6;
+            this.colPaymentMethod.Name = "colPaymentMethod";
+            this.colPaymentMethod.ReadOnly = true;
+            // 
+            // colTransactionCount
+            // 
+            this.colTransactionCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTransactionCount.DataPropertyName = "TransactionCount";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colTransactionCount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colTransactionCount.HeaderText = "Transactions";
+            this.colTransactionCount.MinimumWidth = 6;
+            this.colTransactionCount.Name = "colTransactionCount";
+            this.colTransactionCount.ReadOnly = true;
+            this.colTransactionCount.Width = 114;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            this.colTotalAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colTotalAmount.HeaderText = "Total Amount";
+            this.colTotalAmount.MinimumWidth = 6;
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 115;
             // 
             // statusStrip
             // 

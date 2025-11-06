@@ -1335,6 +1335,42 @@
   <data name="&gt;&gt;Detail.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Btn_printCustomerReceipt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="Btn_printCustomerReceipt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Btn_printCustomerReceipt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>544, 12</value>
+  </data>
+  <data name="Btn_printCustomerReceipt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="Btn_printCustomerReceipt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 28</value>
+  </data>
+  <data name="Btn_printCustomerReceipt.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="Btn_printCustomerReceipt.Text" xml:space="preserve">
+    <value>Print Receipt</value>
+  </data>
+  <data name="&gt;&gt;Btn_printCustomerReceipt.Name" xml:space="preserve">
+    <value>Btn_printCustomerReceipt</value>
+  </data>
+  <data name="&gt;&gt;Btn_printCustomerReceipt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Btn_printCustomerReceipt.Parent" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="&gt;&gt;Btn_printCustomerReceipt.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Btn_ledger_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="Btn_ledger_report.Location" type="System.Drawing.Point, System.Drawing">
     <value>669, 12</value>
   </data>
@@ -1360,7 +1396,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;Btn_ledger_report.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btn_payment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1390,7 +1426,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;btn_payment.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btn_trans_refresh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1420,7 +1456,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;btn_trans_refresh.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="grid_customer_transactions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1525,7 +1561,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;grid_customer_transactions.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Transactions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>

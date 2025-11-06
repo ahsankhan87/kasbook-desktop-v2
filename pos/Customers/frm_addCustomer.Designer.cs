@@ -78,6 +78,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txt_registrationName = new System.Windows.Forms.TextBox();
             this.Transactions = new System.Windows.Forms.TabPage();
+            this.Btn_printCustomerReceipt = new System.Windows.Forms.Button();
             this.Btn_ledger_report = new System.Windows.Forms.Button();
             this.btn_payment = new System.Windows.Forms.Button();
             this.btn_trans_refresh = new System.Windows.Forms.Button();
@@ -392,6 +393,7 @@
             // 
             // Transactions
             // 
+            this.Transactions.Controls.Add(this.Btn_printCustomerReceipt);
             this.Transactions.Controls.Add(this.Btn_ledger_report);
             this.Transactions.Controls.Add(this.btn_payment);
             this.Transactions.Controls.Add(this.btn_trans_refresh);
@@ -399,6 +401,13 @@
             resources.ApplyResources(this.Transactions, "Transactions");
             this.Transactions.Name = "Transactions";
             this.Transactions.UseVisualStyleBackColor = true;
+            // 
+            // Btn_printCustomerReceipt
+            // 
+            resources.ApplyResources(this.Btn_printCustomerReceipt, "Btn_printCustomerReceipt");
+            this.Btn_printCustomerReceipt.Name = "Btn_printCustomerReceipt";
+            this.Btn_printCustomerReceipt.UseVisualStyleBackColor = true;
+            this.Btn_printCustomerReceipt.Click += new System.EventHandler(this.Btn_printCustomerReceipt_Click);
             // 
             // Btn_ledger_report
             // 
@@ -659,5 +668,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txt_registrationName;
+        private System.Windows.Forms.Button Btn_printCustomerReceipt;
     }
 }

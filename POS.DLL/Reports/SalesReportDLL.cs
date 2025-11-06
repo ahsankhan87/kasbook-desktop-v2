@@ -451,16 +451,19 @@ namespace POS.DLL
             using (SqlConnection conn = new SqlConnection(dbConnection.ConnectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_GetBranchSummary", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                var dt = new DataTable();
 
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                using (var cmd = new SqlCommand("sp_GetBranchSummary", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 60; // bump timeout for large datasets
 
+                    using (var adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
                 return dt;
-
-
             }
         }
 

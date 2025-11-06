@@ -396,5 +396,31 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Btn_printCustomerReceipt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (grid_customer_transactions.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string id = grid_customer_transactions.CurrentRow.Cells["id"].Value.ToString();
+
+                if (String.IsNullOrEmpty(id))
+                {
+                    MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                pos.Customers.Customer_Ledger_Report.Frm_customerPaymentReceipt frm_CustomerPaymentReceipt = new Customers.Customer_Ledger_Report.Frm_customerPaymentReceipt(id);
+                frm_CustomerPaymentReceipt.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
