@@ -180,6 +180,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account," +
+                            " 0 AS invoice_subtype,0 AS invoice_subtype_code," +
                             " SI.id,SI.item_code,SI.item_number,SI.quantity_sold,SI.unit_price," +
                             " S.discount_value AS total_discount, S.total_tax, S.total_amount, " + 
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
