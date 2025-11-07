@@ -62,7 +62,14 @@ namespace pos
             string company_email = "";
             string company_vat_no = "";
             string company_contact_no = "";
-            
+            string StreetName= "";
+            string BuildingNumber = "";
+            string CitySubdivisionName= "";
+            string CityName= "";
+            string Postalcode= "";
+            string CountryName= "";
+
+
             foreach (DataRow dr_company in company_dt.Rows)
             {
                 company_name = dr_company["name"].ToString();
@@ -70,6 +77,12 @@ namespace pos
                 company_email = dr_company["email"].ToString();
                 company_vat_no = dr_company["vat_no"].ToString();
                 company_contact_no = dr_company["contact_no"].ToString();
+                StreetName = dr_company["StreetName"].ToString();
+                BuildingNumber = dr_company["BuildingNumber"].ToString();
+                CitySubdivisionName = dr_company["CitySubdivisionName"].ToString();
+                CityName = dr_company["CityName"].ToString();
+                Postalcode = dr_company["Postalcode"].ToString();
+                CountryName = dr_company["CountryName"].ToString();
             }
 
             string SallerName = gethexstring(1, company_name); //Tag1
@@ -107,6 +120,12 @@ namespace pos
             rptDoc.SetParameterValue("company_vat", company_vat_no);
             rptDoc.SetParameterValue("company_address", company_address);
             rptDoc.SetParameterValue("company_contact", company_contact_no);
+            rptDoc.SetParameterValue("StreetName", StreetName);
+            rptDoc.SetParameterValue("BuildingNumber", BuildingNumber);
+            rptDoc.SetParameterValue("CitySubdivisionName", CitySubdivisionName);
+            rptDoc.SetParameterValue("CityName", CityName);
+            rptDoc.SetParameterValue("Postalcode", Postalcode);
+            rptDoc.SetParameterValue("CountryName", CountryName);
 
             rptDoc.SetParameterValue("subtotal", total_amount);
             rptDoc.SetParameterValue("total_discount", total_discount);
