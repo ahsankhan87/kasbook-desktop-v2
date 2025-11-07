@@ -117,12 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnCustomerNameChange.Text" xml:space="preserve">
+    <value>تغيير العميل</value>
+  </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 23</value>
+    <value>101, 28</value>
   </data>
   <data name="btn_print_invoice.Text" xml:space="preserve">
     <value>فاتورة طباعة</value>
@@ -131,7 +134,7 @@
     <value>تحديث</value>
   </data>
   <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>154, 25</value>
   </data>
   <data name="lbl_taxes_title.Text" xml:space="preserve">
     <value>جميع معاملات البيع</value>
@@ -139,7 +142,10 @@
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
   </data>
-  <data name="customer_name.HeaderText" xml:space="preserve">
+  <data name="invoice_subtype_code.HeaderText" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="customer.HeaderText" xml:space="preserve">
     <value>عميل</value>
   </data>
   <data name="sale_date.HeaderText" xml:space="preserve">
@@ -157,7 +163,7 @@
   <data name="total_tax.HeaderText" xml:space="preserve">
     <value>مجموع الضريبة</value>
   </data>
-  <data name="total_amount.HeaderText" xml:space="preserve">
+  <data name="total.HeaderText" xml:space="preserve">
     <value>المبلغ الإجمالي</value>
   </data>
   <data name="detail.HeaderText" xml:space="preserve">
@@ -165,13 +171,13 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="detail.Width" type="System.Int32, mscorlib">
-    <value>52</value>
+    <value>54</value>
   </data>
   <data name="btn_delete.HeaderText" xml:space="preserve">
     <value>حذف</value>
   </data>
   <data name="btn_delete.Width" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>36</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

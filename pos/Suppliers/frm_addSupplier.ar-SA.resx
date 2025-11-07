@@ -138,7 +138,7 @@
     <value>599, 81</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 17</value>
+    <value>34, 16</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>الكنية</value>
@@ -156,7 +156,7 @@
     <value>599, 141</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
+    <value>86, 16</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>البريد الإلكتروني</value>
@@ -174,7 +174,7 @@
     <value>599, 201</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 17</value>
+    <value>34, 16</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>عنوان</value>
@@ -192,7 +192,7 @@
     <value>599, 171</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 17</value>
+    <value>63, 16</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>رقم الاتصال</value>
@@ -210,13 +210,13 @@
     <value>599, 111</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
+    <value>73, 16</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>الرقم الضريبي</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
+    <value>90, 16</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>البحث عن مورد
@@ -252,7 +252,7 @@
 </value>
   </data>
   <data name="chk_vat_status.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 21</value>
+    <value>109, 20</value>
   </data>
   <data name="chk_vat_status.Text" xml:space="preserve">
     <value>التكلفة مع ضريبة</value>
@@ -264,7 +264,7 @@
     <value>599, 51</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 17</value>
+    <value>57, 16</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>الاسم الأول</value>
@@ -276,6 +276,9 @@
   <data name="tabPage2.Text" xml:space="preserve">
     <value>المعاملات
 </value>
+  </data>
+  <data name="Btn_printPaymentReceipt.Text" xml:space="preserve">
+    <value>طباعة إيصال الدفع</value>
   </data>
   <data name="Btn_ledger_report.Text" xml:space="preserve">
     <value>تقرير الموردين</value>
