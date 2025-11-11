@@ -1960,6 +1960,15 @@ namespace pos
 
         }
 
+        private void salesExpensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            POS.Reports.Finance.frm_salesExpensesReport salesExpensesForm = new POS.Reports.Finance.frm_salesExpensesReport
+            {
+                MdiParent = this
+            };
+            salesExpensesForm.Show();
+        }
+
         //private void CreateDashboardPanel()
         //{
         //    // Main dashboard container

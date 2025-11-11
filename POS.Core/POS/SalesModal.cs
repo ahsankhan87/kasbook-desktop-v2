@@ -147,4 +147,13 @@ namespace POS.Core
         public double packet_qty { get; set; }
 
     }
+
+    public sealed class FinanceSummaryDto
+    {
+        public decimal SalesAmount { get; set; }
+        public decimal SalesTax { get; set; }
+        public decimal SalesNet { get; set; }
+        public decimal ExpensesTotal { get; set; }
+        public decimal Profit => SalesNet - ExpensesTotal;
+    }
 }

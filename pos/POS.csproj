@@ -806,6 +806,12 @@
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\DGVPrinter.cs" />
+    <Compile Include="Reports\Finance\frm_salesExpensesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Finance\frm_salesExpensesReport.Designer.cs">
+      <DependentUpon>frm_salesExpensesReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
       <SubType>Form</SubType>
     </Compile>

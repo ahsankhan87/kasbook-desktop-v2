@@ -92,7 +92,8 @@ namespace pos
             //btn_movements.Enabled = false;
             get_suppliers_dropdownlist();
             get_employees_dropdownlist();
-            
+            get_payment_method_dropdownlist();
+
             //GetMAXInvoiceNo();
             //disable sorting in grid
             foreach (DataGridViewColumn column in grid_purchases.Columns)
@@ -1711,7 +1712,7 @@ namespace pos
             
             for (int i = 0; i <= total_rows - 1; i++)
             {
-                int product_id = Convert.ToInt16(grid_purchases.Rows[i].Cells["id"].Value);
+                Int32 product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
                 if (product_id > 0)
                 {
                     filled_rows++;
@@ -1736,7 +1737,7 @@ namespace pos
 
                 for (int i = 0; i <= filled_rows - 1; i++)
                 {
-                    int product_id = Convert.ToInt16(grid_purchases.Rows[i].Cells["id"].Value);
+                    int product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
                     if(product_id > 0)
                     {
                         grid_purchases.Rows[i].Cells["discount"].Value = Math.Round(diff_amount_per_item,3);
@@ -1929,6 +1930,11 @@ namespace pos
             {
                 string purchase_type = (string.IsNullOrEmpty(cmb_purchase_type.SelectedValue.ToString()) ? "Cash" : cmb_purchase_type.SelectedValue.ToString());
                 int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
+                string bankID = "";
+                string bankGLAccountID = "";
+                string paymentMethodText = cmb_payment_method.Text;
+                int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
+
 
                 if (purchase_type == "Hold")
                 {
@@ -1936,13 +1942,25 @@ namespace pos
                     return;
                 }
 
-
                 if (supplier_id <= 0 || txt_supplier_invoice.Text.Length == 0)
                 {
                     MessageBox.Show("Supplier and Supplier Invoice No. are required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     cmb_suppliers.Focus();
                     return;
                 }
+                
+                if (purchase_type == "Cash" && (paymentMethodText.Contains("Bank") || paymentMethodText.Contains("bank") || paymentMethodText.Contains("banks") || paymentMethodText.Contains("Banks")))
+                {
+                    Master.Banks.frm_banksPopup bankfrm = new Master.Banks.frm_banksPopup();
+                    bankfrm.ShowDialog();
+                    string bankIDPlusGLAccountID = bankfrm._bankIDPlusGLAccountID;
+
+                    int condition_index_len = bankIDPlusGLAccountID.IndexOf("+");
+                    bankID = bankIDPlusGLAccountID.Substring(0, condition_index_len).Trim();
+                    bankGLAccountID = bankIDPlusGLAccountID.Substring(condition_index_len + 1).Trim();
+
+                }
+
 
                 //if (txt_supplier_invoice.Text.Length == 0)
                 //{
@@ -2022,6 +2040,12 @@ namespace pos
                             account = "Purchase",
                             po_invoice_no = po_invoice_no_1,
                             po_status = po_status,
+
+                            payment_method_id = payment_method_id,
+                            payment_method_text = paymentMethodText,
+                            bankGLAccountID = bankGLAccountID,
+                            bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
+
 
                             cash_account_id = cash_account_id,
                             payable_account_id = payable_account_id,
@@ -2267,6 +2291,25 @@ namespace pos
             PurchasesBLL purchasesBLL= new PurchasesBLL();
             DataTable dt = purchasesBLL.PurchaseReceipt(invoice_no);
             return dt;
+
+        }
+
+        public void get_payment_method_dropdownlist()
+        {
+            PaymentMethodBLL paymentMethodBLL = new PaymentMethodBLL();
+
+            DataTable payment_method = paymentMethodBLL.GetAll();
+            DataRow emptyRow = payment_method.NewRow();
+            //emptyRow[0] = 0;              // Set Column Value
+            //emptyRow[1] = "";              // Set Column Value
+            //payment_method.Rows.InsertAt(emptyRow, 0);
+
+
+            cmb_payment_method.DisplayMember = "description";
+            cmb_payment_method.ValueMember = "id";
+            cmb_payment_method.DataSource = payment_method;
+
+            cmb_employees.SelectedIndex = 0;
 
         }
     }

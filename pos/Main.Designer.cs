@@ -156,6 +156,7 @@
             this.toolStripButton_salesv1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.salesExpensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -687,6 +688,7 @@
             this.salesToolStripMenuItem,
             this.purchasesToolStripMenuItem1,
             this.warehouseToolStripMenuItem1,
+            this.salesExpensesToolStripMenuItem,
             this.branchSummaryToolStripMenuItem,
             this.toolStripSeparator11,
             this.journalDaybookToolStripMenuItem,
@@ -770,8 +772,8 @@
             // 
             // branchSummaryToolStripMenuItem
             // 
-            this.branchSummaryToolStripMenuItem.Name = "branchSummaryToolStripMenuItem";
             resources.ApplyResources(this.branchSummaryToolStripMenuItem, "branchSummaryToolStripMenuItem");
+            this.branchSummaryToolStripMenuItem.Name = "branchSummaryToolStripMenuItem";
             this.branchSummaryToolStripMenuItem.Click += new System.EventHandler(this.branchSummaryToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
@@ -1041,6 +1043,12 @@
             this.toolStripButton1.Name = "toolStripButton1";
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             // 
+            // salesExpensesToolStripMenuItem
+            // 
+            this.salesExpensesToolStripMenuItem.Name = "salesExpensesToolStripMenuItem";
+            resources.ApplyResources(this.salesExpensesToolStripMenuItem, "salesExpensesToolStripMenuItem");
+            this.salesExpensesToolStripMenuItem.Click += new System.EventHandler(this.salesExpensesToolStripMenuItem_Click);
+            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1196,5 +1204,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_dashboard;
         private System.Windows.Forms.ToolStripMenuItem banksReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem byPaymentMethodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesExpensesToolStripMenuItem;
     }
 }
