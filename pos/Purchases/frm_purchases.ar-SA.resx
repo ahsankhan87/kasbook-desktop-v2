@@ -330,6 +330,30 @@
   <data name="LoadPOToolStripButton.Text" xml:space="preserve">
     <value>طلبات (Ct+L)</value>
   </data>
+  <data name="PrinttoolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 42</value>
+  </data>
+  <data name="PrinttoolStripButton.Text" xml:space="preserve">
+    <value>طباعة الفاتورة</value>
+  </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 136</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 16</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>طريقة الدفع:</value>
+  </data>
+  <data name="cmb_payment_method.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_payment_method.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 133</value>
+  </data>
   <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
