@@ -395,7 +395,7 @@ namespace POS.DLL
                             }
                             keyword = keyword.Substring(0, keyword.Length - 4);// remove last 3 letter i.e. AND from query
 
-                            string query = "SELECT p.id,p.item_number,p.part_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                            string query = "SELECT p.id,p.item_number,p.part_number, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
                                 " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, p.picture, p.packet_qty," +
                                 " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty" + //branch wise qty
                                 " FROM pos_products AS p";
@@ -733,14 +733,14 @@ namespace POS.DLL
                             {
                                 // First try with CONTAINS (more efficient if full-text index exists)
                                 string containsClause = BuildContainsClause(condition);
-                                
+
                                 // Combine both approaches with OR
                                 query += " AND (" + containsClause ;
 
                                 //string containsClause1 = OptimizeSearchTerm(condition);
 
                                 // Fallback for short words (full-text ignores words < 3 chars)
-                                if (condition.Length > 3)
+                                if (condition.Trim().Length > 3)
                                 {
                                     string likeClause = BuildLikeClause(condition,
                                     new[] { "P.code" }); //{ "P.name", "P.code", "P.item_number", "P.description" }
@@ -755,7 +755,7 @@ namespace POS.DLL
                                 else
                                 {
                                     query += ")";
-                                }
+                            }
                             }
 
                             // Add optional filters
@@ -786,6 +786,7 @@ namespace POS.DLL
                             }
 
                             //query += " ORDER BY qty DESC";
+                            // Add TOP to limit results and improve performance
                             query = "SELECT TOP 200 * FROM (" + query + ") AS Results ORDER BY name ASC";
 
                             cmd.CommandText = query;
@@ -1183,7 +1184,7 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            cmd.CommandText = @"SELECT code, name FROM pos_products WHERE deleted != '1'";
+                            cmd.CommandText = @"SELECT code, name FROM pos_products WHERE deleted != '1' ORDER BY name";
                             cmd.Connection = cn;
                             //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -1516,7 +1517,7 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT P.id,P.name,P.part_number,P.item_number, P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,,P.location_code," +
+                            cmd.CommandText = @"SELECT P.id,P.name,P.part_number,P.item_number, P.cost_price,P.unit_price,P.item_type,P.code,P.tax_id,P.category_code," +
                                  " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " T.title AS tax_title,T.rate AS tax_rate" +
                                 " FROM pos_products P" +
@@ -1640,44 +1641,33 @@ namespace POS.DLL
         public DataTable Get_otherStock(string productID, string item_number)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand())
             {
-                using (SqlCommand cmd = new SqlCommand())
+                DataTable dt = new DataTable();
+                try
                 {
-                    try
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd.Connection = cn;
+                    cmd.CommandText = "SELECT S.qty,S.item_code, B.name AS branch_name FROM pos_product_stocks S" +
+                                      " LEFT JOIN pos_branches B ON S.branch_id=B.id" +
+                                      " WHERE (S.item_number = @item_number) AND S.branch_id <> @branch_id";
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    cmd.Parameters.AddWithValue("@productID", productID);
+                    cmd.Parameters.AddWithValue("@item_number", item_number);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        DataTable dt = new DataTable();
-                        if (cn.State == ConnectionState.Closed)
-                        {
-                            cn.Open();
-
-                            cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT S.qty,S.item_code, B.name AS branch_name FROM pos_product_stocks S" +
-                                " LEFT JOIN pos_branches B ON S.branch_id=B.id" +
-                                " WHERE (S.item_number = @item_number) AND S.branch_id <> @branch_id";
-                            // "AND P.branch_id = @branch_id";
-
-                            //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@productID", productID);
-                            cmd.Parameters.AddWithValue("@item_number", item_number);
-
-                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                            {
-                                da.Fill(dt);
-                            }
-
-                        }
-
-                        return dt;
-                    }
-                    catch
-                    {
-
-                        throw;
+                        da.Fill(dt);
                     }
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error fetching other stock: " + ex.Message, ex);
+                }
+                return dt;
             }
-
         }
 
         public int Insert(ProductModal obj)
@@ -1813,7 +1803,7 @@ namespace POS.DLL
                         Log.LogAction("Update Product", $"Product Code: {obj.code}, Product Name: {obj.name}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                     }
                     catch
-                    {
+                   {
                         throw;
                     }
                 }
@@ -1903,7 +1893,7 @@ namespace POS.DLL
                             //-- 2) Update  
                             //-- 3) Delete  
                             //-- 4) Select Perticular Record  
-                            //-- 5) Bulk update 
+                            //-- 5) Bulk update
                         }
 
                         result = Convert.ToInt32(cmd.ExecuteScalar());
@@ -1924,41 +1914,39 @@ namespace POS.DLL
         {
             string result = "";
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand("sp_ProductsCrud", cn))
             {
-                using (SqlCommand cmd = new SqlCommand("sp_ProductsCrud", cn))
+                try
                 {
-                    try
+                    if (cn.State == ConnectionState.Closed)
                     {
-                        if (cn.State == ConnectionState.Closed)
-                        {
-                            cn.Open();
+                        cn.Open();
 
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@item_number", obj.item_number);
-                            cmd.Parameters.AddWithValue("@code", obj.code);
-                            cmd.Parameters.AddWithValue("@qty", obj.qty);
-                            cmd.Parameters.AddWithValue("@adjustment_qty", obj.adjustment_qty);
-                            cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
-                            cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
-                            cmd.Parameters.AddWithValue("@location_code", obj.location_code);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@item_number", obj.item_number);
+                        cmd.Parameters.AddWithValue("@code", obj.code);
+                        cmd.Parameters.AddWithValue("@qty", obj.qty);
+                        cmd.Parameters.AddWithValue("@adjustment_qty", obj.adjustment_qty);
+                        cmd.Parameters.AddWithValue("@cost_price", obj.cost_price);
+                        cmd.Parameters.AddWithValue("@unit_price", obj.unit_price);
+                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@invoice_no", obj.invoice_no);
+                        cmd.Parameters.AddWithValue("@location_code", obj.location_code);
 
-                            cmd.Parameters.AddWithValue("@OperationType", "7"); //-- 6) qty adjustment update
-
-                        }
-
-                        result = cmd.ExecuteScalar().ToString();
-                        Log.LogAction("Update Product Adjustment", $"Product Code: {obj.code}, InvoiceNo: {obj.invoice_no}, Adjustment Qty= {obj.adjustment_qty}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@OperationType", "7"); //-- 6) qty adjustment update
 
                     }
-                    catch
-                    {
 
-                        throw;
-                    }
+                    result = cmd.ExecuteScalar().ToString();
+                    Log.LogAction("Update Product Adjustment", $"Product Code: {obj.code}, InvoiceNo: {obj.invoice_no}, Adjustment Qty= {obj.adjustment_qty}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+
+                }
+                catch
+                {
+
+                    throw;
                 }
             }
             return result;
@@ -2118,6 +2106,272 @@ namespace POS.DLL
                 }
             }
             return (int)result;
+        }
+
+        public DataTable SearchProductsPaged(string condition, string category_code, string brand_code_csv, string group_code, int pageIndex, int pageSize)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                DataTable dt = new DataTable();
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    // Base select (only required columns)
+                    string select = @"SELECT p.id, p.item_number, p.part_number, p.code, p.name, p.name_ar, p.category_code, 
+                                         p.item_type, p.brand_code, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2,
+                                         p.tax_id, p.location_code, p.unit_id, p.re_stock_level, p.description, p.group_code,
+                                         p.alt_no, p.packet_qty, ISNULL(bs.branch_qty,0) AS qty,
+                                         C.name AS category, C.id AS category_id";
+
+                    // Derived table for branch stock (pre-aggregated for speed)
+                    string joinStock = @"LEFT JOIN (
+                                            SELECT item_number, SUM(qty) AS branch_qty
+                                            FROM pos_product_stocks WITH (NOLOCK)
+                                            WHERE branch_id=@branch_id
+                                            GROUP BY item_number
+                                        ) bs ON bs.item_number = p.item_number";
+                    string from = @"FROM pos_products p WITH (NOLOCK)
+                                   LEFT JOIN pos_categories C WITH (NOLOCK) ON C.code = p.category_code
+                                   " + joinStock;
+
+                    StringBuilder where = new StringBuilder();
+                    where.Append("WHERE p.deleted=0");
+
+                    // Filters
+                    if (!string.IsNullOrEmpty(category_code))
+                    {
+                        where.Append(" AND p.category_code = @category_code");
+                        cmd.Parameters.AddWithValue("@category_code", category_code);
+                    }
+                    if (!string.IsNullOrEmpty(group_code))
+                    {
+                        where.Append(" AND p.group_code = @group_code");
+                        cmd.Parameters.AddWithValue("@group_code", group_code);
+                    }
+                    if (!string.IsNullOrEmpty(brand_code_csv))
+                    {
+                        var brands = brand_code_csv.Split(',').Select(b => b.Trim()).Where(b => b.Length > 0).ToList();
+                        if (brands.Count > 0)
+                        {
+                            if (brands.Count == 1)
+                            {
+                                where.Append(" AND p.brand_code = @brand_code");
+                                cmd.Parameters.AddWithValue("@brand_code", brands[0]);
+                            }
+                            else
+                            {
+                                var inParams = new List<string>();
+                                for (int i = 0; i < brands.Count; i++)
+                                {
+                                    string pname = "@brand" + i;
+                                    inParams.Add(pname);
+                                    cmd.Parameters.AddWithValue(pname, brands[i]);
+                                }
+                                where.Append(" AND p.brand_code IN (" + string.Join(",", inParams) + ")");
+                            }
+                        }
+                    }
+
+                    // Search condition (debounced externally). Prefer LIKE with leading pattern only for index usage.
+                    if (!string.IsNullOrWhiteSpace(condition))
+                    {
+                        var words = condition.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                                              .Where(w => w.Length > 0).ToList();
+                        if (words.Count == 1 && words[0].Length < 3)
+                        {
+                            where.Append(" AND (p.code LIKE @term OR p.part_number LIKE @term OR p.name LIKE @term)");
+                            cmd.Parameters.AddWithValue("@term", words[0] + "%");
+                        }
+                        else if (words.Count == 1)
+                        {
+                            where.Append(" AND (p.name LIKE @termLong OR p.code LIKE @termLike OR p.part_number LIKE @termLike OR p.description LIKE @termDesc)");
+                            cmd.Parameters.AddWithValue("@termLong", words[0] + "%");
+                            cmd.Parameters.AddWithValue("@termLike", "%" + words[0] + "%");
+                            cmd.Parameters.AddWithValue("@termDesc", "%" + words[0] + "%");
+                        }
+                        else
+                        {
+                            // multi-word: each word must appear in ANY of the searchable columns; build AND groups
+                            // ( (col LIKE %w1%) AND (col LIKE %w2%) ... ) across combined columns
+                            int idx = 0;
+                            where.Append(" AND (");
+                            foreach (var w in words)
+                            {
+                                string pName = "@w" + idx++;
+                                // Short tokens (<3) use prefix match to allow partial typing
+                                if (w.Length < 3)
+                                {
+                                    cmd.Parameters.AddWithValue(pName, w + "%");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue(pName, "%" + w + "%");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                }
+                            }
+                            where.Length -= 4; // remove trailing AND
+                            where.Append(")");
+                        }
+                    }
+
+                    string orderPaging = " ORDER BY p.name ASC, p.id ASC OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
+                    cmd.Parameters.AddWithValue("@offset", pageIndex * pageSize);
+                    cmd.Parameters.AddWithValue("@pageSize", pageSize);
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                    cmd.CommandText = select + " " + from + " " + where.ToString() + orderPaging;
+                    cmd.Connection = cn;
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Paged search failed: " + ex.Message, ex);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable SearchProductsPagedWithCount(string condition, string category_code, string brand_code_csv, string group_code, int pageIndex, int pageSize, out int totalCount)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                DataTable dt = new DataTable();
+                totalCount = 0;
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    StringBuilder where = new StringBuilder("WHERE p.deleted=0");
+
+                    if (!string.IsNullOrEmpty(category_code))
+                    {
+                        where.Append(" AND p.category_code = @category_code");
+                        cmd.Parameters.AddWithValue("@category_code", category_code);
+                    }
+                    if (!string.IsNullOrEmpty(group_code))
+                    {
+                        where.Append(" AND p.group_code = @group_code");
+                        cmd.Parameters.AddWithValue("@group_code", group_code);
+                    }
+                    if (!string.IsNullOrEmpty(brand_code_csv))
+                    {
+                        var brands = brand_code_csv.Split(',').Select(b => b.Trim()).Where(b => b.Length > 0).ToList();
+                        if (brands.Count > 0)
+                        {
+                            if (brands.Count == 1)
+                            {
+                                where.Append(" AND p.brand_code = @brand_code");
+                                cmd.Parameters.AddWithValue("@brand_code", brands[0]);
+                            }
+                            else
+                            {
+                                var inParams = new List<string>();
+                                for (int i = 0; i < brands.Count; i++)
+                                {
+                                    string pname = "@brand" + i;
+                                    inParams.Add(pname);
+                                    cmd.Parameters.AddWithValue(pname, brands[i]);
+                                }
+                                where.Append(" AND p.brand_code IN (" + string.Join(",", inParams) + ")");
+                            }
+                        }
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(condition))
+                    {
+                        var words = condition.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                                              .Where(w => w.Length > 0).ToList();
+                        if (words.Count > 1)
+                        {
+                            int idx = 0;
+                            where.Append(" AND (");
+                            foreach (var w in words)
+                            {
+                                string pName = "@w" + idx++;
+                                if (w.Length < 3)
+                                {
+                                    cmd.Parameters.AddWithValue(pName, w + "%");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue(pName, "%" + w + "%");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                }
+                            }
+                            where.Length -= 4; // remove trailing AND
+                            where.Append(")");
+                        }
+                        else
+                        {
+                            string single = words[0];
+                            if (single.Length < 3)
+                            {
+                                where.Append(" AND (p.code LIKE @term OR p.part_number LIKE @term OR p.name LIKE @term)");
+                                cmd.Parameters.AddWithValue("@term", single + "%");
+                            }
+                            else
+                            {
+                                where.Append(" AND (p.name LIKE @termLong OR p.code LIKE @termLike OR p.part_number LIKE @termLike OR p.description LIKE @termDesc)");
+                                cmd.Parameters.AddWithValue("@termLong", single + "%");
+                                cmd.Parameters.AddWithValue("@termLike", "%" + single + "%");
+                                cmd.Parameters.AddWithValue("@termDesc", "%" + single + "%");
+                            }
+                        }
+                    }
+
+                    using (SqlCommand countCmd = new SqlCommand("SELECT COUNT(1) FROM pos_products p " + where.ToString(), cn))
+                    {
+                        foreach (SqlParameter p in cmd.Parameters)
+                            countCmd.Parameters.Add(new SqlParameter(p.ParameterName, p.Value));
+                        totalCount = Convert.ToInt32(countCmd.ExecuteScalar());
+                    }
+
+                    string select = @"SELECT p.id, p.item_number, p.part_number, p.code, p.name, p.name_ar, p.category_code, 
+                                         p.item_type, p.brand_code, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2,
+                                         p.tax_id, p.location_code, p.unit_id, p.re_stock_level, p.description, p.group_code,
+                                         p.alt_no, p.packet_qty, ISNULL(bs.branch_qty,0) AS qty,
+                                         C.name AS category, C.id AS category_id";
+
+                    string joinStock = @"LEFT JOIN (
+                                            SELECT item_number, SUM(qty) AS branch_qty
+                                            FROM pos_product_stocks WITH (NOLOCK)
+                                            WHERE branch_id=@branch_id
+                                            GROUP BY item_number
+                                        ) bs ON bs.item_number = p.item_number";
+                    string from = @"FROM pos_products p WITH (NOLOCK)
+                                   LEFT JOIN pos_categories C WITH (NOLOCK) ON C.code = p.category_code
+                                   " + joinStock;
+
+                    string orderPaging = " ORDER BY p.name ASC, p.id ASC OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY";
+                    cmd.Parameters.AddWithValue("@offset", pageIndex * pageSize);
+                    cmd.Parameters.AddWithValue("@pageSize", pageSize);
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                    cmd.CommandText = select + " " + from + " " + where.ToString() + orderPaging;
+                    cmd.Connection = cn;
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Paged search with count failed: " + ex.Message, ex);
+                }
+                return dt;
+            }
         }
     }
 }

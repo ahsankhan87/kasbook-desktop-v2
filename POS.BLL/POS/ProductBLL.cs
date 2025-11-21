@@ -456,5 +456,24 @@ namespace POS.BLL
             }
         }
 
+        public DataTable SearchProductsPaged(string condition, string category_code, string brand_code_csv, string group_code, int pageIndex, int pageSize)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.SearchProductsPaged(condition, category_code, brand_code_csv, group_code, pageIndex, pageSize);
+            }
+            catch { throw; }
+        }
+
+        public DataTable SearchProductsPagedWithCount(string condition, string category_code, string brand_code_csv, string group_code, int pageIndex, int pageSize, out int totalCount)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.SearchProductsPagedWithCount(condition, category_code, brand_code_csv, group_code, pageIndex, pageSize, out totalCount);
+            }
+            catch { throw; }
+        }
     }
 }

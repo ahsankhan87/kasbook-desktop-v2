@@ -2,6 +2,7 @@
 using POS.Core;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -17,7 +18,16 @@ namespace pos
         string _brand_code = "";
         string _group_code = "";
         bool _isGrid = false;
+
         public bool _returnStatus = false;
+
+        int _pageIndex = 0;
+        int _pageSize = 100; // adjust as needed
+        Timer _debounceTimer;
+        private ProductBLL _productBll = new ProductBLL();
+        int _totalCount = 0;
+        int _totalPages = 0;
+        Label _lblPages; // runtime created label
 
         public frm_searchSaleProducts(frm_sales mainForm, string product_code, string category_code, string brand_code, bool isGrid = false, string group_code = "")
         {
@@ -31,18 +41,35 @@ namespace pos
             _group_code = group_code;
 
             InitializeComponent();
+            
+            _debounceTimer = new Timer();
+            _debounceTimer.Interval = 300; // 300ms debounce
+            _debounceTimer.Tick += (s, e) =>
+            {
+                _debounceTimer.Stop();
+                _pageIndex = 0; // reset page when typing
+                PerformPagedSearch();
+            };            
         }
 
         public frm_searchSaleProducts()
         {
             InitializeComponent();
-
+            
+            _debounceTimer = new Timer();
+            _debounceTimer.Interval = 300;
+            _debounceTimer.Tick += (s, e) =>
+            {
+                _debounceTimer.Stop();
+                _pageIndex = 0;
+                PerformPagedSearch();
+            };            
         }
 
         private void frm_searchSaleProducts_Load(object sender, EventArgs e)
         {
             txt_search.Text = _product_code;
-            load_Products_grid();
+            PerformPagedSearch();
             grid_search_products.Focus();
         }
 
@@ -54,89 +81,99 @@ namespace pos
             }
         }
 
-        public void load_Products_grid()
+        private void PerformPagedSearch()
         {
             try
             {
-                grid_search_products.DataSource = null;
-
-                // set it to false if not needed for fast load
-                grid_search_products.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-                // or even better, use .DisableResizing. Most time consuming enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-                grid_search_products.RowHeadersVisible = false;
-
-                //bind data in data grid view  
-                //ProductBLL objBLL = new ProductBLL();
-                grid_search_products.AutoGenerateColumns = false;
-
-                String condition = txt_search.Text.Trim();
-
-                if (condition != "")
+                string condition = txt_search.Text.Trim();
+                if (string.IsNullOrWhiteSpace(condition))
                 {
-                    //Call search first time
-                    grid_search_products.DataSource = ProductBLL.SearchProductByBrandAndCategory(condition, _category_code, _brand_code, _group_code);
-                    //grid_search_products.DataSource = ProductBLL.GetAllProducts(condition);
+                    grid_search_products.DataSource = null;
+                    _totalCount = 0; _totalPages = 0; UpdatePagingLabel();
+                    return;
+                }
+                var sw = Stopwatch.StartNew();
+                //var dt = ProductBLL.SearchProductByBrandAndCategory(condition, _category_code, _brand_code, _group_code);
+                var  dt = _productBll.SearchProductsPagedWithCount(condition, _category_code, _brand_code, _group_code, _pageIndex, _pageSize, out _totalCount);
+                sw.Stop();
+                _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
+                // clamp page index if past last page (can occur after data changes)
+                if (_pageIndex >= _totalPages && _totalPages > 0)
+                {
+                    _pageIndex = _totalPages - 1;
+                    dt = _productBll.SearchProductsPagedWithCount(condition, _category_code, _brand_code, _group_code, _pageIndex, _pageSize, out _totalCount);
+                }
+                grid_search_products.AutoGenerateColumns = false;
+                grid_search_products.DataSource = dt;
+                UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
+                this.Text = $"Products (Page {_pageIndex + 1}/{_totalPages})";
 
-                    if (grid_search_products.Rows.Count <= 0)
+                if (dt.Rows.Count == 0)
+                {
+                    string resultMsg = (lang == "ar-SA" ? "لم يتم العثور على المنتج، هل تريد إنشاء منتج جديد؟" : "Product not found, want to create new product?");
+                    string resultMsgTitle = (lang == "ar-SA" ? "معاملة بيع" : "Sale Transaction");
+                    DialogResult result = MessageBox.Show(resultMsg, resultMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Yes)
                     {
-                        string resultMsg = "";
-                        string resultMsgTitle = "";
-                        if (lang == "en-US")
-                        {
-                            resultMsg =  "Product not found, want to create new product?";
-                            resultMsgTitle = "Sale Transaction";
-                        }
-                        else if (lang == "ar-SA")
-                        {
-                            resultMsg = "لم يتم العثور على المنتج، هل تريد إنشاء منتج جديد؟";
-                            resultMsgTitle = "معاملة بيع";
-                        }
-                        DialogResult result = MessageBox.Show(resultMsg, resultMsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            //var keyword = "";
-                            //int numericValue;
-                            // bool isNumber = int.TryParse(condition, out numericValue);
-                            //if (isNumber)
-                            // {
-                            //    keyword = numericValue.ToString();
-                            //}
-
-                            frm_product_full_detail frm_products = new frm_product_full_detail(null, null, "", this, null, condition);
-                            frm_products.ShowDialog();
-
-                            //Call serach again after new product added
-                            grid_search_products.DataSource = ProductBLL.SearchProductByBrandAndCategory(condition, _category_code, _brand_code, _group_code);
-                            
-                            ///
-                        }
-                        else
-                        {
-                            //this.Visible = false;
-                            this.Close();
-                        }
+                        frm_product_full_detail frm_products = new frm_product_full_detail(null, null, "", this, null, condition);
+                        frm_products.ShowDialog();
+                        dt = _productBll.SearchProductsPagedWithCount(condition, _category_code, _brand_code, _group_code, _pageIndex, _pageSize, out _totalCount);
+                        _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
+                        grid_search_products.DataSource = dt;
+                        UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
                     }
                     else
                     {
-                        string productID = (grid_search_products.CurrentRow.Cells["id"].Value != null ? grid_search_products.CurrentRow.Cells["id"].Value.ToString() : "");
-                        string product_code = (grid_search_products.CurrentRow.Cells["code"].Value != null ? grid_search_products.CurrentRow.Cells["code"].Value.ToString() : "");
-                        string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
-                        int alternate_no = (grid_search_products.CurrentRow.Cells["alternate_no"].Value != null ? Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value) : 0);
-                        load_alternate_product(alternate_no);//load alternate products
-                        load_other_stock(productID, item_number);
-
+                        this.Close();
                     }
-
                 }
-
+                else
+                {
+                    if (grid_search_products.CurrentRow != null)
+                    {
+                        string productID = grid_search_products.CurrentRow.Cells["id"].Value?.ToString();
+                        string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value?.ToString();
+                        int alternate_no = 0;
+                        if (grid_search_products.CurrentRow.Cells["alternate_no"] != null)
+                            int.TryParse(grid_search_products.CurrentRow.Cells["alternate_no"].Value?.ToString(), out alternate_no);
+                        load_alternate_product(alternate_no);
+                        if (!string.IsNullOrEmpty(productID) && !string.IsNullOrEmpty(item_number))
+                            load_other_stock(productID, item_number);
+                    }
+                }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
 
+        private void UpdatePagingLabel(long elapsedMs = 0, int currentCount = 0)
+        {
+            if (lbl_pages1 == null) return;
+            string timePart = elapsedMs > 0 ? $" | {elapsedMs} ms" : string.Empty;
+            lbl_pages1.Text = $"Page {_pageIndex + 1} of {_totalPages} | Rows {currentCount}/{_totalCount}{timePart}";
+            // disable page navigation if at ends
+            // (UI logic could be added later for buttons) but clamp via key handling already
+        }
+
+        public void load_Products_grid()
+        {
+            // replaced by PerformPagedSearch to avoid full result loading
+            PerformPagedSearch();
+        }
+
+        private void txt_search_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                _debounceTimer.Stop();
+                _debounceTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
@@ -203,35 +240,17 @@ namespace pos
             {
                 grid_search_products.Focus();
             }
-        }
-
-        private void txt_search_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
+            else if (e.KeyCode == Keys.PageDown)
             {
-                if (!string.IsNullOrEmpty(txt_search.Text) && txt_search.Text.Length > 3)
-                {
-                    //grid_search_products.DataSource = null;
-                    bool by_code = rb_by_code.Checked;
-                    bool by_name = rb_by_name.Checked;
-
-
-                    //bind data in data grid view  
-                    ProductBLL objBLL = new ProductBLL();
-                    grid_search_products.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text.Trim();
-                    grid_search_products.DataSource = objBLL.SearchRecord(condition, by_code, by_name);
-
-
-                }
-
-
+                if (_pageIndex + 1 < _totalPages) { _pageIndex++; PerformPagedSearch(); }
             }
-            catch (Exception ex)
+            else if (e.KeyCode == Keys.PageUp)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (_pageIndex > 0) { _pageIndex--; PerformPagedSearch(); }
+            }
+            else if (e.KeyCode == Keys.F5)
+            {
+                PerformPagedSearch();
             }
         }
 
@@ -342,20 +361,16 @@ namespace pos
 
         private void grid_search_products_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            System.Collections.IList list = grid_search_products.Rows;
-            for (int i = 0; i < list.Count; i++)
+            try
             {
-                DataGridViewRow gvr = (DataGridViewRow)list[i];
-                if (Convert.ToDouble(gvr.Cells["qty"].Value.ToString()) <= 0 || gvr.Cells["qty"].Value.ToString() == string.Empty)
-                {
-                    gvr.DefaultCellStyle.ForeColor = Color.Red;
-                }
-                else
-                {
-                    gvr.DefaultCellStyle.ForeColor = Color.Black;
-                }
+                if (e.RowIndex < 0) return; // header
+                var row = grid_search_products.Rows[e.RowIndex];
+                var qtyCell = row.Cells["qty"]?.Value;
+                double qty;
+                bool isZeroOrEmpty = qtyCell == null || string.IsNullOrWhiteSpace(qtyCell.ToString()) || !double.TryParse(qtyCell.ToString(), out qty) || qty <= 0;
+                row.DefaultCellStyle.ForeColor = isZeroOrEmpty ? Color.Red : Color.Black;
             }
-
+            catch { /* swallow formatting errors */ }
         }
 
         private void grid_group_products_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
