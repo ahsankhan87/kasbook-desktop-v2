@@ -79,6 +79,7 @@ namespace pos.Dashboard
             this.colArea = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colInfo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnNewPurchase = new System.Windows.Forms.Button();
             this.headerPanel.SuspendLayout();
             this.summaryPanel.SuspendLayout();
             this.pnlSalesToday.SuspendLayout();
@@ -213,12 +214,13 @@ namespace pos.Dashboard
             resources.ApplyResources(this.quickAccessPanel, "quickAccessPanel");
             this.quickAccessPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.quickAccessPanel.Controls.Add(this.btnNewSale);
+            this.quickAccessPanel.Controls.Add(this.btnNewPurchase);
             this.quickAccessPanel.Controls.Add(this.btnProducts);
             this.quickAccessPanel.Controls.Add(this.btnCustomers);
             this.quickAccessPanel.Controls.Add(this.btnSuppliers);
-            this.quickAccessPanel.Controls.Add(this.btnSalesReport);
             this.quickAccessPanel.Controls.Add(this.btnPurchasesReport);
             this.quickAccessPanel.Controls.Add(this.btnSettings);
+            this.quickAccessPanel.Controls.Add(this.btnSalesReport);
             this.quickAccessPanel.Name = "quickAccessPanel";
             // 
             // btnNewSale
@@ -308,6 +310,14 @@ namespace pos.Dashboard
             // 
             resources.ApplyResources(this.colDateTime, "colDateTime");
             // 
+            // btnNewPurchase
+            // 
+            this.btnNewPurchase.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnNewPurchase, "btnNewPurchase");
+            this.btnNewPurchase.Name = "btnNewPurchase";
+            this.btnNewPurchase.UseVisualStyleBackColor = false;
+            this.btnNewPurchase.Click += new System.EventHandler(this.btnNewPurchase_Click);
+            // 
             // frm_dashboard
             // 
             resources.ApplyResources(this, "$this");
@@ -336,5 +346,6 @@ namespace pos.Dashboard
         private Panel panelSalesColor;
         private Panel panelRevenueColor;
         private Panel panelLowStockColor;
+        private Button btnNewPurchase;
     }
 }

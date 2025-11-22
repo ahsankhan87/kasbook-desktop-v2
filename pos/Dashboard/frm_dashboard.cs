@@ -291,5 +291,28 @@ namespace pos.Dashboard
         {
             LowStockReport = null;
         }
+
+        Form frm_purchase;
+        private void btnNewPurchase_Click(object sender, EventArgs e)
+        {
+            if(frm_purchase == null)
+            {
+                frm_purchase = new frm_purchases();
+                frm_purchase.MdiParent = frm_main.ActiveForm;
+                //frm_sales_obj.Dock = DockStyle.Fill;
+                frm_purchase.FormClosed += new FormClosedEventHandler(Frm_purchase_FormClosed);
+                frm_purchase.WindowState = FormWindowState.Maximized;
+                frm_purchase.Show();
+            }
+            else
+            {
+                frm_purchase.Activate();
+            }
+        }
+
+        private void Frm_purchase_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           frm_purchase = null;
+        }
     }
 }

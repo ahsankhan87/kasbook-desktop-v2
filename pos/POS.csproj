@@ -353,9 +353,6 @@
     <Compile Include="Dashboard\frm_dashboard.Designer.cs">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard\frm_dashboard_1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Employees\frm_emp_commission_payment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1293,6 +1290,9 @@
     <Compile Include="Sales\frm_debitnote.Designer.cs">
       <DependentUpon>frm_debitnote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\frm_send_whatsapp.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\frm_zatca_invoices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1301,6 +1301,7 @@
     </Compile>
     <Compile Include="Master\Companies\zatca\ZatcaAuth.cs" />
     <Compile Include="Master\Companies\zatca\ZatcaComplianceApi.cs" />
+    <Compile Include="Sales\WhatsAppInvoiceSender.cs" />
     <Compile Include="Subscription.cs" />
     <Compile Include="Subscription\RenewSubscrption.cs">
       <SubType>Form</SubType>
@@ -1523,9 +1524,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\frm_dashboard.resx">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard\frm_dashboard_1.resx">
-      <DependentUpon>frm_dashboard_1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Employees\frm_addEmployee.ar-SA.resx">
       <DependentUpon>frm_addEmployee.cs</DependentUpon>

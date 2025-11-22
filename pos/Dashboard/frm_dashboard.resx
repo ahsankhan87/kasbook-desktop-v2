@@ -117,11 +117,63 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>headerPanel</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblSubtitle.Name" xml:space="preserve">
+    <value>lblSubtitle</value>
+  </data>
+  <data name="&gt;&gt;lblSubtitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSubtitle.Parent" xml:space="preserve">
+    <value>headerPanel</value>
+  </data>
+  <data name="&gt;&gt;lblSubtitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="headerPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="headerPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="headerPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>24, 18, 24, 18</value>
+  </data>
+  <data name="headerPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 110</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="headerPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;headerPanel.Name" xml:space="preserve">
+    <value>headerPanel</value>
+  </data>
+  <data name="&gt;&gt;headerPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;headerPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;headerPanel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 20pt, style=Bold</value>
   </data>
@@ -176,33 +228,128 @@
   <data name="&gt;&gt;lblSubtitle.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="headerPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="&gt;&gt;pnlSalesToday.Name" xml:space="preserve">
+    <value>pnlSalesToday</value>
   </data>
-  <data name="headerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="headerPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>24, 18, 24, 18</value>
-  </data>
-  <data name="headerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1200, 110</value>
-  </data>
-  <data name="headerPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;headerPanel.Name" xml:space="preserve">
-    <value>headerPanel</value>
-  </data>
-  <data name="&gt;&gt;headerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pnlSalesToday.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;headerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pnlSalesToday.Parent" xml:space="preserve">
+    <value>summaryPanel</value>
+  </data>
+  <data name="&gt;&gt;pnlSalesToday.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.Name" xml:space="preserve">
+    <value>pnlRevenueToday</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.Parent" xml:space="preserve">
+    <value>summaryPanel</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.Name" xml:space="preserve">
+    <value>pnlLowStock</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.Parent" xml:space="preserve">
+    <value>summaryPanel</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="summaryPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="summaryPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 110</value>
+  </data>
+  <data name="summaryPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 16, 16, 16</value>
+  </data>
+  <data name="summaryPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 160</value>
+  </data>
+  <data name="summaryPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;summaryPanel.Name" xml:space="preserve">
+    <value>summaryPanel</value>
+  </data>
+  <data name="&gt;&gt;summaryPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;summaryPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;headerPanel.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;summaryPanel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;panelSalesColor.Name" xml:space="preserve">
+    <value>panelSalesColor</value>
+  </data>
+  <data name="&gt;&gt;panelSalesColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelSalesColor.Parent" xml:space="preserve">
+    <value>pnlSalesToday</value>
+  </data>
+  <data name="&gt;&gt;panelSalesColor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTitle.Name" xml:space="preserve">
+    <value>lblSalesTitle</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTitle.Parent" xml:space="preserve">
+    <value>pnlSalesToday</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblSalesValue.Name" xml:space="preserve">
+    <value>lblSalesValue</value>
+  </data>
+  <data name="&gt;&gt;lblSalesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSalesValue.Parent" xml:space="preserve">
+    <value>pnlSalesToday</value>
+  </data>
+  <data name="&gt;&gt;lblSalesValue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlSalesToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 26</value>
+  </data>
+  <data name="pnlSalesToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="pnlSalesToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 120</value>
+  </data>
+  <data name="pnlSalesToday.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pnlSalesToday.Name" xml:space="preserve">
+    <value>pnlSalesToday</value>
+  </data>
+  <data name="&gt;&gt;pnlSalesToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSalesToday.Parent" xml:space="preserve">
+    <value>summaryPanel</value>
+  </data>
+  <data name="&gt;&gt;pnlSalesToday.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="panelSalesColor.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -282,29 +429,65 @@
   <data name="&gt;&gt;lblSalesValue.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="pnlSalesToday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 26</value>
+  <data name="&gt;&gt;panelRevenueColor.Name" xml:space="preserve">
+    <value>panelRevenueColor</value>
   </data>
-  <data name="pnlSalesToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="pnlSalesToday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 120</value>
-  </data>
-  <data name="pnlSalesToday.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;pnlSalesToday.Name" xml:space="preserve">
-    <value>pnlSalesToday</value>
-  </data>
-  <data name="&gt;&gt;pnlSalesToday.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelRevenueColor.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pnlSalesToday.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelRevenueColor.Parent" xml:space="preserve">
+    <value>pnlRevenueToday</value>
+  </data>
+  <data name="&gt;&gt;panelRevenueColor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.Name" xml:space="preserve">
+    <value>lblRevenueTitle</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.Parent" xml:space="preserve">
+    <value>pnlRevenueToday</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.Name" xml:space="preserve">
+    <value>lblRevenueValue</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.Parent" xml:space="preserve">
+    <value>pnlRevenueToday</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlRevenueToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 26</value>
+  </data>
+  <data name="pnlRevenueToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="pnlRevenueToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 120</value>
+  </data>
+  <data name="pnlRevenueToday.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.Name" xml:space="preserve">
+    <value>pnlRevenueToday</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlRevenueToday.Parent" xml:space="preserve">
     <value>summaryPanel</value>
   </data>
-  <data name="&gt;&gt;pnlSalesToday.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;pnlRevenueToday.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="panelRevenueColor.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -384,29 +567,65 @@
   <data name="&gt;&gt;lblRevenueValue.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="pnlRevenueToday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 26</value>
+  <data name="&gt;&gt;panelLowStockColor.Name" xml:space="preserve">
+    <value>panelLowStockColor</value>
   </data>
-  <data name="pnlRevenueToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="pnlRevenueToday.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 120</value>
-  </data>
-  <data name="pnlRevenueToday.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;pnlRevenueToday.Name" xml:space="preserve">
-    <value>pnlRevenueToday</value>
-  </data>
-  <data name="&gt;&gt;pnlRevenueToday.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelLowStockColor.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pnlRevenueToday.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelLowStockColor.Parent" xml:space="preserve">
+    <value>pnlLowStock</value>
+  </data>
+  <data name="&gt;&gt;panelLowStockColor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockTitle.Name" xml:space="preserve">
+    <value>lblLowStockTitle</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockTitle.Parent" xml:space="preserve">
+    <value>pnlLowStock</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockValue.Name" xml:space="preserve">
+    <value>lblLowStockValue</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockValue.Parent" xml:space="preserve">
+    <value>pnlLowStock</value>
+  </data>
+  <data name="&gt;&gt;lblLowStockValue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlLowStock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>766, 26</value>
+  </data>
+  <data name="pnlLowStock.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="pnlLowStock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 120</value>
+  </data>
+  <data name="pnlLowStock.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.Name" xml:space="preserve">
+    <value>pnlLowStock</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlLowStock.Parent" xml:space="preserve">
     <value>summaryPanel</value>
   </data>
-  <data name="&gt;&gt;pnlRevenueToday.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;pnlLowStock.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="panelLowStockColor.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -486,57 +705,6 @@
   <data name="&gt;&gt;lblLowStockValue.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="pnlLowStock.Location" type="System.Drawing.Point, System.Drawing">
-    <value>766, 26</value>
-  </data>
-  <data name="pnlLowStock.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="pnlLowStock.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 120</value>
-  </data>
-  <data name="pnlLowStock.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;pnlLowStock.Name" xml:space="preserve">
-    <value>pnlLowStock</value>
-  </data>
-  <data name="&gt;&gt;pnlLowStock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlLowStock.Parent" xml:space="preserve">
-    <value>summaryPanel</value>
-  </data>
-  <data name="&gt;&gt;pnlLowStock.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="summaryPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="summaryPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 110</value>
-  </data>
-  <data name="summaryPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>16, 16, 16, 16</value>
-  </data>
-  <data name="summaryPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1200, 160</value>
-  </data>
-  <data name="summaryPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;summaryPanel.Name" xml:space="preserve">
-    <value>summaryPanel</value>
-  </data>
-  <data name="&gt;&gt;summaryPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;summaryPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;summaryPanel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="lblQuickAccess.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -606,11 +774,44 @@
   <data name="&gt;&gt;btnNewSale.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnNewPurchase.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.5pt, style=Bold</value>
+  </data>
+  <data name="btnNewPurchase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnNewPurchase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 26</value>
+  </data>
+  <data name="btnNewPurchase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="btnNewPurchase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 80</value>
+  </data>
+  <data name="btnNewPurchase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnNewPurchase.Text" xml:space="preserve">
+    <value>💳  New Purchase</value>
+  </data>
+  <data name="&gt;&gt;btnNewPurchase.Name" xml:space="preserve">
+    <value>btnNewPurchase</value>
+  </data>
+  <data name="&gt;&gt;btnNewPurchase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNewPurchase.Parent" xml:space="preserve">
+    <value>quickAccessPanel</value>
+  </data>
+  <data name="&gt;&gt;btnNewPurchase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="btnProducts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10.5pt, style=Bold</value>
   </data>
   <data name="btnProducts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 26</value>
+    <value>466, 26</value>
   </data>
   <data name="btnProducts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 10, 10, 10</value>
@@ -619,7 +820,7 @@
     <value>200, 80</value>
   </data>
   <data name="btnProducts.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnProducts.Text" xml:space="preserve">
     <value>📦  Products</value>
@@ -634,13 +835,13 @@
     <value>quickAccessPanel</value>
   </data>
   <data name="&gt;&gt;btnProducts.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnCustomers.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10.5pt, style=Bold</value>
   </data>
   <data name="btnCustomers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>466, 26</value>
+    <value>686, 26</value>
   </data>
   <data name="btnCustomers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 10, 10, 10</value>
@@ -649,7 +850,7 @@
     <value>200, 80</value>
   </data>
   <data name="btnCustomers.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnCustomers.Text" xml:space="preserve">
     <value>👤  Customers</value>
@@ -664,13 +865,13 @@
     <value>quickAccessPanel</value>
   </data>
   <data name="&gt;&gt;btnCustomers.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnSuppliers.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10.5pt, style=Bold</value>
   </data>
   <data name="btnSuppliers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>686, 26</value>
+    <value>906, 26</value>
   </data>
   <data name="btnSuppliers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 10, 10, 10</value>
@@ -679,7 +880,7 @@
     <value>200, 80</value>
   </data>
   <data name="btnSuppliers.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btnSuppliers.Text" xml:space="preserve">
     <value>🏢  Suppliers</value>
@@ -694,36 +895,6 @@
     <value>quickAccessPanel</value>
   </data>
   <data name="&gt;&gt;btnSuppliers.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnSalesReport.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10.5pt, style=Bold</value>
-  </data>
-  <data name="btnSalesReport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>906, 26</value>
-  </data>
-  <data name="btnSalesReport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
-  </data>
-  <data name="btnSalesReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 80</value>
-  </data>
-  <data name="btnSalesReport.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="btnSalesReport.Text" xml:space="preserve">
-    <value>📊  Sales Report</value>
-  </data>
-  <data name="&gt;&gt;btnSalesReport.Name" xml:space="preserve">
-    <value>btnSalesReport</value>
-  </data>
-  <data name="&gt;&gt;btnSalesReport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSalesReport.Parent" xml:space="preserve">
-    <value>quickAccessPanel</value>
-  </data>
-  <data name="&gt;&gt;btnSalesReport.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="btnPurchasesReport.Font" type="System.Drawing.Font, System.Drawing">
@@ -785,6 +956,36 @@
   </data>
   <data name="&gt;&gt;btnSettings.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="btnSalesReport.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.5pt, style=Bold</value>
+  </data>
+  <data name="btnSalesReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>466, 126</value>
+  </data>
+  <data name="btnSalesReport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="btnSalesReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 80</value>
+  </data>
+  <data name="btnSalesReport.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="btnSalesReport.Text" xml:space="preserve">
+    <value>📊  Sales Report</value>
+  </data>
+  <data name="&gt;&gt;btnSalesReport.Name" xml:space="preserve">
+    <value>btnSalesReport</value>
+  </data>
+  <data name="&gt;&gt;btnSalesReport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSalesReport.Parent" xml:space="preserve">
+    <value>quickAccessPanel</value>
+  </data>
+  <data name="&gt;&gt;btnSalesReport.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="quickAccessPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -849,24 +1050,6 @@
   <data name="&gt;&gt;lblRecent.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="colArea.Text" xml:space="preserve">
-    <value>Area</value>
-  </data>
-  <data name="colArea.Width" type="System.Int32, mscorlib">
-    <value>280</value>
-  </data>
-  <data name="colInfo.Text" xml:space="preserve">
-    <value>Info</value>
-  </data>
-  <data name="colInfo.Width" type="System.Int32, mscorlib">
-    <value>480</value>
-  </data>
-  <data name="colDateTime.Text" xml:space="preserve">
-    <value>Date/Time</value>
-  </data>
-  <data name="colDateTime.Width" type="System.Int32, mscorlib">
-    <value>220</value>
-  </data>
   <data name="listRecent.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -893,6 +1076,24 @@
   </data>
   <data name="&gt;&gt;listRecent.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="colArea.Text" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="colArea.Width" type="System.Int32, mscorlib">
+    <value>280</value>
+  </data>
+  <data name="colInfo.Text" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="colInfo.Width" type="System.Int32, mscorlib">
+    <value>480</value>
+  </data>
+  <data name="colDateTime.Text" xml:space="preserve">
+    <value>Date/Time</value>
+  </data>
+  <data name="colDateTime.Width" type="System.Int32, mscorlib">
+    <value>220</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
