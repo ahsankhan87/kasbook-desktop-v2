@@ -1,27 +1,29 @@
-﻿using System;
+﻿using com.sun.org.apache.bcel.@internal.generic;
+using CrystalDecisions.CrystalReports.Engine;
+using Newtonsoft.Json;
+using pos.Master.Companies.zatca;
+using pos.Sales;
+using POS.BLL;
+using POS.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
-using CrystalDecisions.CrystalReports.Engine;
-using System.IO;
-using System.Diagnostics;
 using System.Xml;
+using System.Xml.Schema;
 using Zatca.EInvoice.SDK;
 using Zatca.EInvoice.SDK.Contracts.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using pos.Master.Companies.zatca;
-using System.Xml.Schema;
-using POS.Core;
 
 namespace pos
 {
@@ -906,6 +908,19 @@ namespace pos
             }
         }
 
-       
+        private async void btnSendWhatsApp_Click(object sender, EventArgs e)
+        {
+            //SendInvoiceToWhatsApp();
+            string invoiceNo = grid_all_sales.CurrentRow.Cells["invoice_no"].Value.ToString();
+            if(string.IsNullOrEmpty(invoiceNo))
+            {
+                MessageBox.Show("Please select a valid invoice.");
+                return;
+            }
+            frm_send_whatsapp _frm_Send_Whatsapp = new frm_send_whatsapp(invoiceNo);
+            _frm_Send_Whatsapp.ShowDialog();
+        }
+
+        
     }
 }
