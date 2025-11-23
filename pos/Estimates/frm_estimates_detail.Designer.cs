@@ -34,17 +34,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grid_estimates_detail = new System.Windows.Forms.DataGridView();
+            this.txt_close = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loc_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity_sold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_close = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_estimates_detail)).BeginInit();
             this.panel2.SuspendLayout();
@@ -70,6 +71,7 @@
             this.invoice_no,
             this.product_code,
             this.product_name,
+            this.loc_code,
             this.quantity_sold,
             this.unit_price,
             this.discount_value,
@@ -77,6 +79,28 @@
             this.grid_estimates_detail.Name = "grid_estimates_detail";
             this.grid_estimates_detail.ReadOnly = true;
             this.grid_estimates_detail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // txt_close
+            // 
+            resources.ApplyResources(this.txt_close, "txt_close");
+            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.txt_close.Name = "txt_close";
+            this.txt_close.UseVisualStyleBackColor = true;
+            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.txt_close);
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
             // id
             // 
@@ -106,6 +130,13 @@
             resources.ApplyResources(this.product_name, "product_name");
             this.product_name.Name = "product_name";
             this.product_name.ReadOnly = true;
+            // 
+            // loc_code
+            // 
+            this.loc_code.DataPropertyName = "loc_code";
+            resources.ApplyResources(this.loc_code, "loc_code");
+            this.loc_code.Name = "loc_code";
+            this.loc_code.ReadOnly = true;
             // 
             // quantity_sold
             // 
@@ -144,28 +175,6 @@
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
-            // txt_close
-            // 
-            resources.ApplyResources(this.txt_close, "txt_close");
-            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.txt_close.Name = "txt_close";
-            this.txt_close.UseVisualStyleBackColor = true;
-            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.txt_close);
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
-            // 
             // frm_estimates_detail
             // 
             resources.ApplyResources(this, "$this");
@@ -197,6 +206,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loc_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity_sold;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;

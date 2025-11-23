@@ -161,6 +161,28 @@ namespace pos
                 load_estimates_items_detail(Convert.ToInt16(sale_id), invoice_no);
 
             }
+            if (name == "btn_delete")
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    var invoice_no = grid_all_estimates.CurrentRow.Cells["invoice_no"].Value.ToString();
+
+                    EstimatesBLL estimatesBLL = new EstimatesBLL();
+                    int qresult = estimatesBLL.DeleteEstimates(invoice_no);
+                    if (qresult > 0)
+                    {
+                        MessageBox.Show(invoice_no + " deleted successfully", "Delete Estimates", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        load_all_estimates_grid();
+                    }
+                    else
+                    {
+                        MessageBox.Show(invoice_no + " not deleted, please try again", "Delete Estimates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                }
+            }
         }
 
         

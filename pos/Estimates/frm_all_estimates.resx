@@ -330,6 +330,18 @@
   <data name="detail.Width" type="System.Int32, mscorlib">
     <value>48</value>
   </data>
+  <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="btn_delete.HeaderText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="btn_delete.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btn_delete.Width" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
   <data name="grid_all_estimates.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 49</value>
   </data>
@@ -547,6 +559,12 @@
     <value>detail</value>
   </data>
   <data name="&gt;&gt;detail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
+    <value>btn_delete</value>
+  </data>
+  <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

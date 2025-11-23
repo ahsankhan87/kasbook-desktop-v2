@@ -156,8 +156,10 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.invoice_no,SI.id,SI.item_number,SI.item_code,SI.quantity_sold,SI.unit_price,"+
+                        String query = "SELECT SI.invoice_no,SI.id,SI.item_number,SI.item_code,SI.quantity_sold,SI.unit_price,SI.loc_code,"+
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold-SI.discount_value) AS total,"+
+                            " ((SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))*SI.tax_rate/100) AS vat," +
+                            " (ABS((SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))*SI.tax_rate/100) + ABS(SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))) AS net_total, " +
                             " P.name AS product_name, P.code AS product_code " +
                             "FROM pos_estimates_items SI " +
                             "LEFT JOIN pos_products P ON P.item_number=SI.item_number " +
@@ -334,7 +336,79 @@ namespace POS.DLL
             }
 
         }
+        public int Delete(int EstimateId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
 
-        
+                        cmd = new SqlCommand("sp_Estimates", cn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", EstimateId);
+                        cmd.Parameters.AddWithValue("@OperationType", "3");
+
+                    }
+
+                    int result = cmd.ExecuteNonQuery();
+                    return result;
+                }
+                catch
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        public int DeleteEstimates(string invoice_no)
+        {
+            String query1 = "DELETE FROM pos_estimates WHERE invoice_no  = @invoice_no AND branch_id = @branch_id";
+            String query2 = " DELETE FROM pos_estimates_items WHERE invoice_no  = @invoice_no AND branch_id = @branch_id";
+            int result = 0;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlTransaction transaction = null;
+
+                DataTable sales_dt = new DataTable();
+                if (cn.State == ConnectionState.Closed)
+                {
+                    cn.Open();
+                    transaction = cn.BeginTransaction();
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand(query1, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
+                        using (SqlCommand cmd = new SqlCommand(query2, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
+                        
+                        //cmd = new SqlCommand(query, cn);
+                        //cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                        //cmd.Parameters.AddWithValue("@OperationType", "5");
+                        transaction.Commit();
+
+                        Log.LogAction("Delete Estimates", $"InvoiceNo: {invoice_no}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+
+                        result = 1;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+
+                        throw;
+
+                    }
+                }
+
+                //int result = cmd.ExecuteNonQuery();
+
+                return result;
+
+            }
+
+        }
+
     }
 }

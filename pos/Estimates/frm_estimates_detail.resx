@@ -161,6 +161,18 @@
   <data name="product_name.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <metadata name="loc_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="loc_code.HeaderText" xml:space="preserve">
+    <value>Loc</value>
+  </data>
+  <data name="loc_code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="loc_code.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <metadata name="quantity_sold.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -406,6 +418,12 @@
     <value>product_name</value>
   </data>
   <data name="&gt;&gt;product_name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;loc_code.Name" xml:space="preserve">
+    <value>loc_code</value>
+  </data>
+  <data name="&gt;&gt;loc_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;quantity_sold.Name" xml:space="preserve">

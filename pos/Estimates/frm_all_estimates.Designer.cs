@@ -50,6 +50,7 @@
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_estimates)).BeginInit();
             this.panel2.SuspendLayout();
@@ -111,7 +112,8 @@
             this.total_tax,
             this.total,
             this.status,
-            this.detail});
+            this.detail,
+            this.btn_delete});
             this.grid_all_estimates.Name = "grid_all_estimates";
             this.grid_all_estimates.ReadOnly = true;
             this.grid_all_estimates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -208,8 +210,17 @@
             // 
             this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.detail, "detail");
+            this.detail.Image = global::pos.Properties.Resources.Detail_16;
             this.detail.Name = "detail";
             this.detail.ReadOnly = true;
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.btn_delete, "btn_delete");
+            this.btn_delete.Image = global::pos.Properties.Resources.Trash_16;
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.ReadOnly = true;
             // 
             // frm_all_estimates
             // 
@@ -251,6 +262,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewImageColumn detail;
+        private System.Windows.Forms.DataGridViewImageColumn btn_delete;
     }
 }
 

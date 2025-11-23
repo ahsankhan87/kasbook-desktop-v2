@@ -121,8 +121,20 @@ namespace POS.BLL
                 throw;
             }
         }
+        public int DeleteEstimates(string invoice_no)
+        {
+            try
+            {
+                EstimatesDLL objDLL = new EstimatesDLL();
+                return objDLL.DeleteEstimates(invoice_no);
+            }
+            catch
+            {
 
-       
+                throw;
+            }
+        }
+
 
     }
 }
