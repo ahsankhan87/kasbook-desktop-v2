@@ -118,18 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSendWhatsApp.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnSendWhatsApp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnSendWhatsApp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 15</value>
+    <value>368, 6</value>
   </data>
   <data name="btnSendWhatsApp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 35</value>
+    <value>154, 44</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnSendWhatsApp.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="btnSendWhatsApp.Text" xml:space="preserve">
-    <value>WhatsApp</value>
+    <value>Send on &amp;WhatsApp</value>
   </data>
   <data name="&gt;&gt;btnSendWhatsApp.Name" xml:space="preserve">
     <value>btnSendWhatsApp</value>
@@ -143,11 +150,17 @@
   <data name="&gt;&gt;btnSendWhatsApp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="BtnCustomerNameChange.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="BtnCustomerNameChange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="BtnCustomerNameChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 15</value>
+    <value>227, 6</value>
   </data>
   <data name="BtnCustomerNameChange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 28</value>
+    <value>135, 44</value>
   </data>
   <data name="BtnCustomerNameChange.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -167,7 +180,6 @@
   <data name="&gt;&gt;BtnCustomerNameChange.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -234,6 +246,9 @@
   <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>1109, 14</value>
   </data>
@@ -261,14 +276,20 @@
   <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="btn_print_invoice.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="btn_print_invoice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 15</value>
+    <value>119, 6</value>
   </data>
   <data name="btn_print_invoice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>100, 44</value>
   </data>
   <data name="btn_print_invoice.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -288,14 +309,20 @@
   <data name="&gt;&gt;btn_print_invoice.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="btn_refresh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 15</value>
+    <value>12, 6</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>100, 44</value>
   </data>
   <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -612,6 +639,9 @@
   <data name="lbl_taxes_title.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
   </data>
+  <data name="lbl_taxes_title.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 23</value>
   </data>
@@ -666,6 +696,27 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="dataGridViewImageColumn1.HeaderText" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="dataGridViewImageColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewImageColumn1.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="dataGridViewImageColumn2.HeaderText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="dataGridViewImageColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewImageColumn2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewImageColumn2.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -701,6 +752,9 @@
         //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAA==
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -783,18 +837,6 @@
   <data name="&gt;&gt;zatca_status.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;detail.Name" xml:space="preserve">
-    <value>detail</value>
-  </data>
-  <data name="&gt;&gt;detail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
-    <value>btn_delete</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;sale_time.Name" xml:space="preserve">
     <value>sale_time</value>
   </data>
@@ -836,6 +878,30 @@
   </data>
   <data name="&gt;&gt;btn_show_qrcode.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn2.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;detail.Name" xml:space="preserve">
+    <value>detail</value>
+  </data>
+  <data name="&gt;&gt;detail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
+    <value>btn_delete</value>
+  </data>
+  <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_all_sales</value>

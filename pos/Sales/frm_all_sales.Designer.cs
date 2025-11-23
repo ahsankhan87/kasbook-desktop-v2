@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_all_sales));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_all_sales));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSendWhatsApp = new System.Windows.Forms.Button();
             this.BtnCustomerNameChange = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
@@ -54,8 +55,6 @@
             this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.zatca_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.detail = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.sale_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Zetca_qrcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_send_zatca = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -65,7 +64,10 @@
             this.btn_show_qrcode = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_taxes_title = new System.Windows.Forms.Label();
-            this.btnSendWhatsApp = new System.Windows.Forms.Button();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.detail = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_sales)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -85,6 +87,15 @@
             this.panel1.Controls.Add(this.grid_all_sales);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // btnSendWhatsApp
+            // 
+            this.btnSendWhatsApp.BackColor = System.Drawing.Color.Green;
+            resources.ApplyResources(this.btnSendWhatsApp, "btnSendWhatsApp");
+            this.btnSendWhatsApp.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnSendWhatsApp.Name = "btnSendWhatsApp";
+            this.btnSendWhatsApp.UseVisualStyleBackColor = false;
+            this.btnSendWhatsApp.Click += new System.EventHandler(this.btnSendWhatsApp_Click);
             // 
             // BtnCustomerNameChange
             // 
@@ -262,22 +273,6 @@
             this.zatca_status.Name = "zatca_status";
             this.zatca_status.ReadOnly = true;
             // 
-            // detail
-            // 
-            this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.detail, "detail");
-            this.detail.Image = global::pos.Properties.Resources.Detail_16;
-            this.detail.Name = "detail";
-            this.detail.ReadOnly = true;
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.btn_delete, "btn_delete");
-            this.btn_delete.Image = global::pos.Properties.Resources.Trash_16;
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.ReadOnly = true;
-            // 
             // sale_time
             // 
             this.sale_time.DataPropertyName = "sale_time";
@@ -342,12 +337,35 @@
             this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
             this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
-            // btnSendWhatsApp
+            // dataGridViewImageColumn1
             // 
-            resources.ApplyResources(this.btnSendWhatsApp, "btnSendWhatsApp");
-            this.btnSendWhatsApp.Name = "btnSendWhatsApp";
-            this.btnSendWhatsApp.UseVisualStyleBackColor = true;
-            this.btnSendWhatsApp.Click += new System.EventHandler(this.btnSendWhatsApp_Click);
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.dataGridViewImageColumn1, "dataGridViewImageColumn1");
+            this.dataGridViewImageColumn1.Image = global::pos.Properties.Resources.Detail_16;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.dataGridViewImageColumn2, "dataGridViewImageColumn2");
+            this.dataGridViewImageColumn2.Image = global::pos.Properties.Resources.Trash_16;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            // 
+            // detail
+            // 
+            this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.detail, "detail");
+            this.detail.Image = global::pos.Properties.Resources.Detail_16;
+            this.detail.Name = "detail";
+            this.detail.ReadOnly = true;
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.btn_delete, "btn_delete");
+            this.btn_delete.Image = global::pos.Properties.Resources.Trash_16;
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.ReadOnly = true;
             // 
             // frm_all_sales
             // 
@@ -405,6 +423,8 @@
         private System.Windows.Forms.DataGridViewButtonColumn btn_report_to_zatca;
         private System.Windows.Forms.DataGridViewButtonColumn btn_show_qrcode;
         private System.Windows.Forms.Button btnSendWhatsApp;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
     }
 }
 

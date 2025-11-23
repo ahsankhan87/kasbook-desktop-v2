@@ -103,6 +103,9 @@ namespace pos
             btnCancel.Click += (s, e) => this.Close();
 
             this.Controls.AddRange(new Control[] { lblInfo, txtPhone, chkIncludeCode, grpMode, btnSend, btnCancel });
+            
+            this.AcceptButton = btnSend;
+            this.CancelButton = btnCancel;
 
             TryAutoFillCustomerPhone(); // auto fill after controls created
         }
@@ -220,6 +223,24 @@ namespace pos
                 MessageBox.Show("Send failed: " + ex.Message, "WhatsApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnSend.Enabled = true;
             }
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_send_whatsapp
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "frm_send_whatsapp";
+            this.Load += new System.EventHandler(this.frm_send_whatsapp_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void frm_send_whatsapp_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
