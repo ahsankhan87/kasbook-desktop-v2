@@ -2901,10 +2901,16 @@ namespace pos
                                 isPrintInvoiceCode = false;
 
                                 clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
+                            }else if(result1 == "2")
+                            {
+                                //Send invoice on WhatsApp
+                                frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no);
+                                send_Whatsapp.ShowDialog();
+                                clear_form();
+                                return;
                             }
                             else
                             {
-
                                 clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
                                 return; // return without printing only save
                             }

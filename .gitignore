@@ -398,4 +398,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/pos/Sales
+/pos/Sales/*
+!/pos/Sales/WhatsAppInvoiceSender.cs
+!/pos/Sales/frm_send_whatsapp.cs

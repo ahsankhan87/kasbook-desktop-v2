@@ -44,8 +44,8 @@ namespace pos
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -57,7 +57,8 @@ namespace pos
             this.listBox1.Items.AddRange(new object[] {
             resources.GetString("listBox1.Items"),
             resources.GetString("listBox1.Items1"),
-            resources.GetString("listBox1.Items2")});
+            resources.GetString("listBox1.Items2"),
+            resources.GetString("listBox1.Items3")});
             this.listBox1.Name = "listBox1";
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
