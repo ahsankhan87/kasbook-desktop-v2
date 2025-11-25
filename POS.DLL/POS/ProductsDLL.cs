@@ -2373,5 +2373,70 @@ namespace POS.DLL
                 return dt;
             }
         }
+
+        /// <summary>
+        /// New methods for POS product operations
+        /// </summary>
+
+        private dbConnection dbHelper = new dbConnection();
+        
+        public DataTable SearchProducts(string searchTerm, int branchId)
+        {
+            string query = @"
+                SELECT 
+                    code,item_number, name, name_ar, barcode, unit_price, 
+                    qty, unit_price_2, cost_price, avg_cost,unit_id,tax_id,packet_qty, brand_code,
+                    category_code, item_type
+                FROM pos_products 
+                WHERE (branch_id = @BranchId OR branch_id IS NULL) 
+                AND (deleted = 0 OR deleted IS NULL)
+                AND (name LIKE @SearchTerm OR code LIKE @SearchTerm 
+                    OR barcode LIKE @SearchTerm OR name_ar LIKE @SearchTerm)";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@BranchId", branchId),
+                new SqlParameter("@SearchTerm", $"%{searchTerm}%")
+            };
+
+            return dbHelper.ExecuteQuery(query, parameters);
+        }
+
+        public DataTable GetProductByBarcode(string barcode, int branchId)
+        {
+            string query = @"
+                SELECT 
+                    code,item_number, name, name_ar, barcode, unit_price, 
+                    qty, unit_price_2, cost_price,  avg_cost,packet_qty, brand_code,
+                    category_code, item_type, tax_id, unit_id
+                FROM pos_products 
+                WHERE (branch_id = @BranchId OR branch_id IS NULL) 
+                AND barcode = @Barcode
+                AND (deleted = 0 OR deleted IS NULL)";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@BranchId", branchId),
+                new SqlParameter("@Barcode", barcode)
+            };
+
+            return dbHelper.ExecuteQuery(query, parameters);
+        }
+
+        public bool UpdateProductQuantity(string productCode, decimal quantity, int branchId)
+        {
+            string query = @"
+                UPDATE pos_products 
+                SET qty = qty - @Quantity,
+                    date_updated = GETDATE()
+                WHERE code = @ProductCode 
+                AND (branch_id = @BranchId OR branch_id IS NULL)";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@Quantity", quantity),
+                new SqlParameter("@ProductCode", productCode),
+                new SqlParameter("@BranchId", branchId)
+            };
+
+            return dbHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
     }
 }

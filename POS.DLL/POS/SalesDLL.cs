@@ -2645,5 +2645,112 @@ namespace POS.DLL
                 //   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// New methods for POS product operations
+        /// </summary>
+        private dbConnection dbHelper = new dbConnection();
+
+        /// <summary>
+        /// Get the next invoice number for a given branch
+        /// </summary>
+        /// <param name="branchId"></param>
+        /// <returns></returns>
+        public string GetNextInvoiceNumber(int branchId)
+        {
+            string query = @"
+                SELECT 'INV-' + CONVERT(varchar, @BranchId) + '-' + 
+                       RIGHT('000000' + CONVERT(varchar, ISNULL(MAX(CAST(SUBSTRING(invoice_no, LEN(invoice_no)-5, 6) AS INT)), 0) + 1), 6)
+                FROM pos_sales 
+                WHERE branch_id = @BranchId 
+                AND invoice_no LIKE 'INV-' + CONVERT(varchar, @BranchId) + '-%'";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@BranchId", branchId)
+            };
+
+            object result = dbHelper.ExecuteScalar(query, parameters);
+            return result?.ToString() ?? $"INV-{branchId}-000001";
+        }
+
+        public int CreateSale(DataTable saleItems, decimal totalAmount, decimal totalTax,
+                            decimal discount, int customerId, int userId, int branchId,
+                            int paymentMethodId, string customerName = "")
+        {
+            string invoiceNo = GetNextInvoiceNumber(branchId);
+
+            string saleQuery = @"
+                INSERT INTO pos_sales (
+                    invoice_no, store_id, sale_time, sale_date, sale_type,
+                    account, total_amount, total_tax, exchange_rate, paid,
+                    discount_value, customer_id, employee_id, user_id,
+                    register_mode, amount_due, currency_id, branch_id,
+                    is_return, payment_method_id, customer_name, flatDiscountValue
+                ) VALUES (
+                    @InvoiceNo, @StoreId, GETDATE(), GETDATE(), 'POS',
+                    'SALE', @TotalAmount, @TotalTax, 1, @TotalAmount,
+                    @DiscountValue, @CustomerId, @EmployeeId, @UserId,
+                    'POS', 0, 1, @BranchId, 0, @PaymentMethodId, @CustomerName, @DiscountValue
+                ); SELECT SCOPE_IDENTITY();";
+
+            SqlParameter[] saleParams = {
+                new SqlParameter("@InvoiceNo", invoiceNo),
+                new SqlParameter("@StoreId", branchId),
+                new SqlParameter("@TotalAmount", totalAmount),
+                new SqlParameter("@TotalTax", totalTax),
+                new SqlParameter("@DiscountValue", discount),
+                new SqlParameter("@CustomerId", customerId == 0 ? DBNull.Value : (object)customerId),
+                new SqlParameter("@EmployeeId", DBNull.Value),
+                new SqlParameter("@UserId", userId),
+                new SqlParameter("@BranchId", branchId),
+                new SqlParameter("@PaymentMethodId", paymentMethodId),
+                new SqlParameter("@CustomerName", string.IsNullOrEmpty(customerName) ? DBNull.Value : (object)customerName)
+            };
+
+            int saleId = Convert.ToInt32(dbHelper.ExecuteScalar(saleQuery, saleParams));
+
+            // Insert sale items
+            foreach (DataRow row in saleItems.Rows)
+            {
+                string itemQuery = @"
+                    INSERT INTO pos_sales_items (
+                        invoice_no, sale_id, item_code, item_name, quantity_sold,
+                        cost_price, unit_price, discount_percent, discount_value,
+                        service, unit_id, currency_id, exchange_rate, branch_id,
+                        tax_id, tax_rate, packet_qty, item_number
+                    ) VALUES (
+                        @InvoiceNo, @SaleId, @ItemCode, @ItemName, @QuantitySold,
+                        @CostPrice, @UnitPrice, @DiscountPercent, @DiscountValue,
+                        0, @UnitId, 1, 1, @BranchId, @TaxId, @TaxRate, @PacketQty, @ItemNumber
+                    )";
+
+                SqlParameter[] itemParams = {
+                    new SqlParameter("@InvoiceNo", invoiceNo),
+                    new SqlParameter("@SaleId", saleId),
+                    new SqlParameter("@ItemCode", row["ProductCode"]),
+                    new SqlParameter("@ItemName", row["ProductName"]),
+                    new SqlParameter("@QuantitySold", row["Quantity"]),
+                    new SqlParameter("@CostPrice", row["CostPrice"]),
+                    new SqlParameter("@UnitPrice", row["UnitPrice"]),
+                    new SqlParameter("@DiscountPercent", row["DiscountPercent"]),
+                    new SqlParameter("@DiscountValue", row["DiscountValue"]),
+                    new SqlParameter("@UnitId", row["UnitId"] ?? DBNull.Value),
+                    new SqlParameter("@BranchId", branchId),
+                    new SqlParameter("@TaxId", row["TaxId"] ?? DBNull.Value),
+                    new SqlParameter("@TaxRate", row["TaxRate"] ?? 0),
+                    new SqlParameter("@PacketQty", row["PacketQty"] ?? 1),
+                    new SqlParameter("@ItemNumber", row["ItemNumber"] ?? DBNull.Value)
+                };
+
+                dbHelper.ExecuteNonQuery(itemQuery, itemParams);
+
+                // Update product quantity
+                ProductDLL productDal = new ProductDLL();
+                productDal.UpdateProductQuantity(row["ProductCode"].ToString(),
+                    Convert.ToDecimal(row["Quantity"]), branchId);
+            }
+
+            return saleId;
+        }
     }
 }

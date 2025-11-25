@@ -11,6 +11,14 @@ namespace POS.BLL
 {
     public class SalesBLL
     {
+        private SalesDLL salesDAL;
+
+        public SalesBLL()
+        {
+            salesDAL = new SalesDLL();
+        }
+
+
         public DataTable GetAll()
         {
             try
@@ -421,6 +429,63 @@ namespace POS.BLL
 
                 throw;
             }
+        }
+
+        /// <summary>
+        /// New method to process a sale
+        /// </summary>
+        /// <param name="saleItems"></param>
+        /// <param name="totalAmount"></param>
+        /// <param name="totalTax"></param>
+        /// <param name="discount"></param>
+        /// <param name="customerId"></param>
+        /// <param name="userId"></param>
+        /// <param name="branchId"></param>
+        /// <param name="paymentMethodId"></param>
+        /// <param name="customerName"></param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception"></exception>
+        public int ProcessSale(DataTable saleItems, decimal totalAmount, decimal totalTax,
+                              decimal discount, int customerId, int userId, int branchId,
+                              int paymentMethodId, string customerName = "")
+        {
+            // Validate sale data
+            if (saleItems.Rows.Count == 0)
+                throw new System.Exception("No items in sale");
+
+            if (totalAmount <= 0)
+                throw new System.Exception("Invalid total amount");
+
+            // Process the sale
+            return salesDAL.CreateSale(saleItems, totalAmount, totalTax, discount,
+                                     customerId, userId, branchId, paymentMethodId, customerName);
+        }
+
+        public decimal CalculateTotal(DataTable saleItems)
+        {
+            decimal total = 0;
+            foreach (DataRow row in saleItems.Rows)
+            {
+                decimal quantity = Convert.ToDecimal(row["Quantity"]);
+                decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
+                decimal discountValue = Convert.ToDecimal(row["DiscountValue"]);
+                total += (quantity * unitPrice) - discountValue;
+            }
+            return total;
+        }
+
+        public decimal CalculateTax(DataTable saleItems)
+        {
+            // Implement tax calculation logic based on your tax rules
+            decimal tax = 0;
+            foreach (DataRow row in saleItems.Rows)
+            {
+                decimal quantity = Convert.ToDecimal(row["Quantity"]);
+                decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
+                decimal taxRate = Convert.ToDecimal(row["TaxRate"] ?? 0);
+                tax += (quantity * unitPrice) * (taxRate / 100);
+            }
+            return tax;
         }
     }
 }

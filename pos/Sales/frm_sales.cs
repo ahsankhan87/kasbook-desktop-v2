@@ -2798,14 +2798,15 @@ namespace pos
                             sale_id = salesObj.InsertSales(sales_model_header, sales_model_detail);// for sales items
                             if (sale_id > 0)
                             {
-                                // Sign invoice to ZATCA
-                                if (UsersModal.useZatcaEInvoice == true && chk_sendInvoiceToZatca.Checked == true)
+                                
+                                if (UsersModal.useZatcaEInvoice == true )
                                 {
                                     DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                                     if (activeZatcaCredential == null)
                                     {
                                         MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
                                     }
+                                    // Sign invoice to ZATCA
 
                                     // Retrieve PCSID credentials from the database using the credentialId
                                     DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
@@ -2819,12 +2820,13 @@ namespace pos
 
                                         // After signing with CSID, send invoice to ZATCA
                                         // If invoice subtype is Standard then clear it from ZATCA
-                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
                                         {
                                             // Clear invoice from ZATCA
                                             ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
                                         }
-                                        else //otherwise Report invoice to ZATCA
+                                        else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                        //otherwise Report invoice to ZATCA
                                         {
                                             // Report invoice to ZATCA
                                             ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
@@ -2838,12 +2840,13 @@ namespace pos
 
                                         // After signing with PCSID, send invoice to ZATCA
                                         // If invoice subtype is Standard then clear it from ZATCA
-                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
                                         {
                                             // Clear invoice from ZATCA
                                             ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
                                         }
-                                        else //otherwise Report invoice to ZATCA
+                                        else if(cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                         //otherwise Report invoice to ZATCA
                                         {
                                             // Report invoice to ZATCA
                                             ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
@@ -2903,8 +2906,10 @@ namespace pos
                                 clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
                             }else if(result1 == "2")
                             {
+                                bool isEstimate =  (sale_type == "Quotation" ? true : false);
+
                                 //Send invoice on WhatsApp
-                                frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no);
+                                frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no,isEstimate);
                                 send_Whatsapp.ShowDialog();
                                 clear_form();
                                 return;

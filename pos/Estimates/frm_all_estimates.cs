@@ -185,6 +185,16 @@ namespace pos
             }
         }
 
-        
+        private void btnSendWhatsApp_Click(object sender, EventArgs e)
+        {
+            string invoiceNo = grid_all_estimates.CurrentRow.Cells["invoice_no"].Value.ToString();
+            if (string.IsNullOrEmpty(invoiceNo))
+            {
+                MessageBox.Show("Please select a valid invoice.");
+                return;
+            }
+            frm_send_whatsapp _frm_Send_Whatsapp = new frm_send_whatsapp(invoiceNo,true);
+            _frm_Send_Whatsapp.ShowDialog();
+        }
     }
 }

@@ -11,6 +11,12 @@ namespace POS.BLL
 {
     public class ProductBLL
     {
+        private ProductDLL productDLL;
+        public ProductBLL()
+        {
+            productDLL = new ProductDLL();
+        }
+
         static public DataTable GetAll()
         {
             try
@@ -474,6 +480,39 @@ namespace POS.BLL
                 return objDLL.SearchProductsPagedWithCount(condition, category_code, brand_code_csv, group_code, pageIndex, pageSize, out totalCount);
             }
             catch { throw; }
+        }
+
+        /// <summary>
+        /// New method to search products by name or code for a specific branch
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <param name="branchId"></param>
+        /// <returns></returns>
+
+        public DataTable SearchProducts(string searchTerm, int branchId)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return new DataTable();
+
+            return productDLL.SearchProducts(searchTerm.Trim(), branchId);
+        }
+
+        public DataTable GetProductByBarcode(string barcode, int branchId)
+        {
+            if (string.IsNullOrWhiteSpace(barcode))
+                return new DataTable();
+
+            return productDLL.GetProductByBarcode(barcode.Trim(), branchId);
+        }
+
+        public bool ValidateProductQuantity(string productCode, decimal quantity, int branchId)
+        {
+            DataTable product = productDLL.SearchProducts(productCode, branchId);
+            if (product.Rows.Count == 0)
+                return false;
+
+            decimal availableQty = Convert.ToDecimal(product.Rows[0]["qty"]);
+            return availableQty >= quantity;
         }
     }
 }

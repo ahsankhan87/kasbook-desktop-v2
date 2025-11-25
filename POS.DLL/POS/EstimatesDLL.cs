@@ -198,8 +198,8 @@ namespace POS.DLL
                             " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.item_number," +
                              " S.discount_value AS total_discount, S.total_tax, S.total_amount, " + 
                              " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
-                            " S.total_tax as vat,"+
-                            //" ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
+                            //" S.total_tax as vat,"+
+                            " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " P.name AS product_name,P.code,S.description," +
                             " C.first_name AS customer_name, C.RegistrationName as customer_company,C.PostalCode," +
                             " C.CityName, C.CountryName,C.StreetName,C.BuildingNumber,C.CitySubdivisionName, C.vat_no AS customer_vat" +

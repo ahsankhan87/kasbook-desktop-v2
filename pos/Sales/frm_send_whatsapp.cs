@@ -21,10 +21,14 @@ namespace pos
         private RadioButton rbDesktop;
         private RadioButton rbWeb;
         private readonly string _invoiceNo;
+        private readonly bool _isEstimate;
         private readonly SalesBLL _salesBll = new SalesBLL();
-        public frm_send_whatsapp(string invoiceNo)
+        private readonly EstimatesBLL _estimatesBll = new EstimatesBLL();
+
+        public frm_send_whatsapp(string invoiceNo, bool isEstimate = false)
         {
             _invoiceNo = invoiceNo;
+            _isEstimate = isEstimate;
             Init();
         }
 
@@ -114,7 +118,16 @@ namespace pos
         {
             try
             {
-                DataTable dt = _salesBll.SaleReceipt(_invoiceNo);
+                DataTable dt = null;
+                // Get customer ID from invoice
+                if (_isEstimate)
+                {
+                    dt = _estimatesBll.SaleReceipt(_invoiceNo);
+                }else
+                {
+                    dt = _salesBll.SaleReceipt(_invoiceNo);
+
+                }
                 if (dt == null || dt.Rows.Count == 0) return;
                 DataRow r = dt.Rows[0];
                 int customerId = 0;
@@ -160,7 +173,18 @@ namespace pos
             }
             try
             {
-                DataTable dt = _salesBll.SaleReceipt(_invoiceNo);
+                //DataTable dt = _salesBll.SaleReceipt(_invoiceNo);
+                DataTable dt = null;
+                // Get customer ID from invoice
+                if (_isEstimate)
+                {
+                    dt = _estimatesBll.SaleReceipt(_invoiceNo);
+                }
+                else
+                {
+                    dt = _salesBll.SaleReceipt(_invoiceNo);
+
+                }
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     MessageBox.Show("Invoice data not found.", "WhatsApp", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -1969,6 +1969,12 @@ namespace pos
             salesExpensesForm.Show();
         }
 
+        private void toolStripButtonNewPOS_Click(object sender, EventArgs e)
+        {
+            frmPOS frmPOS = new frmPOS();
+            frmPOS.ShowDialog();
+        }
+
         //private void CreateDashboardPanel()
         //{
         //    // Main dashboard container

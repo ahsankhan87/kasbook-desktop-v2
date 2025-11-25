@@ -921,6 +921,10 @@ namespace pos
             _frm_Send_Whatsapp.ShowDialog();
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmPOS frmPOS = new frmPOS();
+            frmPOS.ShowDialog();
+        }
     }
 }
