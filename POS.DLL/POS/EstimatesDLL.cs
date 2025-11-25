@@ -160,7 +160,7 @@ namespace POS.DLL
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold-SI.discount_value) AS total,"+
                             " ((SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))*SI.tax_rate/100) AS vat," +
                             " (ABS((SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))*SI.tax_rate/100) + ABS(SI.unit_price*SI.quantity_sold-ABS(SI.discount_value))) AS net_total, " +
-                            " P.name AS product_name, P.code AS product_code " +
+                            " SI.item_name AS product_name, P.code AS product_code " +
                             "FROM pos_estimates_items SI " +
                             "LEFT JOIN pos_products P ON P.item_number=SI.item_number " +
                             "WHERE sale_id LIKE @sale_id";
@@ -200,7 +200,7 @@ namespace POS.DLL
                              " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             //" S.total_tax as vat,"+
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
-                            " P.name AS product_name,P.code,S.description," +
+                            " SI.item_name AS product_name,P.code,S.description," +
                             " C.first_name AS customer_name, C.RegistrationName as customer_company,C.PostalCode," +
                             " C.CityName, C.CountryName,C.StreetName,C.BuildingNumber,C.CitySubdivisionName, C.vat_no AS customer_vat" +
                             " FROM pos_estimates S" +

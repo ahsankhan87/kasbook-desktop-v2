@@ -2233,7 +2233,7 @@ namespace POS.DLL
                             " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.item_number," +
                             " SI.discount_value,SI.discount_percent,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat, SI.item_number," +
-                            " P.name AS name,P.code,P.item_type,P.category_code," +
+                            " SI.item_name AS name,P.code,P.item_type,P.category_code," +
                             " U.name AS unit," +
                             " CT.name AS category, CT.id AS category_id," +
                             " C.first_name as customer_name, C.vat_no, C.credit_limit" +

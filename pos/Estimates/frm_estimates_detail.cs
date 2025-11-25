@@ -38,7 +38,7 @@ namespace pos
 
                 grid_estimates_detail.DataSource = null;
                 grid_estimates_detail.AutoGenerateColumns = false;
-                grid_estimates_detail.DataSource = load_estimates_detail_grid();
+                //grid_estimates_detail.DataSource = load_estimates_detail_grid();
 
                 EstimatesBLL objestimatesBLL = new EstimatesBLL();
                 DataTable dt = objestimatesBLL.GetAllEstimatesItems(_sale_id);
