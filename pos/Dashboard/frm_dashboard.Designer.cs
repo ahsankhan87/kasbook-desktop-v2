@@ -68,18 +68,18 @@ namespace pos.Dashboard
             this.lblQuickAccess = new System.Windows.Forms.Label();
             this.quickAccessPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNewSale = new System.Windows.Forms.Button();
+            this.btnNewPurchase = new System.Windows.Forms.Button();
             this.btnProducts = new System.Windows.Forms.Button();
             this.btnCustomers = new System.Windows.Forms.Button();
             this.btnSuppliers = new System.Windows.Forms.Button();
-            this.btnSalesReport = new System.Windows.Forms.Button();
             this.btnPurchasesReport = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.btnSalesReport = new System.Windows.Forms.Button();
             this.lblRecent = new System.Windows.Forms.Label();
             this.listRecent = new System.Windows.Forms.ListView();
             this.colArea = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colInfo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnNewPurchase = new System.Windows.Forms.Button();
             this.headerPanel.SuspendLayout();
             this.summaryPanel.SuspendLayout();
             this.pnlSalesToday.SuspendLayout();
@@ -231,6 +231,14 @@ namespace pos.Dashboard
             this.btnNewSale.UseVisualStyleBackColor = false;
             this.btnNewSale.Click += new System.EventHandler(this.btnNewSale_Click);
             // 
+            // btnNewPurchase
+            // 
+            this.btnNewPurchase.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnNewPurchase, "btnNewPurchase");
+            this.btnNewPurchase.Name = "btnNewPurchase";
+            this.btnNewPurchase.UseVisualStyleBackColor = false;
+            this.btnNewPurchase.Click += new System.EventHandler(this.btnNewPurchase_Click);
+            // 
             // btnProducts
             // 
             this.btnProducts.BackColor = System.Drawing.Color.White;
@@ -255,14 +263,6 @@ namespace pos.Dashboard
             this.btnSuppliers.UseVisualStyleBackColor = false;
             this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
             // 
-            // btnSalesReport
-            // 
-            this.btnSalesReport.BackColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.btnSalesReport, "btnSalesReport");
-            this.btnSalesReport.Name = "btnSalesReport";
-            this.btnSalesReport.UseVisualStyleBackColor = false;
-            this.btnSalesReport.Click += new System.EventHandler(this.btnSalesReport_Click);
-            // 
             // btnPurchasesReport
             // 
             this.btnPurchasesReport.BackColor = System.Drawing.Color.White;
@@ -278,6 +278,14 @@ namespace pos.Dashboard
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.UseVisualStyleBackColor = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // btnSalesReport
+            // 
+            this.btnSalesReport.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnSalesReport, "btnSalesReport");
+            this.btnSalesReport.Name = "btnSalesReport";
+            this.btnSalesReport.UseVisualStyleBackColor = false;
+            this.btnSalesReport.Click += new System.EventHandler(this.btnSalesReport_Click);
             // 
             // lblRecent
             // 
@@ -309,14 +317,6 @@ namespace pos.Dashboard
             // colDateTime
             // 
             resources.ApplyResources(this.colDateTime, "colDateTime");
-            // 
-            // btnNewPurchase
-            // 
-            this.btnNewPurchase.BackColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.btnNewPurchase, "btnNewPurchase");
-            this.btnNewPurchase.Name = "btnNewPurchase";
-            this.btnNewPurchase.UseVisualStyleBackColor = false;
-            this.btnNewPurchase.Click += new System.EventHandler(this.btnNewPurchase_Click);
             // 
             // frm_dashboard
             // 

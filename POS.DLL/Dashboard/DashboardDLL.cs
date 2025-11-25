@@ -28,7 +28,6 @@ namespace POS.DLL.Dashboard
                         TodayAmount = SUM(
                             CASE 
                                 WHEN CAST(S.sale_date AS date) = @TodayDate THEN
-                                    (CASE WHEN ISNULL(S.account,'') = 'Return' THEN -1 ELSE 1 END) *
                                     (COALESCE(S.total_amount,0) + COALESCE(S.total_tax,0) - COALESCE(S.discount_value,0))
                                 ELSE 0
                             END
@@ -36,7 +35,6 @@ namespace POS.DLL.Dashboard
                         MonthlyAmount = SUM(
                             CASE 
                                 WHEN S.sale_date >= @MonthStart AND S.sale_date < @NextMonthStart THEN
-                                    (CASE WHEN ISNULL(S.account,'') = 'Return' THEN -1 ELSE 1 END) *
                                     (COALESCE(S.total_amount,0) + COALESCE(S.total_tax,0) - COALESCE(S.discount_value,0))
                                 ELSE 0
                             END
