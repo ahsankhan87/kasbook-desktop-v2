@@ -1,5 +1,6 @@
-using CrystalDecisions.CrystalReports.Engine;
+﻿using CrystalDecisions.CrystalReports.Engine;
 using POS.BLL;
+using POS.Core;
 using System;
 using System.Data;
 using System.Drawing;
@@ -25,6 +26,7 @@ namespace pos
         private readonly bool _isEstimate;
         private readonly SalesBLL _salesBll = new SalesBLL();
         private readonly EstimatesBLL _estimatesBll = new EstimatesBLL();
+        private string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
 
         public frm_send_whatsapp(string invoiceNo, bool isEstimate = false)
         {
@@ -35,7 +37,7 @@ namespace pos
 
         private void Init()
         {
-            this.Text = "Send Invoice via WhatsApp";
+            this.Text = (lang == "en-US" ? "Send Invoice via WhatsApp" : "إرسال الفاتورة عبر WhatsApp");
             this.Size = new Size(430, 250);
             this.StartPosition = FormStartPosition.CenterParent;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -46,7 +48,7 @@ namespace pos
                 Left = 20,
                 Top = 15,
                 Width = 380,
-                Text = "Customer WhatsApp Number (countrycode+number):"
+                Text = (lang == "en-US" ? "Customer WhatsApp Number (countrycode+number):" : "رقم واتساب )العميل (رمز الدولة + الرقم):")
             };
             txtPhone = new TextBox
             {
@@ -61,7 +63,7 @@ namespace pos
                 Top = 70,
                 Width = 200,
                 Checked = true,
-                Text = "Include product codes"
+                Text = (lang == "en-US" ? "Include product codes" : "تضمين رموز المنتج")
             };
             grpMode = new GroupBox
             {
