@@ -296,5 +296,11 @@ namespace pos
             pos.Master.Companies.zatca.AutoGenerateCSID autoGenerateCSR = new Master.Companies.zatca.AutoGenerateCSID();
             autoGenerateCSR.Show();
         }
+
+        private void BtnRenewSubscription_Click(object sender, EventArgs e)
+        {
+            frmRenewSubscrption frm = new frmRenewSubscrption();
+            frm.ShowDialog();
+        }
     }
 }

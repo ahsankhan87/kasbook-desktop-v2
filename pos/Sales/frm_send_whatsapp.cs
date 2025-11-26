@@ -1,12 +1,13 @@
+using CrystalDecisions.CrystalReports.Engine;
+using POS.BLL;
 using System;
 using System.Data;
 using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions; // added for phone normalization
-using CrystalDecisions.CrystalReports.Engine;
-using POS.BLL;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pos
 {
@@ -238,6 +239,7 @@ namespace pos
 
                 btnSend.Enabled = false;
                 var mode = rbDesktop.Checked ? WhatsAppInvoiceSender.WhatsAppSendMode.Desktop : WhatsAppInvoiceSender.WhatsAppSendMode.Web;
+                SetKeyboardToEnglish();
                 await WhatsAppInvoiceSender.SendInvoicePdfAsync(_invoiceNo, phone, rpt, $"Invoice {_invoiceNo} - Total {net_total:N2}", mode);
                 MessageBox.Show("Invoice sent (or attempted) to WhatsApp.", "WhatsApp", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
@@ -248,7 +250,26 @@ namespace pos
                 btnSend.Enabled = true;
             }
         }
+        public static void SetKeyboardToEnglish()
+        {
+            try
+            {
+                // Create a CultureInfo object for English (United States)
+                CultureInfo englishCulture = new CultureInfo("en-US");
 
+                // Get the InputLanguage corresponding to the English culture
+                InputLanguage englishInputLanguage = InputLanguage.FromCulture(englishCulture);
+
+                // Set the current input language to English
+                InputLanguage.CurrentInputLanguage = englishInputLanguage;
+
+                //MessageBox.Show("Keyboard layout changed to English (US).");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error changing keyboard layout: {ex.Message}");
+            }
+        }
         private void InitializeComponent()
         {
             this.SuspendLayout();

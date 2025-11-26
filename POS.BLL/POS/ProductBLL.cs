@@ -1,22 +1,25 @@
-﻿using System;
+﻿using POS.Core;
+using POS.DAL;
+using POS.DLL;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using POS.DLL;
-using System.Data;
-using POS.Core;
 
 namespace POS.BLL
 {
     public class ProductBLL
     {
         private ProductDLL productDLL;
+        
         public ProductBLL()
         {
             productDLL = new ProductDLL();
         }
-
+        
+        
         static public DataTable GetAll()
         {
             try
@@ -488,7 +491,8 @@ namespace POS.BLL
         /// <param name="searchTerm"></param>
         /// <param name="branchId"></param>
         /// <returns></returns>
-
+        
+        /*
         public DataTable SearchProducts(string searchTerm, int branchId)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
@@ -513,6 +517,95 @@ namespace POS.BLL
 
             decimal availableQty = Convert.ToDecimal(product.Rows[0]["qty"]);
             return availableQty >= quantity;
+        }
+        */
+        
+
+        public DataTable SearchProductsWithStock(string searchTerm, int branchId, string locationCode = null)
+        {
+            string query = @"
+                SELECT 
+                    p.code, p.name, p.name_ar, p.barcode, p.unit_price, 
+                    p.cost_price, p.brand_code, p.category_code, p.item_type,
+                    p.tax_id, p.unit_id, p.item_number,
+                    ISNULL(ps.qty, 0) as current_stock,
+                    ps.loc_code, ps.reorder_level
+                FROM pos_products p
+                LEFT JOIN pos_product_stocks ps ON p.code = ps.item_code 
+                    AND ps.branch_id = @BranchId
+                    AND (@LocationCode IS NULL OR ps.loc_code = @LocationCode)
+                WHERE (p.branch_id = @BranchId OR p.branch_id IS NULL) 
+                AND (p.deleted = 0 OR p.deleted IS NULL)
+                AND (p.name LIKE @SearchTerm OR p.code LIKE @SearchTerm 
+                    OR p.barcode LIKE @SearchTerm OR p.name_ar LIKE @SearchTerm)";
+
+            // This would need to be executed through DatabaseHelper
+            // For now, let's modify the ProductBLL to include stock information
+            return new DataTable();
+        }
+
+        public decimal GetProductStock(string itemNumber, int branchId, string locationCode = null)
+        {
+            return productDLL.GetCurrentStock(itemNumber, branchId, locationCode);
+        }
+
+        public DataTable SearchProducts(string searchTerm, int branchId)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return new DataTable();
+
+            DataTable products = productDLL.SearchProducts(searchTerm.Trim(), branchId);
+
+            // Add stock information to the results
+            if (products.Columns.Contains("qty"))
+                products.Columns.Remove("qty");
+
+            products.Columns.Add("current_stock", typeof(decimal));
+            products.Columns.Add("location", typeof(string));
+
+            foreach (DataRow row in products.Rows)
+            {
+                string itemNumber = row["item_number"].ToString();
+                decimal currentStock = productDLL.GetCurrentStock(itemNumber, branchId);
+                row["current_stock"] = currentStock;
+                row["location"] = "DEF"; // Default location
+            }
+
+            return products;
+        }
+
+        public DataTable GetProductByBarcode(string barcode, int branchId)
+        {
+            if (string.IsNullOrWhiteSpace(barcode))
+                return new DataTable();
+
+            DataTable product = productDLL.GetProductByBarcode(barcode.Trim(), branchId);
+
+            if (product.Rows.Count > 0)
+            {
+                // Add stock information
+                string productCode = product.Rows[0]["code"].ToString();
+                decimal currentStock = productDLL.GetCurrentStock(productCode, branchId);
+
+                if (product.Columns.Contains("qty"))
+                    product.Columns.Remove("qty");
+
+                product.Columns.Add("current_stock", typeof(decimal));
+                product.Rows[0]["current_stock"] = currentStock;
+            }
+
+            return product;
+        }
+
+        public bool ValidateProductQuantity(string itemNumber, decimal quantity, int branchId)
+        {
+            decimal availableStock = productDLL.GetCurrentStock(itemNumber, branchId);
+            return availableStock >= quantity;
+        }
+
+        public decimal GetProductStock(string itemNumber, int branchId)
+        {
+            return productDLL.GetCurrentStock(itemNumber, branchId);
         }
     }
 }

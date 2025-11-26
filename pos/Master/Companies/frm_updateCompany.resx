@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1000, 17</value>
+    <value>1107, 11</value>
   </data>
   <data name="btn_save.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -148,7 +148,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btn_save.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lbl_header_title.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -181,7 +181,34 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;lbl_header_title.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="BtnRenewSubscription.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 7.8pt, style=Bold</value>
+  </data>
+  <data name="BtnRenewSubscription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>924, 14</value>
+  </data>
+  <data name="BtnRenewSubscription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 55</value>
+  </data>
+  <data name="BtnRenewSubscription.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="BtnRenewSubscription.Text" xml:space="preserve">
+    <value>Renew Subscription</value>
+  </data>
+  <data name="&gt;&gt;BtnRenewSubscription.Name" xml:space="preserve">
+    <value>BtnRenewSubscription</value>
+  </data>
+  <data name="&gt;&gt;BtnRenewSubscription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnRenewSubscription.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;BtnRenewSubscription.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lblExpiryDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,10 +244,10 @@
     <value>0</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 12</value>
+    <value>239, 12</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 32</value>
+    <value>653, 41</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -235,13 +262,13 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btn_cancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1107, 17</value>
+    <value>1107, 41</value>
   </data>
   <data name="btn_cancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -265,7 +292,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -277,7 +304,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1225, 58</value>
+    <value>1225, 80</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -757,7 +784,7 @@
     <value>16</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 76</value>
+    <value>12, 88</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1555,7 +1582,7 @@
     <value>25</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>752, 76</value>
+    <value>752, 88</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1870,7 +1897,7 @@
     <value>4</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 76</value>
+    <value>444, 88</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>301, 532</value>

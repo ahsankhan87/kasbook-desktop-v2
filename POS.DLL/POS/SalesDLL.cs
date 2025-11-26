@@ -1,12 +1,13 @@
-﻿using System;
+﻿using POS.Core;
+using POS.DAL;
+using POS.DLL;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using POS.Core;
-
 
 namespace POS.DLL
 {
@@ -17,6 +18,14 @@ namespace POS.DLL
         private DataTable dt = new DataTable();
         private SalesModal info = new SalesModal();
         public UsersModal user_obj = new UsersModal();
+
+        private InventoryDAL inventoryDAL;
+        private ProductDLL productDLL;
+        public SalesDLL()
+        {
+            inventoryDAL = new InventoryDAL();
+            productDLL = new ProductDLL();
+        }
 
         public DataTable GetAll()
         {
@@ -2673,7 +2682,7 @@ namespace POS.DLL
             return result?.ToString() ?? $"INV-{branchId}-000001";
         }
 
-        public int CreateSale(DataTable saleItems, decimal totalAmount, decimal totalTax,
+        public int CreateSale_1(DataTable saleItems, decimal totalAmount, decimal totalTax,
                             decimal discount, int customerId, int userId, int branchId,
                             int paymentMethodId, string customerName = "")
         {
@@ -2746,11 +2755,126 @@ namespace POS.DLL
 
                 // Update product quantity
                 ProductDLL productDal = new ProductDLL();
-                productDal.UpdateProductQuantity(row["ProductCode"].ToString(),
+                productDal.UpdateProductQuantity(row["ItemNumber"].ToString(),
                     Convert.ToDecimal(row["Quantity"]), branchId);
             }
 
             return saleId;
+        }
+
+        public int CreateSale(DataTable saleItems, decimal totalAmount, decimal totalTax,
+                            decimal discount, int customerId, int userId, int branchId,
+                            int paymentMethodId, string customerName = "", string locationCode = "MAIN")
+        {
+            string invoiceNo = GetNextInvoiceNumber(branchId);
+
+            using (SqlConnection conn = dbHelper.GetConnection())
+            {
+                conn.Open();
+                using (SqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Insert sale header
+                        string saleQuery = @"
+                            INSERT INTO pos_sales (
+                                invoice_no, store_id, sale_time, sale_date, sale_type,
+                                account, total_amount, total_tax, exchange_rate, paid,
+                                discount_value, customer_id, employee_id, user_id,
+                                register_mode, amount_due, currency_id, branch_id,
+                                is_return, payment_method_id, customer_name, flatDiscountValue
+                            ) VALUES (
+                                @InvoiceNo, @StoreId, GETDATE(), GETDATE(), 'POS',
+                                'SALE', @TotalAmount, @TotalTax, 1, @TotalAmount,
+                                @DiscountValue, @CustomerId, @EmployeeId, @UserId,
+                                'POS', 0, 1, @BranchId, 0, @PaymentMethodId, @CustomerName, @DiscountValue
+                            ); SELECT SCOPE_IDENTITY();";
+
+                        SqlParameter[] saleParams = {
+                            new SqlParameter("@InvoiceNo", invoiceNo),
+                            new SqlParameter("@StoreId", branchId),
+                            new SqlParameter("@TotalAmount", totalAmount),
+                            new SqlParameter("@TotalTax", totalTax),
+                            new SqlParameter("@DiscountValue", discount),
+                            new SqlParameter("@CustomerId", customerId == 0 ? DBNull.Value : (object)customerId),
+                            new SqlParameter("@EmployeeId", DBNull.Value),
+                            new SqlParameter("@UserId", userId),
+                            new SqlParameter("@BranchId", branchId),
+                            new SqlParameter("@PaymentMethodId", paymentMethodId),
+                            new SqlParameter("@CustomerName", string.IsNullOrEmpty(customerName) ? DBNull.Value : (object)customerName)
+                        };
+
+                        int saleId = Convert.ToInt32(dbHelper.ExecuteScalar(saleQuery, saleParams, conn, transaction));
+
+                        // Insert sale items and update inventory
+                        foreach (DataRow row in saleItems.Rows)
+                        {
+                            string itemCode = row["ProductCode"].ToString();
+                            decimal quantity = Convert.ToDecimal(row["Quantity"]);
+                            decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
+                            decimal costPrice = Convert.ToDecimal(row["CostPrice"]);
+                            string itemNumber = row["ItemNumber"]?.ToString();
+
+                            // Validate stock before processing
+                            if (!productDLL.ValidateStockAvailability(itemNumber, branchId, quantity, locationCode))
+                            {
+                                throw new Exception($"Insufficient stock for product: {row["ProductName"]}. Available: {productDLL.GetProductStock(itemNumber, branchId, locationCode)}");
+                            }
+
+                            // Insert sale item
+                            string itemQuery = @"
+                                INSERT INTO pos_sales_items (
+                                    invoice_no, sale_id, item_code, item_name, quantity_sold,
+                                    cost_price, unit_price, discount_percent, discount_value,
+                                    service, unit_id, currency_id, exchange_rate, branch_id,
+                                    tax_id, tax_rate, packet_qty, item_number
+                                ) VALUES (
+                                    @InvoiceNo, @SaleId, @ItemCode, @ItemName, @QuantitySold,
+                                    @CostPrice, @UnitPrice, @DiscountPercent, @DiscountValue,
+                                    0, @UnitId, 1, 1, @BranchId, @TaxId, @TaxRate, @PacketQty, @ItemNumber
+                                )";
+
+                            SqlParameter[] itemParams = {
+                                new SqlParameter("@InvoiceNo", invoiceNo),
+                                new SqlParameter("@SaleId", saleId),
+                                new SqlParameter("@ItemCode", itemCode),
+                                new SqlParameter("@ItemName", row["ProductName"]),
+                                new SqlParameter("@QuantitySold", quantity),
+                                new SqlParameter("@CostPrice", costPrice),
+                                new SqlParameter("@UnitPrice", unitPrice),
+                                new SqlParameter("@DiscountPercent", row["DiscountPercent"]),
+                                new SqlParameter("@DiscountValue", row["DiscountValue"]),
+                                new SqlParameter("@UnitId", row["UnitId"] ?? DBNull.Value),
+                                new SqlParameter("@BranchId", branchId),
+                                new SqlParameter("@TaxId", row["TaxId"] ?? DBNull.Value),
+                                new SqlParameter("@TaxRate", row["TaxRate"] ?? 0),
+                                new SqlParameter("@PacketQty", row["PacketQty"] ?? 1),
+                                new SqlParameter("@ItemNumber", (object)itemNumber ?? DBNull.Value)
+                            };
+
+                            dbHelper.ExecuteNonQuery(itemQuery, itemParams, conn, transaction);
+
+                            // Process inventory transaction
+                            bool inventoryProcessed = productDLL.ProcessSaleTransaction(
+                                itemCode, branchId, quantity, unitPrice, costPrice, userId,
+                                invoiceNo, itemNumber, customerId == 0 ? null : (int?)customerId, locationCode);
+
+                            if (!inventoryProcessed)
+                            {
+                                throw new Exception($"Failed to update inventory for product: {row["ProductName"]}");
+                            }
+                        }
+
+                        transaction.Commit();
+                        return saleId;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
         }
     }
 }

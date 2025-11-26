@@ -1301,6 +1301,12 @@
     </Compile>
     <Compile Include="Master\Companies\zatca\ZatcaAuth.cs" />
     <Compile Include="Master\Companies\zatca\ZatcaComplianceApi.cs" />
+    <Compile Include="Sales\POS\FrmNewSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\POS\FrmNewSales.Designer.cs">
+      <DependentUpon>FrmNewSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\POS\frmPOS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2230,6 +2236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_zatca_invoices.resx">
       <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\POS\FrmNewSales.resx">
+      <DependentUpon>FrmNewSales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\POS\frmPOS.resx">
       <DependentUpon>frmPOS.cs</DependentUpon>

@@ -53,7 +53,29 @@ namespace POS.DLL
                 }
             }
         }
+        // Add these overloaded methods to DatabaseHelper for transaction support
+        // You'll need to add these to your existing DatabaseHelper class
+        
+        public object ExecuteScalar(string query, SqlParameter[] parameters, SqlConnection conn, SqlTransaction transaction)
+        {
+            using (SqlCommand cmd = new SqlCommand(query, conn, transaction))
+            {
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+                return cmd.ExecuteScalar();
+            }
+        }
 
+        public int ExecuteNonQuery(string query, SqlParameter[] parameters, SqlConnection conn, SqlTransaction transaction)
+        {
+            using (SqlCommand cmd = new SqlCommand(query, conn, transaction))
+            {
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        
         public object ExecuteScalar(string query, SqlParameter[] parameters = null)
         {
             using (SqlConnection conn = GetConnection())

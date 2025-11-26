@@ -130,6 +130,7 @@ namespace pos
                     Subscription subcription_obj = new Subscription();
                     bool verifySubcriptionKey = subcription_obj.VerifySubscriptionKey(company_id, subscriptionKey, out DateTime currentDate, systemID);
 
+                    //MessageBox.Show("Expiry Date: " + currentDate.ToString());
                     DateTime today = Convert.ToDateTime(DateTime.Now.ToShortDateString());
                     TimeSpan t = currentDate - today;
                     double no_of_days = t.TotalDays;
@@ -137,6 +138,8 @@ namespace pos
                     if (no_of_days <= 14)
                     {
                         MessageBox.Show("Your account will expire on " + currentDate.Date.ToShortDateString() + ", number of days left: " + no_of_days + ". Please re-new account.", "Software Expiration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        frmRenewSubscrption frm = new frmRenewSubscrption();
+                        frm.ShowDialog();
                     }
 
                     if (!verifySubcriptionKey)

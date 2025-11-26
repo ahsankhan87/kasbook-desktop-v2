@@ -51,6 +51,7 @@
     <Compile Include="POS\DebitNoteDLL.cs" />
     <Compile Include="POS\FiscalYearsDLL.cs" />
     <Compile Include="POS\BranchesDLL.cs" />
+    <Compile Include="POS\InventoryDAL.cs" />
     <Compile Include="POS\Log.cs" />
     <Compile Include="POS\PaymentMethodDLL.cs" />
     <Compile Include="POS\ProductGroupsDLL.cs" />

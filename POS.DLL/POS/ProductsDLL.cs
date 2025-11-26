@@ -1,16 +1,23 @@
-﻿using System;
+﻿using POS.Core;
+using POS.DAL;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using POS.Core;
 
 namespace POS.DLL
 {
     public class ProductDLL
     {
+        private InventoryDAL inventoryDAL;
+
+        public ProductDLL()
+        {
+            inventoryDAL = new InventoryDAL();
+        }
         public DataTable GetAll()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -2421,22 +2428,168 @@ namespace POS.DLL
             return dbHelper.ExecuteQuery(query, parameters);
         }
 
-        public bool UpdateProductQuantity(string productCode, decimal quantity, int branchId)
+        public bool UpdateProductQuantity(string ItemNumber, decimal quantity, int branchId)
         {
             string query = @"
-                UPDATE pos_products 
+                UPDATE pos_product_stocks
                 SET qty = qty - @Quantity,
                     date_updated = GETDATE()
-                WHERE code = @ProductCode 
+                WHERE item_number = @ItemNumber
                 AND (branch_id = @BranchId OR branch_id IS NULL)";
 
             SqlParameter[] parameters = {
                 new SqlParameter("@Quantity", quantity),
-                new SqlParameter("@ProductCode", productCode),
+                new SqlParameter("@ItemNumber", ItemNumber),
                 new SqlParameter("@BranchId", branchId)
             };
 
             return dbHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
+
+        public DataTable GetProductStock(string itemNumber, int branchId, string locationCode = null)
+        {
+            string query = @"
+                SELECT 
+                    ps.item_code, ps.qty, ps.loc_code, ps.reorder_level,
+                    p.name, p.unit_price, p.cost_price, p.barcode,
+                    p.category_code, p.brand_code, p.unit_id, p.tax_id
+                FROM pos_product_stocks ps
+                INNER JOIN pos_products p ON ps.item_number = p.item_number
+                WHERE ps.item_number = @ItemNumber
+                AND ps.branch_id = @BranchId
+                AND (ps.loc_code = @LocationCode OR @LocationCode IS NULL)
+                AND (p.deleted = 0 OR p.deleted IS NULL)";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@ItemNumber", itemNumber),
+                new SqlParameter("@BranchId", branchId),
+                new SqlParameter("@LocationCode", (object)locationCode ?? DBNull.Value)
+            };
+
+            return dbHelper.ExecuteQuery(query, parameters);
+        }
+
+        public bool UpdateProductStock(string ItemNumber, int branchId, decimal quantityChange,
+                                     string locationCode, int userId, string transactionType)
+        {
+            using (SqlConnection conn = dbHelper.GetConnection())
+            {
+                conn.Open();
+                using (SqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Update or Insert into pos_product_stocks
+                        string stockQuery = @"
+                            IF EXISTS (SELECT 1 FROM pos_product_stocks 
+                                      WHERE item_number = @ItemNumber 
+                                      AND branch_id = @BranchId 
+                                      )
+                            BEGIN
+                                UPDATE pos_product_stocks 
+                                SET qty = qty + @QuantityChange,
+                                    date_updated = GETDATE(),
+                                    user_id = @UserId
+                                WHERE item_number = @ItemNumber 
+                                AND branch_id = @BranchId 
+                                
+                            END
+                            ELSE
+                            BEGIN
+                                INSERT INTO pos_product_stocks (
+                                    branch_id, user_id, loc_code, item_number, 
+                                    qty, date_created, date_updated
+                                ) VALUES (
+                                    @BranchId, @UserId, @LocationCode, @ItemNumber,
+                                    @QuantityChange, GETDATE(), GETDATE()
+                                )
+                            END";
+
+                        SqlParameter[] stockParams = {
+                            new SqlParameter("@ItemNumber", ItemNumber),
+                            new SqlParameter("@BranchId", branchId),
+                            new SqlParameter("@LocationCode", locationCode),
+                            new SqlParameter("@QuantityChange", quantityChange),
+                            new SqlParameter("@UserId", userId)
+                        };
+
+                        using (SqlCommand cmd = new SqlCommand(stockQuery, conn, transaction))
+                        {
+                            cmd.Parameters.AddRange(stockParams);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public decimal GetCurrentStock(string ItemNumber, int branchId, string locationCode = null)
+        {
+            string query = @"
+                SELECT ISNULL(SUM(qty), 0) as current_stock
+                FROM pos_product_stocks 
+                WHERE item_number = @ItemNumber
+                AND branch_id = @BranchId
+                ";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@ItemNumber", ItemNumber),
+                new SqlParameter("@BranchId", branchId),
+                new SqlParameter("@LocationCode", (object)locationCode ?? DBNull.Value)
+            };
+
+            object result = dbHelper.ExecuteScalar(query, parameters);
+            return Convert.ToDecimal(result);
+        }
+
+        public bool ValidateStockAvailability(string ItemNumber, int branchId, decimal requestedQuantity, string locationCode = null)
+        {
+            decimal currentStock = GetCurrentStock(ItemNumber, branchId, locationCode);
+            return currentStock >= requestedQuantity;
+        }
+
+
+        public bool ProcessSaleTransaction(string productCode, int branchId, decimal quantity,
+                                         decimal unitPrice, decimal costPrice, int userId,
+                                         string invoiceNo, string itemNumber,int? customerId = null,
+                                         string locationCode = "MAIN")
+        {
+            //using (var transaction = new System.Transactions.TransactionScope())
+            
+                try
+                {
+                    // Update stock (negative quantity for sale)
+                    bool stockUpdated = UpdateProductStock(
+                        itemNumber, branchId, -quantity, locationCode, userId, "SALE");
+
+                    if (!stockUpdated)
+                        return false;
+
+                    // Record inventory transaction
+                    bool inventoryRecorded = inventoryDAL.RecordInventoryTransaction(
+                        productCode, -quantity, costPrice, unitPrice, branchId, userId,
+                        $"Sale - Invoice: {invoiceNo}", invoiceNo, "SALE", itemNumber,
+                        customerId, null, locationCode);
+
+                    if (!inventoryRecorded)
+                        return false;
+
+                    //transaction.Complete();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error processing sale transaction: {ex.Message}", ex);
+                }
+            
         }
     }
 }

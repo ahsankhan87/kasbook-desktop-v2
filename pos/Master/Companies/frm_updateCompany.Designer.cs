@@ -93,6 +93,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.txt_postalCode = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BtnRenewSubscription = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -117,6 +118,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel1.Controls.Add(this.BtnRenewSubscription);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.lbl_header_title);
             this.panel1.Controls.Add(this.btn_cancel);
@@ -537,6 +539,14 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
+            // BtnRenewSubscription
+            // 
+            resources.ApplyResources(this.BtnRenewSubscription, "BtnRenewSubscription");
+            this.BtnRenewSubscription.ForeColor = System.Drawing.Color.Black;
+            this.BtnRenewSubscription.Name = "BtnRenewSubscription";
+            this.BtnRenewSubscription.UseVisualStyleBackColor = true;
+            this.BtnRenewSubscription.Click += new System.EventHandler(this.BtnRenewSubscription_Click);
+            // 
             // frm_updateCompany
             // 
             resources.ApplyResources(this, "$this");
@@ -632,5 +642,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txt_countryName;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button BtnRenewSubscription;
     }
 }
