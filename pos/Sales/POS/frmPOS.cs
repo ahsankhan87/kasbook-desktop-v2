@@ -64,6 +64,99 @@ namespace pos
             dgvCart.DataSource = cartItems;
         }
 
+        //private void ConfigureDataGrids()
+        //{
+        //    // Configure Products Grid
+        //    dgvProducts.AutoGenerateColumns = false;
+        //    dgvProducts.Columns.Clear();
+
+        //    dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "code",
+        //        HeaderText = "Code",
+        //        Name = "colCode",
+        //        Width = 80,
+        //        ReadOnly = true
+        //    });
+
+        //    dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "name",
+        //        HeaderText = "Product Name",
+        //        Name = "colName",
+        //        Width = 200,
+        //        ReadOnly = true
+        //    });
+
+        //    dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "unit_price",
+        //        HeaderText = "Price",
+        //        Name = "colPrice",
+        //        Width = 80,
+        //        ReadOnly = true
+        //    });
+
+        //    dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "qty",
+        //        HeaderText = "Stock",
+        //        Name = "colStock",
+        //        Width = 60,
+        //        ReadOnly = true
+        //    });
+
+        //    // Configure Cart Grid
+        //    dgvCart.AutoGenerateColumns = false;
+        //    dgvCart.Columns.Clear();
+
+        //    dgvCart.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "ProductName",
+        //        HeaderText = "Product",
+        //        Name = "colCartName",
+        //        ReadOnly = true,
+        //        Width = 150
+        //    });
+
+        //    DataGridViewTextBoxColumn quantityColumn = new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "Quantity",
+        //        HeaderText = "Qty",
+        //        Name = "colCartQty",
+        //        Width = 60,
+        //        ReadOnly = false
+        //    };
+        //    dgvCart.Columns.Add(quantityColumn);
+
+        //    dgvCart.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "UnitPrice",
+        //        HeaderText = "Price",
+        //        Name = "colCartPrice",
+        //        ReadOnly = true,
+        //        Width = 80
+        //    });
+
+        //    DataGridViewTextBoxColumn discountColumn = new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "DiscountValue",
+        //        HeaderText = "Discount",
+        //        Name = "colCartDiscount",
+        //        Width = 80,
+        //        ReadOnly = false
+        //    };
+        //    dgvCart.Columns.Add(discountColumn);
+
+        //    dgvCart.Columns.Add(new DataGridViewTextBoxColumn()
+        //    {
+        //        DataPropertyName = "Total",
+        //        HeaderText = "Total",
+        //        Name = "colCartTotal",
+        //        ReadOnly = true,
+        //        Width = 80
+        //    });
+        //}
         private void ConfigureDataGrids()
         {
             // Configure Products Grid
@@ -97,16 +190,17 @@ namespace pos
                 ReadOnly = true
             });
 
+            // Add stock column
             dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "qty",
+                DataPropertyName = "current_stock",
                 HeaderText = "Stock",
                 Name = "colStock",
                 Width = 60,
                 ReadOnly = true
             });
 
-            // Configure Cart Grid
+            // Configure Cart Grid - Add stock validation
             dgvCart.AutoGenerateColumns = false;
             dgvCart.Columns.Clear();
 
@@ -129,35 +223,25 @@ namespace pos
             };
             dgvCart.Columns.Add(quantityColumn);
 
-            dgvCart.Columns.Add(new DataGridViewTextBoxColumn()
+            dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "UnitPrice",
+                DataPropertyName = "unit_price",
                 HeaderText = "Price",
-                Name = "colCartPrice",
-                ReadOnly = true,
-                Width = 80
+                Name = "colPrice",
+                Width = 80,
+                ReadOnly = true
             });
 
-            DataGridViewTextBoxColumn discountColumn = new DataGridViewTextBoxColumn()
+            // Add stock column to products grid
+            dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "DiscountValue",
-                HeaderText = "Discount",
-                Name = "colCartDiscount",
-                Width = 80,
-                ReadOnly = false
-            };
-            dgvCart.Columns.Add(discountColumn);
-
-            dgvCart.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "Total",
-                HeaderText = "Total",
-                Name = "colCartTotal",
-                ReadOnly = true,
-                Width = 80
+                DataPropertyName = "current_stock",
+                HeaderText = "Stock",
+                Name = "colStock",
+                Width = 60,
+                ReadOnly = true
             });
         }
-
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
             if (txtSearch.Text.Length > 2)
@@ -226,7 +310,6 @@ namespace pos
                 }
             }
         }
-
         private void AddProductToCart(DataRow productRow)
         {
             string productCode = productRow["code"].ToString();
@@ -234,13 +317,33 @@ namespace pos
             decimal unitPrice = Convert.ToDecimal(productRow["unit_price"]);
             decimal costPrice = productRow["cost_price"] != DBNull.Value ?
                 Convert.ToDecimal(productRow["cost_price"]) : 0m;
+            decimal currentStock = productRow["current_stock"] != DBNull.Value ?
+                Convert.ToDecimal(productRow["current_stock"]) : 0m;
+
+            // Check stock availability
+            if (currentStock <= 0)
+            {
+                MessageBox.Show($"Product '{productName}' is out of stock!", "Stock Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             // Check if product already in cart
             DataRow[] existingRows = cartItems.Select($"ProductCode = '{productCode.Replace("'", "''")}'");
             if (existingRows.Length > 0)
             {
-                existingRows[0]["Quantity"] = Convert.ToDecimal(existingRows[0]["Quantity"]) + 1;
-                existingRows[0]["Total"] = Convert.ToDecimal(existingRows[0]["Quantity"]) * unitPrice - Convert.ToDecimal(existingRows[0]["DiscountValue"]);
+                decimal newQuantity = Convert.ToDecimal(existingRows[0]["Quantity"]) + 1;
+
+                // Validate stock for increased quantity
+                if (newQuantity > currentStock)
+                {
+                    MessageBox.Show($"Cannot add more. Only {currentStock} units available for '{productName}'",
+                        "Stock Limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                existingRows[0]["Quantity"] = newQuantity;
+                existingRows[0]["Total"] = newQuantity * unitPrice - Convert.ToDecimal(existingRows[0]["DiscountValue"]);
             }
             else
             {
@@ -254,7 +357,7 @@ namespace pos
                 newRow["Total"] = unitPrice;
                 newRow["CostPrice"] = costPrice;
                 newRow["TaxId"] = productRow["tax_id"] ?? DBNull.Value;
-                newRow["TaxRate"] = 0m; // Calculate based on tax_id if needed
+                newRow["TaxRate"] = 0m;
                 newRow["UnitId"] = productRow["unit_id"] ?? DBNull.Value;
                 newRow["PacketQty"] = productRow["packet_qty"] ?? 1m;
                 newRow["ItemNumber"] = productRow["item_number"] ?? DBNull.Value;
@@ -265,6 +368,45 @@ namespace pos
             UpdateTotals();
             dgvCart.Refresh();
         }
+
+        //private void AddProductToCart(DataRow productRow)
+        //{
+        //    string productCode = productRow["code"].ToString();
+        //    string productName = productRow["name"].ToString();
+        //    decimal unitPrice = Convert.ToDecimal(productRow["unit_price"]);
+        //    decimal costPrice = productRow["cost_price"] != DBNull.Value ?
+        //        Convert.ToDecimal(productRow["cost_price"]) : 0m;
+
+        //    // Check if product already in cart
+        //    DataRow[] existingRows = cartItems.Select($"ProductCode = '{productCode.Replace("'", "''")}'");
+        //    if (existingRows.Length > 0)
+        //    {
+        //        existingRows[0]["Quantity"] = Convert.ToDecimal(existingRows[0]["Quantity"]) + 1;
+        //        existingRows[0]["Total"] = Convert.ToDecimal(existingRows[0]["Quantity"]) * unitPrice - Convert.ToDecimal(existingRows[0]["DiscountValue"]);
+        //    }
+        //    else
+        //    {
+        //        DataRow newRow = cartItems.NewRow();
+        //        newRow["ProductCode"] = productCode;
+        //        newRow["ProductName"] = productName;
+        //        newRow["Quantity"] = 1m;
+        //        newRow["UnitPrice"] = unitPrice;
+        //        newRow["DiscountValue"] = 0m;
+        //        newRow["DiscountPercent"] = 0m;
+        //        newRow["Total"] = unitPrice;
+        //        newRow["CostPrice"] = costPrice;
+        //        newRow["TaxId"] = productRow["tax_id"] ?? DBNull.Value;
+        //        newRow["TaxRate"] = 0m; // Calculate based on tax_id if needed
+        //        newRow["UnitId"] = productRow["unit_id"] ?? DBNull.Value;
+        //        newRow["PacketQty"] = productRow["packet_qty"] ?? 1m;
+        //        newRow["ItemNumber"] = productRow["item_number"] ?? DBNull.Value;
+
+        //        cartItems.Rows.Add(newRow);
+        //    }
+
+        //    UpdateTotals();
+        //    dgvCart.Refresh();
+        //}
 
         private void DgvCart_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {

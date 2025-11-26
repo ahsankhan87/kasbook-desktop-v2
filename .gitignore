@@ -401,3 +401,6 @@ FodyWeavers.xsd
 /pos/Sales/*
 !/pos/Sales/WhatsAppInvoiceSender.cs
 !/pos/Sales/frm_send_whatsapp.cs
+/pos/Sales/POS/frmPOS.cs
+/pos/Sales/POS/frmPOS.Designer.cs
+/pos/Sales/POS/frmPOS.resx
