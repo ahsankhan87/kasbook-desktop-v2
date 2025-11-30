@@ -2932,6 +2932,7 @@ namespace pos
                                 {
                                     obj.load_print(); // send print direct to printer without showing dialog
                                     //obj.ShowDialog();
+                                    clear_form();
                                 }
                             }
                             else//for estiamte
@@ -2940,6 +2941,7 @@ namespace pos
                                 {
                                     //obj.ShowDialog();
                                     obj.load_print(); // send print direct to printer without showing dialog
+                                    clear_form();
                                 }
                             }
 
