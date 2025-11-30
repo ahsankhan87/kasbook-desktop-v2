@@ -1161,10 +1161,10 @@
     <Compile Include="Reports\Sales\Report Viewer\frm_sales_report.Designer.cs">
       <DependentUpon>frm_sales_report.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Sales\rpt\sales_invoice_small.cs">
+    <Compile Include="Reports\Sales\rpt\pos80_sales_invoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sales_invoice_small.rpt</DependentUpon>
+      <DependentUpon>pos80_sales_invoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Sales\rpt\sales_report.cs">
@@ -2120,9 +2120,9 @@
     <EmbeddedResource Include="Reports\Sales\Report Viewer\frm_sales_report.resx">
       <DependentUpon>frm_sales_report.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Sales\rpt\sales_invoice_small.rpt">
+    <EmbeddedResource Include="Reports\Sales\rpt\pos80_sales_invoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>sales_invoice_small.cs</LastGenOutput>
+      <LastGenOutput>pos80_sales_invoice.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\rpt\sales_report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2352,6 +2352,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Reports\Sales\rpt\pos80_sales_invoice_OLD.rpt" />
+    <None Include="Reports\Sales\rpt\pos80_sale_invoice.rpt" />
     <None Include="Resources\database.png" />
     <None Include="Resources\delete.png" />
     <None Include="Resources\edit.png" />

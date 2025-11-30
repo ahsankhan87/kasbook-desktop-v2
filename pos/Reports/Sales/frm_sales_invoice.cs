@@ -1,6 +1,7 @@
 ﻿//using CrystalDecisions.Shared;
 using CrystalDecisions.CrystalReports.Engine;
 using POS.BLL;
+using POS.Core;
 using System;
 using System.Data;
 using System.Drawing;
@@ -15,13 +16,16 @@ namespace pos
         DataTable _dt;
         bool _isPrint = false;
         bool _isPrintProductCode = false;
+        bool _isPrintPOS80 = false;
+        public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
 
-        public frm_sales_invoice(DataTable sales_detail,bool isPrint, bool isPrintProductCode=false)
+        public frm_sales_invoice(DataTable sales_detail,bool isPrint, bool isPrintProductCode=false,bool isPrintPOS80=false)
         {
             InitializeComponent();
             _dt = sales_detail;
             _isPrintProductCode = isPrintProductCode;
             _isPrint = isPrint;
+            _isPrintPOS80 = isPrintPOS80;
         }
 
         private void frm_sales_invoice_Load(object sender, EventArgs e)
@@ -105,7 +109,11 @@ namespace pos
 
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             ReportDocument rptDoc = new ReportDocument();
-            if(_isPrintProductCode)
+            if(_isPrintPOS80)
+            {
+                rptDoc.Load(appPath + @"\\reports\\pos80_sale_invoice.rpt");
+            }
+            else if(_isPrintProductCode)
             {
                 rptDoc.Load(appPath + @"\\reports\\sales_invoice.rpt");
             }
@@ -120,12 +128,15 @@ namespace pos
             rptDoc.SetParameterValue("company_vat", company_vat_no);
             rptDoc.SetParameterValue("company_address", company_address);
             rptDoc.SetParameterValue("company_contact", company_contact_no);
+
+
             rptDoc.SetParameterValue("StreetName", StreetName);
             rptDoc.SetParameterValue("BuildingNumber", BuildingNumber);
             rptDoc.SetParameterValue("CitySubdivisionName", CitySubdivisionName);
             rptDoc.SetParameterValue("CityName", CityName);
             rptDoc.SetParameterValue("Postalcode", Postalcode);
             rptDoc.SetParameterValue("CountryName", CountryName);
+            
 
             rptDoc.SetParameterValue("subtotal", total_amount);
             rptDoc.SetParameterValue("total_discount", total_discount);

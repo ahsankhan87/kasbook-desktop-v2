@@ -132,17 +132,17 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="listBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 179</value>
+    <value>529, 207</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="btnCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btnSave.Text" xml:space="preserve">
     <value>Save</value>
@@ -159,6 +159,9 @@
   <data name="listBox1.Items3" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="listBox1.Items4" xml:space="preserve">
+    <value>Save and Print POS80 Invoice</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Save Options</value>
   </data>
@@ -172,10 +175,10 @@
     <value>1</value>
   </data>
   <data name="listBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>380, 223</value>
+    <value>428, 279</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -193,22 +196,22 @@
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="btnSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 46</value>
+    <value>112, 58</value>
   </data>
   <data name="&gt;&gt;listBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="listBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 14</value>
+    <value>9, 18</value>
   </data>
   <data name="&gt;&gt;listBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 46</value>
+    <value>116, 58</value>
   </data>
   <data name="&gt;&gt;listBox1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -223,19 +226,19 @@
     <value>$this</value>
   </data>
   <data name="listBox1.ItemHeight" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>29</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>487, 283</value>
+    <value>548, 354</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>9, 20</value>
   </data>
   <data name="listBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 223</value>
+    <value>303, 279</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

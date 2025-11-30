@@ -126,4 +126,10 @@
   <data name="listBox1.Items2" xml:space="preserve">
     <value>احفظ وأرسل على WhatsApp</value>
   </data>
+  <data name="listBox1.Items3" xml:space="preserve">
+    <value>حفظ </value>
+  </data>
+  <data name="listBox1.Items4" xml:space="preserve">
+    <value>حفظ وطباعة فاتورة POS80</value>
+  </data>
 </root>

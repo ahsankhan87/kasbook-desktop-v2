@@ -16,9 +16,9 @@ namespace pos.Reports.Sales.rpt {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class sales_invoice_small : ReportClass {
+    public class pos80_sales_invoice : ReportClass {
         
-        public sales_invoice_small() {
+        public pos80_sales_invoice() {
         }
         
         public override string ResourceName {
@@ -193,7 +193,7 @@ namespace pos.Reports.Sales.rpt {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            sales_invoice_small rpt = new sales_invoice_small();
+            pos80_sales_invoice rpt = new pos80_sales_invoice();
             rpt.Site = this.Site;
             return rpt;
         }

@@ -2892,6 +2892,7 @@ namespace pos
                             // PRINT INVOICE
                             string result1 = formPrintOption.PrintOptions;
                             bool isPrintInvoiceCode = false;
+                            bool isPrintPOS80 = false;
 
                             if (result1 == "0")
                             {
@@ -2914,15 +2915,20 @@ namespace pos
                                 clear_form();
                                 return;
                             }
-                            else
+                            
+                            else if(result1 == "3")
                             {
                                 clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
                                 return; // return without printing only save
                             }
+                            else if (result1 == "4")
+                            {
+                                isPrintPOS80 = true;
+                            }
 
                             if (sale_type == "Cash" || sale_type == "Credit")//for sales 
                             {
-                                using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(invoice_no), true, isPrintInvoiceCode))
+                                using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(invoice_no), true, isPrintInvoiceCode, isPrintPOS80))
                                 {
                                     obj.load_print(); // send print direct to printer without showing dialog
                                     //obj.ShowDialog();
@@ -2930,7 +2936,7 @@ namespace pos
                             }
                             else//for estiamte
                             {
-                                using (frm_sales_invoice obj = new frm_sales_invoice(load_estiamte_receipt(invoice_no), true, isPrintInvoiceCode))
+                                using (frm_sales_invoice obj = new frm_sales_invoice(load_estiamte_receipt(invoice_no), true, isPrintInvoiceCode, isPrintPOS80))
                                 {
                                     //obj.ShowDialog();
                                     obj.load_print(); // send print direct to printer without showing dialog

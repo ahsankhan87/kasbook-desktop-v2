@@ -58,7 +58,8 @@ namespace pos
             resources.GetString("listBox1.Items"),
             resources.GetString("listBox1.Items1"),
             resources.GetString("listBox1.Items2"),
-            resources.GetString("listBox1.Items3")});
+            resources.GetString("listBox1.Items3"),
+            resources.GetString("listBox1.Items4")});
             this.listBox1.Name = "listBox1";
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
