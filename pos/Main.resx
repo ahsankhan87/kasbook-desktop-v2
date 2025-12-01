@@ -122,55 +122,55 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="profileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="profileToolStripMenuItem.Text" xml:space="preserve">
     <value>Profile</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Text" xml:space="preserve">
     <value>Country Origin</value>
   </data>
   <data name="branchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="branchToolStripMenuItem.Text" xml:space="preserve">
     <value>Branches</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment Terms</value>
   </data>
   <data name="paymentMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="paymentMethodToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment Method</value>
   </data>
   <data name="financialYearsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="financialYearsToolStripMenuItem.Text" xml:space="preserve">
     <value>Financial Years</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>DB Backup</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 26</value>
@@ -185,41 +185,59 @@
     <value>Arabic</value>
   </data>
   <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="languageToolStripMenuItem.Text" xml:space="preserve">
     <value>Language</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
+  </data>
+  <data name="rolePermissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="rolePermissionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Role Permissions</value>
+  </data>
+  <data name="userClaimsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="userClaimsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;User Claims</value>
+  </data>
+  <data name="securityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="securityToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Security</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="applicationLogsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Text" xml:space="preserve">
     <value>Application &amp;Logs</value>
   </data>
   <data name="usersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="usersToolStripMenuItem.Text" xml:space="preserve">
     <value>Users</value>
   </data>
   <data name="logoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="logoutToolStripMenuItem.Text" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -868,7 +886,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_dashboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButton_dashboard.Text" xml:space="preserve">
     <value>Dashboard</value>
@@ -880,7 +898,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_sales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButton_sales.Text" xml:space="preserve">
     <value>Sales</value>
@@ -892,7 +910,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_purchase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButton_purchase.Text" xml:space="preserve">
     <value>Purchases</value>
@@ -904,7 +922,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_products.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButton_products.Text" xml:space="preserve">
     <value>Products</value>
@@ -916,7 +934,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_customers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButton_customers.Text" xml:space="preserve">
     <value>Customers</value>
@@ -928,7 +946,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_suppliers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButton_suppliers.Text" xml:space="preserve">
     <value>Suppliers</value>
@@ -943,7 +961,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonDailySaleReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButtonDailySaleReport.Text" xml:space="preserve">
     <value>Sale Report</value>
@@ -1018,7 +1036,7 @@
     <value>False</value>
   </data>
   <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 4</value>
+    <value>86, 4</value>
   </data>
   <data name="toolStripButtonNewPOS.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1039,7 +1057,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonNewPOS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>86, 48</value>
   </data>
   <data name="toolStripButtonNewPOS.Text" xml:space="preserve">
     <value>New POS</value>
@@ -1057,7 +1075,7 @@
     <value>Yes</value>
   </data>
   <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 670</value>
+    <value>93, 670</value>
   </data>
   <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1673,6 +1691,24 @@
     <value>exitToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;securityToolStripMenuItem.Name" xml:space="preserve">
+    <value>securityToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;securityToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rolePermissionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>rolePermissionsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;rolePermissionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userClaimsToolStripMenuItem.Name" xml:space="preserve">
+    <value>userClaimsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;userClaimsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;itemsToolStripMenuItem.Name" xml:space="preserve">

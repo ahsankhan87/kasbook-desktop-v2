@@ -1,23 +1,13 @@
-﻿using com.sun.org.apache.bcel.@internal.generic;
-using pos.Master.Companies.zatca;
-using pos.Sales;
+﻿using pos.Master.Companies.zatca;
 using POS.BLL;
 using POS.Core;
-using POS.DLL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using Zatca.EInvoice.SDK;
-using Zatca.EInvoice.SDK.Contracts.Models;
 using Timer = System.Windows.Forms.Timer; // added
 
 
@@ -829,11 +819,11 @@ namespace pos
                     frm_search_estimates obj_estimate = new frm_search_estimates(this);
                     obj_estimate.ShowDialog();
                 }
-                if(e.Control && e.Alt && e.KeyCode == Keys.B)
+                if (e.Control && e.Alt && e.KeyCode == Keys.B)
                 {
                     txt_barcode.Focus();
                 }
-                if(e.Control && e.Alt && e.KeyCode == Keys.I)
+                if (e.Control && e.Alt && e.KeyCode == Keys.I)
                 {
                     txt_invoice_no.Focus();
                 }
@@ -1489,7 +1479,7 @@ namespace pos
                 }
 
                 if (_dt.Rows.Count > 0)
-                 {
+                {
                     CustomerBLL customerBLL = new CustomerBLL();
 
                     foreach (DataRow myProductView in _dt.Rows)
@@ -2798,8 +2788,8 @@ namespace pos
                             sale_id = salesObj.InsertSales(sales_model_header, sales_model_detail);// for sales items
                             if (sale_id > 0)
                             {
-                                
-                                if (UsersModal.useZatcaEInvoice == true )
+
+                                if (UsersModal.useZatcaEInvoice == true)
                                 {
                                     DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                                     if (activeZatcaCredential == null)
@@ -2845,8 +2835,8 @@ namespace pos
                                             // Clear invoice from ZATCA
                                             ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
                                         }
-                                        else if(cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                         //otherwise Report invoice to ZATCA
+                                        else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                        //otherwise Report invoice to ZATCA
                                         {
                                             // Report invoice to ZATCA
                                             ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
@@ -2905,18 +2895,19 @@ namespace pos
                                 isPrintInvoiceCode = false;
 
                                 clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
-                            }else if(result1 == "2")
+                            }
+                            else if (result1 == "2")
                             {
-                                bool isEstimate =  (sale_type == "Quotation" ? true : false);
+                                bool isEstimate = (sale_type == "Quotation" ? true : false);
 
                                 //Send invoice on WhatsApp
-                                frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no,isEstimate);
+                                frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no, isEstimate);
                                 send_Whatsapp.ShowDialog();
                                 clear_form();
                                 return;
                             }
-                            
-                            else if(result1 == "3")
+
+                            else if (result1 == "3")
                             {
                                 clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
                                 return; // return without printing only save
@@ -3140,7 +3131,7 @@ namespace pos
             customersDataGridView.Columns[4].Name = "Credit Limit";
 
             customersDataGridView.Columns[0].ReadOnly = true;
-            customersDataGridView.Columns[1].Visible= false;
+            customersDataGridView.Columns[1].Visible = false;
             customersDataGridView.Columns[2].ReadOnly = true;
             customersDataGridView.Columns[3].ReadOnly = true;
             customersDataGridView.Columns[4].Visible = false;

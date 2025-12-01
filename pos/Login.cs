@@ -212,8 +212,25 @@ namespace pos
                                 UsersModal.logged_in_user_level = 0;
                                 UsersModal.loggedIncompanyID = 0;
                             }
+
+                            // Initialize application security context
+                            if (pos.Security.Authorization.AppSecurityContext.RoleRepo == null)
+                            {
+                                pos.Security.Authorization.AppSecurityContext.RoleRepo = new pos.Security.Authorization.SqlRoleRepository();
+                                pos.Security.Authorization.AppSecurityContext.HydrateFromDb();
+                            }
+                            var parsedRole = pos.Security.Authorization.SystemRole.User;
+                            System.Enum.TryParse(UsersModal.logged_in_user_role, true, out parsedRole);
+                            pos.Security.Authorization.AppSecurityContext.SetUser(new pos.Security.Authorization.UserIdentity
+                            {
+                                UserId = UsersModal.logged_in_userid,
+                                BranchId = UsersModal.logged_in_branch_id,
+                                Username = UsersModal.logged_in_username,
+                                Role = parsedRole
+                            });
+
                             this.Hide();
-                            frm_main frm_main_obj = new frm_main();
+                            var frm_main_obj = new frm_main();
                             frm_main_obj.Show();
 
                         }

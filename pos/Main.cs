@@ -1,18 +1,19 @@
-﻿using System;
+﻿using pos.Reports.Banks;
+using pos.Security.Admin;
+using POS.BLL;
+using POS.Core;
+using POS.DLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Globalization;
-using POS.DLL;
-using POS.Core;
-using POS.BLL;
-using pos.Reports.Banks;
 
 namespace pos
 {
@@ -1973,6 +1974,18 @@ namespace pos
         {
             frmPOS frmPOS = new frmPOS();
             frmPOS.ShowDialog();
+        }
+
+        private void rolePermissionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new FrmRolePermissions())
+                frm.ShowDialog(this);
+        }
+
+        private void userClaimsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new FrmUserClaims())
+                frm.ShowDialog(this);
         }
 
         //private void CreateDashboardPanel()

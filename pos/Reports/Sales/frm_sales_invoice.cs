@@ -19,7 +19,7 @@ namespace pos
         bool _isPrintPOS80 = false;
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
 
-        public frm_sales_invoice(DataTable sales_detail,bool isPrint, bool isPrintProductCode=false,bool isPrintPOS80=false)
+        public frm_sales_invoice(DataTable sales_detail, bool isPrint, bool isPrintProductCode = false, bool isPrintPOS80 = false)
         {
             InitializeComponent();
             _dt = sales_detail;
@@ -66,12 +66,12 @@ namespace pos
             string company_email = "";
             string company_vat_no = "";
             string company_contact_no = "";
-            string StreetName= "";
+            string StreetName = "";
             string BuildingNumber = "";
-            string CitySubdivisionName= "";
-            string CityName= "";
-            string Postalcode= "";
-            string CountryName= "";
+            string CitySubdivisionName = "";
+            string CityName = "";
+            string Postalcode = "";
+            string CountryName = "";
 
 
             foreach (DataRow dr_company in company_dt.Rows)
@@ -109,11 +109,11 @@ namespace pos
 
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             ReportDocument rptDoc = new ReportDocument();
-            if(_isPrintPOS80)
+            if (_isPrintPOS80)
             {
                 rptDoc.Load(appPath + @"\\reports\\pos80_sale_invoice.rpt");
             }
-            else if(_isPrintProductCode)
+            else if (_isPrintProductCode)
             {
                 rptDoc.Load(appPath + @"\\reports\\sales_invoice.rpt");
             }
@@ -121,7 +121,7 @@ namespace pos
             {
                 rptDoc.Load(appPath + @"\\reports\\sales_invoice_sans_code.rpt");
             }
-            
+
             rptDoc.SetDataSource(_dt);
             //rptDoc.SetParameterValue("username", username);
             rptDoc.SetParameterValue("company_name", company_name);
@@ -136,7 +136,7 @@ namespace pos
             rptDoc.SetParameterValue("CityName", CityName);
             rptDoc.SetParameterValue("Postalcode", Postalcode);
             rptDoc.SetParameterValue("CountryName", CountryName);
-            
+
 
             rptDoc.SetParameterValue("subtotal", total_amount);
             rptDoc.SetParameterValue("total_discount", total_discount);
@@ -146,12 +146,12 @@ namespace pos
 
             crystalReportViewer_sales_invoice.ReportSource = rptDoc;
 
-           
+
             if (_isPrint)
             {
                 rptDoc.PrintToPrinter(1, true, 0, 0);
             }
-            
+
         }
 
         private byte[] GenerateQrCode(string qrmsg)
@@ -164,7 +164,7 @@ namespace pos
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    
+
                     bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     byte[] byteImage = ms.ToArray();
                     return byteImage;
@@ -195,7 +195,7 @@ namespace pos
 
                         bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                         byteImage = ms.ToArray();
-                        
+
                         //FileStream fileStream = new FileStream(appPath + "qrcode.jpg", FileMode.Open);
 
                         //BinaryReader binaryReader = new BinaryReader(fileStream);
@@ -210,7 +210,7 @@ namespace pos
 
         static string gethexstring(Int32 TagNo, string TagValue)
         {
-          
+
             string decString = TagValue;
             byte[] bytes = Encoding.UTF8.GetBytes(decString);
             string hexString = BitConverter.ToString(bytes);
@@ -225,7 +225,7 @@ namespace pos
             hexString = TagNoVal + TagValue_LengthVal + hexString.Replace("-", "");
             return hexString;
         }
-       
+
         static string gethexDec(Int32 TagValue)
         {
             string hxint = String.Format("0{0:X}", TagValue);

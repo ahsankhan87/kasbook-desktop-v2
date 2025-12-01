@@ -55,11 +55,11 @@ namespace pos
 
                 String condition = txt_search.Text.Trim();
 
-                if (condition != "")
-                {
+                //if (condition != "")
+                //{
                     grid_search_users.DataSource = objBLL.SearchRecord(condition);
 
-                }
+                //}
 
 
             }
@@ -122,11 +122,7 @@ namespace pos
                 if(txt_search.Text != "")
                 {
                     //bind data in data grid view  
-                    UsersBLL objBLL = new UsersBLL();
-                    grid_search_users.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text.Trim();
-                    grid_search_users.DataSource = objBLL.SearchRecord(condition);
+                    load_users_grid();
 
                 }
                 

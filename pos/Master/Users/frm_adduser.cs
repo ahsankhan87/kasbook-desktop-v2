@@ -209,15 +209,15 @@ namespace pos
             string table = "pos_branches";
             DataTable branches = generalBLL_obj.GetRecord(keyword,table);
 
-            DataRow emptyRow = branches.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[1] = "Please Select";              // Set Column Value
-            branches.Rows.InsertAt(emptyRow, 0);
+            //DataRow emptyRow = branches.NewRow();
+            //emptyRow[0] = 0;              // Set Column Value
+            //emptyRow[1] = "Please Select";              // Set Column Value
+            //branches.Rows.InsertAt(emptyRow, 0);
 
             cmb_branches.DisplayMember = "name";
             cmb_branches.ValueMember = "id";
             cmb_branches.DataSource = branches;
-
+            cmb_branches.SelectedIndex = 0;
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -399,14 +399,29 @@ namespace pos
 
             DataRow _row = dt.NewRow();
             _row["id"] = "2";
-            _row["name"] = "User";
+            _row["name"] = "Manager";
             dt.Rows.Add(_row);
+
+            DataRow _row_2 = dt.NewRow();
+            _row_2["id"] = "3";
+            _row_2["name"] = "Owner";
+            dt.Rows.Add(_row_2);
+
+            DataRow _row_3 = dt.NewRow();
+            _row_3["id"] = "4";
+            _row_3["name"] = "User";
+            dt.Rows.Add(_row_3);
+            DataRow _row_4 = dt.NewRow();
+            _row_4["id"] = "5";
+            _row_4["name"] = "Cashier";
+            dt.Rows.Add(_row_4);
 
 
             cmb_user_role.DisplayMember = "name";
             cmb_user_role.ValueMember = "id";
             cmb_user_role.DataSource = dt;
 
+            cmb_user_role.SelectedIndex = 0;
         }
 
         private void chk_master_CheckedChanged(object sender, EventArgs e)
@@ -570,11 +585,11 @@ namespace pos
         private void btn_search_Click(object sender, EventArgs e)
         {
             string search = txt_search.Text;
-            if (search != "")
-            {
+            //if (search != "")
+            //{
                 frm_search_users search_product_obj = new frm_search_users(this, search);
                 search_product_obj.ShowDialog();
-            }
+           // }
         }
 
         private void btn_pwd_change_Click(object sender, EventArgs e)
@@ -597,7 +612,7 @@ namespace pos
                 info.name = txt_name.Text;
                 info.username = txt_username.Text;
                 info.password = txt_password.Text;
-                info.branch_id = Convert.ToInt32(cmb_branches.SelectedValue);
+                info.branch_id = (cmb_branches.SelectedValue == null ? 1 : Convert.ToInt32(cmb_branches.SelectedValue));
                 info.language = cmb_lang.SelectedValue.ToString();
                 info.user_role = cmb_user_role.Text;
                 info.user_level = Convert.ToInt32(cmb_user_role.SelectedValue);

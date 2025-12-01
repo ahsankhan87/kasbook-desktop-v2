@@ -1,27 +1,17 @@
-﻿using com.sun.org.apache.bcel.@internal.generic;
-using CrystalDecisions.CrystalReports.Engine;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using pos.Master.Companies.zatca;
-using pos.Sales;
+using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Schema;
 using Zatca.EInvoice.SDK;
 using Zatca.EInvoice.SDK.Contracts.Models;
 
@@ -31,15 +21,45 @@ namespace pos
     {
         public SalesBLL objSalesBLL = new SalesBLL();
 
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_all_sales()
         {
             InitializeComponent();
+
+            // Ensure user identity exists; hydrate claims from DB
+            if (_currentUser == null)
+            {
+                var parsedRole = SystemRole.Viewer;
+                System.Enum.TryParse(UsersModal.logged_in_user_role, true, out parsedRole);
+                AppSecurityContext.SetUser(new UserIdentity
+                {
+                    UserId = UsersModal.logged_in_userid,
+                    BranchId = UsersModal.logged_in_branch_id,
+                    Username = UsersModal.logged_in_username,
+                    Role = parsedRole
+                });
+                _currentUser = AppSecurityContext.User;
+            }
+
+            // On load, refresh claims from DB and apply permission attributes
+            this.Load += (s, e) =>
+            {
+                AppSecurityContext.RefreshUserClaims();
+                RequirePermissionAttribute.Apply(this, _currentUser, _auth);
+            };
         }
 
-        public void frm_all_sales_Load(object sender, EventArgs e)
+        private void frm_all_sales_Load(object sender, EventArgs e)
         {
             load_all_sales_grid();
 
+            // Disable/hide actions based on DB-backed permissions
+            Btn_PrintPOS80.Enabled = _auth.HasPermission(_currentUser, Permissions.Sales_Print);
+            btn_print_invoice.Enabled = _auth.HasPermission(_currentUser, Permissions.Sales_Print);
+            // Add further UI elements here as needed, e.g. delete/report buttons/menus.
         }
 
         public void load_all_sales_grid()
@@ -193,6 +213,31 @@ namespace pos
                     load_sales_items_detail(Convert.ToInt32(sale_id), invoice_no);
 
                 }
+                if (name == "btn_delete" && !_auth.HasPermission(_currentUser, Permissions.Sales_Delete))
+                {
+                    MessageBox.Show("You don't have permission to delete sales.");
+                    return;
+                }
+                if (name == "btn_send_zatca" && !_auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Sign))
+                {
+                    MessageBox.Show("You don't have permission to sign invoices to ZATCA.");
+                    return;
+                }
+                if (name == "btn_report_to_zatca" && !_auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Report))
+                {
+                    MessageBox.Show("You don't have permission to report invoices to ZATCA.");
+                    return;
+                }
+                if (name == "btn_download_ubl" && !_auth.HasPermission(_currentUser, Permissions.Sales_Zatca_DownloadUBL))
+                {
+                    MessageBox.Show("You don't have permission to download UBL.");
+                    return;
+                }
+                if (name == "btn_show_qrcode" && !_auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Qr_Show))
+                {
+                    MessageBox.Show("You don't have permission to view QR code.");
+                    return;
+                }
                 if (name == "btn_delete")
                 {
                     DialogResult result = MessageBox.Show("Are you sure you want to delete", "Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -260,7 +305,7 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private async void ZatcaComplianceCheck(int saleId, string invoiceNo)
         {
             try
@@ -398,11 +443,11 @@ namespace pos
 
         public XmlDocument GenerateUBLXMLInvoice(string invoiceNo)
         {
-            
+
             // 2. Generate UBL XML (helper function — I’ll help build this)
             DataSet ds = objSalesBLL.GetSaleAndItemsDataSet(invoiceNo);
             //XmlDocument ublXml = pos.Master.Companies.zatca.ZatcaHelper.BuildUblXml(ds);
-            
+
             // Create generator instance
             var generator = new ZatcaInvoiceGenerator();
 
@@ -443,7 +488,7 @@ namespace pos
 
                 byte[] bytes = Convert.FromBase64String(cert);
                 string decodedCert = Encoding.UTF8.GetString(bytes);
-                
+
                 //XmlDocument ublXml = LoadSampleUBL();
                 //ublXml.Save("UBL\\debug_ubl1.xml");
 
@@ -461,7 +506,7 @@ namespace pos
 
                     //var invoiceHash = new EInvoiceHashGenerator();
                     //var hashResult = invoiceHash.GenerateEInvoiceHashing(signResult.SignedEInvoice);
-                    
+
                     //Get Invoice Hash for Next PIH
                     var SignedInvoiceHash = GetInvoiceHash(signResult);
                     //MessageBox.Show($"Invoice Hash : {SignedInvoiceHash}\n");
@@ -496,7 +541,7 @@ namespace pos
                     //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
                     //}
 
-                    
+
 
                     //Get QRCode from SignedInvoice
                     var Base64QrCode = GetBase64QrCode(signResult);
@@ -547,7 +592,7 @@ namespace pos
                 objSalesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
             }
         }
-       
+
         private async void ReportInvoiceToZatcaAsync(string invoiceNo)
         {
             try
@@ -566,7 +611,7 @@ namespace pos
                 }
 
                 // 3. Prepare credentials
-                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id,"Simulation"); // GetPublicKeyFromFile();
+                string cert = ZatcaInvoiceGenerator.GetCertFromDb(UsersModal.logged_in_branch_id, "Simulation"); // GetPublicKeyFromFile();
                 string secret = ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, "Simulation"); // GetSecretFromFile();
                 string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
 
@@ -608,7 +653,7 @@ namespace pos
 
                     // 7. Save successful submission
                     var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseContent);
-                    string zatcaStatus = jsonResponse?.clearanceStatus; 
+                    string zatcaStatus = jsonResponse?.clearanceStatus;
                     ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
                         invoiceNo,
                         requestResult.InvoiceRequest.Uuid,
@@ -855,7 +900,7 @@ namespace pos
             if (!File.Exists(path)) throw new FileNotFoundException("Secret certificate not found.");
             return File.ReadAllText(path).Trim();
         }
-        
+
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(grid_all_sales.CurrentRow.Cells["invoice_no"].Value.ToString());
@@ -879,7 +924,7 @@ namespace pos
             {
                 MessageBox.Show(ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
         }
 
@@ -888,7 +933,7 @@ namespace pos
             string invoiceNo = grid_all_sales.CurrentRow.Cells["invoice_no"].Value.ToString();
             Sales.EInvoice eInvoice = new Sales.EInvoice();
             string xmlContent = eInvoice.CreateUBLInvoice(invoiceNo);
-            
+
             SaveXmlToFile(xmlContent, invoiceNo);
         }
         private void SaveXmlToFile(string xmlContent, string invoiceNo)
@@ -897,7 +942,7 @@ namespace pos
             {
                 saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
                 saveFileDialog.Title = "Save UBL XML File";
-                saveFileDialog.FileName = invoiceNo+".xml";
+                saveFileDialog.FileName = invoiceNo + ".xml";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -912,7 +957,7 @@ namespace pos
         {
             //SendInvoiceToWhatsApp();
             string invoiceNo = grid_all_sales.CurrentRow.Cells["invoice_no"].Value.ToString();
-            if(string.IsNullOrEmpty(invoiceNo))
+            if (string.IsNullOrEmpty(invoiceNo))
             {
                 MessageBox.Show("Please select a valid invoice.");
                 return;
@@ -925,6 +970,18 @@ namespace pos
         {
             frmPOS frmPOS = new frmPOS();
             frmPOS.ShowDialog();
+        }
+
+        private void Btn_PrintPOS80_Click(object sender, EventArgs e)
+        {
+            if (grid_all_sales.Rows.Count > 0)
+            {
+                string invoiceNo = grid_all_sales.CurrentRow.Cells["invoice_no"].Value.ToString();
+                using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(), false, false, true))
+                {
+                    obj.ShowDialog();
+                }
+            }
         }
     }
 }

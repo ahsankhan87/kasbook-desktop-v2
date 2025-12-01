@@ -50,6 +50,9 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolePermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userClaimsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehousetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -196,6 +199,7 @@
             this.toolStripSeparator5,
             this.languageToolStripMenuItem,
             this.toolStripSeparator8,
+            this.securityToolStripMenuItem,
             this.applicationLogsToolStripMenuItem,
             this.usersToolStripMenuItem,
             this.logoutToolStripMenuItem,
@@ -314,6 +318,26 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.btn_exit_Click);
+            // 
+            // securityToolStripMenuItem
+            // 
+            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rolePermissionsToolStripMenuItem,
+            this.userClaimsToolStripMenuItem});
+            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
+            resources.ApplyResources(this.securityToolStripMenuItem, "securityToolStripMenuItem");
+            // 
+            // rolePermissionsToolStripMenuItem
+            // 
+            this.rolePermissionsToolStripMenuItem.Name = "rolePermissionsToolStripMenuItem";
+            resources.ApplyResources(this.rolePermissionsToolStripMenuItem, "rolePermissionsToolStripMenuItem");
+            this.rolePermissionsToolStripMenuItem.Click += new System.EventHandler(this.rolePermissionsToolStripMenuItem_Click);
+            // 
+            // userClaimsToolStripMenuItem
+            // 
+            this.userClaimsToolStripMenuItem.Name = "userClaimsToolStripMenuItem";
+            resources.ApplyResources(this.userClaimsToolStripMenuItem, "userClaimsToolStripMenuItem");
+            this.userClaimsToolStripMenuItem.Click += new System.EventHandler(this.userClaimsToolStripMenuItem_Click);
             // 
             // itemsToolStripMenuItem
             // 
@@ -1214,5 +1238,8 @@
         private System.Windows.Forms.ToolStripMenuItem byPaymentMethodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesExpensesToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonNewPOS;
+        private System.Windows.Forms.ToolStripMenuItem securityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolePermissionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userClaimsToolStripMenuItem;
     }
 }
