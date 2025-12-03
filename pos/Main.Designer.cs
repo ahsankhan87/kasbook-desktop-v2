@@ -45,14 +45,14 @@
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arabicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolePermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userClaimsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolePermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userClaimsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehousetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,6 +161,7 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
+            this.permissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -290,6 +291,27 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             // 
+            // securityToolStripMenuItem
+            // 
+            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rolePermissionsToolStripMenuItem,
+            this.permissionsToolStripMenuItem,
+            this.userClaimsToolStripMenuItem});
+            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
+            resources.ApplyResources(this.securityToolStripMenuItem, "securityToolStripMenuItem");
+            // 
+            // rolePermissionsToolStripMenuItem
+            // 
+            this.rolePermissionsToolStripMenuItem.Name = "rolePermissionsToolStripMenuItem";
+            resources.ApplyResources(this.rolePermissionsToolStripMenuItem, "rolePermissionsToolStripMenuItem");
+            this.rolePermissionsToolStripMenuItem.Click += new System.EventHandler(this.rolePermissionsToolStripMenuItem_Click);
+            // 
+            // userClaimsToolStripMenuItem
+            // 
+            this.userClaimsToolStripMenuItem.Name = "userClaimsToolStripMenuItem";
+            resources.ApplyResources(this.userClaimsToolStripMenuItem, "userClaimsToolStripMenuItem");
+            this.userClaimsToolStripMenuItem.Click += new System.EventHandler(this.userClaimsToolStripMenuItem_Click);
+            // 
             // applicationLogsToolStripMenuItem
             // 
             resources.ApplyResources(this.applicationLogsToolStripMenuItem, "applicationLogsToolStripMenuItem");
@@ -318,26 +340,6 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.btn_exit_Click);
-            // 
-            // securityToolStripMenuItem
-            // 
-            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolePermissionsToolStripMenuItem,
-            this.userClaimsToolStripMenuItem});
-            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            resources.ApplyResources(this.securityToolStripMenuItem, "securityToolStripMenuItem");
-            // 
-            // rolePermissionsToolStripMenuItem
-            // 
-            this.rolePermissionsToolStripMenuItem.Name = "rolePermissionsToolStripMenuItem";
-            resources.ApplyResources(this.rolePermissionsToolStripMenuItem, "rolePermissionsToolStripMenuItem");
-            this.rolePermissionsToolStripMenuItem.Click += new System.EventHandler(this.rolePermissionsToolStripMenuItem_Click);
-            // 
-            // userClaimsToolStripMenuItem
-            // 
-            this.userClaimsToolStripMenuItem.Name = "userClaimsToolStripMenuItem";
-            resources.ApplyResources(this.userClaimsToolStripMenuItem, "userClaimsToolStripMenuItem");
-            this.userClaimsToolStripMenuItem.Click += new System.EventHandler(this.userClaimsToolStripMenuItem_Click);
             // 
             // itemsToolStripMenuItem
             // 
@@ -1081,6 +1083,12 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
+            // permissionsToolStripMenuItem
+            // 
+            this.permissionsToolStripMenuItem.Name = "permissionsToolStripMenuItem";
+            resources.ApplyResources(this.permissionsToolStripMenuItem, "permissionsToolStripMenuItem");
+            this.permissionsToolStripMenuItem.Click += new System.EventHandler(this.permissionsToolStripMenuItem_Click);
+            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1241,5 +1249,6 @@
         private System.Windows.Forms.ToolStripMenuItem securityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rolePermissionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userClaimsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem permissionsToolStripMenuItem;
     }
 }

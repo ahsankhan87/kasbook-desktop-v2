@@ -1,18 +1,12 @@
 ﻿using pos.Reports.Banks;
 using pos.Security.Admin;
-using POS.BLL;
+using pos.Security.Authorization;
 using POS.Core;
 using POS.DLL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pos
@@ -20,7 +14,7 @@ namespace pos
     public partial class frm_main : Form
     {
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
-        
+
         // Dashboard panel
         private Panel dashboardPanel;
         private FlowLayoutPanel quickAccessPanel;
@@ -30,28 +24,39 @@ namespace pos
             Thread.CurrentThread.CurrentUICulture
                = new System.Globalization.CultureInfo(lang);
             InitializeComponent();
+
+            // Tag menu and toolbar items with permission keys (DB-backed)
+            // Sales
+            if (this.GetType() != null)
+            {
+                LoadAllMenus();
+            }
         }
 
         private void frm_main_Load(object sender, EventArgs e)
         {
-            this.Text = "Kasbook - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + ")";
+            this.Text = "Kasbook - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
-            if (UsersModal.logged_in_user_level == 1)//1 is Admin
-            {
-                Enable_all_menus();
-            }
-            else
-            {
-                Enable_all_menus(false);
-                load_modules();
-                exitToolStripMenuItem.Enabled = true;
-                logoutToolStripMenuItem.Enabled = true;
-                usersToolStripMenuItem.Enabled = false;
-            }
+            //if (UsersModal.logged_in_user_level == 1)//1 is Admin
+            //{
+            //    Enable_all_menus();
+            //}
+            //else
+            //{
+            //    Enable_all_menus(false);
+            //    load_modules();
+            //    exitToolStripMenuItem.Enabled = true;
+            //    logoutToolStripMenuItem.Enabled = true;
+            //    usersToolStripMenuItem.Enabled = false;
+            //}
+
+            // Re-apply DB-backed permissions to ensure module-based enabling can't elevate privileges
+            AppSecurityContext.RefreshUserClaims();
+            this.ApplyPermissions(AppSecurityContext.Auth, AppSecurityContext.User);
 
             mark_checked_lang_menu(); // language menu mark checked
 
-            toolStripStatusLabel_username.Text = UsersModal.logged_in_username;
+            toolStripStatusLabel_username.Text = UsersModal.logged_in_username+"-"+UsersModal.logged_in_user_role;
             toolStripStatusLabel_branch_name.Text = UsersModal.logged_in_branch_name.ToString();
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
             toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();
@@ -61,7 +66,71 @@ namespace pos
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
         }
-        
+
+        private void LoadAllMenus()
+        {
+            // Menu items (names must match Designer)
+            try
+            {
+                if (newTransactionToolStripMenuItem2 != null) newTransactionToolStripMenuItem2.Tag = Permissions.Sales_Create;
+                if (allTransactionToolStripMenuItem1 != null) allTransactionToolStripMenuItem1.Tag = Permissions.Sales_View;
+                if (salesReturnToolStripMenuItem != null) salesReturnToolStripMenuItem.Tag = Permissions.Sales_Return;
+                if (salesReportToolStripMenuItem1 != null) salesReportToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
+                if (newTransactionToolStripMenuItem != null) newTransactionToolStripMenuItem.Tag = Permissions.Purchases_Create;
+                if (allPurchasesToolStripMenuItem != null) allPurchasesToolStripMenuItem.Tag = Permissions.Purchases_View;
+                if (purchaseReturnToolStripMenuItem != null) purchaseReturnToolStripMenuItem.Tag = Permissions.Purchases_Return;
+                if (purchaseReportToolStripMenuItem != null) purchaseReportToolStripMenuItem.Tag = Permissions.Reports_PurchasesView;
+                if (suppliersToolStripMenuItem != null) suppliersToolStripMenuItem.Tag = Permissions.Suppliers_View;
+                if (itemsToolStripMenuItem != null) itemsToolStripMenuItem.Tag = Permissions.Products_View;
+                if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
+
+                // Inventory / Products
+                if (productsServicesToolStripMenuItem != null) productsServicesToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
+                if (labelsToolStripMenuItem != null) labelsToolStripMenuItem.Tag = Permissions.Inventory_View;
+
+                // Customers
+                if (customersToolStripMenuItem != null) customersToolStripMenuItem.Tag = Permissions.Customers_View;
+
+                // Finance / Reports
+                if (journalDaybookToolStripMenuItem != null) journalDaybookToolStripMenuItem.Tag = Permissions.Finance_View;
+                if (trialBalanceToolStripMenuItem != null) trialBalanceToolStripMenuItem.Tag = Permissions.Finance_Report;
+                if (profitLossToolStripMenuItem != null) profitLossToolStripMenuItem.Tag = Permissions.Finance_Report;
+                if (balanceSheetToolStripMenuItem != null) balanceSheetToolStripMenuItem.Tag = Permissions.Finance_Report;
+                if (accountReportToolStripMenuItem != null) accountReportToolStripMenuItem.Tag = Permissions.Finance_Report;
+                if (groupReportToolStripMenuItem != null) groupReportToolStripMenuItem.Tag = Permissions.Finance_Report;
+                if (banksReportToolStripMenuItem != null) banksReportToolStripMenuItem.Tag = Permissions.Finance_Report;
+
+                // Security admin
+                if (permissionsToolStripMenuItem != null) permissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
+                if (rolePermissionsToolStripMenuItem != null) rolePermissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_Create;
+                if (userClaimsToolStripMenuItem != null) userClaimsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
+
+                // users
+                if (usersToolStripMenuItem != null) usersToolStripMenuItem.Tag = Permissions.Security_Users_View;
+                if (warehousetoolStripMenuItem != null) warehousetoolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (categoriesToolStripMenuItem != null) categoriesToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (unitsToolStripMenuItem != null) unitsToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (locationsToolStripMenuItem != null) locationsToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (brandToolStripMenuItem != null) brandToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (branchToolStripMenuItem != null) branchToolStripMenuItem.Tag = Permissions.Branches_View;
+                if (profileToolStripMenuItem != null) profileToolStripMenuItem.Tag = Permissions.Profile_View;
+            }
+            catch { /* ignore if some items are not present in this build */ }
+
+            // ToolStrip buttons
+            try
+            {
+                if (toolStripButton_sales != null) toolStripButton_sales.Tag = Permissions.Sales_Create;
+                if (toolStripButton_purchase != null) toolStripButton_purchase.Tag = Permissions.Purchases_Create;
+                if (toolStripButton_products != null) toolStripButton_products.Tag = Permissions.Products_View;
+                if (toolStripButton_customers != null) toolStripButton_customers.Tag = Permissions.Customers_View;
+                if (toolStripButton_suppliers != null) toolStripButton_suppliers.Tag = Permissions.Suppliers_View;
+                if (toolStripButtonDailySaleReport != null) toolStripButtonDailySaleReport.Tag = Permissions.Reports_SalesView;
+                if (toolStripButtonNewPOS != null) toolStripButtonNewPOS.Tag = Permissions.Sales_Create;
+            }
+            catch { /* ignore */ }
+        }
 
         private void load_modules()
         {
@@ -180,7 +249,7 @@ namespace pos
                 }
 
             }
-            
+
         }
 
         void mark_checked_lang_menu()
@@ -589,7 +658,7 @@ namespace pos
 
             }
             else Application.ExitThread();
-          
+
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
@@ -626,10 +695,10 @@ namespace pos
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            
+
             //App logging 
             POS.DLL.Log.LogAction("User Logout", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
-            
+
             Login login_obj = new Login();
             login_obj.Show();
         }
@@ -902,7 +971,7 @@ namespace pos
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "en-US":
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ar-SA"); 
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ar-SA");
                     break;
             }
             this.Controls.Clear();
@@ -915,7 +984,8 @@ namespace pos
 
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
-                case "ar-SA": Thread.CurrentThread.CurrentUICulture
+                case "ar-SA":
+                    Thread.CurrentThread.CurrentUICulture
                     = new System.Globalization.CultureInfo("en-US"); break;
             }
             this.Controls.Clear();
@@ -1555,12 +1625,12 @@ namespace pos
                 frm_shortcuts.Activate();
             }
         }
-        
+
         private void Frm_shortcuts_FormClosed(object sender, FormClosedEventArgs e)
         {
             frm_shortcuts = null;
         }
-        
+
         Form frm_ict;
         private void iCTToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1575,7 +1645,7 @@ namespace pos
             {
                 frm_ict.Activate();
             }
-            
+
         }
 
         private void Frm_ict_FormClosed(object sender, FormClosedEventArgs e)
@@ -1663,7 +1733,7 @@ namespace pos
 
         private void Frm_branchSummary_FormClosed(object sender, FormClosedEventArgs e)
         {
-            frm_branchSummary = null; 
+            frm_branchSummary = null;
         }
 
         Form frm_banks;
@@ -1902,7 +1972,7 @@ namespace pos
             DebitNote = null;
         }
 
-       
+
         Form _dashboardForm;
         private void toolStripButton_dashboard_Click(object sender, EventArgs e)
         {
@@ -1920,7 +1990,7 @@ namespace pos
             {
                 _dashboardForm.Activate();
             }
-            
+
         }
 
         private void _dashboardForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1985,6 +2055,12 @@ namespace pos
         private void userClaimsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var frm = new FrmUserClaims())
+                frm.ShowDialog(this);
+        }
+
+        private void permissionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var frm = new FrmPermissions())
                 frm.ShowDialog(this);
         }
 

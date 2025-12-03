@@ -1,4 +1,7 @@
-﻿using System;
+﻿using pos.Security.Authorization;
+using POS.BLL;
+using POS.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.BLL;
-using POS.Core;
 
 namespace pos
 {
@@ -19,6 +20,10 @@ namespace pos
         
         public int _user_id;
         string _status;
+        
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public frm_adduser(frm_users mainForm, int user_id, string status)
         {
@@ -32,12 +37,11 @@ namespace pos
         {
             InitializeComponent();
             
-
         }
 
         public void frm_adduser_Load(object sender, EventArgs e)
         {
-            Load_all_menu();
+            //Load_all_menu();
            
             get_branches_dropdownlist();
             get_language_dropdownlist();
@@ -222,6 +226,12 @@ namespace pos
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Security_Users_Create))
+            {
+                MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             UsersBLL objBLL = new UsersBLL();
             if (objBLL.IsUsernameExist(txt_username.Text))
             {
@@ -384,44 +394,56 @@ namespace pos
             cmb_lang.ValueMember = "id";
             cmb_lang.DataSource = dt;
 
+            cmb_lang.SelectedIndex = 0;
         }
 
         private void get_userrole_dropdownlist()
         {
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
-            DataRow _row_1 = dt.NewRow();
-            _row_1["id"] = "1";
-            _row_1["name"] = "Administrator";
-            dt.Rows.Add(_row_1);
+            GeneralBLL generalBLL_obj = new GeneralBLL();
+            string keyword = "id,role_name";
+            string table = "Roles";
+            DataTable roles_dt = generalBLL_obj.GetRecord(keyword, table);
 
-            DataRow _row = dt.NewRow();
-            _row["id"] = "2";
-            _row["name"] = "Manager";
-            dt.Rows.Add(_row);
-
-            DataRow _row_2 = dt.NewRow();
-            _row_2["id"] = "3";
-            _row_2["name"] = "Owner";
-            dt.Rows.Add(_row_2);
-
-            DataRow _row_3 = dt.NewRow();
-            _row_3["id"] = "4";
-            _row_3["name"] = "User";
-            dt.Rows.Add(_row_3);
-            DataRow _row_4 = dt.NewRow();
-            _row_4["id"] = "5";
-            _row_4["name"] = "Cashier";
-            dt.Rows.Add(_row_4);
-
-
-            cmb_user_role.DisplayMember = "name";
+            cmb_user_role.DisplayMember = "role_name";
             cmb_user_role.ValueMember = "id";
-            cmb_user_role.DataSource = dt;
+            cmb_user_role.DataSource = roles_dt;
+            cmb_user_role.SelectedIndex = 3;
 
-            cmb_user_role.SelectedIndex = 0;
+
+            //DataTable dt = new DataTable();
+            //dt.Clear();
+            //dt.Columns.Add("id");
+            //dt.Columns.Add("name");
+            //DataRow _row_1 = dt.NewRow();
+            //_row_1["id"] = "1";
+            //_row_1["name"] = "Administrator";
+            //dt.Rows.Add(_row_1);
+
+            //DataRow _row = dt.NewRow();
+            //_row["id"] = "2";
+            //_row["name"] = "Manager";
+            //dt.Rows.Add(_row);
+
+            //DataRow _row_2 = dt.NewRow();
+            //_row_2["id"] = "3";
+            //_row_2["name"] = "Owner";
+            //dt.Rows.Add(_row_2);
+
+            //DataRow _row_3 = dt.NewRow();
+            //_row_3["id"] = "4";
+            //_row_3["name"] = "User";
+            //dt.Rows.Add(_row_3);
+            //DataRow _row_4 = dt.NewRow();
+            //_row_4["id"] = "5";
+            //_row_4["name"] = "Cashier";
+            //dt.Rows.Add(_row_4);
+
+
+            //cmb_user_role.DisplayMember = "name";
+            //cmb_user_role.ValueMember = "id";
+            //cmb_user_role.DataSource = dt;
+
+            //cmb_user_role.SelectedIndex = 0;
         }
 
         private void chk_master_CheckedChanged(object sender, EventArgs e)
@@ -606,6 +628,13 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Security_Users_Edit))
+            {
+                MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (txt_name.Text != string.Empty)
             {
                 UsersModal info = new UsersModal();
@@ -739,7 +768,7 @@ namespace pos
             txt_password.Text = "";
             txt_confirm_pwd.Text = "";
 
-            cmb_user_role.SelectedValue = "";
+            cmb_user_role.SelectedIndex = 3;
             cmb_branches.SelectedIndex = 0;
             cmb_lang.SelectedIndex = 0;
             cmb_user_role.SelectedIndex = 0;
@@ -793,6 +822,13 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Security_Users_Delete))
+            {
+                MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string user_id = txt_id.Text;
 
             if (user_id != "")

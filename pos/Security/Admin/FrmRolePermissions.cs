@@ -1,8 +1,9 @@
+using pos.Security.Authorization;
+using POS.Core;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using pos.Security.Authorization;
 
 namespace pos.Security.Admin
 {
@@ -75,6 +76,9 @@ namespace pos.Security.Admin
             _auth.OverrideRole(def);
 
             MessageBox.Show("Role permissions updated.", "Security", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //App logging 
+            POS.DLL.Log.LogAction("Permissions", $"Updated permissions for role '{role}'.", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
         }
     }
 }

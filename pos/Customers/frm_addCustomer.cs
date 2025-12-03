@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
 
@@ -15,17 +16,43 @@ namespace pos
 {
     public partial class frm_addCustomer : Form
     {
-        
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_addCustomer()
         {
             InitializeComponent();
-           
+            // Ensure user identity exists; hydrate claims from DB
+            if (_currentUser == null)
+            {
+                var parsedRole = SystemRole.Viewer;
+                System.Enum.TryParse(UsersModal.logged_in_user_role, true, out parsedRole);
+                AppSecurityContext.SetUser(new UserIdentity
+                {
+                    UserId = UsersModal.logged_in_userid,
+                    BranchId = UsersModal.logged_in_branch_id,
+                    Username = UsersModal.logged_in_username,
+                    Role = parsedRole
+                });
+                _currentUser = AppSecurityContext.User;
+            }
         }
         
         public void frm_addCustomer_Load(object sender, EventArgs e)
         {
             txt_search.Focus();
             this.ActiveControl = txt_search;
+
+            // Disable/hide actions based on DB-backed permissions
+            //btn_save.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
+            //btn_update.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
+            //btn_delete.Enabled = _auth.HasPermission(_currentUser,Permissions.Customers_Delete);
+            //btn_payment.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerPayment);
+            //Btn_ledger_report.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerPrint);
+            //Btn_printCustomerReceipt.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerPrint);
+            //grid_customer_transactions.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerView);
+            // Add further UI elements here as needed, e.g. delete/report buttons/menus.
         }
 
         public void load_customer_detail(int customer_id)
@@ -75,6 +102,24 @@ namespace pos
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Customers_Create))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validate required fields
+                if (txt_first_name.Text == string.Empty)
+                {
+                    MessageBox.Show("Please enter first name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if(txt_registrationName.Text == string.Empty)
+                {
+                    MessageBox.Show("Please enter registration name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (txt_first_name.Text != string.Empty)
                 {
                     CustomerModal info = new CustomerModal
@@ -186,6 +231,14 @@ namespace pos
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Customers_Edit))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
                     MessageBox.Show("Record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -253,6 +306,13 @@ namespace pos
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Customers_Delete))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string id = txt_id.Text;
 
                 if (id != "")
@@ -298,6 +358,13 @@ namespace pos
             string customer_id = txt_id.Text;
             if (customer_id != "")
             {
+                //load customer transactions in grid
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Customers_LedgerView))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 load_customer_transactions_grid(int.Parse(customer_id));
             }
         }
@@ -307,6 +374,12 @@ namespace pos
             string customer_id = txt_id.Text;
             if (customer_id != "")
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Customers_LedgerPayment))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 frm_customer_payment obj = new frm_customer_payment(this, int.Parse(customer_id));
                 obj.ShowDialog();
                
@@ -382,6 +455,12 @@ namespace pos
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Customers_LedgerPrint))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
                     MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

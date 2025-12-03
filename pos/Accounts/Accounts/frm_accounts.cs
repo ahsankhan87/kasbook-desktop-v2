@@ -1,20 +1,24 @@
-﻿using System;
+﻿using pos.Security.Authorization;
+using POS.BLL;
+using POS.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
-using POS.Core;
 
 namespace pos
 {
     public partial class frm_accounts : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public frm_accounts()
         {
@@ -51,14 +55,42 @@ namespace pos
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-            frm_addAccount frm_addAccount_obj = new frm_addAccount(this);
-            frm_addAccount.instance.tb_lbl_is_edit.Text = "false";
+            try
+            {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Account_Create))
+                {
+                    MessageBox.Show("You do not have permission to create a new account.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            frm_addAccount_obj.ShowDialog();
+                frm_addAccount frm_addAccount_obj = new frm_addAccount(this);
+                frm_addAccount.instance.tb_lbl_is_edit.Text = "false";
+
+                frm_addAccount_obj.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Account_Edit))
+            {
+                MessageBox.Show("You do not have permission to edit an account.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // validate selection
+            if (grid_accounts.CurrentRow == null)
+            {
+                MessageBox.Show("Please select record", "Edit Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string id = grid_accounts.CurrentRow.Cells["id"].Value.ToString();
             string name = grid_accounts.CurrentRow.Cells["name"].Value.ToString();
             string name_2 = grid_accounts.CurrentRow.Cells["name_2"].Value.ToString();
@@ -82,6 +114,18 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Account_Delete))
+            {
+                MessageBox.Show("You do not have permission to delete an account.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // validate selection
+            if (grid_accounts.CurrentRow == null)
+            {
+                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string id = grid_accounts.CurrentRow.Cells[0].Value.ToString();
 
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;

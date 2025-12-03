@@ -33,6 +33,9 @@ namespace pos.Security.Authorization
             // Owner short-circuit
             if (user.Role == SystemRole.Owner) return true;
 
+            // Admins have all permissions
+            if (user.Role == SystemRole.Administrator) return true;
+
             // User claims allow fine-grained overrides
             if (user.Claims.Contains(permission)) return true;
 
@@ -83,7 +86,11 @@ namespace pos.Security.Authorization
                 Permissions.Sales_Zatca_Qr_Show, Permissions.Sales_Zatca_DownloadUBL,
                 Permissions.Customers_View, Permissions.Customers_Edit,
                 Permissions.Finance_View, Permissions.Finance_Report,
-                Permissions.Inventory_View, Permissions.Inventory_Edit
+                Permissions.Inventory_View, Permissions.Inventory_Edit,
+                Permissions.Security_Permissions_View,
+                Permissions.Security_Permissions_Create,
+                Permissions.Security_Permissions_Edit,
+                Permissions.Security_Permissions_Delete
             });
 
             _roleCache[SystemRole.Manager] = new RoleDefinition
@@ -96,7 +103,9 @@ namespace pos.Security.Authorization
                 Permissions.Sales_Zatca_Sign, Permissions.Sales_Zatca_Report, Permissions.Sales_Zatca_Qr_Show,
                 Permissions.Customers_View, Permissions.Customers_Edit,
                 Permissions.Finance_View,
-                Permissions.Inventory_View
+                Permissions.Inventory_View,
+                Permissions.Security_Permissions_View,
+                Permissions.Security_Permissions_Edit
             });
 
             _roleCache[SystemRole.User] = new RoleDefinition

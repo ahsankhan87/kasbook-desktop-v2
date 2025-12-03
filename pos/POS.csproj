@@ -1308,6 +1308,9 @@
       <DependentUpon>frmPOS.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\WhatsAppInvoiceSender.cs" />
+    <Compile Include="Security\Admin\FrmPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Security\Admin\FrmRolePermissions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1322,9 +1325,13 @@
     </Compile>
     <Compile Include="Security\Authorization\AppSecurityContext.cs" />
     <Compile Include="Security\Authorization\AuthorizationService.cs" />
+    <Compile Include="Security\Authorization\FormSecurityExtensions.cs" />
     <Compile Include="Security\Authorization\Models.cs" />
     <Compile Include="Security\Authorization\PermissionAttribute.cs" />
     <Compile Include="Security\Authorization\RoleRepository.cs" />
+    <Compile Include="Security\Authorization\SecuredForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Security\Authorization\SqlRoleRepository.cs" />
     <Compile Include="Subscription.cs" />
     <Compile Include="Subscription\RenewSubscrption.cs">
@@ -2257,6 +2264,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\Authorization\SecuredForm.resx">
+      <DependentUpon>SecuredForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Subscription\RenewSubscrption.resx">
       <DependentUpon>RenewSubscrption.cs</DependentUpon>

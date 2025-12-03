@@ -1,23 +1,27 @@
-﻿using System;
+﻿using pos.Security.Authorization;
+using POS.BLL;
+using POS.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.BLL;
-using POS.Core;
-using System.IO;
-using System.Drawing.Imaging;
 
 namespace pos
 {
     public partial class frm_updateCompany : Form
     {
-         
+        // // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_updateCompany()
         {
             InitializeComponent();
@@ -27,6 +31,8 @@ namespace pos
         
         public void frm_updateCompany_Load(object sender, EventArgs e)
          {
+            // permission check
+            chk_use_zatca_e_invoice.Tag = _auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Enable);
             //DataTable accountDT = get_GL_accounts_dt();
 
             //LOAD ACCOUNT DROPDOWN LIST
@@ -107,7 +113,12 @@ namespace pos
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-
+            // Permission check
+            if(_auth.HasPermission(_currentUser,Permissions.Profile_Edit))
+            {
+                MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (txt_name.Text != string.Empty && txt_vat_no.Text != string.Empty && txt_StreetName.Text != string.Empty &&
                 txt_cityName.Text != string.Empty && txt_postalCode.Text != string.Empty)
             {
@@ -299,7 +310,13 @@ namespace pos
 
         private void BtnRenewSubscription_Click(object sender, EventArgs e)
         {
-            frmRenewSubscrption frm = new frmRenewSubscrption();
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Security_Permissions_Create))
+            {
+                MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+                frmRenewSubscrption frm = new frmRenewSubscrption();
             frm.ShowDialog();
         }
     }

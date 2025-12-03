@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using pos.Security.Authorization;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace pos
 {
     public partial class frm_journal_entries : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public double _dr_total = 0;
         public double _cr_total = 0;
 
@@ -25,6 +30,11 @@ namespace pos
 
         private void frm_journal_entries_Load(object sender, EventArgs e)
         {
+            // permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Journal_Create)) { 
+                MessageBox.Show("You do not have permission to access this module.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             Load_account_autocomplete();
             GetMAXInvoiceNo();
         }
@@ -78,7 +88,15 @@ namespace pos
         {
             try
             {
-                if(_dr_total == _cr_total)
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Journal_Create))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // check debit and credit balance
+                if (_dr_total == _cr_total)
                 {
                     DialogResult result = MessageBox.Show("Are you sure you want to sale", "Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 

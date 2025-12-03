@@ -81,6 +81,7 @@
     <Compile Include="dbConnection.cs" />
     <Compile Include="GeneralDLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\PermissionsDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\POS.Core\POS.Core.csproj">

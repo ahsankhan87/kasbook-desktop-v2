@@ -1,19 +1,23 @@
-﻿using System;
+﻿using pos.Security.Authorization;
+using POS.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
 
 namespace pos
 {
     public partial class frm_groups : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public frm_groups()
         {
@@ -50,6 +54,14 @@ namespace pos
 
         private void btn_new_Click(object sender, EventArgs e)
         {
+            // Permission check can be added here
+            if(!_auth.HasPermission(_currentUser, Permissions.Group_Create))
+            {
+                MessageBox.Show("You do not have permission to create a new group.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            // Open the add group form in new mode
             frm_addGroup frm_addGroup_obj = new frm_addGroup(this);
             frm_addGroup.instance.tb_lbl_is_edit.Text = "false";
 
@@ -58,6 +70,19 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            // Permission check can be added here
+            if(!_auth.HasPermission(_currentUser, Permissions.Group_Edit))
+            {
+                MessageBox.Show("You do not have permission to edit groups.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Ensure a row is selected
+            if (grid_groups.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a group to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Open the add group form in edit mode with selected group details
             string id = grid_groups.CurrentRow.Cells["id"].Value.ToString();
             string title = grid_groups.CurrentRow.Cells["name"].Value.ToString();
             string name_2 = grid_groups.CurrentRow.Cells["name_2"].Value.ToString();
@@ -78,6 +103,18 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            // Permission check can be added here
+            if(!_auth.HasPermission(_currentUser, Permissions.Group_Delete))
+            {
+                MessageBox.Show("You do not have permission to delete groups.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Ensure a row is selected
+            if (grid_groups.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a group to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string id = grid_groups.CurrentRow.Cells[0].Value.ToString();
 
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;

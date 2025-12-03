@@ -1,4 +1,5 @@
 ﻿using pos.Sales;
+using pos.Security.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace pos.Dashboard
         public Action OpenSalesReport { get; set; }
         public Action OpenPurchasesReport { get; set; }
         public Action OpenSettings { get; set; }
+
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public frm_dashboard()
         {
@@ -131,6 +136,14 @@ namespace pos.Dashboard
         Form ZatcaInvoices;
         private void btnSettings_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Sales_View))
+            {
+                MessageBox.Show("You do not have permission to access Settings.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Open ZATCA Invoices settings form
             if (ZatcaInvoices == null)
             {
                 ZatcaInvoices = new pos.Sales.frm_zatca_invoices()
@@ -154,6 +167,12 @@ namespace pos.Dashboard
         Form frm_sales_obj;
         private void btnNewSale_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Sales_Create))
+            {
+                MessageBox.Show("You do not have permission to create a new sale.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             frm_sales_obj = new frm_sales();
             frm_sales_obj.MdiParent = frm_main.ActiveForm;
 
@@ -166,6 +185,13 @@ namespace pos.Dashboard
         Form frm_products;
         private void btnProducts_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Products_View))
+            {
+                MessageBox.Show("You do not have permission to access Products.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (frm_products == null)
             {
                 frm_products = new frm_product_full_detail();
@@ -188,6 +214,13 @@ namespace pos.Dashboard
         Form frmCustomers;
         private void btnCustomers_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Customers_View))
+            {
+                MessageBox.Show("You do not have permission to access Customers.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (frmCustomers == null)
             {
                 frmCustomers = new frm_customers();
@@ -210,6 +243,13 @@ namespace pos.Dashboard
         Form frmSuppliers;
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Suppliers_View))
+            {
+                MessageBox.Show("You do not have permission to access Suppliers.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (frmSuppliers == null)
             {
                 frmSuppliers = new frm_suppliers();
@@ -231,6 +271,13 @@ namespace pos.Dashboard
         Form frmSalesReport;
         private void btnSalesReport_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Reports_SalesView))
+            {
+                MessageBox.Show("You do not have permission to access Sales Reports.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (frmSalesReport == null)
             {
                 frmSalesReport = new frm_SalesReport();
@@ -252,6 +299,13 @@ namespace pos.Dashboard
         Form frmPurchasesReport;
         private void btnPurchasesReport_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Reports_PurchasesView))
+            {
+                MessageBox.Show("You do not have permission to access Purchases Reports.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (frmPurchasesReport == null)
             {
                 frmPurchasesReport = new frm_PurchasesReport();
@@ -273,6 +327,12 @@ namespace pos.Dashboard
         Form LowStockReport;
         private void lblLowStockValue_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Reports_InventoryView))
+            {
+                MessageBox.Show("You do not have permission to access Inventory Reports.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (LowStockReport == null)
             {
                 LowStockReport = new pos.Reports.Products.Inventory.FrmLowStockReport
@@ -295,7 +355,14 @@ namespace pos.Dashboard
         Form frm_purchase;
         private void btnNewPurchase_Click(object sender, EventArgs e)
         {
-            if(frm_purchase == null)
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Purchases_Create))
+            {
+                MessageBox.Show("You do not have permission to create a new purchase.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (frm_purchase == null)
             {
                 frm_purchase = new frm_purchases();
                 frm_purchase.MdiParent = frm_main.ActiveForm;

@@ -7,20 +7,16 @@ namespace pos.Security.Authorization
 {
     public sealed class SqlRoleRepository : IRoleRepository
     {
-        // Add this connection string in App.config:
-        // <connectionStrings>
-        //   <add name="POSConnection" connectionString="Data Source=.;Initial Catalog=YourDb;Integrated Security=True"/>
-        // </connectionStrings>
-
+        
         public IEnumerable<RoleDefinition> LoadAllRoles()
         {
             var results = new Dictionary<SystemRole, RoleDefinition>();
 
             using (var cn = new SqlConnection(dbConnection.ConnectionString))
             using (var cmd = new SqlCommand(@"
-SELECT rp.role_name, rp.permission_name
-FROM RolePermissions rp WITH (NOLOCK);
-", cn))
+                    SELECT rp.role_name, rp.permission_name
+                    FROM RolePermissions rp WITH (NOLOCK);
+                    ", cn))
             {
                 cn.Open();
                 using (var rd = cmd.ExecuteReader())
@@ -59,12 +55,12 @@ FROM RolePermissions rp WITH (NOLOCK);
 
                     // Ensure role and permissions exist
                     cmd.CommandText = @"
-MERGE Roles AS t
-USING (SELECT @role_name AS role_name) AS s
-ON t.role_name = s.role_name
-WHEN NOT MATCHED THEN INSERT (role_name) VALUES (s.role_name);
+                    MERGE Roles AS t
+                    USING (SELECT @role_name AS role_name) AS s
+                    ON t.role_name = s.role_name
+                    WHEN NOT MATCHED THEN INSERT (role_name) VALUES (s.role_name);
 
-DELETE FROM RolePermissions WHERE role_name = @role_name;";
+                    DELETE FROM RolePermissions WHERE role_name = @role_name;";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@role_name", role.ToString());
                     cmd.ExecuteNonQuery();
@@ -75,18 +71,18 @@ DELETE FROM RolePermissions WHERE role_name = @role_name;";
                         {
                             // Ensure permission exists
                             cmd.CommandText = @"
-MERGE Permissions AS t
-USING (SELECT @p AS permission_name) AS s
-ON t.permission_name = s.permission_name
-WHEN NOT MATCHED THEN INSERT (permission_name) VALUES (s.permission_name);";
+                                MERGE Permissions AS t
+                                USING (SELECT @p AS permission_name) AS s
+                                ON t.permission_name = s.permission_name
+                                WHEN NOT MATCHED THEN INSERT (permission_name) VALUES (s.permission_name);";
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@p", p);
                             cmd.ExecuteNonQuery();
 
                             // Insert role-permission
                             cmd.CommandText = @"
-INSERT INTO RolePermissions(role_name, permission_name)
-VALUES(@role_name, @p);";
+                                INSERT INTO RolePermissions(role_name, permission_name)
+                                VALUES(@role_name, @p);";
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@role_name", role.ToString());
                             cmd.Parameters.AddWithValue("@p", p);
@@ -104,9 +100,9 @@ VALUES(@role_name, @p);";
             var claims = new List<string>();
             using (var cn = new SqlConnection(dbConnection.ConnectionString))
             using (var cmd = new SqlCommand(@"
-SELECT permission_name
-FROM UserClaims WITH (NOLOCK)
-WHERE user_id = @uid;", cn))
+                SELECT permission_name
+                FROM UserClaims WITH (NOLOCK)
+                WHERE user_id = @uid;", cn))
             {
                 cmd.Parameters.AddWithValue("@uid", userId);
                 cn.Open();
@@ -141,18 +137,18 @@ WHERE user_id = @uid;", cn))
                         {
                             // Ensure permission exists
                             cmd.CommandText = @"
-MERGE Permissions AS t
-USING (SELECT @p AS permission_name) AS s
-ON t.permission_name = s.permission_name
-WHEN NOT MATCHED THEN INSERT (permission_name) VALUES (s.permission_name);";
+                                MERGE Permissions AS t
+                                USING (SELECT @p AS permission_name) AS s
+                                ON t.permission_name = s.permission_name
+                                WHEN NOT MATCHED THEN INSERT (permission_name) VALUES (s.permission_name);";
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@p", c);
                             cmd.ExecuteNonQuery();
 
                             // Insert user-claim
                             cmd.CommandText = @"
-INSERT INTO UserClaims(user_id, permission_name)
-VALUES(@uid, @p);";
+                                INSERT INTO UserClaims(user_id, permission_name)
+                                VALUES(@uid, @p);";
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@uid", userId);
                             cmd.Parameters.AddWithValue("@p", c);

@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using pos.Security.Authorization;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace pos.Expenses
 {
     public partial class frm_expenses : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_expenses()
         {
             InitializeComponent();
@@ -21,6 +26,12 @@ namespace pos.Expenses
 
         private void frm_expenses_Load(object sender, EventArgs e)
         {
+            // permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Expenses_Create))
+            {
+                MessageBox.Show("You do not have permission to access this module.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             get_cash_accounts_dropdownlist();
             cmb_cash_account.SelectedValue = "3";
             get_vat_accounts_dropdownlist();
@@ -220,6 +231,13 @@ namespace pos.Expenses
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Expenses_Create))
+                {
+                    MessageBox.Show("You do not have permission to perform this action.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 DialogResult result = MessageBox.Show("Are you sure you want to ?", "Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)

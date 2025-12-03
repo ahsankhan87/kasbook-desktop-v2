@@ -17,7 +17,7 @@ using Zatca.EInvoice.SDK.Contracts.Models;
 
 namespace pos
 {
-    public partial class frm_all_sales : Form
+    public partial class frm_all_sales : SecuredForm
     {
         public SalesBLL objSalesBLL = new SalesBLL();
 
@@ -44,22 +44,16 @@ namespace pos
                 _currentUser = AppSecurityContext.User;
             }
 
-            // On load, refresh claims from DB and apply permission attributes
-            this.Load += (s, e) =>
-            {
-                AppSecurityContext.RefreshUserClaims();
-                RequirePermissionAttribute.Apply(this, _currentUser, _auth);
-            };
+            // Tag permission-aware controls
+            //btn_print_invoice.Tag = Permissions.Sales_Print;
+            //Btn_PrintPOS80.Tag = Permissions.Sales_Print;
+
         }
 
         private void frm_all_sales_Load(object sender, EventArgs e)
         {
             load_all_sales_grid();
 
-            // Disable/hide actions based on DB-backed permissions
-            Btn_PrintPOS80.Enabled = _auth.HasPermission(_currentUser, Permissions.Sales_Print);
-            btn_print_invoice.Enabled = _auth.HasPermission(_currentUser, Permissions.Sales_Print);
-            // Add further UI elements here as needed, e.g. delete/report buttons/menus.
         }
 
         public void load_all_sales_grid()
@@ -175,6 +169,13 @@ namespace pos
         {
             if (grid_all_sales.Rows.Count > 0)
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Sales_Print))
+                {
+                    MessageBox.Show("You don't have permission to print sales invoices.");
+                    return;
+                }
+
                 DialogResult result1 = MessageBox.Show("Print invoice with product code?", "Print Invoice", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
                 bool isPrintInvoiceWithCode = false;
@@ -974,6 +975,13 @@ namespace pos
 
         private void Btn_PrintPOS80_Click(object sender, EventArgs e)
         {
+            // Permission Check
+            if (!_auth.HasPermission(_currentUser, Permissions.Sales_Print))
+            {
+                MessageBox.Show("You don't have permission to print POS 80mm receipt. Please contact the administrator.");
+                return;
+            }
+
             if (grid_all_sales.Rows.Count > 0)
             {
                 string invoiceNo = grid_all_sales.CurrentRow.Cells["invoice_no"].Value.ToString();
