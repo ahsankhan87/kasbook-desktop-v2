@@ -170,11 +170,41 @@ namespace pos
                     }
                 }
 
-                // Safely get values from cells
+                // Helper to read double safely
                 double GetCellDouble(string colName)
                 {
                     var val = grid_sales.Rows[e.RowIndex].Cells[colName].Value;
-                    return val == null || val.ToString() == "" ? 0 : Convert.ToDouble(val);
+                    return val == null || string.IsNullOrWhiteSpace(Convert.ToString(val)) ? 0 : Convert.ToDouble(val);
+                }
+
+                // Prevent unit_price below cost_price
+                if (columnName.Equals("unit_price", StringComparison.OrdinalIgnoreCase))
+                {
+                    var costPriceVal = grid_sales.Rows[e.RowIndex].Cells["cost_price"].Value;
+                    var unitPriceVal = grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value;
+
+                    double costPrice = costPriceVal == null || string.IsNullOrWhiteSpace(Convert.ToString(costPriceVal))
+                        ? 0
+                        : Convert.ToDouble(costPriceVal);
+
+                    double unitPriceInput = unitPriceVal == null || string.IsNullOrWhiteSpace(Convert.ToString(unitPriceVal))
+                        ? 0
+                        : Convert.ToDouble(unitPriceVal);
+
+                    if (unitPriceInput < costPrice)
+                    {
+                        var msg = lang == "ar-SA"
+                        ? "لا يمكن أن يكون سعر الوحدة أقل من سعر التكلفة."
+                        : "Unit price cannot be lower than cost price.";
+                        var caption = lang == "ar-SA" ? "سعر غير صالح" : "Invalid Price";
+                        MessageBox.Show(msg, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        // Reset to cost price and reselect the cell
+                        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value = Math.Round(costPrice, 3);
+                        grid_sales.CurrentCell = grid_sales.Rows[e.RowIndex].Cells["unit_price"];
+                        grid_sales.BeginEdit(true);
+                        return;// skip further calculations for this edit
+
+                    }
                 }
 
                 double unitPrice = GetCellDouble("unit_price");
@@ -2507,12 +2537,14 @@ namespace pos
                     return;
                 }
 
-                if ((cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01") &&
-                    (string.IsNullOrWhiteSpace(txt_customerID.Text)))
+                // Existing Standard subtype check
+                // Additional ZATCA postal address validation for Standard subtype
+                if (cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
                 {
-                    MessageBox.Show("Please select customer for Standard invoice type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtCustomerSearch.Focus();
-                    return;
+                    int customerId = 0;
+                    int.TryParse(txt_customerID.Text, out customerId);
+                    if (!ValidateStandardInvoiceCustomer(customerId))
+                        return;
                 }
 
                 if (cmb_sale_type.SelectedValue.ToString() == "0")
@@ -3348,6 +3380,103 @@ namespace pos
             string phone = customersDataGridView.Columns.Contains("contact_no") ? Convert.ToString(row.Cells["contact_no"].Value) : string.Empty;
             string vat = customersDataGridView.Columns.Contains("vat_no") ? Convert.ToString(row.Cells["vat_no"].Value) : string.Empty;
 
+        }
+
+        // Add this helper inside frm_sales class
+        private bool ValidateStandardInvoiceCustomer(int customerId)
+        {
+            if (customerId <= 0)
+            {
+                MessageBox.Show(
+                    lang == "ar-SA" ? "يرجى اختيار العميل لنوع الفاتورة الضريبية (قياسية)." : "Please select a customer for Standard invoice type.",
+                    lang == "ar-SA" ? "معاملة البيع" : "Sale Transaction",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                txtCustomerSearch.Focus();
+                return false;
+            }
+
+            try
+            {
+                var customerBLL = new CustomerBLL();
+                var dt = customerBLL.SearchRecordByCustomerID(customerId);
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    MessageBox.Show(
+                        lang == "ar-SA" ? "العميل المحدد غير موجود." : "Selected customer not found.",
+                        lang == "ar-SA" ? "معاملة البيع" : "Sale Transaction",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    txtCustomerSearch.Focus();
+                    return false;
+                }
+
+                var row = dt.Rows[0];
+
+                string cityName = Convert.ToString(row["CityName"]);
+                string countryName = Convert.ToString(row["CountryName"]);
+                string streetName = Convert.ToString(row["StreetName"]);
+                string postalCode = Convert.ToString(row["PostalCode"]);
+                string buildingNumber = Convert.ToString(row["BuildingNumber"]);
+                string citySubdivisionName = Convert.ToString(row["CitySubdivisionName"]);
+                string registrationName = Convert.ToString(row["RegistrationName"]); // customer legal name
+
+                var missing = new List<string>();
+                if (string.IsNullOrWhiteSpace(registrationName)) missing.Add("Registration Name");
+                if (string.IsNullOrWhiteSpace(countryName)) missing.Add("Country Name");
+                if (string.IsNullOrWhiteSpace(cityName)) missing.Add("City Name");
+                if (string.IsNullOrWhiteSpace(citySubdivisionName)) missing.Add("City Subdivision Name");
+                if (string.IsNullOrWhiteSpace(streetName)) missing.Add("Street Name");
+                if (string.IsNullOrWhiteSpace(buildingNumber)) missing.Add("Building Number");
+                if (string.IsNullOrWhiteSpace(postalCode)) missing.Add("Postal Code");
+
+                if (missing.Count > 0)
+                {
+                    var caption = lang == "ar-SA" ? "فاتورة زاتكا القياسية" : "ZATCA Standard Invoice";
+                    var head = lang == "ar-SA"
+                        ? "تعذر معالجة الفاتورة القياسية. الحقول الإلزامية لعنوان العميل المفقودة:\n\n- "
+                        : "Cannot process Standard invoice. Missing mandatory customer address fields:\n\n- ";
+                    // Localize field names
+                    var localizedMissing = new List<string>();
+                    foreach (var m in missing)
+                    {
+                        switch (m)
+                        {
+                            case "Registration Name": localizedMissing.Add(lang == "ar-SA" ? "الاسم القانوني (Registration Name)" : m); break;
+                            case "Country Name": localizedMissing.Add(lang == "ar-SA" ? "اسم الدولة" : m); break;
+                            case "City Name": localizedMissing.Add(lang == "ar-SA" ? "اسم المدينة" : m); break;
+                            case "City Subdivision Name": localizedMissing.Add(lang == "ar-SA" ? "اسم تقسيم المدينة" : m); break;
+                            case "Street Name": localizedMissing.Add(lang == "ar-SA" ? "اسم الشارع" : m); break;
+                            case "Building Number": localizedMissing.Add(lang == "ar-SA" ? "رقم المبنى" : m); break;
+                            case "Postal Code": localizedMissing.Add(lang == "ar-SA" ? "الرمز البريدي" : m); break;
+                            default: localizedMissing.Add(m); break;
+                        }
+                    }
+
+                    MessageBox.Show(
+                        head + string.Join("\n- ", localizedMissing),
+                        caption,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    txtCustomerSearch.Focus();
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    (lang == "ar-SA" ? "فشل التحقق من عنوان العميل.\n" : "Failed to validate customer address.\n") + ex.Message,
+                    lang == "ar-SA" ? "خطأ" : "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                ); 
+                return false;
+            }
         }
     }
 

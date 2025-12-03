@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using POS.Core;
 using POS.DLL;
+using System;
+using System.Collections.Generic;
 using System.Data;
-using POS.Core;
 
 namespace POS.BLL
 {
@@ -18,7 +15,6 @@ namespace POS.BLL
             salesDAL = new SalesDLL();
         }
 
-
         public DataTable GetAll()
         {
             try
@@ -28,7 +24,7 @@ namespace POS.BLL
             }
             catch
             {
-                
+
                 throw;
             }
         }
@@ -233,7 +229,7 @@ namespace POS.BLL
                 throw;
             }
         }
-       
+
         public int InsertSales_1(SalesModal obj)
         {
             try
@@ -396,7 +392,7 @@ namespace POS.BLL
             try
             {
                 SalesDLL objDLL = new SalesDLL();
-                return objDLL.InsertEstimates(sales,sales_detail);
+                return objDLL.InsertEstimates(sales, sales_detail);
             }
             catch
             {
@@ -404,7 +400,7 @@ namespace POS.BLL
                 throw;
             }
         }
-        public int UpdateCustomerInSales(string invoiceNo,string customerId)
+        public int UpdateCustomerInSales(string invoiceNo, string customerId)
         {
             try
             {
