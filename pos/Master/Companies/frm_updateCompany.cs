@@ -114,7 +114,7 @@ namespace pos
         private void btn_save_Click(object sender, EventArgs e)
         {
             // Permission check
-            if(_auth.HasPermission(_currentUser,Permissions.Profile_Edit))
+            if(!_auth.HasPermission(_currentUser,Permissions.Profile_Edit))
             {
                 MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

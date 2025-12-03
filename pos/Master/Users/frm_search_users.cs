@@ -83,7 +83,7 @@ namespace pos
                     mainForm.load_user_detail(int.Parse(user_id));
                     mainForm.load_user_rights(int.Parse(user_id));
                     mainForm.load_user_commission_grid(int.Parse(user_id));
-                    mainForm.check_all_modules(int.Parse(user_id));
+                    //mainForm.check_all_modules(int.Parse(user_id));
                     
                 }
 
@@ -126,7 +126,6 @@ namespace pos
 
                 }
                 
-
             }
             catch (Exception ex)
             {

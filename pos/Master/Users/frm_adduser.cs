@@ -50,7 +50,7 @@ namespace pos
             load_user_detail(_user_id);
             load_user_rights(_user_id);
             load_user_commission_grid(_user_id);
-            check_all_modules(_user_id);
+            //check_all_modules(_user_id);
             
             //lbl_cpwd.Visible = false;
             //lbl_pwd.Visible = false;
@@ -256,70 +256,70 @@ namespace pos
                     int result = objBLL.Insert(info); // result is user_id
                         
                     /////////INSERTING USER MODUELS
-                    foreach (object itemChecked in checkedListBox_Master.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
+                    //foreach (object itemChecked in checkedListBox_Master.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
 
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_POS.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_POS.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
 
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
 
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
 
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_HR.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_HR.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
                     ///////////
 
 
@@ -655,72 +655,72 @@ namespace pos
                     int result = objBLL.Update(info);
 
                     /////////DELETE USER MODULES FIRST AND THEN INSERT AGAINS USER MODULES
-                    objBLL.DeleteUserModules(int.Parse(txt_id.Text));
-                    /////
-                    foreach (object itemChecked in checkedListBox_Master.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
+                    //objBLL.DeleteUserModules(int.Parse(txt_id.Text));
+                    ///////
+                    //foreach (object itemChecked in checkedListBox_Master.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
 
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_POS.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_POS.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
 
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
 
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
 
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
-                    foreach (object itemChecked in checkedListBox_HR.CheckedItems)
-                    {
-                        DataRowView castedItem = itemChecked as DataRowView;
-                        string moduleName = castedItem["name"].ToString();
-                        int moduleID = (int)castedItem["id"];
-                        info.user_id = result;
-                        info.module_name = moduleName;
-                        info.module_id = moduleID;
-                        objBLL.InsertUserModules(info);
-                    }
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
+                    //foreach (object itemChecked in checkedListBox_HR.CheckedItems)
+                    //{
+                    //    DataRowView castedItem = itemChecked as DataRowView;
+                    //    string moduleName = castedItem["name"].ToString();
+                    //    int moduleID = (int)castedItem["id"];
+                    //    info.user_id = result;
+                    //    info.module_name = moduleName;
+                    //    info.module_id = moduleID;
+                    //    objBLL.InsertUserModules(info);
+                    //}
                     ///////////
 
                     ///USER RIGHTS
@@ -862,7 +862,7 @@ namespace pos
                 load_user_detail(int.Parse(user_id));
                 load_user_rights(int.Parse(user_id));
                 load_user_commission_grid(int.Parse(user_id));
-                check_all_modules(int.Parse(user_id));
+                //check_all_modules(int.Parse(user_id));
             }
             
         }

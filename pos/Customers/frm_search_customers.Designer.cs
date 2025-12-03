@@ -37,6 +37,7 @@
             this.grid_search_customers = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.first_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.registrationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.last_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vat_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +94,7 @@
             this.grid_search_customers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.first_name,
+            this.registrationName,
             this.last_name,
             this.email,
             this.vat_no,
@@ -118,6 +120,13 @@
             resources.ApplyResources(this.first_name, "first_name");
             this.first_name.Name = "first_name";
             this.first_name.ReadOnly = true;
+            // 
+            // registrationName
+            // 
+            this.registrationName.DataPropertyName = "registrationName";
+            resources.ApplyResources(this.registrationName, "registrationName");
+            this.registrationName.Name = "registrationName";
+            this.registrationName.ReadOnly = true;
             // 
             // last_name
             // 
@@ -184,6 +193,7 @@
         private System.Windows.Forms.DataGridView grid_search_customers;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn first_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn registrationName;
         private System.Windows.Forms.DataGridViewTextBoxColumn last_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat_no;

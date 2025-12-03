@@ -223,7 +223,7 @@ namespace pos.Dashboard
 
             if (frmCustomers == null)
             {
-                frmCustomers = new frm_customers();
+                frmCustomers = new frm_addCustomer();
                 frmCustomers.MdiParent = frm_main.ActiveForm;
                 //frm_cust.Dock = DockStyle.Fill;
                 frmCustomers.FormClosed += new FormClosedEventHandler(FrmCustomers_FormClosed);
@@ -252,7 +252,7 @@ namespace pos.Dashboard
 
             if (frmSuppliers == null)
             {
-                frmSuppliers = new frm_suppliers();
+                frmSuppliers = new frm_addSupplier();
                 frmSuppliers.MdiParent = frm_main.ActiveForm;
                 //frm_cust.Dock = DockStyle.Fill;
                 frmSuppliers.FormClosed += new FormClosedEventHandler(FrmSuppliers_FormClosed);
