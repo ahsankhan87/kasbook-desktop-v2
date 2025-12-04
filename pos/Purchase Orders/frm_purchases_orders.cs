@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using pos.Security.Authorization;
 
 namespace pos
 {
@@ -18,6 +19,10 @@ namespace pos
 
     public partial class frm_purchases_order : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
         public int cash_account_id = 0;
         //public int sales_account_id = 0;
@@ -1390,7 +1395,13 @@ namespace pos
         {
             try
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to order " + invoice_status, "Purchase Order Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(!_auth.HasPermission(_currentUser, Permissions.PurchaseOrders_Create))
+                {
+                    MessageBox.Show("You don't have rights to create purchase orders", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DialogResult result = MessageBox.Show("Are you sure you want to purchase order " + invoice_status, "Purchase Order Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {

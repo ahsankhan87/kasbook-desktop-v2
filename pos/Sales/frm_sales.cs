@@ -1,4 +1,5 @@
 ﻿using pos.Master.Companies.zatca;
+using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
 using System;
@@ -35,6 +36,10 @@ namespace pos
         public double total_sub_total = 0;
         string invoice_status = "";
         string product_code = "";
+
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public double cash_sales_amount_limit = 0;
         //public double cash_purchase_amount_limit= 0;
@@ -2531,6 +2536,7 @@ namespace pos
         {
             try
             {
+                // Validate at least one product is added
                 if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
                 {
                     MessageBox.Show("Please add products ", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -2539,14 +2545,19 @@ namespace pos
 
                 // Existing Standard subtype check
                 // Additional ZATCA postal address validation for Standard subtype
-                if (cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                // ZATCA validation
+                if (UsersModal.useZatcaEInvoice)
                 {
-                    int customerId = 0;
-                    int.TryParse(txt_customerID.Text, out customerId);
-                    if (!ValidateStandardInvoiceCustomer(customerId))
-                        return;
+                    if (cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                    {
+                        int customerId = 0;
+                        int.TryParse(txt_customerID.Text, out customerId);
+                        if (!ValidateStandardInvoiceCustomer(customerId))
+                            return;
+                    }
                 }
 
+                // Sale type selection validation
                 if (cmb_sale_type.SelectedValue.ToString() == "0")
                 {
                     MessageBox.Show("Please select sale type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -2558,6 +2569,7 @@ namespace pos
                 string sale_type;
                 string paymentMethodText = cmb_payment_method.Text;
 
+                // Get sale type
                 if (cmb_sale_type.SelectedValue.ToString() == null)
                 {
                     MessageBox.Show("Are you sure you want to " + invoice_status, invoice_status + " Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -2590,6 +2602,7 @@ namespace pos
                 //    return;
                 //}
 
+                // Print options dialog
                 Frm_print_options formPrintOption = new Frm_print_options();
                 if (formPrintOption.ShowDialog() == DialogResult.OK)
                 {
@@ -3455,12 +3468,24 @@ namespace pos
                         }
                     }
 
-                    MessageBox.Show(
-                        head + string.Join("\n- ", localizedMissing),
+                    var proceedQuestion = lang == "ar-SA"
+                         ? "\n\nهل ترغب بالمتابعة على أي حال؟"
+                         : "\n\nDo you want to proceed anyway?";
+
+                    var result = MessageBox.Show(
+                        head + string.Join("\n- ", localizedMissing) + proceedQuestion,
                         caption,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2
                     );
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Proceed even with missing fields
+                        return true;
+                    }
+
                     txtCustomerSearch.Focus();
                     return false;
                 }

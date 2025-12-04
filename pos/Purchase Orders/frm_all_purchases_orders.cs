@@ -1,30 +1,36 @@
-﻿using System;
+﻿using pos.Security.Authorization;
+using POS.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
 
 namespace pos
 {
     public partial class frm_all_purchases_orders : Form
     {
         Purchases_orderBLL objPurchases_orderBLL = new Purchases_orderBLL();
-                            
+        
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_all_purchases_orders()
         {
             InitializeComponent();
         }
 
-
         public void frm_all_purchases_orders_Load(object sender, EventArgs e)
         {
             load_all_purchases_orders_grid();
+
+            grid_all_purchases_orders.Columns["delete"].Visible = _auth.HasPermission(_currentUser, Permissions.PurchaseOrders_Delete);
         }
 
         public void load_all_purchases_orders_grid()

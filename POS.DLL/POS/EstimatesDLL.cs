@@ -202,11 +202,13 @@ namespace POS.DLL
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " SI.item_name AS product_name,P.code,S.description," +
                             " C.first_name AS customer_name, C.RegistrationName as customer_company,C.PostalCode," +
-                            " C.CityName, C.CountryName,C.StreetName,C.BuildingNumber,C.CitySubdivisionName, C.vat_no AS customer_vat" +
+                            " C.CityName, C.CountryName,C.StreetName,C.BuildingNumber,C.CitySubdivisionName, C.vat_no AS customer_vat," +
+                            " U.name AS username" +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.id=SI.sale_id" +
                             " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
+                            " LEFT JOIN pos_users U ON U.id=S.user_id" +
                             " WHERE S.invoice_no LIKE @invoice_no";
 
                         cmd = new SqlCommand(query, cn);

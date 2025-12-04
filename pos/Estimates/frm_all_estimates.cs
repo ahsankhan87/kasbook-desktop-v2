@@ -1,20 +1,24 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using pos.Security.Authorization;
+using POS.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
-using CrystalDecisions.CrystalReports.Engine;
 
 namespace pos
 {
     public partial class frm_all_estimates : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public frm_all_estimates()
         {
@@ -163,6 +167,13 @@ namespace pos
             }
             if (name == "btn_delete")
             {
+                //permission check
+                if (!_auth.HasPermission(_currentUser, Permissions.Quotes_Delete))
+                {
+                    MessageBox.Show("You do not have permission to delete estimates.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)

@@ -1,21 +1,26 @@
-﻿using System;
+﻿using pos.Security.Authorization;
+using POS.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
 
 namespace pos
 {
     public partial class frm_all_purchases : Form
     {
         PurchasesBLL objBLL = new PurchasesBLL();
-                    
+
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_all_purchases()
         {
             InitializeComponent();
@@ -128,6 +133,13 @@ namespace pos
                 }
                 if (name == "btn_delete")
                 {
+                    // Permission check
+                    if(!_auth.HasPermission(_currentUser, Permissions.Purchases_Delete))
+                    {
+                        MessageBox.Show("You do not have permission to delete purchases.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     DialogResult result = MessageBox.Show("Are you sure you want to delete", "Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (result == DialogResult.Yes)
@@ -159,6 +171,13 @@ namespace pos
         {
             if(grid_all_purchases.Rows.Count > 0)
             {
+                // permission check
+                if(!_auth.HasPermission(_currentUser, Permissions.Purchases_Print))
+                {
+                    MessageBox.Show("You do not have permission to print purchase invoices.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 using (frm_purchase_invoice obj = new frm_purchase_invoice(load_purchase_receipt(), false))
                 {
                     obj.ShowDialog();

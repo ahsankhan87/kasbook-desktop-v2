@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using pos.Security.Authorization;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace pos
 {
     public partial class frm_purchases : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+        
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
         public int cash_account_id = 0;
         //public int sales_account_id = 0;
@@ -1928,6 +1933,13 @@ namespace pos
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser,Permissions.Purchases_Create))
+                {
+                    MessageBox.Show("You don't have permission to perform this action. Please contact your system administrator.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string purchase_type = (string.IsNullOrEmpty(cmb_purchase_type.SelectedValue.ToString()) ? "Cash" : cmb_purchase_type.SelectedValue.ToString());
                 int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
                 string bankID = "";
