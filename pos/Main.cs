@@ -2064,6 +2064,22 @@ namespace pos
                 frm.ShowDialog(this);
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var about = new pos.About.frm_about())
+            {
+                about.ShowDialog(this);
+            }
+        }
+
+        private void toolStripButton_Help_Click(object sender, EventArgs e)
+        {
+            using (var about = new pos.About.frm_about())
+            {
+                about.ShowDialog(this);
+            }
+        }
+
         //private void CreateDashboardPanel()
         //{
         //    // Main dashboard container

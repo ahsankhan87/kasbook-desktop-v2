@@ -116,14 +116,12 @@ namespace pos
 
         public DataTable load_estimates_receipt()
         {
-           
-                var invoice_no = grid_all_estimates.CurrentRow.Cells["invoice_no"].Value.ToString();
-                //bind data in data grid view  
-                EstimatesBLL objEstimatesBLL = new EstimatesBLL();
-                DataTable dt = objEstimatesBLL.SaleReceipt(invoice_no);
-                return dt;
+            var invoice_no = grid_all_estimates.CurrentRow.Cells["invoice_no"].Value.ToString();
+            //bind data in data grid view  
+            EstimatesBLL objEstimatesBLL = new EstimatesBLL();
+            DataTable dt = objEstimatesBLL.SaleReceipt(invoice_no);
+            return dt;
 
-            
         }
 
         private void btn_print_Click(object sender, EventArgs e)

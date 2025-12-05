@@ -118,6 +118,67 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="masterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 24</value>
+  </data>
+  <data name="masterToolStripMenuItem.Text" xml:space="preserve">
+    <value>الرٍئيسيه</value>
+  </data>
+  <data name="itemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 24</value>
+  </data>
+  <data name="itemsToolStripMenuItem.Text" xml:space="preserve">
+    <value>العناصر</value>
+  </data>
+  <data name="pOSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 24</value>
+  </data>
+  <data name="pOSToolStripMenuItem.Text" xml:space="preserve">
+    <value>المشتريات</value>
+  </data>
+  <data name="salesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 24</value>
+  </data>
+  <data name="salesToolStripMenuItem1.Text" xml:space="preserve">
+    <value> المبيعات</value>
+  </data>
+  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>المحاسبه</value>
+  </data>
+  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 24</value>
+  </data>
+  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>التقارير</value>
+  </data>
+  <data name="purchasesToolStripMenuItem.Text" xml:space="preserve">
+    <value>الخدمات</value>
+  </data>
+  <data name="humanResourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 24</value>
+  </data>
+  <data name="humanResourceToolStripMenuItem.Text" xml:space="preserve">
+    <value>الموارد البشريه</value>
+  </data>
+  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 24</value>
+  </data>
+  <data name="windowsMenu.Text" xml:space="preserve">
+    <value>ويندوز</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 24</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>يساعد</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="menuStrip1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 6</value>
   </data>
@@ -169,6 +230,12 @@
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 6</value>
   </data>
+  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 26</value>
+  </data>
+  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
+    <value>لغة</value>
+  </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 26</value>
   </data>
@@ -181,14 +248,11 @@
   <data name="arabicToolStripMenuItem.Text" xml:space="preserve">
     <value>عربي</value>
   </data>
-  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 26</value>
-  </data>
-  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
-    <value>لغة</value>
-  </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 6</value>
+  </data>
+  <data name="securityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 26</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>233, 26</value>
@@ -214,11 +278,17 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>خروج</value>
   </data>
-  <data name="masterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 24</value>
+  <data name="warehousetoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 26</value>
   </data>
-  <data name="masterToolStripMenuItem.Text" xml:space="preserve">
-    <value>الرٍئيسيه</value>
+  <data name="warehousetoolStripMenuItem.Text" xml:space="preserve">
+    <value>مستودع</value>
+  </data>
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 26</value>
+  </data>
+  <data name="toolStripMenuItem3.Text" xml:space="preserve">
+    <value>ملفات الاصناف</value>
   </data>
   <data name="تقريرعنصنفToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 26</value>
@@ -232,11 +302,11 @@
   <data name="editItemDataToolStripMenuItem.Text" xml:space="preserve">
     <value>تحرير بيانات العناصر</value>
   </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 26</value>
   </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
-    <value>ملفات الاصناف</value>
+  <data name="toolStripMenuItem4.Text" xml:space="preserve">
+    <value>الجرد</value>
   </data>
   <data name="اجماليالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 26</value>
@@ -249,12 +319,6 @@
   </data>
   <data name="lowStockInventoryToolStripMenuItem.Text" xml:space="preserve">
     <value>جرد مخزون منخفض</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 26</value>
-  </data>
-  <data name="toolStripMenuItem4.Text" xml:space="preserve">
-    <value>الجرد</value>
   </data>
   <data name="تقريرعنالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 26</value>
@@ -273,12 +337,6 @@
   </data>
   <data name="الاصنافغيرالمتحركهToolStripMenuItem.Text" xml:space="preserve">
     <value>الاصناف غير المتحركه*</value>
-  </data>
-  <data name="warehousetoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 26</value>
-  </data>
-  <data name="warehousetoolStripMenuItem.Text" xml:space="preserve">
-    <value>مستودع</value>
   </data>
   <data name="productsServicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 26</value>
@@ -346,12 +404,6 @@
   <data name="taxesVATToolStripMenuItem1.Text" xml:space="preserve">
     <value>الضرائب / VAT</value>
   </data>
-  <data name="itemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 24</value>
-  </data>
-  <data name="itemsToolStripMenuItem.Text" xml:space="preserve">
-    <value>العناصر</value>
-  </data>
   <data name="newTransactionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 26</value>
   </data>
@@ -384,12 +436,6 @@
   </data>
   <data name="allPurchaseOrdersToolStripMenuItem.Text" xml:space="preserve">
     <value>جميع أوامر الشراء</value>
-  </data>
-  <data name="pOSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 24</value>
-  </data>
-  <data name="pOSToolStripMenuItem.Text" xml:space="preserve">
-    <value>المشتريات</value>
   </data>
   <data name="newTransactionToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 26</value>
@@ -451,12 +497,6 @@
   <data name="iCTReleaseToolStripMenuItem.Text" xml:space="preserve">
     <value>الافراج عن نقل</value>
   </data>
-  <data name="salesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 24</value>
-  </data>
-  <data name="salesToolStripMenuItem1.Text" xml:space="preserve">
-    <value> المبيعات</value>
-  </data>
   <data name="customersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 26</value>
   </data>
@@ -508,11 +548,11 @@
   <data name="accountsToolStripMenuItem1.Text" xml:space="preserve">
     <value>حسابات</value>
   </data>
-  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
+  <data name="salesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 26</value>
   </data>
-  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
-    <value>المحاسبه</value>
+  <data name="salesToolStripMenuItem.Text" xml:space="preserve">
+    <value>مبيعات</value>
   </data>
   <data name="dailySaleReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 26</value>
@@ -541,17 +581,8 @@
   <data name="categoryWiseSalesSummaryToolStripMenuItem.Text" xml:space="preserve">
     <value>ملخص مبيعات الفئة الحكيمة</value>
   </data>
-  <data name="salesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 26</value>
-  </data>
-  <data name="salesToolStripMenuItem.Text" xml:space="preserve">
-    <value>مبيعات</value>
-  </data>
-  <data name="purchaseReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 26</value>
-  </data>
-  <data name="purchaseReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>تقرير المشتريات</value>
+  <data name="byPaymentMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 26</value>
   </data>
   <data name="purchasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 26</value>
@@ -559,11 +590,20 @@
   <data name="purchasesToolStripMenuItem1.Text" xml:space="preserve">
     <value>المشتريات</value>
   </data>
+  <data name="purchaseReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 26</value>
+  </data>
+  <data name="purchaseReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>تقرير المشتريات</value>
+  </data>
   <data name="warehouseToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 26</value>
   </data>
   <data name="warehouseToolStripMenuItem1.Text" xml:space="preserve">
     <value>مستودع</value>
+  </data>
+  <data name="salesExpensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 26</value>
   </data>
   <data name="branchSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 26</value>
@@ -622,26 +662,11 @@
   <data name="banksReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 26</value>
   </data>
-  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 24</value>
-  </data>
-  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
-    <value>التقارير</value>
-  </data>
-  <data name="purchasesToolStripMenuItem.Text" xml:space="preserve">
-    <value>الخدمات</value>
-  </data>
   <data name="employeesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 26</value>
   </data>
   <data name="employeesToolStripMenuItem.Text" xml:space="preserve">
     <value>الموظفين</value>
-  </data>
-  <data name="humanResourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 24</value>
-  </data>
-  <data name="humanResourceToolStripMenuItem.Text" xml:space="preserve">
-    <value>الموارد البشريه</value>
   </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 26</value>
@@ -667,33 +692,29 @@
   <data name="CloseAllToolStripMenuItem.Text" xml:space="preserve">
     <value>إغلاق الكل</value>
   </data>
-  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 24</value>
-  </data>
-  <data name="windowsMenu.Text" xml:space="preserve">
-    <value>ويندوز</value>
-  </data>
   <data name="shortcutsKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 26</value>
   </data>
   <data name="shortcutsKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>مفاتيح الاختصارات</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 24</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>يساعد</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="menuStrip1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 26</value>
   </data>
   <data name="sideMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1113, 32</value>
+  </data>
+  <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 670</value>
+  </data>
   <data name="toolStripButton_dashboard.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 48</value>
+  </data>
+  <data name="toolStripButton_dashboard.Text" xml:space="preserve">
+    <value>لوحة القيادة</value>
   </data>
   <data name="toolStripButton_sales.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 48</value>
@@ -730,6 +751,12 @@
   </data>
   <data name="toolStripButtonDailySaleReport.Text" xml:space="preserve">
     <value>تقرير يومي</value>
+  </data>
+  <data name="toolStripButton_Help.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 48</value>
+  </data>
+  <data name="toolStripButton_Help.Text" xml:space="preserve">
+    <value>مساعدة</value>
   </data>
   <data name="toolStripButton_salesv1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -770,11 +797,23 @@
   <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 4</value>
   </data>
-  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1113, 32</value>
+  <data name="toolStripButtonNewPOS.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
+        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
+        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
+        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
+        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
+        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
+        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
+        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
+        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
+        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
+</value>
   </data>
-  <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 670</value>
+  <data name="toolStripButtonNewPOS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 48</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -799,5 +838,8 @@
         //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAA==
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
 </root>
