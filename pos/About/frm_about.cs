@@ -61,7 +61,7 @@ namespace pos.About
                 SizeMode = PictureBoxSizeMode.Zoom,
                 BorderStyle = BorderStyle.FixedSingle
             };
-            TryLoadImage(picLogo, Path.Combine(Application.StartupPath, "nozum.ico"));
+            TryLoadImage(picLogo, Path.Combine(Application.StartupPath, "nozum.png"));
 
             // Main company labels
             lblCompanyName = new Label
