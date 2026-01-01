@@ -6,7 +6,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace POS.DLL
 {
@@ -27,7 +26,7 @@ namespace POS.DLL
                 cmd.Parameters.AddWithValue("@OperationType", "");
                 cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
-                DataTable dt = new DataTable(); 
+                DataTable dt = new DataTable();
                 try
                 {
                     cn.Open();
@@ -35,7 +34,7 @@ namespace POS.DLL
                     {
                         da.Fill(dt);
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -43,7 +42,7 @@ namespace POS.DLL
                 }
                 return dt;
             }
-            
+
         }
         public String GetMaxProductNumber()
         {
@@ -56,7 +55,7 @@ namespace POS.DLL
                         cn.Open();
 
                         SqlCommand cmd = new SqlCommand("SELECT item_number FROM pos_products ORDER BY id desc", cn);
-                        
+
                         string maxId = Convert.ToString(cmd.ExecuteScalar());
 
                         if (string.IsNullOrEmpty(maxId))
@@ -135,11 +134,11 @@ namespace POS.DLL
                             " FROM pos_products AS P" +
                             " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                             //" WHERE (contains(P.name,@keyword_name) OR contains(P.item_number,@item_number) OR contains(P.item_number_2,@item_number_2) OR contains(P.description,@keyword_desc) OR contains(P.code,@keyword_code)) AND P.branch_id = @branch_id";
-                            " WHERE p.deleted=0 AND contains(P.*,'" + keyword + "')"+
+                            " WHERE p.deleted=0 AND contains(P.*,'" + keyword + "')" +
                             " ORDER BY qty desc";
 
                 SqlCommand command = new SqlCommand(query, connection);
-                
+
                 try
                 {
                     if (connection.State == ConnectionState.Closed)
@@ -151,21 +150,21 @@ namespace POS.DLL
                         {
                             products.Add(new ProductModal
                             {
-                                id = reader.GetInt32(0), 
+                                id = reader.GetInt32(0),
                                 item_number = reader.GetString(1),
-                                
-                                code = reader.GetString(2), 
-                                name = reader.GetString(3), 
-                                name_ar = reader.GetString(4), 
-                                category_code = reader.GetString(5), 
+
+                                code = reader.GetString(2),
+                                name = reader.GetString(3),
+                                name_ar = reader.GetString(4),
+                                category_code = reader.GetString(5),
                                 item_type = reader.GetString(6),
                                 brand_code = reader.GetString(7),
                                 status = reader.GetBoolean(8),
                                 barcode = reader.GetString(9),
                                 avg_cost = (double)reader.GetDecimal(10),
                                 cost_price = (double)reader.GetDecimal(11),
-                                unit_price = (double)reader.GetDecimal(12), 
-                                unit_price_2 = (double)reader.GetDecimal(13), 
+                                unit_price = (double)reader.GetDecimal(12),
+                                unit_price_2 = (double)reader.GetDecimal(13),
                                 tax_id = reader.GetInt32(14),
                                 location_code = reader.GetString(15),
                                 unit_id = reader.GetInt32(16),
@@ -215,7 +214,7 @@ namespace POS.DLL
 
                 cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                 cmd.Parameters.AddWithValue("@Product_id", Product_id);
-                                
+
                 try
                 {
                     if (cn.State == ConnectionState.Closed)
@@ -227,7 +226,7 @@ namespace POS.DLL
                     {
                         da.Fill(dt);
                     }
-                                      
+
                 }
                 catch (Exception ex)
                 {
@@ -261,7 +260,7 @@ namespace POS.DLL
                                 " FROM pos_products p " +
                                 " LEFT JOIN pos_product_stocks ps ON p.id = ps.item_id" +
                                 " WHERE p.deleted=0 AND p.code = @code ";
-                               // " AND ps.branch_id = @branch_id";
+                            // " AND ps.branch_id = @branch_id";
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@code", Product_code);
@@ -308,7 +307,7 @@ namespace POS.DLL
                                 " FROM pos_products p " +
                                 " LEFT JOIN pos_product_stocks ps ON p.id = ps.item_id" +
                                 " WHERE p.deleted=0 AND p.item_number = @item_number ";
-                                //" AND ps.branch_id = @branch_id";
+                            //" AND ps.branch_id = @branch_id";
 
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@item_number", item_number);
@@ -391,7 +390,7 @@ namespace POS.DLL
                         if (cn.State == ConnectionState.Closed)
                         {
                             cn.Open();
-                            
+
                             string[] words = condition.Split(' ');
                             string keyword = "";
 
@@ -442,7 +441,7 @@ namespace POS.DLL
 
                         }
 
-                       
+
                     }
                     catch
                     {
@@ -502,7 +501,7 @@ namespace POS.DLL
                             {
                                 da.Fill(dt);
                             }
-                            
+
                         }
 
                         return dt;
@@ -658,10 +657,10 @@ namespace POS.DLL
 
                                 //Fallback for short search terms(FREETEXT ignores words < 3 chars)
                                 if (condition.Trim().Length > 3)
-                                    {
-                                        query += " OR P.code LIKE @fallbackSearch";
-                                        cmd.Parameters.AddWithValue("@fallbackSearch", "%" + condition + "%");
-                                    }
+                                {
+                                    query += " OR P.code LIKE @fallbackSearch";
+                                    cmd.Parameters.AddWithValue("@fallbackSearch", "%" + condition + "%");
+                                }
                             }
 
                             // Add optional filters
@@ -742,7 +741,7 @@ namespace POS.DLL
                                 string containsClause = BuildContainsClause(condition);
 
                                 // Combine both approaches with OR
-                                query += " AND (" + containsClause ;
+                                query += " AND (" + containsClause;
 
                                 //string containsClause1 = OptimizeSearchTerm(condition);
 
@@ -762,7 +761,7 @@ namespace POS.DLL
                                 else
                                 {
                                     query += ")";
-                            }
+                                }
                             }
 
                             // Add optional filters
@@ -953,7 +952,7 @@ namespace POS.DLL
                             query += " ORDER BY qty DESC";
                             cmd.CommandText = query;
                             cmd.Connection = cn;
-                            
+
                             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                             {
                                 da.Fill(dt);
@@ -1091,12 +1090,12 @@ namespace POS.DLL
                                     LEFT JOIN pos_categories C WITH (NOLOCK) ON C.code=P.category_code
                                     WHERE p.deleted=0 ";
 
-                            
-                            if(fromLocation == "All" && toLocation == "All")
+
+                            if (fromLocation == "All" && toLocation == "All")
                             {
                                 query += ""; //search all locations
                             }
-                            else if(!string.IsNullOrEmpty(fromLocation) && fromLocation != "all")
+                            else if (!string.IsNullOrEmpty(fromLocation) && fromLocation != "all")
                             {
                                 query += " AND p.location_code >= @fromLocation AND p.location_code <= @toLocation";
 
@@ -1418,7 +1417,7 @@ namespace POS.DLL
                 }
             }
         }
-        public DataTable SearchRecordByProductCode(string product_code) 
+        public DataTable SearchRecordByProductCode(string product_code)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1579,7 +1578,7 @@ namespace POS.DLL
                                 " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                                 " WHERE p.deleted=0 AND P.item_number = @item_number";
-                            
+
                             cmd.Parameters.AddWithValue("@item_number", item_number);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
@@ -1626,7 +1625,7 @@ namespace POS.DLL
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                                 " WHERE P.supplier_id = @supplierId AND P.deleted = 0";
 
-                             cmd.Parameters.AddWithValue("@supplierId", supplierId);
+                            cmd.Parameters.AddWithValue("@supplierId", supplierId);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
                             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -1746,7 +1745,7 @@ namespace POS.DLL
             }
             return (int)result;
         }
-        
+
         public int Update(ProductModal obj)
         {
             Int32 result = 0;
@@ -1810,7 +1809,7 @@ namespace POS.DLL
                         Log.LogAction("Update Product", $"Product Code: {obj.code}, Product Name: {obj.name}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                     }
                     catch
-                   {
+                    {
                         throw;
                     }
                 }
@@ -2001,6 +2000,41 @@ namespace POS.DLL
 
         }
 
+        // Get product adjustment by invoice no
+        public DataTable GetProductAdjustmentsByInvoiceNo(string invoice_no)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        DataTable dt = new DataTable();
+                        if (cn.State == ConnectionState.Closed)
+                        {
+                            cn.Open();
+                            cmd.Connection = cn;
+                            cmd.CommandText = @"SELECT p.name,p.name_ar,p.category_code,p.location_code,p.qty,p.item_type,
+                            pa.*,pa.qty as adjustment_qty FROM pos_product_adjustment pa
+                            LEFT JOIN pos_products p ON p.item_number=pa.item_number
+                            WHERE pa.invoice_no = @invoice_no AND pa.branch_id = @branch_id";
+                            cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                da.Fill(dt);
+                            }
+                        }
+                        return dt;
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+
         public int Delete(int ProductId)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -2086,7 +2120,7 @@ namespace POS.DLL
                             cn.Open();
 
                             cmd.CommandType = CommandType.StoredProcedure;
-                           
+
                             cmd.Parameters.AddWithValue("@item_number", obj.item_number);
                             cmd.Parameters.AddWithValue("@code", obj.code);
                             cmd.Parameters.AddWithValue("@id", obj.id);
@@ -2386,7 +2420,7 @@ namespace POS.DLL
         /// </summary>
 
         private dbConnection dbHelper = new dbConnection();
-        
+
         public DataTable SearchProducts(string searchTerm, int branchId)
         {
             string query = @"
@@ -2559,37 +2593,37 @@ namespace POS.DLL
 
         public bool ProcessSaleTransaction(string productCode, int branchId, decimal quantity,
                                          decimal unitPrice, decimal costPrice, int userId,
-                                         string invoiceNo, string itemNumber,int? customerId = null,
+                                         string invoiceNo, string itemNumber, int? customerId = null,
                                          string locationCode = "MAIN")
         {
             //using (var transaction = new System.Transactions.TransactionScope())
-            
-                try
-                {
-                    // Update stock (negative quantity for sale)
-                    bool stockUpdated = UpdateProductStock(
-                        itemNumber, branchId, -quantity, locationCode, userId, "SALE");
 
-                    if (!stockUpdated)
-                        return false;
+            try
+            {
+                // Update stock (negative quantity for sale)
+                bool stockUpdated = UpdateProductStock(
+                    itemNumber, branchId, -quantity, locationCode, userId, "SALE");
 
-                    // Record inventory transaction
-                    bool inventoryRecorded = inventoryDAL.RecordInventoryTransaction(
-                        productCode, -quantity, costPrice, unitPrice, branchId, userId,
-                        $"Sale - Invoice: {invoiceNo}", invoiceNo, "SALE", itemNumber,
-                        customerId, null, locationCode);
+                if (!stockUpdated)
+                    return false;
 
-                    if (!inventoryRecorded)
-                        return false;
+                // Record inventory transaction
+                bool inventoryRecorded = inventoryDAL.RecordInventoryTransaction(
+                    productCode, -quantity, costPrice, unitPrice, branchId, userId,
+                    $"Sale - Invoice: {invoiceNo}", invoiceNo, "SALE", itemNumber,
+                    customerId, null, locationCode);
 
-                    //transaction.Complete();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Error processing sale transaction: {ex.Message}", ex);
-                }
-            
+                if (!inventoryRecorded)
+                    return false;
+
+                //transaction.Complete();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error processing sale transaction: {ex.Message}", ex);
+            }
+
         }
     }
 }

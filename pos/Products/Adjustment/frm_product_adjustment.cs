@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using com.sun.rowset.@internal;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Data;
@@ -38,7 +39,8 @@ namespace pos
                     {
                         ProductModal info = new ProductModal();
                         ProductBLL productBLLObj = new ProductBLL();
-                        
+                        string invoice_no = productBLLObj.GetMaxAdjustmentInvoiceNo();
+
                         for (int i = 0; i < grid_search_products.Rows.Count; i++)
                         {
                             if (grid_search_products.Rows[i].Cells["id"].Value != null)
@@ -48,7 +50,7 @@ namespace pos
                                 double avg_cost = (grid_search_products.Rows[i].Cells["avg_cost"].Value != null ? double.Parse(grid_search_products.Rows[i].Cells["avg_cost"].Value.ToString()) : 0); 
                                 double unit_price = (grid_search_products.Rows[i].Cells["unit_price"].Value != null ? double.Parse(grid_search_products.Rows[i].Cells["unit_price"].Value.ToString()) : 0); 
                                 
-                                info.invoice_no = txt_ref_no.Text;
+                                info.invoice_no = invoice_no;
                                 info.item_number = grid_search_products.Rows[i].Cells["item_number"].Value.ToString();
                                 info.code = grid_search_products.Rows[i].Cells["code"].Value.ToString();
                                 info.id = int.Parse(grid_search_products.Rows[i].Cells["id"].Value.ToString()); 
@@ -69,11 +71,11 @@ namespace pos
                                     if(total > 0)
                                     {
                                         //Product Adjustment JOURNAL ENTRY (credit)
-                                        Insert_Journal_entry(txt_ref_no.Text, item_variance_acc_id, 0, total, txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
+                                        Insert_Journal_entry(invoice_no, item_variance_acc_id, 0, total, txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
                                         /////////////
 
                                         ///Inventory JOURNAL ENTRY (debit)
-                                        Insert_Journal_entry(txt_ref_no.Text, inventory_acc_id, total, 0, txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
+                                        Insert_Journal_entry(invoice_no, inventory_acc_id, total, 0, txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
                                     }
                                     
                                 }
@@ -82,10 +84,10 @@ namespace pos
                                     if (Math.Abs(total) > 0)
                                     {
                                         //Product Adjustment JOURNAL ENTRY (Debit)
-                                        Insert_Journal_entry(txt_ref_no.Text, item_variance_acc_id, Math.Abs(total), 0, txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
+                                        Insert_Journal_entry(invoice_no, item_variance_acc_id, Math.Abs(total), 0, txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
 
                                         ///Inventory JOURNAL ENTRY (credit)
-                                        Insert_Journal_entry(txt_ref_no.Text, inventory_acc_id, 0, Math.Abs(total), txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
+                                        Insert_Journal_entry(invoice_no, inventory_acc_id, 0, Math.Abs(total), txt_date.Value.Date, "Product Adjustment", 0, 0, 0);
 
                                     }
                                 }
@@ -124,7 +126,7 @@ namespace pos
         private void GetMAXInvoiceNo()
         {
             ProductBLL objBLL = new ProductBLL();
-            txt_ref_no.Text = objBLL.GetMaxAdjustmentInvoiceNo();
+            txt_ref_no.Text =  objBLL.GetMaxAdjustmentInvoiceNo();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -169,42 +171,55 @@ namespace pos
                 ProductBLL productsBLL_obj = new ProductBLL();
                 DataTable product_dt = new DataTable();
 
-                if (product_code != "")
+                if (!string.IsNullOrWhiteSpace(product_code))
                 {
                     product_dt = productsBLL_obj.SearchRecordByProductNumber(product_code);
                 }
-                
-                //grid_search_products.Rows.Clear();
-                //grid_search_products.Refresh();
 
                 if (product_dt.Rows.Count > 0)
                 {
-
                     foreach (DataRow myProductView in product_dt.Rows)
                     {
                         int id = Convert.ToInt32(myProductView["id"]);
-                        string code = myProductView["code"].ToString();
-                        string category = myProductView["category"].ToString();
-                        string name = myProductView["name"].ToString();
-                        string name_ar = myProductView["name_ar"].ToString();
-                        string location_code = myProductView["location_code"].ToString();
-                        decimal qty = Math.Round(Convert.ToDecimal(myProductView["qty"].ToString()),2);
-                        decimal adjustment_qty = Math.Round(Convert.ToDecimal(myProductView["qty"].ToString()),2);
-                        decimal avg_cost = Math.Round(Convert.ToDecimal(myProductView["avg_cost"].ToString()),2);
-                        decimal unit_price = Math.Round(Convert.ToDecimal(myProductView["unit_price"].ToString()),2);
-                        string description = myProductView["description"].ToString();
-                        string item_type = myProductView["item_type"].ToString();
+                        string code = Convert.ToString(myProductView["code"]);
+                        string category = Convert.ToString(myProductView["category"]);
+                        string name = Convert.ToString(myProductView["name"]);
+                        string name_ar = Convert.ToString(myProductView["name_ar"]);
+                        string location_code = Convert.ToString(myProductView["location_code"]);
+                        decimal qty = Math.Round(Convert.ToDecimal(myProductView["qty"]), 2);
+                        decimal avg_cost = Math.Round(Convert.ToDecimal(myProductView["avg_cost"]), 2);
+                        decimal unit_price = Math.Round(Convert.ToDecimal(myProductView["unit_price"]), 2);
+                        string description = Convert.ToString(myProductView["description"]);
+                        string item_type = Convert.ToString(myProductView["item_type"]);
                         string btn_delete = "Del";
-                        string item_number = myProductView["item_number"].ToString();
+                        string item_number = Convert.ToString(myProductView["item_number"]);
 
+                        // Show qty dialog per product; default to current qty
+                        decimal enteredQty = qty;
+                        using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty))
+                        {
+                            if (qtyDlg.ShowDialog(this) == DialogResult.OK)
+                            {
+                                enteredQty = qtyDlg.EnteredQty; // this is a decimal
+                            }
+                            else
+                            {
+                                // If cancelled, keep default (current qty)
+                                enteredQty = qty;
+                            }
+                        }
 
-                        string[] row0 = { id.ToString(), code,category, name, name_ar, location_code, qty.ToString(), adjustment_qty.ToString(), 
-                            avg_cost.ToString(), unit_price.ToString(),btn_delete, description, item_type,item_number };
+                        string[] row0 =
+                        {
+                            id.ToString(), code, category, name, name_ar, location_code,
+                            qty.ToString("N2"),
+                            enteredQty.ToString("N2"), // adjustment_qty (from dialog)
+                            avg_cost.ToString("N2"), unit_price.ToString("N2"),
+                            btn_delete, description, item_type, item_number
+                        };
 
                         grid_search_products.Rows.Add(row0);
-
                     }
-
                 }
             }
             catch (Exception ex)
@@ -303,7 +318,66 @@ namespace pos
             }
         }
 
+        private void txt_ref_no_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // When press enter search product adjustment
+            if (txt_ref_no.Text != "" && e.KeyChar == (char)Keys.Enter)
+            {
+                // validation
+                if (txt_ref_no.Text.Trim().Length == 0)
+                {
+                    MessageBox.Show("Please enter valid reference no.", "Adjustment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                // select adjustment from table and fill grid
+                ProductBLL _productBll = new ProductBLL();
+                DataTable dt = _productBll.GetProductAdjustmentsByInvoiceNo(txt_ref_no.Text);
 
+                if (dt.Rows.Count > 0)
+                {
+                    grid_search_products.Rows.Clear();
+                    foreach (DataRow myProductView in dt.Rows)
+                    {
+                        int id = Convert.ToInt32(myProductView["id"]);
+                        string code = Convert.ToString(myProductView["item_code"]);
+                        string category = Convert.ToString(myProductView["category_code"]);
+                        string name = Convert.ToString(myProductView["name"]);
+                        string name_ar = Convert.ToString(myProductView["name_ar"]);
+                        string location_code = Convert.ToString(myProductView["location_code"]);
+                        decimal qty = Math.Round(Convert.ToDecimal(myProductView["qty"]), 2);
+                        decimal adjustment_qty = Math.Round(Convert.ToDecimal(myProductView["adjustment_qty"]), 2);
+                        decimal avg_cost = Math.Round(Convert.ToDecimal(myProductView["cost_price"]), 2);
+                        decimal unit_price = Math.Round(Convert.ToDecimal(myProductView["unit_price"]), 2);
+                        string description = Convert.ToString(myProductView["description"]);
+                        string item_type = Convert.ToString(myProductView["item_type"]);
+                        string btn_delete = "Del";
+                        string item_number = Convert.ToString(myProductView["item_number"]);
+                        string[] row0 =
+                        {
+                            id.ToString(), code, category, name, name_ar, location_code,
+                            qty.ToString("N2"),
+                            adjustment_qty.ToString("N2"), // adjustment_qty
+                            avg_cost.ToString("N2"), unit_price.ToString("N2"),
+                            btn_delete, description, item_type, item_number
+                        };
+                        grid_search_products.Rows.Add(row0);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No record found.", "Adjustment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
 
+        private void Btn_clear_Click(object sender, EventArgs e)
+        {
+            // Clear all fields
+            txt_ref_no.Clear();
+            grid_search_products.DataSource = null;
+            grid_search_products.Rows.Clear();
+            grid_search_products.Refresh();
+
+        }
     }
 }

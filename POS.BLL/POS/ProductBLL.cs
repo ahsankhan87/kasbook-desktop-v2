@@ -73,6 +73,20 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public DataTable GetProductAdjustmentsByInvoiceNo(string invoice_no)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.GetProductAdjustmentsByInvoiceNo(invoice_no);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
         public DataTable GetAllByProductByItemNumber(string item_number)
         {
             try
