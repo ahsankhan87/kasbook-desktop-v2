@@ -282,7 +282,11 @@ namespace pos
                 {
                     btn_update.PerformClick();
                 }
-
+                // Print Ctrl + P
+                if (e.Control && e.KeyCode == Keys.P)
+                {
+                    btn_print.PerformClick();
+                }
             }
             catch (Exception ex)
             {

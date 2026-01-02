@@ -35,17 +35,6 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txt_date = new System.Windows.Forms.DateTimePicker();
-            this.txt_ref_no = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.rb_by_name = new System.Windows.Forms.RadioButton();
-            this.rb_by_code = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_close = new System.Windows.Forms.Button();
-            this.btn_update = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +49,19 @@
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_date = new System.Windows.Forms.DateTimePicker();
+            this.txt_ref_no = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rb_by_name = new System.Windows.Forms.RadioButton();
+            this.rb_by_code = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.Btn_clear = new System.Windows.Forms.Button();
+            this.btn_close = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
+            this.btn_print = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,85 +104,6 @@
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_search_products.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_search_products_CellContentClick);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txt_date);
-            this.panel1.Controls.Add(this.txt_ref_no);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.rb_by_name);
-            this.panel1.Controls.Add(this.rb_by_code);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_search);
-            this.panel1.Controls.Add(this.Btn_clear);
-            this.panel1.Controls.Add(this.btn_close);
-            this.panel1.Controls.Add(this.btn_update);
-            this.panel1.Controls.Add(this.btn_search);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // txt_date
-            // 
-            resources.ApplyResources(this.txt_date, "txt_date");
-            this.txt_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_date.Name = "txt_date";
-            // 
-            // txt_ref_no
-            // 
-            resources.ApplyResources(this.txt_ref_no, "txt_ref_no");
-            this.txt_ref_no.Name = "txt_ref_no";
-            this.txt_ref_no.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ref_no_KeyPress);
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // rb_by_name
-            // 
-            resources.ApplyResources(this.rb_by_name, "rb_by_name");
-            this.rb_by_name.Name = "rb_by_name";
-            this.rb_by_name.UseVisualStyleBackColor = true;
-            // 
-            // rb_by_code
-            // 
-            resources.ApplyResources(this.rb_by_code, "rb_by_code");
-            this.rb_by_code.Checked = true;
-            this.rb_by_code.Name = "rb_by_code";
-            this.rb_by_code.TabStop = true;
-            this.rb_by_code.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // btn_close
-            // 
-            resources.ApplyResources(this.btn_close, "btn_close");
-            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_close.Name = "btn_close";
-            this.btn_close.UseVisualStyleBackColor = true;
-            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
-            // 
-            // btn_update
-            // 
-            resources.ApplyResources(this.btn_update, "btn_update");
-            this.btn_update.Name = "btn_update";
-            this.btn_update.UseVisualStyleBackColor = true;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // id
             // 
@@ -292,6 +214,71 @@
             resources.ApplyResources(this.item_number, "item_number");
             this.item_number.Name = "item_number";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txt_date);
+            this.panel1.Controls.Add(this.txt_ref_no);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.rb_by_name);
+            this.panel1.Controls.Add(this.rb_by_code);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.txt_search);
+            this.panel1.Controls.Add(this.Btn_clear);
+            this.panel1.Controls.Add(this.btn_close);
+            this.panel1.Controls.Add(this.btn_update);
+            this.panel1.Controls.Add(this.btn_search);
+            this.panel1.Controls.Add(this.btn_print);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // txt_date
+            // 
+            resources.ApplyResources(this.txt_date, "txt_date");
+            this.txt_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.txt_date.Name = "txt_date";
+            // 
+            // txt_ref_no
+            // 
+            resources.ApplyResources(this.txt_ref_no, "txt_ref_no");
+            this.txt_ref_no.Name = "txt_ref_no";
+            this.txt_ref_no.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ref_no_KeyPress);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // rb_by_name
+            // 
+            resources.ApplyResources(this.rb_by_name, "rb_by_name");
+            this.rb_by_name.Name = "rb_by_name";
+            this.rb_by_name.UseVisualStyleBackColor = true;
+            // 
+            // rb_by_code
+            // 
+            resources.ApplyResources(this.rb_by_code, "rb_by_code");
+            this.rb_by_code.Checked = true;
+            this.rb_by_code.Name = "rb_by_code";
+            this.rb_by_code.TabStop = true;
+            this.rb_by_code.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // Btn_clear
             // 
             resources.ApplyResources(this.Btn_clear, "Btn_clear");
@@ -299,6 +286,28 @@
             this.Btn_clear.Name = "Btn_clear";
             this.Btn_clear.UseVisualStyleBackColor = true;
             this.Btn_clear.Click += new System.EventHandler(this.Btn_clear_Click);
+            // 
+            // btn_close
+            // 
+            resources.ApplyResources(this.btn_close, "btn_close");
+            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_close.Name = "btn_close";
+            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            // 
+            // btn_update
+            // 
+            resources.ApplyResources(this.btn_update, "btn_update");
+            this.btn_update.Name = "btn_update";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
+            // 
+            // btn_print
+            // 
+            resources.ApplyResources(this.btn_print, "btn_print");
+            this.btn_print.Name = "btn_print";
+            this.btn_print.UseVisualStyleBackColor = true;
+            this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
             // 
             // frm_product_adjustment
             // 
@@ -351,5 +360,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn item_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.Button Btn_clear;
+        private System.Windows.Forms.Button btn_print;
     }
 }

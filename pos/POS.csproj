@@ -473,6 +473,9 @@
     <Compile Include="Products\Adjustment\frm_adjust_qty.Designer.cs">
       <DependentUpon>frm_adjust_qty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Adjustment\frm_product_adjustment.Print.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Products\frm_other_stocks.cs">
       <SubType>Form</SubType>
     </Compile>
