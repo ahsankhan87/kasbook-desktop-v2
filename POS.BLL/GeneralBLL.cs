@@ -29,6 +29,32 @@ namespace POS.BLL
             }
         }
 
+        public int UpdateOrDeleteRecord(string table, string setClause, string whereClause)
+        {
+            try
+            {
+                GeneralDLL objDLL = new GeneralDLL();
+                return objDLL.UpdateOrDeleteRecord(table, setClause, whereClause);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int InsertRecord(string table, string columnsCsv, string valuesCsv)
+        {
+            try
+            {
+                GeneralDLL objDLL = new GeneralDLL();
+                return objDLL.InsertRecord(table, columnsCsv, valuesCsv);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public List<string> GetProductsList()
         {
             try

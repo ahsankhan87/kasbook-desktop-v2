@@ -483,5 +483,19 @@ namespace POS.BLL
             }
             return tax;
         }
+
+        public string GetMaxSmallSaleInvoiceNo()
+        {
+            try
+            {
+                SalesDLL salesDLL = new SalesDLL();
+                return salesDLL.GetMaxSmallSaleInvoiceNo();
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
     }
 }

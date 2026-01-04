@@ -867,6 +867,12 @@ namespace pos
                 {
                     txtCustomerSearch.Focus();
                 }
+
+                if (e.Control && e.Alt && e.KeyCode == Keys.S)
+                {
+                    using (var f = new frm_small_sale_settings())
+                        f.ShowDialog(this);
+                }
             }
             catch (Exception ex)
             {
@@ -1606,20 +1612,20 @@ namespace pos
                 if (grid_sales.RowCount > 0)
                 {
                     if (grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
-                    {
-                        int id = int.Parse(grid_sales.CurrentRow.Cells["id"].Value.ToString());
-                        string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
-                        string name = grid_sales.CurrentRow.Cells["name"].Value.ToString();
-                        string category_code = grid_sales.CurrentRow.Cells["category_code"].Value.ToString();
-                        double cost_price = double.Parse(grid_sales.CurrentRow.Cells["cost_price"].Value.ToString());
-                        double unit_price = double.Parse(grid_sales.CurrentRow.Cells["unit_price"].Value.ToString());
+                {
+                    int id = int.Parse(grid_sales.CurrentRow.Cells["id"].Value.ToString());
+                    string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
+                    string name = grid_sales.CurrentRow.Cells["name"].Value.ToString();
+                    string category_code = grid_sales.CurrentRow.Cells["category_code"].Value.ToString();
+                    double cost_price = double.Parse(grid_sales.CurrentRow.Cells["cost_price"].Value.ToString());
+                    double unit_price = double.Parse(grid_sales.CurrentRow.Cells["unit_price"].Value.ToString());
 
 
-                        frm_add_porder porder_obj = new frm_add_porder(this, id, item_number, name, category_code, cost_price, unit_price);
-                        porder_obj.ShowDialog();
-                    }
-
+                    frm_add_porder porder_obj = new frm_add_porder(this, id, item_number, name, category_code, cost_price, unit_price);
+                    porder_obj.ShowDialog();
                 }
+
+            }
             }
             catch (Exception ex)
             {
@@ -2659,32 +2665,7 @@ namespace pos
                             total_tax_var = 0;
                         }
 
-                        if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
-                        {
-                            MessageBox.Show("Update are not allowed", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-
-                            //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
-                            //if (qresult == 0)
-                            //{
-                            //    MessageBox.Show(invoice_no + "  has issue while updating, please try again", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            //    return;
-                            //}
-                            //invoice_no = txt_invoice_no.Text;
-                        }
-                        else
-                        {
-                            if (sale_type == "Quotation")
-                            {
-                                invoice_no = salesObj.GetMaxEstimateInvoiceNo();
-                            }
-                            else
-                            {
-                                invoice_no = salesObj.GetMaxSaleInvoiceNo();
-
-                            }
-
-                        }
+                        
 
                         if (txt_invoice_no.Text != "" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "E") //if estimates
                         {
@@ -2708,6 +2689,39 @@ namespace pos
                         int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
                         string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
                         string PONumber = txtPONumber.Text;
+
+                        double smallSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(200.0);
+                        bool isSmallSale = (sale_type == "Cash" || sale_type == "Credit") && net_total < smallSaleThreshold;
+                        
+                        if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
+                        {
+                            MessageBox.Show("Update are not allowed", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+
+                            //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
+                            //if (qresult == 0)
+                            //{
+                            //    MessageBox.Show(invoice_no + "  has issue while updating, please try again", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //    return;
+                            //}
+                            //invoice_no = txt_invoice_no.Text;
+                        }
+                        else
+                        {
+                            if (sale_type == "Quotation")
+                            {
+                                invoice_no = salesObj.GetMaxEstimateInvoiceNo();
+                            }
+                            else
+                            {
+                                // NEW: pick invoice series based on amount
+                                invoice_no = isSmallSale
+                                    ? salesObj.GetMaxSmallSaleInvoiceNo()   // ZS-000001
+                                    : salesObj.GetMaxSaleInvoiceNo();
+
+                            }
+
+                        }
 
                         //set the date from datetimepicker and set time to te current time
                         DateTime now = DateTime.Now;
@@ -2836,58 +2850,65 @@ namespace pos
 
                                 if (UsersModal.useZatcaEInvoice == true)
                                 {
-                                    DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
-                                    if (activeZatcaCredential == null)
-                                    {
-                                        MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
-                                    }
-                                    // Sign invoice to ZATCA
-
-                                    // Retrieve PCSID credentials from the database using the credentialId
-                                    DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
-                                    if (PCSID_dataRow == null)
-                                    {
-                                        //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
-
-                                        // If PCSID not exist then sign with CSID
-                                        //Sign Invoice with CSID instead of Production CSID
-                                        ZatcaHelper.SignInvoiceToZatca(invoice_no);
-
-                                        // After signing with CSID, send invoice to ZATCA
-                                        // If invoice subtype is Standard then clear it from ZATCA
-                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                    
+                                        DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                                        if (activeZatcaCredential == null)
                                         {
-                                            // Clear invoice from ZATCA
-                                            ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                            MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
                                         }
-                                        else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                        //otherwise Report invoice to ZATCA
+                                        
+                                        // Sign invoice to ZATCA
+                                        // Retrieve PCSID credentials from the database using the credentialId
+                                        DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                                        if (PCSID_dataRow == null)
                                         {
-                                            // Report invoice to ZATCA
-                                            ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                            //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
+
+                                            // If PCSID not exist then sign with CSID
+                                            //Sign Invoice with CSID instead of Production CSID
+                                            ZatcaHelper.SignInvoiceToZatca(invoice_no);
+
+                                            // NEW: skip ZATCA for small sales
+                                            if (!isSmallSale)
+                                            {
+                                                // After signing with CSID, send invoice to ZATCA
+                                                // If invoice subtype is Standard then clear it from ZATCA
+                                                if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                                {
+                                                    // Clear invoice from ZATCA
+                                                    ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                                }
+                                                else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                                //otherwise Report invoice to ZATCA
+                                                {
+                                                    // Report invoice to ZATCA
+                                                    ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                                }
+                                            }
                                         }
-
-                                    }
-                                    else
-                                    {
-                                        //If PCSID exist then sign it 
-                                        ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
-
-                                        // After signing with PCSID, send invoice to ZATCA
-                                        // If invoice subtype is Standard then clear it from ZATCA
-                                        if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                        else
                                         {
-                                            // Clear invoice from ZATCA
-                                            ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
-                                        }
-                                        else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                        //otherwise Report invoice to ZATCA
-                                        {
-                                            // Report invoice to ZATCA
-                                            ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
-                                        }
-                                    }
+                                            //If PCSID exist then sign it 
+                                            ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
 
+                                            // NEW: skip ZATCA for small sales
+                                            if (!isSmallSale)
+                                            {
+                                                // After signing with PCSID, send invoice to ZATCA
+                                                // If invoice subtype is Standard then clear it from ZATCA
+                                                if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                                {
+                                                    // Clear invoice from ZATCA
+                                                    ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                                }
+                                                else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                                //otherwise Report invoice to ZATCA
+                                                {
+                                                    // Report invoice to ZATCA
+                                                    ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                                }
+                                            }
+                                        }
                                 }
                                 //////
                                 ///

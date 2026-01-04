@@ -39,6 +39,61 @@ namespace POS.DLL
             }
         }
 
+        public int UpdateOrDeleteRecord(string table, string setClause, string whereClause)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                    }
+
+                    cmd.Connection = cn;
+
+                    if (string.IsNullOrWhiteSpace(setClause))
+                    {
+                        // DELETE
+                        cmd.CommandText = "DELETE FROM " + table + " WHERE " + whereClause;
+                    }
+                    else
+                    {
+                        // UPDATE
+                        cmd.CommandText = "UPDATE " + table + " SET " + setClause + " WHERE " + whereClause;
+                    }
+
+                    return cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public int InsertRecord(string table, string columnsCsv, string valuesCsv)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                    }
+
+                    cmd.Connection = cn;
+                    cmd.CommandText = "INSERT INTO " + table + " (" + columnsCsv + ") VALUES (" + valuesCsv + ")";
+
+                    return cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
 
         public List<string> GetProductsList()
         {

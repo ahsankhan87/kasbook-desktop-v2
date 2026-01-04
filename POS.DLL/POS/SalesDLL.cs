@@ -254,7 +254,7 @@ namespace POS.DLL
                 }
             }
         }
-        public DataTable SearchInvoices(String invoiceNo, DateTime? fromdate, String type, String subtype, DateTime? todate, String status)
+        public DataTable SearchInvoices(String invoiceNo, DateTime? fromdate, String type, String subtype, DateTime? todate, String status, bool SkipSmallInvoices = true)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -302,6 +302,12 @@ namespace POS.DLL
                         {
                             query.Append(" AND s.zatca_status = @Status");
                             cmd.Parameters.AddWithValue("@Status", status);
+                        }
+
+                        if (SkipSmallInvoices)
+                        {
+                            //exclude sales with invoice numbers starting with ZS-00000
+                            query.Append(" AND s.invoice_no NOT LIKE 'ZS-%'");
                         }
 
                         query.Append(" AND s.branch_id = @branch_id");
@@ -2874,6 +2880,31 @@ namespace POS.DLL
                         throw;
                     }
                 }
+            }
+        }
+
+        public string GetMaxSmallSaleInvoiceNo()
+        {
+            using (var cn = new System.Data.SqlClient.SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new System.Data.SqlClient.SqlCommand())
+            {
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT MAX(invoice_no) FROM pos_sales WHERE invoice_no LIKE 'ZS-%'";
+
+                if (cn.State == System.Data.ConnectionState.Closed)
+                    cn.Open();
+
+                string maxId = Convert.ToString(cmd.ExecuteScalar());
+
+                if (string.IsNullOrWhiteSpace(maxId))
+                {
+                    return "ZS-000001";
+                }
+
+                // ZS-000001
+                int intval = int.Parse(maxId.Substring(3, 6));
+                intval++;
+                return string.Format("ZS-{0:000000}", intval);
             }
         }
     }

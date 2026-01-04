@@ -1305,6 +1305,12 @@
     <Compile Include="Sales\frm_send_whatsapp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Sales\frm_small_sale_settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frm_small_sale_settings.Designer.cs">
+      <DependentUpon>frm_small_sale_settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\frm_zatca_invoices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2261,6 +2267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_send_whatsapp.resx">
       <DependentUpon>frm_send_whatsapp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_small_sale_settings.resx">
+      <DependentUpon>frm_small_sale_settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_zatca_invoices.ar-SA.resx">
       <DependentUpon>frm_zatca_invoices.cs</DependentUpon>
