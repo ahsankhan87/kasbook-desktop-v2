@@ -1223,6 +1223,12 @@
       <DependentUpon>frm_warehouse_report.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\EInvoice.cs" />
+    <Compile Include="Sales\frm_pos_sale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frm_pos_sale.Designer.cs">
+      <DependentUpon>frm_pos_sale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\Frm_print_options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2198,6 +2204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_all_sales.ar-SA.resx">
       <DependentUpon>frm_all_sales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_pos_sale.resx">
+      <DependentUpon>frm_pos_sale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\Frm_print_options.ar-SA.resx">
       <DependentUpon>Frm_print_options.cs</DependentUpon>

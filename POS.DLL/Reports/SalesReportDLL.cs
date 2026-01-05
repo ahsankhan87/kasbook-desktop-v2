@@ -101,7 +101,7 @@ namespace POS.DLL
                         cn.Open();
                         String query = "SELECT S.id,S.sale_date,S.invoice_no," +
                             " C.first_name AS customer_name," +
-                            " SI.item_code,SI.item_number,SI.item_name AS product_name,SI.loc_code,SI.quantity_sold,SI.unit_price," +
+                            " SI.item_code,SI.item_code as code,SI.item_number,SI.item_name AS product_name,SI.loc_code,SI.quantity_sold,SI.unit_price," +
                             " SI.discount_value,"+
                             " SI.tax_rate," +
                             " IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100)) AS vat," +

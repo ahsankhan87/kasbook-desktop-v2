@@ -1,4 +1,5 @@
 ﻿using pos.Reports.Banks;
+using pos.Sales;
 using pos.Security.Admin;
 using pos.Security.Authorization;
 using POS.Core;
@@ -2042,7 +2043,7 @@ namespace pos
 
         private void toolStripButtonNewPOS_Click(object sender, EventArgs e)
         {
-            frmPOS frmPOS = new frmPOS();
+            frm_pos_sale frmPOS = new frm_pos_sale();
             frmPOS.ShowDialog();
         }
 

@@ -1,11 +1,14 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using POS.BLL;
 using POS.Core;
+using QRCoder;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions; // added for phone normalization
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -110,7 +113,7 @@ namespace pos
             btnCancel.Click += (s, e) => this.Close();
 
             this.Controls.AddRange(new Control[] { lblInfo, txtPhone, chkIncludeCode, grpMode, btnSend, btnCancel });
-            
+
             this.AcceptButton = btnSend;
             this.CancelButton = btnCancel;
 
@@ -126,7 +129,8 @@ namespace pos
                 if (_isEstimate)
                 {
                     dt = _estimatesBll.SaleReceipt(_invoiceNo);
-                }else
+                }
+                else
                 {
                     dt = _salesBll.SaleReceipt(_invoiceNo);
 
@@ -194,11 +198,13 @@ namespace pos
                     return;
                 }
                 double total_amount = 0, total_tax = 0, total_discount = 0;
+
                 foreach (DataRow dr in dt.Rows)
                 {
                     total_amount = Convert.ToDouble(dr["total_amount"]);
                     total_tax = Convert.ToDouble(dr["total_tax"]);
                     total_discount = Convert.ToDouble(dr["total_discount"]);
+
                 }
                 double net_total = total_amount - total_discount + total_tax;
                 CompaniesBLL company_obj = new CompaniesBLL();
@@ -218,9 +224,22 @@ namespace pos
                     Postalcode = cdr["Postalcode"].ToString();
                     CountryName = cdr["CountryName"].ToString();
                 }
+                string saleTimeStr = dt.Rows[0].Table.Columns.Contains("sale_time") ? Convert.ToString(dt.Rows[0]["sale_time"]) : null;
+                DateTime saleTime = DateTime.Now;
+                DateTime parsedSaleTime;
+                if (!string.IsNullOrWhiteSpace(saleTimeStr) && DateTime.TryParse(saleTimeStr, out parsedSaleTime))
+                {
+                    saleTime = parsedSaleTime;
+                }
+
+                // IMPORTANT: add qrcode_image + qrcode_image_phase2 columns BEFORE binding report
+                EnsureInvoiceQrColumns(dt, net_total, total_tax, saleTime, company_name, company_vat_no);
+
                 string appPath = Path.GetDirectoryName(Application.ExecutablePath);
                 ReportDocument rpt = new ReportDocument();
                 rpt.Load(appPath + (chkIncludeCode.Checked ? "\\reports\\sales_invoice.rpt" : "\\reports\\sales_invoice_sans_code.rpt"));
+
+                // Bind AFTER we add QR columns
                 rpt.SetDataSource(dt);
 
                 rpt.SetParameterValue("company_name", company_name);
@@ -238,6 +257,7 @@ namespace pos
                 rpt.SetParameterValue("total_vat", total_tax);
                 rpt.SetParameterValue("net_total", net_total);
                 rpt.SetParameterValue("company_email", company_email);
+
 
                 btnSend.Enabled = false;
                 var mode = rbDesktop.Checked ? WhatsAppInvoiceSender.WhatsAppSendMode.Desktop : WhatsAppInvoiceSender.WhatsAppSendMode.Web;
@@ -288,6 +308,111 @@ namespace pos
         private void frm_send_whatsapp_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private static byte[] GenerateQrCodeImage(string qrmsg, int pixelsPerModule)
+        {
+            QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+            QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(qrmsg, QRCodeGenerator.ECCLevel.Q);
+            QRCode qRCode = new QRCode(qRCodeData);
+
+            using (Bitmap bmp = qRCode.GetGraphic(pixelsPerModule))
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bmp.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        private static byte[] GeneratePhase2QrCodeImage(byte[] qrBytes, int pixelsPerModule)
+        {
+            if (qrBytes == null || qrBytes.Length == 0) return null;
+
+            string base64String = Convert.ToBase64String(qrBytes);
+            return GenerateQrCodeImage(base64String, pixelsPerModule);
+        }
+
+        private static void EnsureInvoiceQrColumns(DataTable dt, double netTotal, double totalTax, DateTime saleTime, string companyName, string companyVatNo)
+        {
+            // Phase-1 TLV QR (always)
+            string s_date = saleTime.ToString("yyyy-MM-ddTHH:mm:ss");
+            string SallerName = gethexstring(1, companyName);
+            string VATReg = gethexstring(2, companyVatNo);
+            string DateTimeStr = gethexstring(3, s_date);
+            string TotalAmt = gethexstring(4, netTotal.ToString());
+            string VatAmt = gethexstring(5, totalTax.ToString());
+            string qtcode_String = SallerName + VATReg + DateTimeStr + TotalAmt + VatAmt;
+
+            byte[] imageData = GenerateQrCodeImage(HexToBase64(qtcode_String), pixelsPerModule: 20);
+
+            // Phase-2 QR (from DB column: zatca_qrcode_phase2)
+            byte[] zatca_qrcode_phase2 = null;
+            if (dt.Columns.Contains("zatca_qrcode_phase2") && dt.Rows.Count > 0)
+                zatca_qrcode_phase2 = (dt.Rows[0]["zatca_qrcode_phase2"] == DBNull.Value ? null : (byte[])dt.Rows[0]["zatca_qrcode_phase2"]);
+
+            byte[] imageData_phase2 = GeneratePhase2QrCodeImage(zatca_qrcode_phase2, pixelsPerModule: 20);
+
+            if (!dt.Columns.Contains("qrcode_image"))
+                dt.Columns.Add("qrcode_image", typeof(byte[]));
+            if (!dt.Columns.Contains("qrcode_image_phase2"))
+                dt.Columns.Add("qrcode_image_phase2", typeof(byte[]));
+
+            foreach (DataRow r in dt.Rows)
+            {
+                r["qrcode_image"] = imageData;
+                r["qrcode_image_phase2"] = (object)imageData_phase2 ?? DBNull.Value;
+            }
+        }
+        static string gethexstring(Int32 TagNo, string TagValue)
+        {
+
+            string decString = TagValue;
+            byte[] bytes = Encoding.UTF8.GetBytes(decString);
+            string hexString = BitConverter.ToString(bytes);
+
+            string StrTagNo = String.Format("0{0:X}", TagNo);
+            String TagNoVal = StrTagNo.Substring(StrTagNo.Length - 2, 2);
+
+            string StrTagValue_Length = String.Format("0{0:X}", bytes.Length);
+            String TagValue_LengthVal = StrTagValue_Length.Substring(StrTagValue_Length.Length - 2, 2);
+
+
+            hexString = TagNoVal + TagValue_LengthVal + hexString.Replace("-", "");
+            return hexString;
+        }
+
+        static string gethexDec(Int32 TagValue)
+        {
+            string hxint = String.Format("0{0:X}", TagValue);
+            return hxint.Substring(hxint.Length - 2, 2);
+
+        }
+        public static string HexToBase64(string strInput)
+        {
+            try
+            {
+                var bytes = new byte[strInput.Length / 2];
+                for (var i = 0; i < bytes.Length; i++)
+                {
+                    bytes[i] = Convert.ToByte(strInput.Substring(i * 2, 2), 16);
+                }
+                return Convert.ToBase64String(bytes);
+            }
+            catch (Exception)
+            {
+                return "-1";
+            }
+        }
+
+        private string StringToHex(string hexstring)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char t in hexstring)
+            {
+                //Note: X for upper, x for lower case letters
+                sb.Append(Convert.ToInt32(t).ToString("x"));
+            }
+            return sb.ToString();
         }
     }
 }
