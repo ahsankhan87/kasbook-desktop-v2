@@ -760,7 +760,7 @@ namespace pos.Master.Companies.zatca
                 }
                 // Show the response in a message box or process it as needed
                 // For example, you can show the response in a message box
-                MessageBox.Show($"ZATCA Response:\n{response}", "Zatca Response", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show($"ZATCA Response:\n{response}", "Zatca Response", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Alternatively, you can log the response or save it to a file/database
 
 
@@ -875,7 +875,7 @@ namespace pos.Master.Companies.zatca
                 }
                 // Show the response in a message box or process it as needed
                 // For example, you can show the response in a message box
-                MessageBox.Show($"ZATCA Response:\n{response}", "Zatca Response");
+                //MessageBox.Show($"ZATCA Response:\n{response}", "Zatca Response");
                 // Alternatively, you can log the response or save it to a file/database
 
             }
@@ -1097,26 +1097,26 @@ namespace pos.Master.Companies.zatca
                     string pcsidCertBase64 = PCSID_dataRow["cert_base64"].ToString();
                     string pcsidSecret = PCSID_dataRow["secret_key"].ToString();
 
-                    var resultValidator = eInvoiceValidator.ValidateEInvoice(
-                        signResult.SignedEInvoice,
-                        pcsidCertBase64,
-                        pcsidSecret); 
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(
+                    //    signResult.SignedEInvoice,
+                    //    pcsidCertBase64,
+                    //    pcsidSecret); 
                     
-                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, decodedCert, privateKey_CSID);
+                    ////var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, decodedCert, privateKey_CSID);
 
-                    if (!resultValidator.IsValid)
-                    {
-                        var failedSteps = resultValidator.ValidationSteps
-                           .Where(step => !step.IsValid)
-                           .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
-                           .ToList();
+                    //if (!resultValidator.IsValid)
+                    //{
+                    //    var failedSteps = resultValidator.ValidationSteps
+                    //       .Where(step => !step.IsValid)
+                    //       .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                    //       .ToList();
 
-                        string fullError = failedSteps.Any()
-                            ? string.Join("\n\n", failedSteps)
-                            : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+                    //    string fullError = failedSteps.Any()
+                    //        ? string.Join("\n\n", failedSteps)
+                    //        : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
 
-                        MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
-                    }
+                    //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    //}
 
                     
                     ////GetRequestApi Payload
