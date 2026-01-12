@@ -40,6 +40,21 @@ namespace pos.Sales
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridZatcaInvoices = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zatca_mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.account = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_subtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zatca_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zatca_message = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prevSaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prevInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sale_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnComplianceChecks = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnViewResponse = new System.Windows.Forms.Button();
@@ -60,38 +75,23 @@ namespace pos.Sales
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmb_status = new System.Windows.Forms.ComboBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zatca_mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.account = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_subtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zatca_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zatca_message = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prevSaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prevInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sale_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewComplianceCheckButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridZatcaInvoices
             // 
-            resources.ApplyResources(this.gridZatcaInvoices, "gridZatcaInvoices");
             this.gridZatcaInvoices.AllowUserToAddRows = false;
             this.gridZatcaInvoices.AllowUserToDeleteRows = false;
             this.gridZatcaInvoices.AllowUserToOrderColumns = true;
@@ -112,204 +112,11 @@ namespace pos.Sales
             this.prevSaleDate,
             this.prevInvoiceNo,
             this.sale_time});
+            resources.ApplyResources(this.gridZatcaInvoices, "gridZatcaInvoices");
             this.gridZatcaInvoices.MultiSelect = false;
             this.gridZatcaInvoices.Name = "gridZatcaInvoices";
             this.gridZatcaInvoices.ReadOnly = true;
             this.gridZatcaInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // btnComplianceChecks
-            // 
-            resources.ApplyResources(this.btnComplianceChecks, "btnComplianceChecks");
-            this.btnComplianceChecks.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnComplianceChecks.Name = "btnComplianceChecks";
-            this.btnComplianceChecks.UseVisualStyleBackColor = false;
-            this.btnComplianceChecks.Click += new System.EventHandler(this.btnReport_Click);
-            // 
-            // btnRefresh
-            // 
-            resources.ApplyResources(this.btnRefresh, "btnRefresh");
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnViewResponse
-            // 
-            resources.ApplyResources(this.btnViewResponse, "btnViewResponse");
-            this.btnViewResponse.Name = "btnViewResponse";
-            this.btnViewResponse.UseVisualStyleBackColor = true;
-            this.btnViewResponse.Click += new System.EventHandler(this.btnViewResponse_Click);
-            // 
-            // lblTitle
-            // 
-            resources.ApplyResources(this.lblTitle, "lblTitle");
-            this.lblTitle.Name = "lblTitle";
-            // 
-            // btn_viewQR
-            // 
-            resources.ApplyResources(this.btn_viewQR, "btn_viewQR");
-            this.btn_viewQR.Name = "btn_viewQR";
-            this.btn_viewQR.UseVisualStyleBackColor = true;
-            this.btn_viewQR.Click += new System.EventHandler(this.btn_viewQR_Click);
-            // 
-            // btn_signInvoice
-            // 
-            resources.ApplyResources(this.btn_signInvoice, "btn_signInvoice");
-            this.btn_signInvoice.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btn_signInvoice.Name = "btn_signInvoice";
-            this.btn_signInvoice.UseVisualStyleBackColor = false;
-            this.btn_signInvoice.Click += new System.EventHandler(this.btn_signInvoice_Click);
-            // 
-            // btn_invoice_report
-            // 
-            resources.ApplyResources(this.btn_invoice_report, "btn_invoice_report");
-            this.btn_invoice_report.BackColor = System.Drawing.Color.YellowGreen;
-            this.btn_invoice_report.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_invoice_report.Name = "btn_invoice_report";
-            this.btn_invoice_report.UseVisualStyleBackColor = false;
-            this.btn_invoice_report.Click += new System.EventHandler(this.btn_invoice_report_Click);
-            // 
-            // btn_Invoice_clearance
-            // 
-            resources.ApplyResources(this.btn_Invoice_clearance, "btn_Invoice_clearance");
-            this.btn_Invoice_clearance.BackColor = System.Drawing.Color.YellowGreen;
-            this.btn_Invoice_clearance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_Invoice_clearance.Name = "btn_Invoice_clearance";
-            this.btn_Invoice_clearance.UseVisualStyleBackColor = false;
-            this.btn_Invoice_clearance.Click += new System.EventHandler(this.btn_Invoice_clearance_Click);
-            // 
-            // cmbSubtype
-            // 
-            resources.ApplyResources(this.cmbSubtype, "cmbSubtype");
-            this.cmbSubtype.FormattingEnabled = true;
-            this.cmbSubtype.Name = "cmbSubtype";
-            // 
-            // cmbType
-            // 
-            resources.ApplyResources(this.cmbType, "cmbType");
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Name = "cmbType";
-            // 
-            // txtInvoiceNo
-            // 
-            resources.ApplyResources(this.txtInvoiceNo, "txtInvoiceNo");
-            this.txtInvoiceNo.Name = "txtInvoiceNo";
-            // 
-            // dtpFromDate
-            // 
-            resources.ApplyResources(this.dtpFromDate, "dtpFromDate");
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Name = "dtpFromDate";
-            // 
-            // btnDownloadUBL
-            // 
-            resources.ApplyResources(this.btnDownloadUBL, "btnDownloadUBL");
-            this.btnDownloadUBL.Name = "btnDownloadUBL";
-            this.btnDownloadUBL.UseVisualStyleBackColor = true;
-            this.btnDownloadUBL.Click += new System.EventHandler(this.btnDownloadUBL_Click);
-            // 
-            // btnSearch
-            // 
-            resources.ApplyResources(this.btnSearch, "btnSearch");
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cmb_status);
-            this.panel1.Controls.Add(this.cmbSubtype);
-            this.panel1.Controls.Add(this.btnClose);
-            this.panel1.Controls.Add(this.btnRefresh);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.cmbType);
-            this.panel1.Controls.Add(this.txtInvoiceNo);
-            this.panel1.Controls.Add(this.dtpToDate);
-            this.panel1.Controls.Add(this.dtpFromDate);
-            this.panel1.Name = "panel1";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // cmb_status
-            // 
-            resources.ApplyResources(this.cmb_status, "cmb_status");
-            this.cmb_status.FormattingEnabled = true;
-            this.cmb_status.Name = "cmb_status";
-            // 
-            // btnClose
-            // 
-            resources.ApplyResources(this.btnClose, "btnClose");
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Name = "btnClose";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // dtpToDate
-            // 
-            resources.ApplyResources(this.dtpToDate, "dtpToDate");
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Name = "dtpToDate";
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.gridZatcaInvoices);
-            this.panel2.Name = "panel2";
-            // 
-            // panel3
-            // 
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Controls.Add(this.btnViewResponse);
-            this.panel3.Controls.Add(this.btn_invoice_report);
-            this.panel3.Controls.Add(this.btn_Invoice_clearance);
-            this.panel3.Controls.Add(this.btnDownloadUBL);
-            this.panel3.Controls.Add(this.btn_signInvoice);
-            this.panel3.Controls.Add(this.btnComplianceChecks);
-            this.panel3.Controls.Add(this.btn_viewQR);
-            this.panel3.Name = "panel3";
-            // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::pos.Properties.Resources._3969301_841013250;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
             // 
             // id
             // 
@@ -446,6 +253,209 @@ namespace pos.Sales
             this.sale_time.Name = "sale_time";
             this.sale_time.ReadOnly = true;
             // 
+            // btnComplianceChecks
+            // 
+            resources.ApplyResources(this.btnComplianceChecks, "btnComplianceChecks");
+            this.btnComplianceChecks.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnComplianceChecks.Name = "btnComplianceChecks";
+            this.btnComplianceChecks.UseVisualStyleBackColor = false;
+            this.btnComplianceChecks.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btnRefresh
+            // 
+            resources.ApplyResources(this.btnRefresh, "btnRefresh");
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnViewResponse
+            // 
+            resources.ApplyResources(this.btnViewResponse, "btnViewResponse");
+            this.btnViewResponse.Name = "btnViewResponse";
+            this.btnViewResponse.UseVisualStyleBackColor = true;
+            this.btnViewResponse.Click += new System.EventHandler(this.btnViewResponse_Click);
+            // 
+            // lblTitle
+            // 
+            resources.ApplyResources(this.lblTitle, "lblTitle");
+            this.lblTitle.Name = "lblTitle";
+            // 
+            // btn_viewQR
+            // 
+            resources.ApplyResources(this.btn_viewQR, "btn_viewQR");
+            this.btn_viewQR.Name = "btn_viewQR";
+            this.btn_viewQR.UseVisualStyleBackColor = true;
+            this.btn_viewQR.Click += new System.EventHandler(this.btn_viewQR_Click);
+            // 
+            // btn_signInvoice
+            // 
+            resources.ApplyResources(this.btn_signInvoice, "btn_signInvoice");
+            this.btn_signInvoice.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btn_signInvoice.Name = "btn_signInvoice";
+            this.btn_signInvoice.UseVisualStyleBackColor = false;
+            this.btn_signInvoice.Click += new System.EventHandler(this.btn_signInvoice_Click);
+            // 
+            // btn_invoice_report
+            // 
+            resources.ApplyResources(this.btn_invoice_report, "btn_invoice_report");
+            this.btn_invoice_report.BackColor = System.Drawing.Color.YellowGreen;
+            this.btn_invoice_report.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_invoice_report.Name = "btn_invoice_report";
+            this.btn_invoice_report.UseVisualStyleBackColor = false;
+            this.btn_invoice_report.Click += new System.EventHandler(this.btn_invoice_report_Click);
+            // 
+            // btn_Invoice_clearance
+            // 
+            resources.ApplyResources(this.btn_Invoice_clearance, "btn_Invoice_clearance");
+            this.btn_Invoice_clearance.BackColor = System.Drawing.Color.YellowGreen;
+            this.btn_Invoice_clearance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_Invoice_clearance.Name = "btn_Invoice_clearance";
+            this.btn_Invoice_clearance.UseVisualStyleBackColor = false;
+            this.btn_Invoice_clearance.Click += new System.EventHandler(this.btn_Invoice_clearance_Click);
+            // 
+            // cmbSubtype
+            // 
+            this.cmbSubtype.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbSubtype, "cmbSubtype");
+            this.cmbSubtype.Name = "cmbSubtype";
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbType, "cmbType");
+            this.cmbType.Name = "cmbType";
+            // 
+            // txtInvoiceNo
+            // 
+            resources.ApplyResources(this.txtInvoiceNo, "txtInvoiceNo");
+            this.txtInvoiceNo.Name = "txtInvoiceNo";
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpFromDate, "dtpFromDate");
+            this.dtpFromDate.Name = "dtpFromDate";
+            // 
+            // btnDownloadUBL
+            // 
+            resources.ApplyResources(this.btnDownloadUBL, "btnDownloadUBL");
+            this.btnDownloadUBL.Name = "btnDownloadUBL";
+            this.btnDownloadUBL.UseVisualStyleBackColor = true;
+            this.btnDownloadUBL.Click += new System.EventHandler(this.btnDownloadUBL_Click);
+            // 
+            // btnSearch
+            // 
+            resources.ApplyResources(this.btnSearch, "btnSearch");
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblTitle);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cmb_status);
+            this.panel1.Controls.Add(this.cmbSubtype);
+            this.panel1.Controls.Add(this.btnClose);
+            this.panel1.Controls.Add(this.btnRefresh);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.cmbType);
+            this.panel1.Controls.Add(this.txtInvoiceNo);
+            this.panel1.Controls.Add(this.dtpToDate);
+            this.panel1.Controls.Add(this.dtpFromDate);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::pos.Properties.Resources._3969301_841013250;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // cmb_status
+            // 
+            this.cmb_status.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_status, "cmb_status");
+            this.cmb_status.Name = "cmb_status";
+            // 
+            // btnClose
+            // 
+            resources.ApplyResources(this.btnClose, "btnClose");
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Name = "btnClose";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpToDate, "dtpToDate");
+            this.dtpToDate.Name = "dtpToDate";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.gridZatcaInvoices);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnViewResponse);
+            this.panel3.Controls.Add(this.btn_invoice_report);
+            this.panel3.Controls.Add(this.btn_Invoice_clearance);
+            this.panel3.Controls.Add(this.btnDownloadUBL);
+            this.panel3.Controls.Add(this.btn_signInvoice);
+            this.panel3.Controls.Add(this.NewComplianceCheckButton);
+            this.panel3.Controls.Add(this.btnComplianceChecks);
+            this.panel3.Controls.Add(this.btn_viewQR);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // NewComplianceCheckButton
+            // 
+            resources.ApplyResources(this.NewComplianceCheckButton, "NewComplianceCheckButton");
+            this.NewComplianceCheckButton.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.NewComplianceCheckButton.Name = "NewComplianceCheckButton";
+            this.NewComplianceCheckButton.UseVisualStyleBackColor = false;
+            this.NewComplianceCheckButton.Click += new System.EventHandler(this.NewComplianceCheckButton_Click);
+            // 
             // frm_zatca_invoices
             // 
             resources.ApplyResources(this, "$this");
@@ -461,9 +471,9 @@ namespace pos.Sales
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -513,5 +523,6 @@ namespace pos.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn prevSaleDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn prevInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_time;
+        private System.Windows.Forms.Button NewComplianceCheckButton;
     }
 }

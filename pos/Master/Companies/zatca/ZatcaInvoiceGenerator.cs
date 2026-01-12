@@ -11,12 +11,75 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using static java.security.cert.CertPathValidatorException;
+using System.Text.RegularExpressions;
 
 namespace pos.Master.Companies.zatca
 {
 
     public class ZatcaInvoiceGenerator
     {
+        private static string NormalizeIso3166Alpha2(string value, string defaultCode)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return defaultCode;
+
+            string v = value.Trim();
+
+            // Already ISO alpha-2
+            if (v.Length == 2)
+                return v.ToUpperInvariant();
+
+            // Common KSA variants
+            if (string.Equals(v, "Saudi Arabia", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(v, "Kingdom of Saudi Arabia", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(v, "KSA", StringComparison.OrdinalIgnoreCase))
+                return "SA";
+
+            return defaultCode;
+        }
+
+        private static string ExtractDigits(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return null;
+            return Regex.Replace(value, "[^0-9]", "");
+        }
+
+        public static DateTime ParseSqlDateTimeInvariant(object sqlDateTimeValue)
+        {
+            if (sqlDateTimeValue == null || sqlDateTimeValue == DBNull.Value)
+                return DateTime.Now;
+
+            if (sqlDateTimeValue is DateTime dt)
+                return dt;
+
+            string s = Convert.ToString(sqlDateTimeValue);
+            DateTime parsed;
+
+            // Try exact SQL format first
+            if (DateTime.TryParseExact(
+                    s,
+                    "yyyy-MM-dd HH:mm:ss.fff",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out parsed))
+                return parsed;
+
+            // Try without milliseconds
+            if (DateTime.TryParseExact(
+                    s,
+                    "yyyy-MM-dd HH:mm:ss",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out parsed))
+                return parsed;
+
+            // Fallback to regular parse
+            if (DateTime.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsed))
+                return parsed;
+
+            return DateTime.Now;
+        }
+
         public XmlDocument GenerateZatcaInvoiceXmlDocument(DataSet ds, string invoiceNo)
         {
             // Get invoice header and items from dataset
@@ -42,7 +105,7 @@ namespace pos.Master.Companies.zatca
 
 
             // Add all invoice components
-            AddUBLExtensions(xmlDoc, invoiceElement);
+            //AddUBLExtensions(xmlDoc, invoiceElement);
             AddBasicInvoiceInfo(xmlDoc, invoiceElement, invoiceHeader.Rows[0], invoiceNo);
             AddDocumentReferences(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddSupplierParty(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
@@ -53,23 +116,6 @@ namespace pos.Master.Companies.zatca
             AddTaxTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddLegalMonetaryTotals(xmlDoc, invoiceElement, invoiceHeader.Rows[0]);
             AddInvoiceLines(xmlDoc, invoiceElement, invoiceItems);
-
-            // Generate file name as per ZATCA: VAT + _ + Date + "T" + Time + _ + IRN.xml
-            //string vatNumber = "1010010000"; // invoiceHeader.Rows[0]["customer_vat_no"].ToString();
-            //string date = Convert.ToDateTime(invoiceHeader.Rows[0]["sale_date"]).ToString("yyyyMMdd");
-            //string time = Convert.ToDateTime(invoiceHeader.Rows[0]["sale_time"]).ToString("HHmmss");
-            //string sanitizedInvoiceNo = System.Text.RegularExpressions.Regex.Replace(invoiceNo, "[^a-zA-Z0-9]", "-");
-            //string filename = $"{vatNumber}_{date}T{time}_{sanitizedInvoiceNo}.xml";
-            //xmlDoc.InsertBefore(xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null), invoiceElement);
-            //xmlDoc.DocumentElement.SetAttribute("filename", filename);
-
-            //// Save directly with correct file name
-            //string ublFolder = Path.Combine(Application.StartupPath, "UBL");
-            //if (!Directory.Exists(ublFolder))
-            //    Directory.CreateDirectory(ublFolder);
-
-            //string filePath = Path.Combine(ublFolder, filename);
-            //xmlDoc.Save(filePath);
 
             return xmlDoc;
         }
@@ -82,11 +128,13 @@ namespace pos.Master.Companies.zatca
             // Invoice ID (your invoice number)
             AddElement(xmlDoc, parent, "cbc:ID", invoiceNo);
 
-            // UUID (should be unique for each invoice)
-            AddElement(xmlDoc, parent, "cbc:UUID", Guid.NewGuid().ToString());
+            // UUID (reuse if already stored to avoid re-sign mismatches)
+            string existingUuid = invoice.Table.Columns.Contains("zatca_uuid") ? Convert.ToString(invoice["zatca_uuid"]) : null;
+            string uuidToUse = string.IsNullOrWhiteSpace(existingUuid) ? Guid.NewGuid().ToString() : existingUuid.Trim();
+            AddElement(xmlDoc, parent, "cbc:UUID", uuidToUse);
 
-            // Issue date and time
-            DateTime issueDate = Convert.ToDateTime(invoice["sale_time"]);
+            // Issue date and time (parse invariantly from SQL datetime)
+            DateTime issueDate = ParseSqlDateTimeInvariant(invoice["sale_time"]);
             AddElement(xmlDoc, parent, "cbc:IssueDate", issueDate.ToString("yyyy-MM-dd"));
             AddElement(xmlDoc, parent, "cbc:IssueTime", issueDate.ToString("HH:mm:ss"));
 
@@ -100,7 +148,7 @@ namespace pos.Master.Companies.zatca
             else if (accountType == "sale")
                 invoiceTypeCode = "388"; // Standard Sale
             else
-                invoiceTypeCode = "388"; // 
+                invoiceTypeCode = "388";
 
             string invoiceTypeName = (subtype == "02" ? "0200000" : "0100000");
 
@@ -118,26 +166,29 @@ namespace pos.Master.Companies.zatca
             // ICV reference
             XmlElement icvRef = xmlDoc.CreateElement("cac", "AdditionalDocumentReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             AddElement(xmlDoc, icvRef, "cbc:ID", "ICV");
-            AddElement(xmlDoc, icvRef, "cbc:UUID", invoice["id"].ToString()); // Should be calculated
+            AddElement(xmlDoc, icvRef, "cbc:UUID", invoice["id"].ToString());
             parent.AppendChild(icvRef);
 
-            // PIH reference
+            // PIH: previous invoice hash (based on invoice_no numeric sequence)
+            string currentInvoiceNo = invoice.Table.Columns.Contains("invoice_no") ? Convert.ToString(invoice["invoice_no"]) : null;
+            string pihValue = GetPreviousInvoiceHashByInvoiceNoSequence(currentInvoiceNo);
+
             XmlElement pihRef = xmlDoc.CreateElement("cac", "AdditionalDocumentReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             AddElement(xmlDoc, pihRef, "cbc:ID", "PIH");
             XmlElement attachment = xmlDoc.CreateElement("cac", "Attachment", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            XmlElement binaryObject = AddElement(xmlDoc, attachment, "cbc:EmbeddedDocumentBinaryObject", "");
+            XmlElement binaryObject = AddElement(xmlDoc, attachment, "cbc:EmbeddedDocumentBinaryObject", pihValue);
             binaryObject.SetAttribute("mimeCode", "text/plain");
             pihRef.AppendChild(attachment);
             parent.AppendChild(pihRef);
 
-            // QR code reference (placeholder)
-            XmlElement qrRef = xmlDoc.CreateElement("cac", "AdditionalDocumentReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, qrRef, "cbc:ID", "QR");
-            XmlElement qrAttachment = xmlDoc.CreateElement("cac", "Attachment", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            XmlElement qrBinaryObject = AddElement(xmlDoc, qrAttachment, "cbc:EmbeddedDocumentBinaryObject", "");
-            qrBinaryObject.SetAttribute("mimeCode", "text/plain");
-            qrRef.AppendChild(qrAttachment);
-            parent.AppendChild(qrRef);
+            // QR placeholder (keep empty before signing)
+            //XmlElement qrRef = xmlDoc.CreateElement("cac", "AdditionalDocumentReference", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            //AddElement(xmlDoc, qrRef, "cbc:ID", "QR");
+            //XmlElement qrAttachment = xmlDoc.CreateElement("cac", "Attachment", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            //XmlElement qrBinaryObject = AddElement(xmlDoc, qrAttachment, "cbc:EmbeddedDocumentBinaryObject", "");
+            //qrBinaryObject.SetAttribute("mimeCode", "text/plain");
+            //qrRef.AppendChild(qrAttachment);
+            //parent.AppendChild(qrRef);
         }
 
         private void AddSupplierParty(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
@@ -176,10 +227,15 @@ namespace pos.Master.Companies.zatca
             XmlElement party = xmlDoc.CreateElement("cac", "Party", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 
             // Party identification (CRN - Commercial Registration Number)
-            XmlElement partyIdentification = xmlDoc.CreateElement("cac", "PartyIdentification", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            XmlElement id = AddElement(xmlDoc, partyIdentification, "cbc:ID", organizationIdentifier);
-            id.SetAttribute("schemeID", "CRN");
-            party.AppendChild(partyIdentification);
+            // CRN is stored in address field in this app; extract digits and emit only if it looks valid.
+            string crnDigits = ExtractDigits(location);
+            if (!string.IsNullOrWhiteSpace(crnDigits) && crnDigits.Length == 10)
+            {
+                XmlElement partyIdentification = xmlDoc.CreateElement("cac", "PartyIdentification", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                XmlElement id = AddElement(xmlDoc, partyIdentification, "cbc:ID", crnDigits);
+                id.SetAttribute("schemeID", "CRN");
+                party.AppendChild(partyIdentification);
+            }
 
             // Postal address
             XmlElement postalAddress = xmlDoc.CreateElement("cac", "PostalAddress", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
@@ -189,7 +245,7 @@ namespace pos.Master.Companies.zatca
             AddElement(xmlDoc, postalAddress, "cbc:CityName", CityName);
             AddElement(xmlDoc, postalAddress, "cbc:PostalZone", PostalCode);
             XmlElement country = xmlDoc.CreateElement("cac", "Country", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, country, "cbc:IdentificationCode", "SA");
+            AddElement(xmlDoc, country, "cbc:IdentificationCode", NormalizeIso3166Alpha2(countryName, "SA"));
             postalAddress.AppendChild(country);
             party.AppendChild(postalAddress);
 
@@ -224,7 +280,8 @@ namespace pos.Master.Companies.zatca
             AddElement(xmlDoc, postalAddress, "cbc:CityName", invoice["CityName"].ToString());
             AddElement(xmlDoc, postalAddress, "cbc:PostalZone", invoice["PostalCode"].ToString());
             XmlElement country = xmlDoc.CreateElement("cac", "Country", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-            AddElement(xmlDoc, country, "cbc:IdentificationCode", invoice["CountryName"].ToString());
+            string buyerCountry = invoice.Table.Columns.Contains("CountryName") ? Convert.ToString(invoice["CountryName"]) : null;
+            AddElement(xmlDoc, country, "cbc:IdentificationCode", NormalizeIso3166Alpha2(buyerCountry, "SA"));
             postalAddress.AppendChild(country);
             party.AppendChild(postalAddress);
 
@@ -925,6 +982,103 @@ namespace pos.Master.Companies.zatca
                         else
                             return null;
                     }
+                }
+            }
+        }
+
+        public void UpdateQRCodeInXml(XmlDocument xmlDoc, string qrBase64)
+        {
+            XmlNamespaceManager nsMgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            nsMgr.AddNamespace("cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            nsMgr.AddNamespace("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+
+            // Find or create the QR code AdditionalDocumentReference
+            XmlNode qrRef = xmlDoc.SelectSingleNode("//cac:AdditionalDocumentReference[cbc:ID='QR']", nsMgr);
+
+            if (qrRef == null)
+            {
+                // Create new QR reference
+                XmlElement invoice = xmlDoc.DocumentElement;
+                XmlElement qrElement = xmlDoc.CreateElement("cac", "AdditionalDocumentReference",
+                    "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+
+                XmlElement idElement = xmlDoc.CreateElement("cbc", "ID",
+                    "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+                idElement.InnerText = "QR";
+                qrElement.AppendChild(idElement);
+
+                XmlElement attachment = xmlDoc.CreateElement("cac", "Attachment",
+                    "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+
+                XmlElement embeddedDoc = xmlDoc.CreateElement("cbc", "EmbeddedDocumentBinaryObject",
+                    "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+                embeddedDoc.InnerText = qrBase64;
+                embeddedDoc.SetAttribute("mimeCode", "text/plain");
+                embeddedDoc.SetAttribute("filename", "QRCode.txt");
+
+                attachment.AppendChild(embeddedDoc);
+                qrElement.AppendChild(attachment);
+
+                // Insert before PIH or at appropriate location
+                XmlNode pihRef = xmlDoc.SelectSingleNode("//cac:AdditionalDocumentReference[cbc:ID='PIH']", nsMgr);
+                if (pihRef != null)
+                {
+                    pihRef.ParentNode.InsertBefore(qrElement, pihRef);
+                }
+                else
+                {
+                    // Add to invoice
+                    invoice.AppendChild(qrElement);
+                }
+            }
+            else
+            {
+                // Update existing QR code
+                XmlNode embeddedDoc = qrRef.SelectSingleNode("cac:Attachment/cbc:EmbeddedDocumentBinaryObject", nsMgr);
+                if (embeddedDoc != null)
+                {
+                    embeddedDoc.InnerText = qrBase64;
+                }
+            }
+        }
+
+        private const string FirstPihBase64 = "NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==";
+
+        private static string GetPreviousInvoiceHashByInvoiceNoSequence(string currentInvoiceNo)
+        {
+            if (string.IsNullOrWhiteSpace(currentInvoiceNo))
+                return FirstPihBase64;
+
+            // Extract digits in C# to get current numeric value (handles S-000123, POS-12, etc.)
+            string digits = Regex.Replace(currentInvoiceNo, "[^0-9]", "");
+            int currentNo;
+            if (string.IsNullOrWhiteSpace(digits) || !int.TryParse(digits, out currentNo))
+                return FirstPihBase64;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                // Get the previous invoice by numeric digits part.
+                // NOTE: This assumes invoice_no’s numeric portion is the ordering key.
+                string sql = @"
+                SELECT TOP 1 zatca_hash
+                FROM pos_sales
+                WHERE
+                    zatca_hash IS NOT NULL
+                    AND LTRIM(RTRIM(zatca_hash)) <> ''
+                    AND zatca_status IN ('REPORTED','CLEARED')
+                    AND TRY_CONVERT(int, REPLACE(REPLACE(invoice_no, 'S-', ''), '-', '')) IS NOT NULL
+                    AND TRY_CONVERT(int, REPLACE(REPLACE(invoice_no, 'S-', ''), '-', '')) < @currentNo
+                ORDER BY TRY_CONVERT(int, REPLACE(REPLACE(invoice_no, 'S-', ''), '-', '')) DESC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@currentNo", currentNo);
+
+                    object o = cmd.ExecuteScalar();
+                    string prevHash = (o == null || o == DBNull.Value) ? null : Convert.ToString(o);
+                    return string.IsNullOrWhiteSpace(prevHash) ? FirstPihBase64 : prevHash.Trim();
                 }
             }
         }
