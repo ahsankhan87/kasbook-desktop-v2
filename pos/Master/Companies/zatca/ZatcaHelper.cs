@@ -84,36 +84,34 @@ namespace pos.Master.Companies.zatca
                     ////MessageBox.Show($"Invoice Hash : {SignedInvoiceHash}\n");
                     //ZatcaHelper.InsertInvoiceHashToSignedXml(signResult.SignedEInvoice, SignedInvoiceHash);
 
-                    //var qrGen = new EInvoiceQRGenerator();
-                    //QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
-                    //string qrBase64 = qrResult.QR;
+                    var qrGen = new EInvoiceQRGenerator();
+                    QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
+                    string qrBase64 = qrResult.QR;
 
-
-                    // Insert QR into Signed XML before submission
-                   // ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase64);
+                    //Insert QR into Signed XML before submission
+                    ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase64);
 
                     // Save signed XML
                     string ublPath = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_signed.xml");
                     signResult.SignedEInvoice.Save(ublPath);
                     //signResult.SaveSignedEInvoice(ublPath);
 
-                    EInvoiceValidator eInvoiceValidator = new EInvoiceValidator();
-                    var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, cert, secret);
+                    //EInvoiceValidator eInvoiceValidator = new EInvoiceValidator();
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, cert, secret);
 
-                    if (!resultValidator.IsValid)
-                    {
-                        var failedSteps = resultValidator.ValidationSteps
-                           .Where(step => !step.IsValid)
-                           .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
-                           .ToList();
+                    //if (!resultValidator.IsValid)
+                    //{
+                    //    var failedSteps = resultValidator.ValidationSteps
+                    //       .Where(step => !step.IsValid)
+                    //       .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                    //       .ToList();
 
-                        string fullError = failedSteps.Any()
-                            ? string.Join("\n\n", failedSteps)
-                            : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+                    //    string fullError = failedSteps.Any()
+                    //        ? string.Join("\n\n", failedSteps)
+                    //        : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
 
-                        MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
-                    }
-
+                    //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    //}
 
 
                     //Get QRCode from SignedInvoice
@@ -882,7 +880,6 @@ namespace pos.Master.Companies.zatca
             catch (Exception ex)
             {
                 MessageBox.Show($"Error submitting to ZATCA:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
             }
         }
         public static XmlDocument LoadSignedXMLInvoice(string invoiceNo)
@@ -901,7 +898,6 @@ namespace pos.Master.Companies.zatca
         {
             XmlDocument xmlDoc = new XmlDocument() { PreserveWhitespace = true };
             xmlDoc.LoadXml(signResult.SignedEInvoice.OuterXml);
-
 
             XmlNamespaceManager nsManager = new XmlNamespaceManager(xmlDoc.NameTable);
             nsManager.AddNamespace("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");

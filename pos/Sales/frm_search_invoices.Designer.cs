@@ -40,18 +40,16 @@
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Listbox_method = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
             this.btn_ok = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_search = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_sales_report = new System.Windows.Forms.DataGridView();
-            this.copyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.copyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
@@ -64,31 +62,29 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.btn_close);
             this.panel1.Controls.Add(this.btn_ok);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.btn_search);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.txt_from_date);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txt_condition);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txt_to_date);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // txt_from_date
             // 
-            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_from_date, "txt_from_date");
+            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_from_date.Name = "txt_from_date";
             this.txt_from_date.ValueChanged += new System.EventHandler(this.txt_from_date_ValueChanged);
             // 
@@ -109,22 +105,22 @@
             // 
             // txt_to_date
             // 
-            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_to_date, "txt_to_date");
+            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_to_date.Name = "txt_to_date";
             this.txt_to_date.ValueChanged += new System.EventHandler(this.txt_to_date_ValueChanged);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.Listbox_method);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.Listbox_method);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // Listbox_method
             // 
-            this.Listbox_method.FormattingEnabled = true;
             resources.ApplyResources(this.Listbox_method, "Listbox_method");
+            this.Listbox_method.FormattingEnabled = true;
             this.Listbox_method.Items.AddRange(new object[] {
             resources.GetString("Listbox_method.Items"),
             resources.GetString("Listbox_method.Items1"),
@@ -132,18 +128,10 @@
             resources.GetString("Listbox_method.Items3")});
             this.Listbox_method.Name = "Listbox_method";
             // 
-            // button3
-            // 
-            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.btn_close_Click);
-            // 
             // btn_close
             // 
-            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_close, "btn_close");
+            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_close.Name = "btn_close";
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
@@ -155,13 +143,6 @@
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btn_search_Click);
-            // 
             // btn_search
             // 
             resources.ApplyResources(this.btn_search, "btn_search");
@@ -171,16 +152,16 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_sales_report);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_sales_report);
             this.panel2.Name = "panel2";
             // 
             // grid_sales_report
             // 
+            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AllowUserToAddRows = false;
             this.grid_sales_report.AllowUserToDeleteRows = false;
             this.grid_sales_report.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sales_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -194,20 +175,6 @@
             this.grid_sales_report.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_sales_report.DoubleClick += new System.EventHandler(this.grid_sales_report_DoubleClick);
             this.grid_sales_report.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_sales_report_KeyDown);
-            // 
-            // copyContextMenuStrip
-            // 
-            this.copyContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.copyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem});
-            this.copyContextMenuStrip.Name = "copyContextMenuStrip";
-            resources.ApplyResources(this.copyContextMenuStrip, "copyContextMenuStrip");
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // id
             // 
@@ -233,6 +200,20 @@
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
+            // 
+            // copyContextMenuStrip
+            // 
+            resources.ApplyResources(this.copyContextMenuStrip, "copyContextMenuStrip");
+            this.copyContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.copyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.copyContextMenuStrip.Name = "copyContextMenuStrip";
+            // 
+            // copyToolStripMenuItem
+            // 
+            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // customer_name
             // 
@@ -293,9 +274,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox Listbox_method;
         private System.Windows.Forms.Button btn_close;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btn_ok;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ContextMenuStrip copyContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;

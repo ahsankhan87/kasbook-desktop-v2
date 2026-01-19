@@ -1023,9 +1023,6 @@
   <data name="NewComplianceCheckButton.Text" xml:space="preserve">
     <value>NEW Compliance Checks</value>
   </data>
-  <data name="NewComplianceCheckButton.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;NewComplianceCheckButton.Name" xml:space="preserve">
     <value>NewComplianceCheckButton</value>
   </data>

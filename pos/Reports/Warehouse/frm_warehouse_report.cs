@@ -37,88 +37,78 @@ namespace pos
         }
 
         
-        private void btn_search_Click(object sender, EventArgs e)
+        private async void btn_search_Click(object sender, EventArgs e)
         {
-            try
+            using (pos.UI.Busy.BusyScope.Show(this, "Loading warehouse report..."))
             {
-                string[] arr_brands = new string[lb_brands.SelectedItems.Count];
-                string[] arr_categories= new string[lb_category.SelectedItems.Count];
-                string[] arr_locations = new string[lb_locations.SelectedItems.Count];
-
-                int i=0;
-                foreach (var item in lb_brands.SelectedItems)
+                try
                 {
-                    arr_brands[i] = ((DataRowView)item)["code"].ToString();
-                    i++;
-                }
+                    string[] arr_brands = new string[lb_brands.SelectedItems.Count];
+                    string[] arr_categories = new string[lb_category.SelectedItems.Count];
+                    string[] arr_locations = new string[lb_locations.SelectedItems.Count];
 
-                int j = 0;
-                foreach (var item in lb_category.SelectedItems)
+                    int i = 0;
+                    foreach (var item in lb_brands.SelectedItems)
+                    {
+                        arr_brands[i] = ((DataRowView)item)["code"].ToString();
+                        i++;
+                    }
+
+                    int j = 0;
+                    foreach (var item in lb_category.SelectedItems)
+                    {
+                        arr_categories[j] = ((DataRowView)item)["code"].ToString();
+                        j++;
+                    }
+
+                    int k = 0;
+                    foreach (var item in lb_locations.SelectedItems)
+                    {
+                        arr_locations[k] = ((DataRowView)item)["code"].ToString();
+                        k++;
+                    }
+
+                    int unit_id = Convert.ToInt16(cmb_units.SelectedValue);
+                    string item_type = cmb_item_type.SelectedItem.ToString();
+                    bool qty_onhand = chk_qty_on_hand.Checked;
+
+                    grid_sales_report.AutoGenerateColumns = false;
+
+                    // Run DB/report work off the UI thread
+                    DataTable accounts_dt = await Task.Run(() =>
+                    {
+                        WarehouseReportBLL sale_report_obj = new WarehouseReportBLL();
+                        return sale_report_obj.WarehouseReport(arr_categories, arr_brands, arr_locations, unit_id, item_type, qty_onhand);
+                    });
+
+                    double _quantity_sold_total = 0;
+                    double _unit_price_total = 0;
+                    double _cost_price_total = 0;
+                    double _total = 0;
+
+                    foreach (DataRow dr in accounts_dt.Rows)
+                    {
+                        _quantity_sold_total += (dr["qty"].ToString() != "" ? Convert.ToDouble(dr["qty"].ToString()) : 0);
+                        _cost_price_total += (dr["cost_price"].ToString() != "" ? Convert.ToDouble(dr["cost_price"].ToString()) : 0);
+                        _unit_price_total += (dr["unit_price"].ToString() != "" ? Convert.ToDouble(dr["unit_price"].ToString()) : 0);
+                        _total += Convert.ToDouble(dr["total_cost"].ToString());
+                    }
+
+                    DataRow newRow = accounts_dt.NewRow();
+                    newRow[5] = "Total";
+                    newRow[2] = _quantity_sold_total;
+                    newRow[4] = _unit_price_total;
+                    newRow[3] = _cost_price_total;
+                    newRow[11] = _total;
+                    accounts_dt.Rows.InsertAt(newRow, accounts_dt.Rows.Count);
+
+                    grid_sales_report.DataSource = accounts_dt;
+                    CustomizeDataGridView();
+                }
+                catch (Exception ex)
                 {
-                    arr_categories[j] = ((DataRowView)item)["code"].ToString();
-                    j++;
+                    MessageBox.Show(ex.Message, "Error");
                 }
-
-                int k = 0;
-                foreach (var item in lb_locations.SelectedItems)
-                {
-                    arr_locations[k] = ((DataRowView)item)["code"].ToString();
-                    k++;
-                }
-
-                //string location_code = cmb_locations.SelectedValue.ToString();
-                //string brand_code = cmb_brands.SelectedValue.ToString();
-                //string category_code = cmb_categories.SelectedValue.ToString();
-                int unit_id = Convert.ToInt16(cmb_units.SelectedValue);
-                string item_type = cmb_item_type.SelectedItem.ToString();
-                bool qty_onhand = chk_qty_on_hand.Checked;
-
-                WarehouseReportBLL sale_report_obj = new WarehouseReportBLL();
-                grid_sales_report.AutoGenerateColumns = false;
-
-                DataTable accounts_dt = new DataTable();
-                accounts_dt = sale_report_obj.WarehouseReport(arr_categories, arr_brands, arr_locations, unit_id, item_type, qty_onhand);
-
-                double _quantity_sold_total = 0;
-                double _unit_price_total = 0;
-                double _cost_price_total = 0;
-                //double _discount_value_total = 0;
-                // double _vat_total = 0;
-                double _total = 0;
-
-                //DataTable total_dt = sale_report_obj.WarehouseReport_total_amount(arr_categories, arr_brands, arr_locations, unit_id, item_type, qty_onhand);
-                
-                
-                foreach (DataRow dr in accounts_dt.Rows)
-                {
-                    _quantity_sold_total += (dr["qty"].ToString() != "" ? Convert.ToDouble(dr["qty"].ToString()) : 0);
-                    _cost_price_total += (dr["cost_price"].ToString() != "" ? Convert.ToDouble(dr["cost_price"].ToString()) : 0);
-                    _unit_price_total += (dr["unit_price"].ToString() != "" ? Convert.ToDouble(dr["unit_price"].ToString()) : 0);
-                    //_discount_value_total += Convert.ToDouble(dr["discount_value"].ToString());
-                    // _vat_total += Convert.ToDouble(dr["vat"].ToString());
-                    _total += Convert.ToDouble(dr["total_cost"].ToString());
-                }
-                
-                DataRow newRow = accounts_dt.NewRow();
-                newRow[5] = "Total";
-                newRow[2] = _quantity_sold_total;
-                newRow[4] = _unit_price_total;
-                newRow[3] = _cost_price_total;
-                //newRow[6] = _discount_value_total;
-                //newRow[9] = _vat_total;
-                newRow[11] =  _total;
-                accounts_dt.Rows.InsertAt(newRow, accounts_dt.Rows.Count);
-
-                grid_sales_report.DataSource = accounts_dt;
-                CustomizeDataGridView();
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-                
             }
         }
         private void CustomizeDataGridView()

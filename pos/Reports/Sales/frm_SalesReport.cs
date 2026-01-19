@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.Security.Authorization;
 
 namespace pos
 {
@@ -18,7 +19,11 @@ namespace pos
         public string _product_code = "";
         public string _product_name;
         DataTable sales_report_dt = new DataTable();
-                
+
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         ProductBLL productsBLL_obj = new ProductBLL();
                 
         public frm_SalesReport()
@@ -43,6 +48,8 @@ namespace pos
             cmb_sale_type.SelectedIndex = 0;
             cmb_sale_account.SelectedIndex = 0;
             get_employees_dropdownlist();
+
+            ApplyProfitColumnVisibility();
         }
 
         public void load_products()
@@ -130,60 +137,143 @@ namespace pos
             //cmb_products.ValueMember = "id";
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
+        private async void btn_search_Click(object sender, EventArgs e)
         {
-            try
+            using (pos.UI.Busy.BusyScope.Show(this, "Loading sales report..."))
             {
-                DateTime from_date = txt_from_date.Value.Date;
-                DateTime to_date = txt_to_date.Value.Date;
-                int customer_id = Convert.ToInt16(cmb_customers.SelectedValue);
-                string product_code = _product_code; //Convert.ToInt16(cmb_products.SelectedValue);
-                string sale_type = cmb_sale_type.SelectedItem.ToString();
-                int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
-                string sale_account = cmb_sale_account.SelectedItem.ToString();
-                int branch_id = UsersModal.logged_in_branch_id;
-
-                SalesReportBLL sale_report_obj = new SalesReportBLL ();
-                grid_sales_report.AutoGenerateColumns = false;
-
-                sales_report_dt = sale_report_obj.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account,branch_id);
-
-                double _quantity_sold_total = 0;
-                double _unit_price_total = 0;
-                double _discount_value_total = 0;
-                double _vat_total = 0;
-                double _total = 0;
-                double _total_with_vat = 0;
-
-                foreach (DataRow dr in sales_report_dt.Rows)
+                try
                 {
-                    _quantity_sold_total += (dr["quantity_sold"].ToString() == "" ? 0 : Convert.ToDouble(dr["quantity_sold"].ToString()));
-                    _unit_price_total += (dr["unit_price"].ToString() == "" ? 0 : Convert.ToDouble(dr["unit_price"].ToString()));
-                    _discount_value_total += (dr["discount_value"].ToString() == "" ? 0 : Convert.ToDouble(dr["discount_value"].ToString()));
-                    _vat_total += (dr["vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["vat"].ToString()));
-                    _total_with_vat += (dr["total_with_vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["total_with_vat"].ToString()));
-                    _total += (dr["total"].ToString() == "" ? 0 : Convert.ToDouble(dr["total"].ToString())); ;
+                    DateTime from_date = txt_from_date.Value.Date;
+                    DateTime to_date = txt_to_date.Value.Date;
+                    int customer_id = Convert.ToInt16(cmb_customers.SelectedValue);
+                    string product_code = _product_code;
+                    string sale_type = cmb_sale_type.SelectedItem.ToString();
+                    int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
+                    string sale_account = cmb_sale_account.SelectedItem.ToString();
+                    int branch_id = UsersModal.logged_in_branch_id;
+
+                    grid_sales_report.AutoGenerateColumns = false;
+
+                    // Run DB/report work off the UI thread
+                    sales_report_dt = await Task.Run(() =>
+                    {
+                        SalesReportBLL sale_report_obj = new SalesReportBLL();
+                        return sale_report_obj.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id);
+                    });
+
+                    // Ensure profit column exists (you said you created it; this is a safety net)
+                    if (!sales_report_dt.Columns.Contains("profit"))
+                        sales_report_dt.Columns.Add("profit", typeof(double));
+
+                    // also add cost_total if not present (DAL now provides it, but keep safe)
+                    if (!sales_report_dt.Columns.Contains("cost_total"))
+                        sales_report_dt.Columns.Add("cost_total", typeof(double));
+
+                    if (!sales_report_dt.Columns.Contains("profit_percent"))
+                        sales_report_dt.Columns.Add("profit_percent", typeof(double));
+
+                    bool showProfit = CanViewProfit();
+
+                    double _quantity_sold_total = 0;
+                    double _unit_price_total = 0;
+                    double _discount_value_total = 0;
+                    double _vat_total = 0;
+                    double _total = 0;
+                    double _cost_price_total = 0;
+                    double _total_with_vat = 0;
+                    double _profit_total = 0;
+                    double _net_revenue_total = 0; // <-- Added revenue accumulator for profit percent totals
+
+                    foreach (DataRow dr in sales_report_dt.Rows)
+                    {
+                        double qty = (dr["quantity_sold"].ToString() == "" ? 0 : Convert.ToDouble(dr["quantity_sold"]));
+                        double total = (dr["total"].ToString() == "" ? 0 : Convert.ToDouble(dr["total"]));
+
+                        _quantity_sold_total += qty;
+                        _unit_price_total += (dr["unit_price"].ToString() == "" ? 0 : Convert.ToDouble(dr["unit_price"]));
+                        _cost_price_total += (dr["cost_price"].ToString() == "" ? 0 : Convert.ToDouble(dr["cost_price"]));
+                        _discount_value_total += (dr["discount_value"].ToString() == "" ? 0 : Convert.ToDouble(dr["discount_value"]));
+                        _vat_total += (dr["vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["vat"]));
+                        _total_with_vat += (dr["total_with_vat"].ToString() == "" ? 0 : Convert.ToDouble(dr["total_with_vat"]));
+                        _total += total;
+
+                        if (showProfit)
+                        {
+                            double avgCost = (sales_report_dt.Columns.Contains("cost_price") && dr["cost_price"].ToString() != "")
+                                ? Convert.ToDouble(dr["cost_price"])
+                                : 0;
+
+                            double unitPrice = (dr["unit_price"].ToString() == "" ? 0 : Convert.ToDouble(dr["unit_price"]));
+                            double discountValueRaw = (dr["discount_value"].ToString() == "" ? 0 : Convert.ToDouble(dr["discount_value"]));
+
+                            // Normalize discount sign to follow quantity sign
+                            double discountValue = (qty < 0) ? -Math.Abs(discountValueRaw) : Math.Abs(discountValueRaw);
+
+                            double lineRevenue = (unitPrice * qty) - discountValue;
+
+                            // Cost follows qty sign
+                            double costTotal = avgCost * qty;
+                            dr["cost_total"] = costTotal;
+                            
+                            double profit = lineRevenue - costTotal;
+
+                            // Enforce profit sign to follow qty (returns must be negative impact)
+                            if (qty < 0) profit = -Math.Abs(profit);
+                            else profit = Math.Abs(profit);
+
+                            dr["profit"] = profit;
+
+                            var pctBase = lineRevenue;
+                            var pct = (Math.Abs(pctBase) < 0.0000001) ? 0 : (profit / pctBase) * 100.0;
+                            dr["profit_percent"] = pct;
+
+                            _profit_total += profit;
+                            _net_revenue_total += lineRevenue;
+                        }
+                        else
+                        {
+                            // avoid leaking cost/profit in exported DataTable
+                            dr["profit"] = 0;
+                            dr["cost_total"] = 0;
+                            dr["profit_percent"] = 0;
+                        }
+                    }
+
+                    if (sales_report_dt.Rows.Count > 0)
+                    {
+                        DataRow newRow = sales_report_dt.NewRow();
+                        newRow[8] = "Total";
+                        newRow[9] = _quantity_sold_total;
+                        newRow[10] = _unit_price_total;
+                        newRow[11] = _discount_value_total;
+                        newRow[13] = _vat_total;
+                        newRow[14] = _total_with_vat;
+                        newRow[15] = _total;
+                        newRow[16] = _cost_price_total;
+
+                        if (sales_report_dt.Columns.Contains("profit"))
+                            newRow["profit"] = _profit_total;
+                        if (sales_report_dt.Columns.Contains("profit_percent"))
+                        {
+                            var pctTotal = (Math.Abs(_net_revenue_total) < 0.0000001) ? 0 : (_profit_total / _net_revenue_total) * 100.0;
+                            newRow["profit_percent"] = pctTotal;
+                        }
+
+                        sales_report_dt.Rows.InsertAt(newRow, sales_report_dt.Rows.Count);
+                    }
+
+                    grid_sales_report.DataSource = sales_report_dt;
+                    if (grid_sales_report.Rows.Count > 0)
+                        CustomizeDataGridView();
+
+                    ApplyProfitColumnVisibility();
+
+                    _product_code = "";
                 }
-
-                DataRow newRow = sales_report_dt.NewRow();
-                newRow[6] = "Total";
-                newRow[8] = _quantity_sold_total;
-                newRow[9] = _unit_price_total;
-                newRow[10] = _discount_value_total;
-                newRow[12] = _vat_total;
-                newRow[13] = _total_with_vat;
-                newRow[14] = _total;
-                sales_report_dt.Rows.InsertAt(newRow, sales_report_dt.Rows.Count);
-
-                grid_sales_report.DataSource = sales_report_dt;
-                CustomizeDataGridView();
-
-                _product_code = "";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-                
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
             }
         }
         private void CustomizeDataGridView()
@@ -410,6 +500,39 @@ namespace pos
 
             txt_from_date.Value = startDate;
             txt_to_date.Value = endDate;
+        }
+
+        private bool CanViewProfit()
+        {
+            // Owner/Admin short-circuit is already handled by Auth.
+            return _auth.HasPermission(_currentUser, Permissions.Reports_ProfitLossView);
+
+            //var user = AppSecurityContext.User;
+            //return user != null && AppSecurityContext.Auth.HasPermission(user, "Sales.Profit.View");
+        }
+
+        private void ApplyProfitColumnVisibility()
+        {
+            // If you already created the profit column in designer, set its Name to "profit".
+            // Optionally hide cost_price/cost_total as well.
+            bool show = CanViewProfit();
+
+            if (grid_sales_report.Columns.Contains("profit"))
+                grid_sales_report.Columns["profit"].Visible = show;
+
+            if (grid_sales_report.Columns.Contains("profit_percent"))
+                grid_sales_report.Columns["profit_percent"].Visible = show;
+
+            //if (grid_sales_report.Columns.Contains("cost_price"))
+            //    grid_sales_report.Columns["cost_price"].Visible = show;
+
+            //if (grid_sales_report.Columns.Contains("cost_total"))
+            //    grid_sales_report.Columns["cost_total"].Visible = show;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

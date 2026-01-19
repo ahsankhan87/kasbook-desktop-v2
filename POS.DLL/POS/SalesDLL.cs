@@ -132,7 +132,7 @@ namespace POS.DLL
         }
 
         public DataTable SaleReceipt(string invoice_no)
-        {
+        { 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 try
@@ -223,7 +223,7 @@ namespace POS.DLL
         }
 
         public DataTable SearchRecord(String condition)
-        {
+        { 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 try
@@ -233,8 +233,8 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-
-                        cmd = new SqlCommand("SELECT s.*,CONCAT(C.first_name,' ',C.last_name) AS customer_name " +
+                        cmd = new SqlCommand("SELECT s.*,(s.total_amount+total_tax-discount_value) AS total," +
+                            "IIF(s.invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype,CONCAT(C.first_name,' ',C.last_name) AS customer " +
                             "FROM pos_sales s LEFT JOIN pos_customers C ON C.id=S.customer_id WHERE invoice_no LIKE @invoice_no AND s.branch_id = @branch_id", cn);
                         //cmd.Parameters.AddWithValue("@invoice_no", condition);
                         cmd.Parameters.AddWithValue("@invoice_no", string.Format("%{0}%", condition));

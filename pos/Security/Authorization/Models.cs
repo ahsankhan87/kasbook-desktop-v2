@@ -131,7 +131,6 @@ namespace pos.Security.Authorization
         public const string Reports_AccountsView = "reports.accounts.view";
         public const string Reports_ProfitLossView = "reports.profitloss.view";
 
-
         // ZATCA (FATOORA) specific permissions
         public const string Sales_Zatca_Enable = "sales.zatca.enable";
         public const string Sales_Zatca_Configure = "sales.zatca.configure";
@@ -160,7 +159,6 @@ namespace pos.Security.Authorization
         public const string Finance_Edit = "finance.edit";
         public const string Finance_Create = "finance.create";
 
-       
         // Security: Permissions management (normalized to lowercase)
         public const string Security_Permissions_View   = "security.permissions.view";
         public const string Security_Permissions_Create = "security.permissions.create";
@@ -206,6 +204,9 @@ namespace pos.Security.Authorization
         public const string Journal_Create = "journal.create";
         public const string Journal_Edit = "journal.edit";
         public const string Journal_Delete = "journal.delete";
+
+        // Dashboard permissions
+        public const string Dashboard_Metrics_View = "dashboard.metrics.view";
 
 
     }

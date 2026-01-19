@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -31,6 +32,11 @@ namespace pos
 
         public bool _returnStatus = false;
 
+        private readonly Timer _debounceTimer = new Timer();
+        private const int DebounceMs = 250;
+        private string _pendingSearchText = string.Empty;
+        private Dictionary<string, DataTable> _searchCache = new Dictionary<string, DataTable>(StringComparer.OrdinalIgnoreCase);
+
         public frm_searchProducts(frm_sales mainForm, frm_assign_products assign_product_frm, frm_alt_products frm_alt_products,
             string product_code, string category_id, string brand_id, int rowIndex = 0, bool isGrid = false, bool source_product = false,
             frm_products_labels frm_pro_labels = null, frm_product_full_detail frm_pro_detail = null, frm_product_adjustment frm_pro_adjmt=null)
@@ -50,19 +56,74 @@ namespace pos
             _brand_id = brand_id;
 
             InitializeComponent();
+
+            _debounceTimer.Interval = DebounceMs;
+            _debounceTimer.Tick += DebounceTimer_Tick;
         }
 
         public frm_searchProducts()
         {
             InitializeComponent();
 
+            _debounceTimer.Interval = DebounceMs;
+            _debounceTimer.Tick += DebounceTimer_Tick;
         }
 
-        private void frm_searchProducts_Load(object sender, EventArgs e)
+        private async void frm_searchProducts_Load(object sender, EventArgs e)
         {
             txt_search.Text = _product_code;
-            load_Products_grid();
+
+            using (BusyScope.Show(this, "Loading products..."))
+            {
+                await LoadProductsGridAsync();
+            }
+
             grid_search_products.Focus();
+        }
+
+        private Task<DataTable> SearchProductsAsync(string condition)
+        {
+            // Run DB query off UI thread so BusyForm can repaint/animate.
+            return Task.Run(() => ProductBLL.SearchProductByBrandAndCategory(condition, _category_id, _brand_id));
+        }
+
+        private Task<DataTable> SearchProductsAsync(string condition, bool by_code, bool by_name)
+        {
+            return Task.Run(() =>
+            {
+                var objBLL = new ProductBLL();
+                return objBLL.SearchRecord(condition, by_code, by_name);
+            });
+        }
+
+        private async Task LoadProductsGridAsync()
+        {
+            grid_search_products.DataSource = null;
+            grid_search_products.AutoGenerateColumns = false;
+
+            string condition = (txt_search.Text ?? string.Empty).Trim();
+            if (condition == string.Empty)
+                return;
+
+            // Prefer the existing behavior used in load_Products_grid (brand/category)
+            var dt = await SearchProductsAsync(condition);
+            grid_search_products.DataSource = dt;
+        }
+
+        // Keep old method for callers, but route to async.
+        public async void load_Products_grid()
+        {
+            try
+            {
+                using (BusyScope.Show(this, "Searching products..."))
+                {
+                    await LoadProductsGridAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
@@ -145,32 +206,51 @@ namespace pos
             }
         }
 
-        public void load_Products_grid()
+        private void DebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _debounceTimer.Stop();
+
+            string condition = (_pendingSearchText ?? string.Empty).Trim();
+            if (condition.Length == 0)
+            {
+                grid_search_products.DataSource = null;
+                return;
+            }
+
+            bool by_code = rb_by_code.Checked;
+            bool by_name = rb_by_name.Checked;
+
+            // cache key includes mode
+            string cacheKey = string.Format("{0}|c:{1}|n:{2}|cat:{3}|brand:{4}", condition, by_code, by_name, _category_id, _brand_id);
+
+            if (_searchCache.TryGetValue(cacheKey, out var cached))
+            {
+                grid_search_products.DataSource = cached;
+                return;
+            }
+
+            using (BusyScope.Show(this, "Searching products..."))
+            {
+                // Perform the search and update the cache
+                var dt = SearchProductsAsync(condition, by_code, by_name).Result;
+                _searchCache[cacheKey] = dt;
+                grid_search_products.DataSource = dt;
+            }
+        }
+
+        private async void txt_search_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
-                grid_search_products.DataSource = null;
-
-                //bind data in data grid view  
-                //ProductBLL objBLL = new ProductBLL();
-                grid_search_products.AutoGenerateColumns = false;
-
-                String condition = txt_search.Text.Trim();
-
-                if(condition != "")
-                {
-                    grid_search_products.DataSource = ProductBLL.SearchProductByBrandAndCategory(condition, _category_id, _brand_id);
-
-                }
-                
-
+                // reset debounce
+                _pendingSearchText = txt_search.Text;
+                _debounceTimer.Stop();
+                _debounceTimer.Start();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -202,36 +282,6 @@ namespace pos
                 product_movement_check();
             }
         }
-
-        private void txt_search_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if(txt_search.Text != "")
-                {
-                    //grid_search_products.DataSource = null;
-                    bool by_code = rb_by_code.Checked;
-                    bool by_name = rb_by_name.Checked;
-
-
-                    //bind data in data grid view  
-                    ProductBLL objBLL = new ProductBLL();
-                    grid_search_products.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text.Trim();
-                    grid_search_products.DataSource = objBLL.SearchRecord(condition, by_code, by_name);
-
-                }
-                
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
         
     }
 }
-     

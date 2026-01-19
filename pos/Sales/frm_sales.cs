@@ -10,6 +10,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer; // added
+using pos.UI; // <-- Added Ui namespace
 
 
 namespace pos
@@ -198,17 +199,13 @@ namespace pos
 
                     if (unitPriceInput < costPrice)
                     {
-                        var msg = lang == "ar-SA"
-                        ? "لا يمكن أن يكون سعر الوحدة أقل من سعر التكلفة."
-                        : "Unit price cannot be lower than cost price.";
-                        var caption = lang == "ar-SA" ? "سعر غير صالح" : "Invalid Price";
-                        MessageBox.Show(msg, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        // Reset to cost price and reselect the cell
-                        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value = Math.Round(costPrice, 3);
-                        grid_sales.CurrentCell = grid_sales.Rows[e.RowIndex].Cells["unit_price"];
-                        grid_sales.BeginEdit(true);
-                        return;// skip further calculations for this edit
+                        UiMessages.ShowWarning(
+                            "Warning: Unit price is lower than cost price. The invoice will be saved with this price.",
+                            "تنبيه: سعر الوحدة أقل من سعر التكلفة. سيتم حفظ الفاتورة بهذا السعر.");
 
+                        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Style.BackColor = Color.MistyRose;
+
+                        // Continue (do not reset value; do not return)
                     }
                 }
 
@@ -360,7 +357,7 @@ namespace pos
                         var grid_item_number = (grid_sales.Rows[i].Cells["item_number"].Value != null ? grid_sales.Rows[i].Cells["item_number"].Value : "");
                         if (grid_item_number.ToString() == item_number)
                         {
-                            MessageBox.Show("Product already added", "Already exist", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            UiMessages.ShowWarning("Product already added", "المنتج مضاف مسبقاً", "Already exist", "موجود بالفعل");
                             grid_sales.CurrentCell = grid_sales.Rows[RowIndex].Cells["code"]; //make qty cell active
                                                                                               //grid_sales.CurrentCell.Selected = true;
                             grid_sales.BeginEdit(true);
@@ -510,8 +507,8 @@ namespace pos
                     int id = Convert.ToInt32(myProductView["id"]);
                     string code = myProductView["code"].ToString();
                     string name = myProductView["name"].ToString();
-                    double cost_price = Convert.ToDouble(myProductView["avg_cost"]);
-                    double unit_price = Convert.ToDouble(myProductView["unit_price"]);
+                    double cost_price = Math.Round(Convert.ToDouble(myProductView["avg_cost"]), 2);
+                    double unit_price = Math.Round(Convert.ToDouble(myProductView["unit_price"]), 3);
                     double discount = 0.00;
                     double discount_percent = 0.00;
                     string location_code = myProductView["location_code"].ToString();
@@ -531,9 +528,9 @@ namespace pos
                     //double current_sub_total = Convert.ToDouble(qty) * unit_price + tax;
 
                     string[] row0 = { id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
-                                            sub_total_without_vat.ToString(),tax.ToString(), sub_total.ToString(),location_code,unit,category,
-                                            btn_delete, shop_qty,tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
-                                            item_type,category_code,grid_item_number};
+                    sub_total_without_vat.ToString(), tax.ToString(), sub_total.ToString(), location_code, unit, category,
+                    btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
+                    item_type, category_code, grid_item_number};
 
                     //Remove the first empty row
                     if (grid_sales.RowCount > 0 && grid_sales.Rows[0].Cells["id"].Value == null)
@@ -567,8 +564,7 @@ namespace pos
             }
             else
             {
-                MessageBox.Show("Record not found", "Products", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                UiMessages.ShowWarning("Record not found", "لم يتم العثور على سجل", "Products", "المنتجات");
             }
         }
 
@@ -1609,9 +1605,7 @@ namespace pos
             try
             {
                 //MessageBox.Show(grid_sales.CurrentRow.Cells["code"].Value.ToString());
-                if (grid_sales.RowCount > 0)
-                {
-                    if (grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
+                if (grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
                 {
                     int id = int.Parse(grid_sales.CurrentRow.Cells["id"].Value.ToString());
                     string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
@@ -1625,7 +1619,6 @@ namespace pos
                     porder_obj.ShowDialog();
                 }
 
-            }
             }
             catch (Exception ex)
             {
@@ -2514,13 +2507,14 @@ namespace pos
 
             if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
             {
-                if (MessageBox.Show("Are you sure you want to close sale?",
-                      "Close Sale Transaction",
-                       MessageBoxButtons.YesNo,
-                       MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                if (MessageBox.Show(
+                        UiMessages.T("Are you sure you want to close sale?", "هل أنت متأكد أنك تريد إغلاق عملية البيع؟"),
+                        UiMessages.T("Close Sale Transaction", "إغلاق معاملة البيع"),
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2) == DialogResult.No)
                 {
                     e.Cancel = true;
-
                 }
             }
 
@@ -2529,7 +2523,8 @@ namespace pos
         private void NewToolStripButton_Click(object sender, EventArgs e)
         {
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want new sale transaction", "New Transaction", buttons, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show(UiMessages.T("Are you sure you want new sale transaction", "هل أنت متأكد أنك تريد عملية بيع جديدة"),
+                  UiMessages.T("New Transaction", "معاملة جديدة"), buttons, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
@@ -2545,7 +2540,7 @@ namespace pos
                 // Validate at least one product is added
                 if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
                 {
-                    MessageBox.Show("Please add products ", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات", "Sale Transaction", "معاملة البيع");
                     return;
                 }
 
@@ -2566,7 +2561,7 @@ namespace pos
                 // Sale type selection validation
                 if (cmb_sale_type.SelectedValue.ToString() == "0")
                 {
-                    MessageBox.Show("Please select sale type", "Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning("Please select sale type", "يرجى اختيار نوع البيع", "Sale Transaction", "معاملة البيع");
                     return;
                 }
 
@@ -2629,13 +2624,17 @@ namespace pos
 
                     if (sale_type == "Credit" && netAmount > netCreditLimit)
                     {
-                        MessageBox.Show($"Cannot process sale. Customer credit limit would be exceeded!\n\n" +
-                                  $"Current Balance: {customerBalance:C}\n" +
-                                  $"Sale Amount: {netAmount:C}\n" +
-                                  $"Credit Limit: {customer_credit_limit:C}",
-                                  "Credit Limit Exceeded",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Warning);
+                        MessageBox.Show(
+                            $"Cannot process sale. Customer credit limit would be exceeded!\n\n" +
+                            $"Current Balance: {customerBalance:C}\n" +
+                            $"Sale Amount: {netAmount:C}\n" +
+                            $"Credit Limit: {customer_credit_limit:C}",
+                            $"لا يمكن إتمام البيع لأن حد الائتمان للعميل سيتجاوز الحد المسموح.\n\n" +
+                            $"الرصيد الحالي: {customerBalance:C}\n" +
+                            $"قيمة الفاتورة: {netAmount:C}\n" +
+                            $"حد الائتمان: {customer_credit_limit:C}",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
                         return;
                     }
                     ////
@@ -2665,7 +2664,7 @@ namespace pos
                             total_tax_var = 0;
                         }
 
-                        
+                       
 
                         if (txt_invoice_no.Text != "" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "E") //if estimates
                         {
@@ -2695,7 +2694,7 @@ namespace pos
                         
                         if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
                         {
-                            MessageBox.Show("Update are not allowed", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            UiMessages.ShowWarning("Update are not allowed", "التعديل غير مسموح", "Update", "تعديل");
                             return;
 
                             //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
@@ -3005,12 +3004,12 @@ namespace pos
                         }
                         else
                         {
-                            MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            UiMessages.ShowError("Record not saved", "لم يتم حفظ السجل", "Error", "خطأ");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Please add products", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات", "Sale Transaction", "معاملة البيع");
                     }
                 }
 

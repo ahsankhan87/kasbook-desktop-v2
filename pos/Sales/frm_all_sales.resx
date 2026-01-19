@@ -126,7 +126,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnSendWhatsApp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>475, 7</value>
+    <value>462, 7</value>
   </data>
   <data name="btnSendWhatsApp.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 44</value>
@@ -157,10 +157,10 @@
     <value>NoControl</value>
   </data>
   <data name="BtnCustomerNameChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 7</value>
+    <value>338, 7</value>
   </data>
   <data name="BtnCustomerNameChange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 44</value>
+    <value>118, 44</value>
   </data>
   <data name="BtnCustomerNameChange.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -190,13 +190,13 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>714, 18</value>
+    <value>626, 18</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 16</value>
+    <value>114, 17</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -220,13 +220,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>830, 15</value>
+    <value>741, 15</value>
   </data>
   <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>243, 24</value>
   </data>
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -250,7 +250,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1109, 14</value>
+    <value>984, 14</value>
   </data>
   <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -283,13 +283,13 @@
     <value>NoControl</value>
   </data>
   <data name="Btn_PrintPOS80.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 6</value>
+    <value>218, 7</value>
   </data>
   <data name="Btn_PrintPOS80.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="Btn_PrintPOS80.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 44</value>
+    <value>114, 44</value>
   </data>
   <data name="Btn_PrintPOS80.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -316,13 +316,13 @@
     <value>NoControl</value>
   </data>
   <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 6</value>
+    <value>104, 7</value>
   </data>
   <data name="btn_print_invoice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 44</value>
+    <value>108, 44</value>
   </data>
   <data name="btn_print_invoice.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -349,13 +349,13 @@
     <value>NoControl</value>
   </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
+    <value>10, 7</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 44</value>
+    <value>88, 44</value>
   </data>
   <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -511,7 +511,7 @@
     <value>6</value>
   </data>
   <data name="detail.Width" type="System.Int32, mscorlib">
-    <value>48</value>
+    <value>47</value>
   </data>
   <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -622,7 +622,7 @@
     <value>51</value>
   </data>
   <data name="grid_all_sales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1172, 464</value>
+    <value>1048, 464</value>
   </data>
   <data name="grid_all_sales.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -649,7 +649,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 524</value>
+    <value>1054, 524</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -676,7 +676,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 23</value>
+    <value>13, 23</value>
   </data>
   <data name="lbl_taxes_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -712,7 +712,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 63</value>
+    <value>1054, 63</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -754,13 +754,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>7, 16</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 587</value>
+    <value>1054, 587</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -937,6 +937,6 @@
     <value>frm_all_sales</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>pos.Security.Authorization.SecuredForm, pos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

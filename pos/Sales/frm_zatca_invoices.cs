@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -187,6 +188,20 @@ namespace pos.Sales
                 string ecdsaPublicKeyBase64 = sigData.PublicKeyBase64;
                 string certificateSignatureBase64 = sigData.CertificateSignatureBase64;
 
+                // 4. Generate QR code with thumbprints (not full certificates)
+                // 3. Extract ALL required data
+                string invoiceHash = ZatcaHelper.GetInvoiceHash(signResult);
+                string ecdsaSignature = ExtractEcdsaSignature(signResult.SignedEInvoice);
+                string ecdsaPublicKeyThumbprint = ExtractEcdsaPublicKeyThumbprint(signResult.SignedEInvoice);
+                string zatcaCertificateThumbprint = ExtractZatcaCertificateThumbprint(signResult.SignedEInvoice);
+                
+                DateTime issueDateTime = ZatcaInvoiceGenerator.ParseSqlDateTimeInvariant(invoice["sale_time"]);
+                ZATCAQRCodeGenerator qrGenerator = new ZATCAQRCodeGenerator();
+                string finalQRCode = qrGenerator.GeneratePhase2QRCodeWithAllTags(
+                    invoice, sellerName, sellerVAT, totalWithVat, vatAmount,
+                    issueDateTime, invoiceHashBase64, ecdsaSignature,
+                    ecdsaPublicKeyThumbprint, zatcaCertificateThumbprint);
+
                 // 4️⃣ Generate ZATCA-SAFE QR (Tag-3 fixed)
                 string qrBase64 = ZatcaPhase2QrGenerator.GenerateQrBase64(
                     sellerName,
@@ -201,8 +216,12 @@ namespace pos.Sales
                     certificateSignatureBase64
                 );
 
+                var qrGen = new EInvoiceQRGenerator();
+                QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
+                string qrBase641 = qrResult.QR;
+
                 // 5️⃣ Insert QR AFTER signing (correct for Phase-2)
-                ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase64);
+                ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase641);
 
                 // 8️⃣ Save signed XML
                 string ublFolder = Path.Combine(Application.StartupPath, "UBL");
@@ -216,7 +235,9 @@ namespace pos.Sales
                 salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", path, null);
 
                 // Validate QR contents
-                var tlvs = ZatcaPhase2QrGenerator.DecodeZatcaQr(qrBase64);
+                var tlvs = ZatcaPhase2QrGenerator.DecodeZatcaQr(qrBase641);
+                var tlvs_1 = ZatcaPhase2QrGenerator.DecodeZatcaQr(qrBase64);
+                var tlvs_2 = ZatcaPhase2QrGenerator.DecodeZatcaQr(finalQRCode);
                 //ZatcaPhase2QrGenerator.ValidateZatcaQr(tlvs);
                 //MessageBox.Show("QR Tag-8: " + tlvs.First(t => t.Tag == 8).Value);
                 //MessageBox.Show("QR Tag-9: " + tlvs.First(t => t.Tag == 9).Value);
@@ -284,7 +305,108 @@ namespace pos.Sales
                 
             }
         }
-        
+        public static string ExtractEcdsaSignature(XmlDocument signedXml)
+        {
+            try
+            {
+                XmlNamespaceManager ns = new XmlNamespaceManager(signedXml.NameTable);
+                ns.AddNamespace("ds", "http://www.w3.org/2000/09/xmldsig#");
+                ns.AddNamespace("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+                ns.AddNamespace("sig", "urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2");
+                ns.AddNamespace("sac", "urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2");
+
+                // XPath: /Invoice/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/sig:UBLDocumentSignatures/sac:SignatureInformation/ds:Signature/ds:SignatureValue
+                XmlNode signatureNode = signedXml.SelectSingleNode(
+                    "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/sig:UBLDocumentSignatures/sac:SignatureInformation/ds:Signature/ds:SignatureValue", ns);
+
+                if (signatureNode != null)
+                {
+                    return signatureNode.InnerText.Trim();
+                }
+
+                // Alternative XPath (without sig: prefix)
+                signatureNode = signedXml.SelectSingleNode(
+                    "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/*[local-name()='UBLDocumentSignatures']/*[local-name()='SignatureInformation']/ds:Signature/ds:SignatureValue", ns);
+
+                return signatureNode?.InnerText.Trim() ?? "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error extracting ECDSA signature: {ex.Message}");
+                return "";
+            }
+        }
+
+        public static string ExtractEcdsaPublicKeyThumbprint(XmlDocument signedXml)
+        {
+            try
+            {
+                XmlNamespaceManager ns = new XmlNamespaceManager(signedXml.NameTable);
+                ns.AddNamespace("ds", "http://www.w3.org/2000/09/xmldsig#");
+                ns.AddNamespace("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+
+                // Extract the full certificate
+                XmlNode certNode = signedXml.SelectSingleNode(
+                    "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/*[local-name()='UBLDocumentSignatures']/*[local-name()='SignatureInformation']/ds:Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate", ns);
+
+                if (certNode != null)
+                {
+                    string cert = certNode.InnerText.Trim();
+                    cert = Regex.Replace(cert, @"\s+", "");
+
+                    // Generate SHA-256 thumbprint
+                    return ZATCAQRCodeGenerator.GenerateCertificateThumbprint(cert);
+                }
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error extracting ECDSA public key thumbprint: {ex.Message}");
+                return "";
+            }
+        }
+
+        public static string ExtractZatcaCertificateThumbprint(XmlDocument signedXml)
+        {
+            try
+            {
+                // Check if this is a simplified invoice
+                XmlNamespaceManager ns = new XmlNamespaceManager(signedXml.NameTable);
+                ns.AddNamespace("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+
+                XmlNode invoiceTypeNode = signedXml.SelectSingleNode("//cbc:InvoiceTypeCode", ns);
+                string invoiceType = invoiceTypeNode?.Attributes?["name"]?.Value;
+
+                // For simplified invoices only
+                if (invoiceType == "0100000" || invoiceType == "0200000")
+                {
+                    ns.AddNamespace("ds", "http://www.w3.org/2000/09/xmldsig#");
+                    ns.AddNamespace("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+
+                    // Extract ZATCA's CA certificate (second certificate in chain)
+                    XmlNodeList certNodes = signedXml.SelectNodes(
+                        "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/*[local-name()='UBLDocumentSignatures']/*[local-name()='SignatureInformation']/ds:Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate", ns);
+
+                    if (certNodes != null && certNodes.Count > 1)
+                    {
+                        string zatcaCert = certNodes[1].InnerText.Trim();
+                        zatcaCert = Regex.Replace(zatcaCert, @"\s+", "");
+
+                        // Generate SHA-256 thumbprint
+                        return ZATCAQRCodeGenerator.GenerateCertificateThumbprint(zatcaCert);
+                    }
+                }
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error extracting ZATCA certificate thumbprint: {ex.Message}");
+                return "";
+            }
+        }
+
         private async Task ZatcaInvoiceComplianceChecks(string invoiceNo)
         {
             try

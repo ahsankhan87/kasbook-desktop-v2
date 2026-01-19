@@ -99,21 +99,25 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
+
+                        // NOTE: avg_cost is used as product cost for profit reporting
                         String query = "SELECT S.id,S.sale_date,S.invoice_no," +
                             " C.first_name AS customer_name," +
                             " SI.item_code,SI.item_code as code,SI.item_number,SI.item_name AS product_name,SI.loc_code,SI.quantity_sold,SI.unit_price," +
-                            " SI.discount_value,"+
+                            " SI.discount_value," +
                             " SI.tax_rate," +
                             " IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100)) AS vat," +
                             " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))+IIF(S.account = 'Return',((-SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100),((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100))) AS total_with_vat," +
-                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))) AS total" +
-                            //" IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold),(SI.unit_price*SI.quantity_sold)) AS total," +
+                            " (IIF(S.account = 'Return',(-SI.unit_price*SI.quantity_sold-SI.discount_value),(SI.unit_price*SI.quantity_sold-SI.discount_value))) AS total," +
+                            " ISNULL(SI.cost_price, 0) AS cost_price," +
+                            " (ISNULL(SI.unit_price, 0) - ISNULL(SI.cost_price, 0) * SI.quantity_sold) AS profit," +
+                            " (ISNULL(SI.cost_price, 0) * SI.quantity_sold) AS cost_total" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
-                            //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
+                            " LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
                             " WHERE S.branch_id = @branch_id AND S.sale_date BETWEEN @from_date AND @to_date";
-                            
+
                         if (sale_type != "All")
                         {
                             query += " AND S.sale_type = @sale_type";
@@ -156,15 +160,13 @@ namespace POS.DLL
                         if (product_code != "")
                         {
                             cmd.Parameters.AddWithValue("@product_code", product_code);
-                        
+
                         }
                         if (employee_id != 0)
                         {
                             cmd.Parameters.AddWithValue("@employee_id", employee_id);
-                        
-                        }
-                        //cmd.Parameters.AddWithValue("@OperationType", "5");
 
+                        }
                     }
 
                     da = new SqlDataAdapter(cmd);

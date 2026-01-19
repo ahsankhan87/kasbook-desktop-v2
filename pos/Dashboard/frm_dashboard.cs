@@ -81,6 +81,19 @@ namespace pos.Dashboard
 
         private void LoadDashboardMetrics()
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Dashboard_Metrics_View))
+            {
+                SetSalesTodayAmount(0m);
+                SetMonthlySalesAmount(0m);
+                SetLowStockCount(0);
+                SetRecentActivity(new[]
+                {
+                    new RecentItem("Security", "Dashboard metrics hidden (no permission).", DateTime.Now)
+                });
+                return;
+            }
+
             try
             {
                 var bll = new POS.BLL.Dashboard.DashboardBLL();

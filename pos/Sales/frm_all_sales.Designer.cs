@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
+            this.Btn_PrintPOS80 = new System.Windows.Forms.Button();
             this.btn_print_invoice = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_all_sales = new System.Windows.Forms.DataGridView();
@@ -68,7 +69,6 @@
             this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Btn_PrintPOS80 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_sales)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -123,6 +123,13 @@
             this.btn_search.Name = "btn_search";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // Btn_PrintPOS80
+            // 
+            resources.ApplyResources(this.Btn_PrintPOS80, "Btn_PrintPOS80");
+            this.Btn_PrintPOS80.Name = "Btn_PrintPOS80";
+            this.Btn_PrintPOS80.UseVisualStyleBackColor = true;
+            this.Btn_PrintPOS80.Click += new System.EventHandler(this.Btn_PrintPOS80_Click);
             // 
             // btn_print_invoice
             // 
@@ -368,13 +375,6 @@
             resources.ApplyResources(this.dataGridViewImageColumn2, "dataGridViewImageColumn2");
             this.dataGridViewImageColumn2.Image = global::pos.Properties.Resources.Trash_16;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            // 
-            // Btn_PrintPOS80
-            // 
-            resources.ApplyResources(this.Btn_PrintPOS80, "Btn_PrintPOS80");
-            this.Btn_PrintPOS80.Name = "Btn_PrintPOS80";
-            this.Btn_PrintPOS80.UseVisualStyleBackColor = true;
-            this.Btn_PrintPOS80.Click += new System.EventHandler(this.Btn_PrintPOS80_Click);
             // 
             // frm_all_sales
             // 

@@ -90,7 +90,9 @@ namespace pos.Security.Authorization
                 Permissions.Security_Permissions_View,
                 Permissions.Security_Permissions_Create,
                 Permissions.Security_Permissions_Edit,
-                Permissions.Security_Permissions_Delete
+                Permissions.Security_Permissions_Delete,
+                Permissions.Dashboard_Metrics_View,
+                Permissions.Reports_ProfitLossView,
             });
 
             _roleCache[SystemRole.Manager] = new RoleDefinition
@@ -105,7 +107,10 @@ namespace pos.Security.Authorization
                 Permissions.Finance_View,
                 Permissions.Inventory_View,
                 Permissions.Security_Permissions_View,
-                Permissions.Security_Permissions_Edit
+                Permissions.Security_Permissions_Edit,
+                Permissions.Dashboard_Metrics_View,
+                                Permissions.Reports_ProfitLossView,
+
             });
 
             _roleCache[SystemRole.User] = new RoleDefinition
@@ -118,7 +123,8 @@ namespace pos.Security.Authorization
                 Permissions.Sales_Zatca_Sign, Permissions.Sales_Zatca_Report, Permissions.Sales_Zatca_Qr_Show,
                 Permissions.Customers_View, Permissions.Customers_Edit,
                 Permissions.Finance_View,
-                Permissions.Inventory_View
+                Permissions.Inventory_View,
+                Permissions.Dashboard_Metrics_View
             });
 
             _roleCache[SystemRole.Cashier] = new RoleDefinition
@@ -130,7 +136,8 @@ namespace pos.Security.Authorization
                 Permissions.Sales_Create, Permissions.Sales_View, Permissions.Sales_Print,
                 Permissions.Sales_Zatca_Qr_Show,
                 Permissions.Customers_View,
-                Permissions.Inventory_View
+                Permissions.Inventory_View,
+                Permissions.Dashboard_Metrics_View
             });
 
             _roleCache[SystemRole.SalesRep] = new RoleDefinition
@@ -141,6 +148,7 @@ namespace pos.Security.Authorization
             {
                 Permissions.Sales_Create, Permissions.Sales_View, Permissions.Sales_Print,
                 Permissions.Customers_View,
+                Permissions.Dashboard_Metrics_View
             });
 
             _roleCache[SystemRole.Accountant] = new RoleDefinition
@@ -150,7 +158,8 @@ namespace pos.Security.Authorization
             _roleCache[SystemRole.Accountant].GrantedPermissions.UnionWith(new[]
             {
                 Permissions.Sales_View, Permissions.Sales_Print,
-                Permissions.Finance_View, Permissions.Finance_Report
+                Permissions.Finance_View, Permissions.Finance_Report,
+                Permissions.Dashboard_Metrics_View
             });
 
             _roleCache[SystemRole.Viewer] = new RoleDefinition
@@ -161,7 +170,8 @@ namespace pos.Security.Authorization
             {
                 Permissions.Sales_View,
                 Permissions.Customers_View,
-                Permissions.Inventory_View
+                Permissions.Inventory_View,
+                Permissions.Dashboard_Metrics_View
             });
         }
     }

@@ -1444,6 +1444,11 @@
       <DependentUpon>SupplierPaymentReceipt.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Busy\BusyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Busy\BusyScope.cs" />
+    <Compile Include="UI\UiMessages.cs" />
     <EmbeddedResource Include="Accounts\Accounts\frm_accounts.ar-SA.resx">
       <DependentUpon>frm_accounts.cs</DependentUpon>
     </EmbeddedResource>

@@ -87,7 +87,6 @@ namespace pos
         {
             try
             {
-
                 String condition = txt_search.Text;
                 if (!string.IsNullOrEmpty(condition))
                 {
