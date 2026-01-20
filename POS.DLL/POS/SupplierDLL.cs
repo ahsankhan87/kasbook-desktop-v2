@@ -177,6 +177,13 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
                         cmd.Parameters.AddWithValue("@OperationType", "1");
                         
+                        cmd.Parameters.Add("@StreetName", SqlDbType.NVarChar).Value = obj.StreetName;
+                        cmd.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = obj.PostalCode;
+                        cmd.Parameters.Add("@BuildingNumber", SqlDbType.NVarChar).Value = obj.BuildingNumber;
+                        cmd.Parameters.Add("@CitySubdivisionName", SqlDbType.NVarChar).Value = obj.CitySubdivisionName;
+                        cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
+                        cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
+
                         //--operation types   
                         //-- 1) Insert  
                         //-- 2) Update  
@@ -224,6 +231,13 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
                         cmd.Parameters.AddWithValue("@OperationType", "2");
                         
+                        cmd.Parameters.Add("@StreetName", SqlDbType.NVarChar).Value = obj.StreetName;
+                        cmd.Parameters.Add("@PostalCode", SqlDbType.NVarChar).Value = obj.PostalCode;
+                        cmd.Parameters.Add("@BuildingNumber", SqlDbType.NVarChar).Value = obj.BuildingNumber;
+                        cmd.Parameters.Add("@CitySubdivisionName", SqlDbType.NVarChar).Value = obj.CitySubdivisionName;
+                        cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
+                        cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
+
                         //--operation types   
                         //-- 1) Insert  
                         //-- 2) Update  

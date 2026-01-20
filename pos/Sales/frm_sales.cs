@@ -162,7 +162,6 @@ namespace pos
                     }
                     ////////////
 
-
                 }
 
                 // Handle the end of editing for numeric columns (3, 4, 5, 6, 7)

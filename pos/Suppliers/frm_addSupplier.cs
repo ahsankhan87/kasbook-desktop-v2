@@ -82,10 +82,15 @@ namespace pos
                 info.address = txt_address.Text;
                 info.contact_no = txt_contact_no.Text;
                 info.vat_with_status = chk_vat_status.Checked;
-                    
+                info.StreetName = txt_StreetName.Text.Trim();
+                info.CityName = txt_cityName.Text.Trim();
+                info.BuildingNumber = txt_buildingNumber.Text.Trim();
+                info.CitySubdivisionName = txt_citySubdivisionName.Text.Trim();
+                info.PostalCode = txt_postalCode.Text.Trim();
+                info.CountryName = txt_countryName.Text.Trim();
+
                 SupplierBLL objBLL = new SupplierBLL();
                     
-                
                 int result = objBLL.Insert(info);
                 if (result > 0)
                 {
@@ -104,7 +109,6 @@ namespace pos
 
                 }
 
-                
             }
             else
             {
@@ -158,6 +162,13 @@ namespace pos
             chk_vat_status.Checked = false;
             lbl_customer_name.Text = "";
             grid_supplier_transactions.DataSource = null;
+
+            txt_StreetName.Text = "";
+            txt_cityName.Text = "";
+            txt_buildingNumber.Text = "";
+            txt_citySubdivisionName.Text = "";
+            txt_postalCode.Text = "";
+            txt_countryName.Text = "";
         }
 
         private void btn_update_Click(object sender, EventArgs e)
@@ -178,6 +189,12 @@ namespace pos
                 info.address = txt_address.Text;
                 info.contact_no = txt_contact_no.Text;
                 info.vat_with_status = chk_vat_status.Checked;
+                info.StreetName = txt_StreetName.Text.Trim();
+                info.CityName = txt_cityName.Text.Trim();
+                info.BuildingNumber = txt_buildingNumber.Text.Trim();
+                info.CitySubdivisionName = txt_citySubdivisionName.Text.Trim();
+                info.PostalCode = txt_postalCode.Text.Trim();
+                info.CountryName = txt_countryName.Text.Trim();
 
                 SupplierBLL objBLL = new SupplierBLL();
 
@@ -222,7 +239,13 @@ namespace pos
                 txt_contact_no.Text = myProductView["contact_no"].ToString();
                 txt_email.Text = myProductView["email"].ToString();
                 chk_vat_status.Checked = bool.Parse(myProductView["vat_status"].ToString());
-                
+                txt_StreetName.Text = myProductView["StreetName"].ToString();
+                txt_cityName.Text = myProductView["CityName"].ToString();
+                txt_buildingNumber.Text = myProductView["BuildingNumber"].ToString();
+                txt_citySubdivisionName.Text = myProductView["CitySubdivisionName"].ToString();
+                txt_postalCode.Text = myProductView["PostalCode"].ToString();
+                txt_countryName.Text = myProductView["CountryName"].ToString();
+
             }
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;

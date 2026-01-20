@@ -35,6 +35,13 @@ namespace POS.Core
         public string date_updated { get; set; }
 
         public bool vat_with_status { get; set; }
+        public string CityName { get; set; }
 
+        public string CountryName { get; set; }
+
+        public string StreetName { get; set; }
+        public string PostalCode { get; set; }
+        public string BuildingNumber { get; set; }
+        public string CitySubdivisionName { get; set; }
     }
 }

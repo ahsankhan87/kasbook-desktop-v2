@@ -129,7 +129,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_product_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>620, 14</value>
+    <value>599, 14</value>
   </data>
   <data name="txt_product_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -137,11 +137,14 @@
   <data name="txt_product_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <data name="txt_product_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 28</value>
+  </data>
   <data name="btn_search_products.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btn_search_products.Location" type="System.Drawing.Point, System.Drawing">
-    <value>540, 12</value>
+    <value>494, 12</value>
   </data>
   <data name="btn_search_products.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -159,7 +162,7 @@
     <value>Yes</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 17</value>
+    <value>84, 22</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>بحث منتوج
@@ -197,7 +200,7 @@
     <value>Top, Right</value>
   </data>
   <data name="lbl_errors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 595</value>
+    <value>188, 595</value>
   </data>
   <data name="lbl_errors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 0, 1, 0</value>
@@ -215,7 +218,7 @@
     <value>19</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
+    <value>حفظ F3</value>
   </data>
   <data name="btn_cancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
@@ -236,7 +239,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 670</value>
+    <value>814, 670</value>
   </data>
   <data name="Products_tab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -248,22 +251,49 @@
     <value>True</value>
   </data>
   <data name="Products_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 670</value>
+    <value>814, 670</value>
   </data>
   <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>829, 639</value>
+    <value>806, 639</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>تفاصيل</value>
+  </data>
+  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>568, 475</value>
+  </data>
+  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label7.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 18</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>السعر 2</value>
   </data>
   <data name="btn_translate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btn_translate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 232</value>
+    <value>330, 232</value>
   </data>
   <data name="btn_translate.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 28</value>
@@ -272,7 +302,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_expiry_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 14</value>
+    <value>146, 14</value>
   </data>
   <data name="txt_expiry_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -284,7 +314,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 170</value>
+    <value>480, 170</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
@@ -293,7 +323,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 139</value>
+    <value>480, 139</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
@@ -305,7 +335,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 108</value>
+    <value>480, 108</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
@@ -317,7 +347,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>559, 170</value>
+    <value>536, 170</value>
   </data>
   <data name="txt_groups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -332,7 +362,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>559, 139</value>
+    <value>536, 139</value>
   </data>
   <data name="txt_categories.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -347,7 +377,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_def_location.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 108</value>
+    <value>146, 108</value>
   </data>
   <data name="txt_def_location.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 24</value>
@@ -356,7 +386,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_packet_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 77</value>
+    <value>146, 77</value>
   </data>
   <data name="txt_packet_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -368,7 +398,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>559, 108</value>
+    <value>536, 108</value>
   </data>
   <data name="txt_brands.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -379,11 +409,14 @@
   <data name="txt_brands.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 200</value>
+    <value>146, 204</value>
   </data>
   <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -395,7 +428,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 173</value>
+    <value>740, 173</value>
   </data>
   <data name="label22.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -409,11 +442,14 @@
   <data name="label22.Text" xml:space="preserve">
     <value>مجموعة</value>
   </data>
+  <data name="btn_upload_picture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btn_upload_picture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btn_upload_picture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 327</value>
+    <value>146, 331</value>
   </data>
   <data name="btn_upload_picture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -428,7 +464,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 17</value>
+    <value>737, 17</value>
   </data>
   <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 18</value>
@@ -443,7 +479,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 205</value>
+    <value>720, 205</value>
   </data>
   <data name="label41.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -462,7 +498,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 142</value>
+    <value>766, 142</value>
   </data>
   <data name="label23.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -480,7 +516,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 237</value>
+    <value>762, 237</value>
   </data>
   <data name="label39.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -499,7 +535,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 269</value>
+    <value>742, 269</value>
   </data>
   <data name="label38.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -518,7 +554,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 234</value>
+    <value>480, 234</value>
   </data>
   <data name="txt_name.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -533,7 +569,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_name_ar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 266</value>
+    <value>480, 266</value>
   </data>
   <data name="txt_name_ar.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -548,7 +584,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 202</value>
+    <value>480, 202</value>
   </data>
   <data name="txt_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -563,7 +599,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_barcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 14</value>
+    <value>480, 14</value>
   </data>
   <data name="txt_barcode.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -578,7 +614,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 108</value>
+    <value>751, 108</value>
   </data>
   <data name="label34.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -596,7 +632,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 49</value>
+    <value>734, 49</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 18</value>
@@ -608,7 +644,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 80</value>
+    <value>724, 80</value>
   </data>
   <data name="label33.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -627,7 +663,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_alt_item_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 46</value>
+    <value>480, 46</value>
   </data>
   <data name="txt_alt_item_number.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 24</value>
@@ -636,7 +672,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_part_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 76</value>
+    <value>480, 76</value>
   </data>
   <data name="txt_part_number.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 24</value>
@@ -645,7 +681,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 137</value>
+    <value>414, 137</value>
   </data>
   <data name="label25.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -661,7 +697,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_pur_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 406</value>
+    <value>480, 406</value>
   </data>
   <data name="txt_pur_dmnd_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -673,13 +709,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_restock_level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>638, 472</value>
+    <value>480, 504</value>
   </data>
   <data name="txt_restock_level.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_restock_level.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
+    <value>239, 24</value>
   </data>
   <data name="txt_restock_level.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -688,7 +724,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_item_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 306</value>
+    <value>480, 306</value>
   </data>
   <data name="cmb_item_type.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -703,7 +739,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_demand_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 374</value>
+    <value>480, 374</value>
   </data>
   <data name="txt_demand_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -718,13 +754,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_sale_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>691, 408</value>
+    <value>641, 408</value>
   </data>
   <data name="txt_sale_dmnd_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_sale_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 24</value>
+    <value>78, 24</value>
   </data>
   <data name="txt_sale_dmnd_qty.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -733,7 +769,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 134</value>
+    <value>146, 134</value>
   </data>
   <data name="txt_description.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -748,7 +784,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_supplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 46</value>
+    <value>146, 46</value>
   </data>
   <data name="cmb_supplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -760,7 +796,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_units.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 340</value>
+    <value>480, 340</value>
   </data>
   <data name="cmb_units.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -775,7 +811,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_tax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>647, 374</value>
+    <value>624, 374</value>
   </data>
   <data name="cmb_tax.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -790,7 +826,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 309</value>
+    <value>721, 309</value>
   </data>
   <data name="label37.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -806,7 +842,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>397, 109</value>
+    <value>374, 109</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 21</value>
@@ -818,7 +854,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 377</value>
+    <value>746, 377</value>
   </data>
   <data name="label24.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -833,7 +869,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 80</value>
+    <value>389, 80</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -848,7 +884,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 49</value>
+    <value>411, 49</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -863,7 +899,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>409, 19</value>
+    <value>386, 19</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -879,7 +915,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 443</value>
+    <value>724, 443</value>
   </data>
   <data name="label26.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -894,7 +930,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 475</value>
+    <value>728, 510</value>
   </data>
   <data name="label27.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -910,7 +946,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 343</value>
+    <value>756, 343</value>
   </data>
   <data name="label36.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -925,7 +961,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 409</value>
+    <value>730, 409</value>
   </data>
   <data name="label28.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -940,7 +976,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>584, 409</value>
+    <value>561, 409</value>
   </data>
   <data name="label29.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -951,23 +987,11 @@
   <data name="label29.Text" xml:space="preserve">
     <value>حد المشتريات</value>
   </data>
-  <data name="label30.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>559, 443</value>
-  </data>
-  <data name="label30.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 23</value>
-  </data>
   <data name="label31.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>585, 377</value>
+    <value>562, 377</value>
   </data>
   <data name="label31.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -982,7 +1006,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>633, 443</value>
+    <value>739, 475</value>
   </data>
   <data name="label32.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -997,13 +1021,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>691, 440</value>
+    <value>480, 440</value>
   </data>
   <data name="txt_cost_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_cost_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 24</value>
+    <value>238, 24</value>
   </data>
   <data name="txt_cost_price.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1012,13 +1036,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_unit_price_2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>503, 440</value>
+    <value>480, 472</value>
   </data>
   <data name="txt_unit_price_2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_unit_price_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 24</value>
+    <value>76, 24</value>
   </data>
   <data name="txt_unit_price_2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1027,13 +1051,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_unit_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>582, 440</value>
+    <value>615, 472</value>
   </data>
   <data name="txt_unit_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_unit_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 24</value>
+    <value>103, 24</value>
   </data>
   <data name="txt_unit_price.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1042,17 +1066,11 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>829, 639</value>
+    <value>806, 639</value>
   </data>
   <data name="tabPage3.Text" xml:space="preserve">
     <value>الحركات
 </value>
-  </data>
-  <data name="grid_movements.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="grid_movements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>823, 635</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
@@ -1068,6 +1086,9 @@
   </data>
   <data name="balanceQty.HeaderText" xml:space="preserve">
     <value>الكمية التوازن</value>
+  </data>
+  <data name="balanceQty.Width" type="System.Int32, mscorlib">
+    <value>106</value>
   </data>
   <data name="cost_price.HeaderText" xml:space="preserve">
     <value>سعر التكلفة</value>
@@ -1101,6 +1122,12 @@
   </data>
   <data name="trans_date.Width" type="System.Int32, mscorlib">
     <value>105</value>
+  </data>
+  <data name="grid_movements.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="grid_movements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 635</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1142,13 +1169,13 @@
     <value>فارغة</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>837, 47</value>
+    <value>814, 47</value>
   </data>
   <data name="panel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 670</value>
+    <value>158, 670</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>972, 717</value>

@@ -57,6 +57,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_countryName = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txt_buildingNumber = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txt_postalCode = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_cityName = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txt_citySubdivisionName = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txt_StreetName = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Btn_printPaymentReceipt = new System.Windows.Forms.Button();
             this.Btn_ledger_report = new System.Windows.Forms.Button();
@@ -84,6 +97,7 @@
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_supplier_transactions)).BeginInit();
             this.panel3.SuspendLayout();
@@ -232,6 +246,7 @@
             // tabPage1
             // 
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.txt_id);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.label3);
@@ -250,6 +265,84 @@
             this.tabPage1.Controls.Add(this.lbl_edit_status);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.txt_countryName);
+            this.groupBox3.Controls.Add(this.label27);
+            this.groupBox3.Controls.Add(this.txt_buildingNumber);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.txt_postalCode);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.txt_cityName);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.txt_citySubdivisionName);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.txt_StreetName);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // txt_countryName
+            // 
+            resources.ApplyResources(this.txt_countryName, "txt_countryName");
+            this.txt_countryName.Name = "txt_countryName";
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            // 
+            // txt_buildingNumber
+            // 
+            resources.ApplyResources(this.txt_buildingNumber, "txt_buildingNumber");
+            this.txt_buildingNumber.Name = "txt_buildingNumber";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            // 
+            // txt_postalCode
+            // 
+            resources.ApplyResources(this.txt_postalCode, "txt_postalCode");
+            this.txt_postalCode.Name = "txt_postalCode";
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            // 
+            // txt_cityName
+            // 
+            resources.ApplyResources(this.txt_cityName, "txt_cityName");
+            this.txt_cityName.Name = "txt_cityName";
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            // 
+            // txt_citySubdivisionName
+            // 
+            resources.ApplyResources(this.txt_citySubdivisionName, "txt_citySubdivisionName");
+            this.txt_citySubdivisionName.Name = "txt_citySubdivisionName";
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            // 
+            // txt_StreetName
+            // 
+            resources.ApplyResources(this.txt_StreetName, "txt_StreetName");
+            this.txt_StreetName.Name = "txt_StreetName";
             // 
             // tabPage2
             // 
@@ -460,6 +553,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_supplier_transactions)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -517,5 +612,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn balance;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.Button Btn_printPaymentReceipt;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txt_countryName;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox txt_buildingNumber;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txt_postalCode;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txt_cityName;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txt_citySubdivisionName;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox txt_StreetName;
     }
 }

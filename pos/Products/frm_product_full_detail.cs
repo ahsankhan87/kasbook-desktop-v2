@@ -88,6 +88,7 @@ namespace pos
                 Products_tab.SelectedTab = tabPage3; // Switch to history tab
                 
             }
+            ApplyGregorianCalendarForDatePickersIfArabic();
         }
 
         public void load_product_detail(string item_number)
@@ -109,7 +110,7 @@ namespace pos
                 txt_unit_price.Text = Math.Round(Convert.ToDecimal( myProductView["unit_price"]), 4).ToString();
                 txt_unit_price_2.Text = Math.Round(Convert.ToDecimal(myProductView["unit_price_2"]), 4).ToString();
                 txt_description.Text = myProductView["description"].ToString();
-                txt_expiry_date.Text = myProductView["expiry_date"].ToString();
+                //txt_expiry_date.Text = myProductView["expiry_date"].ToString();
 
                 //txt_brand_code.Text = myProductView["brand_code"].ToString();
                 //txt_category_code.Text = myProductView["category_code"].ToString();
@@ -149,6 +150,19 @@ namespace pos
                         pictureBox1.Image = null;
                     }
 
+                }
+
+                // set expiry date safely if column exists
+                if (dt.Columns.Contains("expiry_date") && myProductView["expiry_date"] != DBNull.Value)
+                {
+                    try
+                    {
+                        txt_expiry_date.Value = ClampToSafePickerDate(Convert.ToDateTime(myProductView["expiry_date"]));
+                    }
+                    catch
+                    {
+                        txt_expiry_date.Value = DateTime.Today;
+                    }
                 }
 
                 Load_product_movements_with_balance_qty(item_number);
@@ -285,7 +299,7 @@ namespace pos
                     info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
                     info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
                     info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
-                    info.expiry_date = txt_expiry_date.Value.Date;
+                    info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
                     info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
 
                     int result = objBLL.Insert(info);
@@ -596,7 +610,7 @@ namespace pos
                     info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
                     info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
                     info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
-                    info.expiry_date = txt_expiry_date.Value.Date;
+                    info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
                     info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
 
 
@@ -1349,6 +1363,32 @@ namespace pos
         private void txt_part_number_KeyUp(object sender, KeyEventArgs e)
         {
             generate_item_code();
+        }
+
+        private void ApplyGregorianCalendarForDatePickersIfArabic()
+        {
+            // When running in ar-SA, Windows may use UmAlQuraCalendar (Hijri) for DateTimePicker.
+            // That calendar has a limited supported range and can throw when Value is outside it.
+            // We keep Arabic UI but force Gregorian display for this picker.
+            if (string.Equals(lang, "ar-SA", StringComparison.OrdinalIgnoreCase))
+            {
+                txt_expiry_date.Format = DateTimePickerFormat.Custom;
+                txt_expiry_date.CustomFormat = "yyyy-MM-dd";
+            }
+            else
+            {
+                // restore default short format for other cultures
+                txt_expiry_date.Format = DateTimePickerFormat.Short;
+                txt_expiry_date.CustomFormat = null;
+            }
+        }
+
+        private static DateTime ClampToSafePickerDate(DateTime dt)
+        {
+            // Keep within DateTimePicker supported range
+            if (dt < DateTimePicker.MinimumDateTime) return DateTimePicker.MinimumDateTime;
+            if (dt > DateTimePicker.MaximumDateTime) return DateTimePicker.MaximumDateTime;
+            return dt;
         }
     }
 }

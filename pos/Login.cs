@@ -110,8 +110,9 @@ namespace pos
                 dlg.MaximizeBox = false;
                 dlg.ShowInTaskbar = false;
                 dlg.Padding = new Padding(12);
+                dlg.KeyPreview = true;
 
-                // Give the dialog a deterministic size so the buttons don't collapse/disappear.
+                // deterministic size so the buttons don't collapse/disappear
                 dlg.ClientSize = new Size(520, 220);
                 dlg.MinimumSize = new Size(520, 220);
 
@@ -134,28 +135,65 @@ namespace pos
 
                 btnContinue.Text = "Continue";
                 btnContinue.AutoSize = true;
+                btnContinue.TabIndex = 0;
+                btnContinue.UseVisualStyleBackColor = true;
 
                 btnRenew.Text = "Renew";
                 btnRenew.AutoSize = true;
+                btnRenew.TabIndex = 1;
+                btnRenew.UseVisualStyleBackColor = true;
 
                 btnCancel.Text = "Cancel";
                 btnCancel.AutoSize = true;
+                btnCancel.TabIndex = 2;
+                btnCancel.UseVisualStyleBackColor = true;
 
-                // Defaults
-                dlg.AcceptButton = btnContinue;
-                dlg.CancelButton = btnCancel;
+                // IMPORTANT: ensure AcceptButton works by having the button on the form and focusable,
+                // then focus it when dialog is shown.
+                dlg.Shown += (s, e) =>
+                {
+                    dlg.AcceptButton = btnContinue;
+                    dlg.CancelButton = btnCancel;
+                    btnContinue.Focus();
+                    btnContinue.Select();
+                };
 
                 SubscriptionPromptResult result = SubscriptionPromptResult.Cancel;
 
-                btnContinue.Click += (s, e) => { result = SubscriptionPromptResult.Continue; dlg.DialogResult = DialogResult.OK; };
-                btnRenew.Click += (s, e) => { result = SubscriptionPromptResult.Renew; dlg.DialogResult = DialogResult.OK; };
-                btnCancel.Click += (s, e) => { result = SubscriptionPromptResult.Cancel; dlg.DialogResult = DialogResult.Cancel; };
+                btnContinue.Click += (s, e) =>
+                {
+                    result = SubscriptionPromptResult.Continue;
+                    dlg.DialogResult = DialogResult.OK;
+                    dlg.Close();
+                };
+                btnRenew.Click += (s, e) =>
+                {
+                    result = SubscriptionPromptResult.Renew;
+                    dlg.DialogResult = DialogResult.OK;
+                    dlg.Close();
+                };
+                btnCancel.Click += (s, e) =>
+                {
+                    result = SubscriptionPromptResult.Cancel;
+                    dlg.DialogResult = DialogResult.Cancel;
+                    dlg.Close();
+                };
+
+                // fallback: make Enter act like Continue even if focus is weird
+                dlg.KeyDown += (s, e) =>
+                {
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        btnContinue.PerformClick();
+                    }
+                };
 
                 pnlButtons.Controls.Add(btnCancel);
                 pnlButtons.Controls.Add(btnRenew);
                 pnlButtons.Controls.Add(btnContinue);
 
-                // Layout: message + buttons
                 layout.Dock = DockStyle.Fill;
                 layout.ColumnCount = 1;
                 layout.RowCount = 2;

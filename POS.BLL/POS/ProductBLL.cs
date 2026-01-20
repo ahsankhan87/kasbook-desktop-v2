@@ -19,7 +19,6 @@ namespace POS.BLL
             productDLL = new ProductDLL();
         }
         
-        
         static public DataTable GetAll()
         {
             try
