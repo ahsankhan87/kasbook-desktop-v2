@@ -43,5 +43,7 @@ namespace POS.Core
         public string PostalCode { get; set; }
         public string BuildingNumber { get; set; }
         public string CitySubdivisionName { get; set; }
+
+        public int GLAccountID { get; set; } = 0;
     }
 }

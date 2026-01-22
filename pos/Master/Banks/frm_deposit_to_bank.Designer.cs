@@ -37,12 +37,13 @@
             this.txt_total_amount = new System.Windows.Forms.TextBox();
             this.lbl_header_title = new System.Windows.Forms.Label();
             this.cmb_cash_account_code = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txt_payment_date = new System.Windows.Forms.DateTimePicker();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,11 +92,6 @@
             this.cmb_cash_account_code.FormattingEnabled = true;
             this.cmb_cash_account_code.Name = "cmb_cash_account_code";
             // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
             // txt_payment_date
             // 
             resources.ApplyResources(this.txt_payment_date, "txt_payment_date");
@@ -128,10 +124,23 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // frm_deposit_to_bank
             // 
+            this.AcceptButton = this.btn_save;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_cancel;
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.label4);
@@ -140,8 +149,8 @@
             this.Controls.Add(this.txt_description);
             this.Controls.Add(this.txt_total_amount);
             this.Controls.Add(this.cmb_cash_account_code);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txt_payment_date);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.panel1);
@@ -166,11 +175,12 @@
         private System.Windows.Forms.TextBox txt_total_amount;
         private System.Windows.Forms.Label lbl_header_title;
         private System.Windows.Forms.ComboBox cmb_cash_account_code;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker txt_payment_date;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label3;
     }
 }

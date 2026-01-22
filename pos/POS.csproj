@@ -2333,6 +2333,9 @@
     <EmbeddedResource Include="Suppliers\frm_supplier_detail.resx">
       <DependentUpon>frm_supplier_detail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Suppliers\frm_supplier_payment.ar-SA.resx">
+      <DependentUpon>frm_supplier_payment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\frm_supplier_payment.resx">
       <DependentUpon>frm_supplier_payment.cs</DependentUpon>
     </EmbeddedResource>

@@ -62,6 +62,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Detail = new System.Windows.Forms.TabPage();
+            this.cmb_GL_account_code = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_countryName = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -276,6 +278,8 @@
             // Detail
             // 
             resources.ApplyResources(this.Detail, "Detail");
+            this.Detail.Controls.Add(this.cmb_GL_account_code);
+            this.Detail.Controls.Add(this.label12);
             this.Detail.Controls.Add(this.groupBox3);
             this.Detail.Controls.Add(this.label1);
             this.Detail.Controls.Add(this.txt_first_name);
@@ -302,6 +306,18 @@
             this.Detail.Controls.Add(this.lbl_edit_status);
             this.Detail.Name = "Detail";
             this.Detail.UseVisualStyleBackColor = true;
+            // 
+            // cmb_GL_account_code
+            // 
+            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
+            this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_GL_account_code.FormattingEnabled = true;
+            this.cmb_GL_account_code.Name = "cmb_GL_account_code";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
             // 
             // groupBox3
             // 
@@ -669,5 +685,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txt_registrationName;
         private System.Windows.Forms.Button Btn_printCustomerReceipt;
+        private System.Windows.Forms.ComboBox cmb_GL_account_code;
+        private System.Windows.Forms.Label label12;
     }
 }

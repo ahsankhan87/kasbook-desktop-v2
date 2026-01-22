@@ -50,5 +50,7 @@ namespace POS.Core
         public string CitySubdivisionName { get; set; }
 
         public string registrationName { get; set; }
+
+        public int GLAccountID { get; set; } = 0;
     }
 }

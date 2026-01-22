@@ -183,6 +183,7 @@ namespace POS.DLL
                         cmd.Parameters.Add("@CitySubdivisionName", SqlDbType.NVarChar).Value = obj.CitySubdivisionName;
                         cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
                         cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
+                        cmd.Parameters.Add("@GLAccountID", SqlDbType.Int).Value = obj.GLAccountID;
 
                         //--operation types   
                         //-- 1) Insert  
@@ -237,6 +238,7 @@ namespace POS.DLL
                         cmd.Parameters.Add("@CitySubdivisionName", SqlDbType.NVarChar).Value = obj.CitySubdivisionName;
                         cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
                         cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
+                        cmd.Parameters.Add("@GLAccountID", SqlDbType.Int).Value = obj.GLAccountID;
 
                         //--operation types   
                         //-- 1) Insert  

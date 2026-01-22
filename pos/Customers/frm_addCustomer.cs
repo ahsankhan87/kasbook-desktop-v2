@@ -43,7 +43,7 @@ namespace pos
         {
             txt_search.Focus();
             this.ActiveControl = txt_search;
-
+            get_accounts_dropdownlist();
             // Disable/hide actions based on DB-backed permissions
             //btn_save.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
             //btn_update.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
@@ -54,7 +54,25 @@ namespace pos
             //grid_customer_transactions.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerView);
             // Add further UI elements here as needed, e.g. delete/report buttons/menus.
         }
+        public void get_accounts_dropdownlist()
+        {
+            GeneralBLL generalBLL_obj = new GeneralBLL();
+            string keyword = "id,name";
+            string table = "acc_accounts";
 
+            DataTable accounts = generalBLL_obj.GetRecord(keyword, table);
+            DataRow emptyRow = accounts.NewRow();
+            emptyRow[0] = 0;              // Set Column Value
+            emptyRow[1] = "Please Select";              // Set Column Value
+            accounts.Rows.InsertAt(emptyRow, 0);
+
+            cmb_GL_account_code.DisplayMember = "name";
+            cmb_GL_account_code.ValueMember = "id";
+            cmb_GL_account_code.DataSource = accounts;
+
+            cmb_GL_account_code.SelectedValue = "5"; // 5 is the default Ac receiavable Account id in acc_accounts table
+
+        }
         public void load_customer_detail(int customer_id)
         {
             CustomerBLL objBLL = new CustomerBLL();
@@ -78,6 +96,7 @@ namespace pos
                 txt_postalCode.Text = myProductView["PostalCode"].ToString();
                 txt_countryName.Text = myProductView["CountryName"].ToString();
                 txt_registrationName.Text = myProductView["RegistrationName"].ToString();
+                cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
 
             }
             lbl_customer_name.Visible = true;
@@ -141,7 +160,7 @@ namespace pos
                         CountryName = txt_countryName.Text.Trim(),
                         registrationName = txt_registrationName.Text.Trim(),
                         date_created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-
+                        GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue)
 
                     };
 
@@ -266,6 +285,7 @@ namespace pos
                         CountryName = txt_countryName.Text.Trim(),
                         registrationName = txt_registrationName.Text.Trim(),
                         date_updated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                        GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue)
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();

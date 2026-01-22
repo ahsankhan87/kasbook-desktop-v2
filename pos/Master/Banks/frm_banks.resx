@@ -157,7 +157,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 456</value>
+    <value>141, 456</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -189,8 +189,14 @@
   <data name="btn_blank.Text" xml:space="preserve">
     <value>Blank All</value>
   </data>
-  <data name="&gt;&gt;txt_holderName.Parent" xml:space="preserve">
-    <value>Detail</value>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 160</value>
+  </data>
+  <data name="&gt;&gt;txt_name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="btn_save.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -213,9 +219,6 @@
   <data name="&gt;&gt;Btn_bank_report.Name" xml:space="preserve">
     <value>Btn_bank_report</value>
   </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
   <data name="txt_holderName.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -227,9 +230,6 @@
   </data>
   <data name="&gt;&gt;lbl_edit_status.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 16</value>
   </data>
   <data name="lbl_edit_status.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -250,7 +250,7 @@
     <value>NoControl</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 17</value>
+    <value>41, 17</value>
   </data>
   <data name="btn_delete.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -259,37 +259,28 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 16</value>
+    <value>22, 17</value>
   </data>
   <data name="btn_payment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 330</value>
+    <value>119, 330</value>
   </data>
   <data name="&gt;&gt;entry_date.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
-  </data>
-  <data name="grid_banks_transactions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>88, 28</value>
   </data>
   <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="lbl_bank_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 17</value>
+    <value>448, 17</value>
   </data>
   <data name="&gt;&gt;Transactions.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_name.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="Btn_deposit.Text" xml:space="preserve">
-    <value>Deposit to bank</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -307,7 +298,7 @@
     <value>label7</value>
   </data>
   <data name="lbl_edit_status.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 16</value>
+    <value>95, 17</value>
   </data>
   <data name="grid_banks_transactions.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
@@ -327,9 +318,6 @@
   <data name="&gt;&gt;Detail.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="btn_trans_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 12</value>
-  </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -343,7 +331,7 @@
     <value>tabControl1</value>
   </data>
   <data name="btn_payment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 28</value>
+    <value>130, 28</value>
   </data>
   <data name="&gt;&gt;account_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -358,10 +346,10 @@
     <value>1</value>
   </data>
   <data name="txt_accountNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 22</value>
+    <value>292, 24</value>
   </data>
   <data name="Btn_bank_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>539, 14</value>
+    <value>472, 14</value>
   </data>
   <data name="&gt;&gt;lbl_bank_name.Name" xml:space="preserve">
     <value>lbl_bank_name</value>
@@ -372,9 +360,6 @@
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="balance.HeaderText" xml:space="preserve">
     <value>Balance</value>
   </data>
@@ -384,8 +369,8 @@
   <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>Invoice No.</value>
+  <data name="&gt;&gt;txt_name.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="cmb_GL_account_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -397,13 +382,10 @@
     <value>credit</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>863, 514</value>
+    <value>755, 514</value>
   </data>
   <data name="txt_bankBranch.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;grid_banks_transactions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -412,16 +394,16 @@
     <value>lbl_edit_status</value>
   </data>
   <data name="txt_bankBranch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 188</value>
+    <value>150, 188</value>
   </data>
   <data name="lbl_bank_name.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 16</value>
+    <value>84, 17</value>
   </data>
   <data name="Btn_bank_report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 28</value>
+    <value>130, 28</value>
   </data>
   <data name="&gt;&gt;txt_bankBranch.Name" xml:space="preserve">
     <value>txt_bankBranch</value>
@@ -430,10 +412,16 @@
     <value>Detail</value>
   </data>
   <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 28</value>
+    <value>150, 28</value>
+  </data>
+  <data name="Transactions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 192</value>
+    <value>67, 192</value>
+  </data>
+  <data name="btn_delete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 207</value>
   </data>
   <data name="&gt;&gt;txt_holderName.Name" xml:space="preserve">
     <value>txt_holderName</value>
@@ -444,11 +432,20 @@
   <data name="&gt;&gt;btn_update.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;balance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
+    <value>btn_search</value>
+  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 64</value>
+    <value>67, 64</value>
+  </data>
+  <data name="&gt;&gt;Btn_deposit.Parent" xml:space="preserve">
+    <value>Transactions</value>
   </data>
   <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -478,13 +475,13 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 149</value>
+    <value>18, 149</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Holder Name</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 82</value>
+    <value>11, 82</value>
   </data>
   <data name="&gt;&gt;btn_save.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -499,19 +496,22 @@
     <value>0</value>
   </data>
   <data name="btn_blank.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 23</value>
+    <value>18, 23</value>
   </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>Detail</value>
+  <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8pt</value>
   </data>
   <data name="&gt;&gt;Btn_bank_report.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txt_id.Name" xml:space="preserve">
     <value>txt_id</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
   </data>
   <data name="btn_blank.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -534,6 +534,9 @@
   <data name="btn_save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>Detail</value>
+  </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -546,6 +549,12 @@
   <data name="Btn_bank_report.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
+  <data name="btn_save.Text" xml:space="preserve">
+    <value>Create (F3)</value>
+  </data>
+  <data name="Btn_bank_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -555,8 +564,8 @@
   <data name="Transactions.Text" xml:space="preserve">
     <value>Transactions</value>
   </data>
-  <data name="&gt;&gt;Btn_deposit.Parent" xml:space="preserve">
-    <value>Transactions</value>
+  <data name="grid_banks_transactions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="txt_id.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -565,10 +574,10 @@
     <value>Refresh (F5)</value>
   </data>
   <data name="cmb_GL_account_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 60</value>
+    <value>150, 60</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 96</value>
+    <value>67, 96</value>
   </data>
   <data name="&gt;&gt;label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -580,7 +589,7 @@
     <value>5</value>
   </data>
   <data name="grid_banks_transactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>685, 372</value>
+    <value>599, 372</value>
   </data>
   <data name="&gt;&gt;btn_cancel.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -604,10 +613,10 @@
     <value>label5</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 16</value>
+    <value>79, 17</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 16</value>
+  <data name="btn_trans_refresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 12</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -631,31 +640,25 @@
     <value>False</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 128</value>
-  </data>
-  <data name="btn_save.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8pt</value>
+    <value>67, 128</value>
   </data>
   <data name="&gt;&gt;Detail.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 16</value>
+    <value>86, 17</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 22</value>
+    <value>204, 24</value>
   </data>
   <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="&gt;&gt;btn_refresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
-  </data>
-  <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -667,10 +670,13 @@
     <value>panel3</value>
   </data>
   <data name="cmb_GL_account_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 24</value>
+    <value>292, 24</value>
+  </data>
+  <data name="&gt;&gt;Btn_deposit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txt_bankBranch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 22</value>
+    <value>292, 24</value>
   </data>
   <data name="txt_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -681,14 +687,17 @@
   <data name="&gt;&gt;txt_holderName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;txt_name.Parent" xml:space="preserve">
+    <value>Detail</value>
+  </data>
   <data name="&gt;&gt;btn_cancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_bank_name.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Transactions.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txt_accountNo.Parent" xml:space="preserve">
     <value>Detail</value>
@@ -715,19 +724,16 @@
     <value>Fill</value>
   </data>
   <data name="btn_payment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 12</value>
+    <value>101, 12</value>
   </data>
   <data name="btn_trans_refresh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="Detail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>694, 427</value>
   </data>
   <data name="btn_cancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_payment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -739,19 +745,22 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 58</value>
+    <value>755, 58</value>
   </data>
   <data name="btn_update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 456</value>
+    <value>614, 456</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="Transactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>694, 427</value>
+    <value>606, 427</value>
   </data>
   <data name="btn_delete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -768,20 +777,20 @@
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="debit.HeaderText" xml:space="preserve">
     <value>Debit</value>
   </data>
-  <data name="&gt;&gt;txt_accountNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="txt_accountNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 124</value>
+    <value>150, 124</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
   <data name="btn_blank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -796,7 +805,7 @@
     <value>Entry Date</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 15</value>
+    <value>363, 15</value>
   </data>
   <data name="btn_update.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -811,13 +820,13 @@
     <value>Credit</value>
   </data>
   <data name="txt_holderName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 156</value>
+    <value>150, 156</value>
   </data>
   <data name="lbl_bank_name.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 58</value>
+    <value>614, 58</value>
   </data>
   <data name="&gt;&gt;Btn_bank_report.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -826,7 +835,7 @@
     <value>0</value>
   </data>
   <data name="Btn_deposit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 12</value>
+    <value>238, 12</value>
   </data>
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -848,9 +857,6 @@
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_banks</value>
-  </data>
-  <data name="&gt;&gt;grid_banks_transactions.Name" xml:space="preserve">
-    <value>grid_banks_transactions</value>
   </data>
   <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
     <value>txt_search</value>
@@ -879,6 +885,9 @@
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
   </data>
+  <data name="lbl_bank_name.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -896,9 +905,6 @@
   </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8pt</value>
   </data>
   <data name="&gt;&gt;grid_banks_transactions.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -940,7 +946,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 456</value>
+    <value>614, 456</value>
   </data>
   <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -952,7 +958,7 @@
     <value>Right</value>
   </data>
   <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 92</value>
+    <value>150, 92</value>
   </data>
   <data name="&gt;&gt;grid_banks_transactions.Parent" xml:space="preserve">
     <value>Transactions</value>
@@ -988,22 +994,25 @@
     <value>0</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 32</value>
+    <value>67, 32</value>
   </data>
   <data name="&gt;&gt;btn_update.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
   <data name="txt_name.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;txt_name.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;btn_save.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_trans_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Banks</value>
@@ -1013,6 +1022,9 @@
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -1024,10 +1036,7 @@
     <value>True</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 16</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>84, 17</value>
   </data>
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1042,7 +1051,7 @@
     <value>panel2</value>
   </data>
   <data name="Btn_deposit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 27</value>
+    <value>116, 27</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1063,16 +1072,13 @@
     <value>CenterScreen</value>
   </data>
   <data name="txt_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 22</value>
-  </data>
-  <data name="&gt;&gt;txt_bankBranch.Parent" xml:space="preserve">
-    <value>Detail</value>
+    <value>292, 24</value>
   </data>
   <data name="&gt;&gt;lbl_bank_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="description.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1083,8 +1089,8 @@
   <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="btn_delete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 207</value>
+  <data name="&gt;&gt;grid_banks_transactions.Name" xml:space="preserve">
+    <value>grid_banks_transactions</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -1096,7 +1102,7 @@
     <value>2</value>
   </data>
   <data name="txt_holderName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 22</value>
+    <value>292, 24</value>
   </data>
   <data name="btn_delete.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
@@ -1111,16 +1117,16 @@
     <value>7</value>
   </data>
   <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 76</value>
+    <value>18, 76</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;grid_banks_transactions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 58</value>
   </data>
-  <data name="btn_save.Text" xml:space="preserve">
-    <value>Create (F3)</value>
+  <data name="&gt;&gt;txt_accountNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="grid_banks_transactions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1129,7 +1135,7 @@
     <value>btn_blank</value>
   </data>
   <data name="txt_id.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 22</value>
+    <value>292, 24</value>
   </data>
   <data name="btn_blank.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
@@ -1144,10 +1150,10 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 242</value>
+    <value>18, 242</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+  <data name="&gt;&gt;txt_bankBranch.Parent" xml:space="preserve">
+    <value>Detail</value>
   </data>
   <data name="&gt;&gt;label21.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1155,8 +1161,8 @@
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>Detail</value>
   </data>
-  <data name="&gt;&gt;Btn_deposit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 17</value>
   </data>
   <data name="btn_delete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1164,14 +1170,11 @@
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;txt_holderName.Parent" xml:space="preserve">
+    <value>Detail</value>
   </data>
   <data name="btn_cancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;btn_update.Parent" xml:space="preserve">
-    <value>groupBox2</value>
   </data>
   <data name="lbl_edit_status.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1182,8 +1185,8 @@
   <data name="txt_accountNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="lbl_bank_name.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="btn_save.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8pt</value>
   </data>
   <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1194,20 +1197,20 @@
   <data name="&gt;&gt;txt_accountNo.Name" xml:space="preserve">
     <value>txt_accountNo</value>
   </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="&gt;&gt;btn_update.Parent" xml:space="preserve">
+    <value>groupBox2</value>
   </data>
   <data name="txt_id.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 26</value>
+    <value>63, 26</value>
   </data>
   <data name="&gt;&gt;txt_bankBranch.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 15</value>
+    <value>155, 15</value>
   </data>
   <data name="&gt;&gt;btn_delete.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1221,20 +1224,20 @@
   <data name="&gt;&gt;btn_blank.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
-    <value>btn_search</value>
+  <data name="Btn_deposit.Text" xml:space="preserve">
+    <value>Deposit to bank</value>
   </data>
   <data name="entry_date.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;balance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
   </data>
   <data name="&gt;&gt;description.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_update.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 113</value>
+    <value>18, 113</value>
   </data>
   <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1248,8 +1251,8 @@
   <data name="btn_payment.Text" xml:space="preserve">
     <value>Withdraw from bank</value>
   </data>
-  <data name="&gt;&gt;txt_name.Parent" xml:space="preserve">
-    <value>Detail</value>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1257,8 +1260,8 @@
   <data name="btn_update.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Detail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>606, 427</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1275,14 +1278,17 @@
   <data name="&gt;&gt;Transactions.Name" xml:space="preserve">
     <value>Transactions</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 160</value>
+  <data name="invoice_no.HeaderText" xml:space="preserve">
+    <value>Invoice No.</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <metadata name="account_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-SA</value>
   </metadata>
   <metadata name="balance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1299,13 +1305,13 @@
   <metadata name="debit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="credit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="entry_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="credit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>

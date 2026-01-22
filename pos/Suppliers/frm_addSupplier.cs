@@ -52,6 +52,26 @@ namespace pos
         {
             txt_search.Focus();
             this.ActiveControl = txt_search;
+            get_accounts_dropdownlist();
+        }
+        public void get_accounts_dropdownlist()
+        {
+            GeneralBLL generalBLL_obj = new GeneralBLL();
+            string keyword = "id,name";
+            string table = "acc_accounts";
+
+            DataTable accounts = generalBLL_obj.GetRecord(keyword, table);
+            DataRow emptyRow = accounts.NewRow();
+            emptyRow[0] = 0;              // Set Column Value
+            emptyRow[1] = "Please Select";              // Set Column Value
+            accounts.Rows.InsertAt(emptyRow, 0);
+
+            cmb_GL_account_code.DisplayMember = "name";
+            cmb_GL_account_code.ValueMember = "id";
+            cmb_GL_account_code.DataSource = accounts;
+
+            cmb_GL_account_code.SelectedValue = "6"; // 6 is the default Ac payable Account id in acc_accounts table
+
         }
 
         public DataTable get_GL_accounts_dt()
@@ -88,6 +108,7 @@ namespace pos
                 info.CitySubdivisionName = txt_citySubdivisionName.Text.Trim();
                 info.PostalCode = txt_postalCode.Text.Trim();
                 info.CountryName = txt_countryName.Text.Trim();
+                info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
 
                 SupplierBLL objBLL = new SupplierBLL();
                     
@@ -195,6 +216,7 @@ namespace pos
                 info.CitySubdivisionName = txt_citySubdivisionName.Text.Trim();
                 info.PostalCode = txt_postalCode.Text.Trim();
                 info.CountryName = txt_countryName.Text.Trim();
+                info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
 
                 SupplierBLL objBLL = new SupplierBLL();
 
@@ -245,6 +267,7 @@ namespace pos
                 txt_citySubdivisionName.Text = myProductView["CitySubdivisionName"].ToString();
                 txt_postalCode.Text = myProductView["PostalCode"].ToString();
                 txt_countryName.Text = myProductView["CountryName"].ToString();
+                cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
 
             }
             lbl_customer_name.Visible = true;
@@ -361,9 +384,10 @@ namespace pos
         private void btn_payment_Click(object sender, EventArgs e)
         {
             string supplier_id = txt_id.Text;
+            string supplier_name = lbl_customer_name.Text;
             if (supplier_id != "")
             {
-                frm_supplier_payment obj = new frm_supplier_payment(this, int.Parse(supplier_id));
+                frm_supplier_payment obj = new frm_supplier_payment(this, int.Parse(supplier_id),supplier_name);
                 obj.ShowDialog();
                 CustomizeDataGridView();
             }

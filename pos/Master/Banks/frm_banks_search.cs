@@ -50,12 +50,7 @@ namespace pos.Master.Banks
 
                 String condition = txt_search.Text.Trim();
 
-                if (condition != "")
-                {
-                    grid_search_banks.DataSource = objBLL.SearchRecord(condition);
-
-                }
-
+                grid_search_banks.DataSource = objBLL.SearchRecord(condition);
 
             }
             catch (Exception ex)

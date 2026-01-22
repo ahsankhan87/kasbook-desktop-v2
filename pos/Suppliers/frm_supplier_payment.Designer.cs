@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_supplier_payment));
             this.label1 = new System.Windows.Forms.Label();
             this.txt_total_amount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,138 +41,167 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.txt_payment_date = new System.Windows.Forms.DateTimePicker();
+            this.cmb_ref_account_code = new System.Windows.Forms.ComboBox();
+            this.cmb_GL_account_code = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblGLAccountDebitName = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblSupplierName = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 106);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Payment Date:";
             // 
             // txt_total_amount
             // 
-            this.txt_total_amount.Location = new System.Drawing.Point(149, 134);
-            this.txt_total_amount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            resources.ApplyResources(this.txt_total_amount, "txt_total_amount");
             this.txt_total_amount.Name = "txt_total_amount";
-            this.txt_total_amount.Size = new System.Drawing.Size(333, 22);
-            this.txt_total_amount.TabIndex = 1;
             this.txt_total_amount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_total_amount_KeyPress);
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 138);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Total Amount:";
             // 
             // txt_description
             // 
-            this.txt_description.Location = new System.Drawing.Point(149, 198);
-            this.txt_description.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txt_description.Multiline = true;
+            resources.ApplyResources(this.txt_description, "txt_description");
             this.txt_description.Name = "txt_description";
-            this.txt_description.Size = new System.Drawing.Size(333, 99);
-            this.txt_description.TabIndex = 5;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 202);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 17);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Description:";
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(277, 353);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            resources.ApplyResources(this.btn_save, "btn_save");
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(100, 28);
-            this.btn_save.TabIndex = 6;
-            this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // lbl_header_title
             // 
-            this.lbl_header_title.AutoSize = true;
-            this.lbl_header_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            resources.ApplyResources(this.lbl_header_title, "lbl_header_title");
             this.lbl_header_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_header_title.Location = new System.Drawing.Point(34, 19);
-            this.lbl_header_title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_header_title.Name = "lbl_header_title";
-            this.lbl_header_title.Size = new System.Drawing.Size(260, 25);
-            this.lbl_header_title.TabIndex = 3;
-            this.lbl_header_title.Text = "Supplier Payment Receipt";
             // 
             // txt_discount
             // 
-            this.txt_discount.Location = new System.Drawing.Point(149, 166);
-            this.txt_discount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            resources.ApplyResources(this.txt_discount, "txt_discount");
             this.txt_discount.Name = "txt_discount";
-            this.txt_discount.Size = new System.Drawing.Size(333, 22);
-            this.txt_discount.TabIndex = 2;
             this.txt_discount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_discount_KeyPress);
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(36, 170);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 17);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Discount:";
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_header_title);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.ForeColor = System.Drawing.Color.Coral;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(539, 58);
-            this.panel1.TabIndex = 6;
             // 
             // btn_cancel
             // 
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Location = new System.Drawing.Point(384, 353);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(100, 28);
-            this.btn_cancel.TabIndex = 7;
-            this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // txt_payment_date
             // 
+            resources.ApplyResources(this.txt_payment_date, "txt_payment_date");
             this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_payment_date.Location = new System.Drawing.Point(149, 102);
-            this.txt_payment_date.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txt_payment_date.Name = "txt_payment_date";
-            this.txt_payment_date.Size = new System.Drawing.Size(333, 22);
-            this.txt_payment_date.TabIndex = 8;
+            // 
+            // cmb_ref_account_code
+            // 
+            resources.ApplyResources(this.cmb_ref_account_code, "cmb_ref_account_code");
+            this.cmb_ref_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_ref_account_code.FormattingEnabled = true;
+            this.cmb_ref_account_code.Name = "cmb_ref_account_code";
+            // 
+            // cmb_GL_account_code
+            // 
+            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
+            this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_GL_account_code.FormattingEnabled = true;
+            this.cmb_GL_account_code.Name = "cmb_GL_account_code";
+            this.cmb_GL_account_code.SelectedIndexChanged += new System.EventHandler(this.cmb_GL_account_code_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // lblGLAccountDebitName
+            // 
+            resources.ApplyResources(this.lblGLAccountDebitName, "lblGLAccountDebitName");
+            this.lblGLAccountDebitName.Name = "lblGLAccountDebitName";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // lblSupplierName
+            // 
+            resources.ApplyResources(this.lblSupplierName, "lblSupplierName");
+            this.lblSupplierName.Name = "lblSupplierName";
+            // 
+            // groupBox1
+            // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.groupBox1.Controls.Add(this.lblSupplierName);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.lblGLAccountDebitName);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.groupBox2.Controls.Add(this.cmb_ref_account_code);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.cmb_GL_account_code);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
             // 
             // frm_supplier_payment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(539, 416);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txt_payment_date);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.panel1);
@@ -185,16 +215,17 @@
             this.Controls.Add(this.txt_total_amount);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_supplier_payment";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Supplier Payment";
             this.Load += new System.EventHandler(this.frm_supplier_payment_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_supplier_payment_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,5 +245,15 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.DateTimePicker txt_payment_date;
+        private System.Windows.Forms.ComboBox cmb_ref_account_code;
+        private System.Windows.Forms.ComboBox cmb_GL_account_code;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblGLAccountDebitName;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblSupplierName;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

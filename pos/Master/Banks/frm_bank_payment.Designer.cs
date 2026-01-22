@@ -44,6 +44,7 @@ namespace pos.Master.Banks
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,30 +88,30 @@ namespace pos.Master.Banks
             // 
             // txt_payment_date
             // 
-            this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_payment_date, "txt_payment_date");
+            this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_payment_date.Name = "txt_payment_date";
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_header_title);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
             // cmb_cash_account_code
             // 
+            resources.ApplyResources(this.cmb_cash_account_code, "cmb_cash_account_code");
             this.cmb_cash_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_cash_account_code.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_cash_account_code, "cmb_cash_account_code");
             this.cmb_cash_account_code.Name = "cmb_cash_account_code";
             // 
             // label3
@@ -129,6 +130,11 @@ namespace pos.Master.Banks
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
             // frm_bank_payment
             // 
             this.AcceptButton = this.btn_save;
@@ -136,6 +142,7 @@ namespace pos.Master.Banks
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
             this.Controls.Add(this.cmb_cash_account_code);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_save);
@@ -176,5 +183,6 @@ namespace pos.Master.Banks
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

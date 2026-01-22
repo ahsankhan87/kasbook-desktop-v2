@@ -71,7 +71,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        public bool IsBankGlAccount(int accountId)
+        {
+            try
+            {
+                BankDLL objDLL = new BankDLL();
+                return objDLL.IsBankGlAccount(accountId);
+            }
+            catch
+            {
 
+                throw;
+            }
+        }
         public int Insert(BankModal obj)
         {
             try

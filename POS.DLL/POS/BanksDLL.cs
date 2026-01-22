@@ -45,6 +45,63 @@ namespace POS.DLL
             }
             
         }
+        public bool IsBankGlAccount(int glAccountId)
+        {
+            // Heuristic based on a common schema: `pos_gl_accounts` has `id` and `account_type`.
+            // account_type might be "Bank", "BANK", or numeric code.
+            // Return false on any error to keep behavior safe.
+            try
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        cmd = new SqlCommand();
+                        string query = "SELECT TOP 500 id, name FROM acc_accounts";
+                        //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                        cmd.CommandText = query;
+                        cmd.Connection = cn;
+                        da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        
+                    }
+                }
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (row["id"] == DBNull.Value) continue;
+                    if (Convert.ToInt32(row["id"]) != glAccountId) continue;
+
+                    if (!dt.Columns.Contains("name") || row["name"] == DBNull.Value)
+                        return false;
+
+                    var t = row["name"].ToString().Trim();
+
+                    // String-based detection
+                    if (t.Equals("banks", StringComparison.OrdinalIgnoreCase))
+                        return true;
+
+                    // Numeric-based detection (if your DB uses codes)
+                    int code;
+                    if (int.TryParse(t, out code))
+                    {
+                        // Adjust this if your system has a known bank code.
+                        // Keep conservative: assume code 19 indicates bank (common pattern in some POS schemas).
+                        if (code == 19) return true;
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public DataTable SearchRecordByBankID(int Bank_id)
         {

@@ -30,12 +30,20 @@ namespace pos.Master.Banks
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_banks));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_trans_refresh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.grid_banks_transactions = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entry_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.account_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_blank = new System.Windows.Forms.Button();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.btn_delete = new System.Windows.Forms.Button();
@@ -68,14 +76,6 @@ namespace pos.Master.Banks
             this.btn_search = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entry_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.account_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_banks_transactions)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -118,6 +118,71 @@ namespace pos.Master.Banks
             this.grid_banks_transactions.Name = "grid_banks_transactions";
             this.grid_banks_transactions.ReadOnly = true;
             this.grid_banks_transactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            resources.ApplyResources(this.id, "id");
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // invoice_no
+            // 
+            this.invoice_no.DataPropertyName = "invoice_no";
+            resources.ApplyResources(this.invoice_no, "invoice_no");
+            this.invoice_no.Name = "invoice_no";
+            this.invoice_no.ReadOnly = true;
+            // 
+            // entry_date
+            // 
+            this.entry_date.DataPropertyName = "entry_date";
+            resources.ApplyResources(this.entry_date, "entry_date");
+            this.entry_date.Name = "entry_date";
+            this.entry_date.ReadOnly = true;
+            // 
+            // account_name
+            // 
+            this.account_name.DataPropertyName = "account_name";
+            resources.ApplyResources(this.account_name, "account_name");
+            this.account_name.Name = "account_name";
+            this.account_name.ReadOnly = true;
+            // 
+            // debit
+            // 
+            this.debit.DataPropertyName = "debit";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.debit, "debit");
+            this.debit.Name = "debit";
+            this.debit.ReadOnly = true;
+            // 
+            // credit
+            // 
+            this.credit.DataPropertyName = "credit";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.credit, "credit");
+            this.credit.Name = "credit";
+            this.credit.ReadOnly = true;
+            // 
+            // balance
+            // 
+            this.balance.DataPropertyName = "balance";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.balance, "balance");
+            this.balance.Name = "balance";
+            this.balance.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.DataPropertyName = "description";
+            resources.ApplyResources(this.description, "description");
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
             // 
             // btn_blank
             // 
@@ -344,71 +409,6 @@ namespace pos.Master.Banks
             this.panel1.Controls.Add(this.label21);
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            resources.ApplyResources(this.id, "id");
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // invoice_no
-            // 
-            this.invoice_no.DataPropertyName = "invoice_no";
-            resources.ApplyResources(this.invoice_no, "invoice_no");
-            this.invoice_no.Name = "invoice_no";
-            this.invoice_no.ReadOnly = true;
-            // 
-            // entry_date
-            // 
-            this.entry_date.DataPropertyName = "entry_date";
-            resources.ApplyResources(this.entry_date, "entry_date");
-            this.entry_date.Name = "entry_date";
-            this.entry_date.ReadOnly = true;
-            // 
-            // account_name
-            // 
-            this.account_name.DataPropertyName = "account_name";
-            resources.ApplyResources(this.account_name, "account_name");
-            this.account_name.Name = "account_name";
-            this.account_name.ReadOnly = true;
-            // 
-            // debit
-            // 
-            this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.debit, "debit");
-            this.debit.Name = "debit";
-            this.debit.ReadOnly = true;
-            // 
-            // credit
-            // 
-            this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.credit, "credit");
-            this.credit.Name = "credit";
-            this.credit.ReadOnly = true;
-            // 
-            // balance
-            // 
-            this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
-            resources.ApplyResources(this.balance, "balance");
-            this.balance.Name = "balance";
-            this.balance.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.DataPropertyName = "description";
-            resources.ApplyResources(this.description, "description");
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
             // 
             // frm_banks
             // 

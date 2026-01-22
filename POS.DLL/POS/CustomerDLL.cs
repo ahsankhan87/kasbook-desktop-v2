@@ -166,6 +166,7 @@ namespace POS.DLL
                 cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
                 cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
                 cmd.Parameters.Add("@RegistrationName", SqlDbType.NVarChar).Value = obj.registrationName;
+                cmd.Parameters.Add("@GLAccountID", SqlDbType.Int).Value = obj.GLAccountID;
 
                 try
                 {
@@ -212,6 +213,7 @@ namespace POS.DLL
                 cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
                 cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
                 cmd.Parameters.Add("@RegistrationName", SqlDbType.NVarChar).Value = obj.registrationName;
+                cmd.Parameters.Add("@GLAccountID", SqlDbType.Int).Value = obj.GLAccountID;
 
 
                 //SetCommonParameters(cmd, obj);

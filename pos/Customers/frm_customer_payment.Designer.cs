@@ -41,7 +41,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.txt_payment_date = new System.Windows.Forms.DateTimePicker();
+            this.cmb_GL_account_code = new System.Windows.Forms.ComboBox();
+            this.cmb_ref_account_code = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCustomerName = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblGLAccountDebitName = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -96,16 +108,16 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_header_title);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -116,11 +128,80 @@
             this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_payment_date.Name = "txt_payment_date";
             // 
+            // cmb_GL_account_code
+            // 
+            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
+            this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_GL_account_code.FormattingEnabled = true;
+            this.cmb_GL_account_code.Name = "cmb_GL_account_code";
+            this.cmb_GL_account_code.SelectedIndexChanged += new System.EventHandler(this.cmb_cash_account_code_SelectedIndexChanged);
+            // 
+            // cmb_ref_account_code
+            // 
+            resources.ApplyResources(this.cmb_ref_account_code, "cmb_ref_account_code");
+            this.cmb_ref_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_ref_account_code.FormattingEnabled = true;
+            this.cmb_ref_account_code.Name = "cmb_ref_account_code";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // groupBox1
+            // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.groupBox1.Controls.Add(this.lblCustomerName);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.lblGLAccountDebitName);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // lblCustomerName
+            // 
+            resources.ApplyResources(this.lblCustomerName, "lblCustomerName");
+            this.lblCustomerName.Name = "lblCustomerName";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // lblGLAccountDebitName
+            // 
+            resources.ApplyResources(this.lblGLAccountDebitName, "lblGLAccountDebitName");
+            this.lblGLAccountDebitName.Name = "lblGLAccountDebitName";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // groupBox2
+            // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.cmb_ref_account_code);
+            this.groupBox2.Controls.Add(this.cmb_GL_account_code);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
             // frm_customer_payment
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txt_payment_date);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.panel1);
@@ -140,6 +221,10 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_customer_payment_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +244,15 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.DateTimePicker txt_payment_date;
+        private System.Windows.Forms.ComboBox cmb_GL_account_code;
+        private System.Windows.Forms.ComboBox cmb_ref_account_code;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblCustomerName;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblGLAccountDebitName;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

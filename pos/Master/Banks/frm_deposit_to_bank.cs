@@ -37,7 +37,7 @@ namespace pos.Master.Banks
 
         private void frm_payment_to_bank_Load(object sender, EventArgs e)
         {
-            lbl_header_title.Text = "Deposit amount to bank ("+_bankName+")";
+            //lbl_header_title.Text = "Deposit amount to bank (" + _bankName + ")";
             get_accounts_dropdownlist();
         }
         public string GetMAXInvoiceNo()

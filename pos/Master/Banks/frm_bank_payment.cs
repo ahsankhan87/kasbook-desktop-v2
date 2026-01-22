@@ -36,7 +36,7 @@ namespace pos.Master.Banks
 
         private void frm_bank_payment_Load(object sender, EventArgs e)
         {
-            lbl_header_title.Text = "Make payment from bank (" + _bankName + ")";
+            //lbl_header_title.Text = "Make payment from bank (" + _bankName + ")";
             get_accounts_dropdownlist();
         }
 

@@ -57,6 +57,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cmb_GL_account_code = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_countryName = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -246,6 +248,8 @@
             // tabPage1
             // 
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.cmb_GL_account_code);
+            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.txt_id);
             this.tabPage1.Controls.Add(this.groupBox1);
@@ -265,6 +269,18 @@
             this.tabPage1.Controls.Add(this.lbl_edit_status);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cmb_GL_account_code
+            // 
+            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
+            this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_GL_account_code.FormattingEnabled = true;
+            this.cmb_GL_account_code.Name = "cmb_GL_account_code";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
             // 
             // groupBox3
             // 
@@ -625,5 +641,7 @@
         private System.Windows.Forms.TextBox txt_citySubdivisionName;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox txt_StreetName;
+        private System.Windows.Forms.ComboBox cmb_GL_account_code;
+        private System.Windows.Forms.Label label6;
     }
 }
