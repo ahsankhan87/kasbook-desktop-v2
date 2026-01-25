@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
 
 namespace pos
 {
@@ -124,21 +125,48 @@ namespace pos
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Customers_Create))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to create customers.",
+                        "ليس لديك صلاحية لإنشاء العملاء.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
                     return;
                 }
 
                 // Validate required fields
                 if (txt_first_name.Text == string.Empty)
                 {
-                    MessageBox.Show("Please enter first name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "First name is required.",
+                        "الاسم الأول مطلوب.",
+                        "Validation",
+                        "تحقق"
+                    );
+                    txt_first_name.Focus();
                     return;
                 }
-                if(txt_registrationName.Text == string.Empty)
+                if (txt_registrationName.Text == string.Empty)
                 {
-                    MessageBox.Show("Please enter registration name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Registration name is required.",
+                        "اسم التسجيل مطلوب.",
+                        "Validation",
+                        "تحقق"
+                    );
+                    txt_registrationName.Focus();
                     return;
                 }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Save this customer?",
+                    "هل تريد حفظ هذا العميل؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+                if (confirm != DialogResult.Yes)
+                    return;
+
                 if (txt_first_name.Text != string.Empty)
                 {
                     CustomerModal info = new CustomerModal
@@ -168,23 +196,38 @@ namespace pos
                     int result = objBLL.Insert(info);
                     if (result > 0)
                     {
-                        MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UiMessages.ShowInfo(
+                            "Customer has been created successfully.",
+                            "تم إنشاء العميل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                         clear_all();
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowError(
+                            "Customer could not be saved. Please try again.",
+                            "تعذر حفظ العميل. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
                     }
 
                 }
                 else
                 {
-                    MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Please enter value in field",
+                        "يرجى إدخال قيمة في الحقل",
+                        "Invalid Data",
+                        "بيانات غير صالحة"
+                    );
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
                 throw;
             }
         }
@@ -213,6 +256,10 @@ namespace pos
             if (e.KeyData == Keys.F5)
             {
                 btn_refresh.PerformClick();
+            }
+            if(e.KeyData == Keys.F9)
+            {
+                txt_search.Focus();
             }
             
         }
@@ -253,19 +300,37 @@ namespace pos
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Customers_Edit))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to update customers.",
+                        "ليس لديك صلاحية لتحديث العملاء.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
                     return;
                 }
 
-
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
-                    MessageBox.Show("Record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowError(
+                        "Please select a customer record to update.",
+                        "يرجى اختيار سجل عميل للتحديث.",
+                        "Not Found",
+                        "غير موجود"
+                    );
                     return;
                 }
 
                 if (txt_first_name.Text != string.Empty && txt_registrationName.Text != string.Empty && txt_vatno.Text != string.Empty)
                 {
+                    var confirmUpdate = UiMessages.ConfirmYesNo(
+                        "Update this customer?",
+                        "هل تريد تحديث هذا العميل؟",
+                        captionEn: "Confirm",
+                        captionAr: "تأكيد"
+                    );
+                    if (confirmUpdate != DialogResult.Yes)
+                        return;
+
                     CustomerModal info = new CustomerModal
                     {
                         first_name = txt_first_name.Text,
@@ -289,32 +354,46 @@ namespace pos
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();
-
                     info.id = int.Parse(txt_id.Text);
 
                     int result = objBLL.Update(info);
                     if (result > 0)
                     {
-                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UiMessages.ShowInfo(
+                            "Customer has been updated successfully.",
+                            "تم تحديث العميل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                         clear_all();
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowError(
+                            "Customer could not be updated. Please try again.",
+                            "تعذر تحديث العميل. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
                     }
 
                 }
                 else
                 {
-                    MessageBox.Show("Please enter first name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Please enter first name",
+                        "يرجى إدخال الاسم الأول",
+                        "Required Field",
+                        "حقل مطلوب"
+                    );
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
                 throw;
             }
-}
+        }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
@@ -329,35 +408,56 @@ namespace pos
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Customers_Delete))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to delete customers.",
+                        "ليس لديك صلاحية لحذف العملاء.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
                     return;
                 }
 
                 string id = txt_id.Text;
-
-                if (id != "")
+                if (string.IsNullOrWhiteSpace(id))
                 {
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                    DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        CustomerBLL objBLL = new CustomerBLL();
-                        int resulte = objBLL.Delete(int.Parse(id));
-
-                        MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        clear_all();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
+                    UiMessages.ShowInfo(
+                        "Please select a customer record to delete.",
+                        "يرجى اختيار سجل عميل للحذف.",
+                        "Delete",
+                        "حذف"
+                    );
+                    return;
                 }
+
+                var confirmDelete = UiMessages.ConfirmYesNo(
+                    "Delete this customer? This action cannot be undone.",
+                    "هل تريد حذف هذا العميل؟ لا يمكن التراجع عن هذا الإجراء.",
+                    captionEn: "Confirm Delete",
+                    captionAr: "تأكيد الحذف"
+                );
+
+                if (confirmDelete != DialogResult.Yes)
+                    return;
+
+                CustomerBLL objBLL = new CustomerBLL();
+                objBLL.Delete(int.Parse(id));
+
+                UiMessages.ShowInfo(
+                    "Customer has been deleted successfully.",
+                    "تم حذف العميل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+                clear_all();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(
+                    $"An error occurred: {ex.Message}",
+                    $"حدث خطأ: {ex.Message}",
+                    "Error",
+                    "خطأ"
+                );
             }
         }
 
@@ -365,12 +465,22 @@ namespace pos
         {
             string customer_id = txt_id.Text;
 
-            if (customer_id != "")
+            if (!string.IsNullOrWhiteSpace(customer_id))
             {
-                load_customer_detail(int.Parse(customer_id));
-                
+                using (pos.UI.Busy.BusyScope.Show(this, UiMessages.T("Loading customer details...", "جاري تحميل بيانات العميل...")))
+                {
+                    load_customer_detail(int.Parse(customer_id));
+                }
             }
-
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a customer first.",
+                    "يرجى اختيار عميل أولاً.",
+                    "Customer",
+                    "العميل"
+                );
+            }
         }
 
         private void btn_trans_refresh_Click(object sender, EventArgs e)
@@ -378,14 +488,22 @@ namespace pos
             string customer_id = txt_id.Text;
             if (customer_id != "")
             {
-                //load customer transactions in grid
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Customers_LedgerView))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to view the customer ledger.",
+                        "ليس لديك صلاحية لعرض كشف حساب العميل.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
                     return;
                 }
-                load_customer_transactions_grid(int.Parse(customer_id));
+
+                using (pos.UI.Busy.BusyScope.Show(this, UiMessages.T("Loading customer transactions...", "جاري تحميل حركات العميل...")))
+                {
+                    load_customer_transactions_grid(int.Parse(customer_id));
+                }
             }
         }
 
@@ -397,12 +515,26 @@ namespace pos
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Customers_LedgerPayment))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to record payments for this customer.",
+                        "ليس لديك صلاحية لتسجيل دفعات لهذا العميل.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
                     return;
                 }
                 frm_customer_payment obj = new frm_customer_payment(this, int.Parse(customer_id));
                 obj.ShowDialog();
-               
+
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a customer first.",
+                    "يرجى اختيار عميل أولاً.",
+                    "Customer",
+                    "العميل"
+                );
             }
         }
         private void CustomizeDataGridView()
@@ -465,7 +597,12 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(
+                    "Failed to load customer transactions. " + ex.Message,
+                    "تعذر تحميل حركات العميل. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
                 throw;
             }
 
@@ -478,12 +615,22 @@ namespace pos
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Customers_LedgerPrint))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to print the customer ledger.",
+                        "ليس لديك صلاحية لطباعة كشف حساب العميل.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
                     return;
                 }
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
-                    MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowInfo(
+                        "Please select a customer to view the ledger report.",
+                        "يرجى اختيار عميل لعرض تقرير كشف الحساب.",
+                        "Customer",
+                        "العميل"
+                    );
                     return;
                 }
                 string customer_id = txt_id.Text;
@@ -492,7 +639,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -502,7 +649,12 @@ namespace pos
             {
                 if (grid_customer_transactions.CurrentRow == null)
                 {
-                    MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowInfo(
+                        "Please select a transaction to print the receipt.",
+                        "يرجى اختيار حركة لطباعة الإيصال.",
+                        "Receipt",
+                        "الإيصال"
+                    );
                     return;
                 }
 
@@ -510,7 +662,12 @@ namespace pos
 
                 if (String.IsNullOrEmpty(id))
                 {
-                    MessageBox.Show("Please select customer to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowInfo(
+                        "Please select a transaction to print the receipt.",
+                        "يرجى اختيار حركة لطباعة الإيصال.",
+                        "Receipt",
+                        "الإيصال"
+                    );
                     return;
                 }
                 pos.Customers.Customer_Ledger_Report.Frm_customerPaymentReceipt frm_CustomerPaymentReceipt = new Customers.Customer_Ledger_Report.Frm_customerPaymentReceipt(id);
@@ -518,7 +675,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
     }

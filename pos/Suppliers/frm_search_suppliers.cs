@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -20,6 +22,9 @@ namespace pos
         string _search = "";
         
         public bool _returnStatus = false;
+
+        private readonly Timer _searchDebounce = new Timer();
+        private const int DebounceMs = 300;
 
         public frm_search_suppliers(frm_addSupplier mainForm, string search)
         {
@@ -39,34 +44,56 @@ namespace pos
         private void frm_search_suppliers_Load(object sender, EventArgs e)
         {
             txt_search.Text = _search;
+
+            // Debounce search
+            _searchDebounce.Interval = DebounceMs;
+            _searchDebounce.Tick += SearchDebounce_Tick;
+
             load_suppliers_grid();
             grid_search_suppliers.Focus();
+        }
+
+        private void SearchDebounce_Tick(object sender, EventArgs e)
+        {
+            _searchDebounce.Stop();
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Searching suppliers...", "جاري البحث عن الموردين...")))
+                {
+                    grid_search_suppliers.DataSource = null;
+
+                    SupplierBLL objBLL = new SupplierBLL();
+                    grid_search_suppliers.AutoGenerateColumns = false;
+
+                    String condition = txt_search.Text.Trim();
+                    grid_search_suppliers.DataSource = objBLL.SearchRecord(condition);
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         public void load_suppliers_grid()
         {
             try
             {
-                grid_search_suppliers.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading suppliers...", "جاري تحميل الموردين...")))
+                {
+                    grid_search_suppliers.DataSource = null;
 
-                //bind data in data grid view  
-                SupplierBLL objBLL = new SupplierBLL();
-                grid_search_suppliers.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    SupplierBLL objBLL = new SupplierBLL();
+                    grid_search_suppliers.AutoGenerateColumns = false;
 
-                String condition = txt_search.Text.Trim();
-
-                //if (condition != "")
-                //{
+                    String condition = txt_search.Text.Trim();
                     grid_search_suppliers.DataSource = objBLL.SearchRecord(condition);
-
-                //}
-
-
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -75,21 +102,27 @@ namespace pos
         {
             if (grid_search_suppliers.SelectedCells.Count > 0)
             {
-                string Supplier_id = grid_search_suppliers.CurrentRow.Cells["id"].Value.ToString();
-                
-                
-                if(mainForm != null)
+                string supplier_id = grid_search_suppliers.CurrentRow.Cells["id"].Value.ToString();
+
+                if (mainForm != null)
                 {
-                    mainForm.load_detail(int.Parse(Supplier_id));
-                    mainForm.load_transactions_grid(int.Parse(Supplier_id));
+                    using (BusyScope.Show(this, UiMessages.T("Loading supplier...", "جاري تحميل المورد...")))
+                    {
+                        mainForm.load_detail(int.Parse(supplier_id));
+                        mainForm.load_transactions_grid(int.Parse(supplier_id));
+                    }
                 }
 
-                
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Please select record", "suppliers", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UiMessages.ShowInfo(
+                    "Please select a supplier record.",
+                    "يرجى اختيار سجل مورد.",
+                    "Suppliers",
+                    "الموردون"
+                );
             }
         }
 
@@ -114,26 +147,9 @@ namespace pos
 
         private void txt_search_KeyUp(object sender, KeyEventArgs e)
         {
-            try
-            {
-                if(txt_search.Text != "")
-                {
-                    //bind data in data grid view  
-                    SupplierBLL objBLL = new SupplierBLL();
-                    grid_search_suppliers.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text.Trim();
-                    grid_search_suppliers.DataSource = objBLL.SearchRecord(condition);
-
-                }
-                
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            // Debounce DB calls while the user types
+            _searchDebounce.Stop();
+            _searchDebounce.Start();
         }
 
         private void frm_search_suppliers_KeyDown(object sender, KeyEventArgs e)

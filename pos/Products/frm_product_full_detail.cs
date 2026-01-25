@@ -13,6 +13,7 @@ using POS.Core;
 using System.IO;
 using System.Net;
 using System.Web;
+using pos.UI;
 
 namespace pos
 {
@@ -77,10 +78,10 @@ namespace pos
                 txt_part_number.Focus();
             }
 
+            // Fix broken if statement in frm_product_full_detail_Load
             if (_item_number != "")
             {
                 load_product_detail(_item_number);
-                
             }
             //when this is true it will focus on history tab
             if (_loadMovementHistory)
@@ -89,6 +90,16 @@ namespace pos
                 
             }
             ApplyGregorianCalendarForDatePickersIfArabic();
+
+            // Restrict numeric fields
+            if (txt_cost_price != null) txt_cost_price.KeyPress += NumericTextBox_KeyPress;
+            if (txt_unit_price != null) txt_unit_price.KeyPress += NumericTextBox_KeyPress;
+            if (txt_unit_price_2 != null) txt_unit_price_2.KeyPress += NumericTextBox_KeyPress;
+            if (txt_packet_qty != null) txt_packet_qty.KeyPress += NumericTextBox_KeyPress;
+            if (txt_demand_qty != null) txt_demand_qty.KeyPress += NumericTextBox_KeyPress;
+            if (txt_pur_dmnd_qty != null) txt_pur_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
+            if (txt_sale_dmnd_qty != null) txt_sale_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
+            if (txt_restock_level != null) txt_restock_level.KeyPress += NumericTextBox_KeyPress;
         }
 
         public void load_product_detail(string item_number)
@@ -236,96 +247,118 @@ namespace pos
         {
             try
             {
-                
                 if (objBLL.IsProductExist(txt_code.Text.Trim(), txt_category_code.Text.Trim()))
                 {
-                    MessageBox.Show("Product already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowWarning(
+                        "A product with the same code already exists.",
+                        "يوجد منتج بنفس الكود بالفعل.",
+                        "Duplicate",
+                        "مكرر"
+                    );
                     return;
                 }
                 if (objBLL.CheckDuplicateBarcode(txt_barcode.Text) && !string.IsNullOrEmpty(txt_barcode.Text))
                 {
-                    MessageBox.Show("Product barcode already exist", "Duplicate barcode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowWarning(
+                        "A product with the same barcode already exists.",
+                        "يوجد منتج بنفس الباركود بالفعل.",
+                        "Duplicate",
+                        "مكرر"
+                    );
                     return;
                 }
+
+                if (string.IsNullOrWhiteSpace(txt_code.Text) || string.IsNullOrWhiteSpace(txt_name.Text) || string.IsNullOrWhiteSpace(txt_part_number.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Code, name, and part number are required.",
+                        "الكود والاسم ورقم القطعة حقول مطلوبة.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Save this product?",
+                    "هل تريد حفظ هذا المنتج؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+                if (confirm != DialogResult.Yes) return;
 
                 FileStream fs;
                 BinaryReader br;
 
-                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_part_number.Text != string.Empty)
+                ProductModal info = new ProductModal();
+
+                if (picture_name != "")
                 {
-                    ProductModal info = new ProductModal();
+                    byte[] ImageData;
+                    fs = new FileStream(picture_name, FileMode.Open, FileAccess.Read);
+                    br = new BinaryReader(fs);
+                    ImageData = br.ReadBytes((int)fs.Length);
+                    br.Close();
+                    fs.Close();
 
-                    //string FileName = openFileDialog1.FileName; 
-                    if (picture_name != "")
-                    {
+                    info.picture = ImageData;
+                }
 
-                        byte[] ImageData;
-                        fs = new FileStream(picture_name, FileMode.Open, FileAccess.Read);
-                        br = new BinaryReader(fs);
-                        ImageData = br.ReadBytes((int)fs.Length);
-                        br.Close();
-                        fs.Close();
+                //Unique item number / id 
+                string maxItemNumber = objBLL.GetMaxProductNumber();
 
-                        info.picture = ImageData;
+                info.barcode = txt_barcode.Text;
+                info.code = txt_code.Text;
+                info.part_number = txt_part_number.Text;
+                info.item_number = maxItemNumber;
+                info.alt_item_number = txt_alt_item_number.Text;
+                info.group_code = txt_group_code.Text;
+                info.category_code = txt_category_code.Text;
+                info.brand_code = txt_brand_code.Text;
 
-                    }
+                info.name = txt_name.Text;
+                info.name_ar = txt_name_ar.Text;
+                info.cost_price = (String.IsNullOrEmpty(txt_cost_price.Text)) ? 0 : double.Parse(txt_cost_price.Text);
+                info.unit_price = (String.IsNullOrEmpty(txt_unit_price.Text)) ? 0 : double.Parse(txt_unit_price.Text);
+                info.unit_price_2 = (String.IsNullOrEmpty(txt_unit_price_2.Text)) ? 0 : double.Parse(txt_unit_price_2.Text);
+                info.item_type = cmb_item_type.Text;
+                info.description = txt_description.Text;
+                info.tax_id = (cmb_tax.SelectedValue == null ? 0 : Convert.ToInt32(cmb_tax.SelectedValue.ToString()));
+                info.supplier_id = (cmb_supplier.SelectedValue == null ? 0 : Convert.ToInt32(cmb_supplier.SelectedValue.ToString()));
+                info.unit_id = (cmb_units.SelectedValue == null ? 0 : Convert.ToInt32(cmb_units.SelectedValue.ToString()));
+                info.location_code = txt_def_location.Text;
+                info.demand_qty = (txt_demand_qty.Text != "" ? decimal.Parse(txt_demand_qty.Text) : 0);
+                info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
+                info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
+                info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
+                info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
+                info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
 
-                    //Unique item number / id 
-                    string maxItemNumber = objBLL.GetMaxProductNumber();
-
-                    info.barcode = txt_barcode.Text;
-                    info.code = txt_code.Text;
-                    info.part_number = txt_part_number.Text;
-                    info.item_number = maxItemNumber;
-                    info.alt_item_number = txt_alt_item_number.Text;
-                    //info.origin = (cmb_origin.SelectedValue != null ? cmb_origin.SelectedValue.ToString() : "" );
-                    info.group_code = txt_group_code.Text;
-                    info.category_code = txt_category_code.Text;
-                    info.brand_code = txt_brand_code.Text;
-
-                    info.name = txt_name.Text;
-                    info.name_ar = txt_name_ar.Text;
-                    info.cost_price = (String.IsNullOrEmpty(txt_cost_price.Text)) ? 0 : double.Parse(txt_cost_price.Text);
-                    info.unit_price = (String.IsNullOrEmpty(txt_unit_price.Text)) ? 0 : double.Parse(txt_unit_price.Text);
-                    info.unit_price_2 = (String.IsNullOrEmpty(txt_unit_price_2.Text)) ? 0 : double.Parse(txt_unit_price_2.Text);
-                    info.item_type = cmb_item_type.Text;
-                    info.description = txt_description.Text;
-                    info.tax_id = (cmb_tax.SelectedValue == null ? 0 : Convert.ToInt32(cmb_tax.SelectedValue.ToString()));
-                    info.supplier_id = (cmb_supplier.SelectedValue == null ? 0 : Convert.ToInt32(cmb_supplier.SelectedValue.ToString()));
-                    info.unit_id = (cmb_units.SelectedValue == null ? 0 : Convert.ToInt32(cmb_units.SelectedValue.ToString()));
-                    //info.location_code = (cmb_locations.SelectedValue != null ? cmb_locations.SelectedValue.ToString() : "");
-                    info.location_code = txt_def_location.Text;
-                    info.demand_qty = (txt_demand_qty.Text != "" ? decimal.Parse(txt_demand_qty.Text) : 0);
-                    info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
-                    info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
-                    info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
-                    info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
-                    info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
-
-                    int result = objBLL.Insert(info);
-                    if (result > 0)
-                    {
-
-                        MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        clear_all();
-                        txt_part_number.Focus();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-
+                int result = objBLL.Insert(info);
+                if (result > 0)
+                {
+                    UiMessages.ShowInfo(
+                        "Product has been created successfully.",
+                        "تم إنشاء المنتج بنجاح.",
+                        "Success",
+                        "نجاح"
+                    );
+                    clear_all();
+                    txt_part_number.Focus();
                 }
                 else
                 {
-                    MessageBox.Show("Code and Name are required field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    UiMessages.ShowError(
+                        "Product could not be saved. Please try again.",
+                        "تعذر حفظ المنتج. يرجى المحاولة مرة أخرى.",
+                        "Error",
+                        "خطأ"
+                    );
                 }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
        
@@ -333,13 +366,16 @@ namespace pos
         {
             if (keyData == (Keys.Control | Keys.S))
             {
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to save", "Save Record", buttons, MessageBoxIcon.Warning);
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Save this product?",
+                    "هل تريد حفظ هذا المنتج؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
 
-                if (result == DialogResult.Yes)
-                {
+                if (confirm == DialogResult.Yes)
                     btn_save.PerformClick();
-                }
+
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -493,9 +529,14 @@ namespace pos
 
         private void txt_code_KeyDown(object sender, KeyEventArgs e)
         {
-            if (objBLL.IsProductExist(txt_code.Text,txt_category_code.Text) && e.KeyData == Keys.Enter)
+            if (objBLL.IsProductExist(txt_code.Text, txt_category_code.Text) && e.KeyData == Keys.Enter)
             {
-                MessageBox.Show("Item code already exist","Product",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                UiMessages.ShowWarning(
+                    "This item code is already in use.",
+                    "كود الصنف مستخدم بالفعل.",
+                    "Duplicate",
+                    "مكرر"
+                );
                 btn_save.Enabled = false;
                 lbl_errors.Visible = true;
                 lbl_errors.Text = "*Item code already exist";
@@ -509,48 +550,6 @@ namespace pos
             }
         }
 
-        private void txt_item_number_KeyUp(object sender, KeyEventArgs e)
-        {
-            generate_item_code();
-        }
-
-        private void generate_item_code()
-        {
-            string brand_code = txt_brand_code.Text;
-            string item_number = txt_part_number.Text;
-
-            txt_code.Text = brand_code +item_number;
-        }
-
-        
-        private void btn_upload_picture_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = new Bitmap(opnfd.FileName);
-                picture_name = opnfd.FileName;
-            }  
-  
-        }
-
-        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (txt_product_code.Text != "" && e.KeyData == Keys.Enter)
-            {
-                frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, txt_product_code.Text, "", "", 0, false, false, null,this);
-                search_product_obj.ShowDialog();
-
-            }
-        }
-
-        private void btn_search_products_Click(object sender, EventArgs e)
-        {
-            frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, txt_product_code.Text, "", "", 0, false, false, null, this);
-            search_product_obj.ShowDialog();
-        }
-
         private void btn_update_Click(object sender, EventArgs e)
         {
             try
@@ -558,97 +557,106 @@ namespace pos
 
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
-                    MessageBox.Show("Record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowInfo(
+                        "Please select a product record to update.",
+                        "يرجى اختيار سجل منتج للتحديث.",
+                        "Not Found",
+                        "غير موجود"
+                    );
                     return;
                 }
+
+                if (string.IsNullOrWhiteSpace(txt_code.Text) || string.IsNullOrWhiteSpace(txt_name.Text) || string.IsNullOrWhiteSpace(txt_part_number.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Code, name, and part number are required.",
+                        "الكود والاسم ورقم القطعة حقول مطلوبة.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Update this product?",
+                    "هل تريد تحديث هذا المنتج؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+                if (confirm != DialogResult.Yes) return;
 
                 FileStream fs;
                 BinaryReader br;
 
-                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty && txt_part_number.Text != string.Empty)
+                ProductModal info = new ProductModal();
+
+                if (picture_name != "")
                 {
-                    ProductModal info = new ProductModal();
+                    byte[] ImageData;
+                    fs = new FileStream(picture_name, FileMode.Open, FileAccess.Read);
+                    br = new BinaryReader(fs);
+                    ImageData = br.ReadBytes((int)fs.Length);
+                    br.Close();
+                    fs.Close();
 
-                    //string FileName = openFileDialog1.FileName; 
-                    if (picture_name != "")
-                    {
+                    info.picture = ImageData;
+                }
 
-                        byte[] ImageData;
-                        fs = new FileStream(picture_name, FileMode.Open, FileAccess.Read);
-                        br = new BinaryReader(fs);
-                        ImageData = br.ReadBytes((int)fs.Length);
-                        br.Close();
-                        fs.Close();
+                info.barcode = txt_barcode.Text;
+                info.code = txt_code.Text;
+                info.part_number = txt_part_number.Text;
+                info.alt_item_number = txt_alt_item_number.Text;
+                info.group_code = txt_group_code.Text;
+                info.category_code = txt_category_code.Text;
+                info.brand_code = txt_brand_code.Text;
 
-                        info.picture = ImageData;
-
-                    }
-
-                    info.barcode = txt_barcode.Text;
-                    info.code = txt_code.Text;
-                    info.part_number = txt_part_number.Text;
-                    info.alt_item_number = txt_alt_item_number.Text;
-                    //info.origin = (cmb_origin.SelectedValue != null ? cmb_origin.SelectedValue.ToString() : "" );
-
-                    info.group_code = txt_group_code.Text;
-                    info.category_code = txt_category_code.Text;
-                    info.brand_code = txt_brand_code.Text;
-
-                    info.name = txt_name.Text;
-                    info.name_ar = txt_name_ar.Text;
-                    info.cost_price = (String.IsNullOrEmpty(txt_cost_price.Text)) ? 0 : double.Parse(txt_cost_price.Text);
-                    info.unit_price = (String.IsNullOrEmpty(txt_unit_price.Text)) ? 0 : double.Parse(txt_unit_price.Text);
-                    info.unit_price_2 = (String.IsNullOrEmpty(txt_unit_price_2.Text)) ? 0 : double.Parse(txt_unit_price_2.Text);
-                    info.item_type = cmb_item_type.Text;
-                    info.description = txt_description.Text;
-                    info.tax_id = (cmb_tax.SelectedValue == null ? 0 : Convert.ToInt32(cmb_tax.SelectedValue.ToString()));
-                    info.unit_id = Convert.ToInt32(cmb_units.SelectedValue.ToString());
-                    info.supplier_id = (cmb_supplier.SelectedValue == null ? 0 : Convert.ToInt32(cmb_supplier.SelectedValue.ToString()));
-                    //info.location_code = (cmb_locations.SelectedValue != null ? cmb_locations.SelectedValue.ToString() : "");
-                    info.location_code = txt_def_location.Text;
-                    info.demand_qty = (txt_demand_qty.Text != "" ? decimal.Parse(txt_demand_qty.Text) : 0);
-                    info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
-                    info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
-                    info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
-                    info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
-                    info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
+                info.name = txt_name.Text;
+                info.name_ar = txt_name_ar.Text;
+                info.cost_price = (String.IsNullOrEmpty(txt_cost_price.Text)) ? 0 : double.Parse(txt_cost_price.Text);
+                info.unit_price = (String.IsNullOrEmpty(txt_unit_price.Text)) ? 0 : double.Parse(txt_unit_price.Text);
+                info.unit_price_2 = (String.IsNullOrEmpty(txt_unit_price_2.Text)) ? 0 : double.Parse(txt_unit_price_2.Text);
+                info.item_type = cmb_item_type.Text;
+                info.description = txt_description.Text;
+                info.tax_id = (cmb_tax.SelectedValue == null ? 0 : Convert.ToInt32(cmb_tax.SelectedValue.ToString()));
+                info.unit_id = Convert.ToInt32(cmb_units.SelectedValue.ToString());
+                info.supplier_id = (cmb_supplier.SelectedValue == null ? 0 : Convert.ToInt32(cmb_supplier.SelectedValue.ToString()));
+                info.location_code = txt_def_location.Text;
+                info.demand_qty = (txt_demand_qty.Text != "" ? decimal.Parse(txt_demand_qty.Text) : 0);
+                info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
+                info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
+                info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
+                info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
+                info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
 
 
-                    info.id = int.Parse(txt_id.Text);
-                    int result = objBLL.Update(info);
+                info.id = int.Parse(txt_id.Text);
+                int result = objBLL.Update(info);
 
-                    ///////////
-                    //RE STOCK LEVEL UPDATE
-                    //for (int i = 0; i < grid_location_qty.Rows.Count; i++)
-                    //{
-                    //    if (grid_location_qty.Rows[i].Cells["location_code"].Value != null)
-                    //    {
-
-                    //        info.re_stock_level = (grid_location_qty.Rows[i].Cells["re_order_qty"].Value.ToString() != "" ? decimal.Parse(grid_location_qty.Rows[i].Cells["re_order_qty"].Value.ToString()) : 0);
-                    //        info.location_code = grid_location_qty.Rows[i].Cells["location_code"].Value.ToString();
-
-                    //        objBLL.UpdateReorder_level(info);
-                    //    }
-
-                    //}
-                    /////////////
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        clear_all();
-                        txt_part_number.Focus();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                if (result > 0)
+                {
+                    UiMessages.ShowInfo(
+                        "Product has been updated successfully.",
+                        "تم تحديث المنتج بنجاح.",
+                        "Success",
+                        "نجاح"
+                    );
+                    clear_all();
+                    txt_part_number.Focus();
+                }
+                else
+                {
+                    UiMessages.ShowError(
+                        "Product could not be updated. Please try again.",
+                        "تعذر تحديث المنتج. يرجى المحاولة مرة أخرى.",
+                        "Error",
+                        "خطأ"
+                    );
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -761,7 +769,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
                 throw;
             }
         }
@@ -834,7 +842,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
                 throw;
             }
         }
@@ -885,25 +893,38 @@ namespace pos
         {
             string id = txt_id.Text;
 
-            if(id != "")
+            if (!string.IsNullOrWhiteSpace(id))
             {
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Delete this product? This action cannot be undone.",
+                    "هل تريد حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
+                    captionEn: "Confirm Delete",
+                    captionAr: "تأكيد الحذف"
+                );
 
-                if (result == DialogResult.Yes)
+                if (confirm == DialogResult.Yes)
                 {
                     ProductBLL objBLL = new ProductBLL();
                     objBLL.Delete(int.Parse(id));
 
-                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Product has been deleted successfully.",
+                        "تم حذف المنتج بنجاح.",
+                        "Deleted",
+                        "تم الحذف"
+                    );
                     clear_all();
                     txt_part_number.Focus();
                 }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a product record first.",
+                    "يرجى اختيار سجل منتج أولاً.",
+                    "Product",
+                    "المنتج"
+                );
             }
         }
 
@@ -1035,7 +1056,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -1179,7 +1200,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -1302,7 +1323,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -1354,8 +1375,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
             return result;
         }
@@ -1389,6 +1409,67 @@ namespace pos
             if (dt < DateTimePicker.MinimumDateTime) return DateTimePicker.MinimumDateTime;
             if (dt > DateTimePicker.MaximumDateTime) return DateTimePicker.MaximumDateTime;
             return dt;
+        }
+
+        private void NumericTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow digits, control keys (Backspace), and one decimal point.
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Only allow one decimal point, and not as first character
+            var tb = sender as TextBox;
+            if (tb != null && e.KeyChar == '.')
+            {
+                if (tb.Text.Contains(".") || tb.SelectionStart == 0 && tb.TextLength == 0)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        // Add missing helper used by txt_part_number_KeyUp / txt_brands_TextChanged
+        private void generate_item_code()
+        {
+            string brand_code = txt_brand_code.Text;
+            string part_number = txt_part_number.Text;
+
+            txt_code.Text = brand_code + part_number;
+        }
+
+        private void txt_item_number_KeyUp(object sender, KeyEventArgs e)
+        {
+            generate_item_code();
+        }
+
+        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txt_product_code.Text) && e.KeyData == Keys.Enter)
+            {
+                frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, txt_product_code.Text, "", "", 0, false, false, null, this);
+                search_product_obj.ShowDialog();
+            }
+        }
+
+        private void btn_search_products_Click(object sender, EventArgs e)
+        {
+            frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, txt_product_code.Text, "", "", 0, false, false, null, this);
+            search_product_obj.ShowDialog();
+        }
+
+        private void btn_upload_picture_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opnfd = new OpenFileDialog();
+            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif";
+            if (opnfd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = new Bitmap(opnfd.FileName);
+                picture_name = opnfd.FileName;
+            }
         }
     }
 }

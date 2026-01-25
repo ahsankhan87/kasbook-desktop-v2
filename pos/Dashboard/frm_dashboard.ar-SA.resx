@@ -117,54 +117,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>864, 18</value>
+  </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 46</value>
   </data>
   <data name="lblTitle.Text" xml:space="preserve">
     <value>لوحة القيادة</value>
   </data>
+  <data name="lblSubtitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>673, 69</value>
+  </data>
+  <data name="lblSubtitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 23</value>
+  </data>
+  <data name="lblSubtitle.Text" xml:space="preserve">
+    <value>subtitle</value>
+  </data>
+  <data name="headerPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1078, 110</value>
+  </data>
+  <data name="summaryPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1078, 157</value>
+  </data>
+  <data name="pnlSalesToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>734, 26</value>
+  </data>
+  <data name="lblSalesTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblSalesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 18</value>
+  </data>
   <data name="lblSalesTitle.Text" xml:space="preserve">
     <value>مبيعات اليوم</value>
+  </data>
+  <data name="pnlRevenueToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>409, 26</value>
+  </data>
+  <data name="lblRevenueTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblRevenueTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 18</value>
   </data>
   <data name="lblRevenueTitle.Text" xml:space="preserve">
     <value>المبيعات الشهرية</value>
   </data>
+  <data name="pnlLowStock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 26</value>
+  </data>
+  <data name="lblLowStockTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblLowStockTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 18</value>
+  </data>
   <data name="lblLowStockTitle.Text" xml:space="preserve">
     <value>عناصر المخزون المنخفض</value>
   </data>
+  <data name="lblQuickAccess.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 267</value>
+  </data>
   <data name="lblQuickAccess.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 46</value>
+    <value>193, 46</value>
   </data>
   <data name="lblQuickAccess.Text" xml:space="preserve">
     <value>الوصول السريع</value>
   </data>
+  <data name="quickAccessPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 313</value>
+  </data>
+  <data name="quickAccessPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1078, 224</value>
+  </data>
+  <data name="btnNewSale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>866, 26</value>
+  </data>
   <data name="btnNewSale.Text" xml:space="preserve">
     <value>💳 مبيعات جديدة</value>
+  </data>
+  <data name="btnNewPurchase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>673, 26</value>
+  </data>
+  <data name="btnNewPurchase.Text" xml:space="preserve">
+    <value>💳  شراء جديد</value>
+  </data>
+  <data name="btnProducts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 26</value>
   </data>
   <data name="btnProducts.Text" xml:space="preserve">
     <value>📦  منتجات</value>
   </data>
+  <data name="btnCustomers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>287, 26</value>
+  </data>
   <data name="btnCustomers.Text" xml:space="preserve">
     <value>👤  الزبائن</value>
+  </data>
+  <data name="btnSuppliers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 26</value>
   </data>
   <data name="btnSuppliers.Text" xml:space="preserve">
     <value>🏢  الموردين</value>
   </data>
-  <data name="btnSalesReport.Text" xml:space="preserve">
-    <value>📊  تقرير المبيعات</value>
+  <data name="btnPurchasesReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>866, 126</value>
   </data>
   <data name="btnPurchasesReport.Text" xml:space="preserve">
     <value>🧾  تقرير المشتريات</value>
   </data>
+  <data name="btnSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>673, 126</value>
+  </data>
   <data name="btnSettings.Text" xml:space="preserve">
     <value>⚙️  إعدادات</value>
   </data>
+  <data name="btnSalesReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 126</value>
+  </data>
+  <data name="btnSalesReport.Text" xml:space="preserve">
+    <value>📊  تقرير المبيعات</value>
+  </data>
+  <data name="lblRecent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 537</value>
+  </data>
   <data name="lblRecent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 46</value>
+    <value>169, 46</value>
   </data>
   <data name="lblRecent.Text" xml:space="preserve">
     <value>النشاط الأخير</value>
+  </data>
+  <data name="listRecent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 583</value>
+  </data>
+  <data name="listRecent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1078, 161</value>
   </data>
   <data name="colArea.Text" xml:space="preserve">
     <value>منطقة</value>
@@ -174,5 +268,18 @@
   </data>
   <data name="colDateTime.Text" xml:space="preserve">
     <value>التاريخ/الوقت</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1078, 744</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>لوحة القيادة</value>
   </data>
 </root>

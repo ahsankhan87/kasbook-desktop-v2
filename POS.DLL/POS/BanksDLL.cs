@@ -78,9 +78,10 @@ namespace POS.DLL
                         return false;
 
                     var t = row["name"].ToString().Trim();
+                    var id = row["id"].ToString().Trim();
 
                     // String-based detection
-                    if (t.Equals("banks", StringComparison.OrdinalIgnoreCase))
+                    if (id.Equals("19", StringComparison.OrdinalIgnoreCase))
                         return true;
 
                     // Numeric-based detection (if your DB uses codes)

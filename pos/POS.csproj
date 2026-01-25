@@ -1558,6 +1558,9 @@
     <EmbeddedResource Include="Customers\Customer Ledger Report\Frm_customerPaymentReceipt.resx">
       <DependentUpon>Frm_customerPaymentReceipt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Customers\CustomerNameChange.ar-SA.resx">
+      <DependentUpon>CustomerNameChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customers\CustomerNameChange.resx">
       <DependentUpon>CustomerNameChange.cs</DependentUpon>
     </EmbeddedResource>

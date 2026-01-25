@@ -237,10 +237,10 @@ namespace pos
 
             combo.DataSource = null;
 
-            DataRow emptyRow = dt.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[1] = "Please Select " + type;              // Set Column Value
-            dt.Rows.InsertAt(emptyRow, 0);
+            //DataRow emptyRow = dt.NewRow();
+            //emptyRow[0] = 0;              // Set Column Value
+            //emptyRow[1] = "Please Select " + type;              // Set Column Value
+            //dt.Rows.InsertAt(emptyRow, 0);
 
             combo.DisplayMember = displayMember;
             combo.ValueMember = valueMember;

@@ -27,6 +27,9 @@ namespace pos
         public int inventory_acc_id = 0;
         public int purchases_acc_id = 0;
 
+        private CheckBox _chkHeader;
+        private bool _bulkChecking;
+
         public frm_purchase_return()
         {
             InitializeComponent();
@@ -41,7 +44,108 @@ namespace pos
             //load_purchase_return_grid(Purchase_id);
             LoadReturnReasonsDDL();
             autoCompleteInvoice();
-            
+
+            SetupHeaderCheckBox();
+        }
+
+        private void SetupHeaderCheckBox()
+        {
+            if (grid_purchase_return == null) return;
+            if (!grid_purchase_return.Columns.Contains("chk")) return;
+            if (_chkHeader != null) return;
+
+            _chkHeader = new CheckBox();
+            _chkHeader.Size = new Size(15, 15);
+            _chkHeader.BackColor = Color.Transparent;
+            _chkHeader.Checked = false;
+            _chkHeader.Click += HeaderCheckBox_Click;
+
+            grid_purchase_return.Controls.Add(_chkHeader);
+
+            PositionHeaderCheckBox();
+            grid_purchase_return.ColumnWidthChanged += (s, e) => PositionHeaderCheckBox();
+            grid_purchase_return.Scroll += (s, e) => PositionHeaderCheckBox();
+
+            grid_purchase_return.CellValueChanged += grid_purchase_return_CellValueChanged;
+            grid_purchase_return.CurrentCellDirtyStateChanged += grid_purchase_return_CurrentCellDirtyStateChanged;
+        }
+
+        private void PositionHeaderCheckBox()
+        {
+            if (_chkHeader == null) return;
+            if (!grid_purchase_return.Columns.Contains("chk")) return;
+
+            Rectangle rect = grid_purchase_return.GetCellDisplayRectangle(grid_purchase_return.Columns["chk"].Index, -1, true);
+            int x = rect.X + (rect.Width - _chkHeader.Width) / 2;
+            int y = rect.Y + (rect.Height - _chkHeader.Height) / 2;
+            _chkHeader.Location = new Point(Math.Max(0, x), Math.Max(0, y));
+        }
+
+        private void HeaderCheckBox_Click(object sender, EventArgs e)
+        {
+            if (_bulkChecking) return;
+
+            try
+            {
+                _bulkChecking = true;
+                bool check = _chkHeader.Checked;
+
+                foreach (DataGridViewRow row in grid_purchase_return.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    if (row.ReadOnly) continue;
+
+                    row.Cells["chk"].Value = check;
+                }
+
+                grid_purchase_return.EndEdit();
+            }
+            finally
+            {
+                _bulkChecking = false;
+            }
+        }
+
+        private void grid_purchase_return_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (grid_purchase_return.CurrentCell is DataGridViewCheckBoxCell)
+                grid_purchase_return.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void grid_purchase_return_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_bulkChecking) return;
+            if (e.RowIndex < 0) return;
+            if (e.ColumnIndex < 0) return;
+
+            if (grid_purchase_return.Columns[e.ColumnIndex].Name != "chk")
+                return;
+
+            bool allChecked = true;
+            bool anyChecked = false;
+
+            foreach (DataGridViewRow row in grid_purchase_return.Rows)
+            {
+                if (row.IsNewRow) continue;
+                if (row.ReadOnly) continue;
+
+                bool isChecked = false;
+                if (row.Cells["chk"].Value != null)
+                    isChecked = Convert.ToBoolean(row.Cells["chk"].Value);
+
+                anyChecked |= isChecked;
+                allChecked &= isChecked;
+            }
+
+            try
+            {
+                _bulkChecking = true;
+                _chkHeader.Checked = anyChecked && allChecked;
+            }
+            finally
+            {
+                _bulkChecking = false;
+            }
         }
 
         private void btn_search_Click(object sender, EventArgs e)

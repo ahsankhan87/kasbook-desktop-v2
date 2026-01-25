@@ -1,10 +1,12 @@
-﻿using pos.Sales;
+﻿using com.sun.org.apache.xerces.@internal.impl.dtd.models;
+using pos.Sales;
 using pos.Security.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace pos.Dashboard
 {
@@ -32,10 +34,24 @@ namespace pos.Dashboard
         {
             if (DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
                 return;
+            
+            var company = POS.Core.UsersModal.logged_in_company_name;
+            var branch = POS.Core.UsersModal.logged_in_branch_name;
+            var fy = POS.Core.UsersModal.fiscal_year;
 
-            // English-only UI (no localization, no RTL)
-            ApplyEnglishTexts();
+            // Do not override localized resources for Arabic.
+            // WinForms will automatically use `frm_dashboard.ar-SA.resx` when CurrentUICulture is ar-SA.
+            if (!string.Equals(System.Globalization.CultureInfo.CurrentUICulture.Name, "ar-SA", StringComparison.OrdinalIgnoreCase))
+            {
+                ApplyEnglishTexts();
+                lblSubtitle.Text = $"Company: {company} • Branch: {branch} • Fiscal Year: {fy} • {DateTime.Now:dddd, MMM dd, yyyy}";
 
+            }else
+            {
+                lblSubtitle.Text = $"الشركة: {company} • الفرع: {branch} • السنة المالية: {fy} • {DateTime.Now:dddd, MMM dd, yyyy}";
+                //lblSubtitle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            }   
+           
             // Actions
             btnNewSale.Click += (s, a) => OpenNewSale?.Invoke();
             btnProducts.Click += (s, a) => OpenProducts?.Invoke();
@@ -73,10 +89,7 @@ namespace pos.Dashboard
             colInfo.Text = "Info";
             colDateTime.Text = "Date/Time";
 
-            var company = POS.Core.UsersModal.logged_in_company_name;
-            var branch = POS.Core.UsersModal.logged_in_branch_name;
-            var fy = POS.Core.UsersModal.fiscal_year;
-            lblSubtitle.Text = $"Company: {company} • Branch: {branch} • Fiscal Year: {fy} • {DateTime.Now:dddd, MMM dd, yyyy}";
+            
         }
 
         private void LoadDashboardMetrics()

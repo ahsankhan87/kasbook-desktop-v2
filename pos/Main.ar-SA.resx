@@ -701,12 +701,6 @@
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 26</value>
   </data>
-  <data name="sideMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1113, 32</value>
-  </data>
   <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 670</value>
   </data>
@@ -839,7 +833,7 @@
         AAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
 </root>

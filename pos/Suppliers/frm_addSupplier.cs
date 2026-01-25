@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using pos.Suppliers.Supplier_Ledger_Report;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -91,8 +93,26 @@ namespace pos
         
         private void btn_save_Click(object sender, EventArgs e)
         {
-            
-            if (txt_first_name.Text != string.Empty && txt_last_name.Text != string.Empty)
+            if (string.IsNullOrWhiteSpace(txt_first_name.Text))
+            {
+                UiMessages.ShowInfo(
+                    "Supplier name is required name.",
+                    "اسم المورد مطلوب (الاسم الأول واسم العائلة).",
+                    "Validation",
+                    "التحقق"
+                );
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Save this supplier?",
+                "هل تريد حفظ هذا المورد؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
             {
                 SupplierModal info = new SupplierModal();
                 info.first_name = txt_first_name.Text;
@@ -111,31 +131,34 @@ namespace pos
                 info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
 
                 SupplierBLL objBLL = new SupplierBLL();
-                    
                 int result = objBLL.Insert(info);
                 if (result > 0)
                 {
-                    MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Supplier has been created successfully.",
+                        "تم إنشاء المورد بنجاح.",
+                        "Success",
+                        "نجاح"
+                    );
                     clear_all();
 
+                    if (mainForm != null)
+                        mainForm.load_Suppliers_grid();
                 }
                 else
                 {
-                    MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowError(
+                        "Supplier could not be saved. Please try again.",
+                        "تعذر حفظ المورد. يرجى المحاولة مرة أخرى.",
+                        "Error",
+                        "خطأ"
+                    );
                 }
-                    
-                if(mainForm != null)
-                {
-                    mainForm.load_Suppliers_grid();
-
-                }
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
-            
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -162,6 +185,10 @@ namespace pos
             if (e.KeyData == Keys.F5)
             {
                 btn_refresh.PerformClick();
+            }
+            if( e.KeyData == Keys.F9)
+            {
+                txt_search.Focus();
             }
             
         }
@@ -196,11 +223,35 @@ namespace pos
         {
             if (String.IsNullOrEmpty(txt_id.Text))
             {
-                MessageBox.Show("Record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowInfo(
+                    "Please select a supplier record to update.",
+                    "يرجى اختيار سجل مورد للتحديث.",
+                    "Not Found",
+                    "غير موجود"
+                );
                 return;
             }
 
-            if (txt_first_name.Text != string.Empty && txt_last_name.Text != string.Empty)
+            if (string.IsNullOrWhiteSpace(txt_first_name.Text))
+            {
+                UiMessages.ShowInfo(
+                    "Supplier name is required name.",
+                    "اسم المورد مطلوب.",
+                    "Validation",
+                    "التحقق"
+                );
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Update this supplier?",
+                "هل تريد تحديث هذا المورد؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
             {
                 SupplierModal info = new SupplierModal();
                 info.first_name = txt_first_name.Text;
@@ -217,167 +268,179 @@ namespace pos
                 info.PostalCode = txt_postalCode.Text.Trim();
                 info.CountryName = txt_countryName.Text.Trim();
                 info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
-
-                SupplierBLL objBLL = new SupplierBLL();
-
                 info.id = int.Parse(txt_id.Text);
 
+                SupplierBLL objBLL = new SupplierBLL();
                 int result = objBLL.Update(info);
                 if (result > 0)
                 {
-                    MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Supplier has been updated successfully.",
+                        "تم تحديث المورد بنجاح.",
+                        "Success",
+                        "نجاح"
+                    );
                     clear_all();
 
+                    if (mainForm != null)
+                        mainForm.load_Suppliers_grid();
                 }
                 else
                 {
-                    MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowError(
+                        "Supplier could not be updated. Please try again.",
+                        "تعذر تحديث المورد. يرجى المحاولة مرة أخرى.",
+                        "Error",
+                        "خطأ"
+                    );
                 }
-                
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            string id = txt_id.Text;
+
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier record to delete.",
+                    "يرجى اختيار سجل مورد للحذف.",
+                    "Delete",
+                    "حذف"
+                );
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this supplier? This action cannot be undone.",
+                "هل تريد حذف هذا المورد؟ لا يمكن التراجع عن هذا الإجراء.",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                SupplierBLL objBLL = new SupplierBLL();
+                objBLL.Delete(int.Parse(id));
+
+                UiMessages.ShowInfo(
+                    "Supplier has been deleted successfully.",
+                    "تم حذف المورد بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+                clear_all();
+
                 if (mainForm != null)
-                {
                     mainForm.load_Suppliers_grid();
-
-                }
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(
+                    "Failed to delete supplier. " + ex.Message,
+                    "تعذر حذف المورد. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
             }
-        }
-
-        public void load_detail(int supplier_id)
-        {
-            SupplierBLL objBLL = new SupplierBLL();
-            DataTable dt = objBLL.SearchRecordBySupplierID(supplier_id);
-            foreach (DataRow myProductView in dt.Rows)
-            {
-                txt_id.Text = myProductView["id"].ToString();
-                txt_first_name.Text = myProductView["first_name"].ToString();
-                txt_last_name.Text = myProductView["last_name"].ToString();
-                txt_address.Text = myProductView["address"].ToString();
-                txt_vatno.Text = myProductView["vat_no"].ToString();
-                txt_contact_no.Text = myProductView["contact_no"].ToString();
-                txt_email.Text = myProductView["email"].ToString();
-                chk_vat_status.Checked = bool.Parse(myProductView["vat_status"].ToString());
-                txt_StreetName.Text = myProductView["StreetName"].ToString();
-                txt_cityName.Text = myProductView["CityName"].ToString();
-                txt_buildingNumber.Text = myProductView["BuildingNumber"].ToString();
-                txt_citySubdivisionName.Text = myProductView["CitySubdivisionName"].ToString();
-                txt_postalCode.Text = myProductView["PostalCode"].ToString();
-                txt_countryName.Text = myProductView["CountryName"].ToString();
-                cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
-
-            }
-            lbl_customer_name.Visible = true;
-            lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
-        }
-
-        private void btn_search_Click(object sender, EventArgs e)
-        {
-            frm_search_suppliers search_obj = new frm_search_suppliers(this, txt_search.Text);
-            search_obj.ShowDialog();
         }
 
         public void load_transactions_grid(int supplier_id)
         {
             try
             {
-                grid_supplier_transactions.DataSource = null;
-
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_supplier_transactions.AutoGenerateColumns = false;
-
-                String keyword = "id,invoice_no,debit,credit,(credit-debit) AS balance,description,entry_date,account_id,account_name";
-                String table = "pos_suppliers_payments WHERE supplier_id = " + supplier_id + "";
-
-                DataTable dt = new DataTable();
-                dt = objBLL.GetRecord(keyword, table);
-
-                double _dr_total = 0;
-                double _cr_total = 0;
-
-                foreach (DataRow dr in dt.Rows)
+                using (BusyScope.Show(this, UiMessages.T("Loading supplier transactions...", "جاري تحميل حركات المورد...")))
                 {
-                    _dr_total += Convert.ToDouble(dr["debit"].ToString());
-                    _cr_total += Convert.ToDouble(dr["credit"].ToString());
+                    grid_supplier_transactions.DataSource = null;
 
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_supplier_transactions.AutoGenerateColumns = false;
+
+                    String keyword = "id,invoice_no,debit,credit,(credit-debit) AS balance,description,entry_date,account_id,account_name";
+                    String table = "pos_suppliers_payments WHERE supplier_id = " + supplier_id + "";
+
+                    DataTable dt = new DataTable();
+                    dt = objBLL.GetRecord(keyword, table);
+
+                    double _dr_total = 0;
+                    double _cr_total = 0;
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        _dr_total += Convert.ToDouble(dr["debit"].ToString());
+                        _cr_total += Convert.ToDouble(dr["credit"].ToString());
+
+                    }
+
+                    DataRow newRow = dt.NewRow();
+                    newRow[8] = "Total";
+                    newRow[2] = _dr_total;
+                    newRow[3] = _cr_total;
+                    newRow[4] = (_cr_total - _dr_total);
+                    dt.Rows.InsertAt(newRow, dt.Rows.Count);
+
+                    grid_supplier_transactions.DataSource = dt;
+                    CustomizeDataGridView();
                 }
-
-                DataRow newRow = dt.NewRow();
-                newRow[8] = "Total";
-                newRow[2] = _dr_total;
-                newRow[3] = _cr_total;
-                newRow[4] = (_cr_total - _dr_total);
-                dt.Rows.InsertAt(newRow, dt.Rows.Count);
-
-                grid_supplier_transactions.DataSource = dt;
-                CustomizeDataGridView();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(
+                    "Failed to load supplier transactions. " + ex.Message,
+                    "تعذر تحميل حركات المورد. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
                 throw;
             }
 
         }
 
-        private void btn_delete_Click(object sender, EventArgs e)
-        {
-            string id = txt_id.Text;
-           
-                if (!string.IsNullOrWhiteSpace(id))
-                {
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                    DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        SupplierBLL objBLL = new SupplierBLL();
-
-                    try
-                    {
-                        int deleteResult = objBLL.Delete(int.Parse(id));
-                        //if (deleteResult > 0)
-                        //{
-                            MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            clear_all();
-                        //}
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                    else
-                    {
-                        MessageBox.Show("Please select a record to delete.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                }
-            
-        }
         private void btn_refresh_Click(object sender, EventArgs e)
         {
             string supplier_id = txt_id.Text;
 
-            if (supplier_id != "")
+            if (!string.IsNullOrWhiteSpace(supplier_id))
             {
-                load_detail(int.Parse(supplier_id));
-                
-            }
+                using (BusyScope.Show(this, UiMessages.T("Loading supplier details...", "جاري تحميل بيانات المورد...")))
+                {
+                    load_detail(int.Parse(supplier_id));
+                }
 
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier first.",
+                    "يرجى اختيار مورد أولاً.",
+                    "Supplier",
+                    "المورد"
+                );
+            }
         }
 
         private void btn_trans_refresh_Click(object sender, EventArgs e)
         {
             string supplier_id = txt_id.Text;
-            if (supplier_id != "")
+            if (!string.IsNullOrWhiteSpace(supplier_id))
             {
                 load_transactions_grid(int.Parse(supplier_id));
-                
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier first.",
+                    "يرجى اختيار مورد أولاً.",
+                    "Supplier",
+                    "المورد"
+                );
             }
         }
 
@@ -385,13 +448,59 @@ namespace pos
         {
             string supplier_id = txt_id.Text;
             string supplier_name = lbl_customer_name.Text;
-            if (supplier_id != "")
+            if (!string.IsNullOrWhiteSpace(supplier_id))
             {
-                frm_supplier_payment obj = new frm_supplier_payment(this, int.Parse(supplier_id),supplier_name);
+                frm_supplier_payment obj = new frm_supplier_payment(this, int.Parse(supplier_id), supplier_name);
                 obj.ShowDialog();
                 CustomizeDataGridView();
             }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier first.",
+                    "يرجى اختيار مورد أولاً.",
+                    "Supplier",
+                    "المورد"
+                );
+            }
         }
+
+        private void Btn_printPaymentReceipt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (grid_supplier_transactions.SelectedRows.Count == 0)
+                {
+                    UiMessages.ShowInfo(
+                        "Please select a payment record to print.",
+                        "يرجى اختيار سجل دفعة للطباعة.",
+                        "Receipt",
+                        "الإيصال"
+                    );
+                    return;
+                }
+
+                string payment_id = grid_supplier_transactions.SelectedRows[0].Cells["id"].Value.ToString();
+                if (string.IsNullOrEmpty(payment_id))
+                {
+                    UiMessages.ShowError(
+                        "The selected payment record is not valid.",
+                        "سجل الدفعة المحدد غير صالح.",
+                        "Error",
+                        "خطأ"
+                    );
+                    return;
+                }
+
+                Frm_SupplierPaymentReceipt reportForm = new Frm_SupplierPaymentReceipt(payment_id);
+                reportForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
+        }
+
         private void CustomizeDataGridView()
         {
             // Get the last row in the DataGridView
@@ -417,43 +526,56 @@ namespace pos
         private void Btn_ledger_report_Click(object sender, EventArgs e)
         {
             string supplier_id = txt_id.Text;
-            if (supplier_id != "")
+            if (!string.IsNullOrWhiteSpace(supplier_id))
             {
-                pos.Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport obj = new Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport(supplier_id);
-                obj.ShowDialog();
-
+                using (BusyScope.Show(this, UiMessages.T("Opening ledger report...", "جاري فتح تقرير كشف الحساب...")))
+                {
+                    pos.Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport obj = new Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport(supplier_id);
+                    obj.ShowDialog();
+                }
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier to view the ledger report.",
+                    "يرجى اختيار مورد لعرض تقرير كشف الحساب.",
+                    "Supplier",
+                    "المورد"
+                );
             }
         }
 
-        private void Btn_printPaymentReceipt_Click(object sender, EventArgs e)
+        public void load_detail(int supplier_id)
         {
-            try
+            SupplierBLL objBLL = new SupplierBLL();
+            DataTable dt = objBLL.SearchRecordBySupplierID(supplier_id);
+            foreach (DataRow myProductView in dt.Rows)
             {
-                if(grid_supplier_transactions.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("Please select a payment record to print.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                //if(grid_supplier_transactions.SelectedRows[0].Cells["credit"].Value == null || Convert.ToDecimal(grid_supplier_transactions.SelectedRows[0].Cells["credit"].Value) <= 0)
-                //{
-                //    MessageBox.Show("The selected record is not a payment.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //    return;
-                //}
-
-                string payment_id = grid_supplier_transactions.SelectedRows[0].Cells["id"].Value.ToString();
-                if (string.IsNullOrEmpty(payment_id))
-                {
-                    MessageBox.Show("Invalid payment record selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                Frm_SupplierPaymentReceipt reportForm = new Frm_SupplierPaymentReceipt(payment_id);
-                reportForm.ShowDialog();
+                txt_id.Text = myProductView["id"].ToString();
+                txt_first_name.Text = myProductView["first_name"].ToString();
+                txt_last_name.Text = myProductView["last_name"].ToString();
+                txt_address.Text = myProductView["address"].ToString();
+                txt_vatno.Text = myProductView["vat_no"].ToString();
+                txt_contact_no.Text = myProductView["contact_no"].ToString();
+                txt_email.Text = myProductView["email"].ToString();
+                chk_vat_status.Checked = bool.TryParse(Convert.ToString(myProductView["vat_status"]), out var vat) && vat;
+                txt_StreetName.Text = myProductView["StreetName"].ToString();
+                txt_cityName.Text = myProductView["CityName"].ToString();
+                txt_buildingNumber.Text = myProductView["BuildingNumber"].ToString();
+                txt_citySubdivisionName.Text = myProductView["CitySubdivisionName"].ToString();
+                txt_postalCode.Text = myProductView["PostalCode"].ToString();
+                txt_countryName.Text = myProductView["CountryName"].ToString();
+                cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            lbl_customer_name.Visible = true;
+            lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
         }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            frm_search_suppliers search_obj = new frm_search_suppliers(this, txt_search.Text);
+            search_obj.ShowDialog();
+        }
+
     }
 }

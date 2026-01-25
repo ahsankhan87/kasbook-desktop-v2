@@ -36,7 +36,7 @@ namespace pos
 
         private void frm_main_Load(object sender, EventArgs e)
         {
-            this.Text = "Kasbook - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
+            this.Text = "Nozum Autoline ERP - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
             //if (UsersModal.logged_in_user_level == 1)//1 is Admin
             //{

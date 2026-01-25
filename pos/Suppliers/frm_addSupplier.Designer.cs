@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addSupplier));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_first_name = new System.Windows.Forms.TextBox();
             this.txt_last_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,10 +73,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.txt_StreetName = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Btn_printPaymentReceipt = new System.Windows.Forms.Button();
-            this.Btn_ledger_report = new System.Windows.Forms.Button();
-            this.btn_payment = new System.Windows.Forms.Button();
-            this.btn_trans_refresh = new System.Windows.Forms.Button();
+            this.panelTransactionBottom = new System.Windows.Forms.Panel();
             this.grid_supplier_transactions = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +83,11 @@
             this.credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelTransactionTop = new System.Windows.Forms.Panel();
+            this.Btn_ledger_report = new System.Windows.Forms.Button();
+            this.btn_trans_refresh = new System.Windows.Forms.Button();
+            this.Btn_printPaymentReceipt = new System.Windows.Forms.Button();
+            this.btn_payment = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_save = new System.Windows.Forms.Button();
@@ -101,7 +103,9 @@
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panelTransactionBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_supplier_transactions)).BeginInit();
+            this.panelTransactionTop.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -363,41 +367,16 @@
             // tabPage2
             // 
             resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Controls.Add(this.Btn_printPaymentReceipt);
-            this.tabPage2.Controls.Add(this.Btn_ledger_report);
-            this.tabPage2.Controls.Add(this.btn_payment);
-            this.tabPage2.Controls.Add(this.btn_trans_refresh);
-            this.tabPage2.Controls.Add(this.grid_supplier_transactions);
+            this.tabPage2.Controls.Add(this.panelTransactionBottom);
+            this.tabPage2.Controls.Add(this.panelTransactionTop);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // Btn_printPaymentReceipt
+            // panelTransactionBottom
             // 
-            resources.ApplyResources(this.Btn_printPaymentReceipt, "Btn_printPaymentReceipt");
-            this.Btn_printPaymentReceipt.Name = "Btn_printPaymentReceipt";
-            this.Btn_printPaymentReceipt.UseVisualStyleBackColor = true;
-            this.Btn_printPaymentReceipt.Click += new System.EventHandler(this.Btn_printPaymentReceipt_Click);
-            // 
-            // Btn_ledger_report
-            // 
-            resources.ApplyResources(this.Btn_ledger_report, "Btn_ledger_report");
-            this.Btn_ledger_report.Name = "Btn_ledger_report";
-            this.Btn_ledger_report.UseVisualStyleBackColor = true;
-            this.Btn_ledger_report.Click += new System.EventHandler(this.Btn_ledger_report_Click);
-            // 
-            // btn_payment
-            // 
-            resources.ApplyResources(this.btn_payment, "btn_payment");
-            this.btn_payment.Name = "btn_payment";
-            this.btn_payment.UseVisualStyleBackColor = true;
-            this.btn_payment.Click += new System.EventHandler(this.btn_payment_Click);
-            // 
-            // btn_trans_refresh
-            // 
-            resources.ApplyResources(this.btn_trans_refresh, "btn_trans_refresh");
-            this.btn_trans_refresh.Name = "btn_trans_refresh";
-            this.btn_trans_refresh.UseVisualStyleBackColor = true;
-            this.btn_trans_refresh.Click += new System.EventHandler(this.btn_trans_refresh_Click);
+            resources.ApplyResources(this.panelTransactionBottom, "panelTransactionBottom");
+            this.panelTransactionBottom.Controls.Add(this.grid_supplier_transactions);
+            this.panelTransactionBottom.Name = "panelTransactionBottom";
             // 
             // grid_supplier_transactions
             // 
@@ -451,9 +430,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -461,9 +440,9 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -471,9 +450,9 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
@@ -484,6 +463,43 @@
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
             this.description.ReadOnly = true;
+            // 
+            // panelTransactionTop
+            // 
+            resources.ApplyResources(this.panelTransactionTop, "panelTransactionTop");
+            this.panelTransactionTop.Controls.Add(this.Btn_ledger_report);
+            this.panelTransactionTop.Controls.Add(this.btn_trans_refresh);
+            this.panelTransactionTop.Controls.Add(this.Btn_printPaymentReceipt);
+            this.panelTransactionTop.Controls.Add(this.btn_payment);
+            this.panelTransactionTop.Name = "panelTransactionTop";
+            // 
+            // Btn_ledger_report
+            // 
+            resources.ApplyResources(this.Btn_ledger_report, "Btn_ledger_report");
+            this.Btn_ledger_report.Name = "Btn_ledger_report";
+            this.Btn_ledger_report.UseVisualStyleBackColor = true;
+            this.Btn_ledger_report.Click += new System.EventHandler(this.Btn_ledger_report_Click);
+            // 
+            // btn_trans_refresh
+            // 
+            resources.ApplyResources(this.btn_trans_refresh, "btn_trans_refresh");
+            this.btn_trans_refresh.Name = "btn_trans_refresh";
+            this.btn_trans_refresh.UseVisualStyleBackColor = true;
+            this.btn_trans_refresh.Click += new System.EventHandler(this.btn_trans_refresh_Click);
+            // 
+            // Btn_printPaymentReceipt
+            // 
+            resources.ApplyResources(this.Btn_printPaymentReceipt, "Btn_printPaymentReceipt");
+            this.Btn_printPaymentReceipt.Name = "Btn_printPaymentReceipt";
+            this.Btn_printPaymentReceipt.UseVisualStyleBackColor = true;
+            this.Btn_printPaymentReceipt.Click += new System.EventHandler(this.Btn_printPaymentReceipt_Click);
+            // 
+            // btn_payment
+            // 
+            resources.ApplyResources(this.btn_payment, "btn_payment");
+            this.btn_payment.Name = "btn_payment";
+            this.btn_payment.UseVisualStyleBackColor = true;
+            this.btn_payment.Click += new System.EventHandler(this.btn_payment_Click);
             // 
             // panel3
             // 
@@ -572,7 +588,9 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.panelTransactionBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_supplier_transactions)).EndInit();
+            this.panelTransactionTop.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -643,5 +661,7 @@
         private System.Windows.Forms.TextBox txt_StreetName;
         private System.Windows.Forms.ComboBox cmb_GL_account_code;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panelTransactionBottom;
+        private System.Windows.Forms.Panel panelTransactionTop;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using POS.BLL;
 using POS.Core;
+using pos.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,24 +30,49 @@ namespace pos.Customers
 
         private void Btn_ok_Click(object sender, EventArgs e)
         {
-           
+            // validate selection
+            if (cmb_customers.SelectedValue == null)
+            {
+                UiMessages.ShowWarning(
+                    "Please select a customer.",
+                    "يرجى اختيار العميل."
+                );
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Are you sure you want to change the customer for this invoice?",
+                "هل أنت متأكد أنك تريد تغيير العميل لهذه الفاتورة؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
             try
             {
                 SalesBLL salesBLL = new SalesBLL();
                 int result = salesBLL.UpdateCustomerInSales(_invoiceNo, cmb_customers.SelectedValue.ToString());
-                if(result > 0)
+                if (result > 0)
                 {
-                    MessageBox.Show("Customer updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Customer updated successfully.",
+                        "تم تحديث العميل بنجاح."
+                    );
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Customer not updated", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowError(
+                        "Customer was not updated.",
+                        "لم يتم تحديث العميل."
+                    );
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -54,6 +80,7 @@ namespace pos.Customers
         private void CustomerNameChange_Load(object sender, EventArgs e)
         {
             this.ActiveControl = cmb_customers;
+            cmb_customers.Focus();
             lbl_invoice_no.Text = _invoiceNo;
             Get_customers_DDL();
         }

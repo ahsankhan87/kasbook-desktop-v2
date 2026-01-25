@@ -276,7 +276,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 21</value>
+    <value>651, 21</value>
   </data>
   <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -285,10 +285,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 19</value>
-  </data>
-  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 25</value>
+    <value>567, 19</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>&amp;يبحث</value>
@@ -297,14 +294,14 @@
     <value>Top, Right</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>895, 24</value>
+    <value>883, 19</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 16</value>
+    <value>90, 32</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>البحث عن مورد
-</value>
+ (F9) </value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1015, 58</value>
@@ -427,7 +424,10 @@
     <value>731, 66</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 22</value>
+    <value>110, 22</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>GL رقم الحساب</value>
   </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -544,38 +544,11 @@
     <value>المعاملات
 </value>
   </data>
-  <data name="Btn_printPaymentReceipt.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="Btn_printPaymentReceipt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>584, 16</value>
-  </data>
-  <data name="Btn_printPaymentReceipt.Text" xml:space="preserve">
-    <value>طباعة إيصال الدفع</value>
-  </data>
-  <data name="Btn_ledger_report.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="Btn_ledger_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 16</value>
-  </data>
-  <data name="Btn_ledger_report.Text" xml:space="preserve">
-    <value>تقرير الموردين</value>
-  </data>
-  <data name="btn_payment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="btn_payment.Text" xml:space="preserve">
-    <value>يدفع</value>
-  </data>
-  <data name="btn_trans_refresh.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="btn_trans_refresh.Text" xml:space="preserve">
-    <value>ينعش</value>
+  <data name="panelTransactionBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>846, 465</value>
   </data>
   <data name="grid_supplier_transactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>839, 449</value>
+    <value>846, 465</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة
@@ -599,6 +572,39 @@
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
   </data>
+  <data name="panelTransactionTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>846, 56</value>
+  </data>
+  <data name="Btn_ledger_report.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="Btn_ledger_report.Location" type="System.Drawing.Point, System.Drawing">
+    <value>734, 16</value>
+  </data>
+  <data name="Btn_ledger_report.Text" xml:space="preserve">
+    <value>&amp;تقرير الموردين</value>
+  </data>
+  <data name="btn_trans_refresh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="btn_trans_refresh.Text" xml:space="preserve">
+    <value>&amp;ينعش</value>
+  </data>
+  <data name="Btn_printPaymentReceipt.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="Btn_printPaymentReceipt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>596, 16</value>
+  </data>
+  <data name="Btn_printPaymentReceipt.Text" xml:space="preserve">
+    <value>&amp;طباعة إيصال الدفع</value>
+  </data>
+  <data name="btn_payment.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="btn_payment.Text" xml:space="preserve">
+    <value>ي&amp;دفع</value>
+  </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>860, 58</value>
   </data>
@@ -612,13 +618,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 101</value>
+    <value>7, 101</value>
   </data>
   <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 33</value>
+    <value>109, 32</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
+    <value> حفظ (F3)</value>
   </data>
   <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -642,7 +648,7 @@
     <value>106, 33</value>
   </data>
   <data name="btn_delete.Text" xml:space="preserve">
-    <value>يمسح</value>
+    <value>ح&amp;ذف</value>
   </data>
   <data name="btn_update.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -666,7 +672,7 @@
     <value>106, 33</value>
   </data>
   <data name="btn_blank.Text" xml:space="preserve">
-    <value>فارغ</value>
+    <value>&amp;فارغ</value>
   </data>
   <data name="btn_cancel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>

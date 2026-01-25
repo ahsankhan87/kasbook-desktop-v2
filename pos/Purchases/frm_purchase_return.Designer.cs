@@ -111,6 +111,8 @@
             this.grid_purchase_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_purchase_return.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.grid_purchase_return_CellValidating);
             this.grid_purchase_return.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grid_purchase_return_DataError);
+            this.grid_purchase_return.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_purchase_return_CellValueChanged);
+            this.grid_purchase_return.CurrentCellDirtyStateChanged += new System.EventHandler(this.grid_purchase_return_CurrentCellDirtyStateChanged);
             // 
             // txt_close
             // 

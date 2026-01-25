@@ -43,6 +43,9 @@ namespace pos
             txt_invoice_no.Text = _invoice_no;
         }
 
+        private CheckBox _chkHeader;
+private bool _bulkChecking;
+
         public void frm_sales_return_Load(object sender, EventArgs e)
         {
             //load_sales_return_grid(sale_id);
@@ -51,9 +54,75 @@ namespace pos
             autoCompleteInvoice();
             txt_invoice_no.Focus();
             Get_user_total_commission();
+
+            SetupHeaderCheckBox();
+
             LoadSalesReturnGrid();
 
         }
+
+        private void SetupHeaderCheckBox()
+{
+    if (grid_sales_return == null) return;
+    if (!grid_sales_return.Columns.Contains("chk")) return;
+
+    // avoid adding twice
+    if (_chkHeader != null) return;
+
+    _chkHeader = new CheckBox();
+    _chkHeader.Size = new Size(15, 15);
+    _chkHeader.BackColor = Color.Transparent;
+    _chkHeader.Checked = false;
+    _chkHeader.Click += HeaderCheckBox_Click;
+
+    grid_sales_return.Controls.Add(_chkHeader);
+
+    // position initially and on scroll/resize
+    PositionHeaderCheckBox();
+    grid_sales_return.ColumnWidthChanged += (s, e) => PositionHeaderCheckBox();
+    grid_sales_return.Scroll += (s, e) => PositionHeaderCheckBox();
+
+    // keep state synced
+    grid_sales_return.CellValueChanged += grid_sales_return_CellValueChanged;
+    grid_sales_return.CurrentCellDirtyStateChanged += grid_sales_return_CurrentCellDirtyStateChanged;
+}
+
+private void PositionHeaderCheckBox()
+{
+    if (_chkHeader == null) return;
+    if (!grid_sales_return.Columns.Contains("chk")) return;
+
+    Rectangle rect = grid_sales_return.GetCellDisplayRectangle(grid_sales_return.Columns["chk"].Index, -1, true);
+    // center the checkbox in the header cell
+    int x = rect.X + (rect.Width - _chkHeader.Width) / 2;
+    int y = rect.Y + (rect.Height - _chkHeader.Height) / 2;
+    _chkHeader.Location = new Point(Math.Max(0, x), Math.Max(0, y));
+}
+
+private void HeaderCheckBox_Click(object sender, EventArgs e)
+{
+    if (_bulkChecking) return;
+
+    try
+    {
+        _bulkChecking = true;
+        bool check = _chkHeader.Checked;
+
+        foreach (DataGridViewRow row in grid_sales_return.Rows)
+        {
+            if (row.IsNewRow) continue;
+            if (row.ReadOnly) continue; // fully returned rows are read-only
+
+            row.Cells["chk"].Value = check;
+        }
+
+        grid_sales_return.EndEdit();
+    }
+    finally
+    {
+        _bulkChecking = false;
+    }
+}
 
         private void btn_search_Click(object sender, EventArgs e)
         {
@@ -594,5 +663,47 @@ namespace pos
                 }
             }
         }
+private void grid_sales_return_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+{
+    if (grid_sales_return.CurrentCell is DataGridViewCheckBoxCell)
+        grid_sales_return.CommitEdit(DataGridViewDataErrorContexts.Commit);
+}
+
+private void grid_sales_return_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+{
+    if (_bulkChecking) return;
+    if (e.RowIndex < 0) return;
+    if (e.ColumnIndex < 0) return;
+
+    if (grid_sales_return.Columns[e.ColumnIndex].Name != "chk")
+        return;
+
+    // update header checkbox based on all editable rows
+    bool allChecked = true;
+    bool anyChecked = false;
+
+    foreach (DataGridViewRow row in grid_sales_return.Rows)
+    {
+        if (row.IsNewRow) continue;
+        if (row.ReadOnly) continue;
+
+        bool isChecked = false;
+        if (row.Cells["chk"].Value != null)
+            isChecked = Convert.ToBoolean(row.Cells["chk"].Value);
+
+        anyChecked |= isChecked;
+        allChecked &= isChecked;
+    }
+
+    try
+    {
+        _bulkChecking = true;
+        _chkHeader.Checked = anyChecked && allChecked;
+    }
+    finally
+    {
+        _bulkChecking = false;
+    }
+}
     }
 }

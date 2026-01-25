@@ -49,10 +49,10 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -63,28 +63,29 @@
             // 
             // btn_ok
             // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_search_suppliers);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_search_suppliers);
             this.panel2.Name = "panel2";
             // 
             // grid_search_suppliers
             // 
+            resources.ApplyResources(this.grid_search_suppliers, "grid_search_suppliers");
             this.grid_search_suppliers.AllowUserToAddRows = false;
             this.grid_search_suppliers.AllowUserToDeleteRows = false;
             this.grid_search_suppliers.AllowUserToOrderColumns = true;
@@ -98,7 +99,6 @@
             this.vat_no,
             this.contact_no,
             this.address});
-            resources.ApplyResources(this.grid_search_suppliers, "grid_search_suppliers");
             this.grid_search_suppliers.Name = "grid_search_suppliers";
             this.grid_search_suppliers.ReadOnly = true;
             this.grid_search_suppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
