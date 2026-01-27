@@ -1,11 +1,11 @@
-﻿using System;
+﻿using pos.UI;
+using pos.UI.Busy;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
@@ -17,10 +17,8 @@ namespace pos
     {
         PurchasesBLL objPurchaseBLL = new PurchasesBLL();
         DataTable Purchases_dt;
-        //string _invoice_no = "";
 
         public int cash_account_id = 0;
-        //public int sales_account_id = 0;
         public int payable_account_id = 0;
         public int tax_account_id = 0;
         public int purchases_discount_acc_id = 0;
@@ -34,14 +32,10 @@ namespace pos
         {
             InitializeComponent();
             Get_AccountID_From_Company();
-            
-            //_invoice_no = invoice_no;
         }
-
 
         public void frm_purchase_return_Load(object sender, EventArgs e)
         {
-            //load_purchase_return_grid(Purchase_id);
             LoadReturnReasonsDDL();
             autoCompleteInvoice();
 
@@ -150,33 +144,55 @@ namespace pos
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            try
-             {
-                grid_purchase_return.DataSource = null;
-                 //grid_purchase_return.Rows.Clear();
-                grid_purchase_return.Refresh();
-                grid_purchase_return.AutoGenerateColumns = false;
-                grid_purchase_return.DataSource = objPurchaseBLL.GetReturnPurchaseItems(txt_invoice_no.Text);
-                Purchases_dt = load_purchase_return_grid(txt_invoice_no.Text);
-
-                MarkFullyReturnedRows();
-
-            }
-            catch (Exception ex)
+            var invoiceNo = txt_invoice_no.Text.Trim();
+            if (string.IsNullOrWhiteSpace(invoiceNo))
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowWarning(
+                    "Please enter an invoice number to search.",
+                    "يرجى إدخال رقم الفاتورة للبحث.",
+                    captionEn: "Purchase Return",
+                    captionAr: "مرتجع مشتريات");
+                txt_invoice_no.Focus();
+                return;
+            }
 
+            using (BusyScope.Show(this, UiMessages.T("Loading invoice items...", "جارٍ تحميل أصناف الفاتورة...")))
+            {
+                try
+                {
+                    grid_purchase_return.DataSource = null;
+                    grid_purchase_return.Refresh();
+                    grid_purchase_return.AutoGenerateColumns = false;
+
+                    grid_purchase_return.DataSource = objPurchaseBLL.GetReturnPurchaseItems(invoiceNo);
+                    Purchases_dt = load_purchase_return_grid(invoiceNo);
+
+                    MarkFullyReturnedRows();
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(
+                        "Unable to load invoice items.\n" + ex.Message,
+                        "تعذر تحميل أصناف الفاتورة.\n" + ex.Message,
+                        captionEn: "Purchase Return",
+                        captionAr: "مرتجع مشتريات");
+                }
             }
         }
+
         private void MarkFullyReturnedRows()
         {
             foreach (DataGridViewRow row in grid_purchase_return.Rows)
             {
-                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                decimal avail = 0;
+                if (row.Cells["ReturnableQty"].Value != null)
+                    decimal.TryParse(row.Cells["ReturnableQty"].Value.ToString(), out avail);
+
                 if (avail <= 0)
                 {
-                    row.ReadOnly = true; // whole row
+                    row.ReadOnly = true;
                     row.Cells["ReturnQty"].Value = 0m;
+                    row.Cells["chk"].Value = false;
                 }
             }
             ApplyRowStyles();
@@ -186,7 +202,10 @@ namespace pos
         {
             foreach (DataGridViewRow row in grid_purchase_return.Rows)
             {
-                decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                decimal avail = 0;
+                if (row.Cells["ReturnableQty"].Value != null)
+                    decimal.TryParse(row.Cells["ReturnableQty"].Value.ToString(), out avail);
+
                 if (avail <= 0)
                 {
                     row.DefaultCellStyle.BackColor = Color.LightGray;
@@ -195,17 +214,97 @@ namespace pos
             }
         }
 
+        private bool TryGetSelectedReturnLines(out int selectedCount, out string validationMessageEn, out string validationMessageAr)
+        {
+            selectedCount = 0;
+            validationMessageEn = null;
+            validationMessageAr = null;
+
+            if (grid_purchase_return.Rows.Count == 0)
+            {
+                validationMessageEn = "Please search for an invoice first.";
+                validationMessageAr = "يرجى البحث عن فاتورة أولاً.";
+                return false;
+            }
+
+            foreach (DataGridViewRow row in grid_purchase_return.Rows)
+            {
+                if (row.IsNewRow) continue;
+                if (row.ReadOnly) continue;
+
+                bool isChecked = row.Cells["chk"].Value != null && Convert.ToBoolean(row.Cells["chk"].Value);
+                if (!isChecked) continue;
+
+                decimal avail = 0m;
+                decimal entered = 0m;
+
+                if (row.Cells["ReturnableQty"].Value != null)
+                    decimal.TryParse(row.Cells["ReturnableQty"].Value.ToString(), out avail);
+
+                if (row.Cells["ReturnQty"].Value != null)
+                    decimal.TryParse(row.Cells["ReturnQty"].Value.ToString(), out entered);
+
+                if (entered <= 0)
+                {
+                    validationMessageEn = "Return quantity must be greater than zero for all selected items.";
+                    validationMessageAr = "يجب أن تكون كمية الإرجاع أكبر من صفر لجميع الأصناف المحددة.";
+                    return false;
+                }
+
+                if (entered > avail)
+                {
+                    validationMessageEn = $"Return quantity cannot exceed the available quantity ({avail}).";
+                    validationMessageAr = $"لا يمكن أن تتجاوز كمية الإرجاع الكمية المتاحة ({avail}).";
+                    return false;
+                }
+
+                selectedCount++;
+            }
+
+            if (selectedCount == 0)
+            {
+                validationMessageEn = "Please select at least one item to return.";
+                validationMessageAr = "يرجى اختيار صنف واحد على الأقل للإرجاع.";
+                return false;
+            }
+
+            return true;
+        }
+
         private void btn_return_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to return", "Purchase Return Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            var prev_invoice_no = txt_invoice_no.Text.Trim();
+            if (string.IsNullOrWhiteSpace(prev_invoice_no))
             {
-                if (grid_purchase_return.Rows.Count > 0)
+                UiMessages.ShowWarning(
+                    "Please enter and search an invoice number before saving a return.",
+                    "يرجى إدخال رقم الفاتورة والبحث عنها قبل حفظ المرتجع.",
+                    captionEn: "Purchase Return",
+                    captionAr: "مرتجع مشتريات");
+                return;
+            }
+
+            if (!TryGetSelectedReturnLines(out var selectedCount, out var msgEn, out var msgAr))
+            {
+                UiMessages.ShowWarning(msgEn, msgAr, captionEn: "Purchase Return", captionAr: "مرتجع مشتريات");
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Do you want to save this purchase return transaction?",
+                "هل تريد حفظ معاملة مرتجع المشتريات؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد",
+                defaultButton: MessageBoxDefaultButton.Button2);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            using (BusyScope.Show(this, UiMessages.T("Saving return...", "جارٍ حفظ المرتجع...")))
+            {
+                try
                 {
                     string returnReason = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Value;
-                    string prev_invoice_no = txt_invoice_no.Text.Trim();
-
                     string new_invoice_no = GetMAXInvoiceNo();
 
                     decimal total_tax = 0;
@@ -213,52 +312,59 @@ namespace pos
                     decimal total_discount = 0;
                     decimal sub_total = 0;
 
-                    //GET VALUES FROM LOADED GRID
+                    // Calculate totals from selected rows
                     for (int i = 0; i < grid_purchase_return.RowCount; i++)
                     {
-                        if (Convert.ToBoolean(grid_purchase_return.Rows[i].Cells["chk"].Value))
-                        {
-                            decimal tax_rate = (grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString()));
-                            sub_total = (Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value) * Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value) - Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value));
+                        if (grid_purchase_return.Rows[i].IsNewRow) continue;
+                        if (grid_purchase_return.Rows[i].ReadOnly) continue;
 
-                            // decimal tax = (Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value) * tax_rate / 100);
+                        if (grid_purchase_return.Rows[i].Cells["chk"].Value != null && Convert.ToBoolean(grid_purchase_return.Rows[i].Cells["chk"].Value))
+                        {
+                            decimal tax_rate = (grid_purchase_return.Rows[i].Cells["tax_rate"].Value == null || grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString()));
+                            decimal returnQty = Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value);
+                            decimal costPrice = Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value);
+                            decimal discountVal = Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value);
+
+                            sub_total = (returnQty * costPrice - discountVal);
                             decimal tax = (sub_total * tax_rate / 100);
 
                             total_tax += tax;
-                            //total_tax += tax * Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value);
-                            total_amount += sub_total + Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value);
-                            total_discount += Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["discount_value"].Value);
-
-                        } 
+                            total_amount += sub_total + discountVal;
+                            total_discount += discountVal;
+                        }
                     }
 
-                    List<PurchaseModalHeader> purchase_model_header = new List<PurchaseModalHeader> { };
-                    List<PurchasesModal> purchase_model_detail = new List<PurchasesModal> { };
+                    List<PurchaseModalHeader> purchase_model_header = new List<PurchaseModalHeader>();
+                    List<PurchasesModal> purchase_model_detail = new List<PurchasesModal>();
 
-                    //GET ALREADY SAVED PurchaseS 
+                    // Header from original invoice data
+                    if (Purchases_dt == null || Purchases_dt.Rows.Count == 0)
+                    {
+                        UiMessages.ShowError(
+                            "Unable to save return because the original invoice header could not be loaded. Please search again.",
+                            "تعذر حفظ المرتجع لأن بيانات رأس الفاتورة الأصلية غير متاحة. يرجى البحث مرة أخرى.",
+                            captionEn: "Purchase Return",
+                            captionAr: "مرتجع مشتريات");
+                        return;
+                    }
+
                     foreach (DataRow Purchases_dr in Purchases_dt.Rows)
                     {
-                        /////Added sales header into the List
                         purchase_model_header.Add(new PurchaseModalHeader
                         {
                             supplier_id = (Purchases_dr["supplier_id"].ToString() == string.Empty ? 0 : int.Parse(Purchases_dr["supplier_id"].ToString())),
                             employee_id = (Purchases_dr["employee_id"].ToString() == string.Empty ? 0 : int.Parse(Purchases_dr["employee_id"].ToString())),
                             invoice_no = new_invoice_no,
-                            //supplier_invoice_no = txt_supplier_invoice.Text,
                             total_amount = total_amount,
                             total_tax = Math.Round(total_tax, 6),
                             total_discount = total_discount,
-                            //total_discount_percent = (string.IsNullOrEmpty(txt_total_disc_percent.Text) ? 0 : Convert.ToDouble(txt_total_disc_percent.Text)),
                             purchase_type = Purchases_dr["purchase_type"].ToString(),
                             purchase_date = DateTime.Now,
                             purchase_time = DateTime.Now,
                             description = "Purchase Return Inv #:" + prev_invoice_no,
-                            //shipping_cost = (string.IsNullOrEmpty(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text)),
                             account = "Return",
-
                             old_invoice_no = prev_invoice_no,
                             returnReason = returnReason,
-
 
                             cash_account_id = cash_account_id,
                             payable_account_id = payable_account_id,
@@ -266,59 +372,67 @@ namespace pos
                             purchases_discount_acc_id = purchases_discount_acc_id,
                             inventory_acc_id = inventory_acc_id,
                             purchases_acc_id = purchases_acc_id,
-
                         });
-                        //////
-
                     }
-                    
+
                     for (int i = 0; i < grid_purchase_return.Rows.Count; i++)
                     {
-                        if (grid_purchase_return.Rows[i].Cells["id"].Value != null)
-                        {
-                            if (Convert.ToBoolean(grid_purchase_return.Rows[i].Cells["chk"].Value))
-                            {
-                                ///// Added sales detail in to List
-                                purchase_model_detail.Add(new PurchasesModal
-                                {
-                                    invoice_no = new_invoice_no,
-                                    item_number = grid_purchase_return.Rows[i].Cells["item_number"].Value.ToString(),
-                                    code = grid_purchase_return.Rows[i].Cells["item_code"].Value.ToString(),
-                                    //name = grid_purchases.Rows[i].Cells["name"].Value.ToString(),
-                                    quantity = decimal.Parse(grid_purchase_return.Rows[i].Cells["ReturnQty"].Value.ToString()),
-                                    packet_qty = decimal.Parse(grid_purchase_return.Rows[i].Cells["packet_qty"].Value.ToString()),
-                                    cost_price = Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["cost_price"].Value.ToString()),// its avg cost actually ,
-                                    unit_price = decimal.Parse(grid_purchase_return.Rows[i].Cells["unit_price"].Value.ToString()),
-                                    discount = decimal.Parse(grid_purchase_return.Rows[i].Cells["discount_value"].Value.ToString()),
-                                    tax_id = Convert.ToInt16(grid_purchase_return.Rows[i].Cells["tax_id"].Value.ToString()),
-                                    tax_rate = Convert.ToDecimal(grid_purchase_return.Rows[i].Cells["tax_rate"].Value.ToString()),
-                                    purchase_date = DateTime.Now,
-                                    location_code = grid_purchase_return.Rows[i].Cells["loc_code"].Value.ToString()
-                                });
-                                //////////////
-                            }
-                        }
+                        var row = grid_purchase_return.Rows[i];
+                        if (row.IsNewRow) continue;
+                        if (row.ReadOnly) continue;
 
+                        if (row.Cells["id"].Value != null && row.Cells["chk"].Value != null && Convert.ToBoolean(row.Cells["chk"].Value))
+                        {
+                            purchase_model_detail.Add(new PurchasesModal
+                            {
+                                invoice_no = new_invoice_no,
+                                item_number = row.Cells["item_number"].Value.ToString(),
+                                code = row.Cells["item_code"].Value.ToString(),
+                                quantity = decimal.Parse(row.Cells["ReturnQty"].Value.ToString()),
+                                packet_qty = decimal.Parse(row.Cells["packet_qty"].Value.ToString()),
+                                cost_price = Convert.ToDecimal(row.Cells["cost_price"].Value.ToString()),
+                                unit_price = decimal.Parse(row.Cells["unit_price"].Value.ToString()),
+                                discount = decimal.Parse(row.Cells["discount_value"].Value.ToString()),
+                                tax_id = Convert.ToInt16(row.Cells["tax_id"].Value.ToString()),
+                                tax_rate = Convert.ToDecimal(row.Cells["tax_rate"].Value.ToString()),
+                                purchase_date = DateTime.Now,
+                                location_code = row.Cells["loc_code"].Value.ToString()
+                            });
+                        }
                     }
 
                     int Purchase_id = objPurchaseBLL.InsertReturnPurchase(purchase_model_header, purchase_model_detail);
 
                     if (Purchase_id > 0)
                     {
-                        MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UiMessages.ShowInfo(
+                            "Purchase return has been saved successfully.",
+                            "تم حفظ مرتجع المشتريات بنجاح.",
+                            captionEn: "Purchase Return",
+                            captionAr: "مرتجع مشتريات");
+
                         grid_purchase_return.DataSource = null;
                         grid_purchase_return.Rows.Clear();
                         grid_purchase_return.Refresh();
+                        txt_invoice_no.Clear();
                         txt_invoice_no.Focus();
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowError(
+                            "The purchase return could not be saved. Please try again.",
+                            "تعذر حفظ مرتجع المشتريات. يرجى المحاولة مرة أخرى.",
+                            captionEn: "Purchase Return",
+                            captionAr: "مرتجع مشتريات");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Please search for invoice", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowError(
+                        "An error occurred while saving the return.\n" + ex.Message,
+                        "حدث خطأ أثناء حفظ المرتجع.\n" + ex.Message,
+                        captionEn: "Purchase Return",
+                        captionAr: "مرتجع مشتريات");
                 }
             }
         }
@@ -364,17 +478,13 @@ namespace pos
 
         public DataTable load_Purchases_items_return_grid(string invoice_no)
         {
-              
-            //bind data in data grid view  
             DataTable dt = objPurchaseBLL.GetReturnPurchaseItems(invoice_no);
             return dt;
-            
+
         }
 
         public DataTable load_purchase_return_grid(string invoice_no)
         {
-
-            //bind data in data grid view  
             DataTable dt = objPurchaseBLL.GetReturnPurchase(invoice_no);
             return dt;
 
@@ -383,50 +493,54 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             PurchasesBLL PurchasesBLL_obj = new PurchasesBLL();
-            return PurchasesBLL_obj.GetMaxReturnInvoiceNo(); //GetMaxInvoiceNo();
+            return PurchasesBLL_obj.GetMaxReturnInvoiceNo();
         }
 
         public void autoCompleteInvoice()
         {
             try
             {
-                txt_invoice_no.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                txt_invoice_no.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
-
-                GeneralBLL invoicesBLL_obj = new GeneralBLL();
-                string keyword = "TOP 500 invoice_no ";
-                string table = "pos_purchases WHERE account <> 'return'  AND branch_id="+ UsersModal.logged_in_branch_id + " ORDER BY id desc";
-                DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
-
-                if (dt.Rows.Count > 0)
+                using (BusyScope.Show(this, UiMessages.T("Loading invoices...", "جارٍ تحميل الفواتير...")))
                 {
-                    foreach (DataRow dr in dt.Rows)
+                    txt_invoice_no.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    txt_invoice_no.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                    AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+                    GeneralBLL invoicesBLL_obj = new GeneralBLL();
+                    string keyword = "TOP 500 invoice_no ";
+                    string table = "pos_purchases WHERE account <> 'return'  AND branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY id desc";
+                    DataTable dt = invoicesBLL_obj.GetRecord(keyword, table);
+
+                    if (dt.Rows.Count > 0)
                     {
-                        coll.Add(dr["invoice_no"].ToString());
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            coll.Add(dr["invoice_no"].ToString());
+
+                        }
 
                     }
 
+                    txt_invoice_no.AutoCompleteCustomSource = coll;
                 }
-
-                txt_invoice_no.AutoCompleteCustomSource = coll;
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(
+                    ex.Message,
+                    ex.Message,
+                    captionEn: "Error",
+                    captionAr: "خطأ");
             }
 
         }
-        
+
         private void frm_purchase_return_KeyDown(object sender, KeyEventArgs e)
         {
-            //when you enter in textbox it will goto next textbox, work like TAB key
             if (e.KeyData == Keys.Enter)
             {
                 SendKeys.Send("{TAB}");
             }
-
 
             if (e.KeyCode == Keys.F3)
             {
@@ -441,30 +555,17 @@ namespace pos
 
         private void grid_purchase_return_DataError(object sender, DataGridViewDataErrorEventArgs anError)
         {
-            MessageBox.Show("Error happened " + anError.Context.ToString(),"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            if (anError.Context == DataGridViewDataErrorContexts.Commit)
-            {
-                MessageBox.Show("Commit error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (anError.Context == DataGridViewDataErrorContexts.CurrentCellChange)
-            {
-                MessageBox.Show("Cell change", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (anError.Context == DataGridViewDataErrorContexts.Parsing)
-            {
-                MessageBox.Show("parsing error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (anError.Context == DataGridViewDataErrorContexts.LeaveControl)
-            {
-                MessageBox.Show("leave control error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            UiMessages.ShowError(
+                "Invalid value detected in the grid. Please review the entered data.",
+                "تم إدخال قيمة غير صالحة في الجدول. يرجى مراجعة البيانات المدخلة.",
+                captionEn: "Purchase Return",
+                captionAr: "مرتجع مشتريات");
 
             if ((anError.Exception) is ConstraintException)
             {
                 DataGridView view = (DataGridView)sender;
-                view.Rows[anError.RowIndex].ErrorText = "an error";
-                view.Rows[anError.RowIndex].Cells[anError.ColumnIndex].ErrorText = "an error";
+                view.Rows[anError.RowIndex].ErrorText = "Invalid value.";
+                view.Rows[anError.RowIndex].Cells[anError.ColumnIndex].ErrorText = "Invalid value.";
 
                 anError.ThrowException = false;
             }
@@ -483,23 +584,31 @@ namespace pos
                     row.Cells["ReturnQty"].Value = 0m;
                     return;
                 }
+
                 if (!decimal.TryParse(e.FormattedValue.ToString(), out var entered) || entered < 0)
                 {
                     e.Cancel = true;
-                    MessageBox.Show("Invalid quantity.");
+                    UiMessages.ShowWarning(
+                        "Please enter a valid quantity.",
+                        "يرجى إدخال كمية صحيحة.",
+                        captionEn: "Purchase Return",
+                        captionAr: "مرتجع مشتريات");
                     return;
                 }
                 if (entered > avail)
                 {
                     e.Cancel = true;
-                    MessageBox.Show($"Cannot return more than available ({avail}).","Return",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        $"Return quantity cannot exceed the available quantity ({avail}).",
+                        $"لا يمكن أن تتجاوز كمية الإرجاع الكمية المتاحة ({avail}).",
+                        captionEn: "Purchase Return",
+                        captionAr: "مرتجع مشتريات");
                 }
             }
         }
 
         private void LoadReturnReasonsDDL()
         {
-            // Example reasons; replace with your actual codes and reasons
             var reasons = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("01", "Goods returned"),
@@ -518,7 +627,7 @@ namespace pos
             cmbReturnReason.DisplayMember = "Value";
             cmbReturnReason.ValueMember = "Key";
 
-            cmbReturnReason.SelectedIndex = 0;  // Set default selection
+            cmbReturnReason.SelectedIndex = 0;
         }
 
     }

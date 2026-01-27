@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -30,20 +32,22 @@ namespace pos
         {
             try
             {
-                grid_units.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading units...", "جاري تحميل الوحدات...")))
+                {
+                    grid_units.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_units.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_units.AutoGenerateColumns = false;
 
-                String keyword = "id,name,date_created";
-                String table = "pos_units";
-                grid_units.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "id,name,date_created";
+                    String table = "pos_units";
+                    grid_units.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -58,46 +62,86 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            if(grid_units.Rows.Count > 0)
+            if (grid_units.CurrentRow == null)
             {
-                string id = grid_units.CurrentRow.Cells[0].Value.ToString();
-                string title = grid_units.CurrentRow.Cells[1].Value.ToString();
-                string rate = grid_units.CurrentRow.Cells[2].Value.ToString();
-
-                frm_addUnit frm_addUnit_obj = new frm_addUnit(this);
-                frm_addUnit.instance.tb_lbl_is_edit.Text = "true";
-
-                frm_addUnit.instance.tb_id.Text = id;
-                frm_addUnit.instance.tb_name.Text = title;
-
-                frm_addUnit.instance.Show();
+                UiMessages.ShowInfo(
+                    "Please select a unit to update.",
+                    "يرجى اختيار وحدة للتحديث.",
+                    "Units",
+                    "الوحدات"
+                );
+                return;
             }
-            
+
+            string id = grid_units.CurrentRow.Cells[0].Value.ToString();
+            string title = grid_units.CurrentRow.Cells[1].Value.ToString();
+            string rate = grid_units.CurrentRow.Cells[2].Value.ToString();
+
+            frm_addUnit frm_addUnit_obj = new frm_addUnit(this);
+            frm_addUnit.instance.tb_lbl_is_edit.Text = "true";
+
+            frm_addUnit.instance.tb_id.Text = id;
+            frm_addUnit.instance.tb_name.Text = title;
+
+            frm_addUnit.instance.Show();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            if (grid_units.Rows.Count > 0)
+            if (grid_units.CurrentRow == null)
             {
-                string id = grid_units.CurrentRow.Cells[0].Value.ToString();
+                UiMessages.ShowInfo(
+                    "Please select a unit to delete.",
+                    "يرجى اختيار وحدة للحذف.",
+                    "Units",
+                    "الوحدات"
+                );
+                return;
+            }
 
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+            string idText = Convert.ToString(grid_units.CurrentRow.Cells[0].Value);
+            int id;
+            if (!int.TryParse(idText, out id) || id <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected record is not valid.",
+                    "السجل المحدد غير صالح.",
+                    "Units",
+                    "الوحدات"
+                );
+                return;
+            }
 
-                if (result == DialogResult.Yes)
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this unit?",
+                "هل تريد حذف هذه الوحدة؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
                 {
-
                     UnitsBLL objBLL = new UnitsBLL();
-                    objBLL.Delete(int.Parse(id));
-
-                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    load_units_grid();
+                    objBLL.Delete(id);
                 }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                }
+                UiMessages.ShowInfo(
+                    "Record deleted successfully.",
+                    "تم حذف السجل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+
+                load_units_grid();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -110,23 +154,16 @@ namespace pos
         {
             try
             {
-                
-                    //grid_units.DataSource = null;
-
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     UnitsBLL objBLL = new UnitsBLL();
-                    //grid_units.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_units.DataSource = objBLL.SearchRecord(condition);
-
-                    //txt_search.Text = "";
-                
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }

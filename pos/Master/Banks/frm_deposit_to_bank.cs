@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos.Master.Banks
 {
@@ -19,6 +21,9 @@ namespace pos.Master.Banks
         public int _bank_account_code;
         public string _invoice_no;
         public string _bankName;
+
+        private readonly Timer _amountDebounce = new Timer();
+        private const int AmountDebounceMs = 250;
 
         public frm_deposit_to_bank(frm_banks mainForm, int bank_id, int bank_account_code,string bankName="")
         {
@@ -38,8 +43,45 @@ namespace pos.Master.Banks
         private void frm_payment_to_bank_Load(object sender, EventArgs e)
         {
             //lbl_header_title.Text = "Deposit amount to bank (" + _bankName + ")";
-            get_accounts_dropdownlist();
+
+            _amountDebounce.Interval = AmountDebounceMs;
+            _amountDebounce.Tick += AmountDebounce_Tick;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
+                {
+                    get_accounts_dropdownlist();
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
+
+        private void AmountDebounce_Tick(object sender, EventArgs e)
+        {
+            _amountDebounce.Stop();
+
+            // lightweight validation feedback; don't block user aggressively
+            if (string.IsNullOrWhiteSpace(txt_total_amount.Text))
+                return;
+
+            double amount;
+            if (!double.TryParse(txt_total_amount.Text.Trim(), out amount) || amount <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please enter a valid amount.",
+                    "يرجى إدخال مبلغ صحيح.",
+                    "Validation",
+                    "التحقق"
+                );
+                txt_total_amount.SelectAll();
+                txt_total_amount.Focus();
+            }
+        }
+
         public string GetMAXInvoiceNo()
         {
             JournalsBLL JournalsBLL_obj = new JournalsBLL();
@@ -67,57 +109,131 @@ namespace pos.Master.Banks
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            if (_invoice_no != string.Empty && _bank_id != 0)
+            try
             {
-                if(_bank_account_code == 0)
+                if (_bank_id == 0)
                 {
-                    MessageBox.Show("Bank GL account not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Bank record is not selected.",
+                        "لم يتم اختيار البنك.",
+                        "Bank",
+                        "البنك"
+                    );
                     return;
                 }
 
-                int cash_account_id = (cmb_cash_account_code.SelectedValue == null ? 0 : int.Parse(cmb_cash_account_code.SelectedValue.ToString()));
+                if (_bank_account_code == 0)
+                {
+                    UiMessages.ShowError(
+                        "Bank GL account is not configured.",
+                        "حساب الأستاذ للبنك غير مُعد.",
+                        "Error",
+                        "خطأ"
+                    );
+                    return;
+                }
+
+                int cash_account_id = 0;
+                if (cmb_cash_account_code.SelectedValue != null)
+                    int.TryParse(cmb_cash_account_code.SelectedValue.ToString(), out cash_account_id);
 
                 if (cash_account_id == 0)
                 {
-                    MessageBox.Show("Please select transfer from GL Account (Cash Account).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Please select the GL account to transfer from (cash/bank).",
+                        "يرجى اختيار حساب الأستاذ للتحويل منه (نقدي/بنك).",
+                        "Validation",
+                        "التحقق"
+                    );
                     return;
                 }
-                if (txt_total_amount.Text == string.Empty || Convert.ToDouble(txt_total_amount.Text) <= 0)
+
+                if (string.IsNullOrWhiteSpace(txt_total_amount.Text))
                 {
-                    MessageBox.Show("Please enter valid amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Amount is required.",
+                        "المبلغ مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
                     return;
                 }
-                ///GET MAX INVOICE NO
-                _invoice_no = GetMAXInvoiceNo();
 
-                ///BANK JOURNAL ENTRY (DEBIT)
-                Insert_Journal_entry(_invoice_no, _bank_account_code, Convert.ToDouble(txt_total_amount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
-
-                ///CASH JOURNAL ENTRY (CREDIT)
-                int entry_id = Insert_Journal_entry(_invoice_no, cash_account_id, 0, Convert.ToDouble(txt_total_amount.Text), txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
-
-                ///ADD ENTRY INTO BANK PAYMENT(DEBIT)
-                Insert_Journal_entry(_invoice_no, _bank_account_code,  Convert.ToDouble(txt_total_amount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, _bank_id, 0, entry_id);
-
-
-                if (entry_id > 0)
+                double amount;
+                if (!double.TryParse(txt_total_amount.Text.Trim(), out amount) || amount <= 0)
                 {
-                    MessageBox.Show("Amount deposited successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Entry not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowInfo(
+                        "Please enter a valid amount.",
+                        "يرجى إدخال مبلغ صحيح.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
                 }
 
+                if (string.IsNullOrWhiteSpace(txt_description.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Description is required.",
+                        "الوصف مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
 
-                mainForm.load_banks_transactions_grid(_bank_id);
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Post this bank deposit?",
+                    "هل تريد ترحيل إيداع البنك؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
 
-                this.Close();
+                if (confirm != DialogResult.Yes)
+                    return;
 
+                using (BusyScope.Show(this, UiMessages.T("Posting deposit...", "جاري ترحيل الإيداع...")))
+                {
+                    // GET MAX INVOICE NO
+                    _invoice_no = GetMAXInvoiceNo();
+
+                    // BANK JOURNAL ENTRY (DEBIT)
+                    Insert_Journal_entry(_invoice_no, _bank_account_code, amount, 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
+
+                    // CASH JOURNAL ENTRY (CREDIT)
+                    int entry_id = Insert_Journal_entry(_invoice_no, cash_account_id, 0, amount, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
+
+                    // ADD ENTRY INTO BANK PAYMENT (DEBIT)
+                    Insert_Journal_entry(_invoice_no, _bank_account_code, amount, 0, txt_payment_date.Value.Date, txt_description.Text, _bank_id, 0, entry_id);
+
+                    if (entry_id > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Deposit has been posted successfully.",
+                            "تم ترحيل الإيداع بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
+                    }
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Deposit could not be posted. Please try again.",
+                            "تعذر ترحيل الإيداع. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
+                    }
+
+                    if (mainForm != null)
+                        mainForm.load_banks_transactions_grid(_bank_id);
+
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
         private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
@@ -168,6 +284,12 @@ namespace pos.Master.Banks
             {
                 e.Handled = true;
             }
+        }
+
+        private void txt_total_amount_TextChanged(object sender, EventArgs e)
+        {
+            _amountDebounce.Stop();
+            _amountDebounce.Start();
         }
 
         private void frm_deposit_to_bank_KeyDown(object sender, KeyEventArgs e)

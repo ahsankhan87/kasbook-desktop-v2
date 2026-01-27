@@ -760,6 +760,8 @@ namespace pos
 
         private void clear_all()
         {
+            lbl_name.Text = "";
+            
             txt_id.Text = "";
             txt_name.Text = "";
             txt_username.Text = "";

@@ -123,13 +123,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>449, 17</value>
+    <value>393, 17</value>
   </data>
   <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 22</value>
+    <value>228, 24</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
@@ -151,13 +151,13 @@
     <value>Top, Right</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 14</value>
+    <value>626, 14</value>
   </data>
   <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 28</value>
+    <value>66, 28</value>
   </data>
   <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -178,13 +178,13 @@
     <value>1</value>
   </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 14</value>
+    <value>300, 14</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -205,13 +205,13 @@
     <value>2</value>
   </data>
   <data name="btn_delete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 14</value>
+    <value>206, 14</value>
   </data>
   <data name="btn_delete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_delete.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -232,13 +232,13 @@
     <value>3</value>
   </data>
   <data name="btn_update.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 14</value>
+    <value>111, 14</value>
   </data>
   <data name="btn_update.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_update.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -310,7 +310,7 @@
     <value>51</value>
   </data>
   <data name="grid_payment_terms.Size" type="System.Drawing.Size, System.Drawing">
-    <value>791, 389</value>
+    <value>692, 389</value>
   </data>
   <data name="grid_payment_terms.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -328,13 +328,13 @@
     <value>5</value>
   </data>
   <data name="btn_new.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 14</value>
+    <value>17, 14</value>
   </data>
   <data name="btn_new.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_new.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_new.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -364,7 +364,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 448</value>
+    <value>696, 448</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -388,7 +388,7 @@
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
   </data>
   <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 17</value>
+    <value>10, 17</value>
   </data>
   <data name="lbl_taxes_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -424,7 +424,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 54</value>
+    <value>696, 54</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -445,10 +445,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>7, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>796, 502</value>
+    <value>696, 502</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

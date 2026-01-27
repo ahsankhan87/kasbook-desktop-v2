@@ -133,6 +133,8 @@
             this.Controls.Add(this.txt_vat);
             this.Controls.Add(this.txt_subtotal);
             this.Controls.Add(this.btn_cancel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frm_round_prices";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.frm_round_prices_Load);

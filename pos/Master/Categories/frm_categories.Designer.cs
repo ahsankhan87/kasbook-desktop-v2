@@ -50,6 +50,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
@@ -58,7 +59,6 @@
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.grid_categories);
             this.panel1.Controls.Add(this.btn_new);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -97,6 +97,7 @@
             // 
             // grid_categories
             // 
+            resources.ApplyResources(this.grid_categories, "grid_categories");
             this.grid_categories.AllowUserToAddRows = false;
             this.grid_categories.AllowUserToDeleteRows = false;
             this.grid_categories.AllowUserToOrderColumns = true;
@@ -107,7 +108,6 @@
             this.code,
             this.name,
             this.date_created});
-            resources.ApplyResources(this.grid_categories, "grid_categories");
             this.grid_categories.Name = "grid_categories";
             this.grid_categories.ReadOnly = true;
             this.grid_categories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -142,17 +142,17 @@
             // 
             // btn_new
             // 
-            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_new, "btn_new");
+            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_new.Name = "btn_new";
             this.btn_new.UseVisualStyleBackColor = true;
             this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // lbl_taxes_title

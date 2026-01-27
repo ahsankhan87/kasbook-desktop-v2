@@ -149,7 +149,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_cost_price_with_vat = new System.Windows.Forms.TextBox();
             this.txt_single_cost_evat = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
             this.txt_cost_price = new System.Windows.Forms.TextBox();
             this.txt_total_cost = new System.Windows.Forms.TextBox();
             this.txt_total_amount = new System.Windows.Forms.TextBox();
@@ -971,7 +970,6 @@
             this.panel_footer.Controls.Add(this.groupBox2);
             this.panel_footer.Controls.Add(this.txt_cost_price_with_vat);
             this.panel_footer.Controls.Add(this.txt_single_cost_evat);
-            this.panel_footer.Controls.Add(this.label28);
             this.panel_footer.Controls.Add(this.txt_cost_price);
             this.panel_footer.Controls.Add(this.txt_total_cost);
             this.panel_footer.Controls.Add(this.txt_total_amount);
@@ -1115,11 +1113,6 @@
             this.txt_single_cost_evat.Name = "txt_single_cost_evat";
             this.txt_single_cost_evat.ReadOnly = true;
             // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
-            // 
             // txt_cost_price
             // 
             resources.ApplyResources(this.txt_cost_price, "txt_cost_price");
@@ -1155,6 +1148,7 @@
             resources.ApplyResources(this.chk_show_total_cost, "chk_show_total_cost");
             this.chk_show_total_cost.Name = "chk_show_total_cost";
             this.chk_show_total_cost.UseVisualStyleBackColor = true;
+            this.chk_show_total_cost.CheckedChanged += new System.EventHandler(this.chk_show_total_cost_CheckedChanged);
             this.chk_show_total_cost.Click += new System.EventHandler(this.chk_show_total_cost_CheckedChanged);
             // 
             // txt_change_amount
@@ -1393,7 +1387,6 @@
         private System.Windows.Forms.TextBox txt_cust_credit_limit;
         private System.Windows.Forms.RadioButton radioDiscPercent;
         private System.Windows.Forms.RadioButton radioDiscValue;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.NumericUpDown txtTotalFlatDiscountValue;
         private System.Windows.Forms.NumericUpDown txt_total_disc_percent;

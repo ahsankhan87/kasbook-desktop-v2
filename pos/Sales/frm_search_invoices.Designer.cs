@@ -62,29 +62,29 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.btn_close);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_search);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.txt_from_date);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txt_condition);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txt_to_date);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // txt_from_date
             // 
-            resources.ApplyResources(this.txt_from_date, "txt_from_date");
             this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.txt_from_date, "txt_from_date");
             this.txt_from_date.Name = "txt_from_date";
             this.txt_from_date.ValueChanged += new System.EventHandler(this.txt_from_date_ValueChanged);
             // 
@@ -105,22 +105,22 @@
             // 
             // txt_to_date
             // 
-            resources.ApplyResources(this.txt_to_date, "txt_to_date");
             this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.txt_to_date, "txt_to_date");
             this.txt_to_date.Name = "txt_to_date";
             this.txt_to_date.ValueChanged += new System.EventHandler(this.txt_to_date_ValueChanged);
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.Listbox_method);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // Listbox_method
             // 
-            resources.ApplyResources(this.Listbox_method, "Listbox_method");
             this.Listbox_method.FormattingEnabled = true;
+            resources.ApplyResources(this.Listbox_method, "Listbox_method");
             this.Listbox_method.Items.AddRange(new object[] {
             resources.GetString("Listbox_method.Items"),
             resources.GetString("Listbox_method.Items1"),
@@ -130,8 +130,8 @@
             // 
             // btn_close
             // 
-            resources.ApplyResources(this.btn_close, "btn_close");
             this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_close, "btn_close");
             this.btn_close.Name = "btn_close";
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
@@ -152,16 +152,16 @@
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.grid_sales_report);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // grid_sales_report
             // 
-            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AllowUserToAddRows = false;
             this.grid_sales_report.AllowUserToDeleteRows = false;
             this.grid_sales_report.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sales_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -203,16 +203,16 @@
             // 
             // copyContextMenuStrip
             // 
-            resources.ApplyResources(this.copyContextMenuStrip, "copyContextMenuStrip");
             this.copyContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.copyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
             this.copyContextMenuStrip.Name = "copyContextMenuStrip";
+            resources.ApplyResources(this.copyContextMenuStrip, "copyContextMenuStrip");
             // 
             // copyToolStripMenuItem
             // 
-            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // customer_name
@@ -230,7 +230,7 @@
             dataGridViewCellStyle1.Format = "N2";
             dataGridViewCellStyle1.NullValue = null;
             this.total_amount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.total_amount.FillWeight = 54.6067F;
+            this.total_amount.FillWeight = 30F;
             resources.ApplyResources(this.total_amount, "total_amount");
             this.total_amount.Name = "total_amount";
             this.total_amount.ReadOnly = true;

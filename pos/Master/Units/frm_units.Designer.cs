@@ -49,6 +49,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
@@ -57,7 +58,6 @@
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.grid_units);
             this.panel1.Controls.Add(this.btn_new);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -96,6 +96,7 @@
             // 
             // grid_units
             // 
+            resources.ApplyResources(this.grid_units, "grid_units");
             this.grid_units.AllowUserToAddRows = false;
             this.grid_units.AllowUserToDeleteRows = false;
             this.grid_units.AllowUserToOrderColumns = true;
@@ -105,7 +106,6 @@
             this.id,
             this.name,
             this.date_created});
-            resources.ApplyResources(this.grid_units, "grid_units");
             this.grid_units.Name = "grid_units";
             this.grid_units.ReadOnly = true;
             this.grid_units.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -133,17 +133,17 @@
             // 
             // btn_new
             // 
-            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_new, "btn_new");
+            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_new.Name = "btn_new";
             this.btn_new.UseVisualStyleBackColor = true;
             this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // lbl_taxes_title

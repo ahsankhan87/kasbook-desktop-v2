@@ -732,6 +732,12 @@
     <Compile Include="Purchases\frm_purchases _v1.Designer.cs">
       <DependentUpon>frm_purchases _v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchases\frm_purchases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\frm_purchases.Designer.cs">
+      <DependentUpon>frm_purchases.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchases\frm_purchase_return.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1076,12 +1082,6 @@
     </Compile>
     <Compile Include="Purchases\frm_all_purchases.Designer.cs">
       <DependentUpon>frm_all_purchases.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Purchases\frm_purchases.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Purchases\frm_purchases.Designer.cs">
-      <DependentUpon>frm_purchases.cs</DependentUpon>
     </Compile>
     <Compile Include="Master\Taxes\frm_addTax.cs">
       <SubType>Form</SubType>
@@ -1657,8 +1657,14 @@
     <EmbeddedResource Include="Master\Banks\frm_banks.resx">
       <DependentUpon>frm_banks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master\Banks\frm_banksPopup.ar-SA.resx">
+      <DependentUpon>frm_banksPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Master\Banks\frm_banksPopup.resx">
       <DependentUpon>frm_banksPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Banks\frm_banks_search.ar-SA.resx">
+      <DependentUpon>frm_banks_search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Banks\frm_banks_search.resx">
       <DependentUpon>frm_banks_search.cs</DependentUpon>
@@ -1698,6 +1704,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Companies\zatca\ShowQRCodePhase2.resx">
       <DependentUpon>ShowQRCodePhase2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Companies\zatca\ShowZatcaCSID.ar-SA.resx">
+      <DependentUpon>ShowZatcaCSID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Companies\zatca\ShowZatcaCSID.resx">
       <DependentUpon>ShowZatcaCSID.cs</DependentUpon>
@@ -2013,12 +2022,6 @@
     <EmbeddedResource Include="Purchases\frm_purchases _v1.resx">
       <DependentUpon>frm_purchases _v1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchases\frm_purchases.ar-SA.resx">
-      <DependentUpon>frm_purchases.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchases\frm_purchases.resx">
-      <DependentUpon>frm_purchases.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Master\Taxes\frm_addTax.resx">
       <DependentUpon>frm_addTax.cs</DependentUpon>
     </EmbeddedResource>
@@ -2039,6 +2042,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Products\frm_searchProducts.resx">
       <DependentUpon>frm_searchProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\frm_purchases.ar-SA.resx">
+      <DependentUpon>frm_purchases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\frm_purchases.resx">
+      <DependentUpon>frm_purchases.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchases\frm_purchases_detail.ar-SA.resx">
       <DependentUpon>frm_purchases_detail.cs</DependentUpon>
@@ -2290,6 +2299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_send_whatsapp.resx">
       <DependentUpon>frm_send_whatsapp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_small_sale_settings.ar-SA.resx">
+      <DependentUpon>frm_small_sale_settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_small_sale_settings.resx">
       <DependentUpon>frm_small_sale_settings.cs</DependentUpon>

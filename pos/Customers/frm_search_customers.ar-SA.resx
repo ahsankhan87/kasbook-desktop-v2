@@ -136,12 +136,6 @@
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>841, 69</value>
   </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>841, 501</value>
-  </data>
-  <data name="grid_search_customers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>841, 501</value>
-  </data>
   <data name="first_name.HeaderText" xml:space="preserve">
     <value>اسم</value>
   </data>
@@ -159,6 +153,12 @@
   </data>
   <data name="address.HeaderText" xml:space="preserve">
     <value>عنوان</value>
+  </data>
+  <data name="grid_search_customers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>841, 501</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>841, 501</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>841, 570</value>

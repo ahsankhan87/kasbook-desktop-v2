@@ -29,12 +29,9 @@ namespace pos.Master.Banks
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_banks_search));
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_search_banks = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txt_search = new System.Windows.Forms.TextBox();
-            this.btn_ok = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLAccountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +40,10 @@ namespace pos.Master.Banks
             this.holderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bankBranch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date_created = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_ok = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_banks)).BeginInit();
             this.panel1.SuspendLayout();
@@ -51,12 +52,8 @@ namespace pos.Master.Banks
             // panel2
             // 
             this.panel2.Controls.Add(this.grid_search_banks);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 69);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1001, 408);
-            this.panel2.TabIndex = 5;
             // 
             // grid_search_banks
             // 
@@ -74,142 +71,108 @@ namespace pos.Master.Banks
             this.holderName,
             this.bankBranch,
             this.date_created});
-            this.grid_search_banks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grid_search_banks.Location = new System.Drawing.Point(0, 0);
-            this.grid_search_banks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            resources.ApplyResources(this.grid_search_banks, "grid_search_banks");
             this.grid_search_banks.Name = "grid_search_banks";
             this.grid_search_banks.ReadOnly = true;
-            this.grid_search_banks.RowHeadersWidth = 51;
             this.grid_search_banks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_search_banks.Size = new System.Drawing.Size(1001, 408);
-            this.grid_search_banks.TabIndex = 1;
             this.grid_search_banks.DoubleClick += new System.EventHandler(this.grid_search_customers_DoubleClick);
             this.grid_search_banks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_search_customers_KeyDown);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txt_search);
-            this.panel1.Controls.Add(this.btn_ok);
-            this.panel1.Controls.Add(this.btn_cancel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1001, 69);
-            this.panel1.TabIndex = 4;
-            // 
-            // txt_search
-            // 
-            this.txt_search.Location = new System.Drawing.Point(11, 14);
-            this.txt_search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(612, 22);
-            this.txt_search.TabIndex = 6;
-            this.txt_search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyUp);
-            // 
-            // btn_ok
-            // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_ok.Location = new System.Drawing.Point(628, 10);
-            this.btn_ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_ok.Name = "btn_ok";
-            this.btn_ok.Size = new System.Drawing.Size(103, 30);
-            this.btn_ok.TabIndex = 3;
-            this.btn_ok.Text = "OK (Enter)";
-            this.btn_ok.UseVisualStyleBackColor = true;
-            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
-            // 
-            // btn_cancel
-            // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_cancel.Location = new System.Drawing.Point(734, 10);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(103, 30);
-            this.btn_cancel.TabIndex = 4;
-            this.btn_cancel.Text = "Cancel (Esc)";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // id
             // 
             this.id.DataPropertyName = "id";
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 6;
+            resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
-            this.id.Visible = false;
             // 
             // GLAccountID
             // 
             this.GLAccountID.DataPropertyName = "GLAccountID";
-            this.GLAccountID.HeaderText = "GL Account ID";
-            this.GLAccountID.MinimumWidth = 6;
+            resources.ApplyResources(this.GLAccountID, "GLAccountID");
             this.GLAccountID.Name = "GLAccountID";
             this.GLAccountID.ReadOnly = true;
             // 
             // code
             // 
             this.code.DataPropertyName = "code";
-            this.code.HeaderText = "Bank Code";
-            this.code.MinimumWidth = 6;
+            resources.ApplyResources(this.code, "code");
             this.code.Name = "code";
             this.code.ReadOnly = true;
             // 
             // name
             // 
             this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Bank Name";
-            this.name.MinimumWidth = 6;
+            resources.ApplyResources(this.name, "name");
             this.name.Name = "name";
             this.name.ReadOnly = true;
             // 
             // accountNo
             // 
             this.accountNo.DataPropertyName = "accountNo";
-            this.accountNo.HeaderText = "Account No";
-            this.accountNo.MinimumWidth = 6;
+            resources.ApplyResources(this.accountNo, "accountNo");
             this.accountNo.Name = "accountNo";
             this.accountNo.ReadOnly = true;
             // 
             // holderName
             // 
             this.holderName.DataPropertyName = "holderName";
-            this.holderName.HeaderText = "Holder Name";
-            this.holderName.MinimumWidth = 6;
+            resources.ApplyResources(this.holderName, "holderName");
             this.holderName.Name = "holderName";
             this.holderName.ReadOnly = true;
             // 
             // bankBranch
             // 
             this.bankBranch.DataPropertyName = "bankBranch";
-            this.bankBranch.HeaderText = "Bank Branch";
-            this.bankBranch.MinimumWidth = 6;
+            resources.ApplyResources(this.bankBranch, "bankBranch");
             this.bankBranch.Name = "bankBranch";
             this.bankBranch.ReadOnly = true;
             // 
             // date_created
             // 
             this.date_created.DataPropertyName = "date_created";
-            this.date_created.HeaderText = "Date Created";
-            this.date_created.MinimumWidth = 6;
+            resources.ApplyResources(this.date_created, "date_created");
             this.date_created.Name = "date_created";
             this.date_created.ReadOnly = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txt_search);
+            this.panel1.Controls.Add(this.btn_ok);
+            this.panel1.Controls.Add(this.btn_cancel);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // txt_search
+            // 
+            resources.ApplyResources(this.txt_search, "txt_search");
+            this.txt_search.Name = "txt_search";
+            this.txt_search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyUp);
+            // 
+            // btn_ok
+            // 
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.Name = "btn_ok";
+            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
             // frm_banks_search
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(1001, 477);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frm_banks_search";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search Banks ";
             this.Load += new System.EventHandler(this.frm_banks_search_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_banks_search_KeyDown);
             this.panel2.ResumeLayout(false);

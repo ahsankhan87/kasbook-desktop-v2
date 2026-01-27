@@ -117,28 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="txt_close.Text" xml:space="preserve">
-    <value>خروج</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="lbl_taxes_title.Text" xml:space="preserve">
-    <value>عودة شراء</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>رقم الفاتورة:</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
-  <data name="btn_return.Text" xml:space="preserve">
-    <value>حفظ (F3)</value>
-  </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
   </data>
@@ -147,9 +125,6 @@
   </data>
   <data name="quantity.HeaderText" xml:space="preserve">
     <value>الكمية</value>
-  </data>
-  <data name="return_qty.HeaderText" xml:space="preserve">
-    <value>عودة الكمية</value>
   </data>
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>سعر البيع</value>
@@ -168,6 +143,55 @@
   </data>
   <data name="loc_code.HeaderText" xml:space="preserve">
     <value>موقع</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txt_close.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 51</value>
+  </data>
+  <data name="txt_close.Text" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="cmbReturnReason.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 59</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>481, 62</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>سبب العودة</value>
+  </data>
+  <data name="btn_return.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 9</value>
+  </data>
+  <data name="btn_return.Text" xml:space="preserve">
+    <value>حفظ (F3)</value>
+  </data>
+  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>601, 59</value>
+  </data>
+  <data name="btn_search.Text" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>872, 65</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>رقم الفاتورة:</value>
+  </data>
+  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>861, 16</value>
+  </data>
+  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 25</value>
+  </data>
+  <data name="lbl_taxes_title.Text" xml:space="preserve">
+    <value>عودة شراء</value>
+  </data>
+  <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
+    <value>697, 62</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

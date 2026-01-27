@@ -1,4 +1,5 @@
-﻿using POS.BLL;
+﻿using pos.UI.Busy;
+using POS.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,55 +38,59 @@ namespace pos
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            try
+            using (BusyScope.Show(this, "Searching..."))
             {
-                string from_date = "";
-                string to_date = "";
-                string customer = "";
-                string invoice_no = "";
-                double total_amount = 0;
-
-                if (Listbox_method.SelectedIndex == 0)
+                try
                 {
-                    invoice_no = txt_condition.Text;
+
+                    string from_date = "";
+                    string to_date = "";
+                    string customer = "";
+                    string invoice_no = "";
+                    double total_amount = 0;
+
+                    if (Listbox_method.SelectedIndex == 0)
+                    {
+                        invoice_no = txt_condition.Text;
+                    }
+
+                    if (Listbox_method.SelectedIndex == 1)
+                    {
+                        customer = txt_condition.Text;
+                    } 
+                    
+                    if (Listbox_method.SelectedIndex == 2)
+                    {
+                        from_date = txt_from_date.Value.Date.ToString("yyyy-MM-dd");
+                        to_date = txt_to_date.Value.Date.ToString("yyyy-MM-dd"); ;
+                    
+                    }
+
+                    if (Listbox_method.SelectedIndex == 3)
+                    {
+                        total_amount = (string.IsNullOrEmpty(txt_condition.Text) ? 0 : double.Parse(txt_condition.Text));
+                    }
+                                   
+                    grid_sales_report.AutoGenerateColumns = false;
+
+                    if (!string.IsNullOrEmpty(invoice_no) || !string.IsNullOrEmpty(customer) 
+                        || total_amount != 0 || !string.IsNullOrEmpty(from_date) || !string.IsNullOrEmpty(to_date))
+                    {
+                        SalesReportBLL sale_report_obj = new SalesReportBLL();
+                        DataTable accounts_dt = new DataTable();
+                        accounts_dt = sale_report_obj.InvoiceReport(from_date, to_date, customer, invoice_no, total_amount);
+
+                        grid_sales_report.DataSource = accounts_dt;
+                    }
+
+                    this.ActiveControl = grid_sales_report;
+                    grid_sales_report.Focus();
                 }
-
-                if (Listbox_method.SelectedIndex == 1)
+                catch (Exception ex)
                 {
-                    customer = txt_condition.Text;
-                } 
-                
-                if (Listbox_method.SelectedIndex == 2)
-                {
-                    from_date = txt_from_date.Value.Date.ToString("yyyy-MM-dd");
-                    to_date = txt_to_date.Value.Date.ToString("yyyy-MM-dd"); ;
-                
+                    MessageBox.Show(ex.Message, "Error");
+                    
                 }
-
-                if (Listbox_method.SelectedIndex == 3)
-                {
-                    total_amount = (string.IsNullOrEmpty(txt_condition.Text) ? 0 : double.Parse(txt_condition.Text));
-                }
-                               
-                grid_sales_report.AutoGenerateColumns = false;
-
-                if (!string.IsNullOrEmpty(invoice_no) || !string.IsNullOrEmpty(customer) 
-                    || total_amount != 0 || !string.IsNullOrEmpty(from_date) || !string.IsNullOrEmpty(to_date))
-                {
-                    SalesReportBLL sale_report_obj = new SalesReportBLL();
-                    DataTable accounts_dt = new DataTable();
-                    accounts_dt = sale_report_obj.InvoiceReport(from_date, to_date, customer, invoice_no, total_amount);
-
-                    grid_sales_report.DataSource = accounts_dt;
-                }
-
-                this.ActiveControl = grid_sales_report;
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-                
             }
         }
 
@@ -130,7 +135,7 @@ namespace pos
             {
                 if (grid_sales_report.Rows.Count > 0)
                 {
-                    if (string.IsNullOrEmpty(grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString()))
+                    if (!string.IsNullOrEmpty(grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString()))
                     {
                         var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
                         SalesBLL salesObj = new SalesBLL();

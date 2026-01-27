@@ -38,9 +38,10 @@ namespace pos.Master.Companies.zatca
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(280, 317);
+            this.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BtnClose.Location = new System.Drawing.Point(245, 317);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(75, 27);
+            this.BtnClose.Size = new System.Drawing.Size(66, 27);
             this.BtnClose.TabIndex = 1;
             this.BtnClose.Text = "Close";
             this.BtnClose.UseVisualStyleBackColor = true;
@@ -48,18 +49,18 @@ namespace pos.Master.Companies.zatca
             // 
             // pictureBoxQRCode
             // 
-            this.pictureBoxQRCode.Location = new System.Drawing.Point(31, 53);
+            this.pictureBoxQRCode.Location = new System.Drawing.Point(27, 53);
             this.pictureBoxQRCode.Name = "pictureBoxQRCode";
-            this.pictureBoxQRCode.Size = new System.Drawing.Size(324, 258);
+            this.pictureBoxQRCode.Size = new System.Drawing.Size(284, 258);
             this.pictureBoxQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxQRCode.TabIndex = 3;
             this.pictureBoxQRCode.TabStop = false;
             // 
             // BtnDownload
             // 
-            this.BtnDownload.Location = new System.Drawing.Point(176, 317);
+            this.BtnDownload.Location = new System.Drawing.Point(154, 317);
             this.BtnDownload.Name = "BtnDownload";
-            this.BtnDownload.Size = new System.Drawing.Size(98, 27);
+            this.BtnDownload.Size = new System.Drawing.Size(86, 27);
             this.BtnDownload.TabIndex = 1;
             this.BtnDownload.Text = "Download";
             this.BtnDownload.UseVisualStyleBackColor = true;
@@ -68,17 +69,18 @@ namespace pos.Master.Companies.zatca
             // LabelInvoiceNo
             // 
             this.LabelInvoiceNo.AutoSize = true;
-            this.LabelInvoiceNo.Location = new System.Drawing.Point(28, 23);
+            this.LabelInvoiceNo.Location = new System.Drawing.Point(24, 23);
             this.LabelInvoiceNo.Name = "LabelInvoiceNo";
-            this.LabelInvoiceNo.Size = new System.Drawing.Size(46, 17);
+            this.LabelInvoiceNo.Size = new System.Drawing.Size(42, 17);
             this.LabelInvoiceNo.TabIndex = 4;
             this.LabelInvoiceNo.Text = "label1";
             // 
             // ShowQRCodePhase2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 356);
+            this.CancelButton = this.BtnClose;
+            this.ClientSize = new System.Drawing.Size(344, 356);
             this.Controls.Add(this.LabelInvoiceNo);
             this.Controls.Add(this.pictureBoxQRCode);
             this.Controls.Add(this.BtnDownload);

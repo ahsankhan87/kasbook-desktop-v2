@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -67,69 +69,107 @@ namespace pos
         {
             try
             {
+                bool isEdit = (lbl_edit_status.Text == "true");
 
-                if (txt_code.Text != string.Empty && txt_name.Text != string.Empty)
+                if (string.IsNullOrWhiteSpace(txt_code.Text) || string.IsNullOrWhiteSpace(txt_name.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Brand code and name are required.",
+                        "كود واسم العلامة التجارية حقول مطلوبة.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this brand?" : "Save this brand?",
+                    isEdit ? "هل تريد تحديث هذه العلامة التجارية؟" : "هل تريد حفظ هذه العلامة التجارية؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T(isEdit ? "Updating..." : "Saving...", isEdit ? "جاري التحديث..." : "جاري الحفظ...")))
                 {
                     BrandsModal info = new BrandsModal();
-                    info.code = txt_code.Text;
-                    info.name = txt_name.Text;
+                    info.code = txt_code.Text.Trim();
+                    info.name = txt_name.Text.Trim();
                     info.category_code = cmb_category.SelectedValue == null ? "" : cmb_category.SelectedValue.ToString();
                     info.group_code = cmb_groups.SelectedValue == null ? "" : cmb_groups.SelectedValue.ToString();
 
                     BrandsBLL objBLL = new BrandsBLL();
+                    int result;
 
-                    if (lbl_edit_status.Text == "true")
+                    if (isEdit)
                     {
-                        info.id = int.Parse(txt_id.Text);
-
-                        int result = objBLL.Update(info);
-                        if (result > 0)
+                        int id;
+                        if (!int.TryParse(txt_id.Text, out id) || id <= 0)
                         {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UiMessages.ShowError(
+                                "Invalid brand id.",
+                                "معرّف العلامة التجارية غير صالح.",
+                                "Error",
+                                "خطأ"
+                            );
+                            return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        info.id = id;
+                        result = objBLL.Update(info);
                     }
                     else
                     {
-                        int result = objBLL.Insert(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        result = objBLL.Insert(info);
                     }
 
-                    if (mainForm != null)
+                    if (result > 0)
                     {
-                        mainForm.load_Brands_grid();
-
+                        UiMessages.ShowInfo(
+                            isEdit ? "Record updated successfully." : "Record created successfully.",
+                            isEdit ? "تم تحديث السجل بنجاح." : "تم إنشاء السجل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                     }
-
-                    this.Close();
-
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Record not saved.",
+                            "لم يتم حفظ السجل.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Please enter code and name", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                }
+
+                if (mainForm != null)
+                    mainForm.load_Brands_grid();
+
+                this.Close();
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_addBrand_KeyDown(object sender, KeyEventArgs e)

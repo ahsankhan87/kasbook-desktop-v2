@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -30,20 +32,22 @@ namespace pos
         {
             try
             {
-                grid_categories.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading categories...", "جاري تحميل الأقسام...")))
+                {
+                    grid_categories.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_categories.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_categories.AutoGenerateColumns = false;
 
-                String keyword = "id,code,name,date_created";
-                String table = "pos_categories";
-                grid_categories.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "id,code,name,date_created";
+                    String table = "pos_categories";
+                    grid_categories.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -58,6 +62,17 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            if (grid_categories.CurrentRow == null)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a category record to update.",
+                    "يرجى اختيار قسم للتحديث.",
+                    "Categories",
+                    "الأقسام"
+                );
+                return;
+            }
+
             string id = grid_categories.CurrentRow.Cells["id"].Value.ToString();
             string code = grid_categories.CurrentRow.Cells["code"].Value.ToString();
             string name = grid_categories.CurrentRow.Cells["name"].Value.ToString();
@@ -74,26 +89,61 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_categories.CurrentRow.Cells[0].Value.ToString();
-
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (grid_categories.CurrentRow == null)
             {
+                UiMessages.ShowInfo(
+                    "Please select a category record to delete.",
+                    "يرجى اختيار قسم للحذف.",
+                    "Categories",
+                    "الأقسام"
+                );
+                return;
+            }
 
-                CategoriesBLL objBLL = new CategoriesBLL();
-                objBLL.Delete(int.Parse(id));
+            string idText = Convert.ToString(grid_categories.CurrentRow.Cells[0].Value);
+            int id;
+            if (!int.TryParse(idText, out id) || id <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected record is not valid.",
+                    "السجل المحدد غير صالح.",
+                    "Categories",
+                    "الأقسام"
+                );
+                return;
+            }
 
-                MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this category?",
+                "هل تريد حذف هذا القسم؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
+                {
+                    CategoriesBLL objBLL = new CategoriesBLL();
+                    objBLL.Delete(id);
+                }
+
+                UiMessages.ShowInfo(
+                    "Record deleted successfully.",
+                    "تم حذف السجل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+
                 load_categories_grid();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
-
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
@@ -105,23 +155,16 @@ namespace pos
         {
             try
             {
-                
-                    //grid_categories.DataSource = null;
-
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     CategoriesBLL objBLL = new CategoriesBLL();
-                    //grid_categories.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_categories.DataSource = objBLL.SearchRecord(condition);
-
-                    //txt_search.Text = "";
-                
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }

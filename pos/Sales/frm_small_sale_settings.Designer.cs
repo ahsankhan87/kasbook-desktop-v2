@@ -28,6 +28,7 @@ namespace pos
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_small_sale_settings));
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblThreshold = new System.Windows.Forms.Label();
             this.nudThreshold = new System.Windows.Forms.NumericUpDown();
@@ -38,64 +39,46 @@ namespace pos
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(146, 19);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Small Sale Settings";
             // 
             // lblThreshold
             // 
-            this.lblThreshold.AutoSize = true;
-            this.lblThreshold.Location = new System.Drawing.Point(13, 46);
+            resources.ApplyResources(this.lblThreshold, "lblThreshold");
             this.lblThreshold.Name = "lblThreshold";
-            this.lblThreshold.Size = new System.Drawing.Size(159, 15);
-            this.lblThreshold.TabIndex = 1;
-            this.lblThreshold.Text = "Small Sale Max Amount:";
             // 
             // nudThreshold
             // 
+            resources.ApplyResources(this.nudThreshold, "nudThreshold");
             this.nudThreshold.DecimalPlaces = 2;
-            this.nudThreshold.Location = new System.Drawing.Point(178, 44);
             this.nudThreshold.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.nudThreshold.Name = "nudThreshold";
-            this.nudThreshold.Size = new System.Drawing.Size(150, 23);
-            this.nudThreshold.TabIndex = 2;
-            this.nudThreshold.ThousandsSeparator = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(172, 88);
+            resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 27);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(253, 88);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 27);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frm_small_sale_settings
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(344, 131);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.nudThreshold);
@@ -105,8 +88,6 @@ namespace pos
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_small_sale_settings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Small Sale Settings";
             this.Load += new System.EventHandler(this.frm_small_sale_settings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudThreshold)).EndInit();
             this.ResumeLayout(false);

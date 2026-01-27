@@ -622,7 +622,7 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@debit", obj.debit);
                         cmd.Parameters.AddWithValue("@credit", obj.credit);
                         cmd.Parameters.AddWithValue("@description", obj.description);
-                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                        cmd.Parameters.AddWithValue("@user_id", obj.user_id);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
                         cmd.Parameters.AddWithValue("@entry_id", obj.entry_id);

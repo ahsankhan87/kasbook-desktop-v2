@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -30,20 +32,22 @@ namespace pos
         {
             try
             {
-                grid_payment_terms.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading payment terms...", "جاري تحميل شروط الدفع...")))
+                {
+                    grid_payment_terms.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_payment_terms.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_payment_terms.AutoGenerateColumns = false;
 
-                String keyword = "id,code,description,date_created";
-                String table = "pos_payment_terms";
-                grid_payment_terms.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "id,code,description,date_created";
+                    String table = "pos_payment_terms";
+                    grid_payment_terms.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -58,6 +62,17 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            if (grid_payment_terms.CurrentRow == null)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a payment term to update.",
+                    "يرجى اختيار شرط دفع للتحديث.",
+                    "Payment Terms",
+                    "شروط الدفع"
+                );
+                return;
+            }
+
             if(grid_payment_terms.Rows.Count > 0)
             {
                 string id = grid_payment_terms.CurrentRow.Cells[0].Value.ToString();
@@ -78,27 +93,60 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            if (grid_payment_terms.Rows.Count > 0)
+            if (grid_payment_terms.CurrentRow == null)
             {
-                string id = grid_payment_terms.CurrentRow.Cells[0].Value.ToString();
+                UiMessages.ShowInfo(
+                    "Please select a payment term to delete.",
+                    "يرجى اختيار شرط دفع للحذف.",
+                    "Payment Terms",
+                    "شروط الدفع"
+                );
+                return;
+            }
 
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+            string idText = Convert.ToString(grid_payment_terms.CurrentRow.Cells[0].Value);
+            int id;
+            if (!int.TryParse(idText, out id) || id <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected record is not valid.",
+                    "السجل المحدد غير صالح.",
+                    "Payment Terms",
+                    "شروط الدفع"
+                );
+                return;
+            }
 
-                if (result == DialogResult.Yes)
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this payment term?",
+                "هل تريد حذف شرط الدفع هذا؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
                 {
-
                     PaymentTermsBLL objBLL = new PaymentTermsBLL();
-                    objBLL.Delete(int.Parse(id));
-
-                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    load_payment_terms_grid();
+                    objBLL.Delete(id);
                 }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                }
+                UiMessages.ShowInfo(
+                    "Record deleted successfully.",
+                    "تم حذف السجل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+
+                load_payment_terms_grid();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -111,23 +159,16 @@ namespace pos
         {
             try
             {
-                
-                    //grid_payment_terms.DataSource = null;
-
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     PaymentTermsBLL objBLL = new PaymentTermsBLL();
-                    //grid_payment_terms.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_payment_terms.DataSource = objBLL.SearchRecord(condition);
-
-                    //txt_search.Text = "";
-                
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }

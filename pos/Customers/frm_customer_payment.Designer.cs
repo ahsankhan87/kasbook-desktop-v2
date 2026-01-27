@@ -189,14 +189,15 @@
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.cmb_ref_account_code);
             this.groupBox2.Controls.Add(this.cmb_GL_account_code);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // frm_customer_payment
             // 
+            this.AcceptButton = this.btn_save;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;

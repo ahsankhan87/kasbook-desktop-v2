@@ -117,18 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 13</value>
-  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>اسم:</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
     <value>حفظ</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>324, 21</value>
+  </data>
   <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
+    <value>100, 25</value>
   </data>
   <data name="lbl_header_title.Text" xml:space="preserve">
     <value>السنة المالية</value>
@@ -137,19 +137,19 @@
     <value>إلغاء</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>58, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>الأوصاف:</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+    <value>65, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>من التاريخ</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+    <value>66, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>حتي اليوم</value>

@@ -83,24 +83,24 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_header_title);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // txt_payment_date
             // 
-            this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_payment_date, "txt_payment_date");
+            this.txt_payment_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_payment_date.Name = "txt_payment_date";
             // 
             // frm_user_commission_payment

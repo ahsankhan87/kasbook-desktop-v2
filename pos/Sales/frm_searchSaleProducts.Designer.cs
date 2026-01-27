@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_searchSaleProducts));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +55,9 @@
             this.group_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alternate_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.lbl_pages1 = new System.Windows.Forms.Label();
             this.rb_by_name = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -75,16 +77,18 @@
             this.alt_item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.grid_other_stock = new System.Windows.Forms.DataGridView();
             this.branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.branch_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_group_products)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_other_stock)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -94,7 +98,6 @@
             this.grid_search_products.AllowUserToAddRows = false;
             this.grid_search_products.AllowUserToDeleteRows = false;
             this.grid_search_products.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_search_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -108,6 +111,7 @@
             this.group_code,
             this.alternate_no,
             this.item_number});
+            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.ReadOnly = true;
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -135,8 +139,8 @@
             // 
             this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.name.DataPropertyName = "name";
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.name, "name");
             this.name.Name = "name";
             this.name.ReadOnly = true;
@@ -145,10 +149,10 @@
             // 
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.qty.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.qty.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.qty, "qty");
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
@@ -157,11 +161,11 @@
             // 
             this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.Format = "N2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.unit_price, "unit_price");
             this.unit_price.Name = "unit_price";
             this.unit_price.ReadOnly = true;
@@ -170,8 +174,8 @@
             // 
             this.location_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.location_code.DataPropertyName = "location_code";
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.location_code.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.location_code.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.location_code, "location_code");
             this.location_code.Name = "location_code";
             this.location_code.ReadOnly = true;
@@ -180,8 +184,8 @@
             // 
             this.category.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.category.DataPropertyName = "category";
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.category.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.category.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.category, "category");
             this.category.Name = "category";
             this.category.ReadOnly = true;
@@ -189,8 +193,8 @@
             // description
             // 
             this.description.DataPropertyName = "description";
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.description.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.description.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
             this.description.ReadOnly = true;
@@ -216,20 +220,32 @@
             this.item_number.Name = "item_number";
             this.item_number.ReadOnly = true;
             // 
-            // panel1
+            // panelTop
             // 
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lbl_pages1);
-            this.panel1.Controls.Add(this.rb_by_name);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.rb_by_code);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_search);
-            this.panel1.Controls.Add(this.btn_ok);
-            this.panel1.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            this.panelTop.Controls.Add(this.label5);
+            this.panelTop.Controls.Add(this.label4);
+            this.panelTop.Controls.Add(this.lbl_pages1);
+            this.panelTop.Controls.Add(this.rb_by_name);
+            this.panelTop.Controls.Add(this.label3);
+            this.panelTop.Controls.Add(this.rb_by_code);
+            this.panelTop.Controls.Add(this.label1);
+            this.panelTop.Controls.Add(this.txt_search);
+            this.panelTop.Controls.Add(this.btn_ok);
+            this.panelTop.Controls.Add(this.btn_cancel);
+            resources.ApplyResources(this.panelTop, "panelTop");
+            this.panelTop.Name = "panelTop";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label5.Name = "label5";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label4.Name = "label4";
             // 
             // lbl_pages1
             // 
@@ -288,7 +304,6 @@
             this.grid_group_products.AllowUserToAddRows = false;
             this.grid_group_products.AllowUserToDeleteRows = false;
             this.grid_group_products.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_group_products, "grid_group_products");
             this.grid_group_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_group_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.g_id,
@@ -299,6 +314,7 @@
             this.g_location_code,
             this.g_category,
             this.alt_item_number});
+            resources.ApplyResources(this.grid_group_products, "grid_group_products");
             this.grid_group_products.Name = "grid_group_products";
             this.grid_group_products.ReadOnly = true;
             this.grid_group_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -317,8 +333,8 @@
             // 
             this.g_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_code.DataPropertyName = "code";
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.g_code.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_code.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.g_code, "g_code");
             this.g_code.Name = "g_code";
             this.g_code.ReadOnly = true;
@@ -327,8 +343,8 @@
             // 
             this.g_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.g_name.DataPropertyName = "name";
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.g_name.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_name.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.g_name, "g_name");
             this.g_name.Name = "g_name";
             this.g_name.ReadOnly = true;
@@ -337,11 +353,11 @@
             // 
             this.g_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_qty.DataPropertyName = "qty";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.Format = "N2";
-            dataGridViewCellStyle23.NullValue = null;
-            this.g_qty.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.g_qty.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.g_qty, "g_qty");
             this.g_qty.Name = "g_qty";
             this.g_qty.ReadOnly = true;
@@ -350,11 +366,11 @@
             // 
             this.g_unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.Format = "N2";
-            dataGridViewCellStyle24.NullValue = null;
-            this.g_unit_price.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.g_unit_price.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.g_unit_price, "g_unit_price");
             this.g_unit_price.Name = "g_unit_price";
             this.g_unit_price.ReadOnly = true;
@@ -363,8 +379,8 @@
             // 
             this.g_location_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_location_code.DataPropertyName = "location_code";
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.g_location_code.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_location_code.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.g_location_code, "g_location_code");
             this.g_location_code.Name = "g_location_code";
             this.g_location_code.ReadOnly = true;
@@ -373,8 +389,8 @@
             // 
             this.g_category.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.g_category.DataPropertyName = "category";
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.g_category.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.g_category.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.g_category, "g_category");
             this.g_category.Name = "g_category";
             this.g_category.ReadOnly = true;
@@ -393,10 +409,22 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_other_stock);
-            this.panel2.Controls.Add(this.grid_search_products);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Controls.Add(this.panel4);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.grid_search_products);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.grid_other_stock);
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Name = "panel4";
             // 
             // grid_other_stock
             // 
@@ -413,8 +441,8 @@
             // branch
             // 
             this.branch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branch.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.branch.DefaultCellStyle = dataGridViewCellStyle13;
             resources.ApplyResources(this.branch, "branch");
             this.branch.Name = "branch";
             this.branch.ReadOnly = true;
@@ -422,11 +450,11 @@
             // branch_qty
             // 
             this.branch_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle28.Format = "N2";
-            dataGridViewCellStyle28.NullValue = null;
-            this.branch_qty.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.branch_qty.DefaultCellStyle = dataGridViewCellStyle14;
             resources.ApplyResources(this.branch_qty, "branch_qty");
             this.branch_qty.Name = "branch_qty";
             this.branch_qty.ReadOnly = true;
@@ -438,18 +466,6 @@
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label5.Name = "label5";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label4.Name = "label4";
-            // 
             // frm_searchSaleProducts
             // 
             resources.ApplyResources(this, "$this");
@@ -457,17 +473,19 @@
             this.CancelButton = this.btn_cancel;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelTop);
             this.KeyPreview = true;
             this.Name = "frm_searchSaleProducts";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.frm_searchSaleProducts_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_searchSaleProducts_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_group_products)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_other_stock)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -478,7 +496,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView grid_search_products;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.TextBox txt_search;
@@ -515,5 +533,7 @@
         private System.Windows.Forms.Label lbl_pages1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel4;
     }
 }

@@ -57,16 +57,19 @@ namespace pos.Expenses
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.panelBody = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.grid_expenses)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panelTop.SuspendLayout();
+            this.panelBody.SuspendLayout();
             this.SuspendLayout();
             // 
             // grid_expenses
             // 
             this.grid_expenses.AllowUserToAddRows = false;
             this.grid_expenses.AllowUserToDeleteRows = false;
-            resources.ApplyResources(this.grid_expenses, "grid_expenses");
             this.grid_expenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_expenses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.account_code,
@@ -76,6 +79,7 @@ namespace pos.Expenses
             this.description,
             this.total,
             this.btn_delete});
+            resources.ApplyResources(this.grid_expenses, "grid_expenses");
             this.grid_expenses.Name = "grid_expenses";
             this.grid_expenses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_expenses_CellContentClick);
             this.grid_expenses.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_expenses_CellEndEdit);
@@ -153,24 +157,28 @@ namespace pos.Expenses
             // 
             // btn_add
             // 
+            this.btn_add.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btn_add.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.btn_add, "btn_add");
             this.btn_add.Name = "btn_add";
-            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // btn_close
             // 
+            this.btn_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_close, "btn_close");
             this.btn_close.Name = "btn_close";
-            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // btn_save
             // 
+            this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             resources.ApplyResources(this.btn_save, "btn_save");
             this.btn_save.Name = "btn_save";
-            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.UseVisualStyleBackColor = false;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // label1
@@ -225,22 +233,34 @@ namespace pos.Expenses
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.cmb_vat_account);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.cmb_cash_account);
             this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.cmb_cash_account);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // panelTop
+            // 
+            this.panelTop.Controls.Add(this.groupBox1);
+            this.panelTop.Controls.Add(this.btn_close);
+            this.panelTop.Controls.Add(this.groupBox2);
+            this.panelTop.Controls.Add(this.btn_save);
+            resources.ApplyResources(this.panelTop, "panelTop");
+            this.panelTop.Name = "panelTop";
+            // 
+            // panelBody
+            // 
+            this.panelBody.Controls.Add(this.grid_expenses);
+            resources.ApplyResources(this.panelBody, "panelBody");
+            this.panelBody.Name = "panelBody";
             // 
             // frm_expenses
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_close;
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btn_save);
-            this.Controls.Add(this.btn_close);
-            this.Controls.Add(this.grid_expenses);
+            this.Controls.Add(this.panelBody);
+            this.Controls.Add(this.panelTop);
             this.Name = "frm_expenses";
             this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -251,6 +271,8 @@ namespace pos.Expenses
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panelTop.ResumeLayout(false);
+            this.panelBody.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -278,5 +300,7 @@ namespace pos.Expenses
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewCheckBoxColumn btn_delete;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Panel panelBody;
     }
 }

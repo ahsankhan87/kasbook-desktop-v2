@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace pos.About
@@ -10,20 +11,21 @@ namespace pos.About
     {
         private PictureBox picLogo;
         private PictureBox picSisterLogo;
-        private Label lblCompanyName;
-        private Label lblLocations;
-        private Label lblContactTitle;
+
+        private Label lblHeaderTitle;
+        private Label lblHeaderSubtitle;
+        private Label lblVersion;
+
+        private GroupBox grpMain;
+        private GroupBox grpSister;
+
         private LinkLabel lnkWhatsappSa;
         private LinkLabel lnkWhatsappPk;
-        private Label lblEmail;
-        private Label lblWebsite;
-        private Label lblSisterTitle;
-        private Label lblSisterWebsite;
-        private Label lblSisterLocation;
+        private LinkLabel lnkWebsite;
+        private LinkLabel lnkSisterWebsite;
+
         private TextBox txtDescription;
         private Button btnClose;
-        private TableLayoutPanel sisterPanel;
-        private TableLayoutPanel mainPanel;
 
         public frm_about()
         {
@@ -34,190 +36,347 @@ namespace pos.About
         {
             var isArabic = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag == "ar-SA";
 
-            this.Text = isArabic ? "حول - شركة نوزم للتقنيات" : "About - NOZUM Technologies";
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.ClientSize = new Size(780, 520);
-            this.Font = new Font("Segoe UI", 9F);
+            Text = isArabic ? "حول" : "About";
+            StartPosition = FormStartPosition.CenterParent;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            ShowInTaskbar = false;
+            BackColor = Color.White;
+            Font = new Font("Segoe UI", 9F);
+            ClientSize = new Size(860, 560);
 
-            // Main company panel (logo + info stacked)
-            mainPanel = new TableLayoutPanel
+            // RTL support
+            if (isArabic)
             {
-                Location = new Point(20, 20),
-                AutoSize = true,
-                ColumnCount = 2,
-                RowCount = 7,
-            };
-            mainPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130));
-            mainPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+                RightToLeft = RightToLeft.Yes;
+                RightToLeftLayout = true;
+            }
 
-            // Main company logo
-            picLogo = new PictureBox
+            // Header
+            var pnlHeader = new Panel
             {
-                Size = new Size(120, 120),
-                Dock = DockStyle.Fill,
-                SizeMode = PictureBoxSizeMode.Zoom,
-                BorderStyle = BorderStyle.FixedSingle
+                Dock = DockStyle.Top,
+                Height = 74,
+                BackColor = Color.White,
+                Padding = new Padding(18, 14, 18, 10)
             };
-            TryLoadImage(picLogo, Path.Combine(Application.StartupPath, "nozum.png"));
 
-            // Main company labels
-            lblCompanyName = new Label
+            lblHeaderTitle = new Label
             {
                 AutoSize = true,
                 Font = new Font("Segoe UI", 14F, FontStyle.Bold),
+                Text = isArabic ? "معلومات الشركة" : "Company Information",
+                ForeColor = Color.FromArgb(25, 25, 25),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft
+            };
+
+            lblHeaderSubtitle = new Label
+            {
+                AutoSize = true,
+                Top = 42,
+                ForeColor = Color.DimGray,
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic
+                    ? "تفاصيل الاتصال والمواقع الخاصة بالشركات"
+                    : "Company contact, locations and websites"
+            };
+
+            pnlHeader.Controls.Add(lblHeaderTitle);
+            pnlHeader.Controls.Add(lblHeaderSubtitle);
+
+            var pnlDivider = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 1,
+                BackColor = Color.Gainsboro
+            };
+
+            // Body
+            var pnlBody = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.White,
+                Padding = new Padding(18, 14, 18, 14)
+            };
+
+            // Position groups based on RTL
+            var leftGroupX = isArabic ? 436 : 18;
+            var rightGroupX = isArabic ? 18 : 436;
+
+            grpMain = new GroupBox
+            {
+                Text = isArabic ? "الشركة الرئيسية" : "Main Company",
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(45, 45, 45),
+                Location = new Point(leftGroupX, 10),
+                Size = new Size(400, 250),
+                RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No
+            };
+
+            var mainTable = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 2,
+                RowCount = 8,
+                Padding = new Padding(12),
+                RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No
+            };
+            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120));
+            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+
+            picLogo = new PictureBox
+            {
+                Size = new Size(104, 104),
+                Dock = DockStyle.Top,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.White
+            };
+            TryLoadImage(picLogo, Path.Combine(Application.StartupPath, "nozum.png"));
+
+            var lblMainName = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
                 Text = isArabic ? "شركة نوزم للتقنيات" : "NOZUM Technologies",
-                Anchor = AnchorStyles.Left
+                Margin = new Padding(3, 2, 3, 6),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft
             };
 
-            lblLocations = new Label
+            var lblMainLocationsTitle = new Label
             {
                 AutoSize = true,
-                Text = isArabic ? "الدمام، الرياض، جدة - المملكة العربية السعودية" : "Dammam, Riyadh, Jeddah, Saudi Arabia",
-                Anchor = AnchorStyles.Left
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(70, 70, 70),
+                Text = isArabic ? "المواقع" : "Locations",
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft
             };
 
-            lblContactTitle = new Label
+            var lblMainLocations = new Label
             {
                 AutoSize = true,
-                Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(45, 45, 45),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic
+                    ? "الدمام، الرياض، جدة — المملكة العربية السعودية"
+                    : "Dammam, Riyadh, Jeddah — Saudi Arabia"
+            };
+
+            var lblMainContactTitle = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(70, 70, 70),
                 Text = isArabic ? "التواصل" : "Contact",
-                Anchor = AnchorStyles.Left
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft
             };
 
             lnkWhatsappSa = new LinkLabel
             {
                 AutoSize = true,
-                Text = isArabic ? "واتساب (السعودية): +966 56 155 6977" : "WhatsApp (SA): +966 56 155 6977",
-                Anchor = AnchorStyles.Left
+                LinkColor = Color.FromArgb(0, 102, 204),
+                ActiveLinkColor = Color.FromArgb(0, 102, 204),
+                VisitedLinkColor = Color.FromArgb(0, 102, 204),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic ? "واتساب (السعودية): +966 56 155 6977" : "WhatsApp (SA): +966 56 155 6977"
             };
             lnkWhatsappSa.LinkClicked += (s, e) => OpenWhatsApp("966561556977");
 
             lnkWhatsappPk = new LinkLabel
             {
                 AutoSize = true,
-                Text = isArabic ? "واتساب (باكستان): +92 345 9079213" : "WhatsApp (PK): +92 345 9079213",
-                Anchor = AnchorStyles.Left
+                LinkColor = Color.FromArgb(0, 102, 204),
+                ActiveLinkColor = Color.FromArgb(0, 102, 204),
+                VisitedLinkColor = Color.FromArgb(0, 102, 204),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic ? "واتساب (باكستان): +92 345 9079213" : "WhatsApp (PK): +92 345 9079213"
             };
             lnkWhatsappPk.LinkClicked += (s, e) => OpenWhatsApp("923459079213");
 
-            lblEmail = new Label
+            var lblEmail = new Label
             {
                 AutoSize = true,
-                Text = isArabic ? "البريد الإلكتروني: info@nozumtech.com" : "Email: info@nozumtech.com",
-                Anchor = AnchorStyles.Left
+                ForeColor = Color.FromArgb(45, 45, 45),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic ? "البريد الإلكتروني: info@nozumtech.com" : "Email: info@nozumtech.com"
             };
 
-            lblWebsite = new Label
+            lnkWebsite = new LinkLabel
             {
                 AutoSize = true,
-                ForeColor = Color.Blue,
-                Cursor = Cursors.Hand,
-                Text = isArabic ? "الموقع: https://www.nozumtech.com" : "Website: https://www.nozumtech.com",
-                Anchor = AnchorStyles.Left
+                LinkColor = Color.FromArgb(0, 102, 204),
+                ActiveLinkColor = Color.FromArgb(0, 102, 204),
+                VisitedLinkColor = Color.FromArgb(0, 102, 204),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic ? "الموقع: www.nozumtech.com" : "Website: www.nozumtech.com"
             };
-            lblWebsite.Click += (s, e) => OpenUrl("https://www.nozumtech.com");
+            lnkWebsite.LinkClicked += (s, e) => OpenUrl("https://www.nozumtech.com");
 
-            // Add main components
-            mainPanel.Controls.Add(picLogo, 0, 0);
-            mainPanel.SetRowSpan(picLogo, 7);
-            mainPanel.Controls.Add(lblCompanyName, 1, 0);
-            mainPanel.Controls.Add(lblLocations, 1, 1);
-            mainPanel.Controls.Add(lblContactTitle, 1, 2);
-            mainPanel.Controls.Add(lnkWhatsappSa, 1, 3);
-            mainPanel.Controls.Add(lnkWhatsappPk, 1, 4);
-            mainPanel.Controls.Add(lblEmail, 1, 5);
-            mainPanel.Controls.Add(lblWebsite, 1, 6);
+            mainTable.Controls.Add(picLogo, 0, 0);
+            mainTable.SetRowSpan(picLogo, 3);
+            mainTable.Controls.Add(lblMainName, 1, 0);
+            mainTable.Controls.Add(lblMainLocationsTitle, 1, 1);
+            mainTable.Controls.Add(lblMainLocations, 1, 2);
+            mainTable.Controls.Add(lblMainContactTitle, 1, 3);
+            mainTable.Controls.Add(lnkWhatsappSa, 1, 4);
+            mainTable.Controls.Add(lnkWhatsappPk, 1, 5);
+            mainTable.Controls.Add(lblEmail, 1, 6);
+            mainTable.Controls.Add(lnkWebsite, 1, 7);
 
-            // Sister company title
-            lblSisterTitle = new Label
+            grpMain.Controls.Add(mainTable);
+
+            grpSister = new GroupBox
             {
-                AutoSize = true,
-                Location = new Point(20, mainPanel.Bottom + 10),
-                Font = new Font("Segoe UI", 10F, FontStyle.Bold),
-                Text = isArabic ? "الشركة الشقيقة" : "Sister Company"
+                Text = isArabic ? "الشركة الشقيقة" : "Sister Company",
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(45, 45, 45),
+                Location = new Point(rightGroupX, 10),
+                Size = new Size(400, 250),
+                RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No
             };
 
-            // Sister company area
-            sisterPanel = new TableLayoutPanel
+            var sisterTable = new TableLayoutPanel
             {
-                Location = new Point(20, lblSisterTitle.Bottom + 8),
-                AutoSize = true,
+                Dock = DockStyle.Fill,
                 ColumnCount = 2,
-                RowCount = 2,
+                RowCount = 4,
+                Padding = new Padding(12),
+                RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No
             };
-            sisterPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130));
-            sisterPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            sisterPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            sisterPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            sisterTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120));
+            sisterTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
             picSisterLogo = new PictureBox
             {
-                Size = new Size(120, 120),
-                Dock = DockStyle.Fill,
+                Size = new Size(104, 104),
+                Dock = DockStyle.Top,
                 SizeMode = PictureBoxSizeMode.Zoom,
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.White
             };
             TryLoadImage(picSisterLogo, Path.Combine(Application.StartupPath, "khybersoft.png"));
 
-            lblSisterLocation = new Label
+            var lblSisterName = new Label
             {
                 AutoSize = true,
-                Text = isArabic ? "شركة خيبرسوفت — بيشاور، باكستان" : "KhyberSoft — Peshawar, Pakistan",
-                Anchor = AnchorStyles.Left
+                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                Text = isArabic ? "خيبرسوفت" : "KhyberSoft",
+                Margin = new Padding(3, 2, 3, 6),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft
             };
 
-            lblSisterWebsite = new Label
+            var lblSisterLocationTitle = new Label
             {
                 AutoSize = true,
-                ForeColor = Color.Blue,
-                Cursor = Cursors.Hand,
-                Text = isArabic ? "الموقع: https://khybersoft.com" : "Website: https://khybersoft.com",
-                Anchor = AnchorStyles.Left
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(70, 70, 70),
+                Text = isArabic ? "الموقع" : "Location",
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft
             };
-            lblSisterWebsite.Click += (s, e) => OpenUrl("https://khybersoft.com");
 
-            sisterPanel.Controls.Add(picSisterLogo, 0, 0);
-            sisterPanel.SetRowSpan(picSisterLogo, 2);
-            sisterPanel.Controls.Add(lblSisterLocation, 1, 0);
-            sisterPanel.Controls.Add(lblSisterWebsite, 1, 1);
+            var lblSisterLocation = new Label
+            {
+                AutoSize = true,
+                ForeColor = Color.FromArgb(45, 45, 45),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic ? "بيشاور — باكستان" : "Peshawar — Pakistan"
+            };
 
-            // Description
+            lnkSisterWebsite = new LinkLabel
+            {
+                AutoSize = true,
+                LinkColor = Color.FromArgb(0, 102, 204),
+                ActiveLinkColor = Color.FromArgb(0, 102, 204),
+                VisitedLinkColor = Color.FromArgb(0, 102, 204),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = isArabic ? "الموقع: khybersoft.com" : "Website: khybersoft.com"
+            };
+            lnkSisterWebsite.LinkClicked += (s, e) => OpenUrl("https://khybersoft.com");
+
+            sisterTable.Controls.Add(picSisterLogo, 0, 0);
+            sisterTable.SetRowSpan(picSisterLogo, 3);
+            sisterTable.Controls.Add(lblSisterName, 1, 0);
+            sisterTable.Controls.Add(lblSisterLocationTitle, 1, 1);
+            sisterTable.Controls.Add(lblSisterLocation, 1, 2);
+            sisterTable.Controls.Add(lnkSisterWebsite, 1, 3);
+
+            grpSister.Controls.Add(sisterTable);
+
             txtDescription = new TextBox
             {
-                Location = new Point(20, sisterPanel.Bottom + 40),
-                Size = new Size(740, 140),
+                Location = new Point(18, 274),
+                Size = new Size(818, 210),
                 Multiline = true,
                 ReadOnly = true,
                 BorderStyle = BorderStyle.FixedSingle,
                 ScrollBars = ScrollBars.Vertical,
+                BackColor = Color.White,
+                RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No,
                 Text = isArabic
                     ? "نوزم للتقنيات تقدم حلول نقاط البيع والبرمجيات المؤسسية.\r\n" +
-                      "لدعم العملاء، يرجى التواصل عبر واتساب أو البريد الإلكتروني.\r\n\r\n" +
+                      "للدعم الفني، تواصل معنا عبر واتساب أو البريد الإلكتروني.\r\n\r\n" +
                       "خيبرسوفت (الشركة الشقيقة) تقدم حلولاً في بيشاور، باكستان."
                     : "NOZUM Technologies provides POS and enterprise software solutions.\r\n" +
                       "For support, please reach us on WhatsApp or email.\r\n\r\n" +
-                      "KhyberSoft (sister company) focuses on solutions based in Peshawar, Pakistan."
+                      "KhyberSoft (sister company) provides solutions based in Peshawar, Pakistan."
+            };
+
+            // Footer
+            var pnlFooter = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 58,
+                Padding = new Padding(18, 10, 18, 10),
+                BackColor = Color.White
+            };
+
+            lblVersion = new Label
+            {
+                AutoSize = true,
+                ForeColor = Color.DimGray,
+                Location = new Point(18, 18),
+                TextAlign = isArabic ? ContentAlignment.MiddleRight : ContentAlignment.MiddleLeft,
+                Text = (isArabic ? "الإصدار" : "Version") + ": " + GetAppVersion()
             };
 
             btnClose = new Button
             {
-                Text = isArabic ? "حسناً" : "OK",
+                Text = isArabic ? "إغلاق" : "Close",
                 DialogResult = DialogResult.OK,
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
-                Location = new Point(this.ClientSize.Width - 100, this.ClientSize.Height - 50),
-                Size = new Size(80, 28)
+                Size = new Size(100, 30),
+                Location = new Point(ClientSize.Width - 18 - 100, 14)
             };
-            btnClose.Click += (s, e) => this.Close();
+            btnClose.Click += (s, e) => Close();
 
-            // Add to form
-            this.Controls.Add(mainPanel);
-            this.Controls.Add(lblSisterTitle);
-            this.Controls.Add(sisterPanel);
-            this.Controls.Add(txtDescription);
-            this.Controls.Add(btnClose);
+            pnlFooter.Controls.Add(lblVersion);
+            pnlFooter.Controls.Add(btnClose);
+
+            pnlBody.Controls.Add(grpMain);
+            pnlBody.Controls.Add(grpSister);
+            pnlBody.Controls.Add(txtDescription);
+
+            Controls.Add(pnlBody);
+            Controls.Add(pnlFooter);
+            Controls.Add(pnlDivider);
+            Controls.Add(pnlHeader);
+
+            AcceptButton = btnClose;
+        }
+
+        private static string GetAppVersion()
+        {
+            try
+            {
+                var v = Assembly.GetEntryAssembly()?.GetName()?.Version;
+                if (v == null) return "1.0.0";
+                return v.Major + "." + v.Minor + "." + v.Build;
+            }
+            catch
+            {
+                return "1.0.0";
+            }
         }
 
         private static void TryLoadImage(PictureBox pb, string path)
@@ -231,7 +390,7 @@ namespace pos.About
             }
             catch
             {
-                // Ignore load failures; keep placeholder border
+                // Ignore load failures
             }
         }
 
@@ -247,16 +406,18 @@ namespace pos.About
             }
             catch (Exception ex)
             {
-                MessageBox.Show((System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag == "ar-SA" ? "تعذر فتح الرابط." : "Unable to open link.") + "\n" + ex.Message, 
-                    System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag == "ar-SA" ? "حول" : "About", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var isArabic = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag == "ar-SA";
+                MessageBox.Show(
+                    (isArabic ? "تعذر فتح الرابط." : "Unable to open link.") + "\n" + ex.Message,
+                    isArabic ? "حول" : "About",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
 
         private static void OpenWhatsApp(string internationalNumberDigitsOnly)
         {
-            var url = $"https://wa.me/{internationalNumberDigitsOnly}";
-            OpenUrl(url);
+            OpenUrl($"https://wa.me/{internationalNumberDigitsOnly}");
         }
     }
 }

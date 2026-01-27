@@ -129,15 +129,12 @@
   <data name="btn_update.Text" xml:space="preserve">
     <value>تحديث</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid_taxes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="btn_new.Text" xml:space="preserve">
     <value>اضف جديد</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="lbl_taxes_title.Text" xml:space="preserve">
-    <value>إدارة الضرائب</value>
   </data>
   <data name="title.HeaderText" xml:space="preserve">
     <value>عنوان الضريبة</value>
@@ -147,6 +144,16 @@
   </data>
   <data name="date_created.HeaderText" xml:space="preserve">
     <value>تاريخ الإنشاء</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>766, 13</value>
+  </data>
+  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 25</value>
+  </data>
+  <data name="lbl_taxes_title.Text" xml:space="preserve">
+    <value>إدارة الضرائب</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -171,6 +178,13 @@
         //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAA==
 </value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>الضرائب</value>

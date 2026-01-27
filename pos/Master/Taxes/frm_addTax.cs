@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -56,61 +58,123 @@ namespace pos
         
         private void btn_save_Click(object sender, EventArgs e)
         {
-            
-            if (txt_title.Text != string.Empty && txt_rate.Text != string.Empty)
+            try
             {
-                TaxModal info = new TaxModal();
-                info.title = txt_title.Text;
-                info.rate = Convert.ToDouble(txt_rate.Text);
-                
-                TaxBLL objBLL = new TaxBLL();
-                    
-                if (lbl_edit_status.Text == "true")
-                {
-                    info.id = int.Parse(txt_id.Text);
-                    
-                    int result = objBLL.Update(info);
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    int result = objBLL.Insert(info);
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                
-                if(mainForm != null)
-                {
-                    mainForm.load_Taxes_grid();
-                }
-                
-                this.Close();
+                bool isEdit = (lbl_edit_status.Text == "true");
 
+                if (string.IsNullOrWhiteSpace(txt_title.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Title is required.",
+                        "العنوان مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_title.Focus();
+                    return;
+                }
+
+                double rate;
+                if (string.IsNullOrWhiteSpace(txt_rate.Text) || !double.TryParse(txt_rate.Text.Trim(), out rate) || rate < 0)
+                {
+                    UiMessages.ShowInfo(
+                        "Please enter a valid tax rate.",
+                        "يرجى إدخال نسبة ضريبة صحيحة.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_rate.Focus();
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this tax?" : "Save this tax?",
+                    isEdit ? "هل تريد تحديث هذه الضريبة؟" : "هل تريد حفظ هذه الضريبة؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T(isEdit ? "Updating..." : "Saving...", isEdit ? "جاري التحديث..." : "جاري الحفظ...")))
+                {
+                    TaxModal info = new TaxModal();
+                    info.title = txt_title.Text.Trim();
+                    info.rate = rate;
+
+                    TaxBLL objBLL = new TaxBLL();
+                    int result;
+
+                    if (isEdit)
+                    {
+                        int id;
+                        if (!int.TryParse(txt_id.Text, out id) || id <= 0)
+                        {
+                            UiMessages.ShowError(
+                                "Invalid tax id.",
+                                "معرّف الضريبة غير صالح.",
+                                "Error",
+                                "خطأ"
+                            );
+                            return;
+                        }
+
+                        info.id = id;
+                        result = objBLL.Update(info);
+                    }
+                    else
+                    {
+                        result = objBLL.Insert(info);
+                    }
+
+                    if (result > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            isEdit ? "Record updated successfully." : "Record created successfully.",
+                            isEdit ? "تم تحديث السجل بنجاح." : "تم إنشاء السجل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
+                    }
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Record not saved.",
+                            "لم يتم حفظ السجل.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
+                }
+
+                if (mainForm != null)
+                    mainForm.load_Taxes_grid();
+
+                this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
-            
+
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_addTax_KeyDown(object sender, KeyEventArgs e)

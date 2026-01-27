@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos.Master.Banks
 {
@@ -22,7 +24,17 @@ namespace pos.Master.Banks
 
         private void frm_banks_Load(object sender, EventArgs e)
         {
-            get_accounts_dropdownlist();
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
+                {
+                    get_accounts_dropdownlist();
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         public void get_accounts_dropdownlist()
@@ -49,39 +61,63 @@ namespace pos.Master.Banks
         {
             try
             {
-                if (txt_name.Text != string.Empty && txt_name.Text != string.Empty)
+                if (string.IsNullOrWhiteSpace(txt_name.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Bank name is required.",
+                        "اسم البنك مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_name.Focus();
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Save this bank?",
+                    "هل تريد حفظ هذا البنك؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+                if (confirm != DialogResult.Yes) return;
+
+                using (BusyScope.Show(this, UiMessages.T("Saving...", "جاري الحفظ...")))
                 {
                     BankModal info = new BankModal
                     {
-                        name = txt_name.Text,
+                        name = txt_name.Text.Trim(),
                         holderName = txt_holderName.Text,
                         accountNo = txt_accountNo.Text,
                         bankBranch = txt_bankBranch.Text,
                         GLAccountID = (cmb_GL_account_code.SelectedValue == null ? "" : cmb_GL_account_code.SelectedValue.ToString())
-                };
+                    };
 
                     BankBLL objBLL = new BankBLL();
                     int result = objBLL.Insert(info);
                     if (result > 0)
                     {
-                        MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UiMessages.ShowInfo(
+                            "Bank has been created successfully.",
+                            "تم إنشاء البنك بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                         clear_all();
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        UiMessages.ShowError(
+                            "Bank could not be saved. Please try again.",
+                            "تعذر حفظ البنك. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -125,42 +161,73 @@ namespace pos.Master.Banks
             {
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
-                    MessageBox.Show("Record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowInfo(
+                        "Please select a bank record to update.",
+                        "يرجى اختيار سجل بنك للتحديث.",
+                        "Not Found",
+                        "غير موجود"
+                    );
                     return;
                 }
 
-                if (txt_name.Text != string.Empty && txt_name.Text != string.Empty)
+                if (string.IsNullOrWhiteSpace(txt_name.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Bank name is required.",
+                        "اسم البنك مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_name.Focus();
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Update this bank?",
+                    "هل تريد تحديث هذا البنك؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+                if (confirm != DialogResult.Yes) return;
+
+                using (BusyScope.Show(this, UiMessages.T("Updating...", "جاري التحديث...")))
                 {
                     BankModal info = new BankModal
                     {
-                        name = txt_name.Text,
+                        name = txt_name.Text.Trim(),
                         holderName = txt_holderName.Text,
                         accountNo = txt_accountNo.Text,
                         bankBranch = txt_bankBranch.Text,
-                        GLAccountID = cmb_GL_account_code.SelectedValue.ToString()
+                        GLAccountID = (cmb_GL_account_code.SelectedValue == null ? "" : cmb_GL_account_code.SelectedValue.ToString()),
+                        id = int.Parse(txt_id.Text)
                     };
 
                     BankBLL objBLL = new BankBLL();
-
-                    info.id = int.Parse(txt_id.Text);
-
                     int result = objBLL.Update(info);
                     if (result > 0)
                     {
-                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UiMessages.ShowInfo(
+                            "Bank has been updated successfully.",
+                            "تم تحديث البنك بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                         clear_all();
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowError(
+                            "Bank could not be updated. Please try again.",
+                            "تعذر تحديث البنك. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
                     }
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -168,82 +235,89 @@ namespace pos.Master.Banks
         {
             string id = txt_id.Text;
 
-            if (id != "")
+            if (string.IsNullOrWhiteSpace(id))
             {
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+                UiMessages.ShowInfo(
+                    "Please select a bank record to delete.",
+                    "يرجى اختيار سجل بنك للحذف.",
+                    "Delete",
+                    "حذف"
+                );
+                return;
+            }
 
-                if (result == DialogResult.Yes)
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this bank? This action cannot be undone.",
+                "هل تريد حذف هذا البنك؟ لا يمكن التراجع عن هذا الإجراء.",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
                 {
                     BankBLL objBLL = new BankBLL();
                     objBLL.Delete(int.Parse(id));
 
-                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Bank has been deleted successfully.",
+                        "تم حذف البنك بنجاح.",
+                        "Deleted",
+                        "تم الحذف"
+                    );
                     clear_all();
                 }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
             }
-        }
-
-        private void btn_cancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btn_blank_Click(object sender, EventArgs e)
-        {
-            clear_all();
-        }
-
-        private void btn_search_Click(object sender, EventArgs e)
-        {
-            frm_banks_search search_obj = new frm_banks_search(this, txt_search.Text);
-            search_obj.ShowDialog();
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         public void load_banks_transactions_grid(int bank_id)
         {
             try
             {
-                grid_banks_transactions.DataSource = null;
-
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_banks_transactions.AutoGenerateColumns = false;
-
-                String keyword = "id,invoice_no,debit,credit,(debit-credit) AS balance,description,entry_date,account_id,account_name";
-                String table = "pos_banks_payments WHERE bank_id = " + bank_id + "";
-
-                DataTable dt = new DataTable();
-                dt = objBLL.GetRecord(keyword, table);
-
-                double _dr_total = 0;
-                double _cr_total = 0;
-
-                foreach (DataRow dr in dt.Rows)
+                using (BusyScope.Show(this, UiMessages.T("Loading bank transactions...", "جاري تحميل حركات البنك...")))
                 {
-                    _dr_total += Convert.ToDouble(dr["debit"].ToString());
-                    _cr_total += Convert.ToDouble(dr["credit"].ToString());
+                    grid_banks_transactions.DataSource = null;
 
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_banks_transactions.AutoGenerateColumns = false;
+
+                    String keyword = "id,invoice_no,debit,credit,(debit-credit) AS balance,description,entry_date,account_id,account_name";
+                    String table = "pos_banks_payments WHERE bank_id = " + bank_id + "";
+
+                    DataTable dt = new DataTable();
+                    dt = objBLL.GetRecord(keyword, table);
+
+                    double _dr_total = 0;
+                    double _cr_total = 0;
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        _dr_total += Convert.ToDouble(dr["debit"].ToString());
+                        _cr_total += Convert.ToDouble(dr["credit"].ToString());
+
+                    }
+
+                    DataRow newRow = dt.NewRow();
+                    newRow[8] = "Total";
+                    newRow[2] = _dr_total;
+                    newRow[3] = _cr_total;
+                    newRow[4] = (_dr_total - _cr_total);
+                    dt.Rows.InsertAt(newRow, dt.Rows.Count);
+
+                    grid_banks_transactions.DataSource = dt;
+                    CustomizeDataGridView();
                 }
-
-                DataRow newRow = dt.NewRow();
-                newRow[8] = "Total";
-                newRow[2] = _dr_total;
-                newRow[3] = _cr_total;
-                newRow[4] = (_dr_total - _cr_total);
-                dt.Rows.InsertAt(newRow, dt.Rows.Count);
-
-                grid_banks_transactions.DataSource = dt;
-                CustomizeDataGridView();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
                 throw;
             }
 
@@ -251,27 +325,127 @@ namespace pos.Master.Banks
 
         private void btn_trans_refresh_Click(object sender, EventArgs e)
         {
-            string bank_id = txt_id.Text;
-            if (bank_id != "")
+            int bankId;
+            if (int.TryParse(txt_id.Text, out bankId) && bankId > 0)
             {
-                load_banks_transactions_grid(int.Parse(bank_id));
-                
+                load_banks_transactions_grid(bankId);
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a bank first.",
+                    "يرجى اختيار بنك أولاً.",
+                    "Bank",
+                    "البنك"
+                );
             }
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
         {
-            string bank_id = txt_id.Text;
+            int bankId;
+            if (!int.TryParse(txt_id.Text, out bankId) || bankId <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a bank first.",
+                    "يرجى اختيار بنك أولاً.",
+                    "Bank",
+                    "البنك"
+                );
+                return;
+            }
+
             string bankName = lbl_bank_name.Text;
             int bank_account_code = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
-            
-            if (bank_id != "")
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Open bank payment window?",
+                "هل تريد فتح شاشة دفع البنك؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            frm_bank_payment obj = new frm_bank_payment(this, bankId, bank_account_code, bankName);
+            obj.ShowDialog();
+        }
+
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            int bankId;
+            if (int.TryParse(txt_id.Text, out bankId) && bankId > 0)
             {
-                frm_bank_payment obj = new frm_bank_payment(this, int.Parse(bank_id), bank_account_code,bankName);
-                obj.ShowDialog();
-                
+                load_bank_detail(bankId);
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a bank first.",
+                    "يرجى اختيار بنك أولاً.",
+                    "Bank",
+                    "البنك"
+                );
             }
         }
+
+        private void Btn_deposit_Click(object sender, EventArgs e)
+        {
+            int bankId;
+            if (!int.TryParse(txt_id.Text, out bankId) || bankId <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a bank first.",
+                    "يرجى اختيار بنك أولاً.",
+                    "Bank",
+                    "البنك"
+                );
+                return;
+            }
+
+            string bankName = lbl_bank_name.Text;
+            int bank_account_code = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Open deposit window?",
+                "هل تريد فتح شاشة الإيداع؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            frm_deposit_to_bank obj = new frm_deposit_to_bank(this, bankId, bank_account_code, bankName);
+            obj.ShowDialog();
+        }
+
+        private void Btn_bank_report_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int bankId;
+                if (!int.TryParse(txt_id.Text, out bankId) || bankId <= 0)
+                {
+                    UiMessages.ShowInfo(
+                        "Please select a bank to view the report.",
+                        "يرجى اختيار بنك لعرض التقرير.",
+                        "Bank Report",
+                        "تقرير البنك"
+                    );
+                    return;
+                }
+
+                using (BusyScope.Show(this, UiMessages.T("Opening report...", "جاري فتح التقرير...")))
+                {
+                    frm_bankLedgerReport bankLedger = new frm_bankLedgerReport(bankId);
+                    bankLedger.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
+
+        }
+
         private void CustomizeDataGridView()
         {
             // Get the last row in the DataGridView
@@ -311,50 +485,20 @@ namespace pos.Master.Banks
             lbl_bank_name.Text = txt_name.Text;
         }
 
-        private void btn_refresh_Click(object sender, EventArgs e)
+        private void btn_cancel_Click(object sender, EventArgs e)
         {
-            string bank_id = txt_id.Text;
-
-            if (bank_id != "")
-            {
-                load_bank_detail(int.Parse(bank_id));
-
-            }
+            this.Close();
         }
 
-        private void Btn_deposit_Click(object sender, EventArgs e)
+        private void btn_blank_Click(object sender, EventArgs e)
         {
-            string bank_id = txt_id.Text;
-            string bankName = lbl_bank_name.Text;
-            int bank_account_code = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
-
-            if (bank_id != "")
-            {
-                frm_deposit_to_bank obj = new frm_deposit_to_bank(this, int.Parse(bank_id), bank_account_code, bankName);
-                obj.ShowDialog();
-
-            }
+            clear_all();
         }
 
-        private void Btn_bank_report_Click(object sender, EventArgs e)
+        private void btn_search_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (String.IsNullOrEmpty(txt_id.Text))
-                {
-                    MessageBox.Show("Please select bank to view report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                int bankId = int.Parse(txt_id.Text);
-
-                frm_bankLedgerReport bankLedger = new frm_bankLedgerReport(bankId);
-                bankLedger.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+            frm_banks_search search_obj = new frm_banks_search(this, txt_search.Text);
+            search_obj.ShowDialog();
         }
     }
 }

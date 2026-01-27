@@ -1,5 +1,7 @@
-﻿using pos.Master.Companies.zatca;
+﻿using pos.UI.Busy;
+using pos.Master.Companies.zatca;
 using pos.Security.Authorization;
+using pos.UI; // <-- Added Ui namespace
 using POS.BLL;
 using POS.Core;
 using System;
@@ -10,7 +12,6 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer; // added
-using pos.UI; // <-- Added Ui namespace
 
 
 namespace pos
@@ -328,7 +329,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -424,7 +425,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -629,11 +630,13 @@ namespace pos
             {
                 if (cmb_sale_type.SelectedValue.ToString() == "Credit" && netAmount > netCreditLimit)
                 {
-                    MessageBox.Show("Sales transaction cannot be saved, because customer credit limit has exceeded by " + limitExceededBy, "Credit limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning("Sales transaction cannot be processed, because customer credit limit has exceeded by " + limitExceededBy.ToString("N2"),
+                     "لا يمكن حفظ معاملة البيع، لأنه تم تجاوز حد ائتمان العميل بمقدار " + limitExceededBy.ToString("N2"),
+                     "Credit limit",
+                     "حد الائتمان");
                     return;
                 }
             }
-
             ///
 
         }
@@ -685,35 +688,6 @@ namespace pos
             }
 
             txt_total_qty.Text = Math.Round(total_qty, 2).ToString();
-        }
-
-        private void btn_save_Click(object sender, EventArgs e)
-        {
-
-
-
-        }
-
-        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
-            string description, int customer_id, int supplier_id, int entry_id, int employee_id = 0)
-        {
-            int journal_id = 0;
-            JournalsModal JournalsModal_obj = new JournalsModal();
-            JournalsBLL JournalsObj = new JournalsBLL();
-
-            JournalsModal_obj.invoice_no = invoice_no;
-            JournalsModal_obj.entry_date = date;
-            JournalsModal_obj.debit = debit;
-            JournalsModal_obj.credit = credit;
-            JournalsModal_obj.account_id = account_id;
-            JournalsModal_obj.description = description;
-            JournalsModal_obj.customer_id = customer_id;
-            JournalsModal_obj.supplier_id = supplier_id;
-            JournalsModal_obj.entry_id = entry_id;
-            JournalsModal_obj.employee_id = employee_id;
-
-            journal_id = JournalsObj.Insert(JournalsModal_obj);
-            return journal_id;
         }
 
         private int Insert_emp_commission(string invoice_no, int account_id, double debit, double credit, DateTime date,
@@ -790,8 +764,6 @@ namespace pos
 
         }
 
-
-
         private void frm_sales_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -862,6 +834,30 @@ namespace pos
                 {
                     txtCustomerSearch.Focus();
                 }
+                if(e.Control && e.Alt && e.KeyCode == Keys.P)
+                {
+                    PrinttoolStripButton.PerformClick();
+                }
+                if (e.Control && e.Alt && e.KeyCode == Keys.R)
+                {
+                    SaleReturnToolStripButton.PerformClick();
+                }
+                if(e.Control && e.Alt && e.KeyCode == Keys.N)
+                {
+                    cmb_employees.Focus();
+                }
+                if (e.Control && e.Alt && e.KeyCode == Keys.T)
+                {
+                    cmb_sale_type.Focus();
+                }
+                if (e.Control && e.Alt && e.KeyCode == Keys.U)
+                {
+                    chk_show_total_cost.Checked = !chk_show_total_cost.Checked;
+                }
+                if (e.Control && e.Alt && e.KeyCode == Keys.Z)
+                {
+                    chk_sendInvoiceToZatca.Checked = !chk_sendInvoiceToZatca.Checked;
+                }
 
                 if (e.Control && e.Alt && e.KeyCode == Keys.S)
                 {
@@ -871,7 +867,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -895,40 +891,8 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
-
-        }
-
-        public void autoCompleteProductCode()
-        {
-            try
-            {
-                //    txt_product_code.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                //    txt_product_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                //    AutoCompleteStringCollection Products_coll = new AutoCompleteStringCollection();
-
-                //    ProductBLL productsBLL_obj = new ProductBLL();
-                //    DataTable dt = productsBLL_obj.GetAllProductCodes();
-
-                //    if (dt.Rows.Count > 0)
-                //    {
-                //        foreach (DataRow dr in dt.Rows)
-                //        {
-                //            Products_coll.Add(dr["code"].ToString() +" - "+ dr["name"].ToString());
-
-                //        }
-
-                //    }
-
-                //    txt_product_code.AutoCompleteCustomSource = Products_coll;
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
 
         }
 
@@ -948,11 +912,6 @@ namespace pos
                 //netAmount += total_tax;
                 txt_total_amount.Text = netAmount.ToString();
             }
-        }
-
-        private void btn_movements_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void clear_form()
@@ -1164,13 +1123,8 @@ namespace pos
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
-        }
-
-        private void btn_round_prices_Click(object sender, EventArgs e)
-        {
-
         }
 
         public void round_total_amount(double new_amount, double old_total_amount, double sub_total)
@@ -1251,7 +1205,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1403,10 +1357,8 @@ namespace pos
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                    DialogResult result = MessageBox.Show("Are you sure you want delete", "Delete", buttons, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
+                    var confirm = UiMessages.ConfirmYesNoCancel("Are you sure you want delete", "هل أنت متأكد أنك تريد الحذف", "Delete", "حذف");
+                    if (confirm == DialogResult.Yes)
                     {
                         grid_sales.Rows.RemoveAt(grid_sales.CurrentRow.Index);
 
@@ -1453,7 +1405,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -1571,9 +1523,9 @@ namespace pos
 
 
                         string[] row0 = { id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
-                                            sub_total_without_vat.ToString(),tax.ToString(), current_sub_total.ToString(),location_code,unit,category,
-                                            btn_delete, shop_qty,tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
-                                            item_type,category_code,item_number};
+                                            sub_total_without_vat.ToString(), tax.ToString(), current_sub_total.ToString(), location_code, unit, category,
+                                            btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
+                                            item_type, category_code, item_number};
                         int rowIndex = grid_sales.Rows.Add(row0);
 
                         ////////
@@ -1595,7 +1547,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1621,7 +1573,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1687,11 +1639,6 @@ namespace pos
             }
         }
 
-        private void btn_search_invioces_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void chk_show_total_cost_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_show_total_cost.Checked)
@@ -1739,7 +1686,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1828,7 +1775,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1986,7 +1933,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -2110,7 +2057,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -2235,8 +2182,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -2292,11 +2238,6 @@ namespace pos
 
                 anError.ThrowException = false;
             }
-        }
-
-        private void btn_ict_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void radioDiscValue_CheckedChanged(object sender, EventArgs e)
@@ -2521,347 +2462,355 @@ namespace pos
 
         private void NewToolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(UiMessages.T("Are you sure you want new sale transaction", "هل أنت متأكد أنك تريد عملية بيع جديدة"),
-                  UiMessages.T("New Transaction", "معاملة جديدة"), buttons, MessageBoxIcon.Warning);
+            var confirm = UiMessages.ConfirmYesNo(
+                    "Create new sale transaction?",
+                    "هل تريد إنشاء حركة بيع جديدة؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
 
-            if (result == DialogResult.Yes)
-            {
-                clear_form();
-                //txt_product_code.Focus();
-            }
+            if (confirm != DialogResult.Yes)
+                return;
+
+            clear_form();
+            
         }
 
         private void SaveToolStripButton_Click(object sender, EventArgs e)
         {
-            try
+            using (BusyScope.Show(this, "Saving..."))
             {
-                // Validate at least one product is added
-                if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
+                try
                 {
-                    UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات", "Sale Transaction", "معاملة البيع");
-                    return;
-                }
-
-                // Existing Standard subtype check
-                // Additional ZATCA postal address validation for Standard subtype
-                // ZATCA validation
-                if (UsersModal.useZatcaEInvoice)
-                {
-                    if (cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
+                    // Validate at least one product is added
+                    if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
                     {
-                        int customerId = 0;
-                        int.TryParse(txt_customerID.Text, out customerId);
-                        if (!ValidateStandardInvoiceCustomer(customerId))
-                            return;
-                    }
-                }
-
-                // Sale type selection validation
-                if (cmb_sale_type.SelectedValue.ToString() == "0")
-                {
-                    UiMessages.ShowWarning("Please select sale type", "يرجى اختيار نوع البيع", "Sale Transaction", "معاملة البيع");
-                    return;
-                }
-
-                string bankID = "";
-                string bankGLAccountID = "";
-                string sale_type;
-                string paymentMethodText = cmb_payment_method.Text;
-
-                // Get sale type
-                if (cmb_sale_type.SelectedValue.ToString() == null)
-                {
-                    MessageBox.Show("Are you sure you want to " + invoice_status, invoice_status + " Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    return;
-                }
-                else
-                {
-                    sale_type = (string.IsNullOrEmpty(cmb_sale_type.SelectedValue.ToString()) ? "Cash" : cmb_sale_type.SelectedValue.ToString());
-                }
-
-                int destination_branch_id = 0;
-                int source_branch_id = UsersModal.logged_in_branch_id;
-
-                // DialogResult result = MessageBox.Show("Are you sure you want to sale", "Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (sale_type == "Cash" && (paymentMethodText.Contains("Bank") || paymentMethodText.Contains("bank") || paymentMethodText.Contains("banks") || paymentMethodText.Contains("Banks")))
-                {
-                    Master.Banks.frm_banksPopup bankfrm = new Master.Banks.frm_banksPopup();
-                    bankfrm.ShowDialog();
-                    string bankIDPlusGLAccountID = bankfrm._bankIDPlusGLAccountID;
-
-                    int condition_index_len = bankIDPlusGLAccountID.IndexOf("+");
-                    bankID = bankIDPlusGLAccountID.Substring(0, condition_index_len).Trim();
-                    bankGLAccountID = bankIDPlusGLAccountID.Substring(condition_index_len + 1).Trim();
-
-                }
-
-                //if(string.IsNullOrEmpty(bankGLAccountID) || bankGLAccountID == "0")
-                //{
-                //    MessageBox.Show("The Selected bank does not have GL Account linked. Please link GL Account to your bank and try again", "Bank Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                //    return;
-                //}
-
-                // Print options dialog
-                Frm_print_options formPrintOption = new Frm_print_options();
-                if (formPrintOption.ShowDialog() == DialogResult.OK)
-                {
-                    if (sale_type == "ICT")
-                    {
-                        Products.ICT.frm_destination_branch obj_ict = new Products.ICT.frm_destination_branch();
-                        obj_ict.ShowDialog();
-                        destination_branch_id = obj_ict._branch_id;
-
-                    }
-
-                    ///Checking customer credit limit
-                    double customer_credit_limit = (txt_cust_credit_limit.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
-                    double customerBalance = (txt_cust_balance.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_balance.Text));
-                    double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
-                    double netCreditLimit = customer_credit_limit - customerBalance;
-                    double limitExceededBy = netAmount - netCreditLimit;
-
-                    if (sale_type == "Credit" && netAmount > netCreditLimit)
-                    {
-                        MessageBox.Show(
-                            $"Cannot process sale. Customer credit limit would be exceeded!\n\n" +
-                            $"Current Balance: {customerBalance:C}\n" +
-                            $"Sale Amount: {netAmount:C}\n" +
-                            $"Credit Limit: {customer_credit_limit:C}",
-                            $"لا يمكن إتمام البيع لأن حد الائتمان للعميل سيتجاوز الحد المسموح.\n\n" +
-                            $"الرصيد الحالي: {customerBalance:C}\n" +
-                            $"قيمة الفاتورة: {netAmount:C}\n" +
-                            $"حد الائتمان: {customer_credit_limit:C}",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
+                        UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات", "Sale Transaction", "معاملة البيع");
                         return;
                     }
-                    ////
 
-                    if (grid_sales.Rows.Count > 0)
+                    // Existing Standard subtype check
+                    // Additional ZATCA postal address validation for Standard subtype
+                    // ZATCA validation
+                    if (UsersModal.useZatcaEInvoice)
                     {
-                        List<SalesModalHeader> sales_model_header = new List<SalesModalHeader> { };
-                        List<SalesModal> sales_model_detail = new List<SalesModal> { };
-
-                        string invoice_no = "";
-                        double total_tax_var = 0;
-                        Int32 tax_id = 0;
-                        double tax_rate = 0;
-                        string estimate_invoice_no = "";
-                        bool estimate_status = false;
-                        Int32 sale_id = 0;
-
-                        // SalesModal salesModal_obj = new SalesModal();
-                        SalesBLL salesObj = new SalesBLL();
-
-                        if (chkbox_is_taxable.Checked)
+                        if (cmb_invoice_subtype_code.SelectedValue != null && cmb_invoice_subtype_code.SelectedValue.ToString() == "01")
                         {
-                            total_tax_var = Convert.ToDouble(txt_total_tax.Text);
+                            int customerId = 0;
+                            int.TryParse(txt_customerID.Text, out customerId);
+                            if (!ValidateStandardInvoiceCustomer(customerId))
+                                return;
+                        }
+                    }
+
+                    // Sale type selection validation
+                    if (cmb_sale_type.SelectedValue.ToString() == "0")
+                    {
+                        UiMessages.ShowWarning("Please select sale type", "يرجى اختيار نوع البيع", "Sale Transaction", "معاملة البيع");
+                        return;
+                    }
+
+                    string bankID = "";
+                    string bankGLAccountID = "";
+                    string sale_type;
+                    string paymentMethodText = cmb_payment_method.Text;
+
+                    // Get sale type
+                    if (cmb_sale_type.SelectedValue.ToString() == null)
+                    {
+                        UiMessages.ShowWarning("Please select sale type", "يرجى اختيار نوع البيع", "Sale Transaction", "معاملة البيع");
+                        return;
+                    }
+                    else
+                    {
+                        sale_type = (string.IsNullOrEmpty(cmb_sale_type.SelectedValue.ToString()) ? "Cash" : cmb_sale_type.SelectedValue.ToString());
+                    }
+
+                    int destination_branch_id = 0;
+                    int source_branch_id = UsersModal.logged_in_branch_id;
+
+                    if (sale_type == "Cash" && (paymentMethodText.Contains("Bank") || paymentMethodText.Contains("bank") || paymentMethodText.Contains("banks") || paymentMethodText.Contains("Banks")))
+                    {
+                        Master.Banks.frm_banksPopup bankfrm = new Master.Banks.frm_banksPopup();
+                        bankfrm.ShowDialog();
+
+                        if (!string.IsNullOrEmpty(bankfrm._bankIDPlusGLAccountID))
+                        {
+                            string bankIDPlusGLAccountID = bankfrm._bankIDPlusGLAccountID;
+
+                            int condition_index_len = bankIDPlusGLAccountID.IndexOf("+");
+                            bankID = bankIDPlusGLAccountID.Substring(0, condition_index_len).Trim();
+                            bankGLAccountID = bankIDPlusGLAccountID.Substring(condition_index_len + 1).Trim();
                         }
                         else
                         {
-                            total_tax_var = 0;
-                        }
-
-                       
-
-                        if (txt_invoice_no.Text != "" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "E") //if estimates
-                        {
-                            estimate_invoice_no = txt_invoice_no.Text;
-                            estimate_status = true;
-
-                        }
-
-                        //if purchase return then put minus sign before amount
-                        double return_minus_value = (sale_type == "Return" ? -1 : 1);
-                        double net_total = Math.Round(return_minus_value * total_amount, 6);
-                        double net_total_discount = Math.Round(return_minus_value * total_discount, 6);
-                        double net_total_tax = Math.Round(return_minus_value * total_tax, 6);
-
-                        DateTime sale_date = txt_sale_date.Value.Date;
-                        int customer_id = (string.IsNullOrWhiteSpace(txt_customerID.Text) ? 0 : Convert.ToInt32(txt_customerID.Text));
-                        string customer_name = txtCustomerSearch.Text.Trim();
-                        string customer_vat = txt_customer_vat.Text;
-                        int employee_id = (cmb_employees.SelectedValue == null ? 0 : Convert.ToInt32(cmb_employees.SelectedValue));
-                        int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_terms.SelectedValue));
-                        int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
-                        string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
-                        string PONumber = txtPONumber.Text;
-
-                        double smallSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(200.0);
-                        bool isSmallSale = (sale_type == "Cash" || sale_type == "Credit") && net_total < smallSaleThreshold;
-                        
-                        if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
-                        {
-                            UiMessages.ShowWarning("Update are not allowed", "التعديل غير مسموح", "Update", "تعديل");
                             return;
-
-                            //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
-                            //if (qresult == 0)
-                            //{
-                            //    MessageBox.Show(invoice_no + "  has issue while updating, please try again", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            //    return;
-                            //}
-                            //invoice_no = txt_invoice_no.Text;
                         }
-                        else
+                    }
+
+                    // Print options dialog
+                    Frm_print_options formPrintOption = new Frm_print_options();
+                    if (formPrintOption.ShowDialog() == DialogResult.OK)
+                    {
+                        if (sale_type == "ICT")
                         {
-                            if (sale_type == "Quotation")
+                            Products.ICT.frm_destination_branch obj_ict = new Products.ICT.frm_destination_branch();
+                            obj_ict.ShowDialog();
+                            destination_branch_id = obj_ict._branch_id;
+                        }
+
+                        ///Checking customer credit limit
+                        double customer_credit_limit = (txt_cust_credit_limit.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_credit_limit.Text));
+                        double customerBalance = (txt_cust_balance.Text == string.Empty ? 0 : Convert.ToDouble(txt_cust_balance.Text));
+                        double netAmount = (txt_total_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_total_amount.Text));
+                        double netCreditLimit = customer_credit_limit - customerBalance;
+
+                        if (sale_type == "Credit" && netAmount > netCreditLimit)
+                        {
+                            UiMessages.ShowError(
+                                "Cannot process sale. Customer credit limit would be exceeded!\n\n" +
+                                $"Current Balance: {customerBalance:C}\n" +
+                                $"Sale Amount: {netAmount:C}\n" +
+                                $"Credit Limit: {customer_credit_limit:C}",
+                                "Sale Transaction",
+                                captionAr: "لا يمكن إتمام البيع لأن حد الائتمان للعميل سيتجاوز الحد المسموح.\n\n" +
+                                $"الرصيد الحالي: {customerBalance:C}\n" +
+                                $"قيمة الفاتورة: {netAmount:C}\n" +
+                                $"حد الائتمان: {customer_credit_limit:C}"
+                            );
+
+                            return;
+                        }
+                        ////
+
+                        if (grid_sales.Rows.Count > 0)
+                        {
+                            List<SalesModalHeader> sales_model_header = new List<SalesModalHeader> { };
+                            List<SalesModal> sales_model_detail = new List<SalesModal> { };
+
+                            string invoice_no = "";
+                            double total_tax_var = 0;
+                            Int32 tax_id = 0;
+                            double tax_rate = 0;
+                            string estimate_invoice_no = "";
+                            bool estimate_status = false;
+                            Int32 sale_id = 0;
+
+                            SalesBLL salesObj = new SalesBLL();
+
+                            if (chkbox_is_taxable.Checked)
                             {
-                                invoice_no = salesObj.GetMaxEstimateInvoiceNo();
+                                total_tax_var = Convert.ToDouble(txt_total_tax.Text);
                             }
                             else
                             {
-                                // NEW: pick invoice series based on amount
-                                invoice_no = isSmallSale
-                                    ? salesObj.GetMaxSmallSaleInvoiceNo()   // ZS-000001
-                                    : salesObj.GetMaxSaleInvoiceNo();
+                                total_tax_var = 0;
+                            }
+
+                            if (txt_invoice_no.Text != "" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "E") //if estimates
+                            {
+                                estimate_invoice_no = txt_invoice_no.Text;
+                                estimate_status = true;
 
                             }
 
-                        }
+                            //if purchase return then put minus sign before amount
+                            double return_minus_value = (sale_type == "Return" ? -1 : 1);
+                            double net_total = Math.Round(return_minus_value * total_amount, 6);
+                            double net_total_discount = Math.Round(return_minus_value * total_discount, 6);
+                            double net_total_tax = Math.Round(return_minus_value * total_tax, 6);
 
-                        //set the date from datetimepicker and set time to te current time
-                        DateTime now = DateTime.Now;
-                        txt_sale_date.Value = new DateTime(txt_sale_date.Value.Year, txt_sale_date.Value.Month, txt_sale_date.Value.Day, now.Hour, now.Minute, now.Second);
-                        /////////////////////
+                            DateTime sale_date = txt_sale_date.Value.Date;
+                            int customer_id = (string.IsNullOrWhiteSpace(txt_customerID.Text) ? 0 : Convert.ToInt32(txt_customerID.Text));
+                            string customer_name = txtCustomerSearch.Text.Trim();
+                            string customer_vat = txt_customer_vat.Text;
+                            int employee_id = (cmb_employees.SelectedValue == null ? 0 : Convert.ToInt32(cmb_employees.SelectedValue));
+                            int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_terms.SelectedValue));
+                            int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
+                            string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
+                            string PONumber = txtPONumber.Text;
 
-                        /////Added sales header into the List
-                        sales_model_header.Add(new SalesModalHeader
-                        {
-                            customer_id = customer_id,
-                            customer_name = customer_name,
-                            customer_vat = customer_vat,
-                            employee_id = employee_id,
-                            invoice_no = invoice_no,
-                            total_amount = net_total,
-                            total_tax = total_tax_var,
-                            total_discount = net_total_discount,
-                            total_discount_percent = Convert.ToDouble(txt_total_disc_percent.Value),
-                            flat_discount_value = Convert.ToDouble(txtTotalFlatDiscountValue.Value),
-                            sale_type = sale_type,
-                            invoice_subtype = invoice_subtype,
-                            sale_date = sale_date,
-                            sale_time = txt_sale_date.Value,
-                            description = txt_description.Text,
-                            payment_terms_id = payment_terms_id,
-                            payment_method_id = payment_method_id,
-                            payment_method_text = paymentMethodText,
-                            bankGLAccountID = bankGLAccountID,
-                            bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
-                            PONumber = PONumber,
+                            double smallSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(200.0);
+                            bool isSmallSale = (sale_type == "Cash" || sale_type == "Credit") && net_total < smallSaleThreshold;
+                            
 
-                            account = "Sale",
-                            is_return = false,
-                            estimate_invoice_no = estimate_invoice_no,
-                            estimate_status = estimate_status,
-
-                            total_cost_amount = total_cost_amount,
-                            cash_account_id = cash_account_id,
-                            receivable_account_id = receivable_account_id,
-                            tax_account_id = tax_account_id,
-                            sales_discount_acc_id = sales_discount_acc_id,
-                            inventory_acc_id = inventory_acc_id,
-                            purchases_acc_id = purchases_acc_id,
-                            sales_account_id = sales_account_id,
-
-                        });
-                        //////
-
-                        //if invoice type is sale then insert sales otherwise insert estimates/quotation
-                        //Int32 sale_id = (sale_type == "Quotation" ? salesObj.InsertEstimates(salesModal_obj) : salesObj.InsertSales(salesModal_obj));
-                        int sno = 0;
-                        for (int i = 0; i < grid_sales.Rows.Count; i++)
-                        {
-                            if (grid_sales.Rows[i].Cells["id"].Value != null)
+                            if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
                             {
-                                if (chkbox_is_taxable.Checked)
+                                UiMessages.ShowWarning("Update are not allowed", "التعديل غير مسموح", "Update", "تعديل");
+                                return;
+
+                                //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
+                                //if (qresult == 0)
+                                //{
+                                //    MessageBox.Show(invoice_no + "  has issue while updating, please try again", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                //    return;
+                                //}
+                                //invoice_no = txt_invoice_no.Text;
+                            }
+                            else
+                            {
+                                if (sale_type == "Quotation")
                                 {
-                                    tax_rate = (grid_sales.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[i].Cells["tax_rate"].Value.ToString()));
-                                    tax_id = Convert.ToInt32(grid_sales.Rows[i].Cells["tax_id"].Value.ToString());
-                                    //tax_rate = tax_rate;
+                                    invoice_no = salesObj.GetMaxEstimateInvoiceNo();
                                 }
                                 else
                                 {
-                                    tax_id = 0;
-                                    tax_rate = 0;
+                                    // NEW: pick invoice series based on amount
+                                    invoice_no = isSmallSale
+                                        ? salesObj.GetMaxSmallSaleInvoiceNo()   // ZS-000001
+                                        : salesObj.GetMaxSaleInvoiceNo();
+
                                 }
 
-                                ///// Added sales detail in to List
-                                sales_model_detail.Add(new SalesModal
-                                {
-                                    serialNo = sno++,
-                                    invoice_no = invoice_no,
-                                    item_id = Convert.ToInt32(grid_sales.Rows[i].Cells["id"].Value.ToString()),
-                                    item_number = grid_sales.Rows[i].Cells["item_number"].Value.ToString(),
-                                    code = grid_sales.Rows[i].Cells["code"].Value.ToString(),
-                                    name = grid_sales.Rows[i].Cells["name"].Value.ToString(),
-                                    quantity_sold = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["qty"].Value.ToString()) ? 0 : double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString())),
-                                    unit_price = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(double.Parse(grid_sales.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
-                                    discount = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(double.Parse(grid_sales.Rows[i].Cells["discount"].Value.ToString()), 4)),
-                                    discount_percent = double.Parse(grid_sales.Rows[i].Cells["discount_percent"].Value.ToString()),
-                                    cost_price = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["cost_price"].Value.ToString()) ? 0 : Math.Round(Convert.ToDouble(grid_sales.Rows[i].Cells["cost_price"].Value.ToString()), 4)),// its avg cost actually ,
-                                    item_type = grid_sales.Rows[i].Cells["item_type"].Value.ToString(),
-                                    location_code = (grid_sales.Rows[i].Cells["location_code"].Value == null ? "" : grid_sales.Rows[i].Cells["location_code"].Value.ToString()),
-                                    tax_id = tax_id,
-                                    tax_rate = tax_rate,
-                                    sale_date = sale_date,
-                                    destination_branch_id = destination_branch_id,
-                                    source_branch_id = source_branch_id,
-                                    customer_id = customer_id,
-                                });
-                                //////////////
-
                             }
-                        }
 
-                        //if invoice type is sale then insert sales otherwise insert estimates/quotation
-                        if (sale_type == "Quotation")
-                        {
-                            sale_id = salesObj.InsertEstimates(sales_model_header, sales_model_detail); // for quotation / estimates
-                            if (sale_id > 0)
+                            //set the date from datetimepicker and set time to te current time
+                            DateTime now = DateTime.Now;
+                            txt_sale_date.Value = new DateTime(txt_sale_date.Value.Year, txt_sale_date.Value.Month, txt_sale_date.Value.Day, now.Hour, now.Minute, now.Second);
+                            /////////////////////
+
+                            /////Added sales header into the List
+                            sales_model_header.Add(new SalesModalHeader
                             {
-                                MessageBox.Show(invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                txt_invoice_no.Text = invoice_no; // set the invoice no in textbox
-                                txt_invoice_no.Tag = sale_id; // set the sale id in tag
-                            }
-                        }
-                        else if (sale_type == "ICT")
-                        {
-                            if (destination_branch_id != 0)
+                                customer_id = customer_id,
+                                customer_name = customer_name,
+                                customer_vat = customer_vat,
+                                employee_id = employee_id,
+                                invoice_no = invoice_no,
+                                total_amount = net_total,
+                                total_tax = total_tax_var,
+                                total_discount = net_total_discount,
+                                total_discount_percent = Convert.ToDouble(txt_total_disc_percent.Value),
+                                flat_discount_value = Convert.ToDouble(txtTotalFlatDiscountValue.Value),
+                                sale_type = sale_type,
+                                invoice_subtype = invoice_subtype,
+                                sale_date = sale_date,
+                                sale_time = txt_sale_date.Value,
+                                description = txt_description.Text,
+                                payment_terms_id = payment_terms_id,
+                                payment_method_id = payment_method_id,
+                                payment_method_text = paymentMethodText,
+                                bankGLAccountID = bankGLAccountID,
+                                bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
+                                PONumber = PONumber,
+
+                                account = "Sale",
+                                is_return = false,
+                                estimate_invoice_no = estimate_invoice_no,
+                                estimate_status = estimate_status,
+
+                                total_cost_amount = total_cost_amount,
+                                cash_account_id = cash_account_id,
+                                receivable_account_id = receivable_account_id,
+                                tax_account_id = tax_account_id,
+                                sales_discount_acc_id = sales_discount_acc_id,
+                                inventory_acc_id = inventory_acc_id,
+                                purchases_acc_id = purchases_acc_id,
+                                sales_account_id = sales_account_id,
+
+                            });
+                            //////
+
+                            //if invoice type is sale then insert sales otherwise insert estimates/quotation
+                            //Int32 sale_id = (sale_type == "Quotation" ? salesObj.InsertEstimates(salesModal_obj) : salesObj.InsertSales(salesModal_obj));
+                            int sno = 0;
+                            for (int i = 0; i < grid_sales.Rows.Count; i++)
                             {
-                                int ict_result = salesObj.ict_qty_request(sales_model_header, sales_model_detail);
-                                if (ict_result > 0)
+                                if (grid_sales.Rows[i].Cells["id"].Value != null)
                                 {
-                                    MessageBox.Show("Request for Inter Company Transfer (ICT) sent successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
-                                    return; // return without printing only save
+                                    if (chkbox_is_taxable.Checked)
+                                    {
+                                        tax_rate = (grid_sales.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.Rows[i].Cells["tax_rate"].Value.ToString()));
+                                        tax_id = Convert.ToInt32(grid_sales.Rows[i].Cells["tax_id"].Value.ToString());
+                                    }
+                                    else
+                                    {
+                                        tax_id = 0;
+                                        tax_rate = 0;
+                                    }
+
+                                    ///// Added sales detail in to List
+                                    sales_model_detail.Add(new SalesModal
+                                    {
+                                        serialNo = sno++,
+                                        invoice_no = invoice_no,
+                                        item_id = Convert.ToInt32(grid_sales.Rows[i].Cells["id"].Value.ToString()),
+                                        item_number = grid_sales.Rows[i].Cells["item_number"].Value.ToString(),
+                                        code = grid_sales.Rows[i].Cells["code"].Value.ToString(),
+                                        name = grid_sales.Rows[i].Cells["name"].Value.ToString(),
+                                        quantity_sold = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["qty"].Value.ToString()) ? 0 : double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString())),
+                                        unit_price = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(double.Parse(grid_sales.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
+                                        discount = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(double.Parse(grid_sales.Rows[i].Cells["discount"].Value.ToString()), 4)),
+                                        discount_percent = double.Parse(grid_sales.Rows[i].Cells["discount_percent"].Value.ToString()),
+                                        cost_price = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["cost_price"].Value.ToString()) ? 0 : Math.Round(Convert.ToDouble(grid_sales.Rows[i].Cells["cost_price"].Value.ToString()), 4)),// its avg cost actually ,
+                                        item_type = grid_sales.Rows[i].Cells["item_type"].Value.ToString(),
+                                        location_code = (grid_sales.Rows[i].Cells["location_code"].Value == null ? "" : grid_sales.Rows[i].Cells["location_code"].Value.ToString()),
+                                        tax_id = tax_id,
+                                        tax_rate = tax_rate,
+                                        sale_date = sale_date,
+                                        destination_branch_id = destination_branch_id,
+                                        source_branch_id = source_branch_id,
+                                        customer_id = customer_id,
+                                    });
+                                    //////////////
+
                                 }
                             }
 
-                        }
-                        else
-                        {
-                            sale_id = salesObj.InsertSales(sales_model_header, sales_model_detail);// for sales items
-                            if (sale_id > 0)
+                            if (sale_type == "Quotation")
                             {
-
-                                if (UsersModal.useZatcaEInvoice == true)
+                                sale_id = salesObj.InsertEstimates(sales_model_header, sales_model_detail);
+                                if (sale_id > 0)
                                 {
-                                    
+                                    UiMessages.ShowInfo(
+                                        "Estimate No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully",
+                                        "تقدير رقم: " + invoice_no + " " + sale_type + " تمت " + (invoice_status == "Update" ? "تحديث" : "إنشاء") + " بنجاح",
+                                        captionEn: "Success",
+                                        captionAr: "نجاح"
+                                    );
+                                    txt_invoice_no.Text = invoice_no;
+                                    txt_invoice_no.Tag = sale_id;
+                                }
+                            }
+                            else if (sale_type == "ICT")
+                            {
+                                if (destination_branch_id != 0)
+                                {
+                                    int ict_result = salesObj.ict_qty_request(sales_model_header, sales_model_detail);
+                                    if (ict_result > 0)
+                                    {
+                                        UiMessages.ShowInfo(
+                                            "Request for Inter Company Transfer (ICT) sent successfully",
+                                            "تم إرسال طلب التحويل بين الشركات بنجاح",
+                                            captionEn: "Success",
+                                            captionAr: "نجاح"
+                                        );
+                                        clear_form();
+                                        return;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                sale_id = salesObj.InsertSales(sales_model_header, sales_model_detail);
+                                if (sale_id > 0)
+                                {
+                                    if (UsersModal.useZatcaEInvoice == true)
+                                    {
                                         DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                                         if (activeZatcaCredential == null)
                                         {
-                                            MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
+                                            UiMessages.ShowError(
+                                                "No active ZATCA CSID/credentials found. Please configure them first.",
+                                                "لا توجد بيانات اعتماد Zاتكا نشطة. يرجى تكوينها أولاً."
+                                            );
                                         }
-                                        
+
                                         // Sign invoice to ZATCA
                                         // Retrieve PCSID credentials from the database using the credentialId
                                         DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
                                         if (PCSID_dataRow == null)
                                         {
-                                            //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
-
                                             // If PCSID not exist then sign with CSID
                                             //Sign Invoice with CSID instead of Production CSID
                                             ZatcaHelper.SignInvoiceToZatca(invoice_no);
@@ -2907,115 +2856,103 @@ namespace pos
                                                 }
                                             }
                                         }
+                                    }
+
+                                    UiMessages.ShowInfo(
+                                        "Invoice No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully",
+                                        "فاتورة رقم: " + invoice_no + " " + sale_type + " تمت " + (invoice_status == "Update" ? "تحديث" : "إنشاء") + " بنجاح",
+                                        captionEn: "Success",
+                                        captionAr: "نجاح"
+                                    );
                                 }
-                                //////
-                                ///
-                                MessageBox.Show("Invoice No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            }
-                        }
-
-                        if (sale_type != "Quotation" && sale_type != "Gift" && sale_type != "ICT")//for sales 
-                        {
-
-                            //Employee commission entry
-                            if (employee_commission_percent > 0)
-                            {
-                                var emp_commission_amount = employee_commission_percent * net_total / 100;
-                                Insert_emp_commission(invoice_no, 0, 0, emp_commission_amount, sale_date, txt_description.Text, employee_id);
-                            }
-                            /////
-
-                            //User commission entry
-                            if (user_commission_percent > 0)
-                            {
-                                var user_commission_amount = user_commission_percent * net_total / 100;
-                                Insert_user_commission(invoice_no, 0, 0, user_commission_amount, sale_date, txt_description.Text);
-                            }
-                            /////
-
-                        }
-
-                        if (sale_id > 0)
-                        {
-                            if (customer_id == 0 && customer_name.Length > 0)
-                            {
-                                //when new customer added then load again Dropdown list to fetch that record
-                                get_customers_dropdownlist();
-                            }
-                            // PRINT INVOICE
-                            string result1 = formPrintOption.PrintOptions;
-                            bool isPrintInvoiceCode = false;
-                            bool isPrintPOS80 = false;
-
-                            if (result1 == "0")
-                            {
-                                isPrintInvoiceCode = true;
-
-                                clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
-                            }
-                            else if (result1 == "1")
-                            {
-                                isPrintInvoiceCode = false;
-
-                                clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
-                            }
-                            else if (result1 == "2")
-                            {
-                                bool isEstimate = (sale_type == "Quotation" ? true : false);
-
-                                //Send invoice on WhatsApp
-                                frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no, isEstimate);
-                                send_Whatsapp.ShowDialog();
-                                clear_form();
-                                return;
                             }
 
-                            else if (result1 == "3")
+                            if (sale_type != "Quotation" && sale_type != "Gift" && sale_type != "ICT")
                             {
-                                clear_form();// CLEAR ALL FORM TEXTBOXES, GRID AND EVERYTING
-                                return; // return without printing only save
-                            }
-                            else if (result1 == "4")
-                            {
-                                isPrintPOS80 = true;
-                            }
-
-                            if (sale_type == "Cash" || sale_type == "Credit")//for sales 
-                            {
-                                using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(invoice_no), true, isPrintInvoiceCode, isPrintPOS80))
+                                if (employee_commission_percent > 0)
                                 {
-                                    obj.load_print(); // send print direct to printer without showing dialog
-                                    //obj.ShowDialog();
+                                    var emp_commission_amount = employee_commission_percent * net_total / 100;
+                                    Insert_emp_commission(invoice_no, 0, 0, emp_commission_amount, sale_date, txt_description.Text, employee_id);
+                                }
+
+                                if (user_commission_percent > 0)
+                                {
+                                    var user_commission_amount = user_commission_percent * net_total / 100;
+                                    Insert_user_commission(invoice_no, 0, 0, user_commission_amount, sale_date, txt_description.Text);
+                                }
+                            }
+
+                            if (sale_id > 0)
+                            {
+                                if (customer_id == 0 && customer_name.Length > 0)
+                                {
+                                    get_customers_dropdownlist();
+                                }
+
+                                string result1 = formPrintOption.PrintOptions;
+                                bool isPrintInvoiceCode = false;
+                                bool isPrintPOS80 = false;
+
+                                if (result1 == "0")
+                                {
+                                    isPrintInvoiceCode = true;
                                     clear_form();
                                 }
-                            }
-                            else//for estiamte
-                            {
-                                using (frm_sales_invoice obj = new frm_sales_invoice(load_estiamte_receipt(invoice_no), true, isPrintInvoiceCode, isPrintPOS80))
+                                else if (result1 == "1")
                                 {
-                                    //obj.ShowDialog();
-                                    obj.load_print(); // send print direct to printer without showing dialog
+                                    isPrintInvoiceCode = false;
                                     clear_form();
                                 }
-                            }
+                                else if (result1 == "2")
+                                {
+                                    bool isEstimate = (sale_type == "Quotation" ? true : false);
+                                    frm_send_whatsapp send_Whatsapp = new frm_send_whatsapp(invoice_no, isEstimate);
+                                    send_Whatsapp.ShowDialog();
+                                    clear_form();
+                                    return;
+                                }
+                                else if (result1 == "3")
+                                {
+                                    clear_form();
+                                    return;
+                                }
+                                else if (result1 == "4")
+                                {
+                                    isPrintPOS80 = true;
+                                }
 
+                                if (sale_type == "Cash" || sale_type == "Credit")
+                                {
+                                    using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(invoice_no), true, isPrintInvoiceCode, isPrintPOS80))
+                                    {
+                                        obj.load_print();
+                                        clear_form();
+                                    }
+                                }
+                                else
+                                {
+                                    using (frm_sales_invoice obj = new frm_sales_invoice(load_estiamte_receipt(invoice_no), true, isPrintInvoiceCode, isPrintPOS80))
+                                    {
+                                        obj.load_print();
+                                        clear_form();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                UiMessages.ShowError("Record not saved", "لم يتم حفظ السجل", "Error", "خطأ");
+                            }
                         }
                         else
                         {
-                            UiMessages.ShowError("Record not saved", "لم يتم حفظ السجل", "Error", "خطأ");
+                            UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات", "Sale Transaction", "معاملة البيع");
                         }
                     }
-                    else
-                    {
-                        UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات", "Sale Transaction", "معاملة البيع");
-                    }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
+                }
             }
         }
 
@@ -3048,7 +2985,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -3063,7 +3000,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -3076,7 +3013,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -3089,7 +3026,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -3102,7 +3039,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -3320,7 +3257,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
         }
 
@@ -3463,7 +3400,7 @@ namespace pos
                 if (string.IsNullOrWhiteSpace(streetName)) missing.Add("Street Name");
                 if (string.IsNullOrWhiteSpace(buildingNumber)) missing.Add("Building Number");
                 if (string.IsNullOrWhiteSpace(postalCode)) missing.Add("Postal Code");
-
+            
                 if (missing.Count > 0)
                 {
                     var caption = lang == "ar-SA" ? "فاتورة زاتكا القياسية" : "ZATCA Standard Invoice";

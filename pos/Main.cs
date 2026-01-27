@@ -2,6 +2,7 @@
 using pos.Sales;
 using pos.Security.Admin;
 using pos.Security.Authorization;
+using pos.UI;
 using POS.Core;
 using POS.DLL;
 using System;
@@ -36,20 +37,7 @@ namespace pos
 
         private void frm_main_Load(object sender, EventArgs e)
         {
-            this.Text = "Nozum Autoline ERP - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
-
-            //if (UsersModal.logged_in_user_level == 1)//1 is Admin
-            //{
-            //    Enable_all_menus();
-            //}
-            //else
-            //{
-            //    Enable_all_menus(false);
-            //    load_modules();
-            //    exitToolStripMenuItem.Enabled = true;
-            //    logoutToolStripMenuItem.Enabled = true;
-            //    usersToolStripMenuItem.Enabled = false;
-            //}
+            this.Text = "Nozum ERP - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
             // Re-apply DB-backed permissions to ensure module-based enabling can't elevate privileges
             AppSecurityContext.RefreshUserClaims();
@@ -57,7 +45,7 @@ namespace pos
 
             mark_checked_lang_menu(); // language menu mark checked
 
-            toolStripStatusLabel_username.Text = UsersModal.logged_in_username+"-"+UsersModal.logged_in_user_role;
+            toolStripStatusLabel_username.Text = UsersModal.logged_in_username + "-" + UsersModal.logged_in_user_role;
             toolStripStatusLabel_branch_name.Text = UsersModal.logged_in_branch_name.ToString();
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
             toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();
@@ -650,16 +638,21 @@ namespace pos
 
         private void frm_main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to exit?",
-                       "Close Application",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
+            var result = UiMessages.ConfirmYesNo(
+                "Are you sure you want to exit the application?",
+                "هل أنت متأكد أنك تريد إغلاق التطبيق؟",
+                captionEn: "Exit",
+                captionAr: "خروج",
+                defaultButton: MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.No)
             {
                 e.Cancel = true;
-
             }
-            else Application.ExitThread();
-
+            else
+            {
+                Application.ExitThread();
+            }
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
@@ -1497,7 +1490,11 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowWarning(
+                    ex.Message,
+                    ex.Message,
+                    captionEn: "Warning",
+                    captionAr: "تنبيه");
             }
         }
 

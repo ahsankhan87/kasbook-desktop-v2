@@ -118,205 +118,436 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnSendWhatsApp.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1054, 587</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnSendWhatsApp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnSendWhatsApp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>462, 7</value>
-  </data>
-  <data name="btnSendWhatsApp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 44</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnSendWhatsApp.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="btnSendWhatsApp.Text" xml:space="preserve">
-    <value>Send on &amp;WhatsApp</value>
-  </data>
-  <data name="&gt;&gt;btnSendWhatsApp.Name" xml:space="preserve">
-    <value>btnSendWhatsApp</value>
-  </data>
-  <data name="&gt;&gt;btnSendWhatsApp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSendWhatsApp.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;btnSendWhatsApp.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="BtnCustomerNameChange.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
-  </data>
-  <data name="BtnCustomerNameChange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="BtnCustomerNameChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 7</value>
-  </data>
-  <data name="BtnCustomerNameChange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 44</value>
-  </data>
-  <data name="BtnCustomerNameChange.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="BtnCustomerNameChange.Text" xml:space="preserve">
-    <value>Change Customer</value>
-  </data>
-  <data name="&gt;&gt;BtnCustomerNameChange.Name" xml:space="preserve">
-    <value>BtnCustomerNameChange</value>
-  </data>
-  <data name="&gt;&gt;BtnCustomerNameChange.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BtnCustomerNameChange.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;BtnCustomerNameChange.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>626, 18</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 17</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Enter Invoice No.</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txt_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 15</value>
-  </data>
-  <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 24</value>
-  </data>
-  <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
-    <value>txt_search</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>984, 14</value>
-  </data>
-  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 28</value>
-  </data>
-  <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
-    <value>btn_search</value>
+  <data name="&gt;&gt;id.Name" xml:space="preserve">
+    <value>id</value>
   </data>
   <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txt_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="sale_type.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 44</value>
+  </data>
+  <data name="zatca_status.HeaderText" xml:space="preserve">
+    <value>Zacta Status</value>
+  </data>
+  <data name="btnSendWhatsApp.Text" xml:space="preserve">
+    <value>Send on &amp;WhatsApp</value>
+  </data>
+  <data name="btn_print_invoice.Text" xml:space="preserve">
+    <value>Print Invoice</value>
+  </data>
+  <data name="btn_delete.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="&gt;&gt;lbl_taxes_title.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Enter Invoice No.</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btn_print_invoice.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="Btn_PrintPOS80.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
-  </data>
-  <data name="Btn_PrintPOS80.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Btn_PrintPOS80.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 7</value>
-  </data>
-  <data name="Btn_PrintPOS80.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="Btn_PrintPOS80.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 44</value>
-  </data>
-  <data name="Btn_PrintPOS80.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="Btn_PrintPOS80.Text" xml:space="preserve">
     <value>Print POS80 Invoice</value>
   </data>
-  <data name="&gt;&gt;Btn_PrintPOS80.Name" xml:space="preserve">
-    <value>Btn_PrintPOS80</value>
+  <data name="total.HeaderText" xml:space="preserve">
+    <value>Total Amount</value>
   </data>
-  <data name="&gt;&gt;Btn_PrintPOS80.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="total_tax.HeaderText" xml:space="preserve">
+    <value>Total VAT</value>
+  </data>
+  <data name="&gt;&gt;grid_all_sales.Name" xml:space="preserve">
+    <value>grid_all_sales</value>
+  </data>
+  <data name="BtnCustomerNameChange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 7</value>
+  </data>
+  <data name="&gt;&gt;btnSendWhatsApp.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Btn_PrintPOS80.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="btn_show_qrcode.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
+    <value>btn_delete</value>
+  </data>
+  <data name="btn_refresh.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="id.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;zatca_status.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_download_ubl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Zetca_qrcode.HeaderText" xml:space="preserve">
+    <value>Zetca Qrcode</value>
+  </data>
+  <data name="total.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="zatca_status.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnSendWhatsApp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 44</value>
   </data>
   <data name="&gt;&gt;Btn_PrintPOS80.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;Btn_PrintPOS80.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="btn_print_invoice.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="BtnCustomerNameChange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_report_to_zatca.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dataGridViewImageColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="grid_all_sales.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BtnCustomerNameChange.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;BtnCustomerNameChange.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="Btn_PrintPOS80.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 44</value>
+  </data>
+  <data name="btn_print_invoice.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btn_show_qrcode.Name" xml:space="preserve">
+    <value>btn_show_qrcode</value>
+  </data>
+  <data name="sale_type.HeaderText" xml:space="preserve">
+    <value>Sale Type</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Btn_PrintPOS80.Name" xml:space="preserve">
+    <value>Btn_PrintPOS80</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 63</value>
+  </data>
+  <data name="btnSendWhatsApp.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="btn_send_zatca.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_all_sales</value>
+  </data>
+  <data name="dataGridViewImageColumn2.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="&gt;&gt;btn_show_qrcode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sale_time.HeaderText" xml:space="preserve">
+    <value>Sale Time</value>
   </data>
   <data name="btn_print_invoice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 7</value>
+  <data name="btn_show_qrcode.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Btn_PrintPOS80.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="total_tax.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;sale_type.Name" xml:space="preserve">
+    <value>sale_type</value>
+  </data>
+  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grid_all_sales.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lbl_taxes_title.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
+    <value>txt_search</value>
+  </data>
+  <data name="btnSendWhatsApp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>462, 7</value>
+  </data>
+  <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grid_all_sales.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="btn_search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="grid_all_sales.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btn_report_to_zatca.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_download_ubl.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_zatca_compliance_check.HeaderText" xml:space="preserve">
+    <value>ZATCA Compliance Check</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>626, 18</value>
+  </data>
+  <data name="&gt;&gt;btnSendWhatsApp.Name" xml:space="preserve">
+    <value>btnSendWhatsApp</value>
+  </data>
+  <data name="dataGridViewImageColumn2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btn_print_invoice.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 24</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 17</value>
+  </data>
+  <data name="dataGridViewImageColumn1.HeaderText" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Btn_PrintPOS80.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="btn_download_ubl.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="sale_time.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btn_zatca_compliance_check.Name" xml:space="preserve">
+    <value>btn_zatca_compliance_check</value>
+  </data>
+  <data name="&gt;&gt;account.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btn_report_to_zatca.HeaderText" xml:space="preserve">
+    <value>Report to Zatca</value>
+  </data>
+  <data name="&gt;&gt;BtnCustomerNameChange.Name" xml:space="preserve">
+    <value>BtnCustomerNameChange</value>
+  </data>
+  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 28</value>
+  </data>
+  <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
+    <value>btn_search</value>
+  </data>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>All Sales </value>
+  </data>
+  <data name="btn_send_zatca.HeaderText" xml:space="preserve">
+    <value>ZATCA Sign</value>
+  </data>
+  <data name="&gt;&gt;lbl_taxes_title.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="customer.HeaderText" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="&gt;&gt;sale_date.Name" xml:space="preserve">
+    <value>sale_date</value>
+  </data>
+  <data name="&gt;&gt;sale_date.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSendWhatsApp.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;grid_all_sales.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="discount_value.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>741, 15</value>
+  </data>
+  <data name="btn_refresh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn2.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn2</value>
+  </data>
+  <data name="zatca_status.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btn_print_invoice.Name" xml:space="preserve">
+    <value>btn_print_invoice</value>
+  </data>
+  <data name="&gt;&gt;id.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="invoice_subtype_code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="id.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="&gt;&gt;btnSendWhatsApp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;detail.Name" xml:space="preserve">
+    <value>detail</value>
+  </data>
+  <data name="invoice_no.HeaderText" xml:space="preserve">
+    <value>Invoice No.</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="sale_time.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lbl_taxes_title.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="dataGridViewImageColumn1.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="&gt;&gt;invoice_subtype_code.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Btn_PrintPOS80.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btn_report_to_zatca.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="BtnCustomerNameChange.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lbl_taxes_title.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sale_date.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;discount_value.Name" xml:space="preserve">
+    <value>discount_value</value>
+  </data>
+  <data name="btn_zatca_compliance_check.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewImageColumn2.HeaderText" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="btn_print_invoice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -324,443 +555,122 @@
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 44</value>
   </data>
-  <data name="btn_print_invoice.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="btn_print_invoice.Text" xml:space="preserve">
-    <value>Print Invoice</value>
-  </data>
-  <data name="&gt;&gt;btn_print_invoice.Name" xml:space="preserve">
-    <value>btn_print_invoice</value>
-  </data>
-  <data name="&gt;&gt;btn_print_invoice.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_print_invoice.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;btn_print_invoice.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
-  </data>
-  <data name="btn_refresh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 7</value>
-  </data>
-  <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 44</value>
-  </data>
-  <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="btn_refresh.Text" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.Name" xml:space="preserve">
-    <value>btn_refresh</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="grid_all_sales.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="id.HeaderText" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="id.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
-  </data>
-  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 28</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>Invoice No.</value>
-  </data>
-  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="invoice_subtype_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="invoice_subtype_code.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="invoice_subtype_code.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="customer.HeaderText" xml:space="preserve">
-    <value>Customer</value>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="customer.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="sale_date.HeaderText" xml:space="preserve">
-    <value>Sale Date</value>
-  </data>
-  <data name="sale_date.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="sale_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="sale_type.HeaderText" xml:space="preserve">
-    <value>Sale Type</value>
-  </data>
-  <data name="sale_type.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="account.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="account.HeaderText" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="account.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="discount_value.HeaderText" xml:space="preserve">
-    <value>Discount</value>
-  </data>
-  <data name="discount_value.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="total_tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="total_tax.HeaderText" xml:space="preserve">
-    <value>Total VAT</value>
-  </data>
-  <data name="total_tax.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="total.HeaderText" xml:space="preserve">
-    <value>Total Amount</value>
-  </data>
-  <data name="total.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="zatca_status.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="zatca_status.HeaderText" xml:space="preserve">
-    <value>Zacta Status</value>
-  </data>
-  <data name="zatca_status.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="zatca_status.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="detail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="detail.HeaderText" xml:space="preserve">
-    <value>Detail</value>
-  </data>
-  <data name="detail.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="detail.Width" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="btn_delete.HeaderText" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="btn_delete.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btn_delete.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="btn_delete.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="sale_time.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="sale_time.HeaderText" xml:space="preserve">
-    <value>Sale Time</value>
-  </data>
-  <data name="sale_time.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="sale_time.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="Zetca_qrcode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Zetca_qrcode.HeaderText" xml:space="preserve">
-    <value>Zetca Qrcode</value>
-  </data>
   <data name="Zetca_qrcode.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="Zetca_qrcode.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="btn_send_zatca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="btn_send_zatca.HeaderText" xml:space="preserve">
-    <value>ZATCA Sign</value>
-  </data>
-  <data name="btn_send_zatca.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btn_send_zatca.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="btn_zatca_compliance_check.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="btn_zatca_compliance_check.HeaderText" xml:space="preserve">
-    <value>ZATCA Compliance Check</value>
-  </data>
-  <data name="btn_zatca_compliance_check.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btn_zatca_compliance_check.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="btn_download_ubl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="btn_download_ubl.HeaderText" xml:space="preserve">
-    <value>UBL</value>
-  </data>
-  <data name="btn_download_ubl.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btn_download_ubl.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="btn_report_to_zatca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="btn_report_to_zatca.HeaderText" xml:space="preserve">
-    <value>Report to Zatca</value>
-  </data>
-  <data name="btn_report_to_zatca.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btn_report_to_zatca.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="btn_show_qrcode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="btn_show_qrcode.HeaderText" xml:space="preserve">
-    <value>Show QR</value>
-  </data>
-  <data name="btn_show_qrcode.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btn_show_qrcode.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="grid_all_sales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 57</value>
-  </data>
-  <data name="grid_all_sales.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="grid_all_sales.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="grid_all_sales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1048, 464</value>
-  </data>
-  <data name="grid_all_sales.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grid_all_sales.Name" xml:space="preserve">
-    <value>grid_all_sales</value>
-  </data>
-  <data name="&gt;&gt;grid_all_sales.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grid_all_sales.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;grid_all_sales.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 63</value>
-  </data>
-  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1054, 524</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lbl_taxes_title.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbl_taxes_title.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
-  </data>
-  <data name="lbl_taxes_title.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 23</value>
-  </data>
-  <data name="lbl_taxes_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 25</value>
-  </data>
-  <data name="lbl_taxes_title.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lbl_taxes_title.Text" xml:space="preserve">
-    <value>All Sales Transactions</value>
-  </data>
-  <data name="&gt;&gt;lbl_taxes_title.Name" xml:space="preserve">
-    <value>lbl_taxes_title</value>
-  </data>
-  <data name="&gt;&gt;lbl_taxes_title.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_taxes_title.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;lbl_taxes_title.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1054, 63</value>
-  </data>
-  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
-    <value>panel2</value>
   </data>
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="btn_zatca_compliance_check.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="dataGridViewImageColumn1.HeaderText" xml:space="preserve">
+  <data name="&gt;&gt;invoice_subtype_code.Name" xml:space="preserve">
+    <value>invoice_subtype_code</value>
+  </data>
+  <data name="&gt;&gt;total.Name" xml:space="preserve">
+    <value>total</value>
+  </data>
+  <data name="&gt;&gt;sale_type.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1054, 524</value>
+  </data>
+  <data name="&gt;&gt;btn_refresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BtnCustomerNameChange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 44</value>
+  </data>
+  <data name="&gt;&gt;sale_time.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grid_all_sales.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btn_show_qrcode.HeaderText" xml:space="preserve">
+    <value>Show QR</value>
+  </data>
+  <data name="detail.Width" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;detail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn1</value>
+  </data>
+  <data name="grid_all_sales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1048, 464</value>
+  </data>
+  <data name="&gt;&gt;btn_refresh.Name" xml:space="preserve">
+    <value>btn_refresh</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Btn_PrintPOS80.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="grid_all_sales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 57</value>
+  </data>
+  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyToolStripMenuItem</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnSendWhatsApp.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 7</value>
+  </data>
+  <data name="detail.HeaderText" xml:space="preserve">
     <value>Detail</value>
   </data>
-  <data name="dataGridViewImageColumn1.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="btn_delete.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="dataGridViewImageColumn1.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="dataGridViewImageColumn2.HeaderText" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="dataGridViewImageColumn2.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="btn_send_zatca.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="dataGridViewImageColumn2.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="dataGridViewImageColumn2.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 16</value>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
   </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1054, 587</value>
+  <data name="account.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -786,157 +696,247 @@
         AAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="&gt;&gt;btn_report_to_zatca.Name" xml:space="preserve">
+    <value>btn_report_to_zatca</value>
+  </data>
+  <data name="Btn_PrintPOS80.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>All Sales </value>
+  <data name="&gt;&gt;btn_refresh.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
-  <data name="&gt;&gt;id.Name" xml:space="preserve">
-    <value>id</value>
-  </data>
-  <data name="&gt;&gt;id.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;invoice_no.Name" xml:space="preserve">
-    <value>invoice_no</value>
-  </data>
-  <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;invoice_subtype_code.Name" xml:space="preserve">
-    <value>invoice_subtype_code</value>
-  </data>
-  <data name="&gt;&gt;invoice_subtype_code.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customer.Name" xml:space="preserve">
-    <value>customer</value>
-  </data>
-  <data name="&gt;&gt;customer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sale_date.Name" xml:space="preserve">
-    <value>sale_date</value>
-  </data>
-  <data name="&gt;&gt;sale_date.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sale_type.Name" xml:space="preserve">
-    <value>sale_type</value>
-  </data>
-  <data name="&gt;&gt;sale_type.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;account.Name" xml:space="preserve">
-    <value>account</value>
-  </data>
-  <data name="&gt;&gt;account.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;discount_value.Name" xml:space="preserve">
-    <value>discount_value</value>
-  </data>
-  <data name="&gt;&gt;discount_value.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;total_tax.Name" xml:space="preserve">
-    <value>total_tax</value>
+  <data name="&gt;&gt;btn_print_invoice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;total_tax.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;total.Name" xml:space="preserve">
-    <value>total</value>
+  <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;total.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BtnCustomerNameChange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;zatca_status.Name" xml:space="preserve">
-    <value>zatca_status</value>
+  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;zatca_status.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;detail.Name" xml:space="preserve">
-    <value>detail</value>
-  </data>
-  <data name="&gt;&gt;detail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
-    <value>btn_delete</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sale_time.Name" xml:space="preserve">
-    <value>sale_time</value>
-  </data>
-  <data name="&gt;&gt;sale_time.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Zetca_qrcode.Name" xml:space="preserve">
-    <value>Zetca_qrcode</value>
-  </data>
-  <data name="&gt;&gt;Zetca_qrcode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_send_zatca.Name" xml:space="preserve">
-    <value>btn_send_zatca</value>
-  </data>
-  <data name="&gt;&gt;btn_send_zatca.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_zatca_compliance_check.Name" xml:space="preserve">
-    <value>btn_zatca_compliance_check</value>
-  </data>
-  <data name="&gt;&gt;btn_zatca_compliance_check.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;invoice_no.Name" xml:space="preserve">
+    <value>invoice_no</value>
   </data>
   <data name="&gt;&gt;btn_download_ubl.Name" xml:space="preserve">
     <value>btn_download_ubl</value>
   </data>
-  <data name="&gt;&gt;btn_download_ubl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Zetca_qrcode.Name" xml:space="preserve">
+    <value>Zetca_qrcode</value>
   </data>
-  <data name="&gt;&gt;btn_report_to_zatca.Name" xml:space="preserve">
-    <value>btn_report_to_zatca</value>
+  <data name="discount_value.HeaderText" xml:space="preserve">
+    <value>Discount</value>
   </data>
-  <data name="&gt;&gt;btn_report_to_zatca.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btn_print_invoice.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;btn_show_qrcode.Name" xml:space="preserve">
-    <value>btn_show_qrcode</value>
+  <data name="btn_delete.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;btn_show_qrcode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbl_taxes_title.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
   </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lbl_taxes_title.Name" xml:space="preserve">
+    <value>lbl_taxes_title</value>
+  </data>
+  <data name="BtnCustomerNameChange.Text" xml:space="preserve">
+    <value>Change Customer</value>
+  </data>
+  <data name="lbl_taxes_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewImageColumn2.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn2</value>
+  <data name="&gt;&gt;btn_send_zatca.Name" xml:space="preserve">
+    <value>btn_send_zatca</value>
   </data>
-  <data name="&gt;&gt;dataGridViewImageColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;discount_value.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>frm_all_sales</value>
+  <data name="&gt;&gt;btn_send_zatca.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grid_all_sales.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;Zetca_qrcode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>984, 14</value>
+  </data>
+  <data name="Zetca_qrcode.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;customer.Name" xml:space="preserve">
+    <value>customer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>pos.Security.Authorization.SecuredForm, pos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;sale_time.Name" xml:space="preserve">
+    <value>sale_time</value>
+  </data>
+  <data name="btnSendWhatsApp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;total_tax.Name" xml:space="preserve">
+    <value>total_tax</value>
+  </data>
+  <data name="btn_download_ubl.HeaderText" xml:space="preserve">
+    <value>UBL</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1054, 63</value>
+  </data>
+  <data name="lbl_taxes_title.Text" xml:space="preserve">
+    <value>All Sales Transactions</value>
+  </data>
+  <data name="&gt;&gt;btn_refresh.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="account.HeaderText" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="invoice_subtype_code.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;total.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dataGridViewImageColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lbl_taxes_title.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 23</value>
+  </data>
+  <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;account.Name" xml:space="preserve">
+    <value>account</value>
+  </data>
+  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 25</value>
+  </data>
+  <data name="sale_date.HeaderText" xml:space="preserve">
+    <value>Sale Date</value>
+  </data>
+  <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 7</value>
+  </data>
+  <data name="Btn_PrintPOS80.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 7</value>
+  </data>
+  <data name="btn_delete.HeaderText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;BtnCustomerNameChange.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;zatca_status.Name" xml:space="preserve">
+    <value>zatca_status</value>
+  </data>
+  <data name="&gt;&gt;btn_zatca_compliance_check.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="detail.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="account.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btn_show_qrcode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="invoice_subtype_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="total_tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="detail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="sale_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btn_download_ubl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btn_zatca_compliance_check.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="zatca_status.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btn_send_zatca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Zetca_qrcode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="sale_time.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btn_report_to_zatca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

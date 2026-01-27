@@ -1323,7 +1323,7 @@ namespace POS.DLL
                             " SI.quantity_sold,SI.unit_price,SI.cost_price,SI.tax_rate,SI.tax_id,SI.discount_value,SI.loc_code," +
                             " (SI.unit_price*SI.quantity_sold-SI.discount_value)+((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS total," +
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
-                            " SI.item_name AS product_name," +
+                            " SI.item_name AS product_name,(SI.quantity_sold - ISNULL(r.TotalReturnedQty,0)) AS ReturnQty," +
                             " ISNULL(r.TotalReturnedQty,0) AS ReturnedQty,(SI.quantity_sold - ISNULL(r.TotalReturnedQty,0)) AS ReturnableQty" +
                             //" C.first_name AS customer_name" +
                             " FROM pos_sales_items SI" +
@@ -1345,10 +1345,10 @@ namespace POS.DLL
                     da.Fill(dt);
 
                     // Add input column for new return qty (not persisted yet)
-                    if (!dt.Columns.Contains("ReturnQty"))
-                        dt.Columns.Add("ReturnQty", typeof(decimal));
-                    foreach (DataRow r in dt.Rows)
-                        r["ReturnQty"] = 0m;
+                    //if (!dt.Columns.Contains("ReturnQty"))
+                    //    dt.Columns.Add("ReturnQty", typeof(decimal));
+                    //foreach (DataRow r in dt.Rows)
+                    //    r["ReturnQty"] = 0m;
 
                     return dt;
                 }

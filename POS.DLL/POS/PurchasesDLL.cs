@@ -1041,7 +1041,7 @@ namespace POS.DLL
                             " SI.id,SI.item_code,SI.item_number,SI.quantity,SI.unit_price,SI.cost_price,SI.tax_rate,SI.tax_id,SI.discount_value," +
                             " (((SI.cost_price*SI.quantity-ABS(SI.discount_value))*SI.tax_rate/100) + (SI.cost_price*SI.quantity-ABS(SI.discount_value))) AS total," +
                             " ((SI.cost_price*SI.quantity-discount_value)*SI.tax_rate/100) AS vat," +
-                            " P.name AS product_name," +
+                            " P.name AS product_name,(SI.quantity - ISNULL(r.TotalReturnedQty,0)) AS ReturnQty," +
                             " ISNULL(r.TotalReturnedQty,0) AS ReturnedQty,(SI.quantity - ISNULL(r.TotalReturnedQty,0)) AS ReturnableQty" +
                             //" C.first_name AS customer_name" +
                             " FROM pos_purchases_items SI" +

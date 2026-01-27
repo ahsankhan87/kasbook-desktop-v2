@@ -117,126 +117,272 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txt_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 83</value>
+  </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 86</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
+    <value>88, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>الاسم الكامل:</value>
   </data>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>721, 18</value>
+  </data>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 24</value>
+  </data>
+  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>640, 18</value>
+  </data>
+  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 24</value>
+  </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>يبحث</value>
   </data>
+  <data name="label21.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
+  </data>
+  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>990, 20</value>
+  </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>42, 20</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>يبحث</value>
   </data>
+  <data name="txt_id.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 54</value>
+  </data>
+  <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 56</value>
+  </data>
+  <data name="txt_username.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_username.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 52</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>335, 55</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+    <value>109, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>اسم االمستخدم:</value>
   </data>
-  <data name="lbl_pwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="lbl_pwd.Text" xml:space="preserve">
-    <value>كلمة المرور:</value>
-  </data>
-  <data name="lbl_cpwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
-  <data name="lbl_cpwd.Text" xml:space="preserve">
-    <value>تأكيد كلمة المرور:</value>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 116</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>74, 17</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>فرع شجرة:</value>
   </data>
+  <data name="cmb_branches.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_branches.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 114</value>
+  </data>
+  <data name="cmb_lang.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_lang.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 145</value>
+  </data>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 147</value>
+  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
+    <value>75, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>لغة التطبيق</value>
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>عمولة المبيعات٪</value>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>927, 451</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>دور المستخدم</value>
+  <data name="user_detail_tab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>919, 422</value>
   </data>
   <data name="user_detail_tab.Text" xml:space="preserve">
     <value>تفاصيل المستخدم</value>
   </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 206</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>عمولة المبيعات٪</value>
+  </data>
+  <data name="txt_commission_percent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_commission_percent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 205</value>
+  </data>
+  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 177</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>دور المستخدم</value>
+  </data>
+  <data name="cmb_user_role.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmb_user_role.Location" type="System.Drawing.Point, System.Drawing">
+    <value>477, 176</value>
+  </data>
+  <data name="txt_password.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_password.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 83</value>
+  </data>
+  <data name="txt_confirm_pwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_confirm_pwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 113</value>
+  </data>
+  <data name="lbl_pwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lbl_pwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>335, 86</value>
+  </data>
+  <data name="lbl_pwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="lbl_pwd.Text" xml:space="preserve">
+    <value>كلمة المرور:</value>
+  </data>
+  <data name="lbl_cpwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lbl_cpwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>335, 117</value>
+  </data>
+  <data name="lbl_cpwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="lbl_cpwd.Text" xml:space="preserve">
+    <value>تأكيد كلمة المرور:</value>
+  </data>
   <data name="module_permission_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>801, 340</value>
+    <value>919, 422</value>
   </data>
   <data name="module_permission_tab.Text" xml:space="preserve">
     <value>إذن الوحدة النمطية</value>
   </data>
+  <data name="user_rights_tab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>919, 422</value>
+  </data>
+  <data name="user_rights_tab.Text" xml:space="preserve">
+    <value>حقوق</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>المشتريات</value>
+  </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+    <value>130, 17</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>السماح ببيع الائتمان:</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 13</value>
+    <value>138, 17</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
     <value>حد مبلغ شراء الائتمان:</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+    <value>99, 17</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>حد مبلغ الشراء:</value>
   </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>المشتريات</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>مبيعات</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+    <value>130, 17</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>السماح ببيع الائتمان:</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>111, 17</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>تأكيد كلمة المرور:</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
+    <value>74, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>كلمه السر:</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>مبيعات</value>
+  <data name="user_commission.Size" type="System.Drawing.Size, System.Drawing">
+    <value>919, 422</value>
   </data>
-  <data name="user_rights_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>801, 340</value>
-  </data>
-  <data name="user_rights_tab.Text" xml:space="preserve">
-    <value>حقوق</value>
+  <data name="user_commission.Text" xml:space="preserve">
+    <value>عمولة</value>
   </data>
   <data name="btn_payment.Text" xml:space="preserve">
     <value>دفع</value>
   </data>
   <data name="btn_refresh.Text" xml:space="preserve">
     <value>ينعش</value>
+  </data>
+  <data name="grid_commission.Size" type="System.Drawing.Size, System.Drawing">
+    <value>917, 370</value>
   </data>
   <data name="entry_date.HeaderText" xml:space="preserve">
     <value>تاريخ</value>
@@ -256,26 +402,53 @@
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
   </data>
-  <data name="user_commission.Size" type="System.Drawing.Size, System.Drawing">
-    <value>801, 340</value>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>927, 451</value>
   </data>
-  <data name="user_commission.Text" xml:space="preserve">
-    <value>عمولة</value>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>927, 60</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 451</value>
+  </data>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 330</value>
+  </data>
+  <data name="btn_pwd_change.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 42</value>
   </data>
   <data name="btn_pwd_change.Text" xml:space="preserve">
     <value>تغيير كلمة السر</value>
   </data>
+  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
+  </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
+  <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
+  </data>
   <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
+    <value>حفظ (F3)</value>
+  </data>
+  <data name="btn_main_refresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
+  </data>
+  <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
   </data>
   <data name="btn_delete.Text" xml:space="preserve">
     <value>حذف</value>
   </data>
+  <data name="btn_update.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
+  </data>
   <data name="btn_update.Text" xml:space="preserve">
     <value>تحديث (F4)</value>
+  </data>
+  <data name="btn_blank.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
   </data>
   <data name="btn_blank.Text" xml:space="preserve">
     <value>صافي</value>
@@ -304,11 +477,9 @@
         AAAAAAAAAAAAAA==
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>

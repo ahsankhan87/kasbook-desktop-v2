@@ -100,6 +100,7 @@
             this.grid_taxes.AllowUserToAddRows = false;
             this.grid_taxes.AllowUserToDeleteRows = false;
             this.grid_taxes.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_taxes, "grid_taxes");
             this.grid_taxes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_taxes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_taxes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -107,7 +108,6 @@
             this.title,
             this.rate,
             this.date_created});
-            resources.ApplyResources(this.grid_taxes, "grid_taxes");
             this.grid_taxes.Name = "grid_taxes";
             this.grid_taxes.ReadOnly = true;
             this.grid_taxes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

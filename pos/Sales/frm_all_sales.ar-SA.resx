@@ -127,11 +127,26 @@
   <data name="btnSendWhatsApp.Text" xml:space="preserve">
     <value>أرسل &amp;WhatsApp</value>
   </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>940, 22</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 17</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>أدخل رقم الفاتورة.</value>
+  </data>
   <data name="BtnCustomerNameChange.Location" type="System.Drawing.Point, System.Drawing">
     <value>342, 8</value>
   </data>
   <data name="BtnCustomerNameChange.Text" xml:space="preserve">
     <value>تغيير العميل</value>
+  </data>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>697, 19</value>
+  </data>
+  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>624, 16</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث</value>
@@ -199,6 +214,9 @@
   </data>
   <data name="btn_delete.HeaderText" xml:space="preserve">
     <value>حذف</value>
+  </data>
+  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>887, 21</value>
   </data>
   <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 25</value>

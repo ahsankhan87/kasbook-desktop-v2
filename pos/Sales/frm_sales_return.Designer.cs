@@ -61,6 +61,8 @@
             this.invoice_subtype_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_close = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
+            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
             this.cmbReturnReason = new System.Windows.Forms.ComboBox();
             this.btn_return = new System.Windows.Forms.Button();
             this.btn_search = new System.Windows.Forms.Button();
@@ -74,14 +76,13 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.grid_sales_return);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // grid_sales_return
             // 
-            resources.ApplyResources(this.grid_sales_return, "grid_sales_return");
             this.grid_sales_return.AllowUserToAddRows = false;
             this.grid_sales_return.AllowUserToDeleteRows = false;
             this.grid_sales_return.AllowUserToOrderColumns = true;
@@ -110,6 +111,7 @@
             this.packet_qty,
             this.item_number,
             this.invoice_subtype_code});
+            resources.ApplyResources(this.grid_sales_return, "grid_sales_return");
             this.grid_sales_return.Name = "grid_sales_return";
             this.grid_sales_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_sales_return.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.grid_sales_return_CellValidating);
@@ -185,7 +187,7 @@
             // 
             // ReturnQty
             // 
-            this.ReturnQty.DataPropertyName = "ReturnableQty";
+            this.ReturnQty.DataPropertyName = "ReturnQty";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle2.Format = "N2";
@@ -304,8 +306,9 @@
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            this.panel2.Controls.Add(this.chk_sendInvoiceToZatca);
             this.panel2.Controls.Add(this.cmbReturnReason);
             this.panel2.Controls.Add(this.txt_close);
             this.panel2.Controls.Add(this.btn_return);
@@ -313,12 +316,28 @@
             this.panel2.Controls.Add(this.txt_invoice_no);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
+            // 
+            // chk_sendInvoiceToZatca
+            // 
+            this.chk_sendInvoiceToZatca.Checked = true;
+            this.chk_sendInvoiceToZatca.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_sendInvoiceToZatca.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
+            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
+            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
             // 
             // cmbReturnReason
             // 
-            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
             this.cmbReturnReason.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
             this.cmbReturnReason.Name = "cmbReturnReason";
             // 
             // btn_return
@@ -406,6 +425,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_subtype_code;
+        private System.Windows.Forms.CheckBox chk_sendInvoiceToZatca;
+        private System.Windows.Forms.Label lbl_taxes_title;
     }
 }
 

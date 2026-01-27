@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_search_estimates));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_ok = new System.Windows.Forms.Button();
@@ -51,10 +51,10 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -65,22 +65,23 @@
             // 
             // btn_ok
             // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // grid_search_estimates
             // 
+            resources.ApplyResources(this.grid_search_estimates, "grid_search_estimates");
             this.grid_search_estimates.AllowUserToAddRows = false;
             this.grid_search_estimates.AllowUserToDeleteRows = false;
             this.grid_search_estimates.AllowUserToOrderColumns = true;
@@ -95,7 +96,6 @@
             this.discount_value,
             this.total_tax,
             this.total_amount});
-            resources.ApplyResources(this.grid_search_estimates, "grid_search_estimates");
             this.grid_search_estimates.Name = "grid_search_estimates";
             this.grid_search_estimates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_search_estimates.DoubleClick += new System.EventHandler(this.grid_search_estimates_DoubleClick);
@@ -139,10 +139,10 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -150,10 +150,10 @@
             // total_tax
             // 
             this.total_tax.DataPropertyName = "total_tax";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.total_tax.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.total_tax.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.total_tax, "total_tax");
             this.total_tax.Name = "total_tax";
             this.total_tax.ReadOnly = true;
@@ -161,10 +161,10 @@
             // total_amount
             // 
             this.total_amount.DataPropertyName = "total_amount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.total_amount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.total_amount.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.total_amount, "total_amount");
             this.total_amount.Name = "total_amount";
             this.total_amount.ReadOnly = true;

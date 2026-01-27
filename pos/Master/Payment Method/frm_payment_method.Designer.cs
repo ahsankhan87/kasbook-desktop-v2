@@ -36,13 +36,13 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.grid_payment_method = new System.Windows.Forms.DataGridView();
+            this.btn_new = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date_created = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_new = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_payment_method)).BeginInit();
             this.panel2.SuspendLayout();
@@ -50,6 +50,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
@@ -58,7 +59,6 @@
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.grid_payment_method);
             this.panel1.Controls.Add(this.btn_new);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -97,10 +97,10 @@
             // 
             // grid_payment_method
             // 
+            resources.ApplyResources(this.grid_payment_method, "grid_payment_method");
             this.grid_payment_method.AllowUserToAddRows = false;
             this.grid_payment_method.AllowUserToDeleteRows = false;
             this.grid_payment_method.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_payment_method, "grid_payment_method");
             this.grid_payment_method.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_payment_method.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_payment_method.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -111,6 +111,27 @@
             this.grid_payment_method.Name = "grid_payment_method";
             this.grid_payment_method.ReadOnly = true;
             this.grid_payment_method.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // btn_new
+            // 
+            resources.ApplyResources(this.btn_new, "btn_new");
+            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_new.Name = "btn_new";
+            this.btn_new.UseVisualStyleBackColor = true;
+            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
+            // 
+            // panel2
+            // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
             // id
             // 
@@ -139,27 +160,6 @@
             resources.ApplyResources(this.date_created, "date_created");
             this.date_created.Name = "date_created";
             this.date_created.ReadOnly = true;
-            // 
-            // btn_new
-            // 
-            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_new, "btn_new");
-            this.btn_new.Name = "btn_new";
-            this.btn_new.UseVisualStyleBackColor = true;
-            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
             // frm_payment_method
             // 

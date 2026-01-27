@@ -35,17 +35,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grid_purchase_return = new System.Windows.Forms.DataGridView();
             this.txt_close = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btn_return = new System.Windows.Forms.Button();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
-            this.txt_invoice_no = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_search = new System.Windows.Forms.Button();
             this.cmbReturnReason = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_return = new System.Windows.Forms.Button();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
+            this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,9 +76,9 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.grid_purchase_return);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // grid_purchase_return
@@ -110,9 +113,9 @@
             this.grid_purchase_return.Name = "grid_purchase_return";
             this.grid_purchase_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_purchase_return.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.grid_purchase_return_CellValidating);
-            this.grid_purchase_return.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grid_purchase_return_DataError);
             this.grid_purchase_return.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_purchase_return_CellValueChanged);
             this.grid_purchase_return.CurrentCellDirtyStateChanged += new System.EventHandler(this.grid_purchase_return_CurrentCellDirtyStateChanged);
+            this.grid_purchase_return.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grid_purchase_return_DataError);
             // 
             // txt_close
             // 
@@ -124,12 +127,29 @@
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.cmbReturnReason);
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.btn_return);
+            this.panel2.Controls.Add(this.btn_search);
             this.panel2.Controls.Add(this.txt_close);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lbl_taxes_title);
+            this.panel2.Controls.Add(this.txt_invoice_no);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // cmbReturnReason
+            // 
+            this.cmbReturnReason.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
+            this.cmbReturnReason.Name = "cmbReturnReason";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Name = "label2";
             // 
             // btn_return
             // 
@@ -137,6 +157,19 @@
             this.btn_return.Name = "btn_return";
             this.btn_return.UseVisualStyleBackColor = true;
             this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
+            // 
+            // btn_search
+            // 
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Name = "label1";
             // 
             // lbl_taxes_title
             // 
@@ -148,30 +181,6 @@
             // 
             resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
             this.txt_invoice_no.Name = "txt_invoice_no";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // btn_search
-            // 
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
-            // cmbReturnReason
-            // 
-            this.cmbReturnReason.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
-            this.cmbReturnReason.Name = "cmbReturnReason";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Name = "label2";
             // 
             // id
             // 
@@ -223,33 +232,41 @@
             // ReturnedQty
             // 
             this.ReturnedQty.DataPropertyName = "ReturnedQty";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.ReturnedQty.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ReturnedQty, "ReturnedQty");
             this.ReturnedQty.Name = "ReturnedQty";
             // 
             // ReturnableQty
             // 
             this.ReturnableQty.DataPropertyName = "ReturnableQty";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ReturnableQty.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.ReturnableQty, "ReturnableQty");
             this.ReturnableQty.Name = "ReturnableQty";
             // 
             // ReturnQty
             // 
-            this.ReturnQty.DataPropertyName = "ReturnableQty";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.ReturnQty.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ReturnQty.DataPropertyName = "ReturnQty";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.ReturnQty.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.ReturnQty, "ReturnQty");
             this.ReturnQty.Name = "ReturnQty";
             // 
             // unit_price
             // 
             this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle5;
             this.unit_price.FillWeight = 112.5211F;
             resources.ApplyResources(this.unit_price, "unit_price");
             this.unit_price.Name = "unit_price";
@@ -258,6 +275,10 @@
             // cost_price
             // 
             this.cost_price.DataPropertyName = "cost_price";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
@@ -265,10 +286,10 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle7;
             this.discount_value.FillWeight = 112.5211F;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
@@ -277,10 +298,10 @@
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.vat.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.vat.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
             this.vat.ReadOnly = true;
@@ -288,10 +309,10 @@
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle9;
             this.total.FillWeight = 112.5211F;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
@@ -338,13 +359,8 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.txt_close;
-            this.Controls.Add(this.cmbReturnReason);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btn_search);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txt_invoice_no);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.KeyPreview = true;
             this.Name = "frm_purchase_return";
             this.ShowIcon = false;
@@ -355,7 +371,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -364,7 +379,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView grid_purchase_return;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lbl_taxes_title;
         private System.Windows.Forms.Button txt_close;
         private System.Windows.Forms.TextBox txt_invoice_no;
         private System.Windows.Forms.Label label1;
@@ -372,6 +386,7 @@
         private System.Windows.Forms.Button btn_return;
         private System.Windows.Forms.ComboBox cmbReturnReason;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_taxes_title;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;

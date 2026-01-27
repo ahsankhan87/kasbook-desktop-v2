@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="BtnSupplierNameChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 15</value>
+    <value>205, 15</value>
   </data>
   <data name="BtnSupplierNameChange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 28</value>
+    <value>118, 28</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="BtnSupplierNameChange.TabIndex" type="System.Int32, mscorlib">
@@ -157,13 +157,13 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>608, 18</value>
+    <value>532, 18</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 17</value>
+    <value>114, 17</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -187,13 +187,13 @@
     <value>NoControl</value>
   </data>
   <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 15</value>
+    <value>111, 15</value>
   </data>
   <data name="btn_print_invoice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_print_invoice.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -217,13 +217,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 15</value>
+    <value>644, 15</value>
   </data>
   <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 22</value>
+    <value>318, 24</value>
   </data>
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1101, 15</value>
+    <value>963, 15</value>
   </data>
   <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -277,13 +277,13 @@
     <value>NoControl</value>
   </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 15</value>
+    <value>18, 15</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>88, 28</value>
   </data>
   <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -319,7 +319,7 @@
     <value>False</value>
   </data>
   <data name="id.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>125</value>
   </data>
   <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -385,7 +385,7 @@
     <value>6</value>
   </data>
   <data name="purchase_type.Width" type="System.Int32, mscorlib">
-    <value>122</value>
+    <value>118</value>
   </data>
   <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -397,7 +397,7 @@
     <value>6</value>
   </data>
   <data name="discount_value.Width" type="System.Int32, mscorlib">
-    <value>92</value>
+    <value>91</value>
   </data>
   <metadata name="total_tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -409,7 +409,7 @@
     <value>6</value>
   </data>
   <data name="total_tax.Width" type="System.Int32, mscorlib">
-    <value>92</value>
+    <value>88</value>
   </data>
   <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -421,7 +421,7 @@
     <value>6</value>
   </data>
   <data name="total.Width" type="System.Int32, mscorlib">
-    <value>111</value>
+    <value>110</value>
   </data>
   <metadata name="detail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -436,7 +436,7 @@
     <value>Transaction Detail</value>
   </data>
   <data name="detail.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>47</value>
   </data>
   <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -451,7 +451,7 @@
     <value>Delete record</value>
   </data>
   <data name="btn_delete.Width" type="System.Int32, mscorlib">
-    <value>55</value>
+    <value>52</value>
   </data>
   <data name="grid_all_purchases.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 50</value>
@@ -463,7 +463,7 @@
     <value>51</value>
   </data>
   <data name="grid_all_purchases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1177, 497</value>
+    <value>1030, 497</value>
   </data>
   <data name="grid_all_purchases.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -490,7 +490,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 552</value>
+    <value>1032, 552</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 11</value>
+    <value>13, 11</value>
   </data>
   <data name="lbl_taxes_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -553,7 +553,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 47</value>
+    <value>1032, 47</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -577,7 +577,7 @@
     <value>6</value>
   </data>
   <data name="dataGridViewImageColumn1.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>125</value>
   </data>
   <data name="dataGridViewImageColumn2.HeaderText" xml:space="preserve">
     <value>Delete</value>
@@ -589,19 +589,19 @@
     <value>Delete record</value>
   </data>
   <data name="dataGridViewImageColumn2.Width" type="System.Int32, mscorlib">
-    <value>55</value>
+    <value>125</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>7, 16</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1180, 599</value>
+    <value>1032, 599</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -636,24 +636,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>All Purchases</value>
   </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn2.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -665,6 +647,12 @@
   </data>
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;purchase_date.Name" xml:space="preserve">
     <value>purchase_date</value>
@@ -718,6 +706,18 @@
     <value>btn_delete</value>
   </data>
   <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn2.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

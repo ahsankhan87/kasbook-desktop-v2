@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -43,7 +45,7 @@ namespace pos
             {
                 btn_save.Text = "Update";
                 lbl_header_title.Text = "Update Branches";
-                
+
             }
             else
             {
@@ -53,63 +55,112 @@ namespace pos
         
         private void btn_save_Click(object sender, EventArgs e)
         {
-            
-                
-                if (txt_name.Text != string.Empty)
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txt_name.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Branch name is required.",
+                        "اسم الفرع مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_name.Focus();
+                    return;
+                }
+
+                bool isEdit = (lbl_edit_status.Text == "true");
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this branch?" : "Save this branch?",
+                    isEdit ? "هل تريد تحديث هذا الفرع؟" : "هل تريد حفظ هذا الفرع؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T(isEdit ? "Updating..." : "Saving...", isEdit ? "جاري التحديث..." : "جاري الحفظ...")))
                 {
                     BranchesModal info = new BranchesModal();
-                    info.name = txt_name.Text;
+                    info.name = txt_name.Text.Trim();
                     info.description = txt_description.Text;
-                    
+
                     BranchesBLL objBLL = new BranchesBLL();
-                    
-                    if (lbl_edit_status.Text == "true")
+
+                    int result;
+                    if (isEdit)
                     {
-                        info.id = int.Parse(txt_id.Text);
-                    
-                        int result = objBLL.Update(info);
-                        if (result > 0)
+                        int id;
+                        if (!int.TryParse(txt_id.Text, out id) || id <= 0)
                         {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UiMessages.ShowError(
+                                "Invalid branch id.",
+                                "معرّف الفرع غير صالح.",
+                                "Error",
+                                "خطأ"
+                            );
+                            return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+
+                        info.id = id;
+                        result = objBLL.Update(info);
                     }
                     else
                     {
-                        int result = objBLL.Insert(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        result = objBLL.Insert(info);
                     }
-                    
-                    if(mainForm != null)
+
+                    if (result > 0)
                     {
-                        mainForm.load_branches_grid();
-
+                        UiMessages.ShowInfo(
+                            isEdit ? "Branch has been updated successfully." : "Branch has been created successfully.",
+                            isEdit ? "تم تحديث الفرع بنجاح." : "تم إنشاء الفرع بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                     }
-
-                    this.Close();
-
+                    else
+                    {
+                        UiMessages.ShowError(
+                            isEdit ? "Branch could not be updated. Please try again." : "Branch could not be saved. Please try again.",
+                            isEdit ? "تعذر تحديث الفرع. يرجى المحاولة مرة أخرى." : "تعذر حفظ الفرع. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
                 }
-                else
+
+                if (mainForm != null)
                 {
-                    MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    mainForm.load_branches_grid();
                 }
-            
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
+
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_addBranch_KeyDown(object sender, KeyEventArgs e)

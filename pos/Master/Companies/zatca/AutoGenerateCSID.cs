@@ -1,4 +1,6 @@
-﻿using POS.BLL;
+﻿using pos.UI;
+using pos.UI.Busy;
+using POS.BLL;
 using POS.Core;
 using System;
 using System.Collections.Generic;
@@ -20,8 +22,6 @@ namespace pos.Master.Companies.zatca
 {
     public partial class AutoGenerateCSID : Form
     {
-        //private Mode mode { get; set; }
-
         public AutoGenerateCSID()
         {
             InitializeComponent();
@@ -32,9 +32,7 @@ namespace pos.Master.Companies.zatca
 
         private void AutoGenerateCSR_Load(object sender, EventArgs e)
         {
-            
             Zatca.EInvoice.SDK.CsrGenerator csrGenerator = new CsrGenerator();
-            //csrGenerator.GenerateCsr();
 
             FillInvoiceTypes();
             btn_csr_save.Visible = false;
@@ -44,7 +42,6 @@ namespace pos.Master.Companies.zatca
             btn_info.Visible = false;
         }
 
-
         private void fillcontrols()
         {
             GeneralBLL objBLL = new GeneralBLL();
@@ -53,63 +50,51 @@ namespace pos.Master.Companies.zatca
             string table = "pos_companies";
             DataTable companies_dt = objBLL.GetRecord(keyword, table);
             foreach (DataRow dr in companies_dt.Rows)
-            {       
+            {
                 string vatNo = dr["vat_no"].ToString();
                 string prefix = rdb_simulation.Checked ? "TST" : rdb_production.Checked ? "PRD" : "TST";
                 string commonName = $"{prefix}-{vatNo}";
                 txt_commonName.Text = commonName;
                 txt_organizationName.Text = dr["name"].ToString();
-                txt_organizationUnitName.Text = UsersModal.logged_in_branch_name; // "Riyadh Branch";
-                txt_countryName.Text = dr["CountryName"].ToString(); 
+                txt_organizationUnitName.Text = UsersModal.logged_in_branch_name;
+                txt_countryName.Text = dr["CountryName"].ToString();
                 txt_serialNumber.Text = $"1-{prefix}|2-{prefix}|3-" + Guid.NewGuid().ToString();
                 txt_organizationIdentifier.Text = vatNo;
                 txt_location.Text = dr["address"].ToString();
                 txt_industry.Text = "Auto Parts";
             }
         }
-        //private void btn_csid_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        btn_csid.Enabled = false;
-        //        btn_csid.Text = "Generating...";
-        //        btn_csid.Cursor = Cursors.WaitCursor;
-        //        btn_csid.Refresh();
-        //        Task.Run(() => GenerateCSRAsync()).Wait();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    finally
-        //    {
-        //        btn_csid.Enabled = true;
-        //        btn_csid.Text = "Generate CSID انشاء المفتاح العام";
-        //        btn_csid.Cursor = Cursors.Default;
-        //    }
 
-        //}
         private async void btn_csid_Click(object sender, EventArgs e)
         {
-            try
+            btn_csid.Enabled = false;
+            btn_csid.Text = UiMessages.T("Generating...", "جارٍ الإنشاء...");
+            btn_csid.Cursor = Cursors.WaitCursor;
+            btn_csid.Refresh();
+
+            using (BusyScope.Show(this, UiMessages.T("Generating CSID...", "جارٍ إنشاء CSID...")))
             {
-                btn_csid.Enabled = false;
-                btn_csid.Text = "Generating...";
-                btn_csid.Cursor = Cursors.WaitCursor;
-                btn_csid.Refresh();
-                await GenerateCSRAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                btn_csid.Enabled = true;
-                btn_csid.Text = "Generate CSID انشاء المفتاح العام";
-                btn_csid.Cursor = Cursors.Default;
+                try
+                {
+                    await GenerateCSRAsync();
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(
+                        "An error occurred while generating CSID.\n" + ex.Message,
+                        "حدث خطأ أثناء إنشاء CSID.\n" + ex.Message,
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                }
+                finally
+                {
+                    btn_csid.Enabled = true;
+                    btn_csid.Text = UiMessages.T("Generate CSID", "إنشاء CSID");
+                    btn_csid.Cursor = Cursors.Default;
+                }
             }
         }
+
         private async Task GenerateCSRAsync()
         {
             try
@@ -132,13 +117,17 @@ namespace pos.Master.Companies.zatca
                     string.IsNullOrWhiteSpace(organizationIdentifier) ||
                     string.IsNullOrWhiteSpace(organizationUnit) ||
                     string.IsNullOrWhiteSpace(organizationUnitName) ||
-                    string.IsNullOrWhiteSpace(countryName))
+                    string.IsNullOrWhiteSpace(countryName) ||
+                    string.IsNullOrWhiteSpace(invoiceType))
                 {
-                    MessageBox.Show("Please fill all required fields before generating CSR.");
+                    UiMessages.ShowWarning(
+                        "Please fill in all required fields before generating CSR.",
+                        "يرجى تعبئة جميع الحقول المطلوبة قبل إنشاء CSR.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
                     return;
                 }
 
-                // Instantiate DTO with all parameters (no public setters)
                 var csrDto = new CsrGenerationDto(
                     commonName,
                     serialNumber,
@@ -151,72 +140,83 @@ namespace pos.Master.Companies.zatca
                     industryCategory
                 );
 
-                bool pemFormat = false; // set to false if you want base64 only
+                bool pemFormat = false;
                 EnvironmentType environment = rdb_simulation.Checked ? EnvironmentType.Simulation :
                                               rdb_production.Checked ? EnvironmentType.Production :
                                               EnvironmentType.NonProduction;
 
+                // Generate CSR + key
                 var result = csrGenerator.GenerateCsr(csrDto, environment, pemFormat);
 
-                if (result.IsValid)
+                if (!result.IsValid)
                 {
-                    txt_csr.Text = result.Csr;
-                    txt_privatekey.Text = result.PrivateKey;
+                    string message = (result.ErrorMessages != null && result.ErrorMessages.Any())
+                        ? string.Join(Environment.NewLine, result.ErrorMessages)
+                        : "Unknown error.";
 
-                    btn_csr_save.Visible = true;
-                    btn_privatekey_save.Visible = true;
-                    string otp = txt_otp.Text.Trim(); // from Fatoora Portal
-                    if (string.IsNullOrWhiteSpace(otp))
-                    {
-                        MessageBox.Show("OTP is required from Fatoora Portal for CSID request.");
-                        return;
-                    }
-
-                    var authDetails = await ZatcaAuth.GetComplianceCSIDAsync(txt_csr.Text.Trim(), environment.ToString(), otp);
-                    // Check if CSID was successfully retrieved
-                    if (authDetails == null || string.IsNullOrWhiteSpace(authDetails.BinarySecurityToken) || string.IsNullOrWhiteSpace(authDetails.Secret))
-                    {
-                        // If csid is null or does not contain required fields, show error
-                        MessageBox.Show("Failed to retrieve CSID. Please check your CSR and OTP.");
-                        return;
-                    }
-                    string binarySecurityToken = authDetails.BinarySecurityToken;
-                    string secret = authDetails.Secret;
-                    string requestID = authDetails.RequestID;
-                    txt_publickey.Text = binarySecurityToken ?? "";
-                    txt_secret.Text = secret ?? "";
-                    txt_compliance_request_id.Text = requestID ?? "";
-
-                    string authorizationToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{authDetails.BinarySecurityToken}:{authDetails.Secret}"));
-
-                    //var ProductionCSIDResponse = await ZatcaAuth.GetProductionCSIDAsync(authDetails.RequestID, authorizationToken, environment.ToString());
-                    //string binarySecurityToken1 = ProductionCSIDResponse.BinarySecurityToken;
-                    //string secret1 = ProductionCSIDResponse.Secret;
-                    //string requestID1 = ProductionCSIDResponse.RequestID;
-
-                    // If csid is not null, assign values to textboxes 
-                    // and make buttons visible
-                    //txt_publickey.Text = binarySecurityToken1 ?? "";
-                    //txt_secret.Text = secret1 ?? "";
-                    //txt_compliance_request_id.Text = requestID1 ?? "";
-
-                    btn_publickey_save.Visible = true;
-                    btn_secretkey_save.Visible = true;
-                    btn_info.Visible = true;
-                    MessageBox.Show("CSID generated successfully.");
-
+                    UiMessages.ShowError(
+                        "CSR generation failed.\n" + message,
+                        "فشل إنشاء CSR.\n" + message,
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                    return;
                 }
-                else
+
+                txt_csr.Text = result.Csr;
+                txt_privatekey.Text = result.PrivateKey;
+
+                btn_csr_save.Visible = true;
+                btn_privatekey_save.Visible = true;
+
+                string otp = txt_otp.Text.Trim();
+                if (string.IsNullOrWhiteSpace(otp))
                 {
-                    string message = string.Join(Environment.NewLine, result.ErrorMessages);
-                    MessageBox.Show("Failed to generate CSID. " + Environment.NewLine + message);
+                    UiMessages.ShowWarning(
+                        "OTP is required. Please copy it from the Fatoora portal and paste it here.",
+                        "رمز التحقق (OTP) مطلوب. يرجى نسخه من بوابة فاتورة ولصقه هنا.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                    return;
                 }
+
+                // Request compliance CSID
+                var authDetails = await ZatcaAuth.GetComplianceCSIDAsync(txt_csr.Text.Trim(), environment.ToString(), otp);
+
+                if (authDetails == null ||
+                    string.IsNullOrWhiteSpace(authDetails.BinarySecurityToken) ||
+                    string.IsNullOrWhiteSpace(authDetails.Secret))
+                {
+                    UiMessages.ShowError(
+                        "CSID request failed. Please verify CSR and OTP, then try again.",
+                        "فشل طلب CSID. يرجى التحقق من CSR و OTP ثم المحاولة مرة أخرى.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                    return;
+                }
+
+                txt_publickey.Text = authDetails.BinarySecurityToken ?? "";
+                txt_secret.Text = authDetails.Secret ?? "";
+                txt_compliance_request_id.Text = authDetails.RequestID ?? "";
+
+                btn_publickey_save.Visible = true;
+                btn_secretkey_save.Visible = true;
+                btn_info.Visible = true;
+
+                UiMessages.ShowInfo(
+                    "CSID generated successfully.",
+                    "تم إنشاء CSID بنجاح.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("CSID Error: \n" + ex.Message);
+                UiMessages.ShowError(
+                    "CSID generation error.\n" + ex.Message,
+                    "حدث خطأ أثناء إنشاء CSID.\n" + ex.Message,
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
-            
+
         }
 
         private void FillInvoiceTypes()
@@ -232,23 +232,37 @@ namespace pos.Master.Companies.zatca
             cmb_invoicetype.DisplayMember = "Key";
             cmb_invoicetype.ValueMember = "Value";
         }
+
         private void btn_csr_save_Click(object sender, EventArgs e)
         {
             try
             {
-                saveFileDialog1.Filter = "csr files (*.csr)|*.csr";
-                saveFileDialog1.FileName = "csr.csr";
-                DialogResult result = saveFileDialog1.ShowDialog();
-
-                if (result == DialogResult.OK)
+                using (BusyScope.Show(this, UiMessages.T("Saving CSR...", "جارٍ حفظ CSR...")))
                 {
-                    string filename = saveFileDialog1.FileName;
-                    File.WriteAllText(filename, txt_csr.Text.Trim());
+                    saveFileDialog1.Filter = "CSR files (*.csr)|*.csr";
+                    saveFileDialog1.FileName = "csr.csr";
+                    DialogResult result = saveFileDialog1.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        string filename = saveFileDialog1.FileName;
+                        File.WriteAllText(filename, txt_csr.Text.Trim());
+
+                        UiMessages.ShowInfo(
+                            "CSR file saved successfully.",
+                            "تم حفظ ملف CSR بنجاح.",
+                            captionEn: "ZATCA",
+                            captionAr: "زاتكا");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.InnerException.ToString());
+                UiMessages.ShowError(
+                    "Unable to save CSR file.\n" + ex.Message,
+                    "تعذر حفظ ملف CSR.\n" + ex.Message,
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
 
         }
@@ -257,30 +271,36 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
-                saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
-                saveFileDialog1.FileName = "private_key.pem";
-                DialogResult result = saveFileDialog1.ShowDialog();
-
-                if (result == DialogResult.OK)
+                using (BusyScope.Show(this, UiMessages.T("Saving private key...", "جارٍ حفظ المفتاح الخاص...")))
                 {
-                    string filename = saveFileDialog1.FileName;
+                    saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
+                    saveFileDialog1.FileName = "private_key.pem";
+                    DialogResult result = saveFileDialog1.ShowDialog();
 
-                    string keyBase64 = txt_privatekey.Text.Trim();
-                    //string pem = "-----BEGIN EC PRIVATE KEY-----\n" +
-                    //             BreakLines(keyBase64) +
-                    //             "\n-----END EC PRIVATE KEY-----";
+                    if (result == DialogResult.OK)
+                    {
+                        string filename = saveFileDialog1.FileName;
+                        string keyBase64 = txt_privatekey.Text.Trim();
+                        File.WriteAllText(filename, keyBase64);
 
-                    File.WriteAllText(filename, keyBase64);
+                        UiMessages.ShowInfo(
+                            "Private key saved successfully.",
+                            "تم حفظ المفتاح الخاص بنجاح.",
+                            captionEn: "ZATCA",
+                            captionAr: "زاتكا");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error saving private key: " + ex.Message);
+                UiMessages.ShowError(
+                    "Unable to save the private key.\n" + ex.Message,
+                    "تعذر حفظ المفتاح الخاص.\n" + ex.Message,
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
         }
 
-
-       
         private void btn_refresh1_Click(object sender, EventArgs e)
         {
             RefreshSerialNumber();
@@ -290,6 +310,7 @@ namespace pos.Master.Companies.zatca
         {
             RefreshSerialNumber();
         }
+
         private void RefreshSerialNumber()
         {
             string prefix = rdb_simulation.Checked ? "TST" : rdb_production.Checked ? "PRD" : "TST";
@@ -301,49 +322,70 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
-                saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
-                saveFileDialog1.FileName = "cert.pem";
-                DialogResult result = saveFileDialog1.ShowDialog();
-
-                if (result == DialogResult.OK)
+                using (BusyScope.Show(this, UiMessages.T("Saving certificate...", "جارٍ حفظ الشهادة...")))
                 {
-                    string filename = saveFileDialog1.FileName;
+                    saveFileDialog1.Filter = "PEM files (*.pem)|*.pem";
+                    saveFileDialog1.FileName = "cert.pem";
+                    DialogResult result = saveFileDialog1.ShowDialog();
 
-                    string certBase64 = txt_publickey.Text.Trim();
-                    //string pem = "-----BEGIN CERTIFICATE-----\n" +
-                    //             BreakLines(certBase64) +
-                    //             "\n-----END CERTIFICATE-----";
+                    if (result == DialogResult.OK)
+                    {
+                        string filename = saveFileDialog1.FileName;
+                        string certBase64 = txt_publickey.Text.Trim();
+                        File.WriteAllText(filename, certBase64);
 
-                    File.WriteAllText(filename, certBase64);
+                        UiMessages.ShowInfo(
+                            "Certificate saved successfully.",
+                            "تم حفظ الشهادة بنجاح.",
+                            captionEn: "ZATCA",
+                            captionAr: "زاتكا");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error saving certificate: " + ex.Message);
+                UiMessages.ShowError(
+                    "Unable to save the certificate.\n" + ex.Message,
+                    "تعذر حفظ الشهادة.\n" + ex.Message,
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
         }
-
 
         private void btn_secretkey_save_Click(object sender, EventArgs e)
         {
             try
             {
-                saveFileDialog1.Filter = "secretkey files (*.txt)|*.txt";
-                saveFileDialog1.FileName = "secret.txt";
-                DialogResult result = saveFileDialog1.ShowDialog();
-
-                if (result == DialogResult.OK)
+                using (BusyScope.Show(this, UiMessages.T("Saving secret key...", "جارٍ حفظ المفتاح السري...")))
                 {
-                    string filename = saveFileDialog1.FileName;
-                    string secretkey = txt_secret.Text;
-                    File.WriteAllText(filename, secretkey);
+                    saveFileDialog1.Filter = "Secret key files (*.txt)|*.txt";
+                    saveFileDialog1.FileName = "secret.txt";
+                    DialogResult result = saveFileDialog1.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        string filename = saveFileDialog1.FileName;
+                        string secretkey = txt_secret.Text;
+                        File.WriteAllText(filename, secretkey);
+
+                        UiMessages.ShowInfo(
+                            "Secret key saved successfully.",
+                            "تم حفظ المفتاح السري بنجاح.",
+                            captionEn: "ZATCA",
+                            captionAr: "زاتكا");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.InnerException.ToString());
+                UiMessages.ShowError(
+                    "Unable to save the secret key.\n" + ex.Message,
+                    "تعذر حفظ المفتاح السري.\n" + ex.Message,
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
         }
+
         private string BreakLines(string base64, int lineLength = 64)
         {
             StringBuilder sb = new StringBuilder();
@@ -360,47 +402,51 @@ namespace pos.Master.Companies.zatca
             if (!string.IsNullOrEmpty(txt_publickey.Text))
             {
                 GetCertInfo();
-                
             }
-
         }
-       
+
         private void GetCertInfo()
         {
             if (!string.IsNullOrEmpty(txt_publickey.Text))
             {
-                string pemText = txt_publickey.Text.Trim();
+                try
+                {
+                    string pemText = txt_publickey.Text.Trim();
 
-                // Remove PEM headers
-                string base64 = pemText
-                    .Replace("-----BEGIN CERTIFICATE-----", "")
-                    .Replace("-----END CERTIFICATE-----", "")
-                    .Replace("\r", "")
-                    .Replace("\n", "")
-                    .Trim();
+                    string base64 = pemText
+                        .Replace("-----BEGIN CERTIFICATE-----", "")
+                        .Replace("-----END CERTIFICATE-----", "")
+                        .Replace("\r", "")
+                        .Replace("\n", "")
+                        .Trim();
 
-                // Decode Base64
-                byte[] certBytes = Convert.FromBase64String(base64);
+                    byte[] certBytes = Convert.FromBase64String(base64);
 
-                // Save to a .cer or .der file
-                //File.WriteAllBytes(pemText, certBytes);
+                    var certificate = new X509Certificate2(certBytes);
 
-                // Optional: Load it into an X509Certificate2 object
-                var certificate = new X509Certificate2(certBytes);
+                    string info = "";
+                    info = UiMessages.T("Subject: ", "الموضوع: ") + certificate.Subject + "\n";
+                    info += UiMessages.T("Issuer: ", "المصدر: ") + certificate.Issuer + "\n";
+                    info += UiMessages.T("Valid From: ", "صالح من: ") + certificate.NotBefore + "\n";
+                    info += UiMessages.T("Valid To: ", "صالح حتى: ") + certificate.NotAfter + "\n";
 
-                // Print info
-                string info = "";
-                info = "Subject :" + certificate.Subject + "\n";
-                info += "Issuer :" + certificate.Issuer + "\n";
-                info += "Valid From :" + certificate.NotBefore + "\n";
-                info += "Valid To :" + certificate.NotAfter + "\n";
-                MessageBox.Show(info);
-                
+                    MessageBox.Show(info, UiMessages.T("Certificate Information", "معلومات الشهادة"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(
+                        "Unable to read certificate information.\n" + ex.Message,
+                        "تعذر قراءة معلومات الشهادة.\n" + ex.Message,
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                }
             }
         }
+
         private void BtnGenerateCSR_Click(object sender, EventArgs e)
         {
-           GenerateCSRAsync();
+            // fire-and-forget UI event
+            _ = GenerateCSRAsync();
         }
 
         private void label48_Click(object sender, EventArgs e)
@@ -410,25 +456,52 @@ namespace pos.Master.Companies.zatca
 
         private void Btn_save_Click(object sender, EventArgs e)
         {
-            try
+            using (BusyScope.Show(this, UiMessages.T("Saving credentials...", "جارٍ حفظ بيانات الاعتماد...")))
             {
-                EnvironmentType mode = rdb_simulation.Checked ? EnvironmentType.Simulation :
-                                            rdb_production.Checked ? EnvironmentType.Production :
-                                            EnvironmentType.NonProduction;
-                // Save CSID credentials to database
-                int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials("CSID", mode.ToString(),
-                    txt_publickey.Text.Trim(), txt_privatekey.Text.Trim(), txt_secret.Text.Trim(), txt_csr.Text.Trim(),
-                    txt_otp.Text, txt_compliance_request_id.Text);
-                if (result > 0)
+                try
                 {
-                    MessageBox.Show("Updated successfully", "Zatca Credentials", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    EnvironmentType mode = rdb_simulation.Checked ? EnvironmentType.Simulation :
+                                                rdb_production.Checked ? EnvironmentType.Production :
+                                                EnvironmentType.NonProduction;
+
+                    int result = ZatcaInvoiceGenerator.UpsertZatcaCredentials(
+                        "CSID",
+                        mode.ToString(),
+                        txt_publickey.Text.Trim(),
+                        txt_privatekey.Text.Trim(),
+                        txt_secret.Text.Trim(),
+                        txt_csr.Text.Trim(),
+                        txt_otp.Text,
+                        txt_compliance_request_id.Text);
+
+                    if (result > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Credentials saved successfully.",
+                            "تم حفظ بيانات الاعتماد بنجاح.",
+                            captionEn: "ZATCA Credentials",
+                            captionAr: "بيانات اعتماد زاتكا");
+                    }
+                    else
+                    {
+                        UiMessages.ShowWarning(
+                            "No changes were saved. Please verify the entered details.",
+                            "لم يتم حفظ أي تغييرات. يرجى التحقق من البيانات المدخلة.",
+                            captionEn: "ZATCA Credentials",
+                            captionAr: "بيانات اعتماد زاتكا");
+                    }
                 }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(
+                        "Error while saving credentials.\n" + ex.Message,
+                        "حدث خطأ أثناء حفظ بيانات الاعتماد.\n" + ex.Message,
+                        captionEn: "ZATCA Credentials",
+                        captionAr: "بيانات اعتماد زاتكا");
+                }
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error saving certificate: " + ex.Message);
-            }
-           
+
         }
 
         private void rdb_simulation_CheckedChanged(object sender, EventArgs e)
@@ -440,7 +513,5 @@ namespace pos.Master.Companies.zatca
         {
             fillcontrols();
         }
-
-        
     }
 }

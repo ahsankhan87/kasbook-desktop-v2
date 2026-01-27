@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using POS.BLL;
 using POS.Core;
 using pos.Master.Companies.zatca;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -19,7 +21,7 @@ namespace pos
         SalesBLL objSalesBLL = new SalesBLL();
         DataTable sales_dt;
         string _invoice_no = "";
-        
+
         public int cash_account_id = 0;
         public int sales_account_id = 0;
         public int receivable_account_id = 0;
@@ -30,25 +32,50 @@ namespace pos
 
         public double employee_commission_percent = 0;
         public double user_commission_percent = 0;
-        
+
+        private readonly Timer _invoiceSearchDebounce = new Timer();
+        private const int DebounceMs = 300;
+
         public frm_sales_return()
         {
             InitializeComponent();
-            //_invoice_no = invoice_no;
+
+            _invoiceSearchDebounce.Interval = DebounceMs;
+            _invoiceSearchDebounce.Tick += InvoiceSearchDebounce_Tick;
+            if (txt_invoice_no != null)
+                txt_invoice_no.TextChanged += txt_invoice_no_TextChanged;
         }
+
         public frm_sales_return(string invoiceNo)
         {
             InitializeComponent();
             _invoice_no = invoiceNo;
             txt_invoice_no.Text = _invoice_no;
+
+            _invoiceSearchDebounce.Interval = DebounceMs;
+            _invoiceSearchDebounce.Tick += InvoiceSearchDebounce_Tick;
+            if (txt_invoice_no != null)
+                txt_invoice_no.TextChanged += txt_invoice_no_TextChanged;
+        }
+
+        private void InvoiceSearchDebounce_Tick(object sender, EventArgs e)
+        {
+            _invoiceSearchDebounce.Stop();
+            btn_search.PerformClick();
+        }
+
+        private void txt_invoice_no_TextChanged(object sender, EventArgs e)
+        {
+            // Avoid hammering DB while typing
+            _invoiceSearchDebounce.Stop();
+            _invoiceSearchDebounce.Start();
         }
 
         private CheckBox _chkHeader;
-private bool _bulkChecking;
+        private bool _bulkChecking;
 
         public void frm_sales_return_Load(object sender, EventArgs e)
         {
-            //load_sales_return_grid(sale_id);
             Get_AccountID_From_Company();
             LoadReturnReasonsDDL();
             autoCompleteInvoice();
@@ -57,95 +84,129 @@ private bool _bulkChecking;
 
             SetupHeaderCheckBox();
 
-            LoadSalesReturnGrid();
+            // If invoice already provided, load it; otherwise keep grid empty
+            if (!string.IsNullOrWhiteSpace(txt_invoice_no.Text))
+                LoadSalesReturnGrid();
+        }
 
+        private bool TryGetInvoiceNo(out string invoiceNo)
+        {
+            invoiceNo = (txt_invoice_no.Text ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+            {
+                UiMessages.ShowInfo(
+                    "Please enter invoice number.",
+                    "يرجى إدخال رقم الفاتورة.",
+                    "Sales Return",
+                    "مرتجع مبيعات");
+                txt_invoice_no.Focus();
+                return false;
+            }
+            return true;
         }
 
         private void SetupHeaderCheckBox()
-{
-    if (grid_sales_return == null) return;
-    if (!grid_sales_return.Columns.Contains("chk")) return;
-
-    // avoid adding twice
-    if (_chkHeader != null) return;
-
-    _chkHeader = new CheckBox();
-    _chkHeader.Size = new Size(15, 15);
-    _chkHeader.BackColor = Color.Transparent;
-    _chkHeader.Checked = false;
-    _chkHeader.Click += HeaderCheckBox_Click;
-
-    grid_sales_return.Controls.Add(_chkHeader);
-
-    // position initially and on scroll/resize
-    PositionHeaderCheckBox();
-    grid_sales_return.ColumnWidthChanged += (s, e) => PositionHeaderCheckBox();
-    grid_sales_return.Scroll += (s, e) => PositionHeaderCheckBox();
-
-    // keep state synced
-    grid_sales_return.CellValueChanged += grid_sales_return_CellValueChanged;
-    grid_sales_return.CurrentCellDirtyStateChanged += grid_sales_return_CurrentCellDirtyStateChanged;
-}
-
-private void PositionHeaderCheckBox()
-{
-    if (_chkHeader == null) return;
-    if (!grid_sales_return.Columns.Contains("chk")) return;
-
-    Rectangle rect = grid_sales_return.GetCellDisplayRectangle(grid_sales_return.Columns["chk"].Index, -1, true);
-    // center the checkbox in the header cell
-    int x = rect.X + (rect.Width - _chkHeader.Width) / 2;
-    int y = rect.Y + (rect.Height - _chkHeader.Height) / 2;
-    _chkHeader.Location = new Point(Math.Max(0, x), Math.Max(0, y));
-}
-
-private void HeaderCheckBox_Click(object sender, EventArgs e)
-{
-    if (_bulkChecking) return;
-
-    try
-    {
-        _bulkChecking = true;
-        bool check = _chkHeader.Checked;
-
-        foreach (DataGridViewRow row in grid_sales_return.Rows)
         {
-            if (row.IsNewRow) continue;
-            if (row.ReadOnly) continue; // fully returned rows are read-only
+            if (grid_sales_return == null) return;
+            if (!grid_sales_return.Columns.Contains("chk")) return;
 
-            row.Cells["chk"].Value = check;
+            // avoid adding twice
+            if (_chkHeader != null) return;
+
+            _chkHeader = new CheckBox();
+            _chkHeader.Size = new Size(15, 15);
+            _chkHeader.BackColor = Color.Transparent;
+            _chkHeader.Checked = false;
+            _chkHeader.Click += HeaderCheckBox_Click;
+
+            grid_sales_return.Controls.Add(_chkHeader);
+
+            // position initially and on scroll/resize
+            PositionHeaderCheckBox();
+            grid_sales_return.ColumnWidthChanged += (s, e) => PositionHeaderCheckBox();
+            grid_sales_return.Scroll += (s, e) => PositionHeaderCheckBox();
+
+            // keep state synced
+            grid_sales_return.CellValueChanged += grid_sales_return_CellValueChanged;
+            grid_sales_return.CurrentCellDirtyStateChanged += grid_sales_return_CurrentCellDirtyStateChanged;
         }
 
-        grid_sales_return.EndEdit();
-    }
-    finally
-    {
-        _bulkChecking = false;
-    }
-}
+        private void PositionHeaderCheckBox()
+        {
+            if (_chkHeader == null) return;
+            if (!grid_sales_return.Columns.Contains("chk")) return;
+
+            Rectangle rect = grid_sales_return.GetCellDisplayRectangle(grid_sales_return.Columns["chk"].Index, -1, true);
+            // center the checkbox in the header cell
+            int x = rect.X + (rect.Width - _chkHeader.Width) / 2;
+            int y = rect.Y + (rect.Height - _chkHeader.Height) / 2;
+            _chkHeader.Location = new Point(Math.Max(0, x), Math.Max(0, y));
+        }
+
+        private void HeaderCheckBox_Click(object sender, EventArgs e)
+        {
+            if (_bulkChecking) return;
+
+            try
+            {
+                _bulkChecking = true;
+                bool check = _chkHeader.Checked;
+
+                foreach (DataGridViewRow row in grid_sales_return.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    if (row.ReadOnly) continue;
+
+                    row.Cells["chk"].Value = check;
+                }
+
+                grid_sales_return.EndEdit();
+            }
+            finally
+            {
+                _bulkChecking = false;
+            }
+        }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
+            _invoiceSearchDebounce.Stop();
             LoadSalesReturnGrid();
         }
         public void LoadSalesReturnGrid()
         {
             try
             {
-                if(!string.IsNullOrEmpty(txt_invoice_no.Text))
+                if (!TryGetInvoiceNo(out string invoiceNo))
+                {
+                    grid_sales_return.DataSource = null;
+                    return;
+                }
+
+                using (BusyScope.Show(this, UiMessages.T("Loading invoice items...", "جاري تحميل عناصر الفاتورة...")))
                 {
                     grid_sales_return.DataSource = null;
                     grid_sales_return.AutoGenerateColumns = false;
-                    grid_sales_return.DataSource = objSalesBLL.GetReturnSaleItems(txt_invoice_no.Text);
-                    sales_dt = load_sales_return_grid(txt_invoice_no.Text);
+
+                    grid_sales_return.DataSource = objSalesBLL.GetReturnSaleItems(invoiceNo);
+                    sales_dt = load_sales_return_grid(invoiceNo);
+
+                    if (sales_dt == null || sales_dt.Rows.Count == 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Invoice not found.",
+                            "لم يتم العثور على الفاتورة.",
+                            "Sales Return",
+                            "مرتجع مبيعات");
+                        return;
+                    }
+
                     MarkFullyReturnedRows();
                 }
-                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
             }
         }
         private void MarkFullyReturnedRows()
@@ -178,41 +239,126 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
         public bool item_checked = false;
         private void btn_return_Click(object sender, EventArgs e)
         {
-            ////Checking item is selected or not
-            for (int i = 0; i < grid_sales_return.Rows.Count; i++)
+            try
             {
-                if (grid_sales_return.Rows[i].Cells["id"].Value != null)
+                if (!TryGetInvoiceNo(out string prev_invoice_no))
+                    return;
+
+                if (grid_sales_return.Rows.Count == 0)
                 {
-                    if (Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value))
+                    UiMessages.ShowInfo(
+                        "Please search for an invoice first.",
+                        "يرجى البحث عن فاتورة أولاً.",
+                        "Sales Return",
+                        "مرتجع مبيعات");
+                    return;
+                }
+
+                if (sales_dt == null || sales_dt.Rows.Count == 0)
+                {
+                    UiMessages.ShowWarning(
+                        "Invoice data is not loaded. Please search again.",
+                        "بيانات الفاتورة غير محملة. يرجى البحث مرة أخرى.",
+                        "Sales Return",
+                        "مرتجع مبيعات");
+                    return;
+                }
+
+                // reset and check selection
+                item_checked = false;
+                for (int i = 0; i < grid_sales_return.Rows.Count; i++)
+                {
+                    if (grid_sales_return.Rows[i].Cells["id"].Value == null) continue;
+
+                    bool isChecked = grid_sales_return.Rows[i].Cells["chk"].Value != null &&
+                                     Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value);
+                    if (isChecked)
                     {
                         item_checked = true;
+                        break;
                     }
                 }
-            }
-            if (!item_checked)
-            {
-                MessageBox.Show("Please select product", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            /////////
 
-            DialogResult result = MessageBox.Show("Are you sure you want to return", "Sale Return Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (!item_checked)
+                {
+                    
+                    UiMessages.ShowWarning(
+                        "Please select at least one product to return.",
+                        "يرجى اختيار منتج واحد على الأقل للإرجاع.",
+                        "Sales Return",
+                        "مرتجع مبيعات");
 
-            if (result == DialogResult.Yes)
-            {
-                if (grid_sales_return.Rows.Count > 0)
+                    // Important: do not allow previous state to unlock rows.
+                    // Re-apply lock/style for fully returned items, then exit.
+                    MarkFullyReturnedRows();
+
+                    return;
+                }
+
+                // Validate quantities for selected rows
+                foreach (DataGridViewRow row in grid_sales_return.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    if (row.Cells["id"].Value == null) continue;
+
+                    bool selected = row.Cells["chk"].Value != null && Convert.ToBoolean(row.Cells["chk"].Value);
+                    if (!selected) continue;
+
+                    decimal avail = Convert.ToDecimal(row.Cells["ReturnableQty"].Value);
+                    decimal qty;
+                    decimal.TryParse(Convert.ToString(row.Cells["ReturnQty"].Value), out qty);
+
+                    if (qty <= 0)
+                    {
+                        MarkFullyReturnedRows();
+                        UiMessages.ShowWarning(
+                            "Return quantity must be greater than zero.",
+                            "كمية الإرجاع يجب أن تكون أكبر من صفر.",
+                            "Sales Return",
+                            "مرتجع مبيعات");
+                        return;
+                    }
+
+                    if (qty > avail)
+                    {
+                        MarkFullyReturnedRows();
+                        UiMessages.ShowWarning(
+                            $"Cannot return more than available ({avail}).",
+                            $"لا يمكن إرجاع أكثر من الكمية المتاحة ({avail}).",
+                            "Sales Return",
+                            "مرتجع مبيعات");
+                        return;
+                    }
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Are you sure you want to process this return?",
+                    "هل أنت متأكد أنك تريد تنفيذ عملية الإرجاع؟",
+                    captionEn: "Sale Return",
+                    captionAr: "مرتجع مبيعات");
+
+                if (confirm != DialogResult.Yes)
+                {
+                    MarkFullyReturnedRows();
+                    return;
+                }
+
+                using (BusyScope.Show(this, UiMessages.T("Processing return...", "جاري تنفيذ عملية الإرجاع...")))
                 {
                     string returnReasonCode = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Key;
                     string returnReason = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Value;
 
-                    string prev_invoice_no = txt_invoice_no.Text.Trim();
                     DateTime prev_invoice_date = Convert.ToDateTime(sales_dt.Rows[0]["sale_date"].ToString()).Date;
                     string new_invoice_no = GetMAXInvoiceNo();
                     string invoice_subtype_code = sales_dt.Rows[0]["invoice_subtype_code"].ToString();
-                    
+
                     if (string.IsNullOrEmpty(new_invoice_no))
                     {
-                        MessageBox.Show("No invoice number found, please check your settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowError(
+                            "No invoice number found, please check your settings.",
+                            "لم يتم العثور على رقم فاتورة. يرجى التحقق من الإعدادات.",
+                            "Error",
+                            "خطأ");
                         return;
                     }
 
@@ -223,8 +369,8 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                     double sub_total = 0;
 
                     int employee_id = 0;
-                    string description = "Sale Return Prev Inv #:"+ prev_invoice_no+" Prev Date: "+prev_invoice_date.Date;
-                    
+                    string description = "Sale Return Prev Inv #:" + prev_invoice_no + " Prev Date: " + prev_invoice_date.Date;
+
                     DateTime sale_date = DateTime.Now;
 
                     //GET VALUES FROM LOADED GRID
@@ -233,17 +379,17 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                         if (Convert.ToBoolean(grid_sales_return.Rows[i].Cells["chk"].Value))
                         {
                             double tax_rate = (grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales_return.Rows[i].Cells["tax_rate"].Value.ToString()));
-                            sub_total = (Convert.ToDouble(grid_sales_return.Rows[i].Cells["ReturnQty"].Value) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["unit_price"].Value)- Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value));
+                            sub_total = (Convert.ToDouble(grid_sales_return.Rows[i].Cells["ReturnQty"].Value) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["unit_price"].Value) - Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value));
                             double tax = (sub_total * tax_rate / 100);
 
                             total_tax += tax;
 
                             //total_tax += Convert.ToInt32(grid_sales_return.Rows[i].Cells["vat"].Value) / Convert.ToInt32(grid_sales_return.Rows[i].Cells["quantity_sold"].Value) * Convert.ToInt32(grid_sales_return.Rows[i].Cells["ReturnQty"].Value);
-                            total_amount += sub_total+ Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
+                            total_amount += sub_total + Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
                             total_discount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["discount_value"].Value);
                             total_cost_amount += Convert.ToDouble(grid_sales_return.Rows[i].Cells["cost_price"].Value.ToString()) * Convert.ToDouble(grid_sales_return.Rows[i].Cells["ReturnQty"].Value.ToString());
 
-                        } 
+                        }
                     }
 
                     List<SalesModalHeader> sales_model_header = new List<SalesModalHeader> { };
@@ -252,11 +398,10 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                     //GET ALREADY SAVED SALES 
                     foreach (DataRow sales_dr in sales_dt.Rows)
                     {
-                        
+
                         employee_id = (sales_dr["employee_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["employee_id"].ToString()));
                         int customer_id = (sales_dr["customer_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["customer_id"].ToString()));
                         string sale_type = sales_dr["sale_type"].ToString();
-
                         /////Added sales header into the List
                         sales_model_header.Add(new SalesModalHeader
                         {
@@ -293,7 +438,7 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                         });
                         //////
                     }
-                    
+
                     for (int i = 0; i < grid_sales_return.Rows.Count; i++)
                     {
                         if (grid_sales_return.Rows[i].Cells["id"].Value != null)
@@ -304,7 +449,7 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                                 sales_model_detail.Add(new SalesModal
                                 {
                                     invoice_no = new_invoice_no,
-                                    item_number= grid_sales_return.Rows[i].Cells["item_number"].Value.ToString(),
+                                    item_number = grid_sales_return.Rows[i].Cells["item_number"].Value.ToString(),
                                     code = grid_sales_return.Rows[i].Cells["item_code"].Value.ToString(),
                                     name = grid_sales_return.Rows[i].Cells["product_name"].Value.ToString(),
                                     quantity_sold = double.Parse(grid_sales_return.Rows[i].Cells["ReturnQty"].Value.ToString()),
@@ -352,29 +497,59 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                             DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                             if (activeZatcaCredential == null)
                             {
-                                MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
-                            }
-
-                            // Retrieve PCSID credentials from the database using the credentialId
-                            DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
-                            if (PCSID_dataRow == null)
-                            {
-                                //MessageBox.Show("No Production CSID credentials found for the selected ZATCA CSID.");
-
-                                //Sign Invoice with CSID instead of Production CSID
-                                ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                                UiMessages.ShowWarning(
+                                    "No active ZATCA CSID/credentials found. Please configure them first.",
+                                    "لا توجد بيانات زاتكا (CSID) نشطة. يرجى إعدادها أولاً.",
+                                    "ZATCA",
+                                    "زاتكا");
                             }
                             else
                             {
-                                //If PCSID exist then sign it 
-                                ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                                if (PCSID_dataRow == null)
+                                {
+                                    ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                                    // After signing with CSID, send invoice to ZATCA
+                                    // If invoice subtype is Standard then clear it from ZATCA
+                                    if (invoice_subtype_code == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                    {
+                                        // Clear invoice from ZATCA
+                                        ZatcaHelper.ZatcaInvoiceClearanceAsync(new_invoice_no);
+                                    }
+                                    else if (invoice_subtype_code == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                    //otherwise Report invoice to ZATCA
+                                    {
+                                        // Report invoice to ZATCA
+                                        ZatcaHelper.ZatcaInvoiceReportingAsync(new_invoice_no);
+                                    }
+                                }
+                                else
+                                {
+                                    ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
+                                    // After signing with PCSID, send invoice to ZATCA
+                                    // If invoice subtype is Standard then clear it from ZATCA
+                                    if (invoice_subtype_code == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                    {
+                                        // Clear invoice from ZATCA
+                                        ZatcaHelper.ZatcaInvoiceClearanceAsync(new_invoice_no);
+                                    }
+                                    else if (invoice_subtype_code == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                    //otherwise Report invoice to ZATCA
+                                    {
+                                        // Report invoice to ZATCA
+                                        ZatcaHelper.ZatcaInvoiceReportingAsync(new_invoice_no);
+                                    }
+                                }
                             }
 
                         }
-                        //////
-                        ///
-                        
-                        MessageBox.Show("Return transaction Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        UiMessages.ShowInfo(
+                            "Return transaction saved successfully.",
+                            "تم حفظ عملية الإرجاع بنجاح.",
+                            "Success",
+                            "نجاح");
+
                         grid_sales_return.DataSource = null;
                         grid_sales_return.Rows.Clear();
                         grid_sales_return.Refresh();
@@ -382,13 +557,14 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                     }
                     else
                     {
-                        MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowError("Record not saved", "لم يتم حفظ السجل", "Error", "خطأ");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Please search for invoice", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                MarkFullyReturnedRows();
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
             }
         }
 
@@ -449,7 +625,7 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
             journal_id = emp_Obj.InsertUserCommission(JournalsModal_obj);
             return journal_id;
         }
-        
+
         private void Get_AccountID_From_Company()
         {
             GeneralBLL objBLL = new GeneralBLL();
@@ -471,11 +647,11 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
 
         public DataTable load_sales_items_return_grid(string invoice_no)
         {
-              
+
             //bind data in data grid view  
             DataTable dt = objSalesBLL.GetReturnSaleItems(invoice_no);
             return dt;
-            
+
         }
 
         public DataTable load_sales_return_grid(string invoice_no)
@@ -525,7 +701,7 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
             }
 
         }
-        
+
         private void frm_sales_return_KeyDown(object sender, KeyEventArgs e)
         {
             //when you enter in textbox it will goto next textbox, work like TAB key
@@ -567,7 +743,7 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
             EmployeeBLL obj = new EmployeeBLL();
             DataTable employees = obj.SearchRecordByID(employee_id);
             double commission_percent = 0;
-            
+
             foreach (DataRow dr in employees.Rows)
             {
                 commission_percent = double.Parse(dr["commission_percent"].ToString());
@@ -618,16 +794,16 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
             // Example reasons; replace with your actual codes and reasons
             var reasons = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("01", "Goods returned"),
-                new KeyValuePair<string, string>("02", "Invoice correction"),
-                new KeyValuePair<string, string>("03", "Service not provided"),
-                new KeyValuePair<string, string>("04", "Duplicate invoice"),
-                new KeyValuePair<string, string>("05", "Incorrect amount"),
-                new KeyValuePair<string, string>("06", "Cancellation of order"),
-                new KeyValuePair<string, string>("07", "Price adjustment"),
-                new KeyValuePair<string, string>("08", "Damaged goods"),
-                new KeyValuePair<string, string>("09", "Incorrect tax calculation"),
-                new KeyValuePair<string, string>("10", "Other")
+                new KeyValuePair<string, string>("01", UiMessages.T("Goods returned", "إرجاع بضاعة")),
+                new KeyValuePair<string, string>("02", UiMessages.T("Invoice correction", "تصحيح فاتورة")),
+                new KeyValuePair<string, string>("03", UiMessages.T("Service not provided", "خدمة غير مقدمة")),
+                new KeyValuePair<string, string>("04", UiMessages.T("Duplicate invoice", "فاتورة مكررة")),
+                new KeyValuePair<string, string>("05", UiMessages.T("Incorrect amount", "مبلغ غير صحيح")),
+                new KeyValuePair<string, string>("06", UiMessages.T("Cancellation of order", "إلغاء الطلب")),
+                new KeyValuePair<string, string>("07", UiMessages.T("Price adjustment", "تعديل السعر")),
+                new KeyValuePair<string, string>("08", UiMessages.T("Damaged goods", "بضاعة تالفة")),
+                new KeyValuePair<string, string>("09", UiMessages.T("Incorrect tax calculation", "احتساب ضريبة غير صحيح")),
+                new KeyValuePair<string, string>("10", UiMessages.T("Other", "أخرى"))
             };
 
             cmbReturnReason.DataSource = new BindingSource(reasons, null);
@@ -653,57 +829,61 @@ private void HeaderCheckBox_Click(object sender, EventArgs e)
                 if (!decimal.TryParse(e.FormattedValue.ToString(), out var entered) || entered < 0)
                 {
                     e.Cancel = true;
-                    MessageBox.Show("Invalid quantity.", "Return", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning("Invalid quantity.", "كمية غير صالحة.", "Return", "إرجاع");
                     return;
                 }
                 if (entered > avail)
                 {
                     e.Cancel = true;
-                    MessageBox.Show($"Cannot return more than available ({avail}).", "Return", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        $"Cannot return more than available ({avail}).",
+                        $"لا يمكن إرجاع أكثر من الكمية المتاحة ({avail}).",
+                        "Return",
+                        "إرجاع");
                 }
             }
         }
-private void grid_sales_return_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-{
-    if (grid_sales_return.CurrentCell is DataGridViewCheckBoxCell)
-        grid_sales_return.CommitEdit(DataGridViewDataErrorContexts.Commit);
-}
+        private void grid_sales_return_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (grid_sales_return.CurrentCell is DataGridViewCheckBoxCell)
+                grid_sales_return.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
 
-private void grid_sales_return_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-{
-    if (_bulkChecking) return;
-    if (e.RowIndex < 0) return;
-    if (e.ColumnIndex < 0) return;
+        private void grid_sales_return_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_bulkChecking) return;
+            if (e.RowIndex < 0) return;
+            if (e.ColumnIndex < 0) return;
 
-    if (grid_sales_return.Columns[e.ColumnIndex].Name != "chk")
-        return;
+            if (grid_sales_return.Columns[e.ColumnIndex].Name != "chk")
+                return;
 
-    // update header checkbox based on all editable rows
-    bool allChecked = true;
-    bool anyChecked = false;
+            // update header checkbox based on all editable rows
+            bool allChecked = true;
+            bool anyChecked = false;
 
-    foreach (DataGridViewRow row in grid_sales_return.Rows)
-    {
-        if (row.IsNewRow) continue;
-        if (row.ReadOnly) continue;
+            foreach (DataGridViewRow row in grid_sales_return.Rows)
+            {
+                if (row.IsNewRow) continue;
+                if (row.ReadOnly) continue;
 
-        bool isChecked = false;
-        if (row.Cells["chk"].Value != null)
-            isChecked = Convert.ToBoolean(row.Cells["chk"].Value);
+                bool isChecked = false;
+                if (row.Cells["chk"].Value != null)
+                    isChecked = Convert.ToBoolean(row.Cells["chk"].Value);
 
-        anyChecked |= isChecked;
-        allChecked &= isChecked;
-    }
+                anyChecked |= isChecked;
+                allChecked &= isChecked;
+            }
 
-    try
-    {
-        _bulkChecking = true;
-        _chkHeader.Checked = anyChecked && allChecked;
-    }
-    finally
-    {
-        _bulkChecking = false;
-    }
-}
+            try
+            {
+                _bulkChecking = true;
+                _chkHeader.Checked = anyChecked && allChecked;
+            }
+            finally
+            {
+                _bulkChecking = false;
+            }
+        }
     }
 }

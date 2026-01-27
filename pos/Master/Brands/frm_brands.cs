@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -31,20 +33,22 @@ namespace pos
         {
             try
             {
-                grid_brands.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading brands...", "جاري تحميل العلامات التجارية...")))
+                {
+                    grid_brands.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_brands.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_brands.AutoGenerateColumns = false;
 
-                String keyword = "*";
-                String table = "pos_brands";
-                grid_brands.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "*";
+                    String table = "pos_brands";
+                    grid_brands.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -59,6 +63,17 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            if (grid_brands.CurrentRow == null)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a brand record to update.",
+                    "يرجى اختيار علامة تجارية للتحديث.",
+                    "Brands",
+                    "العلامات التجارية"
+                );
+                return;
+            }
+
             string id = grid_brands.CurrentRow.Cells["id"].Value.ToString();
             string code = grid_brands.CurrentRow.Cells["code"].Value.ToString();
             string name = grid_brands.CurrentRow.Cells["name"].Value.ToString();
@@ -79,26 +94,61 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_brands.CurrentRow.Cells[0].Value.ToString();
-
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (grid_brands.CurrentRow == null)
             {
+                UiMessages.ShowInfo(
+                    "Please select a brand record to delete.",
+                    "يرجى اختيار علامة تجارية للحذف.",
+                    "Brands",
+                    "العلامات التجارية"
+                );
+                return;
+            }
 
-                BrandsBLL objBLL = new BrandsBLL();
-                objBLL.Delete(int.Parse(id));
+            string idText = Convert.ToString(grid_brands.CurrentRow.Cells[0].Value);
+            int id;
+            if (!int.TryParse(idText, out id) || id <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected record is not valid.",
+                    "السجل المحدد غير صالح.",
+                    "Brands",
+                    "العلامات التجارية"
+                );
+                return;
+            }
 
-                MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this brand?",
+                "هل تريد حذف هذه العلامة التجارية؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
+                {
+                    BrandsBLL objBLL = new BrandsBLL();
+                    objBLL.Delete(id);
+                }
+
+                UiMessages.ShowInfo(
+                    "Record deleted successfully.",
+                    "تم حذف السجل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+
                 load_Brands_grid();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
-
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
@@ -110,23 +160,16 @@ namespace pos
         {
             try
             {
-                
-                    //grid_brands.DataSource = null;
-
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     BrandsBLL objBLL = new BrandsBLL();
-                    //grid_brands.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_brands.DataSource = objBLL.SearchRecord(condition);
-
-                    //txt_search.Text = "";
-                
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }

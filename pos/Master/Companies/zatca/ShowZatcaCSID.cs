@@ -1,14 +1,10 @@
-﻿using POS.BLL;
+﻿using pos.UI;
+using pos.UI.Busy;
+using POS.BLL;
 using POS.Core;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pos.Master.Companies.zatca
@@ -23,29 +19,56 @@ namespace pos.Master.Companies.zatca
         private void grid_fiscal_years_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (grid_zatca_csids.CurrentRow == null) return;
+            if (e.ColumnIndex < 0) return;
+
             string name = grid_zatca_csids.Columns[e.ColumnIndex].Name;
             if (name == "activate")
             {
-                string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
-                string mode = grid_zatca_csids.CurrentRow.Cells["mode"].Value.ToString();
-                
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to activate", "Activate Zatca Environment", buttons, MessageBoxIcon.Warning);
+                string id = Convert.ToString(grid_zatca_csids.CurrentRow.Cells["id"].Value);
+
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    UiMessages.ShowWarning(
+                        "Please select a valid record.",
+                        "يرجى اختيار سجل صالح.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                    return;
+                }
+
+                var result = UiMessages.ConfirmYesNo(
+                    "Do you want to activate the selected ZATCA environment?",
+                    "هل تريد تفعيل بيئة زاتكا المحددة؟",
+                    captionEn: "Activate",
+                    captionAr: "تفعيل",
+                    defaultButton: MessageBoxDefaultButton.Button2);
 
                 if (result == DialogResult.Yes)
                 {
-                    ZatcaInvoiceGenerator.UpdateZatcaStatus(int.Parse(id));
+                    using (BusyScope.Show(this, UiMessages.T("Activating...", "جارٍ التفعيل...")))
+                    {
+                        try
+                        {
+                            ZatcaInvoiceGenerator.UpdateZatcaStatus(int.Parse(id));
 
-                    MessageBox.Show("Record updated successfully.", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadZatcaCSIDGrid();
+                            UiMessages.ShowInfo(
+                                "Environment activated successfully.",
+                                "تم تفعيل البيئة بنجاح.",
+                                captionEn: "ZATCA",
+                                captionAr: "زاتكا");
+
+                            LoadZatcaCSIDGrid();
+                        }
+                        catch (Exception ex)
+                        {
+                            UiMessages.ShowError(
+                                "Unable to activate the selected environment.\n" + ex.Message,
+                                "تعذر تفعيل البيئة المحددة.\n" + ex.Message,
+                                captionEn: "ZATCA",
+                                captionAr: "زاتكا");
+                        }
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-
-                LoadZatcaCSIDGrid();
             }
         }
 
@@ -56,18 +79,24 @@ namespace pos.Master.Companies.zatca
 
         protected void LoadZatcaCSIDGrid()
         {
-            try
+            using (BusyScope.Show(this, UiMessages.T("Loading credentials...", "جارٍ تحميل بيانات الاعتماد...")))
             {
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_zatca_csids.AutoGenerateColumns = false;
-                string keyword = "*";
-                string table = "zatca_credentials";
-                grid_zatca_csids.DataSource = objBLL.GetRecord(keyword, table);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                try
+                {
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_zatca_csids.AutoGenerateColumns = false;
+                    string keyword = "*";
+                    string table = "zatca_credentials";
+                    grid_zatca_csids.DataSource = objBLL.GetRecord(keyword, table);
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(
+                        "Unable to load ZATCA credentials.\n" + ex.Message,
+                        "تعذر تحميل بيانات اعتماد زاتكا.\n" + ex.Message,
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                }
             }
         }
 
@@ -78,27 +107,50 @@ namespace pos.Master.Companies.zatca
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-            AutoGenerateCSID autoGenerateCSR = new AutoGenerateCSID();
-            autoGenerateCSR.ShowDialog();
+            using (var autoGenerateCSR = new AutoGenerateCSID())
+            {
+                autoGenerateCSR.ShowDialog(this);
+            }
+
+            // reload after closing (in case user saved new credentials)
+            LoadZatcaCSIDGrid();
         }
 
         private void btn_generatePCSID_Click(object sender, EventArgs e)
         {
             try
             {
-                if (grid_zatca_csids.CurrentRow == null) return;
-                string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
-                if (string.IsNullOrEmpty(id))
+                if (grid_zatca_csids.CurrentRow == null)
                 {
-                    MessageBox.Show("Please select a valid CSID record.", "Generate PCSID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "Please select a CSID record first.",
+                        "يرجى اختيار سجل CSID أولاً.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
                     return;
                 }
-                GeneratePCSID generatePCSID = new GeneratePCSID(int.Parse(id));
-                generatePCSID.ShowDialog();
+
+                string id = Convert.ToString(grid_zatca_csids.CurrentRow.Cells["id"].Value);
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    UiMessages.ShowWarning(
+                        "The selected record is not valid.",
+                        "السجل المحدد غير صالح.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                    return;
+                }
+
+                using (var generatePCSID = new GeneratePCSID(int.Parse(id)))
+                {
+                    generatePCSID.ShowDialog(this);
+                }
+
+                LoadZatcaCSIDGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -106,41 +158,76 @@ namespace pos.Master.Companies.zatca
         {
             try
             {
-                if (grid_zatca_csids.CurrentRow == null) return;
-                string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
-                if (string.IsNullOrEmpty(id))
+                if (grid_zatca_csids.CurrentRow == null)
                 {
-                    MessageBox.Show("Please select a valid CSID record.", "Renew PCSID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "Please select a CSID record first.",
+                        "يرجى اختيار سجل CSID أولاً.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
                     return;
                 }
-                RenewPCSID renewPCSID = new RenewPCSID(int.Parse(id));
-                renewPCSID.ShowDialog();
+
+                string id = Convert.ToString(grid_zatca_csids.CurrentRow.Cells["id"].Value);
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    UiMessages.ShowWarning(
+                        "The selected record is not valid.",
+                        "السجل المحدد غير صالح.",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
+                    return;
+                }
+
+                using (var renewPCSID = new RenewPCSID(int.Parse(id)))
+                {
+                    renewPCSID.ShowDialog(this);
+                }
+
+                LoadZatcaCSIDGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
         private void btn_info_Click(object sender, EventArgs e)
         {
-            if (grid_zatca_csids.CurrentRow == null) return;
-            string id = grid_zatca_csids.CurrentRow.Cells["id"].Value.ToString();
-            string publicKey = grid_zatca_csids.CurrentRow.Cells["cert_base64"].Value.ToString(); 
-            
-            if (!string.IsNullOrEmpty(publicKey))
+            if (grid_zatca_csids.CurrentRow == null)
+            {
+                UiMessages.ShowWarning(
+                    "Please select a record first.",
+                    "يرجى اختيار سجل أولاً.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
+                return;
+            }
+
+            string publicKey = Convert.ToString(grid_zatca_csids.CurrentRow.Cells["cert_base64"].Value);
+
+            if (!string.IsNullOrWhiteSpace(publicKey))
             {
                 GetCertInfo(publicKey);
-
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "No certificate data is available for the selected record.",
+                    "لا توجد بيانات شهادة للسجل المحدد.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
         }
+
         private void GetCertInfo(string publicKey)
         {
-            if (!string.IsNullOrEmpty(publicKey))
+            if (string.IsNullOrWhiteSpace(publicKey)) return;
+
+            try
             {
                 string pemText = publicKey.Trim();
 
-                // Remove PEM headers
                 string base64 = pemText
                     .Replace("-----BEGIN CERTIFICATE-----", "")
                     .Replace("-----END CERTIFICATE-----", "")
@@ -148,25 +235,25 @@ namespace pos.Master.Companies.zatca
                     .Replace("\n", "")
                     .Trim();
 
-                // Decode Base64
                 byte[] certBytes = Convert.FromBase64String(base64);
-
-                // Save to a .cer or .der file
-                //File.WriteAllBytes(pemText, certBytes);
-
-                // Optional: Load it into an X509Certificate2 object
                 var certificate = new X509Certificate2(certBytes);
 
-                // Print info
                 string info = "";
-                info = "Subject :" + certificate.Subject + "\n";
-                info += "Issuer :" + certificate.Issuer + "\n";
-                info += "Valid From :" + certificate.NotBefore + "\n";
-                info += "Valid To :" + certificate.NotAfter + "\n";
-                MessageBox.Show(info);
+                info = UiMessages.T("Subject: ", "الموضوع: ") + certificate.Subject + "\n";
+                info += UiMessages.T("Issuer: ", "المصدر: ") + certificate.Issuer + "\n";
+                info += UiMessages.T("Valid From: ", "صالح من: ") + certificate.NotBefore + "\n";
+                info += UiMessages.T("Valid To: ", "صالح حتى: ") + certificate.NotAfter + "\n";
 
+                MessageBox.Show(info, UiMessages.T("Certificate Information", "معلومات الشهادة"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "Unable to read certificate information.\n" + ex.Message,
+                    "تعذر قراءة معلومات الشهادة.\n" + ex.Message,
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
         }
-
     }
 }

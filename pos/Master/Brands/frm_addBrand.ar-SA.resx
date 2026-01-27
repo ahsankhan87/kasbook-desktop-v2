@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 13</value>
+    <value>35, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>اسم</value>
@@ -127,8 +127,11 @@
   <data name="btn_save.Text" xml:space="preserve">
     <value>حفظ</value>
   </data>
+  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 19</value>
+  </data>
   <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
+    <value>157, 25</value>
   </data>
   <data name="lbl_header_title.Text" xml:space="preserve">
     <value>أضف علامة تجارية</value>
@@ -137,19 +140,19 @@
     <value>إلغاء</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 13</value>
+    <value>35, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>اسم</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
+    <value>59, 17</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>كود الفئة</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
+    <value>89, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>كود المجموعة</value>

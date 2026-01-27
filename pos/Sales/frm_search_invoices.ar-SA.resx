@@ -118,29 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 60</value>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 151</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 63</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 17</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>من تاريخ</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 87</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 17</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>الى تاريخ</value>
-  </data>
-  <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 84</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>معايير</value>
   </data>
   <data name="btn_close.Location" type="System.Drawing.Point, System.Drawing">
     <value>703, 20</value>
@@ -158,14 +140,44 @@
     <value>511, 20</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث (F3)</value>
+    <value>بحث</value>
+  </data>
+  <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 72</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 75</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>من تاريخ</value>
+  </data>
+  <data name="txt_condition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 33</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 99</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>الى تاريخ</value>
+  </data>
+  <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 96</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid_sales_report.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
   <data name="sale_date.HeaderText" xml:space="preserve">
     <value>تاريخ</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة
-</value>
+    <value>رقم الفاتورة</value>
   </data>
   <data name="customer_name.HeaderText" xml:space="preserve">
     <value>العميل</value>
@@ -173,8 +185,14 @@
   <data name="total_amount.HeaderText" xml:space="preserve">
     <value>المجموع</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grid_sales_report.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>ابحث عن فواتير المبيعات</value>
   </data>
 </root>

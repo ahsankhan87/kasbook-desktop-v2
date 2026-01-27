@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -44,9 +46,18 @@ namespace pos
         
         public void frm_customer_payment_Load(object sender, EventArgs e)
         {
-            Get_AccountID_From_Company();
-            get_accounts_dropdownlist();
-            GetMAXInvoiceNo();
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))    {
+                    Get_AccountID_From_Company();
+                    get_accounts_dropdownlist();
+                    GetMAXInvoiceNo();
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         public void get_accounts_dropdownlist()
@@ -77,69 +88,132 @@ namespace pos
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            if (_invoice_no != string.Empty && _customer_id != 0)
+            try
             {
-                int GL_account_id = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
-                int Ref_account_id = (cmb_ref_account_code.SelectedValue == null ? 0 : int.Parse(cmb_ref_account_code.SelectedValue.ToString()));
-
-                ///CASH/BANK JOURNAL ENTRY (DEBIT)
-                Insert_Journal_entry(_invoice_no, GL_account_id, Convert.ToDouble(txt_total_amount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
-
-                ///ACCOUNT RECEIVABLE JOURNAL ENTRY (CREDIT)
-                int entry_id = Insert_Journal_entry(_invoice_no, receivable_account_id, 0, Convert.ToDouble(txt_total_amount.Text), txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
-
-                ///ADD ENTRY INTO customer PAYMENT(CREDIT)
-                Insert_Journal_entry(_invoice_no, GL_account_id, 0, Convert.ToDouble(txt_total_amount.Text), txt_payment_date.Value.Date, txt_description.Text, _customer_id, 0, entry_id, 0);
-
-                // Insert entry into reference account if selected
-                if (Ref_account_id != 0)
+                if (string.IsNullOrWhiteSpace(_invoice_no) || _customer_id == 0)
                 {
-                    // check if reference account is receivable or payable or bank
-                    BankBLL bankBLL = new BankBLL();
-                    if (bankBLL.IsBankGlAccount(GL_account_id))
+                    UiMessages.ShowInfo(
+                        "Please select a customer and enter the payment details.",
+                        "يرجى اختيار عميل وإدخال بيانات الدفعة.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txt_total_amount.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Payment amount is required.",
+                        "مبلغ الدفعة مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                double amount;
+                if (!double.TryParse(txt_total_amount.Text, out amount) || amount <= 0)
+                {
+                    UiMessages.ShowInfo(
+                        "Please enter a valid payment amount.",
+                        "يرجى إدخال مبلغ دفعة صحيح.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Post this customer payment?",
+                    "هل تريد ترحيل دفعة العميل؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T("Posting payment...", "جاري ترحيل الدفعة...")))
+                {
+                    int GL_account_id = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
+                    int Ref_account_id = (cmb_ref_account_code.SelectedValue == null ? 0 : int.Parse(cmb_ref_account_code.SelectedValue.ToString()));
+
+                    // CASH/BANK JOURNAL ENTRY (DEBIT)
+                    Insert_Journal_entry(_invoice_no, GL_account_id, amount, 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
+
+                    // ACCOUNT RECEIVABLE JOURNAL ENTRY (CREDIT)
+                    int entry_id = Insert_Journal_entry(_invoice_no, receivable_account_id, 0, amount, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
+
+                    // ADD ENTRY INTO customer PAYMENT (CREDIT)
+                    Insert_Journal_entry(_invoice_no, GL_account_id, 0, amount, txt_payment_date.Value.Date, txt_description.Text, _customer_id, 0, entry_id, 0);
+
+                    // Insert entry into reference account if selected
+                    if (Ref_account_id != 0)
                     {
-                        // Insert into reference account (debit) in bank payment
-                        Insert_Journal_entry(_invoice_no, GL_account_id, Convert.ToDouble(txt_total_amount.Text),0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, entry_id, Ref_account_id);
+                        BankBLL bankBLL = new BankBLL();
+                        if (bankBLL.IsBankGlAccount(GL_account_id))
+                        {
+                            // Insert into reference account (debit) in bank payment
+                            Insert_Journal_entry(_invoice_no, GL_account_id, amount, 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, entry_id, Ref_account_id);
+                        }
                     }
-                    else {
-                        // Default handling for other account types
+
+                    // IF DISCOUNT APPLIED
+                    if (!string.IsNullOrWhiteSpace(txt_discount.Text))
+                    {
+                        double discount;
+                        if (double.TryParse(txt_discount.Text, out discount) && discount > 0)
+                        {
+                            // SALES DISCOUNT JOURNAL ENTRY (debit)
+                            int entry_idd = Insert_Journal_entry(_invoice_no, sales_discount_acc_id, discount, 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
+                            // receivable JOURNAL ENTRY (credit)
+                            Insert_Journal_entry(_invoice_no, receivable_account_id, 0, discount, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
+
+                            // ADD ENTRY INTO customer PAYMENT (credit)
+                            Insert_Journal_entry(_invoice_no, sales_discount_acc_id, 0, discount, txt_payment_date.Value.Date, txt_description.Text, _customer_id, 0, entry_idd, 0);
+                        }
+                        else
+                        {
+                            UiMessages.ShowInfo(
+                                "Please enter a valid discount amount.",
+                                "يرجى إدخال مبلغ خصم صحيح.",
+                                "Validation",
+                                "التحقق"
+                            );
+                            return;
+                        }
                     }
 
+                    if (entry_id > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Payment has been posted successfully.",
+                            "تم ترحيل الدفعة بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
+                    }
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Payment could not be posted. Please try again.",
+                            "تعذر ترحيل الدفعة. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
+                    }
+
+                    if (mainForm != null)
+                        mainForm.load_customer_transactions_grid(_customer_id);
+
+                    this.Close();
                 }
-
-                ///IF DISCOUNT APPLIED
-                if (txt_discount.Text != string.Empty)
-                {
-                    /// SALES DISCOUNT JOURNAL ENTRY (debit)
-                    int entry_idd = Insert_Journal_entry(_invoice_no, sales_discount_acc_id, Convert.ToDouble(txt_discount.Text), 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
-                    ///receivable JOURNAL ENTRY (credit)
-                    Insert_Journal_entry(_invoice_no, receivable_account_id, 0, Convert.ToDouble(txt_discount.Text), txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0, 0);
-
-                    
-                    ///ADD ENTRY INTO customer PAYMENT(credit)
-                    Insert_Journal_entry(_invoice_no, sales_discount_acc_id, 0, Convert.ToDouble(txt_discount.Text), txt_payment_date.Value.Date, txt_description.Text, _customer_id, 0, entry_idd, 0);
-
-                }
-
-               if (entry_id > 0)
-                {
-                    MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-               mainForm.load_customer_transactions_grid(_customer_id);
-                    
-                this.Close();
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
-            
         }
         
         private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,

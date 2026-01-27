@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos.Expenses
 {
@@ -19,6 +21,10 @@ namespace pos.Expenses
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
 
+        private readonly Timer _calcDebounce = new Timer();
+        private const int CalcDebounceMs = 120;
+        private DataGridViewCellEventArgs _pendingCellEndEdit;
+
         public frm_expenses()
         {
             InitializeComponent();
@@ -26,17 +32,37 @@ namespace pos.Expenses
 
         private void frm_expenses_Load(object sender, EventArgs e)
         {
+            // debounce for totals calculation
+            _calcDebounce.Interval = CalcDebounceMs;
+            _calcDebounce.Tick += CalcDebounce_Tick;
+
             // permission check
             if (!_auth.HasPermission(_currentUser, Permissions.Expenses_Create))
             {
-                MessageBox.Show("You do not have permission to access this module.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowWarning(
+                    "You do not have permission to access Expenses.",
+                    "ليس لديك صلاحية للوصول إلى المصروفات.",
+                    "Access Denied",
+                    "تم رفض الوصول"
+                );
+                // Keep form open but limit actions via save permission check.
             }
 
-            get_cash_accounts_dropdownlist();
-            cmb_cash_account.SelectedValue = "3";
-            get_vat_accounts_dropdownlist();
-            cmb_vat_account.SelectedValue = "7";
-            get_expense_accounts_dropdownlist();
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
+                {
+                    get_cash_accounts_dropdownlist();
+                    cmb_cash_account.SelectedValue = "3";
+                    get_vat_accounts_dropdownlist();
+                    cmb_vat_account.SelectedValue = "7";
+                    get_expense_accounts_dropdownlist();
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         public void get_expense_accounts_dropdownlist()
@@ -58,7 +84,6 @@ namespace pos.Expenses
             {
                 if (cmb_account_code.Items.Count > 0)
                 {
-                    
                     string account_code = cmb_account_code.SelectedValue.ToString();
                     string account = cmb_account_code.GetItemText(cmb_account_code.SelectedItem).ToString();
                     string amount = "0";
@@ -66,22 +91,25 @@ namespace pos.Expenses
                     string desc = "";
                     string total = "";
 
-                    string[] row0 = { account_code, account, amount, vat, desc,total };
-                    
+                    string[] row0 = { account_code, account, amount, vat, desc, total };
+
                     grid_expenses.Rows.Add(row0);
 
-                    fill_vat_grid_combo(grid_expenses.RowCount-1);
-
+                    fill_vat_grid_combo(grid_expenses.RowCount - 1);
                 }
                 else
                 {
-                    MessageBox.Show("Please select account", "Expenses", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                    UiMessages.ShowInfo(
+                        "Please select an expense account.",
+                        "يرجى اختيار حساب المصروف.",
+                        "Expenses",
+                        "المصروفات"
+                    );
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -115,14 +143,17 @@ namespace pos.Expenses
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                    DialogResult result = MessageBox.Show("Are you sure you want delete", "Delete", buttons, MessageBoxIcon.Warning);
+                    var confirm = UiMessages.ConfirmYesNo(
+                        "Delete the selected row?",
+                        "هل تريد حذف الصف المحدد؟",
+                        captionEn: "Confirm Delete",
+                        captionAr: "تأكيد الحذف"
+                    );
 
-                    if (result == DialogResult.Yes)
+                    if (confirm == DialogResult.Yes)
                     {
-                        grid_expenses.Rows.RemoveAt(grid_expenses.CurrentRow.Index);
-
-                      
+                        if (grid_expenses.CurrentRow != null)
+                            grid_expenses.Rows.RemoveAt(grid_expenses.CurrentRow.Index);
                     }
                 }
 
@@ -134,31 +165,16 @@ namespace pos.Expenses
 
                     if (iColumn <= 5)
                     {
-                        
-                            grid_expenses.CurrentCell = grid_expenses.Rows[iRow].Cells[iColumn + 1];
-                            grid_expenses.Focus();
-                            grid_expenses.CurrentCell.Selected = true;
-                        
+                        grid_expenses.CurrentCell = grid_expenses.Rows[iRow].Cells[iColumn + 1];
+                        grid_expenses.Focus();
+                        grid_expenses.CurrentCell.Selected = true;
                     }
-                    //else if (iColumn > 5)
-                    //{
-                    //    if (grid_expenses.Rows[iRow].Cells["code"].Value != null && grid_expenses.Rows[iRow].Cells["unit_price"].Value != null && grid_expenses.Rows[iRow].Cells["qty"].Value != null)
-                    //    {
-                    //        grid_expenses.Rows.Add();  //adds new row on last cell of row
-                    //        this.ActiveControl = grid_expenses;
-                    //        grid_expenses.CurrentCell = grid_expenses.Rows[iRow + 1].Cells["code"];
-                    //        //grid_expenses.Rows[iRow + 1].Cells["code"].Value = product_code;
-                    //        grid_expenses.CurrentCell.Selected = true;
-                    //        grid_expenses.BeginEdit(true);
-                    //    }
-
-                    //}
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
 
@@ -169,36 +185,74 @@ namespace pos.Expenses
                 string name = grid_expenses.Columns[e.ColumnIndex].Name;
                 if (name == "btn_delete")
                 {
-                    grid_expenses.Rows.RemoveAt(e.RowIndex);
+                    var confirm = UiMessages.ConfirmYesNo(
+                        "Delete the selected row?",
+                        "هل تريد حذف الصف المحدد؟",
+                        captionEn: "Confirm Delete",
+                        captionAr: "تأكيد الحذف"
+                    );
 
+                    if (confirm == DialogResult.Yes)
+                        grid_expenses.Rows.RemoveAt(e.RowIndex);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want close", "Close Form", buttons, MessageBoxIcon.Warning);
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close this window?",
+                "هل تريد إغلاق النافذة؟",
+                captionEn: "Close",
+                captionAr: "إغلاق"
+            );
 
-            if (result == DialogResult.Yes)
-            {
+            if (confirm == DialogResult.Yes)
                 this.Close();
-            }
         }
 
         private void grid_expenses_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            double tax_rate = (grid_expenses.Rows[e.RowIndex].Cells["vat"].Value == null || grid_expenses.Rows[e.RowIndex].Cells["vat"].Value.ToString() == "" ? 0 : double.Parse(grid_expenses.Rows[e.RowIndex].Cells["vat"].Value.ToString()));
-            double amount = Convert.ToDouble(grid_expenses.Rows[e.RowIndex].Cells["amount"].Value);
-            double tax = (amount * tax_rate / 100);
+            // debounce calculation to avoid repeated parsing while edits are in progress
+            _pendingCellEndEdit = e;
+            _calcDebounce.Stop();
+            _calcDebounce.Start();
+        }
 
-            grid_expenses.Rows[e.RowIndex].Cells["total"].Value = amount + tax;
+        private void CalcDebounce_Tick(object sender, EventArgs e)
+        {
+            _calcDebounce.Stop();
 
+            if (_pendingCellEndEdit == null)
+                return;
+
+            try
+            {
+                int rowIndex = _pendingCellEndEdit.RowIndex;
+                if (rowIndex < 0 || rowIndex >= grid_expenses.Rows.Count)
+                    return;
+
+                double tax_rate = (grid_expenses.Rows[rowIndex].Cells["vat"].Value == null || grid_expenses.Rows[rowIndex].Cells["vat"].Value.ToString() == "" ? 0 : double.Parse(grid_expenses.Rows[rowIndex].Cells["vat"].Value.ToString()));
+
+                double amount = 0;
+                var amountObj = grid_expenses.Rows[rowIndex].Cells["amount"].Value;
+                if (amountObj != null)
+                {
+                    double.TryParse(amountObj.ToString(), out amount);
+                }
+
+                double tax = (amount * tax_rate / 100);
+                grid_expenses.Rows[rowIndex].Cells["total"].Value = amount + tax;
+            }
+            catch
+            {
+                // keep silent; user may still be editing values
+            }
         }
 
         public void get_cash_accounts_dropdownlist()
@@ -234,57 +288,87 @@ namespace pos.Expenses
                 // Permission check
                 if (!_auth.HasPermission(_currentUser, Permissions.Expenses_Create))
                 {
-                    MessageBox.Show("You do not have permission to perform this action.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UiMessages.ShowWarning(
+                        "You do not have permission to perform this action.",
+                        "ليس لديك صلاحية لتنفيذ هذا الإجراء.",
+                        "Access Denied",
+                        "تم رفض الوصول"
+                    );
                     return;
                 }
 
-                DialogResult result = MessageBox.Show("Are you sure you want to ?", "Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                if (grid_expenses.Rows.Count <= 0)
                 {
-                    if (grid_expenses.Rows.Count > 0)
+                    UiMessages.ShowInfo(
+                        "Please add at least one expense line.",
+                        "يرجى إضافة بند مصروف واحد على الأقل.",
+                        "Expenses",
+                        "المصروفات"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Save this expense transaction?",
+                    "هل تريد حفظ حركة المصروفات؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T("Saving...", "جاري الحفظ...")))
+                {
+                    List<ExpenseModal_Header> model_header = new List<ExpenseModal_Header> { };
+
+                    ExpenseBLL salesObj = new ExpenseBLL();
+                    string invoice_no = salesObj.GetMaxInvoiceNo();
+
+                    for (int i = 0; i < grid_expenses.Rows.Count; i++)
                     {
-                        List<ExpenseModal_Header> model_header = new List<ExpenseModal_Header> { };
+                        if (grid_expenses.Rows[i].IsNewRow) continue;
+                        if (grid_expenses.Rows[i].Cells["account_code"].Value == null) continue;
 
-                        ExpenseBLL salesObj = new ExpenseBLL();
-                        string invoice_no = salesObj.GetMaxInvoiceNo();
-
-                        for (int i = 0; i < grid_expenses.Rows.Count; i++)
+                        model_header.Add(new ExpenseModal_Header
                         {
-                            /////Added sales header into the List
-                            model_header.Add(new ExpenseModal_Header
-                            {
+                            cash_account = (cmb_cash_account.SelectedValue == null ? "" : cmb_cash_account.SelectedValue.ToString()),
+                            vat_account = (cmb_vat_account.SelectedValue == null ? "" : cmb_vat_account.SelectedValue.ToString()),
+                            invoice_no = invoice_no,
+                            sale_date = txt_sale_date.Value.Date,
+                            expense_account = Convert.ToString(grid_expenses.Rows[i].Cells["account_code"].Value),
+                            amount = (grid_expenses.Rows[i].Cells["amount"].Value == null ? 0 : Convert.ToDouble(grid_expenses.Rows[i].Cells["amount"].Value.ToString())),
+                            vat = (grid_expenses.Rows[i].Cells["vat"].Value == null ? 0 : Convert.ToDouble(grid_expenses.Rows[i].Cells["vat"].Value.ToString())),
+                            description = (grid_expenses.Rows[i].Cells["description"].Value == null ? "" : grid_expenses.Rows[i].Cells["description"].Value.ToString()),
+                            expense_account_name = (grid_expenses.Rows[i].Cells["account"].Value == null ? "" : grid_expenses.Rows[i].Cells["account"].Value.ToString()),
+                        });
+                    }
 
-                                cash_account = (cmb_cash_account.SelectedValue.ToString() == null ? "" : cmb_cash_account.SelectedValue.ToString()),
-                                vat_account = (cmb_vat_account.SelectedValue.ToString() == null ? "" : cmb_vat_account.SelectedValue.ToString()),
-                                invoice_no = invoice_no,
-                                sale_date = txt_sale_date.Value.Date,
-                                expense_account = grid_expenses.Rows[i].Cells["account_code"].Value.ToString(),
-                                amount = Convert.ToDouble(grid_expenses.Rows[i].Cells["amount"].Value.ToString()),
-                                vat = (grid_expenses.Rows[i].Cells["vat"].Value == null ? 0 : Convert.ToDouble(grid_expenses.Rows[i].Cells["vat"].Value.ToString())),
-                                description = grid_expenses.Rows[i].Cells["description"].Value.ToString(),
-                                expense_account_name = grid_expenses.Rows[i].Cells["account"].Value.ToString(),
-                            });
-                            //////
-                        }
-
-                        var sale_id = salesObj.Insert(model_header);// for sales items
-                        if (sale_id.ToString().Length > 0)
-                        {
-                            MessageBox.Show("Transaction created successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            clear_form();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                    var sale_id = salesObj.Insert(model_header);
+                    if (sale_id.ToString().Length > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Expense transaction has been saved successfully.",
+                            "تم حفظ حركة المصروفات بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
+                        clear_form();
+                    }
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Expense transaction could not be saved. Please try again.",
+                            "تعذر حفظ حركة المصروفات. يرجى المحاولة مرة أخرى.",
+                            "Error",
+                            "خطأ"
+                        );
                     }
                 }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
         private void clear_form()
@@ -299,6 +383,10 @@ namespace pos.Expenses
             if (e.KeyData == Keys.F3)
             {
                 btn_save.PerformClick();
+            }
+            if (e.KeyData == Keys.Escape)
+            {
+                btn_close.PerformClick();
             }
         }
     }

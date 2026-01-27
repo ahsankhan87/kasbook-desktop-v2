@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -59,64 +61,121 @@ namespace pos
         
         private void btn_save_Click(object sender, EventArgs e)
         {
-            
-                if (txt_code.Text != string.Empty)
+            try
+            {
+                bool isEdit = (lbl_edit_status.Text == "true");
+
+                if (string.IsNullOrWhiteSpace(txt_code.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Code is required.",
+                        "الكود مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_code.Focus();
+                    return;
+                }
+
+                if (txt_from_date.Value.Date > txt_todate.Value.Date)
+                {
+                    UiMessages.ShowInfo(
+                        "From date must be less than or equal to To date.",
+                        "يجب أن يكون تاريخ البداية أقل من أو يساوي تاريخ النهاية.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this fiscal year?" : "Save this fiscal year?",
+                    isEdit ? "هل تريد تحديث هذه السنة المالية؟" : "هل تريد حفظ هذه السنة المالية؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T(isEdit ? "Updating..." : "Saving...", isEdit ? "جاري التحديث..." : "جاري الحفظ...")))
                 {
                     FiscalYearModal info = new FiscalYearModal();
-                    info.code = txt_code.Text;
+                    info.code = txt_code.Text.Trim();
                     info.name = txt_description.Text;
                     info.from_date = txt_from_date.Value.Date;
                     info.to_date = txt_todate.Value.Date;
-                    
+
                     FiscalYearBLL objBLL = new FiscalYearBLL();
-                    
-                    if (lbl_edit_status.Text == "true")
+                    int result;
+
+                    if (isEdit)
                     {
-                        info.id = int.Parse(txt_id.Text);
-                    
-                        int result = objBLL.Update(info);
-                        if (result > 0)
+                        int id;
+                        if (!int.TryParse(txt_id.Text, out id) || id <= 0)
                         {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UiMessages.ShowError(
+                                "Invalid fiscal year id.",
+                                "معرّف السنة المالية غير صالح.",
+                                "Error",
+                                "خطأ"
+                            );
+                            return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        info.id = id;
+                        result = objBLL.Update(info);
                     }
                     else
                     {
-                        int result = objBLL.Insert(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        result = objBLL.Insert(info);
                     }
-                    
-                    if(mainForm != null)
+
+                    if (result > 0)
                     {
-                        mainForm.load_fiscal_years_grid();
-
+                        UiMessages.ShowInfo(
+                            isEdit ? "Record updated successfully." : "Record created successfully.",
+                            isEdit ? "تم تحديث السجل بنجاح." : "تم إنشاء السجل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                     }
-
-                    this.Close();
-
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Record not saved.",
+                            "لم يتم حفظ السجل.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                }
-            
+
+                if (mainForm != null)
+                    mainForm.load_fiscal_years_grid();
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_addFiscalYear_KeyDown(object sender, KeyEventArgs e)

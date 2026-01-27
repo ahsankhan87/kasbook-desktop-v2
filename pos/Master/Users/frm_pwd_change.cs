@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -65,51 +67,113 @@ namespace pos
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (_user_id <= 0)
+                {
+                    UiMessages.ShowError(
+                        "Invalid user.",
+                        "مستخدم غير صالح.",
+                        "Error",
+                        "خطأ"
+                    );
+                    return;
+                }
 
+                if (string.IsNullOrWhiteSpace(txt_password.Text) || string.IsNullOrWhiteSpace(txt_confirm_pwd.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Password and confirm password are required.",
+                        "كلمة المرور وتأكيد كلمة المرور مطلوبان.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
 
-            if (txt_password.Text == txt_confirm_pwd.Text)
+                if (!string.Equals(txt_password.Text, txt_confirm_pwd.Text, StringComparison.Ordinal))
+                {
+                    UiMessages.ShowInfo(
+                        "Password does not match.",
+                        "كلمة المرور غير متطابقة.",
+                        "Password Change",
+                        "تغيير كلمة المرور"
+                    );
+                    return;
+                }
+
+                if (txt_password.Text.Length < 2)
+                {
+                    UiMessages.ShowInfo(
+                        "Password is too short.",
+                        "كلمة المرور قصيرة جدًا.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Change password for this user?",
+                    "هل تريد تغيير كلمة المرور لهذا المستخدم؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T("Updating password...", "جاري تحديث كلمة المرور...")))
                 {
                     UsersModal info = new UsersModal();
-                    //info.username = txt_username.Text;
                     info.password = txt_password.Text;
-                   
-                    UsersBLL objBLL = new UsersBLL();
-
-
                     info.id = _user_id;
-                    
-                        int result = objBLL.UpdatePassword(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Password updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    
-                    
-                    //frm_users obj_frm_cust = new frm_users();
-                    //obj_frm_cust.Close();
-                    //obj_frm_cust.ShowDialog();
-                    //mainForm.load_user_detail();
-                    //obj_frm_cust.load_userss_grid();
-                    //obj_frm_cust.frm_users_Load(sender,e);
 
-                    this.Close();
+                    UsersBLL objBLL = new UsersBLL();
+                    int result = objBLL.UpdatePassword(info);
+                    if (result > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Password updated successfully.",
+                            "تم تحديث كلمة المرور بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
+                    }
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Password was not updated.",
+                            "لم يتم تحديث كلمة المرور.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
+                }
 
-                }
-                else
-                {
-                    MessageBox.Show("Password does not match", "Password Change", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                }
-            
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_pwd_change_KeyDown(object sender, KeyEventArgs e)

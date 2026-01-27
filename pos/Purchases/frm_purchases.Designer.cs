@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_purchases));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -90,7 +91,7 @@
             this.txt_barcode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txt_brands = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip_purchases = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip_purchases = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productMovementF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,7 +151,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.locationsdtDataTableBindingSource = new System.Windows.Forms.BindingSource();
+            this.locationsdtDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_header.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();

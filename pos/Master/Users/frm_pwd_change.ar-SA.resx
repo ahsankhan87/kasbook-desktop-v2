@@ -121,8 +121,11 @@
     <value>حفظ</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>289, 24</value>
+  </data>
   <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 20</value>
+    <value>144, 25</value>
   </data>
   <data name="lbl_header_title.Text" xml:space="preserve">
     <value>تغيير كلمة المرور</value>
@@ -131,16 +134,22 @@
     <value>إلغاء</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+    <value>109, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>اسم االمستخدم:</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>110, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>كلمة مرور جديدة:</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>تأكيد كلمة المرور:</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -165,6 +174,14 @@
         //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAA==
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>تغيير كلمة المرور</value>

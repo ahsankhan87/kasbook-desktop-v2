@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -30,20 +32,22 @@ namespace pos
         {
             try
             {
-                grid_locations.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading locations...", "جاري تحميل المواقع...")))
+                {
+                    grid_locations.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_locations.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_locations.AutoGenerateColumns = false;
 
-                String keyword = "*";
-                String table = "pos_Locations";
-                grid_locations.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "*";
+                    String table = "pos_Locations";
+                    grid_locations.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -58,6 +62,17 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            if (grid_locations.CurrentRow == null)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a location record to update.",
+                    "يرجى اختيار موقع للتحديث.",
+                    "Locations",
+                    "المواقع"
+                );
+                return;
+            }
+
             string id = grid_locations.CurrentRow.Cells["id"].Value.ToString();
             string name = grid_locations.CurrentRow.Cells["name"].Value.ToString();
             string code = grid_locations.CurrentRow.Cells["code"].Value.ToString();
@@ -74,24 +89,60 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_locations.CurrentRow.Cells[0].Value.ToString();
-
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (grid_locations.CurrentRow == null)
             {
+                UiMessages.ShowInfo(
+                    "Please select a location record to delete.",
+                    "يرجى اختيار موقع للحذف.",
+                    "Locations",
+                    "المواقع"
+                );
+                return;
+            }
 
-                LocationsBLL objBLL = new LocationsBLL();
-                objBLL.Delete(int.Parse(id));
+            string idText = Convert.ToString(grid_locations.CurrentRow.Cells[0].Value);
+            int id;
+            if (!int.TryParse(idText, out id) || id <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected record is not valid.",
+                    "السجل المحدد غير صالح.",
+                    "Locations",
+                    "المواقع"
+                );
+                return;
+            }
 
-                MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this location?",
+                "هل تريد حذف هذا الموقع؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
+                {
+                    LocationsBLL objBLL = new LocationsBLL();
+                    objBLL.Delete(id);
+                }
+
+                UiMessages.ShowInfo(
+                    "Record deleted successfully.",
+                    "تم حذف السجل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+
                 load_Locations_grid();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -105,23 +156,16 @@ namespace pos
         {
             try
             {
-                
-                    //grid_locations.DataSource = null;
-
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     LocationsBLL objBLL = new LocationsBLL();
-                    //grid_locations.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_locations.DataSource = objBLL.SearchRecord(condition);
-
-                    //txt_search.Text = "";
-                
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }

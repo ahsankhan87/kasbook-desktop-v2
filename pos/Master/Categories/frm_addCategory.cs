@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -55,63 +57,107 @@ namespace pos
         
         private void btn_save_Click(object sender, EventArgs e)
         {
+            try
+            {
+                bool isEdit = (lbl_edit_status.Text == "true");
 
+                if (string.IsNullOrWhiteSpace(txt_code.Text) || string.IsNullOrWhiteSpace(txt_name.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Category code and name are required.",
+                        "كود واسم القسم حقول مطلوبة.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    return;
+                }
 
-            if (txt_code.Text != string.Empty && txt_name.Text != string.Empty)
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this category?" : "Save this category?",
+                    isEdit ? "هل تريد تحديث هذا القسم؟" : "هل تريد حفظ هذا القسم؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T(isEdit ? "Updating..." : "Saving...", isEdit ? "جاري التحديث..." : "جاري الحفظ...")))
                 {
                     CategoriesModal info = new CategoriesModal();
-                    info.name = txt_name.Text;
-                    info.code = txt_code.Text;
-                    
+                    info.name = txt_name.Text.Trim();
+                    info.code = txt_code.Text.Trim();
+
                     CategoriesBLL objBLL = new CategoriesBLL();
-                    
-                    if (lbl_edit_status.Text == "true")
+                    int result;
+
+                    if (isEdit)
                     {
-                        info.id = int.Parse(txt_id.Text);
-                    
-                        int result = objBLL.Update(info);
-                        if (result > 0)
+                        int id;
+                        if (!int.TryParse(txt_id.Text, out id) || id <= 0)
                         {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UiMessages.ShowError(
+                                "Invalid category id.",
+                                "معرّف القسم غير صالح.",
+                                "Error",
+                                "خطأ"
+                            );
+                            return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        info.id = id;
+                        result = objBLL.Update(info);
                     }
                     else
                     {
-                        int result = objBLL.Insert(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        result = objBLL.Insert(info);
                     }
-                    
-                    if(mainForm != null)
+
+                    if (result > 0)
                     {
-                        mainForm.load_categories_grid();
-
+                        UiMessages.ShowInfo(
+                            isEdit ? "Record updated successfully." : "Record created successfully.",
+                            isEdit ? "تم تحديث السجل بنجاح." : "تم إنشاء السجل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                     }
-                    
-                    this.Close();
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Record not saved.",
+                            "لم يتم حفظ السجل.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
+                }
 
-                }
-                else
-                {
-                    MessageBox.Show("Please enter code and name", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                }
-            
+                if (mainForm != null)
+                    mainForm.load_categories_grid();
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_addCategory_KeyDown(object sender, KeyEventArgs e)

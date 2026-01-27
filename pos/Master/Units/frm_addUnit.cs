@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -53,62 +55,109 @@ namespace pos
         
         private void btn_save_Click(object sender, EventArgs e)
         {
-            
-                
-                if (txt_name.Text != string.Empty)
+            try
+            {
+                bool isEdit = (lbl_edit_status.Text == "true");
+
+                if (string.IsNullOrWhiteSpace(txt_name.Text))
+                {
+                    UiMessages.ShowInfo(
+                        "Unit name is required.",
+                        "اسم الوحدة مطلوب.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_name.Focus();
+                    return;
+                }
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this unit?" : "Save this unit?",
+                    isEdit ? "هل تريد تحديث هذه الوحدة؟" : "هل تريد حفظ هذه الوحدة؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                using (BusyScope.Show(this, UiMessages.T(isEdit ? "Updating..." : "Saving...", isEdit ? "جاري التحديث..." : "جاري الحفظ...")))
                 {
                     UnitsModal info = new UnitsModal();
-                    info.name = txt_name.Text;
-                    
+                    info.name = txt_name.Text.Trim();
+
                     UnitsBLL objBLL = new UnitsBLL();
-                    
-                    if (lbl_edit_status.Text == "true")
+                    int result;
+
+                    if (isEdit)
                     {
-                        info.id = int.Parse(txt_id.Text);
-                    
-                        int result = objBLL.Update(info);
-                        if (result > 0)
+                        int id;
+                        if (!int.TryParse(txt_id.Text, out id) || id <= 0)
                         {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UiMessages.ShowError(
+                                "Invalid unit id.",
+                                "معرّف الوحدة غير صالح.",
+                                "Error",
+                                "خطأ"
+                            );
+                            return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+
+                        info.id = id;
+                        result = objBLL.Update(info);
                     }
                     else
                     {
-                        int result = objBLL.Insert(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        result = objBLL.Insert(info);
                     }
-                    
-                    if(mainForm != null)
+
+                    if (result > 0)
                     {
-                        mainForm.load_units_grid();
-
+                        UiMessages.ShowInfo(
+                            isEdit ? "Record updated successfully." : "Record created successfully.",
+                            isEdit ? "تم تحديث السجل بنجاح." : "تم إنشاء السجل بنجاح.",
+                            "Success",
+                            "نجاح"
+                        );
                     }
-                    
-                    this.Close();
+                    else
+                    {
+                        UiMessages.ShowError(
+                            "Record not saved.",
+                            "لم يتم حفظ السجل.",
+                            "Error",
+                            "خطأ"
+                        );
+                        return;
+                    }
+                }
 
-                }
-                else
-                {
-                    MessageBox.Show("Please enter value in field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                }
-            
+                if (mainForm != null)
+                    mainForm.load_units_grid();
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
+
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            var confirm = UiMessages.ConfirmYesNo(
+                "Close without saving?",
+                "هل تريد الإغلاق بدون حفظ؟",
+                captionEn: "Confirm",
+                captionAr: "تأكيد"
+            );
+
+            if (confirm == DialogResult.Yes)
+            {
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private void frm_addUnit_KeyDown(object sender, KeyEventArgs e)

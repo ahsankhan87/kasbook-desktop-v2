@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_all_estimates));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSendWhatsApp = new System.Windows.Forms.Button();
             this.txt_search = new System.Windows.Forms.TextBox();
@@ -39,8 +39,6 @@
             this.btn_print_invoice = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_all_estimates = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +50,9 @@
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewImageColumn();
             this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
+            this.Btn_PrintPOS80 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_estimates)).BeginInit();
             this.panel2.SuspendLayout();
@@ -59,20 +60,21 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.Btn_PrintPOS80);
             this.panel1.Controls.Add(this.btnSendWhatsApp);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.btn_print_invoice);
             this.panel1.Controls.Add(this.btn_refresh);
             this.panel1.Controls.Add(this.grid_all_estimates);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // btnSendWhatsApp
             // 
-            resources.ApplyResources(this.btnSendWhatsApp, "btnSendWhatsApp");
             this.btnSendWhatsApp.BackColor = System.Drawing.Color.Green;
+            resources.ApplyResources(this.btnSendWhatsApp, "btnSendWhatsApp");
             this.btnSendWhatsApp.ForeColor = System.Drawing.SystemColors.Control;
             this.btnSendWhatsApp.Name = "btnSendWhatsApp";
             this.btnSendWhatsApp.UseVisualStyleBackColor = false;
@@ -107,10 +109,10 @@
             // 
             // grid_all_estimates
             // 
-            resources.ApplyResources(this.grid_all_estimates, "grid_all_estimates");
             this.grid_all_estimates.AllowUserToAddRows = false;
             this.grid_all_estimates.AllowUserToDeleteRows = false;
             this.grid_all_estimates.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_all_estimates, "grid_all_estimates");
             this.grid_all_estimates.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_all_estimates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_all_estimates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -131,19 +133,6 @@
             this.grid_all_estimates.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_estimates_CellContentClick);
             this.grid_all_estimates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_estimates_CellDoubleClick);
             this.grid_all_estimates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_all_estimates_KeyDown);
-            // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
             // 
             // id
             // 
@@ -183,9 +172,9 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -193,9 +182,9 @@
             // total_tax
             // 
             this.total_tax.DataPropertyName = "total_tax";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.total_tax.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.total_tax.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.total_tax, "total_tax");
             this.total_tax.Name = "total_tax";
             this.total_tax.ReadOnly = true;
@@ -203,9 +192,9 @@
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            this.total.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.total.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
             this.total.ReadOnly = true;
@@ -232,6 +221,26 @@
             this.btn_delete.Image = global::pos.Properties.Resources.Trash_16;
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.ReadOnly = true;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
+            // 
+            // Btn_PrintPOS80
+            // 
+            resources.ApplyResources(this.Btn_PrintPOS80, "Btn_PrintPOS80");
+            this.Btn_PrintPOS80.Name = "Btn_PrintPOS80";
+            this.Btn_PrintPOS80.UseVisualStyleBackColor = true;
+            this.Btn_PrintPOS80.Click += new System.EventHandler(this.Btn_PrintPOS80_Click);
             // 
             // frm_all_estimates
             // 
@@ -275,6 +284,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewImageColumn detail;
         private System.Windows.Forms.DataGridViewImageColumn btn_delete;
+        private System.Windows.Forms.Button Btn_PrintPOS80;
     }
 }
 

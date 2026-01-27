@@ -4,6 +4,8 @@ using java.security;
 using java.util;
 using Newtonsoft.Json;
 using pos.Master.Companies.zatca;
+using pos.UI;
+using pos.UI.Busy;
 using POS.BLL;
 using POS.Core;
 using POS.DLL;
@@ -47,65 +49,100 @@ namespace pos.Sales
 
         private void LoadZatcaInvoices()
         {
-            // Example: get all invoices with ZATCA status from your DB
-            gridZatcaInvoices.AutoGenerateColumns = false;
+            using (BusyScope.Show(this, UiMessages.T("Loading invoices...", "جاري تحميل الفواتير...")))
+            {
+                try
+                {
+                    // Example: get all invoices with ZATCA status from your DB
+                    gridZatcaInvoices.AutoGenerateColumns = false;
 
-            string invoiceNo = txtInvoiceNo.Text.Trim();
-            string type = cmbType.SelectedValue?.ToString();
-            string subtype = cmbSubtype.SelectedValue?.ToString();
-            string status = cmb_status.SelectedValue?.ToString();
-            DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
-            DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
+                    string invoiceNo = txtInvoiceNo.Text.Trim();
+                    string type = cmbType.SelectedValue?.ToString();
+                    string subtype = cmbSubtype.SelectedValue?.ToString();
+                    string status = cmb_status.SelectedValue?.ToString();
+                    DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
+                    DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
 
-            DataTable dt = new SalesBLL().SearchInvoices(invoiceNo,fromdate,type,subtype,todate,status); // Implement this method in your BLL
-            gridZatcaInvoices.DataSource = dt;
+                    DataTable dt = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status);
+                    gridZatcaInvoices.DataSource = dt;
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+                }
+            }
         }
-
-
 
         private async void btnReport_Click(object sender, EventArgs e)
         {
             try
             {
-                if (gridZatcaInvoices.CurrentRow == null) return;
-
-                // Get the selected invoice number from the grid
-                if (gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value == null)
+                if (gridZatcaInvoices.CurrentRow == null)
                 {
-                    MessageBox.Show("Please select a valid invoice.");
+                    UiMessages.ShowWarning(
+                        "Please select an invoice from the list.",
+                        "يرجى اختيار فاتورة من القائمة.",
+                        "ZATCA",
+                        "زاتكا");
                     return;
                 }
-                // Assuming the invoice number is in the "invoice_no" column
-                if (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString()))
+
+                if (gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value == null ||
+                    string.IsNullOrWhiteSpace(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString()))
                 {
-                    MessageBox.Show("Selected invoice number is empty.");
+                    UiMessages.ShowWarning(
+                        "The selected row does not contain a valid invoice number.",
+                        "السطر المحدد لا يحتوي على رقم فاتورة صحيح.",
+                        "ZATCA",
+                        "زاتكا");
                     return;
                 }
 
                 string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
 
                 btnComplianceChecks.Enabled = false;
-                btnComplianceChecks.Text = "Checking...";
+                btnComplianceChecks.Text = UiMessages.T("Checking...", "جارٍ التحقق...");
                 btnComplianceChecks.Cursor = Cursors.WaitCursor;
                 btnComplianceChecks.Refresh();
+
                 await ZatcaInvoiceComplianceChecks(invoiceNo);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
             finally
             {
                 btnComplianceChecks.Enabled = true;
-                btnComplianceChecks.Text = "Compliance checks";
+                btnComplianceChecks.Text = UiMessages.T("Compliance checks", "فحص المطابقة");
                 btnComplianceChecks.Cursor = Cursors.Default;
             }
-
-
         }
+
         private async void NewComplianceCheckButton_Click(object sender, EventArgs e)
         {
-            await ZatcaInvoiceReporting_NEWAsync(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString());
+            if (gridZatcaInvoices.CurrentRow == null)
+            {
+                UiMessages.ShowWarning(
+                    "Please select an invoice from the list.",
+                    "يرجى اختيار فاتورة من القائمة.",
+                    "ZATCA",
+                    "زاتكا");
+                return;
+            }
+
+            var invoiceNo = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value);
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "The selected row does not contain a valid invoice number.",
+                    "السطر المحدد لا يحتوي على رقم فاتورة صحيح.",
+                    "ZATCA",
+                    "زاتكا");
+                return;
+            }
+
+            await ZatcaInvoiceReporting_NEWAsync(invoiceNo);
         }
 
         public async Task ZatcaInvoiceReporting_NEWAsync(string invoiceNo)
@@ -115,196 +152,179 @@ namespace pos.Sales
             {
                 if (!UsersModal.useZatcaEInvoice)
                 {
-                    MessageBox.Show("ZATCA E-Invoice is not enabled.");
+                    UiMessages.ShowWarning(
+                        "ZATCA E-Invoicing is not enabled in system settings.",
+                        "ميزة الفوترة الإلكترونية (زاتكا) غير مفعلة في إعدادات النظام.",
+                        "ZATCA",
+                        "زاتكا");
                     return;
                 }
 
-                // 1️⃣ Generate unsigned XML
-                XmlDocument ublXml = ZatcaHelper.GenerateUBLXMLInvoice(invoiceNo);
-
-                // 2️⃣ Read Issue Date & Time (FINAL)
-                XmlNamespaceManager ns = new XmlNamespaceManager(ublXml.NameTable);
-                ns.AddNamespace("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
-
-                string issueDate = ublXml.SelectSingleNode("//cbc:IssueDate", ns)?.InnerText;
-                string issueTime = ublXml.SelectSingleNode("//cbc:IssueTime", ns)?.InnerText;
-
-                if (string.IsNullOrEmpty(issueDate) || string.IsNullOrEmpty(issueTime))
-                    throw new Exception("IssueDate or IssueTime missing in XML.");
-
-                // 3️⃣ Extract totals & seller info (use your existing logic)
-                // Get invoice data for QR code
-                DataSet ds = salesBLL.GetSaleAndItemsDataSet(invoiceNo);
-                DataRow invoice = ds.Tables["Sale"].Rows[0];
-
-                // Calculate totals for QR code
-                decimal totalWithVat = Convert.ToDecimal(invoice["total_amount"]) + Convert.ToDecimal(invoice["total_tax"]) - Convert.ToDecimal(invoice["discount_value"]);
-                decimal vatAmount = Convert.ToDecimal(invoice["total_tax"]);
-
-                // Get seller info
-                string sellerName = "";
-                string sellerVAT = "";
-                GeneralBLL objBLL = new GeneralBLL();
-                DataTable companies_dt = objBLL.GetRecord("TOP 1 *", "pos_companies");
-                if (companies_dt.Rows.Count > 0)
+                using (BusyScope.Show(this, UiMessages.T("Preparing invoice for reporting...", "جارٍ تجهيز الفاتورة للإرسال...")))
                 {
-                    sellerName = companies_dt.Rows[0]["name"].ToString();
-                    sellerVAT = companies_dt.Rows[0]["vat_no"].ToString();
+                    // 1️⃣ Generate unsigned XML
+                    XmlDocument ublXml = ZatcaHelper.GenerateUBLXMLInvoice(invoiceNo);
+
+                    // 2️⃣ Read Issue Date & Time
+                    XmlNamespaceManager ns = new XmlNamespaceManager(ublXml.NameTable);
+                    ns.AddNamespace("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+
+                    string issueDate = ublXml.SelectSingleNode("//cbc:IssueDate", ns)?.InnerText;
+                    string issueTime = ublXml.SelectSingleNode("//cbc:IssueTime", ns)?.InnerText;
+
+                    if (string.IsNullOrEmpty(issueDate) || string.IsNullOrEmpty(issueTime))
+                        throw new Exception("IssueDate or IssueTime is missing in the generated XML.");
+
+                    // Get invoice data for QR code
+                    DataSet ds = salesBLL.GetSaleAndItemsDataSet(invoiceNo);
+                    DataRow invoice = ds.Tables["Sale"].Rows[0];
+
+                    decimal totalWithVat = Convert.ToDecimal(invoice["total_amount"]) + Convert.ToDecimal(invoice["total_tax"]) - Convert.ToDecimal(invoice["discount_value"]);
+                    decimal vatAmount = Convert.ToDecimal(invoice["total_tax"]);
+
+                    // Get seller info
+                    string sellerName = "";
+                    string sellerVAT = "";
+                    GeneralBLL objBLL = new GeneralBLL();
+                    DataTable companies_dt = objBLL.GetRecord("TOP 1 *", "pos_companies");
+                    if (companies_dt.Rows.Count > 0)
+                    {
+                        sellerName = companies_dt.Rows[0]["name"].ToString();
+                        sellerVAT = companies_dt.Rows[0]["vat_no"].ToString();
+                    }
+
+                    // Load ZATCA credentials
+                    DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                    if (activeZatcaCredential == null)
+                    {
+                        UiMessages.ShowError(
+                            "No active ZATCA credentials found. Please configure CSID/PCSID first.",
+                            "لا توجد بيانات اعتماد زاتكا نشطة. يرجى إعداد CSID/PCSID أولاً.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
+                    }
+
+                    DataRow PCSID = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                    if (PCSID == null)
+                    {
+                        UiMessages.ShowError(
+                            "No PCSID credentials found under the active CSID. Please configure PCSID first.",
+                            "لا توجد بيانات PCSID تحت CSID النشط. يرجى إعداد PCSID أولاً.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
+                    }
+
+                    string env = activeZatcaCredential["mode"].ToString();
+                    string privateKey = activeZatcaCredential["private_key"].ToString();
+                    string certBase64 = PCSID["cert_base64"].ToString();
+                    string PCSIDCertificate = PCSID["cert_base64"].ToString();
+                    string secret = PCSID["secret_key"].ToString();
+                    string PCSID_authorization = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{PCSIDCertificate}:{secret}"));
+
+                    string decodedCert = Encoding.UTF8.GetString(Convert.FromBase64String(certBase64));
+
+                    // SIGN XML
+                    var signer = new EInvoiceSigner();
+                    SignResult signResult = signer.SignDocument(ublXml, decodedCert, privateKey);
+                    if (!signResult.IsValid)
+                        throw new Exception(signResult.ErrorMessage);
+
+                    var hashGen = new EInvoiceHashGenerator();
+                    string invoiceHashBase64 = hashGen.GenerateEInvoiceHashing(signResult.SignedEInvoice).Hash;
+
+                    var sigData = ZatcaHelper.ExtractSignatureData(signResult.SignedEInvoice, PCSIDCertificate);
+
+                    // Generate ZATCA-SAFE QR
+                    string qrBase64 = ZatcaPhase2QrGenerator.GenerateQrBase64(
+                        sellerName,
+                        sellerVAT,
+                        issueDate,
+                        issueTime,
+                        totalWithVat,
+                        vatAmount,
+                        invoiceHashBase64,
+                        sigData.SignatureValueBase64,
+                        sigData.PublicKeyBase64,
+                        sigData.CertificateSignatureBase64
+                    );
+
+                    var qrGen = new EInvoiceQRGenerator();
+                    QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
+                    string qrBase641 = qrResult.QR;
+
+                    ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase641);
+
+                    // Save signed XML
+                    string ublFolder = Path.Combine(Application.StartupPath, "UBL");
+                    Directory.CreateDirectory(ublFolder);
+
+                    string path = Path.Combine(ublFolder, invoiceNo + "_signed.xml");
+                    signResult.SignedEInvoice.Save(path);
+
+                    // Save QR
+                    salesBLL.UpdateZatcaQrCode(invoiceNo, Convert.FromBase64String(qrBase64));
+                    salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", path, null);
+
+                    // Generate request payload
+                    var requestGenerator = new RequestGenerator();
+                    var requestResult = requestGenerator.GenerateRequest(signResult.SignedEInvoice);
+
+                    object requestBody = new
+                    {
+                        invoiceHash = invoiceHashBase64,
+                        uuid = requestResult.InvoiceRequest.Uuid,
+                        invoice = requestResult.InvoiceRequest.Invoice
+                    };
+
+                    var response = await ZatcaHelper.CallSingleInvoiceReportingAsync(requestBody, PCSID_authorization, env);
+                    if (string.IsNullOrEmpty(response))
+                    {
+                        UiMessages.ShowError(
+                            "No response was received from ZATCA. Please try again.",
+                            "لم يتم استلام أي رد من زاتكا. يرجى المحاولة مرة أخرى.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
+                    }
+
+                    var responseContent = JsonConvert.DeserializeObject<dynamic>(response);
+                    string zatcaStatus = responseContent?.reportingStatus;
+
+                    if (string.IsNullOrEmpty(zatcaStatus))
+                    {
+                        UiMessages.ShowError(
+                            "ZATCA response does not contain a reporting status.",
+                            "رد زاتكا لا يحتوي على حالة الإرسال.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
+                    }
+
+                    ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
+                        invoiceNo,
+                        requestResult.InvoiceRequest.Uuid,
+                        invoiceHashBase64,
+                        requestResult.InvoiceRequest.Invoice,
+                        zatcaStatus,
+                        env,
+                        responseContent.ToString()
+                    );
+
+                    UiMessages.ShowInfo(
+                        $"Invoice {invoiceNo} was processed successfully. ZATCA Status: {zatcaStatus}",
+                        $"تمت معالجة الفاتورة {invoiceNo} بنجاح. حالة زاتكا: {zatcaStatus}",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
                 }
-
-
-                // 6️⃣ Load ZATCA credentials
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
-                DataRow PCSID = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(
-                    Convert.ToInt32(activeZatcaCredential["id"])
-                );
-                string env = activeZatcaCredential["mode"].ToString();
-                string privateKey = activeZatcaCredential["private_key"].ToString();
-                string certBase64 = PCSID["cert_base64"].ToString();
-                string PCSIDCertificate = PCSID["cert_base64"].ToString();
-                string secret = PCSID["secret_key"].ToString();
-                string PCSID_authorization = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{PCSIDCertificate}:{secret}"));
-
-                string decodedCert = Encoding.UTF8.GetString(Convert.FromBase64String(certBase64));
-
-                // 7️⃣ SIGN XML
-                var signer = new EInvoiceSigner();
-                SignResult signResult = signer.SignDocument(ublXml, decodedCert, privateKey);
-
-                if (!signResult.IsValid)
-                    throw new Exception(signResult.ErrorMessage);
-
-                // Tag-6
-                var hashGen = new EInvoiceHashGenerator();
-                string invoiceHashBase64 =
-                    hashGen.GenerateEInvoiceHashing(signResult.SignedEInvoice).Hash;
-                //string invoiceHashBase64 = signResult.Steps[1].ResultedValue.ToString(); 
-                //ZatcaHelper.InsertInvoiceHashToSignedXml(signResult.SignedEInvoice, invoiceHashBase64);
-
-                // Tag-7,8,9
-                var sigData = ZatcaHelper.ExtractSignatureData(signResult.SignedEInvoice, PCSIDCertificate);
-
-                string ecdsaSignatureBase64 = sigData.SignatureValueBase64;
-                string ecdsaPublicKeyBase64 = sigData.PublicKeyBase64;
-                string certificateSignatureBase64 = sigData.CertificateSignatureBase64;
-
-                // 4. Generate QR code with thumbprints (not full certificates)
-                // 3. Extract ALL required data
-                string invoiceHash = ZatcaHelper.GetInvoiceHash(signResult);
-                string ecdsaSignature = ExtractEcdsaSignature(signResult.SignedEInvoice);
-                string ecdsaPublicKeyThumbprint = ExtractEcdsaPublicKeyThumbprint(signResult.SignedEInvoice);
-                string zatcaCertificateThumbprint = ExtractZatcaCertificateThumbprint(signResult.SignedEInvoice);
-                
-                DateTime issueDateTime = ZatcaInvoiceGenerator.ParseSqlDateTimeInvariant(invoice["sale_time"]);
-                ZATCAQRCodeGenerator qrGenerator = new ZATCAQRCodeGenerator();
-                string finalQRCode = qrGenerator.GeneratePhase2QRCodeWithAllTags(
-                    invoice, sellerName, sellerVAT, totalWithVat, vatAmount,
-                    issueDateTime, invoiceHashBase64, ecdsaSignature,
-                    ecdsaPublicKeyThumbprint, zatcaCertificateThumbprint);
-
-                // 4️⃣ Generate ZATCA-SAFE QR (Tag-3 fixed)
-                string qrBase64 = ZatcaPhase2QrGenerator.GenerateQrBase64(
-                    sellerName,
-                    sellerVAT,
-                    issueDate,
-                    issueTime,
-                    totalWithVat,
-                    vatAmount,
-                    invoiceHashBase64,
-                    ecdsaSignatureBase64,
-                    ecdsaPublicKeyBase64,
-                    certificateSignatureBase64
-                );
-
-                var qrGen = new EInvoiceQRGenerator();
-                QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
-                string qrBase641 = qrResult.QR;
-
-                // 5️⃣ Insert QR AFTER signing (correct for Phase-2)
-                ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, qrBase641);
-
-                // 8️⃣ Save signed XML
-                string ublFolder = Path.Combine(Application.StartupPath, "UBL");
-                Directory.CreateDirectory(ublFolder);
-
-                string path = Path.Combine(ublFolder, invoiceNo + "_signed.xml");
-                signResult.SignedEInvoice.Save(path);
-
-                // 9️⃣ Save QR
-                salesBLL.UpdateZatcaQrCode(invoiceNo, Convert.FromBase64String(qrBase64));
-                salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", path, null);
-
-                // Validate QR contents
-                var tlvs = ZatcaPhase2QrGenerator.DecodeZatcaQr(qrBase641);
-                var tlvs_1 = ZatcaPhase2QrGenerator.DecodeZatcaQr(qrBase64);
-                var tlvs_2 = ZatcaPhase2QrGenerator.DecodeZatcaQr(finalQRCode);
-                //ZatcaPhase2QrGenerator.ValidateZatcaQr(tlvs);
-                //MessageBox.Show("QR Tag-8: " + tlvs.First(t => t.Tag == 8).Value);
-                //MessageBox.Show("QR Tag-9: " + tlvs.First(t => t.Tag == 9).Value);
-
-                // 10. Generate request payload
-                var requestGenerator = new RequestGenerator();
-                var requestResult = requestGenerator.GenerateRequest(signResult.SignedEInvoice);
-
-                object requestBody = new
-                {
-                    invoiceHash = invoiceHashBase64, //requestResult.InvoiceRequest.InvoiceHash,
-                    uuid = requestResult.InvoiceRequest.Uuid,
-                    invoice = requestResult.InvoiceRequest.Invoice
-                };
-                
-                // 3. Call ZATCA Reporting API
-                var response = await ZatcaHelper.CallSingleInvoiceReportingAsync(requestBody, PCSID_authorization, env);
-                if (string.IsNullOrEmpty(response))
-                {
-                    MessageBox.Show("No response received from ZATCA.");
-                    return;
-                }
-                var responseContent = JsonConvert.DeserializeObject<dynamic>(response);
-                if (responseContent == null)
-                {
-                    MessageBox.Show("Invalid response format from ZATCA.");
-                    return;
-                }
-                string zatcaStatus = responseContent?.reportingStatus;
-
-                if (string.IsNullOrEmpty(zatcaStatus))
-                {
-                    MessageBox.Show("ZATCA reporting status is empty or not found in the response.");
-                    return;
-                }
-
-                // 4. Save the ZATCA status to the database
-                ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
-                       invoiceNo,
-                       requestResult.InvoiceRequest.Uuid,
-                       invoiceHashBase64, ///requestResult.InvoiceRequest.InvoiceHash,
-                       requestResult.InvoiceRequest.Invoice,
-                       zatcaStatus,
-                       env,
-                       responseContent.ToString()
-                       );
-                
-                // Show a success message
-                if (zatcaStatus == "REPORTED")
-                {
-                    MessageBox.Show($"Invoice {invoiceNo} has been successfully reported by ZATCA.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show($"ZATCA clearance status for invoice {invoiceNo}: {zatcaStatus}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                // Show the response in a message box or process it as needed
-                // For example, you can show the response in a message box
-                MessageBox.Show($"ZATCA Response:\n{response}", "Zatca Response");
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
+
         public static string ExtractEcdsaSignature(XmlDocument signedXml)
         {
             try
@@ -411,117 +431,144 @@ namespace pos.Sales
         {
             try
             {
-                if (invoiceNo == null) return;
+                if (string.IsNullOrWhiteSpace(invoiceNo)) return;
 
-                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
-                if (activeZatcaCredential == null)
+                using (BusyScope.Show(this, UiMessages.T("Running compliance checks...", "جارٍ تنفيذ فحوصات المطابقة...")))
                 {
-                    MessageBox.Show("No active ZATCA CSID credentials found. Please configure them first.", "ZATCA CSID");
-                    return;
-                }
-                string env = activeZatcaCredential["mode"].ToString();
-
-                // Check if ZATCA credentials are configured
-                if (string.IsNullOrEmpty(env))
-                {
-                    MessageBox.Show("No active ZATCA CSID credentials found. Please configure them first.", "ZATCA CSID");
-                    return;
-                }
-
-                XmlDocument ublXml = ZatcaHelper.LoadSignedXMLInvoice(invoiceNo);
-
-                var requestGenerator = new RequestGenerator();
-                var requestResult = requestGenerator.GenerateRequest(ublXml);
-                if (!requestResult.IsValid)
-                {
-                    MessageBox.Show("Failed to generate request: " + requestResult.ErrorMessages, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                string cert = activeZatcaCredential["cert_base64"].ToString();
-                string secret = activeZatcaCredential["secret_key"].ToString(); //ZatcaInvoiceGenerator.GetSecretFromDb(UsersModal.logged_in_branch_id, env);
-                string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
-
-                var invoiceHash = new EInvoiceHashGenerator();
-                var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
-
-                var requestBody = new
-                {
-                    invoiceHash = hashResult.Hash,
-                    uuid = requestResult.InvoiceRequest.Uuid,
-                    invoice = requestResult.InvoiceRequest.Invoice
-                };
-
-                using (var client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Add("Authorization", $"Basic {credentials}");
-                    client.DefaultRequestHeaders.Add("accept", "application/json");
-                    client.DefaultRequestHeaders.Add("Accept-Version", "V2");
-                    client.DefaultRequestHeaders.Add("Accept-Language", "EN");
-
-                    string url;
-                    switch (env)
+                    DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                    if (activeZatcaCredential == null)
                     {
-                        case "Production":
-                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core/compliance/invoices";
-                            break;
-                        case "Simulation":
-                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/compliance/invoices";
-                            break;
-                        default:
-                            url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";
-                            break;
+                        UiMessages.ShowWarning(
+                            "No active ZATCA credentials found. Please configure CSID first.",
+                            "لا توجد بيانات اعتماد زاتكا نشطة. يرجى إعداد CSID أولاً.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
+                    }
+                    string env = activeZatcaCredential["mode"].ToString();
+
+                    if (string.IsNullOrEmpty(env))
+                    {
+                        UiMessages.ShowWarning(
+                            "No active ZATCA environment is configured.",
+                            "لم يتم تحديد بيئة زاتكا النشطة.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
                     }
 
-                    var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync(url, content);
+                    XmlDocument ublXml = ZatcaHelper.LoadSignedXMLInvoice(invoiceNo);
 
-                    var responseContent = await response.Content.ReadAsStringAsync();
-
-                    if (!response.IsSuccessStatusCode)
+                    var requestGenerator = new RequestGenerator();
+                    var requestResult = requestGenerator.GenerateRequest(ublXml);
+                    if (!requestResult.IsValid)
                     {
-                        var error = JsonConvert.DeserializeObject<dynamic>(responseContent);
-                        string errorDetails = error?.validationResults?.errorMessages?[0]?.message ?? responseContent;
-                        throw new Exception($"ZATCA Error: {errorDetails}");
+                        UiMessages.ShowError(
+                            "Failed to generate compliance request: " + requestResult.ErrorMessages,
+                            "فشل إنشاء طلب المطابقة: " + requestResult.ErrorMessages,
+                            "ZATCA",
+                            "زاتكا");
+                        return;
                     }
 
-                    var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseContent);
-                    string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? jsonResponse?.clearanceStatus : jsonResponse?.reportingStatus); //01=Standard Invoice
+                    string cert = activeZatcaCredential["cert_base64"].ToString();
+                    string secret = activeZatcaCredential["secret_key"].ToString();
+                    string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{cert}:{secret}"));
 
-                    //ZatcaInvoiceGenerator.SaveZatcaStatusToDatabase(
-                    //    invoiceNo,
-                    //    requestResult.InvoiceRequest.Uuid,
-                    //    hashResult.Hash,
-                    //    requestResult.InvoiceRequest.Invoice,
-                    //    zatcaStatus,
-                    //    env,
-                    //    responseContent.ToString()
-                    //    );
+                    var invoiceHash = new EInvoiceHashGenerator();
+                    var hashResult = invoiceHash.GenerateEInvoiceHashing(ublXml);
 
-                    // Optionally, you can save the response content to the database or process it further
-                    // Show a success message
+                    var requestBody = new
+                    {
+                        invoiceHash = hashResult.Hash,
+                        uuid = requestResult.InvoiceRequest.Uuid,
+                        invoice = requestResult.InvoiceRequest.Invoice
+                    };
 
-                    MessageBox.Show($"ZATCA status for invoice {invoiceNo}: {zatcaStatus}", "Zatca Compliance Checks", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    using (var client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Clear();
+                        client.DefaultRequestHeaders.Add("Authorization", $"Basic {credentials}");
+                        client.DefaultRequestHeaders.Add("accept", "application/json");
+                        client.DefaultRequestHeaders.Add("Accept-Version", "V2");
+                        client.DefaultRequestHeaders.Add("Accept-Language", "EN");
 
-                    MessageBox.Show($"ZATCA Response ({env}):\n{jsonResponse}", "Zatca Response", MessageBoxButtons.OK);
-                    //LoadZatcaInvoices();
+                        string url;
+                        switch (env)
+                        {
+                            case "Production":
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/core/compliance/invoices";
+                                break;
+                            case "Simulation":
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation/compliance/invoices";
+                                break;
+                            default:
+                                url = "https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance/invoices";
+                                break;
+                        }
+
+                        var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+                        var response = await client.PostAsync(url, content);
+
+                        var responseContent = await response.Content.ReadAsStringAsync();
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            var error = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                            string errorDetails = error?.validationResults?.errorMessages?[0]?.message ?? responseContent;
+                            throw new Exception($"ZATCA Error: {errorDetails}");
+                        }
+
+                        var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                        string zatcaStatus = (GetInvoiceTypeCode(invoiceNo) == "01" ? jsonResponse?.clearanceStatus : jsonResponse?.reportingStatus);
+
+                        UiMessages.ShowInfo(
+                            $"ZATCA status for invoice {invoiceNo}: {zatcaStatus}",
+                            $"حالة زاتكا للفاتورة {invoiceNo}: {zatcaStatus}",
+                            captionEn: "ZATCA",
+                            captionAr: "زاتكا");
+
+                        // Optional: show raw response (kept but professional label)
+                        MessageBox.Show($"{UiMessages.T("ZATCA Response", "رد زاتكا")}:\n{jsonResponse}", UiMessages.T("ZATCA", "زاتكا"), MessageBoxButtons.OK);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error submitting to ZATCA:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(
+                    $"Error submitting to ZATCA:\n{ex.Message}",
+                    $"حدث خطأ أثناء الإرسال إلى زاتكا:\n{ex.Message}",
+                    "ZATCA",
+                    "زاتكا");
             }
         }
 
         private void btnViewResponse_Click(object sender, EventArgs e)
         {
-            if (gridZatcaInvoices.CurrentRow == null) return;
-            string response = gridZatcaInvoices.CurrentRow.Cells["zatca_message"].Value.ToString();
-            MessageBox.Show("\n" + response, "ZATCA Response");
+            if (gridZatcaInvoices.CurrentRow == null)
+            {
+                UiMessages.ShowWarning(
+                    "Please select an invoice first.",
+                    "يرجى اختيار فاتورة أولاً.",
+                    "ZATCA",
+                    "زاتكا");
+                return;
+            }
+
+            string response = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["zatca_message"].Value);
+            if (string.IsNullOrWhiteSpace(response))
+            {
+                UiMessages.ShowInfo(
+                    "No response details are available for the selected invoice.",
+                    "لا توجد تفاصيل رد متاحة للفاتورة المحددة.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
+                return;
+            }
+
+            MessageBox.Show("\n" + response, UiMessages.T("ZATCA Response", "رد زاتكا"));
         }
 
-       
         public static string GetInvoiceTypeCode(string invoiceNo)
         {
             SalesBLL salesBLL = new SalesBLL();
@@ -530,7 +577,16 @@ namespace pos.Sales
 
         private void btn_viewQR_Click(object sender, EventArgs e)
         {
-            if (gridZatcaInvoices.CurrentRow == null) return;
+            if (gridZatcaInvoices.CurrentRow == null)
+            {
+                UiMessages.ShowWarning(
+                    "Please select an invoice first.",
+                    "يرجى اختيار فاتورة أولاً.",
+                    "ZATCA",
+                    "زاتكا");
+                return;
+            }
+
             string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
 
             SalesBLL objSalesBLL = new SalesBLL();
@@ -545,7 +601,11 @@ namespace pos.Sales
             }
             else
             {
-                MessageBox.Show("No QR Code found for this invoice.");
+                UiMessages.ShowInfo(
+                    "No QR code is stored for the selected invoice.",
+                    "لا يوجد رمز QR محفوظ للفاتورة المحددة.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
         }
 
@@ -553,90 +613,119 @@ namespace pos.Sales
         {
             try
             {
-                if (gridZatcaInvoices.CurrentRow == null) return;
-                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
-                string prevInvoiceNo = gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value.ToString();
-                string status = gridZatcaInvoices.CurrentRow.Cells["zatca_status"].Value.ToString();
-                DateTime prevSaleDate = (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()) ? DateTime.Now : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value.ToString()));
+                if (gridZatcaInvoices.CurrentRow == null)
+                {
+                    UiMessages.ShowWarning(
+                        "Please select an invoice first.",
+                        "يرجى اختيار فاتورة أولاً.",
+                        "ZATCA",
+                        "زاتكا");
+                    return;
+                }
+
+                string invoiceNo = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value);
+                string account = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["account"].Value);
+                string prevInvoiceNo = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["prevInvoiceNo"].Value);
+                DateTime prevSaleDate = (string.IsNullOrEmpty(Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value))
+                    ? DateTime.Now
+                    : Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["prevSaleDate"].Value));
 
                 btn_signInvoice.Enabled = false;
-                btn_signInvoice.Text = "Checking...";
+                btn_signInvoice.Text = UiMessages.T("Processing...", "جارٍ المعالجة...");
                 btn_signInvoice.Cursor = Cursors.WaitCursor;
                 btn_signInvoice.Refresh();
 
-                //if (status.ToLower() == "signed" || status.ToLower() == "cleared" || status.ToLower() == "reported")
-                //{
-                //    MessageBox.Show("This invoice is already signed or cleared/reported to ZATCA.", "Zatca Invoice Sign", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    return;
-                //}
-
-                //sign the credit note invoice to ZATCA
-                if (UsersModal.useZatcaEInvoice == true)
+                if (!UsersModal.useZatcaEInvoice)
                 {
-                    DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
-                    if (activeZatcaCredential == null)
+                    UiMessages.ShowWarning(
+                        "ZATCA E-Invoicing is not enabled in system settings.",
+                        "ميزة الفوترة الإلكترونية (زاتكا) غير مفعلة في إعدادات النظام.",
+                        "ZATCA",
+                        "زاتكا");
+                    return;
+                }
+
+                DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
+                if (activeZatcaCredential == null)
+                {
+                    UiMessages.ShowError(
+                        "No active ZATCA credentials found. Please configure CSID/PCSID first.",
+                        "لا توجد بيانات اعتماد زاتكا نشطة. يرجى إعداد CSID/PCSID أولاً.",
+                        "ZATCA",
+                        "زاتكا");
+                    return;
+                }
+
+                DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+
+                if (PCSID_dataRow == null)
+                {
+                    // Sign using CSID
+                    if (account != null && account.ToLower() == "sale")
                     {
-                        MessageBox.Show("No active ZATCA CSID/credentials found. Please configure them first.");
+                        ZatcaHelper.SignInvoiceToZatca(invoiceNo);
                     }
-
-                    // Retrieve PCSID credentials from the database using the credentialId
-                    DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
-                    if (PCSID_dataRow == null)
+                    else if (account != null && account.ToLower() == "return")
                     {
-                        //Sign Invoice with CSID instead of Production CSID
-                        if (account.ToLower() == "sale")
-                        {
-                            ZatcaHelper.SignInvoiceToZatca(invoiceNo);
-                        }
-                        else if (account.ToLower() == "return")
-                        {
-                            ZatcaHelper.SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
-
-                        }
-                        else if (account.ToLower() == "debit")
-                        {
-                            ZatcaHelper.SignDebitNoteToZatca(invoiceNo, prevInvoiceNo, prevSaleDate);
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid account type for signing invoice.");
-
-                        }
+                        ZatcaHelper.SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                    }
+                    else if (account != null && account.ToLower() == "debit")
+                    {
+                        ZatcaHelper.SignDebitNoteToZatca(invoiceNo, prevInvoiceNo, prevSaleDate);
                     }
                     else
                     {
-                        //If PCSID exist then sign it 
-                        if (account.ToLower() == "sale")
-                        {
-                            await ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
-                        }
-                        else if (account.ToLower() == "return")
-                        {
-                            await ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
-                        }
-                        else if (account.ToLower() == "debit")
-                        {
-                            await ZatcaHelper.PCSID_SignDebitNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
-                        }
+                        UiMessages.ShowWarning(
+                            "Unsupported transaction type for signing.",
+                            "نوع العملية غير مدعوم للتوقيع.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
                     }
-
                 }
-                //////
-                ///
+                else
+                {
+                    // Sign using PCSID
+                    if (account != null && account.ToLower() == "sale")
+                    {
+                        await ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoiceNo);
+                    }
+                    else if (account != null && account.ToLower() == "return")
+                    {
+                        await ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                    }
+                    else if (account != null && account.ToLower() == "debit")
+                    {
+                        await ZatcaHelper.PCSID_SignDebitNoteToZatcaAsync(invoiceNo, prevInvoiceNo, prevSaleDate);
+                    }
+                    else
+                    {
+                        UiMessages.ShowWarning(
+                            "Unsupported transaction type for signing.",
+                            "نوع العملية غير مدعوم للتوقيع.",
+                            "ZATCA",
+                            "زاتكا");
+                        return;
+                    }
+                }
 
+                UiMessages.ShowInfo(
+                    $"Invoice {invoiceNo} was signed successfully.",
+                    $"تم توقيع الفاتورة {invoiceNo} بنجاح.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
             finally
             {
                 btn_signInvoice.Enabled = true;
-                btn_signInvoice.Text = "Sign Invoice";
+                btn_signInvoice.Text = UiMessages.T("Sign Invoice", "توقيع الفاتورة");
                 btn_signInvoice.Cursor = Cursors.Default;
             }
+
             LoadZatcaInvoices();
         }
 
@@ -644,37 +733,62 @@ namespace pos.Sales
         {
             try
             {
-                if (gridZatcaInvoices.CurrentRow == null) return;
-                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
-                string invoice_subtype = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
-
-                if (invoice_subtype.ToLower() == "simplified") // Simplified Invoice
+                if (gridZatcaInvoices.CurrentRow == null)
                 {
-                    MessageBox.Show("Simplified invoices cannot be cleared. Please use the reporting option instead.", "ZATCA Clearance", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowWarning(
+                        "Please select an invoice first.",
+                        "يرجى اختيار فاتورة أولاً.",
+                        "ZATCA",
+                        "زاتكا");
                     return;
                 }
-                if (string.IsNullOrEmpty(invoiceNo) || string.IsNullOrEmpty(account) || string.IsNullOrEmpty(invoice_subtype))
+
+                string invoiceNo = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value);
+                string invoice_subtype = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value);
+
+                if (invoice_subtype != null && invoice_subtype.ToLower() == "simplified")
                 {
-                    MessageBox.Show("Please ensure all required fields are filled.");
+                    UiMessages.ShowInfo(
+                        "Simplified invoices cannot be cleared. Please use Reporting instead.",
+                        "لا يمكن إجراء الاعتماد (Clearance) للفواتير المبسطة. يرجى استخدام الإبلاغ (Reporting).",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
                     return;
-                }   
+                }
+
+                if (string.IsNullOrWhiteSpace(invoiceNo) || string.IsNullOrWhiteSpace(invoice_subtype))
+                {
+                    UiMessages.ShowWarning(
+                        "Please ensure the selected invoice has complete details.",
+                        "يرجى التأكد من اكتمال بيانات الفاتورة المحددة.",
+                        "ZATCA",
+                        "زاتكا");
+                    return;
+                }
 
                 btn_Invoice_clearance.Enabled = false;
-                btn_Invoice_clearance.Text = "Checking...";
+                btn_Invoice_clearance.Text = UiMessages.T("Processing...", "جارٍ المعالجة...");
                 btn_Invoice_clearance.Cursor = Cursors.WaitCursor;
                 btn_Invoice_clearance.Refresh();
+
                 await ZatcaHelper.ZatcaInvoiceClearanceAsync(invoiceNo);
-                LoadZatcaInvoices(); // Optionally reload the invoices grid
+
+                UiMessages.ShowInfo(
+                    $"Clearance request submitted for invoice {invoiceNo}.",
+                    $"تم إرسال طلب الاعتماد للفاتورة {invoiceNo}.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
+
+                LoadZatcaInvoices();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
             finally
             {
                 btn_Invoice_clearance.Enabled = true;
-                btn_Invoice_clearance.Text = "Clearance";
+                btn_Invoice_clearance.Text = UiMessages.T("Clearance", "اعتماد");
                 btn_Invoice_clearance.Cursor = Cursors.Default;
             }
         }
@@ -683,46 +797,227 @@ namespace pos.Sales
         {
             try
             {
-                if (gridZatcaInvoices.CurrentRow == null) return;
-                string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-                string account = gridZatcaInvoices.CurrentRow.Cells["account"].Value.ToString();
-                string invoice_subtype = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
+                if (gridZatcaInvoices.CurrentRow == null)
+                {
+                    UiMessages.ShowWarning(
+                        "Please select an invoice first.",
+                        "يرجى اختيار فاتورة أولاً.",
+                        "ZATCA",
+                        "زاتكا");
+                    return;
+                }
 
-                if (invoice_subtype.ToLower() == "standard") // 01=Standard Invoice
+                string invoiceNo = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value);
+                string invoice_subtype = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value);
+
+                if (invoice_subtype != null && invoice_subtype.ToLower() == "standard")
                 {
-                    MessageBox.Show("Standard invoices cannot be reported. Please use the clearance option instead.", "ZATCA Reporting", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        "Standard invoices cannot be reported. Please use Clearance instead.",
+                        "لا يمكن الإبلاغ (Reporting) للفواتير القياسية. يرجى استخدام الاعتماد (Clearance).",
+                        captionEn: "ZATCA",
+                        captionAr: "زاتكا");
                     return;
                 }
-                // Get the selected invoice number from the grid
-                if (gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value == null)
+
+                if (string.IsNullOrWhiteSpace(invoiceNo))
                 {
-                    MessageBox.Show("Please select a valid invoice.");
+                    UiMessages.ShowWarning(
+                        "The selected row does not contain a valid invoice number.",
+                        "السطر المحدد لا يحتوي على رقم فاتورة صحيح.",
+                        "ZATCA",
+                        "زاتكا");
                     return;
                 }
-                // Assuming the invoice number is in the "invoice_no" column
-                if (string.IsNullOrEmpty(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString()))
-                {
-                    MessageBox.Show("Selected invoice number is empty.");
-                    return;
-                }
+
                 btn_invoice_report.Enabled = false;
-                btn_invoice_report.Text = "Checking...";
+                btn_invoice_report.Text = UiMessages.T("Processing...", "جارٍ المعالجة...");
                 btn_invoice_report.Cursor = Cursors.WaitCursor;
                 btn_invoice_report.Refresh();
-                await ZatcaHelper.ZatcaInvoiceReportingAsync(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString());
-                LoadZatcaInvoices(); // Optionally reload the invoices grid
+
+                await ZatcaHelper.ZatcaInvoiceReportingAsync(invoiceNo);
+
+                UiMessages.ShowInfo(
+                    $"Reporting request submitted for invoice {invoiceNo}.",
+                    $"تم إرسال طلب الإبلاغ للفاتورة {invoiceNo}.",
+                    captionEn: "ZATCA",
+                    captionAr: "زاتكا");
+
+                LoadZatcaInvoices();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
             finally
             {
                 btn_invoice_report.Enabled = true;
-                btn_invoice_report.Text = "Reporting";
+                btn_invoice_report.Text = UiMessages.T("Reporting", "إبلاغ");
                 btn_invoice_report.Cursor = Cursors.Default;
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            using (BusyScope.Show(this, UiMessages.T("Searching...", "جارٍ البحث...")))
+            {
+                try
+                {
+                    string invoiceNo = txtInvoiceNo.Text.Trim();
+                    string type = cmbType.SelectedValue?.ToString();
+                    string subtype = cmbSubtype.SelectedValue?.ToString();
+                    string status = cmb_status.SelectedValue?.ToString();
+                    DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
+                    DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
+
+                    var results = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status);
+                    gridZatcaInvoices.DataSource = results;
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(
+                        "Error while searching invoices: " + ex.Message,
+                        "حدث خطأ أثناء البحث عن الفواتير: " + ex.Message,
+                        "ZATCA",
+                        "زاتكا");
+                }
+            }
+        }
+
+        private void btnDownloadUBL_Click(object sender, EventArgs e)
+        {
+            if (gridZatcaInvoices.CurrentRow == null)
+            {
+                UiMessages.ShowWarning(
+                    "Please select an invoice to download.",
+                    "يرجى اختيار فاتورة لتنزيلها.",
+                    "ZATCA",
+                    "زاتكا");
+                return;
+            }
+
+            string invoiceNo = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value);
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "The selected invoice number is not valid.",
+                    "رقم الفاتورة المحدد غير صالح.",
+                    "ZATCA",
+                    "زاتكا");
+                return;
+            }
+
+            DownloadUBLInvoice(invoiceNo);
+        }
+
+        private void DownloadUBLInvoice(string invoiceNo)
+        {
+            try
+            {
+                if (gridZatcaInvoices.CurrentRow == null)
+                {
+                    UiMessages.ShowWarning(
+                        "Please select an invoice to download.",
+                        "يرجى اختيار فاتورة لتنزيلها.",
+                        "ZATCA",
+                        "زاتكا");
+                    return;
+                }
+
+                string vat = Convert.ToString(gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value);
+                DateTime issueDate = Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["sale_time"].Value);
+                string irn = Regex.Replace(invoiceNo, "[^a-zA-Z0-9]", "-");
+
+                string datePart = issueDate.ToString("yyyyMMdd");
+                string timePart = issueDate.ToString("HHmmss");
+                string fileName = $"{vat}_{datePart}T{timePart}_{irn}.xml";
+
+                XmlDocument ublXmlDoc = GetUBLXmlByInvoiceNo(invoiceNo);
+
+                using (var sfd = new SaveFileDialog())
+                {
+                    sfd.Filter = "XML Files (*.xml)|*.xml";
+                    sfd.FileName = fileName;
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        ublXmlDoc.Save(sfd.FileName);
+                        UiMessages.ShowInfo(
+                            "UBL file has been saved successfully.",
+                            "تم حفظ ملف UBL بنجاح.",
+                            captionEn: "ZATCA",
+                            captionAr: "زاتكا");
+                    }
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                UiMessages.ShowError(
+                    "Signed XML/UBL file was not found for the selected invoice.",
+                    "لم يتم العثور على ملف XML/UBL الموقّع للفاتورة المحددة.",
+                    "ZATCA",
+                    "زاتكا");
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+            }
+        }
+
+        private XmlDocument GetUBLXmlByInvoiceNo(string invoiceNo)
+        {
+            string path = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_signed.xml");
+
+            if (!File.Exists(path))
+                throw new FileNotFoundException("XML/UBL invoice not found.");
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.PreserveWhitespace = true; // important for signed XML
+            xmlDoc.Load(path); // this reads the file and parses it into an XmlDocument
+            return xmlDoc;
+        }
+
+        private void StatusDDL()
+        {
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("id");
+            dt.Columns.Add("name");
+            DataRow _row_0 = dt.NewRow();
+            _row_0["id"] = "";
+            _row_0["name"] = "All";
+            dt.Rows.Add(_row_0);
+            DataRow _row_1 = dt.NewRow();
+            _row_1["id"] = "Signed";
+            _row_1["name"] = "Signed";
+            dt.Rows.Add(_row_1);
+            DataRow _row_2 = dt.NewRow();
+            _row_2["id"] = "Cleared";
+            _row_2["name"] = "Cleared";
+            dt.Rows.Add(_row_2);
+            DataRow _row_3 = dt.NewRow();
+            _row_3["id"] = "Reported";
+            _row_3["name"] = "Reported";
+            dt.Rows.Add(_row_3);
+            DataRow _row_4 = dt.NewRow();
+            _row_4["id"] = "Pending";
+            _row_4["name"] = "Pending";
+            dt.Rows.Add(_row_4);
+            DataRow _row_5 = dt.NewRow();
+            _row_5["id"] = "Failed";
+            _row_5["name"] = "Failed";
+            dt.Rows.Add(_row_5);
+
+            cmb_status.DisplayMember = "name";
+            cmb_status.ValueMember = "id";
+            cmb_status.DataSource = dt;
+            cmb_status.SelectedIndex = 0; // Set default selection to "All"
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
         private void InvoiceTypeDDL()
         {
@@ -787,126 +1082,5 @@ namespace pos.Sales
 
             cmbSubtype.SelectedIndex = 0; // Set default selection to "Standard"
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string invoiceNo = txtInvoiceNo.Text.Trim();
-                string type = cmbType.SelectedValue?.ToString();
-                string subtype = cmbSubtype.SelectedValue?.ToString();
-                string status = cmb_status.SelectedValue?.ToString();
-                DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
-                DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
-
-                var results = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status);
-                gridZatcaInvoices.DataSource = results;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error searching invoices: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
-        }
-
-        private void btnDownloadUBL_Click(object sender, EventArgs e)
-        {
-            if (gridZatcaInvoices.CurrentRow == null)
-            {
-                MessageBox.Show("Please select an invoice to download.");
-                return;
-            }
-
-            string invoiceNo = gridZatcaInvoices.CurrentRow.Cells["invoice_no"].Value.ToString();
-            DownloadUBLInvoice(invoiceNo);
-        }
-        private void DownloadUBLInvoice(string invoiceNo)
-        {
-            if (gridZatcaInvoices.CurrentRow == null)
-            {
-                MessageBox.Show("Please select an invoice to download.");
-                return;
-            }
-
-            // Example column names: adjust as per your DataGridView
-            string vat = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value.ToString();
-            DateTime issueDate = Convert.ToDateTime(gridZatcaInvoices.CurrentRow.Cells["sale_time"].Value);
-            string irn = System.Text.RegularExpressions.Regex.Replace(invoiceNo, "[^a-zA-Z0-9]", "-");
-            
-            string datePart = issueDate.ToString("yyyyMMdd");
-            string timePart = issueDate.ToString("HHmmss");
-            string fileName = $"{vat}_{datePart}T{timePart}_{irn}.xml";
-
-           
-            // Replace with your actual logic to get UBL XML content
-            XmlDocument ublXmlDoc = GetUBLXmlByInvoiceNo(invoiceNo);
-
-            using (var sfd = new SaveFileDialog())
-            {
-                sfd.Filter = "XML Files (*.xml)|*.xml";
-                sfd.FileName = fileName;
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    ublXmlDoc.Save(sfd.FileName);
-                    MessageBox.Show("UBL Invoice downloaded successfully.","Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                }
-            }
-        }
-        private XmlDocument GetUBLXmlByInvoiceNo(string invoiceNo)
-        {
-            string path = Path.Combine(Application.StartupPath, "UBL", invoiceNo + "_signed.xml");
-
-            if (!File.Exists(path))
-                throw new FileNotFoundException("XML/UBL invoice not found.");
-
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.PreserveWhitespace = true; // important for signed XML
-            xmlDoc.Load(path); // this reads the file and parses it into an XmlDocument
-            return xmlDoc;
-        }
-
-        private void StatusDDL()
-        {
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
-            DataRow _row_0 = dt.NewRow();
-            _row_0["id"] = "";
-            _row_0["name"] = "All";
-            dt.Rows.Add(_row_0);
-            DataRow _row_1 = dt.NewRow();
-            _row_1["id"] = "Signed";
-            _row_1["name"] = "Signed";
-            dt.Rows.Add(_row_1);
-            DataRow _row_2 = dt.NewRow();
-            _row_2["id"] = "Cleared";
-            _row_2["name"] = "Cleared";
-            dt.Rows.Add(_row_2);
-            DataRow _row_3 = dt.NewRow();
-            _row_3["id"] = "Reported";
-            _row_3["name"] = "Reported";
-            dt.Rows.Add(_row_3);
-            DataRow _row_4 = dt.NewRow();
-            _row_4["id"] = "Pending";
-            _row_4["name"] = "Pending";
-            dt.Rows.Add(_row_4);
-            DataRow _row_5 = dt.NewRow();
-            _row_5["id"] = "Failed";
-            _row_5["name"] = "Failed";
-            dt.Rows.Add(_row_5);
-
-            cmb_status.DisplayMember = "name";
-            cmb_status.ValueMember = "id";
-            cmb_status.DataSource = dt;
-            cmb_status.SelectedIndex = 0; // Set default selection to "All"
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-       
     }
 }

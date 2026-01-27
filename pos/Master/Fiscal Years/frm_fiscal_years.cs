@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -31,20 +33,22 @@ namespace pos
         {
             try
             {
-                grid_fiscal_years.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading fiscal years...", "جاري تحميل السنوات المالية...")))
+                {
+                    grid_fiscal_years.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_fiscal_years.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_fiscal_years.AutoGenerateColumns = false;
 
-                String keyword = "*";
-                String table = "acc_fiscal_years";
-                grid_fiscal_years.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "*";
+                    String table = "acc_fiscal_years";
+                    grid_fiscal_years.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -59,53 +63,91 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            if(grid_fiscal_years.Rows.Count > 0)
+            if (grid_fiscal_years.CurrentRow == null)
             {
-                string id = grid_fiscal_years.CurrentRow.Cells["id"].Value.ToString();
-                string name = grid_fiscal_years.CurrentRow.Cells["name"].Value.ToString();
-                string code = grid_fiscal_years.CurrentRow.Cells["code"].Value.ToString();
-                string from_date = grid_fiscal_years.CurrentRow.Cells["from_date"].Value.ToString();
-                string to_date = grid_fiscal_years.CurrentRow.Cells["to_date"].Value.ToString();
-
-                frm_addFiscalYear frm_addFiscalYear_obj = new frm_addFiscalYear(this);
-                frm_addFiscalYear.instance.tb_lbl_is_edit.Text = "true";
-
-                frm_addFiscalYear.instance.tb_id.Text = id;
-                frm_addFiscalYear.instance.tb_name.Text = name;
-                frm_addFiscalYear.instance.tb_code.Text = code;
-                frm_addFiscalYear.instance.tb_from_date.Text = from_date;
-                frm_addFiscalYear.instance.tb_to_date.Text = to_date;
-
-                frm_addFiscalYear.instance.Show();
+                UiMessages.ShowInfo(
+                    "Please select a fiscal year record to update.",
+                    "يرجى اختيار سنة مالية للتحديث.",
+                    "Fiscal Years",
+                    "السنوات المالية"
+                );
+                return;
             }
-            
+
+            string id = grid_fiscal_years.CurrentRow.Cells["id"].Value.ToString();
+            string name = grid_fiscal_years.CurrentRow.Cells["name"].Value.ToString();
+            string code = grid_fiscal_years.CurrentRow.Cells["code"].Value.ToString();
+            string from_date = grid_fiscal_years.CurrentRow.Cells["from_date"].Value.ToString();
+            string to_date = grid_fiscal_years.CurrentRow.Cells["to_date"].Value.ToString();
+
+            frm_addFiscalYear frm_addFiscalYear_obj = new frm_addFiscalYear(this);
+            frm_addFiscalYear.instance.tb_lbl_is_edit.Text = "true";
+
+            frm_addFiscalYear.instance.tb_id.Text = id;
+            frm_addFiscalYear.instance.tb_name.Text = name;
+            frm_addFiscalYear.instance.tb_code.Text = code;
+            frm_addFiscalYear.instance.tb_from_date.Text = from_date;
+            frm_addFiscalYear.instance.tb_to_date.Text = to_date;
+
+            frm_addFiscalYear.instance.Show();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            if (grid_fiscal_years.Rows.Count > 0)
+            if (grid_fiscal_years.CurrentRow == null)
             {
-                string id = grid_fiscal_years.CurrentRow.Cells["id"].Value.ToString();
+                UiMessages.ShowInfo(
+                    "Please select a fiscal year record to delete.",
+                    "يرجى اختيار سنة مالية للحذف.",
+                    "Fiscal Years",
+                    "السنوات المالية"
+                );
+                return;
+            }
 
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+            string idText = Convert.ToString(grid_fiscal_years.CurrentRow.Cells["id"].Value);
+            int id;
+            if (!int.TryParse(idText, out id) || id <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected record is not valid.",
+                    "السجل المحدد غير صالح.",
+                    "Fiscal Years",
+                    "السنوات المالية"
+                );
+                return;
+            }
 
-                if (result == DialogResult.Yes)
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this fiscal year?",
+                "هل تريد حذف هذه السنة المالية؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
                 {
-
                     FiscalYearBLL objBLL = new FiscalYearBLL();
-                    objBLL.Delete(int.Parse(id));
-
-                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    load_fiscal_years_grid();
-                }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                    objBLL.Delete(id);
                 }
 
-            } 
+                UiMessages.ShowInfo(
+                    "Record deleted successfully.",
+                    "تم حذف السجل بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+                load_fiscal_years_grid();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
@@ -117,20 +159,16 @@ namespace pos
         {
             try
             {
-                //bind data in data grid view  
-                FiscalYearBLL objBLL = new FiscalYearBLL();
-                //grid_fiscal_years.AutoGenerateColumns = false;
-
-                String condition = txt_search.Text;
-                grid_fiscal_years.DataSource = objBLL.SearchRecord(condition);
-
-                //txt_search.Text = "";
-                
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
+                    FiscalYearBLL objBLL = new FiscalYearBLL();
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
+                    grid_fiscal_years.DataSource = objBLL.SearchRecord(condition);
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -168,38 +206,69 @@ namespace pos
             string name = grid_fiscal_years.Columns[e.ColumnIndex].Name;
             if (name == "activate")
             {
-                string id = grid_fiscal_years.CurrentRow.Cells["id"].Value.ToString();
-                string from_date = grid_fiscal_years.CurrentRow.Cells["from_date"].Value.ToString();
-                string to_date = grid_fiscal_years.CurrentRow.Cells["to_date"].Value.ToString();
-                string desc = grid_fiscal_years.CurrentRow.Cells["name"].Value.ToString();
-
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to activate", "Activate Fiscal Year", buttons, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                if (grid_fiscal_years.CurrentRow == null)
                 {
-                    FiscalYearBLL objBLL = new FiscalYearBLL();
-                    objBLL.SetAllStatusZero(int.Parse(id));
-                    objBLL.UpdateStatus(int.Parse(id),true);
+                    UiMessages.ShowInfo(
+                        "Please select a fiscal year to activate.",
+                        "يرجى اختيار سنة مالية للتفعيل.",
+                        "Fiscal Years",
+                        "السنوات المالية"
+                    );
+                    return;
+                }
 
-                    ////
-                    ////// Update static variables
-                    UsersModal userModal_obj = new UsersModal();
-                    UsersModal.fiscal_year = desc;
-                    UsersModal.fy_from_date = Convert.ToDateTime(from_date);
-                    UsersModal.fy_to_date = Convert.ToDateTime(to_date);
-                    ////
+                string idText = Convert.ToString(grid_fiscal_years.CurrentRow.Cells["id"].Value);
+                int id;
+                if (!int.TryParse(idText, out id) || id <= 0)
+                {
+                    UiMessages.ShowInfo(
+                        "The selected record is not valid.",
+                        "السجل المحدد غير صالح.",
+                        "Fiscal Years",
+                        "السنوات المالية"
+                    );
+                    return;
+                }
 
-                    MessageBox.Show("Record updated successfully.", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string from_date = Convert.ToString(grid_fiscal_years.CurrentRow.Cells["from_date"].Value);
+                string to_date = Convert.ToString(grid_fiscal_years.CurrentRow.Cells["to_date"].Value);
+                string desc = Convert.ToString(grid_fiscal_years.CurrentRow.Cells["name"].Value);
+
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Activate this fiscal year?",
+                    "هل تريد تفعيل هذه السنة المالية؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد"
+                );
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                try
+                {
+                    using (BusyScope.Show(this, UiMessages.T("Activating...", "جاري التفعيل...")))
+                    {
+                        FiscalYearBLL objBLL = new FiscalYearBLL();
+                        objBLL.SetAllStatusZero(id);
+                        objBLL.UpdateStatus(id, true);
+
+                        UsersModal.fiscal_year = desc;
+                        UsersModal.fy_from_date = Convert.ToDateTime(from_date);
+                        UsersModal.fy_to_date = Convert.ToDateTime(to_date);
+                    }
+
+                    UiMessages.ShowInfo(
+                        "Fiscal year activated successfully.",
+                        "تم تفعيل السنة المالية بنجاح.",
+                        "Success",
+                        "نجاح"
+                    );
                     load_fiscal_years_grid();
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                    UiMessages.ShowError(ex.Message, ex.Message);
                 }
-
-                load_fiscal_years_grid();
             }
         }
     }

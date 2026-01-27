@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -30,20 +32,22 @@ namespace pos
         {
             try
             {
-                grid_branches.DataSource = null;
+                using (BusyScope.Show(this, UiMessages.T("Loading branches...", "جاري تحميل الفروع...")))
+                {
+                    grid_branches.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
-                grid_branches.AutoGenerateColumns = false;
+                    //bind data in data grid view  
+                    GeneralBLL objBLL = new GeneralBLL();
+                    grid_branches.AutoGenerateColumns = false;
 
-                String keyword = "id,name,description, date_created";
-                String table = "pos_branches";
-                grid_branches.DataSource = objBLL.GetRecord(keyword, table);
+                    String keyword = "id,name,description, date_created";
+                    String table = "pos_branches";
+                    grid_branches.DataSource = objBLL.GetRecord(keyword, table);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
@@ -58,45 +62,101 @@ namespace pos
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            if (grid_branches.CurrentRow == null)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a branch record to update.",
+                    "يرجى اختيار سجل فرع للتحديث.",
+                    "Branches",
+                    "الفروع"
+                );
+                return;
+            }
+
             string id = grid_branches.CurrentRow.Cells[0].Value.ToString();
             string title = grid_branches.CurrentRow.Cells[1].Value.ToString();
-            string rate = grid_branches.CurrentRow.Cells[2].Value.ToString();
-            
+
             frm_addBranch frm_addBranch_obj = new frm_addBranch(this);
             frm_addBranch.instance.tb_lbl_is_edit.Text = "true";
 
             frm_addBranch.instance.tb_id.Text = id;
             frm_addBranch.instance.tb_name.Text = title;
-            
+
             frm_addBranch.instance.Show();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_branches.CurrentRow.Cells[0].Value.ToString();
-
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (grid_branches.CurrentRow == null)
             {
+                UiMessages.ShowInfo(
+                    "Please select a branch record to delete.",
+                    "يرجى اختيار سجل فرع للحذف.",
+                    "Branches",
+                    "الفروع"
+                );
+                return;
+            }
 
-                BranchesBLL objBLL = new BranchesBLL();
-                objBLL.Delete(int.Parse(id));
+            string id = grid_branches.CurrentRow.Cells[0].Value.ToString();
+            int branchId;
+            if (!int.TryParse(id, out branchId) || branchId <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "The selected branch record is not valid.",
+                    "سجل الفرع المحدد غير صالح.",
+                    "Branches",
+                    "الفروع"
+                );
+                return;
+            }
 
-                MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this branch?",
+                "هل تريد حذف هذا الفرع؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
+                {
+                    BranchesBLL objBLL = new BranchesBLL();
+                    objBLL.Delete(branchId);
+                }
+
+                UiMessages.ShowInfo(
+                    "Branch has been deleted successfully.",
+                    "تم حذف الفرع بنجاح.",
+                    "Deleted",
+                    "تم الحذف"
+                );
+
                 load_branches_grid();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
         {
+            var confirm = UiMessages.ConfirmYesNo(
+                "Refresh the branch list?",
+                "هل تريد تحديث قائمة الفروع؟",
+                captionEn: "Confirm Refresh",
+                captionAr: "تأكيد التحديث"
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
             load_branches_grid();
         }
 
@@ -104,23 +164,16 @@ namespace pos
         {
             try
             {
-                
-                    //grid_branches.DataSource = null;
-
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     BranchesBLL objBLL = new BranchesBLL();
-                    //grid_branches.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
+                    String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_branches.DataSource = objBLL.SearchRecord(condition);
-
-                    //txt_search.Text = "";
-                
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message);
             }
 
         }

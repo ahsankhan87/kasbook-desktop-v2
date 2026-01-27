@@ -36,6 +36,9 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.grid_fiscal_years = new System.Windows.Forms.DataGridView();
+            this.btn_new = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_title = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,9 +46,6 @@
             this.to_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.activate = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btn_new = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_fiscal_years)).BeginInit();
             this.panel2.SuspendLayout();
@@ -53,6 +53,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
@@ -61,7 +62,6 @@
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.grid_fiscal_years);
             this.panel1.Controls.Add(this.btn_new);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -100,10 +100,10 @@
             // 
             // grid_fiscal_years
             // 
+            resources.ApplyResources(this.grid_fiscal_years, "grid_fiscal_years");
             this.grid_fiscal_years.AllowUserToAddRows = false;
             this.grid_fiscal_years.AllowUserToDeleteRows = false;
             this.grid_fiscal_years.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_fiscal_years, "grid_fiscal_years");
             this.grid_fiscal_years.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_fiscal_years.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_fiscal_years.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -118,6 +118,27 @@
             this.grid_fiscal_years.ReadOnly = true;
             this.grid_fiscal_years.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_fiscal_years.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_fiscal_years_CellContentClick);
+            // 
+            // btn_new
+            // 
+            resources.ApplyResources(this.btn_new, "btn_new");
+            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_new.Name = "btn_new";
+            this.btn_new.UseVisualStyleBackColor = true;
+            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
+            // 
+            // panel2
+            // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_title);
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_title
+            // 
+            resources.ApplyResources(this.lbl_title, "lbl_title");
+            this.lbl_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_title.Name = "lbl_title";
             // 
             // id
             // 
@@ -169,27 +190,6 @@
             resources.ApplyResources(this.activate, "activate");
             this.activate.Name = "activate";
             this.activate.ReadOnly = true;
-            // 
-            // btn_new
-            // 
-            this.btn_new.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_new, "btn_new");
-            this.btn_new.Name = "btn_new";
-            this.btn_new.UseVisualStyleBackColor = true;
-            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_title);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_title
-            // 
-            resources.ApplyResources(this.lbl_title, "lbl_title");
-            this.lbl_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_title.Name = "lbl_title";
             // 
             // frm_fiscal_years
             // 
