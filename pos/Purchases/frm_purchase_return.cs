@@ -493,7 +493,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             PurchasesBLL PurchasesBLL_obj = new PurchasesBLL();
-            return PurchasesBLL_obj.GetMaxReturnInvoiceNo();
+            return PurchasesBLL_obj.GeneratePurchaseReturnInvoiceNo(); //.GetMaxReturnInvoiceNo();
         }
 
         public void autoCompleteInvoice()
@@ -516,9 +516,7 @@ namespace pos
                         foreach (DataRow dr in dt.Rows)
                         {
                             coll.Add(dr["invoice_no"].ToString());
-
                         }
-
                     }
 
                     txt_invoice_no.AutoCompleteCustomSource = coll;

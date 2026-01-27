@@ -77,6 +77,18 @@ namespace POS.BLL
                 throw;
             }
         }
+        // PURCHASE
+        public string GeneratePurchaseInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            return objDLL.GenerateDailyInvoiceNo("pos_purchases", "invoice_no", "P", branchId, invoiceDate);
+        }
+
+        // PURCHASE RETURN
+        public string GeneratePurchaseReturnInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            return objDLL.GenerateDailyInvoiceNo("pos_purchases", "invoice_no", "PR", branchId, invoiceDate);
+        }
+
         public String GetMaxInvoiceNo()
         {
             try

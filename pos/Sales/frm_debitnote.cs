@@ -158,7 +158,7 @@ namespace pos.Sales
         private void GetMaxInvoiceNo()
         {
             SalesBLL salesBLL = new SalesBLL();
-            txtDebitNoteNumber.Text = salesBLL.GetMaxDebitNoteInvoiceNo();
+            txtDebitNoteNumber.Text = salesBLL.GenerateDebitNoteInvoiceNo(); //.GetMaxDebitNoteInvoiceNo();
 
         }
 

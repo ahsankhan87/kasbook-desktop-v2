@@ -86,7 +86,7 @@ namespace pos.Master.Companies.zatca
                     GeneralBLL objBLL = new GeneralBLL();
                     grid_zatca_csids.AutoGenerateColumns = false;
                     string keyword = "*";
-                    string table = "zatca_credentials";
+                    string table = "zatca_credentials WHERE branch_id = " + UsersModal.logged_in_branch_id;
                     grid_zatca_csids.DataSource = objBLL.GetRecord(keyword, table);
                 }
                 catch (Exception ex)

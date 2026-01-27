@@ -269,6 +269,41 @@ namespace POS.DLL
             }
 
         }
+        // Add inside PurchasesDLL class (recommended near GetMaxInvoiceNo)
+        public string GenerateDailyInvoiceNo(string tableName, string invoiceColumn, string prefix, int? branchId = null, DateTime? invoiceDate = null)
+        {
+            int bId = branchId ?? UsersModal.logged_in_branch_id;
+            DateTime d = (invoiceDate ?? DateTime.Now).Date;
+
+            string datePart = d.ToString("yyyyMMdd");
+            string start = prefix + bId + "-" + datePart + "-"; // e.g. "P1-20260128-"
+            string like = start + "%";
+
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand($@"
+            SELECT MAX({invoiceColumn})
+            FROM {tableName}
+            WHERE branch_id = @branch_id
+              AND {invoiceColumn} LIKE @like;", cn))
+            {
+                cmd.Parameters.AddWithValue("@branch_id", bId);
+                cmd.Parameters.AddWithValue("@like", like);
+
+                cn.Open();
+                string lastRef = Convert.ToString(cmd.ExecuteScalar());
+
+                int newNum = 1;
+                if (!string.IsNullOrWhiteSpace(lastRef) && lastRef.StartsWith(start, StringComparison.OrdinalIgnoreCase))
+                {
+                    string tail = lastRef.Substring(start.Length); // "0001"
+                    int lastNum;
+                    if (int.TryParse(tail, out lastNum))
+                        newNum = lastNum + 1;
+                }
+
+                return start + newNum.ToString("0000");
+            }
+        }
 
         public String GetMaxInvoiceNo_HOLD()
         {

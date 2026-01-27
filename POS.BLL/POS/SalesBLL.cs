@@ -138,6 +138,35 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        // SALE (replaces your GenerateSaleInvoiceNo logic to use the common helper)
+        public string GenerateSaleInvoiceNo(string prefix = "S", int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", prefix, branchId, invoiceDate);
+        }
+
+        // SALES RETURN
+        public string GenerateSalesReturnInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "SR", branchId, invoiceDate);
+        }
+
+        // DEBIT NOTE
+        public string GenerateDebitNoteInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "DN", branchId, invoiceDate);
+        }
+
+        // ESTIMATE
+        public string GenerateEstimateInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_estimates", "invoice_no", "E", branchId, invoiceDate);
+        }
+
         public String GetMaxSalesReturnInvoiceNo()
         {
             try

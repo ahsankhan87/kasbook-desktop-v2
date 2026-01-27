@@ -666,7 +666,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             SalesBLL salesBLL_obj = new SalesBLL();
-            return salesBLL_obj.GetMaxSalesReturnInvoiceNo();
+            return salesBLL_obj.GenerateSalesReturnInvoiceNo(); // GetMaxSalesReturnInvoiceNo();
         }
 
         public void autoCompleteInvoice()

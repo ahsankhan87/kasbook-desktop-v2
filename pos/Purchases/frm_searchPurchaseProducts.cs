@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -78,51 +80,62 @@ namespace pos
                     _totalCount = 0; _totalPages = 0; UpdatePagingLabel();
                     return;
                 }
-                var sw = Stopwatch.StartNew();
-                var dt = _productBll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, _group_code, _pageIndex, _pageSize, out _totalCount);
-                sw.Stop();
-                _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
-                if (_pageIndex >= _totalPages && _totalPages > 0)
-                {
-                    _pageIndex = _totalPages - 1;
-                    dt = _productBll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, _group_code, _pageIndex, _pageSize, out _totalCount);
-                }
-                grid_search_products.AutoGenerateColumns = false;
-                grid_search_products.DataSource = dt;
-                UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
-                this.Text = $"Products (Page {_pageIndex + 1}/{_totalPages})";
 
-                if (dt.Rows.Count == 0)
+                using (BusyScope.Show(this, UiMessages.T("Searching products...", "جارٍ البحث عن المنتجات...")))
                 {
-                    DialogResult result = MessageBox.Show("Product not found, want to create new product?", "Purchase Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-                    if (result == DialogResult.Yes)
+                    var sw = Stopwatch.StartNew();
+                    var dt = _productBll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, _group_code, _pageIndex, _pageSize, out _totalCount);
+                    sw.Stop();
+
+                    _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
+                    if (_pageIndex >= _totalPages && _totalPages > 0)
                     {
-                        frm_product_full_detail frm_products = new frm_product_full_detail(null, null, "", null, this, condition);
-                        frm_products.ShowDialog();
+                        _pageIndex = _totalPages - 1;
                         dt = _productBll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, _group_code, _pageIndex, _pageSize, out _totalCount);
-                        _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
-                        grid_search_products.DataSource = dt;
-                        UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
+                    }
+
+                    grid_search_products.AutoGenerateColumns = false;
+                    grid_search_products.DataSource = dt;
+                    UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
+                    this.Text = $"Products (Page {_pageIndex + 1}/{_totalPages})";
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        var result = UiMessages.ConfirmYesNo(
+                            "No matching product was found. Would you like to create a new product?",
+                            "لم يتم العثور على منتج مطابق. هل ترغب في إنشاء منتج جديد؟",
+                            captionEn: "Purchase Transaction",
+                            captionAr: "معاملة شراء");
+
+                        if (result == DialogResult.Yes)
+                        {
+                            frm_product_full_detail frm_products = new frm_product_full_detail(null, null, "", null, this, condition);
+                            frm_products.ShowDialog();
+
+                            dt = _productBll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, _group_code, _pageIndex, _pageSize, out _totalCount);
+                            _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
+                            grid_search_products.DataSource = dt;
+                            UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
+                        }
+                        else
+                        {
+                            this.Close();
+                        }
                     }
                     else
                     {
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    if (grid_search_products.CurrentRow != null)
-                    {
-                        int alternate_no = 0;
-                        if (grid_search_products.CurrentRow.Cells["alternate_no"] != null)
-                            int.TryParse(grid_search_products.CurrentRow.Cells["alternate_no"].Value?.ToString(), out alternate_no);
-                        load_alternate_product(); // uses current row's alternate_no internally
+                        if (grid_search_products.CurrentRow != null)
+                        {
+                            load_alternate_product(); // uses current row's alternate_no internally
+                        }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(
+                    "An unexpected error occurred while searching products. Please try again.",
+                    "حدث خطأ غير متوقع أثناء البحث عن المنتجات. يرجى المحاولة مرة أخرى.");
             }
         }
 
@@ -145,9 +158,11 @@ namespace pos
                 _debounceTimer.Stop();
                 _debounceTimer.Start();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowWarning(
+                    "Unable to process your input at the moment. Please try again.",
+                    "تعذر معالجة الإدخال حالياً. يرجى المحاولة مرة أخرى.");
             }
         }
 
@@ -181,12 +196,9 @@ namespace pos
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if (grid_search_products.SelectedCells.Count > 0)
+            if (grid_search_products.SelectedCells.Count > 0 && grid_search_products.CurrentRow != null)
             {
-                string product_id = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
-                string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
                 string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-
 
                 if (_isGrid)
                 {
@@ -211,7 +223,7 @@ namespace pos
                     {
                         purchase_orderForm.load_products(item_number);
                     }
-                   
+                  
                 }
                 
                 //this.Visible = false;
@@ -219,7 +231,11 @@ namespace pos
             }
             else
             {
-                MessageBox.Show("Please select record", "Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UiMessages.ShowInfo(
+                    "Please select a product to continue.",
+                    "يرجى تحديد منتج للمتابعة.",
+                    captionEn: "Products",
+                    captionAr: "المنتجات");
             }
         }
 
@@ -244,12 +260,18 @@ namespace pos
 
         public void product_movement_check()
         {
-            if(grid_search_products.RowCount > 0)
+            if(grid_search_products.RowCount > 0 && grid_search_products.CurrentRow != null)
             {
                 string product_code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
                 frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
 
                 frm_prod_move_obj.ShowDialog();
+            }
+            else
+            {
+                UiMessages.ShowWarning(
+                    "Please select a product first.",
+                    "يرجى تحديد منتج أولاً.");
             }
             
         }
@@ -268,7 +290,7 @@ namespace pos
         }
         private void group_grid_insert()//alternate / group products insert to grid
         {
-            if (grid_group_products.SelectedCells.Count > 0)
+            if (grid_group_products.SelectedCells.Count > 0 && grid_group_products.CurrentRow != null)
             {
                 string g_product_id = grid_group_products.CurrentRow.Cells["g_id"].Value.ToString();
 
@@ -302,7 +324,11 @@ namespace pos
             }
             else
             {
-                MessageBox.Show("Please select record", "Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UiMessages.ShowInfo(
+                    "Please select a product to continue.",
+                    "يرجى تحديد منتج للمتابعة.",
+                    captionEn: "Products",
+                    captionAr: "المنتجات");
             }
         }
 
@@ -318,10 +344,11 @@ namespace pos
                 
                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowWarning(
+                    "Unable to load related (alternate) products.",
+                    "تعذر تحميل المنتجات المرتبطة (البديلة).");
             }
         }
 
@@ -329,26 +356,34 @@ namespace pos
        {
            try
            {
-                grid_group_products.Refresh();
-                //grid_group_products.Rows.Clear();
-                // set it to false if not needed for fast load
-                grid_group_products.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-                // or even better, use .DisableResizing. Most time consuming enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-                grid_group_products.RowHeadersVisible = false;
-
-
-                //bind data in data grid view  
-                ProductBLL objBLL = new ProductBLL();
-                grid_group_products.AutoGenerateColumns = false;
-                
-               if (grid_search_products.Rows.Count > 0)
+                if (grid_search_products.Rows.Count <= 0 || grid_search_products.CurrentRow == null)
                 {
-                    int alternate_no = Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value);
+                    grid_group_products.DataSource = null;
+                    return;
+                }
+
+                using (BusyScope.Show(this, UiMessages.T("Loading related products...", "جارٍ تحميل المنتجات المرتبطة...")))
+                {
+                    grid_group_products.Refresh();
+                    //grid_group_products.Rows.Clear();
+                    // set it to false if not needed for fast load
+                    grid_group_products.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                    // or even better, use .DisableResizing. Most time consuming enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                    grid_group_products.RowHeadersVisible = false;
+
+
+                    //bind data in data grid view  
+                    ProductBLL objBLL = new ProductBLL();
+                    grid_group_products.AutoGenerateColumns = false;
+
+                    int alternate_no = 0;
+                    if (grid_search_products.CurrentRow.Cells["alternate_no"] != null)
+                        int.TryParse(grid_search_products.CurrentRow.Cells["alternate_no"].Value?.ToString(), out alternate_no);
+
 
                     if (alternate_no != 0)
                     {
                         grid_group_products.DataSource = objBLL.GetProductsByAlternateNo(alternate_no);
-
                     }
                     else
                     {
@@ -357,10 +392,11 @@ namespace pos
                 }
 
            }
-           catch (Exception ex)
+           catch (Exception)
            {
-
-               MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               UiMessages.ShowWarning(
+                   "Unable to load related (alternate) products.",
+                   "تعذر تحميل المنتجات المرتبطة (البديلة).");
            }
        }
     }

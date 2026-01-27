@@ -122,7 +122,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="code.Width" type="System.Int32, mscorlib">
-    <value>89</value>
+    <value>98</value>
   </data>
   <data name="name.HeaderText" xml:space="preserve">
     <value>اسم الصنف</value>
@@ -131,13 +131,13 @@
     <value>الكمية</value>
   </data>
   <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>62</value>
+    <value>73</value>
   </data>
   <data name="avg_cost.HeaderText" xml:space="preserve">
     <value>سعر التكلفة</value>
   </data>
   <data name="avg_cost.Width" type="System.Int32, mscorlib">
-    <value>88</value>
+    <value>107</value>
   </data>
   <data name="location_code.HeaderText" xml:space="preserve">
     <value>الموقع</value>
@@ -145,13 +145,25 @@
   <data name="category.HeaderText" xml:space="preserve">
     <value>الصناعه</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 53</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 53</value>
+  </data>
+  <data name="lbl_pages1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 14</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btn_ok.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 6</value>
+    <value>119, 7</value>
+  </data>
+  <data name="btn_ok.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 31</value>
   </data>
   <data name="btn_ok.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -163,7 +175,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 7</value>
+    <value>14, 7</value>
   </data>
   <data name="btn_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -172,64 +184,58 @@
     <value>إلغاء (Esc)</value>
   </data>
   <data name="rb_by_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>544, 36</value>
+    <value>755, 41</value>
   </data>
   <data name="rb_by_name.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="rb_by_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 21</value>
+    <value>70, 21</value>
   </data>
   <data name="rb_by_name.Text" xml:space="preserve">
     <value>بالاسم</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 40</value>
+    <value>14, 53</value>
   </data>
   <data name="rb_by_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>616, 36</value>
+    <value>827, 41</value>
   </data>
   <data name="rb_by_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="rb_by_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
+    <value>56, 21</value>
   </data>
   <data name="rb_by_code.Text" xml:space="preserve">
     <value>الكود</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>685, 38</value>
+    <value>896, 43</value>
   </data>
   <data name="label1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 17</value>
+    <value>66, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>بحث منتج</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 11</value>
+    <value>447, 11</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 7</value>
+  <data name="grid_group_products.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="label2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 17</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>مجموعة / منتجات بديلة (زائد +)</value>
+  <data name="grid_group_products.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1002, 225</value>
   </data>
   <data name="g_code.HeaderText" xml:space="preserve">
     <value>رقم الصنف</value>
   </data>
   <data name="g_code.Width" type="System.Int32, mscorlib">
-    <value>89</value>
+    <value>98</value>
   </data>
   <data name="g_name.HeaderText" xml:space="preserve">
     <value>اسم الصنف</value>
@@ -238,18 +244,45 @@
     <value>الكمية</value>
   </data>
   <data name="g_qty.Width" type="System.Int32, mscorlib">
-    <value>62</value>
+    <value>73</value>
   </data>
   <data name="g_avg_cost.HeaderText" xml:space="preserve">
     <value>سعر التكلفة</value>
   </data>
   <data name="g_avg_cost.Width" type="System.Int32, mscorlib">
-    <value>88</value>
+    <value>107</value>
   </data>
   <data name="g_location_code.HeaderText" xml:space="preserve">
     <value>الموقع</value>
   </data>
   <data name="g_category.HeaderText" xml:space="preserve">
     <value>الصناعه</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>625, 7</value>
+  </data>
+  <data name="label2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>مجموعة / منتجات بديلة (زائد +)</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>البحث عن منتجات الشراء</value>
   </data>
 </root>

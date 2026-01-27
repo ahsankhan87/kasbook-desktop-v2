@@ -369,7 +369,80 @@ namespace POS.DLL
             }
 
         }
+        
+        public string GenerateSaleInvoiceNo(string prefix = "S", int? branchId = null, DateTime? invoiceDate = null)
+        {
+            int bId = branchId ?? UsersModal.logged_in_branch_id;
+            DateTime d = (invoiceDate ?? DateTime.Now).Date;
 
+            string date = d.ToString("yyyyMMdd");
+            string start = prefix + bId + "-" + date + "-";          // e.g. "S1-20260128-"
+            string like = start + "%";
+
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            SELECT MAX(invoice_no)
+            FROM pos_sales
+            WHERE branch_id = @branch_id
+              AND invoice_no LIKE @like;", cn))
+            {
+                cmd.Parameters.AddWithValue("@branch_id", bId);
+                cmd.Parameters.AddWithValue("@like", like);
+
+                cn.Open();
+                string lastRef = Convert.ToString(cmd.ExecuteScalar());
+
+                int newNum = 1;
+                if (!string.IsNullOrWhiteSpace(lastRef) && lastRef.StartsWith(start, StringComparison.OrdinalIgnoreCase))
+                {
+                    // Equivalent to PHP: substr(lastRef, strlen(start))
+                    string tail = lastRef.Substring(start.Length); // "0001"
+                    int lastNum;
+                    if (int.TryParse(tail, out lastNum))
+                        newNum = lastNum + 1;
+                }
+
+                return start + newNum.ToString("0000"); // "S1-20260128-0001"
+            }
+        }
+        // Add inside SalesDLL class (recommended near other invoice helpers)
+
+        public string GenerateDailyInvoiceNo(string tableName, string invoiceColumn, string prefix, int? branchId = null, DateTime? invoiceDate = null)
+        {
+            int bId = branchId ?? UsersModal.logged_in_branch_id;
+            DateTime d = (invoiceDate ?? DateTime.Now).Date;
+
+            string datePart = d.ToString("yyyyMMdd");
+            string start = prefix + bId + "-" + datePart + "-"; // e.g. "SR1-20260128-"
+            string like = start + "%";
+
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand($@"
+            SELECT MAX({invoiceColumn})
+            FROM {tableName}
+            WHERE branch_id = @branch_id
+              AND {invoiceColumn} LIKE @like;", cn))
+            {
+                cmd.Parameters.AddWithValue("@branch_id", bId);
+                cmd.Parameters.AddWithValue("@like", like);
+
+                cn.Open();
+                string lastRef = Convert.ToString(cmd.ExecuteScalar());
+
+                int newNum = 1;
+                if (!string.IsNullOrWhiteSpace(lastRef) && lastRef.StartsWith(start, StringComparison.OrdinalIgnoreCase))
+                {
+                    string tail = lastRef.Substring(start.Length); // "0001"
+                    int lastNum;
+                    if (int.TryParse(tail, out lastNum))
+                        newNum = lastNum + 1;
+                }
+
+                return start + newNum.ToString("0000");
+            }
+        }
+
+        
         public String GetMaxSalesReturnInvoiceNo()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

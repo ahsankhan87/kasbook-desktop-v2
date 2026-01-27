@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chk_hold_purchases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 17</value>
+    <value>151, 21</value>
   </data>
   <data name="chk_hold_purchases.Text" xml:space="preserve">
     <value>المشتريات المحفوظة</value>
@@ -137,22 +137,34 @@
     <value>بحث (F3)</value>
   </data>
   <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 42</value>
+    <value>203, 66</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 69</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>من تاريخ</value>
   </data>
+  <data name="txt_condition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 24</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>303, 70</value>
+  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>60, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>الى تاريخ</value>
   </data>
   <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 66</value>
+    <value>18, 66</value>
+  </data>
+  <data name="txt_to_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
   </data>
   <data name="Listbox_method.Items" xml:space="preserve">
     <value>فاتورة</value>
@@ -177,8 +189,7 @@
     <value>تاريخ</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة
-</value>
+    <value>رقم الفاتورة</value>
   </data>
   <data name="supplier_name.HeaderText" xml:space="preserve">
     <value>المورد</value>
@@ -188,5 +199,15 @@
   </data>
   <data name="total_amount.HeaderText" xml:space="preserve">
     <value>المجموع</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>البحث عن فواتير الشراء</value>
   </data>
 </root>

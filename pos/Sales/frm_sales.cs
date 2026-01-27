@@ -2651,14 +2651,14 @@ namespace pos
                             {
                                 if (sale_type == "Quotation")
                                 {
-                                    invoice_no = salesObj.GetMaxEstimateInvoiceNo();
+                                    invoice_no = salesObj.GenerateEstimateInvoiceNo(); //GetMaxEstimateInvoiceNo();
                                 }
                                 else
                                 {
                                     // NEW: pick invoice series based on amount
                                     invoice_no = isSmallSale
                                         ? salesObj.GetMaxSmallSaleInvoiceNo()   // ZS-000001
-                                        : salesObj.GetMaxSaleInvoiceNo();
+                                        : salesObj.GenerateSaleInvoiceNo();  //GetMaxSaleInvoiceNo();
 
                                 }
 
@@ -2800,59 +2800,61 @@ namespace pos
                                         DataRow activeZatcaCredential = ZatcaInvoiceGenerator.GetActiveZatcaCSID();
                                         if (activeZatcaCredential == null)
                                         {
-                                            UiMessages.ShowError(
-                                                "No active ZATCA CSID/credentials found. Please configure them first.",
+                                            UiMessages.ShowWarning(
+                                                "No active ZATCA CSID/credentials found. Please configure them first to send invoices to zatca.",
                                                 "لا توجد بيانات اعتماد Zاتكا نشطة. يرجى تكوينها أولاً."
                                             );
+
                                         }
-
-                                        // Sign invoice to ZATCA
-                                        // Retrieve PCSID credentials from the database using the credentialId
-                                        DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
-                                        if (PCSID_dataRow == null)
-                                        {
-                                            // If PCSID not exist then sign with CSID
-                                            //Sign Invoice with CSID instead of Production CSID
-                                            ZatcaHelper.SignInvoiceToZatca(invoice_no);
-
-                                            // NEW: skip ZATCA for small sales
-                                            if (!isSmallSale)
+                                        else { 
+                                            // Sign invoice to ZATCA
+                                            // Retrieve PCSID credentials from the database using the credentialId
+                                            DataRow PCSID_dataRow = ZatcaInvoiceGenerator.GetZatcaCredentialByParentID(Convert.ToInt32(activeZatcaCredential["id"]));
+                                            if (PCSID_dataRow == null)
                                             {
-                                                // After signing with CSID, send invoice to ZATCA
-                                                // If invoice subtype is Standard then clear it from ZATCA
-                                                if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                                // If PCSID not exist then sign with CSID
+                                                //Sign Invoice with CSID instead of Production CSID
+                                                ZatcaHelper.SignInvoiceToZatca(invoice_no);
+
+                                                // NEW: skip ZATCA for small sales
+                                                if (!isSmallSale)
                                                 {
-                                                    // Clear invoice from ZATCA
-                                                    ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
-                                                }
-                                                else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                                //otherwise Report invoice to ZATCA
-                                                {
-                                                    // Report invoice to ZATCA
-                                                    ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                                    // After signing with CSID, send invoice to ZATCA
+                                                    // If invoice subtype is Standard then clear it from ZATCA
+                                                    if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                                    {
+                                                        // Clear invoice from ZATCA
+                                                        ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                                    }
+                                                    else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                                    //otherwise Report invoice to ZATCA
+                                                    {
+                                                        // Report invoice to ZATCA
+                                                        ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                                    }
                                                 }
                                             }
-                                        }
-                                        else
-                                        {
-                                            //If PCSID exist then sign it 
-                                            ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
-
-                                            // NEW: skip ZATCA for small sales
-                                            if (!isSmallSale)
+                                            else
                                             {
-                                                // After signing with PCSID, send invoice to ZATCA
-                                                // If invoice subtype is Standard then clear it from ZATCA
-                                                if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                                //If PCSID exist then sign it 
+                                                ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
+
+                                                // NEW: skip ZATCA for small sales
+                                                if (!isSmallSale)
                                                 {
-                                                    // Clear invoice from ZATCA
-                                                    ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
-                                                }
-                                                else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                                //otherwise Report invoice to ZATCA
-                                                {
-                                                    // Report invoice to ZATCA
-                                                    ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                                    // After signing with PCSID, send invoice to ZATCA
+                                                    // If invoice subtype is Standard then clear it from ZATCA
+                                                    if (cmb_invoice_subtype_code.SelectedValue.ToString() == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                                    {
+                                                        // Clear invoice from ZATCA
+                                                        ZatcaHelper.ZatcaInvoiceClearanceAsync(invoice_no);
+                                                    }
+                                                    else if (cmb_invoice_subtype_code.SelectedValue.ToString() == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                                    //otherwise Report invoice to ZATCA
+                                                    {
+                                                        // Report invoice to ZATCA
+                                                        ZatcaHelper.ZatcaInvoiceReportingAsync(invoice_no);
+                                                    }
                                                 }
                                             }
                                         }
