@@ -1458,7 +1458,7 @@ namespace pos
                     PrinttoolStripButton.Enabled = true;
                     SaleReturnToolStripButton.Enabled = true;
                 }
-                else // for estimates 
+                else// for estimates 
                 {
                     invoice_status = "Estimate";
                     //btn_save.Text = "Sale (F3)";
@@ -1475,13 +1475,33 @@ namespace pos
                         // inside Load_products_to_grid_by_invoiceno(...) where the selected lines are
                         _suppressCustomerSearch = true;
                         _customerSearchDebounceTimer.Stop();
+                        
                         txtCustomerSearch.Text = myProductView["customer_name"].ToString();
                         txt_customerID.Text = myProductView["customer_id"].ToString();
                         txt_customer_vat.Text = myProductView["vat_no"].ToString();
                         txt_cust_credit_limit.Text = myProductView["credit_limit"].ToString();
+                        
                         Decimal customer_total_balance = customerBLL.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
                         txt_cust_balance.Text = customer_total_balance.ToString("N2");
+                        
                         _suppressCustomerSearch = false;
+                        // NEW: Load invoice subtype saved in DB (do NOT override it)
+                        string savedSubtype = null;
+                        if (_dt.Columns.Contains("invoice_subtype"))
+                            savedSubtype = Convert.ToString(myProductView["invoice_subtype"]);
+                        else if (_dt.Columns.Contains("invoice_subtype_code"))
+                            savedSubtype = Convert.ToString(myProductView["invoice_subtype_code"]);
+
+                        if (!string.IsNullOrWhiteSpace(savedSubtype) && cmb_invoice_subtype_code.DataSource != null)
+                        {
+                            // Expecting "01" or "02"
+                            cmb_invoice_subtype_code.SelectedValue = savedSubtype.Trim();
+                        }
+                        else
+                        {
+                            // fallback rule if DB column not present
+                            ApplyInvoiceSubtypeForCustomerSelection();
+                        }
 
                         cmb_employees.SelectedValue = myProductView["employee_id"];
                         cmb_sale_type.SelectedValue = myProductView["sale_type"];
@@ -2630,8 +2650,8 @@ namespace pos
                             string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
                             string PONumber = txtPONumber.Text;
 
-                            double smallSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(200.0);
-                            bool isSmallSale = (sale_type == "Cash" || sale_type == "Credit") && net_total < smallSaleThreshold;
+                            double smallSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(0);
+                            bool isSmallSale = (sale_type == "Cash" || sale_type == "Credit") && (net_total >= smallSaleThreshold && smallSaleThreshold != 0);
                             
 
                             if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
@@ -2657,7 +2677,7 @@ namespace pos
                                 {
                                     // NEW: pick invoice series based on amount
                                     invoice_no = isSmallSale
-                                        ? salesObj.GetMaxSmallSaleInvoiceNo()   // ZS-000001
+                                        ? salesObj.GenerateZatcaSkipSalesInvoiceNo() //GetMaxSmallSaleInvoiceNo()   // ZS-000001
                                         : salesObj.GenerateSaleInvoiceNo();  //GetMaxSaleInvoiceNo();
 
                                 }
@@ -3173,6 +3193,8 @@ namespace pos
                 Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
                 txt_cust_balance.Text = customer_total_balance.ToString("N2");
 
+                // NEW
+                ApplyInvoiceSubtypeForCustomerSelection();
 
                 customersDataGridView.Visible = false;
                 grid_sales.Focus();
@@ -3197,6 +3219,8 @@ namespace pos
             Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
             txt_cust_balance.Text = customer_total_balance.ToString("N2");
 
+            // NEW
+            ApplyInvoiceSubtypeForCustomerSelection();
 
             customersDataGridView.Visible = false;
             grid_sales.Focus();
@@ -3307,6 +3331,10 @@ namespace pos
                     CustomerBLL customerBLL_obj = new CustomerBLL();
                     Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
                     txt_cust_balance.Text = customer_total_balance.ToString("N2");
+
+                    // NEW
+                    ApplyInvoiceSubtypeForCustomerSelection();
+
                 }
             }
             _customerSearchDebounceTimer.Stop();
@@ -3351,6 +3379,26 @@ namespace pos
             string phone = customersDataGridView.Columns.Contains("contact_no") ? Convert.ToString(row.Cells["contact_no"].Value) : string.Empty;
             string vat = customersDataGridView.Columns.Contains("vat_no") ? Convert.ToString(row.Cells["vat_no"].Value) : string.Empty;
 
+        }
+
+        // Add inside frm_sales class (near other helpers)
+        private void ApplyInvoiceSubtypeForCustomerSelection()
+        {
+            // If no customer selected => Simplified (02)
+            // If customer selected => Standard (01)
+            bool hasCustomer = !string.IsNullOrWhiteSpace(txt_customerID.Text)
+                               && txt_customerID.Text != "0"
+                               && txt_customerID.Text != "-1";
+
+            var desired = hasCustomer ? "01" : "02";
+
+            // Guard (combo might not be initialized yet during load)
+            if (cmb_invoice_subtype_code.DataSource == null)
+                return;
+
+            // Avoid unnecessary SelectedIndexChanged churn
+            if (cmb_invoice_subtype_code.SelectedValue == null || cmb_invoice_subtype_code.SelectedValue.ToString() != desired)
+                cmb_invoice_subtype_code.SelectedValue = desired;
         }
 
         // Add this helper inside frm_sales class

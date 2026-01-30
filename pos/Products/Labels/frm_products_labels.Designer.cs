@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_products_labels));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_purchase_inv_no = new System.Windows.Forms.TextBox();
             this.txt_product_code = new System.Windows.Forms.TextBox();
@@ -42,13 +42,13 @@
             this.grid_product_groups = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_product_groups)).BeginInit();
             this.SuspendLayout();
@@ -130,13 +130,13 @@
             this.grid_product_groups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.code,
+            this.barcode,
             this.category,
             this.name,
             this.qty,
             this.unit_price,
             this.location_code,
-            this.label_qty,
-            this.barcode});
+            this.label_qty});
             this.grid_product_groups.Name = "grid_product_groups";
             this.grid_product_groups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_product_groups.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_product_groups_CellContentClick);
@@ -153,6 +153,12 @@
             resources.ApplyResources(this.code, "code");
             this.code.Name = "code";
             this.code.ReadOnly = true;
+            // 
+            // barcode
+            // 
+            this.barcode.DataPropertyName = "barcode";
+            resources.ApplyResources(this.barcode, "barcode");
+            this.barcode.Name = "barcode";
             // 
             // category
             // 
@@ -192,16 +198,10 @@
             // label_qty
             // 
             this.label_qty.DataPropertyName = "label_qty";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label_qty.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_qty.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.label_qty, "label_qty");
             this.label_qty.Name = "label_qty";
-            // 
-            // barcode
-            // 
-            this.barcode.DataPropertyName = "barcode";
-            resources.ApplyResources(this.barcode, "barcode");
-            this.barcode.Name = "barcode";
             // 
             // frm_products_labels
             // 
@@ -235,13 +235,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn location_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn label_qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
     }
 }
 

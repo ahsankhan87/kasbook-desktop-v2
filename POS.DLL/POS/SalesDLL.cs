@@ -442,7 +442,6 @@ namespace POS.DLL
             }
         }
 
-        
         public String GetMaxSalesReturnInvoiceNo()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -2269,7 +2268,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.sale_date,S.sale_time,S.invoice_no,S.sale_type,S.account,S.customer_id,S.employee_id,S.description,S.account," +
-                            " S.discount_percent AS total_disc_percent,S.discount_value AS total_disc_value,S.total_amount,S.flatDiscountValue," +
+                            " S.discount_percent AS total_disc_percent,S.discount_value AS total_disc_value,S.total_amount,S.flatDiscountValue,S.invoice_subtype_code," +
                             " SI.id,SI.item_code,SI.quantity_sold,SI.unit_price,SI.cost_price,SI.loc_code,SI.packet_qty,SI.item_number," +
                             " SI.discount_value,SI.discount_percent,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat, SI.item_number," +

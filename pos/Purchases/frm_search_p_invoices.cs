@@ -148,7 +148,33 @@ namespace pos
                 {
                     btn_ok.PerformClick();
                 }
-                
+                if (e.KeyCode == Keys.Escape)
+                {
+                    btn_close.PerformClick();
+                }
+                if ((e.KeyCode == Keys.Return) && (e.Modifiers == Keys.Control))
+                {
+                    btn_ok.PerformClick();
+                }
+                if (e.KeyCode == Keys.F2 && (e.Modifiers == Keys.Control))
+                {
+                    txt_condition.Focus();
+                }
+                if (e.KeyData == Keys.Down)
+                {
+                    if (this.ActiveControl != grid_sales_report)
+                    {
+                        this.ActiveControl = grid_sales_report;
+                    }
+                }
+                if(e.KeyData == Keys.F4)
+                {
+                    chk_hold_purchases.Checked = !chk_hold_purchases.Checked;
+                }
+                if( e.KeyData == Keys.F5)
+                {
+                    Listbox_method.Focus();
+                }
             }
             catch (Exception)
             {

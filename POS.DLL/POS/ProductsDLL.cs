@@ -832,7 +832,7 @@ namespace POS.DLL
 
                 // Create CONTAINS condition for each part (split by +)
                 var containsTerms = words.Select(word => $"\"{word}*\"");
-                allConditions.Add($"CONTAINS((P.name, P.code, P.part_number, P.description), '{string.Join(" AND ", containsTerms)}')");
+                allConditions.Add($"CONTAINS((P.name, P.code, P.part_number, P.description,P.barcode), '{string.Join(" AND ", containsTerms)}')");
             }
 
             return allConditions.Count > 0 ? string.Join(" AND ", allConditions) : "1=1";
@@ -2367,6 +2367,7 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@termLong", single + "%");
                                 cmd.Parameters.AddWithValue("@termLike", "%" + single + "%");
                                 cmd.Parameters.AddWithValue("@termDesc", "%" + single + "%");
+                                //cmd.Parameters.AddWithValue("@barcodeExact", single);
                             }
                         }
                     }

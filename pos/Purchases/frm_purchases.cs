@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -77,33 +79,33 @@ namespace pos
 
         private void frm_purchases_Load(object sender, EventArgs e)
         {
-            grid_purchases.Rows.Add();
-            this.ActiveControl = grid_purchases;
-            grid_purchases.CurrentCell = grid_purchases.Rows[0].Cells["code"];
-
-            Get_AccountID_From_Company();
-            load_user_rights(UsersModal.logged_in_userid);
-            //txt_product_name.Text = tb_product_name.Text;
-            get_purchasetype_dropdownlist();
-            if (lang == "en-US")
+            using (BusyScope.Show(this, UiMessages.T("Loading purchases...", "جاري تحميل المشتريات...")))
             {
-                cmb_purchase_type.SelectedValue = "Cash";
-            }
-            else if (lang == "ar-SA")
-            {
-                cmb_purchase_type.SelectedIndex = 0;
-            }
+                grid_purchases.Rows.Add();
+                this.ActiveControl = grid_purchases;
+                grid_purchases.CurrentCell = grid_purchases.Rows[0].Cells["code"];
 
-            //btn_movements.Enabled = false;
-            get_suppliers_dropdownlist();
-            get_employees_dropdownlist();
-            get_payment_method_dropdownlist();
+                Get_AccountID_From_Company();
+                load_user_rights(UsersModal.logged_in_userid);
 
-            //GetMAXInvoiceNo();
-            //disable sorting in grid
-            foreach (DataGridViewColumn column in grid_purchases.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                get_purchasetype_dropdownlist();
+                if (lang == "en-US")
+                {
+                    cmb_purchase_type.SelectedValue = "Cash";
+                }
+                else if (lang == "ar-SA")
+                {
+                    cmb_purchase_type.SelectedIndex = 0;
+                }
+
+                get_suppliers_dropdownlist();
+                get_employees_dropdownlist();
+                get_payment_method_dropdownlist();
+
+                foreach (DataGridViewColumn column in grid_purchases.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
             }
         }
 
@@ -123,7 +125,7 @@ namespace pos
         public string GetMAXInvoiceNo_HOLD()
         {
             PurchasesBLL PurchasesBLL_obj = new PurchasesBLL();
-            return PurchasesBLL_obj.GetMaxInvoiceNo_HOLD();
+            return PurchasesBLL_obj.GenerateHoldPurchaseInvoiceNo();
         }
 
         Form purchaseSearchObj;
@@ -327,7 +329,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -540,8 +542,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -793,7 +794,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -816,7 +817,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Products", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
 
             }
 
@@ -955,7 +956,7 @@ namespace pos
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1118,7 +1119,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -1212,7 +1213,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1389,7 +1390,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1511,7 +1512,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1634,7 +1635,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1696,8 +1697,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -1797,7 +1797,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1823,7 +1823,7 @@ namespace pos
                         //net_total = (grid_purchases.Rows[i].Cells["tax"].Value.ToString() == "0" ? (new_amount_total + new_vat_total) : new_amount_total);
                         //grid_purchases.Rows[i].Cells["unit_price"].Value = net_total;
 
-                        tax_rate = 0; // (grid_purchases.Rows[i].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
+                        tax_rate = 0; // (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString())));
 
                         ////grid_purchases.Rows[i].Cells["sub_total"].Value = Convert.ToDouble(grid_purchases.Rows[i].Cells["sub_total"].Value) - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value);
 
@@ -2202,7 +2202,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -2235,7 +2235,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -2248,7 +2248,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -2261,7 +2261,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 

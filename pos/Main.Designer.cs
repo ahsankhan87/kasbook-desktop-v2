@@ -95,6 +95,7 @@
             this.zatcaInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.allQuotationsEstimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.iCTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iCTRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iCTReleaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,7 +165,6 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -632,6 +632,11 @@
             this.allQuotationsEstimatesToolStripMenuItem.Name = "allQuotationsEstimatesToolStripMenuItem";
             resources.ApplyResources(this.allQuotationsEstimatesToolStripMenuItem, "allQuotationsEstimatesToolStripMenuItem");
             this.allQuotationsEstimatesToolStripMenuItem.Click += new System.EventHandler(this.allQuotationsEstimatesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // iCTToolStripMenuItem
             // 
@@ -1107,11 +1112,6 @@
             resources.ApplyResources(this.toolStripButtonNewPOS, "toolStripButtonNewPOS");
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // frm_main
             // 

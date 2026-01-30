@@ -97,6 +97,9 @@
             this.txt_transfer_search = new System.Windows.Forms.TextBox();
             this.btn_transfer = new System.Windows.Forms.Button();
             this.btn_transfer_search = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -106,6 +109,8 @@
             this.loc_transfer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_loc_transfer)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_search
@@ -603,13 +608,31 @@
             this.btn_transfer_search.UseVisualStyleBackColor = true;
             this.btn_transfer_search.Click += new System.EventHandler(this.btn_transfer_search_Click);
             // 
+            // panel3
+            // 
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Name = "panel3";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // panel4
+            // 
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Controls.Add(this.tabControl1);
+            this.panel4.Name = "panel4";
+            // 
             // frm_bulk_edit_product
             // 
             this.AcceptButton = this.btn_search;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_close;
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.KeyPreview = true;
             this.Name = "frm_bulk_edit_product";
             this.ShowIcon = false;
@@ -629,6 +652,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid_loc_transfer)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -699,5 +725,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label12;
     }
 }

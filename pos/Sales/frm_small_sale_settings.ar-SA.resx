@@ -119,34 +119,40 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 23</value>
+    <value>196, 23</value>
   </data>
   <data name="lblTitle.Text" xml:space="preserve">
-    <value>إعدادات البيع الصغيرة</value>
+    <value>رقم فاتورة البيع: الإعدادات</value>
   </data>
   <data name="lblThreshold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 17</value>
+    <value>123, 17</value>
   </data>
   <data name="lblThreshold.Text" xml:space="preserve">
-    <value>الحد الأقصى لمبلغ البيع الصغير:</value>
+    <value>إجمالي مبلغ البيع ≥</value>
   </data>
   <data name="nudThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 47</value>
+    <value>153, 47</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 90</value>
+    <value>209, 112</value>
   </data>
   <data name="btnSave.Text" xml:space="preserve">
     <value>يحفظ</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 90</value>
+    <value>290, 112</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>يلغي</value>
   </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 17</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>ملاحظة: إذا تم تعيين القيمة إلى (0)، فسيتم تعطيل الوظيفة</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>393, 140</value>
+    <value>388, 150</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -157,6 +163,6 @@
     <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>إعدادات البيع الصغيرة</value>
+    <value>رقم فاتورة البيع: الإعدادات</value>
   </data>
 </root>

@@ -36,9 +36,10 @@
             this.txt_from_date = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_condition = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxMethod = new System.Windows.Forms.GroupBox();
             this.Listbox_method = new System.Windows.Forms.ListBox();
             this.btn_close = new System.Windows.Forms.Button();
             this.btn_ok = new System.Windows.Forms.Button();
@@ -54,7 +55,7 @@
             this.total_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxMethod.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_report)).BeginInit();
             this.copyContextMenuStrip.SuspendLayout();
@@ -63,7 +64,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.groupBoxMethod);
             this.panel1.Controls.Add(this.btn_close);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_search);
@@ -75,6 +76,7 @@
             this.groupBox2.Controls.Add(this.txt_from_date);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txt_condition);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txt_to_date);
             resources.ApplyResources(this.groupBox2, "groupBox2");
@@ -98,6 +100,11 @@
             resources.ApplyResources(this.txt_condition, "txt_condition");
             this.txt_condition.Name = "txt_condition";
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
@@ -110,12 +117,12 @@
             this.txt_to_date.Name = "txt_to_date";
             this.txt_to_date.ValueChanged += new System.EventHandler(this.txt_to_date_ValueChanged);
             // 
-            // groupBox1
+            // groupBoxMethod
             // 
-            this.groupBox1.Controls.Add(this.Listbox_method);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.groupBoxMethod.Controls.Add(this.Listbox_method);
+            resources.ApplyResources(this.groupBoxMethod, "groupBoxMethod");
+            this.groupBoxMethod.Name = "groupBoxMethod";
+            this.groupBoxMethod.TabStop = false;
             // 
             // Listbox_method
             // 
@@ -251,7 +258,7 @@
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBoxMethod.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_report)).EndInit();
             this.copyContextMenuStrip.ResumeLayout(false);
@@ -271,7 +278,7 @@
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txt_condition;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxMethod;
         private System.Windows.Forms.ListBox Listbox_method;
         private System.Windows.Forms.Button btn_close;
         private System.Windows.Forms.Button btn_ok;
@@ -282,5 +289,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
+        private System.Windows.Forms.Label label1;
     }
 }

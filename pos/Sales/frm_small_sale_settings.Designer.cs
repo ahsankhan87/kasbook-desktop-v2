@@ -34,6 +34,7 @@ namespace pos
             this.nudThreshold = new System.Windows.Forms.NumericUpDown();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudThreshold)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,8 +50,8 @@ namespace pos
             // 
             // nudThreshold
             // 
-            resources.ApplyResources(this.nudThreshold, "nudThreshold");
             this.nudThreshold.DecimalPlaces = 2;
+            resources.ApplyResources(this.nudThreshold, "nudThreshold");
             this.nudThreshold.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -67,11 +68,16 @@ namespace pos
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // frm_small_sale_settings
             // 
@@ -82,6 +88,7 @@ namespace pos
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.nudThreshold);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblThreshold);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -102,5 +109,6 @@ namespace pos
         private System.Windows.Forms.NumericUpDown nudThreshold;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label1;
     }
 }

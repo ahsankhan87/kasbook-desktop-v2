@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_purchase_inv_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 24</value>
+    <value>401, 24</value>
   </data>
   <data name="txt_product_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 57</value>
+    <value>401, 57</value>
   </data>
   <data name="btn_invoice_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 24</value>
+    <value>323, 24</value>
   </data>
   <data name="btn_invoice_search.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 29</value>
@@ -134,7 +134,7 @@
     <value>بحث</value>
   </data>
   <data name="btn_search_products.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 57</value>
+    <value>323, 57</value>
   </data>
   <data name="btn_search_products.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 34</value>
@@ -142,40 +142,49 @@
   <data name="btn_search_products.Text" xml:space="preserve">
     <value>جمع</value>
   </data>
+  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 51</value>
+  </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء (Esc)</value>
+  </data>
+  <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
     <value>طباعة (F3)
 </value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>521, 27</value>
+    <value>639, 27</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 17</value>
+    <value>99, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>فاتورة الشراء #:</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 60</value>
+    <value>639, 60</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
+    <value>76, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>بحث منتوج</value>
+    <value>بحث منتوج:</value>
   </data>
   <data name="code.HeaderText" xml:space="preserve">
     <value>شفرة</value>
+  </data>
+  <data name="barcode.HeaderText" xml:space="preserve">
+    <value>الباركود</value>
   </data>
   <data name="category.HeaderText" xml:space="preserve">
     <value>الصناع</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="category.Width" type="System.Int32, mscorlib">
-    <value>69</value>
+    <value>72</value>
   </data>
   <data name="name.HeaderText" xml:space="preserve">
     <value>اسم</value>
@@ -190,7 +199,7 @@
     <value>الموقع</value>
   </data>
   <data name="location_code.Width" type="System.Int32, mscorlib">
-    <value>64</value>
+    <value>73</value>
   </data>
   <data name="label_qty.HeaderText" xml:space="preserve">
     <value>تسمية الكمية</value>

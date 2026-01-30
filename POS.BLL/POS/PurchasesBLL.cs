@@ -88,7 +88,11 @@ namespace POS.BLL
         {
             return objDLL.GenerateDailyInvoiceNo("pos_purchases", "invoice_no", "PR", branchId, invoiceDate);
         }
-
+        // PURCHASE HOLD
+        public string GenerateHoldPurchaseInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            return objDLL.GenerateDailyInvoiceNo("pos_hold_purchases", "invoice_no", "PH", branchId, invoiceDate);
+        }
         public String GetMaxInvoiceNo()
         {
             try

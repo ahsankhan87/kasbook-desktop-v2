@@ -115,7 +115,25 @@ namespace pos
                 {
                     btn_ok.PerformClick();
                 }
-                
+                if (e.KeyCode == Keys.Down)
+                {
+                    if (this.ActiveControl.Name != grid_sales_report.Name)
+                    {
+                        this.ActiveControl = grid_sales_report;
+                    }
+                }
+                if ((e.KeyCode == Keys.Return) && (e.Modifiers == Keys.Control))
+                {
+                    btn_ok.PerformClick();
+                }
+                if (e.KeyCode == Keys.F2 && (e.Modifiers == Keys.Control))
+                {
+                    txt_condition.Focus();
+                }
+                if(e.KeyCode == Keys.F4)
+                {
+                    Listbox_method.Focus();
+                }
             }
             catch (Exception ex)
             {

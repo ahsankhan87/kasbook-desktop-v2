@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using pos.UI.Busy;
+using pos.UI;
 
 namespace pos
 {
@@ -39,7 +40,7 @@ namespace pos
 
         public frm_searchProducts(frm_sales mainForm, frm_assign_products assign_product_frm, frm_alt_products frm_alt_products,
             string product_code, string category_id, string brand_id, int rowIndex = 0, bool isGrid = false, bool source_product = false,
-            frm_products_labels frm_pro_labels = null, frm_product_full_detail frm_pro_detail = null, frm_product_adjustment frm_pro_adjmt=null)
+            frm_products_labels frm_pro_labels = null, frm_product_full_detail frm_pro_detail = null, frm_product_adjustment frm_pro_adjmt = null)
         {
             this.mainForm = mainForm;
             this.assign_product_frm = assign_product_frm;
@@ -73,7 +74,7 @@ namespace pos
         {
             txt_search.Text = _product_code;
 
-            using (BusyScope.Show(this, "Loading products..."))
+            using (BusyScope.Show(this, UiMessages.T("Loading products...", "جاري تحميل الأصناف...")))
             {
                 await LoadProductsGridAsync();
             }
@@ -115,14 +116,14 @@ namespace pos
         {
             try
             {
-                using (BusyScope.Show(this, "Searching products..."))
+                using (BusyScope.Show(this, UiMessages.T("Searching products...", "جاري البحث عن الأصناف...")))
                 {
                     await LoadProductsGridAsync();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message, captionEn: "Error", captionAr: "خطأ");
             }
         }
 
@@ -194,7 +195,11 @@ namespace pos
             }
             else
             {
-                MessageBox.Show("Please select record", "Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UiMessages.ShowInfo(
+                    "Please select a product.",
+                    "يرجى اختيار صنف.",
+                    captionEn: "Products",
+                    captionAr: "الأصناف");
             }
         }
 
@@ -202,11 +207,12 @@ namespace pos
         {
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
                 btn_ok.PerformClick();
             }
         }
 
-        private void DebounceTimer_Tick(object sender, EventArgs e)
+        private async void DebounceTimer_Tick(object sender, EventArgs e)
         {
             _debounceTimer.Stop();
 
@@ -229,27 +235,32 @@ namespace pos
                 return;
             }
 
-            using (BusyScope.Show(this, "Searching products..."))
+            using (BusyScope.Show(this, UiMessages.T("Searching products...", "جاري البحث عن الأصناف...")))
             {
-                // Perform the search and update the cache
-                var dt = SearchProductsAsync(condition, by_code, by_name).Result;
-                _searchCache[cacheKey] = dt;
-                grid_search_products.DataSource = dt;
+                try
+                {
+                    var dt = await SearchProductsAsync(condition, by_code, by_name);
+                    _searchCache[cacheKey] = dt;
+                    grid_search_products.DataSource = dt;
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, ex.Message, captionEn: "Error", captionAr: "خطأ");
+                }
             }
         }
 
-        private async void txt_search_KeyUp(object sender, KeyEventArgs e)
+        private void txt_search_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
-                // reset debounce
                 _pendingSearchText = txt_search.Text;
                 _debounceTimer.Stop();
                 _debounceTimer.Start();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, ex.Message, captionEn: "Error", captionAr: "خطأ");
             }
         }
 
@@ -273,6 +284,14 @@ namespace pos
 
                 frm_prod_move_obj.ShowDialog();
             }
+            else
+            {
+                UiMessages.ShowWarning(
+                    "No product selected.",
+                    "لم يتم اختيار صنف.",
+                    captionEn: "Products",
+                    captionAr: "الأصناف");
+            }
         }
 
         private void frm_searchProducts_KeyDown(object sender, KeyEventArgs e)
@@ -282,6 +301,6 @@ namespace pos
                 product_movement_check();
             }
         }
-        
+
     }
 }

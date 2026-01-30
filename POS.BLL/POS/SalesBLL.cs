@@ -153,6 +153,13 @@ namespace POS.BLL
             return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "SR", branchId, invoiceDate);
         }
 
+        // SALES RETURN
+        public string GenerateZatcaSkipSalesInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "ZS", branchId, invoiceDate);
+        }
+
         // DEBIT NOTE
         public string GenerateDebitNoteInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
         {
@@ -166,7 +173,11 @@ namespace POS.BLL
             SalesDLL salesDLL = new SalesDLL();
             return salesDLL.GenerateDailyInvoiceNo("pos_estimates", "invoice_no", "E", branchId, invoiceDate);
         }
-
+        public string GenerateAdjustmentInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_product_adjustment", "invoice_no", "AD", branchId, invoiceDate);
+        }
         public String GetMaxSalesReturnInvoiceNo()
         {
             try

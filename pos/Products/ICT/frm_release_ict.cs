@@ -2,13 +2,9 @@
 using POS.Core;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos.Products.ICT
 {
@@ -21,7 +17,10 @@ namespace pos.Products.ICT
 
         private void frm_release_ict_Load(object sender, EventArgs e)
         {
-            load_all_ict_grid();
+            using (BusyScope.Show(this, UiMessages.T("Loading ICT releases...", "جاري تحميل اعتماد الكميات...")))
+            {
+                load_all_ict_grid();
+            }
         }
 
         public void load_all_ict_grid()
@@ -30,91 +29,19 @@ namespace pos.Products.ICT
             {
                 ICTBLL objSalesBLL = new ICTBLL();
                 grid_ict.DataSource = null;
-
-                //bind data in data grid view  
                 grid_ict.AutoGenerateColumns = false;
-
-                //String keyword = "id,name,date_created";
-                // String table = "pos_all_sales";
                 grid_ict.DataSource = objSalesBLL.GetAll_ict_releases();
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, ex.Message, captionEn: "Error", captionAr: "خطأ");
             }
 
         }
 
         private void btn_transfer_Click(object sender, EventArgs e)
         {
-            
-        }
-        private void transfer_qty()
-        {
-            try
-            {
-                DialogResult result = MessageBox.Show("Are you sure you want to transfer quantity", "Transfer Quantity", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    ICTModal modal = new ICTModal();
-                    SalesBLL objSalesBLL = new SalesBLL();
-
-                    List<ICTModal> ict_list = new List<ICTModal> { };
-
-                    for (int i = 0; i < grid_ict.Rows.Count; i++)
-                    {
-                        if (grid_ict.Rows[i].Cells["chk"].Value != null)
-                        {
-                            if (Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value))
-                            {
-                                double qty = 0;
-                                if (grid_ict.Rows[i].Cells["qty_released"].Value != null)
-                                {
-                                    if (!string.IsNullOrEmpty(grid_ict.Rows[i].Cells["qty_released"].Value.ToString()))
-                                    {
-                                        qty = double.Parse(grid_ict.Rows[i].Cells["qty_released"].Value.ToString());
-                                    }
-                                }
-                                ///// Added sales detail in to List
-                                ict_list.Add(new ICTModal
-                                {
-
-                                    quantity = qty,
-                                    item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
-                                    item_number = grid_ict.Rows[i].Cells["item_number"].Value.ToString(),
-
-                                    destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
-                                    source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
-                                    //status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),
-                                    transfer_date = DateTime.Now,
-                                });
-                                //////////////
-                            }
-                        }
-
-                    }
-
-                    int sale_id = 0; // objSalesBLL.save_ict_transfer(ict_list);
-
-                    if (sale_id > 0)
-                    {
-                        MessageBox.Show("ICT quantity transferred successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        load_all_ict_grid();
-                    }
-                }
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
-            }
-
+            // Not used currently; keep for designer compatibility.
         }
 
         private void frm_release_ict_KeyDown(object sender, KeyEventArgs e)
@@ -123,7 +50,7 @@ namespace pos.Products.ICT
             {
                 btn_release_qty.PerformClick();
             }
-            
+
             if (e.KeyCode == Keys.F5)
             {
                 btn_refresh.PerformClick();
@@ -132,88 +59,115 @@ namespace pos.Products.ICT
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            load_all_ict_grid();
+            using (BusyScope.Show(this, UiMessages.T("Refreshing...", "جاري التحديث...")))
+            {
+                load_all_ict_grid();
+            }
         }
 
         private void btn_release_qty_Click(object sender, EventArgs e)
         {
-            try
+            using (BusyScope.Show(this, UiMessages.T("Releasing quantity...", "جاري اعتماد الكمية...")))
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to transfer quantity", "Transfer Quantity", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                try
                 {
+                    DialogResult result = UiMessages.ConfirmYesNo(
+                        "Are you sure you want to release quantity?",
+                        "هل أنت متأكد أنك تريد اعتماد الكمية؟",
+                        captionEn: "Release Quantity",
+                        captionAr: "اعتماد الكمية");
+
+                    if (result != DialogResult.Yes)
+                        return;
+
                     ICTBLL objSalesBLL = new ICTBLL();
+                    var ict_list = BuildSelectedReleaseList();
 
-                    List<ICTModal> ict_list = new List<ICTModal> { };
-
-                    for (int i = 0; i < grid_ict.Rows.Count; i++)
+                    if (ict_list.Count <= 0)
                     {
-                        if (grid_ict.Rows[i].Cells["chk"].Value != null)
-                        {
-                            
-                                if (Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value) && Convert.ToDouble(grid_ict.Rows[i].Cells["qty_released"].Value.ToString()) > 0)
-                                {
-                                    double qty = 0;
-                                    if (grid_ict.Rows[i].Cells["qty_released"].Value != null)
-                                    {
-                                        if (!string.IsNullOrEmpty(grid_ict.Rows[i].Cells["qty_released"].Value.ToString()))
-                                        {
-                                            qty = double.Parse(grid_ict.Rows[i].Cells["qty_released"].Value.ToString());
-                                        }
-                                    }
-
-                                    if (qty > 0)// transfer qty should be greater than zero
-                                    {
-                                        ///// Added sales detail in to List
-                                        ict_list.Add(new ICTModal
-                                        {
-                                            id = int.Parse(grid_ict.Rows[i].Cells["id"].Value.ToString()),
-                                            quantity = qty,
-                                            item_code = grid_ict.Rows[i].Cells["item_code"].Value.ToString(),
-                                            item_number = grid_ict.Rows[i].Cells["item_number"].Value.ToString(),
-                                            destination_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["destination_branch_id"].Value.ToString()),
-                                            source_branch_id = Convert.ToInt16(grid_ict.Rows[i].Cells["source_branch_id"].Value.ToString()),
-                                            //status = Convert.ToBoolean(grid_ict.Rows[i].Cells["chk"].Value),
-                                            release_date = DateTime.Now,
-                                        });
-                                        //////////////
-                                    }
-
-                                }
-                            
-                        }
-
+                        UiMessages.ShowWarning(
+                            "Please select at least one row and enter a valid release quantity.",
+                            "يرجى اختيار صف واحد على الأقل وإدخال كمية اعتماد صحيحة.",
+                            captionEn: "Release Quantity",
+                            captionAr: "اعتماد الكمية");
+                        return;
                     }
 
-                    if (ict_list.Count > 0)
-                    {
-                        int sale_id = objSalesBLL.save_ict_release_qty(ict_list);
+                    int sale_id = objSalesBLL.save_ict_release_qty(ict_list);
 
-                        if (sale_id > 0)
-                        {
-                            MessageBox.Show("ICT quantity released successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            load_all_ict_grid();
-                        }
+                    if (sale_id > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "ICT quantity released successfully.",
+                            "تم اعتماد كمية ICT بنجاح.",
+                            captionEn: "Success",
+                            captionAr: "نجاح");
+                        load_all_ict_grid();
                     }
                     else
                     {
-                        MessageBox.Show("Transaction not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        UiMessages.ShowWarning(
+                            "Transaction was not saved.",
+                            "لم يتم حفظ العملية.",
+                            captionEn: "Release Quantity",
+                            captionAr: "اعتماد الكمية");
                     }
                 }
-
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, ex.Message, captionEn: "Error", captionAr: "خطأ");
+                }
             }
-            catch (Exception ex)
+        }
+
+        private List<ICTModal> BuildSelectedReleaseList()
+        {
+            var list = new List<ICTModal>();
+
+            for (int i = 0; i < grid_ict.Rows.Count; i++)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                var row = grid_ict.Rows[i];
+                if (row == null || row.IsNewRow)
+                    continue;
+
+                bool selected = false;
+                try
+                {
+                    if (row.Cells["chk"].Value != null)
+                        selected = Convert.ToBoolean(row.Cells["chk"].Value);
+                }
+                catch
+                {
+                    selected = false;
+                }
+
+                if (!selected)
+                    continue;
+
+                // Business rule from original: qty_released must be > 0
+                double qty = 0;
+                double.TryParse(Convert.ToString(row.Cells["qty_released"].Value), out qty);
+                if (qty <= 0)
+                    continue;
+
+                list.Add(new ICTModal
+                {
+                    id = Convert.ToInt32(row.Cells["id"].Value),
+                    quantity = qty,
+                    item_code = Convert.ToString(row.Cells["item_code"].Value),
+                    item_number = Convert.ToString(row.Cells["item_number"].Value),
+                    destination_branch_id = Convert.ToInt16(Convert.ToString(row.Cells["destination_branch_id"].Value)),
+                    source_branch_id = Convert.ToInt16(Convert.ToString(row.Cells["source_branch_id"].Value)),
+                    release_date = DateTime.Now,
+                });
             }
 
+            return list;
         }
     }
 }
