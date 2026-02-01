@@ -134,9 +134,10 @@ namespace pos.Security.Authorization
         // ZATCA (FATOORA) specific permissions
         public const string Sales_Zatca_Enable = "sales.zatca.enable";
         public const string Sales_Zatca_Configure = "sales.zatca.configure";
-        public const string Sales_Zatca_Generate = "sales.zatca.generate";
+        public const string Sales_Zatca_View = "sales.zatca.view";
         public const string Sales_Zatca_Transmit = "sales.zatca.transmit";
         public const string Sales_Zatca_Sign = "sales.zatca.sign";
+        public const string Sales_Zatca_Send = "sales.zatca.send";
         public const string Sales_Zatca_Report = "sales.zatca.report";
         public const string Sales_Zatca_Clear = "sales.zatca.clear";
         public const string Sales_Zatca_Qr_Show = "sales.zatca.qr.show";
@@ -208,7 +209,8 @@ namespace pos.Security.Authorization
         // Dashboard permissions
         public const string Dashboard_Metrics_View = "dashboard.metrics.view";
 
-
+        // Application logs
+        public const string ApplicationLogs_View = "applicationlogs.view";
     }
 
     public sealed class UserIdentity

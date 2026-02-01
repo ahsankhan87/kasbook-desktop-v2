@@ -82,7 +82,7 @@ namespace pos
         {
             if (e.KeyData == Keys.Enter)
             {
-               SendKeys.Send("{TAB}");
+                        SendKeys.Send("{TAB}");
             }
         }
 
@@ -525,6 +525,9 @@ namespace pos
             registerfrm.ShowDialog();
         }
 
-        
+        private void TxtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

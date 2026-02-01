@@ -542,6 +542,11 @@ namespace pos
                 btn_refresh.PerformClick();
                 e.Handled = true;
             }
+            if(e.KeyCode == Keys.P && e.Control)
+            {
+                btn_print_invoice.PerformClick();
+                e.Handled = true;
+            }
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)

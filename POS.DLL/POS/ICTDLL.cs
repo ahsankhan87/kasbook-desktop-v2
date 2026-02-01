@@ -13,12 +13,12 @@ namespace POS.DLL
     {
         private SqlCommand cmd;
         private SqlDataAdapter da;
-        private DataTable dt = new DataTable();
         
         public DataTable GetAll_ict_transfer_transactions()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
+                var dt = new DataTable();
                 try
                 {
                     if (cn.State == ConnectionState.Closed)
@@ -53,6 +53,7 @@ namespace POS.DLL
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
+                var dt = new DataTable();
                 try
                 {
                     if (cn.State == ConnectionState.Closed)
@@ -86,6 +87,7 @@ namespace POS.DLL
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
+                var dt = new DataTable();
                 try
                 {
                     if (cn.State == ConnectionState.Closed)

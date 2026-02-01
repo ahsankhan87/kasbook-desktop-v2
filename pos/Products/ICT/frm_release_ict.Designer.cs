@@ -190,6 +190,7 @@ namespace pos.Products.ICT
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_release_qty);
             this.Controls.Add(this.grid_ict);
+            this.KeyPreview = true;
             this.Name = "frm_release_ict";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.frm_release_ict_Load);

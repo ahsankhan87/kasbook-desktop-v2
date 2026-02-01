@@ -311,8 +311,8 @@
             // 
             // permissionsToolStripMenuItem
             // 
-            this.permissionsToolStripMenuItem.Name = "permissionsToolStripMenuItem";
             resources.ApplyResources(this.permissionsToolStripMenuItem, "permissionsToolStripMenuItem");
+            this.permissionsToolStripMenuItem.Name = "permissionsToolStripMenuItem";
             this.permissionsToolStripMenuItem.Click += new System.EventHandler(this.permissionsToolStripMenuItem_Click);
             // 
             // userClaimsToolStripMenuItem

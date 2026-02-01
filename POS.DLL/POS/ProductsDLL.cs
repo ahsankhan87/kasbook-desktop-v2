@@ -51,35 +51,33 @@ namespace POS.DLL
                 try
                 {
                     if (cn.State == ConnectionState.Closed)
-                    {
                         cn.Open();
 
-                        SqlCommand cmd = new SqlCommand("SELECT item_number FROM pos_products ORDER BY id desc", cn);
+                    // item_number is NVARCHAR; find the largest numeric value safely.
+                    // Non-numeric values are ignored.
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        SELECT TOP 1 item_number
+                        FROM pos_products
+                        WHERE TRY_CONVERT(BIGINT, item_number) IS NOT NULL
+                        ORDER BY TRY_CONVERT(BIGINT, item_number) DESC, id DESC", cn))
+                    {
+                        var maxVal = Convert.ToString(cmd.ExecuteScalar());
 
-                        string maxId = Convert.ToString(cmd.ExecuteScalar());
+                        if (string.IsNullOrWhiteSpace(maxVal))
+                            return "1";
 
-                        if (string.IsNullOrEmpty(maxId))
-                        {
-                            return maxId = "1";
-                        }
-                        else
-                        {
-                            decimal intval = int.Parse(maxId);
-                            intval++;
-                            maxId = intval.ToString(); // String.Format("S-{0:000000}", intval);
-                            return maxId;
-                        }
+                        long current;
+                        if (!long.TryParse(maxVal, out current))
+                            return "1";
 
+                        return (current + 1).ToString();
                     }
-                    return "";
                 }
-                catch
+                catch (Exception ex)
                 {
-
-                    throw;
+                    throw new Exception("Error getting max item_number: " + ex.Message, ex);
                 }
             }
-
         }
 
         public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero, string group_code, string brand_code, string category_code)

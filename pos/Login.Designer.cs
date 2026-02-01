@@ -79,15 +79,15 @@ namespace pos
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 530);
+            this.panel1.Size = new System.Drawing.Size(262, 530);
             this.panel1.TabIndex = 3;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::pos.Properties.Resources.nozum;
-            this.pictureBox3.Location = new System.Drawing.Point(68, 20);
+            this.pictureBox3.Location = new System.Drawing.Point(60, 20);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(156, 163);
+            this.pictureBox3.Size = new System.Drawing.Size(136, 163);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 4;
             this.pictureBox3.TabStop = false;
@@ -97,7 +97,7 @@ namespace pos
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.linkLabel2.LinkColor = System.Drawing.Color.White;
-            this.linkLabel2.Location = new System.Drawing.Point(181, 480);
+            this.linkLabel2.Location = new System.Drawing.Point(158, 480);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(104, 17);
             this.linkLabel2.TabIndex = 3;
@@ -109,7 +109,7 @@ namespace pos
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(182, 328);
+            this.label6.Location = new System.Drawing.Point(159, 328);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(97, 31);
             this.label6.TabIndex = 3;
@@ -121,7 +121,7 @@ namespace pos
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(95, 297);
+            this.label5.Location = new System.Drawing.Point(83, 297);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(184, 31);
             this.label5.TabIndex = 3;
@@ -133,7 +133,7 @@ namespace pos
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(29, 266);
+            this.label4.Location = new System.Drawing.Point(25, 266);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(250, 31);
             this.label4.TabIndex = 3;
@@ -145,7 +145,7 @@ namespace pos
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(97, 189);
+            this.label2.Location = new System.Drawing.Point(85, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 29);
             this.label2.TabIndex = 3;
@@ -157,7 +157,7 @@ namespace pos
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(71, 237);
+            this.label3.Location = new System.Drawing.Point(62, 237);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(208, 31);
             this.label3.TabIndex = 3;
@@ -169,7 +169,7 @@ namespace pos
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 8F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(194, 461);
+            this.label1.Location = new System.Drawing.Point(170, 461);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 19);
             this.label1.TabIndex = 3;
@@ -191,9 +191,9 @@ namespace pos
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(300, 0);
+            this.panel2.Location = new System.Drawing.Point(262, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(450, 530);
+            this.panel2.Size = new System.Drawing.Size(394, 530);
             this.panel2.TabIndex = 0;
             // 
             // BtnRegister
@@ -203,9 +203,9 @@ namespace pos
             this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRegister.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRegister.ForeColor = System.Drawing.Color.White;
-            this.BtnRegister.Location = new System.Drawing.Point(287, 358);
+            this.BtnRegister.Location = new System.Drawing.Point(251, 358);
             this.BtnRegister.Name = "BtnRegister";
-            this.BtnRegister.Size = new System.Drawing.Size(150, 38);
+            this.BtnRegister.Size = new System.Drawing.Size(131, 38);
             this.BtnRegister.TabIndex = 3;
             this.BtnRegister.Text = "REGISTER";
             this.BtnRegister.UseVisualStyleBackColor = false;
@@ -219,9 +219,9 @@ namespace pos
             this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLogin.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnLogin.ForeColor = System.Drawing.Color.White;
-            this.BtnLogin.Location = new System.Drawing.Point(288, 314);
+            this.BtnLogin.Location = new System.Drawing.Point(252, 314);
             this.BtnLogin.Name = "BtnLogin";
-            this.BtnLogin.Size = new System.Drawing.Size(150, 38);
+            this.BtnLogin.Size = new System.Drawing.Size(131, 38);
             this.BtnLogin.TabIndex = 3;
             this.BtnLogin.Text = "LOGIN";
             this.BtnLogin.UseVisualStyleBackColor = false;
@@ -231,7 +231,7 @@ namespace pos
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.linkLabel1.Location = new System.Drawing.Point(226, 479);
+            this.linkLabel1.Location = new System.Drawing.Point(198, 479);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(166, 17);
             this.linkLabel1.TabIndex = 5;
@@ -244,9 +244,9 @@ namespace pos
             this.Btn_forget_password.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_forget_password.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_forget_password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.Btn_forget_password.Location = new System.Drawing.Point(123, 319);
+            this.Btn_forget_password.Location = new System.Drawing.Point(108, 319);
             this.Btn_forget_password.Name = "Btn_forget_password";
-            this.Btn_forget_password.Size = new System.Drawing.Size(159, 31);
+            this.Btn_forget_password.Size = new System.Drawing.Size(139, 31);
             this.Btn_forget_password.TabIndex = 4;
             this.Btn_forget_password.Text = "Forget Password ?";
             this.Btn_forget_password.UseVisualStyleBackColor = true;
@@ -260,7 +260,7 @@ namespace pos
             this.panel4.Controls.Add(this.pictureBox2);
             this.panel4.Location = new System.Drawing.Point(0, 244);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(445, 50);
+            this.panel4.Size = new System.Drawing.Size(390, 50);
             this.panel4.TabIndex = 2;
             // 
             // TxtPassword
@@ -269,9 +269,9 @@ namespace pos
             this.TxtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtPassword.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.TxtPassword.Location = new System.Drawing.Point(45, 12);
+            this.TxtPassword.Location = new System.Drawing.Point(39, 12);
             this.TxtPassword.Name = "TxtPassword";
-            this.TxtPassword.Size = new System.Drawing.Size(393, 25);
+            this.TxtPassword.Size = new System.Drawing.Size(344, 25);
             this.TxtPassword.TabIndex = 1;
             this.TxtPassword.UseSystemPasswordChar = true;
             this.TxtPassword.Click += new System.EventHandler(this.TxtPassword_Click);
@@ -280,9 +280,9 @@ namespace pos
             // pictureBox2
             // 
             this.pictureBox2.Image = global::pos.Properties.Resources.Password;
-            this.pictureBox2.Location = new System.Drawing.Point(8, 11);
+            this.pictureBox2.Location = new System.Drawing.Point(7, 11);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox2.Size = new System.Drawing.Size(21, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -295,7 +295,7 @@ namespace pos
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(0, 185);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(445, 50);
+            this.panel3.Size = new System.Drawing.Size(390, 50);
             this.panel3.TabIndex = 1;
             // 
             // TxtUsername
@@ -304,9 +304,9 @@ namespace pos
             this.TxtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtUsername.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.TxtUsername.Location = new System.Drawing.Point(45, 12);
+            this.TxtUsername.Location = new System.Drawing.Point(39, 12);
             this.TxtUsername.Name = "TxtUsername";
-            this.TxtUsername.Size = new System.Drawing.Size(393, 25);
+            this.TxtUsername.Size = new System.Drawing.Size(344, 25);
             this.TxtUsername.TabIndex = 0;
             this.TxtUsername.Click += new System.EventHandler(this.TxtUsername_Click);
             this.TxtUsername.Enter += new System.EventHandler(this.TxtUsername_Enter);
@@ -314,9 +314,9 @@ namespace pos
             // pictureBox1
             // 
             this.pictureBox1.Image = global::pos.Properties.Resources.Male_User;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox1.Size = new System.Drawing.Size(21, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -329,9 +329,9 @@ namespace pos
             this.Btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_close.Font = new System.Drawing.Font("Verdana", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.Btn_close.Location = new System.Drawing.Point(386, 0);
+            this.Btn_close.Location = new System.Drawing.Point(338, 0);
             this.Btn_close.Name = "Btn_close";
-            this.Btn_close.Size = new System.Drawing.Size(64, 42);
+            this.Btn_close.Size = new System.Drawing.Size(56, 42);
             this.Btn_close.TabIndex = 6;
             this.Btn_close.Text = "X";
             this.Btn_close.UseVisualStyleBackColor = true;
@@ -342,7 +342,7 @@ namespace pos
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 8F);
             this.label11.ForeColor = System.Drawing.Color.Silver;
-            this.label11.Location = new System.Drawing.Point(22, 497);
+            this.label11.Location = new System.Drawing.Point(19, 497);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(242, 19);
             this.label11.TabIndex = 37;
@@ -353,7 +353,7 @@ namespace pos
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 8F);
             this.label10.ForeColor = System.Drawing.Color.Silver;
-            this.label10.Location = new System.Drawing.Point(22, 478);
+            this.label10.Location = new System.Drawing.Point(19, 478);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(205, 19);
             this.label10.TabIndex = 36;
@@ -364,7 +364,7 @@ namespace pos
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 8F);
             this.label9.ForeColor = System.Drawing.Color.Silver;
-            this.label9.Location = new System.Drawing.Point(22, 459);
+            this.label9.Location = new System.Drawing.Point(19, 459);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(386, 19);
             this.label9.TabIndex = 35;
@@ -375,7 +375,7 @@ namespace pos
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 8F);
             this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(22, 440);
+            this.label8.Location = new System.Drawing.Point(19, 440);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 19);
             this.label8.TabIndex = 34;
@@ -386,7 +386,7 @@ namespace pos
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.label7.Location = new System.Drawing.Point(20, 129);
+            this.label7.Location = new System.Drawing.Point(18, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(280, 31);
             this.label7.TabIndex = 33;
@@ -394,10 +394,10 @@ namespace pos
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Btn_close;
-            this.ClientSize = new System.Drawing.Size(750, 530);
+            this.ClientSize = new System.Drawing.Size(656, 530);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

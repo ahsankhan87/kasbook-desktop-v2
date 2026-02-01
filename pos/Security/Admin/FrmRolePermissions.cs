@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos.Security.Admin
 {
@@ -18,10 +20,17 @@ namespace pos.Security.Admin
             _repo = AppSecurityContext.RoleRepo ?? throw new InvalidOperationException("RoleRepo not configured.");
             _auth = AppSecurityContext.Auth;
 
-            // Load roles
-            cmbRoles.DataSource = Enum.GetValues(typeof(SystemRole));
-            LoadAllPermissions();
-            if (cmbRoles.Items.Count > 0) cmbRoles.SelectedIndex = 0;
+            using (BusyScope.Show(this, UiMessages.T("Loading permissions...", "Ã«—Ì  Õ„Ì· «·’·«ÕÌ« ...")))
+            {
+                // Load roles
+                cmbRoles.DataSource = Enum.GetValues(typeof(SystemRole));
+                LoadAllPermissions();
+                if (cmbRoles.Items.Count > 0) cmbRoles.SelectedIndex = 0;
+            }
+
+            // Keep UI in sync when role changes
+            cmbRoles.SelectedIndexChanged += (s, e) => LoadPermissionsForRole();
+            LoadPermissionsForRole();
         }
 
         private string[] _allPermissions;
@@ -65,20 +74,34 @@ namespace pos.Security.Admin
             if (cmbRoles.SelectedItem == null) return;
             var role = (SystemRole)cmbRoles.SelectedItem;
 
-            var selected = checkedListBoxPermissions.CheckedItems.Cast<object>()
-                .Select(o => o.ToString())
-                .ToList();
+            using (BusyScope.Show(this, UiMessages.T("Saving permissions...", "Ã«—Ì Õ›Ÿ «·’·«ÕÌ« ...")))
+            {
+                try
+                {
+                    var selected = checkedListBoxPermissions.CheckedItems.Cast<object>()
+                        .Select(o => o.ToString())
+                        .ToList();
 
-            _repo.SaveRolePermissions(role, selected);
+                    _repo.SaveRolePermissions(role, selected);
 
-            var def = new RoleDefinition { Role = role };
-            def.GrantedPermissions.UnionWith(selected);
-            _auth.OverrideRole(def);
+                    var def = new RoleDefinition { Role = role };
+                    def.GrantedPermissions.UnionWith(selected);
+                    _auth.OverrideRole(def);
 
-            MessageBox.Show("Role permissions updated.", "Security", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UiMessages.ShowInfo(
+                        UiMessages.T("Role permissions updated.", " „  ÕœÌÀ ’·«ÕÌ«  «·œÊ—."),
+                        UiMessages.T("Role permissions updated.", " „  ÕœÌÀ ’·«ÕÌ«  «·œÊ—."),
+                        captionEn: "Security",
+                        captionAr: "«·√„«‰");
 
-            //App logging 
-            POS.DLL.Log.LogAction("Permissions", $"Updated permissions for role '{role}'.", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                    //App logging 
+                    POS.DLL.Log.LogAction("Permissions", $"Updated permissions for role '{role}'.", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Œÿ√");
+                }
+            }
         }
     }
 }

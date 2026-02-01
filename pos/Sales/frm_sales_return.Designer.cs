@@ -327,8 +327,6 @@
             // 
             // chk_sendInvoiceToZatca
             // 
-            this.chk_sendInvoiceToZatca.Checked = true;
-            this.chk_sendInvoiceToZatca.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_sendInvoiceToZatca.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
             this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";

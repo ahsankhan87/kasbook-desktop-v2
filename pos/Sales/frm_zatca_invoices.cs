@@ -23,11 +23,17 @@ using System.Windows.Forms;
 using System.Xml;
 using Zatca.EInvoice.SDK;
 using Zatca.EInvoice.SDK.Contracts.Models;
+using pos.Security.Authorization;
+using AppPermissions = pos.Security.Authorization.Permissions;
 
 namespace pos.Sales
 {
     public partial class frm_zatca_invoices : Form
     {
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_zatca_invoices()
         {
             InitializeComponent();
@@ -39,12 +45,18 @@ namespace pos.Sales
             StatusDDL();
             InvoiceSubTypeDDL();
             InvoiceTypeDDL();
+
+            // keep action buttons in sync with current selection
+            gridZatcaInvoices.SelectionChanged += gridZatcaInvoices_SelectionChanged;
+
             LoadZatcaInvoices();
+            UpdateActionButtonsForSelection();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadZatcaInvoices();
+            UpdateActionButtonsForSelection();
         }
 
         private void LoadZatcaInvoices()
@@ -70,6 +82,55 @@ namespace pos.Sales
                 {
                     UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
                 }
+                finally
+                {
+                    UpdateActionButtonsForSelection();
+                }
+            }
+        }
+
+        private void gridZatcaInvoices_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateActionButtonsForSelection();
+        }
+
+        private void UpdateActionButtonsForSelection()
+        {
+            // Default: disable both until we can clearly determine subtype
+            btn_invoice_report.Enabled = false;
+            btn_Invoice_clearance.Enabled = false;
+
+            // Apply permissions for other buttons (independent of subtype)
+            btn_signInvoice.Enabled = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Sign);
+            btn_viewQR.Enabled = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Qr_Show);
+            btnDownloadUBL.Enabled = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_DownloadUBL);
+            btnComplianceChecks.Enabled = _auth.HasAny(_currentUser, AppPermissions.Sales_Zatca_Transmit, AppPermissions.Sales_Zatca_View);
+
+            if (gridZatcaInvoices.CurrentRow == null)
+                return;
+
+            var subtypeObj = gridZatcaInvoices.CurrentRow.Cells["invoice_subtype"].Value;
+            var subtype = Convert.ToString(subtypeObj);
+            if (string.IsNullOrWhiteSpace(subtype))
+                return;
+
+            // Support both "01/02" codes and "standard/simplified" labels if returned by query
+            var normalized = subtype.Trim().ToLowerInvariant();
+
+            var isStandard = normalized == "01" || normalized == "standard";
+            var isSimplified = normalized == "02" || normalized == "simplified";
+
+            if (isStandard)
+            {
+                // Standard => Clearance only (if permitted)
+                btn_Invoice_clearance.Enabled = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Clear);
+                btn_invoice_report.Enabled = false;
+            }
+            else if (isSimplified)
+            {
+                // Simplified => Reporting only (if permitted)
+                btn_invoice_report.Enabled = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Report);
+                btn_Invoice_clearance.Enabled = false;
             }
         }
 
@@ -577,6 +638,16 @@ namespace pos.Sales
 
         private void btn_viewQR_Click(object sender, EventArgs e)
         {
+            if (!_auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Qr_Show))
+            {
+                UiMessages.ShowWarning(
+                    "You don't have permission to view QR code.",
+                    "ليس لديك صلاحية لعرض رمز الاستجابة السريعة.",
+                    "Permission Denied",
+                    "تم رفض الصلاحية");
+                return;
+            }
+
             if (gridZatcaInvoices.CurrentRow == null)
             {
                 UiMessages.ShowWarning(
@@ -613,6 +684,17 @@ namespace pos.Sales
         {
             try
             {
+                // Permission check
+                if (!_auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Sign))
+                {
+                    UiMessages.ShowWarning(
+                        "You don't have permission to sign invoices for ZATCA.",
+                        "ليس لديك صلاحية لتوقيع الفواتير لإرسالها إلى زاتكا.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية");
+                    return;
+                }
+
                 if (gridZatcaInvoices.CurrentRow == null)
                 {
                     UiMessages.ShowWarning(
@@ -733,6 +815,16 @@ namespace pos.Sales
         {
             try
             {
+                if (!_auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Clear))
+                {
+                    UiMessages.ShowWarning(
+                        "You don't have permission to submit clearance to ZATCA.",
+                        "ليس لديك صلاحية لإرسال الاعتماد إلى زاتكا.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية");
+                    return;
+                }
+
                 if (gridZatcaInvoices.CurrentRow == null)
                 {
                     UiMessages.ShowWarning(
@@ -797,6 +889,16 @@ namespace pos.Sales
         {
             try
             {
+                if (!_auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Report))
+                {
+                    UiMessages.ShowWarning(
+                        "You don't have permission to report invoices to ZATCA.",
+                        "ليس لديك صلاحية لإرسال الفواتير (إبلاغ) إلى زاتكا.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية");
+                    return;
+                }
+
                 if (gridZatcaInvoices.CurrentRow == null)
                 {
                     UiMessages.ShowWarning(
@@ -886,6 +988,16 @@ namespace pos.Sales
 
         private void btnDownloadUBL_Click(object sender, EventArgs e)
         {
+            if (!_auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_DownloadUBL))
+            {
+                UiMessages.ShowWarning(
+                    "You don't have permission to download UBL.",
+                    "ليس لديك صلاحية لتنزيل ملف UBL.",
+                    "Permission Denied",
+                    "تم رفض الص صلاحية");
+                return;
+            }
+
             if (gridZatcaInvoices.CurrentRow == null)
             {
                 UiMessages.ShowWarning(

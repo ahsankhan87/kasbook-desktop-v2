@@ -264,5 +264,14 @@ namespace pos
         {
 
         }
+
+        private void frm_sales_invoice_KeyDown(object sender, KeyEventArgs e)
+        {
+            // when press esc the close
+            if (e.KeyData == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

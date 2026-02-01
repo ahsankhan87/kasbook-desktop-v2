@@ -510,6 +510,9 @@
   <data name="btn_invoice_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="btn_invoice_report.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="btn_invoice_report.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
   </data>
@@ -539,6 +542,9 @@
   </data>
   <data name="btn_Invoice_clearance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="btn_Invoice_clearance.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="btn_Invoice_clearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
@@ -1022,6 +1028,9 @@
   </data>
   <data name="NewComplianceCheckButton.Text" xml:space="preserve">
     <value>NEW Compliance Checks</value>
+  </data>
+  <data name="NewComplianceCheckButton.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;NewComplianceCheckButton.Name" xml:space="preserve">
     <value>NewComplianceCheckButton</value>

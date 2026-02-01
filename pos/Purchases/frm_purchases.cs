@@ -266,6 +266,7 @@ namespace pos
                         //double single_avg_cost = (total_avg_cost / double.Parse(pre_tax));
                         //double tax = (single_avg_cost * tax_rate / 100);
                         //double new_tax_value = (tax * qty);
+
                         //grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value = single_avg_cost;
                         //grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = new_tax_value;
                         //double sub_total = ((single_avg_cost * qty) + new_tax_value) - Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["discount"].Value);
@@ -1753,7 +1754,7 @@ namespace pos
                         //net_total = (grid_purchases.Rows[i].Cells["tax"].Value.ToString() == "0" ? (new_amount_total + new_vat_total) : new_amount_total);
                         //grid_purchases.Rows[i].Cells["unit_price"].Value = net_total;
 
-                        tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
+                        tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
 
                         ////grid_purchases.Rows[i].Cells["sub_total"].Value = Convert.ToDouble(grid_purchases.Rows[i].Cells["sub_total"].Value) - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value);
 
@@ -1931,73 +1932,79 @@ namespace pos
 
         private void SaveToolStripButton_Click(object sender, EventArgs e)
         {
-            try
+            using (BusyScope.Show(this, UiMessages.T("Saving purchase...", "جاري حفظ المشتريات...")))
             {
-                // Permission check
-                if (!_auth.HasPermission(_currentUser,Permissions.Purchases_Create))
+                try
                 {
-                    MessageBox.Show("You don't have permission to perform this action. Please contact your system administrator.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string purchase_type = (string.IsNullOrEmpty(cmb_purchase_type.SelectedValue.ToString()) ? "Cash" : cmb_purchase_type.SelectedValue.ToString());
-                int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
-                string bankID = "";
-                string bankGLAccountID = "";
-                string paymentMethodText = cmb_payment_method.Text;
-                int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
-
-
-                if (purchase_type == "Hold")
-                {
-                    hold_purchases();
-                    return;
-                }
-
-                if (supplier_id <= 0 || txt_supplier_invoice.Text.Length == 0)
-                {
-                    MessageBox.Show("Supplier and Supplier Invoice No. are required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cmb_suppliers.Focus();
-                    return;
-                }
-                
-                if (purchase_type == "Cash" && (paymentMethodText.Contains("Bank") || paymentMethodText.Contains("bank") || paymentMethodText.Contains("banks") || paymentMethodText.Contains("Banks")))
-                {
-                    Master.Banks.frm_banksPopup bankfrm = new Master.Banks.frm_banksPopup();
-                    bankfrm.ShowDialog();
-                    string bankIDPlusGLAccountID = bankfrm._bankIDPlusGLAccountID;
-
-                    int condition_index_len = bankIDPlusGLAccountID.IndexOf("+");
-                    bankID = bankIDPlusGLAccountID.Substring(0, condition_index_len).Trim();
-                    bankGLAccountID = bankIDPlusGLAccountID.Substring(condition_index_len + 1).Trim();
-
-                }
-
-
-                //if (txt_supplier_invoice.Text.Length == 0)
-                //{
-                //    MessageBox.Show("Supplier and Supplier Invoice No. are required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
-
-                DialogResult result = MessageBox.Show("Are you sure you want to purchase " + purchase_type, "Purchase Transaction " + invoice_status, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    if (grid_purchases.Rows.Count > 0)
+                    // Permission check
+                    if (!_auth.HasPermission(_currentUser, Permissions.Purchases_Create))
                     {
-                        List<PurchaseModalHeader> purchase_model_header = new List<PurchaseModalHeader> { };
-                        List<PurchasesModal> purchase_model_detail = new List<PurchasesModal> { };
+                        UiMessages.ShowWarning(
+                            "You do not have permission to create purchase transactions.\nPlease contact your system administrator.",
+                            "ليس لديك صلاحية لإنشاء معاملات شراء.\nيرجى التواصل مع مدير النظام.",
+                            captionEn: "Permission denied",
+                            captionAr: "صلاحية مرفوضة");
+                        return;
+                    }
 
-                        //PurchasesModal PurchasesModal_obj = new PurchasesModal();
-                        PurchasesBLL purchasesObj = new PurchasesBLL();
-                        DateTime purchase_date = txt_purchase_date.Value.Date;
+                    string purchase_type = (string.IsNullOrEmpty(cmb_purchase_type.SelectedValue.ToString()) ? "Cash" : cmb_purchase_type.SelectedValue.ToString());
+                    int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
+                    string bankID = "";
+                    string bankGLAccountID = "";
+                    string paymentMethodText = cmb_payment_method.Text;
+                    int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
 
-                        int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
-                        string po_invoice_no_1 = "";
-                        bool po_status = false;
-                        string invoice_no = "";
-                        string location_code = "";
+
+                    if (purchase_type == "Hold")
+                    {
+                        hold_purchases();
+                        return;
+                    }
+
+                    if (supplier_id <= 0 || txt_supplier_invoice.Text.Length == 0)
+                    {
+                        UiMessages.ShowWarning(
+                            "Supplier and Supplier Invoice No. are required.",
+                            "المورد ورقم فاتورة المورد مطلوبان.",
+                            captionEn: "Validation",
+                            captionAr: "التحقق");
+                        cmb_suppliers.Focus();
+                        return;
+                    }
+
+                    if (purchase_type == "Cash" && (paymentMethodText.Contains("Bank") || paymentMethodText.Contains("bank") || paymentMethodText.Contains("banks") || paymentMethodText.Contains("Banks")))
+                    {
+                        Master.Banks.frm_banksPopup bankfrm = new Master.Banks.frm_banksPopup();
+                        bankfrm.ShowDialog();
+                        string bankIDPlusGLAccountID = bankfrm._bankIDPlusGLAccountID;
+
+                        int condition_index_len = bankIDPlusGLAccountID.IndexOf("+");
+                        bankID = bankIDPlusGLAccountID.Substring(0, condition_index_len).Trim();
+                        bankGLAccountID = bankIDPlusGLAccountID.Substring(condition_index_len + 1).Trim();
+
+                    }
+
+                    DialogResult result = UiMessages.ConfirmYesNo(
+                        "Create this purchase transaction (" + purchase_type + ")?",
+                        "هل تريد إنشاء عملية شراء (" + purchase_type + ")؟",
+                        captionEn: "Confirm purchase",
+                        captionAr: "تأكيد الشراء");
+
+                    if (result == DialogResult.Yes)
+                    {
+                        if (grid_purchases.Rows.Count > 0)
+                        {
+                            List<PurchaseModalHeader> purchase_model_header = new List<PurchaseModalHeader> { };
+                            List<PurchasesModal> purchase_model_detail = new List<PurchasesModal> { };
+
+                            PurchasesBLL purchasesObj = new PurchasesBLL();
+                            DateTime purchase_date = txt_purchase_date.Value.Date;
+
+                            int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
+                            string po_invoice_no_1 = "";
+                            bool po_status = false;
+                            string invoice_no = "";
+                            string location_code = "";
 
                         //if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "P") //Update sales delete all record first and insert new sales
                         //{
@@ -2010,201 +2017,143 @@ namespace pos
                         //    invoice_no = txt_invoice_no.Text;
                         //}
                         //else
-                        if (invoice_status == "PO") //if purchase order
-                        {
-                            po_invoice_no_1 = po_invoice_no;
-                            po_status = true;
-                            invoice_no = GetMAXInvoiceNo();
-                        }
-                        else
-                        {
-                            invoice_no = GetMAXInvoiceNo();
-                        }
-
-                        //if purchase return then put minus sign before amount
-                        decimal return_minus_value = (purchase_type == "Return" ? -1 : 1);
-                        decimal net_total = Math.Round(return_minus_value * total_amount, 6);
-                        decimal net_total_discount = Math.Round(return_minus_value * total_discount, 6);
-                        decimal net_total_tax = Math.Round(return_minus_value * total_tax, 6);
-
-
-                        //set the date from datetimepicker and set time to te current time
-                        DateTime now = DateTime.Now;
-                        txt_purchase_date.Value = new DateTime(txt_purchase_date.Value.Year, txt_purchase_date.Value.Month, txt_purchase_date.Value.Day, now.Hour, now.Minute, now.Second);
-                        /////////////////////
-
-                        /////Add sales header into the List
-                        purchase_model_header.Add(new PurchaseModalHeader
-                        {
-                            supplier_id = supplier_id,
-                            employee_id = employee_id,
-                            invoice_no = invoice_no,
-                            supplier_invoice_no = txt_supplier_invoice.Text,
-                            total_amount = net_total,
-                            total_tax = Math.Round(total_tax, 6),
-                            total_discount = total_discount,
-                            //total_discount_percent = (string.IsNullOrEmpty(txt_total_disc_percent.Text) ? 0 : Convert.ToDouble(txt_total_disc_percent.Text)),
-                            purchase_type = purchase_type,
-                            purchase_date = purchase_date,
-                            purchase_time = txt_purchase_date.Value,
-                            description = txt_description.Text,
-                            shipping_cost = (string.IsNullOrEmpty(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text)),
-                            account = "Purchase",
-                            po_invoice_no = po_invoice_no_1,
-                            po_status = po_status,
-
-                            payment_method_id = payment_method_id,
-                            payment_method_text = paymentMethodText,
-                            bankGLAccountID = bankGLAccountID,
-                            bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
-
-
-                            cash_account_id = cash_account_id,
-                            payable_account_id = payable_account_id,
-                            tax_account_id = tax_account_id,
-                            purchases_discount_acc_id = purchases_discount_acc_id,
-                            inventory_acc_id = inventory_acc_id,
-                            purchases_acc_id = purchases_acc_id,
-
-                        });
-                        //////
-
-                        int sno = 1;
-                        for (int i = 0; i < grid_purchases.Rows.Count; i++)
-                        {
-                            if (grid_purchases.Rows[i].Cells["id"].Value != null && grid_purchases.Rows[i].Cells["code"].Value != null)
+                            if (invoice_status == "PO") //if purchase order
                             {
-
-                                if (grid_purchases.Rows[i].Cells["location_code"].Value == null || grid_purchases.Rows[i].Cells["location_code"].Value == DBNull.Value || String.IsNullOrEmpty(grid_purchases.Rows[i].Cells["location_code"].Value as String) || String.IsNullOrWhiteSpace(grid_purchases.Rows[i].Cells["location_code"].Value.ToString()))
-                                {
-                                    location_code = "";
-                                }
-                                else
-                                {
-                                    location_code = grid_purchases.Rows[i].Cells["location_code"].Value.ToString();
-                                }
-
-                                ///// Added sales detail in to List
-                                decimal tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
-                                
-                                purchase_model_detail.Add(new PurchasesModal
-                                {
-                                    serialNo = sno++,
-                                    invoice_no = invoice_no,
-                                    item_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value.ToString()),
-                                    code = grid_purchases.Rows[i].Cells["code"].Value.ToString(),
-                                    item_number = grid_purchases.Rows[i].Cells["item_number"].Value.ToString(),
-                                    //name = grid_purchases.Rows[i].Cells["name"].Value.ToString(),
-                                    quantity = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["qty"].Value.ToString()) ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["qty"].Value.ToString())),
-                                    cost_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()) ? 0 : Math.Round(Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()), 4)),// its avg cost actually ,
-                                    unit_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
-                                    discount = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount"].Value.ToString()), 4)),
-                                    tax_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["tax_id"].Value.ToString()),
-                                    tax_rate = tax_rate,
-                                    purchase_date = purchase_date,
-                                    location_code = location_code,
-                                    supplier_id = supplier_id,
-
-                                });
-                                //////////////
+                                po_invoice_no_1 = po_invoice_no;
+                                po_status = true;
+                                invoice_no = GetMAXInvoiceNo();
+                            }
+                            else
+                            {
+                                invoice_no = GetMAXInvoiceNo();
                             }
 
-                        }
-
-                        var purchase_id = purchasesObj.Insertpurchases(purchase_model_header, purchase_model_detail);
-
-
-                        /////INVENTORY JOURNAL ENTRY (DEBIT)
-                        //Insert_Journal_entry(invoice_no, inventory_acc_id, net_total, 0, purchase_date, txt_description.Text, 0, 0, 0);
-
-                        //if (purchase_type == "Cash")
-                        //{
-                        //    ///CASH JOURNAL ENTRY (CREDIT)
-                        //    Insert_Journal_entry(invoice_no, cash_account_id, 0, net_total, purchase_date, txt_description.Text, 0, 0, 0);
-
-                        //}
-                        //else
-                        //{
-                        //    ///ACCOUNT PAYABLE JOURNAL ENTRY (CREDIT)
-                        //    int entry_id = Insert_Journal_entry(invoice_no, payable_account_id, 0, net_total, purchase_date, txt_description.Text, 0, 0, 0);
-
-                        //    if (supplier_id != 0)
-                        //    {
-                        //        ///ADD ENTRY INTO supplier PAYMENT(Credit)
-                        //        Insert_Journal_entry(invoice_no, inventory_acc_id, 0, net_total, purchase_date, txt_description.Text, 0, supplier_id, entry_id);
-
-                        //    }
-
-                        //}
+                            //if purchase return then put minus sign before amount
+                            decimal return_minus_value = (purchase_type == "Return" ? -1 : 1);
+                            decimal net_total = Math.Round(return_minus_value * total_amount, 6);
+                            decimal net_total_discount = Math.Round(return_minus_value * total_discount, 6);
+                            decimal net_total_tax = Math.Round(return_minus_value * total_tax, 6);
 
 
-                        //if (net_total_discount > 0)
-                        //{
-                        //    /// CASH JOURNAL ENTRY (DEBIT)
-                        //    Insert_Journal_entry(invoice_no, cash_account_id, net_total_discount, 0, purchase_date, txt_description.Text, 0, 0, 0);
-                        //    ///PURCHASE DISCOUNT JOURNAL ENTRY (CREDIT)
-                        //    int entry_id = Insert_Journal_entry(invoice_no, purchases_discount_acc_id, 0, net_total_discount, purchase_date, txt_description.Text, 0, 0, 0);
+                            //set the date from datetimepicker and set time to te current time
+                            DateTime now = DateTime.Now;
+                            txt_purchase_date.Value = new DateTime(txt_purchase_date.Value.Year, txt_purchase_date.Value.Month, txt_purchase_date.Value.Day, now.Hour, now.Minute, now.Second);
+                            /////////////////////
 
-                        //    if (purchase_type == "Credit" && supplier_id != 0)
-                        //    {
-                        //        ///ADD ENTRY INTO CUSTOMER PAYMENT(DEBIT)
-                        //        Insert_Journal_entry(invoice_no, purchases_discount_acc_id, 0, net_total_discount, purchase_date, txt_description.Text, 0, supplier_id, entry_id);
+                            /////Add sales header into the List
+                            purchase_model_header.Add(new PurchaseModalHeader
+                            {
+                                supplier_id = supplier_id,
+                                employee_id = employee_id,
+                                invoice_no = invoice_no,
+                                supplier_invoice_no = txt_supplier_invoice.Text,
+                                total_amount = net_total,
+                                total_tax = Math.Round(total_tax, 6),
+                                total_discount = total_discount,
+                                purchase_type = purchase_type,
+                                purchase_date = purchase_date,
+                                purchase_time = txt_purchase_date.Value,
+                                description = txt_description.Text,
+                                shipping_cost = (string.IsNullOrEmpty(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text)),
+                                account = "Purchase",
+                                po_invoice_no = po_invoice_no_1,
+                                po_status = po_status,
 
-                        //    }
-                        //}
+                                payment_method_id = payment_method_id,
+                                payment_method_text = paymentMethodText,
+                                bankGLAccountID = bankGLAccountID,
+                                bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
 
-                        //if (net_total_tax > 0)
-                        //{
-                        //    ///SALES TAX JOURNAL ENTRY (DEBIT)
-                        //    Insert_Journal_entry(invoice_no, tax_account_id, net_total_tax, 0, purchase_date, txt_description.Text, 0, 0, 0);
 
-                        //    if (purchase_type == "Cash")
-                        //    {
-                        //        ///CASH JOURNAL ENTRY (CREDIT)
-                        //        Insert_Journal_entry(invoice_no, cash_account_id, 0, net_total_tax, purchase_date, txt_description.Text, 0, 0, 0);
+                                cash_account_id = cash_account_id,
+                                payable_account_id = payable_account_id,
+                                tax_account_id = tax_account_id,
+                                purchases_discount_acc_id = purchases_discount_acc_id,
+                                inventory_acc_id = inventory_acc_id,
+                                purchases_acc_id = purchases_acc_id,
 
-                        //    }
-                        //    else
-                        //    {
-                        //        ///ACCOUNT PAYABLE JOURNAL ENTRY (CREDIT)
-                        //        int entry_id = Insert_Journal_entry(invoice_no, payable_account_id, 0, net_total_tax, purchase_date, txt_description.Text, 0, 0, 0);
+                            });
+                            //////
 
-                        //        if (supplier_id != 0)
-                        //        {
-                        //            ///ADD ENTRY INTO supplier PAYMENT(Credit)
-                        //            Insert_Journal_entry(invoice_no, tax_account_id, 0, net_total_tax, purchase_date, txt_description.Text, 0, supplier_id, entry_id);
+                            int sno = 1;
+                            for (int i = 0; i < grid_purchases.Rows.Count; i++)
+                            {
+                                if (grid_purchases.Rows[i].Cells["id"].Value != null && grid_purchases.Rows[i].Cells["code"].Value != null)
+                                {
 
-                        //        }
+                                    if (grid_purchases.Rows[i].Cells["location_code"].Value == null || grid_purchases.Rows[i].Cells["location_code"].Value == DBNull.Value || String.IsNullOrEmpty(grid_purchases.Rows[i].Cells["location_code"].Value as String) || String.IsNullOrWhiteSpace(grid_purchases.Rows[i].Cells["location_code"].Value.ToString()))
+                                    {
+                                        location_code = "";
+                                    }
+                                    else
+                                    {
+                                        location_code = grid_purchases.Rows[i].Cells["location_code"].Value.ToString();
+                                    }
 
-                        //    }
+                                    ///// Added sales detail in to List
+                                    decimal tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
 
-                        //}
+                                    purchase_model_detail.Add(new PurchasesModal
+                                    {
+                                        serialNo = sno++,
+                                        invoice_no = invoice_no,
+                                        item_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value.ToString()),
+                                        code = grid_purchases.Rows[i].Cells["code"].Value.ToString(),
+                                        item_number = grid_purchases.Rows[i].Cells["item_number"].Value.ToString(),
+                                        quantity = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["qty"].Value.ToString()) ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["qty"].Value.ToString())),
+                                        cost_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()) ? 0 : Math.Round(Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()), 4)),
+                                        unit_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
+                                        discount = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount"].Value.ToString()), 4)),
+                                        tax_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["tax_id"].Value.ToString()),
+                                        tax_rate = tax_rate,
+                                        purchase_date = purchase_date,
+                                        location_code = location_code,
+                                        supplier_id = supplier_id,
 
-                        if (purchase_id > 0)
-                        {
-                            MessageBox.Show(invoice_no + " transaction created successfully", "Success " + invoice_status, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    });
+                                }
 
-                            clear_form();
-                            GetMAXInvoiceNo();
-                            grid_purchases.Focus();
+                            }
+
+                            var purchase_id = purchasesObj.Insertpurchases(purchase_model_header, purchase_model_detail);
+
+                            if (purchase_id > 0)
+                            {
+                                UiMessages.ShowInfo(
+                                    "Purchase saved successfully. Invoice: " + invoice_no,
+                                    "تم حفظ عملية الشراء بنجاح. رقم الفاتورة: " + invoice_no,
+                                    captionEn: "Success",
+                                    captionAr: "نجاح");
+
+                                clear_form();
+                                GetMAXInvoiceNo();
+                                grid_purchases.Focus();
+                            }
+                            else
+                            {
+                                UiMessages.ShowError(
+                                    "Purchase was not saved. Please try again.",
+                                    "لم يتم حفظ عملية الشراء. يرجى المحاولة مرة أخرى.",
+                                    captionEn: "Error",
+                                    captionAr: "خطأ");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            UiMessages.ShowWarning(
+                                "Please add at least one product.",
+                                "يرجى إضافة صنف واحد على الأقل.",
+                                captionEn: "Purchases",
+                                captionAr: "المشتريات");
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Please add products", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
                 }
 
             }
-            catch (Exception ex)
-            {
-                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
-            }
-
         }
 
         private void HistoryToolStripButton_Click(object sender, EventArgs e)
@@ -2325,4 +2274,4 @@ namespace pos
 
         }
     }
-}
+        }

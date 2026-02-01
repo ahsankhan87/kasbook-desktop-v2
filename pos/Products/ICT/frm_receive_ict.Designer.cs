@@ -30,7 +30,7 @@ namespace pos.Products.ICT
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_receive_ict));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_ict = new System.Windows.Forms.DataGridView();
             this.source_branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,9 +53,9 @@ namespace pos.Products.ICT
             // 
             // grid_ict
             // 
-            resources.ApplyResources(this.grid_ict, "grid_ict");
             this.grid_ict.AllowUserToAddRows = false;
             this.grid_ict.AllowUserToDeleteRows = false;
+            resources.ApplyResources(this.grid_ict, "grid_ict");
             this.grid_ict.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_ict.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.source_branch,
@@ -140,8 +140,8 @@ namespace pos.Products.ICT
             // 
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty.DataPropertyName = "qty_transferred";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.qty.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.qty, "qty");
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
@@ -195,6 +195,7 @@ namespace pos.Products.ICT
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_transfer);
             this.Controls.Add(this.grid_ict);
+            this.KeyPreview = true;
             this.Name = "frm_receive_ict";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.frm_receive_ict_Load);

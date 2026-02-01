@@ -1,18 +1,20 @@
-﻿using System;
+﻿using pos.Master.Companies.zatca;
+using pos.Security.Authorization;
+using pos.UI;
+using pos.UI.Busy;
+using POS.BLL;
+using POS.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
-using POS.Core;
-using pos.Master.Companies.zatca;
-using pos.UI;
-using pos.UI.Busy;
+using pos.Security.Authorization;
 
 namespace pos
 {
@@ -35,6 +37,10 @@ namespace pos
 
         private readonly Timer _invoiceSearchDebounce = new Timer();
         private const int DebounceMs = 300;
+        
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public frm_sales_return()
         {
@@ -57,11 +63,11 @@ namespace pos
             if (txt_invoice_no != null)
                 txt_invoice_no.TextChanged += txt_invoice_no_TextChanged;
         }
-
+        
         private void InvoiceSearchDebounce_Tick(object sender, EventArgs e)
         {
             _invoiceSearchDebounce.Stop();
-            btn_search.PerformClick();
+            //btn_search.PerformClick();
         }
 
         private void txt_invoice_no_TextChanged(object sender, EventArgs e)
@@ -83,6 +89,9 @@ namespace pos
             Get_user_total_commission();
 
             SetupHeaderCheckBox();
+           
+            // Apply permissions for ZATCA send checkbox
+            ApplyZatcaPermissionsToControls();
 
             // If invoice already provided, load it; otherwise keep grid empty
             if (!string.IsNullOrWhiteSpace(txt_invoice_no.Text))
@@ -103,6 +112,30 @@ namespace pos
                 return false;
             }
             return true;
+        }
+        private void ApplyZatcaPermissionsToControls()
+        {
+            // If ZATCA isn't enabled system-wide, keep it off.
+            if (!UsersModal.useZatcaEInvoice)
+            {
+                chk_sendInvoiceToZatca.Checked = false;
+                chk_sendInvoiceToZatca.Enabled = false;
+                return;
+            }
+
+            bool canTransmit = _auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Transmit);
+            //chk_sendInvoiceToZatca.Checked = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Send);
+
+            if (!canTransmit)
+            {
+                chk_sendInvoiceToZatca.Enabled = false;
+                //chk_sendInvoiceToZatca.Visible = false; // hide if denied
+            }
+            else
+            {
+                chk_sendInvoiceToZatca.Visible = true;
+                chk_sendInvoiceToZatca.Enabled = true;
+            }
         }
 
         private void SetupHeaderCheckBox()

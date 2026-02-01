@@ -46,15 +46,15 @@ namespace pos.Products.ICT
 
         private void transfer_qty()
         {
-            using (BusyScope.Show(this, UiMessages.T("Processing transfer...", "جاري تنفيذ التحويل...")))
+            using (BusyScope.Show(this, UiMessages.T("Processing receiving...", "جاري معالجة الاستلام...")))
             {
                 try
                 {
                     var confirm = UiMessages.ConfirmYesNo(
-                        "Are you sure you want to transfer quantity?",
-                        "هل أنت متأكد أنك تريد تحويل الكمية؟",
-                        captionEn: "Transfer Quantity",
-                        captionAr: "تحويل الكمية");
+                        "Are you sure you want to receive quantity?",
+                        "هل أنت متأكد من رغبتك في استلام الكمية؟",
+                        captionEn: "Receiving Quantity",
+                        captionAr: "استلام الكمية");
 
                     if (confirm != DialogResult.Yes)
                         return;
@@ -67,8 +67,8 @@ namespace pos.Products.ICT
                         UiMessages.ShowWarning(
                             "Please select at least one row and enter a valid transfer quantity.",
                             "يرجى اختيار صف واحد على الأقل وإدخال كمية تحويل صحيحة.",
-                            captionEn: "Transfer Quantity",
-                            captionAr: "تحويل الكمية");
+                            captionEn: "Receiving Quantity",
+                            captionAr: "استلام الكمية");
                         return;
                     }
 

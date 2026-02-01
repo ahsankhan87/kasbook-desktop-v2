@@ -36,10 +36,14 @@ namespace pos
 
         public void frm_purchase_return_Load(object sender, EventArgs e)
         {
+            //ActiveControl = txt_invoice_no;
+
             LoadReturnReasonsDDL();
             autoCompleteInvoice();
 
             SetupHeaderCheckBox();
+            txt_invoice_no.Focus();
+
         }
 
         private void SetupHeaderCheckBox()

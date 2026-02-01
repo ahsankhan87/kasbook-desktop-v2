@@ -72,6 +72,8 @@ namespace pos
                 if (suppliersToolStripMenuItem != null) suppliersToolStripMenuItem.Tag = Permissions.Suppliers_View;
                 if (itemsToolStripMenuItem != null) itemsToolStripMenuItem.Tag = Permissions.Products_View;
                 if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
+                if (zatcaInvoicesToolStripMenuItem != null) zatcaInvoicesToolStripMenuItem.Tag = Permissions.Sales_Zatca_View;
+                if (generateZATCACSIDToolStripMenuItem != null) generateZATCACSIDToolStripMenuItem.Tag = Permissions.Sales_Zatca_Configure;
 
                 // Inventory / Products
                 if (productsServicesToolStripMenuItem != null) productsServicesToolStripMenuItem.Tag = Permissions.Inventory_View;

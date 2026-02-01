@@ -12,7 +12,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer; // added
-
+using AppPermissions = pos.Security.Authorization.Permissions;
 
 namespace pos
 {
@@ -110,10 +110,38 @@ namespace pos
             get_invoice_subtype_dropdownlist();
             Get_user_total_commission();
 
+            // Apply permissions for ZATCA send checkbox
+            ApplyZatcaPermissionsToControls();
+
             //disable sorting in grid
             foreach (DataGridViewColumn column in grid_sales.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void ApplyZatcaPermissionsToControls()
+        {
+            // If ZATCA isn't enabled system-wide, keep it off.
+            if (!UsersModal.useZatcaEInvoice)
+            {
+                chk_sendInvoiceToZatca.Checked = false;
+                chk_sendInvoiceToZatca.Enabled = false;
+                return;
+            }
+
+            bool canTransmit = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Transmit);
+            //chk_sendInvoiceToZatca.Checked = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Send);
+
+            if (!canTransmit)
+            {
+                chk_sendInvoiceToZatca.Enabled = false;
+                //chk_sendInvoiceToZatca.Visible = false; // hide if denied
+            }
+            else
+            {
+                chk_sendInvoiceToZatca.Visible = true;
+                chk_sendInvoiceToZatca.Enabled = true;
             }
         }
 
@@ -521,14 +549,11 @@ namespace pos
                     string item_type = myProductView["item_type"].ToString();
                     string category_code = myProductView["category_code"].ToString();
                     string grid_item_number = myProductView["item_number"].ToString();
+                    double current_sub_total = Convert.ToDouble(qty) * unit_price + tax - discount;
 
-                    //double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : Convert.ToDouble(myProductView["tax_rate"]));
-                    //double tax = (Convert.ToDouble(qty) * unit_price * tax_rate / 100);
-
-                    //double current_sub_total = Convert.ToDouble(qty) * unit_price + tax;
 
                     string[] row0 = { id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
-                    sub_total_without_vat.ToString(), tax.ToString(), sub_total.ToString(), location_code, unit, category,
+                    sub_total_without_vat.ToString(), tax.ToString(), current_sub_total.ToString(), location_code, unit, category,
                     btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
                     item_type, category_code, grid_item_number};
 
@@ -856,7 +881,19 @@ namespace pos
                 }
                 if (e.Control && e.Alt && e.KeyCode == Keys.Z)
                 {
-                    chk_sendInvoiceToZatca.Checked = !chk_sendInvoiceToZatca.Checked;
+                    // Permission check for toggling send-to-zatca
+                    if (_auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Transmit))
+                    {
+                        chk_sendInvoiceToZatca.Checked = !chk_sendInvoiceToZatca.Checked;
+                    }
+                    else
+                    {
+                        UiMessages.ShowWarning(
+                            "You don't have permission to transmit invoices to ZATCA.",
+                            "ليس لديك صلاحية لإرسال الفواتير إلى زاتكا.",
+                            "Permission Denied",
+                            "تم رفض الصلاحية");
+                    }
                 }
 
                 if (e.Control && e.Alt && e.KeyCode == Keys.S)
@@ -1451,7 +1488,7 @@ namespace pos
 
                 string invoice_chr = invoice_no.Substring(0, 1);
 
-                if (invoice_chr.ToUpper() == "S")// for invoice edit
+                if (invoice_chr.ToUpper() == "S" || invoice_chr.ToUpper() == "Z")// for invoice edit
                 {
                     invoice_status = "Update"; //"Estimate";// 
                     //btn_save.Text = "Update (F3)"; //"Save"; //
@@ -3094,10 +3131,13 @@ namespace pos
         {
             if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
-                using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "تحميل...")))
                 {
-                    //obj.load_print(); // send print direct to printer without showing dialog
-                    obj.ShowDialog();
+                    using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
+                    {
+                        //obj.load_print(); // send print direct to printer without showing dialog
+                        obj.ShowDialog();
+                    }
                 }
             }
 
@@ -3107,11 +3147,14 @@ namespace pos
         {
             if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
-                using (frm_sales_return obj = new frm_sales_return(txt_invoice_no.Text))
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "تحميل...")))
                 {
-                    obj.ShowDialog();
-                    //obj.LoadSalesReturnGrid(); // send print direct to printer without showing dialog
-                    obj.Close();
+                   using (frm_sales_return obj = new frm_sales_return(txt_invoice_no.Text))
+                    {
+                        obj.ShowDialog();
+                        //obj.LoadSalesReturnGrid(); // send print direct to printer without showing dialog
+                        obj.Close();
+                    }
                 }
             }
         }
