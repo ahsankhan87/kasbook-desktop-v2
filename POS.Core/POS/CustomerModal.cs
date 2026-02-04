@@ -52,5 +52,7 @@ namespace POS.Core
         public string registrationName { get; set; }
 
         public int GLAccountID { get; set; } = 0;
+
+        public string CRNumber { get; set; }
     }
 }

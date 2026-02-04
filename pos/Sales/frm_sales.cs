@@ -2687,8 +2687,16 @@ namespace pos
                             string invoice_subtype = (cmb_invoice_subtype_code.SelectedValue == null ? "02" : cmb_invoice_subtype_code.SelectedValue.ToString());
                             string PONumber = txtPONumber.Text;
 
-                            double smallSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(0);
-                            bool isSmallSale = (sale_type == "Cash" || sale_type == "Credit") && (net_total >= smallSaleThreshold && smallSaleThreshold != 0);
+                            double skipSaleThreshold = new SettingsBLL().GetSmallSaleThreshold(0);
+                            bool isStandardSubtype = (invoice_subtype == "01");
+                            bool isSimplifiedSubtype = (invoice_subtype == "02");
+
+                            // Skip sending to ZATCA only for Simplified invoices when amount exceeds the configured threshold.
+                            // Standard invoices must still be sent (clearance) when requested.
+                            bool ZatcaSkipSaleInvoice = isSimplifiedSubtype
+                                && (sale_type == "Cash" || sale_type == "Credit")
+                                && (skipSaleThreshold != 0)
+                                && (net_total >= skipSaleThreshold);
                             
 
                             if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
@@ -2713,8 +2721,8 @@ namespace pos
                                 else
                                 {
                                     // NEW: pick invoice series based on amount
-                                    invoice_no = isSmallSale
-                                        ? salesObj.GenerateZatcaSkipSalesInvoiceNo() //GetMaxSmallSaleInvoiceNo()   // ZS-000001
+                                    invoice_no = ZatcaSkipSaleInvoice
+                                        ? salesObj.GenerateZatcaSkipSalesInvoiceNo() //GetMaxSmallSaleInvoiceNo()   // ZS1-000001
                                         : salesObj.GenerateSaleInvoiceNo();  //GetMaxSaleInvoiceNo();
 
                                 }
@@ -2873,8 +2881,8 @@ namespace pos
                                                 //Sign Invoice with CSID instead of Production CSID
                                                 ZatcaHelper.SignInvoiceToZatca(invoice_no);
 
-                                                // NEW: skip ZATCA for small sales
-                                                if (!isSmallSale)
+                                                // NEW: skip ZATCA for sales
+                                                if (!ZatcaSkipSaleInvoice)
                                                 {
                                                     // After signing with CSID, send invoice to ZATCA
                                                     // If invoice subtype is Standard then clear it from ZATCA
@@ -2897,7 +2905,7 @@ namespace pos
                                                 ZatcaHelper.PCSID_SignInvoiceToZatcaAsync(invoice_no);
 
                                                 // NEW: skip ZATCA for small sales
-                                                if (!isSmallSale)
+                                                if (!ZatcaSkipSaleInvoice)
                                                 {
                                                     // After signing with PCSID, send invoice to ZATCA
                                                     // If invoice subtype is Standard then clear it from ZATCA
@@ -2925,7 +2933,6 @@ namespace pos
                                     );
                                 }
                             }
-
                             if (sale_type != "Quotation" && sale_type != "Gift" && sale_type != "ICT")
                             {
                                 if (employee_commission_percent > 0)
@@ -3041,10 +3048,12 @@ namespace pos
                         obj.ShowDialog();
                     }
                 }
+
+
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "خطأ", "Error", "Error");
             }
         }
 

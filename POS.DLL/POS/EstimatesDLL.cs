@@ -201,7 +201,7 @@ namespace POS.DLL
                             //" S.total_tax as vat,"+
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " SI.item_name AS product_name,P.code,S.description," +
-                            " C.first_name AS customer_name, C.RegistrationName as customer_company,C.PostalCode," +
+                            " C.first_name AS customer_name, C.RegistrationName as customer_company,C.PostalCode, C.cr_number AS customer_cr_number," +
                             " C.CityName, C.CountryName,C.StreetName,C.BuildingNumber,C.CitySubdivisionName, C.vat_no AS customer_vat," +
                             " U.name AS username" +
                             " FROM pos_estimates S" +

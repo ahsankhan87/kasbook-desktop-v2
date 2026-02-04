@@ -101,7 +101,8 @@
               <xs:element name="CountryName" msprop:Generator_ColumnPropNameInTable="CountryNameColumn" msprop:Generator_ColumnPropNameInRow="CountryName" msprop:Generator_UserColumnName="CountryName" msprop:Generator_ColumnVarNameInTable="columnCountryName" type="xs:string" minOccurs="0" />
               <xs:element name="invoice_subtype" msprop:Generator_ColumnPropNameInTable="invoice_subtypeColumn" msprop:Generator_ColumnPropNameInRow="invoice_subtype" msprop:Generator_UserColumnName="invoice_subtype" msprop:Generator_ColumnVarNameInTable="columninvoice_subtype" type="xs:string" minOccurs="0" />
               <xs:element name="invoice_subtype_code" msprop:Generator_ColumnPropNameInTable="invoice_subtype_codeColumn" msprop:Generator_ColumnPropNameInRow="invoice_subtype_code" msprop:Generator_UserColumnName="invoice_subtype_code" msprop:Generator_ColumnVarNameInTable="columninvoice_subtype_code" type="xs:string" minOccurs="0" />
-              <xs:element name="cost_price" msprop:Generator_ColumnPropNameInRow="cost_price" msprop:Generator_ColumnPropNameInTable="cost_priceColumn" msprop:Generator_ColumnVarNameInTable="columncost_price" msprop:Generator_UserColumnName="cost_price" type="xs:string" minOccurs="0" />
+              <xs:element name="cost_price" msprop:Generator_UserColumnName="cost_price" msprop:Generator_ColumnPropNameInTable="cost_priceColumn" msprop:Generator_ColumnPropNameInRow="cost_price" msprop:Generator_ColumnVarNameInTable="columncost_price" type="xs:string" minOccurs="0" />
+              <xs:element name="customer_cr_number" msprop:Generator_ColumnPropNameInRow="customer_cr_number" msprop:Generator_ColumnPropNameInTable="customer_cr_numberColumn" msprop:Generator_ColumnVarNameInTable="columncustomer_cr_number" msprop:Generator_UserColumnName="customer_cr_number" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

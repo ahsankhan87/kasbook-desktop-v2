@@ -98,7 +98,7 @@ namespace pos
                 txt_countryName.Text = myProductView["CountryName"].ToString();
                 txt_registrationName.Text = myProductView["RegistrationName"].ToString();
                 cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
-
+                txt_cr_number.Text = myProductView["cr_number"].ToString();
             }
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
@@ -188,8 +188,8 @@ namespace pos
                         CountryName = txt_countryName.Text.Trim(),
                         registrationName = txt_registrationName.Text.Trim(),
                         date_created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue)
-
+                        GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue),
+                        CRNumber = txt_cr_number.Text.Trim()
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();
@@ -286,6 +286,9 @@ namespace pos
             txt_postalCode.Text = "";
             txt_countryName.Text = "";
             txt_registrationName.Text = "";
+
+            cmb_GL_account_code.SelectedValue = "5"; // 5 is the default Ac receiavable Account id in acc_accounts table
+            txt_cr_number.Text = "";
         }
 
         private void btn_blank_Click(object sender, EventArgs e)
@@ -350,7 +353,8 @@ namespace pos
                         CountryName = txt_countryName.Text.Trim(),
                         registrationName = txt_registrationName.Text.Trim(),
                         date_updated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue)
+                        GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue),
+                        CRNumber = txt_cr_number.Text.Trim()
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();

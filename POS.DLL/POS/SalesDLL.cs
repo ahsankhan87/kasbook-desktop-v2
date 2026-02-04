@@ -149,7 +149,7 @@ namespace POS.DLL
                             " (SI.unit_price*SI.quantity_sold) AS total, " +
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " C.first_name AS customer_name, C.vat_no AS customer_vat, C.RegistrationName AS customer_company, " +
-                            " C.StreetName, C.BuildingNumber, C.CitySubdivisionName, C.CityName, C.PostalCode, C.CountryName," +
+                            " C.StreetName, C.BuildingNumber, C.CitySubdivisionName, C.CityName, C.PostalCode, C.CountryName, C.cr_number AS customer_cr_number," +
                             " U.name AS username," +
                             " SI.loc_code,S.description,SI.item_code as code" +
                             " FROM pos_sales S" +

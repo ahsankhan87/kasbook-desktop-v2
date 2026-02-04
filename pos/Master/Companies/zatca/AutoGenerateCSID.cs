@@ -105,7 +105,7 @@ namespace pos.Master.Companies.zatca
                 string commonName = txt_commonName.Text; // "TST-2050012095-300589284900003";
                 string serialNumber = txt_serialNumber.Text; // "1-TST|2-TST|3-" + Guid.NewGuid().ToString();
                 string organizationIdentifier = txt_organizationIdentifier.Text; // "300589284900003"; // ✅ valid
-                string organizationUnit = txt_organizationName.Text; // "Main Branch";
+                string organizationName = txt_organizationName.Text; // "Main Branch";
                 string organizationUnitName = txt_organizationUnitName.Text; // "Riyadh Branch"; // actual 10-digit TIN
                 string countryName = txt_countryName.Text; //"SA";
                 string invoiceType = cmb_invoicetype.SelectedValue.ToString(); // "1100";
@@ -115,7 +115,7 @@ namespace pos.Master.Companies.zatca
                 if (string.IsNullOrWhiteSpace(commonName) ||
                     string.IsNullOrWhiteSpace(serialNumber) ||
                     string.IsNullOrWhiteSpace(organizationIdentifier) ||
-                    string.IsNullOrWhiteSpace(organizationUnit) ||
+                    string.IsNullOrWhiteSpace(organizationName) ||
                     string.IsNullOrWhiteSpace(organizationUnitName) ||
                     string.IsNullOrWhiteSpace(countryName) ||
                     string.IsNullOrWhiteSpace(invoiceType))
@@ -132,8 +132,8 @@ namespace pos.Master.Companies.zatca
                     commonName,
                     serialNumber,
                     organizationIdentifier,
-                    organizationUnit,
                     organizationUnitName,
+                    organizationName,
                     countryName,
                     invoiceType,
                     locationAddress,

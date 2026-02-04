@@ -50,8 +50,8 @@ namespace pos
             // 
             // nudThreshold
             // 
-            this.nudThreshold.DecimalPlaces = 2;
             resources.ApplyResources(this.nudThreshold, "nudThreshold");
+            this.nudThreshold.DecimalPlaces = 2;
             this.nudThreshold.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -68,8 +68,8 @@ namespace pos
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
