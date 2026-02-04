@@ -304,10 +304,10 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@Status", status);
                         }
 
-                        if (SkipSmallInvoices)
+                        if (!SkipSmallInvoices)
                         {
                             //exclude sales with invoice numbers starting with ZS-00000
-                            query.Append(" AND s.invoice_no NOT LIKE 'ZS-%'");
+                            query.Append(" AND s.invoice_no NOT LIKE 'ZS%'");
                         }
 
                         query.Append(" AND s.branch_id = @branch_id");

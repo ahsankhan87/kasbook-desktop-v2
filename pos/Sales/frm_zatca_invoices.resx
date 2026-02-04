@@ -130,9 +130,6 @@
   <data name="id.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="id.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
   <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -143,7 +140,7 @@
     <value>6</value>
   </data>
   <data name="invoice_no.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>102</value>
   </data>
   <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -154,6 +151,9 @@
   <data name="customer.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="customer.Width" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
   <metadata name="zatca_mode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -162,9 +162,6 @@
   </data>
   <data name="zatca_mode.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="zatca_mode.Width" type="System.Int32, mscorlib">
-    <value>125</value>
   </data>
   <metadata name="account.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -188,7 +185,7 @@
     <value>6</value>
   </data>
   <data name="invoice_subtype.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>93</value>
   </data>
   <metadata name="zatca_status.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -200,7 +197,7 @@
     <value>6</value>
   </data>
   <data name="zatca_status.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>76</value>
   </data>
   <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -212,7 +209,7 @@
     <value>6</value>
   </data>
   <data name="sale_date.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>66</value>
   </data>
   <metadata name="total_tax.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -224,7 +221,7 @@
     <value>6</value>
   </data>
   <data name="total_tax.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>95</value>
   </data>
   <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -236,7 +233,7 @@
     <value>6</value>
   </data>
   <data name="discount_value.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>101</value>
   </data>
   <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -248,7 +245,7 @@
     <value>6</value>
   </data>
   <data name="total.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>92</value>
   </data>
   <metadata name="zatca_message.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -322,7 +319,7 @@
     <value>51</value>
   </data>
   <data name="gridZatcaInvoices.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1058, 506</value>
+    <value>1133, 516</value>
   </data>
   <data name="gridZatcaInvoices.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -346,7 +343,7 @@
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
   </data>
   <data name="btnComplianceChecks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>719, 11</value>
+    <value>794, 11</value>
   </data>
   <data name="btnComplianceChecks.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 54</value>
@@ -373,7 +370,7 @@
     <value>Top, Right</value>
   </data>
   <data name="btnRefresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>909, 9</value>
+    <value>984, 9</value>
   </data>
   <data name="btnRefresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 37</value>
@@ -394,7 +391,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btnRefresh.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="btnViewResponse.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 11</value>
@@ -430,7 +427,7 @@
     <value>Segoe UI, 14pt, style=Bold</value>
   </data>
   <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 7</value>
+    <value>443, 7</value>
   </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 32</value>
@@ -451,7 +448,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btn_viewQR.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 11</value>
@@ -484,7 +481,7 @@
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
   </data>
   <data name="btn_signInvoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>606, 11</value>
+    <value>681, 11</value>
   </data>
   <data name="btn_signInvoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 54</value>
@@ -517,7 +514,7 @@
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
   </data>
   <data name="btn_invoice_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>945, 11</value>
+    <value>1020, 11</value>
   </data>
   <data name="btn_invoice_report.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 54</value>
@@ -550,7 +547,7 @@
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
   </data>
   <data name="btn_Invoice_clearance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>834, 11</value>
+    <value>909, 11</value>
   </data>
   <data name="btn_Invoice_clearance.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 54</value>
@@ -592,7 +589,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;cmbSubtype.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cmbType.Location" type="System.Drawing.Point, System.Drawing">
     <value>553, 78</value>
@@ -613,7 +610,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;cmbType.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="txtInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>425, 78</value>
@@ -634,7 +631,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;txtInvoiceNo.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>242, 78</value>
@@ -655,7 +652,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;dtpFromDate.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="btnDownloadUBL.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 11</value>
@@ -682,7 +679,7 @@
     <value>3</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>886, 74</value>
+    <value>1024, 74</value>
   </data>
   <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 30</value>
@@ -703,13 +700,13 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btnSearch.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 56</value>
+    <value>239, 56</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 17</value>
@@ -730,7 +727,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -757,7 +754,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -784,7 +781,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -811,7 +808,37 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>886, 80</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 21</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Text" xml:space="preserve">
+    <value>Show ZS Invoices</value>
+  </data>
+  <data name="&gt;&gt;chk_ShowZatcaInvoice.Name" xml:space="preserve">
+    <value>chk_ShowZatcaInvoice</value>
+  </data>
+  <data name="&gt;&gt;chk_ShowZatcaInvoice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chk_ShowZatcaInvoice.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;chk_ShowZatcaInvoice.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -838,7 +865,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 7</value>
@@ -862,7 +889,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmb_status.Location" type="System.Drawing.Point, System.Drawing">
     <value>774, 78</value>
@@ -883,13 +910,13 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;cmb_status.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="btnClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>985, 9</value>
+    <value>1060, 9</value>
   </data>
   <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 37</value>
@@ -910,13 +937,13 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 56</value>
+    <value>329, 56</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 17</value>
@@ -937,7 +964,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="dtpToDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>332, 78</value>
@@ -958,7 +985,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;dtpToDate.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -967,7 +994,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1058, 108</value>
+    <value>1133, 124</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -988,10 +1015,10 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 108</value>
+    <value>0, 124</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1058, 506</value>
+    <value>1133, 516</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1018,7 +1045,7 @@
     <value>NoControl</value>
   </data>
   <data name="NewComplianceCheckButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 11</value>
+    <value>526, 11</value>
   </data>
   <data name="NewComplianceCheckButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 54</value>
@@ -1048,10 +1075,10 @@
     <value>Bottom</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 614</value>
+    <value>0, 640</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1058, 77</value>
+    <value>1133, 77</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1075,7 +1102,7 @@
     <value>7, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1058, 691</value>
+    <value>1133, 717</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -131,7 +131,7 @@ namespace pos
             }
 
             bool canTransmit = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Transmit);
-            //chk_sendInvoiceToZatca.Checked = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Send);
+            chk_sendInvoiceToZatca.Checked = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Send);
 
             if (!canTransmit)
             {

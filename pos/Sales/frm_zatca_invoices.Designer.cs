@@ -74,6 +74,7 @@ namespace pos.Sales
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmb_status = new System.Windows.Forms.ComboBox();
@@ -120,6 +121,7 @@ namespace pos.Sales
             // 
             // id
             // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.id.DataPropertyName = "id";
             resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
@@ -127,6 +129,7 @@ namespace pos.Sales
             // 
             // invoice_no
             // 
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_no.DataPropertyName = "invoice_no";
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoice_no.DefaultCellStyle = dataGridViewCellStyle1;
@@ -136,7 +139,7 @@ namespace pos.Sales
             // 
             // customer
             // 
-            this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.customer.DataPropertyName = "customer";
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customer.DefaultCellStyle = dataGridViewCellStyle2;
@@ -146,9 +149,11 @@ namespace pos.Sales
             // 
             // zatca_mode
             // 
+            this.zatca_mode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.zatca_mode.DataPropertyName = "zatca_mode";
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.zatca_mode.DefaultCellStyle = dataGridViewCellStyle3;
+            this.zatca_mode.FillWeight = 30F;
             resources.ApplyResources(this.zatca_mode, "zatca_mode");
             this.zatca_mode.Name = "zatca_mode";
             this.zatca_mode.ReadOnly = true;
@@ -158,12 +163,14 @@ namespace pos.Sales
             this.account.DataPropertyName = "account";
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.account.DefaultCellStyle = dataGridViewCellStyle4;
+            this.account.FillWeight = 30F;
             resources.ApplyResources(this.account, "account");
             this.account.Name = "account";
             this.account.ReadOnly = true;
             // 
             // invoice_subtype
             // 
+            this.invoice_subtype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_subtype.DataPropertyName = "invoice_subtype";
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoice_subtype.DefaultCellStyle = dataGridViewCellStyle5;
@@ -173,6 +180,7 @@ namespace pos.Sales
             // 
             // zatca_status
             // 
+            this.zatca_status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.zatca_status.DataPropertyName = "zatca_status";
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.zatca_status.DefaultCellStyle = dataGridViewCellStyle6;
@@ -182,6 +190,7 @@ namespace pos.Sales
             // 
             // sale_date
             // 
+            this.sale_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sale_date.DataPropertyName = "sale_date";
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sale_date.DefaultCellStyle = dataGridViewCellStyle7;
@@ -191,6 +200,7 @@ namespace pos.Sales
             // 
             // total_tax
             // 
+            this.total_tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.total_tax.DataPropertyName = "total_tax";
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -203,6 +213,7 @@ namespace pos.Sales
             // 
             // discount_value
             // 
+            this.discount_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.discount_value.DataPropertyName = "discount_value";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -215,6 +226,7 @@ namespace pos.Sales
             // 
             // total
             // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.total.DataPropertyName = "total";
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -372,6 +384,8 @@ namespace pos.Sales
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.chk_ShowZatcaInvoice);
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label4);
@@ -389,8 +403,13 @@ namespace pos.Sales
             this.panel1.Controls.Add(this.txtInvoiceNo);
             this.panel1.Controls.Add(this.dtpToDate);
             this.panel1.Controls.Add(this.dtpFromDate);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // chk_ShowZatcaInvoice
+            // 
+            resources.ApplyResources(this.chk_ShowZatcaInvoice, "chk_ShowZatcaInvoice");
+            this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
+            this.chk_ShowZatcaInvoice.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -508,6 +527,8 @@ namespace pos.Sales
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmb_status;
+        private System.Windows.Forms.Button NewComplianceCheckButton;
+        private System.Windows.Forms.CheckBox chk_ShowZatcaInvoice;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
@@ -523,6 +544,5 @@ namespace pos.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn prevSaleDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn prevInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_time;
-        private System.Windows.Forms.Button NewComplianceCheckButton;
     }
 }

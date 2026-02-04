@@ -231,12 +231,12 @@ namespace POS.BLL
                 throw;
             }
         }
-        public DataTable SearchInvoices(String invoiceNo, DateTime? date, String type, String subtype, DateTime? todate, String status)
+        public DataTable SearchInvoices(String invoiceNo, DateTime? date, String type, String subtype, DateTime? todate, String status, bool showZatcaSkipInvoice=true)
         {
             try
             {
                 SalesDLL objDLL = new SalesDLL();
-                return objDLL.SearchInvoices(invoiceNo, date, type, subtype, todate, status);
+                return objDLL.SearchInvoices(invoiceNo, date, type, subtype, todate, status, showZatcaSkipInvoice);
             }
             catch
             {

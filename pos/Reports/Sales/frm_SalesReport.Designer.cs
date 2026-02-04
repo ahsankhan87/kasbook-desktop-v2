@@ -294,6 +294,7 @@
             // 
             // invoice_no
             // 
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_no.DataPropertyName = "invoice_no";
             this.invoice_no.FillWeight = 55.53223F;
             resources.ApplyResources(this.invoice_no, "invoice_no");
@@ -328,6 +329,7 @@
             // loc_code
             // 
             this.loc_code.DataPropertyName = "loc_code";
+            this.loc_code.FillWeight = 20F;
             resources.ApplyResources(this.loc_code, "loc_code");
             this.loc_code.Name = "loc_code";
             this.loc_code.ReadOnly = true;

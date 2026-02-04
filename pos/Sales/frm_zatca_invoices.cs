@@ -74,8 +74,9 @@ namespace pos.Sales
                     string status = cmb_status.SelectedValue?.ToString();
                     DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
                     DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
+                    bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
 
-                    DataTable dt = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status);
+                    DataTable dt = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status, showZatcaSkipInvoice);
                     gridZatcaInvoices.DataSource = dt;
                 }
                 catch (Exception ex)
@@ -971,8 +972,9 @@ namespace pos.Sales
                     string status = cmb_status.SelectedValue?.ToString();
                     DateTime? fromdate = dtpFromDate.Checked ? dtpFromDate.Value.Date : (DateTime?)null;
                     DateTime? todate = dtpToDate.Checked ? dtpToDate.Value.Date : (DateTime?)null;
+                    bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
 
-                    var results = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status);
+                    var results = new SalesBLL().SearchInvoices(invoiceNo, fromdate, type, subtype, todate, status, showZatcaSkipInvoice);
                     gridZatcaInvoices.DataSource = results;
                 }
                 catch (Exception ex)
