@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -23,7 +25,10 @@ namespace pos
 
         public void frm_product_groups_Load(object sender, EventArgs e)
         {
-            load_ProductGroups_grid();
+            using (BusyScope.Show(this, UiMessages.T("Loading product groups...", "جاري تحميل مجموعات المنتجات...")))
+            {
+                load_ProductGroups_grid();
+            }
         }
 
         public void load_ProductGroups_grid()
@@ -42,90 +47,164 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
                 throw;
             }
 
         }
 
+        private bool TryGetSelectedGroup(out string id, out string code, out string name)
+        {
+            id = null;
+            code = null;
+            name = null;
+
+            if (grid_product_groups.CurrentRow == null)
+                return false;
+
+            var row = grid_product_groups.CurrentRow;
+
+            id = Convert.ToString(row.Cells["id"].Value);
+            code = Convert.ToString(row.Cells["code"].Value);
+            name = Convert.ToString(row.Cells["name"].Value);
+
+            return !string.IsNullOrWhiteSpace(id);
+        }
+
         private void btn_new_Click(object sender, EventArgs e)
         {
-            frm_addProductGroup frm_addProductGroup_obj = new frm_addProductGroup(this);
-            frm_addProductGroup.instance.tb_lbl_is_edit.Text = "false";
-
-            frm_addProductGroup_obj.ShowDialog();
+            using (BusyScope.Show(this, UiMessages.T("Opening...", "جاري الفتح...")))
+            {
+                frm_addProductGroup frm_addProductGroup_obj = new frm_addProductGroup(this);
+                frm_addProductGroup.instance.tb_lbl_is_edit.Text = "false";
+                frm_addProductGroup_obj.ShowDialog(this);
+            }
         }
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            string id = grid_product_groups.CurrentRow.Cells["id"].Value.ToString();
-            string code = grid_product_groups.CurrentRow.Cells["code"].Value.ToString();
-            string name = grid_product_groups.CurrentRow.Cells["name"].Value.ToString();
-            
-            frm_addProductGroup frm_addProductGroup_obj = new frm_addProductGroup(this);
-            frm_addProductGroup.instance.tb_lbl_is_edit.Text = "true";
+            if (!TryGetSelectedGroup(out var id, out var code, out var name))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a product group to update.",
+                    "يرجى تحديد مجموعة منتجات للتحديث.",
+                    captionEn: "Product Groups",
+                    captionAr: "مجموعات المنتجات");
+                return;
+            }
 
-            frm_addProductGroup.instance.tb_id.Text = id;
-            frm_addProductGroup.instance.tb_code.Text = code;
-            frm_addProductGroup.instance.tb_name.Text = name;
-            
-            frm_addProductGroup.instance.Show();
+            using (BusyScope.Show(this, UiMessages.T("Opening...", "جاري الفتح...")))
+            {
+                frm_addProductGroup frm_addProductGroup_obj = new frm_addProductGroup(this);
+                frm_addProductGroup.instance.tb_lbl_is_edit.Text = "true";
+
+                frm_addProductGroup.instance.tb_id.Text = id;
+                frm_addProductGroup.instance.tb_code.Text = code;
+                frm_addProductGroup.instance.tb_name.Text = name;
+
+                frm_addProductGroup_obj.ShowDialog(this);
+            }
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_product_groups.CurrentRow.Cells[0].Value.ToString();
-
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (!TryGetSelectedGroup(out var id, out var code, out var name))
             {
-
-                ProductGroupsBLL objBLL = new ProductGroupsBLL();
-                objBLL.Delete(int.Parse(id));
-
-                MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                load_ProductGroups_grid();
-            }
-            else
-            {
-                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                UiMessages.ShowWarning(
+                    "Please select a product group to delete.",
+                    "يرجى تحديد مجموعة منتجات للحذف.",
+                    captionEn: "Product Groups",
+                    captionAr: "مجموعات المنتجات");
+                return;
             }
 
+            var confirm = UiMessages.ConfirmYesNo(
+                $"Delete product group '{name}'?",
+                $"هل تريد حذف مجموعة المنتجات '{name}'؟",
+                captionEn: "Delete",
+                captionAr: "حذف");
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            using (BusyScope.Show(this, UiMessages.T("Deleting...", "جاري الحذف...")))
+            {
+                try
+                {
+                    ProductGroupsBLL objBLL = new ProductGroupsBLL();
+                    objBLL.Delete(int.Parse(id));
+
+                    UiMessages.ShowInfo(
+                        "Product group deleted successfully.",
+                        "تم حذف مجموعة المنتجات بنجاح.",
+                        captionEn: "Success",
+                        captionAr: "نجاح");
+
+                    load_ProductGroups_grid();
+                }
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+                }
+            }
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            load_ProductGroups_grid();
+            using (BusyScope.Show(this, UiMessages.T("Refreshing...", "جاري التحديث...")))
+            {
+                load_ProductGroups_grid();
+            }
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
             try
             {
-                
-                    //grid_product_groups.DataSource = null;
+                string condition = (txt_search.Text ?? string.Empty).Trim();
+                if (string.IsNullOrWhiteSpace(condition))
+                {
+                    using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
+                    {
+                        load_ProductGroups_grid();
+                    }
+                    return;
+                }
 
-                    //bind data in data grid view  
+                using (BusyScope.Show(this, UiMessages.T("Searching...", "جاري البحث...")))
+                {
                     ProductGroupsBLL objBLL = new ProductGroupsBLL();
-                    //grid_product_groups.AutoGenerateColumns = false;
-
-                    String condition = txt_search.Text;
                     grid_product_groups.DataSource = objBLL.SearchRecord(condition);
 
-                    //txt_search.Text = "";
-                
+                    if (grid_product_groups.Rows.Count == 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "No matching groups found.",
+                            "لم يتم العثور على مجموعات مطابقة.",
+                            captionEn: "Search",
+                            captionAr: "بحث");
+                    }
+                }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
 
+        private void btn_assign_product_Click(object sender, EventArgs e)
+        {
+            using (BusyScope.Show(this, UiMessages.T("Opening...", "جاري الفتح...")))
+            {
+                using (frm_assign_products frm = new frm_assign_products())
+                {
+                    frm.ShowDialog(this);
+                }
+            }
+        }
+
+        // Designer-wired handlers
         private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13) // Enter
@@ -136,28 +215,14 @@ namespace pos
 
         private void frm_product_groups_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control == true && e.KeyCode == Keys.N)
-            {
+            if (e.Control && e.KeyCode == Keys.N)
                 btn_new.PerformClick();
 
-            }
-
-            if (e.Control == true && e.KeyCode == Keys.U)
-            {
+            if (e.Control && e.KeyCode == Keys.U)
                 btn_update.PerformClick();
-            }
 
-            if (e.Control == true && e.KeyCode == Keys.D)
-            {
+            if (e.Control && e.KeyCode == Keys.D)
                 btn_delete.PerformClick();
-
-            }
-        }
-
-        private void btn_assign_product_Click(object sender, EventArgs e)
-        {
-            frm_assign_products frm = new frm_assign_products();
-            frm.ShowDialog();
         }
     }
 }

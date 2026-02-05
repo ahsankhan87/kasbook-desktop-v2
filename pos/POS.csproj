@@ -200,11 +200,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="Zatca.EInvoice.SDK">
-      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\Zatca.EInvoice.SDK.dll</HintPath>
+    <Reference Include="ZATCA.EInvoice.SDK">
+      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\ZATCA.EInvoice.SDK.dll</HintPath>
     </Reference>
-    <Reference Include="Zatca.EInvoice.SDK.Contracts">
-      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\Zatca.EInvoice.SDK.Contracts.dll</HintPath>
+    <Reference Include="ZATCA.EInvoice.SDK.Contracts">
+      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK.Contracts\net48\ZATCA.EInvoice.SDK.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Zatca.EInvoice.SDK.Saxon">
       <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\Zatca.EInvoice.SDK.Saxon.dll</HintPath>

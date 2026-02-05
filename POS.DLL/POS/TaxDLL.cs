@@ -83,8 +83,8 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("SELECT id,title,rate,status,date_created FROM pos_taxes WHERE title LIKE @title OR id = @id", cn);
-                        cmd.Parameters.AddWithValue("@id", condition);
+                        cmd = new SqlCommand("SELECT * FROM pos_taxes WHERE title LIKE @title", cn);
+                        //cmd.Parameters.AddWithValue("@id", condition);
                         cmd.Parameters.AddWithValue("@title", string.Format("%{0}%", condition));
                         
                         da = new SqlDataAdapter(cmd);

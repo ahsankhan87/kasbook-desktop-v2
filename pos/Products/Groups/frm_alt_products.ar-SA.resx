@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_source_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 21</value>
+    <value>315, 17</value>
   </data>
   <data name="txt_source_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -132,7 +132,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_product_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 48</value>
+    <value>315, 44</value>
   </data>
   <data name="txt_product_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -141,16 +141,25 @@
     <value>Top, Right</value>
   </data>
   <data name="btn_search_products.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 47</value>
+    <value>237, 47</value>
   </data>
   <data name="btn_search_products.Text" xml:space="preserve">
     <value>يضيف</value>
   </data>
+  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 60</value>
+  </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 26</value>
+    <value>94, 38</value>
   </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء (ESC)</value>
+  </data>
+  <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 16</value>
+  </data>
+  <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 39</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
     <value>حفظ (F3)</value>
@@ -159,10 +168,10 @@
     <value>Top, Right</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 54</value>
+    <value>561, 50</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 17</value>
+    <value>69, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>عدد البديل
@@ -172,10 +181,10 @@
     <value>Top, Right</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>425, 24</value>
+    <value>547, 20</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
+    <value>88, 17</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
     <value>المنتج المصدر
@@ -185,13 +194,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_item_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 21</value>
+    <value>134, 17</value>
   </data>
   <data name="txt_item_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_item_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>176, 24</value>
   </data>
   <data name="code.HeaderText" xml:space="preserve">
     <value>رقم الصنف</value>
@@ -207,7 +216,13 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btn_delete.Width" type="System.Int32, mscorlib">
-    <value>61</value>
+    <value>66</value>
+  </data>
+  <data name="grid_product_groups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 102</value>
+  </data>
+  <data name="grid_product_groups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>643, 485</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -233,8 +248,13 @@
         AAAAAAAAAAAAAA==
 </value>
   </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>إنشاء أرقام بديلة
-</value>
+    <value>إنشاء أرقام بديلة</value>
   </data>
 </root>

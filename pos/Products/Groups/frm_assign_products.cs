@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
 
 namespace pos
 {
@@ -39,22 +40,23 @@ namespace pos
                 {
                     foreach (DataRow myProductView in product_dt.Rows)
                     {
-                        
                         grid_product_groups.Rows[RowIndex].Cells["id"].Value = myProductView["id"].ToString();
                         grid_product_groups.Rows[RowIndex].Cells["code"].Value = myProductView["code"].ToString();
                         grid_product_groups.Rows[RowIndex].Cells["name"].Value = myProductView["name"].ToString();
-                        //total_amount += sub_total; 
-                        //total_tax += tax;
-
                     }
-
-
                 }
-
+                else
+                {
+                    UiMessages.ShowWarning(
+                        "No matching product was found.",
+                        "لم يتم العثور على المنتج المطلوب.",
+                        captionEn: "Products",
+                        captionAr: "المنتجات");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
                 throw;
             }
 
@@ -131,43 +133,81 @@ namespace pos
         {
             try
             {
-                if(txt_group_code.Text != "")
+                if (string.IsNullOrWhiteSpace(txt_group_code.Text))
                 {
-                    var result = "";
-                    ProductGroupsModal info = new ProductGroupsModal();
-                    ProductGroupsBLL objBLL = new ProductGroupsBLL();
+                    UiMessages.ShowWarning(
+                        "Please select a product group first.",
+                        "يرجى اختيار مجموعة المنتجات أولاً.",
+                        captionEn: "Product Groups",
+                        captionAr: "مجموعات المنتجات");
+                    cmb_product_groups.Focus();
+                    return;
+                }
 
-                    for (int i = 0; i < grid_product_groups.Rows.Count; i++)
-                    {
-                        if (grid_product_groups.Rows[i].Cells["code"].Value != null)
-                        {
-                            info.group_code = txt_group_code.Text;
-                            info.product_id = grid_product_groups.Rows[i].Cells["code"].Value.ToString();
+                if (grid_product_groups.Rows.Count == 0)
+                {
+                    UiMessages.ShowWarning(
+                        "No products to assign. Please add products first.",
+                        "لا توجد منتجات للإسناد. يرجى إضافة منتجات أولاً.",
+                        captionEn: "Product Groups",
+                        captionAr: "مجموعات المنتجات");
+                    txt_product_code.Focus();
+                    return;
+                }
 
-                            result = objBLL.InsertProductGroupDetail(info); // for sales items
+                var confirm = UiMessages.ConfirmYesNo(
+                    "Assign the listed products to this group?",
+                    "هل تريد إسناد المنتجات المدرجة لهذه المجموعة؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد");
 
-                        }
+                if (confirm != DialogResult.Yes)
+                    return;
 
-                    }
-                    if(result.ToString().Length > 0)
-                    {
-                        MessageBox.Show("Record Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string result = string.Empty;
+                ProductGroupsModal info = new ProductGroupsModal();
+                ProductGroupsBLL objBLL = new ProductGroupsBLL();
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                int savedCount = 0;
+
+                for (int i = 0; i < grid_product_groups.Rows.Count; i++)
+                {
+                    if (grid_product_groups.Rows[i].IsNewRow) continue;
+
+                    var codeCell = grid_product_groups.Rows[i].Cells["code"].Value;
+                    if (codeCell == null) continue;
+
+                    info.group_code = txt_group_code.Text;
+                    info.product_id = codeCell.ToString();
+
+                    result = objBLL.InsertProductGroupDetail(info);
+                    if (!string.IsNullOrEmpty(result))
+                        savedCount++;
+                }
+
+                if (savedCount > 0)
+                {
+                    UiMessages.ShowInfo(
+                        $"Products assigned successfully. ({savedCount})",
+                        $"تم إسناد المنتجات بنجاح. ({savedCount})",
+                        captionEn: "Success",
+                        captionAr: "نجاح");
+
+                    // Refresh grid from DB
+                    Load_grid(txt_group_code.Text);
                 }
                 else
                 {
-                    MessageBox.Show("Please select group", "Group", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UiMessages.ShowWarning(
+                        "Nothing was saved. Please verify selected products.",
+                        "لم يتم حفظ أي بيانات. يرجى التحقق من المنتجات المختارة.",
+                        captionEn: "Warning",
+                        captionAr: "تنبيه");
                 }
-            
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -178,23 +218,44 @@ namespace pos
 
         private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
         {
-            if(txt_group_code.Text != "" && e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
-                frm_searchProducts search_product_obj = new frm_searchProducts(null, this,null, txt_product_code.Text, "", "", 0, false);
-                search_product_obj.ShowDialog();
+                if (string.IsNullOrWhiteSpace(txt_group_code.Text))
+                {
+                    UiMessages.ShowWarning(
+                        "Please select a group before adding products.",
+                        "يرجى اختيار المجموعة قبل إضافة المنتجات.",
+                        captionEn: "Product Groups",
+                        captionAr: "مجموعات المنتجات");
+                    cmb_product_groups.Focus();
+                    return;
+                }
 
+                frm_searchProducts search_product_obj = new frm_searchProducts(null, this, null, txt_product_code.Text, "", "", 0, false);
+                search_product_obj.ShowDialog();
             }
         }
 
         private void btn_search_products_Click(object sender, EventArgs e)
         {
-            frm_searchProducts search_product_obj = new frm_searchProducts(null, this,null, txt_product_code.Text, "", "", 0, false);
+            if (string.IsNullOrWhiteSpace(txt_group_code.Text))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a group before adding products.",
+                    "يرجى اختيار المجموعة قبل إضافة المنتجات.",
+                    captionEn: "Product Groups",
+                    captionAr: "مجموعات المنتجات");
+                cmb_product_groups.Focus();
+                return;
+            }
+
+            frm_searchProducts search_product_obj = new frm_searchProducts(null, this, null, txt_product_code.Text, "", "", 0, false);
             search_product_obj.ShowDialog();
 
         }
+
         public void load_products(string product_id = "")
         {
-
             ProductBLL productsBLL_obj = new ProductBLL();
             DataTable product_dt = new DataTable();
 
@@ -207,25 +268,34 @@ namespace pos
             {
                 foreach (DataRow myProductView in product_dt.Rows)
                 {
-
                     int id = Convert.ToInt32(myProductView["id"]);
                     string code = myProductView["code"].ToString();
                     string name = myProductView["name"].ToString();
-                    
-                    string[] row0 = { id.ToString(), code, name};
 
+                    string[] row0 = { id.ToString(), code, name };
                     grid_product_groups.Rows.Add(row0);
-
                 }
-
-
             }
             else
             {
-                MessageBox.Show("Record not found", "Products", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowWarning(
+                    "No matching product was found.",
+                    "لم يتم العثور على المنتج المطلوب.");
 
             }
         }
 
+        private void frm_assign_products_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.F3) {
+                btn_save.PerformClick();
+            }
+            if(e.KeyData == Keys.Escape) {
+                btn_cancel.PerformClick();
+            }
+
+        }
+
+        // ...existing code...
     }
 }

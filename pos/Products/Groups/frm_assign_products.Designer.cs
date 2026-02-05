@@ -158,6 +158,7 @@
             this.Name = "frm_assign_products";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.frm_assign_products_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_assign_products_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_product_groups)).EndInit();
@@ -174,12 +175,12 @@
         private System.Windows.Forms.TextBox txt_group_code;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.TextBox txt_product_code;
         private System.Windows.Forms.Button btn_search_products;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
     }
 }
 

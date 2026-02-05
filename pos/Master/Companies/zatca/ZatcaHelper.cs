@@ -14,8 +14,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using Zatca.EInvoice.SDK;
-using Zatca.EInvoice.SDK.Contracts.Models;
+using ZATCA.EInvoice.SDK;
+using ZATCA.EInvoice.SDK.Contracts.Models;
 
 namespace pos.Master.Companies.zatca
 {
@@ -96,8 +96,8 @@ namespace pos.Master.Companies.zatca
                     signResult.SignedEInvoice.Save(ublPath);
 
                     // Save QR image bytes to DB
-                    var base64QrFromXml = GetBase64QrCode(signResult);
-                    byte[] qrBytes = Convert.FromBase64String(base64QrFromXml);
+                    //var base64QrFromXml = GetBase64QrCode(signResult);
+                    byte[] qrBytes = Convert.FromBase64String(qrBase64);
                     salesBLL.UpdateZatcaQrCode(invoiceNo, qrBytes);
 
                     ////GetRequestApi Payload
@@ -985,7 +985,7 @@ namespace pos.Master.Companies.zatca
                         Directory.CreateDirectory(ublFolder);
 
                     // Debug the QR already embedded by the signer (this is the one you should keep)
-                    var embeddedQrBase64 = ZatcaHelper.GetBase64QrCode(signResult);
+                    //var embeddedQrBase64 = ZatcaHelper.GetBase64QrCode(signResult);
                     //DebugQrTimestampFromBase64(embeddedQrBase64);
                     //ZatcaHelper.InsertQrIntoXml(signResult.SignedEInvoice, embeddedQrBase64);
 
@@ -1013,7 +1013,7 @@ namespace pos.Master.Companies.zatca
                     signResult.SignedEInvoice.Save(ublPath);
                     
                     // 7. Generate QR image for display/storage in db
-                    byte[] qrBytes = Convert.FromBase64String(embeddedQrBase64);
+                    byte[] qrBytes = Convert.FromBase64String(qrBase64);
                     salesBLL.UpdateZatcaQrCode(invoiceNo, qrBytes);
                     //MessageBox.Show($"Base64 QRCode : {Base64QrCode}\n");
 
@@ -1021,28 +1021,28 @@ namespace pos.Master.Companies.zatca
                     string pcsidCertBase64 = PCSID_dataRow["cert_base64"].ToString();
                     string pcsidSecret = PCSID_dataRow["secret_key"].ToString();
 
-                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(
-                    //    signResult.SignedEInvoice,
-                    //    pcsidCertBase64,
-                    //    pcsidSecret); 
-                    
-                    ////var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, decodedCert, privateKey_CSID);
+                    var resultValidator = eInvoiceValidator.ValidateEInvoice(
+                        signResult.SignedEInvoice,
+                        pcsidCertBase64,
+                        pcsidSecret);
 
-                    //if (!resultValidator.IsValid)
-                    //{
-                    //    var failedSteps = resultValidator.ValidationSteps
-                    //       .Where(step => !step.IsValid)
-                    //       .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
-                    //       .ToList();
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, decodedCert, privateKey_CSID);
 
-                    //    string fullError = failedSteps.Any()
-                    //        ? string.Join("\n\n", failedSteps)
-                    //        : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+                    if (!resultValidator.IsValid)
+                    {
+                        var failedSteps = resultValidator.ValidationSteps
+                           .Where(step => !step.IsValid)
+                           .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                           .ToList();
 
-                    //    MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
-                    //}
+                        string fullError = failedSteps.Any()
+                            ? string.Join("\n\n", failedSteps)
+                            : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
 
-                    
+                        MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    }
+
+
                     ////GetRequestApi Payload
                     //RequestGenerator RequestGenerator = new RequestGenerator();
                     //RequestResult RequestResult = RequestGenerator.GenerateRequest(signResult.SignedEInvoice);

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using pos.UI;
 
 namespace pos
 {
@@ -45,75 +46,95 @@ namespace pos
         {
             if (lbl_edit_status.Text == "true")
             {
-                btn_save.Text = "Update";
-                lbl_header_title.Text = "Update Product Groups";
-                
+                btn_save.Text = UiMessages.T("Update", "تحديث");
+                lbl_header_title.Text = UiMessages.T("Update Product Group", "تحديث مجموعة المنتجات");
             }
             else
             {
-                btn_save.Text = "Save";
+                btn_save.Text = UiMessages.T("Save", "حفظ");
+                lbl_header_title.Text = UiMessages.T("Add Product Group", "إضافة مجموعة منتجات");
             }
         }
         
         private void btn_save_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string code = (txt_code.Text ?? string.Empty).Trim();
+                string name = (txt_name.Text ?? string.Empty).Trim();
 
-
-            if (txt_code.Text != string.Empty && txt_name.Text != string.Empty)
+                if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(name))
                 {
-                    ProductGroupsModal info = new ProductGroupsModal();
-                    info.code = txt_code.Text;
-                    info.name = txt_name.Text;
-                    
-                    ProductGroupsBLL objBLL = new ProductGroupsBLL();
-                    
-                    if (lbl_edit_status.Text == "true")
-                    {
-                        info.id = int.Parse(txt_id.Text);
-                    
-                        int result = objBLL.Update(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        int result = objBLL.Insert(info);
-                        if (result > 0)
-                        {
-                            MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    
-                    if(mainForm != null)
-                    {
-                        mainForm.load_ProductGroups_grid();
+                    UiMessages.ShowWarning(
+                        "Please enter both group code and name.",
+                        "يرجى إدخال كود واسم المجموعة.",
+                        captionEn: "Validation",
+                        captionAr: "التحقق");
+                    txt_code.Focus();
+                    return;
+                }
 
-                    }
-                    
-                    this.Close();
+                bool isEdit = lbl_edit_status.Text == "true";
 
+                var confirm = UiMessages.ConfirmYesNo(
+                    isEdit ? "Update this product group?" : "Create this product group?",
+                    isEdit ? "هل تريد تحديث مجموعة المنتجات؟" : "هل تريد إنشاء مجموعة المنتجات؟",
+                    captionEn: "Confirm",
+                    captionAr: "تأكيد");
+
+                if (confirm != DialogResult.Yes)
+                    return;
+
+                ProductGroupsModal info = new ProductGroupsModal();
+                info.code = code;
+                info.name = name;
+
+                ProductGroupsBLL objBLL = new ProductGroupsBLL();
+
+                int result;
+                if (isEdit)
+                {
+                    int id;
+                    int.TryParse(txt_id.Text, out id);
+                    info.id = id;
+                    result = objBLL.Update(info);
                 }
                 else
                 {
-                    MessageBox.Show("Please enter code and name", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    result = objBLL.Insert(info);
                 }
-            
+
+                if (result > 0)
+                {
+                    UiMessages.ShowInfo(
+                        isEdit ? "Product group updated successfully." : "Product group created successfully.",
+                        isEdit ? "تم تحديث مجموعة المنتجات بنجاح." : "تم إنشاء مجموعة المنتجات بنجاح.",
+                        captionEn: "Success",
+                        captionAr: "نجاح");
+
+                    if (mainForm != null)
+                        mainForm.load_ProductGroups_grid();
+
+                    Close();
+                }
+                else
+                {
+                    UiMessages.ShowError(
+                        "Nothing was saved. Please try again.",
+                        "لم يتم حفظ أي بيانات. يرجى المحاولة مرة أخرى.",
+                        captionEn: "Error",
+                        captionAr: "خطأ");
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose(); 
-            this.Close();
+            Close();
         }
 
         private void frm_addProductGroup_KeyDown(object sender, KeyEventArgs e)

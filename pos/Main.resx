@@ -194,7 +194,7 @@
     <value>221, 6</value>
   </data>
   <data name="rolePermissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>202, 26</value>
   </data>
   <data name="rolePermissionsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Role Permissions</value>
@@ -204,13 +204,13 @@
     <value>False</value>
   </data>
   <data name="permissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>202, 26</value>
   </data>
   <data name="permissionsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Permissions</value>
   </data>
   <data name="userClaimsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>202, 26</value>
   </data>
   <data name="userClaimsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;User Claims</value>
@@ -220,9 +220,6 @@
   </data>
   <data name="securityToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Security</value>
-  </data>
-  <data name="applicationLogsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 26</value>

@@ -2,7 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Zatca.EInvoice.SDK.Contracts.Models;
+using ZATCA.EInvoice.SDK.Contracts.Models;
 
 
 public class ZatcaAuth

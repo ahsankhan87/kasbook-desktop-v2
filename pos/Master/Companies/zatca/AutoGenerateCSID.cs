@@ -14,9 +14,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Zatca.EInvoice.SDK;
-using Zatca.EInvoice.SDK.Contracts;
-using Zatca.EInvoice.SDK.Contracts.Models;
+using ZATCA.EInvoice.SDK;
+using ZATCA.EInvoice.SDK.Contracts;
+using ZATCA.EInvoice.SDK.Contracts.Models;
 
 namespace pos.Master.Companies.zatca
 {
@@ -32,7 +32,7 @@ namespace pos.Master.Companies.zatca
 
         private void AutoGenerateCSR_Load(object sender, EventArgs e)
         {
-            Zatca.EInvoice.SDK.CsrGenerator csrGenerator = new CsrGenerator();
+            ZATCA.EInvoice.SDK.CsrGenerator csrGenerator = new CsrGenerator();
 
             FillInvoiceTypes();
             btn_csr_save.Visible = false;

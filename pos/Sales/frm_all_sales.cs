@@ -12,8 +12,8 @@ using System.Net.Http;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Zatca.EInvoice.SDK;
-using Zatca.EInvoice.SDK.Contracts.Models;
+using ZATCA.EInvoice.SDK;
+using ZATCA.EInvoice.SDK.Contracts.Models;
 using pos.UI;
 using pos.UI.Busy;
 

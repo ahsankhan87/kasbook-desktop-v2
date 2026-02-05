@@ -323,8 +323,8 @@
             // 
             // applicationLogsToolStripMenuItem
             // 
-            resources.ApplyResources(this.applicationLogsToolStripMenuItem, "applicationLogsToolStripMenuItem");
             this.applicationLogsToolStripMenuItem.Name = "applicationLogsToolStripMenuItem";
+            resources.ApplyResources(this.applicationLogsToolStripMenuItem, "applicationLogsToolStripMenuItem");
             this.applicationLogsToolStripMenuItem.Click += new System.EventHandler(this.applicationLogsToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem

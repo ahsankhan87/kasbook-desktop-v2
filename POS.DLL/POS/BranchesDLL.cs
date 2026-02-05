@@ -107,7 +107,7 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("SELECT id,name,date_created FROM pos_branches WHERE name LIKE @name", cn);
+                        cmd = new SqlCommand("SELECT * FROM pos_branches WHERE name LIKE @name", cn);
                         //cmd.Parameters.AddWithValue("@id", condition);
                         cmd.Parameters.AddWithValue("@name", string.Format("%{0}%", condition));
                         

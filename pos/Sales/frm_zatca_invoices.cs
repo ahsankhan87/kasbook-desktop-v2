@@ -21,8 +21,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using Zatca.EInvoice.SDK;
-using Zatca.EInvoice.SDK.Contracts.Models;
+using ZATCA.EInvoice.SDK;
+using ZATCA.EInvoice.SDK.Contracts.Models;
 using pos.Security.Authorization;
 using AppPermissions = pos.Security.Authorization.Permissions;
 
@@ -296,21 +296,21 @@ namespace pos.Sales
                     var hashGen = new EInvoiceHashGenerator();
                     string invoiceHashBase64 = hashGen.GenerateEInvoiceHashing(signResult.SignedEInvoice).Hash;
 
-                    var sigData = ZatcaHelper.ExtractSignatureData(signResult.SignedEInvoice, PCSIDCertificate);
+                    //var sigData = ZatcaHelper.ExtractSignatureData(signResult.SignedEInvoice, PCSIDCertificate);
 
-                    // Generate ZATCA-SAFE QR
-                    string qrBase64 = ZatcaPhase2QrGenerator.GenerateQrBase64(
-                        sellerName,
-                        sellerVAT,
-                        issueDate,
-                        issueTime,
-                        totalWithVat,
-                        vatAmount,
-                        invoiceHashBase64,
-                        sigData.SignatureValueBase64,
-                        sigData.PublicKeyBase64,
-                        sigData.CertificateSignatureBase64
-                    );
+                    //// Generate ZATCA-SAFE QR
+                    //string qrBase64 = ZatcaPhase2QrGenerator.GenerateQrBase64(
+                    //    sellerName,
+                    //    sellerVAT,
+                    //    issueDate,
+                    //    issueTime,
+                    //    totalWithVat,
+                    //    vatAmount,
+                    //    invoiceHashBase64,
+                    //    sigData.SignatureValueBase64,
+                    //    sigData.PublicKeyBase64,
+                    //    sigData.CertificateSignatureBase64
+                    //);
 
                     var qrGen = new EInvoiceQRGenerator();
                     QRResult qrResult = qrGen.GenerateEInvoiceQRCode(signResult.SignedEInvoice);
@@ -326,7 +326,7 @@ namespace pos.Sales
                     signResult.SignedEInvoice.Save(path);
 
                     // Save QR
-                    salesBLL.UpdateZatcaQrCode(invoiceNo, Convert.FromBase64String(qrBase64));
+                    salesBLL.UpdateZatcaQrCode(invoiceNo, Convert.FromBase64String(qrBase641));
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", path, null);
 
                     // Generate request payload
