@@ -295,7 +295,7 @@ namespace pos.Sales
 
                     var hashGen = new EInvoiceHashGenerator();
                     string invoiceHashBase64 = hashGen.GenerateEInvoiceHashing(signResult.SignedEInvoice).Hash;
-
+                    
                     //var sigData = ZatcaHelper.ExtractSignatureData(signResult.SignedEInvoice, PCSIDCertificate);
 
                     //// Generate ZATCA-SAFE QR
@@ -328,6 +328,28 @@ namespace pos.Sales
                     // Save QR
                     salesBLL.UpdateZatcaQrCode(invoiceNo, Convert.FromBase64String(qrBase641));
                     salesBLL.UpdateZatcaStatus(invoiceNo, "Signed", path, null);
+                    EInvoiceValidator eInvoiceValidator = new EInvoiceValidator();
+                    
+                    var resultValidator = eInvoiceValidator.ValidateEInvoice(
+                        signResult.SignedEInvoice,
+                        certBase64,
+                        secret);
+
+                    //var resultValidator = eInvoiceValidator.ValidateEInvoice(signResult.SignedEInvoice, decodedCert, privateKey_CSID);
+
+                    if (!resultValidator.IsValid)
+                    {
+                        var failedSteps = resultValidator.ValidationSteps
+                           .Where(step => !step.IsValid)
+                           .Select(step => $"{step.ValidationStepName}: {step.ErrorMessages[0]}")
+                           .ToList();
+
+                        string fullError = failedSteps.Any()
+                            ? string.Join("\n\n", failedSteps)
+                            : resultValidator.ValidationSteps[0].ErrorMessages[0] ?? "Signing failed with unknown error.";
+
+                        MessageBox.Show("Zatca Invoice Validator results:\n\n" + fullError);
+                    }
 
                     // Generate request payload
                     var requestGenerator = new RequestGenerator();
