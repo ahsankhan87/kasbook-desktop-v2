@@ -455,21 +455,34 @@ namespace pos
             try
             {
                
-                DialogResult result = MessageBox.Show("Are you sure you want to hold purchase", "Hold Purchase Transaction " + invoice_status, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = UiMessages.ConfirmYesNoCancel("Are you sure you want to hold purchase?", "هل أنت متأكد من رغبتك في تأجيل عملية الشراء؟", "Hold Purchase Transaction " + invoice_status, "عقد معاملة الشراء " + invoice_status);
 
                 if (result == DialogResult.Yes)
                 {
                     if (grid_purchases.Rows.Count > 0)
                     {
                         PurchasesModal PurchasesModal_obj = new PurchasesModal();
-                        PurchasesBLL purchasesObj = new PurchasesBLL();
+                        var purchasesObj = new PurchasesBLL();
                         DateTime purchase_date = txt_purchase_date.Value.Date;
                         int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
                         int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
                 
                         string invoice_no = "";
-
+                        // near start of hold_purchases(), after supplier_id is read
+                        var supplierInvoiceNo = (txt_supplier_invoice.Text ?? string.Empty).Trim();
                         
+                        if (purchasesObj.IsHoldSupplierInvoiceNoExists(supplier_id, supplierInvoiceNo))
+                        {
+                            UiMessages.ShowWarning(
+                                "This Supplier Invoice No. already exists in Hold purchases for the selected supplier.",
+                                "رقم فاتورة المورد موجود بالفعل في المشتريات المحفوظة لنفس المورد.",
+                                captionEn: "Duplicate Supplier Invoice",
+                                captionAr: "تكرار رقم فاتورة المورد");
+                            txt_supplier_invoice.Focus();
+                            txt_supplier_invoice.SelectAll();
+                            return;
+                        }
+
                         invoice_no = GetMAXInvoiceNo_HOLD();
                         
                         PurchasesModal_obj.employee_id = employee_id;
@@ -523,7 +536,7 @@ namespace pos
                         }
                         if (purchase_id > 0)
                         {
-                            MessageBox.Show(invoice_no + " hold purchases transaction successfully", "Success "+invoice_status, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            UiMessages.ShowInfo(invoice_no + " hold purchases transaction saved successfully", invoice_no + "تم حفظ عملية الشراء المعلقة بنجاح", "Success " + invoice_status, "نجاح " + invoice_status);
 
                             clear_form();
                             //GetMAXInvoiceNo_HOLD();
@@ -531,12 +544,12 @@ namespace pos
                         }
                         else
                         {
-                            MessageBox.Show("Record not saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            UiMessages.ShowError("Record not saved", "لم يتم حفظ السجل");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Please add products", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UiMessages.ShowWarning("Please add products", "يرجى إضافة منتجات");
                     }
                 }
 
@@ -556,7 +569,8 @@ namespace pos
                 total_sub_total += Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value) * Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
             }
 
-            txt_sub_total.Text = Math.Round(total_sub_total,2).ToString();
+            decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
+            txt_sub_total.Text = Math.Round(total_sub_total + shippingCost, 2).ToString();
         }
 
         private void get_total_amount()
@@ -567,8 +581,75 @@ namespace pos
             {
                 total_amount += Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value) * Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
             }
-            decimal net = (total_amount + total_tax - total_discount);
+
+            decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
+            decimal net = (total_amount + total_tax - total_discount + shippingCost);
             txt_total_amount.Text = Math.Round(net,2).ToString();
+        }
+
+        private void txt_shipping_cost_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
+
+                if (chkbox_is_taxable.Checked && shippingCost != 0)
+                {
+                    decimal itemsNetTotal = 0;
+
+                    for (int i = 0; i <= grid_purchases.Rows.Count - 1; i++)
+                    {
+                        if (grid_purchases.Rows[i].Cells["id"].Value == null || grid_purchases.Rows[i].Cells["code"].Value == null)
+                        {
+                            continue;
+                        }
+
+                        decimal qty = Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value);
+                        decimal avgCost = Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
+                        decimal discount = Convert.ToDecimal(grid_purchases.Rows[i].Cells["discount"].Value);
+                        decimal lineNet = (qty * avgCost) - discount;
+                        if (lineNet > 0)
+                        {
+                            itemsNetTotal += lineNet;
+                        }
+                    }
+
+                    for (int i = 0; i <= grid_purchases.Rows.Count - 1; i++)
+                    {
+                        if (grid_purchases.Rows[i].Cells["id"].Value == null || grid_purchases.Rows[i].Cells["code"].Value == null)
+                        {
+                            continue;
+                        }
+
+                        decimal qty = Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value);
+                        decimal avgCost = Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
+                        decimal discount = Convert.ToDecimal(grid_purchases.Rows[i].Cells["discount"].Value);
+                        decimal taxRate = (grid_purchases.Rows[i].Cells["tax_rate"].Value == null || grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : Convert.ToDecimal(grid_purchases.Rows[i].Cells["tax_rate"].Value));
+
+                        decimal lineNet = (qty * avgCost) - discount;
+                        if (lineNet < 0)
+                        {
+                            lineNet = 0;
+                        }
+
+                        decimal shippingShare = (itemsNetTotal > 0 ? (shippingCost * (lineNet / itemsNetTotal)) : 0);
+                        decimal taxableBase = lineNet + shippingShare;
+                        decimal tax = Math.Round((taxableBase * taxRate) / 100, 4);
+
+                        grid_purchases.Rows[i].Cells["tax"].Value = tax;
+                        grid_purchases.Rows[i].Cells["sub_total"].Value = Math.Round(taxableBase + tax, 4);
+                    }
+                }
+
+                get_total_tax();
+                get_total_discount();
+                get_sub_total_amount();
+                get_total_amount();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+            }
         }
 
         private void get_total_tax()
@@ -1654,23 +1735,24 @@ namespace pos
             if (grid_purchases.Rows.Count > 0 && grid_purchases.Focused)
             {
                 string product_code = (grid_purchases.CurrentRow.Cells["code"].Value != null ? grid_purchases.CurrentRow.Cells["code"].Value.ToString() : "");
-                if (product_code != "")
+                string item_number = (grid_purchases.CurrentRow.Cells["item_number"].Value != null ? grid_purchases.CurrentRow.Cells["item_number"].Value.ToString() : "");
+                if (item_number != "")
                 {
                     if (grid_product_history.Rows.Count > 0) // if history grid is empty then load product history 
                     {
                         //if product history grid has already same product the don not load but 
                         //if history gird has different product the load
                         //it will improve performance
-                        if (product_code != grid_product_history.CurrentRow.Cells["item_code"].Value.ToString())
+                        if (item_number != grid_product_history.CurrentRow.Cells["item_number"].Value.ToString())
                         {
-                            load_product_purchase_history(product_code);
+                            load_product_purchase_history(item_number);
                             txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
 
                         }
                     }
                     else
                     {
-                        load_product_purchase_history(product_code);
+                        load_product_purchase_history(item_number);
                         txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
 
                     }
@@ -1680,7 +1762,7 @@ namespace pos
             
         }
 
-        public void load_product_purchase_history(string product_code)
+        public void load_product_purchase_history(string item_number)
         {
             try
             {
@@ -1690,8 +1772,8 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_product_history.AutoGenerateColumns = false;
 
-                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,I.trans_date, S.first_name AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_code = '" + product_code + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
+                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,I.trans_date, Concat(S.first_name, ' ', S.last_name) AS supplier";
+                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_number = '" + item_number + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
                 grid_product_history.DataSource = objBLL.GetRecord(keyword, table);
 
 
@@ -1997,7 +2079,22 @@ namespace pos
                             List<PurchaseModalHeader> purchase_model_header = new List<PurchaseModalHeader> { };
                             List<PurchasesModal> purchase_model_detail = new List<PurchasesModal> { };
 
-                            PurchasesBLL purchasesObj = new PurchasesBLL();
+                            var supplierInvoiceNo = (txt_supplier_invoice.Text ?? string.Empty).Trim();
+                            var purchasesObj = new PurchasesBLL();
+                            
+                            // For normal purchases, block duplicates in pos_purchases
+                            if (purchasesObj.IsSupplierInvoiceNoExists(supplier_id, supplierInvoiceNo))
+                            {
+                                UiMessages.ShowWarning(
+                                    "This Supplier Invoice No. already exists for the selected supplier.",
+                                    "رقم فاتورة المورد موجود بالفعل لنفس المورد.",
+                                    captionEn: "Duplicate Supplier Invoice",
+                                    captionAr: "تكرار رقم فاتورة المورد");
+                                txt_supplier_invoice.Focus();
+                                txt_supplier_invoice.SelectAll();
+                                return;
+                            }
+
                             DateTime purchase_date = txt_purchase_date.Value.Date;
 
                             int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -76,7 +76,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\IKVM.Java.dll</HintPath>
     </Reference>
-    <Reference Include="IKVM.Runtime">
+    <Reference Include="IKVM.Runtime, Version=8.10.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\IKVM.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -88,7 +89,8 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.8, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.9.0.8\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Pipelines.Sockets.Unofficial, Version=1.0.0.0, Culture=neutral, PublicKeyToken=42ea0a778e13fbe2, processorArchitecture=MSIL">
@@ -98,6 +100,10 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
       <HintPath>..\packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="saxon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\saxon.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=2.88.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.2.88.8\lib\net462\SkiaSharp.dll</HintPath>
@@ -167,7 +173,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Security.Cryptography.Xml">
+    <Reference Include="System.Security.Cryptography.Xml, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\System.Security.Cryptography.Xml.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.Encodings.Web, Version=9.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -200,14 +207,17 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="ZATCA.EInvoice.SDK">
+    <Reference Include="xerces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\xerces.dll</HintPath>
+    </Reference>
+    <Reference Include="ZATCA.EInvoice.SDK, Version=3.4.6.0, Culture=neutral, PublicKeyToken=cf541c52f43eaadd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\ZATCA.EInvoice.SDK.dll</HintPath>
     </Reference>
-    <Reference Include="ZATCA.EInvoice.SDK.Contracts">
-      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK.Contracts\net48\ZATCA.EInvoice.SDK.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Zatca.EInvoice.SDK.Saxon">
-      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\Zatca.EInvoice.SDK.Saxon.dll</HintPath>
+    <Reference Include="ZATCA.EInvoice.SDK.Contracts, Version=3.4.6.0, Culture=neutral, PublicKeyToken=cf541c52f43eaadd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\zatca dlls\DLL\Zatca.EInvoice.SDK\net48\ZATCA.EInvoice.SDK.Contracts.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -316,12 +326,11 @@
     <Compile Include="Accounts\Reports\frm_journal_daybook.Designer.cs">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </Compile>
-    <Compile Include="bin\Debug\Reports\sales_invoice.cs">
+    <!-- <Compile Include="bin\Debug\Reports\sales_invoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>sales_invoice.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
+    </Compile> -->
     <Compile Include="Customers\Customer Ledger Report\CustomerPayment.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1555,10 +1564,10 @@
     <EmbeddedResource Include="Accounts\Reports\frm_journal_daybook.resx">
       <DependentUpon>frm_journal_daybook.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="bin\Debug\Reports\sales_invoice.rpt">
+    <!-- <EmbeddedResource Include="bin\Debug\Reports\sales_invoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice.cs</LastGenOutput>
-    </EmbeddedResource>
+    </EmbeddedResource> -->
     <EmbeddedResource Include="Customers\Customer Ledger Report\CustomerPayment.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerPayment.cs</LastGenOutput>
@@ -2520,9 +2529,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Rules\schematrons\20210819_ZATCA_E-invoice_Validation_Rules.xsl" />
-    <Content Include="Data\Rules\schematrons\CEN-EN16931-UBL.xsl" />
+    <Content Include="Data\Rules\schematrons\20210819_ZATCA_E-invoice_Validation_Rules.xsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Rules\schematrons\CEN-EN16931-UBL.xsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="nozum.ico" />
+    <Content Include="saxon.dll" />
     <None Include="Resources\3969301-841013250.jpeg" />
     <Content Include="Resources\Add.png" />
     <None Include="Resources\Trash 16.png" />

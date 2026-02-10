@@ -1886,6 +1886,60 @@ namespace POS.DLL
             }
             return result;
         }
+        public bool IsSupplierInvoiceNoExists(int supplierId, string supplierInvoiceNo, string excludeInvoiceNo = null)
+        {
+            if (string.IsNullOrWhiteSpace(supplierInvoiceNo))
+                return false;
 
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = cn.CreateCommand())
+            {
+                cn.Open();
+
+                cmd.CommandText = @"
+                SELECT TOP 1 1
+                FROM pos_purchases
+                WHERE branch_id = @branch_id
+                  AND supplier_id = @supplier_id
+                  AND supplier_invoice_no = @supplier_invoice_no
+                  AND (@exclude_invoice_no IS NULL OR invoice_no <> @exclude_invoice_no);";
+
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                cmd.Parameters.AddWithValue("@supplier_id", supplierId);
+                cmd.Parameters.AddWithValue("@supplier_invoice_no", supplierInvoiceNo.Trim());
+                cmd.Parameters.AddWithValue("@exclude_invoice_no", (object)excludeInvoiceNo ?? DBNull.Value);
+
+                var found = cmd.ExecuteScalar();
+                return found != null && found != DBNull.Value;
+            }
+        }
+
+        public bool IsHoldSupplierInvoiceNoExists(int supplierId, string supplierInvoiceNo, string excludeInvoiceNo = null)
+        {
+            if (string.IsNullOrWhiteSpace(supplierInvoiceNo))
+                return false;
+
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = cn.CreateCommand())
+            {
+                cn.Open();
+
+                cmd.CommandText = @"
+                SELECT TOP 1 1
+                FROM pos_hold_purchases
+                WHERE branch_id = @branch_id
+                  AND supplier_id = @supplier_id
+                  AND supplier_invoice_no = @supplier_invoice_no
+                  AND (@exclude_invoice_no IS NULL OR invoice_no <> @exclude_invoice_no);";
+
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                cmd.Parameters.AddWithValue("@supplier_id", supplierId);
+                cmd.Parameters.AddWithValue("@supplier_invoice_no", supplierInvoiceNo.Trim());
+                cmd.Parameters.AddWithValue("@exclude_invoice_no", (object)excludeInvoiceNo ?? DBNull.Value);
+
+                var found = cmd.ExecuteScalar();
+                return found != null && found != DBNull.Value;
+            }
+        }
     }
 }

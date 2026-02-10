@@ -770,7 +770,7 @@
             // 
             resources.ApplyResources(this.txt_shipping_cost, "txt_shipping_cost");
             this.txt_shipping_cost.Name = "txt_shipping_cost";
-            this.txt_shipping_cost.TextChanged += new System.EventHandler(this.txt_total_disc_value_TextChanged);
+            this.txt_shipping_cost.TextChanged += new System.EventHandler(this.txt_shipping_cost_TextChanged);
             // 
             // txt_total_disc_value
             // 

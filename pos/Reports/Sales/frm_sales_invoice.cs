@@ -107,20 +107,45 @@ namespace pos
                 dr["qrcode_image_phase2"] = imageData_phase2;
             }
 
-            string appPath = Path.GetDirectoryName(Application.ExecutablePath);
+            string appPath = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
             ReportDocument rptDoc = new ReportDocument();
+
+            string reportFileName;
             if (_isPrintPOS80)
             {
-                rptDoc.Load(appPath + @"\\reports\\pos80_sale_invoice.rpt");
+                reportFileName = "pos80_sale_invoice.rpt";
             }
             else if (_isPrintProductCode)
             {
-                rptDoc.Load(appPath + @"\\reports\\sales_invoice.rpt");
+                reportFileName = "sales_invoice.rpt";
             }
             else
             {
-                rptDoc.Load(appPath + @"\\reports\\sales_invoice_sans_code.rpt");
+                reportFileName = "sales_invoice_sans_code.rpt";
             }
+
+            string reportsDir = Path.Combine(appPath, "reports");
+            string reportPath = Path.Combine(reportsDir, reportFileName);
+
+            if (!File.Exists(reportPath))
+            {
+                Directory.CreateDirectory(reportsDir);
+
+                // Fallback for dev environments where reports aren't copied to bin output.
+                string solutionRoot = Path.GetFullPath(Path.Combine(appPath, "..", ".."));
+                string sourceReportPath = Path.Combine(solutionRoot, "pos", "Reports", reportFileName);
+                if (File.Exists(sourceReportPath))
+                {
+                    File.Copy(sourceReportPath, reportPath, true);
+                }
+            }
+
+            if (!File.Exists(reportPath))
+            {
+                throw new FileNotFoundException("Report file not found.", reportPath);
+            }
+
+            rptDoc.Load(reportPath);
 
             rptDoc.SetDataSource(_dt);
             //rptDoc.SetParameterValue("username", username);

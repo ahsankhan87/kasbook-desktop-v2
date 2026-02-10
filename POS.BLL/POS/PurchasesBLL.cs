@@ -309,5 +309,29 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public bool IsSupplierInvoiceNoExists(int supplierId, string supplierInvoiceNo, string excludeInvoiceNo = null)
+        {
+            try
+            {
+                return objDLL.IsSupplierInvoiceNoExists(supplierId, supplierInvoiceNo, excludeInvoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public bool IsHoldSupplierInvoiceNoExists(int supplierId, string supplierInvoiceNo, string excludeInvoiceNo = null)
+        {
+            try
+            {
+                return objDLL.IsHoldSupplierInvoiceNoExists(supplierId, supplierInvoiceNo, excludeInvoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

@@ -139,12 +139,12 @@ namespace pos.Master.Companies.zatca
             catch (Exception ex)
             {
                 UiMessages.ShowError(
-                    "Error while signing the invoice for ZATCA.\n" + ex.Message,
-                    "حدث خطأ أثناء توقيع الفاتورة لزاتكا.\n" + ex.Message,
+                    "Error while signing the invoice for ZATCA.\n" + ex.ToString(),
+                    "حدث خطأ أثناء توقيع الفاتورة لزاتكا.\n" + ex.ToString(),
                     "ZATCA",
                     "زاتكا");
 
-                salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.Message);
+                salesBLL.UpdateZatcaStatus(invoiceNo, "Failed", null, ex.ToString());
             }
         }
 
@@ -429,7 +429,7 @@ namespace pos.Master.Companies.zatca
             }
         }
 
-        // Change the method signature to static
+        // 
         public static XmlDocument GenerateUBLXMLInvoice(string invoiceNo)
         {
             SalesBLL salesBLL = new SalesBLL();
@@ -938,6 +938,10 @@ namespace pos.Master.Companies.zatca
                 }
                 // 1. Generate XML invoice unsigned
                 XmlDocument ublXml = GenerateUBLXMLInvoice(invoiceNo);
+                
+                if (ublXml == null || ublXml.DocumentElement == null)
+                    throw new Exception("Generated UBL XML is null.");
+                
                 //ublXml.Save("UBL\\unsigned_ubl_"+ invoiceNo + ".xml");
 
                 // Check if ZATCA credentials are configured
@@ -966,7 +970,7 @@ namespace pos.Master.Companies.zatca
                 ////
 
                 byte[] bytes = Convert.FromBase64String(PCISD_cert);
-                string decodedCert = Encoding.UTF8.GetString(bytes);
+                string decodedCert = Encoding.ASCII.GetString(bytes); //Encoding.UTF8.GetString(bytes);
 
                 //XmlDocument ublXml = LoadSampleUBL();
                 //ublXml.Save("UBL\\debug_ubl1.xml");
@@ -981,6 +985,7 @@ namespace pos.Master.Companies.zatca
                 {
                     // Make sure "UBL" folder exists
                     string ublFolder = Path.Combine(Application.StartupPath, "UBL");
+                    
                     if (!Directory.Exists(ublFolder))
                         Directory.CreateDirectory(ublFolder);
 
