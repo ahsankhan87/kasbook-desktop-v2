@@ -13,7 +13,71 @@ namespace POS.DLL
     {
         private SqlCommand cmd;
         private SqlDataAdapter da;
+
+        public string NormalizeSupplierCodeInput(string input)
+        {
+            var normalized = (input ?? string.Empty).Trim();
+
+            if (normalized.Length == 0) return normalized;
+
+            // Only normalize when the text is intended to be a supplier code.
+            // Examples:
+            //  - "S00001"  => "S-00001"
+            //  - "S-00001" => "S-00001"
+            // Do NOT normalize names like "Sam" or "saleem".
+            bool isCodeNoDash =
+                normalized.Length > 1 &&
+                (normalized[0] == 'S' || normalized[0] == 's') &&
+                normalized.Substring(1).All(char.IsDigit);
+
+            bool isCodeWithDash =
+                normalized.Length > 2 &&
+                (normalized[0] == 'S' || normalized[0] == 's') &&
+                normalized[1] == '-' &&
+                normalized.Substring(2).All(char.IsDigit);
+
+            if (isCodeNoDash)
+            {
+                normalized = "S-" + normalized.Substring(1);
+            }
+            else if (isCodeWithDash)
+            {
+                normalized = "S" + normalized.Substring(1);
+            }
+
+            return normalized;
+        }
         
+        public string GetNextSupplierCode()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    string nextCode = "S-00001"; // Default code if no suppliers exist
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        cmd = new SqlCommand("SELECT MAX(supplier_code) FROM pos_suppliers WHERE branch_id = @branch_id", cn);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        var result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value && result != null)
+                        {
+                            string maxCode = result.ToString();
+                            if (maxCode.StartsWith("S-") && int.TryParse(maxCode.Substring(2), out int numericPart))
+                            {
+                                nextCode = $"S-{(numericPart + 1).ToString("D5")}";
+                            }
+                        }
+                    }
+                    return nextCode;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
         public DataTable GetAll()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -118,10 +182,12 @@ namespace POS.DLL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = cn;
-                    cmd.CommandText = @"SELECT id, first_name, last_name, email, vat_no, address, date_created, branch_id 
+                    cmd.CommandText = @"SELECT id, supplier_code, first_name, last_name, email, vat_no, address, contact_no, vat_status, date_created, branch_id 
                                 FROM pos_suppliers 
                                 WHERE branch_id = @branch_id 
                                 AND (first_name LIKE @condition OR last_name LIKE @condition 
+                                OR supplier_code LIKE @condition
+                                OR contact_no LIKE @condition
                                 OR vat_no LIKE @condition OR address LIKE @condition)";
 
                     // Add parameters with precise type and value to prevent SQL injection
@@ -162,6 +228,26 @@ namespace POS.DLL
                     {
                         cn.Open();
 
+                        string code = string.IsNullOrWhiteSpace(obj.supplier_code)
+                            ? GetNextSupplierCode()
+                            : NormalizeSupplierCodeInput(obj.supplier_code);
+
+                        if (string.IsNullOrWhiteSpace(code) || !code.StartsWith("S-") || code.Length < 3)
+                        {
+                            code = GetNextSupplierCode();
+                        }
+
+                        // Prevent duplicates in the same branch
+                        using (SqlCommand dupCmd = new SqlCommand(
+                            "SELECT COUNT(1) FROM pos_suppliers WHERE branch_id=@branch_id AND supplier_code=@code", cn))
+                        {
+                            dupCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                            dupCmd.Parameters.Add("@code", SqlDbType.NVarChar, 50).Value = code;
+                            int exists = Convert.ToInt32(dupCmd.ExecuteScalar());
+                            if (exists > 0)
+                                throw new Exception("Supplier code already exists: " + code);
+                        }
+
                         cmd = new SqlCommand("sp_SuppliersCrud", cn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -184,6 +270,8 @@ namespace POS.DLL
                         cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
                         cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
                         cmd.Parameters.Add("@GLAccountID", SqlDbType.Int).Value = obj.GLAccountID;
+                        cmd.Parameters.Add("@supplier_code", SqlDbType.NVarChar).Value = code;
+
 
                         //--operation types   
                         //-- 1) Insert  
@@ -217,6 +305,37 @@ namespace POS.DLL
                     {
                         cn.Open();
 
+                        // Normalize/validate supplier code; keep existing code if incoming is invalid
+                        string incoming = NormalizeSupplierCodeInput(obj.supplier_code);
+                        if (string.IsNullOrWhiteSpace(incoming) || !incoming.StartsWith("S-") || incoming.Length < 3)
+                        {
+                            using (SqlCommand getCmd = new SqlCommand(
+                                "SELECT supplier_code FROM pos_suppliers WHERE id=@id AND branch_id=@branch_id", cn))
+                            {
+                                getCmd.Parameters.Add("@id", SqlDbType.Int).Value = obj.id;
+                                getCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                                var existing = getCmd.ExecuteScalar();
+                                incoming = existing == null || existing == DBNull.Value ? string.Empty : Convert.ToString(existing);
+                            }
+                        }
+
+                        if (string.IsNullOrWhiteSpace(incoming))
+                        {
+                            incoming = GetNextSupplierCode();
+                        }
+
+                        // Prevent duplicates in the same branch (excluding the current supplier)
+                        using (SqlCommand dupCmd = new SqlCommand(
+                            "SELECT COUNT(1) FROM pos_suppliers WHERE branch_id=@branch_id AND supplier_code=@code AND id<>@id", cn))
+                        {
+                            dupCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                            dupCmd.Parameters.Add("@code", SqlDbType.NVarChar, 50).Value = incoming;
+                            dupCmd.Parameters.Add("@id", SqlDbType.Int).Value = obj.id;
+                            int exists = Convert.ToInt32(dupCmd.ExecuteScalar());
+                            if (exists > 0)
+                                throw new Exception("Supplier code already exists: " + incoming);
+                        }
+
                         cmd = new SqlCommand("sp_SuppliersCrud", cn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         //cmd.Parameters.AddWithValue("@branch_id", 0);
@@ -239,6 +358,7 @@ namespace POS.DLL
                         cmd.Parameters.Add("@CityName", SqlDbType.NVarChar).Value = obj.CityName;
                         cmd.Parameters.Add("@CountryName", SqlDbType.NVarChar).Value = obj.CountryName;
                         cmd.Parameters.Add("@GLAccountID", SqlDbType.Int).Value = obj.GLAccountID;
+                        cmd.Parameters.Add("@supplier_code", SqlDbType.NVarChar).Value = incoming;
 
                         //--operation types   
                         //-- 1) Insert  

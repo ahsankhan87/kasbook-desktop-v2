@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer; // added
@@ -3175,13 +3176,13 @@ namespace pos
             var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
 
             customersDataGridView = new DataGridView();
-            customersDataGridView.ColumnCount = 5;
+            customersDataGridView.ColumnCount = 6;
 
             int xLocation = groupBoxCustomer.Location.X + txtCustomerSearch.Location.X;
             int yLocation = groupBoxCustomer.Location.Y + txtCustomerSearch.Location.Y + 22;
 
             customersDataGridView.Location = new Point(xLocation, yLocation);
-            customersDataGridView.Size = new Size(405, 240);
+            customersDataGridView.Size = new Size(520, 240);
             customersDataGridView.BorderStyle = BorderStyle.None;
             customersDataGridView.BackgroundColor = Color.White;
             customersDataGridView.AutoGenerateColumns = false;
@@ -3199,23 +3200,24 @@ namespace pos
             customersDataGridView.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.Single;
 
-            customersDataGridView.Columns[0].Name = "Name";
-            customersDataGridView.Columns[1].Name = "ID";
-            customersDataGridView.Columns[2].Name = "Contact";
-            customersDataGridView.Columns[3].Name = "VAT No";
-            customersDataGridView.Columns[4].Name = "Credit Limit";
+            customersDataGridView.Columns[0].Name = "Code";
+            customersDataGridView.Columns[1].Name = "Name";
+            customersDataGridView.Columns[2].Name = "ID";
+            customersDataGridView.Columns[3].Name = "Contact";
+            customersDataGridView.Columns[4].Name = "VAT No";
+            customersDataGridView.Columns[5].Name = "Credit Limit";
 
             customersDataGridView.Columns[0].ReadOnly = true;
-            customersDataGridView.Columns[1].Visible = false;
-            customersDataGridView.Columns[2].ReadOnly = true;
+            customersDataGridView.Columns[1].ReadOnly = true;
+            customersDataGridView.Columns[2].Visible = false;
             customersDataGridView.Columns[3].ReadOnly = true;
-            customersDataGridView.Columns[4].Visible = false;
+            customersDataGridView.Columns[4].ReadOnly = true;
+            customersDataGridView.Columns[5].Visible = false;
 
-            customersDataGridView.Columns[0].Width = 220;
-            //customersDataGridView.Columns[1].Width = 220;
-            customersDataGridView.Columns[2].Width = 130;
-            customersDataGridView.Columns[3].Width = 120;
-            //customersDataGridView.Columns[4].Width = 30;
+            customersDataGridView.Columns[0].Width = 90;
+            customersDataGridView.Columns[1].Width = 220;
+            customersDataGridView.Columns[3].Width = 130;
+            customersDataGridView.Columns[4].Width = 120;
 
             //customersDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //customersDataGridView.AutoResizeColumns();
@@ -3235,10 +3237,10 @@ namespace pos
             {
                 e.Handled = true;
 
-                txt_customerID.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
-                txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
-                txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
-                txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+                txt_customerID.Text = customersDataGridView.CurrentRow.Cells[2].Value.ToString();
+                txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+                txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[5].Value.ToString();
 
                 ///customer balance
                 CustomerBLL customerBLL_obj = new CustomerBLL();
@@ -3262,10 +3264,10 @@ namespace pos
 
         private void customersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txt_customerID.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
-            txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
-            txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
-            txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+            txt_customerID.Text = customersDataGridView.CurrentRow.Cells[2].Value.ToString();
+            txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+            txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+            txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[5].Value.ToString();
             ///customer balance
             CustomerBLL customerBLL_obj = new CustomerBLL();
             Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
@@ -3285,6 +3287,8 @@ namespace pos
             {
                 var customerSearch = txtCustomerSearch.Text ?? string.Empty;
 
+                var normalizedSearch = new CustomerBLL().NormalizeCustomerCodeInput(customerSearch);
+
                 // If we are suppressing or the box isn't focused, do not show suggestions
                 if (_suppressCustomerSearch || !txtCustomerSearch.Focused)
                 {
@@ -3292,10 +3296,10 @@ namespace pos
                     return;
                 }
 
-                if (!string.IsNullOrWhiteSpace(customerSearch))
+                if (!string.IsNullOrWhiteSpace(normalizedSearch))
                 {
                     var bll = new CustomerBLL();
-                    DataTable dt = bll.SearchRecord(customerSearch) ?? new DataTable();
+                    DataTable dt = bll.SearchRecord(normalizedSearch) ?? new DataTable();
 
                     customersDataGridView.Rows.Clear();
 
@@ -3304,6 +3308,7 @@ namespace pos
                         foreach (DataRow dr in dt.Rows)
                         {
                             string[] row0 = {
+                        dt.Columns.Contains("customer_code") ? dr["customer_code"].ToString() : "",
                         dr["first_name"].ToString() + " " + dr["last_name"].ToString(),
                         dr["id"].ToString(),
                         dr["contact_no"].ToString(),
@@ -3337,6 +3342,19 @@ namespace pos
             {
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "Error");
             }
+        }
+
+        private void SelectCustomerFromDataRow(DataRow dr)
+        {
+            txt_customerID.Text = Convert.ToString(dr["id"]);
+            txtCustomerSearch.Text = (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"])).Trim();
+            txt_customer_vat.Text = Convert.ToString(dr["vat_no"]);
+            txt_cust_credit_limit.Text = Convert.ToString(dr["credit_limit"]);
+
+            CustomerBLL customerBLL_obj = new CustomerBLL();
+            Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));
+            txt_cust_balance.Text = customer_total_balance.ToString("N2");
+            ApplyInvoiceSubtypeForCustomerSelection();
         }
 
         private void CustomerSearchDebounceTimer_Tick(object sender, EventArgs e)
@@ -3373,12 +3391,46 @@ namespace pos
             }
             if (e.KeyCode == Keys.Enter)
             {
+                var normalizedSearch = new CustomerBLL().NormalizeCustomerCodeInput(txtCustomerSearch.Text);
+
+                // If user entered an exact customer code, try to auto-select on Enter
+                if (!string.IsNullOrWhiteSpace(normalizedSearch) && normalizedSearch.StartsWith("C-", StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var bll = new CustomerBLL();
+                        var dt = bll.SearchRecord(normalizedSearch);
+                        if (dt != null && dt.Rows.Count > 0 && dt.Columns.Contains("customer_code"))
+                        {
+                            var exact = dt.Select("customer_code = '" + normalizedSearch.Replace("'", "''") + "'");
+                            if (exact.Length == 1)
+                            {
+                                SelectCustomerFromDataRow(exact[0]);
+                                customersDataGridView.Visible = false;
+                                grid_sales.Focus();
+                                return;
+                            }
+                        }
+
+                        // No exact match found for entered code => clear selected customer fields
+                        txt_customerID.Text = "";
+                        txt_customer_vat.Text = "";
+                        txt_cust_credit_limit.Text = "";
+                        txt_cust_balance.Text = "";
+                        ApplyInvoiceSubtypeForCustomerSelection();
+                    }
+                    catch
+                    {
+                        // ignore and fall back to grid selection
+                    }
+                }
+
                 if (customersDataGridView.Visible && customersDataGridView.Rows.Count > 0)
                 {
-                    txt_customerID.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
-                    txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[0].Value.ToString();
-                    txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[3].Value.ToString();
-                    txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+                    txt_customerID.Text = customersDataGridView.CurrentRow.Cells[2].Value.ToString();
+                    txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                    txt_customer_vat.Text = customersDataGridView.CurrentRow.Cells[4].Value.ToString();
+                    txt_cust_credit_limit.Text = customersDataGridView.CurrentRow.Cells[5].Value.ToString();
                     ///customer balance
                     CustomerBLL customerBLL_obj = new CustomerBLL();
                     Decimal customer_total_balance = customerBLL_obj.GetCustomerAccountBalance(Convert.ToInt32(txt_customerID.Text));

@@ -54,7 +54,26 @@ namespace pos
         {
             txt_search.Focus();
             this.ActiveControl = txt_search;
+            GetSupplierCode();
             get_accounts_dropdownlist();
+        }
+        private void GetSupplierCode()
+        {
+            try
+            {
+                SupplierBLL objBLL = new SupplierBLL();
+                string newCode = objBLL.getNextSupplierCode();
+                txt_supplier_code.Text = newCode;
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "Failed to generate supplier code. " + ex.Message,
+                    "تعذر إنشاء رمز المورد. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
+            }
         }
         public void get_accounts_dropdownlist()
         {
@@ -129,6 +148,7 @@ namespace pos
                 info.PostalCode = txt_postalCode.Text.Trim();
                 info.CountryName = txt_countryName.Text.Trim();
                 info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
+                info.supplier_code = txt_supplier_code.Text.Trim();
 
                 SupplierBLL objBLL = new SupplierBLL();
                 int result = objBLL.Insert(info);
@@ -216,7 +236,8 @@ namespace pos
             txt_buildingNumber.Text = "";
             txt_citySubdivisionName.Text = "";
             txt_postalCode.Text = "";
-            txt_countryName.Text = "";
+            txt_countryName.Text = "SA";
+            GetSupplierCode();
         }
 
         private void btn_update_Click(object sender, EventArgs e)
@@ -269,6 +290,7 @@ namespace pos
                 info.CountryName = txt_countryName.Text.Trim();
                 info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
                 info.id = int.Parse(txt_id.Text);
+                info.supplier_code = txt_supplier_code.Text.Trim();
 
                 SupplierBLL objBLL = new SupplierBLL();
                 int result = objBLL.Update(info);
@@ -566,6 +588,7 @@ namespace pos
                 txt_postalCode.Text = myProductView["PostalCode"].ToString();
                 txt_countryName.Text = myProductView["CountryName"].ToString();
                 cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
+                txt_supplier_code.Text = myProductView["supplier_code"].ToString();
             }
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;

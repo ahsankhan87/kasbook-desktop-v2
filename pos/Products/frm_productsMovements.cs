@@ -68,11 +68,14 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_search_products.AutoGenerateColumns = false;
 
-                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer,S.first_name AS supplier";
+                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.unit_price," +
+                    "I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer," +
+                    "CONCAT(S.first_name,'-',PR.supplier_invoice_no) AS supplier";
                 string table = "pos_inventory I " +
                                "LEFT JOIN pos_products P ON P.code = I.item_code " +
                                "LEFT JOIN pos_customers C ON C.id = I.customer_id " +
                                "LEFT JOIN pos_suppliers S ON S.id = I.supplier_id " +
+                               "LEFT JOIN pos_purchases PR on PR.supplier_id = I.supplier_id " +
                                "WHERE I.item_number = '" + _item_number.Replace("'", "''") + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " " +
                                "ORDER BY I.id ASC";
 

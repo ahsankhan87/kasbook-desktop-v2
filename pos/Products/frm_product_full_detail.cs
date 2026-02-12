@@ -783,7 +783,9 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_movements.AutoGenerateColumns = false;
 
-                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.loc_code,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer,S.first_name AS supplier";
+                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.loc_code,I.unit_price," +
+                    "I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer," +
+                    "CONCAT(S.first_name,' ',S.last_name) AS supplier";
                 string table = "pos_inventory I " +
                                "LEFT JOIN pos_products P ON P.item_number = I.item_number " +
                                "LEFT JOIN pos_customers C ON C.id = I.customer_id " +

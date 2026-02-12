@@ -45,5 +45,7 @@ namespace POS.Core
         public string CitySubdivisionName { get; set; }
 
         public int GLAccountID { get; set; } = 0;
+
+        public string supplier_code { get; set; }
     }
 }

@@ -11,6 +11,18 @@ namespace POS.BLL
 {
     public class CustomerBLL
     {
+        public string NormalizeCustomerCodeInput(string input)
+        {
+            CustomerDLL objDLL = new CustomerDLL();
+            return objDLL.NormalizeCustomerCodeInput(input);
+        }
+
+        public string GetNextCustomerCode()
+        {
+            CustomerDLL objDLL = new CustomerDLL();
+            return objDLL.GetNextCustomerCode();
+        }
+
         public DataTable GetAll()
         {
             try

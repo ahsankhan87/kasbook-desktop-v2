@@ -36,6 +36,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_search_customers = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.first_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.registrationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.last_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,10 +51,10 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -64,29 +65,28 @@
             // 
             // btn_ok
             // 
-            resources.ApplyResources(this.btn_ok, "btn_ok");
             this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_ok, "btn_ok");
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
             // btn_cancel
             // 
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.grid_search_customers);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // grid_search_customers
             // 
-            resources.ApplyResources(this.grid_search_customers, "grid_search_customers");
             this.grid_search_customers.AllowUserToAddRows = false;
             this.grid_search_customers.AllowUserToDeleteRows = false;
             this.grid_search_customers.AllowUserToOrderColumns = true;
@@ -94,6 +94,7 @@
             this.grid_search_customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_search_customers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.customer_code,
             this.first_name,
             this.registrationName,
             this.last_name,
@@ -101,6 +102,7 @@
             this.vat_no,
             this.contact_no,
             this.address});
+            resources.ApplyResources(this.grid_search_customers, "grid_search_customers");
             this.grid_search_customers.Name = "grid_search_customers";
             this.grid_search_customers.ReadOnly = true;
             this.grid_search_customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -113,6 +115,13 @@
             resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            // 
+            // customer_code
+            // 
+            this.customer_code.DataPropertyName = "customer_code";
+            resources.ApplyResources(this.customer_code, "customer_code");
+            this.customer_code.Name = "customer_code";
+            this.customer_code.ReadOnly = true;
             // 
             // first_name
             // 
@@ -192,6 +201,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView grid_search_customers;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn first_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn registrationName;
         private System.Windows.Forms.DataGridViewTextBoxColumn last_name;

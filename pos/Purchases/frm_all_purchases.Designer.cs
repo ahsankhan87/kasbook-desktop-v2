@@ -66,6 +66,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.BtnSupplierNameChange);
             this.panel1.Controls.Add(this.label1);
@@ -74,7 +75,6 @@
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.btn_refresh);
             this.panel1.Controls.Add(this.grid_all_purchases);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // BtnSupplierNameChange
@@ -118,10 +118,10 @@
             // 
             // grid_all_purchases
             // 
+            resources.ApplyResources(this.grid_all_purchases, "grid_all_purchases");
             this.grid_all_purchases.AllowUserToAddRows = false;
             this.grid_all_purchases.AllowUserToDeleteRows = false;
             this.grid_all_purchases.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_all_purchases, "grid_all_purchases");
             this.grid_all_purchases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_all_purchases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_all_purchases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -161,16 +161,16 @@
             // 
             // contextMenuStrip1
             // 
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // copyToolStripMenuItem
             // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // purchase_date
@@ -256,9 +256,9 @@
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel2.Controls.Add(this.lbl_taxes_title);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // lbl_taxes_title

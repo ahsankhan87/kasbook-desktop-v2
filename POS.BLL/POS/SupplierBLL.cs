@@ -11,6 +11,18 @@ namespace POS.BLL
 {
     public class SupplierBLL
     {
+        public string NormalizeSupplierCodeInput(string input)
+        {
+            SupplierDLL objDLL = new SupplierDLL();
+            return objDLL.NormalizeSupplierCodeInput(input);
+        }
+
+        public string getNextSupplierCode()
+        {
+            SupplierDLL objDLL = new SupplierDLL();
+            return objDLL.GetNextSupplierCode();
+        }
+
         public DataTable GetAll()
         {
             try

@@ -45,6 +45,8 @@ namespace pos
             txt_search.Focus();
             this.ActiveControl = txt_search;
             get_accounts_dropdownlist();
+            GetCustomerCode();
+
             // Disable/hide actions based on DB-backed permissions
             //btn_save.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
             //btn_update.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
@@ -55,6 +57,27 @@ namespace pos
             //grid_customer_transactions.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerView);
             // Add further UI elements here as needed, e.g. delete/report buttons/menus.
         }
+        private void GetCustomerCode()
+        {
+            // Customer code should not be edited for existing customers
+            //txt_customer_code.ReadOnly = !string.IsNullOrWhiteSpace(txt_id.Text);
+
+            // Auto-generate customer code for new customers
+
+            if (string.IsNullOrWhiteSpace(txt_customer_code.Text))
+            {
+                try
+                {
+                    CustomerBLL bll = new CustomerBLL();
+                    txt_customer_code.Text = bll.GetNextCustomerCode();
+                }
+                catch
+                {
+                    // ignore auto-code errors; user can still save and DLL will generate if empty
+                }
+            }
+        }
+
         public void get_accounts_dropdownlist()
         {
             GeneralBLL generalBLL_obj = new GeneralBLL();
@@ -99,9 +122,13 @@ namespace pos
                 txt_registrationName.Text = myProductView["RegistrationName"].ToString();
                 cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
                 txt_cr_number.Text = myProductView["cr_number"].ToString();
+                if (dt.Columns.Contains("customer_code"))
+                    txt_customer_code.Text = myProductView["customer_code"].ToString();
             }
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
+
+            //txt_customer_code.ReadOnly = true;
         }
 
         public DataTable get_GL_accounts_dt()
@@ -189,7 +216,8 @@ namespace pos
                         registrationName = txt_registrationName.Text.Trim(),
                         date_created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue),
-                        CRNumber = txt_cr_number.Text.Trim()
+                        CRNumber = txt_cr_number.Text.Trim(),
+                        customer_code = txt_customer_code.Text.Trim(),
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();
@@ -284,11 +312,12 @@ namespace pos
             txt_buildingNumber.Text = "";
             txt_citySubdivisionName.Text = "";
             txt_postalCode.Text = "";
-            txt_countryName.Text = "";
+            txt_countryName.Text = "SA";
             txt_registrationName.Text = "";
 
             cmb_GL_account_code.SelectedValue = "5"; // 5 is the default Ac receiavable Account id in acc_accounts table
             txt_cr_number.Text = "";
+            GetCustomerCode();
         }
 
         private void btn_blank_Click(object sender, EventArgs e)
@@ -354,7 +383,8 @@ namespace pos
                         registrationName = txt_registrationName.Text.Trim(),
                         date_updated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue),
-                        CRNumber = txt_cr_number.Text.Trim()
+                        CRNumber = txt_cr_number.Text.Trim(),
+                        customer_code = txt_customer_code.Text.Trim(),
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();
@@ -385,7 +415,7 @@ namespace pos
                 else
                 {
                     UiMessages.ShowInfo(
-                        "Please enter first name",
+                        "Customer name, registration no. and vat no. are requried",
                         "يرجى إدخال الاسم الأول",
                         "Required Field",
                         "حقل مطلوب"

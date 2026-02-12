@@ -61,6 +61,11 @@ namespace pos
         private DataGridView categoriesDataGridView = new DataGridView();
         private DataGridView groupsDataGridView = new DataGridView();
 
+        private DataGridView suppliersDataGridView;
+        private System.Windows.Forms.Timer _supplierSearchDebounceTimer;
+        private bool _suppressSupplierSearch;
+        private int _selectedSupplierId;
+
         public DataTable products_dt = new DataTable();
 
         //private frm_searchProducts productsMainForm;
@@ -74,6 +79,17 @@ namespace pos
         {
             InitializeComponent();
             //autoCompleteProductCode();
+
+            SetupSuppliersDataGridView();
+            _supplierSearchDebounceTimer = new System.Windows.Forms.Timer { Interval = 300 };
+            _supplierSearchDebounceTimer.Tick += SupplierSearchDebounceTimer_Tick;
+
+            if (txtSupplierSearch != null)
+            {
+                txtSupplierSearch.TextChanged += txtSupplierSearch_TextChanged;
+                txtSupplierSearch.KeyUp += txtSupplierSearch_KeyUp;
+                txtSupplierSearch.Leave += txtSupplierSearch_Leave;
+            }
 
         }
 
@@ -98,7 +114,7 @@ namespace pos
                     cmb_purchase_type.SelectedIndex = 0;
                 }
 
-                get_suppliers_dropdownlist();
+                // Supplier selection is via txtSupplierSearch + grid
                 get_employees_dropdownlist();
                 get_payment_method_dropdownlist();
 
@@ -107,12 +123,6 @@ namespace pos
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
             }
-        }
-
-        private void btn_search_products_Click(object sender, EventArgs e)
-        {
-            frm_searchProducts frm_search_product_obj = new frm_searchProducts();
-            frm_search_product_obj.Show();
 
         }
 
@@ -465,7 +475,7 @@ namespace pos
                         var purchasesObj = new PurchasesBLL();
                         DateTime purchase_date = txt_purchase_date.Value.Date;
                         int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
-                        int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
+                        int supplier_id = _selectedSupplierId;
                 
                         string invoice_no = "";
                         // near start of hold_purchases(), after supplier_id is read
@@ -827,6 +837,12 @@ namespace pos
         {
             try
             {
+                // Don't hijack key handling while supplier search box is active
+                if (txtSupplierSearch != null && txtSupplierSearch.Focused)
+                {
+                    return;
+                }
+
                 //when you enter in textbox it will goto next textbox, work like TAB key
                 if (e.KeyData == Keys.Enter)
                 {
@@ -908,7 +924,7 @@ namespace pos
         private void clear_form()
         {
             //cmb_suppliers.SelectedValue = 0;
-            cmb_suppliers.Refresh();
+            //cmb_suppliers.Refresh();
             //cmb_categories.SelectedValue = 0;
             cmb_employees.SelectedValue = 0;
             cmb_purchase_type.SelectedValue = "Cash";
@@ -945,6 +961,11 @@ namespace pos
             txt_supplier_vat.Text = "";
             txt_cust_balance.Text = "";
 
+            _selectedSupplierId = 0;
+            _suppressSupplierSearch = true;
+            txtSupplierSearch.Text = "";
+            _suppressSupplierSearch = false;
+
             txt_sub_total.Text = "0.00";
             txt_total_amount.Text = "0.00";
             txt_total_tax.Text = "0.00";
@@ -967,80 +988,7 @@ namespace pos
 
         }
 
-        public void get_suppliers_dropdownlist()
-        {
-            SupplierBLL supplierBLL = new SupplierBLL();
-
-            DataTable suppliers = supplierBLL.GetAll();
-            DataRow emptyRow = suppliers.NewRow();
-            emptyRow[0] = "0";              // Set Column Value
-            emptyRow[2] = "Select Supplier";              // Set Column Value
-            suppliers.Rows.InsertAt(emptyRow, 0);
-
-            DataRow emptyRow1 = suppliers.NewRow();
-            emptyRow1[0] = "-1";              // Set Column Value
-            emptyRow1[2] = "ADD NEW";              // Set Column Value
-            suppliers.Rows.InsertAt(emptyRow1, 1);
-
-            cmb_suppliers.DisplayMember = "first_name";
-            cmb_suppliers.ValueMember = "id";
-            cmb_suppliers.DataSource = suppliers;
-
-        }
-        private void cmb_suppliers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                cmb_purchase_type.SelectedValue = (allow_credit_purchase ? "Credit" : "Cash"); //if user has no right then select cash instead
-
-                if (cmb_suppliers.SelectedValue.ToString() != null && cmb_suppliers.SelectedValue.ToString() != "0")
-                {
-                    int supplier_id = Convert.ToInt32(cmb_suppliers.SelectedValue.ToString());
-
-                    SupplierBLL BLL_obj = new SupplierBLL();
-                    DataTable suppliers = BLL_obj.SearchRecordBySupplierID(supplier_id);
-
-
-                    foreach (DataRow dr in suppliers.Rows)
-                    {
-                        txt_supplier_vat.Text = dr["vat_no"].ToString();
-                        bool vat_with_status = Boolean.Parse(dr["vat_status"].ToString());
-                        if (vat_with_status)
-                        {
-                            rd_btn_with_vat.Checked = true;
-                        }
-                        else
-                        {
-                            rd_btn_without_vat.Checked = true;
-                        }
-
-                    }
-
-                    ///customer balance
-                    DataTable supplier_total_balance = BLL_obj.GetSupplierAccountBalance(supplier_id);
-                    ///
-                    foreach (DataRow dr in supplier_total_balance.Rows)
-                    {
-                        txt_cust_balance.Text = dr["balance"].ToString();
-                    }
-                }
-
-
-                if (cmb_suppliers.SelectedValue.ToString() == "-1")
-                {
-                    frm_addSupplier custfrm = new frm_addSupplier(null);
-                    custfrm.ShowDialog();
-
-                    get_suppliers_dropdownlist();
-                }
-            }
-
-
-            catch (Exception ex)
-            {
-                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
-            }
-        }
+        // Supplier combobox list/handler removed; supplier is selected via `txtSupplierSearch`.
 
         public void get_employees_dropdownlist()
         {
@@ -1197,6 +1145,7 @@ namespace pos
 
                         }
                     }
+
                 }
             }
             catch (Exception ex)
@@ -1241,7 +1190,29 @@ namespace pos
                     foreach (DataRow myProductView in _dt.Rows)
                     {
                         txt_supplier_invoice.Text = myProductView["supplier_invoice_no"].ToString();
-                        cmb_suppliers.SelectedValue = myProductView["supplier_id"];
+                        _selectedSupplierId = (myProductView["supplier_id"] == null ? 0 : Convert.ToInt32(myProductView["supplier_id"]));
+                        try
+                        {
+                            _suppressSupplierSearch = true;
+                            if (_selectedSupplierId > 0)
+                            {
+                                var bll = new SupplierBLL();
+                                var dtSup = bll.SearchRecordBySupplierID(_selectedSupplierId);
+                                if (dtSup != null && dtSup.Rows.Count > 0)
+                                    SelectSupplierFromDataRow(dtSup.Rows[0]);
+                                else
+                                    ClearSelectedSupplier();
+                            }
+                            else
+                            {
+                                ClearSelectedSupplier();
+                                txtSupplierSearch.Text = "";
+                            }
+                        }
+                        finally
+                        {
+                            _suppressSupplierSearch = false;
+                        }
                         cmb_employees.SelectedValue = myProductView["employee_id"];
                         //cmb_purchase_type.SelectedValue = myProductView["purchase_type"];
                         //txt_purchase_date.Value = Convert.ToDateTime(myProductView["purchase_date"].ToString());
@@ -1743,7 +1714,7 @@ namespace pos
                         //if product history grid has already same product the don not load but 
                         //if history gird has different product the load
                         //it will improve performance
-                        if (item_number != grid_product_history.CurrentRow.Cells["item_number"].Value.ToString())
+                        if (item_number != grid_product_history.CurrentRow.Cells["history_item_number"].Value.ToString())
                         {
                             load_product_purchase_history(item_number);
                             txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
@@ -1772,8 +1743,12 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_product_history.AutoGenerateColumns = false;
 
-                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,I.trans_date, Concat(S.first_name, ' ', S.last_name) AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_number = '" + item_number + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
+                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.unit_price," +
+                    "I.cost_price,I.invoice_no,I.description,I.trans_date, Concat(S.first_name, ' - ',PR.supplier_invoice_no) AS supplier";
+                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code " +
+                    "LEFT JOIN pos_suppliers S ON S.id=I.supplier_id " +
+                    "LEFT JOIN pos_purchases PR on PR.supplier_id = I.supplier_id " +
+                    "WHERE I.item_number = '" + item_number + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
                 grid_product_history.DataSource = objBLL.GetRecord(keyword, table);
 
 
@@ -2030,7 +2005,7 @@ namespace pos
                     }
 
                     string purchase_type = (string.IsNullOrEmpty(cmb_purchase_type.SelectedValue.ToString()) ? "Cash" : cmb_purchase_type.SelectedValue.ToString());
-                    int supplier_id = (cmb_suppliers.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
+                    int supplier_id = _selectedSupplierId;
                     string bankID = "";
                     string bankGLAccountID = "";
                     string paymentMethodText = cmb_payment_method.Text;
@@ -2043,14 +2018,46 @@ namespace pos
                         return;
                     }
 
-                    if (supplier_id <= 0 || txt_supplier_invoice.Text.Length == 0)
+                    if (supplier_id <= 0)
                     {
                         UiMessages.ShowWarning(
-                            "Supplier and Supplier Invoice No. are required.",
-                            "المورد ورقم فاتورة المورد مطلوبان.",
+                            "Supplier is required.",
+                            "المورد مطلوب.",
                             captionEn: "Validation",
                             captionAr: "التحقق");
-                        cmb_suppliers.Focus();
+
+                        suppliersDataGridView.Visible = false;
+                        this.ActiveControl = txtSupplierSearch;
+                        txtSupplierSearch.Focus();
+                        txtSupplierSearch.SelectAll();
+
+                        BeginInvoke((Action)(() =>
+                        {
+                            this.ActiveControl = txtSupplierSearch;
+                            txtSupplierSearch.Focus();
+                            txtSupplierSearch.SelectAll();
+                        }));
+                        return;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(txt_supplier_invoice.Text))
+                    {
+                        UiMessages.ShowWarning(
+                            "Supplier Invoice No. is required.",
+                            "رقم فاتورة المورد مطلوب.",
+                            captionEn: "Validation",
+                            captionAr: "التحقق");
+
+                        this.ActiveControl = txt_supplier_invoice;
+                        txt_supplier_invoice.Focus();
+                        txt_supplier_invoice.SelectAll();
+
+                        BeginInvoke((Action)(() =>
+                        {
+                            this.ActiveControl = txt_supplier_invoice;
+                            txt_supplier_invoice.Focus();
+                            txt_supplier_invoice.SelectAll();
+                        }));
                         return;
                     }
 
@@ -2370,5 +2377,288 @@ namespace pos
             cmb_employees.SelectedIndex = 0;
 
         }
-    }
+
+
+        private void SetupSuppliersDataGridView()
+        {
+            if (suppliersDataGridView != null) return;
+
+            suppliersDataGridView = new DataGridView();
+            suppliersDataGridView.ColumnCount = 6;
+
+            int xLocation = groupBox1.Location.X + txtSupplierSearch.Location.X;
+            int yLocation = groupBox1.Location.Y + txtSupplierSearch.Location.Y + 22;
+
+            suppliersDataGridView.Location = new Point(xLocation, yLocation);
+            suppliersDataGridView.Size = new Size(520, 240);
+            suppliersDataGridView.BorderStyle = BorderStyle.None;
+            suppliersDataGridView.BackgroundColor = Color.White;
+            suppliersDataGridView.AutoGenerateColumns = false;
+            suppliersDataGridView.ReadOnly = true;
+            suppliersDataGridView.AllowUserToAddRows = false;
+            suppliersDataGridView.AllowUserToDeleteRows = false;
+            suppliersDataGridView.AllowUserToResizeRows = false;
+            suppliersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            suppliersDataGridView.MultiSelect = false;
+            suppliersDataGridView.RowHeadersVisible = false;
+
+            suppliersDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            suppliersDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            suppliersDataGridView.Columns[0].Name = "Code";
+            suppliersDataGridView.Columns[1].Name = "Name";
+            suppliersDataGridView.Columns[2].Name = "ID";
+            suppliersDataGridView.Columns[3].Name = "Contact";
+            suppliersDataGridView.Columns[4].Name = "VAT No";
+            suppliersDataGridView.Columns[5].Name = "VatStatus";
+
+            suppliersDataGridView.Columns[2].Visible = false;
+            suppliersDataGridView.Columns[5].Visible = false;
+
+            suppliersDataGridView.Columns[0].Width = 90;
+            suppliersDataGridView.Columns[1].Width = 220;
+            suppliersDataGridView.Columns[3].Width = 130;
+            suppliersDataGridView.Columns[4].Width = 120;
+
+            suppliersDataGridView.CellClick += suppliersDataGridView_CellClick;
+            suppliersDataGridView.KeyDown += suppliersDataGridView_KeyDown;
+
+            suppliersDataGridView.Visible = false;
+            this.Controls.Add(suppliersDataGridView);
+            suppliersDataGridView.BringToFront();
         }
+
+        private void RefreshSuppliersData()
+        {
+            try
+            {
+                var supplierSearch = txtSupplierSearch.Text ?? string.Empty;
+
+                var bll = new SupplierBLL();
+                var normalizedSearch = bll.NormalizeSupplierCodeInput(supplierSearch);
+
+                if (_suppressSupplierSearch || !txtSupplierSearch.Focused)
+                {
+                    suppliersDataGridView.Visible = false;
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch))
+                {
+                    DataTable dt = bll.SearchRecord(normalizedSearch) ?? new DataTable();
+                    suppliersDataGridView.Rows.Clear();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string[] row0 = {
+                                dt.Columns.Contains("supplier_code") ? Convert.ToString(dr["supplier_code"]) : "",
+                                (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"]))
+                                    .Trim(),
+                                Convert.ToString(dr["id"]),
+                                dt.Columns.Contains("contact_no") ? Convert.ToString(dr["contact_no"]) : "",
+                                Convert.ToString(dr["vat_no"]),
+                                dt.Columns.Contains("vat_status") ? Convert.ToString(dr["vat_status"]) : ""
+                            };
+                            suppliersDataGridView.Rows.Add(row0);
+                        }
+
+                        suppliersDataGridView.Visible = true;
+                        suppliersDataGridView.ClearSelection();
+                        suppliersDataGridView.CurrentCell = null;
+                        if (suppliersDataGridView.Rows.Count > 0)
+                            suppliersDataGridView.CurrentCell = suppliersDataGridView.Rows[0].Cells[0];
+                    }
+                    else
+                    {
+                        suppliersDataGridView.Visible = false;
+                    }
+                }
+                else
+                {
+                    txtSupplierSearch.Text = "";
+                    ClearSelectedSupplier();
+                    suppliersDataGridView.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+            }
+        }
+
+        private void SelectSupplierFromDataRow(DataRow dr)
+        {
+            _selectedSupplierId = Convert.ToInt32(dr["id"]);
+            txtSupplierSearch.Text = (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"]))
+                .Trim();
+            txt_supplier_vat.Text = Convert.ToString(dr["vat_no"]);
+
+            bool vat_with_status = bool.TryParse(Convert.ToString(dr["vat_status"]), out var vat) && vat;
+            if (vat_with_status)
+                rd_btn_with_vat.Checked = true;
+            else
+                rd_btn_without_vat.Checked = true;
+
+            var bll = new SupplierBLL();
+            DataTable supplier_total_balance = bll.GetSupplierAccountBalance(_selectedSupplierId);
+            if (supplier_total_balance != null && supplier_total_balance.Rows.Count > 0)
+                txt_cust_balance.Text = Convert.ToString(supplier_total_balance.Rows[0]["balance"]);
+            else
+                txt_cust_balance.Text = "";
+        }
+
+        private void ClearSelectedSupplier()
+        {
+            _selectedSupplierId = 0;
+            txt_supplier_vat.Text = "";
+            txt_cust_balance.Text = "";
+        }
+
+        private void SupplierSearchDebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _supplierSearchDebounceTimer.Stop();
+            if (_suppressSupplierSearch || !txtSupplierSearch.Focused) return;
+            RefreshSuppliersData();
+        }
+
+        private void txtSupplierSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_suppressSupplierSearch || !txtSupplierSearch.Focused) return;
+            _supplierSearchDebounceTimer.Stop();
+            _supplierSearchDebounceTimer.Start();
+        }
+
+        private void txtSupplierSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                if (suppliersDataGridView.Visible && suppliersDataGridView.Rows.Count > 0)
+                {
+                    suppliersDataGridView.Focus();
+                    if (suppliersDataGridView.CurrentRow == null)
+                        suppliersDataGridView.CurrentCell = suppliersDataGridView.Rows[0].Cells[0];
+                }
+                return;
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                suppliersDataGridView.Visible = false;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                var bll = new SupplierBLL();
+                var normalizedSearch = bll.NormalizeSupplierCodeInput(txtSupplierSearch.Text);
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch) && normalizedSearch.StartsWith("S-", StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var dt = bll.SearchRecord(normalizedSearch);
+                        if (dt != null && dt.Rows.Count > 0 && dt.Columns.Contains("supplier_code"))
+                        {
+                            var exact = dt.Select("supplier_code = '" + normalizedSearch.Replace("'", "''") + "'");
+                            if (exact.Length == 1)
+                            {
+                                SelectSupplierFromDataRow(exact[0]);
+                                suppliersDataGridView.Visible = false;
+                                grid_purchases.Focus();
+                                return;
+                            }
+                        }
+
+                        // No exact match => clear fields
+                        ClearSelectedSupplier();
+                    }
+                    catch
+                    {
+                    }
+                }
+
+                if (suppliersDataGridView.Visible && suppliersDataGridView.Rows.Count > 0)
+                {
+                    var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+                    int supId;
+                    if (int.TryParse(idText, out supId) && supId > 0)
+                    {
+                        var dt = bll.SearchRecordBySupplierID(supId);
+                        if (dt != null && dt.Rows.Count > 0)
+                            SelectSupplierFromDataRow(dt.Rows[0]);
+                        else
+                            ClearSelectedSupplier();
+                    }
+                    suppliersDataGridView.Visible = false;
+                    grid_purchases.Focus();
+                }
+            }
+
+            _supplierSearchDebounceTimer.Stop();
+            _supplierSearchDebounceTimer.Start();
+        }
+
+        private void txtSupplierSearch_Leave(object sender, EventArgs e)
+        {
+            _supplierSearchDebounceTimer.Stop();
+            if (!suppliersDataGridView.Focused)
+                suppliersDataGridView.Visible = false;
+        }
+
+        private void suppliersDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+                int supId;
+                if (int.TryParse(idText, out supId) && supId > 0)
+                {
+                    var bll = new SupplierBLL();
+                    var dt = bll.SearchRecordBySupplierID(supId);
+                    if (dt != null && dt.Rows.Count > 0)
+                        SelectSupplierFromDataRow(dt.Rows[0]);
+                }
+                suppliersDataGridView.Visible = false;
+                grid_purchases.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                suppliersDataGridView.Visible = false;
+                txtSupplierSearch.Focus();
+            }
+        }
+
+        private void suppliersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+            int supId;
+            if (int.TryParse(idText, out supId) && supId > 0)
+            {
+                var bll = new SupplierBLL();
+                var dt = bll.SearchRecordBySupplierID(supId);
+                if (dt != null && dt.Rows.Count > 0)
+                    SelectSupplierFromDataRow(dt.Rows[0]);
+            }
+
+            suppliersDataGridView.Visible = false;
+            grid_purchases.Focus();
+        }
+
+
+        private void btn_search_products_Click(object sender, EventArgs e)
+        {
+            frm_searchProducts frm_search_product_obj = new frm_searchProducts();
+            frm_search_product_obj.Show();
+
+        }
+
+        // Kept for designer compatibility. Supplier selection is handled via `txtSupplierSearch`.
+        private void cmb_suppliers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+    }
+}

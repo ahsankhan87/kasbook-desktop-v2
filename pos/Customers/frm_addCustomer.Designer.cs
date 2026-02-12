@@ -63,6 +63,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Detail = new System.Windows.Forms.TabPage();
             this.cmb_GL_account_code = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_countryName = new System.Windows.Forms.TextBox();
@@ -77,7 +78,10 @@
             this.txt_citySubdivisionName = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.txt_StreetName = new System.Windows.Forms.TextBox();
+            this.txt_customer_code = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.txt_cr_number = new System.Windows.Forms.TextBox();
             this.txt_registrationName = new System.Windows.Forms.TextBox();
             this.Transactions = new System.Windows.Forms.TabPage();
             this.panelTransactionBottom = new System.Windows.Forms.Panel();
@@ -102,8 +106,6 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
-            this.txt_cr_number = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -275,18 +277,21 @@
             // 
             // tabControl1
             // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.Detail);
             this.tabControl1.Controls.Add(this.Transactions);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // Detail
             // 
             this.Detail.Controls.Add(this.cmb_GL_account_code);
+            this.Detail.Controls.Add(this.label14);
             this.Detail.Controls.Add(this.label12);
             this.Detail.Controls.Add(this.groupBox3);
             this.Detail.Controls.Add(this.label1);
+            this.Detail.Controls.Add(this.txt_customer_code);
             this.Detail.Controls.Add(this.txt_first_name);
             this.Detail.Controls.Add(this.label6);
             this.Detail.Controls.Add(this.txt_vin_no);
@@ -321,6 +326,11 @@
             this.cmb_GL_account_code.FormattingEnabled = true;
             resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
             this.cmb_GL_account_code.Name = "cmb_GL_account_code";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
             // 
             // label12
             // 
@@ -405,10 +415,25 @@
             resources.ApplyResources(this.txt_StreetName, "txt_StreetName");
             this.txt_StreetName.Name = "txt_StreetName";
             // 
+            // txt_customer_code
+            // 
+            resources.ApplyResources(this.txt_customer_code, "txt_customer_code");
+            this.txt_customer_code.Name = "txt_customer_code";
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
+            // 
+            // txt_cr_number
+            // 
+            resources.ApplyResources(this.txt_cr_number, "txt_cr_number");
+            this.txt_cr_number.Name = "txt_cr_number";
             // 
             // txt_registrationName
             // 
@@ -606,16 +631,6 @@
             this.btn_blank.UseVisualStyleBackColor = true;
             this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
             // 
-            // txt_cr_number
-            // 
-            resources.ApplyResources(this.txt_cr_number, "txt_cr_number");
-            this.txt_cr_number.Name = "txt_cr_number";
-            // 
-            // label13
-            // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Name = "label13";
-            // 
             // frm_addCustomer
             // 
             resources.ApplyResources(this, "$this");
@@ -723,5 +738,7 @@
         private System.Windows.Forms.Panel panelTransactionTop;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txt_cr_number;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txt_customer_code;
     }
 }

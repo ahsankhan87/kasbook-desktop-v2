@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="BtnSupplierNameChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 12</value>
+    <value>254, 12</value>
   </data>
   <data name="BtnSupplierNameChange.Text" xml:space="preserve">
     <value>&amp;تغيير المورد</value>
@@ -134,7 +134,7 @@
     <value>أدخل رقم الفاتورة.</value>
   </data>
   <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 12</value>
+    <value>134, 12</value>
   </data>
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 28</value>
@@ -154,21 +154,11 @@
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 12</value>
   </data>
+  <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 28</value>
+  </data>
   <data name="btn_refresh.Text" xml:space="preserve">
-    <value>&amp;ينعش</value>
-  </data>
-  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>850, 9</value>
-  </data>
-  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 25</value>
-  </data>
-  <data name="lbl_taxes_title.Text" xml:space="preserve">
-    <value>جميع معاملات الشراء</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="id.Width" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>&amp;ينعش (F5)</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
@@ -185,8 +175,9 @@
   <data name="purchase_type.HeaderText" xml:space="preserve">
     <value>نوع الشراء</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="purchase_type.Width" type="System.Int32, mscorlib">
-    <value>95</value>
+    <value>88</value>
   </data>
   <data name="discount_value.HeaderText" xml:space="preserve">
     <value>خصم</value>
@@ -214,6 +205,15 @@
   </data>
   <data name="btn_delete.HeaderText" xml:space="preserve">
     <value>يمسح</value>
+  </data>
+  <data name="lbl_taxes_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>850, 9</value>
+  </data>
+  <data name="lbl_taxes_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 25</value>
+  </data>
+  <data name="lbl_taxes_title.Text" xml:space="preserve">
+    <value>جميع معاملات الشراء</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

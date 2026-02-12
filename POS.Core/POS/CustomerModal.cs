@@ -54,5 +54,7 @@ namespace POS.Core
         public int GLAccountID { get; set; } = 0;
 
         public string CRNumber { get; set; }
+        public string customer_code { get; set; }
+
     }
 }

@@ -7,6 +7,69 @@ namespace POS.DLL
 {
     public class CustomerDLL
     {
+        public string NormalizeCustomerCodeInput(string input)
+        {
+            var normalized = (input ?? string.Empty).Trim();
+
+            if (normalized.Length == 0) return normalized;
+
+            // Only normalize when the text is intended to be a customer code.
+            // Examples:
+            //  - "C00012"  => "C-00012"
+            //  - "C-00012" => "C-00012"
+            // Do NOT normalize names like "car" or "customer".
+            bool isCodeNoDash =
+                normalized.Length > 1 &&
+                (normalized[0] == 'C' || normalized[0] == 'c') &&
+                IsAllDigits(normalized.Substring(1));
+
+            bool isCodeWithDash =
+                normalized.Length > 2 &&
+                (normalized[0] == 'C' || normalized[0] == 'c') &&
+                normalized[1] == '-' &&
+                IsAllDigits(normalized.Substring(2));
+
+            if (isCodeNoDash)
+            {
+                normalized = "C-" + normalized.Substring(1);
+            }
+            else if (isCodeWithDash)
+            {
+                normalized = "C" + normalized.Substring(1);
+            }
+
+            return normalized;
+        }
+
+        private static bool IsAllDigits(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!char.IsDigit(s[i])) return false;
+            }
+            return true;
+        }
+
+        public string GetNextCustomerCode()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+                SELECT ISNULL(MAX(TRY_CAST(
+                    CASE 
+                        WHEN customer_code LIKE 'C-%' THEN SUBSTRING(customer_code, 3, 50)
+                        ELSE customer_code
+                    END AS int)), 0)
+                FROM pos_customers
+                WHERE branch_id = @branch_id", cn))
+            {
+                cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cn.Open();
+                int max = Convert.ToInt32(cmd.ExecuteScalar());
+                int nextNum = max + 1;
+                return "C-" + nextNum.ToString("D5");
+            }
+        }
         public DataTable GetAll()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -74,6 +137,7 @@ namespace POS.DLL
                                 FROM pos_customers 
                                 WHERE branch_id = @branch_id 
                                 AND (first_name LIKE @condition OR last_name LIKE @condition 
+                                OR customer_code LIKE @condition
                                 OR vat_no LIKE @condition OR address LIKE @condition OR contact_no LIKE @condition)";
 
                     // Add parameters with precise type and value to prevent SQL injection
@@ -146,6 +210,29 @@ namespace POS.DLL
 
                 cmd.Parameters.Add("first_name", SqlDbType.NVarChar).Value = obj.first_name;
                 cmd.Parameters.Add("last_name", SqlDbType.NVarChar).Value = obj.last_name;
+                string code = string.IsNullOrWhiteSpace(obj.customer_code)
+                    ? GetNextCustomerCode()
+                    : NormalizeCustomerCodeInput(obj.customer_code);
+
+                // If user provided something invalid (e.g. name), ignore it and generate the next valid one.
+                if (string.IsNullOrWhiteSpace(code) || !code.StartsWith("C-") || code.Length < 3)
+                {
+                    code = GetNextCustomerCode();
+                }
+
+                // Prevent duplicates in the same branch
+                using (SqlCommand dupCmd = new SqlCommand(
+                    "SELECT COUNT(1) FROM pos_customers WHERE branch_id=@branch_id AND customer_code=@code", cn))
+                {
+                    dupCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                    dupCmd.Parameters.Add("@code", SqlDbType.NVarChar, 50).Value = code;
+                    cn.Open();
+                    int exists = Convert.ToInt32(dupCmd.ExecuteScalar());
+                    cn.Close();
+                    if (exists > 0)
+                        throw new Exception("Customer code already exists: " + code);
+                }
+                cmd.Parameters.Add("customer_code", SqlDbType.NVarChar).Value = code;
                 cmd.Parameters.Add("email", SqlDbType.NVarChar).Value = obj.email;
                 cmd.Parameters.Add("address", SqlDbType.NVarChar).Value = obj.address;
                 cmd.Parameters.Add("status", SqlDbType.Int).Value = 1; // Assuming status is always active
@@ -193,6 +280,41 @@ namespace POS.DLL
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = obj.id;
                 cmd.Parameters.Add("first_name", SqlDbType.NVarChar).Value = obj.first_name;
                 cmd.Parameters.Add("last_name", SqlDbType.NVarChar).Value = obj.last_name;
+                string code = NormalizeCustomerCodeInput(obj.customer_code);
+                if (string.IsNullOrWhiteSpace(code) || !code.StartsWith("C-") || code.Length < 3)
+                {
+                    using (SqlCommand getCmd = new SqlCommand(
+                        "SELECT customer_code FROM pos_customers WHERE id=@id AND branch_id=@branch_id", cn))
+                    {
+                        getCmd.Parameters.Add("@id", SqlDbType.Int).Value = obj.id;
+                        getCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                        cn.Open();
+                        var existing = getCmd.ExecuteScalar();
+                        cn.Close();
+                        code = existing == null || existing == DBNull.Value ? string.Empty : Convert.ToString(existing);
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(code))
+                {
+                    code = GetNextCustomerCode();
+                }
+
+                // Prevent duplicates in the same branch (excluding the current customer)
+                using (SqlCommand dupCmd = new SqlCommand(
+                    "SELECT COUNT(1) FROM pos_customers WHERE branch_id=@branch_id AND customer_code=@code AND id<>@id", cn))
+                {
+                    dupCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                    dupCmd.Parameters.Add("@code", SqlDbType.NVarChar, 50).Value = code;
+                    dupCmd.Parameters.Add("@id", SqlDbType.Int).Value = obj.id;
+                    cn.Open();
+                    int exists = Convert.ToInt32(dupCmd.ExecuteScalar());
+                    cn.Close();
+                    if (exists > 0)
+                        throw new Exception("Customer code already exists: " + code);
+                }
+
+                cmd.Parameters.Add("customer_code", SqlDbType.NVarChar).Value = code;
                 cmd.Parameters.Add("email", SqlDbType.NVarChar).Value = obj.email;
                 cmd.Parameters.Add("address", SqlDbType.NVarChar).Value = obj.address;
                 cmd.Parameters.Add("status", SqlDbType.Int).Value = 1; // Assuming status is always active

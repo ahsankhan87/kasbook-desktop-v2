@@ -97,7 +97,18 @@ namespace pos
 
         private void frm_all_purchases_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if(e.KeyCode == Keys.F5)
+            {
+                btn_refresh.PerformClick();
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                txt_search.Focus();
+            }
+            if(e.KeyCode == Keys.P && e.Control)
+            {
+                btn_print_invoice.PerformClick();
+            }
         }
 
         private void grid_all_purchases_KeyDown(object sender, KeyEventArgs e)
