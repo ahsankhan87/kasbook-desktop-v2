@@ -131,10 +131,6 @@
   <data name="txt_first_name.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 28</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txt_first_name.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="txt_last_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -146,9 +142,6 @@
   </data>
   <data name="txt_last_name.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 28</value>
-  </data>
-  <data name="txt_last_name.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -177,9 +170,6 @@
   <data name="txt_email.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 28</value>
   </data>
-  <data name="txt_email.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -204,6 +194,7 @@
   <data name="txt_address.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 289</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txt_address.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -263,9 +254,6 @@
   </data>
   <data name="txt_vatno.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 28</value>
-  </data>
-  <data name="txt_vatno.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
   </data>
   <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -437,30 +425,6 @@
   <data name="cmb_GL_account_code.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>731, 98</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 22</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>رمز المورد</value>
-  </data>
-  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>731, 66</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 22</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>GL رقم الحساب</value>
-  </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -562,6 +526,36 @@
   </data>
   <data name="txt_StreetName.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 28</value>
+  </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>731, 98</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 22</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>رمز المورد</value>
+  </data>
+  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>731, 66</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 22</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>GL رقم الحساب</value>
+  </data>
+  <data name="txt_supplier_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_supplier_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 97</value>

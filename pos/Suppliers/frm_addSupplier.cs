@@ -122,6 +122,18 @@ namespace pos
                 );
                 return;
             }
+            var supplierBLL = new SupplierBLL();
+            if(supplierBLL.IsSupplierCodeExists(txt_supplier_code.Text.Trim()))
+            {
+                UiMessages.ShowWarning(
+                    "Supplier code already exists.",
+                    "رمز المورد موجود بالفعل.",
+                    "Validation",
+                    "تحقق"
+                );
+                txt_supplier_code.Focus();
+                return;
+            }
 
             var confirm = UiMessages.ConfirmYesNo(
                 "Save this supplier?",
@@ -261,6 +273,18 @@ namespace pos
                     "Validation",
                     "التحقق"
                 );
+                return;
+            }
+            var supplierBLL = new SupplierBLL();
+            if(supplierBLL.IsSupplierCodeExists(txt_supplier_code.Text.Trim(), int.Parse(txt_id.Text)))
+            {
+                UiMessages.ShowWarning(
+                    "Supplier code already exists.",
+                    "رمز المورد موجود بالفعل.",
+                    "Validation",
+                    "تحقق"
+                );
+                txt_supplier_code.Focus();
                 return;
             }
 

@@ -2080,6 +2080,33 @@ namespace pos
             }
         }
 
+        private void vATDashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form vatDashboard = null;
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f is pos.Reports.Taxes.frm_VatDashboard)
+                {
+                    vatDashboard = f;
+                    break;
+                }
+            }
+
+            if (vatDashboard == null)
+            {
+                vatDashboard = new pos.Reports.Taxes.frm_VatDashboard();
+                vatDashboard.MdiParent = this;
+                vatDashboard.FormClosed += (s, args) => { };
+                vatDashboard.Show();
+            }
+            else
+            {
+                vatDashboard.Activate();
+            }
+        }
+
+
+
         //private void CreateDashboardPanel()
         //{
         //    // Main dashboard container

@@ -64,18 +64,16 @@ namespace pos
 
             // Auto-generate customer code for new customers
 
-            if (string.IsNullOrWhiteSpace(txt_customer_code.Text))
+            try
             {
-                try
-                {
-                    CustomerBLL bll = new CustomerBLL();
-                    txt_customer_code.Text = bll.GetNextCustomerCode();
-                }
-                catch
-                {
-                    // ignore auto-code errors; user can still save and DLL will generate if empty
-                }
+                CustomerBLL bll = new CustomerBLL();
+                txt_customer_code.Text = bll.GetNextCustomerCode();
             }
+            catch
+            {
+                // ignore auto-code errors; user can still save and DLL will generate if empty
+            }
+            
         }
 
         public void get_accounts_dropdownlist()
@@ -184,7 +182,18 @@ namespace pos
                     txt_registrationName.Focus();
                     return;
                 }
-
+                var customerBLL = new CustomerBLL();
+                if (customerBLL.IsCustomerCodeExists(txt_customer_code.Text.Trim()))
+                {
+                    UiMessages.ShowWarning(
+                        "Customer code already exists.",
+                        "رمز العميل موجود بالفعل.",
+                        "Validation",
+                        "تحقق"
+                    );
+                    txt_customer_code.Focus();
+                    return;
+                }
                 var confirm = UiMessages.ConfirmYesNo(
                     "Save this customer?",
                     "هل تريد حفظ هذا العميل؟",
@@ -349,6 +358,19 @@ namespace pos
                         "Not Found",
                         "غير موجود"
                     );
+                    return;
+                }
+
+                var customerBLL = new CustomerBLL();
+                if(customerBLL.IsCustomerCodeExists(txt_customer_code.Text.Trim(), int.Parse(txt_id.Text)))
+                {
+                    UiMessages.ShowWarning(
+                        "Customer code already exists.",
+                        "رمز العميل موجود بالفعل.",
+                        "Validation",
+                        "تحقق"
+                    );
+                    txt_customer_code.Focus();
                     return;
                 }
 

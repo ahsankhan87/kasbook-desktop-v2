@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_first_name = new System.Windows.Forms.TextBox();
             this.txt_last_name = new System.Windows.Forms.TextBox();
             this.txt_email = new System.Windows.Forms.TextBox();
@@ -151,12 +151,12 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_customer_name);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.label21);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
@@ -173,8 +173,8 @@
             // 
             // btn_search
             // 
-            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_search.Name = "btn_search";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
@@ -187,8 +187,8 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -271,8 +271,8 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.tabControl1);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Name = "panel2";
             // 
             // tabControl1
@@ -286,6 +286,7 @@
             // 
             // Detail
             // 
+            resources.ApplyResources(this.Detail, "Detail");
             this.Detail.Controls.Add(this.cmb_GL_account_code);
             this.Detail.Controls.Add(this.label14);
             this.Detail.Controls.Add(this.label12);
@@ -316,15 +317,14 @@
             this.Detail.Controls.Add(this.label9);
             this.Detail.Controls.Add(this.txt_credit_limit);
             this.Detail.Controls.Add(this.lbl_edit_status);
-            resources.ApplyResources(this.Detail, "Detail");
             this.Detail.Name = "Detail";
             this.Detail.UseVisualStyleBackColor = true;
             // 
             // cmb_GL_account_code
             // 
+            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
             this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_GL_account_code.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
             this.cmb_GL_account_code.Name = "cmb_GL_account_code";
             // 
             // label14
@@ -339,6 +339,7 @@
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.txt_countryName);
             this.groupBox3.Controls.Add(this.label27);
             this.groupBox3.Controls.Add(this.txt_buildingNumber);
@@ -351,7 +352,6 @@
             this.groupBox3.Controls.Add(this.txt_citySubdivisionName);
             this.groupBox3.Controls.Add(this.label26);
             this.groupBox3.Controls.Add(this.txt_StreetName);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -442,20 +442,21 @@
             // 
             // Transactions
             // 
+            resources.ApplyResources(this.Transactions, "Transactions");
             this.Transactions.Controls.Add(this.panelTransactionBottom);
             this.Transactions.Controls.Add(this.panelTransactionTop);
-            resources.ApplyResources(this.Transactions, "Transactions");
             this.Transactions.Name = "Transactions";
             this.Transactions.UseVisualStyleBackColor = true;
             // 
             // panelTransactionBottom
             // 
-            this.panelTransactionBottom.Controls.Add(this.grid_customer_transactions);
             resources.ApplyResources(this.panelTransactionBottom, "panelTransactionBottom");
+            this.panelTransactionBottom.Controls.Add(this.grid_customer_transactions);
             this.panelTransactionBottom.Name = "panelTransactionBottom";
             // 
             // grid_customer_transactions
             // 
+            resources.ApplyResources(this.grid_customer_transactions, "grid_customer_transactions");
             this.grid_customer_transactions.AllowUserToAddRows = false;
             this.grid_customer_transactions.AllowUserToDeleteRows = false;
             this.grid_customer_transactions.AllowUserToOrderColumns = true;
@@ -470,7 +471,6 @@
             this.credit,
             this.balance,
             this.description});
-            resources.ApplyResources(this.grid_customer_transactions, "grid_customer_transactions");
             this.grid_customer_transactions.Name = "grid_customer_transactions";
             this.grid_customer_transactions.ReadOnly = true;
             this.grid_customer_transactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -506,9 +506,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -516,9 +516,9 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -526,9 +526,9 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
@@ -542,11 +542,11 @@
             // 
             // panelTransactionTop
             // 
+            resources.ApplyResources(this.panelTransactionTop, "panelTransactionTop");
             this.panelTransactionTop.Controls.Add(this.btn_payment);
             this.panelTransactionTop.Controls.Add(this.btn_trans_refresh);
             this.panelTransactionTop.Controls.Add(this.Btn_printCustomerReceipt);
             this.panelTransactionTop.Controls.Add(this.Btn_ledger_report);
-            resources.ApplyResources(this.panelTransactionTop, "panelTransactionTop");
             this.panelTransactionTop.Name = "panelTransactionTop";
             // 
             // btn_payment
@@ -579,19 +579,19 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Name = "panel3";
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.btn_save);
             this.groupBox2.Controls.Add(this.btn_refresh);
             this.groupBox2.Controls.Add(this.btn_delete);
             this.groupBox2.Controls.Add(this.btn_update);
             this.groupBox2.Controls.Add(this.btn_blank);
             this.groupBox2.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -604,8 +604,8 @@
             // 
             // btn_refresh
             // 
-            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_refresh, "btn_refresh");
+            this.btn_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);

@@ -61,6 +61,7 @@
     <Compile Include="POS\BrandsBLL.cs" />
     <Compile Include="POS\LocationsBLL.cs" />
     <Compile Include="Reports\PurchasesReportBLL.cs" />
+    <Compile Include="Reports\VatDashboardBLL.cs" />
     <Compile Include="Reports\WarehouseReportBLL.cs" />
     <Compile Include="Reports\SalesReportBLL.cs" />
     <Compile Include="POS\UnitsBLL.cs" />

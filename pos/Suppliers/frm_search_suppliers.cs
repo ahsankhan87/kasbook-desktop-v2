@@ -65,8 +65,8 @@ namespace pos
                     SupplierBLL objBLL = new SupplierBLL();
                     grid_search_suppliers.AutoGenerateColumns = false;
 
-                    String condition = txt_search.Text.Trim();
-                    grid_search_suppliers.DataSource = objBLL.SearchRecord(condition);
+                    var normalizedCondition = objBLL.NormalizeSupplierCodeInput(txt_search.Text.Trim());
+                    grid_search_suppliers.DataSource = objBLL.SearchRecord(normalizedCondition);
                 }
             }
             catch (Exception ex)
@@ -87,8 +87,8 @@ namespace pos
                     SupplierBLL objBLL = new SupplierBLL();
                     grid_search_suppliers.AutoGenerateColumns = false;
 
-                    String condition = txt_search.Text.Trim();
-                    grid_search_suppliers.DataSource = objBLL.SearchRecord(condition);
+                    var normalizedCondition = objBLL.NormalizeSupplierCodeInput(txt_search.Text.Trim());
+                    grid_search_suppliers.DataSource = objBLL.SearchRecord(normalizedCondition);
                 }
             }
             catch (Exception ex)

@@ -32,7 +32,7 @@ namespace POS.BLL
             }
             catch
             {
-                
+
                 throw;
             }
         }
@@ -117,6 +117,19 @@ namespace POS.BLL
             catch
             {
 
+                throw;
+            }
+        }
+
+        public bool IsSupplierCodeExists(string Supplier_code, int? excludeSupplierId = null)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.IsSupplierCodeExists(Supplier_code, excludeSupplierId);
+            }
+            catch
+            {
                 throw;
             }
         }

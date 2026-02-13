@@ -61,8 +61,8 @@ namespace pos
                     CustomerBLL objBLL = new CustomerBLL();
                     grid_search_customers.AutoGenerateColumns = false;
 
-                    String condition = txt_search.Text.Trim();
-                    grid_search_customers.DataSource = objBLL.SearchRecord(condition);
+                    var keyword = objBLL.NormalizeCustomerCodeInput(txt_search.Text.Trim());
+                    grid_search_customers.DataSource = objBLL.SearchRecord(keyword);
                 }
             }
             catch (Exception ex)
@@ -83,8 +83,8 @@ namespace pos
                     CustomerBLL objBLL = new CustomerBLL();
                     grid_search_customers.AutoGenerateColumns = false;
 
-                    String condition = txt_search.Text.Trim();
-                    grid_search_customers.DataSource = objBLL.SearchRecord(condition);
+                    var keyword = objBLL.NormalizeCustomerCodeInput(txt_search.Text.Trim());
+                    grid_search_customers.DataSource = objBLL.SearchRecord(keyword);
                 }
             }
             catch (Exception ex)

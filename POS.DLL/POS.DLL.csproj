@@ -67,6 +67,7 @@
     <Compile Include="POS\CompaniesDLL.cs" />
     <Compile Include="POS\BrandsDLL.cs" />
     <Compile Include="POS\LocationsDLL.cs" />
+    <Compile Include="POS\VatDashboardDLL.cs" />
     <Compile Include="Reports\PurchaseReportDLL.cs" />
     <Compile Include="Reports\AccountReportDLL.cs" />
     <Compile Include="Reports\WarehouseReportDLL.cs" />

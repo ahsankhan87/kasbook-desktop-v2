@@ -546,6 +546,9 @@
   <data name="cmb_GL_account_code.Size" type="System.Drawing.Size, System.Drawing">
     <value>293, 30</value>
   </data>
+  <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>768, 52</value>
   </data>
@@ -672,11 +675,17 @@
   <data name="txt_StreetName.Size" type="System.Drawing.Size, System.Drawing">
     <value>267, 28</value>
   </data>
+  <data name="txt_customer_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_customer_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>465, 47</value>
   </data>
   <data name="txt_customer_code.Size" type="System.Drawing.Size, System.Drawing">
     <value>296, 28</value>
+  </data>
+  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>768, 244</value>
@@ -698,6 +707,9 @@
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>اسم التسجيل *</value>
+  </data>
+  <data name="txt_cr_number.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_cr_number.Location" type="System.Drawing.Point, System.Drawing">
     <value>468, 241</value>

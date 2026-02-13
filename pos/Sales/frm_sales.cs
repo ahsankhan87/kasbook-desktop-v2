@@ -1792,11 +1792,23 @@ namespace pos
 
                         txt_shop_qty.Text = shop_qty;
                         txt_company_qty.Text = company_qty;
-                        double tax = (Convert.ToDouble(avg_cost) * tax_rate / 100);
-                        txt_cost_price.Text = Math.Round(Convert.ToDouble(avg_cost), 3).ToString();
-                        txt_total_cost.Text = Math.Round(total_cost_amount, 3).ToString();
-                        txt_cost_price_with_vat.Text = Math.Round(total_cost_amount_e_vat, 3).ToString(); // (total_cost_amount + (total_cost_amount * tax_rate / 100)).ToString();
-                        txt_single_cost_evat.Text = (Math.Round((Convert.ToDouble(avg_cost) + tax), 3)).ToString();
+                        double qty = 0;
+                        if (grid_sales.CurrentRow.Cells["qty"].Value != null && !string.IsNullOrWhiteSpace(grid_sales.CurrentRow.Cells["qty"].Value.ToString()))
+                        {
+                            double.TryParse(grid_sales.CurrentRow.Cells["qty"].Value.ToString(), out qty);
+                        }
+
+                        double unitCost = 0;
+                        double.TryParse(avg_cost, out unitCost);
+                        double unitVat = (unitCost * tax_rate / 100);
+
+                        txt_cost_price.Text = Math.Round(unitCost, 3).ToString();
+                        txt_single_cost_evat.Text = Math.Round((unitCost + unitVat), 3).ToString();
+
+                        double lineTotalCost = qty * unitCost;
+                        double lineTotalCostWithVat = qty * (unitCost + unitVat);
+                        txt_total_cost.Text = Math.Round(lineTotalCost, 3).ToString();
+                        txt_cost_price_with_vat.Text = Math.Round(lineTotalCostWithVat, 3).ToString();
 
                         Purchases_orderBLL poBLL = new Purchases_orderBLL();
                         txt_order_qty.Text = poBLL.GetPOrder_qty(item_number).ToString();
