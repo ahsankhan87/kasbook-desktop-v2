@@ -1805,10 +1805,10 @@ namespace pos
                         txt_cost_price.Text = Math.Round(unitCost, 3).ToString();
                         txt_single_cost_evat.Text = Math.Round((unitCost + unitVat), 3).ToString();
 
-                        double lineTotalCost = qty * unitCost;
-                        double lineTotalCostWithVat = qty * (unitCost + unitVat);
-                        txt_total_cost.Text = Math.Round(lineTotalCost, 3).ToString();
-                        txt_cost_price_with_vat.Text = Math.Round(lineTotalCostWithVat, 3).ToString();
+                        // Show invoice totals (entire grid), not row totals
+                        get_total_cost_amount();
+                        txt_total_cost.Text = Math.Round(total_cost_amount, 3).ToString();
+                        txt_cost_price_with_vat.Text = Math.Round(total_cost_amount_e_vat, 3).ToString();
 
                         Purchases_orderBLL poBLL = new Purchases_orderBLL();
                         txt_order_qty.Text = poBLL.GetPOrder_qty(item_number).ToString();
