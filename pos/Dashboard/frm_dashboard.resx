@@ -297,9 +297,6 @@
   <data name="pnlSalesToday.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="pnlSalesToday.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;pnlSalesToday.Name" xml:space="preserve">
     <value>pnlSalesToday</value>
   </data>
@@ -402,9 +399,6 @@
   <data name="pnlRevenueToday.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="pnlRevenueToday.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;pnlRevenueToday.Name" xml:space="preserve">
     <value>pnlRevenueToday</value>
   </data>
@@ -506,9 +500,6 @@
   </data>
   <data name="pnlLowStock.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="pnlLowStock.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;pnlLowStock.Name" xml:space="preserve">
     <value>pnlLowStock</value>

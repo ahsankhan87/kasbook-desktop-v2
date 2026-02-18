@@ -71,7 +71,7 @@
             this.Label21.ForeColor = System.Drawing.Color.White;
             this.Label21.Location = new System.Drawing.Point(0, 0);
             this.Label21.Name = "Label21";
-            this.Label21.Size = new System.Drawing.Size(641, 25);
+            this.Label21.Size = new System.Drawing.Size(789, 25);
             this.Label21.TabIndex = 3;
             this.Label21.Text = "BACKUP  SETTINGS";
             this.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,7 +112,7 @@
             this.Label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Label9.Location = new System.Drawing.Point(9, 23);
             this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(358, 28);
+            this.Label9.Size = new System.Drawing.Size(317, 23);
             this.Label9.TabIndex = 33;
             this.Label9.Text = "Database Backup Initialize, Please Wait...";
             // 
@@ -131,7 +131,7 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label6.Location = new System.Drawing.Point(24, 332);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(150, 28);
+            this.label6.Size = new System.Drawing.Size(132, 23);
             this.label6.TabIndex = 1360;
             this.label6.Text = "Database Name";
             // 
@@ -139,7 +139,7 @@
             // 
             this.txtDbName.Location = new System.Drawing.Point(194, 117);
             this.txtDbName.Name = "txtDbName";
-            this.txtDbName.Size = new System.Drawing.Size(289, 33);
+            this.txtDbName.Size = new System.Drawing.Size(289, 29);
             this.txtDbName.TabIndex = 1359;
             // 
             // label5
@@ -149,7 +149,7 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label5.Location = new System.Drawing.Point(24, 120);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(164, 28);
+            this.label5.Size = new System.Drawing.Size(146, 23);
             this.label5.TabIndex = 1358;
             this.label5.Text = "Database Name : ";
             // 
@@ -160,7 +160,7 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Location = new System.Drawing.Point(24, 307);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(118, 28);
+            this.label4.Size = new System.Drawing.Size(104, 23);
             this.label4.TabIndex = 1356;
             this.label4.Text = "Backup Path";
             // 
@@ -172,7 +172,7 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label3.Location = new System.Drawing.Point(423, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 28);
+            this.label3.Size = new System.Drawing.Size(60, 23);
             this.label3.TabIndex = 1355;
             this.label3.Text = "Date : ";
             // 
@@ -183,7 +183,7 @@
             this.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DateTimePicker1.Location = new System.Drawing.Point(492, 30);
             this.DateTimePicker1.Name = "DateTimePicker1";
-            this.DateTimePicker1.Size = new System.Drawing.Size(147, 33);
+            this.DateTimePicker1.Size = new System.Drawing.Size(147, 29);
             this.DateTimePicker1.TabIndex = 1348;
             // 
             // Label8
@@ -193,7 +193,7 @@
             this.Label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Label8.Location = new System.Drawing.Point(8, 273);
             this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(233, 40);
+            this.Label8.Size = new System.Drawing.Size(196, 32);
             this.Label8.TabIndex = 1353;
             this.Label8.Text = "Manually Backup";
             // 
@@ -202,7 +202,7 @@
             this.LinkLabel1.AutoSize = true;
             this.LinkLabel1.Location = new System.Drawing.Point(173, 63);
             this.LinkLabel1.Name = "LinkLabel1";
-            this.LinkLabel1.Size = new System.Drawing.Size(0, 28);
+            this.LinkLabel1.Size = new System.Drawing.Size(0, 23);
             this.LinkLabel1.TabIndex = 1352;
             this.LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
@@ -213,7 +213,7 @@
             this.Label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Label7.Location = new System.Drawing.Point(24, 63);
             this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(196, 28);
+            this.Label7.Size = new System.Drawing.Size(172, 23);
             this.Label7.TabIndex = 1351;
             this.Label7.Text = "Save Directory Path : ";
             // 
@@ -253,9 +253,9 @@
             this.label13.BackColor = System.Drawing.Color.SteelBlue;
             this.label13.Dock = System.Windows.Forms.DockStyle.Right;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(639, 25);
+            this.label13.Location = new System.Drawing.Point(787, 25);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(2, 379);
+            this.label13.Size = new System.Drawing.Size(2, 417);
             this.label13.TabIndex = 1362;
             // 
             // label22
@@ -263,9 +263,9 @@
             this.label22.BackColor = System.Drawing.Color.SteelBlue;
             this.label22.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label22.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(0, 402);
+            this.label22.Location = new System.Drawing.Point(0, 440);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(639, 2);
+            this.label22.Size = new System.Drawing.Size(787, 2);
             this.label22.TabIndex = 1363;
             // 
             // label20
@@ -275,7 +275,7 @@
             this.label20.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Location = new System.Drawing.Point(0, 25);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(2, 377);
+            this.label20.Size = new System.Drawing.Size(2, 415);
             this.label20.TabIndex = 1364;
             // 
             // Timer1
@@ -291,7 +291,7 @@
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Location = new System.Drawing.Point(134, 307);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(0, 28);
+            this.linkLabel2.Size = new System.Drawing.Size(0, 23);
             this.linkLabel2.TabIndex = 1365;
             // 
             // linkLabel3
@@ -299,7 +299,7 @@
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.Location = new System.Drawing.Point(134, 332);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(0, 28);
+            this.linkLabel3.Size = new System.Drawing.Size(0, 23);
             this.linkLabel3.TabIndex = 1366;
             // 
             // label1
@@ -309,7 +309,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label1.Location = new System.Drawing.Point(24, 89);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(287, 28);
+            this.label1.Size = new System.Drawing.Size(252, 23);
             this.label1.TabIndex = 1367;
             this.label1.Text = "Auto Backup Time Span (Days): ";
             // 
@@ -318,7 +318,7 @@
             this.txtSpan.Location = new System.Drawing.Point(223, 89);
             this.txtSpan.MaxLength = 2;
             this.txtSpan.Name = "txtSpan";
-            this.txtSpan.Size = new System.Drawing.Size(57, 33);
+            this.txtSpan.Size = new System.Drawing.Size(57, 29);
             this.txtSpan.TabIndex = 1368;
             this.txtSpan.Text = "0";
             this.txtSpan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSpan_KeyPress);
@@ -328,7 +328,7 @@
             this.txtNoOfFiles.Location = new System.Drawing.Point(492, 89);
             this.txtNoOfFiles.MaxLength = 2;
             this.txtNoOfFiles.Name = "txtNoOfFiles";
-            this.txtNoOfFiles.Size = new System.Drawing.Size(57, 33);
+            this.txtNoOfFiles.Size = new System.Drawing.Size(57, 29);
             this.txtNoOfFiles.TabIndex = 1370;
             this.txtNoOfFiles.Text = "5";
             this.txtNoOfFiles.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSpan_KeyPress);
@@ -340,7 +340,7 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Location = new System.Drawing.Point(347, 89);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(221, 28);
+            this.label2.Size = new System.Drawing.Size(195, 23);
             this.label2.TabIndex = 1369;
             this.label2.Text = "No Of Backup To Keep : ";
             // 
@@ -351,7 +351,7 @@
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label10.Location = new System.Drawing.Point(8, 28);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(190, 40);
+            this.label10.Size = new System.Drawing.Size(160, 32);
             this.label10.TabIndex = 1371;
             this.label10.Text = "Backup Setup";
             // 
@@ -371,7 +371,7 @@
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label12.Location = new System.Drawing.Point(8, 196);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(226, 40);
+            this.label12.Size = new System.Drawing.Size(188, 32);
             this.label12.TabIndex = 1373;
             this.label12.Text = "Last Backup Info";
             // 
@@ -387,10 +387,10 @@
             // 
             // FrmDbBackup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(641, 404);
+            this.ClientSize = new System.Drawing.Size(789, 442);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.lblLastBackupInfo);
             this.Controls.Add(this.label12);

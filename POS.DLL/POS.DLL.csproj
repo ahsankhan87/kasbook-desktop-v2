@@ -45,6 +45,7 @@
     <Compile Include="Accounts\AccountsDLL.cs" />
     <Compile Include="Accounts\GroupsDLL.cs" />
     <Compile Include="Dashboard\DashboardDLL.cs" />
+    <Compile Include="POS\BackupDLL.cs" />
     <Compile Include="POS\BanksDLL.cs" />
     <Compile Include="POS\CustomerDLL.cs" />
     <Compile Include="POS\CustomerDLL_old.cs" />

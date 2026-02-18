@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using pos.Security.Authorization;
 using POS.BLL;
@@ -42,6 +36,9 @@ namespace pos
         
         public void frm_addCustomer_Load(object sender, EventArgs e)
         {
+            // Apply professional theme
+            AppTheme.Apply(this);
+
             txt_search.Focus();
             this.ActiveControl = txt_search;
             get_accounts_dropdownlist();
@@ -57,6 +54,9 @@ namespace pos
             //grid_customer_transactions.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerView);
             // Add further UI elements here as needed, e.g. delete/report buttons/menus.
         }
+
+       
+        
         private void GetCustomerCode()
         {
             // Customer code should not be edited for existing customers
@@ -607,7 +607,8 @@ namespace pos
                 style.Font = new Font(grid_customer_transactions.Font, FontStyle.Bold);
 
                 // Set the background color
-                style.BackColor = Color.LightGray;
+                style.BackColor = Color.FromArgb(245, 246, 248);
+                style.ForeColor = Color.FromArgb(0, 0, 0);
 
                 // Apply the style to the current cell
                 cell.Style = style;

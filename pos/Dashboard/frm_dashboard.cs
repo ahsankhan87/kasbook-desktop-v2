@@ -1,8 +1,10 @@
 ﻿using com.sun.org.apache.xerces.@internal.impl.dtd.models;
 using pos.Sales;
 using pos.Security.Authorization;
+using pos.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,7 +36,10 @@ namespace pos.Dashboard
         {
             if (DesignMode || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
                 return;
-            
+
+            // Apply professional theme
+            AppTheme.Apply(this);
+
             var company = POS.Core.UsersModal.logged_in_company_name;
             var branch = POS.Core.UsersModal.logged_in_branch_name;
             var fy = POS.Core.UsersModal.fiscal_year;
@@ -61,8 +66,269 @@ namespace pos.Dashboard
             btnPurchasesReport.Click += (s, a) => OpenPurchasesReport?.Invoke();
             btnSettings.Click += (s, a) => OpenSettings?.Invoke();
 
+            // Apply stunning visual theme
+            StyleDashboard();
+
             // Load metrics from BLL
             LoadDashboardMetrics();
+        }
+
+        // ── Colour palette ───────────────────────────────────────────────────
+        private static readonly Color _bg           = Color.FromArgb(245, 247, 250);  // page background
+        private static readonly Color _header1      = Color.FromArgb(15,  76, 129);   // header gradient start
+        private static readonly Color _header2      = Color.FromArgb(0,  120, 212);   // header gradient end
+        private static readonly Color _cardBg       = Color.White;
+        private static readonly Color _cardBorder   = Color.FromArgb(225, 230, 238);
+        private static readonly Color _accent1      = Color.FromArgb(46,  204, 113);  // green  – today sales
+        private static readonly Color _accent2      = Color.FromArgb(52,  152, 219);  // blue   – monthly
+        private static readonly Color _accent3      = Color.FromArgb(231,  76,  60);  // red    – low stock
+        private static readonly Color _sectionHdr   = Color.FromArgb(52,  73,  94);   // section label
+        private static readonly Color _listHdr      = Color.FromArgb(235, 239, 245);
+        private static readonly Color _listAlt      = Color.FromArgb(250, 251, 253);
+
+        // Quick-access button accent colours (one per button in order)
+        private static readonly Color[] _btnColors = {
+            Color.FromArgb(0,  120, 212),  // New Sale      – MS Blue
+            Color.FromArgb(0,  153, 188),  // New Purchase  – Teal
+            Color.FromArgb(16, 124,  16),  // Products      – Green
+            Color.FromArgb(0,  120, 212),  // Customers     – Blue
+            Color.FromArgb(136,  0, 153),  // Suppliers     – Purple
+            Color.FromArgb(255, 140,   0), // Purchases Rpt – Orange
+            Color.FromArgb(96,  94,  92),  // Settings      – Slate
+            Color.FromArgb(0,  178, 148),  // Sales Report  – Teal-green
+        };
+
+        /// <summary>
+        /// Applies the full visual redesign to every control on the dashboard.
+        /// Called once from Load, after texts and data are set.
+        /// </summary>
+        private void StyleDashboard()
+        {
+            // ── Page background ──────────────────────────────────────────────
+            this.BackColor = _bg;
+
+            // ── Header banner ────────────────────────────────────────────────
+            headerPanel.BackColor = _header1;   // real gradient via Paint
+            headerPanel.Paint    -= HeaderPanel_Paint;
+            headerPanel.Paint    += HeaderPanel_Paint;
+            headerPanel.Height    = 90;
+            headerPanel.Padding   = new System.Windows.Forms.Padding(20, 0, 20, 0);
+
+            bool isRtl = headerPanel.RightToLeft == RightToLeft.Yes;
+
+            // Title: left-aligned for en-US, right-aligned for ar-SA
+            lblTitle.Font      = new Font("Segoe UI Semibold", 20F, FontStyle.Regular);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.AutoSize  = true;
+            lblTitle.Anchor    = isRtl
+                ? (AnchorStyles.Top | AnchorStyles.Right)
+                : (AnchorStyles.Top | AnchorStyles.Left);
+            lblTitle.Location  = new Point(
+                isRtl ? headerPanel.Width - lblTitle.PreferredWidth - 24 : 24,
+                14);
+
+            // Subtitle: same horizontal side as title, below it
+            lblSubtitle.Font      = new Font("Segoe UI", 9.5F, FontStyle.Regular);
+            lblSubtitle.ForeColor = Color.FromArgb(210, 230, 255);
+            lblSubtitle.AutoSize  = true;
+            lblSubtitle.Anchor    = isRtl
+                ? (AnchorStyles.Top | AnchorStyles.Right)
+                : (AnchorStyles.Top | AnchorStyles.Left);
+            lblSubtitle.Location  = new Point(
+                isRtl ? headerPanel.Width - lblSubtitle.PreferredWidth - 24 : 24,
+                56);
+
+            // Re-anchor subtitle to stretch when resized (en-US only, RTL auto-adapts via Right anchor)
+            if (!isRtl)
+            {
+                lblSubtitle.AutoSize = false;
+                lblSubtitle.Anchor   = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                lblSubtitle.Width    = headerPanel.Width - 48;
+            }
+
+            // ── Summary cards ────────────────────────────────────────────────
+            summaryPanel.BackColor = _bg;
+            summaryPanel.Padding   = new System.Windows.Forms.Padding(10, 12, 10, 6);
+
+            StyleSummaryCard(pnlSalesToday,    panelSalesColor,    lblSalesTitle,    lblSalesValue,    _accent1);
+            StyleSummaryCard(pnlRevenueToday,  panelRevenueColor,  lblRevenueTitle,  lblRevenueValue,  _accent2);
+            StyleSummaryCard(pnlLowStock,      panelLowStockColor, lblLowStockTitle, lblLowStockValue, _accent3);
+
+            // ── Section label – Quick Access ──────────────────────────────────
+            lblQuickAccess.Font      = new Font("Segoe UI Semibold", 10F, FontStyle.Regular);
+            lblQuickAccess.ForeColor = _sectionHdr;
+
+            // ── Quick-access button strip ─────────────────────────────────────
+            quickAccessPanel.BackColor = _bg;
+            quickAccessPanel.Padding   = new System.Windows.Forms.Padding(12, 8, 12, 8);
+            quickAccessPanel.MinimumSize = new System.Drawing.Size(0, 110);
+
+            var qaBtns = new[] { btnNewSale, btnNewPurchase, btnProducts, btnCustomers,
+                                 btnSuppliers, btnPurchasesReport, btnSettings, btnSalesReport };
+            for (int i = 0; i < qaBtns.Length; i++)
+            {
+                if (qaBtns[i] == null) continue;
+                StyleQuickButton(qaBtns[i], i < _btnColors.Length ? _btnColors[i] : AppTheme.Primary);
+            }
+
+            // ── Section label – Recent Activity ──────────────────────────────
+            lblRecent.Font      = new Font("Segoe UI Semibold", 10F, FontStyle.Regular);
+            lblRecent.ForeColor = _sectionHdr;
+
+            // ── Recent activity list ──────────────────────────────────────────
+            listRecent.BackColor        = _cardBg;
+            listRecent.ForeColor        = AppTheme.TextPrimary;
+            listRecent.Font             = new Font("Segoe UI", 9.5F, FontStyle.Regular);
+            listRecent.BorderStyle      = BorderStyle.FixedSingle;
+            listRecent.GridLines        = false;
+            listRecent.FullRowSelect    = true;
+            listRecent.HeaderStyle      = ColumnHeaderStyle.Nonclickable;
+
+            // Colour alternating rows via OwnerDraw
+            listRecent.OwnerDraw      = true;
+            listRecent.DrawColumnHeader -= ListRecent_DrawColumnHeader;
+            listRecent.DrawItem        -= ListRecent_DrawItem;
+            listRecent.DrawSubItem     -= ListRecent_DrawSubItem;
+            listRecent.DrawColumnHeader += ListRecent_DrawColumnHeader;
+            listRecent.DrawItem        += ListRecent_DrawItem;
+            listRecent.DrawSubItem     += ListRecent_DrawSubItem;
+        }
+
+        // ── Paint handlers ───────────────────────────────────────────────────
+
+        private void HeaderPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            var p = (Panel)sender;
+            using (var brush = new System.Drawing.Drawing2D.LinearGradientBrush(
+                p.ClientRectangle, _header1, _header2,
+                System.Drawing.Drawing2D.LinearGradientMode.Horizontal))
+            {
+                e.Graphics.FillRectangle(brush, p.ClientRectangle);
+            }
+            // Thin luminous bottom border
+            using (var pen = new Pen(Color.FromArgb(80, 255, 255, 255), 1))
+                e.Graphics.DrawLine(pen, 0, p.Height - 1, p.Width, p.Height - 1);
+        }
+
+        private void ListRecent_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            using (var bg = new SolidBrush(_listHdr))
+                e.Graphics.FillRectangle(bg, e.Bounds);
+            using (var pen = new Pen(_cardBorder, 1))
+                e.Graphics.DrawRectangle(pen, e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI Semibold", 8.75F),
+                e.Bounds, _sectionHdr, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+        }
+
+        private void ListRecent_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = false; // handled per sub-item
+        }
+
+        private void ListRecent_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            Color bg = e.ItemIndex % 2 == 0 ? _cardBg : _listAlt;
+            if ((e.Item.Selected))
+                bg = AppTheme.PrimaryLight;
+
+            using (var brush = new SolidBrush(bg))
+                e.Graphics.FillRectangle(brush, e.Bounds);
+
+            // Subtle bottom separator
+            using (var pen = new Pen(Color.FromArgb(20, 0, 0, 0), 1))
+                e.Graphics.DrawLine(pen, e.Bounds.Left, e.Bounds.Bottom - 1, e.Bounds.Right, e.Bounds.Bottom - 1);
+
+            var textColor = e.ColumnIndex == 0 ? AppTheme.Primary : AppTheme.TextPrimary;
+            TextRenderer.DrawText(e.Graphics, e.SubItem.Text,
+                new Font("Segoe UI", 9.5F, e.ColumnIndex == 0 ? FontStyle.Bold : FontStyle.Regular),
+                System.Drawing.Rectangle.Inflate(e.Bounds, -4, 0),
+                textColor,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+        }
+
+        // ── Per-control helpers ──────────────────────────────────────────────
+
+        private static void StyleSummaryCard(Panel card, Panel accentBar,
+            Label title, Label value, Color accent)
+        {
+            card.BackColor   = _cardBg;
+            card.BorderStyle = BorderStyle.None;
+
+            // Drop-shadow illusion via Paint
+            card.Paint -= (s, e) => { };
+            card.Paint += (s, e) =>
+            {
+                var g = e.Graphics;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                // outer border
+                using (var pen = new Pen(_cardBorder, 1))
+                    g.DrawRectangle(pen, 0, 0, card.Width - 1, card.Height - 1);
+            };
+
+            // Accent left-bar
+            accentBar.BackColor = accent;
+            accentBar.Width     = 6;
+            accentBar.Dock      = DockStyle.Left;
+
+            title.Font      = new Font("Segoe UI", 9F, FontStyle.Regular);
+            title.ForeColor = Color.FromArgb(100, 100, 110);
+
+            value.Font      = new Font("Segoe UI Semibold", 22F, FontStyle.Bold);
+            value.ForeColor = Color.FromArgb(30, 30, 40);
+        }
+
+        private static void StyleQuickButton(Button btn, Color accent)
+        {
+            Color hoverColor = Color.FromArgb(
+                Math.Min(255, accent.R + 40),
+                Math.Min(255, accent.G + 40),
+                Math.Min(255, accent.B + 40));
+            Color pressColor = Color.FromArgb(
+                Math.Max(0, accent.R - 30),
+                Math.Max(0, accent.G - 30),
+                Math.Max(0, accent.B - 30));
+            Color borderAccent = Color.FromArgb(
+                Math.Max(0, accent.R - 20),
+                Math.Max(0, accent.G - 20),
+                Math.Max(0, accent.B - 20));
+
+            btn.BackColor  = accent;
+            btn.ForeColor  = Color.White;
+            btn.FlatStyle  = FlatStyle.Flat;
+            btn.Font       = new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
+            btn.Cursor     = Cursors.Hand;
+            btn.Height     = 80;
+            btn.Width      = 175;
+            btn.Margin     = new System.Windows.Forms.Padding(8, 6, 8, 6);
+            btn.Padding    = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            btn.TextAlign  = ContentAlignment.MiddleCenter;
+
+            btn.FlatAppearance.BorderSize        = 0;
+            btn.FlatAppearance.MouseOverBackColor = hoverColor;
+            btn.FlatAppearance.MouseDownBackColor = pressColor;
+
+            // Explicit mouse events for a clearly distinguishable hover/press state
+            btn.MouseEnter += (s, e) =>
+            {
+                btn.BackColor = hoverColor;
+                btn.FlatAppearance.BorderSize  = 2;
+                btn.FlatAppearance.BorderColor = Color.White;
+            };
+            btn.MouseLeave += (s, e) =>
+            {
+                btn.BackColor = accent;
+                btn.FlatAppearance.BorderSize = 0;
+            };
+            btn.MouseDown += (s, e) =>
+            {
+                btn.BackColor = pressColor;
+                btn.FlatAppearance.BorderColor = Color.FromArgb(180, 255, 255, 255);
+            };
+            btn.MouseUp += (s, e) =>
+            {
+                btn.BackColor = hoverColor;
+                btn.FlatAppearance.BorderColor = Color.White;
+            };
         }
 
         private void ApplyEnglishTexts()

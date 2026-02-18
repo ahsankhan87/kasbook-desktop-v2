@@ -5,6 +5,7 @@ using pos.Security.Authorization;
 using pos.UI;
 using POS.Core;
 using POS.DLL;
+using POS.BLL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,6 +26,7 @@ namespace pos
         {
             Thread.CurrentThread.CurrentUICulture
                = new System.Globalization.CultureInfo(lang);
+
             InitializeComponent();
 
             // Tag menu and toolbar items with permission keys (DB-backed)
@@ -33,10 +35,14 @@ namespace pos
             {
                 LoadAllMenus();
             }
+
         }
 
         private void frm_main_Load(object sender, EventArgs e)
         {
+            // Apply professional theme
+            UI.AppTheme.Apply(this);
+
             this.Text = "Nozum ERP - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
             // Re-apply DB-backed permissions to ensure module-based enabling can't elevate privileges
@@ -640,6 +646,34 @@ namespace pos
 
         private void frm_main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Only prompt on user-initiated close
+            if (e.CloseReason != CloseReason.UserClosing)
+                return;
+
+            try
+            {
+                var backupBll = new BackupBLL();
+                if (!backupBll.HasBackupInLastDays(7))
+                {
+                    var backupWarn = UiMessages.ConfirmYesNo(
+                        "No database backup was taken in the last 7 days.\n\nDo you still want to exit?",
+                        "لم يتم أخذ نسخة احتياطية لقاعدة البيانات خلال آخر 7 أيام.\n\nهل تريد الخروج؟",
+                        captionEn: "Backup Reminder",
+                        captionAr: "تذكير النسخ الاحتياطي",
+                        defaultButton: MessageBoxDefaultButton.Button2);
+
+                    if (backupWarn == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+            }
+            catch
+            {
+                // If backup check fails, do not block closing.
+            }
+
             var result = UiMessages.ConfirmYesNo(
                 "Are you sure you want to exit the application?",
                 "هل أنت متأكد أنك تريد إغلاق التطبيق؟",

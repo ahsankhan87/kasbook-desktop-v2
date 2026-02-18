@@ -1470,6 +1470,7 @@
       <DependentUpon>SupplierPaymentReceipt.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\AppTheme.cs" />
     <Compile Include="UI\Busy\BusyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2293,9 +2294,6 @@
     <EmbeddedResource Include="Reports\Sales\frm_sales_invoice.resx">
       <DependentUpon>frm_sales_invoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\frm_sales.ar-SD.resx">
-      <DependentUpon>frm_sales.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_sales_v1.ar-SA.resx">
       <DependentUpon>frm_sales_v1.cs</DependentUpon>
     </EmbeddedResource>
@@ -2518,7 +2516,6 @@
   <ItemGroup>
     <Folder Include="Accounts\Reports\Trial Balance\" />
     <Folder Include="Properties\DataSources\" />
-    <Folder Include="UI\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

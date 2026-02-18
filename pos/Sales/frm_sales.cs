@@ -91,6 +91,10 @@ namespace pos
 
         private void frm_sales_Load(object sender, EventArgs e)
         {
+            // Apply professional theme
+            AppTheme.Apply(this);
+            StyleSalesForm();
+
             this.Text = "Sale Invoice ";
             grid_sales.Rows.Add();
             this.ActiveControl = grid_sales;
@@ -153,6 +157,247 @@ namespace pos
 
         }
 
+        /// <summary>
+        /// POS-specific styling applied after the generic Fluent theme.
+        /// Gives the sales page a Dynamics 365–like professional look.
+        /// </summary>
+        private void StyleSalesForm()
+        {
+            // ── Classic Windows grey panels ───────────────────────────
+            panel_header.BackColor = SystemColors.Control;
+            panel_footer.BackColor = SystemColors.Control;
+            panel_grid.BackColor = SystemColors.Control;
+
+            // ── GroupBoxes: standard Windows look ─────────────────────
+            foreach (Control ctrl in panel_header.Controls)
+            {
+                if (ctrl is GroupBox grp)
+                {
+                    grp.BackColor = SystemColors.Control;
+                    grp.ForeColor = SystemColors.ControlText;
+                    grp.Font = AppTheme.FontGroupBox;
+                    grp.Padding = new Padding(4, 8, 4, 4);
+
+                    foreach (Control child in grp.Controls)
+                    {
+                        if (child is ComboBox cmb)
+                        {
+                            cmb.BackColor = SystemColors.Window;
+                            cmb.FlatStyle = FlatStyle.Standard;
+                        }
+                    }
+                }
+            }
+
+            // ── Title label ───────────────────────────────────────────
+            lbl_title.Font = AppTheme.FontHeader;
+            lbl_title.ForeColor = SystemColors.ControlText;
+
+            // ── ToolStrip: classic Windows system renderer ────────────
+            SalesToolStrip.RenderMode = ToolStripRenderMode.System;
+            SalesToolStrip.BackColor = SystemColors.Control;
+            SalesToolStrip.ForeColor = SystemColors.ControlText;
+            SalesToolStrip.ImageScalingSize = new Size(20, 20);
+            SalesToolStrip.AutoSize = true;
+            SalesToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            SalesToolStrip.Padding = new Padding(4, 2, 4, 2);
+            foreach (ToolStripItem item in SalesToolStrip.Items)
+            {
+                item.ForeColor = SystemColors.ControlText;
+                item.Padding = new Padding(4, 2, 4, 2);
+                item.Margin = new Padding(1, 0, 1, 0);
+                if (item is ToolStripButton tsb)
+                {
+                    tsb.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                    tsb.TextImageRelation = TextImageRelation.ImageBeforeText;
+                }
+            }
+
+            // ── Sales grid: clean Dynamics-style ──────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.SetProperty,
+                null, grid_sales, new object[] { true });
+            grid_sales.ColumnHeadersHeight = 38;
+            grid_sales.RowTemplate.Height = 34;
+            grid_sales.RowHeadersVisible = false;
+            grid_sales.BackgroundColor = SystemColors.AppWorkspace;
+            grid_sales.DefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+            grid_sales.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+
+            // Serial number column: muted, centered
+            sno.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.GrayText,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.GrayText,
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                Font = AppTheme.FontSmall
+            };
+
+            // Code column
+            code.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            // Delete button column styling
+            btn_delete.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                ForeColor = AppTheme.Danger,
+                SelectionForeColor = AppTheme.Danger,
+                Alignment = DataGridViewContentAlignment.MiddleCenter
+            };
+            btn_delete.FlatStyle = FlatStyle.Flat;
+
+            // ── Footer: professional totals area ──────────────────
+            // Style TableLayoutPanels as white card sections on gray footer
+            StyleFooterCard(tableLayoutPanel5);
+            StyleFooterCard(tableLayoutPanel6);
+            StyleFooterCard(tableLayoutPanel7);
+            StyleFooterCard(tableLayoutPanel8);
+
+            // groupBox2 (product info)
+            groupBox2.BackColor = SystemColors.Control;
+            groupBox2.ForeColor = SystemColors.ControlText;
+            groupBox2.Font = AppTheme.FontGroupBox;
+
+            // ── Main totals labels ──────────────────────────────
+            StyleFooterLabel(label14, false);      // Sub Total
+            StyleFooterLabel(label13, false);      // Discount
+            StyleFooterLabel(label9, true);        // Total Amount
+            chkbox_is_taxable.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
+            chkbox_is_taxable.ForeColor = SystemColors.ControlText;
+
+            // ── Secondary labels (tableLayoutPanel7) ──────────────────
+            StyleFooterLabel(label22, false);      // Net After Disc
+            StyleFooterLabel(label23, false);      // Total Qty
+
+            // ── Received / Change labels (tableLayoutPanel8) ──────────
+            StyleFooterLabel(label24, false);      // Received
+            StyleFooterLabel(label25, false);      // Change
+
+            // ── Total fields — large and prominent ────────────────────
+            StyleTotalField(txt_total_amount, true);       // Grand total: HERO
+            StyleTotalField(txt_sub_total, false);
+            StyleTotalField(txt_sub_total_2, false);
+            StyleTotalField(txt_total_tax, false);
+            StyleTotalField(txt_total_discount, false);
+            StyleTotalField(txt_total_qty, false);
+            StyleSecondaryField(txt_change_amount);
+            StyleSecondaryField(txt_amount_received);
+
+            // ── Cost fields: subtle muted look ────────────────────────
+            StyleCostField(txt_cost_price);
+            StyleCostField(txt_cost_price_with_vat);
+            StyleCostField(txt_single_cost_evat);
+            StyleCostField(txt_total_cost);
+            StyleCostField(txt_shop_qty);
+            StyleCostField(txt_company_qty);
+            StyleCostField(txt_order_qty);
+
+            // ── Customer search dropdown ──────────────────────────────
+            if (customersDataGridView != null)
+            {
+                StyleDropdownGrid(customersDataGridView);
+            }
+        }
+
+        /// <summary>Style a summary total field in the footer.</summary>
+        private static void StyleTotalField(TextBox txt, bool isPrimary)
+        {
+            txt.ReadOnly = true;
+            txt.BorderStyle = BorderStyle.Fixed3D;
+            txt.TextAlign = HorizontalAlignment.Right;
+            if (isPrimary)
+            {
+                txt.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+                txt.ForeColor = SystemColors.WindowText;
+                txt.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                txt.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Regular);
+                txt.ForeColor = SystemColors.WindowText;
+                txt.BackColor = SystemColors.Window;
+            }
+        }
+
+        /// <summary>Style a secondary footer field (received / change).</summary>
+        private static void StyleSecondaryField(TextBox txt)
+        {
+            txt.BorderStyle = BorderStyle.Fixed3D;
+            txt.TextAlign = HorizontalAlignment.Right;
+            txt.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
+            txt.ForeColor = SystemColors.WindowText;
+            txt.BackColor = SystemColors.Window;
+        }
+
+        /// <summary>Style a cost-info read-only field.</summary>
+        private static void StyleCostField(TextBox txt)
+        {
+            txt.ReadOnly = true;
+            txt.BorderStyle = BorderStyle.Fixed3D;
+            txt.TextAlign = HorizontalAlignment.Right;
+            txt.Font = AppTheme.FontDefault;
+            txt.ForeColor = SystemColors.GrayText;
+            txt.BackColor = SystemColors.Control;
+        }
+
+        /// <summary>Style a popup DataGridView dropdown (brands / categories / customers).</summary>
+        private static void StyleDropdownGrid(DataGridView dgv)
+        {
+            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.BackgroundColor = SystemColors.AppWorkspace;
+            dgv.GridColor = SystemColors.ControlDark;
+            dgv.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = SystemColors.WindowText,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+            dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText
+            };
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersVisible = false;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.RowTemplate.Height = 28;
+            dgv.ColumnHeadersHeight = 32;
+        }
+
+        /// <summary>Style a footer TableLayoutPanel.</summary>
+        private static void StyleFooterCard(TableLayoutPanel tlp)
+        {
+            tlp.BackColor = SystemColors.Control;
+        }
+
+        /// <summary>Style a footer label.</summary>
+        private static void StyleFooterLabel(Label lbl, bool isPrimary)
+        {
+            if (isPrimary)
+            {
+                lbl.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+                lbl.ForeColor = SystemColors.ControlText;
+            }
+            else
+            {
+                lbl.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular);
+                lbl.ForeColor = SystemColors.ControlText;
+            }
+        }
+
         Form frm_searchSaleProducts_obj;
 
         private void grid_sales_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -194,8 +439,8 @@ namespace pos
 
                 }
 
-                // Handle the end of editing for numeric columns (3, 4, 5, 6, 7)
-                if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7)
+                // Handle the end of editing for numeric columns (Qty=4, unit_price=5, discount=6, discount_percent=7, total_without_vat=8)
+                if (e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7 || e.ColumnIndex == 8)
                 {
                     var cell = grid_sales.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     // If the cell value is null or empty, set it to 0
@@ -553,7 +798,7 @@ namespace pos
                     double current_sub_total = Convert.ToDouble(qty) * unit_price + tax - discount;
 
 
-                    string[] row0 = { id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
+                    string[] row0 = { "", id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
                     sub_total_without_vat.ToString(), tax.ToString(), current_sub_total.ToString(), location_code, unit, category,
                     btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
                     item_type, category_code, grid_item_number};
@@ -1415,7 +1660,18 @@ namespace pos
                     int iColumn = grid_sales.CurrentCell.ColumnIndex;
                     int iRow = grid_sales.CurrentCell.RowIndex;
 
-                    if (iColumn <= 8)
+                    int snoIdx = grid_sales.Columns["sno"].Index;
+                    int idIdx = grid_sales.Columns["id"].Index;
+                    int codeIdx = grid_sales.Columns["code"].Index;
+
+                    if (iColumn == snoIdx || iColumn == idIdx)
+                    {
+                        grid_sales.CurrentCell = grid_sales.Rows[iRow].Cells[codeIdx];
+                        grid_sales.Focus();
+                        grid_sales.CurrentCell.Selected = true;
+                        grid_sales.BeginEdit(true);
+                    }
+                    else if (iColumn <= 9)
                     {
                         if (grid_sales.Rows[iRow].Cells["code"].Value != null && grid_sales.Rows[iRow].Cells["unit_price"].Value != null && grid_sales.Rows[iRow].Cells["qty"].Value != null)
                         {
@@ -1425,7 +1681,7 @@ namespace pos
                             //grid_sales.BeginEdit(true);
                         }
                     }
-                    else if (iColumn > 8)
+                    else if (iColumn > 9)
                     {
                         if (grid_sales.Rows[iRow].Cells["code"].Value != null && grid_sales.Rows[iRow].Cells["unit_price"].Value != null && grid_sales.Rows[iRow].Cells["qty"].Value != null)
                         {
@@ -1580,7 +1836,7 @@ namespace pos
                         double current_sub_total = Convert.ToDouble(qty) * unit_price + tax - discount;
 
 
-                        string[] row0 = { id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
+                        string[] row0 = { "", id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
                                             sub_total_without_vat.ToString(), tax.ToString(), current_sub_total.ToString(), location_code, unit, category,
                                             btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
                                             item_type, category_code, item_number};
@@ -1640,8 +1896,8 @@ namespace pos
 
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
-            if (grid_sales.CurrentCell.ColumnIndex == 3 || grid_sales.CurrentCell.ColumnIndex == 4 || grid_sales.CurrentCell.ColumnIndex == 5
-                || grid_sales.CurrentCell.ColumnIndex == 6 || grid_sales.CurrentCell.ColumnIndex == 7) //qty, unit price and discount Column will accept only numeric
+            if (grid_sales.CurrentCell.ColumnIndex == 4 || grid_sales.CurrentCell.ColumnIndex == 5 || grid_sales.CurrentCell.ColumnIndex == 6
+                || grid_sales.CurrentCell.ColumnIndex == 7 || grid_sales.CurrentCell.ColumnIndex == 8) //qty, unit price and discount Column will accept only numeric
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -1821,12 +2077,8 @@ namespace pos
 
         private void grid_sales_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            //for Serial No. in grid
-            using (SolidBrush b = new SolidBrush(grid_sales.RowHeadersDefaultCellStyle.ForeColor))
-            {
-                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
-            }
-            //grid_sales.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
+            // Populate the frozen serial-number column automatically
+            grid_sales.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
         }
 
         private void updateProductToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1937,6 +2189,7 @@ namespace pos
 
             this.Controls.Add(brandsDataGridView);
             brandsDataGridView.BringToFront();
+            StyleDropdownGrid(brandsDataGridView);
 
         }
 
@@ -2060,6 +2313,7 @@ namespace pos
 
             this.Controls.Add(categoriesDataGridView);
             categoriesDataGridView.BringToFront();
+            StyleDropdownGrid(categoriesDataGridView);
 
         }
 
@@ -2186,6 +2440,7 @@ namespace pos
 
             this.Controls.Add(groupsDataGridView);
             groupsDataGridView.BringToFront();
+            StyleDropdownGrid(groupsDataGridView);
 
         }
 
@@ -3126,8 +3381,8 @@ namespace pos
 
         private void grid_sales_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            // Validate only the numeric columns (3, 4, 5, 6, 7)
-            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7)
+            // Validate only the numeric columns (Qty=4, unit_price=5, discount=6, discount_percent=7, total_without_vat=8)
+            if (e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7 || e.ColumnIndex == 8)
             {
                 // Check if the value is null or empty
                 if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
@@ -3240,6 +3495,7 @@ namespace pos
             customersDataGridView.Visible = false;
             this.Controls.Add(customersDataGridView);
             customersDataGridView.BringToFront();
+            StyleDropdownGrid(customersDataGridView);
 
         }
 
@@ -3624,6 +3880,11 @@ namespace pos
                 ); 
                 return false;
             }
+        }
+
+        private void panel_footer_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

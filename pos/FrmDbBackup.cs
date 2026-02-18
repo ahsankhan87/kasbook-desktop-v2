@@ -153,7 +153,7 @@ namespace pos
                 cmd.Parameters.AddWithValue("@DATABASE", txtDbName.Text); // Your Database Name
                 cmd.Parameters.AddWithValue("@FILEPATH", filaPath);
                 cmd.Parameters.AddWithValue("@BackupName", linkLabel3.Text);
-                cmd.Parameters.AddWithValue("@SoftwareDate", Convert.ToDateTime(DateTimePicker1.Text));
+                cmd.Parameters.Add("@SoftwareDate", SqlDbType.DateTime).Value = DateTimePicker1.Value;
                 cmd.Parameters.AddWithValue("@Type", "Manually");
                 numFlag = cmd.ExecuteNonQuery();
                 DataTable dtLoc = new DataTable();

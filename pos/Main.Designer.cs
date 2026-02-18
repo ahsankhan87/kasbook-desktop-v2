@@ -277,6 +277,7 @@
             this.englishToolStripMenuItem,
             this.arabicToolStripMenuItem});
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+
             // 
             // englishToolStripMenuItem
             // 
