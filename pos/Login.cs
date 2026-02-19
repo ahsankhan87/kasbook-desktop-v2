@@ -1,5 +1,6 @@
 ﻿using POS.BLL;
 using POS.Core;
+using pos.UI;
 using System;
 using System.Data;
 using System.Drawing;
@@ -19,34 +20,187 @@ namespace pos
         
         private void Frm_Login_Load(object sender, EventArgs e)
         {
+            StyleLoginForm();
+
             TxtUsername.Focus();
             this.ActiveControl = TxtUsername;
             ActivateTxtUsername();
-           
+
             if (is_company_exist())
-            {
                 BtnRegister.Visible = false;
-            }
             else
-            {
                 BtnRegister.Visible = true;
+        }
+
+        // ────────────────────────────────────────────────────────────────────
+        //  LOGIN FORM STYLING
+        // ────────────────────────────────────────────────────────────────────
+        private void StyleLoginForm()
+        {
+            // ── Form ──────────────────────────────────────────────────────
+            this.BackColor = AppTheme.Surface;
+            this.Font      = AppTheme.FontDefault;
+
+            // ── Left brand panel (primary blue) ───────────────────────────
+            panel1.BackColor = AppTheme.Primary;
+            panel1.Padding   = new Padding(24, 20, 24, 20);
+
+            label2.Font      = new Font("Segoe UI", 20F, FontStyle.Bold);          // app name
+            label2.ForeColor = Color.White;
+            label2.BackColor = Color.Transparent;
+            // Center label2 horizontally below the logo
+            label2.AutoSize     = false;
+            label2.TextAlign    = ContentAlignment.MiddleCenter;
+            label2.Left         = 0;
+            label2.Width        = panel1.ClientSize.Width;
+            label2.Height       = 36;
+            label2.Top          = pictureBox3.Bottom + 8;
+
+            Color subTextColor = Color.FromArgb(210, 232, 255);
+            foreach (Label lbl in new[] { label3, label4, label5, label6 })
+            {
+                lbl.Font      = new Font("Segoe UI", 13F, FontStyle.Regular);
+                lbl.ForeColor = subTextColor;
+                lbl.BackColor = Color.Transparent;
             }
+
+            label1.Font      = new Font("Segoe UI", 8F, FontStyle.Regular);
+            label1.ForeColor = Color.FromArgb(160, 200, 240);
+            label1.BackColor = Color.Transparent;
+
+            linkLabel2.Font            = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            linkLabel2.LinkColor       = Color.FromArgb(180, 220, 255);
+            linkLabel2.ActiveLinkColor = Color.White;
+            linkLabel2.BackColor       = Color.Transparent;
+
+            // Divider accent line below logo — drawn by painting panel1
+            panel1.Paint -= Panel1_Paint;
+            panel1.Paint += Panel1_Paint;
+
+            // ── Right form panel ──────────────────────────────────────────
+            panel2.BackColor   = AppTheme.Surface;
+            panel2.BorderStyle = BorderStyle.None;
+
+            // Heading
+            label7.Font      = new Font("Segoe UI Semibold", 15F, FontStyle.Regular);
+            label7.ForeColor = AppTheme.TextPrimary;
+            label7.BackColor = AppTheme.Surface;
+            label7.Text      = "Sign In";
+
+            // Input panels — set to inactive state initially
+            StyleInputPanel(panel3, TxtUsername, active: false);
+            StyleInputPanel(panel4, TxtPassword, active: false);
+
+            // Login button
+            BtnLogin.FlatStyle  = FlatStyle.Flat;
+            BtnLogin.FlatAppearance.BorderSize         = 0;
+            BtnLogin.FlatAppearance.MouseOverBackColor = AppTheme.PrimaryDark;
+            BtnLogin.FlatAppearance.MouseDownBackColor = AppTheme.PrimaryDarker;
+            BtnLogin.BackColor  = AppTheme.Primary;
+            BtnLogin.ForeColor  = Color.White;
+            BtnLogin.Font       = new Font("Segoe UI Semibold", 10.5F, FontStyle.Bold);
+            BtnLogin.Cursor     = Cursors.Hand;
+            BtnLogin.UseVisualStyleBackColor = false;
+            BtnLogin.Text       = "Sign In";
+
+            // Register button
+            BtnRegister.FlatStyle  = FlatStyle.Flat;
+            BtnRegister.FlatAppearance.BorderSize = 0;
+            BtnRegister.BackColor  = AppTheme.Accent;
+            BtnRegister.ForeColor  = Color.White;
+            BtnRegister.Font       = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            BtnRegister.Cursor     = Cursors.Hand;
+            BtnRegister.UseVisualStyleBackColor = false;
+
+            // Close button — minimal ✕
+            Btn_close.FlatStyle  = FlatStyle.Flat;
+            Btn_close.FlatAppearance.BorderSize         = 0;
+            Btn_close.FlatAppearance.MouseOverBackColor = AppTheme.DangerLight;
+            Btn_close.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 190, 190);
+            Btn_close.BackColor  = Color.Transparent;
+            Btn_close.ForeColor  = AppTheme.TextSecondary;
+            Btn_close.Font       = new Font("Segoe UI", 13F, FontStyle.Regular);
+            Btn_close.Cursor     = Cursors.Hand;
+            Btn_close.Text       = "✕";
+
+            // Forget password link-style button
+            Btn_forget_password.FlatStyle  = FlatStyle.Flat;
+            Btn_forget_password.FlatAppearance.BorderSize = 0;
+            Btn_forget_password.BackColor  = Color.Transparent;
+            Btn_forget_password.ForeColor  = AppTheme.Primary;
+            Btn_forget_password.Font       = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            Btn_forget_password.Cursor     = Cursors.Hand;
+
+            // Support section
+            foreach (Label lbl in new[] { label8, label9, label10, label11 })
+            {
+                lbl.Font      = new Font("Segoe UI", 8F, FontStyle.Regular);
+                lbl.ForeColor = AppTheme.TextDisabled;
+                lbl.BackColor = AppTheme.Surface;
+            }
+            label8.ForeColor = AppTheme.TextSecondary;
+
+            linkLabel1.Font            = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            linkLabel1.LinkColor       = AppTheme.Primary;
+            linkLabel1.ActiveLinkColor = AppTheme.PrimaryDark;
+            linkLabel1.BackColor       = AppTheme.Surface;
+        }
+
+        // Accent divider on the blue brand panel
+        private void Panel1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            int y = pictureBox3.Bottom + 12;
+            using (var pen = new System.Drawing.Pen(Color.FromArgb(80, Color.White), 1))
+                e.Graphics.DrawLine(pen, 20, y, panel1.Width - 20, y);
+        }
+
+        // Style an input panel; active=true shows a Primary blue left accent border
+        private static void StyleInputPanel(Panel pnl, TextBox txt, bool active)
+        {
+            Color bg = active ? AppTheme.PrimarySubtle : AppTheme.Background;
+
+            pnl.BorderStyle = BorderStyle.None;
+            pnl.BackColor   = bg;
+            pnl.Padding     = new Padding(0);
+
+            txt.BackColor   = bg;
+            txt.ForeColor   = AppTheme.TextPrimary;
+            txt.Font        = new Font("Segoe UI", 11F, FontStyle.Regular);
+            txt.BorderStyle = BorderStyle.None;
+
+            foreach (Control child in pnl.Controls)
+                if (child is PictureBox pb) pb.BackColor = bg;
+
+            // Paint a 2 px bottom-border accent to show focus state
+            pnl.Paint -= InputPanel_Paint;
+            pnl.Paint += InputPanel_Paint;
+        }
+
+        // Owner-drawn bottom border for the input panels
+        private static void InputPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            var pnl = (Panel)sender;
+            bool active = pnl.BackColor == AppTheme.PrimarySubtle;
+            Color lineColor = active ? AppTheme.Primary : AppTheme.BorderStrong;
+            int thickness  = active ? 2 : 1;
+            using (var pen = new System.Drawing.Pen(lineColor, thickness))
+                e.Graphics.DrawLine(pen, 0, pnl.Height - thickness,
+                    pnl.Width, pnl.Height - thickness);
         }
 
         private void ActivateTxtUsername()
         {
-            TxtUsername.BackColor = Color.White;
-            panel3.BackColor = Color.White;
-            TxtPassword.BackColor = SystemColors.Control;
-            panel4.BackColor = SystemColors.Control;
-
+            StyleInputPanel(panel3, TxtUsername, active: true);
+            StyleInputPanel(panel4, TxtPassword, active: false);
+            panel3.Invalidate();
+            panel4.Invalidate();
         }
         private void ActivateTxtPassword()
         {
-            TxtPassword.BackColor = Color.White;
-            panel4.BackColor = Color.White;
-            TxtUsername.BackColor = SystemColors.Control;
-            panel3.BackColor = SystemColors.Control;
+            StyleInputPanel(panel4, TxtPassword, active: true);
+            StyleInputPanel(panel3, TxtUsername, active: false);
+            panel4.Invalidate();
+            panel3.Invalidate();
         }
 
         private void TxtUsername_Click(object sender, EventArgs e)

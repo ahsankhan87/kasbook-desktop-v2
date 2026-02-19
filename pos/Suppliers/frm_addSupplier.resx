@@ -133,8 +133,9 @@
   <data name="&gt;&gt;btn_save.Name" xml:space="preserve">
     <value>btn_save</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>panel3</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 32</value>
   </data>
   <data name="Btn_printPaymentReceipt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -142,9 +143,8 @@
   <data name="label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 244</value>
+    <value>371, 244</value>
   </data>
   <data name="&gt;&gt;label9.Name" xml:space="preserve">
     <value>label9</value>
@@ -154,7 +154,7 @@
     <value>3</value>
   </data>
   <data name="txt_buildingNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 24</value>
+    <value>219, 24</value>
   </data>
   <data name="account_name.HeaderText" xml:space="preserve">
     <value>Account</value>
@@ -165,8 +165,8 @@
   <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="&gt;&gt;label26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txt_first_name.Name" xml:space="preserve">
     <value>txt_first_name</value>
@@ -184,16 +184,16 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 281</value>
+    <value>4, 314</value>
   </data>
   <data name="panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="&gt;&gt;txt_vatno.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPage1</value>
   </data>
   <data name="label23.Text" xml:space="preserve">
     <value>Building Number</value>
@@ -207,11 +207,11 @@
   <data name="&gt;&gt;label23.Name" xml:space="preserve">
     <value>label23</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="txt_first_name.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="txt_contact_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 244</value>
+    <value>119, 193</value>
   </data>
   <data name="grid_supplier_transactions.Size" type="System.Drawing.Size, System.Drawing">
     <value>834, 471</value>
@@ -246,23 +246,23 @@
   <data name="grid_supplier_transactions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;btn_payment.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
+  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>8</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>VAT No.</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 18</value>
-  </data>
-  <data name="txt_vatno.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
   </data>
   <data name="lbl_edit_status.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -280,7 +280,7 @@
     <value>NoControl</value>
   </data>
   <data name="txt_address.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 99</value>
+    <value>317, 206</value>
   </data>
   <data name="lbl_edit_status.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -291,20 +291,17 @@
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label22.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;lbl_edit_status.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cmb_GL_account_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 84</value>
+    <value>119, 58</value>
   </data>
   <data name="btn_delete.Text" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
-  <data name="&gt;&gt;lbl_customer_name.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="btn_trans_refresh.Text" xml:space="preserve">
+    <value>Re&amp;fresh</value>
   </data>
   <data name="&gt;&gt;txt_cityName.Name" xml:space="preserve">
     <value>txt_cityName</value>
@@ -312,26 +309,20 @@
   <data name="txt_cityName.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+  <data name="&gt;&gt;txt_last_name.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="chk_vat_status.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="txt_StreetName.Location" type="System.Drawing.Point, System.Drawing">
     <value>136, 38</value>
   </data>
   <data name="txt_last_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 148</value>
-  </data>
-  <data name="&gt;&gt;txt_StreetName.Name" xml:space="preserve">
-    <value>txt_StreetName</value>
+    <value>119, 112</value>
   </data>
   <data name="&gt;&gt;label21.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -351,14 +342,14 @@
   <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
-  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 17</value>
   </data>
   <data name="btn_payment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;balance.Name" xml:space="preserve">
+    <value>balance</value>
   </data>
   <data name="&gt;&gt;txt_buildingNumber.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -369,8 +360,11 @@
   <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 34</value>
   </data>
-  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 267</value>
+  <data name="label25.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;label22.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -381,6 +375,9 @@
   <data name="&gt;&gt;label25.Name" xml:space="preserve">
     <value>label25</value>
   </data>
+  <data name="&gt;&gt;cmb_GL_account_code.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
@@ -389,6 +386,12 @@
   </data>
   <data name="txt_supplier_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btn_save.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="Btn_printPaymentReceipt.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 28</value>
@@ -405,9 +408,6 @@
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
@@ -415,10 +415,7 @@
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txt_first_name.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="panelTransactionTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 56</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -432,20 +429,20 @@
   <data name="&gt;&gt;account_name.Name" xml:space="preserve">
     <value>account_name</value>
   </data>
-  <data name="&gt;&gt;txt_supplier_code.Name" xml:space="preserve">
-    <value>txt_supplier_code</value>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_id" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cmb_GL_account_code" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_supplier_code" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_first_name" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_last_name" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_vatno" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_address" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_email" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_contact_no" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,26.20865,Percent,73.79135" /&gt;&lt;Rows Styles="Percent,6.49652,Percent,6.49652,Percent,6.49652,Percent,6.49652,Percent,6.49652,Percent,6.49652,Percent,6.49652,Percent,6.49652,Percent,48.02784" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="panelTransactionTop.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;txt_email.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btn_trans_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 11</value>
-  </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;chk_vat_status.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -459,20 +456,17 @@
   <data name="txt_cityName.Location" type="System.Drawing.Point, System.Drawing">
     <value>136, 128</value>
   </data>
-  <data name="txt_postalCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 121</value>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
   </data>
   <data name="btn_payment.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 28</value>
   </data>
   <data name="&gt;&gt;txt_address.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>14</value>
   </data>
-  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
   </data>
   <data name="&gt;&gt;grid_supplier_transactions.Name" xml:space="preserve">
     <value>grid_supplier_transactions</value>
@@ -489,17 +483,17 @@
   <data name="lbl_edit_status.Text" xml:space="preserve">
     <value>lbl_edit_status</value>
   </data>
-  <data name="btn_save.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;txt_postalCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="grid_supplier_transactions.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="txt_last_name.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -507,23 +501,29 @@
   <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
     <value>btn_delete</value>
   </data>
+  <data name="txt_last_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="txt_last_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
+  </data>
+  <data name="Btn_printPaymentReceipt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>578, 11</value>
   </data>
   <data name="balance.HeaderText" xml:space="preserve">
     <value>Balance</value>
   </data>
-  <data name="&gt;&gt;balance.Name" xml:space="preserve">
-    <value>balance</value>
+  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;chk_vat_status.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txt_supplier_code.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>Invoice No.</value>
@@ -538,7 +538,7 @@
     <value>10</value>
   </data>
   <data name="chk_vat_status.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;credit.Name" xml:space="preserve">
     <value>credit</value>
@@ -552,11 +552,11 @@
   <data name="txt_citySubdivisionName.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;debit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;txt_cityName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 71</value>
@@ -564,17 +564,11 @@
   <data name="&gt;&gt;lbl_edit_status.Name" xml:space="preserve">
     <value>lbl_edit_status</value>
   </data>
-  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;panel3.Name" xml:space="preserve">
     <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -583,16 +577,16 @@
     <value>57, 17</value>
   </data>
   <data name="&gt;&gt;txt_id.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 20</value>
+    <value>119, 4</value>
   </data>
-  <data name="&gt;&gt;label26.Name" xml:space="preserve">
-    <value>label26</value>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 249</value>
+    <value>4, 194</value>
   </data>
   <data name="Btn_ledger_report.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -600,29 +594,32 @@
   <data name="panelTransactionBottom.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="Btn_ledger_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>First Name</value>
+  <data name="&gt;&gt;btn_refresh.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 17</value>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Detail</value>
   </data>
   <data name="txt_citySubdivisionName.Location" type="System.Drawing.Point, System.Drawing">
     <value>136, 98</value>
   </data>
-  <data name="&gt;&gt;txt_first_name.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="txt_contact_no.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;txt_first_name.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
   </data>
   <data name="chk_vat_status.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 21</value>
+    <value>97, 21</value>
   </data>
-  <data name="&gt;&gt;txt_buildingNumber.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 86</value>
   </data>
   <data name="lbl_customer_name.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -631,7 +628,7 @@
     <value>groupBox3</value>
   </data>
   <data name="txt_countryName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 24</value>
+    <value>219, 24</value>
   </data>
   <data name="&gt;&gt;label23.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -654,11 +651,11 @@
   <data name="lbl_customer_name.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt, style=Bold</value>
   </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
     <value>tabPage1</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Btn_ledger_report.Name" xml:space="preserve">
     <value>Btn_ledger_report</value>
@@ -669,11 +666,17 @@
   <data name="balance.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 16</value>
   </data>
   <data name="&gt;&gt;txt_last_name.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="credit.HeaderText" xml:space="preserve">
+    <value>Credit</value>
   </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
@@ -687,23 +690,35 @@
   <data name="&gt;&gt;id.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 174</value>
   </data>
   <data name="txt_citySubdivisionName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 24</value>
+    <value>219, 24</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 21</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btn_blank.Parent" xml:space="preserve">
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;txt_contact_no.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;txt_email.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="txt_StreetName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -712,7 +727,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -735,6 +750,9 @@
   <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -745,28 +763,25 @@
     <value>txt_id</value>
   </data>
   <data name="txt_supplier_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
   </data>
   <data name="btn_blank.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;txt_countryName.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;cmb_GL_account_code.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txt_contact_no.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="txt_countryName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 188</value>
   </data>
   <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -783,11 +798,11 @@
   <data name="lbl_customer_name.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
   </data>
-  <data name="btn_delete.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 48</value>
   </data>
-  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 101</value>
+  <data name="btn_delete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 232</value>
   </data>
   <data name="txt_address.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -798,32 +813,29 @@
   <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="txt_contact_no.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 24</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 89</value>
+    <value>4, 59</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 17</value>
   </data>
-  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 41</value>
+  <data name="&gt;&gt;panelTransactionBottom.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txt_email.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 212</value>
+    <value>119, 166</value>
   </data>
   <data name="&gt;&gt;label22.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelTransactionBottom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;txt_countryName.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="txt_id.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -835,22 +847,28 @@
     <value>430, 21</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 153</value>
+    <value>4, 113</value>
   </data>
   <data name="txt_StreetName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 24</value>
+    <value>219, 24</value>
   </data>
   <data name="&gt;&gt;label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>3</value>
   </data>
   <data name="chk_vat_status.Text" xml:space="preserve">
-    <value>Cost with VAT status</value>
+    <value>VAT Status</value>
   </data>
-  <data name="&gt;&gt;txt_address.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 267</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>tabPage1</value>
   </data>
   <data name="panelTransactionTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -858,17 +876,11 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Address</value>
   </data>
-  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmb_GL_account_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_StreetName.Parent" xml:space="preserve">
-    <value>groupBox3</value>
   </data>
   <data name="id.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -876,8 +888,8 @@
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="txt_id.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
     <value>tabPage1</value>
@@ -892,7 +904,7 @@
     <value>label5</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
+    <value>84, 17</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
@@ -912,11 +924,14 @@
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 17</value>
   </data>
-  <data name="panelTransactionTop.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="&gt;&gt;debit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="txt_supplier_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 52</value>
+    <value>119, 31</value>
   </data>
   <data name="label26.Text" xml:space="preserve">
     <value>Postal Code</value>
@@ -934,37 +949,40 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 185</value>
+    <value>4, 140</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;txt_vatno.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
-  <data name="&gt;&gt;panelTransactionBottom.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="txt_postalCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 17</value>
   </data>
-  <data name="grid_supplier_transactions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="label27.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="label27.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 24</value>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 217</value>
+    <value>4, 167</value>
   </data>
-  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 190</value>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
   </data>
   <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -982,7 +1000,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cmb_GL_account_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
   </data>
   <data name="label24.Text" xml:space="preserve">
     <value>City Subdivision</value>
@@ -990,8 +1008,11 @@
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="Btn_printPaymentReceipt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>578, 11</value>
+  <data name="txt_contact_no.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="txt_first_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -999,11 +1020,11 @@
   <data name="&gt;&gt;grid_supplier_transactions.Parent" xml:space="preserve">
     <value>panelTransactionBottom</value>
   </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
+    <value>groupBox3</value>
   </data>
   <data name="txt_email.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
   </data>
   <data name="&gt;&gt;label21.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1011,8 +1032,8 @@
   <data name="label27.Text" xml:space="preserve">
     <value>Country:</value>
   </data>
-  <data name="&gt;&gt;btn_blank.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1023,8 +1044,8 @@
   <data name="txt_first_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
+  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 41</value>
   </data>
   <data name="&gt;&gt;btn_cancel.Name" xml:space="preserve">
     <value>btn_cancel</value>
@@ -1032,26 +1053,38 @@
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;txt_supplier_code.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>10</value>
+  </data>
+  <data name="txt_first_name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 85</value>
   </data>
   <data name="txt_vatno.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 180</value>
+    <value>119, 139</value>
+  </data>
+  <data name="btn_update.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 138</value>
   </data>
   <data name="label22.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
   <data name="chk_vat_status.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 30</value>
+    <value>23, 21</value>
   </data>
   <data name="&gt;&gt;label23.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1068,8 +1101,8 @@
   <data name="label27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 34</value>
+  <data name="btn_cancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Btn_ledger_report.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 28</value>
@@ -1087,16 +1120,13 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;txt_contact_no.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 20</value>
+    <value>466, 20</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1003, 58</value>
@@ -1119,8 +1149,14 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Btn_printPaymentReceipt.Text" xml:space="preserve">
+    <value>Print &amp;Receipt</value>
+  </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
+  </data>
+  <data name="label22.Text" xml:space="preserve">
+    <value>Street Name</value>
   </data>
   <data name="&gt;&gt;btn_blank.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1128,8 +1164,8 @@
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Transactions</value>
   </data>
-  <data name="panelTransactionBottom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 471</value>
+  <data name="&gt;&gt;txt_buildingNumber.Name" xml:space="preserve">
+    <value>txt_buildingNumber</value>
   </data>
   <data name="btn_delete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1144,13 +1180,16 @@
     <value>Supplier name</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="btn_blank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 560</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lbl_customer_name.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Purchase Parameter</value>
   </data>
   <data name="debit.HeaderText" xml:space="preserve">
     <value>Debit</value>
@@ -1158,8 +1197,8 @@
   <data name="&gt;&gt;txt_vatno.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;credit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;txt_supplier_code.Name" xml:space="preserve">
+    <value>txt_supplier_code</value>
   </data>
   <data name="&gt;&gt;label27.Name" xml:space="preserve">
     <value>label27</value>
@@ -1200,20 +1239,23 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Btn_printPaymentReceipt.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;txt_cityName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="debit.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="btn_trans_refresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 28</value>
+  </data>
   <data name="&gt;&gt;txt_contact_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 174</value>
+  <data name="btn_update.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Btn_printPaymentReceipt.Text" xml:space="preserve">
-    <value>Print &amp;Receipt</value>
+  <data name="grid_supplier_transactions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1228,7 +1270,7 @@
     <value>True</value>
   </data>
   <data name="txt_postalCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 24</value>
+    <value>219, 24</value>
   </data>
   <data name="&gt;&gt;btn_refresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1239,11 +1281,14 @@
   <data name="&gt;&gt;panel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="txt_address.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="Btn_printPaymentReceipt.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="txt_vatno.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1251,11 +1296,8 @@
   <data name="&gt;&gt;Btn_printPaymentReceipt.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="&gt;&gt;label22.Name" xml:space="preserve">
-    <value>label22</value>
+  <data name="&gt;&gt;btn_payment.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 17</value>
@@ -1278,6 +1320,9 @@
   <data name="&gt;&gt;txt_id.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="txt_supplier_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
   <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
     <value>txt_search</value>
   </data>
@@ -1296,8 +1341,8 @@
   <data name="&gt;&gt;lbl_customer_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Last Name</value>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txt_buildingNumber.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -1311,17 +1356,20 @@
   <data name="chk_vat_status.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
   <data name="&gt;&gt;panelTransactionTop.Parent" xml:space="preserve">
     <value>tabPage2</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="&gt;&gt;txt_StreetName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label24.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="txt_countryName.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1342,10 +1390,10 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="txt_countryName.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;txt_StreetName.Parent" xml:space="preserve">
+    <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;txt_last_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1354,13 +1402,16 @@
     <value>Action</value>
   </data>
   <data name="&gt;&gt;txt_email.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
   </data>
-  <data name="&gt;&gt;cmb_GL_account_code.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 101</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1368,29 +1419,41 @@
   <data name="lbl_edit_status.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 483</value>
   </data>
-  <data name="txt_first_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 116</value>
+  <data name="txt_cityName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 24</value>
   </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 119</value>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;txt_buildingNumber.Name" xml:space="preserve">
-    <value>txt_buildingNumber</value>
+  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 34</value>
+  </data>
+  <data name="label24.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 57</value>
+  <data name="txt_email.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="btn_update.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;label25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_edit_status.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>1</value>
   </data>
-  <data name="btn_update.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 190</value>
   </data>
   <data name="label23.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1398,11 +1461,14 @@
   <data name="&gt;&gt;btn_save.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="txt_contact_no.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;label22.Name" xml:space="preserve">
+    <value>label22</value>
   </data>
   <data name="&gt;&gt;description.Name" xml:space="preserve">
     <value>description</value>
+  </data>
+  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
   </data>
   <data name="txt_last_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1410,8 +1476,8 @@
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>848, 560</value>
   </data>
-  <data name="txt_first_name.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 78</value>
   </data>
   <data name="btn_payment.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1422,11 +1488,8 @@
   <data name="&gt;&gt;txt_countryName.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="&gt;&gt;btn_cancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="txt_vatno.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
   </data>
   <data name="&gt;&gt;txt_address.Name" xml:space="preserve">
     <value>txt_address</value>
@@ -1434,20 +1497,26 @@
   <data name="&gt;&gt;btn_payment.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="txt_supplier_code.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="txt_email.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Contact No.</value>
   </data>
-  <data name="label22.Text" xml:space="preserve">
-    <value>Street Name</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;btn_delete.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1458,17 +1527,14 @@
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>346, 17</value>
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 17</value>
-  </data>
   <data name="&gt;&gt;btn_trans_refresh.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;btn_refresh.Name" xml:space="preserve">
+    <value>btn_refresh</value>
   </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>First Name *</value>
   </data>
   <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1482,17 +1548,17 @@
   <data name="txt_countryName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="panelTransactionBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>834, 471</value>
   </data>
   <data name="btn_search.Text" xml:space="preserve">
     <value>&amp;Search</value>
   </data>
   <data name="txt_first_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 25</value>
+    <value>4, 5</value>
   </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
@@ -1501,13 +1567,13 @@
     <value>3</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lbl_customer_name.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label26.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;txt_StreetName.Name" xml:space="preserve">
+    <value>txt_StreetName</value>
   </data>
   <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1515,20 +1581,17 @@
   <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="&gt;&gt;Btn_printPaymentReceipt.Name" xml:space="preserve">
     <value>Btn_printPaymentReceipt</value>
   </data>
-  <data name="btn_trans_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 28</value>
-  </data>
-  <data name="btn_payment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 11</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Detail</value>
+  <data name="Btn_ledger_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_buildingNumber.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1539,8 +1602,8 @@
   <data name="&gt;&gt;debit.Name" xml:space="preserve">
     <value>debit</value>
   </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;txt_last_name.Name" xml:space="preserve">
     <value>txt_last_name</value>
@@ -1548,8 +1611,8 @@
   <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>panel2</value>
+  <data name="btn_trans_refresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 11</value>
   </data>
   <data name="label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1560,8 +1623,8 @@
   <data name="label25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="grid_supplier_transactions.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;txt_address.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txt_cityName.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -1569,32 +1632,32 @@
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Last Name</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
-    <value>panel2</value>
+  <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="txt_email.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="txt_contact_no.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txt_address.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 276</value>
+    <value>119, 220</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="&gt;&gt;txt_address.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>GL Account</value>
@@ -1609,7 +1672,7 @@
     <value>56, 17</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Btn_ledger_report.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1618,9 +1681,6 @@
     <value>CenterScreen</value>
   </data>
   <data name="Btn_ledger_report.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_update.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Btn_printPaymentReceipt.Parent" xml:space="preserve">
@@ -1650,14 +1710,14 @@
   <data name="btn_update.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
   </data>
-  <data name="btn_delete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 232</value>
+  <data name="label22.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txt_citySubdivisionName.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -1665,20 +1725,23 @@
   <data name="&gt;&gt;chk_vat_status.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;btn_update.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="label26.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="btn_delete.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
   </data>
-  <data name="&gt;&gt;btn_refresh.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
   </data>
-  <data name="txt_cityName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 24</value>
+  <data name="&gt;&gt;txt_postalCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label21.Name" xml:space="preserve">
+    <value>label21</value>
   </data>
   <data name="panelTransactionBottom.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 58</value>
@@ -1686,8 +1749,8 @@
   <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 101</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 58</value>
@@ -1696,7 +1759,7 @@
     <value>&amp;Create (F3)</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>4</value>
   </data>
   <data name="label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1704,14 +1767,11 @@
   <data name="&gt;&gt;btn_blank.Name" xml:space="preserve">
     <value>btn_blank</value>
   </data>
-  <data name="label25.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 88</value>
+  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
+    <value>groupBox3</value>
   </data>
   <data name="txt_id.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+    <value>317, 24</value>
   </data>
   <data name="&gt;&gt;panelTransactionTop.Name" xml:space="preserve">
     <value>panelTransactionTop</value>
@@ -1722,14 +1782,20 @@
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;credit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;btn_trans_refresh.Parent" xml:space="preserve">
     <value>panelTransactionTop</value>
   </data>
   <data name="&gt;&gt;txt_countryName.Name" xml:space="preserve">
     <value>txt_countryName</value>
   </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 430</value>
+  </data>
+  <data name="btn_blank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;lbl_edit_status.Parent" xml:space="preserve">
     <value>tabPage1</value>
@@ -1737,23 +1803,26 @@
   <data name="&gt;&gt;account_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
-  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="txt_vatno.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 17</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Purchase Parameter</value>
+  <data name="btn_delete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 17</value>
+  <data name="btn_delete.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="Btn_printPaymentReceipt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1761,20 +1830,23 @@
   <data name="&gt;&gt;panelTransactionTop.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btn_cancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label26.Name" xml:space="preserve">
+    <value>label26</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="label9.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="credit.HeaderText" xml:space="preserve">
-    <value>Credit</value>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;btn_refresh.Name" xml:space="preserve">
-    <value>btn_refresh</value>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 21</value>
+  </data>
+  <data name="cmb_GL_account_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="lbl_edit_status.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1797,20 +1869,17 @@
   <data name="btn_save.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
   </data>
-  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="txt_countryName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 188</value>
   </data>
   <data name="&gt;&gt;txt_supplier_code.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="credit.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 560</value>
-  </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1836,8 +1905,11 @@
         AAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;btn_cancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txt_id.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1872,14 +1944,14 @@
   <data name="&gt;&gt;description.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 24</value>
   </data>
-  <data name="btn_update.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 138</value>
+  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
-  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="&gt;&gt;panelTransactionBottom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1890,26 +1962,26 @@
   <data name="btn_payment.Text" xml:space="preserve">
     <value>&amp;Payment</value>
   </data>
-  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;btn_update.Parent" xml:space="preserve">
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;txt_id.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="label27.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="btn_payment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 11</value>
   </data>
   <data name="&gt;&gt;label26.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="&gt;&gt;txt_last_name.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="btn_trans_refresh.Text" xml:space="preserve">
-    <value>Re&amp;fresh</value>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="txt_StreetName.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1917,11 +1989,14 @@
   <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 34</value>
   </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 330</value>
@@ -1929,14 +2004,14 @@
   <data name="&gt;&gt;label24.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="panelTransactionTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>834, 56</value>
   </data>
   <data name="btn_blank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="btn_delete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;txt_buildingNumber.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;btn_save.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1946,6 +2021,9 @@
   </data>
   <metadata name="account_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-SA</value>
   </metadata>
   <metadata name="balance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

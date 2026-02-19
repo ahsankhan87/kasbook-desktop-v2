@@ -58,6 +58,9 @@ namespace pos
         
         public void frm_product_full_detail_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleProductForm();
+
             txt_part_number.Focus();
             this.ActiveControl = txt_part_number;
             cmb_item_type.SelectedIndex = 0;
@@ -100,6 +103,100 @@ namespace pos
             if (txt_pur_dmnd_qty != null) txt_pur_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
             if (txt_sale_dmnd_qty != null) txt_sale_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
             if (txt_restock_level != null) txt_restock_level.KeyPress += NumericTextBox_KeyPress;
+        }
+
+        private void StyleProductForm()
+        {
+            // Panels
+            panel1.BackColor = AppTheme.PrimaryDark;
+            panel1.ForeColor = AppTheme.TextOnPrimary;
+            panel1.Padding = new Padding(8, 4, 8, 4);
+            panel2.BackColor = SystemColors.Control;
+            panel2.AutoScroll = true;
+            panel2.AutoScrollMinSize = new Size(tableLayoutPanel1.PreferredSize.Width + 40, tableLayoutPanel1.Height + 40);
+
+            // Header area
+            lbl_product_name.Font = AppTheme.FontHeader;
+            lbl_product_name.ForeColor = AppTheme.TextOnPrimary;
+
+            foreach (Label lbl in panel1.Controls.OfType<Label>())
+            {
+                if (lbl == lbl_product_name) continue;
+                lbl.Font = AppTheme.FontLabel;
+                lbl.ForeColor = AppTheme.TextOnPrimary;
+            }
+
+            lbl_errors.Font = AppTheme.FontSmall;
+            lbl_errors.ForeColor = AppTheme.Danger;
+
+            // Tabs
+            Products_tab.Font = AppTheme.FontTab;
+            tabPage1.BackColor = SystemColors.Control;
+            tabPage3.BackColor = SystemColors.Control;
+            tableLayoutPanel1.BackColor = SystemColors.Control;
+
+            // Picture box
+            pictureBox1.BackColor = SystemColors.Window;
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+
+            // Buttons
+            foreach (Button btn in new[] { btn_save, btn_cancel, btn_search_products, btn_upload_picture, btn_translate })
+            {
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+                btn.Height = 34;
+            }
+
+            // Grid: movements
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_movements, new object[] { true });
+
+            grid_movements.BackgroundColor = SystemColors.AppWorkspace;
+            grid_movements.BorderStyle = BorderStyle.None;
+            grid_movements.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid_movements.GridColor = SystemColors.ControlLight;
+            grid_movements.RowHeadersVisible = false;
+            grid_movements.EnableHeadersVisualStyles = false;
+
+            grid_movements.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid_movements.ColumnHeadersHeight = 34;
+            grid_movements.RowTemplate.Height = 30;
+
+            grid_movements.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(6, 4, 6, 4)
+            };
+
+            grid_movements.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+
+            grid_movements.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = AppTheme.GridAltRow,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            foreach (DataGridViewColumn col in grid_movements.Columns)
+                col.DefaultCellStyle.Font = null;
         }
 
         public void load_product_detail(string item_number)
@@ -988,8 +1085,7 @@ namespace pos
 
             this.tabPage1.Controls.Add(brandsDataGridView);
             brandsDataGridView.BringToFront();
-            
-            
+            StyleDropdownGrid(brandsDataGridView);
 
         }
 
@@ -1136,6 +1232,7 @@ namespace pos
 
             this.tabPage1.Controls.Add(categoriesDataGridView);
             categoriesDataGridView.BringToFront();
+            StyleDropdownGrid(categoriesDataGridView);
 
         }
 
@@ -1215,6 +1312,36 @@ namespace pos
 
         }
 
+        private static void StyleDropdownGrid(DataGridView dgv)
+        {
+            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.BackgroundColor = SystemColors.AppWorkspace;
+            dgv.GridColor = SystemColors.ControlDark;
+            dgv.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = SystemColors.WindowText,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+            dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText
+            };
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersVisible = false;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.RowTemplate.Height = 28;
+            dgv.ColumnHeadersHeight = 32;
+        }
+
         private void SetupGroupsDataGridView()
         {
             var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
@@ -1259,6 +1386,7 @@ namespace pos
 
             this.tabPage1.Controls.Add(groupsDataGridView);
             groupsDataGridView.BringToFront();
+            StyleDropdownGrid(groupsDataGridView);
 
         }
 

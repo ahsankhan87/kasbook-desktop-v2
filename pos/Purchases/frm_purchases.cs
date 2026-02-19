@@ -451,12 +451,13 @@ namespace pos
 
                 }
 
-                if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6)
+                string editedColName = grid_purchases.Columns[e.ColumnIndex].Name;
+                if (_numericColumns.Contains(editedColName))
                 {
                     var cell = grid_purchases.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     if (cell.Value == null || string.IsNullOrEmpty(cell.Value.ToString()))
                     {
-                        cell.Value = 0; // Set default value to 0 if null or empty
+                        cell.Value = 0;
                     }
                 }
 
@@ -977,26 +978,6 @@ namespace pos
             
         }
         
-        private int Insert_Journal_entry(string invoice_no, int account_id, decimal debit, decimal credit, DateTime date,
-            string description, int customer_id, int supplier_id, int entry_id)
-        {
-            int journal_id = 0;
-            JournalsModal JournalsModal_obj = new JournalsModal();
-            JournalsBLL JournalsObj = new JournalsBLL();
-
-            JournalsModal_obj.invoice_no = invoice_no;
-            JournalsModal_obj.entry_date = date;
-            JournalsModal_obj.debit = Convert.ToDouble(debit);
-            JournalsModal_obj.credit = Convert.ToDouble(credit);
-            JournalsModal_obj.account_id = account_id;
-            JournalsModal_obj.description = description;
-            JournalsModal_obj.customer_id = customer_id;
-            JournalsModal_obj.supplier_id = supplier_id;
-            JournalsModal_obj.entry_id = entry_id;
-
-            journal_id = JournalsObj.Insert(JournalsModal_obj);
-            return journal_id;
-        }
 
         private void Get_AccountID_From_Company()
         {
@@ -1397,8 +1378,16 @@ namespace pos
                 if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
                 {
                     e.SuppressKeyPress = true;
+
+                    // Commit the active cell edit before navigating;
+                    // changing CurrentCell while in edit mode throws InvalidOperationException.
+                    if (grid_purchases.IsCurrentCellInEditMode)
+                        grid_purchases.EndEdit();
+
+                    if (grid_purchases.CurrentCell == null) return;
+
                     int iColumn = grid_purchases.CurrentCell.ColumnIndex;
-                    int iRow = grid_purchases.CurrentCell.RowIndex;
+                    int iRow    = grid_purchases.CurrentCell.RowIndex;
 
                     int snoIdx  = grid_purchases.Columns["sno"].Index;
                     int idIdx   = grid_purchases.Columns["id"].Index;
@@ -1444,6 +1433,12 @@ namespace pos
         {
             try
             {
+                // End any pending cell edit before clearing rows; otherwise the grid
+                // throws InvalidOperationException ("cannot commit or quit a cell value change").
+                if (grid_purchases.IsCurrentCellInEditMode)
+                    grid_purchases.EndEdit();
+                grid_purchases.CurrentCell = null;
+
                 grid_purchases.Rows.Clear();
                 grid_purchases.Refresh();
                 txt_invoice_no.Text = invoice_no;
@@ -1560,7 +1555,7 @@ namespace pos
         {
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
-            if (grid_purchases.CurrentCell.ColumnIndex == 3 || grid_purchases.CurrentCell.ColumnIndex == 4 || grid_purchases.CurrentCell.ColumnIndex == 5 || grid_purchases.CurrentCell.ColumnIndex == 6) //qty, unit price and discount Column will accept only numeric
+            if (_numericColumns.Contains(grid_purchases.Columns[grid_purchases.CurrentCell.ColumnIndex].Name)) // Qty, avg_cost, unit_price, discount — numeric only
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -2598,24 +2593,27 @@ namespace pos
             }
         }
 
+        private static readonly HashSet<string> _numericColumns =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "avg_cost", "unit_price", "discount" };
+
         private void grid_purchases_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6)
+            string colName = grid_purchases.Columns[e.ColumnIndex].Name;
+            if (!_numericColumns.Contains(colName)) return;
+
+            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
             {
-                if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-                {
-                    e.Cancel = true;
-                    grid_purchases.Rows[e.RowIndex].ErrorText = "Value cannot be null or empty";
-                }
-                else if (!decimal.TryParse(e.FormattedValue.ToString(), out _))
-                {
-                    e.Cancel = true;
-                    grid_purchases.Rows[e.RowIndex].ErrorText = "Value must be a numeric value";
-                }
-                else
-                {
-                    grid_purchases.Rows[e.RowIndex].ErrorText = string.Empty;
-                }
+                e.Cancel = true;
+                grid_purchases.Rows[e.RowIndex].ErrorText = "Value cannot be null or empty";
+            }
+            else if (!decimal.TryParse(e.FormattedValue.ToString(), out _))
+            {
+                e.Cancel = true;
+                grid_purchases.Rows[e.RowIndex].ErrorText = "Value must be a numeric value";
+            }
+            else
+            {
+                grid_purchases.Rows[e.RowIndex].ErrorText = string.Empty;
             }
         }
 

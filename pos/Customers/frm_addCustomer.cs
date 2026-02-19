@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using pos.Security.Authorization;
 using POS.BLL;
@@ -38,6 +39,7 @@ namespace pos
         {
             // Apply professional theme
             AppTheme.Apply(this);
+            StyleCustomerForm();
 
             txt_search.Focus();
             this.ActiveControl = txt_search;
@@ -53,6 +55,96 @@ namespace pos
             //Btn_printCustomerReceipt.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerPrint);
             //grid_customer_transactions.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_LedgerView);
             // Add further UI elements here as needed, e.g. delete/report buttons/menus.
+        }
+
+        private void StyleCustomerForm()
+        {
+            panel1.BackColor = AppTheme.PrimaryDark;
+            panel1.ForeColor = AppTheme.TextOnPrimary;
+            panel1.Padding = new Padding(8, 4, 8, 4);
+            panel2.BackColor = SystemColors.Control;
+            panel2.AutoScroll = true;
+            panel2.AutoScrollMinSize = new Size(tableLayoutPanel1.PreferredSize.Width + 40, tableLayoutPanel1.PreferredSize.Height + 40);
+
+            panel3.BackColor = SystemColors.Control;
+            panelTransactionTop.BackColor = SystemColors.Control;
+            panelTransactionBottom.BackColor = SystemColors.Control;
+
+            foreach (Label lbl in panel1.Controls.OfType<Label>())
+                lbl.ForeColor = AppTheme.TextOnPrimary;
+
+            tabControl1.Font = AppTheme.FontTab;
+            Detail.BackColor = SystemColors.Control;
+            Transactions.BackColor = SystemColors.Control;
+
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel1.Dock = DockStyle.Top;
+
+            groupBox2.Font = AppTheme.FontGroupBox;
+            groupBox3.Font = AppTheme.FontGroupBox;
+
+            foreach (Button btn in new[] { btn_save, btn_update, btn_delete, btn_blank, btn_cancel, btn_refresh, btn_search, btn_payment, btn_trans_refresh, Btn_ledger_report, Btn_printCustomerReceipt })
+            {
+                if (btn == null) continue;
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+                btn.Height = 34;
+            }
+
+            StyleLedgerGrid(grid_customer_transactions);
+        }
+
+        private static void StyleLedgerGrid(DataGridView grid)
+        {
+            if (grid == null) return;
+
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid, new object[] { true });
+
+            grid.BackgroundColor = SystemColors.AppWorkspace;
+            grid.BorderStyle = BorderStyle.None;
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid.GridColor = SystemColors.ControlLight;
+            grid.RowHeadersVisible = false;
+            grid.EnableHeadersVisualStyles = false;
+
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid.ColumnHeadersHeight = 34;
+            grid.RowTemplate.Height = 30;
+
+            grid.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(6, 4, 6, 4)
+            };
+
+            grid.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+
+            grid.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = AppTheme.GridAltRow,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
         }
 
        

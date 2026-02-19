@@ -125,14 +125,11 @@
   <data name="lbl_product_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 0, 1, 0</value>
   </data>
-  <data name="lbl_product_name.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="txt_product_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_product_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 12</value>
+    <value>800, 12</value>
   </data>
   <data name="txt_product_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -147,7 +144,7 @@
     <value>Top, Right</value>
   </data>
   <data name="btn_search_products.Location" type="System.Drawing.Point, System.Drawing">
-    <value>614, 9</value>
+    <value>709, 9</value>
   </data>
   <data name="btn_search_products.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -155,14 +152,11 @@
   <data name="btn_search_products.Text" xml:space="preserve">
     <value>بحث</value>
   </data>
-  <data name="btn_search_products.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1007, 11</value>
+    <value>1102, 11</value>
   </data>
   <data name="label21.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -174,14 +168,8 @@
     <value>بحث منتوج
 </value>
   </data>
-  <data name="label21.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="txtItemNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 11</value>
-  </data>
-  <data name="txtItemNumber.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 11</value>
@@ -193,14 +181,8 @@
   <data name="txt_id.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
   </data>
-  <data name="txt_id.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 13</value>
-  </data>
-  <data name="label6.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="label40.Location" type="System.Drawing.Point, System.Drawing">
     <value>170, 13</value>
@@ -208,23 +190,17 @@
   <data name="label40.TabIndex" type="System.Int32, mscorlib">
     <value>151</value>
   </data>
-  <data name="label40.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1113, 47</value>
-  </data>
-  <data name="panel1.ToolTip" xml:space="preserve">
-    <value />
+    <value>1208, 47</value>
   </data>
   <data name="lbl_errors.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="lbl_errors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 589</value>
+    <value>472, 589</value>
   </data>
   <data name="lbl_errors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 0, 1, 0</value>
@@ -234,9 +210,6 @@
   </data>
   <data name="lbl_errors.TabIndex" type="System.Int32, mscorlib">
     <value>141</value>
-  </data>
-  <data name="lbl_errors.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btn_save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
@@ -274,206 +247,279 @@
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
-  <data name="btn_cancel.ToolTip" xml:space="preserve">
-    <value />
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 47</value>
   </data>
-  <data name="btn_translate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btn_translate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="btn_translate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 244</value>
-  </data>
-  <data name="btn_translate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 36</value>
-  </data>
-  <data name="btn_translate.Text" xml:space="preserve">
-    <value>ترجمة إلى العربية</value>
-  </data>
-  <data name="btn_translate.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_expiry_date.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_expiry_date.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_expiry_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 24</value>
-  </data>
-  <data name="txt_expiry_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txt_expiry_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 28</value>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1050, 748</value>
   </data>
-  <data name="txt_expiry_date.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="txt_expiry_date.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_group_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_group_code.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 184</value>
-  </data>
-  <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 28</value>
-  </data>
-  <data name="txt_group_code.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_category_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_category_code.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 152</value>
-  </data>
-  <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 28</value>
-  </data>
-  <data name="txt_category_code.TabIndex" type="System.Int32, mscorlib">
-    <value>162</value>
-  </data>
-  <data name="txt_category_code.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_brand_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_brand_code.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 123</value>
-  </data>
-  <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 28</value>
-  </data>
-  <data name="txt_brand_code.TabIndex" type="System.Int32, mscorlib">
-    <value>161</value>
-  </data>
-  <data name="txt_brand_code.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_groups.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_groups.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 184</value>
-  </data>
-  <data name="txt_groups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="Products_tab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 28</value>
+  <data name="Products_tab.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
-  <data name="txt_categories.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="Products_tab.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="txt_categories.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
+  <data name="Products_tab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1050, 748</value>
   </data>
-  <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 152</value>
+  <data name="tabPage1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
   </data>
-  <data name="txt_categories.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 28</value>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1042, 717</value>
   </data>
-  <data name="txt_def_location.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>تفاصيل</value>
+  </data>
+  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="txt_def_location.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_barcode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_def_location.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 158</value>
+  <data name="txt_barcode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 4</value>
   </data>
-  <data name="txt_def_location.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 28</value>
+  <data name="txt_barcode.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
-  <data name="txt_def_location.ToolTip" xml:space="preserve">
-    <value />
+  <data name="txt_barcode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
   </data>
-  <data name="txt_packet_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_packet_qty.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_packet_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 125</value>
-  </data>
-  <data name="txt_packet_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="txt_packet_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 28</value>
-  </data>
-  <data name="txt_packet_qty.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="txt_packet_qty.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_brands.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_brands.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 120</value>
-  </data>
-  <data name="txt_brands.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 28</value>
+  <data name="txt_barcode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Top, Bottom, Right</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 259</value>
+    <value>1, 217</value>
   </data>
   <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 142</value>
+  </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
   </data>
-  <data name="pictureBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btn_translate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="btn_translate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="btn_translate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 256</value>
+  </data>
+  <data name="btn_translate.Text" xml:space="preserve">
+    <value>ترجمة إلى العربية</value>
+  </data>
+  <data name="txt_alt_item_number.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_alt_item_number.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 40</value>
+  </data>
+  <data name="txt_alt_item_number.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
+  </data>
+  <data name="txt_alt_item_number.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txt_packet_qty.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_packet_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 148</value>
+  </data>
+  <data name="txt_packet_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="txt_packet_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 28</value>
+  </data>
+  <data name="txt_packet_qty.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="txt_def_location.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_def_location.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 112</value>
+  </data>
+  <data name="txt_def_location.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 28</value>
+  </data>
+  <data name="label25.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label25.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 187</value>
+  </data>
+  <data name="label25.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 22</value>
+  </data>
+  <data name="label25.Text" xml:space="preserve">
+    <value>وصف
+</value>
+  </data>
+  <data name="txt_description.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 184</value>
+  </data>
+  <data name="txt_description.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_description.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 28</value>
+  </data>
+  <data name="txt_description.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="txt_expiry_date.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_expiry_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 40</value>
+  </data>
+  <data name="txt_expiry_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txt_expiry_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 28</value>
+  </data>
+  <data name="txt_expiry_date.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label42.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label42.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 7</value>
+  </data>
+  <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 22</value>
+  </data>
+  <data name="label42.TabIndex" type="System.Int32, mscorlib">
+    <value>147</value>
+  </data>
+  <data name="label42.Text" xml:space="preserve">
+    <value>البار كود</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 150</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 24</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>قطع في التعبئة</value>
+  </data>
+  <data name="txt_groups.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 184</value>
+  </data>
+  <data name="txt_groups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 28</value>
+  </data>
+  <data name="txt_group_code.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 184</value>
+  </data>
+  <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 28</value>
+  </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 78</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 24</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>المورد</value>
+  </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 114</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 24</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>الموقع الافتراضي</value>
+  </data>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 43</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 22</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>رقم مقابل</value>
   </data>
   <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="label22.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 187</value>
+    <value>915, 187</value>
   </data>
   <data name="label22.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -487,136 +533,61 @@
   <data name="label22.Text" xml:space="preserve">
     <value>مجموعة</value>
   </data>
-  <data name="label22.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="btn_upload_picture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
   </data>
-  <data name="btn_upload_picture.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 42</value>
   </data>
-  <data name="btn_upload_picture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
   </data>
-  <data name="btn_upload_picture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 389</value>
-  </data>
-  <data name="btn_upload_picture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="btn_upload_picture.TabIndex" type="System.Int32, mscorlib">
-    <value>225</value>
-  </data>
-  <data name="btn_upload_picture.Text" xml:space="preserve">
-    <value>تحميل</value>
-  </data>
-  <data name="btn_upload_picture.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label42.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label42.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 27</value>
-  </data>
-  <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 22</value>
-  </data>
-  <data name="label42.TabIndex" type="System.Int32, mscorlib">
-    <value>147</value>
-  </data>
-  <data name="label42.Text" xml:space="preserve">
-    <value>البار كود</value>
-  </data>
-  <data name="label42.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label41.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label41.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 219</value>
-  </data>
-  <data name="label41.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 22</value>
-  </data>
-  <data name="label41.TabIndex" type="System.Int32, mscorlib">
-    <value>149</value>
-  </data>
-  <data name="label41.Text" xml:space="preserve">
-    <value>رمز الصنف
+  <data name="label4.Text" xml:space="preserve">
+    <value>تاريخ الانتهاء
 </value>
   </data>
-  <data name="label41.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="label23.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label16.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
   </data>
-  <data name="label23.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 6</value>
   </data>
-  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 155</value>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 24</value>
   </data>
-  <data name="label23.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 22</value>
-  </data>
-  <data name="label23.TabIndex" type="System.Int32, mscorlib">
-    <value>143</value>
-  </data>
-  <data name="label23.Text" xml:space="preserve">
-    <value>فئة</value>
-  </data>
-  <data name="label23.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label39.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label39.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 251</value>
-  </data>
-  <data name="label39.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 22</value>
-  </data>
-  <data name="label39.TabIndex" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <data name="label39.Text" xml:space="preserve">
-    <value>اسم
+  <data name="label16.Text" xml:space="preserve">
+    <value>إعادة الطلب
 </value>
   </data>
-  <data name="label39.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cmb_supplier.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="cmb_supplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 75</value>
+  </data>
+  <data name="cmb_supplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cmb_supplier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 30</value>
+  </data>
+  <data name="cmb_supplier.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="label38.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="label38.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 283</value>
+    <value>915, 295</value>
   </data>
   <data name="label38.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -631,134 +602,145 @@
     <value>الاسم 2
 </value>
   </data>
-  <data name="label38.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label39.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="txt_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_name.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="label39.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 248</value>
+  <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 259</value>
   </data>
-  <data name="txt_name.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="label39.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txt_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
+  <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 22</value>
   </data>
-  <data name="txt_name.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label39.TabIndex" type="System.Int32, mscorlib">
+    <value>150</value>
   </data>
-  <data name="txt_name_ar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label39.Text" xml:space="preserve">
+    <value>اسم
+</value>
   </data>
-  <data name="txt_name_ar.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="label41.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label41.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_name_ar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 280</value>
+  <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 223</value>
   </data>
-  <data name="txt_name_ar.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="label41.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txt_name_ar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
+  <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 22</value>
   </data>
-  <data name="txt_name_ar.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label41.TabIndex" type="System.Int32, mscorlib">
+    <value>149</value>
   </data>
-  <data name="txt_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label41.Text" xml:space="preserve">
+    <value>رمز الصنف
+</value>
   </data>
-  <data name="txt_code.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_category_code.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 216</value>
+  <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 148</value>
   </data>
-  <data name="txt_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 28</value>
+  </data>
+  <data name="txt_category_code.TabIndex" type="System.Int32, mscorlib">
+    <value>162</value>
+  </data>
+  <data name="txt_categories.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 148</value>
+  </data>
+  <data name="txt_categories.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 28</value>
+  </data>
+  <data name="txt_restock_level.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_restock_level.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="txt_restock_level.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txt_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
+  <data name="txt_restock_level.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 28</value>
   </data>
-  <data name="txt_code.TabIndex" type="System.Int32, mscorlib">
-    <value>160</value>
+  <data name="txt_restock_level.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
-  <data name="txt_barcode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_barcode.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_part_number.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_barcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 24</value>
+  <data name="txt_part_number.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 76</value>
   </data>
-  <data name="txt_barcode.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txt_part_number.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
+  </data>
+  <data name="txt_brand_code.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 112</value>
+  </data>
+  <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 28</value>
+  </data>
+  <data name="txt_brand_code.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="txt_pur_dmnd_qty.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_pur_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 472</value>
+  </data>
+  <data name="txt_pur_dmnd_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txt_barcode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
+  <data name="txt_pur_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
   </data>
-  <data name="txt_barcode.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="txt_barcode.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label34.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label34.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_sale_dmnd_qty.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 123</value>
+  <data name="txt_sale_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 508</value>
   </data>
-  <data name="label34.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txt_sale_dmnd_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 22</value>
+  <data name="txt_sale_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
   </data>
-  <data name="label34.TabIndex" type="System.Int32, mscorlib">
-    <value>144</value>
-  </data>
-  <data name="label34.Text" xml:space="preserve">
-    <value>ماركة</value>
-  </data>
-  <data name="label34.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 59</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 22</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>رقم مقابل</value>
-  </data>
-  <data name="label5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="txt_sale_dmnd_qty.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="label33.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="label33.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 91</value>
+    <value>915, 79</value>
   </data>
   <data name="label33.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -773,347 +755,347 @@
     <value>رقم الصنف
 </value>
   </data>
-  <data name="label33.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label19.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="txt_alt_item_number.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_alt_item_number.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_alt_item_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 56</value>
-  </data>
-  <data name="txt_alt_item_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
-  </data>
-  <data name="txt_alt_item_number.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="txt_alt_item_number.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_part_number.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_part_number.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_part_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 88</value>
-  </data>
-  <data name="txt_part_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
-  </data>
-  <data name="label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label16.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="label19.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
   </data>
-  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 95</value>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 619</value>
   </data>
-  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 24</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>السعر 2</value>
+  </data>
+  <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label26.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 547</value>
+  </data>
+  <data name="label26.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 22</value>
+  </data>
+  <data name="label26.Text" xml:space="preserve">
+    <value>سعر التكلفه</value>
+  </data>
+  <data name="txt_unit_price_2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_unit_price_2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 617</value>
+  </data>
+  <data name="txt_unit_price_2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_unit_price_2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
+  </data>
+  <data name="txt_unit_price_2.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="label32.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label32.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 583</value>
+  </data>
+  <data name="label32.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 22</value>
+  </data>
+  <data name="label32.Text" xml:space="preserve">
+    <value>السعر 1</value>
+  </data>
+  <data name="txt_name_ar.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_name_ar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 292</value>
+  </data>
+  <data name="txt_name_ar.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_name_ar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
+  </data>
+  <data name="label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label18.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 510</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 24</value>
   </data>
-  <data name="label16.Text" xml:space="preserve">
-    <value>إعادة الطلب
-</value>
+  <data name="label18.Text" xml:space="preserve">
+    <value>حد المبيعات</value>
   </data>
-  <data name="label16.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 27</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 24</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>تاريخ الانتهاء
-</value>
-  </data>
-  <data name="label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 60</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 24</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>المورد</value>
-  </data>
-  <data name="label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 128</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 24</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>قطع في التعبئة</value>
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 158</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 24</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>الموقع الافتراضي</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label25.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label25.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_unit_price.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 190</value>
+  <data name="txt_unit_price.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 580</value>
   </data>
-  <data name="label25.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txt_unit_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 22</value>
+  <data name="txt_unit_price.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
   </data>
-  <data name="label25.Text" xml:space="preserve">
-    <value>وصف
-</value>
-  </data>
-  <data name="label25.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_pur_dmnd_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_pur_dmnd_qty.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_pur_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 484</value>
-  </data>
-  <data name="txt_pur_dmnd_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_pur_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
-  </data>
-  <data name="txt_pur_dmnd_qty.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_restock_level.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_restock_level.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_restock_level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 92</value>
-  </data>
-  <data name="txt_restock_level.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_restock_level.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 28</value>
-  </data>
-  <data name="txt_restock_level.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="txt_restock_level.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmb_item_type.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="cmb_item_type.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="cmb_item_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 312</value>
-  </data>
-  <data name="cmb_item_type.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="cmb_item_type.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 30</value>
-  </data>
-  <data name="cmb_item_type.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="cmb_item_type.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_demand_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="txt_unit_price.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="txt_demand_qty.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="txt_demand_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 417</value>
+    <value>482, 436</value>
   </data>
   <data name="txt_demand_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="txt_demand_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
+    <value>425, 28</value>
   </data>
   <data name="txt_demand_qty.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="txt_demand_qty.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_sale_dmnd_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_sale_dmnd_qty.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_cost_price.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_sale_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 451</value>
+  <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 544</value>
   </data>
-  <data name="txt_sale_dmnd_qty.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txt_cost_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txt_sale_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
+  <data name="txt_cost_price.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
   </data>
-  <data name="txt_sale_dmnd_qty.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="txt_cost_price.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="txt_sale_dmnd_qty.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_description.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_description.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cmb_item_type.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 191</value>
+  <data name="cmb_item_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 328</value>
   </data>
-  <data name="txt_description.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="cmb_item_type.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txt_description.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 59</value>
+  <data name="cmb_item_type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 30</value>
   </data>
-  <data name="txt_description.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="cmb_item_type.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="txt_description.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmb_supplier.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="cmb_supplier.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txt_name.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="cmb_supplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 57</value>
+  <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>616, 256</value>
   </data>
-  <data name="cmb_supplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="cmb_supplier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 30</value>
-  </data>
-  <data name="cmb_supplier.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="cmb_supplier.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmb_units.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="cmb_units.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="cmb_units.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 346</value>
-  </data>
-  <data name="cmb_units.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txt_name.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="cmb_units.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 30</value>
+  <data name="txt_name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 28</value>
   </data>
-  <data name="cmb_units.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="cmb_units.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label17.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11pt</value>
   </data>
-  <data name="cmb_tax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 474</value>
+  </data>
+  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 24</value>
+  </data>
+  <data name="label17.Text" xml:space="preserve">
+    <value>حد المشتريات</value>
+  </data>
+  <data name="txt_brands.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 112</value>
+  </data>
+  <data name="txt_brands.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 28</value>
+  </data>
+  <data name="label34.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label34.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 115</value>
+  </data>
+  <data name="label34.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 22</value>
+  </data>
+  <data name="label34.TabIndex" type="System.Int32, mscorlib">
+    <value>144</value>
+  </data>
+  <data name="label34.Text" xml:space="preserve">
+    <value>ماركة</value>
+  </data>
+  <data name="label24.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label24.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 403</value>
+  </data>
+  <data name="label24.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 22</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>ضريبة</value>
+  </data>
+  <data name="label31.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label31.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 439</value>
+  </data>
+  <data name="label31.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 22</value>
+  </data>
+  <data name="label31.Text" xml:space="preserve">
+    <value>حد الطلب</value>
   </data>
   <data name="cmb_tax.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="cmb_tax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 380</value>
+    <value>482, 400</value>
   </data>
   <data name="cmb_tax.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="cmb_tax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 30</value>
+    <value>425, 30</value>
   </data>
   <data name="cmb_tax.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="cmb_tax.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cmb_units.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="cmb_units.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 364</value>
+  </data>
+  <data name="cmb_units.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="cmb_units.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 30</value>
+  </data>
+  <data name="cmb_units.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="txt_code.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="txt_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 220</value>
+  </data>
+  <data name="txt_code.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txt_code.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 28</value>
+  </data>
+  <data name="txt_code.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="label23.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label23.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 151</value>
+  </data>
+  <data name="label23.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 22</value>
+  </data>
+  <data name="label23.TabIndex" type="System.Int32, mscorlib">
+    <value>143</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>فئة</value>
+  </data>
+  <data name="label36.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="label36.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 367</value>
+  </data>
+  <data name="label36.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 22</value>
+  </data>
+  <data name="label36.Text" xml:space="preserve">
+    <value>وحدة</value>
   </data>
   <data name="label37.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="label37.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 315</value>
+    <value>915, 331</value>
   </data>
   <data name="label37.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -1125,245 +1107,36 @@
     <value>نوع العنصر
 </value>
   </data>
-  <data name="label37.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btn_upload_picture.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="label24.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label24.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="btn_upload_picture.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 383</value>
+  <data name="btn_upload_picture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="label24.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="btn_upload_picture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 362</value>
   </data>
-  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 22</value>
-  </data>
-  <data name="label24.Text" xml:space="preserve">
-    <value>ضريبة</value>
-  </data>
-  <data name="label24.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label26.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label26.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 520</value>
-  </data>
-  <data name="label26.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 22</value>
-  </data>
-  <data name="label26.Text" xml:space="preserve">
-    <value>سعر التكلفه</value>
-  </data>
-  <data name="label26.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label36.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label36.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 352</value>
-  </data>
-  <data name="label36.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 22</value>
-  </data>
-  <data name="label36.Text" xml:space="preserve">
-    <value>وحدة</value>
-  </data>
-  <data name="label36.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label18.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 453</value>
-  </data>
-  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 24</value>
-  </data>
-  <data name="label18.Text" xml:space="preserve">
-    <value>حد المبيعات</value>
-  </data>
-  <data name="label18.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label17.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 486</value>
-  </data>
-  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 24</value>
-  </data>
-  <data name="label17.Text" xml:space="preserve">
-    <value>حد المشتريات</value>
-  </data>
-  <data name="label17.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label31.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label31.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 417</value>
-  </data>
-  <data name="label31.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 22</value>
-  </data>
-  <data name="label31.Text" xml:space="preserve">
-    <value>حد الطلب</value>
-  </data>
-  <data name="label31.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label19.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label19.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 552</value>
-  </data>
-  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
-  </data>
-  <data name="label19.Text" xml:space="preserve">
-    <value>السعر 2</value>
-  </data>
-  <data name="label19.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label32.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label32.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 553</value>
-  </data>
-  <data name="label32.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 22</value>
-  </data>
-  <data name="label32.Text" xml:space="preserve">
-    <value>السعر 1</value>
-  </data>
-  <data name="label32.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_cost_price.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_cost_price.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 517</value>
-  </data>
-  <data name="txt_cost_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_cost_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 28</value>
-  </data>
-  <data name="txt_cost_price.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="txt_cost_price.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_unit_price_2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_unit_price_2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_unit_price_2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 551</value>
-  </data>
-  <data name="txt_unit_price_2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_unit_price_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 28</value>
-  </data>
-  <data name="txt_unit_price_2.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="txt_unit_price_2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txt_unit_price.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_unit_price.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="txt_unit_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>668, 551</value>
-  </data>
-  <data name="txt_unit_price.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="txt_unit_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 28</value>
-  </data>
-  <data name="txt_unit_price.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="txt_unit_price.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tabPage1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11pt</value>
-  </data>
-  <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="btn_upload_picture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btn_upload_picture.TabIndex" type="System.Int32, mscorlib">
+    <value>225</value>
+  </data>
+  <data name="btn_upload_picture.Text" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="tabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>947, 633</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>تفاصيل</value>
-  </data>
-  <data name="tabPage1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>الحركات
+</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
@@ -1422,48 +1195,20 @@
   <data name="grid_movements.Size" type="System.Drawing.Size, System.Drawing">
     <value>941, 629</value>
   </data>
-  <data name="grid_movements.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt, style=Bold</value>
   </data>
-  <data name="tabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>947, 633</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>الحركات
-</value>
-  </data>
-  <data name="tabPage3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Products_tab.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="Products_tab.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="groupBox2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="Products_tab.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Products_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>955, 664</value>
-  </data>
-  <data name="Products_tab.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 47</value>
-  </data>
-  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>955, 664</value>
-  </data>
-  <data name="panel2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>عمل</value>
   </data>
   <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
@@ -1480,9 +1225,6 @@
   <data name="btn_refresh.Text" xml:space="preserve">
     <value>ينعش (F5)</value>
   </data>
-  <data name="btn_refresh.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btn_other_stock.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
   </data>
@@ -1494,9 +1236,6 @@
   </data>
   <data name="btn_other_stock.Text" xml:space="preserve">
     <value>مخزونات أخرى</value>
-  </data>
-  <data name="btn_other_stock.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btn_delete.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
@@ -1513,9 +1252,6 @@
   <data name="btn_delete.Text" xml:space="preserve">
     <value>حذف</value>
   </data>
-  <data name="btn_delete.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btn_update.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
   </data>
@@ -1530,9 +1266,6 @@
   </data>
   <data name="btn_update.Text" xml:space="preserve">
     <value>تحديث (F4)</value>
-  </data>
-  <data name="btn_update.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btn_blank.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
@@ -1549,41 +1282,14 @@
   <data name="btn_blank.Text" xml:space="preserve">
     <value>فارغة</value>
   </data>
-  <data name="btn_blank.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt, style=Bold</value>
-  </data>
-  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="groupBox2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>عمل</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>955, 47</value>
+    <value>1050, 47</value>
   </data>
   <data name="panel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 664</value>
-  </data>
-  <data name="panel3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1113, 711</value>
+    <value>158, 748</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1617,8 +1323,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>إضافة المنتجات</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

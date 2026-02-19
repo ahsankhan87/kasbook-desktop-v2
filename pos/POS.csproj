@@ -2377,6 +2377,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\frm_addSupplier.ar-SA.resx">
       <DependentUpon>frm_addSupplier.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\frm_addSupplier.resx">
       <DependentUpon>frm_addSupplier.cs</DependentUpon>

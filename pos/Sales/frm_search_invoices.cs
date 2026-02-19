@@ -1,4 +1,5 @@
 ﻿using pos.UI.Busy;
+using pos.UI;
 using POS.BLL;
 using System;
 using System.Collections.Generic;
@@ -32,65 +33,261 @@ namespace pos
 
         private void search_invoices_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleSearchForm();
+
             Listbox_method.SelectedIndex = 2;
             txt_condition.Focus();
         }
 
+        // ── Uniform app styling ───────────────────────────────────────────────
+        private void StyleSearchForm()
+        {
+            // ── Form ─────────────────────────────────────────────────────────
+            this.BackColor = SystemColors.Control;
+            this.Font      = AppTheme.FontDefault;
+
+            // ── Filter panel (panel1) ─────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+            panel1.Padding   = new Padding(8, 6, 8, 6);
+
+            // ── Results panel (panel2) ────────────────────────────────────────
+            panel2.BackColor = SystemColors.Control;
+            panel2.Padding   = new Padding(6, 4, 6, 6);
+
+            // ── GroupBoxes ────────────────────────────────────────────────────
+            foreach (GroupBox grp in new[] { groupBox2, groupBoxMethod })
+            {
+                grp.BackColor = SystemColors.Control;
+                grp.ForeColor = SystemColors.ControlText;
+                grp.Font      = AppTheme.FontGroupBox;
+                grp.Padding   = new Padding(6, 10, 6, 6);
+            }
+
+            // ── Search-method ListBox ─────────────────────────────────────────
+            Listbox_method.BackColor   = SystemColors.Window;
+            Listbox_method.ForeColor   = AppTheme.TextPrimary;
+            Listbox_method.Font        = new Font("Segoe UI", 10F, FontStyle.Regular);
+            Listbox_method.BorderStyle = BorderStyle.FixedSingle;
+
+            // DrawMode must be set BEFORE ItemHeight: in Normal mode ItemHeight
+            // is read-only (auto-sized from font) so the assignment is silently
+            // ignored, causing the subsequent Height calculation to use the wrong value.
+            Listbox_method.DrawMode = DrawMode.OwnerDrawFixed;
+            Listbox_method.DrawItem -= Listbox_method_DrawItem;
+            Listbox_method.DrawItem += Listbox_method_DrawItem;
+
+            Listbox_method.ItemHeight     = 28;
+            Listbox_method.IntegralHeight = false;
+            Listbox_method.Height         = Listbox_method.ItemHeight * Listbox_method.Items.Count + 4;
+
+            // ── Search condition inputs ───────────────────────────────────────
+            txt_condition.Font        = AppTheme.FontDefault;
+            txt_condition.BackColor   = SystemColors.Window;
+            txt_condition.BorderStyle = BorderStyle.FixedSingle;
+            txt_condition.Height      = AppTheme.InputHeight;
+
+            txt_from_date.Font         = AppTheme.FontDefault;
+            txt_from_date.CalendarFont = AppTheme.FontDefault;
+
+            txt_to_date.Font           = AppTheme.FontDefault;
+            txt_to_date.CalendarFont   = AppTheme.FontDefault;
+
+            // ── Labels ────────────────────────────────────────────────────────
+            foreach (Label lbl in new[] { label1, label3, label5 })
+            {
+                lbl.Font      = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+                lbl.ForeColor = AppTheme.TextSecondary;
+            }
+
+            // ── Buttons ───────────────────────────────────────────────────────
+            StyleActionButton(btn_search, AppTheme.Primary,  AppTheme.PrimaryDark);
+            StyleActionButton(btn_ok,     AppTheme.Accent,   AppTheme.PrimaryDark);
+            StyleActionButton(btn_close,  AppTheme.Danger,   AppTheme.DangerDark);
+
+            // ── Results grid ─────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance  |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_sales_report, new object[] { true });
+
+            grid_sales_report.BackgroundColor     = SystemColors.AppWorkspace;
+            grid_sales_report.BorderStyle         = BorderStyle.None;
+            grid_sales_report.CellBorderStyle     = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid_sales_report.GridColor           = SystemColors.ControlLight;
+            grid_sales_report.RowHeadersVisible   = false;
+            grid_sales_report.EnableHeadersVisualStyles = false;
+
+            grid_sales_report.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid_sales_report.ColumnHeadersHeight         = 36;
+            grid_sales_report.RowTemplate.Height          = 32;
+
+            grid_sales_report.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = SystemColors.Control,
+                ForeColor          = SystemColors.ControlText,
+                Font               = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment          = DataGridViewContentAlignment.MiddleLeft,
+                Padding            = new Padding(6, 4, 6, 4)
+            };
+
+            grid_sales_report.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = SystemColors.Window,
+                ForeColor          = AppTheme.TextPrimary,
+                Font               = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding            = new Padding(6, 2, 6, 2)
+            };
+
+            grid_sales_report.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = AppTheme.GridAltRow,
+                ForeColor          = AppTheme.TextPrimary,
+                Font               = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            // total_amount column: right-aligned, bold accent
+            total_amount.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                Alignment          = DataGridViewContentAlignment.MiddleRight,
+                Format             = "N2",
+                Font               = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular),
+                ForeColor          = AppTheme.Primary,
+                SelectionForeColor = SystemColors.HighlightText,
+                SelectionBackColor = SystemColors.Highlight
+            };
+
+            // invoice_no column: bold
+            invoice_no.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                Font               = new Font("Segoe UI Semibold", 9F, FontStyle.Regular),
+                ForeColor          = AppTheme.TextPrimary,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            // Reset per-column fonts from resx
+            foreach (DataGridViewColumn col in grid_sales_report.Columns)
+            {
+                if (col.Name != "total_amount" && col.Name != "invoice_no")
+                    col.DefaultCellStyle.Font = null;
+            }
+        }
+
+        // ── Owner-draw ListBox: coloured highlight for selected item ──────────
+        private void Listbox_method_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+
+            Color bg   = selected ? AppTheme.Primary   : SystemColors.Window;
+            Color fore = selected ? Color.White         : AppTheme.TextPrimary;
+
+            using (var bgBrush = new SolidBrush(bg))
+                e.Graphics.FillRectangle(bgBrush, e.Bounds);
+
+            if (selected)
+                using (var stripe = new SolidBrush(AppTheme.PrimaryDark))
+                    e.Graphics.FillRectangle(stripe, e.Bounds.X, e.Bounds.Y, 4, e.Bounds.Height);
+
+            string text = Listbox_method.Items[e.Index].ToString();
+            TextRenderer.DrawText(e.Graphics, text,
+                new Font("Segoe UI", 10F, selected ? FontStyle.Bold : FontStyle.Regular),
+                new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width - 10, e.Bounds.Height),
+                fore,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+        }
+
+        // ── Button helper ─────────────────────────────────────────────────────
+        private static void StyleActionButton(Button btn, Color baseColor, Color darkColor)
+        {
+            btn.FlatStyle  = FlatStyle.Flat;
+            btn.BackColor  = baseColor;
+            btn.ForeColor  = Color.White;
+            btn.Font       = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            btn.Cursor     = Cursors.Hand;
+            btn.Height     = 34;
+            btn.FlatAppearance.BorderSize         = 0;
+            btn.FlatAppearance.MouseOverBackColor =
+                Color.FromArgb(Math.Min(255, baseColor.R + 30),
+                               Math.Min(255, baseColor.G + 30),
+                               Math.Min(255, baseColor.B + 30));
+            btn.FlatAppearance.MouseDownBackColor = darkColor;
+        }
+
         private void btn_search_Click(object sender, EventArgs e)
         {
-            using (BusyScope.Show(this, "Searching..."))
+            try
             {
-                try
+                string from_date    = "";
+                string to_date      = "";
+                string customer     = "";
+                string invoice_no   = "";
+                double total_amount = 0;
+
+                if (Listbox_method.SelectedIndex == 0)
+                    invoice_no = txt_condition.Text;
+
+                if (Listbox_method.SelectedIndex == 1)
+                    customer = txt_condition.Text;
+
+                if (Listbox_method.SelectedIndex == 2)
                 {
-
-                    string from_date = "";
-                    string to_date = "";
-                    string customer = "";
-                    string invoice_no = "";
-                    double total_amount = 0;
-
-                    if (Listbox_method.SelectedIndex == 0)
-                    {
-                        invoice_no = txt_condition.Text;
-                    }
-
-                    if (Listbox_method.SelectedIndex == 1)
-                    {
-                        customer = txt_condition.Text;
-                    } 
-                    
-                    if (Listbox_method.SelectedIndex == 2)
-                    {
-                        from_date = txt_from_date.Value.Date.ToString("yyyy-MM-dd");
-                        to_date = txt_to_date.Value.Date.ToString("yyyy-MM-dd"); ;
-                    
-                    }
-
-                    if (Listbox_method.SelectedIndex == 3)
-                    {
-                        total_amount = (string.IsNullOrEmpty(txt_condition.Text) ? 0 : double.Parse(txt_condition.Text));
-                    }
-                                   
-                    grid_sales_report.AutoGenerateColumns = false;
-
-                    if (!string.IsNullOrEmpty(invoice_no) || !string.IsNullOrEmpty(customer) 
-                        || total_amount != 0 || !string.IsNullOrEmpty(from_date) || !string.IsNullOrEmpty(to_date))
-                    {
-                        SalesReportBLL sale_report_obj = new SalesReportBLL();
-                        DataTable accounts_dt = new DataTable();
-                        accounts_dt = sale_report_obj.InvoiceReport(from_date, to_date, customer, invoice_no, total_amount);
-
-                        grid_sales_report.DataSource = accounts_dt;
-                    }
-
-                    this.ActiveControl = grid_sales_report;
-                    grid_sales_report.Focus();
+                    from_date = txt_from_date.Value.Date.ToString("yyyy-MM-dd");
+                    to_date   = txt_to_date.Value.Date.ToString("yyyy-MM-dd");
                 }
-                catch (Exception ex)
+
+                if (Listbox_method.SelectedIndex == 3)
+                    total_amount = string.IsNullOrEmpty(txt_condition.Text) ? 0 : double.Parse(txt_condition.Text);
+
+                grid_sales_report.AutoGenerateColumns = false;
+
+                if (string.IsNullOrEmpty(invoice_no) && string.IsNullOrEmpty(customer)
+                    && total_amount == 0 && string.IsNullOrEmpty(from_date) && string.IsNullOrEmpty(to_date))
                 {
-                    MessageBox.Show(ex.Message, "Error");
-                    
+                    UiMessages.ShowWarning(
+                        "Please enter a search value or select a date range.",
+                        "يرجى إدخال قيمة للبحث أو تحديد نطاق تاريخ.");
+                    txt_condition.Focus();
+                    return;
                 }
+
+                using (BusyScope.Show(this, UiMessages.T("Searching sales invoices...", "جارٍ البحث عن فواتير المبيعات...")))
+                {
+                    SalesReportBLL sale_report_obj = new SalesReportBLL();
+                    DataTable accounts_dt = sale_report_obj.InvoiceReport(from_date, to_date, customer, invoice_no, total_amount);
+                    grid_sales_report.DataSource = accounts_dt;
+
+                    if (accounts_dt == null || accounts_dt.Rows.Count == 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "No invoices matched your search criteria.",
+                            "لا توجد فواتير مطابقة لمعايير البحث.");
+                    }
+                }
+
+                this.ActiveControl = grid_sales_report;
+                grid_sales_report.Focus();
+            }
+            catch (FormatException)
+            {
+                UiMessages.ShowWarning(
+                    "Please enter a valid amount.",
+                    "يرجى إدخال مبلغ صحيح.");
+                txt_condition.Focus();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "An unexpected error occurred while searching. Please try again.",
+                    "حدث خطأ غير متوقع أثناء البحث. يرجى المحاولة مرة أخرى.");
             }
         }
 
@@ -105,39 +302,35 @@ namespace pos
         {
             try
             {
-                //when you enter in textbox it will goto next textbox, work like TAB key
                 if (e.KeyData == Keys.Enter)
-                {
                     SendKeys.Send("{TAB}");
-                }
 
                 if (e.KeyCode == Keys.F3)
-                {
                     btn_ok.PerformClick();
-                }
+
+                if (e.KeyCode == Keys.Escape)
+                    btn_close.PerformClick();
+
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (this.ActiveControl.Name != grid_sales_report.Name)
-                    {
+                    if (this.ActiveControl != grid_sales_report)
                         this.ActiveControl = grid_sales_report;
-                    }
                 }
-                if ((e.KeyCode == Keys.Return) && (e.Modifiers == Keys.Control))
-                {
+
+                if (e.KeyCode == Keys.Return && e.Modifiers == Keys.Control)
                     btn_ok.PerformClick();
-                }
-                if (e.KeyCode == Keys.F2 && (e.Modifiers == Keys.Control))
-                {
+
+                if (e.KeyCode == Keys.F2 && e.Modifiers == Keys.Control)
                     txt_condition.Focus();
-                }
-                if(e.KeyCode == Keys.F4)
-                {
+
+                if (e.KeyCode == Keys.F4)
                     Listbox_method.Focus();
-                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowWarning(
+                    "Unable to process the selected shortcut key.",
+                    "تعذر تنفيذ اختصار لوحة المفاتيح المحدد.");
             }
         }
 
@@ -151,32 +344,14 @@ namespace pos
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (grid_sales_report.Rows.Count > 0)
-                {
-                    if (!string.IsNullOrEmpty(grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString()))
-                    {
-                        var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-                        SalesBLL salesObj = new SalesBLL();
-                        DataTable _dt = new DataTable();
-
-                        _dt = salesObj.GetSaleAndSalesItems(invoice_no);
-                        load_sales_grid_products(_dt, invoice_no);
-                        this.Close();
-                    }
-                }
-                
+                LoadSaleByInvoiceNo();
+                this.Close();
             }
-            
         }
 
         private void grid_sales_report_DoubleClick(object sender, EventArgs e)
         {
-            var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-            SalesBLL salesObj = new SalesBLL();
-            DataTable _dt = new DataTable();
-
-            _dt = salesObj.GetSaleAndSalesItems(invoice_no);
-            load_sales_grid_products(_dt, invoice_no);
+            LoadSaleByInvoiceNo();
             this.Close();
         }
 
@@ -192,17 +367,54 @@ namespace pos
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if(grid_sales_report.Rows.Count > 0)
-            {
-                var invoice_no = grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-                SalesBLL salesObj = new SalesBLL();
-                DataTable _dt = new DataTable();
+            LoadSaleByInvoiceNo();
+            this.Close();
+        }
 
-                _dt = salesObj.GetSaleAndSalesItems(invoice_no);
-                load_sales_grid_products(_dt, invoice_no);
-                this.Close();
+        private void LoadSaleByInvoiceNo()
+        {
+            try
+            {
+                if (salesForm == null && salesForm_v1 == null)
+                {
+                    UiMessages.ShowWarning(
+                        "Unable to load the selected invoice because the sales form is not available.",
+                        "تعذر تحميل الفاتورة المحددة لأن شاشة المبيعات غير متاحة.");
+                    return;
+                }
+
+                if (grid_sales_report.CurrentRow == null || grid_sales_report.Rows.Count == 0)
+                {
+                    UiMessages.ShowWarning(
+                        "Please select an invoice to continue.",
+                        "يرجى تحديد فاتورة للمتابعة.");
+                    return;
+                }
+
+                var cell = grid_sales_report.CurrentRow.Cells["invoice_no"];
+                var selectedInvoiceNo = cell != null && cell.Value != null ? cell.Value.ToString() : string.Empty;
+
+                if (string.IsNullOrWhiteSpace(selectedInvoiceNo))
+                {
+                    UiMessages.ShowWarning(
+                        "The selected row does not contain a valid invoice number.",
+                        "الصف المحدد لا يحتوي على رقم فاتورة صالح.");
+                    return;
+                }
+
+                using (BusyScope.Show(this, UiMessages.T("Loading invoice details...", "جارٍ تحميل تفاصيل الفاتورة...")))
+                {
+                    SalesBLL salesObj = new SalesBLL();
+                    DataTable _dt = salesObj.GetSaleAndSalesItems(selectedInvoiceNo);
+                    load_sales_grid_products(_dt, selectedInvoiceNo);
+                }
             }
-           
+            catch (Exception)
+            {
+                UiMessages.ShowError(
+                    "An error occurred while loading the selected sales invoice.",
+                    "حدث خطأ أثناء تحميل فاتورة المبيعات المحددة.");
+            }
         }
 
         private void load_sales_grid_products(DataTable dt,string invoice_no)
@@ -221,7 +433,38 @@ namespace pos
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(grid_sales_report.CurrentRow.Cells["invoice_no"].Value.ToString());
+            try
+            {
+                if (grid_sales_report.CurrentRow == null)
+                {
+                    UiMessages.ShowWarning(
+                        "Please select an invoice first.",
+                        "يرجى تحديد فاتورة أولاً.");
+                    return;
+                }
+
+                var cell  = grid_sales_report.CurrentRow.Cells["invoice_no"];
+                var value = cell != null && cell.Value != null ? cell.Value.ToString() : string.Empty;
+
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    UiMessages.ShowWarning(
+                        "The selected invoice number is empty.",
+                        "رقم الفاتورة المحدد فارغ.");
+                    return;
+                }
+
+                Clipboard.SetText(value);
+                UiMessages.ShowInfo(
+                    "Invoice number copied to the clipboard.",
+                    "تم نسخ رقم الفاتورة إلى الحافظة.");
+            }
+            catch (Exception)
+            {
+                UiMessages.ShowError(
+                    "Unable to copy the invoice number to the clipboard.",
+                    "تعذر نسخ رقم الفاتورة إلى الحافظة.");
+            }
         }
 
     }

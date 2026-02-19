@@ -175,7 +175,7 @@
     <value>txt_from_date</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 14</value>
+    <value>175, 7</value>
   </data>
   <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -265,7 +265,7 @@
     <value>0</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 152</value>
+    <value>502, 158</value>
   </data>
   <data name="&gt;&gt;copyContextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -277,10 +277,10 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txt_condition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 24</value>
+    <value>414, 24</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 71</value>
+    <value>3, 73</value>
   </data>
   <data name="grid_sales_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -298,7 +298,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 27</value>
+    <value>3, 31</value>
   </data>
   <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -421,16 +421,16 @@
     <value>panel1</value>
   </data>
   <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 67</value>
+    <value>64, 73</value>
   </data>
   <data name="txt_condition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 23</value>
+    <value>64, 27</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
   <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 98</value>
+    <value>64, 104</value>
   </data>
   <data name="sale_date.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -517,7 +517,7 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 100</value>
+    <value>3, 102</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -589,10 +589,10 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>594, 20</value>
+    <value>684, 68</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 20</value>
+    <value>684, 27</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 17</value>
@@ -640,7 +640,7 @@
     <value>4, 4</value>
   </data>
   <data name="btn_close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>690, 20</value>
+    <value>684, 112</value>
   </data>
   <data name="sale_date.HeaderText" xml:space="preserve">
     <value>Date</value>

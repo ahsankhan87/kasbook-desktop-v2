@@ -30,19 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_product_full_detail));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_product_name = new System.Windows.Forms.Label();
             this.txt_product_code = new System.Windows.Forms.TextBox();
@@ -58,60 +58,61 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.Products_tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btn_translate = new System.Windows.Forms.Button();
-            this.txt_expiry_date = new System.Windows.Forms.DateTimePicker();
-            this.txt_group_code = new System.Windows.Forms.TextBox();
-            this.txt_category_code = new System.Windows.Forms.TextBox();
-            this.txt_brand_code = new System.Windows.Forms.TextBox();
-            this.txt_groups = new System.Windows.Forms.TextBox();
-            this.txt_categories = new System.Windows.Forms.TextBox();
-            this.txt_def_location = new System.Windows.Forms.TextBox();
-            this.txt_packet_qty = new System.Windows.Forms.TextBox();
-            this.txt_brands = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.btn_upload_picture = new System.Windows.Forms.Button();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.txt_name = new System.Windows.Forms.TextBox();
-            this.txt_name_ar = new System.Windows.Forms.TextBox();
-            this.txt_code = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txt_barcode = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_translate = new System.Windows.Forms.Button();
             this.txt_alt_item_number = new System.Windows.Forms.TextBox();
-            this.txt_part_number = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txt_packet_qty = new System.Windows.Forms.TextBox();
+            this.txt_def_location = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.txt_pur_dmnd_qty = new System.Windows.Forms.TextBox();
-            this.txt_restock_level = new System.Windows.Forms.TextBox();
-            this.cmb_item_type = new System.Windows.Forms.ComboBox();
-            this.txt_demand_qty = new System.Windows.Forms.TextBox();
-            this.txt_sale_dmnd_qty = new System.Windows.Forms.TextBox();
             this.txt_description = new System.Windows.Forms.TextBox();
+            this.txt_expiry_date = new System.Windows.Forms.DateTimePicker();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_groups = new System.Windows.Forms.TextBox();
+            this.txt_group_code = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.cmb_supplier = new System.Windows.Forms.ComboBox();
-            this.cmb_units = new System.Windows.Forms.ComboBox();
-            this.cmb_tax = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.txt_category_code = new System.Windows.Forms.TextBox();
+            this.txt_categories = new System.Windows.Forms.TextBox();
+            this.txt_restock_level = new System.Windows.Forms.TextBox();
+            this.txt_part_number = new System.Windows.Forms.TextBox();
+            this.txt_brand_code = new System.Windows.Forms.TextBox();
+            this.txt_pur_dmnd_qty = new System.Windows.Forms.TextBox();
+            this.txt_sale_dmnd_qty = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.txt_cost_price = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.txt_unit_price_2 = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txt_name_ar = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.txt_unit_price = new System.Windows.Forms.TextBox();
+            this.txt_demand_qty = new System.Windows.Forms.TextBox();
+            this.txt_cost_price = new System.Windows.Forms.TextBox();
+            this.cmb_item_type = new System.Windows.Forms.ComboBox();
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txt_brands = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.cmb_tax = new System.Windows.Forms.ComboBox();
+            this.cmb_units = new System.Windows.Forms.ComboBox();
+            this.txt_code = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.btn_upload_picture = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.grid_movements = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -137,6 +138,7 @@
             this.panel2.SuspendLayout();
             this.Products_tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_movements)).BeginInit();
@@ -246,64 +248,84 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btn_translate);
-            this.tabPage1.Controls.Add(this.txt_expiry_date);
-            this.tabPage1.Controls.Add(this.txt_group_code);
-            this.tabPage1.Controls.Add(this.txt_category_code);
-            this.tabPage1.Controls.Add(this.txt_brand_code);
-            this.tabPage1.Controls.Add(this.txt_groups);
-            this.tabPage1.Controls.Add(this.txt_categories);
-            this.tabPage1.Controls.Add(this.txt_def_location);
-            this.tabPage1.Controls.Add(this.txt_packet_qty);
-            this.tabPage1.Controls.Add(this.txt_brands);
-            this.tabPage1.Controls.Add(this.pictureBox1);
-            this.tabPage1.Controls.Add(this.label22);
-            this.tabPage1.Controls.Add(this.btn_upload_picture);
-            this.tabPage1.Controls.Add(this.label42);
-            this.tabPage1.Controls.Add(this.label41);
-            this.tabPage1.Controls.Add(this.label23);
-            this.tabPage1.Controls.Add(this.label39);
-            this.tabPage1.Controls.Add(this.label38);
-            this.tabPage1.Controls.Add(this.txt_name);
-            this.tabPage1.Controls.Add(this.txt_name_ar);
-            this.tabPage1.Controls.Add(this.txt_code);
-            this.tabPage1.Controls.Add(this.txt_barcode);
-            this.tabPage1.Controls.Add(this.label34);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label33);
-            this.tabPage1.Controls.Add(this.txt_alt_item_number);
-            this.tabPage1.Controls.Add(this.txt_part_number);
-            this.tabPage1.Controls.Add(this.label16);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.label25);
+            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
             this.tabPage1.Controls.Add(this.lbl_errors);
-            this.tabPage1.Controls.Add(this.txt_pur_dmnd_qty);
-            this.tabPage1.Controls.Add(this.txt_restock_level);
-            this.tabPage1.Controls.Add(this.cmb_item_type);
-            this.tabPage1.Controls.Add(this.txt_demand_qty);
-            this.tabPage1.Controls.Add(this.txt_sale_dmnd_qty);
-            this.tabPage1.Controls.Add(this.txt_description);
-            this.tabPage1.Controls.Add(this.cmb_supplier);
-            this.tabPage1.Controls.Add(this.cmb_units);
-            this.tabPage1.Controls.Add(this.cmb_tax);
-            this.tabPage1.Controls.Add(this.label37);
-            this.tabPage1.Controls.Add(this.label24);
-            this.tabPage1.Controls.Add(this.label26);
-            this.tabPage1.Controls.Add(this.label36);
-            this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.label31);
-            this.tabPage1.Controls.Add(this.label19);
-            this.tabPage1.Controls.Add(this.label32);
-            this.tabPage1.Controls.Add(this.txt_cost_price);
-            this.tabPage1.Controls.Add(this.txt_unit_price_2);
-            this.tabPage1.Controls.Add(this.txt_unit_price);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.txt_barcode, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btn_translate, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txt_alt_item_number, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txt_packet_qty, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txt_def_location, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label25, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txt_description, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txt_expiry_date, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label42, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txt_groups, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txt_group_code, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label22, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label16, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cmb_supplier, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label38, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.label39, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label41, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txt_category_code, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txt_categories, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txt_restock_level, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_part_number, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txt_brand_code, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txt_pur_dmnd_qty, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.txt_sale_dmnd_qty, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label33, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 0, 17);
+            this.tableLayoutPanel1.Controls.Add(this.label26, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.txt_unit_price_2, 1, 17);
+            this.tableLayoutPanel1.Controls.Add(this.label32, 0, 16);
+            this.tableLayoutPanel1.Controls.Add(this.txt_name_ar, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.label18, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.txt_unit_price, 1, 16);
+            this.tableLayoutPanel1.Controls.Add(this.txt_demand_qty, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.txt_cost_price, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.cmb_item_type, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.txt_name, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label17, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.txt_brands, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label34, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label24, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label31, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.cmb_tax, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.cmb_units, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.txt_code, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label23, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label36, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label37, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.btn_upload_picture, 4, 10);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // txt_barcode
+            // 
+            resources.ApplyResources(this.txt_barcode, "txt_barcode");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_barcode, 2);
+            this.txt_barcode.Name = "txt_barcode";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Name = "pictureBox1";
+            this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 4);
+            this.pictureBox1.TabStop = false;
             // 
             // btn_translate
             // 
@@ -312,29 +334,50 @@
             this.btn_translate.UseVisualStyleBackColor = true;
             this.btn_translate.Click += new System.EventHandler(this.btn_translate_Click);
             // 
+            // txt_alt_item_number
+            // 
+            resources.ApplyResources(this.txt_alt_item_number, "txt_alt_item_number");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_alt_item_number, 2);
+            this.txt_alt_item_number.Name = "txt_alt_item_number";
+            this.txt_alt_item_number.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_item_number_KeyUp);
+            // 
+            // txt_packet_qty
+            // 
+            resources.ApplyResources(this.txt_packet_qty, "txt_packet_qty");
+            this.txt_packet_qty.Name = "txt_packet_qty";
+            this.txt_packet_qty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_item_number_KeyUp);
+            // 
+            // txt_def_location
+            // 
+            resources.ApplyResources(this.txt_def_location, "txt_def_location");
+            this.txt_def_location.Name = "txt_def_location";
+            this.txt_def_location.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_item_number_KeyUp);
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            // 
+            // txt_description
+            // 
+            resources.ApplyResources(this.txt_description, "txt_description");
+            this.txt_description.Name = "txt_description";
+            // 
             // txt_expiry_date
             // 
-            this.txt_expiry_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_expiry_date, "txt_expiry_date");
+            this.txt_expiry_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_expiry_date.Name = "txt_expiry_date";
             // 
-            // txt_group_code
+            // label42
             // 
-            resources.ApplyResources(this.txt_group_code, "txt_group_code");
-            this.txt_group_code.Name = "txt_group_code";
-            this.txt_group_code.ReadOnly = true;
+            resources.ApplyResources(this.label42, "label42");
+            this.label42.Name = "label42";
             // 
-            // txt_category_code
+            // label2
             // 
-            resources.ApplyResources(this.txt_category_code, "txt_category_code");
-            this.txt_category_code.Name = "txt_category_code";
-            this.txt_category_code.ReadOnly = true;
-            // 
-            // txt_brand_code
-            // 
-            resources.ApplyResources(this.txt_brand_code, "txt_brand_code");
-            this.txt_brand_code.Name = "txt_brand_code";
-            this.txt_brand_code.ReadOnly = true;
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
             // 
             // txt_groups
             // 
@@ -344,6 +387,72 @@
             this.txt_groups.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_groups_KeyUp);
             this.txt_groups.Leave += new System.EventHandler(this.txt_groups_Leave);
             // 
+            // txt_group_code
+            // 
+            resources.ApplyResources(this.txt_group_code, "txt_group_code");
+            this.txt_group_code.Name = "txt_group_code";
+            this.txt_group_code.ReadOnly = true;
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // cmb_supplier
+            // 
+            resources.ApplyResources(this.cmb_supplier, "cmb_supplier");
+            this.cmb_supplier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_supplier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_supplier.FormattingEnabled = true;
+            this.cmb_supplier.Name = "cmb_supplier";
+            this.cmb_supplier.SelectedIndexChanged += new System.EventHandler(this.cmb_units_SelectedIndexChanged);
+            // 
+            // label38
+            // 
+            resources.ApplyResources(this.label38, "label38");
+            this.label38.Name = "label38";
+            // 
+            // label39
+            // 
+            resources.ApplyResources(this.label39, "label39");
+            this.label39.Name = "label39";
+            // 
+            // label41
+            // 
+            resources.ApplyResources(this.label41, "label41");
+            this.label41.Name = "label41";
+            // 
+            // txt_category_code
+            // 
+            resources.ApplyResources(this.txt_category_code, "txt_category_code");
+            this.txt_category_code.Name = "txt_category_code";
+            this.txt_category_code.ReadOnly = true;
+            // 
             // txt_categories
             // 
             resources.ApplyResources(this.txt_categories, "txt_categories");
@@ -352,17 +461,112 @@
             this.txt_categories.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_categories_KeyUp);
             this.txt_categories.Leave += new System.EventHandler(this.txt_categories_Leave);
             // 
-            // txt_def_location
+            // txt_restock_level
             // 
-            resources.ApplyResources(this.txt_def_location, "txt_def_location");
-            this.txt_def_location.Name = "txt_def_location";
-            this.txt_def_location.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_item_number_KeyUp);
+            resources.ApplyResources(this.txt_restock_level, "txt_restock_level");
+            this.txt_restock_level.Name = "txt_restock_level";
             // 
-            // txt_packet_qty
+            // txt_part_number
             // 
-            resources.ApplyResources(this.txt_packet_qty, "txt_packet_qty");
-            this.txt_packet_qty.Name = "txt_packet_qty";
-            this.txt_packet_qty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_item_number_KeyUp);
+            resources.ApplyResources(this.txt_part_number, "txt_part_number");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_part_number, 2);
+            this.txt_part_number.Name = "txt_part_number";
+            this.toolTip1.SetToolTip(this.txt_part_number, resources.GetString("txt_part_number.ToolTip"));
+            this.txt_part_number.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_part_number_KeyUp);
+            // 
+            // txt_brand_code
+            // 
+            resources.ApplyResources(this.txt_brand_code, "txt_brand_code");
+            this.txt_brand_code.Name = "txt_brand_code";
+            this.txt_brand_code.ReadOnly = true;
+            // 
+            // txt_pur_dmnd_qty
+            // 
+            resources.ApplyResources(this.txt_pur_dmnd_qty, "txt_pur_dmnd_qty");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_pur_dmnd_qty, 2);
+            this.txt_pur_dmnd_qty.Name = "txt_pur_dmnd_qty";
+            // 
+            // txt_sale_dmnd_qty
+            // 
+            resources.ApplyResources(this.txt_sale_dmnd_qty, "txt_sale_dmnd_qty");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_sale_dmnd_qty, 2);
+            this.txt_sale_dmnd_qty.Name = "txt_sale_dmnd_qty";
+            // 
+            // label33
+            // 
+            resources.ApplyResources(this.label33, "label33");
+            this.label33.Name = "label33";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            // 
+            // txt_unit_price_2
+            // 
+            resources.ApplyResources(this.txt_unit_price_2, "txt_unit_price_2");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_unit_price_2, 2);
+            this.txt_unit_price_2.Name = "txt_unit_price_2";
+            // 
+            // label32
+            // 
+            resources.ApplyResources(this.label32, "label32");
+            this.label32.Name = "label32";
+            // 
+            // txt_name_ar
+            // 
+            resources.ApplyResources(this.txt_name_ar, "txt_name_ar");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_name_ar, 2);
+            this.txt_name_ar.Name = "txt_name_ar";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // txt_unit_price
+            // 
+            resources.ApplyResources(this.txt_unit_price, "txt_unit_price");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_unit_price, 2);
+            this.txt_unit_price.Name = "txt_unit_price";
+            // 
+            // txt_demand_qty
+            // 
+            resources.ApplyResources(this.txt_demand_qty, "txt_demand_qty");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_demand_qty, 2);
+            this.txt_demand_qty.Name = "txt_demand_qty";
+            // 
+            // txt_cost_price
+            // 
+            resources.ApplyResources(this.txt_cost_price, "txt_cost_price");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_cost_price, 2);
+            this.txt_cost_price.Name = "txt_cost_price";
+            // 
+            // cmb_item_type
+            // 
+            resources.ApplyResources(this.cmb_item_type, "cmb_item_type");
+            this.tableLayoutPanel1.SetColumnSpan(this.cmb_item_type, 2);
+            this.cmb_item_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_item_type.FormattingEnabled = true;
+            this.cmb_item_type.Items.AddRange(new object[] {
+            resources.GetString("cmb_item_type.Items"),
+            resources.GetString("cmb_item_type.Items1")});
+            this.cmb_item_type.Name = "cmb_item_type";
+            // 
+            // txt_name
+            // 
+            resources.ApplyResources(this.txt_name, "txt_name");
+            this.txt_name.Name = "txt_name";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
             // 
             // txt_brands
             // 
@@ -373,179 +577,40 @@
             this.txt_brands.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_brands_KeyUp);
             this.txt_brands.Leave += new System.EventHandler(this.txt_brands_Leave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
-            // 
-            // btn_upload_picture
-            // 
-            resources.ApplyResources(this.btn_upload_picture, "btn_upload_picture");
-            this.btn_upload_picture.Name = "btn_upload_picture";
-            this.btn_upload_picture.UseVisualStyleBackColor = true;
-            this.btn_upload_picture.Click += new System.EventHandler(this.btn_upload_picture_Click);
-            // 
-            // label42
-            // 
-            resources.ApplyResources(this.label42, "label42");
-            this.label42.Name = "label42";
-            // 
-            // label41
-            // 
-            resources.ApplyResources(this.label41, "label41");
-            this.label41.Name = "label41";
-            // 
-            // label23
-            // 
-            resources.ApplyResources(this.label23, "label23");
-            this.label23.Name = "label23";
-            // 
-            // label39
-            // 
-            resources.ApplyResources(this.label39, "label39");
-            this.label39.Name = "label39";
-            // 
-            // label38
-            // 
-            resources.ApplyResources(this.label38, "label38");
-            this.label38.Name = "label38";
-            // 
-            // txt_name
-            // 
-            resources.ApplyResources(this.txt_name, "txt_name");
-            this.txt_name.Name = "txt_name";
-            // 
-            // txt_name_ar
-            // 
-            resources.ApplyResources(this.txt_name_ar, "txt_name_ar");
-            this.txt_name_ar.Name = "txt_name_ar";
-            // 
-            // txt_code
-            // 
-            resources.ApplyResources(this.txt_code, "txt_code");
-            this.txt_code.Name = "txt_code";
-            this.txt_code.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.txt_code, resources.GetString("txt_code.ToolTip"));
-            // 
-            // txt_barcode
-            // 
-            resources.ApplyResources(this.txt_barcode, "txt_barcode");
-            this.txt_barcode.Name = "txt_barcode";
-            // 
             // label34
             // 
             resources.ApplyResources(this.label34, "label34");
             this.label34.Name = "label34";
             // 
-            // label5
+            // label24
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
             // 
-            // label33
+            // label31
             // 
-            resources.ApplyResources(this.label33, "label33");
-            this.label33.Name = "label33";
+            resources.ApplyResources(this.label31, "label31");
+            this.label31.Name = "label31";
             // 
-            // txt_alt_item_number
+            // cmb_tax
             // 
-            resources.ApplyResources(this.txt_alt_item_number, "txt_alt_item_number");
-            this.txt_alt_item_number.Name = "txt_alt_item_number";
-            this.txt_alt_item_number.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_item_number_KeyUp);
-            // 
-            // txt_part_number
-            // 
-            resources.ApplyResources(this.txt_part_number, "txt_part_number");
-            this.txt_part_number.Name = "txt_part_number";
-            this.toolTip1.SetToolTip(this.txt_part_number, resources.GetString("txt_part_number.ToolTip"));
-            this.txt_part_number.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_part_number_KeyUp);
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // label25
-            // 
-            resources.ApplyResources(this.label25, "label25");
-            this.label25.Name = "label25";
-            // 
-            // txt_pur_dmnd_qty
-            // 
-            resources.ApplyResources(this.txt_pur_dmnd_qty, "txt_pur_dmnd_qty");
-            this.txt_pur_dmnd_qty.Name = "txt_pur_dmnd_qty";
-            // 
-            // txt_restock_level
-            // 
-            resources.ApplyResources(this.txt_restock_level, "txt_restock_level");
-            this.txt_restock_level.Name = "txt_restock_level";
-            // 
-            // cmb_item_type
-            // 
-            this.cmb_item_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmb_item_type, "cmb_item_type");
-            this.cmb_item_type.FormattingEnabled = true;
-            this.cmb_item_type.Items.AddRange(new object[] {
-            resources.GetString("cmb_item_type.Items"),
-            resources.GetString("cmb_item_type.Items1")});
-            this.cmb_item_type.Name = "cmb_item_type";
-            // 
-            // txt_demand_qty
-            // 
-            resources.ApplyResources(this.txt_demand_qty, "txt_demand_qty");
-            this.txt_demand_qty.Name = "txt_demand_qty";
-            // 
-            // txt_sale_dmnd_qty
-            // 
-            resources.ApplyResources(this.txt_sale_dmnd_qty, "txt_sale_dmnd_qty");
-            this.txt_sale_dmnd_qty.Name = "txt_sale_dmnd_qty";
-            // 
-            // txt_description
-            // 
-            resources.ApplyResources(this.txt_description, "txt_description");
-            this.txt_description.Name = "txt_description";
-            // 
-            // cmb_supplier
-            // 
-            this.cmb_supplier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_supplier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            resources.ApplyResources(this.cmb_supplier, "cmb_supplier");
-            this.cmb_supplier.FormattingEnabled = true;
-            this.cmb_supplier.Name = "cmb_supplier";
-            this.cmb_supplier.SelectedIndexChanged += new System.EventHandler(this.cmb_units_SelectedIndexChanged);
+            resources.ApplyResources(this.cmb_tax, "cmb_tax");
+            this.cmb_tax.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_tax.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.tableLayoutPanel1.SetColumnSpan(this.cmb_tax, 2);
+            this.cmb_tax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_tax.FormattingEnabled = true;
+            this.cmb_tax.Items.AddRange(new object[] {
+            resources.GetString("cmb_tax.Items"),
+            resources.GetString("cmb_tax.Items1")});
+            this.cmb_tax.Name = "cmb_tax";
             // 
             // cmb_units
             // 
+            resources.ApplyResources(this.cmb_units, "cmb_units");
             this.cmb_units.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_units.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            resources.ApplyResources(this.cmb_units, "cmb_units");
+            this.tableLayoutPanel1.SetColumnSpan(this.cmb_units, 2);
             this.cmb_units.FormattingEnabled = true;
             this.cmb_units.Items.AddRange(new object[] {
             resources.GetString("cmb_units.Items"),
@@ -553,77 +618,35 @@
             this.cmb_units.Name = "cmb_units";
             this.cmb_units.SelectedIndexChanged += new System.EventHandler(this.cmb_units_SelectedIndexChanged);
             // 
-            // cmb_tax
+            // txt_code
             // 
-            this.cmb_tax.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_tax.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_tax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cmb_tax, "cmb_tax");
-            this.cmb_tax.FormattingEnabled = true;
-            this.cmb_tax.Items.AddRange(new object[] {
-            resources.GetString("cmb_tax.Items"),
-            resources.GetString("cmb_tax.Items1")});
-            this.cmb_tax.Name = "cmb_tax";
+            resources.ApplyResources(this.txt_code, "txt_code");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_code, 2);
+            this.txt_code.Name = "txt_code";
+            this.txt_code.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.txt_code, resources.GetString("txt_code.ToolTip"));
             // 
-            // label37
+            // label23
             // 
-            resources.ApplyResources(this.label37, "label37");
-            this.label37.Name = "label37";
-            // 
-            // label24
-            // 
-            resources.ApplyResources(this.label24, "label24");
-            this.label24.Name = "label24";
-            // 
-            // label26
-            // 
-            resources.ApplyResources(this.label26, "label26");
-            this.label26.Name = "label26";
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
             // 
             // label36
             // 
             resources.ApplyResources(this.label36, "label36");
             this.label36.Name = "label36";
             // 
-            // label18
+            // label37
             // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
+            resources.ApplyResources(this.label37, "label37");
+            this.label37.Name = "label37";
             // 
-            // label17
+            // btn_upload_picture
             // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // label31
-            // 
-            resources.ApplyResources(this.label31, "label31");
-            this.label31.Name = "label31";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // label32
-            // 
-            resources.ApplyResources(this.label32, "label32");
-            this.label32.Name = "label32";
-            // 
-            // txt_cost_price
-            // 
-            resources.ApplyResources(this.txt_cost_price, "txt_cost_price");
-            this.txt_cost_price.Name = "txt_cost_price";
-            // 
-            // txt_unit_price_2
-            // 
-            resources.ApplyResources(this.txt_unit_price_2, "txt_unit_price_2");
-            this.txt_unit_price_2.Name = "txt_unit_price_2";
-            // 
-            // txt_unit_price
-            // 
-            resources.ApplyResources(this.txt_unit_price, "txt_unit_price");
-            this.txt_unit_price.Name = "txt_unit_price";
+            resources.ApplyResources(this.btn_upload_picture, "btn_upload_picture");
+            this.btn_upload_picture.Name = "btn_upload_picture";
+            this.btn_upload_picture.UseVisualStyleBackColor = true;
+            this.btn_upload_picture.Click += new System.EventHandler(this.btn_upload_picture_Click);
             // 
             // tabPage3
             // 
@@ -637,16 +660,16 @@
             this.grid_movements.AllowUserToAddRows = false;
             this.grid_movements.AllowUserToDeleteRows = false;
             this.grid_movements.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(250)))));
-            this.grid_movements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_movements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle66.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(250)))));
+            this.grid_movements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle67.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle67.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle67.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle67.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_movements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle67;
             this.grid_movements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_movements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -660,14 +683,14 @@
             this.supplier,
             this.customer,
             this.trans_date});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_movements.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle78.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle78.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
+            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_movements.DefaultCellStyle = dataGridViewCellStyle78;
             resources.ApplyResources(this.grid_movements, "grid_movements");
             this.grid_movements.EnableHeadersVisualStyles = false;
             this.grid_movements.Name = "grid_movements";
@@ -685,8 +708,8 @@
             // 
             this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_no.DataPropertyName = "invoice_no";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoice_no.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle68.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoice_no.DefaultCellStyle = dataGridViewCellStyle68;
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
@@ -695,11 +718,11 @@
             // 
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.qty.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle69.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle69.Format = "N2";
+            dataGridViewCellStyle69.NullValue = null;
+            this.qty.DefaultCellStyle = dataGridViewCellStyle69;
             resources.ApplyResources(this.qty, "qty");
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
@@ -708,11 +731,11 @@
             // 
             this.balanceQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.balanceQty.DataPropertyName = "balanceQty";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.balanceQty.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle70.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle70.Format = "N2";
+            dataGridViewCellStyle70.NullValue = null;
+            this.balanceQty.DefaultCellStyle = dataGridViewCellStyle70;
             resources.ApplyResources(this.balanceQty, "balanceQty");
             this.balanceQty.Name = "balanceQty";
             this.balanceQty.ReadOnly = true;
@@ -721,11 +744,11 @@
             // 
             this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cost_price.DataPropertyName = "cost_price";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle71.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle71.Format = "N2";
+            dataGridViewCellStyle71.NullValue = null;
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle71;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
@@ -734,11 +757,11 @@
             // 
             this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle72.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle72.Format = "N2";
+            dataGridViewCellStyle72.NullValue = null;
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle72;
             resources.ApplyResources(this.unit_price, "unit_price");
             this.unit_price.Name = "unit_price";
             this.unit_price.ReadOnly = true;
@@ -746,8 +769,8 @@
             // loc_code
             // 
             this.loc_code.DataPropertyName = "loc_code";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loc_code.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle73.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loc_code.DefaultCellStyle = dataGridViewCellStyle73;
             resources.ApplyResources(this.loc_code, "loc_code");
             this.loc_code.Name = "loc_code";
             this.loc_code.ReadOnly = true;
@@ -756,8 +779,8 @@
             // 
             this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.description.DataPropertyName = "description";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.description.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle74.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.description.DefaultCellStyle = dataGridViewCellStyle74;
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
             this.description.ReadOnly = true;
@@ -766,8 +789,8 @@
             // 
             this.supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.supplier.DataPropertyName = "supplier";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.supplier.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle75.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplier.DefaultCellStyle = dataGridViewCellStyle75;
             resources.ApplyResources(this.supplier, "supplier");
             this.supplier.Name = "supplier";
             this.supplier.ReadOnly = true;
@@ -776,8 +799,8 @@
             // 
             this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.customer.DataPropertyName = "customer";
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customer.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle76.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customer.DefaultCellStyle = dataGridViewCellStyle76;
             resources.ApplyResources(this.customer, "customer");
             this.customer.Name = "customer";
             this.customer.ReadOnly = true;
@@ -786,10 +809,10 @@
             // 
             this.trans_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.trans_date.DataPropertyName = "trans_date";
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.Format = "d";
-            dataGridViewCellStyle12.NullValue = null;
-            this.trans_date.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle77.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle77.Format = "d";
+            dataGridViewCellStyle77.NullValue = null;
+            this.trans_date.DefaultCellStyle = dataGridViewCellStyle77;
             resources.ApplyResources(this.trans_date, "trans_date");
             this.trans_date.Name = "trans_date";
             this.trans_date.ReadOnly = true;
@@ -860,6 +883,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.Name = "frm_product_full_detail";
+            this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_product_full_detail_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_product_full_detail_KeyDown);
@@ -868,7 +892,8 @@
             this.panel2.ResumeLayout(false);
             this.Products_tab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_movements)).EndInit();
@@ -970,5 +995,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

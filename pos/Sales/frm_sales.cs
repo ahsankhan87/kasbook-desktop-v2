@@ -44,6 +44,9 @@ namespace pos
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
 
+        private static readonly HashSet<string> _numericColumns =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "unit_price", "discount", "discount_percent", "total_without_vat" };
+
         public double cash_sales_amount_limit = 0;
         //public double cash_purchase_amount_limit= 0;
         public bool allow_credit_sales = false;
@@ -439,8 +442,8 @@ namespace pos
 
                 }
 
-                // Handle the end of editing for numeric columns (Qty=4, unit_price=5, discount=6, discount_percent=7, total_without_vat=8)
-                if (e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7 || e.ColumnIndex == 8)
+                // Handle the end of editing for numeric columns (Qty, unit_price, discount, discount_percent, total_without_vat)
+                if (_numericColumns.Contains(grid_sales.Columns[e.ColumnIndex].Name))
                 {
                     var cell = grid_sales.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     // If the cell value is null or empty, set it to 0
@@ -1657,8 +1660,16 @@ namespace pos
                 if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
                 {
                     e.SuppressKeyPress = true;
+
+                    // Commit the active cell edit before navigating;
+                    // changing CurrentCell while in edit mode throws InvalidOperationException.
+                    if (grid_sales.IsCurrentCellInEditMode)
+                        grid_sales.EndEdit();
+
+                    if (grid_sales.CurrentCell == null) return;
+
                     int iColumn = grid_sales.CurrentCell.ColumnIndex;
-                    int iRow = grid_sales.CurrentCell.RowIndex;
+                    int iRow    = grid_sales.CurrentCell.RowIndex;
 
                     int snoIdx = grid_sales.Columns["sno"].Index;
                     int idIdx = grid_sales.Columns["id"].Index;
@@ -1896,8 +1907,7 @@ namespace pos
 
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
-            if (grid_sales.CurrentCell.ColumnIndex == 4 || grid_sales.CurrentCell.ColumnIndex == 5 || grid_sales.CurrentCell.ColumnIndex == 6
-                || grid_sales.CurrentCell.ColumnIndex == 7 || grid_sales.CurrentCell.ColumnIndex == 8) //qty, unit price and discount Column will accept only numeric
+            if (_numericColumns.Contains(grid_sales.Columns[grid_sales.CurrentCell.ColumnIndex].Name)) // Qty, unit_price, discount, discount_percent, total_without_vat — numeric only
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -3381,26 +3391,22 @@ namespace pos
 
         private void grid_sales_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            // Validate only the numeric columns (Qty=4, unit_price=5, discount=6, discount_percent=7, total_without_vat=8)
-            if (e.ColumnIndex == 4 || e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7 || e.ColumnIndex == 8)
+            string colName = grid_sales.Columns[e.ColumnIndex].Name;
+            if (!_numericColumns.Contains(colName)) return;
+
+            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
             {
-                // Check if the value is null or empty
-                if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-                {
-                    e.Cancel = true; // Prevent the cell from losing focus
-                    grid_sales.Rows[e.RowIndex].ErrorText = "Value cannot be null or empty";
-                }
-                // Check if the value is a valid numeric value
-                else if (!decimal.TryParse(e.FormattedValue.ToString(), out _))
-                {
-                    e.Cancel = true; // Prevent the cell from losing focus
-                    grid_sales.Rows[e.RowIndex].ErrorText = "Value must be a numeric value";
-                }
-                else
-                {
-                    // Clear any previous error messages
-                    grid_sales.Rows[e.RowIndex].ErrorText = string.Empty;
-                }
+                e.Cancel = true;
+                grid_sales.Rows[e.RowIndex].ErrorText = "Value cannot be null or empty";
+            }
+            else if (!decimal.TryParse(e.FormattedValue.ToString(), out _))
+            {
+                e.Cancel = true;
+                grid_sales.Rows[e.RowIndex].ErrorText = "Value must be a numeric value";
+            }
+            else
+            {
+                grid_sales.Rows[e.RowIndex].ErrorText = string.Empty;
             }
         }
 

@@ -787,10 +787,10 @@
     <value>وصف</value>
   </data>
   <data name="grid_customer_transactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>886, 515</value>
+    <value>912, 515</value>
   </data>
   <data name="panelTransactionBottom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>886, 515</value>
+    <value>912, 515</value>
   </data>
   <data name="btn_payment.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
@@ -817,7 +817,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="Btn_printCustomerReceipt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 11</value>
+    <value>647, 11</value>
   </data>
   <data name="Btn_printCustomerReceipt.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 32</value>
@@ -829,7 +829,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="Btn_ledger_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>762, 10</value>
+    <value>788, 10</value>
   </data>
   <data name="Btn_ledger_report.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 33</value>
@@ -838,13 +838,13 @@
     <value>&amp;تقرير العملاء</value>
   </data>
   <data name="panelTransactionTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>886, 51</value>
+    <value>912, 51</value>
   </data>
   <data name="Transactions.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="Transactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>892, 570</value>
+    <value>918, 570</value>
   </data>
   <data name="Transactions.Text" xml:space="preserve">
     <value>المعاملات</value>

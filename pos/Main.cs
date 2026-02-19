@@ -9,6 +9,7 @@ using POS.BLL;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -42,6 +43,7 @@ namespace pos
         {
             // Apply professional theme
             UI.AppTheme.Apply(this);
+            StyleMainForm();
 
             this.Text = "Nozum ERP - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
@@ -60,6 +62,64 @@ namespace pos
 
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+        }
+
+        private void StyleMainForm()
+        {
+            // Menu strip
+            menuStrip1.BackColor = AppTheme.Surface;
+            menuStrip1.ForeColor = AppTheme.TextPrimary;
+            menuStrip1.Font = AppTheme.FontToolStrip;
+            menuStrip1.Renderer = new pos.UI.FluentToolStripRenderer();
+            menuStrip1.Padding = new Padding(6, 2, 6, 2);
+
+            // Status strip
+            statusStrip1.BackColor = AppTheme.PrimaryDark;
+            statusStrip1.ForeColor = AppTheme.TextOnPrimary;
+            statusStrip1.Font = AppTheme.FontStatusBar;
+            statusStrip1.Renderer = new pos.UI.FluentToolStripRenderer();
+            foreach (ToolStripItem item in statusStrip1.Items)
+                item.ForeColor = AppTheme.TextOnPrimary;
+
+            // Left navigation (side menu)
+            sideMenu.BackColor = SystemColors.Control;
+            sideMenu.ForeColor = SystemColors.ControlText;
+            sideMenu.GripStyle = ToolStripGripStyle.Hidden;
+            sideMenu.RenderMode = ToolStripRenderMode.System;
+            sideMenu.AutoSize = true;
+            //sideMenu.Padding = new Padding(4, 6, 4, 6);
+
+            foreach (ToolStripItem item in sideMenu.Items)
+            {
+                if (item is ToolStripButton btn)
+                    StyleSideMenuButton(btn);
+            }
+
+            // MDI background
+            foreach (Control ctrl in this.Controls)
+            {
+                if (ctrl is MdiClient mdi)
+                    mdi.BackColor = AppTheme.Background;
+            }
+        }
+
+        private void StyleSideMenuButton(ToolStripButton btn)
+        {
+            btn.AutoSize = false;
+            if (sideMenu.Width > 0)
+                btn.Width = sideMenu.Width - 10;
+            //btn.Height = 36;
+            //btn.Margin = new Padding(2, 2, 2, 2);
+            //btn.Padding = new Padding(6, 0, 4, 0);
+            //btn.TextAlign = ContentAlignment.MiddleLeft;
+            //btn.ImageAlign = ContentAlignment.MiddleLeft;
+            //btn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            //btn.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            btn.Font = AppTheme.FontToolStrip;
+            btn.ForeColor = SystemColors.ControlText;
+            btn.BackColor = SystemColors.Control;
+            btn.Checked = false;
+            btn.CheckOnClick = false;
         }
 
         private void LoadAllMenus()

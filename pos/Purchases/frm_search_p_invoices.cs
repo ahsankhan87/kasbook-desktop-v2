@@ -32,8 +32,198 @@ namespace pos
 
         private void search_p_invoices_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleSearchForm();
+
             Listbox_method.SelectedIndex = 3;
             txt_condition.Focus();
+        }
+
+        // ── Uniform app styling ───────────────────────────────────────────────
+        private void StyleSearchForm()
+        {
+            // ── Form ─────────────────────────────────────────────────────────
+            this.BackColor = SystemColors.Control;
+            this.Font      = AppTheme.FontDefault;
+
+            // ── Filter panel (panel1) ─────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+            panel1.Padding   = new Padding(8, 6, 8, 6);
+
+            // ── Results panel (panel2) ────────────────────────────────────────
+            panel2.BackColor = SystemColors.Control;
+            panel2.Padding   = new Padding(6, 4, 6, 6);
+
+            // ── GroupBoxes ────────────────────────────────────────────────────
+            foreach (GroupBox grp in new[] { groupBox1, groupBox2 })
+            {
+                grp.BackColor = SystemColors.Control;
+                grp.ForeColor = SystemColors.ControlText;
+                grp.Font      = AppTheme.FontGroupBox;
+                grp.Padding   = new Padding(6, 10, 6, 6);
+            }
+
+            // ── Search-method ListBox ─────────────────────────────────────────
+            Listbox_method.BackColor   = SystemColors.Window;
+            Listbox_method.ForeColor   = AppTheme.TextPrimary;
+            Listbox_method.Font        = new Font("Segoe UI", 10F, FontStyle.Regular);
+            Listbox_method.BorderStyle = BorderStyle.FixedSingle;
+
+            // DrawMode must be set BEFORE ItemHeight: in Normal mode ItemHeight
+            // is read-only (auto-sized from font) so the assignment is silently
+            // ignored, causing the subsequent Height calculation to use the wrong value.
+            Listbox_method.DrawMode = DrawMode.OwnerDrawFixed;
+            Listbox_method.DrawItem -= Listbox_method_DrawItem;
+            Listbox_method.DrawItem += Listbox_method_DrawItem;
+
+            Listbox_method.ItemHeight     = 28;
+            Listbox_method.IntegralHeight = false;
+            Listbox_method.Height         = Listbox_method.ItemHeight * Listbox_method.Items.Count + 4;
+
+            // ── Search condition inputs ───────────────────────────────────────
+            txt_condition.Font        = AppTheme.FontDefault;
+            txt_condition.BackColor   = SystemColors.Window;
+            txt_condition.BorderStyle = BorderStyle.FixedSingle;
+            txt_condition.Height      = AppTheme.InputHeight;
+
+            txt_from_date.Font      = AppTheme.FontDefault;
+            txt_from_date.CalendarFont = AppTheme.FontDefault;
+
+            txt_to_date.Font        = AppTheme.FontDefault;
+            txt_to_date.CalendarFont = AppTheme.FontDefault;
+
+            // ── Labels ────────────────────────────────────────────────────────
+            foreach (Label lbl in new[] { label1, label3, label5 })
+            {
+                lbl.Font      = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+                lbl.ForeColor = AppTheme.TextSecondary;
+            }
+
+            // ── Hold-purchases checkbox ───────────────────────────────────────
+            chk_hold_purchases.Font      = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            chk_hold_purchases.ForeColor = SystemColors.ControlText;
+
+            // ── Buttons ───────────────────────────────────────────────────────
+            StyleActionButton(btn_search,  AppTheme.Primary,  AppTheme.PrimaryDark);
+            StyleActionButton(btn_ok,      AppTheme.Accent,   AppTheme.PrimaryDark);
+            StyleActionButton(btn_close,   AppTheme.Danger,   AppTheme.DangerDark);
+
+            // ── Results grid ─────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance  |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_sales_report, new object[] { true });
+
+            grid_sales_report.BackgroundColor     = SystemColors.AppWorkspace;
+            grid_sales_report.BorderStyle         = BorderStyle.None;
+            grid_sales_report.CellBorderStyle     = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid_sales_report.GridColor           = SystemColors.ControlLight;
+            grid_sales_report.RowHeadersVisible   = false;
+            grid_sales_report.EnableHeadersVisualStyles = false;
+
+            grid_sales_report.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid_sales_report.ColumnHeadersHeight         = 36;
+            grid_sales_report.RowTemplate.Height          = 32;
+
+            grid_sales_report.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = SystemColors.Control,
+                ForeColor          = SystemColors.ControlText,
+                Font               = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment          = DataGridViewContentAlignment.MiddleLeft,
+                Padding            = new Padding(6, 4, 6, 4)
+            };
+
+            grid_sales_report.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = SystemColors.Window,
+                ForeColor          = AppTheme.TextPrimary,
+                Font               = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding            = new Padding(6, 2, 6, 2)
+            };
+
+            grid_sales_report.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = AppTheme.GridAltRow,
+                ForeColor          = AppTheme.TextPrimary,
+                Font               = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            // total_amount column: right-aligned, bold accent
+            total_amount.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                Alignment          = DataGridViewContentAlignment.MiddleRight,
+                Format             = "N2",
+                Font               = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular),
+                ForeColor          = AppTheme.Primary,
+                SelectionForeColor = SystemColors.HighlightText,
+                SelectionBackColor = SystemColors.Highlight
+            };
+
+            // invoice_no column: bold
+            invoice_no.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                Font               = new Font("Segoe UI Semibold", 9F, FontStyle.Regular),
+                ForeColor          = AppTheme.TextPrimary,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            // Reset per-column fonts from resx
+            foreach (DataGridViewColumn col in grid_sales_report.Columns)
+            {
+                if (col.Name != "total_amount" && col.Name != "invoice_no")
+                    col.DefaultCellStyle.Font = null;
+            }
+        }
+
+        // ── Owner-draw ListBox: coloured highlight for selected item ──────────
+        private void Listbox_method_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+
+            Color bg   = selected ? AppTheme.Primary      : SystemColors.Window;
+            Color fore = selected ? Color.White            : AppTheme.TextPrimary;
+
+            using (var bgBrush = new SolidBrush(bg))
+                e.Graphics.FillRectangle(bgBrush, e.Bounds);
+
+            // Left accent stripe for selected item
+            if (selected)
+                using (var stripe = new SolidBrush(AppTheme.PrimaryDark))
+                    e.Graphics.FillRectangle(stripe, e.Bounds.X, e.Bounds.Y, 4, e.Bounds.Height);
+
+            string text = Listbox_method.Items[e.Index].ToString();
+            TextRenderer.DrawText(e.Graphics, text,
+                new Font("Segoe UI", 10F, selected ? FontStyle.Bold : FontStyle.Regular),
+                new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width - 10, e.Bounds.Height),
+                fore,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+        }
+
+        // ── Button helper ─────────────────────────────────────────────────────
+        private static void StyleActionButton(Button btn, Color baseColor, Color darkColor)
+        {
+            btn.FlatStyle  = FlatStyle.Flat;
+            btn.BackColor  = baseColor;
+            btn.ForeColor  = Color.White;
+            btn.Font       = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            btn.Cursor     = Cursors.Hand;
+            btn.Height     = 34;
+            btn.FlatAppearance.BorderSize        = 0;
+            btn.FlatAppearance.MouseOverBackColor =
+                Color.FromArgb(Math.Min(255, baseColor.R + 30),
+                               Math.Min(255, baseColor.G + 30),
+                               Math.Min(255, baseColor.B + 30));
+            btn.FlatAppearance.MouseDownBackColor = darkColor;
         }
 
         private void btn_search_Click(object sender, EventArgs e)
