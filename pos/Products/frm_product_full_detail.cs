@@ -140,13 +140,6 @@ namespace pos
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
 
             // Buttons
-            foreach (Button btn in new[] { btn_save, btn_cancel, btn_search_products, btn_upload_picture, btn_translate })
-            {
-                btn.FlatStyle = FlatStyle.Flat;
-                btn.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
-                btn.Height = 34;
-            }
-
             // Grid: movements
             typeof(DataGridView).InvokeMember("DoubleBuffered",
                 System.Reflection.BindingFlags.NonPublic |

@@ -101,17 +101,33 @@ namespace pos.UI
                 form.ForeColor = TextPrimary;
             }
 
-            ApplyRecursive(root, rtl);
+            root.SuspendLayout();
+            try
+            {
+                ApplyRecursive(root, rtl);
+            }
+            finally
+            {
+                root.ResumeLayout(true);
+            }
         }
 
         // ?? Recursive walker ????????????????????????????????????????
         private static void ApplyRecursive(Control control, bool rtl)
         {
-            StyleControl(control, rtl);
-
-            foreach (Control child in control.Controls)
+            control.SuspendLayout();
+            try
             {
-                ApplyRecursive(child, rtl);
+                StyleControl(control, rtl);
+
+                foreach (Control child in control.Controls)
+                {
+                    ApplyRecursive(child, rtl);
+                }
+            }
+            finally
+            {
+                control.ResumeLayout(false);
             }
         }
 
@@ -133,9 +149,17 @@ namespace pos.UI
             if (ctrl is MenuStrip ms)             { StyleMenuStrip(ms);          return; }
             if (ctrl is StatusStrip ss)           { StyleStatusStrip(ss);        return; }
             if (ctrl is ToolStrip ts)             { StyleToolStrip(ts);          return; }
-            if (ctrl is TableLayoutPanel tlp)     { tlp.BackColor = Color.Transparent; return; }
+            if (ctrl is TableLayoutPanel tlp)
+            {
+                tlp.BackColor = SystemColors.Control;
+                tlp.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                return;
+            }
             if (ctrl is FlowLayoutPanel flp)      { flp.BackColor = Color.Transparent; return; }
             if (ctrl is PictureBox pb)            { pb.BackColor = Surface;      return; }
+
+            ctrl.Font = FontDefault;
+            ctrl.ForeColor = TextPrimary;
         }
 
         // ???????????????????????????????????????????????????????????
@@ -186,6 +210,7 @@ namespace pos.UI
             btn.FlatAppearance.BorderSize = 1;
             btn.Cursor = Cursors.Hand;
             btn.Font = FontButton;
+            btn.Height = ButtonHeight;
             btn.UseVisualStyleBackColor = false;
 
             if (name.Contains("save") || name.Contains("payment"))
@@ -410,54 +435,83 @@ namespace pos.UI
         // ???????????????????????????????????????????????????????????
         private static void StyleDataGridView(DataGridView dgv, bool rtl)
         {
-            dgv.BorderStyle = BorderStyle.None;
-            dgv.BackgroundColor = Surface;
-            dgv.GridColor = Border;
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgv.RowHeadersVisible = false;
-
             if (rtl)
                 dgv.RightToLeft = RightToLeft.Yes;
 
-            dgv.EnableHeadersVisualStyles = false;
-
-            var headerAlign = rtl
-                ? DataGridViewContentAlignment.MiddleRight
-                : DataGridViewContentAlignment.MiddleLeft;
-
-            dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            if (ShouldApplyGridStyle(dgv))
             {
-                BackColor = GridHeader,
-                ForeColor = TextSecondary,
-                Font = FontGridHeader,
-                Alignment = headerAlign,
-                Padding = new Padding(8, 4, 8, 4),
-                SelectionBackColor = GridHeader,
-                SelectionForeColor = TextSecondary
-            };
-            dgv.ColumnHeadersHeight = 38;
-            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+                dgv.BorderStyle = BorderStyle.None;
+                dgv.BackgroundColor = Surface;
+                dgv.GridColor = Border;
+                dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+                dgv.RowHeadersVisible = false;
+                dgv.EnableHeadersVisualStyles = false;
 
-            dgv.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = Surface,
-                ForeColor = TextPrimary,
-                Font = FontGrid,
-                SelectionBackColor = GridSelection,
-                SelectionForeColor = TextPrimary,
-                Padding = new Padding(6, 3, 6, 3)
-            };
-            dgv.RowTemplate.Height = 34;
+                var headerAlign = rtl
+                    ? DataGridViewContentAlignment.MiddleRight
+                    : DataGridViewContentAlignment.MiddleLeft;
 
-            dgv.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+                dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = GridHeader,
+                    ForeColor = TextSecondary,
+                    Font = FontGridHeader,
+                    Alignment = headerAlign,
+                    Padding = new Padding(8, 4, 8, 4),
+                    SelectionBackColor = GridHeader,
+                    SelectionForeColor = TextSecondary
+                };
+                dgv.ColumnHeadersHeight = 38;
+                dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+                dgv.DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = Surface,
+                    ForeColor = TextPrimary,
+                    Font = FontGrid,
+                    SelectionBackColor = GridSelection,
+                    SelectionForeColor = TextPrimary,
+                    Padding = new Padding(6, 3, 6, 3)
+                };
+                dgv.RowTemplate.Height = 34;
+
+                dgv.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+                {
+                    BackColor = GridAltRow,
+                    ForeColor = TextPrimary,
+                    Font = FontGrid,
+                    SelectionBackColor = GridSelection,
+                    SelectionForeColor = TextPrimary
+                };
+                return;
+            }
+
+            dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle(dgv.ColumnHeadersDefaultCellStyle)
             {
-                BackColor = GridAltRow,
-                ForeColor = TextPrimary,
-                Font = FontGrid,
-                SelectionBackColor = GridSelection,
-                SelectionForeColor = TextPrimary
+                Font = FontGridHeader
             };
+
+            dgv.DefaultCellStyle = new DataGridViewCellStyle(dgv.DefaultCellStyle)
+            {
+                Font = FontGrid
+            };
+
+            dgv.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle(dgv.AlternatingRowsDefaultCellStyle)
+            {
+                Font = FontGrid
+            };
+        }
+
+        private static bool ShouldApplyGridStyle(Control control)
+        {
+            var form = control.FindForm();
+            if (form == null)
+                return false;
+
+            var name = form.Name ?? string.Empty;
+            return name.Equals("frm_sales", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("frm_purchases", StringComparison.OrdinalIgnoreCase);
         }
 
         // ???????????????????????????????????????????????????????????

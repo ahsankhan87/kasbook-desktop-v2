@@ -18,6 +18,7 @@ namespace pos
 {
     public partial class frm_purchases : Form
     {
+        private static readonly ComponentResourceManager PurchasesResources = new ComponentResourceManager(typeof(frm_purchases));
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
@@ -192,8 +193,8 @@ namespace pos
                 System.Reflection.BindingFlags.SetProperty,
                 null, grid_purchases, new object[] { true });
 
-            var gridFont   = new Font("Segoe UI", 10F, FontStyle.Regular);
-            var headerFont = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            var gridFont   = AppTheme.FontGrid;
+            var headerFont = AppTheme.FontGridHeader;
 
             // Grid-level settings
             grid_purchases.BorderStyle          = BorderStyle.None;
@@ -288,7 +289,7 @@ namespace pos
             {
                 BackColor          = SystemColors.Control,
                 ForeColor          = SystemColors.ControlText,
-                Font               = new Font("Segoe UI Semibold", 9F, FontStyle.Regular),
+                Font               = AppTheme.FontGridHeader,
                 SelectionBackColor = SystemColors.Control,
                 SelectionForeColor = SystemColors.ControlText
             };
@@ -296,7 +297,7 @@ namespace pos
             {
                 BackColor          = SystemColors.Window,
                 ForeColor          = SystemColors.WindowText,
-                Font               = new Font("Segoe UI", 9F, FontStyle.Regular),
+                Font               = AppTheme.FontGrid,
                 SelectionBackColor = SystemColors.Highlight,
                 SelectionForeColor = SystemColors.HighlightText
             };
@@ -334,7 +335,7 @@ namespace pos
             StylePurchaseLabel(label20, false);   // Disc Value
             StylePurchaseLabel(label22, false);   // Shipping Cost
 
-            chkbox_is_taxable.Font      = new Font("Segoe UI Semibold", 10F, FontStyle.Regular);
+            chkbox_is_taxable.Font      = AppTheme.FontSemiBold;
             chkbox_is_taxable.ForeColor = SystemColors.ControlText;
 
             // Total fields
@@ -360,18 +361,14 @@ namespace pos
             txt.TextAlign   = HorizontalAlignment.Right;
             txt.ForeColor   = SystemColors.WindowText;
             txt.BackColor   = SystemColors.Window;
-            txt.Font = isPrimary
-                ? new Font("Segoe UI Semibold", 16F, FontStyle.Bold)
-                : new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
+            txt.Font = isPrimary ? AppTheme.FontHeader : AppTheme.FontSubHeader;
         }
 
         /// <summary>Style a purchases footer label.</summary>
         private static void StylePurchaseLabel(Label lbl, bool isPrimary)
         {
             lbl.ForeColor = SystemColors.ControlText;
-            lbl.Font = isPrimary
-                ? new Font("Segoe UI Semibold", 11F, FontStyle.Bold)
-                : new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            lbl.Font = isPrimary ? AppTheme.FontSemiBold : AppTheme.FontLabel;
         }
 
         /// <summary>Style a popup DataGridView dropdown on the purchases page.</summary>

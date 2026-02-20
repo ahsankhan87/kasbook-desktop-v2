@@ -92,14 +92,6 @@ namespace pos
             groupBox3.Font = AppTheme.FontGroupBox;
             groupBox2.Font = AppTheme.FontGroupBox;
 
-            foreach (Button btn in new[] { btn_save, btn_update, btn_delete, btn_blank, btn_cancel, btn_refresh, btn_search, btn_payment, btn_trans_refresh, Btn_ledger_report, Btn_printPaymentReceipt })
-            {
-                if (btn == null) continue;
-                btn.FlatStyle = FlatStyle.Flat;
-                btn.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
-                btn.Height = 34;
-            }
-
             StyleLedgerGrid(grid_supplier_transactions);
         }
 

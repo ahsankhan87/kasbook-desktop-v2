@@ -4,6 +4,7 @@ using pos.Security.Authorization;
 using pos.UI; // <-- Added Ui namespace
 using POS.BLL;
 using POS.Core;
+using System.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,6 +20,15 @@ namespace pos
 {
     public partial class frm_sales : Form
     {
+        private static readonly ComponentResourceManager SalesResources = new ComponentResourceManager(typeof(frm_sales));
+        private static readonly Font SalesGridFont = AppTheme.FontGrid;
+        private static readonly Font SalesGridHeaderFont = AppTheme.FontGridHeader;
+        private static readonly Font TaxableCheckFont = AppTheme.FontSemiBold;
+        private static readonly Font TotalPrimaryFont = AppTheme.FontHeader;
+        private static readonly Font TotalSecondaryFont = AppTheme.FontSubHeader;
+        private static readonly Font SecondaryFieldFont = AppTheme.FontSemiBold;
+        private static readonly Font FooterPrimaryLabelFont = AppTheme.FontSemiBold;
+        private static readonly Font FooterSecondaryLabelFont = AppTheme.FontLabel;
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
         public int cash_account_id = 0;
         public int sales_account_id = 0;
@@ -224,8 +234,8 @@ namespace pos
             grid_sales.RowTemplate.Height = 34;
             grid_sales.RowHeadersVisible = false;
             grid_sales.BackgroundColor = SystemColors.AppWorkspace;
-            grid_sales.DefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
-            grid_sales.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            grid_sales.DefaultCellStyle.Font = SalesGridFont;
+            grid_sales.ColumnHeadersDefaultCellStyle.Font = SalesGridHeaderFont;
 
             // Serial number column: muted, centered
             sno.DefaultCellStyle = new DataGridViewCellStyle
@@ -267,11 +277,35 @@ namespace pos
             groupBox2.ForeColor = SystemColors.ControlText;
             groupBox2.Font = AppTheme.FontGroupBox;
 
+            groupBox5.BackColor = SystemColors.Control;
+            groupBox5.ForeColor = SystemColors.ControlText;
+            groupBox5.Font = AppTheme.FontGroupBox;
+            //groupBox5.Padding = new Padding(8, 18, 8, 8);
+
+            groupBox6.BackColor = SystemColors.Control;
+            groupBox6.ForeColor = SystemColors.ControlText;
+            groupBox6.Font = AppTheme.FontGroupBox;
+            //groupBox6.Padding = new Padding(8, 18, 8, 8);
+
+            foreach (RadioButton rb in groupBox5.Controls.OfType<RadioButton>())
+            {
+                rb.Font = AppTheme.FontDefault;
+                rb.AutoSize = true;
+                rb.Margin = new Padding(6, 4, 6, 4);
+            }
+
+            foreach (RadioButton rb in groupBox6.Controls.OfType<RadioButton>())
+            {
+                rb.Font = AppTheme.FontDefault;
+                rb.AutoSize = true;
+                rb.Margin = new Padding(6, 4, 6, 4);
+            }
+
             // ── Main totals labels ──────────────────────────────
             StyleFooterLabel(label14, false);      // Sub Total
             StyleFooterLabel(label13, false);      // Discount
             StyleFooterLabel(label9, true);        // Total Amount
-            chkbox_is_taxable.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
+            chkbox_is_taxable.Font = TaxableCheckFont;
             chkbox_is_taxable.ForeColor = SystemColors.ControlText;
 
             // ── Secondary labels (tableLayoutPanel7) ──────────────────
@@ -316,13 +350,13 @@ namespace pos
             txt.TextAlign = HorizontalAlignment.Right;
             if (isPrimary)
             {
-                txt.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+                txt.Font = TotalPrimaryFont;
                 txt.ForeColor = SystemColors.WindowText;
                 txt.BackColor = SystemColors.Window;
             }
             else
             {
-                txt.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Regular);
+                txt.Font = TotalSecondaryFont;
                 txt.ForeColor = SystemColors.WindowText;
                 txt.BackColor = SystemColors.Window;
             }
@@ -333,7 +367,7 @@ namespace pos
         {
             txt.BorderStyle = BorderStyle.Fixed3D;
             txt.TextAlign = HorizontalAlignment.Right;
-            txt.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
+            txt.Font = SecondaryFieldFont;
             txt.ForeColor = SystemColors.WindowText;
             txt.BackColor = SystemColors.Window;
         }
@@ -391,12 +425,12 @@ namespace pos
         {
             if (isPrimary)
             {
-                lbl.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+                lbl.Font = FooterPrimaryLabelFont;
                 lbl.ForeColor = SystemColors.ControlText;
             }
             else
             {
-                lbl.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular);
+                lbl.Font = FooterSecondaryLabelFont;
                 lbl.ForeColor = SystemColors.ControlText;
             }
         }
@@ -1867,6 +1901,13 @@ namespace pos
                     get_total_amount();
                     get_total_qty();
 
+                    grid_sales.EndEdit();
+                    grid_sales.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
+                    grid_sales.ClearSelection();
+                    if (grid_sales.Rows.Count > 0)
+                    {
+                        grid_sales.CurrentCell = grid_sales.Rows[0].Cells["code"];
+                    }
                     grid_sales.Focus();
                 }
             }

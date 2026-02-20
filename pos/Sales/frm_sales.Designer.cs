@@ -89,12 +89,6 @@
             this.groupBox_products = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.rd_btn_with_vat = new System.Windows.Forms.RadioButton();
-            this.rd_btn_without_vat = new System.Windows.Forms.RadioButton();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.rd_btn_bytotal_price = new System.Windows.Forms.RadioButton();
-            this.rd_btn_by_unitprice = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_groups = new System.Windows.Forms.TextBox();
             this.txt_brand_code = new System.Windows.Forms.TextBox();
@@ -103,8 +97,14 @@
             this.txt_category_code = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txt_barcode = new System.Windows.Forms.TextBox();
-            this.txt_brands = new System.Windows.Forms.TextBox();
             this.txt_categories = new System.Windows.Forms.TextBox();
+            this.txt_brands = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rd_btn_with_vat = new System.Windows.Forms.RadioButton();
+            this.rd_btn_without_vat = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.rd_btn_bytotal_price = new System.Windows.Forms.RadioButton();
+            this.rd_btn_by_unitprice = new System.Windows.Forms.RadioButton();
             this.grid_sales = new System.Windows.Forms.DataGridView();
             this.sno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -550,6 +550,7 @@
             // groupBox_products
             // 
             this.groupBox_products.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox_products.Controls.Add(this.groupBox5);
             resources.ApplyResources(this.groupBox_products, "groupBox_products");
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
@@ -558,7 +559,6 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.label8, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.groupBox5, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.txt_groups, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.txt_brand_code, 2, 3);
@@ -567,60 +567,14 @@
             this.tableLayoutPanel2.Controls.Add(this.txt_category_code, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label18, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.txt_barcode, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txt_brands, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.txt_categories, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txt_brands, 1, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            // 
-            // groupBox5
-            // 
-            this.tableLayoutPanel2.SetColumnSpan(this.groupBox5, 3);
-            this.groupBox5.Controls.Add(this.rd_btn_with_vat);
-            this.groupBox5.Controls.Add(this.rd_btn_without_vat);
-            this.groupBox5.Controls.Add(this.groupBox6);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
-            // 
-            // rd_btn_with_vat
-            // 
-            resources.ApplyResources(this.rd_btn_with_vat, "rd_btn_with_vat");
-            this.rd_btn_with_vat.Name = "rd_btn_with_vat";
-            this.rd_btn_with_vat.UseVisualStyleBackColor = true;
-            // 
-            // rd_btn_without_vat
-            // 
-            resources.ApplyResources(this.rd_btn_without_vat, "rd_btn_without_vat");
-            this.rd_btn_without_vat.Checked = true;
-            this.rd_btn_without_vat.Name = "rd_btn_without_vat";
-            this.rd_btn_without_vat.TabStop = true;
-            this.rd_btn_without_vat.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.rd_btn_bytotal_price);
-            this.groupBox6.Controls.Add(this.rd_btn_by_unitprice);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.TabStop = false;
-            // 
-            // rd_btn_bytotal_price
-            // 
-            resources.ApplyResources(this.rd_btn_bytotal_price, "rd_btn_bytotal_price");
-            this.rd_btn_bytotal_price.Name = "rd_btn_bytotal_price";
-            this.rd_btn_bytotal_price.UseVisualStyleBackColor = true;
-            // 
-            // rd_btn_by_unitprice
-            // 
-            resources.ApplyResources(this.rd_btn_by_unitprice, "rd_btn_by_unitprice");
-            this.rd_btn_by_unitprice.Checked = true;
-            this.rd_btn_by_unitprice.Name = "rd_btn_by_unitprice";
-            this.rd_btn_by_unitprice.TabStop = true;
-            this.rd_btn_by_unitprice.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -675,6 +629,13 @@
             this.txt_barcode.Name = "txt_barcode";
             this.txt_barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_barcode_KeyDown);
             // 
+            // txt_categories
+            // 
+            resources.ApplyResources(this.txt_categories, "txt_categories");
+            this.txt_categories.Name = "txt_categories";
+            this.txt_categories.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_categories_KeyUp);
+            this.txt_categories.Leave += new System.EventHandler(this.txt_categories_Leave);
+            // 
             // txt_brands
             // 
             resources.ApplyResources(this.txt_brands, "txt_brands");
@@ -682,12 +643,50 @@
             this.txt_brands.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_brands_KeyUp);
             this.txt_brands.Leave += new System.EventHandler(this.txt_brands_Leave);
             // 
-            // txt_categories
+            // groupBox5
             // 
-            resources.ApplyResources(this.txt_categories, "txt_categories");
-            this.txt_categories.Name = "txt_categories";
-            this.txt_categories.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_categories_KeyUp);
-            this.txt_categories.Leave += new System.EventHandler(this.txt_categories_Leave);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Controls.Add(this.rd_btn_with_vat);
+            this.groupBox5.Controls.Add(this.rd_btn_without_vat);
+            this.groupBox5.Controls.Add(this.groupBox6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.TabStop = false;
+            // 
+            // rd_btn_with_vat
+            // 
+            resources.ApplyResources(this.rd_btn_with_vat, "rd_btn_with_vat");
+            this.rd_btn_with_vat.Name = "rd_btn_with_vat";
+            this.rd_btn_with_vat.UseVisualStyleBackColor = true;
+            // 
+            // rd_btn_without_vat
+            // 
+            resources.ApplyResources(this.rd_btn_without_vat, "rd_btn_without_vat");
+            this.rd_btn_without_vat.Checked = true;
+            this.rd_btn_without_vat.Name = "rd_btn_without_vat";
+            this.rd_btn_without_vat.TabStop = true;
+            this.rd_btn_without_vat.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.rd_btn_bytotal_price);
+            this.groupBox6.Controls.Add(this.rd_btn_by_unitprice);
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // rd_btn_bytotal_price
+            // 
+            resources.ApplyResources(this.rd_btn_bytotal_price, "rd_btn_bytotal_price");
+            this.rd_btn_bytotal_price.Name = "rd_btn_bytotal_price";
+            this.rd_btn_bytotal_price.UseVisualStyleBackColor = true;
+            // 
+            // rd_btn_by_unitprice
+            // 
+            resources.ApplyResources(this.rd_btn_by_unitprice, "rd_btn_by_unitprice");
+            this.rd_btn_by_unitprice.Checked = true;
+            this.rd_btn_by_unitprice.Name = "rd_btn_by_unitprice";
+            this.rd_btn_by_unitprice.TabStop = true;
+            this.rd_btn_by_unitprice.UseVisualStyleBackColor = true;
             // 
             // grid_sales
             // 

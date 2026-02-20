@@ -12,6 +12,18 @@ namespace pos
 {
     public partial class Login : Form
     {
+        private static readonly Font Label2Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+        private static readonly Font SubTextFont = new Font("Segoe UI", 13F, FontStyle.Regular);
+        private static readonly Font Label1Font = new Font("Segoe UI", 8F, FontStyle.Regular);
+        private static readonly Font LinkLabel2Font = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+        private static readonly Font HeadingFont = new Font("Segoe UI Semibold", 15F, FontStyle.Regular);
+        private static readonly Font LoginButtonFont = new Font("Segoe UI Semibold", 10.5F, FontStyle.Bold);
+        private static readonly Font RegisterButtonFont = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+        private static readonly Font CloseButtonFont = new Font("Segoe UI", 13F, FontStyle.Regular);
+        private static readonly Font ForgetPasswordFont = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+        private static readonly Font SupportFont = new Font("Segoe UI", 8F, FontStyle.Regular);
+        private static readonly Font InputFont = new Font("Segoe UI", 11F, FontStyle.Regular);
+
         public Login()
         {
             InitializeComponent();
@@ -37,6 +49,10 @@ namespace pos
         // ────────────────────────────────────────────────────────────────────
         private void StyleLoginForm()
         {
+            var originalClientSize = this.ClientSize;
+            this.SuspendLayout();
+            this.AutoScaleMode = AutoScaleMode.None;
+
             // ── Form ──────────────────────────────────────────────────────
             this.BackColor = AppTheme.Surface;
             this.Font      = AppTheme.FontDefault;
@@ -45,7 +61,7 @@ namespace pos
             panel1.BackColor = AppTheme.Primary;
             panel1.Padding   = new Padding(24, 20, 24, 20);
 
-            label2.Font      = new Font("Segoe UI", 20F, FontStyle.Bold);          // app name
+            label2.Font      = Label2Font;          // app name
             label2.ForeColor = Color.White;
             label2.BackColor = Color.Transparent;
             // Center label2 horizontally below the logo
@@ -59,16 +75,16 @@ namespace pos
             Color subTextColor = Color.FromArgb(210, 232, 255);
             foreach (Label lbl in new[] { label3, label4, label5, label6 })
             {
-                lbl.Font      = new Font("Segoe UI", 13F, FontStyle.Regular);
+                lbl.Font      = SubTextFont;
                 lbl.ForeColor = subTextColor;
                 lbl.BackColor = Color.Transparent;
             }
 
-            label1.Font      = new Font("Segoe UI", 8F, FontStyle.Regular);
+            label1.Font      = Label1Font;
             label1.ForeColor = Color.FromArgb(160, 200, 240);
             label1.BackColor = Color.Transparent;
 
-            linkLabel2.Font            = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            linkLabel2.Font            = LinkLabel2Font;
             linkLabel2.LinkColor       = Color.FromArgb(180, 220, 255);
             linkLabel2.ActiveLinkColor = Color.White;
             linkLabel2.BackColor       = Color.Transparent;
@@ -82,7 +98,7 @@ namespace pos
             panel2.BorderStyle = BorderStyle.None;
 
             // Heading
-            label7.Font      = new Font("Segoe UI Semibold", 15F, FontStyle.Regular);
+            label7.Font      = HeadingFont;
             label7.ForeColor = AppTheme.TextPrimary;
             label7.BackColor = AppTheme.Surface;
             label7.Text      = "Sign In";
@@ -98,7 +114,7 @@ namespace pos
             BtnLogin.FlatAppearance.MouseDownBackColor = AppTheme.PrimaryDarker;
             BtnLogin.BackColor  = AppTheme.Primary;
             BtnLogin.ForeColor  = Color.White;
-            BtnLogin.Font       = new Font("Segoe UI Semibold", 10.5F, FontStyle.Bold);
+            BtnLogin.Font       = LoginButtonFont;
             BtnLogin.Cursor     = Cursors.Hand;
             BtnLogin.UseVisualStyleBackColor = false;
             BtnLogin.Text       = "Sign In";
@@ -108,7 +124,7 @@ namespace pos
             BtnRegister.FlatAppearance.BorderSize = 0;
             BtnRegister.BackColor  = AppTheme.Accent;
             BtnRegister.ForeColor  = Color.White;
-            BtnRegister.Font       = new Font("Segoe UI Semibold", 9.5F, FontStyle.Regular);
+            BtnRegister.Font       = RegisterButtonFont;
             BtnRegister.Cursor     = Cursors.Hand;
             BtnRegister.UseVisualStyleBackColor = false;
 
@@ -119,7 +135,7 @@ namespace pos
             Btn_close.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 190, 190);
             Btn_close.BackColor  = Color.Transparent;
             Btn_close.ForeColor  = AppTheme.TextSecondary;
-            Btn_close.Font       = new Font("Segoe UI", 13F, FontStyle.Regular);
+            Btn_close.Font       = CloseButtonFont;
             Btn_close.Cursor     = Cursors.Hand;
             Btn_close.Text       = "✕";
 
@@ -128,22 +144,25 @@ namespace pos
             Btn_forget_password.FlatAppearance.BorderSize = 0;
             Btn_forget_password.BackColor  = Color.Transparent;
             Btn_forget_password.ForeColor  = AppTheme.Primary;
-            Btn_forget_password.Font       = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            Btn_forget_password.Font       = ForgetPasswordFont;
             Btn_forget_password.Cursor     = Cursors.Hand;
 
             // Support section
             foreach (Label lbl in new[] { label8, label9, label10, label11 })
             {
-                lbl.Font      = new Font("Segoe UI", 8F, FontStyle.Regular);
+                lbl.Font      = SupportFont;
                 lbl.ForeColor = AppTheme.TextDisabled;
                 lbl.BackColor = AppTheme.Surface;
             }
             label8.ForeColor = AppTheme.TextSecondary;
 
-            linkLabel1.Font            = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            linkLabel1.Font            = LinkLabel2Font;
             linkLabel1.LinkColor       = AppTheme.Primary;
             linkLabel1.ActiveLinkColor = AppTheme.PrimaryDark;
             linkLabel1.BackColor       = AppTheme.Surface;
+
+            this.ClientSize = originalClientSize;
+            this.ResumeLayout(true);
         }
 
         // Accent divider on the blue brand panel
@@ -165,7 +184,7 @@ namespace pos
 
             txt.BackColor   = bg;
             txt.ForeColor   = AppTheme.TextPrimary;
-            txt.Font        = new Font("Segoe UI", 11F, FontStyle.Regular);
+            txt.Font        = InputFont;
             txt.BorderStyle = BorderStyle.None;
 
             foreach (Control child in pnl.Controls)

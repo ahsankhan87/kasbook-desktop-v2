@@ -26,6 +26,9 @@ namespace pos.Master.Banks
         {
             try
             {
+                AppTheme.Apply(this);
+                StyleBanksForm();
+
                 using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
                 {
                     get_accounts_dropdownlist();
@@ -36,6 +39,81 @@ namespace pos.Master.Banks
                 UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
+
+        private void StyleBanksForm()
+        {
+            panel1.BackColor = AppTheme.PrimaryDark;
+            panel1.ForeColor = AppTheme.TextOnPrimary;
+            panel1.Padding = new Padding(8, 4, 8, 4);
+
+            panel2.BackColor = SystemColors.Control;
+            panel2.AutoScroll = true;
+
+            panel3.BackColor = SystemColors.Control;
+
+            foreach (Label lbl in panel1.Controls.OfType<Label>())
+                lbl.ForeColor = AppTheme.TextOnPrimary;
+
+            tabControl1.Font = AppTheme.FontTab;
+            Detail.BackColor = SystemColors.Control;
+            Transactions.BackColor = SystemColors.Control;
+
+            groupBox2.Font = AppTheme.FontGroupBox;
+
+            StyleLedgerGrid(grid_banks_transactions);
+        }
+
+        private static void StyleLedgerGrid(DataGridView grid)
+        {
+            if (grid == null) return;
+
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid, new object[] { true });
+
+            grid.BackgroundColor = SystemColors.AppWorkspace;
+            grid.BorderStyle = BorderStyle.None;
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid.GridColor = SystemColors.ControlLight;
+            grid.RowHeadersVisible = false;
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid.ColumnHeadersHeight = 34;
+            grid.RowTemplate.Height = 30;
+
+            grid.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(6, 4, 6, 4)
+            };
+
+            grid.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+
+            grid.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = AppTheme.GridAltRow,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+        }
+        
 
         public void get_accounts_dropdownlist()
         {

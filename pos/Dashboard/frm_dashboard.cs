@@ -38,7 +38,7 @@ namespace pos.Dashboard
                 return;
 
             // Apply professional theme
-            AppTheme.Apply(this);
+            //AppTheme.Apply(this);
 
             var company = POS.Core.UsersModal.logged_in_company_name;
             var branch = POS.Core.UsersModal.logged_in_branch_name;
@@ -86,17 +86,7 @@ namespace pos.Dashboard
         private static readonly Color _listHdr      = Color.FromArgb(235, 239, 245);
         private static readonly Color _listAlt      = Color.FromArgb(250, 251, 253);
 
-        // Quick-access button accent colours (one per button in order)
-        private static readonly Color[] _btnColors = {
-            Color.FromArgb(0,  120, 212),  // New Sale      – MS Blue
-            Color.FromArgb(0,  153, 188),  // New Purchase  – Teal
-            Color.FromArgb(16, 124,  16),  // Products      – Green
-            Color.FromArgb(0,  120, 212),  // Customers     – Blue
-            Color.FromArgb(136,  0, 153),  // Suppliers     – Purple
-            Color.FromArgb(255, 140,   0), // Purchases Rpt – Orange
-            Color.FromArgb(96,  94,  92),  // Settings      – Slate
-            Color.FromArgb(0,  178, 148),  // Sales Report  – Teal-green
-        };
+      
 
         /// <summary>
         /// Applies the full visual redesign to every control on the dashboard.
@@ -163,13 +153,13 @@ namespace pos.Dashboard
             quickAccessPanel.Padding   = new System.Windows.Forms.Padding(12, 8, 12, 8);
             quickAccessPanel.MinimumSize = new System.Drawing.Size(0, 110);
 
-            var qaBtns = new[] { btnNewSale, btnNewPurchase, btnProducts, btnCustomers,
-                                 btnSuppliers, btnPurchasesReport, btnSettings, btnSalesReport };
-            for (int i = 0; i < qaBtns.Length; i++)
-            {
-                if (qaBtns[i] == null) continue;
-                StyleQuickButton(qaBtns[i], i < _btnColors.Length ? _btnColors[i] : AppTheme.Primary);
-            }
+            //var qaBtns = new[] { btnNewSale, btnNewPurchase, btnProducts, btnCustomers,
+            //                     btnSuppliers, btnPurchasesReport, btnSettings, btnSalesReport };
+            //for (int i = 0; i < qaBtns.Length; i++)
+            //{
+            //    if (qaBtns[i] == null) continue;
+            //    StyleQuickButton(qaBtns[i], i < _btnColors.Length ? _btnColors[i] : AppTheme.Primary);
+            //}
 
             // ── Section label – Recent Activity ──────────────────────────────
             lblRecent.Font      = new Font("Segoe UI Semibold", 10F, FontStyle.Regular);
@@ -277,60 +267,7 @@ namespace pos.Dashboard
             value.ForeColor = Color.FromArgb(30, 30, 40);
         }
 
-        private static void StyleQuickButton(Button btn, Color accent)
-        {
-            Color hoverColor = Color.FromArgb(
-                Math.Min(255, accent.R + 40),
-                Math.Min(255, accent.G + 40),
-                Math.Min(255, accent.B + 40));
-            Color pressColor = Color.FromArgb(
-                Math.Max(0, accent.R - 30),
-                Math.Max(0, accent.G - 30),
-                Math.Max(0, accent.B - 30));
-            Color borderAccent = Color.FromArgb(
-                Math.Max(0, accent.R - 20),
-                Math.Max(0, accent.G - 20),
-                Math.Max(0, accent.B - 20));
-
-            btn.BackColor  = accent;
-            btn.ForeColor  = Color.White;
-            btn.FlatStyle  = FlatStyle.Flat;
-            btn.Font       = new Font("Segoe UI Semibold", 11F, FontStyle.Regular);
-            btn.Cursor     = Cursors.Hand;
-            btn.Height     = 80;
-            btn.Width      = 175;
-            btn.Margin     = new System.Windows.Forms.Padding(8, 6, 8, 6);
-            btn.Padding    = new System.Windows.Forms.Padding(4, 8, 4, 8);
-            btn.TextAlign  = ContentAlignment.MiddleCenter;
-
-            btn.FlatAppearance.BorderSize        = 0;
-            btn.FlatAppearance.MouseOverBackColor = hoverColor;
-            btn.FlatAppearance.MouseDownBackColor = pressColor;
-
-            // Explicit mouse events for a clearly distinguishable hover/press state
-            btn.MouseEnter += (s, e) =>
-            {
-                btn.BackColor = hoverColor;
-                btn.FlatAppearance.BorderSize  = 2;
-                btn.FlatAppearance.BorderColor = Color.White;
-            };
-            btn.MouseLeave += (s, e) =>
-            {
-                btn.BackColor = accent;
-                btn.FlatAppearance.BorderSize = 0;
-            };
-            btn.MouseDown += (s, e) =>
-            {
-                btn.BackColor = pressColor;
-                btn.FlatAppearance.BorderColor = Color.FromArgb(180, 255, 255, 255);
-            };
-            btn.MouseUp += (s, e) =>
-            {
-                btn.BackColor = hoverColor;
-                btn.FlatAppearance.BorderColor = Color.White;
-            };
-        }
-
+        
         private void ApplyEnglishTexts()
         {
             this.Text = "Dashboard";
