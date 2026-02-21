@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
 
 namespace pos
 {
@@ -23,7 +24,47 @@ namespace pos
 
         public void frm_purchases_detail_Load(object sender, EventArgs e)
         {
-            //load_purchases_detail_grid(sale_id);
+            AppTheme.Apply(this);
+            StyleForm();
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+
+            lbl_taxes_title.Font = AppTheme.FontHeader;
+            lbl_taxes_title.ForeColor = Color.White;
+
+            txt_close.FlatStyle = FlatStyle.System;
+            txt_close.Font = AppTheme.FontButton;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_purchases_detail, new object[] { true });
+
+            grid_purchases_detail.BackgroundColor = SystemColors.AppWorkspace;
+            grid_purchases_detail.RowHeadersVisible = false;
+            grid_purchases_detail.ColumnHeadersHeight = 36;
+            grid_purchases_detail.RowTemplate.Height = 30;
+            grid_purchases_detail.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_purchases_detail.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_purchases_detail.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_purchases_detail.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_purchases_detail.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_purchases_detail.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_purchases_detail.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal data columns from the user
+            id.Visible = false;
+            invoice_no.Visible = false;
         }
 
         public void load_purchases_detail_grid(string invoice_no)
@@ -71,7 +112,7 @@ namespace pos
                     grid_purchases_detail.Rows.Add(row00);
 
                 }
-                string[] row12 = { "","","","","Total", _total_qty.ToString(), _total_cost.ToString(), _total_discount.ToString(), _total_vat.ToString(), _grand_total.ToString() };
+                string[] row12 = { "","","","","Total", _total_qty.ToString("N2"), _total_cost.ToString("N2"), _total_discount.ToString("N2"), _total_vat.ToString("N2"), _grand_total.ToString("N2") };
                 grid_purchases_detail.Rows.Add(row12);
                 CustomizeDataGridView();
             }
@@ -84,24 +125,21 @@ namespace pos
         }
         private void CustomizeDataGridView()
         {
-            // Get the last row in the DataGridView
+            if (grid_purchases_detail.Rows.Count == 0) return;
+
             DataGridViewRow lastRow = grid_purchases_detail.Rows[grid_purchases_detail.Rows.Count - 1];
 
-            // Loop through all cells in the row
             foreach (DataGridViewCell cell in lastRow.Cells)
             {
-                DataGridViewCellStyle style = new DataGridViewCellStyle(cell.Style);
-
-                // Set the font to bold
-                style.Font = new Font(grid_purchases_detail.Font, FontStyle.Bold);
-
-                // Set the background color
-                style.BackColor = Color.LightGray;
-
-                // Apply the style to the current cell
-                cell.Style = style;
+                cell.Style = new DataGridViewCellStyle(cell.Style)
+                {
+                    Font = AppTheme.FontSemiBold,
+                    BackColor = SystemColors.ControlDark,
+                    ForeColor = SystemColors.ControlText,
+                    SelectionBackColor = SystemColors.ControlDark,
+                    SelectionForeColor = SystemColors.ControlText
+                };
             }
-
         }
         private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
         {

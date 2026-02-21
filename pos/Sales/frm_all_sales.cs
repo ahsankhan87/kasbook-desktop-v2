@@ -16,6 +16,7 @@ using ZATCA.EInvoice.SDK;
 using ZATCA.EInvoice.SDK.Contracts.Models;
 using pos.UI;
 using pos.UI.Busy;
+using System.Drawing;
 
 namespace pos
 {
@@ -62,7 +63,43 @@ namespace pos
 
         private void frm_all_sales_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_all_sales_grid();
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+            lbl_taxes_title.Font = AppTheme.FontHeader;
+            lbl_taxes_title.ForeColor = Color.White;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_all_sales, new object[] { true });
+
+            grid_all_sales.BackgroundColor = SystemColors.AppWorkspace;
+            grid_all_sales.RowHeadersVisible = false;
+            grid_all_sales.ColumnHeadersHeight = 36;
+            grid_all_sales.RowTemplate.Height = 30;
+            grid_all_sales.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_all_sales.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_all_sales.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_all_sales.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_all_sales.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_all_sales.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_all_sales.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal id column
+            id.Visible = false;
         }
 
         private void SearchDebounce_Tick(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using pos.Security.Authorization;
+using pos.UI;
 using POS.BLL;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,45 @@ namespace pos
 
         public void frm_all_purchases_orders_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_all_purchases_orders_grid();
 
             grid_all_purchases_orders.Columns["delete"].Visible = _auth.HasPermission(_currentUser, Permissions.PurchaseOrders_Delete);
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+            lbl_taxes_title.Font = AppTheme.FontHeader;
+            lbl_taxes_title.ForeColor = Color.White;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_all_purchases_orders, new object[] { true });
+
+            grid_all_purchases_orders.BackgroundColor = SystemColors.AppWorkspace;
+            grid_all_purchases_orders.RowHeadersVisible = false;
+            grid_all_purchases_orders.ColumnHeadersHeight = 36;
+            grid_all_purchases_orders.RowTemplate.Height = 30;
+            grid_all_purchases_orders.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_all_purchases_orders.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_all_purchases_orders.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_all_purchases_orders.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_all_purchases_orders.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_all_purchases_orders.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_all_purchases_orders.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal id column
+            id.Visible = false;
         }
 
         public void load_all_purchases_orders_grid()

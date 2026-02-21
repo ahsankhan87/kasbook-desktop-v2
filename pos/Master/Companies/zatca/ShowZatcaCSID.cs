@@ -1,5 +1,6 @@
 ﻿using pos.UI;
 using pos.UI.Busy;
+using System.Drawing;
 using POS.BLL;
 using POS.Core;
 using System;
@@ -74,7 +75,43 @@ namespace pos.Master.Companies.zatca
 
         private void ShowZatcaCSID_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             LoadZatcaCSIDGrid();
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+            lbl_title.Font = AppTheme.FontHeader;
+            lbl_title.ForeColor = Color.White;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(System.Windows.Forms.DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_zatca_csids, new object[] { true });
+
+            grid_zatca_csids.BackgroundColor = SystemColors.AppWorkspace;
+            grid_zatca_csids.RowHeadersVisible = false;
+            grid_zatca_csids.ColumnHeadersHeight = 36;
+            grid_zatca_csids.RowTemplate.Height = 30;
+            grid_zatca_csids.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_zatca_csids.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_zatca_csids.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_zatca_csids.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_zatca_csids.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_zatca_csids.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_zatca_csids.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal id column
+            id.Visible = false;
         }
 
         protected void LoadZatcaCSIDGrid()

@@ -36,14 +36,59 @@ namespace pos
 
         public void frm_purchase_return_Load(object sender, EventArgs e)
         {
-            //ActiveControl = txt_invoice_no;
+            AppTheme.Apply(this);
+            StyleForm();
 
+            //ActiveControl = txt_invoice_no;
             LoadReturnReasonsDDL();
             autoCompleteInvoice();
 
             SetupHeaderCheckBox();
             txt_invoice_no.Focus();
+        }
 
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+            lbl_taxes_title.Font = AppTheme.FontHeader;
+            lbl_taxes_title.ForeColor = Color.White;
+            label1.Font = AppTheme.FontHeader; label1.ForeColor = Color.White;
+            label2.Font = AppTheme.FontHeader; label2.ForeColor = Color.White;
+
+
+            txt_close.FlatStyle = FlatStyle.System;
+            txt_close.Font = AppTheme.FontButton;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_purchase_return, new object[] { true });
+
+            grid_purchase_return.BackgroundColor = SystemColors.AppWorkspace;
+            grid_purchase_return.RowHeadersVisible = false;
+            grid_purchase_return.ColumnHeadersHeight = 36;
+            grid_purchase_return.RowTemplate.Height = 30;
+            grid_purchase_return.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_purchase_return.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_purchase_return.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_purchase_return.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_purchase_return.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_purchase_return.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_purchase_return.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal/technical columns
+            id.Visible = false;
+            tax_id.Visible = false;
+            tax_rate.Visible = false;
+            item_id.Visible = false;
+            packet_qty.Visible = false;
         }
 
         private void SetupHeaderCheckBox()

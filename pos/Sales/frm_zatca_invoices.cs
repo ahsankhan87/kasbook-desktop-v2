@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using pos.Master.Companies.zatca;
 using pos.UI;
 using pos.UI.Busy;
+using System.Drawing;
 using POS.BLL;
 using POS.Core;
 using POS.DLL;
@@ -42,6 +43,9 @@ namespace pos.Sales
 
         private void frm_zatca_invoices_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
+
             StatusDDL();
             InvoiceSubTypeDDL();
             InvoiceTypeDDL();
@@ -51,6 +55,70 @@ namespace pos.Sales
 
             LoadZatcaInvoices();
             UpdateActionButtonsForSelection();
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = SystemColors.Control;
+            panel2.ForeColor = Color.White;
+            lblTitle.Font = AppTheme.FontHeader;
+            lblTitle.ForeColor = Color.White;
+            chk_ShowZatcaInvoice.Font = AppTheme.FontDefault;
+            chk_ShowZatcaInvoice.ForeColor = Color.White;
+            // ── Filter panel ─────────────────────────────────────────
+            panel3.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(System.Windows.Forms.DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, gridZatcaInvoices, new object[] { true });
+
+            gridZatcaInvoices.BackgroundColor = SystemColors.AppWorkspace;
+            gridZatcaInvoices.RowHeadersVisible = false;
+            gridZatcaInvoices.ColumnHeadersHeight = 36;
+            gridZatcaInvoices.RowTemplate.Height = 30;
+            gridZatcaInvoices.DefaultCellStyle.Font = AppTheme.FontGrid;
+            gridZatcaInvoices.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            gridZatcaInvoices.DefaultCellStyle.BackColor = SystemColors.Window;
+            gridZatcaInvoices.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            gridZatcaInvoices.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            gridZatcaInvoices.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            gridZatcaInvoices.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            gridZatcaInvoices.DataBindingComplete += gridZatcaInvoices_DataBindingComplete;
+
+            // Hide internal/redundant columns
+            id.Visible = false;
+            prevSaleDate.Visible = false;
+            prevInvoiceNo.Visible = false;
+            sale_time.Visible = false;
+        }
+
+        private void gridZatcaInvoices_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in gridZatcaInvoices.Rows)
+            {
+                var statusObj = row.Cells["zatca_status"].Value;
+                if (statusObj != null)
+                {
+                    string status = statusObj.ToString().ToLower();
+                    if (status == "cleared")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else if (status == "reported")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else if (status == "failed")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightPink;
+                    }
+                }
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

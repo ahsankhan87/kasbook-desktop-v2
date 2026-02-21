@@ -82,6 +82,9 @@ namespace pos
 
         public void frm_sales_return_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
+
             Get_AccountID_From_Company();
             LoadReturnReasonsDDL();
             autoCompleteInvoice();
@@ -96,6 +99,55 @@ namespace pos
             // If invoice already provided, load it; otherwise keep grid empty
             if (!string.IsNullOrWhiteSpace(txt_invoice_no.Text))
                 LoadSalesReturnGrid();
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+            lbl_taxes_title.Font = AppTheme.FontHeader;
+            lbl_taxes_title.ForeColor = Color.White;
+
+            label1.Font = AppTheme.FontLabel;
+            label1.ForeColor = Color.White;
+            label2.Font = AppTheme.FontLabel;
+            label2.ForeColor = Color.White;
+            chk_sendInvoiceToZatca.Font = AppTheme.FontLabel;
+            chk_sendInvoiceToZatca.ForeColor = Color.White; chk_sendInvoiceToZatca.FlatStyle = FlatStyle.System;
+
+            txt_close.FlatStyle = FlatStyle.System;
+            txt_close.Font = AppTheme.FontButton;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_sales_return, new object[] { true });
+
+            grid_sales_return.BackgroundColor = SystemColors.AppWorkspace;
+            grid_sales_return.RowHeadersVisible = false;
+            grid_sales_return.ColumnHeadersHeight = 36;
+            grid_sales_return.RowTemplate.Height = 30;
+            grid_sales_return.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_sales_return.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_sales_return.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_sales_return.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_sales_return.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_sales_return.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_sales_return.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal/technical columns
+            id.Visible = false;
+            tax_id.Visible = false;
+            tax_rate.Visible = false;
+            item_id.Visible = false;
+            packet_qty.Visible = false;
+            invoice_subtype_code.Visible = false;
         }
 
         private bool TryGetInvoiceNo(out string invoiceNo)

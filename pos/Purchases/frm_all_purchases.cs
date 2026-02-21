@@ -4,6 +4,7 @@ using pos.UI.Busy;
 using POS.BLL;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace pos
@@ -23,7 +24,43 @@ namespace pos
 
         public void frm_all_purchases_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_all_purchases_grid();
+        }
+
+        private void StyleForm()
+        {
+            // ── Header panel ──────────────────────────────────────────
+            panel2.BackColor = AppTheme.PrimaryDark;
+            panel2.ForeColor = Color.White;
+            lbl_taxes_title.Font = AppTheme.FontHeader;
+            lbl_taxes_title.ForeColor = Color.White;
+
+            // ── Body panel ────────────────────────────────────────────
+            panel1.BackColor = SystemColors.Control;
+
+            // ── Grid ──────────────────────────────────────────────────
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid_all_purchases, new object[] { true });
+
+            grid_all_purchases.BackgroundColor = SystemColors.AppWorkspace;
+            grid_all_purchases.RowHeadersVisible = false;
+            grid_all_purchases.ColumnHeadersHeight = 36;
+            grid_all_purchases.RowTemplate.Height = 30;
+            grid_all_purchases.DefaultCellStyle.Font = AppTheme.FontGrid;
+            grid_all_purchases.DefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_all_purchases.DefaultCellStyle.BackColor = SystemColors.Window;
+            grid_all_purchases.ColumnHeadersDefaultCellStyle.Font = AppTheme.FontGridHeader;
+            grid_all_purchases.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+            grid_all_purchases.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+            grid_all_purchases.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+            // Hide internal id column
+            id.Visible = false;
         }
 
         public void load_all_purchases_grid()

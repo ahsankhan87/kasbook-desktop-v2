@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gridZatcaInvoices.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
   <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="id.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -394,10 +397,10 @@
     <value>11</value>
   </data>
   <data name="btnViewResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 11</value>
+    <value>126, 11</value>
   </data>
   <data name="btnViewResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>153, 48</value>
   </data>
   <data name="btnViewResponse.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -451,7 +454,7 @@
     <value>4</value>
   </data>
   <data name="btn_viewQR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 11</value>
+    <value>285, 11</value>
   </data>
   <data name="btn_viewQR.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 48</value>
@@ -658,7 +661,7 @@
     <value>4, 11</value>
   </data>
   <data name="btnDownloadUBL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 48</value>
+    <value>116, 48</value>
   </data>
   <data name="btnDownloadUBL.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

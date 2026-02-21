@@ -29,16 +29,9 @@ namespace pos.Sales
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_zatca_invoices));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridZatcaInvoices = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +89,8 @@ namespace pos.Sales
             this.gridZatcaInvoices.AllowUserToAddRows = false;
             this.gridZatcaInvoices.AllowUserToDeleteRows = false;
             this.gridZatcaInvoices.AllowUserToOrderColumns = true;
-            this.gridZatcaInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.gridZatcaInvoices, "gridZatcaInvoices");
+            this.gridZatcaInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridZatcaInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.invoice_no,
@@ -113,7 +107,6 @@ namespace pos.Sales
             this.prevSaleDate,
             this.prevInvoiceNo,
             this.sale_time});
-            resources.ApplyResources(this.gridZatcaInvoices, "gridZatcaInvoices");
             this.gridZatcaInvoices.MultiSelect = false;
             this.gridZatcaInvoices.Name = "gridZatcaInvoices";
             this.gridZatcaInvoices.ReadOnly = true;
@@ -131,8 +124,6 @@ namespace pos.Sales
             // 
             this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_no.DataPropertyName = "invoice_no";
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoice_no.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
@@ -141,8 +132,6 @@ namespace pos.Sales
             // 
             this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.customer.DataPropertyName = "customer";
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customer.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.customer, "customer");
             this.customer.Name = "customer";
             this.customer.ReadOnly = true;
@@ -151,8 +140,6 @@ namespace pos.Sales
             // 
             this.zatca_mode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.zatca_mode.DataPropertyName = "zatca_mode";
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zatca_mode.DefaultCellStyle = dataGridViewCellStyle13;
             this.zatca_mode.FillWeight = 30F;
             resources.ApplyResources(this.zatca_mode, "zatca_mode");
             this.zatca_mode.Name = "zatca_mode";
@@ -161,8 +148,6 @@ namespace pos.Sales
             // account
             // 
             this.account.DataPropertyName = "account";
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.account.DefaultCellStyle = dataGridViewCellStyle14;
             this.account.FillWeight = 30F;
             resources.ApplyResources(this.account, "account");
             this.account.Name = "account";
@@ -172,8 +157,6 @@ namespace pos.Sales
             // 
             this.invoice_subtype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_subtype.DataPropertyName = "invoice_subtype";
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoice_subtype.DefaultCellStyle = dataGridViewCellStyle15;
             resources.ApplyResources(this.invoice_subtype, "invoice_subtype");
             this.invoice_subtype.Name = "invoice_subtype";
             this.invoice_subtype.ReadOnly = true;
@@ -182,8 +165,6 @@ namespace pos.Sales
             // 
             this.zatca_status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.zatca_status.DataPropertyName = "zatca_status";
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zatca_status.DefaultCellStyle = dataGridViewCellStyle16;
             resources.ApplyResources(this.zatca_status, "zatca_status");
             this.zatca_status.Name = "zatca_status";
             this.zatca_status.ReadOnly = true;
@@ -192,8 +173,6 @@ namespace pos.Sales
             // 
             this.sale_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sale_date.DataPropertyName = "sale_date";
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sale_date.DefaultCellStyle = dataGridViewCellStyle17;
             resources.ApplyResources(this.sale_date, "sale_date");
             this.sale_date.Name = "sale_date";
             this.sale_date.ReadOnly = true;
@@ -202,11 +181,10 @@ namespace pos.Sales
             // 
             this.total_tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.total_tax.DataPropertyName = "total_tax";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.Format = "N2";
-            dataGridViewCellStyle18.NullValue = null;
-            this.total_tax.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.total_tax.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.total_tax, "total_tax");
             this.total_tax.Name = "total_tax";
             this.total_tax.ReadOnly = true;
@@ -215,11 +193,10 @@ namespace pos.Sales
             // 
             this.discount_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.Format = "N2";
-            dataGridViewCellStyle19.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -228,11 +205,10 @@ namespace pos.Sales
             // 
             this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.Format = "N2";
-            dataGridViewCellStyle20.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
             this.total.ReadOnly = true;
