@@ -25,8 +25,15 @@ namespace pos
 
         public void frm_brands_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_Brands_grid();
            
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_taxes_title, panel1, grid_brands, id);
         }
 
         public void load_Brands_grid()

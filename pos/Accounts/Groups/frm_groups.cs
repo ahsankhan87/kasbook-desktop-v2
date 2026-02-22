@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -27,7 +28,14 @@ namespace pos
 
         public void frm_groups_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_groups_grid();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel2, lbl_taxes_title, panel1, grid_groups, id, parent_id, account_type_id);
         }
 
         public void load_groups_grid()

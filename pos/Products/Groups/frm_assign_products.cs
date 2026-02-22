@@ -25,7 +25,14 @@ namespace pos
 
         public void frm_assign_products_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             get_groups_dropdownlist();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_product_groups, id);
         }
 
         public void load_ProductGroups_grid(string product_id, int RowIndex)

@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos.Security.Admin
 {
@@ -26,10 +27,17 @@ namespace pos.Security.Admin
 
             this.Load += (s, e) =>
             {
+                AppTheme.Apply(this);
+                StyleForm();
                 EnsureGridColumns();
                 LoadPermissions();
                 txtSearch.Focus();
             };
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, null, gridPermissions);
         }
 
         private void EnsureGridColumns()

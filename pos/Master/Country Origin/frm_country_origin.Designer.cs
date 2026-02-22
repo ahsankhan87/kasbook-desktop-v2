@@ -51,7 +51,6 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
@@ -60,6 +59,7 @@
             this.panel1.Controls.Add(this.btn_update);
             this.panel1.Controls.Add(this.grid_country_origin);
             this.panel1.Controls.Add(this.btn_new);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_search
@@ -101,6 +101,7 @@
             this.grid_country_origin.AllowUserToAddRows = false;
             this.grid_country_origin.AllowUserToDeleteRows = false;
             this.grid_country_origin.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_country_origin, "grid_country_origin");
             this.grid_country_origin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_country_origin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_country_origin.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -109,7 +110,6 @@
             this.name,
             this.brand_code,
             this.date_created});
-            resources.ApplyResources(this.grid_country_origin, "grid_country_origin");
             this.grid_country_origin.Name = "grid_country_origin";
             this.grid_country_origin.ReadOnly = true;
             this.grid_country_origin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -174,8 +174,8 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.KeyPreview = true;
             this.Name = "frm_country_origin";
             this.ShowIcon = false;

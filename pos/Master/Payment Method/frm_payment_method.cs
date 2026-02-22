@@ -25,7 +25,14 @@ namespace pos
 
         public void frm_payment_method_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_payment_method_grid();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_taxes_title, panel1, grid_payment_method, id);
         }
 
         public void load_payment_method_grid()

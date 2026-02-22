@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -23,7 +24,14 @@ namespace pos
 
         private void frm_group_report_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             get_groups_dropdownlist();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_group_report);
         }
 
         private void CustomizeDataGridView()

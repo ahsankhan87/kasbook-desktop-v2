@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -23,9 +24,16 @@ namespace pos
 
         private void frm_journal_daybook_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             DateTime date = txt_entry_date.Value.Date;
             Load_journal_daybook(date);
             
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_journal_daybook);
         }
 
         private void Load_journal_daybook(DateTime date)

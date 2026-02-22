@@ -17,10 +17,17 @@ namespace pos.Products.ICT
 
         private void frm_release_ict_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             using (BusyScope.Show(this, UiMessages.T("Loading ICT releases...", "جاري تحميل اعتماد الكميات...")))
             {
                 load_all_ict_grid();
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, null, grid_ict, source_branch_id, destination_branch_id, item_number);
         }
 
         public void load_all_ict_grid()

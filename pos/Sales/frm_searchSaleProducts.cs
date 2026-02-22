@@ -70,9 +70,18 @@ namespace pos
 
         private void frm_searchSaleProducts_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             txt_search.Text = _product_code;
             PerformPagedSearch();
             grid_search_products.Focus();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panelTop, null, panel1, grid_search_products);
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel3, grid_group_products);
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel4, grid_other_stock);
         }
 
         private void grid_search_products_KeyDown(object sender, KeyEventArgs e)

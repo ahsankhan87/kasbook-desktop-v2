@@ -19,7 +19,7 @@ namespace pos.UI
     ///   • "cancel"/ "blank"/ "close"     ? Ghost    (flat neutral)
     ///   • "print" / "ledger"/ "receipt"  ? Info     (teal)
     /// </summary>
-    internal static class AppTheme
+    public static class AppTheme
     {
         // ?? Microsoft Fluent colour palette ??????????????????????????
         public static readonly Color Primary          = Color.FromArgb(0, 120, 212);     // #0078D4  MS Blue
@@ -109,6 +109,69 @@ namespace pos.UI
             finally
             {
                 root.ResumeLayout(true);
+            }
+        }
+
+        public static void ApplyListFormStyleLightHeader(Panel headerPanel, Label headerLabel, Panel bodyPanel, DataGridView grid, params DataGridViewColumn[] hiddenColumns)
+        {
+            if (headerPanel != null)
+            {
+                headerPanel.BackColor = SurfaceAlt;
+                headerPanel.ForeColor = TextPrimary;
+                foreach (Control child in headerPanel.Controls)
+                {
+                    if (child is Label lbl && lbl != headerLabel)
+                        lbl.ForeColor = TextPrimary;
+                }
+            }
+
+            if (headerLabel != null)
+            {
+                headerLabel.Font = FontHeader;
+                headerLabel.ForeColor = TextPrimary;
+            }
+
+            if (bodyPanel != null)
+            {
+                bodyPanel.BackColor = SystemColors.Control;
+
+                foreach (Control child in bodyPanel.Controls)
+                {
+                    if (child is Label lbl && lbl != headerLabel)
+                    {
+                        lbl.ForeColor = TextPrimary;
+                    }
+                }
+            }
+
+            if (grid != null)
+            {
+                typeof(DataGridView).InvokeMember("DoubleBuffered",
+                    System.Reflection.BindingFlags.NonPublic |
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.SetProperty,
+                    null, grid, new object[] { true });
+
+                grid.BackgroundColor = SystemColors.AppWorkspace;
+                grid.RowHeadersVisible = false;
+                grid.ColumnHeadersHeight = 36;
+                grid.RowTemplate.Height = 30;
+                grid.DefaultCellStyle.Font = FontGrid;
+                grid.DefaultCellStyle.ForeColor = TextPrimary;
+                grid.DefaultCellStyle.BackColor = SystemColors.Window;
+                grid.ColumnHeadersDefaultCellStyle.Font = FontGridHeader;
+                grid.ColumnHeadersDefaultCellStyle.ForeColor = TextPrimary;
+                grid.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+                grid.AlternatingRowsDefaultCellStyle.ForeColor = TextPrimary;
+
+                if (hiddenColumns != null)
+                {
+                    foreach (var column in hiddenColumns)
+                    {
+                        if (column != null)
+                            column.Visible = false;
+                    }
+                }
             }
         }
 
@@ -585,6 +648,64 @@ namespace pos.UI
         {
             panel.BackColor = Primary;
             panel.ForeColor = TextOnPrimary;
+        }
+
+        public static void ApplyListFormStyle(Panel headerPanel, Label headerLabel, Panel bodyPanel, DataGridView grid, params DataGridViewColumn[] hiddenColumns)
+        {
+            if (headerPanel != null)
+            {
+                headerPanel.BackColor = PrimaryDark;
+                headerPanel.ForeColor = TextOnPrimary;
+            }
+
+            if (headerLabel != null)
+            {
+                headerLabel.Font = FontHeader;
+                headerLabel.ForeColor = TextOnPrimary;
+            }
+
+            if (bodyPanel != null)
+            {
+                bodyPanel.BackColor = SystemColors.Control;
+
+                foreach (Control child in bodyPanel.Controls)
+                {
+                    if (child is Label lbl && lbl != headerLabel)
+                    {
+                        lbl.ForeColor = TextPrimary;
+                    }
+                }
+            }
+
+            if (grid != null)
+            {
+                typeof(DataGridView).InvokeMember("DoubleBuffered",
+                    System.Reflection.BindingFlags.NonPublic |
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.SetProperty,
+                    null, grid, new object[] { true });
+
+                grid.BackgroundColor = SystemColors.AppWorkspace;
+                grid.RowHeadersVisible = false;
+                grid.ColumnHeadersHeight = 36;
+                grid.RowTemplate.Height = 30;
+                grid.DefaultCellStyle.Font = FontGrid;
+                grid.DefaultCellStyle.ForeColor = TextPrimary;
+                grid.DefaultCellStyle.BackColor = SystemColors.Window;
+                grid.ColumnHeadersDefaultCellStyle.Font = FontGridHeader;
+                grid.ColumnHeadersDefaultCellStyle.ForeColor = TextPrimary;
+                grid.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.ControlLight;
+                grid.AlternatingRowsDefaultCellStyle.ForeColor = TextPrimary;
+
+                if (hiddenColumns != null)
+                {
+                    foreach (var column in hiddenColumns)
+                    {
+                        if (column != null)
+                            column.Visible = false;
+                    }
+                }
+            }
         }
     }
 

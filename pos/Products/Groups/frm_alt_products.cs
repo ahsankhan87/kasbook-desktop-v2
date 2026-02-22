@@ -27,7 +27,14 @@ namespace pos
 
         public void frm_alt_products_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             txt_source_code.Focus();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_product_groups, id);
         }
 
         private void txt_source_code_KeyDown(object sender, KeyEventArgs e)

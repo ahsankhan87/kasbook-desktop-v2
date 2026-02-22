@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -24,6 +25,8 @@ namespace pos
 
         private void frm_balancesheet_report_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             CmbCondition.Items.AddRange(new string[]
             {
                 "Custom", "Today", "Yesterday", "This Week", "Last Week",
@@ -33,6 +36,11 @@ namespace pos
                 "Previous Fiscal Year", "Next Fiscal Year"
             });
             CmbCondition.SelectedIndex = 0;
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_balancesheet_report);
         }
 
         private void btn_search_Click(object sender, EventArgs e)

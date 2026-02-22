@@ -25,7 +25,14 @@ namespace pos
 
         public void frm_categories_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_categories_grid();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_taxes_title, panel1, grid_categories, id);
         }
 
         public void load_categories_grid()

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -28,9 +29,16 @@ namespace pos
 
         private void daily_salesReport_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             label2.Text = DateTime.Now.Date.ToShortDateString();
             Load_sales_report();
             CustomizeDataGridView();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_sales_report, id);
         }
 
         private void Load_sales_report()

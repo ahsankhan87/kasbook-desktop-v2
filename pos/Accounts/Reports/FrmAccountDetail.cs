@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos.Accounts.Reports
 {
@@ -28,8 +29,15 @@ namespace pos.Accounts.Reports
 
         private void FrmAccountDetail_Load(object sender, EventArgs e)
         {
-            
+            AppTheme.Apply(this);
+            StyleForm();
             Load_account_report(_from_date, _to_date, _accountID);
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_account_report);
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel3, grid_sales_detail, id);
         }
 
         private void Load_account_report(DateTime from_date, DateTime to_date, int account_id)

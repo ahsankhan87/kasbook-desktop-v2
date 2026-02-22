@@ -114,7 +114,8 @@ namespace pos
             label2.Font = AppTheme.FontLabel;
             label2.ForeColor = Color.White;
             chk_sendInvoiceToZatca.Font = AppTheme.FontLabel;
-            chk_sendInvoiceToZatca.ForeColor = Color.White; chk_sendInvoiceToZatca.FlatStyle = FlatStyle.System;
+            chk_sendInvoiceToZatca.ForeColor = Color.White; 
+            chk_sendInvoiceToZatca.FlatStyle = FlatStyle.Standard;
 
             txt_close.FlatStyle = FlatStyle.System;
             txt_close.Font = AppTheme.FontButton;

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -23,6 +24,8 @@ namespace pos
 
         private void frm_account_report_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             CmbCondition.Items.AddRange(new string[]
             {
                 "Custom", "Today", "Yesterday", "This Week", "Last Week",
@@ -33,6 +36,11 @@ namespace pos
             });
             CmbCondition.SelectedIndex = 0; 
             get_accounts_dropdownlist();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_account_report);
         }
 
         private void CustomizeDataGridView()

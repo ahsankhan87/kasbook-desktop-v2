@@ -117,18 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lb_category.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lb_category.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 25</value>
+    <value>126, 31</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lb_category.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="lb_category.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 160</value>
+    <value>119, 196</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lb_category.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
@@ -144,14 +147,17 @@
   <data name="&gt;&gt;lb_category.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lb_locations.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <data name="lb_locations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 25</value>
+    <value>248, 31</value>
   </data>
   <data name="lb_locations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="lb_locations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 160</value>
+    <value>119, 196</value>
   </data>
   <data name="lb_locations.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -171,14 +177,17 @@
   <data name="lb_brands.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lb_brands.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <data name="lb_brands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 25</value>
+    <value>4, 31</value>
   </data>
   <data name="lb_brands.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="lb_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 160</value>
+    <value>119, 196</value>
   </data>
   <data name="lb_brands.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -196,13 +205,13 @@
     <value>2</value>
   </data>
   <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
-    <value>745, 60</value>
+    <value>869, 74</value>
   </data>
   <data name="btn_print.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="btn_print.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 22</value>
+    <value>88, 27</value>
   </data>
   <data name="btn_print.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -226,13 +235,13 @@
     <value>True</value>
   </data>
   <data name="chk_qty_on_hand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 73</value>
+    <value>509, 92</value>
   </data>
   <data name="chk_qty_on_hand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="chk_qty_on_hand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 14</value>
+    <value>18, 17</value>
   </data>
   <data name="chk_qty_on_hand.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -253,10 +262,13 @@
     <value>True</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
+    <value>4, 6</value>
+  </data>
+  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+    <value>49, 17</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -277,10 +289,13 @@
     <value>5</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>745, 5</value>
+    <value>869, 6</value>
+  </data>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 51</value>
+    <value>88, 63</value>
   </data>
   <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -310,10 +325,13 @@
     <value>Service</value>
   </data>
   <data name="cmb_item_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 25</value>
+    <value>444, 31</value>
+  </data>
+  <data name="cmb_item_type.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_item_type.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 21</value>
+    <value>144, 24</value>
   </data>
   <data name="cmb_item_type.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -334,10 +352,13 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 27</value>
+    <value>374, 33</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
+    <value>76, 17</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -358,10 +379,13 @@
     <value>8</value>
   </data>
   <data name="cmb_units.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 50</value>
+    <value>444, 62</value>
+  </data>
+  <data name="cmb_units.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_units.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 21</value>
+    <value>144, 24</value>
   </data>
   <data name="cmb_units.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -382,10 +406,13 @@
     <value>True</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 5</value>
+    <value>246, 6</value>
+  </data>
+  <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>65, 17</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -409,10 +436,13 @@
     <value>True</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 5</value>
+    <value>122, 6</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+    <value>70, 17</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -436,10 +466,13 @@
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 73</value>
+    <value>374, 90</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>129, 17</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -463,10 +496,13 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 52</value>
+    <value>374, 64</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>43, 17</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -492,8 +528,11 @@
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>827, 185</value>
+    <value>965, 228</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -516,8 +555,11 @@
   <data name="category_name.HeaderText" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="category_name.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="category_name.Width" type="System.Int32, mscorlib">
-    <value>74</value>
+    <value>94</value>
   </data>
   <metadata name="code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -525,8 +567,11 @@
   <data name="code.HeaderText" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="code.Width" type="System.Int32, mscorlib">
-    <value>57</value>
+    <value>69</value>
   </data>
   <metadata name="name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -534,8 +579,11 @@
   <data name="name.HeaderText" xml:space="preserve">
     <value>Product</value>
   </data>
+  <data name="name.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="name.Width" type="System.Int32, mscorlib">
-    <value>69</value>
+    <value>86</value>
   </data>
   <metadata name="unit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -543,8 +591,11 @@
   <data name="unit.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
+  <data name="unit.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="unit.Width" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>61</value>
   </data>
   <metadata name="location_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -552,8 +603,11 @@
   <data name="location_code.HeaderText" xml:space="preserve">
     <value>Location</value>
   </data>
+  <data name="location_code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="location_code.Width" type="System.Int32, mscorlib">
-    <value>73</value>
+    <value>89</value>
   </data>
   <metadata name="brand.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -561,8 +615,11 @@
   <data name="brand.HeaderText" xml:space="preserve">
     <value>Brand</value>
   </data>
+  <data name="brand.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="brand.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+    <value>73</value>
   </data>
   <metadata name="item_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -570,11 +627,14 @@
   <data name="item_type.HeaderText" xml:space="preserve">
     <value>Item Type</value>
   </data>
+  <data name="item_type.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="item_type.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="item_type.Width" type="System.Int32, mscorlib">
-    <value>79</value>
+    <value>125</value>
   </data>
   <metadata name="qty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -582,8 +642,11 @@
   <data name="qty.HeaderText" xml:space="preserve">
     <value>Qty</value>
   </data>
+  <data name="qty.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>48</value>
+    <value>60</value>
   </data>
   <metadata name="shop_qty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -591,8 +654,11 @@
   <data name="shop_qty.HeaderText" xml:space="preserve">
     <value>Shop Qty</value>
   </data>
+  <data name="shop_qty.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="shop_qty.Width" type="System.Int32, mscorlib">
-    <value>76</value>
+    <value>96</value>
   </data>
   <metadata name="cost_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -600,8 +666,11 @@
   <data name="cost_price.HeaderText" xml:space="preserve">
     <value>Cost Price</value>
   </data>
+  <data name="cost_price.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>80</value>
+    <value>98</value>
   </data>
   <metadata name="unit_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -609,8 +678,11 @@
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>Unit Price</value>
   </data>
+  <data name="unit_price.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>94</value>
   </data>
   <metadata name="total_cost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -618,14 +690,23 @@
   <data name="total_cost.HeaderText" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="total_cost.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="total_cost.Width" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>67</value>
   </data>
   <data name="grid_sales_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
+  </data>
+  <data name="grid_sales_report.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grid_sales_report.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="grid_sales_report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>825, 272</value>
+    <value>962, 335</value>
   </data>
   <data name="grid_sales_report.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -646,10 +727,13 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 185</value>
+    <value>0, 228</value>
+  </data>
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>827, 275</value>
+    <value>965, 338</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -670,13 +754,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 16</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>827, 460</value>
+    <value>965, 566</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

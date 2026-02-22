@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using pos.Security.Authorization;
+using pos.UI;
 
 namespace pos
 {
@@ -36,6 +37,8 @@ namespace pos
 
         private void SalesReport_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             CmbCondition.Items.AddRange(new string[]
             {
                 "Custom", "Today", "Yesterday", "This Week", "Last Week",
@@ -50,6 +53,11 @@ namespace pos
             get_employees_dropdownlist();
 
             ApplyProfitColumnVisibility();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_sales_report, id);
         }
 
         public void load_products()

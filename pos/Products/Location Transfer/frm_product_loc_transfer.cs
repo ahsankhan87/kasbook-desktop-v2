@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -28,9 +29,16 @@ namespace pos
         
         private void frm_product_loc_transfer_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             GetMAXInvoiceNo();
             get_from_locations_dropdownlist();
             get_to_locations_dropdownlist();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_search_products, id);
         }
         
         private void btn_update_Click(object sender, EventArgs e)

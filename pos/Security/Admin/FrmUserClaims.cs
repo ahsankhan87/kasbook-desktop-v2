@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using pos.Security.Authorization;
+using pos.UI;
 
 namespace pos.Security.Admin
 {
@@ -14,6 +15,7 @@ namespace pos.Security.Admin
         {
             InitializeComponent();
             _repo = AppSecurityContext.RoleRepo ?? throw new InvalidOperationException("RoleRepo not configured.");
+            this.Load += (s, e) => AppTheme.Apply(this);
             LoadAllPermissions();
         }
 
@@ -59,6 +61,11 @@ namespace pos.Security.Admin
                 AppSecurityContext.RefreshUserClaims();
 
             MessageBox.Show("User claims updated.", "Security", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

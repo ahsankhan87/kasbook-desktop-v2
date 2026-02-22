@@ -361,7 +361,7 @@
     <value>True</value>
   </data>
   <data name="lbl_pages1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>658, 17</value>
+    <value>667, 17</value>
   </data>
   <data name="lbl_pages1.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 17</value>
@@ -559,7 +559,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 30</value>
+    <value>98, 30</value>
   </data>
   <data name="btn_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

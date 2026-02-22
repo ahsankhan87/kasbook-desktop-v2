@@ -44,6 +44,8 @@ namespace pos
 
         private void frm_bulk_edit_product_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
             {
                 autoCompleteInvoice();
@@ -54,6 +56,12 @@ namespace pos
                     get_product_to_locations_dropdownlist();
                 }
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_search_products, id);
+            AppTheme.ApplyListFormStyleLightHeader(null, null, null, grid_loc_transfer);
         }
 
         public void autoCompleteInvoice()

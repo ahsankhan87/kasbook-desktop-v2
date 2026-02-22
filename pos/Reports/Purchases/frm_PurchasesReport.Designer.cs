@@ -244,6 +244,7 @@
             // id
             // 
             this.id.DataPropertyName = "id";
+            this.id.FillWeight = 30F;
             resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
@@ -251,6 +252,7 @@
             // purchase_date
             // 
             this.purchase_date.DataPropertyName = "purchase_date";
+            this.purchase_date.FillWeight = 70F;
             resources.ApplyResources(this.purchase_date, "purchase_date");
             this.purchase_date.Name = "purchase_date";
             this.purchase_date.ReadOnly = true;
@@ -258,6 +260,8 @@
             // invoice_no
             // 
             this.invoice_no.DataPropertyName = "invoice_no";
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.invoice_no.FillWeight = 90F;
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
@@ -265,6 +269,8 @@
             // supplier_name
             // 
             this.supplier_name.DataPropertyName = "supplier_name";
+            this.supplier_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.supplier_name.FillWeight = 150F;
             resources.ApplyResources(this.supplier_name, "supplier_name");
             this.supplier_name.Name = "supplier_name";
             this.supplier_name.ReadOnly = true;
@@ -273,6 +279,7 @@
             // 
             this.product_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.product_name.DataPropertyName = "product_name";
+            this.product_name.FillWeight = 200F;
             resources.ApplyResources(this.product_name, "product_name");
             this.product_name.Name = "product_name";
             this.product_name.ReadOnly = true;
@@ -280,6 +287,7 @@
             // loc_code
             // 
             this.loc_code.DataPropertyName = "loc_code";
+            this.loc_code.FillWeight = 50F;
             resources.ApplyResources(this.loc_code, "loc_code");
             this.loc_code.Name = "loc_code";
             this.loc_code.ReadOnly = true;
@@ -290,6 +298,7 @@
             dataGridViewCellStyle7.Format = "N2";
             dataGridViewCellStyle7.NullValue = null;
             this.quantity.DefaultCellStyle = dataGridViewCellStyle7;
+            this.quantity.FillWeight = 70F;
             resources.ApplyResources(this.quantity, "quantity");
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
@@ -300,6 +309,7 @@
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle8.Format = "N2";
             this.cost_price.DefaultCellStyle = dataGridViewCellStyle8;
+            this.cost_price.FillWeight = 70F;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
@@ -311,6 +321,7 @@
             dataGridViewCellStyle9.Format = "N2";
             dataGridViewCellStyle9.NullValue = null;
             this.discount_value.DefaultCellStyle = dataGridViewCellStyle9;
+            this.discount_value.FillWeight = 70F;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -322,6 +333,7 @@
             dataGridViewCellStyle10.Format = "N2";
             dataGridViewCellStyle10.NullValue = null;
             this.total.DefaultCellStyle = dataGridViewCellStyle10;
+            this.total.FillWeight = 80F;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
             this.total.ReadOnly = true;
@@ -333,6 +345,7 @@
             dataGridViewCellStyle11.Format = "N2";
             dataGridViewCellStyle11.NullValue = null;
             this.vat.DefaultCellStyle = dataGridViewCellStyle11;
+            this.vat.FillWeight = 60F;
             resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
             this.vat.ReadOnly = true;
@@ -344,6 +357,7 @@
             dataGridViewCellStyle12.Format = "N2";
             dataGridViewCellStyle12.NullValue = null;
             this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle12;
+            this.total_with_vat.FillWeight = 80F;
             resources.ApplyResources(this.total_with_vat, "total_with_vat");
             this.total_with_vat.Name = "total_with_vat";
             this.total_with_vat.ReadOnly = true;

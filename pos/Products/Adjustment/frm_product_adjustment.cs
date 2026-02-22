@@ -22,11 +22,18 @@ namespace pos
 
         private void frm_product_adjustment_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
             {
                 GetMAXInvoiceNo();
                 Get_AccountID_From_Company();
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_search_products, id);
         }
 
         private void btn_update_Click(object sender, EventArgs e)

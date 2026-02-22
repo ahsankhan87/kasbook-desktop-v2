@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -21,6 +22,7 @@ namespace pos
 
         private void RenewSubscrption_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
             int userID = GetUserID();
             txtUserID.Text = userID.ToString();
 

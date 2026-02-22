@@ -20,6 +20,11 @@ namespace pos.Security.Admin
             _repo = AppSecurityContext.RoleRepo ?? throw new InvalidOperationException("RoleRepo not configured.");
             _auth = AppSecurityContext.Auth;
 
+            this.Load += (s, e) =>
+            {
+                AppTheme.Apply(this);
+            };
+
             using (BusyScope.Show(this, UiMessages.T("Loading permissions...", "ÌÇÑí ÊÍãíá ÇáÕáÇÍíÇÊ...")))
             {
                 // Load roles
@@ -29,7 +34,6 @@ namespace pos.Security.Admin
             }
 
             // Keep UI in sync when role changes
-            cmbRoles.SelectedIndexChanged += (s, e) => LoadPermissionsForRole();
             LoadPermissionsForRole();
         }
 
@@ -67,6 +71,16 @@ namespace pos.Security.Admin
                 if (def.GrantedPermissions.Contains(p))
                     checkedListBoxPermissions.SetItemChecked(i, true);
             }
+        }
+
+        private void cmbRoles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadPermissionsForRole();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

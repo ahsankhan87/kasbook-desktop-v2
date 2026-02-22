@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -28,6 +29,8 @@ namespace pos
 
         private void PurchasesReport_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             CmbCondition.Items.AddRange(new string[]
             {
                 "Custom", "Today", "Yesterday", "This Week", "Last Week",
@@ -42,6 +45,11 @@ namespace pos
             cmb_purchase_type.SelectedIndex = 0;
             autoCompleteProductCode();
             get_employees_dropdownlist();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_Purchases_report, id);
         }
 
         public void get_suppliers_dropdownlist()

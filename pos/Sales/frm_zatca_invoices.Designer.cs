@@ -453,6 +453,7 @@ namespace pos.Sales
             // 
             // frm_zatca_invoices
             // 
+            this.AcceptButton = this.btnSearch;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;

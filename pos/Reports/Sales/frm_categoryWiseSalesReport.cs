@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -30,10 +31,17 @@ namespace pos
 
         private void categoryWiseSalesReport_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             cmb_sale_type.SelectedIndex = 0;
             cmb_sale_account.SelectedIndex = 0;
             get_employees_dropdownlist();
             get_customers_dropdownlist();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_sales_report);
         }
 
         public void load_products()

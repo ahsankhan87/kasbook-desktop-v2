@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -32,10 +33,19 @@ namespace pos
 
         private void frm_other_stocks_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             if (_item_number.Length != 0)
             {
                 load_product_detail(_product_id, _item_number, _product_name);
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, null, grid_other_stock);
+            lbl_product_name.Font = AppTheme.FontHeader;
+            lbl_product_name.ForeColor = AppTheme.TextPrimary;
         }
 
         public void load_product_detail(string product_id, string item_number, string product_name)

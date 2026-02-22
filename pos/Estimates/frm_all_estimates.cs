@@ -31,11 +31,18 @@ namespace pos
 
         public void frm_all_estimates_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             // Debounce for search
             _searchDebounce.Interval = DebounceMs;
             _searchDebounce.Tick += SearchDebounce_Tick;
 
             load_all_estimates_grid();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_taxes_title, panel1, grid_all_estimates, id);
         }
 
         private void SearchDebounce_Tick(object sender, EventArgs e)

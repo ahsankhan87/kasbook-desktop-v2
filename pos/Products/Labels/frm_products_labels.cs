@@ -20,12 +20,19 @@ namespace pos
 
         public void frm_products_labels_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             txt_product_code.Focus();
 
             using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
             {
                 autoCompleteInvoice();
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_product_groups, id);
         }
 
         private void btn_save_Click(object sender, EventArgs e)

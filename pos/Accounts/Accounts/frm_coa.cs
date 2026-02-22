@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -23,7 +24,14 @@ namespace pos
 
         private void frm_coa_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             Load_coa(UsersModal.fy_from_date, UsersModal.fy_to_date);
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_coa);
         }
 
         private void Load_coa(DateTime from_date, DateTime to_date)

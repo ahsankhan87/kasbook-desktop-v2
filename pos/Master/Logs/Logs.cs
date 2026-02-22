@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos.Master.Logs
 {
@@ -19,9 +20,20 @@ namespace pos.Master.Logs
 
         private void Logs_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             GridLogs.AutoGenerateColumns = false;
            
             GridLogs.DataSource =  POS.DLL.Log.GetAll();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel1, label21, panel2, GridLogs);
+            label1.Font = AppTheme.FontLabel;
+            label1.ForeColor = Color.White;
+            label2.Font = AppTheme.FontLabel;
+            label2.ForeColor = Color.White;
         }
 
         private void Logs_KeyDown(object sender, KeyEventArgs e)

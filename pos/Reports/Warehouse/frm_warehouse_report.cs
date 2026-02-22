@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -23,12 +24,19 @@ namespace pos
 
         private void warehouse_report_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             cmb_item_type.SelectedIndex = 0;
             get_brands_dropdownlist();
             get_categories_dropdownlist();
             get_locations_dropdownlist();
             get_units_dropdownlist();
             
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_sales_report);
         }
 
         public void load_products()

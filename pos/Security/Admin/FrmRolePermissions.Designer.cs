@@ -37,7 +37,7 @@ namespace pos.Security.Admin
             this.cmbRoles.Left = 60;
             this.cmbRoles.Top = 10;
             this.cmbRoles.Width = 220;
-            this.cmbRoles.SelectedIndexChanged += (s, e) => LoadPermissionsForRole();
+            this.cmbRoles.SelectedIndexChanged += new System.EventHandler(this.cmbRoles_SelectedIndexChanged);
 
             this.checkedListBoxPermissions.Left = 12;
             this.checkedListBoxPermissions.Top = 45;
@@ -55,7 +55,7 @@ namespace pos.Security.Admin
             this.btnClose.Left = 342;
             this.btnClose.Top = 415;
             this.btnClose.Width = 90;
-            this.btnClose.Click += (s, e) => this.Close();
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 
             this.ClientSize = new System.Drawing.Size(450, 455);
             this.Controls.Add(this.lblRole);

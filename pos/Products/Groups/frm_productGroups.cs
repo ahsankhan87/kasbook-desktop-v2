@@ -25,10 +25,17 @@ namespace pos
 
         public void frm_product_groups_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             using (BusyScope.Show(this, UiMessages.T("Loading product groups...", "جاري تحميل مجموعات المنتجات...")))
             {
                 load_ProductGroups_grid();
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_taxes_title, panel1, grid_product_groups, id);
         }
 
         public void load_ProductGroups_grid()

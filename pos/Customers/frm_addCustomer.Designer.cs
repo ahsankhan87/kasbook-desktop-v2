@@ -553,6 +553,8 @@
             // description
             // 
             this.description.DataPropertyName = "description";
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.FillWeight = 260F;
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
             this.description.ReadOnly = true;

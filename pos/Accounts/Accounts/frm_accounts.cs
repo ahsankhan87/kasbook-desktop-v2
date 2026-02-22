@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pos.UI;
 
 namespace pos
 {
@@ -28,7 +29,14 @@ namespace pos
 
         public void frm_accounts_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_accounts_grid();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panel2, lbl_taxes_title, panel1, grid_accounts, id, group_id);
         }
 
         public void load_accounts_grid()

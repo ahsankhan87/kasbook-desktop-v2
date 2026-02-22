@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using POS.BLL;
+using pos.UI;
 
 namespace pos
 {
@@ -27,6 +28,8 @@ namespace pos
 
         public void frm_estimates_detail_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             //load_estimates_detail_grid(sale_id);
              try
             {
@@ -68,7 +71,7 @@ namespace pos
                     grid_estimates_detail.Rows.Add(row00);
 
                 }
-                string[] row12 = { "", "", "", "", "Total", _total_qty.ToString(), _total_cost.ToString(), _total_discount.ToString(), _total_vat.ToString(), _grand_total.ToString() };
+                string[] row12 = { "", "", "", "", "Total", _total_qty.ToString("N2"), _total_cost.ToString("N2"), _total_discount.ToString("N2"), _total_vat.ToString("N2"), _grand_total.ToString("N2") };
                 grid_estimates_detail.Rows.Add(row12);
 
                 CustomizeDataGridView();
@@ -78,6 +81,13 @@ namespace pos
                  MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
              }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_taxes_title, panel1, grid_estimates_detail, id, invoice_no);
+            txt_close.FlatStyle = FlatStyle.System;
+            txt_close.Font = AppTheme.FontButton;
         }
 
         public DataTable load_estimates_detail_grid()
@@ -111,24 +121,21 @@ namespace pos
 
         private void CustomizeDataGridView()
         {
-            // Get the last row in the DataGridView
+            if (grid_estimates_detail.Rows.Count == 0) return;
+
             DataGridViewRow lastRow = grid_estimates_detail.Rows[grid_estimates_detail.Rows.Count - 1];
 
-            // Loop through all cells in the row
             foreach (DataGridViewCell cell in lastRow.Cells)
             {
-                DataGridViewCellStyle style = new DataGridViewCellStyle(cell.Style);
-
-                // Set the font to bold
-                style.Font = new Font(grid_estimates_detail.Font, FontStyle.Bold);
-
-                // Set the background color
-                style.BackColor = Color.LightGray;
-
-                // Apply the style to the current cell
-                cell.Style = style;
+                cell.Style = new DataGridViewCellStyle(cell.Style)
+                {
+                    Font = AppTheme.FontSemiBold,
+                    BackColor = SystemColors.ControlDark,
+                    ForeColor = SystemColors.ControlText,
+                    SelectionBackColor = SystemColors.ControlDark,
+                    SelectionForeColor = SystemColors.ControlText
+                };
             }
-
         }
 
     }

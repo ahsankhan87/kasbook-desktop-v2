@@ -54,8 +54,9 @@ namespace pos
             panel2.ForeColor = Color.White;
             lbl_taxes_title.Font = AppTheme.FontHeader;
             lbl_taxes_title.ForeColor = Color.White;
-            label1.Font = AppTheme.FontHeader; label1.ForeColor = Color.White;
-            label2.Font = AppTheme.FontHeader; label2.ForeColor = Color.White;
+            
+            label1.Font = AppTheme.FontLabel; label1.ForeColor = Color.White;
+            label2.Font = AppTheme.FontLabel; label2.ForeColor = Color.White;
 
 
             txt_close.FlatStyle = FlatStyle.System;

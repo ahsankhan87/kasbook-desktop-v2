@@ -26,7 +26,14 @@ namespace pos
 
         public void frm_fiscal_years_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
             load_fiscal_years_grid();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyle(panel2, lbl_title, panel1, grid_fiscal_years, id);
         }
 
         public void load_fiscal_years_grid()
