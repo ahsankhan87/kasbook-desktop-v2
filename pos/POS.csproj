@@ -2223,9 +2223,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.ar-SA.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\Report Viewer\SaleInvoiceReport.resx">
       <DependentUpon>SaleInvoiceReport.cs</DependentUpon>

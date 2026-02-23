@@ -21,6 +21,11 @@ namespace pos
         public string _product_name;
         DataTable sales_report_dt = new DataTable();
 
+        private DataGridView customersDataGridView;
+        private System.Windows.Forms.Timer _customerSearchDebounceTimer;
+        private bool _suppressCustomerSearch;
+        private int _selectedCustomerId;
+        
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
@@ -30,9 +35,18 @@ namespace pos
         public frm_SalesReport()
         {
             InitializeComponent();
-            get_customers_dropdownlist();
             //get_products_dropdownlist();
             autoCompleteProductCode();
+
+            _customerSearchDebounceTimer = new System.Windows.Forms.Timer { Interval = 300 };
+            _customerSearchDebounceTimer.Tick += CustomerSearchDebounceTimer_Tick;
+
+            if (txtCustomerSearch != null)
+            {
+                txtCustomerSearch.TextChanged += txtCustomerSearch_TextChanged;
+                txtCustomerSearch.KeyUp       += txtCustomerSearch_KeyUp;
+                txtCustomerSearch.Leave       += txtCustomerSearch_Leave;
+            }
         }
 
         private void SalesReport_Load(object sender, EventArgs e)
@@ -51,6 +65,14 @@ namespace pos
             cmb_sale_type.SelectedIndex = 0;
             cmb_sale_account.SelectedIndex = 0;
             get_employees_dropdownlist();
+
+            SetupCustomersDataGridView();
+            //if (txtCustomerSearch != null)
+            //{
+            //    txtCustomerSearch.Width = 170;
+            //    txtCustomerSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            //    txtCustomerSearch.MaximumSize = new Size(170, 0);
+            //}
 
             ApplyProfitColumnVisibility();
         }
@@ -111,21 +133,7 @@ namespace pos
 
 
         }
-        public void get_customers_dropdownlist()
-        {
-            CustomerBLL customerBLL = new CustomerBLL();
-
-            DataTable customers = customerBLL.GetAll();
-            DataRow emptyRow = customers.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[2] = "All Customer";              // Set Column Value
-            customers.Rows.InsertAt(emptyRow, 0);
-            
-            cmb_customers.DisplayMember = "first_name";
-            cmb_customers.ValueMember = "id";
-            cmb_customers.DataSource = customers;
-
-        }
+        
 
         public void get_products_dropdownlist()
         {
@@ -153,7 +161,7 @@ namespace pos
                 {
                     DateTime from_date = txt_from_date.Value.Date;
                     DateTime to_date = txt_to_date.Value.Date;
-                    int customer_id = Convert.ToInt16(cmb_customers.SelectedValue);
+                    int customer_id = _selectedCustomerId;
                     string product_code = _product_code;
                     string sale_type = cmb_sale_type.SelectedItem.ToString();
                     int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
@@ -340,6 +348,9 @@ namespace pos
         {
             try
             {
+                if (txtCustomerSearch != null && txtCustomerSearch.Focused && e.KeyCode == Keys.Enter)
+                    return;
+
                 //when you enter in textbox it will goto next textbox, work like TAB key
                 if (e.KeyData == Keys.Enter)
                 {
@@ -541,6 +552,273 @@ namespace pos
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void SetupCustomersDataGridView()
+        {
+            if (customersDataGridView != null) return;
+
+            customersDataGridView = new DataGridView();
+            customersDataGridView.ColumnCount = 6;
+            bool isRtl = RightToLeft == RightToLeft.Yes;
+
+            customersDataGridView.Size               = new Size(520, 240);
+            customersDataGridView.BorderStyle        = BorderStyle.None;
+            customersDataGridView.BackgroundColor    = Color.White;
+            customersDataGridView.AutoGenerateColumns = false;
+            customersDataGridView.ReadOnly           = true;
+            customersDataGridView.AllowUserToAddRows    = false;
+            customersDataGridView.AllowUserToDeleteRows = false;
+            customersDataGridView.AllowUserToResizeRows = false;
+            customersDataGridView.SelectionMode      = DataGridViewSelectionMode.FullRowSelect;
+            customersDataGridView.MultiSelect        = false;
+            customersDataGridView.RowHeadersVisible  = false;
+            customersDataGridView.RightToLeft        = isRtl ? RightToLeft.Yes : RightToLeft.No;
+            customersDataGridView.AutoSizeRowsMode   = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            customersDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            customersDataGridView.Columns[0].Name = "Code";
+            customersDataGridView.Columns[1].Name = "Name";
+            customersDataGridView.Columns[2].Name = "ID";
+            customersDataGridView.Columns[3].Name = "Contact";
+            customersDataGridView.Columns[4].Name = "VAT No";
+            customersDataGridView.Columns[5].Name = "Credit Limit";
+
+            customersDataGridView.Columns[2].Visible = false;
+            customersDataGridView.Columns[5].Visible = false;
+
+            customersDataGridView.Columns[0].Width = 90;
+            customersDataGridView.Columns[1].Width = 220;
+            customersDataGridView.Columns[3].Width = 130;
+            customersDataGridView.Columns[4].Width = 120;
+
+            customersDataGridView.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = SystemColors.Window,
+                ForeColor          = SystemColors.WindowText,
+                Font               = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding            = new Padding(6, 2, 6, 2)
+            };
+            customersDataGridView.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor          = SystemColors.Control,
+                ForeColor          = SystemColors.ControlText,
+                Font               = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText
+            };
+            customersDataGridView.EnableHeadersVisualStyles  = false;
+            customersDataGridView.CellBorderStyle            = DataGridViewCellBorderStyle.SingleHorizontal;
+            customersDataGridView.RowTemplate.Height         = 28;
+            customersDataGridView.ColumnHeadersHeight        = 32;
+            customersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            customersDataGridView.CellClick += customersDataGridView_CellClick;
+            customersDataGridView.KeyDown   += customersDataGridView_KeyDown;
+
+            customersDataGridView.Visible = false;
+            this.Controls.Add(customersDataGridView);
+            customersDataGridView.BringToFront();
+        }
+
+        private void PositionCustomersDropdown()
+        {
+            Point pt = this.PointToClient(
+                txtCustomerSearch.Parent.PointToScreen(txtCustomerSearch.Location));
+            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - customersDataGridView.Width));
+            customersDataGridView.Location = new Point(x, pt.Y + txtCustomerSearch.Height + 2);
+        }
+
+        private void RefreshCustomersData()
+        {
+            try
+            {
+                var customerSearch   = txtCustomerSearch.Text ?? string.Empty;
+                var normalizedSearch = new CustomerBLL().NormalizeCustomerCodeInput(customerSearch);
+
+                if (_suppressCustomerSearch || !txtCustomerSearch.Focused)
+                {
+                    customersDataGridView.Visible = false;
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch))
+                {
+                    DataTable dt = new CustomerBLL().SearchRecord(normalizedSearch) ?? new DataTable();
+                    customersDataGridView.Rows.Clear();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string[] row0 = {
+                                dt.Columns.Contains("customer_code") ? dr["customer_code"].ToString() : "",
+                                (dr["first_name"].ToString() + " " + dr["last_name"].ToString()).Trim(),
+                                dr["id"].ToString(),
+                                dt.Columns.Contains("contact_no") ? dr["contact_no"].ToString() : "",
+                                dr["vat_no"].ToString(),
+                                dt.Columns.Contains("credit_limit") ? dr["credit_limit"].ToString() : ""
+                            };
+                            customersDataGridView.Rows.Add(row0);
+                        }
+                        PositionCustomersDropdown();
+                        customersDataGridView.Visible = true;
+                        customersDataGridView.BringToFront();
+                        customersDataGridView.ClearSelection();
+                        customersDataGridView.CurrentCell = null;
+                        if (customersDataGridView.Rows.Count > 0)
+                            customersDataGridView.CurrentCell = customersDataGridView.Rows[0].Cells[0];
+                    }
+                    else
+                    {
+                        customersDataGridView.Visible = false;
+                    }
+                }
+                else
+                {
+                    txtCustomerSearch.Text = "";
+                    ClearSelectedCustomer();
+                    customersDataGridView.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SelectCustomerFromDataRow(DataRow dr)
+        {
+            _selectedCustomerId = Convert.ToInt32(dr["id"]);
+            _suppressCustomerSearch = true;
+            txtCustomerSearch.Text = (dr["first_name"].ToString() + " " + dr["last_name"].ToString()).Trim();
+            _suppressCustomerSearch = false;
+        }
+
+        private void ClearSelectedCustomer()
+        {
+            _selectedCustomerId = 0;
+        }
+
+        private void CustomerSearchDebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _customerSearchDebounceTimer.Stop();
+            if (_suppressCustomerSearch || !txtCustomerSearch.Focused) return;
+            RefreshCustomersData();
+        }
+
+        private void txtCustomerSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_suppressCustomerSearch || !txtCustomerSearch.Focused) return;
+
+            if (string.IsNullOrWhiteSpace(txtCustomerSearch.Text))
+            {
+                ClearSelectedCustomer();
+            }
+
+            _customerSearchDebounceTimer.Stop();
+            _customerSearchDebounceTimer.Start();
+        }
+
+        private void txtCustomerSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                if (customersDataGridView.Visible && customersDataGridView.Rows.Count > 0)
+                {
+                    customersDataGridView.Focus();
+                    if (customersDataGridView.CurrentRow == null)
+                        customersDataGridView.CurrentCell = customersDataGridView.Rows[0].Cells[0];
+                }
+                return;
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                customersDataGridView.Visible = false;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                var normalizedSearch = new CustomerBLL().NormalizeCustomerCodeInput(txtCustomerSearch.Text);
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch) && normalizedSearch.StartsWith("C-", StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var bll = new CustomerBLL();
+                        var dt = bll.SearchRecord(normalizedSearch);
+                        if (dt != null && dt.Rows.Count > 0 && dt.Columns.Contains("customer_code"))
+                        {
+                            var exact = dt.Select("customer_code = '" + normalizedSearch.Replace("'", "''") + "'");
+                            if (exact.Length == 1)
+                            {
+                                SelectCustomerFromDataRow(exact[0]);
+                                customersDataGridView.Visible = false;
+                                btn_search.Focus();
+                                return;
+                            }
+                        }
+                        ClearSelectedCustomer();
+                    }
+                    catch { }
+                }
+
+                if (customersDataGridView.Visible && customersDataGridView.Rows.Count > 0)
+                {
+                    if (customersDataGridView.CurrentRow == null)
+                        customersDataGridView.CurrentCell = customersDataGridView.Rows[0].Cells[0];
+
+                    _selectedCustomerId = Convert.ToInt32(customersDataGridView.CurrentRow.Cells[2].Value);
+                    _suppressCustomerSearch = true;
+                    txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                    _suppressCustomerSearch = false;
+                    customersDataGridView.Visible = false;
+                    btn_search.Focus();
+                }
+            }
+
+            _customerSearchDebounceTimer.Stop();
+            _customerSearchDebounceTimer.Start();
+        }
+
+        private void txtCustomerSearch_Leave(object sender, EventArgs e)
+        {
+            _customerSearchDebounceTimer.Stop();
+            if (!customersDataGridView.Focused)
+                customersDataGridView.Visible = false;
+        }
+
+        private void customersDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                _selectedCustomerId = Convert.ToInt32(customersDataGridView.CurrentRow.Cells[2].Value);
+                _suppressCustomerSearch = true;
+                txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+                _suppressCustomerSearch = false;
+                customersDataGridView.Visible = false;
+                btn_search.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                customersDataGridView.Visible = false;
+                txtCustomerSearch.Focus();
+            }
+        }
+
+        private void customersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _selectedCustomerId = Convert.ToInt32(customersDataGridView.CurrentRow.Cells[2].Value);
+            _suppressCustomerSearch = true;
+            txtCustomerSearch.Text = customersDataGridView.CurrentRow.Cells[1].Value.ToString();
+            _suppressCustomerSearch = false;
+            customersDataGridView.Visible = false;
+            btn_search.Focus();
         }
     }
 }

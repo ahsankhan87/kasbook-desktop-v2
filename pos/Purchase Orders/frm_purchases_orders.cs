@@ -59,6 +59,11 @@ namespace pos
         private DataGridView categoriesDataGridView = new DataGridView();
         private DataGridView groupsDataGridView = new DataGridView();
 
+        private DataGridView suppliersDataGridView;
+        private System.Windows.Forms.Timer _supplierSearchDebounceTimer;
+        private bool _suppressSupplierSearch;
+        private int _selectedSupplierId;
+
         string invoice_status = "";
         string po_invoice_no = "";
         string product_code = "";
@@ -73,16 +78,17 @@ namespace pos
         {
             InitializeComponent();
             //autoCompleteProductCode();
-            
-            //instance = this;
-            //global_product_id = txt_product_code;
-            //tb_code = txt_product_code;
-            //tb_product_name = txt_product_name;
-            ////tb_description = txt_description;
-            //tb_qty = txt_qty;
-            //tb_cost_price = txt_cost_price;
-            //tb_cost_price = txt_cost_price;
-            
+
+            SetupSuppliersDataGridView();
+            _supplierSearchDebounceTimer = new System.Windows.Forms.Timer { Interval = 300 };
+            _supplierSearchDebounceTimer.Tick += SupplierSearchDebounceTimer_Tick;
+
+            if (txtSupplierSearch != null)
+            {
+                txtSupplierSearch.TextChanged += txtSupplierSearch_TextChanged;
+                txtSupplierSearch.KeyUp += txtSupplierSearch_KeyUp;
+                txtSupplierSearch.Leave += txtSupplierSearch_Leave;
+            }
         }
 
         private void frm_purchases_order_Load(object sender, EventArgs e)
@@ -499,6 +505,9 @@ namespace pos
         {
             try
             {
+                if (txtSupplierSearch != null && txtSupplierSearch.Focused)
+                    return;
+
                 //when you enter in textbox it will goto next textbox, work like TAB key
                 if (e.KeyData == Keys.Enter)
                 {
@@ -580,8 +589,10 @@ namespace pos
             //txt_supplier_vat.Text = "";
             invoice_status = "";
             SearchBySupplierCheckbox.Checked = false;
-            cmb_suppliers.SelectedValue = 0;
-            cmb_suppliers.Refresh();
+            _selectedSupplierId = 0;
+            _suppressSupplierSearch = true;
+            txtSupplierSearch.Text = "";
+            _suppressSupplierSearch = false;
             //cmb_categories.SelectedValue = 0;
             cmb_employees.SelectedValue = 0;
             
@@ -636,107 +647,11 @@ namespace pos
 
         public void get_suppliers_dropdownlist()
         {
-            SupplierBLL supplierBLL = new SupplierBLL();
-
-            DataTable suppliers = supplierBLL.GetAll();
-            DataRow emptyRow = suppliers.NewRow();
-            emptyRow[0] = "0";              // Set Column Value
-            emptyRow[2] = "Select Supplier";              // Set Column Value
-            suppliers.Rows.InsertAt(emptyRow, 0);
-
-            //DataRow emptyRow1 = suppliers.NewRow();
-            //emptyRow1[0] = "-1";              // Set Column Value
-            //emptyRow1[2] = "ADD NEW";              // Set Column Value
-            //suppliers.Rows.InsertAt(emptyRow1, 1);
-            
-            cmb_suppliers.DisplayMember = "first_name";
-            cmb_suppliers.ValueMember = "id";
-            cmb_suppliers.DataSource = suppliers;
-
+            // cmb_suppliers was removed from the form; supplier selection is via txtSupplierSearch.
         }
         private void cmb_suppliers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if(SearchBySupplierCheckbox.Checked && cmb_suppliers.Focused)
-                {
-                    grid_purchases_order.Rows.Clear();
-                    grid_purchases_order.Refresh();
-
-                    if (!string.IsNullOrEmpty(cmb_suppliers.SelectedValue.ToString()) && cmb_suppliers.SelectedValue.ToString() != "0")
-                    {
-                        ProductBLL productsBLL_obj = new ProductBLL();
-                        DataTable product_dt = productsBLL_obj.SearchProductBySupplier(cmb_suppliers.SelectedValue.ToString());
-
-                        if (product_dt.Rows.Count > 0)
-                        {
-                            
-                            foreach (DataRow myProductView in product_dt.Rows)
-                            {
-                                double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
-                                double required_qty = (myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? 1 : Convert.ToDouble(myProductView["purchase_demand_qty"].ToString()));
-                                double tax = (double.Parse(myProductView["avg_cost"].ToString()) * tax_rate / 100)* required_qty;
-                                double sub_total = tax + double.Parse(myProductView["avg_cost"].ToString());
-
-                                double qty = Convert.ToDouble(myProductView["qty"].ToString());
-                                double total = qty * double.Parse(myProductView["avg_cost"].ToString());
-                                double current_sub_total = tax + total;
-
-                                int id = Convert.ToInt32(myProductView["id"]);
-                                string code = myProductView["code"].ToString();
-                                string name = myProductView["name"].ToString();
-                                double cost_price = Convert.ToDouble(myProductView["avg_cost"]);
-                                double qty_sold = 0;
-                                string available_qty = qty.ToString();
-                                string category = myProductView["category"].ToString();
-                                double unit_price = Convert.ToDouble(myProductView["unit_price"]);
-                                double discount = 0; //Convert.ToDouble(myProductView["discount_value"]);
-                                string btn_delete = "Del";
-                                string location_code = myProductView["location_code"].ToString();
-                                string unit = myProductView["unit"].ToString();
-                                string tax_id = myProductView["tax_id"].ToString();
-                                string item_number = myProductView["item_number"].ToString();
-
-
-                                string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
-                                            available_qty,required_qty.ToString(),category,unit_price.ToString(), discount.ToString(),
-                                sub_total.ToString(),location_code,unit,btn_delete,tax_id, tax_rate.ToString(),item_number    };
-
-                                int RowIndex = grid_purchases_order.Rows.Add(row0);
-
-
-                                get_total_tax();
-                                get_total_discount();
-                                get_sub_total_amount();
-                                get_total_amount();
-                                get_total_qty();
-
-                                global_product_id = 0;
-                                global_unit_price = 0;
-                                global_tax_id = 0;
-                                global_tax_rate = 0;
-                            }
-                        }
-                        cmb_suppliers.Focus();
-
-                    }
-                }
-                
-
-                if (cmb_suppliers.SelectedValue.ToString() == "-1")
-                {
-                    frm_addSupplier custfrm = new frm_addSupplier(null);
-                    custfrm.ShowDialog();
-
-                    get_suppliers_dropdownlist();
-                }
-                    
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            // cmb_suppliers removed from designer; supplier selection is handled via txtSupplierSearch.
         }
 
         public void get_employees_dropdownlist()
@@ -876,23 +791,9 @@ namespace pos
 
         private void SetupBrandDataGridView()
         {
-            var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
-
             brandsDataGridView.ColumnCount = 2;
-            int xLocation = groupBox_products.Location.X + txt_brands.Location.X;
-            int yLocation = groupBox_products.Location.Y + txt_brands.Location.Y + 22;
-
             brandsDataGridView.Name = "brandsDataGridView";
-            if (lang == "en-US")
-            {
-                brandsDataGridView.Location = new Point(xLocation, yLocation);
-                brandsDataGridView.Size = new Size(250, 250);
-            }
-            else if (lang == "ar-SA")
-            {
-                brandsDataGridView.Location = new Point(xLocation, yLocation);
-                brandsDataGridView.Size = new Size(250, 250);
-            }
+            brandsDataGridView.Size = new Size(250, 250);
 
             brandsDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
@@ -918,6 +819,7 @@ namespace pos
             this.brandsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(brandsDataGridView_KeyDown);
 
             this.Controls.Add(brandsDataGridView);
+            PositionDropdownGrid(brandsDataGridView, txt_brands);
             brandsDataGridView.BringToFront();
 
         }
@@ -999,22 +901,9 @@ namespace pos
 
         private void SetupCategoriesDataGridView()
         {
-            var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
             categoriesDataGridView.ColumnCount = 2;
-            int xLocation = groupBox_products.Location.X + txt_categories.Location.X + 5;
-            int yLocation = groupBox_products.Location.Y + txt_categories.Location.Y + 22;
-
             categoriesDataGridView.Name = "categoriesDataGridView";
-            if (lang == "en-US")
-            {
-                categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(250, 250);
-            }
-            else if (lang == "ar-SA")
-            {
-                categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(250, 250);
-            }
+            categoriesDataGridView.Size = new Size(250, 250);
 
             categoriesDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
@@ -1040,6 +929,7 @@ namespace pos
             this.categoriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(categoriesDataGridView_KeyDown);
 
             this.Controls.Add(categoriesDataGridView);
+            PositionDropdownGrid(categoriesDataGridView, txt_categories);
             categoriesDataGridView.BringToFront();
 
         }
@@ -1125,23 +1015,9 @@ namespace pos
 
         private void SetupGroupsDataGridView()
         {
-            var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
             groupsDataGridView.ColumnCount = 2;
             groupsDataGridView.Name = "groupsDataGridView";
-            int xLocation = groupBox_products.Location.X + txt_groups.Location.X;
-            int yLocation = groupBox_products.Location.Y + txt_groups.Location.Y + 22;
-
-            groupsDataGridView.Name = "groupsDataGridView";
-            if (lang == "en-US")
-            {
-                groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(250, 250);
-            }
-            else if (lang == "ar-SA")
-            {
-                groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(250, 250);
-            }
+            groupsDataGridView.Size = new Size(250, 250);
 
             groupsDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
@@ -1167,8 +1043,19 @@ namespace pos
             this.groupsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(groupsDataGridView_KeyDown);
 
             this.Controls.Add(groupsDataGridView);
+            PositionDropdownGrid(groupsDataGridView, txt_groups);
             groupsDataGridView.BringToFront();
 
+        }
+
+        // Positions a popup dropdown grid directly below its anchor control.
+        // Converts through PointToScreen → PointToClient so nested panels/groupboxes and
+        // RTL mirroring are both handled automatically by WinForms (no manual RTL branch needed).
+        private void PositionDropdownGrid(DataGridView dgv, Control anchor)
+        {
+            Point pt = this.PointToClient(anchor.Parent.PointToScreen(anchor.Location));
+            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - dgv.Width));
+            dgv.Location = new Point(x, pt.Y + anchor.Height + 2);
         }
 
         void groupsDataGridView_KeyDown(object sender, KeyEventArgs e)
@@ -1273,7 +1160,28 @@ namespace pos
 
                     foreach (DataRow myProductView in _dt.Rows)
                     {
-                        cmb_suppliers.SelectedValue = myProductView["supplier_id"];
+                        _selectedSupplierId = (myProductView["supplier_id"] == null ? 0 : Convert.ToInt32(myProductView["supplier_id"]));
+                        try
+                        {
+                            _suppressSupplierSearch = true;
+                            if (_selectedSupplierId > 0)
+                            {
+                                var bll = new SupplierBLL();
+                                var dtSup = bll.SearchRecordBySupplierID(_selectedSupplierId);
+                                if (dtSup != null && dtSup.Rows.Count > 0)
+                                    txtSupplierSearch.Text = (Convert.ToString(dtSup.Rows[0]["first_name"]) + " " + Convert.ToString(dtSup.Rows[0]["last_name"])).Trim();
+                                else
+                                    txtSupplierSearch.Text = "";
+                            }
+                            else
+                            {
+                                txtSupplierSearch.Text = "";
+                            }
+                        }
+                        finally
+                        {
+                            _suppressSupplierSearch = false;
+                        }
                         cmb_employees.SelectedValue = myProductView["employee_id"];
                         //cmb_purchase_type.SelectedValue = myProductView["purchase_type"];
                         txt_purchase_date.Value = Convert.ToDateTime(myProductView["purchase_date"].ToString());
@@ -1414,7 +1322,7 @@ namespace pos
                         DateTime purchase_date = txt_purchase_date.Value.Date;
                         DateTime delivery_date = txt_delivery_date.Value.Date;
 
-                        int supplier_id = (cmb_suppliers.SelectedValue == null ? 0 : int.Parse(cmb_suppliers.SelectedValue.ToString()));
+                        int supplier_id = _selectedSupplierId;
                         int employee_id = (cmb_employees.SelectedValue == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
 
                         string invoice_no = "";
@@ -1701,6 +1609,328 @@ namespace pos
         {
             debounceTimer.Stop();   // Restart the timer
             debounceTimer.Start();
+        }
+
+        private void SetupSuppliersDataGridView()
+        {
+            if (suppliersDataGridView != null) return;
+
+            suppliersDataGridView = new DataGridView();
+            suppliersDataGridView.ColumnCount = 6;
+
+            bool isRtl = RightToLeft == RightToLeft.Yes || lang == "ar-SA";
+
+            suppliersDataGridView.Size = new Size(520, 240);
+            suppliersDataGridView.BorderStyle = BorderStyle.None;
+            suppliersDataGridView.BackgroundColor = Color.White;
+            suppliersDataGridView.AutoGenerateColumns = false;
+            suppliersDataGridView.ReadOnly = true;
+            suppliersDataGridView.AllowUserToAddRows = false;
+            suppliersDataGridView.AllowUserToDeleteRows = false;
+            suppliersDataGridView.AllowUserToResizeRows = false;
+            suppliersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            suppliersDataGridView.MultiSelect = false;
+            suppliersDataGridView.RowHeadersVisible = false;
+            suppliersDataGridView.RightToLeft = isRtl ? RightToLeft.Yes : RightToLeft.No;
+            suppliersDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            suppliersDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            suppliersDataGridView.Columns[0].Name = "Code";
+            suppliersDataGridView.Columns[1].Name = "Name";
+            suppliersDataGridView.Columns[2].Name = "ID";
+            suppliersDataGridView.Columns[3].Name = "Contact";
+            suppliersDataGridView.Columns[4].Name = "VAT No";
+            suppliersDataGridView.Columns[5].Name = "VatStatus";
+
+            suppliersDataGridView.Columns[2].Visible = false;
+            suppliersDataGridView.Columns[5].Visible = false;
+
+            suppliersDataGridView.Columns[0].Width = 90;
+            suppliersDataGridView.Columns[1].Width = 220;
+            suppliersDataGridView.Columns[3].Width = 130;
+            suppliersDataGridView.Columns[4].Width = 120;
+
+            suppliersDataGridView.CellClick += suppliersDataGridView_CellClick;
+            suppliersDataGridView.KeyDown += suppliersDataGridView_KeyDown;
+
+            suppliersDataGridView.Visible = false;
+            this.Controls.Add(suppliersDataGridView);
+            suppliersDataGridView.BringToFront();
+        }
+
+        private void PositionSuppliersDropdown()
+        {
+            Point pt = this.PointToClient(
+                txtSupplierSearch.Parent.PointToScreen(txtSupplierSearch.Location));
+            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - suppliersDataGridView.Width));
+            suppliersDataGridView.Location = new Point(x, pt.Y + txtSupplierSearch.Height + 2);
+        }
+
+        private void RefreshSuppliersData()
+        {
+            try
+            {
+                var supplierSearch = txtSupplierSearch.Text ?? string.Empty;
+                var bll = new SupplierBLL();
+                var normalizedSearch = bll.NormalizeSupplierCodeInput(supplierSearch);
+
+                if (_suppressSupplierSearch || !txtSupplierSearch.Focused)
+                {
+                    suppliersDataGridView.Visible = false;
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch))
+                {
+                    DataTable dt = bll.SearchRecord(normalizedSearch) ?? new DataTable();
+                    suppliersDataGridView.Rows.Clear();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string[] row0 = {
+                                dt.Columns.Contains("supplier_code") ? Convert.ToString(dr["supplier_code"]) : "",
+                                (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"])).Trim(),
+                                Convert.ToString(dr["id"]),
+                                dt.Columns.Contains("contact_no") ? Convert.ToString(dr["contact_no"]) : "",
+                                Convert.ToString(dr["vat_no"]),
+                                dt.Columns.Contains("vat_status") ? Convert.ToString(dr["vat_status"]) : ""
+                            };
+                            suppliersDataGridView.Rows.Add(row0);
+                        }
+                        PositionSuppliersDropdown();
+                        suppliersDataGridView.Visible = true;
+                        suppliersDataGridView.BringToFront();
+                        suppliersDataGridView.ClearSelection();
+                        suppliersDataGridView.CurrentCell = null;
+                        if (suppliersDataGridView.Rows.Count > 0)
+                            suppliersDataGridView.CurrentCell = suppliersDataGridView.Rows[0].Cells[0];
+                    }
+                    else
+                    {
+                        suppliersDataGridView.Visible = false;
+                    }
+                }
+                else
+                {
+                    txtSupplierSearch.Text = "";
+                    ClearSelectedSupplier();
+                    suppliersDataGridView.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SelectSupplierFromDataRow(DataRow dr)
+        {
+            _selectedSupplierId = Convert.ToInt32(dr["id"]);
+            _suppressSupplierSearch = true;
+            txtSupplierSearch.Text = (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"])).Trim();
+            _suppressSupplierSearch = false;
+            // Keep cmb_suppliers in sync for SearchBySupplierCheckbox functionality
+            if (SearchBySupplierCheckbox.Checked) LoadProductsBySupplier(_selectedSupplierId);
+        }
+
+        private void LoadProductsBySupplier(int supplierId)
+        {
+            if (supplierId <= 0) return;
+            try
+            {
+                grid_purchases_order.Rows.Clear();
+                grid_purchases_order.Refresh();
+
+                ProductBLL productsBLL_obj = new ProductBLL();
+                DataTable product_dt = productsBLL_obj.SearchProductBySupplier(supplierId.ToString());
+
+                if (product_dt.Rows.Count > 0)
+                {
+                    foreach (DataRow myProductView in product_dt.Rows)
+                    {
+                        double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
+                        double required_qty = (myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? 1 : Convert.ToDouble(myProductView["purchase_demand_qty"].ToString()));
+                        double tax = (double.Parse(myProductView["avg_cost"].ToString()) * tax_rate / 100) * required_qty;
+                        double sub_total = tax + double.Parse(myProductView["avg_cost"].ToString());
+
+                        double qty = Convert.ToDouble(myProductView["qty"].ToString());
+                        int id = Convert.ToInt32(myProductView["id"]);
+                        string code = myProductView["code"].ToString();
+                        string name = myProductView["name"].ToString();
+                        double cost_price = Convert.ToDouble(myProductView["avg_cost"]);
+                        double qty_sold = 0;
+                        string available_qty = qty.ToString();
+                        string category = myProductView["category"].ToString();
+                        double unit_price = Convert.ToDouble(myProductView["unit_price"]);
+                        double discount = 0;
+                        string btn_delete = "Del";
+                        string location_code = myProductView["location_code"].ToString();
+                        string unit = myProductView["unit"].ToString();
+                        string tax_id = myProductView["tax_id"].ToString();
+                        string item_number = myProductView["item_number"].ToString();
+
+                        string[] row0 = { id.ToString(), code, name, cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
+                            available_qty, required_qty.ToString(), category, unit_price.ToString(), discount.ToString(),
+                            sub_total.ToString(), location_code, unit, btn_delete, tax_id, tax_rate.ToString(), item_number };
+
+                        grid_purchases_order.Rows.Add(row0);
+
+                        global_product_id = 0;
+                        global_unit_price = 0;
+                        global_tax_id = 0;
+                        global_tax_rate = 0;
+                    }
+
+                    get_total_tax();
+                    get_total_discount();
+                    get_sub_total_amount();
+                    get_total_amount();
+                    get_total_qty();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ClearSelectedSupplier()
+        {
+            _selectedSupplierId = 0;
+        }
+
+        private void SupplierSearchDebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _supplierSearchDebounceTimer.Stop();
+            if (_suppressSupplierSearch || !txtSupplierSearch.Focused) return;
+            RefreshSuppliersData();
+        }
+
+        private void txtSupplierSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_suppressSupplierSearch || !txtSupplierSearch.Focused) return;
+            
+            if (string.IsNullOrWhiteSpace(txtSupplierSearch.Text))
+            {
+                ClearSelectedSupplier();
+            }
+
+            _supplierSearchDebounceTimer.Stop();
+            _supplierSearchDebounceTimer.Start();
+        }
+
+        private void txtSupplierSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                if (suppliersDataGridView.Visible && suppliersDataGridView.Rows.Count > 0)
+                {
+                    suppliersDataGridView.Focus();
+                    if (suppliersDataGridView.CurrentRow == null)
+                        suppliersDataGridView.CurrentCell = suppliersDataGridView.Rows[0].Cells[0];
+                }
+                return;
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                suppliersDataGridView.Visible = false;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                var bll = new SupplierBLL();
+                var normalizedSearch = bll.NormalizeSupplierCodeInput(txtSupplierSearch.Text);
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch) && normalizedSearch.StartsWith("S-", StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var dt = bll.SearchRecord(normalizedSearch);
+                        if (dt != null && dt.Rows.Count > 0 && dt.Columns.Contains("supplier_code"))
+                        {
+                            var exact = dt.Select("supplier_code = '" + normalizedSearch.Replace("'", "''") + "'");
+                            if (exact.Length == 1)
+                            {
+                                SelectSupplierFromDataRow(exact[0]);
+                                suppliersDataGridView.Visible = false;
+                                grid_purchases_order.Focus();
+                                return;
+                            }
+                        }
+                        ClearSelectedSupplier();
+                    }
+                    catch { }
+                }
+
+                if (suppliersDataGridView.Visible && suppliersDataGridView.Rows.Count > 0)
+                {
+                    var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+                    int supId;
+                    if (int.TryParse(idText, out supId) && supId > 0)
+                    {
+                        var dt = bll.SearchRecordBySupplierID(supId);
+                        if (dt != null && dt.Rows.Count > 0)
+                            SelectSupplierFromDataRow(dt.Rows[0]);
+                        else
+                            ClearSelectedSupplier();
+                    }
+                    suppliersDataGridView.Visible = false;
+                    grid_purchases_order.Focus();
+                }
+            }
+
+            _supplierSearchDebounceTimer.Stop();
+            _supplierSearchDebounceTimer.Start();
+        }
+
+        private void txtSupplierSearch_Leave(object sender, EventArgs e)
+        {
+            _supplierSearchDebounceTimer.Stop();
+            if (!suppliersDataGridView.Focused)
+                suppliersDataGridView.Visible = false;
+        }
+
+        private void suppliersDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+                int supId;
+                if (int.TryParse(idText, out supId) && supId > 0)
+                {
+                    var bll = new SupplierBLL();
+                    var dt = bll.SearchRecordBySupplierID(supId);
+                    if (dt != null && dt.Rows.Count > 0)
+                        SelectSupplierFromDataRow(dt.Rows[0]);
+                }
+                suppliersDataGridView.Visible = false;
+                grid_purchases_order.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                suppliersDataGridView.Visible = false;
+                txtSupplierSearch.Focus();
+            }
+        }
+
+        private void suppliersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+            int supId;
+            if (int.TryParse(idText, out supId) && supId > 0)
+            {
+                var bll = new SupplierBLL();
+                var dt = bll.SearchRecordBySupplierID(supId);
+                if (dt != null && dt.Rows.Count > 0)
+                    SelectSupplierFromDataRow(dt.Rows[0]);
+            }
+            suppliersDataGridView.Visible = false;
+            grid_purchases_order.Focus();
         }
     }
 }

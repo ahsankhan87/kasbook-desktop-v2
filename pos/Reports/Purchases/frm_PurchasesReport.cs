@@ -22,9 +22,25 @@ namespace pos
         public string _product_name;
         DataTable purchase_report_dt = new DataTable();
 
+        private DataGridView suppliersDataGridView;
+        private System.Windows.Forms.Timer _supplierSearchDebounceTimer;
+        private bool _suppressSupplierSearch;
+        private int _selectedSupplierId;
+
         public frm_PurchasesReport()
         {
             InitializeComponent();
+
+            SetupSuppliersDataGridView();
+            _supplierSearchDebounceTimer = new System.Windows.Forms.Timer { Interval = 300 };
+            _supplierSearchDebounceTimer.Tick += SupplierSearchDebounceTimer_Tick;
+
+            if (txtSupplierSearch != null)
+            {
+                txtSupplierSearch.TextChanged += txtSupplierSearch_TextChanged;
+                txtSupplierSearch.KeyUp += txtSupplierSearch_KeyUp;
+                txtSupplierSearch.Leave += txtSupplierSearch_Leave;
+            }
         }
 
         private void PurchasesReport_Load(object sender, EventArgs e)
@@ -40,7 +56,6 @@ namespace pos
                 "Previous Fiscal Year", "Next Fiscal Year"
             });
             CmbCondition.SelectedIndex = 0;
-            get_suppliers_dropdownlist();
             //get_products_dropdownlist();
             cmb_purchase_type.SelectedIndex = 0;
             autoCompleteProductCode();
@@ -52,22 +67,7 @@ namespace pos
             AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_Purchases_report, id);
         }
 
-        public void get_suppliers_dropdownlist()
-        {
-            SupplierBLL supplierBLL = new SupplierBLL();
-
-            DataTable suppliers = supplierBLL.GetAll();
-            DataRow emptyRow = suppliers.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[2] = "All Supplier";              // Set Column Value
-            suppliers.Rows.InsertAt(emptyRow, 0);
-
-            cmb_suppliers.DisplayMember = "first_name";
-            cmb_suppliers.ValueMember = "id";
-            cmb_suppliers.DataSource = suppliers;
-
-            
-        }
+        
 
         public void autoCompleteProductCode()
         {
@@ -108,7 +108,7 @@ namespace pos
                 
                 DateTime from_date = txt_from_date.Value.Date;
                 DateTime to_date = txt_to_date.Value.Date;
-                int supplier_id = Convert.ToInt16(cmb_suppliers.SelectedValue);
+                int supplier_id = _selectedSupplierId;
                 int product_id = _product_id; //Convert.ToInt16(cmb_products.SelectedValue);
                 int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
                 string purchase_type = cmb_purchase_type.SelectedItem.ToString();
@@ -222,6 +222,9 @@ namespace pos
         {
             try
             {
+                if (txtSupplierSearch != null && txtSupplierSearch.Focused && e.KeyCode == Keys.Enter)
+                    return;
+
                 //when you enter in textbox it will goto next textbox, work like TAB key
                 if (e.KeyData == Keys.Enter)
                 {
@@ -390,6 +393,262 @@ namespace pos
             {
                 MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void SetupSuppliersDataGridView()
+        {
+            if (suppliersDataGridView != null) return;
+
+            suppliersDataGridView = new DataGridView();
+            suppliersDataGridView.ColumnCount = 6;
+
+            suppliersDataGridView.Size = new Size(520, 240);
+            suppliersDataGridView.BorderStyle = BorderStyle.None;
+            suppliersDataGridView.BackgroundColor = Color.White;
+            suppliersDataGridView.AutoGenerateColumns = false;
+            suppliersDataGridView.ReadOnly = true;
+            suppliersDataGridView.AllowUserToAddRows = false;
+            suppliersDataGridView.AllowUserToDeleteRows = false;
+            suppliersDataGridView.AllowUserToResizeRows = false;
+            suppliersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            suppliersDataGridView.MultiSelect = false;
+            suppliersDataGridView.RowHeadersVisible = false;
+            suppliersDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            suppliersDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            suppliersDataGridView.Columns[0].Name = "Code";
+            suppliersDataGridView.Columns[1].Name = "Name";
+            suppliersDataGridView.Columns[2].Name = "ID";
+            suppliersDataGridView.Columns[3].Name = "Contact";
+            suppliersDataGridView.Columns[4].Name = "VAT No";
+            suppliersDataGridView.Columns[5].Name = "VatStatus";
+
+            suppliersDataGridView.Columns[2].Visible = false;
+            suppliersDataGridView.Columns[5].Visible = false;
+
+            suppliersDataGridView.Columns[0].Width = 90;
+            suppliersDataGridView.Columns[1].Width = 220;
+            suppliersDataGridView.Columns[3].Width = 130;
+            suppliersDataGridView.Columns[4].Width = 120;
+
+            suppliersDataGridView.CellClick += suppliersDataGridView_CellClick;
+            suppliersDataGridView.KeyDown += suppliersDataGridView_KeyDown;
+
+            suppliersDataGridView.Visible = false;
+            this.Controls.Add(suppliersDataGridView);
+            suppliersDataGridView.BringToFront();
+        }
+
+        private void PositionSuppliersDropdown()
+        {
+            Point pt = this.PointToClient(
+                txtSupplierSearch.Parent.PointToScreen(txtSupplierSearch.Location));
+            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - suppliersDataGridView.Width));
+            suppliersDataGridView.Location = new Point(x, pt.Y + txtSupplierSearch.Height + 2);
+        }
+
+        private void RefreshSuppliersData()
+        {
+            try
+            {
+                var supplierSearch = txtSupplierSearch.Text ?? string.Empty;
+                var bll = new SupplierBLL();
+                var normalizedSearch = bll.NormalizeSupplierCodeInput(supplierSearch);
+
+                if (_suppressSupplierSearch || !txtSupplierSearch.Focused)
+                {
+                    suppliersDataGridView.Visible = false;
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch))
+                {
+                    DataTable dt = bll.SearchRecord(normalizedSearch) ?? new DataTable();
+                    suppliersDataGridView.Rows.Clear();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string[] row0 = {
+                                dt.Columns.Contains("supplier_code") ? Convert.ToString(dr["supplier_code"]) : "",
+                                (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"])).Trim(),
+                                Convert.ToString(dr["id"]),
+                                dt.Columns.Contains("contact_no") ? Convert.ToString(dr["contact_no"]) : "",
+                                Convert.ToString(dr["vat_no"]),
+                                dt.Columns.Contains("vat_status") ? Convert.ToString(dr["vat_status"]) : ""
+                            };
+                            suppliersDataGridView.Rows.Add(row0);
+                        }
+                        PositionSuppliersDropdown();
+                        suppliersDataGridView.Visible = true;
+                        suppliersDataGridView.BringToFront();
+                        suppliersDataGridView.ClearSelection();
+                        suppliersDataGridView.CurrentCell = null;
+                        if (suppliersDataGridView.Rows.Count > 0)
+                            suppliersDataGridView.CurrentCell = suppliersDataGridView.Rows[0].Cells[0];
+                    }
+                    else
+                    {
+                        suppliersDataGridView.Visible = false;
+                    }
+                }
+                else
+                {
+                    txtSupplierSearch.Text = "";
+                    ClearSelectedSupplier();
+                    suppliersDataGridView.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SelectSupplierFromDataRow(DataRow dr)
+        {
+            _selectedSupplierId = Convert.ToInt32(dr["id"]);
+            _suppressSupplierSearch = true;
+            txtSupplierSearch.Text = (Convert.ToString(dr["first_name"]) + " " + Convert.ToString(dr["last_name"])).Trim();
+            _suppressSupplierSearch = false;
+        }
+
+        private void ClearSelectedSupplier()
+        {
+            _selectedSupplierId = 0;
+        }
+
+        private void SupplierSearchDebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _supplierSearchDebounceTimer.Stop();
+            if (_suppressSupplierSearch || !txtSupplierSearch.Focused) return;
+            RefreshSuppliersData();
+        }
+
+        private void txtSupplierSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_suppressSupplierSearch || !txtSupplierSearch.Focused) return;
+            
+            if (string.IsNullOrWhiteSpace(txtSupplierSearch.Text))
+            {
+                ClearSelectedSupplier();
+            }
+
+            _supplierSearchDebounceTimer.Stop();
+            _supplierSearchDebounceTimer.Start();
+        }
+
+        private void txtSupplierSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                if (suppliersDataGridView.Visible && suppliersDataGridView.Rows.Count > 0)
+                {
+                    suppliersDataGridView.Focus();
+                    if (suppliersDataGridView.CurrentRow == null)
+                        suppliersDataGridView.CurrentCell = suppliersDataGridView.Rows[0].Cells[0];
+                }
+                return;
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                suppliersDataGridView.Visible = false;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                var bll = new SupplierBLL();
+                var normalizedSearch = bll.NormalizeSupplierCodeInput(txtSupplierSearch.Text);
+
+                if (!string.IsNullOrWhiteSpace(normalizedSearch) && normalizedSearch.StartsWith("S-", StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var dt = bll.SearchRecord(normalizedSearch);
+                        if (dt != null && dt.Rows.Count > 0 && dt.Columns.Contains("supplier_code"))
+                        {
+                            var exact = dt.Select("supplier_code = '" + normalizedSearch.Replace("'", "''") + "'");
+                            if (exact.Length == 1)
+                            {
+                                SelectSupplierFromDataRow(exact[0]);
+                                suppliersDataGridView.Visible = false;
+                                btn_search.Focus();
+                                return;
+                            }
+                        }
+                        ClearSelectedSupplier();
+                    }
+                    catch { }
+                }
+
+                if (suppliersDataGridView.Visible && suppliersDataGridView.Rows.Count > 0)
+                {
+                    var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+                    int supId;
+                    if (int.TryParse(idText, out supId) && supId > 0)
+                    {
+                        var dt = bll.SearchRecordBySupplierID(supId);
+                        if (dt != null && dt.Rows.Count > 0)
+                            SelectSupplierFromDataRow(dt.Rows[0]);
+                        else
+                            ClearSelectedSupplier();
+                    }
+                    suppliersDataGridView.Visible = false;
+                    btn_search.Focus();
+                }
+            }
+
+            _supplierSearchDebounceTimer.Stop();
+            _supplierSearchDebounceTimer.Start();
+        }
+
+        private void txtSupplierSearch_Leave(object sender, EventArgs e)
+        {
+            _supplierSearchDebounceTimer.Stop();
+            if (!suppliersDataGridView.Focused)
+                suppliersDataGridView.Visible = false;
+        }
+
+        private void suppliersDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+                int supId;
+                if (int.TryParse(idText, out supId) && supId > 0)
+                {
+                    var bll = new SupplierBLL();
+                    var dt = bll.SearchRecordBySupplierID(supId);
+                    if (dt != null && dt.Rows.Count > 0)
+                        SelectSupplierFromDataRow(dt.Rows[0]);
+                }
+                suppliersDataGridView.Visible = false;
+                btn_search.Focus();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                suppliersDataGridView.Visible = false;
+                txtSupplierSearch.Focus();
+            }
+        }
+
+        private void suppliersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var idText = Convert.ToString(suppliersDataGridView.CurrentRow.Cells[2].Value);
+            int supId;
+            if (int.TryParse(idText, out supId) && supId > 0)
+            {
+                var bll = new SupplierBLL();
+                var dt = bll.SearchRecordBySupplierID(supId);
+                if (dt != null && dt.Rows.Count > 0)
+                    SelectSupplierFromDataRow(dt.Rows[0]);
+            }
+            suppliersDataGridView.Visible = false;
+            btn_search.Focus();
         }
     }
 }

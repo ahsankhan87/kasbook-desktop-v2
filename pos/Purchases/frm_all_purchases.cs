@@ -326,6 +326,7 @@ namespace pos
                 if (grid_all_purchases.Rows.Count > 0)
                 {
                     string invoiceNo = Convert.ToString(grid_all_purchases.CurrentRow.Cells["invoice_no"].Value);
+                    string supplierInvoiceNo = Convert.ToString(grid_all_purchases.CurrentRow.Cells["supplier_invoice_no"].Value);
                     if (string.IsNullOrWhiteSpace(invoiceNo))
                     {
                         UiMessages.ShowWarning(
@@ -336,7 +337,7 @@ namespace pos
                         return;
                     }
 
-                    using (var supplierNameChange = new Suppliers.ChangeSupplierName(invoiceNo))
+                    using (var supplierNameChange = new Suppliers.ChangeSupplierName(invoiceNo, supplierInvoiceNo))
                     {
                         supplierNameChange.ShowDialog(this);
                     }

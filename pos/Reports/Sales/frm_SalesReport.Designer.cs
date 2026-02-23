@@ -40,6 +40,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtCustomerSearch = new System.Windows.Forms.TextBox();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
@@ -54,7 +55,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txt_from_date = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmb_customers = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -90,7 +90,7 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.txtCustomerSearch);
             this.panel1.Controls.Add(this.CmbCondition);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.cmb_employees);
@@ -105,20 +105,25 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txt_from_date);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cmb_customers);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label4);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // txtCustomerSearch
+            // 
+            resources.ApplyResources(this.txtCustomerSearch, "txtCustomerSearch");
+            this.txtCustomerSearch.Name = "txtCustomerSearch";
+            // 
             // CmbCondition
             // 
-            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCondition.FormattingEnabled = true;
+            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.Name = "CmbCondition";
             this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
             // 
@@ -129,10 +134,10 @@
             // 
             // cmb_employees
             // 
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.Name = "cmb_employees";
             // 
             // txt_product_name
@@ -170,30 +175,30 @@
             // 
             // cmb_sale_account
             // 
-            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_account.FormattingEnabled = true;
             this.cmb_sale_account.Items.AddRange(new object[] {
             resources.GetString("cmb_sale_account.Items"),
             resources.GetString("cmb_sale_account.Items1"),
             resources.GetString("cmb_sale_account.Items2")});
+            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.Name = "cmb_sale_account";
             // 
             // cmb_sale_type
             // 
-            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_type.FormattingEnabled = true;
             this.cmb_sale_type.Items.AddRange(new object[] {
             resources.GetString("cmb_sale_type.Items"),
             resources.GetString("cmb_sale_type.Items1"),
             resources.GetString("cmb_sale_type.Items2")});
+            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.Name = "cmb_sale_type";
             // 
             // txt_to_date
             // 
-            resources.ApplyResources(this.txt_to_date, "txt_to_date");
             this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.txt_to_date, "txt_to_date");
             this.txt_to_date.Name = "txt_to_date";
             // 
             // label6
@@ -203,22 +208,14 @@
             // 
             // txt_from_date
             // 
-            resources.ApplyResources(this.txt_from_date, "txt_from_date");
             this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.txt_from_date, "txt_from_date");
             this.txt_from_date.Name = "txt_from_date";
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            // 
-            // cmb_customers
-            // 
-            resources.ApplyResources(this.cmb_customers, "cmb_customers");
-            this.cmb_customers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_customers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_customers.FormattingEnabled = true;
-            this.cmb_customers.Name = "cmb_customers";
             // 
             // label5
             // 
@@ -242,16 +239,16 @@
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.grid_sales_report);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // grid_sales_report
             // 
-            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AllowUserToAddRows = false;
             this.grid_sales_report.AllowUserToDeleteRows = false;
             this.grid_sales_report.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sales_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -294,7 +291,6 @@
             // 
             // invoice_no
             // 
-            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.NotSet;
             this.invoice_no.DataPropertyName = "invoice_no";
             this.invoice_no.FillWeight = 90F;
             resources.ApplyResources(this.invoice_no, "invoice_no");
@@ -303,8 +299,8 @@
             // 
             // customer_name
             // 
-            this.customer_name.DataPropertyName = "customer_name";
             this.customer_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.customer_name.DataPropertyName = "customer_name";
             this.customer_name.FillWeight = 150F;
             resources.ApplyResources(this.customer_name, "customer_name");
             this.customer_name.Name = "customer_name";
@@ -312,8 +308,8 @@
             // 
             // product_code
             // 
-            this.product_code.DataPropertyName = "item_code";
             this.product_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.product_code.DataPropertyName = "item_code";
             this.product_code.FillWeight = 90F;
             resources.ApplyResources(this.product_code, "product_code");
             this.product_code.Name = "product_code";
@@ -444,10 +440,10 @@
             // 
             // cost_total
             // 
+            this.cost_total.FillWeight = 70F;
             resources.ApplyResources(this.cost_total, "cost_total");
             this.cost_total.Name = "cost_total";
             this.cost_total.ReadOnly = true;
-            this.cost_total.FillWeight = 70F;
             // 
             // frm_SalesReport
             // 
@@ -479,7 +475,6 @@
         private System.Windows.Forms.DateTimePicker txt_to_date;
         private System.Windows.Forms.DateTimePicker txt_from_date;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmb_customers;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmb_sale_type;
@@ -511,5 +506,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn profit;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit_percent;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost_total;
+        private System.Windows.Forms.TextBox txtCustomerSearch;
     }
 }

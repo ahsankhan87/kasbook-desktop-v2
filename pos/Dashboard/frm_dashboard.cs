@@ -83,8 +83,8 @@ namespace pos.Dashboard
         private static readonly Color _accent2      = Color.FromArgb(52,  152, 219);  // blue   – monthly
         private static readonly Color _accent3      = Color.FromArgb(231,  76,  60);  // red    – low stock
         private static readonly Color _sectionHdr   = Color.FromArgb(52,  73,  94);   // section label
-        private static readonly Color _listHdr      = Color.FromArgb(235, 239, 245);
-        private static readonly Color _listAlt      = Color.FromArgb(250, 251, 253);
+        private static readonly Color _listHdr      = AppTheme.GridHeader;
+        private static readonly Color _listAlt      = AppTheme.GridAltRow;
 
       
 
@@ -168,7 +168,7 @@ namespace pos.Dashboard
             // ── Recent activity list ──────────────────────────────────────────
             listRecent.BackColor        = _cardBg;
             listRecent.ForeColor        = AppTheme.TextPrimary;
-            listRecent.Font             = new Font("Segoe UI", 9.5F, FontStyle.Regular);
+            listRecent.Font             = AppTheme.FontGrid;
             listRecent.BorderStyle      = BorderStyle.FixedSingle;
             listRecent.GridLines        = false;
             listRecent.FullRowSelect    = true;
@@ -182,6 +182,8 @@ namespace pos.Dashboard
             listRecent.DrawColumnHeader += ListRecent_DrawColumnHeader;
             listRecent.DrawItem        += ListRecent_DrawItem;
             listRecent.DrawSubItem     += ListRecent_DrawSubItem;
+
+            UpdateRecentColumnWidths();
         }
 
         // ── Paint handlers ───────────────────────────────────────────────────
@@ -206,7 +208,7 @@ namespace pos.Dashboard
                 e.Graphics.FillRectangle(bg, e.Bounds);
             using (var pen = new Pen(_cardBorder, 1))
                 e.Graphics.DrawRectangle(pen, e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
-            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI Semibold", 8.75F),
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, AppTheme.FontGridHeader,
                 e.Bounds, _sectionHdr, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
         }
 
@@ -229,8 +231,9 @@ namespace pos.Dashboard
                 e.Graphics.DrawLine(pen, e.Bounds.Left, e.Bounds.Bottom - 1, e.Bounds.Right, e.Bounds.Bottom - 1);
 
             var textColor = e.ColumnIndex == 0 ? AppTheme.Primary : AppTheme.TextPrimary;
+            var textFont = e.ColumnIndex == 0 ? AppTheme.FontSemiBold : AppTheme.FontGrid;
             TextRenderer.DrawText(e.Graphics, e.SubItem.Text,
-                new Font("Segoe UI", 9.5F, e.ColumnIndex == 0 ? FontStyle.Bold : FontStyle.Regular),
+                textFont,
                 System.Drawing.Rectangle.Inflate(e.Bounds, -4, 0),
                 textColor,
                 TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
@@ -348,9 +351,25 @@ namespace pos.Dashboard
                     lvi.SubItems.Add(i.Timestamp == DateTime.MinValue ? "-" : i.Timestamp.ToString("yyyy-MM-dd HH:mm"));
                     listRecent.Items.Add(lvi);
                 }
-                for (int i = 0; i < listRecent.Columns.Count; i++) listRecent.Columns[i].Width = -2;
+                UpdateRecentColumnWidths();
             }
             finally { listRecent.EndUpdate(); }
+        }
+
+        private void UpdateRecentColumnWidths()
+        {
+            if (listRecent.Columns.Count == 0) return;
+
+            int padding = 24;
+            int totalWidth = Math.Max(0, listRecent.ClientSize.Width - padding);
+
+            int colAreaWidth = Math.Max(90, (int)(totalWidth * 0.2));
+            int colDateWidth = Math.Max(140, (int)(totalWidth * 0.25));
+            int colInfoWidth = Math.Max(120, totalWidth - colAreaWidth - colDateWidth);
+
+            colArea.Width = colAreaWidth;
+            colInfo.Width = colInfoWidth;
+            colDateTime.Width = colDateWidth;
         }
 
         public class RecentItem

@@ -44,19 +44,19 @@ namespace pos.Suppliers
             // 
             this.lbl_invoice_no.AutoSize = true;
             this.lbl_invoice_no.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_invoice_no.Location = new System.Drawing.Point(218, 22);
+            this.lbl_invoice_no.Location = new System.Drawing.Point(191, 22);
             this.lbl_invoice_no.Name = "lbl_invoice_no";
-            this.lbl_invoice_no.Size = new System.Drawing.Size(82, 17);
+            this.lbl_invoice_no.Size = new System.Drawing.Size(78, 16);
             this.lbl_invoice_no.TabIndex = 19;
             this.lbl_invoice_no.Text = "invoice no";
             // 
             // btn_cancel
             // 
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Location = new System.Drawing.Point(366, 151);
+            this.btn_cancel.Location = new System.Drawing.Point(320, 151);
             this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(100, 28);
+            this.btn_cancel.Size = new System.Drawing.Size(88, 28);
             this.btn_cancel.TabIndex = 4;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
@@ -64,10 +64,10 @@ namespace pos.Suppliers
             // 
             // btn_ok
             // 
-            this.btn_ok.Location = new System.Drawing.Point(264, 151);
+            this.btn_ok.Location = new System.Drawing.Point(231, 151);
             this.btn_ok.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ok.Name = "btn_ok";
-            this.btn_ok.Size = new System.Drawing.Size(100, 28);
+            this.btn_ok.Size = new System.Drawing.Size(88, 28);
             this.btn_ok.TabIndex = 3;
             this.btn_ok.Text = "OK";
             this.btn_ok.UseVisualStyleBackColor = true;
@@ -78,65 +78,65 @@ namespace pos.Suppliers
             this.cmb_suppliers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
             this.cmb_suppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_suppliers.FormattingEnabled = true;
-            this.cmb_suppliers.Location = new System.Drawing.Point(158, 106);
+            this.cmb_suppliers.Location = new System.Drawing.Point(138, 106);
             this.cmb_suppliers.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_suppliers.Name = "cmb_suppliers";
-            this.cmb_suppliers.Size = new System.Drawing.Size(308, 24);
+            this.cmb_suppliers.Size = new System.Drawing.Size(270, 24);
             this.cmb_suppliers.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 22);
+            this.label2.Location = new System.Drawing.Point(8, 22);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 17);
+            this.label2.Size = new System.Drawing.Size(189, 17);
             this.label2.TabIndex = 14;
             this.label2.Text = "You have selected invoice no.";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 43);
+            this.label1.Location = new System.Drawing.Point(8, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(217, 17);
+            this.label1.Size = new System.Drawing.Size(203, 17);
             this.label1.TabIndex = 15;
             this.label1.Text = "Please select supplier to change ";
             // 
             // txtSupplierInvoiceNo
             // 
-            this.txtSupplierInvoiceNo.Location = new System.Drawing.Point(158, 77);
+            this.txtSupplierInvoiceNo.Location = new System.Drawing.Point(138, 77);
             this.txtSupplierInvoiceNo.Name = "txtSupplierInvoiceNo";
-            this.txtSupplierInvoiceNo.Size = new System.Drawing.Size(308, 22);
+            this.txtSupplierInvoiceNo.Size = new System.Drawing.Size(270, 24);
             this.txtSupplierInvoiceNo.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 80);
+            this.label3.Location = new System.Drawing.Point(8, 80);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(134, 17);
+            this.label3.Size = new System.Drawing.Size(129, 17);
             this.label3.TabIndex = 14;
             this.label3.Text = "Supplier Invoice No.";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 109);
+            this.label4.Location = new System.Drawing.Point(8, 109);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 17);
+            this.label4.Size = new System.Drawing.Size(56, 17);
             this.label4.TabIndex = 14;
             this.label4.Text = "Supplier";
             // 
             // ChangeSupplierName
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
-            this.ClientSize = new System.Drawing.Size(479, 192);
+            this.ClientSize = new System.Drawing.Size(419, 192);
             this.Controls.Add(this.txtSupplierInvoiceNo);
             this.Controls.Add(this.lbl_invoice_no);
             this.Controls.Add(this.btn_cancel);

@@ -273,6 +273,9 @@
   <data name="lblSalesValue.Text" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblSalesValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblSalesValue.Name" xml:space="preserve">
     <value>lblSalesValue</value>
   </data>
@@ -375,6 +378,9 @@
   <data name="lblRevenueValue.Text" xml:space="preserve">
     <value>0.00</value>
   </data>
+  <data name="lblRevenueValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblRevenueValue.Name" xml:space="preserve">
     <value>lblRevenueValue</value>
   </data>
@@ -476,6 +482,9 @@
   </data>
   <data name="lblLowStockValue.Text" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="lblLowStockValue.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblLowStockValue.Name" xml:space="preserve">
     <value>lblLowStockValue</value>

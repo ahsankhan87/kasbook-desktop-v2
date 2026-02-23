@@ -36,6 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtSupplierSearch = new System.Windows.Forms.TextBox();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
             this.txt_from_date = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmb_suppliers = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,6 +76,7 @@
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.txtSupplierSearch);
             this.panel1.Controls.Add(this.CmbCondition);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
@@ -90,11 +91,15 @@
             this.panel1.Controls.Add(this.txt_to_date);
             this.panel1.Controls.Add(this.txt_from_date);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cmb_suppliers);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Name = "panel1";
+            // 
+            // txtSupplierSearch
+            // 
+            resources.ApplyResources(this.txtSupplierSearch, "txtSupplierSearch");
+            this.txtSupplierSearch.Name = "txtSupplierSearch";
             // 
             // CmbCondition
             // 
@@ -187,14 +192,6 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // cmb_suppliers
-            // 
-            resources.ApplyResources(this.cmb_suppliers, "cmb_suppliers");
-            this.cmb_suppliers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_suppliers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_suppliers.FormattingEnabled = true;
-            this.cmb_suppliers.Name = "cmb_suppliers";
-            // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
@@ -259,8 +256,8 @@
             // 
             // invoice_no
             // 
-            this.invoice_no.DataPropertyName = "invoice_no";
             this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.invoice_no.DataPropertyName = "invoice_no";
             this.invoice_no.FillWeight = 90F;
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
@@ -268,8 +265,8 @@
             // 
             // supplier_name
             // 
-            this.supplier_name.DataPropertyName = "supplier_name";
             this.supplier_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.supplier_name.DataPropertyName = "supplier_name";
             this.supplier_name.FillWeight = 150F;
             resources.ApplyResources(this.supplier_name, "supplier_name");
             this.supplier_name.Name = "supplier_name";
@@ -390,7 +387,6 @@
         private System.Windows.Forms.DateTimePicker txt_to_date;
         private System.Windows.Forms.DateTimePicker txt_from_date;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmb_suppliers;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmb_purchase_type;
@@ -416,5 +412,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_with_vat;
+        private System.Windows.Forms.TextBox txtSupplierSearch;
     }
 }

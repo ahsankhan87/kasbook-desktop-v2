@@ -9,11 +9,13 @@ namespace pos.Suppliers
     public partial class ChangeSupplierName : Form
     {
         public string _invoiceNo;
+        public string _supplierINvoiceNo = "";
 
-        public ChangeSupplierName(string invoiceNo)
+        public ChangeSupplierName(string invoiceNo, string supplierINvoiceNo)
         {
             InitializeComponent();
             _invoiceNo = invoiceNo;
+            _supplierINvoiceNo = supplierINvoiceNo;
         }
 
         private void Btn_cancel_Click(object sender, EventArgs e)
@@ -64,8 +66,9 @@ namespace pos.Suppliers
 
         private void ChangeSupplierName_Load(object sender, EventArgs e)
         {
-            this.ActiveControl = txtSupplierInvoiceNo;
             lbl_invoice_no.Text = _invoiceNo;
+            txtSupplierInvoiceNo.Text = _supplierINvoiceNo;
+            this.ActiveControl = txtSupplierInvoiceNo;
             Get_Suppliers_DDL();
         }
     }

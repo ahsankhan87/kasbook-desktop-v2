@@ -1305,7 +1305,7 @@ namespace pos
             //cmb_categories.SelectedValue = 0;
 
             this.ActiveControl = grid_sales;
-
+            grid_sales.CurrentCell = grid_sales.Rows[0].Cells["code"];
         }
 
         private void btn_new_Click(object sender, EventArgs e)
@@ -2197,23 +2197,9 @@ namespace pos
 
         private void SetupBrandDataGridView()
         {
-            var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
-
             brandsDataGridView.ColumnCount = 2;
-            int xLocation = groupBox_products.Location.X + txt_brands.Location.X;
-            int yLocation = groupBox_products.Location.Y + txt_brands.Location.Y + 22;
-
             brandsDataGridView.Name = "brandsDataGridView";
-            if (current_lang_code == "en-US")
-            {
-                brandsDataGridView.Location = new Point(xLocation, yLocation);
-                brandsDataGridView.Size = new Size(250, 250);
-            }
-            else if (current_lang_code == "ar-SA")
-            {
-                brandsDataGridView.Location = new Point(xLocation, yLocation);
-                brandsDataGridView.Size = new Size(250, 250);
-            }
+            brandsDataGridView.Size = new Size(250, 250);
 
             brandsDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
@@ -2239,6 +2225,7 @@ namespace pos
             this.brandsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(brandsDataGridView_KeyDown);
 
             this.Controls.Add(brandsDataGridView);
+            PositionDropdownGrid(brandsDataGridView, txt_brands);
             brandsDataGridView.BringToFront();
             StyleDropdownGrid(brandsDataGridView);
 
@@ -2321,23 +2308,9 @@ namespace pos
 
         private void SetupCategoriesDataGridView()
         {
-            var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
             categoriesDataGridView.ColumnCount = 2;
-            int xLocation = groupBox_products.Location.X + txt_categories.Location.X + 5;
-            int yLocation = groupBox_products.Location.Y + txt_categories.Location.Y + 22;
-
             categoriesDataGridView.Name = "categoriesDataGridView";
-            if (current_lang_code == "en-US")
-            {
-                categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(250, 250);
-
-            }
-            else if (current_lang_code == "ar-SA")
-            {
-                categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(250, 250);
-            }
+            categoriesDataGridView.Size = new Size(250, 250);
 
             categoriesDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
@@ -2363,6 +2336,7 @@ namespace pos
             this.categoriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(categoriesDataGridView_KeyDown);
 
             this.Controls.Add(categoriesDataGridView);
+            PositionDropdownGrid(categoriesDataGridView, txt_categories);
             categoriesDataGridView.BringToFront();
             StyleDropdownGrid(categoriesDataGridView);
 
@@ -2447,24 +2421,9 @@ namespace pos
 
         private void SetupGroupsDataGridView()
         {
-            var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
-
             groupsDataGridView.ColumnCount = 2;
-
-            int xLocation = groupBox_products.Location.X + txt_groups.Location.X;
-            int yLocation = groupBox_products.Location.Y + txt_groups.Location.Y + 22;
-
             groupsDataGridView.Name = "groupsDataGridView";
-            if (current_lang_code == "en-US")
-            {
-                groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(250, 250);
-            }
-            else if (current_lang_code == "ar-SA")
-            {
-                groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(250, 250);
-            }
+            groupsDataGridView.Size = new Size(250, 250);
 
             groupsDataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
@@ -2490,6 +2449,7 @@ namespace pos
             this.groupsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(groupsDataGridView_KeyDown);
 
             this.Controls.Add(groupsDataGridView);
+            PositionDropdownGrid(groupsDataGridView, txt_groups);
             groupsDataGridView.BringToFront();
             StyleDropdownGrid(groupsDataGridView);
 
@@ -3483,19 +3443,31 @@ namespace pos
             }
         }
 
+        // Positions a popup dropdown grid directly below its anchor control.
+        // Converts through PointToScreen → PointToClient so nested panels/groupboxes and
+        // RTL mirroring are both handled automatically by WinForms (no manual RTL branch needed).
+        private void PositionDropdownGrid(DataGridView dgv, Control anchor)
+        {
+            Point pt = this.PointToClient(anchor.Parent.PointToScreen(anchor.Location));
+            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - dgv.Width));
+            dgv.Location = new Point(x, pt.Y + anchor.Height + 2);
+        }
+
+        private void PositionCustomersDropdown()
+        {
+            Point pt = this.PointToClient(
+                txtCustomerSearch.Parent.PointToScreen(txtCustomerSearch.Location));
+            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - customersDataGridView.Width));
+            customersDataGridView.Location = new Point(x, pt.Y + txtCustomerSearch.Height + 2);
+        }
+
         private void SetupCustomersDataGridView()
         {
             if (customersDataGridView != null) return; // already created
 
-            var current_lang_code = Thread.CurrentThread.CurrentUICulture.IetfLanguageTag;
-
             customersDataGridView = new DataGridView();
             customersDataGridView.ColumnCount = 6;
 
-            int xLocation = groupBoxCustomer.Location.X + txtCustomerSearch.Location.X;
-            int yLocation = groupBoxCustomer.Location.Y + txtCustomerSearch.Location.Y + 22;
-
-            customersDataGridView.Location = new Point(xLocation, yLocation);
             customersDataGridView.Size = new Size(520, 240);
             customersDataGridView.BorderStyle = BorderStyle.None;
             customersDataGridView.BackgroundColor = Color.White;
@@ -3633,7 +3605,9 @@ namespace pos
                             customersDataGridView.Rows.Add(row0);
                         }
 
+                        PositionCustomersDropdown();
                         customersDataGridView.Visible = true; // textbox is focused here per the guard above
+                        customersDataGridView.BringToFront();
                         customersDataGridView.ClearSelection();
                         customersDataGridView.CurrentCell = null;
                         TrySelectCurrent();
@@ -3681,6 +3655,16 @@ namespace pos
         private void txtCustomerSearch_TextChanged(object sender, EventArgs e)
         {
             if (_suppressCustomerSearch || !txtCustomerSearch.Focused) return;
+            
+            if (string.IsNullOrWhiteSpace(txtCustomerSearch.Text))
+            {
+                txt_customerID.Text = "";
+                txt_customer_vat.Text = "";
+                txt_cust_credit_limit.Text = "";
+                txt_cust_balance.Text = "";
+                ApplyInvoiceSubtypeForCustomerSelection();
+            }
+
             _customerSearchDebounceTimer.Stop();
             _customerSearchDebounceTimer.Start();
         }
