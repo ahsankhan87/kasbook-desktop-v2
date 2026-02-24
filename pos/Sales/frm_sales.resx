@@ -1708,7 +1708,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 27</value>
+    <value>134, 27</value>
   </data>
   <data name="txt_groups.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1729,13 +1729,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 85</value>
+    <value>228, 85</value>
   </data>
   <data name="txt_brand_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 27</value>
+    <value>64, 27</value>
   </data>
   <data name="txt_brand_code.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1792,13 +1792,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 56</value>
+    <value>228, 56</value>
   </data>
   <data name="txt_group_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 27</value>
+    <value>64, 27</value>
   </data>
   <data name="txt_group_code.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1819,13 +1819,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 29</value>
+    <value>228, 29</value>
   </data>
   <data name="txt_category_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 27</value>
+    <value>64, 27</value>
   </data>
   <data name="txt_category_code.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1915,7 +1915,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 27</value>
+    <value>134, 27</value>
   </data>
   <data name="txt_categories.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1942,7 +1942,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 27</value>
+    <value>134, 27</value>
   </data>
   <data name="txt_brands.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1984,7 +1984,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label11" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label18" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_categories" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.71186,Percent,62.28814,Absolute,67" /&gt;&lt;Rows Styles="Percent,24.8,Percent,24,Percent,25.6,Percent,25.6,Absolute,53" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label11" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label18" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_categories" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.71186,Percent,62.28814,Absolute,69" /&gt;&lt;Rows Styles="Percent,24.8,Percent,24,Percent,25.6,Percent,25.6,Absolute,53" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2557,7 +2557,7 @@
     <value>51</value>
   </data>
   <data name="grid_sales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1395, 382</value>
+    <value>1395, 378</value>
   </data>
   <data name="grid_sales.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2584,7 +2584,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel_grid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1395, 382</value>
+    <value>1395, 378</value>
   </data>
   <data name="panel_grid.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2617,13 +2617,13 @@
     <value>Microsoft Sans Serif, 10.8pt, style=Bold</value>
   </data>
   <data name="txt_amount_received.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 8</value>
+    <value>183, 8</value>
   </data>
   <data name="txt_amount_received.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_amount_received.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 28</value>
+    <value>185, 28</value>
   </data>
   <data name="txt_amount_received.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2650,13 +2650,13 @@
     <value>Microsoft Sans Serif, 10.8pt, style=Bold</value>
   </data>
   <data name="txt_change_amount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 51</value>
+    <value>183, 51</value>
   </data>
   <data name="txt_change_amount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_change_amount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 28</value>
+    <value>185, 28</value>
   </data>
   <data name="txt_change_amount.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2692,7 +2692,7 @@
     <value>NoControl</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 11</value>
+    <value>76, 11</value>
   </data>
   <data name="label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -2731,7 +2731,7 @@
     <value>NoControl</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 54</value>
+    <value>90, 54</value>
   </data>
   <data name="label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -2758,13 +2758,13 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 91</value>
+    <value>657, 95</value>
   </data>
   <data name="tableLayoutPanel8.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 86</value>
+    <value>372, 86</value>
   </data>
   <data name="tableLayoutPanel8.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -2790,105 +2790,6 @@
   <data name="tableLayoutPanel7.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="txt_total_disc_percent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="txt_total_disc_percent.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="txt_total_disc_percent.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
-  </data>
-  <data name="txt_total_disc_percent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 10</value>
-  </data>
-  <data name="txt_total_disc_percent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="txt_total_disc_percent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
-  </data>
-  <data name="txt_total_disc_percent.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txt_total_disc_percent.Name" xml:space="preserve">
-    <value>txt_total_disc_percent</value>
-  </data>
-  <data name="&gt;&gt;txt_total_disc_percent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_total_disc_percent.Parent" xml:space="preserve">
-    <value>tableLayoutPanel7</value>
-  </data>
-  <data name="&gt;&gt;txt_total_disc_percent.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="radioDiscPercent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="radioDiscPercent.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioDiscPercent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioDiscPercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 13</value>
-  </data>
-  <data name="radioDiscPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="radioDiscPercent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 21</value>
-  </data>
-  <data name="radioDiscPercent.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="radioDiscPercent.Text" xml:space="preserve">
-    <value>Discount %</value>
-  </data>
-  <data name="&gt;&gt;radioDiscPercent.Name" xml:space="preserve">
-    <value>radioDiscPercent</value>
-  </data>
-  <data name="&gt;&gt;radioDiscPercent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioDiscPercent.Parent" xml:space="preserve">
-    <value>tableLayoutPanel7</value>
-  </data>
-  <data name="&gt;&gt;radioDiscPercent.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 54</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtTotalFlatDiscountValue.Name" xml:space="preserve">
-    <value>txtTotalFlatDiscountValue</value>
-  </data>
-  <data name="&gt;&gt;txtTotalFlatDiscountValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtTotalFlatDiscountValue.Parent" xml:space="preserve">
-    <value>tableLayoutPanel7</value>
-  </data>
-  <data name="&gt;&gt;txtTotalFlatDiscountValue.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="radioDiscValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -2899,7 +2800,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioDiscValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 57</value>
+    <value>4, 57</value>
   </data>
   <data name="radioDiscValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2923,6 +2824,105 @@
     <value>tableLayoutPanel7</value>
   </data>
   <data name="&gt;&gt;radioDiscValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtTotalFlatDiscountValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="txtTotalFlatDiscountValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt</value>
+  </data>
+  <data name="txtTotalFlatDiscountValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 54</value>
+  </data>
+  <data name="txtTotalFlatDiscountValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtTotalFlatDiscountValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 27</value>
+  </data>
+  <data name="txtTotalFlatDiscountValue.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtTotalFlatDiscountValue.Name" xml:space="preserve">
+    <value>txtTotalFlatDiscountValue</value>
+  </data>
+  <data name="&gt;&gt;txtTotalFlatDiscountValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTotalFlatDiscountValue.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;txtTotalFlatDiscountValue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txt_sub_total_2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="txt_sub_total_2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt</value>
+  </data>
+  <data name="txt_sub_total_2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 10</value>
+  </data>
+  <data name="txt_sub_total_2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txt_sub_total_2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 27</value>
+  </data>
+  <data name="txt_sub_total_2.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="txt_sub_total_2.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="txt_sub_total_2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txt_sub_total_2.Name" xml:space="preserve">
+    <value>txt_sub_total_2</value>
+  </data>
+  <data name="&gt;&gt;txt_sub_total_2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_sub_total_2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;txt_sub_total_2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txt_total_disc_percent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="txt_total_disc_percent.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="txt_total_disc_percent.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt</value>
+  </data>
+  <data name="txt_total_disc_percent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 10</value>
+  </data>
+  <data name="txt_total_disc_percent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txt_total_disc_percent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 27</value>
+  </data>
+  <data name="txt_total_disc_percent.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;txt_total_disc_percent.Name" xml:space="preserve">
+    <value>txt_total_disc_percent</value>
+  </data>
+  <data name="&gt;&gt;txt_total_disc_percent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_total_disc_percent.Parent" xml:space="preserve">
+    <value>tableLayoutPanel7</value>
+  </data>
+  <data name="&gt;&gt;txt_total_disc_percent.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="txt_total_qty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -2932,13 +2932,13 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="txt_total_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 54</value>
+    <value>295, 54</value>
   </data>
   <data name="txt_total_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_total_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 27</value>
+    <value>73, 27</value>
   </data>
   <data name="txt_total_qty.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2961,40 +2961,40 @@
   <data name="&gt;&gt;txt_total_qty.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txt_sub_total_2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
+  <data name="radioDiscPercent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <data name="txt_sub_total_2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
+  <data name="radioDiscPercent.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="txt_sub_total_2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 10</value>
+  <data name="radioDiscPercent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="txt_sub_total_2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="radioDiscPercent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 13</value>
+  </data>
+  <data name="radioDiscPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="txt_sub_total_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 27</value>
+  <data name="radioDiscPercent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 21</value>
   </data>
-  <data name="txt_sub_total_2.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="radioDiscPercent.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="txt_sub_total_2.Text" xml:space="preserve">
-    <value>0.00</value>
+  <data name="radioDiscPercent.Text" xml:space="preserve">
+    <value>Discount %</value>
   </data>
-  <data name="txt_sub_total_2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
+  <data name="&gt;&gt;radioDiscPercent.Name" xml:space="preserve">
+    <value>radioDiscPercent</value>
   </data>
-  <data name="&gt;&gt;txt_sub_total_2.Name" xml:space="preserve">
-    <value>txt_sub_total_2</value>
+  <data name="&gt;&gt;radioDiscPercent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txt_sub_total_2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_sub_total_2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioDiscPercent.Parent" xml:space="preserve">
     <value>tableLayoutPanel7</value>
   </data>
-  <data name="&gt;&gt;txt_sub_total_2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioDiscPercent.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="label22.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -3010,7 +3010,7 @@
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 14</value>
+    <value>188, 14</value>
   </data>
   <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -3049,7 +3049,7 @@
     <value>NoControl</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 58</value>
+    <value>205, 58</value>
   </data>
   <data name="label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -3076,13 +3076,13 @@
     <value>7</value>
   </data>
   <data name="tableLayoutPanel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 3</value>
+    <value>657, 9</value>
   </data>
   <data name="tableLayoutPanel7.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 88</value>
+    <value>372, 88</value>
   </data>
   <data name="tableLayoutPanel7.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -3100,7 +3100,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel7.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_total_disc_percent" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="radioDiscPercent" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtTotalFlatDiscountValue" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="radioDiscValue" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_total_qty" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_sub_total_2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label23" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,59.05172,Percent,40.94828,Absolute,116,Absolute,107" /&gt;&lt;Rows Styles="Percent,54.54546,Percent,45.45454" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioDiscValue" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtTotalFlatDiscountValue" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_sub_total_2" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_total_disc_percent" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_total_qty" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="radioDiscPercent" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label23" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,61.25655,Percent,38.74345,Absolute,109,Absolute,80" /&gt;&lt;Rows Styles="Percent,54.54546,Percent,45.45454" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -3460,7 +3460,7 @@
     <value>8</value>
   </data>
   <data name="tableLayoutPanel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 3</value>
+    <value>441, 7</value>
   </data>
   <data name="tableLayoutPanel6.RowCount" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3793,7 +3793,7 @@
     <value>7</value>
   </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1023, 3</value>
+    <value>1029, 9</value>
   </data>
   <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3856,7 +3856,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="txt_order_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 93</value>
+    <value>256, 101</value>
   </data>
   <data name="txt_order_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3886,7 +3886,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="txt_company_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 63</value>
+    <value>256, 71</value>
   </data>
   <data name="txt_company_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3916,7 +3916,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="txt_shop_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 35</value>
+    <value>256, 43</value>
   </data>
   <data name="txt_shop_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3952,7 +3952,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 95</value>
+    <value>144, 103</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -3988,7 +3988,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 67</value>
+    <value>144, 75</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4024,7 +4024,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 40</value>
+    <value>144, 48</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -4054,7 +4054,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 3</value>
+    <value>4, 11</value>
   </data>
   <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -4063,7 +4063,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>351, 160</value>
+    <value>351, 168</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4087,13 +4087,13 @@
     <value>Bottom</value>
   </data>
   <data name="panel_footer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 661</value>
+    <value>0, 657</value>
   </data>
   <data name="panel_footer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel_footer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1395, 178</value>
+    <value>1395, 182</value>
   </data>
   <data name="panel_footer.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

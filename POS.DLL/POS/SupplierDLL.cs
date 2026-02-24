@@ -28,13 +28,15 @@ namespace POS.DLL
             bool isCodeNoDash =
                 normalized.Length > 1 &&
                 (normalized[0] == 'S' || normalized[0] == 's') &&
-                normalized.Substring(1).All(char.IsDigit);
+                normalized.Substring(1).All(char.IsDigit) &&
+                normalized.Substring(1).Length >= 5;
 
             bool isCodeWithDash =
                 normalized.Length > 2 &&
                 (normalized[0] == 'S' || normalized[0] == 's') &&
                 normalized[1] != '-' &&
-                normalized.Substring(2).All(char.IsDigit);
+                normalized.Substring(2).All(char.IsDigit) &&
+                normalized.Substring(2).Length >= 5;
 
             if (isCodeNoDash)
             {
@@ -194,7 +196,7 @@ namespace POS.DLL
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = cn;
-                    cmd.CommandText = @"SELECT id, supplier_code, first_name, last_name, email, vat_no, address, contact_no, vat_status, date_created, branch_id 
+                    cmd.CommandText = @"SELECT *
                                 FROM pos_suppliers 
                                 WHERE branch_id = @branch_id 
                                 AND (first_name LIKE @condition OR last_name LIKE @condition 

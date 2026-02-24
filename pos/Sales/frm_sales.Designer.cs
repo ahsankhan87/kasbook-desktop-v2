@@ -141,12 +141,12 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.txt_total_disc_percent = new System.Windows.Forms.NumericUpDown();
-            this.radioDiscPercent = new System.Windows.Forms.RadioButton();
-            this.txtTotalFlatDiscountValue = new System.Windows.Forms.NumericUpDown();
             this.radioDiscValue = new System.Windows.Forms.RadioButton();
-            this.txt_total_qty = new System.Windows.Forms.TextBox();
+            this.txtTotalFlatDiscountValue = new System.Windows.Forms.NumericUpDown();
             this.txt_sub_total_2 = new System.Windows.Forms.TextBox();
+            this.txt_total_disc_percent = new System.Windows.Forms.NumericUpDown();
+            this.txt_total_qty = new System.Windows.Forms.TextBox();
+            this.radioDiscPercent = new System.Windows.Forms.RadioButton();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -194,8 +194,8 @@
             this.panel_footer.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_total_disc_percent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalFlatDiscountValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_total_disc_percent)).BeginInit();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1011,39 +1011,24 @@
             // tableLayoutPanel7
             // 
             resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
-            this.tableLayoutPanel7.Controls.Add(this.txt_total_disc_percent, 3, 0);
-            this.tableLayoutPanel7.Controls.Add(this.radioDiscPercent, 2, 0);
-            this.tableLayoutPanel7.Controls.Add(this.txtTotalFlatDiscountValue, 3, 1);
-            this.tableLayoutPanel7.Controls.Add(this.radioDiscValue, 2, 1);
-            this.tableLayoutPanel7.Controls.Add(this.txt_total_qty, 1, 1);
-            this.tableLayoutPanel7.Controls.Add(this.txt_sub_total_2, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label22, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label23, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.radioDiscValue, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.txtTotalFlatDiscountValue, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.txt_sub_total_2, 3, 0);
+            this.tableLayoutPanel7.Controls.Add(this.txt_total_disc_percent, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.txt_total_qty, 3, 1);
+            this.tableLayoutPanel7.Controls.Add(this.radioDiscPercent, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label22, 2, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label23, 2, 1);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             // 
-            // txt_total_disc_percent
+            // radioDiscValue
             // 
-            resources.ApplyResources(this.txt_total_disc_percent, "txt_total_disc_percent");
-            this.txt_total_disc_percent.DecimalPlaces = 2;
-            this.txt_total_disc_percent.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.txt_total_disc_percent.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.txt_total_disc_percent.Name = "txt_total_disc_percent";
-            this.txt_total_disc_percent.ValueChanged += new System.EventHandler(this.txt_total_disc_percent_ValueChanged);
-            // 
-            // radioDiscPercent
-            // 
-            resources.ApplyResources(this.radioDiscPercent, "radioDiscPercent");
-            this.radioDiscPercent.Name = "radioDiscPercent";
-            this.radioDiscPercent.UseVisualStyleBackColor = true;
-            this.radioDiscPercent.CheckedChanged += new System.EventHandler(this.radioDiscPercent_CheckedChanged);
+            resources.ApplyResources(this.radioDiscValue, "radioDiscValue");
+            this.radioDiscValue.Checked = true;
+            this.radioDiscValue.Name = "radioDiscValue";
+            this.radioDiscValue.TabStop = true;
+            this.radioDiscValue.UseVisualStyleBackColor = true;
+            this.radioDiscValue.CheckedChanged += new System.EventHandler(this.radioDiscValue_CheckedChanged);
             // 
             // txtTotalFlatDiscountValue
             // 
@@ -1062,14 +1047,28 @@
             this.txtTotalFlatDiscountValue.Name = "txtTotalFlatDiscountValue";
             this.txtTotalFlatDiscountValue.ValueChanged += new System.EventHandler(this.txtTotalFlatDiscountValue_ValueChanged);
             // 
-            // radioDiscValue
+            // txt_sub_total_2
             // 
-            resources.ApplyResources(this.radioDiscValue, "radioDiscValue");
-            this.radioDiscValue.Checked = true;
-            this.radioDiscValue.Name = "radioDiscValue";
-            this.radioDiscValue.TabStop = true;
-            this.radioDiscValue.UseVisualStyleBackColor = true;
-            this.radioDiscValue.CheckedChanged += new System.EventHandler(this.radioDiscValue_CheckedChanged);
+            resources.ApplyResources(this.txt_sub_total_2, "txt_sub_total_2");
+            this.txt_sub_total_2.Name = "txt_sub_total_2";
+            this.txt_sub_total_2.ReadOnly = true;
+            // 
+            // txt_total_disc_percent
+            // 
+            resources.ApplyResources(this.txt_total_disc_percent, "txt_total_disc_percent");
+            this.txt_total_disc_percent.DecimalPlaces = 2;
+            this.txt_total_disc_percent.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.txt_total_disc_percent.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.txt_total_disc_percent.Name = "txt_total_disc_percent";
+            this.txt_total_disc_percent.ValueChanged += new System.EventHandler(this.txt_total_disc_percent_ValueChanged);
             // 
             // txt_total_qty
             // 
@@ -1077,11 +1076,12 @@
             this.txt_total_qty.Name = "txt_total_qty";
             this.txt_total_qty.ReadOnly = true;
             // 
-            // txt_sub_total_2
+            // radioDiscPercent
             // 
-            resources.ApplyResources(this.txt_sub_total_2, "txt_sub_total_2");
-            this.txt_sub_total_2.Name = "txt_sub_total_2";
-            this.txt_sub_total_2.ReadOnly = true;
+            resources.ApplyResources(this.radioDiscPercent, "radioDiscPercent");
+            this.radioDiscPercent.Name = "radioDiscPercent";
+            this.radioDiscPercent.UseVisualStyleBackColor = true;
+            this.radioDiscPercent.CheckedChanged += new System.EventHandler(this.radioDiscPercent_CheckedChanged);
             // 
             // label22
             // 
@@ -1316,8 +1316,8 @@
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_total_disc_percent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalFlatDiscountValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_total_disc_percent)).EndInit();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);

@@ -151,7 +151,7 @@
     <value>19</value>
   </data>
   <data name="txtCustomerSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
+    <value>Top, Left</value>
   </data>
   <data name="txtCustomerSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>587, 19</value>

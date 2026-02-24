@@ -67,13 +67,6 @@ namespace pos
             get_employees_dropdownlist();
 
             SetupCustomersDataGridView();
-            //if (txtCustomerSearch != null)
-            //{
-            //    txtCustomerSearch.Width = 170;
-            //    txtCustomerSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            //    txtCustomerSearch.MaximumSize = new Size(170, 0);
-            //}
-
             ApplyProfitColumnVisibility();
         }
 
