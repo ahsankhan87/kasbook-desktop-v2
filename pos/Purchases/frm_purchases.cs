@@ -92,6 +92,12 @@ namespace pos
                 txtSupplierSearch.Leave += txtSupplierSearch_Leave;
             }
 
+            if (txt_shipping_cost != null)
+            {
+                txt_shipping_cost.TextChanged -= txt_shipping_cost_TextChanged;
+                txt_shipping_cost.TextChanged += txt_shipping_cost_TextChanged;
+            }
+
         }
 
         private void frm_purchases_Load(object sender, EventArgs e)
@@ -347,7 +353,8 @@ namespace pos
             StylePurchaseTotalField(txt_shop_qty,        false);
             StylePurchaseTotalField(txt_total_disc_value, false);
             StylePurchaseTotalField(txt_shipping_cost,   false);
-
+            txt_shipping_cost.ReadOnly = false;
+            txt_total_disc_value.ReadOnly = false;
             // Supplier dropdown grid
             if (suppliersDataGridView != null)
                 StylePurchaseDropdownGrid(suppliersDataGridView);
