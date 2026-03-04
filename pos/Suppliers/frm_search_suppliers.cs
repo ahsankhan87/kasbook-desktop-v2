@@ -49,6 +49,10 @@ namespace pos
             _searchDebounce.Interval = DebounceMs;
             _searchDebounce.Tick += SearchDebounce_Tick;
 
+            ConfigureGridLayout();
+            grid_search_suppliers.RowPostPaint -= grid_search_suppliers_RowPostPaint;
+            grid_search_suppliers.RowPostPaint += grid_search_suppliers_RowPostPaint;
+
             load_suppliers_grid();
             grid_search_suppliers.Focus();
         }
@@ -67,6 +71,7 @@ namespace pos
 
                     var normalizedCondition = objBLL.NormalizeSupplierCodeInput(txt_search.Text.Trim());
                     grid_search_suppliers.DataSource = objBLL.SearchRecord(normalizedCondition);
+                    UpdateTotalSuppliersLabel();
                 }
             }
             catch (Exception ex)
@@ -89,6 +94,7 @@ namespace pos
 
                     var normalizedCondition = objBLL.NormalizeSupplierCodeInput(txt_search.Text.Trim());
                     grid_search_suppliers.DataSource = objBLL.SearchRecord(normalizedCondition);
+                    UpdateTotalSuppliersLabel();
                 }
             }
             catch (Exception ex)
@@ -158,6 +164,27 @@ namespace pos
             {
                 grid_search_suppliers.Focus();
             }
+        }
+
+        private void ConfigureGridLayout()
+        {
+            if (grid_search_suppliers.Columns.Contains("first_name"))
+                grid_search_suppliers.Columns["first_name"].FillWeight = 180;
+
+            if (grid_search_suppliers.Columns.Contains("last_name"))
+                grid_search_suppliers.Columns["last_name"].FillWeight = 140;
+        }
+
+        private void grid_search_suppliers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (grid_search_suppliers.Columns.Contains("sno"))
+                grid_search_suppliers.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
+        }
+
+        private void UpdateTotalSuppliersLabel()
+        {
+            int count = (grid_search_suppliers.DataSource as DataTable)?.Rows.Count ?? grid_search_suppliers.Rows.Count;
+            lbl_totalCount.Text = UiMessages.T("Suppliers (Total: " + count + ")", "الموردون (الإجمالي: " + count + ")");
         }
         
     }

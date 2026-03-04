@@ -80,6 +80,28 @@ namespace POS.DLL
             }
         }
 
+        public bool CheckDuplicatePartNumber(string partNumber, int? excludeProductId = null)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT COUNT(1) FROM pos_products WHERE deleted = 0 AND part_number = @part_number";
+                cmd.Parameters.AddWithValue("@part_number", partNumber ?? string.Empty);
+
+                if (excludeProductId.HasValue)
+                {
+                    cmd.CommandText += " AND id <> @exclude_id";
+                    cmd.Parameters.AddWithValue("@exclude_id", excludeProductId.Value);
+                }
+
+                if (cn.State == ConnectionState.Closed)
+                    cn.Open();
+
+                return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+            }
+        }
+
         public DataTable GetProductsSummary(DateTime StartDate, DateTime EndDate, bool is_zero, string group_code, string brand_code, string category_code)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -296,14 +318,13 @@ namespace POS.DLL
                         {
                             cn.Open();
 
-                            string query = "SELECT p.id,p.item_number,p.part_number, p.item_number_2,p.part_number, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
+                            string query = "SELECT TOP 1 p.id,p.item_number,p.part_number, p.item_number_2, p.code,p.name, p.name_ar, p.category_code, p.item_type, p.brand_code, p.status, p.barcode, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2, p.tax_id," +
                                 " p.unit_id, p.re_stock_level, p.description, p.deleted, p.date_created, p.date_updated, p.user_id, p.demand_qty, p.purchase_demand_qty, p.sale_demand_qty, p.origin, p.group_code, p.alt_no, " +
                                 "p.picture, p.packet_qty, p.expiry_date,p.location_code,p.supplier_id," +
                                 " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=p.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " COALESCE((select TOP 1 SUM(s.qty) as qty from pos_product_stocks s where s.item_number=p.item_number),0) as company_qty, " + //branch wise qty
-                                " ps.reorder_level " +
+                                " COALESCE((SELECT TOP 1 ps.reorder_level FROM pos_product_stocks ps WHERE ps.item_id = p.id AND ps.branch_id=@branch_id ORDER BY ps.id DESC),0) AS reorder_level " +
                                 " FROM pos_products p " +
-                                " LEFT JOIN pos_product_stocks ps ON p.id = ps.item_id" +
                                 " WHERE p.deleted=0 AND p.item_number = @item_number ";
                             //" AND ps.branch_id = @branch_id";
 
@@ -2221,12 +2242,12 @@ namespace POS.DLL
                                               .Where(w => w.Length > 0).ToList();
                         if (words.Count == 1 && words[0].Length < 3)
                         {
-                            where.Append(" AND (p.code LIKE @term OR p.part_number LIKE @term OR p.name LIKE @term)");
+                            where.Append(" AND (p.code LIKE @term OR p.name LIKE @term)");
                             cmd.Parameters.AddWithValue("@term", words[0] + "%");
                         }
                         else if (words.Count == 1)
                         {
-                            where.Append(" AND (p.name LIKE @termLong OR p.code LIKE @termLike OR p.part_number LIKE @termLike OR p.description LIKE @termDesc)");
+                            where.Append(" AND (p.name LIKE @termLong OR p.code LIKE @termLike OR p.description LIKE @termDesc)");
                             cmd.Parameters.AddWithValue("@termLong", words[0] + "%");
                             cmd.Parameters.AddWithValue("@termLike", "%" + words[0] + "%");
                             cmd.Parameters.AddWithValue("@termDesc", "%" + words[0] + "%");
@@ -2244,12 +2265,12 @@ namespace POS.DLL
                                 if (w.Length < 3)
                                 {
                                     cmd.Parameters.AddWithValue(pName, w + "%");
-                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
                                 }
                                 else
                                 {
                                     cmd.Parameters.AddWithValue(pName, "%" + w + "%");
-                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
                                 }
                             }
                             where.Length -= 4; // remove trailing AND
@@ -2340,12 +2361,12 @@ namespace POS.DLL
                                 if (w.Length < 3)
                                 {
                                     cmd.Parameters.AddWithValue(pName, w + "%");
-                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
                                 }
                                 else
                                 {
                                     cmd.Parameters.AddWithValue(pName, "%" + w + "%");
-                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.part_number LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
+                                    where.Append(" (p.name LIKE " + pName + " OR p.code LIKE " + pName + " OR p.description LIKE " + pName + ") AND");
                                 }
                             }
                             where.Length -= 4; // remove trailing AND
@@ -2356,16 +2377,23 @@ namespace POS.DLL
                             string single = words[0];
                             if (single.Length < 3)
                             {
-                                where.Append(" AND (p.code LIKE @term OR p.part_number LIKE @term OR p.name LIKE @term)");
+                                where.Append(" AND (p.code LIKE @term OR p.name LIKE @term)");
                                 cmd.Parameters.AddWithValue("@term", single + "%");
                             }
                             else
                             {
-                                where.Append(" AND (p.name LIKE @termLong OR p.code LIKE @termLike OR p.part_number LIKE @termLike OR p.description LIKE @termDesc)");
+                                var singleNoDash = single.Replace("-", "");
+                                where.Append(" AND (p.name LIKE @termLong OR REPLACE(p.code,'-','') LIKE @termLikeNoDash OR p.description LIKE @termDesc)");
                                 cmd.Parameters.AddWithValue("@termLong", single + "%");
-                                cmd.Parameters.AddWithValue("@termLike", "%" + single + "%");
+                                cmd.Parameters.AddWithValue("@termLikeNoDash", "%" + singleNoDash + "%");
                                 cmd.Parameters.AddWithValue("@termDesc", "%" + single + "%");
-                                //cmd.Parameters.AddWithValue("@barcodeExact", single);
+
+                                //where.Append(" AND (p.name LIKE @termLong OR p.code LIKE @termLike OR p.part_number LIKE @termLike OR p.description LIKE @termDesc)");
+                                //cmd.Parameters.AddWithValue("@termLong", single + "%");
+                                //cmd.Parameters.AddWithValue("@termLike", "%" + single + "%");
+                                //cmd.Parameters.AddWithValue("@termDesc", "%" + single + "%");
+                                
+                                ////cmd.Parameters.AddWithValue("@barcodeExact", single);
                             }
                         }
                     }

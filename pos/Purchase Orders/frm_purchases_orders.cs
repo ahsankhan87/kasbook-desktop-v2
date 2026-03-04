@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using pos.Security.Authorization;
+using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -93,27 +95,27 @@ namespace pos
 
         private void frm_purchases_order_Load(object sender, EventArgs e)
         {
-            grid_purchases_order.Rows.Add();
-            this.ActiveControl = grid_purchases_order;
-            grid_purchases_order.CurrentCell = grid_purchases_order.Rows[0].Cells[1];
-            
-            Get_AccountID_From_Company();
-            load_user_rights(UsersModal.logged_in_userid);
-            //txt_product_name.Text = tb_product_name.Text;
-            
-            Cmb_zero_qty.SelectedIndex = 0;
-            //btn_movements.Enabled = false;
-            get_suppliers_dropdownlist();
-            get_employees_dropdownlist();
-            
-            GetMAXInvoiceNo();
-
-            //disable sorting in grid
-            foreach (DataGridViewColumn column in grid_purchases_order.Columns)
+            using (BusyScope.Show(this, UiMessages.T("Loading purchase orders...", "جاري تحميل أوامر الشراء...")))
             {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                grid_purchases_order.Rows.Add();
+                this.ActiveControl = grid_purchases_order;
+                grid_purchases_order.CurrentCell = grid_purchases_order.Rows[0].Cells[1];
+
+                Get_AccountID_From_Company();
+                load_user_rights(UsersModal.logged_in_userid);
+
+                Cmb_zero_qty.SelectedIndex = 0;
+                get_suppliers_dropdownlist();
+                get_employees_dropdownlist();
+
+                GetMAXInvoiceNo();
+
+                foreach (DataGridViewColumn column in grid_purchases_order.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                LoadBrandList();
             }
-            LoadBrandList();
         }
         
         private void btn_search_products_Click(object sender, EventArgs e)
@@ -126,7 +128,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             Purchases_orderBLL Purchases_orderBLL_obj = new Purchases_orderBLL();
-            return Purchases_orderBLL_obj.GetMaxInvoiceNo();
+            return Purchases_orderBLL_obj.GeneratePurchaseOrderInvoiceNo(); // GetMaxInvoiceNo();
         }
         Form purchaseSearchObj;
         private void grid_purchases_order_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -1230,7 +1232,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
         }
 
@@ -1254,8 +1256,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
         }
@@ -1289,8 +1290,11 @@ namespace pos
 
         private void NewToolStripButton_Click(object sender, EventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want new sale transaction", "New Transaction", buttons, MessageBoxIcon.Warning);
+            DialogResult result = UiMessages.ConfirmYesNo(
+                "Are you sure you want to start a new purchase order transaction?",
+                "هل أنت متأكد أنك تريد بدء معاملة أمر شراء جديدة؟",
+                captionEn: "New transaction",
+                captionAr: "معاملة جديدة");
 
             if (result == DialogResult.Yes)
             {
@@ -1301,41 +1305,51 @@ namespace pos
 
         private void SaveToolStripButton_Click(object sender, EventArgs e)
         {
-            try
+            using (BusyScope.Show(this, UiMessages.T("Saving purchase order...", "جاري حفظ أمر الشراء...")))
             {
-                if(!_auth.HasPermission(_currentUser, Permissions.PurchaseOrders_Create))
+                try
                 {
-                    MessageBox.Show("You don't have rights to create purchase orders", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                DialogResult result = MessageBox.Show("Are you sure you want to purchase order " + invoice_status, "Purchase Order Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    if (grid_purchases_order.Rows.Count > 0)
+                    if (!_auth.HasPermission(_currentUser, Permissions.PurchaseOrders_Create))
                     {
-                        List<Purchases_orderModal> Purchases_orderModal_obj = new List<Purchases_orderModal> { };
-                        List<PurchaseOrderDetailModal> po_model_detail = new List<PurchaseOrderDetailModal> { };
+                        UiMessages.ShowWarning(
+                            "You do not have permission to create purchase orders.",
+                            "ليس لديك صلاحية لإنشاء أوامر شراء.",
+                            captionEn: "Permission denied",
+                            captionAr: "رفض الصلاحية");
+                        return;
+                    }
 
-                        Purchases_orderBLL purchases_orderObj = new Purchases_orderBLL();
-                        DateTime purchase_date = txt_purchase_date.Value.Date;
-                        DateTime delivery_date = txt_delivery_date.Value.Date;
+                    DialogResult result = UiMessages.ConfirmYesNo(
+                        (invoice_status == "Update" ? "Are you sure you want to update this purchase order?" : "Are you sure you want to create this purchase order?"),
+                        (invoice_status == "Update" ? "هل أنت متأكد من تحديث أمر الشراء هذا؟" : "هل أنت متأكد من إنشاء أمر الشراء هذا؟"),
+                        captionEn: "Purchase order confirmation",
+                        captionAr: "تأكيد أمر الشراء");
 
-                        int supplier_id = _selectedSupplierId;
-                        int employee_id = (cmb_employees.SelectedValue == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
-
-                        string invoice_no = "";
-
-                        if (invoice_status == "Update") //Update sales delete all record first and insert new sales
+                    if (result == DialogResult.Yes)
+                    {
+                        if (grid_purchases_order.Rows.Count > 0)
                         {
-                            purchases_orderObj.DeletePurchasesOrder(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
-                            invoice_no = txt_invoice_no.Text;
-                        }
-                        else
-                        {
-                            invoice_no = GetMAXInvoiceNo();
-                        }
+                            List<Purchases_orderModal> Purchases_orderModal_obj = new List<Purchases_orderModal> { };
+                            List<PurchaseOrderDetailModal> po_model_detail = new List<PurchaseOrderDetailModal> { };
+
+                            Purchases_orderBLL purchases_orderObj = new Purchases_orderBLL();
+                            DateTime purchase_date = txt_purchase_date.Value.Date;
+                            DateTime delivery_date = txt_delivery_date.Value.Date;
+
+                            int supplier_id = _selectedSupplierId;
+                            int employee_id = (cmb_employees.SelectedValue == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
+
+                            string invoice_no = "";
+
+                            if (invoice_status == "Update")
+                            {
+                                purchases_orderObj.DeletePurchasesOrder(txt_invoice_no.Text);
+                                invoice_no = txt_invoice_no.Text;
+                            }
+                            else
+                            {
+                                invoice_no = GetMAXInvoiceNo();
+                            }
 
                         //set the date from datetimepicker and set time to te current time
                         DateTime now = DateTime.Now;
@@ -1393,45 +1407,59 @@ namespace pos
                             }
 
                         }
-                        Int32 purchase_id = purchases_orderObj.InsertPurchaseOrderBLL(Purchases_orderModal_obj, po_model_detail);
+                            Int32 purchase_id = purchases_orderObj.InsertPurchaseOrderBLL(Purchases_orderModal_obj, po_model_detail);
 
-                        if (purchase_id > 0)
-                        {
-                            MessageBox.Show(invoice_no+" Purchase Order created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            clear_form();
-                            GetMAXInvoiceNo();
-
-                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                            DialogResult result1 = MessageBox.Show("Print purchase order report", "Print Order Report", buttons, MessageBoxIcon.Warning);
-
-                            if (result1 == DialogResult.Yes)
+                            if (purchase_id > 0)
                             {
-                                if (!string.IsNullOrEmpty(invoice_no))
+                                UiMessages.ShowInfo(
+                                    (invoice_status == "Update" ? "Purchase order updated successfully. Invoice: " : "Purchase order created successfully. Invoice: ") + invoice_no,
+                                    (invoice_status == "Update" ? "تم تحديث أمر الشراء بنجاح. رقم الفاتورة: " : "تم إنشاء أمر الشراء بنجاح. رقم الفاتورة: ") + invoice_no,
+                                    captionEn: "Success",
+                                    captionAr: "نجاح");
+
+                                clear_form();
+                                GetMAXInvoiceNo();
+
+                                DialogResult result1 = UiMessages.ConfirmYesNo(
+                                    "Do you want to print the purchase order report?",
+                                    "هل تريد طباعة تقرير أمر الشراء؟",
+                                    captionEn: "Print report",
+                                    captionAr: "طباعة التقرير");
+
+                                if (result1 == DialogResult.Yes)
                                 {
-                                    using (frm_purchase_order_report obj = new frm_purchase_order_report(invoice_no, false))
+                                    if (!string.IsNullOrEmpty(invoice_no))
                                     {
-                                        obj.ShowDialog();
+                                        using (frm_purchase_order_report obj = new frm_purchase_order_report(invoice_no, false))
+                                        {
+                                            obj.ShowDialog();
+                                        }
                                     }
                                 }
+                            }
+                            else
+                            {
+                                UiMessages.ShowError(
+                                    "Purchase order was not saved.",
+                                    "لم يتم حفظ أمر الشراء.",
+                                    captionEn: "Error",
+                                    captionAr: "خطأ");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Purchase Order not created", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            UiMessages.ShowWarning(
+                                "Please add at least one product.",
+                                "يرجى إضافة منتج واحد على الأقل.",
+                                captionEn: "Validation",
+                                captionAr: "التحقق");
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Please add products", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception ex)
+                {
+                    UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+                }
             }
 
         }

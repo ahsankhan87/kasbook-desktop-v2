@@ -1021,7 +1021,7 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_countryName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 174</value>
+    <value>129, 175</value>
   </data>
   <data name="txt_countryName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1111,7 +1111,7 @@
     <value>NoControl</value>
   </data>
   <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 177</value>
+    <value>4, 178</value>
   </data>
   <data name="label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1372,13 +1372,13 @@
     <value>11</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 50</value>
+    <value>8, 22</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 164</value>
+    <value>384, 207</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>

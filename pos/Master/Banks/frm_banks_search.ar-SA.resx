@@ -118,26 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 21</value>
+  <data name="grid_search_banks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>993, 535</value>
   </data>
-  <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 17</value>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 77</value>
   </data>
-  <data name="btn_ok.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 30</value>
-  </data>
-  <data name="btn_ok.Text" xml:space="preserve">
-    <value>نعم (Enter)</value>
-  </data>
-  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 17</value>
-  </data>
-  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 30</value>
-  </data>
-  <data name="btn_cancel.Text" xml:space="preserve">
-    <value>يلغي (Esc)</value>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>993, 535</value>
   </data>
   <data name="GLAccountID.HeaderText" xml:space="preserve">
     <value>GL معرف الحساب</value>
@@ -159,6 +147,30 @@
   </data>
   <data name="date_created.HeaderText" xml:space="preserve">
     <value>تاريخ الإنشاء</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>993, 77</value>
+  </data>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>445, 17</value>
+  </data>
+  <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 13</value>
+  </data>
+  <data name="btn_ok.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 30</value>
+  </data>
+  <data name="btn_ok.Text" xml:space="preserve">
+    <value>نعم (Enter)</value>
+  </data>
+  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 30</value>
+  </data>
+  <data name="btn_cancel.Text" xml:space="preserve">
+    <value>يلغي (Esc)</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">

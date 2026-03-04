@@ -113,6 +113,20 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public bool CheckDuplicatePartNumber(string partNumber, int? excludeProductId = null)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.CheckDuplicatePartNumber(partNumber, excludeProductId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool IsProductExist(string part_number, string category_code)
         {
             try

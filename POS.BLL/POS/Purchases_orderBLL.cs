@@ -112,7 +112,12 @@ namespace POS.BLL
                 throw;
             }
         }
-
+        // PURCHASE ORDER
+        public string GeneratePurchaseOrderInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            var purchasesDLL = new PurchasesDLL();
+            return purchasesDLL.GenerateDailyInvoiceNo("pos_purchases_order", "invoice_no", "PO", branchId, invoiceDate);
+        }
         public DataTable SearchRecord(String condition)
         {
             try

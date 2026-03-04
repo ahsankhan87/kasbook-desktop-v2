@@ -19,6 +19,13 @@ namespace pos
     public partial class frm_purchases : Form
     {
         private static readonly ComponentResourceManager PurchasesResources = new ComponentResourceManager(typeof(frm_purchases));
+        private static readonly Font PurchasesGridFont = new Font(AppTheme.FontGrid.FontFamily, AppTheme.FontGrid.Size + 1f, AppTheme.FontGrid.Style);
+        private static readonly Font PurchasesGridHeaderFont = new Font(AppTheme.FontGridHeader.FontFamily, AppTheme.FontGridHeader.Size + 1f, AppTheme.FontGridHeader.Style);
+        private static readonly Font PurchasesTaxableCheckFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
+        private static readonly Font PurchasesTotalPrimaryFont = new Font(AppTheme.FontHeader.FontFamily, AppTheme.FontHeader.Size + 2f, AppTheme.FontHeader.Style);
+        private static readonly Font PurchasesTotalSecondaryFont = new Font(AppTheme.FontSubHeader.FontFamily, AppTheme.FontSubHeader.Size + 1f, AppTheme.FontSubHeader.Style);
+        private static readonly Font PurchasesFooterPrimaryLabelFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
+        private static readonly Font PurchasesFooterSecondaryLabelFont = new Font(AppTheme.FontLabel.FontFamily, AppTheme.FontLabel.Size + 1f, AppTheme.FontLabel.Style);
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
@@ -66,6 +73,11 @@ namespace pos
         private System.Windows.Forms.Timer _supplierSearchDebounceTimer;
         private bool _suppressSupplierSearch;
         private int _selectedSupplierId;
+        private bool _suppressDiscountSync;
+        private bool _isClearingForm;
+        private bool _isEditMode;
+        private bool _editingHoldPurchase;
+        private string _editingInvoiceNo = string.Empty;
 
         public DataTable products_dt = new DataTable();
 
@@ -98,6 +110,25 @@ namespace pos
                 txt_shipping_cost.TextChanged += txt_shipping_cost_TextChanged;
             }
 
+            if (txt_total_disc_percent != null)
+            {
+                txt_total_disc_percent.TextChanged -= txt_total_disc_value_TextChanged;
+                txt_total_disc_percent.TextChanged -= txt_total_disc_percent_TextChanged;
+                txt_total_disc_percent.TextChanged += txt_total_disc_percent_TextChanged;
+            }
+
+            if (radioDiscValue != null)
+            {
+                radioDiscValue.CheckedChanged -= radioDiscValue_CheckedChanged;
+                radioDiscValue.CheckedChanged += radioDiscValue_CheckedChanged;
+            }
+
+            if (radioDiscPercent != null)
+            {
+                radioDiscPercent.CheckedChanged -= radioDiscPercent_CheckedChanged;
+                radioDiscPercent.CheckedChanged += radioDiscPercent_CheckedChanged;
+            }
+
         }
 
         private void frm_purchases_Load(object sender, EventArgs e)
@@ -109,6 +140,7 @@ namespace pos
             using (BusyScope.Show(this, UiMessages.T("Loading purchases...", "جاري تحميل المشتريات...")))
             {
                 grid_purchases.Rows.Add();
+                InitializePurchaseRowDefaults(0);
                 this.ActiveControl = grid_purchases;
                 grid_purchases.CurrentCell = grid_purchases.Rows[0].Cells["code"];
 
@@ -199,8 +231,8 @@ namespace pos
                 System.Reflection.BindingFlags.SetProperty,
                 null, grid_purchases, new object[] { true });
 
-            var gridFont   = AppTheme.FontGrid;
-            var headerFont = AppTheme.FontGridHeader;
+            var gridFont   = PurchasesGridFont;
+            var headerFont = PurchasesGridHeaderFont;
 
             // Grid-level settings
             grid_purchases.BorderStyle          = BorderStyle.None;
@@ -251,6 +283,8 @@ namespace pos
             foreach (DataGridViewColumn col in grid_purchases.Columns)
                 col.DefaultCellStyle.Font = null;
 
+            ApplyPurchaseGridAmountFormats();
+
             // sno: grey centered row-number column
             sno.DefaultCellStyle = new DataGridViewCellStyle
             {
@@ -295,7 +329,7 @@ namespace pos
             {
                 BackColor          = SystemColors.Control,
                 ForeColor          = SystemColors.ControlText,
-                Font               = AppTheme.FontGridHeader,
+                Font               = PurchasesGridHeaderFont,
                 SelectionBackColor = SystemColors.Control,
                 SelectionForeColor = SystemColors.ControlText
             };
@@ -303,7 +337,7 @@ namespace pos
             {
                 BackColor          = SystemColors.Window,
                 ForeColor          = SystemColors.WindowText,
-                Font               = AppTheme.FontGrid,
+                Font               = PurchasesGridFont,
                 SelectionBackColor = SystemColors.Highlight,
                 SelectionForeColor = SystemColors.HighlightText
             };
@@ -338,10 +372,10 @@ namespace pos
             StylePurchaseLabel(label9,  true);    // Total Amount
             StylePurchaseLabel(label10, false);   // Total Qty
             StylePurchaseLabel(label19, false);   // Shop Qty
-            StylePurchaseLabel(label20, false);   // Disc Value
+            //StylePurchaseLabel(label20, false);   // Disc Value
             StylePurchaseLabel(label22, false);   // Shipping Cost
 
-            chkbox_is_taxable.Font      = AppTheme.FontSemiBold;
+            chkbox_is_taxable.Font      = PurchasesTaxableCheckFont;
             chkbox_is_taxable.ForeColor = SystemColors.ControlText;
 
             // Total fields
@@ -352,9 +386,11 @@ namespace pos
             StylePurchaseTotalField(txt_total_qty,       false);
             StylePurchaseTotalField(txt_shop_qty,        false);
             StylePurchaseTotalField(txt_total_disc_value, false);
+            StylePurchaseTotalField(txt_total_disc_percent, false);
             StylePurchaseTotalField(txt_shipping_cost,   false);
             txt_shipping_cost.ReadOnly = false;
             txt_total_disc_value.ReadOnly = false;
+            txt_total_disc_percent.ReadOnly = false;
             // Supplier dropdown grid
             if (suppliersDataGridView != null)
                 StylePurchaseDropdownGrid(suppliersDataGridView);
@@ -368,14 +404,14 @@ namespace pos
             txt.TextAlign   = HorizontalAlignment.Right;
             txt.ForeColor   = SystemColors.WindowText;
             txt.BackColor   = SystemColors.Window;
-            txt.Font = isPrimary ? AppTheme.FontHeader : AppTheme.FontSubHeader;
+            txt.Font = isPrimary ? PurchasesTotalPrimaryFont : PurchasesTotalSecondaryFont;
         }
 
         /// <summary>Style a purchases footer label.</summary>
         private static void StylePurchaseLabel(Label lbl, bool isPrimary)
         {
             lbl.ForeColor = SystemColors.ControlText;
-            lbl.Font = isPrimary ? AppTheme.FontSemiBold : AppTheme.FontLabel;
+            lbl.Font = isPrimary ? PurchasesFooterPrimaryLabelFont : PurchasesFooterSecondaryLabelFont;
         }
 
         /// <summary>Style a popup DataGridView dropdown on the purchases page.</summary>
@@ -388,7 +424,7 @@ namespace pos
             {
                 BackColor          = SystemColors.Window,
                 ForeColor          = SystemColors.WindowText,
-                Font               = AppTheme.FontGrid,
+                Font               = PurchasesGridFont,
                 SelectionBackColor = SystemColors.Highlight,
                 SelectionForeColor = SystemColors.HighlightText,
                 Padding            = new Padding(6, 2, 6, 2)
@@ -397,7 +433,7 @@ namespace pos
             {
                 BackColor          = SystemColors.Control,
                 ForeColor          = SystemColors.ControlText,
-                Font               = AppTheme.FontGridHeader,
+                Font               = PurchasesGridHeaderFont,
                 SelectionBackColor = SystemColors.Control,
                 SelectionForeColor = SystemColors.ControlText
             };
@@ -407,6 +443,18 @@ namespace pos
             dgv.CellBorderStyle            = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.RowTemplate.Height         = 28;
             dgv.ColumnHeadersHeight        = 32;
+        }
+
+        private void ApplyPurchaseGridAmountFormats()
+        {
+            if (grid_purchases == null) return;
+
+            string[] amountColumns = { "avg_cost", "unit_price", "discount", "discount_percent", "tax", "sub_total" };
+            foreach (var colName in amountColumns)
+            {
+                if (grid_purchases.Columns.Contains(colName))
+                    grid_purchases.Columns[colName].DefaultCellStyle.Format = "N2";
+            }
         }
 
         public string GetMAXInvoiceNo()
@@ -602,6 +650,7 @@ namespace pos
                     tax = ((totalValue - discount) * taxRate) / 100;
                     double finalSubtotal = totalValue - discount + tax;
 
+                    grid_purchases.Rows[e.RowIndex].Cells["discount_percent"].Value = Math.Round(discountPercent, 4);
                     grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = finalSubtotal;
                     grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = tax;
 
@@ -614,6 +663,18 @@ namespace pos
                     ////txt_total_discount.Text = total_amount.ToString();
                     //grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = (tax_1);
                     //grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total_1;
+                }
+
+                if (columnName == "discount_percent")
+                {
+                    double discountPercent = GetCellDouble("discount_percent");
+                    double discountValue = (totalValue * discountPercent) / 100;
+                    tax = ((totalValue - discountValue) * taxRate) / 100;
+                    double finalSubtotal = totalValue - discountValue + tax;
+
+                    grid_purchases.Rows[e.RowIndex].Cells["discount"].Value = Math.Round(discountValue, 4);
+                    grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = Math.Round(finalSubtotal, 4);
+                    grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = Math.Round(tax, 4);
                 }
 
                 get_total_tax();
@@ -684,6 +745,7 @@ namespace pos
                     grid_purchases.Rows[RowIndex].Cells["avg_cost"].Value = avg_cost;
                     grid_purchases.Rows[RowIndex].Cells["unit_price"].Value = unit_price;
                     grid_purchases.Rows[RowIndex].Cells["discount"].Value = 0.00;
+                    grid_purchases.Rows[RowIndex].Cells["discount_percent"].Value = 0.00;
                     grid_purchases.Rows[RowIndex].Cells["tax"].Value = tax;
                     grid_purchases.Rows[RowIndex].Cells["sub_total"].Value = sub_total;
                     grid_purchases.Rows[RowIndex].Cells["location_code"].Value = myProductView["location_code"].ToString();
@@ -748,8 +810,11 @@ namespace pos
         {
             try
             {
-               
-                DialogResult result = UiMessages.ConfirmYesNoCancel("Are you sure you want to hold purchase?", "هل أنت متأكد من رغبتك في تأجيل عملية الشراء؟", "Hold Purchase Transaction " + invoice_status, "عقد معاملة الشراء " + invoice_status);
+                bool isEditingPurchase = _isEditMode && _editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo);
+
+                DialogResult result = UiMessages.ConfirmYesNoCancel(
+                    isEditingPurchase ? "Update Hold Purchase Transaction " : "Hold Purchase Transaction ",
+                    isEditingPurchase ? "تحديث معاملة الشراء المعلقة " : "عقد معاملة الشراء ");
 
                 if (result == DialogResult.Yes)
                 {
@@ -760,12 +825,13 @@ namespace pos
                         DateTime purchase_date = txt_purchase_date.Value.Date;
                         int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
                         int supplier_id = _selectedSupplierId;
+                        bool isEditingHold = _isEditMode && _editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo);
                 
                         string invoice_no = "";
                         // near start of hold_purchases(), after supplier_id is read
                         var supplierInvoiceNo = (txt_supplier_invoice.Text ?? string.Empty).Trim();
                         
-                        if (purchasesObj.IsHoldSupplierInvoiceNoExists(supplier_id, supplierInvoiceNo))
+                        if (purchasesObj.IsHoldSupplierInvoiceNoExists(supplier_id, supplierInvoiceNo, isEditingHold ? _editingInvoiceNo : null))
                         {
                             UiMessages.ShowWarning(
                                 "This Supplier Invoice No. already exists in Hold purchases for the selected supplier.",
@@ -777,7 +843,19 @@ namespace pos
                             return;
                         }
 
-                        invoice_no = GetMAXInvoiceNo_HOLD();
+                        invoice_no = (isEditingHold ? _editingInvoiceNo : GetMAXInvoiceNo_HOLD());
+
+                        if (isEditingHold)
+                        {
+                            int deleteResult = purchasesObj.DeleteHoldPurchases(_editingInvoiceNo);
+                            if (deleteResult <= 0)
+                            {
+                                UiMessages.ShowError(
+                                    "Unable to update hold purchase. Existing record could not be replaced.",
+                                    "تعذر تحديث الشراء المعلق. لم يتم استبدال السجل الحالي.");
+                                return;
+                            }
+                        }
                         
                         PurchasesModal_obj.employee_id = employee_id;
                         PurchasesModal_obj.supplier_id = supplier_id;
@@ -830,7 +908,10 @@ namespace pos
                         }
                         if (purchase_id > 0)
                         {
-                            UiMessages.ShowInfo(invoice_no + " hold purchases transaction saved successfully", invoice_no + "تم حفظ عملية الشراء المعلقة بنجاح", "Success " + invoice_status, "نجاح " + invoice_status);
+                            UiMessages.ShowInfo(
+                                isEditingPurchase ? invoice_no + " hold purchases transaction updated successfully" : invoice_no + " hold purchases transaction saved successfully", 
+                                isEditingPurchase ? invoice_no + "تم تحديث عملية الشراء المعلقة بنجاح" : invoice_no + "تم حفظ عملية الشراء المعلقة بنجاح", 
+                                "Success " + invoice_status, "نجاح " + invoice_status);
 
                             clear_form();
                             //GetMAXInvoiceNo_HOLD();
@@ -885,6 +966,8 @@ namespace pos
         {
             try
             {
+                if (_isClearingForm) return;
+
                 decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
 
                 if (chkbox_is_taxable.Checked && shippingCost != 0)
@@ -1051,6 +1134,7 @@ namespace pos
                     double avg_cost = Convert.ToDouble(myProductView["avg_cost"]);
                     double unit_price = Convert.ToDouble(myProductView["unit_price"]);
                     double discount = 0.00;
+                    double discount_percent = 0.00;
                     string location_code = myProductView["location_code"].ToString();
                     string unit = myProductView["unit"].ToString();
                     string category = myProductView["category"].ToString();
@@ -1059,7 +1143,7 @@ namespace pos
                     string shop_qty = myProductView["qty"].ToString();
 
                     string[] row0 = { "", id.ToString(), code, name, 
-                                            qty.ToString(), avg_cost.ToString(),unit_price.ToString(), discount.ToString(), 
+                                            qty.ToString(), avg_cost.ToString(),unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
                                             tax.ToString(), current_sub_total.ToString(),location_code,unit,category, 
                                             btn_delete, tax_id.ToString(), tax_rate.ToString(), unit_price.ToString(),shop_qty };
                     //Remove the first empty row
@@ -1124,7 +1208,7 @@ namespace pos
                 {
                     SearchToolStripButton.PerformClick();
                 }
-                if (e.Control && e.KeyCode == Keys.H)
+                if (e.Control && e.KeyCode == Keys.H || e.KeyCode == Keys.F6)
                 {
                     HistoryToolStripButton.PerformClick();
                 }
@@ -1132,7 +1216,7 @@ namespace pos
                 {
                     grid_purchases.Focus();
                 }
-                if (e.Control && e.KeyCode == Keys.L)
+                if (e.Control && e.KeyCode == Keys.L || e.KeyCode == Keys.F7)
                 {
                     frm_search_porder obj = new frm_search_porder(this);
                     obj.ShowDialog();
@@ -1187,68 +1271,99 @@ namespace pos
 
         private void clear_form()
         {
-            //cmb_suppliers.SelectedValue = 0;
-            //cmb_suppliers.Refresh();
-            //cmb_categories.SelectedValue = 0;
-            cmb_employees.SelectedValue = 0;
-            cmb_purchase_type.SelectedValue = "Cash";
-            //cmb_brands.SelectedValue = 0;
-            invoice_status = "";
-            //btn_save.Text = "Create (F3)";
-            PrinttoolStripButton.Enabled = false;
+            _isClearingForm = true;
+            try
+            {
+                //cmb_suppliers.SelectedValue = 0;
+                //cmb_suppliers.Refresh();
+                //cmb_categories.SelectedValue = 0;
+                cmb_employees.SelectedValue = 0;
+                cmb_purchase_type.SelectedValue = "Cash";
+                //cmb_brands.SelectedValue = 0;
+                invoice_status = "";
+                _isEditMode = false;
+                _editingHoldPurchase = false;
+                _editingInvoiceNo = string.Empty;
+                //btn_save.Text = "Create (F3)";
+                PrinttoolStripButton.Enabled = false;
 
-            txt_brand_code.Text = "";
-            txt_brands.Text = "";
-            txt_category_code.Text = "";
-            txt_categories.Text = "";
-            txt_groups.Text = "";
-            txt_group_code.Text = "";
+                txt_brand_code.Text = "";
+                txt_brands.Text = "";
+                txt_category_code.Text = "";
+                txt_categories.Text = "";
+                txt_groups.Text = "";
+                txt_group_code.Text = "";
 
-            txt_description.Text = "";
-            //txt_discount.Text = "";
-            //txt_vat.Text = "";
+                txt_description.Text = "";
+                //txt_discount.Text = "";
+                //txt_vat.Text = "";
 
-            global_product_id = 0;
-            //global_avg_cost = 0;
-            global_tax_id = 0;
-            global_tax_rate = 0;
+                global_product_id = 0;
+                //global_avg_cost = 0;
+                global_tax_id = 0;
+                global_tax_rate = 0;
 
-            total_amount = 0;
-            total_discount = 0;
-            total_tax = 0;
-            total_sub_total = 0;
+                total_amount = 0;
+                total_discount = 0;
+                total_tax = 0;
+                total_sub_total = 0;
 
-            txt_invoice_no.Text = "";
-            txt_purchase_date.Refresh();
-            txt_purchase_date.Value = DateTime.Now;
-            txt_supplier_invoice.Text = "";
-            txt_supplier_vat.Text = "";
-            txt_cust_balance.Text = "";
+                txt_invoice_no.Text = "";
+                txt_purchase_date.Refresh();
+                txt_purchase_date.Value = DateTime.Now;
+                txt_supplier_invoice.Text = "";
+                txt_supplier_vat.Text = "";
+                txt_cust_balance.Text = "";
 
-            _selectedSupplierId = 0;
-            _suppressSupplierSearch = true;
-            txtSupplierSearch.Text = "";
-            _suppressSupplierSearch = false;
+                _selectedSupplierId = 0;
+                _suppressSupplierSearch = true;
+                txtSupplierSearch.Text = "";
+                _suppressSupplierSearch = false;
+                if (suppliersDataGridView != null)
+                    suppliersDataGridView.Visible = false;
 
-            txt_sub_total.Text = "0.00";
-            txt_total_amount.Text = "0.00";
-            txt_total_tax.Text = "0.00";
-            txt_total_discount.Text = "0.00";
-            txt_total_qty.Text = "";
-            txt_shop_qty.Text = "";
-            
-            rd_btn_by_unitprice.Checked = true;
-            rd_btn_without_vat.Checked = true;
+                _suppressDiscountSync = true;
+                txt_total_disc_value.Text = "0.00";
+                txt_total_disc_percent.Text = "0.00";
+                _suppressDiscountSync = false;
 
-            grid_purchases.DataSource = null;
-            grid_purchases.Rows.Clear();
-            grid_purchases.Refresh();
-            grid_purchases.Rows.Add();
-            //this.ActiveControl = grid_purchases;
+                txt_sub_total.Text = "0.00";
+                txt_total_amount.Text = "0.00";
+                txt_total_tax.Text = "0.00";
+                txt_total_discount.Text = "0.00";
+                txt_shipping_cost.Text = "0.00";
+                txt_total_qty.Text = "";
+                txt_shop_qty.Text = "";
 
-            grid_product_history.DataSource = null;
-            grid_product_history.Rows.Clear();
-            //grid_product_history.Refresh();
+                rd_btn_by_unitprice.Checked = true;
+                rd_btn_without_vat.Checked = true;
+
+                grid_purchases.DataSource = null;
+                grid_purchases.Rows.Clear();
+                grid_purchases.Refresh();
+                grid_purchases.Rows.Add();
+                InitializePurchaseRowDefaults(0);
+
+                grid_product_history.DataSource = null;
+                grid_product_history.Rows.Clear();
+                //grid_product_history.Refresh();
+            }
+            finally
+            {
+                _isClearingForm = false;
+            }
+
+            BeginInvoke((Action)(() =>
+            {
+                if (grid_purchases.Rows.Count > 0 && grid_purchases.Columns.Contains("code"))
+                {
+                    this.ActiveControl = grid_purchases;
+                    grid_purchases.Focus();
+                    grid_purchases.CurrentCell = grid_purchases.Rows[0].Cells["code"];
+                    grid_purchases.CurrentCell.Selected = true;
+                    //grid_purchases.BeginEdit(true);
+                }
+            }));
 
         }
 
@@ -1418,6 +1533,7 @@ namespace pos
                         if (grid_purchases.Rows[iRow].Cells["code"].Value != null && grid_purchases.Rows[iRow].Cells["avg_cost"].Value != null && grid_purchases.Rows[iRow].Cells["qty"].Value != null)
                         {
                             grid_purchases.Rows.Add();
+                            InitializePurchaseRowDefaults(iRow + 1);
                             this.ActiveControl = grid_purchases;
                             grid_purchases.CurrentCell = grid_purchases.Rows[iRow + 1].Cells["code"];
                             grid_purchases.CurrentCell.Selected = true;
@@ -1447,26 +1563,38 @@ namespace pos
                 grid_purchases.Refresh();
                 txt_invoice_no.Text = invoice_no;
 
-                string invoice_chr = invoice_no.Substring(0, 2);
+                bool isPoInvoice = !string.IsNullOrWhiteSpace(invoice_no) &&
+                                   invoice_no.StartsWith("PO", StringComparison.OrdinalIgnoreCase);
 
-                //string invoice_chr = invoice_no.Substring(0, 1);
+                bool isHoldInvoice = !string.IsNullOrWhiteSpace(invoice_no) &&
+                                     (invoice_no.StartsWith("H-", StringComparison.OrdinalIgnoreCase)
+                                      || invoice_no.StartsWith("PH", StringComparison.OrdinalIgnoreCase));
 
-                if (invoice_chr.ToUpper() == "PO")// for invoice edit
+                if (_dt != null && _dt.Rows.Count > 0 && _dt.Columns.Contains("purchase_type"))
                 {
-                    invoice_status = "PO";
+                    var rowPurchaseType = Convert.ToString(_dt.Rows[0]["purchase_type"]);
+                    if (!string.IsNullOrWhiteSpace(rowPurchaseType) && rowPurchaseType.Equals("Hold", StringComparison.OrdinalIgnoreCase))
+                        isHoldInvoice = true;
                 }
-                else if (invoice_no.Substring(0, 1).ToUpper() == "H")// for HOld purchases invoice 
+
+                if (isPoInvoice)
                 {
                     invoice_status = "PO";
+                    po_invoice_no = invoice_no;
+                    _isEditMode = false;
+                    _editingHoldPurchase = false;
+                    _editingInvoiceNo = string.Empty;
+                    PrinttoolStripButton.Enabled = false;
                 }
                 else
                 {
-                    invoice_status = "PO"; // "Update";
-                    PrinttoolStripButton.Enabled = true;
+                    invoice_status = "Update";
+                    po_invoice_no = "";
+                    _isEditMode = true;
+                    _editingHoldPurchase = isHoldInvoice;
+                    _editingInvoiceNo = invoice_no;
+                    PrinttoolStripButton.Enabled = !isHoldInvoice;
                 }
-
-                //btn_save.Text = "Save (F3)";
-                po_invoice_no = invoice_no;
 
                 if (_dt.Rows.Count > 0)
                 {
@@ -1498,25 +1626,34 @@ namespace pos
                             _suppressSupplierSearch = false;
                         }
                         cmb_employees.SelectedValue = myProductView["employee_id"];
-                        //cmb_purchase_type.SelectedValue = myProductView["purchase_type"];
-                        //txt_purchase_date.Value = Convert.ToDateTime(myProductView["purchase_date"].ToString());
+
+                        // If purchase_date is null or empty or invalid, set it to today's date; otherwise, set it to the value from the data row
+                        // if invoice is Purchase Order restrict to today
+                        if (myProductView["purchase_date"] != DBNull.Value)
+                            txt_purchase_date.Value = Convert.ToDateTime(myProductView["purchase_date"].ToString());
+                        else
+                            txt_purchase_date.Value = DateTime.Today;
+
                         txt_description.Text = myProductView["description"].ToString();
                         txt_shipping_cost.Text = (string.IsNullOrEmpty(myProductView["shipping_cost"].ToString() as String) ? "" : myProductView["shipping_cost"].ToString());
 
-                        decimal qty = Math.Round(Convert.ToDecimal(myProductView["quantity"].ToString()),2);
+                        decimal qty = Math.Round(Convert.ToDecimal(myProductView["quantity"].ToString()), 2);
                         decimal discount = Math.Round(Convert.ToDecimal(myProductView["discount_value"]), 4);
+                        decimal discount_percent = (_dt.Columns.Contains("discount_percent") && myProductView["discount_percent"] != DBNull.Value
+                            ? Math.Round(Convert.ToDecimal(myProductView["discount_percent"]), 4)
+                            : 0);
                         decimal total = qty * decimal.Parse(myProductView["cost_price"].ToString());
                         decimal tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : decimal.Parse(myProductView["tax_rate"].ToString()));
-                        decimal tax = Math.Round(((total- discount) * tax_rate / 100),4);
+                        decimal tax = Math.Round(((total - discount) * tax_rate / 100), 4);
                         //decimal tax = Math.Round(Convert.ToDecimal(myProductView["vat"].ToString()), 2);
-                        decimal current_sub_total = Math.Round((tax + total-discount),2);
+                        decimal current_sub_total = Math.Round((tax + total - discount), 2);
 
                         int id = Convert.ToInt32(myProductView["id"]);
                         string code = myProductView["code"].ToString();
                         string name = myProductView["name"].ToString();
                         //string qty = myProductView["quantity"].ToString();
-                        decimal cost_price = Math.Round(Convert.ToDecimal(myProductView["cost_price"]),4);
-                        decimal unit_price = Math.Round( Convert.ToDecimal(myProductView["unit_price"]),4);
+                        decimal cost_price = Math.Round(Convert.ToDecimal(myProductView["cost_price"]), 4);
+                        decimal unit_price = Math.Round(Convert.ToDecimal(myProductView["unit_price"]), 4);
                         string location_code = myProductView["location_code"].ToString();
                         string unit = myProductView["unit"].ToString();
                         string category = myProductView["category"].ToString();
@@ -1526,10 +1663,10 @@ namespace pos
                         decimal shop_qty = 0;
                         string item_number = myProductView["item_number"].ToString();
 
-                        string[] row0 = { "", id.ToString(), code, name, 
-                                            qty.ToString(), cost_price.ToString(),unit_price.ToString(), discount.ToString(), 
-                                            tax.ToString(), current_sub_total.ToString(),location_code,unit,category, 
-                                            btn_delete, tax_id.ToString(), tax_rate.ToString(), shop_qty.ToString(),item_number };
+                        string[] row0 = { "", id.ToString(), code, name,
+                                            qty.ToString("N2"), cost_price.ToString("N2"),unit_price.ToString("N2"), discount.ToString("N2"), discount_percent.ToString("N2"),
+                                            tax.ToString("N2"), current_sub_total.ToString("N2"),location_code,unit,category,
+                                            btn_delete, tax_id.ToString(), tax_rate.ToString("N2"), shop_qty.ToString("N2"),item_number };
                         int RowIndex = grid_purchases.Rows.Add(row0);
 
                         //GET / SET Location Dropdown list
@@ -1542,16 +1679,32 @@ namespace pos
                     get_sub_total_amount();
                     get_total_amount();
                     get_total_qty();
-                    grid_purchases.Focus();
-
+                    
+                    // Set focus to the grid and select the first cell (code) of the first row
                     this.ActiveControl = grid_purchases;
                     grid_purchases.Focus();
+                    //active cell should be the first cell (code) of the first row
+                    if (grid_purchases.Rows.Count > 0)
+                    {
+                        grid_purchases.CurrentCell = grid_purchases.Rows[0].Cells["code"];
+                    }
                 }
             }
             catch (Exception ex)
             {
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
+        }
+
+        private void InitializePurchaseRowDefaults(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases.Rows.Count) return;
+
+            var row = grid_purchases.Rows[rowIndex];
+            if (row.Cells["discount"].Value == null) row.Cells["discount"].Value = 0;
+            if (row.Cells["discount_percent"].Value == null) row.Cells["discount_percent"].Value = 0;
+            if (row.Cells["tax"].Value == null) row.Cells["tax"].Value = 0;
+            if (row.Cells["sub_total"].Value == null) row.Cells["sub_total"].Value = 0;
         }
 
 
@@ -2003,10 +2156,65 @@ namespace pos
         }
 
         private void txt_total_disc_value_TextChanged(object sender, EventArgs e)
-        {            
-            decimal new_total_discount = (string.IsNullOrEmpty(txt_total_disc_value.Text) ? 0 : Convert.ToDecimal(txt_total_disc_value.Text));
+        {
+            if (_suppressDiscountSync) return;
 
-            total_discount_value(new_total_discount);
+            if (radioDiscValue != null && radioDiscValue.Checked)
+            {
+                decimal new_total_discount = 0;
+                decimal.TryParse(txt_total_disc_value.Text, out new_total_discount);
+
+                _suppressDiscountSync = true;
+                txt_total_disc_percent.Text = "0";
+                _suppressDiscountSync = false;
+
+                total_discount_value(new_total_discount);
+            }
+        }
+
+        private void txt_total_disc_percent_TextChanged(object sender, EventArgs e)
+        {
+            if (_suppressDiscountSync) return;
+
+            if (radioDiscPercent != null && radioDiscPercent.Checked)
+            {
+                decimal totalDiscountPercent = 0;
+                decimal.TryParse(txt_total_disc_percent.Text, out totalDiscountPercent);
+
+                _suppressDiscountSync = true;
+                txt_total_disc_value.Text = "0";
+                _suppressDiscountSync = false;
+
+                total_discount_percent(totalDiscountPercent);
+            }
+        }
+
+        private void radioDiscValue_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioDiscValue != null && radioDiscValue.Checked)
+            {
+                _suppressDiscountSync = true;
+                txt_total_disc_percent.Text = "0";
+                _suppressDiscountSync = false;
+
+                decimal amount = 0;
+                decimal.TryParse(txt_total_disc_value.Text, out amount);
+                total_discount_value(amount);
+            }
+        }
+
+        private void radioDiscPercent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioDiscPercent != null && radioDiscPercent.Checked)
+            {
+                _suppressDiscountSync = true;
+                txt_total_disc_value.Text = "0";
+                _suppressDiscountSync = false;
+
+                decimal percent = 0;
+                decimal.TryParse(txt_total_disc_percent.Text, out percent);
+                total_discount_percent(percent);
+            }
         }
 
 
@@ -2038,44 +2246,68 @@ namespace pos
             double total_value = 0;
             double tax_rate = 0;
             double sub_total_1 = 0;
-
-
-                for (int i = 0; i <= filled_rows - 1; i++)
+            for (int i = 0; i <= filled_rows - 1; i++)
+            {
+                int product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
+                if (product_id > 0)
                 {
-                    int product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
-                    if(product_id > 0)
-                    {
-                        grid_purchases.Rows[i].Cells["discount"].Value = Math.Round(diff_amount_per_item,3);
+                    grid_purchases.Rows[i].Cells["discount"].Value = Math.Round(diff_amount_per_item, 3);
+                    decimal baseValue = Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value) * Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value);
+                    decimal rowPercent = baseValue == 0 ? 0 : (diff_amount_per_item / baseValue) * 100;
+                    grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(rowPercent, 4);
 
-                        //new_amount_single = (double.Parse(grid_purchases.Rows[i].Cells["sub_total"].Value.ToString()) / double.Parse(grid_purchases.Rows[i].Cells["qty"].Value.ToString())) - (diff_amount_per_item / double.Parse(grid_purchases.Rows[i].Cells["qty"].Value.ToString()));
-                        //new_amount_total = new_amount_single * total_item_share / 100;
-                        //new_vat_total = new_amount_single * total_tax_share / 100;
-                        //net_total = (grid_purchases.Rows[i].Cells["tax"].Value.ToString() == "0" ? (new_amount_total + new_vat_total) : new_amount_total);
-                        //grid_purchases.Rows[i].Cells["unit_price"].Value = net_total;
+                    tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
+                    total_value = Convert.ToDouble(grid_purchases.Rows[i].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases.Rows[i].Cells["qty"].Value);
+                    tax_1 = ((total_value - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value)) * tax_rate / 100);
+                    sub_total_1 = tax_1 + total_value - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value);
 
-                        tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
-
-                        ////grid_purchases.Rows[i].Cells["sub_total"].Value = Convert.ToDouble(grid_purchases.Rows[i].Cells["sub_total"].Value) - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value);
-
-                        total_value = Convert.ToDouble(grid_purchases.Rows[i].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases.Rows[i].Cells["qty"].Value);
-
-                        tax_1 = ((total_value - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value)) * tax_rate / 100);
-
-                        sub_total_1 = tax_1 + total_value - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value);
-
-                        grid_purchases.Rows[i].Cells["sub_total"].Value = sub_total_1;
-                        ////grid_purchases.Rows[i].Cells["total_without_vat"].Value = (sub_total_1 - tax_1);
-                        grid_purchases.Rows[i].Cells["tax"].Value = (tax_1);
-
-                        get_total_tax();
-                        get_total_discount();
-                        get_sub_total_amount();
-                        get_total_amount();
-                        get_total_qty(); 
-                    }
-                    
+                    grid_purchases.Rows[i].Cells["sub_total"].Value = sub_total_1;
+                    grid_purchases.Rows[i].Cells["tax"].Value = tax_1;
+                }
             }
 
+            get_total_tax();
+            get_total_discount();
+            get_sub_total_amount();
+            get_total_amount();
+            get_total_qty();
+        }
+
+        public void total_discount_percent(decimal total_discount_percent)
+        {
+            int total_rows = grid_purchases.Rows.Count;
+
+            for (int i = 0; i <= total_rows - 1; i++)
+            {
+                if (grid_purchases.Rows[i].Cells["id"].Value == null) continue;
+
+                int product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
+                if (product_id <= 0) continue;
+
+                decimal qty = (grid_purchases.Rows[i].Cells["qty"].Value == null ? 0 : Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value));
+                decimal avgCost = (grid_purchases.Rows[i].Cells["avg_cost"].Value == null ? 0 : Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value));
+                decimal totalValue = qty * avgCost;
+
+                decimal discountValue = Math.Round((totalValue * total_discount_percent) / 100, 4);
+                grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(total_discount_percent, 4);
+                grid_purchases.Rows[i].Cells["discount"].Value = discountValue;
+
+                decimal taxRate = (grid_purchases.Rows[i].Cells["tax_rate"].Value == null || grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == ""
+                    ? 0
+                    : Convert.ToDecimal(grid_purchases.Rows[i].Cells["tax_rate"].Value));
+
+                decimal tax = Math.Round(((totalValue - discountValue) * taxRate) / 100, 4);
+                decimal subTotal = Math.Round((totalValue - discountValue) + tax, 4);
+
+                grid_purchases.Rows[i].Cells["tax"].Value = tax;
+                grid_purchases.Rows[i].Cells["sub_total"].Value = subTotal;
+            }
+
+            get_total_tax();
+            get_total_discount();
+            get_sub_total_amount();
+            get_total_amount();
+            get_total_qty();
         }
 
         private void productDetailToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2253,6 +2485,7 @@ namespace pos
                     string bankGLAccountID = "";
                     string paymentMethodText = cmb_payment_method.Text;
                     int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
+                    bool isEditingPurchase = _isEditMode && !_editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo);
 
 
                     if (purchase_type == "Hold")
@@ -2317,8 +2550,8 @@ namespace pos
                     }
 
                     DialogResult result = UiMessages.ConfirmYesNo(
-                        "Create this purchase transaction (" + purchase_type + ")?",
-                        "هل تريد إنشاء عملية شراء (" + purchase_type + ")؟",
+                        isEditingPurchase ? "Update this purchase transaction (" + purchase_type + ")?" : "Create this purchase transaction (" + purchase_type + ")?",
+                        isEditingPurchase ? "هل تريد تحديث عملية شراء (" + purchase_type + ")؟" : "هل تريد إنشاء عملية شراء (" + purchase_type + ")؟",
                         captionEn: "Confirm purchase",
                         captionAr: "تأكيد الشراء");
 
@@ -2333,7 +2566,7 @@ namespace pos
                             var purchasesObj = new PurchasesBLL();
                             
                             // For normal purchases, block duplicates in pos_purchases
-                            if (purchasesObj.IsSupplierInvoiceNoExists(supplier_id, supplierInvoiceNo))
+                            if (purchasesObj.IsSupplierInvoiceNoExists(supplier_id, supplierInvoiceNo, isEditingPurchase ? _editingInvoiceNo : null))
                             {
                                 UiMessages.ShowWarning(
                                     "This Supplier Invoice No. already exists for the selected supplier.",
@@ -2353,18 +2586,11 @@ namespace pos
                             string invoice_no = "";
                             string location_code = "";
 
-                        //if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "P") //Update sales delete all record first and insert new sales
-                        //{
-                        //    int qresult = purchasesObj.DeletePurchases(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
-                        //    if (qresult <= 0)
-                        //    {
-                        //        MessageBox.Show(invoice_no + " has issue while updating, please try again", "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        //        return;
-                        //    }
-                        //    invoice_no = txt_invoice_no.Text;
-                        //}
-                        //else
-                            if (invoice_status == "PO") //if purchase order
+                            if (isEditingPurchase)
+                            {
+                                invoice_no = _editingInvoiceNo;
+                            }
+                            else if (invoice_status == "PO") //if purchase order
                             {
                                 po_invoice_no_1 = po_invoice_no;
                                 po_status = true;
@@ -2397,6 +2623,7 @@ namespace pos
                                 total_amount = net_total,
                                 total_tax = Math.Round(total_tax, 6),
                                 total_discount = total_discount,
+                                total_discount_percent = (txt_total_disc_percent.Text == "" ? 0 : Convert.ToDecimal(txt_total_disc_percent.Text)),
                                 purchase_type = purchase_type,
                                 purchase_date = purchase_date,
                                 purchase_time = txt_purchase_date.Value,
@@ -2451,6 +2678,7 @@ namespace pos
                                         cost_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()) ? 0 : Math.Round(Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()), 4)),
                                         unit_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
                                         discount = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount"].Value.ToString()), 4)),
+                                        line_discount_percent = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount_percent"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount_percent"].Value.ToString()), 4)),
                                         tax_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["tax_id"].Value.ToString()),
                                         tax_rate = tax_rate,
                                         purchase_date = purchase_date,
@@ -2462,13 +2690,15 @@ namespace pos
 
                             }
 
-                            var purchase_id = purchasesObj.Insertpurchases(purchase_model_header, purchase_model_detail);
+                            var purchase_id = (isEditingPurchase
+                                ? purchasesObj.ReplacePurchases(_editingInvoiceNo, purchase_model_header, purchase_model_detail)
+                                : purchasesObj.Insertpurchases(purchase_model_header, purchase_model_detail));
 
                             if (purchase_id > 0)
                             {
                                 UiMessages.ShowInfo(
-                                    "Purchase saved successfully. Invoice: " + invoice_no,
-                                    "تم حفظ عملية الشراء بنجاح. رقم الفاتورة: " + invoice_no,
+                                    (isEditingPurchase ? "Purchase updated successfully. Invoice: " : "Purchase created successfully. Invoice: ") + invoice_no,
+                                    (isEditingPurchase ? "تم تحديث عملية الشراء بنجاح. رقم الفاتورة: " : "تم إنشاء عملية الشراء بنجاح. رقم الفاتورة: ") + invoice_no,
                                     captionEn: "Success",
                                     captionAr: "نجاح");
 
@@ -2562,7 +2792,7 @@ namespace pos
         }
 
         private static readonly HashSet<string> _numericColumns =
-            new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "avg_cost", "unit_price", "discount" };
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "avg_cost", "unit_price", "discount", "discount_percent" };
 
         private void grid_purchases_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -2927,5 +3157,75 @@ namespace pos
         {
         }
 
+        private void txt_invoice_no_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                // Allow user to load purchase and hold purchase by pressing Enter key when invoice_no field is focused
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (!string.IsNullOrEmpty(txt_invoice_no.Text))
+                    {
+                        string invoiceNo = txt_invoice_no.Text.Trim();
+                        var purchasesBLL = new PurchasesBLL();
+                        if(invoiceNo.StartsWith("PH", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var _hold_dt = purchasesBLL.GetAll_Hold_PurchaseByInvoice(invoiceNo);
+                            if (_hold_dt != null && _hold_dt.Rows.Count > 0)
+                            {
+                                Load_products_to_grid_by_invoiceno(_hold_dt,invoiceNo);
+                            }
+                            else
+                            {
+                                UiMessages.ShowWarning(
+                                    "Hold Invoice number not found.",
+                                    "رقم الفاتورة المؤقتة غير موجود.",
+                                    captionEn: "Not Found",
+                                    captionAr: "غير موجود");
+                            }
+                            return;
+                        }
+                        else if(invoiceNo.StartsWith("PO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var purchasesOrderObj = new Purchases_orderBLL();
+                            var _po_dt = purchasesOrderObj.GetAllPurchaseOrder(invoiceNo);
+                            if (_po_dt != null && _po_dt.Rows.Count > 0)
+                            {
+                                Load_products_to_grid_by_invoiceno(_po_dt, invoiceNo);
+                            }
+                            else
+                            {
+                                UiMessages.ShowWarning(
+                                    "Purchase Order number not found.",
+                                    "رقم أمر الشراء غير موجود.",
+                                    captionEn: "Not Found",
+                                    captionAr: "غير موجود");
+                            }
+                            return;
+                        }
+                        else if (invoiceNo.StartsWith("P", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var dt = purchasesBLL.GetAllPurchaseByInvoice(invoiceNo);
+                            if (dt != null && dt.Rows.Count > 0)
+                            {
+                                Load_products_to_grid_by_invoiceno(dt, invoiceNo);
+                            }
+                        }
+                        else
+                        {
+                            UiMessages.ShowWarning(
+                                "Invoice number not found.",
+                                "رقم الفاتورة غير موجود.",
+                                captionEn: "Not Found",
+                                captionAr: "غير موجود");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+            }
+        }
     }
 }

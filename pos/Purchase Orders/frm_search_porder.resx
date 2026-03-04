@@ -119,10 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 18</value>
+    <value>2, 14</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 26</value>
+    <value>453, 24</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
@@ -140,15 +144,17 @@
   <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 12</value>
+    <value>459, 10</value>
+  </data>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 38</value>
+    <value>86, 30</value>
   </data>
   <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -169,10 +175,13 @@
     <value>1</value>
   </data>
   <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>706, 12</value>
+    <value>549, 10</value>
+  </data>
+  <data name="btn_ok.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="btn_ok.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 38</value>
+    <value>90, 30</value>
   </data>
   <data name="btn_ok.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -193,10 +202,13 @@
     <value>2</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>826, 12</value>
+    <value>642, 10</value>
+  </data>
+  <data name="btn_cancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 38</value>
+    <value>90, 30</value>
   </data>
   <data name="btn_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -223,10 +235,10 @@
     <value>0, 0</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>954, 55</value>
+    <value>742, 44</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -252,6 +264,9 @@
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="id.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -261,11 +276,20 @@
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>Invoice No.</value>
   </data>
+  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="invoice_no.Width" type="System.Int32, mscorlib">
+    <value>106</value>
+  </data>
   <metadata name="supplier_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="supplier_name.HeaderText" xml:space="preserve">
     <value>Supplier</value>
+  </data>
+  <data name="supplier_name.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <metadata name="purchase_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -273,11 +297,20 @@
   <data name="purchase_date.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="purchase_date.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="purchase_date.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
   <metadata name="purchase_type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="purchase_type.HeaderText" xml:space="preserve">
     <value>Sale Type</value>
+  </data>
+  <data name="purchase_type.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="purchase_type.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -288,6 +321,9 @@
   <data name="discount_value.HeaderText" xml:space="preserve">
     <value>Discount</value>
   </data>
+  <data name="discount_value.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="discount_value.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -296,6 +332,9 @@
   </metadata>
   <data name="total_tax.HeaderText" xml:space="preserve">
     <value>Total VAT</value>
+  </data>
+  <data name="total_tax.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="total_tax.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -306,14 +345,23 @@
   <data name="total_amount.HeaderText" xml:space="preserve">
     <value>Total Amount</value>
   </data>
+  <data name="total_amount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="total_amount.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="grid_search_porder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 63</value>
+    <value>2, 50</value>
+  </data>
+  <data name="grid_search_porder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="grid_search_porder.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="grid_search_porder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>939, 597</value>
+    <value>730, 478</value>
   </data>
   <data name="grid_search_porder.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -334,16 +382,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>7, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>954, 672</value>
+    <value>742, 538</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 52</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

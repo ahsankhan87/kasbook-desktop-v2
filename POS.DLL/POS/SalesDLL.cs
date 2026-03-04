@@ -571,31 +571,35 @@ namespace POS.DLL
                     try
                     {
                         int CustomerID = 0;
-                        //if customer name not selected in sales form then whatever text is typed in textbox, it will be saved a new customer
-                        //else the selected customer id will be used
-                        if (sales[0].customer_id == 0 && sales[0].customer_name.Length > 0)
-                        {
-                            cmd = new SqlCommand("sp_CustomersCrud", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
+                        ////if customer name not selected in sales form then whatever text is typed in textbox, it will be saved a new customer
+                        ////else the selected customer id will be used
+                        //if (sales[0].customer_id == 0 && sales[0].customer_name.Length > 0)
+                        //{
+                        //    cmd = new SqlCommand("sp_CustomersCrud", cn, transaction);
+                        //    cmd.CommandType = CommandType.StoredProcedure;
 
-                            foreach (SalesModalHeader sale_header in sales)
-                            {
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@first_name", sale_header.customer_name);
-                                cmd.Parameters.AddWithValue("@status", 1);
-                                //cmd.Parameters.AddWithValue("@contact_no", obj.contact_no);
-                                cmd.Parameters.AddWithValue("@vat_no", sale_header.customer_vat);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                //cmd.Parameters.AddWithValue("@credit_limit", obj.credit_limit);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-                            }
-                            CustomerID = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-                        else
-                        {
-                            CustomerID = sales[0].customer_id;
-                        }
+                        //    foreach (SalesModalHeader sale_header in sales)
+                        //    {
+                        //        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        //        cmd.Parameters.AddWithValue("@first_name", sale_header.customer_name);
+                        //        cmd.Parameters.AddWithValue("@status", 1);
+                        //        //cmd.Parameters.AddWithValue("@contact_no", obj.contact_no);
+                        //        cmd.Parameters.AddWithValue("@vat_no", sale_header.customer_vat);
+                        //        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                        //        //cmd.Parameters.AddWithValue("@credit_limit", obj.credit_limit);
+                        //        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
+                        //        cmd.Parameters.AddWithValue("@OperationType", "1");
+                        //    }
+                        //    CustomerID = Convert.ToInt32(cmd.ExecuteScalar());
+                        //}
+                        //else
+                        //{
+                        //    CustomerID = sales[0].customer_id;
+                        //}
+
+                        // Disable the above code block and replace with below code to avoid creating duplicate customers
+                        // when same customer name is entered multiple times without selection
+                        CustomerID = sales[0].customer_id;
 
                         cmd = new SqlCommand("sp_Sales", cn, transaction);
                         cmd.CommandType = CommandType.StoredProcedure;

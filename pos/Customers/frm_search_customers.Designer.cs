@@ -35,7 +35,9 @@
             this.btn_cancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_search_customers = new System.Windows.Forms.DataGridView();
+            this.lbl_totalCustomers = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.first_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.registrationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +53,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbl_totalCustomers);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
@@ -94,6 +97,7 @@
             this.grid_search_customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_search_customers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.sno,
             this.customer_code,
             this.first_name,
             this.registrationName,
@@ -109,12 +113,24 @@
             this.grid_search_customers.DoubleClick += new System.EventHandler(this.grid_search_customers_DoubleClick);
             this.grid_search_customers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_search_customers_KeyDown);
             // 
+            // lbl_totalCustomers
+            // 
+            resources.ApplyResources(this.lbl_totalCustomers, "lbl_totalCustomers");
+            this.lbl_totalCustomers.Name = "lbl_totalCustomers";
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
             resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            // 
+            // sno
+            // 
+            this.sno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            resources.ApplyResources(this.sno, "sno");
+            this.sno.Name = "sno";
+            this.sno.ReadOnly = true;
             // 
             // customer_code
             // 
@@ -200,7 +216,9 @@
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView grid_search_customers;
+        private System.Windows.Forms.Label lbl_totalCustomers;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sno;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn first_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn registrationName;

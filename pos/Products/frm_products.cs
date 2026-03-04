@@ -147,8 +147,9 @@ namespace pos
         {
             if (grid_products.RowCount > 0)
             {
-                string product_code = grid_products.CurrentRow.Cells["code"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
+                string item_number = grid_products.CurrentRow.Cells["item_number"].Value.ToString();
+                string product_name = grid_products.CurrentRow.Cells["name"].Value.ToString();
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, product_name);
 
                 frm_prod_move_obj.load_Products_grid();
                 frm_prod_move_obj.ShowDialog();

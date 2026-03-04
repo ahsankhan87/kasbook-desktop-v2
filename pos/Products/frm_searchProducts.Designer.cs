@@ -42,6 +42,7 @@
             this.alternate_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_totalCount = new System.Windows.Forms.Label();
             this.rb_by_name = new System.Windows.Forms.RadioButton();
             this.rb_by_code = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -133,6 +134,7 @@
             // 
             // category
             // 
+            this.category.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.category.DataPropertyName = "category";
             resources.ApplyResources(this.category, "category");
             this.category.Name = "category";
@@ -154,6 +156,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbl_totalCount);
             this.panel1.Controls.Add(this.rb_by_name);
             this.panel1.Controls.Add(this.rb_by_code);
             this.panel1.Controls.Add(this.label2);
@@ -163,6 +166,11 @@
             this.panel1.Controls.Add(this.btn_cancel);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // lbl_totalCount
+            // 
+            resources.ApplyResources(this.lbl_totalCount, "lbl_totalCount");
+            this.lbl_totalCount.Name = "lbl_totalCount";
             // 
             // rb_by_name
             // 
@@ -249,5 +257,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn alternate_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
+        private System.Windows.Forms.Label lbl_totalCount;
     }
 }

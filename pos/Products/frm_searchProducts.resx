@@ -200,7 +200,7 @@
     <value>8</value>
   </data>
   <data name="category.Width" type="System.Int32, mscorlib">
-    <value>150</value>
+    <value>94</value>
   </data>
   <metadata name="alternate_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -247,7 +247,7 @@
     <value>62</value>
   </data>
   <data name="grid_search_products.Size" type="System.Drawing.Size, System.Drawing">
-    <value>746, 469</value>
+    <value>993, 543</value>
   </data>
   <data name="grid_search_products.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -262,6 +262,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grid_search_products.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lbl_totalCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbl_totalCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_totalCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>760, 17</value>
+  </data>
+  <data name="lbl_totalCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 17</value>
+  </data>
+  <data name="lbl_totalCount.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lbl_totalCount.Text" xml:space="preserve">
+    <value>Total Count:</value>
+  </data>
+  <data name="&gt;&gt;lbl_totalCount.Name" xml:space="preserve">
+    <value>lbl_totalCount</value>
+  </data>
+  <data name="&gt;&gt;lbl_totalCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_totalCount.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lbl_totalCount.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="rb_by_name.AutoSize" type="System.Boolean, mscorlib">
@@ -292,7 +322,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;rb_by_name.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rb_by_code.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,7 +352,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;rb_by_code.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -334,7 +364,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>568, 46</value>
+    <value>815, 46</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 17</value>
@@ -355,7 +385,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -382,7 +412,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 14</value>
@@ -406,7 +436,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
     <value>550, 10</value>
@@ -433,7 +463,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btn_ok.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>642, 10</value>
@@ -442,7 +472,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 30</value>
+    <value>99, 30</value>
   </data>
   <data name="btn_cancel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -460,7 +490,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -472,7 +502,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>746, 69</value>
+    <value>993, 69</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -496,7 +526,7 @@
     <value>7, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>746, 538</value>
+    <value>993, 612</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 52</value>

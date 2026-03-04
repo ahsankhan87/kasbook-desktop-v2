@@ -117,138 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;lbl_product_name.Name" xml:space="preserve">
-    <value>lbl_product_name</value>
-  </data>
-  <data name="&gt;&gt;lbl_product_name.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_product_name.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lbl_product_name.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txt_product_code.Name" xml:space="preserve">
-    <value>txt_product_code</value>
-  </data>
-  <data name="&gt;&gt;txt_product_code.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_product_code.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txt_product_code.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btn_search_products.Name" xml:space="preserve">
-    <value>btn_search_products</value>
-  </data>
-  <data name="&gt;&gt;btn_search_products.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_search_products.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;btn_search_products.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
-  </data>
-  <data name="&gt;&gt;label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtItemNumber.Name" xml:space="preserve">
-    <value>txtItemNumber</value>
-  </data>
-  <data name="&gt;&gt;txtItemNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtItemNumber.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtItemNumber.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txt_id.Name" xml:space="preserve">
-    <value>txt_id</value>
-  </data>
-  <data name="&gt;&gt;txt_id.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_id.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txt_id.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label40.Name" xml:space="preserve">
-    <value>label40</value>
-  </data>
-  <data name="&gt;&gt;label40.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label40.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;label40.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1208, 58</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="lbl_product_name.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lbl_product_name.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt, style=Bold</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lbl_product_name.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -279,9 +156,6 @@
   <data name="&gt;&gt;lbl_product_name.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="txt_product_code.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
@@ -297,6 +171,9 @@
   <data name="txt_product_code.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="txt_product_code.ToolTip" xml:space="preserve">
     <value>Search product by code, then press Enter</value>
   </data>
@@ -519,6 +396,33 @@
   <data name="&gt;&gt;label40.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1208, 58</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="lbl_errors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -640,7 +544,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_barcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 6</value>
+    <value>137, 6</value>
   </data>
   <data name="txt_barcode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -667,7 +571,7 @@
     <value>Top, Bottom, Left</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 218</value>
+    <value>695, 218</value>
   </data>
   <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -694,7 +598,7 @@
     <value>1</value>
   </data>
   <data name="btn_translate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>417, 256</value>
+    <value>416, 256</value>
   </data>
   <data name="btn_translate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -727,7 +631,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_alt_item_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 42</value>
+    <value>137, 42</value>
   </data>
   <data name="txt_alt_item_number.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -757,13 +661,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_packet_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 150</value>
+    <value>696, 150</value>
   </data>
   <data name="txt_packet_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_packet_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 24</value>
+    <value>326, 24</value>
   </data>
   <data name="txt_packet_qty.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -787,13 +691,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_def_location.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 114</value>
+    <value>696, 114</value>
   </data>
   <data name="txt_def_location.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_def_location.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 24</value>
+    <value>326, 24</value>
   </data>
   <data name="txt_def_location.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -823,7 +727,7 @@
     <value>NoControl</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 189</value>
+    <value>550, 189</value>
   </data>
   <data name="label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -856,7 +760,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 184</value>
+    <value>696, 184</value>
   </data>
   <data name="txt_description.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -865,7 +769,7 @@
     <value>True</value>
   </data>
   <data name="txt_description.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 28</value>
+    <value>326, 28</value>
   </data>
   <data name="txt_description.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -886,13 +790,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_expiry_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 41</value>
+    <value>695, 41</value>
   </data>
   <data name="txt_expiry_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_expiry_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 26</value>
+    <value>328, 26</value>
   </data>
   <data name="txt_expiry_date.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -961,7 +865,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 153</value>
+    <value>550, 153</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -994,7 +898,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 186</value>
+    <value>136, 186</value>
   </data>
   <data name="txt_groups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1005,9 +909,6 @@
   <data name="txt_groups.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="txt_groups.ToolTip" xml:space="preserve">
     <value>Type to search groups, press Enter to select</value>
   </data>
@@ -1030,7 +931,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>417, 186</value>
+    <value>416, 186</value>
   </data>
   <data name="txt_group_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1066,7 +967,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 81</value>
+    <value>550, 81</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1105,7 +1006,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 117</value>
+    <value>550, 117</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1222,7 +1123,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 45</value>
+    <value>550, 45</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1261,7 +1162,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 9</value>
+    <value>550, 9</value>
   </data>
   <data name="label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1294,13 +1195,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="cmb_supplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 77</value>
+    <value>696, 77</value>
   </data>
   <data name="cmb_supplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_supplier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 26</value>
+    <value>326, 26</value>
   </data>
   <data name="cmb_supplier.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1441,7 +1342,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>417, 150</value>
+    <value>416, 150</value>
   </data>
   <data name="txt_category_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1471,7 +1372,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 150</value>
+    <value>136, 150</value>
   </data>
   <data name="txt_categories.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1504,13 +1405,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_restock_level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 6</value>
+    <value>696, 6</value>
   </data>
   <data name="txt_restock_level.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_restock_level.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 24</value>
+    <value>326, 24</value>
   </data>
   <data name="txt_restock_level.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1534,7 +1435,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_part_number.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 78</value>
+    <value>137, 78</value>
   </data>
   <data name="txt_part_number.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1567,7 +1468,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>417, 114</value>
+    <value>416, 114</value>
   </data>
   <data name="txt_brand_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1597,7 +1498,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_pur_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 474</value>
+    <value>137, 474</value>
   </data>
   <data name="txt_pur_dmnd_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1627,7 +1528,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_sale_dmnd_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 510</value>
+    <value>137, 510</value>
   </data>
   <data name="txt_sale_dmnd_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1774,7 +1675,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_unit_price_2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 619</value>
+    <value>137, 619</value>
   </data>
   <data name="txt_unit_price_2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1843,7 +1744,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_name_ar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 294</value>
+    <value>137, 294</value>
   </data>
   <data name="txt_name_ar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1912,7 +1813,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_unit_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 582</value>
+    <value>137, 582</value>
   </data>
   <data name="txt_unit_price.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1942,7 +1843,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_demand_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 438</value>
+    <value>137, 438</value>
   </data>
   <data name="txt_demand_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1972,7 +1873,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 546</value>
+    <value>137, 546</value>
   </data>
   <data name="txt_cost_price.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2008,7 +1909,7 @@
     <value>Service</value>
   </data>
   <data name="cmb_item_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 329</value>
+    <value>137, 329</value>
   </data>
   <data name="cmb_item_type.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2038,7 +1939,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 258</value>
+    <value>137, 258</value>
   </data>
   <data name="txt_name.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2107,7 +2008,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 114</value>
+    <value>136, 114</value>
   </data>
   <data name="txt_brands.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -2263,7 +2164,7 @@
     <value>Service</value>
   </data>
   <data name="cmb_tax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 401</value>
+    <value>137, 401</value>
   </data>
   <data name="cmb_tax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2299,7 +2200,7 @@
     <value>Service</value>
   </data>
   <data name="cmb_units.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 365</value>
+    <value>137, 365</value>
   </data>
   <data name="cmb_units.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2329,7 +2230,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 222</value>
+    <value>137, 222</value>
   </data>
   <data name="txt_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2473,7 +2374,7 @@
     <value>52</value>
   </data>
   <data name="btn_upload_picture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 362</value>
+    <value>695, 362</value>
   </data>
   <data name="btn_upload_picture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -2524,7 +2425,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="pictureBox1" Row="6" RowSpan="4" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_translate" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_alt_item_number" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_packet_qty" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_def_location" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label25" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_description" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_expiry_date" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label42" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label16" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cmb_supplier" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label38" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label39" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label41" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_restock_level" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_part_number" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_pur_dmnd_qty" Row="13" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_sale_dmnd_qty" Row="14" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label33" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label19" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label26" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price_2" Row="17" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label32" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_name_ar" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label18" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price" Row="16" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_demand_qty" Row="12" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_cost_price" Row="15" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_item_type" Row="9" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_name" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label17" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label24" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmb_tax" Row="11" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_units" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_code" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label23" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label37" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_upload_picture" Row="10" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,32.38771,Percent,67.61229,Absolute,134,Absolute,146,Absolute,332" /&gt;&lt;Rows Styles="Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="pictureBox1" Row="6" RowSpan="4" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_translate" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_alt_item_number" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_packet_qty" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_def_location" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label25" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_description" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_expiry_date" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label42" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label16" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cmb_supplier" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label38" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label39" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label41" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_restock_level" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_part_number" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_pur_dmnd_qty" Row="13" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_sale_dmnd_qty" Row="14" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label33" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label19" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label26" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price_2" Row="17" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label32" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_name_ar" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label18" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price" Row="16" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_demand_qty" Row="12" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_cost_price" Row="15" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_item_type" Row="9" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_name" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label17" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label24" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmb_tax" Row="11" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_units" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_code" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label23" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label37" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_upload_picture" Row="10" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,32.38771,Percent,67.61229,Absolute,134,Absolute,146,Absolute,333" /&gt;&lt;Rows Styles="Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tabPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -2558,6 +2459,165 @@
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="id.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="id.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="id.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="invoice_no.HeaderText" xml:space="preserve">
+    <value>Invoice No</value>
+  </data>
+  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="invoice_no.Width" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <metadata name="qty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="qty.HeaderText" xml:space="preserve">
+    <value>Trans Qty</value>
+  </data>
+  <data name="qty.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="qty.Width" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
+  <metadata name="balanceQty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="balanceQty.HeaderText" xml:space="preserve">
+    <value>Bal Qty</value>
+  </data>
+  <data name="balanceQty.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="balanceQty.Width" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <metadata name="cost_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="cost_price.HeaderText" xml:space="preserve">
+    <value>Cost Price</value>
+  </data>
+  <data name="cost_price.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cost_price.Width" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <metadata name="unit_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="unit_price.HeaderText" xml:space="preserve">
+    <value>Sale Price</value>
+  </data>
+  <data name="unit_price.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="unit_price.Width" type="System.Int32, mscorlib">
+    <value>104</value>
+  </data>
+  <metadata name="loc_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="loc_code.HeaderText" xml:space="preserve">
+    <value>Loc</value>
+  </data>
+  <data name="loc_code.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="loc_code.Width" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <metadata name="description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="description.HeaderText" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="description.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="description.Width" type="System.Int32, mscorlib">
+    <value>112</value>
+  </data>
+  <metadata name="supplier.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="supplier.HeaderText" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="supplier.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="customer.HeaderText" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="customer.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <metadata name="trans_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="trans_date.HeaderText" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="trans_date.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="trans_date.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <metadata name="username.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="username.HeaderText" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="username.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="username.Width" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="grid_movements.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="grid_movements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 2</value>
+  </data>
+  <data name="grid_movements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grid_movements.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="grid_movements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1036, 702</value>
+  </data>
+  <data name="grid_movements.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;grid_movements.Name" xml:space="preserve">
     <value>grid_movements</value>
@@ -2656,255 +2716,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="id.HeaderText" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="id.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="id.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="id.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="invoice_no.HeaderText" xml:space="preserve">
-    <value>Invoice No</value>
-  </data>
-  <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="invoice_no.Width" type="System.Int32, mscorlib">
-    <value>107</value>
-  </data>
-  <metadata name="qty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="qty.HeaderText" xml:space="preserve">
-    <value>Trans Qty</value>
-  </data>
-  <data name="qty.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>102</value>
-  </data>
-  <metadata name="balanceQty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="balanceQty.HeaderText" xml:space="preserve">
-    <value>Bal Qty</value>
-  </data>
-  <data name="balanceQty.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="balanceQty.Width" type="System.Int32, mscorlib">
-    <value>85</value>
-  </data>
-  <metadata name="cost_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="cost_price.HeaderText" xml:space="preserve">
-    <value>Cost Price</value>
-  </data>
-  <data name="cost_price.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>107</value>
-  </data>
-  <metadata name="unit_price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="unit_price.HeaderText" xml:space="preserve">
-    <value>Sale Price</value>
-  </data>
-  <data name="unit_price.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>104</value>
-  </data>
-  <metadata name="loc_code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="loc_code.HeaderText" xml:space="preserve">
-    <value>Loc</value>
-  </data>
-  <data name="loc_code.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="loc_code.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="description.HeaderText" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="description.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="description.Width" type="System.Int32, mscorlib">
-    <value>112</value>
-  </data>
-  <metadata name="supplier.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="supplier.HeaderText" xml:space="preserve">
-    <value>Supplier</value>
-  </data>
-  <data name="supplier.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="customer.HeaderText" xml:space="preserve">
-    <value>Customer</value>
-  </data>
-  <data name="customer.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <metadata name="trans_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="trans_date.HeaderText" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="trans_date.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="trans_date.Width" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="grid_movements.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="grid_movements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 2</value>
-  </data>
-  <data name="grid_movements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="grid_movements.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="grid_movements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1036, 702</value>
-  </data>
-  <data name="grid_movements.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;grid_movements.Name" xml:space="preserve">
-    <value>grid_movements</value>
-  </data>
-  <data name="&gt;&gt;grid_movements.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grid_movements.Parent" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;grid_movements.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.Name" xml:space="preserve">
-    <value>btn_refresh</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;btn_refresh.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btn_other_stock.Name" xml:space="preserve">
-    <value>btn_other_stock</value>
-  </data>
-  <data name="&gt;&gt;btn_other_stock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_other_stock.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;btn_other_stock.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Name" xml:space="preserve">
-    <value>btn_delete</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;btn_delete.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;btn_update.Name" xml:space="preserve">
-    <value>btn_update</value>
-  </data>
-  <data name="&gt;&gt;btn_update.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_update.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;btn_update.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;btn_blank.Name" xml:space="preserve">
-    <value>btn_blank</value>
-  </data>
-  <data name="&gt;&gt;btn_blank.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_blank.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;btn_blank.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 27</value>
-  </data>
-  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 453</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btn_refresh.Font" type="System.Drawing.Font, System.Drawing">
@@ -3075,6 +2886,36 @@
   <data name="&gt;&gt;btn_blank.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 27</value>
+  </data>
+  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 453</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -3147,6 +2988,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Product Detail</value>
   </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -3213,11 +3060,11 @@
   <data name="&gt;&gt;trans_date.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
+  <data name="&gt;&gt;username.Name" xml:space="preserve">
+    <value>username</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;username.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_product_full_detail</value>

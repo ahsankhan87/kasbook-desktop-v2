@@ -157,7 +157,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost," +
-                            " SI.id,SI.item_code,SI.item_number,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber," +
+                            " SI.id,SI.item_code,SI.item_number,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.discount_percent," +
                             " SI.quantity AS qty,SI.cost_price AS avg_cost," + // this line is for print of build edit product page
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity*SI.tax_rate/100) AS vat," +
@@ -404,6 +404,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@quantity", detail.quantity);
                             cmd.Parameters.AddWithValue("@packet_qty", detail.packet_qty);
                             cmd.Parameters.AddWithValue("@discount_value", detail.discount);
+                            cmd.Parameters.AddWithValue("@discount_percent", detail.line_discount_percent);
                             cmd.Parameters.AddWithValue("@tax_rate", detail.tax_rate);
                             cmd.Parameters.AddWithValue("@cost_price", detail.cost_price);
                             cmd.Parameters.AddWithValue("@supplier_id", detail.supplier_id);
@@ -894,6 +895,28 @@ namespace POS.DLL
                 return newProdID;
 
             }
+        }
+
+        public int ReplacePurchases(string oldInvoiceNo, List<PurchaseModalHeader> purchases, List<PurchasesModal> purchase_detail)
+        {
+            if (string.IsNullOrWhiteSpace(oldInvoiceNo))
+                throw new ArgumentException("Old invoice number is required.", nameof(oldInvoiceNo));
+
+            if (purchases == null || purchases.Count == 0)
+                throw new ArgumentException("Purchase header is required.", nameof(purchases));
+
+            if (purchase_detail == null || purchase_detail.Count == 0)
+                throw new ArgumentException("Purchase detail is required.", nameof(purchase_detail));
+
+            int deleteResult = DeletePurchases(oldInvoiceNo);
+            if (deleteResult <= 0)
+                throw new Exception("Unable to delete old purchase invoice before replacement.");
+
+            int newPurchaseId = Insertpurchases(purchases, purchase_detail);
+            if (newPurchaseId <= 0)
+                throw new Exception("Unable to save replacement purchase invoice.");
+
+            return newPurchaseId;
         }
 
         public int InsertpurchasesItems(PurchasesModal obj)
@@ -1557,7 +1580,6 @@ namespace POS.DLL
             {
                 SqlTransaction transaction = null;
                
-                
                 DataTable sales_dt = new DataTable();
                 if (cn.State == ConnectionState.Closed)
                 {
@@ -1650,6 +1672,51 @@ namespace POS.DLL
 
         }
 
+        public int DeleteHoldPurchases(string invoice_no)
+        {
+            string SQL1 = "DELETE FROM pos_hold_purchases WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
+            string SQL2 = "DELETE FROM pos_hold_purchases_items WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
+            Int32 result = 0;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlTransaction transaction = null;
+
+                if (cn.State == ConnectionState.Closed)
+                {
+                    cn.Open();
+                    transaction = cn.BeginTransaction();
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand(SQL2, cn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        using (SqlCommand cmd = new SqlCommand(SQL1, cn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@invoice_no", invoice_no);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        Log.LogAction("Delete Hold Purchase", $"InvoiceNo: {invoice_no}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                        result = 1;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+
+                return result;
+            }
+        }
+
         public DataTable PurchaseReceipt(string invoice_no)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -1703,7 +1770,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost," +
-                            " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.item_number," +
+                            " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.item_number,SI.discount_percent," +
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity*SI.tax_rate/100) AS vat," +
                             " P.name AS name,P.code,P.location_code,P.item_type,P.barcode," +

@@ -340,7 +340,7 @@ namespace pos.UI
         // ???????????????????????????????????????????????????????????
         private static void StyleTextBox(TextBox txt)
         {
-            txt.Font = FontDefault;
+            SetFontIfNeeded(txt, FontDefault);
             txt.ForeColor = TextPrimary;
             txt.BackColor = txt.ReadOnly ? Background : InputBackground;
             txt.BorderStyle = BorderStyle.FixedSingle;
@@ -348,7 +348,7 @@ namespace pos.UI
 
         private static void StyleComboBox(ComboBox cmb)
         {
-            cmb.Font = FontDefault;
+            SetFontIfNeeded(cmb, FontDefault);
             cmb.ForeColor = TextPrimary;
             cmb.BackColor = InputBackground;
             cmb.FlatStyle = FlatStyle.Standard;
@@ -356,7 +356,7 @@ namespace pos.UI
 
         private static void StyleNumericUpDown(NumericUpDown nud)
         {
-            nud.Font = FontDefault;
+            SetFontIfNeeded(nud, FontDefault);
             nud.ForeColor = TextPrimary;
             nud.BackColor = InputBackground;
             nud.BorderStyle = BorderStyle.FixedSingle;
@@ -364,7 +364,7 @@ namespace pos.UI
 
         private static void StyleDateTimePicker(DateTimePicker dtp)
         {
-            dtp.Font = FontDefault;
+            SetFontIfNeeded(dtp, FontDefault);
             dtp.CalendarForeColor = TextPrimary;
             dtp.CalendarMonthBackground = Surface;
             dtp.CalendarTitleBackColor = Primary;
@@ -419,14 +419,14 @@ namespace pos.UI
         // ???????????????????????????????????????????????????????????
         private static void StyleCheckBox(CheckBox chk)
         {
-            chk.Font = FontDefault;
+            SetFontIfNeeded(chk, FontDefault);
             chk.ForeColor = TextPrimary;
             chk.FlatStyle = FlatStyle.Standard;
         }
 
         private static void StyleRadioButton(RadioButton rb)
         {
-            rb.Font = FontDefault;
+            SetFontIfNeeded(rb, FontDefault);
             rb.ForeColor = TextPrimary;
             rb.FlatStyle = FlatStyle.Standard;
         }
@@ -436,7 +436,7 @@ namespace pos.UI
         // ???????????????????????????????????????????????????????????
         private static void StyleGroupBox(GroupBox grp)
         {
-            grp.Font = FontGroupBox;
+            SetFontIfNeeded(grp, FontGroupBox);
             grp.ForeColor = PrimaryDark;
             grp.BackColor = Surface;
             grp.Padding = new Padding(4, 8, 4, 4);
@@ -447,17 +447,38 @@ namespace pos.UI
         // ???????????????????????????????????????????????????????????
         private static void StyleTabControl(TabControl tab, bool rtl)
         {
-            tab.Font = FontTab;
-            tab.DrawMode = TabDrawMode.OwnerDrawFixed;
-            tab.SizeMode = TabSizeMode.Fixed;
-            tab.ItemSize = new Size(140, 36);
-            tab.Padding = new Point(12, 6);
+            SetFontIfNeeded(tab, FontTab);
+            if (tab.DrawMode != TabDrawMode.OwnerDrawFixed)
+                tab.DrawMode = TabDrawMode.OwnerDrawFixed;
+            if (tab.SizeMode != TabSizeMode.Fixed)
+                tab.SizeMode = TabSizeMode.Fixed;
+            if (tab.ItemSize.Width != 140 || tab.ItemSize.Height != 36)
+                tab.ItemSize = new Size(140, 36);
+            if (tab.Padding.X != 12 || tab.Padding.Y != 6)
+                tab.Padding = new Point(12, 6);
 
             if (rtl)
-                tab.RightToLeftLayout = true;
+            {
+                if (!tab.RightToLeftLayout)
+                    tab.RightToLeftLayout = true;
+            }
+            else if (tab.RightToLeftLayout)
+            {
+                tab.RightToLeftLayout = false;
+            }
+
+            if (tab.Tag as string == "__APP_THEME_TAB_DRAW_HOOKED")
+                return;
 
             tab.DrawItem -= TabControl_DrawItem;
             tab.DrawItem += TabControl_DrawItem;
+            tab.Tag = "__APP_THEME_TAB_DRAW_HOOKED";
+        }
+
+        private static void SetFontIfNeeded(Control control, Font font)
+        {
+            if (!object.ReferenceEquals(control.Font, font))
+                control.Font = font;
         }
 
         private static void TabControl_DrawItem(object sender, DrawItemEventArgs e)

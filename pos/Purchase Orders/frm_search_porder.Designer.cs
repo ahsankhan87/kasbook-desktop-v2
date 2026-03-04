@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_search_porder));
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_search = new System.Windows.Forms.Button();
             this.btn_ok = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.grid_search_porder = new System.Windows.Forms.DataGridView();
@@ -42,7 +43,6 @@
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_search = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_porder)).BeginInit();
             this.SuspendLayout();
@@ -61,6 +61,14 @@
             resources.ApplyResources(this.txt_search, "txt_search");
             this.txt_search.Name = "txt_search";
             this.txt_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_search_KeyPress);
+            // 
+            // btn_search
+            // 
+            this.btn_search.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // btn_ok
             // 
@@ -109,6 +117,7 @@
             // 
             // invoice_no
             // 
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.invoice_no.DataPropertyName = "invoice_no";
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
@@ -116,6 +125,7 @@
             // 
             // supplier_name
             // 
+            this.supplier_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.supplier_name.DataPropertyName = "supplier_name";
             resources.ApplyResources(this.supplier_name, "supplier_name");
             this.supplier_name.Name = "supplier_name";
@@ -123,6 +133,7 @@
             // 
             // purchase_date
             // 
+            this.purchase_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.purchase_date.DataPropertyName = "purchase_date";
             resources.ApplyResources(this.purchase_date, "purchase_date");
             this.purchase_date.Name = "purchase_date";
@@ -156,14 +167,6 @@
             this.total_amount.Name = "total_amount";
             this.total_amount.ReadOnly = true;
             // 
-            // btn_search
-            // 
-            this.btn_search.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
             // frm_search_porder
             // 
             resources.ApplyResources(this, "$this");
@@ -189,6 +192,7 @@
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.DataGridView grid_search_porder;
+        private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier_name;
@@ -197,6 +201,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_tax;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_amount;
-        private System.Windows.Forms.Button btn_search;
     }
 }

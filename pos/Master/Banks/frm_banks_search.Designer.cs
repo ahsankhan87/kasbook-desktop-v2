@@ -32,7 +32,13 @@ namespace pos.Master.Banks
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_banks_search));
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_search_banks = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_ok = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.lbl_totalCount = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLAccountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,10 +46,6 @@ namespace pos.Master.Banks
             this.holderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bankBranch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date_created = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txt_search = new System.Windows.Forms.TextBox();
-            this.btn_ok = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_banks)).BeginInit();
             this.panel1.SuspendLayout();
@@ -64,6 +66,7 @@ namespace pos.Master.Banks
             this.grid_search_banks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_search_banks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.sno,
             this.GLAccountID,
             this.code,
             this.name,
@@ -78,12 +81,55 @@ namespace pos.Master.Banks
             this.grid_search_banks.DoubleClick += new System.EventHandler(this.grid_search_customers_DoubleClick);
             this.grid_search_banks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_search_customers_KeyDown);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbl_totalCount);
+            this.panel1.Controls.Add(this.txt_search);
+            this.panel1.Controls.Add(this.btn_ok);
+            this.panel1.Controls.Add(this.btn_cancel);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // txt_search
+            // 
+            resources.ApplyResources(this.txt_search, "txt_search");
+            this.txt_search.Name = "txt_search";
+            this.txt_search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyUp);
+            // 
+            // btn_ok
+            // 
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.Name = "btn_ok";
+            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // lbl_totalCount
+            // 
+            resources.ApplyResources(this.lbl_totalCount, "lbl_totalCount");
+            this.lbl_totalCount.Name = "lbl_totalCount";
+            // 
             // id
             // 
             this.id.DataPropertyName = "id";
             resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            // 
+            // sno
+            // 
+            this.sno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            resources.ApplyResources(this.sno, "sno");
+            this.sno.Name = "sno";
+            this.sno.ReadOnly = true;
             // 
             // GLAccountID
             // 
@@ -134,36 +180,6 @@ namespace pos.Master.Banks
             this.date_created.Name = "date_created";
             this.date_created.ReadOnly = true;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txt_search);
-            this.panel1.Controls.Add(this.btn_ok);
-            this.panel1.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // txt_search
-            // 
-            resources.ApplyResources(this.txt_search, "txt_search");
-            this.txt_search.Name = "txt_search";
-            this.txt_search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyUp);
-            // 
-            // btn_ok
-            // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_ok, "btn_ok");
-            this.btn_ok.Name = "btn_ok";
-            this.btn_ok.UseVisualStyleBackColor = true;
-            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
-            // 
-            // btn_cancel
-            // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
-            // 
             // frm_banks_search
             // 
             resources.ApplyResources(this, "$this");
@@ -191,7 +207,9 @@ namespace pos.Master.Banks
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.Label lbl_totalCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sno;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLAccountID;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;

@@ -37,6 +37,10 @@ namespace pos
         private const int DebounceMs = 250;
         private string _pendingSearchText = string.Empty;
         private Dictionary<string, DataTable> _searchCache = new Dictionary<string, DataTable>(StringComparer.OrdinalIgnoreCase);
+        private int _pageIndex = 0;
+        private const int _pageSize = 100;
+        private int _totalCount = 0;
+        private int _totalPages = 0;
 
         public frm_searchProducts(frm_sales mainForm, frm_assign_products assign_product_frm, frm_alt_products frm_alt_products,
             string product_code, string category_id, string brand_id, int rowIndex = 0, bool isGrid = false, bool source_product = false,
@@ -73,6 +77,7 @@ namespace pos
         private async void frm_searchProducts_Load(object sender, EventArgs e)
         {
             txt_search.Text = _product_code;
+            ConfigureGridLayout();
 
             using (BusyScope.Show(this, UiMessages.T("Loading products...", "جاري تحميل الأصناف...")))
             {
@@ -86,6 +91,17 @@ namespace pos
         {
             // Run DB query off UI thread so BusyForm can repaint/animate.
             return Task.Run(() => ProductBLL.SearchProductByBrandAndCategory(condition, _category_id, _brand_id));
+        }
+
+        private Task<Tuple<DataTable, int>> SearchProductsPagedAsync(string condition, int pageIndex, int pageSize)
+        {
+            return Task.Run(() =>
+            {
+                int total;
+                var bll = new ProductBLL();
+                var dt = bll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, "", pageIndex, pageSize, out total);
+                return Tuple.Create(dt, total);
+            });
         }
 
         private Task<DataTable> SearchProductsAsync(string condition, bool by_code, bool by_name)
@@ -104,11 +120,28 @@ namespace pos
 
             string condition = (txt_search.Text ?? string.Empty).Trim();
             if (condition == string.Empty)
+            {
+                _totalCount = 0;
+                _totalPages = 0;
                 return;
+            }
 
-            // Prefer the existing behavior used in load_Products_grid (brand/category)
-            var dt = await SearchProductsAsync(condition);
+            var result = await SearchProductsPagedAsync(condition, _pageIndex, _pageSize);
+            var dt = result.Item1;
+            _totalCount = result.Item2;
+            _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
+
+            if (_pageIndex >= _totalPages && _totalPages > 0)
+            {
+                _pageIndex = _totalPages - 1;
+                result = await SearchProductsPagedAsync(condition, _pageIndex, _pageSize);
+                dt = result.Item1;
+                _totalCount = result.Item2;
+                _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
+            }
+
             grid_search_products.DataSource = dt;
+            UpdateTotalProductsLabel();
         }
 
         // Keep old method for callers, but route to async.
@@ -220,18 +253,18 @@ namespace pos
             if (condition.Length == 0)
             {
                 grid_search_products.DataSource = null;
+                _totalCount = 0;
+                _totalPages = 0;
+                UpdateTotalProductsLabel();
                 return;
             }
 
-            bool by_code = rb_by_code.Checked;
-            bool by_name = rb_by_name.Checked;
-
-            // cache key includes mode
-            string cacheKey = string.Format("{0}|c:{1}|n:{2}|cat:{3}|brand:{4}", condition, by_code, by_name, _category_id, _brand_id);
+            string cacheKey = string.Format("{0}|p:{1}|ps:{2}|cat:{3}|brand:{4}", condition, _pageIndex, _pageSize, _category_id, _brand_id);
 
             if (_searchCache.TryGetValue(cacheKey, out var cached))
             {
                 grid_search_products.DataSource = cached;
+                UpdateTotalProductsLabel();
                 return;
             }
 
@@ -239,9 +272,13 @@ namespace pos
             {
                 try
                 {
-                    var dt = await SearchProductsAsync(condition, by_code, by_name);
+                    var result = await SearchProductsPagedAsync(condition, _pageIndex, _pageSize);
+                    var dt = result.Item1;
+                    _totalCount = result.Item2;
+                    _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
                     _searchCache[cacheKey] = dt;
                     grid_search_products.DataSource = dt;
+                    UpdateTotalProductsLabel();
                 }
                 catch (Exception ex)
                 {
@@ -255,6 +292,7 @@ namespace pos
             try
             {
                 _pendingSearchText = txt_search.Text;
+                _pageIndex = 0;
                 _debounceTimer.Stop();
                 _debounceTimer.Start();
             }
@@ -280,7 +318,8 @@ namespace pos
             if (grid_search_products.RowCount > 0)
             {
                 string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number);
+                string product_name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number,product_name);
 
                 frm_prod_move_obj.ShowDialog();
             }
@@ -300,6 +339,36 @@ namespace pos
             {
                 product_movement_check();
             }
+            else if (e.KeyCode == Keys.PageDown)
+            {
+                if (_pageIndex + 1 < _totalPages)
+                {
+                    _pageIndex++;
+                    load_Products_grid();
+                }
+            }
+            else if (e.KeyCode == Keys.PageUp)
+            {
+                if (_pageIndex > 0)
+                {
+                    _pageIndex--;
+                    load_Products_grid();
+                }
+            }
+        }
+
+        private void ConfigureGridLayout()
+        {
+            if (grid_search_products.Columns.Contains("name"))
+                grid_search_products.Columns["name"].FillWeight = 220;
+        }
+
+        private void UpdateTotalProductsLabel()
+        {
+            int count = (grid_search_products.DataSource as DataTable)?.Rows.Count ?? grid_search_products.Rows.Count;
+            lbl_totalCount.Text = UiMessages.T(
+                "Products " + count + "/" + _totalCount + " (Page " + (_pageIndex + 1) + "/" + Math.Max(1, _totalPages) + ")",
+                "الأصناف " + count + "/" + _totalCount + " (صفحة " + (_pageIndex + 1) + "/" + Math.Max(1, _totalPages) + ")");
         }
 
     }

@@ -156,6 +156,19 @@ namespace POS.BLL
             }
         }
 
+        public int ReplacePurchases(string oldInvoiceNo, List<PurchaseModalHeader> purchases, List<PurchasesModal> purchase_detail)
+        {
+            try
+            {
+                return objDLL.ReplacePurchases(oldInvoiceNo, purchases, purchase_detail);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
+
         public int InsertpurchasesItems(PurchasesModal obj)
         {
             try
@@ -226,6 +239,19 @@ namespace POS.BLL
             try
             {
                 return objDLL.DeletePurchases(invoice_no);
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
+
+        public int DeleteHoldPurchases(string invoice_no)
+        {
+            try
+            {
+                return objDLL.DeleteHoldPurchases(invoice_no);
             }
             catch
             {

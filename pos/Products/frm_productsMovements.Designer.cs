@@ -37,10 +37,13 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_close = new System.Windows.Forms.Button();
+            this.lbl_productName = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.balanceQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,8 +53,7 @@
             this.supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trans_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_close = new System.Windows.Forms.Button();
+            this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,26 +88,12 @@
             this.description,
             this.supplier,
             this.customer,
-            this.trans_date});
+            this.trans_date,
+            this.username});
             resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.ReadOnly = true;
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            resources.ApplyResources(this.id, "id");
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // invoice_no
-            // 
-            this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
-            this.invoice_no.DataPropertyName = "invoice_no";
-            resources.ApplyResources(this.invoice_no, "invoice_no");
-            this.invoice_no.Name = "invoice_no";
-            this.invoice_no.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -121,6 +109,44 @@
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbl_productName);
+            this.panel1.Controls.Add(this.txt_search);
+            this.panel1.Controls.Add(this.btn_close);
+            this.panel1.Controls.Add(this.btn_search);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // btn_close
+            // 
+            resources.ApplyResources(this.btn_close, "btn_close");
+            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_close.Name = "btn_close";
+            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            // 
+            // lbl_productName
+            // 
+            resources.ApplyResources(this.lbl_productName, "lbl_productName");
+            this.lbl_productName.Name = "lbl_productName";
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            resources.ApplyResources(this.id, "id");
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // invoice_no
+            // 
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
+            this.invoice_no.DataPropertyName = "invoice_no";
+            resources.ApplyResources(this.invoice_no, "invoice_no");
+            this.invoice_no.Name = "invoice_no";
+            this.invoice_no.ReadOnly = true;
+            // 
             // product_name
             // 
             this.product_name.DataPropertyName = "product_name";
@@ -130,6 +156,7 @@
             // 
             // qty
             // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.qty.DataPropertyName = "qty";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle1.Format = "N2";
@@ -141,6 +168,7 @@
             // 
             // balanceQty
             // 
+            this.balanceQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.balanceQty.DataPropertyName = "balanceQty";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
@@ -152,6 +180,7 @@
             // 
             // cost_price
             // 
+            this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.cost_price.DataPropertyName = "cost_price";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
@@ -163,6 +192,7 @@
             // 
             // unit_price
             // 
+            this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.unit_price.DataPropertyName = "unit_price";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle4.Format = "N2";
@@ -201,21 +231,13 @@
             this.trans_date.Name = "trans_date";
             this.trans_date.ReadOnly = true;
             // 
-            // panel1
+            // username
             // 
-            this.panel1.Controls.Add(this.txt_search);
-            this.panel1.Controls.Add(this.btn_close);
-            this.panel1.Controls.Add(this.btn_search);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // btn_close
-            // 
-            resources.ApplyResources(this.btn_close, "btn_close");
-            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_close.Name = "btn_close";
-            this.btn_close.UseVisualStyleBackColor = true;
-            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            this.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.username.DataPropertyName = "username";
+            resources.ApplyResources(this.username, "username");
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
             // 
             // frm_productsMovements
             // 
@@ -245,6 +267,7 @@
         private System.Windows.Forms.Button btn_close;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.Label lbl_productName;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
@@ -256,5 +279,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn trans_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn username;
     }
 }

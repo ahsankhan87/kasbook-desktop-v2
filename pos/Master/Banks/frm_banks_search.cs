@@ -38,6 +38,9 @@ namespace pos.Master.Banks
         private void frm_banks_search_Load(object sender, EventArgs e)
         {
             txt_search.Text = _search;
+            ConfigureGridLayout();
+            grid_search_banks.RowPostPaint -= grid_search_banks_RowPostPaint;
+            grid_search_banks.RowPostPaint += grid_search_banks_RowPostPaint;
             load_customers_grid();
             grid_search_banks.Focus();
         }
@@ -62,6 +65,7 @@ namespace pos.Master.Banks
 
                     String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_search_banks.DataSource = objBLL.SearchRecord(condition);
+                    UpdateTotalBanksLabel();
                 }
             }
             catch (Exception ex)
@@ -84,6 +88,7 @@ namespace pos.Master.Banks
 
                     String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_search_banks.DataSource = objBLL.SearchRecord(condition);
+                    UpdateTotalBanksLabel();
                 }
             }
             catch (Exception ex)
@@ -180,6 +185,37 @@ namespace pos.Master.Banks
             {
                 this.Close();
             }
+        }
+
+        private void ConfigureGridLayout()
+        {
+            if (!grid_search_banks.Columns.Contains("sno"))
+            {
+                var sno = new DataGridViewTextBoxColumn
+                {
+                    Name = "sno",
+                    HeaderText = "S/N",
+                    ReadOnly = true,
+                    SortMode = DataGridViewColumnSortMode.NotSortable,
+                    Width = 60
+                };
+                grid_search_banks.Columns.Insert(0, sno);
+            }
+
+            if (grid_search_banks.Columns.Contains("name"))
+                grid_search_banks.Columns["name"].FillWeight = 200;
+        }
+
+        private void grid_search_banks_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (grid_search_banks.Columns.Contains("sno"))
+                grid_search_banks.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
+        }
+
+        private void UpdateTotalBanksLabel()
+        {
+            int count = (grid_search_banks.DataSource as System.Data.DataTable)?.Rows.Count ?? grid_search_banks.Rows.Count;
+            lbl_totalCount.Text = UiMessages.T("Banks (Total: " + count + ")", "البنوك (الإجمالي: " + count + ")");
         }
     }
 }

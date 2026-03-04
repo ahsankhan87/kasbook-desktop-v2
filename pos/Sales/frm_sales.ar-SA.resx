@@ -311,10 +311,10 @@
 </value>
   </data>
   <data name="HistoryToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 24</value>
+    <value>99, 24</value>
   </data>
   <data name="HistoryToolStripButton.Text" xml:space="preserve">
-    <value>&amp;حركة (Ct+H)</value>
+    <value>&amp;حركة (F6)</value>
   </data>
   <data name="ICTToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -350,10 +350,10 @@
 </value>
   </data>
   <data name="LoadQuotationToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 24</value>
+    <value>104, 24</value>
   </data>
   <data name="LoadQuotationToolStripButton.Text" xml:space="preserve">
-    <value>اقتباس (Ct+L)</value>
+    <value>اقتباس (F7)</value>
   </data>
   <data name="PrinttoolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -578,7 +578,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txtCustomerSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 2</value>
+    <value>4, 3</value>
   </data>
   <data name="txtCustomerSearch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 2, 4, 2</value>
@@ -596,7 +596,7 @@
     <value>91, 28</value>
   </data>
   <data name="chk_sendInvoiceToZatca.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 119</value>
+    <value>62, 128</value>
   </data>
   <data name="chk_sendInvoiceToZatca.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 2, 4, 2</value>
@@ -611,7 +611,7 @@
     <value>إرسال الفاتورة إلى ZATCA</value>
   </data>
   <data name="txt_customer_vat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 28</value>
+    <value>4, 34</value>
   </data>
   <data name="txt_customer_vat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
@@ -620,7 +620,7 @@
     <value>213, 27</value>
   </data>
   <data name="txt_cust_credit_limit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 53</value>
+    <value>4, 63</value>
   </data>
   <data name="txt_cust_credit_limit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
@@ -632,7 +632,7 @@
     <value>Right</value>
   </data>
   <data name="lbl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 29</value>
+    <value>225, 37</value>
   </data>
   <data name="lbl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -647,7 +647,7 @@
     <value>Right</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 79</value>
+    <value>225, 96</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 20</value>
@@ -659,7 +659,7 @@
     <value>Right</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 3</value>
+    <value>225, 6</value>
   </data>
   <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -674,7 +674,7 @@
     <value>Right</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 54</value>
+    <value>225, 66</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -684,7 +684,7 @@
 </value>
   </data>
   <data name="txt_cust_balance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 77</value>
+    <value>4, 93</value>
   </data>
   <data name="txt_cust_balance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
@@ -726,7 +726,7 @@
     <value>Right</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 4</value>
+    <value>259, 4</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 20</value>
@@ -738,7 +738,7 @@
     <value>Right</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 33</value>
+    <value>259, 33</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
@@ -747,13 +747,13 @@
     <value>الصناع</value>
   </data>
   <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 58</value>
+    <value>82, 58</value>
   </data>
   <data name="txt_groups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 27</value>
+    <value>169, 27</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 90</value>
@@ -762,13 +762,13 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 27</value>
+    <value>70, 27</value>
   </data>
   <data name="label11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 62</value>
+    <value>259, 62</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
@@ -783,7 +783,7 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 27</value>
+    <value>70, 27</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 30</value>
@@ -792,13 +792,13 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 27</value>
+    <value>70, 27</value>
   </data>
   <data name="label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 93</value>
+    <value>259, 93</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
@@ -813,34 +813,31 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_barcode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 27</value>
+    <value>247, 27</value>
   </data>
   <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 30</value>
+    <value>82, 30</value>
   </data>
   <data name="txt_categories.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 27</value>
+    <value>169, 27</value>
   </data>
   <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 90</value>
+    <value>82, 90</value>
   </data>
   <data name="txt_brands.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 4, 1</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 27</value>
+    <value>169, 27</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>362, 120</value>
-  </data>
-  <data name="groupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
   </data>
   <data name="rd_btn_with_vat.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1056,7 +1053,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_amount_received.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 30</value>
+    <value>187, 30</value>
   </data>
   <data name="txt_change_amount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
@@ -1068,13 +1065,13 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_change_amount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 30</value>
+    <value>187, 30</value>
   </data>
   <data name="label24.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 10</value>
+    <value>197, 10</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 25</value>
@@ -1086,7 +1083,7 @@
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 53</value>
+    <value>197, 53</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 25</value>
@@ -1100,44 +1097,11 @@
   <data name="tableLayoutPanel7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="txt_total_disc_percent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 10</value>
-  </data>
-  <data name="txt_total_disc_percent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="txt_total_disc_percent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 27</value>
-  </data>
-  <data name="radioDiscPercent.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radioDiscPercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 13</value>
-  </data>
-  <data name="radioDiscPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="radioDiscPercent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 21</value>
-  </data>
-  <data name="radioDiscPercent.Text" xml:space="preserve">
-    <value>تخفيض ٪</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 54</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="txtTotalFlatDiscountValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 27</value>
-  </data>
   <data name="radioDiscValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioDiscValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 57</value>
+    <value>278, 57</value>
   </data>
   <data name="radioDiscValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1148,35 +1112,68 @@
   <data name="radioDiscValue.Text" xml:space="preserve">
     <value>قيمة الخصم</value>
   </data>
-  <data name="txt_total_qty.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 6.75pt, style=Bold</value>
+  <data name="txtTotalFlatDiscountValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 54</value>
   </data>
-  <data name="txt_total_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 58</value>
-  </data>
-  <data name="txt_total_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtTotalFlatDiscountValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
-  <data name="txt_total_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 20</value>
+  <data name="txtTotalFlatDiscountValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 27</value>
   </data>
   <data name="txt_sub_total_2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.75pt, style=Bold</value>
   </data>
   <data name="txt_sub_total_2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 14</value>
+    <value>3, 14</value>
   </data>
   <data name="txt_sub_total_2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_sub_total_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 20</value>
+    <value>83, 20</value>
+  </data>
+  <data name="txt_total_disc_percent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 10</value>
+  </data>
+  <data name="txt_total_disc_percent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="txt_total_disc_percent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 27</value>
+  </data>
+  <data name="txt_total_qty.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt, style=Bold</value>
+  </data>
+  <data name="txt_total_qty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 58</value>
+  </data>
+  <data name="txt_total_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="txt_total_qty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
+  </data>
+  <data name="radioDiscPercent.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radioDiscPercent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 13</value>
+  </data>
+  <data name="radioDiscPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="radioDiscPercent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 21</value>
+  </data>
+  <data name="radioDiscPercent.Text" xml:space="preserve">
+    <value>تخفيض ٪</value>
   </data>
   <data name="label22.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 15</value>
+    <value>93, 15</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 17</value>
@@ -1188,7 +1185,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 59</value>
+    <value>93, 59</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 17</value>

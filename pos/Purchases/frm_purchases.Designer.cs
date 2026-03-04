@@ -68,14 +68,16 @@
             this.rd_btn_with_vat = new System.Windows.Forms.RadioButton();
             this.rd_btn_without_vat = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.radioDiscValue = new System.Windows.Forms.RadioButton();
+            this.radioDiscPercent = new System.Windows.Forms.RadioButton();
             this.txt_total_qty = new System.Windows.Forms.TextBox();
+            this.txt_total_disc_percent = new System.Windows.Forms.TextBox();
             this.txt_shop_qty = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txt_shipping_cost = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.txt_total_disc_value = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txt_shipping_cost = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txt_sub_total = new System.Windows.Forms.TextBox();
             this.chkbox_is_taxable = new System.Windows.Forms.CheckBox();
@@ -145,6 +147,7 @@
             this.avg_cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount_percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sub_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -192,17 +195,20 @@
             // 
             // splitContainer1.Panel1
             // 
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             this.splitContainer1.Panel1.Controls.Add(this.grid_product_history);
             this.splitContainer1.Panel1.Controls.Add(this.label15);
             // 
             // splitContainer1.Panel2
             // 
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel5);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel4);
             // 
             // grid_product_history
             // 
+            resources.ApplyResources(this.grid_product_history, "grid_product_history");
             this.grid_product_history.AllowUserToAddRows = false;
             this.grid_product_history.AllowUserToDeleteRows = false;
             this.grid_product_history.AllowUserToOrderColumns = true;
@@ -219,7 +225,6 @@
             this.trans_date,
             this.item_code,
             this.history_item_number});
-            resources.ApplyResources(this.grid_product_history, "grid_product_history");
             this.grid_product_history.Name = "grid_product_history";
             this.grid_product_history.ReadOnly = true;
             this.grid_product_history.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -328,18 +333,18 @@
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.rd_btn_with_vat);
             this.groupBox2.Controls.Add(this.rd_btn_without_vat);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.rd_btn_bytotal_price);
             this.groupBox3.Controls.Add(this.rd_btn_by_unitprice);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -374,15 +379,31 @@
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.radioDiscValue, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.radioDiscPercent, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.txt_total_qty, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.txt_total_disc_percent, 1, 3);
             this.tableLayoutPanel5.Controls.Add(this.txt_shop_qty, 1, 1);
-            this.tableLayoutPanel5.Controls.Add(this.label22, 0, 3);
-            this.tableLayoutPanel5.Controls.Add(this.txt_shipping_cost, 1, 3);
-            this.tableLayoutPanel5.Controls.Add(this.label20, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.txt_total_disc_value, 1, 2);
             this.tableLayoutPanel5.Controls.Add(this.label19, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.label10, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label22, 0, 4);
+            this.tableLayoutPanel5.Controls.Add(this.txt_shipping_cost, 1, 4);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // radioDiscValue
+            // 
+            resources.ApplyResources(this.radioDiscValue, "radioDiscValue");
+            this.radioDiscValue.Checked = true;
+            this.radioDiscValue.Name = "radioDiscValue";
+            this.radioDiscValue.TabStop = true;
+            this.radioDiscValue.UseVisualStyleBackColor = true;
+            // 
+            // radioDiscPercent
+            // 
+            resources.ApplyResources(this.radioDiscPercent, "radioDiscPercent");
+            this.radioDiscPercent.Name = "radioDiscPercent";
+            this.radioDiscPercent.UseVisualStyleBackColor = true;
             // 
             // txt_total_qty
             // 
@@ -390,27 +411,17 @@
             this.txt_total_qty.Name = "txt_total_qty";
             this.txt_total_qty.ReadOnly = true;
             // 
+            // txt_total_disc_percent
+            // 
+            resources.ApplyResources(this.txt_total_disc_percent, "txt_total_disc_percent");
+            this.txt_total_disc_percent.Name = "txt_total_disc_percent";
+            this.txt_total_disc_percent.TextChanged += new System.EventHandler(this.txt_total_disc_value_TextChanged);
+            // 
             // txt_shop_qty
             // 
             resources.ApplyResources(this.txt_shop_qty, "txt_shop_qty");
             this.txt_shop_qty.Name = "txt_shop_qty";
             this.txt_shop_qty.ReadOnly = true;
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
-            // 
-            // txt_shipping_cost
-            // 
-            resources.ApplyResources(this.txt_shipping_cost, "txt_shipping_cost");
-            this.txt_shipping_cost.Name = "txt_shipping_cost";
-            this.txt_shipping_cost.TextChanged += new System.EventHandler(this.txt_shipping_cost_TextChanged);
-            // 
-            // label20
-            // 
-            resources.ApplyResources(this.label20, "label20");
-            this.label20.Name = "label20";
             // 
             // txt_total_disc_value
             // 
@@ -427,6 +438,17 @@
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // txt_shipping_cost
+            // 
+            resources.ApplyResources(this.txt_shipping_cost, "txt_shipping_cost");
+            this.txt_shipping_cost.Name = "txt_shipping_cost";
+            this.txt_shipping_cost.TextChanged += new System.EventHandler(this.txt_shipping_cost_TextChanged);
             // 
             // tableLayoutPanel4
             // 
@@ -502,8 +524,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -564,9 +586,9 @@
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.txt_description);
             this.groupBox5.Controls.Add(this.label17);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
@@ -588,8 +610,8 @@
             // 
             // PurchaseToolStrip
             // 
-            this.PurchaseToolStrip.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.PurchaseToolStrip, "PurchaseToolStrip");
+            this.PurchaseToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.PurchaseToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.PurchaseToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewToolStripButton,
@@ -602,41 +624,41 @@
             // 
             // NewToolStripButton
             // 
+            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
-            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.Name = "NewToolStripButton";
             this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
             // 
             // SaveToolStripButton
             // 
+            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
-            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.Name = "SaveToolStripButton";
             this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
             // 
             // SearchToolStripButton
             // 
+            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.Name = "SearchToolStripButton";
             this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
             // 
             // HistoryToolStripButton
             // 
+            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
-            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.Name = "HistoryToolStripButton";
             this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
             // 
             // LoadPOToolStripButton
             // 
+            resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
             this.LoadPOToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.LoadPOToolStripButton.Image = global::pos.Properties.Resources.Estimate;
-            resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
             this.LoadPOToolStripButton.Name = "LoadPOToolStripButton";
             this.LoadPOToolStripButton.Click += new System.EventHandler(this.LoadPOToolStripButton_Click);
             // 
@@ -649,8 +671,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.tableLayoutPanel1);
             resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.tableLayoutPanel1);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -673,7 +695,7 @@
             // 
             resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
             this.txt_invoice_no.Name = "txt_invoice_no";
-            this.txt_invoice_no.ReadOnly = true;
+            this.txt_invoice_no.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_invoice_no_KeyDown);
             // 
             // cmb_payment_method
             // 
@@ -732,8 +754,8 @@
             // 
             // groupBox_products
             // 
-            this.groupBox_products.Controls.Add(this.tableLayoutPanel2);
             resources.ApplyResources(this.groupBox_products, "groupBox_products");
+            this.groupBox_products.Controls.Add(this.tableLayoutPanel2);
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
             // 
@@ -821,34 +843,35 @@
             // 
             // contextMenuStrip_purchases
             // 
+            resources.ApplyResources(this.contextMenuStrip_purchases, "contextMenuStrip_purchases");
             this.contextMenuStrip_purchases.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip_purchases.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNewRowToolStripMenuItem,
             this.productMovementF4ToolStripMenuItem,
             this.productDetailToolStripMenuItem});
             this.contextMenuStrip_purchases.Name = "contextMenuStrip_purchases";
-            resources.ApplyResources(this.contextMenuStrip_purchases, "contextMenuStrip_purchases");
             // 
             // addNewRowToolStripMenuItem
             // 
-            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             resources.ApplyResources(this.addNewRowToolStripMenuItem, "addNewRowToolStripMenuItem");
+            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             this.addNewRowToolStripMenuItem.Click += new System.EventHandler(this.addNewRowToolStripMenuItem_Click);
             // 
             // productMovementF4ToolStripMenuItem
             // 
-            this.productMovementF4ToolStripMenuItem.Name = "productMovementF4ToolStripMenuItem";
             resources.ApplyResources(this.productMovementF4ToolStripMenuItem, "productMovementF4ToolStripMenuItem");
+            this.productMovementF4ToolStripMenuItem.Name = "productMovementF4ToolStripMenuItem";
             this.productMovementF4ToolStripMenuItem.Click += new System.EventHandler(this.productMovementF4ToolStripMenuItem_Click);
             // 
             // productDetailToolStripMenuItem
             // 
-            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             resources.ApplyResources(this.productDetailToolStripMenuItem, "productDetailToolStripMenuItem");
+            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             this.productDetailToolStripMenuItem.Click += new System.EventHandler(this.productDetailToolStripMenuItem_Click);
             // 
             // grid_purchases
             // 
+            resources.ApplyResources(this.grid_purchases, "grid_purchases");
             this.grid_purchases.AllowUserToAddRows = false;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             this.grid_purchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
@@ -873,6 +896,7 @@
             this.avg_cost,
             this.unit_price,
             this.discount,
+            this.discount_percent,
             this.tax,
             this.sub_total,
             this.location_code,
@@ -892,7 +916,6 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid_purchases.DefaultCellStyle = dataGridViewCellStyle17;
-            resources.ApplyResources(this.grid_purchases, "grid_purchases");
             this.grid_purchases.EnableHeadersVisualStyles = false;
             this.grid_purchases.Name = "grid_purchases";
             this.grid_purchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -976,7 +999,7 @@
             // 
             // discount
             // 
-            this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle11.Format = "N2";
@@ -984,6 +1007,12 @@
             this.discount.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.discount, "discount");
             this.discount.Name = "discount";
+            // 
+            // discount_percent
+            // 
+            this.discount_percent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            resources.ApplyResources(this.discount_percent, "discount_percent");
+            this.discount_percent.Name = "discount_percent";
             // 
             // tax
             // 
@@ -1000,7 +1029,7 @@
             // 
             // sub_total
             // 
-            this.sub_total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sub_total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle13.Format = "N2";
@@ -1074,8 +1103,8 @@
             // 
             // panel_grid
             // 
-            this.panel_grid.Controls.Add(this.grid_purchases);
             resources.ApplyResources(this.panel_grid, "panel_grid");
+            this.panel_grid.Controls.Add(this.grid_purchases);
             this.panel_grid.Name = "panel_grid";
             // 
             // panel_footer
@@ -1205,7 +1234,6 @@
         private System.Windows.Forms.TextBox txt_shop_qty;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txt_total_disc_value;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ToolStripMenuItem productDetailToolStripMenuItem;
         private System.Windows.Forms.TextBox txt_shipping_cost;
         private System.Windows.Forms.Label label22;
@@ -1219,24 +1247,6 @@
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ToolStripButton PrinttoolStripButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sno;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn avg_cost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sub_total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn location_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn category;
-        private System.Windows.Forms.DataGridViewButtonColumn btn_delete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tax_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn shop_qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmb_payment_method;
         private System.Windows.Forms.TextBox txtSupplierSearch;
@@ -1257,5 +1267,27 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.RadioButton radioDiscPercent;
+        private System.Windows.Forms.RadioButton radioDiscValue;
+        private System.Windows.Forms.TextBox txt_total_disc_percent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn avg_cost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discount_percent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sub_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn location_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_delete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tax_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shop_qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
     }
 }

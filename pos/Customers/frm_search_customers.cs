@@ -47,6 +47,10 @@ namespace pos
             _searchDebounce.Interval = 300;
             _searchDebounce.Tick += SearchDebounce_Tick;
 
+            ConfigureGridLayout();
+            grid_search_customers.RowPostPaint -= grid_search_customers_RowPostPaint;
+            grid_search_customers.RowPostPaint += grid_search_customers_RowPostPaint;
+
             load_customers_grid();
             grid_search_customers.Focus();
         }
@@ -63,6 +67,7 @@ namespace pos
 
                     var keyword = objBLL.NormalizeCustomerCodeInput(txt_search.Text.Trim());
                     grid_search_customers.DataSource = objBLL.SearchRecord(keyword);
+                    UpdateCustomersCountCaption();
                 }
             }
             catch (Exception ex)
@@ -85,6 +90,7 @@ namespace pos
 
                     var keyword = objBLL.NormalizeCustomerCodeInput(txt_search.Text.Trim());
                     grid_search_customers.DataSource = objBLL.SearchRecord(keyword);
+                    UpdateCustomersCountCaption();
                 }
             }
             catch (Exception ex)
@@ -148,6 +154,40 @@ namespace pos
             {
                 grid_search_customers.Focus();
             }
+        }
+
+        private void ConfigureGridLayout()
+        {
+            if (!grid_search_customers.Columns.Contains("sno"))
+            {
+                var sno = new DataGridViewTextBoxColumn
+                {
+                    Name = "sno",
+                    HeaderText = "S/N",
+                    ReadOnly = true,
+                    SortMode = DataGridViewColumnSortMode.NotSortable,
+                    Width = 60
+                };
+                grid_search_customers.Columns.Insert(0, sno);
+            }
+
+            if (grid_search_customers.Columns.Contains("first_name"))
+                grid_search_customers.Columns["first_name"].FillWeight = 200;
+
+            if (grid_search_customers.Columns.Contains("registrationName"))
+                grid_search_customers.Columns["registrationName"].FillWeight = 200;
+        }
+
+        private void grid_search_customers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (grid_search_customers.Columns.Contains("sno"))
+                grid_search_customers.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
+        }
+
+        private void UpdateCustomersCountCaption()
+        {
+            int count = (grid_search_customers.DataSource as DataTable)?.Rows.Count ?? grid_search_customers.Rows.Count;
+            lbl_totalCustomers.Text = UiMessages.T("Customers (Total: " + count + ")", "العملاء (الإجمالي: " + count + ")");
         }
 
     }

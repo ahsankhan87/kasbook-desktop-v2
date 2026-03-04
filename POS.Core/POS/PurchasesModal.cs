@@ -122,6 +122,7 @@ namespace POS.Core
 
         public decimal packet_qty { get; set; }
 
+        public decimal line_discount_percent { get; set; }
 
     }
 }

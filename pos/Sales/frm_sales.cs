@@ -21,14 +21,14 @@ namespace pos
     public partial class frm_sales : Form
     {
         private static readonly ComponentResourceManager SalesResources = new ComponentResourceManager(typeof(frm_sales));
-        private static readonly Font SalesGridFont = AppTheme.FontGrid;
-        private static readonly Font SalesGridHeaderFont = AppTheme.FontGridHeader;
-        private static readonly Font TaxableCheckFont = AppTheme.FontSemiBold;
-        private static readonly Font TotalPrimaryFont = AppTheme.FontHeader;
-        private static readonly Font TotalSecondaryFont = AppTheme.FontSubHeader;
-        private static readonly Font SecondaryFieldFont = AppTheme.FontSemiBold;
-        private static readonly Font FooterPrimaryLabelFont = AppTheme.FontSemiBold;
-        private static readonly Font FooterSecondaryLabelFont = AppTheme.FontLabel;
+        private static readonly Font SalesGridFont = new Font(AppTheme.FontGrid.FontFamily, AppTheme.FontGrid.Size + 1f, AppTheme.FontGrid.Style);
+        private static readonly Font SalesGridHeaderFont = new Font(AppTheme.FontGridHeader.FontFamily, AppTheme.FontGridHeader.Size + 1f, AppTheme.FontGridHeader.Style);
+        private static readonly Font TaxableCheckFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
+        private static readonly Font TotalPrimaryFont = new Font(AppTheme.FontHeader.FontFamily, AppTheme.FontHeader.Size + 2f, AppTheme.FontHeader.Style);
+        private static readonly Font TotalSecondaryFont = new Font(AppTheme.FontSubHeader.FontFamily, AppTheme.FontSubHeader.Size + 1f, AppTheme.FontSubHeader.Style);
+        private static readonly Font SecondaryFieldFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
+        private static readonly Font FooterPrimaryLabelFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
+        private static readonly Font FooterSecondaryLabelFont = new Font(AppTheme.FontLabel.FontFamily, AppTheme.FontLabel.Size + 1f, AppTheme.FontLabel.Style);
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
         public int cash_account_id = 0;
         public int sales_account_id = 0;
@@ -1089,7 +1089,7 @@ namespace pos
                 {
                     SaveToolStripButton.PerformClick();
                 }
-                if (e.Control && e.KeyCode == Keys.H)
+                if (e.Control && e.KeyCode == Keys.H || e.KeyCode == Keys.F6)
                 {
                     HistoryToolStripButton.PerformClick();
                 }
@@ -1101,10 +1101,7 @@ namespace pos
                 {
                     AmountFixToolStripButton.PerformClick();
                 }
-                if (e.KeyCode == Keys.F6)
-                {
-                    //chk_print_invoice.Checked = !chk_print_invoice.Checked;
-                }
+                
                 if (e.KeyCode == Keys.F9)
                 {
                     grid_sales.Focus();
@@ -1124,7 +1121,7 @@ namespace pos
                 {
                     SearchToolStripButton.PerformClick();
                 }
-                if (e.Control && e.KeyCode == Keys.L)
+                if (e.Control && e.KeyCode == Keys.L || e.KeyCode == Keys.F7)
                 {
                     frm_search_estimates obj_estimate = new frm_search_estimates(this);
                     obj_estimate.ShowDialog();
@@ -1298,19 +1295,16 @@ namespace pos
             txt_company_qty.Text = "";
             txtPONumber.Text = "";
             txt_user_commission_balance.Text = "";
+            product_pic.Image = null;
 
             cmb_employees.SelectedValue = 0;
             cmb_sale_type.SelectedValue = "Cash";
+            cmb_invoice_subtype_code.SelectedValue = "02";
             cmb_customers.SelectedValue = 0;
             //cmb_categories.SelectedValue = 0;
 
             this.ActiveControl = grid_sales;
             grid_sales.CurrentCell = grid_sales.Rows[0].Cells["code"];
-        }
-
-        private void btn_new_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void txt_customer_id_KeyPress(object sender, KeyPressEventArgs e)
@@ -1753,8 +1747,10 @@ namespace pos
         {
             try
             {
+                // Load invoice details to form when user enter invoice number and press enter key
                 if (txt_invoice_no.Text != "" && e.KeyCode == Keys.Enter)
                 {
+                    e.Handled = true;
                     string invoice_no = txt_invoice_no.Text;
                     string invoice_chr = invoice_no.Substring(0, 1);
                     SalesBLL salesObj = new SalesBLL();
@@ -2930,6 +2926,7 @@ namespace pos
                             double tax_rate = 0;
                             string estimate_invoice_no = "";
                             bool estimate_status = false;
+                            bool isEstimateEdit = false;
                             Int32 sale_id = 0;
 
                             SalesBLL salesObj = new SalesBLL();
@@ -2990,6 +2987,25 @@ namespace pos
                                 //    return;
                                 //}
                                 //invoice_no = txt_invoice_no.Text;
+                            }
+                            else if (invoice_status == "Estimate"
+                                && !string.IsNullOrWhiteSpace(txt_invoice_no.Text)
+                                && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "E"
+                                && sale_type == "Quotation")
+                            {
+                                EstimatesBLL estimatesBLL = new EstimatesBLL();
+                                int qresult = estimatesBLL.DeleteEstimates(txt_invoice_no.Text);
+                                if (qresult <= 0)
+                                {
+                                    UiMessages.ShowError("Estimate has issue while updating, please try again",
+                                        "حدثت مشكلة أثناء تحديث عرض السعر، يرجى المحاولة مرة أخرى",
+                                        "Update",
+                                        "تعديل");
+                                    return;
+                                }
+
+                                invoice_no = txt_invoice_no.Text;
+                                isEstimateEdit = true;
                             }
                             else
                             {
@@ -3107,8 +3123,8 @@ namespace pos
                                 if (sale_id > 0)
                                 {
                                     UiMessages.ShowInfo(
-                                        "Estimate No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully",
-                                        "تقدير رقم: " + invoice_no + " " + sale_type + " تمت " + (invoice_status == "Update" ? "تحديث" : "إنشاء") + " بنجاح",
+                                        "Estimate No: " + invoice_no + " " + sale_type + " transaction " + ((invoice_status == "Update" || isEstimateEdit) ? "updated" : "created") + " successfully",
+                                        "تقدير رقم: " + invoice_no + " " + sale_type + " تمت " + ((invoice_status == "Update" || isEstimateEdit) ? "تحديث" : "إنشاء") + " بنجاح",
                                         captionEn: "Success",
                                         captionAr: "نجاح"
                                     );

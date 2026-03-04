@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 using pos.UI;
+using pos.UI.Busy;
 
 namespace pos
 {
@@ -58,7 +59,8 @@ namespace pos
         
         public void frm_product_full_detail_Load(object sender, EventArgs e)
         {
-            AppTheme.Apply(this);
+            if (!_loadMovementHistory)
+                AppTheme.Apply(this);
             StyleProductForm();
 
             txt_part_number.Focus();
@@ -84,12 +86,13 @@ namespace pos
             // Fix broken if statement in frm_product_full_detail_Load
             if (_item_number != "")
             {
-                load_product_detail(_item_number);
+                load_product_detail(_item_number, !_loadMovementHistory);
             }
             //when this is true it will focus on history tab
             if (_loadMovementHistory)
             {
                 Products_tab.SelectedTab = tabPage3; // Switch to history tab
+                BeginInvoke((Action)(() => LoadMovementHistoryIfNeeded()));
                 
             }
             ApplyGregorianCalendarForDatePickersIfArabic();
@@ -103,6 +106,7 @@ namespace pos
             if (txt_pur_dmnd_qty != null) txt_pur_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
             if (txt_sale_dmnd_qty != null) txt_sale_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
             if (txt_restock_level != null) txt_restock_level.KeyPress += NumericTextBox_KeyPress;
+            if (txt_part_number != null) txt_part_number.Leave += txt_part_number_Leave;
         }
 
         private void StyleProductForm()
@@ -192,7 +196,7 @@ namespace pos
                 col.DefaultCellStyle.Font = null;
         }
 
-        public void load_product_detail(string item_number)
+        public void load_product_detail(string item_number, bool loadMovement = true)
         {
             DataTable dt = objBLL.GetAllByProductByItemNumber(item_number);
             foreach (DataRow myProductView in dt.Rows)
@@ -266,12 +270,28 @@ namespace pos
                     }
                 }
 
-                Load_product_movements_with_balance_qty(item_number);
+                if (loadMovement)
+                {
+                    using (BusyScope.Show(this, UiMessages.T("Loading movements...", "جاري تحميل الحركات...")))
+                    {
+                        Load_product_movements_with_balance_qty(item_number);
+                    }
+                }
                 //load_product_location_qty(item_number);
             }
             lbl_product_name.Visible = true;
             lbl_product_name.Text = txt_code.Text+' '+txt_name.Text;
             btn_other_stock.Enabled = true;
+        }
+
+        private void LoadMovementHistoryIfNeeded()
+        {
+            if (!_loadMovementHistory || string.IsNullOrWhiteSpace(_item_number)) return;
+
+            using (BusyScope.Show(this, UiMessages.T("Loading movement history...", "جاري تحميل سجل الحركات...")))
+            {
+                Load_product_movements_with_balance_qty(_item_number);
+            }
         }
         
         private void fetch_brands_by_code(string brand_code)
@@ -358,6 +378,9 @@ namespace pos
                     return;
                 }
 
+                HandleDuplicatePartNumberValidation();
+                   
+
                 if (string.IsNullOrWhiteSpace(txt_code.Text) || string.IsNullOrWhiteSpace(txt_name.Text) || string.IsNullOrWhiteSpace(txt_part_number.Text))
                 {
                     UiMessages.ShowInfo(
@@ -368,6 +391,9 @@ namespace pos
                     );
                     return;
                 }
+
+                HandleDuplicatePartNumberValidation();
+                    
 
                 var confirm = UiMessages.ConfirmYesNo(
                     "Save this product?",
@@ -755,6 +781,55 @@ namespace pos
             clear_all();
             txt_part_number.Focus();
         }
+
+        private bool HandleDuplicatePartNumberValidation()
+        {
+            string partNumber = (txt_part_number.Text ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(partNumber))
+                return false;
+
+            int currentId;
+            int? excludeId = int.TryParse(txt_id.Text, out currentId) ? (int?)currentId : null;
+            bool exists = objBLL.CheckDuplicatePartNumber(partNumber, excludeId);
+            if (!exists)
+                return false;
+
+            ShowDuplicatePartNumberAndOpenSearch(partNumber);
+            return true;
+        }
+
+        private void ShowDuplicatePartNumberAndOpenSearch(string partNumber)
+        {
+            if (string.IsNullOrWhiteSpace(partNumber))
+                partNumber = (txt_part_number.Text ?? string.Empty).Trim();
+
+            UiMessages.ShowWarning(
+                "Part number already exists: " + partNumber,
+                "رقم القطعة موجود بالفعل: " + partNumber,
+                "Duplicate part number",
+                "رقم قطعة مكرر");
+
+            using (frm_searchProducts search_product_obj = new frm_searchProducts(null, null, null, partNumber, "", "", 0, false, false, null, this))
+            {
+                search_product_obj.ShowDialog();
+            }
+        }
+
+        private void txt_part_number_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txt_id.Text))
+                return;
+
+            string partNumber = (txt_part_number.Text ?? string.Empty).Trim();
+            if (string.IsNullOrWhiteSpace(partNumber))
+                return;
+
+            if (HandleDuplicatePartNumberValidation())
+            {
+                //txt_part_number.Focus();
+            }
+        }
+
         private void clear_all()
         {
             txt_barcode.Text = "";
@@ -808,8 +883,8 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_movements.AutoGenerateColumns = false;
 
-                String keyword = "TOP 1000 I.id,I.item_code,I.item_number,I.qty,I.unit_price,I.cost_price,I.loc_code,I.invoice_no,I.description,trans_date,C.first_name AS customer, S.first_name AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_customers C ON C.id=I.customer_id LEFT JOIN pos_suppliers S ON S.id=I.supplier_id"+
+                String keyword = "TOP 1000 I.id,I.item_code,I.item_number,I.qty,I.unit_price,I.cost_price,I.loc_code,I.invoice_no,I.description,trans_date,C.first_name AS customer, S.first_name AS supplier, U.username AS username";
+                String table = "pos_inventory I LEFT JOIN pos_customers C ON C.id=I.customer_id LEFT JOIN pos_suppliers S ON S.id=I.supplier_id LEFT JOIN pos_users U ON U.id=I.user_id"+
                 " WHERE I.item_number = '" + item_number + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " ORDER BY I.id DESC";
                 //grid_movements.DataSource = objBLL.GetRecord(keyword, table);
 
@@ -830,9 +905,10 @@ namespace pos
                         string supplier = myProductView["supplier"].ToString();
                         string customer = myProductView["customer"].ToString();
                         string date = myProductView["trans_date"].ToString();
+                        string username = myProductView["username"].ToString();
 
-                        string[] row0 = { id.ToString(), invoice_no, qty,cost_price.ToString(), unit_price.ToString(),
-                                          loc_code,description, supplier, customer,date};
+                        string[] row0 = { id.ToString(), invoice_no, qty, "", cost_price.ToString(), unit_price.ToString(),
+                                          loc_code,description, supplier, customer,date, username};
 
                         grid_movements.Rows.Add(row0);
 
@@ -869,55 +945,64 @@ namespace pos
             try
             {
                 grid_movements.Rows.Clear();
-
-                GeneralBLL objBLL = new GeneralBLL();
                 grid_movements.AutoGenerateColumns = false;
 
-                string keyword = "I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.loc_code,I.unit_price," +
-                    "I.cost_price,I.invoice_no,I.description,trans_date,C.first_name AS customer," +
-                    "CONCAT(S.first_name,' ',S.last_name) AS supplier";
-                string table = "pos_inventory I " +
-                               "LEFT JOIN pos_products P ON P.item_number = I.item_number " +
-                               "LEFT JOIN pos_customers C ON C.id = I.customer_id " +
-                               "LEFT JOIN pos_suppliers S ON S.id = I.supplier_id " +
-                               "WHERE I.item_number = '" + item_number + "' AND I.branch_id = " + UsersModal.logged_in_branch_id + " " +
-                               "ORDER BY I.id ASC";
+                DataTable product_dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(POS.DLL.dbConnection.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    cmd.CommandText = @"SELECT
+                                            I.id,
+                                            I.item_code,
+                                            I.item_number,
+                                            I.qty,
+                                            I.loc_code,
+                                            I.unit_price,
+                                            I.cost_price,
+                                            I.invoice_no,
+                                            I.description,
+                                            I.trans_date,
+                                            C.first_name AS customer,
+                                            CONCAT(S.first_name,' ',S.last_name) AS supplier,
+                                            COALESCE(U.name,U.username,  '') AS username,
+                                            SUM(I.qty) OVER (ORDER BY I.id ASC ROWS UNBOUNDED PRECEDING) AS balance_qty
+                                        FROM pos_inventory I
+                                        LEFT JOIN pos_customers C ON C.id = I.customer_id
+                                        LEFT JOIN pos_suppliers S ON S.id = I.supplier_id
+                                        LEFT JOIN pos_users U ON U.id = I.user_id
+                                        WHERE I.item_number = @item_number
+                                          AND I.branch_id = @branch_id
+                                        ORDER BY I.id DESC";
+                    cmd.Parameters.AddWithValue("@item_number", item_number);
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 
-                DataTable product_dt = objBLL.GetRecord(keyword, table);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(product_dt);
+                    }
+                }
 
                 if (product_dt.Rows.Count > 0)
                 {
-                    // ✅ Add balance_qty column manually to avoid error
-                    if (!product_dt.Columns.Contains("balance_qty"))
-                        product_dt.Columns.Add("balance_qty", typeof(double));
-
-                    // Calculate running balance
-                    double balance_qty = 0;
-                    foreach (DataRow row in product_dt.Rows)
-                    {
-                        balance_qty += Convert.ToDouble(row["qty"]);
-                        row["balance_qty"] = balance_qty;
-                    }
-
-                    // Display in DESC order
                     int RowIndex = 0;
-                    foreach (DataRow row in product_dt.Select("", "id DESC"))
+                    foreach (DataRow row in product_dt.Rows)
                     {
                         int id = Convert.ToInt32(row["id"]);
                         string invoice_no = row["invoice_no"].ToString();
-                        //string name = row["product_name"].ToString();
-                        string qty = row["qty"].ToString();
-                        string balance = row["balance_qty"].ToString();
-                        double cost_price = Convert.ToDouble(row["cost_price"]);
-                        double unit_price = Convert.ToDouble(row["unit_price"]);
+                        string qty = Convert.ToDecimal(row["qty"]).ToString("N2");
+                        string balance = Convert.ToDecimal(row["balance_qty"]).ToString("N2");
+                        string cost_price = Convert.ToDecimal(row["cost_price"]).ToString("N2");
+                        string unit_price = Convert.ToDecimal(row["unit_price"]).ToString("N2");
                         string location = row["loc_code"].ToString();
                         string description = row["description"].ToString();
                         string supplier = row["supplier"].ToString();
                         string customer = row["customer"].ToString();
                         string date = row["trans_date"].ToString();
+                        string username = row["username"].ToString();
 
                         string[] row0 = { id.ToString(), invoice_no, qty, balance, cost_price.ToString(), unit_price.ToString(),
-                                  location,description, supplier, customer, date };
+                                  location,description, supplier, customer, date, username };
 
                         grid_movements.Rows.Add(row0);
 
