@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -18,6 +19,27 @@ namespace pos
     public partial class frm_main : Form
     {
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
+
+        private readonly System.Windows.Forms.Timer _inactivityTimer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer _subscriptionMonitorTimer = new System.Windows.Forms.Timer();
+        private TimeSpan _autoLogoutThreshold = TimeSpan.FromMinutes(15);
+        private readonly TimeSpan _subscriptionRefreshInterval = TimeSpan.FromMinutes(30);
+        private bool _isSessionLockInProgress;
+        private bool _isSubscriptionExpiryHandlingInProgress;
+        private string _currentLoginUsername = string.Empty;
+        private string _cachedSystemId = string.Empty;
+        private DateTime _cachedSubscriptionExpiry = DateTime.MinValue;
+        private DateTime _lastSubscriptionRefreshUtc = DateTime.MinValue;
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct LASTINPUTINFO
+        {
+            public uint cbSize;
+            public uint dwTime;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
 
         // Dashboard panel
         private Panel dashboardPanel;
@@ -62,6 +84,219 @@ namespace pos
 
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+
+            _currentLoginUsername = ResolveCurrentLoginUsername();
+            _cachedSystemId = new HardwareIdentifier().GetUniqueHardwareId();
+            RefreshSubscriptionSnapshot(force: true);
+
+            InitializeInactivityLockLogout();
+            InitializeRuntimeSubscriptionMonitor();
+        }
+
+        private void InitializeInactivityLockLogout()
+        {
+            int timeoutMinutes = new SettingsBLL().GetAutoLogoutMinutes(15);
+            if (timeoutMinutes <= 0)
+                timeoutMinutes = 15;
+
+            _autoLogoutThreshold = TimeSpan.FromMinutes(timeoutMinutes);
+            _inactivityTimer.Interval = 1000;
+            _inactivityTimer.Tick -= InactivityTimer_Tick;
+            _inactivityTimer.Tick += InactivityTimer_Tick;
+            _inactivityTimer.Start();
+        }
+
+        private void InitializeRuntimeSubscriptionMonitor()
+        {
+            _subscriptionMonitorTimer.Interval = 60 * 1000; // every 1 minute (in-memory checks)
+            _subscriptionMonitorTimer.Tick -= SubscriptionMonitorTimer_Tick;
+            _subscriptionMonitorTimer.Tick += SubscriptionMonitorTimer_Tick;
+            _subscriptionMonitorTimer.Start();
+        }
+
+        private void InactivityTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isSessionLockInProgress || !this.Visible)
+                return;
+
+            if (GetSystemIdleTime() < _autoLogoutThreshold)
+                return;
+
+            _isSessionLockInProgress = true;
+            _inactivityTimer.Stop();
+
+            DialogResult lockResult;
+            using (var lockForm = new frm_session_lock(UsersModal.logged_in_username, _currentLoginUsername, UsersModal.logged_in_userid))
+            {
+                lockResult = lockForm.ShowDialog(this);
+            }
+
+            if (lockResult == DialogResult.OK)
+            {
+                _isSessionLockInProgress = false;
+                _inactivityTimer.Start();
+                return;
+            }
+
+            LogoutCurrentUser("Auto Logout", "Session timeout due to inactivity");
+        }
+
+        private void SubscriptionMonitorTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isSessionLockInProgress || _isSubscriptionExpiryHandlingInProgress || !this.Visible)
+                return;
+
+            EnsureRuntimeSubscriptionStillValid();
+        }
+
+        private bool EnsureRuntimeSubscriptionStillValid()
+        {
+            if (!IsSubscriptionValidNow())
+            {
+                HandleRuntimeSubscriptionExpiry();
+                return false;
+            }
+
+            if (_cachedSubscriptionExpiry != DateTime.MinValue && DateTime.Now > _cachedSubscriptionExpiry)
+            {
+                HandleRuntimeSubscriptionExpiry();
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsSubscriptionValidNow()
+        {
+            bool needsRefresh = _cachedSubscriptionExpiry == DateTime.MinValue
+                                || (DateTime.UtcNow - _lastSubscriptionRefreshUtc) >= _subscriptionRefreshInterval;
+
+            if (needsRefresh)
+                return RefreshSubscriptionSnapshot(force: false);
+
+            if (_cachedSubscriptionExpiry == DateTime.MinValue)
+                return false;
+
+            if (DateTime.Now <= _cachedSubscriptionExpiry)
+                return true;
+
+            return RefreshSubscriptionSnapshot(force: true);
+        }
+
+        private bool RefreshSubscriptionSnapshot(bool force)
+        {
+            if (!force && (DateTime.UtcNow - _lastSubscriptionRefreshUtc) < _subscriptionRefreshInterval)
+                return _cachedSubscriptionExpiry != DateTime.MinValue && DateTime.Now <= _cachedSubscriptionExpiry;
+
+            DateTime expiryDate = DateTime.MinValue;
+
+            try
+            {
+                var companyBll = new CompaniesBLL();
+                DataTable companyDt = companyBll.GetCompany();
+                if (companyDt == null || companyDt.Rows.Count == 0)
+                    return true;
+
+                DataRow dr = companyDt.Rows[0];
+
+                int companyId = Convert.ToInt32(dr["id"]);
+                int locked = Convert.ToInt32(dr["locked"]);
+                string subscriptionKey = Convert.ToString(dr["subscriptionKey"]);
+
+                if (locked > 0 || string.IsNullOrWhiteSpace(subscriptionKey))
+                {
+                    _cachedSubscriptionExpiry = DateTime.MinValue;
+                    _lastSubscriptionRefreshUtc = DateTime.UtcNow;
+                    return false;
+                }
+
+                var subscription = new Subscription();
+                if (string.IsNullOrWhiteSpace(_cachedSystemId))
+                    _cachedSystemId = new HardwareIdentifier().GetUniqueHardwareId();
+
+                bool isValid = subscription.VerifySubscriptionKey(companyId, subscriptionKey, out expiryDate, _cachedSystemId);
+                _lastSubscriptionRefreshUtc = DateTime.UtcNow;
+                _cachedSubscriptionExpiry = isValid ? expiryDate : DateTime.MinValue;
+                return isValid;
+            }
+            catch
+            {
+                // Do not force-close on transient check errors.
+                return true;
+            }
+        }
+
+        private void HandleRuntimeSubscriptionExpiry()
+        {
+            if (_isSubscriptionExpiryHandlingInProgress)
+                return;
+
+            _isSubscriptionExpiryHandlingInProgress = true;
+            _subscriptionMonitorTimer.Stop();
+            _inactivityTimer.Stop();
+
+            UiMessages.ShowWarning(
+                "Software subscription has expired. Please renew to continue.",
+                "انتهت صلاحية اشتراك البرنامج. يرجى التجديد للمتابعة.",
+                "Software Expiration",
+                "انتهاء الاشتراك");
+
+            LogoutCurrentUser("Auto Logout", "Subscription expired while application was running");
+        }
+
+        private static TimeSpan GetSystemIdleTime()
+        {
+            var info = new LASTINPUTINFO();
+            info.cbSize = (uint)Marshal.SizeOf(info);
+
+            if (!GetLastInputInfo(ref info))
+                return TimeSpan.Zero;
+
+            uint tickCount = (uint)Environment.TickCount;
+            uint idleMilliseconds = tickCount - info.dwTime;
+            return TimeSpan.FromMilliseconds(idleMilliseconds);
+        }
+
+        private void LogoutCurrentUser(string actionName, string actionDescription)
+        {
+            _inactivityTimer.Stop();
+            _subscriptionMonitorTimer.Stop();
+
+            this.Hide();
+
+            try
+            {
+                POS.DLL.Log.LogAction(actionName,
+                    $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}, Detail: {actionDescription}",
+                    UsersModal.logged_in_userid,
+                    UsersModal.logged_in_branch_id);
+            }
+            catch
+            {
+            }
+
+            Login login_obj = new Login();
+            login_obj.Show();
+        }
+
+        private string ResolveCurrentLoginUsername()
+        {
+            try
+            {
+                var bll = new UsersBLL();
+                DataTable dt = bll.GetUser(UsersModal.logged_in_userid);
+                if (dt != null && dt.Rows.Count > 0 && dt.Columns.Contains("username"))
+                {
+                    string username = Convert.ToString(dt.Rows[0]["username"]);
+                    if (!string.IsNullOrWhiteSpace(username))
+                        return username.Trim();
+                }
+            }
+            catch
+            {
+            }
+
+            return UsersModal.logged_in_username;
         }
 
         private void StyleMainForm()
@@ -706,6 +941,9 @@ namespace pos
 
         private void frm_main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_isSessionLockInProgress || _isSubscriptionExpiryHandlingInProgress)
+                return;
+
             // Only prompt on user-initiated close
             if (e.CloseReason != CloseReason.UserClosing)
                 return;
@@ -784,13 +1022,18 @@ namespace pos
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            _inactivityTimer.Stop();
+            _subscriptionMonitorTimer.Stop();
+            LogoutCurrentUser("User Logout", "Manual logout");
+        }
 
-            //App logging 
-            POS.DLL.Log.LogAction("User Logout", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
-
-            Login login_obj = new Login();
-            login_obj.Show();
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            _inactivityTimer.Stop();
+            _subscriptionMonitorTimer.Stop();
+            _inactivityTimer.Dispose();
+            _subscriptionMonitorTimer.Dispose();
+            base.OnFormClosed(e);
         }
 
         Form branch_obj;

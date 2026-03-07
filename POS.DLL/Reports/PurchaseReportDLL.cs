@@ -40,7 +40,7 @@ namespace POS.DLL
                             //" LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
                             //" LEFT JOIN pos_products P ON P.code=SI.item_code" +
                             " LEFT JOIN pos_suppliers C ON C.id=S.supplier_id" +
-                            " WHERE S.branch_id=@branch_id";
+                            " WHERE S.branch_id=@branch_id AND S.account <>'Return'";
 
                         
                         if (from_date != "" && to_date != "")

@@ -1510,6 +1510,8 @@ namespace pos.Reports.Sales {
             
             private global::System.Data.DataColumn columncustomer_cr_number;
             
+            private global::System.Data.DataColumn columncustomer_contact_no;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public sales_receipt_dtDataTable() {
@@ -1825,6 +1827,14 @@ namespace pos.Reports.Sales {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn customer_contact_noColumn {
+                get {
+                    return this.columncustomer_contact_no;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1895,7 +1905,8 @@ namespace pos.Reports.Sales {
                         string invoice_subtype, 
                         string invoice_subtype_code, 
                         string cost_price, 
-                        string customer_cr_number) {
+                        string customer_cr_number, 
+                        string customer_contact_no) {
                 sales_receipt_dtRow rowsales_receipt_dtRow = ((sales_receipt_dtRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoice_no,
@@ -1932,7 +1943,8 @@ namespace pos.Reports.Sales {
                         invoice_subtype,
                         invoice_subtype_code,
                         cost_price,
-                        customer_cr_number};
+                        customer_cr_number,
+                        customer_contact_no};
                 rowsales_receipt_dtRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsales_receipt_dtRow);
                 return rowsales_receipt_dtRow;
@@ -1990,6 +2002,7 @@ namespace pos.Reports.Sales {
                 this.columninvoice_subtype_code = base.Columns["invoice_subtype_code"];
                 this.columncost_price = base.Columns["cost_price"];
                 this.columncustomer_cr_number = base.Columns["customer_cr_number"];
+                this.columncustomer_contact_no = base.Columns["customer_contact_no"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2065,6 +2078,8 @@ namespace pos.Reports.Sales {
                 base.Columns.Add(this.columncost_price);
                 this.columncustomer_cr_number = new global::System.Data.DataColumn("customer_cr_number", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncustomer_cr_number);
+                this.columncustomer_contact_no = new global::System.Data.DataColumn("customer_contact_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncustomer_contact_no);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3948,6 +3963,23 @@ namespace pos.Reports.Sales {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public string customer_contact_no {
+                get {
+                    try {
+                        return ((string)(this[this.tablesales_receipt_dt.customer_contact_noColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'customer_contact_no\' in table \'sales_receipt_dt\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_receipt_dt.customer_contact_noColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public bool Isinvoice_noNull() {
                 return this.IsNull(this.tablesales_receipt_dt.invoice_noColumn);
             }
@@ -4364,6 +4396,18 @@ namespace pos.Reports.Sales {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public void Setcustomer_cr_numberNull() {
                 this[this.tablesales_receipt_dt.customer_cr_numberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public bool Iscustomer_contact_noNull() {
+                return this.IsNull(this.tablesales_receipt_dt.customer_contact_noColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void Setcustomer_contact_noNull() {
+                this[this.tablesales_receipt_dt.customer_contact_noColumn] = global::System.Convert.DBNull;
             }
         }
         

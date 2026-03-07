@@ -6,6 +6,7 @@ namespace POS.BLL
     public sealed class SettingsBLL
     {
         private const string SmallSaleThresholdKey = "SmallSaleThreshold";
+        private const string AutoLogoutMinutesKey = "AutoLogoutMinutes";
 
         public double GetSmallSaleThreshold(double defaultValue = 200.0)
         {
@@ -43,6 +44,28 @@ namespace POS.BLL
             else
             {
                 generalBLL.InsertRecord("pos_settings", "setting_key,setting_value", "'" + SmallSaleThresholdKey + "','" + v + "'");
+            }
+        }
+
+        public int GetAutoLogoutMinutes(int defaultValue = 15)
+        {
+            try
+            {
+                var generalBLL = new GeneralBLL();
+                DataTable dt = generalBLL.GetRecord("TOP 1 setting_value", "pos_settings WHERE setting_key='" + AutoLogoutMinutesKey + "'");
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int value;
+                    if (int.TryParse(Convert.ToString(dt.Rows[0]["setting_value"]), out value) && value > 0)
+                        return value;
+                }
+
+                return defaultValue;
+            }
+            catch
+            {
+                return defaultValue;
             }
         }
     }

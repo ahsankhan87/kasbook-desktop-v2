@@ -153,6 +153,13 @@ namespace POS.BLL
             return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "SR", branchId, invoiceDate);
         }
 
+        // SALES RETURN (skip ZATCA series)
+        public string GenerateZatcaSkipSalesReturnInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
+        {
+            SalesDLL salesDLL = new SalesDLL();
+            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "ZSR", branchId, invoiceDate);
+        }
+
         // SALES RETURN
         public string GenerateZatcaSkipSalesInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
         {

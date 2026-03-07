@@ -421,6 +421,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_session_lock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_session_lock.Designer.cs">
+      <DependentUpon>frm_session_lock.cs</DependentUpon>
+    </Compile>
     <Compile Include="HardwareIdentifier.cs" />
     <Compile Include="Master\Banks\frm_banks.cs">
       <SubType>Form</SubType>
@@ -1665,6 +1671,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDbBackup.resx">
       <DependentUpon>FrmDbBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_session_lock.resx">
+      <DependentUpon>frm_session_lock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

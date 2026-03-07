@@ -177,7 +177,7 @@ namespace pos
             }
 
             bool canTransmit = _auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Transmit);
-            //chk_sendInvoiceToZatca.Checked = _auth.HasPermission(_currentUser, AppPermissions.Sales_Zatca_Send);
+            chk_sendInvoiceToZatca.Checked = _auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Send);
 
             if (!canTransmit)
             {
@@ -433,9 +433,12 @@ namespace pos
                 {
                     string returnReasonCode = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Key;
                     string returnReason = ((KeyValuePair<string, string>)cmbReturnReason.SelectedItem).Value;
+                    bool skipZatcaForReturn = prev_invoice_no.StartsWith("ZS", StringComparison.OrdinalIgnoreCase);
 
                     DateTime prev_invoice_date = Convert.ToDateTime(sales_dt.Rows[0]["sale_date"].ToString()).Date;
-                    string new_invoice_no = GetMAXInvoiceNo();
+                    string new_invoice_no = skipZatcaForReturn
+                        ? objSalesBLL.GenerateZatcaSkipSalesReturnInvoiceNo()
+                        : GetMAXInvoiceNo();
                     string invoice_subtype_code = sales_dt.Rows[0]["invoice_subtype_code"].ToString();
 
                     if (string.IsNullOrEmpty(new_invoice_no))
@@ -595,35 +598,46 @@ namespace pos
                                 if (PCSID_dataRow == null)
                                 {
                                     ZatcaHelper.SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
-                                    // After signing with CSID, send invoice to ZATCA
-                                    // If invoice subtype is Standard then clear it from ZATCA
-                                    if (invoice_subtype_code == "01" && chk_sendInvoiceToZatca.Checked == true)
+
+                                    // Skip ZATCA transmission for return if original invoice was a return (ZS prefix), otherwise proceed based on subtype and checkbox
+                                    if (!skipZatcaForReturn)
                                     {
-                                        // Clear invoice from ZATCA
-                                        ZatcaHelper.ZatcaInvoiceClearanceAsync(new_invoice_no);
-                                    }
-                                    else if (invoice_subtype_code == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                    //otherwise Report invoice to ZATCA
-                                    {
-                                        // Report invoice to ZATCA
-                                        ZatcaHelper.ZatcaInvoiceReportingAsync(new_invoice_no);
+                                        // After signing with CSID, send invoice to ZATCA
+                                        // If invoice subtype is Standard then clear it from ZATCA
+                                        if (invoice_subtype_code == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                        {
+                                            // Clear invoice from ZATCA
+                                            ZatcaHelper.ZatcaInvoiceClearanceAsync(new_invoice_no);
+                                        }
+                                        else if (invoice_subtype_code == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                        //otherwise Report invoice to ZATCA
+                                        {
+                                            // Report invoice to ZATCA
+                                            ZatcaHelper.ZatcaInvoiceReportingAsync(new_invoice_no);
+                                        }
                                     }
                                 }
                                 else
                                 {
                                     ZatcaHelper.PCSID_SignCreditNoteToZatcaAsync(new_invoice_no, prev_invoice_no, prev_invoice_date);
-                                    // After signing with PCSID, send invoice to ZATCA
-                                    // If invoice subtype is Standard then clear it from ZATCA
-                                    if (invoice_subtype_code == "01" && chk_sendInvoiceToZatca.Checked == true)
+
+
+                                    // Skip ZATCA transmission for return if original invoice was a return (ZS prefix), otherwise proceed based on subtype and checkbox
+                                    if (!skipZatcaForReturn)
                                     {
-                                        // Clear invoice from ZATCA
-                                        ZatcaHelper.ZatcaInvoiceClearanceAsync(new_invoice_no);
-                                    }
-                                    else if (invoice_subtype_code == "02" && chk_sendInvoiceToZatca.Checked == true)
-                                    //otherwise Report invoice to ZATCA
-                                    {
-                                        // Report invoice to ZATCA
-                                        ZatcaHelper.ZatcaInvoiceReportingAsync(new_invoice_no);
+                                        // After signing with PCSID, send invoice to ZATCA
+                                        // If invoice subtype is Standard then clear it from ZATCA
+                                        if (invoice_subtype_code == "01" && chk_sendInvoiceToZatca.Checked == true)
+                                        {
+                                            // Clear invoice from ZATCA
+                                            ZatcaHelper.ZatcaInvoiceClearanceAsync(new_invoice_no);
+                                        }
+                                        else if (invoice_subtype_code == "02" && chk_sendInvoiceToZatca.Checked == true)
+                                        //otherwise Report invoice to ZATCA
+                                        {
+                                            // Report invoice to ZATCA
+                                            ZatcaHelper.ZatcaInvoiceReportingAsync(new_invoice_no);
+                                        }
                                     }
                                 }
                             }
@@ -652,27 +666,6 @@ namespace pos
                 MarkFullyReturnedRows();
                 UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
             }
-        }
-
-        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
-            string description, int customer_id, int supplier_id, int entry_id)
-        {
-            int journal_id = 0;
-            JournalsModal JournalsModal_obj = new JournalsModal();
-            JournalsBLL JournalsObj = new JournalsBLL();
-
-            JournalsModal_obj.invoice_no = invoice_no;
-            JournalsModal_obj.entry_date = date;
-            JournalsModal_obj.debit = debit;
-            JournalsModal_obj.credit = credit;
-            JournalsModal_obj.account_id = account_id;
-            JournalsModal_obj.description = description;
-            JournalsModal_obj.customer_id = customer_id;
-            JournalsModal_obj.supplier_id = supplier_id;
-            JournalsModal_obj.entry_id = entry_id;
-
-            journal_id = JournalsObj.Insert(JournalsModal_obj);
-            return journal_id;
         }
 
         private int Insert_emp_commission(string invoice_no, int account_id, double debit, double credit, DateTime date,
