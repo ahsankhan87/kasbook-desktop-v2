@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_search_customers));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_totalCustomers = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_ok = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_search_customers = new System.Windows.Forms.DataGridView();
-            this.lbl_totalCustomers = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,12 +53,17 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.lbl_totalCustomers);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_ok);
             this.panel1.Controls.Add(this.btn_cancel);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // lbl_totalCustomers
+            // 
+            resources.ApplyResources(this.lbl_totalCustomers, "lbl_totalCustomers");
+            this.lbl_totalCustomers.Name = "lbl_totalCustomers";
             // 
             // txt_search
             // 
@@ -68,28 +73,29 @@
             // 
             // btn_ok
             // 
-            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_ok, "btn_ok");
+            this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
             // btn_cancel
             // 
-            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_cancel, "btn_cancel");
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_search_customers);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_search_customers);
             this.panel2.Name = "panel2";
             // 
             // grid_search_customers
             // 
+            resources.ApplyResources(this.grid_search_customers, "grid_search_customers");
             this.grid_search_customers.AllowUserToAddRows = false;
             this.grid_search_customers.AllowUserToDeleteRows = false;
             this.grid_search_customers.AllowUserToOrderColumns = true;
@@ -106,17 +112,11 @@
             this.vat_no,
             this.contact_no,
             this.address});
-            resources.ApplyResources(this.grid_search_customers, "grid_search_customers");
             this.grid_search_customers.Name = "grid_search_customers";
             this.grid_search_customers.ReadOnly = true;
             this.grid_search_customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_search_customers.DoubleClick += new System.EventHandler(this.grid_search_customers_DoubleClick);
             this.grid_search_customers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_search_customers_KeyDown);
-            // 
-            // lbl_totalCustomers
-            // 
-            resources.ApplyResources(this.lbl_totalCustomers, "lbl_totalCustomers");
-            this.lbl_totalCustomers.Name = "lbl_totalCustomers";
             // 
             // id
             // 

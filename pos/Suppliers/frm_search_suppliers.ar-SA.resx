@@ -117,12 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lbl_totalCount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_totalCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>907, 45</value>
+  </data>
+  <data name="txt_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>198, 19</value>
+    <value>426, 19</value>
   </data>
   <data name="btn_ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 11</value>
+    <value>138, 11</value>
   </data>
   <data name="btn_ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 39</value>
@@ -131,13 +141,16 @@
     <value>نعم (Enter)</value>
   </data>
   <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 11</value>
+    <value>31, 11</value>
   </data>
   <data name="btn_cancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 39</value>
   </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء (Esc)</value>
+  </data>
+  <data name="supplier_code.HeaderText" xml:space="preserve">
+    <value>رمز</value>
   </data>
   <data name="first_name.HeaderText" xml:space="preserve">
     <value>اسم</value>
@@ -154,7 +167,6 @@
   <data name="address.HeaderText" xml:space="preserve">
     <value>عنوان</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
