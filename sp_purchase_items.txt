@@ -1,0 +1,208 @@
+USE [pos_db]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Purchase_items]    Script Date: 01/04/2026 10:32:03 pm ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Ahsan Khan>
+-- Create date: <24-12-2021>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_Purchase_items]
+	-- Add the parameters for the stored procedure here
+    @id int = '',  
+	@branch_id int = '',
+	@user_id int = '',
+    @invoice_no nvarchar(100) = '',  
+    @purchase_id int = '',  
+	@item_id int = 0, 
+	@item_code nvarchar(200) = '', 
+	@item_number nvarchar(200) = '', 
+	@tax_id int = '',
+	@tax_rate decimal(18,6) = 0,   
+	@quantity decimal(18,6) = 0,   
+	@cost_price decimal(18,6) = 0,
+	@unit_price decimal(18,6) = 0,
+	@discount_value decimal(18,6) = 0,
+	@discount_percent decimal(18,6) = 0,
+    @customer_id int = '',  
+    @supplier_id int = '',  
+	@purchase_date date = '', 
+	@total_product_qty decimal(10,2) = 0,
+	@item_type nvarchar(50) = '',
+	
+	@PO_status bit = 0,
+	@PO_invoice_no nvarchar(100) = '',
+	
+	@old_invoice_no nvarchar(50) = '',  
+	@returnReason nvarchar(200) = '', 
+
+	@location_code nvarchar(50) = '',
+	@packet_qty decimal(18,6) = 0,
+	
+	@purchase_type varchar(50) = '',
+	@serialNo int = 0,
+
+    @OperationType int 
+	--================================================  
+    
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	IF @OperationType=1  --purchase
+    BEGIN 
+		INSERT INTO pos_purchases_items(branch_id,purchase_id,invoice_no,item_code,quantity,cost_price,unit_price,discount_value,discount_percent,tax_id,tax_rate,loc_code,packet_qty,description,serialnumber,item_number) 
+		VALUES (@branch_id,@purchase_id,@invoice_no,@item_code,@quantity,@cost_price, @unit_price,@discount_value,@discount_percent,@tax_id,@tax_rate,@location_code,@packet_qty,@purchase_type,@serialNo,@item_number)  
+    
+		-- GET AVG COST AND SAVE IN TABLE
+		declare @old_qty decimal(18,6) = COALESCE((SELECT TOP 1 ISNULL(qty,0) AS qty FROM pos_product_stocks WHERE item_number = @item_number AND branch_id=@branch_id),0);
+		declare @old_avg_cost decimal(18,6) = (SELECT ISNULL(avg_cost,0) AS avg_cost FROM pos_products WHERE item_number = @item_number);
+		
+		declare @new_avg_cost decimal(18,6);
+		declare @total_qty decimal(18,6);
+		
+			IF @old_avg_cost != 0
+			BEGIN
+				declare @total_old_cost decimal(18,6) = @old_qty*@old_avg_cost;
+				declare @total_new_cost decimal(18,6) = @quantity*@cost_price;
+				declare @total_cost decimal(18,6) = 0;
+			
+				IF (@purchase_type = 'Return')
+				BEGIN
+					
+					SET @total_cost = (@total_old_cost - @total_new_cost);
+					SET @total_qty = (@old_qty-@quantity);
+
+					IF (@total_qty <= 0)
+					BEGIN
+						SET @total_qty = 0;
+						SET @new_avg_cost = 0;
+					END
+					ELSE
+					BEGIN
+						SET @new_avg_cost = (@total_cost/@total_qty); -- CALCULATE AVG COST
+					END
+				END
+				ELSE
+				BEGIN
+					SET @total_cost = @total_old_cost + @total_new_cost;
+					SET @total_qty = @old_qty+@quantity;
+
+					IF (@total_qty <= 0)
+					BEGIN
+						SET @total_qty = 0;
+						SET @new_avg_cost = 0;
+					END
+					ELSE
+					BEGIN
+						SET @new_avg_cost = @total_cost/@total_qty; -- CALCULATE AVG COST
+					END
+				END
+			END
+			ELSE
+			BEGIN
+				IF (@purchase_type = 'Return')
+				BEGIN
+					set @new_avg_cost = 0;
+					set @total_qty = CASE WHEN (@old_qty-@quantity) < 0 THEN 0 ELSE (@old_qty-@quantity) END;
+				END
+				ELSE
+				BEGIN
+					set @new_avg_cost = @cost_price;
+					set @total_qty = @old_qty + @quantity;
+				END
+			END
+			-----------------
+
+		
+		--BEGIN
+			UPDATE pos_products SET location_code=@location_code, avg_cost=@new_avg_cost, unit_price=@unit_price WHERE item_number=@item_number
+			
+			--insert products qty of branches if not exist in table
+			declare @total_qty_1 decimal(18,6) = CASE WHEN @purchase_type = 'Return' THEN (@old_qty-@quantity) ELSE (@old_qty+@quantity) END;
+			IF (@total_qty_1 < 0) SET @total_qty_1 = 0;
+			
+			declare @status int;
+			EXEC sp_ProductsStocks 1,@branch_id,@user_id,@item_code,@total_qty_1,@status OUTPUT,@item_id,@item_number;
+			--
+			if @status IS NULL OR @status = 0
+			BEGIN
+				--if qty exist in product stock table then update qty
+				UPDATE pos_product_stocks SET qty=@total_qty_1 WHERE item_number=@item_number AND branch_id=@branch_id
+				--
+			END
+
+		--END
+		
+		--insert Location if not exist in location table
+		INSERT INTO pos_locations (branch_id,user_id,code,name,date_created) SELECT @branch_id,@user_id,@location_code,@location_code,GETDATE() WHERE NOT EXISTS ( SELECT code FROM pos_locations WHERE code = @location_code) 
+		--
+		
+		INSERT INTO pos_inventory VALUES (@item_code, @quantity,@cost_price,@unit_price,@branch_id,@user_id,'Purchase',@invoice_no, @purchase_date,GETDATE(),@customer_id,@supplier_id,@total_product_qty,@purchase_date,@location_code,@packet_qty,@item_number)	
+		
+		IF @PO_status != 0
+		BEGIN
+		UPDATE pos_purchases_order_items SET status= @PO_status, trans_invoice_no=@invoice_no WHERE invoice_no=@PO_invoice_no AND item_number = @item_number;
+		END
+	END 
+	
+	ELSE IF @OperationType=2  --Return Purchases
+    BEGIN  
+        INSERT INTO pos_purchases_items(branch_id,purchase_id,invoice_no,item_code,quantity,cost_price,unit_price,discount_value,tax_id,tax_rate,loc_code,packet_qty,item_number) 
+		VALUES (@branch_id,@purchase_id,@invoice_no,@item_code,-@quantity,-@cost_price, -@unit_price,-@discount_value,@tax_id,@tax_rate,@location_code,+@packet_qty,@item_number)  
+		
+		-- GET AVG COST AND SAVE IN TABLE
+		declare @old_qty_rt decimal(18,6) = COALESCE((SELECT TOP 1 ISNULL(qty,0) AS qty FROM pos_product_stocks WHERE item_number = @item_number AND branch_id=@branch_id),0);
+		declare @old_avg_cost_rt decimal(18,6) = (SELECT ISNULL(avg_cost,0) AS avg_cost FROM pos_products WHERE item_number = @item_number);
+		
+		declare @new_avg_cost_rt decimal(18,6);
+		declare @total_qty_rt decimal(18,6);
+		
+		IF @old_avg_cost_rt != 0
+		BEGIN
+			declare @total_old_cost_rt decimal(18,6) = @old_qty_rt*@old_avg_cost_rt;
+			declare @total_new_cost_rt decimal(18,6) = @quantity*@cost_price;
+			declare @total_cost_rt decimal(18,6) = 0;
+			
+			
+			SET @total_cost_rt = (@total_old_cost_rt - @total_new_cost_rt);
+			SET @total_qty_rt = (@old_qty_rt-@quantity);
+				-- IF TOTAL QTY IS ZERO THEN ASSIGN 1 TO AVOID DIVIDE BY ZERO ERROR
+				IF (@total_qty_rt <= 0)
+			BEGIN
+				SET @total_qty_rt = 0;
+				SET @new_avg_cost_rt = 0;
+			END
+			ELSE
+			BEGIN
+				SET @new_avg_cost_rt = (@total_cost_rt/@total_qty_rt); -- CALCULATE AVG COST
+			END
+			
+			
+		END
+		ELSE
+		BEGIN
+			set @new_avg_cost_rt = 0;
+			set @total_qty_rt = CASE WHEN (@old_qty_rt-@quantity) < 0 THEN 0 ELSE (@old_qty_rt-@quantity) END;
+		END
+		-----------------
+		IF @item_type != 'Service'
+		--BEGIN
+			UPDATE pos_products SET avg_cost=@new_avg_cost_rt WHERE item_number=@item_number
+			UPDATE pos_product_stocks SET qty= (CASE WHEN (@old_qty_rt-@quantity) < 0 THEN 0 ELSE (@old_qty_rt-@quantity) END) WHERE item_number=@item_number AND branch_id=@branch_id
+		
+		--END
+		
+		INSERT INTO pos_purchasesReturn (PurchaseId,OriginalInvoiceNo,ItemNumber,ProductCode,QtyReturned,Amount,ReturnReason,User_id,Created_at,Branch_id)
+		VALUES (@purchase_id,@old_invoice_no,@item_number,@item_code,@quantity,(@quantity*@cost_price),@returnReason,@user_id,GETDATE(),@branch_id)
+
+		INSERT INTO pos_inventory VALUES (@item_code,-@quantity,-@cost_price,-@unit_price,@branch_id,@user_id,'Purchase Return',@invoice_no, @purchase_date,GETDATE(),@customer_id,@supplier_id,@total_product_qty,@purchase_date,@location_code,-@packet_qty,@item_number)	
+	
+	END  
+END
+

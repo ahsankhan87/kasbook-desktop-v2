@@ -278,6 +278,19 @@ namespace pos
                     txt_customer_code.Focus();
                     return;
                 }
+
+                if (customerBLL.IsCustomerDuplicate(txt_first_name.Text.Trim(), txt_vatno.Text.Trim(), txt_registrationName.Text.Trim()))
+                {
+                    UiMessages.ShowWarning(
+                        "A customer with the same first name, VAT no, and registration name already exists.",
+                        "يوجد عميل بنفس الاسم الأول ورقم الضريبة واسم التسجيل.",
+                        "Validation",
+                        "تحقق"
+                    );
+                    txt_first_name.Focus();
+                    return;
+                }
+
                 var confirm = UiMessages.ConfirmYesNo(
                     "Save this customer?",
                     "هل تريد حفظ هذا العميل؟",
@@ -455,6 +468,18 @@ namespace pos
                         "تحقق"
                     );
                     txt_customer_code.Focus();
+                    return;
+                }
+
+                if (customerBLL.IsCustomerDuplicate(txt_first_name.Text.Trim(), txt_vatno.Text.Trim(), txt_registrationName.Text.Trim(), int.Parse(txt_id.Text)))
+                {
+                    UiMessages.ShowWarning(
+                        "A customer with the same first name, VAT no, and registration name already exists.",
+                        "يوجد عميل بنفس الاسم الأول ورقم الضريبة واسم التسجيل.",
+                        "Validation",
+                        "تحقق"
+                    );
+                    txt_first_name.Focus();
                     return;
                 }
 

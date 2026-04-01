@@ -126,13 +126,13 @@
     <value>NoControl</value>
   </data>
   <data name="Btn_PrintPOS80.Location" type="System.Drawing.Point, System.Drawing">
-    <value>437, 3</value>
+    <value>471, 3</value>
   </data>
   <data name="Btn_PrintPOS80.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="Btn_PrintPOS80.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 44</value>
+    <value>157, 44</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Btn_PrintPOS80.TabIndex" type="System.Int32, mscorlib">
@@ -160,10 +160,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnSendWhatsApp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 3</value>
+    <value>301, 3</value>
   </data>
   <data name="btnSendWhatsApp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 44</value>
+    <value>163, 44</value>
   </data>
   <data name="btnSendWhatsApp.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -187,7 +187,7 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>594, 14</value>
+    <value>652, 14</value>
   </data>
   <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -214,7 +214,7 @@
     <value>Top, Right</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>909, 11</value>
+    <value>967, 11</value>
   </data>
   <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -241,13 +241,13 @@
     <value>3</value>
   </data>
   <data name="btn_print_invoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 3</value>
+    <value>152, 3</value>
   </data>
   <data name="btn_print_invoice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="btn_print_invoice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 44</value>
+    <value>142, 44</value>
   </data>
   <data name="btn_print_invoice.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -415,7 +415,7 @@
     <value>51</value>
   </data>
   <data name="grid_all_estimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>988, 474</value>
+    <value>1046, 474</value>
   </data>
   <data name="grid_all_estimates.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -442,7 +442,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 524</value>
+    <value>1053, 524</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -502,7 +502,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 63</value>
+    <value>1053, 63</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -529,7 +529,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>995, 587</value>
+    <value>1053, 587</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

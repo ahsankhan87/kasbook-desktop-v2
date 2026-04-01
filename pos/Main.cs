@@ -95,9 +95,12 @@ namespace pos
 
         private void InitializeInactivityLockLogout()
         {
-            int timeoutMinutes = new SettingsBLL().GetAutoLogoutMinutes(15);
+            int timeoutMinutes = new SettingsBLL().GetAutoLogoutMinutes(60);
             if (timeoutMinutes <= 0)
-                timeoutMinutes = 15;
+                timeoutMinutes = 60;
+
+            if (timeoutMinutes < 60)
+                timeoutMinutes = 60;
 
             _autoLogoutThreshold = TimeSpan.FromMinutes(timeoutMinutes);
             _inactivityTimer.Interval = 1000;

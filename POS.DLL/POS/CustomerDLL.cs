@@ -402,5 +402,30 @@ namespace POS.DLL
                 return exists > 0;
             }
         }
+
+        public bool IsCustomerDuplicate(string firstName, string vatNo, string registrationName, int? excludeCustomerId = null)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(
+                "SELECT COUNT(1) FROM pos_customers " +
+                "WHERE branch_id=@branch_id " +
+                "AND ISNULL(LTRIM(RTRIM(first_name)),'') = @first_name " +
+                "AND ISNULL(LTRIM(RTRIM(vat_no)),'') = @vat_no " +
+                "AND ISNULL(LTRIM(RTRIM(RegistrationName)),'') = @registration_name" +
+                (excludeCustomerId.HasValue ? " AND id<>@id" : string.Empty), cn))
+            {
+                cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmd.Parameters.Add("@first_name", SqlDbType.NVarChar, 200).Value = (firstName ?? string.Empty).Trim();
+                cmd.Parameters.Add("@vat_no", SqlDbType.NVarChar, 100).Value = (vatNo ?? string.Empty).Trim();
+                cmd.Parameters.Add("@registration_name", SqlDbType.NVarChar, 250).Value = (registrationName ?? string.Empty).Trim();
+
+                if (excludeCustomerId.HasValue)
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = excludeCustomerId.Value;
+
+                cn.Open();
+                int exists = Convert.ToInt32(cmd.ExecuteScalar());
+                return exists > 0;
+            }
+        }
     }
 }

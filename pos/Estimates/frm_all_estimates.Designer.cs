@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_all_estimates));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_all_estimates));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Btn_PrintPOS80 = new System.Windows.Forms.Button();
             this.btnSendWhatsApp = new System.Windows.Forms.Button();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@
             this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_taxes_title = new System.Windows.Forms.Label();
-            this.Btn_PrintPOS80 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_estimates)).BeginInit();
             this.panel2.SuspendLayout();
@@ -70,6 +70,13 @@
             this.panel1.Controls.Add(this.grid_all_estimates);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // Btn_PrintPOS80
+            // 
+            resources.ApplyResources(this.Btn_PrintPOS80, "Btn_PrintPOS80");
+            this.Btn_PrintPOS80.Name = "Btn_PrintPOS80";
+            this.Btn_PrintPOS80.UseVisualStyleBackColor = true;
+            this.Btn_PrintPOS80.Click += new System.EventHandler(this.Btn_PrintPOS80_Click);
             // 
             // btnSendWhatsApp
             // 
@@ -234,13 +241,6 @@
             resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
             this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
             this.lbl_taxes_title.Name = "lbl_taxes_title";
-            // 
-            // Btn_PrintPOS80
-            // 
-            resources.ApplyResources(this.Btn_PrintPOS80, "Btn_PrintPOS80");
-            this.Btn_PrintPOS80.Name = "Btn_PrintPOS80";
-            this.Btn_PrintPOS80.UseVisualStyleBackColor = true;
-            this.Btn_PrintPOS80.Click += new System.EventHandler(this.Btn_PrintPOS80_Click);
             // 
             // frm_all_estimates
             // 

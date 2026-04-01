@@ -99,6 +99,18 @@ namespace pos.UI
                 form.BackColor = Background;
                 form.Font = FontDefault;
                 form.ForeColor = TextPrimary;
+
+                form.Shown -= CenterFormOnShown;
+                form.Shown += CenterFormOnShown;
+
+                if (!form.IsMdiContainer
+                    && form.MdiParent == null
+                    && form.WindowState == FormWindowState.Normal
+                    && (form.StartPosition == FormStartPosition.WindowsDefaultLocation
+                        || form.StartPosition == FormStartPosition.Manual))
+                {
+                    form.StartPosition = FormStartPosition.CenterScreen;
+                }
             }
 
             root.SuspendLayout();
@@ -110,6 +122,38 @@ namespace pos.UI
             {
                 root.ResumeLayout(true);
             }
+        }
+
+        private static void CenterFormOnShown(object sender, EventArgs e)
+        {
+            var form = sender as Form;
+            if (form == null || form.IsDisposed)
+                return;
+
+            if (form.IsMdiContainer || form.MdiParent != null || form.WindowState != FormWindowState.Normal)
+                return;
+
+            Rectangle area;
+            int x;
+            int y;
+
+            if (form.Owner != null)
+            {
+                area = Screen.FromControl(form.Owner).WorkingArea;
+                x = form.Owner.Left + (form.Owner.Width - form.Width) / 2;
+                y = form.Owner.Top + (form.Owner.Height - form.Height) / 2;
+            }
+            else
+            {
+                area = Screen.FromControl(form).WorkingArea;
+                x = area.Left + (area.Width - form.Width) / 2;
+                y = area.Top + (area.Height - form.Height) / 2;
+            }
+
+            if (x < area.Left) x = area.Left;
+            if (y < area.Top) y = area.Top;
+
+            form.Location = new Point(x, y);
         }
 
         public static void ApplyListFormStyleLightHeader(Panel headerPanel, Label headerLabel, Panel bodyPanel, DataGridView grid, params DataGridViewColumn[] hiddenColumns)

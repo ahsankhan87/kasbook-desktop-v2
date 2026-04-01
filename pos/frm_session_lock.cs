@@ -19,6 +19,14 @@ namespace pos
             lblUserValue.Text = displayName;
             _loginUsername = loginUsername;
             _userId = userId;
+
+            this.WindowState = FormWindowState.Normal;
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.ShowInTaskbar = false;
+            this.TopMost = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void frm_session_lock_Load(object sender, EventArgs e)

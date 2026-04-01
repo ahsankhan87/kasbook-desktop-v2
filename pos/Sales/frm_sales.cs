@@ -1058,18 +1058,22 @@ namespace pos
         {
             //bind data in data grid view  
             SalesBLL objSalesBLL = new SalesBLL();
-            DataTable dt = objSalesBLL.SaleReceipt(invoice_no);
-            return dt;
+            //DataTable dt = objSalesBLL.SaleReceipt(invoice_no);
+            //return dt;
 
+            if (!string.IsNullOrWhiteSpace(invoice_no))
+                return objSalesBLL.SaleReceipt(invoice_no);
+            
+            return null;
         }
 
         public DataTable load_estiamte_receipt(string invoice_no)
         {
             //bind data in data grid view  
-            SalesBLL objSalesBLL = new SalesBLL();
-            DataTable dt = objSalesBLL.EstimateReceipt(invoice_no);
-            return dt;
-
+            EstimatesBLL objEstimatesBLL = new EstimatesBLL();
+            if (!string.IsNullOrWhiteSpace(invoice_no))
+                return objEstimatesBLL.SaleReceipt(invoice_no);
+            return null;
         }
 
         private void frm_sales_KeyDown(object sender, KeyEventArgs e)
@@ -2814,6 +2818,11 @@ namespace pos
             {
                 try
                 {
+                    if (grid_sales.IsCurrentCellInEditMode)
+                        grid_sales.EndEdit();
+
+                    this.Validate();
+
                     // Validate at least one product is added
                     if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
                     {
@@ -3090,6 +3099,11 @@ namespace pos
                                     }
 
                                     ///// Added sales detail in to List
+                                    var editedName = Convert.ToString(grid_sales.Rows[i].Cells["name"].EditedFormattedValue);
+                                    var nameValue = string.IsNullOrWhiteSpace(editedName)
+                                        ? Convert.ToString(grid_sales.Rows[i].Cells["name"].Value)
+                                        : editedName;
+
                                     sales_model_detail.Add(new SalesModal
                                     {
                                         serialNo = sno++,
@@ -3097,7 +3111,7 @@ namespace pos
                                         item_id = Convert.ToInt32(grid_sales.Rows[i].Cells["id"].Value.ToString()),
                                         item_number = grid_sales.Rows[i].Cells["item_number"].Value.ToString(),
                                         code = grid_sales.Rows[i].Cells["code"].Value.ToString(),
-                                        name = grid_sales.Rows[i].Cells["name"].Value.ToString(),
+                                        name = nameValue,
                                         quantity_sold = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["qty"].Value.ToString()) ? 0 : double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString())),
                                         unit_price = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(double.Parse(grid_sales.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
                                         discount = (string.IsNullOrEmpty(grid_sales.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(double.Parse(grid_sales.Rows[i].Cells["discount"].Value.ToString()), 4)),

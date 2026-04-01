@@ -137,5 +137,18 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public bool IsCustomerDuplicate(string firstName, string vatNo, string registrationName, int? excludeCustomerId = null)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.IsCustomerDuplicate(firstName, vatNo, registrationName, excludeCustomerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
