@@ -90,7 +90,8 @@ namespace POS.DLL
 
         }
 
-        public DataTable SaleReport(DateTime from_date, DateTime to_date, int customer_id = 0, string product_code = "", string sale_type = "", int employee_id = 0,string sale_account="",int branch_id=0)
+        public DataTable SaleReport(DateTime from_date, DateTime to_date, int customer_id = 0, string product_code = "", 
+            string sale_type = "", int employee_id = 0,string sale_account="",int branch_id=0, bool SkipSmallInvoices=true)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -137,6 +138,12 @@ namespace POS.DLL
                         if (employee_id != 0)
                         {
                             query += " AND S.employee_id = @employee_id";
+                        }
+
+                        if (!SkipSmallInvoices)
+                        {
+                            //exclude sales with invoice numbers starting with ZS-00000
+                            query += (" AND s.invoice_no NOT LIKE 'ZS%'");
                         }
 
                         cmd = new SqlCommand(query, cn);

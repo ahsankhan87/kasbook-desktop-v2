@@ -56,7 +56,7 @@ namespace POS.DLL
 
         }
 
-        public DataTable GetAllSales()
+        public DataTable GetAllSales(bool showZSInvoices = true)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -70,7 +70,9 @@ namespace POS.DLL
                             "CONCAT(C.first_name,' ',C.last_name) AS customer " +
                             "FROM pos_sales SI " +
                             "LEFT JOIN pos_customers C ON C.id=SI.customer_id" +
-                            " WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id Order by id desc ";
+                            " WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id ";
+                        query += showZSInvoices ? "" : " AND SI.invoice_no NOT LIKE 'ZS%'"; // Exclude ZS- invoices if showZSInvoices is false
+                        query += " ORDER BY SI.id DESC"; 
 
 
                         cmd = new SqlCommand(query, cn);
@@ -150,12 +152,13 @@ namespace POS.DLL
                             " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
                             " C.first_name AS customer_name, C.vat_no AS customer_vat, C.RegistrationName AS customer_company, " +
                             " C.StreetName, C.BuildingNumber, C.CitySubdivisionName, C.CityName, C.PostalCode, C.CountryName, C.cr_number AS customer_cr_number," +
-                            " U.name AS username," +
+                            " U.name AS username, PM.description AS payment_method," +
                             " SI.loc_code,S.description,SI.item_code as code" +
                             " FROM pos_sales S" +
                             " LEFT JOIN pos_sales_items SI ON S.id=SI.sale_id" +
                             //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +
                             " LEFT JOIN pos_customers C ON C.id=S.customer_id" +
+                            " LEFT JOIN pos_payment_method PM ON PM.id=S.payment_method_id" +
                             " LEFT JOIN pos_users U ON U.id=S.user_id" +
                             " WHERE S.invoice_no = @invoice_no AND S.branch_id = @branch_id";
 
@@ -195,7 +198,7 @@ namespace POS.DLL
                             " SI.discount_value,(SI.unit_price*SI.quantity_sold) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity_sold*SI.tax_rate/100) AS vat," +
                             " SI.item_name AS product_name," +
-                            " C.first_name AS customer_name, C.vat_no AS customer_vat" +
+                            " C.first_name AS customer_name, C.vat_no AS customer_vat," +
                             " FROM pos_estimates S" +
                             " LEFT JOIN pos_estimates_items SI ON S.id=SI.sale_id" +
                             //" LEFT JOIN pos_products P ON P.item_number=SI.item_number" +

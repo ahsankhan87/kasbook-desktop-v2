@@ -43,6 +43,8 @@ namespace pos.Sales
 
         private void frm_zatca_invoices_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+
             AppTheme.Apply(this);
             StyleForm();
 
@@ -1285,6 +1287,42 @@ namespace pos.Sales
             cmbSubtype.DataSource = dt;
 
             cmbSubtype.SelectedIndex = 0; // Set default selection to "Standard"
+        }
+
+        private void frm_zatca_invoices_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+                e.Handled = true; // prevent further processing of the Enter key    
+            }
+            // Show/hide chk_ShowZatcaInvoice checkbox when Ctrl + Alt + Z is pressed
+            if (e.Control && e.Alt && e.KeyCode == Keys.Z)
+            {
+                ToggleShowZatcaInvoiceCheckbox();
+                e.Handled = true;
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Shift | Keys.Z))
+            {
+                ToggleShowZatcaInvoiceCheckbox();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ToggleShowZatcaInvoiceCheckbox()
+        {
+            chk_ShowZatcaInvoice.Visible = !chk_ShowZatcaInvoice.Visible;
+            if (!chk_ShowZatcaInvoice.Visible)
+            {
+                chk_ShowZatcaInvoice.Checked = false;
+            }
+            chk_ShowZatcaInvoice.Focus();
         }
     }
 }

@@ -69,6 +69,7 @@
             this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_sales)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -352,6 +353,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.chk_ShowZatcaInvoice);
             this.panel2.Controls.Add(this.lbl_taxes_title);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
@@ -375,6 +377,12 @@
             resources.ApplyResources(this.dataGridViewImageColumn2, "dataGridViewImageColumn2");
             this.dataGridViewImageColumn2.Image = global::pos.Properties.Resources.Trash_16;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            // 
+            // chk_ShowZatcaInvoice
+            // 
+            resources.ApplyResources(this.chk_ShowZatcaInvoice, "chk_ShowZatcaInvoice");
+            this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
+            this.chk_ShowZatcaInvoice.UseVisualStyleBackColor = true;
             // 
             // frm_all_sales
             // 
@@ -435,6 +443,7 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.Button Btn_PrintPOS80;
+        private System.Windows.Forms.CheckBox chk_ShowZatcaInvoice;
     }
 }
 

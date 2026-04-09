@@ -67,7 +67,6 @@ namespace pos.Sales
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmb_status = new System.Windows.Forms.ComboBox();
@@ -77,6 +76,7 @@ namespace pos.Sales
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.NewComplianceCheckButton = new System.Windows.Forms.Button();
+            this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -381,12 +381,6 @@ namespace pos.Sales
             this.panel1.Controls.Add(this.dtpFromDate);
             this.panel1.Name = "panel1";
             // 
-            // chk_ShowZatcaInvoice
-            // 
-            resources.ApplyResources(this.chk_ShowZatcaInvoice, "chk_ShowZatcaInvoice");
-            this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
-            this.chk_ShowZatcaInvoice.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
@@ -451,6 +445,12 @@ namespace pos.Sales
             this.NewComplianceCheckButton.UseVisualStyleBackColor = false;
             this.NewComplianceCheckButton.Click += new System.EventHandler(this.NewComplianceCheckButton_Click);
             // 
+            // chk_ShowZatcaInvoice
+            // 
+            resources.ApplyResources(this.chk_ShowZatcaInvoice, "chk_ShowZatcaInvoice");
+            this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
+            this.chk_ShowZatcaInvoice.UseVisualStyleBackColor = true;
+            // 
             // frm_zatca_invoices
             // 
             this.AcceptButton = this.btnSearch;
@@ -464,6 +464,7 @@ namespace pos.Sales
             this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_zatca_invoices_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_zatca_invoices_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gridZatcaInvoices)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -505,7 +506,6 @@ namespace pos.Sales
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cmb_status;
         private System.Windows.Forms.Button NewComplianceCheckButton;
-        private System.Windows.Forms.CheckBox chk_ShowZatcaInvoice;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
@@ -521,5 +521,6 @@ namespace pos.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn prevSaleDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn prevInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_time;
+        private System.Windows.Forms.CheckBox chk_ShowZatcaInvoice;
     }
 }

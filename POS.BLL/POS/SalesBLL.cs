@@ -28,12 +28,12 @@ namespace POS.BLL
                 throw;
             }
         }
-        public DataTable GetAllSales()
+        public DataTable GetAllSales(bool showZSInvoices)
         {
             try
             {
                 SalesDLL objDLL = new SalesDLL();
-                return objDLL.GetAllSales();
+                return objDLL.GetAllSales(showZSInvoices);
             }
             catch
             {

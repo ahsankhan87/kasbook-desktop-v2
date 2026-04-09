@@ -160,6 +160,7 @@ namespace pos
                     int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
                     string sale_account = cmb_sale_account.SelectedItem.ToString();
                     int branch_id = UsersModal.logged_in_branch_id;
+                    bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
 
                     grid_sales_report.AutoGenerateColumns = false;
 
@@ -167,7 +168,7 @@ namespace pos
                     sales_report_dt = await Task.Run(() =>
                     {
                         SalesReportBLL sale_report_obj = new SalesReportBLL();
-                        return sale_report_obj.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id);
+                        return sale_report_obj.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice);
                     });
 
                     // Ensure profit column exists (you said you created it; this is a safety net)
@@ -364,6 +365,13 @@ namespace pos
                 if (e.Control && e.KeyCode == Keys.E)
                 {
                     btn_export.PerformClick();
+                }
+
+                // Show/hide chk_ShowZatcaInvoice checkbox when Ctrl + Alt + Z is pressed
+                if (e.Control && e.Alt && e.KeyCode == Keys.Z)
+                {
+                    ToggleShowZatcaInvoiceCheckbox();
+                    e.Handled = true;
                 }
             }
             catch (Exception ex)
@@ -812,6 +820,16 @@ namespace pos
             _suppressCustomerSearch = false;
             customersDataGridView.Visible = false;
             btn_search.Focus();
+        }
+
+        private void ToggleShowZatcaInvoiceCheckbox()
+        {
+            chk_ShowZatcaInvoice.Visible = !chk_ShowZatcaInvoice.Visible;
+            if (!chk_ShowZatcaInvoice.Visible)
+            {
+                chk_ShowZatcaInvoice.Checked = false;
+            }
+            chk_ShowZatcaInvoice.Focus();
         }
     }
 }

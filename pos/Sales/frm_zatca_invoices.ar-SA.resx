@@ -169,6 +169,10 @@
   <data name="total.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="gridZatcaInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1139, 517</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnComplianceChecks.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -176,7 +180,6 @@
   <data name="btnComplianceChecks.Text" xml:space="preserve">
     <value>فحوصات الامتثال</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnRefresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
@@ -207,6 +210,9 @@
   <data name="btn_viewQR.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="btn_viewQR.Text" xml:space="preserve">
+    <value>مرأى QR</value>
+  </data>
   <data name="btn_signInvoice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -225,6 +231,24 @@
   <data name="btn_Invoice_clearance.Text" xml:space="preserve">
     <value>تخليص</value>
   </data>
+  <data name="cmbSubtype.Location" type="System.Drawing.Point, System.Drawing">
+    <value>532, 88</value>
+  </data>
+  <data name="cmbType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>644, 88</value>
+  </data>
+  <data name="txtInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>756, 88</value>
+  </data>
+  <data name="txtInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 24</value>
+  </data>
+  <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1008, 88</value>
+  </data>
+  <data name="dtpFromDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 24</value>
+  </data>
   <data name="btnDownloadUBL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -237,6 +261,9 @@
   <data name="btnSearch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>299, 85</value>
+  </data>
   <data name="btnSearch.Text" xml:space="preserve">
     <value>بحث</value>
   </data>
@@ -247,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 50</value>
+    <value>1047, 60</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 22</value>
@@ -262,7 +289,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>473, 50</value>
+    <value>810, 60</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 22</value>
@@ -277,7 +304,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>631, 50</value>
+    <value>718, 60</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 22</value>
@@ -292,13 +319,19 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>686, 50</value>
+    <value>550, 60</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 22</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>النوع الفرعي</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1139, 123</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>870, 18</value>
   </data>
   <data name="chk_ShowZatcaInvoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 21</value>
@@ -313,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>849, 50</value>
+    <value>491, 60</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 22</value>
@@ -323,6 +356,9 @@
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="cmb_status.Location" type="System.Drawing.Point, System.Drawing">
+    <value>420, 88</value>
   </data>
   <data name="btnClose.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
@@ -340,13 +376,25 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>356, 50</value>
+    <value>934, 60</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 22</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>حدد تاريخ</value>
+  </data>
+  <data name="dtpToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>895, 88</value>
+  </data>
+  <data name="dtpToDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 24</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 123</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1139, 517</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>

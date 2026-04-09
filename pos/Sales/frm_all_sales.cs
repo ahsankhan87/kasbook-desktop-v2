@@ -76,6 +76,8 @@ namespace pos
             lbl_taxes_title.Font = AppTheme.FontHeader;
             lbl_taxes_title.ForeColor = Color.White;
 
+            label1.ForeColor = Color.Black;
+
             // ── Body panel ────────────────────────────────────────────
             panel1.BackColor = SystemColors.Control;
 
@@ -118,11 +120,13 @@ namespace pos
         {
             try
             {
+                bool showZSInvoices = chk_ShowZatcaInvoice.Checked;
+
                 using (BusyScope.Show(this, UiMessages.T("Loading sales...", "جاري تحميل المبيعات...")))
                 {
                     grid_all_sales.DataSource = null;
                     grid_all_sales.AutoGenerateColumns = false;
-                    grid_all_sales.DataSource = objSalesBLL.GetAllSales();
+                    grid_all_sales.DataSource = objSalesBLL.GetAllSales(showZSInvoices);
                 }
             }
             catch (Exception ex)
@@ -134,6 +138,15 @@ namespace pos
                     captionAr: "المبيعات");
             }
 
+        }
+        private void ToggleShowZatcaInvoiceCheckbox()
+        {
+            chk_ShowZatcaInvoice.Visible = !chk_ShowZatcaInvoice.Visible;
+            if (!chk_ShowZatcaInvoice.Visible)
+            {
+                chk_ShowZatcaInvoice.Checked = false;
+            }
+            chk_ShowZatcaInvoice.Focus();
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
@@ -582,6 +595,13 @@ namespace pos
             if(e.KeyCode == Keys.P && e.Control)
             {
                 btn_print_invoice.PerformClick();
+                e.Handled = true;
+            }
+
+            // Show/hide chk_ShowZatcaInvoice checkbox when Ctrl + Alt + Z is pressed
+            if (e.Control && e.Alt && e.KeyCode == Keys.Z)
+            {
+                ToggleShowZatcaInvoiceCheckbox();
                 e.Handled = true;
             }
         }

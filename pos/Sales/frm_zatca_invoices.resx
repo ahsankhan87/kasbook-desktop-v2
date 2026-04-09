@@ -322,7 +322,7 @@
     <value>51</value>
   </data>
   <data name="gridZatcaInvoices.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1139, 516</value>
+    <value>1139, 522</value>
   </data>
   <data name="gridZatcaInvoices.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -373,10 +373,10 @@
     <value>Top, Right</value>
   </data>
   <data name="btnRefresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>990, 9</value>
+    <value>983, 9</value>
   </data>
   <data name="btnRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 37</value>
+    <value>77, 37</value>
   </data>
   <data name="btnRefresh.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -574,7 +574,7 @@
     <value>2</value>
   </data>
   <data name="cmbSubtype.Location" type="System.Drawing.Point, System.Drawing">
-    <value>664, 78</value>
+    <value>663, 78</value>
   </data>
   <data name="cmbSubtype.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 24</value>
@@ -616,7 +616,7 @@
     <value>14</value>
   </data>
   <data name="txtInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>425, 78</value>
+    <value>426, 78</value>
   </data>
   <data name="txtInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 24</value>
@@ -682,7 +682,7 @@
     <value>3</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1024, 74</value>
+    <value>886, 74</value>
   </data>
   <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 30</value>
@@ -816,11 +816,17 @@
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chk_ShowZatcaInvoice.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="chk_ShowZatcaInvoice.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chk_ShowZatcaInvoice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chk_ShowZatcaInvoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>886, 80</value>
+    <value>846, 18</value>
   </data>
   <data name="chk_ShowZatcaInvoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 21</value>
@@ -830,6 +836,9 @@
   </data>
   <data name="chk_ShowZatcaInvoice.Text" xml:space="preserve">
     <value>Show ZS Invoices</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;chk_ShowZatcaInvoice.Name" xml:space="preserve">
     <value>chk_ShowZatcaInvoice</value>
@@ -895,7 +904,7 @@
     <value>6</value>
   </data>
   <data name="cmb_status.Location" type="System.Drawing.Point, System.Drawing">
-    <value>774, 78</value>
+    <value>773, 78</value>
   </data>
   <data name="cmb_status.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 24</value>
@@ -970,7 +979,7 @@
     <value>12</value>
   </data>
   <data name="dtpToDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 78</value>
+    <value>334, 78</value>
   </data>
   <data name="dtpToDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 24</value>
@@ -997,7 +1006,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1139, 124</value>
+    <value>1139, 118</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1018,10 +1027,10 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 124</value>
+    <value>0, 118</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1139, 516</value>
+    <value>1139, 522</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
