@@ -24,5 +24,11 @@ namespace POS.BLL
             var dll = new VatDashboardDLL();
             return dll.GetBranchMovement(from, to);
         }
+
+        public DataTable GetInvoiceDetails(DateTime from, DateTime to, string term)
+        {
+            var dll = new VatDashboardDLL();
+            return dll.GetInvoiceDetails(from, to, term);
+        }
     }
 }

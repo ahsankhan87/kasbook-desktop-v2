@@ -1248,6 +1248,12 @@
     <Compile Include="Reports\Taxes\frm_VatDashboard.Designer.cs">
       <DependentUpon>frm_VatDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Taxes\frm_VatInvoiceDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_VatInvoiceDetails.Designer.cs">
+      <DependentUpon>frm_VatInvoiceDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Taxes\frm_VatPurchasesSummaryReport.cs">
       <SubType>Form</SubType>
     </Compile>

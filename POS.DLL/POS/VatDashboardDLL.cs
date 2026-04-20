@@ -19,8 +19,8 @@ namespace POS.DLL
                 ;WITH SalesAgg AS (
                     SELECT
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
@@ -29,8 +29,8 @@ namespace POS.DLL
                 SalesReturnAgg AS (
                     SELECT
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account = 'Return'
@@ -39,8 +39,8 @@ namespace POS.DLL
                 PurchAgg AS (
                     SELECT
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
@@ -49,8 +49,8 @@ namespace POS.DLL
                 PurchReturnAgg AS (
                     SELECT
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account = 'Return'
@@ -117,8 +117,8 @@ namespace POS.DLL
                     SELECT
                         branch_id,
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
@@ -129,8 +129,8 @@ namespace POS.DLL
                     SELECT
                         branch_id,
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account = 'Return'
@@ -141,8 +141,8 @@ namespace POS.DLL
                     SELECT
                         branch_id,
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
@@ -153,8 +153,8 @@ namespace POS.DLL
                     SELECT
                         branch_id,
                         Docs = COUNT(1),
-                        NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0),
-                        VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account = 'Return'
@@ -206,25 +206,25 @@ namespace POS.DLL
                 DECLARE @to   DATETIME = @pTo;
 
                 ;WITH SalesAgg AS (
-                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0), VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE branch_id = @branch_id AND sale_date >= @from AND sale_date < DATEADD(day,1,@to) AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
                 ),
                 SalesReturnAgg AS (
-                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0), VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE branch_id = @branch_id AND sale_date >= @from AND sale_date < DATEADD(day,1,@to) AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
                 ),
                 PurchAgg AS (
-                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0), VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE branch_id = @branch_id AND purchase_date >= @from AND purchase_date < DATEADD(day,1,@to) AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
                 ),
                 PurchReturnAgg AS (
-                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ISNULL(total_amount,0) - ISNULL(discount_value,0)),0), VatAmount = ISNULL(SUM(ISNULL(total_tax,0)),0)
+                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE branch_id = @branch_id AND purchase_date >= @from AND purchase_date < DATEADD(day,1,@to) AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
@@ -241,6 +241,94 @@ namespace POS.DLL
                 ORDER BY SortOrder;";
 
                 cmd.Parameters.AddWithValue("@branch_id", branchId);
+                cmd.Parameters.AddWithValue("@pFrom", from.Date);
+                cmd.Parameters.AddWithValue("@pTo", to.Date);
+
+                var dt = new DataTable();
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetInvoiceDetails(DateTime from, DateTime to, string term)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = cn.CreateCommand())
+            {
+                string normalizedTerm = (term ?? string.Empty).Trim();
+                if (normalizedTerm.Length == 0)
+                    return new DataTable();
+
+                string salesSelect = @"
+                    SELECT
+                        DocDate = s.sale_date,
+                        InvoiceNo = s.invoice_no,
+                        Branch = ISNULL(b.name, ''),
+                        Party = LTRIM(RTRIM(ISNULL(c.first_name, '') + ' ' + ISNULL(c.last_name, ''))),
+                        DocType = CASE WHEN s.account = 'Return' THEN 'Sales Return' ELSE 'Sales' END,
+                        NetAmount = {0}ABS(ISNULL(s.total_amount,0) - ISNULL(s.discount_value,0)),
+                        VatAmount = {0}ABS(ISNULL(s.total_tax,0)),
+                        TotalAmount = {0}(ABS(ISNULL(s.total_amount,0) - ISNULL(s.discount_value,0)) + ABS(ISNULL(s.total_tax,0))),
+                        Description = ISNULL(s.description, '')
+                    FROM pos_sales s
+                    LEFT JOIN pos_customers c ON c.id = s.customer_id
+                    LEFT JOIN pos_branches b ON b.id = s.branch_id
+                    WHERE s.sale_date >= @pFrom AND s.sale_date < DATEADD(day,1,@pTo)
+                      AND ISNULL(s.invoice_no,'') NOT LIKE 'ZS%'
+                      AND {1}";
+
+                string purchasesSelect = @"
+                    SELECT
+                        DocDate = p.purchase_date,
+                        InvoiceNo = p.invoice_no,
+                        Branch = ISNULL(b.name, ''),
+                        Party = LTRIM(RTRIM(ISNULL(s.first_name, '') + ' ' + ISNULL(s.last_name, ''))),
+                        DocType = CASE WHEN p.account = 'Return' THEN 'Purchase Return' ELSE 'Purchases' END,
+                        NetAmount = {0}ABS(ISNULL(p.total_amount,0) - ISNULL(p.discount_value,0)),
+                        VatAmount = {0}ABS(ISNULL(p.total_tax,0)),
+                        TotalAmount = {0}(ABS(ISNULL(p.total_amount,0) - ISNULL(p.discount_value,0)) + ABS(ISNULL(p.total_tax,0))),
+                        Description = ISNULL(p.description, '')
+                    FROM pos_purchases p
+                    LEFT JOIN pos_suppliers s ON s.id = p.supplier_id
+                    LEFT JOIN pos_branches b ON b.id = p.branch_id
+                    WHERE p.purchase_date >= @pFrom AND p.purchase_date < DATEADD(day,1,@pTo)
+                      AND ISNULL(p.invoice_no,'') NOT LIKE 'ZS%'
+                      AND {1}";
+
+                string sql;
+                switch (normalizedTerm.ToLowerInvariant())
+                {
+                    case "sales":
+                        sql = string.Format(salesSelect, string.Empty, "s.account <> 'Return'");
+                        break;
+                    case "sales return":
+                        sql = string.Format(salesSelect, "-", "s.account = 'Return'");
+                        break;
+                    case "purchases":
+                        sql = string.Format(purchasesSelect, "-", "p.account <> 'Return'");
+                        break;
+                    case "purchase return":
+                        sql = string.Format(purchasesSelect, string.Empty, "p.account = 'Return'");
+                        break;
+                    case "total sales":
+                        sql = string.Format(salesSelect, string.Empty, "s.account <> 'Return'")
+                            + " UNION ALL "
+                            + string.Format(salesSelect, "-", "s.account = 'Return'");
+                        break;
+                    case "total purchases":
+                        sql = string.Format(purchasesSelect, "-", "p.account <> 'Return'")
+                            + " UNION ALL "
+                            + string.Format(purchasesSelect, string.Empty, "p.account = 'Return'");
+                        break;
+                    default:
+                        return new DataTable();
+                }
+
+                cmd.CommandText = sql + " ORDER BY DocDate DESC, InvoiceNo DESC";
                 cmd.Parameters.AddWithValue("@pFrom", from.Date);
                 cmd.Parameters.AddWithValue("@pTo", to.Date);
 

@@ -7,6 +7,49 @@ namespace pos.Security.Authorization
 {
     public sealed class SqlRoleRepository : IRoleRepository
     {
+        private static void EnsureSecurityTables(SqlConnection cn, SqlTransaction tx = null)
+        {
+            using (var cmd = new SqlCommand(@"
+IF OBJECT_ID(N'dbo.Roles', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Roles
+    (
+        role_name NVARCHAR(50) NOT NULL PRIMARY KEY
+    );
+END;
+
+IF OBJECT_ID(N'dbo.Permissions', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Permissions
+    (
+        permission_name NVARCHAR(200) NOT NULL PRIMARY KEY
+    );
+END;
+
+IF OBJECT_ID(N'dbo.RolePermissions', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.RolePermissions
+    (
+        role_name NVARCHAR(50) NOT NULL,
+        permission_name NVARCHAR(200) NOT NULL,
+        CONSTRAINT PK_RolePermissions PRIMARY KEY (role_name, permission_name)
+    );
+END;
+
+IF OBJECT_ID(N'dbo.UserClaims', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.UserClaims
+    (
+        user_id INT NOT NULL,
+        permission_name NVARCHAR(200) NOT NULL,
+        CONSTRAINT PK_UserClaims PRIMARY KEY (user_id, permission_name)
+    );
+END;
+", cn, tx))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
         
         public IEnumerable<RoleDefinition> LoadAllRoles()
         {
@@ -15,10 +58,11 @@ namespace pos.Security.Authorization
             using (var cn = new SqlConnection(dbConnection.ConnectionString))
             using (var cmd = new SqlCommand(@"
                     SELECT rp.role_name, rp.permission_name
-                    FROM RolePermissions rp WITH (NOLOCK);
+                    FROM dbo.RolePermissions rp WITH (NOLOCK);
                     ", cn))
             {
                 cn.Open();
+                EnsureSecurityTables(cn);
                 using (var rd = cmd.ExecuteReader())
                 {
                     while (rd.Read())
@@ -52,15 +96,16 @@ namespace pos.Security.Authorization
                 using (var tx = cn.BeginTransaction())
                 {
                     cmd.Transaction = tx;
+                    EnsureSecurityTables(cn, tx);
 
                     // Ensure role and permissions exist
                     cmd.CommandText = @"
-                    MERGE Roles AS t
+                    MERGE dbo.Roles AS t
                     USING (SELECT @role_name AS role_name) AS s
                     ON t.role_name = s.role_name
                     WHEN NOT MATCHED THEN INSERT (role_name) VALUES (s.role_name);
 
-                    DELETE FROM RolePermissions WHERE role_name = @role_name;";
+                    DELETE FROM dbo.RolePermissions WHERE role_name = @role_name;";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@role_name", role.ToString());
                     cmd.ExecuteNonQuery();
@@ -71,7 +116,7 @@ namespace pos.Security.Authorization
                         {
                             // Ensure permission exists
                             cmd.CommandText = @"
-                                MERGE Permissions AS t
+                                MERGE dbo.Permissions AS t
                                 USING (SELECT @p AS permission_name) AS s
                                 ON t.permission_name = s.permission_name
                                 WHEN NOT MATCHED THEN INSERT (permission_name) VALUES (s.permission_name);";
@@ -81,7 +126,7 @@ namespace pos.Security.Authorization
 
                             // Insert role-permission
                             cmd.CommandText = @"
-                                INSERT INTO RolePermissions(role_name, permission_name)
+                                INSERT INTO dbo.RolePermissions(role_name, permission_name)
                                 VALUES(@role_name, @p);";
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@role_name", role.ToString());
@@ -101,11 +146,12 @@ namespace pos.Security.Authorization
             using (var cn = new SqlConnection(dbConnection.ConnectionString))
             using (var cmd = new SqlCommand(@"
                 SELECT permission_name
-                FROM UserClaims WITH (NOLOCK)
+                FROM dbo.UserClaims WITH (NOLOCK)
                 WHERE user_id = @uid;", cn))
             {
                 cmd.Parameters.AddWithValue("@uid", userId);
                 cn.Open();
+                EnsureSecurityTables(cn);
                 using (var rd = cmd.ExecuteReader())
                 {
                     while (rd.Read())
@@ -125,8 +171,9 @@ namespace pos.Security.Authorization
                 using (var tx = cn.BeginTransaction())
                 {
                     cmd.Transaction = tx;
+                    EnsureSecurityTables(cn, tx);
 
-                    cmd.CommandText = "DELETE FROM UserClaims WHERE user_id = @uid;";
+                    cmd.CommandText = "DELETE FROM dbo.UserClaims WHERE user_id = @uid;";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@uid", userId);
                     cmd.ExecuteNonQuery();
@@ -137,7 +184,7 @@ namespace pos.Security.Authorization
                         {
                             // Ensure permission exists
                             cmd.CommandText = @"
-                                MERGE Permissions AS t
+                                MERGE dbo.Permissions AS t
                                 USING (SELECT @p AS permission_name) AS s
                                 ON t.permission_name = s.permission_name
                                 WHEN NOT MATCHED THEN INSERT (permission_name) VALUES (s.permission_name);";
@@ -147,7 +194,7 @@ namespace pos.Security.Authorization
 
                             // Insert user-claim
                             cmd.CommandText = @"
-                                INSERT INTO UserClaims(user_id, permission_name)
+                                INSERT INTO dbo.UserClaims(user_id, permission_name)
                                 VALUES(@uid, @p);";
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@uid", userId);
