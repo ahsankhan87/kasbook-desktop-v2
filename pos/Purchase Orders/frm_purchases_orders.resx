@@ -412,13 +412,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txtSupplierSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 142</value>
+    <value>99, 142</value>
   </data>
   <data name="txtSupplierSearch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txtSupplierSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 24</value>
+    <value>177, 24</value>
   </data>
   <data name="txtSupplierSearch.TabIndex" type="System.Int32, mscorlib">
     <value>172</value>
@@ -439,7 +439,7 @@
     <value>True</value>
   </data>
   <data name="SearchBySupplierCheckbox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 118</value>
+    <value>99, 118</value>
   </data>
   <data name="SearchBySupplierCheckbox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -466,13 +466,13 @@
     <value>1</value>
   </data>
   <data name="cmb_employees.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 91</value>
+    <value>99, 91</value>
   </data>
   <data name="cmb_employees.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_employees.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 24</value>
+    <value>177, 24</value>
   </data>
   <data name="cmb_employees.TabIndex" type="System.Int32, mscorlib">
     <value>170</value>
@@ -493,13 +493,13 @@
     <value />
   </data>
   <data name="txt_delivery_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 66</value>
+    <value>99, 66</value>
   </data>
   <data name="txt_delivery_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_delivery_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 24</value>
+    <value>177, 24</value>
   </data>
   <data name="txt_delivery_date.TabIndex" type="System.Int32, mscorlib">
     <value>168</value>
@@ -520,13 +520,13 @@
     <value />
   </data>
   <data name="txt_purchase_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 41</value>
+    <value>99, 41</value>
   </data>
   <data name="txt_purchase_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_purchase_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 24</value>
+    <value>177, 24</value>
   </data>
   <data name="txt_purchase_date.TabIndex" type="System.Int32, mscorlib">
     <value>169</value>
@@ -550,7 +550,7 @@
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 145</value>
+    <value>32, 145</value>
   </data>
   <data name="label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -577,13 +577,13 @@
     <value>5</value>
   </data>
   <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 16</value>
+    <value>99, 16</value>
   </data>
   <data name="txt_invoice_no.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_invoice_no.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 24</value>
+    <value>177, 24</value>
   </data>
   <data name="txt_invoice_no.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -607,7 +607,7 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 94</value>
+    <value>26, 94</value>
   </data>
   <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -640,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 46</value>
+    <value>57, 47</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -673,7 +673,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 71</value>
+    <value>4, 71</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -706,7 +706,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 18</value>
+    <value>21, 22</value>
   </data>
   <data name="label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1392,9 +1392,6 @@
   <data name="name.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="name.Width" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
   <metadata name="avg_cost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1480,7 +1477,7 @@
     <value>False</value>
   </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>87</value>
   </data>
   <metadata name="discount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1495,7 +1492,7 @@
     <value>False</value>
   </data>
   <data name="discount.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>91</value>
   </data>
   <metadata name="sub_total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1522,7 +1519,7 @@
     <value>False</value>
   </data>
   <data name="location_code.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>59</value>
   </data>
   <metadata name="unit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1537,7 +1534,7 @@
     <value>False</value>
   </data>
   <data name="unit.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>61</value>
   </data>
   <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1600,7 +1597,7 @@
     <value>51</value>
   </data>
   <data name="grid_purchases_order.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 528</value>
+    <value>772, 357</value>
   </data>
   <data name="grid_purchases_order.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1617,8 +1614,8 @@
   <data name="&gt;&gt;grid_purchases_order.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="splitContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1659,9 +1656,6 @@
   <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="invoice_no.Width" type="System.Int32, mscorlib">
-    <value>94</value>
-  </data>
   <metadata name="product_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1696,7 +1690,7 @@
     <value>6</value>
   </data>
   <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>91</value>
+    <value>98</value>
   </data>
   <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1711,7 +1705,7 @@
     <value>False</value>
   </data>
   <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>94</value>
   </data>
   <metadata name="description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1726,7 +1720,7 @@
     <value>False</value>
   </data>
   <data name="description.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>105</value>
   </data>
   <metadata name="supplier.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1780,7 +1774,7 @@
     <value>51</value>
   </data>
   <data name="grid_product_history.Size" type="System.Drawing.Size, System.Drawing">
-    <value>472, 505</value>
+    <value>472, 334</value>
   </data>
   <data name="grid_product_history.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1804,7 +1798,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>478, 528</value>
+    <value>478, 357</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1837,7 +1831,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1254, 528</value>
+    <value>1254, 357</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>772</value>
@@ -2382,6 +2376,18 @@
   <data name="&gt;&gt;PurchaseHistoryToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;debounceTimer.Name" xml:space="preserve">
+    <value>debounceTimer</value>
+  </data>
+  <data name="&gt;&gt;debounceTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -2549,18 +2555,6 @@
   </data>
   <data name="&gt;&gt;item_code.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;debounceTimer.Name" xml:space="preserve">
-    <value>debounceTimer</value>
-  </data>
-  <data name="&gt;&gt;debounceTimer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_purchases_order</value>
