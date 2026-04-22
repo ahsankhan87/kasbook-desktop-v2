@@ -51,6 +51,7 @@
             this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ImportExcelToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.AmountFixToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ICTToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -275,6 +276,7 @@
             this.NewToolStripButton,
             this.SaveToolStripButton,
             this.SearchToolStripButton,
+            this.ImportExcelToolStripButton,
             this.AmountFixToolStripButton,
             this.HistoryToolStripButton,
             this.ICTToolStripButton,
@@ -303,6 +305,14 @@
             resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.Name = "SearchToolStripButton";
             this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
+            // 
+            // ImportExcelToolStripButton
+            // 
+            this.ImportExcelToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ImportExcelToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ImportExcelToolStripButton.Name = "ImportExcelToolStripButton";
+            resources.ApplyResources(this.ImportExcelToolStripButton, "ImportExcelToolStripButton");
+            this.ImportExcelToolStripButton.Click += new System.EventHandler(this.ImportExcelToolStripButton_Click);
             // 
             // AmountFixToolStripButton
             // 
@@ -1421,6 +1431,7 @@
         private System.Windows.Forms.ToolStripButton LoadQuotationToolStripButton;
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.ToolStripButton SearchToolStripButton;
+        private System.Windows.Forms.ToolStripButton ImportExcelToolStripButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txtPONumber;

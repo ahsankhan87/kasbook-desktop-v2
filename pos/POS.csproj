@@ -846,6 +846,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\Common\ExcelExportHelper.cs" />
+    <Compile Include="Reports\Common\ProductExcelImportHelper.cs" />
     <Compile Include="Reports\Dashboard\frm_branchWiseSummary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1290,6 +1291,12 @@
     </Compile>
     <Compile Include="Reports\Sales\frm_sales_invoice.Designer.cs">
       <DependentUpon>frm_sales_invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\frm_sales_excel_import.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\frm_sales_excel_import.Designer.cs">
+      <DependentUpon>frm_sales_excel_import.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\frm_sales_v1.cs">
       <SubType>Form</SubType>
@@ -2310,6 +2317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_sales_invoice.resx">
       <DependentUpon>frm_sales_invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_sales_excel_import.resx">
+      <DependentUpon>frm_sales_excel_import.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_sales_v1.ar-SA.resx">
       <DependentUpon>frm_sales_v1.cs</DependentUpon>

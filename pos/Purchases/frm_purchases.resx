@@ -1752,6 +1752,12 @@
   <data name="SearchToolStripButton.ToolTipText" xml:space="preserve">
     <value>Search invoices</value>
   </data>
+  <data name="ImportExcelToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 42</value>
+  </data>
+  <data name="ImportExcelToolStripButton.Text" xml:space="preserve">
+    <value>Import Excel</value>
+  </data>
   <data name="HistoryToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -2245,13 +2251,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 117</value>
+    <value>189, 117</value>
   </data>
   <data name="txt_brand_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 24</value>
+    <value>64, 24</value>
   </data>
   <data name="txt_brand_code.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -2272,13 +2278,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 80</value>
+    <value>189, 80</value>
   </data>
   <data name="txt_category_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 24</value>
+    <value>64, 24</value>
   </data>
   <data name="txt_category_code.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2299,13 +2305,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 43</value>
+    <value>189, 43</value>
   </data>
   <data name="txt_group_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 24</value>
+    <value>64, 24</value>
   </data>
   <data name="txt_group_code.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2332,7 +2338,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
+    <value>110, 24</value>
   </data>
   <data name="txt_groups.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2359,7 +2365,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
+    <value>110, 24</value>
   </data>
   <data name="txt_categories.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2386,7 +2392,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
+    <value>110, 24</value>
   </data>
   <data name="txt_brands.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2572,7 +2578,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.5,Percent,62.5,Absolute,67" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,36,Absolute,37" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.5,Percent,62.5,Absolute,69" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,36,Absolute,37" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox_products.Location" type="System.Drawing.Point, System.Drawing">
     <value>691, 48</value>
@@ -3091,6 +3097,12 @@
     <value>SearchToolStripButton</value>
   </data>
   <data name="&gt;&gt;SearchToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ImportExcelToolStripButton.Name" xml:space="preserve">
+    <value>ImportExcelToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;ImportExcelToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;HistoryToolStripButton.Name" xml:space="preserve">

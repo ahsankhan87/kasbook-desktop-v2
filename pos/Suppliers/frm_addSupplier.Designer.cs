@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addSupplier));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_first_name = new System.Windows.Forms.TextBox();
             this.txt_last_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -99,6 +99,7 @@
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
+            this.btn_transDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -452,9 +453,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -462,9 +463,9 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -472,17 +473,17 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
             // 
             // description
             // 
-            this.description.DataPropertyName = "description";
             this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.DataPropertyName = "description";
             this.description.FillWeight = 260F;
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
@@ -490,6 +491,7 @@
             // 
             // panelTransactionTop
             // 
+            this.panelTransactionTop.Controls.Add(this.btn_transDelete);
             this.panelTransactionTop.Controls.Add(this.Btn_ledger_report);
             this.panelTransactionTop.Controls.Add(this.btn_trans_refresh);
             this.panelTransactionTop.Controls.Add(this.Btn_printPaymentReceipt);
@@ -586,6 +588,13 @@
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // btn_transDelete
+            // 
+            resources.ApplyResources(this.btn_transDelete, "btn_transDelete");
+            this.btn_transDelete.Name = "btn_transDelete";
+            this.btn_transDelete.UseVisualStyleBackColor = true;
+            this.btn_transDelete.Click += new System.EventHandler(this.button1_Click);
             // 
             // frm_addSupplier
             // 
@@ -692,5 +701,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txt_supplier_code;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btn_transDelete;
     }
 }

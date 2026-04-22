@@ -1,6 +1,7 @@
 ﻿using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
+using pos.Reports.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -2776,6 +2777,305 @@ namespace pos
             {
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
+        }
+
+        private void ImportExcelToolStripButton_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frm_sales_excel_import(
+                StartPurchasesExcelImport,
+                DownloadPurchasesImportTemplate,
+                "Purchase Excel Import",
+                "Purchase Excel Import Utility",
+                "Import purchase lines from Excel into grid_purchases for review and further action.\r\nRequired columns: Product Code or Name, Qty, and Price.",
+                "How to use",
+                "1. Download the sample template.\r\n2. Fill in Product Code or Name, Qty and Price.\r\n3. Click Import Excel and choose your file.\r\n4. Review the imported lines in the purchases grid before saving."))
+            {
+                frm.ShowDialog(this);
+            }
+        }
+
+        private void StartPurchasesExcelImport()
+        {
+            try
+            {
+                using (var ofd = new OpenFileDialog())
+                {
+                    ofd.Title = "Import purchase items from Excel";
+                    ofd.Filter = "Excel Files (*.xlsx;*.xls)|*.xlsx;*.xls";
+                    ofd.Multiselect = false;
+
+                    if (ofd.ShowDialog(this) != DialogResult.OK)
+                        return;
+
+                    using (BusyScope.Show(this, UiMessages.T("Importing purchase items...", "جاري استيراد أصناف الشراء...")))
+                    {
+                        var rows = ProductExcelImportHelper.ParseRows(ProductExcelImportHelper.ReadExcel(ofd.FileName));
+                        ImportPurchaseItemsFromExcel(rows);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Import Excel", "استيراد إكسل");
+            }
+        }
+
+        private void DownloadPurchasesImportTemplate()
+        {
+            try
+            {
+                ExcelExportHelper.ExportDataTableToExcel(ProductExcelImportHelper.BuildTemplate(), "purchases_import_template", this, includeLastRow: true);
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Import Template", "قالب الاستيراد");
+            }
+        }
+
+        private void ImportPurchaseItemsFromExcel(IList<ProductExcelImportRow> items)
+        {
+            if (items == null || items.Count == 0)
+            {
+                UiMessages.ShowInfo("The selected Excel file does not contain any valid rows.", "ملف الإكسل المحدد لا يحتوي على أي صفوف صحيحة.");
+                return;
+            }
+
+            int importedCount = 0;
+            var skipped = new List<string>();
+
+            foreach (var item in items)
+            {
+                var productRow = FindProductForPurchaseImport(item.ProductCode, item.ProductName);
+                if (productRow == null)
+                {
+                    skipped.Add((!string.IsNullOrWhiteSpace(item.ProductCode) ? item.ProductCode : item.ProductName) + " (product not found)");
+                    continue;
+                }
+
+                var qtyToImport = Convert.ToDouble(item.Qty ?? 1m);
+                var importedPrice = item.Price.HasValue
+                    ? Convert.ToDouble(item.Price.Value)
+                    : Convert.ToDouble(productRow["avg_cost"]);
+
+                ImportProductIntoPurchasesGrid(productRow, qtyToImport, importedPrice);
+                importedCount++;
+            }
+
+            get_total_tax();
+            get_total_discount();
+            get_sub_total_amount();
+            get_total_amount();
+            get_total_qty();
+            EnsureTrailingEmptyPurchasesRow();
+
+            if (importedCount == 0)
+            {
+                UiMessages.ShowWarning(
+                    "No rows were imported. Please verify the Excel columns and product codes.",
+                    "لم يتم استيراد أي صفوف. يرجى التحقق من أعمدة الإكسل وأكواد المنتجات.");
+                return;
+            }
+
+            string details = skipped.Count > 0 ? "\n\nSkipped: " + string.Join(", ", skipped.Take(10).ToArray()) : string.Empty;
+            UiMessages.ShowInfo(
+                string.Format("Imported {0} row(s) successfully.{1}", importedCount, details),
+                string.Format("تم استيراد {0} صف/صفوف بنجاح.{1}", importedCount, skipped.Count > 0 ? "\n\nتم تخطي بعض الصفوف." : string.Empty),
+                "Import Excel",
+                "استيراد إكسل");
+        }
+
+        private DataRow FindProductForPurchaseImport(string productCode, string productName)
+        {
+            var productsBLL = new ProductBLL();
+            DataTable dt = null;
+
+            if (!string.IsNullOrWhiteSpace(productCode))
+                dt = productsBLL.SearchRecordByProductCode(productCode.Trim());
+
+            if ((dt == null || dt.Rows.Count == 0) && !string.IsNullOrWhiteSpace(productName))
+            {
+                var searchDt = productsBLL.SearchRecord(productName.Trim(), by_name: true);
+                if (searchDt != null && searchDt.Rows.Count > 0)
+                {
+                    DataRow selectedRow = null;
+                    foreach (DataRow searchRow in searchDt.Rows)
+                    {
+                        if (string.Equals(Convert.ToString(searchRow["name"]), productName.Trim(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            selectedRow = searchRow;
+                            break;
+                        }
+                    }
+
+                    if (selectedRow == null)
+                        selectedRow = searchDt.Rows[0];
+
+                    var itemNumber = Convert.ToString(selectedRow["item_number"]);
+                    if (!string.IsNullOrWhiteSpace(itemNumber))
+                        dt = productsBLL.SearchRecordByProductNumber(itemNumber);
+                }
+            }
+
+            return dt != null && dt.Rows.Count > 0 ? dt.Rows[0] : null;
+        }
+
+        private void ImportProductIntoPurchasesGrid(DataRow productRow, double qtyToImport, double importedPrice)
+        {
+            string itemNumber = Convert.ToString(productRow["item_number"]);
+            int rowIndex = FindPurchasesGridRowByItemNumber(itemNumber);
+
+            if (rowIndex < 0)
+            {
+                rowIndex = GetPurchasesImportTargetRowIndex();
+                PopulatePurchasesGridRow(rowIndex, productRow, qtyToImport, importedPrice);
+                return;
+            }
+
+            double existingQty = GetPurchasesCellDouble(rowIndex, "Qty");
+            PopulatePurchasesGridRow(rowIndex, productRow, existingQty + qtyToImport, importedPrice);
+        }
+
+        private int GetPurchasesImportTargetRowIndex()
+        {
+            if (grid_purchases.Rows.Count == 0)
+            {
+                int rowIndex = grid_purchases.Rows.Add();
+                InitializePurchaseRowDefaults(rowIndex);
+                return rowIndex;
+            }
+
+            if (grid_purchases.Rows[0].Cells["id"].Value == null && string.IsNullOrWhiteSpace(Convert.ToString(grid_purchases.Rows[0].Cells["code"].Value)))
+            {
+                InitializePurchaseRowDefaults(0);
+                return 0;
+            }
+
+            int newRowIndex = grid_purchases.Rows.Add();
+            InitializePurchaseRowDefaults(newRowIndex);
+            return newRowIndex;
+        }
+
+        private int FindPurchasesGridRowByItemNumber(string itemNumber)
+        {
+            if (string.IsNullOrWhiteSpace(itemNumber))
+                return -1;
+
+            for (int i = 0; i < grid_purchases.Rows.Count; i++)
+            {
+                string currentItemNumber = Convert.ToString(grid_purchases.Rows[i].Cells["item_number"].Value);
+                if (string.Equals(currentItemNumber, itemNumber, StringComparison.OrdinalIgnoreCase))
+                    return i;
+            }
+
+            return -1;
+        }
+
+        private void PopulatePurchasesGridRow(int rowIndex, DataRow productRow, double qtyToImport, double importedPrice)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases.Rows.Count)
+                return;
+
+            InitializePurchaseRowDefaults(rowIndex);
+
+            grid_purchases.Rows[rowIndex].Cells["id"].Value = Convert.ToString(productRow["id"]);
+            grid_purchases.Rows[rowIndex].Cells["code"].Value = Convert.ToString(productRow["code"]);
+            grid_purchases.Rows[rowIndex].Cells["name"].Value = Convert.ToString(productRow["name"]);
+            grid_purchases.Rows[rowIndex].Cells["Qty"].Value = qtyToImport;
+            grid_purchases.Rows[rowIndex].Cells["unit_price"].Value = Math.Round(Convert.ToDecimal(productRow["unit_price"]), 4);
+            grid_purchases.Rows[rowIndex].Cells["discount"].Value = 0.00;
+            grid_purchases.Rows[rowIndex].Cells["discount_percent"].Value = 0.00;
+            grid_purchases.Rows[rowIndex].Cells["location_code"].Value = Convert.ToString(productRow["location_code"]);
+            grid_purchases.Rows[rowIndex].Cells["unit"].Value = Convert.ToString(productRow["unit"]);
+            grid_purchases.Rows[rowIndex].Cells["category"].Value = Convert.ToString(productRow["category"]);
+            grid_purchases.Rows[rowIndex].Cells["btn_delete"].Value = "Del";
+            grid_purchases.Rows[rowIndex].Cells["tax_id"].Value = Convert.ToString(productRow["tax_id"]);
+            grid_purchases.Rows[rowIndex].Cells["tax_rate"].Value = Convert.ToString(productRow["tax_rate"]);
+            grid_purchases.Rows[rowIndex].Cells["shop_qty"].Value = Convert.ToString(productRow["qty"]);
+            grid_purchases.Rows[rowIndex].Cells["item_number"].Value = Convert.ToString(productRow["item_number"]);
+
+            ApplyImportedCostToPurchaseRow(rowIndex, qtyToImport, importedPrice);
+
+            double shopQty = 0;
+            double.TryParse(Convert.ToString(productRow["qty"]), out shopQty);
+            grid_purchases.Rows[rowIndex].DefaultCellStyle.ForeColor = shopQty <= 0 ? Color.Red : Color.Black;
+        }
+
+        private void ApplyImportedCostToPurchaseRow(int rowIndex, double qtyToImport, double importedPrice)
+        {
+            double taxRate = GetPurchasesCellDouble(rowIndex, "tax_rate");
+
+            if (rd_btn_without_vat.Checked && rd_btn_by_unitprice.Checked)
+            {
+                double netTotal = importedPrice * qtyToImport;
+                double tax = (netTotal * taxRate) / 100;
+
+                grid_purchases.Rows[rowIndex].Cells["avg_cost"].Value = importedPrice;
+                grid_purchases.Rows[rowIndex].Cells["tax"].Value = tax;
+                grid_purchases.Rows[rowIndex].Cells["sub_total"].Value = netTotal + tax;
+                return;
+            }
+
+            if (rd_btn_without_vat.Checked && rd_btn_bytotal_price.Checked)
+            {
+                double avgCost = qtyToImport == 0 ? 0 : importedPrice / qtyToImport;
+                double netTotal = avgCost * qtyToImport;
+                double tax = (netTotal * taxRate) / 100;
+
+                grid_purchases.Rows[rowIndex].Cells["avg_cost"].Value = avgCost;
+                grid_purchases.Rows[rowIndex].Cells["tax"].Value = tax;
+                grid_purchases.Rows[rowIndex].Cells["sub_total"].Value = netTotal + tax;
+                return;
+            }
+
+            if (rd_btn_with_vat.Checked && rd_btn_by_unitprice.Checked)
+            {
+                double divisor = 1 + (taxRate / 100);
+                double avgCost = divisor == 0 ? importedPrice : importedPrice / divisor;
+                double netTotal = avgCost * qtyToImport;
+                double tax = (netTotal * taxRate) / 100;
+
+                grid_purchases.Rows[rowIndex].Cells["avg_cost"].Value = avgCost;
+                grid_purchases.Rows[rowIndex].Cells["tax"].Value = tax;
+                grid_purchases.Rows[rowIndex].Cells["sub_total"].Value = netTotal + tax;
+                return;
+            }
+
+            double divisorTotal = 1 + (taxRate / 100);
+            double totalWithoutVat = divisorTotal == 0 ? importedPrice : importedPrice / divisorTotal;
+            double avgCostNet = qtyToImport == 0 ? 0 : totalWithoutVat / qtyToImport;
+            double taxAmount = (totalWithoutVat * taxRate) / 100;
+
+            grid_purchases.Rows[rowIndex].Cells["avg_cost"].Value = avgCostNet;
+            grid_purchases.Rows[rowIndex].Cells["tax"].Value = taxAmount;
+            grid_purchases.Rows[rowIndex].Cells["sub_total"].Value = totalWithoutVat + taxAmount;
+        }
+
+        private void EnsureTrailingEmptyPurchasesRow()
+        {
+            if (grid_purchases.Rows.Count == 0)
+            {
+                int rowIndex = grid_purchases.Rows.Add();
+                InitializePurchaseRowDefaults(rowIndex);
+                return;
+            }
+
+            var lastRow = grid_purchases.Rows[grid_purchases.Rows.Count - 1];
+            bool isBlankLastRow = lastRow.Cells["id"].Value == null && string.IsNullOrWhiteSpace(Convert.ToString(lastRow.Cells["code"].Value));
+            if (!isBlankLastRow)
+            {
+                int rowIndex = grid_purchases.Rows.Add();
+                InitializePurchaseRowDefaults(rowIndex);
+            }
+        }
+
+        private double GetPurchasesCellDouble(int rowIndex, string columnName)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases.Rows.Count)
+                return 0;
+
+            var value = grid_purchases.Rows[rowIndex].Cells[columnName].Value;
+            double parsed;
+            return value == null || !double.TryParse(Convert.ToString(value), out parsed) ? 0 : parsed;
         }
 
         private void LoadPOToolStripButton_Click(object sender, EventArgs e)

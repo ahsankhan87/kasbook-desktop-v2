@@ -14,6 +14,7 @@ using System.Globalization;
 using pos.Security.Authorization;
 using pos.UI;
 using pos.UI.Busy;
+using pos.Reports.Common;
 
 namespace pos
 {
@@ -1468,6 +1469,278 @@ namespace pos
         {
             frm_search_porder obj = new frm_search_porder(null, this);
             obj.ShowDialog();
+        }
+
+        private void ImportExcelToolStripButton_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frm_sales_excel_import(
+                StartPurchaseOrderExcelImport,
+                DownloadPurchaseOrderImportTemplate,
+                "Purchase Order Excel Import",
+                "Purchase Order Excel Import Utility",
+                "Import purchase order lines from Excel into grid_purchases_order for review and further action.\r\nRequired columns: Product Code or Name, Qty, and Price.",
+                "How to use",
+                "1. Download the sample template.\r\n2. Fill in Product Code or Name, Qty and Price.\r\n3. Click Import Excel and choose your file.\r\n4. Review the imported lines in the purchase order grid before saving."))
+            {
+                frm.ShowDialog(this);
+            }
+        }
+
+        private void StartPurchaseOrderExcelImport()
+        {
+            try
+            {
+                using (var ofd = new OpenFileDialog())
+                {
+                    ofd.Title = "Import purchase order items from Excel";
+                    ofd.Filter = "Excel Files (*.xlsx;*.xls)|*.xlsx;*.xls";
+                    ofd.Multiselect = false;
+
+                    if (ofd.ShowDialog(this) != DialogResult.OK)
+                        return;
+
+                    using (BusyScope.Show(this, UiMessages.T("Importing purchase order items...", "جاري استيراد أصناف أمر الشراء...")))
+                    {
+                        var rows = ProductExcelImportHelper.ParseRows(ProductExcelImportHelper.ReadExcel(ofd.FileName));
+                        ImportPurchaseOrderItemsFromExcel(rows);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Import Excel", "استيراد إكسل");
+            }
+        }
+
+        private void DownloadPurchaseOrderImportTemplate()
+        {
+            try
+            {
+                ExcelExportHelper.ExportDataTableToExcel(ProductExcelImportHelper.BuildTemplate(), "purchase_order_import_template", this, includeLastRow: true);
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Import Template", "قالب الاستيراد");
+            }
+        }
+
+        private void ImportPurchaseOrderItemsFromExcel(IList<ProductExcelImportRow> items)
+        {
+            if (items == null || items.Count == 0)
+            {
+                UiMessages.ShowInfo("The selected Excel file does not contain any valid rows.", "ملف الإكسل المحدد لا يحتوي على أي صفوف صحيحة.");
+                return;
+            }
+
+            int importedCount = 0;
+            var skipped = new List<string>();
+
+            foreach (var item in items)
+            {
+                var productRow = FindProductForPurchaseOrderImport(item.ProductCode, item.ProductName);
+                if (productRow == null)
+                {
+                    skipped.Add((!string.IsNullOrWhiteSpace(item.ProductCode) ? item.ProductCode : item.ProductName) + " (product not found)");
+                    continue;
+                }
+
+                var qtyToImport = Convert.ToDouble(item.Qty ?? 1m);
+                var importedPrice = item.Price.HasValue
+                    ? Convert.ToDouble(item.Price.Value)
+                    : Convert.ToDouble(productRow["avg_cost"]);
+
+                ImportProductIntoPurchaseOrderGrid(productRow, qtyToImport, importedPrice);
+                importedCount++;
+            }
+
+            get_total_tax();
+            get_total_discount();
+            get_sub_total_amount();
+            get_total_amount();
+            get_total_qty();
+            EnsureTrailingEmptyPurchaseOrderRow();
+
+            if (importedCount == 0)
+            {
+                UiMessages.ShowWarning(
+                    "No rows were imported. Please verify the Excel columns and product codes.",
+                    "لم يتم استيراد أي صفوف. يرجى التحقق من أعمدة الإكسل وأكواد المنتجات.");
+                return;
+            }
+
+            string details = skipped.Count > 0 ? "\n\nSkipped: " + string.Join(", ", skipped.Take(10).ToArray()) : string.Empty;
+            UiMessages.ShowInfo(
+                string.Format("Imported {0} row(s) successfully.{1}", importedCount, details),
+                string.Format("تم استيراد {0} صف/صفوف بنجاح.{1}", importedCount, skipped.Count > 0 ? "\n\nتم تخطي بعض الصفوف." : string.Empty),
+                "Import Excel",
+                "استيراد إكسل");
+        }
+
+        private DataRow FindProductForPurchaseOrderImport(string productCode, string productName)
+        {
+            var productsBLL = new ProductBLL();
+            DataTable dt = null;
+
+            if (!string.IsNullOrWhiteSpace(productCode))
+                dt = productsBLL.SearchRecordByProductCode(productCode.Trim());
+
+            if ((dt == null || dt.Rows.Count == 0) && !string.IsNullOrWhiteSpace(productName))
+            {
+                var searchDt = productsBLL.SearchRecord(productName.Trim(), by_name: true);
+                if (searchDt != null && searchDt.Rows.Count > 0)
+                {
+                    DataRow selectedRow = null;
+                    foreach (DataRow searchRow in searchDt.Rows)
+                    {
+                        if (string.Equals(Convert.ToString(searchRow["name"]), productName.Trim(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            selectedRow = searchRow;
+                            break;
+                        }
+                    }
+
+                    if (selectedRow == null)
+                        selectedRow = searchDt.Rows[0];
+
+                    var itemNumber = Convert.ToString(selectedRow["item_number"]);
+                    if (!string.IsNullOrWhiteSpace(itemNumber))
+                        dt = productsBLL.SearchRecordByProductNumber(itemNumber);
+                }
+            }
+
+            return dt != null && dt.Rows.Count > 0 ? dt.Rows[0] : null;
+        }
+
+        private void ImportProductIntoPurchaseOrderGrid(DataRow productRow, double qtyToImport, double importedPrice)
+        {
+            string itemNumber = Convert.ToString(productRow["item_number"]);
+            int rowIndex = FindPurchaseOrderGridRowByItemNumber(itemNumber);
+
+            if (rowIndex < 0)
+            {
+                rowIndex = GetPurchaseOrderImportTargetRowIndex();
+                PopulatePurchaseOrderGridRow(rowIndex, productRow, qtyToImport, importedPrice);
+                return;
+            }
+
+            double existingQty = GetPurchaseOrderCellDouble(rowIndex, "Qty");
+            PopulatePurchaseOrderGridRow(rowIndex, productRow, existingQty + qtyToImport, importedPrice);
+        }
+
+        private int GetPurchaseOrderImportTargetRowIndex()
+        {
+            if (grid_purchases_order.Rows.Count == 0)
+            {
+                int rowIndex = grid_purchases_order.Rows.Add();
+                InitializePurchaseOrderRowDefaults(rowIndex);
+                return rowIndex;
+            }
+
+            if (grid_purchases_order.Rows[0].Cells["id"].Value == null && string.IsNullOrWhiteSpace(Convert.ToString(grid_purchases_order.Rows[0].Cells["code"].Value)))
+            {
+                InitializePurchaseOrderRowDefaults(0);
+                return 0;
+            }
+
+            int newRowIndex = grid_purchases_order.Rows.Add();
+            InitializePurchaseOrderRowDefaults(newRowIndex);
+            return newRowIndex;
+        }
+
+        private int FindPurchaseOrderGridRowByItemNumber(string itemNumber)
+        {
+            if (string.IsNullOrWhiteSpace(itemNumber))
+                return -1;
+
+            for (int i = 0; i < grid_purchases_order.Rows.Count; i++)
+            {
+                string currentItemNumber = Convert.ToString(grid_purchases_order.Rows[i].Cells["item_number"].Value);
+                if (string.Equals(currentItemNumber, itemNumber, StringComparison.OrdinalIgnoreCase))
+                    return i;
+            }
+
+            return -1;
+        }
+
+        private void PopulatePurchaseOrderGridRow(int rowIndex, DataRow productRow, double qtyToImport, double importedPrice)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases_order.Rows.Count)
+                return;
+
+            InitializePurchaseOrderRowDefaults(rowIndex);
+
+            double taxRate = 0;
+            double.TryParse(Convert.ToString(productRow["tax_rate"]), out taxRate);
+            double total = qtyToImport * importedPrice;
+            double tax = (total * taxRate) / 100;
+
+            grid_purchases_order.Rows[rowIndex].Cells["id"].Value = Convert.ToString(productRow["id"]);
+            grid_purchases_order.Rows[rowIndex].Cells["item_number"].Value = Convert.ToString(productRow["item_number"]);
+            grid_purchases_order.Rows[rowIndex].Cells["code"].Value = Convert.ToString(productRow["code"]);
+            grid_purchases_order.Rows[rowIndex].Cells["name"].Value = Convert.ToString(productRow["name"]);
+            grid_purchases_order.Rows[rowIndex].Cells["Qty"].Value = qtyToImport;
+            grid_purchases_order.Rows[rowIndex].Cells["avg_cost"].Value = Math.Round(importedPrice, 3);
+            grid_purchases_order.Rows[rowIndex].Cells["unit_price"].Value = Math.Round(Convert.ToDouble(productRow["unit_price"]), 3);
+            grid_purchases_order.Rows[rowIndex].Cells["discount"].Value = 0.00;
+            grid_purchases_order.Rows[rowIndex].Cells["tax"].Value = Math.Round(tax, 3);
+            grid_purchases_order.Rows[rowIndex].Cells["sub_total"].Value = Math.Round(total + tax, 3);
+            grid_purchases_order.Rows[rowIndex].Cells["location_code"].Value = string.Empty;
+            grid_purchases_order.Rows[rowIndex].Cells["unit"].Value = Convert.ToString(productRow["unit"]);
+            grid_purchases_order.Rows[rowIndex].Cells["category"].Value = Convert.ToString(productRow["category"]);
+            grid_purchases_order.Rows[rowIndex].Cells["btn_delete"].Value = "Del";
+            grid_purchases_order.Rows[rowIndex].Cells["tax_id"].Value = Convert.ToString(productRow["tax_id"]);
+            grid_purchases_order.Rows[rowIndex].Cells["tax_rate"].Value = Convert.ToString(productRow["tax_rate"]);
+            grid_purchases_order.Rows[rowIndex].Cells["available_qty"].Value = Convert.ToString(productRow["qty"]);
+            grid_purchases_order.Rows[rowIndex].Cells["qty_sold"].Value = 0;
+
+            double availableQty = 0;
+            double.TryParse(Convert.ToString(productRow["qty"]), out availableQty);
+            grid_purchases_order.Rows[rowIndex].DefaultCellStyle.ForeColor = availableQty <= 0 ? Color.Red : Color.Black;
+        }
+
+        private void EnsureTrailingEmptyPurchaseOrderRow()
+        {
+            if (grid_purchases_order.Rows.Count == 0)
+            {
+                int rowIndex = grid_purchases_order.Rows.Add();
+                InitializePurchaseOrderRowDefaults(rowIndex);
+                return;
+            }
+
+            var lastRow = grid_purchases_order.Rows[grid_purchases_order.Rows.Count - 1];
+            bool isBlankLastRow = lastRow.Cells["id"].Value == null && string.IsNullOrWhiteSpace(Convert.ToString(lastRow.Cells["code"].Value));
+            if (!isBlankLastRow)
+            {
+                int rowIndex = grid_purchases_order.Rows.Add();
+                InitializePurchaseOrderRowDefaults(rowIndex);
+            }
+        }
+
+        private void InitializePurchaseOrderRowDefaults(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases_order.Rows.Count)
+                return;
+
+            var row = grid_purchases_order.Rows[rowIndex];
+            if (row.Cells["avg_cost"].Value == null) row.Cells["avg_cost"].Value = 0;
+            if (row.Cells["Qty"].Value == null) row.Cells["Qty"].Value = 0;
+            if (row.Cells["unit_price"].Value == null) row.Cells["unit_price"].Value = 0;
+            if (row.Cells["discount"].Value == null) row.Cells["discount"].Value = 0;
+            if (row.Cells["tax"].Value == null) row.Cells["tax"].Value = 0;
+            if (row.Cells["sub_total"].Value == null) row.Cells["sub_total"].Value = 0;
+            if (row.Cells["qty_sold"].Value == null) row.Cells["qty_sold"].Value = 0;
+            if (row.Cells["available_qty"].Value == null) row.Cells["available_qty"].Value = 0;
+            if (row.Cells["btn_delete"].Value == null) row.Cells["btn_delete"].Value = "Del";
+        }
+
+        private double GetPurchaseOrderCellDouble(int rowIndex, string columnName)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases_order.Rows.Count)
+                return 0;
+
+            var value = grid_purchases_order.Rows[rowIndex].Cells[columnName].Value;
+            double parsed;
+            return value == null || !double.TryParse(Convert.ToString(value), out parsed) ? 0 : parsed;
         }
 
         private void HistoryToolStripButton_Click(object sender, EventArgs e)
