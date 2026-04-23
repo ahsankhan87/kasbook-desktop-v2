@@ -114,6 +114,46 @@ namespace POS.DLL
             }
 
         }
+
+        public DataTable GetProductPurchaseHistory(string item_number)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    DataTable history = new DataTable();
+
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+
+                        String query = "SELECT TOP 100 PI.id, P.name AS product_name, PI.item_code, PI.item_number, PI.quantity AS qty, " +
+                            "PI.unit_price, PI.cost_price, PH.invoice_no, PH.description, PH.purchase_date AS trans_date, " +
+                            "CONCAT(ISNULL(S.first_name, ''), ' - ', ISNULL(PH.supplier_invoice_no, '')) AS supplier " +
+                            "FROM pos_purchases_items PI " +
+                            "INNER JOIN pos_purchases PH ON PH.id = PI.purchase_id AND PH.branch_id = PI.branch_id " +
+                            "LEFT JOIN pos_products P ON P.item_number = PI.item_number " +
+                            "LEFT JOIN pos_suppliers S ON S.id = PH.supplier_id " +
+                            "WHERE PI.item_number = @item_number AND PI.branch_id = @branch_id " +
+                            "AND ISNULL(PH.account, '') <> 'Return' " +
+                            "ORDER BY PH.purchase_date DESC, PI.id DESC";
+
+                        cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@item_number", item_number);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    }
+
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(history);
+                    return history;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
         public DataTable SearchRecord(String condition)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

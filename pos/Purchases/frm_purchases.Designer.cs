@@ -196,17 +196,20 @@
             // 
             // splitContainer1.Panel1
             // 
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             this.splitContainer1.Panel1.Controls.Add(this.grid_product_history);
             this.splitContainer1.Panel1.Controls.Add(this.label15);
             // 
             // splitContainer1.Panel2
             // 
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel5);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel4);
             // 
             // grid_product_history
             // 
+            resources.ApplyResources(this.grid_product_history, "grid_product_history");
             this.grid_product_history.AllowUserToAddRows = false;
             this.grid_product_history.AllowUserToDeleteRows = false;
             this.grid_product_history.AllowUserToOrderColumns = true;
@@ -223,7 +226,6 @@
             this.trans_date,
             this.item_code,
             this.history_item_number});
-            resources.ApplyResources(this.grid_product_history, "grid_product_history");
             this.grid_product_history.Name = "grid_product_history";
             this.grid_product_history.ReadOnly = true;
             this.grid_product_history.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -332,18 +334,18 @@
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.rd_btn_with_vat);
             this.groupBox2.Controls.Add(this.rd_btn_without_vat);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.rd_btn_bytotal_price);
             this.groupBox3.Controls.Add(this.rd_btn_by_unitprice);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -523,8 +525,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -585,9 +587,9 @@
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.txt_description);
             this.groupBox5.Controls.Add(this.label17);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
@@ -609,8 +611,8 @@
             // 
             // PurchaseToolStrip
             // 
-            this.PurchaseToolStrip.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.PurchaseToolStrip, "PurchaseToolStrip");
+            this.PurchaseToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.PurchaseToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.PurchaseToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewToolStripButton,
@@ -624,49 +626,49 @@
             // 
             // NewToolStripButton
             // 
+            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
-            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
             this.NewToolStripButton.Name = "NewToolStripButton";
             this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
             // 
             // SaveToolStripButton
             // 
+            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
-            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
             this.SaveToolStripButton.Name = "SaveToolStripButton";
             this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
             // 
             // SearchToolStripButton
             // 
+            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
             this.SearchToolStripButton.Name = "SearchToolStripButton";
             this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
             // 
             // ImportExcelToolStripButton
             // 
+            resources.ApplyResources(this.ImportExcelToolStripButton, "ImportExcelToolStripButton");
             this.ImportExcelToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ImportExcelToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ImportExcelToolStripButton.Name = "ImportExcelToolStripButton";
-            resources.ApplyResources(this.ImportExcelToolStripButton, "ImportExcelToolStripButton");
             this.ImportExcelToolStripButton.Click += new System.EventHandler(this.ImportExcelToolStripButton_Click);
             // 
             // HistoryToolStripButton
             // 
+            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
-            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
             this.HistoryToolStripButton.Name = "HistoryToolStripButton";
             this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
             // 
             // LoadPOToolStripButton
             // 
+            resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
             this.LoadPOToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.LoadPOToolStripButton.Image = global::pos.Properties.Resources.Estimate;
-            resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
             this.LoadPOToolStripButton.Name = "LoadPOToolStripButton";
             this.LoadPOToolStripButton.Click += new System.EventHandler(this.LoadPOToolStripButton_Click);
             // 
@@ -679,8 +681,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.tableLayoutPanel1);
             resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.tableLayoutPanel1);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -762,8 +764,8 @@
             // 
             // groupBox_products
             // 
-            this.groupBox_products.Controls.Add(this.tableLayoutPanel2);
             resources.ApplyResources(this.groupBox_products, "groupBox_products");
+            this.groupBox_products.Controls.Add(this.tableLayoutPanel2);
             this.groupBox_products.Name = "groupBox_products";
             this.groupBox_products.TabStop = false;
             // 
@@ -851,34 +853,35 @@
             // 
             // contextMenuStrip_purchases
             // 
+            resources.ApplyResources(this.contextMenuStrip_purchases, "contextMenuStrip_purchases");
             this.contextMenuStrip_purchases.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip_purchases.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNewRowToolStripMenuItem,
             this.productMovementF4ToolStripMenuItem,
             this.productDetailToolStripMenuItem});
             this.contextMenuStrip_purchases.Name = "contextMenuStrip_purchases";
-            resources.ApplyResources(this.contextMenuStrip_purchases, "contextMenuStrip_purchases");
             // 
             // addNewRowToolStripMenuItem
             // 
-            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             resources.ApplyResources(this.addNewRowToolStripMenuItem, "addNewRowToolStripMenuItem");
+            this.addNewRowToolStripMenuItem.Name = "addNewRowToolStripMenuItem";
             this.addNewRowToolStripMenuItem.Click += new System.EventHandler(this.addNewRowToolStripMenuItem_Click);
             // 
             // productMovementF4ToolStripMenuItem
             // 
-            this.productMovementF4ToolStripMenuItem.Name = "productMovementF4ToolStripMenuItem";
             resources.ApplyResources(this.productMovementF4ToolStripMenuItem, "productMovementF4ToolStripMenuItem");
+            this.productMovementF4ToolStripMenuItem.Name = "productMovementF4ToolStripMenuItem";
             this.productMovementF4ToolStripMenuItem.Click += new System.EventHandler(this.productMovementF4ToolStripMenuItem_Click);
             // 
             // productDetailToolStripMenuItem
             // 
-            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             resources.ApplyResources(this.productDetailToolStripMenuItem, "productDetailToolStripMenuItem");
+            this.productDetailToolStripMenuItem.Name = "productDetailToolStripMenuItem";
             this.productDetailToolStripMenuItem.Click += new System.EventHandler(this.productDetailToolStripMenuItem_Click);
             // 
             // grid_purchases
             // 
+            resources.ApplyResources(this.grid_purchases, "grid_purchases");
             this.grid_purchases.AllowUserToAddRows = false;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             this.grid_purchases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
@@ -923,7 +926,6 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid_purchases.DefaultCellStyle = dataGridViewCellStyle17;
-            resources.ApplyResources(this.grid_purchases, "grid_purchases");
             this.grid_purchases.EnableHeadersVisualStyles = false;
             this.grid_purchases.Name = "grid_purchases";
             this.grid_purchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -1111,8 +1113,8 @@
             // 
             // panel_grid
             // 
-            this.panel_grid.Controls.Add(this.grid_purchases);
             resources.ApplyResources(this.panel_grid, "panel_grid");
+            this.panel_grid.Controls.Add(this.grid_purchases);
             this.panel_grid.Name = "panel_grid";
             // 
             // panel_footer

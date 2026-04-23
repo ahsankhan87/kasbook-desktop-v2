@@ -178,6 +178,8 @@ namespace pos
         /// </summary>
         private void StyleSalesForm()
         {
+            ApplySalesLabelForeColor(this, Color.Black);
+
             // ── Classic Windows grey panels ───────────────────────────
             panel_header.BackColor = SystemColors.Control;
             panel_footer.BackColor = SystemColors.Control;
@@ -189,7 +191,7 @@ namespace pos
                 if (ctrl is GroupBox grp)
                 {
                     grp.BackColor = SystemColors.Control;
-                    grp.ForeColor = SystemColors.ControlText;
+                    grp.ForeColor = Color.Black;
                     grp.Font = AppTheme.FontGroupBox;
                     grp.Padding = new Padding(4, 8, 4, 4);
 
@@ -206,7 +208,7 @@ namespace pos
 
             // ── Title label ───────────────────────────────────────────
             lbl_title.Font = AppTheme.FontHeader;
-            lbl_title.ForeColor = SystemColors.ControlText;
+            lbl_title.ForeColor = Color.Black;
 
             // ── ToolStrip: classic Windows system renderer ────────────
             SalesToolStrip.RenderMode = ToolStripRenderMode.System;
@@ -276,16 +278,16 @@ namespace pos
 
             // groupBox2 (product info)
             groupBox2.BackColor = SystemColors.Control;
-            groupBox2.ForeColor = SystemColors.ControlText;
+            groupBox2.ForeColor = Color.Black;
             groupBox2.Font = AppTheme.FontGroupBox;
 
             groupBox5.BackColor = SystemColors.Control;
-            groupBox5.ForeColor = SystemColors.ControlText;
+            groupBox5.ForeColor = Color.Black;
             groupBox5.Font = AppTheme.FontGroupBox;
             //groupBox5.Padding = new Padding(8, 18, 8, 8);
 
             groupBox6.BackColor = SystemColors.Control;
-            groupBox6.ForeColor = SystemColors.ControlText;
+            groupBox6.ForeColor = Color.Black;
             groupBox6.Font = AppTheme.FontGroupBox;
             //groupBox6.Padding = new Padding(8, 18, 8, 8);
 
@@ -428,12 +430,28 @@ namespace pos
             if (isPrimary)
             {
                 lbl.Font = FooterPrimaryLabelFont;
-                lbl.ForeColor = SystemColors.ControlText;
+                lbl.ForeColor = Color.Black;
             }
             else
             {
                 lbl.Font = FooterSecondaryLabelFont;
-                lbl.ForeColor = SystemColors.ControlText;
+                lbl.ForeColor = Color.Black;
+            }
+        }
+
+        private static void ApplySalesLabelForeColor(Control parent, Color color)
+        {
+            if (parent == null)
+                return;
+
+            foreach (Control child in parent.Controls)
+            {
+                var label = child as Label;
+                if (label != null)
+                    label.ForeColor = color;
+
+                if (child.HasChildren)
+                    ApplySalesLabelForeColor(child, color);
             }
         }
 

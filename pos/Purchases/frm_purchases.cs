@@ -79,6 +79,7 @@ namespace pos
         private bool _isEditMode;
         private bool _editingHoldPurchase;
         private string _editingInvoiceNo = string.Empty;
+        private string _loadedHistoryItemNumber = string.Empty;
 
         public DataTable products_dt = new DataTable();
 
@@ -175,9 +176,11 @@ namespace pos
         /// </summary>
         private void StylePurchasesForm()
         {
+            ApplyPurchaseLabelForeColor(this, Color.Black);
+
             // ── Title label ───────────────────────────────────────────
             lbl_title.Font = AppTheme.FontHeader;
-            lbl_title.ForeColor = SystemColors.ControlText;
+            lbl_title.ForeColor = Color.Black;
 
             // ── Panels ────────────────────────────────────────────────
             panel_header.BackColor = SystemColors.Control;
@@ -190,7 +193,7 @@ namespace pos
                 if (ctrl is GroupBox grp)
                 {
                     grp.BackColor = SystemColors.Control;
-                    grp.ForeColor = SystemColors.ControlText;
+                    grp.ForeColor = Color.Black;
                     grp.Font      = AppTheme.FontGroupBox;
                     grp.Padding   = new Padding(4, 8, 4, 4);
 
@@ -364,7 +367,7 @@ namespace pos
 
             // groupBox2 (VAT / price-type options)
             groupBox2.BackColor = SystemColors.Control;
-            groupBox2.ForeColor = SystemColors.ControlText;
+            groupBox2.ForeColor = Color.Black;
             groupBox2.Font      = AppTheme.FontGroupBox;
 
             // Labels
@@ -411,8 +414,24 @@ namespace pos
         /// <summary>Style a purchases footer label.</summary>
         private static void StylePurchaseLabel(Label lbl, bool isPrimary)
         {
-            lbl.ForeColor = SystemColors.ControlText;
+            lbl.ForeColor = Color.Black;
             lbl.Font = isPrimary ? PurchasesFooterPrimaryLabelFont : PurchasesFooterSecondaryLabelFont;
+        }
+
+        private static void ApplyPurchaseLabelForeColor(Control parent, Color color)
+        {
+            if (parent == null)
+                return;
+
+            foreach (Control child in parent.Controls)
+            {
+                var label = child as Label;
+                if (label != null)
+                    label.ForeColor = color;
+
+                if (child.HasChildren)
+                    ApplyPurchaseLabelForeColor(child, color);
+            }
         }
 
         /// <summary>Style a popup DataGridView dropdown on the purchases page.</summary>
@@ -2099,30 +2118,22 @@ namespace pos
 
         private void grid_purchases_SelectionChanged(object sender, EventArgs e)
         {
-            if (grid_purchases.Rows.Count > 0 && grid_purchases.Focused)
+            if (grid_purchases.Rows.Count > 0 && grid_purchases.Focused && grid_purchases.CurrentRow != null)
             {
-                string product_code = (grid_purchases.CurrentRow.Cells["code"].Value != null ? grid_purchases.CurrentRow.Cells["code"].Value.ToString() : "");
                 string item_number = (grid_purchases.CurrentRow.Cells["item_number"].Value != null ? grid_purchases.CurrentRow.Cells["item_number"].Value.ToString() : "");
-                if (item_number != "")
+                if (!string.IsNullOrWhiteSpace(item_number))
                 {
-                    if (grid_product_history.Rows.Count > 0) // if history grid is empty then load product history 
-                    {
-                        //if product history grid has already same product the don not load but 
-                        //if history gird has different product the load
-                        //it will improve performance
-                        if (item_number != grid_product_history.CurrentRow.Cells["history_item_number"].Value.ToString())
-                        {
-                            load_product_purchase_history(item_number);
-                            txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
-
-                        }
-                    }
-                    else
+                    if (!string.Equals(_loadedHistoryItemNumber, item_number, StringComparison.OrdinalIgnoreCase))
                     {
                         load_product_purchase_history(item_number);
-                        txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
-
                     }
+
+                    txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
+                }
+                else
+                {
+                    grid_product_history.DataSource = null;
+                    _loadedHistoryItemNumber = string.Empty;
                 }
 
             }
@@ -2134,23 +2145,16 @@ namespace pos
             try
             {
                 grid_product_history.DataSource = null;
-
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
                 grid_product_history.AutoGenerateColumns = false;
 
-                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.item_number,I.qty,I.unit_price," +
-                    "I.cost_price,I.invoice_no,I.description,I.trans_date, Concat(S.first_name, ' - ',PR.supplier_invoice_no) AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code " +
-                    "LEFT JOIN pos_suppliers S ON S.id=I.supplier_id " +
-                    "LEFT JOIN pos_purchases PR on PR.supplier_id = I.supplier_id " +
-                    "WHERE I.item_number = '" + item_number + "' AND I.description = 'Purchase' ORDER BY I.id DESC";
-                grid_product_history.DataSource = objBLL.GetRecord(keyword, table);
-
+                PurchasesBLL objBLL = new PurchasesBLL();
+                grid_product_history.DataSource = objBLL.GetProductPurchaseHistory(item_number);
+                _loadedHistoryItemNumber = item_number;
 
             }
             catch (Exception ex)
             {
+                _loadedHistoryItemNumber = string.Empty;
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 

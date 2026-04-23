@@ -65,6 +65,18 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetProductPurchaseHistory(string item_number)
+        {
+            try
+            {
+                return objDLL.GetProductPurchaseHistory(item_number);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public DataTable GetAll_Hold_PurchaseByInvoice(string invoice_no)
         {
             try

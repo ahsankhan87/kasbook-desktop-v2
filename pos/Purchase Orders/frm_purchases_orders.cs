@@ -22,6 +22,13 @@ namespace pos
 
     public partial class frm_purchases_order : Form
     {
+        private static readonly Font PurchasesOrderGridFont = new Font(AppTheme.FontGrid.FontFamily, AppTheme.FontGrid.Size + 1f, AppTheme.FontGrid.Style);
+        private static readonly Font PurchasesOrderGridHeaderFont = new Font(AppTheme.FontGridHeader.FontFamily, AppTheme.FontGridHeader.Size + 1f, AppTheme.FontGridHeader.Style);
+        private static readonly Font PurchasesOrderTotalPrimaryFont = new Font(AppTheme.FontHeader.FontFamily, AppTheme.FontHeader.Size + 2f, AppTheme.FontHeader.Style);
+        private static readonly Font PurchasesOrderTotalSecondaryFont = new Font(AppTheme.FontSubHeader.FontFamily, AppTheme.FontSubHeader.Size + 1f, AppTheme.FontSubHeader.Style);
+        private static readonly Font PurchasesOrderFooterPrimaryLabelFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
+        private static readonly Font PurchasesOrderFooterSecondaryLabelFont = new Font(AppTheme.FontLabel.FontFamily, AppTheme.FontLabel.Size + 1f, AppTheme.FontLabel.Style);
+
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
@@ -66,6 +73,7 @@ namespace pos
         private System.Windows.Forms.Timer _supplierSearchDebounceTimer;
         private bool _suppressSupplierSearch;
         private int _selectedSupplierId;
+        private string _loadedHistoryItemNumber = string.Empty;
 
         string invoice_status = "";
         string po_invoice_no = "";
@@ -96,11 +104,14 @@ namespace pos
 
         private void frm_purchases_order_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StylePurchaseOrderForm();
+
             using (BusyScope.Show(this, UiMessages.T("Loading purchase orders...", "جاري تحميل أوامر الشراء...")))
             {
                 grid_purchases_order.Rows.Add();
                 this.ActiveControl = grid_purchases_order;
-                grid_purchases_order.CurrentCell = grid_purchases_order.Rows[0].Cells[1];
+                grid_purchases_order.CurrentCell = grid_purchases_order.Rows[0].Cells["code"];
 
                 Get_AccountID_From_Company();
                 load_user_rights(UsersModal.logged_in_userid);
@@ -117,6 +128,241 @@ namespace pos
                 }
                 LoadBrandList();
             }
+        }
+
+        private void StylePurchaseOrderForm()
+        {
+            ApplyLabelForeColor(this, Color.Black);
+
+            label29.Font = AppTheme.FontHeader;
+            label29.ForeColor = Color.Black;
+
+            panel_header.BackColor = SystemColors.Control;
+            panel_footer.BackColor = SystemColors.Control;
+            panel_grid.BackColor = SystemColors.Control;
+            splitContainer2.BackColor = SystemColors.Control;
+            splitContainer2.Panel1.BackColor = SystemColors.Control;
+            splitContainer2.Panel2.BackColor = SystemColors.Control;
+
+            foreach (Control ctrl in panel_header.Controls)
+            {
+                if (ctrl is GroupBox grp)
+                {
+                    grp.BackColor = SystemColors.Control;
+                    grp.ForeColor = Color.Black;
+                    grp.Font = AppTheme.FontGroupBox;
+                    grp.Padding = new Padding(4, 8, 4, 4);
+
+                    foreach (Control child in grp.Controls)
+                    {
+                        if (child is ComboBox cmb)
+                        {
+                            cmb.BackColor = SystemColors.Window;
+                            cmb.FlatStyle = FlatStyle.Standard;
+                        }
+                    }
+                }
+            }
+
+            groupBox5.BackColor = SystemColors.Control;
+            groupBox5.ForeColor = Color.Black;
+            groupBox5.Font = AppTheme.FontGroupBox;
+
+            PurchaseToolStrip.RenderMode = ToolStripRenderMode.System;
+            PurchaseToolStrip.BackColor = SystemColors.Control;
+            PurchaseToolStrip.ForeColor = SystemColors.ControlText;
+            PurchaseToolStrip.ImageScalingSize = new Size(20, 20);
+            PurchaseToolStrip.AutoSize = true;
+            PurchaseToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            PurchaseToolStrip.Padding = new Padding(4, 2, 4, 2);
+            foreach (ToolStripItem item in PurchaseToolStrip.Items)
+            {
+                item.ForeColor = SystemColors.ControlText;
+                item.Padding = new Padding(4, 2, 4, 2);
+                item.Margin = new Padding(1, 0, 1, 0);
+                if (item is ToolStripButton tsb)
+                {
+                    tsb.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                    tsb.TextImageRelation = TextImageRelation.ImageBeforeText;
+                }
+            }
+
+            StylePurchaseOrderGrid(grid_purchases_order, true);
+            ApplyPurchaseOrderGridAmountFormats();
+
+            sno.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.GrayText,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.GrayText,
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+                Font = AppTheme.FontSmall
+            };
+
+            code.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            btn_delete.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                ForeColor = AppTheme.Danger,
+                SelectionForeColor = AppTheme.Danger,
+                Alignment = DataGridViewContentAlignment.MiddleCenter
+            };
+            btn_delete.FlatStyle = FlatStyle.Flat;
+
+            StylePurchaseOrderGrid(grid_product_history, false);
+
+            StylePurchaseOrderLabel(label9, true);
+            StylePurchaseOrderLabel(label12, false);
+            StylePurchaseOrderLabel(label13, false);
+            StylePurchaseOrderLabel(label14, false);
+            StylePurchaseOrderLabel(label19, false);
+            StylePurchaseOrderLabel(label15, false);
+            StylePurchaseOrderLabel(label29, true);
+
+            StylePurchaseOrderTotalField(txt_total_amount, true);
+            StylePurchaseOrderTotalField(txt_sub_total, false);
+            StylePurchaseOrderTotalField(txt_total_discount, false);
+            StylePurchaseOrderTotalField(txt_total_tax, false);
+            StylePurchaseOrderTotalField(txt_total_qty, false);
+
+            StylePurchaseOrderDropdownGrid(brandsDataGridView);
+            StylePurchaseOrderDropdownGrid(categoriesDataGridView);
+            StylePurchaseOrderDropdownGrid(groupsDataGridView);
+            if (suppliersDataGridView != null)
+                StylePurchaseOrderDropdownGrid(suppliersDataGridView);
+        }
+
+        private static void StylePurchaseOrderGrid(DataGridView grid, bool isMainGrid)
+        {
+            if (grid == null) return;
+
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.SetProperty,
+                null, grid, new object[] { true });
+
+            grid.BorderStyle = BorderStyle.None;
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid.GridColor = SystemColors.ControlLight;
+            grid.BackgroundColor = SystemColors.AppWorkspace;
+            grid.RowHeadersVisible = false;
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid.ColumnHeadersHeight = isMainGrid ? 36 : 32;
+            grid.RowTemplate.Height = isMainGrid ? 34 : 28;
+
+            grid.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = PurchasesOrderGridHeaderFont,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(6, 4, 6, 4)
+            };
+
+            grid.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = SystemColors.WindowText,
+                Font = PurchasesOrderGridFont,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(4, 2, 4, 2)
+            };
+
+            grid.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = SystemColors.WindowText,
+                Font = PurchasesOrderGridFont,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+        }
+
+        private void ApplyPurchaseOrderGridAmountFormats()
+        {
+            if (grid_purchases_order == null) return;
+
+            string[] amountColumns = { "avg_cost", "unit_price", "discount", "tax", "sub_total", "qty_sold", "available_qty", "Qty" };
+            foreach (var colName in amountColumns)
+            {
+                if (grid_purchases_order.Columns.Contains(colName))
+                    grid_purchases_order.Columns[colName].DefaultCellStyle.Format = "N2";
+            }
+        }
+
+        private static void StylePurchaseOrderTotalField(TextBox txt, bool isPrimary)
+        {
+            txt.ReadOnly = true;
+            txt.BorderStyle = BorderStyle.Fixed3D;
+            txt.TextAlign = HorizontalAlignment.Right;
+            txt.ForeColor = SystemColors.WindowText;
+            txt.BackColor = SystemColors.Window;
+            txt.Font = isPrimary ? PurchasesOrderTotalPrimaryFont : PurchasesOrderTotalSecondaryFont;
+        }
+
+        private static void StylePurchaseOrderLabel(Label lbl, bool isPrimary)
+        {
+            lbl.ForeColor = Color.Black;
+            lbl.Font = isPrimary ? PurchasesOrderFooterPrimaryLabelFont : PurchasesOrderFooterSecondaryLabelFont;
+        }
+
+        private static void ApplyLabelForeColor(Control parent, Color color)
+        {
+            if (parent == null)
+                return;
+
+            foreach (Control child in parent.Controls)
+            {
+                var label = child as Label;
+                if (label != null)
+                    label.ForeColor = color;
+
+                if (child.HasChildren)
+                    ApplyLabelForeColor(child, color);
+            }
+        }
+
+        private static void StylePurchaseOrderDropdownGrid(DataGridView dgv)
+        {
+            if (dgv == null) return;
+
+            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.BackgroundColor = SystemColors.AppWorkspace;
+            dgv.GridColor = SystemColors.ControlDark;
+            dgv.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = SystemColors.WindowText,
+                Font = PurchasesOrderGridFont,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+            dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = PurchasesOrderGridHeaderFont,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText
+            };
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersVisible = false;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.RowTemplate.Height = 28;
+            dgv.ColumnHeadersHeight = 32;
         }
         
         private void btn_search_products_Click(object sender, EventArgs e)
@@ -342,7 +588,7 @@ namespace pos
                     string tax_id = myProductView["tax_id"].ToString();
                     string item_number1 = myProductView["item_number"].ToString();
 
-                    string[] row0 = { id.ToString(), code, name,  avg_cost.ToString(), tax.ToString(), qty_sold,
+                    string[] row0 = { "", id.ToString(), code, name,  avg_cost.ToString(), tax.ToString(), qty_sold,
                                             available_qty,qty.ToString(),category,unit_price.ToString(), discount.ToString(),
                             current_sub_total.ToString(),location_code,unit,btn_delete,
                             tax_id.ToString(), tax_rate.ToString(),item_number1 };
@@ -641,7 +887,7 @@ namespace pos
             grid_purchases_order.Rows.Clear();
             grid_purchases_order.Refresh();
             grid_purchases_order.Rows.Add();
-            grid_purchases_order.CurrentCell = grid_purchases_order.Rows[0].Cells[1];
+            grid_purchases_order.CurrentCell = grid_purchases_order.Rows[0].Cells["code"];
 
             grid_product_history.DataSource = null;
             grid_product_history.Refresh();
@@ -725,8 +971,17 @@ namespace pos
                     e.SuppressKeyPress = true;
                     int iColumn = grid_purchases_order.CurrentCell.ColumnIndex;
                     int iRow = grid_purchases_order.CurrentCell.RowIndex;
-                    
-                    if (iColumn <= 6)
+                    int snoIdx = grid_purchases_order.Columns["sno"].Index;
+                    int idIdx = grid_purchases_order.Columns["id"].Index;
+                    int codeIdx = grid_purchases_order.Columns["code"].Index;
+
+                    if (iColumn == snoIdx || iColumn == idIdx)
+                    {
+                        grid_purchases_order.CurrentCell = grid_purchases_order.Rows[iRow].Cells[codeIdx];
+                        grid_purchases_order.Focus();
+                        grid_purchases_order.CurrentCell.Selected = true;
+                    }
+                    else if (iColumn <= 7)
                     {
                         if (grid_purchases_order.Rows[iRow].Cells["code"].Value != null && grid_purchases_order.Rows[iRow].Cells["avg_cost"].Value != null && grid_purchases_order.Rows[iRow].Cells["qty"].Value != null)
                         {
@@ -736,13 +991,13 @@ namespace pos
                             
                         }
                     }
-                    else if (iColumn > 6)
+                    else if (iColumn > 7)
                     {
                         if (grid_purchases_order.Rows[iRow].Cells["code"].Value != null && grid_purchases_order.Rows[iRow].Cells["avg_cost"].Value != null && grid_purchases_order.Rows[iRow].Cells["qty"].Value != null)
                         {
                             grid_purchases_order.Rows.Add();  //adds new row on last cell of row
                             this.ActiveControl = grid_purchases_order;
-                            grid_purchases_order.CurrentCell = grid_purchases_order.Rows[iRow + 1].Cells[1];
+                            grid_purchases_order.CurrentCell = grid_purchases_order.Rows[iRow + 1].Cells["code"];
                             grid_purchases_order.CurrentCell.Selected = true;
                             grid_purchases_order.BeginEdit(true);
                         }
@@ -785,11 +1040,7 @@ namespace pos
 
         private void grid_purchases_order_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            //grid_purchases_order.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
-            using (SolidBrush b = new SolidBrush(grid_purchases_order.RowHeadersDefaultCellStyle.ForeColor))
-            {
-                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
-            }
+            grid_purchases_order.Rows[e.RowIndex].Cells["sno"].Value = (e.RowIndex + 1).ToString();
         }
 
         private void SetupBrandDataGridView()
@@ -1212,7 +1463,7 @@ namespace pos
                         string tax_id = myProductView["tax_id"].ToString();
                         string item_number = myProductView["item_number"].ToString();
 
-                        string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold,
+                        string[] row0 = { "", id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold,
                                             available_qty,qty.ToString(),category,unit_price.ToString(), discount.ToString(),
                             current_sub_total.ToString(),location_code,unit,btn_delete,
                             tax_id.ToString(), tax_rate.ToString(),item_number };
@@ -1237,26 +1488,20 @@ namespace pos
             }
         }
 
-        public void load_product_purchase_history(string product_code)
+        public void load_product_purchase_history(string item_number)
         {
             try
             {
-                
                 grid_product_history.DataSource = null;
-
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
                 grid_product_history.AutoGenerateColumns = false;
 
-                String keyword = "TOP 100 I.id,P.name AS product_name,I.item_code,I.qty,I.unit_price,I.cost_price,I.invoice_no,I.description,trans_date, S.first_name AS supplier";
-                String table = "pos_inventory I LEFT JOIN pos_products P ON P.code=I.item_code LEFT JOIN pos_suppliers S ON S.id=I.supplier_id WHERE I.item_code = '" + product_code + "' AND I.description = 'Purchase' AND I.branch_id=" + UsersModal.logged_in_branch_id + " ORDER BY I.id DESC";
-                grid_product_history.DataSource = objBLL.GetRecord(keyword, table);
-
-                    
-                
+                PurchasesBLL objBLL = new PurchasesBLL();
+                grid_product_history.DataSource = objBLL.GetProductPurchaseHistory(item_number);
+                _loadedHistoryItemNumber = item_number;
             }
             catch (Exception ex)
             {
+                _loadedHistoryItemNumber = string.Empty;
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
 
@@ -1265,25 +1510,20 @@ namespace pos
         private void grid_purchases_order_SelectionChanged(object sender, EventArgs e)
         {
 
-            if (grid_purchases_order.Rows.Count > 0 && grid_purchases_order.Focused)
+            if (grid_purchases_order.Rows.Count > 0 && grid_purchases_order.Focused && grid_purchases_order.CurrentRow != null)
             {
-                string product_code = (grid_purchases_order.CurrentRow.Cells["code"].Value != null ? grid_purchases_order.CurrentRow.Cells["code"].Value.ToString() : "");
-                if (product_code != "")
+                string item_number = (grid_purchases_order.CurrentRow.Cells["item_number"].Value != null ? grid_purchases_order.CurrentRow.Cells["item_number"].Value.ToString() : "");
+                if (!string.IsNullOrWhiteSpace(item_number))
                 {
-                    if (grid_product_history.Rows.Count > 0) // if history grid is empty then load product history 
+                    if (!string.Equals(_loadedHistoryItemNumber, item_number, StringComparison.OrdinalIgnoreCase))
                     {
-                        //if product history grid has already same product the don not load but 
-                        //if history gird has different product the load
-                        //it will improve performance
-                        if (product_code != grid_product_history.CurrentRow.Cells["item_code"].Value.ToString())
-                        {
-                            load_product_purchase_history(product_code);
-                        }
+                        load_product_purchase_history(item_number);
                     }
-                    else
-                    {
-                        load_product_purchase_history(product_code);
-                    }
+                }
+                else
+                {
+                    grid_product_history.DataSource = null;
+                    _loadedHistoryItemNumber = string.Empty;
                 }
 
             }
@@ -1828,7 +2068,7 @@ namespace pos
                         string item_number = myProductView["item_number"].ToString();
 
 
-                        string[] row0 = { id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
+                        string[] row0 = { "", id.ToString(), code, name,  cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
                                             available_qty,required_qty.ToString(),category,unit_price.ToString(), discount.ToString(),
                             sub_total.ToString(),location_code,unit,btn_delete,tax_id,
                             tax_rate.ToString(),item_number    };
@@ -2072,7 +2312,7 @@ namespace pos
                         string tax_id = myProductView["tax_id"].ToString();
                         string item_number = myProductView["item_number"].ToString();
 
-                        string[] row0 = { id.ToString(), code, name, cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
+                        string[] row0 = { "", id.ToString(), code, name, cost_price.ToString(), tax.ToString(), qty_sold.ToString(),
                             available_qty, required_qty.ToString(), category, unit_price.ToString(), discount.ToString(),
                             sub_total.ToString(), location_code, unit, btn_delete, tax_id, tax_rate.ToString(), item_number };
 
