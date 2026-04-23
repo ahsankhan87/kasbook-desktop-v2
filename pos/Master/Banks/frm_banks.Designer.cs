@@ -76,6 +76,7 @@ namespace pos.Master.Banks
             this.btn_search = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_transDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_banks_transactions)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -118,6 +119,7 @@ namespace pos.Master.Banks
             this.grid_banks_transactions.Name = "grid_banks_transactions";
             this.grid_banks_transactions.ReadOnly = true;
             this.grid_banks_transactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grid_banks_transactions.SelectionChanged += new System.EventHandler(this.grid_banks_transactions_SelectionChanged);
             // 
             // id
             // 
@@ -179,8 +181,8 @@ namespace pos.Master.Banks
             // 
             // description
             // 
-            this.description.DataPropertyName = "description";
             this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.DataPropertyName = "description";
             this.description.FillWeight = 260F;
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
@@ -332,6 +334,7 @@ namespace pos.Master.Banks
             // 
             // Transactions
             // 
+            this.Transactions.Controls.Add(this.btn_transDelete);
             this.Transactions.Controls.Add(this.Btn_bank_report);
             this.Transactions.Controls.Add(this.Btn_deposit);
             this.Transactions.Controls.Add(this.grid_banks_transactions);
@@ -412,6 +415,14 @@ namespace pos.Master.Banks
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
+            // btn_transDelete
+            // 
+            this.btn_transDelete.Enabled = false;
+            resources.ApplyResources(this.btn_transDelete, "btn_transDelete");
+            this.btn_transDelete.Name = "btn_transDelete";
+            this.btn_transDelete.UseVisualStyleBackColor = true;
+            this.btn_transDelete.Click += new System.EventHandler(this.btn_transDelete_Click);
+            // 
             // frm_banks
             // 
             this.AcceptButton = this.btn_search;
@@ -485,5 +496,6 @@ namespace pos.Master.Banks
         private System.Windows.Forms.DataGridViewTextBoxColumn credit;
         private System.Windows.Forms.DataGridViewTextBoxColumn balance;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.Button btn_transDelete;
     }
 }

@@ -48,6 +48,7 @@ namespace pos
             tb_email = txt_email;
             tb_lbl_is_edit = lbl_edit_status;
             vat_with_status = chk_vat_status;
+            btn_transDelete.Enabled = false;
         }
         
         public void frm_addSupplier_Load(object sender, EventArgs e)
@@ -338,6 +339,7 @@ namespace pos
             txt_citySubdivisionName.Text = "";
             txt_postalCode.Text = "";
             txt_countryName.Text = "SA";
+            btn_transDelete.Enabled = false;
             GetSupplierCode();
         }
 
@@ -523,6 +525,7 @@ namespace pos
 
                     grid_supplier_transactions.DataSource = dt;
                     CustomizeDataGridView();
+                    UpdateDeleteTransactionButtonState();
                 }
             }
             catch (Exception ex)
@@ -636,8 +639,137 @@ namespace pos
             }
         }
 
+        private void btn_transDelete_Click(object sender, EventArgs e)
+        {
+            if (grid_supplier_transactions.SelectedRows.Count == 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a payment transaction to delete.",
+                    "يرجى اختيار حركة دفعة للحذف.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                return;
+            }
+
+            int supplierId;
+            if (!int.TryParse(txt_id.Text, out supplierId) || supplierId <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier first.",
+                    "يرجى اختيار مورد أولاً.",
+                    "Supplier",
+                    "المورد"
+                );
+                return;
+            }
+
+            string paymentInvoiceNo = Convert.ToString(grid_supplier_transactions.SelectedRows[0].Cells["invoice_no"].Value);
+            if (string.IsNullOrWhiteSpace(paymentInvoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a valid payment transaction row.",
+                    "يرجى اختيار صف دفعة صالح.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                return;
+            }
+
+            if (!IsJournalTransactionInvoice(paymentInvoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "Only journal transactions with invoice numbers starting with J can be deleted.",
+                    "يمكن حذف حركات اليومية فقط التي يبدأ رقم فاتورتها بالحرف J.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                UpdateDeleteTransactionButtonState();
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this supplier payment transaction and all linked journal/bank entries?",
+                "هل تريد حذف حركة دفعة المورد هذه وجميع قيود اليومية/البنك المرتبطة بها؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting supplier payment transaction...", "جاري حذف حركة دفعة المورد...")))
+                {
+                    SupplierBLL objBLL = new SupplierBLL();
+                    int result = objBLL.DeletePaymentTransaction(paymentInvoiceNo.Trim());
+
+                    if (result > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Supplier payment transaction has been deleted successfully.",
+                            "تم حذف حركة دفعة المورد بنجاح.",
+                            "Deleted",
+                            "تم الحذف"
+                        );
+
+                        load_transactions_grid(supplierId);
+
+                        if (mainForm != null)
+                            mainForm.load_Suppliers_grid();
+                    }
+                    else
+                    {
+                        UiMessages.ShowWarning(
+                            "No linked records were found for the selected invoice number.",
+                            "لم يتم العثور على سجلات مرتبطة برقم الفاتورة المحدد.",
+                            "Delete Transaction",
+                            "حذف الحركة"
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "Failed to delete supplier payment transaction. " + ex.Message,
+                    "تعذر حذف حركة دفعة المورد. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
+            }
+        }
+
+        private void grid_supplier_transactions_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateDeleteTransactionButtonState();
+        }
+
+        private void UpdateDeleteTransactionButtonState()
+        {
+            btn_transDelete.Enabled = false;
+
+            if (grid_supplier_transactions == null || grid_supplier_transactions.SelectedRows.Count == 0)
+                return;
+
+            var selectedRow = grid_supplier_transactions.SelectedRows[0];
+            if (selectedRow == null)
+                return;
+
+            string invoiceNo = Convert.ToString(selectedRow.Cells["invoice_no"].Value);
+            btn_transDelete.Enabled = IsJournalTransactionInvoice(invoiceNo);
+        }
+
+        private static bool IsJournalTransactionInvoice(string invoiceNo)
+        {
+            return !string.IsNullOrWhiteSpace(invoiceNo)
+                && invoiceNo.Trim().StartsWith("J", StringComparison.OrdinalIgnoreCase);
+        }
+
         private void CustomizeDataGridView()
         {
+            if (grid_supplier_transactions == null || grid_supplier_transactions.Rows.Count == 0)
+                return;
+
             // Get the last row in the DataGridView
             DataGridViewRow lastRow = grid_supplier_transactions.Rows[grid_supplier_transactions.Rows.Count - 1];
 
@@ -711,11 +843,6 @@ namespace pos
         {
             frm_search_suppliers search_obj = new frm_search_suppliers(this, txt_search.Text);
             search_obj.ShowDialog();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

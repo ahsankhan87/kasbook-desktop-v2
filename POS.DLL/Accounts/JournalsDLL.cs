@@ -106,41 +106,42 @@ namespace POS.DLL
 
         public String GetMaxInvoiceNo()
         {
+            return GenerateDailyInvoiceNo("acc_entries", "invoice_no", "J");
+        }
+
+        public string GenerateDailyInvoiceNo(string tableName, string invoiceColumn, string prefix, int? branchId = null, DateTime? invoiceDate = null)
+        {
+            int bId = branchId ?? UsersModal.logged_in_branch_id;
+            DateTime d = (invoiceDate ?? DateTime.Now).Date;
+
+            string datePart = d.ToString("yyyyMMdd");
+            string start = prefix + bId + "-" + datePart + "-";
+            string like = start + "%";
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand($@"
+            SELECT MAX({invoiceColumn})
+            FROM {tableName}
+            WHERE branch_id = @branch_id
+              AND {invoiceColumn} LIKE @like;", cn))
             {
-                try
+                cmd.Parameters.AddWithValue("@branch_id", bId);
+                cmd.Parameters.AddWithValue("@like", like);
+
+                cn.Open();
+                string lastRef = Convert.ToString(cmd.ExecuteScalar());
+
+                int newNum = 1;
+                if (!string.IsNullOrWhiteSpace(lastRef) && lastRef.StartsWith(start, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (cn.State == ConnectionState.Closed)
-                    {
-                        cn.Open();
-
-                        cmd = new SqlCommand("SELECT MAX(invoice_no) FROM acc_entries WHERE invoice_no LIKE 'J-%' AND branch_id = @branch_id", cn);
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-
-                        string maxId = Convert.ToString(cmd.ExecuteScalar());
-
-                        if (maxId == "")
-                        {
-                            return maxId = "J-000001";
-                        }
-                        else
-                        {
-                            int intval = int.Parse(maxId.Substring(2, 6));
-                            intval++;
-                            maxId = String.Format("J-{0:000000}", intval);
-                            return maxId;
-                        }
-
-                    }
-                    return "";
+                    string tail = lastRef.Substring(start.Length);
+                    int lastNum;
+                    if (int.TryParse(tail, out lastNum))
+                        newNum = lastNum + 1;
                 }
-                catch
-                {
 
-                    throw;
-                }
+                return start + newNum.ToString("0000");
             }
-
         }
 
         public int Insert(JournalsModal obj)

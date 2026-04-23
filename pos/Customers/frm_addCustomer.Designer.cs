@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_first_name = new System.Windows.Forms.TextBox();
             this.txt_last_name = new System.Windows.Forms.TextBox();
             this.txt_email = new System.Windows.Forms.TextBox();
@@ -108,6 +108,7 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
+            this.btn_transDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -491,6 +492,7 @@
             this.grid_customer_transactions.Name = "grid_customer_transactions";
             this.grid_customer_transactions.ReadOnly = true;
             this.grid_customer_transactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grid_customer_transactions.SelectionChanged += new System.EventHandler(this.grid_customer_transactions_SelectionChanged);
             // 
             // id
             // 
@@ -523,9 +525,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -533,9 +535,9 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -543,9 +545,9 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
@@ -561,6 +563,7 @@
             // 
             // panelTransactionTop
             // 
+            this.panelTransactionTop.Controls.Add(this.btn_transDelete);
             this.panelTransactionTop.Controls.Add(this.btn_payment);
             this.panelTransactionTop.Controls.Add(this.btn_trans_refresh);
             this.panelTransactionTop.Controls.Add(this.Btn_printCustomerReceipt);
@@ -649,6 +652,14 @@
             this.btn_blank.Name = "btn_blank";
             this.btn_blank.UseVisualStyleBackColor = true;
             this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
+            // 
+            // btn_transDelete
+            // 
+            this.btn_transDelete.Enabled = false;
+            resources.ApplyResources(this.btn_transDelete, "btn_transDelete");
+            this.btn_transDelete.Name = "btn_transDelete";
+            this.btn_transDelete.UseVisualStyleBackColor = true;
+            this.btn_transDelete.Click += new System.EventHandler(this.btn_transDelete_Click);
             // 
             // frm_addCustomer
             // 
@@ -763,5 +774,6 @@
         private System.Windows.Forms.TextBox txt_customer_code;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button btn_transDelete;
     }
 }

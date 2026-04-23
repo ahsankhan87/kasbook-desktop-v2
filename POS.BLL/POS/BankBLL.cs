@@ -125,5 +125,18 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public int DeletePaymentTransaction(string invoiceNo)
+        {
+            try
+            {
+                BankDLL objDLL = new BankDLL();
+                return objDLL.DeletePaymentTransaction(invoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

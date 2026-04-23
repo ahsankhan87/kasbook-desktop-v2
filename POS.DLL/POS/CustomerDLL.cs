@@ -362,6 +362,71 @@ namespace POS.DLL
             }
         }
 
+        public int DeletePaymentTransaction(string invoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlTransaction transaction = null;
+                try
+                {
+                    int result = 0;
+
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                    }
+
+                    transaction = cn.BeginTransaction();
+
+                    result += DeletePaymentTransactionRecords(cn, transaction, "pos_customers_payments", invoiceNo);
+                    result += DeletePaymentTransactionRecords(cn, transaction, "acc_entries", invoiceNo);
+                    result += DeleteOptionalPaymentTransactionRecords(cn, transaction, invoiceNo, "pos_banks_payments");
+
+                    transaction.Commit();
+
+                    if (result > 0)
+                    {
+                        Log.LogAction("Delete Customer Payment", $"InvoiceNo: {invoiceNo}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                    }
+
+                    return result;
+                }
+                catch
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+
+                    throw;
+                }
+            }
+        }
+
+        private static int DeletePaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string tableName, string invoiceNo)
+        {
+            using (SqlCommand deleteCommand = new SqlCommand($"DELETE FROM {tableName} WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+            {
+                deleteCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
+                deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                return deleteCommand.ExecuteNonQuery();
+            }
+        }
+
+        private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string invoiceNo, string tableName)
+        {
+            using (SqlCommand countCommand = new SqlCommand($"SELECT COUNT(1) FROM {tableName} WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+            {
+                countCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
+                countCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+
+                if (Convert.ToInt32(countCommand.ExecuteScalar()) <= 0)
+                    return 0;
+            }
+
+            return DeletePaymentTransactionRecords(cn, transaction, tableName, invoiceNo);
+        }
+
         private void SetCommonParameters(SqlCommand cmd, CustomerModal obj)
         {
             cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;

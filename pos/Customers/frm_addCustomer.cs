@@ -19,6 +19,7 @@ namespace pos
         public frm_addCustomer()
         {
             InitializeComponent();
+            btn_transDelete.Enabled = false;
             // Ensure user identity exists; hydrate claims from DB
             if (_currentUser == null)
             {
@@ -423,6 +424,7 @@ namespace pos
 
             cmb_GL_account_code.SelectedValue = "5"; // 5 is the default Ac receiavable Account id in acc_accounts table
             txt_cr_number.Text = "";
+            btn_transDelete.Enabled = false;
             GetCustomerCode();
         }
 
@@ -704,6 +706,9 @@ namespace pos
         }
         private void CustomizeDataGridView()
         {
+            if (grid_customer_transactions == null || grid_customer_transactions.Rows.Count == 0)
+                return;
+
             // Get the last row in the DataGridView
             DataGridViewRow lastRow = grid_customer_transactions.Rows[grid_customer_transactions.Rows.Count - 1];
 
@@ -760,6 +765,7 @@ namespace pos
 
                 grid_customer_transactions.DataSource = dt;
                 CustomizeDataGridView();
+                UpdateDeleteTransactionButtonState();
             }
             catch (Exception ex)
             {
@@ -843,6 +849,129 @@ namespace pos
             {
                 UiMessages.ShowError(ex.Message, ex.Message);
             }
+        }
+
+        private void btn_transDelete_Click(object sender, EventArgs e)
+        {
+            if (grid_customer_transactions.SelectedRows.Count == 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a payment transaction to delete.",
+                    "يرجى اختيار حركة دفعة للحذف.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                return;
+            }
+
+            int customerId;
+            if (!int.TryParse(txt_id.Text, out customerId) || customerId <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a customer first.",
+                    "يرجى اختيار عميل أولاً.",
+                    "Customer",
+                    "العميل"
+                );
+                return;
+            }
+
+            string paymentInvoiceNo = Convert.ToString(grid_customer_transactions.SelectedRows[0].Cells["invoice_no"].Value);
+            if (string.IsNullOrWhiteSpace(paymentInvoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a valid payment transaction row.",
+                    "يرجى اختيار صف دفعة صالح.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                return;
+            }
+
+            if (!IsJournalTransactionInvoice(paymentInvoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "Only journal transactions with invoice numbers starting with J can be deleted.",
+                    "يمكن حذف حركات اليومية فقط التي يبدأ رقم فاتورتها بالحرف J.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                UpdateDeleteTransactionButtonState();
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this customer payment transaction and all linked journal/bank entries?",
+                "هل تريد حذف حركة دفعة العميل هذه وجميع قيود اليومية/البنك المرتبطة بها؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                using (pos.UI.Busy.BusyScope.Show(this, UiMessages.T("Deleting customer payment transaction...", "جاري حذف حركة دفعة العميل...")))
+                {
+                    CustomerBLL objBLL = new CustomerBLL();
+                    int result = objBLL.DeletePaymentTransaction(paymentInvoiceNo.Trim());
+
+                    if (result > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Customer payment transaction has been deleted successfully.",
+                            "تم حذف حركة دفعة العميل بنجاح.",
+                            "Deleted",
+                            "تم الحذف"
+                        );
+
+                        load_customer_transactions_grid(customerId);
+                    }
+                    else
+                    {
+                        UiMessages.ShowWarning(
+                            "No linked records were found for the selected invoice number.",
+                            "لم يتم العثور على سجلات مرتبطة برقم الفاتورة المحدد.",
+                            "Delete Transaction",
+                            "حذف الحركة"
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "Failed to delete customer payment transaction. " + ex.Message,
+                    "تعذر حذف حركة دفعة العميل. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
+            }
+        }
+
+        private void grid_customer_transactions_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateDeleteTransactionButtonState();
+        }
+
+        private void UpdateDeleteTransactionButtonState()
+        {
+            btn_transDelete.Enabled = false;
+
+            if (grid_customer_transactions == null || grid_customer_transactions.SelectedRows.Count == 0)
+                return;
+
+            var selectedRow = grid_customer_transactions.SelectedRows[0];
+            if (selectedRow == null)
+                return;
+
+            string invoiceNo = Convert.ToString(selectedRow.Cells["invoice_no"].Value);
+            btn_transDelete.Enabled = IsJournalTransactionInvoice(invoiceNo);
+        }
+
+        private static bool IsJournalTransactionInvoice(string invoiceNo)
+        {
+            return !string.IsNullOrWhiteSpace(invoiceNo)
+                && invoiceNo.Trim().StartsWith("J", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

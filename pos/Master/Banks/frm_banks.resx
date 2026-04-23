@@ -148,7 +148,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;btn_trans_refresh.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -286,7 +286,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;grid_banks_transactions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btn_blank.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
@@ -918,6 +918,36 @@
   <data name="&gt;&gt;Detail.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btn_transDelete.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_transDelete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btn_transDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>360, 12</value>
+  </data>
+  <data name="btn_transDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 28</value>
+  </data>
+  <data name="btn_transDelete.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="btn_transDelete.Text" xml:space="preserve">
+    <value>Delete Invoice</value>
+  </data>
+  <data name="&gt;&gt;btn_transDelete.Name" xml:space="preserve">
+    <value>btn_transDelete</value>
+  </data>
+  <data name="&gt;&gt;btn_transDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_transDelete.Parent" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="&gt;&gt;btn_transDelete.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Btn_bank_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -925,7 +955,7 @@
     <value>NoControl</value>
   </data>
   <data name="Btn_bank_report.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 14</value>
+    <value>542, 12</value>
   </data>
   <data name="Btn_bank_report.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -949,7 +979,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;Btn_bank_report.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="Btn_deposit.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 12</value>
@@ -973,7 +1003,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;Btn_deposit.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btn_payment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1003,7 +1033,7 @@
     <value>Transactions</value>
   </data>
   <data name="&gt;&gt;btn_payment.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Transactions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>

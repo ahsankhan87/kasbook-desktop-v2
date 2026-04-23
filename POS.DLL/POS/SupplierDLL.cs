@@ -416,6 +416,58 @@ namespace POS.DLL
                 }
             }
         }
+
+        public int DeletePaymentTransaction(string invoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlTransaction transaction = null;
+                try
+                {
+                    int result = 0;
+
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                    }
+
+                    transaction = cn.BeginTransaction();
+
+                    result += DeletePaymentTransactionRecords(cn, transaction, "pos_suppliers_payments", invoiceNo);
+                    result += DeletePaymentTransactionRecords(cn, transaction, "acc_entries", invoiceNo);
+                    result += DeletePaymentTransactionRecords(cn, transaction, "pos_banks_payments", invoiceNo);
+
+                    transaction.Commit();
+
+                    if (result > 0)
+                    {
+                        Log.LogAction("Delete Supplier Payment", $"InvoiceNo: {invoiceNo}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                    }
+
+                    return result;
+                }
+                catch
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+
+                    throw;
+                }
+            }
+        }
+
+        private static int DeletePaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string tableName, string invoiceNo)
+        {
+            using (SqlCommand deleteCommand = new SqlCommand($"DELETE FROM {tableName} WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+            {
+                deleteCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
+                deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                return deleteCommand.ExecuteNonQuery();
+            }
+        }
+
         public bool IsSupplierCodeExists(string supplierCode, int? excludeSupplierId = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

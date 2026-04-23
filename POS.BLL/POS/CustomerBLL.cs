@@ -125,6 +125,20 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public int DeletePaymentTransaction(string invoiceNo)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.DeletePaymentTransaction(invoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool IsCustomerCodeExists(string CustomerCode, int? excludeCustomerId = null)
         {
             try

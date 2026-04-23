@@ -20,6 +20,7 @@ namespace pos.Master.Banks
         public frm_banks()
         {
             InitializeComponent();
+            btn_transDelete.Enabled = false;
         }
 
         private void frm_banks_Load(object sender, EventArgs e)
@@ -230,6 +231,7 @@ namespace pos.Master.Banks
             txt_holderName.Text = "";
             lbl_bank_name.Text = "";
             grid_banks_transactions.DataSource = null;
+            btn_transDelete.Enabled = false;
             //cmb_GL_account_code.SelectedValue = "";
         }
 
@@ -391,6 +393,7 @@ namespace pos.Master.Banks
 
                     grid_banks_transactions.DataSource = dt;
                     CustomizeDataGridView();
+                    UpdateDeleteTransactionButtonState();
                 }
             }
             catch (Exception ex)
@@ -526,6 +529,9 @@ namespace pos.Master.Banks
 
         private void CustomizeDataGridView()
         {
+            if (grid_banks_transactions == null || grid_banks_transactions.Rows.Count == 0)
+                return;
+
             // Get the last row in the DataGridView
             DataGridViewRow lastRow = grid_banks_transactions.Rows[grid_banks_transactions.Rows.Count - 1];
 
@@ -577,6 +583,129 @@ namespace pos.Master.Banks
         {
             frm_banks_search search_obj = new frm_banks_search(this, txt_search.Text);
             search_obj.ShowDialog();
+        }
+
+        private void btn_transDelete_Click(object sender, EventArgs e)
+        {
+            if (grid_banks_transactions.SelectedRows.Count == 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a bank transaction to delete.",
+                    "يرجى اختيار حركة بنك للحذف.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                return;
+            }
+
+            int bankId;
+            if (!int.TryParse(txt_id.Text, out bankId) || bankId <= 0)
+            {
+                UiMessages.ShowInfo(
+                    "Please select a bank first.",
+                    "يرجى اختيار بنك أولاً.",
+                    "Bank",
+                    "البنك"
+                );
+                return;
+            }
+
+            string paymentInvoiceNo = Convert.ToString(grid_banks_transactions.SelectedRows[0].Cells["invoice_no"].Value);
+            if (string.IsNullOrWhiteSpace(paymentInvoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a valid bank transaction row.",
+                    "يرجى اختيار صف حركة بنك صالح.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                return;
+            }
+
+            if (!IsJournalTransactionInvoice(paymentInvoiceNo))
+            {
+                UiMessages.ShowWarning(
+                    "Only journal transactions with invoice numbers starting with J can be deleted.",
+                    "يمكن حذف حركات اليومية فقط التي يبدأ رقم فاتورتها بالحرف J.",
+                    "Delete Transaction",
+                    "حذف الحركة"
+                );
+                UpdateDeleteTransactionButtonState();
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this bank transaction and linked journal entries?",
+                "هل تريد حذف حركة البنك هذه وقيود اليومية المرتبطة بها؟",
+                captionEn: "Confirm Delete",
+                captionAr: "تأكيد الحذف"
+            );
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Deleting bank transaction...", "جاري حذف حركة البنك...")))
+                {
+                    BankBLL objBLL = new BankBLL();
+                    int result = objBLL.DeletePaymentTransaction(paymentInvoiceNo.Trim());
+
+                    if (result > 0)
+                    {
+                        UiMessages.ShowInfo(
+                            "Bank transaction has been deleted successfully.",
+                            "تم حذف حركة البنك بنجاح.",
+                            "Deleted",
+                            "تم الحذف"
+                        );
+
+                        load_banks_transactions_grid(bankId);
+                    }
+                    else
+                    {
+                        UiMessages.ShowWarning(
+                            "No linked records were found for the selected invoice number.",
+                            "لم يتم العثور على سجلات مرتبطة برقم الفاتورة المحدد.",
+                            "Delete Transaction",
+                            "حذف الحركة"
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "Failed to delete bank transaction. " + ex.Message,
+                    "تعذر حذف حركة البنك. " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
+            }
+        }
+
+        private void grid_banks_transactions_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateDeleteTransactionButtonState();
+        }
+
+        private void UpdateDeleteTransactionButtonState()
+        {
+            btn_transDelete.Enabled = false;
+
+            if (grid_banks_transactions == null || grid_banks_transactions.SelectedRows.Count == 0)
+                return;
+
+            var selectedRow = grid_banks_transactions.SelectedRows[0];
+            if (selectedRow == null)
+                return;
+
+            string invoiceNo = Convert.ToString(selectedRow.Cells["invoice_no"].Value);
+            btn_transDelete.Enabled = IsJournalTransactionInvoice(invoiceNo);
+        }
+
+        private static bool IsJournalTransactionInvoice(string invoiceNo)
+        {
+            return !string.IsNullOrWhiteSpace(invoiceNo)
+                && invoiceNo.Trim().StartsWith("J", StringComparison.OrdinalIgnoreCase);
         }
     }
 }
