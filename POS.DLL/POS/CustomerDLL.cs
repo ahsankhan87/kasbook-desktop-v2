@@ -199,6 +199,69 @@ namespace POS.DLL
             }
         }
 
+        public DataTable GetPendingCustomerInvoices(int customerId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+                SELECT
+                    s.invoice_no,
+                    s.sale_date,
+                    CAST(ISNULL(s.total_amount, 0) + ISNULL(s.total_tax, 0) - ISNULL(s.discount_value, 0) AS decimal(18,4)) AS invoice_amount,
+                    CAST(ISNULL(SUM(cp.credit), 0) AS decimal(18,4)) AS paid_amount,
+                    CAST((ISNULL(s.total_amount, 0) + ISNULL(s.total_tax, 0) - ISNULL(s.discount_value, 0)) - ISNULL(SUM(cp.credit), 0) AS decimal(18,4)) AS balance_amount
+                FROM pos_sales s
+                LEFT JOIN pos_customers_payments cp
+                    ON cp.branch_id = s.branch_id
+                    AND cp.customer_id = s.customer_id
+                    AND cp.invoice_no = s.invoice_no
+                WHERE s.branch_id = @branch_id
+                  AND s.customer_id = @customer_id
+                  AND ISNULL(s.sale_type, '') = 'Credit'
+                  AND ISNULL(s.account, '') <> 'Return'
+                GROUP BY s.invoice_no, s.sale_date, s.total_amount, s.total_tax, s.discount_value
+                HAVING ((ISNULL(s.total_amount, 0) + ISNULL(s.total_tax, 0) - ISNULL(s.discount_value, 0)) - ISNULL(SUM(cp.credit), 0)) > 0.004
+                ORDER BY s.sale_date DESC, s.invoice_no DESC", cn))
+            {
+                cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmd.Parameters.Add("@customer_id", SqlDbType.Int).Value = customerId;
+
+                DataTable dt = new DataTable();
+                try
+                {
+                    cn.Open();
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+
+                    if (!dt.Columns.Contains("display_text"))
+                        dt.Columns.Add("display_text", typeof(string));
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        DateTime saleDate;
+                        DateTime.TryParse(Convert.ToString(row["sale_date"]), out saleDate);
+
+                        decimal balanceAmount = 0m;
+                        if (row["balance_amount"] != DBNull.Value)
+                            balanceAmount = Convert.ToDecimal(row["balance_amount"]);
+
+                        row["display_text"] = string.Format(
+                            "{0} | {1:yyyy-MM-dd} | Balance: {2:N2}",
+                            Convert.ToString(row["invoice_no"]),
+                            saleDate == DateTime.MinValue ? DateTime.Today : saleDate,
+                            balanceAmount);
+                    }
+
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error fetching pending customer invoices: " + ex.Message, ex);
+                }
+            }
+        }
+
 
         public int Insert(CustomerModal obj)
         {

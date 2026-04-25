@@ -51,6 +51,8 @@
             this.lblSupplierName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmb_pendingInvoices = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -195,11 +197,24 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // cmb_pendingInvoices
+            // 
+            resources.ApplyResources(this.cmb_pendingInvoices, "cmb_pendingInvoices");
+            this.cmb_pendingInvoices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_pendingInvoices.FormattingEnabled = true;
+            this.cmb_pendingInvoices.Name = "cmb_pendingInvoices";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
             // frm_supplier_payment
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
+            this.Controls.Add(this.cmb_pendingInvoices);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txt_payment_date);
@@ -209,6 +224,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_description);
             this.Controls.Add(this.txt_discount);
@@ -255,5 +271,7 @@
         private System.Windows.Forms.Label lblSupplierName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox cmb_pendingInvoices;
+        private System.Windows.Forms.Label label9;
     }
 }

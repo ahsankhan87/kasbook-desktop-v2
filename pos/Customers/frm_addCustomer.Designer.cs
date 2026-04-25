@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_first_name = new System.Windows.Forms.TextBox();
             this.txt_last_name = new System.Windows.Forms.TextBox();
             this.txt_email = new System.Windows.Forms.TextBox();
@@ -97,6 +97,7 @@
             this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTransactionTop = new System.Windows.Forms.Panel();
+            this.btn_transDelete = new System.Windows.Forms.Button();
             this.btn_payment = new System.Windows.Forms.Button();
             this.btn_trans_refresh = new System.Windows.Forms.Button();
             this.Btn_printCustomerReceipt = new System.Windows.Forms.Button();
@@ -108,7 +109,6 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
-            this.btn_transDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -525,9 +525,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -535,9 +535,9 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.credit.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.credit.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -545,9 +545,9 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
@@ -570,6 +570,13 @@
             this.panelTransactionTop.Controls.Add(this.Btn_ledger_report);
             resources.ApplyResources(this.panelTransactionTop, "panelTransactionTop");
             this.panelTransactionTop.Name = "panelTransactionTop";
+            // 
+            // btn_transDelete
+            // 
+            resources.ApplyResources(this.btn_transDelete, "btn_transDelete");
+            this.btn_transDelete.Name = "btn_transDelete";
+            this.btn_transDelete.UseVisualStyleBackColor = true;
+            this.btn_transDelete.Click += new System.EventHandler(this.btn_transDelete_Click);
             // 
             // btn_payment
             // 
@@ -652,14 +659,6 @@
             this.btn_blank.Name = "btn_blank";
             this.btn_blank.UseVisualStyleBackColor = true;
             this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
-            // 
-            // btn_transDelete
-            // 
-            this.btn_transDelete.Enabled = false;
-            resources.ApplyResources(this.btn_transDelete, "btn_transDelete");
-            this.btn_transDelete.Name = "btn_transDelete";
-            this.btn_transDelete.UseVisualStyleBackColor = true;
-            this.btn_transDelete.Click += new System.EventHandler(this.btn_transDelete_Click);
             // 
             // frm_addCustomer
             // 

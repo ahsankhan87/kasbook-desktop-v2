@@ -2122,7 +2122,7 @@
     <value>False</value>
   </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>87</value>
   </data>
   <metadata name="discount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2137,7 +2137,7 @@
     <value>False</value>
   </data>
   <data name="discount.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>91</value>
   </data>
   <metadata name="sub_total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2164,7 +2164,7 @@
     <value>False</value>
   </data>
   <data name="location_code.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>59</value>
   </data>
   <metadata name="unit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2179,7 +2179,7 @@
     <value>False</value>
   </data>
   <data name="unit.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>61</value>
   </data>
   <metadata name="btn_delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2469,6 +2469,18 @@
   <data name="&gt;&gt;PurchaseHistoryToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>dataGridViewImageColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;debounceTimer.Name" xml:space="preserve">
+    <value>debounceTimer</value>
+  </data>
+  <data name="&gt;&gt;debounceTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;sno.Name" xml:space="preserve">
     <value>sno</value>
   </data>
@@ -2582,18 +2594,6 @@
   </data>
   <data name="&gt;&gt;item_number.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Name" xml:space="preserve">
-    <value>dataGridViewImageColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewImageColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;debounceTimer.Name" xml:space="preserve">
-    <value>debounceTimer</value>
-  </data>
-  <data name="&gt;&gt;debounceTimer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_purchases_order</value>

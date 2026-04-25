@@ -84,6 +84,19 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetPendingCustomerInvoices(int customerId)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetPendingCustomerInvoices(customerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public int Insert(CustomerModal obj)
         {
             try

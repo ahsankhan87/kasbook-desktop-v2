@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 370</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
   </data>
@@ -125,7 +128,7 @@
     <value>تاريخ الدفع:</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 374</value>
+    <value>52, 405</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
@@ -134,7 +137,7 @@
     <value>المبلغ الإجمالي:</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 438</value>
+    <value>52, 469</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
@@ -146,7 +149,7 @@
     <value>يحفظ</value>
   </data>
   <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>464, 19</value>
+    <value>572, 20</value>
   </data>
   <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 25</value>
@@ -155,7 +158,7 @@
     <value>الدفع للمورد</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 406</value>
+    <value>52, 437</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 20</value>
@@ -166,11 +169,65 @@
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>يلغي</value>
   </data>
+  <data name="cmb_ref_account_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 68</value>
+  </data>
+  <data name="cmb_GL_account_code.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 35</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>427, 71</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 20</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>المرجع: الحساب (الائتماني):</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 39</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 20</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>GL الحساب (الائتماني):</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>469, 34</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 20</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>GL الحساب (مدين):</value>
+  </data>
+  <data name="lblGLAccountDebitName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 34</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>503, 67</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>المورد (مدين):</value>
+  </data>
+  <data name="lblSupplierName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 67</value>
+  </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>قيد مدين</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>إدخال الائتمان</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 20</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>الفواتير المستحقة:</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">

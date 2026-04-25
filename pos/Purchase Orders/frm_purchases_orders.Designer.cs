@@ -111,6 +111,11 @@
             this.txt_barcode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.grid_purchases_order = new System.Windows.Forms.DataGridView();
+            this.panel_grid = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel_footer = new System.Windows.Forms.Panel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.debounceTimer = new System.Windows.Forms.Timer(this.components);
             this.sno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,11 +135,6 @@
             this.tax_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tax_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel_grid = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.panel_footer = new System.Windows.Forms.Panel();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.debounceTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -732,12 +732,44 @@
             this.grid_purchases_order.SelectionChanged += new System.EventHandler(this.grid_purchases_order_SelectionChanged);
             this.grid_purchases_order.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_purchases_order_KeyDown);
             // 
+            // panel_grid
+            // 
+            this.panel_grid.Controls.Add(this.grid_purchases_order);
+            this.panel_grid.Controls.Add(this.label15);
+            resources.ApplyResources(this.panel_grid, "panel_grid");
+            this.panel_grid.Name = "panel_grid";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // panel_footer
+            // 
+            this.panel_footer.Controls.Add(this.splitContainer2);
+            resources.ApplyResources(this.panel_footer, "panel_footer");
+            this.panel_footer.Name = "panel_footer";
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.dataGridViewImageColumn1, "dataGridViewImageColumn1");
+            this.dataGridViewImageColumn1.Image = global::pos.Properties.Resources.delete;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // debounceTimer
+            // 
+            this.debounceTimer.Interval = 300;
+            this.debounceTimer.Tick += new System.EventHandler(this.debounceTimer_Tick);
+            // 
             // sno
             // 
-            this.sno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             resources.ApplyResources(this.sno, "sno");
             this.sno.Name = "sno";
             this.sno.ReadOnly = true;
+            this.sno.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // id
             // 
@@ -895,37 +927,6 @@
             resources.ApplyResources(this.item_number, "item_number");
             this.item_number.Name = "item_number";
             // 
-            // panel_grid
-            // 
-            this.panel_grid.Controls.Add(this.grid_purchases_order);
-            this.panel_grid.Controls.Add(this.label15);
-            resources.ApplyResources(this.panel_grid, "panel_grid");
-            this.panel_grid.Name = "panel_grid";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
-            // panel_footer
-            // 
-            this.panel_footer.Controls.Add(this.splitContainer2);
-            resources.ApplyResources(this.panel_footer, "panel_footer");
-            this.panel_footer.Name = "panel_footer";
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.dataGridViewImageColumn1, "dataGridViewImageColumn1");
-            this.dataGridViewImageColumn1.Image = global::pos.Properties.Resources.delete;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // debounceTimer
-            // 
-            this.debounceTimer.Interval = 300;
-            this.debounceTimer.Tick += new System.EventHandler(this.debounceTimer_Tick);
-            // 
             // frm_purchases_order
             // 
             resources.ApplyResources(this, "$this");
@@ -1046,6 +1047,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn trans_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn sno;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
@@ -1065,8 +1069,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

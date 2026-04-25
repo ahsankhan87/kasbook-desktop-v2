@@ -12,6 +12,8 @@ namespace pos
 {
     public partial class frm_addCustomer : Form
     {
+        private const string PaymentReferencePrefix = "[Payment Ref: ";
+
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
@@ -877,6 +879,7 @@ namespace pos
             }
 
             string paymentInvoiceNo = Convert.ToString(grid_customer_transactions.SelectedRows[0].Cells["invoice_no"].Value);
+            string paymentDescription = Convert.ToString(grid_customer_transactions.SelectedRows[0].Cells["description"].Value);
             if (string.IsNullOrWhiteSpace(paymentInvoiceNo))
             {
                 UiMessages.ShowWarning(
@@ -888,11 +891,15 @@ namespace pos
                 return;
             }
 
-            if (!IsJournalTransactionInvoice(paymentInvoiceNo))
+            string paymentReferenceInvoiceNo = IsJournalTransactionInvoice(paymentInvoiceNo)
+                ? paymentInvoiceNo.Trim()
+                : ExtractPaymentReferenceInvoice(paymentDescription);
+
+            if (string.IsNullOrWhiteSpace(paymentReferenceInvoiceNo))
             {
                 UiMessages.ShowWarning(
-                    "Only journal transactions with invoice numbers starting with J can be deleted.",
-                    "يمكن حذف حركات اليومية فقط التي يبدأ رقم فاتورتها بالحرف J.",
+                    "Only payment transactions linked to a journal reference can be deleted.",
+                    "يمكن حذف حركات الدفعات المرتبطة بمرجع قيد يومية فقط.",
                     "Delete Transaction",
                     "حذف الحركة"
                 );
@@ -913,7 +920,7 @@ namespace pos
                 using (pos.UI.Busy.BusyScope.Show(this, UiMessages.T("Deleting customer payment transaction...", "جاري حذف حركة دفعة العميل...")))
                 {
                     CustomerBLL objBLL = new CustomerBLL();
-                    int result = objBLL.DeletePaymentTransaction(paymentInvoiceNo.Trim());
+                    int result = objBLL.DeletePaymentTransaction(paymentReferenceInvoiceNo.Trim());
 
                     if (result > 0)
                     {
@@ -965,13 +972,32 @@ namespace pos
                 return;
 
             string invoiceNo = Convert.ToString(selectedRow.Cells["invoice_no"].Value);
-            btn_transDelete.Enabled = IsJournalTransactionInvoice(invoiceNo);
+            string description = Convert.ToString(selectedRow.Cells["description"].Value);
+            btn_transDelete.Enabled = IsJournalTransactionInvoice(invoiceNo)
+                || !string.IsNullOrWhiteSpace(ExtractPaymentReferenceInvoice(description));
         }
 
         private static bool IsJournalTransactionInvoice(string invoiceNo)
         {
             return !string.IsNullOrWhiteSpace(invoiceNo)
                 && invoiceNo.Trim().StartsWith("J", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string ExtractPaymentReferenceInvoice(string description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+                return string.Empty;
+
+            int startIndex = description.IndexOf(PaymentReferencePrefix, StringComparison.OrdinalIgnoreCase);
+            if (startIndex < 0)
+                return string.Empty;
+
+            startIndex += PaymentReferencePrefix.Length;
+            int endIndex = description.IndexOf(']', startIndex);
+            if (endIndex <= startIndex)
+                return string.Empty;
+
+            return description.Substring(startIndex, endIndex - startIndex).Trim();
         }
     }
 }
