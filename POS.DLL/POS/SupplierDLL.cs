@@ -231,6 +231,68 @@ namespace POS.DLL
             return dt;
         }
 
+        public DataTable GetPendingSupplierInvoices(int supplierId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+            SELECT
+                p.invoice_no,
+                p.purchase_date,
+                CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.total_discount, 0) AS decimal(18,4)) AS invoice_amount,
+                CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS paid_amount,
+                CAST((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.total_discount, 0)) - ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS balance_amount
+            FROM pos_purchases p
+            LEFT JOIN pos_suppliers_payments sp
+                ON sp.branch_id = p.branch_id
+                AND sp.supplier_id = p.supplier_id
+                AND sp.invoice_no = p.invoice_no
+            WHERE p.branch_id = @branch_id
+              AND p.supplier_id = @supplier_id
+              AND ISNULL(p.purchase_type, '') = 'Credit'
+            GROUP BY p.invoice_no, p.purchase_date, p.total_amount, p.total_tax, p.total_discount
+            HAVING ((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.total_discount, 0)) - ISNULL(SUM(sp.debit), 0)) > 0.004
+            ORDER BY p.purchase_date DESC, p.invoice_no DESC", cn))
+            {
+                cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmd.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+
+                DataTable dt = new DataTable();
+                try
+                {
+                    cn.Open();
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+
+                    if (!dt.Columns.Contains("display_text"))
+                        dt.Columns.Add("display_text", typeof(string));
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        DateTime purchaseDate;
+                        DateTime.TryParse(Convert.ToString(row["purchase_date"]), out purchaseDate);
+
+                        decimal balanceAmount = 0m;
+                        if (row["balance_amount"] != DBNull.Value)
+                            balanceAmount = Convert.ToDecimal(row["balance_amount"]);
+
+                        row["display_text"] = string.Format(
+                            "{0} | {1:yyyy-MM-dd} | Balance: {2:N2}",
+                            Convert.ToString(row["invoice_no"]),
+                            purchaseDate == DateTime.MinValue ? DateTime.Today : purchaseDate,
+                            balanceAmount);
+                    }
+
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error fetching pending supplier invoices: " + ex.Message, ex);
+                }
+            }
+        }
+
         public int Insert(SupplierModal obj)
         {
             Int32 result = 0;

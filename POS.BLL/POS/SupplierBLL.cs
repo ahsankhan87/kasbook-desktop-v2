@@ -79,6 +79,19 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetPendingSupplierInvoices(int supplierId)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetPendingSupplierInvoices(supplierId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public int Insert(SupplierModal obj)
         {
             try
