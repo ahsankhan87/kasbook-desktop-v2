@@ -147,7 +147,7 @@ namespace pos
                         Insert_Journal_entry(_invoice_no, glAccountId, 0, amount, txt_payment_date.Value.Date, journalDescription, 0, 0, entry_id, refAccountId);
                     }
 
-                    Insert_Journal_entry(ledgerInvoiceNo, glAccountId, amount, 0, txt_payment_date.Value.Date, ledgerDescription, 0, _supplier_id, entry_id, 0);
+                    Insert_Journal_entry(_invoice_no, glAccountId, amount, 0, txt_payment_date.Value.Date, ledgerDescription, 0, _supplier_id, entry_id, 0);
 
                     if (!string.IsNullOrWhiteSpace(txt_discount.Text))
                     {
@@ -156,7 +156,7 @@ namespace pos
                         {
                             Insert_Journal_entry(_invoice_no, payable_account_id, discount, 0, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
                             int entry_idd = Insert_Journal_entry(_invoice_no, purchases_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
-                            Insert_Journal_entry(ledgerInvoiceNo, purchases_discount_acc_id, discount, 0, txt_payment_date.Value.Date, discountLedgerDescription, 0, _supplier_id, entry_idd, 0);
+                            Insert_Journal_entry(_invoice_no, purchases_discount_acc_id, discount, 0, txt_payment_date.Value.Date, discountLedgerDescription, 0, _supplier_id, entry_idd, 0);
                         }
                     }
 

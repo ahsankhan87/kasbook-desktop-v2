@@ -7,6 +7,7 @@ using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
 using pos.UI;
+using POS.DLL;
 
 namespace pos
 {
@@ -339,6 +340,16 @@ namespace pos
                             "Success",
                             "نجاح"
                         );
+                        Log.LogAction(
+                            "Create Customer",
+                            "CustomerId=" + result
+                            + " | Code=" + info.customer_code
+                            + " | Name=" + ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim()
+                            + " | VAT=" + (info.vat_no ?? "")
+                            + " | Contact=" + (info.contact_no ?? "")
+                            + " | GLAccountId=" + info.GLAccountID,
+                            UsersModal.logged_in_userid,
+                            UsersModal.logged_in_branch_id);
                         clear_all();
                     }
                     else
@@ -534,6 +545,17 @@ namespace pos
                             "Success",
                             "نجاح"
                         );
+
+                        Log.LogAction(
+                            "Update Customer",
+                            "CustomerId=" + info.id
+                            + " | Code=" + info.customer_code
+                            + " | Name=" + ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim()
+                            + " | VAT=" + (info.vat_no ?? "")
+                            + " | Contact=" + (info.contact_no ?? "")
+                            + " | GLAccountId=" + info.GLAccountID,
+                            UsersModal.logged_in_userid,
+                            UsersModal.logged_in_branch_id);
                         clear_all();
                     }
                     else
@@ -610,6 +632,15 @@ namespace pos
 
                 CustomerBLL objBLL = new CustomerBLL();
                 objBLL.Delete(int.Parse(id));
+
+                Log.LogAction(
+                    "Delete Customer",
+                    "CustomerId=" + id
+                    + " | Code=" + (txt_customer_code.Text ?? string.Empty).Trim()
+                    + " | Name=" + ((txt_first_name.Text ?? "") + " " + (txt_last_name.Text ?? "")).Trim()
+                    + " | VAT=" + (txt_vatno.Text ?? string.Empty).Trim(),
+                    UsersModal.logged_in_userid,
+                    UsersModal.logged_in_branch_id);
 
                 UiMessages.ShowInfo(
                     "Customer has been deleted successfully.",
@@ -855,6 +886,17 @@ namespace pos
 
         private void btn_transDelete_Click(object sender, EventArgs e)
         {
+            if (!_auth.HasPermission(_currentUser, Permissions.Customers_Delete))
+            {
+                UiMessages.ShowWarning(
+                    "You do not have permission to delete customer payment transactions.",
+                    "ليس لديك صلاحية لحذف حركات دفعات العملاء.",
+                    "Permission Denied",
+                    "تم رفض الصلاحية"
+                );
+                return;
+            }
+
             if (grid_customer_transactions.SelectedRows.Count == 0)
             {
                 UiMessages.ShowInfo(
@@ -931,6 +973,15 @@ namespace pos
                             "تم الحذف"
                         );
 
+                        Log.LogAction(
+                            "Delete Customer Payment Transaction",
+                            "CustomerId=" + customerId
+                            + " | DisplayInvoice=" + paymentInvoiceNo
+                            + " | JournalReference=" + paymentReferenceInvoiceNo
+                            + " | Description=" + (paymentDescription ?? string.Empty),
+                            UsersModal.logged_in_userid,
+                            UsersModal.logged_in_branch_id);
+
                         load_customer_transactions_grid(customerId);
                     }
                     else
@@ -963,6 +1014,9 @@ namespace pos
         private void UpdateDeleteTransactionButtonState()
         {
             btn_transDelete.Enabled = false;
+
+            if (!_auth.HasPermission(_currentUser, Permissions.Customers_Delete))
+                return;
 
             if (grid_customer_transactions == null || grid_customer_transactions.SelectedRows.Count == 0)
                 return;

@@ -9,8 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using pos.Suppliers.Supplier_Ledger_Report;
+using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
+using POS.DLL;
 using pos.UI;
 using pos.UI.Busy;
 
@@ -19,6 +21,10 @@ namespace pos
     public partial class frm_addSupplier : Form
     {
         private const string PaymentReferencePrefix = "[Payment Ref: ";
+
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         public static frm_addSupplier instance;
         public TextBox tb_id;
@@ -51,6 +57,20 @@ namespace pos
             tb_lbl_is_edit = lbl_edit_status;
             vat_with_status = chk_vat_status;
             btn_transDelete.Enabled = false;
+
+            if (_currentUser == null)
+            {
+                var parsedRole = SystemRole.Viewer;
+                System.Enum.TryParse(UsersModal.logged_in_user_role, true, out parsedRole);
+                AppSecurityContext.SetUser(new UserIdentity
+                {
+                    UserId = UsersModal.logged_in_userid,
+                    BranchId = UsersModal.logged_in_branch_id,
+                    Username = UsersModal.logged_in_username,
+                    Role = parsedRole
+                });
+                _currentUser = AppSecurityContext.User;
+            }
         }
         
         public void frm_addSupplier_Load(object sender, EventArgs e)
@@ -215,7 +235,7 @@ namespace pos
                 return;
             }
             var supplierBLL = new SupplierBLL();
-            if(supplierBLL.IsSupplierCodeExists(txt_supplier_code.Text.Trim()))
+            if (supplierBLL.IsSupplierCodeExists(txt_supplier_code.Text.Trim()))
             {
                 UiMessages.ShowWarning(
                     "Supplier code already exists.",
@@ -258,6 +278,17 @@ namespace pos
                 int result = objBLL.Insert(info);
                 if (result > 0)
                 {
+                    Log.LogAction(
+                        "Create Supplier",
+                        "SupplierId=" + result
+                        + " | Code=" + info.supplier_code
+                        + " | Name=" + ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim()
+                        + " | VAT=" + (info.vat_no ?? "")
+                        + " | Contact=" + (info.contact_no ?? "")
+                        + " | GLAccountId=" + info.GLAccountID,
+                        UsersModal.logged_in_userid,
+                        UsersModal.logged_in_branch_id);
+
                     UiMessages.ShowInfo(
                         "Supplier has been created successfully.",
                         "تم إنشاء المورد بنجاح.",
@@ -341,6 +372,9 @@ namespace pos
             txt_citySubdivisionName.Text = "";
             txt_postalCode.Text = "";
             txt_countryName.Text = "SA";
+
+            cmb_GL_account_code.SelectedValue = 6;
+            txt_supplier_code.Text = "";
             btn_transDelete.Enabled = false;
             GetSupplierCode();
         }
@@ -369,7 +403,7 @@ namespace pos
                 return;
             }
             var supplierBLL = new SupplierBLL();
-            if(supplierBLL.IsSupplierCodeExists(txt_supplier_code.Text.Trim(), int.Parse(txt_id.Text)))
+            if (supplierBLL.IsSupplierCodeExists(txt_supplier_code.Text.Trim(), int.Parse(txt_id.Text)))
             {
                 UiMessages.ShowWarning(
                     "Supplier code already exists.",
@@ -413,6 +447,17 @@ namespace pos
                 int result = objBLL.Update(info);
                 if (result > 0)
                 {
+                    Log.LogAction(
+                        "Update Supplier",
+                        "SupplierId=" + info.id
+                        + " | Code=" + info.supplier_code
+                        + " | Name=" + ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim()
+                        + " | VAT=" + (info.vat_no ?? "")
+                        + " | Contact=" + (info.contact_no ?? "")
+                        + " | GLAccountId=" + info.GLAccountID,
+                        UsersModal.logged_in_userid,
+                        UsersModal.logged_in_branch_id);
+
                     UiMessages.ShowInfo(
                         "Supplier has been updated successfully.",
                         "تم تحديث المورد بنجاح.",
@@ -467,6 +512,15 @@ namespace pos
             {
                 SupplierBLL objBLL = new SupplierBLL();
                 objBLL.Delete(int.Parse(id));
+
+                Log.LogAction(
+                    "Delete Supplier",
+                    "SupplierId=" + id
+                    + " | Code=" + (txt_supplier_code.Text ?? string.Empty).Trim()
+                    + " | Name=" + ((txt_first_name.Text ?? "") + " " + (txt_last_name.Text ?? "")).Trim()
+                    + " | VAT=" + (txt_vatno.Text ?? string.Empty).Trim(),
+                    UsersModal.logged_in_userid,
+                    UsersModal.logged_in_branch_id);
 
                 UiMessages.ShowInfo(
                     "Supplier has been deleted successfully.",
@@ -643,6 +697,17 @@ namespace pos
 
         private void btn_transDelete_Click(object sender, EventArgs e)
         {
+            if (!_auth.HasPermission(_currentUser, Permissions.Suppliers_Delete))
+            {
+                UiMessages.ShowWarning(
+                    "You do not have permission to delete supplier payment transactions.",
+                    "ليس لديك صلاحية لحذف حركات دفعات الموردين.",
+                    "Permission Denied",
+                    "تم رفض الصلاحية"
+                );
+                return;
+            }
+
             if (grid_supplier_transactions.SelectedRows.Count == 0)
             {
                 UiMessages.ShowInfo(
@@ -720,6 +785,15 @@ namespace pos
                             "تم الحذف"
                         );
 
+                        Log.LogAction(
+                            "Delete Supplier Payment Transaction",
+                            "SupplierId=" + supplierId
+                            + " | DisplayInvoice=" + paymentInvoiceNo
+                            + " | JournalReference=" + paymentReferenceInvoiceNo
+                            + " | Description=" + (paymentDescription ?? string.Empty),
+                            UsersModal.logged_in_userid,
+                            UsersModal.logged_in_branch_id);
+
                         load_transactions_grid(supplierId);
 
                         if (mainForm != null)
@@ -748,13 +822,16 @@ namespace pos
         }
 
         private void grid_supplier_transactions_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateDeleteTransactionButtonState();
+{
+    UpdateDeleteTransactionButtonState();
         }
 
         private void UpdateDeleteTransactionButtonState()
         {
             btn_transDelete.Enabled = false;
+
+            if (!_auth.HasPermission(_currentUser, Permissions.Suppliers_Delete))
+                return;
 
             if (grid_supplier_transactions == null || grid_supplier_transactions.SelectedRows.Count == 0)
                 return;

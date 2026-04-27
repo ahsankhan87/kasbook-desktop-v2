@@ -17,7 +17,7 @@ namespace pos.Security.Authorization
     }
 
     // Canonical permission keys (flat list – easy to store and query)
-    public static class Permissions
+    public static class Permissions 
     {
         // Products module permissions (normalized to lowercase)
         public const string Products_Create = "products.create";

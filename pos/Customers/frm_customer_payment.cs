@@ -187,7 +187,7 @@ namespace pos
                     int entry_id = Insert_Journal_entry(_invoice_no, receivable_account_id, 0, amount, txt_payment_date.Value.Date, journalDescription, 0, 0, 0, 0);
 
                     // ADD ENTRY INTO customer PAYMENT (CREDIT)
-                    Insert_Journal_entry(ledgerInvoiceNo, GL_account_id, 0, amount, txt_payment_date.Value.Date, ledgerDescription, _customer_id, 0, entry_id, 0);
+                    Insert_Journal_entry(_invoice_no, GL_account_id, 0, amount, txt_payment_date.Value.Date, ledgerDescription, _customer_id, 0, entry_id, 0);
 
                     // Insert entry into reference account if selected
                     if (Ref_account_id != 0)
@@ -212,7 +212,7 @@ namespace pos
                             Insert_Journal_entry(_invoice_no, receivable_account_id, 0, discount, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
 
                             // ADD ENTRY INTO customer PAYMENT (credit)
-                            Insert_Journal_entry(ledgerInvoiceNo, sales_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountLedgerDescription, _customer_id, 0, entry_idd, 0);
+                            Insert_Journal_entry(_invoice_no, sales_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountLedgerDescription, _customer_id, 0, entry_idd, 0);
                         }
                         else
                         {

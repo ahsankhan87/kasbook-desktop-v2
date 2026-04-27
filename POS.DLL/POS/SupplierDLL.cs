@@ -238,9 +238,9 @@ namespace POS.DLL
             SELECT
                 p.invoice_no,
                 p.purchase_date,
-                CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.total_discount, 0) AS decimal(18,4)) AS invoice_amount,
+                CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4)) AS invoice_amount,
                 CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS paid_amount,
-                CAST((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.total_discount, 0)) - ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS balance_amount
+                CAST((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS balance_amount
             FROM pos_purchases p
             LEFT JOIN pos_suppliers_payments sp
                 ON sp.branch_id = p.branch_id
@@ -249,8 +249,8 @@ namespace POS.DLL
             WHERE p.branch_id = @branch_id
               AND p.supplier_id = @supplier_id
               AND ISNULL(p.purchase_type, '') = 'Credit'
-            GROUP BY p.invoice_no, p.purchase_date, p.total_amount, p.total_tax, p.total_discount
-            HAVING ((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.total_discount, 0)) - ISNULL(SUM(sp.debit), 0)) > 0.004
+            GROUP BY p.invoice_no, p.purchase_date, p.total_amount, p.total_tax, p.discount_value
+            HAVING ((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - ISNULL(SUM(sp.debit), 0)) > 0.004
             ORDER BY p.purchase_date DESC, p.invoice_no DESC", cn))
             {
                 cmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
