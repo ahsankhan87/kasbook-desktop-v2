@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using POS.DLL;
 using pos.UI;
 using pos.UI.Busy;
 
@@ -147,7 +148,8 @@ namespace pos
                         Insert_Journal_entry(_invoice_no, glAccountId, 0, amount, txt_payment_date.Value.Date, journalDescription, 0, 0, entry_id, refAccountId);
                     }
 
-                    Insert_Journal_entry(_invoice_no, glAccountId, amount, 0, txt_payment_date.Value.Date, ledgerDescription, 0, _supplier_id, entry_id, 0);
+                    // supplier ledger entry should be linked to the credit entry of the payment account for proper reporting of supplier payments in the ledger
+                    Insert_Journal_entry(ledgerInvoiceNo, glAccountId, amount, 0, txt_payment_date.Value.Date, ledgerDescription, 0, _supplier_id, entry_id, 0,_invoice_no);
 
                     if (!string.IsNullOrWhiteSpace(txt_discount.Text))
                     {
@@ -156,7 +158,8 @@ namespace pos
                         {
                             Insert_Journal_entry(_invoice_no, payable_account_id, discount, 0, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
                             int entry_idd = Insert_Journal_entry(_invoice_no, purchases_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
-                            Insert_Journal_entry(_invoice_no, purchases_discount_acc_id, discount, 0, txt_payment_date.Value.Date, discountLedgerDescription, 0, _supplier_id, entry_idd, 0);
+                            // Supplier ledger entry for discount should be linked to the credit entry of the discount account for proper reporting of supplier discounts in the ledger
+                            Insert_Journal_entry(ledgerInvoiceNo, purchases_discount_acc_id, discount, 0, txt_payment_date.Value.Date, discountLedgerDescription, 0, _supplier_id, entry_idd, 0,_invoice_no);
                         }
                     }
 
@@ -165,6 +168,18 @@ namespace pos
                         string.IsNullOrWhiteSpace(appliedInvoiceNo) ? "تم ترحيل دفعة المورد بنجاح." : "تم ترحيل دفعة المورد بنجاح مقابل الفاتورة " + appliedInvoiceNo + ".",
                         "Success",
                         "نجاح");
+
+                    Log.LogAction(
+                        "Post Supplier Payment",
+                        "SupplierId=" + _supplier_id
+                        + " | PaymentRef=" + _invoice_no
+                        + " | AppliedInvoice=" + (string.IsNullOrWhiteSpace(appliedInvoiceNo) ? "(none)" : appliedInvoiceNo)
+                        + " | Amount=" + amount.ToString("N2")
+                        + " | Discount=" + discountAmount.ToString("N2")
+                        + " | GLAccountId=" + glAccountId
+                        + " | RefAccountId=" + refAccountId,
+                        UsersModal.logged_in_userid,
+                        UsersModal.logged_in_branch_id);
 
                     if (mainForm != null)
                         mainForm.load_transactions_grid(_supplier_id);
@@ -179,7 +194,7 @@ namespace pos
         }
 
         private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
-           string description, int customer_id, int supplier_id, int entry_id, int bank_id)
+           string description, int customer_id, int supplier_id, int entry_id, int bank_id, string payment_ref_invoice_no = "")
         {
             int journal_id = 0;
             JournalsModal JournalsModal_obj = new JournalsModal();
@@ -195,6 +210,7 @@ namespace pos
             JournalsModal_obj.supplier_id = supplier_id;
             JournalsModal_obj.entry_id = entry_id;
             JournalsModal_obj.bank_id = bank_id;
+            JournalsModal_obj.payment_ref_invoice_no = payment_ref_invoice_no;
 
             journal_id = JournalsObj.Insert(JournalsModal_obj);
             return journal_id;

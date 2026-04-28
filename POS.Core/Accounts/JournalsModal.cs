@@ -41,5 +41,6 @@ namespace POS.Core
 
         public int employee_id { get; set; }
 
+        public string payment_ref_invoice_no { get; set; }
     }
 }

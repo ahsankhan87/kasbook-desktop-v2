@@ -439,18 +439,15 @@ namespace POS.DLL
                         cn.Open();
                     }
 
+                    EnsurePaymentReferenceColumn(cn);
+
                     transaction = cn.BeginTransaction();
 
-                    result += DeletePaymentTransactionRecords(cn, transaction, "pos_customers_payments", invoiceNo);
+                    result += DeleteCustomerPaymentTransactionRecords(cn, transaction, invoiceNo);
                     result += DeletePaymentTransactionRecords(cn, transaction, "acc_entries", invoiceNo);
                     result += DeleteOptionalPaymentTransactionRecords(cn, transaction, invoiceNo, "pos_banks_payments");
 
                     transaction.Commit();
-
-                    if (result > 0)
-                    {
-                        Log.LogAction("Delete Customer Payment", $"InvoiceNo: {invoiceNo}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
-                    }
 
                     return result;
                 }
@@ -463,6 +460,31 @@ namespace POS.DLL
 
                     throw;
                 }
+            }
+        }
+
+        private static int DeleteCustomerPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string paymentReferenceInvoiceNo)
+        {
+            const string query = @"DELETE FROM pos_customers_payments
+            WHERE branch_id = @branch_id
+              AND (
+                    payment_ref_invoice_no = @invoice_no
+                    OR invoice_no = @invoice_no
+                    OR (ISNULL(description, '') <> '' AND CHARINDEX(@payment_ref_token, description) > 0)
+                    OR entry_id IN (
+                        SELECT id
+                        FROM acc_entries
+                        WHERE branch_id = @branch_id
+                          AND invoice_no = @invoice_no
+                    )
+                  )";
+
+            using (SqlCommand deleteCommand = new SqlCommand(query, cn, transaction))
+            {
+                deleteCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = paymentReferenceInvoiceNo;
+                deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                deleteCommand.Parameters.Add("@payment_ref_token", SqlDbType.NVarChar).Value = "[Payment Ref: " + paymentReferenceInvoiceNo + "]";
+                return deleteCommand.ExecuteNonQuery();
             }
         }
 
@@ -553,6 +575,20 @@ namespace POS.DLL
                 cn.Open();
                 int exists = Convert.ToInt32(cmd.ExecuteScalar());
                 return exists > 0;
+            }
+        }
+
+        private static void EnsurePaymentReferenceColumn(SqlConnection cn)
+        {
+            const string sql = @"
+        IF COL_LENGTH('pos_customers_payments', 'payment_ref_invoice_no') IS NULL
+        BEGIN
+            ALTER TABLE pos_customers_payments ADD payment_ref_invoice_no NVARCHAR(50) NULL;
+        END";
+
+            using (SqlCommand cmd = new SqlCommand(sql, cn))
+            {
+                cmd.ExecuteNonQuery();
             }
         }
     }

@@ -170,6 +170,7 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@supplier_id", obj.supplier_id);
                         cmd.Parameters.AddWithValue("@bank_id", obj.bank_id);
                         cmd.Parameters.AddWithValue("@entry_id", obj.entry_id);
+                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", obj.payment_ref_invoice_no);
                         cmd.Parameters.AddWithValue("@OperationType", "1");
                         
                         //--operation types   

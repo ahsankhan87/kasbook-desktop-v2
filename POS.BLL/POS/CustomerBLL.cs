@@ -152,6 +152,8 @@ namespace POS.BLL
             }
         }
 
+       
+
         public bool IsCustomerCodeExists(string CustomerCode, int? excludeCustomerId = null)
         {
             try

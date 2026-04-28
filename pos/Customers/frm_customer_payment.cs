@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.BLL;
 using POS.Core;
+using POS.DLL;
 using pos.UI;
 using pos.UI.Busy;
 
@@ -187,7 +188,7 @@ namespace pos
                     int entry_id = Insert_Journal_entry(_invoice_no, receivable_account_id, 0, amount, txt_payment_date.Value.Date, journalDescription, 0, 0, 0, 0);
 
                     // ADD ENTRY INTO customer PAYMENT (CREDIT)
-                    Insert_Journal_entry(_invoice_no, GL_account_id, 0, amount, txt_payment_date.Value.Date, ledgerDescription, _customer_id, 0, entry_id, 0);
+                    int customerPaymentJournalId = Insert_Journal_entry(ledgerInvoiceNo, GL_account_id, 0, amount, txt_payment_date.Value.Date, ledgerDescription, _customer_id, 0, entry_id, 0, _invoice_no);
 
                     // Insert entry into reference account if selected
                     if (Ref_account_id != 0)
@@ -212,7 +213,8 @@ namespace pos
                             Insert_Journal_entry(_invoice_no, receivable_account_id, 0, discount, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
 
                             // ADD ENTRY INTO customer PAYMENT (credit)
-                            Insert_Journal_entry(_invoice_no, sales_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountLedgerDescription, _customer_id, 0, entry_idd, 0);
+                            Insert_Journal_entry(ledgerInvoiceNo, sales_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountLedgerDescription, _customer_id, 0, entry_idd, 0, _invoice_no);
+
                         }
                         else
                         {
@@ -228,6 +230,18 @@ namespace pos
 
                     if (entry_id > 0)
                     {
+                        Log.LogAction(
+                            "Post Customer Payment",
+                            "CustomerId=" + _customer_id
+                            + " | PaymentRef=" + _invoice_no
+                            + " | AppliedInvoice=" + (string.IsNullOrWhiteSpace(appliedInvoiceNo) ? "(none)" : appliedInvoiceNo)
+                            + " | Amount=" + amount.ToString("N2")
+                            + " | Discount=" + discountAmount.ToString("N2")
+                            + " | GLAccountId=" + GL_account_id
+                            + " | RefAccountId=" + Ref_account_id,
+                            UsersModal.logged_in_userid,
+                            UsersModal.logged_in_branch_id);
+
                         UiMessages.ShowInfo(
                             string.IsNullOrWhiteSpace(appliedInvoiceNo) ? "Payment has been posted successfully." : "Payment has been posted successfully against invoice " + appliedInvoiceNo + ".",
                             string.IsNullOrWhiteSpace(appliedInvoiceNo) ? "تم ترحيل الدفعة بنجاح." : "تم ترحيل الدفعة بنجاح مقابل الفاتورة " + appliedInvoiceNo + ".",
@@ -258,7 +272,7 @@ namespace pos
         }
         
         private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
-           string description, int customer_id, int supplier_id, int entry_id,int bank_id)
+           string description, int customer_id, int supplier_id, int entry_id,int bank_id,string payment_ref_invoice_no = "")
         {
             int journal_id = 0;
             JournalsModal JournalsModal_obj = new JournalsModal();
@@ -274,6 +288,7 @@ namespace pos
             JournalsModal_obj.supplier_id = supplier_id;
             JournalsModal_obj.bank_id = bank_id;
             JournalsModal_obj.entry_id = entry_id;
+            JournalsModal_obj.payment_ref_invoice_no = payment_ref_invoice_no;
 
             journal_id = JournalsObj.Insert(JournalsModal_obj);
             return journal_id;
