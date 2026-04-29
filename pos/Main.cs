@@ -82,6 +82,18 @@ namespace pos
 
             toolStripButton_dashboard.PerformClick();
 
+            // Load modules based on user permissions
+            if (UsersModal.useZatcaEInvoice)
+            {
+                zatcaInvoicesToolStripMenuItem.Enabled = true;
+                generateZATCACSIDToolStripMenuItem.Enabled = true;
+            }
+             else
+            {
+                zatcaInvoicesToolStripMenuItem.Enabled = false;
+                generateZATCACSIDToolStripMenuItem.Enabled = false;
+            }
+
             //App logging 
             POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 

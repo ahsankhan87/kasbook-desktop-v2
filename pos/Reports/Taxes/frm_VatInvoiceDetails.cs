@@ -106,7 +106,7 @@ namespace pos.Reports.Taxes
         private void btnExport_Click(object sender, EventArgs e)
         {
             var dt = gridDetails.DataSource as DataTable;
-            ExcelExportHelper.ExportDataTableToExcel(dt, "vat_invoice_details", this, includeLastRow: true);
+            ExcelExportHelper.ExportDataTableToExcel(dt, "vat_invoice_details_"+lblTitle.Text.Replace(":", "-").Replace("/", "-"), this, includeLastRow: true);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

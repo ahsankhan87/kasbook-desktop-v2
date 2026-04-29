@@ -774,7 +774,7 @@ namespace pos
                 {
                     SearchToolStripButton.PerformClick();
                 }
-                if (e.Control && e.KeyCode == Keys.H)
+                if (e.Control && e.KeyCode == Keys.H || e.KeyCode == Keys.F6)
                 {
                     HistoryToolStripButton.PerformClick();
                 }
@@ -1985,14 +1985,14 @@ namespace pos
 
         private void HistoryToolStripButton_Click(object sender, EventArgs e)
         {
-            string product_code = "";
-
-            if (grid_purchases_order.Rows.Count > 0 && grid_purchases_order.CurrentRow.Cells["code"].Value != null)
+            if (grid_purchases_order.Rows.Count > 0 && grid_purchases_order.CurrentRow.Cells["item_number"].Value != null)
             {
-                product_code = grid_purchases_order.CurrentRow.Cells["code"].Value.ToString();
+                string item_number= grid_purchases_order.CurrentRow.Cells["item_number"].Value.ToString();
+                string code = grid_purchases_order.CurrentRow.Cells["code"].Value.ToString();
+                string product_name = grid_purchases_order.CurrentRow.Cells["name"].Value.ToString();
+                string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
 
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
-                frm_prod_move_obj.load_Products_grid();
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
                 frm_prod_move_obj.ShowDialog();
             }
 

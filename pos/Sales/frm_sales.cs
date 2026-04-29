@@ -3357,26 +3357,34 @@ namespace pos
             {
                 //this will load the product movement 
 
-                //string global_product_code = "";
-                //if (grid_sales.Rows.Count > 0 && grid_sales.CurrentRow.Cells["code"].Value != null)
-                //{
-                //    global_product_code = grid_sales.CurrentRow.Cells["code"].Value.ToString();
-                //    frm_productsMovements frm_prod_move_obj = new frm_productsMovements(global_product_code);
-                //    frm_prod_move_obj.ShowDialog();
-                //}
+                if (grid_sales.Rows.Count > 0 && grid_sales.CurrentRow.Cells["item_number"].Value != null)
+                {
+                    string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
+                    string code = grid_sales.CurrentRow.Cells["code"].Value.ToString();
+                    string product_name = grid_sales.CurrentRow.Cells["name"].Value.ToString();
+                    string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
+                    
+                    if (string.IsNullOrWhiteSpace(item_number))
+                    {
+                        UiMessages.ShowWarning("Item number is empty for the selected product.", "رقم الصنف فارغ للمنتج المحدد.");
+                        return;
+                    }
+                    frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
+                    frm_prod_move_obj.ShowDialog();
+                }
 
                 //this will load the product page
-                if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["item_number"].Value != null)
-                {
-                    if (grid_sales.CurrentRow.Cells["item_number"].Value != null)
-                    {
-                        string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
+                //if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["item_number"].Value != null)
+                //{
+                //    if (grid_sales.CurrentRow.Cells["item_number"].Value != null)
+                //    {
+                //        string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
 
-                        frm_product_full_detail obj = new frm_product_full_detail(this, null, item_number, null, null, "", true);
+                //        frm_product_full_detail obj = new frm_product_full_detail(this, null, item_number, null, null, "", true);
 
-                        obj.ShowDialog();
-                    }
-                }
+                //        obj.ShowDialog();
+                //    }
+                //}
 
 
             }

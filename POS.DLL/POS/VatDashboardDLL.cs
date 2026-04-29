@@ -267,16 +267,16 @@ namespace POS.DLL
                     SELECT
                         DocDate = s.sale_date,
                         InvoiceNo = s.invoice_no,
-                        Branch = ISNULL(b.name, ''),
                         Party = LTRIM(RTRIM(ISNULL(c.first_name, '') + ' ' + ISNULL(c.last_name, ''))),
+                        VATNo = ISNULL(c.vat_no, ''),
                         DocType = CASE WHEN s.account = 'Return' THEN 'Sales Return' ELSE 'Sales' END,
+                        SaleType = s.sale_type,
                         NetAmount = {0}ABS(ISNULL(s.total_amount,0) - ISNULL(s.discount_value,0)),
                         VatAmount = {0}ABS(ISNULL(s.total_tax,0)),
                         TotalAmount = {0}(ABS(ISNULL(s.total_amount,0) - ISNULL(s.discount_value,0)) + ABS(ISNULL(s.total_tax,0))),
                         Description = ISNULL(s.description, '')
                     FROM pos_sales s
                     LEFT JOIN pos_customers c ON c.id = s.customer_id
-                    LEFT JOIN pos_branches b ON b.id = s.branch_id
                     WHERE s.sale_date >= @pFrom AND s.sale_date < DATEADD(day,1,@pTo)
                       AND ISNULL(s.invoice_no,'') NOT LIKE 'ZS%'
                       AND {1}";
@@ -285,16 +285,17 @@ namespace POS.DLL
                     SELECT
                         DocDate = p.purchase_date,
                         InvoiceNo = p.invoice_no,
-                        Branch = ISNULL(b.name, ''),
+                        SupplierInvoice = p.supplier_invoice_no,
                         Party = LTRIM(RTRIM(ISNULL(s.first_name, '') + ' ' + ISNULL(s.last_name, ''))),
+                        VATNo = ISNULL(s.vat_no, ''),
                         DocType = CASE WHEN p.account = 'Return' THEN 'Purchase Return' ELSE 'Purchases' END,
+                        PurType = p.purchase_type,
                         NetAmount = {0}ABS(ISNULL(p.total_amount,0) - ISNULL(p.discount_value,0)),
                         VatAmount = {0}ABS(ISNULL(p.total_tax,0)),
                         TotalAmount = {0}(ABS(ISNULL(p.total_amount,0) - ISNULL(p.discount_value,0)) + ABS(ISNULL(p.total_tax,0))),
                         Description = ISNULL(p.description, '')
                     FROM pos_purchases p
                     LEFT JOIN pos_suppliers s ON s.id = p.supplier_id
-                    LEFT JOIN pos_branches b ON b.id = p.branch_id
                     WHERE p.purchase_date >= @pFrom AND p.purchase_date < DATEADD(day,1,@pTo)
                       AND ISNULL(p.invoice_no,'') NOT LIKE 'ZS%'
                       AND {1}";
@@ -328,7 +329,7 @@ namespace POS.DLL
                         return new DataTable();
                 }
 
-                cmd.CommandText = sql + " ORDER BY DocDate DESC, InvoiceNo DESC";
+                cmd.CommandText = sql + " ORDER BY DocDate ASC, InvoiceNo ASC";
                 cmd.Parameters.AddWithValue("@pFrom", from.Date);
                 cmd.Parameters.AddWithValue("@pTo", to.Date);
 

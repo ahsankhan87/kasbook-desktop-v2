@@ -252,15 +252,21 @@ namespace pos
             if (grid_search_products.RowCount > 0)
             {
                 string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number);
+                string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
+                string product_name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
+                string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
 
+                if (string.IsNullOrEmpty(item_number))
+                { return; }
+
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
                 frm_prod_move_obj.ShowDialog();
             }
         }
 
         private void frm_searchSaleProducts_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.H)
+            if (e.Control && e.KeyCode == Keys.H || e.KeyCode == Keys.F6)
             {
                 product_movement_check();
             }

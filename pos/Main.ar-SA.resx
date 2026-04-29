@@ -445,6 +445,9 @@
   <data name="generateZATCACSIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>355, 26</value>
   </data>
+  <data name="generateZATCACSIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>ربط هيئة الزكاة والضريبة</value>
+  </data>
   <data name="zatcaInvoicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>355, 26</value>
   </data>
@@ -488,52 +491,52 @@
     <value> المبيعات</value>
   </data>
   <data name="customersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="customersToolStripMenuItem.Text" xml:space="preserve">
     <value>عملاء</value>
   </data>
   <data name="suppliersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="suppliersToolStripMenuItem.Text" xml:space="preserve">
     <value>الموردين</value>
   </data>
   <data name="banksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="banksToolStripMenuItem.Text" xml:space="preserve">
     <value>بنك</value>
   </data>
   <data name="expensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="expensesToolStripMenuItem.Text" xml:space="preserve">
     <value>مصاريف</value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 6</value>
+    <value>221, 6</value>
   </data>
   <data name="chartOfAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="chartOfAccountsToolStripMenuItem.Text" xml:space="preserve">
     <value>جدول الحسابات</value>
   </data>
   <data name="journalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="journalToolStripMenuItem.Text" xml:space="preserve">
     <value>مجلة</value>
   </data>
   <data name="groupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="groupsToolStripMenuItem.Text" xml:space="preserve">
     <value>مجموعات</value>
   </data>
   <data name="accountsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="accountsToolStripMenuItem1.Text" xml:space="preserve">
     <value>حسابات</value>

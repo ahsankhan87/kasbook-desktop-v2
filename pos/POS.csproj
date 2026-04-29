@@ -1255,12 +1255,6 @@
     <Compile Include="Reports\Taxes\frm_VatInvoiceDetails.Designer.cs">
       <DependentUpon>frm_VatInvoiceDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Taxes\frm_VatPurchasesSummaryReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Taxes\frm_VatSalesSummaryReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\Warehouse\frm_warehouse_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2284,6 +2278,9 @@
     <EmbeddedResource Include="Reports\Sales\sales_invoice_ar.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice_ar.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Taxes\frm_VatDashboard.ar-SA.resx">
+      <DependentUpon>frm_VatDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Taxes\frm_VatDashboard.resx">
       <DependentUpon>frm_VatDashboard.cs</DependentUpon>

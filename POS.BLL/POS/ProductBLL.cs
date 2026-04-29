@@ -99,7 +99,18 @@ namespace POS.BLL
                 throw;
             }
         }
-
+        public string GetProductNameByItemNumber(string item_number)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.GetProductNameByItemNumber(item_number);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public bool CheckDuplicateBarcode(string barcode)
         { 
             try

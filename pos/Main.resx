@@ -264,7 +264,7 @@
     <value>toolStripSeparator11</value>
   </data>
   <data name="warehouseToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 32</value>
@@ -342,7 +342,7 @@
     <value>All Purchases</value>
   </data>
   <data name="accountReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="taxesVATToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 26</value>
@@ -487,7 +487,7 @@
     <value>TopCenter</value>
   </data>
   <data name="salesExpensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;dailySaleReportToolStripMenuItem.Name" xml:space="preserve">
     <value>dailySaleReportToolStripMenuItem</value>
@@ -553,7 +553,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="balanceSheetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;toolStripButton_products.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -580,7 +580,7 @@
     <value>1, 0, 18, 0</value>
   </data>
   <data name="purchasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="usersToolStripMenuItem.Text" xml:space="preserve">
     <value>Users</value>
@@ -697,7 +697,7 @@
     <value>branchToolStripMenuItem</value>
   </data>
   <data name="vATDashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;banksReportToolStripMenuItem.Name" xml:space="preserve">
     <value>banksReportToolStripMenuItem</value>
@@ -706,7 +706,7 @@
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="banksReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="newTransactionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 26</value>
@@ -796,7 +796,7 @@
     <value>Account Payable</value>
   </data>
   <data name="accountReceivableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="lowStockInventoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 26</value>
@@ -940,7 +940,7 @@
     <value>1</value>
   </data>
   <data name="salesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;lowStockReportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1160,7 +1160,7 @@
     <value>Help</value>
   </data>
   <data name="groupReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1280,7 +1280,7 @@
     <value>216, 26</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
+    <value>219, 6</value>
   </data>
   <data name="&gt;&gt;salesToolStripMenuItem.Name" xml:space="preserve">
     <value>salesToolStripMenuItem</value>
@@ -1292,7 +1292,7 @@
     <value>brandToolStripMenuItem</value>
   </data>
   <data name="generateZATCACSIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>Generate Zatca CSID</value>
+    <value>ZATCA Integration</value>
   </data>
   <data name="&gt;&gt;الاصنافالمتحركهToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1481,7 +1481,7 @@
     <value>itemsToolStripMenuItem</value>
   </data>
   <data name="accountPayableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
@@ -1535,7 +1535,7 @@
     <value>Sales Expenses </value>
   </data>
   <data name="branchSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;chartOfAccountsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1631,7 +1631,7 @@
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="profitLossToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="toolStripButtonNewPOS.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1661,7 +1661,7 @@
     <value>260, 26</value>
   </data>
   <data name="trialBalanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">
     <value>toolStripMenuItem3</value>
@@ -1904,7 +1904,7 @@
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="journalDaybookToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>222, 26</value>
   </data>
   <data name="toolStripStatusLabel_branch.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 21</value>

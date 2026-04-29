@@ -168,10 +168,7 @@ namespace pos
 
         private void frm_searchPurchaseProducts_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F4)
-            {
-                product_movement_check();
-            }
+            
             if (e.KeyCode == Keys.Add || e.KeyCode == Keys.Oemplus)
             {
                 grid_group_products.Focus();
@@ -191,6 +188,10 @@ namespace pos
             else if (e.KeyCode == Keys.F5)
             {
                 PerformPagedSearch();
+            }
+            if (e.Control && e.KeyCode == Keys.H || e.KeyCode == Keys.F6)
+            {
+                product_movement_check();
             }
         }
 
@@ -260,11 +261,17 @@ namespace pos
 
         public void product_movement_check()
         {
-            if(grid_search_products.RowCount > 0 && grid_search_products.CurrentRow != null)
+            if (grid_search_products.RowCount > 0)
             {
-                string product_code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(product_code);
+                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
+                string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
+                string product_name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
+                string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
 
+                if (string.IsNullOrEmpty(item_number))
+                { return; }
+
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
                 frm_prod_move_obj.ShowDialog();
             }
             else

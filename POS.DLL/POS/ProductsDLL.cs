@@ -2652,5 +2652,14 @@ namespace POS.DLL
             }
 
         }
+
+        // Get product name only by item number
+        public string GetProductNameByItemNumber(string itemNumber)
+        {
+            string query = "SELECT CONCAT(code,' ',name) AS product_name FROM pos_products WHERE item_number = @ItemNumber";
+            SqlParameter[] parameters = { new SqlParameter("@ItemNumber", itemNumber) };
+            object result = dbHelper.ExecuteScalar(query, parameters);
+            return result != null ? result.ToString() : string.Empty;
+        }
     }
 }

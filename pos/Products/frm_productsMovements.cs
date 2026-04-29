@@ -24,23 +24,23 @@ namespace pos
 
         private void frm_productsMovements_Load(object sender, EventArgs e)
         {
+            // Get product name from BLL to ensure we have the latest name, in case it was changed after opening this form.
+            //ProductBLL productBLL = new ProductBLL();
+            //string productName = productBLL.GetProductNameByItemNumber(_item_number);
+            //lbl_productName.Text = !string.IsNullOrWhiteSpace(productName) ? productName : _product_name;
+            //
+
             lbl_productName.Text = string.IsNullOrWhiteSpace(_product_name)
                 ? UiMessages.T("Item: " + _item_number, "الصنف: " + _item_number)
                 : _product_name;
 
-            if (grid_search_products.Columns.Contains("product_name"))
-                grid_search_products.Columns["product_name"].Visible = false;
+            grid_search_products.Focus();
 
-            load_Products_grid();
-        }
-
-        public void load_Products_grid()
-        {
             try
             {
                 using (BusyScope.Show(this, UiMessages.T("Loading movements...", "جاري تحميل الحركات...")))
                 {
-                    load_product_movements();
+                    Load_product_movements_with_balance_qty(_item_number);
                 }
             }
             catch (Exception ex)
@@ -58,7 +58,89 @@ namespace pos
                 captionEn: "Movements",
                 captionAr: "الحركات");
         }
+        private void Load_product_movements_with_balance_qty(string item_number)
+        {
+            try
+            {
+                grid_search_products.Rows.Clear();
+                grid_search_products.AutoGenerateColumns = false;
 
+                DataTable product_dt = new DataTable();
+                using (SqlConnection cn = new SqlConnection(POS.DLL.dbConnection.ConnectionString))
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    cmd.CommandText = @"SELECT
+                                            I.id,
+                                            I.item_code,
+                                            I.item_number,
+                                            I.qty,
+                                            I.loc_code,
+                                            I.unit_price,
+                                            I.cost_price,
+                                            I.invoice_no,
+                                            I.description,
+                                            I.trans_date,
+                                            C.first_name AS customer,
+                                            CONCAT(S.first_name,' ',S.last_name) AS supplier,
+                                            COALESCE(U.name,U.username,  '') AS username,
+                                            SUM(I.qty) OVER (ORDER BY I.id ASC ROWS UNBOUNDED PRECEDING) AS balance_qty
+                                        FROM pos_inventory I
+                                        LEFT JOIN pos_customers C ON C.id = I.customer_id
+                                        LEFT JOIN pos_suppliers S ON S.id = I.supplier_id
+                                        LEFT JOIN pos_users U ON U.id = I.user_id
+                                        WHERE I.item_number = @item_number
+                                          AND I.branch_id = @branch_id
+                                        ORDER BY I.id DESC";
+                    cmd.Parameters.AddWithValue("@item_number", item_number);
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(product_dt);
+                    }
+                }
+
+                if (product_dt.Rows.Count > 0)
+                {
+                    int RowIndex = 0;
+                    foreach (DataRow row in product_dt.Rows)
+                    {
+                        int id = Convert.ToInt32(row["id"]);
+                        string invoice_no = row["invoice_no"].ToString();
+                        string qty = Convert.ToDecimal(row["qty"]).ToString("N2");
+                        string balance = Convert.ToDecimal(row["balance_qty"]).ToString("N2");
+                        string cost_price = Convert.ToDecimal(row["cost_price"]).ToString("N2");
+                        string unit_price = Convert.ToDecimal(row["unit_price"]).ToString("N2");
+                        string location = row["loc_code"].ToString();
+                        string description = row["description"].ToString();
+                        string supplier = row["supplier"].ToString();
+                        string customer = row["customer"].ToString();
+                        string date = row["trans_date"].ToString();
+                        string username = row["username"].ToString();
+
+                        string[] row0 = { id.ToString(), invoice_no, qty, balance, cost_price.ToString(), unit_price.ToString(),
+                                  location,description, supplier, customer, date, username };
+
+                        grid_search_products.Rows.Add(row0);
+
+                        if (description == "Sale")
+                            grid_search_products.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+                        else if (description == "Purchase")
+                            grid_search_products.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+                        else if (description == "Adjustment")
+                            grid_search_products.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+
+                        RowIndex++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+                throw;
+            }
+        }
         private void load_product_movements()
         {
             try

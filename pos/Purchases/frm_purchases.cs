@@ -2742,27 +2742,33 @@ namespace pos
         {
             try
             {
-                //string item_number = "";
-
-                //if (grid_purchases.Rows.Count > 0)
-                //{
-                //    item_number = grid_purchases.CurrentRow.Cells["item_number"].Value.ToString();
-                //}
-
-                //frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number);
-                //frm_prod_move_obj.ShowDialog();
-
-                if (grid_purchases.RowCount > 0 && grid_purchases.CurrentRow.Cells["item_number"].Value != null)
+                if (grid_purchases.Rows.Count > 0 && grid_purchases.CurrentRow.Cells["item_number"].Value != null)
                 {
-                    if (!string.IsNullOrEmpty(grid_purchases.CurrentRow.Cells["item_number"].Value.ToString()))
+                    string item_number = grid_purchases.CurrentRow.Cells["item_number"].Value.ToString();
+                    string code = grid_purchases.CurrentRow.Cells["code"].Value.ToString();
+                    string product_name = grid_purchases.CurrentRow.Cells["name"].Value.ToString();
+                    string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
+
+                    if (string.IsNullOrWhiteSpace(item_number))
                     {
-                        string item_number = grid_purchases.CurrentRow.Cells["item_number"].Value.ToString();
-
-                        frm_product_full_detail obj = new frm_product_full_detail(null, this, item_number, null, null, "", true);
-
-                        obj.ShowDialog();
+                        UiMessages.ShowWarning("Item number is empty for the selected product.", "رقم الصنف فارغ للمنتج المحدد.");
+                        return;
                     }
+                    frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
+                    frm_prod_move_obj.ShowDialog();
                 }
+
+                //if (grid_purchases.RowCount > 0 && grid_purchases.CurrentRow.Cells["item_number"].Value != null)
+                //{
+                //    if (!string.IsNullOrEmpty(grid_purchases.CurrentRow.Cells["item_number"].Value.ToString()))
+                //    {
+                //        string item_number = grid_purchases.CurrentRow.Cells["item_number"].Value.ToString();
+
+                //        frm_product_full_detail obj = new frm_product_full_detail(null, this, item_number, null, null, "", true);
+
+                //        obj.ShowDialog();
+                //    }
+                //}
             }
             catch (Exception ex)
             {

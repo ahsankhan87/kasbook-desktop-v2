@@ -129,7 +129,7 @@ namespace POS.DLL
 
                         String query = "SELECT TOP 100 PI.id, P.name AS product_name, PI.item_code, PI.item_number, PI.quantity AS qty, " +
                             "PI.unit_price, PI.cost_price, PH.invoice_no, PH.description, PH.purchase_date AS trans_date, " +
-                            "CONCAT(ISNULL(S.first_name, ''), ' - ', ISNULL(PH.supplier_invoice_no, '')) AS supplier " +
+                            "CONCAT(ISNULL(S.first_name, ''), ' - (', ISNULL(PH.supplier_invoice_no, ''),')') AS supplier " +
                             "FROM pos_purchases_items PI " +
                             "INNER JOIN pos_purchases PH ON PH.id = PI.purchase_id AND PH.branch_id = PI.branch_id " +
                             "LEFT JOIN pos_products P ON P.item_number = PI.item_number " +
