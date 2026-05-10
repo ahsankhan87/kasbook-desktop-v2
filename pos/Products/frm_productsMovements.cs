@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using pos.UI;
 using pos.UI.Busy;
@@ -24,11 +25,7 @@ namespace pos
 
         private void frm_productsMovements_Load(object sender, EventArgs e)
         {
-            // Get product name from BLL to ensure we have the latest name, in case it was changed after opening this form.
-            //ProductBLL productBLL = new ProductBLL();
-            //string productName = productBLL.GetProductNameByItemNumber(_item_number);
-            //lbl_productName.Text = !string.IsNullOrWhiteSpace(productName) ? productName : _product_name;
-            //
+            StyleForm();
 
             lbl_productName.Text = string.IsNullOrWhiteSpace(_product_name)
                 ? UiMessages.T("Item: " + _item_number, "الصنف: " + _item_number)
@@ -47,6 +44,62 @@ namespace pos
             {
                 UiMessages.ShowError(ex.Message, ex.Message, captionEn: "Error", captionAr: "خطأ");
             }
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.Apply(this);
+
+            // Header panel
+            panel1.BackColor = AppTheme.PrimaryDark;
+            panel1.ForeColor = AppTheme.TextOnPrimary;
+            panel1.Padding = new Padding(8, 4, 8, 4);
+
+            lbl_productName.Font = AppTheme.FontHeader;
+            lbl_productName.ForeColor = AppTheme.TextOnPrimary;
+
+            // Grid — double-buffer to reduce flicker
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+                null, grid_search_products, new object[] { true });
+
+            // Set the control-level font first so it doesn't bleed through
+            // when per-row BackColor overrides are applied (which clears inherited fonts).
+            grid_search_products.Font = AppTheme.FontGrid;
+
+            grid_search_products.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Control,
+                ForeColor = SystemColors.ControlText,
+                Font = AppTheme.FontGridHeader,
+                SelectionBackColor = SystemColors.Control,
+                SelectionForeColor = SystemColors.ControlText,
+                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                Padding = new Padding(6, 4, 6, 4)
+            };
+
+            grid_search_products.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = SystemColors.Window,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText,
+                Padding = new Padding(6, 2, 6, 2)
+            };
+
+            grid_search_products.AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = AppTheme.GridAltRow,
+                ForeColor = AppTheme.TextPrimary,
+                Font = AppTheme.FontGrid,
+                SelectionBackColor = SystemColors.Highlight,
+                SelectionForeColor = SystemColors.HighlightText
+            };
+
+            // Ensure no per-column font overrides exist that would cause size differences
+            foreach (DataGridViewColumn col in grid_search_products.Columns)
+                col.DefaultCellStyle.Font = null;
         }
 
         private void btn_search_Click(object sender, EventArgs e)

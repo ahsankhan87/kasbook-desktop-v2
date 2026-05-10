@@ -63,7 +63,21 @@
             this.grid_search_products.AllowUserToAddRows = false;
             this.grid_search_products.AllowUserToDeleteRows = false;
             this.grid_search_products.AllowUserToOrderColumns = true;
-            this.grid_search_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_search_products.BackgroundColor = System.Drawing.SystemColors.AppWorkspace;
+            this.grid_search_products.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grid_search_products.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.grid_search_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.grid_search_products.ColumnHeadersHeight = 34;
+            this.grid_search_products.EnableHeadersVisualStyles = false;
+            this.grid_search_products.Location = new System.Drawing.Point(12, 54);
+            this.grid_search_products.MultiSelect = false;
+            this.grid_search_products.Name = "grid_search_products";
+            this.grid_search_products.ReadOnly = true;
+            this.grid_search_products.RowHeadersVisible = false;
+            this.grid_search_products.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.grid_search_products.RowTemplate.DefaultCellStyle.Format = "N2";
+            this.grid_search_products.RowTemplate.Height = 30;
+            this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_search_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.invoice_no,
@@ -78,9 +92,6 @@
             this.trans_date,
             this.username});
             resources.ApplyResources(this.grid_search_products, "grid_search_products");
-            this.grid_search_products.Name = "grid_search_products";
-            this.grid_search_products.ReadOnly = true;
-            this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
             // id
             // 
@@ -88,10 +99,12 @@
             resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             // 
             // invoice_no
             // 
             this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.invoice_no.MinimumWidth = 90;
             this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
             this.invoice_no.DataPropertyName = "invoice_no";
             resources.ApplyResources(this.invoice_no, "invoice_no");
@@ -115,6 +128,7 @@
             // qty
             // 
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.qty.MinimumWidth = 65;
             this.qty.DataPropertyName = "qty";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle1.Format = "N2";
@@ -127,6 +141,7 @@
             // balanceQty
             // 
             this.balanceQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.balanceQty.MinimumWidth = 75;
             this.balanceQty.DataPropertyName = "balanceQty";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
@@ -139,6 +154,7 @@
             // cost_price
             // 
             this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cost_price.MinimumWidth = 80;
             this.cost_price.DataPropertyName = "cost_price";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
@@ -151,6 +167,7 @@
             // unit_price
             // 
             this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.unit_price.MinimumWidth = 80;
             this.unit_price.DataPropertyName = "unit_price";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle4.Format = "N2";
@@ -163,6 +180,7 @@
             // loc
             // 
             this.loc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.loc.MinimumWidth = 55;
             this.loc.DataPropertyName = "loc";
             resources.ApplyResources(this.loc, "loc");
             this.loc.Name = "loc";
@@ -171,6 +189,8 @@
             // description
             // 
             this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.FillWeight = 20f;
+            this.description.MinimumWidth = 80;
             this.description.DataPropertyName = "description";
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
@@ -178,6 +198,9 @@
             // 
             // supplier
             // 
+            this.supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.supplier.FillWeight = 30f;
+            this.supplier.MinimumWidth = 100;
             this.supplier.DataPropertyName = "supplier";
             resources.ApplyResources(this.supplier, "supplier");
             this.supplier.Name = "supplier";
@@ -185,6 +208,9 @@
             // 
             // customer
             // 
+            this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.customer.FillWeight = 30f;
+            this.customer.MinimumWidth = 100;
             this.customer.DataPropertyName = "customer";
             resources.ApplyResources(this.customer, "customer");
             this.customer.Name = "customer";
@@ -192,6 +218,8 @@
             // 
             // trans_date
             // 
+            this.trans_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.trans_date.MinimumWidth = 90;
             this.trans_date.DataPropertyName = "trans_date";
             dataGridViewCellStyle5.Format = "d";
             dataGridViewCellStyle5.NullValue = null;
@@ -202,7 +230,9 @@
             // 
             // username
             // 
-            this.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.username.FillWeight = 20f;
+            this.username.MinimumWidth = 70;
             this.username.DataPropertyName = "username";
             resources.ApplyResources(this.username, "username");
             this.username.Name = "username";

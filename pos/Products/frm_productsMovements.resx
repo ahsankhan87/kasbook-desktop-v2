@@ -295,7 +295,7 @@
     <value>51</value>
   </data>
   <data name="grid_search_products.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 590</value>
+    <value>1317, 680</value>
   </data>
   <data name="grid_search_products.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -346,7 +346,7 @@
     <value>Top, Right</value>
   </data>
   <data name="btn_close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1070, 12</value>
+    <value>1236, 12</value>
   </data>
   <data name="btn_close.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -382,7 +382,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 51</value>
+    <value>1317, 51</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -406,7 +406,7 @@
     <value>7, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 641</value>
+    <value>1317, 731</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
