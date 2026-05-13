@@ -63,9 +63,19 @@ namespace pos
 
         private void frm_searchPurchaseProducts_Load(object sender, EventArgs e)
         {
+            // Apply AppTheme
+            AppTheme.Apply(this);
+            StyleForm();
+
             txt_search.Text = _product_code;
             PerformPagedSearch();
             grid_search_products.Focus();
+        }
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(panelTop, null, panelMiddle, grid_search_products);
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panelFooter, grid_group_products);
+            //AppTheme.ApplyListFormStyleLightHeader(null, null, panel4, grid_other_stock);
         }
 
         // New paged search method

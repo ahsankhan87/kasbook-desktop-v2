@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid_search_products.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
   <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="id.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -233,6 +236,9 @@
   <data name="description.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="description.Width" type="System.Int32, mscorlib">
+    <value>105</value>
+  </data>
   <metadata name="supplier.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -242,9 +248,6 @@
   <data name="supplier.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="supplier.Width" type="System.Int32, mscorlib">
-    <value>89</value>
-  </data>
   <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -253,9 +256,6 @@
   </data>
   <data name="customer.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="customer.Width" type="System.Int32, mscorlib">
-    <value>97</value>
   </data>
   <metadata name="trans_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -267,7 +267,7 @@
     <value>6</value>
   </data>
   <data name="trans_date.Width" type="System.Int32, mscorlib">
-    <value>67</value>
+    <value>66</value>
   </data>
   <metadata name="username.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -417,6 +417,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Products Movements</value>
   </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -428,12 +434,6 @@
   </data>
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;qty.Name" xml:space="preserve">
     <value>qty</value>

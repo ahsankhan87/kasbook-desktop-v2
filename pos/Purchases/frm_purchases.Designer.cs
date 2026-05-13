@@ -237,7 +237,7 @@
             // 
             // invoice_no
             // 
-            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.invoice_no.DataPropertyName = "invoice_no";
             resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
@@ -297,7 +297,7 @@
             // 
             // supplier
             // 
-            this.supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.supplier.DataPropertyName = "supplier";
             resources.ApplyResources(this.supplier, "supplier");
             this.supplier.Name = "supplier";
@@ -1007,7 +1007,7 @@
             // 
             // discount
             // 
-            this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle11.Format = "N2";
@@ -1018,7 +1018,7 @@
             // 
             // discount_percent
             // 
-            this.discount_percent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.discount_percent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.discount_percent, "discount_percent");
             this.discount_percent.Name = "discount_percent";
             // 
@@ -1268,6 +1268,17 @@
         private System.Windows.Forms.RadioButton radioDiscPercent;
         private System.Windows.Forms.RadioButton radioDiscValue;
         private System.Windows.Forms.TextBox txt_total_disc_percent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn product_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cost_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn supplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn trans_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn history_item_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn sno;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
@@ -1287,16 +1298,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tax_rate;
         private System.Windows.Forms.DataGridViewTextBoxColumn shop_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cost_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn supplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn trans_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn history_item_number;
     }
 }

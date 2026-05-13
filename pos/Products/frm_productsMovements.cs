@@ -74,7 +74,7 @@ namespace pos
                 Font = AppTheme.FontGridHeader,
                 SelectionBackColor = SystemColors.Control,
                 SelectionForeColor = SystemColors.ControlText,
-                Alignment = DataGridViewContentAlignment.MiddleLeft,
+                //Alignment = DataGridViewContentAlignment.MiddleLeft,
                 Padding = new Padding(6, 4, 6, 4)
             };
 

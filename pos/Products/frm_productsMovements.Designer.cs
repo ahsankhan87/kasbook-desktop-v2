@@ -36,10 +36,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_productName = new System.Windows.Forms.Label();
+            this.btn_close = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.balanceQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,9 +53,6 @@
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trans_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_productName = new System.Windows.Forms.Label();
-            this.btn_close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -63,21 +63,10 @@
             this.grid_search_products.AllowUserToAddRows = false;
             this.grid_search_products.AllowUserToDeleteRows = false;
             this.grid_search_products.AllowUserToOrderColumns = true;
-            this.grid_search_products.BackgroundColor = System.Drawing.SystemColors.AppWorkspace;
             this.grid_search_products.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_search_products.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            resources.ApplyResources(this.grid_search_products, "grid_search_products");
             this.grid_search_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grid_search_products.ColumnHeadersHeight = 34;
-            this.grid_search_products.EnableHeadersVisualStyles = false;
-            this.grid_search_products.Location = new System.Drawing.Point(12, 54);
-            this.grid_search_products.MultiSelect = false;
-            this.grid_search_products.Name = "grid_search_products";
-            this.grid_search_products.ReadOnly = true;
-            this.grid_search_products.RowHeadersVisible = false;
-            this.grid_search_products.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.grid_search_products.RowTemplate.DefaultCellStyle.Format = "N2";
-            this.grid_search_products.RowTemplate.Height = 30;
-            this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_search_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.invoice_no,
@@ -91,25 +80,15 @@
             this.customer,
             this.trans_date,
             this.username});
-            resources.ApplyResources(this.grid_search_products, "grid_search_products");
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            resources.ApplyResources(this.id, "id");
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // invoice_no
-            // 
-            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.invoice_no.MinimumWidth = 90;
-            this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
-            this.invoice_no.DataPropertyName = "invoice_no";
-            resources.ApplyResources(this.invoice_no, "invoice_no");
-            this.invoice_no.Name = "invoice_no";
-            this.invoice_no.ReadOnly = true;
+            this.grid_search_products.EnableHeadersVisualStyles = false;
+            this.grid_search_products.MultiSelect = false;
+            this.grid_search_products.Name = "grid_search_products";
+            this.grid_search_products.ReadOnly = true;
+            this.grid_search_products.RowHeadersVisible = false;
+            //this.grid_search_products.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.grid_search_products.RowTemplate.DefaultCellStyle.Format = "N2";
+            this.grid_search_products.RowTemplate.Height = 30;
+            this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
             // contextMenuStrip1
             // 
@@ -124,119 +103,6 @@
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
-            // qty
-            // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.qty.MinimumWidth = 65;
-            this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.qty, "qty");
-            this.qty.Name = "qty";
-            this.qty.ReadOnly = true;
-            // 
-            // balanceQty
-            // 
-            this.balanceQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.balanceQty.MinimumWidth = 75;
-            this.balanceQty.DataPropertyName = "balanceQty";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.balanceQty.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.balanceQty, "balanceQty");
-            this.balanceQty.Name = "balanceQty";
-            this.balanceQty.ReadOnly = true;
-            // 
-            // cost_price
-            // 
-            this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cost_price.MinimumWidth = 80;
-            this.cost_price.DataPropertyName = "cost_price";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.cost_price, "cost_price");
-            this.cost_price.Name = "cost_price";
-            this.cost_price.ReadOnly = true;
-            // 
-            // unit_price
-            // 
-            this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.unit_price.MinimumWidth = 80;
-            this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.unit_price, "unit_price");
-            this.unit_price.Name = "unit_price";
-            this.unit_price.ReadOnly = true;
-            // 
-            // loc
-            // 
-            this.loc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.loc.MinimumWidth = 55;
-            this.loc.DataPropertyName = "loc";
-            resources.ApplyResources(this.loc, "loc");
-            this.loc.Name = "loc";
-            this.loc.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.description.FillWeight = 20f;
-            this.description.MinimumWidth = 80;
-            this.description.DataPropertyName = "description";
-            resources.ApplyResources(this.description, "description");
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
-            // supplier
-            // 
-            this.supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.supplier.FillWeight = 30f;
-            this.supplier.MinimumWidth = 100;
-            this.supplier.DataPropertyName = "supplier";
-            resources.ApplyResources(this.supplier, "supplier");
-            this.supplier.Name = "supplier";
-            this.supplier.ReadOnly = true;
-            // 
-            // customer
-            // 
-            this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.customer.FillWeight = 30f;
-            this.customer.MinimumWidth = 100;
-            this.customer.DataPropertyName = "customer";
-            resources.ApplyResources(this.customer, "customer");
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            // 
-            // trans_date
-            // 
-            this.trans_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.trans_date.MinimumWidth = 90;
-            this.trans_date.DataPropertyName = "trans_date";
-            dataGridViewCellStyle5.Format = "d";
-            dataGridViewCellStyle5.NullValue = null;
-            this.trans_date.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.trans_date, "trans_date");
-            this.trans_date.Name = "trans_date";
-            this.trans_date.ReadOnly = true;
-            // 
-            // username
-            // 
-            this.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.username.FillWeight = 20f;
-            this.username.MinimumWidth = 70;
-            this.username.DataPropertyName = "username";
-            resources.ApplyResources(this.username, "username");
-            this.username.Name = "username";
-            this.username.ReadOnly = true;
             // 
             // panel1
             // 
@@ -257,6 +123,125 @@
             this.btn_close.Name = "btn_close";
             this.btn_close.UseVisualStyleBackColor = true;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            resources.ApplyResources(this.id, "id");
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // invoice_no
+            // 
+            this.invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
+            this.invoice_no.DataPropertyName = "invoice_no";
+            resources.ApplyResources(this.invoice_no, "invoice_no");
+            this.invoice_no.Name = "invoice_no";
+            this.invoice_no.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.qty.DataPropertyName = "qty";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.qty, "qty");
+            this.qty.Name = "qty";
+            this.qty.ReadOnly = true;
+            // 
+            // balanceQty
+            // 
+            this.balanceQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.balanceQty.DataPropertyName = "balanceQty";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.balanceQty.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.balanceQty, "balanceQty");
+            this.balanceQty.Name = "balanceQty";
+            this.balanceQty.ReadOnly = true;
+            // 
+            // cost_price
+            // 
+            this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.cost_price.DataPropertyName = "cost_price";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.cost_price, "cost_price");
+            this.cost_price.Name = "cost_price";
+            this.cost_price.ReadOnly = true;
+            // 
+            // unit_price
+            // 
+            this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.unit_price.DataPropertyName = "unit_price";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.unit_price, "unit_price");
+            this.unit_price.Name = "unit_price";
+            this.unit_price.ReadOnly = true;
+            // 
+            // loc
+            // 
+            this.loc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.loc.DataPropertyName = "loc";
+            resources.ApplyResources(this.loc, "loc");
+            this.loc.Name = "loc";
+            this.loc.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.description.DataPropertyName = "description";
+            this.description.FillWeight = 20F;
+            resources.ApplyResources(this.description, "description");
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // supplier
+            // 
+            this.supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.supplier.DataPropertyName = "supplier";
+            this.supplier.FillWeight = 30F;
+            resources.ApplyResources(this.supplier, "supplier");
+            this.supplier.Name = "supplier";
+            this.supplier.ReadOnly = true;
+            // 
+            // customer
+            // 
+            this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.customer.DataPropertyName = "customer";
+            this.customer.FillWeight = 30F;
+            resources.ApplyResources(this.customer, "customer");
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
+            // 
+            // trans_date
+            // 
+            this.trans_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.trans_date.DataPropertyName = "trans_date";
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.trans_date.DefaultCellStyle = dataGridViewCellStyle5;
+            resources.ApplyResources(this.trans_date, "trans_date");
+            this.trans_date.Name = "trans_date";
+            this.trans_date.ReadOnly = true;
+            // 
+            // username
+            // 
+            this.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.username.DataPropertyName = "username";
+            this.username.FillWeight = 20F;
+            resources.ApplyResources(this.username, "username");
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
             // 
             // frm_productsMovements
             // 
