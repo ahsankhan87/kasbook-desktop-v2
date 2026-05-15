@@ -415,6 +415,9 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@credit_purchase_amount", obj.credit_purchase_amount_limit);
                         cmd.Parameters.AddWithValue("@cash_purchase_amount", obj.cash_purchase_amount_limit);
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@max_discount_amount", obj.max_discount_amount);
+                        cmd.Parameters.AddWithValue("@max_discount_percent", obj.max_discount_percent);
+
                         cmd.Parameters.AddWithValue("@OperationType", "5");
 
                         //--operation types   

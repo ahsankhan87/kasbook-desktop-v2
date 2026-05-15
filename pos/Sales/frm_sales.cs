@@ -1,4 +1,4 @@
-ï»¿using pos.UI.Busy;
+using pos.UI.Busy;
 using pos.Master.Companies.zatca;
 using pos.Security.Authorization;
 using pos.UI; // <-- Added Ui namespace
@@ -175,18 +175,18 @@ namespace pos
 
         /// <summary>
         /// POS-specific styling applied after the generic Fluent theme.
-        /// Gives the sales page a Dynamics 365â€“like professional look.
+        /// Gives the sales page a Dynamics 365–like professional look.
         /// </summary>
         private void StyleSalesForm()
         {
             ApplySalesLabelForeColor(this, Color.Black);
 
-            // â”€â”€ Classic Windows grey panels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Classic Windows grey panels ???????????????????????????
             panel_header.BackColor = SystemColors.Control;
             panel_footer.BackColor = SystemColors.Control;
             panel_grid.BackColor = SystemColors.Control;
 
-            // â”€â”€ GroupBoxes: standard Windows look â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? GroupBoxes: standard Windows look ?????????????????????
             foreach (Control ctrl in panel_header.Controls)
             {
                 if (ctrl is GroupBox grp)
@@ -207,11 +207,11 @@ namespace pos
                 }
             }
 
-            // â”€â”€ Title label â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Title label ???????????????????????????????????????????
             lbl_title.Font = AppTheme.FontHeader;
             lbl_title.ForeColor = Color.Black;
 
-            // â”€â”€ ToolStrip: classic Windows system renderer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? ToolStrip: classic Windows system renderer ????????????
             SalesToolStrip.RenderMode = ToolStripRenderMode.System;
             SalesToolStrip.BackColor = SystemColors.Control;
             SalesToolStrip.ForeColor = SystemColors.ControlText;
@@ -231,7 +231,7 @@ namespace pos
                 }
             }
 
-            // â”€â”€ Sales grid: clean Dynamics-style â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Sales grid: clean Dynamics-style ??????????????????????
             typeof(DataGridView).InvokeMember("DoubleBuffered",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.SetProperty,
                 null, grid_sales, new object[] { true });
@@ -270,7 +270,7 @@ namespace pos
             };
             btn_delete.FlatStyle = FlatStyle.Flat;
 
-            // â”€â”€ Footer: professional totals area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Footer: professional totals area ??????????????????
             // Style TableLayoutPanels as white card sections on gray footer
             StyleFooterCard(tableLayoutPanel5);
             StyleFooterCard(tableLayoutPanel6);
@@ -306,22 +306,22 @@ namespace pos
                 rb.Margin = new Padding(6, 4, 6, 4);
             }
 
-            // â”€â”€ Main totals labels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Main totals labels ??????????????????????????????
             StyleFooterLabel(label14, false);      // Sub Total
             StyleFooterLabel(label13, false);      // Discount
             StyleFooterLabel(label9, true);        // Total Amount
             chkbox_is_taxable.Font = TaxableCheckFont;
             chkbox_is_taxable.ForeColor = SystemColors.ControlText;
 
-            // â”€â”€ Secondary labels (tableLayoutPanel7) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Secondary labels (tableLayoutPanel7) ??????????????????
             StyleFooterLabel(label22, false);      // Net After Disc
             StyleFooterLabel(label23, false);      // Total Qty
 
-            // â”€â”€ Received / Change labels (tableLayoutPanel8) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Received / Change labels (tableLayoutPanel8) ??????????
             StyleFooterLabel(label24, false);      // Received
             StyleFooterLabel(label25, false);      // Change
 
-            // â”€â”€ Total fields â€” large and prominent â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Total fields — large and prominent ????????????????????
             StyleTotalField(txt_total_amount, true);       // Grand total: HERO
             StyleTotalField(txt_sub_total, false);
             StyleTotalField(txt_sub_total_2, false);
@@ -331,7 +331,7 @@ namespace pos
             StyleSecondaryField(txt_change_amount);
             StyleSecondaryField(txt_amount_received);
 
-            // â”€â”€ Cost fields: subtle muted look â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Cost fields: subtle muted look ????????????????????????
             StyleCostField(txt_cost_price);
             StyleCostField(txt_cost_price_with_vat);
             StyleCostField(txt_single_cost_evat);
@@ -340,7 +340,7 @@ namespace pos
             StyleCostField(txt_company_qty);
             StyleCostField(txt_order_qty);
 
-            // â”€â”€ Customer search dropdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ?? Customer search dropdown ??????????????????????????????
             if (customersDataGridView != null)
             {
                 StyleDropdownGrid(customersDataGridView);
@@ -533,7 +533,7 @@ namespace pos
                     {
                         UiMessages.ShowWarning(
                             "Warning: Unit price is lower than cost price. The invoice will be saved with this price.",
-                            "ØªÙ†Ø¨ÙŠÙ‡: Ø³Ø¹Ø± Ø§Ù„ÙˆØ­Ø¯Ø© Ø£Ù‚Ù„ Ù…Ù† Ø³Ø¹Ø± Ø§Ù„ØªÙƒÙ„ÙØ©. Ø³ÙŠØªÙ… Ø­ÙØ¸ Ø§Ù„ÙØ§ØªÙˆØ±Ø© Ø¨Ù‡Ø°Ø§ Ø§Ù„Ø³Ø¹Ø±.");
+                            "ÊäÈíå: ÓÚÑ ÇáæÍÏÉ ÃŞá ãä ÓÚÑ ÇáÊßáİÉ. ÓíÊã ÍİÙ ÇáİÇÊæÑÉ ÈåĞÇ ÇáÓÚÑ.");
 
                         grid_sales.Rows[e.RowIndex].Cells["unit_price"].Style.BackColor = Color.MistyRose;
 
@@ -690,7 +690,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
 
         }
@@ -718,7 +718,7 @@ namespace pos
                         var grid_item_number = (grid_sales.Rows[i].Cells["item_number"].Value != null ? grid_sales.Rows[i].Cells["item_number"].Value : "");
                         if (grid_item_number.ToString() == item_number)
                         {
-                            UiMessages.ShowWarning("Product already added", "Ø§Ù„Ù…Ù†ØªØ¬ Ù…Ø¶Ø§Ù Ù…Ø³Ø¨Ù‚Ø§Ù‹", "Already exist", "Ù…ÙˆØ¬ÙˆØ¯ Ø¨Ø§Ù„ÙØ¹Ù„");
+                            UiMessages.ShowWarning("Product already added", "ÇáãäÊÌ ãÖÇİ ãÓÈŞÇğ", "Already exist", "ãæÌæÏ ÈÇáİÚá");
                             grid_sales.CurrentCell = grid_sales.Rows[RowIndex].Cells["code"]; //make qty cell active
                                                                                               //grid_sales.CurrentCell.Selected = true;
                             grid_sales.BeginEdit(true);
@@ -748,7 +748,8 @@ namespace pos
                         grid_sales.Rows[RowIndex].Cells["qty"].Value = qty;
                         grid_sales.Rows[RowIndex].Cells["cost_price"].Value = Math.Round(Decimal.Parse(myProductView["avg_cost"].ToString()), 2);
                         grid_sales.Rows[RowIndex].Cells["unit_price"].Value = Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2);
-                        var _dr = _discountEngine.ResolveItemDiscount(Convert.ToInt32(myProductView["id"]), null, null, qty, (double)Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2), UsersModal.logged_in_branch_id);
+                        int? _schemeId = (myProductView["discount_scheme_id"] != DBNull.Value && myProductView["discount_scheme_id"] != null) ? (int?)Convert.ToInt32(myProductView["discount_scheme_id"]) : null;
+                        var _dr = _discountEngine.ResolveItemDiscount(_schemeId, qty, (double)Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2));
                         grid_sales.Rows[RowIndex].Cells["discount"].Value = _dr.DiscountValue;
                         grid_sales.Rows[RowIndex].Cells["discount_percent"].Value = Math.Round(_dr.DiscountPercent, 2);
                         grid_sales.Rows[RowIndex].Cells["tax"].Value = tax;
@@ -787,7 +788,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -923,7 +924,7 @@ namespace pos
             }
             else
             {
-                UiMessages.ShowWarning("Record not found", "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø³Ø¬Ù„", "Products", "Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª");
+                UiMessages.ShowWarning("Record not found", "áã íÊã ÇáÚËæÑ Úáì ÓÌá", "Products", "ÇáãäÊÌÇÊ");
             }
         }
 
@@ -990,9 +991,9 @@ namespace pos
                 if (cmb_sale_type.SelectedValue.ToString() == "Credit" && netAmount > netCreditLimit)
                 {
                     UiMessages.ShowWarning("Sales transaction cannot be processed, because customer credit limit has exceeded by " + limitExceededBy.ToString("N2"),
-                     "Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø­ÙØ¸ Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹ØŒ Ù„Ø£Ù†Ù‡ ØªÙ… ØªØ¬Ø§ÙˆØ² Ø­Ø¯ Ø§Ø¦ØªÙ…Ø§Ù† Ø§Ù„Ø¹Ù…ÙŠÙ„ Ø¨Ù…Ù‚Ø¯Ø§Ø± " + limitExceededBy.ToString("N2"),
+                     "áÇ íãßä ÍİÙ ãÚÇãáÉ ÇáÈíÚ¡ áÃäå Êã ÊÌÇæÒ ÍÏ ÇÆÊãÇä ÇáÚãíá ÈãŞÏÇÑ " + limitExceededBy.ToString("N2"),
                      "Credit limit",
-                     "Ø­Ø¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†");
+                     "ÍÏ ÇáÇÆÊãÇä");
                     return;
                 }
             }
@@ -1225,9 +1226,9 @@ namespace pos
                     {
                         UiMessages.ShowWarning(
                             "You don't have permission to transmit invoices to ZATCA.",
-                            "Ù„ÙŠØ³ Ù„Ø¯ÙŠÙƒ ØµÙ„Ø§Ø­ÙŠØ© Ù„Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„ÙÙˆØ§ØªÙŠØ± Ø¥Ù„Ù‰ Ø²Ø§ØªÙƒØ§.",
+                            "áíÓ áÏíß ÕáÇÍíÉ áÅÑÓÇá ÇáİæÇÊíÑ Åáì ÒÇÊßÇ.",
                             "Permission Denied",
-                            "ØªÙ… Ø±ÙØ¶ Ø§Ù„ØµÙ„Ø§Ø­ÙŠØ©");
+                            "Êã ÑİÖ ÇáÕáÇÍíÉ");
                     }
                 }
 
@@ -1239,7 +1240,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -1263,7 +1264,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
 
         }
@@ -1492,7 +1493,7 @@ namespace pos
 
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -1574,7 +1575,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -1593,7 +1594,7 @@ namespace pos
             }
             else if (lang == "ar-SA")
             {
-                _row_1["name"] = "Ù†Ù‚Ø¯ÙŠ";
+                _row_1["name"] = "äŞÏí";
             }
 
             dt.Rows.Add(_row_1);
@@ -1604,7 +1605,7 @@ namespace pos
                 _row["id"] = "Credit";
                 if (lang == "ar-SA")
                 {
-                    _row["name"] = "Ø§Ø¬Ù„";
+                    _row["name"] = "ÇÌá";
                 }
                 else { _row["name"] = "Credit"; }
 
@@ -1616,7 +1617,7 @@ namespace pos
             _row_2["id"] = "Quotation";
             if (lang == "ar-SA")
             {
-                _row_2["name"] = "Ø¹Ø±Ø¶ Ø³Ø¹Ø±";
+                _row_2["name"] = "ÚÑÖ ÓÚÑ";
             }
             else { _row_2["name"] = "Quotation"; }
 
@@ -1627,7 +1628,7 @@ namespace pos
 
             if (lang == "ar-SA")
             {
-                _row_3["name"] = "Ù‡Ø¯ÙŠØ©";
+                _row_3["name"] = "åÏíÉ";
             }
             else { _row_3["name"] = "Gift"; }
 
@@ -1638,7 +1639,7 @@ namespace pos
 
             if (lang == "ar_SA")
             {
-                _row_4["name"] = "Ù†Ù‚Ù„ Ù‚Ø·Ø¹ Ø§Ù„ØºÙŠØ§Ø± Ø¨ÙŠÙ† Ø§Ù„Ø´Ø±ÙƒØ§Øª";
+                _row_4["name"] = "äŞá ŞØÚ ÇáÛíÇÑ Èíä ÇáÔÑßÇÊ";
             }
             else
             {
@@ -1655,7 +1656,7 @@ namespace pos
             //}
             //else if (lang == "ar-SA")
             //{
-            //    _row_4["name"] = "ÙŠØ¹ÙˆØ¯";
+            //    _row_4["name"] = "íÚæÏ";
             //}
             //dt.Rows.Add(_row_4);
 
@@ -1677,7 +1678,7 @@ namespace pos
 
             if (lang == "ar-SA")
             {
-                _row_1["name"] = "Ù…Ø¨Ø³Ø·Ø©";
+                _row_1["name"] = "ãÈÓØÉ";
             }
             else { _row_1["name"] = "Simplified"; }
             dt.Rows.Add(_row_1);
@@ -1687,7 +1688,7 @@ namespace pos
 
             if (lang == "ar-SA")
             {
-                _row_2["name"] = "Ø¶Ø±ÙŠØ¨ÙŠØ©";
+                _row_2["name"] = "ÖÑíÈíÉ";
             }
             else { _row_2["name"] = "Standard"; }
             dt.Rows.Add(_row_2);
@@ -1726,7 +1727,7 @@ namespace pos
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    var confirm = UiMessages.ConfirmYesNoCancel("Are you sure you want delete", "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ø£Ù†Ùƒ ØªØ±ÙŠØ¯ Ø§Ù„Ø­Ø°Ù", "Delete", "Ø­Ø°Ù");
+                    var confirm = UiMessages.ConfirmYesNoCancel("Are you sure you want delete", "åá ÃäÊ ãÊÃßÏ Ãäß ÊÑíÏ ÇáÍĞİ", "Delete", "ÍĞİ");
                     if (confirm == DialogResult.Yes)
                     {
                         grid_sales.Rows.RemoveAt(grid_sales.CurrentRow.Index);
@@ -1793,7 +1794,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
 
         }
@@ -1964,7 +1965,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -1990,7 +1991,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -1999,7 +2000,7 @@ namespace pos
 
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
-            if (_numericColumns.Contains(grid_sales.Columns[grid_sales.CurrentCell.ColumnIndex].Name)) // Qty, unit_price, discount, discount_percent, total_without_vat â€” numeric only
+            if (_numericColumns.Contains(grid_sales.Columns[grid_sales.CurrentCell.ColumnIndex].Name)) // Qty, unit_price, discount, discount_percent, total_without_vat — numeric only
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -2102,7 +2103,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -2199,7 +2200,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Ø®Ø·Ø£");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "ÎØÃ");
             }
         }
 
@@ -2345,7 +2346,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -2457,7 +2458,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -2569,7 +2570,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -2835,8 +2836,8 @@ namespace pos
             if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
             {
                 if (MessageBox.Show(
-                        UiMessages.T("Are you sure you want to close sale?", "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ø£Ù†Ùƒ ØªØ±ÙŠØ¯ Ø¥ØºÙ„Ø§Ù‚ Ø¹Ù…Ù„ÙŠØ© Ø§Ù„Ø¨ÙŠØ¹ØŸ"),
-                        UiMessages.T("Close Sale Transaction", "Ø¥ØºÙ„Ø§Ù‚ Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹"),
+                        UiMessages.T("Are you sure you want to close sale?", "åá ÃäÊ ãÊÃßÏ Ãäß ÊÑíÏ ÅÛáÇŞ ÚãáíÉ ÇáÈíÚ¿"),
+                        UiMessages.T("Close Sale Transaction", "ÅÛáÇŞ ãÚÇãáÉ ÇáÈíÚ"),
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Warning,
                         MessageBoxDefaultButton.Button2) == DialogResult.No)
@@ -2851,9 +2852,9 @@ namespace pos
         {
             var confirm = UiMessages.ConfirmYesNo(
                     "Create new sale transaction?",
-                    "Ù‡Ù„ ØªØ±ÙŠØ¯ Ø¥Ù†Ø´Ø§Ø¡ Ø­Ø±ÙƒØ© Ø¨ÙŠØ¹ Ø¬Ø¯ÙŠØ¯Ø©ØŸ",
+                    "åá ÊÑíÏ ÅäÔÇÁ ÍÑßÉ ÈíÚ ÌÏíÏÉ¿",
                     captionEn: "Confirm",
-                    captionAr: "ØªØ£ÙƒÙŠØ¯"
+                    captionAr: "ÊÃßíÏ"
                 );
 
             if (confirm != DialogResult.Yes)
@@ -2877,7 +2878,7 @@ namespace pos
                     // Validate at least one product is added
                     if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
                     {
-                        UiMessages.ShowWarning("Please add products", "ÙŠØ±Ø¬Ù‰ Ø¥Ø¶Ø§ÙØ© Ù…Ù†ØªØ¬Ø§Øª", "Sale Transaction", "Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹");
+                        UiMessages.ShowWarning("Please add products", "íÑÌì ÅÖÇİÉ ãäÊÌÇÊ", "Sale Transaction", "ãÚÇãáÉ ÇáÈíÚ");
                         return;
                     }
 
@@ -2898,7 +2899,7 @@ namespace pos
                     // Sale type selection validation
                     if (cmb_sale_type.SelectedValue.ToString() == "0")
                     {
-                        UiMessages.ShowWarning("Please select sale type", "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù†ÙˆØ¹ Ø§Ù„Ø¨ÙŠØ¹", "Sale Transaction", "Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹");
+                        UiMessages.ShowWarning("Please select sale type", "íÑÌì ÇÎÊíÇÑ äæÚ ÇáÈíÚ", "Sale Transaction", "ãÚÇãáÉ ÇáÈíÚ");
                         return;
                     }
 
@@ -2910,7 +2911,7 @@ namespace pos
                     // Get sale type
                     if (cmb_sale_type.SelectedValue.ToString() == null)
                     {
-                        UiMessages.ShowWarning("Please select sale type", "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù†ÙˆØ¹ Ø§Ù„Ø¨ÙŠØ¹", "Sale Transaction", "Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹");
+                        UiMessages.ShowWarning("Please select sale type", "íÑÌì ÇÎÊíÇÑ äæÚ ÇáÈíÚ", "Sale Transaction", "ãÚÇãáÉ ÇáÈíÚ");
                         return;
                     }
                     else
@@ -2965,10 +2966,10 @@ namespace pos
                                 $"Sale Amount: {netAmount:C}\n" +
                                 $"Credit Limit: {customer_credit_limit:C}",
                                 "Sale Transaction",
-                                captionAr: "Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø¥ØªÙ…Ø§Ù… Ø§Ù„Ø¨ÙŠØ¹ Ù„Ø£Ù† Ø­Ø¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù† Ù„Ù„Ø¹Ù…ÙŠÙ„ Ø³ÙŠØªØ¬Ø§ÙˆØ² Ø§Ù„Ø­Ø¯ Ø§Ù„Ù…Ø³Ù…ÙˆØ­.\n\n" +
-                                $"Ø§Ù„Ø±ØµÙŠØ¯ Ø§Ù„Ø­Ø§Ù„ÙŠ: {customerBalance:C}\n" +
-                                $"Ù‚ÙŠÙ…Ø© Ø§Ù„ÙØ§ØªÙˆØ±Ø©: {netAmount:C}\n" +
-                                $"Ø­Ø¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†: {customer_credit_limit:C}"
+                                captionAr: "áÇ íãßä ÅÊãÇã ÇáÈíÚ áÃä ÍÏ ÇáÇÆÊãÇä ááÚãíá ÓíÊÌÇæÒ ÇáÍÏ ÇáãÓãæÍ.\n\n" +
+                                $"ÇáÑÕíÏ ÇáÍÇáí: {customerBalance:C}\n" +
+                                $"ŞíãÉ ÇáİÇÊæÑÉ: {netAmount:C}\n" +
+                                $"ÍÏ ÇáÇÆÊãÇä: {customer_credit_limit:C}"
                             );
 
                             return;
@@ -3037,7 +3038,7 @@ namespace pos
 
                             if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
                             {
-                                UiMessages.ShowWarning("Update are not allowed", "Ø§Ù„ØªØ¹Ø¯ÙŠÙ„ ØºÙŠØ± Ù…Ø³Ù…ÙˆØ­", "Update", "ØªØ¹Ø¯ÙŠÙ„");
+                                UiMessages.ShowWarning("Update are not allowed", "ÇáÊÚÏíá ÛíÑ ãÓãæÍ", "Update", "ÊÚÏíá");
                                 return;
 
                                 //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
@@ -3058,9 +3059,9 @@ namespace pos
                                 if (qresult <= 0)
                                 {
                                     UiMessages.ShowError("Estimate has issue while updating, please try again",
-                                        "Ø­Ø¯Ø«Øª Ù…Ø´ÙƒÙ„Ø© Ø£Ø«Ù†Ø§Ø¡ ØªØ­Ø¯ÙŠØ« Ø¹Ø±Ø¶ Ø§Ù„Ø³Ø¹Ø±ØŒ ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø±Ø© Ø£Ø®Ø±Ù‰",
+                                        "ÍÏËÊ ãÔßáÉ ÃËäÇÁ ÊÍÏíË ÚÑÖ ÇáÓÚÑ¡ íÑÌì ÇáãÍÇæáÉ ãÑÉ ÃÎÑì",
                                         "Update",
-                                        "ØªØ¹Ø¯ÙŠÙ„");
+                                        "ÊÚÏíá");
                                     return;
                                 }
 
@@ -3189,9 +3190,9 @@ namespace pos
                                 {
                                     UiMessages.ShowInfo(
                                         "Estimate No: " + invoice_no + " " + sale_type + " transaction " + ((invoice_status == "Update" || isEstimateEdit) ? "updated" : "created") + " successfully",
-                                        "ØªÙ‚Ø¯ÙŠØ± Ø±Ù‚Ù…: " + invoice_no + " " + sale_type + " ØªÙ…Øª " + ((invoice_status == "Update" || isEstimateEdit) ? "ØªØ­Ø¯ÙŠØ«" : "Ø¥Ù†Ø´Ø§Ø¡") + " Ø¨Ù†Ø¬Ø§Ø­",
+                                        "ÊŞÏíÑ ÑŞã: " + invoice_no + " " + sale_type + " ÊãÊ " + ((invoice_status == "Update" || isEstimateEdit) ? "ÊÍÏíË" : "ÅäÔÇÁ") + " ÈäÌÇÍ",
                                         captionEn: "Success",
-                                        captionAr: "Ù†Ø¬Ø§Ø­"
+                                        captionAr: "äÌÇÍ"
                                     );
                                     txt_invoice_no.Text = invoice_no;
                                     txt_invoice_no.Tag = sale_id;
@@ -3206,9 +3207,9 @@ namespace pos
                                     {
                                         UiMessages.ShowInfo(
                                             "Request for Inter Company Transfer (ICT) sent successfully",
-                                            "ØªÙ… Ø¥Ø±Ø³Ø§Ù„ Ø·Ù„Ø¨ Ø§Ù„ØªØ­ÙˆÙŠÙ„ Ø¨ÙŠÙ† Ø§Ù„Ø´Ø±ÙƒØ§Øª Ø¨Ù†Ø¬Ø§Ø­",
+                                            "Êã ÅÑÓÇá ØáÈ ÇáÊÍæíá Èíä ÇáÔÑßÇÊ ÈäÌÇÍ",
                                             captionEn: "Success",
-                                            captionAr: "Ù†Ø¬Ø§Ø­"
+                                            captionAr: "äÌÇÍ"
                                         );
                                         clear_form();
                                         return;
@@ -3227,7 +3228,7 @@ namespace pos
                                         {
                                             UiMessages.ShowWarning(
                                                 "No active ZATCA CSID/credentials found. Please configure them first to send invoices to zatca.",
-                                                "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ø¹ØªÙ…Ø§Ø¯ ZØ§ØªÙƒØ§ Ù†Ø´Ø·Ø©. ÙŠØ±Ø¬Ù‰ ØªÙƒÙˆÙŠÙ†Ù‡Ø§ Ø£ÙˆÙ„Ø§Ù‹."
+                                                "áÇ ÊæÌÏ ÈíÇäÇÊ ÇÚÊãÇÏ ZÇÊßÇ äÔØÉ. íÑÌì ÊßæíäåÇ ÃæáÇğ."
                                             );
 
                                         }
@@ -3287,9 +3288,9 @@ namespace pos
 
                                     UiMessages.ShowInfo(
                                         "Invoice No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully",
-                                        "ÙØ§ØªÙˆØ±Ø© Ø±Ù‚Ù…: " + invoice_no + " " + sale_type + " ØªÙ…Øª " + (invoice_status == "Update" ? "ØªØ­Ø¯ÙŠØ«" : "Ø¥Ù†Ø´Ø§Ø¡") + " Ø¨Ù†Ø¬Ø§Ø­",
+                                        "İÇÊæÑÉ ÑŞã: " + invoice_no + " " + sale_type + " ÊãÊ " + (invoice_status == "Update" ? "ÊÍÏíË" : "ÅäÔÇÁ") + " ÈäÌÇÍ",
                                         captionEn: "Success",
-                                        captionAr: "Ù†Ø¬Ø§Ø­"
+                                        captionAr: "äÌÇÍ"
                                     );
                                 }
                             }
@@ -3366,18 +3367,18 @@ namespace pos
                             }
                             else
                             {
-                                UiMessages.ShowError("Record not saved", "Ù„Ù… ÙŠØªÙ… Ø­ÙØ¸ Ø§Ù„Ø³Ø¬Ù„", "Error", "Ø®Ø·Ø£");
+                                UiMessages.ShowError("Record not saved", "áã íÊã ÍİÙ ÇáÓÌá", "Error", "ÎØÃ");
                             }
                         }
                         else
                         {
-                            UiMessages.ShowWarning("Please add products", "ÙŠØ±Ø¬Ù‰ Ø¥Ø¶Ø§ÙØ© Ù…Ù†ØªØ¬Ø§Øª", "Sale Transaction", "Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹");
+                            UiMessages.ShowWarning("Please add products", "íÑÌì ÅÖÇİÉ ãäÊÌÇÊ", "Sale Transaction", "ãÚÇãáÉ ÇáÈíÚ");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                    UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
                 }
             }
         }
@@ -3397,7 +3398,7 @@ namespace pos
                     
                     if (string.IsNullOrWhiteSpace(item_number))
                     {
-                        UiMessages.ShowWarning("Item number is empty for the selected product.", "Ø±Ù‚Ù… Ø§Ù„ØµÙ†Ù ÙØ§Ø±Øº Ù„Ù„Ù…Ù†ØªØ¬ Ø§Ù„Ù…Ø­Ø¯Ø¯.");
+                        UiMessages.ShowWarning("Item number is empty for the selected product.", "ÑŞã ÇáÕäİ İÇÑÛ ááãäÊÌ ÇáãÍÏÏ.");
                         return;
                     }
                     frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
@@ -3421,7 +3422,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -3436,7 +3437,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -3449,7 +3450,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -3462,7 +3463,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -3475,7 +3476,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -3500,7 +3501,7 @@ namespace pos
                     if (ofd.ShowDialog(this) != DialogResult.OK)
                         return;
 
-                    using (BusyScope.Show(this, UiMessages.T("Importing sales items...", "Ø¬Ø§Ø±ÙŠ Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ø£ØµÙ†Ø§Ù Ø§Ù„Ø¨ÙŠØ¹...")))
+                    using (BusyScope.Show(this, UiMessages.T("Importing sales items...", "ÌÇÑí ÇÓÊíÑÇÏ ÃÕäÇİ ÇáÈíÚ...")))
                     {
                         var dt = ReadSalesImportExcel(ofd.FileName);
                         ImportSalesItemsFromExcelTable(dt);
@@ -3509,7 +3510,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, ex.Message, "Import Excel", "Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ø¥ÙƒØ³Ù„");
+                UiMessages.ShowError(ex.Message, ex.Message, "Import Excel", "ÇÓÊíÑÇÏ ÅßÓá");
             }
         }
 
@@ -3521,7 +3522,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, ex.Message, "Import Template", "Ù‚Ø§Ù„Ø¨ Ø§Ù„Ø§Ø³ØªÙŠØ±Ø§Ø¯");
+                UiMessages.ShowError(ex.Message, ex.Message, "Import Template", "ŞÇáÈ ÇáÇÓÊíÑÇÏ");
             }
         }
 
@@ -3540,7 +3541,7 @@ namespace pos
             var items = ProductExcelImportHelper.ParseRows(source);
             if (items == null || items.Count == 0)
             {
-                UiMessages.ShowInfo("The selected Excel file does not contain any valid rows.", "Ù…Ù„Ù Ø§Ù„Ø¥ÙƒØ³Ù„ Ø§Ù„Ù…Ø­Ø¯Ø¯ Ù„Ø§ ÙŠØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ Ø£ÙŠ ØµÙÙˆÙ ØµØ­ÙŠØ­Ø©.");
+                UiMessages.ShowInfo("The selected Excel file does not contain any valid rows.", "ãáİ ÇáÅßÓá ÇáãÍÏÏ áÇ íÍÊæí Úáì Ãí Õİæİ ÕÍíÍÉ.");
                 return;
             }
 
@@ -3572,16 +3573,16 @@ namespace pos
             {
                 UiMessages.ShowWarning(
                     "No rows were imported. Please verify the Excel columns and product codes.",
-                    "Ù„Ù… ÙŠØªÙ… Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ø£ÙŠ ØµÙÙˆÙ. ÙŠØ±Ø¬Ù‰ Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø£Ø¹Ù…Ø¯Ø© Ø§Ù„Ø¥ÙƒØ³Ù„ ÙˆØ£ÙƒÙˆØ§Ø¯ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª.");
+                    "áã íÊã ÇÓÊíÑÇÏ Ãí Õİæİ. íÑÌì ÇáÊÍŞŞ ãä ÃÚãÏÉ ÇáÅßÓá æÃßæÇÏ ÇáãäÊÌÇÊ.");
                 return;
             }
 
             string details = skipped.Count > 0 ? "\n\nSkipped: " + string.Join(", ", skipped.Take(10).ToArray()) : string.Empty;
             UiMessages.ShowInfo(
                 string.Format("Imported {0} row(s) successfully.{1}", importedCount, details),
-                string.Format("ØªÙ… Ø§Ø³ØªÙŠØ±Ø§Ø¯ {0} ØµÙ/ØµÙÙˆÙ Ø¨Ù†Ø¬Ø§Ø­.{1}", importedCount, skipped.Count > 0 ? "\n\nØªÙ… ØªØ®Ø·ÙŠ Ø¨Ø¹Ø¶ Ø§Ù„ØµÙÙˆÙ." : string.Empty),
+                string.Format("Êã ÇÓÊíÑÇÏ {0} Õİ/Õİæİ ÈäÌÇÍ.{1}", importedCount, skipped.Count > 0 ? "\n\nÊã ÊÎØí ÈÚÖ ÇáÕİæİ." : string.Empty),
                 "Import Excel",
-                "Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ø¥ÙƒØ³Ù„");
+                "ÇÓÊíÑÇÏ ÅßÓá");
         }
 
         private DataRow FindProductForImport(string productCode, string productName)
@@ -3862,7 +3863,7 @@ namespace pos
         {
             if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
-                using (BusyScope.Show(this, UiMessages.T("Loading...", "ØªØ­Ù…ÙŠÙ„...")))
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "ÊÍãíá...")))
                 {
                     using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
                     {
@@ -3878,7 +3879,7 @@ namespace pos
         {
             if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
-                using (BusyScope.Show(this, UiMessages.T("Loading...", "ØªØ­Ù…ÙŠÙ„...")))
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "ÊÍãíá...")))
                 {
                    using (frm_sales_return obj = new frm_sales_return(txt_invoice_no.Text))
                     {
@@ -3891,7 +3892,7 @@ namespace pos
         }
 
         // Positions a popup dropdown grid directly below its anchor control.
-        // Converts through PointToScreen â†’ PointToClient so nested panels/groupboxes and
+        // Converts through PointToScreen ? PointToClient so nested panels/groupboxes and
         // RTL mirroring are both handled automatically by WinForms (no manual RTL branch needed).
         private void PositionDropdownGrid(DataGridView dgv, Control anchor)
         {
@@ -4076,7 +4077,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Ø®Ø·Ø£", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÎØÃ", "Error", "Error");
             }
         }
 
@@ -4257,8 +4258,8 @@ namespace pos
             if (customerId <= 0)
             {
                 MessageBox.Show(
-                    lang == "ar-SA" ? "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„Ø¹Ù…ÙŠÙ„ Ù„Ù†ÙˆØ¹ Ø§Ù„ÙØ§ØªÙˆØ±Ø© Ø§Ù„Ø¶Ø±ÙŠØ¨ÙŠØ© (Ù‚ÙŠØ§Ø³ÙŠØ©)." : "Please select a customer for Standard invoice type.",
-                    lang == "ar-SA" ? "Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹" : "Sale Transaction",
+                    lang == "ar-SA" ? "íÑÌì ÇÎÊíÇÑ ÇáÚãíá áäæÚ ÇáİÇÊæÑÉ ÇáÖÑíÈíÉ (ŞíÇÓíÉ)." : "Please select a customer for Standard invoice type.",
+                    lang == "ar-SA" ? "ãÚÇãáÉ ÇáÈíÚ" : "Sale Transaction",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
@@ -4273,8 +4274,8 @@ namespace pos
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     MessageBox.Show(
-                        lang == "ar-SA" ? "Ø§Ù„Ø¹Ù…ÙŠÙ„ Ø§Ù„Ù…Ø­Ø¯Ø¯ ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯." : "Selected customer not found.",
-                        lang == "ar-SA" ? "Ù…Ø¹Ø§Ù…Ù„Ø© Ø§Ù„Ø¨ÙŠØ¹" : "Sale Transaction",
+                        lang == "ar-SA" ? "ÇáÚãíá ÇáãÍÏÏ ÛíÑ ãæÌæÏ." : "Selected customer not found.",
+                        lang == "ar-SA" ? "ãÚÇãáÉ ÇáÈíÚ" : "Sale Transaction",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
                     );
@@ -4303,9 +4304,9 @@ namespace pos
             
                 if (missing.Count > 0)
                 {
-                    var caption = lang == "ar-SA" ? "ÙØ§ØªÙˆØ±Ø© Ø²Ø§ØªÙƒØ§ Ø§Ù„Ù‚ÙŠØ§Ø³ÙŠØ©" : "ZATCA Standard Invoice";
+                    var caption = lang == "ar-SA" ? "İÇÊæÑÉ ÒÇÊßÇ ÇáŞíÇÓíÉ" : "ZATCA Standard Invoice";
                     var head = lang == "ar-SA"
-                        ? "ØªØ¹Ø°Ø± Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„ÙØ§ØªÙˆØ±Ø© Ø§Ù„Ù‚ÙŠØ§Ø³ÙŠØ©. Ø§Ù„Ø­Ù‚ÙˆÙ„ Ø§Ù„Ø¥Ù„Ø²Ø§Ù…ÙŠØ© Ù„Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ø¹Ù…ÙŠÙ„ Ø§Ù„Ù…ÙÙ‚ÙˆØ¯Ø©:\n\n- "
+                        ? "ÊÚĞÑ ãÚÇáÌÉ ÇáİÇÊæÑÉ ÇáŞíÇÓíÉ. ÇáÍŞæá ÇáÅáÒÇãíÉ áÚäæÇä ÇáÚãíá ÇáãİŞæÏÉ:\n\n- "
                         : "Cannot process Standard invoice. Missing mandatory customer address fields:\n\n- ";
                     // Localize field names
                     var localizedMissing = new List<string>();
@@ -4313,19 +4314,19 @@ namespace pos
                     {
                         switch (m)
                         {
-                            case "Registration Name": localizedMissing.Add(lang == "ar-SA" ? "Ø§Ù„Ø§Ø³Ù… Ø§Ù„Ù‚Ø§Ù†ÙˆÙ†ÙŠ (Registration Name)" : m); break;
-                            case "Country Name": localizedMissing.Add(lang == "ar-SA" ? "Ø§Ø³Ù… Ø§Ù„Ø¯ÙˆÙ„Ø©" : m); break;
-                            case "City Name": localizedMissing.Add(lang == "ar-SA" ? "Ø§Ø³Ù… Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©" : m); break;
-                            case "City Subdivision Name": localizedMissing.Add(lang == "ar-SA" ? "Ø§Ø³Ù… ØªÙ‚Ø³ÙŠÙ… Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©" : m); break;
-                            case "Street Name": localizedMissing.Add(lang == "ar-SA" ? "Ø§Ø³Ù… Ø§Ù„Ø´Ø§Ø±Ø¹" : m); break;
-                            case "Building Number": localizedMissing.Add(lang == "ar-SA" ? "Ø±Ù‚Ù… Ø§Ù„Ù…Ø¨Ù†Ù‰" : m); break;
-                            case "Postal Code": localizedMissing.Add(lang == "ar-SA" ? "Ø§Ù„Ø±Ù…Ø² Ø§Ù„Ø¨Ø±ÙŠØ¯ÙŠ" : m); break;
+                            case "Registration Name": localizedMissing.Add(lang == "ar-SA" ? "ÇáÇÓã ÇáŞÇäæäí (Registration Name)" : m); break;
+                            case "Country Name": localizedMissing.Add(lang == "ar-SA" ? "ÇÓã ÇáÏæáÉ" : m); break;
+                            case "City Name": localizedMissing.Add(lang == "ar-SA" ? "ÇÓã ÇáãÏíäÉ" : m); break;
+                            case "City Subdivision Name": localizedMissing.Add(lang == "ar-SA" ? "ÇÓã ÊŞÓíã ÇáãÏíäÉ" : m); break;
+                            case "Street Name": localizedMissing.Add(lang == "ar-SA" ? "ÇÓã ÇáÔÇÑÚ" : m); break;
+                            case "Building Number": localizedMissing.Add(lang == "ar-SA" ? "ÑŞã ÇáãÈäì" : m); break;
+                            case "Postal Code": localizedMissing.Add(lang == "ar-SA" ? "ÇáÑãÒ ÇáÈÑíÏí" : m); break;
                             default: localizedMissing.Add(m); break;
                         }
                     }
 
                     var proceedQuestion = lang == "ar-SA"
-                         ? "\n\nÙ‡Ù„ ØªØ±ØºØ¨ Ø¨Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø© Ø¹Ù„Ù‰ Ø£ÙŠ Ø­Ø§Ù„ØŸ"
+                         ? "\n\nåá ÊÑÛÈ ÈÇáãÊÇÈÚÉ Úáì Ãí ÍÇá¿"
                          : "\n\nDo you want to proceed anyway?";
 
                     var result = MessageBox.Show(
@@ -4351,8 +4352,8 @@ namespace pos
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    (lang == "ar-SA" ? "ÙØ´Ù„ Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ø¹Ù…ÙŠÙ„.\n" : "Failed to validate customer address.\n") + ex.Message,
-                    lang == "ar-SA" ? "Ø®Ø·Ø£" : "Error",
+                    (lang == "ar-SA" ? "İÔá ÇáÊÍŞŞ ãä ÚäæÇä ÇáÚãíá.\n" : "Failed to validate customer address.\n") + ex.Message,
+                    lang == "ar-SA" ? "ÎØÃ" : "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 ); 

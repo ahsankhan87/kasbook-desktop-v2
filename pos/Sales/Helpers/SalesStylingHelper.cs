@@ -1,5 +1,8 @@
 using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using pos.UI;
 using POS.Core;
 
 namespace pos.Sales.Helpers
@@ -130,15 +133,15 @@ namespace pos.Sales.Helpers
 
             // Delete button column styling
             var btnDeleteColumn = grid_sales.Columns["btn_delete"];
-            if (btnDeleteColumn != null)
+            if (btnDeleteColumn is DataGridViewButtonColumn buttonColumn)
             {
-                btnDeleteColumn.DefaultCellStyle = new DataGridViewCellStyle
+                buttonColumn.DefaultCellStyle = new DataGridViewCellStyle
                 {
                     ForeColor = AppTheme.Danger,
                     SelectionForeColor = AppTheme.Danger,
                     Alignment = DataGridViewContentAlignment.MiddleCenter
                 };
-                btnDeleteColumn.FlatStyle = FlatStyle.Flat;
+                buttonColumn.FlatStyle = FlatStyle.Flat;
             }
 
             // ── Footer: professional totals area ──────────────────

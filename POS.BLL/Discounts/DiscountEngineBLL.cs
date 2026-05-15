@@ -9,29 +9,23 @@ namespace POS.BLL
     {
         private readonly DiscountSchemesDLL _dll = new DiscountSchemesDLL();
 
+        /// <summary>
+        /// Resolves discount for a sales line using the scheme directly assigned to the product.
+        /// </summary>
         public DiscountResultModal ResolveItemDiscount(
-            int productId,
-            int? brandId,
-            int? categoryId,
+            int? discountSchemeId,
             double qty,
-            double unitPrice,
-            int branchId)
+            double unitPrice)
         {
             double lineTotal = qty * unitPrice;
-            if (lineTotal <= 0)
+            if (lineTotal <= 0 || discountSchemeId == null || discountSchemeId <= 0)
                 return DiscountResultModal.None();
 
-            DataTable schemes = _dll.GetActiveForItem(productId, brandId, categoryId, branchId);
-            if (schemes == null || schemes.Rows.Count == 0)
+            DataTable dt = _dll.GetActiveById(discountSchemeId.Value);
+            if (dt == null || dt.Rows.Count == 0)
                 return DiscountResultModal.None();
 
-            DataRow row = schemes.Rows[0];
-
-            string discountType = row["product_id"] != DBNull.Value ? "PRODUCT"
-                                 : row["brand_id"] != DBNull.Value ? "BRAND"
-                                 : row["category_id"] != DBNull.Value ? "CATEGORY"
-                                 : "NONE";
-
+            DataRow row = dt.Rows[0];
             string calcType = row["calc_type"].ToString();
             double schemeValue = Convert.ToDouble(row["value"]);
             int schemeId = Convert.ToInt32(row["id"]);
@@ -59,7 +53,6 @@ namespace POS.BLL
             return new DiscountResultModal
             {
                 SchemeId = schemeId,
-                DiscountType = discountType,
                 CalcType = calcType,
                 DiscountValue = discountAmount,
                 DiscountPercent = discountPercent

@@ -137,7 +137,7 @@ namespace pos.Discounts
             {
                 dt.DefaultView.RowFilter = string.IsNullOrWhiteSpace(keyword)
                     ? ""
-                    : $"name LIKE '%{keyword}%' OR target_name LIKE '%{keyword}%'";
+                    : $"name LIKE '%{keyword}%'";
             }
         }
 

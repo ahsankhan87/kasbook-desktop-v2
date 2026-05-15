@@ -18,7 +18,7 @@ namespace pos.Sales.Helpers
         public static void PopulateCustomersDropdown(ComboBox cmb_customers)
         {
             CustomerBLL customerBLL_obj = new CustomerBLL();
-            DataTable dt = customerBLL_obj.GetRecord("TOP 100 *", "pos_customers");
+            DataTable dt = customerBLL_obj.GetAll();
             
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
@@ -36,7 +36,7 @@ namespace pos.Sales.Helpers
         public static void PopulateEmployeesDropdown(ComboBox cmb_employees)
         {
             EmployeeBLL emp_Obj = new EmployeeBLL();
-            DataTable dt = emp_Obj.GetRecord("*", "pos_employees");
+            DataTable dt = emp_Obj.GetAll(); //GetRecord("*", "pos_employees");
             
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
@@ -54,7 +54,7 @@ namespace pos.Sales.Helpers
         public static void PopulatePaymentTermsDropdown(ComboBox cmb_payment_terms)
         {
             PaymentTermsBLL paymentTermsBLL_obj = new PaymentTermsBLL();
-            DataTable dt = paymentTermsBLL_obj.GetRecord("*", "pos_payment_terms");
+            DataTable dt = paymentTermsBLL_obj.GetAll(); //.GetRecord("*", "pos_payment_terms");
             
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
@@ -72,7 +72,7 @@ namespace pos.Sales.Helpers
         public static void PopulatePaymentMethodsDropdown(ComboBox cmb_payment_method)
         {
             PaymentMethodBLL paymentMethodBLL_obj = new PaymentMethodBLL();
-            DataTable dt = paymentMethodBLL_obj.GetRecord("*", "pos_payment_methods");
+            DataTable dt = paymentMethodBLL_obj.GetAll(); //GetRecord("*", "pos_payment_methods");
             
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
@@ -172,7 +172,7 @@ namespace pos.Sales.Helpers
         public static void FillLocationsGridCombo(DataGridView grid_sales, int rowIndex, string product_id, string selectedValue = "DEF")
         {
             LocationsBLL locationBLL_obj = new LocationsBLL();
-            DataTable dt = locationBLL_obj.GetRecord("*", "pos_locations");
+            DataTable dt = locationBLL_obj.GetAll(); //.GetRecord("*", "pos_locations");
             
             DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)grid_sales.Rows[rowIndex].Cells["location_id"];
             cell.DataSource = dt;

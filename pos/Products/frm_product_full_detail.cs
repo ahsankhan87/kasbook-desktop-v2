@@ -70,6 +70,7 @@ namespace pos
             
             get_taxes_dropdownlist();
             get_suppliers_dropdownlist();
+            get_discount_schemes_dropdownlist();
             //get_brands_dropdownlist();
             //get_origin_dropdownlist();
             //get_product_group_dropdownlist();
@@ -239,6 +240,11 @@ namespace pos
                 txt_pur_dmnd_qty.Text =myProductView["purchase_demand_qty"].ToString();
                 txt_sale_dmnd_qty.Text = myProductView["sale_demand_qty"].ToString();
                 txt_restock_level.Text = myProductView["reorder_level"].ToString();
+               
+                if (myProductView["discount_scheme_id"] != DBNull.Value)
+                    cmb_discount_scheme.SelectedValue = Convert.ToInt32(myProductView["discount_scheme_id"]);
+                else
+                    cmb_discount_scheme.SelectedIndex = 0;
 
                 if (myProductView["picture"].ToString() != "")
                 {
@@ -449,6 +455,7 @@ namespace pos
                 info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
                 info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
                 info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
+                info.discount_scheme_id = (cmb_discount_scheme.SelectedValue != null && (int)cmb_discount_scheme.SelectedValue > 0) ? (int?)Convert.ToInt32(cmb_discount_scheme.SelectedValue) : null;
 
                 int result = objBLL.Insert(info);
                 if (result > 0)
@@ -512,7 +519,18 @@ namespace pos
             cmb_tax.DataSource = taxes;
 
         }
-
+        public void get_discount_schemes_dropdownlist()
+        {
+            var bll = new POS.BLL.DiscountSchemesBLL();
+            DataTable dt = bll.GetAllActive(POS.Core.UsersModal.logged_in_branch_id);
+            DataRow emptyRow = dt.NewRow();
+            emptyRow["id"] = 0;
+            emptyRow["name"] = "None";
+            dt.Rows.InsertAt(emptyRow, 0);
+            cmb_discount_scheme.DisplayMember = "name";
+            cmb_discount_scheme.ValueMember = "id";
+            cmb_discount_scheme.DataSource = dt;
+        }
 
         public void get_suppliers_dropdownlist()
         {
@@ -743,7 +761,7 @@ namespace pos
                 info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
                 info.expiry_date = ClampToSafePickerDate(txt_expiry_date.Value.Date);
                 info.packet_qty = (String.IsNullOrEmpty(txt_packet_qty.Text)) ? 0 : decimal.Parse(txt_packet_qty.Text);
-
+                info.discount_scheme_id = (cmb_discount_scheme.SelectedValue != null && (int)cmb_discount_scheme.SelectedValue > 0) ? (int?)Convert.ToInt32(cmb_discount_scheme.SelectedValue) : null;
 
                 info.id = int.Parse(txt_id.Text);
                 int result = objBLL.Update(info);
@@ -869,7 +887,7 @@ namespace pos
             txt_id.Text = "";
             cmb_tax.SelectedIndex = 0;
             pictureBox1.Image = null;
-
+            cmb_discount_scheme.SelectedIndex = 0;
             
         }
 

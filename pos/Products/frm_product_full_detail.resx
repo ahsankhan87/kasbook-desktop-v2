@@ -550,7 +550,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_barcode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_barcode.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -570,8 +570,11 @@
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 218</value>
+    <value>694, 218</value>
   </data>
   <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -597,8 +600,11 @@
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btn_translate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btn_translate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 256</value>
+    <value>415, 256</value>
   </data>
   <data name="btn_translate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -637,7 +643,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_alt_item_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_alt_item_number.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -661,13 +667,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_packet_qty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 150</value>
+    <value>695, 150</value>
   </data>
   <data name="txt_packet_qty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_packet_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 24</value>
+    <value>327, 24</value>
   </data>
   <data name="txt_packet_qty.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -691,13 +697,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_def_location.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 114</value>
+    <value>695, 114</value>
   </data>
   <data name="txt_def_location.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_def_location.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 24</value>
+    <value>327, 24</value>
   </data>
   <data name="txt_def_location.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -727,7 +733,7 @@
     <value>NoControl</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 189</value>
+    <value>549, 189</value>
   </data>
   <data name="label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -760,7 +766,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_description.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 184</value>
+    <value>695, 184</value>
   </data>
   <data name="txt_description.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -769,7 +775,7 @@
     <value>True</value>
   </data>
   <data name="txt_description.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 28</value>
+    <value>327, 28</value>
   </data>
   <data name="txt_description.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -790,13 +796,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_expiry_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 41</value>
+    <value>694, 41</value>
   </data>
   <data name="txt_expiry_date.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_expiry_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 26</value>
+    <value>329, 26</value>
   </data>
   <data name="txt_expiry_date.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -865,7 +871,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 153</value>
+    <value>549, 153</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -904,7 +910,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 24</value>
+    <value>272, 24</value>
   </data>
   <data name="txt_groups.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -931,7 +937,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 186</value>
+    <value>415, 186</value>
   </data>
   <data name="txt_group_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -967,7 +973,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 81</value>
+    <value>549, 81</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1006,7 +1012,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 117</value>
+    <value>549, 117</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1123,7 +1129,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 45</value>
+    <value>549, 45</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1162,7 +1168,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 9</value>
+    <value>549, 9</value>
   </data>
   <data name="label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1195,13 +1201,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="cmb_supplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 77</value>
+    <value>695, 77</value>
   </data>
   <data name="cmb_supplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_supplier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 26</value>
+    <value>327, 26</value>
   </data>
   <data name="cmb_supplier.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1342,7 +1348,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 150</value>
+    <value>415, 150</value>
   </data>
   <data name="txt_category_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1378,7 +1384,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 24</value>
+    <value>272, 24</value>
   </data>
   <data name="txt_categories.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1405,13 +1411,13 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_restock_level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>696, 6</value>
+    <value>695, 6</value>
   </data>
   <data name="txt_restock_level.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_restock_level.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 24</value>
+    <value>327, 24</value>
   </data>
   <data name="txt_restock_level.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1441,7 +1447,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_part_number.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_part_number.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1468,7 +1474,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 114</value>
+    <value>415, 114</value>
   </data>
   <data name="txt_brand_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1504,7 +1510,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_pur_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_pur_dmnd_qty.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1534,7 +1540,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_sale_dmnd_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_sale_dmnd_qty.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1681,7 +1687,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_unit_price_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_unit_price_2.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1750,7 +1756,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_name_ar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_name_ar.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1819,7 +1825,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_unit_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_unit_price.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1849,7 +1855,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_demand_qty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_demand_qty.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1879,7 +1885,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_cost_price.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_cost_price.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1915,7 +1921,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_item_type.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 26</value>
+    <value>404, 26</value>
   </data>
   <data name="cmb_item_type.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1945,7 +1951,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 24</value>
+    <value>270, 24</value>
   </data>
   <data name="txt_name.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2014,7 +2020,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 24</value>
+    <value>272, 24</value>
   </data>
   <data name="txt_brands.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2170,7 +2176,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_tax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 26</value>
+    <value>404, 26</value>
   </data>
   <data name="cmb_tax.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2206,7 +2212,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="cmb_units.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 26</value>
+    <value>404, 26</value>
   </data>
   <data name="cmb_units.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2236,7 +2242,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txt_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 24</value>
+    <value>404, 24</value>
   </data>
   <data name="txt_code.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -2373,8 +2379,11 @@
   <data name="&gt;&gt;label37.ZOrder" xml:space="preserve">
     <value>52</value>
   </data>
+  <data name="btn_upload_picture.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btn_upload_picture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 362</value>
+    <value>694, 362</value>
   </data>
   <data name="btn_upload_picture.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -2399,6 +2408,75 @@
   </data>
   <data name="&gt;&gt;btn_upload_picture.ZOrder" xml:space="preserve">
     <value>53</value>
+  </data>
+  <data name="cmb_discount_scheme.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="cmb_discount_scheme.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="cmb_discount_scheme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>695, 437</value>
+  </data>
+  <data name="cmb_discount_scheme.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmb_discount_scheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>327, 26</value>
+  </data>
+  <data name="cmb_discount_scheme.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;cmb_discount_scheme.Name" xml:space="preserve">
+    <value>cmb_discount_scheme</value>
+  </data>
+  <data name="&gt;&gt;cmb_discount_scheme.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmb_discount_scheme.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;cmb_discount_scheme.ZOrder" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 441</value>
+  </data>
+  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 18</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Discount Scheme:</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>55</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 14</value>
@@ -2425,7 +2503,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="pictureBox1" Row="6" RowSpan="4" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_translate" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_alt_item_number" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_packet_qty" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_def_location" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label25" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_description" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_expiry_date" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label42" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label16" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cmb_supplier" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label38" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label39" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label41" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_restock_level" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_part_number" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_pur_dmnd_qty" Row="13" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_sale_dmnd_qty" Row="14" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label33" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label19" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label26" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price_2" Row="17" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label32" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_name_ar" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label18" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price" Row="16" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_demand_qty" Row="12" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_cost_price" Row="15" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_item_type" Row="9" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_name" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label17" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label24" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmb_tax" Row="11" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_units" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_code" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label23" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label37" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_upload_picture" Row="10" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,32.38771,Percent,67.61229,Absolute,134,Absolute,146,Absolute,333" /&gt;&lt;Rows Styles="Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="pictureBox1" Row="6" RowSpan="4" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_translate" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_alt_item_number" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_packet_qty" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_def_location" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label25" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_description" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_expiry_date" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label42" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label22" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label16" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cmb_supplier" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label38" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label39" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label41" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_restock_level" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="txt_part_number" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_pur_dmnd_qty" Row="13" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_sale_dmnd_qty" Row="14" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label33" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label19" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label26" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price_2" Row="17" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label32" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_name_ar" Row="8" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label18" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_unit_price" Row="16" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_demand_qty" Row="12" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_cost_price" Row="15" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_item_type" Row="9" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_name" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label17" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label34" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label24" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label31" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmb_tax" Row="11" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cmb_units" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_code" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="label23" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label36" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label37" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_upload_picture" Row="10" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="cmb_discount_scheme" Row="12" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="12" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,32.38771,Percent,67.61229,Absolute,134,Absolute,146,Absolute,334" /&gt;&lt;Rows Styles="Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555,Percent,5.555555" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tabPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -2988,12 +3066,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Product Detail</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
   </data>
@@ -3065,6 +3137,12 @@
   </data>
   <data name="&gt;&gt;username.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_product_full_detail</value>

@@ -89,6 +89,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_upload_picture = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_discount_scheme = new System.Windows.Forms.Label();
+            this.cmb_discount_scheme = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_products)).BeginInit();
@@ -538,6 +540,23 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Name = "panel2";
             // 
+            // lbl_discount_scheme
+            // 
+            resources.ApplyResources(this.lbl_discount_scheme, "lbl_discount_scheme");
+            this.lbl_discount_scheme.Name = "lbl_discount_scheme";
+            // 
+            // cmb_discount_scheme
+            // 
+            this.cmb_discount_scheme.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_discount_scheme.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_discount_scheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_discount_scheme, "cmb_discount_scheme");
+            this.cmb_discount_scheme.FormattingEnabled = true;
+            this.cmb_discount_scheme.Items.AddRange(new object[] {
+            resources.GetString("cmb_discount_scheme.Items"),
+            resources.GetString("cmb_discount_scheme.Items1")});
+            this.cmb_discount_scheme.Name = "cmb_discount_scheme";
+            // 
             // frm_addProduct
             // 
             resources.ApplyResources(this, "$this");
@@ -623,5 +642,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btn_upload_picture;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lbl_discount_scheme;
+        private System.Windows.Forms.ComboBox cmb_discount_scheme;
     }
 }

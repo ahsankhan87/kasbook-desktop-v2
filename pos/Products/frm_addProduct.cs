@@ -57,6 +57,8 @@ namespace pos
             get_locations_dropdownlist();
             get_units_dropdownlist();
             get_categories_dropdownlist();
+            get_discount_schemes_dropdownlist();
+            InitDiscountSchemeControls();
 
             txt_item_number.Text = _keyword;
 
@@ -112,6 +114,10 @@ namespace pos
                 txt_pur_dmnd_qty.Text =myProductView["purchase_demand_qty"].ToString();
                 txt_sale_dmnd_qty.Text = myProductView["sale_demand_qty"].ToString();
                 txt_restock_level.Text = myProductView["re_stock_level"].ToString();
+                if (myProductView["discount_scheme_id"] != DBNull.Value)
+                    cmb_discount_scheme.SelectedValue = Convert.ToInt32(myProductView["discount_scheme_id"]);
+                else
+                    cmb_discount_scheme.SelectedIndex = 0;
 
                 if (myProductView["picture"].ToString() != "")
                 {
@@ -181,6 +187,7 @@ namespace pos
                     info.purchase_demand_qty = (txt_pur_dmnd_qty.Text != "" ? decimal.Parse(txt_pur_dmnd_qty.Text) : 0);
                     info.sale_demand_qty = (txt_sale_dmnd_qty.Text != "" ? decimal.Parse(txt_sale_dmnd_qty.Text) : 0);
                     info.re_stock_level = (txt_restock_level.Text != "" ? decimal.Parse(txt_restock_level.Text) : 0);
+                    info.discount_scheme_id = (cmb_discount_scheme.SelectedValue != null && (int)cmb_discount_scheme.SelectedValue > 0) ? (int?)Convert.ToInt32(cmb_discount_scheme.SelectedValue) : null;
                     
                     if (_status == "true")
                     {
@@ -266,6 +273,40 @@ namespace pos
             cmb_tax.ValueMember = "id";
             cmb_tax.DataSource = taxes;
 
+        }
+
+        public void get_discount_schemes_dropdownlist()
+        {
+            var bll = new POS.BLL.DiscountSchemesBLL();
+            DataTable dt = bll.GetAllActive(POS.Core.UsersModal.logged_in_branch_id);
+            DataRow emptyRow = dt.NewRow();
+            emptyRow["id"] = 0;
+            emptyRow["name"] = "None";
+            dt.Rows.InsertAt(emptyRow, 0);
+            cmb_discount_scheme.DisplayMember = "name";
+            cmb_discount_scheme.ValueMember = "id";
+            cmb_discount_scheme.DataSource = dt;
+        }
+
+        private void InitDiscountSchemeControls()
+        {
+            lbl_discount_scheme = new System.Windows.Forms.Label();
+            cmb_discount_scheme = new System.Windows.Forms.ComboBox();
+
+            lbl_discount_scheme.Text = "Discount Scheme:";
+            lbl_discount_scheme.AutoSize = true;
+            lbl_discount_scheme.Font = new System.Drawing.Font("Segoe UI", 9F);
+
+            cmb_discount_scheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmb_discount_scheme.Width = 220;
+            cmb_discount_scheme.Font = new System.Drawing.Font("Segoe UI", 9F);
+
+            var taxY = cmb_tax.Bottom + 8;
+            lbl_discount_scheme.Location = new System.Drawing.Point(cmb_tax.Left - 130, taxY + 3);
+            cmb_discount_scheme.Location = new System.Drawing.Point(cmb_tax.Left, taxY);
+
+            groupBox1.Controls.Add(lbl_discount_scheme);
+            groupBox1.Controls.Add(cmb_discount_scheme);
         }
 
         public void get_brands_dropdownlist()

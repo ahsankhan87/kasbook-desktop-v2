@@ -1,4 +1,5 @@
-﻿using pos.Security.Authorization;
+﻿using javax.swing.@event;
+using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
 using System;
@@ -651,6 +652,8 @@ namespace pos
                 info.user_role = cmb_user_role.Text;
                 info.user_level = Convert.ToInt32(cmb_user_role.SelectedValue);
                 info.user_commission_percent = int.Parse(txt_commission_percent.Text);
+                info.max_discount_percent = (txt_max_discount_percent.Text == string.Empty ? 0 : Convert.ToDouble(txt_max_discount_percent.Text));
+                info.max_discount_amount = (txt_max_discount_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_max_discount_amount.Text));
 
                 UsersBLL objBLL = new UsersBLL();
 

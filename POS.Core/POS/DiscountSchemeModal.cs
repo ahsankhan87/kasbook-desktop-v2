@@ -3,7 +3,8 @@ using System;
 namespace POS.Core
 {
     /// <summary>
-    /// Represents a product-level or brand-level discount scheme stored in pos_discount_schemes.
+    /// Represents a discount scheme stored in pos_discount_schemes.
+    /// The FK link to a product is stored on pos_products.discount_scheme_id.
     /// </summary>
     public class DiscountSchemeModal
     {
@@ -11,11 +12,6 @@ namespace POS.Core
 
         public string name { get; set; }
         public string name_ar { get; set; }
-
-        // Link target (FK-based)
-        public int? product_id { get; set; }
-        public int? brand_id { get; set; }
-        public int? category_id { get; set; }
 
         /// <summary>PERCENT or AMOUNT</summary>
         public string calc_type { get; set; }
@@ -42,9 +38,6 @@ namespace POS.Core
     {
         public int? SchemeId { get; set; }
 
-        /// <summary>PRODUCT | BRAND | CATEGORY | NONE</summary>
-        public string DiscountType { get; set; }
-
         public string CalcType { get; set; }
 
         public double DiscountValue { get; set; }
@@ -53,7 +46,6 @@ namespace POS.Core
 
         public static DiscountResultModal None() => new DiscountResultModal
         {
-            DiscountType = "NONE",
             DiscountValue = 0,
             DiscountPercent = 0
         };

@@ -15,6 +15,12 @@ namespace POS.BLL
             catch { throw; }
         }
 
+        public DataTable GetAllActive(int branchId)
+        {
+            try { return _dll.GetAllActive(branchId); }
+            catch { throw; }
+        }
+
         public DataTable GetById(int id)
         {
             try { return _dll.GetById(id); }
@@ -28,7 +34,7 @@ namespace POS.BLL
                 int id = _dll.Insert(info);
                 Log.LogAction(
                     "Insert Discount Scheme",
-                    $"Name: {info.name}, ProductId: {info.product_id}, BrandId: {info.brand_id}, CategoryId: {info.category_id}",
+                    $"Name: {info.name}",
                     UsersModal.logged_in_userid,
                     UsersModal.logged_in_branch_id);
                 return id;

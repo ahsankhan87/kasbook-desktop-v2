@@ -1,4 +1,4 @@
-using POS.BLL;
+﻿using POS.BLL;
 using POS.Core;
 using pos.UI;
 using System;
@@ -24,14 +24,6 @@ namespace pos.Discounts
         private void frm_add_discount_scheme_Load(object sender, EventArgs e)
         {
             AppTheme.Apply(this);
-            BindLookups();
-
-            cmb_apply_on.Items.Clear();
-            cmb_apply_on.Items.Add("Product");
-            cmb_apply_on.Items.Add("Brand");
-            cmb_apply_on.Items.Add("Category");
-            cmb_apply_on.SelectedIndex = 0;
-
             cmb_calc_type.Items.Clear();
             cmb_calc_type.Items.Add("PERCENT");
             cmb_calc_type.Items.Add("AMOUNT");
@@ -49,28 +41,6 @@ namespace pos.Discounts
                 btn_save.Text = "Save";
                 chk_is_active.Checked = true;
             }
-
-            UpdateApplyOnVisibility();
-        }
-
-        private void BindLookups()
-        {
-            var g = new GeneralBLL();
-
-            var dtProducts = g.GetRecord("id,name", "pos_products WHERE deleted=0 ORDER BY name");
-            cmb_product.DisplayMember = "name";
-            cmb_product.ValueMember = "id";
-            cmb_product.DataSource = dtProducts;
-
-            var dtBrands = g.GetRecord("id,name", "pos_brands ORDER BY name");
-            cmb_brand.DisplayMember = "name";
-            cmb_brand.ValueMember = "id";
-            cmb_brand.DataSource = dtBrands;
-
-            var dtCategories = g.GetRecord("id,name", "pos_categories ORDER BY name");
-            cmb_category.DisplayMember = "name";
-            cmb_category.ValueMember = "id";
-            cmb_category.DataSource = dtCategories;
         }
 
         private void LoadForEdit()
@@ -87,7 +57,6 @@ namespace pos.Discounts
                 txt_name_ar.Text = r["name_ar"].ToString();
                 txt_value.Text = r["value"].ToString();
                 chk_is_active.Checked = Convert.ToBoolean(r["is_active"]);
-
                 cmb_calc_type.SelectedItem = r["calc_type"].ToString();
 
                 if (r["start_date"] != DBNull.Value)
@@ -97,24 +66,6 @@ namespace pos.Discounts
 
                 chk_no_end.Checked = (r["end_date"] == DBNull.Value);
                 chk_no_start.Checked = (r["start_date"] == DBNull.Value);
-
-                if (r["product_id"] != DBNull.Value)
-                {
-                    cmb_apply_on.SelectedItem = "Product";
-                    cmb_product.SelectedValue = Convert.ToInt32(r["product_id"]);
-                }
-                else if (r["brand_id"] != DBNull.Value)
-                {
-                    cmb_apply_on.SelectedItem = "Brand";
-                    cmb_brand.SelectedValue = Convert.ToInt32(r["brand_id"]);
-                }
-                else if (r["category_id"] != DBNull.Value)
-                {
-                    cmb_apply_on.SelectedItem = "Category";
-                    cmb_category.SelectedValue = Convert.ToInt32(r["category_id"]);
-                }
-
-                UpdateApplyOnVisibility();
             }
             catch (Exception ex)
             {
@@ -128,31 +79,11 @@ namespace pos.Discounts
 
             try
             {
-                int? productId = null;
-                int? brandId = null;
-                int? categoryId = null;
-
-                switch (cmb_apply_on.SelectedItem?.ToString())
-                {
-                    case "Product":
-                        productId = Convert.ToInt32(cmb_product.SelectedValue);
-                        break;
-                    case "Brand":
-                        brandId = Convert.ToInt32(cmb_brand.SelectedValue);
-                        break;
-                    case "Category":
-                        categoryId = Convert.ToInt32(cmb_category.SelectedValue);
-                        break;
-                }
-
                 var info = new DiscountSchemeModal
                 {
                     id = _isEdit ? _editId : 0,
                     name = txt_name.Text.Trim(),
                     name_ar = txt_name_ar.Text.Trim(),
-                    product_id = productId,
-                    brand_id = brandId,
-                    category_id = categoryId,
                     calc_type = cmb_calc_type.SelectedItem.ToString(),
                     value = double.Parse(txt_value.Text.Trim()),
                     is_active = chk_is_active.Checked,
@@ -192,12 +123,6 @@ namespace pos.Discounts
                 return false;
             }
 
-            if (cmb_apply_on.SelectedItem == null)
-            {
-                UiMessages.ShowInfo("Please select discount target.", "يرجى اختيار هدف الخصم.", "Validation", "التحقق");
-                return false;
-            }
-
             double val;
             if (!double.TryParse(txt_value.Text.Trim(), out val) || val < 0)
             {
@@ -217,17 +142,6 @@ namespace pos.Discounts
         }
 
         private void btn_cancel_Click(object sender, EventArgs e) => Close();
-
-        private void cmb_apply_on_SelectedIndexChanged(object sender, EventArgs e) => UpdateApplyOnVisibility();
-
-        private void UpdateApplyOnVisibility()
-        {
-            string mode = cmb_apply_on.SelectedItem?.ToString() ?? "Product";
-
-            lbl_product.Visible = cmb_product.Visible = (mode == "Product");
-            lbl_brand.Visible = cmb_brand.Visible = (mode == "Brand");
-            lbl_category.Visible = cmb_category.Visible = (mode == "Category");
-        }
 
         private void chk_no_start_CheckedChanged(object sender, EventArgs e)
             => dtp_start.Enabled = !chk_no_start.Checked;

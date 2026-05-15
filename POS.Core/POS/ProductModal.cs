@@ -76,6 +76,9 @@ namespace POS.Core
         public int sales_return_acc_id { get; set; }
         public int sales_discount_acc_id { get; set; }
 
+        /// <summary>FK to pos_discount_schemes; null means no scheme assigned.</summary>
+        public int? discount_scheme_id { get; set; }
+
         public string invoice_no { get; set; }
 
         public byte[] picture { get; set; }

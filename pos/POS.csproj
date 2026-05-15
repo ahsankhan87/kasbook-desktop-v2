@@ -1639,6 +1639,12 @@
     <EmbeddedResource Include="Dashboard\frm_dashboard.resx">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Discounts\frm_add_discount_scheme.resx">
+      <DependentUpon>frm_add_discount_scheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Discounts\frm_discount_schemes.resx">
+      <DependentUpon>frm_discount_schemes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Employees\frm_addEmployee.ar-SA.resx">
       <DependentUpon>frm_addEmployee.cs</DependentUpon>
     </EmbeddedResource>
