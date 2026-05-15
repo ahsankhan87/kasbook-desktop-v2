@@ -1323,6 +1323,10 @@
     <Compile Include="Sales\frm_sales.Designer.cs">
       <DependentUpon>frm_sales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\Helpers\SalesStylingHelper.cs" />
+    <Compile Include="Sales\Helpers\SalesCalculationHelper.cs" />
+    <Compile Include="Sales\Helpers\SalesGridHelper.cs" />
+    <Compile Include="Sales\Helpers\SalesDropdownHelper.cs" />
     <Compile Include="Sales\frm_all_sales.cs">
       <SubType>Form</SubType>
     </Compile>
