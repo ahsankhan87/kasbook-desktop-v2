@@ -55,6 +55,7 @@ namespace pos
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
+        private readonly POS.BLL.DiscountEngineBLL _discountEngine = new POS.BLL.DiscountEngineBLL();
 
         private static readonly HashSet<string> _numericColumns =
             new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "unit_price", "discount", "discount_percent", "total_without_vat" };
@@ -625,9 +626,24 @@ namespace pos
                 }
 
                 // --------------------------- DISCOUNT Changed --------------------------
+
                 if (columnName == "discount")
                 {
+                    // Get user-specific discount limits
+                    double maxDiscountPercent = UsersModal.logged_in_max_discount_percent;
+                    double maxDiscountAmount = UsersModal.logged_in_max_discount_amount;
+
+                    // Validate discount against user limit
                     double discountPercent = totalValue == 0 ? 0 : (discount / totalValue) * 100;
+                    
+                    if (!DiscountValidator.IsDiscountValid(discount, totalValue, maxDiscountPercent, maxDiscountAmount))
+                    {
+                        // Reset to 0 if exceeds limit
+                        grid_sales.Rows[e.RowIndex].Cells[columnName].Value = 0;
+                        discount = 0;
+                        discountPercent = 0;
+                    }
+
                     tax = ((totalValue - discount) * taxRate) / 100;
                     double finalSubtotal = totalValue - discount + tax;
 
@@ -640,8 +656,22 @@ namespace pos
                 // -------------------- DISCOUNT PERCENT Changed -------------------------
                 if (columnName == "discount_percent")
                 {
+                    // Get user-specific discount limits
+                    double maxDiscountPercent = UsersModal.logged_in_max_discount_percent;
+                    double maxDiscountAmount = UsersModal.logged_in_max_discount_amount;
+
                     double discountPercent = GetCellDouble("discount_percent");
                     double discountValue = (discountPercent * totalValue) / 100;
+
+                    // Validate discount against user limit
+                    if (!DiscountValidator.IsDiscountValid(discountValue, totalValue, maxDiscountPercent, maxDiscountAmount))
+                    {
+                        // Reset to 0 if exceeds limit
+                        grid_sales.Rows[e.RowIndex].Cells[columnName].Value = 0;
+                        discountPercent = 0;
+                        discountValue = 0;
+                    }
+
                     tax = ((totalValue - discountValue) * taxRate) / 100;
                     double finalSubtotal = totalValue - discountValue + tax;
 
@@ -718,8 +748,9 @@ namespace pos
                         grid_sales.Rows[RowIndex].Cells["qty"].Value = qty;
                         grid_sales.Rows[RowIndex].Cells["cost_price"].Value = Math.Round(Decimal.Parse(myProductView["avg_cost"].ToString()), 2);
                         grid_sales.Rows[RowIndex].Cells["unit_price"].Value = Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2);
-                        grid_sales.Rows[RowIndex].Cells["discount"].Value = 0.00;
-                        grid_sales.Rows[RowIndex].Cells["discount_percent"].Value = 0.00;
+                        var _dr = _discountEngine.ResolveItemDiscount(Convert.ToInt32(myProductView["id"]), null, null, qty, (double)Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2), UsersModal.logged_in_branch_id);
+                        grid_sales.Rows[RowIndex].Cells["discount"].Value = _dr.DiscountValue;
+                        grid_sales.Rows[RowIndex].Cells["discount_percent"].Value = Math.Round(_dr.DiscountPercent, 2);
                         grid_sales.Rows[RowIndex].Cells["tax"].Value = tax;
                         grid_sales.Rows[RowIndex].Cells["sub_total"].Value = sub_total;
                         grid_sales.Rows[RowIndex].Cells["total_without_vat"].Value = sub_total_without_vat;
@@ -4334,5 +4365,5 @@ namespace pos
 
         }
     }
-
 }
+

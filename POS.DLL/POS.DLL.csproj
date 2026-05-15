@@ -85,6 +85,7 @@
     <Compile Include="GeneralDLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\PermissionsDAL.cs" />
+    <Compile Include="Discounts\DiscountSchemesDLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\POS.Core\POS.Core.csproj">

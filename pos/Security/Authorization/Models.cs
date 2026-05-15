@@ -211,6 +211,12 @@ namespace pos.Security.Authorization
 
         // Application logs
         public const string ApplicationLogs_View = "applicationlogs.view";
+
+        // Discounts module permissions
+        public const string Discounts_View             = "discounts.view";
+        public const string Discounts_ManageSchemes    = "discounts.manageschemes";
+        public const string Discounts_ApproveOverride  = "discounts.approveoverride";
+        public const string Discounts_ViewReports      = "discounts.viewreports";
     }
 
     public sealed class UserIdentity

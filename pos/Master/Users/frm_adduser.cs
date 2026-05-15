@@ -203,6 +203,11 @@ namespace pos
                 //chk_allow_cash_purchase.Checked = (bool)dr["allow_cash_purchase"];
                 chk_allow_credit_purchase.Checked = (bool)dr["allow_credit_purchase"];
 
+                // Load discount limits
+                if (dr.Table.Columns.Contains("max_discount_percent"))
+                    txt_max_discount_percent.Text = dr["max_discount_percent"].ToString();
+                if (dr.Table.Columns.Contains("max_discount_amount"))
+                    txt_max_discount_amount.Text = dr["max_discount_amount"].ToString();
             }
         }
 
@@ -735,6 +740,11 @@ namespace pos
                     info.allow_credit_sales = chk_allow_credit_sales.Checked;
                     //info.allow_cash_purchase = chk_allow_cash_purchase.Checked;
                     info.allow_credit_purchase = chk_allow_credit_purchase.Checked;
+
+                // Add discount limits (TODO: Add UI fields txt_max_discount_percent/txt_max_discount_amount to form)
+                info.max_discount_percent = (txt_max_discount_percent.Text == string.Empty ? 0 : Convert.ToDouble(txt_max_discount_percent.Text));
+                info.max_discount_amount = (txt_max_discount_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_max_discount_amount.Text));
+                    
                     objBLL.UpdateUserRights(info);
                     ///
 
@@ -783,6 +793,10 @@ namespace pos
             chk_allow_credit_sales.Checked = false;
             //chk_allow_cash_purchase.Checked = (bool)dr["allow_cash_purchase"];
             chk_allow_credit_purchase.Checked = false;
+
+            // Clear discount limits (TODO: Add UI fields to form)
+            txt_max_discount_percent.Text = "";
+            txt_max_discount_amount.Text = "";
 
             grid_commission.DataSource = null;
 

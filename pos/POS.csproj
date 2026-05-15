@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -1261,6 +1261,7 @@
     <Compile Include="Reports\Warehouse\frm_warehouse_report.Designer.cs">
       <DependentUpon>frm_warehouse_report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\DiscountValidator.cs" />
     <Compile Include="Sales\EInvoice.cs" />
     <Compile Include="Sales\frm_pos_sale.cs">
       <SubType>Form</SubType>
@@ -2517,6 +2518,18 @@
     <None Include="Resources\logo.png" />
     <None Include="Resources\shortcuts.png" />
     <None Include="Suppliers\Supplier Ledger Report\SupplierLedger.rpt" />
+    <Compile Include="Discounts\frm_discount_schemes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Discounts\frm_discount_schemes.Designer.cs">
+      <DependentUpon>frm_discount_schemes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Discounts\frm_add_discount_scheme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Discounts\frm_add_discount_scheme.Designer.cs">
+      <DependentUpon>frm_add_discount_scheme.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

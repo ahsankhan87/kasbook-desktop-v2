@@ -834,6 +834,27 @@ namespace pos
             frm_brands_obj = null; //throw new NotImplementedException();
         }
 
+        Form frm_discount_schemes_obj;
+        private void discountSchemesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frm_discount_schemes_obj == null)
+            {
+                frm_discount_schemes_obj = new Discounts.frm_discount_schemes();
+                frm_discount_schemes_obj.MdiParent = this;
+                frm_discount_schemes_obj.FormClosed += new FormClosedEventHandler(frm_discount_schemes_obj_FormClosed);
+                frm_discount_schemes_obj.Show();
+            }
+            else
+            {
+                frm_discount_schemes_obj.Activate();
+            }
+        }
+
+        void frm_discount_schemes_obj_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_discount_schemes_obj = null;
+        }
+
         Form frm_update_com_obj;
         private void profileToolStripMenuItem_Click(object sender, EventArgs e)
         {

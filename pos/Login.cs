@@ -541,6 +541,8 @@ namespace pos
                         string language = "";
                         string userRole = "";
                         int userLevel = 0;
+                        double maxDiscountPercent = 0;
+                        double maxDiscountAmount = 0;
 
                         if (dt != null && dt.Rows.Count > 0)
                         {
@@ -551,6 +553,18 @@ namespace pos
                             language = dr["language"].ToString();
                             userRole = dr["user_role"].ToString();
                             userLevel = (int)dr["user_level"];
+                        }
+
+                        // Load user discount limits
+                        var usersBLL = new UsersBLL();
+                        DataTable userRightsDt = usersBLL.GetUserRights(userId);
+                        if (userRightsDt != null && userRightsDt.Rows.Count > 0)
+                        {
+                            var dr = userRightsDt.Rows[0];
+                            if (dr.Table.Columns.Contains("max_discount_percent") && dr["max_discount_percent"] != DBNull.Value)
+                                maxDiscountPercent = Convert.ToDouble(dr["max_discount_percent"]);
+                            if (dr.Table.Columns.Contains("max_discount_amount") && dr["max_discount_amount"] != DBNull.Value)
+                                maxDiscountAmount = Convert.ToDouble(dr["max_discount_amount"]);
                         }
 
                         var branchesBLL = new BranchesBLL();
@@ -580,7 +594,9 @@ namespace pos
                             UserLevel = userLevel,
                             FiscalYearName = fyName,
                             FiscalYearFrom = fyFrom,
-                            FiscalYearTo = fyTo
+                            FiscalYearTo = fyTo,
+                            MaxDiscountPercent = maxDiscountPercent,
+                            MaxDiscountAmount = maxDiscountAmount
                         };
                     });
 
@@ -596,6 +612,10 @@ namespace pos
                     UsersModal.fiscal_year = userData.FiscalYearName;
                     UsersModal.fy_from_date = userData.FiscalYearFrom;
                     UsersModal.fy_to_date = userData.FiscalYearTo;
+
+                    // Set discount limits in session
+                    UsersModal.logged_in_max_discount_percent = userData.MaxDiscountPercent;
+                    UsersModal.logged_in_max_discount_amount = userData.MaxDiscountAmount;
 
                     // IMPORTANT: Apply language before creating main form so resources load in correct culture.
                     var lang = string.IsNullOrWhiteSpace(UsersModal.logged_in_lang) ? "en-US" : UsersModal.logged_in_lang;
@@ -629,7 +649,7 @@ namespace pos
                         System.Globalization.CultureInfo.DefaultThreadCurrentCulture = culture;
                         System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culture;
                     }
-
+       
                     // Initialize application security context
                     if (pos.Security.Authorization.AppSecurityContext.RoleRepo == null)
                     {

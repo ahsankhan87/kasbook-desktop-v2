@@ -30,6 +30,10 @@ namespace POS.Core
         public static DateTime fy_to_date { get; set; }
         public static string fiscal_year { get; set; }
 
+        // Discount limits (session)
+        public static double logged_in_max_discount_percent { get; set; }
+        public static double logged_in_max_discount_amount { get; set; }
+
         ///
 
         public int id { get; set; }
@@ -68,6 +72,10 @@ namespace POS.Core
         public bool allow_credit_sales { get; set; }
         public bool allow_cash_purchase { get; set; }
         public bool allow_credit_purchase { get; set; }
+
+        // Discount limits (new)
+        public double max_discount_percent { get; set; }  // e.g., 10% max
+        public double max_discount_amount { get; set; }   // e.g., 100 fixed max
 
         ///
 

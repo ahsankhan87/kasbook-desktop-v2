@@ -31,6 +31,7 @@
 - Do not bypass authorization checks; permission gating is expected through `Tag` + `ApplyPermissions`.
 - Preserve audit logging patterns using `POS.DLL.Log.LogAction(...)` for major user actions.
 - `frm_main` contains inactivity lock/logout and runtime subscription checks—changes here can affect global session behavior.
+- Implement discount limits for users on the sales page, enforcing per-user limits (e.g., User A max 10% or fixed 100). This is a security/business rule enforcement feature similar to sales amount limits already in the system.
 
 ## Reporting/Integration Notes
 - Reporting is mixed: Crystal Reports forms (`Reports/*`, `.rpt` generated classes) and newer shared report helpers (`Reports/Common/BaseReportForm.cs`).
