@@ -3,6 +3,7 @@ using pos.Master.Companies.zatca;
 using pos.Security.Authorization;
 using pos.UI; // <-- Added Ui namespace
 using pos.Reports.Common;
+using pos.Sales.Helpers;
 using POS.BLL;
 using POS.Core;
 using System.ComponentModel;
@@ -234,281 +235,79 @@ namespace pos
         /// </summary>
         private void StyleSalesForm()
         {
-            ApplySalesLabelForeColor(this, Color.Black);
-
-            // ?? Classic Windows grey panels ???????????????????????????
-            panel_header.BackColor = SystemColors.Control;
-            panel_footer.BackColor = SystemColors.Control;
-            panel_grid.BackColor = SystemColors.Control;
-
-            // ?? GroupBoxes: standard Windows look ?????????????????????
-            foreach (Control ctrl in panel_header.Controls)
-            {
-                if (ctrl is GroupBox grp)
-                {
-                    grp.BackColor = SystemColors.Control;
-                    grp.ForeColor = Color.Black;
-                    grp.Font = AppTheme.FontGroupBox;
-                    grp.Padding = new Padding(4, 8, 4, 4);
-
-                    foreach (Control child in grp.Controls)
-                    {
-                        if (child is ComboBox cmb)
-                        {
-                            cmb.BackColor = SystemColors.Window;
-                            cmb.FlatStyle = FlatStyle.Standard;
-                        }
-                    }
-                }
-            }
-
-            // ?? Title label ???????????????????????????????????????????
-            lbl_title.Font = AppTheme.FontHeader;
-            lbl_title.ForeColor = Color.Black;
-
-            // ?? ToolStrip: classic Windows system renderer ????????????
-            SalesToolStrip.RenderMode = ToolStripRenderMode.System;
-            SalesToolStrip.BackColor = SystemColors.Control;
-            SalesToolStrip.ForeColor = SystemColors.ControlText;
-            SalesToolStrip.ImageScalingSize = new Size(20, 20);
-            SalesToolStrip.AutoSize = true;
-            SalesToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            SalesToolStrip.Padding = new Padding(4, 2, 4, 2);
-            foreach (ToolStripItem item in SalesToolStrip.Items)
-            {
-                item.ForeColor = SystemColors.ControlText;
-                item.Padding = new Padding(4, 2, 4, 2);
-                item.Margin = new Padding(1, 0, 1, 0);
-                if (item is ToolStripButton tsb)
-                {
-                    tsb.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-                    tsb.TextImageRelation = TextImageRelation.ImageBeforeText;
-                }
-            }
-
-            // ?? Sales grid: clean Dynamics-style ??????????????????????
-            typeof(DataGridView).InvokeMember("DoubleBuffered",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.SetProperty,
-                null, grid_sales, new object[] { true });
-            grid_sales.ColumnHeadersHeight = 38;
-            grid_sales.RowTemplate.Height = 34;
-            grid_sales.RowHeadersVisible = false;
-            grid_sales.BackgroundColor = SystemColors.AppWorkspace;
-            grid_sales.DefaultCellStyle.Font = SalesGridFont;
-            grid_sales.ColumnHeadersDefaultCellStyle.Font = SalesGridHeaderFont;
-
-            // Serial number column: muted, centered
-            sno.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = SystemColors.Control,
-                ForeColor = SystemColors.GrayText,
-                SelectionBackColor = SystemColors.Control,
-                SelectionForeColor = SystemColors.GrayText,
-                Alignment = DataGridViewContentAlignment.MiddleCenter,
-                Font = AppTheme.FontSmall
-            };
-
-            // Code column
-            code.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = SystemColors.Window,
-                SelectionBackColor = SystemColors.Highlight,
-                SelectionForeColor = SystemColors.HighlightText
-            };
-
-            // Delete button column styling
-            btn_delete.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                ForeColor = AppTheme.Danger,
-                SelectionForeColor = AppTheme.Danger,
-                Alignment = DataGridViewContentAlignment.MiddleCenter
-            };
-            btn_delete.FlatStyle = FlatStyle.Flat;
-
-            // ?? Footer: professional totals area ??????????????????
-            // Style TableLayoutPanels as white card sections on gray footer
-            StyleFooterCard(tableLayoutPanel5);
-            StyleFooterCard(tableLayoutPanel6);
-            StyleFooterCard(tableLayoutPanel7);
-            StyleFooterCard(tableLayoutPanel8);
-
-            // groupBox2 (product info)
-            groupBox2.BackColor = SystemColors.Control;
-            groupBox2.ForeColor = Color.Black;
-            groupBox2.Font = AppTheme.FontGroupBox;
-
-            groupBox5.BackColor = SystemColors.Control;
-            groupBox5.ForeColor = Color.Black;
-            groupBox5.Font = AppTheme.FontGroupBox;
-            //groupBox5.Padding = new Padding(8, 18, 8, 8);
-
-            groupBox6.BackColor = SystemColors.Control;
-            groupBox6.ForeColor = Color.Black;
-            groupBox6.Font = AppTheme.FontGroupBox;
-            //groupBox6.Padding = new Padding(8, 18, 8, 8);
-
-            foreach (RadioButton rb in groupBox5.Controls.OfType<RadioButton>())
-            {
-                rb.Font = AppTheme.FontDefault;
-                rb.AutoSize = true;
-                rb.Margin = new Padding(6, 4, 6, 4);
-            }
-
-            foreach (RadioButton rb in groupBox6.Controls.OfType<RadioButton>())
-            {
-                rb.Font = AppTheme.FontDefault;
-                rb.AutoSize = true;
-                rb.Margin = new Padding(6, 4, 6, 4);
-            }
-
-            // ?? Main totals labels ??????????????????????????????
-            StyleFooterLabel(label14, false);      // Sub Total
-            StyleFooterLabel(label13, false);      // Discount
-            StyleFooterLabel(label9, true);        // Total Amount
-            chkbox_is_taxable.Font = TaxableCheckFont;
-            chkbox_is_taxable.ForeColor = SystemColors.ControlText;
-
-            // ?? Secondary labels (tableLayoutPanel7) ??????????????????
-            StyleFooterLabel(label22, false);      // Net After Disc
-            StyleFooterLabel(label23, false);      // Total Qty
-
-            // ?? Received / Change labels (tableLayoutPanel8) ??????????
-            StyleFooterLabel(label24, false);      // Received
-            StyleFooterLabel(label25, false);      // Change
-
-            // ?? Total fields — large and prominent ????????????????????
-            StyleTotalField(txt_total_amount, true);       // Grand total: HERO
-            StyleTotalField(txt_sub_total, false);
-            StyleTotalField(txt_sub_total_2, false);
-            StyleTotalField(txt_total_tax, false);
-            StyleTotalField(txt_total_discount, false);
-            StyleTotalField(txt_total_qty, false);
-            StyleSecondaryField(txt_change_amount);
-            StyleSecondaryField(txt_amount_received);
-
-            // ?? Cost fields: subtle muted look ????????????????????????
-            StyleCostField(txt_cost_price);
-            StyleCostField(txt_cost_price_with_vat);
-            StyleCostField(txt_single_cost_evat);
-            StyleCostField(txt_total_cost);
-            StyleCostField(txt_shop_qty);
-            StyleCostField(txt_company_qty);
-            StyleCostField(txt_order_qty);
-
-            // ?? Customer search dropdown ??????????????????????????????
-            if (customersDataGridView != null)
-            {
-                StyleDropdownGrid(customersDataGridView);
-            }
+            SalesStylingHelper.StyleSalesForm(
+                this,
+                panel_header,
+                panel_footer,
+                panel_grid,
+                lbl_title,
+                SalesToolStrip,
+                grid_sales,
+                groupBox2,
+                groupBox5,
+                groupBox6,
+                txt_total_amount,
+                txt_sub_total,
+                txt_sub_total_2,
+                txt_total_tax,
+                txt_total_discount,
+                txt_total_qty,
+                txt_change_amount,
+                txt_amount_received,
+                txt_cost_price,
+                txt_cost_price_with_vat,
+                txt_single_cost_evat,
+                txt_total_cost,
+                txt_shop_qty,
+                txt_company_qty,
+                txt_order_qty,
+                chkbox_is_taxable,
+                tableLayoutPanel5,
+                tableLayoutPanel6,
+                tableLayoutPanel7,
+                tableLayoutPanel8,
+                customersDataGridView);
         }
 
         /// <summary>Style a summary total field in the footer.</summary>
         private static void StyleTotalField(TextBox txt, bool isPrimary)
         {
-            txt.ReadOnly = true;
-            txt.BorderStyle = BorderStyle.Fixed3D;
-            txt.TextAlign = HorizontalAlignment.Right;
-            if (isPrimary)
-            {
-                txt.Font = TotalPrimaryFont;
-                txt.ForeColor = SystemColors.WindowText;
-                txt.BackColor = SystemColors.Window;
-            }
-            else
-            {
-                txt.Font = TotalSecondaryFont;
-                txt.ForeColor = SystemColors.WindowText;
-                txt.BackColor = SystemColors.Window;
-            }
+            SalesStylingHelper.StyleTotalField(txt, isPrimary);
         }
 
         /// <summary>Style a secondary footer field (received / change).</summary>
         private static void StyleSecondaryField(TextBox txt)
         {
-            txt.BorderStyle = BorderStyle.Fixed3D;
-            txt.TextAlign = HorizontalAlignment.Right;
-            txt.Font = SecondaryFieldFont;
-            txt.ForeColor = SystemColors.WindowText;
-            txt.BackColor = SystemColors.Window;
+            SalesStylingHelper.StyleSecondaryField(txt);
         }
 
         /// <summary>Style a cost-info read-only field.</summary>
         private static void StyleCostField(TextBox txt)
         {
-            txt.ReadOnly = true;
-            txt.BorderStyle = BorderStyle.Fixed3D;
-            txt.TextAlign = HorizontalAlignment.Right;
-            txt.Font = AppTheme.FontDefault;
-            txt.ForeColor = SystemColors.GrayText;
-            txt.BackColor = SystemColors.Control;
+            SalesStylingHelper.StyleCostField(txt);
         }
 
         /// <summary>Style a popup DataGridView dropdown (brands / categories / customers).</summary>
         private static void StyleDropdownGrid(DataGridView dgv)
         {
-            dgv.BorderStyle = BorderStyle.FixedSingle;
-            dgv.BackgroundColor = SystemColors.AppWorkspace;
-            dgv.GridColor = SystemColors.ControlDark;
-            dgv.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = SystemColors.Window,
-                ForeColor = SystemColors.WindowText,
-                Font = AppTheme.FontGrid,
-                SelectionBackColor = SystemColors.Highlight,
-                SelectionForeColor = SystemColors.HighlightText,
-                Padding = new Padding(6, 2, 6, 2)
-            };
-            dgv.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = SystemColors.Control,
-                ForeColor = SystemColors.ControlText,
-                Font = AppTheme.FontGridHeader,
-                SelectionBackColor = SystemColors.Control,
-                SelectionForeColor = SystemColors.ControlText
-            };
-            dgv.EnableHeadersVisualStyles = false;
-            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgv.RowHeadersVisible = false;
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgv.RowTemplate.Height = 28;
-            dgv.ColumnHeadersHeight = 32;
+            SalesStylingHelper.StyleDropdownGrid(dgv);
         }
 
         /// <summary>Style a footer TableLayoutPanel.</summary>
         private static void StyleFooterCard(TableLayoutPanel tlp)
         {
-            tlp.BackColor = SystemColors.Control;
+            SalesStylingHelper.StyleFooterCard(tlp);
         }
 
         /// <summary>Style a footer label.</summary>
         private static void StyleFooterLabel(Label lbl, bool isPrimary)
         {
-            if (isPrimary)
-            {
-                lbl.Font = FooterPrimaryLabelFont;
-                lbl.ForeColor = Color.Black;
-            }
-            else
-            {
-                lbl.Font = FooterSecondaryLabelFont;
-                lbl.ForeColor = Color.Black;
-            }
+            SalesStylingHelper.StyleFooterLabel(lbl, isPrimary);
         }
 
         private static void ApplySalesLabelForeColor(Control parent, Color color)
         {
-            if (parent == null)
-                return;
-
-            foreach (Control child in parent.Controls)
-            {
-                var label = child as Label;
-                if (label != null)
-                    label.ForeColor = color;
-
-                if (child.HasChildren)
-                    ApplySalesLabelForeColor(child, color);
-            }
+            SalesStylingHelper.ApplySalesLabelForeColor(parent, color);
         }
 
         Form frm_searchSaleProducts_obj;
@@ -752,7 +551,7 @@ namespace pos
 
         void frm_searchSaleProducts_obj_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //frm_searchSaleProducts_obj = null;
+
         }
 
         public void Load_products_to_grid(string item_number)
@@ -1984,7 +1783,6 @@ namespace pos
                         string shop_qty = "0"; // myProductView["qty"].ToString();
                         string category_code = myProductView["category_code"].ToString();
                         string item_number = myProductView["item_number"].ToString();
-
                         double current_sub_total = Convert.ToDouble(qty) * unit_price + tax - discount;
 
 
@@ -1996,7 +1794,7 @@ namespace pos
 
                         ////////
                         //fill_locations_grid_combo(rowIndex, "", id.ToString());
-                        //////
+                        //////////
 
                     }
                     //grid_sales.Rows.Add();
@@ -2738,18 +2536,25 @@ namespace pos
             }
             //txt_total_amount.Text = round_total_amount.ToString();
             //double total_diff_amount = old_total_amount - new_amount; // calculate difference amount and add to single item unit price
-            //double total_item_share = sub_total * 100 / old_total_amount;
-            //double total_tax_share = (old_total_amount - sub_total) * 100 / old_total_amount;
-            double diff_amount_per_item = total_discount_value / filled_rows;
+            //double total_item_share = Math.Round(total_diff_amount / sub_total * 100,2);
+            //if (total_diff_amount != 0)
+            //{
+            //    if(radioDiscValue.Checked)
+            //    {
+            //        txtTotalFlatDiscountValue.Value += Convert.ToDecimal(total_diff_amount);
 
-            //double new_amount_total = 0;
-            //double new_amount_single = 0;
-            //double new_vat_total = 0;
-            //double net_total = 0;
+            //    }else if(radioDiscPercent.Checked)
+            //    {
+            //        txt_total_disc_percent.Value += Convert.ToDecimal(total_item_share);
+            //    }
+            //}
 
-            double discount_percent = 0;
-            double tax_1 = 0;
-            double total_value = 0;
+            double total_diff_amount = total_discount_value; // total_discount_value is already the difference amount
+
+            double new_amount_single = 0;
+            double new_vat_total = 0;
+            double net_total = 0;
+
             double tax_rate = 0;
             double sub_total_1 = 0;
 
@@ -2758,9 +2563,11 @@ namespace pos
                 int product_id = Convert.ToInt32(grid_sales.Rows[i].Cells["id"].Value);
                 if (product_id > 0)
                 {
-                    grid_sales.Rows[i].Cells["discount"].Value = diff_amount_per_item;
+                    grid_sales.Rows[i].Cells["discount"].Value = total_diff_amount / filled_rows;
 
-                    discount_percent = diff_amount_per_item / total_amount * 100;
+                    double discount_value = Convert.ToDouble(grid_sales.Rows[i].Cells["discount"].Value);
+                    double total_value = Convert.ToDouble(grid_sales.Rows[i].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value);
+                    double discount_percent = total_value == 0 ? 0 : (discount_value / total_value) * 100;
                     grid_sales.Rows[i].Cells["discount_percent"].Value = Math.Round(discount_percent, 4).ToString();
 
                     //new_amount_single = (double.Parse(grid_sales.Rows[i].Cells["sub_total"].Value.ToString()) / double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString())) - (diff_amount_per_item / double.Parse(grid_sales.Rows[i].Cells["qty"].Value.ToString()));
@@ -2775,7 +2582,7 @@ namespace pos
 
                     total_value = Convert.ToDouble(grid_sales.Rows[i].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value);
 
-                    tax_1 = ((total_value - Convert.ToDouble(grid_sales.Rows[i].Cells["discount"].Value)) * tax_rate / 100);
+                    double tax_1 = ((total_value - Convert.ToDouble(grid_sales.Rows[i].Cells["discount"].Value)) * tax_rate / 100);
 
                     sub_total_1 = tax_1 + total_value - Convert.ToDouble(grid_sales.Rows[i].Cells["discount"].Value);
 
@@ -3717,7 +3524,8 @@ namespace pos
 
         private void PopulateSalesGridRow(int rowIndex, DataRow productRow, double qtyToImport, double importedPrice)
         {
-            if (rowIndex < 0) return;
+            if (rowIndex < 0 || rowIndex >= grid_sales.Rows.Count)
+                return;
 
             grid_sales.Rows[rowIndex].Cells["id"].Value = Convert.ToString(productRow["id"]);
             grid_sales.Rows[rowIndex].Cells["code"].Value = Convert.ToString(productRow["code"]);
