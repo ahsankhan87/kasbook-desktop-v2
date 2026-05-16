@@ -1,6 +1,7 @@
 using pos.Security.Authorization;
 using POS.Core;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -23,21 +24,21 @@ namespace pos.Security.Admin
             this.Load += (s, e) =>
             {
                 AppTheme.Apply(this);
+                Text = UiMessages.T("Role Permissions", "’·«ÕÌ«  «·√œÊ«—");
             };
 
             using (BusyScope.Show(this, UiMessages.T("Loading permissions...", "Ã«—Ì  Õ„Ì· «·’·«ÕÌ« ...")))
             {
-                // Load roles
+                LoadAllPermissions();  // Move this BEFORE setting DataSource
                 cmbRoles.DataSource = Enum.GetValues(typeof(SystemRole));
-                LoadAllPermissions();
                 if (cmbRoles.Items.Count > 0) cmbRoles.SelectedIndex = 0;
             }
 
-            // Keep UI in sync when role changes
             LoadPermissionsForRole();
         }
 
         private string[] _allPermissions;
+        private readonly HashSet<string> _selectedPermissions = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         private void LoadAllPermissions()
         {
@@ -48,34 +49,121 @@ namespace pos.Security.Admin
                 .OrderBy(s => s)
                 .ToArray();
 
+            PopulateModuleFilter();
+            ApplyPermissionFilter();
+        }
+
+        private void PopulateModuleFilter()
+        {
+            var modules = _allPermissions
+                .Select(GetPermissionModule)
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(s => s)
+                .ToList();
+
+            cmbModuleFilter.Items.Clear();
+            cmbModuleFilter.Items.Add("All");
+            foreach (var m in modules)
+                cmbModuleFilter.Items.Add(m);
+
+            cmbModuleFilter.SelectedIndex = 0;
+        }
+
+        private static string GetPermissionModule(string permission)
+        {
+            if (string.IsNullOrWhiteSpace(permission)) return string.Empty;
+            int idx = permission.IndexOf('.');
+            return idx > 0 ? permission.Substring(0, idx) : permission;
+        }
+
+        private void ApplyPermissionFilter()
+        {
+            var keyword = (txtSearch.Text ?? string.Empty).Trim();
+            var module = cmbModuleFilter.SelectedItem == null ? "All" : cmbModuleFilter.SelectedItem.ToString();
+
+            var filtered = _allPermissions.Where(p =>
+                (string.Equals(module, "All", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(GetPermissionModule(p), module, StringComparison.OrdinalIgnoreCase)) &&
+                (string.IsNullOrWhiteSpace(keyword) || p.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0))
+                .ToArray();
+
             checkedListBoxPermissions.Items.Clear();
-            foreach (var p in _allPermissions)
-                checkedListBoxPermissions.Items.Add(p, false);
+            foreach (var p in filtered)
+                checkedListBoxPermissions.Items.Add(p, _selectedPermissions.Contains(p));
+
+            UpdateSelectionSummary();
         }
 
         private void LoadPermissionsForRole()
         {
             if (cmbRoles.SelectedItem == null) return;
+
             var role = (SystemRole)cmbRoles.SelectedItem;
             var def = _auth.GetRole(role);
 
-            // Uncheck all
-            for (int i = 0; i < checkedListBoxPermissions.Items.Count; i++)
-                checkedListBoxPermissions.SetItemChecked(i, false);
+            _selectedPermissions.Clear();
+            if (def != null)
+                _selectedPermissions.UnionWith(def.GrantedPermissions);
 
-            if (def == null) return;
+            ApplyPermissionFilter();
+        }
 
-            for (int i = 0; i < checkedListBoxPermissions.Items.Count; i++)
-            {
-                var p = checkedListBoxPermissions.Items[i].ToString();
-                if (def.GrantedPermissions.Contains(p))
-                    checkedListBoxPermissions.SetItemChecked(i, true);
-            }
+        private void UpdateSelectionSummary()
+        {
+            lblSelectedCount.Text = string.Format(
+                UiMessages.T("Selected: {0}", "«·„Õœœ: {0}"),
+                _selectedPermissions.Count);
         }
 
         private void cmbRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadPermissionsForRole();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            ApplyPermissionFilter();
+        }
+
+        private void cmbModuleFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyPermissionFilter();
+        }
+
+        private void checkedListBoxPermissions_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.Index < 0 || e.Index >= checkedListBoxPermissions.Items.Count) return;
+
+            var permission = checkedListBoxPermissions.Items[e.Index].ToString();
+            if (e.NewValue == CheckState.Checked)
+                _selectedPermissions.Add(permission);
+            else
+                _selectedPermissions.Remove(permission);
+
+            BeginInvoke((Action)(() => UpdateSelectionSummary()));
+        }
+
+        private void btnCheckAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxPermissions.Items.Count; i++)
+            {
+                var permission = checkedListBoxPermissions.Items[i].ToString();
+                _selectedPermissions.Add(permission);
+                checkedListBoxPermissions.SetItemChecked(i, true);
+            }
+            UpdateSelectionSummary();
+        }
+
+        private void btnUncheckAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxPermissions.Items.Count; i++)
+            {
+                var permission = checkedListBoxPermissions.Items[i].ToString();
+                _selectedPermissions.Remove(permission);
+                checkedListBoxPermissions.SetItemChecked(i, false);
+            }
+            UpdateSelectionSummary();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -92,9 +180,7 @@ namespace pos.Security.Admin
             {
                 try
                 {
-                    var selected = checkedListBoxPermissions.CheckedItems.Cast<object>()
-                        .Select(o => o.ToString())
-                        .ToList();
+                    var selected = _selectedPermissions.ToList();
 
                     _repo.SaveRolePermissions(role, selected);
 
@@ -108,7 +194,6 @@ namespace pos.Security.Admin
                         captionEn: "Security",
                         captionAr: "«·√„«‰");
 
-                    //App logging 
                     POS.DLL.Log.LogAction("Permissions", $"Updated permissions for role '{role}'.", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                 }
                 catch (Exception ex)

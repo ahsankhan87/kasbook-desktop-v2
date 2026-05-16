@@ -327,8 +327,26 @@
   <data name="user_rights_tab.Text" xml:space="preserve">
     <value>حقوق</value>
   </data>
+  <data name="groupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>528, 22</value>
+  </data>
+  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 196</value>
+  </data>
   <data name="groupBox8.Text" xml:space="preserve">
     <value>المشتريات</value>
+  </data>
+  <data name="chk_allow_credit_purchase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 64</value>
+  </data>
+  <data name="txt_cash_purchase_amt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 34</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 63</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 17</value>
@@ -336,11 +354,20 @@
   <data name="label11.Text" xml:space="preserve">
     <value>السماح ببيع الائتمان:</value>
   </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 89</value>
+  </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 17</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
     <value>حد مبلغ شراء الائتمان:</value>
+  </data>
+  <data name="txt_credit_purchase_amt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 87</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 37</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
@@ -348,8 +375,23 @@
   <data name="label14.Text" xml:space="preserve">
     <value>حد مبلغ الشراء:</value>
   </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 22</value>
+  </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>مبيعات</value>
+  </data>
+  <data name="chk_allow_credit_sales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 64</value>
+  </data>
+  <data name="txt_cash_sales_amt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 34</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 64</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 17</value>
@@ -357,17 +399,50 @@
   <data name="label10.Text" xml:space="preserve">
     <value>السماح ببيع الائتمان:</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 17</value>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 90</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>تأكيد كلمة المرور:</value>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 17</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>نسبة الخصم القصوى %:</value>
+  </data>
+  <data name="txt_max_discount_percent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>56, 87</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 37</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>كلمه السر:</value>
+  </data>
+  <data name="txt_max_discount_amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 258</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>750, 261</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 17</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>الحد الأقصى لمبلغ الخصم:</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>750, 240</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>تأكيد كلمة المرور:</value>
+  </data>
+  <data name="txt_credit_sales_amt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 235</value>
   </data>
   <data name="user_commission.Size" type="System.Drawing.Size, System.Drawing">
     <value>919, 422</value>
@@ -405,15 +480,6 @@
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>927, 451</value>
   </data>
-  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>927, 60</value>
-  </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 451</value>
-  </data>
-  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 330</value>
-  </data>
   <data name="btn_pwd_change.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 42</value>
   </data>
@@ -435,6 +501,9 @@
   <data name="btn_main_refresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 28</value>
   </data>
+  <data name="btn_main_refresh.Text" xml:space="preserve">
+    <value>ينعش (F5)</value>
+  </data>
   <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 28</value>
   </data>
@@ -452,6 +521,15 @@
   </data>
   <data name="btn_blank.Text" xml:space="preserve">
     <value>صافي</value>
+  </data>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 330</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>927, 60</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 451</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

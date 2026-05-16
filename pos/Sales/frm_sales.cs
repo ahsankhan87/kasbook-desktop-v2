@@ -56,6 +56,8 @@ namespace pos
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
         private readonly POS.BLL.DiscountEngineBLL _discountEngine = new POS.BLL.DiscountEngineBLL();
+        private bool _canEditUnitPrice;
+        private bool _canEditDiscount;
 
         private static readonly HashSet<string> _numericColumns =
             new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "unit_price", "discount", "discount_percent", "total_without_vat" };
@@ -82,6 +84,7 @@ namespace pos
             txt_groups.Click += TextBoxOnClick;
             txt_categories.Click += TextBoxOnClick;
             txt_brands.Click += TextBoxOnClick;
+            grid_sales.CellBeginEdit += grid_sales_CellBeginEdit;
 
             // Debounce for customer search
             SetupCustomersDataGridView(); // build it once here
@@ -131,6 +134,8 @@ namespace pos
             get_invoice_subtype_dropdownlist();
             Get_user_total_commission();
 
+            ApplySalesPriceDiscountEditPermissions();
+
             // Apply permissions for ZATCA send checkbox
             ApplyZatcaPermissionsToControls();
 
@@ -138,6 +143,56 @@ namespace pos
             foreach (DataGridViewColumn column in grid_sales.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void ApplySalesPriceDiscountEditPermissions()
+        {
+            _canEditUnitPrice = _auth.HasPermission(_currentUser, AppPermissions.Sales_EditPrice);
+            _canEditDiscount = _auth.HasPermission(_currentUser, AppPermissions.Sales_EditDiscount);
+
+            if (grid_sales.Columns.Contains("unit_price"))
+            {
+                grid_sales.Columns["unit_price"].ReadOnly = !_canEditUnitPrice;
+                grid_sales.Columns["unit_price"].DefaultCellStyle.BackColor = _canEditUnitPrice ? SystemColors.Window : Color.Gainsboro;
+            }
+
+            if (grid_sales.Columns.Contains("discount"))
+            {
+                grid_sales.Columns["discount"].ReadOnly = !_canEditDiscount;
+                grid_sales.Columns["discount"].DefaultCellStyle.BackColor = _canEditDiscount ? SystemColors.Window : Color.Gainsboro;
+            }
+
+            if (grid_sales.Columns.Contains("discount_percent"))
+            {
+                grid_sales.Columns["discount_percent"].ReadOnly = !_canEditDiscount;
+                grid_sales.Columns["discount_percent"].DefaultCellStyle.BackColor = _canEditDiscount ? SystemColors.Window : Color.Gainsboro;
+            }
+        }
+
+        private void grid_sales_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            string colName = grid_sales.Columns[e.ColumnIndex].Name;
+
+            if (colName == "unit_price" && !_canEditUnitPrice)
+            {
+                e.Cancel = true;
+                UiMessages.ShowWarning(
+                    "You do not have permission to edit unit price.",
+                    "·Ì” ·œÌﬂ ’·«ÕÌ… · ⁄œÌ· ”⁄— «·ÊÕœ….",
+                    "Permission Denied",
+                    " „ —›÷ «·’·«ÕÌ…");
+                return;
+            }
+
+            if ((colName == "discount" || colName == "discount_percent") && !_canEditDiscount)
+            {
+                e.Cancel = true;
+                UiMessages.ShowWarning(
+                    "You do not have permission to edit discounts.",
+                    "·Ì” ·œÌﬂ ’·«ÕÌ… · ⁄œÌ· «·Œ’Ê„« .",
+                    "Permission Denied",
+                    " „ —›÷ «·’·«ÕÌ…");
             }
         }
 
@@ -4361,10 +4416,6 @@ namespace pos
             }
         }
 
-        private void panel_footer_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
 

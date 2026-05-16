@@ -985,7 +985,6 @@
             this.panel_footer.Controls.Add(this.tableLayoutPanel5);
             this.panel_footer.Controls.Add(this.groupBox2);
             this.panel_footer.Name = "panel_footer";
-            this.panel_footer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_footer_Paint);
             // 
             // tableLayoutPanel8
             // 

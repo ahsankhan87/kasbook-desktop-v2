@@ -34,6 +34,8 @@ namespace pos.Security.Authorization
         // Sales module permissions (normalized to lowercase)
         public const string Sales_Create = "sales.create";
         public const string Sales_Edit = "sales.edit";
+        public const string Sales_EditPrice = "sales.editprice";
+        public const string Sales_EditDiscount = "sales.editdiscount";
         public const string Sales_Delete = "sales.delete";
         public const string Sales_View = "sales.view";
         public const string Sales_Print = "sales.print";

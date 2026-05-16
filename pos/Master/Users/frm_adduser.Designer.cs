@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_adduser));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -88,9 +88,13 @@
             this.chk_allow_credit_sales = new System.Windows.Forms.CheckBox();
             this.txt_cash_sales_amt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txt_max_discount_percent = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_max_discount_amount = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_credit_sales_amt = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.user_commission = new System.Windows.Forms.TabPage();
             this.btn_payment = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
@@ -112,10 +116,6 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
-            this.txt_max_discount_amount = new System.Windows.Forms.TextBox();
-            this.txt_max_discount_percent = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -148,12 +148,12 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_name);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.label21);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
@@ -170,8 +170,8 @@
             // 
             // btn_search
             // 
-            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_search.Name = "btn_search";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
@@ -210,19 +210,19 @@
             // 
             // cmb_branches
             // 
+            resources.ApplyResources(this.cmb_branches, "cmb_branches");
             this.cmb_branches.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_branches.FormattingEnabled = true;
             this.cmb_branches.Items.AddRange(new object[] {
             resources.GetString("cmb_branches.Items"),
             resources.GetString("cmb_branches.Items1")});
-            resources.ApplyResources(this.cmb_branches, "cmb_branches");
             this.cmb_branches.Name = "cmb_branches";
             // 
             // groupBox4
             // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.chk_accounts);
             this.groupBox4.Controls.Add(this.checkedListBox_Accounts);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -235,16 +235,16 @@
             // 
             // checkedListBox_Accounts
             // 
+            resources.ApplyResources(this.checkedListBox_Accounts, "checkedListBox_Accounts");
             this.checkedListBox_Accounts.CheckOnClick = true;
             this.checkedListBox_Accounts.FormattingEnabled = true;
-            resources.ApplyResources(this.checkedListBox_Accounts, "checkedListBox_Accounts");
             this.checkedListBox_Accounts.Name = "checkedListBox_Accounts";
             // 
             // groupBox6
             // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Controls.Add(this.chk_hr);
             this.groupBox6.Controls.Add(this.checkedListBox_HR);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
@@ -257,16 +257,16 @@
             // 
             // checkedListBox_HR
             // 
+            resources.ApplyResources(this.checkedListBox_HR, "checkedListBox_HR");
             this.checkedListBox_HR.CheckOnClick = true;
             this.checkedListBox_HR.FormattingEnabled = true;
-            resources.ApplyResources(this.checkedListBox_HR, "checkedListBox_HR");
             this.checkedListBox_HR.Name = "checkedListBox_HR";
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.chk_reports);
             this.groupBox5.Controls.Add(this.checkedListBox_Reports);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
@@ -279,16 +279,16 @@
             // 
             // checkedListBox_Reports
             // 
+            resources.ApplyResources(this.checkedListBox_Reports, "checkedListBox_Reports");
             this.checkedListBox_Reports.CheckOnClick = true;
             this.checkedListBox_Reports.FormattingEnabled = true;
-            resources.ApplyResources(this.checkedListBox_Reports, "checkedListBox_Reports");
             this.checkedListBox_Reports.Name = "checkedListBox_Reports";
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.chk_pos);
             this.groupBox3.Controls.Add(this.checkedListBox_POS);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -301,16 +301,16 @@
             // 
             // checkedListBox_POS
             // 
+            resources.ApplyResources(this.checkedListBox_POS, "checkedListBox_POS");
             this.checkedListBox_POS.CheckOnClick = true;
             this.checkedListBox_POS.FormattingEnabled = true;
-            resources.ApplyResources(this.checkedListBox_POS, "checkedListBox_POS");
             this.checkedListBox_POS.Name = "checkedListBox_POS";
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.chk_master);
             this.groupBox2.Controls.Add(this.checkedListBox_Master);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -323,16 +323,16 @@
             // 
             // checkedListBox_Master
             // 
+            resources.ApplyResources(this.checkedListBox_Master, "checkedListBox_Master");
             this.checkedListBox_Master.CheckOnClick = true;
             this.checkedListBox_Master.FormattingEnabled = true;
-            resources.ApplyResources(this.checkedListBox_Master, "checkedListBox_Master");
             this.checkedListBox_Master.Name = "checkedListBox_Master";
             // 
             // cmb_lang
             // 
+            resources.ApplyResources(this.cmb_lang, "cmb_lang");
             this.cmb_lang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_lang.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_lang, "cmb_lang");
             this.cmb_lang.Name = "cmb_lang";
             // 
             // label5
@@ -342,9 +342,9 @@
             // 
             // groupBox7
             // 
+            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Controls.Add(this.chk_services);
             this.groupBox7.Controls.Add(this.checkedListBox_Services);
-            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
             // 
@@ -357,23 +357,24 @@
             // 
             // checkedListBox_Services
             // 
+            resources.ApplyResources(this.checkedListBox_Services, "checkedListBox_Services");
             this.checkedListBox_Services.CheckOnClick = true;
             this.checkedListBox_Services.FormattingEnabled = true;
-            resources.ApplyResources(this.checkedListBox_Services, "checkedListBox_Services");
             this.checkedListBox_Services.Name = "checkedListBox_Services";
             // 
             // tabControl1
             // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.user_detail_tab);
             this.tabControl1.Controls.Add(this.module_permission_tab);
             this.tabControl1.Controls.Add(this.user_rights_tab);
             this.tabControl1.Controls.Add(this.user_commission);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // user_detail_tab
             // 
+            resources.ApplyResources(this.user_detail_tab, "user_detail_tab");
             this.user_detail_tab.Controls.Add(this.label9);
             this.user_detail_tab.Controls.Add(this.txt_commission_percent);
             this.user_detail_tab.Controls.Add(this.txt_id);
@@ -392,7 +393,6 @@
             this.user_detail_tab.Controls.Add(this.lbl_pwd);
             this.user_detail_tab.Controls.Add(this.lbl_cpwd);
             this.user_detail_tab.Controls.Add(this.label8);
-            resources.ApplyResources(this.user_detail_tab, "user_detail_tab");
             this.user_detail_tab.Name = "user_detail_tab";
             this.user_detail_tab.UseVisualStyleBackColor = true;
             // 
@@ -414,9 +414,9 @@
             // 
             // cmb_user_role
             // 
+            resources.ApplyResources(this.cmb_user_role, "cmb_user_role");
             this.cmb_user_role.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_user_role.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_user_role, "cmb_user_role");
             this.cmb_user_role.Name = "cmb_user_role";
             // 
             // txt_password
@@ -443,33 +443,37 @@
             // 
             // module_permission_tab
             // 
+            resources.ApplyResources(this.module_permission_tab, "module_permission_tab");
             this.module_permission_tab.Controls.Add(this.groupBox2);
             this.module_permission_tab.Controls.Add(this.groupBox6);
             this.module_permission_tab.Controls.Add(this.groupBox4);
             this.module_permission_tab.Controls.Add(this.groupBox3);
             this.module_permission_tab.Controls.Add(this.groupBox7);
             this.module_permission_tab.Controls.Add(this.groupBox5);
-            resources.ApplyResources(this.module_permission_tab, "module_permission_tab");
             this.module_permission_tab.Name = "module_permission_tab";
             this.module_permission_tab.UseVisualStyleBackColor = true;
             // 
             // user_rights_tab
             // 
+            resources.ApplyResources(this.user_rights_tab, "user_rights_tab");
             this.user_rights_tab.Controls.Add(this.groupBox8);
             this.user_rights_tab.Controls.Add(this.groupBox1);
-            resources.ApplyResources(this.user_rights_tab, "user_rights_tab");
+            this.user_rights_tab.Controls.Add(this.txt_max_discount_amount);
+            this.user_rights_tab.Controls.Add(this.label12);
+            this.user_rights_tab.Controls.Add(this.label4);
+            this.user_rights_tab.Controls.Add(this.txt_credit_sales_amt);
             this.user_rights_tab.Name = "user_rights_tab";
             this.user_rights_tab.UseVisualStyleBackColor = true;
             // 
             // groupBox8
             // 
+            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Controls.Add(this.chk_allow_credit_purchase);
             this.groupBox8.Controls.Add(this.txt_cash_purchase_amt);
             this.groupBox8.Controls.Add(this.label11);
             this.groupBox8.Controls.Add(this.label13);
             this.groupBox8.Controls.Add(this.txt_credit_purchase_amt);
             this.groupBox8.Controls.Add(this.label14);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
             // 
@@ -509,17 +513,13 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.chk_allow_credit_sales);
             this.groupBox1.Controls.Add(this.txt_cash_sales_amt);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txt_max_discount_percent);
-            this.groupBox1.Controls.Add(this.txt_max_discount_amount);
-            this.groupBox1.Controls.Add(this.txt_credit_sales_amt);
             this.groupBox1.Controls.Add(this.label3);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -540,6 +540,34 @@
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
             // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // txt_max_discount_percent
+            // 
+            resources.ApplyResources(this.txt_max_discount_percent, "txt_max_discount_percent");
+            this.txt_max_discount_percent.Name = "txt_max_discount_percent";
+            this.txt_max_discount_percent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_sales_amt_KeyPress);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            this.label3.Tag = "";
+            // 
+            // txt_max_discount_amount
+            // 
+            resources.ApplyResources(this.txt_max_discount_amount, "txt_max_discount_amount");
+            this.txt_max_discount_amount.Name = "txt_max_discount_amount";
+            this.txt_max_discount_amount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_sales_amt_KeyPress);
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
@@ -551,18 +579,12 @@
             this.txt_credit_sales_amt.Name = "txt_credit_sales_amt";
             this.txt_credit_sales_amt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_sales_amt_KeyPress);
             // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            this.label3.Tag = "";
-            // 
             // user_commission
             // 
+            resources.ApplyResources(this.user_commission, "user_commission");
             this.user_commission.Controls.Add(this.btn_payment);
             this.user_commission.Controls.Add(this.btn_refresh);
             this.user_commission.Controls.Add(this.grid_commission);
-            resources.ApplyResources(this.user_commission, "user_commission");
             this.user_commission.Name = "user_commission";
             this.user_commission.UseVisualStyleBackColor = true;
             // 
@@ -582,10 +604,10 @@
             // 
             // grid_commission
             // 
+            resources.ApplyResources(this.grid_commission, "grid_commission");
             this.grid_commission.AllowUserToAddRows = false;
             this.grid_commission.AllowUserToDeleteRows = false;
             this.grid_commission.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_commission, "grid_commission");
             this.grid_commission.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_commission.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_commission.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -624,9 +646,9 @@
             // debit
             // 
             this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            this.debit.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.debit.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.debit, "debit");
             this.debit.Name = "debit";
             this.debit.ReadOnly = true;
@@ -634,10 +656,10 @@
             // credit
             // 
             this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.credit.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.credit.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.credit, "credit");
             this.credit.Name = "credit";
             this.credit.ReadOnly = true;
@@ -645,9 +667,9 @@
             // balance
             // 
             this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.balance.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            this.balance.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.balance, "balance");
             this.balance.Name = "balance";
             this.balance.ReadOnly = true;
@@ -661,18 +683,19 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.tabControl1);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Name = "panel2";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.groupBox9);
             resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.groupBox9);
             this.panel3.Name = "panel3";
             // 
             // groupBox9
             // 
+            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Controls.Add(this.btn_pwd_change);
             this.groupBox9.Controls.Add(this.btn_cancel);
             this.groupBox9.Controls.Add(this.btn_save);
@@ -680,7 +703,6 @@
             this.groupBox9.Controls.Add(this.btn_delete);
             this.groupBox9.Controls.Add(this.btn_update);
             this.groupBox9.Controls.Add(this.btn_blank);
-            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
             // 
@@ -708,8 +730,8 @@
             // 
             // btn_main_refresh
             // 
-            this.btn_main_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_main_refresh, "btn_main_refresh");
+            this.btn_main_refresh.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_main_refresh.Name = "btn_main_refresh";
             this.btn_main_refresh.UseVisualStyleBackColor = true;
             this.btn_main_refresh.Click += new System.EventHandler(this.btn_main_refresh_Click);
@@ -734,28 +756,6 @@
             this.btn_blank.Name = "btn_blank";
             this.btn_blank.UseVisualStyleBackColor = true;
             this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
-            // 
-            // txt_max_discount_amount
-            // 
-            resources.ApplyResources(this.txt_max_discount_amount, "txt_max_discount_amount");
-            this.txt_max_discount_amount.Name = "txt_max_discount_amount";
-            this.txt_max_discount_amount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_sales_amt_KeyPress);
-            // 
-            // txt_max_discount_percent
-            // 
-            resources.ApplyResources(this.txt_max_discount_percent, "txt_max_discount_percent");
-            this.txt_max_discount_percent.Name = "txt_max_discount_percent";
-            this.txt_max_discount_percent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_sales_amt_KeyPress);
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
             // 
             // frm_adduser
             // 
@@ -789,6 +789,7 @@
             this.user_detail_tab.PerformLayout();
             this.module_permission_tab.ResumeLayout(false);
             this.user_rights_tab.ResumeLayout(false);
+            this.user_rights_tab.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox1.ResumeLayout(false);

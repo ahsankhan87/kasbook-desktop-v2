@@ -80,7 +80,7 @@ namespace pos.Security.Authorization
             };
             _roleCache[SystemRole.Administrator].GrantedPermissions.UnionWith(new[]
             {
-                Permissions.Sales_Create, Permissions.Sales_Edit, Permissions.Sales_Delete,
+                Permissions.Sales_Create, Permissions.Sales_Edit, Permissions.Sales_EditPrice, Permissions.Sales_EditDiscount, Permissions.Sales_Delete,
                 Permissions.Sales_View, Permissions.Sales_Print,
                 Permissions.Sales_Zatca_Sign, Permissions.Sales_Zatca_Report,
                 Permissions.Sales_Zatca_Qr_Show, Permissions.Sales_Zatca_DownloadUBL,

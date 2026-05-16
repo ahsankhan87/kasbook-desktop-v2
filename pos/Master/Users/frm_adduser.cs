@@ -18,10 +18,10 @@ namespace pos
     public partial class frm_adduser : Form
     {
         public frm_users mainForm;
-        
+
         public int _user_id;
         string _status;
-        
+
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
@@ -37,13 +37,13 @@ namespace pos
         public frm_adduser()
         {
             InitializeComponent();
-            
+
         }
 
         public void frm_adduser_Load(object sender, EventArgs e)
         {
             //Load_all_menu();
-           
+
             get_branches_dropdownlist();
             get_language_dropdownlist();
             get_userrole_dropdownlist();
@@ -52,12 +52,15 @@ namespace pos
             load_user_rights(_user_id);
             load_user_commission_grid(_user_id);
             //check_all_modules(_user_id);
-            
+
+            txt_max_discount_percent.KeyPress += txt_max_discount_percent_KeyPress;
+            txt_max_discount_percent.Validating += txt_max_discount_percent_Validating;
+
             //lbl_cpwd.Visible = false;
             //lbl_pwd.Visible = false;
             //txt_confirm_pwd.Visible = false;
-           // txt_password.Visible = false;
-            
+            // txt_password.Visible = false;
+
         }
 
         private void Load_all_menu()
@@ -108,17 +111,17 @@ namespace pos
 
         }
         public void check_all_modules(int user_id)
-        {  
+        {
             //////
             ModulesBLL usermoduleDLL = new ModulesBLL();
 
             DataTable dt_parent_menus = usermoduleDLL.GetParentModules(0); //GET ALL PARENT MENU FIRST
-            
-            foreach(DataRow dr in dt_parent_menus.Rows)
+
+            foreach (DataRow dr in dt_parent_menus.Rows)
             {
                 DataTable dt_1 = usermoduleDLL.GetUsersModules_ByParent((int)dr["id"], user_id); //get all modules according to parent id
 
-                if(dr["name"].ToString() == "Master")
+                if (dr["name"].ToString() == "Master")
                 {
                     for (int i = 0; i < dt_1.Rows.Count; i++)
                     {
@@ -161,14 +164,14 @@ namespace pos
                     }
                 }
             }
-            
+
             //////////
         }
 
         public void load_user_detail(int user_id)
         {
             UsersBLL generalBLL_obj = new UsersBLL();
-            
+
             DataTable users = generalBLL_obj.GetUser(user_id);
 
             foreach (DataRow dr in users.Rows)
@@ -181,7 +184,7 @@ namespace pos
                 cmb_user_role.SelectedValue = dr["user_level"];
                 cmb_branches.SelectedValue = dr["branch_id"].ToString();
                 cmb_lang.SelectedValue = dr["language"].ToString();
-                
+
             }
             lbl_name.Visible = true;
             lbl_name.Text = txt_name.Text;
@@ -194,7 +197,7 @@ namespace pos
             foreach (DataRow dr in users.Rows)
             {
                 ///USER RIGHTS
-                
+
                 txt_cash_sales_amt.Text = dr["cash_sales_amount"].ToString();
                 txt_credit_sales_amt.Text = dr["credit_sales_amount"].ToString();
                 txt_cash_purchase_amt.Text = dr["cash_purchase_amount"].ToString();
@@ -217,7 +220,7 @@ namespace pos
             GeneralBLL generalBLL_obj = new GeneralBLL();
             string keyword = "id,name";
             string table = "pos_branches";
-            DataTable branches = generalBLL_obj.GetRecord(keyword,table);
+            DataTable branches = generalBLL_obj.GetRecord(keyword, table);
 
             //DataRow emptyRow = branches.NewRow();
             //emptyRow[0] = 0;              // Set Column Value
@@ -238,114 +241,118 @@ namespace pos
                 MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (!ValidateMaxDiscountPercent())
+                return;
+
             UsersBLL objBLL = new UsersBLL();
             if (objBLL.IsUsernameExist(txt_username.Text))
             {
                 MessageBox.Show("Username already exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-    
-                if (txt_name.Text != string.Empty && txt_username.Text != "" && txt_password.Text != "")
+
+            if (txt_name.Text != string.Empty && txt_username.Text != "" && txt_password.Text != "")
+            {
+                UsersModal info = new UsersModal();
+                info.companyID = UsersModal.loggedIncompanyID;
+                info.name = txt_name.Text;
+                info.username = txt_username.Text;
+                info.password = txt_password.Text;
+                info.branch_id = Convert.ToInt32(cmb_branches.SelectedValue);
+                info.language = cmb_lang.SelectedValue.ToString();
+                info.user_role = cmb_user_role.Text;
+                info.user_level = Convert.ToInt32(cmb_user_role.SelectedValue);
+                info.user_commission_percent = (string.IsNullOrEmpty(txt_commission_percent.Text) ? 0 : int.Parse(txt_commission_percent.Text));
+
+
+                int result = objBLL.Insert(info); // result is user_id
+
+                /////////INSERTING USER MODUELS
+                //foreach (object itemChecked in checkedListBox_Master.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_POS.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_HR.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                ///////////
+
+
+                if (result > 0)
                 {
-                    UsersModal info = new UsersModal();
-                    info.companyID = UsersModal.loggedIncompanyID;
-                    info.name = txt_name.Text;
-                    info.username = txt_username.Text;
-                    info.password = txt_password.Text;
-                    info.branch_id = Convert.ToInt32(cmb_branches.SelectedValue);
-                    info.language = cmb_lang.SelectedValue.ToString();
-                    info.user_role = cmb_user_role.Text;
-                    info.user_level = Convert.ToInt32(cmb_user_role.SelectedValue);
-                    info.user_commission_percent = (string.IsNullOrEmpty(txt_commission_percent.Text) ? 0 : int.Parse(txt_commission_percent.Text));
-
-                    
-                    int result = objBLL.Insert(info); // result is user_id
-                        
-                    /////////INSERTING USER MODUELS
-                    //foreach (object itemChecked in checkedListBox_Master.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_POS.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_HR.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    ///////////
-
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        clear_all();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    
-
+                    MessageBox.Show("Record created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clear_all();
                 }
                 else
                 {
-                    MessageBox.Show("Please enter value in name, username and password field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            
+
+
+            }
+            else
+            {
+                MessageBox.Show("Please enter value in name, username and password field", "Invalid Data", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            }
+
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -389,13 +396,13 @@ namespace pos
             _row_1["id"] = "en-US";
             _row_1["name"] = "English";
             dt.Rows.Add(_row_1);
-            
+
             DataRow _row = dt.NewRow();
             _row["id"] = "ar-SA";
             _row["name"] = "Arabic";
             dt.Rows.Add(_row);
 
-            
+
             cmb_lang.DisplayMember = "name";
             cmb_lang.ValueMember = "id";
             cmb_lang.DataSource = dt;
@@ -595,7 +602,7 @@ namespace pos
                 load_user_commission_grid(int.Parse(user_id));
                 ViewTotalInLastRow();
             }
-            
+
         }
 
         private void btn_payment_Click(object sender, EventArgs e)
@@ -615,16 +622,16 @@ namespace pos
             string search = txt_search.Text;
             //if (search != "")
             //{
-                frm_search_users search_product_obj = new frm_search_users(this, search);
-                search_product_obj.ShowDialog();
-           // }
+            frm_search_users search_product_obj = new frm_search_users(this, search);
+            search_product_obj.ShowDialog();
+            // }
         }
 
         private void btn_pwd_change_Click(object sender, EventArgs e)
         {
             string id = txt_id.Text;
             string username = txt_username.Text;
-            
+
             if (id != "")
             {
                 frm_pwd_change frm = new frm_pwd_change(this, int.Parse(id), username);
@@ -640,6 +647,9 @@ namespace pos
                 MessageBox.Show("You do not have permission to perform this action.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (!ValidateMaxDiscountPercent())
+                return;
 
             if (txt_name.Text != string.Empty)
             {
@@ -657,113 +667,113 @@ namespace pos
 
                 UsersBLL objBLL = new UsersBLL();
 
-                
-                    info.id = int.Parse(txt_id.Text);
 
-                    int result = objBLL.Update(info);
+                info.id = int.Parse(txt_id.Text);
 
-                    /////////DELETE USER MODULES FIRST AND THEN INSERT AGAINS USER MODULES
-                    //objBLL.DeleteUserModules(int.Parse(txt_id.Text));
-                    ///////
-                    //foreach (object itemChecked in checkedListBox_Master.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
+                int result = objBLL.Update(info);
 
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_POS.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
+                /////////DELETE USER MODULES FIRST AND THEN INSERT AGAINS USER MODULES
+                //objBLL.DeleteUserModules(int.Parse(txt_id.Text));
+                ///////
+                //foreach (object itemChecked in checkedListBox_Master.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
 
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_POS.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
 
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_Accounts.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
 
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    //foreach (object itemChecked in checkedListBox_HR.CheckedItems)
-                    //{
-                    //    DataRowView castedItem = itemChecked as DataRowView;
-                    //    string moduleName = castedItem["name"].ToString();
-                    //    int moduleID = (int)castedItem["id"];
-                    //    info.user_id = result;
-                    //    info.module_name = moduleName;
-                    //    info.module_id = moduleID;
-                    //    objBLL.InsertUserModules(info);
-                    //}
-                    ///////////
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
 
-                    ///USER RIGHTS
-                    ////////////DELETE USER Rights FIRST AND THEN INSERT AGAINS USER rights
-                    objBLL.DeleteUserRights(int.Parse(txt_id.Text));
-                    /////
-                    info.cash_sales_amount_limit = (txt_cash_sales_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_cash_sales_amt.Text));
-                    info.credit_sales_amount_limit = (txt_credit_sales_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_credit_sales_amt.Text));
-                    info.cash_purchase_amount_limit = (txt_cash_purchase_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_cash_purchase_amt.Text));
-                    info.credit_purchase_amount_limit = (txt_credit_purchase_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_credit_purchase_amt.Text));
-                    //info.allow_cash_sales = chk_allow_cash_sales.Checked;
-                    info.allow_credit_sales = chk_allow_credit_sales.Checked;
-                    //info.allow_cash_purchase = chk_allow_cash_purchase.Checked;
-                    info.allow_credit_purchase = chk_allow_credit_purchase.Checked;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_Reports.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                //foreach (object itemChecked in checkedListBox_HR.CheckedItems)
+                //{
+                //    DataRowView castedItem = itemChecked as DataRowView;
+                //    string moduleName = castedItem["name"].ToString();
+                //    int moduleID = (int)castedItem["id"];
+                //    info.user_id = result;
+                //    info.module_name = moduleName;
+                //    info.module_id = moduleID;
+                //    objBLL.InsertUserModules(info);
+                //}
+                ///////////
+
+                ///USER RIGHTS
+                ////////////DELETE USER Rights FIRST AND THEN INSERT AGAINS USER rights
+                objBLL.DeleteUserRights(int.Parse(txt_id.Text));
+                /////
+                info.cash_sales_amount_limit = (txt_cash_sales_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_cash_sales_amt.Text));
+                info.credit_sales_amount_limit = (txt_credit_sales_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_credit_sales_amt.Text));
+                info.cash_purchase_amount_limit = (txt_cash_purchase_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_cash_purchase_amt.Text));
+                info.credit_purchase_amount_limit = (txt_credit_purchase_amt.Text == string.Empty ? 0 : Convert.ToDouble(txt_credit_purchase_amt.Text));
+                //info.allow_cash_sales = chk_allow_cash_sales.Checked;
+                info.allow_credit_sales = chk_allow_credit_sales.Checked;
+                //info.allow_cash_purchase = chk_allow_cash_purchase.Checked;
+                info.allow_credit_purchase = chk_allow_credit_purchase.Checked;
 
                 // Add discount limits (TODO: Add UI fields txt_max_discount_percent/txt_max_discount_amount to form)
                 info.max_discount_percent = (txt_max_discount_percent.Text == string.Empty ? 0 : Convert.ToDouble(txt_max_discount_percent.Text));
                 info.max_discount_amount = (txt_max_discount_amount.Text == string.Empty ? 0 : Convert.ToDouble(txt_max_discount_amount.Text));
-                    
-                    objBLL.UpdateUserRights(info);
-                    ///
 
-                    ///////////
+                objBLL.UpdateUserRights(info);
+                ///
 
-                    if (result > 0)
-                    {
-                        MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        clear_all();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                
-                
+                ///////////
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Record updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clear_all();
+                }
+                else
+                {
+                    MessageBox.Show("Record not saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
             }
             else
             {
@@ -774,7 +784,7 @@ namespace pos
         private void clear_all()
         {
             lbl_name.Text = "";
-            
+
             txt_id.Text = "";
             txt_name.Text = "";
             txt_username.Text = "";
@@ -787,7 +797,7 @@ namespace pos
             cmb_branches.SelectedIndex = 0;
             cmb_lang.SelectedIndex = 0;
             cmb_user_role.SelectedIndex = 0;
-                
+
             txt_cash_sales_amt.Text = "";
             txt_credit_sales_amt.Text = "";
             txt_cash_purchase_amt.Text = "";
@@ -807,27 +817,27 @@ namespace pos
             {
                 checkedListBox_Master.SetItemChecked(i, false);
             }
-       
+
             for (int i = 0; i < checkedListBox_POS.Items.Count; i++)
             {
                 checkedListBox_POS.SetItemChecked(i, false);
             }
-       
+
             for (int i = 0; i < checkedListBox_Accounts.Items.Count; i++)
             {
                 checkedListBox_Accounts.SetItemChecked(i, false);
             }
-        
+
             for (int i = 0; i < checkedListBox_Reports.Items.Count; i++)
             {
                 checkedListBox_Reports.SetItemChecked(i, false);
             }
-        
+
             for (int i = 0; i < checkedListBox_Services.Items.Count; i++)
             {
                 checkedListBox_Services.SetItemChecked(i, false);
             }
-        
+
             for (int i = 0; i < checkedListBox_HR.Items.Count; i++)
             {
                 checkedListBox_HR.SetItemChecked(i, false);
@@ -876,14 +886,61 @@ namespace pos
         {
             string user_id = txt_id.Text;
 
-            if(user_id != "")
+            if (user_id != "")
             {
                 load_user_detail(int.Parse(user_id));
                 load_user_rights(int.Parse(user_id));
                 load_user_commission_grid(int.Parse(user_id));
                 //check_all_modules(int.Parse(user_id));
             }
-            
+
+        }
+
+        private void txt_max_discount_percent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_max_discount_percent_Validating(object sender, CancelEventArgs e)
+        {
+            if (!ValidateMaxDiscountPercent())
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private bool ValidateMaxDiscountPercent()
+        {
+            if (string.IsNullOrWhiteSpace(txt_max_discount_percent.Text))
+                return true;
+
+            double percent;
+            if (!double.TryParse(txt_max_discount_percent.Text, out percent))
+            {
+                MessageBox.Show("Please enter a valid discount percentage.", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_max_discount_percent.Focus();
+                txt_max_discount_percent.SelectAll();
+                return false;
+            }
+
+            if (percent < 0 || percent > 100)
+            {
+                MessageBox.Show("Maximum discount percent must be between 0 and 100.", "Invalid Discount Limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_max_discount_percent.Focus();
+                txt_max_discount_percent.SelectAll();
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -10,9 +10,6 @@ BEGIN
         id            INT IDENTITY(1,1) PRIMARY KEY,
         name          NVARCHAR(100) NOT NULL,
         name_ar       NVARCHAR(100) NULL,
-        product_id    INT           NULL,
-        brand_id      INT           NULL,
-        category_id   INT           NULL,
         calc_type     VARCHAR(10)   NOT NULL,    -- 'PERCENT' | 'AMOUNT'
         value         DECIMAL(18,4) NOT NULL DEFAULT 0,
         is_active     BIT           NOT NULL DEFAULT 1,
@@ -57,10 +54,10 @@ BEGIN
     IF @OperationType = '1'
     BEGIN
         INSERT INTO pos_discount_schemes
-            (name, name_ar, product_id, brand_id, category_id, calc_type, value,
+            (name, name_ar, calc_type, value,
              is_active, start_date, end_date, branch_id, company_id, created_by, created_at, updated_at)
         VALUES
-            (@name, @name_ar, @product_id, @brand_id, @category_id, @calc_type, @value,
+            (@name, @name_ar,  @calc_type, @value,
              ISNULL(@is_active,1), @start_date, @end_date, @branch_id, @company_id, @created_by, GETDATE(), GETDATE());
         SELECT SCOPE_IDENTITY() AS id;
         RETURN;
@@ -72,9 +69,6 @@ BEGIN
         UPDATE pos_discount_schemes SET
             name          = @name,
             name_ar       = @name_ar,
-            product_id    = @product_id,
-            brand_id      = @brand_id,
-            category_id   = @category_id,
             calc_type     = @calc_type,
             value         = @value,
             is_active     = ISNULL(@is_active, is_active),
