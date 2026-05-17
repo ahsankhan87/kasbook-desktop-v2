@@ -410,19 +410,21 @@ namespace pos.Master.Companies.zatca
         
         private void AddAllowanceCharge(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
-            if (invoice["discount_value"].ToString() == "")
+            decimal documentDiscount = 0m;
+
+            if (invoice.Table.Columns.Contains("discount_value") &&
+                invoice["discount_value"] != DBNull.Value &&
+                !string.IsNullOrWhiteSpace(Convert.ToString(invoice["discount_value"])))
             {
-                return;
+                documentDiscount = Math.Abs(Convert.ToDecimal(invoice["discount_value"]));
             }
 
-            decimal discount = Math.Abs(Convert.ToDecimal(invoice["discount_value"]));
-
-            if (discount > 0)
+            if (documentDiscount > 0)
             {
                 XmlElement allowanceCharge = xmlDoc.CreateElement("cac", "AllowanceCharge", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
                 AddElement(xmlDoc, allowanceCharge, "cbc:ChargeIndicator", "false");
                 AddElement(xmlDoc, allowanceCharge, "cbc:AllowanceChargeReason", "discount");
-                AddElement(xmlDoc, allowanceCharge, "cbc:Amount", discount.ToString("F2"), "SAR");
+                AddElement(xmlDoc, allowanceCharge, "cbc:Amount", documentDiscount.ToString("F2"), "SAR");
 
                 XmlElement taxCategory = xmlDoc.CreateElement("cac", "TaxCategory", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
                 XmlElement categoryId = AddElement(xmlDoc, taxCategory, "cbc:ID", "S");
@@ -439,11 +441,59 @@ namespace pos.Master.Companies.zatca
             }
         }
 
+        private static decimal GetLineDiscount(DataRow item)
+        {
+            if (item.Table.Columns.Contains("discount_value") && item["discount_value"] != DBNull.Value && !string.IsNullOrWhiteSpace(Convert.ToString(item["discount_value"])))
+                return Math.Abs(Convert.ToDecimal(item["discount_value"]));
+
+            return 0m;
+        }
+
+        private static decimal GetLineNetAmount(DataRow item)
+        {
+            decimal quantity = item.Table.Columns.Contains("quantity_sold") && item["quantity_sold"] != DBNull.Value ? Convert.ToDecimal(item["quantity_sold"]) : 0m;
+            decimal unitPrice = item.Table.Columns.Contains("unit_price") && item["unit_price"] != DBNull.Value ? Convert.ToDecimal(item["unit_price"]) : 0m;
+            decimal discount = GetLineDiscount(item);
+
+            decimal gross = quantity * unitPrice;
+            decimal net = gross - discount;
+            return net < 0 ? 0 : net;
+        }
+
         private void AddTaxTotals(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
-            decimal taxableAmount = Convert.ToDecimal(invoice["total_amount"]) - Convert.ToDecimal(invoice["discount_value"]);
-            decimal taxPercent = 15m; // Standard VAT rate in KSA
-            decimal taxAmount = Math.Round(taxableAmount * taxPercent / 100, 2);
+            DataTable invoiceItems = invoice.Table.DataSet != null && invoice.Table.DataSet.Tables.Contains("SalesItems")
+                ? invoice.Table.DataSet.Tables["SalesItems"]
+                : null;
+
+            decimal lineNetTotal = 0m;
+            decimal lineTaxTotal = 0m;
+
+            if (invoiceItems != null)
+            {
+                foreach (DataRow item in invoiceItems.Rows)
+                {
+                    decimal net = GetLineNetAmount(item);
+                    decimal taxRate = item.Table.Columns.Contains("tax_rate") && item["tax_rate"] != DBNull.Value ? Convert.ToDecimal(item["tax_rate"]) : 0m;
+                    decimal tax = Math.Round(net * taxRate / 100m, 2);
+                    lineNetTotal += net;
+                    lineTaxTotal += tax;
+                }
+            }
+            else
+            {
+                lineNetTotal = invoice.Table.Columns.Contains("total_amount") && invoice["total_amount"] != DBNull.Value ? Convert.ToDecimal(invoice["total_amount"]) : 0m;
+                lineTaxTotal = invoice.Table.Columns.Contains("total_tax") && invoice["total_tax"] != DBNull.Value ? Convert.ToDecimal(invoice["total_tax"]) : 0m;
+            }
+
+            decimal documentDiscount = 0m;
+            if (invoice.Table.Columns.Contains("discount_value") && invoice["discount_value"] != DBNull.Value && !string.IsNullOrWhiteSpace(Convert.ToString(invoice["discount_value"])))
+                documentDiscount = Math.Abs(Convert.ToDecimal(invoice["discount_value"]));
+
+            decimal taxableAmount = lineNetTotal - documentDiscount;
+            if (taxableAmount < 0) taxableAmount = 0;
+            decimal taxPercent = 15m;
+            decimal taxAmount = lineTaxTotal;
 
             // First TaxTotal (summary)
             XmlElement taxTotal1 = xmlDoc.CreateElement("cac", "TaxTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
@@ -476,16 +526,44 @@ namespace pos.Master.Companies.zatca
 
         public void AddLegalMonetaryTotals(XmlDocument xmlDoc, XmlElement parent, DataRow invoice)
         {
-            decimal discount = Convert.ToDecimal(invoice["discount_value"]);
-            decimal lineTotal = Convert.ToDecimal(invoice["total_amount"])- discount;
-            decimal taxAmount = Convert.ToDecimal(invoice["total_tax"]);
+            DataTable invoiceItems = invoice.Table.DataSet != null && invoice.Table.DataSet.Tables.Contains("SalesItems")
+                ? invoice.Table.DataSet.Tables["SalesItems"]
+                : null;
+
+            decimal lineNetTotal = 0m;
+            decimal lineTaxTotal = 0m;
+
+            if (invoiceItems != null)
+            {
+                foreach (DataRow item in invoiceItems.Rows)
+                {
+                    decimal net = GetLineNetAmount(item);
+                    decimal taxRate = item.Table.Columns.Contains("tax_rate") && item["tax_rate"] != DBNull.Value ? Convert.ToDecimal(item["tax_rate"]) : 0m;
+                    decimal tax = Math.Round(net * taxRate / 100m, 2);
+                    lineNetTotal += net;
+                    lineTaxTotal += tax;
+                }
+            }
+            else
+            {
+                lineNetTotal = invoice.Table.Columns.Contains("total_amount") && invoice["total_amount"] != DBNull.Value ? Convert.ToDecimal(invoice["total_amount"]) : 0m;
+                lineTaxTotal = invoice.Table.Columns.Contains("total_tax") && invoice["total_tax"] != DBNull.Value ? Convert.ToDecimal(invoice["total_tax"]) : 0m;
+            }
+
+            decimal documentDiscount = 0m;
+            if (invoice.Table.Columns.Contains("discount_value") && invoice["discount_value"] != DBNull.Value && !string.IsNullOrWhiteSpace(Convert.ToString(invoice["discount_value"])))
+                documentDiscount = Math.Abs(Convert.ToDecimal(invoice["discount_value"]));
+
+            decimal lineTotal = lineNetTotal - documentDiscount;
+            if (lineTotal < 0) lineTotal = 0;
+            decimal taxAmount = lineTaxTotal;
             decimal payableAmount = lineTotal + taxAmount;
 
             XmlElement monetaryTotal = xmlDoc.CreateElement("cac", "LegalMonetaryTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
             AddElement(xmlDoc, monetaryTotal, "cbc:LineExtensionAmount", Math.Abs(lineTotal).ToString("F2"), "SAR");
             AddElement(xmlDoc, monetaryTotal, "cbc:TaxExclusiveAmount", Math.Abs(lineTotal).ToString("F2"), "SAR");
             AddElement(xmlDoc, monetaryTotal, "cbc:TaxInclusiveAmount", Math.Abs(payableAmount).ToString("F2"), "SAR");
-            AddElement(xmlDoc, monetaryTotal, "cbc:AllowanceTotalAmount", Math.Abs(discount).ToString("F2"), "SAR");
+            AddElement(xmlDoc, monetaryTotal, "cbc:AllowanceTotalAmount", Math.Abs(documentDiscount).ToString("F2"), "SAR");
             AddElement(xmlDoc, monetaryTotal, "cbc:PrepaidAmount", "0.00", "SAR");
             AddElement(xmlDoc, monetaryTotal, "cbc:PayableAmount", Math.Abs(payableAmount).ToString("F2"), "SAR");
             parent.AppendChild(monetaryTotal);
@@ -497,35 +575,44 @@ namespace pos.Master.Companies.zatca
             foreach (DataRow item in invoiceItems.Rows)
             {
                 decimal quantity = Convert.ToDecimal(item["quantity_sold"]);
-                decimal discount = Convert.ToDecimal(item["discount_value"]);
-                decimal price = Convert.ToDecimal(item["unit_price"]) - discount;
-                decimal lineTotal = quantity * price;
-                decimal taxPercent = Convert.ToDecimal(item["tax_rate"]);
-                decimal taxAmount = Convert.ToDecimal(item["vat"]);
+                decimal unitPrice = Convert.ToDecimal(item["unit_price"]);
+                decimal discount = GetLineDiscount(item);
+
+                decimal lineGross = Math.Round(quantity * unitPrice, 2, MidpointRounding.AwayFromZero);
+                decimal discountXml = Math.Round(discount, 2, MidpointRounding.AwayFromZero);
+                decimal lineTotal = Math.Round(lineGross - discountXml, 2, MidpointRounding.AwayFromZero);
+                if (lineTotal < 0) lineTotal = 0;
+
+                decimal taxPercent = item.Table.Columns.Contains("tax_rate") && item["tax_rate"] != DBNull.Value ? Convert.ToDecimal(item["tax_rate"]) : 0m;
+                decimal taxAmount = Math.Round(lineTotal * taxPercent / 100m, 2, MidpointRounding.AwayFromZero);
 
                 XmlElement invoiceLine = xmlDoc.CreateElement("cac", "InvoiceLine", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
                 AddElement(xmlDoc, invoiceLine, "cbc:ID", Math.Abs(lineNumber).ToString());
 
-                // Invoiced quantity
                 XmlElement invoicedQuantity = AddElement(xmlDoc, invoiceLine, "cbc:InvoicedQuantity", Math.Abs(quantity).ToString("F6"));
-                invoicedQuantity.SetAttribute("unitCode", "PCE"); // PCE = pieces
+                invoicedQuantity.SetAttribute("unitCode", "PCE");
 
-                // Line extension amount
                 AddElement(xmlDoc, invoiceLine, "cbc:LineExtensionAmount", Math.Abs(lineTotal).ToString("F2"), "SAR");
 
-                // Tax total for line
+                if (discountXml > 0)
+                {
+                    XmlElement lineAllowanceCharge = xmlDoc.CreateElement("cac", "AllowanceCharge", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+                    AddElement(xmlDoc, lineAllowanceCharge, "cbc:ChargeIndicator", "false");
+                    AddElement(xmlDoc, lineAllowanceCharge, "cbc:AllowanceChargeReason", "discount");
+                    AddElement(xmlDoc, lineAllowanceCharge, "cbc:Amount", Math.Abs(discountXml).ToString("F2"), "SAR");
+                    invoiceLine.AppendChild(lineAllowanceCharge);
+                }
+
                 XmlElement lineTaxTotal = xmlDoc.CreateElement("cac", "TaxTotal", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
                 AddElement(xmlDoc, lineTaxTotal, "cbc:TaxAmount", Math.Abs(taxAmount).ToString("F2"), "SAR");
                 AddElement(xmlDoc, lineTaxTotal, "cbc:RoundingAmount", Math.Abs(lineTotal + taxAmount).ToString("F2"), "SAR");
                 invoiceLine.AppendChild(lineTaxTotal);
 
-                // Item information
                 XmlElement itemElement = xmlDoc.CreateElement("cac", "Item", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
                 AddElement(xmlDoc, itemElement, "cbc:Name", item["name"].ToString());
 
-                // Tax category for item
                 XmlElement classifiedTaxCategory = xmlDoc.CreateElement("cac", "ClassifiedTaxCategory", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-                AddElement(xmlDoc, classifiedTaxCategory, "cbc:ID", "S"); // S = Standard rate
+                AddElement(xmlDoc, classifiedTaxCategory, "cbc:ID", "S");
                 AddElement(xmlDoc, classifiedTaxCategory, "cbc:Percent", taxPercent.ToString("F2"));
 
                 XmlElement itemTaxScheme = xmlDoc.CreateElement("cac", "TaxScheme", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
@@ -534,9 +621,12 @@ namespace pos.Master.Companies.zatca
                 itemElement.AppendChild(classifiedTaxCategory);
                 invoiceLine.AppendChild(itemElement);
 
-                // Price information
                 XmlElement priceElement = xmlDoc.CreateElement("cac", "Price", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
-                AddElement(xmlDoc, priceElement, "cbc:PriceAmount", Math.Abs(price).ToString("F2"), "SAR");
+                AddElement(xmlDoc, priceElement, "cbc:PriceAmount", Math.Abs(lineGross).ToString("F2"), "SAR");
+
+                XmlElement baseQty = AddElement(xmlDoc, priceElement, "cbc:BaseQuantity", Math.Abs(quantity).ToString("F6"));
+                baseQty.SetAttribute("unitCode", "PCE");
+
                 invoiceLine.AppendChild(priceElement);
 
                 parent.AppendChild(invoiceLine);

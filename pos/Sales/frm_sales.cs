@@ -24,15 +24,8 @@ namespace pos
     public partial class frm_sales : Form
     {
         private static readonly ComponentResourceManager SalesResources = new ComponentResourceManager(typeof(frm_sales));
-        private static readonly Font SalesGridFont = new Font(AppTheme.FontGrid.FontFamily, AppTheme.FontGrid.Size + 1f, AppTheme.FontGrid.Style);
-        private static readonly Font SalesGridHeaderFont = new Font(AppTheme.FontGridHeader.FontFamily, AppTheme.FontGridHeader.Size + 1f, AppTheme.FontGridHeader.Style);
-        private static readonly Font TaxableCheckFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
-        private static readonly Font TotalPrimaryFont = new Font(AppTheme.FontHeader.FontFamily, AppTheme.FontHeader.Size + 2f, AppTheme.FontHeader.Style);
-        private static readonly Font TotalSecondaryFont = new Font(AppTheme.FontSubHeader.FontFamily, AppTheme.FontSubHeader.Size + 1f, AppTheme.FontSubHeader.Style);
-        private static readonly Font SecondaryFieldFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
-        private static readonly Font FooterPrimaryLabelFont = new Font(AppTheme.FontSemiBold.FontFamily, AppTheme.FontSemiBold.Size + 1f, AppTheme.FontSemiBold.Style);
-        private static readonly Font FooterSecondaryLabelFont = new Font(AppTheme.FontLabel.FontFamily, AppTheme.FontLabel.Size + 1f, AppTheme.FontLabel.Style);
-        public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
+        // load current system language from user session or settings
+        public string lang  = Thread.CurrentThread.CurrentCulture.Name ?? UsersModal.logged_in_lang ?? "en-US";
         public int cash_account_id = 0;
         public int sales_account_id = 0;
         public int receivable_account_id = 0;
@@ -63,11 +56,6 @@ namespace pos
         private static readonly HashSet<string> _numericColumns =
             new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Qty", "unit_price", "discount", "discount_percent", "total_without_vat" };
 
-        public double cash_sales_amount_limit = 0;
-        //public double cash_purchase_amount_limit= 0;
-        public bool allow_credit_sales = false;
-        //public bool allow_credit_purchase= false;
-
         private DataGridView brandsDataGridView = new DataGridView();
         private DataGridView categoriesDataGridView = new DataGridView();
         private DataGridView groupsDataGridView = new DataGridView();
@@ -78,6 +66,7 @@ namespace pos
         private bool _suppressCustomerSearch;
 
         ProductBLL productsBLL_obj = new ProductBLL();
+        Form frm_searchSaleProducts_obj;
 
         public frm_sales()
         {
@@ -124,7 +113,6 @@ namespace pos
 
             //btn_movements.Enabled = false;
             //autoCompleteProductCode();
-            load_user_rights(UsersModal.logged_in_userid);
             Get_AccountID_From_Company();
             get_customers_dropdownlist();
 
@@ -169,6 +157,20 @@ namespace pos
                 grid_sales.Columns["discount_percent"].ReadOnly = !_canEditDiscount;
                 grid_sales.Columns["discount_percent"].DefaultCellStyle.BackColor = _canEditDiscount ? SystemColors.Window : Color.Gainsboro;
             }
+
+            // 
+            ApplyInvoiceDiscountEditPermissions();
+        }
+        private void ApplyInvoiceDiscountEditPermissions()
+        {
+            radioDiscValue.Enabled = _canEditDiscount;
+            radioDiscPercent.Enabled = _canEditDiscount;
+
+            txtTotalFlatDiscountValue.Enabled = _canEditDiscount && radioDiscValue.Checked;
+            txt_total_disc_percent.Enabled = _canEditDiscount && radioDiscPercent.Checked;
+
+            txtTotalFlatDiscountValue.BackColor = txtTotalFlatDiscountValue.Enabled ? SystemColors.Window : Color.Gainsboro;
+            txt_total_disc_percent.BackColor = txt_total_disc_percent.Enabled ? SystemColors.Window : Color.Gainsboro;
         }
 
         private void grid_sales_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -180,9 +182,9 @@ namespace pos
                 e.Cancel = true;
                 UiMessages.ShowWarning(
                     "You do not have permission to edit unit price.",
-                    "·Ì” ·œÌﬂ ’·«ÕÌ… · ⁄œÌ· ”⁄— «·ÊÕœ….",
+                    "ŸÑŸäÿ≥ ŸÑÿØŸäŸÉ ÿµŸÑÿßÿ≠Ÿäÿ© ŸÑÿ™ÿπÿØŸäŸÑ ÿ≥ÿπÿ± ÿßŸÑŸàÿ≠ÿØÿ©.",
                     "Permission Denied",
-                    " „ —›÷ «·’·«ÕÌ…");
+                    "ÿ™ŸÖ ÿ±ŸÅÿ∂ ÿßŸÑÿµŸÑÿßÿ≠Ÿäÿ©");
                 return;
             }
 
@@ -191,9 +193,9 @@ namespace pos
                 e.Cancel = true;
                 UiMessages.ShowWarning(
                     "You do not have permission to edit discounts.",
-                    "·Ì” ·œÌﬂ ’·«ÕÌ… · ⁄œÌ· «·Œ’Ê„« .",
+                    "ŸÑŸäÿ≥ ŸÑÿØŸäŸÉ ÿµŸÑÿßÿ≠Ÿäÿ© ŸÑÿ™ÿπÿØŸäŸÑ ÿßŸÑÿÆÿµŸàŸÖÿßÿ™.",
                     "Permission Denied",
-                    " „ —›÷ «·’·«ÕÌ…");
+                    "ÿ™ŸÖ ÿ±ŸÅÿ∂ ÿßŸÑÿµŸÑÿßÿ≠Ÿäÿ©");
             }
         }
 
@@ -231,7 +233,7 @@ namespace pos
 
         /// <summary>
         /// POS-specific styling applied after the generic Fluent theme.
-        /// Gives the sales page a Dynamics 365ñlike professional look.
+        /// Gives the sales page a Dynamics 365‚Äìlike professional look.
         /// </summary>
         private void StyleSalesForm()
         {
@@ -268,50 +270,7 @@ namespace pos
                 tableLayoutPanel8,
                 customersDataGridView);
         }
-
-        /// <summary>Style a summary total field in the footer.</summary>
-        private static void StyleTotalField(TextBox txt, bool isPrimary)
-        {
-            SalesStylingHelper.StyleTotalField(txt, isPrimary);
-        }
-
-        /// <summary>Style a secondary footer field (received / change).</summary>
-        private static void StyleSecondaryField(TextBox txt)
-        {
-            SalesStylingHelper.StyleSecondaryField(txt);
-        }
-
-        /// <summary>Style a cost-info read-only field.</summary>
-        private static void StyleCostField(TextBox txt)
-        {
-            SalesStylingHelper.StyleCostField(txt);
-        }
-
-        /// <summary>Style a popup DataGridView dropdown (brands / categories / customers).</summary>
-        private static void StyleDropdownGrid(DataGridView dgv)
-        {
-            SalesStylingHelper.StyleDropdownGrid(dgv);
-        }
-
-        /// <summary>Style a footer TableLayoutPanel.</summary>
-        private static void StyleFooterCard(TableLayoutPanel tlp)
-        {
-            SalesStylingHelper.StyleFooterCard(tlp);
-        }
-
-        /// <summary>Style a footer label.</summary>
-        private static void StyleFooterLabel(Label lbl, bool isPrimary)
-        {
-            SalesStylingHelper.StyleFooterLabel(lbl, isPrimary);
-        }
-
-        private static void ApplySalesLabelForeColor(Control parent, Color color)
-        {
-            SalesStylingHelper.ApplySalesLabelForeColor(parent, color);
-        }
-
-        Form frm_searchSaleProducts_obj;
-
+       
         private void grid_sales_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -387,7 +346,7 @@ namespace pos
                     {
                         UiMessages.ShowWarning(
                             "Warning: Unit price is lower than cost price. The invoice will be saved with this price.",
-                            " ‰»ÌÂ: ”⁄— «·ÊÕœ… √ﬁ· „‰ ”⁄— «· ﬂ·›…. ”Ì „ Õ›Ÿ «·›« Ê—… »Â–« «·”⁄—.");
+                            "ÿ™ŸÜÿ®ŸäŸá: ÿ≥ÿπÿ± ÿßŸÑŸàÿ≠ÿØÿ© ÿ£ŸÇŸÑ ŸÖŸÜ ÿ≥ÿπÿ± ÿßŸÑÿ™ŸÉŸÑŸÅÿ©. ÿ≥Ÿäÿ™ŸÖ ÿ≠ŸÅÿ∏ ÿßŸÑŸÅÿßÿ™Ÿàÿ±ÿ© ÿ®Ÿáÿ∞ÿß ÿßŸÑÿ≥ÿπÿ±.");
 
                         grid_sales.Rows[e.RowIndex].Cells["unit_price"].Style.BackColor = Color.MistyRose;
 
@@ -544,7 +503,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
 
         }
@@ -572,7 +531,7 @@ namespace pos
                         var grid_item_number = (grid_sales.Rows[i].Cells["item_number"].Value != null ? grid_sales.Rows[i].Cells["item_number"].Value : "");
                         if (grid_item_number.ToString() == item_number)
                         {
-                            UiMessages.ShowWarning("Product already added", "«·„‰ Ã „÷«› „”»ﬁ«", "Already exist", "„ÊÃÊœ »«·›⁄·");
+                            UiMessages.ShowWarning("Product already added", "ÿßŸÑŸÖŸÜÿ™ÿ¨ ŸÖÿ∂ÿßŸÅ ŸÖÿ≥ÿ®ŸÇÿßŸã", "Already exist", "ŸÖŸàÿ¨ŸàÿØ ÿ®ÿßŸÑŸÅÿπŸÑ");
                             grid_sales.CurrentCell = grid_sales.Rows[RowIndex].Cells["code"]; //make qty cell active
                                                                                               //grid_sales.CurrentCell.Selected = true;
                             grid_sales.BeginEdit(true);
@@ -642,40 +601,8 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
-        }
-
-        public void fill_locations_grid_combo(int RowIndex, string SelectedValue = "DEF", string product_id = "")
-        {
-            DataTable dt = new DataTable();
-            var locationComboCell = new DataGridViewComboBoxCell();
-            GeneralBLL generalBLL_obj = new GeneralBLL();
-            string keyword = "loc_code as location_code";
-            string table = "pos_product_stocks WHERE item_id=" + product_id + " AND  qty > 0 GROUP BY loc_code";
-
-            dt = generalBLL_obj.GetRecord(keyword, table);
-
-            //WHEN NO LOCATION ASSIGNED TO PRODUCT THEN ALL LOCATIONS SHALL BE LOADED
-            if (dt.Rows.Count <= 0)
-            {
-                string keyword1 = "L.code as location_code,L.name";
-                string table1 = "pos_locations L";
-
-                dt = generalBLL_obj.GetRecord(keyword1, table1);
-
-            }
-            ///////////
-
-            locationComboCell.DataSource = dt;
-            locationComboCell.DisplayMember = "location_code";
-            locationComboCell.ValueMember = "location_code";
-
-            grid_sales.Rows[RowIndex].Cells["location_code"] = locationComboCell;
-            //grid_sales.Rows[RowIndex].Cells["location_code"].Value = SelectedValue;
-            grid_sales.Rows[RowIndex].Cells["location_code"].Value = dt.Rows[0]["location_code"].ToString(); // GET FIRST COLUMN OF DT TO SHOW FIRST VALUE AS SELECTED
-
-
         }
 
         private void txt_barcode_KeyDown(object sender, KeyEventArgs e)
@@ -691,78 +618,106 @@ namespace pos
 
         public void load_products(string item_number = "", string product_name = "", string barcode = "")
         {
-
             DataTable product_dt = new DataTable();
 
             if (item_number != string.Empty)
-            {
                 product_dt = productsBLL_obj.SearchRecordByProductNumber(item_number);
-            }
 
             if (product_name != string.Empty)
-            {
                 product_dt = productsBLL_obj.SearchRecordByProductName(product_name);
-            }
 
             if (barcode != string.Empty)
-            {
                 product_dt = productsBLL_obj.SearchRecordByBarcode(barcode);
-            }
 
             if (product_dt.Rows.Count > 0)
             {
-
                 foreach (DataRow myProductView in product_dt.Rows)
                 {
                     double qty = Convert.ToDouble(myProductView["sale_demand_qty"].ToString() == string.Empty || (decimal)myProductView["sale_demand_qty"] == 0 ? "1" : myProductView["sale_demand_qty"].ToString());
-                    double total = qty * double.Parse(myProductView["unit_price"].ToString());
                     double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
-                    double tax = (total * tax_rate / 100);
-                    double sub_total = tax + total;
-                    double sub_total_without_vat = total;
-
-                    int id = Convert.ToInt32(myProductView["id"]);
-                    string code = myProductView["code"].ToString();
-                    string name = myProductView["name"].ToString();
-                    double cost_price = Math.Round(Convert.ToDouble(myProductView["avg_cost"]), 2);
-                    double unit_price = Math.Round(Convert.ToDouble(myProductView["unit_price"]), 3);
-                    double discount = 0.00;
-                    double discount_percent = 0.00;
-                    string location_code = myProductView["location_code"].ToString();
-                    string unit = myProductView["unit"].ToString();
-                    string category = myProductView["category"].ToString();
-                    string btn_delete = "Del";
-
-                    string shop_qty = myProductView["qty"].ToString();
-                    string tax_id = myProductView["tax_id"].ToString();
-                    string item_type = myProductView["item_type"].ToString();
-                    string category_code = myProductView["category_code"].ToString();
                     string grid_item_number = myProductView["item_number"].ToString();
-                    double current_sub_total = Convert.ToDouble(qty) * unit_price + tax - discount;
 
-
-                    string[] row0 = { "", id.ToString(), code, name, qty.ToString(), unit_price.ToString(), discount.ToString(), discount_percent.ToString(),
-                    sub_total_without_vat.ToString(), tax.ToString(), current_sub_total.ToString(), location_code, unit, category,
-                    btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
-                    item_type, category_code, grid_item_number};
-
-                    //Remove the first empty row
-                    if (grid_sales.RowCount > 0 && grid_sales.Rows[0].Cells["id"].Value == null)
+                    // --- Check if product already exists in grid ---
+                    int existingRowIndex = -1;
+                    for (int i = 0; i < grid_sales.Rows.Count; i++)
                     {
-                        grid_sales.Rows.RemoveAt(0);
-                    }
-                    //
-                    int RowIndex = grid_sales.Rows.Add(row0);
-
-                    if (Convert.ToDouble(myProductView["qty"]) <= 0 || myProductView["qty"].ToString() == string.Empty)
-                    {
-                        grid_sales.CurrentRow.DefaultCellStyle.ForeColor = Color.Red;
+                        var cellVal = grid_sales.Rows[i].Cells["item_number"].Value;
+                        if (cellVal != null && cellVal.ToString() == grid_item_number)
+                        {
+                            existingRowIndex = i;
+                            break;
+                        }
                     }
 
-                    //GET / SET Location Dropdown list
-                    /////
-                    //fill_locations_grid_combo(RowIndex,"",myProductView["id"].ToString());
-                    //////////
+                    if (existingRowIndex >= 0)
+                    {
+                        // Product exists ‚Äî increment qty and recalculate row
+                        double existingQty = 0;
+                        double.TryParse(Convert.ToString(grid_sales.Rows[existingRowIndex].Cells["qty"].Value), out existingQty);
+                        double newQty = existingQty + qty;
+
+                        double unitPrice = 0;
+                        double.TryParse(Convert.ToString(grid_sales.Rows[existingRowIndex].Cells["unit_price"].Value), out unitPrice);
+                        double discountVal = 0;
+                        double.TryParse(Convert.ToString(grid_sales.Rows[existingRowIndex].Cells["discount"].Value), out discountVal);
+
+                        double newTotal = unitPrice * newQty;
+                        double newTax = ((newTotal - discountVal) * tax_rate) / 100;
+                        double newSubTotal = newTotal - discountVal + newTax;
+                        double discountPercent = newTotal == 0 ? 0 : (discountVal / newTotal) * 100;
+
+                        grid_sales.Rows[existingRowIndex].Cells["qty"].Value = newQty;
+                        grid_sales.Rows[existingRowIndex].Cells["total_without_vat"].Value = newTotal - discountVal;
+                        grid_sales.Rows[existingRowIndex].Cells["tax"].Value = newTax;
+                        grid_sales.Rows[existingRowIndex].Cells["sub_total"].Value = newSubTotal;
+                        grid_sales.Rows[existingRowIndex].Cells["discount_percent"].Value = Math.Round(discountPercent, 2);
+                    }
+                    else
+                    {
+                        // Product does not exist ‚Äî add new row
+                        double unit_price = Math.Round(Convert.ToDouble(myProductView["unit_price"]), 3);
+                        double total = qty * unit_price;
+                        double tax = (total * tax_rate / 100);
+                        double sub_total = tax + total;
+                        double sub_total_without_vat = total;
+
+                        int id = Convert.ToInt32(myProductView["id"]);
+                        string code = myProductView["code"].ToString();
+                        string name = myProductView["name"].ToString();
+                        double cost_price = Math.Round(Convert.ToDouble(myProductView["avg_cost"]), 2);
+
+                        int? _schemeId = (myProductView["discount_scheme_id"] != DBNull.Value && myProductView["discount_scheme_id"] != null)
+                            ? (int?)Convert.ToInt32(myProductView["discount_scheme_id"]) : null;
+                        var _dr = _discountEngine.ResolveItemDiscount(_schemeId, qty, unit_price);
+                        double discount = _dr.DiscountValue;
+                        double discount_percent = Math.Round(_dr.DiscountPercent, 2);
+
+                        string location_code = myProductView["location_code"].ToString();
+                        string unit = myProductView["unit"].ToString();
+                        string category = myProductView["category"].ToString();
+                        string shop_qty = myProductView["qty"].ToString();
+                        string tax_id = myProductView["tax_id"].ToString();
+                        string item_type = myProductView["item_type"].ToString();
+                        string category_code = myProductView["category_code"].ToString();
+                        double current_sub_total = qty * unit_price + tax - discount;
+
+                        string[] row0 = {
+                    "", id.ToString(), code, name, qty.ToString(), unit_price.ToString(),
+                    discount.ToString(), discount_percent.ToString(),
+                    sub_total_without_vat.ToString(), tax.ToString(), current_sub_total.ToString(),
+                    location_code, unit, category, "Del", shop_qty, tax_id,
+                    tax_rate.ToString(), cost_price.ToString(), item_type, category_code, grid_item_number
+                };
+
+                        // Remove the first empty row
+                        if (grid_sales.RowCount > 0 && grid_sales.Rows[0].Cells["id"].Value == null)
+                            grid_sales.Rows.RemoveAt(0);
+
+                        int RowIndex = grid_sales.Rows.Add(row0);
+
+                        if (Convert.ToDouble(myProductView["qty"]) <= 0 || myProductView["qty"].ToString() == string.Empty)
+                            grid_sales.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    }
 
                     get_total_tax();
                     get_total_discount();
@@ -770,15 +725,13 @@ namespace pos
                     get_total_cost_amount();
                     get_total_amount();
                     get_total_qty();
-
                 }
 
                 txt_barcode.Focus();
-
             }
             else
             {
-                UiMessages.ShowWarning("Record not found", "·„ Ì „ «·⁄ÀÊ— ⁄·Ï ”Ã·", "Products", "«·„‰ Ã« ");
+                UiMessages.ShowWarning("Record not found", "ŸÑŸÖ Ÿäÿ™ŸÖ ÿßŸÑÿπÿ´Ÿàÿ± ÿπŸÑŸâ ÿ≥ÿ¨ŸÑ", "Products", "ÿßŸÑŸÖŸÜÿ™ÿ¨ÿßÿ™");
             }
         }
 
@@ -845,9 +798,9 @@ namespace pos
                 if (cmb_sale_type.SelectedValue.ToString() == "Credit" && netAmount > netCreditLimit)
                 {
                     UiMessages.ShowWarning("Sales transaction cannot be processed, because customer credit limit has exceeded by " + limitExceededBy.ToString("N2"),
-                     "·« Ì„ﬂ‰ Õ›Ÿ „⁄«„·… «·»Ì⁄° ·√‰Â  „  Ã«Ê“ Õœ «∆ „«‰ «·⁄„Ì· »„ﬁœ«— " + limitExceededBy.ToString("N2"),
+                     "ŸÑÿß ŸäŸÖŸÉŸÜ ÿ≠ŸÅÿ∏ ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπÿå ŸÑÿ£ŸÜŸá ÿ™ŸÖ ÿ™ÿ¨ÿßŸàÿ≤ ÿ≠ÿØ ÿßÿ¶ÿ™ŸÖÿßŸÜ ÿßŸÑÿπŸÖŸäŸÑ ÿ®ŸÖŸÇÿØÿßÿ± " + limitExceededBy.ToString("N2"),
                      "Credit limit",
-                     "Õœ «·«∆ „«‰");
+                     "ÿ≠ÿØ ÿßŸÑÿßÿ¶ÿ™ŸÖÿßŸÜ");
                     return;
                 }
             }
@@ -941,23 +894,17 @@ namespace pos
             return journal_id;
         }
 
-        private void Get_AccountID_From_Company()
-        {
-            GeneralBLL objBLL = new GeneralBLL();
-
-            String keyword = "TOP 1 *";
-            String table = "pos_companies";
-            DataTable companies_dt = objBLL.GetRecord(keyword, table);
-            foreach (DataRow dr in companies_dt.Rows)
-            {
-                cash_account_id = (int)dr["cash_acc_id"];
-                sales_account_id = (int)dr["sales_acc_id"];
-                receivable_account_id = (int)dr["receivable_acc_id"];
-                tax_account_id = (int)dr["tax_acc_id"];
-                sales_discount_acc_id = (int)dr["sales_discount_acc_id"];
-                inventory_acc_id = (int)dr["inventory_acc_id"];
-                purchases_acc_id = (int)dr["purchases_acc_id"];
-            }
+        private void Get_AccountID_From_Company()        {
+      
+            var accounts = SalesDropdownHelper.GetCompanyAccountIds();
+            cash_account_id = accounts.CashAccountId;
+            sales_account_id = accounts.SalesAccountId;
+            receivable_account_id = accounts.ReceivableAccountId;
+            tax_account_id = accounts.TaxAccountId;
+            sales_discount_acc_id = accounts.SalesDiscountAccId;
+            inventory_acc_id = accounts.InventoryAccId;
+            purchases_acc_id = accounts.PurchasesAccId;
+            
         }
 
         public DataTable load_sales_receipt(string invoice_no)
@@ -1080,9 +1027,9 @@ namespace pos
                     {
                         UiMessages.ShowWarning(
                             "You don't have permission to transmit invoices to ZATCA.",
-                            "·Ì” ·œÌﬂ ’·«ÕÌ… ·≈—”«· «·›Ê« Ì— ≈·Ï “« ﬂ«.",
+                            "ŸÑŸäÿ≥ ŸÑÿØŸäŸÉ ÿµŸÑÿßÿ≠Ÿäÿ© ŸÑÿ•ÿ±ÿ≥ÿßŸÑ ÿßŸÑŸÅŸàÿßÿ™Ÿäÿ± ÿ•ŸÑŸâ ÿ≤ÿßÿ™ŸÉÿß.",
                             "Permission Denied",
-                            " „ —›÷ «·’·«ÕÌ…");
+                            "ÿ™ŸÖ ÿ±ŸÅÿ∂ ÿßŸÑÿµŸÑÿßÿ≠Ÿäÿ©");
                     }
                 }
 
@@ -1094,7 +1041,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
@@ -1118,7 +1065,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
 
         }
@@ -1199,8 +1146,7 @@ namespace pos
             txt_cost_price.Text = "";
             txt_cost_price_with_vat.Text = "";
             txt_single_cost_evat.Text = "";
-            txt_single_cost_evat.Text = "";
-
+            txt_total_cost.Text = "";
             txt_shop_qty.Text = "";
             txt_company_qty.Text = "";
             txtPONumber.Text = "";
@@ -1231,81 +1177,16 @@ namespace pos
             }
         }
 
-        public void get_customers_dropdownlist()
-        {
-            CustomerBLL customerBLL = new CustomerBLL();
-            DataTable customers = customerBLL.GetAll();
-
-            DataRow emptyRow = customers.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[2] = "";              // Set Column Value
-            customers.Rows.InsertAt(emptyRow, 0);
-
-            DataRow emptyRow1 = customers.NewRow();
-            emptyRow1[0] = "-1";              // Set Column Value
-            emptyRow1[2] = "ADD NEW";              // Set Column Value
-            customers.Rows.InsertAt(emptyRow1, 1);
-
-            cmb_customers.DisplayMember = "first_name";
-            cmb_customers.ValueMember = "id";
-            cmb_customers.DataSource = customers;
-
-
+        public void get_customers_dropdownlist()        {           
+            SalesDropdownHelper.PopulateCustomersDropdown(cmb_customers, includeAddNewRow: true);
         }
 
-        public void get_employees_dropdownlist()
-        {
-            EmployeeBLL employeeBLL = new EmployeeBLL();
-            DataTable employees = employeeBLL.GetAll();
+        public void get_employees_dropdownlist()        
+        {            SalesDropdownHelper.PopulateEmployeesDropdown(cmb_employees);        }
 
-            DataRow emptyRow = employees.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[2] = "Select Employee";              // Set Column Value
-            employees.Rows.InsertAt(emptyRow, 0);
+        public void get_payment_terms_dropdownlist()        {           SalesDropdownHelper.PopulatePaymentTermsDropdown(cmb_payment_terms);        }
 
-
-            cmb_employees.DisplayMember = "first_name";
-            cmb_employees.ValueMember = "id";
-            cmb_employees.DataSource = employees;
-
-
-        }
-
-        public void get_payment_terms_dropdownlist()
-        {
-            PaymentTermsBLL paymentMethodBLL = new PaymentTermsBLL();
-
-            DataTable payment_terms = paymentMethodBLL.GetAll();
-            DataRow emptyRow = payment_terms.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[4] = "";              // Set Column Value
-            payment_terms.Rows.InsertAt(emptyRow, 0);
-
-
-            cmb_payment_terms.DisplayMember = "description";
-            cmb_payment_terms.ValueMember = "id";
-            cmb_payment_terms.DataSource = payment_terms;
-
-
-        }
-
-        public void get_payment_method_dropdownlist()
-        {
-            PaymentMethodBLL paymentMethodBLL = new PaymentMethodBLL();
-
-            DataTable payment_method = paymentMethodBLL.GetAll();
-            DataRow emptyRow = payment_method.NewRow();
-            //emptyRow[0] = 0;              // Set Column Value
-            //emptyRow[1] = "";              // Set Column Value
-            //payment_method.Rows.InsertAt(emptyRow, 0);
-
-
-            cmb_payment_method.DisplayMember = "description";
-            cmb_payment_method.ValueMember = "id";
-            cmb_payment_method.DataSource = payment_method;
-
-
-        }
+        public void get_payment_method_dropdownlist()        {            SalesDropdownHelper.PopulatePaymentMethodsDropdown(cmb_payment_method);        }
         private void cmb_customers_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1347,7 +1228,7 @@ namespace pos
 
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
@@ -1429,159 +1310,25 @@ namespace pos
             catch (Exception ex)
             {
 
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
-        private void get_saletype_dropdownlist()
-        {
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
-
-            DataRow _row_1 = dt.NewRow();
-            _row_1["id"] = "Cash";
-            if (lang == "en-US")
-            {
-                _row_1["name"] = "Cash";
-            }
-            else if (lang == "ar-SA")
-            {
-                _row_1["name"] = "‰ﬁœÌ";
-            }
-
-            dt.Rows.Add(_row_1);
-
-            if (allow_credit_sales)//user right check
-            {
-                DataRow _row = dt.NewRow();
-                _row["id"] = "Credit";
-                if (lang == "ar-SA")
-                {
-                    _row["name"] = "«Ã·";
-                }
-                else { _row["name"] = "Credit"; }
-
-                dt.Rows.Add(_row);
-
-            }
-
-            DataRow _row_2 = dt.NewRow();
-            _row_2["id"] = "Quotation";
-            if (lang == "ar-SA")
-            {
-                _row_2["name"] = "⁄—÷ ”⁄—";
-            }
-            else { _row_2["name"] = "Quotation"; }
-
-            dt.Rows.Add(_row_2);
-
-            DataRow _row_3 = dt.NewRow();
-            _row_3["id"] = "Gift";
-
-            if (lang == "ar-SA")
-            {
-                _row_3["name"] = "ÂœÌ…";
-            }
-            else { _row_3["name"] = "Gift"; }
-
-            dt.Rows.Add(_row_3);
-
-            DataRow _row_4 = dt.NewRow();
-            _row_4["id"] = "ICT";
-
-            if (lang == "ar_SA")
-            {
-                _row_4["name"] = "‰ﬁ· ﬁÿ⁄ «·€Ì«— »Ì‰ «·‘—ﬂ« ";
-            }
-            else
-            {
-                _row_4["name"] = "ICT";
-            }
-            dt.Rows.Add(_row_4);
-
-
-            //DataRow _row_4 = dt.NewRow();
-            //_row_4["id"] = "Return";
-            //if (lang == "en-US")
-            //{
-            //    _row_4["name"] = "Return";
-            //}
-            //else if (lang == "ar-SA")
-            //{
-            //    _row_4["name"] = "Ì⁄Êœ";
-            //}
-            //dt.Rows.Add(_row_4);
-
-            cmb_sale_type.DisplayMember = "name";
-            cmb_sale_type.ValueMember = "id";
-            cmb_sale_type.DataSource = dt;
-
-            cmb_sale_type.SelectedIndex = 0; //default value
-
+        private void get_saletype_dropdownlist(){            
+            SalesDropdownHelper.PopulateSaleTypeDropdown(cmb_sale_type, lang, UsersModal.logged_in_user_allow_credit_sale);        
         }
-        private void get_invoice_subtype_dropdownlist()
-        {
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
-            DataRow _row_1 = dt.NewRow();
-            _row_1["id"] = "02";
-
-            if (lang == "ar-SA")
-            {
-                _row_1["name"] = "„»”ÿ…";
-            }
-            else { _row_1["name"] = "Simplified"; }
-            dt.Rows.Add(_row_1);
-
-            DataRow _row_2 = dt.NewRow();
-            _row_2["id"] = "01";
-
-            if (lang == "ar-SA")
-            {
-                _row_2["name"] = "÷—Ì»Ì…";
-            }
-            else { _row_2["name"] = "Standard"; }
-            dt.Rows.Add(_row_2);
-
-            cmb_invoice_subtype_code.DisplayMember = "name";
-            cmb_invoice_subtype_code.ValueMember = "id";
-            cmb_invoice_subtype_code.DataSource = dt;
-
-            cmb_invoice_subtype_code.SelectedIndex = 0; //default value
+            
+        private void get_invoice_subtype_dropdownlist(){            
+            SalesDropdownHelper.PopulateInvoiceSubtypeDropdown(cmb_invoice_subtype_code, lang, UsersModal.useZatcaEInvoice);
         }
-
-        public void load_user_rights(int user_id)
-        {
-            UsersBLL userBLL_obj = new UsersBLL();
-            DataTable users = userBLL_obj.GetUserRights(user_id);
-
-            foreach (DataRow dr in users.Rows)
-            {
-                ///USER RIGHTS
-
-                cash_sales_amount_limit = Convert.ToDouble(dr["cash_sales_amount"]);
-                //txt_credit_sales_amt= (double) dr["credit_sales_amount"].ToString();
-                //cash_purchase_amount_limit = Convert.ToDouble(dr["cash_purchase_amount"]);
-                //txt_credit_purchase_amt.Text = (double) dr["credit_purchase_amount"].ToString();
-                //allow_cash_sales.Checked = (bool)dr["allow_cash_sales"];
-                allow_credit_sales = (bool)dr["allow_credit_sales"];
-                //chk_allow_cash_purchase.Checked = (bool)dr["allow_cash_purchase"];
-                //allow_credit_purchase= (bool)dr["allow_credit_purchase"];
-
-            }
-        }
-
+        
         private void grid_sales_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    var confirm = UiMessages.ConfirmYesNoCancel("Are you sure you want delete", "Â· √‰  „ √ﬂœ √‰ﬂ  —Ìœ «·Õ–›", "Delete", "Õ–›");
+                    var confirm = UiMessages.ConfirmYesNoCancel("Are you sure you want delete", "ŸáŸÑ ÿ£ŸÜÿ™ ŸÖÿ™ÿ£ŸÉÿØ ÿ£ŸÜŸÉ ÿ™ÿ±ŸäÿØ ÿßŸÑÿ≠ÿ∞ŸÅ", "Delete", "ÿ≠ÿ∞ŸÅ");
                     if (confirm == DialogResult.Yes)
                     {
                         grid_sales.Rows.RemoveAt(grid_sales.CurrentRow.Index);
@@ -1648,7 +1395,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
 
         }
@@ -1818,7 +1565,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
@@ -1844,7 +1591,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
@@ -1853,7 +1600,7 @@ namespace pos
 
             e.Control.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
 
-            if (_numericColumns.Contains(grid_sales.Columns[grid_sales.CurrentCell.ColumnIndex].Name)) // Qty, unit_price, discount, discount_percent, total_without_vat ó numeric only
+            if (_numericColumns.Contains(grid_sales.Columns[grid_sales.CurrentCell.ColumnIndex].Name)) // Qty, unit_price, discount, discount_percent, total_without_vat ‚Äî numeric only
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -1956,7 +1703,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
@@ -2053,7 +1800,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Œÿ√");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "ÿÆÿ∑ÿ£");
             }
         }
 
@@ -2100,43 +1847,17 @@ namespace pos
             grid_sales.Rows.Add();
         }
 
-        private void SetupBrandDataGridView()
-        {
-            brandsDataGridView.ColumnCount = 2;
-            brandsDataGridView.Name = "brandsDataGridView";
-            brandsDataGridView.Size = new Size(250, 250);
-
-            brandsDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            brandsDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            brandsDataGridView.Columns[0].Name = "Code";
-            brandsDataGridView.Columns[1].Name = "Name";
-            brandsDataGridView.Columns[0].ReadOnly = true;
-            brandsDataGridView.Columns[1].ReadOnly = true;
-            brandsDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            brandsDataGridView.MultiSelect = false;
-            brandsDataGridView.AllowUserToAddRows = false;
-            brandsDataGridView.AllowUserToDeleteRows = false;
-
-            brandsDataGridView.RowHeadersVisible = false;
-            //brandsDataGridView.ColumnHeadersVisible = false;
-            brandsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            brandsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            brandsDataGridView.AutoResizeColumns();
-
+        private void SetupBrandDataGridView()        {
+           SalesPopupGridHelper.SetupLookupGrid(brandsDataGridView, "brandsDataGridView", 250, 250);
             brandsDataGridView.CellClick += new DataGridViewCellEventHandler(brandsDataGridView_CellClick);
-            this.brandsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(brandsDataGridView_KeyDown);
-
-            this.Controls.Add(brandsDataGridView);
-            PositionDropdownGrid(brandsDataGridView, txt_brands);
+           this.brandsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(brandsDataGridView_KeyDown);
+           this.Controls.Add(brandsDataGridView);
+           SalesPopupGridHelper.PositionDropdownGrid(this, brandsDataGridView, txt_brands);
             brandsDataGridView.BringToFront();
-            StyleDropdownGrid(brandsDataGridView);
+          SalesPopupGridHelper.ApplyGridStyling(brandsDataGridView);
 
-        }
-
-        void brandsDataGridView_KeyDown(object sender, KeyEventArgs e)
+      }
+       void brandsDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -2199,7 +1920,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -2211,43 +1932,16 @@ namespace pos
             }
         }
 
-        private void SetupCategoriesDataGridView()
-        {
-            categoriesDataGridView.ColumnCount = 2;
-            categoriesDataGridView.Name = "categoriesDataGridView";
-            categoriesDataGridView.Size = new Size(250, 250);
-
-            categoriesDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            categoriesDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            categoriesDataGridView.Columns[0].Name = "Code";
-            categoriesDataGridView.Columns[1].Name = "Name";
-            categoriesDataGridView.Columns[0].ReadOnly = true;
-            categoriesDataGridView.Columns[1].ReadOnly = true;
-            categoriesDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            categoriesDataGridView.MultiSelect = false;
-            categoriesDataGridView.AllowUserToAddRows = false;
-            categoriesDataGridView.AllowUserToDeleteRows = false;
-
-            categoriesDataGridView.RowHeadersVisible = false;
-            //brandsDataGridView.ColumnHeadersVisible = false;
-            categoriesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            categoriesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            categoriesDataGridView.AutoResizeColumns();
-
+        private void SetupCategoriesDataGridView()       
+ {            SalesPopupGridHelper.SetupLookupGrid(categoriesDataGridView, "categoriesDataGridView", 250, 250);
             this.categoriesDataGridView.CellClick += new DataGridViewCellEventHandler(categoriesDataGridView_CellClick);
             this.categoriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(categoriesDataGridView_KeyDown);
-
             this.Controls.Add(categoriesDataGridView);
-            PositionDropdownGrid(categoriesDataGridView, txt_categories);
+           SalesPopupGridHelper.PositionDropdownGrid(this, categoriesDataGridView, txt_categories);
             categoriesDataGridView.BringToFront();
-            StyleDropdownGrid(categoriesDataGridView);
-
-        }
-
-        void categoriesDataGridView_KeyDown(object sender, KeyEventArgs e)
+            SalesPopupGridHelper.ApplyGridStyling(categoriesDataGridView);
+       }
+      void categoriesDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -2311,7 +2005,7 @@ namespace pos
             catch (Exception ex)
             {
 
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -2326,40 +2020,14 @@ namespace pos
 
         private void SetupGroupsDataGridView()
         {
-            groupsDataGridView.ColumnCount = 2;
-            groupsDataGridView.Name = "groupsDataGridView";
-            groupsDataGridView.Size = new Size(250, 250);
-
-            groupsDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            groupsDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            groupsDataGridView.Columns[0].Name = "Code";
-            groupsDataGridView.Columns[1].Name = "Name";
-            groupsDataGridView.Columns[0].ReadOnly = true;
-            groupsDataGridView.Columns[1].ReadOnly = true;
-            groupsDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            groupsDataGridView.MultiSelect = false;
-            groupsDataGridView.AllowUserToAddRows = false;
-            groupsDataGridView.AllowUserToDeleteRows = false;
-
-            groupsDataGridView.RowHeadersVisible = false;
-            //brandsDataGridView.ColumnHeadersVisible = false;
-            groupsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            groupsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            groupsDataGridView.AutoResizeColumns();
-
-            this.groupsDataGridView.CellClick += new DataGridViewCellEventHandler(groupsDataGridView_CellClick);
-            this.groupsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(groupsDataGridView_KeyDown);
-
+            SalesPopupGridHelper.SetupLookupGrid(groupsDataGridView, "groupsDataGridView", 250, 250);
+           this.groupsDataGridView.CellClick += new DataGridViewCellEventHandler(groupsDataGridView_CellClick);
+           this.groupsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(groupsDataGridView_KeyDown);
             this.Controls.Add(groupsDataGridView);
-            PositionDropdownGrid(groupsDataGridView, txt_groups);
+          SalesPopupGridHelper.PositionDropdownGrid(this, groupsDataGridView, txt_groups);
             groupsDataGridView.BringToFront();
-            StyleDropdownGrid(groupsDataGridView);
-
-        }
-
+           SalesPopupGridHelper.ApplyGridStyling(groupsDataGridView);
+       }
         void groupsDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -2423,7 +2091,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -2523,6 +2191,30 @@ namespace pos
 
         public void total_discount_value(double total_discount_value)
         {
+            // Get user-specific discount limits
+            double maxDiscountPercent = UsersModal.logged_in_max_discount_percent;
+            double maxDiscountAmount = UsersModal.logged_in_max_discount_amount;
+
+            // Compute the gross invoice total from the grid (unit_price * qty, before any discount)
+            double invoiceTotal = 0;
+            for (int i = 0; i < grid_sales.Rows.Count; i++)
+            {
+                if (grid_sales.Rows[i].Cells["id"].Value != null && Convert.ToInt32(grid_sales.Rows[i].Cells["id"].Value) > 0)
+                    invoiceTotal += Convert.ToDouble(grid_sales.Rows[i].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value);
+            }
+
+            // Validate the requested flat discount against this user's limits
+            if (!DiscountValidator.IsDiscountValid(total_discount_value, invoiceTotal, maxDiscountPercent, maxDiscountAmount))
+            {
+                UiMessages.ShowWarning(
+                    "Discount exceeds your allowed limit. It has been reset to 0.",
+                    "ÿßŸÑÿÆÿµŸÖ Ÿäÿ™ÿ¨ÿßŸàÿ≤ ÿßŸÑÿ≠ÿØ ÿßŸÑŸÖÿ≥ŸÖŸàÿ≠ ÿ®Ÿá. ÿ™ŸÖ ÿ•ÿπÿßÿØÿ© ÿ™ÿπŸäŸäŸÜŸá ÿ•ŸÑŸâ 0.",
+                    "Discount Limit",
+                    "ÿ≠ÿØ ÿßŸÑÿÆÿµŸÖ");
+                txtTotalFlatDiscountValue.Value = 0;
+                total_discount_value = 0;
+            }
+
             int total_rows = grid_sales.Rows.Count;
             int filled_rows = 0;
 
@@ -2606,15 +2298,35 @@ namespace pos
         {
             total_discount_value(Convert.ToDouble(txtTotalFlatDiscountValue.Text));
 
-            //get_total_tax();
-            //get_total_discount();
-            //get_sub_total_amount();
-            //get_total_cost_amount();
-            //get_total_amount();
         }
 
         public void total_discount_percent(double total_discount_percent)
         {
+            // Get user-specific discount limits
+            double maxDiscountPercent = UsersModal.logged_in_max_discount_percent;
+            double maxDiscountAmount = UsersModal.logged_in_max_discount_amount;
+
+            // Compute the gross invoice total from the grid (unit_price * qty, before any discount)
+            double invoiceTotal = 0;
+            for (int i = 0; i < grid_sales.Rows.Count; i++)
+            {
+                if (grid_sales.Rows[i].Cells["id"].Value != null && Convert.ToInt32(grid_sales.Rows[i].Cells["id"].Value) > 0)
+                    invoiceTotal += Convert.ToDouble(grid_sales.Rows[i].Cells["unit_price"].Value) * Convert.ToDouble(grid_sales.Rows[i].Cells["qty"].Value);
+            }
+
+            // Convert the requested percent to a value and validate
+            double requestedDiscountValue = (total_discount_percent * invoiceTotal) / 100;
+            if (!DiscountValidator.IsDiscountValid(requestedDiscountValue, invoiceTotal, maxDiscountPercent, maxDiscountAmount))
+            {
+                UiMessages.ShowWarning(
+                    "Discount exceeds your allowed limit. It has been reset to 0.",
+                    "ÿßŸÑÿÆÿµŸÖ Ÿäÿ™ÿ¨ÿßŸàÿ≤ ÿßŸÑÿ≠ÿØ ÿßŸÑŸÖÿ≥ŸÖŸàÿ≠ ÿ®Ÿá. ÿ™ŸÖ ÿ•ÿπÿßÿØÿ© ÿ™ÿπŸäŸäŸÜŸá ÿ•ŸÑŸâ 0.",
+                    "Discount Limit",
+                    "ÿ≠ÿØ ÿßŸÑÿÆÿµŸÖ");
+                txt_total_disc_percent.Value = 0;
+                total_discount_percent = 0;
+            }
+
             int total_rows = grid_sales.Rows.Count;
             int filled_rows = 0;
 
@@ -2698,8 +2410,8 @@ namespace pos
             if (grid_sales.RowCount > 0 && grid_sales.CurrentRow.Cells["code"].Value != null && grid_sales.CurrentRow.Cells["id"].Value != null)
             {
                 if (MessageBox.Show(
-                        UiMessages.T("Are you sure you want to close sale?", "Â· √‰  „ √ﬂœ √‰ﬂ  —Ìœ ≈€·«ﬁ ⁄„·Ì… «·»Ì⁄ø"),
-                        UiMessages.T("Close Sale Transaction", "≈€·«ﬁ „⁄«„·… «·»Ì⁄"),
+                        UiMessages.T("Are you sure you want to close sale?", "ŸáŸÑ ÿ£ŸÜÿ™ ŸÖÿ™ÿ£ŸÉÿØ ÿ£ŸÜŸÉ ÿ™ÿ±ŸäÿØ ÿ•ÿ∫ŸÑÿßŸÇ ÿπŸÖŸÑŸäÿ© ÿßŸÑÿ®Ÿäÿπÿü"),
+                        UiMessages.T("Close Sale Transaction", "ÿ•ÿ∫ŸÑÿßŸÇ ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ"),
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Warning,
                         MessageBoxDefaultButton.Button2) == DialogResult.No)
@@ -2714,9 +2426,9 @@ namespace pos
         {
             var confirm = UiMessages.ConfirmYesNo(
                     "Create new sale transaction?",
-                    "Â·  —Ìœ ≈‰‘«¡ Õ—ﬂ… »Ì⁄ ÃœÌœ…ø",
+                    "ŸáŸÑ ÿ™ÿ±ŸäÿØ ÿ•ŸÜÿ¥ÿßÿ° ÿ≠ÿ±ŸÉÿ© ÿ®Ÿäÿπ ÿ¨ÿØŸäÿØÿ©ÿü",
                     captionEn: "Confirm",
-                    captionAr: " √ﬂÌœ"
+                    captionAr: "ÿ™ÿ£ŸÉŸäÿØ"
                 );
 
             if (confirm != DialogResult.Yes)
@@ -2740,7 +2452,7 @@ namespace pos
                     // Validate at least one product is added
                     if (grid_sales.Rows.Count <= 1 && grid_sales.CurrentRow.Cells["code"].Value == null)
                     {
-                        UiMessages.ShowWarning("Please add products", "Ì—ÃÏ ≈÷«›… „‰ Ã« ", "Sale Transaction", "„⁄«„·… «·»Ì⁄");
+                        UiMessages.ShowWarning("Please add products", "Ÿäÿ±ÿ¨Ÿâ ÿ•ÿ∂ÿßŸÅÿ© ŸÖŸÜÿ™ÿ¨ÿßÿ™", "Sale Transaction", "ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ");
                         return;
                     }
 
@@ -2761,7 +2473,7 @@ namespace pos
                     // Sale type selection validation
                     if (cmb_sale_type.SelectedValue.ToString() == "0")
                     {
-                        UiMessages.ShowWarning("Please select sale type", "Ì—ÃÏ «Œ Ì«— ‰Ê⁄ «·»Ì⁄", "Sale Transaction", "„⁄«„·… «·»Ì⁄");
+                        UiMessages.ShowWarning("Please select sale type", "Ÿäÿ±ÿ¨Ÿâ ÿßÿÆÿ™Ÿäÿßÿ± ŸÜŸàÿπ ÿßŸÑÿ®Ÿäÿπ", "Sale Transaction", "ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ");
                         return;
                     }
 
@@ -2773,7 +2485,7 @@ namespace pos
                     // Get sale type
                     if (cmb_sale_type.SelectedValue.ToString() == null)
                     {
-                        UiMessages.ShowWarning("Please select sale type", "Ì—ÃÏ «Œ Ì«— ‰Ê⁄ «·»Ì⁄", "Sale Transaction", "„⁄«„·… «·»Ì⁄");
+                        UiMessages.ShowWarning("Please select sale type", "Ÿäÿ±ÿ¨Ÿâ ÿßÿÆÿ™Ÿäÿßÿ± ŸÜŸàÿπ ÿßŸÑÿ®Ÿäÿπ", "Sale Transaction", "ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ");
                         return;
                     }
                     else
@@ -2828,10 +2540,10 @@ namespace pos
                                 $"Sale Amount: {netAmount:C}\n" +
                                 $"Credit Limit: {customer_credit_limit:C}",
                                 "Sale Transaction",
-                                captionAr: "·« Ì„ﬂ‰ ≈ „«„ «·»Ì⁄ ·√‰ Õœ «·«∆ „«‰ ··⁄„Ì· ”Ì Ã«Ê“ «·Õœ «·„”„ÊÕ.\n\n" +
-                                $"«·—’Ìœ «·Õ«·Ì: {customerBalance:C}\n" +
-                                $"ﬁÌ„… «·›« Ê—…: {netAmount:C}\n" +
-                                $"Õœ «·«∆ „«‰: {customer_credit_limit:C}"
+                                captionAr: "ŸÑÿß ŸäŸÖŸÉŸÜ ÿ•ÿ™ŸÖÿßŸÖ ÿßŸÑÿ®Ÿäÿπ ŸÑÿ£ŸÜ ÿ≠ÿØ ÿßŸÑÿßÿ¶ÿ™ŸÖÿßŸÜ ŸÑŸÑÿπŸÖŸäŸÑ ÿ≥Ÿäÿ™ÿ¨ÿßŸàÿ≤ ÿßŸÑÿ≠ÿØ ÿßŸÑŸÖÿ≥ŸÖŸàÿ≠.\n\n" +
+                                $"ÿßŸÑÿ±ÿµŸäÿØ ÿßŸÑÿ≠ÿßŸÑŸä: {customerBalance:C}\n" +
+                                $"ŸÇŸäŸÖÿ© ÿßŸÑŸÅÿßÿ™Ÿàÿ±ÿ©: {netAmount:C}\n" +
+                                $"ÿ≠ÿØ ÿßŸÑÿßÿ¶ÿ™ŸÖÿßŸÜ: {customer_credit_limit:C}"
                             );
 
                             return;
@@ -2900,7 +2612,7 @@ namespace pos
 
                             if (invoice_status == "Update" && txt_invoice_no.Text.Substring(0, 1).ToUpper() == "S") //Update sales delete all record first and insert new sales
                             {
-                                UiMessages.ShowWarning("Update are not allowed", "«· ⁄œÌ· €Ì— „”„ÊÕ", "Update", " ⁄œÌ·");
+                                UiMessages.ShowWarning("Update are not allowed", "ÿßŸÑÿ™ÿπÿØŸäŸÑ ÿ∫Ÿäÿ± ŸÖÿ≥ŸÖŸàÿ≠", "Update", "ÿ™ÿπÿØŸäŸÑ");
                                 return;
 
                                 //int qresult = salesObj.DeleteSales(txt_invoice_no.Text); //DELETE ALL TRANSACTIONS
@@ -2921,9 +2633,9 @@ namespace pos
                                 if (qresult <= 0)
                                 {
                                     UiMessages.ShowError("Estimate has issue while updating, please try again",
-                                        "ÕœÀ  „‘ﬂ·… √À‰«¡  ÕœÌÀ ⁄—÷ «·”⁄—° Ì—ÃÏ «·„Õ«Ê·… „—… √Œ—Ï",
+                                        "ÿ≠ÿØÿ´ÿ™ ŸÖÿ¥ŸÉŸÑÿ© ÿ£ÿ´ŸÜÿßÿ° ÿ™ÿ≠ÿØŸäÿ´ ÿπÿ±ÿ∂ ÿßŸÑÿ≥ÿπÿ±ÿå Ÿäÿ±ÿ¨Ÿâ ÿßŸÑŸÖÿ≠ÿßŸàŸÑÿ© ŸÖÿ±ÿ© ÿ£ÿÆÿ±Ÿâ",
                                         "Update",
-                                        " ⁄œÌ·");
+                                        "ÿ™ÿπÿØŸäŸÑ");
                                     return;
                                 }
 
@@ -3052,9 +2764,9 @@ namespace pos
                                 {
                                     UiMessages.ShowInfo(
                                         "Estimate No: " + invoice_no + " " + sale_type + " transaction " + ((invoice_status == "Update" || isEstimateEdit) ? "updated" : "created") + " successfully",
-                                        " ﬁœÌ— —ﬁ„: " + invoice_no + " " + sale_type + "  „  " + ((invoice_status == "Update" || isEstimateEdit) ? " ÕœÌÀ" : "≈‰‘«¡") + " »‰Ã«Õ",
+                                        "ÿ™ŸÇÿØŸäÿ± ÿ±ŸÇŸÖ: " + invoice_no + " " + sale_type + " ÿ™ŸÖÿ™ " + ((invoice_status == "Update" || isEstimateEdit) ? "ÿ™ÿ≠ÿØŸäÿ´" : "ÿ•ŸÜÿ¥ÿßÿ°") + " ÿ®ŸÜÿ¨ÿßÿ≠",
                                         captionEn: "Success",
-                                        captionAr: "‰Ã«Õ"
+                                        captionAr: "ŸÜÿ¨ÿßÿ≠"
                                     );
                                     txt_invoice_no.Text = invoice_no;
                                     txt_invoice_no.Tag = sale_id;
@@ -3069,9 +2781,9 @@ namespace pos
                                     {
                                         UiMessages.ShowInfo(
                                             "Request for Inter Company Transfer (ICT) sent successfully",
-                                            " „ ≈—”«· ÿ·» «· ÕÊÌ· »Ì‰ «·‘—ﬂ«  »‰Ã«Õ",
+                                            "ÿ™ŸÖ ÿ•ÿ±ÿ≥ÿßŸÑ ÿ∑ŸÑÿ® ÿßŸÑÿ™ÿ≠ŸàŸäŸÑ ÿ®ŸäŸÜ ÿßŸÑÿ¥ÿ±ŸÉÿßÿ™ ÿ®ŸÜÿ¨ÿßÿ≠",
                                             captionEn: "Success",
-                                            captionAr: "‰Ã«Õ"
+                                            captionAr: "ŸÜÿ¨ÿßÿ≠"
                                         );
                                         clear_form();
                                         return;
@@ -3090,7 +2802,7 @@ namespace pos
                                         {
                                             UiMessages.ShowWarning(
                                                 "No active ZATCA CSID/credentials found. Please configure them first to send invoices to zatca.",
-                                                "·«  ÊÃœ »Ì«‰«  «⁄ „«œ Z« ﬂ« ‰‘ÿ…. Ì—ÃÏ  ﬂÊÌ‰Â« √Ê·«."
+                                                "ŸÑÿß ÿ™Ÿàÿ¨ÿØ ÿ®ŸäÿßŸÜÿßÿ™ ÿßÿπÿ™ŸÖÿßÿØ Zÿßÿ™ŸÉÿß ŸÜÿ¥ÿ∑ÿ©. Ÿäÿ±ÿ¨Ÿâ ÿ™ŸÉŸàŸäŸÜŸáÿß ÿ£ŸàŸÑÿßŸã."
                                             );
 
                                         }
@@ -3150,9 +2862,9 @@ namespace pos
 
                                     UiMessages.ShowInfo(
                                         "Invoice No: " + invoice_no + " " + sale_type + " transaction " + (invoice_status == "Update" ? "updated" : "created") + " successfully",
-                                        "›« Ê—… —ﬁ„: " + invoice_no + " " + sale_type + "  „  " + (invoice_status == "Update" ? " ÕœÌÀ" : "≈‰‘«¡") + " »‰Ã«Õ",
+                                        "ŸÅÿßÿ™Ÿàÿ±ÿ© ÿ±ŸÇŸÖ: " + invoice_no + " " + sale_type + " ÿ™ŸÖÿ™ " + (invoice_status == "Update" ? "ÿ™ÿ≠ÿØŸäÿ´" : "ÿ•ŸÜÿ¥ÿßÿ°") + " ÿ®ŸÜÿ¨ÿßÿ≠",
                                         captionEn: "Success",
-                                        captionAr: "‰Ã«Õ"
+                                        captionAr: "ŸÜÿ¨ÿßÿ≠"
                                     );
                                 }
                             }
@@ -3229,18 +2941,18 @@ namespace pos
                             }
                             else
                             {
-                                UiMessages.ShowError("Record not saved", "·„ Ì „ Õ›Ÿ «·”Ã·", "Error", "Œÿ√");
+                                UiMessages.ShowError("Record not saved", "ŸÑŸÖ Ÿäÿ™ŸÖ ÿ≠ŸÅÿ∏ ÿßŸÑÿ≥ÿ¨ŸÑ", "Error", "ÿÆÿ∑ÿ£");
                             }
                         }
                         else
                         {
-                            UiMessages.ShowWarning("Please add products", "Ì—ÃÏ ≈÷«›… „‰ Ã« ", "Sale Transaction", "„⁄«„·… «·»Ì⁄");
+                            UiMessages.ShowWarning("Please add products", "Ÿäÿ±ÿ¨Ÿâ ÿ•ÿ∂ÿßŸÅÿ© ŸÖŸÜÿ™ÿ¨ÿßÿ™", "Sale Transaction", "ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                    UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
                 }
             }
         }
@@ -3260,7 +2972,7 @@ namespace pos
                     
                     if (string.IsNullOrWhiteSpace(item_number))
                     {
-                        UiMessages.ShowWarning("Item number is empty for the selected product.", "—ﬁ„ «·’‰› ›«—€ ··„‰ Ã «·„Õœœ.");
+                        UiMessages.ShowWarning("Item number is empty for the selected product.", "ÿ±ŸÇŸÖ ÿßŸÑÿµŸÜŸÅ ŸÅÿßÿ±ÿ∫ ŸÑŸÑŸÖŸÜÿ™ÿ¨ ÿßŸÑŸÖÿ≠ÿØÿØ.");
                         return;
                     }
                     frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, display_name);
@@ -3284,7 +2996,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("An error occurred: " + ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError("An error occurred: " + ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -3299,7 +3011,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -3312,7 +3024,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -3325,7 +3037,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -3338,7 +3050,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -3363,7 +3075,7 @@ namespace pos
                     if (ofd.ShowDialog(this) != DialogResult.OK)
                         return;
 
-                    using (BusyScope.Show(this, UiMessages.T("Importing sales items...", "Ã«—Ì «” Ì—«œ √’‰«› «·»Ì⁄...")))
+                    using (BusyScope.Show(this, UiMessages.T("Importing sales items...", "ÿ¨ÿßÿ±Ÿä ÿßÿ≥ÿ™Ÿäÿ±ÿßÿØ ÿ£ÿµŸÜÿßŸÅ ÿßŸÑÿ®Ÿäÿπ...")))
                     {
                         var dt = ReadSalesImportExcel(ofd.FileName);
                         ImportSalesItemsFromExcelTable(dt);
@@ -3372,7 +3084,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, ex.Message, "Import Excel", "«” Ì—«œ ≈ﬂ”·");
+                UiMessages.ShowError(ex.Message, ex.Message, "Import Excel", "ÿßÿ≥ÿ™Ÿäÿ±ÿßÿØ ÿ•ŸÉÿ≥ŸÑ");
             }
         }
 
@@ -3384,7 +3096,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, ex.Message, "Import Template", "ﬁ«·» «·«” Ì—«œ");
+                UiMessages.ShowError(ex.Message, ex.Message, "Import Template", "ŸÇÿßŸÑÿ® ÿßŸÑÿßÿ≥ÿ™Ÿäÿ±ÿßÿØ");
             }
         }
 
@@ -3403,7 +3115,7 @@ namespace pos
             var items = ProductExcelImportHelper.ParseRows(source);
             if (items == null || items.Count == 0)
             {
-                UiMessages.ShowInfo("The selected Excel file does not contain any valid rows.", "„·› «·≈ﬂ”· «·„Õœœ ·« ÌÕ ÊÌ ⁄·Ï √Ì ’›Ê› ’ÕÌÕ….");
+                UiMessages.ShowInfo("The selected Excel file does not contain any valid rows.", "ŸÖŸÑŸÅ ÿßŸÑÿ•ŸÉÿ≥ŸÑ ÿßŸÑŸÖÿ≠ÿØÿØ ŸÑÿß Ÿäÿ≠ÿ™ŸàŸä ÿπŸÑŸâ ÿ£Ÿä ÿµŸÅŸàŸÅ ÿµÿ≠Ÿäÿ≠ÿ©.");
                 return;
             }
 
@@ -3435,16 +3147,16 @@ namespace pos
             {
                 UiMessages.ShowWarning(
                     "No rows were imported. Please verify the Excel columns and product codes.",
-                    "·„ Ì „ «” Ì—«œ √Ì ’›Ê›. Ì—ÃÏ «· Õﬁﬁ „‰ √⁄„œ… «·≈ﬂ”· Ê√ﬂÊ«œ «·„‰ Ã« .");
+                    "ŸÑŸÖ Ÿäÿ™ŸÖ ÿßÿ≥ÿ™Ÿäÿ±ÿßÿØ ÿ£Ÿä ÿµŸÅŸàŸÅ. Ÿäÿ±ÿ¨Ÿâ ÿßŸÑÿ™ÿ≠ŸÇŸÇ ŸÖŸÜ ÿ£ÿπŸÖÿØÿ© ÿßŸÑÿ•ŸÉÿ≥ŸÑ Ÿàÿ£ŸÉŸàÿßÿØ ÿßŸÑŸÖŸÜÿ™ÿ¨ÿßÿ™.");
                 return;
             }
 
             string details = skipped.Count > 0 ? "\n\nSkipped: " + string.Join(", ", skipped.Take(10).ToArray()) : string.Empty;
             UiMessages.ShowInfo(
                 string.Format("Imported {0} row(s) successfully.{1}", importedCount, details),
-                string.Format(" „ «” Ì—«œ {0} ’›/’›Ê› »‰Ã«Õ.{1}", importedCount, skipped.Count > 0 ? "\n\n „  ŒÿÌ »⁄÷ «·’›Ê›." : string.Empty),
+                string.Format("ÿ™ŸÖ ÿßÿ≥ÿ™Ÿäÿ±ÿßÿØ {0} ÿµŸÅ/ÿµŸÅŸàŸÅ ÿ®ŸÜÿ¨ÿßÿ≠.{1}", importedCount, skipped.Count > 0 ? "\n\nÿ™ŸÖ ÿ™ÿÆÿ∑Ÿä ÿ®ÿπÿ∂ ÿßŸÑÿµŸÅŸàŸÅ." : string.Empty),
                 "Import Excel",
-                "«” Ì—«œ ≈ﬂ”·");
+                "ÿßÿ≥ÿ™Ÿäÿ±ÿßÿØ ÿ•ŸÉÿ≥ŸÑ");
         }
 
         private DataRow FindProductForImport(string productCode, string productName)
@@ -3726,7 +3438,7 @@ namespace pos
         {
             if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
-                using (BusyScope.Show(this, UiMessages.T("Loading...", " Õ„Ì·...")))
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "ÿ™ÿ≠ŸÖŸäŸÑ...")))
                 {
                     using (frm_sales_invoice obj = new frm_sales_invoice(load_sales_receipt(txt_invoice_no.Text), true))
                     {
@@ -3742,7 +3454,7 @@ namespace pos
         {
             if (!String.IsNullOrEmpty(txt_invoice_no.Text))
             {
-                using (BusyScope.Show(this, UiMessages.T("Loading...", " Õ„Ì·...")))
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "ÿ™ÿ≠ŸÖŸäŸÑ...")))
                 {
                    using (frm_sales_return obj = new frm_sales_return(txt_invoice_no.Text))
                     {
@@ -3757,76 +3469,57 @@ namespace pos
         // Positions a popup dropdown grid directly below its anchor control.
         // Converts through PointToScreen ? PointToClient so nested panels/groupboxes and
         // RTL mirroring are both handled automatically by WinForms (no manual RTL branch needed).
-        private void PositionDropdownGrid(DataGridView dgv, Control anchor)
+        private void PositionDropdownGrid(DataGridView dgv, Control anchor)        {
+           SalesPopupGridHelper.PositionDropdownGrid(this, dgv, anchor);
+       }
+
+       private void PositionCustomersDropdown()        {
+           SalesPopupGridHelper.PositionCustomersDropdown(this, customersDataGridView, txtCustomerSearch);
+       }
+
+       private void SetupCustomersDataGridView()
         {
-            Point pt = this.PointToClient(anchor.Parent.PointToScreen(anchor.Location));
-            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - dgv.Width));
-            dgv.Location = new Point(x, pt.Y + anchor.Height + 2);
-        }
+            if (customersDataGridView != null) return;
 
-        private void PositionCustomersDropdown()
-        {
-            Point pt = this.PointToClient(
-                txtCustomerSearch.Parent.PointToScreen(txtCustomerSearch.Location));
-            int x = Math.Max(0, Math.Min(pt.X, this.ClientSize.Width - customersDataGridView.Width));
-            customersDataGridView.Location = new Point(x, pt.Y + txtCustomerSearch.Height + 2);
-        }
-
-        private void SetupCustomersDataGridView()
-        {
-            if (customersDataGridView != null) return; // already created
-
-            customersDataGridView = new DataGridView();
-            customersDataGridView.ColumnCount = 6;
-
-            customersDataGridView.Size = new Size(520, 240);
+          customersDataGridView = new DataGridView();
+           customersDataGridView.ColumnCount = 6;
+           customersDataGridView.Size = new Size(520, 240);
             customersDataGridView.BorderStyle = BorderStyle.None;
             customersDataGridView.BackgroundColor = Color.White;
             customersDataGridView.AutoGenerateColumns = false;
             customersDataGridView.ReadOnly = true;
-            customersDataGridView.AllowUserToAddRows = false;
+           customersDataGridView.AllowUserToAddRows = false;
             customersDataGridView.AllowUserToDeleteRows = false;
             customersDataGridView.AllowUserToResizeRows = false;
             customersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             customersDataGridView.MultiSelect = false;
             customersDataGridView.RowHeadersVisible = false;
-            //Dock = DockStyle.Fill
-
-            customersDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            customersDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-
+            customersDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            customersDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             customersDataGridView.Columns[0].Name = "Code";
-            customersDataGridView.Columns[1].Name = "Name";
-            customersDataGridView.Columns[2].Name = "ID";
+           customersDataGridView.Columns[1].Name = "Name";
+           customersDataGridView.Columns[2].Name = "ID";
             customersDataGridView.Columns[3].Name = "Contact";
-            customersDataGridView.Columns[4].Name = "VAT No";
+           customersDataGridView.Columns[4].Name = "VAT No";
             customersDataGridView.Columns[5].Name = "Credit Limit";
-
             customersDataGridView.Columns[0].ReadOnly = true;
             customersDataGridView.Columns[1].ReadOnly = true;
-            customersDataGridView.Columns[2].Visible = false;
+           customersDataGridView.Columns[2].Visible = false;
             customersDataGridView.Columns[3].ReadOnly = true;
             customersDataGridView.Columns[4].ReadOnly = true;
             customersDataGridView.Columns[5].Visible = false;
-
             customersDataGridView.Columns[0].Width = 90;
             customersDataGridView.Columns[1].Width = 220;
             customersDataGridView.Columns[3].Width = 130;
             customersDataGridView.Columns[4].Width = 120;
 
-            //customersDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //customersDataGridView.AutoResizeColumns();
-
             this.customersDataGridView.CellClick += new DataGridViewCellEventHandler(customersDataGridView_CellClick);
             this.customersDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(customersDataGridView_KeyDown);
 
-            customersDataGridView.Visible = false;
+           customersDataGridView.Visible = false;
             this.Controls.Add(customersDataGridView);
             customersDataGridView.BringToFront();
-            StyleDropdownGrid(customersDataGridView);
-
+            SalesPopupGridHelper.ApplyGridStyling(customersDataGridView);
         }
 
         void customersDataGridView_KeyDown(object sender, KeyEventArgs e)
@@ -3940,7 +3633,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, "Œÿ√", "Error", "Error");
+                UiMessages.ShowError(ex.Message, "ÿÆÿ∑ÿ£", "Error", "Error");
             }
         }
 
@@ -4121,8 +3814,8 @@ namespace pos
             if (customerId <= 0)
             {
                 MessageBox.Show(
-                    lang == "ar-SA" ? "Ì—ÃÏ «Œ Ì«— «·⁄„Ì· ·‰Ê⁄ «·›« Ê—… «·÷—Ì»Ì… (ﬁÌ«”Ì…)." : "Please select a customer for Standard invoice type.",
-                    lang == "ar-SA" ? "„⁄«„·… «·»Ì⁄" : "Sale Transaction",
+                    lang == "ar-SA" ? "Ÿäÿ±ÿ¨Ÿâ ÿßÿÆÿ™Ÿäÿßÿ± ÿßŸÑÿπŸÖŸäŸÑ ŸÑŸÜŸàÿπ ÿßŸÑŸÅÿßÿ™Ÿàÿ±ÿ© ÿßŸÑÿ∂ÿ±Ÿäÿ®Ÿäÿ© (ŸÇŸäÿßÿ≥Ÿäÿ©)." : "Please select a customer for Standard invoice type.",
+                    lang == "ar-SA" ? "ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ" : "Sale Transaction",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
@@ -4137,8 +3830,8 @@ namespace pos
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     MessageBox.Show(
-                        lang == "ar-SA" ? "«·⁄„Ì· «·„Õœœ €Ì— „ÊÃÊœ." : "Selected customer not found.",
-                        lang == "ar-SA" ? "„⁄«„·… «·»Ì⁄" : "Sale Transaction",
+                        lang == "ar-SA" ? "ÿßŸÑÿπŸÖŸäŸÑ ÿßŸÑŸÖÿ≠ÿØÿØ ÿ∫Ÿäÿ± ŸÖŸàÿ¨ŸàÿØ." : "Selected customer not found.",
+                        lang == "ar-SA" ? "ŸÖÿπÿßŸÖŸÑÿ© ÿßŸÑÿ®Ÿäÿπ" : "Sale Transaction",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
                     );
@@ -4167,9 +3860,9 @@ namespace pos
             
                 if (missing.Count > 0)
                 {
-                    var caption = lang == "ar-SA" ? "›« Ê—… “« ﬂ« «·ﬁÌ«”Ì…" : "ZATCA Standard Invoice";
+                    var caption = lang == "ar-SA" ? "ŸÅÿßÿ™Ÿàÿ±ÿ© ÿ≤ÿßÿ™ŸÉÿß ÿßŸÑŸÇŸäÿßÿ≥Ÿäÿ©" : "ZATCA Standard Invoice";
                     var head = lang == "ar-SA"
-                        ? " ⁄–— „⁄«·Ã… «·›« Ê—… «·ﬁÌ«”Ì…. «·ÕﬁÊ· «·≈·“«„Ì… ·⁄‰Ê«‰ «·⁄„Ì· «·„›ﬁÊœ…:\n\n- "
+                        ? "ÿ™ÿπÿ∞ÿ± ŸÖÿπÿßŸÑÿ¨ÿ© ÿßŸÑŸÅÿßÿ™Ÿàÿ±ÿ© ÿßŸÑŸÇŸäÿßÿ≥Ÿäÿ©. ÿßŸÑÿ≠ŸÇŸàŸÑ ÿßŸÑÿ•ŸÑÿ≤ÿßŸÖŸäÿ© ŸÑÿπŸÜŸàÿßŸÜ ÿßŸÑÿπŸÖŸäŸÑ ÿßŸÑŸÖŸÅŸÇŸàÿØÿ©:\n\n- "
                         : "Cannot process Standard invoice. Missing mandatory customer address fields:\n\n- ";
                     // Localize field names
                     var localizedMissing = new List<string>();
@@ -4177,19 +3870,19 @@ namespace pos
                     {
                         switch (m)
                         {
-                            case "Registration Name": localizedMissing.Add(lang == "ar-SA" ? "«·«”„ «·ﬁ«‰Ê‰Ì (Registration Name)" : m); break;
-                            case "Country Name": localizedMissing.Add(lang == "ar-SA" ? "«”„ «·œÊ·…" : m); break;
-                            case "City Name": localizedMissing.Add(lang == "ar-SA" ? "«”„ «·„œÌ‰…" : m); break;
-                            case "City Subdivision Name": localizedMissing.Add(lang == "ar-SA" ? "«”„  ﬁ”Ì„ «·„œÌ‰…" : m); break;
-                            case "Street Name": localizedMissing.Add(lang == "ar-SA" ? "«”„ «·‘«—⁄" : m); break;
-                            case "Building Number": localizedMissing.Add(lang == "ar-SA" ? "—ﬁ„ «·„»‰Ï" : m); break;
-                            case "Postal Code": localizedMissing.Add(lang == "ar-SA" ? "«·—„“ «·»—ÌœÌ" : m); break;
+                            case "Registration Name": localizedMissing.Add(lang == "ar-SA" ? "ÿßŸÑÿßÿ≥ŸÖ ÿßŸÑŸÇÿßŸÜŸàŸÜŸä (Registration Name)" : m); break;
+                            case "Country Name": localizedMissing.Add(lang == "ar-SA" ? "ÿßÿ≥ŸÖ ÿßŸÑÿØŸàŸÑÿ©" : m); break;
+                            case "City Name": localizedMissing.Add(lang == "ar-SA" ? "ÿßÿ≥ŸÖ ÿßŸÑŸÖÿØŸäŸÜÿ©" : m); break;
+                            case "City Subdivision Name": localizedMissing.Add(lang == "ar-SA" ? "ÿßÿ≥ŸÖ ÿ™ŸÇÿ≥ŸäŸÖ ÿßŸÑŸÖÿØŸäŸÜÿ©" : m); break;
+                            case "Street Name": localizedMissing.Add(lang == "ar-SA" ? "ÿßÿ≥ŸÖ ÿßŸÑÿ¥ÿßÿ±ÿπ" : m); break;
+                            case "Building Number": localizedMissing.Add(lang == "ar-SA" ? "ÿ±ŸÇŸÖ ÿßŸÑŸÖÿ®ŸÜŸâ" : m); break;
+                            case "Postal Code": localizedMissing.Add(lang == "ar-SA" ? "ÿßŸÑÿ±ŸÖÿ≤ ÿßŸÑÿ®ÿ±ŸäÿØŸä" : m); break;
                             default: localizedMissing.Add(m); break;
                         }
                     }
 
                     var proceedQuestion = lang == "ar-SA"
-                         ? "\n\nÂ·  —€» »«·„ «»⁄… ⁄·Ï √Ì Õ«·ø"
+                         ? "\n\nŸáŸÑ ÿ™ÿ±ÿ∫ÿ® ÿ®ÿßŸÑŸÖÿ™ÿßÿ®ÿπÿ© ÿπŸÑŸâ ÿ£Ÿä ÿ≠ÿßŸÑÿü"
                          : "\n\nDo you want to proceed anyway?";
 
                     var result = MessageBox.Show(
@@ -4215,8 +3908,8 @@ namespace pos
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    (lang == "ar-SA" ? "›‘· «· Õﬁﬁ „‰ ⁄‰Ê«‰ «·⁄„Ì·.\n" : "Failed to validate customer address.\n") + ex.Message,
-                    lang == "ar-SA" ? "Œÿ√" : "Error",
+                    (lang == "ar-SA" ? "ŸÅÿ¥ŸÑ ÿßŸÑÿ™ÿ≠ŸÇŸÇ ŸÖŸÜ ÿπŸÜŸàÿßŸÜ ÿßŸÑÿπŸÖŸäŸÑ.\n" : "Failed to validate customer address.\n") + ex.Message,
+                    lang == "ar-SA" ? "ÿÆÿ∑ÿ£" : "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 ); 

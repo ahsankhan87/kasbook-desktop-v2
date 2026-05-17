@@ -543,6 +543,8 @@ namespace pos
                         int userLevel = 0;
                         double maxDiscountPercent = 0;
                         double maxDiscountAmount = 0;
+                        bool AllowUserCreditSale = false;
+                        double UserSaleInvoiceLimit = 0;
 
                         if (dt != null && dt.Rows.Count > 0)
                         {
@@ -565,6 +567,10 @@ namespace pos
                                 maxDiscountPercent = Convert.ToDouble(dr["max_discount_percent"]);
                             if (dr.Table.Columns.Contains("max_discount_amount") && dr["max_discount_amount"] != DBNull.Value)
                                 maxDiscountAmount = Convert.ToDouble(dr["max_discount_amount"]);
+                            if(dr.Table.Columns.Contains("cash_sales_amount") && dr["cash_sales_amount"] != DBNull.Value)
+                                UserSaleInvoiceLimit = Convert.ToDouble(dr["cash_sales_amount"]);
+                            if(dr.Table.Columns.Contains("allow_credit_sales") && dr["allow_credit_sales"] != DBNull.Value)
+                                AllowUserCreditSale = Convert.ToBoolean(dr["allow_credit_sales"]);
                         }
 
                         var branchesBLL = new BranchesBLL();
@@ -596,7 +602,9 @@ namespace pos
                             FiscalYearFrom = fyFrom,
                             FiscalYearTo = fyTo,
                             MaxDiscountPercent = maxDiscountPercent,
-                            MaxDiscountAmount = maxDiscountAmount
+                            MaxDiscountAmount = maxDiscountAmount,
+                            AllowUserCreditSale = AllowUserCreditSale,
+                            UserSaleInvoiceLimit = UserSaleInvoiceLimit
                         };
                     });
 
@@ -616,6 +624,8 @@ namespace pos
                     // Set discount limits in session
                     UsersModal.logged_in_max_discount_percent = userData.MaxDiscountPercent;
                     UsersModal.logged_in_max_discount_amount = userData.MaxDiscountAmount;
+                    UsersModal.logged_in_user_allow_credit_sale = userData.AllowUserCreditSale;
+                    UsersModal.logged_in_user_sale_invoice_limit = userData.UserSaleInvoiceLimit;
 
                     // IMPORTANT: Apply language before creating main form so resources load in correct culture.
                     var lang = string.IsNullOrWhiteSpace(UsersModal.logged_in_lang) ? "en-US" : UsersModal.logged_in_lang;

@@ -17,17 +17,30 @@ namespace pos.Sales.Helpers
         /// </summary>
         public static void PopulateCustomersDropdown(ComboBox cmb_customers)
         {
+            PopulateCustomersDropdown(cmb_customers, includeAddNewRow: true);
+        }
+
+        public static void PopulateCustomersDropdown(ComboBox cmb_customers, bool includeAddNewRow)
+        {
             CustomerBLL customerBLL_obj = new CustomerBLL();
             DataTable dt = customerBLL_obj.GetAll();
-            
-            DataRow dr = dt.NewRow();
-            dr["id"] = 0;
-            dr["name"] = "--Select--";
-            dt.Rows.InsertAt(dr, 0);
 
-            cmb_customers.DataSource = dt;
-            cmb_customers.DisplayMember = "name";
+            DataRow emptyRow = dt.NewRow();
+            emptyRow[0] = 0;
+            emptyRow[2] = string.Empty;
+            dt.Rows.InsertAt(emptyRow, 0);
+
+            if (includeAddNewRow)
+            {
+                DataRow addNewRow = dt.NewRow();
+                addNewRow[0] = "-1";
+                addNewRow[2] = "ADD NEW";
+                dt.Rows.InsertAt(addNewRow, 1);
+            }
+
+            cmb_customers.DisplayMember = "first_name";
             cmb_customers.ValueMember = "id";
+            cmb_customers.DataSource = dt;
         }
 
         /// <summary>
@@ -36,16 +49,16 @@ namespace pos.Sales.Helpers
         public static void PopulateEmployeesDropdown(ComboBox cmb_employees)
         {
             EmployeeBLL emp_Obj = new EmployeeBLL();
-            DataTable dt = emp_Obj.GetAll(); //GetRecord("*", "pos_employees");
-            
-            DataRow dr = dt.NewRow();
-            dr["id"] = 0;
-            dr["name"] = "--Select--";
-            dt.Rows.InsertAt(dr, 0);
+            DataTable dt = emp_Obj.GetAll();
 
-            cmb_employees.DataSource = dt;
-            cmb_employees.DisplayMember = "name";
+            DataRow emptyRow = dt.NewRow();
+            emptyRow[0] = 0;
+            emptyRow[2] = "Select Employee";
+            dt.Rows.InsertAt(emptyRow, 0);
+
+            cmb_employees.DisplayMember = "first_name";
             cmb_employees.ValueMember = "id";
+            cmb_employees.DataSource = dt;
         }
 
         /// <summary>
@@ -54,16 +67,16 @@ namespace pos.Sales.Helpers
         public static void PopulatePaymentTermsDropdown(ComboBox cmb_payment_terms)
         {
             PaymentTermsBLL paymentTermsBLL_obj = new PaymentTermsBLL();
-            DataTable dt = paymentTermsBLL_obj.GetAll(); //.GetRecord("*", "pos_payment_terms");
-            
-            DataRow dr = dt.NewRow();
-            dr["id"] = 0;
-            dr["name"] = "--Select--";
-            dt.Rows.InsertAt(dr, 0);
+            DataTable dt = paymentTermsBLL_obj.GetAll();
 
-            cmb_payment_terms.DataSource = dt;
-            cmb_payment_terms.DisplayMember = "name";
+            DataRow emptyRow = dt.NewRow();
+            emptyRow[0] = 0;
+            emptyRow[4] = string.Empty;
+            dt.Rows.InsertAt(emptyRow, 0);
+
+            cmb_payment_terms.DisplayMember = "description";
             cmb_payment_terms.ValueMember = "id";
+            cmb_payment_terms.DataSource = dt;
         }
 
         /// <summary>
@@ -72,16 +85,11 @@ namespace pos.Sales.Helpers
         public static void PopulatePaymentMethodsDropdown(ComboBox cmb_payment_method)
         {
             PaymentMethodBLL paymentMethodBLL_obj = new PaymentMethodBLL();
-            DataTable dt = paymentMethodBLL_obj.GetAll(); //GetRecord("*", "pos_payment_methods");
-            
-            DataRow dr = dt.NewRow();
-            dr["id"] = 0;
-            dr["name"] = "--Select--";
-            dt.Rows.InsertAt(dr, 0);
+            DataTable dt = paymentMethodBLL_obj.GetAll();
 
-            cmb_payment_method.DataSource = dt;
-            cmb_payment_method.DisplayMember = "name";
+            cmb_payment_method.DisplayMember = "description";
             cmb_payment_method.ValueMember = "id";
+            cmb_payment_method.DataSource = dt;
         }
 
         /// <summary>
@@ -89,21 +97,28 @@ namespace pos.Sales.Helpers
         /// </summary>
         public static void PopulateSaleTypeDropdown(ComboBox cmb_sale_type)
         {
+            PopulateSaleTypeDropdown(cmb_sale_type, "en-US", false);
+        }
+
+        public static void PopulateSaleTypeDropdown(ComboBox cmb_sale_type, string lang, bool allowCreditSales)
+        {
             DataTable dt = new DataTable();
-            dt.Columns.Add("id", typeof(string));
-            dt.Columns.Add("name", typeof(string));
+            dt.Columns.Add("id");
+            dt.Columns.Add("name");
 
-            dt.Rows.Add("0", "--Select--");
-            dt.Rows.Add("Cash", "Cash");
-            dt.Rows.Add("Credit", "Credit");
-            dt.Rows.Add("Return", "Return");
-            dt.Rows.Add("ICT", "ICT");
-            dt.Rows.Add("Quotation", "Quotation");
+            dt.Rows.Add("Cash", lang == "ar-SA" ? "نقدي" : "Cash");
 
-            cmb_sale_type.DataSource = dt;
+            if (allowCreditSales)
+                dt.Rows.Add("Credit", lang == "ar-SA" ? "اجل" : "Credit");
+
+            dt.Rows.Add("Quotation", lang == "ar-SA" ? "عرض سعر" : "Quotation");
+            dt.Rows.Add("Gift", lang == "ar-SA" ? "هدية" : "Gift");
+            dt.Rows.Add("ICT", lang == "ar_SA" ? "نقل قطع الغيار بين الشركات" : "ICT");
+
             cmb_sale_type.DisplayMember = "name";
             cmb_sale_type.ValueMember = "id";
-            cmb_sale_type.SelectedValue = "0";
+            cmb_sale_type.DataSource = dt;
+            cmb_sale_type.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -111,36 +126,31 @@ namespace pos.Sales.Helpers
         /// </summary>
         public static void PopulateInvoiceSubtypeDropdown(ComboBox cmb_invoice_subtype_code, bool useZatcaEInvoice)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("code", typeof(string));
-            dt.Columns.Add("name", typeof(string));
-
-            if (useZatcaEInvoice)
-            {
-                dt.Rows.Add("01", "Standard Invoice (Tax Invoice)");
-                dt.Rows.Add("02", "Simplified Invoice");
-            }
-            else
-            {
-                dt.Rows.Add("02", "Simplified Invoice");
-            }
-
-            cmb_invoice_subtype_code.DataSource = dt;
-            cmb_invoice_subtype_code.DisplayMember = "name";
-            cmb_invoice_subtype_code.ValueMember = "code";
-            cmb_invoice_subtype_code.SelectedValue = "02";
+            PopulateInvoiceSubtypeDropdown(cmb_invoice_subtype_code, "en-US", useZatcaEInvoice);
         }
 
-        /// <summary>
-        /// Gets account IDs from company settings.
-        /// </summary>
+        public static void PopulateInvoiceSubtypeDropdown(ComboBox cmb_invoice_subtype_code, string lang, bool useZatcaEInvoice)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id", typeof(string));
+            dt.Columns.Add("name", typeof(string));
+
+            dt.Rows.Add("02", lang == "ar-SA" ? "فاتورة مبسطة" : "Simplified Invoice");
+            dt.Rows.Add("01", lang == "ar-SA" ? "فاتورة ضريبية" : "Standard Invoice");
+
+            cmb_invoice_subtype_code.DisplayMember = "name";
+            cmb_invoice_subtype_code.ValueMember = "id";
+            cmb_invoice_subtype_code.DataSource = dt;
+            cmb_invoice_subtype_code.SelectedIndex = 0;
+        }
+
         public static CompanyAccounts GetCompanyAccountIds()
         {
             GeneralBLL objBLL = new GeneralBLL();
             DataTable companies_dt = objBLL.GetRecord("TOP 1 *", "pos_companies");
-            
+
             var accounts = new CompanyAccounts();
-            
+
             foreach (DataRow dr in companies_dt.Rows)
             {
                 accounts.CashAccountId = (int)dr["cash_acc_id"];
@@ -150,41 +160,30 @@ namespace pos.Sales.Helpers
                 accounts.SalesDiscountAccId = (int)dr["sales_discount_acc_id"];
                 accounts.InventoryAccId = (int)dr["inventory_acc_id"];
                 accounts.PurchasesAccId = (int)dr["purchases_acc_id"];
+
                 
-                // Optional: cash sales amount limit and credit sales settings
-                if (dr.Table.Columns.Contains("cash_sales_amount_limit"))
-                {
-                    accounts.CashSalesAmountLimit = Convert.ToDouble(dr["cash_sales_amount_limit"]);
-                }
-                
-                if (dr.Table.Columns.Contains("allow_credit_sales"))
-                {
-                    accounts.AllowCreditSales = Convert.ToBoolean(dr["allow_credit_sales"]);
-                }
             }
-            
+
             return accounts;
         }
 
-        /// <summary>
-        /// Fills the locations grid combo for a specific row.
-        /// </summary>
         public static void FillLocationsGridCombo(DataGridView grid_sales, int rowIndex, string product_id, string selectedValue = "DEF")
         {
-            LocationsBLL locationBLL_obj = new LocationsBLL();
-            DataTable dt = locationBLL_obj.GetAll(); //.GetRecord("*", "pos_locations");
-            
-            DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)grid_sales.Rows[rowIndex].Cells["location_id"];
+            GeneralBLL generalBLL_obj = new GeneralBLL();
+            DataTable dt = generalBLL_obj.GetRecord("loc_code as location_code", "pos_product_stocks WHERE item_id=" + product_id + " AND  qty > 0 GROUP BY loc_code");
+
+            if (dt.Rows.Count <= 0)
+                dt = generalBLL_obj.GetRecord("L.code as location_code,L.name", "pos_locations L");
+
+            DataGridViewComboBoxCell cell = new DataGridViewComboBoxCell();
             cell.DataSource = dt;
-            cell.DisplayMember = "name";
-            cell.ValueMember = "id";
-            cell.Value = selectedValue;
+            cell.DisplayMember = "location_code";
+            cell.ValueMember = "location_code";
+            grid_sales.Rows[rowIndex].Cells["location_code"] = cell;
+            grid_sales.Rows[rowIndex].Cells["location_code"].Value = dt.Rows[0]["location_code"].ToString();
         }
     }
 
-    /// <summary>
-    /// Data class to hold company account configuration.
-    /// </summary>
     public class CompanyAccounts
     {
         public int CashAccountId { get; set; }

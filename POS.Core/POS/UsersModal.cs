@@ -34,6 +34,8 @@ namespace POS.Core
         public static double logged_in_max_discount_percent { get; set; }
         public static double logged_in_max_discount_amount { get; set; }
 
+        public static bool logged_in_user_allow_credit_sale { get; set; }
+        public static double logged_in_user_sale_invoice_limit { get; set; }
         ///
 
         public int id { get; set; }
@@ -78,6 +80,7 @@ namespace POS.Core
         public double max_discount_amount { get; set; }   // e.g., 100 fixed max
 
         ///
+
 
         public int user_commission_percent { get; set; }
 
