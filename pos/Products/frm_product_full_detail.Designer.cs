@@ -134,6 +134,7 @@
             this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_refresh = new System.Windows.Forms.Button();
+            this.btn_productAdjustment = new System.Windows.Forms.Button();
             this.btn_other_stock = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
@@ -232,8 +233,8 @@
             // 
             // btn_cancel
             // 
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -872,6 +873,7 @@
             this.groupBox2.Controls.Add(this.btn_cancel);
             this.groupBox2.Controls.Add(this.btn_save);
             this.groupBox2.Controls.Add(this.btn_refresh);
+            this.groupBox2.Controls.Add(this.btn_productAdjustment);
             this.groupBox2.Controls.Add(this.btn_other_stock);
             this.groupBox2.Controls.Add(this.btn_delete);
             this.groupBox2.Controls.Add(this.btn_update);
@@ -887,6 +889,13 @@
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
+            // 
+            // btn_productAdjustment
+            // 
+            resources.ApplyResources(this.btn_productAdjustment, "btn_productAdjustment");
+            this.btn_productAdjustment.Name = "btn_productAdjustment";
+            this.btn_productAdjustment.UseVisualStyleBackColor = true;
+            this.btn_productAdjustment.Click += new System.EventHandler(this.btn_other_stock_Click);
             // 
             // btn_other_stock
             // 
@@ -1052,5 +1061,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txt_margin_percent;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btn_productAdjustment;
     }
 }
