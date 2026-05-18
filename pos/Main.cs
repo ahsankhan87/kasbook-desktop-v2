@@ -381,6 +381,7 @@ namespace pos
                 if (allTransactionToolStripMenuItem1 != null) allTransactionToolStripMenuItem1.Tag = Permissions.Sales_View;
                 if (salesReturnToolStripMenuItem != null) salesReturnToolStripMenuItem.Tag = Permissions.Sales_Return;
                 if (salesReportToolStripMenuItem1 != null) salesReportToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
+                if (dailySaleReportToolStripMenuItem != null) dailySaleReportToolStripMenuItem.Tag = Permissions.Reports_SalesView;
                 if (newTransactionToolStripMenuItem != null) newTransactionToolStripMenuItem.Tag = Permissions.Purchases_Create;
                 if (allPurchasesToolStripMenuItem != null) allPurchasesToolStripMenuItem.Tag = Permissions.Purchases_View;
                 if (purchaseReturnToolStripMenuItem != null) purchaseReturnToolStripMenuItem.Tag = Permissions.Purchases_Return;
@@ -390,16 +391,20 @@ namespace pos
                 if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
                 if (zatcaInvoicesToolStripMenuItem != null) zatcaInvoicesToolStripMenuItem.Tag = Permissions.Sales_Zatca_View;
                 if (generateZATCACSIDToolStripMenuItem != null) generateZATCACSIDToolStripMenuItem.Tag = Permissions.Sales_Zatca_Configure;
+                if (debitNoteToolStripMenuItem != null) debitNoteToolStripMenuItem.Tag = Permissions.Sales_DebitNote;
 
                 // Inventory / Products
                 if (productsServicesToolStripMenuItem != null) productsServicesToolStripMenuItem.Tag = Permissions.Inventory_View;
                 if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
                 if (labelsToolStripMenuItem != null) labelsToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (quantityOnHandToolStripMenuItem != null) quantityOnHandToolStripMenuItem.Tag = Permissions.Reports_InventoryView;
+                if (lowStockReportToolStripMenuItem != null) lowStockReportToolStripMenuItem.Tag = Permissions.Reports_InventoryView;
 
                 // Customers
                 if (customersToolStripMenuItem != null) customersToolStripMenuItem.Tag = Permissions.Customers_View;
 
                 // Finance / Reports
+                if (journalToolStripMenuItem != null) journalToolStripMenuItem.Tag = Permissions.Journal_View;
                 if (journalDaybookToolStripMenuItem != null) journalDaybookToolStripMenuItem.Tag = Permissions.Finance_View;
                 if (trialBalanceToolStripMenuItem != null) trialBalanceToolStripMenuItem.Tag = Permissions.Finance_Report;
                 if (profitLossToolStripMenuItem != null) profitLossToolStripMenuItem.Tag = Permissions.Finance_Report;
@@ -407,11 +412,15 @@ namespace pos
                 if (accountReportToolStripMenuItem != null) accountReportToolStripMenuItem.Tag = Permissions.Finance_Report;
                 if (groupReportToolStripMenuItem != null) groupReportToolStripMenuItem.Tag = Permissions.Finance_Report;
                 if (banksReportToolStripMenuItem != null) banksReportToolStripMenuItem.Tag = Permissions.Finance_Report;
+                if (accountPayableToolStripMenuItem != null) accountPayableToolStripMenuItem.Tag = Permissions.Reports_AccountsView;
+                if (accountReceivableToolStripMenuItem != null) accountReceivableToolStripMenuItem.Tag = Permissions.Reports_AccountsView;
+                if (vATDashboardToolStripMenuItem != null) vATDashboardToolStripMenuItem.Tag = Permissions.Reports_FinanceView;
 
                 // Security admin
                 if (permissionsToolStripMenuItem != null) permissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
                 if (rolePermissionsToolStripMenuItem != null) rolePermissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_Create;
                 if (userClaimsToolStripMenuItem != null) userClaimsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
+                if (applicationLogsToolStripMenuItem != null) applicationLogsToolStripMenuItem.Tag = Permissions.ApplicationLogs_View;
 
                 // users
                 if (usersToolStripMenuItem != null) usersToolStripMenuItem.Tag = Permissions.Security_Users_View;
@@ -422,6 +431,22 @@ namespace pos
                 if (brandToolStripMenuItem != null) brandToolStripMenuItem.Tag = Permissions.Inventory_View;
                 if (branchToolStripMenuItem != null) branchToolStripMenuItem.Tag = Permissions.Branches_View;
                 if (profileToolStripMenuItem != null) profileToolStripMenuItem.Tag = Permissions.Profile_View;
+                if (financialYearsToolStripMenuItem != null) financialYearsToolStripMenuItem.Tag = Permissions.FinancialYears_View;
+
+                // Accounts / Banks / Expenses
+                if (groupsToolStripMenuItem != null) groupsToolStripMenuItem.Tag = Permissions.Group_View;
+                if (accountsToolStripMenuItem1 != null) accountsToolStripMenuItem1.Tag = Permissions.Account_View;
+                if (chartOfAccountsToolStripMenuItem != null) chartOfAccountsToolStripMenuItem.Tag = Permissions.Account_View;
+                if (banksToolStripMenuItem != null) banksToolStripMenuItem.Tag = Permissions.Bank_View;
+                if (expensesToolStripMenuItem != null) expensesToolStripMenuItem.Tag = Permissions.Expenses_View;
+
+                // ICT
+                if (iCTToolStripMenuItem != null) iCTToolStripMenuItem.Tag = Permissions.Sales_ictTransactions_View;
+                if (iCTRequestToolStripMenuItem != null) iCTRequestToolStripMenuItem.Tag = Permissions.Sales_ictTransactions_Request;
+                if (iCTReleaseToolStripMenuItem != null) iCTReleaseToolStripMenuItem.Tag = Permissions.Sales_ictTransactions_Release;
+
+                // Discounts
+                if (discountSchemesToolStripMenuItem != null) discountSchemesToolStripMenuItem.Tag = Permissions.Discounts_ManageSchemes;
             }
             catch { /* ignore if some items are not present in this build */ }
 

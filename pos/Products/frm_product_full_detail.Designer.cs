@@ -60,6 +60,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txt_barcode = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_translate = new System.Windows.Forms.Button();
             this.txt_alt_item_number = new System.Windows.Forms.TextBox();
             this.txt_packet_qty = new System.Windows.Forms.TextBox();
@@ -89,13 +90,9 @@
             this.txt_pur_dmnd_qty = new System.Windows.Forms.TextBox();
             this.txt_sale_dmnd_qty = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.txt_unit_price_2 = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
             this.txt_name_ar = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.txt_unit_price = new System.Windows.Forms.TextBox();
             this.txt_demand_qty = new System.Windows.Forms.TextBox();
             this.txt_cost_price = new System.Windows.Forms.TextBox();
             this.cmb_item_type = new System.Windows.Forms.ComboBox();
@@ -112,6 +109,15 @@
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.btn_upload_picture = new System.Windows.Forms.Button();
+            this.cmb_discount_scheme = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txt_unit_price_2 = new System.Windows.Forms.TextBox();
+            this.txt_unit_price = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_margin_percent = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.grid_movements = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -134,19 +140,16 @@
             this.btn_blank = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cmb_discount_scheme = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.Products_tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_movements)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -291,13 +294,9 @@
             this.tableLayoutPanel1.Controls.Add(this.txt_pur_dmnd_qty, 1, 13);
             this.tableLayoutPanel1.Controls.Add(this.txt_sale_dmnd_qty, 1, 14);
             this.tableLayoutPanel1.Controls.Add(this.label33, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label19, 0, 17);
             this.tableLayoutPanel1.Controls.Add(this.label26, 0, 15);
-            this.tableLayoutPanel1.Controls.Add(this.txt_unit_price_2, 1, 17);
-            this.tableLayoutPanel1.Controls.Add(this.label32, 0, 16);
             this.tableLayoutPanel1.Controls.Add(this.txt_name_ar, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label18, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.txt_unit_price, 1, 16);
             this.tableLayoutPanel1.Controls.Add(this.txt_demand_qty, 1, 12);
             this.tableLayoutPanel1.Controls.Add(this.txt_cost_price, 1, 15);
             this.tableLayoutPanel1.Controls.Add(this.cmb_item_type, 1, 9);
@@ -316,6 +315,13 @@
             this.tableLayoutPanel1.Controls.Add(this.btn_upload_picture, 4, 10);
             this.tableLayoutPanel1.Controls.Add(this.cmb_discount_scheme, 4, 12);
             this.tableLayoutPanel1.Controls.Add(this.label7, 3, 12);
+            this.tableLayoutPanel1.Controls.Add(this.txt_unit_price_2, 1, 18);
+            this.tableLayoutPanel1.Controls.Add(this.txt_unit_price, 1, 17);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 0, 18);
+            this.tableLayoutPanel1.Controls.Add(this.label32, 0, 17);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 16);
+            this.tableLayoutPanel1.Controls.Add(this.txt_margin_percent, 2, 16);
+            this.tableLayoutPanel1.Controls.Add(this.label9, 1, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // txt_barcode
@@ -323,6 +329,14 @@
             resources.ApplyResources(this.txt_barcode, "txt_barcode");
             this.tableLayoutPanel1.SetColumnSpan(this.txt_barcode, 2);
             this.txt_barcode.Name = "txt_barcode";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Name = "pictureBox1";
+            this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 4);
+            this.pictureBox1.TabStop = false;
             // 
             // btn_translate
             // 
@@ -494,26 +508,10 @@
             resources.ApplyResources(this.label33, "label33");
             this.label33.Name = "label33";
             // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
             // label26
             // 
             resources.ApplyResources(this.label26, "label26");
             this.label26.Name = "label26";
-            // 
-            // txt_unit_price_2
-            // 
-            resources.ApplyResources(this.txt_unit_price_2, "txt_unit_price_2");
-            this.tableLayoutPanel1.SetColumnSpan(this.txt_unit_price_2, 2);
-            this.txt_unit_price_2.Name = "txt_unit_price_2";
-            // 
-            // label32
-            // 
-            resources.ApplyResources(this.label32, "label32");
-            this.label32.Name = "label32";
             // 
             // txt_name_ar
             // 
@@ -525,12 +523,6 @@
             // 
             resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
-            // 
-            // txt_unit_price
-            // 
-            resources.ApplyResources(this.txt_unit_price, "txt_unit_price");
-            this.tableLayoutPanel1.SetColumnSpan(this.txt_unit_price, 2);
-            this.txt_unit_price.Name = "txt_unit_price";
             // 
             // txt_demand_qty
             // 
@@ -644,6 +636,57 @@
             this.btn_upload_picture.Name = "btn_upload_picture";
             this.btn_upload_picture.UseVisualStyleBackColor = true;
             this.btn_upload_picture.Click += new System.EventHandler(this.btn_upload_picture_Click);
+            // 
+            // cmb_discount_scheme
+            // 
+            resources.ApplyResources(this.cmb_discount_scheme, "cmb_discount_scheme");
+            this.cmb_discount_scheme.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_discount_scheme.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_discount_scheme.FormattingEnabled = true;
+            this.cmb_discount_scheme.Name = "cmb_discount_scheme";
+            this.cmb_discount_scheme.SelectedIndexChanged += new System.EventHandler(this.cmb_units_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // txt_unit_price_2
+            // 
+            resources.ApplyResources(this.txt_unit_price_2, "txt_unit_price_2");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_unit_price_2, 2);
+            this.txt_unit_price_2.Name = "txt_unit_price_2";
+            // 
+            // txt_unit_price
+            // 
+            resources.ApplyResources(this.txt_unit_price, "txt_unit_price");
+            this.tableLayoutPanel1.SetColumnSpan(this.txt_unit_price, 2);
+            this.txt_unit_price.Name = "txt_unit_price";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label32
+            // 
+            resources.ApplyResources(this.label32, "label32");
+            this.label32.Name = "label32";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // txt_margin_percent
+            // 
+            resources.ApplyResources(this.txt_margin_percent, "txt_margin_percent");
+            this.txt_margin_percent.Name = "txt_margin_percent";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
             // 
             // tabPage3
             // 
@@ -879,28 +922,6 @@
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Name = "pictureBox1";
-            this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 4);
-            this.pictureBox1.TabStop = false;
-            // 
-            // cmb_discount_scheme
-            // 
-            resources.ApplyResources(this.cmb_discount_scheme, "cmb_discount_scheme");
-            this.cmb_discount_scheme.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_discount_scheme.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_discount_scheme.FormattingEnabled = true;
-            this.cmb_discount_scheme.Name = "cmb_discount_scheme";
-            this.cmb_discount_scheme.SelectedIndexChanged += new System.EventHandler(this.cmb_units_SelectedIndexChanged);
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
             // frm_product_full_detail
             // 
             resources.ApplyResources(this, "$this");
@@ -923,11 +944,11 @@
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_movements)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1028,5 +1049,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn username;
         private System.Windows.Forms.ComboBox cmb_discount_scheme;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_margin_percent;
+        private System.Windows.Forms.Label label9;
     }
 }

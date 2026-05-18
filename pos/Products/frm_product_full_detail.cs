@@ -107,7 +107,30 @@ namespace pos
             if (txt_pur_dmnd_qty != null) txt_pur_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
             if (txt_sale_dmnd_qty != null) txt_sale_dmnd_qty.KeyPress += NumericTextBox_KeyPress;
             if (txt_restock_level != null) txt_restock_level.KeyPress += NumericTextBox_KeyPress;
+            if (txt_margin_percent != null)
+            {
+                txt_margin_percent.KeyPress += NumericTextBox_KeyPress;
+                txt_margin_percent.TextChanged += txt_margin_percent_TextChanged;
+            }
             if (txt_part_number != null) txt_part_number.Leave += txt_part_number_Leave;
+        }
+
+        private void txt_margin_percent_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_margin_percent.Text))
+                return;
+
+            decimal costPrice;
+            decimal marginPercent;
+
+            if (!decimal.TryParse(txt_cost_price.Text, out costPrice))
+                return;
+
+            if (!decimal.TryParse(txt_margin_percent.Text, out marginPercent))
+                return;
+
+            var unitPrice = costPrice + (costPrice * marginPercent / 100m);
+            txt_unit_price.Text = Math.Round(unitPrice, 4).ToString("0.####");
         }
 
         private void StyleProductForm()
@@ -215,6 +238,20 @@ namespace pos
                 txt_cost_price.Text = Math.Round(Convert.ToDecimal(myProductView["avg_cost"]), 4).ToString();
                 txt_unit_price.Text = Math.Round(Convert.ToDecimal( myProductView["unit_price"]), 4).ToString();
                 txt_unit_price_2.Text = Math.Round(Convert.ToDecimal(myProductView["unit_price_2"]), 4).ToString();
+
+                decimal loadedCostPrice;
+                decimal loadedUnitPrice;
+                if (decimal.TryParse(txt_cost_price.Text, out loadedCostPrice) &&
+                    decimal.TryParse(txt_unit_price.Text, out loadedUnitPrice) &&
+                    loadedCostPrice > 0)
+                {
+                    var marginPercent = ((loadedUnitPrice - loadedCostPrice) / loadedCostPrice) * 100m;
+                    txt_margin_percent.Text = Math.Round(marginPercent, 4).ToString("0.####");
+                }
+                else
+                {
+                    txt_margin_percent.Text = "";
+                }
                 txt_description.Text = myProductView["description"].ToString();
                 //txt_expiry_date.Text = myProductView["expiry_date"].ToString();
 
@@ -889,6 +926,7 @@ namespace pos
             pictureBox1.Image = null;
             cmb_discount_scheme.SelectedIndex = 0;
             
+            txt_margin_percent.Text = "";
         }
 
         private void load_product_movements(string item_number)
