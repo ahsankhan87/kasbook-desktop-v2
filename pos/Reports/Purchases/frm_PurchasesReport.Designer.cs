@@ -29,21 +29,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_PurchasesReport));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_search = new System.Windows.Forms.TextBox();
             this.txtSupplierSearch = new System.Windows.Forms.TextBox();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txt_product_name = new System.Windows.Forms.TextBox();
-            this.txt_product_code = new System.Windows.Forms.TextBox();
             this.Btn_print = new System.Windows.Forms.Button();
             this.Btn_export = new System.Windows.Forms.Button();
             this.btn_search = new System.Windows.Forms.Button();
@@ -60,6 +59,7 @@
             this.purchase_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplier_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loc_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,14 +76,13 @@
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.txtSupplierSearch);
             this.panel1.Controls.Add(this.CmbCondition);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.cmb_employees);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.txt_product_name);
-            this.panel1.Controls.Add(this.txt_product_code);
             this.panel1.Controls.Add(this.Btn_print);
             this.panel1.Controls.Add(this.Btn_export);
             this.panel1.Controls.Add(this.btn_search);
@@ -95,6 +94,11 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Name = "panel1";
+            // 
+            // txt_search
+            // 
+            resources.ApplyResources(this.txt_search, "txt_search");
+            this.txt_search.Name = "txt_search";
             // 
             // txtSupplierSearch
             // 
@@ -131,17 +135,6 @@
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            // 
-            // txt_product_name
-            // 
-            resources.ApplyResources(this.txt_product_name, "txt_product_name");
-            this.txt_product_name.Name = "txt_product_name";
-            // 
-            // txt_product_code
-            // 
-            resources.ApplyResources(this.txt_product_code, "txt_product_code");
-            this.txt_product_code.Name = "txt_product_code";
-            this.txt_product_code.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_product_code_KeyDown);
             // 
             // Btn_print
             // 
@@ -226,6 +219,7 @@
             this.purchase_date,
             this.invoice_no,
             this.supplier_name,
+            this.item_code,
             this.product_name,
             this.loc_code,
             this.quantity,
@@ -272,6 +266,13 @@
             this.supplier_name.Name = "supplier_name";
             this.supplier_name.ReadOnly = true;
             // 
+            // item_code
+            // 
+            this.item_code.DataPropertyName = "item_code";
+            resources.ApplyResources(this.item_code, "item_code");
+            this.item_code.Name = "item_code";
+            this.item_code.ReadOnly = true;
+            // 
             // product_name
             // 
             this.product_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -292,9 +293,9 @@
             // quantity
             // 
             this.quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.quantity.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.quantity.DefaultCellStyle = dataGridViewCellStyle13;
             this.quantity.FillWeight = 70F;
             resources.ApplyResources(this.quantity, "quantity");
             this.quantity.Name = "quantity";
@@ -303,9 +304,9 @@
             // cost_price
             // 
             this.cost_price.DataPropertyName = "cost_price";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N2";
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle14;
             this.cost_price.FillWeight = 70F;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
@@ -314,10 +315,10 @@
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle15;
             this.discount_value.FillWeight = 70F;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
@@ -326,10 +327,10 @@
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle16;
             this.total.FillWeight = 80F;
             resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
@@ -338,10 +339,10 @@
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.vat.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "N2";
+            dataGridViewCellStyle17.NullValue = null;
+            this.vat.DefaultCellStyle = dataGridViewCellStyle17;
             this.vat.FillWeight = 60F;
             resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
@@ -350,10 +351,10 @@
             // total_with_vat
             // 
             this.total_with_vat.DataPropertyName = "total_with_vat";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "N2";
+            dataGridViewCellStyle18.NullValue = null;
+            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle18;
             this.total_with_vat.FillWeight = 80F;
             resources.ApplyResources(this.total_with_vat, "total_with_vat");
             this.total_with_vat.Name = "total_with_vat";
@@ -391,8 +392,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmb_purchase_type;
         private System.Windows.Forms.Button btn_search;
-        private System.Windows.Forms.TextBox txt_product_name;
-        private System.Windows.Forms.TextBox txt_product_code;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmb_employees;
@@ -400,10 +399,13 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button Btn_print;
         private System.Windows.Forms.Button Btn_export;
+        private System.Windows.Forms.TextBox txtSupplierSearch;
+        private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchase_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn loc_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
@@ -412,6 +414,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_with_vat;
-        private System.Windows.Forms.TextBox txtSupplierSearch;
     }
 }

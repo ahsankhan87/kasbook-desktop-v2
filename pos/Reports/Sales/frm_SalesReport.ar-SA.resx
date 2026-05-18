@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>731, 49</value>
+    <value>632, 49</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 17</value>
@@ -133,28 +133,49 @@
 </value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 116</value>
+    <value>1145, 116</value>
+  </data>
+  <data name="txt_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 46</value>
+  </data>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 24</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 76</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 21</value>
+  </data>
+  <data name="chk_ShowZatcaInvoice.Text" xml:space="preserve">
+    <value>عرض فواتير ZS</value>
   </data>
   <data name="txtCustomerSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txtCustomerSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 13</value>
+    <value>284, 13</value>
   </data>
   <data name="txtCustomerSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>341, 24</value>
   </data>
   <data name="CmbCondition.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="CmbCondition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>806, 13</value>
+    <value>922, 13</value>
   </data>
   <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 49</value>
+    <value>856, 49</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
@@ -165,17 +186,8 @@
   <data name="cmb_employees.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="txt_product_name.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_product_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 77</value>
-  </data>
-  <data name="txt_product_code.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="txt_product_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 45</value>
+  <data name="cmb_employees.Location" type="System.Drawing.Point, System.Drawing">
+    <value>703, 45</value>
   </data>
   <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 66</value>
@@ -199,25 +211,25 @@
     <value>Top, Right</value>
   </data>
   <data name="cmb_sale_account.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 77</value>
+    <value>703, 77</value>
   </data>
   <data name="cmb_sale_type.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="cmb_sale_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 13</value>
+    <value>703, 13</value>
   </data>
   <data name="txt_to_date.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="txt_to_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>806, 77</value>
+    <value>922, 77</value>
   </data>
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 80</value>
+    <value>856, 80</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 17</value>
@@ -229,13 +241,13 @@
     <value>Top, Right</value>
   </data>
   <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>806, 46</value>
+    <value>922, 46</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 16</value>
+    <value>856, 16</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 17</value>
@@ -248,7 +260,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>959, 80</value>
+    <value>1075, 80</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -260,7 +272,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>959, 16</value>
+    <value>1075, 16</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 17</value>
@@ -272,7 +284,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>959, 49</value>
+    <value>1075, 49</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 17</value>
@@ -284,7 +296,7 @@
     <value>Top, Right</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>731, 16</value>
+    <value>632, 16</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 17</value>
@@ -296,13 +308,13 @@
     <value>0, 116</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 483</value>
+    <value>1145, 483</value>
   </data>
   <data name="grid_sales_report.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="grid_sales_report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1023, 474</value>
+    <value>1139, 474</value>
   </data>
   <data name="sale_date.HeaderText" xml:space="preserve">
     <value>تاريخ</value>

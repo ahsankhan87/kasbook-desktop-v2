@@ -2545,6 +2545,15 @@
     <Compile Include="Discounts\frm_add_discount_scheme.Designer.cs">
       <DependentUpon>frm_add_discount_scheme.cs</DependentUpon>
     </Compile>
+    <Compile Include="Discounts\frm_apply_discount_scheme_bulk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Discounts\frm_apply_discount_scheme_bulk.Designer.cs">
+      <DependentUpon>frm_apply_discount_scheme_bulk.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Discounts\frm_apply_discount_scheme_bulk.resx">
+      <DependentUpon>frm_apply_discount_scheme_bulk.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

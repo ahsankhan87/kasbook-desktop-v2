@@ -16,14 +16,6 @@ namespace pos.Discounts
             this.lbl_title = new System.Windows.Forms.Label();
             this.panel_body = new System.Windows.Forms.Panel();
             this.grid_schemes = new System.Windows.Forms.DataGridView();
-            this.panel_toolbar = new System.Windows.Forms.Panel();
-            this.txt_search = new System.Windows.Forms.TextBox();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.btn_new = new System.Windows.Forms.Button();
-            this.btn_update = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
-            this.btn_toggle = new System.Windows.Forms.Button();
-            this.btn_refresh = new System.Windows.Forms.Button();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_calc_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -31,6 +23,15 @@ namespace pos.Discounts
             this.col_is_active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_end_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel_toolbar = new System.Windows.Forms.Panel();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.btn_apply_to_products = new System.Windows.Forms.Button();
+            this.btn_new = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_toggle = new System.Windows.Forms.Button();
+            this.btn_refresh = new System.Windows.Forms.Button();
             this.panel_header.SuspendLayout();
             this.panel_body.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_schemes)).BeginInit();
@@ -91,90 +92,6 @@ namespace pos.Discounts
             this.grid_schemes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid_schemes.Size = new System.Drawing.Size(1100, 522);
             this.grid_schemes.TabIndex = 0;
-            // 
-            // panel_toolbar
-            // 
-            this.panel_toolbar.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel_toolbar.Controls.Add(this.txt_search);
-            this.panel_toolbar.Controls.Add(this.btn_search);
-            this.panel_toolbar.Controls.Add(this.btn_new);
-            this.panel_toolbar.Controls.Add(this.btn_update);
-            this.panel_toolbar.Controls.Add(this.btn_delete);
-            this.panel_toolbar.Controls.Add(this.btn_toggle);
-            this.panel_toolbar.Controls.Add(this.btn_refresh);
-            this.panel_toolbar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_toolbar.Location = new System.Drawing.Point(0, 0);
-            this.panel_toolbar.Name = "panel_toolbar";
-            this.panel_toolbar.Size = new System.Drawing.Size(1100, 49);
-            this.panel_toolbar.TabIndex = 1;
-            // 
-            // txt_search
-            // 
-            this.txt_search.Location = new System.Drawing.Point(10, 12);
-            this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(200, 24);
-            this.txt_search.TabIndex = 0;
-            this.txt_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_search_KeyPress);
-            // 
-            // btn_search
-            // 
-            this.btn_search.Location = new System.Drawing.Point(216, 11);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(70, 28);
-            this.btn_search.TabIndex = 1;
-            this.btn_search.Text = "Search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
-            // btn_new
-            // 
-            this.btn_new.Location = new System.Drawing.Point(580, 11);
-            this.btn_new.Name = "btn_new";
-            this.btn_new.Size = new System.Drawing.Size(75, 28);
-            this.btn_new.TabIndex = 2;
-            this.btn_new.Text = "New";
-            this.btn_new.UseVisualStyleBackColor = true;
-            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
-            // 
-            // btn_update
-            // 
-            this.btn_update.Location = new System.Drawing.Point(660, 11);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(75, 28);
-            this.btn_update.TabIndex = 3;
-            this.btn_update.Text = "Edit";
-            this.btn_update.UseVisualStyleBackColor = true;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.Location = new System.Drawing.Point(740, 11);
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(75, 28);
-            this.btn_delete.TabIndex = 4;
-            this.btn_delete.Text = "Delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
-            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
-            // 
-            // btn_toggle
-            // 
-            this.btn_toggle.Location = new System.Drawing.Point(820, 11);
-            this.btn_toggle.Name = "btn_toggle";
-            this.btn_toggle.Size = new System.Drawing.Size(100, 28);
-            this.btn_toggle.TabIndex = 5;
-            this.btn_toggle.Text = "Toggle Active";
-            this.btn_toggle.UseVisualStyleBackColor = true;
-            this.btn_toggle.Click += new System.EventHandler(this.btn_toggle_Click);
-            // 
-            // btn_refresh
-            // 
-            this.btn_refresh.Location = new System.Drawing.Point(925, 11);
-            this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(75, 28);
-            this.btn_refresh.TabIndex = 6;
-            this.btn_refresh.Text = "Refresh";
-            this.btn_refresh.UseVisualStyleBackColor = true;
-            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // col_id
             // 
@@ -244,6 +161,101 @@ namespace pos.Discounts
             this.col_end_date.ReadOnly = true;
             this.col_end_date.Width = 94;
             // 
+            // panel_toolbar
+            // 
+            this.panel_toolbar.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel_toolbar.Controls.Add(this.txt_search);
+            this.panel_toolbar.Controls.Add(this.btn_search);
+            this.panel_toolbar.Controls.Add(this.btn_apply_to_products);
+            this.panel_toolbar.Controls.Add(this.btn_new);
+            this.panel_toolbar.Controls.Add(this.btn_update);
+            this.panel_toolbar.Controls.Add(this.btn_delete);
+            this.panel_toolbar.Controls.Add(this.btn_toggle);
+            this.panel_toolbar.Controls.Add(this.btn_refresh);
+            this.panel_toolbar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_toolbar.Location = new System.Drawing.Point(0, 0);
+            this.panel_toolbar.Name = "panel_toolbar";
+            this.panel_toolbar.Size = new System.Drawing.Size(1100, 49);
+            this.panel_toolbar.TabIndex = 1;
+            // 
+            // txt_search
+            // 
+            this.txt_search.Location = new System.Drawing.Point(10, 12);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(200, 24);
+            this.txt_search.TabIndex = 0;
+            this.txt_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_search_KeyPress);
+            // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(216, 11);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(70, 28);
+            this.btn_search.TabIndex = 1;
+            this.btn_search.Text = "Search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // btn_apply_to_products
+            // 
+            this.btn_apply_to_products.Location = new System.Drawing.Point(418, 11);
+            this.btn_apply_to_products.Name = "btn_apply_to_products";
+            this.btn_apply_to_products.Size = new System.Drawing.Size(157, 28);
+            this.btn_apply_to_products.TabIndex = 2;
+            this.btn_apply_to_products.Text = "Apply To Items";
+            this.btn_apply_to_products.UseVisualStyleBackColor = true;
+            this.btn_apply_to_products.Click += new System.EventHandler(this.btn_apply_to_products_Click);
+            // 
+            // btn_new
+            // 
+            this.btn_new.Location = new System.Drawing.Point(580, 11);
+            this.btn_new.Name = "btn_new";
+            this.btn_new.Size = new System.Drawing.Size(75, 28);
+            this.btn_new.TabIndex = 2;
+            this.btn_new.Text = "New";
+            this.btn_new.UseVisualStyleBackColor = true;
+            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
+            // 
+            // btn_update
+            // 
+            this.btn_update.Location = new System.Drawing.Point(660, 11);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(75, 28);
+            this.btn_update.TabIndex = 3;
+            this.btn_update.Text = "Edit";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.Location = new System.Drawing.Point(740, 11);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(75, 28);
+            this.btn_delete.TabIndex = 4;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // btn_toggle
+            // 
+            this.btn_toggle.Location = new System.Drawing.Point(820, 11);
+            this.btn_toggle.Name = "btn_toggle";
+            this.btn_toggle.Size = new System.Drawing.Size(100, 28);
+            this.btn_toggle.TabIndex = 5;
+            this.btn_toggle.Text = "Toggle Active";
+            this.btn_toggle.UseVisualStyleBackColor = true;
+            this.btn_toggle.Click += new System.EventHandler(this.btn_toggle_Click);
+            // 
+            // btn_refresh
+            // 
+            this.btn_refresh.Location = new System.Drawing.Point(925, 11);
+            this.btn_refresh.Name = "btn_refresh";
+            this.btn_refresh.Size = new System.Drawing.Size(75, 28);
+            this.btn_refresh.TabIndex = 6;
+            this.btn_refresh.Text = "Refresh";
+            this.btn_refresh.UseVisualStyleBackColor = true;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
+            // 
             // frm_discount_schemes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -275,6 +287,7 @@ namespace pos.Discounts
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_new;
+        private System.Windows.Forms.Button btn_apply_to_products;
         private System.Windows.Forms.DataGridView grid_schemes;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_name;

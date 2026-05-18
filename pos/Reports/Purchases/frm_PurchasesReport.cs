@@ -21,6 +21,7 @@ namespace pos
         public int _product_id = 0;
         public string _product_name;
         DataTable purchase_report_dt = new DataTable();
+        private DataView _purchaseReportView;
 
         private DataGridView suppliersDataGridView;
         private System.Windows.Forms.Timer _supplierSearchDebounceTimer;
@@ -41,6 +42,11 @@ namespace pos
                 txtSupplierSearch.KeyUp += txtSupplierSearch_KeyUp;
                 txtSupplierSearch.Leave += txtSupplierSearch_Leave;
             }
+
+            if (txt_search != null)
+            {
+                txt_search.TextChanged += txt_search_TextChanged;
+            }
         }
 
         private void PurchasesReport_Load(object sender, EventArgs e)
@@ -58,7 +64,6 @@ namespace pos
             CmbCondition.SelectedIndex = 0;
             //get_products_dropdownlist();
             cmb_purchase_type.SelectedIndex = 0;
-            autoCompleteProductCode();
             get_employees_dropdownlist();
         }
 
@@ -66,40 +71,6 @@ namespace pos
         {
             AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_Purchases_report, id);
         }
-
-        
-
-        public void autoCompleteProductCode()
-        {
-            try
-            {
-                txt_product_code.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                txt_product_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                AutoCompleteStringCollection Products_coll = new AutoCompleteStringCollection();
-
-                DataTable dt = productsBLL_obj.GetAllProductCodes();
-
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        Products_coll.Add(dr["code"].ToString());
-
-                    }
-
-                }
-
-                txt_product_code.AutoCompleteCustomSource = Products_coll;
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-        }
-
         
         private void btn_search_Click(object sender, EventArgs e)
         {
@@ -146,7 +117,9 @@ namespace pos
                 newRow[14] = _total;
                 purchase_report_dt.Rows.InsertAt(newRow, purchase_report_dt.Rows.Count);
 
-                grid_Purchases_report.DataSource = purchase_report_dt;
+                _purchaseReportView = new DataView(purchase_report_dt);
+                grid_Purchases_report.DataSource = _purchaseReportView;
+                ApplyGridProductFilter();
                 CustomizeDataGridView();
                 
                 _product_id = 0;
@@ -179,30 +152,29 @@ namespace pos
 
         }
 
-
-        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
+        private void txt_search_TextChanged(object sender, EventArgs e)
         {
-            if (txt_product_code.Text != string.Empty && e.KeyCode == Keys.Enter)
-            {
-                DataTable product_dt = new DataTable();
-                product_dt = productsBLL_obj.SearchRecordByProductCode(txt_product_code.Text);
-
-                if (product_dt.Rows.Count > 0)
-                {
-                    foreach (DataRow myProductView in product_dt.Rows)
-                    {
-                        txt_product_name.Text = myProductView["name"].ToString();
-                        _product_id = (int)myProductView["id"];
-
-                    }
-                }
-            }
-            else
-            {
-                _product_id = 0;
-                txt_product_name.Text = "";
-            }
+            ApplyGridProductFilter();
         }
+
+        private void ApplyGridProductFilter()
+        {
+            if (_purchaseReportView == null)
+                return;
+
+            string keyword = (txt_search.Text ?? string.Empty).Trim().Replace("'", "''");
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                _purchaseReportView.RowFilter = string.Empty;
+                return;
+            }
+
+            _purchaseReportView.RowFilter =
+                "Convert(item_code, 'System.String') LIKE '%" + keyword + "%'" +
+                " OR Convert(product_name, 'System.String') LIKE '%" + keyword + "%'";
+        }
+
         public void get_employees_dropdownlist()
         {
             EmployeeBLL employeeBLL = new EmployeeBLL();

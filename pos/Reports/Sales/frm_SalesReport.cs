@@ -20,6 +20,7 @@ namespace pos
         public string _product_code = "";
         public string _product_name;
         DataTable sales_report_dt = new DataTable();
+        private DataView _salesReportView;
 
         private DataGridView customersDataGridView;
         private System.Windows.Forms.Timer _customerSearchDebounceTimer;
@@ -36,8 +37,7 @@ namespace pos
         {
             InitializeComponent();
             //get_products_dropdownlist();
-            autoCompleteProductCode();
-
+           
             _customerSearchDebounceTimer = new System.Windows.Forms.Timer { Interval = 300 };
             _customerSearchDebounceTimer.Tick += CustomerSearchDebounceTimer_Tick;
 
@@ -46,6 +46,11 @@ namespace pos
                 txtCustomerSearch.TextChanged += txtCustomerSearch_TextChanged;
                 txtCustomerSearch.KeyUp       += txtCustomerSearch_KeyUp;
                 txtCustomerSearch.Leave       += txtCustomerSearch_Leave;
+            }
+
+            if (txt_search != null)
+            {
+                txt_search.TextChanged += txt_search_TextChanged;
             }
         }
 
@@ -80,36 +85,6 @@ namespace pos
             //txt_product_code.Text = _product_name;
         }
 
-        public void autoCompleteProductCode()
-        {
-            try
-            {
-                txt_product_code.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                txt_product_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                AutoCompleteStringCollection Products_coll = new AutoCompleteStringCollection();
-
-                DataTable dt = productsBLL_obj.GetAllProductCodes();
-
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        Products_coll.Add(dr["code"].ToString());
-
-                    }
-
-                }
-
-                txt_product_code.AutoCompleteCustomSource = Products_coll;
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-        }
         public void get_employees_dropdownlist()
         {
             EmployeeBLL employeeBLL = new EmployeeBLL();
@@ -272,7 +247,9 @@ namespace pos
                         sales_report_dt.Rows.InsertAt(newRow, sales_report_dt.Rows.Count);
                     }
 
-                    grid_sales_report.DataSource = sales_report_dt;
+                    _salesReportView = new DataView(sales_report_dt);
+                    grid_sales_report.DataSource = _salesReportView;
+                    ApplyGridProductFilter();
                     if (grid_sales_report.Rows.Count > 0)
                         CustomizeDataGridView();
 
@@ -307,28 +284,28 @@ namespace pos
             }
 
         }
-        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
+
+        private void txt_search_TextChanged(object sender, EventArgs e)
         {
-             if (txt_product_code.Text != string.Empty && e.KeyCode == Keys.Enter)
+            ApplyGridProductFilter();
+        }
+
+        private void ApplyGridProductFilter()
+        {
+            if (_salesReportView == null)
+                return;
+
+            string keyword = (txt_search.Text ?? string.Empty).Trim().Replace("'", "''");
+
+            if (string.IsNullOrWhiteSpace(keyword))
             {
-                DataTable product_dt = new DataTable();
-                product_dt = productsBLL_obj.SearchRecordByProductCode(txt_product_code.Text);
-                  
-                if (product_dt.Rows.Count > 0)
-                {
-                    foreach (DataRow myProductView in product_dt.Rows)
-                    {
-                        txt_product_name.Text = myProductView["name"].ToString();
-                        _product_code = myProductView["code"].ToString();
-                       
-                    }
-                }
+                _salesReportView.RowFilter = string.Empty;
+                return;
             }
-             else
-             {
-                 _product_code = "";
-                 txt_product_name.Text = "";
-             }
+
+            _salesReportView.RowFilter =
+                "Convert(item_code, 'System.String') LIKE '%" + keyword + "%'" +
+                " OR Convert(product_name, 'System.String') LIKE '%" + keyword + "%'";
         }
 
         private void btn_search_products_Click(object sender, EventArgs e)

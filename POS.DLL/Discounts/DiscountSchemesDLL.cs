@@ -178,5 +178,26 @@ namespace POS.DLL
                 return id;
             }
         }
+
+        public int ApplySchemeToProducts(int schemeId, string brandCode, string categoryCode)
+        {
+            string query = @"
+                UPDATE P
+                   SET P.discount_scheme_id = @scheme_id
+                FROM pos_products P
+                WHERE P.deleted = 0
+                  AND (@brand_code = '' OR P.brand_code = @brand_code)
+                  AND (@category_code = '' OR P.category_code = @category_code);";
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, cn))
+            {
+                cmd.Parameters.AddWithValue("@scheme_id", schemeId);
+                cmd.Parameters.AddWithValue("@brand_code", (brandCode ?? string.Empty).Trim());
+                cmd.Parameters.AddWithValue("@category_code", (categoryCode ?? string.Empty).Trim());
+                cn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

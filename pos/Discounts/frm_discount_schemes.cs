@@ -141,6 +141,14 @@ namespace pos.Discounts
             }
         }
 
+        private void btn_apply_to_products_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frm_apply_discount_scheme_bulk(this))
+            {
+                frm.ShowDialog(this);
+            }
+        }
+
         public void RefreshGrid() => LoadGrid();
     }
 }

@@ -1565,7 +1565,6 @@ namespace pos
         private void btn_other_stock_Click(object sender, EventArgs e)
         {
             string product_id="";
-            string product_code="";
             string item_number="";
             string product_name = "";
             if(!string.IsNullOrEmpty(txt_id.Text))

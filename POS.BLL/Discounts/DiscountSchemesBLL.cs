@@ -77,5 +77,20 @@ namespace POS.BLL
             }
             catch { throw; }
         }
+
+        public int ApplySchemeToProducts(int schemeId, string brandCode, string categoryCode)
+        {
+            try
+            {
+                int affected = _dll.ApplySchemeToProducts(schemeId, brandCode, categoryCode);
+                Log.LogAction(
+                    "Apply Discount Scheme To Products",
+                    $"SchemeId: {schemeId}, Brand: {brandCode}, Category: {categoryCode}, Affected: {affected}",
+                    UsersModal.logged_in_userid,
+                    UsersModal.logged_in_branch_id);
+                return affected;
+            }
+            catch { throw; }
+        }
     }
 }
