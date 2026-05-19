@@ -76,6 +76,9 @@ namespace pos
 
         private async void frm_searchProducts_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            StyleForm();
+
             txt_search.Text = _product_code;
 
             using (BusyScope.Show(this, UiMessages.T("Loading products...", "جاري تحميل الأصناف...")))
@@ -83,10 +86,12 @@ namespace pos
                 await LoadProductsGridAsync();
             }
 
-            // Defer layout tweaks so we don't touch Fill columns while the grid is still resizing.
-            BeginInvoke((Action)ConfigureGridLayout);
-
             grid_search_products.Focus();
+        }
+
+        private void StyleForm()
+        {
+            AppTheme.ApplyListFormStyleLightHeader(null, null, panel1, grid_search_products, id);
         }
 
         private Task<DataTable> SearchProductsAsync(string condition)
@@ -337,7 +342,7 @@ namespace pos
 
         private void frm_searchProducts_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.H)
+            if (e.Control && e.KeyCode == Keys.H || e.KeyCode == Keys.F6)
             {
                 product_movement_check();
             }
@@ -356,19 +361,6 @@ namespace pos
                     _pageIndex--;
                     load_Products_grid();
                 }
-            }
-        }
-
-        private void ConfigureGridLayout()
-        {
-            if (grid_search_products.IsDisposed || grid_search_products.Columns.Count == 0)
-                return;
-
-            var nameColumn = grid_search_products.Columns["name"];
-            if (nameColumn != null)
-            {
-                // Keep the column fill behavior, but change weight only after layout has settled.
-                nameColumn.FillWeight = 220;
             }
         }
 

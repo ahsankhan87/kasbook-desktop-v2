@@ -14,6 +14,7 @@ namespace pos
         public int inventory_acc_id = 0;
         public int item_variance_acc_id = 0;
 
+
         public frm_product_adjustment()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace pos
             StyleForm();
             using (BusyScope.Show(this, UiMessages.T("Loading...", "جاري التحميل...")))
             {
-                GetMAXInvoiceNo();
+                txt_ref_no.Text = GetMAXInvoiceNo();
                 Get_AccountID_From_Company();
             }
         }
@@ -73,10 +74,8 @@ namespace pos
 
                     var productBLLObj = new ProductBLL();
 
-                    // Use current ref number if present; otherwise generate a new one.
-                    string invoice_no = (txt_ref_no.Text ?? string.Empty).Trim();
-                    if (string.IsNullOrWhiteSpace(invoice_no))
-                        invoice_no = productBLLObj.GetMaxAdjustmentInvoiceNo();
+                    // generate a new invoice number.
+                    string invoice_no = GetMAXInvoiceNo();
 
                     ProductModal info = new ProductModal();
 
@@ -102,6 +101,18 @@ namespace pos
                             UiMessages.ShowWarning(
                                 "Invalid prices detected in grid. Please correct and try again.",
                                 "تم اكتشاف أسعار غير صحيحة في الجدول. يرجى التصحيح والمحاولة مرة أخرى.",
+                                captionEn: "Adjustment",
+                                captionAr: "تسوية");
+                            return;
+                        }
+
+                        // Validate adjustment quantity: it should not be negative or zero (unless no change)
+                        string validationMessage;
+                        if (!ValidateAdjustmentQty(row, out validationMessage))
+                        {
+                            UiMessages.ShowWarning(
+                                validationMessage,
+                                validationMessage,
                                 captionEn: "Adjustment",
                                 captionAr: "تسوية");
                             return;
@@ -170,7 +181,7 @@ namespace pos
                         captionAr: "نجاح");
 
                     // After save: reset UI for a new adjustment
-                    txt_ref_no.Text = productBLLObj.GetMaxAdjustmentInvoiceNo();
+                    txt_ref_no.Text = GetMAXInvoiceNo();
                     grid_search_products.DataSource = null;
                     grid_search_products.Rows.Clear();
                     grid_search_products.Refresh();
@@ -202,12 +213,12 @@ namespace pos
             }
         }
 
-        private void GetMAXInvoiceNo()
+        private string GetMAXInvoiceNo()
         {
             //ProductBLL objBLL = new ProductBLL();
             //txt_ref_no.Text = objBLL.GetMaxAdjustmentInvoiceNo();
             SalesBLL objSales = new SalesBLL();
-            txt_ref_no.Text = objSales.GenerateAdjustmentInvoiceNo();
+            return objSales.GenerateAdjustmentInvoiceNo();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -488,6 +499,28 @@ namespace pos
                 captionEn: "Adjustment",
                 captionAr: "تسوية");
 
+        }
+
+        private static bool ValidateAdjustmentQty(DataGridViewRow row, out string message)
+        {
+            message = string.Empty;
+
+            double currentQty = ParseDoubleCell(row, "qty");
+            double targetQty = ParseDoubleCell(row, "adjustment_qty");
+
+            if (targetQty < 0)
+            {
+                message = "Adjustment quantity cannot be negative.";
+                return false;
+            }
+
+            if (Math.Abs(targetQty - currentQty) < 0.0001)
+            {
+                message = "Adjustment quantity is the same as the current quantity.";
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -1734,5 +1734,13 @@ namespace pos
                 picture_name = opnfd.FileName;
             }
         }
+
+        private void btn_productAdjustment_Click(object sender, EventArgs e)
+        {
+            // Open the product adjustment form, passing the current product's item number
+            string item_number = txtItemNumber.Text;
+            frm_product_adjustment productAdjustmentForm = new frm_product_adjustment();
+            productAdjustmentForm.ShowDialog();
+        }
     }
 }

@@ -134,12 +134,6 @@
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث</value>
   </data>
-  <data name="grid_search_products.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 142</value>
-  </data>
-  <data name="grid_search_products.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 409</value>
-  </data>
   <data name="code.HeaderText" xml:space="preserve">
     <value>شفرة</value>
   </data>
@@ -195,8 +189,11 @@
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 142</value>
+  <data name="grid_search_products.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 142</value>
+  </data>
+  <data name="grid_search_products.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 409</value>
   </data>
   <data name="txt_date.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -326,6 +323,9 @@
   </data>
   <data name="btn_print.Text" xml:space="preserve">
     <value>مطبعة</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 142</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>897, 551</value>
