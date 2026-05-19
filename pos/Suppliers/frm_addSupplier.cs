@@ -641,7 +641,7 @@ namespace pos
         private void btn_payment_Click(object sender, EventArgs e)
         {
             string supplier_id = txt_id.Text;
-            string supplier_name = lbl_customer_name.Text;
+            string supplier_name = ((txt_first_name.Text ?? "") + " " + (txt_last_name.Text ?? "")).Trim();
             if (!string.IsNullOrWhiteSpace(supplier_id))
             {
                 frm_supplier_payment obj = new frm_supplier_payment(this, int.Parse(supplier_id), supplier_name);

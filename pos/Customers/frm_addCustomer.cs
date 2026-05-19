@@ -710,6 +710,7 @@ namespace pos
         private void btn_payment_Click(object sender, EventArgs e)
         {
             string customer_id = txt_id.Text;
+            string customer_name = ((txt_first_name.Text ?? "") + " " + (txt_last_name.Text ?? "")).Trim();
             if (customer_id != "")
             {
                 // Permission check
@@ -723,7 +724,7 @@ namespace pos
                     );
                     return;
                 }
-                frm_customer_payment obj = new frm_customer_payment(this, int.Parse(customer_id));
+                frm_customer_payment obj = new frm_customer_payment(this, int.Parse(customer_id), customer_name);
                 obj.ShowDialog();
 
             }

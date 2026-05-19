@@ -2457,6 +2457,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.ar-SA.resx">
+      <DependentUpon>FrmSupplierLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\Supplier Ledger Report\FrmSupplierLedgerReport.resx">
       <DependentUpon>FrmSupplierLedgerReport.cs</DependentUpon>
     </EmbeddedResource>

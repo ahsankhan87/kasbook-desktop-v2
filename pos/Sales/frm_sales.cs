@@ -366,6 +366,9 @@ namespace pos
                 // ----------------------------- QTY Changed -----------------------------
                 if (columnName == "Qty")
                 {
+                    if (!ValidateSaleQty(e.RowIndex))
+                        return;
+                    
                     grid_sales.Rows[e.RowIndex].Cells["tax"].Value = tax;
                     grid_sales.Rows[e.RowIndex].Cells["sub_total"].Value = subTotal + tax;
                     grid_sales.Rows[e.RowIndex].Cells["total_without_vat"].Value = subTotal;
@@ -3916,7 +3919,30 @@ namespace pos
                 return false;
             }
         }
+        private bool ValidateSaleQty(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_sales.Rows.Count)
+                return true;
 
+            object qtyObj = grid_sales.Rows[rowIndex].Cells["Qty"].Value;
+            double qty;
+
+            if (!double.TryParse(Convert.ToString(qtyObj), out qty) || qty <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Quantity must be greater than zero.",
+                    "الكمية يجب أن تكون أكبر من صفر.",
+                    "Validation",
+                    "التحقق");
+
+                grid_sales.Rows[rowIndex].Cells["Qty"].Value = 1;
+                grid_sales.CurrentCell = grid_sales.Rows[rowIndex].Cells["Qty"];
+                grid_sales.BeginEdit(true);
+                return false;
+            }
+
+            return true;
+        }
     }
 }
 

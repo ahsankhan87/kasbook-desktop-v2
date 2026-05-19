@@ -551,12 +551,15 @@ namespace pos
 
                 if (columnName == "Qty") // if qty is changed
                 {
+                    if (!ValidateSaleQty(e.RowIndex))
+                        return;
+
                     //double tax_rate = (grid_purchases.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
                     //double tax = (Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value) * tax_rate / 100);
 
-                   // grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["qty"].Value));
-                   // double sub_total = Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["discount"].Value);
-                   // grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
+                    // grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = (tax * Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["qty"].Value));
+                    // double sub_total = Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["tax"].Value) + Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["qty"].Value) - Convert.ToDouble(grid_purchases.Rows[e.RowIndex].Cells["discount"].Value);
+                    // grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = sub_total;
 
                     grid_purchases.Rows[e.RowIndex].Cells["tax"].Value = tax;
                     grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = subTotal + tax;
@@ -2128,12 +2131,24 @@ namespace pos
                         load_product_purchase_history(item_number);
                     }
 
-                    txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
+                    //txt_shop_qty.Text = (grid_purchases.CurrentRow.Cells["shop_qty"].Value != null ? grid_purchases.CurrentRow.Cells["shop_qty"].Value.ToString() : "");
+                    // Current qty on hand for the logged-in branch
+                    try
+                    {
+                        ProductBLL productBLL = new ProductBLL();
+                        decimal currentStock = productBLL.GetProductStock(item_number, UsersModal.logged_in_branch_id);
+                        txt_shop_qty.Text = currentStock.ToString("N2");
+                    }
+                    catch
+                    {
+                        txt_shop_qty.Text = "0.00";
+                    }
                 }
                 else
                 {
                     grid_product_history.DataSource = null;
                     _loadedHistoryItemNumber = string.Empty;
+                    txt_shop_qty.Text = "0.00";
                 }
 
             }
@@ -3536,6 +3551,31 @@ namespace pos
             {
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
+        }
+
+        private bool ValidateSaleQty(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases.Rows.Count)
+                return true;
+
+            object qtyObj = grid_purchases.Rows[rowIndex].Cells["Qty"].Value;
+            double qty;
+
+            if (!double.TryParse(Convert.ToString(qtyObj), out qty) || qty <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Quantity must be greater than zero.",
+                    "الكمية يجب أن تكون أكبر من صفر.",
+                    "Validation",
+                    "التحقق");
+
+                grid_purchases.Rows[rowIndex].Cells["Qty"].Value = 1;
+                grid_purchases.CurrentCell = grid_purchases.Rows[rowIndex].Cells["Qty"];
+                grid_purchases.BeginEdit(true);
+                return false;
+            }
+
+            return true;
         }
     }
 }

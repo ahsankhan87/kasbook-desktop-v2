@@ -422,6 +422,9 @@ namespace pos
 
                 if (columnName == "Qty") // if qty is changed
                 {
+                    if (!ValidateSaleQty(e.RowIndex))
+                        return;
+
                     double tax_rate = (grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value == "" ? 0 : double.Parse(grid_purchases_order.Rows[e.RowIndex].Cells["tax_rate"].Value.ToString()));
                     double tax = (Convert.ToDouble(grid_purchases_order.Rows[e.RowIndex].Cells["avg_cost"].Value) * tax_rate / 100);
                      
@@ -2472,6 +2475,30 @@ namespace pos
             }
             suppliersDataGridView.Visible = false;
             grid_purchases_order.Focus();
+        }
+        private bool ValidateSaleQty(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_purchases_order.Rows.Count)
+                return true;
+
+            object qtyObj = grid_purchases_order.Rows[rowIndex].Cells["Qty"].Value;
+            double qty;
+
+            if (!double.TryParse(Convert.ToString(qtyObj), out qty) || qty <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Quantity must be greater than zero.",
+                    "الكمية يجب أن تكون أكبر من صفر.",
+                    "Validation",
+                    "التحقق");
+
+                grid_purchases_order.Rows[rowIndex].Cells["Qty"].Value = 1;
+                grid_purchases_order.CurrentCell = grid_purchases_order.Rows[rowIndex].Cells["Qty"];
+                grid_purchases_order.BeginEdit(true);
+                return false;
+            }
+
+            return true;
         }
     }
 }
