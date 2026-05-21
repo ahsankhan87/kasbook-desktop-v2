@@ -645,5 +645,20 @@ namespace POS.BLL
         {
             return productDLL.GetCurrentStock(itemNumber, branchId);
         }
+
+        public int ExecuteStockSuppression(string oldItemNumber, string newItemNumber, List<int> branchIds,
+            bool transferStock, bool zeroDemandOldPart, bool transferPartDescription, bool resetReorderLevel)
+        {
+            try
+            {
+                ProductDLL objDLL = new ProductDLL();
+                return objDLL.ExecuteStockSuppression(oldItemNumber, newItemNumber, branchIds,
+                    transferStock, zeroDemandOldPart, transferPartDescription, resetReorderLevel);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

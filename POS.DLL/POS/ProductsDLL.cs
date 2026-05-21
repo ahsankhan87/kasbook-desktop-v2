@@ -1384,7 +1384,7 @@ namespace POS.DLL
                         return dt;
                     }
                     catch
-                    {
+        {
                         throw;
                     }
                 }
@@ -1589,6 +1589,7 @@ namespace POS.DLL
                                 " P.unit_price,P.cost_price,P.description,P.group_code,alt_no,demand_qty,purchase_demand_qty,sale_demand_qty," +
                                 " COALESCE((select  TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
                                 " P.category_code,P.picture,P.packet_qty,P.item_number_2,P.unit_price_2,P.expiry_date,P.unit_id,P.supplier_id,P.discount_scheme_id," +
+                                " P.superseded_from_item_code, P.superseded_to_item_code," +
                                 " T.title AS tax_title,T.rate AS tax_rate," +
                                 " U.name AS unit," +
                                 " C.name AS category, C.id AS category_id" +
@@ -1929,7 +1930,7 @@ namespace POS.DLL
                         return (int)result;
                     }
                     catch
-        {
+                    {
 
                         throw;
                     }
@@ -2138,7 +2139,7 @@ namespace POS.DLL
                     {
                         if (cn.State == ConnectionState.Closed)
                         {
-                cn.Open();
+                            cn.Open();
 
                             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -2394,7 +2395,7 @@ namespace POS.DLL
                                 //cmd.Parameters.AddWithValue("@termLong", single + "%");
                                 //cmd.Parameters.AddWithValue("@termLike", "%" + single + "%");
                                 //cmd.Parameters.AddWithValue("@termDesc", "%" + single + "%");
-                                
+
                                 ////cmd.Parameters.AddWithValue("@barcodeExact", single);
                             }
                         }
@@ -2555,7 +2556,6 @@ namespace POS.DLL
                                     user_id = @UserId
                                 WHERE item_number = @ItemNumber 
                                 AND branch_id = @BranchId 
-                                
                             END
                             ELSE
                             BEGIN
@@ -2579,16 +2579,25 @@ namespace POS.DLL
                         using (SqlCommand cmd = new SqlCommand(stockQuery, conn, transaction))
                         {
                             cmd.Parameters.AddRange(stockParams);
-                cmd.ExecuteNonQuery();
-            }
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Record inventory transaction
+                        bool inventoryRecorded = inventoryDAL.RecordInventoryTransaction(
+                            ItemNumber, quantityChange, 0, 0, branchId, userId,
+                            $"Stock Adjustment - {transactionType}", null, transactionType, null,
+                            null, null, locationCode);
+
+                        if (!inventoryRecorded)
+                            return false;
 
                         transaction.Commit();
                         return true;
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         transaction.Rollback();
-                        throw;
+                        throw new Exception($"Error updating stock: {ex.Message}", ex);
                     }
                 }
             }
@@ -2662,6 +2671,241 @@ namespace POS.DLL
             SqlParameter[] parameters = { new SqlParameter("@ItemNumber", itemNumber) };
             object result = dbHelper.ExecuteScalar(query, parameters);
             return result != null ? result.ToString() : string.Empty;
+        }
+
+
+        public int ExecuteStockSuppression(string oldItemNumber, string newItemNumber, List<int> branchIds,
+        bool transferStock, bool zeroDemandOldPart, bool transferPartDescription, bool resetReorderLevel)
+        {
+            if (string.IsNullOrWhiteSpace(oldItemNumber) || string.IsNullOrWhiteSpace(newItemNumber))
+                return 0;
+
+            if (string.Equals(oldItemNumber.Trim(), newItemNumber.Trim(), StringComparison.OrdinalIgnoreCase))
+                return 0;
+
+            oldItemNumber = oldItemNumber.Trim();
+            newItemNumber = newItemNumber.Trim();
+            var validBranches = (branchIds ?? new List<int>()).Where(x => x > 0).Distinct().ToList();
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+                using (SqlTransaction tx = cn.BeginTransaction())
+                {
+                    try
+                    {
+                        int oldProductId = 0;
+                        int newProductId = 0;
+                        string oldDescription = string.Empty;
+                        string newDescription = string.Empty;
+                        string existingSupersedeTo = string.Empty;
+
+                        // Fetch old product details
+                        using (var cmd = new SqlCommand(@"
+                            SELECT id, description, superseded_to_item_code 
+                            FROM pos_products 
+                            WHERE deleted = 0 AND item_number = @item_number", cn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@item_number", oldItemNumber);
+                            using (var rd = cmd.ExecuteReader())
+                            {
+                                if (rd.Read())
+                                {
+                                    oldProductId = Convert.ToInt32(rd["id"]);
+                                    oldDescription = Convert.ToString(rd["description"]);
+                                    existingSupersedeTo = Convert.ToString(rd["superseded_to_item_code"] ?? "");
+                                }
+                            }
+                        }
+
+                        // Fetch new product details
+                        using (var cmd = new SqlCommand(@"
+                            SELECT id, description 
+                            FROM pos_products 
+                            WHERE deleted = 0 AND item_number = @item_number", cn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@item_number", newItemNumber);
+                            using (var rd = cmd.ExecuteReader())
+                            {
+                                if (rd.Read())
+                                {
+                                    newProductId = Convert.ToInt32(rd["id"]);
+                                    newDescription = Convert.ToString(rd["description"]);
+                                }
+                            }
+                        }
+
+                        if (oldProductId <= 0 || newProductId <= 0)
+                        {
+                            tx.Rollback();
+                            return 0;
+                        }
+
+                        int affected = 0;
+
+                        // Update OLD item: mark it as superseded (immutable history)
+                        // Set superseded_to_item_code to link to the new item
+                        using (var cmd = new SqlCommand(@"
+                            UPDATE pos_products 
+                            SET superseded_to_item_code = @new_item_number,
+                                date_updated = GETDATE(), 
+                                user_id = @user_id 
+                            WHERE id = @id", cn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@new_item_number", newItemNumber);
+                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                            cmd.Parameters.AddWithValue("@id", oldProductId);
+                            affected += cmd.ExecuteNonQuery();
+                        }
+
+                        // Update NEW item: set backward link (if not already set)
+                        // Set superseded_from_item_code to link from the old item
+                        using (var cmd = new SqlCommand(@"
+                            UPDATE pos_products 
+                            SET superseded_from_item_code = CASE 
+                                    WHEN superseded_from_item_code IS NULL OR superseded_from_item_code = '' 
+                                    THEN @old_item_number 
+                                    ELSE superseded_from_item_code 
+                                END,
+                                date_updated = GETDATE(), 
+                                user_id = @user_id 
+                            WHERE id = @id", cn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@old_item_number", oldItemNumber);
+                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                            cmd.Parameters.AddWithValue("@id", newProductId);
+                            affected += cmd.ExecuteNonQuery();
+                        }
+
+                        // Transfer description if needed (new item can inherit old item's description)
+                        if (transferPartDescription && !string.IsNullOrWhiteSpace(oldDescription) && string.IsNullOrWhiteSpace(newDescription))
+                        {
+                            using (var cmd = new SqlCommand(@"
+                                UPDATE pos_products 
+                                SET description = @description, 
+                                    date_updated = GETDATE(), 
+                                    user_id = @user_id 
+                                WHERE id = @id", cn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@description", oldDescription);
+                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                                cmd.Parameters.AddWithValue("@id", newProductId);
+                                affected += cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Zero out demand for old part if requested
+                        if (zeroDemandOldPart)
+                        {
+                            using (var cmd = new SqlCommand(@"
+                                UPDATE pos_products 
+                                SET demand_qty = 0, 
+                                    purchase_demand_qty = 0, 
+                                    sale_demand_qty = 0, 
+                                    date_updated = GETDATE(), 
+                                    user_id = @user_id 
+                                WHERE id = @id", cn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                                cmd.Parameters.AddWithValue("@id", oldProductId);
+                                affected += cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Reset reorder level for new part if requested
+                        if (resetReorderLevel)
+                        {
+                            using (var cmd = new SqlCommand(@"
+                                UPDATE pos_products 
+                                SET re_stock_level = 0, 
+                                    date_updated = GETDATE(), 
+                                    user_id = @user_id 
+                                WHERE id = @id", cn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                                cmd.Parameters.AddWithValue("@id", newProductId);
+                                affected += cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Transfer stock from old item to new item across selected branches
+                        if (transferStock && validBranches.Count > 0)
+                        {
+                            foreach (int branchId in validBranches)
+                            {
+                                decimal oldQty = 0;
+
+                                // Get current stock for old item in this branch
+                                using (var cmd = new SqlCommand(@"
+                                    SELECT ISNULL(SUM(qty), 0) 
+                                    FROM pos_product_stocks 
+                                    WHERE item_number = @old_item_number AND branch_id = @branch_id", cn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@old_item_number", oldItemNumber);
+                                    cmd.Parameters.AddWithValue("@branch_id", branchId);
+                                    var val = cmd.ExecuteScalar();
+                                    oldQty = val == null || val == DBNull.Value ? 0 : Convert.ToDecimal(val);
+                                }
+
+                                if (oldQty <= 0)
+                                    continue;
+
+                                // Transfer stock to new item
+                                using (var cmd = new SqlCommand(@"
+                                IF EXISTS (SELECT 1 FROM pos_product_stocks WHERE item_number = @new_item_number AND branch_id = @branch_id)
+                                BEGIN
+                                    UPDATE pos_product_stocks
+                                    SET qty = ISNULL(qty,0) + @qty,
+                                        date_updated = GETDATE(),
+                                        user_id = @user_id
+                                    WHERE item_number = @new_item_number AND branch_id = @branch_id;
+                                END
+                                ELSE
+                                BEGIN
+                                    INSERT INTO pos_product_stocks (item_code, item_number, branch_id, qty, date_created, date_updated, user_id)
+                                    VALUES (@new_item_number, @new_item_number, @branch_id, @qty, GETDATE(), GETDATE(), @user_id);
+                                END
+                                ", cn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@new_item_number", newItemNumber);
+                                    cmd.Parameters.AddWithValue("@branch_id", branchId);
+                                    cmd.Parameters.AddWithValue("@qty", oldQty);
+                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                // Zero out old item's stock (preserve history)
+                                using (var cmd = new SqlCommand(@"
+                                    UPDATE pos_product_stocks 
+                                    SET qty = 0, 
+                                        date_updated = GETDATE(), 
+                                        user_id = @user_id 
+                                    WHERE item_number = @old_item_number AND branch_id = @branch_id", cn, tx))
+                                {
+                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                                    cmd.Parameters.AddWithValue("@old_item_number", oldItemNumber);
+                                    cmd.Parameters.AddWithValue("@branch_id", branchId);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
+
+                        // Log the supersession action
+                        Log.LogAction("Stock Suppression", 
+                            $"Old Item={oldItemNumber}, New Item={newItemNumber}, TransferStock={transferStock}, ZeroDemand={zeroDemandOldPart}, Branches={string.Join(",", validBranches)}", 
+                            UsersModal.logged_in_userid, 
+                            UsersModal.logged_in_branch_id);
+
+                        tx.Commit();
+                        return affected > 0 ? affected : 1;
+                    }
+                    catch
+                    {
+                        tx.Rollback();
+                        throw;
+                    }
+                }
+            }
         }
     }
 }

@@ -2048,6 +2048,10 @@
     <EmbeddedResource Include="Products\Location Transfer\frm_product_loc_transfer.resx">
       <DependentUpon>frm_product_loc_transfer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\Suppression\frm_stock_suppression.resx">
+      <DependentUpon>frm_stock_suppression.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchase Orders\frm_all_purchases_orders.ar-SA.resx">
       <DependentUpon>frm_all_purchases_orders.cs</DependentUpon>
     </EmbeddedResource>
@@ -2485,6 +2489,12 @@
     <None Include="Products\Labels\product_labels.xss">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>
+    <None Include="Products\Suppression\COMPLETION_CHECKLIST.md" />
+    <None Include="Products\Suppression\IMPLEMENTATION_SUMMARY.md" />
+    <None Include="Products\Suppression\README.md" />
+    <None Include="Products\Suppression\STOCK_SUPPRESSION_GUIDE.md" />
+    <None Include="Products\Suppression\TECHNICAL_REFERENCE.md" />
+    <None Include="Products\Suppression\VISUAL_GUIDE.md" />
     <None Include="Reports\Products\Products_dataset.xsc">
       <DependentUpon>Products_dataset.xsd</DependentUpon>
     </None>
@@ -2557,6 +2567,24 @@
     <EmbeddedResource Include="Discounts\frm_apply_discount_scheme_bulk.resx">
       <DependentUpon>frm_apply_discount_scheme_bulk.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Products\Suppression\frm_stock_suppression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Suppression\frm_stock_suppression.Designer.cs">
+      <DependentUpon>frm_stock_suppression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Suppression\frm_stock_suppression_companies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Suppression\frm_stock_suppression_companies.Designer.cs">
+      <DependentUpon>frm_stock_suppression_companies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Suppression\frm_stock_suppression_stock_records.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Suppression\frm_stock_suppression_stock_records.Designer.cs">
+      <DependentUpon>frm_stock_suppression_stock_records.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

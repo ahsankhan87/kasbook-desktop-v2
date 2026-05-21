@@ -44,14 +44,14 @@ namespace pos
         // Dashboard panel
         private Panel dashboardPanel;
         private FlowLayoutPanel quickAccessPanel;
-
+        
         public frm_main()
         {
             Thread.CurrentThread.CurrentUICulture
                = new System.Globalization.CultureInfo(lang);
 
             InitializeComponent();
-
+            
             // Tag menu and toolbar items with permission keys (DB-backed)
             // Sales
             if (this.GetType() != null)
@@ -252,7 +252,7 @@ namespace pos
 
             UiMessages.ShowWarning(
                 "Software subscription has expired. Please renew to continue.",
-                "انتهت صلاحية اشتراك البرنامج. يرجى التجديد للمتابعة.",
+                "انتهت صلاحيات اشتراك البرنامج. يرجى التجديد للمتابعة.",
                 "Software Expiration",
                 "انتهاء الاشتراك");
 
@@ -447,6 +447,7 @@ namespace pos
 
                 // Discounts
                 if (discountSchemesToolStripMenuItem != null) discountSchemesToolStripMenuItem.Tag = Permissions.Discounts_ManageSchemes;
+                if (stockSuppressionToolStripMenuItem != null) stockSuppressionToolStripMenuItem.Tag = Permissions.Inventory_Edit;
             }
             catch { /* ignore if some items are not present in this build */ }
 
@@ -2391,7 +2392,7 @@ namespace pos
 
         }
 
-        private void _dashboardForm_FormClosed(object sender, FormClosedEventArgs e)
+ private void _dashboardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _dashboardForm = null;
         }
@@ -2500,6 +2501,31 @@ namespace pos
             else
             {
                 vatDashboard.Activate();
+            }
+        }
+
+        private void stockSupressionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form stockSupression = null;
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f is pos.Products.Suppression.frm_stock_suppression)
+                {
+                    stockSupression = f;
+                    break;
+                }
+            }
+
+            if (stockSupression == null)
+            {
+                stockSupression = new pos.Products.Suppression.frm_stock_suppression();
+               // stockSupression.MdiParent = this;
+                stockSupression.FormClosed += (s, args) => { };
+                stockSupression.ShowDialog();
+            }
+            else
+            {
+                stockSupression.Activate();
             }
         }
 
