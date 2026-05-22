@@ -193,7 +193,6 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -201,7 +200,6 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Xml.Linq.3.5.21022.801\lib\net20\System.Xml.Linq.dll</HintPath>
@@ -410,19 +408,7 @@
     </Compile>
     <Compile Include="Expenses\frm_expenses.Designer.cs">
       <DependentUpon>frm_expenses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Expenses\frm_expense_dashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Expenses\frm_expense_dashboard.Designer.cs">
-      <DependentUpon>frm_expense_dashboard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Expenses\frm_expense_tracker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Expenses\frm_expense_tracker.Designer.cs">
-      <DependentUpon>frm_expense_tracker.cs</DependentUpon>
-    </Compile>
+    </Compile>`r`n    <Compile Include="Expenses\frm_expense_tracker.cs">`r`n      <SubType>Form</SubType>`r`n    </Compile>`r`n    <Compile Include="Expenses\frm_expense_tracker.Designer.cs">`r`n      <DependentUpon>frm_expense_tracker.cs</DependentUpon>`r`n    </Compile>
     <Compile Include="FrmDbBackup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1703,9 +1689,6 @@
     <EmbeddedResource Include="Expenses\frm_expenses.resx">
       <DependentUpon>frm_expenses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Expenses\frm_expense_dashboard.resx">
-      <DependentUpon>frm_expense_dashboard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmDbBackup.resx">
       <DependentUpon>FrmDbBackup.cs</DependentUpon>
     </EmbeddedResource>
@@ -2703,3 +2686,5 @@
   <Import Project="..\packages\SkiaSharp.NativeAssets.Win32.2.88.8\build\net462\SkiaSharp.NativeAssets.Win32.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Win32.2.88.8\build\net462\SkiaSharp.NativeAssets.Win32.targets')" />
   <Import Project="..\packages\SkiaSharp.NativeAssets.Linux.NoDependencies.2.88.8\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Linux.NoDependencies.2.88.8\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets')" />
 </Project>
+
+

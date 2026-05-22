@@ -1,17 +1,9 @@
-﻿
-namespace pos.Expenses
+﻿namespace pos.Expenses
 {
     partial class frm_expenses
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,284 +15,404 @@ namespace pos.Expenses
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_expenses));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.grid_expenses = new System.Windows.Forms.DataGridView();
-            this.account_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.account = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vat = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_delete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cmb_account_code = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btn_add = new System.Windows.Forms.Button();
-            this.btn_close = new System.Windows.Forms.Button();
-            this.btn_save = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmb_cash_account = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmb_vat_account = new System.Windows.Forms.ComboBox();
-            this.txt_sale_date = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.panelBody = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.grid_expenses)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.panelTop.SuspendLayout();
-            this.panelBody.SuspendLayout();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.grpVoucherInfo = new System.Windows.Forms.GroupBox();
+            this.txtReferenceNo = new System.Windows.Forms.TextBox();
+            this.lblReferenceNo = new System.Windows.Forms.Label();
+            this.txtVoucherNo = new System.Windows.Forms.TextBox();
+            this.lblVoucherNo = new System.Windows.Forms.Label();
+            this.dtpVoucherDate = new System.Windows.Forms.DateTimePicker();
+            this.lblVoucherDate = new System.Windows.Forms.Label();
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.grpExpenseDetails = new System.Windows.Forms.GroupBox();
+            this.txtNetTotal = new System.Windows.Forms.TextBox();
+            this.lblNetTotal = new System.Windows.Forms.Label();
+            this.txtTaxAmount = new System.Windows.Forms.TextBox();
+            this.lblTaxAmount = new System.Windows.Forms.Label();
+            this.nudTaxPercent = new System.Windows.Forms.NumericUpDown();
+            this.lblTaxPercent = new System.Windows.Forms.Label();
+            this.cmbVatAccount = new System.Windows.Forms.ComboBox();
+            this.lblVatAccount = new System.Windows.Forms.Label();
+            this.btnAttachment = new System.Windows.Forms.Button();
+            this.txtAttachment = new System.Windows.Forms.TextBox();
+            this.lblAttachment = new System.Windows.Forms.Label();
+            this.txtNarration = new System.Windows.Forms.TextBox();
+            this.lblNarration = new System.Windows.Forms.Label();
+            this.nudAmount = new System.Windows.Forms.NumericUpDown();
+            this.lblAmount = new System.Windows.Forms.Label();
+            this.cmbExpenseAccount = new System.Windows.Forms.ComboBox();
+            this.lblExpenseAccount = new System.Windows.Forms.Label();
+            this.grpPaymentInfo = new System.Windows.Forms.GroupBox();
+            this.cmbCreditAccount = new System.Windows.Forms.ComboBox();
+            this.lblCreditAccount = new System.Windows.Forms.Label();
+            this.cmbPaymentMode = new System.Windows.Forms.ComboBox();
+            this.lblPaymentMode = new System.Windows.Forms.Label();
+            this.pnlActions = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tslLastSaved = new System.Windows.Forms.ToolStripStatusLabel();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pnlHeader.SuspendLayout();
+            this.grpVoucherInfo.SuspendLayout();
+            this.pnlContent.SuspendLayout();
+            this.grpExpenseDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTaxPercent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
+            this.grpPaymentInfo.SuspendLayout();
+            this.pnlActions.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grid_expenses
+            // pnlHeader
             // 
-            this.grid_expenses.AllowUserToAddRows = false;
-            this.grid_expenses.AllowUserToDeleteRows = false;
-            this.grid_expenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_expenses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.account_code,
-            this.account,
-            this.amount,
-            this.vat,
-            this.description,
-            this.total,
-            this.btn_delete});
-            resources.ApplyResources(this.grid_expenses, "grid_expenses");
-            this.grid_expenses.Name = "grid_expenses";
-            this.grid_expenses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_expenses_CellContentClick);
-            this.grid_expenses.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_expenses_CellEndEdit);
-            this.grid_expenses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_expenses_KeyDown);
+            this.pnlHeader.Controls.Add(this.grpVoucherInfo);
+            resources.ApplyResources(this.pnlHeader, "pnlHeader");
+            this.pnlHeader.Name = "pnlHeader";
             // 
-            // account_code
+            // grpVoucherInfo
             // 
-            this.account_code.DataPropertyName = "account_code";
-            resources.ApplyResources(this.account_code, "account_code");
-            this.account_code.Name = "account_code";
+            this.grpVoucherInfo.Controls.Add(this.txtReferenceNo);
+            this.grpVoucherInfo.Controls.Add(this.lblReferenceNo);
+            this.grpVoucherInfo.Controls.Add(this.txtVoucherNo);
+            this.grpVoucherInfo.Controls.Add(this.lblVoucherNo);
+            this.grpVoucherInfo.Controls.Add(this.dtpVoucherDate);
+            this.grpVoucherInfo.Controls.Add(this.lblVoucherDate);
+            resources.ApplyResources(this.grpVoucherInfo, "grpVoucherInfo");
+            this.grpVoucherInfo.Name = "grpVoucherInfo";
+            this.grpVoucherInfo.TabStop = false;
             // 
-            // account
+            // txtReferenceNo
             // 
-            this.account.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.account.DataPropertyName = "account";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.account.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.account, "account");
-            this.account.Name = "account";
+            resources.ApplyResources(this.txtReferenceNo, "txtReferenceNo");
+            this.txtReferenceNo.Name = "txtReferenceNo";
             // 
-            // amount
+            // lblReferenceNo
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amount.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.amount, "amount");
-            this.amount.Name = "amount";
+            resources.ApplyResources(this.lblReferenceNo, "lblReferenceNo");
+            this.lblReferenceNo.Name = "lblReferenceNo";
             // 
-            // vat
+            // txtVoucherNo
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vat.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.vat, "vat");
-            this.vat.Name = "vat";
-            this.vat.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.vat.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            resources.ApplyResources(this.txtVoucherNo, "txtVoucherNo");
+            this.txtVoucherNo.Name = "txtVoucherNo";
+            this.txtVoucherNo.ReadOnly = true;
             // 
-            // description
+            // lblVoucherNo
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.description.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.description, "description");
-            this.description.Name = "description";
+            resources.ApplyResources(this.lblVoucherNo, "lblVoucherNo");
+            this.lblVoucherNo.Name = "lblVoucherNo";
             // 
-            // total
+            // dtpVoucherDate
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.total, "total");
-            this.total.Name = "total";
+            this.dtpVoucherDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpVoucherDate, "dtpVoucherDate");
+            this.dtpVoucherDate.Name = "dtpVoucherDate";
             // 
-            // btn_delete
+            // lblVoucherDate
             // 
-            this.btn_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.NullValue = false;
-            this.btn_delete.DefaultCellStyle = dataGridViewCellStyle6;
-            resources.ApplyResources(this.btn_delete, "btn_delete");
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.btn_delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            resources.ApplyResources(this.lblVoucherDate, "lblVoucherDate");
+            this.lblVoucherDate.Name = "lblVoucherDate";
             // 
-            // cmb_account_code
+            // pnlContent
             // 
-            this.cmb_account_code.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_account_code.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_account_code.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_account_code, "cmb_account_code");
-            this.cmb_account_code.Name = "cmb_account_code";
+            this.pnlContent.Controls.Add(this.grpExpenseDetails);
+            this.pnlContent.Controls.Add(this.grpPaymentInfo);
+            this.pnlContent.Controls.Add(this.pnlActions);
+            resources.ApplyResources(this.pnlContent, "pnlContent");
+            this.pnlContent.Name = "pnlContent";
             // 
-            // label5
+            // grpExpenseDetails
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            this.grpExpenseDetails.Controls.Add(this.txtNetTotal);
+            this.grpExpenseDetails.Controls.Add(this.lblNetTotal);
+            this.grpExpenseDetails.Controls.Add(this.txtTaxAmount);
+            this.grpExpenseDetails.Controls.Add(this.lblTaxAmount);
+            this.grpExpenseDetails.Controls.Add(this.nudTaxPercent);
+            this.grpExpenseDetails.Controls.Add(this.lblTaxPercent);
+            this.grpExpenseDetails.Controls.Add(this.cmbVatAccount);
+            this.grpExpenseDetails.Controls.Add(this.lblVatAccount);
+            this.grpExpenseDetails.Controls.Add(this.btnAttachment);
+            this.grpExpenseDetails.Controls.Add(this.txtAttachment);
+            this.grpExpenseDetails.Controls.Add(this.lblAttachment);
+            this.grpExpenseDetails.Controls.Add(this.txtNarration);
+            this.grpExpenseDetails.Controls.Add(this.lblNarration);
+            this.grpExpenseDetails.Controls.Add(this.nudAmount);
+            this.grpExpenseDetails.Controls.Add(this.lblAmount);
+            this.grpExpenseDetails.Controls.Add(this.cmbExpenseAccount);
+            this.grpExpenseDetails.Controls.Add(this.lblExpenseAccount);
+            resources.ApplyResources(this.grpExpenseDetails, "grpExpenseDetails");
+            this.grpExpenseDetails.Name = "grpExpenseDetails";
+            this.grpExpenseDetails.TabStop = false;
             // 
-            // btn_add
+            // txtNetTotal
             // 
-            this.btn_add.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btn_add.ForeColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.btn_add, "btn_add");
-            this.btn_add.Name = "btn_add";
-            this.btn_add.UseVisualStyleBackColor = false;
-            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            resources.ApplyResources(this.txtNetTotal, "txtNetTotal");
+            this.txtNetTotal.Name = "txtNetTotal";
+            this.txtNetTotal.ReadOnly = true;
+            this.txtNetTotal.TabStop = false;
             // 
-            // btn_close
+            // lblNetTotal
             // 
-            this.btn_close.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btn_close, "btn_close");
-            this.btn_close.Name = "btn_close";
-            this.btn_close.UseVisualStyleBackColor = false;
-            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            resources.ApplyResources(this.lblNetTotal, "lblNetTotal");
+            this.lblNetTotal.Name = "lblNetTotal";
             // 
-            // btn_save
+            // txtTaxAmount
             // 
-            this.btn_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            resources.ApplyResources(this.btn_save, "btn_save");
-            this.btn_save.Name = "btn_save";
-            this.btn_save.UseVisualStyleBackColor = false;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            resources.ApplyResources(this.txtTaxAmount, "txtTaxAmount");
+            this.txtTaxAmount.Name = "txtTaxAmount";
+            this.txtTaxAmount.ReadOnly = true;
+            this.txtTaxAmount.TabStop = false;
             // 
-            // label1
+            // lblTaxAmount
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblTaxAmount, "lblTaxAmount");
+            this.lblTaxAmount.Name = "lblTaxAmount";
             // 
-            // cmb_cash_account
+            // nudTaxPercent
             // 
-            this.cmb_cash_account.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_cash_account.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_cash_account.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_cash_account, "cmb_cash_account");
-            this.cmb_cash_account.Name = "cmb_cash_account";
+            this.nudTaxPercent.DecimalPlaces = 2;
+            resources.ApplyResources(this.nudTaxPercent, "nudTaxPercent");
+            this.nudTaxPercent.Name = "nudTaxPercent";
+            this.nudTaxPercent.ValueChanged += new System.EventHandler(this.amountOrTax_ValueChanged);
             // 
-            // label2
+            // lblTaxPercent
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblTaxPercent, "lblTaxPercent");
+            this.lblTaxPercent.Name = "lblTaxPercent";
             // 
-            // cmb_vat_account
+            // cmbVatAccount
             // 
-            this.cmb_vat_account.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_vat_account.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_vat_account.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_vat_account, "cmb_vat_account");
-            this.cmb_vat_account.Name = "cmb_vat_account";
+            this.cmbVatAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbVatAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbVatAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbVatAccount.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbVatAccount, "cmbVatAccount");
+            this.cmbVatAccount.Name = "cmbVatAccount";
             // 
-            // txt_sale_date
+            // lblVatAccount
             // 
-            resources.ApplyResources(this.txt_sale_date, "txt_sale_date");
-            this.txt_sale_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_sale_date.Name = "txt_sale_date";
+            resources.ApplyResources(this.lblVatAccount, "lblVatAccount");
+            this.lblVatAccount.Name = "lblVatAccount";
             // 
-            // label3
+            // btnAttachment
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.btnAttachment, "btnAttachment");
+            this.btnAttachment.Name = "btnAttachment";
+            this.btnAttachment.UseVisualStyleBackColor = true;
+            this.btnAttachment.Click += new System.EventHandler(this.btnAttachment_Click);
             // 
-            // groupBox1
+            // txtAttachment
             // 
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.cmb_account_code);
-            this.groupBox1.Controls.Add(this.btn_add);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            resources.ApplyResources(this.txtAttachment, "txtAttachment");
+            this.txtAttachment.Name = "txtAttachment";
+            this.txtAttachment.ReadOnly = true;
+            this.txtAttachment.TabStop = false;
             // 
-            // groupBox2
+            // lblAttachment
             // 
-            this.groupBox2.Controls.Add(this.txt_sale_date);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.cmb_vat_account);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.cmb_cash_account);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
+            resources.ApplyResources(this.lblAttachment, "lblAttachment");
+            this.lblAttachment.Name = "lblAttachment";
             // 
-            // panelTop
+            // txtNarration
             // 
-            this.panelTop.Controls.Add(this.groupBox1);
-            this.panelTop.Controls.Add(this.btn_close);
-            this.panelTop.Controls.Add(this.groupBox2);
-            this.panelTop.Controls.Add(this.btn_save);
-            resources.ApplyResources(this.panelTop, "panelTop");
-            this.panelTop.Name = "panelTop";
+            resources.ApplyResources(this.txtNarration, "txtNarration");
+            this.txtNarration.Name = "txtNarration";
             // 
-            // panelBody
+            // lblNarration
             // 
-            this.panelBody.Controls.Add(this.grid_expenses);
-            resources.ApplyResources(this.panelBody, "panelBody");
-            this.panelBody.Name = "panelBody";
+            resources.ApplyResources(this.lblNarration, "lblNarration");
+            this.lblNarration.Name = "lblNarration";
+            // 
+            // nudAmount
+            // 
+            this.nudAmount.DecimalPlaces = 2;
+            resources.ApplyResources(this.nudAmount, "nudAmount");
+            this.nudAmount.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.nudAmount.Name = "nudAmount";
+            this.nudAmount.ValueChanged += new System.EventHandler(this.amountOrTax_ValueChanged);
+            // 
+            // lblAmount
+            // 
+            resources.ApplyResources(this.lblAmount, "lblAmount");
+            this.lblAmount.Name = "lblAmount";
+            // 
+            // cmbExpenseAccount
+            // 
+            this.cmbExpenseAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbExpenseAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbExpenseAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbExpenseAccount.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbExpenseAccount, "cmbExpenseAccount");
+            this.cmbExpenseAccount.Name = "cmbExpenseAccount";
+            // 
+            // lblExpenseAccount
+            // 
+            resources.ApplyResources(this.lblExpenseAccount, "lblExpenseAccount");
+            this.lblExpenseAccount.Name = "lblExpenseAccount";
+            // 
+            // grpPaymentInfo
+            // 
+            this.grpPaymentInfo.Controls.Add(this.cmbCreditAccount);
+            this.grpPaymentInfo.Controls.Add(this.lblCreditAccount);
+            this.grpPaymentInfo.Controls.Add(this.cmbPaymentMode);
+            this.grpPaymentInfo.Controls.Add(this.lblPaymentMode);
+            resources.ApplyResources(this.grpPaymentInfo, "grpPaymentInfo");
+            this.grpPaymentInfo.Name = "grpPaymentInfo";
+            this.grpPaymentInfo.TabStop = false;
+            // 
+            // cmbCreditAccount
+            // 
+            this.cmbCreditAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbCreditAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCreditAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCreditAccount.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbCreditAccount, "cmbCreditAccount");
+            this.cmbCreditAccount.Name = "cmbCreditAccount";
+            // 
+            // lblCreditAccount
+            // 
+            resources.ApplyResources(this.lblCreditAccount, "lblCreditAccount");
+            this.lblCreditAccount.Name = "lblCreditAccount";
+            // 
+            // cmbPaymentMode
+            // 
+            this.cmbPaymentMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentMode.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbPaymentMode, "cmbPaymentMode");
+            this.cmbPaymentMode.Name = "cmbPaymentMode";
+            this.cmbPaymentMode.SelectedIndexChanged += new System.EventHandler(this.cmbPaymentMode_SelectedIndexChanged);
+            // 
+            // lblPaymentMode
+            // 
+            resources.ApplyResources(this.lblPaymentMode, "lblPaymentMode");
+            this.lblPaymentMode.Name = "lblPaymentMode";
+            // 
+            // pnlActions
+            // 
+            this.pnlActions.Controls.Add(this.btnClose);
+            this.pnlActions.Controls.Add(this.btnClear);
+            this.pnlActions.Controls.Add(this.btnSave);
+            resources.ApplyResources(this.pnlActions, "pnlActions");
+            this.pnlActions.Name = "pnlActions";
+            // 
+            // btnClose
+            // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnClose, "btnClose");
+            this.btnClose.Name = "btnClose";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btn_close_Click);
+            // 
+            // btnClear
+            // 
+            resources.ApplyResources(this.btnClear, "btnClear");
+            this.btnClear.Name = "btnClear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSave
+            // 
+            resources.ApplyResources(this.btnSave, "btnSave");
+            this.btnSave.Name = "btnSave";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslLastSaved});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.Name = "statusStrip1";
+            // 
+            // tslLastSaved
+            // 
+            this.tslLastSaved.Name = "tslLastSaved";
+            resources.ApplyResources(this.tslLastSaved, "tslLastSaved");
+            // 
+            // openFileDialog1
+            // 
+            resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
             // frm_expenses
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btn_close;
-            this.Controls.Add(this.panelBody);
-            this.Controls.Add(this.panelTop);
+            this.CancelButton = this.btnClose;
+            this.Controls.Add(this.pnlContent);
+            this.Controls.Add(this.pnlHeader);
+            this.Controls.Add(this.statusStrip1);
+            this.KeyPreview = true;
             this.Name = "frm_expenses";
             this.ShowIcon = false;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_expenses_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_expenses_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.grid_expenses)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.panelTop.ResumeLayout(false);
-            this.panelBody.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
+            this.grpVoucherInfo.ResumeLayout(false);
+            this.grpVoucherInfo.PerformLayout();
+            this.pnlContent.ResumeLayout(false);
+            this.grpExpenseDetails.ResumeLayout(false);
+            this.grpExpenseDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTaxPercent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
+            this.grpPaymentInfo.ResumeLayout(false);
+            this.pnlActions.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView grid_expenses;
-        private System.Windows.Forms.ComboBox cmb_account_code;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btn_add;
-        private System.Windows.Forms.Button btn_close;
-        private System.Windows.Forms.Button btn_save;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmb_cash_account;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmb_vat_account;
-        private System.Windows.Forms.DateTimePicker txt_sale_date;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn account_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn account;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
-        private System.Windows.Forms.DataGridViewComboBoxColumn vat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn total;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn btn_delete;
-        private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Panel panelBody;
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.GroupBox grpVoucherInfo;
+        private System.Windows.Forms.TextBox txtReferenceNo;
+        private System.Windows.Forms.Label lblReferenceNo;
+        private System.Windows.Forms.TextBox txtVoucherNo;
+        private System.Windows.Forms.Label lblVoucherNo;
+        private System.Windows.Forms.DateTimePicker dtpVoucherDate;
+        private System.Windows.Forms.Label lblVoucherDate;
+        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.GroupBox grpExpenseDetails;
+        private System.Windows.Forms.ComboBox cmbVatAccount;
+        private System.Windows.Forms.Label lblVatAccount;
+        private System.Windows.Forms.TextBox txtNetTotal;
+        private System.Windows.Forms.Label lblNetTotal;
+        private System.Windows.Forms.TextBox txtTaxAmount;
+        private System.Windows.Forms.Label lblTaxAmount;
+        private System.Windows.Forms.NumericUpDown nudTaxPercent;
+        private System.Windows.Forms.Label lblTaxPercent;
+        private System.Windows.Forms.Button btnAttachment;
+        private System.Windows.Forms.TextBox txtAttachment;
+        private System.Windows.Forms.Label lblAttachment;
+        private System.Windows.Forms.TextBox txtNarration;
+        private System.Windows.Forms.Label lblNarration;
+        private System.Windows.Forms.NumericUpDown nudAmount;
+        private System.Windows.Forms.Label lblAmount;
+        private System.Windows.Forms.ComboBox cmbExpenseAccount;
+        private System.Windows.Forms.Label lblExpenseAccount;
+        private System.Windows.Forms.GroupBox grpPaymentInfo;
+        private System.Windows.Forms.ComboBox cmbCreditAccount;
+        private System.Windows.Forms.Label lblCreditAccount;
+        private System.Windows.Forms.ComboBox cmbPaymentMode;
+        private System.Windows.Forms.Label lblPaymentMode;
+        private System.Windows.Forms.Panel pnlActions;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tslLastSaved;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

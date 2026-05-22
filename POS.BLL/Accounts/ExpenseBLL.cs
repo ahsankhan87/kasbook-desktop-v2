@@ -104,5 +104,135 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public DataTable GetExpenseTrackerList(DateTime fromDate, DateTime toDate, int expenseAccountId = 0, string paymentMode = "", string searchText = "")
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetExpenseTrackerList(fromDate, toDate, expenseAccountId, paymentMode, searchText);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetExpenseByVoucher(string voucherNo)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetExpenseByVoucher(voucherNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int DeleteByVoucher(string voucherNo)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.DeleteByVoucher(voucherNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetExpenseTotal(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetExpenseTotal(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetPendingExpenseTotal()
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetPendingExpenseTotal();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int GetPendingExpenseCount()
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetPendingExpenseCount();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetExpenseMonthlyComparison(int year)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetExpenseMonthlyComparison(year);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetExpenseBreakdown(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetExpenseBreakdown(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetRecentExpenses(int top)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetRecentExpenses(top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetTopExpenseAccounts(DateTime fromDate, DateTime toDate, int top)
+        {
+            try
+            {
+                ExpenseDLL objDLL = new ExpenseDLL();
+                return objDLL.GetTopExpenseAccounts(fromDate, toDate, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

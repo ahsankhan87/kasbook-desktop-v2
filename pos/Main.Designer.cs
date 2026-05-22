@@ -168,6 +168,9 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
+            this.createNewExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -708,9 +711,12 @@
             // 
             // expensesToolStripMenuItem
             // 
+            this.expensesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewExpenseToolStripMenuItem,
+            this.expenseListToolStripMenuItem1,
+            this.expenseDashboardToolStripMenuItem});
             this.expensesToolStripMenuItem.Name = "expensesToolStripMenuItem";
             resources.ApplyResources(this.expensesToolStripMenuItem, "expensesToolStripMenuItem");
-            this.expensesToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1137,6 +1143,24 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
+            // createNewExpenseToolStripMenuItem
+            // 
+            this.createNewExpenseToolStripMenuItem.Name = "createNewExpenseToolStripMenuItem";
+            resources.ApplyResources(this.createNewExpenseToolStripMenuItem, "createNewExpenseToolStripMenuItem");
+            this.createNewExpenseToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
+            // 
+            // expenseListToolStripMenuItem1
+            // 
+            this.expenseListToolStripMenuItem1.Name = "expenseListToolStripMenuItem1";
+            resources.ApplyResources(this.expenseListToolStripMenuItem1, "expenseListToolStripMenuItem1");
+            this.expenseListToolStripMenuItem1.Click += new System.EventHandler(this.expenseListToolStripMenuItem_Click);
+            // 
+            // expenseDashboardToolStripMenuItem
+            // 
+            this.expenseDashboardToolStripMenuItem.Name = "expenseDashboardToolStripMenuItem";
+            resources.ApplyResources(this.expenseDashboardToolStripMenuItem, "expenseDashboardToolStripMenuItem");
+            this.expenseDashboardToolStripMenuItem.Click += new System.EventHandler(this.expenseDashboardToolStripMenuItem_Click);
+            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1304,5 +1328,8 @@
         private System.Windows.Forms.ToolStripMenuItem vATDashboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem discountSchemesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockSuppressionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNewExpenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expenseListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem expenseDashboardToolStripMenuItem;
     }
 }
