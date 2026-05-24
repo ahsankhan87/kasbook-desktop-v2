@@ -1718,6 +1718,9 @@
     <EmbeddedResource Include="Expenses\frm_expense_dashboard.resx">
       <DependentUpon>frm_expense_dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Expenses\frm_expense_tracker.resx">
+      <DependentUpon>frm_expense_tracker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDbBackup.resx">
       <DependentUpon>FrmDbBackup.cs</DependentUpon>
     </EmbeddedResource>

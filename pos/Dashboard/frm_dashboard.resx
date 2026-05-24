@@ -831,6 +831,105 @@
   <data name="&gt;&gt;btnSalesReport.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="btnCustomersSummary.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.5pt, style=Bold</value>
+  </data>
+  <data name="btnCustomersSummary.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnCustomersSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 126</value>
+  </data>
+  <data name="btnCustomersSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 10, 9, 10</value>
+  </data>
+  <data name="btnCustomersSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 80</value>
+  </data>
+  <data name="btnCustomersSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnCustomersSummary.Text" xml:space="preserve">
+    <value>👤  Customers Summary</value>
+  </data>
+  <data name="&gt;&gt;btnCustomersSummary.Name" xml:space="preserve">
+    <value>btnCustomersSummary</value>
+  </data>
+  <data name="&gt;&gt;btnCustomersSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCustomersSummary.Parent" xml:space="preserve">
+    <value>quickAccessPanel</value>
+  </data>
+  <data name="&gt;&gt;btnCustomersSummary.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="btnSuppliersSummary.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.5pt, style=Bold</value>
+  </data>
+  <data name="btnSuppliersSummary.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnSuppliersSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>795, 126</value>
+  </data>
+  <data name="btnSuppliersSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 10, 9, 10</value>
+  </data>
+  <data name="btnSuppliersSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 80</value>
+  </data>
+  <data name="btnSuppliersSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btnSuppliersSummary.Text" xml:space="preserve">
+    <value>🏢  Suppliers Summary</value>
+  </data>
+  <data name="&gt;&gt;btnSuppliersSummary.Name" xml:space="preserve">
+    <value>btnSuppliersSummary</value>
+  </data>
+  <data name="&gt;&gt;btnSuppliersSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSuppliersSummary.Parent" xml:space="preserve">
+    <value>quickAccessPanel</value>
+  </data>
+  <data name="&gt;&gt;btnSuppliersSummary.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="btnExpenses.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.5pt, style=Bold</value>
+  </data>
+  <data name="btnExpenses.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnExpenses.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 226</value>
+  </data>
+  <data name="btnExpenses.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 10, 9, 10</value>
+  </data>
+  <data name="btnExpenses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 80</value>
+  </data>
+  <data name="btnExpenses.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnExpenses.Text" xml:space="preserve">
+    <value>🏢  Record Expense</value>
+  </data>
+  <data name="&gt;&gt;btnExpenses.Name" xml:space="preserve">
+    <value>btnExpenses</value>
+  </data>
+  <data name="&gt;&gt;btnExpenses.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExpenses.Parent" xml:space="preserve">
+    <value>quickAccessPanel</value>
+  </data>
+  <data name="&gt;&gt;btnExpenses.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
   <data name="quickAccessPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>

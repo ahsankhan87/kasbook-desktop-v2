@@ -632,19 +632,20 @@ OPTION (MAXRECURSION 100)", cn))
             using (SqlCommand cmdLocal = new SqlCommand(@"
 SELECT TOP (@top)
     ISNULL(pi.item_number, '') AS item_no,
-    ISNULL(p.name, ISNULL(pi.item_number, '')) AS item_name,
+    ISNULL(pr.name, ISNULL(pi.item_number, '')) AS item_name,
     CAST(SUM(ISNULL(pi.quantity, 0)) AS decimal(18,2)) AS qty,
     CAST(SUM((ISNULL(pi.cost_price, 0) * ISNULL(pi.quantity, 0)) - ABS(ISNULL(pi.discount_value, 0))) AS decimal(18,2)) AS total_value
 FROM pos_purchases_items pi
-LEFT JOIN pos_products p ON p.item_number = pi.item_number
+INNER JOIN pos_purchases ph ON ph.branch_id = pi.branch_id AND ph.invoice_no = pi.invoice_no
+LEFT JOIN pos_products pr ON pr.item_number = pi.item_number
 WHERE pi.branch_id = @branch_id
-  AND pi.supplier_id = @supplier_id
-GROUP BY pi.item_number, p.name
+  AND ph.supplier_id = @supplier_id
+GROUP BY pi.item_number, pr.name
 ORDER BY total_value DESC", cn))
             {
-                cmdLocal.Parameters.Add("@top", SqlDbType.Int).Value = top <= 0 ? 5 : top;
                 cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
                 cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                cmdLocal.Parameters.Add("@top", SqlDbType.Int).Value = top <= 0 ? 5 : top;
 
                 DataTable dt = new DataTable();
                 cn.Open();
@@ -814,6 +815,7 @@ ORDER BY p.purchase_date DESC, p.invoice_no DESC", cn))
 
         public DataTable GetSupplierMonthlySpendTrend(int supplierId, int months = 24)
         {
+
             return GetSupplierMonthlyPurchaseHistory(supplierId, months <= 0 ? 24 : months);
         }
 
@@ -825,9 +827,10 @@ SELECT DISTINCT
     ISNULL(pi.item_number, '') AS item_no,
     ISNULL(p.name, ISNULL(pi.item_number, '')) AS item_name
 FROM pos_purchases_items pi
+INNER JOIN pos_purchases ph ON ph.branch_id = pi.branch_id AND ph.invoice_no = pi.invoice_no
 LEFT JOIN pos_products p ON p.item_number = pi.item_number
 WHERE pi.branch_id = @branch_id
-  AND pi.supplier_id = @supplier_id
+  AND ph.supplier_id = @supplier_id
 ORDER BY item_name", cn))
             {
                 cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
@@ -854,7 +857,7 @@ SELECT
 FROM pos_purchases_items pi
 INNER JOIN pos_purchases p ON p.branch_id = pi.branch_id AND p.invoice_no = pi.invoice_no
 WHERE pi.branch_id = @branch_id
-  AND pi.supplier_id = @supplier_id
+  AND p.supplier_id = @supplier_id
   AND pi.item_number = @item_no
 ORDER BY p.purchase_date, pi.id", cn))
             {

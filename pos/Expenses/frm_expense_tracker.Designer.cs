@@ -78,16 +78,18 @@ namespace pos.Expenses
             this.panelFilters.Controls.Add(this.btnExport);
             this.panelFilters.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFilters.Location = new System.Drawing.Point(0, 0);
+            this.panelFilters.Margin = new System.Windows.Forms.Padding(2);
             this.panelFilters.Name = "panelFilters";
-            this.panelFilters.Padding = new System.Windows.Forms.Padding(12, 10, 12, 8);
-            this.panelFilters.Size = new System.Drawing.Size(1280, 88);
+            this.panelFilters.Padding = new System.Windows.Forms.Padding(9, 8, 9, 6);
+            this.panelFilters.Size = new System.Drawing.Size(996, 70);
             this.panelFilters.TabIndex = 0;
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(1051, 12);
+            this.btnFilter.Location = new System.Drawing.Point(915, 10);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(2);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(88, 30);
+            this.btnFilter.Size = new System.Drawing.Size(68, 24);
             this.btnFilter.TabIndex = 10;
             this.btnFilter.Text = "Apply";
             this.btnFilter.UseVisualStyleBackColor = true;
@@ -95,17 +97,19 @@ namespace pos.Expenses
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(847, 15);
+            this.txtSearch.Location = new System.Drawing.Point(758, 10);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(196, 26);
+            this.txtSearch.Size = new System.Drawing.Size(153, 24);
             this.txtSearch.TabIndex = 9;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // lblSearch
             // 
-            this.lblSearch.Location = new System.Drawing.Point(786, 12);
+            this.lblSearch.Location = new System.Drawing.Point(685, 10);
+            this.lblSearch.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(54, 30);
+            this.lblSearch.Size = new System.Drawing.Size(56, 24);
             this.lblSearch.TabIndex = 8;
             this.lblSearch.Text = "Search";
             this.lblSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -114,16 +118,18 @@ namespace pos.Expenses
             // 
             this.cmbPaymentMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPaymentMode.FormattingEnabled = true;
-            this.cmbPaymentMode.Location = new System.Drawing.Point(624, 14);
+            this.cmbPaymentMode.Location = new System.Drawing.Point(559, 11);
+            this.cmbPaymentMode.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPaymentMode.Name = "cmbPaymentMode";
-            this.cmbPaymentMode.Size = new System.Drawing.Size(153, 28);
+            this.cmbPaymentMode.Size = new System.Drawing.Size(120, 24);
             this.cmbPaymentMode.TabIndex = 7;
             // 
             // lblPaymentMode
             // 
-            this.lblPaymentMode.Location = new System.Drawing.Point(519, 12);
+            this.lblPaymentMode.Location = new System.Drawing.Point(491, 10);
+            this.lblPaymentMode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPaymentMode.Name = "lblPaymentMode";
-            this.lblPaymentMode.Size = new System.Drawing.Size(99, 30);
+            this.lblPaymentMode.Size = new System.Drawing.Size(64, 24);
             this.lblPaymentMode.TabIndex = 6;
             this.lblPaymentMode.Text = "Payment Mode";
             this.lblPaymentMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -132,16 +138,18 @@ namespace pos.Expenses
             // 
             this.cmbExpenseAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExpenseAccount.FormattingEnabled = true;
-            this.cmbExpenseAccount.Location = new System.Drawing.Point(328, 14);
+            this.cmbExpenseAccount.Location = new System.Drawing.Point(343, 11);
+            this.cmbExpenseAccount.Margin = new System.Windows.Forms.Padding(2);
             this.cmbExpenseAccount.Name = "cmbExpenseAccount";
-            this.cmbExpenseAccount.Size = new System.Drawing.Size(184, 28);
+            this.cmbExpenseAccount.Size = new System.Drawing.Size(144, 24);
             this.cmbExpenseAccount.TabIndex = 5;
             // 
             // lblExpenseAccount
             // 
-            this.lblExpenseAccount.Location = new System.Drawing.Point(212, 12);
+            this.lblExpenseAccount.Location = new System.Drawing.Point(275, 10);
+            this.lblExpenseAccount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblExpenseAccount.Name = "lblExpenseAccount";
-            this.lblExpenseAccount.Size = new System.Drawing.Size(109, 30);
+            this.lblExpenseAccount.Size = new System.Drawing.Size(63, 24);
             this.lblExpenseAccount.TabIndex = 4;
             this.lblExpenseAccount.Text = "Expense Account";
             this.lblExpenseAccount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -149,16 +157,18 @@ namespace pos.Expenses
             // dtpTo
             // 
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTo.Location = new System.Drawing.Point(118, 14);
+            this.dtpTo.Location = new System.Drawing.Point(180, 8);
+            this.dtpTo.Margin = new System.Windows.Forms.Padding(2);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(87, 26);
+            this.dtpTo.Size = new System.Drawing.Size(91, 24);
             this.dtpTo.TabIndex = 3;
             // 
             // lblTo
             // 
-            this.lblTo.Location = new System.Drawing.Point(89, 12);
+            this.lblTo.Location = new System.Drawing.Point(145, 10);
+            this.lblTo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(23, 30);
+            this.lblTo.Size = new System.Drawing.Size(31, 24);
             this.lblTo.TabIndex = 2;
             this.lblTo.Text = "To";
             this.lblTo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -166,25 +176,28 @@ namespace pos.Expenses
             // dtpFrom
             // 
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFrom.Location = new System.Drawing.Point(43, 14);
+            this.dtpFrom.Location = new System.Drawing.Point(51, 8);
+            this.dtpFrom.Margin = new System.Windows.Forms.Padding(2);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(87, 26);
+            this.dtpFrom.Size = new System.Drawing.Size(90, 24);
             this.dtpFrom.TabIndex = 1;
             // 
             // lblFrom
             // 
-            this.lblFrom.Location = new System.Drawing.Point(3, 12);
+            this.lblFrom.Location = new System.Drawing.Point(2, 10);
+            this.lblFrom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(40, 30);
+            this.lblFrom.Size = new System.Drawing.Size(45, 24);
             this.lblFrom.TabIndex = 0;
             this.lblFrom.Text = "From";
             this.lblFrom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(1051, 48);
+            this.btnPrint.Location = new System.Drawing.Point(817, 38);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(88, 30);
+            this.btnPrint.Size = new System.Drawing.Size(68, 24);
             this.btnPrint.TabIndex = 12;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -192,9 +205,10 @@ namespace pos.Expenses
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(1145, 48);
+            this.btnExport.Location = new System.Drawing.Point(891, 38);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(120, 30);
+            this.btnExport.Size = new System.Drawing.Size(93, 24);
             this.btnExport.TabIndex = 11;
             this.btnExport.Text = "Export Excel";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -204,10 +218,11 @@ namespace pos.Expenses
             // 
             this.panelBody.Controls.Add(this.gridExpenses);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 88);
+            this.panelBody.Location = new System.Drawing.Point(0, 70);
+            this.panelBody.Margin = new System.Windows.Forms.Padding(2);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
-            this.panelBody.Size = new System.Drawing.Size(1280, 525);
+            this.panelBody.Padding = new System.Windows.Forms.Padding(9, 0, 9, 0);
+            this.panelBody.Size = new System.Drawing.Size(996, 421);
             this.panelBody.TabIndex = 1;
             // 
             // gridExpenses
@@ -218,14 +233,16 @@ namespace pos.Expenses
             this.gridExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridExpenses.ContextMenuStrip = this.ctxGrid;
             this.gridExpenses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridExpenses.Location = new System.Drawing.Point(12, 0);
+            this.gridExpenses.Location = new System.Drawing.Point(9, 0);
+            this.gridExpenses.Margin = new System.Windows.Forms.Padding(2);
             this.gridExpenses.MultiSelect = false;
             this.gridExpenses.Name = "gridExpenses";
             this.gridExpenses.ReadOnly = true;
             this.gridExpenses.RowHeadersVisible = false;
+            this.gridExpenses.RowHeadersWidth = 51;
             this.gridExpenses.RowTemplate.Height = 28;
             this.gridExpenses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridExpenses.Size = new System.Drawing.Size(1256, 525);
+            this.gridExpenses.Size = new System.Drawing.Size(978, 421);
             this.gridExpenses.TabIndex = 0;
             this.gridExpenses.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridExpenses_CellDoubleClick);
             this.gridExpenses.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridExpenses_MouseDown);
@@ -241,45 +258,45 @@ namespace pos.Expenses
             this.mnuPrintVoucher,
             this.mnuViewJournal});
             this.ctxGrid.Name = "ctxGrid";
-            this.ctxGrid.Size = new System.Drawing.Size(192, 140);
+            this.ctxGrid.Size = new System.Drawing.Size(199, 130);
             // 
             // mnuViewDetails
             // 
             this.mnuViewDetails.Name = "mnuViewDetails";
-            this.mnuViewDetails.Size = new System.Drawing.Size(191, 22);
+            this.mnuViewDetails.Size = new System.Drawing.Size(198, 24);
             this.mnuViewDetails.Text = "View Details";
             this.mnuViewDetails.Click += new System.EventHandler(this.mnuViewDetails_Click);
             // 
             // mnuEdit
             // 
             this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(191, 22);
+            this.mnuEdit.Size = new System.Drawing.Size(198, 24);
             this.mnuEdit.Text = "Edit";
             this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click);
             // 
             // mnuDelete
             // 
             this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.Size = new System.Drawing.Size(191, 22);
+            this.mnuDelete.Size = new System.Drawing.Size(198, 24);
             this.mnuDelete.Text = "Delete";
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // mnuPrintVoucher
             // 
             this.mnuPrintVoucher.Name = "mnuPrintVoucher";
-            this.mnuPrintVoucher.Size = new System.Drawing.Size(191, 22);
+            this.mnuPrintVoucher.Size = new System.Drawing.Size(198, 24);
             this.mnuPrintVoucher.Text = "Print Voucher";
             this.mnuPrintVoucher.Click += new System.EventHandler(this.mnuPrintVoucher_Click);
             // 
             // mnuViewJournal
             // 
             this.mnuViewJournal.Name = "mnuViewJournal";
-            this.mnuViewJournal.Size = new System.Drawing.Size(191, 22);
+            this.mnuViewJournal.Size = new System.Drawing.Size(198, 24);
             this.mnuViewJournal.Text = "View Journal Entry";
             this.mnuViewJournal.Click += new System.EventHandler(this.mnuViewJournal_Click);
             // 
@@ -289,27 +306,30 @@ namespace pos.Expenses
             this.panelSummary.Controls.Add(this.cardTotalTax);
             this.panelSummary.Controls.Add(this.cardTotalExpenses);
             this.panelSummary.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSummary.Location = new System.Drawing.Point(0, 613);
+            this.panelSummary.Location = new System.Drawing.Point(0, 491);
+            this.panelSummary.Margin = new System.Windows.Forms.Padding(2);
             this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Padding = new System.Windows.Forms.Padding(12, 8, 12, 10);
-            this.panelSummary.Size = new System.Drawing.Size(1280, 108);
+            this.panelSummary.Padding = new System.Windows.Forms.Padding(9, 6, 9, 8);
+            this.panelSummary.Size = new System.Drawing.Size(996, 86);
             this.panelSummary.TabIndex = 2;
             // 
             // cardNetTotal
             // 
             this.cardNetTotal.Controls.Add(this.lblNetTotalValue);
             this.cardNetTotal.Controls.Add(this.lblNetTotalTitle);
-            this.cardNetTotal.Location = new System.Drawing.Point(862, 12);
+            this.cardNetTotal.Location = new System.Drawing.Point(670, 10);
+            this.cardNetTotal.Margin = new System.Windows.Forms.Padding(2);
             this.cardNetTotal.Name = "cardNetTotal";
-            this.cardNetTotal.Size = new System.Drawing.Size(403, 84);
+            this.cardNetTotal.Size = new System.Drawing.Size(313, 67);
             this.cardNetTotal.TabIndex = 2;
             // 
             // lblNetTotalValue
             // 
             this.lblNetTotalValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNetTotalValue.Location = new System.Drawing.Point(0, 30);
+            this.lblNetTotalValue.Location = new System.Drawing.Point(0, 24);
+            this.lblNetTotalValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNetTotalValue.Name = "lblNetTotalValue";
-            this.lblNetTotalValue.Size = new System.Drawing.Size(403, 54);
+            this.lblNetTotalValue.Size = new System.Drawing.Size(313, 43);
             this.lblNetTotalValue.TabIndex = 1;
             this.lblNetTotalValue.Text = "0.00";
             this.lblNetTotalValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -318,8 +338,9 @@ namespace pos.Expenses
             // 
             this.lblNetTotalTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblNetTotalTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblNetTotalTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNetTotalTitle.Name = "lblNetTotalTitle";
-            this.lblNetTotalTitle.Size = new System.Drawing.Size(403, 30);
+            this.lblNetTotalTitle.Size = new System.Drawing.Size(313, 24);
             this.lblNetTotalTitle.TabIndex = 0;
             this.lblNetTotalTitle.Text = "Net Total";
             this.lblNetTotalTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -328,17 +349,19 @@ namespace pos.Expenses
             // 
             this.cardTotalTax.Controls.Add(this.lblTotalTaxValue);
             this.cardTotalTax.Controls.Add(this.lblTotalTaxTitle);
-            this.cardTotalTax.Location = new System.Drawing.Point(437, 12);
+            this.cardTotalTax.Location = new System.Drawing.Point(340, 10);
+            this.cardTotalTax.Margin = new System.Windows.Forms.Padding(2);
             this.cardTotalTax.Name = "cardTotalTax";
-            this.cardTotalTax.Size = new System.Drawing.Size(403, 84);
+            this.cardTotalTax.Size = new System.Drawing.Size(313, 67);
             this.cardTotalTax.TabIndex = 1;
             // 
             // lblTotalTaxValue
             // 
             this.lblTotalTaxValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalTaxValue.Location = new System.Drawing.Point(0, 30);
+            this.lblTotalTaxValue.Location = new System.Drawing.Point(0, 24);
+            this.lblTotalTaxValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalTaxValue.Name = "lblTotalTaxValue";
-            this.lblTotalTaxValue.Size = new System.Drawing.Size(403, 54);
+            this.lblTotalTaxValue.Size = new System.Drawing.Size(313, 43);
             this.lblTotalTaxValue.TabIndex = 1;
             this.lblTotalTaxValue.Text = "0.00";
             this.lblTotalTaxValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -347,8 +370,9 @@ namespace pos.Expenses
             // 
             this.lblTotalTaxTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTotalTaxTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTotalTaxTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalTaxTitle.Name = "lblTotalTaxTitle";
-            this.lblTotalTaxTitle.Size = new System.Drawing.Size(403, 30);
+            this.lblTotalTaxTitle.Size = new System.Drawing.Size(313, 24);
             this.lblTotalTaxTitle.TabIndex = 0;
             this.lblTotalTaxTitle.Text = "Total Tax";
             this.lblTotalTaxTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -357,17 +381,19 @@ namespace pos.Expenses
             // 
             this.cardTotalExpenses.Controls.Add(this.lblTotalExpensesValue);
             this.cardTotalExpenses.Controls.Add(this.lblTotalExpensesTitle);
-            this.cardTotalExpenses.Location = new System.Drawing.Point(12, 12);
+            this.cardTotalExpenses.Location = new System.Drawing.Point(9, 10);
+            this.cardTotalExpenses.Margin = new System.Windows.Forms.Padding(2);
             this.cardTotalExpenses.Name = "cardTotalExpenses";
-            this.cardTotalExpenses.Size = new System.Drawing.Size(403, 84);
+            this.cardTotalExpenses.Size = new System.Drawing.Size(313, 67);
             this.cardTotalExpenses.TabIndex = 0;
             // 
             // lblTotalExpensesValue
             // 
             this.lblTotalExpensesValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalExpensesValue.Location = new System.Drawing.Point(0, 30);
+            this.lblTotalExpensesValue.Location = new System.Drawing.Point(0, 24);
+            this.lblTotalExpensesValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalExpensesValue.Name = "lblTotalExpensesValue";
-            this.lblTotalExpensesValue.Size = new System.Drawing.Size(403, 54);
+            this.lblTotalExpensesValue.Size = new System.Drawing.Size(313, 43);
             this.lblTotalExpensesValue.TabIndex = 1;
             this.lblTotalExpensesValue.Text = "0.00";
             this.lblTotalExpensesValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -376,20 +402,22 @@ namespace pos.Expenses
             // 
             this.lblTotalExpensesTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTotalExpensesTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTotalExpensesTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalExpensesTitle.Name = "lblTotalExpensesTitle";
-            this.lblTotalExpensesTitle.Size = new System.Drawing.Size(403, 30);
+            this.lblTotalExpensesTitle.Size = new System.Drawing.Size(313, 24);
             this.lblTotalExpensesTitle.TabIndex = 0;
             this.lblTotalExpensesTitle.Text = "Total Expenses";
             this.lblTotalExpensesTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frm_expense_tracker
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1280, 721);
+            this.ClientSize = new System.Drawing.Size(996, 577);
             this.Controls.Add(this.panelBody);
             this.Controls.Add(this.panelSummary);
             this.Controls.Add(this.panelFilters);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm_expense_tracker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Expense Tracker";

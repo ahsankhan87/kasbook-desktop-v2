@@ -33,6 +33,7 @@
             this.txtTaxAmount = new System.Windows.Forms.TextBox();
             this.lblTaxAmount = new System.Windows.Forms.Label();
             this.nudTaxPercent = new System.Windows.Forms.NumericUpDown();
+            this.cmbTax = new System.Windows.Forms.ComboBox();
             this.lblTaxPercent = new System.Windows.Forms.Label();
             this.cmbVatAccount = new System.Windows.Forms.ComboBox();
             this.lblVatAccount = new System.Windows.Forms.Label();
@@ -133,6 +134,7 @@
             this.grpExpenseDetails.Controls.Add(this.txtTaxAmount);
             this.grpExpenseDetails.Controls.Add(this.lblTaxAmount);
             this.grpExpenseDetails.Controls.Add(this.nudTaxPercent);
+            this.grpExpenseDetails.Controls.Add(this.cmbTax);
             this.grpExpenseDetails.Controls.Add(this.lblTaxPercent);
             this.grpExpenseDetails.Controls.Add(this.cmbVatAccount);
             this.grpExpenseDetails.Controls.Add(this.lblVatAccount);
@@ -178,7 +180,21 @@
             this.nudTaxPercent.DecimalPlaces = 2;
             resources.ApplyResources(this.nudTaxPercent, "nudTaxPercent");
             this.nudTaxPercent.Name = "nudTaxPercent";
+            this.nudTaxPercent.TabStop = false;
+            this.nudTaxPercent.Visible = false;
             this.nudTaxPercent.ValueChanged += new System.EventHandler(this.amountOrTax_ValueChanged);
+            // 
+            // cmbTax
+            // 
+            this.cmbTax.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbTax.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTax.FormattingEnabled = true;
+            this.cmbTax.Location = this.nudTaxPercent.Location;
+            this.cmbTax.Size = this.nudTaxPercent.Size;
+            this.cmbTax.TabIndex = this.nudTaxPercent.TabIndex;
+            this.cmbTax.Name = "cmbTax";
+            this.cmbTax.SelectedIndexChanged += new System.EventHandler(this.cmbTax_SelectedIndexChanged);
             // 
             // lblTaxPercent
             // 
@@ -392,6 +408,7 @@
         private System.Windows.Forms.TextBox txtTaxAmount;
         private System.Windows.Forms.Label lblTaxAmount;
         private System.Windows.Forms.NumericUpDown nudTaxPercent;
+        private System.Windows.Forms.ComboBox cmbTax;
         private System.Windows.Forms.Label lblTaxPercent;
         private System.Windows.Forms.Button btnAttachment;
         private System.Windows.Forms.TextBox txtAttachment;

@@ -585,6 +585,7 @@
             this.Controls.Add(this.pnlTop);
             this.Name = "frm_suppliers";
             this.ShowIcon = false;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_suppliers_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();

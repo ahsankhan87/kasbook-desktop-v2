@@ -287,7 +287,7 @@ namespace pos
             }
 
             DataGridViewRow row = grid_suppliers.CurrentRow;
-            _selectedSupplierId = ToInt(row.Cells["colId"].Value);
+            _selectedSupplierId = ResolveSelectedSupplierId(row);
             _selectedSupplierName = Convert.ToString(row.Cells["colSupplierName"].Value);
             string supplierCode = Convert.ToString(row.Cells["colSupplierCode"].Value);
 
@@ -307,6 +307,32 @@ namespace pos
 
             LoadRecentBills(_selectedSupplierId);
             ToggleDetailsPanel(true);
+        }
+
+        private int ResolveSelectedSupplierId(DataGridViewRow row)
+        {
+            if (row == null)
+                return 0;
+
+            int supplierId = 0;
+
+            if (grid_suppliers.Columns.Contains("colId"))
+                supplierId = ToInt(row.Cells["colId"].Value);
+
+            if (supplierId > 0)
+                return supplierId;
+
+            var dataRowView = row.DataBoundItem as DataRowView;
+            if (dataRowView != null)
+            {
+                if (dataRowView.Row.Table.Columns.Contains("supplier_id"))
+                    supplierId = ToInt(dataRowView["supplier_id"]);
+
+                if (supplierId <= 0 && dataRowView.Row.Table.Columns.Contains("id"))
+                    supplierId = ToInt(dataRowView["id"]);
+            }
+
+            return supplierId;
         }
 
         private void LoadRecentBills(int supplierId)

@@ -198,52 +198,70 @@
     <value>1078, 224</value>
   </data>
   <data name="btnNewSale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 26</value>
+    <value>845, 26</value>
   </data>
   <data name="btnNewSale.Text" xml:space="preserve">
     <value>💳 مبيعات جديدة</value>
   </data>
   <data name="btnNewPurchase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>673, 26</value>
+    <value>652, 26</value>
   </data>
   <data name="btnNewPurchase.Text" xml:space="preserve">
     <value>💳  شراء جديد</value>
   </data>
   <data name="btnProducts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 26</value>
+    <value>459, 26</value>
   </data>
   <data name="btnProducts.Text" xml:space="preserve">
     <value>📦  منتجات</value>
   </data>
   <data name="btnCustomers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 26</value>
+    <value>266, 26</value>
   </data>
   <data name="btnCustomers.Text" xml:space="preserve">
     <value>👤  الزبائن</value>
   </data>
   <data name="btnSuppliers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 26</value>
+    <value>73, 26</value>
   </data>
   <data name="btnSuppliers.Text" xml:space="preserve">
     <value>🏢  الموردين</value>
   </data>
   <data name="btnPurchasesReport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 126</value>
+    <value>845, 126</value>
   </data>
   <data name="btnPurchasesReport.Text" xml:space="preserve">
     <value>🧾  تقرير المشتريات</value>
   </data>
   <data name="btnSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>673, 126</value>
+    <value>652, 126</value>
   </data>
   <data name="btnSettings.Text" xml:space="preserve">
     <value>⚙️  إعدادات</value>
   </data>
   <data name="btnSalesReport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 126</value>
+    <value>459, 126</value>
   </data>
   <data name="btnSalesReport.Text" xml:space="preserve">
     <value>📊  تقرير المبيعات</value>
+  </data>
+  <data name="btnCustomersSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 126</value>
+  </data>
+  <data name="btnCustomersSummary.Text" xml:space="preserve">
+    <value>👤 ملخص العملاء</value>
+  </data>
+  <data name="btnSuppliersSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 126</value>
+  </data>
+  <data name="btnSuppliersSummary.Text" xml:space="preserve">
+    <value>🏢 ملخص الموردين</value>
+  </data>
+  <data name="btnExpenses.Location" type="System.Drawing.Point, System.Drawing">
+    <value>845, 226</value>
+  </data>
+  <data name="btnExpenses.Text" xml:space="preserve">
+    <value>🏢 سجل المصروفات</value>
   </data>
   <data name="lblRecent.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 537</value>

@@ -629,5 +629,89 @@ namespace pos.Dashboard
         {
            frm_purchase = null;
         }
+
+        Form frmCustomersSummary;
+        private void btnCustomersSummary_Click(object sender, EventArgs e)
+        {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Customers_View))
+            {
+                MessageBox.Show("You do not have permission to access Customers.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (frmCustomersSummary == null)
+            {
+                frmCustomersSummary = new frm_customers();
+                frmCustomersSummary.MdiParent = frm_main.ActiveForm;
+                //frm_cust.Dock = DockStyle.Fill;
+                frmCustomersSummary.FormClosed += new FormClosedEventHandler(FrmCustomersSummary_FormClosed);
+                frmCustomersSummary.Show();
+            }
+            else
+            {
+                frmCustomersSummary.Activate();
+            }
+        }
+
+        private void FrmCustomersSummary_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmCustomersSummary = null;
+        }
+
+        Form frmSupplierSummary;
+        private void btnSuppliersSummary_Click(object sender, EventArgs e)
+        {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Suppliers_View))
+            {
+                MessageBox.Show("You do not have permission to access Suppliers.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (frmSupplierSummary == null)
+            {
+                frmSupplierSummary = new frm_suppliers();
+                frmSupplierSummary.MdiParent = frm_main.ActiveForm;
+                frmSupplierSummary.FormClosed += new FormClosedEventHandler(FrmSupplierSummary_FormClosed);
+                frmSupplierSummary.WindowState = FormWindowState.Maximized;
+                frmSupplierSummary.Show();
+            }
+            else
+            {
+                frmSupplierSummary.Activate();
+            }
+        }
+
+        private void FrmSupplierSummary_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmSupplierSummary = null;
+        }
+
+        Form frm_expenses;
+        private void btnExpenses_Click(object sender, EventArgs e)
+        {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Permissions.Expenses_View))
+            {
+                MessageBox.Show("You do not have permission to access Expenses.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (frm_expenses == null)
+            {
+                frm_expenses = new pos.Expenses.frm_expenses();
+                frm_expenses.MdiParent = frm_main.ActiveForm;
+                frm_expenses.FormClosed += new FormClosedEventHandler(Frm_expenses_FormClosed);
+                frm_expenses.WindowState = FormWindowState.Maximized;
+                frm_expenses.Show();
+            }
+            else
+            {
+                frm_expenses.Activate();
+            }
+        }
+
+        private void Frm_expenses_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_expenses = null;
+        }
     }
 }

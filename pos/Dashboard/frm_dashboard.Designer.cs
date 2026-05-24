@@ -75,6 +75,9 @@ namespace pos.Dashboard
             this.btnPurchasesReport = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnSalesReport = new System.Windows.Forms.Button();
+            this.btnCustomersSummary = new System.Windows.Forms.Button();
+            this.btnSuppliersSummary = new System.Windows.Forms.Button();
+            this.btnExpenses = new System.Windows.Forms.Button();
             this.lblRecent = new System.Windows.Forms.Label();
             this.listRecent = new System.Windows.Forms.ListView();
             this.colArea = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -221,6 +224,9 @@ namespace pos.Dashboard
             this.quickAccessPanel.Controls.Add(this.btnPurchasesReport);
             this.quickAccessPanel.Controls.Add(this.btnSettings);
             this.quickAccessPanel.Controls.Add(this.btnSalesReport);
+            this.quickAccessPanel.Controls.Add(this.btnCustomersSummary);
+            this.quickAccessPanel.Controls.Add(this.btnSuppliersSummary);
+            this.quickAccessPanel.Controls.Add(this.btnExpenses);
             this.quickAccessPanel.Name = "quickAccessPanel";
             // 
             // btnNewSale
@@ -287,6 +293,30 @@ namespace pos.Dashboard
             this.btnSalesReport.UseVisualStyleBackColor = false;
             this.btnSalesReport.Click += new System.EventHandler(this.btnSalesReport_Click);
             // 
+            // btnCustomersSummary
+            // 
+            this.btnCustomersSummary.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnCustomersSummary, "btnCustomersSummary");
+            this.btnCustomersSummary.Name = "btnCustomersSummary";
+            this.btnCustomersSummary.UseVisualStyleBackColor = false;
+            this.btnCustomersSummary.Click += new System.EventHandler(this.btnCustomersSummary_Click);
+            // 
+            // btnSuppliersSummary
+            // 
+            this.btnSuppliersSummary.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnSuppliersSummary, "btnSuppliersSummary");
+            this.btnSuppliersSummary.Name = "btnSuppliersSummary";
+            this.btnSuppliersSummary.UseVisualStyleBackColor = false;
+            this.btnSuppliersSummary.Click += new System.EventHandler(this.btnSuppliersSummary_Click);
+            // 
+            // btnExpenses
+            // 
+            this.btnExpenses.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.btnExpenses, "btnExpenses");
+            this.btnExpenses.Name = "btnExpenses";
+            this.btnExpenses.UseVisualStyleBackColor = false;
+            this.btnExpenses.Click += new System.EventHandler(this.btnExpenses_Click);
+            // 
             // lblRecent
             // 
             resources.ApplyResources(this.lblRecent, "lblRecent");
@@ -347,5 +377,8 @@ namespace pos.Dashboard
         private Panel panelRevenueColor;
         private Panel panelLowStockColor;
         private Button btnNewPurchase;
+        private Button btnCustomersSummary;
+        private Button btnSuppliersSummary;
+        private Button btnExpenses;
     }
 }

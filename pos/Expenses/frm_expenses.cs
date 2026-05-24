@@ -53,6 +53,7 @@ namespace pos.Expenses
                     LoadVoucherInfo();
                     LoadExpenseAccounts();
                     LoadVatAccounts();
+                    LoadTaxesDropdown();
                     LoadPaymentModes();
                     LoadCreditAccounts();
                     UpdateCreditAccountByMode();
@@ -121,6 +122,17 @@ namespace pos.Expenses
             cmbVatAccount.DisplayMember = "name";
             cmbVatAccount.ValueMember = "id";
 
+            SelectDefaultVatAccount();
+        }
+
+        private void SelectDefaultVatAccount()
+        {
+            if (cmbVatAccount.Items.Count == 0)
+            {
+                cmbVatAccount.SelectedIndex = -1;
+                return;
+            }
+
             var vatItem = cmbVatAccount.Items
                 .Cast<DataRowView>()
                 .FirstOrDefault(x =>
@@ -132,6 +144,97 @@ namespace pos.Expenses
             {
                 cmbVatAccount.SelectedValue = vatItem["id"];
             }
+            else
+            {
+                cmbVatAccount.SelectedIndex = 0;
+            }
+        }
+
+        private void LoadTaxesDropdown()
+        {
+            if (cmbTax == null)
+                return;
+
+            var taxBLL = new TaxBLL();
+            var taxes = taxBLL.GetAll();
+
+            if (taxes == null)
+                taxes = new DataTable();
+
+            if (!taxes.Columns.Contains("id") || !taxes.Columns.Contains("title") || !taxes.Columns.Contains("rate"))
+            {
+                cmbTax.DataSource = null;
+                nudTaxPercent.Visible = true;
+                return;
+            }
+
+            if (!taxes.Columns.Contains("display_name"))
+                taxes.Columns.Add("display_name", typeof(string));
+            
+            DataRow emptyRow = taxes.NewRow();
+            emptyRow[0] = 0;
+            emptyRow[2] = "0";
+            taxes.Rows.InsertAt(emptyRow, 0);
+
+            foreach (DataRow row in taxes.Rows)
+            {
+                decimal rate = ToDecimalSafe(row["rate"]);
+                row["display_name"] = Convert.ToString(row["title"]) + " (" + rate.ToString("N2") + "%)";
+            }
+
+            cmbTax.DisplayMember = "display_name";
+            cmbTax.ValueMember = "id";
+            cmbTax.DataSource = taxes;
+
+            if (cmbTax.Items.Count > 0)
+                cmbTax.SelectedIndex = 0;
+        }
+
+        private void cmbTax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selected = cmbTax == null ? null : cmbTax.SelectedItem as DataRowView;
+            if (selected == null)
+                return;
+
+            SetTaxPercent(ToDecimalSafe(selected["rate"]));
+        }
+
+        private void SetTaxPercent(decimal rate)
+        {
+            if (rate < nudTaxPercent.Minimum)
+                rate = nudTaxPercent.Minimum;
+
+            if (rate > nudTaxPercent.Maximum)
+                rate = nudTaxPercent.Maximum;
+
+            nudTaxPercent.Value = decimal.Round(rate, 2);
+        }
+
+        private void SelectTaxByRate(decimal rate)
+        {
+            if (cmbTax == null || cmbTax.Items.Count == 0)
+                return;
+
+            for (int i = 0; i < cmbTax.Items.Count; i++)
+            {
+                var rowView = cmbTax.Items[i] as DataRowView;
+                if (rowView == null)
+                    continue;
+
+                decimal rowRate = ToDecimalSafe(rowView["rate"]);
+                if (Math.Abs(rowRate - rate) <= 0.01m)
+                {
+                    cmbTax.SelectedIndex = i;
+                    return;
+                }
+            }
+        }
+
+        private decimal ToDecimalSafe(object value)
+        {
+            decimal d;
+            decimal.TryParse(Convert.ToString(value), out d);
+            return d;
         }
 
         private void LoadPaymentModes()
@@ -373,6 +476,7 @@ namespace pos.Expenses
 
             nudAmount.Value = Convert.ToDecimal(row["amount"]);
             nudTaxPercent.Value = Convert.ToDecimal(row["tax_rate"]);
+            SelectTaxByRate(nudTaxPercent.Value);
 
             if (nudTaxPercent.Value > 0 && cmbVatAccount.Items.Count > 0)
             {
@@ -455,10 +559,15 @@ namespace pos.Expenses
 
             txtReferenceNo.Text = string.Empty;
             cmbExpenseAccount.SelectedIndex = cmbExpenseAccount.Items.Count > 0 ? 0 : -1;
-            cmbVatAccount.SelectedIndex = cmbVatAccount.Items.Count > 0 ? 0 : -1;
+            SelectDefaultVatAccount();
             cmbPaymentMode.SelectedIndex = cmbPaymentMode.Items.Count > 0 ? 0 : -1;
+
+            if (cmbTax != null && cmbTax.Items.Count > 0)
+                cmbTax.SelectedIndex = 0;
+            else
+                nudTaxPercent.Value = 0;
+
             nudAmount.Value = 0;
-            nudTaxPercent.Value = 0;
             txtNarration.Text = string.Empty;
             _selectedAttachmentPath = string.Empty;
             txtAttachment.Text = string.Empty;
@@ -487,6 +596,10 @@ namespace pos.Expenses
             if (e.KeyData == Keys.Escape)
             {
                 btnClose.PerformClick();
+            }
+            if(e.KeyData == Keys.F1)
+            {
+                btnClear.PerformClick();
             }
         }
     }
