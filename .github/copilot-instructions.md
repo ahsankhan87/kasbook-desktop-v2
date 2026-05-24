@@ -26,6 +26,7 @@
 - Use dedicated lock screen form `pos/frm_session_lock.*` (do not build inline lock UI in `frm_main`).
 - Keep label text color/theme aligned with `AppTheme.TextPrimary` (dark text).
 - Create designer page when creating winform.
+- For dashboard drill-down UI, use separate popup windows instead of in-form overlay panels when overlays do not render well.
 
 ## Security, Logging, and Session Rules
 - Do not bypass authorization checks; permission gating is expected through `Tag` + `ApplyPermissions`.

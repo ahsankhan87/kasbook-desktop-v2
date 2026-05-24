@@ -415,6 +415,14 @@ namespace pos
                 if (accountPayableToolStripMenuItem != null) accountPayableToolStripMenuItem.Tag = Permissions.Reports_AccountsView;
                 if (accountReceivableToolStripMenuItem != null) accountReceivableToolStripMenuItem.Tag = Permissions.Reports_AccountsView;
                 if (vATDashboardToolStripMenuItem != null) vATDashboardToolStripMenuItem.Tag = Permissions.Reports_FinanceView;
+                if (byPaymentMethodToolStripMenuItem != null) byPaymentMethodToolStripMenuItem.Tag = Permissions.Reports_SalesView;
+                if (salesExpensesToolStripMenuItem != null) salesExpensesToolStripMenuItem.Tag = Permissions.Reports_FinanceView;
+                if (salesSummaryToolStripMenuItem != null) salesSummaryToolStripMenuItem.Tag = Permissions.Reports_SalesView;
+                if (salesSummaryToolStripMenuItem1 != null) salesSummaryToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
+                if (purchaseSummaryToolStripMenuItem != null) purchaseSummaryToolStripMenuItem.Tag = Permissions.Reports_PurchasesView;
+                if (customersSummaryToolStripMenuItem != null) customersSummaryToolStripMenuItem.Tag = Permissions.Customers_View;
+                if (suppliersSummaryToolStripMenuItem != null) suppliersSummaryToolStripMenuItem.Tag = Permissions.Suppliers_View;
+                if (expenseDashboardToolStripMenuItem != null) expenseDashboardToolStripMenuItem.Tag = Permissions.Expenses_View;
 
                 // Security admin
                 if (permissionsToolStripMenuItem != null) permissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
@@ -616,18 +624,6 @@ namespace pos
         Form frm_customer_obj;
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (frm_customer_obj == null)
-            {
-                frm_customer_obj = new frm_addCustomer();
-                frm_customer_obj.MdiParent = this;
-                frm_customer_obj.FormClosed += new FormClosedEventHandler(frm_customer_obj_FormClosed);
-                frm_customer_obj.Show();
-                //frm_customer_obj.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                frm_customer_obj.Activate();
-            }
 
         }
 
@@ -2539,6 +2535,47 @@ namespace pos
         {
             var expenseDashboard = new pos.Expenses.frm_expense_dashboard();
             expenseDashboard.ShowDialog(this);
+        }
+
+        private void customersDashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void suppliersSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_suppliersSummary = new pos.frm_suppliers();
+            frm_suppliersSummary.ShowDialog(this);
+        }
+
+       
+
+        private void salesDashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var salesDashboard = new pos.Sales.frm_sales_dashboard();
+            salesDashboard.ShowDialog(this);
+        }
+
+        private void salesSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            salesDashboardToolStripMenuItem_Click(sender, e);
+        }
+
+        private void purchaseSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var purchaseDashboard = new pos.frm_purchase_dashboard();
+            purchaseDashboard.ShowDialog(this);
+        }
+
+        private void salesSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            salesDashboardToolStripMenuItem_Click(sender, e);
+        }
+
+        private void customersSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_customers = new pos.frm_customers();
+            frm_customers.ShowDialog(this);
         }
     }
 }

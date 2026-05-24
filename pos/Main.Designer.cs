@@ -104,8 +104,13 @@
             this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.banksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.chartOfAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.journalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,6 +124,7 @@
             this.productWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoryWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.byPaymentMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchasesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,9 +174,10 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.createNewExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expenseListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.expenseDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesSummaryToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.customersSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -540,6 +547,7 @@
             this.pOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTransactionToolStripMenuItem,
             this.purchaseReturnToolStripMenuItem,
+            this.purchaseSummaryToolStripMenuItem,
             this.allPurchasesToolStripMenuItem,
             this.toolStripSeparator12,
             this.purchaseOrdersToolStripMenuItem,
@@ -588,6 +596,7 @@
             this.newTransactionToolStripMenuItem2,
             this.salesReturnToolStripMenuItem,
             this.debitNoteToolStripMenuItem,
+            this.salesSummaryToolStripMenuItem1,
             this.allTransactionToolStripMenuItem1,
             this.toolStripSeparator1,
             this.generateZATCACSIDToolStripMenuItem,
@@ -693,15 +702,32 @@
             // 
             // customersToolStripMenuItem
             // 
+            this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.customersSummaryToolStripMenuItem,
+            this.createNewCustomerToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             resources.ApplyResources(this.customersToolStripMenuItem, "customersToolStripMenuItem");
-            this.customersToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
             // 
             // suppliersToolStripMenuItem
             // 
+            this.suppliersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.suppliersSummaryToolStripMenuItem,
+            this.createNewSupplierToolStripMenuItem});
             this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
             resources.ApplyResources(this.suppliersToolStripMenuItem, "suppliersToolStripMenuItem");
             this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
+            // 
+            // suppliersSummaryToolStripMenuItem
+            // 
+            this.suppliersSummaryToolStripMenuItem.Name = "suppliersSummaryToolStripMenuItem";
+            resources.ApplyResources(this.suppliersSummaryToolStripMenuItem, "suppliersSummaryToolStripMenuItem");
+            this.suppliersSummaryToolStripMenuItem.Click += new System.EventHandler(this.suppliersSummaryToolStripMenuItem_Click);
+            // 
+            // createNewSupplierToolStripMenuItem
+            // 
+            this.createNewSupplierToolStripMenuItem.Name = "createNewSupplierToolStripMenuItem";
+            resources.ApplyResources(this.createNewSupplierToolStripMenuItem, "createNewSupplierToolStripMenuItem");
+            this.createNewSupplierToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
             // 
             // banksToolStripMenuItem
             // 
@@ -717,6 +743,24 @@
             this.expenseDashboardToolStripMenuItem});
             this.expensesToolStripMenuItem.Name = "expensesToolStripMenuItem";
             resources.ApplyResources(this.expensesToolStripMenuItem, "expensesToolStripMenuItem");
+            // 
+            // createNewExpenseToolStripMenuItem
+            // 
+            this.createNewExpenseToolStripMenuItem.Name = "createNewExpenseToolStripMenuItem";
+            resources.ApplyResources(this.createNewExpenseToolStripMenuItem, "createNewExpenseToolStripMenuItem");
+            this.createNewExpenseToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
+            // 
+            // expenseListToolStripMenuItem1
+            // 
+            this.expenseListToolStripMenuItem1.Name = "expenseListToolStripMenuItem1";
+            resources.ApplyResources(this.expenseListToolStripMenuItem1, "expenseListToolStripMenuItem1");
+            this.expenseListToolStripMenuItem1.Click += new System.EventHandler(this.expenseListToolStripMenuItem_Click);
+            // 
+            // expenseDashboardToolStripMenuItem
+            // 
+            this.expenseDashboardToolStripMenuItem.Name = "expenseDashboardToolStripMenuItem";
+            resources.ApplyResources(this.expenseDashboardToolStripMenuItem, "expenseDashboardToolStripMenuItem");
+            this.expenseDashboardToolStripMenuItem.Click += new System.EventHandler(this.expenseDashboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -777,7 +821,8 @@
             this.customerWiseSalesReportToolStripMenuItem,
             this.productWiseSalesSummaryToolStripMenuItem,
             this.categoryWiseSalesSummaryToolStripMenuItem,
-            this.byPaymentMethodToolStripMenuItem});
+            this.byPaymentMethodToolStripMenuItem,
+            this.salesSummaryToolStripMenuItem});
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
             resources.ApplyResources(this.salesToolStripMenuItem, "salesToolStripMenuItem");
             // 
@@ -816,6 +861,12 @@
             this.byPaymentMethodToolStripMenuItem.Name = "byPaymentMethodToolStripMenuItem";
             resources.ApplyResources(this.byPaymentMethodToolStripMenuItem, "byPaymentMethodToolStripMenuItem");
             this.byPaymentMethodToolStripMenuItem.Click += new System.EventHandler(this.byPaymentMethodToolStripMenuItem_Click);
+            // 
+            // salesSummaryToolStripMenuItem
+            // 
+            this.salesSummaryToolStripMenuItem.Name = "salesSummaryToolStripMenuItem";
+            resources.ApplyResources(this.salesSummaryToolStripMenuItem, "salesSummaryToolStripMenuItem");
+            this.salesSummaryToolStripMenuItem.Click += new System.EventHandler(this.salesSummaryToolStripMenuItem_Click);
             // 
             // purchasesToolStripMenuItem1
             // 
@@ -1143,23 +1194,29 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // createNewExpenseToolStripMenuItem
+            // purchaseSummaryToolStripMenuItem
             // 
-            this.createNewExpenseToolStripMenuItem.Name = "createNewExpenseToolStripMenuItem";
-            resources.ApplyResources(this.createNewExpenseToolStripMenuItem, "createNewExpenseToolStripMenuItem");
-            this.createNewExpenseToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
+            this.purchaseSummaryToolStripMenuItem.Name = "purchaseSummaryToolStripMenuItem";
+            resources.ApplyResources(this.purchaseSummaryToolStripMenuItem, "purchaseSummaryToolStripMenuItem");
+            this.purchaseSummaryToolStripMenuItem.Click += new System.EventHandler(this.purchaseSummaryToolStripMenuItem_Click);
             // 
-            // expenseListToolStripMenuItem1
+            // salesSummaryToolStripMenuItem1
             // 
-            this.expenseListToolStripMenuItem1.Name = "expenseListToolStripMenuItem1";
-            resources.ApplyResources(this.expenseListToolStripMenuItem1, "expenseListToolStripMenuItem1");
-            this.expenseListToolStripMenuItem1.Click += new System.EventHandler(this.expenseListToolStripMenuItem_Click);
+            this.salesSummaryToolStripMenuItem1.Name = "salesSummaryToolStripMenuItem1";
+            resources.ApplyResources(this.salesSummaryToolStripMenuItem1, "salesSummaryToolStripMenuItem1");
+            this.salesSummaryToolStripMenuItem1.Click += new System.EventHandler(this.salesSummaryToolStripMenuItem1_Click);
             // 
-            // expenseDashboardToolStripMenuItem
+            // customersSummaryToolStripMenuItem
             // 
-            this.expenseDashboardToolStripMenuItem.Name = "expenseDashboardToolStripMenuItem";
-            resources.ApplyResources(this.expenseDashboardToolStripMenuItem, "expenseDashboardToolStripMenuItem");
-            this.expenseDashboardToolStripMenuItem.Click += new System.EventHandler(this.expenseDashboardToolStripMenuItem_Click);
+            this.customersSummaryToolStripMenuItem.Name = "customersSummaryToolStripMenuItem";
+            resources.ApplyResources(this.customersSummaryToolStripMenuItem, "customersSummaryToolStripMenuItem");
+            this.customersSummaryToolStripMenuItem.Click += new System.EventHandler(this.customersSummaryToolStripMenuItem_Click);
+            // 
+            // createNewCustomerToolStripMenuItem
+            // 
+            this.createNewCustomerToolStripMenuItem.Name = "createNewCustomerToolStripMenuItem";
+            resources.ApplyResources(this.createNewCustomerToolStripMenuItem, "createNewCustomerToolStripMenuItem");
+            this.createNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1331,5 +1388,12 @@
         private System.Windows.Forms.ToolStripMenuItem createNewExpenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem expenseListToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem expenseDashboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNewSupplierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesSummaryToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem customersSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNewCustomerToolStripMenuItem;
     }
 }

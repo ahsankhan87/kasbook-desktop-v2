@@ -293,6 +293,585 @@ namespace POS.DLL
             }
         }
 
+        public DataTable GetSupplierDashboardKPIs()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+;WITH Purchases AS
+(
+    SELECT
+        p.supplier_id,
+        p.invoice_no,
+        CAST(p.purchase_date AS date) AS purchase_date,
+        CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4)) AS invoice_amount,
+        DATEADD(DAY,
+            CASE WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int) ELSE 30 END,
+            CAST(p.purchase_date AS date)) AS due_date
+    FROM pos_purchases p
+    WHERE p.branch_id = @branch_id
+),
+Payments AS
+(
+    SELECT
+        sp.supplier_id,
+        sp.invoice_no,
+        CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS paid_amount
+    FROM pos_suppliers_payments sp
+    WHERE sp.branch_id = @branch_id
+    GROUP BY sp.supplier_id, sp.invoice_no
+),
+InvoiceAgg AS
+(
+    SELECT
+        pu.supplier_id,
+        pu.purchase_date,
+        pu.due_date,
+        pu.invoice_amount,
+        ISNULL(pa.paid_amount, 0) AS paid_amount,
+        CAST(pu.invoice_amount - ISNULL(pa.paid_amount, 0) AS decimal(18,4)) AS balance
+    FROM Purchases pu
+    LEFT JOIN Payments pa ON pa.supplier_id = pu.supplier_id AND pa.invoice_no = pu.invoice_no
+)
+SELECT
+    CAST((SELECT COUNT(1) FROM pos_suppliers s WHERE s.branch_id = @branch_id) AS int) AS TotalSuppliers,
+    CAST(ISNULL(SUM(CASE WHEN ia.balance > 0.004 THEN ia.balance ELSE 0 END), 0) AS decimal(18,2)) AS TotalPayables,
+    CAST(ISNULL(SUM(CASE WHEN ia.balance > 0.004 AND ia.due_date < CAST(GETDATE() AS date) THEN ia.balance ELSE 0 END), 0) AS decimal(18,2)) AS OverduePayables,
+    CAST(ISNULL(SUM(CASE WHEN YEAR(ia.purchase_date) = YEAR(GETDATE()) AND MONTH(ia.purchase_date) = MONTH(GETDATE()) THEN ia.invoice_amount ELSE 0 END), 0) AS decimal(18,2)) AS TotalPurchasesThisMonth,
+    CAST(ISNULL(SUM(CASE WHEN YEAR(ia.purchase_date) = YEAR(DATEADD(MONTH, -1, GETDATE())) AND MONTH(ia.purchase_date) = MONTH(DATEADD(MONTH, -1, GETDATE())) THEN ia.invoice_amount ELSE 0 END), 0) AS decimal(18,2)) AS TotalPurchasesPrevMonth
+FROM InvoiceAgg ia", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierSummaryDashboard(string searchText = null, string category = null, string statusFilter = "All")
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+;WITH Purchases AS
+(
+    SELECT
+        p.supplier_id,
+        p.invoice_no,
+        CAST(p.purchase_date AS date) AS purchase_date,
+        CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4)) AS invoice_amount,
+        DATEADD(DAY,
+            CASE WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int) ELSE 30 END,
+            CAST(p.purchase_date AS date)) AS due_date
+    FROM pos_purchases p
+    WHERE p.branch_id = @branch_id
+),
+Payments AS
+(
+    SELECT
+        sp.supplier_id,
+        sp.invoice_no,
+        CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS paid_amount
+    FROM pos_suppliers_payments sp
+    WHERE sp.branch_id = @branch_id
+    GROUP BY sp.supplier_id, sp.invoice_no
+),
+InvoiceAgg AS
+(
+    SELECT
+        pu.supplier_id,
+        pu.purchase_date,
+        pu.due_date,
+        pu.invoice_amount,
+        ISNULL(pa.paid_amount, 0) AS paid_amount,
+        CAST(pu.invoice_amount - ISNULL(pa.paid_amount, 0) AS decimal(18,4)) AS balance
+    FROM Purchases pu
+    LEFT JOIN Payments pa ON pa.supplier_id = pu.supplier_id AND pa.invoice_no = pu.invoice_no
+),
+SupplierAgg AS
+(
+    SELECT
+        ia.supplier_id,
+        CAST(ISNULL(SUM(ia.invoice_amount), 0) AS decimal(18,2)) AS total_purchases,
+        CAST(ISNULL(SUM(ia.paid_amount), 0) AS decimal(18,2)) AS total_paid,
+        CAST(ISNULL(SUM(CASE WHEN ia.balance > 0 THEN ia.balance ELSE 0 END), 0) AS decimal(18,2)) AS payable_balance,
+        MAX(ia.purchase_date) AS last_bill_date,
+        MAX(CASE WHEN ia.balance > 0.004 AND ia.due_date < CAST(GETDATE() AS date) THEN 1 ELSE 0 END) AS is_overdue
+    FROM InvoiceAgg ia
+    GROUP BY ia.supplier_id
+)
+SELECT
+    s.id AS supplier_id,
+    ISNULL(s.supplier_code, '') AS supplier_code,
+    LTRIM(RTRIM(ISNULL(s.first_name, '') + ' ' + ISNULL(s.last_name, ''))) AS supplier_name,
+    CASE
+        WHEN CHARINDEX('|', ISNULL(s.address, '')) > 0 THEN LTRIM(RTRIM(LEFT(s.address, CHARINDEX('|', s.address) - 1)))
+        WHEN CHARINDEX(',', ISNULL(s.address, '')) > 0 THEN LTRIM(RTRIM(LEFT(s.address, CHARINDEX(',', s.address) - 1)))
+        ELSE 'General'
+    END AS category,
+    ISNULL(s.contact_no, '') AS contact_no,
+    ISNULL(s.address, '') AS address,
+    ISNULL(sa.total_purchases, 0) AS total_purchases,
+    ISNULL(sa.total_paid, 0) AS total_paid,
+    ISNULL(sa.payable_balance, 0) AS payable_balance,
+    CAST(30 AS int) AS credit_days,
+    CAST(0 AS decimal(18,2)) AS credit_limit,
+    sa.last_bill_date,
+    CASE WHEN sa.last_bill_date IS NULL THEN 0 ELSE DATEDIFF(DAY, sa.last_bill_date, CAST(GETDATE() AS date)) END AS days_since_last_purchase,
+    CASE WHEN ISNULL(s.status, 1) = 1 THEN 1 ELSE 0 END AS is_active,
+    ISNULL(sa.is_overdue, 0) AS is_overdue
+FROM pos_suppliers s
+LEFT JOIN SupplierAgg sa ON sa.supplier_id = s.id
+WHERE s.branch_id = @branch_id
+  AND (
+        @SearchText IS NULL
+        OR LTRIM(RTRIM(ISNULL(s.first_name, '') + ' ' + ISNULL(s.last_name, ''))) LIKE '%' + @SearchText + '%'
+        OR ISNULL(s.supplier_code, '') LIKE '%' + @SearchText + '%'
+        OR ISNULL(s.contact_no, '') LIKE '%' + @SearchText + '%'
+        OR ISNULL(s.vat_no, '') LIKE '%' + @SearchText + '%'
+        OR ISNULL(s.address, '') LIKE '%' + @SearchText + '%'
+      )
+  AND (
+        @Category IS NULL
+        OR (
+            CASE
+                WHEN CHARINDEX('|', ISNULL(s.address, '')) > 0 THEN LTRIM(RTRIM(LEFT(s.address, CHARINDEX('|', s.address) - 1)))
+                WHEN CHARINDEX(',', ISNULL(s.address, '')) > 0 THEN LTRIM(RTRIM(LEFT(s.address, CHARINDEX(',', s.address) - 1)))
+                ELSE 'General'
+            END
+        ) = @Category
+      )
+ORDER BY LTRIM(RTRIM(ISNULL(s.first_name, '') + ' ' + ISNULL(s.last_name, '')))", cn))
+            {
+                string status = string.IsNullOrWhiteSpace(statusFilter) ? "All" : statusFilter.Trim();
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@SearchText", SqlDbType.NVarChar, 200).Value = string.IsNullOrWhiteSpace(searchText) ? (object)DBNull.Value : searchText.Trim();
+                cmdLocal.Parameters.Add("@Category", SqlDbType.NVarChar, 100).Value = string.IsNullOrWhiteSpace(category) ? (object)DBNull.Value : category.Trim();
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+
+                if (dt.Columns.Contains("supplier_id") && !dt.Columns.Contains("id")) dt.Columns.Add("id", typeof(int));
+                if (!dt.Columns.Contains("supplier_name")) dt.Columns.Add("supplier_name", typeof(string));
+                if (!dt.Columns.Contains("category")) dt.Columns.Add("category", typeof(string));
+                if (!dt.Columns.Contains("contact_no")) dt.Columns.Add("contact_no", typeof(string));
+                if (!dt.Columns.Contains("address")) dt.Columns.Add("address", typeof(string));
+                if (!dt.Columns.Contains("total_purchases")) dt.Columns.Add("total_purchases", typeof(decimal));
+                if (!dt.Columns.Contains("payable_balance")) dt.Columns.Add("payable_balance", typeof(decimal));
+                if (!dt.Columns.Contains("credit_days")) dt.Columns.Add("credit_days", typeof(int));
+                if (!dt.Columns.Contains("credit_limit")) dt.Columns.Add("credit_limit", typeof(decimal));
+                if (!dt.Columns.Contains("last_bill_date")) dt.Columns.Add("last_bill_date", typeof(DateTime));
+                if (!dt.Columns.Contains("days_since_last_purchase")) dt.Columns.Add("days_since_last_purchase", typeof(int));
+                if (!dt.Columns.Contains("is_active")) dt.Columns.Add("is_active", typeof(int));
+                if (!dt.Columns.Contains("is_overdue")) dt.Columns.Add("is_overdue", typeof(int));
+                if (!dt.Columns.Contains("total_paid")) dt.Columns.Add("total_paid", typeof(decimal));
+                if (!dt.Columns.Contains("status_text")) dt.Columns.Add("status_text", typeof(string));
+                if (!dt.Columns.Contains("row_no")) dt.Columns.Add("row_no", typeof(int));
+
+                int i = 1;
+                foreach (DataRow r in dt.Rows)
+                {
+                    if (dt.Columns.Contains("id") && dt.Columns.Contains("supplier_id"))
+                        r["id"] = r["supplier_id"] == DBNull.Value ? 0 : Convert.ToInt32(r["supplier_id"]);
+
+                    if (dt.Columns.Contains("supplier_name") && string.IsNullOrWhiteSpace(Convert.ToString(r["supplier_name"])) && dt.Columns.Contains("first_name"))
+                    {
+                        string fullName = (Convert.ToString(r["first_name"]) + " " + Convert.ToString(dt.Columns.Contains("last_name") ? r["last_name"] : string.Empty)).Trim();
+                        r["supplier_name"] = fullName;
+                    }
+
+                    if (dt.Columns.Contains("status_text"))
+                    {
+                        bool isActive = !dt.Columns.Contains("is_active") || r["is_active"] == DBNull.Value || Convert.ToInt32(r["is_active"]) == 1;
+                        bool isOverdue = dt.Columns.Contains("is_overdue") && r["is_overdue"] != DBNull.Value && Convert.ToInt32(r["is_overdue"]) == 1;
+                        r["status_text"] = !isActive ? "Inactive" : (isOverdue ? "Overdue" : "Active");
+                    }
+
+                    if (dt.Columns.Contains("row_no")) r["row_no"] = i++;
+                }
+
+                if (!string.Equals(status, "All", StringComparison.OrdinalIgnoreCase) && dt.Columns.Contains("status_text"))
+                {
+                    DataView view = dt.DefaultView;
+                    view.RowFilter = "status_text = '" + status.Replace("'", "''") + "'";
+                    return view.ToTable();
+                }
+
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierRecentBills(int supplierId, int top = 5)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT TOP (@top)
+    p.invoice_no,
+    CAST(p.purchase_date AS date) AS purchase_date,
+    CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,2)) AS amount,
+    CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,2)) AS paid,
+    CAST((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - ISNULL(SUM(sp.debit), 0) AS decimal(18,2)) AS balance
+FROM pos_purchases p
+LEFT JOIN pos_suppliers_payments sp
+    ON sp.branch_id = p.branch_id
+   AND sp.supplier_id = p.supplier_id
+   AND sp.invoice_no = p.invoice_no
+WHERE p.branch_id = @branch_id
+  AND p.supplier_id = @supplier_id
+GROUP BY p.invoice_no, p.purchase_date, p.total_amount, p.total_tax, p.discount_value
+ORDER BY p.purchase_date DESC, p.invoice_no DESC", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                cmdLocal.Parameters.Add("@top", SqlDbType.Int).Value = top <= 0 ? 5 : top;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierProfileOverview(int supplierId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT
+    s.id,
+    ISNULL(s.supplier_code, '') AS supplier_code,
+    ISNULL(s.first_name, '') AS first_name,
+    ISNULL(s.last_name, '') AS last_name,
+    ISNULL(s.email, '') AS email,
+    ISNULL(s.contact_no, '') AS contact_no,
+    ISNULL(s.address, '') AS address,
+    ISNULL(s.status, 1) AS status,
+    CAST(ISNULL(SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)), 0) AS decimal(18,2)) AS lifetime_purchases,
+    CAST(ISNULL(SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,2)) AS total_paid,
+    CAST(ISNULL(SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,2)) AS current_payable,
+    CAST(0 AS decimal(18,2)) AS credit_limit,
+    CAST(30 AS int) AS credit_days,
+    CAST(0 - ISNULL(SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,2)) AS available_credit
+FROM pos_suppliers s
+LEFT JOIN pos_purchases p ON p.branch_id = s.branch_id AND p.supplier_id = s.id
+LEFT JOIN pos_suppliers_payments sp ON sp.branch_id = p.branch_id AND sp.supplier_id = p.supplier_id AND sp.invoice_no = p.invoice_no
+WHERE s.branch_id = @branch_id AND s.id = @supplier_id
+GROUP BY s.id, s.supplier_code, s.first_name, s.last_name, s.email, s.contact_no, s.address, s.status", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierMonthlyPurchaseHistory(int supplierId, int months = 12)
+        {
+            int safeMonths = months <= 0 ? 12 : months;
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+;WITH M AS
+(
+    SELECT 0 AS n, DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AS MonthStart
+    UNION ALL
+    SELECT n + 1, DATEADD(MONTH, -1, MonthStart)
+    FROM M
+    WHERE n + 1 < @months
+),
+S AS
+(
+    SELECT
+        DATEADD(MONTH, DATEDIFF(MONTH, 0, p.purchase_date), 0) AS MonthStart,
+        SUM(CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4))) AS total_amount
+    FROM pos_purchases p
+    WHERE p.branch_id = @branch_id
+      AND p.supplier_id = @supplier_id
+    GROUP BY DATEADD(MONTH, DATEDIFF(MONTH, 0, p.purchase_date), 0)
+)
+SELECT
+    DATENAME(MONTH, m.MonthStart) + ' ' + CONVERT(varchar(4), YEAR(m.MonthStart)) AS month_label,
+    CAST(ISNULL(s.total_amount, 0) AS decimal(18,2)) AS amount,
+    m.MonthStart
+FROM M m
+LEFT JOIN S s ON s.MonthStart = m.MonthStart
+ORDER BY m.MonthStart
+OPTION (MAXRECURSION 100)", cn))
+            {
+                cmdLocal.Parameters.Add("@months", SqlDbType.Int).Value = safeMonths;
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierTopItems(int supplierId, int top = 5)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT TOP (@top)
+    ISNULL(pi.item_number, '') AS item_no,
+    ISNULL(p.name, ISNULL(pi.item_number, '')) AS item_name,
+    CAST(SUM(ISNULL(pi.quantity, 0)) AS decimal(18,2)) AS qty,
+    CAST(SUM((ISNULL(pi.cost_price, 0) * ISNULL(pi.quantity, 0)) - ABS(ISNULL(pi.discount_value, 0))) AS decimal(18,2)) AS total_value
+FROM pos_purchases_items pi
+LEFT JOIN pos_products p ON p.item_number = pi.item_number
+WHERE pi.branch_id = @branch_id
+  AND pi.supplier_id = @supplier_id
+GROUP BY pi.item_number, p.name
+ORDER BY total_value DESC", cn))
+            {
+                cmdLocal.Parameters.Add("@top", SqlDbType.Int).Value = top <= 0 ? 5 : top;
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierLedger(int supplierId, DateTime fromDate, DateTime toDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT
+    x.entry_date,
+    x.trans_type,
+    x.reference_no,
+    x.debit,
+    x.credit,
+    x.running_balance
+FROM
+(
+    SELECT
+        CAST(p.purchase_date AS datetime) AS entry_date,
+        CAST('Bill' AS varchar(20)) AS trans_type,
+        ISNULL(p.invoice_no, '') AS reference_no,
+        CAST(0 AS decimal(18,2)) AS debit,
+        CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,2)) AS credit,
+        CAST(0 AS decimal(18,2)) AS running_balance,
+        1 AS sort_no,
+        p.id AS sort_id
+    FROM pos_purchases p
+    WHERE p.branch_id = @branch_id
+      AND p.supplier_id = @supplier_id
+      AND CAST(p.purchase_date AS date) BETWEEN @from_date AND @to_date
+
+    UNION ALL
+
+    SELECT
+        CAST(sp.entry_date AS datetime) AS entry_date,
+        CASE WHEN ISNULL(sp.debit, 0) > 0 THEN 'Payment' ELSE 'Debit Note' END AS trans_type,
+        ISNULL(sp.invoice_no, '') AS reference_no,
+        CAST(ISNULL(sp.debit, 0) AS decimal(18,2)) AS debit,
+        CAST(0 AS decimal(18,2)) AS credit,
+        CAST(0 AS decimal(18,2)) AS running_balance,
+        2 AS sort_no,
+        sp.id AS sort_id
+    FROM pos_suppliers_payments sp
+    WHERE sp.branch_id = @branch_id
+      AND sp.supplier_id = @supplier_id
+      AND CAST(sp.entry_date AS date) BETWEEN @from_date AND @to_date
+) x
+ORDER BY x.entry_date, x.sort_no, x.sort_id", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                cmdLocal.Parameters.Add("@from_date", SqlDbType.Date).Value = fromDate.Date;
+                cmdLocal.Parameters.Add("@to_date", SqlDbType.Date).Value = toDate.Date;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+
+                decimal running = 0m;
+                foreach (DataRow row in dt.Rows)
+                {
+                    running += (row["credit"] == DBNull.Value ? 0m : Convert.ToDecimal(row["credit"]))
+                               - (row["debit"] == DBNull.Value ? 0m : Convert.ToDecimal(row["debit"]));
+                    row["running_balance"] = Math.Round(running, 2);
+                }
+
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierOutstandingBills(int supplierId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT
+    p.invoice_no,
+    p.purchase_date,
+    DATEADD(DAY,
+        CASE
+            WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int)
+            ELSE 30
+        END,
+        p.purchase_date) AS due_date,
+    CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,2)) AS amount,
+    CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,2)) AS paid,
+    CAST((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - ISNULL(SUM(sp.debit), 0) AS decimal(18,2)) AS balance,
+    CASE
+        WHEN DATEDIFF(DAY, DATEADD(DAY,
+            CASE WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int) ELSE 30 END,
+            p.purchase_date), GETDATE()) < 0 THEN 0
+        ELSE DATEDIFF(DAY, DATEADD(DAY,
+            CASE WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int) ELSE 30 END,
+            p.purchase_date), GETDATE())
+    END AS days_overdue
+FROM pos_purchases p
+LEFT JOIN pos_suppliers_payments sp
+    ON sp.branch_id = p.branch_id
+   AND sp.supplier_id = p.supplier_id
+   AND sp.invoice_no = p.invoice_no
+WHERE p.branch_id = @branch_id
+  AND p.supplier_id = @supplier_id
+GROUP BY p.invoice_no, p.purchase_date, p.payment_terms_id, p.total_amount, p.total_tax, p.discount_value
+HAVING ((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - ISNULL(SUM(sp.debit), 0)) > 0.004
+ORDER BY p.purchase_date DESC, p.invoice_no DESC", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierPayableAgingSummary(int supplierId)
+        {
+            DataTable outDt = new DataTable();
+            outDt.Columns.Add("bucket_current", typeof(decimal));
+            outDt.Columns.Add("bucket_1_30", typeof(decimal));
+            outDt.Columns.Add("bucket_31_60", typeof(decimal));
+            outDt.Columns.Add("bucket_61_90", typeof(decimal));
+            outDt.Columns.Add("bucket_90_plus", typeof(decimal));
+
+            DataTable bills = GetSupplierOutstandingBills(supplierId);
+            decimal cur = 0m, b1 = 0m, b31 = 0m, b61 = 0m, b90 = 0m;
+            foreach (DataRow r in bills.Rows)
+            {
+                decimal bal = r["balance"] == DBNull.Value ? 0m : Convert.ToDecimal(r["balance"]);
+                int days = r["days_overdue"] == DBNull.Value ? 0 : Convert.ToInt32(r["days_overdue"]);
+
+                if (days <= 0) cur += bal;
+                else if (days <= 30) b1 += bal;
+                else if (days <= 60) b31 += bal;
+                else if (days <= 90) b61 += bal;
+                else b90 += bal;
+            }
+
+            DataRow row = outDt.NewRow();
+            row["bucket_current"] = Math.Round(cur, 2);
+            row["bucket_1_30"] = Math.Round(b1, 2);
+            row["bucket_31_60"] = Math.Round(b31, 2);
+            row["bucket_61_90"] = Math.Round(b61, 2);
+            row["bucket_90_plus"] = Math.Round(b90, 2);
+            outDt.Rows.Add(row);
+
+            return outDt;
+        }
+
+        public DataTable GetSupplierTopProductsByValue(int supplierId, int top = 10)
+        {
+            return GetSupplierTopItems(supplierId, top <= 0 ? 10 : top);
+        }
+
+        public DataTable GetSupplierMonthlySpendTrend(int supplierId, int months = 24)
+        {
+            return GetSupplierMonthlyPurchaseHistory(supplierId, months <= 0 ? 24 : months);
+        }
+
+        public DataTable GetSupplierProductsForPriceHistory(int supplierId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT DISTINCT
+    ISNULL(pi.item_number, '') AS item_no,
+    ISNULL(p.name, ISNULL(pi.item_number, '')) AS item_name
+FROM pos_purchases_items pi
+LEFT JOIN pos_products p ON p.item_number = pi.item_number
+WHERE pi.branch_id = @branch_id
+  AND pi.supplier_id = @supplier_id
+ORDER BY item_name", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        public DataTable GetSupplierProductPriceHistory(int supplierId, string itemNumber)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+SELECT
+    p.purchase_date,
+    CAST(ISNULL(pi.cost_price, 0) AS decimal(18,4)) AS unit_cost,
+    ISNULL(p.invoice_no, '') AS invoice_no
+FROM pos_purchases_items pi
+INNER JOIN pos_purchases p ON p.branch_id = pi.branch_id AND p.invoice_no = pi.invoice_no
+WHERE pi.branch_id = @branch_id
+  AND pi.supplier_id = @supplier_id
+  AND pi.item_number = @item_no
+ORDER BY p.purchase_date, pi.id", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                cmdLocal.Parameters.Add("@item_no", SqlDbType.NVarChar, 100).Value = itemNumber ?? string.Empty;
+
+                DataTable dt = new DataTable();
+                cn.Open();
+                using (SqlDataAdapter daLocal = new SqlDataAdapter(cmdLocal))
+                {
+                    daLocal.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
         public int Insert(SupplierModal obj)
         {
             Int32 result = 0;

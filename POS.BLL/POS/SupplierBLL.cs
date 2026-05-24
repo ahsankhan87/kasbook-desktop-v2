@@ -92,6 +92,175 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetSupplierDashboardKPIs()
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierDashboardKPIs();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierSummaryDashboard(string searchText = null, string category = null, string statusFilter = "All")
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierSummaryDashboard(searchText, category, statusFilter);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierRecentBills(int supplierId, int top = 5)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierRecentBills(supplierId, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierProfileOverview(int supplierId)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierProfileOverview(supplierId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierMonthlyPurchaseHistory(int supplierId, int months = 12)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierMonthlyPurchaseHistory(supplierId, months);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierTopItems(int supplierId, int top = 5)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierTopItems(supplierId, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierLedger(int supplierId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierLedger(supplierId, fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierOutstandingBills(int supplierId)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierOutstandingBills(supplierId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierPayableAgingSummary(int supplierId)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierPayableAgingSummary(supplierId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierTopProductsByValue(int supplierId, int top = 10)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierTopProductsByValue(supplierId, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierMonthlySpendTrend(int supplierId, int months = 24)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierMonthlySpendTrend(supplierId, months);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierProductsForPriceHistory(int supplierId)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierProductsForPriceHistory(supplierId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierProductPriceHistory(int supplierId, string itemNumber)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierProductPriceHistory(supplierId, itemNumber);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public int Insert(SupplierModal obj)
         {
             try

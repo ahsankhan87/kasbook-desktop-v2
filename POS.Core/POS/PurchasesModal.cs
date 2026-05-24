@@ -46,6 +46,7 @@ namespace POS.Core
         public string returnReasonCode { get; set; }
         public string returnReason { get; set; }
         public int payment_method_id { get; set; } = 0;
+        public int payment_terms_id { get; set; } = 0;
         public string payment_method_text { get; set; } = "";
         public int bank_id { get; set; } = 0;
         public string bankGLAccountID { get; set; } = "";

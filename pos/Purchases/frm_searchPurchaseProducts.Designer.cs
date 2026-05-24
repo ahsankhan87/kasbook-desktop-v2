@@ -57,8 +57,6 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.grid_group_products = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panelMiddle = new System.Windows.Forms.Panel();
             this.g_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.g_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.g_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +65,8 @@
             this.g_location_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.g_category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alt_item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelMiddle = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.grid_search_products)).BeginInit();
             this.panelTop.SuspendLayout();
             this.panelFooter.SuspendLayout();
@@ -289,17 +289,6 @@
             this.grid_group_products.DoubleClick += new System.EventHandler(this.grid_group_products_DoubleClick);
             this.grid_group_products.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_group_products_KeyDown);
             // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // panelMiddle
-            // 
-            this.panelMiddle.Controls.Add(this.grid_search_products);
-            resources.ApplyResources(this.panelMiddle, "panelMiddle");
-            this.panelMiddle.Name = "panelMiddle";
-            // 
             // g_id
             // 
             this.g_id.DataPropertyName = "id";
@@ -367,6 +356,17 @@
             resources.ApplyResources(this.alt_item_number, "alt_item_number");
             this.alt_item_number.Name = "alt_item_number";
             this.alt_item_number.ReadOnly = true;
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // panelMiddle
+            // 
+            this.panelMiddle.Controls.Add(this.grid_search_products);
+            resources.ApplyResources(this.panelMiddle, "panelMiddle");
+            this.panelMiddle.Name = "panelMiddle";
             // 
             // frm_searchPurchaseProducts
             // 

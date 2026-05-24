@@ -196,7 +196,8 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost," +
+                        String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id," +
+                            " S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost,S.payment_terms_id,S.payment_method_id," +
                             " SI.id,SI.item_code,SI.item_number,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.discount_percent," +
                             " SI.quantity AS qty,SI.cost_price AS avg_cost," + // this line is for print of build edit product page
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
@@ -421,6 +422,8 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@PO_status", 0);
                             cmd.Parameters.AddWithValue("@purchase_time", purchase_header.purchase_time);
                             cmd.Parameters.AddWithValue("@shipping_cost", purchase_header.shipping_cost);
+                            cmd.Parameters.AddWithValue("@payment_method_id", purchase_header.payment_method_id);
+                            cmd.Parameters.AddWithValue("@payment_terms_id", purchase_header.payment_terms_id);
 
                             cmd.Parameters.AddWithValue("@OperationType", "1");
                         }
@@ -836,7 +839,6 @@ namespace POS.DLL
                                     } // bank entry end
                                     else// if bank is not selected in payment metd then cash entry will happen
                                     {
-
                                         ///CASH JOURNAL ENTRY (CREDIT)
                                         //Insert_Journal_entry(invoice_no, cash_account_id, 0, net_total_tax, purchase_date, txt_description.Text, 0, 0, 0);
 
@@ -1537,7 +1539,6 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@OperationType", "1");
 
                                         cmd.ExecuteScalar();
-
                                     }
 
                                 }
@@ -1597,6 +1598,8 @@ namespace POS.DLL
                     }
 
                     int result = Convert.ToInt32(cmd.ExecuteScalar());
+
+
                     return result;
                 }
                 catch
@@ -1809,11 +1812,12 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost," +
+                        String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id," +
+                            "S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost,S.payment_terms_id,S.payment_method_id," +
                             " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.item_number,SI.discount_percent," +
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity*SI.tax_rate/100) AS vat," +
-                            " P.name AS name,P.code,P.location_code,P.item_type,P.barcode," +
+                            " P.name AS name,P.code,P.location_code,P.item_type,P.barcode,P.description," +
                             " U.name AS unit," +
                             " CT.name AS category" +
                             " FROM pos_hold_purchases S" +
@@ -1948,7 +1952,7 @@ namespace POS.DLL
                 {
                     String query1 = "UPDATE pos_purchases SET supplier_id=@supplier_id, supplier_invoice_no=@supplierInvoiceNo WHERE invoice_no = @invoice_no AND branch_id = @branch_id";
                     String query2 = "UPDATE pos_inventory SET supplier_id=@supplier_id  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
-                    String query3 = "UPDATE pos_suppliers_payments SET supplier_id=@supplier_id  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
+                    String query3 = "UPDATE acc_entries SET supplier_id=@supplier_id  WHERE invoice_no= @invoice_no AND branch_id = @branch_id";
 
                     if (cn.State == ConnectionState.Closed)
                     {
@@ -2046,6 +2050,331 @@ namespace POS.DLL
 
                 var found = cmd.ExecuteScalar();
                 return found != null && found != DBNull.Value;
+            }
+        }
+
+        public DataTable GetPurchaseDashboardKpis(DateTime fromDate, DateTime toDate, DateTime prevFromDate, DateTime prevToDate)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            ;WITH CurrentPurchases AS (
+                SELECT p.invoice_no,
+                       ISNULL(p.purchase_type, '') AS purchase_type,
+                       CAST(ISNULL(p.total_amount,0) + ISNULL(p.total_tax,0) - ISNULL(p.discount_value,0) AS decimal(18,2)) AS net_amount,
+                       p.purchase_date
+                FROM pos_purchases p
+                WHERE p.branch_id = @branch_id
+                  AND p.purchase_date BETWEEN @fromDate AND @toDate
+                  AND LOWER(ISNULL(p.purchase_type,'')) <> 'hold'
+            ),
+            PrevPurchases AS (
+                SELECT CAST(ISNULL(p.total_amount,0) + ISNULL(p.total_tax,0) - ISNULL(p.discount_value,0) AS decimal(18,2)) AS net_amount
+                FROM pos_purchases p
+                WHERE p.branch_id = @branch_id
+                  AND p.purchase_date BETWEEN @prevFromDate AND @prevToDate
+                  AND LOWER(ISNULL(p.purchase_type,'')) <> 'hold'
+            ),
+            PaidByInvoiceTotal AS (
+                SELECT sp.invoice_no, SUM(ISNULL(sp.debit, 0)) AS paid_amount
+                FROM pos_suppliers_payments sp
+                WHERE sp.branch_id = @branch_id
+                  AND sp.entry_date <= @toDate
+                GROUP BY sp.invoice_no
+            ),
+            PaidByInvoicePeriod AS (
+                SELECT sp.invoice_no, SUM(ISNULL(sp.debit, 0)) AS paid_amount
+                FROM pos_suppliers_payments sp
+                WHERE sp.branch_id = @branch_id
+                  AND sp.entry_date BETWEEN @fromDate AND @toDate
+                GROUP BY sp.invoice_no
+            )
+            SELECT
+                ISNULL((SELECT SUM(net_amount) FROM CurrentPurchases), 0) AS total_purchases,
+                ISNULL((SELECT SUM(net_amount) FROM PrevPurchases), 0) AS total_purchases_prev,
+                ISNULL((SELECT COUNT(1) FROM CurrentPurchases), 0) AS total_bills,
+                ISNULL((SELECT SUM(CASE
+                                   WHEN LOWER(c.purchase_type) = 'cash' THEN c.net_amount
+                                   WHEN LOWER(c.purchase_type) = 'credit' THEN ISNULL(pp.paid_amount, 0)
+                                   ELSE 0
+                                 END)
+                        FROM CurrentPurchases c
+                        LEFT JOIN PaidByInvoicePeriod pp ON pp.invoice_no = c.invoice_no), 0) AS amount_paid,
+                ISNULL((SELECT SUM(CASE
+                                   WHEN LOWER(c.purchase_type) = 'credit'
+                                        AND c.net_amount - ISNULL(pt.paid_amount, 0) > 0
+                                   THEN c.net_amount - ISNULL(pt.paid_amount, 0)
+                                   ELSE 0
+                                 END)
+                        FROM CurrentPurchases c
+                        LEFT JOIN PaidByInvoiceTotal pt ON pt.invoice_no = c.invoice_no), 0) AS payable_outstanding,
+                ISNULL((SELECT SUM(CASE
+                                   WHEN LOWER(c.purchase_type) = 'credit'
+                                        AND DATEDIFF(DAY, c.purchase_date, GETDATE()) > 30
+                                        AND c.net_amount - ISNULL(pt.paid_amount, 0) > 0
+                                   THEN c.net_amount - ISNULL(pt.paid_amount, 0)
+                                   ELSE 0
+                                 END)
+                        FROM CurrentPurchases c
+                        LEFT JOIN PaidByInvoiceTotal pt ON pt.invoice_no = c.invoice_no), 0) AS overdue_outstanding,
+                CASE WHEN ISNULL((SELECT COUNT(1) FROM CurrentPurchases), 0) = 0 THEN 0
+                     ELSE ISNULL((SELECT SUM(net_amount) FROM CurrentPurchases), 0) / NULLIF((SELECT COUNT(1) FROM CurrentPurchases), 0)
+                END AS avg_purchase_value;", cn))
+            {
+                cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                cmd.Parameters.AddWithValue("@toDate", toDate);
+                cmd.Parameters.AddWithValue("@prevFromDate", prevFromDate);
+                cmd.Parameters.AddWithValue("@prevToDate", prevToDate);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public DataTable GetPurchaseDashboardMonthlyPurchases(int months, DateTime endDate)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            ;WITH M AS
+            (
+                SELECT CAST(DATEFROMPARTS(YEAR(DATEADD(MONTH, -(@months - 1), @endDate)), MONTH(DATEADD(MONTH, -(@months - 1), @endDate)), 1) AS date) AS month_start
+                UNION ALL
+                SELECT DATEADD(MONTH, 1, month_start)
+                FROM M
+                WHERE month_start < DATEFROMPARTS(YEAR(@endDate), MONTH(@endDate), 1)
+            )
+            SELECT MONTH(m.month_start) AS month_no,
+                   YEAR(m.month_start) AS year_no,
+                   LEFT(DATENAME(MONTH, m.month_start), 3) AS month_label,
+                   ISNULL(SUM(ISNULL(p.total_amount,0) + ISNULL(p.total_tax,0) - ISNULL(p.discount_value,0)), 0) AS amount
+            FROM M
+            LEFT JOIN pos_purchases p ON p.purchase_date >= m.month_start
+                                     AND p.purchase_date < DATEADD(MONTH, 1, m.month_start)
+                                     AND p.branch_id = @branch_id
+                                     AND LOWER(ISNULL(p.purchase_type,'')) <> 'hold'
+            GROUP BY m.month_start
+            ORDER BY m.month_start
+            OPTION (MAXRECURSION 400);", cn))
+            {
+                cmd.Parameters.AddWithValue("@months", months);
+                cmd.Parameters.AddWithValue("@endDate", endDate);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public DataTable GetPurchaseDashboardSupplierSplit(DateTime fromDate, DateTime toDate, int top = 5)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            ;WITH S AS
+            (
+                SELECT CONCAT(ISNULL(ps.first_name, 'Unknown'), ' ', ISNULL(ps.last_name, '')) AS supplier_name,
+                       SUM(ISNULL(pp.total_amount,0) + ISNULL(pp.total_tax,0) - ISNULL(pp.discount_value,0)) AS total_amount
+                FROM pos_purchases pp
+                LEFT JOIN pos_suppliers ps ON pp.supplier_id = ps.id
+                WHERE pp.purchase_date BETWEEN @fromDate AND @toDate
+                  AND pp.branch_id = @branch_id
+                  AND LOWER(ISNULL(pp.purchase_type,'')) <> 'hold'
+                GROUP BY CONCAT(ISNULL(ps.first_name, 'Unknown'), ' ', ISNULL(ps.last_name, ''))
+            )
+            SELECT TOP (@top)
+                supplier_name,
+                total_amount
+            FROM S
+            ORDER BY total_amount DESC;", cn))
+            {
+                cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                cmd.Parameters.AddWithValue("@toDate", toDate);
+                cmd.Parameters.AddWithValue("@top", top);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public DataTable GetPurchaseDashboardYearlyTrend(int year)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            ;WITH M AS
+            (
+                SELECT 1 AS month_no
+                UNION ALL
+                SELECT month_no + 1 FROM M WHERE month_no < 12
+            )
+            SELECT m.month_no,
+                   LEFT(DATENAME(MONTH, DATEFROMPARTS(@year, m.month_no, 1)), 3) AS month_name,
+                   ISNULL(SUM(CASE WHEN YEAR(p.purchase_date) = @year THEN ISNULL(p.total_amount,0) + ISNULL(p.total_tax,0) - ISNULL(p.discount_value,0) ELSE 0 END), 0) AS current_year_amount,
+                   ISNULL(SUM(CASE WHEN YEAR(p.purchase_date) = @year - 1 THEN ISNULL(p.total_amount,0) + ISNULL(p.total_tax,0) - ISNULL(p.discount_value,0) ELSE 0 END), 0) AS last_year_amount
+            FROM M m
+            LEFT JOIN pos_purchases p ON MONTH(p.purchase_date) = m.month_no
+                                     AND p.branch_id = @branch_id
+                                     AND YEAR(p.purchase_date) IN (@year, @year - 1)
+                                     AND LOWER(ISNULL(p.purchase_type,'')) <> 'hold'
+            GROUP BY m.month_no
+            ORDER BY m.month_no
+            OPTION (MAXRECURSION 12);", cn))
+            {
+                cmd.Parameters.AddWithValue("@year", year);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public DataTable GetPurchaseDashboardTopSuppliers(DateTime fromDate, DateTime toDate, int top = 10)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            ;WITH P AS
+            (
+                SELECT pp.invoice_no,
+                       pp.supplier_id,
+                       CONCAT(ISNULL(ps.first_name, 'Unknown'), ' ', ISNULL(ps.last_name, '')) AS supplier_name,
+                       ISNULL(pp.purchase_type, '') AS purchase_type,
+                       CAST(ISNULL(pp.total_amount,0) + ISNULL(pp.total_tax,0) - ISNULL(pp.discount_value,0) AS decimal(18,2)) AS net_amount
+                FROM pos_purchases pp
+                LEFT JOIN pos_suppliers ps ON pp.supplier_id = ps.id
+                WHERE pp.purchase_date BETWEEN @fromDate AND @toDate
+                  AND pp.branch_id = @branch_id
+                  AND LOWER(ISNULL(pp.purchase_type,'')) <> 'hold'
+            ),
+            Paid AS
+            (
+                SELECT invoice_no, SUM(ISNULL(debit,0)) AS paid_amount
+                FROM pos_suppliers_payments
+                WHERE branch_id = @branch_id
+                GROUP BY invoice_no
+            ),
+            Totals AS
+            (
+                SELECT p.supplier_id,
+                       p.supplier_name,
+                       SUM(p.net_amount) AS total_purchases,
+                       SUM(CASE
+                               WHEN LOWER(p.purchase_type) = 'credit' AND p.net_amount - ISNULL(pd.paid_amount, 0) > 0
+                               THEN p.net_amount - ISNULL(pd.paid_amount, 0)
+                               ELSE 0
+                           END) AS payable_amount
+                FROM P p
+                LEFT JOIN Paid pd ON pd.invoice_no = p.invoice_no
+                GROUP BY p.supplier_id, p.supplier_name
+            )
+            SELECT TOP (@top)
+                ROW_NUMBER() OVER (ORDER BY total_purchases DESC) AS rank_no,
+                supplier_name,
+                total_purchases,
+                CASE WHEN gt.grand_total = 0 THEN 0 ELSE (total_purchases * 100.0 / gt.grand_total) END AS share_percent,
+                payable_amount
+            FROM Totals
+            CROSS JOIN (SELECT ISNULL(SUM(total_purchases), 0) AS grand_total FROM Totals) gt
+            ORDER BY total_purchases DESC;", cn))
+            {
+                cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                cmd.Parameters.AddWithValue("@toDate", toDate);
+                cmd.Parameters.AddWithValue("@top", top);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public DataTable GetPurchaseDashboardPendingBills(DateTime fromDate, DateTime toDate, int top = 50)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            ;WITH Paid AS
+            (
+                SELECT invoice_no, SUM(ISNULL(debit, 0)) AS paid_amount
+                FROM pos_suppliers_payments
+                WHERE branch_id = @branch_id
+                GROUP BY invoice_no
+            )
+            SELECT TOP (@top)
+                pp.invoice_no AS bill_no,
+                CONCAT(ISNULL(ps.first_name, 'Unknown'), ' ', ISNULL(ps.last_name, '')) AS supplier_name,
+                pp.purchase_date AS bill_date,
+                DATEADD(DAY, 30, pp.purchase_date) AS due_date,
+                CAST((ISNULL(pp.total_amount,0) + ISNULL(pp.total_tax,0) - ISNULL(pp.discount_value,0)) - ISNULL(pd.paid_amount,0) AS decimal(18,2)) AS amount,
+                CASE
+                    WHEN DATEDIFF(DAY, DATEADD(DAY, 30, pp.purchase_date), GETDATE()) > 0
+                    THEN DATEDIFF(DAY, DATEADD(DAY, 30, pp.purchase_date), GETDATE())
+                    ELSE 0
+                END AS days_overdue
+            FROM pos_purchases pp
+            LEFT JOIN pos_suppliers ps ON pp.supplier_id = ps.id
+            LEFT JOIN Paid pd ON pd.invoice_no = pp.invoice_no
+            WHERE pp.purchase_date BETWEEN @fromDate AND @toDate
+              AND pp.branch_id = @branch_id
+              AND LOWER(ISNULL(pp.purchase_type, '')) = 'credit'
+              AND ((ISNULL(pp.total_amount,0) + ISNULL(pp.total_tax,0) - ISNULL(pp.discount_value,0)) - ISNULL(pd.paid_amount,0)) > 0
+            ORDER BY amount DESC;", cn))
+            {
+                cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                cmd.Parameters.AddWithValue("@toDate", toDate);
+                cmd.Parameters.AddWithValue("@top", top);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public decimal GetPurchasePaymentTotal(DateTime fromDate, DateTime toDate)
+        {
+            using (var cn = new SqlConnection(dbConnection.ConnectionString))
+            using (var cmd = new SqlCommand(@"
+            SELECT ISNULL(SUM(ISNULL(sp.debit, 0)), 0)
+            FROM pos_suppliers_payments sp
+            INNER JOIN pos_purchases pp ON pp.invoice_no = sp.invoice_no
+                                       AND pp.branch_id = sp.branch_id
+            WHERE sp.entry_date BETWEEN @fromDate AND @toDate
+              AND sp.branch_id = @branch_id
+              AND LOWER(ISNULL(pp.purchase_type, '')) = 'credit';", cn))
+            {
+                cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                cmd.Parameters.AddWithValue("@toDate", toDate);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                cn.Open();
+                var result = cmd.ExecuteScalar();
+                return result != null && result != DBNull.Value ? Convert.ToDecimal(result) : 0m;
             }
         }
     }

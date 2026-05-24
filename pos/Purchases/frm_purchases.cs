@@ -1,7 +1,10 @@
-﻿using pos.Security.Authorization;
+﻿using pos.Reports.Common;
+using pos.Sales.Helpers;
+using pos.Security.Authorization;
+using pos.UI;
+using pos.UI.Busy;
 using POS.BLL;
 using POS.Core;
-using pos.Reports.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +15,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using pos.UI;
-using pos.UI.Busy;
 
 namespace pos
 {
@@ -162,6 +163,7 @@ namespace pos
                 // Supplier selection is via txtSupplierSearch + grid
                 get_employees_dropdownlist();
                 get_payment_method_dropdownlist();
+                get_payment_terms_dropdownlist();
 
                 foreach (DataGridViewColumn column in grid_purchases.Columns)
                 {
@@ -1648,7 +1650,9 @@ namespace pos
                         {
                             _suppressSupplierSearch = false;
                         }
-                        cmb_employees.SelectedValue = myProductView["employee_id"];
+                        cmb_employees.SelectedValue = (string.IsNullOrEmpty(myProductView["employee_id"].ToString()) ? "" : myProductView["employee_id"]);
+                        cmb_payment_terms.SelectedValue = (string.IsNullOrEmpty(myProductView["payment_terms_id"].ToString()) ? "" : myProductView["payment_terms_id"]);
+                        cmb_payment_method.SelectedValue = (string.IsNullOrEmpty(myProductView["payment_method_id"].ToString()) ? "" : myProductView["payment_method_id"]);
 
                         // If purchase_date is null or empty or invalid, set it to today's date; otherwise, set it to the value from the data row
                         // if invoice is Purchase Order restrict to today
@@ -2505,6 +2509,7 @@ namespace pos
                     string bankGLAccountID = "";
                     string paymentMethodText = cmb_payment_method.Text;
                     int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
+                    int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_terms.SelectedValue));
                     bool isEditingPurchase = _isEditMode && !_editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo);
 
 
@@ -2654,6 +2659,7 @@ namespace pos
                                 po_status = po_status,
 
                                 payment_method_id = payment_method_id,
+                                payment_terms_id = payment_terms_id,
                                 payment_method_text = paymentMethodText,
                                 bankGLAccountID = bankGLAccountID,
                                 bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
@@ -3159,26 +3165,9 @@ namespace pos
             return dt;
 
         }
+        public void get_payment_terms_dropdownlist() { SalesDropdownHelper.PopulatePaymentTermsDropdown(cmb_payment_terms); }
 
-        public void get_payment_method_dropdownlist()
-        {
-            PaymentMethodBLL paymentMethodBLL = new PaymentMethodBLL();
-
-            DataTable payment_method = paymentMethodBLL.GetAll();
-            DataRow emptyRow = payment_method.NewRow();
-            //emptyRow[0] = 0;              // Set Column Value
-            //emptyRow[1] = "";              // Set Column Value
-            //payment_method.Rows.InsertAt(emptyRow, 0);
-
-
-            cmb_payment_method.DisplayMember = "description";
-            cmb_payment_method.ValueMember = "id";
-            cmb_payment_method.DataSource = payment_method;
-
-            cmb_employees.SelectedIndex = 0;
-
-        }
-
+        public void get_payment_method_dropdownlist() { SalesDropdownHelper.PopulatePaymentMethodsDropdown(cmb_payment_method); }
 
         private void SetupSuppliersDataGridView()
         {

@@ -97,6 +97,136 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetCustomerSummaryDashboard()
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerSummaryDashboard();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerRecentTransactions(int customerId, int top = 5)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerRecentTransactions(customerId, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerProfileOverview(int customerId)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerProfileOverview(customerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerMonthlyPurchaseHistory(int customerId, int months = 12)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerMonthlyPurchaseHistory(customerId, months);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerLedger(int customerId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerLedger(customerId, fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerOutstandingInvoices(int customerId)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerOutstandingInvoices(customerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerAgingSummary(int customerId)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerAgingSummary(customerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerNotes(int customerId)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerNotes(customerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int AddCustomerNote(int customerId, string noteText)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.AddCustomerNote(customerId, noteText);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int UpdateCustomerStatus(int customerId, bool isActive)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.UpdateCustomerStatus(customerId, isActive);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public int Insert(CustomerModal obj)
         {
             try
@@ -151,8 +281,6 @@ namespace POS.BLL
                 throw;
             }
         }
-
-       
 
         public bool IsCustomerCodeExists(string CustomerCode, int? excludeCustomerId = null)
         {

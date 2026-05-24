@@ -272,6 +272,90 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetPurchaseDashboardKpis(DateTime fromDate, DateTime toDate, DateTime prevFromDate, DateTime prevToDate)
+        {
+            try
+            {
+                return objDLL.GetPurchaseDashboardKpis(fromDate, toDate, prevFromDate, prevToDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetPurchaseDashboardMonthlyPurchases(int months, DateTime endDate)
+        {
+            try
+            {
+                return objDLL.GetPurchaseDashboardMonthlyPurchases(months, endDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetPurchaseDashboardSupplierSplit(DateTime fromDate, DateTime toDate, int top = 5)
+        {
+            try
+            {
+                return objDLL.GetPurchaseDashboardSupplierSplit(fromDate, toDate, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetPurchaseDashboardYearlyTrend(int year)
+        {
+            try
+            {
+                return objDLL.GetPurchaseDashboardYearlyTrend(year);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetPurchaseDashboardTopSuppliers(DateTime fromDate, DateTime toDate, int top = 10)
+        {
+            try
+            {
+                return objDLL.GetPurchaseDashboardTopSuppliers(fromDate, toDate, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetPurchaseDashboardPendingBills(DateTime fromDate, DateTime toDate, int top = 50)
+        {
+            try
+            {
+                return objDLL.GetPurchaseDashboardPendingBills(fromDate, toDate, top);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetPurchasePaymentTotal(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return objDLL.GetPurchasePaymentTotal(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public DataTable PurchaseReceipt(string invoice_no)
         {
             try
