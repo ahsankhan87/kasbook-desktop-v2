@@ -23,10 +23,10 @@ namespace pos.Products.Adjustment
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_deleteProduct = new System.Windows.Forms.Button();
+            this.txt_location = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_sale_price = new System.Windows.Forms.TextBox();
             this.lbl_productCode = new System.Windows.Forms.Label();
-            this.cmb_locations = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -42,16 +42,16 @@ namespace pos.Products.Adjustment
             // 
             // btnOk
             // 
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             resources.ApplyResources(this.btnOk, "btnOk");
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Name = "btnOk";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -63,11 +63,16 @@ namespace pos.Products.Adjustment
             // 
             // btn_deleteProduct
             // 
-            this.btn_deleteProduct.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btn_deleteProduct, "btn_deleteProduct");
+            this.btn_deleteProduct.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_deleteProduct.Name = "btn_deleteProduct";
             this.btn_deleteProduct.UseVisualStyleBackColor = true;
             this.btn_deleteProduct.Click += new System.EventHandler(this.btn_deleteProduct_Click);
+            // 
+            // txt_location
+            // 
+            resources.ApplyResources(this.txt_location, "txt_location");
+            this.txt_location.Name = "txt_location";
             // 
             // label2
             // 
@@ -85,20 +90,12 @@ namespace pos.Products.Adjustment
             resources.ApplyResources(this.lbl_productCode, "lbl_productCode");
             this.lbl_productCode.Name = "lbl_productCode";
             // 
-            // cmb_locations
-            // 
-            this.cmb_locations.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_locations.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_locations.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_locations, "cmb_locations");
-            this.cmb_locations.Name = "cmb_locations";
-            // 
             // frm_adjust_qty
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.Controls.Add(this.cmb_locations);
+            this.Controls.Add(this.txt_location);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_productCode);
@@ -121,9 +118,9 @@ namespace pos.Products.Adjustment
         }
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_deleteProduct;
+        private System.Windows.Forms.TextBox txt_location;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txt_sale_price;
         private System.Windows.Forms.Label lbl_productCode;
-        private System.Windows.Forms.ComboBox cmb_locations;
     }
 }

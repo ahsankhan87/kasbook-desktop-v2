@@ -2708,7 +2708,7 @@ namespace pos
                                         tax_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["tax_id"].Value.ToString()),
                                         tax_rate = tax_rate,
                                         purchase_date = purchase_date,
-                                        location_code = location_code,
+                                        location_code = location_code?.ToUpper(),
                                         supplier_id = supplier_id,
 
                                     });

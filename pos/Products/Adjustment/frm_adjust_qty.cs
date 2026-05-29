@@ -14,6 +14,7 @@ namespace pos.Products.Adjustment
         public decimal EnteredQty { get; private set; }
         public decimal Price { get; set; }
         public string locationCode { get; set; }
+        public bool IsProductDeleted { get; private set; }
 
         public int _productID { get; private set; }
         public string _productCode { get; private set; }
@@ -25,8 +26,7 @@ namespace pos.Products.Adjustment
             txtQty.Focus();
             _productID = productID;
             _productCode = productCode;
-            //txt_location.Text = locationCode;
-            cmb_locations.SelectedValue = locationCode;
+            txt_location.Text = locationCode;
             txt_sale_price.Text = price.ToString();
             lbl_productCode.Text = productCode;
             ApplyPermissionTags();
@@ -94,7 +94,8 @@ namespace pos.Products.Adjustment
             }
 
             EnteredQty = Math.Round(val, 2);
-            locationCode = cmb_locations.SelectedValue?.ToString(); // pass through location code for use in calling code if needed
+            // convert text_location to capital letters to maintain consistency in location codes
+            locationCode = txt_location.Text?.ToUpper(); // pass through location code for use in calling code if needed
             Price = decimal.TryParse(txt_sale_price.Text, out var price) ? price : 0m; // pass through price for use in calling code if needed
         }
 
@@ -125,7 +126,7 @@ namespace pos.Products.Adjustment
         private void btn_deleteProduct_Click(object sender, EventArgs e)
         {
             // delete product permanently from the system
-            if (!string.IsNullOrWhiteSpace(_productID.ToString()))
+            if (_productID > 0)
             {
                 var confirm = UiMessages.ConfirmYesNo(
                     "Delete this product? This action cannot be undone.",
@@ -138,6 +139,7 @@ namespace pos.Products.Adjustment
                 {
                     ProductBLL objBLL = new ProductBLL();
                     objBLL.Delete(_productID);
+                    IsProductDeleted = true;
 
                     UiMessages.ShowInfo(
                         "Product has been deleted successfully.",
@@ -145,6 +147,9 @@ namespace pos.Products.Adjustment
                         "Deleted",
                         " „ «·Õ–›"
                     );
+
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
                     return;
                 }
             }
@@ -178,25 +183,8 @@ namespace pos.Products.Adjustment
         private void frm_adjust_qty_Load(object sender, EventArgs e)
         {
             ApplyPermissionsOnLoad();
-            get_locations_dropdownlist();
+           
         }
-        public void get_locations_dropdownlist()
-        {
-            GeneralBLL generalBLL_obj = new GeneralBLL();
-            string keyword = "code,name";
-            string table = "pos_locations";
-
-            DataTable locations = generalBLL_obj.GetRecord(keyword, table);
-            //DataRow emptyRow = locations.NewRow();
-            //emptyRow[0] = 0;              // Set Column Value
-            //emptyRow[1] = "All";              // Set Column Value
-            //locations.Rows.InsertAt(emptyRow, 0);
-
-
-            cmb_locations.DisplayMember = "name";
-            cmb_locations.ValueMember = "code";
-            cmb_locations.DataSource = locations;
-
-        }
+        
     }
 }
