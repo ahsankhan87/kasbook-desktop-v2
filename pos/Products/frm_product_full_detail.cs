@@ -15,6 +15,7 @@ using System.Net;
 using System.Web;
 using pos.UI;
 using pos.UI.Busy;
+using pos.Security.Authorization;
 
 namespace pos
 {
@@ -49,12 +50,35 @@ namespace pos
             this.searchsalesForm = searchsalesForm;
             _loadMovementHistory = loadMovementHistory;
             InitializeComponent();
+            ApplyPermissionTags();
         }
 
         public frm_product_full_detail()
         {
             InitializeComponent();
-            
+            ApplyPermissionTags();
+        }
+
+        private void ApplyPermissionTags()
+        {
+            this.Tag = Permissions.Inventory_View;
+
+            if (btn_save != null) btn_save.Tag = Permissions.Products_Create;
+            if (btn_update != null) btn_update.Tag = Permissions.Products_Edit;
+            if (btn_delete != null) btn_delete.Tag = Permissions.Products_Delete;
+            if (btn_productAdjustment != null) btn_productAdjustment.Tag = Permissions.Inventory_Edit;
+        }
+
+        private void ApplyPermissionsOnLoad()
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
+
+            if (AppSecurityContext.User == null || AppSecurityContext.Auth == null)
+                return;
+
+            AppSecurityContext.RefreshUserClaims();
+            this.ApplyPermissions(AppSecurityContext.Auth, AppSecurityContext.User);
         }
         
         public void frm_product_full_detail_Load(object sender, EventArgs e)
@@ -62,6 +86,7 @@ namespace pos
             if (!_loadMovementHistory)
                 AppTheme.Apply(this);
             StyleProductForm();
+            ApplyPermissionsOnLoad();
 
             txt_part_number.Focus();
             this.ActiveControl = txt_part_number;

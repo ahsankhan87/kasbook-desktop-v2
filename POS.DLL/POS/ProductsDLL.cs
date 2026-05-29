@@ -1114,9 +1114,14 @@ namespace POS.DLL
                             {
                                 query += ""; //search all locations
                             }
-                            else if (!string.IsNullOrEmpty(fromLocation) && fromLocation != "all")
+                            else if (!string.IsNullOrEmpty(fromLocation) && fromLocation != "All" && toLocation != "All")
                             {
                                 query += " AND p.location_code >= @fromLocation AND p.location_code <= @toLocation";
+
+                            }
+                            else if (!string.IsNullOrEmpty(fromLocation) && toLocation == "All")
+                            {
+                                query += " AND p.location_code = @fromLocation";
 
                             }
                             if (qty_onhand)
@@ -1172,7 +1177,7 @@ namespace POS.DLL
                             }
 
                             //query += " ORDER BY qty DESC";
-                            query = "SELECT TOP 1000 * FROM (" + query + ") AS Results ORDER BY name ASC";
+                            query = "SELECT TOP 1000 * FROM (" + query + ") AS Results ORDER BY location_code ASC";
 
                             cmd.CommandText = query;
                             cmd.Connection = cn;

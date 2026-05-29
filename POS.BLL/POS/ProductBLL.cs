@@ -1,4 +1,4 @@
-﻿using POS.Core;
+using POS.Core;
 using POS.DAL;
 using POS.DLL;
 using System;

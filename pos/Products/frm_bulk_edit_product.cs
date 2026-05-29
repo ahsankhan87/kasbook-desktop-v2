@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using pos.UI;
 using pos.UI.Busy;
+using pos.Sales.Helpers;
 
 namespace pos
 {
@@ -26,9 +27,60 @@ namespace pos
         public frm_bulk_edit_product()
         {
             InitializeComponent();
-            //txt_brands.Click += TextBoxOnClick;
             txt_categories.Click += TextBoxOnClick;
             txt_groups.Click += TextBoxOnClick;
+            InitGroupsDataGridView();
+            InitCategoriesDataGridView();
+        }
+
+        private void InitGroupsDataGridView()
+        {
+            groupsDataGridView.ColumnCount = 2;
+            groupsDataGridView.Name = "groupsDataGridView";
+            groupsDataGridView.Visible = false;
+            groupsDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            groupsDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            groupsDataGridView.Columns[0].Name = "Code";
+            groupsDataGridView.Columns[1].Name = "Name";
+            groupsDataGridView.Columns[0].ReadOnly = true;
+            groupsDataGridView.Columns[1].ReadOnly = true;
+            groupsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            groupsDataGridView.MultiSelect = false;
+            groupsDataGridView.AllowUserToAddRows = false;
+            groupsDataGridView.AllowUserToDeleteRows = false;
+            groupsDataGridView.RowHeadersVisible = false;
+            groupsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            groupsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            groupsDataGridView.AutoResizeColumns();
+            SalesStylingHelper.StyleDropdownGrid(groupsDataGridView);
+            groupsDataGridView.CellClick += new DataGridViewCellEventHandler(groupsDataGridView_CellClick);
+            groupsDataGridView.KeyDown += new KeyEventHandler(groupsDataGridView_KeyDown);
+            this.Controls.Add(groupsDataGridView);
+        }
+
+        private void InitCategoriesDataGridView()
+        {
+            categoriesDataGridView.ColumnCount = 2;
+            categoriesDataGridView.Name = "categoriesDataGridView";
+            categoriesDataGridView.Visible = false;
+            categoriesDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            categoriesDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            categoriesDataGridView.Columns[0].Name = "Code";
+            categoriesDataGridView.Columns[1].Name = "Name";
+            categoriesDataGridView.Columns[0].ReadOnly = true;
+            categoriesDataGridView.Columns[1].ReadOnly = true;
+            categoriesDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            categoriesDataGridView.MultiSelect = false;
+            categoriesDataGridView.AllowUserToAddRows = false;
+            categoriesDataGridView.AllowUserToDeleteRows = false;
+            categoriesDataGridView.RowHeadersVisible = false;
+            categoriesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            categoriesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            categoriesDataGridView.AutoResizeColumns();
+            SalesStylingHelper.StyleDropdownGrid(categoriesDataGridView);
+            categoriesDataGridView.CellClick += new DataGridViewCellEventHandler(categoriesDataGridView_CellClick);
+            categoriesDataGridView.KeyDown += new KeyEventHandler(categoriesDataGridView_KeyDown);
+            this.Controls.Add(categoriesDataGridView);
         }
 
         private void TextBoxOnClick(object sender, EventArgs eventArgs)
@@ -553,46 +605,11 @@ namespace pos
 
         private void SetupGroupsDataGridView()
         {
-            groupsDataGridView.ColumnCount = 2;
-            int xLocation = txt_groups.Location.X;
-            int yLocation = txt_groups.Location.Y + 45;
-
-            groupsDataGridView.Name = "groupsDataGridView";
-            if (lang == "en-US")
-            {
-                groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(250, 250);
-            }
-            else if (lang == "ar-SA")
-            {
-                groupsDataGridView.Location = new Point(xLocation, yLocation);
-                groupsDataGridView.Size = new Size(250, 250);
-            }
-            groupsDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            groupsDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            groupsDataGridView.Columns[0].Name = "Code";
-            groupsDataGridView.Columns[1].Name = "Name";
-            groupsDataGridView.Columns[0].ReadOnly = true;
-            groupsDataGridView.Columns[1].ReadOnly = true;
-            groupsDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            groupsDataGridView.MultiSelect = false;
-            groupsDataGridView.AllowUserToAddRows = false;
-            groupsDataGridView.AllowUserToDeleteRows = false;
-
-            groupsDataGridView.RowHeadersVisible = false;
-            groupsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            groupsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            groupsDataGridView.AutoResizeColumns();
-
-            this.groupsDataGridView.CellClick += new DataGridViewCellEventHandler(groupsDataGridView_CellClick);
-            this.groupsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(groupsDataGridView_KeyDown);
-
-            this.Controls.Add(groupsDataGridView);
+            Point screenPt = txt_groups.PointToScreen(new Point(0, txt_groups.Height + 2));
+            groupsDataGridView.Location = this.PointToClient(screenPt);
+            groupsDataGridView.Size = new Size(Math.Max(txt_groups.Width, 280), 220);
+            groupsDataGridView.Visible = true;
             groupsDataGridView.BringToFront();
-
         }
 
         void groupsDataGridView_KeyDown(object sender, KeyEventArgs e)
@@ -602,9 +619,8 @@ namespace pos
                 e.Handled = true;
                 txt_group_code.Text = groupsDataGridView.CurrentRow.Cells[0].Value.ToString();
                 txt_groups.Text = groupsDataGridView.CurrentRow.Cells[1].Value.ToString();
-                this.Controls.Remove(groupsDataGridView);
+                groupsDataGridView.Visible = false;
                 txt_categories.Focus();
-
             }
         }
 
@@ -612,9 +628,8 @@ namespace pos
         {
             txt_group_code.Text = groupsDataGridView.CurrentRow.Cells[0].Value.ToString();
             txt_groups.Text = groupsDataGridView.CurrentRow.Cells[1].Value.ToString();
-            this.Controls.Remove(groupsDataGridView);
+            groupsDataGridView.Visible = false;
             txt_categories.Focus();
-
         }
 
         private void txt_groups_KeyUp(object sender, KeyEventArgs e)
@@ -623,37 +638,28 @@ namespace pos
             {
                 if (txt_groups.Text != "")
                 {
-                    SetupGroupsDataGridView();
-
                     ProductGroupsBLL pg_BLL_obj = new ProductGroupsBLL();
-                    string grp_name = txt_groups.Text;
-
-                    DataTable dt = pg_BLL_obj.SearchRecordByName(grp_name);
+                    DataTable dt = pg_BLL_obj.SearchRecordByName(txt_groups.Text);
 
                     if (dt.Rows.Count > 0)
                     {
                         groupsDataGridView.Rows.Clear();
                         foreach (DataRow dr in dt.Rows)
-                        {
-                            string code = dr["code"].ToString();
-                            string name = dr["name"].ToString();
-
-                            string[] row0 = { code, name };
-
-                            groupsDataGridView.Rows.Add(row0);
-                        }
+                            groupsDataGridView.Rows.Add(dr["code"].ToString(), dr["name"].ToString());
                         groupsDataGridView.ClearSelection();
                         groupsDataGridView.CurrentCell = null;
+                        SetupGroupsDataGridView();
                     }
-
+                    else
+                    {
+                        groupsDataGridView.Visible = false;
+                    }
                 }
                 else
                 {
                     txt_group_code.Text = "";
-                    this.Controls.Remove(groupsDataGridView);
+                    groupsDataGridView.Visible = false;
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -664,55 +670,16 @@ namespace pos
         private void txt_groups_Leave(object sender, EventArgs e)
         {
             if (!groupsDataGridView.Focused)
-            {
-                this.Controls.Remove(groupsDataGridView);
-            }
-
+                groupsDataGridView.Visible = false;
         }
 
         private void SetupCategoriesDataGridView()
         {
-            categoriesDataGridView.ColumnCount = 2;
-            int xLocation = txt_categories.Location.X;
-            int yLocation = txt_categories.Location.Y + 45;
-
-            categoriesDataGridView.Name = "categoriesDataGridView";
-            if (lang == "en-US")
-            {
-                categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(250, 250);
-            }
-            else if (lang == "ar-SA")
-            {
-                categoriesDataGridView.Location = new Point(xLocation, yLocation);
-                categoriesDataGridView.Size = new Size(250, 250);
-            }
-
-            categoriesDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            categoriesDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            categoriesDataGridView.Columns[0].Name = "Code";
-            categoriesDataGridView.Columns[1].Name = "Name";
-            categoriesDataGridView.Columns[0].ReadOnly = true;
-            categoriesDataGridView.Columns[1].ReadOnly = true;
-            categoriesDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
-            categoriesDataGridView.MultiSelect = false;
-            categoriesDataGridView.AllowUserToAddRows = false;
-            categoriesDataGridView.AllowUserToDeleteRows = false;
-
-            categoriesDataGridView.RowHeadersVisible = false;
-            categoriesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            categoriesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            categoriesDataGridView.AutoResizeColumns();
-
-            this.categoriesDataGridView.CellClick += new DataGridViewCellEventHandler(categoriesDataGridView_CellClick);
-            this.categoriesDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(categoriesDataGridView_KeyDown);
-
-            this.Controls.Add(categoriesDataGridView);
+            Point screenPt = txt_categories.PointToScreen(new Point(0, txt_categories.Height + 2));
+            categoriesDataGridView.Location = this.PointToClient(screenPt);
+            categoriesDataGridView.Size = new Size(Math.Max(txt_categories.Width, 280), 220);
+            categoriesDataGridView.Visible = true;
             categoriesDataGridView.BringToFront();
-
         }
 
         void categoriesDataGridView_KeyDown(object sender, KeyEventArgs e)
@@ -722,9 +689,8 @@ namespace pos
                 e.Handled = true;
                 txt_category_code.Text = categoriesDataGridView.CurrentRow.Cells[0].Value.ToString();
                 txt_categories.Text = categoriesDataGridView.CurrentRow.Cells[1].Value.ToString();
-                this.Controls.Remove(categoriesDataGridView);
+                categoriesDataGridView.Visible = false;
                 txt_search.Focus();
-
             }
         }
 
@@ -732,9 +698,8 @@ namespace pos
         {
             txt_category_code.Text = categoriesDataGridView.CurrentRow.Cells[0].Value.ToString();
             txt_categories.Text = categoriesDataGridView.CurrentRow.Cells[1].Value.ToString();
-            this.Controls.Remove(categoriesDataGridView);
+            categoriesDataGridView.Visible = false;
             txt_search.Focus();
-
         }
 
         private void txt_categories_KeyUp(object sender, KeyEventArgs e)
@@ -743,37 +708,28 @@ namespace pos
             {
                 if (txt_categories.Text != "")
                 {
-                    SetupCategoriesDataGridView();
-
                     CategoriesBLL brandsBLL_obj = new CategoriesBLL();
-                    string category_name = txt_categories.Text;
-
-                    DataTable dt = brandsBLL_obj.SearchRecord(category_name);
+                    DataTable dt = brandsBLL_obj.SearchRecord(txt_categories.Text);
 
                     if (dt.Rows.Count > 0)
                     {
                         categoriesDataGridView.Rows.Clear();
                         foreach (DataRow dr in dt.Rows)
-                        {
-                            string code = dr["code"].ToString();
-                            string name = dr["name"].ToString();
-
-                            string[] row0 = { code, name };
-
-                            categoriesDataGridView.Rows.Add(row0);
-                        }
+                            categoriesDataGridView.Rows.Add(dr["code"].ToString(), dr["name"].ToString());
                         categoriesDataGridView.ClearSelection();
                         categoriesDataGridView.CurrentCell = null;
+                        SetupCategoriesDataGridView();
                     }
-
+                    else
+                    {
+                        categoriesDataGridView.Visible = false;
+                    }
                 }
                 else
                 {
                     txt_category_code.Text = "";
-                    this.Controls.Remove(categoriesDataGridView);
+                    categoriesDataGridView.Visible = false;
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -784,10 +740,7 @@ namespace pos
         private void txt_categories_Leave(object sender, EventArgs e)
         {
             if (!categoriesDataGridView.Focused)
-            {
-                this.Controls.Remove(categoriesDataGridView);
-            }
-
+                categoriesDataGridView.Visible = false;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

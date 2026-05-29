@@ -28,6 +28,8 @@ namespace pos
         int _grid_row_index = 0;
         string _category_id = "";
         string _brand_id = "";
+        string _group_id = "";
+        string _location_code = "";
         bool _isGrid = false;
         bool _source_product = false;
 
@@ -44,7 +46,8 @@ namespace pos
 
         public frm_searchProducts(frm_sales mainForm, frm_assign_products assign_product_frm, frm_alt_products frm_alt_products,
             string product_code, string category_id, string brand_id, int rowIndex = 0, bool isGrid = false, bool source_product = false,
-            frm_products_labels frm_pro_labels = null, frm_product_full_detail frm_pro_detail = null, frm_product_adjustment frm_pro_adjmt = null)
+            frm_products_labels frm_pro_labels = null, frm_product_full_detail frm_pro_detail = null, frm_product_adjustment frm_pro_adjmt = null,
+            string group_id = "", string location_code = "")
         {
             this.mainForm = mainForm;
             this.assign_product_frm = assign_product_frm;
@@ -59,6 +62,8 @@ namespace pos
             _source_product = source_product;
             _category_id = category_id;
             _brand_id = brand_id;
+            _group_id = group_id;
+            _location_code = location_code;
 
             InitializeComponent();
 

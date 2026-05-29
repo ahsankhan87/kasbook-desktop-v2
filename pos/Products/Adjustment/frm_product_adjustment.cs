@@ -107,16 +107,16 @@ namespace pos
                         }
 
                         // Validate adjustment quantity: it should not be negative or zero (unless no change)
-                        string validationMessage;
-                        if (!ValidateAdjustmentQty(row, out validationMessage))
-                        {
-                            UiMessages.ShowWarning(
-                                validationMessage,
-                                validationMessage,
-                                captionEn: "Adjustment",
-                                captionAr: "تسوية");
-                            return;
-                        }
+                        //string validationMessage;
+                        //if (!ValidateAdjustmentQty(row, out validationMessage))
+                        //{
+                        //    UiMessages.ShowWarning(
+                        //        validationMessage,
+                        //        validationMessage,
+                        //        captionEn: "Adjustment",
+                        //        captionAr: "تسوية");
+                        //    return;
+                        //}
 
                         info.invoice_no = invoice_no;
                         info.item_number = Convert.ToString(row.Cells["item_number"].Value);
@@ -286,11 +286,20 @@ namespace pos
 
                             // Show qty dialog per product; default to current qty
                             decimal enteredQty = qty;
-                            using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty))
+                            int productID = id;
+                            string productCode = code;
+                            decimal unitPrice = unit_price;
+                            string locationCode = location_code;
+
+                            using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty,unitPrice,locationCode, productID, productCode))
                             {
                                 if (qtyDlg.ShowDialog(this) == DialogResult.OK)
                                 {
                                     enteredQty = qtyDlg.EnteredQty; // this is a decimal
+                                    productID = qtyDlg._productID; // in case you need it for something
+                                    productCode = qtyDlg._productCode; // in case you need it for something
+                                    location_code = qtyDlg.locationCode; // in case location can be changed in dialog
+                                    decimal price = qtyDlg.Price; // in case price can be changed in dialog
                                 }
                                 else
                                 {
