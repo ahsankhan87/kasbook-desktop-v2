@@ -7,6 +7,7 @@ namespace POS.BLL
     {
         private const string SmallSaleThresholdKey = "SmallSaleThreshold";
         private const string AutoLogoutMinutesKey = "AutoLogoutMinutes";
+        private const string ApplyShippingCostToPurchaseItemsKey = "ApplyShippingCostToPurchaseItems";
 
         public double GetSmallSaleThreshold(double defaultValue = 200.0)
         {
@@ -66,6 +67,48 @@ namespace POS.BLL
             catch
             {
                 return defaultValue;
+            }
+        }
+
+        public bool GetApplyShippingCostToPurchaseItems(bool defaultValue = false)
+        {
+            try
+            {
+                var generalBLL = new GeneralBLL();
+                DataTable dt = generalBLL.GetRecord("TOP 1 setting_value", "pos_settings WHERE setting_key='" + ApplyShippingCostToPurchaseItemsKey + "'");
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    bool value;
+                    if (bool.TryParse(Convert.ToString(dt.Rows[0]["setting_value"]), out value))
+                        return value;
+
+                    int numericValue;
+                    if (int.TryParse(Convert.ToString(dt.Rows[0]["setting_value"]), out numericValue))
+                        return numericValue != 0;
+                }
+
+                return defaultValue;
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
+
+        public void SetApplyShippingCostToPurchaseItems(bool value)
+        {
+            var generalBLL = new GeneralBLL();
+            DataTable exists = generalBLL.GetRecord("TOP 1 setting_key", "pos_settings WHERE setting_key='" + ApplyShippingCostToPurchaseItemsKey + "'");
+            string v = value ? "1" : "0";
+
+            if (exists != null && exists.Rows.Count > 0)
+            {
+                generalBLL.UpdateOrDeleteRecord("pos_settings", "setting_value='" + v + "'", "setting_key='" + ApplyShippingCostToPurchaseItemsKey + "'");
+            }
+            else
+            {
+                generalBLL.InsertRecord("pos_settings", "setting_key,setting_value", "'" + ApplyShippingCostToPurchaseItemsKey + "','" + v + "'");
             }
         }
     }

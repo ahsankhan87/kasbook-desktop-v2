@@ -195,7 +195,9 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,S.delivery_date,'0' AS shipping_cost," +
+                        String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account," +
+                            "S.supplier_id,S.supplier_invoice_no,S.employee_id,S.description,S.account,'0' AS payment_terms_id, '1' AS payment_method_id," +
+                            "S.delivery_date,'0' AS shipping_cost,S.currency_id," +
                             " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price,SI.item_number," +
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity*SI.tax_rate/100) AS vat," +

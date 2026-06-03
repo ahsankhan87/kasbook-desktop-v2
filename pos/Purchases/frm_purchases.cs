@@ -40,6 +40,7 @@ namespace pos
         public int purchases_discount_acc_id = 0;
         public int inventory_acc_id = 0;
         public int purchases_acc_id = 0;
+        public int _companyCurrencyId = 0;
 
         public static frm_purchases instance;
         public TextBox tb_product_id;
@@ -83,6 +84,7 @@ namespace pos
         private string _loadedHistoryItemNumber = string.Empty;
 
         public DataTable products_dt = new DataTable();
+        private bool _applyShippingCostToItems = false;
 
         //private frm_searchProducts productsMainForm;
 
@@ -164,6 +166,8 @@ namespace pos
                 get_employees_dropdownlist();
                 get_payment_method_dropdownlist();
                 get_payment_terms_dropdownlist();
+                GetCurrenciesDropDownList();
+                _applyShippingCostToItems = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
 
                 foreach (DataGridViewColumn column in grid_purchases.Columns)
                 {
@@ -850,6 +854,7 @@ namespace pos
                         DateTime purchase_date = txt_purchase_date.Value.Date;
                         int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
                         int supplier_id = _selectedSupplierId;
+                        int currency_id = (cmb_currency.SelectedValue == null ? 0 : Convert.ToInt32(cmb_currency.SelectedValue));
                         bool isEditingHold = _isEditMode && _editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo);
                 
                         string invoice_no = "";
@@ -893,6 +898,7 @@ namespace pos
                         PurchasesModal_obj.description = txt_description.Text;
                         PurchasesModal_obj.purchase_date = purchase_date;
                         PurchasesModal_obj.account = "Purchase";
+                        PurchasesModal_obj.currency_id = currency_id;
 
                         //set the date from datetimepicker and set time to te current time
                         DateTime now = DateTime.Now;
@@ -993,65 +999,87 @@ namespace pos
             {
                 if (_isClearingForm) return;
 
-                decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
-
-                if (chkbox_is_taxable.Checked && shippingCost != 0)
-                {
-                    decimal itemsNetTotal = 0;
-
-                    for (int i = 0; i <= grid_purchases.Rows.Count - 1; i++)
-                    {
-                        if (grid_purchases.Rows[i].Cells["id"].Value == null || grid_purchases.Rows[i].Cells["code"].Value == null)
-                        {
-                            continue;
-                        }
-
-                        decimal qty = Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value);
-                        decimal avgCost = Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
-                        decimal discount = Convert.ToDecimal(grid_purchases.Rows[i].Cells["discount"].Value);
-                        decimal lineNet = (qty * avgCost) - discount;
-                        if (lineNet > 0)
-                        {
-                            itemsNetTotal += lineNet;
-                        }
-                    }
-
-                    for (int i = 0; i <= grid_purchases.Rows.Count - 1; i++)
-                    {
-                        if (grid_purchases.Rows[i].Cells["id"].Value == null || grid_purchases.Rows[i].Cells["code"].Value == null)
-                        {
-                            continue;
-                        }
-
-                        decimal qty = Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value);
-                        decimal avgCost = Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
-                        decimal discount = Convert.ToDecimal(grid_purchases.Rows[i].Cells["discount"].Value);
-                        decimal taxRate = (grid_purchases.Rows[i].Cells["tax_rate"].Value == null || grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : Convert.ToDecimal(grid_purchases.Rows[i].Cells["tax_rate"].Value));
-
-                        decimal lineNet = (qty * avgCost) - discount;
-                        if (lineNet < 0)
-                        {
-                            lineNet = 0;
-                        }
-
-                        decimal shippingShare = (itemsNetTotal > 0 ? (shippingCost * (lineNet / itemsNetTotal)) : 0);
-                        decimal taxableBase = lineNet + shippingShare;
-                        decimal tax = Math.Round((taxableBase * taxRate) / 100, 4);
-
-                        grid_purchases.Rows[i].Cells["tax"].Value = tax;
-                        grid_purchases.Rows[i].Cells["sub_total"].Value = Math.Round(taxableBase + tax, 4);
-                    }
-                }
-
-                get_total_tax();
-                get_total_discount();
-                get_sub_total_amount();
-                get_total_amount();
+                ApplyShippingCostToPurchaseGridItems();
             }
             catch (Exception ex)
             {
                 UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
             }
+
+        }
+        private void ApplyShippingCostToPurchaseGridItems()
+        {
+            decimal shippingCost;
+            if (!decimal.TryParse(txt_shipping_cost.Text, out shippingCost))
+                shippingCost = 0;
+
+            bool applyShipping = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
+
+            foreach (DataGridViewRow row in grid_purchases.Rows)
+            {
+                if (row.IsNewRow || row.Cells["id"].Value == null || row.Cells["code"].Value == null)
+                    continue;
+
+                decimal qty = Convert.ToDecimal(row.Cells["qty"].Value);
+                decimal discount = Convert.ToDecimal(row.Cells["discount"].Value);
+                decimal taxRate = (row.Cells["tax_rate"].Value == null || row.Cells["tax_rate"].Value.ToString() == "")
+                    ? 0
+                    : Convert.ToDecimal(row.Cells["tax_rate"].Value);
+
+                // keep original base cost once
+                decimal baseAvgCost;
+                if (row.Tag == null)
+                {
+                    baseAvgCost = Convert.ToDecimal(row.Cells["avg_cost"].Value);
+                    row.Tag = baseAvgCost;
+                }
+                else
+                {
+                    baseAvgCost = Convert.ToDecimal(row.Tag);
+                }
+
+                decimal baseLine = (qty * baseAvgCost) - discount;
+                if (baseLine < 0) baseLine = 0;
+
+                if (!applyShipping || shippingCost <= 0)
+                {
+                    row.Cells["avg_cost"].Value = baseAvgCost;
+                    decimal tax = Math.Round((baseLine * taxRate) / 100, 4);
+                    row.Cells["tax"].Value = tax;
+                    row.Cells["sub_total"].Value = Math.Round(baseLine + tax, 4);
+                    continue;
+                }
+
+                // distribute shipping
+                decimal totalBase = 0;
+                foreach (DataGridViewRow r in grid_purchases.Rows)
+                {
+                    if (r.IsNewRow || r.Cells["id"].Value == null || r.Cells["code"].Value == null)
+                        continue;
+
+                    decimal rQty = Convert.ToDecimal(r.Cells["qty"].Value);
+                    decimal rBaseAvg = (r.Tag == null) ? Convert.ToDecimal(r.Cells["avg_cost"].Value) : Convert.ToDecimal(r.Tag);
+                    decimal rDiscount = Convert.ToDecimal(r.Cells["discount"].Value);
+                    decimal rLine = (rQty * rBaseAvg) - rDiscount;
+                    if (rLine > 0) totalBase += rLine;
+                }
+
+                decimal shippingShare = (totalBase > 0) ? Math.Round(shippingCost * (baseLine / totalBase), 4) : 0;
+                decimal newNetBase = baseLine + shippingShare;
+                decimal newAvgCost = qty == 0 ? 0 : Math.Round((newNetBase + discount) / qty, 4);
+                decimal newTax = Math.Round((newNetBase * taxRate) / 100, 4);
+
+                row.Cells["avg_cost"].Value = newAvgCost;
+                row.Cells["tax"].Value = newTax;
+                row.Cells["sub_total"].Value = Math.Round(newNetBase + newTax, 4);
+            }
+
+            get_total_tax();
+            get_total_discount();
+            get_sub_total_amount();
+            get_total_amount();
+            get_total_qty();
+        
         }
 
         private void get_total_tax()
@@ -1106,6 +1134,9 @@ namespace pos
                 purchases_discount_acc_id = (int)dr["purchases_discount_acc_id"];
                 inventory_acc_id = (int)dr["inventory_acc_id"];
                 purchases_acc_id = (int)dr["purchases_acc_id"];
+                _companyCurrencyId = (dr.Table.Columns.Contains("currency_id") && dr["currency_id"] != DBNull.Value)
+                    ? Convert.ToInt32(dr["currency_id"])
+                    : 0;
             }
         }
 
@@ -1352,6 +1383,11 @@ namespace pos
                 txt_total_disc_percent.Text = "0.00";
                 _suppressDiscountSync = false;
 
+                if (_companyCurrencyId > 0)
+                    cmb_currency.SelectedValue = _companyCurrencyId;
+                else
+                    cmb_currency.SelectedValue = 0;
+
                 txt_sub_total.Text = "0.00";
                 txt_total_amount.Text = "0.00";
                 txt_total_tax.Text = "0.00";
@@ -1406,9 +1442,42 @@ namespace pos
             cmb_employees.ValueMember = "id";
             cmb_employees.DataSource = employees;
 
-
         }
 
+        public void GetCurrenciesDropDownList()
+        {
+            CurrencyBLL currencyBLL = new CurrencyBLL();
+            DataTable currencies = currencyBLL.GetAll();
+
+            DataRow emptyRow = currencies.NewRow();
+            emptyRow["id"] = 0;
+            if (currencies.Columns.Contains("name"))
+                emptyRow["name"] = "Select Currency";
+            currencies.Rows.InsertAt(emptyRow, 0);
+
+
+            cmb_currency.DisplayMember = "name";
+            cmb_currency.ValueMember = "id";
+            cmb_currency.DataSource = currencies;
+
+            if (_companyCurrencyId > 0)
+            {
+                bool found = false;
+                foreach (DataRow row in currencies.Rows)
+                {
+                    if (row["id"] != DBNull.Value && Convert.ToInt32(row["id"]) == _companyCurrencyId)
+                    {
+                        found = true;
+                        break;
+        }
+                }
+                cmb_currency.SelectedValue = found ? _companyCurrencyId : 0;
+            }
+            else
+            {
+                cmb_currency.SelectedValue = 0;
+            }
+        }
 
         private void get_purchasetype_dropdownlist()
         {
@@ -1614,14 +1683,14 @@ namespace pos
                 else
                 {
                     invoice_status = "Update";
-                    po_invoice_no = "";
+                    po_invoice_no = string.Empty;
                     _isEditMode = true;
                     _editingHoldPurchase = isHoldInvoice;
                     _editingInvoiceNo = invoice_no;
                     PrinttoolStripButton.Enabled = !isHoldInvoice;
                 }
 
-                if (_dt.Rows.Count > 0)
+                if (_dt != null && _dt.Rows.Count > 0)
                 {
 
                     foreach (DataRow myProductView in _dt.Rows)
@@ -1643,7 +1712,7 @@ namespace pos
                             else
                             {
                                 ClearSelectedSupplier();
-                                txtSupplierSearch.Text = "";
+                                txtSupplierSearch.Text = string.Empty;
                             }
                         }
                         finally
@@ -1662,7 +1731,8 @@ namespace pos
                             txt_purchase_date.Value = DateTime.Today;
 
                         txt_description.Text = myProductView["description"].ToString();
-                        txt_shipping_cost.Text = (string.IsNullOrEmpty(myProductView["shipping_cost"].ToString() as String) ? "" : myProductView["shipping_cost"].ToString());
+                        cmb_currency.SelectedValue = (string.IsNullOrEmpty(myProductView["currency_id"].ToString()) ? 0 : Convert.ToInt32(myProductView["currency_id"]));
+                        txt_shipping_cost.Text = (string.IsNullOrEmpty(myProductView["shipping_cost"].ToString()) ? string.Empty : myProductView["shipping_cost"].ToString());
 
                         decimal qty = Math.Round(Convert.ToDecimal(myProductView["quantity"].ToString()), 2);
                         decimal discount = Math.Round(Convert.ToDecimal(myProductView["discount_value"]), 4);
@@ -2510,6 +2580,7 @@ namespace pos
                     string paymentMethodText = cmb_payment_method.Text;
                     int payment_method_id = (cmb_payment_method.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_method.SelectedValue));
                     int payment_terms_id = (cmb_payment_terms.SelectedValue == null ? 0 : Convert.ToInt32(cmb_payment_terms.SelectedValue));
+                    int currency_id = (cmb_currency.SelectedValue == null ? 0 : Convert.ToInt32(cmb_currency.SelectedValue));
                     bool isEditingPurchase = _isEditMode && !_editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo);
 
 
@@ -2663,7 +2734,7 @@ namespace pos
                                 payment_method_text = paymentMethodText,
                                 bankGLAccountID = bankGLAccountID,
                                 bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
-
+                                currency_id = currency_id,
 
                                 cash_account_id = cash_account_id,
                                 payable_account_id = payable_account_id,

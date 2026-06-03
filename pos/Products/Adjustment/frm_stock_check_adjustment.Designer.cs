@@ -228,7 +228,7 @@ namespace pos
             this.cmbAdjustmentType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbAdjustmentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAdjustmentType.FormattingEnabled = true;
-            this.cmbAdjustmentType.Location = new System.Drawing.Point(502, 16);
+            this.cmbAdjustmentType.Location = new System.Drawing.Point(502, 17);
             this.cmbAdjustmentType.Name = "cmbAdjustmentType";
             this.cmbAdjustmentType.Size = new System.Drawing.Size(167, 24);
             this.cmbAdjustmentType.TabIndex = 5;

@@ -34,6 +34,7 @@ namespace pos
             // permission check
             chk_use_zatca_e_invoice.Tag = _auth.HasPermission(_currentUser, Permissions.Sales_Zatca_Enable);
             //DataTable accountDT = get_GL_accounts_dt();
+            GetCurrenciesDropDownList();
 
             //LOAD ACCOUNT DROPDOWN LIST
             fill_cash_acc_ddl(get_GL_accounts_dt());
@@ -51,7 +52,6 @@ namespace pos
             fill_item_variance_acc_ddl(get_GL_accounts_dt());
             ////////////////////////////
             load_company_detail();
-            
             
 
         }
@@ -78,7 +78,7 @@ namespace pos
                 txt_cityName.Text = dr["CityName"].ToString();
                 txt_postalCode.Text = dr["PostalCode"].ToString();
                 txt_countryName.Text = dr["CountryName"].ToString();
-
+                cmb_currency.SelectedValue = dr["currency_id"].ToString();
 
                 //HardwareIdentifier systemID_obj = new HardwareIdentifier();
                 //string systemID = systemID_obj.GetUniqueHardwareId();
@@ -128,6 +128,7 @@ namespace pos
                 info.address = txt_address.Text.Trim();
                 info.contact_no = txt_contact_no.Text.Trim();
                 info.email = txt_email.Text.Trim();
+                info.currency_id = cmb_currency.SelectedValue != null ? Convert.ToInt32(cmb_currency.SelectedValue.ToString()) : 0;
                 info.streetName = txt_StreetName.Text.Trim();
                 info.cityName = txt_cityName.Text.Trim();
                 info.buildingNumber = txt_buildingNumber.Text.Trim();
@@ -318,6 +319,26 @@ namespace pos
             }
                 frmRenewSubscrption frm = new frmRenewSubscrption();
             frm.ShowDialog();
+        }
+
+        public void GetCurrenciesDropDownList()
+        {
+            CurrencyBLL currencyBLL = new CurrencyBLL();
+            DataTable currencies = currencyBLL.GetAll();
+
+            DataRow emptyRow = currencies.NewRow();
+            emptyRow["id"] = 0;
+            if (currencies.Columns.Contains("name"))
+                emptyRow["name"] = "Select Currency";
+            currencies.Rows.InsertAt(emptyRow, 0);
+
+
+            cmb_currency.DisplayMember = "name";
+            cmb_currency.ValueMember = "id";
+            cmb_currency.DataSource = currencies;
+
+            cmb_currency.SelectedValue = 0;
+            
         }
     }
 }

@@ -32,6 +32,7 @@
             this.btn_save = new System.Windows.Forms.Button();
             this.lbl_header_title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnRenewSubscription = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblExpiryDate = new System.Windows.Forms.Label();
             this.btn_cancel = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.txt_vat_no = new System.Windows.Forms.TextBox();
             this.txt_email = new System.Windows.Forms.TextBox();
             this.txt_contact_no = new System.Windows.Forms.TextBox();
-            this.txt_currency_id = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txt_image = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -93,7 +93,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.txt_postalCode = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.BtnRenewSubscription = new System.Windows.Forms.Button();
+            this.cmb_currency = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -127,6 +127,14 @@
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
+            // BtnRenewSubscription
+            // 
+            resources.ApplyResources(this.BtnRenewSubscription, "BtnRenewSubscription");
+            this.BtnRenewSubscription.ForeColor = System.Drawing.Color.Black;
+            this.BtnRenewSubscription.Name = "BtnRenewSubscription";
+            this.BtnRenewSubscription.UseVisualStyleBackColor = true;
+            this.BtnRenewSubscription.Click += new System.EventHandler(this.BtnRenewSubscription_Click);
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
@@ -151,13 +159,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cmb_currency);
             this.groupBox2.Controls.Add(this.chk_use_zatca_e_invoice);
             this.groupBox2.Controls.Add(this.txt_address);
             this.groupBox2.Controls.Add(this.txt_name);
             this.groupBox2.Controls.Add(this.txt_vat_no);
             this.groupBox2.Controls.Add(this.txt_email);
             this.groupBox2.Controls.Add(this.txt_contact_no);
-            this.groupBox2.Controls.Add(this.txt_currency_id);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txt_image);
             this.groupBox2.Controls.Add(this.label7);
@@ -202,12 +210,6 @@
             // 
             resources.ApplyResources(this.txt_contact_no, "txt_contact_no");
             this.txt_contact_no.Name = "txt_contact_no";
-            // 
-            // txt_currency_id
-            // 
-            resources.ApplyResources(this.txt_currency_id, "txt_currency_id");
-            this.txt_currency_id.Name = "txt_currency_id";
-            this.txt_currency_id.ReadOnly = true;
             // 
             // label8
             // 
@@ -539,13 +541,11 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // BtnRenewSubscription
+            // cmb_currency
             // 
-            resources.ApplyResources(this.BtnRenewSubscription, "BtnRenewSubscription");
-            this.BtnRenewSubscription.ForeColor = System.Drawing.Color.Black;
-            this.BtnRenewSubscription.Name = "BtnRenewSubscription";
-            this.BtnRenewSubscription.UseVisualStyleBackColor = true;
-            this.BtnRenewSubscription.Click += new System.EventHandler(this.BtnRenewSubscription_Click);
+            this.cmb_currency.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_currency, "cmb_currency");
+            this.cmb_currency.Name = "cmb_currency";
             // 
             // frm_updateCompany
             // 
@@ -588,7 +588,6 @@
         private System.Windows.Forms.TextBox txt_vat_no;
         private System.Windows.Forms.TextBox txt_email;
         private System.Windows.Forms.TextBox txt_contact_no;
-        private System.Windows.Forms.TextBox txt_currency_id;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txt_image;
         private System.Windows.Forms.Label label7;
@@ -643,5 +642,6 @@
         private System.Windows.Forms.TextBox txt_countryName;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button BtnRenewSubscription;
+        private System.Windows.Forms.ComboBox cmb_currency;
     }
 }

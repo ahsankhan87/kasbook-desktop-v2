@@ -47,6 +47,7 @@
     <Compile Include="Dashboard\DashboardBLL.cs" />
     <Compile Include="POS\BackupBLL.cs" />
     <Compile Include="POS\BankBLL.cs" />
+    <Compile Include="POS\CurrencyBLL.cs" />
     <Compile Include="POS\DebitNoteBLL.cs" />
     <Compile Include="POS\FiscalyearsBLL.cs" />
     <Compile Include="POS\BranchesBLL.cs" />

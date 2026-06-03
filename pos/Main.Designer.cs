@@ -38,6 +38,7 @@
             this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentTermsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.financialYearsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dBBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -80,6 +81,7 @@
             this.taxesVATToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.discountSchemesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockSuppressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockCheckAndAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,7 +180,7 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.stockCheckAndAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -212,8 +214,10 @@
             this.branchToolStripMenuItem,
             this.paymentTermsToolStripMenuItem,
             this.paymentMethodToolStripMenuItem,
+            this.currenciesToolStripMenuItem,
             this.financialYearsToolStripMenuItem,
             this.dBBackupToolStripMenuItem,
+            this.settingToolStripMenuItem,
             this.toolStripSeparator5,
             this.languageToolStripMenuItem,
             this.toolStripSeparator8,
@@ -265,6 +269,12 @@
             this.paymentMethodToolStripMenuItem.Name = "paymentMethodToolStripMenuItem";
             resources.ApplyResources(this.paymentMethodToolStripMenuItem, "paymentMethodToolStripMenuItem");
             this.paymentMethodToolStripMenuItem.Click += new System.EventHandler(this.paymentMethodToolStripMenuItem_Click);
+            // 
+            // currenciesToolStripMenuItem
+            // 
+            this.currenciesToolStripMenuItem.Name = "currenciesToolStripMenuItem";
+            resources.ApplyResources(this.currenciesToolStripMenuItem, "currenciesToolStripMenuItem");
+            this.currenciesToolStripMenuItem.Click += new System.EventHandler(this.currenciesToolStripMenuItem_Click);
             // 
             // financialYearsToolStripMenuItem
             // 
@@ -543,6 +553,12 @@
             this.stockSuppressionToolStripMenuItem.Name = "stockSuppressionToolStripMenuItem";
             resources.ApplyResources(this.stockSuppressionToolStripMenuItem, "stockSuppressionToolStripMenuItem");
             this.stockSuppressionToolStripMenuItem.Click += new System.EventHandler(this.stockSupressionToolStripMenuItem_Click);
+            // 
+            // stockCheckAndAdjustmentToolStripMenuItem
+            // 
+            this.stockCheckAndAdjustmentToolStripMenuItem.Name = "stockCheckAndAdjustmentToolStripMenuItem";
+            resources.ApplyResources(this.stockCheckAndAdjustmentToolStripMenuItem, "stockCheckAndAdjustmentToolStripMenuItem");
+            this.stockCheckAndAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.stockCheckAndAdjustmentToolStripMenuItem_Click);
             // 
             // pOSToolStripMenuItem
             // 
@@ -1220,11 +1236,11 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // stockCheckAndAdjustmentToolStripMenuItem
+            // settingToolStripMenuItem
             // 
-            this.stockCheckAndAdjustmentToolStripMenuItem.Name = "stockCheckAndAdjustmentToolStripMenuItem";
-            resources.ApplyResources(this.stockCheckAndAdjustmentToolStripMenuItem, "stockCheckAndAdjustmentToolStripMenuItem");
-            this.stockCheckAndAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.stockCheckAndAdjustmentToolStripMenuItem_Click);
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1404,5 +1420,7 @@
         private System.Windows.Forms.ToolStripMenuItem customersSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createNewCustomerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockCheckAndAdjustmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currenciesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
     }
 }

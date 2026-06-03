@@ -210,7 +210,7 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@email", obj.email);
                         cmd.Parameters.AddWithValue("@contact_no", obj.contact_no);
                         cmd.Parameters.AddWithValue("@image", obj.image);
-                        //cmd.Parameters.AddWithValue("@currency_id", obj.name);
+                        cmd.Parameters.AddWithValue("@currency_id", obj.currency_id);
                         cmd.Parameters.AddWithValue("@user_id", obj.user_id);
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
                         cmd.Parameters.AddWithValue("@useZatcaEInvoice", obj.useZatcaEInvoice);

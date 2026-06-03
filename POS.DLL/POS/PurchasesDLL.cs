@@ -197,7 +197,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id," +
-                            " S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost,S.payment_terms_id,S.payment_method_id," +
+                            " S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost,S.payment_terms_id,S.payment_method_id,S.currency_id," +
                             " SI.id,SI.item_code,SI.item_number,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.discount_percent," +
                             " SI.quantity AS qty,SI.cost_price AS avg_cost," + // this line is for print of build edit product page
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
@@ -429,6 +429,22 @@ namespace POS.DLL
                         }
 
                         newProdID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        foreach (PurchaseModalHeader purchase_header in purchases)
+                        {
+                            if (purchase_header.currency_id > 0)
+                            {
+                                cmd = new SqlCommand(@"IF COL_LENGTH('dbo.pos_purchases','currency_id') IS NOT NULL
+                                                       BEGIN
+                                                           UPDATE dbo.pos_purchases
+                                                           SET currency_id = @currency_id
+                                                           WHERE id = @id;
+                                                       END", cn, transaction);
+                                cmd.Parameters.AddWithValue("@currency_id", purchase_header.currency_id);
+                                cmd.Parameters.AddWithValue("@id", newProdID);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
 
                         foreach (PurchasesModal detail in purchase_detail)
                         {
@@ -1813,7 +1829,7 @@ namespace POS.DLL
                     {
                         cn.Open();
                         String query = "SELECT S.purchase_date,S.purchase_time,S.invoice_no,S.purchase_type,S.account,S.supplier_id," +
-                            "S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost,S.payment_terms_id,S.payment_method_id," +
+                            "S.supplier_invoice_no,S.employee_id,S.description,S.account,S.shipping_cost,S.payment_terms_id,S.payment_method_id,S.currency_id," +
                             " SI.id,SI.item_code,SI.quantity,SI.unit_price,SI.cost_price,SI.serialnumber,SI.item_number,SI.discount_percent," +
                             " SI.discount_value,(SI.unit_price*SI.quantity) AS total, SI.tax_rate,SI.tax_id," +
                             " (SI.unit_price*SI.quantity*SI.tax_rate/100) AS vat," +
@@ -1882,9 +1898,22 @@ namespace POS.DLL
                     }
 
                     newProdID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (obj.currency_id > 0)
+                    {
+                        cmd = new SqlCommand(@"IF COL_LENGTH('dbo.pos_hold_purchases','currency_id') IS NOT NULL
+                                               BEGIN
+                                                   UPDATE dbo.pos_hold_purchases
+                                                   SET currency_id = @currency_id
+                                                   WHERE id = @id;
+                                               END", cn);
+                        cmd.Parameters.AddWithValue("@currency_id", obj.currency_id);
+                        cmd.Parameters.AddWithValue("@id", newProdID);
+                        cmd.ExecuteNonQuery();
+                    }
+
                     Log.LogAction("Add Hold Purchase", $"InvoiceNo: {obj.invoice_no}, Purchase Date: {obj.purchase_date}, Total Amount: {((obj.total_amount + obj.total_tax) - obj.total_discount)}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 
-                    return (int)newProdID;
                 }
                 catch
                 {
@@ -1892,6 +1921,7 @@ namespace POS.DLL
                     throw;
                 }
             }
+            return newProdID;
         }
 
         public int Insert_hold_purchasesItems(PurchasesModal obj)

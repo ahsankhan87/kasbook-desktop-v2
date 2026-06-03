@@ -50,6 +50,7 @@ namespace POS.Core
         public string payment_method_text { get; set; } = "";
         public int bank_id { get; set; } = 0;
         public string bankGLAccountID { get; set; } = "";
+        public int currency_id { get; set; } = 0;
     }
 
     public class PurchasesModal
@@ -79,6 +80,7 @@ namespace POS.Core
         public int employee_id { get; set; }
 
         public decimal shipping_cost { get; set; }
+        public int currency_id { get; set; }
         /// </summary>
         /// 
 

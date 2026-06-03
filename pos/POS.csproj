@@ -507,11 +507,29 @@
     <Compile Include="Master\Companies\zatca\ZatcaPhase2QrGenerator.cs" />
     <Compile Include="Master\Companies\zatca\ZATCAQRCodeGenerator.cs" />
     <Compile Include="Master\Companies\zatca\ZatcaSignatureData.cs" />
+    <Compile Include="Master\Currencies\frm_addCurrency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Currencies\frm_addCurrency.Designer.cs">
+      <DependentUpon>frm_addCurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Currencies\frm_currencies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Currencies\frm_currencies.Designer.cs">
+      <DependentUpon>frm_currencies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Master\Logs\Logs.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Master\Logs\Logs.Designer.cs">
       <DependentUpon>Logs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Settings\frm_settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\Settings\frm_settings.Designer.cs">
+      <DependentUpon>frm_settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\Adjustment\frm_adjustment_help.cs">
       <SubType>Form</SubType>
@@ -1910,6 +1928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Payment Method\frm_payment_method.resx">
       <DependentUpon>frm_payment_method.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Settings\frm_settings.resx">
+      <DependentUpon>frm_settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Taxes\frm_addTax.ar-SA.resx">
       <DependentUpon>frm_addTax.cs</DependentUpon>

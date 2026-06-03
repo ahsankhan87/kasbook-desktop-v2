@@ -40,7 +40,6 @@ namespace pos
             instance = this;
             tb_id = txt_id;
             tb_name = txt_name;
-            tb_currency_id = txt_currency_id;
             tb_address = txt_address;
             tb_email = txt_email;
             tb_contact_no = txt_contact_no;
@@ -76,7 +75,7 @@ namespace pos
                     info.vat_no = txt_vat_no.Text;
                     info.address = txt_address.Text;
                     info.contact_no = txt_contact_no.Text;
-                    info.currency_id = 0; // Convert.ToInt16(txt_currency_id.Text);
+                    info.currency_id = cmb_currency.SelectedValue != null ? Convert.ToInt32(cmb_currency.SelectedValue.ToString()) : 0;
                     info.image = txt_image.Text;
                     info.email = txt_email.Text;
                     

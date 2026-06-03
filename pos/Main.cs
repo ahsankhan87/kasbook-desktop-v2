@@ -2583,5 +2583,17 @@ namespace pos
             var frm_stockCheckAdjustment = new pos.frm_stock_check_adjustment();
             frm_stockCheckAdjustment.ShowDialog(this);
         }
+
+        private void currenciesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_currencies = new pos.frm_currencies();
+            frm_currencies.ShowDialog(this);
+        }
+
+        private void settingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_settings = new pos.frm_settings();
+            frm_settings.ShowDialog(this);
+        }
     }
 }
