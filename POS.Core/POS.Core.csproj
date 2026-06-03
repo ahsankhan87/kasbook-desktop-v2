@@ -55,6 +55,7 @@
     <Compile Include="POS\Purchases_orderModal.cs" />
     <Compile Include="POS\PaymentTermsModal.cs" />
     <Compile Include="POS\ICTModal.cs" />
+    <Compile Include="POS\StockAdjustmentModels.cs" />
     <Compile Include="POS\UsersModal.cs" />
     <Compile Include="POS\CompaniesModal.cs" />
     <Compile Include="POS\BrandsModal.cs" />

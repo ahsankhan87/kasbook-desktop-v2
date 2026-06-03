@@ -66,6 +66,7 @@
     <Compile Include="POS\PaymentTermsDLL.cs" />
     <Compile Include="POS\ICTDLL.cs" />
     <Compile Include="POS\SalesDashboardDLL.cs" />
+    <Compile Include="POS\StockAdjustmentDLL.cs" />
     <Compile Include="POS\UsersDLL.cs" />
     <Compile Include="POS\CompaniesDLL.cs" />
     <Compile Include="POS\BrandsDLL.cs" />

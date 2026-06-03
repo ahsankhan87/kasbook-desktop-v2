@@ -59,6 +59,7 @@
     <Compile Include="POS\PaymentTermsBLL.cs" />
     <Compile Include="POS\ICTBLL.cs" />
     <Compile Include="POS\SalesDashboardBLL.cs" />
+    <Compile Include="POS\StockAdjustmentBLL.cs" />
     <Compile Include="POS\UsersBLL.cs" />
     <Compile Include="POS\CompaniesBLL.cs" />
     <Compile Include="POS\BrandsBLL.cs" />

@@ -16,6 +16,7 @@ using System.Web;
 using pos.UI;
 using pos.UI.Busy;
 using pos.Security.Authorization;
+using java.security;
 
 namespace pos
 {
@@ -37,7 +38,12 @@ namespace pos
         public string _status;
         public string picture_name = "";
         private bool _loadMovementHistory;
-            
+
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
+
         public frm_product_full_detail(frm_sales salesForm = null,frm_purchases PurchaseForm = null,string item_number = "",
             frm_searchSaleProducts searchsalesForm = null, frm_searchPurchaseProducts searchPurchaseForm = null, string keyword = "",
             bool loadMovementHistory = false)
@@ -50,35 +56,12 @@ namespace pos
             this.searchsalesForm = searchsalesForm;
             _loadMovementHistory = loadMovementHistory;
             InitializeComponent();
-            ApplyPermissionTags();
+            
         }
 
         public frm_product_full_detail()
         {
             InitializeComponent();
-            ApplyPermissionTags();
-        }
-
-        private void ApplyPermissionTags()
-        {
-            this.Tag = Permissions.Inventory_View;
-
-            if (btn_save != null) btn_save.Tag = Permissions.Products_Create;
-            if (btn_update != null) btn_update.Tag = Permissions.Products_Edit;
-            if (btn_delete != null) btn_delete.Tag = Permissions.Products_Delete;
-            if (btn_productAdjustment != null) btn_productAdjustment.Tag = Permissions.Inventory_Edit;
-        }
-
-        private void ApplyPermissionsOnLoad()
-        {
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                return;
-
-            if (AppSecurityContext.User == null || AppSecurityContext.Auth == null)
-                return;
-
-            AppSecurityContext.RefreshUserClaims();
-            this.ApplyPermissions(AppSecurityContext.Auth, AppSecurityContext.User);
         }
         
         public void frm_product_full_detail_Load(object sender, EventArgs e)
@@ -86,8 +69,7 @@ namespace pos
             if (!_loadMovementHistory)
                 AppTheme.Apply(this);
             StyleProductForm();
-            ApplyPermissionsOnLoad();
-
+            
             txt_part_number.Focus();
             this.ActiveControl = txt_part_number;
             cmb_item_type.SelectedIndex = 0;
@@ -425,6 +407,18 @@ namespace pos
         {
             try
             {
+                // permission check
+                if (!_auth.HasPermission(_currentUser, Security.Authorization.Permissions.Products_Create))
+                {
+                    UiMessages.ShowError(
+                        "You do not have permission to create products.",
+                        "ليس لديك صلاحية إنشاء منتجات.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية"
+                    );
+                    return;
+                }
+
                 if (objBLL.IsProductExist(txt_code.Text.Trim(), txt_category_code.Text.Trim()))
                 {
                     UiMessages.ShowWarning(
@@ -750,6 +744,17 @@ namespace pos
         {
             try
             {
+                // Permission check
+                if(!_auth.HasPermission(_currentUser, Security.Authorization.Permissions.Products_Edit))
+                {
+                    UiMessages.ShowError(
+                        "You do not have permission to update products.",
+                        "ليس لديك صلاحية لتحديث المنتجات.",
+                        "Access Denied",
+                        "تم رفض الوصول"
+                    );
+                    return;
+                }
 
                 if (String.IsNullOrEmpty(txt_id.Text))
                 {
@@ -1149,6 +1154,18 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Security.Authorization.Permissions.Products_Delete))
+            {
+                UiMessages.ShowWarning(
+                    "You do not have permission to delete products.",
+                    "ليس لديك صلاحية لحذف المنتجات.",
+                    "Permission Denied",
+                    "تم رفض الصلاحية"
+                );
+                return;
+            }
+
             string id = txt_id.Text;
 
             if (!string.IsNullOrWhiteSpace(id))

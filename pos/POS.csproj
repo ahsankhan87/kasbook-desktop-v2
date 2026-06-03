@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -513,6 +513,12 @@
     <Compile Include="Master\Logs\Logs.Designer.cs">
       <DependentUpon>Logs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Adjustment\frm_adjustment_help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_adjustment_help.Designer.cs">
+      <DependentUpon>frm_adjustment_help.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Adjustment\frm_adjust_qty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -521,6 +527,30 @@
     </Compile>
     <Compile Include="Products\Adjustment\frm_product_adjustment.Print.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_check_adjustment.bulk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_check_adjustment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_check_adjustment.Designer.cs">
+      <DependentUpon>frm_stock_check_adjustment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_check_adjustment.grid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_check_adjustment.navigation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_check_adjustment.shortcuts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_history.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\Adjustment\frm_stock_history.Designer.cs">
+      <DependentUpon>frm_stock_history.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\frm_other_stocks.cs">
       <SubType>Form</SubType>
@@ -834,6 +864,25 @@
     </Compile>
     <Compile Include="Reports\Accounts\frm_SupplierLedgerReport.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Adjustment\AdjustmentReportPrintHelper.cs" />
+    <Compile Include="Reports\Adjustment\frm_adj_voucher_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Adjustment\frm_adj_voucher_report.Designer.cs">
+      <DependentUpon>frm_adj_voucher_report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Adjustment\frm_price_change_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Adjustment\frm_price_change_report.Designer.cs">
+      <DependentUpon>frm_price_change_report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Adjustment\frm_stock_variance_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Adjustment\frm_stock_variance_report.Designer.cs">
+      <DependentUpon>frm_stock_variance_report.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Banks\BankLedger.cs">
       <AutoGen>True</AutoGen>
@@ -1964,6 +2013,9 @@
     <EmbeddedResource Include="Products\Adjustment\frm_product_adjustment.resx">
       <DependentUpon>frm_product_adjustment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\Adjustment\frm_stock_check_adjustment.resx">
+      <DependentUpon>frm_stock_check_adjustment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\Detail\frm_product_detail.ar-SA.resx">
       <DependentUpon>frm_product_detail.cs</DependentUpon>
     </EmbeddedResource>
@@ -2513,6 +2565,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
+    <None Include="Products\Adjustment\SHORTCUTS_README.md" />
     <None Include="Products\Labels\product_labels.xsc">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>

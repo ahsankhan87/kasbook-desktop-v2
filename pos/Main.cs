@@ -2577,5 +2577,11 @@ namespace pos
             var frm_customers = new pos.frm_customers();
             frm_customers.ShowDialog(this);
         }
+
+        private void stockCheckAndAdjustmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_stockCheckAdjustment = new pos.frm_stock_check_adjustment();
+            frm_stockCheckAdjustment.ShowDialog(this);
+        }
     }
 }

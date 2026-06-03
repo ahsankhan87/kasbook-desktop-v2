@@ -156,4 +156,121 @@ namespace POS.Core
         public decimal ExpensesTotal { get; set; }
         public decimal Profit => SalesNet - ExpensesTotal;
     }
+
+    public class AdjSessionModel
+    {
+        public int AdjId { get; set; }
+        public string AdjNo { get; set; }
+        public DateTime AdjDate { get; set; }
+        public string AdjType { get; set; }
+        public int WarehouseId { get; set; }
+        public string Status { get; set; }
+        public string Notes { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int? PostedBy { get; set; }
+        public DateTime? PostedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }
+        public List<AdjSessionLineModel> Lines { get; set; }
+
+        public AdjSessionModel()
+        {
+            Lines = new List<AdjSessionLineModel>();
+        }
+    }
+
+    public class AdjSessionLineModel
+    {
+        public int LineId { get; set; }
+        public int AdjId { get; set; }
+        public int ProductId { get; set; }
+        public decimal SystemQty { get; set; }
+        public decimal PhysicalQty { get; set; }
+        public decimal QtyDifference { get; set; }
+        public decimal CurrentSalePrice { get; set; }
+        public decimal NewSalePrice { get; set; }
+        public string CurrentLocation { get; set; }
+        public string NewLocation { get; set; }
+        public string Reason { get; set; }
+        public string Notes { get; set; }
+        public bool IsVerified { get; set; }
+    }
+
+    public class AdjSessionCreateResult
+    {
+        public int AdjId { get; set; }
+        public string AdjNo { get; set; }
+    }
+
+    public class AdjSessionSummaryModel
+    {
+        public int TotalLines { get; set; }
+        public decimal QtyIncrease { get; set; }
+        public decimal QtyDecrease { get; set; }
+        public int PriceChangeProducts { get; set; }
+        public int RelocatedProducts { get; set; }
+        public decimal TotalStockValueImpact { get; set; }
+    }
+
+    public class AdjAuditRow
+    {
+        public int AuditId { get; set; }
+        public string AdjNo { get; set; }
+        public DateTime ChangedAt { get; set; }
+        public string ChangeType { get; set; }
+        public string OldValue { get; set; }
+        public string NewValue { get; set; }
+        public string ChangedBy { get; set; }
+        public string Reason { get; set; }
+        public string AdjType { get; set; }
+    }
+
+    public class AdjSessionListRow
+    {
+        public int AdjId { get; set; }
+        public string AdjNo { get; set; }
+        public string AdjDate { get; set; }
+        public string AdjType { get; set; }
+        public string Status { get; set; }
+        public int ProductCount { get; set; }
+        public int QtyIncreases { get; set; }
+        public int QtyDecreases { get; set; }
+        public int PriceChanges { get; set; }
+        public int LocationChanges { get; set; }
+        public string CreatedBy { get; set; }
+        public string PostedBy { get; set; }
+        public string Notes { get; set; }
+    }
+
+    public class StockVarianceRow
+    {
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
+        public string CategoryName { get; set; }
+        public int TotalAdjustments { get; set; }
+        public decimal TotalQtyAdjusted { get; set; }
+        public decimal TotalValueImpact { get; set; }
+        public DateTime LastAdjustmentDate { get; set; }
+    }
+
+    public class PriceChangeRow
+    {
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
+        public string CategoryName { get; set; }
+        public string AdjNo { get; set; }
+        public string ChangeDate { get; set; }
+        public decimal OldPrice { get; set; }
+        public decimal NewPrice { get; set; }
+        public decimal PctChange { get; set; }
+        public string ApprovedBy { get; set; }
+        public string Reason { get; set; }
+    }
+
+    public class AdjPostResult
+    {
+        public bool Success { get; set; }
+        public int AffectedRows { get; set; }
+        public string ErrorMessage { get; set; }
+    }
 }

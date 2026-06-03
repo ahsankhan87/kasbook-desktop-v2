@@ -19,6 +19,10 @@ namespace pos.Products.Adjustment
         public int _productID { get; private set; }
         public string _productCode { get; private set; }
 
+        // Use centralized, DB-backed authorization and current user
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
+
         public frm_adjust_qty(decimal defaultQty = 0m,decimal price = 0m, string locationCode = null, int productID = 0, string productCode = null)
         {
             InitializeComponent();
@@ -29,26 +33,9 @@ namespace pos.Products.Adjustment
             txt_location.Text = locationCode;
             txt_sale_price.Text = price.ToString();
             lbl_productCode.Text = productCode;
-            ApplyPermissionTags();
+            
         }
-        private void ApplyPermissionTags()
-        {
-            this.Tag = Permissions.Inventory_View;
-
-            if (btn_deleteProduct != null) btn_deleteProduct.Tag = Permissions.Products_Delete;
-        }
-
-        private void ApplyPermissionsOnLoad()
-        {
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                return;
-
-            if (AppSecurityContext.User == null || AppSecurityContext.Auth == null)
-                return;
-
-            AppSecurityContext.RefreshUserClaims();
-            this.ApplyPermissions(AppSecurityContext.Auth, AppSecurityContext.User);
-        }
+        
         private void btnOk_Click(object sender, EventArgs e)
         {
             var raw = (txtQty.Text ?? string.Empty).Trim();
@@ -125,6 +112,18 @@ namespace pos.Products.Adjustment
 
         private void btn_deleteProduct_Click(object sender, EventArgs e)
         {
+            // Permission check
+            if (!_auth.HasPermission(_currentUser, Security.Authorization.Permissions.Products_Delete))
+            {
+                UiMessages.ShowWarning(
+                    "You do not have permission to delete products.",
+                    "áíÓ áÏíß ÕáÇÍíÉ áÍÐÝ ÇáãäÊÌÇÊ.",
+                    "Permission Denied",
+                    "Êã ÑÝÖ ÇáÕáÇÍíÉ"
+                );
+                return;
+            }
+
             // delete product permanently from the system
             if (_productID > 0)
             {
@@ -182,8 +181,7 @@ namespace pos.Products.Adjustment
 
         private void frm_adjust_qty_Load(object sender, EventArgs e)
         {
-            ApplyPermissionsOnLoad();
-           
+            
         }
         
     }
