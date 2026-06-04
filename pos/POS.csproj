@@ -814,6 +814,12 @@
     <Compile Include="Purchase Orders\frm_purchase_product_history.Designer.cs">
       <DependentUpon>frm_purchase_product_history.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchases\frm_foreign_purchase_setup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\frm_foreign_purchase_setup.Designer.cs">
+      <DependentUpon>frm_foreign_purchase_setup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchases\frm_purchases _v1.cs">
       <SubType>Form</SubType>
     </Compile>

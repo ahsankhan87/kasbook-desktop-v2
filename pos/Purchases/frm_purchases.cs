@@ -82,6 +82,12 @@ namespace pos
         private bool _editingHoldPurchase;
         private string _editingInvoiceNo = string.Empty;
         private string _loadedHistoryItemNumber = string.Empty;
+        private bool _isForeignPurchaseMode;
+        private int _foreignCurrencyId;
+        private decimal _foreignExchangeRate;
+        private string _foreignPurchaseInvoiceNo = string.Empty;
+        private string _foreignPurchaseCurrencyCode = string.Empty;
+        private string _foreignPurchaseNotes = string.Empty;
 
         public DataTable products_dt = new DataTable();
         private bool _applyShippingCostToItems = false;
@@ -136,6 +142,99 @@ namespace pos
 
         }
 
+        private bool IsForeignPurchaseMode()
+        {
+            return _isForeignPurchaseMode || _foreignCurrencyId > 0;
+        }
+
+        private void ApplyForeignPurchaseMode(int currencyId, decimal exchangeRate, string invoiceNo, string currencyCode, string notes)
+        {
+            _isForeignPurchaseMode = true;
+            _foreignCurrencyId = currencyId;
+            _foreignExchangeRate = exchangeRate;
+            _foreignPurchaseInvoiceNo = invoiceNo ?? string.Empty;
+            _foreignPurchaseCurrencyCode = currencyCode ?? string.Empty;
+            _foreignPurchaseNotes = notes ?? string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(invoiceNo))
+                txt_invoice_no.Text = invoiceNo;
+
+            if (currencyId > 0)
+                cmb_currency.SelectedValue = currencyId;
+
+            if (exchangeRate > 0)
+                _foreignExchangeRate = exchangeRate;
+
+            UpdateForeignPurchaseBanner();
+        }
+
+        private void ClearForeignPurchaseMode()
+        {
+            _isForeignPurchaseMode = false;
+            _foreignCurrencyId = 0;
+            _foreignExchangeRate = 0;
+            _foreignPurchaseInvoiceNo = string.Empty;
+            _foreignPurchaseCurrencyCode = string.Empty;
+            _foreignPurchaseNotes = string.Empty;
+            UpdateForeignPurchaseBanner();
+        }
+
+        private void UpdateForeignPurchaseBanner()
+        {
+            if (lbl_title == null)
+                return;
+
+            string baseTitle = "Purchases";
+            if (lbl_title.Tag == null)
+                lbl_title.Tag = lbl_title.Text;
+
+            baseTitle = Convert.ToString(lbl_title.Tag);
+            if (string.IsNullOrWhiteSpace(baseTitle))
+                baseTitle = "Purchases";
+
+            if (IsForeignPurchaseMode())
+            {
+                string currencyLabel = string.IsNullOrWhiteSpace(_foreignPurchaseCurrencyCode)
+                    ? "Foreign"
+                    : _foreignPurchaseCurrencyCode;
+                lbl_title.Text = baseTitle + " - Foreign Purchase (" + currencyLabel + ")";
+            }
+            else
+            {
+                lbl_title.Text = baseTitle;
+            }
+        }
+
+        private void StartForeignPurchaseSetup()
+        {
+            if (_companyCurrencyId <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Company currency is not configured.",
+                    "عملة الشركة غير مهيأة.",
+                    captionEn: "Setup required",
+                    captionAr: "الإعداد مطلوب");
+                return;
+            }
+
+            using (var frm = new frm_foreign_purchase_setup(_companyCurrencyId))
+            {
+                if (frm.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                ApplyForeignPurchaseMode(frm.SelectedCurrencyId, frm.ExchangeRate, frm.InvoiceNo, frm.SelectedCurrencyCode, frm.Notes);
+                txt_purchase_date.Value = frm.PurchaseDate;
+                txt_invoice_no.Text = frm.InvoiceNo;
+                if (!string.IsNullOrWhiteSpace(frm.Notes))
+                    txt_description.Text = frm.Notes;
+
+                if (frm.SelectedCurrencyId > 0)
+                    cmb_currency.SelectedValue = frm.SelectedCurrencyId;
+
+                txt_shipping_cost.Focus();
+            }
+        }
+
         private void frm_purchases_Load(object sender, EventArgs e)
         {
             // Apply theme first so everything is styled before data loads
@@ -168,6 +267,8 @@ namespace pos
                 get_payment_terms_dropdownlist();
                 GetCurrenciesDropDownList();
                 _applyShippingCostToItems = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
+                ClearForeignPurchaseMode();
+                UpdateForeignPurchaseBanner();
 
                 foreach (DataGridViewColumn column in grid_purchases.Columns)
                 {
@@ -1388,6 +1489,8 @@ namespace pos
                 else
                     cmb_currency.SelectedValue = 0;
 
+                ClearForeignPurchaseMode();
+
                 txt_sub_total.Text = "0.00";
                 txt_total_amount.Text = "0.00";
                 txt_total_tax.Text = "0.00";
@@ -1785,6 +1888,9 @@ namespace pos
                     {
                         grid_purchases.CurrentCell = grid_purchases.Rows[0].Cells["code"];
                     }
+
+                    if (!string.IsNullOrWhiteSpace(_foreignPurchaseInvoiceNo))
+                        txt_invoice_no.Text = _foreignPurchaseInvoiceNo;
                 }
             }
             catch (Exception ex)
@@ -2686,6 +2792,12 @@ namespace pos
                             {
                                 invoice_no = _editingInvoiceNo;
                             }
+                            else if (IsForeignPurchaseMode())
+                            {
+                                invoice_no = !string.IsNullOrWhiteSpace(_foreignPurchaseInvoiceNo)
+                                    ? _foreignPurchaseInvoiceNo
+                                    : purchasesObj.GenerateForeignPurchaseInvoiceNo();
+                            }
                             else if (invoice_status == "PO") //if purchase order
                             {
                                 po_invoice_no_1 = po_invoice_no;
@@ -2734,7 +2846,7 @@ namespace pos
                                 payment_method_text = paymentMethodText,
                                 bankGLAccountID = bankGLAccountID,
                                 bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
-                                currency_id = currency_id,
+                                currency_id = IsForeignPurchaseMode() ? _foreignCurrencyId : currency_id,
 
                                 cash_account_id = cash_account_id,
                                 payable_account_id = payable_account_id,
@@ -3186,6 +3298,18 @@ namespace pos
             {
                 frm_search_porder obj = new frm_search_porder(this);
                 obj.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, "خطأ", "Error", "خطأ");
+            }
+        }
+
+        private void ForeignPurchasetoolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StartForeignPurchaseSetup();
             }
             catch (Exception ex)
             {
