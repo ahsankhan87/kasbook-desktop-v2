@@ -2205,6 +2205,12 @@
     <EmbeddedResource Include="Purchase Orders\frm_purchase_product_history.resx">
       <DependentUpon>frm_purchase_product_history.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\frm_foreign_purchase_setup.ar-SA.resx">
+      <DependentUpon>frm_foreign_purchase_setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\frm_foreign_purchase_setup.resx">
+      <DependentUpon>frm_foreign_purchase_setup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchases\frm_purchases _v1.ar-SA.resx">
       <DependentUpon>frm_purchases _v1.cs</DependentUpon>
     </EmbeddedResource>
