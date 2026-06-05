@@ -987,6 +987,9 @@
   <data name="ImportExcelToolStripButton.Text" xml:space="preserve">
     <value>Import Excel</value>
   </data>
+  <data name="ImportExcelToolStripButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
   <data name="HistoryToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>

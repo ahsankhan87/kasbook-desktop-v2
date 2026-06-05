@@ -51,6 +51,10 @@ namespace POS.Core
         public int bank_id { get; set; } = 0;
         public string bankGLAccountID { get; set; } = "";
         public int currency_id { get; set; } = 0;
+        public decimal exchange_rate { get; set; } = 1;
+        public decimal foreign_total_amount { get; set; }
+        public decimal foreign_total_tax { get; set; }
+        public decimal foreign_total_discount { get; set; }
     }
 
     public class PurchasesModal
@@ -81,6 +85,10 @@ namespace POS.Core
 
         public decimal shipping_cost { get; set; }
         public int currency_id { get; set; }
+        public decimal exchange_rate { get; set; } = 1;
+        public decimal foreign_total_amount { get; set; }
+        public decimal foreign_total_tax { get; set; }
+        public decimal foreign_total_discount { get; set; }
         /// </summary>
         /// 
 
@@ -126,6 +134,9 @@ namespace POS.Core
         public decimal packet_qty { get; set; }
 
         public decimal line_discount_percent { get; set; }
+        public decimal foreign_unit_price { get; set; }
+        public decimal foreign_cost_price { get; set; }
+        public decimal foreign_discount_value { get; set; }
 
     }
 }

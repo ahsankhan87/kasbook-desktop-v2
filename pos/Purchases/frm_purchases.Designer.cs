@@ -105,14 +105,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.lbl_title = new System.Windows.Forms.Label();
             this.PurchaseToolStrip = new System.Windows.Forms.ToolStrip();
-            this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ImportExcelToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.LoadPOToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.ForeignPurchasetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cmb_payment_terms = new System.Windows.Forms.ComboBox();
@@ -166,6 +158,14 @@
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_grid = new System.Windows.Forms.Panel();
             this.panel_footer = new System.Windows.Forms.Panel();
+            this.NewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SearchToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ImportExcelToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.HistoryToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.LoadPOToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ForeignPurchasetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.locationsdtDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -641,67 +641,6 @@
             this.ForeignPurchasetoolStripButton});
             this.PurchaseToolStrip.Name = "PurchaseToolStrip";
             // 
-            // NewToolStripButton
-            // 
-            this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
-            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
-            this.NewToolStripButton.Name = "NewToolStripButton";
-            this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
-            // 
-            // SaveToolStripButton
-            // 
-            this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
-            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
-            this.SaveToolStripButton.Name = "SaveToolStripButton";
-            this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
-            // 
-            // SearchToolStripButton
-            // 
-            this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
-            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
-            this.SearchToolStripButton.Name = "SearchToolStripButton";
-            this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
-            // 
-            // ImportExcelToolStripButton
-            // 
-            this.ImportExcelToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ImportExcelToolStripButton.Image = global::pos.Properties.Resources.Products1;
-            this.ImportExcelToolStripButton.Name = "ImportExcelToolStripButton";
-            resources.ApplyResources(this.ImportExcelToolStripButton, "ImportExcelToolStripButton");
-            this.ImportExcelToolStripButton.Click += new System.EventHandler(this.ImportExcelToolStripButton_Click);
-            // 
-            // HistoryToolStripButton
-            // 
-            this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
-            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
-            this.HistoryToolStripButton.Name = "HistoryToolStripButton";
-            this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
-            // 
-            // LoadPOToolStripButton
-            // 
-            this.LoadPOToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.LoadPOToolStripButton.Image = global::pos.Properties.Resources.Estimate;
-            resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
-            this.LoadPOToolStripButton.Name = "LoadPOToolStripButton";
-            this.LoadPOToolStripButton.Click += new System.EventHandler(this.LoadPOToolStripButton_Click);
-            // 
-            // PrinttoolStripButton
-            // 
-            resources.ApplyResources(this.PrinttoolStripButton, "PrinttoolStripButton");
-            this.PrinttoolStripButton.Image = global::pos.Properties.Resources.Print_32;
-            this.PrinttoolStripButton.Name = "PrinttoolStripButton";
-            this.PrinttoolStripButton.Click += new System.EventHandler(this.PrinttoolStripButton_Click);
-            // 
-            // ForeignPurchasetoolStripButton
-            // 
-            resources.ApplyResources(this.ForeignPurchasetoolStripButton, "ForeignPurchasetoolStripButton");
-            this.ForeignPurchasetoolStripButton.Name = "ForeignPurchasetoolStripButton";
-            this.ForeignPurchasetoolStripButton.Click += new System.EventHandler(this.ForeignPurchasetoolStripButton_Click);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel1);
@@ -1161,6 +1100,68 @@
             resources.ApplyResources(this.panel_footer, "panel_footer");
             this.panel_footer.Controls.Add(this.splitContainer1);
             this.panel_footer.Name = "panel_footer";
+            // 
+            // NewToolStripButton
+            // 
+            this.NewToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.NewToolStripButton.Image = global::pos.Properties.Resources.Add;
+            resources.ApplyResources(this.NewToolStripButton, "NewToolStripButton");
+            this.NewToolStripButton.Name = "NewToolStripButton";
+            this.NewToolStripButton.Click += new System.EventHandler(this.NewToolStripButton_Click);
+            // 
+            // SaveToolStripButton
+            // 
+            this.SaveToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.SaveToolStripButton.Image = global::pos.Properties.Resources.Save;
+            resources.ApplyResources(this.SaveToolStripButton, "SaveToolStripButton");
+            this.SaveToolStripButton.Name = "SaveToolStripButton";
+            this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButton_Click);
+            // 
+            // SearchToolStripButton
+            // 
+            this.SearchToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.SearchToolStripButton.Image = global::pos.Properties.Resources.Search;
+            resources.ApplyResources(this.SearchToolStripButton, "SearchToolStripButton");
+            this.SearchToolStripButton.Name = "SearchToolStripButton";
+            this.SearchToolStripButton.Click += new System.EventHandler(this.SearchToolStripButton_Click);
+            // 
+            // ImportExcelToolStripButton
+            // 
+            this.ImportExcelToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ImportExcelToolStripButton.Image = global::pos.Properties.Resources.Export_Excel;
+            this.ImportExcelToolStripButton.Name = "ImportExcelToolStripButton";
+            resources.ApplyResources(this.ImportExcelToolStripButton, "ImportExcelToolStripButton");
+            this.ImportExcelToolStripButton.Click += new System.EventHandler(this.ImportExcelToolStripButton_Click);
+            // 
+            // HistoryToolStripButton
+            // 
+            this.HistoryToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.HistoryToolStripButton.Image = global::pos.Properties.Resources.Time_Machine;
+            resources.ApplyResources(this.HistoryToolStripButton, "HistoryToolStripButton");
+            this.HistoryToolStripButton.Name = "HistoryToolStripButton";
+            this.HistoryToolStripButton.Click += new System.EventHandler(this.HistoryToolStripButton_Click);
+            // 
+            // LoadPOToolStripButton
+            // 
+            this.LoadPOToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.LoadPOToolStripButton.Image = global::pos.Properties.Resources.Estimate;
+            resources.ApplyResources(this.LoadPOToolStripButton, "LoadPOToolStripButton");
+            this.LoadPOToolStripButton.Name = "LoadPOToolStripButton";
+            this.LoadPOToolStripButton.Click += new System.EventHandler(this.LoadPOToolStripButton_Click);
+            // 
+            // PrinttoolStripButton
+            // 
+            resources.ApplyResources(this.PrinttoolStripButton, "PrinttoolStripButton");
+            this.PrinttoolStripButton.Image = global::pos.Properties.Resources.Print_32;
+            this.PrinttoolStripButton.Name = "PrinttoolStripButton";
+            this.PrinttoolStripButton.Click += new System.EventHandler(this.PrinttoolStripButton_Click);
+            // 
+            // ForeignPurchasetoolStripButton
+            // 
+            this.ForeignPurchasetoolStripButton.Image = global::pos.Properties.Resources.Purchase_For_Euro;
+            resources.ApplyResources(this.ForeignPurchasetoolStripButton, "ForeignPurchasetoolStripButton");
+            this.ForeignPurchasetoolStripButton.Name = "ForeignPurchasetoolStripButton";
+            this.ForeignPurchasetoolStripButton.Click += new System.EventHandler(this.ForeignPurchasetoolStripButton_Click);
             // 
             // dataGridViewImageColumn1
             // 

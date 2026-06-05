@@ -458,8 +458,8 @@
             // 
             // ImportExcelToolStripButton
             // 
-            this.ImportExcelToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ImportExcelToolStripButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ImportExcelToolStripButton.Image = global::pos.Properties.Resources.Export_Excel;
             this.ImportExcelToolStripButton.Name = "ImportExcelToolStripButton";
             resources.ApplyResources(this.ImportExcelToolStripButton, "ImportExcelToolStripButton");
             this.ImportExcelToolStripButton.Click += new System.EventHandler(this.ImportExcelToolStripButton_Click);

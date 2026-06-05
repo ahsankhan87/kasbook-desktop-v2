@@ -203,6 +203,16 @@ namespace pos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Export_Excel {
+            get {
+                object obj = ResourceManager.GetObject("Export Excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Graph_Report {
             get {
                 object obj = ResourceManager.GetObject("Graph Report", resourceCulture);
@@ -336,6 +346,16 @@ namespace pos.Properties {
         internal static System.Drawing.Bitmap Products1 {
             get {
                 object obj = ResourceManager.GetObject("Products1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Purchase_For_Euro {
+            get {
+                object obj = ResourceManager.GetObject("Purchase For Euro", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

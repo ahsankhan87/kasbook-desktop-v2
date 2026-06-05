@@ -2750,6 +2750,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="nozum.ico" />
+    <None Include="Resources\Export Excel.png" />
+    <None Include="Resources\Purchase For Euro.png" />
     <Content Include="saxon.dll" />
     <None Include="Resources\3969301-841013250.jpeg" />
     <Content Include="Resources\Add.png" />

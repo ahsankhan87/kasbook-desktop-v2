@@ -2811,9 +2811,20 @@ namespace pos
 
                             //if purchase return then put minus sign before amount
                             decimal return_minus_value = (purchase_type == "Return" ? -1 : 1);
-                            decimal net_total = Math.Round(return_minus_value * total_amount, 6);
-                            decimal net_total_discount = Math.Round(return_minus_value * total_discount, 6);
-                            decimal net_total_tax = Math.Round(return_minus_value * total_tax, 6);
+                            bool isForeignPurchase = IsForeignPurchaseMode();
+                            decimal exchangeRate = (isForeignPurchase && _foreignExchangeRate > 0 ? _foreignExchangeRate : 1m);
+
+                            decimal enteredTotalAmount = Math.Round(return_minus_value * total_amount, 6);
+                            decimal enteredTotalDiscount = Math.Round(return_minus_value * total_discount, 6);
+                            decimal enteredTotalTax = Math.Round(return_minus_value * total_tax, 6);
+
+                            decimal net_total = Math.Round(enteredTotalAmount * exchangeRate, 6);
+                            decimal net_total_discount = Math.Round(enteredTotalDiscount * exchangeRate, 6);
+                            decimal net_total_tax = Math.Round(enteredTotalTax * exchangeRate, 6);
+
+                            decimal foreign_total_amount = isForeignPurchase ? enteredTotalAmount : net_total;
+                            decimal foreign_total_discount = isForeignPurchase ? enteredTotalDiscount : net_total_discount;
+                            decimal foreign_total_tax = isForeignPurchase ? enteredTotalTax : net_total_tax;
 
 
                             //set the date from datetimepicker and set time to te current time
@@ -2829,8 +2840,8 @@ namespace pos
                                 invoice_no = invoice_no,
                                 supplier_invoice_no = txt_supplier_invoice.Text,
                                 total_amount = net_total,
-                                total_tax = Math.Round(total_tax, 6),
-                                total_discount = total_discount,
+                                total_tax = net_total_tax,
+                                total_discount = net_total_discount,
                                 total_discount_percent = (txt_total_disc_percent.Text == "" ? 0 : Convert.ToDecimal(txt_total_disc_percent.Text)),
                                 purchase_type = purchase_type,
                                 purchase_date = purchase_date,
@@ -2846,7 +2857,11 @@ namespace pos
                                 payment_method_text = paymentMethodText,
                                 bankGLAccountID = bankGLAccountID,
                                 bank_id = (string.IsNullOrEmpty(bankID) ? 0 : Convert.ToInt32(bankID)),
-                                currency_id = IsForeignPurchaseMode() ? _foreignCurrencyId : currency_id,
+                                currency_id = isForeignPurchase ? _foreignCurrencyId : currency_id,
+                                exchange_rate = exchangeRate,
+                                foreign_total_amount = foreign_total_amount,
+                                foreign_total_tax = foreign_total_tax,
+                                foreign_total_discount = foreign_total_discount,
 
                                 cash_account_id = cash_account_id,
                                 payable_account_id = payable_account_id,
@@ -2875,6 +2890,14 @@ namespace pos
 
                                     ///// Added sales detail in to List
                                     decimal tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
+                                    decimal qtyValue = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["qty"].Value.ToString()) ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["qty"].Value.ToString()));
+                                    decimal enteredCostPrice = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()) ? 0 : Math.Round(Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()), 4));
+                                    decimal enteredUnitPrice = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()), 4));
+                                    decimal enteredDiscount = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount"].Value.ToString()), 4));
+
+                                    decimal baseCostPrice = Math.Round(enteredCostPrice * exchangeRate, 4);
+                                    decimal baseUnitPrice = Math.Round(enteredUnitPrice * exchangeRate, 4);
+                                    decimal baseDiscount = Math.Round(enteredDiscount * exchangeRate, 4);
 
                                     purchase_model_detail.Add(new PurchasesModal
                                     {
@@ -2883,16 +2906,21 @@ namespace pos
                                         item_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value.ToString()),
                                         code = grid_purchases.Rows[i].Cells["code"].Value.ToString(),
                                         item_number = grid_purchases.Rows[i].Cells["item_number"].Value.ToString(),
-                                        quantity = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["qty"].Value.ToString()) ? 0 : decimal.Parse(grid_purchases.Rows[i].Cells["qty"].Value.ToString())),
-                                        cost_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()) ? 0 : Math.Round(Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value.ToString()), 4)),
-                                        unit_price = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["unit_price"].Value.ToString()), 4)),
-                                        discount = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount"].Value.ToString()), 4)),
+                                        quantity = qtyValue,
+                                        cost_price = baseCostPrice,
+                                        unit_price = baseUnitPrice,
+                                        discount = baseDiscount,
                                         line_discount_percent = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount_percent"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount_percent"].Value.ToString()), 4)),
                                         tax_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["tax_id"].Value.ToString()),
                                         tax_rate = tax_rate,
                                         purchase_date = purchase_date,
                                         location_code = location_code?.ToUpper(),
                                         supplier_id = supplier_id,
+                                        currency_id = isForeignPurchase ? _foreignCurrencyId : currency_id,
+                                        exchange_rate = exchangeRate,
+                                        foreign_cost_price = isForeignPurchase ? enteredCostPrice : baseCostPrice,
+                                        foreign_unit_price = isForeignPurchase ? enteredUnitPrice : baseUnitPrice,
+                                        foreign_discount_value = isForeignPurchase ? enteredDiscount : baseDiscount,
 
                                     });
                                 }

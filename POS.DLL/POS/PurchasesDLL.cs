@@ -387,7 +387,7 @@ namespace POS.DLL
 
         public int Insertpurchases(List<PurchaseModalHeader> purchases, List<PurchasesModal> purchase_detail)
         {
-            Int32 newProdID = 0;
+            Int32 newPurchaseID = 0;
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 SqlTransaction transaction;
@@ -424,27 +424,33 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@shipping_cost", purchase_header.shipping_cost);
                             cmd.Parameters.AddWithValue("@payment_method_id", purchase_header.payment_method_id);
                             cmd.Parameters.AddWithValue("@payment_terms_id", purchase_header.payment_terms_id);
+                            cmd.Parameters.AddWithValue("@currency_id", purchase_header.currency_id);
+                            cmd.Parameters.AddWithValue("@exchange_rate", purchase_header.exchange_rate > 0 ? purchase_header.exchange_rate : 1m);
+                            cmd.Parameters.AddWithValue("@foreign_total_amount", purchase_header.foreign_total_amount);
+                            cmd.Parameters.AddWithValue("@foreign_total_tax", purchase_header.foreign_total_tax);
+                            cmd.Parameters.AddWithValue("@foreign_total_discount", purchase_header.foreign_total_discount);
 
                             cmd.Parameters.AddWithValue("@OperationType", "1");
                         }
 
-                        newProdID = Convert.ToInt32(cmd.ExecuteScalar());
+                        newPurchaseID = Convert.ToInt32(cmd.ExecuteScalar());
 
-                        foreach (PurchaseModalHeader purchase_header in purchases)
-                        {
-                            if (purchase_header.currency_id > 0)
-                            {
-                                cmd = new SqlCommand(@"IF COL_LENGTH('dbo.pos_purchases','currency_id') IS NOT NULL
-                                                       BEGIN
-                                                           UPDATE dbo.pos_purchases
-                                                           SET currency_id = @currency_id
-                                                           WHERE id = @id;
-                                                       END", cn, transaction);
-                                cmd.Parameters.AddWithValue("@currency_id", purchase_header.currency_id);
-                                cmd.Parameters.AddWithValue("@id", newProdID);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
+                        //foreach (PurchaseModalHeader purchase_header in purchases)
+                        //{
+                        //    cmd = new SqlCommand(@"
+                        //        IF COL_LENGTH('dbo.pos_purchases','currency_id') IS NOT NULL
+                        //            UPDATE dbo.pos_purchases SET currency_id = @currency_id WHERE id = @id;
+                        //        IF COL_LENGTH('dbo.pos_purchases','exchange_rate') IS NOT NULL
+                        //            UPDATE dbo.pos_purchases SET exchange_rate = @exchange_rate WHERE id = @id;
+                        //        IF COL_LENGTH('dbo.pos_purchases','foreign_total_amount') IS NOT NULL
+                        //            UPDATE dbo.pos_purchases SET foreign_total_amount = @foreign_total_amount WHERE id = @id;
+                        //        IF COL_LENGTH('dbo.pos_purchases','foreign_total_tax') IS NOT NULL
+                        //            UPDATE dbo.pos_purchases SET foreign_total_tax = @foreign_total_tax WHERE id = @id;
+                        //        IF COL_LENGTH('dbo.pos_purchases','foreign_total_discount') IS NOT NULL
+                        //            UPDATE dbo.pos_purchases SET foreign_total_discount = @foreign_total_discount WHERE id = @id;", cn, transaction);
+                        //    cmd.Parameters.AddWithValue("@id", newProdID);
+                        //    cmd.ExecuteNonQuery();
+                        //}
 
                         foreach (PurchasesModal detail in purchase_detail)
                         {
@@ -457,7 +463,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@item_id", detail.item_id);
                             cmd.Parameters.AddWithValue("@item_code", detail.code);
                             cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
-                            cmd.Parameters.AddWithValue("@purchase_id", newProdID);
+                            cmd.Parameters.AddWithValue("@purchase_id", newPurchaseID);
                             cmd.Parameters.AddWithValue("@tax_id", detail.tax_id);
                             cmd.Parameters.AddWithValue("@unit_price", detail.unit_price);
                             cmd.Parameters.AddWithValue("@quantity", detail.quantity);
@@ -472,16 +478,39 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@PO_status", detail.po_status);
                             cmd.Parameters.AddWithValue("@location_code", detail.location_code.ToUpper());
                             cmd.Parameters.AddWithValue("@purchase_type", detail.purchase_type);
+                            cmd.Parameters.AddWithValue("@currency_id", detail.currency_id);
+                            cmd.Parameters.AddWithValue("@exchange_rate", detail.exchange_rate > 0 ? detail.exchange_rate : 1m);
+                            cmd.Parameters.AddWithValue("@foreign_unit_price", detail.foreign_unit_price);
+                            cmd.Parameters.AddWithValue("@foreign_cost_price", detail.foreign_cost_price);
+                            cmd.Parameters.AddWithValue("@foreign_discount_value", detail.foreign_discount_value);
 
                             cmd.Parameters.AddWithValue("@OperationType", "1");
 
-                            cmd.ExecuteScalar();
+                            var purchaseItemId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            //cmd = new SqlCommand(@"
+                            //    IF COL_LENGTH('dbo.pos_purchases_items','currency_id') IS NOT NULL
+                            //        UPDATE dbo.pos_purchases_items SET currency_id = @currency_id WHERE id = @id;
+                            //    IF COL_LENGTH('dbo.pos_purchases_items','exchange_rate') IS NOT NULL
+                            //        UPDATE dbo.pos_purchases_items SET exchange_rate = @exchange_rate WHERE id = @id;
+                            //    IF COL_LENGTH('dbo.pos_purchases_items','foreign_unit_price') IS NOT NULL
+                            //        UPDATE dbo.pos_purchases_items SET foreign_unit_price = @foreign_unit_price WHERE id = @id;
+                            //    IF COL_LENGTH('dbo.pos_purchases_items','foreign_cost_price') IS NOT NULL
+                            //        UPDATE dbo.pos_purchases_items SET foreign_cost_price = @foreign_cost_price WHERE id = @id;
+                            //    IF COL_LENGTH('dbo.pos_purchases_items','foreign_discount_value') IS NOT NULL
+                            //        UPDATE dbo.pos_purchases_items SET foreign_discount_value = @foreign_discount_value WHERE id = @id;", cn, transaction);
+                            //cmd.Parameters.AddWithValue("@id", purchaseItemId);
+                            //cmd.ExecuteNonQuery();
                         }
 
                         /// FOR JOURNAL ENTRIES
                         ///  
                         foreach (PurchaseModalHeader purchase_header in purchases)
                         {
+                            decimal baseTotalAmount = purchase_header.total_amount;
+                            decimal baseTotalDiscount = purchase_header.total_discount;
+                            decimal baseTotalTax = purchase_header.total_tax;
+
                             ///INVENTORY JOURNAL ENTRY (DEBIT)
                             //Insert_Journal_entry(invoice_no, inventory_acc_id, net_total, 0, purchase_date, txt_description.Text, 0, 0, 0);
                             
@@ -490,7 +519,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                             cmd.Parameters.AddWithValue("@account_id", purchase_header.inventory_acc_id);
                             cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                            cmd.Parameters.AddWithValue("@debit", (purchase_header.total_amount));
+                            cmd.Parameters.AddWithValue("@debit", baseTotalAmount);
                             cmd.Parameters.AddWithValue("@credit", 0);
                             cmd.Parameters.AddWithValue("@description", purchase_header.description);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -517,7 +546,7 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue("@account_id", purchase_header.bankGLAccountID);
                                     cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                     cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", (purchase_header.total_amount));
+                                    cmd.Parameters.AddWithValue("@credit", baseTotalAmount);
                                     cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                     cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -541,7 +570,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.bankGLAccountID);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                         cmd.Parameters.AddWithValue("@debit", 0);
-                                        cmd.Parameters.AddWithValue("@credit", (purchase_header.total_amount));
+                                        cmd.Parameters.AddWithValue("@credit", baseTotalAmount);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -567,7 +596,7 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue("@account_id", purchase_header.cash_account_id);
                                     cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                     cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", (purchase_header.total_amount));
+                                    cmd.Parameters.AddWithValue("@credit", baseTotalAmount);
                                     cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                     cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -591,7 +620,7 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@account_id", purchase_header.payable_account_id);
                                 cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                 cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", (purchase_header.total_amount));
+                                cmd.Parameters.AddWithValue("@credit", baseTotalAmount);
                                 cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                 cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                 cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -614,7 +643,7 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue("@account_id", purchase_header.inventory_acc_id);
                                     cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                     cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", (purchase_header.total_amount));
+                                    cmd.Parameters.AddWithValue("@credit", baseTotalAmount);
                                     cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                     cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -631,9 +660,9 @@ namespace POS.DLL
                             }
 
 
-                            if (purchase_header.total_discount > 0)
+                            if (baseTotalDiscount > 0)
                             {
-                               
+
                                 //Insert_Journal_entry(invoice_no, cash_account_id, net_total_discount, 0, purchase_date, txt_description.Text, 0, 0, 0);
                                 if (purchase_header.purchase_type == "Cash")
                                 {
@@ -647,7 +676,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.bankGLAccountID);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                                        cmd.Parameters.AddWithValue("@debit", (purchase_header.total_discount));
+                                        cmd.Parameters.AddWithValue("@debit", baseTotalDiscount);
                                         cmd.Parameters.AddWithValue("@credit", 0);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -671,7 +700,7 @@ namespace POS.DLL
                                             cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                                             cmd.Parameters.AddWithValue("@account_id", purchase_header.bankGLAccountID);
                                             cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                                            cmd.Parameters.AddWithValue("@debit", (purchase_header.total_discount));
+                                            cmd.Parameters.AddWithValue("@debit", baseTotalDiscount);
                                             cmd.Parameters.AddWithValue("@credit", 0);
                                             cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -695,7 +724,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.cash_account_id);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                                        cmd.Parameters.AddWithValue("@debit", purchase_header.total_discount);
+                                        cmd.Parameters.AddWithValue("@debit", baseTotalDiscount);
                                         cmd.Parameters.AddWithValue("@credit", 0);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -717,7 +746,7 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                                     cmd.Parameters.AddWithValue("@account_id", purchase_header.payable_account_id);
                                     cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                                    cmd.Parameters.AddWithValue("@debit", purchase_header.total_discount);
+                                    cmd.Parameters.AddWithValue("@debit", baseTotalDiscount);
                                     cmd.Parameters.AddWithValue("@credit", 0);
                                     cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                     cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -739,7 +768,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.purchases_discount_acc_id);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                                        cmd.Parameters.AddWithValue("@debit", purchase_header.total_discount);
+                                        cmd.Parameters.AddWithValue("@debit", baseTotalDiscount);
                                         cmd.Parameters.AddWithValue("@credit", 0);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -762,7 +791,7 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@account_id", purchase_header.purchases_discount_acc_id);
                                 cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                 cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", purchase_header.total_discount);
+                                cmd.Parameters.AddWithValue("@credit", baseTotalDiscount);
                                 cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                 cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                 cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -778,7 +807,7 @@ namespace POS.DLL
                             }
                             //discount end here
 
-                            if (purchase_header.total_tax > 0)
+                            if (baseTotalTax > 0)
                             {
                                 ///SALES TAX JOURNAL ENTRY (DEBIT)
                                 //Insert_Journal_entry(invoice_no, tax_account_id, net_total_tax, 0, purchase_date, txt_description.Text, 0, 0, 0);
@@ -788,7 +817,7 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
                                 cmd.Parameters.AddWithValue("@account_id", purchase_header.tax_account_id);
                                 cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
-                                cmd.Parameters.AddWithValue("@debit", purchase_header.total_tax);
+                                cmd.Parameters.AddWithValue("@debit", baseTotalTax);
                                 cmd.Parameters.AddWithValue("@credit", 0);
                                 cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                 cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
@@ -814,7 +843,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.bankGLAccountID);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                         cmd.Parameters.AddWithValue("@debit", 0);
-                                        cmd.Parameters.AddWithValue("@credit", (purchase_header.total_tax));
+                                        cmd.Parameters.AddWithValue("@credit", baseTotalTax);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -838,7 +867,7 @@ namespace POS.DLL
                                             cmd.Parameters.AddWithValue("@account_id", purchase_header.bankGLAccountID);
                                             cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                             cmd.Parameters.AddWithValue("@debit", 0);
-                                            cmd.Parameters.AddWithValue("@credit", (purchase_header.total_tax));
+                                            cmd.Parameters.AddWithValue("@credit", baseTotalTax);
                                             cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -864,7 +893,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.cash_account_id);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                         cmd.Parameters.AddWithValue("@debit", 0);
-                                        cmd.Parameters.AddWithValue("@credit", purchase_header.total_tax);
+                                        cmd.Parameters.AddWithValue("@credit", baseTotalTax);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -888,7 +917,7 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue("@account_id", purchase_header.payable_account_id);
                                     cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                     cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", purchase_header.total_tax);
+                                    cmd.Parameters.AddWithValue("@credit", baseTotalTax);
                                     cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                     cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -911,7 +940,7 @@ namespace POS.DLL
                                         cmd.Parameters.AddWithValue("@account_id", purchase_header.tax_account_id);
                                         cmd.Parameters.AddWithValue("@entry_date", purchase_header.purchase_date);
                                         cmd.Parameters.AddWithValue("@debit", 0);
-                                        cmd.Parameters.AddWithValue("@credit", purchase_header.total_tax);
+                                        cmd.Parameters.AddWithValue("@credit", baseTotalTax);
                                         cmd.Parameters.AddWithValue("@description", purchase_header.description);
                                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -929,8 +958,6 @@ namespace POS.DLL
 
                             }
 
-
-                            
                         }
                         /// END JOURNAL ENTRIES
                         transaction.Commit();
@@ -950,7 +977,7 @@ namespace POS.DLL
                 }
 
 
-                return newProdID;
+                return newPurchaseID;
 
             }
         }
