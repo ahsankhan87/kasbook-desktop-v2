@@ -17,18 +17,18 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea17 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend17 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea18 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend18 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lbl_title = new System.Windows.Forms.Label();
             this.tabProfile = new System.Windows.Forms.TabControl();
@@ -113,12 +113,12 @@
             this.chartPriceHistory = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartMonthlyTrend24 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartTopProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Btn_ledger_report = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.tabProfile.SuspendLayout();
             this.tabOverview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitOverview)).BeginInit();
             this.splitOverview.Panel1.SuspendLayout();
-            this.splitOverview.Panel2.SuspendLayout();
             this.splitOverview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridTopItemsSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMonthlyPurchases)).BeginInit();
@@ -155,18 +155,19 @@
             this.panelTop.Controls.Add(this.lbl_title);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Padding = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.panelTop.Size = new System.Drawing.Size(1180, 52);
+            this.panelTop.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
+            this.panelTop.Size = new System.Drawing.Size(1032, 42);
             this.panelTop.TabIndex = 0;
             // 
             // lbl_title
             // 
             this.lbl_title.AutoSize = true;
             this.lbl_title.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.lbl_title.Location = new System.Drawing.Point(12, 13);
+            this.lbl_title.Location = new System.Drawing.Point(10, 10);
             this.lbl_title.Name = "lbl_title";
-            this.lbl_title.Size = new System.Drawing.Size(194, 28);
+            this.lbl_title.Size = new System.Drawing.Size(182, 28);
             this.lbl_title.TabIndex = 0;
             this.lbl_title.Text = "Individual Supplier";
             // 
@@ -180,11 +181,12 @@
             this.tabProfile.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabProfile.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tabProfile.ItemSize = new System.Drawing.Size(190, 34);
-            this.tabProfile.Location = new System.Drawing.Point(0, 52);
+            this.tabProfile.Location = new System.Drawing.Point(0, 42);
+            this.tabProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabProfile.Multiline = true;
             this.tabProfile.Name = "tabProfile";
             this.tabProfile.SelectedIndex = 0;
-            this.tabProfile.Size = new System.Drawing.Size(1180, 593);
+            this.tabProfile.Size = new System.Drawing.Size(1032, 474);
             this.tabProfile.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabProfile.TabIndex = 1;
             this.tabProfile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabProfile_DrawItem);
@@ -197,28 +199,26 @@
             this.tabOverview.Controls.Add(this.tableKpi);
             this.tabOverview.Controls.Add(this.pnlOverviewHeader);
             this.tabOverview.Location = new System.Drawing.Point(4, 38);
+            this.tabOverview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabOverview.Name = "tabOverview";
-            this.tabOverview.Padding = new System.Windows.Forms.Padding(10);
-            this.tabOverview.Size = new System.Drawing.Size(1172, 551);
+            this.tabOverview.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
+            this.tabOverview.Size = new System.Drawing.Size(1024, 432);
             this.tabOverview.TabIndex = 0;
             this.tabOverview.Text = "Overview";
             // 
             // splitOverview
             // 
             this.splitOverview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitOverview.Location = new System.Drawing.Point(10, 325);
+            this.splitOverview.Location = new System.Drawing.Point(9, 260);
+            this.splitOverview.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitOverview.Name = "splitOverview";
             // 
             // splitOverview.Panel1
             // 
             this.splitOverview.Panel1.Controls.Add(this.gridTopItemsSmall);
             this.splitOverview.Panel1.Controls.Add(this.lblTopItemsSmallTitle);
-            // 
-            // splitOverview.Panel2
-            // 
-            this.splitOverview.Panel2.Controls.Add(this.chartMonthlyPurchases);
-            this.splitOverview.Size = new System.Drawing.Size(1152, 216);
-            this.splitOverview.SplitterDistance = 430;
+            this.splitOverview.Size = new System.Drawing.Size(1006, 164);
+            this.splitOverview.SplitterDistance = 375;
             this.splitOverview.TabIndex = 3;
             // 
             // gridTopItemsSmall
@@ -232,18 +232,21 @@
             this.colTopItemQty,
             this.colTopItemValue});
             this.gridTopItemsSmall.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridTopItemsSmall.Location = new System.Drawing.Point(0, 24);
+            this.gridTopItemsSmall.Location = new System.Drawing.Point(0, 19);
+            this.gridTopItemsSmall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridTopItemsSmall.Name = "gridTopItemsSmall";
             this.gridTopItemsSmall.ReadOnly = true;
             this.gridTopItemsSmall.RowHeadersVisible = false;
+            this.gridTopItemsSmall.RowHeadersWidth = 51;
             this.gridTopItemsSmall.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridTopItemsSmall.Size = new System.Drawing.Size(430, 192);
+            this.gridTopItemsSmall.Size = new System.Drawing.Size(375, 145);
             this.gridTopItemsSmall.TabIndex = 1;
             // 
             // colTopItemName
             // 
             this.colTopItemName.DataPropertyName = "item_name";
             this.colTopItemName.HeaderText = "Item";
+            this.colTopItemName.MinimumWidth = 6;
             this.colTopItemName.Name = "colTopItemName";
             this.colTopItemName.ReadOnly = true;
             // 
@@ -251,6 +254,7 @@
             // 
             this.colTopItemQty.DataPropertyName = "qty";
             this.colTopItemQty.HeaderText = "Qty";
+            this.colTopItemQty.MinimumWidth = 6;
             this.colTopItemQty.Name = "colTopItemQty";
             this.colTopItemQty.ReadOnly = true;
             // 
@@ -258,6 +262,7 @@
             // 
             this.colTopItemValue.DataPropertyName = "total_value";
             this.colTopItemValue.HeaderText = "Total Value";
+            this.colTopItemValue.MinimumWidth = 6;
             this.colTopItemValue.Name = "colTopItemValue";
             this.colTopItemValue.ReadOnly = true;
             // 
@@ -267,29 +272,30 @@
             this.lblTopItemsSmallTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.lblTopItemsSmallTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTopItemsSmallTitle.Name = "lblTopItemsSmallTitle";
-            this.lblTopItemsSmallTitle.Size = new System.Drawing.Size(430, 24);
+            this.lblTopItemsSmallTitle.Size = new System.Drawing.Size(375, 19);
             this.lblTopItemsSmallTitle.TabIndex = 0;
             this.lblTopItemsSmallTitle.Text = "Top 5 purchased items";
             this.lblTopItemsSmallTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chartMonthlyPurchases
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartMonthlyPurchases.ChartAreas.Add(chartArea1);
+            chartArea17.Name = "ChartArea1";
+            this.chartMonthlyPurchases.ChartAreas.Add(chartArea17);
             this.chartMonthlyPurchases.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chartMonthlyPurchases.Legends.Add(legend1);
-            this.chartMonthlyPurchases.Location = new System.Drawing.Point(0, 0);
+            legend17.Enabled = false;
+            legend17.Name = "Legend1";
+            this.chartMonthlyPurchases.Legends.Add(legend17);
+            this.chartMonthlyPurchases.Location = new System.Drawing.Point(9, 260);
+            this.chartMonthlyPurchases.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartMonthlyPurchases.Name = "chartMonthlyPurchases";
-            series1.ChartArea = "ChartArea1";
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(105)))), ((int)(((byte)(92)))));
-            series1.Legend = "Legend1";
-            series1.Name = "Monthly";
-            series1.XValueMember = "month_label";
-            series1.YValueMembers = "amount";
-            this.chartMonthlyPurchases.Series.Add(series1);
-            this.chartMonthlyPurchases.Size = new System.Drawing.Size(718, 216);
+            series17.ChartArea = "ChartArea1";
+            series17.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(105)))), ((int)(((byte)(92)))));
+            series17.Legend = "Legend1";
+            series17.Name = "Monthly";
+            series17.XValueMember = "month_label";
+            series17.YValueMembers = "amount";
+            this.chartMonthlyPurchases.Series.Add(series17);
+            this.chartMonthlyPurchases.Size = new System.Drawing.Size(1006, 164);
             this.chartMonthlyPurchases.TabIndex = 0;
             // 
             // tableKpi
@@ -304,11 +310,12 @@
             this.tableKpi.Controls.Add(this.pnlKpi3, 2, 0);
             this.tableKpi.Controls.Add(this.pnlKpi4, 3, 0);
             this.tableKpi.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableKpi.Location = new System.Drawing.Point(10, 205);
+            this.tableKpi.Location = new System.Drawing.Point(9, 164);
+            this.tableKpi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableKpi.Name = "tableKpi";
             this.tableKpi.RowCount = 1;
             this.tableKpi.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableKpi.Size = new System.Drawing.Size(1152, 120);
+            this.tableKpi.Size = new System.Drawing.Size(1006, 96);
             this.tableKpi.TabIndex = 2;
             // 
             // pnlKpi1
@@ -317,27 +324,28 @@
             this.pnlKpi1.Controls.Add(this.lblLifetimePurchasesValue);
             this.pnlKpi1.Controls.Add(this.lblLifetimePurchasesTitle);
             this.pnlKpi1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlKpi1.Location = new System.Drawing.Point(3, 3);
+            this.pnlKpi1.Location = new System.Drawing.Point(3, 2);
+            this.pnlKpi1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlKpi1.Name = "pnlKpi1";
-            this.pnlKpi1.Size = new System.Drawing.Size(282, 114);
+            this.pnlKpi1.Size = new System.Drawing.Size(245, 92);
             this.pnlKpi1.TabIndex = 0;
             // 
             // lblLifetimePurchasesValue
             // 
             this.lblLifetimePurchasesValue.AutoSize = true;
             this.lblLifetimePurchasesValue.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.lblLifetimePurchasesValue.Location = new System.Drawing.Point(13, 52);
+            this.lblLifetimePurchasesValue.Location = new System.Drawing.Point(11, 42);
             this.lblLifetimePurchasesValue.Name = "lblLifetimePurchasesValue";
-            this.lblLifetimePurchasesValue.Size = new System.Drawing.Size(56, 32);
+            this.lblLifetimePurchasesValue.Size = new System.Drawing.Size(59, 32);
             this.lblLifetimePurchasesValue.TabIndex = 1;
             this.lblLifetimePurchasesValue.Text = "0.00";
             // 
             // lblLifetimePurchasesTitle
             // 
             this.lblLifetimePurchasesTitle.AutoSize = true;
-            this.lblLifetimePurchasesTitle.Location = new System.Drawing.Point(16, 12);
+            this.lblLifetimePurchasesTitle.Location = new System.Drawing.Point(14, 10);
             this.lblLifetimePurchasesTitle.Name = "lblLifetimePurchasesTitle";
-            this.lblLifetimePurchasesTitle.Size = new System.Drawing.Size(120, 20);
+            this.lblLifetimePurchasesTitle.Size = new System.Drawing.Size(131, 20);
             this.lblLifetimePurchasesTitle.TabIndex = 0;
             this.lblLifetimePurchasesTitle.Text = "Lifetime Purchases";
             // 
@@ -347,27 +355,28 @@
             this.pnlKpi2.Controls.Add(this.lblTotalPaidValue);
             this.pnlKpi2.Controls.Add(this.lblTotalPaidTitle);
             this.pnlKpi2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlKpi2.Location = new System.Drawing.Point(291, 3);
+            this.pnlKpi2.Location = new System.Drawing.Point(254, 2);
+            this.pnlKpi2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlKpi2.Name = "pnlKpi2";
-            this.pnlKpi2.Size = new System.Drawing.Size(282, 114);
+            this.pnlKpi2.Size = new System.Drawing.Size(245, 92);
             this.pnlKpi2.TabIndex = 1;
             // 
             // lblTotalPaidValue
             // 
             this.lblTotalPaidValue.AutoSize = true;
             this.lblTotalPaidValue.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTotalPaidValue.Location = new System.Drawing.Point(14, 52);
+            this.lblTotalPaidValue.Location = new System.Drawing.Point(12, 42);
             this.lblTotalPaidValue.Name = "lblTotalPaidValue";
-            this.lblTotalPaidValue.Size = new System.Drawing.Size(56, 32);
+            this.lblTotalPaidValue.Size = new System.Drawing.Size(59, 32);
             this.lblTotalPaidValue.TabIndex = 1;
             this.lblTotalPaidValue.Text = "0.00";
             // 
             // lblTotalPaidTitle
             // 
             this.lblTotalPaidTitle.AutoSize = true;
-            this.lblTotalPaidTitle.Location = new System.Drawing.Point(17, 12);
+            this.lblTotalPaidTitle.Location = new System.Drawing.Point(15, 10);
             this.lblTotalPaidTitle.Name = "lblTotalPaidTitle";
-            this.lblTotalPaidTitle.Size = new System.Drawing.Size(67, 20);
+            this.lblTotalPaidTitle.Size = new System.Drawing.Size(74, 20);
             this.lblTotalPaidTitle.TabIndex = 0;
             this.lblTotalPaidTitle.Text = "Total Paid";
             // 
@@ -377,9 +386,10 @@
             this.pnlKpi3.Controls.Add(this.lblCurrentPayableValue);
             this.pnlKpi3.Controls.Add(this.lblCurrentPayableTitle);
             this.pnlKpi3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlKpi3.Location = new System.Drawing.Point(579, 3);
+            this.pnlKpi3.Location = new System.Drawing.Point(505, 2);
+            this.pnlKpi3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlKpi3.Name = "pnlKpi3";
-            this.pnlKpi3.Size = new System.Drawing.Size(282, 114);
+            this.pnlKpi3.Size = new System.Drawing.Size(245, 92);
             this.pnlKpi3.TabIndex = 2;
             // 
             // lblCurrentPayableValue
@@ -387,18 +397,18 @@
             this.lblCurrentPayableValue.AutoSize = true;
             this.lblCurrentPayableValue.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.lblCurrentPayableValue.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblCurrentPayableValue.Location = new System.Drawing.Point(14, 52);
+            this.lblCurrentPayableValue.Location = new System.Drawing.Point(12, 42);
             this.lblCurrentPayableValue.Name = "lblCurrentPayableValue";
-            this.lblCurrentPayableValue.Size = new System.Drawing.Size(56, 32);
+            this.lblCurrentPayableValue.Size = new System.Drawing.Size(59, 32);
             this.lblCurrentPayableValue.TabIndex = 1;
             this.lblCurrentPayableValue.Text = "0.00";
             // 
             // lblCurrentPayableTitle
             // 
             this.lblCurrentPayableTitle.AutoSize = true;
-            this.lblCurrentPayableTitle.Location = new System.Drawing.Point(17, 12);
+            this.lblCurrentPayableTitle.Location = new System.Drawing.Point(15, 10);
             this.lblCurrentPayableTitle.Name = "lblCurrentPayableTitle";
-            this.lblCurrentPayableTitle.Size = new System.Drawing.Size(107, 20);
+            this.lblCurrentPayableTitle.Size = new System.Drawing.Size(112, 20);
             this.lblCurrentPayableTitle.TabIndex = 0;
             this.lblCurrentPayableTitle.Text = "Current Payable";
             // 
@@ -408,27 +418,28 @@
             this.pnlKpi4.Controls.Add(this.lblAvailableCreditValue);
             this.pnlKpi4.Controls.Add(this.lblAvailableCreditTitle);
             this.pnlKpi4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlKpi4.Location = new System.Drawing.Point(867, 3);
+            this.pnlKpi4.Location = new System.Drawing.Point(756, 2);
+            this.pnlKpi4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlKpi4.Name = "pnlKpi4";
-            this.pnlKpi4.Size = new System.Drawing.Size(282, 114);
+            this.pnlKpi4.Size = new System.Drawing.Size(247, 92);
             this.pnlKpi4.TabIndex = 3;
             // 
             // lblAvailableCreditValue
             // 
             this.lblAvailableCreditValue.AutoSize = true;
             this.lblAvailableCreditValue.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.lblAvailableCreditValue.Location = new System.Drawing.Point(14, 52);
+            this.lblAvailableCreditValue.Location = new System.Drawing.Point(12, 42);
             this.lblAvailableCreditValue.Name = "lblAvailableCreditValue";
-            this.lblAvailableCreditValue.Size = new System.Drawing.Size(56, 32);
+            this.lblAvailableCreditValue.Size = new System.Drawing.Size(59, 32);
             this.lblAvailableCreditValue.TabIndex = 1;
             this.lblAvailableCreditValue.Text = "0.00";
             // 
             // lblAvailableCreditTitle
             // 
             this.lblAvailableCreditTitle.AutoSize = true;
-            this.lblAvailableCreditTitle.Location = new System.Drawing.Point(17, 12);
+            this.lblAvailableCreditTitle.Location = new System.Drawing.Point(15, 10);
             this.lblAvailableCreditTitle.Name = "lblAvailableCreditTitle";
-            this.lblAvailableCreditTitle.Size = new System.Drawing.Size(101, 20);
+            this.lblAvailableCreditTitle.Size = new System.Drawing.Size(115, 20);
             this.lblAvailableCreditTitle.TabIndex = 0;
             this.lblAvailableCreditTitle.Text = "Available Credit";
             // 
@@ -443,42 +454,43 @@
             this.pnlOverviewHeader.Controls.Add(this.lblHeaderName);
             this.pnlOverviewHeader.Controls.Add(this.pnlAvatar);
             this.pnlOverviewHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlOverviewHeader.Location = new System.Drawing.Point(10, 10);
+            this.pnlOverviewHeader.Location = new System.Drawing.Point(9, 8);
+            this.pnlOverviewHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlOverviewHeader.Name = "pnlOverviewHeader";
-            this.pnlOverviewHeader.Size = new System.Drawing.Size(1152, 195);
+            this.pnlOverviewHeader.Size = new System.Drawing.Size(1006, 156);
             this.pnlOverviewHeader.TabIndex = 1;
             // 
             // lblHeaderCreditDays
             // 
             this.lblHeaderCreditDays.AutoSize = true;
-            this.lblHeaderCreditDays.Location = new System.Drawing.Point(147, 159);
+            this.lblHeaderCreditDays.Location = new System.Drawing.Point(129, 127);
             this.lblHeaderCreditDays.Name = "lblHeaderCreditDays";
-            this.lblHeaderCreditDays.Size = new System.Drawing.Size(99, 20);
+            this.lblHeaderCreditDays.Size = new System.Drawing.Size(107, 20);
             this.lblHeaderCreditDays.TabIndex = 6;
             this.lblHeaderCreditDays.Text = "Credit Terms: 0";
             // 
             // lblHeaderEmail
             // 
             this.lblHeaderEmail.AutoSize = true;
-            this.lblHeaderEmail.Location = new System.Drawing.Point(147, 132);
+            this.lblHeaderEmail.Location = new System.Drawing.Point(129, 106);
             this.lblHeaderEmail.Name = "lblHeaderEmail";
-            this.lblHeaderEmail.Size = new System.Drawing.Size(106, 20);
+            this.lblHeaderEmail.Size = new System.Drawing.Size(113, 20);
             this.lblHeaderEmail.TabIndex = 5;
             this.lblHeaderEmail.Text = "Email: no-email";
             // 
             // lblHeaderPhone
             // 
             this.lblHeaderPhone.AutoSize = true;
-            this.lblHeaderPhone.Location = new System.Drawing.Point(147, 105);
+            this.lblHeaderPhone.Location = new System.Drawing.Point(129, 84);
             this.lblHeaderPhone.Name = "lblHeaderPhone";
-            this.lblHeaderPhone.Size = new System.Drawing.Size(73, 20);
+            this.lblHeaderPhone.Size = new System.Drawing.Size(63, 20);
             this.lblHeaderPhone.TabIndex = 4;
             this.lblHeaderPhone.Text = "Phone: -";
             // 
             // lblHeaderCategory
             // 
             this.lblHeaderCategory.AutoSize = true;
-            this.lblHeaderCategory.Location = new System.Drawing.Point(420, 105);
+            this.lblHeaderCategory.Location = new System.Drawing.Point(368, 84);
             this.lblHeaderCategory.Name = "lblHeaderCategory";
             this.lblHeaderCategory.Size = new System.Drawing.Size(82, 20);
             this.lblHeaderCategory.TabIndex = 3;
@@ -487,9 +499,9 @@
             // lblHeaderCode
             // 
             this.lblHeaderCode.AutoSize = true;
-            this.lblHeaderCode.Location = new System.Drawing.Point(420, 66);
+            this.lblHeaderCode.Location = new System.Drawing.Point(368, 53);
             this.lblHeaderCode.Name = "lblHeaderCode";
-            this.lblHeaderCode.Size = new System.Drawing.Size(95, 20);
+            this.lblHeaderCode.Size = new System.Drawing.Size(99, 20);
             this.lblHeaderCode.TabIndex = 2;
             this.lblHeaderCode.Text = "Code: S00000";
             // 
@@ -497,17 +509,18 @@
             // 
             this.lblHeaderName.AutoSize = true;
             this.lblHeaderName.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.lblHeaderName.Location = new System.Drawing.Point(145, 57);
+            this.lblHeaderName.Location = new System.Drawing.Point(127, 46);
             this.lblHeaderName.Name = "lblHeaderName";
-            this.lblHeaderName.Size = new System.Drawing.Size(151, 32);
+            this.lblHeaderName.Size = new System.Drawing.Size(175, 32);
             this.lblHeaderName.TabIndex = 1;
             this.lblHeaderName.Text = "Supplier Name";
             // 
             // pnlAvatar
             // 
-            this.pnlAvatar.Location = new System.Drawing.Point(17, 47);
+            this.pnlAvatar.Location = new System.Drawing.Point(15, 38);
+            this.pnlAvatar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAvatar.Name = "pnlAvatar";
-            this.pnlAvatar.Size = new System.Drawing.Size(110, 114);
+            this.pnlAvatar.Size = new System.Drawing.Size(96, 91);
             this.pnlAvatar.TabIndex = 0;
             this.pnlAvatar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAvatar_Paint);
             // 
@@ -518,9 +531,10 @@
             this.tabLedger.Controls.Add(this.pnlLedgerFooter);
             this.tabLedger.Controls.Add(this.pnlLedgerFilter);
             this.tabLedger.Location = new System.Drawing.Point(4, 38);
+            this.tabLedger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabLedger.Name = "tabLedger";
-            this.tabLedger.Padding = new System.Windows.Forms.Padding(8);
-            this.tabLedger.Size = new System.Drawing.Size(1172, 551);
+            this.tabLedger.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.tabLedger.Size = new System.Drawing.Size(1024, 432);
             this.tabLedger.TabIndex = 1;
             this.tabLedger.Text = "Account Ledger";
             // 
@@ -538,18 +552,21 @@
             this.colLedgerCredit,
             this.colLedgerBalance});
             this.gridLedger.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridLedger.Location = new System.Drawing.Point(8, 56);
+            this.gridLedger.Location = new System.Drawing.Point(7, 44);
+            this.gridLedger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridLedger.Name = "gridLedger";
             this.gridLedger.ReadOnly = true;
             this.gridLedger.RowHeadersVisible = false;
+            this.gridLedger.RowHeadersWidth = 51;
             this.gridLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridLedger.Size = new System.Drawing.Size(1156, 455);
+            this.gridLedger.Size = new System.Drawing.Size(1010, 347);
             this.gridLedger.TabIndex = 1;
             // 
             // colLedgerDate
             // 
             this.colLedgerDate.DataPropertyName = "entry_date";
             this.colLedgerDate.HeaderText = "Date";
+            this.colLedgerDate.MinimumWidth = 6;
             this.colLedgerDate.Name = "colLedgerDate";
             this.colLedgerDate.ReadOnly = true;
             // 
@@ -557,6 +574,7 @@
             // 
             this.colLedgerType.DataPropertyName = "trans_type";
             this.colLedgerType.HeaderText = "Type";
+            this.colLedgerType.MinimumWidth = 6;
             this.colLedgerType.Name = "colLedgerType";
             this.colLedgerType.ReadOnly = true;
             // 
@@ -564,6 +582,7 @@
             // 
             this.colLedgerRef.DataPropertyName = "reference_no";
             this.colLedgerRef.HeaderText = "Reference No";
+            this.colLedgerRef.MinimumWidth = 6;
             this.colLedgerRef.Name = "colLedgerRef";
             this.colLedgerRef.ReadOnly = true;
             // 
@@ -571,6 +590,7 @@
             // 
             this.colLedgerDebit.DataPropertyName = "debit";
             this.colLedgerDebit.HeaderText = "Debit (Payment made)";
+            this.colLedgerDebit.MinimumWidth = 6;
             this.colLedgerDebit.Name = "colLedgerDebit";
             this.colLedgerDebit.ReadOnly = true;
             // 
@@ -578,6 +598,7 @@
             // 
             this.colLedgerCredit.DataPropertyName = "credit";
             this.colLedgerCredit.HeaderText = "Credit (Bill received)";
+            this.colLedgerCredit.MinimumWidth = 6;
             this.colLedgerCredit.Name = "colLedgerCredit";
             this.colLedgerCredit.ReadOnly = true;
             // 
@@ -585,34 +606,38 @@
             // 
             this.colLedgerBalance.DataPropertyName = "running_balance";
             this.colLedgerBalance.HeaderText = "Running Balance";
+            this.colLedgerBalance.MinimumWidth = 6;
             this.colLedgerBalance.Name = "colLedgerBalance";
             this.colLedgerBalance.ReadOnly = true;
             // 
             // pnlLedgerFooter
             // 
+            this.pnlLedgerFooter.Controls.Add(this.Btn_ledger_report);
             this.pnlLedgerFooter.Controls.Add(this.lblLedgerTotals);
             this.pnlLedgerFooter.Controls.Add(this.btnPrintStatement);
             this.pnlLedgerFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlLedgerFooter.Location = new System.Drawing.Point(8, 511);
+            this.pnlLedgerFooter.Location = new System.Drawing.Point(7, 391);
+            this.pnlLedgerFooter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLedgerFooter.Name = "pnlLedgerFooter";
-            this.pnlLedgerFooter.Size = new System.Drawing.Size(1156, 32);
+            this.pnlLedgerFooter.Size = new System.Drawing.Size(1010, 35);
             this.pnlLedgerFooter.TabIndex = 2;
             // 
             // lblLedgerTotals
             // 
             this.lblLedgerTotals.AutoSize = true;
-            this.lblLedgerTotals.Location = new System.Drawing.Point(3, 8);
+            this.lblLedgerTotals.Location = new System.Drawing.Point(3, 6);
             this.lblLedgerTotals.Name = "lblLedgerTotals";
-            this.lblLedgerTotals.Size = new System.Drawing.Size(185, 20);
+            this.lblLedgerTotals.Size = new System.Drawing.Size(206, 20);
             this.lblLedgerTotals.TabIndex = 0;
             this.lblLedgerTotals.Text = "Totals: DR 0.00 | CR 0.00 | 0.00";
             // 
             // btnPrintStatement
             // 
             this.btnPrintStatement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintStatement.Location = new System.Drawing.Point(1035, 3);
+            this.btnPrintStatement.Location = new System.Drawing.Point(896, 2);
+            this.btnPrintStatement.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrintStatement.Name = "btnPrintStatement";
-            this.btnPrintStatement.Size = new System.Drawing.Size(118, 26);
+            this.btnPrintStatement.Size = new System.Drawing.Size(110, 31);
             this.btnPrintStatement.TabIndex = 1;
             this.btnPrintStatement.Text = "Print Statement";
             this.btnPrintStatement.UseVisualStyleBackColor = true;
@@ -626,16 +651,18 @@
             this.pnlLedgerFilter.Controls.Add(this.dtLedgerFrom);
             this.pnlLedgerFilter.Controls.Add(this.lblLedgerFrom);
             this.pnlLedgerFilter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLedgerFilter.Location = new System.Drawing.Point(8, 8);
+            this.pnlLedgerFilter.Location = new System.Drawing.Point(7, 6);
+            this.pnlLedgerFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlLedgerFilter.Name = "pnlLedgerFilter";
-            this.pnlLedgerFilter.Size = new System.Drawing.Size(1156, 48);
+            this.pnlLedgerFilter.Size = new System.Drawing.Size(1010, 38);
             this.pnlLedgerFilter.TabIndex = 0;
             // 
             // btnLoadLedger
             // 
-            this.btnLoadLedger.Location = new System.Drawing.Point(557, 11);
+            this.btnLoadLedger.Location = new System.Drawing.Point(487, 9);
+            this.btnLoadLedger.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoadLedger.Name = "btnLoadLedger";
-            this.btnLoadLedger.Size = new System.Drawing.Size(90, 26);
+            this.btnLoadLedger.Size = new System.Drawing.Size(79, 27);
             this.btnLoadLedger.TabIndex = 4;
             this.btnLoadLedger.Text = "Load";
             this.btnLoadLedger.UseVisualStyleBackColor = true;
@@ -644,34 +671,36 @@
             // dtLedgerTo
             // 
             this.dtLedgerTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtLedgerTo.Location = new System.Drawing.Point(399, 12);
+            this.dtLedgerTo.Location = new System.Drawing.Point(349, 10);
+            this.dtLedgerTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtLedgerTo.Name = "dtLedgerTo";
-            this.dtLedgerTo.Size = new System.Drawing.Size(140, 27);
+            this.dtLedgerTo.Size = new System.Drawing.Size(123, 27);
             this.dtLedgerTo.TabIndex = 3;
             // 
             // lblLedgerTo
             // 
             this.lblLedgerTo.AutoSize = true;
-            this.lblLedgerTo.Location = new System.Drawing.Point(368, 16);
+            this.lblLedgerTo.Location = new System.Drawing.Point(322, 13);
             this.lblLedgerTo.Name = "lblLedgerTo";
-            this.lblLedgerTo.Size = new System.Drawing.Size(27, 20);
+            this.lblLedgerTo.Size = new System.Drawing.Size(25, 20);
             this.lblLedgerTo.TabIndex = 2;
             this.lblLedgerTo.Text = "To";
             // 
             // dtLedgerFrom
             // 
             this.dtLedgerFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtLedgerFrom.Location = new System.Drawing.Point(214, 12);
+            this.dtLedgerFrom.Location = new System.Drawing.Point(187, 10);
+            this.dtLedgerFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtLedgerFrom.Name = "dtLedgerFrom";
-            this.dtLedgerFrom.Size = new System.Drawing.Size(140, 27);
+            this.dtLedgerFrom.Size = new System.Drawing.Size(123, 27);
             this.dtLedgerFrom.TabIndex = 1;
             // 
             // lblLedgerFrom
             // 
             this.lblLedgerFrom.AutoSize = true;
-            this.lblLedgerFrom.Location = new System.Drawing.Point(168, 16);
+            this.lblLedgerFrom.Location = new System.Drawing.Point(147, 13);
             this.lblLedgerFrom.Name = "lblLedgerFrom";
-            this.lblLedgerFrom.Size = new System.Drawing.Size(45, 20);
+            this.lblLedgerFrom.Size = new System.Drawing.Size(43, 20);
             this.lblLedgerFrom.TabIndex = 0;
             this.lblLedgerFrom.Text = "From";
             // 
@@ -681,9 +710,10 @@
             this.tabOutstanding.Controls.Add(this.gridOutstanding);
             this.tabOutstanding.Controls.Add(this.pnlOutstandingBottom);
             this.tabOutstanding.Location = new System.Drawing.Point(4, 38);
+            this.tabOutstanding.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabOutstanding.Name = "tabOutstanding";
-            this.tabOutstanding.Padding = new System.Windows.Forms.Padding(8);
-            this.tabOutstanding.Size = new System.Drawing.Size(1172, 551);
+            this.tabOutstanding.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.tabOutstanding.Size = new System.Drawing.Size(1024, 432);
             this.tabOutstanding.TabIndex = 2;
             this.tabOutstanding.Text = "Outstanding Bills";
             // 
@@ -702,18 +732,21 @@
             this.colOutBalance,
             this.colOutDays});
             this.gridOutstanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridOutstanding.Location = new System.Drawing.Point(8, 8);
+            this.gridOutstanding.Location = new System.Drawing.Point(7, 6);
+            this.gridOutstanding.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridOutstanding.Name = "gridOutstanding";
             this.gridOutstanding.ReadOnly = true;
             this.gridOutstanding.RowHeadersVisible = false;
+            this.gridOutstanding.RowHeadersWidth = 51;
             this.gridOutstanding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridOutstanding.Size = new System.Drawing.Size(1156, 467);
+            this.gridOutstanding.Size = new System.Drawing.Size(1010, 366);
             this.gridOutstanding.TabIndex = 0;
             // 
             // colOutBillNo
             // 
             this.colOutBillNo.DataPropertyName = "invoice_no";
             this.colOutBillNo.HeaderText = "Bill No";
+            this.colOutBillNo.MinimumWidth = 6;
             this.colOutBillNo.Name = "colOutBillNo";
             this.colOutBillNo.ReadOnly = true;
             // 
@@ -721,6 +754,7 @@
             // 
             this.colOutBillDate.DataPropertyName = "purchase_date";
             this.colOutBillDate.HeaderText = "Bill Date";
+            this.colOutBillDate.MinimumWidth = 6;
             this.colOutBillDate.Name = "colOutBillDate";
             this.colOutBillDate.ReadOnly = true;
             // 
@@ -728,6 +762,7 @@
             // 
             this.colOutDueDate.DataPropertyName = "due_date";
             this.colOutDueDate.HeaderText = "Due Date";
+            this.colOutDueDate.MinimumWidth = 6;
             this.colOutDueDate.Name = "colOutDueDate";
             this.colOutDueDate.ReadOnly = true;
             // 
@@ -735,6 +770,7 @@
             // 
             this.colOutAmount.DataPropertyName = "amount";
             this.colOutAmount.HeaderText = "Amount";
+            this.colOutAmount.MinimumWidth = 6;
             this.colOutAmount.Name = "colOutAmount";
             this.colOutAmount.ReadOnly = true;
             // 
@@ -742,6 +778,7 @@
             // 
             this.colOutPaid.DataPropertyName = "paid";
             this.colOutPaid.HeaderText = "Paid";
+            this.colOutPaid.MinimumWidth = 6;
             this.colOutPaid.Name = "colOutPaid";
             this.colOutPaid.ReadOnly = true;
             // 
@@ -749,6 +786,7 @@
             // 
             this.colOutBalance.DataPropertyName = "balance";
             this.colOutBalance.HeaderText = "Balance";
+            this.colOutBalance.MinimumWidth = 6;
             this.colOutBalance.Name = "colOutBalance";
             this.colOutBalance.ReadOnly = true;
             // 
@@ -756,6 +794,7 @@
             // 
             this.colOutDays.DataPropertyName = "days_overdue";
             this.colOutDays.HeaderText = "Days Overdue";
+            this.colOutDays.MinimumWidth = 6;
             this.colOutDays.Name = "colOutDays";
             this.colOutDays.ReadOnly = true;
             // 
@@ -764,17 +803,19 @@
             this.pnlOutstandingBottom.Controls.Add(this.btnMakePayment);
             this.pnlOutstandingBottom.Controls.Add(this.flowAging);
             this.pnlOutstandingBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlOutstandingBottom.Location = new System.Drawing.Point(8, 475);
+            this.pnlOutstandingBottom.Location = new System.Drawing.Point(7, 372);
+            this.pnlOutstandingBottom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlOutstandingBottom.Name = "pnlOutstandingBottom";
-            this.pnlOutstandingBottom.Size = new System.Drawing.Size(1156, 68);
+            this.pnlOutstandingBottom.Size = new System.Drawing.Size(1010, 54);
             this.pnlOutstandingBottom.TabIndex = 1;
             // 
             // btnMakePayment
             // 
             this.btnMakePayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMakePayment.Location = new System.Drawing.Point(1030, 21);
+            this.btnMakePayment.Location = new System.Drawing.Point(899, 17);
+            this.btnMakePayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMakePayment.Name = "btnMakePayment";
-            this.btnMakePayment.Size = new System.Drawing.Size(123, 33);
+            this.btnMakePayment.Size = new System.Drawing.Size(108, 26);
             this.btnMakePayment.TabIndex = 1;
             this.btnMakePayment.Text = "Make Payment";
             this.btnMakePayment.UseVisualStyleBackColor = true;
@@ -789,8 +830,9 @@
             this.flowAging.Controls.Add(this.pnlAging90Plus);
             this.flowAging.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowAging.Location = new System.Drawing.Point(0, 0);
+            this.flowAging.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowAging.Name = "flowAging";
-            this.flowAging.Size = new System.Drawing.Size(1007, 68);
+            this.flowAging.Size = new System.Drawing.Size(881, 54);
             this.flowAging.TabIndex = 0;
             // 
             // pnlAgingCurrent
@@ -798,27 +840,28 @@
             this.pnlAgingCurrent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAgingCurrent.Controls.Add(this.lblAgeCurrentValue);
             this.pnlAgingCurrent.Controls.Add(this.lblAgeCurrentTitle);
-            this.pnlAgingCurrent.Location = new System.Drawing.Point(3, 3);
+            this.pnlAgingCurrent.Location = new System.Drawing.Point(3, 2);
+            this.pnlAgingCurrent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAgingCurrent.Name = "pnlAgingCurrent";
-            this.pnlAgingCurrent.Size = new System.Drawing.Size(190, 60);
+            this.pnlAgingCurrent.Size = new System.Drawing.Size(166, 48);
             this.pnlAgingCurrent.TabIndex = 0;
             // 
             // lblAgeCurrentValue
             // 
             this.lblAgeCurrentValue.AutoSize = true;
             this.lblAgeCurrentValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAgeCurrentValue.Location = new System.Drawing.Point(8, 33);
+            this.lblAgeCurrentValue.Location = new System.Drawing.Point(7, 26);
             this.lblAgeCurrentValue.Name = "lblAgeCurrentValue";
-            this.lblAgeCurrentValue.Size = new System.Drawing.Size(36, 20);
+            this.lblAgeCurrentValue.Size = new System.Drawing.Size(40, 20);
             this.lblAgeCurrentValue.TabIndex = 1;
             this.lblAgeCurrentValue.Text = "0.00";
             // 
             // lblAgeCurrentTitle
             // 
             this.lblAgeCurrentTitle.AutoSize = true;
-            this.lblAgeCurrentTitle.Location = new System.Drawing.Point(8, 8);
+            this.lblAgeCurrentTitle.Location = new System.Drawing.Point(7, 6);
             this.lblAgeCurrentTitle.Name = "lblAgeCurrentTitle";
-            this.lblAgeCurrentTitle.Size = new System.Drawing.Size(59, 20);
+            this.lblAgeCurrentTitle.Size = new System.Drawing.Size(57, 20);
             this.lblAgeCurrentTitle.TabIndex = 0;
             this.lblAgeCurrentTitle.Text = "Current";
             // 
@@ -827,27 +870,28 @@
             this.pnlAging1_30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAging1_30.Controls.Add(this.lblAge1_30Value);
             this.pnlAging1_30.Controls.Add(this.lblAge1_30Title);
-            this.pnlAging1_30.Location = new System.Drawing.Point(199, 3);
+            this.pnlAging1_30.Location = new System.Drawing.Point(175, 2);
+            this.pnlAging1_30.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAging1_30.Name = "pnlAging1_30";
-            this.pnlAging1_30.Size = new System.Drawing.Size(190, 60);
+            this.pnlAging1_30.Size = new System.Drawing.Size(166, 48);
             this.pnlAging1_30.TabIndex = 1;
             // 
             // lblAge1_30Value
             // 
             this.lblAge1_30Value.AutoSize = true;
             this.lblAge1_30Value.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAge1_30Value.Location = new System.Drawing.Point(8, 33);
+            this.lblAge1_30Value.Location = new System.Drawing.Point(7, 26);
             this.lblAge1_30Value.Name = "lblAge1_30Value";
-            this.lblAge1_30Value.Size = new System.Drawing.Size(36, 20);
+            this.lblAge1_30Value.Size = new System.Drawing.Size(40, 20);
             this.lblAge1_30Value.TabIndex = 1;
             this.lblAge1_30Value.Text = "0.00";
             // 
             // lblAge1_30Title
             // 
             this.lblAge1_30Title.AutoSize = true;
-            this.lblAge1_30Title.Location = new System.Drawing.Point(8, 8);
+            this.lblAge1_30Title.Location = new System.Drawing.Point(7, 6);
             this.lblAge1_30Title.Name = "lblAge1_30Title";
-            this.lblAge1_30Title.Size = new System.Drawing.Size(40, 20);
+            this.lblAge1_30Title.Size = new System.Drawing.Size(39, 20);
             this.lblAge1_30Title.TabIndex = 0;
             this.lblAge1_30Title.Text = "1-30";
             // 
@@ -856,27 +900,28 @@
             this.pnlAging31_60.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAging31_60.Controls.Add(this.lblAge31_60Value);
             this.pnlAging31_60.Controls.Add(this.lblAge31_60Title);
-            this.pnlAging31_60.Location = new System.Drawing.Point(395, 3);
+            this.pnlAging31_60.Location = new System.Drawing.Point(347, 2);
+            this.pnlAging31_60.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAging31_60.Name = "pnlAging31_60";
-            this.pnlAging31_60.Size = new System.Drawing.Size(190, 60);
+            this.pnlAging31_60.Size = new System.Drawing.Size(166, 48);
             this.pnlAging31_60.TabIndex = 2;
             // 
             // lblAge31_60Value
             // 
             this.lblAge31_60Value.AutoSize = true;
             this.lblAge31_60Value.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAge31_60Value.Location = new System.Drawing.Point(8, 33);
+            this.lblAge31_60Value.Location = new System.Drawing.Point(7, 26);
             this.lblAge31_60Value.Name = "lblAge31_60Value";
-            this.lblAge31_60Value.Size = new System.Drawing.Size(36, 20);
+            this.lblAge31_60Value.Size = new System.Drawing.Size(40, 20);
             this.lblAge31_60Value.TabIndex = 1;
             this.lblAge31_60Value.Text = "0.00";
             // 
             // lblAge31_60Title
             // 
             this.lblAge31_60Title.AutoSize = true;
-            this.lblAge31_60Title.Location = new System.Drawing.Point(8, 8);
+            this.lblAge31_60Title.Location = new System.Drawing.Point(7, 6);
             this.lblAge31_60Title.Name = "lblAge31_60Title";
-            this.lblAge31_60Title.Size = new System.Drawing.Size(48, 20);
+            this.lblAge31_60Title.Size = new System.Drawing.Size(47, 20);
             this.lblAge31_60Title.TabIndex = 0;
             this.lblAge31_60Title.Text = "31-60";
             // 
@@ -885,27 +930,28 @@
             this.pnlAging61_90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAging61_90.Controls.Add(this.lblAge61_90Value);
             this.pnlAging61_90.Controls.Add(this.lblAge61_90Title);
-            this.pnlAging61_90.Location = new System.Drawing.Point(591, 3);
+            this.pnlAging61_90.Location = new System.Drawing.Point(519, 2);
+            this.pnlAging61_90.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAging61_90.Name = "pnlAging61_90";
-            this.pnlAging61_90.Size = new System.Drawing.Size(190, 60);
+            this.pnlAging61_90.Size = new System.Drawing.Size(166, 48);
             this.pnlAging61_90.TabIndex = 3;
             // 
             // lblAge61_90Value
             // 
             this.lblAge61_90Value.AutoSize = true;
             this.lblAge61_90Value.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAge61_90Value.Location = new System.Drawing.Point(8, 33);
+            this.lblAge61_90Value.Location = new System.Drawing.Point(7, 26);
             this.lblAge61_90Value.Name = "lblAge61_90Value";
-            this.lblAge61_90Value.Size = new System.Drawing.Size(36, 20);
+            this.lblAge61_90Value.Size = new System.Drawing.Size(40, 20);
             this.lblAge61_90Value.TabIndex = 1;
             this.lblAge61_90Value.Text = "0.00";
             // 
             // lblAge61_90Title
             // 
             this.lblAge61_90Title.AutoSize = true;
-            this.lblAge61_90Title.Location = new System.Drawing.Point(8, 8);
+            this.lblAge61_90Title.Location = new System.Drawing.Point(7, 6);
             this.lblAge61_90Title.Name = "lblAge61_90Title";
-            this.lblAge61_90Title.Size = new System.Drawing.Size(48, 20);
+            this.lblAge61_90Title.Size = new System.Drawing.Size(47, 20);
             this.lblAge61_90Title.TabIndex = 0;
             this.lblAge61_90Title.Text = "61-90";
             // 
@@ -914,27 +960,28 @@
             this.pnlAging90Plus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAging90Plus.Controls.Add(this.lblAge90PlusValue);
             this.pnlAging90Plus.Controls.Add(this.lblAge90PlusTitle);
-            this.pnlAging90Plus.Location = new System.Drawing.Point(787, 3);
+            this.pnlAging90Plus.Location = new System.Drawing.Point(691, 2);
+            this.pnlAging90Plus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAging90Plus.Name = "pnlAging90Plus";
-            this.pnlAging90Plus.Size = new System.Drawing.Size(190, 60);
+            this.pnlAging90Plus.Size = new System.Drawing.Size(166, 48);
             this.pnlAging90Plus.TabIndex = 4;
             // 
             // lblAge90PlusValue
             // 
             this.lblAge90PlusValue.AutoSize = true;
             this.lblAge90PlusValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblAge90PlusValue.Location = new System.Drawing.Point(8, 33);
+            this.lblAge90PlusValue.Location = new System.Drawing.Point(7, 26);
             this.lblAge90PlusValue.Name = "lblAge90PlusValue";
-            this.lblAge90PlusValue.Size = new System.Drawing.Size(36, 20);
+            this.lblAge90PlusValue.Size = new System.Drawing.Size(40, 20);
             this.lblAge90PlusValue.TabIndex = 1;
             this.lblAge90PlusValue.Text = "0.00";
             // 
             // lblAge90PlusTitle
             // 
             this.lblAge90PlusTitle.AutoSize = true;
-            this.lblAge90PlusTitle.Location = new System.Drawing.Point(8, 8);
+            this.lblAge90PlusTitle.Location = new System.Drawing.Point(7, 6);
             this.lblAge90PlusTitle.Name = "lblAge90PlusTitle";
-            this.lblAge90PlusTitle.Size = new System.Drawing.Size(34, 20);
+            this.lblAge90PlusTitle.Size = new System.Drawing.Size(35, 20);
             this.lblAge90PlusTitle.TabIndex = 0;
             this.lblAge90PlusTitle.Text = "90+";
             // 
@@ -943,9 +990,10 @@
             this.tabAnalytics.BackColor = System.Drawing.Color.White;
             this.tabAnalytics.Controls.Add(this.tableAnalytics);
             this.tabAnalytics.Location = new System.Drawing.Point(4, 38);
+            this.tabAnalytics.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabAnalytics.Name = "tabAnalytics";
-            this.tabAnalytics.Padding = new System.Windows.Forms.Padding(8);
-            this.tabAnalytics.Size = new System.Drawing.Size(1172, 551);
+            this.tabAnalytics.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.tabAnalytics.Size = new System.Drawing.Size(1024, 432);
             this.tabAnalytics.TabIndex = 3;
             this.tabAnalytics.Text = "Purchase History && Analytics";
             // 
@@ -959,14 +1007,15 @@
             this.tableAnalytics.Controls.Add(this.chartMonthlyTrend24, 1, 0);
             this.tableAnalytics.Controls.Add(this.chartTopProducts, 0, 0);
             this.tableAnalytics.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableAnalytics.Location = new System.Drawing.Point(8, 8);
+            this.tableAnalytics.Location = new System.Drawing.Point(7, 6);
+            this.tableAnalytics.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableAnalytics.Name = "tableAnalytics";
             this.tableAnalytics.RowCount = 4;
             this.tableAnalytics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableAnalytics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableAnalytics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableAnalytics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
+            this.tableAnalytics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableAnalytics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableAnalytics.Size = new System.Drawing.Size(1156, 535);
+            this.tableAnalytics.Size = new System.Drawing.Size(1010, 420);
             this.tableAnalytics.TabIndex = 0;
             // 
             // pnlPriceHistoryFilter
@@ -974,15 +1023,16 @@
             this.pnlPriceHistoryFilter.Controls.Add(this.lblPriceProduct);
             this.pnlPriceHistoryFilter.Controls.Add(this.cmbPriceProduct);
             this.pnlPriceHistoryFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPriceHistoryFilter.Location = new System.Drawing.Point(3, 250);
+            this.pnlPriceHistoryFilter.Location = new System.Drawing.Point(3, 202);
+            this.pnlPriceHistoryFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPriceHistoryFilter.Name = "pnlPriceHistoryFilter";
-            this.pnlPriceHistoryFilter.Size = new System.Drawing.Size(572, 26);
+            this.pnlPriceHistoryFilter.Size = new System.Drawing.Size(499, 22);
             this.pnlPriceHistoryFilter.TabIndex = 2;
             // 
             // lblPriceProduct
             // 
             this.lblPriceProduct.AutoSize = true;
-            this.lblPriceProduct.Location = new System.Drawing.Point(3, 3);
+            this.lblPriceProduct.Location = new System.Drawing.Point(3, 2);
             this.lblPriceProduct.Name = "lblPriceProduct";
             this.lblPriceProduct.Size = new System.Drawing.Size(60, 20);
             this.lblPriceProduct.TabIndex = 0;
@@ -992,83 +1042,101 @@
             // 
             this.cmbPriceProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPriceProduct.FormattingEnabled = true;
-            this.cmbPriceProduct.Location = new System.Drawing.Point(69, 0);
+            this.cmbPriceProduct.Location = new System.Drawing.Point(60, 0);
+            this.cmbPriceProduct.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbPriceProduct.Name = "cmbPriceProduct";
-            this.cmbPriceProduct.Size = new System.Drawing.Size(420, 28);
+            this.cmbPriceProduct.Size = new System.Drawing.Size(368, 28);
             this.cmbPriceProduct.TabIndex = 1;
             this.cmbPriceProduct.SelectedIndexChanged += new System.EventHandler(this.cmbPriceProduct_SelectedIndexChanged);
             // 
             // chartPriceHistory
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartPriceHistory.ChartAreas.Add(chartArea2);
+            chartArea18.Name = "ChartArea1";
+            this.chartPriceHistory.ChartAreas.Add(chartArea18);
             this.chartPriceHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.chartPriceHistory.Legends.Add(legend2);
-            this.chartPriceHistory.Location = new System.Drawing.Point(581, 250);
+            legend18.Enabled = false;
+            legend18.Name = "Legend1";
+            this.chartPriceHistory.Legends.Add(legend18);
+            this.chartPriceHistory.Location = new System.Drawing.Point(508, 202);
+            this.chartPriceHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartPriceHistory.Name = "chartPriceHistory";
             this.tableAnalytics.SetRowSpan(this.chartPriceHistory, 2);
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(105)))), ((int)(((byte)(92)))));
-            series2.Legend = "Legend1";
-            series2.Name = "Price";
-            series2.XValueMember = "purchase_date";
-            series2.YValueMembers = "unit_cost";
-            this.chartPriceHistory.Series.Add(series2);
-            this.chartPriceHistory.Size = new System.Drawing.Size(572, 282);
+            series18.BorderWidth = 2;
+            series18.ChartArea = "ChartArea1";
+            series18.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(105)))), ((int)(((byte)(92)))));
+            series18.Legend = "Legend1";
+            series18.Name = "Price";
+            series18.XValueMember = "purchase_date";
+            series18.YValueMembers = "unit_cost";
+            this.chartPriceHistory.Series.Add(series18);
+            this.chartPriceHistory.Size = new System.Drawing.Size(499, 216);
             this.chartPriceHistory.TabIndex = 3;
             // 
             // chartMonthlyTrend24
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartMonthlyTrend24.ChartAreas.Add(chartArea3);
+            chartArea19.Name = "ChartArea1";
+            this.chartMonthlyTrend24.ChartAreas.Add(chartArea19);
             this.chartMonthlyTrend24.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.chartMonthlyTrend24.Legends.Add(legend3);
-            this.chartMonthlyTrend24.Location = new System.Drawing.Point(581, 3);
+            legend19.Enabled = false;
+            legend19.Name = "Legend1";
+            this.chartMonthlyTrend24.Legends.Add(legend19);
+            this.chartMonthlyTrend24.Location = new System.Drawing.Point(508, 2);
+            this.chartMonthlyTrend24.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartMonthlyTrend24.Name = "chartMonthlyTrend24";
-            series3.BorderWidth = 2;
-            series3.ChartArea = "ChartArea1";
-            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(77)))), ((int)(((byte)(64)))));
-            series3.Legend = "Legend1";
-            series3.Name = "Trend";
-            series3.XValueMember = "month_label";
-            series3.YValueMembers = "amount";
-            this.chartMonthlyTrend24.Series.Add(series3);
-            this.chartMonthlyTrend24.Size = new System.Drawing.Size(572, 236);
+            series19.BorderWidth = 2;
+            series19.ChartArea = "ChartArea1";
+            series19.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(77)))), ((int)(((byte)(64)))));
+            series19.Legend = "Legend1";
+            series19.Name = "Trend";
+            series19.XValueMember = "month_label";
+            series19.YValueMembers = "amount";
+            this.chartMonthlyTrend24.Series.Add(series19);
+            this.chartMonthlyTrend24.Size = new System.Drawing.Size(499, 190);
             this.chartMonthlyTrend24.TabIndex = 1;
             // 
             // chartTopProducts
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartTopProducts.ChartAreas.Add(chartArea4);
+            chartArea20.Name = "ChartArea1";
+            this.chartTopProducts.ChartAreas.Add(chartArea20);
             this.chartTopProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.chartTopProducts.Legends.Add(legend4);
-            this.chartTopProducts.Location = new System.Drawing.Point(3, 3);
+            legend20.Enabled = false;
+            legend20.Name = "Legend1";
+            this.chartTopProducts.Legends.Add(legend20);
+            this.chartTopProducts.Location = new System.Drawing.Point(3, 2);
+            this.chartTopProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartTopProducts.Name = "chartTopProducts";
-            series4.ChartArea = "ChartArea1";
-            series4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(107)))));
-            series4.Legend = "Legend1";
-            series4.Name = "Top";
-            series4.XValueMember = "item_name";
-            series4.YValueMembers = "total_value";
-            this.chartTopProducts.Series.Add(series4);
-            this.chartTopProducts.Size = new System.Drawing.Size(572, 236);
+            series20.ChartArea = "ChartArea1";
+            series20.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(107)))));
+            series20.Legend = "Legend1";
+            series20.Name = "Top";
+            series20.XValueMember = "item_name";
+            series20.YValueMembers = "total_value";
+            this.chartTopProducts.Series.Add(series20);
+            this.chartTopProducts.Size = new System.Drawing.Size(499, 190);
             this.chartTopProducts.TabIndex = 0;
+            // 
+            // Btn_ledger_report
+            // 
+            this.Btn_ledger_report.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_ledger_report.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Btn_ledger_report.Location = new System.Drawing.Point(749, 3);
+            this.Btn_ledger_report.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_ledger_report.Name = "Btn_ledger_report";
+            this.Btn_ledger_report.Size = new System.Drawing.Size(136, 28);
+            this.Btn_ledger_report.TabIndex = 11;
+            this.Btn_ledger_report.Text = "&Ledger Report ";
+            this.Btn_ledger_report.UseVisualStyleBackColor = true;
+            this.Btn_ledger_report.Click += new System.EventHandler(this.Btn_ledger_report_Click);
             // 
             // frm_supplier_detail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 645);
+            this.ClientSize = new System.Drawing.Size(1032, 516);
             this.Controls.Add(this.tabProfile);
             this.Controls.Add(this.panelTop);
-            this.MinimumSize = new System.Drawing.Size(920, 640);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(807, 521);
             this.Name = "frm_supplier_detail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supplier Profile";
@@ -1078,7 +1146,6 @@
             this.tabProfile.ResumeLayout(false);
             this.tabOverview.ResumeLayout(false);
             this.splitOverview.Panel1.ResumeLayout(false);
-            this.splitOverview.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitOverview)).EndInit();
             this.splitOverview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridTopItemsSmall)).EndInit();
@@ -1211,6 +1278,7 @@
         private System.Windows.Forms.Label lblPriceProduct;
         private System.Windows.Forms.ComboBox cmbPriceProduct;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartPriceHistory;
+        private System.Windows.Forms.Button Btn_ledger_report;
     }
 }
 

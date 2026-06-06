@@ -74,7 +74,11 @@ namespace pos
                     // bind data
                     PurchasesBLL objpurchasesBLL = new PurchasesBLL();
                     grid_all_purchases.AutoGenerateColumns = false;
-                    grid_all_purchases.DataSource = objpurchasesBLL.GetAllPurchases();
+                    DataTable dt = objpurchasesBLL.GetAllPurchases();
+                    grid_all_purchases.DataSource = dt;
+
+                    // Style foreign purchases with visual indicator
+                    StyleForeignPurchases();
                 }
                 catch (Exception ex)
                 {
@@ -84,6 +88,29 @@ namespace pos
                         captionEn: "Purchases",
                         captionAr: "المشتريات");
                 }
+            }
+        }
+
+        private void StyleForeignPurchases()
+        {
+            try
+            {
+                foreach (DataGridViewRow row in grid_all_purchases.Rows)
+                {
+                    string currencyCode = Convert.ToString(row.Cells["currency_code"].Value ?? "SAR");
+
+                    // Highlight foreign purchases (non-SAR)
+                    if (currencyCode != "SAR" && !string.IsNullOrEmpty(currencyCode))
+                    {
+                        // Light blue background for foreign purchase rows
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(200, 220, 240); // Light blue
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Silent fail on styling, data is still visible
+                System.Diagnostics.Debug.WriteLine("Styling error: " + ex.Message);
             }
         }
 

@@ -30,9 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_all_purchases));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtnSupplierNameChange = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,23 +42,25 @@
             this.btn_search = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.grid_all_purchases = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchase_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplier_invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplier_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchase_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.detail = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_taxes_title = new System.Windows.Forms.Label();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchase_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplier_invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplier_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchase_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currency_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_tax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.foreign_net_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.detail = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btn_delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_all_purchases)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -131,9 +134,11 @@
             this.supplier_invoice_no,
             this.supplier_name,
             this.purchase_type,
+            this.currency_code,
             this.discount_value,
             this.total_tax,
             this.total,
+            this.foreign_net_amount,
             this.detail,
             this.btn_delete});
             this.grid_all_purchases.Name = "grid_all_purchases";
@@ -142,22 +147,6 @@
             this.grid_all_purchases.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_purchases_CellContentClick);
             this.grid_all_purchases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_all_purchases_CellDoubleClick);
             this.grid_all_purchases.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_all_purchases_KeyDown);
-            // 
-            // id
-            // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.id.DataPropertyName = "id";
-            resources.ApplyResources(this.id, "id");
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // invoice_no
-            // 
-            this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
-            this.invoice_no.DataPropertyName = "invoice_no";
-            resources.ApplyResources(this.invoice_no, "invoice_no");
-            this.invoice_no.Name = "invoice_no";
-            this.invoice_no.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -172,87 +161,6 @@
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
-            // purchase_date
-            // 
-            this.purchase_date.DataPropertyName = "purchase_date";
-            resources.ApplyResources(this.purchase_date, "purchase_date");
-            this.purchase_date.Name = "purchase_date";
-            this.purchase_date.ReadOnly = true;
-            // 
-            // supplier_invoice_no
-            // 
-            this.supplier_invoice_no.DataPropertyName = "supplier_invoice_no";
-            resources.ApplyResources(this.supplier_invoice_no, "supplier_invoice_no");
-            this.supplier_invoice_no.Name = "supplier_invoice_no";
-            this.supplier_invoice_no.ReadOnly = true;
-            // 
-            // supplier_name
-            // 
-            this.supplier_name.DataPropertyName = "supplier_name";
-            resources.ApplyResources(this.supplier_name, "supplier_name");
-            this.supplier_name.Name = "supplier_name";
-            this.supplier_name.ReadOnly = true;
-            // 
-            // purchase_type
-            // 
-            this.purchase_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.purchase_type.DataPropertyName = "purchase_type";
-            resources.ApplyResources(this.purchase_type, "purchase_type");
-            this.purchase_type.Name = "purchase_type";
-            this.purchase_type.ReadOnly = true;
-            // 
-            // discount_value
-            // 
-            this.discount_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.discount_value, "discount_value");
-            this.discount_value.Name = "discount_value";
-            this.discount_value.ReadOnly = true;
-            // 
-            // total_tax
-            // 
-            this.total_tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.total_tax.DataPropertyName = "total_tax";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.total_tax.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.total_tax, "total_tax");
-            this.total_tax.Name = "total_tax";
-            this.total_tax.ReadOnly = true;
-            // 
-            // total
-            // 
-            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.total.DataPropertyName = "total";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.total, "total");
-            this.total.Name = "total";
-            this.total.ReadOnly = true;
-            // 
-            // detail
-            // 
-            this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.detail, "detail");
-            this.detail.Image = global::pos.Properties.Resources.Detail_16;
-            this.detail.Name = "detail";
-            this.detail.ReadOnly = true;
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.btn_delete, "btn_delete");
-            this.btn_delete.Image = global::pos.Properties.Resources.Trash_16;
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.ReadOnly = true;
             // 
             // panel2
             // 
@@ -283,6 +191,123 @@
             this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.id.DataPropertyName = "id";
+            resources.ApplyResources(this.id, "id");
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // invoice_no
+            // 
+            this.invoice_no.ContextMenuStrip = this.contextMenuStrip1;
+            this.invoice_no.DataPropertyName = "invoice_no";
+            resources.ApplyResources(this.invoice_no, "invoice_no");
+            this.invoice_no.Name = "invoice_no";
+            this.invoice_no.ReadOnly = true;
+            // 
+            // purchase_date
+            // 
+            this.purchase_date.DataPropertyName = "purchase_date";
+            resources.ApplyResources(this.purchase_date, "purchase_date");
+            this.purchase_date.Name = "purchase_date";
+            this.purchase_date.ReadOnly = true;
+            // 
+            // supplier_invoice_no
+            // 
+            this.supplier_invoice_no.DataPropertyName = "supplier_invoice_no";
+            resources.ApplyResources(this.supplier_invoice_no, "supplier_invoice_no");
+            this.supplier_invoice_no.Name = "supplier_invoice_no";
+            this.supplier_invoice_no.ReadOnly = true;
+            // 
+            // supplier_name
+            // 
+            this.supplier_name.DataPropertyName = "supplier_name";
+            resources.ApplyResources(this.supplier_name, "supplier_name");
+            this.supplier_name.Name = "supplier_name";
+            this.supplier_name.ReadOnly = true;
+            // 
+            // purchase_type
+            // 
+            this.purchase_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.purchase_type.DataPropertyName = "purchase_type";
+            resources.ApplyResources(this.purchase_type, "purchase_type");
+            this.purchase_type.Name = "purchase_type";
+            this.purchase_type.ReadOnly = true;
+            // 
+            // currency_code
+            // 
+            this.currency_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.currency_code.DataPropertyName = "currency_code";
+            resources.ApplyResources(this.currency_code, "currency_code");
+            this.currency_code.Name = "currency_code";
+            this.currency_code.ReadOnly = true;
+            // 
+            // discount_value
+            // 
+            this.discount_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.discount_value.DataPropertyName = "discount_value";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle5;
+            resources.ApplyResources(this.discount_value, "discount_value");
+            this.discount_value.Name = "discount_value";
+            this.discount_value.ReadOnly = true;
+            // 
+            // total_tax
+            // 
+            this.total_tax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.total_tax.DataPropertyName = "total_tax";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.total_tax.DefaultCellStyle = dataGridViewCellStyle6;
+            resources.ApplyResources(this.total_tax, "total_tax");
+            this.total_tax.Name = "total_tax";
+            this.total_tax.ReadOnly = true;
+            // 
+            // total
+            // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.total.DataPropertyName = "total";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle7;
+            resources.ApplyResources(this.total, "total");
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            // 
+            // foreign_net_amount
+            // 
+            this.foreign_net_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.foreign_net_amount.DataPropertyName = "foreign_net_amount";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.foreign_net_amount.DefaultCellStyle = dataGridViewCellStyle8;
+            resources.ApplyResources(this.foreign_net_amount, "foreign_net_amount");
+            this.foreign_net_amount.Name = "foreign_net_amount";
+            this.foreign_net_amount.ReadOnly = true;
+            // 
+            // detail
+            // 
+            this.detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.detail, "detail");
+            this.detail.Image = global::pos.Properties.Resources.Detail_16;
+            this.detail.Name = "detail";
+            this.detail.ReadOnly = true;
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.btn_delete, "btn_delete");
+            this.btn_delete.Image = global::pos.Properties.Resources.Trash_16;
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.ReadOnly = true;
             // 
             // frm_all_purchases
             // 
@@ -327,9 +352,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier_invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchase_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn currency_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_tax;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn foreign_net_amount;
         private System.Windows.Forms.DataGridViewImageColumn detail;
         private System.Windows.Forms.DataGridViewImageColumn btn_delete;
     }

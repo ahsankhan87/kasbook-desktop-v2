@@ -384,5 +384,29 @@ namespace pos
             int.TryParse(Convert.ToString(value), out i);
             return i;
         }
+
+        private void Btn_ledger_report_Click(object sender, EventArgs e)
+        {
+            string supplier_id = Convert.ToString(_supplier_id);
+            if (!string.IsNullOrWhiteSpace(supplier_id))
+            {
+                using (BusyScope.Show(this, UiMessages.T("Opening ledger report...", "جاري فتح تقرير كشف الحساب...")))
+                {
+                    pos.Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport obj = new Suppliers.Supplier_Ledger_Report.FrmSupplierLedgerReport(supplier_id);
+                    obj.ShowDialog();
+                }
+            }
+            else
+            {
+                UiMessages.ShowInfo(
+                    "Please select a supplier to view the ledger report.",
+                    "يرجى اختيار مورد لعرض تقرير كشف الحساب.",
+                    "Supplier",
+                    "المورد"
+                );
+            }
+        }
+
+        
     }
 }

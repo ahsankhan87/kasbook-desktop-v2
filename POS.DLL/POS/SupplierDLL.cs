@@ -297,48 +297,53 @@ namespace POS.DLL
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             using (SqlCommand cmdLocal = new SqlCommand(@"
-;WITH Purchases AS
+;WITH PurchaseSummary AS
 (
     SELECT
         p.supplier_id,
-        p.invoice_no,
         CAST(p.purchase_date AS date) AS purchase_date,
         CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4)) AS invoice_amount,
         DATEADD(DAY,
             CASE WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int) ELSE 30 END,
-            CAST(p.purchase_date AS date)) AS due_date
+            CAST(p.purchase_date AS date)) AS due_date,
+        ISNULL(p.purchase_type, '') AS purchase_type
     FROM pos_purchases p
     WHERE p.branch_id = @branch_id
 ),
-Payments AS
+SupplierLedgerBal AS
 (
+    -- Net balance per supplier = what supplier is still owed (credit entries = liability raised,
+    -- debit entries = payments made + discounts given + other reductions)
     SELECT
         sp.supplier_id,
-        sp.invoice_no,
-        CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS paid_amount
+        CAST(ISNULL(SUM(ISNULL(sp.credit, 0)) - SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,4)) AS net_payable
     FROM pos_suppliers_payments sp
     WHERE sp.branch_id = @branch_id
-    GROUP BY sp.supplier_id, sp.invoice_no
+    GROUP BY sp.supplier_id
 ),
-InvoiceAgg AS
+OverdueSuppliers AS
+(
+    -- A supplier is overdue if they have any past-due credit invoice AND still carry a payable balance
+    SELECT DISTINCT ps.supplier_id
+    FROM PurchaseSummary ps
+    INNER JOIN SupplierLedgerBal lb ON lb.supplier_id = ps.supplier_id
+    WHERE ps.purchase_type = 'Credit'
+      AND ps.due_date < CAST(GETDATE() AS date)
+      AND lb.net_payable > 0.004
+),
+MonthlyPurchases AS
 (
     SELECT
-        pu.supplier_id,
-        pu.purchase_date,
-        pu.due_date,
-        pu.invoice_amount,
-        ISNULL(pa.paid_amount, 0) AS paid_amount,
-        CAST(pu.invoice_amount - ISNULL(pa.paid_amount, 0) AS decimal(18,4)) AS balance
-    FROM Purchases pu
-    LEFT JOIN Payments pa ON pa.supplier_id = pu.supplier_id AND pa.invoice_no = pu.invoice_no
+        SUM(CASE WHEN YEAR(ps.purchase_date) = YEAR(GETDATE()) AND MONTH(ps.purchase_date) = MONTH(GETDATE()) THEN ps.invoice_amount ELSE 0 END) AS this_month,
+        SUM(CASE WHEN YEAR(ps.purchase_date) = YEAR(DATEADD(MONTH,-1,GETDATE())) AND MONTH(ps.purchase_date) = MONTH(DATEADD(MONTH,-1,GETDATE())) THEN ps.invoice_amount ELSE 0 END) AS prev_month
+    FROM PurchaseSummary ps
 )
 SELECT
     CAST((SELECT COUNT(1) FROM pos_suppliers s WHERE s.branch_id = @branch_id) AS int) AS TotalSuppliers,
-    CAST(ISNULL(SUM(CASE WHEN ia.balance > 0.004 THEN ia.balance ELSE 0 END), 0) AS decimal(18,2)) AS TotalPayables,
-    CAST(ISNULL(SUM(CASE WHEN ia.balance > 0.004 AND ia.due_date < CAST(GETDATE() AS date) THEN ia.balance ELSE 0 END), 0) AS decimal(18,2)) AS OverduePayables,
-    CAST(ISNULL(SUM(CASE WHEN YEAR(ia.purchase_date) = YEAR(GETDATE()) AND MONTH(ia.purchase_date) = MONTH(GETDATE()) THEN ia.invoice_amount ELSE 0 END), 0) AS decimal(18,2)) AS TotalPurchasesThisMonth,
-    CAST(ISNULL(SUM(CASE WHEN YEAR(ia.purchase_date) = YEAR(DATEADD(MONTH, -1, GETDATE())) AND MONTH(ia.purchase_date) = MONTH(DATEADD(MONTH, -1, GETDATE())) THEN ia.invoice_amount ELSE 0 END), 0) AS decimal(18,2)) AS TotalPurchasesPrevMonth
-FROM InvoiceAgg ia", cn))
+    CAST(ISNULL((SELECT SUM(CASE WHEN lb.net_payable > 0 THEN lb.net_payable ELSE 0 END) FROM SupplierLedgerBal lb), 0) AS decimal(18,2)) AS TotalPayables,
+    CAST(ISNULL((SELECT SUM(lb.net_payable) FROM SupplierLedgerBal lb INNER JOIN OverdueSuppliers os ON os.supplier_id = lb.supplier_id WHERE lb.net_payable > 0), 0) AS decimal(18,2)) AS OverduePayables,
+    CAST(ISNULL((SELECT this_month FROM MonthlyPurchases), 0) AS decimal(18,2)) AS TotalPurchasesThisMonth,
+    CAST(ISNULL((SELECT prev_month FROM MonthlyPurchases), 0) AS decimal(18,2)) AS TotalPurchasesPrevMonth", cn))
             {
                 cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
 
@@ -365,43 +370,56 @@ FROM InvoiceAgg ia", cn))
         CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4)) AS invoice_amount,
         DATEADD(DAY,
             CASE WHEN ISNUMERIC(p.payment_terms_id) = 1 THEN CAST(p.payment_terms_id AS int) ELSE 30 END,
-            CAST(p.purchase_date AS date)) AS due_date
+            CAST(p.purchase_date AS date)) AS due_date,
+        ISNULL(p.purchase_type, '') AS purchase_type
     FROM pos_purchases p
     WHERE p.branch_id = @branch_id
 ),
-Payments AS
-(
-    SELECT
-        sp.supplier_id,
-        sp.invoice_no,
-        CAST(ISNULL(SUM(sp.debit), 0) AS decimal(18,4)) AS paid_amount
-    FROM pos_suppliers_payments sp
-    WHERE sp.branch_id = @branch_id
-    GROUP BY sp.supplier_id, sp.invoice_no
-),
-InvoiceAgg AS
+PurchaseAgg AS
 (
     SELECT
         pu.supplier_id,
-        pu.purchase_date,
-        pu.due_date,
-        pu.invoice_amount,
-        ISNULL(pa.paid_amount, 0) AS paid_amount,
-        CAST(pu.invoice_amount - ISNULL(pa.paid_amount, 0) AS decimal(18,4)) AS balance
+        CAST(ISNULL(SUM(pu.invoice_amount), 0) AS decimal(18,2)) AS total_purchases,
+        MAX(pu.purchase_date) AS last_bill_date
     FROM Purchases pu
-    LEFT JOIN Payments pa ON pa.supplier_id = pu.supplier_id AND pa.invoice_no = pu.invoice_no
+    GROUP BY pu.supplier_id
+),
+SupplierLedgerBal AS
+(
+    -- Net payable = SUM(credit) - SUM(debit) from the supplier sub-ledger.
+    -- Credit entries: raised when a credit purchase is posted (liability).
+    -- Debit entries: reduced when payment is made OR purchase discount is applied.
+    SELECT
+        sp.supplier_id,
+        CAST(ISNULL(SUM(ISNULL(sp.credit, 0)), 0) AS decimal(18,4)) AS total_credit,
+        CAST(ISNULL(SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,4)) AS total_debit,
+        CAST(ISNULL(SUM(ISNULL(sp.credit, 0)) - SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,4)) AS net_payable
+    FROM pos_suppliers_payments sp
+    WHERE sp.branch_id = @branch_id
+    GROUP BY sp.supplier_id
 ),
 SupplierAgg AS
 (
     SELECT
-        ia.supplier_id,
-        CAST(ISNULL(SUM(ia.invoice_amount), 0) AS decimal(18,2)) AS total_purchases,
-        CAST(ISNULL(SUM(ia.paid_amount), 0) AS decimal(18,2)) AS total_paid,
-        CAST(ISNULL(SUM(CASE WHEN ia.balance > 0 THEN ia.balance ELSE 0 END), 0) AS decimal(18,2)) AS payable_balance,
-        MAX(ia.purchase_date) AS last_bill_date,
-        MAX(CASE WHEN ia.balance > 0.004 AND ia.due_date < CAST(GETDATE() AS date) THEN 1 ELSE 0 END) AS is_overdue
-    FROM InvoiceAgg ia
-    GROUP BY ia.supplier_id
+        ISNULL(pa.supplier_id, lb.supplier_id) AS supplier_id,
+        ISNULL(pa.total_purchases, 0) AS total_purchases,
+        -- total_paid shown in detail panel: sum of actual payment debits
+        ISNULL(lb.total_debit, 0) AS total_paid,
+        -- payable balance: net from ledger, floor at 0
+        CAST(CASE WHEN ISNULL(lb.net_payable, 0) > 0 THEN lb.net_payable ELSE 0 END AS decimal(18,2)) AS payable_balance,
+        ISNULL(pa.last_bill_date, NULL) AS last_bill_date,
+        -- overdue: any past-due credit invoice exists AND supplier still has a net payable
+        CAST(CASE
+            WHEN ISNULL(lb.net_payable, 0) > 0.004
+             AND EXISTS (
+                SELECT 1 FROM Purchases pu2
+                WHERE pu2.supplier_id = ISNULL(pa.supplier_id, lb.supplier_id)
+                  AND pu2.purchase_type = 'Credit'
+                  AND pu2.due_date < CAST(GETDATE() AS date)
+             )
+            THEN 1 ELSE 0 END AS int) AS is_overdue
+    FROM PurchaseAgg pa
+    FULL OUTER JOIN SupplierLedgerBal lb ON lb.supplier_id = pa.supplier_id
 )
 SELECT
     s.id AS supplier_id,
@@ -555,17 +573,42 @@ SELECT
     ISNULL(s.contact_no, '') AS contact_no,
     ISNULL(s.address, '') AS address,
     ISNULL(s.status, 1) AS status,
-    CAST(ISNULL(SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)), 0) AS decimal(18,2)) AS lifetime_purchases,
-    CAST(ISNULL(SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,2)) AS total_paid,
-    CAST(ISNULL(SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,2)) AS current_payable,
-    CAST(0 AS decimal(18,2)) AS credit_limit,
     CAST(30 AS int) AS credit_days,
-    CAST(0 - ISNULL(SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - SUM(ISNULL(sp.debit, 0)), 0) AS decimal(18,2)) AS available_credit
+    CAST(0 AS decimal(18,2)) AS credit_limit,
+    -- Lifetime purchases: all invoices (informational total)
+    CAST(ISNULL((
+        SELECT SUM(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0))
+        FROM pos_purchases p
+        WHERE p.branch_id = s.branch_id AND p.supplier_id = s.id
+    ), 0) AS decimal(18,2)) AS lifetime_purchases,
+    -- Total paid (debit side of sub-ledger: payments + discounts given)
+    CAST(ISNULL((
+        SELECT SUM(ISNULL(sp.debit, 0))
+        FROM pos_suppliers_payments sp
+        WHERE sp.branch_id = s.branch_id AND sp.supplier_id = s.id
+    ), 0) AS decimal(18,2)) AS total_paid,
+    -- Current payable: net from sub-ledger = SUM(credit) - SUM(debit), floor at 0
+    CAST(CASE
+        WHEN ISNULL((SELECT SUM(ISNULL(sp.credit,0)) - SUM(ISNULL(sp.debit,0))
+                     FROM pos_suppliers_payments sp
+                     WHERE sp.branch_id = s.branch_id AND sp.supplier_id = s.id), 0) > 0
+        THEN (SELECT SUM(ISNULL(sp.credit,0)) - SUM(ISNULL(sp.debit,0))
+              FROM pos_suppliers_payments sp
+              WHERE sp.branch_id = s.branch_id AND sp.supplier_id = s.id)
+        ELSE 0
+    END AS decimal(18,2)) AS current_payable,
+    -- Available credit: positive when overpaid (debit > credit)
+    CAST(CASE
+        WHEN ISNULL((SELECT SUM(ISNULL(sp.debit,0)) - SUM(ISNULL(sp.credit,0))
+                     FROM pos_suppliers_payments sp
+                     WHERE sp.branch_id = s.branch_id AND sp.supplier_id = s.id), 0) > 0
+        THEN (SELECT SUM(ISNULL(sp.debit,0)) - SUM(ISNULL(sp.credit,0))
+              FROM pos_suppliers_payments sp
+              WHERE sp.branch_id = s.branch_id AND sp.supplier_id = s.id)
+        ELSE 0
+    END AS decimal(18,2)) AS available_credit
 FROM pos_suppliers s
-LEFT JOIN pos_purchases p ON p.branch_id = s.branch_id AND p.supplier_id = s.id
-LEFT JOIN pos_suppliers_payments sp ON sp.branch_id = p.branch_id AND sp.supplier_id = p.supplier_id AND sp.invoice_no = p.invoice_no
-WHERE s.branch_id = @branch_id AND s.id = @supplier_id
-GROUP BY s.id, s.supplier_code, s.first_name, s.last_name, s.email, s.contact_no, s.address, s.status", cn))
+WHERE s.branch_id = @branch_id AND s.id = @supplier_id", cn))
             {
                 cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
                 cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
@@ -757,6 +800,8 @@ LEFT JOIN pos_suppliers_payments sp
    AND sp.invoice_no = p.invoice_no
 WHERE p.branch_id = @branch_id
   AND p.supplier_id = @supplier_id
+  AND ISNULL(p.purchase_type, '') = 'Credit'
+  AND ISNULL(p.account, '') <> 'Return'
 GROUP BY p.invoice_no, p.purchase_date, p.payment_terms_id, p.total_amount, p.total_tax, p.discount_value
 HAVING ((ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0)) - ISNULL(SUM(sp.debit), 0)) > 0.004
 ORDER BY p.purchase_date DESC, p.invoice_no DESC", cn))

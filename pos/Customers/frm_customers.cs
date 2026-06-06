@@ -130,8 +130,10 @@ namespace pos
                     _dashboardSource = BuildDashboardData(raw);
                     _dashboardView = _dashboardSource.DefaultView;
                     grid_customers.DataSource = _dashboardView;
+                    
                     PopulateAreaFilter();
                     ApplyFilters();
+                    
                     if (grid_customers.Rows.Count > 0)
                     {
                         grid_customers.Rows[0].Selected = true;

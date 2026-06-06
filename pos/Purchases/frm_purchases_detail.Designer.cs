@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_purchases_detail));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grid_purchases_detail = new System.Windows.Forms.DataGridView();
             this.txt_close = new System.Windows.Forms.Button();
@@ -46,9 +47,14 @@
             this.loc_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.net_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.foreign_cost_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.foreign_unit_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.foreign_discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exchange_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_purchases_detail)).BeginInit();
             this.panel2.SuspendLayout();
@@ -56,17 +62,17 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.grid_purchases_detail);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // grid_purchases_detail
             // 
-            resources.ApplyResources(this.grid_purchases_detail, "grid_purchases_detail");
             this.grid_purchases_detail.AllowUserToAddRows = false;
             this.grid_purchases_detail.AllowUserToDeleteRows = false;
             this.grid_purchases_detail.AllowUserToOrderColumns = true;
+            resources.ApplyResources(this.grid_purchases_detail, "grid_purchases_detail");
             this.grid_purchases_detail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_purchases_detail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_purchases_detail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -77,9 +83,14 @@
             this.loc_code,
             this.quantity,
             this.cost_price,
+            this.unit_price,
             this.discount_value,
             this.vat,
-            this.net_total});
+            this.net_total,
+            this.foreign_cost_price,
+            this.foreign_unit_price,
+            this.foreign_discount_value,
+            this.exchange_rate});
             this.grid_purchases_detail.Name = "grid_purchases_detail";
             this.grid_purchases_detail.ReadOnly = true;
             this.grid_purchases_detail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -94,10 +105,10 @@
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel2.Controls.Add(this.txt_close);
             this.panel2.Controls.Add(this.lbl_taxes_title);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // lbl_taxes_title
@@ -145,10 +156,10 @@
             // quantity
             // 
             this.quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.quantity.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.quantity.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.quantity, "quantity");
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
@@ -156,21 +167,32 @@
             // cost_price
             // 
             this.cost_price.DataPropertyName = "cost_price";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
             // 
+            // unit_price
+            // 
+            this.unit_price.DataPropertyName = "unit_price";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.unit_price, "unit_price");
+            this.unit_price.Name = "unit_price";
+            this.unit_price.ReadOnly = true;
+            // 
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
@@ -178,10 +200,10 @@
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.vat.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.vat.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
             this.vat.ReadOnly = true;
@@ -189,13 +211,42 @@
             // net_total
             // 
             this.net_total.DataPropertyName = "net_total";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.net_total.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.net_total.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.net_total, "net_total");
             this.net_total.Name = "net_total";
             this.net_total.ReadOnly = true;
+            // 
+            // foreign_cost_price
+            // 
+            this.foreign_cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.foreign_cost_price.DataPropertyName = "foreign_cost_price";
+            resources.ApplyResources(this.foreign_cost_price, "foreign_cost_price");
+            this.foreign_cost_price.Name = "foreign_cost_price";
+            this.foreign_cost_price.ReadOnly = true;
+            // 
+            // foreign_unit_price
+            // 
+            this.foreign_unit_price.DataPropertyName = "foreign_unit_price";
+            resources.ApplyResources(this.foreign_unit_price, "foreign_unit_price");
+            this.foreign_unit_price.Name = "foreign_unit_price";
+            this.foreign_unit_price.ReadOnly = true;
+            // 
+            // foreign_discount_value
+            // 
+            this.foreign_discount_value.DataPropertyName = "foreign_discount_value";
+            resources.ApplyResources(this.foreign_discount_value, "foreign_discount_value");
+            this.foreign_discount_value.Name = "foreign_discount_value";
+            this.foreign_discount_value.ReadOnly = true;
+            // 
+            // exchange_rate
+            // 
+            this.exchange_rate.DataPropertyName = "exchange_rate";
+            resources.ApplyResources(this.exchange_rate, "exchange_rate");
+            this.exchange_rate.Name = "exchange_rate";
+            this.exchange_rate.ReadOnly = true;
             // 
             // frm_purchases_detail
             // 
@@ -231,9 +282,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn loc_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unit_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn net_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn foreign_cost_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn foreign_unit_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn foreign_discount_value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exchange_rate;
     }
 }
 

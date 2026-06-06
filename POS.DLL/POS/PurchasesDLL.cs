@@ -54,8 +54,12 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT TOP 10000 p.*,(p.total_tax+p.total_amount-p.discount_value) as total, CONCAT(sp.first_name,' ',sp.last_name) as supplier_name "+
+                        String query = "SELECT TOP 10000 p.*, CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,4)) AS total, " +
+                            " CAST(ISNULL(p.foreign_total_amount, 0) + ISNULL(p.foreign_total_tax, 0) - ISNULL(p.foreign_total_discount, 0) AS decimal(18,4)) AS foreign_net_amount," +
+                            " CONCAT(sp.first_name,' ',sp.last_name) as supplier_name, " +
+                            " ISNULL(c.code, 'SAR') as currency_code "+
                             " FROM pos_purchases p LEFT JOIN pos_suppliers sp ON p.supplier_id=sp.id"+
+                            " LEFT JOIN pos_currencies c ON p.currency_id = c.id "+
                             " WHERE p.purchase_date BETWEEN @FY_from_date AND @FY_to_date AND p.branch_id = @branch_id order by p.id desc";
 
                         cmd = new SqlCommand(query, cn);
@@ -87,13 +91,15 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT PI.invoice_no,PI.id,PI.item_code,PI.item_number,PI.quantity,PI.cost_price,PI.discount_value,(PI.cost_price*PI.quantity-ABS(PI.discount_value)) AS total,PI.loc_code," + 
+                        String query = "SELECT PI.invoice_no,PI.id,PI.item_code,PI.item_number,PI.quantity,PI.cost_price,PI.unit_price,PI.discount_value," +
+                            " (PI.cost_price*PI.quantity-ABS(PI.discount_value)) AS total,PI.loc_code," + 
                             " P.name AS product_name, " +
-                            "((PI.cost_price*PI.quantity-ABS(PI.discount_value))*PI.tax_rate/100) AS vat, " +
-                            " (((PI.cost_price*PI.quantity-ABS(PI.discount_value))*PI.tax_rate/100) + (PI.cost_price*PI.quantity-ABS(PI.discount_value))) AS net_total " +
-                            "FROM pos_purchases_items PI " +
-                            "LEFT JOIN pos_products P ON P.item_number=PI.item_number " +
-                            "WHERE PI.invoice_no = @invoice_no AND PI.branch_id = @branch_id";
+                            " ((PI.cost_price*PI.quantity-ABS(PI.discount_value))*PI.tax_rate/100) AS vat, " +
+                            " (((PI.cost_price*PI.quantity-ABS(PI.discount_value))*PI.tax_rate/100) + (PI.cost_price*PI.quantity-ABS(PI.discount_value))) AS net_total, " +
+                            " PI.exchange_rate, PI.currency_id, PI.foreign_unit_price, PI.foreign_cost_price, PI.foreign_discount_value" +
+                            " FROM pos_purchases_items PI " +
+                            " LEFT JOIN pos_products P ON P.item_number=PI.item_number " +
+                            " WHERE PI.invoice_no = @invoice_no AND PI.branch_id = @branch_id";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@invoice_no", invoice_no);

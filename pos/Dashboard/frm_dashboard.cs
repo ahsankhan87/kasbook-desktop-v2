@@ -289,7 +289,7 @@ namespace pos.Dashboard
             btnSuppliers.Text = "🏢  Suppliers";
             btnSalesReport.Text = "📊  Sales Report";
             btnPurchasesReport.Text = "🧾  Purchases Report";
-            btnSettings.Text = "⚙️  Settings";
+            btnSettings.Text = "⚙️  ZATCA E-Invoices";
 
             colArea.Text = "Area";
             colInfo.Text = "Info";

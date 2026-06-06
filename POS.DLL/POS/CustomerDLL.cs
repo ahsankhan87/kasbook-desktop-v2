@@ -292,6 +292,7 @@ SalesAgg AS
     WHERE s.branch_id = @branch_id
       AND ISNULL(s.account, '') <> 'Return'
       AND ISNULL(s.sale_type, '') <> 'Quotation'
+      AND ISNULL(s.sale_type, '') <> 'Gift'
     GROUP BY s.customer_id
 ),
 OutstandingAgg AS
