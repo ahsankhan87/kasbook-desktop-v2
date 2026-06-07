@@ -13,6 +13,7 @@ namespace pos.Products.Adjustment
     {
         public decimal EnteredQty { get; private set; }
         public decimal Price { get; set; }
+        public decimal CostPrice { get; set; }
         public string locationCode { get; set; }
         public bool IsProductDeleted { get; private set; }
 
@@ -23,7 +24,7 @@ namespace pos.Products.Adjustment
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
 
-        public frm_adjust_qty(decimal defaultQty = 0m,decimal price = 0m, string locationCode = null, int productID = 0, string productCode = null)
+        public frm_adjust_qty(decimal defaultQty = 0m,decimal price = 0m, string locationCode = null, int productID = 0, string productCode = null,decimal costPrice = 0m)
         {
             InitializeComponent();
             txtQty.Text = defaultQty.ToString("N2");
@@ -32,6 +33,7 @@ namespace pos.Products.Adjustment
             _productCode = productCode;
             txt_location.Text = locationCode;
             txt_sale_price.Text = price.ToString();
+            txt_cost_price.Text = costPrice.ToString();
             lbl_productCode.Text = productCode;
             
         }
@@ -84,6 +86,7 @@ namespace pos.Products.Adjustment
             // convert text_location to capital letters to maintain consistency in location codes
             locationCode = txt_location.Text?.ToUpper(); // pass through location code for use in calling code if needed
             Price = decimal.TryParse(txt_sale_price.Text, out var price) ? price : 0m; // pass through price for use in calling code if needed
+            CostPrice = decimal.TryParse(txt_cost_price.Text, out var costPrice) ? costPrice : 0m; // pass through price for use in calling code if needed
         }
 
         private void txtQty_KeyPress(object sender, KeyPressEventArgs e)

@@ -122,25 +122,28 @@
     <value>11, 53</value>
   </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 17</value>
+    <value>139, 19</value>
   </data>
   <data name="lblTitle.Text" xml:space="preserve">
     <value>ضبط الكمية الدقيقة</value>
   </data>
   <data name="txtQty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 50</value>
+    <value>157, 53</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 147</value>
+    <value>155, 211</value>
+  </data>
+  <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 33</value>
   </data>
   <data name="btnOk.Text" xml:space="preserve">
     <value>نعم</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 147</value>
+    <value>253, 211</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 28</value>
+    <value>96, 33</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>يلغي</value>
@@ -154,10 +157,10 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 80</value>
+    <value>12, 85</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
+    <value>90, 19</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>أدخل الموقع</value>
@@ -166,31 +169,40 @@
     <value>NoControl</value>
   </data>
   <data name="btn_deleteProduct.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 181</value>
+    <value>155, 245</value>
   </data>
   <data name="btn_deleteProduct.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 41</value>
+    <value>194, 41</value>
   </data>
   <data name="btn_deleteProduct.Text" xml:space="preserve">
     <value>حذف المنتج</value>
   </data>
   <data name="txt_location.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 80</value>
+    <value>157, 87</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 113</value>
+    <value>11, 121</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>أدخل سعر البيع</value>
   </data>
   <data name="txt_sale_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 110</value>
+    <value>156, 121</value>
   </data>
   <data name="lbl_productCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 19</value>
   </data>
+  <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 155</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 157</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>أدخل سعر التكلفة</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>338, 259</value>
+    <value>362, 297</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>

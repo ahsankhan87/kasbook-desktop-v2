@@ -153,7 +153,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="grid_product_history.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 165</value>
+    <value>605, 165</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 19</value>
@@ -388,7 +388,7 @@
     <value>1286, 184</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>606</value>
+    <value>605</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -767,37 +767,37 @@
     <value>4, 106</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 27</value>
+    <value>60, 27</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 74</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 27</value>
+    <value>60, 27</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 40</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 27</value>
+    <value>60, 27</value>
   </data>
   <data name="txt_groups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 40</value>
+    <value>72, 40</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 27</value>
+    <value>131, 27</value>
   </data>
   <data name="txt_categories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 74</value>
+    <value>72, 74</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 27</value>
+    <value>131, 27</value>
   </data>
   <data name="txt_brands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 106</value>
+    <value>72, 106</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 27</value>
+    <value>131, 27</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>

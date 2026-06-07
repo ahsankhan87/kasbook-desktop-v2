@@ -27,6 +27,8 @@ namespace pos.Products.Adjustment
             this.label2 = new System.Windows.Forms.Label();
             this.txt_sale_price = new System.Windows.Forms.TextBox();
             this.lbl_productCode = new System.Windows.Forms.Label();
+            this.txt_cost_price = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -90,16 +92,29 @@ namespace pos.Products.Adjustment
             resources.ApplyResources(this.lbl_productCode, "lbl_productCode");
             this.lbl_productCode.Name = "lbl_productCode";
             // 
+            // txt_cost_price
+            // 
+            resources.ApplyResources(this.txt_cost_price, "txt_cost_price");
+            this.txt_cost_price.Name = "txt_cost_price";
+            this.txt_cost_price.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQty_KeyPress);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // frm_adjust_qty
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.Controls.Add(this.txt_location);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_productCode);
             this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.txt_cost_price);
             this.Controls.Add(this.txt_sale_price);
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.btnOk);
@@ -122,5 +137,7 @@ namespace pos.Products.Adjustment
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txt_sale_price;
         private System.Windows.Forms.Label lbl_productCode;
+        private System.Windows.Forms.TextBox txt_cost_price;
+        private System.Windows.Forms.Label label3;
     }
 }

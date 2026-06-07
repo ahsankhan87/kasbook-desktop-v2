@@ -290,7 +290,7 @@ namespace pos
                             string productCode = code;
                             
 
-                            using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty, unit_price, location_code, productID, productCode))
+                            using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty, unit_price, location_code, productID, productCode,avg_cost))
                             {
                                 if (qtyDlg.ShowDialog(this) == DialogResult.OK)
                                 {
@@ -299,6 +299,7 @@ namespace pos
                                     productCode = qtyDlg._productCode; // in case you need it for something
                                     location_code = qtyDlg.locationCode; // in case location can be changed in dialog
                                     unit_price = qtyDlg.Price; // in case price can be changed in dialog
+                                    avg_cost = qtyDlg.CostPrice; // in case price can be changed in dialog
                                 }
                                 else
                                 {
