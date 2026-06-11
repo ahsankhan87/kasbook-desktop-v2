@@ -92,6 +92,12 @@ namespace pos
         public DataTable products_dt = new DataTable();
         private bool _applyShippingCostToItems = false;
 
+        private sealed class PurchaseRowCostState
+        {
+            public decimal BaseAvgCost;
+            public decimal LastShippingShare;
+        }
+
         //private frm_searchProducts productsMainForm;
 
         //public frm_purchases(frm_searchProducts productsMainForm) : this()
@@ -1140,15 +1146,23 @@ namespace pos
                     ? 0
                     : Convert.ToDecimal(row.Cells["tax_rate"].Value);
 
-                decimal baseAvgCost;
-                if (row.Tag == null)
+                var state = row.Tag as PurchaseRowCostState;
+                if (state == null)
                 {
-                    baseAvgCost = Convert.ToDecimal(row.Cells["avg_cost"].Value);
-                    row.Tag = baseAvgCost;
+                    state = new PurchaseRowCostState
+                    {
+                        BaseAvgCost = Convert.ToDecimal(row.Cells["avg_cost"].Value),
+                        LastShippingShare = 0m
+                    };
+                    row.Tag = state;
                 }
-                else
+
+                // If user manually changed avg_cost in grid, preserve that as the new base cost.
+                decimal currentAvgCost = Convert.ToDecimal(row.Cells["avg_cost"].Value);
+                decimal expectedCurrent = Math.Round(state.BaseAvgCost + state.LastShippingShare, 4);
+                if (Math.Abs(currentAvgCost - expectedCurrent) > 0.0001m)
                 {
-                    baseAvgCost = Convert.ToDecimal(row.Tag);
+                    state.BaseAvgCost = currentAvgCost;
                 }
 
                 decimal shippingShare = 0;
@@ -1161,8 +1175,8 @@ namespace pos
                     allocated += shippingShare;
                 }
 
-                // Business expectation: shipping is split equally per product row and added to the row cost.
-                decimal newAvgCost = Math.Round(baseAvgCost + shippingShare, 4);
+                // Split shipping equally per product row, then add to row cost.
+                decimal newAvgCost = Math.Round(state.BaseAvgCost + shippingShare, 4);
                 decimal lineBase = (qty * newAvgCost) - discount;
                 if (lineBase < 0) lineBase = 0;
 
@@ -1171,6 +1185,9 @@ namespace pos
                 row.Cells["avg_cost"].Value = newAvgCost;
                 row.Cells["tax"].Value = tax;
                 row.Cells["sub_total"].Value = Math.Round(lineBase + tax, 4);
+
+                state.LastShippingShare = shippingShare;
+                row.Tag = state;
             }
 
             get_total_tax();
