@@ -286,7 +286,7 @@
     <value>51</value>
   </data>
   <data name="grid_product_history.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 222</value>
+    <value>889, 222</value>
   </data>
   <data name="grid_product_history.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1249,7 +1249,7 @@
     <value>1599, 241</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>890</value>
+    <value>889</value>
   </data>
   <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2419,13 +2419,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 146</value>
+    <value>285, 146</value>
   </data>
   <data name="txt_brand_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 2, 4, 2</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>62, 27</value>
   </data>
   <data name="txt_brand_code.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -2446,13 +2446,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 114</value>
+    <value>285, 114</value>
   </data>
   <data name="txt_category_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 2, 4, 2</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>62, 27</value>
   </data>
   <data name="txt_category_code.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2473,13 +2473,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 70</value>
+    <value>285, 70</value>
   </data>
   <data name="txt_group_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 2, 4, 2</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>62, 27</value>
   </data>
   <data name="txt_group_code.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2506,7 +2506,7 @@
     <value>4, 2, 4, 2</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 27</value>
+    <value>167, 27</value>
   </data>
   <data name="txt_groups.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2533,7 +2533,7 @@
     <value>4, 2, 4, 2</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 27</value>
+    <value>167, 27</value>
   </data>
   <data name="txt_categories.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2560,7 +2560,7 @@
     <value>4, 2, 4, 2</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 27</value>
+    <value>167, 27</value>
   </data>
   <data name="txt_brands.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2749,7 +2749,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.79904,Percent,62.20096,Absolute,68" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,31,Absolute,33" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.79904,Percent,62.20096,Absolute,69" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,31,Absolute,33" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox_products.Location" type="System.Drawing.Point, System.Drawing">
     <value>909, 57</value>

@@ -1076,8 +1076,9 @@ namespace pos
                 total_sub_total += Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value) * Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
             }
 
+            bool applyShippingToItems = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
             decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
-            txt_sub_total.Text = Math.Round(total_sub_total + shippingCost, 2).ToString();
+            txt_sub_total.Text = Math.Round(total_sub_total + (applyShippingToItems ? 0 : shippingCost), 2).ToString();
         }
 
         private void get_total_amount()
@@ -1089,8 +1090,9 @@ namespace pos
                 total_amount += Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value) * Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value);
             }
 
+            bool applyShippingToItems = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
             decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
-            decimal net = (total_amount + total_tax - total_discount + shippingCost);
+            decimal net = (total_amount + total_tax - total_discount + (applyShippingToItems ? 0 : shippingCost));
             txt_total_amount.Text = Math.Round(net,2).ToString();
         }
 
@@ -1116,10 +1118,21 @@ namespace pos
 
             bool applyShipping = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
 
-            foreach (DataGridViewRow row in grid_purchases.Rows)
+            var validRows = grid_purchases.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => !r.IsNewRow && r.Cells["id"].Value != null && r.Cells["code"].Value != null)
+                .ToList();
+
+            int rowCount = validRows.Count;
+            decimal equalShare = (rowCount > 0 && applyShipping && shippingCost > 0)
+                ? Math.Round(shippingCost / rowCount, 4)
+                : 0;
+
+            decimal allocated = 0;
+
+            for (int i = 0; i < rowCount; i++)
             {
-                if (row.IsNewRow || row.Cells["id"].Value == null || row.Cells["code"].Value == null)
-                    continue;
+                var row = validRows[i];
 
                 decimal qty = Convert.ToDecimal(row.Cells["qty"].Value);
                 decimal discount = Convert.ToDecimal(row.Cells["discount"].Value);
@@ -1127,7 +1140,6 @@ namespace pos
                     ? 0
                     : Convert.ToDecimal(row.Cells["tax_rate"].Value);
 
-                // keep original base cost once
                 decimal baseAvgCost;
                 if (row.Tag == null)
                 {
@@ -1139,40 +1151,26 @@ namespace pos
                     baseAvgCost = Convert.ToDecimal(row.Tag);
                 }
 
-                decimal baseLine = (qty * baseAvgCost) - discount;
-                if (baseLine < 0) baseLine = 0;
-
-                if (!applyShipping || shippingCost <= 0)
+                decimal shippingShare = 0;
+                if (applyShipping && shippingCost > 0)
                 {
-                    row.Cells["avg_cost"].Value = baseAvgCost;
-                    decimal tax = Math.Round((baseLine * taxRate) / 100, 4);
-                    row.Cells["tax"].Value = tax;
-                    row.Cells["sub_total"].Value = Math.Round(baseLine + tax, 4);
-                    continue;
+                    shippingShare = equalShare;
+                    if (i == rowCount - 1)
+                        shippingShare = Math.Round(shippingCost - allocated, 4);
+
+                    allocated += shippingShare;
                 }
 
-                // distribute shipping
-                decimal totalBase = 0;
-                foreach (DataGridViewRow r in grid_purchases.Rows)
-                {
-                    if (r.IsNewRow || r.Cells["id"].Value == null || r.Cells["code"].Value == null)
-                        continue;
+                // Business expectation: shipping is split equally per product row and added to the row cost.
+                decimal newAvgCost = Math.Round(baseAvgCost + shippingShare, 4);
+                decimal lineBase = (qty * newAvgCost) - discount;
+                if (lineBase < 0) lineBase = 0;
 
-                    decimal rQty = Convert.ToDecimal(r.Cells["qty"].Value);
-                    decimal rBaseAvg = (r.Tag == null) ? Convert.ToDecimal(r.Cells["avg_cost"].Value) : Convert.ToDecimal(r.Tag);
-                    decimal rDiscount = Convert.ToDecimal(r.Cells["discount"].Value);
-                    decimal rLine = (rQty * rBaseAvg) - rDiscount;
-                    if (rLine > 0) totalBase += rLine;
-                }
-
-                decimal shippingShare = (totalBase > 0) ? Math.Round(shippingCost * (baseLine / totalBase), 4) : 0;
-                decimal newNetBase = baseLine + shippingShare;
-                decimal newAvgCost = qty == 0 ? 0 : Math.Round((newNetBase + discount) / qty, 4);
-                decimal newTax = Math.Round((newNetBase * taxRate) / 100, 4);
+                decimal tax = Math.Round((lineBase * taxRate) / 100, 4);
 
                 row.Cells["avg_cost"].Value = newAvgCost;
-                row.Cells["tax"].Value = newTax;
-                row.Cells["sub_total"].Value = Math.Round(newNetBase + newTax, 4);
+                row.Cells["tax"].Value = tax;
+                row.Cells["sub_total"].Value = Math.Round(lineBase + tax, 4);
             }
 
             get_total_tax();
@@ -1180,7 +1178,6 @@ namespace pos
             get_sub_total_amount();
             get_total_amount();
             get_total_qty();
-        
         }
 
         private void get_total_tax()
