@@ -222,9 +222,6 @@ namespace pos
         {
             if (grid_search_products.SelectedCells.Count > 0)
             {
-                if (!CanSelectMainProduct())
-                    return;
-
                 string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
 
                 if (_isGrid)
@@ -317,9 +314,6 @@ namespace pos
         {
             if (grid_group_products.SelectedCells.Count > 0)
             {
-                if (!CanSelectAlternateProduct())
-                    return;
-
                 string alt_item_number = grid_group_products.CurrentRow.Cells["alt_item_number"].Value.ToString();
 
                 if (_isGrid)
@@ -340,6 +334,7 @@ namespace pos
             }
         }
 
+        /*
         private bool CanSelectMainProduct()
         {
             if (_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
@@ -385,6 +380,7 @@ namespace pos
 
             return true;
         }
+        */
 
         private void grid_search_products_SelectionChanged(object sender, EventArgs e)
         {

@@ -552,7 +552,12 @@ namespace pos
                     {
                         double availableQty = 0;
                         double.TryParse(Convert.ToString(myProductView["qty"]), out availableQty);
-                        if (availableQty <= 0 && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+
+                        // Allow zero qty for Quotation sale type, or if user has permission
+                        string currentSaleType = cmb_sale_type.SelectedValue?.ToString() ?? "";
+                        bool isQuotation = currentSaleType == "Quotation";
+
+                        if (availableQty <= 0 && !isQuotation && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
                         {
                             UiMessages.ShowWarning(
                                 "Cannot add this product because available quantity is zero.",
@@ -649,7 +654,12 @@ namespace pos
                 {
                     double availableQty = 0;
                     double.TryParse(Convert.ToString(myProductView["qty"]), out availableQty);
-                    if (availableQty <= 0 && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+
+                    // Allow zero qty for Quotation sale type, or if user has permission
+                    string currentSaleType = cmb_sale_type.SelectedValue?.ToString() ?? "";
+                    bool isQuotation = currentSaleType == "Quotation";
+
+                    if (availableQty <= 0 && !isQuotation && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
                     {
                         UiMessages.ShowWarning(
                             "Cannot add this product because available quantity is zero.",
@@ -3967,7 +3977,12 @@ namespace pos
                 return false;
             }
 
-            if (qty < 0)
+            // Get current sale type
+            string currentSaleType = cmb_sale_type.SelectedValue?.ToString() ?? "";
+            bool isQuotation = currentSaleType == "Quotation";
+
+            // Allow negative quantities only for Quotation
+            if (qty < 0 && !isQuotation)
             {
                 UiMessages.ShowWarning(
                     "Quantity cannot be negative.",
@@ -3981,7 +3996,8 @@ namespace pos
                 return false;
             }
 
-            if (qty == 0 && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+            // Allow zero quantities only for Quotation
+            if (qty == 0 && !isQuotation && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
             {
                 UiMessages.ShowWarning(
                     "You do not have permission to sell with zero quantity.",
@@ -4001,6 +4017,8 @@ namespace pos
         private bool ValidateSaleGridQuantitiesBeforeSave()
         {
             bool allowZeroQtySale = _auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale);
+            string currentSaleType = cmb_sale_type.SelectedValue?.ToString() ?? "";
+            bool isQuotation = currentSaleType == "Quotation";
 
             for (int i = 0; i < grid_sales.Rows.Count; i++)
             {
@@ -4021,7 +4039,8 @@ namespace pos
                     return false;
                 }
 
-                if (qty < 0)
+                // Allow negative quantities only for Quotation
+                if (qty < 0 && !isQuotation)
                 {
                     UiMessages.ShowWarning(
                         "Quantity cannot be negative.",
@@ -4033,7 +4052,8 @@ namespace pos
                     return false;
                 }
 
-                if (qty == 0 && !allowZeroQtySale)
+                // Allow zero quantities only for Quotation
+                if (qty == 0 && !isQuotation && !allowZeroQtySale)
                 {
                     UiMessages.ShowWarning(
                         "Zero quantity sale is not allowed for your user.",
