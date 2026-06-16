@@ -202,5 +202,10 @@ namespace pos.Security.Admin
                 }
             }
         }
+
+        private void FrmRolePermissions_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

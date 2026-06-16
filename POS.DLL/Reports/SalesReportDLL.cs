@@ -455,6 +455,104 @@ namespace POS.DLL
 
         }
 
+        public DataTable SalesInvoiceReport(DateTime from_date, DateTime to_date, int customer_id = 0, string product_code = "",
+            string sale_type = "", int employee_id = 0, string sale_account = "", int branch_id = 0, bool SkipSmallInvoices = true)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+
+                        // Aggregated sale-level report: one row per invoice
+                        String query = @"
+                            SELECT 
+                                S.id,
+                                S.sale_date,
+                                S.invoice_no,
+                                C.first_name AS customer_name,
+                                COUNT(SI.id) AS total_items,
+                                SUM(SI.unit_price * SI.quantity_sold) AS subtotal,
+                                SUM(SI.discount_value) AS discount_value,
+                                SUM((SI.unit_price * SI.quantity_sold - SI.discount_value) * SI.tax_rate / 100) AS vat,
+                                SUM(SI.unit_price * SI.quantity_sold - SI.discount_value) AS total,
+                                SUM((SI.unit_price * SI.quantity_sold - SI.discount_value) + 
+                                    (SI.unit_price * SI.quantity_sold - SI.discount_value) * SI.tax_rate / 100) AS total_with_vat,
+                                SUM(ISNULL(SI.cost_price, 0) * SI.quantity_sold) AS cost_total,
+                                SUM((SI.unit_price * SI.quantity_sold - SI.discount_value) - (ISNULL(SI.cost_price, 0) * SI.quantity_sold)) AS profit
+                            FROM pos_sales S
+                            LEFT JOIN pos_sales_items SI ON S.id = SI.sale_id
+                            LEFT JOIN pos_customers C ON C.id = S.customer_id
+                            WHERE S.branch_id = @branch_id 
+                              AND S.sale_date BETWEEN @from_date AND @to_date";
+
+                        if (sale_type != "All")
+                        {
+                            query += " AND S.sale_type = @sale_type";
+                        }
+                        if (sale_account != "All")
+                        {
+                            query += " AND S.account = @account";
+                        }
+                        if (customer_id != 0)
+                        {
+                            query += " AND S.customer_id = @customer_id";
+                        }
+                        if (!string.IsNullOrEmpty(product_code))
+                        {
+                            query += " AND EXISTS (SELECT 1 FROM pos_sales_items WHERE sale_id = S.id AND item_code = @product_code)";
+                        }
+                        if (employee_id != 0)
+                        {
+                            query += " AND S.employee_id = @employee_id";
+                        }
+                        if (!SkipSmallInvoices)
+                        {
+                            query += " AND S.invoice_no NOT LIKE 'ZS%'";
+                        }
+
+                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, C.first_name ORDER BY S.sale_date DESC, S.id DESC";
+
+                        cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@from_date", from_date);
+                        cmd.Parameters.AddWithValue("@to_date", to_date);
+                        cmd.Parameters.AddWithValue("@branch_id", branch_id);
+
+                        if (sale_type != "All")
+                        {
+                            cmd.Parameters.AddWithValue("@sale_type", sale_type);
+                        }
+                        if (sale_account != "All")
+                        {
+                            cmd.Parameters.AddWithValue("@account", sale_account);
+                        }
+                        if (customer_id != 0)
+                        {
+                            cmd.Parameters.AddWithValue("@customer_id", customer_id);
+                        }
+                        if (!string.IsNullOrEmpty(product_code))
+                        {
+                            cmd.Parameters.AddWithValue("@product_code", product_code);
+                        }
+                        if (employee_id != 0)
+                        {
+                            cmd.Parameters.AddWithValue("@employee_id", employee_id);
+                        }
+                    }
+
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
         public DataTable GetBranchSummary()
         {
             using (SqlConnection conn = new SqlConnection(dbConnection.ConnectionString))

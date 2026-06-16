@@ -223,6 +223,7 @@ namespace pos.Security.Admin
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(682, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(90, 23);
@@ -245,6 +246,7 @@ namespace pos.Security.Admin
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Role Permissions";
+            this.Load += new System.EventHandler(this.FrmRolePermissions_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             this.grpRole.ResumeLayout(false);

@@ -50,6 +50,7 @@
             this.loc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplier_invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trans_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +78,7 @@
             this.loc,
             this.description,
             this.supplier,
+            this.supplier_invoice_no,
             this.customer,
             this.trans_date,
             this.username});
@@ -85,7 +87,6 @@
             this.grid_search_products.Name = "grid_search_products";
             this.grid_search_products.ReadOnly = true;
             this.grid_search_products.RowHeadersVisible = false;
-            //this.grid_search_products.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.grid_search_products.RowTemplate.DefaultCellStyle.Format = "N2";
             this.grid_search_products.RowTemplate.Height = 30;
             this.grid_search_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -214,6 +215,14 @@
             this.supplier.Name = "supplier";
             this.supplier.ReadOnly = true;
             // 
+            // supplier_invoice_no
+            // 
+            this.supplier_invoice_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.supplier_invoice_no.DataPropertyName = "supplier_invoice_no";
+            resources.ApplyResources(this.supplier_invoice_no, "supplier_invoice_no");
+            this.supplier_invoice_no.Name = "supplier_invoice_no";
+            this.supplier_invoice_no.ReadOnly = true;
+            // 
             // customer
             // 
             this.customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -277,6 +286,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn loc;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn supplier_invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn trans_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn username;

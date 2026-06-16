@@ -131,6 +131,7 @@ namespace pos.Reports.Taxes
                    || string.Equals(term, "Sales Return", StringComparison.OrdinalIgnoreCase)
                    || string.Equals(term, "Purchases", StringComparison.OrdinalIgnoreCase)
                    || string.Equals(term, "Purchase Return", StringComparison.OrdinalIgnoreCase)
+                   || string.Equals(term, "Expenses", StringComparison.OrdinalIgnoreCase)
                    || string.Equals(term, "Total Sales", StringComparison.OrdinalIgnoreCase)
                    || string.Equals(term, "Total Purchases", StringComparison.OrdinalIgnoreCase);
         }
@@ -181,15 +182,16 @@ namespace pos.Reports.Taxes
                 gridBranch.DataSource = branchSummary;
 
                 // KPI cards are based on company totals (ZATCA formula)
-                // Net Payable = Sales VAT - Sales Return VAT - Purchase VAT + Purchase Return VAT
+                // Net Payable = Sales VAT - Sales Return VAT - Purchase VAT + Purchase Return VAT - Expense VAT
                 // Source rows may be signed in the grid, so use absolute values per term first.
                 decimal salesVat = Math.Abs(GetVat(company, "Sales"));
                 decimal salesReturnVat = Math.Abs(GetVat(company, "Sales Return"));
                 decimal purchaseVat = Math.Abs(GetVat(company, "Purchases"));
                 decimal purchaseReturnVat = Math.Abs(GetVat(company, "Purchase Return"));
+                decimal expenseVat = Math.Abs(GetVat(company, "Expenses"));
 
                 decimal vatCollected = salesVat - salesReturnVat;
-                decimal vatPaid = purchaseVat - purchaseReturnVat;
+                decimal vatPaid = (purchaseVat - purchaseReturnVat) + expenseVat;
                 decimal netVat = vatCollected - vatPaid;
 
                 lblVatCollected.Text = vatCollected.ToString("N2");
@@ -233,23 +235,25 @@ namespace pos.Reports.Taxes
             decimal salesReturnNet = Math.Abs(GetAmount(dt, "Terms", "Sales Return", "NetAmount"));
             decimal purchaseNet = Math.Abs(GetAmount(dt, "Terms", "Purchases", "NetAmount"));
             decimal purchaseReturnNet = Math.Abs(GetAmount(dt, "Terms", "Purchase Return", "NetAmount"));
+            decimal expenseNet = Math.Abs(GetAmount(dt, "Terms", "Expenses", "NetAmount"));
 
             decimal salesVat = Math.Abs(GetAmount(dt, "Terms", "Sales", "VatAmount"));
             decimal salesReturnVat = Math.Abs(GetAmount(dt, "Terms", "Sales Return", "VatAmount"));
             decimal purchaseVat = Math.Abs(GetAmount(dt, "Terms", "Purchases", "VatAmount"));
             decimal purchaseReturnVat = Math.Abs(GetAmount(dt, "Terms", "Purchase Return", "VatAmount"));
+            decimal expenseVat = Math.Abs(GetAmount(dt, "Terms", "Expenses", "VatAmount"));
 
             decimal totalSalesNet = salesNet - salesReturnNet;
             decimal totalSalesVat = salesVat - salesReturnVat;
 
-            decimal totalPurchasesNet = purchaseNet - purchaseReturnNet;
-            decimal totalPurchasesVat = purchaseVat - purchaseReturnVat;
+            decimal totalPurchasesNet = purchaseNet - purchaseReturnNet + expenseNet;
+            decimal totalPurchasesVat = purchaseVat - purchaseReturnVat + expenseVat;
 
             decimal grandNet = totalSalesNet - totalPurchasesNet;
             decimal grandVat = totalSalesVat - totalPurchasesVat;
 
             long salesDocs = GetDocs(dt, "Terms", "Sales", "Docs") + GetDocs(dt, "Terms", "Sales Return", "Docs");
-            long purchaseDocs = GetDocs(dt, "Terms", "Purchases", "Docs") + GetDocs(dt, "Terms", "Purchase Return", "Docs");
+            long purchaseDocs = GetDocs(dt, "Terms", "Purchases", "Docs") + GetDocs(dt, "Terms", "Purchase Return", "Docs") + GetDocs(dt, "Terms", "Expenses", "Docs");
 
             var totalSalesRow = dt.NewRow();
             totalSalesRow["Terms"] = "Total Sales";
@@ -409,7 +413,8 @@ namespace pos.Reports.Taxes
             bool hasTaxTerms = HasTerm(dt, termsColumnName, "Sales")
                                || HasTerm(dt, termsColumnName, "Sales Return")
                                || HasTerm(dt, termsColumnName, "Purchases")
-                               || HasTerm(dt, termsColumnName, "Purchase Return");
+                               || HasTerm(dt, termsColumnName, "Purchase Return")
+                               || HasTerm(dt, termsColumnName, "Expenses");
 
             if (hasTaxTerms)
             {
@@ -417,16 +422,18 @@ namespace pos.Reports.Taxes
                 decimal salesReturnNet = Math.Abs(GetAmount(dt, termsColumnName, "Sales Return", "NetAmount"));
                 decimal purchaseNet = Math.Abs(GetAmount(dt, termsColumnName, "Purchases", "NetAmount"));
                 decimal purchaseReturnNet = Math.Abs(GetAmount(dt, termsColumnName, "Purchase Return", "NetAmount"));
+                decimal expenseNet = Math.Abs(GetAmount(dt, termsColumnName, "Expenses", "NetAmount"));
 
                 decimal salesVat = Math.Abs(GetAmount(dt, termsColumnName, "Sales", "VatAmount"));
                 decimal salesReturnVat = Math.Abs(GetAmount(dt, termsColumnName, "Sales Return", "VatAmount"));
                 decimal purchaseVat = Math.Abs(GetAmount(dt, termsColumnName, "Purchases", "VatAmount"));
                 decimal purchaseReturnVat = Math.Abs(GetAmount(dt, termsColumnName, "Purchase Return", "VatAmount"));
+                decimal expenseVat = Math.Abs(GetAmount(dt, termsColumnName, "Expenses", "VatAmount"));
 
-                // Net = Sales - Sales Return - Purchases + Purchase Return
-                net = salesNet - salesReturnNet - purchaseNet + purchaseReturnNet;
-                // VAT = Sales VAT - Sales Return VAT - Purchase VAT + Purchase Return VAT
-                vat = salesVat - salesReturnVat - purchaseVat + purchaseReturnVat;
+                // Net = Sales - Sales Return - Purchases + Purchase Return - Expenses
+                net = salesNet - salesReturnNet - purchaseNet + purchaseReturnNet - expenseNet;
+                // VAT = Sales VAT - Sales Return VAT - Purchase VAT + Purchase Return VAT - Expense VAT
+                vat = salesVat - salesReturnVat - purchaseVat + purchaseReturnVat - expenseVat;
             }
             else
             {
@@ -519,7 +526,8 @@ namespace pos.Reports.Taxes
                     row.DefaultCellStyle.Font = new Font(grid.Font, FontStyle.Bold);
                 }
                 else if (string.Equals(term, "Total Sales", StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(term, "Total Purchases", StringComparison.OrdinalIgnoreCase))
+                    || string.Equals(term, "Total Purchases", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(term, "Expenses", StringComparison.OrdinalIgnoreCase))
                 {
                     row.DefaultCellStyle.BackColor = Color.FromArgb(240, 247, 255);
                     row.DefaultCellStyle.ForeColor = Color.DarkBlue;

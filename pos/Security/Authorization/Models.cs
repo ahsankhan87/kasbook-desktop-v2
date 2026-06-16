@@ -44,6 +44,7 @@ namespace pos.Security.Authorization
         public const string Sales_ictTransactions_View = "sales.icttransactions.view";
         public const string Sales_ictTransactions_Request = "sales.icttransactions.request";
         public const string Sales_ictTransactions_Release = "sales.icttransactions.release";
+        public const string Sales_allowZeroQtySale = "sales.allowzeroqtysale";
 
         // Quotes module permissions (normalized to lowercase)
         public const string Quotes_Create = "quotes.create";

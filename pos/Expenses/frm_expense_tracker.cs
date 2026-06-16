@@ -6,7 +6,9 @@ using POS.Core;
 using POS.DLL;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,6 +18,7 @@ namespace pos.Expenses
     {
         private DataTable _gridData = new DataTable();
         private readonly Bitmap _attachmentIcon = SystemIcons.Information.ToBitmap();
+        private ToolStripMenuItem _mnuOpenAttachment;
 
         public frm_expense_tracker()
         {
@@ -34,6 +37,7 @@ namespace pos.Expenses
             LoadExpenseAccountsFilter();
             LoadPaymentModesFilter();
             LoadGrid();
+            SetupAttachmentMenus();
         }
 
         private void StyleForm()
@@ -130,10 +134,10 @@ namespace pos.Expenses
                 foreach (DataGridViewRow row in gridExpenses.Rows)
                 {
                     bool hasAttachment = false;
-                    if (row.Cells["colHasAttachment"].Value != null)
-                    {
-                        bool.TryParse(row.Cells["colHasAttachment"].Value.ToString(), out hasAttachment);
-                    }
+                        if (row.Cells["colHasAttachment"].Value != null)
+                        {
+                            hasAttachment = Convert.ToInt32(row.Cells["colHasAttachment"].Value) == 1;
+                        }
 
                     row.Cells["colAttachment"].Value = hasAttachment ? _attachmentIcon : null;
 
@@ -386,6 +390,118 @@ namespace pos.Expenses
         private void mnuViewJournal_Click(object sender, EventArgs e)
         {
             ShowJournalForSelected();
+        }
+
+        // --- Attachment open support ---
+
+        private void SetupAttachmentMenus()
+        {
+            _mnuOpenAttachment = new ToolStripMenuItem("Open Attachment");
+            _mnuOpenAttachment.Click += mnuOpenAttachment_Click;
+            ctxGrid.Items.Add(new ToolStripSeparator());
+            ctxGrid.Items.Add(_mnuOpenAttachment);
+
+            ctxGrid.Opening += ctxGrid_Opening;
+            gridExpenses.CellClick += gridExpenses_CellClick;
+        }
+
+        private void ctxGrid_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string desc = GetSelectedDescription();
+            bool hasAttachment = !string.IsNullOrWhiteSpace(ParseAttachmentFromDescription(desc));
+            _mnuOpenAttachment.Enabled = hasAttachment;
+        }
+
+        private void mnuOpenAttachment_Click(object sender, EventArgs e)
+        {
+            OpenAttachmentForSelected();
+        }
+
+        private void gridExpenses_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (gridExpenses.Columns[e.ColumnIndex].Name == "colAttachment")
+            {
+                bool hasAttachment = Convert.ToInt32(gridExpenses.Rows[e.RowIndex].Cells["colHasAttachment"].Value) == 1;
+                if (hasAttachment)
+                {
+                    gridExpenses.CurrentCell = gridExpenses.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    OpenAttachmentForSelected();
+                }
+            }
+        }
+
+        private void OpenAttachmentForSelected()
+        {
+            string desc = GetSelectedDescription();
+            string fileName = ParseAttachmentFromDescription(desc);
+
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                UiMessages.ShowInfo(
+                    "No attachment found for this record.",
+                    "لا يوجد مرفق لهذا السجل.",
+                    "Attachment",
+                    "المرفق");
+                return;
+            }
+
+            string voucherNo = GetSelectedVoucherNo();
+            string folder = Path.Combine(Application.StartupPath, "Attachments", "Expenses");
+
+            // Try prefixed name first (new convention: voucherNo_filename), then bare filename
+            string safeVoucher = voucherNo == null ? string.Empty : string.Concat(voucherNo.Split(Path.GetInvalidFileNameChars()));
+            string prefixedPath = Path.Combine(folder, safeVoucher + "_" + fileName);
+            string barePath = Path.Combine(folder, fileName);
+
+            string resolvedPath = File.Exists(prefixedPath) ? prefixedPath
+                                : File.Exists(barePath) ? barePath
+                                : null;
+
+            if (resolvedPath == null)
+            {
+                UiMessages.ShowWarning(
+                    "Attachment file not found on disk:\n" + fileName,
+                    "ملف المرفق غير موجود:\n" + fileName,
+                    "Attachment Missing",
+                    "المرفق مفقود");
+                return;
+            }
+
+            try
+            {
+                Process.Start(resolvedPath);
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message);
+            }
+        }
+
+        private string GetSelectedDescription()
+        {
+            if (gridExpenses.CurrentRow == null)
+                return string.Empty;
+
+            return Convert.ToString(gridExpenses.CurrentRow.Cells["colDescription"].Value);
+        }
+
+        private string ParseAttachmentFromDescription(string description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+                return string.Empty;
+
+            var parts = description.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var part in parts)
+            {
+                var trimmed = part.Trim();
+                if (trimmed.StartsWith("Attachment:", StringComparison.OrdinalIgnoreCase))
+                    return trimmed.Substring(11).Trim();
+            }
+
+            return string.Empty;
         }
     }
 }

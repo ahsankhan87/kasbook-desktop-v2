@@ -1,5 +1,6 @@
 ﻿using pos.UI;
 using pos.UI.Busy;
+using pos.Security.Authorization;
 using POS.BLL;
 using POS.Core;
 using System;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using AppPermissions = pos.Security.Authorization.Permissions;
 
 namespace pos
 {
@@ -14,6 +16,9 @@ namespace pos
     {
         public string lang = (UsersModal.logged_in_lang.Length > 0 ? UsersModal.logged_in_lang : "en-US");
         private frm_sales mainForm;
+
+        private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
+        private UserIdentity _currentUser = AppSecurityContext.User;
 
         string _product_code = "";
         string _category_code = "";
@@ -217,6 +222,9 @@ namespace pos
         {
             if (grid_search_products.SelectedCells.Count > 0)
             {
+                if (!CanSelectMainProduct())
+                    return;
+
                 string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
 
                 if (_isGrid)
@@ -309,6 +317,9 @@ namespace pos
         {
             if (grid_group_products.SelectedCells.Count > 0)
             {
+                if (!CanSelectAlternateProduct())
+                    return;
+
                 string alt_item_number = grid_group_products.CurrentRow.Cells["alt_item_number"].Value.ToString();
 
                 if (_isGrid)
@@ -327,6 +338,52 @@ namespace pos
             {
                 UiMessages.ShowWarning("Please select record", "يرجى اختيار سجل", "Products", "المنتجات");
             }
+        }
+
+        private bool CanSelectMainProduct()
+        {
+            if (_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+                return true;
+
+            if (grid_search_products.CurrentRow == null)
+                return false;
+
+            double qty;
+            var qtyValue = Convert.ToString(grid_search_products.CurrentRow.Cells["qty"].Value);
+            if (string.IsNullOrWhiteSpace(qtyValue) || !double.TryParse(qtyValue, out qty) || qty <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Cannot add this product because available quantity is zero.",
+                    "لا يمكن إضافة هذا الصنف لأن الكمية المتاحة صفر.",
+                    "Out of Stock",
+                    "نفاد الكمية");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CanSelectAlternateProduct()
+        {
+            if (_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+                return true;
+
+            if (grid_group_products.CurrentRow == null)
+                return false;
+
+            double qty;
+            var qtyValue = Convert.ToString(grid_group_products.CurrentRow.Cells["g_qty"].Value);
+            if (string.IsNullOrWhiteSpace(qtyValue) || !double.TryParse(qtyValue, out qty) || qty <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Cannot add this product because available quantity is zero.",
+                    "لا يمكن إضافة هذا الصنف لأن الكمية المتاحة صفر.",
+                    "Out of Stock",
+                    "نفاد الكمية");
+                return false;
+            }
+
+            return true;
         }
 
         private void grid_search_products_SelectionChanged(object sender, EventArgs e)

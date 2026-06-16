@@ -1078,6 +1078,12 @@
     <Compile Include="Reports\Sales\frm_ReturnsRefundsReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\Sales\frm_SaleProductDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SaleProductDetail.Designer.cs">
+      <DependentUpon>frm_SaleProductDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Sales\frm_SalesByCategoryReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1089,6 +1095,12 @@
     </Compile>
     <Compile Include="Reports\Sales\frm_SalesByProductReport.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesInvoiceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales\frm_SalesInvoiceReport.Designer.cs">
+      <DependentUpon>frm_SalesInvoiceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Sales\frm_SalesRegisterReport.cs">
       <SubType>Form</SubType>
@@ -2373,6 +2385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesByCategoryReport.resx">
       <DependentUpon>frm_SalesByCategoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_SalesInvoiceReport.resx">
+      <DependentUpon>frm_SalesInvoiceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.ar-SA.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>

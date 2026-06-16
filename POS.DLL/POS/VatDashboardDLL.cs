@@ -55,6 +55,15 @@ namespace POS.DLL
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                ),
+                ExpenseAgg AS (
+                    SELECT
+                        Docs = COUNT(1),
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(amount,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
+                    FROM acc_payments
+                    WHERE payment_date >= @from AND payment_date < DATEADD(day,1,@to)
+                      AND ISNULL(invoice_no,'') LIKE 'N-%'
                 )
                 SELECT * FROM (
                     SELECT
@@ -88,6 +97,14 @@ namespace POS.DLL
                         NetAmount = (SELECT NetAmount FROM PurchReturnAgg),
                         VatAmount = (SELECT VatAmount FROM PurchReturnAgg),
                         SortOrder = 4
+                    UNION ALL
+                    SELECT
+                        Terms = 'Expenses',
+                        Docs = (SELECT Docs FROM ExpenseAgg),
+                        Flag = 'Expense',
+                        NetAmount = (SELECT NetAmount FROM ExpenseAgg) * -1,
+                        VatAmount = (SELECT VatAmount FROM ExpenseAgg) * -1,
+                        SortOrder = 5
                 ) x
                 ORDER BY SortOrder;";
 
@@ -161,26 +178,38 @@ namespace POS.DLL
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
                     GROUP BY branch_id
                 ),
+                ExpenseAgg AS (
+                    SELECT
+                        branch_id,
+                        Docs = COUNT(1),
+                        NetAmount = ISNULL(SUM(ABS(ISNULL(amount,0))),0),
+                        VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
+                    FROM acc_payments
+                    WHERE payment_date >= @from AND payment_date < DATEADD(day,1,@to)
+                      AND ISNULL(invoice_no,'') LIKE 'N-%'
+                    GROUP BY branch_id
+                ),
                 Branches AS (
                     SELECT id AS branch_id, name
                     FROM pos_branches
                 )
                 SELECT
                     Terms = b.name,
-                    Doc = ISNULL(sa.Docs,0) + ISNULL(sr.Docs,0) + ISNULL(pa.Docs,0) + ISNULL(pr.Docs,0),
+                    Doc = ISNULL(sa.Docs,0) + ISNULL(sr.Docs,0) + ISNULL(pa.Docs,0) + ISNULL(pr.Docs,0) + ISNULL(ea.Docs,0),
                     [Brn-ID] = RIGHT('00' + CAST(b.branch_id AS varchar(10)), 2),
 
-                    -- Net payable base (sales base - purchases base) with returns applied
-                    NetAmount = (ISNULL(sa.NetAmount,0) - ISNULL(sr.NetAmount,0)) - (ISNULL(pa.NetAmount,0) - ISNULL(pr.NetAmount,0)),
+                    -- Net payable base (sales base - purchases base - expenses base) with returns applied
+                    NetAmount = (ISNULL(sa.NetAmount,0) - ISNULL(sr.NetAmount,0)) - (ISNULL(pa.NetAmount,0) - ISNULL(pr.NetAmount,0)) - ISNULL(ea.NetAmount,0),
 
-                    -- VAT payable (VAT on sales - VAT on purchases) with returns applied
-                    VatAmount = (ISNULL(sa.VatAmount,0) - ISNULL(sr.VatAmount,0)) - (ISNULL(pa.VatAmount,0) - ISNULL(pr.VatAmount,0))
+                    -- VAT payable (VAT on sales - VAT on purchases - VAT on expenses) with returns applied
+                    VatAmount = (ISNULL(sa.VatAmount,0) - ISNULL(sr.VatAmount,0)) - (ISNULL(pa.VatAmount,0) - ISNULL(pr.VatAmount,0)) - ISNULL(ea.VatAmount,0)
                 FROM Branches b
                 LEFT JOIN SalesAgg sa ON sa.branch_id = b.branch_id
                 LEFT JOIN SalesReturnAgg sr ON sr.branch_id = b.branch_id
                 LEFT JOIN PurchAgg pa ON pa.branch_id = b.branch_id
                 LEFT JOIN PurchReturnAgg pr ON pr.branch_id = b.branch_id
-                WHERE (ISNULL(sa.Docs,0) + ISNULL(sr.Docs,0) + ISNULL(pa.Docs,0) + ISNULL(pr.Docs,0)) > 0
+                LEFT JOIN ExpenseAgg ea ON ea.branch_id = b.branch_id
+                WHERE (ISNULL(sa.Docs,0) + ISNULL(sr.Docs,0) + ISNULL(pa.Docs,0) + ISNULL(pr.Docs,0) + ISNULL(ea.Docs,0)) > 0
                 ORDER BY b.branch_id;";
 
                 cmd.Parameters.AddWithValue("@pFrom", from.Date);
@@ -228,6 +257,12 @@ namespace POS.DLL
                     FROM pos_purchases
                     WHERE branch_id = @branch_id AND purchase_date >= @from AND purchase_date < DATEADD(day,1,@to) AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                ),
+                ExpenseAgg AS (
+                    SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(amount,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
+                    FROM acc_payments
+                    WHERE branch_id = @branch_id AND payment_date >= @from AND payment_date < DATEADD(day,1,@to)
+                      AND ISNULL(invoice_no,'') LIKE 'N-%'
                 )
                 SELECT * FROM (
                     SELECT Terms = 'Sales', Docs = (SELECT Docs FROM SalesAgg), Flag = 'Sales', NetAmount = (SELECT NetAmount FROM SalesAgg), VatAmount = (SELECT VatAmount FROM SalesAgg), SortOrder = 1
@@ -237,6 +272,8 @@ namespace POS.DLL
                     SELECT Terms = 'Purchases', Docs = (SELECT Docs FROM PurchAgg), Flag = 'Purchase', NetAmount = (SELECT NetAmount FROM PurchAgg) * -1, VatAmount = (SELECT VatAmount FROM PurchAgg) * -1, SortOrder = 3
                     UNION ALL
                     SELECT Terms = 'Purchase Return', Docs = (SELECT Docs FROM PurchReturnAgg), Flag = 'Return', NetAmount = (SELECT NetAmount FROM PurchReturnAgg), VatAmount = (SELECT VatAmount FROM PurchReturnAgg), SortOrder = 4
+                    UNION ALL
+                    SELECT Terms = 'Expenses', Docs = (SELECT Docs FROM ExpenseAgg), Flag = 'Expense', NetAmount = (SELECT NetAmount FROM ExpenseAgg) * -1, VatAmount = (SELECT VatAmount FROM ExpenseAgg) * -1, SortOrder = 5
                 ) x
                 ORDER BY SortOrder;";
 
@@ -300,6 +337,23 @@ namespace POS.DLL
                       AND ISNULL(p.invoice_no,'') NOT LIKE 'ZS%'
                       AND {1}";
 
+                string expensesSelect = @"
+                    SELECT
+                        DocDate = e.payment_date,
+                        InvoiceNo = e.invoice_no,
+                        SupplierInvoice = CAST('' AS varchar(100)),
+                        Party = ISNULL(e.name, ''),
+                        VATNo = CAST('' AS varchar(100)),
+                        DocType = 'Expenses',
+                        PurType = CAST('' AS varchar(100)),
+                        NetAmount = -ABS(ISNULL(e.amount,0)),
+                        VatAmount = -ABS(ISNULL(e.tax_amount,0)),
+                        TotalAmount = -(ABS(ISNULL(e.amount,0)) + ABS(ISNULL(e.tax_amount,0))),
+                        Description = ISNULL(e.description, '')
+                    FROM acc_payments e
+                    WHERE e.payment_date >= @pFrom AND e.payment_date < DATEADD(day,1,@pTo)
+                      AND ISNULL(e.invoice_no,'') LIKE 'N-%'";
+
                 string sql;
                 switch (normalizedTerm.ToLowerInvariant())
                 {
@@ -324,6 +378,9 @@ namespace POS.DLL
                         sql = string.Format(purchasesSelect, "-", "p.account <> 'Return'")
                             + " UNION ALL "
                             + string.Format(purchasesSelect, string.Empty, "p.account = 'Return'");
+                        break;
+                    case "expenses":
+                        sql = expensesSelect;
                         break;
                     default:
                         return new DataTable();

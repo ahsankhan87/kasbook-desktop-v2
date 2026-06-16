@@ -1836,6 +1836,7 @@ namespace pos
                         {
                             _suppressSupplierSearch = false;
                         }
+                        cmb_purchase_type.SelectedValue = (string.IsNullOrEmpty(myProductView["purchase_type"].ToString()) ? "Cash" : myProductView["purchase_type"].ToString());
                         cmb_employees.SelectedValue = (string.IsNullOrEmpty(myProductView["employee_id"].ToString()) ? "" : myProductView["employee_id"]);
                         cmb_payment_terms.SelectedValue = (string.IsNullOrEmpty(myProductView["payment_terms_id"].ToString()) ? "" : myProductView["payment_terms_id"]);
                         cmb_payment_method.SelectedValue = (string.IsNullOrEmpty(myProductView["payment_method_id"].ToString()) ? "" : myProductView["payment_method_id"]);

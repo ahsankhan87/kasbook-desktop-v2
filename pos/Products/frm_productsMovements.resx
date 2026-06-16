@@ -248,6 +248,18 @@
   <data name="supplier.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <metadata name="supplier_invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="supplier_invoice_no.HeaderText" xml:space="preserve">
+    <value>Supplier Inv #</value>
+  </data>
+  <data name="supplier_invoice_no.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="supplier_invoice_no.Width" type="System.Int32, mscorlib">
+    <value>123</value>
+  </data>
   <metadata name="customer.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -475,6 +487,12 @@
     <value>supplier</value>
   </data>
   <data name="&gt;&gt;supplier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;supplier_invoice_no.Name" xml:space="preserve">
+    <value>supplier_invoice_no</value>
+  </data>
+  <data name="&gt;&gt;supplier_invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customer.Name" xml:space="preserve">

@@ -550,6 +550,17 @@ namespace pos
 
                     foreach (DataRow myProductView in product_dt.Rows)
                     {
+                        double availableQty = 0;
+                        double.TryParse(Convert.ToString(myProductView["qty"]), out availableQty);
+                        if (availableQty <= 0 && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+                        {
+                            UiMessages.ShowWarning(
+                                "Cannot add this product because available quantity is zero.",
+                                "لا يمكن إضافة هذا الصنف لأن الكمية المتاحة صفر.",
+                                "Out of Stock",
+                                "نفاد الكمية");
+                            return;
+                        }
 
                         double qty = Convert.ToDouble(myProductView["sale_demand_qty"].ToString() == string.Empty || (decimal)myProductView["sale_demand_qty"] == 0 ? "1" : myProductView["sale_demand_qty"].ToString());
                         double total = qty * double.Parse(myProductView["unit_price"].ToString());
@@ -636,6 +647,18 @@ namespace pos
             {
                 foreach (DataRow myProductView in product_dt.Rows)
                 {
+                    double availableQty = 0;
+                    double.TryParse(Convert.ToString(myProductView["qty"]), out availableQty);
+                    if (availableQty <= 0 && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+                    {
+                        UiMessages.ShowWarning(
+                            "Cannot add this product because available quantity is zero.",
+                            "لا يمكن إضافة هذا الصنف لأن الكمية المتاحة صفر.",
+                            "Out of Stock",
+                            "نفاد الكمية");
+                        continue;
+                    }
+
                     double qty = Convert.ToDouble(myProductView["sale_demand_qty"].ToString() == string.Empty || (decimal)myProductView["sale_demand_qty"] == 0 ? "1" : myProductView["sale_demand_qty"].ToString());
                     double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
                     string grid_item_number = myProductView["item_number"].ToString();
@@ -2459,6 +2482,9 @@ namespace pos
                         return;
                     }
 
+                    if (!ValidateSaleGridQuantitiesBeforeSave())
+                        return;
+
                     // Existing Standard subtype check
                     // Additional ZATCA postal address validation for Standard subtype
                     // ZATCA validation
@@ -3927,11 +3953,11 @@ namespace pos
             object qtyObj = grid_sales.Rows[rowIndex].Cells["Qty"].Value;
             double qty;
 
-            if (!double.TryParse(Convert.ToString(qtyObj), out qty) || qty <= 0)
+            if (!double.TryParse(Convert.ToString(qtyObj), out qty))
             {
                 UiMessages.ShowWarning(
-                    "Quantity must be greater than zero.",
-                    "الكمية يجب أن تكون أكبر من صفر.",
+                    "Quantity must be a valid number.",
+                    "الكمية يجب أن تكون رقماً صحيحاً.",
                     "Validation",
                     "التحقق");
 
@@ -3939,6 +3965,85 @@ namespace pos
                 grid_sales.CurrentCell = grid_sales.Rows[rowIndex].Cells["Qty"];
                 grid_sales.BeginEdit(true);
                 return false;
+            }
+
+            if (qty < 0)
+            {
+                UiMessages.ShowWarning(
+                    "Quantity cannot be negative.",
+                    "الكمية لا يمكن أن تكون سالبة.",
+                    "Validation",
+                    "التحقق");
+
+                grid_sales.Rows[rowIndex].Cells["Qty"].Value = 1;
+                grid_sales.CurrentCell = grid_sales.Rows[rowIndex].Cells["Qty"];
+                grid_sales.BeginEdit(true);
+                return false;
+            }
+
+            if (qty == 0 && !_auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale))
+            {
+                UiMessages.ShowWarning(
+                    "You do not have permission to sell with zero quantity.",
+                    "ليس لديك صلاحية للبيع بكمية صفر.",
+                    "Permission Denied",
+                    "تم رفض الصلاحية");
+
+                grid_sales.Rows[rowIndex].Cells["Qty"].Value = 1;
+                grid_sales.CurrentCell = grid_sales.Rows[rowIndex].Cells["Qty"];
+                grid_sales.BeginEdit(true);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateSaleGridQuantitiesBeforeSave()
+        {
+            bool allowZeroQtySale = _auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroQtySale);
+
+            for (int i = 0; i < grid_sales.Rows.Count; i++)
+            {
+                var row = grid_sales.Rows[i];
+                if (row == null || row.IsNewRow || row.Cells["id"].Value == null)
+                    continue;
+
+                double qty;
+                if (!double.TryParse(Convert.ToString(row.Cells["qty"].Value), out qty))
+                {
+                    UiMessages.ShowWarning(
+                        "Quantity must be a valid number.",
+                        "الكمية يجب أن تكون رقماً صحيحاً.",
+                        "Validation",
+                        "التحقق");
+                    grid_sales.CurrentCell = row.Cells["qty"];
+                    grid_sales.Focus();
+                    return false;
+                }
+
+                if (qty < 0)
+                {
+                    UiMessages.ShowWarning(
+                        "Quantity cannot be negative.",
+                        "الكمية لا يمكن أن تكون سالبة.",
+                        "Validation",
+                        "التحقق");
+                    grid_sales.CurrentCell = row.Cells["qty"];
+                    grid_sales.Focus();
+                    return false;
+                }
+
+                if (qty == 0 && !allowZeroQtySale)
+                {
+                    UiMessages.ShowWarning(
+                        "Zero quantity sale is not allowed for your user.",
+                        "البيع بكمية صفر غير مسموح لمستخدمك.",
+                        "Permission Denied",
+                        "تم رفض الصلاحية");
+                    grid_sales.CurrentCell = row.Cells["qty"];
+                    grid_sales.Focus();
+                    return false;
+                }
             }
 
             return true;

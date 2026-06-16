@@ -401,6 +401,8 @@ namespace pos.Expenses
 
                     if (saveId.ToString().Length > 0)
                     {
+                        SaveAttachment(voucherNo);
+
                         POS.DLL.Log.LogAction(
                             "Expense Save",
                             $"Expense voucher saved. Voucher: {voucherNo}, Ref: {txtReferenceNo.Text.Trim()}, Amount: {nudAmount.Value:N2}",
@@ -436,11 +438,35 @@ namespace pos.Expenses
             }
         }
 
+        private void SaveAttachment(string voucherNo)
+        {
+            if (string.IsNullOrWhiteSpace(_selectedAttachmentPath) || !File.Exists(_selectedAttachmentPath))
+                return;
+
+            try
+            {
+                string folder = Path.Combine(Application.StartupPath, "Attachments", "Expenses");
+                Directory.CreateDirectory(folder);
+
+                string safeVoucher = string.Concat(voucherNo.Split(Path.GetInvalidFileNameChars()));
+                string destFileName = safeVoucher + "_" + Path.GetFileName(_selectedAttachmentPath);
+                string destPath = Path.Combine(folder, destFileName);
+
+                File.Copy(_selectedAttachmentPath, destPath, overwrite: true);
+            }
+            catch
+            {
+                // attachment copy is non-critical; swallow silently
+            }
+        }
+
         private string BuildDescription()
         {
             var narration = txtNarration.Text?.Trim() ?? string.Empty;
             var reference = txtReferenceNo.Text?.Trim() ?? string.Empty;
-            var attachment = string.IsNullOrWhiteSpace(_selectedAttachmentPath) ? string.Empty : Path.GetFileName(_selectedAttachmentPath);
+            var attachment = !string.IsNullOrWhiteSpace(_selectedAttachmentPath)
+                ? Path.GetFileName(_selectedAttachmentPath)
+                : txtAttachment.Text.Trim();
             var paymentMode = cmbPaymentMode.SelectedItem == null ? string.Empty : cmbPaymentMode.SelectedItem.ToString();
 
             var parts = new List<string>

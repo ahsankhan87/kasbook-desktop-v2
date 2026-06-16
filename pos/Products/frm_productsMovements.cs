@@ -136,12 +136,14 @@ namespace pos
                                             I.trans_date,
                                             C.first_name AS customer,
                                             CONCAT(S.first_name,' ',S.last_name) AS supplier,
+                                            ISNULL(P.supplier_invoice_no, '') AS supplier_invoice_no,
                                             COALESCE(U.name,U.username,  '') AS username,
                                             SUM(I.qty) OVER (ORDER BY I.id ASC ROWS UNBOUNDED PRECEDING) AS balance_qty
                                         FROM pos_inventory I
                                         LEFT JOIN pos_customers C ON C.id = I.customer_id
                                         LEFT JOIN pos_suppliers S ON S.id = I.supplier_id
                                         LEFT JOIN pos_users U ON U.id = I.user_id
+                                        LEFT JOIN pos_purchases P ON P.invoice_no = I.invoice_no
                                         WHERE I.item_number = @item_number
                                           AND I.branch_id = @branch_id
                                         ORDER BY I.id DESC";
@@ -168,12 +170,13 @@ namespace pos
                         string location = row["loc_code"].ToString();
                         string description = row["description"].ToString();
                         string supplier = row["supplier"].ToString();
+                        string supplier_invoice_no = row["supplier_invoice_no"].ToString();
                         string customer = row["customer"].ToString();
                         string date = row["trans_date"].ToString();
                         string username = row["username"].ToString();
 
                         string[] row0 = { id.ToString(), invoice_no, qty, balance, cost_price.ToString(), unit_price.ToString(),
-                                  location,description, supplier, customer, date, username };
+                                  location,description, supplier, supplier_invoice_no, customer, date, username };
 
                         grid_search_products.Rows.Add(row0);
 

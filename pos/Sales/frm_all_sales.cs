@@ -641,6 +641,18 @@ namespace pos
         {
             try
             {
+                // If Zatca invoice status is Reported or Cleared then dont change customer name
+                string zatcaInvoiceStatus = Convert.ToString(grid_all_sales.CurrentRow.Cells["zatca_status"].Value);
+                if (zatcaInvoiceStatus == "REPORTED" || zatcaInvoiceStatus == "CLEARED")
+                {
+                    UiMessages.ShowWarning(
+                        "Customer name cannot be changed for ZATCA compliant invoices.",
+                        "لا يمكن تغيير اسم العميل للفواتير المتوافقة مع ZATCA.",
+                        "Customer Name Change",
+                        "تغيير اسم العميل");
+                    return;
+                }
+
                 if (grid_all_sales.CurrentRow == null)
                 {
                     UiMessages.ShowInfo(
