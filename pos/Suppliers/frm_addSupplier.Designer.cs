@@ -100,6 +100,8 @@
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
+            this.txt_opening_balance = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -285,6 +287,8 @@
             this.tableLayoutPanel1.Controls.Add(this.txt_email, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.txt_contact_no, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_opening_balance, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 9);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // cmb_GL_account_code
@@ -597,6 +601,16 @@
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
+            // txt_opening_balance
+            // 
+            resources.ApplyResources(this.txt_opening_balance, "txt_opening_balance");
+            this.txt_opening_balance.Name = "txt_opening_balance";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
             // frm_addSupplier
             // 
             resources.ApplyResources(this, "$this");
@@ -703,5 +717,7 @@
         private System.Windows.Forms.TextBox txt_supplier_code;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btn_transDelete;
+        private System.Windows.Forms.TextBox txt_opening_balance;
+        private System.Windows.Forms.Label label10;
     }
 }

@@ -205,7 +205,7 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_address.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 427</value>
+    <value>150, 422</value>
   </data>
   <data name="txt_address.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -214,7 +214,7 @@
     <value>True</value>
   </data>
   <data name="txt_address.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 61</value>
+    <value>338, 43</value>
   </data>
   <data name="txt_address.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -676,7 +676,7 @@
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 449</value>
+    <value>4, 435</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1641,11 +1641,74 @@
   <data name="&gt;&gt;txt_registrationName.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
+  <data name="txt_opening_balance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="txt_opening_balance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 473</value>
+  </data>
+  <data name="txt_opening_balance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txt_opening_balance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 23</value>
+  </data>
+  <data name="txt_opening_balance.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="&gt;&gt;txt_opening_balance.Name" xml:space="preserve">
+    <value>txt_opening_balance</value>
+  </data>
+  <data name="&gt;&gt;txt_opening_balance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_opening_balance.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;txt_opening_balance.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 474</value>
+  </data>
+  <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>Opening Balance:</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 5</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>896, 497</value>
@@ -1666,7 +1729,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label12" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox3" Row="0" RowSpan="8" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_car_name" Row="12" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_address" Row="13" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_vin_no" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label10" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label14" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmb_GL_account_code" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_customer_code" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_first_name" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_credit_limit" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_contact_no" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_email" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label13" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_last_name" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_cr_number" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label11" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_registrationName" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_vatno" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_id" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,16.36364,Percent,38.63636,Percent,44.88636" /&gt;&lt;Rows Styles="Absolute,32,Absolute,32,Absolute,34,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,29" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label12" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox3" Row="0" RowSpan="8" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_car_name" Row="12" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_address" Row="13" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_vin_no" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label10" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label14" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label5" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmb_GL_account_code" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_customer_code" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_first_name" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_credit_limit" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_contact_no" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_email" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label13" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_last_name" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_cr_number" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label11" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_registrationName" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_vatno" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label9" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_id" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txt_opening_balance" Row="14" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label15" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,16.36364,Percent,38.63636,Percent,44.88636" /&gt;&lt;Rows Styles="Absolute,32,Absolute,32,Absolute,34,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,32,Absolute,51,Absolute,8" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="Detail.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>

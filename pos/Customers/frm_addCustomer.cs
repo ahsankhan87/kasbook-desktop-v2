@@ -211,6 +211,10 @@ namespace pos
                 if (dt.Columns.Contains("customer_code"))
                     txt_customer_code.Text = myProductView["customer_code"].ToString();
             }
+
+            decimal openingBalance = objBLL.GetCustomerOpeningBalance(customer_id);
+            txt_opening_balance.Text = openingBalance.ToString("N2");
+
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
 
@@ -306,6 +310,19 @@ namespace pos
 
                 if (txt_first_name.Text != string.Empty)
                 {
+                    decimal openingBalance = 0m;
+                    if (!string.IsNullOrWhiteSpace(txt_opening_balance.Text) && !decimal.TryParse(txt_opening_balance.Text, out openingBalance))
+                    {
+                        UiMessages.ShowInfo(
+                            "Please enter a valid opening balance amount.",
+                            "يرجى إدخال مبلغ رصيد افتتاحي صحيح.",
+                            "Validation",
+                            "التحقق"
+                        );
+                        txt_opening_balance.Focus();
+                        return;
+                    }
+
                     CustomerModal info = new CustomerModal
                     {
                         first_name = txt_first_name.Text,
@@ -328,6 +345,7 @@ namespace pos
                         GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue),
                         CRNumber = txt_cr_number.Text.Trim(),
                         customer_code = txt_customer_code.Text.Trim(),
+                        opening_balance = Math.Round(openingBalance, 2),
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();
@@ -437,6 +455,7 @@ namespace pos
 
             cmb_GL_account_code.SelectedValue = "5"; // 5 is the default Ac receiavable Account id in acc_accounts table
             txt_cr_number.Text = "";
+            txt_opening_balance.Text = "0.00";
             btn_transDelete.Enabled = false;
             GetCustomerCode();
         }
@@ -509,6 +528,19 @@ namespace pos
                     if (confirmUpdate != DialogResult.Yes)
                         return;
 
+                    decimal openingBalance = 0m;
+                    if (!string.IsNullOrWhiteSpace(txt_opening_balance.Text) && !decimal.TryParse(txt_opening_balance.Text, out openingBalance))
+                    {
+                        UiMessages.ShowInfo(
+                            "Please enter a valid opening balance amount.",
+                            "يرجى إدخال مبلغ رصيد افتتاحي صحيح.",
+                            "Validation",
+                            "التحقق"
+                        );
+                        txt_opening_balance.Focus();
+                        return;
+                    }
+
                     CustomerModal info = new CustomerModal
                     {
                         first_name = txt_first_name.Text,
@@ -531,6 +563,7 @@ namespace pos
                         GLAccountID = Convert.ToInt32(cmb_GL_account_code.SelectedValue),
                         CRNumber = txt_cr_number.Text.Trim(),
                         customer_code = txt_customer_code.Text.Trim(),
+                        opening_balance = Math.Round(openingBalance, 2),
                     };
 
                     CustomerBLL objBLL = new CustomerBLL();

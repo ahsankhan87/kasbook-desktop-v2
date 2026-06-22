@@ -46,6 +46,8 @@ namespace POS.Core
 
         public int GLAccountID { get; set; } = 0;
 
+        public decimal opening_balance { get; set; }
+
         public string supplier_code { get; set; }
     }
 }

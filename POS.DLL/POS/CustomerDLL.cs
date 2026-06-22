@@ -7,6 +7,8 @@ namespace POS.DLL
 {
     public class CustomerDLL
     {
+        private const string OpeningBalanceMarker = "[Opening Balance]";
+
         public string NormalizeCustomerCodeInput(string input)
         {
             var normalized = (input ?? string.Empty).Trim();
@@ -196,6 +198,178 @@ namespace POS.DLL
                 {
                     throw new Exception("Error fetching customer account balance: " + ex.Message, ex);
                 }
+            }
+        }
+
+        public decimal GetCustomerOpeningBalance(int customerId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+            SELECT TOP 1 CAST(ISNULL(debit, 0) - ISNULL(credit, 0) AS decimal(18,2))
+            FROM pos_customers_payments
+            WHERE branch_id = @branch_id
+              AND customer_id = @customer_id
+              AND (
+                    invoice_no = @opening_invoice_no
+                    OR CHARINDEX(@opening_marker, ISNULL(description, '')) = 1
+                  )
+            ORDER BY id DESC", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@customer_id", SqlDbType.Int).Value = customerId;
+                cmdLocal.Parameters.Add("@opening_invoice_no", SqlDbType.NVarChar, 50).Value = BuildOpeningBalanceInvoiceNo(customerId);
+                cmdLocal.Parameters.Add("@opening_marker", SqlDbType.NVarChar).Value = OpeningBalanceMarker;
+
+                cn.Open();
+                object result = cmdLocal.ExecuteScalar();
+                return result == null || result == DBNull.Value ? 0m : Math.Round(Convert.ToDecimal(result), 2);
+            }
+        }
+
+        private static int GetFallbackReceivableAccountId(SqlConnection cn)
+        {
+            using (SqlCommand cmdLocal = new SqlCommand("SELECT TOP 1 receivable_acc_id FROM pos_companies", cn))
+            {
+                object result = cmdLocal.ExecuteScalar();
+                return result == null || result == DBNull.Value ? 0 : Convert.ToInt32(result);
+            }
+        }
+
+        private static string BuildOpeningBalanceInvoiceNo(int customerId)
+        {
+            return "CUS-OB-" + customerId;
+        }
+
+        private static string BuildOpeningBalanceDescription()
+        {
+            return OpeningBalanceMarker + " Customer opening balance";
+        }
+
+        private static void UpsertCustomerOpeningBalance(SqlConnection cn, int customerId, int accountId, decimal openingBalance)
+        {
+            const string findQuery = @"
+            SELECT TOP 1 id
+            FROM pos_customers_payments
+            WHERE branch_id = @branch_id
+              AND customer_id = @customer_id
+              AND (
+                    invoice_no = @opening_invoice_no
+                    OR CHARINDEX(@opening_marker, ISNULL(description, '')) = 1
+                  )
+            ORDER BY id DESC";
+
+            int existingId = 0;
+            using (SqlCommand findCmd = new SqlCommand(findQuery, cn))
+            {
+                findCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                findCmd.Parameters.Add("@customer_id", SqlDbType.Int).Value = customerId;
+                findCmd.Parameters.Add("@opening_invoice_no", SqlDbType.NVarChar, 50).Value = BuildOpeningBalanceInvoiceNo(customerId);
+                findCmd.Parameters.Add("@opening_marker", SqlDbType.NVarChar).Value = OpeningBalanceMarker;
+
+                object existing = findCmd.ExecuteScalar();
+                existingId = existing == null || existing == DBNull.Value ? 0 : Convert.ToInt32(existing);
+            }
+
+            decimal roundedOpening = Math.Round(openingBalance, 2);
+            if (roundedOpening <= 0)
+            {
+                if (existingId > 0)
+                {
+                    using (SqlCommand deleteCmd = new SqlCommand("DELETE FROM pos_customers_payments WHERE id = @id AND branch_id = @branch_id", cn))
+                    {
+                        deleteCmd.Parameters.Add("@id", SqlDbType.Int).Value = existingId;
+                        deleteCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                        deleteCmd.ExecuteNonQuery();
+                    }
+                }
+
+                return;
+            }
+
+            int effectiveAccountId = accountId > 0 ? accountId : GetFallbackReceivableAccountId(cn);
+            string invoiceNo = BuildOpeningBalanceInvoiceNo(customerId);
+            string description = BuildOpeningBalanceDescription();
+
+            if (existingId > 0)
+            {
+                using (SqlCommand updateCmd = new SqlCommand(@"
+                UPDATE pos_customers_payments
+                SET invoice_no = @invoice_no,
+                    debit = @debit,
+                    credit = 0,
+                    description = @description,
+                    entry_date = @entry_date,
+                    account_id = @account_id,
+                    customer_id = @customer_id,
+                    user_id = @user_id,
+                    date_created = @date_created,
+                    entry_id = 0,
+                    payment_ref_invoice_no = ''
+                WHERE id = @id
+                  AND branch_id = @branch_id", cn))
+                {
+                    updateCmd.Parameters.Add("@id", SqlDbType.Int).Value = existingId;
+                    updateCmd.Parameters.Add("@invoice_no", SqlDbType.NVarChar, 50).Value = invoiceNo;
+                    updateCmd.Parameters.Add("@debit", SqlDbType.Decimal).Value = roundedOpening;
+                    updateCmd.Parameters["@debit"].Precision = 18;
+                    updateCmd.Parameters["@debit"].Scale = 2;
+                    updateCmd.Parameters.Add("@description", SqlDbType.NVarChar).Value = description;
+                    updateCmd.Parameters.Add("@entry_date", SqlDbType.DateTime).Value = DateTime.Now;
+                    updateCmd.Parameters.Add("@account_id", SqlDbType.Int).Value = effectiveAccountId;
+                    updateCmd.Parameters.Add("@customer_id", SqlDbType.Int).Value = customerId;
+                    updateCmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
+                    updateCmd.Parameters.Add("@date_created", SqlDbType.DateTime).Value = DateTime.Now;
+                    updateCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                    updateCmd.ExecuteNonQuery();
+                }
+
+                return;
+            }
+
+            using (SqlCommand insertCmd = new SqlCommand(@"
+            INSERT INTO pos_customers_payments
+            (
+                invoice_no,
+                debit,
+                credit,
+                description,
+                entry_date,
+                account_id,
+                customer_id,
+                user_id,
+                branch_id,
+                date_created,
+                entry_id,
+                payment_ref_invoice_no
+            )
+            VALUES
+            (
+                @invoice_no,
+                @debit,
+                0,
+                @description,
+                @entry_date,
+                @account_id,
+                @customer_id,
+                @user_id,
+                @branch_id,
+                @date_created,
+                0,
+                ''
+            )", cn))
+            {
+                insertCmd.Parameters.Add("@invoice_no", SqlDbType.NVarChar, 50).Value = invoiceNo;
+                insertCmd.Parameters.Add("@debit", SqlDbType.Decimal).Value = roundedOpening;
+                insertCmd.Parameters["@debit"].Precision = 18;
+                insertCmd.Parameters["@debit"].Scale = 2;
+                insertCmd.Parameters.Add("@description", SqlDbType.NVarChar).Value = description;
+                insertCmd.Parameters.Add("@entry_date", SqlDbType.DateTime).Value = DateTime.Now;
+                insertCmd.Parameters.Add("@account_id", SqlDbType.Int).Value = effectiveAccountId;
+                insertCmd.Parameters.Add("@customer_id", SqlDbType.Int).Value = customerId;
+                insertCmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
+                insertCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                insertCmd.Parameters.Add("@date_created", SqlDbType.DateTime).Value = DateTime.Now;
+                insertCmd.ExecuteNonQuery();
             }
         }
 
@@ -764,6 +938,10 @@ END";
             {
                 cn.Open();
                 int result = Convert.ToInt32(cmd.ExecuteScalar());
+                if (result > 0)
+                {
+                    UpsertCustomerOpeningBalance(cn, result, obj.GLAccountID, obj.opening_balance);
+                }
                 LogAction("Add Customer", result, obj);
                 return result;
             }
@@ -851,6 +1029,10 @@ END";
             {
                 cn.Open();
                 int result = Convert.ToInt32(cmd.ExecuteScalar());
+                if (obj.id > 0)
+                {
+                    UpsertCustomerOpeningBalance(cn, obj.id, obj.GLAccountID, obj.opening_balance);
+                }
                 LogAction("Update Customer", obj.id, obj);
                 return result;
             }

@@ -316,6 +316,19 @@ namespace POS.BLL
             }
         }
 
+        public decimal GetSupplierOpeningBalance(int supplierId)
+        {
+            try
+            {
+                SupplierDLL objDLL = new SupplierDLL();
+                return objDLL.GetSupplierOpeningBalance(supplierId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool IsSupplierCodeExists(string Supplier_code, int? excludeSupplierId = null)
         {
             try

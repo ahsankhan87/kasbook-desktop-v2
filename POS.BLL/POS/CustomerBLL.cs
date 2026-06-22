@@ -84,6 +84,19 @@ namespace POS.BLL
             }
         }
 
+        public decimal GetCustomerOpeningBalance(int customerId)
+        {
+            try
+            {
+                CustomerDLL objDLL = new CustomerDLL();
+                return objDLL.GetCustomerOpeningBalance(customerId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public DataTable GetPendingCustomerInvoices(int customerId)
         {
             try

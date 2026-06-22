@@ -109,6 +109,8 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
+            this.txt_opening_balance = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -329,6 +331,8 @@
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.txt_id, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_opening_balance, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label15, 0, 14);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label12
@@ -660,6 +664,16 @@
             this.btn_blank.UseVisualStyleBackColor = true;
             this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
             // 
+            // txt_opening_balance
+            // 
+            resources.ApplyResources(this.txt_opening_balance, "txt_opening_balance");
+            this.txt_opening_balance.Name = "txt_opening_balance";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
             // frm_addCustomer
             // 
             resources.ApplyResources(this, "$this");
@@ -774,5 +788,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btn_transDelete;
+        private System.Windows.Forms.TextBox txt_opening_balance;
+        private System.Windows.Forms.Label label15;
     }
 }

@@ -250,8 +250,28 @@ namespace pos.Expenses
             printer.SubTitle = string.Format("From {0} To {1}", dtpFrom.Value.ToShortDateString(), dtpTo.Value.ToShortDateString());
             printer.PageNumbers = true;
             printer.HeaderCellAlignment = StringAlignment.Near;
-            printer.Footer = "kasbook app";
+            printer.CellAlignment = StringAlignment.Near;
+            printer.Footer = "NOZUM ERP";
             printer.FooterSpacing = 15;
+
+            printer.PageSettings.Landscape = false;
+            printer.PrintMargins = new System.Drawing.Printing.Margins(20, 0, 20, 0);
+            printer.ColumnWidth = DGVPrinter.ColumnWidthSetting.Porportional;
+
+            printer.HideColumns.Add("colAttachment");
+            printer.HideColumns.Add("colPosted");
+            printer.HideColumns.Add("colHasAttachment");
+
+            printer.ColumnWidths.Clear();
+            printer.ColumnWidths.Add("colVoucherNo", 60);
+            printer.ColumnWidths.Add("colDate", 70);
+            printer.ColumnWidths.Add("colAccountName", 105);
+            printer.ColumnWidths.Add("colDescription", 200);
+            printer.ColumnWidths.Add("colPaymentMode", 65);
+            printer.ColumnWidths.Add("colAmount", 65);
+            printer.ColumnWidths.Add("colTax", 55);
+            printer.ColumnWidths.Add("colNetAmount", 70);
+
             printer.PrintPreviewDataGridView(gridExpenses);
         }
 

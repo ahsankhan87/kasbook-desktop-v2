@@ -11,6 +11,8 @@ namespace POS.DLL
 {
     public class SupplierDLL
     {
+        private const string OpeningBalanceMarker = "[Opening Balance]";
+
         private SqlCommand cmd;
         private SqlDataAdapter da;
 
@@ -184,6 +186,178 @@ namespace POS.DLL
                 {
                     throw;
                 }
+            }
+        }
+
+        public decimal GetSupplierOpeningBalance(int supplierId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmdLocal = new SqlCommand(@"
+                    SELECT TOP 1 CAST(ISNULL(credit, 0) - ISNULL(debit, 0) AS decimal(18,2))
+                    FROM pos_suppliers_payments
+                    WHERE branch_id = @branch_id
+                      AND supplier_id = @supplier_id
+                      AND (
+                            invoice_no = @opening_invoice_no
+                            OR CHARINDEX(@opening_marker, ISNULL(description, '')) = 1
+                          )
+                    ORDER BY id DESC", cn))
+            {
+                cmdLocal.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                cmdLocal.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                cmdLocal.Parameters.Add("@opening_invoice_no", SqlDbType.NVarChar, 50).Value = BuildOpeningBalanceInvoiceNo(supplierId);
+                cmdLocal.Parameters.Add("@opening_marker", SqlDbType.NVarChar).Value = OpeningBalanceMarker;
+
+                cn.Open();
+                object result = cmdLocal.ExecuteScalar();
+                return result == null || result == DBNull.Value ? 0m : Math.Round(Convert.ToDecimal(result), 2);
+            }
+        }
+
+        private static int GetFallbackPayableAccountId(SqlConnection cn)
+        {
+            using (SqlCommand cmdLocal = new SqlCommand("SELECT TOP 1 payable_acc_id FROM pos_companies", cn))
+            {
+                object result = cmdLocal.ExecuteScalar();
+                return result == null || result == DBNull.Value ? 0 : Convert.ToInt32(result);
+            }
+        }
+
+        private static string BuildOpeningBalanceInvoiceNo(int supplierId)
+        {
+            return "SUP-OB-" + supplierId;
+        }
+
+        private static string BuildOpeningBalanceDescription()
+        {
+            return OpeningBalanceMarker + " Supplier opening balance";
+        }
+
+        private static void UpsertSupplierOpeningBalance(SqlConnection cn, int supplierId, int accountId, decimal openingBalance)
+        {
+            const string findQuery = @"
+                    SELECT TOP 1 id
+                    FROM pos_suppliers_payments
+                    WHERE branch_id = @branch_id
+                      AND supplier_id = @supplier_id
+                      AND (
+                            invoice_no = @opening_invoice_no
+                            OR CHARINDEX(@opening_marker, ISNULL(description, '')) = 1
+                          )
+                    ORDER BY id DESC";
+
+            int existingId = 0;
+            using (SqlCommand findCmd = new SqlCommand(findQuery, cn))
+            {
+                findCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                findCmd.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                findCmd.Parameters.Add("@opening_invoice_no", SqlDbType.NVarChar, 50).Value = BuildOpeningBalanceInvoiceNo(supplierId);
+                findCmd.Parameters.Add("@opening_marker", SqlDbType.NVarChar).Value = OpeningBalanceMarker;
+
+                object existing = findCmd.ExecuteScalar();
+                existingId = existing == null || existing == DBNull.Value ? 0 : Convert.ToInt32(existing);
+            }
+
+            decimal roundedOpening = Math.Round(openingBalance, 2);
+            if (roundedOpening <= 0)
+            {
+                if (existingId > 0)
+                {
+                    using (SqlCommand deleteCmd = new SqlCommand("DELETE FROM pos_suppliers_payments WHERE id = @id AND branch_id = @branch_id", cn))
+                    {
+                        deleteCmd.Parameters.Add("@id", SqlDbType.Int).Value = existingId;
+                        deleteCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                        deleteCmd.ExecuteNonQuery();
+                    }
+                }
+
+                return;
+            }
+
+            int effectiveAccountId = accountId > 0 ? accountId : GetFallbackPayableAccountId(cn);
+            string invoiceNo = BuildOpeningBalanceInvoiceNo(supplierId);
+            string description = BuildOpeningBalanceDescription();
+
+            if (existingId > 0)
+            {
+                using (SqlCommand updateCmd = new SqlCommand(@"
+                            UPDATE pos_suppliers_payments
+                            SET invoice_no = @invoice_no,
+                                debit = 0,
+                                credit = @credit,
+                                description = @description,
+                                entry_date = @entry_date,
+                                account_id = @account_id,
+                                supplier_id = @supplier_id,
+                                user_id = @user_id,
+                                date_created = @date_created,
+                                entry_id = 0,
+                                payment_ref_invoice_no = ''
+                            WHERE id = @id
+                              AND branch_id = @branch_id", cn))
+                {
+                    updateCmd.Parameters.Add("@id", SqlDbType.Int).Value = existingId;
+                    updateCmd.Parameters.Add("@invoice_no", SqlDbType.NVarChar, 50).Value = invoiceNo;
+                    updateCmd.Parameters.Add("@credit", SqlDbType.Decimal).Value = roundedOpening;
+                    updateCmd.Parameters["@credit"].Precision = 18;
+                    updateCmd.Parameters["@credit"].Scale = 2;
+                    updateCmd.Parameters.Add("@description", SqlDbType.NVarChar).Value = description;
+                    updateCmd.Parameters.Add("@entry_date", SqlDbType.DateTime).Value = DateTime.Now;
+                    updateCmd.Parameters.Add("@account_id", SqlDbType.Int).Value = effectiveAccountId;
+                    updateCmd.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                    updateCmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
+                    updateCmd.Parameters.Add("@date_created", SqlDbType.DateTime).Value = DateTime.Now;
+                    updateCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                    updateCmd.ExecuteNonQuery();
+                }
+
+                return;
+            }
+
+            using (SqlCommand insertCmd = new SqlCommand(@"
+                    INSERT INTO pos_suppliers_payments
+                    (
+                        invoice_no,
+                        debit,
+                        credit,
+                        description,
+                        entry_date,
+                        account_id,
+                        supplier_id,
+                        user_id,
+                        branch_id,
+                        date_created,
+                        entry_id,
+                        payment_ref_invoice_no
+                    )
+                    VALUES
+                    (
+                        @invoice_no,
+                        0,
+                        @credit,
+                        @description,
+                        @entry_date,
+                        @account_id,
+                        @supplier_id,
+                        @user_id,
+                        @branch_id,
+                        @date_created,
+                        0,
+                        ''
+                    )", cn))
+            {
+                insertCmd.Parameters.Add("@invoice_no", SqlDbType.NVarChar, 50).Value = invoiceNo;
+                insertCmd.Parameters.Add("@credit", SqlDbType.Decimal).Value = roundedOpening;
+                insertCmd.Parameters["@credit"].Precision = 18;
+                insertCmd.Parameters["@credit"].Scale = 2;
+                insertCmd.Parameters.Add("@description", SqlDbType.NVarChar).Value = description;
+                insertCmd.Parameters.Add("@entry_date", SqlDbType.DateTime).Value = DateTime.Now;
+                insertCmd.Parameters.Add("@account_id", SqlDbType.Int).Value = effectiveAccountId;
+                insertCmd.Parameters.Add("@supplier_id", SqlDbType.Int).Value = supplierId;
+                insertCmd.Parameters.Add("@user_id", SqlDbType.Int).Value = UsersModal.logged_in_userid;
+                insertCmd.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                insertCmd.Parameters.Add("@date_created", SqlDbType.DateTime).Value = DateTime.Now;
+                insertCmd.ExecuteNonQuery();
             }
         }
 
@@ -985,6 +1159,12 @@ ORDER BY p.purchase_date, pi.id", cn))
                     }
 
                     result = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (result > 0)
+                    {
+                        UpsertSupplierOpeningBalance(cn, result, obj.GLAccountID, obj.opening_balance);
+                    }
+
                     Log.LogAction("Add Supplier", $"Supplier ID: {result}, Supplier Name: {obj.first_name + ' ' + obj.last_name}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 
                     return (int)result;
@@ -1060,6 +1240,12 @@ ORDER BY p.purchase_date, pi.id", cn))
                     }
 
                     result = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (obj.id > 0)
+                    {
+                        UpsertSupplierOpeningBalance(cn, obj.id, obj.GLAccountID, obj.opening_balance);
+                    }
+
                     Log.LogAction("Update Supplier", $"Supplier ID: {obj.id}, Supplier Name: {obj.first_name + ' ' + obj.last_name}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 
                     return (int)result;

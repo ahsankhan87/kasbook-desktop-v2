@@ -257,6 +257,19 @@ namespace pos
 
             try
             {
+                decimal openingBalance = 0m;
+                if (!string.IsNullOrWhiteSpace(txt_opening_balance.Text) && !decimal.TryParse(txt_opening_balance.Text, out openingBalance))
+                {
+                    UiMessages.ShowInfo(
+                        "Please enter a valid opening balance amount.",
+                        "يرجى إدخال مبلغ رصيد افتتاحي صحيح.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_opening_balance.Focus();
+                    return;
+                }
+
                 SupplierModal info = new SupplierModal();
                 info.first_name = txt_first_name.Text;
                 info.last_name = txt_last_name.Text;
@@ -273,6 +286,7 @@ namespace pos
                 info.CountryName = txt_countryName.Text.Trim();
                 info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
                 info.supplier_code = txt_supplier_code.Text.Trim();
+                info.opening_balance = Math.Round(openingBalance, 2);
 
                 SupplierBLL objBLL = new SupplierBLL();
                 int result = objBLL.Insert(info);
@@ -375,6 +389,7 @@ namespace pos
 
             cmb_GL_account_code.SelectedValue = 6;
             txt_supplier_code.Text = "";
+            txt_opening_balance.Text = "0.00";
             btn_transDelete.Enabled = false;
             GetSupplierCode();
         }
@@ -425,6 +440,19 @@ namespace pos
 
             try
             {
+                decimal openingBalance = 0m;
+                if (!string.IsNullOrWhiteSpace(txt_opening_balance.Text) && !decimal.TryParse(txt_opening_balance.Text, out openingBalance))
+                {
+                    UiMessages.ShowInfo(
+                        "Please enter a valid opening balance amount.",
+                        "يرجى إدخال مبلغ رصيد افتتاحي صحيح.",
+                        "Validation",
+                        "التحقق"
+                    );
+                    txt_opening_balance.Focus();
+                    return;
+                }
+
                 SupplierModal info = new SupplierModal();
                 info.first_name = txt_first_name.Text;
                 info.last_name = txt_last_name.Text;
@@ -442,6 +470,7 @@ namespace pos
                 info.GLAccountID = int.Parse(cmb_GL_account_code.SelectedValue.ToString());
                 info.id = int.Parse(txt_id.Text);
                 info.supplier_code = txt_supplier_code.Text.Trim();
+                info.opening_balance = Math.Round(openingBalance, 2);
 
                 SupplierBLL objBLL = new SupplierBLL();
                 int result = objBLL.Update(info);
@@ -939,6 +968,10 @@ namespace pos
                 cmb_GL_account_code.SelectedValue = (myProductView["GLAccountID"].ToString() == "" ? 0 : Convert.ToInt32(myProductView["GLAccountID"].ToString()));
                 txt_supplier_code.Text = myProductView["supplier_code"].ToString();
             }
+
+            decimal openingBalance = objBLL.GetSupplierOpeningBalance(supplier_id);
+            txt_opening_balance.Text = openingBalance.ToString("N2");
+
             lbl_customer_name.Visible = true;
             lbl_customer_name.Text = txt_first_name.Text + ' ' + txt_last_name.Text;
         }
