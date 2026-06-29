@@ -1030,6 +1030,18 @@
     <Compile Include="Reports\Purchase Orders\frm_purchase_order_report.Designer.cs">
       <DependentUpon>frm_purchase_order_report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Purchases\frm_PurchaseInvoiceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Purchases\frm_PurchaseInvoiceReport.Designer.cs">
+      <DependentUpon>frm_PurchaseInvoiceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Purchases\frm_PurchaseProductDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Purchases\frm_PurchaseProductDetail.Designer.cs">
+      <DependentUpon>frm_PurchaseProductDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Purchases\frm_PurchaseRegisterReport.cs">
       <SubType>Form</SubType>
     </Compile>

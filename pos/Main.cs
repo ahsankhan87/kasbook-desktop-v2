@@ -2601,5 +2601,11 @@ namespace pos
             var frm_salesInvoiceReport = new pos.Reports.Sales.frm_SalesInvoiceReport();
             frm_salesInvoiceReport.ShowDialog(this);
         }
+
+        private void purchaseInvoiceReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_purchaseInvoiceReport = new pos.Reports.Purchases.frm_PurchaseInvoiceReport();
+            frm_purchaseInvoiceReport.ShowDialog(this);
+        }
     }
 }

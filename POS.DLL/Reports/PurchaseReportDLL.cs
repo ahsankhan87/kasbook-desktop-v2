@@ -173,6 +173,100 @@ namespace POS.DLL
         }
 
 
+        public DataTable GetPurchaseLineItems(int purchaseId, int branchId)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+
+                    string query =
+                        "SELECT SI.item_code, P.name AS product_name, SI.quantity, SI.cost_price," +
+                        " SI.discount_value, SI.tax_rate," +
+                        " ((SI.cost_price * SI.quantity - SI.discount_value) * SI.tax_rate / 100) AS vat," +
+                        " (SI.cost_price * SI.quantity - SI.discount_value) AS total," +
+                        " ((SI.cost_price * SI.quantity - SI.discount_value) + (SI.cost_price * SI.quantity - SI.discount_value) * SI.tax_rate / 100) AS total_with_vat" +
+                        " FROM pos_purchases_items SI" +
+                        " INNER JOIN pos_purchases S ON S.id = SI.purchase_id" +
+                        " LEFT JOIN pos_products P ON P.item_number = SI.item_number" +
+                        " WHERE SI.purchase_id = @purchase_id AND S.branch_id = @branch_id";
+
+                    SqlCommand command = new SqlCommand(query, cn);
+                    command.Parameters.AddWithValue("@purchase_id", purchaseId);
+                    command.Parameters.AddWithValue("@branch_id", branchId);
+
+                    DataTable result = new DataTable();
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(result);
+                    return result;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public DataTable PurchaseInvoiceReportNew(DateTime from_date, DateTime to_date, int supplier_id = 0,
+            string purchase_type = "All", int employee_id = 0, int branch_id = 0)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+
+                    string query =
+                        "SELECT S.id, S.purchase_date, S.invoice_no, S.supplier_invoice_no," +
+                        " ISNULL(C.first_name, '') AS supplier_name," +
+                        " COUNT(SI.id) AS total_items," +
+                        " ISNULL(SUM(SI.cost_price * SI.quantity), 0) AS subtotal," +
+                        " ISNULL(SUM(SI.discount_value), 0) AS discount_value," +
+                        " ISNULL(SUM((SI.cost_price * SI.quantity - SI.discount_value) * SI.tax_rate / 100), 0) AS vat," +
+                        " ISNULL(SUM(SI.cost_price * SI.quantity - SI.discount_value), 0) AS total," +
+                        " ISNULL(SUM((SI.cost_price * SI.quantity - SI.discount_value) + (SI.cost_price * SI.quantity - SI.discount_value) * SI.tax_rate / 100), 0) AS total_with_vat," +
+                        " S.purchase_type" +
+                        " FROM pos_purchases S" +
+                        " LEFT JOIN pos_purchases_items SI ON S.id = SI.purchase_id" +
+                        " LEFT JOIN pos_suppliers C ON C.id = S.supplier_id" +
+                        " WHERE S.branch_id = @branch_id" +
+                        " AND S.purchase_date BETWEEN @from_date AND @to_date";
+
+                    if (purchase_type != "All")
+                        query += " AND S.purchase_type = @purchase_type";
+                    if (supplier_id != 0)
+                        query += " AND S.supplier_id = @supplier_id";
+                    if (employee_id != 0)
+                        query += " AND S.employee_id = @employee_id";
+
+                    query += " GROUP BY S.id, S.purchase_date, S.invoice_no, S.supplier_invoice_no, C.first_name, S.purchase_type" +
+                             " ORDER BY S.id DESC";
+
+                    cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@branch_id", branch_id);
+                    cmd.Parameters.AddWithValue("@from_date", from_date);
+                    cmd.Parameters.AddWithValue("@to_date", to_date);
+
+                    if (purchase_type != "All")
+                        cmd.Parameters.AddWithValue("@purchase_type", purchase_type);
+                    if (supplier_id != 0)
+                        cmd.Parameters.AddWithValue("@supplier_id", supplier_id);
+                    if (employee_id != 0)
+                        cmd.Parameters.AddWithValue("@employee_id", employee_id);
+
+                    DataTable result = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(result);
+                    return result;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
         public DataTable Hold_PurchaseInvoiceReport(string from_date, string to_date, string supplier = "", string supplier_inv_no = "", string invoice_no = "",
             double total_amount = 0, int branch_id = 0)
         {

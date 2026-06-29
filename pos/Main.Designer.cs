@@ -134,6 +134,7 @@
             this.salesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchasesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseInvoiceReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.salesExpensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -921,7 +922,8 @@
             // purchasesToolStripMenuItem1
             // 
             this.purchasesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.purchaseReportToolStripMenuItem});
+            this.purchaseReportToolStripMenuItem,
+            this.purchaseInvoiceReportToolStripMenuItem});
             this.purchasesToolStripMenuItem1.Name = "purchasesToolStripMenuItem1";
             resources.ApplyResources(this.purchasesToolStripMenuItem1, "purchasesToolStripMenuItem1");
             // 
@@ -930,6 +932,13 @@
             this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
             resources.ApplyResources(this.purchaseReportToolStripMenuItem, "purchaseReportToolStripMenuItem");
             this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
+            // 
+            // purchaseInvoiceReportToolStripMenuItem
+            // 
+            this.purchaseInvoiceReportToolStripMenuItem.Name = "purchaseInvoiceReportToolStripMenuItem";
+            this.purchaseInvoiceReportToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.purchaseInvoiceReportToolStripMenuItem.Text = "Purchase Invoice Report";
+            this.purchaseInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseInvoiceReportToolStripMenuItem_Click);
             // 
             // warehouseToolStripMenuItem1
             // 
@@ -1317,6 +1326,7 @@
         private System.Windows.Forms.ToolStripMenuItem categoryWiseSalesSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchasesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseInvoiceReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem journalDaybookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;

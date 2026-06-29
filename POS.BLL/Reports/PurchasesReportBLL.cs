@@ -20,7 +20,34 @@ namespace POS.BLL
             }
             catch
             {
-                
+
+                throw;
+            }
+        }
+
+        public DataTable GetPurchaseLineItems(int purchaseId, int branchId)
+        {
+            try
+            {
+                PurchasesReportDLL objDLL = new PurchasesReportDLL();
+                return objDLL.GetPurchaseLineItems(purchaseId, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable PurchaseInvoiceReportNew(DateTime from_date, DateTime to_date, int supplier_id = 0,
+            string purchase_type = "All", int employee_id = 0, int branch_id = 0)
+        {
+            try
+            {
+                PurchasesReportDLL objDLL = new PurchasesReportDLL();
+                return objDLL.PurchaseInvoiceReportNew(from_date, to_date, supplier_id, purchase_type, employee_id, branch_id);
+            }
+            catch
+            {
                 throw;
             }
         }

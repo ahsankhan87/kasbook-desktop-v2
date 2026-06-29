@@ -85,6 +85,8 @@
             this.txt_cr_number = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txt_registrationName = new System.Windows.Forms.TextBox();
+            this.txt_opening_balance = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.Transactions = new System.Windows.Forms.TabPage();
             this.panelTransactionBottom = new System.Windows.Forms.Panel();
             this.grid_customer_transactions = new System.Windows.Forms.DataGridView();
@@ -109,8 +111,6 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
-            this.txt_opening_balance = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -462,6 +462,16 @@
             resources.ApplyResources(this.txt_registrationName, "txt_registrationName");
             this.txt_registrationName.Name = "txt_registrationName";
             // 
+            // txt_opening_balance
+            // 
+            resources.ApplyResources(this.txt_opening_balance, "txt_opening_balance");
+            this.txt_opening_balance.Name = "txt_opening_balance";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
             // Transactions
             // 
             this.Transactions.Controls.Add(this.panelTransactionBottom);
@@ -663,16 +673,6 @@
             this.btn_blank.Name = "btn_blank";
             this.btn_blank.UseVisualStyleBackColor = true;
             this.btn_blank.Click += new System.EventHandler(this.btn_blank_Click);
-            // 
-            // txt_opening_balance
-            // 
-            resources.ApplyResources(this.txt_opening_balance, "txt_opening_balance");
-            this.txt_opening_balance.Name = "txt_opening_balance";
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
             // 
             // frm_addCustomer
             // 
