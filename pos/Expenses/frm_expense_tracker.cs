@@ -129,17 +129,46 @@ namespace pos.Expenses
                 string search = txtSearch.Text == null ? string.Empty : txtSearch.Text.Trim();
 
                 _gridData = bll.GetExpenseTrackerList(dtpFrom.Value.Date, dtpTo.Value.Date, accountId, paymentMode, search);
-                gridExpenses.DataSource = _gridData;
+
+                decimal totalAmount = 0;
+                decimal totalTax = 0;
+                decimal netTotal = 0;
+                foreach (DataRow dr in _gridData.Rows)
+                {
+                    totalAmount += dr["Amount"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Amount"]);
+                    totalTax += dr["Tax"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Tax"]);
+                    netTotal += dr["NetAmount"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["NetAmount"]);
+                }
+
+                DataTable gridDisplayData = _gridData.Copy();
+                DataRow totalRow = gridDisplayData.NewRow();
+                totalRow["Description"] = "TOTAL";
+                totalRow["Amount"] = totalAmount;
+                totalRow["Tax"] = totalTax;
+                totalRow["NetAmount"] = netTotal;
+                totalRow["HasAttachment"] = 0;
+                gridDisplayData.Rows.Add(totalRow);
+
+                gridExpenses.DataSource = gridDisplayData;
 
                 foreach (DataGridViewRow row in gridExpenses.Rows)
                 {
                     bool hasAttachment = false;
-                        if (row.Cells["colHasAttachment"].Value != null)
-                        {
-                            hasAttachment = Convert.ToInt32(row.Cells["colHasAttachment"].Value) == 1;
-                        }
+                    object hasAttachmentValue = row.Cells["colHasAttachment"].Value;
+                    if (hasAttachmentValue != null && hasAttachmentValue != DBNull.Value)
+                    {
+                        hasAttachment = Convert.ToInt32(hasAttachmentValue) == 1;
+                    }
 
                     row.Cells["colAttachment"].Value = hasAttachment ? _attachmentIcon : null;
+
+                    bool isTotalRow = string.Equals(Convert.ToString(row.Cells["colDescription"].Value), "TOTAL", StringComparison.OrdinalIgnoreCase);
+                    if (isTotalRow)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(232, 245, 233);
+                        row.DefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+                        continue;
+                    }
 
                     string mode = Convert.ToString(row.Cells["colPaymentMode"].Value);
                     if (string.Equals(mode, "Bank", StringComparison.OrdinalIgnoreCase))
@@ -251,7 +280,7 @@ namespace pos.Expenses
             printer.PageNumbers = true;
             printer.HeaderCellAlignment = StringAlignment.Near;
             printer.CellAlignment = StringAlignment.Near;
-            printer.Footer = "NOZUM ERP";
+            printer.Footer = "POWERED BY NOZUM ERP";
             printer.FooterSpacing = 15;
 
             printer.PageSettings.Landscape = false;
@@ -444,7 +473,13 @@ namespace pos.Expenses
 
             if (gridExpenses.Columns[e.ColumnIndex].Name == "colAttachment")
             {
-                bool hasAttachment = Convert.ToInt32(gridExpenses.Rows[e.RowIndex].Cells["colHasAttachment"].Value) == 1;
+                bool hasAttachment = false;
+                object hasAttachmentValue = gridExpenses.Rows[e.RowIndex].Cells["colHasAttachment"].Value;
+                if (hasAttachmentValue != null && hasAttachmentValue != DBNull.Value)
+                {
+                    hasAttachment = Convert.ToInt32(hasAttachmentValue) == 1;
+                }
+
                 if (hasAttachment)
                 {
                     gridExpenses.CurrentCell = gridExpenses.Rows[e.RowIndex].Cells[e.ColumnIndex];

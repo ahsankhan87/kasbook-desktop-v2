@@ -296,11 +296,46 @@ namespace pos.Expenses
 
         private void btnAttachment_Click(object sender, EventArgs e)
         {
+            ConfigureAttachmentDialogStartPath();
+
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 _selectedAttachmentPath = openFileDialog1.FileName;
                 txtAttachment.Text = _selectedAttachmentPath;
             }
+        }
+
+        private void ConfigureAttachmentDialogStartPath()
+        {
+            openFileDialog1.RestoreDirectory = true;
+
+            string initialDirectory = GetAttachmentInitialDirectory();
+            if (!string.IsNullOrWhiteSpace(initialDirectory))
+            {
+                openFileDialog1.InitialDirectory = initialDirectory;
+            }
+        }
+
+        private string GetAttachmentInitialDirectory()
+        {
+            try
+            {
+                bool isRdp = SystemInformation.TerminalServerSession;
+                if (isRdp)
+                {
+                    const string tsClientRoot = @"\\tsclient";
+                    if (Directory.Exists(tsClientRoot))
+                    {
+                        return tsClientRoot;
+                    }
+                }
+            }
+            catch
+            {
+                // keep fallback behavior
+            }
+
+            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
 
         private void btn_save_Click(object sender, EventArgs e)
