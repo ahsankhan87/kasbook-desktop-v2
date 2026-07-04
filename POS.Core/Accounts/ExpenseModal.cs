@@ -36,6 +36,11 @@ namespace POS.Core
 
         public string expense_account { get; set; }
         public string expense_account_name { get; set; }
+
+        public string referenceNo { get; set; }
+        public string VATNumber { get; set; }
+        public string PaymentType { get; set; }
+
     }
 
     public class ExpenseModal_Detail

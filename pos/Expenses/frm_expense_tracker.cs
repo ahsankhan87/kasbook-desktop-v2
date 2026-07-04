@@ -81,7 +81,7 @@ namespace pos.Expenses
             gridExpenses.RowTemplate.Height = 32;
 
             gridExpenses.Columns.Add(new DataGridViewTextBoxColumn { Name = "colVoucherNo", HeaderText = "Voucher No", DataPropertyName = "VoucherNo", Width = 110 });
-            gridExpenses.Columns.Add(new DataGridViewTextBoxColumn { Name = "colDate", HeaderText = "Date", DataPropertyName = "Date", Width = 95, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd-MMM-yyyy" } });
+            gridExpenses.Columns.Add(new DataGridViewTextBoxColumn { Name = "colDate", HeaderText = "Date", DataPropertyName = "Date", Width = 95, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd-MM-yyyy" } });
             gridExpenses.Columns.Add(new DataGridViewTextBoxColumn { Name = "colAccountName", HeaderText = "Account Name", DataPropertyName = "AccountName", Width = 190 });
             gridExpenses.Columns.Add(new DataGridViewTextBoxColumn { Name = "colDescription", HeaderText = "Description", DataPropertyName = "Description", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
             gridExpenses.Columns.Add(new DataGridViewTextBoxColumn { Name = "colPaymentMode", HeaderText = "Payment Mode", DataPropertyName = "PaymentMode", Width = 95 });
@@ -276,7 +276,7 @@ namespace pos.Expenses
         {
             DGVPrinter printer = new DGVPrinter();
             printer.Title = "Expense List";
-            printer.SubTitle = string.Format("From {0} To {1}", dtpFrom.Value.ToShortDateString(), dtpTo.Value.ToShortDateString());
+            printer.SubTitle = string.Format("From {0} To {1}", dtpFrom.Value.ToString("dd-MM-yyyy"), dtpTo.Value.ToString("dd-MM-yyyy"));
             printer.PageNumbers = true;
             printer.HeaderCellAlignment = StringAlignment.Near;
             printer.CellAlignment = StringAlignment.Near;

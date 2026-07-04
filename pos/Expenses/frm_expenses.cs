@@ -402,6 +402,9 @@ namespace pos.Expenses
                 {
                     var amount = Convert.ToDouble(nudAmount.Value);
                     var taxRate = Convert.ToDouble(nudTaxPercent.Value);
+                    var referenceNo = txtReferenceNo.Text;
+                    var VATNumber = txtVATNumber.Text;
+                    string paymentType = cmbPaymentMode.SelectedValue.ToString();
 
                     var voucherNo = !string.IsNullOrWhiteSpace(_editVoucherNo)
                         ? _editVoucherNo
@@ -428,7 +431,10 @@ namespace pos.Expenses
                             amount = amount,
                             vat = taxRate,
                             description = BuildDescription(),
-                            expense_account_name = cmbExpenseAccount.Text
+                            expense_account_name = cmbExpenseAccount.Text,
+                            referenceNo = referenceNo,
+                            VATNumber = VATNumber,
+                            PaymentType = paymentType,
                         }
                     };
 

@@ -58,6 +58,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tslLastSaved = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtVATNumber = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             this.grpVoucherInfo.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -129,6 +130,7 @@
             // 
             // grpExpenseDetails
             // 
+            this.grpExpenseDetails.Controls.Add(this.txtVATNumber);
             this.grpExpenseDetails.Controls.Add(this.txtNetTotal);
             this.grpExpenseDetails.Controls.Add(this.lblNetTotal);
             this.grpExpenseDetails.Controls.Add(this.txtTaxAmount);
@@ -181,7 +183,6 @@
             resources.ApplyResources(this.nudTaxPercent, "nudTaxPercent");
             this.nudTaxPercent.Name = "nudTaxPercent";
             this.nudTaxPercent.TabStop = false;
-            this.nudTaxPercent.Visible = false;
             this.nudTaxPercent.ValueChanged += new System.EventHandler(this.amountOrTax_ValueChanged);
             // 
             // cmbTax
@@ -191,9 +192,9 @@
             this.cmbTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTax.FormattingEnabled = true;
             this.cmbTax.Location = this.nudTaxPercent.Location;
+            this.cmbTax.Name = "cmbTax";
             this.cmbTax.Size = this.nudTaxPercent.Size;
             this.cmbTax.TabIndex = this.nudTaxPercent.TabIndex;
-            this.cmbTax.Name = "cmbTax";
             this.cmbTax.SelectedIndexChanged += new System.EventHandler(this.cmbTax_SelectedIndexChanged);
             // 
             // lblTaxPercent
@@ -359,6 +360,11 @@
             // 
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
+            // txtVATNumber
+            // 
+            resources.ApplyResources(this.txtVATNumber, "txtVATNumber");
+            this.txtVATNumber.Name = "txtVATNumber";
+            // 
             // frm_expenses
             // 
             resources.ApplyResources(this, "$this");
@@ -431,5 +437,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tslLastSaved;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txtVATNumber;
     }
 }

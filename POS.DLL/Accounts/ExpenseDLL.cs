@@ -248,8 +248,8 @@ namespace POS.DLL
                                 cmd.ExecuteScalar();
                             }
 
-                            String query = "INSERT INTO acc_payments (invoice_no,account_code,name,amount,description,tax_rate,tax_amount,payment_date,branch_id,user_id,entry_id)" +
-                                "VALUES (@invoice_no,@account_code,@account_name,@amount,@description,@tax_rate,@tax_amount,@payment_date,@branch_id,@user_id,@entry_id)";
+                            String query = "INSERT INTO acc_payments (invoice_no,account_code,name,amount,description,tax_rate,tax_amount,payment_date,branch_id,user_id,entry_id,supplier_invoice_no,vat_no,paymentType)" +
+                                "VALUES (@invoice_no,@account_code,@account_name,@amount,@description,@tax_rate,@tax_amount,@payment_date,@branch_id,@user_id,@entry_id,@supplier_invoice_no,@vat_no,@paymentType)";
 
                             cmd = new SqlCommand(query, cn, transaction);
                             cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
@@ -263,11 +263,12 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             cmd.Parameters.AddWithValue("@entry_id", entry_id);
+                            cmd.Parameters.AddWithValue("@supplier_invoice_no", sale_header.referenceNo);
+                            cmd.Parameters.AddWithValue("@vat_no", sale_header.VATNumber);
+                            cmd.Parameters.AddWithValue("@paymentType", sale_header.PaymentType);
+
 
                             newSaleID = Convert.ToInt32(cmd.ExecuteScalar());
-
-
-                           
                             ///
 
                         }
