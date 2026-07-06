@@ -95,7 +95,7 @@ namespace pos
         private sealed class PurchaseRowCostState
         {
             public decimal BaseAvgCost;
-            public decimal LastShippingShare;
+            public decimal LastShippingPerUnitShare;
         }
 
         //private frm_searchProducts productsMainForm;
@@ -1130,8 +1130,18 @@ namespace pos
                 .ToList();
 
             int rowCount = validRows.Count;
-            decimal equalShare = (rowCount > 0 && applyShipping && shippingCost > 0)
-                ? Math.Round(shippingCost / rowCount, 4)
+
+            // Calculate total quantity across all rows
+            decimal totalQuantity = 0;
+            foreach (var row in validRows)
+            {
+                decimal qty = Convert.ToDecimal(row.Cells["qty"].Value);
+                totalQuantity += qty;
+            }
+
+            // Calculate per-unit shipping share: total_shipping / total_quantity
+            decimal perUnitShippingShare = (totalQuantity > 0 && applyShipping && shippingCost > 0)
+                ? Math.Round(shippingCost / totalQuantity, 4)
                 : 0;
 
             decimal allocated = 0;
@@ -1152,31 +1162,31 @@ namespace pos
                     state = new PurchaseRowCostState
                     {
                         BaseAvgCost = Convert.ToDecimal(row.Cells["avg_cost"].Value),
-                        LastShippingShare = 0m
+                        LastShippingPerUnitShare = 0m
                     };
                     row.Tag = state;
                 }
 
                 // If user manually changed avg_cost in grid, preserve that as the new base cost.
                 decimal currentAvgCost = Convert.ToDecimal(row.Cells["avg_cost"].Value);
-                decimal expectedCurrent = Math.Round(state.BaseAvgCost + state.LastShippingShare, 4);
+                decimal expectedCurrent = Math.Round(state.BaseAvgCost + state.LastShippingPerUnitShare, 4);
                 if (Math.Abs(currentAvgCost - expectedCurrent) > 0.0001m)
                 {
                     state.BaseAvgCost = currentAvgCost;
                 }
 
-                decimal shippingShare = 0;
-                if (applyShipping && shippingCost > 0)
+                // Calculate per-unit shipping share for this row
+                decimal shippingPerUnit = perUnitShippingShare;
+                if (i == rowCount - 1 && applyShipping && shippingCost > 0 && totalQuantity > 0)
                 {
-                    shippingShare = equalShare;
-                    if (i == rowCount - 1)
-                        shippingShare = Math.Round(shippingCost - allocated, 4);
-
-                    allocated += shippingShare;
+                    // Last row: handle rounding by adjusting the per-unit share
+                    decimal allocatedTotal = Math.Round(perUnitShippingShare * (totalQuantity - qty), 4);
+                    decimal remainingShipping = Math.Round(shippingCost - allocatedTotal, 4);
+                    shippingPerUnit = qty > 0 ? Math.Round(remainingShipping / qty, 4) : 0;
                 }
 
-                // Split shipping equally per product row, then add to row cost.
-                decimal newAvgCost = Math.Round(state.BaseAvgCost + shippingShare, 4);
+                // Add per-unit shipping to the base cost
+                decimal newAvgCost = Math.Round(state.BaseAvgCost + shippingPerUnit, 4);
                 decimal lineBase = (qty * newAvgCost) - discount;
                 if (lineBase < 0) lineBase = 0;
 
@@ -1186,7 +1196,7 @@ namespace pos
                 row.Cells["tax"].Value = tax;
                 row.Cells["sub_total"].Value = Math.Round(lineBase + tax, 4);
 
-                state.LastShippingShare = shippingShare;
+                state.LastShippingPerUnitShare = shippingPerUnit;
                 row.Tag = state;
             }
 

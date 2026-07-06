@@ -77,6 +77,9 @@ namespace pos
                 double _total_vat = 0;
                 double _total_discount = 0;
                 double _grand_total = 0;
+                double _foreign_total_cost = 0;
+                double _foreign_total_unit = 0;
+                double _foreign_total_discount = 0;
 
                 grid_purchases_detail.DataSource = null;
 
@@ -118,10 +121,12 @@ namespace pos
                     _total_discount += Convert.ToDouble(dr["discount_value"].ToString());
                     _total_vat += Convert.ToDouble(dr["vat"].ToString());
                     _grand_total += Convert.ToDouble(dr["net_total"].ToString());
-                    
+                    _foreign_total_cost += Convert.ToDouble(dr["foreign_cost_price"].ToString());
+                    _foreign_total_unit += Convert.ToDouble(dr["foreign_unit_price"].ToString());
+                    _foreign_total_discount += Convert.ToDouble(dr["foreign_discount_value"].ToString());
                 }
                 string[] row12 = { "","","","","Total", _total_qty.ToString("N2"), _total_cost.ToString("N2"),_total_unit.ToString("N2"),
-                    _total_discount.ToString("N2"), _total_vat.ToString("N2"), _grand_total.ToString("N2") };
+                    _total_discount.ToString("N2"), _total_vat.ToString("N2"), _grand_total.ToString("N2"), _foreign_total_cost.ToString("N2"), _foreign_total_unit.ToString("N2"), _foreign_total_discount.ToString("N2") };
                 grid_purchases_detail.Rows.Add(row12);
                 CustomizeDataGridView();
             }
