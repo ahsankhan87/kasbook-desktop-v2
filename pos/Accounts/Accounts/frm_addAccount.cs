@@ -52,16 +52,54 @@ namespace pos
 
         public void frm_addAccount_Load(object sender, EventArgs e)
         {
-            
+
             if (lbl_edit_status.Text == "true")
             {
                 btn_save.Text = "Update";
                 lbl_header_title.Text = "Update Accountes";
-                
+
             }
             else
             {
                 btn_save.Text = "Save";
+                // Delay code generation to allow dropdown to fully populate
+                this.BeginInvoke(new Action(() =>
+                {
+                    GenerateAccountCode();
+                    cmb_group_id.SelectedValueChanged += (s, ev) => GenerateAccountCode();
+                }));
+            }
+        }
+
+        private void GenerateAccountCode()
+        {
+            try
+            {
+                // Ensure dropdown has data
+                if (cmb_group_id.DataSource == null || cmb_group_id.Items.Count == 0)
+                    return;
+
+                if (cmb_group_id.SelectedValue == null || cmb_group_id.SelectedIndex < 0)
+                    return;
+
+                int groupId = Convert.ToInt32(cmb_group_id.SelectedValue);
+                if (groupId == 0)
+                    return;
+
+                var coaBll = new ChartOfAccountsBLL();
+                string generatedCode = coaBll.GenerateAccountCode(groupId);
+
+                // Ensure textbox exists and is not read-only
+                if (txt_account_code != null && !txt_account_code.ReadOnly)
+                {
+                    txt_account_code.Text = generatedCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error if needed
+                if (txt_account_code != null)
+                    txt_account_code.Text = string.Empty;
             }
         }
 
@@ -127,7 +165,11 @@ namespace pos
                 frm_accounts obj_frm_cust = new frm_accounts();
                 //obj_frm_cust.Close();
                 //obj_frm_cust.ShowDialog();
-                mainForm.load_accounts_grid();
+                if(mainForm != null)
+                {
+                    mainForm.load_accounts_grid();
+                }
+                
                 //obj_frm_cust.load_Accountess_grid();
                 //obj_frm_cust.frm_Accounts_Load(sender,e);
 

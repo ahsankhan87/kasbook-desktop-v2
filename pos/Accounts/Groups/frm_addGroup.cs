@@ -49,16 +49,52 @@ namespace pos
 
         public void frm_addGroup_Load(object sender, EventArgs e)
         {
-            
+
             if (lbl_edit_status.Text == "true")
             {
                 btn_save.Text = "Update";
                 lbl_header_title.Text = "Update Groupes";
-                
+
             }
             else
             {
                 btn_save.Text = "Save";
+                // Delay code generation to allow dropdown to fully populate
+                this.BeginInvoke(new Action(() =>
+                {
+                    GenerateGroupCode();
+                    cmb_parent_id.SelectedValueChanged += (s, ev) => GenerateGroupCode();
+                }));
+            }
+        }
+
+        private void GenerateGroupCode()
+        {
+            try
+            {
+                // Ensure dropdown has data
+                if (cmb_parent_id.DataSource == null || cmb_parent_id.Items.Count == 0)
+                    return;
+
+                if (cmb_parent_id.SelectedValue == null || cmb_parent_id.SelectedIndex < 0)
+                    return;
+
+                int parentId = Convert.ToInt32(cmb_parent_id.SelectedValue);
+
+                var coaBll = new ChartOfAccountsBLL();
+                string generatedCode = coaBll.GenerateAccountCode(parentId);
+
+                // Ensure textbox exists and is not read-only
+                if (txt_group_code != null && !txt_group_code.ReadOnly)
+                {
+                    txt_group_code.Text = generatedCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error if needed
+                if (txt_group_code != null)
+                    txt_group_code.Text = string.Empty;
             }
         }
 
@@ -143,7 +179,11 @@ namespace pos
                 frm_groups obj_frm_cust = new frm_groups();
                 //obj_frm_cust.Close();
                 //obj_frm_cust.ShowDialog();
-                mainForm.load_groups_grid();
+                if (mainForm != null)
+                {
+                    mainForm.load_groups_grid();
+                }
+                
                 //obj_frm_cust.load_Groupess_grid();
                 //obj_frm_cust.frm_groups_Load(sender,e);
 

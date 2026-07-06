@@ -38,6 +38,17 @@ namespace pos
             get_accounts_dropdownlist();
         }
 
+        public void LoadForAccount(int accountId)
+        {
+            if (cmb_accounts.DataSource == null)
+            {
+                get_accounts_dropdownlist();
+            }
+
+            cmb_accounts.SelectedValue = accountId;
+            btn_search.PerformClick();
+        }
+
         private void StyleForm()
         {
             AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_account_report);

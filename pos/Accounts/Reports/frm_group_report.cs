@@ -29,6 +29,17 @@ namespace pos
             get_groups_dropdownlist();
         }
 
+        public void LoadForGroup(int groupId)
+        {
+            if (cmb_groups.DataSource == null)
+            {
+                get_groups_dropdownlist();
+            }
+
+            cmb_groups.SelectedValue = groupId;
+            btn_search.PerformClick();
+        }
+
         private void StyleForm()
         {
             AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_group_report);

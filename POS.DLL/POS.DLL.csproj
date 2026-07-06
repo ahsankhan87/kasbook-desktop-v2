@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\CodesUpdateHelper.cs" />
     <Compile Include="Accounts\ExpenseDLL.cs" />
     <Compile Include="Accounts\JournalsDLL.cs" />
     <Compile Include="Accounts\AccountsDLL.cs" />
@@ -95,6 +96,12 @@
       <Project>{c7ef0a4c-69d0-493e-8494-9c216ca973f2}</Project>
       <Name>POS.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Accounts\UpdateCodesSQL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Accounts\CODE_GENERATION_GUIDE.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
