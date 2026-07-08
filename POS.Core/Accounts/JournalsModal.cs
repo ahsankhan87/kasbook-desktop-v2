@@ -13,7 +13,7 @@ namespace POS.Core
         public int user_id { get; set; }
 
         public int entry_id { get; set; }
-        
+
         public int customer_id { get; set; }
         public int bank_id { get; set; }
 
@@ -21,10 +21,32 @@ namespace POS.Core
 
         public string invoice_no { get; set; }
 
+        public string voucher_type { get; set; }
+
+        public string reference_no { get; set; }
+
+        public string narration { get; set; }
+
+        public string attachment { get; set; }
+
+        public decimal total_debit { get; set; }
+
+        public decimal total_credit { get; set; }
+
+        public string status { get; set; }
+
+        public int? reversal_of { get; set; }
+
+        public int? posted_by { get; set; }
+
+        public DateTime? posted_at { get; set; }
+
+        public bool is_auto_posted { get; set; }
+
         public int account_id { get; set; }
-        
+
         public string account_name { get; set; }
-        
+
         public string code { get; set; }
 
         public string description { get; set; }
@@ -32,7 +54,7 @@ namespace POS.Core
         public double debit { get; set; }
 
         public double credit { get; set; }
-        
+
         public string date_created { get; set; }
 
         public string date_updated { get; set; }

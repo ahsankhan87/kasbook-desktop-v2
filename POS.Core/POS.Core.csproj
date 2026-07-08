@@ -46,6 +46,7 @@
     <Compile Include="Accounts\GroupsModal.cs" />
     <Compile Include="Accounts\AccGroupModel.cs" />
     <Compile Include="Accounts\AccAccountModel.cs" />
+    <Compile Include="Accounts\JournalVoucherModels.cs" />
     <Compile Include="POS\BankModal.cs" />
     <Compile Include="POS\CurrencyModal.cs" />
     <Compile Include="POS\DebitNoteModal.cs" />

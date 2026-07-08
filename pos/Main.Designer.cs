@@ -120,12 +120,14 @@
             this.expenseDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.chartOfAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.journalVoucherListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.journalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailySaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesInvoiceReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.customerWiseSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,7 +184,6 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.salesInvoiceReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -732,6 +733,7 @@
             this.expensesToolStripMenuItem,
             this.toolStripSeparator9,
             this.chartOfAccountsToolStripMenuItem,
+            this.journalVoucherListToolStripMenuItem,
             this.journalToolStripMenuItem,
             this.groupsToolStripMenuItem,
             this.accountsToolStripMenuItem1});
@@ -823,6 +825,12 @@
             resources.ApplyResources(this.chartOfAccountsToolStripMenuItem, "chartOfAccountsToolStripMenuItem");
             this.chartOfAccountsToolStripMenuItem.Click += new System.EventHandler(this.chartOfAccountsToolStripMenuItem_Click);
             // 
+            // journalVoucherListToolStripMenuItem
+            // 
+            this.journalVoucherListToolStripMenuItem.Name = "journalVoucherListToolStripMenuItem";
+            resources.ApplyResources(this.journalVoucherListToolStripMenuItem, "journalVoucherListToolStripMenuItem");
+            this.journalVoucherListToolStripMenuItem.Click += new System.EventHandler(this.journalVoucherListToolStripMenuItem_Click);
+            // 
             // journalToolStripMenuItem
             // 
             this.journalToolStripMenuItem.Name = "journalToolStripMenuItem";
@@ -883,6 +891,12 @@
             this.dailySaleReportToolStripMenuItem.Name = "dailySaleReportToolStripMenuItem";
             this.dailySaleReportToolStripMenuItem.Click += new System.EventHandler(this.dailySaleReportToolStripMenuItem_Click);
             // 
+            // salesInvoiceReportToolStripMenuItem
+            // 
+            this.salesInvoiceReportToolStripMenuItem.Name = "salesInvoiceReportToolStripMenuItem";
+            resources.ApplyResources(this.salesInvoiceReportToolStripMenuItem, "salesInvoiceReportToolStripMenuItem");
+            this.salesInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.salesInvoiceReportToolStripMenuItem_Click);
+            // 
             // salesReportToolStripMenuItem1
             // 
             this.salesReportToolStripMenuItem1.Name = "salesReportToolStripMenuItem1";
@@ -936,8 +950,7 @@
             // purchaseInvoiceReportToolStripMenuItem
             // 
             this.purchaseInvoiceReportToolStripMenuItem.Name = "purchaseInvoiceReportToolStripMenuItem";
-            this.purchaseInvoiceReportToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.purchaseInvoiceReportToolStripMenuItem.Text = "Purchase Invoice Report";
+            resources.ApplyResources(this.purchaseInvoiceReportToolStripMenuItem, "purchaseInvoiceReportToolStripMenuItem");
             this.purchaseInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseInvoiceReportToolStripMenuItem_Click);
             // 
             // warehouseToolStripMenuItem1
@@ -1253,12 +1266,6 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // salesInvoiceReportToolStripMenuItem
-            // 
-            this.salesInvoiceReportToolStripMenuItem.Name = "salesInvoiceReportToolStripMenuItem";
-            resources.ApplyResources(this.salesInvoiceReportToolStripMenuItem, "salesInvoiceReportToolStripMenuItem");
-            this.salesInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.salesInvoiceReportToolStripMenuItem_Click);
-            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1441,5 +1448,6 @@
         private System.Windows.Forms.ToolStripMenuItem currenciesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesInvoiceReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem journalVoucherListToolStripMenuItem;
     }
 }

@@ -67,7 +67,7 @@ namespace pos
             UI.AppTheme.Apply(this);
             StyleMainForm();
 
-            this.Text = "Nozum ERP - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
+            this.Text = "Nozum ERP V2.0.0 - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
             // Re-apply DB-backed permissions to ensure module-based enabling can't elevate privileges
             AppSecurityContext.RefreshUserClaims();
@@ -2606,6 +2606,12 @@ namespace pos
         {
             var frm_purchaseInvoiceReport = new pos.Reports.Purchases.frm_PurchaseInvoiceReport();
             frm_purchaseInvoiceReport.ShowDialog(this);
+        }
+
+        private void journalVoucherListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_journalVoucherList = new pos.frm_journal_voucher_manager();
+            frm_journalVoucherList.ShowDialog(this);
         }
     }
 }
