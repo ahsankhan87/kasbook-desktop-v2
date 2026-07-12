@@ -41,12 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\AccountingDAL.cs" />
+    <Compile Include="Accounts\AccountingDalBase.cs" />
+    <Compile Include="Accounts\ChartOfAccountsDAL.cs" />
     <Compile Include="Accounts\CodesUpdateHelper.cs" />
+    <Compile Include="Accounts\CostCenterDLL.cs" />
     <Compile Include="Accounts\ExpenseDLL.cs" />
     <Compile Include="Accounts\JournalsDLL.cs" />
+    <Compile Include="Accounts\AccountingDashboardDLL.cs" />
     <Compile Include="Accounts\AccountsDLL.cs" />
     <Compile Include="Accounts\GroupsDLL.cs" />
-    <Compile Include="Accounts\JournalsEngineDLL.cs" />
+    <Compile Include="Accounts\LedgerDAL.cs" />
+    <Compile Include="Accounts\PeriodDAL.cs" />
     <Compile Include="Dashboard\DashboardDLL.cs" />
     <Compile Include="POS\BackupDLL.cs" />
     <Compile Include="POS\BanksDLL.cs" />
@@ -91,6 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\PermissionsDAL.cs" />
     <Compile Include="Discounts\DiscountSchemesDLL.cs" />
+    <Compile Include="Tax\TaxRegistrationDLL.cs" />
+    <Compile Include="Tax\TaxTrialBalanceDLL.cs" />
+    <Compile Include="Tax\WHTRegistrationDLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\POS.Core\POS.Core.csproj">
@@ -99,7 +108,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Accounts\AccountingDashboardProcedures.sql" />
     <Content Include="Accounts\UpdateCodesSQL.sql" />
+    <Content Include="Accounts\FinancialPeriodProcedures.sql" />
+    <Content Include="Accounts\\BankReconciliationProcedures.sql" />
+    <Content Include="Accounts\\CostCenterProcedures.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Accounts\CODE_GENERATION_GUIDE.md" />

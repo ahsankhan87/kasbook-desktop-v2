@@ -122,20 +122,20 @@ BEGIN
 		Debit               DECIMAL(18,2),
 		Credit              DECIMAL(18,2),
 		Narration           NVARCHAR(MAX),
-		CostCenter          NVARCHAR(100),
+		CostCenterId        INT NULL,
 		ModuleName          NVARCHAR(50),
 		RefId               INT NULL
 	);
 
 	INSERT INTO @Lines
-		([LineNo], AccountId, Debit, Credit, Narration, CostCenter, ModuleName, RefId)
+		([LineNo], AccountId, Debit, Credit, Narration, CostCenterId, ModuleName, RefId)
 	SELECT
 		Ln.value('(LineNo/text())[1]', 'int'),
 		Ln.value('(AccountId/text())[1]', 'int'),
 		Ln.value('(Debit/text())[1]', 'decimal(18,2)'),
 		Ln.value('(Credit/text())[1]', 'decimal(18,2)'),
 		NULLIF(Ln.value('(Narration/text())[1]', 'nvarchar(max)'), ''),
-		NULLIF(Ln.value('(CostCenter/text())[1]', 'nvarchar(100)'), ''),
+		NULLIF(Ln.value('(CostCenterID/text())[1]', 'int'), 0),
 		NULLIF(Ln.value('(ModuleName/text())[1]', 'nvarchar(50)'), ''),
 		NULLIF(Ln.value('(RefId/text())[1]', 'int'), 0)
 	FROM @VoucherXml.nodes('/Voucher/Lines/Line') AS X(Ln);
@@ -181,7 +181,7 @@ BEGIN
 		(
 			invoice_no, account_id, entry_date, debit, credit, description,
 			user_id, branch_id, date_created, customer_id, supplier_id, bank_id,
-			entry_id, payment_ref_invoice_no
+			cost_center_id, entry_id, payment_ref_invoice_no
 		)
 		OUTPUT INSERTED.id INTO @Inserted(EntryId)
 		SELECT
@@ -197,6 +197,7 @@ BEGIN
 			NULL,
 			NULL,
 			NULL,
+			L.CostCenterId,
 			@HeaderId,
 			@ReferenceNo
 		FROM @Lines L;

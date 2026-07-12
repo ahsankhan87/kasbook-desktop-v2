@@ -623,5 +623,23 @@ namespace pos
 
             return text.Substring(0, length - 1) + "…";
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_journal_voucher_manager
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "frm_journal_voucher_manager";
+            this.Load += new System.EventHandler(this.frm_journal_voucher_manager_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void frm_journal_voucher_manager_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

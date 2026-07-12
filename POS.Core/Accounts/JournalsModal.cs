@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS.Core
 {
@@ -55,14 +52,153 @@ namespace POS.Core
 
         public double credit { get; set; }
 
-        public string date_created { get; set; }
+        public DateTime date_created { get; set; }
 
-        public string date_updated { get; set; }
+        public DateTime date_updated { get; set; }
 
         public DateTime entry_date { get; set; }
 
         public int employee_id { get; set; }
 
         public string payment_ref_invoice_no { get; set; }
+    }
+
+    public class JVHeaderModel
+    {
+        public int VoucherId { get; set; }
+
+        public string VoucherNo { get; set; }
+
+        public DateTime VoucherDate { get; set; }
+
+        public string VoucherType { get; set; }
+
+        public string ReferenceNo { get; set; }
+
+        public string Narration { get; set; }
+
+        public string Attachment { get; set; }
+
+        public decimal TotalDebit { get; set; }
+
+        public decimal TotalCredit { get; set; }
+
+        public string Status { get; set; }
+
+        public int? ReversalOf { get; set; }
+
+        public int? PostedBy { get; set; }
+
+        public DateTime? PostedAt { get; set; }
+
+        public bool IsAutoPosted { get; set; }
+
+        public int? CreatedBy { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public int? UpdatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
+        public int? BranchId { get; set; }
+
+        public int? CompanyId { get; set; }
+
+        public string RefModule { get; set; }
+
+        public int? RefId { get; set; }
+    }
+
+    public class JVLineModel
+    {
+        public int EntryId { get; set; }
+
+        public int VoucherId { get; set; }
+
+        public int LineNo { get; set; }
+
+        public int AccountId { get; set; }
+
+        public string AccountCode { get; set; }
+
+        public string AccountName { get; set; }
+
+        public string Narration { get; set; }
+
+        public decimal Debit { get; set; }
+
+        public decimal Credit { get; set; }
+
+        public int CostCenterID { get; set; }
+
+        public string ModuleName { get; set; }
+
+        public int? RefId { get; set; }
+    }
+
+    public class AutoJVModel
+    {
+        public string ModuleName { get; set; }
+
+        public string RefModule { get; set; }
+
+        public int RefId { get; set; }
+
+        public DateTime VoucherDate { get; set; }
+
+        public string ReferenceNo { get; set; }
+
+        public string Narration { get; set; }
+
+        public bool IsAutoPosted { get; set; }
+
+        public List<JVLineModel> Lines { get; set; } = new List<JVLineModel>();
+    }
+
+    public class PostResult
+    {
+        public bool Success { get; set; }
+
+        public string VoucherNo { get; set; }
+
+        public int VoucherId { get; set; }
+
+        public List<int> EntryIds { get; set; } = new List<int>();
+
+        public List<ValidationError> Messages { get; set; } = new List<ValidationError>();
+    }
+
+    public class BatchPostResult
+    {
+        public int SuccessCount { get; set; }
+
+        public int FailureCount { get; set; }
+
+        public List<int> PostedVoucherIds { get; set; } = new List<int>();
+
+        public List<ValidationError> FailedVouchers { get; set; } = new List<ValidationError>();
+    }
+
+    public class ValidationError
+    {
+        public string VoucherNo { get; set; }
+
+        public int? LineNo { get; set; }
+
+        public string FieldName { get; set; }
+
+        public string Message { get; set; }
+
+        public string Severity { get; set; }
+
+        public bool IsBlocking { get; set; }
+    }
+
+    public class JVVoucherModel
+    {
+        public JVHeaderModel Header { get; set; } = new JVHeaderModel();
+
+        public List<JVLineModel> Lines { get; set; } = new List<JVLineModel>();
     }
 }

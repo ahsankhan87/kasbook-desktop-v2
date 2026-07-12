@@ -18,6 +18,9 @@
   - Role/claim persistence: `SqlRoleRepository`
   - UI enforcement: `FormSecurityExtensions.ApplyPermissions` using `Tag` permission keys.
 
+## Database Usage
+- Use `acc_entries_header` and `acc_entries` as the accounting voucher tables; do not use `acc_vouchers`/`acc_voucher_lines` in this codebase.
+
 ## UI/UX Conventions (use these, avoid ad-hoc variants)
 - Centralize styling through `pos/UI/AppTheme.cs`; call `AppTheme.Apply(this)` in form load.
 - For list/grid screens, follow existing helpers like `AppTheme.ApplyListFormStyle(...)` / `ApplyListFormStyleLightHeader(...)`.
@@ -25,7 +28,7 @@
 - Use `pos/UI/Busy/BusyScope.cs` (`using (BusyScope.Show(...))`) for long-running form actions.
 - Use dedicated lock screen form `pos/frm_session_lock.*` (do not build inline lock UI in `frm_main`).
 - Keep label text color/theme aligned with `AppTheme.TextPrimary` (dark text).
-- Create designer page when creating winform.
+- **Create a separate designer page/file when creating WinForms forms.**
 - For dashboard drill-down UI, use separate popup windows instead of in-form overlay panels when overlays do not render well.
 
 ## Security, Logging, and Session Rules

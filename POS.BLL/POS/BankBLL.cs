@@ -138,5 +138,57 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public DataTable GetBankAccountsForReconciliation()
+        {
+            try
+            {
+                BankDLL objDLL = new BankDLL();
+                return objDLL.GetBankAccountsForReconciliation();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetBankReconciliationTransactions(int bankAccountId, DateTime statementDate)
+        {
+            try
+            {
+                BankDLL objDLL = new BankDLL();
+                return objDLL.GetBankReconciliationTransactions(bankAccountId, statementDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetUnclearedBankTransactions(int bankAccountId, DateTime statementDate)
+        {
+            try
+            {
+                BankDLL objDLL = new BankDLL();
+                return objDLL.GetUnclearedBankTransactions(bankAccountId, statementDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public int SaveBankReconciliation(int bankAccountId, DateTime statementDate, decimal bankStatementBalance, decimal adjustedBankBalance, decimal bookBalance, decimal difference, int userId, DataTable clearedRows)
+        {
+            try
+            {
+                BankDLL objDLL = new BankDLL();
+                return objDLL.SaveBankReconciliation(bankAccountId, statementDate, bankStatementBalance, adjustedBankBalance, bookBalance, difference, userId, clearedRows);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

@@ -167,6 +167,176 @@ namespace POS.DLL
             }
         }
 
+        public DataTable GetBankAccountsForReconciliation()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+                    const string query = @"
+SELECT
+    B.id AS bank_id,
+    B.name AS bank_name,
+    B.GLAccountID AS account_id,
+    ISNULL(A.code, '') AS account_code,
+    ISNULL(A.name, B.name) AS account_name
+FROM pos_banks B
+INNER JOIN acc_accounts A ON A.id = B.GLAccountID
+WHERE B.branch_id = @branch_id
+ORDER BY B.name;";
+
+                    using (SqlCommand localCmd = new SqlCommand(query, cn))
+                    {
+                        localCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(localCmd))
+                        {
+                            DataTable table = new DataTable();
+                            adapter.Fill(table);
+                            return table;
+                        }
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public DataTable GetBankReconciliationTransactions(int bankAccountId, DateTime statementDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand localCmd = new SqlCommand("sp_BankReconciliation", cn))
+                    {
+                        localCmd.CommandType = CommandType.StoredProcedure;
+                        localCmd.Parameters.AddWithValue("@OperationType", 1);
+                        localCmd.Parameters.AddWithValue("@BranchId", UsersModal.logged_in_branch_id);
+                        localCmd.Parameters.AddWithValue("@BankAccountId", bankAccountId);
+                        localCmd.Parameters.AddWithValue("@StatementDate", statementDate.Date);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(localCmd))
+                        {
+                            DataTable table = new DataTable();
+                            adapter.Fill(table);
+                            return table;
+                        }
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public DataTable GetUnclearedBankTransactions(int bankAccountId, DateTime statementDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand localCmd = new SqlCommand("sp_BankReconciliation", cn))
+                    {
+                        localCmd.CommandType = CommandType.StoredProcedure;
+                        localCmd.Parameters.AddWithValue("@OperationType", 4);
+                        localCmd.Parameters.AddWithValue("@BranchId", UsersModal.logged_in_branch_id);
+                        localCmd.Parameters.AddWithValue("@BankAccountId", bankAccountId);
+                        localCmd.Parameters.AddWithValue("@StatementDate", statementDate.Date);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(localCmd))
+                        {
+                            DataTable table = new DataTable();
+                            adapter.Fill(table);
+                            return table;
+                        }
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public int SaveBankReconciliation(int bankAccountId, DateTime statementDate, decimal bankStatementBalance, decimal adjustedBankBalance, decimal bookBalance, decimal difference, int userId, DataTable clearedRows)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                SqlTransaction tx = null;
+                try
+                {
+                    cn.Open();
+                    tx = cn.BeginTransaction();
+
+                    int reconciliationId;
+                    using (SqlCommand headerCmd = new SqlCommand("sp_BankReconciliation", cn, tx))
+                    {
+                        headerCmd.CommandType = CommandType.StoredProcedure;
+                        headerCmd.Parameters.AddWithValue("@OperationType", 2);
+                        headerCmd.Parameters.AddWithValue("@BranchId", UsersModal.logged_in_branch_id);
+                        headerCmd.Parameters.AddWithValue("@BankAccountId", bankAccountId);
+                        headerCmd.Parameters.AddWithValue("@StatementDate", statementDate.Date);
+                        headerCmd.Parameters.AddWithValue("@BankStatementBalance", bankStatementBalance);
+                        headerCmd.Parameters.AddWithValue("@AdjustedBalance", adjustedBankBalance);
+                        headerCmd.Parameters.AddWithValue("@BookBalance", bookBalance);
+                        headerCmd.Parameters.AddWithValue("@Difference", difference);
+                        headerCmd.Parameters.AddWithValue("@UserId", userId);
+
+                        object headerResult = headerCmd.ExecuteScalar();
+                        reconciliationId = headerResult == null || headerResult == DBNull.Value ? 0 : Convert.ToInt32(headerResult);
+                    }
+
+                    if (clearedRows != null)
+                    {
+                        foreach (DataRow row in clearedRows.Rows)
+                        {
+                            int entryId = row["entry_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["entry_id"]);
+                            if (entryId <= 0)
+                            {
+                                continue;
+                            }
+
+                            bool isCleared = row.Table.Columns.Contains("is_cleared") && row["is_cleared"] != DBNull.Value && Convert.ToBoolean(row["is_cleared"]);
+
+                            using (SqlCommand itemCmd = new SqlCommand("sp_BankReconciliation", cn, tx))
+                            {
+                                itemCmd.CommandType = CommandType.StoredProcedure;
+                                itemCmd.Parameters.AddWithValue("@OperationType", 3);
+                                itemCmd.Parameters.AddWithValue("@ReconciliationId", reconciliationId);
+                                itemCmd.Parameters.AddWithValue("@BranchId", UsersModal.logged_in_branch_id);
+                                itemCmd.Parameters.AddWithValue("@BankAccountId", bankAccountId);
+                                itemCmd.Parameters.AddWithValue("@StatementDate", statementDate.Date);
+                                itemCmd.Parameters.AddWithValue("@EntryId", entryId);
+                                itemCmd.Parameters.AddWithValue("@IsCleared", isCleared);
+                                itemCmd.Parameters.AddWithValue("@UserId", userId);
+                                itemCmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    tx.Commit();
+
+                    Log.LogAction("Save Bank Reconciliation", "Bank Account ID: " + bankAccountId + ", Statement Date: " + statementDate.ToString("yyyy-MM-dd"), userId, UsersModal.logged_in_branch_id);
+                    return reconciliationId;
+                }
+                catch
+                {
+                    if (tx != null)
+                    {
+                        tx.Rollback();
+                    }
+
+                    throw;
+                }
+            }
+        }
+
         public DataTable SearchRecord(String condition)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

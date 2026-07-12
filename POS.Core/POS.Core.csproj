@@ -40,13 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\CostCenterModels.cs" />
     <Compile Include="Accounts\ExpenseModal.cs" />
     <Compile Include="Accounts\JournalsModal.cs" />
     <Compile Include="Accounts\AccountsModal.cs" />
     <Compile Include="Accounts\GroupsModal.cs" />
     <Compile Include="Accounts\AccGroupModel.cs" />
     <Compile Include="Accounts\AccAccountModel.cs" />
-    <Compile Include="Accounts\JournalVoucherModels.cs" />
+    <Compile Include="Accounts\AccountLookupItem.cs" />
+    <Compile Include="Accounts\FinancialPeriodModal.cs" />
+    <Compile Include="Accounts\VoucherFilter.cs" />
     <Compile Include="POS\BankModal.cs" />
     <Compile Include="POS\CurrencyModal.cs" />
     <Compile Include="POS\DebitNoteModal.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="POS\iCustomerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="POS\DiscountSchemeModal.cs" />
+    <Compile Include="Tax\TaxModals.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

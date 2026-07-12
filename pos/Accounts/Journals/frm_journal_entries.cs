@@ -19,9 +19,11 @@ namespace pos
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private readonly UserIdentity _currentUser = AppSecurityContext.User;
         private readonly BindingSource _accountBindingSource = new BindingSource();
+        private readonly BindingSource _costCenterBindingSource = new BindingSource();
         private readonly ContextMenuStrip _templateMenu = new ContextMenuStrip();
 
         private DataTable _accountsTable;
+        private DataTable _costCentersTable;
         private bool _suppressAccountFilter;
         private string _attachmentFilePath = string.Empty;
         private string _editingInvoiceNo = string.Empty;
@@ -103,7 +105,11 @@ namespace pos
                     DataGridViewRow gridRow = grid_journal.Rows[rowIndex];
                     gridRow.Cells["account"].Value = line["account_id"];
                     gridRow.Cells["description"].Value = Convert.ToString(line["Description"]);
-                    gridRow.Cells["cost_center"].Value = string.Empty;
+
+                    // Set cost_center from the loaded voucher line
+                    int costCenterId = line["cost_center_id"] != DBNull.Value ? Convert.ToInt32(line["cost_center_id"]) : 0;
+                    gridRow.Cells["cost_center"].Value = costCenterId > 0 ? (object)costCenterId : (object)DBNull.Value;
+
                     gridRow.Cells["debit_amount"].Value = Convert.ToDecimal(line["Debit"]);
                     gridRow.Cells["credit_amount"].Value = Convert.ToDecimal(line["Credit"]);
                     UpdateAccountTypeForRow(rowIndex);
@@ -144,16 +150,38 @@ namespace pos
 
         private void ConfigureCostCenters()
         {
-            cost_center.Items.Clear();
-            cost_center.Items.AddRange(new object[]
+            try
             {
-                string.Empty,
-                "General",
-                "Administration",
-                "Operations",
-                "Sales",
-                "Projects"
-            });
+                // Load real cost centers from the database using CostCenterBLL
+                CostCenterBLL ccBll = new CostCenterBLL();
+                _costCentersTable = ccBll.GetCostCenterDropdown();
+
+                // Add empty row for "Unallocated" entries
+                if (_costCentersTable != null && _costCentersTable.Rows.Count >= 0)
+                {
+                    DataRow emptyRow = _costCentersTable.NewRow();
+                    emptyRow["id"] = DBNull.Value;
+                    emptyRow["display_text"] = string.Empty;
+                    emptyRow["cc_code"] = string.Empty;
+                    emptyRow["cc_name"] = string.Empty;
+                    _costCentersTable.Rows.InsertAt(emptyRow, 0);
+                }
+
+                // Bind to BindingSource
+                _costCenterBindingSource.DataSource = _costCentersTable;
+                cost_center.DataSource = _costCenterBindingSource;
+                cost_center.DisplayMember = "display_text";
+                cost_center.ValueMember = "id";
+                cost_center.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                cost_center.FlatStyle = FlatStyle.Flat;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load cost centers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Fallback: Add empty option so form doesn't crash
+                cost_center.Items.Clear();
+                cost_center.Items.Add(string.Empty);
+            }
         }
 
         private void ConfigureTemplateMenu()
@@ -405,6 +433,17 @@ namespace pos
                     return;
                 }
 
+                // Validate cost center budgets
+                List<string> budgetAlerts = ValidateLineBudgets(txt_entry_date.Value.Date);
+                if (budgetAlerts.Count > 0)
+                {
+                    string budgetWarningMessage = "Budget Alert(s):\r\n\r\n" + string.Join("\r\n", budgetAlerts) + "\r\n\r\nContinue posting anyway?";
+                    if (MessageBox.Show(budgetWarningMessage, "Budget Validation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
                 if (MessageBox.Show("Post this journal voucher?", "Post Voucher", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     return;
@@ -525,7 +564,7 @@ namespace pos
                     Narration = BuildLineDescription(Convert.ToString(row.Cells["description"].Value)),
                     Debit = debit,
                     Credit = credit,
-                    CostCenter = Convert.ToString(row.Cells["cost_center"].Value),
+                    CostCenterID = row.Cells["cost_center"].Value == null ? 0 : Convert.ToInt32(row.Cells["cost_center"].Value),
                     ModuleName = "MANUAL",
                     RefId = null
                 });
@@ -545,6 +584,101 @@ namespace pos
             }
 
             return narration;
+        }
+
+        /// <summary>
+        /// Validates budget for each journal line with cost center assignment.
+        /// Returns list of budget alerts and warnings.
+        /// </summary>
+        private List<string> ValidateLineBudgets(DateTime voucherDate)
+        {
+            List<string> budgetAlerts = new List<string>();
+
+            try
+            {
+                CostCenterBLL ccBll = new CostCenterBLL();
+                int lineNumber = 0;
+
+                foreach (DataGridViewRow row in grid_journal.Rows)
+                {
+                    if (row.IsNewRow)
+                    {
+                        continue;
+                    }
+
+                    lineNumber++;
+
+                    // Get cost center ID from row
+                    object ccValue = row.Cells["cost_center"].Value;
+                    if (ccValue == null || ccValue == DBNull.Value)
+                    {
+                        continue;
+                    }
+
+                    int costCenterId;
+                    if (!int.TryParse(Convert.ToString(ccValue), out costCenterId) || costCenterId <= 0)
+                    {
+                        continue;
+                    }
+
+                    // Get account ID
+                    int accountId;
+                    if (!TryGetInt(row.Cells["account"].Value, out accountId) || accountId <= 0)
+                    {
+                        continue;
+                    }
+
+                    // Get account type to determine if it's an expense account
+                    DataRow accountRow = GetAccountRow(accountId);
+                    if (accountRow == null)
+                    {
+                        continue;
+                    }
+
+                    string accountType = Convert.ToString(accountRow["account_type_name"]).ToLowerInvariant().Trim();
+
+                    // Only check budget for expense accounts (assets, liabilities, and equity don't trigger budget checks)
+                    // Typical expense account types: "Expense", "COGS", "Operating Expense"
+                    bool isExpenseAccount = accountType.Contains("expense") || accountType.Contains("cost");
+                    if (!isExpenseAccount)
+                    {
+                        continue;
+                    }
+
+                    // Get debit amount (typical for expense)
+                    decimal amount = 0m;
+                    if (!TryGetDecimal(row.Cells["debit_amount"].Value, out amount))
+                    {
+                        TryGetDecimal(row.Cells["credit_amount"].Value, out amount);
+                    }
+
+                    if (amount <= 0m)
+                    {
+                        continue;
+                    }
+
+                    // Check budget before posting
+                    BudgetCheckResult budgetResult = ccBll.CheckBudgetBeforePosting(costCenterId, accountId, amount, voucherDate);
+
+                    if (budgetResult.IsOverBudget)
+                    {
+                        string alertMessage = string.Format(
+                            "Line {0}: Budget alert ({1}) - {2}",
+                            lineNumber,
+                            budgetResult.SeverityLevel ?? "Warning",
+                            budgetResult.Message
+                        );
+                        budgetAlerts.Add(alertMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Don't block posting due to budget check failure
+                // Log but continue
+            }
+
+            return budgetAlerts;
         }
 
         private void frm_journal_entries_KeyDown(object sender, KeyEventArgs e)

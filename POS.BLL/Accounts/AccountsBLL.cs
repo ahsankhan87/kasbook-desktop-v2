@@ -109,6 +109,123 @@ namespace POS.BLL
             }
         }
 
+        public DataTable GetProfitLossHierarchy()
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetProfitLossHierarchy();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetProfitLossBalances(DateTime fromDate, DateTime toDate, DateTime? previousFromDate, DateTime? previousToDate, int? costCenterId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetProfitLossBalances(fromDate, toDate, previousFromDate, previousToDate, costCenterId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetProfitLossCostCenters()
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetProfitLossCostCenters();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetInventoryValueAsOf(DateTime asOfDate)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetInventoryValueAsOf(asOfDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetNetProfitBetween(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetNetProfitBetween(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetBalanceByAccountNamePatternsAsOf(DateTime asOfDate, params string[] namePatterns)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetBalanceByAccountNamePatternsAsOf(asOfDate, namePatterns);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetLedgerAccounts()
+        {
+            try
+            {
+                LedgerDAL dal = new LedgerDAL();
+                return dal.GetLedgerAccounts();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetAccountLedgerSummary(int accId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                LedgerDAL dal = new LedgerDAL();
+                return dal.GetAccountLedgerSummary(accId, fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public Tuple<DataTable, int, decimal> GetAccountLedgerPage(int accId, DateTime fromDate, DateTime toDate, int page, int pageSize, string showFilter)
+        {
+            try
+            {
+                LedgerDAL dal = new LedgerDAL();
+                return dal.GetAccountLedger(accId, fromDate, toDate, page, pageSize, showFilter);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public DataTable SearchRecord(String condition)
         {
             try
@@ -175,6 +292,110 @@ namespace POS.BLL
             catch
             {
 
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerSubLedger(int customerId, DateTime? fromDate = null, DateTime? toDate = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetCustomerSubLedger(customerId, fromDate, toDate, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCustomerSubLedgerAging(int customerId, DateTime? fromDate = null, DateTime? toDate = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetCustomerSubLedgerAging(customerId, fromDate, toDate, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierSubLedger(int supplierId, DateTime? fromDate = null, DateTime? toDate = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetSupplierSubLedger(supplierId, fromDate, toDate, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetSupplierSubLedgerAging(int supplierId, DateTime? fromDate = null, DateTime? toDate = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetSupplierSubLedgerAging(supplierId, fromDate, toDate, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCashBook(int? cashAccountId = null, DateTime? fromDate = null, DateTime? toDate = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetCashBook(cashAccountId, fromDate, toDate, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCashBookDailyTotals(int? cashAccountId = null, DateTime? fromDate = null, DateTime? toDate = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetCashBookDailyTotals(cashAccountId, fromDate, toDate, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetCashFlowStatement(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetCashFlowStatement(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public decimal GetCashAndBankBalanceAsOf(DateTime asOfDate)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetCashAndBankBalanceAsOf(asOfDate);
+            }
+            catch
+            {
                 throw;
             }
         }

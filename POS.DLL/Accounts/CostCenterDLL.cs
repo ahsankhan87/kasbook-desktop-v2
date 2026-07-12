@@ -203,11 +203,11 @@ WHERE cc_id = @ccId;";
                             ParentCcId = r["parent_cc_id"] == DBNull.Value ? null : (int?)r["parent_cc_id"],
                             ManagerId = r["manager_id"] == DBNull.Value ? null : (int?)r["manager_id"],
                             MonthlyBudget = r["monthly_budget"] == DBNull.Value ? null : (decimal?)r["monthly_budget"],
-                            StartDate = (DateTime)r["start_date"],
+                            StartDate = r["start_date"] == DBNull.Value ? DateTime.Today : (DateTime)r["start_date"],
                             EndDate = r["end_date"] == DBNull.Value ? null : (DateTime?)r["end_date"],
                             IsActive = (bool)r["is_active"],
                             Description = r["description"]?.ToString(),
-                            CreatedAt = (DateTime)r["created_at"]
+                            CreatedAt = r["created_at"] == DBNull.Value ? DateTime.Now : (DateTime)r["created_at"]
                         };
                     }
                 }

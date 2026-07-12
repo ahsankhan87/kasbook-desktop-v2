@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\CostCenterBLL.cs" />
     <Compile Include="Accounts\ExpenseBLL.cs" />
     <Compile Include="Accounts\JournalsBLL.cs" />
+    <Compile Include="Accounts\AccountingDashboardBLL.cs" />
     <Compile Include="Accounts\AccountsBLL.cs" />
     <Compile Include="Accounts\GroupsBLL.cs" />
     <Compile Include="Accounts\ChartOfAccountsBLL.cs" />
-    <Compile Include="Accounts\JournalsEngineBLL.cs" />
+    <Compile Include="Accounts\FinancialPeriodBLL.cs" />
     <Compile Include="Dashboard\DashboardBLL.cs" />
     <Compile Include="POS\BackupBLL.cs" />
     <Compile Include="POS\BankBLL.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="SettingsBLL.cs" />
     <Compile Include="Discounts\DiscountSchemesBLL.cs" />
     <Compile Include="Discounts\DiscountEngineBLL.cs" />
+    <Compile Include="Tax\SalesTaxBLL.cs" />
+    <Compile Include="Tax\TaxReportingBLL.cs" />
+    <Compile Include="Tax\WHTCalculationBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\POS.Core\POS.Core.csproj">

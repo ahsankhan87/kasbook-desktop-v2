@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -223,6 +223,68 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting\CostCenter\frm_allocation_rules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_allocation_rules.Designer.cs">
+      <DependentUpon>frm_allocation_rules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_budget_setup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_budget_setup.Designer.cs">
+      <DependentUpon>frm_budget_setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_cost_center_setup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_cost_center_setup.Designer.cs">
+      <DependentUpon>frm_cost_center_setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_cost_center_tree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_cost_center_tree.Designer.cs">
+      <DependentUpon>frm_cost_center_tree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_departmental_pl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting\CostCenter\frm_departmental_pl.Designer.cs">
+      <DependentUpon>frm_departmental_pl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_year_end_close_wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_year_end_close_wizard.Designer.cs">
+      <DependentUpon>frm_year_end_close_wizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_BalanceSheetReport.Designer.cs">
+      <DependentUpon>frm_BalanceSheetReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_CashFlowStatementReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_CashFlowStatementReport.Designer.cs">
+      <DependentUpon>frm_CashFlowStatementReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_BankReconciliation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_BankReconciliation.Designer.cs">
+      <DependentUpon>frm_BankReconciliation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Financial\BalanceSheetModels.cs" />
+    <Compile Include="Reports\Financial\BalanceSheetGenerator.cs" />
+    <Compile Include="Reports\Financial\BalanceSheetDiscrepancyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\BalanceSheetDiscrepancyForm.Designer.cs">
+      <DependentUpon>BalanceSheetDiscrepancyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="About\frm_about.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,11 +330,29 @@
     <Compile Include="Accounts\Journals\frm_journal_voucher_manager.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Accounts\Dashboard\frm_accounting_dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Dashboard\frm_accounting_dashboard.Designer.cs">
+      <DependentUpon>frm_accounting_dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Accounts\Maintenance\frm_codes_maintenance.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Accounts\Maintenance\frm_codes_maintenance.Designer.cs">
       <DependentUpon>frm_codes_maintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_financial_periods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_financial_periods.Designer.cs">
+      <DependentUpon>frm_financial_periods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_period_close_wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_period_close_wizard.Designer.cs">
+      <DependentUpon>frm_period_close_wizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Accounts\Reports\AP\AccountPayable.cs">
       <SubType>Form</SubType>
@@ -874,6 +954,24 @@
     <Compile Include="Master\frm_shortcuts.Designer.cs">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Accounts\FrmCashBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\FrmCashBook.Designer.cs">
+      <DependentUpon>FrmCashBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Accounts\FrmCustomerSubLedger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\FrmCustomerSubLedger.Designer.cs">
+      <DependentUpon>FrmCustomerSubLedger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Accounts\FrmSupplierSubLedger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\FrmSupplierSubLedger.Designer.cs">
+      <DependentUpon>FrmSupplierSubLedger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Accounts\frm_AccountPayableAging.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -965,14 +1063,23 @@
     <Compile Include="Reports\Finance\frm_salesExpensesReport.Designer.cs">
       <DependentUpon>frm_salesExpensesReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
+    <Compile Include="Reports\Financial\FrmSubLedgerBase.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\FrmSubLedgerBase.Designer.cs">
+      <DependentUpon>FrmSubLedgerBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Financial\frm_GeneralLedgerReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\Financial\frm_GeneralLedgerReport.Designer.cs">
+      <DependentUpon>frm_GeneralLedgerReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Financial\frm_ProfitAndLossReport.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_ProfitAndLossReport.Designer.cs">
+      <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Financial\frm_TrialBalanceReport.cs">
       <SubType>Form</SubType>
@@ -1372,6 +1479,18 @@
       <DependentUpon>sales_invoice_ar.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Taxes\frm_SalesTaxSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_SalesTaxSummary.Designer.cs">
+      <DependentUpon>frm_SalesTaxSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_TaxTrialBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_TaxTrialBalance.Designer.cs">
+      <DependentUpon>frm_TaxTrialBalance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Taxes\frm_VatDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1383,6 +1502,12 @@
     </Compile>
     <Compile Include="Reports\Taxes\frm_VatInvoiceDetails.Designer.cs">
       <DependentUpon>frm_VatInvoiceDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_WithholdingTaxReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Taxes\frm_WithholdingTaxReport.Designer.cs">
+      <DependentUpon>frm_WithholdingTaxReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Warehouse\frm_warehouse_report.cs">
       <SubType>Form</SubType>
@@ -1631,6 +1756,9 @@
     </Compile>
     <Compile Include="UI\Busy\BusyScope.cs" />
     <Compile Include="UI\UiMessages.cs" />
+    <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_setup.resx">
+      <DependentUpon>frm_cost_center_setup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Accounts\frm_accounts.ar-SA.resx">
       <DependentUpon>frm_accounts.cs</DependentUpon>
     </EmbeddedResource>
@@ -1645,6 +1773,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Accounts\frm_coa.ar-SA.resx">
       <DependentUpon>frm_coa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Dashboard\frm_accounting_dashboard.resx">
+      <DependentUpon>frm_accounting_dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Groups\frm_addGroup.ar-SA.resx">
       <DependentUpon>frm_addGroup.cs</DependentUpon>
@@ -1666,6 +1797,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Accounts\frm_coa.resx">
       <DependentUpon>frm_coa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Journals\frm_journal_voucher_manager.resx">
+      <DependentUpon>frm_journal_voucher_manager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\AP\AccountPayable.ar-SA.resx">
       <DependentUpon>AccountPayable.cs</DependentUpon>
@@ -2338,6 +2472,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_GeneralLedgerReport.resx">
+      <DependentUpon>frm_GeneralLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_ProfitAndLossReport.resx">
+      <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Inventory\frm_AgingInventoryReport.resx">
       <DependentUpon>frm_AgingInventoryReport.cs</DependentUpon>

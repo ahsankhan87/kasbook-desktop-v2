@@ -67,7 +67,7 @@ namespace pos
             UI.AppTheme.Apply(this);
             StyleMainForm();
 
-            this.Text = "Nozum ERP V2.0.0 - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
+            this.Text = "Nozum ERP V3.0.0 - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
 
             // Re-apply DB-backed permissions to ensure module-based enabling can't elevate privileges
             AppSecurityContext.RefreshUserClaims();
@@ -423,6 +423,7 @@ namespace pos
                 if (customersSummaryToolStripMenuItem != null) customersSummaryToolStripMenuItem.Tag = Permissions.Customers_View;
                 if (suppliersSummaryToolStripMenuItem != null) suppliersSummaryToolStripMenuItem.Tag = Permissions.Suppliers_View;
                 if (expenseDashboardToolStripMenuItem != null) expenseDashboardToolStripMenuItem.Tag = Permissions.Expenses_View;
+                if (accountingDashboardToolStripMenuItem != null) accountingDashboardToolStripMenuItem.Tag = Permissions.Finance_View;
 
                 // Security admin
                 if (permissionsToolStripMenuItem != null) permissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
@@ -2537,9 +2538,15 @@ namespace pos
             expenseDashboard.ShowDialog(this);
         }
 
+        private void accountingDashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var accountingDashboard = new frm_accounting_dashboard();
+            accountingDashboard.ShowDialog(this);
+        }
+
         private void customersDashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void suppliersSummaryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2612,6 +2619,163 @@ namespace pos
         {
             var frm_journalVoucherList = new pos.frm_journal_voucher_manager();
             frm_journalVoucherList.ShowDialog(this);
+        }
+
+        private void generalLedgerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_generalLedger = new pos.Reports.Financial.frm_GeneralLedgerReport();
+            frm_generalLedger.ShowDialog(this);
+        }
+
+        private void customerARToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_customerAR = new pos.Reports.Accounts.FrmCustomerSubLedger();
+            frm_customerAR.ShowDialog(this);
+        }
+
+        private void supplierAPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_supplierAP = new pos.Reports.Accounts.FrmSupplierSubLedger();
+            frm_supplierAP.ShowDialog(this);
+        }
+
+        private void cashBookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_cashBook = new pos.Reports.Accounts.FrmCashBook();
+            frm_cashBook.ShowDialog(this);
+        }
+
+        private void incomeStatementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_incomeStatement = new pos.Reports.Financial.frm_ProfitAndLossReport();
+            frm_incomeStatement.ShowDialog(this);
+        }
+
+        private void balanceSheetToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var frm_balanceSheet = new pos.Reports.Financial.frm_BalanceSheetReport();
+            frm_balanceSheet.ShowDialog(this);
+        }
+
+        private void financialPeriodManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_financialPeriodManagement = new pos.frm_financial_periods();
+            frm_financialPeriodManagement.ShowDialog(this);
+        }
+
+        private void cashFlowManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_cashFlowManagement = new pos.Reports.Financial.frm_CashFlowStatementReport();
+            frm_cashFlowManagement.ShowDialog(this);
+        }
+
+        private void bankReconciliationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_bankReconciliation = new pos.Reports.Financial.frm_BankReconciliation();
+            frm_bankReconciliation.ShowDialog(this);
+        }
+
+        // Tax Reporting Forms
+        Form frm_salesTaxSummary;
+        private void salesTaxSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frm_salesTaxSummary == null)
+            {
+                frm_salesTaxSummary = new pos.Reports.Taxes.frm_SalesTaxSummary
+                {
+                    MdiParent = this,
+                    WindowState = FormWindowState.Maximized
+                };
+                frm_salesTaxSummary.FormClosed += new FormClosedEventHandler(frm_salesTaxSummary_FormClosed);
+                frm_salesTaxSummary.Show();
+            }
+            else
+            {
+                frm_salesTaxSummary.Activate();
+            }
+        }
+
+        private void frm_salesTaxSummary_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_salesTaxSummary = null;
+        }
+
+        Form frm_whtReport;
+        private void withholdinTaxReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frm_whtReport == null)
+            {
+                frm_whtReport = new pos.Reports.Taxes.frm_WithholdingTaxReport
+                {
+                    MdiParent = this,
+                    WindowState = FormWindowState.Maximized
+                };
+                frm_whtReport.FormClosed += new FormClosedEventHandler(frm_whtReport_FormClosed);
+                frm_whtReport.Show();
+            }
+            else
+            {
+                frm_whtReport.Activate();
+            }
+        }
+
+        private void frm_whtReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_whtReport = null;
+        }
+
+        Form frm_taxTrialBalance;
+        private void taxTrialBalanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frm_taxTrialBalance == null)
+            {
+                frm_taxTrialBalance = new pos.Reports.Taxes.frm_TaxTrialBalance
+                {
+                    MdiParent = this,
+                    WindowState = FormWindowState.Maximized
+                };
+                frm_taxTrialBalance.FormClosed += new FormClosedEventHandler(frm_taxTrialBalance_FormClosed);
+                frm_taxTrialBalance.Show();
+            }
+            else
+            {
+                frm_taxTrialBalance.Activate();
+            }
+        }
+
+        private void frm_taxTrialBalance_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_taxTrialBalance = null;
+        }
+
+        private void setupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Accounting.CostCenter.frm_cost_center_setup();
+            frm.ShowDialog(this);
+        }
+
+        private void hierarchyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Accounting.CostCenter.frm_cost_center_tree();
+            frm.ShowDialog(this);
+        }
+
+        private void budgetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Accounting.CostCenter.frm_budget_setup();
+            frm.ShowDialog(this);
+        }
+
+        private void allocationRulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Accounting.CostCenter.frm_allocation_rules();
+            frm.ShowDialog(this);
+        }
+
+        private void departmentalPLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Accounting.CostCenter.frm_departmental_pl();
+            frm.ShowDialog(this);
         }
     }
 }

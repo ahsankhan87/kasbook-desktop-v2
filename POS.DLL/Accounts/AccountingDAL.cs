@@ -68,7 +68,7 @@ namespace POS.DLL
         private bool VoucherNoExists(string voucherNo)
         {
             using (SqlConnection cn = CreateConnection())
-            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM acc_vouchers WHERE voucher_no = @voucher_no;", cn))
+            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM acc_entries_header WHERE InvoiceNo = @voucher_no;", cn))
             {
                 cmd.Parameters.AddWithValue("@voucher_no", voucherNo);
                 cn.Open();

@@ -18,16 +18,91 @@ namespace POS.DLL
         {
         }
 
+        public DataTable GetLedgerAccounts()
+        {
+            try
+            {
+                return ExecuteDataTable(@"
+                SELECT A.id AS acc_id,
+                       A.code AS acc_code,
+                       A.name AS acc_name,
+                       '' AS account_type,
+                       CASE WHEN ISNULL(A.op_cr_balance, 0) > ISNULL(A.op_dr_balance, 0) THEN 'Cr' ELSE 'Dr' END AS normal_balance,
+                       ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0)
+                       + ISNULL((SELECT SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0))
+                                 FROM acc_entries E
+                                 WHERE E.account_id = A.id), 0) AS current_balance
+                FROM acc_accounts A
+                WHERE ISNULL(A.is_active, 1) = 1
+                ORDER BY A.code, A.name;");
+            }
+            catch (Exception ex)
+            {
+                throw new DataException("Failed to load ledger accounts.", ex);
+            }
+        }
+
+        public DataTable GetAccountLedgerSummary(int accId, DateTime from, DateTime to)
+        {
+            try
+            {
+                return ExecuteDataTable(@"
+SELECT TOP 1
+       A.id AS acc_id,
+       A.code AS acc_code,
+       A.name AS acc_name,
+       '' AS account_type,
+       CASE WHEN ISNULL(A.op_cr_balance, 0) > ISNULL(A.op_dr_balance, 0) THEN 'Cr' ELSE 'Dr' END AS normal_balance,
+       ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0)
+       + ISNULL((SELECT SUM(ISNULL(E0.debit, 0) - ISNULL(E0.credit, 0))
+                 FROM acc_entries E0
+                 WHERE E0.account_id = A.id), 0) AS current_balance,
+       ISNULL((SELECT SUM(ISNULL(E1.debit, 0))
+               FROM acc_entries E1
+               WHERE E1.account_id = A.id
+                 AND E1.entry_date BETWEEN @from_date AND @to_date), 0) AS period_debit,
+       ISNULL((SELECT SUM(ISNULL(E2.credit, 0))
+               FROM acc_entries E2
+               WHERE E2.account_id = A.id
+                 AND E2.entry_date BETWEEN @from_date AND @to_date), 0) AS period_credit,
+       ISNULL((SELECT COUNT(1)
+               FROM acc_entries E3
+               WHERE E3.account_id = A.id
+                 AND E3.entry_date BETWEEN @from_date AND @to_date), 0) AS period_count,
+       (SELECT MAX(E4.entry_date)
+        FROM acc_entries E4
+        WHERE E4.account_id = A.id) AS last_txn_date
+FROM acc_accounts A
+WHERE A.id = @acc_id;",
+                    cmd =>
+                    {
+                        cmd.Parameters.AddWithValue("@acc_id", accId);
+                        cmd.Parameters.AddWithValue("@from_date", from.Date);
+                        cmd.Parameters.AddWithValue("@to_date", to.Date);
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw new DataException("Failed to load ledger summary.", ex);
+            }
+        }
+
         public Tuple<DataTable, int, decimal> GetAccountLedger(int accId, DateTime from, DateTime to, int page, int pageSize)
+        {
+            return GetAccountLedger(accId, from, to, page, pageSize, "All");
+        }
+
+        public Tuple<DataTable, int, decimal> GetAccountLedger(int accId, DateTime from, DateTime to, int page, int pageSize, string showFilter)
         {
             try
             {
                 int safePage = page <= 0 ? 1 : page;
                 int safePageSize = pageSize <= 0 ? 50 : pageSize;
+                string filter = string.IsNullOrWhiteSpace(showFilter) ? "All" : showFilter.Trim();
 
                 decimal openingBalance = GetAccountBalanceBeforeDate(accId, from);
-                int totalCount = GetLedgerCount(accId, from, to);
-                DataTable entries = GetLedgerPage(accId, from, to, safePage, safePageSize);
+                int totalCount = GetLedgerCount(accId, from, to, filter);
+                DataTable entries = GetLedgerPage(accId, from, to, safePage, safePageSize, filter, openingBalance);
 
                 return Tuple.Create(entries, totalCount, openingBalance);
             }
@@ -42,26 +117,23 @@ namespace POS.DLL
             try
             {
                 return ExecuteDataTable(@"
-SELECT A.acc_id,
-       A.acc_code,
-       A.acc_name,
-       A.parent_group_id,
-       A.account_type,
-       A.normal_balance,
-       ISNULL(A.opening_balance, 0) AS opening_balance,
+SELECT A.id AS acc_id,
+       A.code AS acc_code,
+       A.name AS acc_name,
+       A.group_id AS parent_group_id,
+       '' AS account_type,
+       CASE WHEN ISNULL(A.op_cr_balance, 0) > ISNULL(A.op_dr_balance, 0) THEN 'Cr' ELSE 'Dr' END AS normal_balance,
+       ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0) AS opening_balance,
        SUM(ISNULL(E.debit, 0)) AS total_debit,
        SUM(ISNULL(E.credit, 0)) AS total_credit,
-       CASE WHEN A.normal_balance = 'Cr' THEN
-                -(ISNULL(A.opening_balance, 0))
-            ELSE
-                ISNULL(A.opening_balance, 0)
-       END + SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)) AS balance
+       ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0)
+       + SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)) AS balance
 FROM acc_accounts A
 LEFT JOIN acc_entries E
-       ON E.acc_id = A.acc_id
+       ON E.account_id = A.id
       AND E.entry_date <= @as_of_date
-GROUP BY A.acc_id, A.acc_code, A.acc_name, A.parent_group_id, A.account_type, A.normal_balance, A.opening_balance
-ORDER BY A.acc_code, A.acc_name;",
+GROUP BY A.id, A.code, A.name, A.group_id, A.op_dr_balance, A.op_cr_balance
+ORDER BY A.code, A.name;",
                     cmd => cmd.Parameters.AddWithValue("@as_of_date", asOfDate.Date));
             }
             catch (Exception ex)
@@ -76,13 +148,13 @@ ORDER BY A.acc_code, A.acc_name;",
             {
                 DateTime date = (asOfDate ?? DateTime.Today).Date;
                 return ExecuteScalar<decimal>(@"
-SELECT ISNULL(CASE WHEN A.normal_balance = 'Cr' THEN -ISNULL(A.opening_balance, 0) ELSE ISNULL(A.opening_balance, 0) END, 0)
+SELECT ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0)
      + ISNULL((SELECT SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0))
                FROM acc_entries E
-               WHERE E.acc_id = A.acc_id
+               WHERE E.account_id = A.id
                  AND E.entry_date <= @as_of_date), 0)
 FROM acc_accounts A
-WHERE A.acc_id = @acc_id;",
+WHERE A.id = @acc_id;",
                     cmd =>
                     {
                         cmd.Parameters.AddWithValue("@acc_id", accId);
@@ -107,12 +179,12 @@ WHERE A.acc_id = @acc_id;",
 
                 List<int> distinctIds = new List<int>(new HashSet<int>(accIds));
                 StringBuilder sql = new StringBuilder();
-                sql.AppendLine("SELECT A.acc_id,");
-                sql.AppendLine("       ISNULL(CASE WHEN A.normal_balance = 'Cr' THEN -ISNULL(A.opening_balance, 0) ELSE ISNULL(A.opening_balance, 0) END, 0)");
+                sql.AppendLine("SELECT A.id AS acc_id,");
+                sql.AppendLine("       ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0)");
                 sql.AppendLine("     + ISNULL(SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)), 0) AS balance");
                 sql.AppendLine("FROM acc_accounts A");
-                sql.AppendLine("LEFT JOIN acc_entries E ON E.acc_id = A.acc_id AND E.entry_date <= @as_of_date");
-                sql.AppendLine("WHERE A.acc_id IN (");
+                sql.AppendLine("LEFT JOIN acc_entries E ON E.account_id = A.id AND E.entry_date <= @as_of_date");
+                sql.AppendLine("WHERE A.id IN (");
                 for (int i = 0; i < distinctIds.Count; i++)
                 {
                     if (i > 0)
@@ -122,7 +194,7 @@ WHERE A.acc_id = @acc_id;",
                     sql.Append("@id").Append(i);
                 }
                 sql.AppendLine(")");
-                sql.AppendLine("GROUP BY A.acc_id, A.normal_balance, A.opening_balance;");
+                sql.AppendLine("GROUP BY A.id, A.op_dr_balance, A.op_cr_balance;");
 
                 using (SqlConnection cn = CreateConnection())
                 using (SqlCommand cmd = new SqlCommand(sql.ToString(), cn))
@@ -164,13 +236,13 @@ WHERE A.acc_id = @acc_id;",
         private decimal GetAccountBalanceBeforeDate(int accId, DateTime beforeDate)
         {
             return ExecuteScalar<decimal>(@"
-SELECT ISNULL(CASE WHEN A.normal_balance = 'Cr' THEN -ISNULL(A.opening_balance, 0) ELSE ISNULL(A.opening_balance, 0) END, 0)
+SELECT ISNULL(A.op_dr_balance, 0) - ISNULL(A.op_cr_balance, 0)
      + ISNULL((SELECT SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0))
                FROM acc_entries E
-               WHERE E.acc_id = A.acc_id
+               WHERE E.account_id = A.id
                  AND E.entry_date < @before_date), 0)
 FROM acc_accounts A
-WHERE A.acc_id = @acc_id;",
+WHERE A.id = @acc_id;",
                 cmd =>
                 {
                     cmd.Parameters.AddWithValue("@acc_id", accId);
@@ -178,48 +250,64 @@ WHERE A.acc_id = @acc_id;",
                 });
         }
 
-        private int GetLedgerCount(int accId, DateTime from, DateTime to)
+        private int GetLedgerCount(int accId, DateTime from, DateTime to, string showFilter)
         {
             return ExecuteScalar<int>(@"
 SELECT COUNT(1)
-FROM acc_entries
-WHERE acc_id = @acc_id
-  AND entry_date BETWEEN @from_date AND @to_date;",
+FROM acc_entries E
+LEFT JOIN acc_entries_header H ON H.InvoiceNo = E.invoice_no
+WHERE E.account_id = @acc_id
+  AND E.entry_date BETWEEN @from_date AND @to_date
+  AND (
+        @show_filter = 'All'
+        OR (@show_filter = 'Debits' AND ISNULL(E.debit, 0) > 0)
+        OR (@show_filter = 'Credits' AND ISNULL(E.credit, 0) > 0)
+        OR (@show_filter = 'Unposted' AND ISNULL(H.status, 'Draft') <> 'Posted')
+      );",
                 cmd =>
                 {
                     cmd.Parameters.AddWithValue("@acc_id", accId);
                     cmd.Parameters.AddWithValue("@from_date", from.Date);
                     cmd.Parameters.AddWithValue("@to_date", to.Date);
+                    cmd.Parameters.AddWithValue("@show_filter", showFilter);
                 });
         }
 
-        private DataTable GetLedgerPage(int accId, DateTime from, DateTime to, int page, int pageSize)
+        private DataTable GetLedgerPage(int accId, DateTime from, DateTime to, int page, int pageSize, string showFilter, decimal openingBalance)
         {
             return ExecuteDataTable(@"
 WITH Ledger AS
 (
-    SELECT E.entry_id,
-           E.voucher_id,
-           E.voucher_no,
+    SELECT E.id AS entry_id,
+           E.id AS voucher_id,
+           E.invoice_no AS voucher_no,
            E.entry_date,
-           E.acc_id,
-           A.acc_code,
-           A.acc_name,
-           E.debit,
-           E.credit,
-           E.narration,
+           E.account_id AS acc_id,
+           A.code AS acc_code,
+           A.name AS acc_name,
+           ISNULL(E.debit, 0) AS debit,
+           ISNULL(E.credit, 0) AS credit,
+           ISNULL(E.description, '') AS narration,
            E.cost_center_id,
            E.ref_module,
            E.ref_id,
            E.period_id,
-           E.created_by,
-           E.created_at,
-           COUNT(1) OVER() AS total_count,
-           SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0)) OVER (ORDER BY E.entry_date, E.entry_id ROWS UNBOUNDED PRECEDING) AS running_balance
+           E.user_id AS created_by,
+           E.date_created AS created_at,
+           ISNULL(H.VoucherType, '') AS voucher_type,
+           ISNULL(H.status, 'Posted') AS status,
+           @opening_balance + SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0)) OVER (ORDER BY E.entry_date, E.id ROWS UNBOUNDED PRECEDING) AS running_balance
     FROM acc_entries E
-    INNER JOIN acc_accounts A ON A.acc_id = E.acc_id
-    WHERE E.acc_id = @acc_id
+    INNER JOIN acc_accounts A ON A.id = E.account_id
+    LEFT JOIN acc_entries_header H ON H.InvoiceNo = E.invoice_no
+    WHERE E.account_id = @acc_id
       AND E.entry_date BETWEEN @from_date AND @to_date
+      AND (
+            @show_filter = 'All'
+            OR (@show_filter = 'Debits' AND ISNULL(E.debit, 0) > 0)
+            OR (@show_filter = 'Credits' AND ISNULL(E.credit, 0) > 0)
+            OR (@show_filter = 'Unposted' AND ISNULL(H.status, 'Draft') <> 'Posted')
+          )
 )
 SELECT *
 FROM Ledger
@@ -230,6 +318,8 @@ OFFSET @offset ROWS FETCH NEXT @fetch ROWS ONLY;",
                     cmd.Parameters.AddWithValue("@acc_id", accId);
                     cmd.Parameters.AddWithValue("@from_date", from.Date);
                     cmd.Parameters.AddWithValue("@to_date", to.Date);
+                    cmd.Parameters.AddWithValue("@show_filter", showFilter);
+                    cmd.Parameters.AddWithValue("@opening_balance", openingBalance);
                     cmd.Parameters.AddWithValue("@offset", (page - 1) * pageSize);
                     cmd.Parameters.AddWithValue("@fetch", pageSize);
                 });
