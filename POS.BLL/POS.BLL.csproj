@@ -44,6 +44,7 @@
     <Compile Include="Accounts\ExpenseBLL.cs" />
     <Compile Include="Accounts\JournalsBLL.cs" />
     <Compile Include="Accounts\AccountingDashboardBLL.cs" />
+    <Compile Include="Accounts\AccountingSettingsService.cs" />
     <Compile Include="Accounts\AccountsBLL.cs" />
     <Compile Include="Accounts\GroupsBLL.cs" />
     <Compile Include="Accounts\ChartOfAccountsBLL.cs" />

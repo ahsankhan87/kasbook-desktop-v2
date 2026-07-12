@@ -143,6 +143,7 @@
             this.hierarchyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.budgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allocationRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.departmentalPLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailySaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -203,7 +204,7 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.departmentalPLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -768,7 +769,8 @@
             this.bankReconciliationToolStripMenuItem,
             this.salesTaxSummaryToolStripMenuItem,
             this.taxTrialBalanceToolStripMenuItem,
-            this.costCentersToolStripMenuItem});
+            this.costCentersToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
             resources.ApplyResources(this.accountsToolStripMenuItem, "accountsToolStripMenuItem");
             // 
@@ -1001,6 +1003,12 @@
             this.allocationRulesToolStripMenuItem.Name = "allocationRulesToolStripMenuItem";
             resources.ApplyResources(this.allocationRulesToolStripMenuItem, "allocationRulesToolStripMenuItem");
             this.allocationRulesToolStripMenuItem.Click += new System.EventHandler(this.allocationRulesToolStripMenuItem_Click);
+            // 
+            // departmentalPLToolStripMenuItem
+            // 
+            this.departmentalPLToolStripMenuItem.Name = "departmentalPLToolStripMenuItem";
+            resources.ApplyResources(this.departmentalPLToolStripMenuItem, "departmentalPLToolStripMenuItem");
+            this.departmentalPLToolStripMenuItem.Click += new System.EventHandler(this.departmentalPLToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -1419,11 +1427,11 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // departmentalPLToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.departmentalPLToolStripMenuItem.Name = "departmentalPLToolStripMenuItem";
-            resources.ApplyResources(this.departmentalPLToolStripMenuItem, "departmentalPLToolStripMenuItem");
-            this.departmentalPLToolStripMenuItem.Click += new System.EventHandler(this.departmentalPLToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1628,5 +1636,6 @@
         private System.Windows.Forms.ToolStripMenuItem budgetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allocationRulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem departmentalPLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }

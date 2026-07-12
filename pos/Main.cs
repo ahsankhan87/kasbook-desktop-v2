@@ -2777,5 +2777,11 @@ namespace pos
             var frm = new pos.Accounting.CostCenter.frm_departmental_pl();
             frm.ShowDialog(this);
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.frm_accounting_settings();
+            frm.ShowDialog(this);
+        }
     }
 }

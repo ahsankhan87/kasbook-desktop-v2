@@ -342,6 +342,13 @@
     <Compile Include="Accounts\Maintenance\frm_codes_maintenance.Designer.cs">
       <DependentUpon>frm_codes_maintenance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accounts\Settings\frm_accounting_settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Settings\frm_accounting_settings.Designer.cs">
+      <DependentUpon>frm_accounting_settings.cs</DependentUpon>
+      <DependentUpon>frm_accounting_settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Accounts\Maintenance\frm_financial_periods.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1864,6 +1871,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice.cs</LastGenOutput>
     </EmbeddedResource> -->
+    <EmbeddedResource Include="Accounts\Settings\frm_accounting_settings.resx">
+      <DependentUpon>frm_accounting_settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Customers\Customer Ledger Report\CustomerPayment.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerPayment.cs</LastGenOutput>

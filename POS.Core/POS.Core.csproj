@@ -47,6 +47,9 @@
     <Compile Include="Accounts\GroupsModal.cs" />
     <Compile Include="Accounts\AccGroupModel.cs" />
     <Compile Include="Accounts\AccAccountModel.cs" />
+    <Compile Include="Accounts\AccountingConfigException.cs" />
+    <Compile Include="Accounts\AccountingSettingModel.cs" />
+    <Compile Include="Accounts\SettingKeys.cs" />
     <Compile Include="Accounts\AccountLookupItem.cs" />
     <Compile Include="Accounts\FinancialPeriodModal.cs" />
     <Compile Include="Accounts\VoucherFilter.cs" />

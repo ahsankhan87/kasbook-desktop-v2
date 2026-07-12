@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Accounts\AccountingDAL.cs" />
     <Compile Include="Accounts\AccountingDalBase.cs" />
+    <Compile Include="Accounts\AccountingSettingsDLL.cs" />
     <Compile Include="Accounts\ChartOfAccountsDAL.cs" />
     <Compile Include="Accounts\CodesUpdateHelper.cs" />
     <Compile Include="Accounts\CostCenterDLL.cs" />
