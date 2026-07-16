@@ -40,8 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\BudgetBLL.cs" />
+    <Compile Include="Accounts\BudgetHelper.cs" />
+    <Compile Include="Accounts\COAImportValidator.cs" />
     <Compile Include="Accounts\CostCenterBLL.cs" />
     <Compile Include="Accounts\ExpenseBLL.cs" />
+    <Compile Include="Accounts\ImportBLL.cs" />
+    <Compile Include="Accounts\JournalImportValidator.cs" />
     <Compile Include="Accounts\JournalsBLL.cs" />
     <Compile Include="Accounts\AccountingDashboardBLL.cs" />
     <Compile Include="Accounts\AccountingSettingsService.cs" />
@@ -49,7 +54,10 @@
     <Compile Include="Accounts\GroupsBLL.cs" />
     <Compile Include="Accounts\ChartOfAccountsBLL.cs" />
     <Compile Include="Accounts\FinancialPeriodBLL.cs" />
+    <Compile Include="Accounts\OpeningBalanceValidator.cs" />
     <Compile Include="Dashboard\DashboardBLL.cs" />
+    <Compile Include="Inventory\InventoryCostingEngine.cs" />
+    <Compile Include="Inventory\InventoryValuationBLL.cs" />
     <Compile Include="POS\BackupBLL.cs" />
     <Compile Include="POS\BankBLL.cs" />
     <Compile Include="POS\CurrencyBLL.cs" />
@@ -103,7 +111,10 @@
       <Name>POS.DLL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Accounts\ErrorThresholdValidation.md" />
+    <None Include="Accounts\ImportEngine_Summary.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

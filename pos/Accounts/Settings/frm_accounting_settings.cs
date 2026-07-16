@@ -254,15 +254,25 @@ namespace pos
             gridWhtRates.DataSource = dt;
         }
 
+        /// <summary>
+        /// Loads the voucher numbering configuration grid.
+        /// Voucher format: [Prefix][BranchId]-[DateFormat]-[NumberFormat]
+        /// Example: S1-20260713-0001
+        /// - S = Prefix (Sales)
+        /// - 1 = Branch ID (from logged in user's branch)
+        /// - 20260713 = Date format (YYYYMMDD)
+        /// - 0001 = Counter (starting number, reset based on configuration)
+        /// </summary>
         private void LoadVoucherGrid()
         {
             if (gridVoucher.Rows.Count == 0)
             {
-                gridVoucher.Rows.Add("JV", _settings.GetString("ACC_VOUCHER_JV_PREFIX", "JV"), _settings.GetString("ACC_VOUCHER_JV_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_JV_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_JV_START", "1"), "");
-                gridVoucher.Rows.Add("RECEIPT", _settings.GetString("ACC_VOUCHER_RECEIPT_PREFIX", "RV"), _settings.GetString("ACC_VOUCHER_RECEIPT_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_RECEIPT_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_RECEIPT_START", "1"), "");
-                gridVoucher.Rows.Add("PAYMENT", _settings.GetString("ACC_VOUCHER_PAYMENT_PREFIX", "PV"), _settings.GetString("ACC_VOUCHER_PAYMENT_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_PAYMENT_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_PAYMENT_START", "1"), "");
-                gridVoucher.Rows.Add("IBT", _settings.GetString("ACC_VOUCHER_IBT_PREFIX", "IBT"), _settings.GetString("ACC_VOUCHER_IBT_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_IBT_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_IBT_START", "1"), "");
-                gridVoucher.Rows.Add("ADJ", _settings.GetString("ACC_VOUCHER_ADJ_PREFIX", "ADJ"), _settings.GetString("ACC_VOUCHER_ADJ_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_ADJ_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_ADJ_START", "1"), "");
+                int branchId = UsersModal.logged_in_branch_id;
+                gridVoucher.Rows.Add("JV", _settings.GetString("ACC_VOUCHER_JV_PREFIX", "JV"), branchId.ToString(), _settings.GetString("ACC_VOUCHER_JV_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_JV_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_JV_START", "1"), "");
+                gridVoucher.Rows.Add("RECEIPT", _settings.GetString("ACC_VOUCHER_RECEIPT_PREFIX", "RV"), branchId.ToString(), _settings.GetString("ACC_VOUCHER_RECEIPT_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_RECEIPT_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_RECEIPT_START", "1"), "");
+                gridVoucher.Rows.Add("PAYMENT", _settings.GetString("ACC_VOUCHER_PAYMENT_PREFIX", "PV"), branchId.ToString(), _settings.GetString("ACC_VOUCHER_PAYMENT_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_PAYMENT_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_PAYMENT_START", "1"), "");
+                gridVoucher.Rows.Add("IBT", _settings.GetString("ACC_VOUCHER_IBT_PREFIX", "IBT"), branchId.ToString(), _settings.GetString("ACC_VOUCHER_IBT_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_IBT_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_IBT_START", "1"), "");
+                gridVoucher.Rows.Add("ADJ", _settings.GetString("ACC_VOUCHER_ADJ_PREFIX", "ADJ"), branchId.ToString(), _settings.GetString("ACC_VOUCHER_ADJ_FORMAT", "YYYY-NNNN"), _settings.GetString("ACC_VOUCHER_ADJ_RESET", "Annually"), _settings.GetString("ACC_VOUCHER_ADJ_START", "1"), "");
             }
 
             RefreshVoucherPreview();
@@ -291,6 +301,11 @@ namespace pos
         private void ApplyFinancialYearEndMonth()
         {
             if (cmbFyStartMonth.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            if (cmbFyEndMonth.Items.Count == 0)
             {
                 return;
             }
@@ -399,20 +414,16 @@ namespace pos
                 purchases_return_acc_id = GetIntOrDefault(row, "purchases_return_acc_id"),
                 purchases_discount_acc_id = GetIntOrDefault(row, "purchases_discount_acc_id"),
                 item_variance_acc_id = GetIntOrDefault(row, "item_variance_acc_id"),
-                commission_acc_id = GetIntOrDefault(row, "commission_acc_id")
+                commission_acc_id = GetIntOrDefault(row, "commission_acc_id"),
+                legal_name = txtLegalName.Text,
+                registration_no = txtRegistrationNo.Text,
+                strn = txtStrn.Text,
+                website = txtWebsite.Text,
+                financial_year_start_month = cmbFyStartMonth.SelectedIndex + 1
             };
 
             _companiesBll.Update(modal);
 
-            _generalBll.UpdateOrDeleteRecord("pos_companies",
-                string.Format("legal_name='{0}', registration_no='{1}', ntn='{2}', strn='{3}', website='{4}', financial_year_start_month={5}",
-                    SqlSafe(txtLegalName.Text),
-                    SqlSafe(txtRegistrationNo.Text),
-                    SqlSafe(txtNtnVat.Text),
-                    SqlSafe(txtStrn.Text),
-                    SqlSafe(txtWebsite.Text),
-                    cmbFyStartMonth.SelectedIndex + 1),
-                "id=" + companyId);
         }
 
         private void SaveAccountDefaults()
@@ -521,6 +532,8 @@ namespace pos
 
         private void RefreshVoucherPreview()
         {
+            int branchId = UsersModal.logged_in_branch_id;
+
             foreach (DataGridViewRow row in gridVoucher.Rows)
             {
                 if (row.IsNewRow) continue;
@@ -530,25 +543,31 @@ namespace pos
                 string format = Convert.ToString(row.Cells["colVoucherFormat"].Value ?? "YYYY-NNNN");
                 int start = ToInt(row.Cells["colVoucherStart"].Value, 1);
 
-                row.Cells["colVoucherPreview"].Value = BuildVoucherPreview(prefix, format, start);
+                row.Cells["colVoucherPreview"].Value = BuildVoucherPreview(prefix, branchId, format, start);
             }
         }
 
-        private static string BuildVoucherPreview(string prefix, string format, int number)
+        private static string BuildVoucherPreview(string prefix, int branchId, string format, int number)
         {
-            var yy = DateTime.Today.ToString("yy", CultureInfo.InvariantCulture);
-            var yyyy = DateTime.Today.ToString("yyyy", CultureInfo.InvariantCulture);
+            var today = DateTime.Today;
+            var yy = today.ToString("yy", CultureInfo.InvariantCulture);
+            var yyyy = today.ToString("yyyy", CultureInfo.InvariantCulture);
+            var mm = today.ToString("MM", CultureInfo.InvariantCulture);
+            var dd = today.ToString("dd", CultureInfo.InvariantCulture);
             var n = number.ToString("D4", CultureInfo.InvariantCulture);
 
-            var core = (format ?? "YYYY-NNNN").ToUpperInvariant();
-            if (core == "YY-NNNN")
-                core = yy + "-" + n;
-            else if (core == "NNNN")
-                core = n;
-            else
-                core = yyyy + "-" + n;
+            // Parse the format string which may contain date placeholders and NNNN
+            var fmt = (format ?? "YYYY-NNNN").ToUpperInvariant();
 
-            return string.IsNullOrWhiteSpace(prefix) ? core : prefix + "-" + core;
+            // Replace date placeholders
+            string result = fmt.Replace("YYYY", yyyy);
+            result = result.Replace("YY", yy);
+            result = result.Replace("MM", mm);
+            result = result.Replace("DD", dd);
+            result = result.Replace("NNNN", n);
+
+            // Build the complete voucher number: Prefix + BranchId + formatted part
+            return prefix + branchId + "-" + result;
         }
 
         private int GetCompanyId()

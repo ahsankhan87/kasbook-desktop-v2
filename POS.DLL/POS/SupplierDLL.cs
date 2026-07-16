@@ -1162,7 +1162,7 @@ ORDER BY p.purchase_date, pi.id", cn))
 
                     if (result > 0)
                     {
-                        UpsertSupplierOpeningBalance(cn, result, obj.GLAccountID, obj.opening_balance);
+                        //UpsertSupplierOpeningBalance(cn, result, obj.GLAccountID, obj.opening_balance);
                     }
 
                     Log.LogAction("Add Supplier", $"Supplier ID: {result}, Supplier Name: {obj.first_name + ' ' + obj.last_name}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
@@ -1243,7 +1243,7 @@ ORDER BY p.purchase_date, pi.id", cn))
 
                     if (obj.id > 0)
                     {
-                        UpsertSupplierOpeningBalance(cn, obj.id, obj.GLAccountID, obj.opening_balance);
+                        //UpsertSupplierOpeningBalance(cn, obj.id, obj.GLAccountID, obj.opening_balance);
                     }
 
                     Log.LogAction("Update Supplier", $"Supplier ID: {obj.id}, Supplier Name: {obj.first_name + ' ' + obj.last_name}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);

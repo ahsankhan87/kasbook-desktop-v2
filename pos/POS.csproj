@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -253,11 +253,35 @@
     <Compile Include="Accounting\CostCenter\frm_departmental_pl.Designer.cs">
       <DependentUpon>frm_departmental_pl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accounts\frm_import_data.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\frm_import_data.Designer.cs">
+      <DependentUpon>frm_import_data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\ImportProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\ImportProgressForm.Designer.cs">
+      <DependentUpon>ImportProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Accounts\Maintenance\frm_year_end_close_wizard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Accounts\Maintenance\frm_year_end_close_wizard.Designer.cs">
       <DependentUpon>frm_year_end_close_wizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\frm_inventory_valuation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory\frm_inventory_valuation.Designer.cs">
+      <DependentUpon>frm_inventory_valuation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\frm_valuation_settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory\frm_valuation_settings.Designer.cs">
+      <DependentUpon>frm_valuation_settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
       <SubType>Form</SubType>
@@ -1088,6 +1112,12 @@
     <Compile Include="Reports\Financial\frm_ProfitAndLossReport.Designer.cs">
       <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Financial\frm_BudgetVarianceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_BudgetVarianceDetail.Designer.cs">
+      <DependentUpon>frm_BudgetVarianceDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Financial\frm_TrialBalanceReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1763,6 +1793,13 @@
     </Compile>
     <Compile Include="UI\Busy\BusyScope.cs" />
     <Compile Include="UI\UiMessages.cs" />
+    <Compile Include="UI\UiMessagesEx.cs" />
+    <EmbeddedResource Include="Accounting\CostCenter\frm_allocation_rules.resx">
+      <DependentUpon>frm_allocation_rules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting\CostCenter\frm_budget_setup.resx">
+      <DependentUpon>frm_budget_setup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_setup.resx">
       <DependentUpon>frm_cost_center_setup.cs</DependentUpon>
     </EmbeddedResource>
@@ -1795,6 +1832,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Groups\frm_groups.resx">
       <DependentUpon>frm_groups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\ImportProgressForm.resx">
+      <DependentUpon>ImportProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Journals\frm_journal_entries.ar-SA.resx">
       <DependentUpon>frm_journal_entries.cs</DependentUpon>
@@ -1979,6 +2019,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_session_lock.resx">
       <DependentUpon>frm_session_lock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frm_valuation_settings.resx">
+      <DependentUpon>frm_valuation_settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -2483,6 +2526,9 @@
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_BudgetVsActualReport.resx">
+      <DependentUpon>frm_BudgetVsActualReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_GeneralLedgerReport.resx">
       <DependentUpon>frm_GeneralLedgerReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -2786,6 +2832,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="Accounts\IMPORT_ENGINE_INTEGRATION_SUMMARY.md" />
+    <None Include="Accounts\IMPORT_USER_GUIDE.md" />
     <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
     <None Include="Products\Adjustment\SHORTCUTS_README.md" />
     <None Include="Products\Labels\product_labels.xsc">
@@ -2894,6 +2942,13 @@
     </Compile>
     <Compile Include="Products\Suppression\frm_stock_suppression_stock_records.Designer.cs">
       <DependentUpon>frm_stock_suppression_stock_records.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Financial\BudgetVsActualReportGenerator.cs" />
+    <Compile Include="Reports\Financial\frm_BudgetVsActualReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\frm_BudgetVsActualReport.Designer.cs">
+      <DependentUpon>frm_BudgetVsActualReport.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

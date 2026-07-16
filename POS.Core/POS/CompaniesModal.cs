@@ -65,5 +65,10 @@ namespace POS.Core
         public string systemID { get; set; }
         public string subscriptionKey { get; set; }
 
+        public string legal_name {  get; set; }
+        public string registration_no { get; set; }
+        public string strn { get; set; }
+        public string website { get; set; }
+        public int financial_year_start_month { get; set; }
     }
 }

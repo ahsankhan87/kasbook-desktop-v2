@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\BudgetModal.cs" />
     <Compile Include="Accounts\CostCenterModels.cs" />
     <Compile Include="Accounts\ExpenseModal.cs" />
+    <Compile Include="Accounts\ImportModels.cs" />
     <Compile Include="Accounts\JournalsModal.cs" />
     <Compile Include="Accounts\AccountsModal.cs" />
     <Compile Include="Accounts\GroupsModal.cs" />
@@ -53,6 +55,8 @@
     <Compile Include="Accounts\AccountLookupItem.cs" />
     <Compile Include="Accounts\FinancialPeriodModal.cs" />
     <Compile Include="Accounts\VoucherFilter.cs" />
+    <Compile Include="Inventory\InventoryCostingModels.cs" />
+    <Compile Include="Inventory\InventoryValuationModal.cs" />
     <Compile Include="POS\BankModal.cs" />
     <Compile Include="POS\CurrencyModal.cs" />
     <Compile Include="POS\DebitNoteModal.cs" />

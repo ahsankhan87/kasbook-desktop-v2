@@ -26,10 +26,8 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("sp_fiscal_yearsCrud", cn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@OperationType", "5");
-
+                        cmd = new SqlCommand("SELECT * FROM acc_fiscal_years", cn);
+                        
                     }
 
                     da = new SqlDataAdapter(cmd);

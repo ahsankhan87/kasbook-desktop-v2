@@ -62,6 +62,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txt_supplier_code = new System.Windows.Forms.TextBox();
+            this.txt_opening_balance = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_countryName = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -100,8 +102,6 @@
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_blank = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.txt_opening_balance = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -312,6 +312,16 @@
             // 
             resources.ApplyResources(this.txt_supplier_code, "txt_supplier_code");
             this.txt_supplier_code.Name = "txt_supplier_code";
+            // 
+            // txt_opening_balance
+            // 
+            resources.ApplyResources(this.txt_opening_balance, "txt_opening_balance");
+            this.txt_opening_balance.Name = "txt_opening_balance";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
             // 
             // groupBox3
             // 
@@ -600,16 +610,6 @@
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
-            // 
-            // txt_opening_balance
-            // 
-            resources.ApplyResources(this.txt_opening_balance, "txt_opening_balance");
-            this.txt_opening_balance.Name = "txt_opening_balance";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
             // 
             // frm_addSupplier
             // 

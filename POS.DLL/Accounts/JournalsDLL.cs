@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 using POS.Core;
 
 namespace POS.DLL
@@ -109,8 +110,114 @@ namespace POS.DLL
 
         public String GetMaxInvoiceNo(string prefix = "J")
         {
-            // Generates Invoice like J1-20230708-0001
-            return GenerateDailyInvoiceNo("acc_entries", "invoice_no", prefix);
+            // Use accounting settings voucher format for JV (configured in frm_accounting_settings)
+            // Keys:
+            //   ACC_VOUCHER_JV_PREFIX (default JV)
+            //   ACC_VOUCHER_JV_FORMAT (default YYYY-NNNN)
+            //   ACC_VOUCHER_JV_START  (default 1)
+
+            string configuredPrefix = string.Empty;
+            string configuredFormat = "YYYY-NNNN";
+            int startNo = 1;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(@"
+                    SELECT setting_key, setting_value
+                    FROM pos_settings
+                    WHERE setting_key IN ('ACC_VOUCHER_JV_PREFIX', 'ACC_VOUCHER_JV_FORMAT', 'ACC_VOUCHER_JV_START');", cn))
+                using (SqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        string key = Convert.ToString(rdr[0]);
+                        string val = Convert.ToString(rdr[1]);
+
+                        if (string.Equals(key, "ACC_VOUCHER_JV_PREFIX", StringComparison.OrdinalIgnoreCase))
+                            configuredPrefix = val;
+                        else if (string.Equals(key, "ACC_VOUCHER_JV_FORMAT", StringComparison.OrdinalIgnoreCase))
+                            configuredFormat = string.IsNullOrWhiteSpace(val) ? "YYYY-NNNN" : val;
+                        else if (string.Equals(key, "ACC_VOUCHER_JV_START", StringComparison.OrdinalIgnoreCase))
+                        {
+                            int parsed;
+                            if (int.TryParse(val, out parsed) && parsed > 0)
+                                startNo = parsed;
+                        }
+                    }
+                }
+
+                string effectivePrefix = string.IsNullOrWhiteSpace(configuredPrefix) ? "JV" : configuredPrefix.Trim();
+                string format = string.IsNullOrWhiteSpace(configuredFormat) ? "YYYY-NNNN" : configuredFormat.Trim();
+
+                DateTime today = DateTime.Today;
+                string yyyy = today.ToString("yyyy", CultureInfo.InvariantCulture);
+                string yy = today.ToString("yy", CultureInfo.InvariantCulture);
+                string mm = today.ToString("MM", CultureInfo.InvariantCulture);
+                string dd = today.ToString("dd", CultureInfo.InvariantCulture);
+
+                string formatForLike = format.ToUpperInvariant()
+                    .Replace("YYYY", yyyy)
+                    .Replace("YY", yy)
+                    .Replace("MM", mm)
+                    .Replace("DD", dd);
+
+                // Replace all N groups with '%' to narrow candidates
+                string formatLikePart = Regex.Replace(formatForLike, "N+", "%");
+
+                string invoicePrefix = string.Format("{0}{1}-", effectivePrefix, UsersModal.logged_in_branch_id);
+                string likePattern = invoicePrefix + formatLikePart;
+
+                int maxSequence = 0;
+                using (SqlCommand cmd = new SqlCommand(@"
+                    SELECT invoice_no
+                    FROM acc_entries
+                    WHERE branch_id = @branch_id
+                      AND invoice_no LIKE @likePattern;", cn))
+                {
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    cmd.Parameters.AddWithValue("@likePattern", likePattern);
+
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            string inv = Convert.ToString(rdr[0]);
+                            if (string.IsNullOrWhiteSpace(inv))
+                                continue;
+
+                            int lastDash = inv.LastIndexOf('-');
+                            if (lastDash < 0 || lastDash == inv.Length - 1)
+                                continue;
+
+                            int seq;
+                            if (int.TryParse(inv.Substring(lastDash + 1), out seq) && seq > maxSequence)
+                                maxSequence = seq;
+                        }
+                    }
+                }
+
+                int next = maxSequence > 0 ? (maxSequence + 1) : startNo;
+
+                string finalFormat = formatForLike;
+                int nIndex = finalFormat.IndexOf('N');
+                if (nIndex >= 0)
+                {
+                    int nLen = 0;
+                    while (nIndex + nLen < finalFormat.Length && finalFormat[nIndex + nLen] == 'N')
+                        nLen++;
+
+                    string padded = next.ToString().PadLeft(nLen, '0');
+                    finalFormat = finalFormat.Substring(0, nIndex) + padded + finalFormat.Substring(nIndex + nLen);
+                }
+                else
+                {
+                    finalFormat = finalFormat + "-" + next.ToString("D4", CultureInfo.InvariantCulture);
+                }
+
+                return invoicePrefix + finalFormat;
+            }
         }
 
         public int InsertHeader(JournalsModal obj)
@@ -515,7 +622,7 @@ WHERE H.InvoiceNo = @invoice_no AND H.branch_id = @branch_id;", cn))
                         string originalInvoiceNo = Convert.ToString(headerRow["InvoiceNo"]);
                         DataTable originalLines = GetVoucherLines(originalInvoiceNo);
 
-                        string reversalInvoiceNo = GenerateDailyInvoiceNo("acc_entries", "invoice_no", "J");
+                        string reversalInvoiceNo = GetMaxInvoiceNo();
                         JournalsModal reversalHeader = new JournalsModal
                         {
                             invoice_no = reversalInvoiceNo,

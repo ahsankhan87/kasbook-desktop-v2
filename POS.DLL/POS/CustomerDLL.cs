@@ -7,7 +7,7 @@ namespace POS.DLL
 {
     public class CustomerDLL
     {
-        private const string OpeningBalanceMarker = "[Opening Balance]";
+        private const string OpeningBalanceMarker = "Opening Balance";
 
         public string NormalizeCustomerCodeInput(string input)
         {
@@ -938,10 +938,10 @@ END";
             {
                 cn.Open();
                 int result = Convert.ToInt32(cmd.ExecuteScalar());
-                if (result > 0)
-                {
-                    UpsertCustomerOpeningBalance(cn, result, obj.GLAccountID, obj.opening_balance);
-                }
+                //if (result > 0)
+                //{
+                //    UpsertCustomerOpeningBalance(cn, result, obj.GLAccountID, obj.opening_balance);
+                //}
                 LogAction("Add Customer", result, obj);
                 return result;
             }
@@ -1031,7 +1031,7 @@ END";
                 int result = Convert.ToInt32(cmd.ExecuteScalar());
                 if (obj.id > 0)
                 {
-                    UpsertCustomerOpeningBalance(cn, obj.id, obj.GLAccountID, obj.opening_balance);
+                    //UpsertCustomerOpeningBalance(cn, obj.id, obj.GLAccountID, obj.opening_balance);
                 }
                 LogAction("Update Customer", obj.id, obj);
                 return result;

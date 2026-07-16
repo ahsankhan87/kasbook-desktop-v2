@@ -44,10 +44,13 @@
     <Compile Include="Accounts\AccountingDAL.cs" />
     <Compile Include="Accounts\AccountingDalBase.cs" />
     <Compile Include="Accounts\AccountingSettingsDLL.cs" />
+    <Compile Include="Accounts\BudgetDLL.cs" />
     <Compile Include="Accounts\ChartOfAccountsDAL.cs" />
     <Compile Include="Accounts\CodesUpdateHelper.cs" />
     <Compile Include="Accounts\CostCenterDLL.cs" />
     <Compile Include="Accounts\ExpenseDLL.cs" />
+    <Compile Include="Accounts\ImportDLL.cs" />
+    <Compile Include="Accounts\ImportTemplateGenerator.cs" />
     <Compile Include="Accounts\JournalsDLL.cs" />
     <Compile Include="Accounts\AccountingDashboardDLL.cs" />
     <Compile Include="Accounts\AccountsDLL.cs" />
@@ -55,6 +58,8 @@
     <Compile Include="Accounts\LedgerDAL.cs" />
     <Compile Include="Accounts\PeriodDAL.cs" />
     <Compile Include="Dashboard\DashboardDLL.cs" />
+    <Compile Include="Inventory\InventoryCostingEngineDLL.cs" />
+    <Compile Include="Inventory\InventoryValuationDLL.cs" />
     <Compile Include="POS\BackupDLL.cs" />
     <Compile Include="POS\BanksDLL.cs" />
     <Compile Include="POS\CurrencyDLL.cs" />
@@ -110,13 +115,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Accounts\AccountingDashboardProcedures.sql" />
+    <Content Include="Accounts\BudgetModule_Install.sql" />
+    <Content Include="Accounts\BudgetProcedures.sql" />
+    <Content Include="Accounts\ImportModule_Install.sql" />
+    <Content Include="Accounts\ImportModule_Procedures.sql" />
+    <Content Include="Accounts\ImportModule_Schema.sql" />
     <Content Include="Accounts\UpdateCodesSQL.sql" />
     <Content Include="Accounts\FinancialPeriodProcedures.sql" />
     <Content Include="Accounts\\BankReconciliationProcedures.sql" />
     <Content Include="Accounts\\CostCenterProcedures.sql" />
+    <Content Include="Inventory\InventoryCosting_SQL.sql" />
+    <Content Include="Inventory\InventoryValuation_Migration.sql" />
+    <Content Include="Inventory\InventoryValuation_Schema.sql" />
+    <Content Include="Inventory\InventoryValuation_Settings_SP.sql" />
+    <Content Include="Inventory\InventoryValuation_StoredProcedures.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Accounts\BUDGET_MODULE_README.md" />
     <None Include="Accounts\CODE_GENERATION_GUIDE.md" />
+    <None Include="Accounts\IMPLEMENTATION_SUMMARY.md" />
+    <None Include="Accounts\ImportModule_Procedures_ChangeLog.md" />
+    <None Include="Accounts\ImportTemplateGenerator_Fix.md" />
+    <None Include="Accounts\IMPORT_MODULE_README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

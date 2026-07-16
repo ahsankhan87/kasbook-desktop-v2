@@ -2783,5 +2783,30 @@ namespace pos
             var frm = new pos.frm_accounting_settings();
             frm.ShowDialog(this);
         }
+
+        private void budgetVsActualReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Reports.Financial.frm_BudgetVsActualReport();
+            frm.ShowDialog(this);
+
+        }
+
+        private void inventoryValuationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           var frm = new pos.Inventory.frm_inventory_valuation();
+            frm.ShowDialog(this);
+        }
+
+        private void importDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Accounts.frm_import_data();
+            frm.ShowDialog(this);
+        }
+
+        private void inventoryValuationSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Inventory.frm_valuation_settings();
+            frm.ShowDialog(this);
+        }
     }
 }

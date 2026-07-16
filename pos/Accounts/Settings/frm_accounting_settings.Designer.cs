@@ -98,6 +98,7 @@ namespace pos
             this.gridVoucher = new System.Windows.Forms.DataGridView();
             this.colVoucherType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVoucherPrefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colVoucherBranchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVoucherFormat = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colVoucherReset = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colVoucherStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -194,7 +195,7 @@ namespace pos
             this.tabMain.Controls.Add(this.tabTax);
             this.tabMain.Controls.Add(this.tabPosting);
             this.tabMain.Controls.Add(this.tabReports);
-            this.tabMain.Location = new System.Drawing.Point(12, 33);
+            this.tabMain.Location = new System.Drawing.Point(12, 40);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(1360, 661);
@@ -255,23 +256,23 @@ namespace pos
             // 
             this.lblCurrencyLockNote.AutoSize = true;
             this.lblCurrencyLockNote.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblCurrencyLockNote.Location = new System.Drawing.Point(555, 255);
+            this.lblCurrencyLockNote.Location = new System.Drawing.Point(436, 288);
             this.lblCurrencyLockNote.Name = "lblCurrencyLockNote";
             this.lblCurrencyLockNote.Size = new System.Drawing.Size(0, 23);
             this.lblCurrencyLockNote.TabIndex = 29;
             // 
             // txtLogoPath
             // 
-            this.txtLogoPath.Location = new System.Drawing.Point(168, 284);
+            this.txtLogoPath.Location = new System.Drawing.Point(154, 396);
             this.txtLogoPath.Name = "txtLogoPath";
             this.txtLogoPath.Size = new System.Drawing.Size(600, 29);
             this.txtLogoPath.TabIndex = 14;
             // 
             // btnBrowseLogo
             // 
-            this.btnBrowseLogo.Location = new System.Drawing.Point(774, 283);
+            this.btnBrowseLogo.Location = new System.Drawing.Point(769, 396);
             this.btnBrowseLogo.Name = "btnBrowseLogo";
-            this.btnBrowseLogo.Size = new System.Drawing.Size(75, 27);
+            this.btnBrowseLogo.Size = new System.Drawing.Size(75, 29);
             this.btnBrowseLogo.TabIndex = 15;
             this.btnBrowseLogo.Text = "Browse";
             this.btnBrowseLogo.UseVisualStyleBackColor = true;
@@ -290,7 +291,7 @@ namespace pos
             // cmbCountry
             // 
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(555, 214);
+            this.cmbCountry.Location = new System.Drawing.Point(602, 217);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(294, 29);
             this.cmbCountry.TabIndex = 13;
@@ -298,15 +299,15 @@ namespace pos
             // cmbBaseCurrency
             // 
             this.cmbBaseCurrency.FormattingEnabled = true;
-            this.cmbBaseCurrency.Location = new System.Drawing.Point(168, 214);
+            this.cmbBaseCurrency.Location = new System.Drawing.Point(159, 285);
             this.cmbBaseCurrency.Name = "cmbBaseCurrency";
-            this.cmbBaseCurrency.Size = new System.Drawing.Size(271, 29);
+            this.cmbBaseCurrency.Size = new System.Drawing.Size(300, 29);
             this.cmbBaseCurrency.TabIndex = 12;
             // 
             // cmbFyEndMonth
             // 
             this.cmbFyEndMonth.FormattingEnabled = true;
-            this.cmbFyEndMonth.Location = new System.Drawing.Point(555, 178);
+            this.cmbFyEndMonth.Location = new System.Drawing.Point(602, 181);
             this.cmbFyEndMonth.Name = "cmbFyEndMonth";
             this.cmbFyEndMonth.Size = new System.Drawing.Size(294, 29);
             this.cmbFyEndMonth.TabIndex = 11;
@@ -314,76 +315,75 @@ namespace pos
             // cmbFyStartMonth
             // 
             this.cmbFyStartMonth.FormattingEnabled = true;
-            this.cmbFyStartMonth.Location = new System.Drawing.Point(168, 178);
+            this.cmbFyStartMonth.Location = new System.Drawing.Point(159, 250);
             this.cmbFyStartMonth.Name = "cmbFyStartMonth";
-            this.cmbFyStartMonth.Size = new System.Drawing.Size(271, 29);
+            this.cmbFyStartMonth.Size = new System.Drawing.Size(300, 29);
             this.cmbFyStartMonth.TabIndex = 10;
             this.cmbFyStartMonth.SelectedIndexChanged += new System.EventHandler(this.cmbFyStartMonth_SelectedIndexChanged);
             // 
             // txtWebsite
             // 
-            this.txtWebsite.Location = new System.Drawing.Point(555, 142);
+            this.txtWebsite.Location = new System.Drawing.Point(602, 145);
             this.txtWebsite.Name = "txtWebsite";
             this.txtWebsite.Size = new System.Drawing.Size(294, 29);
             this.txtWebsite.TabIndex = 9;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(168, 142);
+            this.txtEmail.Location = new System.Drawing.Point(159, 213);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(271, 29);
+            this.txtEmail.Size = new System.Drawing.Size(300, 29);
             this.txtEmail.TabIndex = 8;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(555, 106);
+            this.txtPhone.Location = new System.Drawing.Point(602, 109);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(294, 29);
             this.txtPhone.TabIndex = 7;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(168, 106);
+            this.txtAddress.Location = new System.Drawing.Point(159, 145);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(271, 60);
+            this.txtAddress.Size = new System.Drawing.Size(300, 60);
             this.txtAddress.TabIndex = 6;
             // 
             // txtStrn
             // 
-            this.txtStrn.Location = new System.Drawing.Point(555, 70);
+            this.txtStrn.Location = new System.Drawing.Point(602, 73);
             this.txtStrn.Name = "txtStrn";
             this.txtStrn.Size = new System.Drawing.Size(294, 29);
             this.txtStrn.TabIndex = 5;
             // 
             // txtNtnVat
             // 
-            this.txtNtnVat.Location = new System.Drawing.Point(168, 70);
+            this.txtNtnVat.Location = new System.Drawing.Point(159, 108);
             this.txtNtnVat.Name = "txtNtnVat";
-            this.txtNtnVat.Size = new System.Drawing.Size(271, 29);
+            this.txtNtnVat.Size = new System.Drawing.Size(300, 29);
             this.txtNtnVat.TabIndex = 4;
             // 
             // txtRegistrationNo
             // 
-            this.txtRegistrationNo.Location = new System.Drawing.Point(555, 34);
+            this.txtRegistrationNo.Location = new System.Drawing.Point(602, 37);
             this.txtRegistrationNo.Name = "txtRegistrationNo";
             this.txtRegistrationNo.Size = new System.Drawing.Size(294, 29);
             this.txtRegistrationNo.TabIndex = 3;
             // 
             // txtLegalName
             // 
-            this.txtLegalName.Location = new System.Drawing.Point(168, 34);
+            this.txtLegalName.Location = new System.Drawing.Point(159, 34);
             this.txtLegalName.Name = "txtLegalName";
-            this.txtLegalName.Size = new System.Drawing.Size(271, 29);
+            this.txtLegalName.Size = new System.Drawing.Size(300, 29);
             this.txtLegalName.TabIndex = 2;
             // 
             // txtCompanyName
             // 
-            this.txtCompanyName.Location = new System.Drawing.Point(168, 286);
+            this.txtCompanyName.Location = new System.Drawing.Point(159, 71);
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(10, 29);
+            this.txtCompanyName.Size = new System.Drawing.Size(300, 29);
             this.txtCompanyName.TabIndex = 1;
-            this.txtCompanyName.Visible = false;
             // 
             // lblCountry
             // 
@@ -397,7 +397,7 @@ namespace pos
             // lblBaseCurrency
             // 
             this.lblBaseCurrency.AutoSize = true;
-            this.lblBaseCurrency.Location = new System.Drawing.Point(34, 217);
+            this.lblBaseCurrency.Location = new System.Drawing.Point(25, 288);
             this.lblBaseCurrency.Name = "lblBaseCurrency";
             this.lblBaseCurrency.Size = new System.Drawing.Size(118, 23);
             this.lblBaseCurrency.TabIndex = 11;
@@ -415,7 +415,7 @@ namespace pos
             // lblFyStart
             // 
             this.lblFyStart.AutoSize = true;
-            this.lblFyStart.Location = new System.Drawing.Point(34, 181);
+            this.lblFyStart.Location = new System.Drawing.Point(25, 252);
             this.lblFyStart.Name = "lblFyStart";
             this.lblFyStart.Size = new System.Drawing.Size(123, 23);
             this.lblFyStart.TabIndex = 9;
@@ -433,7 +433,7 @@ namespace pos
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(34, 145);
+            this.lblEmail.Location = new System.Drawing.Point(25, 216);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(51, 23);
             this.lblEmail.TabIndex = 7;
@@ -451,7 +451,7 @@ namespace pos
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(34, 109);
+            this.lblAddress.Location = new System.Drawing.Point(25, 148);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(70, 23);
             this.lblAddress.TabIndex = 5;
@@ -469,11 +469,11 @@ namespace pos
             // lblNtnVat
             // 
             this.lblNtnVat.AutoSize = true;
-            this.lblNtnVat.Location = new System.Drawing.Point(34, 73);
+            this.lblNtnVat.Location = new System.Drawing.Point(25, 112);
             this.lblNtnVat.Name = "lblNtnVat";
-            this.lblNtnVat.Size = new System.Drawing.Size(81, 23);
+            this.lblNtnVat.Size = new System.Drawing.Size(113, 23);
             this.lblNtnVat.TabIndex = 3;
-            this.lblNtnVat.Text = "NTN/VAT";
+            this.lblNtnVat.Text = "NTN/VAT No.";
             // 
             // lblRegistration
             // 
@@ -487,7 +487,7 @@ namespace pos
             // lblLegalName
             // 
             this.lblLegalName.AutoSize = true;
-            this.lblLegalName.Location = new System.Drawing.Point(34, 37);
+            this.lblLegalName.Location = new System.Drawing.Point(25, 40);
             this.lblLegalName.Name = "lblLegalName";
             this.lblLegalName.Size = new System.Drawing.Size(101, 23);
             this.lblLegalName.TabIndex = 1;
@@ -496,7 +496,7 @@ namespace pos
             // lblCompanyName
             // 
             this.lblCompanyName.AutoSize = true;
-            this.lblCompanyName.Location = new System.Drawing.Point(34, 37);
+            this.lblCompanyName.Location = new System.Drawing.Point(25, 76);
             this.lblCompanyName.Name = "lblCompanyName";
             this.lblCompanyName.Size = new System.Drawing.Size(134, 23);
             this.lblCompanyName.TabIndex = 0;
@@ -988,6 +988,7 @@ namespace pos
             this.gridVoucher.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colVoucherType,
             this.colVoucherPrefix,
+            this.colVoucherBranchId,
             this.colVoucherFormat,
             this.colVoucherReset,
             this.colVoucherStart,
@@ -1013,13 +1014,24 @@ namespace pos
             this.colVoucherPrefix.MinimumWidth = 6;
             this.colVoucherPrefix.Name = "colVoucherPrefix";
             // 
+            // colVoucherBranchId
+            // 
+            this.colVoucherBranchId.HeaderText = "Branch ID";
+            this.colVoucherBranchId.MinimumWidth = 6;
+            this.colVoucherBranchId.Name = "colVoucherBranchId";
+            this.colVoucherBranchId.ReadOnly = true;
+            // 
             // colVoucherFormat
             // 
             this.colVoucherFormat.HeaderText = "Number Format";
             this.colVoucherFormat.Items.AddRange(new object[] {
             "YYYY-NNNN",
             "YY-NNNN",
-            "NNNN"});
+            "NNNN",
+            "YYYYMMDD-NNNN",
+            "YYYY-MM-DD-NNNN",
+            "YYYYMMDD-YYYY-NNNN",
+            "YYYY-MM-DD-YYYY-NNNN"});
             this.colVoucherFormat.MinimumWidth = 6;
             this.colVoucherFormat.Name = "colVoucherFormat";
             // 
@@ -1143,14 +1155,14 @@ namespace pos
             // 
             // cmbFilingFrequency
             // 
-            this.cmbFilingFrequency.Location = new System.Drawing.Point(800, 67);
+            this.cmbFilingFrequency.Location = new System.Drawing.Point(897, 67);
             this.cmbFilingFrequency.Name = "cmbFilingFrequency";
             this.cmbFilingFrequency.Size = new System.Drawing.Size(200, 29);
             this.cmbFilingFrequency.TabIndex = 0;
             // 
             // txtFbrStrn
             // 
-            this.txtFbrStrn.Location = new System.Drawing.Point(460, 67);
+            this.txtFbrStrn.Location = new System.Drawing.Point(549, 66);
             this.txtFbrStrn.Name = "txtFbrStrn";
             this.txtFbrStrn.Size = new System.Drawing.Size(200, 29);
             this.txtFbrStrn.TabIndex = 1;
@@ -1164,7 +1176,7 @@ namespace pos
             // 
             // cmbTaxMode
             // 
-            this.cmbTaxMode.Location = new System.Drawing.Point(460, 30);
+            this.cmbTaxMode.Location = new System.Drawing.Point(549, 29);
             this.cmbTaxMode.Name = "cmbTaxMode";
             this.cmbTaxMode.Size = new System.Drawing.Size(200, 29);
             this.cmbTaxMode.TabIndex = 3;
@@ -1180,7 +1192,7 @@ namespace pos
             // lblFilingFrequency
             // 
             this.lblFilingFrequency.AutoSize = true;
-            this.lblFilingFrequency.Location = new System.Drawing.Point(685, 70);
+            this.lblFilingFrequency.Location = new System.Drawing.Point(758, 67);
             this.lblFilingFrequency.Name = "lblFilingFrequency";
             this.lblFilingFrequency.Size = new System.Drawing.Size(133, 23);
             this.lblFilingFrequency.TabIndex = 5;
@@ -1189,7 +1201,7 @@ namespace pos
             // lblFbrStrn
             // 
             this.lblFbrStrn.AutoSize = true;
-            this.lblFbrStrn.Location = new System.Drawing.Point(421, 70);
+            this.lblFbrStrn.Location = new System.Drawing.Point(483, 70);
             this.lblFbrStrn.Name = "lblFbrStrn";
             this.lblFbrStrn.Size = new System.Drawing.Size(51, 23);
             this.lblFbrStrn.TabIndex = 6;
@@ -1207,7 +1219,7 @@ namespace pos
             // lblTaxMode
             // 
             this.lblTaxMode.AutoSize = true;
-            this.lblTaxMode.Location = new System.Drawing.Point(338, 33);
+            this.lblTaxMode.Location = new System.Drawing.Point(400, 33);
             this.lblTaxMode.Name = "lblTaxMode";
             this.lblTaxMode.Size = new System.Drawing.Size(143, 23);
             this.lblTaxMode.TabIndex = 8;
@@ -1383,14 +1395,14 @@ namespace pos
             // 
             // txtDigitalSignature
             // 
-            this.txtDigitalSignature.Location = new System.Drawing.Point(180, 259);
+            this.txtDigitalSignature.Location = new System.Drawing.Point(257, 259);
             this.txtDigitalSignature.Name = "txtDigitalSignature";
             this.txtDigitalSignature.Size = new System.Drawing.Size(650, 29);
             this.txtDigitalSignature.TabIndex = 0;
             // 
             // txtReportFooter
             // 
-            this.txtReportFooter.Location = new System.Drawing.Point(180, 177);
+            this.txtReportFooter.Location = new System.Drawing.Point(257, 177);
             this.txtReportFooter.Multiline = true;
             this.txtReportFooter.Name = "txtReportFooter";
             this.txtReportFooter.Size = new System.Drawing.Size(650, 70);
@@ -1398,28 +1410,28 @@ namespace pos
             // 
             // txtReportHeader
             // 
-            this.txtReportHeader.Location = new System.Drawing.Point(180, 141);
+            this.txtReportHeader.Location = new System.Drawing.Point(257, 141);
             this.txtReportHeader.Name = "txtReportHeader";
             this.txtReportHeader.Size = new System.Drawing.Size(650, 29);
             this.txtReportHeader.TabIndex = 2;
             // 
             // cmbShowAmountsIn
             // 
-            this.cmbShowAmountsIn.Location = new System.Drawing.Point(180, 105);
+            this.cmbShowAmountsIn.Location = new System.Drawing.Point(257, 105);
             this.cmbShowAmountsIn.Name = "cmbShowAmountsIn";
             this.cmbShowAmountsIn.Size = new System.Drawing.Size(250, 29);
             this.cmbShowAmountsIn.TabIndex = 3;
             // 
             // cmbReportDateFormat
             // 
-            this.cmbReportDateFormat.Location = new System.Drawing.Point(180, 69);
+            this.cmbReportDateFormat.Location = new System.Drawing.Point(257, 69);
             this.cmbReportDateFormat.Name = "cmbReportDateFormat";
             this.cmbReportDateFormat.Size = new System.Drawing.Size(250, 29);
             this.cmbReportDateFormat.TabIndex = 4;
             // 
             // cmbAmountFormat
             // 
-            this.cmbAmountFormat.Location = new System.Drawing.Point(180, 33);
+            this.cmbAmountFormat.Location = new System.Drawing.Point(257, 33);
             this.cmbAmountFormat.Name = "cmbAmountFormat";
             this.cmbAmountFormat.Size = new System.Drawing.Size(250, 29);
             this.cmbAmountFormat.TabIndex = 5;
@@ -1484,7 +1496,7 @@ namespace pos
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelBottom.Controls.Add(this.btnResetDefaults);
             this.panelBottom.Controls.Add(this.btnSaveSettings);
-            this.panelBottom.Location = new System.Drawing.Point(12, 700);
+            this.panelBottom.Location = new System.Drawing.Point(12, 707);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(1360, 45);
             this.panelBottom.TabIndex = 2;
@@ -1492,9 +1504,9 @@ namespace pos
             // btnResetDefaults
             // 
             this.btnResetDefaults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnResetDefaults.Location = new System.Drawing.Point(1126, 9);
+            this.btnResetDefaults.Location = new System.Drawing.Point(1126, 7);
             this.btnResetDefaults.Name = "btnResetDefaults";
-            this.btnResetDefaults.Size = new System.Drawing.Size(110, 27);
+            this.btnResetDefaults.Size = new System.Drawing.Size(110, 33);
             this.btnResetDefaults.TabIndex = 1;
             this.btnResetDefaults.Text = "Reset Defaults";
             this.btnResetDefaults.UseVisualStyleBackColor = true;
@@ -1503,9 +1515,9 @@ namespace pos
             // btnSaveSettings
             // 
             this.btnSaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveSettings.Location = new System.Drawing.Point(1242, 9);
+            this.btnSaveSettings.Location = new System.Drawing.Point(1242, 7);
             this.btnSaveSettings.Name = "btnSaveSettings";
-            this.btnSaveSettings.Size = new System.Drawing.Size(110, 27);
+            this.btnSaveSettings.Size = new System.Drawing.Size(110, 33);
             this.btnSaveSettings.TabIndex = 0;
             this.btnSaveSettings.Text = "Save Settings";
             this.btnSaveSettings.UseVisualStyleBackColor = true;
@@ -1641,6 +1653,7 @@ namespace pos
         private System.Windows.Forms.DataGridView gridVoucher;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVoucherType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVoucherPrefix;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVoucherBranchId;
         private System.Windows.Forms.DataGridViewComboBoxColumn colVoucherFormat;
         private System.Windows.Forms.DataGridViewComboBoxColumn colVoucherReset;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVoucherStart;

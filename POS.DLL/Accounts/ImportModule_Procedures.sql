@@ -58,7 +58,7 @@ BEGIN
 	DECLARE @VouchersDeleted INT = 0;
 
 	-- Check if session exists
-	IF NOT EXISTS (SELECT 1 FROM dbo.acc_import_sessions WHERE session_id = @SessionId)
+	IF NOT EXISTS (SELECT 1 FROM acc_import_sessions WHERE session_id = @SessionId)
 	BEGIN
 		RAISERROR('Import session not found.', 16, 1);
 		RETURN;
@@ -70,7 +70,7 @@ BEGIN
 		@RollbackAvailableUntil = rollback_available_until,
 		@ImportType = import_type,
 		@FileName = file_name
-	FROM dbo.acc_import_sessions
+	FROM acc_import_sessions
 	WHERE session_id = @SessionId;
 
 	-- Validate session status
@@ -92,36 +92,38 @@ BEGIN
 
 		-- Get voucher count
 		SELECT @VoucherCount = COUNT(*)
-		FROM dbo.acc_import_vouchers
+		FROM acc_import_vouchers
 		WHERE session_id = @SessionId;
 
 		-- Delete all acc_entries linked to vouchers in this session
+		-- acc_entries links to voucher header via invoice_no, not entry_id
 		DELETE ae
-		FROM dbo.acc_entries ae
-		INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = ae.entry_id
+		FROM acc_entries ae
+		INNER JOIN acc_entries_header aeh ON aeh.InvoiceNo = ae.invoice_no AND aeh.branch_id = ae.branch_id
+		INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
 		WHERE aiv.session_id = @SessionId;
 
 		SET @EntriesDeleted = @@ROWCOUNT;
 
 		-- Delete all acc_entries_header (vouchers) in this session
 		DELETE aeh
-		FROM dbo.acc_entries_header aeh
-		INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
+		FROM acc_entries_header aeh
+		INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
 		WHERE aiv.session_id = @SessionId;
 
 		SET @VouchersDeleted = @@ROWCOUNT;
 
 		-- Delete session's acc_import_vouchers links
-		DELETE FROM dbo.acc_import_vouchers
+		DELETE FROM acc_import_vouchers
 		WHERE session_id = @SessionId;
 
 		-- Update session status
-		UPDATE dbo.acc_import_sessions
+		UPDATE acc_import_sessions
 		SET status = 'RolledBack'
 		WHERE session_id = @SessionId;
 
 		-- Log to audit trail if table exists
-		IF OBJECT_ID(N'dbo.acc_audit_trail', N'U') IS NOT NULL
+		IF OBJECT_ID(N'acc_audit_trail', N'U') IS NOT NULL
 		BEGIN
 			DECLARE @AuditMessage NVARCHAR(MAX);
 			SET @AuditMessage = 'Import rollback: Type=' + @ImportType + 
@@ -129,7 +131,7 @@ BEGIN
 								', Vouchers deleted=' + CAST(@VouchersDeleted AS NVARCHAR(10)) + 
 								', Entries deleted=' + CAST(@EntriesDeleted AS NVARCHAR(10));
 
-			INSERT INTO dbo.acc_audit_trail (action, description, user_id, action_date)
+			INSERT INTO acc_audit_trail (action, description, user_id, action_date)
 			VALUES ('IMPORT_ROLLBACK', @AuditMessage, @UserId, GETDATE());
 		END
 
@@ -163,14 +165,14 @@ GO
 -- STORED PROCEDURE: sp_ImportDataQualityCheck
 -- Post-import validation
 -- =============================================
-IF OBJECT_ID(N'dbo.sp_ImportDataQualityCheck', N'P') IS NOT NULL
-	DROP PROCEDURE dbo.sp_ImportDataQualityCheck;
+IF OBJECT_ID(N'sp_ImportDataQualityCheck', N'P') IS NOT NULL
+	DROP PROCEDURE sp_ImportDataQualityCheck;
 GO
 
 PRINT 'Creating stored procedure: sp_ImportDataQualityCheck';
 GO
 
-CREATE PROCEDURE dbo.sp_ImportDataQualityCheck
+CREATE PROCEDURE sp_ImportDataQualityCheck
 	@SessionId INT
 AS
 BEGIN
@@ -183,7 +185,7 @@ BEGIN
 	SELECT 
 		@ImportType = import_type,
 		@Status = status
-	FROM dbo.acc_import_sessions
+	FROM acc_import_sessions
 	WHERE session_id = @SessionId;
 
 	-- Check if session exists
@@ -208,16 +210,19 @@ BEGIN
 		SELECT 
 			'NO_TRANSACTIONS' AS CheckType,
 			'Account has no transactions after opening balance import' AS Issue,
-			'Account Code: ' + ISNULL(a.account_code, '') + ', Name: ' + ISNULL(a.account_name, '') AS Details
-		FROM dbo.acc_accounts a
-		WHERE a.is_active = 1
-		  AND a.account_type IN ('Asset', 'Liability', 'Equity')
+			'Account Code: ' + ISNULL(a.code, '') + ', Name: ' + ISNULL(a.name, '') AS Details
+		FROM acc_accounts a
+		INNER JOIN acc_groups g ON g.id = a.group_id
+		INNER JOIN acc_account_type at ON at.id = g.account_type_id
+
+		WHERE a.is_active = 1 AND at.name IN ('Asset', 'Liability', 'Equity')
 		  AND NOT EXISTS (
 			  SELECT 1 
-			  FROM dbo.acc_entries ae
-			  INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = ae.entry_id
+			  FROM acc_entries ae
+			  INNER JOIN acc_entries_header aeh ON aeh.InvoiceNo = ae.invoice_no AND aeh.branch_id = ae.branch_id
+			  INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
 			  WHERE aiv.session_id = @SessionId
-				AND ae.account_code = a.account_code
+				AND ae.account_id = a.id
 		  );
 	END
 
@@ -226,14 +231,17 @@ BEGIN
 	SELECT TOP 10
 		'LARGE_BALANCE' AS CheckType,
 		'Account has unusually large balance after import' AS Issue,
-		'Account Code: ' + ae.account_code + 
+		'Account Code: ' + ISNULL(a.code, '') + 
+		', Account Name: ' + ISNULL(a.name, '') +
 		', Total Debit: ' + CAST(SUM(ae.debit) AS NVARCHAR(50)) + 
 		', Total Credit: ' + CAST(SUM(ae.credit) AS NVARCHAR(50)) +
 		', Net Balance: ' + CAST(SUM(ae.debit - ae.credit) AS NVARCHAR(50)) AS Details
-	FROM dbo.acc_entries ae
-	INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = ae.entry_id
+	FROM acc_entries ae
+	INNER JOIN acc_entries_header aeh ON aeh.InvoiceNo = ae.invoice_no AND aeh.branch_id = ae.branch_id
+	INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
+	INNER JOIN acc_accounts a ON a.id = ae.account_id
 	WHERE aiv.session_id = @SessionId
-	GROUP BY ae.account_code
+	GROUP BY a.code, a.name
 	HAVING ABS(SUM(ae.debit - ae.credit)) > 1000000 -- Threshold: 1 million
 	ORDER BY ABS(SUM(ae.debit - ae.credit)) DESC;
 
@@ -248,9 +256,9 @@ BEGIN
 				SUM(ae.debit) AS total_debit,
 				SUM(ae.credit) AS total_credit,
 				ABS(SUM(ae.debit) - SUM(ae.credit)) AS difference
-			FROM dbo.acc_entries_header aeh
-			INNER JOIN dbo.acc_entries ae ON ae.entry_id = aeh.id
-			INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
+			FROM acc_entries_header aeh
+			INNER JOIN acc_entries ae ON ae.invoice_no = aeh.InvoiceNo AND ae.branch_id = aeh.branch_id
+			INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
 			WHERE aiv.session_id = @SessionId
 			GROUP BY aeh.id, aeh.InvoiceNo
 			HAVING ABS(SUM(ae.debit) - SUM(ae.credit)) > 0.01 -- Allow small rounding difference
@@ -272,13 +280,14 @@ BEGIN
 		'DUPLICATE_ACCOUNT' AS CheckType,
 		'Multiple entries for same account in one voucher' AS Issue,
 		'Voucher No: ' + aeh.InvoiceNo + 
-		', Account: ' + ae.account_code + 
+		', Account: ' + ISNULL(a.code, '') + ' - ' + ISNULL(a.name, '') +
 		', Count: ' + CAST(COUNT(*) AS NVARCHAR(10)) AS Details
-	FROM dbo.acc_entries ae
-	INNER JOIN dbo.acc_entries_header aeh ON aeh.id = ae.entry_id
-	INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
+	FROM acc_entries ae
+	INNER JOIN acc_entries_header aeh ON aeh.InvoiceNo = ae.invoice_no AND aeh.branch_id = ae.branch_id
+	INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
+	INNER JOIN acc_accounts a ON a.id = ae.account_id
 	WHERE aiv.session_id = @SessionId
-	GROUP BY aeh.id, aeh.InvoiceNo, ae.account_code
+	GROUP BY aeh.id, aeh.InvoiceNo, a.code, a.name, ae.account_id
 	HAVING COUNT(*) > 1;
 
 	-- Check 5: Verify overall trial balance
@@ -292,8 +301,9 @@ BEGIN
 			@TotalDebit = SUM(ae.debit),
 			@TotalCredit = SUM(ae.credit),
 			@Difference = ABS(SUM(ae.debit) - SUM(ae.credit))
-		FROM dbo.acc_entries ae
-		INNER JOIN dbo.acc_import_vouchers aiv ON aiv.voucher_id = ae.entry_id
+		FROM acc_entries ae
+		INNER JOIN acc_entries_header aeh ON aeh.InvoiceNo = ae.invoice_no AND aeh.branch_id = ae.branch_id
+		INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
 		WHERE aiv.session_id = @SessionId;
 
 		IF @Difference > 0.01 -- Allow small rounding difference
@@ -343,14 +353,14 @@ GO
 -- STORED PROCEDURE: sp_GetImportHistory
 -- Returns list of import sessions
 -- =============================================
-IF OBJECT_ID(N'dbo.sp_GetImportHistory', N'P') IS NOT NULL
-	DROP PROCEDURE dbo.sp_GetImportHistory;
+IF OBJECT_ID(N'sp_GetImportHistory', N'P') IS NOT NULL
+	DROP PROCEDURE sp_GetImportHistory;
 GO
 
 PRINT 'Creating stored procedure: sp_GetImportHistory';
 GO
 
-CREATE PROCEDURE dbo.sp_GetImportHistory
+CREATE PROCEDURE sp_GetImportHistory
 	@ImportType VARCHAR(30) = NULL,
 	@FromDate DATETIME = NULL,
 	@ToDate DATETIME = NULL
@@ -376,16 +386,16 @@ BEGIN
 		s.status,
 		s.imported_at,
 		s.rollback_available_until,
-		ISNULL(u.full_name, u.username) AS imported_by_name,
+		ISNULL(u.name, u.username) AS imported_by_name,
 		CASE 
 			WHEN s.status = 'Completed' AND s.rollback_available_until IS NOT NULL 
 				 AND GETDATE() <= s.rollback_available_until 
 			THEN 1
 			ELSE 0
 		END AS can_rollback,
-		(SELECT COUNT(*) FROM dbo.acc_import_vouchers WHERE session_id = s.session_id) AS voucher_count
-	FROM dbo.acc_import_sessions s
-	LEFT JOIN dbo.pos_users u ON u.id = s.imported_by
+		(SELECT COUNT(*) FROM acc_import_vouchers WHERE session_id = s.session_id) AS voucher_count
+	FROM acc_import_sessions s
+	LEFT JOIN pos_users u ON u.id = s.imported_by
 	WHERE 
 		(@ImportType IS NULL OR s.import_type = @ImportType)
 		AND s.imported_at >= @FromDate
@@ -401,14 +411,14 @@ GO
 -- STORED PROCEDURE: sp_ValidateOpeningBalanceImport
 -- Validates opening balance data before import
 -- =============================================
-IF OBJECT_ID(N'dbo.sp_ValidateOpeningBalanceImport', N'P') IS NOT NULL
-	DROP PROCEDURE dbo.sp_ValidateOpeningBalanceImport;
+IF OBJECT_ID(N'sp_ValidateOpeningBalanceImport', N'P') IS NOT NULL
+	DROP PROCEDURE sp_ValidateOpeningBalanceImport;
 GO
 
 PRINT 'Creating stored procedure: sp_ValidateOpeningBalanceImport';
 GO
 
-CREATE PROCEDURE dbo.sp_ValidateOpeningBalanceImport
+CREATE PROCEDURE sp_ValidateOpeningBalanceImport
 	@BalanceRows dbo.ImportBalanceRow READONLY
 AS
 BEGIN
@@ -444,8 +454,8 @@ BEGIN
 		br.acc_code
 	FROM @BalanceRows br
 	WHERE NOT EXISTS (
-		SELECT 1 FROM dbo.acc_accounts a 
-		WHERE a.account_code = br.acc_code
+		SELECT 1 FROM acc_accounts a 
+		WHERE a.code = br.acc_code
 	);
 
 	-- Check 2: Validate no account appears twice
@@ -493,14 +503,18 @@ BEGIN
 	BEGIN
 		SET @ValidationStatus = 'FAILED';
 
-		-- Build error list as JSON array
-		SELECT @ErrorList = '[' + STRING_AGG(
-			'{"ErrorType":"' + ErrorType + 
-			'","Message":"' + ErrorMessage + 
-			'","Account":"' + ISNULL(AccountCode, '') + '"}', 
-			','
-		) + ']'
-		FROM #ValidationErrors;
+		-- Build error list as JSON array (SQL Server 2016+ feature)
+		-- For SQL Server 2012/2014, use FOR XML PATH instead
+		DECLARE @ErrorJson NVARCHAR(MAX);
+		SELECT @ErrorJson = '[' + STUFF((
+			SELECT ',' + 
+				   '{"ErrorType":"' + ErrorType + 
+				   '","Message":"' + REPLACE(ErrorMessage, '"', '\"') + 
+				   '","Account":"' + ISNULL(AccountCode, '') + '"}'
+			FROM #ValidationErrors
+			FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '') + ']';
+
+		SET @ErrorList = ISNULL(@ErrorJson, '[]');
 	END
 
 	-- Return validation summary

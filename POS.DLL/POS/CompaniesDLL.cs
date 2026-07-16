@@ -222,6 +222,13 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@PostalCode", obj.postalCode);
                         cmd.Parameters.AddWithValue("@CountryName", obj.countryName);
 
+                        cmd.Parameters.AddWithValue("@legal_name", obj.legal_name);
+                        cmd.Parameters.AddWithValue("@strn", obj.strn);
+                        cmd.Parameters.AddWithValue("@website", obj.website);
+                        cmd.Parameters.AddWithValue("@financial_year_start_month", obj.financial_year_start_month);
+                        cmd.Parameters.AddWithValue("@registration_no", obj.registration_no);
+
+
 
                         cmd.Parameters.AddWithValue("@OperationType", "2");
 

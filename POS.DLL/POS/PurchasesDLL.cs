@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using POS.Core;
+using POS.DLL.Inventory;
 
 namespace POS.DLL
 {
@@ -394,6 +395,18 @@ namespace POS.DLL
         public int Insertpurchases(List<PurchaseModalHeader> purchases, List<PurchasesModal> purchase_detail)
         {
             Int32 newPurchaseID = 0;
+
+            // Load inventory costing settings once (outside the transaction — read-only, no lock needed)
+            // sp_Purchase_items is the WAC authority; we only need the method to decide FIFO layer creation.
+            string costingMethod = "WAC";
+            try
+            {
+                var valSettings = new InventoryValuationDLL().GetSettings(UsersModal.logged_in_branch_id);
+                if (!string.IsNullOrWhiteSpace(valSettings?.ValuationMethod))
+                    costingMethod = valSettings.ValuationMethod.ToUpperInvariant();
+            }
+            catch { /* fall back to WAC — non-fatal */ }
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 SqlTransaction transaction;
@@ -493,6 +506,28 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@OperationType", "1");
 
                             var purchaseItemId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                            // ── FIFO layer creation ───────────────────────────────────────
+                            // WAC is already updated inside sp_Purchase_items.
+                            // For FIFO valuation we also record a cost layer so that the
+                            // costing engine can consume layers on sale (FIFO depletion).
+                            // This runs in the same transaction so it rolls back atomically.
+                            if (costingMethod == "FIFO" && detail.item_type != "Service")
+                            {
+                                cmd = new SqlCommand("sp_InsertFIFOLayer", cn, transaction);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@ProductId",     detail.item_id);
+                                cmd.Parameters.AddWithValue("@ItemNumber",    detail.item_number);
+                                cmd.Parameters.AddWithValue("@BranchId",      UsersModal.logged_in_branch_id);
+                                cmd.Parameters.AddWithValue("@PurchaseRefId", newPurchaseID);
+                                cmd.Parameters.AddWithValue("@PurchaseDate",  detail.purchase_date);
+                                cmd.Parameters.AddWithValue("@Qty",           detail.quantity);
+                                cmd.Parameters.AddWithValue("@UnitCost",      detail.cost_price);
+                                cmd.Parameters.AddWithValue("@CurrencyId",    detail.currency_id);
+                                cmd.Parameters.AddWithValue("@ExchangeRate",  detail.exchange_rate > 0 ? detail.exchange_rate : 1m);
+                                cmd.ExecuteScalar();
+                            }
+                            // ── end FIFO layer ───────────────────────────────────────────
 
                             //cmd = new SqlCommand(@"
                             //    IF COL_LENGTH('dbo.pos_purchases_items','currency_id') IS NOT NULL

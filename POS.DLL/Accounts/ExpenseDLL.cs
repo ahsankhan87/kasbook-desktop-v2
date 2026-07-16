@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using POS.Core;
 
 namespace POS.DLL
@@ -103,41 +105,112 @@ namespace POS.DLL
 
         public String GetMaxInvoiceNo()
         {
+            // Use accounting settings voucher format for PAYMENT vouchers
+            // Keys:
+            //   ACC_VOUCHER_PAYMENT_PREFIX (default PV)
+            //   ACC_VOUCHER_PAYMENT_FORMAT (default YYYY-NNNN)
+            //   ACC_VOUCHER_PAYMENT_START  (default 1)
+
+            string configuredPrefix = string.Empty;
+            string configuredFormat = "YYYY-NNNN";
+            int startNo = 1;
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
-                try
+                cn.Open();
+
+                using (SqlCommand readSettings = new SqlCommand(@"
+                    SELECT setting_key, setting_value
+                    FROM pos_settings
+                    WHERE setting_key IN ('ACC_VOUCHER_PAYMENT_PREFIX', 'ACC_VOUCHER_PAYMENT_FORMAT', 'ACC_VOUCHER_PAYMENT_START');", cn))
+                using (SqlDataReader rdr = readSettings.ExecuteReader())
                 {
-                    if (cn.State == ConnectionState.Closed)
+                    while (rdr.Read())
                     {
-                        cn.Open();
+                        string key = Convert.ToString(rdr[0]);
+                        string val = Convert.ToString(rdr[1]);
 
-                        cmd = new SqlCommand("SELECT MAX(invoice_no) FROM acc_payments WHERE invoice_no LIKE 'N-%' AND branch_id = @branch_id", cn);
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-
-                        string maxId = Convert.ToString(cmd.ExecuteScalar());
-
-                        if (maxId == "")
+                        if (string.Equals(key, "ACC_VOUCHER_PAYMENT_PREFIX", StringComparison.OrdinalIgnoreCase))
+                            configuredPrefix = val;
+                        else if (string.Equals(key, "ACC_VOUCHER_PAYMENT_FORMAT", StringComparison.OrdinalIgnoreCase))
+                            configuredFormat = string.IsNullOrWhiteSpace(val) ? "YYYY-NNNN" : val;
+                        else if (string.Equals(key, "ACC_VOUCHER_PAYMENT_START", StringComparison.OrdinalIgnoreCase))
                         {
-                            return maxId = "N-000001";
+                            int parsed;
+                            if (int.TryParse(val, out parsed) && parsed > 0)
+                                startNo = parsed;
                         }
-                        else
-                        {
-                            int intval = int.Parse(maxId.Substring(2, 6));
-                            intval++;
-                            maxId = String.Format("N-{0:000000}", intval);
-                            return maxId;
-                        }
-
                     }
-                    return "";
                 }
-                catch
+
+                string effectivePrefix = string.IsNullOrWhiteSpace(configuredPrefix) ? "PV" : configuredPrefix.Trim();
+                string format = string.IsNullOrWhiteSpace(configuredFormat) ? "YYYY-NNNN" : configuredFormat.Trim();
+
+                DateTime today = DateTime.Today;
+                string yyyy = today.ToString("yyyy", CultureInfo.InvariantCulture);
+                string yy = today.ToString("yy", CultureInfo.InvariantCulture);
+                string mm = today.ToString("MM", CultureInfo.InvariantCulture);
+                string dd = today.ToString("dd", CultureInfo.InvariantCulture);
+
+                string formatForLike = format.ToUpperInvariant()
+                    .Replace("YYYY", yyyy)
+                    .Replace("YY", yy)
+                    .Replace("MM", mm)
+                    .Replace("DD", dd);
+
+                string formatLikePart = Regex.Replace(formatForLike, "N+", "%");
+                string invoicePrefix = string.Format("{0}{1}-", effectivePrefix, UsersModal.logged_in_branch_id);
+                string likePattern = invoicePrefix + formatLikePart;
+
+                int maxSequence = 0;
+                using (SqlCommand findExisting = new SqlCommand(@"
+                    SELECT invoice_no
+                    FROM acc_payments
+                    WHERE branch_id = @branch_id
+                      AND invoice_no LIKE @likePattern;", cn))
                 {
+                    findExisting.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    findExisting.Parameters.AddWithValue("@likePattern", likePattern);
 
-                    throw;
+                    using (SqlDataReader rdr = findExisting.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            string inv = Convert.ToString(rdr[0]);
+                            if (string.IsNullOrWhiteSpace(inv))
+                                continue;
+
+                            int lastDash = inv.LastIndexOf('-');
+                            if (lastDash < 0 || lastDash == inv.Length - 1)
+                                continue;
+
+                            int seq;
+                            if (int.TryParse(inv.Substring(lastDash + 1), out seq) && seq > maxSequence)
+                                maxSequence = seq;
+                        }
+                    }
                 }
-            }
 
+                int next = maxSequence > 0 ? (maxSequence + 1) : startNo;
+
+                string finalFormat = formatForLike;
+                int nIndex = finalFormat.IndexOf('N');
+                if (nIndex >= 0)
+                {
+                    int nLen = 0;
+                    while (nIndex + nLen < finalFormat.Length && finalFormat[nIndex + nLen] == 'N')
+                        nLen++;
+
+                    string padded = next.ToString().PadLeft(nLen, '0');
+                    finalFormat = finalFormat.Substring(0, nIndex) + padded + finalFormat.Substring(nIndex + nLen);
+                }
+                else
+                {
+                    finalFormat = finalFormat + "-" + next.ToString("D4", CultureInfo.InvariantCulture);
+                }
+
+                return invoicePrefix + finalFormat;
+            }
         }
 
         public int Insert(List<ExpenseModal_Header> sales)

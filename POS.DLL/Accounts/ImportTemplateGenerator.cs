@@ -273,101 +273,114 @@ JV-002 has 2 lines: Dr 5100 (Expense), Cr 1110 (Cash)";
         {
             var html = new System.Text.StringBuilder();
 
-            // Build HTML with Excel XML namespace for better formatting
-            html.AppendLine("<?xml version=\"1.0\"?>");
-            html.AppendLine("<?mso-application progid=\"Excel.Sheet\"?>");
-            html.AppendLine("<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"");
-            html.AppendLine(" xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\">");
-
-            // Styles
-            html.AppendLine("<Styles>");
-
-            // Header style - Bold, background color, borders
-            html.AppendLine("<Style ss:ID=\"Header\">");
-            html.AppendLine(" <Font ss:Bold=\"1\" ss:Size=\"11\"/>");
-            html.AppendLine(" <Interior ss:Color=\"#4472C4\" ss:Pattern=\"Solid\"/>");
-            html.AppendLine(" <Font ss:Color=\"#FFFFFF\"/>");
-            html.AppendLine(" <Borders>");
-            html.AppendLine("  <Border ss:Position=\"Bottom\" ss:LineStyle=\"Continuous\" ss:Weight=\"1\"/>");
-            html.AppendLine(" </Borders>");
-            html.AppendLine("</Style>");
-
-            // Sample data style - Light gray background
-            html.AppendLine("<Style ss:ID=\"Sample\">");
-            html.AppendLine(" <Interior ss:Color=\"#E7E6E6\" ss:Pattern=\"Solid\"/>");
-            html.AppendLine("</Style>");
-
-            // Instruction style - Wrapped text
-            html.AppendLine("<Style ss:ID=\"Instruction\">");
-            html.AppendLine(" <Alignment ss:Vertical=\"Top\" ss:WrapText=\"1\"/>");
-            html.AppendLine(" <Font ss:Size=\"10\" ss:FontName=\"Courier New\"/>");
-            html.AppendLine("</Style>");
-
-            html.AppendLine("</Styles>");
+            // Build HTML-based Excel file (will open in Excel)
+            html.AppendLine("<html xmlns:o=\"urn:schemas-microsoft-com:office:office\"");
+            html.AppendLine("      xmlns:x=\"urn:schemas-microsoft-com:office:excel\"");
+            html.AppendLine("      xmlns=\"http://www.w3.org/TR/REC-html40\">");
+            html.AppendLine("<head>");
+            html.AppendLine("  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>");
+            html.AppendLine("  <!--[if gte mso 9]><xml>");
+            html.AppendLine("   <x:ExcelWorkbook>");
+            html.AppendLine("    <x:ExcelWorksheets>");
+            html.AppendLine($"     <x:ExcelWorksheet>");
+            html.AppendLine($"      <x:Name>{importType}_Data</x:Name>");
+            html.AppendLine("      <x:WorksheetOptions><x:Selected/></x:WorksheetOptions>");
+            html.AppendLine("     </x:ExcelWorksheet>");
+            html.AppendLine($"     <x:ExcelWorksheet>");
+            html.AppendLine($"      <x:Name>INSTRUCTIONS</x:Name>");
+            html.AppendLine("     </x:ExcelWorksheet>");
+            html.AppendLine("    </x:ExcelWorksheets>");
+            html.AppendLine("   </x:ExcelWorkbook>");
+            html.AppendLine("  </xml><![endif]-->");
+            html.AppendLine("  <style>");
+            html.AppendLine("    table { border-collapse: collapse; font-family: Calibri, sans-serif; font-size: 11pt; }");
+            html.AppendLine("    th { background-color: #4472C4; color: white; font-weight: bold; padding: 8px; border: 1px solid #ccc; text-align: left; }");
+            html.AppendLine("    td { padding: 6px; border: 1px solid #ddd; }");
+            html.AppendLine("    .sample { background-color: #E7E6E6; }");
+            html.AppendLine("    .description { font-size: 9pt; color: #666; font-style: italic; }");
+            html.AppendLine("    .instruction { font-family: 'Courier New', monospace; font-size: 10pt; white-space: pre-wrap; padding: 4px; }");
+            html.AppendLine("  </style>");
+            html.AppendLine("</head>");
+            html.AppendLine("<body>");
 
             // Data worksheet
-            html.AppendLine($"<Worksheet ss:Name=\"{importType}_Data\">");
-            html.AppendLine("<Table>");
-
-            // Set column widths
-            for (int i = 0; i < data.Columns.Count; i++)
-            {
-                html.AppendLine("<Column ss:Width=\"120\"/>");
-            }
+            html.AppendLine($"<!-- {importType}_Data Worksheet -->");
+            html.AppendLine("<table>");
 
             // Header row
-            html.AppendLine("<Row ss:Height=\"25\">");
+            html.AppendLine("<thead><tr>");
             foreach (DataColumn col in data.Columns)
             {
-                html.AppendLine($" <Cell ss:StyleID=\"Header\"><Data ss:Type=\"String\">{System.Security.SecurityElement.Escape(col.ColumnName)}</Data></Cell>");
+                html.AppendLine($"  <th>{HtmlEncode(col.ColumnName)}</th>");
             }
-            html.AppendLine("</Row>");
+            html.AppendLine("</tr></thead>");
 
             // Column description row
-            html.AppendLine("<Row>");
+            html.AppendLine("<tbody>");
+            html.AppendLine("<tr class=\"description\">");
             foreach (DataColumn col in data.Columns)
             {
                 string description = GetColumnDescription(col.ColumnName);
-                html.AppendLine($" <Cell><Data ss:Type=\"String\">{System.Security.SecurityElement.Escape(description)}</Data></Cell>");
+                html.AppendLine($"  <td>{HtmlEncode(description)}</td>");
             }
-            html.AppendLine("</Row>");
+            html.AppendLine("</tr>");
 
             // Sample data rows (highlighted)
             foreach (DataRow row in data.Rows)
             {
-                html.AppendLine("<Row>");
+                html.AppendLine("<tr class=\"sample\">");
                 foreach (var item in row.ItemArray)
                 {
                     string value = item?.ToString() ?? "";
-                    html.AppendLine($" <Cell ss:StyleID=\"Sample\"><Data ss:Type=\"String\">{System.Security.SecurityElement.Escape(value)}</Data></Cell>");
+                    html.AppendLine($"  <td>{HtmlEncode(value)}</td>");
                 }
-                html.AppendLine("</Row>");
+                html.AppendLine("</tr>");
             }
 
-            html.AppendLine("</Table>");
-            html.AppendLine("</Worksheet>");
+            // Add 10 empty rows for user data
+            for (int i = 0; i < 10; i++)
+            {
+                html.AppendLine("<tr>");
+                for (int j = 0; j < data.Columns.Count; j++)
+                {
+                    html.AppendLine("  <td></td>");
+                }
+                html.AppendLine("</tr>");
+            }
+
+            html.AppendLine("</tbody>");
+            html.AppendLine("</table>");
+
+            // Page break for next sheet
+            html.AppendLine("<br style=\"page-break-after: always; mso-break-type: section-break;\" />");
 
             // Instructions worksheet
-            html.AppendLine("<Worksheet ss:Name=\"INSTRUCTIONS\">");
-            html.AppendLine("<Table>");
-            html.AppendLine("<Column ss:Width=\"600\"/>");
+            html.AppendLine("<!-- INSTRUCTIONS Worksheet -->");
+            html.AppendLine("<table>");
+            html.AppendLine("<tr><th>IMPORT INSTRUCTIONS</th></tr>");
+            html.AppendLine("<tr><td class=\"instruction\">");
+            html.AppendLine(HtmlEncode(instructions).Replace("\n", "<br/>"));
+            html.AppendLine("</td></tr>");
+            html.AppendLine("</table>");
 
-            // Split instructions into lines
-            var instructionLines = instructions.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-            foreach (var line in instructionLines)
-            {
-                html.AppendLine("<Row ss:Height=\"18\">");
-                html.AppendLine($" <Cell ss:StyleID=\"Instruction\"><Data ss:Type=\"String\">{System.Security.SecurityElement.Escape(line)}</Data></Cell>");
-                html.AppendLine("</Row>");
-            }
-
-            html.AppendLine("</Table>");
-            html.AppendLine("</Worksheet>");
-
-            html.AppendLine("</Workbook>");
+            html.AppendLine("</body>");
+            html.AppendLine("</html>");
 
             // Write to file
             File.WriteAllText(filePath, html.ToString(), System.Text.Encoding.UTF8);
+        }
+
+        private static string HtmlEncode(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+
+            return text
+                .Replace("&", "&amp;")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;")
+                .Replace("\"", "&quot;")
+                .Replace("'", "&#39;");
         }
 
         private static string GetColumnDescription(string columnName)

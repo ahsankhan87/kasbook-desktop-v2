@@ -286,6 +286,182 @@ namespace POS.DLL.Accounts
             }
         }
 
+        /// <summary>
+        /// Bulk insert with progress reporting (for large datasets)
+        /// </summary>
+        public void BulkInsertWithProgress(DataTable dataTable, string tableName, 
+            Dictionary<string, string> columnMappings, 
+            Action<int, int> progressCallback,
+            int batchSize = 1000)
+        {
+            using (var connection = new SqlConnection(dbConnection.ConnectionString))
+            {
+                connection.Open();
+
+                using (var bulkCopy = new SqlBulkCopy(connection))
+                {
+                    bulkCopy.DestinationTableName = tableName;
+                    bulkCopy.BatchSize = batchSize;
+                    bulkCopy.BulkCopyTimeout = 600; // 10 minutes
+                    bulkCopy.NotifyAfter = batchSize;
+
+                    // Progress notification
+                    int totalRows = dataTable.Rows.Count;
+                    bulkCopy.SqlRowsCopied += (sender, e) =>
+                    {
+                        progressCallback?.Invoke((int)e.RowsCopied, totalRows);
+                    };
+
+                    if (columnMappings != null)
+                    {
+                        foreach (var mapping in columnMappings)
+                        {
+                            bulkCopy.ColumnMappings.Add(mapping.Key, mapping.Value);
+                        }
+                    }
+                    else
+                    {
+                        foreach (DataColumn column in dataTable.Columns)
+                        {
+                            bulkCopy.ColumnMappings.Add(column.ColumnName, column.ColumnName);
+                        }
+                    }
+
+                    bulkCopy.WriteToServer(dataTable);
+                    progressCallback?.Invoke(totalRows, totalRows); // Final callback
+                }
+            }
+        }
+
+        /// <summary>
+        /// Bulk insert journal vouchers with batch processing
+        /// </summary>
+        public int BulkInsertJournalVouchers(List<JournalVoucherGroup> vouchers, int sessionId, int userId, 
+            int branchId, Action<int, int> progressCallback = null)
+        {
+            if (vouchers == null || vouchers.Count == 0)
+                return 0;
+
+            int vouchersCreated = 0;
+            int totalVouchers = vouchers.Count;
+
+            using (var connection = new SqlConnection(dbConnection.ConnectionString))
+            {
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Process in batches
+                        const int batchSize = 100;
+                        for (int i = 0; i < vouchers.Count; i += batchSize)
+                        {
+                            var batch = vouchers.Skip(i).Take(batchSize).ToList();
+
+                            foreach (var voucher in batch)
+                            {
+                                // Insert header
+                                var headerId = InsertVoucherHeaderBatch(connection, transaction, voucher, userId, branchId);
+
+                                // Insert entries
+                                InsertVoucherEntriesBatch(connection, transaction, headerId, voucher.Entries, userId, branchId);
+
+                                // Link to import session
+                                LinkVoucherToSessionBatch(connection, transaction, sessionId, headerId);
+
+                                vouchersCreated++;
+
+                                // Report progress
+                                if (vouchersCreated % 10 == 0 || vouchersCreated == totalVouchers)
+                                {
+                                    progressCallback?.Invoke(vouchersCreated, totalVouchers);
+                                }
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+
+            return vouchersCreated;
+        }
+
+        private int InsertVoucherHeaderBatch(SqlConnection connection, SqlTransaction transaction, 
+            JournalVoucherGroup voucher, int userId, int branchId)
+        {
+            var query = @"
+                INSERT INTO acc_entries_header 
+                    (InvoiceNo, EntryDate, VoucherType, Narration, total_debit, total_credit,
+                     status, posted_by, posted_at, is_auto_posted, date_created, date_updated, user_id, branch_id)
+                VALUES 
+                    (@VoucherNo, @VoucherDate, 'JV', @Narration, @TotalDebit, @TotalCredit,
+                     'Posted', @UserId, GETDATE(), 1, GETDATE(), GETDATE(), @UserId, @BranchId);
+                SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+            using (var cmd = new SqlCommand(query, connection, transaction))
+            {
+                cmd.Parameters.AddWithValue("@VoucherNo", voucher.VoucherNo);
+                cmd.Parameters.AddWithValue("@VoucherDate", voucher.VoucherDate ?? DateTime.Today);
+                cmd.Parameters.AddWithValue("@Narration", voucher.Entries.FirstOrDefault()?.Narration ?? "Imported entry");
+                cmd.Parameters.AddWithValue("@TotalDebit", voucher.TotalDebit);
+                cmd.Parameters.AddWithValue("@TotalCredit", voucher.TotalCredit);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                cmd.Parameters.AddWithValue("@BranchId", branchId);
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        private void InsertVoucherEntriesBatch(SqlConnection connection, SqlTransaction transaction,
+            int headerId, List<JournalEntryImportRow> entries, int userId, int branchId)
+        {
+            foreach (var entry in entries)
+            {
+                var query = @"
+                    INSERT INTO acc_entries 
+                        (invoice_no, account_id, entry_date, debit, credit, description, 
+                         user_id, branch_id, date_created)
+                    SELECT @InvoiceNo, id, @EntryDate, @Debit, @Credit, @Description,
+                           @UserId, @BranchId, GETDATE()
+                    FROM acc_accounts
+                    WHERE code = @AccountCode";
+
+                using (var cmd = new SqlCommand(query, connection, transaction))
+                {
+                    cmd.Parameters.AddWithValue("@InvoiceNo", headerId.ToString());
+                    cmd.Parameters.AddWithValue("@AccountCode", entry.AccountCode);
+                    cmd.Parameters.AddWithValue("@EntryDate", entry.VoucherDate ?? DateTime.Today);
+                    cmd.Parameters.AddWithValue("@Debit", entry.DebitAmount);
+                    cmd.Parameters.AddWithValue("@Credit", entry.CreditAmount);
+                    cmd.Parameters.AddWithValue("@Description", entry.Narration ?? "");
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.Parameters.AddWithValue("@BranchId", branchId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void LinkVoucherToSessionBatch(SqlConnection connection, SqlTransaction transaction,
+            int sessionId, int voucherId)
+        {
+            var query = "INSERT INTO acc_import_vouchers (session_id, voucher_id) VALUES (@SessionId, @VoucherId)";
+
+            using (var cmd = new SqlCommand(query, connection, transaction))
+            {
+                cmd.Parameters.AddWithValue("@SessionId", sessionId);
+                cmd.Parameters.AddWithValue("@VoucherId", voucherId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         #endregion
 
         #region Account Operations

@@ -19,6 +19,15 @@ namespace pos
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
 
+        // Account IDs and invoice tracking for opening balance journal entries
+        public int cash_account_id = 0;
+        public int sales_account_id = 0;
+        public int receivable_account_id = 0;
+        public int sales_discount_acc_id = 0;
+        public int opening_balance_equity_acc_id = 0;
+        public int payable_account_id = 0;
+        private string _invoice_no = string.Empty;
+
         public frm_addCustomer()
         {
             InitializeComponent();
@@ -38,7 +47,7 @@ namespace pos
                 _currentUser = AppSecurityContext.User;
             }
         }
-        
+
         public void frm_addCustomer_Load(object sender, EventArgs e)
         {
             // Apply professional theme
@@ -47,8 +56,10 @@ namespace pos
 
             txt_search.Focus();
             this.ActiveControl = txt_search;
+            Get_AccountID_From_Company();
             get_accounts_dropdownlist();
             GetCustomerCode();
+            GetMAXInvoiceNo();
 
             // Disable/hide actions based on DB-backed permissions
             //btn_save.Enabled = _auth.HasPermission(_currentUser, Permissions.Customers_Edit);
@@ -143,8 +154,8 @@ namespace pos
             };
         }
 
-       
-        
+
+
         private void GetCustomerCode()
         {
             // Customer code should not be edited for existing customers
@@ -161,7 +172,7 @@ namespace pos
             {
                 // ignore auto-code errors; user can still save and DLL will generate if empty
             }
-            
+
         }
 
         public void get_accounts_dropdownlist()
@@ -233,6 +244,100 @@ namespace pos
             emptyRow[1] = "Select Account";              // Set Column Value
             dt.Rows.InsertAt(emptyRow, 0);
             return dt;
+        }
+
+        private void Get_AccountID_From_Company()
+        {
+            GeneralBLL objBLL = new GeneralBLL();
+            String keyword = "TOP 1 *";
+            String table = "pos_companies";
+            DataTable companies_dt = objBLL.GetRecord(keyword, table);
+            foreach (DataRow dr in companies_dt.Rows)
+            {
+                cash_account_id = (int)dr["cash_acc_id"];
+                sales_account_id = (int)dr["sales_acc_id"];
+                receivable_account_id = (int)dr["receivable_acc_id"];
+                sales_discount_acc_id = (int)dr["sales_discount_acc_id"];
+
+                // Load opening balance equity account if available
+                try
+                {
+                    if (companies_dt.Columns.Contains("opening_balance_equity_acc_id") && dr["opening_balance_equity_acc_id"] != DBNull.Value)
+                        opening_balance_equity_acc_id = Convert.ToInt32(dr["opening_balance_equity_acc_id"]);
+                    else
+                        opening_balance_equity_acc_id = GetOpeningBalanceEquityAccountId();
+                }
+                catch
+                {
+                    opening_balance_equity_acc_id = GetOpeningBalanceEquityAccountId();
+                }
+
+                try
+                {
+                    if (companies_dt.Columns.Contains("payable_acc_id") && dr["payable_acc_id"] != DBNull.Value)
+                        payable_account_id = Convert.ToInt32(dr["payable_acc_id"]);
+                }
+                catch
+                {
+                    payable_account_id = 0;
+                }
+            }
+        }
+
+        private int GetOpeningBalanceEquityAccountId()
+        {
+            try
+            {
+                GeneralBLL objBLL = new GeneralBLL();
+                DataTable dt = objBLL.GetRecord("id, name", "acc_accounts");
+                foreach (DataRow row in dt.Rows)
+                {
+                    string accountName = row["name"].ToString().Trim().ToLower();
+                    if (accountName.Contains("opening balance") ||
+                        accountName.Contains("retained earnings") ||
+                        accountName.Contains("equity") ||
+                        accountName == "owner's equity" ||
+                        accountName == "capital")
+                    {
+                        return Convert.ToInt32(row["id"]);
+                    }
+                }
+                // If no equity account found, use cash account as fallback
+                return cash_account_id;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        private void GetMAXInvoiceNo()
+        {
+            JournalsBLL journalsBLL_obj = new JournalsBLL();
+            _invoice_no = journalsBLL_obj.GetMaxInvoiceNo();
+        }
+
+        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
+            string description, int customer_id, int supplier_id, int entry_id, int bank_id, string payment_ref_invoice_no = "")
+        {
+            int journal_id = 0;
+            JournalsModal journalsModal_obj = new JournalsModal();
+            JournalsBLL journalsObj = new JournalsBLL();
+
+            journalsModal_obj.invoice_no = invoice_no;
+            journalsModal_obj.entry_date = date;
+            journalsModal_obj.debit = debit;
+            journalsModal_obj.credit = credit;
+            journalsModal_obj.account_id = account_id;
+            journalsModal_obj.description = description;
+            journalsModal_obj.customer_id = customer_id;
+            journalsModal_obj.supplier_id = supplier_id;
+            journalsModal_obj.bank_id = bank_id;
+            journalsModal_obj.entry_id = entry_id;
+            journalsModal_obj.payment_ref_invoice_no = payment_ref_invoice_no;
+
+            journal_id = journalsObj.Insert(journalsModal_obj);
+            return journal_id;
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -352,6 +457,24 @@ namespace pos
                     int result = objBLL.Insert(info);
                     if (result > 0)
                     {
+                        // Post opening balance journal entries if opening balance is not zero
+                        if (openingBalance != 0)
+                        {
+                            try
+                            {
+                                PostOpeningBalanceJournalEntries(result, openingBalance, info.customer_code, ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim());
+                            }
+                            catch (Exception journalEx)
+                            {
+                                UiMessages.ShowWarning(
+                                    "Customer created but opening balance journal entry failed: " + journalEx.Message,
+                                    "تم إنشاء العميل ولكن فشل قيد الرصيد الافتتاحي: " + journalEx.Message,
+                                    "Warning",
+                                    "تحذير"
+                                );
+                            }
+                        }
+
                         UiMessages.ShowInfo(
                             "Customer has been created successfully.",
                             "تم إنشاء العميل بنجاح.",
@@ -365,7 +488,8 @@ namespace pos
                             + " | Name=" + ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim()
                             + " | VAT=" + (info.vat_no ?? "")
                             + " | Contact=" + (info.contact_no ?? "")
-                            + " | GLAccountId=" + info.GLAccountID,
+                            + " | GLAccountId=" + info.GLAccountID
+                            + " | OpeningBalance=" + openingBalance.ToString("N2"),
                             UsersModal.logged_in_userid,
                             UsersModal.logged_in_branch_id);
                         clear_all();
@@ -423,11 +547,11 @@ namespace pos
             {
                 btn_refresh.PerformClick();
             }
-            if(e.KeyData == Keys.F9)
+            if (e.KeyData == Keys.F9)
             {
                 txt_search.Focus();
             }
-            
+
         }
 
         private void clear_all()
@@ -493,7 +617,7 @@ namespace pos
                 }
 
                 var customerBLL = new CustomerBLL();
-                if(customerBLL.IsCustomerCodeExists(txt_customer_code.Text.Trim(), int.Parse(txt_id.Text)))
+                if (customerBLL.IsCustomerCodeExists(txt_customer_code.Text.Trim(), int.Parse(txt_id.Text)))
                 {
                     UiMessages.ShowWarning(
                         "Customer code already exists.",
@@ -569,9 +693,31 @@ namespace pos
                     CustomerBLL objBLL = new CustomerBLL();
                     info.id = int.Parse(txt_id.Text);
 
+                    // Get previous opening balance to check if it changed
+                    decimal previousOpeningBalance = objBLL.GetCustomerOpeningBalance(info.id);
+
                     int result = objBLL.Update(info);
                     if (result > 0)
                     {
+                        // Handle opening balance change
+                        if (openingBalance != previousOpeningBalance)
+                        {
+                            try
+                            {
+                                decimal balanceChange = openingBalance - previousOpeningBalance;
+                                PostOpeningBalanceAdjustmentJournalEntries(info.id, balanceChange, info.customer_code, ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim());
+                            }
+                            catch (Exception journalEx)
+                            {
+                                UiMessages.ShowWarning(
+                                    "Customer updated but opening balance adjustment journal entry failed: " + journalEx.Message,
+                                    "تم تحديث العميل ولكن فشل قيد تعديل الرصيد الافتتاحي: " + journalEx.Message,
+                                    "Warning",
+                                    "تحذير"
+                                );
+                            }
+                        }
+
                         UiMessages.ShowInfo(
                             "Customer has been updated successfully.",
                             "تم تحديث العميل بنجاح.",
@@ -586,7 +732,9 @@ namespace pos
                             + " | Name=" + ((info.first_name ?? "") + " " + (info.last_name ?? "")).Trim()
                             + " | VAT=" + (info.vat_no ?? "")
                             + " | Contact=" + (info.contact_no ?? "")
-                            + " | GLAccountId=" + info.GLAccountID,
+                            + " | GLAccountId=" + info.GLAccountID
+                            + " | OpeningBalance=" + openingBalance.ToString("N2")
+                            + " | PreviousOpeningBalance=" + previousOpeningBalance.ToString("N2"),
                             UsersModal.logged_in_userid,
                             UsersModal.logged_in_branch_id);
                         clear_all();
@@ -1086,6 +1234,98 @@ namespace pos
                 return string.Empty;
 
             return description.Substring(startIndex, endIndex - startIndex).Trim();
+        }
+
+        private void PostOpeningBalanceJournalEntries(int customerId, decimal openingBalance, string customerCode, string customerName)
+        {
+            if (openingBalance == 0 || opening_balance_equity_acc_id == 0)
+                return;
+
+            GetMAXInvoiceNo();
+            if (string.IsNullOrWhiteSpace(_invoice_no))
+                throw new Exception("Failed to generate invoice number for opening balance entry.");
+
+            DateTime entryDate = DateTime.Now.Date;
+            bool isArabic = IsArabicEnvironment();
+            string description = isArabic
+                ? $"رصيد افتتاحي للعميل {customerName} (كود: {customerCode})"
+                : $"Opening balance for customer {customerName} (Code: {customerCode})";
+
+            if (openingBalance > 0)
+            {
+                // Customer owes us money
+                // Debit: Accounts Receivable (increase asset)
+                int entry_id = Insert_Journal_entry(_invoice_no, receivable_account_id, (double)openingBalance, 0, entryDate, description, 0, 0, 0, 0);
+
+                // Credit: Opening Balance Equity (increase equity)
+                Insert_Journal_entry(_invoice_no, opening_balance_equity_acc_id, 0, (double)openingBalance, entryDate, description, 0, 0, 0, 0);
+
+                // Add entry into customer ledger (debit customer account)
+                Insert_Journal_entry(_invoice_no, receivable_account_id, (double)openingBalance, 0, entryDate, description, customerId, 0, entry_id, 0, _invoice_no);
+            }
+            else if (openingBalance < 0)
+            {
+                // We owe customer money (credit balance)
+                decimal positiveAmount = Math.Abs(openingBalance);
+
+                // Debit: Opening Balance Equity (decrease equity)
+                int entry_id = Insert_Journal_entry(_invoice_no, opening_balance_equity_acc_id, (double)positiveAmount, 0, entryDate, description, 0, 0, 0, 0);
+
+                // Credit: Accounts Receivable (decrease asset)
+                Insert_Journal_entry(_invoice_no, receivable_account_id, 0, (double)positiveAmount, entryDate, description, 0, 0, 0, 0);
+
+                // Add entry into customer ledger (credit customer account)
+                Insert_Journal_entry(_invoice_no, opening_balance_equity_acc_id, 0, (double)positiveAmount, entryDate, description, customerId, 0, entry_id, 0, _invoice_no);
+            }
+        }
+
+        private void PostOpeningBalanceAdjustmentJournalEntries(int customerId, decimal balanceChange, string customerCode, string customerName)
+        {
+            if (balanceChange == 0 || opening_balance_equity_acc_id == 0)
+                return;
+
+            GetMAXInvoiceNo();
+            if (string.IsNullOrWhiteSpace(_invoice_no))
+                throw new Exception("Failed to generate invoice number for opening balance adjustment.");
+
+            DateTime entryDate = DateTime.Now.Date;
+            bool isArabic = IsArabicEnvironment();
+            string description = isArabic
+                ? $"تعديل الرصيد الافتتاحي للعميل {customerName} (كود: {customerCode})"
+                : $"Opening balance adjustment for customer {customerName} (Code: {customerCode})";
+
+            if (balanceChange > 0)
+            {
+                // Increase in opening balance (customer owes more)
+                // Debit: Accounts Receivable
+                int entry_id = Insert_Journal_entry(_invoice_no, receivable_account_id, (double)balanceChange, 0, entryDate, description, 0, 0, 0, 0);
+
+                // Credit: Opening Balance Equity
+                Insert_Journal_entry(_invoice_no, opening_balance_equity_acc_id, 0, (double)balanceChange, entryDate, description, 0, 0, 0, 0);
+
+                // Add entry into customer ledger
+                Insert_Journal_entry(_invoice_no, receivable_account_id, (double)balanceChange, 0, entryDate, description, customerId, 0, entry_id, 0, _invoice_no);
+            }
+            else if (balanceChange < 0)
+            {
+                // Decrease in opening balance
+                decimal positiveAmount = Math.Abs(balanceChange);
+
+                // Debit: Opening Balance Equity
+                int entry_id = Insert_Journal_entry(_invoice_no, opening_balance_equity_acc_id, (double)positiveAmount, 0, entryDate, description, 0, 0, 0, 0);
+
+                // Credit: Accounts Receivable
+                Insert_Journal_entry(_invoice_no, receivable_account_id, 0, (double)positiveAmount, entryDate, description, 0, 0, 0, 0);
+
+                // Add entry into customer ledger
+                Insert_Journal_entry(_invoice_no, opening_balance_equity_acc_id, 0, (double)positiveAmount, entryDate, description, customerId, 0, entry_id, 0, _invoice_no);
+            }
+        }
+
+        private static bool IsArabicEnvironment()
+        {
+            string lang = UsersModal.logged_in_lang ?? string.Empty;
+            return lang.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

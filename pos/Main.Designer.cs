@@ -83,6 +83,7 @@
             this.discountSchemesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockSuppressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockCheckAndAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryValuationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,6 +145,8 @@
             this.budgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allocationRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.departmentalPLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.budgetVsActualReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailySaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,7 +207,8 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryValuationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -421,7 +425,9 @@
             this.taxesVATToolStripMenuItem1,
             this.discountSchemesToolStripMenuItem,
             this.stockSuppressionToolStripMenuItem,
-            this.stockCheckAndAdjustmentToolStripMenuItem});
+            this.stockCheckAndAdjustmentToolStripMenuItem,
+            this.inventoryValuationToolStripMenuItem,
+            this.inventoryValuationSettingsToolStripMenuItem});
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
             resources.ApplyResources(this.itemsToolStripMenuItem, "itemsToolStripMenuItem");
             // 
@@ -589,6 +595,12 @@
             this.stockCheckAndAdjustmentToolStripMenuItem.Name = "stockCheckAndAdjustmentToolStripMenuItem";
             resources.ApplyResources(this.stockCheckAndAdjustmentToolStripMenuItem, "stockCheckAndAdjustmentToolStripMenuItem");
             this.stockCheckAndAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.stockCheckAndAdjustmentToolStripMenuItem_Click);
+            // 
+            // inventoryValuationToolStripMenuItem
+            // 
+            this.inventoryValuationToolStripMenuItem.Name = "inventoryValuationToolStripMenuItem";
+            resources.ApplyResources(this.inventoryValuationToolStripMenuItem, "inventoryValuationToolStripMenuItem");
+            this.inventoryValuationToolStripMenuItem.Click += new System.EventHandler(this.inventoryValuationToolStripMenuItem_Click);
             // 
             // pOSToolStripMenuItem
             // 
@@ -770,7 +782,8 @@
             this.salesTaxSummaryToolStripMenuItem,
             this.taxTrialBalanceToolStripMenuItem,
             this.costCentersToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.importDataToolStripMenuItem});
             this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
             resources.ApplyResources(this.accountsToolStripMenuItem, "accountsToolStripMenuItem");
             // 
@@ -976,7 +989,8 @@
             this.hierarchyToolStripMenuItem,
             this.budgetToolStripMenuItem,
             this.allocationRulesToolStripMenuItem,
-            this.departmentalPLToolStripMenuItem});
+            this.departmentalPLToolStripMenuItem,
+            this.budgetVsActualReportToolStripMenuItem});
             this.costCentersToolStripMenuItem.Name = "costCentersToolStripMenuItem";
             resources.ApplyResources(this.costCentersToolStripMenuItem, "costCentersToolStripMenuItem");
             // 
@@ -1009,6 +1023,18 @@
             this.departmentalPLToolStripMenuItem.Name = "departmentalPLToolStripMenuItem";
             resources.ApplyResources(this.departmentalPLToolStripMenuItem, "departmentalPLToolStripMenuItem");
             this.departmentalPLToolStripMenuItem.Click += new System.EventHandler(this.departmentalPLToolStripMenuItem_Click);
+            // 
+            // budgetVsActualReportToolStripMenuItem
+            // 
+            this.budgetVsActualReportToolStripMenuItem.Name = "budgetVsActualReportToolStripMenuItem";
+            resources.ApplyResources(this.budgetVsActualReportToolStripMenuItem, "budgetVsActualReportToolStripMenuItem");
+            this.budgetVsActualReportToolStripMenuItem.Click += new System.EventHandler(this.budgetVsActualReportToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -1427,11 +1453,17 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // settingsToolStripMenuItem
+            // importDataToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.importDataToolStripMenuItem.Name = "importDataToolStripMenuItem";
+            resources.ApplyResources(this.importDataToolStripMenuItem, "importDataToolStripMenuItem");
+            this.importDataToolStripMenuItem.Click += new System.EventHandler(this.importDataToolStripMenuItem_Click);
+            // 
+            // inventoryValuationSettingsToolStripMenuItem
+            // 
+            this.inventoryValuationSettingsToolStripMenuItem.Name = "inventoryValuationSettingsToolStripMenuItem";
+            resources.ApplyResources(this.inventoryValuationSettingsToolStripMenuItem, "inventoryValuationSettingsToolStripMenuItem");
+            this.inventoryValuationSettingsToolStripMenuItem.Click += new System.EventHandler(this.inventoryValuationSettingsToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1637,5 +1669,9 @@
         private System.Windows.Forms.ToolStripMenuItem allocationRulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem departmentalPLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem budgetVsActualReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryValuationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryValuationSettingsToolStripMenuItem;
     }
 }
