@@ -53,6 +53,7 @@
     <Compile Include="Accounts\AccountingSettingModel.cs" />
     <Compile Include="Accounts\SettingKeys.cs" />
     <Compile Include="Accounts\AccountLookupItem.cs" />
+    <Compile Include="FixedAssets\FixedAssetModels.cs" />
     <Compile Include="Accounts\FinancialPeriodModal.cs" />
     <Compile Include="Accounts\VoucherFilter.cs" />
     <Compile Include="Inventory\InventoryCostingModels.cs" />

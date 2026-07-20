@@ -1,8 +1,10 @@
 ﻿using DGVPrinterHelper;
 using POS.BLL;
 using POS.Core;
+using pos.Reports.Common;
 using pos.Security.Authorization;
 using pos.UI;
+using pos.UI.Busy;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,6 +32,7 @@ namespace pos
         private ContextMenuStrip _treeMenu;
         private ImageList _treeImages;
         private DataGridView _printGrid;
+        private ToolStripButton _btnExportExcel;
         private Timer _searchTimer;
         private Font _boldFont;
         private Tuple<DateTime, DateTime> _currentFiscalYearDates; // Cached fiscal-year (from_date, to_date)
@@ -56,6 +59,7 @@ namespace pos
             _btnExpandAll.Click += (s, e) => _tree.ExpandAll();
             _btnCollapseAll.Click += (s, e) => _tree.CollapseAll();
             _btnPrint.Click += (s, e) => PrintCoa();
+            if (_btnExportExcel != null) _btnExportExcel.Click += (s, e) => ExportCoaToExcel();
             _btnSetupStandard.Click += (s, e) => SetupStandardChartOfAccounts();
             _btnEditSelected.Click += (s, e) => EditSelectedNode();
             _btnRefresh.Click += (s, e) => ReloadAll();
@@ -87,7 +91,25 @@ namespace pos
             _treeMenu.Items.Add(new ToolStripSeparator());
             _treeMenu.Items.Add("View Ledger", null, (s, e) => ViewLedgerForSelectedNode());
             _treeMenu.Items.Add("View Transactions", null, (s, e) => ViewTransactionsForSelectedNode());
+            _treeMenu.Items.Add(new ToolStripSeparator());
+            _treeMenu.Items.Add("Export to Excel", null, (s, e) => ExportCoaToExcel());
             _tree.ContextMenuStrip = _treeMenu;
+
+            _btnExportExcel = new ToolStripButton
+            {
+                DisplayStyle = ToolStripItemDisplayStyle.Text,
+                ForeColor = Color.White,
+                Text = "Export Excel"
+            };
+
+            if (_toolStrip != null)
+            {
+                int printIndex = _toolStrip.Items.IndexOf(_btnPrint);
+                if (printIndex >= 0)
+                    _toolStrip.Items.Insert(printIndex + 1, _btnExportExcel);
+                else
+                    _toolStrip.Items.Add(_btnExportExcel);
+            }
         }
 
         
@@ -815,6 +837,20 @@ namespace pos
             printer.PrintPreviewDataGridView(_printGrid);
         }
 
+        private void ExportCoaToExcel()
+        {
+            BuildPrintGrid();
+            var dt = _printGrid.DataSource as DataTable;
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                UiMessages.ShowInfo("Export", "No COA data to export.");
+                return;
+            }
+
+            var defaultFileName = "ChartOfAccounts_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            ExcelExportHelper.ExportDataTableToExcel(dt, defaultFileName, this);
+        }
+
         private void BuildPrintGrid()
         {
             var dt = new DataTable();
@@ -864,40 +900,117 @@ namespace pos
             if (MessageBox.Show("This will add common Saudi COA entries if they do not already exist. Continue?", "Setup Standard COA", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
-            int assetsType = FindAccountTypeId("asset");
-            int liabilitiesType = FindAccountTypeId("liabil");
-            int equityType = FindAccountTypeId("equity");
-            int incomeType = FindAccountTypeId("income");
-            int expenseType = FindAccountTypeId("expense");
+            using (BusyScope.Show(this, UiMessages.T("Setting up standard chart of accounts...", "جاري إعداد دليل الحسابات القياسي...")))
+            {
+                int assetsType = FindAccountTypeId("asset");
+                int liabilitiesType = FindAccountTypeId("liabil");
+                int equityType = FindAccountTypeId("equity");
+                int incomeType = FindAccountTypeId("income");
+                int expenseType = FindAccountTypeId("expense");
 
-            int assets = EnsureGroup(0, "1000", "Assets", assetsType, "Top-level asset accounts");
-            int liabilities = EnsureGroup(0, "2000", "Liabilities", liabilitiesType, "Top-level liability accounts");
-            int equity = EnsureGroup(0, "3000", "Equity", equityType, "Top-level equity accounts");
-            int income = EnsureGroup(0, "4000", "Income", incomeType, "Top-level income accounts");
-            int expenses = EnsureGroup(0, "5000", "Expenses", expenseType, "Top-level expense accounts");
+                int assets = EnsureGroup(0, "1000", "Assets", "الأصول", assetsType, "Top-level asset accounts");
+                int liabilities = EnsureGroup(0, "2000", "Liabilities", "الخصوم", liabilitiesType, "Top-level liability accounts");
+                int equity = EnsureGroup(0, "3000", "Equity", "حقوق الملكية", equityType, "Top-level equity accounts");
+                int income = EnsureGroup(0, "4000", "Income", "الإيرادات", incomeType, "Top-level income accounts");
+                int expenses = EnsureGroup(0, "5000", "Expenses", "المصروفات", expenseType, "Top-level expense accounts");
 
-            int currentAssets = EnsureGroup(assets, "1100", "Current Assets", assetsType, "Current assets");
-            int fixedAssets = EnsureGroup(assets, "1200", "Fixed Assets", assetsType, "Fixed assets");
-            int currentLiabilities = EnsureGroup(liabilities, "2100", "Current Liabilities", liabilitiesType, "Current liabilities");
-            int retainedEarnings = EnsureGroup(equity, "3100", "Capital", equityType, "Owner's equity / capital");
-            int sales = EnsureGroup(income, "4100", "Sales", incomeType, "Revenue accounts");
-            int operatingExpenses = EnsureGroup(expenses, "5100", "Operating Expenses", expenseType, "Operating expense accounts");
+                int currentAssets = EnsureGroup(assets, "1100", "Current Assets", "الأصول المتداولة", assetsType, "Current assets");
+                int fixedAssets = EnsureGroup(assets, "1200", "Fixed Assets", "الأصول الثابتة", assetsType, "Fixed assets");
+                int currentLiabilities = EnsureGroup(liabilities, "2100", "Current Liabilities", "الخصوم المتداولة", liabilitiesType, "Current liabilities");
+                int longTermLiabilities = EnsureGroup(liabilities, "2200", "Long Term Liabilities", "الخصوم طويلة الأجل", liabilitiesType, "Long term liabilities");
+                int capital = EnsureGroup(equity, "3100", "Capital", "رأس المال", equityType, "Owner's equity / capital");
+                int retainedEarnings = EnsureGroup(equity, "3200", "Retained Earnings", "الأرباح المبقاة", equityType, "Retained earnings");
+                int sales = EnsureGroup(income, "4100", "Sales", "المبيعات", incomeType, "Revenue accounts");
+                int otherIncome = EnsureGroup(income, "4200", "Other Income", "إيرادات أخرى", incomeType, "Other income accounts");
+                int costOfSales = EnsureGroup(expenses, "5100", "Cost of Sales", "تكلفة المبيعات", expenseType, "Cost of goods sold accounts");
+                int operatingExpenses = EnsureGroup(expenses, "5200", "Operating Expenses", "المصروفات التشغيلية", expenseType, "Operating expense accounts");
 
-            EnsureAccount(currentAssets, "1110", "Cash in Hand", "", "Cash on hand");
-            EnsureAccount(currentAssets, "1120", "Bank Account", "", "Main bank account");
-            EnsureAccount(currentLiabilities, "2110", "Accounts Payable", "", "Trade payables");
-            EnsureAccount(retainedEarnings, "3110", "Owner Capital", "", "Owner capital");
-            EnsureAccount(sales, "4110", "Sales Revenue", "", "Sales revenue");
-            EnsureAccount(operatingExpenses, "5110", "Utilities Expense", "", "Utility expenses");
-            EnsureAccount(operatingExpenses, "5120", "Rent Expense", "", "Rent expenses");
+                int cashAndBanks = EnsureGroup(currentAssets, "1110", "Cash and Banks", "النقدية والبنوك", assetsType, "Cash and bank balances");
+                int receivables = EnsureGroup(currentAssets, "1130", "Receivables", "الذمم المدينة", assetsType, "Customer and employee receivables");
+                int inventory = EnsureGroup(currentAssets, "1150", "Inventory", "المخزون", assetsType, "Inventory accounts");
+                int taxAssets = EnsureGroup(currentAssets, "1170", "Tax Assets", "الأصول الضريبية", assetsType, "Recoverable tax balances");
+                int prepayments = EnsureGroup(currentAssets, "1180", "Prepayments", "المصروفات المقدمة", assetsType, "Prepaid expense balances");
 
-            ReloadAll();
+                int propertyPlantEquipment = EnsureGroup(fixedAssets, "1210", "Property, Plant and Equipment", "الممتلكات والآلات والمعدات", assetsType, "Fixed asset cost accounts");
+                int accumulatedDepreciation = EnsureGroup(fixedAssets, "1290", "Accumulated Depreciation", "مجمع الإهلاك", assetsType, "Accumulated depreciation accounts");
+
+                int payables = EnsureGroup(currentLiabilities, "2110", "Payables", "الذمم الدائنة", liabilitiesType, "Trade and accrual payables");
+                int taxLiabilities = EnsureGroup(currentLiabilities, "2130", "Tax Liabilities", "الالتزامات الضريبية", liabilitiesType, "VAT and tax payable accounts");
+                int shortTermLoans = EnsureGroup(currentLiabilities, "2140", "Short Term Loans", "قروض قصيرة الأجل", liabilitiesType, "Short term borrowings");
+
+                EnsureAccount(cashAndBanks, "1111", "Cash in Hand", "نقد في الصندوق", "Cash on hand");
+                EnsureAccount(cashAndBanks, "1112", "Petty Cash", "عهدة نثرية", "Petty cash balance");
+                EnsureAccount(cashAndBanks, "1120", "Bank Account", "الحساب البنكي", "Main bank account");
+                EnsureAccount(cashAndBanks, "1121", "Current Bank Account", "الحساب البنكي الجاري", "Current account with bank");
+                EnsureAccount(cashAndBanks, "1122", "Savings Bank Account", "حساب التوفير البنكي", "Savings account with bank");
+
+                EnsureAccount(receivables, "1131", "Accounts Receivable", "الحسابات المدينة", "Trade receivables from customers");
+                EnsureAccount(receivables, "1132", "Employee Receivable", "ذمم الموظفين المدينة", "Receivables from employees");
+                EnsureAccount(receivables, "1133", "Advance to Supplier", "دفعات مقدمة للموردين", "Advances paid to suppliers");
+
+                EnsureAccount(inventory, "1151", "Inventory Asset", "أصل المخزون", "Inventory on hand");
+                EnsureAccount(inventory, "1152", "Goods in Transit", "بضاعة بالطريق", "Inventory in transit");
+
+                EnsureAccount(taxAssets, "1171", "VAT Receivable", "ضريبة القيمة المضافة المستردة", "Recoverable input VAT");
+                EnsureAccount(prepayments, "1181", "Prepaid Rent", "إيجار مدفوع مقدما", "Rent paid in advance");
+                EnsureAccount(prepayments, "1182", "Prepaid Insurance", "تأمين مدفوع مقدما", "Insurance paid in advance");
+
+                EnsureAccount(propertyPlantEquipment, "1211", "Furniture and Fixtures", "الأثاث والتركيبات", "Furniture and fixture assets");
+                EnsureAccount(propertyPlantEquipment, "1212", "Office Equipment", "المعدات المكتبية", "Office equipment assets");
+                EnsureAccount(propertyPlantEquipment, "1213", "Computers and POS Equipment", "أجهزة الكمبيوتر ونقاط البيع", "Computer and POS hardware assets");
+                EnsureAccount(propertyPlantEquipment, "1214", "Vehicles", "المركبات", "Vehicle assets");
+
+                EnsureAccount(accumulatedDepreciation, "1291", "Accumulated Depreciation - Furniture", "مجمع إهلاك الأثاث", "Accumulated depreciation for furniture");
+                EnsureAccount(accumulatedDepreciation, "1292", "Accumulated Depreciation - Equipment", "مجمع إهلاك المعدات", "Accumulated depreciation for equipment");
+                EnsureAccount(accumulatedDepreciation, "1293", "Accumulated Depreciation - Vehicles", "مجمع إهلاك المركبات", "Accumulated depreciation for vehicles");
+
+                EnsureAccount(payables, "2111", "Accounts Payable", "الحسابات الدائنة", "Trade payables");
+                EnsureAccount(payables, "2112", "Accrued Expenses", "مصروفات مستحقة", "Accrued operating expenses");
+                EnsureAccount(payables, "2113", "Customer Advances", "دفعات مقدمة من العملاء", "Advances received from customers");
+
+                EnsureAccount(taxLiabilities, "2131", "VAT Payable", "ضريبة القيمة المضافة المستحقة", "Output VAT payable");
+                EnsureAccount(shortTermLoans, "2141", "Bank Overdraft", "سحب على المكشوف", "Bank overdraft balance");
+                EnsureAccount(shortTermLoans, "2142", "Short Term Loan", "قرض قصير الأجل", "Short term loan balance");
+                EnsureAccount(longTermLiabilities, "2210", "Long Term Loan", "قرض طويل الأجل", "Long term borrowing");
+
+                EnsureAccount(capital, "3110", "Owner Capital", "رأس مال المالك", "Owner capital");
+                EnsureAccount(capital, "3120", "Owner Drawings", "مسحوبات المالك", "Owner withdrawals");
+                EnsureAccount(retainedEarnings, "3210", "Retained Earnings", "الأرباح المبقاة", "Accumulated retained earnings");
+                EnsureAccount(retainedEarnings, "3220", "Current Year Earnings", "أرباح السنة الحالية", "Current year profit and loss");
+
+                EnsureAccount(sales, "4110", "Sales Revenue", "إيراد المبيعات", "Sales revenue");
+                EnsureAccount(sales, "4120", "Sales Returns", "مردودات المبيعات", "Sales returns and allowances");
+                EnsureAccount(sales, "4130", "Sales Discounts", "خصومات المبيعات", "Discounts allowed on sales");
+                EnsureAccount(otherIncome, "4210", "Other Income", "إيرادات أخرى", "Miscellaneous income");
+                EnsureAccount(otherIncome, "4220", "Commission Income", "إيرادات العمولة", "Commission earned");
+
+                EnsureAccount(costOfSales, "5110", "Cost of Goods Sold", "تكلفة البضاعة المباعة", "Cost of goods sold");
+                EnsureAccount(costOfSales, "5120", "Purchase Returns", "مردودات المشتريات", "Returns to suppliers");
+                EnsureAccount(costOfSales, "5130", "Inventory Adjustment", "تسوية المخزون", "Inventory shrinkage and adjustments");
+
+                EnsureAccount(operatingExpenses, "5210", "Utilities Expense", "مصروف المرافق", "Utility expenses");
+                EnsureAccount(operatingExpenses, "5220", "Rent Expense", "مصروف الإيجار", "Rent expenses");
+                EnsureAccount(operatingExpenses, "5230", "Salaries Expense", "مصروف الرواتب", "Salaries and wages");
+                EnsureAccount(operatingExpenses, "5240", "Marketing Expense", "مصروف التسويق", "Advertising and marketing");
+                EnsureAccount(operatingExpenses, "5250", "Bank Charges", "مصاريف بنكية", "Bank charges and fees");
+                EnsureAccount(operatingExpenses, "5260", "Repairs and Maintenance", "صيانة وإصلاح", "Repairs and maintenance expense");
+                EnsureAccount(operatingExpenses, "5270", "Depreciation Expense", "مصروف الإهلاك", "Depreciation expense");
+                EnsureAccount(operatingExpenses, "5280", "Telephone and Internet Expense", "مصروف الهاتف والإنترنت", "Communication expenses");
+                EnsureAccount(operatingExpenses, "5290", "Stationery Expense", "مصروف القرطاسية", "Stationery and office supplies");
+
+                ReloadAll();
+            }
         }
 
-        private int EnsureGroup(int parentId, string code, string name, int accountTypeId, string description)
+        private int EnsureGroup(int parentId, string code, string name, string name2, int accountTypeId, string description)
         {
             int existing = FindGroupIdByCode(code);
-            if (existing > 0) return existing;
+            string resolvedName2 = string.IsNullOrWhiteSpace(name2) ? name : name2;
+            if (existing > 0)
+            {
+                _generalBll.UpdateOrDeleteRecord("acc_groups", "name_2 = '" + Escape(resolvedName2) + "'", "id = " + existing);
+                return existing;
+            }
 
             var info = new GroupsModal
             {
@@ -905,7 +1018,7 @@ namespace pos
                 account_type_id = accountTypeId,
                 code = code,
                 name = name,
-                name_2 = name,
+                name_2 = resolvedName2,
                 description = description
             };
             return _groupsBll.Insert(info);
@@ -914,14 +1027,19 @@ namespace pos
         private int EnsureAccount(int groupId, string code, string name, string name2, string description)
         {
             int existing = FindAccountIdByCode(code);
-            if (existing > 0) return existing;
+            string resolvedName2 = string.IsNullOrWhiteSpace(name2) ? name : name2;
+            if (existing > 0)
+            {
+                _generalBll.UpdateOrDeleteRecord("acc_accounts", "name_2 = '" + Escape(resolvedName2) + "'", "branch_id = " + UsersModal.logged_in_branch_id + " AND id = " + existing);
+                return existing;
+            }
 
             var info = new AccountsModal
             {
                 group_id = groupId,
                 code = code,
                 name = name,
-                name_2 = string.IsNullOrWhiteSpace(name2) ? name : name2,
+                name_2 = resolvedName2,
                 description = description,
                 op_dr_balance = 0,
                 op_cr_balance = 0

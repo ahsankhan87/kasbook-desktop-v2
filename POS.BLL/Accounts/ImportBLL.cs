@@ -41,7 +41,7 @@ namespace POS.BLL.Accounts
                     RowNumber = rowNumber,
                     AccountCode = GetStringValue(row, "Account Code"),
                     AccountName = GetStringValue(row, "Account Name"),
-                    ParentCode = GetStringValue(row, "Parent Code"),
+                    ParentCode = GetStringValue(row, "Parent Group Code") ?? GetStringValue(row, "Group Code") ?? GetStringValue(row, "Parent Code"),
                     AccountType = GetStringValue(row, "Account Type"),
                     NormalBalance = GetStringValue(row, "Normal Balance"),
                     OpeningBalance = GetDecimalValue(row, "Opening Balance"),
@@ -63,18 +63,25 @@ namespace POS.BLL.Accounts
         public void ValidateChartOfAccounts(List<ChartOfAccountsImportRow> rows)
         {
             var existingCodes = _dll.GetExistingAccountCodes();
-            var validAccountTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase) 
+            var existingGroupCodes = _dll.GetExistingGroupCodes();
+            var validAccountTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
                 { "Asset", "Liability", "Equity", "Revenue", "Expense", "Income" };
-            var validNormalBalances = new HashSet<string>(StringComparer.OrdinalIgnoreCase) 
+            var validNormalBalances = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
                 { "Dr", "Debit", "Cr", "Credit" };
 
-            var importCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var importCodes = new HashSet<string>(
+                rows.Where(r => !string.IsNullOrWhiteSpace(r.AccountCode)).Select(r => r.AccountCode.Trim()),
+                StringComparer.OrdinalIgnoreCase);
+            var seenCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var row in rows)
             {
                 var errors = new List<string>();
+                row.AccountCode = row.AccountCode?.Trim();
+                row.ParentCode = row.ParentCode?.Trim();
+                row.AccountName = row.AccountName?.Trim();
+                row.AccountType = row.AccountType?.Trim();
 
-                // Required fields
                 if (string.IsNullOrWhiteSpace(row.AccountCode))
                     errors.Add("Account Code is required");
 
@@ -86,29 +93,26 @@ namespace POS.BLL.Accounts
                 else if (!validAccountTypes.Contains(row.AccountType))
                     errors.Add($"Invalid Account Type. Must be: {string.Join(", ", validAccountTypes)}");
 
-                // Normal Balance validation
                 if (!string.IsNullOrWhiteSpace(row.NormalBalance) && !validNormalBalances.Contains(row.NormalBalance))
                     errors.Add("Normal Balance must be Dr/Debit or Cr/Credit");
 
-                // Duplicate check within import
                 if (!string.IsNullOrWhiteSpace(row.AccountCode))
                 {
-                    if (existingCodes.Contains(row.AccountCode))
+                    if (existingCodes.Contains(row.AccountCode) || existingGroupCodes.Contains(row.AccountCode))
                         errors.Add("Account Code already exists in system");
-                    else if (importCodes.Contains(row.AccountCode))
+                    else if (!seenCodes.Add(row.AccountCode))
                         errors.Add("Duplicate Account Code in import file");
-                    else
-                        importCodes.Add(row.AccountCode);
                 }
 
-                // Parent code validation
                 if (!string.IsNullOrWhiteSpace(row.ParentCode))
                 {
-                    if (!existingCodes.Contains(row.ParentCode) && !importCodes.Contains(row.ParentCode))
-                        errors.Add("Parent Code not found (must exist in system or earlier in this import)");
+                    if (!existingGroupCodes.Contains(row.ParentCode) && !importCodes.Contains(row.ParentCode))
+                        errors.Add("Parent Group Code not found (must exist in system or in this import)");
+
+                    if (!string.IsNullOrWhiteSpace(row.AccountCode) && row.ParentCode.Equals(row.AccountCode, StringComparison.OrdinalIgnoreCase))
+                        errors.Add("Account cannot be its own parent group");
                 }
 
-                // Bank account validation
                 if (row.IsBankAccount && string.IsNullOrWhiteSpace(row.BankName))
                     errors.Add("Bank Name required when Is Bank Account = Yes");
 
@@ -146,12 +150,21 @@ namespace POS.BLL.Accounts
                     return result;
                 }
 
-                // Import valid rows
-                foreach (var row in rows.Where(r => r.IsValid))
+                // Import valid rows (groups first where code is referenced as parent; leaf rows as accounts)
+                var validRows = rows.Where(r => r.IsValid).ToList();
+                var parentCodes = new HashSet<string>(
+                    validRows.Where(r => !string.IsNullOrWhiteSpace(r.ParentCode)).Select(r => r.ParentCode.Trim()),
+                    StringComparer.OrdinalIgnoreCase);
+
+                foreach (var row in validRows)
                 {
                     try
                     {
-                        _dll.InsertAccount(row, userId);
+                        if (parentCodes.Contains(row.AccountCode))
+                            _dll.InsertGroup(row, userId);
+                        else
+                            _dll.InsertAccount(row, userId);
+
                         result.ImportedRows++;
                     }
                     catch (Exception ex)
@@ -678,8 +691,9 @@ namespace POS.BLL.Accounts
         {
             try
             {
-                if (row.Table.Columns.Contains(columnName) && row[columnName] != DBNull.Value)
-                    return row[columnName].ToString().Trim();
+                var resolvedColumn = ResolveColumnName(row, columnName);
+                if (!string.IsNullOrWhiteSpace(resolvedColumn) && row[resolvedColumn] != DBNull.Value)
+                    return row[resolvedColumn].ToString().Trim();
             }
             catch { }
             return null;
@@ -689,9 +703,10 @@ namespace POS.BLL.Accounts
         {
             try
             {
-                if (row.Table.Columns.Contains(columnName) && row[columnName] != DBNull.Value)
+                var resolvedColumn = ResolveColumnName(row, columnName);
+                if (!string.IsNullOrWhiteSpace(resolvedColumn) && row[resolvedColumn] != DBNull.Value)
                 {
-                    if (decimal.TryParse(row[columnName].ToString(), out decimal value))
+                    if (decimal.TryParse(row[resolvedColumn].ToString(), out decimal value))
                         return value;
                 }
             }
@@ -703,9 +718,10 @@ namespace POS.BLL.Accounts
         {
             try
             {
-                if (row.Table.Columns.Contains(columnName) && row[columnName] != DBNull.Value)
+                var resolvedColumn = ResolveColumnName(row, columnName);
+                if (!string.IsNullOrWhiteSpace(resolvedColumn) && row[resolvedColumn] != DBNull.Value)
                 {
-                    if (DateTime.TryParse(row[columnName].ToString(), out DateTime value))
+                    if (DateTime.TryParse(row[resolvedColumn].ToString(), out DateTime value))
                         return value;
                 }
             }
@@ -717,14 +733,48 @@ namespace POS.BLL.Accounts
         {
             try
             {
-                if (row.Table.Columns.Contains(columnName) && row[columnName] != DBNull.Value)
+                var resolvedColumn = ResolveColumnName(row, columnName);
+                if (!string.IsNullOrWhiteSpace(resolvedColumn) && row[resolvedColumn] != DBNull.Value)
                 {
-                    var value = row[columnName].ToString().Trim().ToUpperInvariant();
+                    var value = row[resolvedColumn].ToString().Trim().ToUpperInvariant();
                     return value == "YES" || value == "TRUE" || value == "1" || value == "Y";
                 }
             }
             catch { }
             return false;
+        }
+
+        private string ResolveColumnName(DataRow row, string expectedColumnName)
+        {
+            if (row == null || row.Table == null || string.IsNullOrWhiteSpace(expectedColumnName))
+                return null;
+
+            if (row.Table.Columns.Contains(expectedColumnName))
+                return expectedColumnName;
+
+            var normalizedExpected = NormalizeColumnName(expectedColumnName);
+
+            foreach (DataColumn column in row.Table.Columns)
+            {
+                if (NormalizeColumnName(column.ColumnName) == normalizedExpected)
+                    return column.ColumnName;
+            }
+
+            return null;
+        }
+
+        private string NormalizeColumnName(string columnName)
+        {
+            if (string.IsNullOrWhiteSpace(columnName))
+                return string.Empty;
+
+            var chars = columnName
+                .Trim()
+                .ToLowerInvariant()
+                .Where(char.IsLetterOrDigit)
+                .ToArray();
+
+            return new string(chars);
         }
 
         /// <summary>
@@ -801,20 +851,26 @@ namespace POS.BLL.Accounts
                     return result;
                 }
 
-                // Step 4: Import accounts
+                // Step 4: Import groups/accounts following parent_id flow
                 var validRows = rows.Where(r => r.IsValid).ToList();
+                var parentCodes = new HashSet<string>(
+                    validRows.Where(r => !string.IsNullOrWhiteSpace(r.ParentCode)).Select(r => r.ParentCode.Trim()),
+                    StringComparer.OrdinalIgnoreCase);
                 int imported = 0;
 
                 foreach (var row in validRows)
                 {
                     imported++;
                     var percent = 10 + (imported * 80 / validRows.Count); // 10-90%
+                    var rowType = parentCodes.Contains(row.AccountCode) ? "group" : "account";
 
-                    ReportProgress(progressCallback, $"Importing account {imported} of {validRows.Count}: {row.AccountCode}",
+                    ReportProgress(progressCallback, $"Importing {rowType} {imported} of {validRows.Count}: {row.AccountCode}",
                         imported, validRows.Count, validationResult.ValidRows, validationResult.InvalidRows, percent);
 
-                    // Insert account using stored procedure or direct insert
-                    _dll.InsertAccount(row, userId);
+                    if (parentCodes.Contains(row.AccountCode))
+                        _dll.InsertGroup(row, userId);
+                    else
+                        _dll.InsertAccount(row, userId);
                 }
 
                 result.ImportedRows = imported;

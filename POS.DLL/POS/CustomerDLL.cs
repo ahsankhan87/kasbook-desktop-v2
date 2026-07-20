@@ -1088,8 +1088,9 @@ END";
                 transaction = cn.BeginTransaction();
 
                 result += DeleteCustomerPaymentTransactionRecords(cn, transaction, invoiceNo);
+                result += DeleteOptionalPaymentTransactionRecords(cn, transaction, "acc_entries_header", invoiceNo);
                 result += DeletePaymentTransactionRecords(cn, transaction, "acc_entries", invoiceNo);
-                result += DeleteOptionalPaymentTransactionRecords(cn, transaction, invoiceNo, "pos_banks_payments");
+                result += DeletePaymentTransactionRecords(cn, transaction, "pos_banks_payments", invoiceNo);
 
                 transaction.Commit();
 
@@ -1142,9 +1143,9 @@ END";
         }
     }
 
-    private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string invoiceNo, string tableName)
+    private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string tableName, string invoiceNo)
     {
-        using (SqlCommand countCommand = new SqlCommand($"SELECT COUNT(1) FROM {tableName} WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+        using (SqlCommand countCommand = new SqlCommand($"SELECT COUNT(1) FROM {tableName} WHERE InvoiceNo = @invoice_no AND branch_id = @branch_id", cn, transaction))
         {
             countCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
             countCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;

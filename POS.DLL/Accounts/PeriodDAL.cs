@@ -21,28 +21,28 @@ namespace POS.DLL
             try
             {
                 return ExecuteDataTable(@"
-SELECT p.period_id,
-       p.year_id,
-       fy.name AS financial_year,
-       p.period_name,
-       p.start_date,
-       p.end_date,
-       p.status,
-       CAST(p.closed_by AS nvarchar(50)) AS closed_by,
-       p.closed_at,
-       ISNULL(v.trx_count, 0) AS transactions_count,
-       CASE WHEN p.status = 'Soft-Closed' THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END AS can_reopen
-FROM acc_financial_periods p
-LEFT JOIN acc_fiscal_years fy ON fy.id = p.year_id
-OUTER APPLY
-(
-    SELECT COUNT(1) AS trx_count
-    FROM acc_entries_header hh
-    WHERE hh.EntryDate >= p.start_date
-      AND hh.EntryDate < DATEADD(DAY, 1, p.end_date)
-) v
-WHERE p.year_id = @year_id
-ORDER BY p.start_date;",
+                    SELECT p.period_id,
+                            p.year_id,
+                            fy.name AS financial_year,
+                            p.period_name,
+                            p.start_date,
+                            p.end_date,
+                            p.status,
+                            CAST(p.closed_by AS nvarchar(50)) AS closed_by,
+                            p.closed_at,
+                            ISNULL(v.trx_count, 0) AS transactions_count,
+                            CASE WHEN p.status = 'Soft-Closed' THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END AS can_reopen
+                    FROM acc_financial_periods p
+                    LEFT JOIN acc_fiscal_years fy ON fy.id = p.year_id
+                    OUTER APPLY
+                    (
+                        SELECT COUNT(1) AS trx_count
+                        FROM acc_entries_header hh
+                        WHERE hh.EntryDate >= p.start_date
+                            AND hh.EntryDate < DATEADD(DAY, 1, p.end_date)
+                    ) v
+                    WHERE p.year_id = @year_id
+                    ORDER BY p.start_date;",
                     cmd => cmd.Parameters.AddWithValue("@year_id", yearId));
             }
             catch (Exception ex)
@@ -56,10 +56,10 @@ ORDER BY p.start_date;",
             try
             {
                 string status = ExecuteScalar<string>(@"
-SELECT TOP 1 status
-FROM acc_financial_periods
-WHERE @dt BETWEEN start_date AND end_date
-ORDER BY start_date DESC;",
+                    SELECT TOP 1 status
+                    FROM acc_financial_periods
+                    WHERE @dt BETWEEN start_date AND end_date
+                    ORDER BY start_date DESC;",
                     cmd => cmd.Parameters.AddWithValue("@dt", date.Date));
 
                 if (string.IsNullOrWhiteSpace(status))
@@ -80,10 +80,10 @@ ORDER BY start_date DESC;",
             try
             {
                 return ExecuteScalar<int>(@"
-SELECT TOP 1 period_id
-FROM acc_financial_periods
-WHERE @dt BETWEEN start_date AND end_date
-ORDER BY start_date DESC;",
+                    SELECT TOP 1 period_id
+                    FROM acc_financial_periods
+                    WHERE @dt BETWEEN start_date AND end_date
+                    ORDER BY start_date DESC;",
                     cmd => cmd.Parameters.AddWithValue("@dt", date.Date));
             }
             catch (Exception ex)

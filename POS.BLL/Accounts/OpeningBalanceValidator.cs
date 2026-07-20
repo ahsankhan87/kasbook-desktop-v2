@@ -41,7 +41,7 @@ namespace POS.BLL.Accounts
 
             try
             {
-                var accounts = _accountsDLL.GetAll();
+                var accounts = _accountsDLL.GetAccountsWithAccountType();
                 if (accounts != null && accounts.Rows.Count > 0)
                 {
                     foreach (DataRow row in accounts.Rows)
@@ -59,6 +59,7 @@ namespace POS.BLL.Accounts
                         }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -236,32 +237,12 @@ namespace POS.BLL.Accounts
         }
 
         /// <summary>
-        /// Validate that all accounts are detail accounts (not group headers)
+        /// Additional detail-account checks are not required here because account existence
+        /// is already validated against acc_accounts in ValidateRow.
         /// </summary>
         public List<ImportErrorModal> ValidateDetailAccounts(List<OpeningBalanceImportRow> rows)
         {
-            var errors = new List<ImportErrorModal>();
-
-            foreach (var row in rows.Where(r => r.IsValid))
-            {
-                if (_accountLookup.TryGetValue(row.AccountCode, out var accountInfo))
-                {
-                    // Check if this is a group account (has children)
-                    var childAccounts = _accountsDLL.GetAccountByGroup(accountInfo.Id);
-                    if (childAccounts != null && childAccounts.Rows.Count > 0)
-                    {
-                        errors.Add(new ImportErrorModal
-                        {
-                            RowNumber = row.RowNumber,
-                            ErrorType = "GROUP_ACCOUNT",
-                            ErrorMessage = $"Account '{row.AccountCode}' is a group account. Opening balances can only be entered for detail accounts",
-                            RowData = row.AccountCode
-                        });
-                    }
-                }
-            }
-
-            return errors;
+            return new List<ImportErrorModal>();
         }
 
         /// <summary>

@@ -59,6 +59,7 @@ namespace POS.Core
         public DateTime entry_date { get; set; }
 
         public int employee_id { get; set; }
+        public int period_id { get; set; }
 
         public string payment_ref_invoice_no { get; set; }
     }
@@ -105,9 +106,8 @@ namespace POS.Core
 
         public int? CompanyId { get; set; }
 
-        public string RefModule { get; set; }
+        public int? PeriodId { get; set; }
 
-        public int? RefId { get; set; }
     }
 
     public class JVLineModel
@@ -135,6 +135,12 @@ namespace POS.Core
         public string ModuleName { get; set; }
 
         public int? RefId { get; set; }
+
+        public int? CustomerId { get; set; }
+        public int? SupplierId { get; set; }
+        public int? BankId { get; set; }
+        public int? PeriodId { get; set; }
+
     }
 
     public class AutoJVModel

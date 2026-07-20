@@ -70,20 +70,27 @@ namespace pos.Accounting.CostCenter
                     // Build tree from flat structure with parent references
                     Dictionary<int, TreeNode> nodeDict = new Dictionary<int, TreeNode>();
 
+                    bool hasYtdIncomeColumn = dt.Columns.Contains("ytd_income");
+                    bool hasYtdExpenseColumn = dt.Columns.Contains("ytd_expense");
+
                     // First pass: create all nodes
                     foreach (DataRow row in dt.Rows)
                     {
                         int ccId = (int)row["cc_id"];
                         string ccCode = row["cc_code"]?.ToString() ?? "";
                         string ccName = row["cc_name"]?.ToString() ?? "";
-                        decimal? ytdIncome = row["ytd_income"] == DBNull.Value ? null : (decimal?)row["ytd_income"];
-                        decimal? ytdExpense = row["ytd_expense"] == DBNull.Value ? null : (decimal?)row["ytd_expense"];
+                        decimal? ytdIncome = (hasYtdIncomeColumn && row["ytd_income"] != DBNull.Value)
+                            ? Convert.ToDecimal(row["ytd_income"])
+                            : (decimal?)null;
+                        decimal? ytdExpense = (hasYtdExpenseColumn && row["ytd_expense"] != DBNull.Value)
+                            ? Convert.ToDecimal(row["ytd_expense"])
+                            : (decimal?)null;
 
                         decimal net = (ytdIncome ?? 0) - (ytdExpense ?? 0);
                         string displayText = $"{ccCode} — {ccName}";
-                        if (ytdIncome.HasValue || ytdExpense.HasValue)
+                        if (hasYtdIncomeColumn || hasYtdExpenseColumn)
                         {
-                            displayText += $" (Income: {ytdIncome:N2}, Expense: {ytdExpense:N2}, Net: {net:N2})";
+                            displayText += $" (Income: {(ytdIncome ?? 0):N2}, Expense: {(ytdExpense ?? 0):N2}, Net: {net:N2})";
                         }
 
                         TreeNode node = new TreeNode(displayText)

@@ -44,6 +44,38 @@ namespace POS.DLL
             }
             
         }
+        public DataTable GetAccountsWithAccountType()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        String query = "SELECT A.*, AT.name AS account_type" +
+                            " FROM acc_accounts A" +
+                            " LEFT JOIN acc_groups G ON g.id = A.group_id" +
+                            " LEFT JOIN acc_account_type AT ON AT.id = G.account_type_id";
+
+
+                        cmd = new SqlCommand(query, cn);
+                        //cmd.Parameters.AddWithValue("@parent_id", parent_id);
+
+                    }
+
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+
+                    throw;
+                }
+            }
+
+        }
 
         public DataTable GetGroupAccountByParent(int parent_id = 0)
         {

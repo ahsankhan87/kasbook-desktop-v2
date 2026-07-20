@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using POS.Core;
 using POS.Core.Accounts;
 
 namespace POS.DLL.Accounts
@@ -47,33 +48,88 @@ namespace POS.DLL.Accounts
             {
                 connection.Open();
 
-                // Get first sheet name
                 var schema = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                 if (schema == null || schema.Rows.Count == 0)
                     throw new InvalidOperationException("No worksheet found in Excel file.");
 
-                string sheetName = string.Empty;
+                var candidateSheets = new List<string>();
                 foreach (DataRow row in schema.Rows)
                 {
                     var tableName = row["TABLE_NAME"].ToString();
                     if (!string.IsNullOrWhiteSpace(tableName) && tableName.EndsWith("$"))
+                        candidateSheets.Add(tableName);
+                }
+
+                if (!candidateSheets.Any())
+                    candidateSheets.Add(schema.Rows[0]["TABLE_NAME"].ToString());
+
+                DataTable bestTable = null;
+                int bestScore = -1;
+
+                foreach (var sheetName in candidateSheets)
+                {
+                    using (var command = new OleDbCommand($"SELECT * FROM [{sheetName}]", connection))
+                    using (var adapter = new OleDbDataAdapter(command))
                     {
-                        sheetName = tableName;
-                        break;
+                        var dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        int score = GetWorksheetMatchScore(dataTable);
+                        if (score > bestScore)
+                        {
+                            bestScore = score;
+                            bestTable = dataTable;
+                        }
                     }
                 }
 
-                if (string.IsNullOrWhiteSpace(sheetName))
-                    sheetName = schema.Rows[0]["TABLE_NAME"].ToString();
+                if (bestTable != null)
+                    return bestTable;
 
-                using (var command = new OleDbCommand($"SELECT * FROM [{sheetName}]", connection))
-                using (var adapter = new OleDbDataAdapter(command))
-                {
-                    var dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-                    return dataTable;
-                }
+                throw new InvalidOperationException("Could not read worksheet data from Excel file.");
             }
+        }
+
+        private int GetWorksheetMatchScore(DataTable table)
+        {
+            if (table == null || table.Columns.Count == 0)
+                return 0;
+
+            var normalizedColumns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (DataColumn column in table.Columns)
+            {
+                normalizedColumns.Add(NormalizeColumnKey(column.ColumnName));
+            }
+
+            int score = 0;
+            if (normalizedColumns.Contains("accountcode")) score += 4;
+            if (normalizedColumns.Contains("accountname")) score += 2;
+            if (normalizedColumns.Contains("accounttype")) score += 2;
+            if (normalizedColumns.Contains("debitamount")) score += 2;
+            if (normalizedColumns.Contains("creditamount")) score += 2;
+            if (normalizedColumns.Contains("partycode")) score += 2;
+            if (normalizedColumns.Contains("partycodename")) score += 1;
+            if (normalizedColumns.Contains("voucherno")) score += 2;
+            if (normalizedColumns.Contains("voucherdate")) score += 2;
+
+            if (table.Rows.Count > 0)
+                score += 1;
+
+            return score;
+        }
+
+        private string NormalizeColumnKey(string columnName)
+        {
+            if (string.IsNullOrWhiteSpace(columnName))
+                return string.Empty;
+
+            var chars = columnName
+                .Trim()
+                .ToLowerInvariant()
+                .Where(char.IsLetterOrDigit)
+                .ToArray();
+
+            return new string(chars);
         }
 
         #endregion
@@ -365,7 +421,7 @@ namespace POS.DLL.Accounts
                                 var headerId = InsertVoucherHeaderBatch(connection, transaction, voucher, userId, branchId);
 
                                 // Insert entries
-                                InsertVoucherEntriesBatch(connection, transaction, headerId, voucher.Entries, userId, branchId);
+                                InsertVoucherEntriesBatch(connection, transaction, headerId, voucher.VoucherNo, voucher.Entries, userId, branchId);
 
                                 // Link to import session
                                 LinkVoucherToSessionBatch(connection, transaction, sessionId, headerId);
@@ -420,22 +476,23 @@ namespace POS.DLL.Accounts
         }
 
         private void InsertVoucherEntriesBatch(SqlConnection connection, SqlTransaction transaction,
-            int headerId, List<JournalEntryImportRow> entries, int userId, int branchId)
+            int headerId, string invoiceNo, List<JournalEntryImportRow> entries, int userId, int branchId)
         {
             foreach (var entry in entries)
             {
                 var query = @"
                     INSERT INTO acc_entries 
-                        (invoice_no, account_id, entry_date, debit, credit, description, 
+                        (entry_id, invoice_no, account_id, account_name, entry_date, debit, credit, description, cost_center_id,
                          user_id, branch_id, date_created)
-                    SELECT @InvoiceNo, id, @EntryDate, @Debit, @Credit, @Description,
+                    SELECT @EntryId, @InvoiceNo, id,name, @EntryDate, @Debit, @Credit, @Description, NULL,
                            @UserId, @BranchId, GETDATE()
                     FROM acc_accounts
                     WHERE code = @AccountCode";
 
                 using (var cmd = new SqlCommand(query, connection, transaction))
                 {
-                    cmd.Parameters.AddWithValue("@InvoiceNo", headerId.ToString());
+                    cmd.Parameters.AddWithValue("@EntryId", headerId);
+                    cmd.Parameters.AddWithValue("@InvoiceNo", (object)invoiceNo ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@AccountCode", entry.AccountCode);
                     cmd.Parameters.AddWithValue("@EntryDate", entry.VoucherDate ?? DateTime.Today);
                     cmd.Parameters.AddWithValue("@Debit", entry.DebitAmount);
@@ -472,7 +529,7 @@ namespace POS.DLL.Accounts
         public bool AccountExists(string accountCode)
         {
             var parameters = new[] { new SqlParameter("@Code", accountCode) };
-            var query = "SELECT COUNT(*) FROM acc_accounts WHERE account_code = @Code";
+            var query = "SELECT COUNT(*) FROM acc_accounts WHERE code = @Code";
             var result = _db.ExecuteQuery(query, parameters);
             return result.Rows.Count > 0 && Convert.ToInt32(result.Rows[0][0]) > 0;
         }
@@ -482,7 +539,7 @@ namespace POS.DLL.Accounts
         /// </summary>
         public HashSet<string> GetExistingAccountCodes()
         {
-            var query = "SELECT account_code FROM acc_accounts WHERE is_active = 1";
+            var query = "SELECT code as account_code FROM acc_accounts WHERE is_active = 1";
             var result = _db.ExecuteQuery(query);
             var codes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
@@ -495,34 +552,143 @@ namespace POS.DLL.Accounts
         }
 
         /// <summary>
+        /// Gets all existing group codes for validation
+        /// </summary>
+        public HashSet<string> GetExistingGroupCodes()
+        {
+            var query = "SELECT code as group_code FROM acc_groups WHERE code IS NOT NULL";
+            var result = _db.ExecuteQuery(query);
+            var codes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (DataRow row in result.Rows)
+            {
+                var code = row["group_code"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(code))
+                    codes.Add(code.Trim());
+            }
+
+            return codes;
+        }
+
+        /// <summary>
+        /// Resolves group id from group code
+        /// </summary>
+        public int? GetGroupIdByCode(string groupCode)
+        {
+            if (string.IsNullOrWhiteSpace(groupCode))
+                return null;
+
+            var parameters = new[] { new SqlParameter("@Code", groupCode.Trim()) };
+            var query = "SELECT TOP 1 id FROM acc_groups WHERE code = @Code";
+            var result = _db.ExecuteQuery(query, parameters);
+
+            if (result.Rows.Count == 0 || result.Rows[0][0] == DBNull.Value)
+                return null;
+
+            return Convert.ToInt32(result.Rows[0][0]);
+        }
+
+        /// <summary>
+        /// Inserts a new group (acc_groups)
+        /// </summary>
+        public int InsertGroup(ChartOfAccountsImportRow group, int userId)
+        {
+            int parentId = 0;
+            if (!string.IsNullOrWhiteSpace(group.ParentCode))
+            {
+                var parentGroupId = GetGroupIdByCode(group.ParentCode);
+                if (!parentGroupId.HasValue)
+                    throw new InvalidOperationException($"Parent group code not found: {group.ParentCode}");
+                parentId = parentGroupId.Value;
+            }
+
+            var accountTypeId = ResolveAccountTypeId(group.AccountType);
+            if (accountTypeId <= 0)
+                throw new InvalidOperationException($"Account type not found: {group.AccountType}");
+
+            using (var connection = new SqlConnection(dbConnection.ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand("sp_GroupsCrud", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@parent_id", parentId);
+                    command.Parameters.AddWithValue("@account_type_id", accountTypeId);
+                    command.Parameters.AddWithValue("@name_2", string.Empty);
+                    command.Parameters.AddWithValue("@name", group.AccountName ?? string.Empty);
+                    command.Parameters.AddWithValue("@code", group.AccountCode ?? string.Empty);
+                    command.Parameters.AddWithValue("@description", (object)group.AccountType ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@user_id", userId);
+                    command.Parameters.AddWithValue("@date_created", DateTime.Now);
+                    command.Parameters.AddWithValue("@OperationType", "1");
+
+                    var scalar = command.ExecuteScalar();
+                    return scalar == null || scalar == DBNull.Value ? 0 : Convert.ToInt32(scalar);
+                }
+            }
+        }
+
+        private int ResolveAccountTypeId(string accountType)
+        {
+            if (string.IsNullOrWhiteSpace(accountType))
+                return 0;
+
+            var type = accountType.Trim().ToLowerInvariant();
+            if (type == "liability") type = "liability";
+            if (type == "revenue") type = "income";
+            if (type == "assets") type = "asset";
+            if (type == "expenses") type = "expense";
+
+            var parameters = new[] { new SqlParameter("@Search", "%" + type + "%") };
+            var query = "SELECT TOP 1 id FROM acc_account_type WHERE LOWER(name) LIKE @Search OR LOWER(code) LIKE @Search ORDER BY id";
+            var result = _db.ExecuteQuery(query, parameters);
+
+            if (result.Rows.Count == 0 || result.Rows[0][0] == DBNull.Value)
+                return 0;
+
+            return Convert.ToInt32(result.Rows[0][0]);
+        }
+
+        /// <summary>
         /// Inserts a new account
         /// </summary>
         public int InsertAccount(ChartOfAccountsImportRow account, int userId)
         {
-            var parameters = new[]
+            var groupId = GetGroupIdByCode(account.ParentCode);
+            if (!groupId.HasValue)
+                throw new InvalidOperationException($"Group code not found: {account.ParentCode}");
+
+            var normalBalance = (account.NormalBalance ?? string.Empty).Trim();
+            var isCredit = normalBalance.Equals("CR", StringComparison.OrdinalIgnoreCase) ||
+                           normalBalance.Equals("CREDIT", StringComparison.OrdinalIgnoreCase);
+            var openingBalance = account.OpeningBalance ?? 0m;
+            var opDrBalance = isCredit ? 0m : openingBalance;
+            var opCrBalance = isCredit ? openingBalance : 0m;
+
+            using (var connection = new SqlConnection(dbConnection.ConnectionString))
             {
-                new SqlParameter("@AccountCode", account.AccountCode),
-                new SqlParameter("@AccountName", account.AccountName),
-                new SqlParameter("@ParentCode", (object)account.ParentCode ?? DBNull.Value),
-                new SqlParameter("@AccountType", account.AccountType),
-                new SqlParameter("@NormalBalance", account.NormalBalance),
-                new SqlParameter("@IsBankAccount", account.IsBankAccount),
-                new SqlParameter("@BankName", (object)account.BankName ?? DBNull.Value),
-                new SqlParameter("@BankAccountNo", (object)account.BankAccountNo ?? DBNull.Value),
-                new SqlParameter("@CreatedBy", userId)
-            };
+                connection.Open();
 
-            var query = @"
-                INSERT INTO acc_accounts 
-                    (account_code, account_name, parent_code, account_type, normal_balance, 
-                     is_bank_account, bank_name, bank_account_no, is_active, created_by, created_at)
-                VALUES 
-                    (@AccountCode, @AccountName, @ParentCode, @AccountType, @NormalBalance,
-                     @IsBankAccount, @BankName, @BankAccountNo, 1, @CreatedBy, GETDATE());
-                SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                using (var command = new SqlCommand("sp_AccountsCrud", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    command.Parameters.AddWithValue("@name", account.AccountName ?? string.Empty);
+                    command.Parameters.AddWithValue("@name_2", string.Empty);
+                    command.Parameters.AddWithValue("@code", account.AccountCode ?? string.Empty);
+                    command.Parameters.AddWithValue("@group_id", groupId.Value);
+                    command.Parameters.AddWithValue("@op_dr_balance", opDrBalance);
+                    command.Parameters.AddWithValue("@op_cr_balance", opCrBalance);
+                    command.Parameters.AddWithValue("@description", (object)account.AccountType ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@user_id", userId);
+                    command.Parameters.AddWithValue("@date_created", DateTime.Now);
+                    command.Parameters.AddWithValue("@OperationType", "1");
 
-            var result = _db.ExecuteQuery(query, parameters);
-            return result.Rows.Count > 0 ? Convert.ToInt32(result.Rows[0][0]) : 0;
+                    var scalar = command.ExecuteScalar();
+                    return scalar == null || scalar == DBNull.Value ? 0 : Convert.ToInt32(scalar);
+                }
+            }
         }
 
         #endregion
@@ -575,8 +741,8 @@ namespace POS.DLL.Accounts
 
             var query = @"
                 INSERT INTO acc_entries_header 
-                    (InvoiceNo, EntryDate, VoucherType, TotalDebit, TotalCredit, Narration, 
-                     branch_id, user_id, created_at, updated_at)
+                    (InvoiceNo, EntryDate, VoucherType, total_debit, total_credit, Narration, 
+                     branch_id, user_id, date_created, date_updated)
                 VALUES 
                     (@VoucherNo, @VoucherDate, @VoucherType, @TotalDebit, @TotalCredit, @Narration,
                      @BranchId, @UserId, GETDATE(), GETDATE());
@@ -591,25 +757,49 @@ namespace POS.DLL.Accounts
         /// </summary>
         public void CreateVoucherEntries(int headerId, List<JournalEntryImportRow> entries)
         {
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("entry_id", typeof(int));
-            dataTable.Columns.Add("account_code", typeof(string));
-            dataTable.Columns.Add("debit", typeof(decimal));
-            dataTable.Columns.Add("credit", typeof(decimal));
-            dataTable.Columns.Add("description", typeof(string));
+            if (entries == null || entries.Count == 0)
+                return;
+
+            var invoiceNo = GetHeaderInvoiceNo(headerId);
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+                throw new InvalidOperationException($"Voucher header not found for id: {headerId}");
 
             foreach (var entry in entries)
             {
-                dataTable.Rows.Add(
-                    headerId,
-                    entry.AccountCode,
-                    entry.DebitAmount,
-                    entry.CreditAmount,
-                    entry.Narration ?? string.Empty
-                );
-            }
+                var parameters = new[]
+                {
+                    new SqlParameter("@EntryId", headerId),
+                    new SqlParameter("@InvoiceNo", invoiceNo),
+                    new SqlParameter("@AccountCode", (object)entry.AccountCode ?? DBNull.Value),
+                    new SqlParameter("@EntryDate", (object)(entry.VoucherDate ?? DateTime.Today)),
+                    new SqlParameter("@Debit", entry.DebitAmount),
+                    new SqlParameter("@Credit", entry.CreditAmount),
+                    new SqlParameter("@Description", (object)(entry.Narration ?? string.Empty)),
+                    new SqlParameter("@UserId", UsersModal.logged_in_userid),
+                    new SqlParameter("@BranchId", UsersModal.logged_in_branch_id)
+                };
 
-            BulkInsert(dataTable, "acc_entries");
+                var query = @"
+                    INSERT INTO acc_entries
+                        (entry_id, invoice_no, account_id,account_name, entry_date, debit, credit, description, cost_center_id, user_id, branch_id, date_created)
+                    SELECT @EntryId, @InvoiceNo, id, name, @EntryDate, @Debit, @Credit, @Description, NULL, @UserId, @BranchId, GETDATE()
+                    FROM acc_accounts
+                    WHERE code = @AccountCode";
+
+                var affectedRows = _db.ExecuteNonQuery(query, parameters);
+                if (affectedRows <= 0)
+                    throw new InvalidOperationException($"Account code not found for entry: {entry.AccountCode}");
+            }
+        }
+
+        private string GetHeaderInvoiceNo(int headerId)
+        {
+            var parameters = new[] { new SqlParameter("@HeaderId", headerId) };
+            var result = _db.ExecuteQuery("SELECT TOP 1 InvoiceNo FROM acc_entries_header WHERE id = @HeaderId", parameters);
+            if (result.Rows.Count == 0 || result.Rows[0][0] == DBNull.Value)
+                return null;
+
+            return Convert.ToString(result.Rows[0][0]);
         }
 
         #endregion

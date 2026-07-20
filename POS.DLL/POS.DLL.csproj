@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -58,6 +58,7 @@
     <Compile Include="Accounts\LedgerDAL.cs" />
     <Compile Include="Accounts\PeriodDAL.cs" />
     <Compile Include="Dashboard\DashboardDLL.cs" />
+    <Compile Include="FixedAssets\FixedAssetDLL.cs" xmlns="" />
     <Compile Include="Inventory\InventoryCostingEngineDLL.cs" />
     <Compile Include="Inventory\InventoryValuationDLL.cs" />
     <Compile Include="POS\BackupDLL.cs" />
@@ -129,6 +130,7 @@
     <Content Include="Inventory\InventoryValuation_Schema.sql" />
     <Content Include="Inventory\InventoryValuation_Settings_SP.sql" />
     <Content Include="Inventory\InventoryValuation_StoredProcedures.sql" />
+    <Content Include="..\Database\FixedAssetsDepreciationProcedures.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Accounts\BUDGET_MODULE_README.md" />
@@ -138,6 +140,7 @@
     <None Include="Accounts\ImportTemplateGenerator_Fix.md" />
     <None Include="Accounts\IMPORT_MODULE_README.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

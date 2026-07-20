@@ -117,69 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;panelFooter.Name" xml:space="preserve">
-    <value>panelFooter</value>
-  </data>
-  <data name="&gt;&gt;panelFooter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelFooter.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;panelFooter.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelContent.Name" xml:space="preserve">
-    <value>panelContent</value>
-  </data>
-  <data name="&gt;&gt;panelContent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelContent.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;panelContent.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.Name" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panelMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="panelMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1382, 920</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panelMain.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelMain.Name" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;panelMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelMain.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;flowFooterButtons.Name" xml:space="preserve">
     <value>flowFooterButtons</value>
   </data>
@@ -192,9 +129,11 @@
   <data name="&gt;&gt;flowFooterButtons.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="panelFooter.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="panelFooter.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 860</value>
   </data>
@@ -204,6 +143,7 @@
   <data name="panelFooter.Size" type="System.Drawing.Size, System.Drawing">
     <value>1382, 60</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="panelFooter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -217,6 +157,528 @@
     <value>panelMain</value>
   </data>
   <data name="&gt;&gt;panelFooter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelGridHost.Name" xml:space="preserve">
+    <value>panelGridHost</value>
+  </data>
+  <data name="&gt;&gt;panelGridHost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelGridHost.Parent" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="&gt;&gt;panelGridHost.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelBalance.Name" xml:space="preserve">
+    <value>panelBalance</value>
+  </data>
+  <data name="&gt;&gt;panelBalance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelBalance.Parent" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="&gt;&gt;panelBalance.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelContent.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelContent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 178</value>
+  </data>
+  <data name="panelContent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="panelContent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1382, 742</value>
+  </data>
+  <data name="panelContent.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelContent.Name" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="&gt;&gt;panelContent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelContent.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelContent.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmb_party_entity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>438, 6</value>
+  </data>
+  <data name="cmb_party_entity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>359, 27</value>
+  </data>
+  <data name="cmb_party_entity.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_entity.Name" xml:space="preserve">
+    <value>cmb_party_entity</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_entity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_entity.Parent" xml:space="preserve">
+    <value>panelParty</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_entity.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblPartyEntity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPartyEntity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 10</value>
+  </data>
+  <data name="lblPartyEntity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 19</value>
+  </data>
+  <data name="lblPartyEntity.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblPartyEntity.Text" xml:space="preserve">
+    <value>Party</value>
+  </data>
+  <data name="&gt;&gt;lblPartyEntity.Name" xml:space="preserve">
+    <value>lblPartyEntity</value>
+  </data>
+  <data name="&gt;&gt;lblPartyEntity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPartyEntity.Parent" xml:space="preserve">
+    <value>panelParty</value>
+  </data>
+  <data name="&gt;&gt;lblPartyEntity.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmb_party_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 6</value>
+  </data>
+  <data name="cmb_party_type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 27</value>
+  </data>
+  <data name="cmb_party_type.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_type.Name" xml:space="preserve">
+    <value>cmb_party_type</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_type.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_type.Parent" xml:space="preserve">
+    <value>panelParty</value>
+  </data>
+  <data name="&gt;&gt;cmb_party_type.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblPartyType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPartyType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 9</value>
+  </data>
+  <data name="lblPartyType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 19</value>
+  </data>
+  <data name="lblPartyType.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblPartyType.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="&gt;&gt;lblPartyType.Name" xml:space="preserve">
+    <value>lblPartyType</value>
+  </data>
+  <data name="&gt;&gt;lblPartyType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPartyType.Parent" xml:space="preserve">
+    <value>panelParty</value>
+  </data>
+  <data name="&gt;&gt;lblPartyType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panelParty.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="panelParty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 139</value>
+  </data>
+  <data name="panelParty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1376, 36</value>
+  </data>
+  <data name="panelParty.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;panelParty.Name" xml:space="preserve">
+    <value>panelParty</value>
+  </data>
+  <data name="&gt;&gt;panelParty.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelParty.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;panelParty.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btn_load_template.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btn_load_template.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1164, 50</value>
+  </data>
+  <data name="btn_load_template.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 30</value>
+  </data>
+  <data name="btn_load_template.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btn_load_template.Text" xml:space="preserve">
+    <value>Load Template</value>
+  </data>
+  <data name="&gt;&gt;btn_load_template.Name" xml:space="preserve">
+    <value>btn_load_template</value>
+  </data>
+  <data name="&gt;&gt;btn_load_template.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_load_template.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;btn_load_template.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btn_attachment.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btn_attachment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1164, 16</value>
+  </data>
+  <data name="btn_attachment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 30</value>
+  </data>
+  <data name="btn_attachment.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btn_attachment.Text" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="&gt;&gt;btn_attachment.Name" xml:space="preserve">
+    <value>btn_attachment</value>
+  </data>
+  <data name="&gt;&gt;btn_attachment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_attachment.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;btn_attachment.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txt_narration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 88</value>
+  </data>
+  <data name="txt_narration.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txt_narration.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="txt_narration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1106, 48</value>
+  </data>
+  <data name="txt_narration.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;txt_narration.Name" xml:space="preserve">
+    <value>txt_narration</value>
+  </data>
+  <data name="&gt;&gt;txt_narration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_narration.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;txt_narration.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblNarration.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNarration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 96</value>
+  </data>
+  <data name="lblNarration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 19</value>
+  </data>
+  <data name="lblNarration.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblNarration.Text" xml:space="preserve">
+    <value>Narration</value>
+  </data>
+  <data name="&gt;&gt;lblNarration.Name" xml:space="preserve">
+    <value>lblNarration</value>
+  </data>
+  <data name="&gt;&gt;lblNarration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNarration.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;lblNarration.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txt_reference_no.Location" type="System.Drawing.Point, System.Drawing">
+    <value>688, 54</value>
+  </data>
+  <data name="txt_reference_no.Size" type="System.Drawing.Size, System.Drawing">
+    <value>470, 26</value>
+  </data>
+  <data name="txt_reference_no.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txt_reference_no.Name" xml:space="preserve">
+    <value>txt_reference_no</value>
+  </data>
+  <data name="&gt;&gt;txt_reference_no.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_reference_no.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;txt_reference_no.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblReferenceNo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>590, 58</value>
+  </data>
+  <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 19</value>
+  </data>
+  <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblReferenceNo.Text" xml:space="preserve">
+    <value>Reference No</value>
+  </data>
+  <data name="&gt;&gt;lblReferenceNo.Name" xml:space="preserve">
+    <value>lblReferenceNo</value>
+  </data>
+  <data name="&gt;&gt;lblReferenceNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReferenceNo.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;lblReferenceNo.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cmb_voucher_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 54</value>
+  </data>
+  <data name="cmb_voucher_type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>388, 27</value>
+  </data>
+  <data name="cmb_voucher_type.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cmb_voucher_type.Name" xml:space="preserve">
+    <value>cmb_voucher_type</value>
+  </data>
+  <data name="&gt;&gt;cmb_voucher_type.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmb_voucher_type.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;cmb_voucher_type.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblVoucherType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVoucherType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 58</value>
+  </data>
+  <data name="lblVoucherType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 19</value>
+  </data>
+  <data name="lblVoucherType.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblVoucherType.Text" xml:space="preserve">
+    <value>Voucher Type</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherType.Name" xml:space="preserve">
+    <value>lblVoucherType</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherType.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherType.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="txt_entry_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>992, 22</value>
+  </data>
+  <data name="txt_entry_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 26</value>
+  </data>
+  <data name="txt_entry_date.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txt_entry_date.Name" xml:space="preserve">
+    <value>txt_entry_date</value>
+  </data>
+  <data name="&gt;&gt;txt_entry_date.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_entry_date.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;txt_entry_date.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblVoucherDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVoucherDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>894, 26</value>
+  </data>
+  <data name="lblVoucherDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 19</value>
+  </data>
+  <data name="lblVoucherDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblVoucherDate.Text" xml:space="preserve">
+    <value>Voucher Date</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherDate.Name" xml:space="preserve">
+    <value>lblVoucherDate</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherDate.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherDate.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="txt_invoice_no.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 26</value>
+  </data>
+  <data name="txt_invoice_no.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txt_invoice_no.Name" xml:space="preserve">
+    <value>txt_invoice_no</value>
+  </data>
+  <data name="&gt;&gt;txt_invoice_no.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_invoice_no.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;txt_invoice_no.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblVoucherNo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVoucherNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 26</value>
+  </data>
+  <data name="lblVoucherNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 19</value>
+  </data>
+  <data name="lblVoucherNo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblVoucherNo.Text" xml:space="preserve">
+    <value>Voucher No</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherNo.Name" xml:space="preserve">
+    <value>lblVoucherNo</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherNo.Parent" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;lblVoucherNo.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="grpVoucherInformation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="grpVoucherInformation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="grpVoucherInformation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1382, 178</value>
+  </data>
+  <data name="grpVoucherInformation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpVoucherInformation.Text" xml:space="preserve">
+    <value>Voucher Details</value>
+  </data>
+  <data name="&gt;&gt;grpVoucherInformation.Name" xml:space="preserve">
+    <value>grpVoucherInformation</value>
+  </data>
+  <data name="&gt;&gt;grpVoucherInformation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpVoucherInformation.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;grpVoucherInformation.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panelMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1382, 920</value>
+  </data>
+  <data name="panelMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Name" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;btn_add_line.Name" xml:space="preserve">
@@ -540,57 +1002,6 @@
   <data name="&gt;&gt;btn_close.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;panelGridHost.Name" xml:space="preserve">
-    <value>panelGridHost</value>
-  </data>
-  <data name="&gt;&gt;panelGridHost.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelGridHost.Parent" xml:space="preserve">
-    <value>panelContent</value>
-  </data>
-  <data name="&gt;&gt;panelGridHost.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelBalance.Name" xml:space="preserve">
-    <value>panelBalance</value>
-  </data>
-  <data name="&gt;&gt;panelBalance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelBalance.Parent" xml:space="preserve">
-    <value>panelContent</value>
-  </data>
-  <data name="&gt;&gt;panelBalance.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelContent.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panelContent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 150</value>
-  </data>
-  <data name="panelContent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 10, 14, 10</value>
-  </data>
-  <data name="panelContent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1382, 770</value>
-  </data>
-  <data name="panelContent.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;panelContent.Name" xml:space="preserve">
-    <value>panelContent</value>
-  </data>
-  <data name="&gt;&gt;panelContent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelContent.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;panelContent.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;grid_journal.Name" xml:space="preserve">
     <value>grid_journal</value>
   </data>
@@ -613,7 +1024,7 @@
     <value>0, 0, 10, 0</value>
   </data>
   <data name="panelGridHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1054, 750</value>
+    <value>1054, 722</value>
   </data>
   <data name="panelGridHost.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -678,6 +1089,9 @@
   <data name="cost_center.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="cost_center.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <metadata name="debit_amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -687,6 +1101,9 @@
   <data name="debit_amount.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="debit_amount.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <metadata name="credit_amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -695,6 +1112,9 @@
   </data>
   <data name="credit_amount.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="credit_amount.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
   <data name="colRemove.HeaderText" xml:space="preserve">
     <value />
@@ -715,7 +1135,7 @@
     <value>51</value>
   </data>
   <data name="grid_journal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1044, 750</value>
+    <value>1044, 722</value>
   </data>
   <data name="grid_journal.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -850,7 +1270,7 @@
     <value>16, 18, 16, 16</value>
   </data>
   <data name="panelBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 750</value>
+    <value>300, 722</value>
   </data>
   <data name="panelBalance.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -874,7 +1294,7 @@
     <value>Segoe UI, 10pt, style=Bold</value>
   </data>
   <data name="lbl_line_count_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 243</value>
+    <value>16, 266</value>
   </data>
   <data name="lbl_line_count_title.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 23</value>
@@ -904,7 +1324,7 @@
     <value>Segoe UI, 18pt, style=Bold</value>
   </data>
   <data name="lbl_line_count.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 266</value>
+    <value>15, 289</value>
   </data>
   <data name="lbl_line_count.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 41</value>
@@ -934,7 +1354,7 @@
     <value>Segoe UI, 15pt, style=Bold</value>
   </data>
   <data name="lbl_balance_status.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 197</value>
+    <value>15, 220</value>
   </data>
   <data name="lbl_balance_status.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 35</value>
@@ -1078,7 +1498,7 @@
     <value>Segoe UI, 10pt, style=Bold</value>
   </data>
   <data name="lbl_dr_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 26</value>
+    <value>17, 23</value>
   </data>
   <data name="lbl_dr_title.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 23</value>
@@ -1127,477 +1547,6 @@
   </data>
   <data name="&gt;&gt;txt_dr_total.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.Name" xml:space="preserve">
-    <value>btn_load_template</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.Name" xml:space="preserve">
-    <value>btn_attachment</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.Name" xml:space="preserve">
-    <value>txt_narration</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.Name" xml:space="preserve">
-    <value>lblNarration</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.Name" xml:space="preserve">
-    <value>txt_reference_no</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Name" xml:space="preserve">
-    <value>lblReferenceNo</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.Name" xml:space="preserve">
-    <value>cmb_voucher_type</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.Name" xml:space="preserve">
-    <value>lblVoucherType</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.Name" xml:space="preserve">
-    <value>txt_entry_date</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.Name" xml:space="preserve">
-    <value>lblVoucherDate</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.Name" xml:space="preserve">
-    <value>txt_invoice_no</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.Name" xml:space="preserve">
-    <value>lblVoucherNo</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="grpVoucherInformation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="grpVoucherInformation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="grpVoucherInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1382, 150</value>
-  </data>
-  <data name="grpVoucherInformation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="grpVoucherInformation.Text" xml:space="preserve">
-    <value>Voucher Details</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.Name" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.Parent" xml:space="preserve">
-    <value>panelMain</value>
-  </data>
-  <data name="&gt;&gt;grpVoucherInformation.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btn_load_template.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="btn_load_template.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1210, 56</value>
-  </data>
-  <data name="btn_load_template.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 30</value>
-  </data>
-  <data name="btn_load_template.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="btn_load_template.Text" xml:space="preserve">
-    <value>Load Template</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.Name" xml:space="preserve">
-    <value>btn_load_template</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;btn_load_template.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btn_attachment.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="btn_attachment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1210, 22</value>
-  </data>
-  <data name="btn_attachment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 30</value>
-  </data>
-  <data name="btn_attachment.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="btn_attachment.Text" xml:space="preserve">
-    <value>Attachment</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.Name" xml:space="preserve">
-    <value>btn_attachment</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;btn_attachment.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txt_narration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 88</value>
-  </data>
-  <data name="txt_narration.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txt_narration.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="txt_narration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 48</value>
-  </data>
-  <data name="txt_narration.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.Name" xml:space="preserve">
-    <value>txt_narration</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_narration.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblNarration.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblNarration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 96</value>
-  </data>
-  <data name="lblNarration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 19</value>
-  </data>
-  <data name="lblNarration.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="lblNarration.Text" xml:space="preserve">
-    <value>Narration</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.Name" xml:space="preserve">
-    <value>lblNarration</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblNarration.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txt_reference_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>688, 54</value>
-  </data>
-  <data name="txt_reference_no.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 26</value>
-  </data>
-  <data name="txt_reference_no.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.Name" xml:space="preserve">
-    <value>txt_reference_no</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_reference_no.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblReferenceNo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 58</value>
-  </data>
-  <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 19</value>
-  </data>
-  <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblReferenceNo.Text" xml:space="preserve">
-    <value>Reference No</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Name" xml:space="preserve">
-    <value>lblReferenceNo</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cmb_voucher_type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 54</value>
-  </data>
-  <data name="cmb_voucher_type.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 27</value>
-  </data>
-  <data name="cmb_voucher_type.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.Name" xml:space="preserve">
-    <value>cmb_voucher_type</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;cmb_voucher_type.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblVoucherType.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblVoucherType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 58</value>
-  </data>
-  <data name="lblVoucherType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 19</value>
-  </data>
-  <data name="lblVoucherType.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblVoucherType.Text" xml:space="preserve">
-    <value>Voucher Type</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.Name" xml:space="preserve">
-    <value>lblVoucherType</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherType.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="txt_entry_date.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1122, 22</value>
-  </data>
-  <data name="txt_entry_date.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 26</value>
-  </data>
-  <data name="txt_entry_date.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.Name" xml:space="preserve">
-    <value>txt_entry_date</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_entry_date.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="lblVoucherDate.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblVoucherDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1036, 26</value>
-  </data>
-  <data name="lblVoucherDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 19</value>
-  </data>
-  <data name="lblVoucherDate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblVoucherDate.Text" xml:space="preserve">
-    <value>Voucher Date</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.Name" xml:space="preserve">
-    <value>lblVoucherDate</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherDate.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 22</value>
-  </data>
-  <data name="txt_invoice_no.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="txt_invoice_no.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.Name" xml:space="preserve">
-    <value>txt_invoice_no</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;txt_invoice_no.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="lblVoucherNo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblVoucherNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 26</value>
-  </data>
-  <data name="lblVoucherNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 19</value>
-  </data>
-  <data name="lblVoucherNo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblVoucherNo.Text" xml:space="preserve">
-    <value>Voucher No</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.Name" xml:space="preserve">
-    <value>lblVoucherNo</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.Parent" xml:space="preserve">
-    <value>grpVoucherInformation</value>
-  </data>
-  <data name="&gt;&gt;lblVoucherNo.ZOrder" xml:space="preserve">
-    <value>11</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

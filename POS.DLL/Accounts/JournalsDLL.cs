@@ -417,7 +417,12 @@ SELECT E.id,
        ISNULL(E.description,'') AS Description,
        ISNULL(E.debit,0) AS Debit,
        ISNULL(E.credit,0) AS Credit,
-       ISNULL(E.cost_center_id, 0) AS cost_center_id
+       ISNULL(E.cost_center_id, 0) AS cost_center_id,
+       ISNULL(E.ref_module, '') AS ref_module,
+       ISNULL(E.ref_id, 0) AS ref_id,
+       ISNULL(E.customer_id, 0) AS customer_id,
+       ISNULL(E.supplier_id, 0) AS supplier_id,
+       ISNULL(E.bank_id, 0) AS bank_id
 FROM acc_entries E
 LEFT JOIN acc_accounts A ON A.id = E.account_id
 WHERE E.invoice_no = @invoice_no
@@ -1438,6 +1443,11 @@ WHERE id = @voucher_id
                             }
                         }
                     }
+
+                    if (result.Success)
+                    {
+                        PostPartyLedgerRows(cn, result.VoucherNo, header.VoucherDate, lines, userId, result.EntryIds);
+                    }
                 }
 
                 return result;
@@ -1520,8 +1530,6 @@ WHERE id = @voucher_id
                     PostedBy = userId,
                     PostedAt = DateTime.Now,
                     IsAutoPosted = false,
-                    RefModule = "REVERSAL",
-                    RefId = voucherId,
                     CreatedBy = userId,
                     CreatedAt = DateTime.Now,
                     UpdatedBy = userId,
@@ -1725,6 +1733,103 @@ VALUES
             return (header, lines);
         }
 
+        private void PostPartyLedgerRows(SqlConnection cn, string invoiceNo, DateTime voucherDate, IEnumerable<JVLineModel> lines, int userId, List<int> entryIds)
+        {
+            if (cn == null || string.IsNullOrWhiteSpace(invoiceNo) || lines == null)
+            {
+                return;
+            }
+
+            foreach (JVLineModel line in lines)
+            {
+                if (line == null || (line.Debit == 0m && line.Credit == 0m))
+                {
+                    continue;
+                }
+
+                if (line.CustomerId.HasValue && line.CustomerId.Value > 0)
+                {
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        INSERT INTO pos_customers_payments
+                            (invoice_no, debit, credit, description, entry_date, account_id,account_name, customer_id, user_id, branch_id, date_created, entry_id, payment_ref_invoice_no)
+                        VALUES
+                            (@invoice_no, @debit, @credit, @description, @entry_date, @account_id,(SELECT name FROM acc_accounts WHERE id=@account_id), @customer_id, @user_id, @branch_id, GETDATE(), @entry_id, @payment_ref_invoice_no);", cn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
+                        cmd.Parameters.AddWithValue("@debit", line.Debit);
+                        cmd.Parameters.AddWithValue("@credit", line.Credit);
+                        cmd.Parameters.AddWithValue("@description", string.IsNullOrWhiteSpace(line.Narration) ? (object)DBNull.Value : line.Narration);
+                        cmd.Parameters.AddWithValue("@entry_date", voucherDate.Date);
+                        cmd.Parameters.AddWithValue("@account_id", line.AccountId);
+                        cmd.Parameters.AddWithValue("@customer_id", line.CustomerId.Value);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@entry_id", entryIds[lines.ToList().IndexOf(line)]);
+                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)invoiceNo ?? DBNull.Value);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                if (line.SupplierId.HasValue && line.SupplierId.Value > 0)
+                {
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        INSERT INTO pos_suppliers_payments
+                            (invoice_no, debit, credit, description, entry_date, account_id,account_name, supplier_id, user_id, branch_id, date_created, entry_id, payment_ref_invoice_no)
+                        VALUES
+                            (@invoice_no, @debit, @credit, @description, @entry_date, @account_id,(SELECT name FROM acc_accounts WHERE id=@account_id), @supplier_id, @user_id, @branch_id, GETDATE(), @entry_id, @payment_ref_invoice_no);", cn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
+                        cmd.Parameters.AddWithValue("@debit", line.Debit);
+                        cmd.Parameters.AddWithValue("@credit", line.Credit);
+                        cmd.Parameters.AddWithValue("@description", string.IsNullOrWhiteSpace(line.Narration) ? (object)DBNull.Value : line.Narration);
+                        cmd.Parameters.AddWithValue("@entry_date", voucherDate.Date);
+                        cmd.Parameters.AddWithValue("@account_id", line.AccountId);
+                        cmd.Parameters.AddWithValue("@supplier_id", line.SupplierId.Value);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@entry_id", entryIds[lines.ToList().IndexOf(line)]);
+                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)invoiceNo ?? DBNull.Value);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                if (line.BankId.HasValue && line.BankId.Value > 0)
+                {
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        IF COL_LENGTH('pos_banks_payments', 'invoice_no') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'debit') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'credit') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'description') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'entry_date') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'account_id') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'bank_id') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'user_id') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'branch_id') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'date_created') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'entry_id') IS NOT NULL
+                        BEGIN
+                            INSERT INTO pos_banks_payments
+                                (invoice_no, debit, credit, description, entry_date, account_id,account_name, bank_id, user_id, branch_id, date_created, entry_id)
+                            VALUES
+                                (@invoice_no, @debit, @credit, @description, @entry_date,(SELECT name FROM acc_accounts WHERE id=@account_id), @account_id, @bank_id, @user_id, @branch_id, GETDATE(), @entry_id);
+                        END", cn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
+                        cmd.Parameters.AddWithValue("@debit", line.Debit);
+                        cmd.Parameters.AddWithValue("@credit", line.Credit);
+                        cmd.Parameters.AddWithValue("@description", string.IsNullOrWhiteSpace(line.Narration) ? (object)DBNull.Value : line.Narration);
+                        cmd.Parameters.AddWithValue("@entry_date", voucherDate.Date);
+                        cmd.Parameters.AddWithValue("@account_id", line.AccountId);
+                        cmd.Parameters.AddWithValue("@bank_id", line.BankId.Value);
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@entry_id", entryIds[lines.ToList().IndexOf(line)]);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
         public BatchPostResult BatchPostVouchers(List<int> voucherIds, int userId)
         {
             BatchPostResult result = new BatchPostResult();
@@ -1829,8 +1934,6 @@ VALUES
                         new XElement("PostedBy", header.PostedBy.HasValue ? header.PostedBy.Value.ToString(CultureInfo.InvariantCulture) : userId.ToString(CultureInfo.InvariantCulture)),
                         new XElement("PostedAt", header.PostedAt.HasValue ? header.PostedAt.Value.ToString("o", CultureInfo.InvariantCulture) : DateTime.Now.ToString("o", CultureInfo.InvariantCulture)),
                         new XElement("IsAutoPosted", header.IsAutoPosted ? "1" : "0"),
-                        new XElement("RefModule", header.RefModule ?? string.Empty),
-                        new XElement("RefId", header.RefId.HasValue ? header.RefId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
                         new XElement("BranchId", header.BranchId.HasValue ? header.BranchId.Value.ToString(CultureInfo.InvariantCulture) : UsersModal.logged_in_branch_id.ToString(CultureInfo.InvariantCulture)),
                         new XElement("CompanyId", header.CompanyId.HasValue ? header.CompanyId.Value.ToString(CultureInfo.InvariantCulture) : UsersModal.loggedIncompanyID.ToString(CultureInfo.InvariantCulture)),
                         new XElement("CreatedBy", header.CreatedBy.HasValue ? header.CreatedBy.Value.ToString(CultureInfo.InvariantCulture) : userId.ToString(CultureInfo.InvariantCulture)),
@@ -2021,8 +2124,6 @@ WHERE branch_id = @branch_id
             header.UpdatedAt = row.Table.Columns.Contains("date_updated") && row["date_updated"] != DBNull.Value ? Convert.ToDateTime(row["date_updated"]) : (DateTime?)null;
             header.BranchId = row.Table.Columns.Contains("branch_id") && row["branch_id"] != DBNull.Value ? Convert.ToInt32(row["branch_id"]) : (int?)null;
             header.CompanyId = row.Table.Columns.Contains("company_id") && row["company_id"] != DBNull.Value ? Convert.ToInt32(row["company_id"]) : (int?)null;
-            header.RefModule = row.Table.Columns.Contains("ref_module") ? Convert.ToString(row["ref_module"]) : string.Empty;
-            header.RefId = row.Table.Columns.Contains("ref_id") && row["ref_id"] != DBNull.Value ? Convert.ToInt32(row["ref_id"]) : (int?)null;
             return header;
         }
 
@@ -2048,6 +2149,11 @@ WHERE branch_id = @branch_id
                 line.Debit = row.Table.Columns.Contains("Debit") && row["Debit"] != DBNull.Value ? Convert.ToDecimal(row["Debit"]) : 0m;
                 line.Credit = row.Table.Columns.Contains("Credit") && row["Credit"] != DBNull.Value ? Convert.ToDecimal(row["Credit"]) : 0m;
                 line.CostCenterID = row.Table.Columns.Contains("cost_center_id") && row["cost_center_id"] != DBNull.Value ? Convert.ToInt32(row["cost_center_id"]) : 0;
+                line.ModuleName = row.Table.Columns.Contains("ref_module") ? Convert.ToString(row["ref_module"]) : string.Empty;
+                line.RefId = row.Table.Columns.Contains("ref_id") && row["ref_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["ref_id"]) : null;
+                line.CustomerId = row.Table.Columns.Contains("customer_id") && row["customer_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["customer_id"]) : null;
+                line.SupplierId = row.Table.Columns.Contains("supplier_id") && row["supplier_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["supplier_id"]) : null;
+                line.BankId = row.Table.Columns.Contains("bank_id") && row["bank_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["bank_id"]) : null;
                 lines.Add(line);
             }
 

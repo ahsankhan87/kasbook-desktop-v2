@@ -2808,5 +2808,11 @@ namespace pos
             var frm = new pos.Inventory.frm_valuation_settings();
             frm.ShowDialog(this);
         }
+
+        private void fixedAssetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.FixedAssets.frm_fixed_asset_register();
+            frm.ShowDialog(this);
+        }
     }
 }

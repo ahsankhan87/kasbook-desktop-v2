@@ -1310,6 +1310,7 @@ ORDER BY p.purchase_date, pi.id", cn))
 
                     //result += DeletePaymentTransactionRecords(cn, transaction, "pos_suppliers_payments", invoiceNo);
                     result += DeleteSupplierPaymentTransactionRecords(cn, transaction, invoiceNo);
+                    result += DeleteOptionalPaymentTransactionRecords(cn, transaction, "acc_entries_header", invoiceNo);
                     result += DeletePaymentTransactionRecords(cn, transaction, "acc_entries", invoiceNo);
                     result += DeletePaymentTransactionRecords(cn, transaction, "pos_banks_payments", invoiceNo);
 
@@ -1367,6 +1368,19 @@ ORDER BY p.purchase_date, pi.id", cn))
                 deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
                 return deleteCommand.ExecuteNonQuery();
             }
+        }
+        private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string invoiceNo, string tableName)
+        {
+            using (SqlCommand countCommand = new SqlCommand($"SELECT COUNT(1) FROM {tableName} WHERE InvoiceNo = @invoice_no AND branch_id = @branch_id", cn, transaction))
+            {
+                countCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
+                countCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+
+                if (Convert.ToInt32(countCommand.ExecuteScalar()) <= 0)
+                    return 0;
+            }
+
+            return DeletePaymentTransactionRecords(cn, transaction, tableName, invoiceNo);
         }
 
         public bool IsSupplierCodeExists(string supplierCode, int? excludeSupplierId = null)

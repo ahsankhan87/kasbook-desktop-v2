@@ -69,34 +69,40 @@ namespace POS.DLL.Accounts
             dt.Columns.Add("Account Code*", typeof(string));
             dt.Columns.Add("Account Name*", typeof(string));
             dt.Columns.Add("Account Type*", typeof(string));
-            dt.Columns.Add("Parent Code", typeof(string));
+            dt.Columns.Add("Parent Group Code", typeof(string));
             dt.Columns.Add("Description", typeof(string));
             dt.Columns.Add("Is Active", typeof(string));
 
-            // Add sample rows
-            dt.Rows.Add("1000", "Assets", "Asset", "", "Main assets account", "Yes");
-            dt.Rows.Add("1100", "Current Assets", "Asset", "1000", "Short-term assets", "Yes");
-            dt.Rows.Add("1110", "Cash", "Asset", "1100", "Cash on hand and in bank", "Yes");
+            // Add sample rows (group hierarchy + leaf account)
+            dt.Rows.Add("1000", "Assets", "Asset", "", "Top-level group", "Yes");
+            dt.Rows.Add("1100", "Current Assets", "Asset", "1000", "Child group under Assets", "Yes");
+            dt.Rows.Add("1111", "Cash in Hand", "Asset", "1100", "Leaf account under Current Assets", "Yes");
 
             instructions = @"CHART OF ACCOUNTS IMPORT INSTRUCTIONS
 
-REQUIRED COLUMNS (* required):
-- Account Code*: Unique code for the account (e.g., 1000, 1100)
-- Account Name*: Full name of the account
-- Account Type*: Asset, Liability, Equity, Revenue, Expense
-- Parent Code: Code of parent account (for hierarchical structure)
-- Description: Optional description
-- Is Active: Yes/No (default: Yes)
+                    REQUIRED COLUMNS (* required):
+                    - Account Code*: Unique code for each COA row (group/account)
+                    - Account Name*: Display name
+                    - Account Type*: Asset, Liability, Equity, Revenue/Income, Expense
+                    - Parent Group Code: Parent group code (leave blank for top-level groups)
+                    - Description: Optional description
+                    - Is Active: Yes/No (default: Yes)
 
-VALIDATION RULES:
-1. Account Code must be unique
-2. Account Type must be one of: Asset, Liability, Equity, Revenue, Expense
-3. If Parent Code is provided, it must exist in the system or in this import
-4. Accounts should be ordered so parent accounts appear before child accounts
+                    HIERARCHY RULES:
+                    1. Top-level groups must have Parent Group Code blank (parent_id = 0)
+                    2. Child groups must reference an existing group code
+                    3. Parent groups must appear before child rows in the file
+                    4. Rows referenced as a parent by other rows are treated as GROUPS
+                    5. Rows not referenced as a parent are imported as LEAF ACCOUNTS into acc_accounts
 
-SAMPLE DATA:
-The first 3 rows contain sample data (highlighted in gray).
-Delete these rows and replace with your actual data.";
+                    VALIDATION RULES:
+                    1. Account Code must be unique
+                    2. Account Type must be one of: Asset, Liability, Equity, Revenue/Income, Expense
+                    3. Parent Group Code (if provided) must exist in the system or in this import
+
+                    SAMPLE DATA:
+                    The first 3 rows contain sample data (highlighted in gray).
+                    Delete these rows and replace with your actual data.";
 
             return dt;
         }
@@ -118,28 +124,28 @@ Delete these rows and replace with your actual data.";
 
             instructions = @"OPENING BALANCE IMPORT INSTRUCTIONS
 
-REQUIRED COLUMNS (* required):
-- Account Code*: Must exist in Chart of Accounts
-- Account Name: For reference only (not validated)
-- Debit Amount: Enter debit balance (leave blank if credit)
-- Credit Amount: Enter credit balance (leave blank if debit)
-- Remarks: Optional notes for the entry
+                REQUIRED COLUMNS (* required):
+                - Account Code*: Must exist in Chart of Accounts
+                - Account Name: For reference only (not validated)
+                - Debit Amount: Enter debit balance (leave blank if credit)
+                - Credit Amount: Enter credit balance (leave blank if debit)
+                - Remarks: Optional notes for the entry
 
-VALIDATION RULES:
-1. Each account can have EITHER debit OR credit (not both)
-2. Total Debits MUST equal Total Credits
-3. All account codes must exist in the system
-4. Amounts must be positive numbers
-5. No duplicate account codes allowed
+                VALIDATION RULES:
+                1. Each account can have EITHER debit OR credit (not both)
+                2. Total Debits MUST equal Total Credits
+                3. All account codes must exist in the system
+                4. Amounts must be positive numbers
+                5. No duplicate account codes allowed
 
-IMPORTANT:
-- Leave Debit Amount blank if account has credit balance
-- Leave Credit Amount blank if account has debit balance
-- Trial Balance MUST balance (Dr = Cr) before import
-- Sample data rows (gray) should be deleted
+                IMPORTANT:
+                - Leave Debit Amount blank if account has credit balance
+                - Leave Credit Amount blank if account has debit balance
+                - Trial Balance MUST balance (Dr = Cr) before import
+                - Sample data rows (gray) should be deleted
 
-SAMPLE DATA:
-Rows 1-3 are samples. Delete and replace with your data.";
+                SAMPLE DATA:
+                Rows 1-3 are samples. Delete and replace with your data.";
 
             return dt;
         }

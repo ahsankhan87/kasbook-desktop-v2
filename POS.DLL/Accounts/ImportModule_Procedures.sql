@@ -83,39 +83,44 @@ BEGIN
 	-- Check rollback availability
 	IF @RollbackAvailableUntil IS NOT NULL AND GETDATE() > @RollbackAvailableUntil
 	BEGIN
-		RAISERROR('Rollback period has expired. Rollback was available until %s', 16, 1, @RollbackAvailableUntil);
+		DECLARE @RollbackUntilText NVARCHAR(30) = CONVERT(NVARCHAR(30), @RollbackAvailableUntil, 120);
+		RAISERROR('Rollback period has expired. Rollback was available until %s', 16, 1, @RollbackUntilText);
 		RETURN;
 	END
 
 	BEGIN TRY
 		BEGIN TRANSACTION;
 
-		-- Get voucher count
-		SELECT @VoucherCount = COUNT(*)
+		-- Capture voucher ids for this session (needed after link rows are deleted)
+		DECLARE @SessionVouchers TABLE (voucher_id INT PRIMARY KEY);
+		INSERT INTO @SessionVouchers (voucher_id)
+		SELECT voucher_id
 		FROM acc_import_vouchers
 		WHERE session_id = @SessionId;
+
+		-- Get voucher count
+		SELECT @VoucherCount = COUNT(*)
+		FROM @SessionVouchers;
 
 		-- Delete all acc_entries linked to vouchers in this session
 		-- acc_entries links to voucher header via invoice_no, not entry_id
 		DELETE ae
 		FROM acc_entries ae
 		INNER JOIN acc_entries_header aeh ON aeh.InvoiceNo = ae.invoice_no AND aeh.branch_id = ae.branch_id
-		INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
-		WHERE aiv.session_id = @SessionId;
+		INNER JOIN @SessionVouchers sv ON sv.voucher_id = aeh.id;
 
 		SET @EntriesDeleted = @@ROWCOUNT;
+
+		-- Delete session's acc_import_vouchers links first (FK constraint)
+		DELETE FROM acc_import_vouchers
+		WHERE session_id = @SessionId;
 
 		-- Delete all acc_entries_header (vouchers) in this session
 		DELETE aeh
 		FROM acc_entries_header aeh
-		INNER JOIN acc_import_vouchers aiv ON aiv.voucher_id = aeh.id
-		WHERE aiv.session_id = @SessionId;
+		INNER JOIN @SessionVouchers sv ON sv.voucher_id = aeh.id;
 
 		SET @VouchersDeleted = @@ROWCOUNT;
-
-		-- Delete session's acc_import_vouchers links
-		DELETE FROM acc_import_vouchers
-		WHERE session_id = @SessionId;
 
 		-- Update session status
 		UPDATE acc_import_sessions

@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_journal_entries));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_journal_entries));
             this.panelMain = new System.Windows.Forms.Panel();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.flowFooterButtons = new System.Windows.Forms.FlowLayoutPanel();
@@ -50,6 +50,7 @@
             this.account = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colAccountType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.party = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.cost_center = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.debit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.credit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -201,6 +202,7 @@
             this.account,
             this.colAccountType,
             this.description,
+            this.party,
             this.cost_center,
             this.debit_amount,
             this.credit_amount,
@@ -220,6 +222,7 @@
             this.grid_journal.RowHeadersVisible = false;
             this.grid_journal.RowTemplate.Height = 30;
             this.grid_journal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grid_journal.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.grid_journal_CellBeginEdit);
             this.grid_journal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_journal_CellContentClick);
             this.grid_journal.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_journal_CellEndEdit);
             this.grid_journal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grid_journal_CellFormatting);
@@ -266,6 +269,15 @@
             resources.ApplyResources(this.description, "description");
             this.description.Name = "description";
             this.description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // party
+            // 
+            this.party.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.party.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.party.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.party.HeaderText = "Party";
+            this.party.Name = "party";
+            this.party.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // cost_center
             // 
@@ -538,6 +550,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn account;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAccountType;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewComboBoxColumn party;
         private System.Windows.Forms.DataGridViewComboBoxColumn cost_center;
         private System.Windows.Forms.DataGridViewTextBoxColumn debit_amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn credit_amount;

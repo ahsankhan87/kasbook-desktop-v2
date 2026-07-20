@@ -20,6 +20,8 @@
 
 ## Database Usage
 - Use `acc_entries_header` and `acc_entries` as the accounting voucher tables; do not use `acc_vouchers`/`acc_voucher_lines` in this codebase.
+- Ensure `acc_accounts` links to `acc_groups` via `group_id` foreign key, and `acc_entries` links to `acc_accounts` via `account_id` (not `account_code`).
+- Standard COA flow must create `acc_groups` hierarchy with top-level `parent_id=0` and nested groups using `parent_id`; only leaf nodes should be inserted into `acc_accounts`.
 
 ## UI/UX Conventions (use these, avoid ad-hoc variants)
 - Centralize styling through `pos/UI/AppTheme.cs`; call `AppTheme.Apply(this)` in form load.

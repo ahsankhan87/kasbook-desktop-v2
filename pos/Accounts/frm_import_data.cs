@@ -135,7 +135,7 @@ namespace pos.Accounts
             dt.Columns.Add("Account Code", typeof(string));
             dt.Columns.Add("Account Name", typeof(string));
             dt.Columns.Add("Account Type", typeof(string));
-            dt.Columns.Add("Parent Code", typeof(string));
+            dt.Columns.Add("Parent Group Code", typeof(string));
             dt.Columns.Add("Normal Balance", typeof(string));
             dt.Columns.Add("Opening Balance", typeof(decimal));
             dt.Columns.Add("Validation Error", typeof(string));
@@ -190,8 +190,8 @@ namespace pos.Accounts
             }
 
             var confirmMessage = chkDryRun.Checked
-                ? $"DRY RUN: Validate {validRows.Count} accounts?\n\nNo data will be imported."
-                : $"Import {validRows.Count} valid accounts?\n\nThis will add new accounts to the Chart of Accounts.";
+                ? $"DRY RUN: Validate {validRows.Count} COA rows (groups/accounts)?\n\nNo data will be imported."
+                : $"Import {validRows.Count} valid COA rows (groups/accounts)?\n\nThis will add groups and leaf accounts to the Chart of Accounts.";
 
             if (MessageBox.Show(confirmMessage, "Confirm Import", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;

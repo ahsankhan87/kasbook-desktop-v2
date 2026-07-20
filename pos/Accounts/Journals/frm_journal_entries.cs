@@ -3,6 +3,7 @@ using pos.Security.Authorization;
 using pos.UI;
 using POS.BLL;
 using POS.Core;
+using POS.DLL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,15 +19,24 @@ namespace pos
     {
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private readonly UserIdentity _currentUser = AppSecurityContext.User;
-        private readonly BindingSource _accountBindingSource = new BindingSource();
         private readonly BindingSource _costCenterBindingSource = new BindingSource();
         private readonly ContextMenuStrip _templateMenu = new ContextMenuStrip();
 
         private DataTable _accountsTable;
         private DataTable _costCentersTable;
-        private bool _suppressAccountFilter;
+        private DataTable _customerPartiesTable;
+        private DataTable _supplierPartiesTable;
+        private DataTable _bankPartiesTable;
         private string _attachmentFilePath = string.Empty;
         private string _editingInvoiceNo = string.Empty;
+
+        private enum JournalPartyMode
+        {
+            General = 0,
+            Customer = 1,
+            Supplier = 2,
+            Bank = 3
+        }
 
         public double _dr_total = 0;
         public double _cr_total = 0;
@@ -49,6 +59,7 @@ namespace pos
             }
 
             ConfigureVoucherTypes();
+            ConfigurePartyLookups();
             ConfigureCostCenters();
             ConfigureTemplateMenu();
             txt_entry_date.Value = DateTime.Today;
@@ -113,6 +124,23 @@ namespace pos
                     gridRow.Cells["debit_amount"].Value = Convert.ToDecimal(line["Debit"]);
                     gridRow.Cells["credit_amount"].Value = Convert.ToDecimal(line["Credit"]);
                     UpdateAccountTypeForRow(rowIndex);
+
+                    int refId = GetIntFromRow(line, "ref_id");
+                    if (refId <= 0)
+                    {
+                        refId = GetIntFromRow(line, "customer_id");
+                    }
+                    if (refId <= 0)
+                    {
+                        refId = GetIntFromRow(line, "supplier_id");
+                    }
+                    if (refId <= 0)
+                    {
+                        refId = GetIntFromRow(line, "bank_id");
+                    }
+
+                    gridRow.Cells["party"].Value = refId > 0 ? (object)refId : (object)0;
+                    BindPartyCellForRow(rowIndex);
                 }
 
                 if (grid_journal.Rows.Count < 2)
@@ -146,6 +174,269 @@ namespace pos
             {
                 cmb_voucher_type.SelectedIndex = 0;
             }
+        }
+
+        private void ConfigurePartyLookups()
+        {
+            _customerPartiesTable = BuildPartyLookupTable(new CustomerBLL().GetAll());
+            _supplierPartiesTable = BuildPartyLookupTable(new SupplierBLL().GetAll());
+            _bankPartiesTable = BuildPartyLookupTable(new BankBLL().GetAll());
+        }
+
+        private DataTable BuildPartyLookupTable(DataTable source)
+        {
+            DataTable dt = source == null ? new DataTable() : source.Copy();
+
+            if (!dt.Columns.Contains("id"))
+            {
+                dt.Columns.Add("id", typeof(int));
+            }
+
+            if (!dt.Columns.Contains("display_text"))
+            {
+                dt.Columns.Add("display_text", typeof(string));
+            }
+
+            foreach (DataRow row in dt.Rows)
+            {
+                row["display_text"] = BuildPartyDisplayText(row);
+            }
+
+            DataRow emptyRow = dt.NewRow();
+            emptyRow["id"] = 0;
+            emptyRow["display_text"] = string.Empty;
+            dt.Rows.InsertAt(emptyRow, 0);
+            return dt;
+        }
+
+        private string BuildPartyDisplayText(DataRow row)
+        {
+            string code = GetFirstPartyValue(row, "customer_code", "supplier_code", "bank_code", "code");
+            string name = GetPartyName(row);
+
+            if (string.IsNullOrWhiteSpace(code)) return name;
+            if (string.IsNullOrWhiteSpace(name)) return code;
+            return code + " - " + name;
+        }
+
+        private string GetPartyName(DataRow row)
+        {
+            string displayName = GetFirstPartyValue(row, "display_name", "name", "name_2", "bank_name", "customer_name", "supplier_name");
+            string firstName = GetFirstPartyValue(row, "first_name");
+            string lastName = GetFirstPartyValue(row, "last_name");
+            if (!string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(lastName))
+            {
+                string combined = (firstName + " " + lastName).Trim();
+                if (!string.IsNullOrWhiteSpace(combined))
+                {
+                    return combined;
+                }
+            }
+
+            return displayName;
+        }
+
+        private string GetFirstPartyValue(DataRow row, params string[] columns)
+        {
+            if (row == null || columns == null)
+            {
+                return string.Empty;
+            }
+
+            foreach (string column in columns)
+            {
+                if (string.IsNullOrWhiteSpace(column) || row.Table == null || !row.Table.Columns.Contains(column))
+                {
+                    continue;
+                }
+
+                string value = Convert.ToString(row[column]).Trim();
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    return value;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private JournalPartyMode ResolvePartyModeFromAccountType(string accountType)
+        {
+            string normalized = (accountType ?? string.Empty).Trim().ToLowerInvariant();
+            if (normalized.Contains("receivable"))
+            {
+                return JournalPartyMode.Customer;
+            }
+
+            if (normalized.Contains("payable"))
+            {
+                return JournalPartyMode.Supplier;
+            }
+
+            if (normalized.Contains("bank"))
+            {
+                return JournalPartyMode.Bank;
+            }
+
+            return JournalPartyMode.General;
+        }
+
+        private DataTable GetPartyTableByMode(JournalPartyMode mode)
+        {
+            if (mode == JournalPartyMode.Customer)
+            {
+                return _customerPartiesTable;
+            }
+
+            if (mode == JournalPartyMode.Supplier)
+            {
+                return _supplierPartiesTable;
+            }
+
+            if (mode == JournalPartyMode.Bank)
+            {
+                return _bankPartiesTable;
+            }
+
+            return null;
+        }
+
+        private DataTable GetPartyTableForRow(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_journal.Rows.Count)
+            {
+                return null;
+            }
+
+            DataGridViewRow row = grid_journal.Rows[rowIndex];
+            JournalPartyMode mode = ResolvePartyModeForRow(row);
+            return GetPartyTableByMode(mode);
+        }
+
+        private void BindPartyCellForRow(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_journal.Rows.Count)
+            {
+                return;
+            }
+
+            DataGridViewRow row = grid_journal.Rows[rowIndex];
+            DataGridViewComboBoxCell partyCell = row.Cells["party"] as DataGridViewComboBoxCell;
+            if (partyCell == null)
+            {
+                return;
+            }
+
+            object previousValue = partyCell.Value;
+            DataTable source = GetPartyTableForRow(rowIndex);
+
+            partyCell.DataSource = null;
+            partyCell.DisplayMember = string.Empty;
+            partyCell.ValueMember = string.Empty;
+
+            if (source == null)
+            {
+                partyCell.Value = DBNull.Value;
+                return;
+            }
+
+            partyCell.DataSource = source;
+            partyCell.DisplayMember = "display_text";
+            partyCell.ValueMember = "id";
+
+            int selectedId;
+            if (previousValue != null && previousValue != DBNull.Value && int.TryParse(Convert.ToString(previousValue), out selectedId) && selectedId > 0 && source.Select("id = " + selectedId.ToString(CultureInfo.InvariantCulture)).Length > 0)
+            {
+                partyCell.Value = selectedId;
+            }
+            else
+            {
+                partyCell.Value = 0;
+            }
+        }
+
+        private int GetRowPartyId(DataGridViewRow row)
+        {
+            if (row == null)
+            {
+                return 0;
+            }
+
+            int partyId;
+            if (TryGetInt(row.Cells["party"].Value, out partyId) && partyId > 0)
+            {
+                return partyId;
+            }
+
+            return 0;
+        }
+
+        private string GetRowPartyRefModule(DataGridViewRow row)
+        {
+            if (row == null)
+            {
+                return string.Empty;
+            }
+
+            switch (ResolvePartyModeForRow(row))
+            {
+                case JournalPartyMode.Customer:
+                    return "CUSTOMER";
+                case JournalPartyMode.Supplier:
+                    return "SUPPLIER";
+                case JournalPartyMode.Bank:
+                    return "BANK";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        private JournalPartyMode ResolvePartyModeForRow(DataGridViewRow row)
+        {
+            if (row == null)
+            {
+                return JournalPartyMode.General;
+            }
+
+            string accountType = Convert.ToString(row.Cells["colAccountType"].Value);
+            JournalPartyMode mode = ResolvePartyModeFromAccountType(accountType);
+            if (mode != JournalPartyMode.General)
+            {
+                return mode;
+            }
+
+            int accountId;
+            if (!TryGetInt(row.Cells["account"].Value, out accountId) || accountId <= 0)
+            {
+                return JournalPartyMode.General;
+            }
+
+            DataRow accountRow = GetAccountRow(accountId);
+            if (accountRow == null)
+            {
+                return JournalPartyMode.General;
+            }
+
+            string accountContext = (Convert.ToString(accountRow["code"]) + " " + Convert.ToString(accountRow["name"]) + " " + Convert.ToString(accountRow["name_2"]) + " " + Convert.ToString(accountRow["account_type_name"]))
+                .Trim()
+                .ToLowerInvariant();
+
+            if (accountContext.Contains("receivable") || accountContext.Contains("customer") || accountContext.Contains("مدين") || accountContext.Contains("عميل"))
+            {
+                return JournalPartyMode.Customer;
+            }
+
+            if (accountContext.Contains("payable") || accountContext.Contains("supplier") || accountContext.Contains("دائن") || accountContext.Contains("مورد"))
+            {
+                return JournalPartyMode.Supplier;
+            }
+
+            if (accountContext.Contains("bank") || accountContext.Contains("بنك"))
+            {
+                return JournalPartyMode.Bank;
+            }
+
+            return JournalPartyMode.General;
         }
 
         private void ConfigureCostCenters()
@@ -204,7 +495,7 @@ namespace pos
             try
             {
                 GeneralBLL objBLL = new GeneralBLL();
-                string keyword = "A.id, ISNULL(A.code,'') AS code, ISNULL(A.name,'') AS name, ISNULL(T.name,'') AS account_type_name, (ISNULL(A.code,'') + ' - ' + ISNULL(A.name,'')) AS display";
+                string keyword = "A.id, ISNULL(A.code,'') AS code, ISNULL(A.name,'') AS name, ISNULL(A.name_2,'') AS name_2, ISNULL(T.name,'') AS account_type_name, (ISNULL(A.code,'') + ' - ' + ISNULL(A.name,'')) AS display";
                 string table = "acc_accounts A INNER JOIN acc_groups G ON A.group_id = G.id INNER JOIN acc_account_type T ON G.account_type_id = T.id WHERE A.branch_id = " + UsersModal.logged_in_branch_id + " ORDER BY A.code, A.name";
 
                 _accountsTable = objBLL.GetRecord(keyword, table);
@@ -217,8 +508,7 @@ namespace pos
                     }
                 }
 
-                _accountBindingSource.DataSource = _accountsTable;
-                account.DataSource = _accountBindingSource;
+                account.DataSource = _accountsTable;
                 account.DisplayMember = "display";
                 account.ValueMember = "id";
                 account.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
@@ -248,9 +538,12 @@ namespace pos
             DataGridViewRow row = grid_journal.Rows[rowIndex];
             row.Cells["colAccountType"].Value = string.Empty;
             row.Cells["description"].Value = string.Empty;
+            row.Cells["party"].Value = 0;
             row.Cells["cost_center"].Value = string.Empty;
             row.Cells["debit_amount"].Value = null;
             row.Cells["credit_amount"].Value = null;
+
+            BindPartyCellForRow(rowIndex);
 
             if (focusNewRow)
             {
@@ -392,15 +685,58 @@ namespace pos
         private void ClearVoucher()
         {
             txt_entry_date.Value = DateTime.Today;
-            txt_reference_no.Clear();
-            txt_narration.Clear();
+            txt_reference_no.Text = string.Empty;
+            txt_narration.Text = string.Empty;
             _attachmentFilePath = string.Empty;
             _editingInvoiceNo = string.Empty;
             btn_attachment.Text = "Attachment";
             cmb_voucher_type.SelectedIndex = 0;
+
             GetMAXInvoiceNo();
             ClearVoucherLines();
             RefreshVoucherState();
+        }
+
+        private bool ValidatePartySelection()
+        {
+            for (int i = 0; i < grid_journal.Rows.Count; i++)
+            {
+                DataGridViewRow row = grid_journal.Rows[i];
+                if (row == null || row.IsNewRow)
+                {
+                    continue;
+                }
+
+                int accountId;
+                if (!TryGetInt(row.Cells["account"].Value, out accountId) || accountId <= 0)
+                {
+                    continue;
+                }
+
+                decimal debit;
+                decimal credit;
+                TryGetDecimal(row.Cells["debit_amount"].Value, out debit);
+                TryGetDecimal(row.Cells["credit_amount"].Value, out credit);
+                if (debit <= 0m && credit <= 0m)
+                {
+                    continue;
+                }
+
+                string refModule = GetRowPartyRefModule(row);
+                if (string.IsNullOrWhiteSpace(refModule))
+                {
+                    continue;
+                }
+
+                int partyId = GetRowPartyId(row);
+                if (partyId <= 0)
+                {
+                    MessageBox.Show(string.Format("Please select party in line {0} for selected {1} account.", i + 1, refModule.ToLowerInvariant()), "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void ClearVoucherLines()
@@ -430,6 +766,11 @@ namespace pos
                 if (!IsVoucherBalanced())
                 {
                     MessageBox.Show("Debit and Credit amounts must be balanced before posting.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!ValidatePartySelection())
+                {
                     return;
                 }
 
@@ -519,8 +860,7 @@ namespace pos
                 UpdatedAt = DateTime.Now,
                 BranchId = UsersModal.logged_in_branch_id,
                 CompanyId = UsersModal.loggedIncompanyID,
-                RefModule = "MANUAL",
-                RefId = null
+                PeriodId = GetCurrentPeriodId(voucherDate)
             };
         }
 
@@ -528,6 +868,7 @@ namespace pos
         {
             List<JVLineModel> lines = new List<JVLineModel>();
             int lineNo = 1;
+            int? periodId = GetCurrentPeriodId(entryDate);
 
             foreach (DataGridViewRow row in grid_journal.Rows)
             {
@@ -552,6 +893,9 @@ namespace pos
                     continue;
                 }
 
+                string refModule = GetRowPartyRefModule(row);
+                int partyId = GetRowPartyId(row);
+
                 DataRow accountRow = GetAccountRow(accountId);
                 lines.Add(new JVLineModel
                 {
@@ -565,8 +909,12 @@ namespace pos
                     Debit = debit,
                     Credit = credit,
                     CostCenterID = row.Cells["cost_center"].Value == null ? 0 : Convert.ToInt32(row.Cells["cost_center"].Value),
-                    ModuleName = "MANUAL",
-                    RefId = null
+                    ModuleName = string.IsNullOrWhiteSpace(refModule) ? "MANUAL" : refModule,
+                    RefId = partyId > 0 ? (int?)partyId : null,
+                    CustomerId = refModule == "CUSTOMER" && partyId > 0 ? (int?)partyId : null,
+                    SupplierId = refModule == "SUPPLIER" && partyId > 0 ? (int?)partyId : null,
+                    BankId = refModule == "BANK" && partyId > 0 ? (int?)partyId : null,
+                    PeriodId = periodId
                 });
             }
 
@@ -584,6 +932,30 @@ namespace pos
             }
 
             return narration;
+        }
+
+        private int GetCurrentPeriodId(DateTime entryDate)
+        {
+            try
+            {
+                AccountingDAL accountingDal = new AccountingDAL(POS.DLL.dbConnection.ConnectionString);
+                return accountingDal.GetCurrentPeriodId(entryDate);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        private int GetIntFromRow(DataRow row, string columnName)
+        {
+            if (row == null || row.Table == null || !row.Table.Columns.Contains(columnName) || row[columnName] == DBNull.Value)
+            {
+                return 0;
+            }
+
+            int value;
+            return int.TryParse(Convert.ToString(row[columnName]), out value) ? value : 0;
         }
 
         /// <summary>
@@ -778,6 +1150,68 @@ namespace pos
             RefreshVoucherState();
         }
 
+        private void grid_journal_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.RowIndex < 0 || grid_journal.Columns[e.ColumnIndex].Name != "account")
+            {
+                return;
+            }
+
+            e.Cancel = true;
+            BeginInvoke(new Action(() => ShowAccountLookupForRow(e.RowIndex)));
+        }
+
+        private void ShowAccountLookupForRow(int rowIndex)
+        {
+            if (_accountsTable == null || rowIndex < 0 || rowIndex >= grid_journal.Rows.Count)
+            {
+                return;
+            }
+
+            using (var lookup = new frm_account_lookup())
+            {
+                lookup.LoadAccounts(_accountsTable, GetInitialAccountLookupText(rowIndex));
+                if (lookup.ShowDialog(this) != DialogResult.OK || lookup.SelectedAccountRow == null)
+                {
+                    return;
+                }
+
+                int accountId;
+                if (!int.TryParse(Convert.ToString(lookup.SelectedAccountRow["id"]), out accountId))
+                {
+                    return;
+                }
+
+                grid_journal.Rows[rowIndex].Cells["account"].Value = accountId;
+                UpdateAccountTypeForRow(rowIndex);
+                BindPartyCellForRow(rowIndex);
+                RefreshVoucherState();
+                FocusCell(rowIndex, "description");
+            }
+        }
+
+        private string GetInitialAccountLookupText(int rowIndex)
+        {
+            if (_accountsTable == null || rowIndex < 0 || rowIndex >= grid_journal.Rows.Count)
+            {
+                return string.Empty;
+            }
+
+            int accountId;
+            if (!TryGetInt(grid_journal.Rows[rowIndex].Cells["account"].Value, out accountId))
+            {
+                return string.Empty;
+            }
+
+            DataRow[] rows = _accountsTable.Select("id = " + accountId);
+            if (rows.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            return Convert.ToString(rows[0]["code"]);
+        }
+
         private void ClearRow(int rowIndex)
         {
             if (rowIndex < 0 || rowIndex >= grid_journal.Rows.Count)
@@ -789,9 +1223,11 @@ namespace pos
             row.Cells["account"].Value = null;
             row.Cells["colAccountType"].Value = string.Empty;
             row.Cells["description"].Value = string.Empty;
+            row.Cells["party"].Value = 0;
             row.Cells["cost_center"].Value = string.Empty;
             row.Cells["debit_amount"].Value = null;
             row.Cells["credit_amount"].Value = null;
+            BindPartyCellForRow(rowIndex);
         }
 
         private void grid_journal_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -832,6 +1268,7 @@ namespace pos
             if (columnName == "account")
             {
                 UpdateAccountTypeForRow(e.RowIndex);
+                BindPartyCellForRow(e.RowIndex);
             }
             else if (columnName == "debit_amount")
             {
@@ -842,7 +1279,6 @@ namespace pos
                 EnforceSingleAmount(e.RowIndex, false);
             }
 
-            ResetAccountFilter();
             RefreshVoucherState();
         }
 
@@ -899,6 +1335,7 @@ namespace pos
 
             string accountTypeName = Convert.ToString(rows[0]["account_type_name"]);
             row.Cells["colAccountType"].Value = string.IsNullOrWhiteSpace(accountTypeName) ? string.Empty : accountTypeName.Trim();
+            BindPartyCellForRow(rowIndex);
         }
 
         private void grid_journal_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -926,6 +1363,7 @@ namespace pos
         {
             e.Row.Cells["colAccountType"].Value = string.Empty;
             e.Row.Cells["description"].Value = string.Empty;
+            e.Row.Cells["party"].Value = 0;
             e.Row.Cells["cost_center"].Value = string.Empty;
             e.Row.Cells["debit_amount"].Value = null;
             e.Row.Cells["credit_amount"].Value = null;
@@ -942,77 +1380,6 @@ namespace pos
             combo.DropDownStyle = ComboBoxStyle.DropDown;
             combo.AutoCompleteSource = AutoCompleteSource.ListItems;
             combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-
-            combo.TextUpdate -= AccountCombo_TextUpdate;
-            if (grid_journal.CurrentCell != null && grid_journal.CurrentCell.OwningColumn.Name == "account")
-            {
-                combo.TextUpdate += AccountCombo_TextUpdate;
-            }
-        }
-
-        private void AccountCombo_TextUpdate(object sender, EventArgs e)
-        {
-            if (_accountsTable == null || _suppressAccountFilter)
-            {
-                return;
-            }
-
-            ComboBox combo = sender as ComboBox;
-            if (combo == null)
-            {
-                return;
-            }
-
-            try
-            {
-                _suppressAccountFilter = true;
-                string text = combo.Text.Trim();
-                if (string.IsNullOrWhiteSpace(text))
-                {
-                    _accountBindingSource.RemoveFilter();
-                }
-                else
-                {
-                    _accountBindingSource.Filter = BuildAccountFilter(text);
-                }
-
-                combo.DroppedDown = true;
-                combo.SelectionStart = combo.Text.Length;
-                combo.SelectionLength = 0;
-            }
-            finally
-            {
-                _suppressAccountFilter = false;
-            }
-        }
-
-        private string BuildAccountFilter(string text)
-        {
-            string value = EscapeRowFilterValue(text);
-            return string.Format("code LIKE '%{0}%' OR name LIKE '%{0}%' OR display LIKE '%{0}%'", value);
-        }
-
-        private string EscapeRowFilterValue(string text)
-        {
-            return (text ?? string.Empty).Replace("'", "''").Replace("[", "[[]");
-        }
-
-        private void ResetAccountFilter()
-        {
-            if (_accountsTable == null)
-            {
-                return;
-            }
-
-            _suppressAccountFilter = true;
-            try
-            {
-                _accountBindingSource.RemoveFilter();
-            }
-            finally
-            {
-                _suppressAccountFilter = false;
-            }
         }
 
         private void grid_journal_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
