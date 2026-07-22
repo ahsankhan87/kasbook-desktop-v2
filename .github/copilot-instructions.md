@@ -32,6 +32,7 @@
 - Keep label text color/theme aligned with `AppTheme.TextPrimary` (dark text).
 - **Create a separate designer page/file when creating WinForms forms.**
 - For dashboard drill-down UI, use separate popup windows instead of in-form overlay panels when overlays do not render well.
+- In journal entry forms, party selection should be optional even for AR, AP, or Bank account rows.
 
 ## Security, Logging, and Session Rules
 - Do not bypass authorization checks; permission gating is expected through `Tag` + `ApplyPermissions`.

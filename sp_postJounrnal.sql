@@ -32,6 +32,7 @@ BEGIN
 		RefId           INT NULL,
 		BranchId        INT NULL,
 		CompanyId       INT NULL,
+		PeriodId        INT NULL,
 		CreatedBy       INT NULL,
 		CreatedAt       DATETIME NULL
 	);
@@ -55,6 +56,7 @@ BEGIN
 		NULLIF(Hdr.value('(RefId/text())[1]', 'int'), 0),
 		NULLIF(Hdr.value('(BranchId/text())[1]', 'int'), 0),
 		NULLIF(Hdr.value('(CompanyId/text())[1]', 'int'), 0),
+		NULLIF(Hdr.value('(PeriodId/text())[1]', 'int'), 0),
 		NULLIF(Hdr.value('(CreatedBy/text())[1]', 'int'), 0),
 		NULLIF(Hdr.value('(CreatedAt/text())[1]', 'datetime'), '1900-01-01')
 	FROM @VoucherXml.nodes('/Voucher/Header') AS X(Hdr);
@@ -76,6 +78,7 @@ BEGIN
 	DECLARE @RefId INT;
 	DECLARE @BranchId INT;
 	DECLARE @CompanyId INT;
+	DECLARE @PeriodId INT;
 	DECLARE @CreatedBy INT;
 	DECLARE @CreatedAt DATETIME;
 
@@ -97,6 +100,7 @@ BEGIN
 		@RefId = RefId,
 		@BranchId = BranchId,
 		@CompanyId = CompanyId,
+		@PeriodId = PeriodId,
 		@CreatedBy = CreatedBy,
 		@CreatedAt = ISNULL(CreatedAt, GETDATE())
 	FROM @Header;
@@ -119,6 +123,20 @@ BEGIN
 		RETURN;
 	END
 
+	IF ISNULL(@PeriodId, 0) <= 0
+	BEGIN
+		SELECT TOP 1 @PeriodId = period_id
+		FROM acc_financial_periods
+		WHERE @VoucherDate BETWEEN start_date AND end_date
+		ORDER BY start_date DESC;
+	END
+
+	IF ISNULL(@PeriodId, 0) <= 0
+	BEGIN
+		RAISERROR('No accounting period exists for the voucher date.', 16, 1);
+		RETURN;
+	END
+
 	DECLARE @Lines TABLE
 	(
 		[LineNo]            INT,
@@ -128,11 +146,12 @@ BEGIN
 		Narration           NVARCHAR(MAX),
 		CostCenter          NVARCHAR(100),
 		ModuleName          NVARCHAR(50),
-		RefId               INT NULL
+		RefId               INT NULL,
+		PeriodId            INT NULL
 	);
 
 	INSERT INTO @Lines
-		([LineNo], AccountId, Debit, Credit, Narration, CostCenter, ModuleName, RefId)
+		([LineNo], AccountId, Debit, Credit, Narration, CostCenter, ModuleName, RefId, PeriodId)
 	SELECT
 		Ln.value('(LineNo/text())[1]', 'int'),
 		Ln.value('(AccountId/text())[1]', 'int'),
@@ -141,7 +160,8 @@ BEGIN
 		NULLIF(Ln.value('(Narration/text())[1]', 'nvarchar(max)'), ''),
 		NULLIF(Ln.value('(CostCenter/text())[1]', 'nvarchar(100)'), ''),
 		NULLIF(Ln.value('(ModuleName/text())[1]', 'nvarchar(50)'), ''),
-		NULLIF(Ln.value('(RefId/text())[1]', 'int'), 0)
+		NULLIF(Ln.value('(RefId/text())[1]', 'int'), 0),
+		NULLIF(Ln.value('(PeriodId/text())[1]', 'int'), 0)
 	FROM @VoucherXml.nodes('/Voucher/Lines/Line') AS X(Ln);
 
 	IF NOT EXISTS (SELECT 1 FROM @Lines)
@@ -170,13 +190,13 @@ BEGIN
 		(
 			InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment,
 			total_debit, total_credit, status, reversal_of, posted_by, posted_at,
-			is_auto_posted, date_created, date_updated, user_id, branch_id
+			is_auto_posted, period_id, date_created, date_updated, user_id, branch_id
 		)
 		VALUES
 		(
 			@VoucherNo, @VoucherDate, @VoucherType, @ReferenceNo, @Narration, @Attachment,
 			@TotalDebit, @TotalCredit, @Status, @ReversalOf, @PostedBy, @PostedAt,
-			@IsAutoPosted, @CreatedAt, GETDATE(), @CreatedBy, @BranchId
+			@IsAutoPosted, @PeriodId, @CreatedAt, GETDATE(), @CreatedBy, @BranchId
 		);
 
 		SET @HeaderId = SCOPE_IDENTITY();
@@ -184,8 +204,8 @@ BEGIN
 		INSERT INTO acc_entries
 		(
 			invoice_no, account_id, entry_date, debit, credit, description,
-			user_id, branch_id, date_created --customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no
-			
+			user_id, branch_id, period_id, date_created --customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no
+
 		)
 		OUTPUT INSERTED.id INTO @Inserted(EntryId)
 		SELECT
@@ -197,8 +217,9 @@ BEGIN
 			COALESCE(L.Narration, @Narration),
 			@CreatedBy,
 			@BranchId,
+			COALESCE(L.PeriodId, @PeriodId),
 			GETDATE()
-			
+
 		FROM @Lines L;
 		
 		UPDATE acc_entries_header

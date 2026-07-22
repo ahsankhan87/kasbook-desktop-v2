@@ -130,7 +130,9 @@
     <Content Include="Inventory\InventoryValuation_Schema.sql" />
     <Content Include="Inventory\InventoryValuation_Settings_SP.sql" />
     <Content Include="Inventory\InventoryValuation_StoredProcedures.sql" />
-    <Content Include="..\Database\FixedAssetsDepreciationProcedures.sql" />
+    <Content Include="..\Database\FixedAssetsDepreciationProcedures.sql">
+      <Link>FixedAssets\FixedAssetsDepreciationProcedures.sql</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Accounts\BUDGET_MODULE_README.md" />

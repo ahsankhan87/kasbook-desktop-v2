@@ -20,6 +20,8 @@ namespace pos.FixedAssets
         private FixedAssetModel _currentAsset;
         private List<FixedAssetModel> _allAssets;
         private List<FixedAssetModel> _filteredAssets;
+        // Maps account name → account_id for dep-account dropdowns
+        private Dictionary<string, int> _accountNameToId = new Dictionary<string, int>();
 
         public frm_fixed_asset_register()
         {
@@ -33,7 +35,7 @@ namespace pos.FixedAssets
         {
             try
             {
-                AppTheme.Apply(this);
+                //AppTheme.Apply(this);
 
                 // Build tab contents first so runtime controls (ddlAssetCategory,
                 // ddlAssetLocation, ddlSupplier, etc.) exist before data loaders run.
@@ -48,18 +50,59 @@ namespace pos.FixedAssets
                 LoadDepreciationAccounts();
                 LoadAssets();
 
-                // Wire up event handlers
+                // Wire up event handlers (idempotent: avoid duplicate subscriptions)
+                dgvAssets.SelectionChanged -= DgvAssets_SelectionChanged;
                 dgvAssets.SelectionChanged += DgvAssets_SelectionChanged;
+
+                dgvAssets.CellClick -= DgvAssets_CellClick;
+                dgvAssets.CellClick += DgvAssets_CellClick;
+
+                txtSearch.TextChanged -= TxtSearch_TextChanged;
                 txtSearch.TextChanged += TxtSearch_TextChanged;
+
+                ddlStatus.SelectedIndexChanged -= FilterAssets;
                 ddlStatus.SelectedIndexChanged += FilterAssets;
+
+                ddlCategory.SelectedIndexChanged -= FilterAssets;
                 ddlCategory.SelectedIndexChanged += FilterAssets;
+
+                ddlLocation.SelectedIndexChanged -= FilterAssets;
                 ddlLocation.SelectedIndexChanged += FilterAssets;
+
+                btnAddAsset.Click -= BtnAddAsset_Click;
                 btnAddAsset.Click += BtnAddAsset_Click;
+
+                btnEditAsset.Click -= BtnEditAsset_Click;
+                btnEditAsset.Click += BtnEditAsset_Click;
+
+                btnDeleteAsset.Click -= BtnDeleteAsset_Click;
+                btnDeleteAsset.Click += BtnDeleteAsset_Click;
+
+                btnRefreshGrid.Click -= BtnRefreshGrid_Click;
+                btnRefreshGrid.Click += BtnRefreshGrid_Click;
+
+                btnSaveAssetInfo.Click -= BtnSaveAssetInfo_Click;
+                btnSaveAssetInfo.Click += BtnSaveAssetInfo_Click;
+
+                btnSaveDepSetup.Click -= BtnSaveDepSetup_Click;
+                btnSaveDepSetup.Click += BtnSaveDepSetup_Click;
+
+                btnRunDepreciation.Click -= BtnRunDepreciation_Click;
                 btnRunDepreciation.Click += BtnRunDepreciation_Click;
+
+                btnPostDisposal.Click -= BtnPostDisposal_Click;
                 btnPostDisposal.Click += BtnPostDisposal_Click;
+
+                btnPostRevaluation.Click -= BtnPostRevaluation_Click;
                 btnPostRevaluation.Click += BtnPostRevaluation_Click;
+
+                txtCost.TextChanged -= TxtCost_TextChanged;
                 txtCost.TextChanged += TxtCost_TextChanged;
+
+                txtDisposalProceeds.TextChanged -= TxtDisposalProceeds_TextChanged;
                 txtDisposalProceeds.TextChanged += TxtDisposalProceeds_TextChanged;
+
+                ddlDepMethod.SelectedIndexChanged -= DdlDepMethod_SelectedIndexChanged;
                 ddlDepMethod.SelectedIndexChanged += DdlDepMethod_SelectedIndexChanged;
 
                 // Initialize form theme for list
@@ -154,7 +197,7 @@ namespace pos.FixedAssets
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    string supplierName = row["supplier_name"]?.ToString() ?? "";
+                    string supplierName = row["first_name"]?.ToString() ?? "";
                     if (!string.IsNullOrEmpty(supplierName))
                     {
                         ddlSupplier.Items.Add(supplierName);
@@ -177,40 +220,73 @@ namespace pos.FixedAssets
                 AccountsBLL accountsBll = new AccountsBLL();
 
                 // Load all accounts
-                DataTable allAccounts = accountsBll.GetAll();
+                DataTable allAccounts = accountsBll.GetAccountsWithAccountType();
 
                 ddlDepAccount.Items.Clear();
                 ddlAccumDepAccount.Items.Clear();
                 ddlRevaluationAccount.Items.Clear();
+                ddlRevaluationAssetAccount.Items.Clear();
+                ddlDisposalReceiptAccount.Items.Clear();
+                ddlDisposalAssetAccount.Items.Clear();
+                ddlDisposalGainAccount.Items.Clear();
+                ddlDisposalLossAccount.Items.Clear();
+                _accountNameToId.Clear();
 
-                // Filter for Depreciation Expense accounts (typically account_type = 5 or group = "Depreciation Expense")
-                // Filter for Accumulated Depreciation / Contra-Asset accounts
-                // Filter for Revaluation Reserve accounts
+                // Build name→id map for all accounts so we can look up IDs when saving/posting
+                foreach (DataRow row in allAccounts.Rows)
+                {
+                    string accountName = row["name"]?.ToString() ?? "";
+                    int accountId = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : 0;
+                    if (!string.IsNullOrEmpty(accountName) && accountId > 0 && !_accountNameToId.ContainsKey(accountName))
+                    {
+                        _accountNameToId[accountName] = accountId;
+                    }
+                }
 
                 foreach (DataRow row in allAccounts.Rows)
                 {
-                    string accountName = row["account_name"]?.ToString() ?? "";
+                    string accountName = row["name"]?.ToString() ?? "";
                     string accountType = row["account_type"]?.ToString() ?? "";
 
-                    if (!string.IsNullOrEmpty(accountName))
+                    if (string.IsNullOrEmpty(accountName))
                     {
-                        // Depreciation Expense accounts (expense type)
-                        if (accountType == "5" || accountName.Contains("Depreciation Expense"))
-                        {
-                            ddlDepAccount.Items.Add(accountName);
-                        }
+                        continue;
+                    }
 
-                        // Accumulated Depreciation / Contra-Asset accounts
-                        if (accountName.Contains("Accumulated Depreciation") || accountName.Contains("Accumulated"))
-                        {
-                            ddlAccumDepAccount.Items.Add(accountName);
-                        }
+                    // Disposal/Revaluation account dropdowns
+                    ddlDisposalReceiptAccount.Items.Add(accountName);
+                    ddlDisposalAssetAccount.Items.Add(accountName);
+                    ddlRevaluationAssetAccount.Items.Add(accountName);
 
-                        // Revaluation Reserve accounts
-                        if (accountName.Contains("Revaluation") || accountName.Contains("Reserve"))
-                        {
-                            ddlRevaluationAccount.Items.Add(accountName);
-                        }
+                    // Depreciation Expense accounts (expense type)
+                    if (accountType == "5" || accountName.IndexOf("Depreciation Expense", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        ddlDepAccount.Items.Add(accountName);
+                    }
+ 
+                    // Accumulated Depreciation / Contra-Asset accounts
+                    if (accountName.IndexOf("Accumulated Depreciation", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        accountName.IndexOf("Accumulated", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        ddlAccumDepAccount.Items.Add(accountName);
+                    }
+
+                    // Revaluation Reserve accounts
+                    if (accountName.IndexOf("Revaluation", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        accountName.IndexOf("Reserve", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        ddlRevaluationAccount.Items.Add(accountName);
+                    }
+
+                    // Gain / loss accounts for disposal
+                    if (accountType == "4" || accountName.IndexOf("Gain", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        ddlDisposalGainAccount.Items.Add(accountName);
+                    }
+
+                    if (accountType == "5" || accountName.IndexOf("Loss", StringComparison.OrdinalIgnoreCase) >= 0 || accountName.IndexOf("Expense", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        ddlDisposalLossAccount.Items.Add(accountName);
                     }
                 }
 
@@ -218,6 +294,18 @@ namespace pos.FixedAssets
                 if (ddlDepAccount.Items.Count > 0) ddlDepAccount.SelectedIndex = 0;
                 if (ddlAccumDepAccount.Items.Count > 0) ddlAccumDepAccount.SelectedIndex = 0;
                 if (ddlRevaluationAccount.Items.Count > 0) ddlRevaluationAccount.SelectedIndex = 0;
+                if (ddlRevaluationAssetAccount.Items.Count > 0) ddlRevaluationAssetAccount.SelectedIndex = 0;
+                if (ddlDisposalReceiptAccount.Items.Count > 0) ddlDisposalReceiptAccount.SelectedIndex = 0;
+                if (ddlDisposalAssetAccount.Items.Count > 0) ddlDisposalAssetAccount.SelectedIndex = 0;
+                if (ddlDisposalGainAccount.Items.Count > 0) ddlDisposalGainAccount.SelectedIndex = 0;
+                if (ddlDisposalLossAccount.Items.Count > 0) ddlDisposalLossAccount.SelectedIndex = 0;
+
+                SelectFirstMatchingAccount(ddlDisposalReceiptAccount, "Cash", "Bank");
+                SelectFirstMatchingAccount(ddlDisposalAssetAccount, "Fixed Asset", "Property", "Plant", "Equipment", "Vehicle", "Machinery", "Furniture");
+                SelectFirstMatchingAccount(ddlDisposalGainAccount, "Gain on Disposal", "Disposal Gain", "Gain");
+                SelectFirstMatchingAccount(ddlDisposalLossAccount, "Loss on Disposal", "Disposal Loss", "Loss");
+                SelectFirstMatchingAccount(ddlRevaluationAssetAccount, "Fixed Asset", "Property", "Plant", "Equipment", "Vehicle", "Machinery", "Furniture");
+                SelectFirstMatchingAccount(ddlRevaluationAccount, "Revaluation Reserve", "Revaluation", "Reserve");
             }
             catch (Exception ex)
             {
@@ -336,21 +424,36 @@ namespace pos.FixedAssets
 
         private void DgvAssets_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvAssets.SelectedRows.Count > 0)
-            {
-                var selectedRow = dgvAssets.SelectedRows[0];
-                var assetCode = selectedRow.Cells[0].Value?.ToString();
+            LoadSelectedAssetFromGrid();
+        }
 
-                if (!string.IsNullOrEmpty(assetCode))
-                {
-                    _currentAsset = _allAssets.FirstOrDefault(a => a.AssetCode == assetCode);
-                    if (_currentAsset != null)
-                    {
-                        LoadAssetDetail();
-                        UpdateSummaryCard();
-                    }
-                }
+        private void DgvAssets_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadSelectedAssetFromGrid();
+        }
+
+        private void LoadSelectedAssetFromGrid()
+        {
+            if (dgvAssets.SelectedRows.Count <= 0)
+            {
+                return;
             }
+
+            var selectedRow = dgvAssets.SelectedRows[0];
+            var assetCode = selectedRow.Cells[0].Value?.ToString();
+            if (string.IsNullOrEmpty(assetCode))
+            {
+                return;
+            }
+
+            _currentAsset = _allAssets.FirstOrDefault(a => a.AssetCode == assetCode);
+            if (_currentAsset == null)
+            {
+                return;
+            }
+
+            LoadAssetDetail();
+            UpdateSummaryCard();
         }
 
         private void LoadAssetDetail()
@@ -372,11 +475,20 @@ namespace pos.FixedAssets
 
             // Depreciation Setup Tab
             ddlDepMethod.SelectedItem = _currentAsset.DepreciationMethod;
-            numUsefulLifeYears.Value = _currentAsset.UsefulLifeYears;
-            numUsefulLifeMonths.Value = _currentAsset.UsefulLifeMonths;
+            numUsefulLifeYears.Value = (decimal)Math.Min(_currentAsset.UsefulLifeYears, numUsefulLifeYears.Maximum);
+            numUsefulLifeMonths.Value = Math.Min(_currentAsset.UsefulLifeMonths, (int)numUsefulLifeMonths.Maximum);
             txtResidualValue.Text = _currentAsset.ResidualValue.ToString("N2");
             txtDepRate.Text = _currentAsset.DepreciationRate.ToString("N2");
             dtStartDepreciationDate.Value = _currentAsset.StartDepreciationFrom;
+
+            // Pre-select dep accounts based on the asset's stored account IDs
+            SelectDropdownByAccountId(ddlDepAccount, _currentAsset.DepAccountId);
+            SelectDropdownByAccountId(ddlAccumDepAccount, _currentAsset.AccumDepAccountId);
+
+            // Disposal/Revaluation posting account defaults
+            SelectFirstMatchingAccount(ddlDisposalAssetAccount, _currentAsset.AssetName, _currentAsset.CategoryName, "Fixed Asset");
+            SelectFirstMatchingAccount(ddlRevaluationAssetAccount, _currentAsset.AssetName, _currentAsset.CategoryName, "Fixed Asset");
+            txtNewRevaluedAmount.Text = _currentAsset.Cost.ToString("N2");
 
             // Load depreciation schedule preview
             LoadDepreciationSchedulePreview();
@@ -392,7 +504,7 @@ namespace pos.FixedAssets
             }
         }
 
-        private void LoadDepreciationSchedulePreview()
+        private void LoadDepreciationSchedulePreview(decimal? previewCost = null)
         {
             if (_currentAsset == null) return;
 
@@ -400,8 +512,28 @@ namespace pos.FixedAssets
 
             try
             {
+                var scheduleAsset = _currentAsset;
+
+                if (previewCost.HasValue)
+                {
+                    scheduleAsset = new FixedAssetModel
+                    {
+                        AssetId = _currentAsset.AssetId,
+                        AssetCode = _currentAsset.AssetCode,
+                        AssetName = _currentAsset.AssetName,
+                        PurchaseDate = _currentAsset.PurchaseDate,
+                        Cost = previewCost.Value,
+                        ResidualValue = _currentAsset.ResidualValue,
+                        UsefulLifeMonths = _currentAsset.UsefulLifeMonths,
+                        DepMethod = _currentAsset.DepMethod,
+                        DepRate = _currentAsset.DepRate,
+                        CurrentWDV = _currentAsset.CurrentWDV,
+                        AccumulatedDepreciation = _currentAsset.AccumulatedDepreciation
+                    };
+                }
+
                 // Generate the full depreciation schedule for this asset
-                List<DepScheduleLine> schedule = _depEngine.GenerateDepreciationSchedule(_currentAsset);
+                List<DepScheduleLine> schedule = _depEngine.GenerateDepreciationSchedule(scheduleAsset);
 
                 foreach (var line in schedule)
                 {
@@ -438,10 +570,10 @@ namespace pos.FixedAssets
                 {
                     dgvDepreciationHistory.Rows.Add(
                         line.PeriodDate.ToString("yyyy-MM"),
-                        line.OpeningWDV.ToString("N2"),
+                        line.DepMethod,
                         line.DepreciationAmount.ToString("N2"),
-                        line.AccumulatedDepreciation.ToString("N2"),
-                        line.ClosingWDV.ToString("N2")
+                        line.ClosingWDV.ToString("N2"),
+                        line.VoucherId.HasValue ? line.VoucherId.Value.ToString() : "-"
                     );
                 }
 
@@ -469,9 +601,117 @@ namespace pos.FixedAssets
             lblCostSummary.Text = $"Cost: PKR {_currentAsset.Cost:N2} | Book Value: PKR {_currentAsset.CurrentWDV:N2} | Age: {years} years {months} months | Depreciation to Date: PKR {depreciation:N2}";
         }
 
+        private void SelectDropdownByAccountId(ComboBox ddl, int accountId)
+        {
+            if (accountId <= 0) return;
+            foreach (var pair in _accountNameToId)
+            {
+                if (pair.Value == accountId)
+                {
+                    int idx = ddl.Items.IndexOf(pair.Key);
+                    if (idx >= 0) ddl.SelectedIndex = idx;
+                    return;
+                }
+            }
+        }
+
+        private void SelectFirstMatchingAccount(ComboBox ddl, params string[] keywords)
+        {
+            if (ddl == null || ddl.Items.Count == 0 || keywords == null || keywords.Length == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < ddl.Items.Count; i++)
+            {
+                string accountName = ddl.Items[i]?.ToString() ?? string.Empty;
+                foreach (string keyword in keywords)
+                {
+                    if (!string.IsNullOrWhiteSpace(keyword) && accountName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        ddl.SelectedIndex = i;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private bool TryGetSelectedAccountId(ComboBox ddl, out int accountId)
+        {
+            accountId = 0;
+            string selectedName = ddl?.SelectedItem?.ToString();
+            return !string.IsNullOrWhiteSpace(selectedName)
+                   && _accountNameToId.TryGetValue(selectedName, out accountId)
+                   && accountId > 0;
+        }
+
+        private void BtnSaveDepSetup_Click(object sender, EventArgs e)
+        {
+            if (_currentAsset == null)
+            {
+                UiMessages.ShowWarning("Please select an asset first.", "يرجى تحديد أصل أولا");
+                return;
+            }
+
+            string depAccountName = ddlDepAccount.SelectedItem?.ToString();
+            string accumDepAccountName = ddlAccumDepAccount.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(depAccountName) || !_accountNameToId.ContainsKey(depAccountName))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a valid Depreciation Expense account.",
+                    "يرجى تحديد حساب مصروف استهلاك صحيح");
+                ddlDepAccount.Focus();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(accumDepAccountName) || !_accountNameToId.ContainsKey(accumDepAccountName))
+            {
+                UiMessages.ShowWarning(
+                    "Please select a valid Accumulated Depreciation account.",
+                    "يرجى تحديد حساب مجمع استهلاك صحيح");
+                ddlAccumDepAccount.Focus();
+                return;
+            }
+
+            try
+            {
+                using (BusyScope.Show(this, "Saving depreciation setup..."))
+                {
+                    int depAccountId = _accountNameToId[depAccountName];
+                    int accumDepAccountId = _accountNameToId[accumDepAccountName];
+
+                    _assetBLL.UpdateAssetDepreciationAccounts(_currentAsset.AssetId, depAccountId, accumDepAccountId);
+
+                    // Update in-memory model so the engine picks up the new IDs immediately
+                    _currentAsset.DepAccountId = depAccountId;
+                    _currentAsset.AccumDepAccountId = accumDepAccountId;
+
+                    // Reflect change in the master list
+                    var master = _allAssets.FirstOrDefault(a => a.AssetId == _currentAsset.AssetId);
+                    if (master != null)
+                    {
+                        master.DepAccountId = depAccountId;
+                        master.AccumDepAccountId = accumDepAccountId;
+                    }
+                }
+
+                UiMessages.ShowInfo(
+                    "Depreciation accounts saved. You can now run depreciation for this asset.",
+                    "تم حفظ حسابات الاستهلاك. يمكنك الآن تشغيل الاستهلاك لهذا الأصل",
+                    "Saved", "تم الحفظ");
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    $"Error saving depreciation setup: {ex.Message}",
+                    $"خطأ في حفظ إعداد الاستهلاك: {ex.Message}");
+            }
+        }
+
         private void BtnAddAsset_Click(object sender, EventArgs e)
         {
-            try
+           try
             {
                 frm_addFixedAsset addForm = new frm_addFixedAsset();
                 if (addForm.ShowDialog(this) == DialogResult.OK)
@@ -481,6 +721,154 @@ namespace pos.FixedAssets
 
                     UiMessages.ShowInfo("Asset added successfully with ID: " + addForm.NewAssetId, "تم إضافة الأصل بنجاح", "Success", "نجاح");
                 }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
+            }
+        }
+
+        private void BtnEditAsset_Click(object sender, EventArgs e)
+        {
+            if (_currentAsset == null)
+            {
+                UiMessages.ShowWarning("Please select an asset to edit.", "يرجى تحديد أصل للتعديل");
+                return;
+            }
+
+            try
+            {
+                var editForm = new frm_addFixedAsset(_currentAsset);
+                if (editForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    LoadAssets();
+                    // Re-select the same asset after reload
+                    _currentAsset = _allAssets.FirstOrDefault(a => a.AssetId == _currentAsset.AssetId);
+                    if (_currentAsset != null)
+                    {
+                        LoadAssetDetail();
+                        UpdateSummaryCard();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
+            }
+        }
+
+        private void BtnDeleteAsset_Click(object sender, EventArgs e)
+        {
+            if (_currentAsset == null)
+            {
+                UiMessages.ShowWarning("Please select an asset to delete.", "يرجى تحديد أصل للحذف");
+                return;
+            }
+
+            var confirm = UiMessages.ConfirmYesNo(
+                "Delete this asset? It will only be deleted if no depreciation/accounting transactions exist.",
+                "هل تريد حذف هذا الأصل؟ سيتم الحذف فقط إذا لم توجد معاملات استهلاك/محاسبة مرتبطة به.",
+                "Confirm Delete",
+                "تأكيد الحذف");
+
+            if (confirm != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                using (BusyScope.Show(this, "Deleting asset..."))
+                {
+                    string reason;
+                    bool deleted = _assetBLL.TryDeleteAssetIfNoTransactions(_currentAsset.AssetId, out reason);
+                    if (!deleted)
+                    {
+                        UiMessages.ShowWarning(
+                            string.IsNullOrWhiteSpace(reason)
+                                ? "Asset cannot be deleted because it has linked transactions."
+                                : reason,
+                            "لا يمكن حذف الأصل لأنه يحتوي على معاملات مرتبطة.");
+                        return;
+                    }
+                }
+
+                UiMessages.ShowInfo("Asset deleted successfully.", "تم حذف الأصل بنجاح", "Deleted", "تم الحذف");
+
+                _currentAsset = null;
+                LoadAssets();
+                UpdateSummaryCard();
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
+            }
+        }
+
+        private void BtnRefreshGrid_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (BusyScope.Show(this, "Refreshing assets..."))
+                {
+                    LoadAssets();
+                    FilterAssets(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
+            }
+        }
+
+        private void BtnSaveAssetInfo_Click(object sender, EventArgs e)
+        {
+            if (_currentAsset == null)
+            {
+                UiMessages.ShowWarning("Please select an asset first.", "يرجى تحديد أصل أولا");
+                return;
+            }
+
+            if (!ValidateAssetDetailsTab())
+            {
+                return;
+            }
+
+            try
+            {
+                using (BusyScope.Show(this, "Saving asset information..."))
+                {
+                    int? locationId = null;
+                    var selectedLocationName = ddlAssetLocation.SelectedItem?.ToString();
+                    if (!string.IsNullOrWhiteSpace(selectedLocationName))
+                    {
+                        var selectedLocation = _assetBLL.GetLocations(activeOnly: false)
+                            .FirstOrDefault(l => string.Equals(l.LocationName, selectedLocationName, StringComparison.OrdinalIgnoreCase));
+                        locationId = selectedLocation != null ? (int?)selectedLocation.LocationId : null;
+                    }
+
+                    _assetBLL.UpdateAssetInfoTabDetails(
+                        _currentAsset.AssetId,
+                        txtAssetName.Text,
+                        txtDescription.Text,
+                        dtPurchaseDate.Value.Date,
+                        ddlSupplier.Text,
+                        txtInvoiceNo.Text,
+                        locationId,
+                        txtSerialNumber.Text,
+                        txtModelNumber.Text,
+                        _currentAsset.Status);
+                }
+
+                LoadAssets();
+                _currentAsset = _allAssets.FirstOrDefault(a => a.AssetId == _currentAsset.AssetId);
+                if (_currentAsset != null)
+                {
+                    LoadAssetDetail();
+                    UpdateSummaryCard();
+                }
+
+                UiMessages.ShowInfo("Asset information updated successfully.", "تم تحديث معلومات الأصل بنجاح", "Saved", "تم الحفظ");
             }
             catch (Exception ex)
             {
@@ -553,6 +941,11 @@ namespace pos.FixedAssets
                             result.PeriodDate, result.EvaluatedAssets, result.PostedCount,
                             result.SkippedCount, result.ErrorCount, result.TotalDepreciation);
 
+                        if (result.Messages != null && result.Messages.Count > 0)
+                        {
+                            message += "\n\nDetails:\n" + string.Join("\n", result.Messages);
+                        }
+
                         UiMessages.ShowInfo(message, "تم تشغيل الاستهلاك بنجاح");
 
                         // Reload the current asset to show updated depreciation state
@@ -580,6 +973,17 @@ namespace pos.FixedAssets
                 return;
             }
 
+            // Prevent duplicate disposal
+            if (_currentAsset.IsDisposed ||
+                string.Equals(_currentAsset.Status, "Disposed", StringComparison.OrdinalIgnoreCase) ||
+                _currentAsset.DisposalDate.HasValue)
+            {
+                UiMessages.ShowWarning(
+                    "This asset is already disposed. Disposal can only be posted once.",
+                    "تم استبعاد هذا الأصل مسبقاً. يمكن تسجيل الاستبعاد مرة واحدة فقط.");
+                return;
+            }
+
             // Validate disposal date
             if (dtDisposalDate.Value == null)
             {
@@ -594,15 +998,57 @@ namespace pos.FixedAssets
                 return;
             }
 
+            if (_currentAsset.AccumDepAccountId <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Please save depreciation setup first (Accumulated Depreciation account is required).",
+                    "يرجى حفظ إعدادات الاستهلاك أولاً (حساب مجمع الاستهلاك مطلوب)");
+                return;
+            }
+
+            if (!TryGetSelectedAccountId(ddlDisposalAssetAccount, out int assetAccountId))
+            {
+                UiMessages.ShowWarning("Please select a valid Asset account.", "يرجى تحديد حساب أصل صحيح");
+                ddlDisposalAssetAccount.Focus();
+                return;
+            }
+
+            int receiptAccountId = 0;
+            if (disposalProceeds > 0m && !TryGetSelectedAccountId(ddlDisposalReceiptAccount, out receiptAccountId))
+            {
+                UiMessages.ShowWarning("Please select a valid Receipt account.", "يرجى تحديد حساب تحصيل صحيح");
+                ddlDisposalReceiptAccount.Focus();
+                return;
+            }
+
+            int gainAccountId = 0;
+            int lossAccountId = 0;
+
             try
             {
                 using (BusyScope.Show(this, "Posting disposal..."))
                 {
                     DateTime disposalDate = dtDisposalDate.Value.Date;
 
-                    // Calculate gain/loss on disposal
-                    decimal bookValue = _currentAsset.CurrentWDV;
-                    decimal gainLoss = disposalProceeds - bookValue;
+                    // Calculate disposal amounts
+                    decimal assetCost = RoundMoney(Math.Max(0m, _currentAsset.Cost));
+                    decimal bookValue = RoundMoney(Math.Max(0m, _currentAsset.CurrentWDV));
+                    decimal accumulatedDepreciation = RoundMoney(Math.Max(0m, assetCost - bookValue));
+                    decimal gainLoss = RoundMoney(disposalProceeds - bookValue);
+
+                    if (gainLoss > 0m && !TryGetSelectedAccountId(ddlDisposalGainAccount, out gainAccountId))
+                    {
+                        UiMessages.ShowWarning("Please select a valid Gain account.", "يرجى تحديد حساب أرباح صحيح");
+                        ddlDisposalGainAccount.Focus();
+                        return;
+                    }
+
+                    if (gainLoss < 0m && !TryGetSelectedAccountId(ddlDisposalLossAccount, out lossAccountId))
+                    {
+                        UiMessages.ShowWarning("Please select a valid Loss account.", "يرجى تحديد حساب خسائر صحيح");
+                        ddlDisposalLossAccount.Focus();
+                        return;
+                    }
 
                     // Create journal entries for disposal
                     AutoJVModel journal = new AutoJVModel
@@ -616,51 +1062,67 @@ namespace pos.FixedAssets
                         Lines = new List<JVLineModel>()
                     };
 
-                    // Debit Cash/Bank Account (placeholder - should be configurable)
-                    journal.Lines.Add(new JVLineModel
+                    // Debit receipt account by proceeds (if any)
+                    if (disposalProceeds > 0m)
                     {
-                        AccountId = 0, // Placeholder
-                        AccountName = "Bank / Cash",
-                        Debit = disposalProceeds,
-                        Credit = 0,
-                        Narration = $"Cash received from disposal of {_currentAsset.AssetName}"
-                    });
-
-                    // Credit Asset Account (Fixed Asset)
-                    journal.Lines.Add(new JVLineModel
-                    {
-                        AccountId = 0, // Placeholder
-                        AccountName = _currentAsset.AssetName,
-                        Debit = 0,
-                        Credit = bookValue,
-                        Narration = $"Book value of disposed asset"
-                    });
-
-                    // If there's a gain, credit gain account; if loss, debit loss account
-                    if (gainLoss != 0)
-                    {
-                        if (gainLoss > 0)
+                        journal.Lines.Add(new JVLineModel
                         {
-                            journal.Lines.Add(new JVLineModel
-                            {
-                                AccountId = 0,
-                                AccountName = "Gain on Disposal",
-                                Debit = 0,
-                                Credit = gainLoss,
-                                Narration = $"Gain on disposal of asset"
-                            });
-                        }
-                        else
+                            AccountId = receiptAccountId,
+                            AccountName = ddlDisposalReceiptAccount.SelectedItem?.ToString() ?? "",
+                            Debit = disposalProceeds,
+                            Credit = 0,
+                            Narration = $"Receipt from disposal of {_currentAsset.AssetName}"
+                        });
+                    }
+
+                    // Debit accumulated depreciation
+                    if (accumulatedDepreciation > 0m)
+                    {
+                        journal.Lines.Add(new JVLineModel
                         {
-                            journal.Lines.Add(new JVLineModel
-                            {
-                                AccountId = 0,
-                                AccountName = "Loss on Disposal",
-                                Debit = Math.Abs(gainLoss),
-                                Credit = 0,
-                                Narration = $"Loss on disposal of asset"
-                            });
-                        }
+                            AccountId = _currentAsset.AccumDepAccountId,
+                            AccountName = ddlAccumDepAccount.SelectedItem?.ToString() ?? "Accumulated Depreciation",
+                            Debit = accumulatedDepreciation,
+                            Credit = 0,
+                            Narration = "Accumulated depreciation reversal on disposal"
+                        });
+                    }
+
+                    // Credit fixed asset at historical cost
+                    if (assetCost > 0m)
+                    {
+                        journal.Lines.Add(new JVLineModel
+                        {
+                            AccountId = assetAccountId,
+                            AccountName = ddlDisposalAssetAccount.SelectedItem?.ToString() ?? _currentAsset.AssetName,
+                            Debit = 0,
+                            Credit = assetCost,
+                            Narration = "Derecognition of fixed asset cost"
+                        });
+                    }
+
+                    // Gain or loss line
+                    if (gainLoss > 0m)
+                    {
+                        journal.Lines.Add(new JVLineModel
+                        {
+                            AccountId = gainAccountId,
+                            AccountName = ddlDisposalGainAccount.SelectedItem?.ToString() ?? "Gain on Disposal",
+                            Debit = 0,
+                            Credit = gainLoss,
+                            Narration = "Gain on disposal of asset"
+                        });
+                    }
+                    else if (gainLoss < 0m)
+                    {
+                        journal.Lines.Add(new JVLineModel
+                        {
+                            AccountId = lossAccountId,
+                            AccountName = ddlDisposalLossAccount.SelectedItem?.ToString() ?? "Loss on Disposal",
+                            Debit = Math.Abs(gainLoss),
+                            Credit = 0,
+                            Narration = "Loss on disposal of asset"
+                        });
                     }
 
                     // Post the journal entry
@@ -669,17 +1131,32 @@ namespace pos.FixedAssets
 
                     if (result != null && result.Success)
                     {
-                        // Update asset status to Disposed
-                        _currentAsset.DisposalDate = disposalDate;
-                        _currentAsset.DisposalProceeds = disposalProceeds;
-                        _currentAsset.Status = "Disposed";
+                        // Determine disposal method from dropdown (default Write-Off if nothing selected)
+                        string disposalMethod = ddlDisposalMethod.SelectedItem?.ToString() ?? "Write-Off";
 
+                        // First update accumulated depreciation / WDV state
                         _assetBLL.UpdateAssetDepreciationState(
                             _currentAsset.AssetId,
-                            _currentAsset.AccumulatedDepreciation,
+                            accumulatedDepreciation,
                             0, // WDV becomes 0 after disposal
                             disposalDate,
                             "Disposed");
+
+                        // Then insert into fa_asset_disposals and force final disposal flags/status in fa_assets
+                        _assetBLL.RecordDisposal(
+                            _currentAsset.AssetId,
+                            disposalDate,
+                            disposalMethod,
+                            disposalProceeds,
+                            assetCost,
+                            accumulatedDepreciation,
+                            bookValue,
+                            $"Disposal voucher {result.VoucherNo}");
+
+                        // Update in-memory model
+                        _currentAsset.DisposalDate = disposalDate;
+                        _currentAsset.DisposalProceeds = disposalProceeds;
+                        _currentAsset.Status = "Disposed";
 
                         string message = string.Format(
                             "Disposal posted successfully:\n" +
@@ -718,17 +1195,51 @@ namespace pos.FixedAssets
                 return;
             }
 
-            // Validate revaluation cost
-            if (!decimal.TryParse(txtCost.Text, out var newRevaluationCost) || newRevaluationCost < 0)
+            // Prevent duplicate revaluation
+            if (_assetBLL.HasAssetRevaluation(_currentAsset.AssetId))
             {
-                UiMessages.ShowWarning("Please enter a valid revaluation cost.", "يرجى إدخال تكلفة إعادة تقييم صحيحة");
+                UiMessages.ShowWarning(
+                    "This asset is already revalued. Revaluation can only be posted once.",
+                    "تمت إعادة تقييم هذا الأصل مسبقاً. يمكن تسجيل إعادة التقييم مرة واحدة فقط.");
+                return;
+            }
+
+            DateTime revaluationDate = dtRevaluationDate.Value.Date;
+
+            // Validate revaluation amount
+            if (!decimal.TryParse(txtNewRevaluedAmount.Text, out var newRevaluationCost) || newRevaluationCost < 0)
+            {
+                UiMessages.ShowWarning("Please enter a valid revaluation amount.", "يرجى إدخال مبلغ إعادة تقييم صحيح");
+                txtNewRevaluedAmount.Focus();
                 return;
             }
 
             // Check if there's a change in cost
             if (newRevaluationCost == _currentAsset.Cost)
             {
-                UiMessages.ShowWarning("The revaluation cost must be different from the current cost.", "يجب أن تكون تكلفة إعادة التقييم مختلفة عن التكلفة الحالية");
+                UiMessages.ShowWarning("The revaluation amount must be different from current cost.", "يجب أن يكون مبلغ إعادة التقييم مختلفاً عن التكلفة الحالية");
+                return;
+            }
+
+            if (!TryGetSelectedAccountId(ddlRevaluationAssetAccount, out int assetAccountId))
+            {
+                UiMessages.ShowWarning("Please select a valid Revaluation Asset account.", "يرجى تحديد حساب أصل إعادة تقييم صحيح");
+                ddlRevaluationAssetAccount.Focus();
+                return;
+            }
+
+            if (!TryGetSelectedAccountId(ddlRevaluationAccount, out int revaluationReserveAccountId))
+            {
+                UiMessages.ShowWarning("Please select a valid Revaluation Reserve account.", "يرجى تحديد حساب احتياطي إعادة تقييم صحيح");
+                ddlRevaluationAccount.Focus();
+                return;
+            }
+
+            if (_currentAsset.AccumDepAccountId <= 0)
+            {
+                UiMessages.ShowWarning(
+                    "Please save depreciation setup first (Accumulated Depreciation account is required).",
+                    "يرجى حفظ إعدادات الاستهلاك أولاً (حساب مجمع الاستهلاك مطلوب)");
                 return;
             }
 
@@ -736,19 +1247,18 @@ namespace pos.FixedAssets
             {
                 using (BusyScope.Show(this, "Posting revaluation..."))
                 {
-                    DateTime revaluationDate = DateTime.Now;
-                    decimal oldCost = _currentAsset.Cost;
-                    decimal costDifference = newRevaluationCost - oldCost;
-                    decimal oldAccumulatedDep = _currentAsset.AccumulatedDepreciation;
+                    decimal oldCost = RoundMoney(Math.Max(0m, _currentAsset.Cost));
+                    decimal costDifference = RoundMoney(newRevaluationCost - oldCost);
+                    decimal oldAccumulatedDep = RoundMoney(Math.Max(0m, _currentAsset.AccumulatedDepreciation));
 
                     // Calculate new accumulated depreciation proportionately
                     decimal newAccumulatedDep = 0m;
-                    if (oldCost > 0 && newRevaluationCost > 0)
+                    if (oldCost > 0m && newRevaluationCost > 0m)
                     {
                         newAccumulatedDep = RoundMoney(oldAccumulatedDep * (newRevaluationCost / oldCost));
                     }
 
-                    decimal depreciationDifference = newAccumulatedDep - oldAccumulatedDep;
+                    decimal depreciationDifference = RoundMoney(newAccumulatedDep - oldAccumulatedDep);
 
                     // Create journal entries for revaluation
                     AutoJVModel journal = new AutoJVModel
@@ -762,91 +1272,92 @@ namespace pos.FixedAssets
                         Lines = new List<JVLineModel>()
                     };
 
-                    // Debit/Credit Asset Account with the cost difference
-                    if (costDifference > 0)
+                    // Revalue cost: asset vs revaluation reserve
+                    if (costDifference > 0m)
                     {
                         journal.Lines.Add(new JVLineModel
                         {
-                            AccountId = 0, // Placeholder
-                            AccountName = _currentAsset.AssetName,
+                            AccountId = assetAccountId,
+                            AccountName = ddlRevaluationAssetAccount.SelectedItem?.ToString() ?? _currentAsset.AssetName,
                             Debit = costDifference,
-                            Credit = 0,
-                            Narration = $"Upward revaluation of asset"
+                            Credit = 0m,
+                            Narration = "Upward revaluation of asset cost"
                         });
 
                         journal.Lines.Add(new JVLineModel
                         {
-                            AccountId = 0,
-                            AccountName = "Revaluation Reserve",
-                            Debit = 0,
+                            AccountId = revaluationReserveAccountId,
+                            AccountName = ddlRevaluationAccount.SelectedItem?.ToString() ?? "Revaluation Reserve",
+                            Debit = 0m,
                             Credit = costDifference,
-                            Narration = $"Upward revaluation reserve"
+                            Narration = "Upward revaluation reserve"
                         });
                     }
                     else
                     {
+                        decimal amount = Math.Abs(costDifference);
+
                         journal.Lines.Add(new JVLineModel
                         {
-                            AccountId = 0,
-                            AccountName = "Revaluation Reserve",
-                            Debit = Math.Abs(costDifference),
-                            Credit = 0,
-                            Narration = $"Downward revaluation reserve"
+                            AccountId = revaluationReserveAccountId,
+                            AccountName = ddlRevaluationAccount.SelectedItem?.ToString() ?? "Revaluation Reserve",
+                            Debit = amount,
+                            Credit = 0m,
+                            Narration = "Downward revaluation reserve"
                         });
 
                         journal.Lines.Add(new JVLineModel
                         {
-                            AccountId = 0,
-                            AccountName = _currentAsset.AssetName,
-                            Debit = 0,
-                            Credit = Math.Abs(costDifference),
-                            Narration = $"Downward revaluation of asset"
+                            AccountId = assetAccountId,
+                            AccountName = ddlRevaluationAssetAccount.SelectedItem?.ToString() ?? _currentAsset.AssetName,
+                            Debit = 0m,
+                            Credit = amount,
+                            Narration = "Downward revaluation of asset cost"
                         });
                     }
 
-                    // Handle accumulated depreciation adjustment if applicable
-                    if (depreciationDifference != 0)
+                    // Revalue accumulated depreciation vs reserve
+                    if (depreciationDifference > 0m)
                     {
-                        if (depreciationDifference > 0)
+                        journal.Lines.Add(new JVLineModel
                         {
-                            journal.Lines.Add(new JVLineModel
-                            {
-                                AccountId = 0,
-                                AccountName = "Accumulated Depreciation",
-                                Debit = depreciationDifference,
-                                Credit = 0,
-                                Narration = $"Adjust accumulated depreciation"
-                            });
+                            AccountId = revaluationReserveAccountId,
+                            AccountName = ddlRevaluationAccount.SelectedItem?.ToString() ?? "Revaluation Reserve",
+                            Debit = depreciationDifference,
+                            Credit = 0m,
+                            Narration = "Revaluation adjustment for accumulated depreciation"
+                        });
 
-                            journal.Lines.Add(new JVLineModel
-                            {
-                                AccountId = 0,
-                                AccountName = "Revaluation Reserve",
-                                Debit = 0,
-                                Credit = depreciationDifference,
-                                Narration = $"Revaluation adjustment for accumulated depreciation"
-                            });
-                        }
-                        else
+                        journal.Lines.Add(new JVLineModel
                         {
-                            journal.Lines.Add(new JVLineModel
-                            {
-                                AccountId = 0,
-                                AccountName = "Revaluation Reserve",
-                                Debit = Math.Abs(depreciationDifference),
-                                Credit = 0,
-                                Narration = $"Revaluation adjustment for accumulated depreciation"
-                            });
+                            AccountId = _currentAsset.AccumDepAccountId,
+                            AccountName = ddlAccumDepAccount.SelectedItem?.ToString() ?? "Accumulated Depreciation",
+                            Debit = 0m,
+                            Credit = depreciationDifference,
+                            Narration = "Increase accumulated depreciation after revaluation"
+                        });
+                    }
+                    else if (depreciationDifference < 0m)
+                    {
+                        decimal amount = Math.Abs(depreciationDifference);
 
-                            journal.Lines.Add(new JVLineModel
-                            {
-                                AccountId = 0,
-                                AccountName = "Accumulated Depreciation",
-                                Debit = 0,
-                                Credit = Math.Abs(depreciationDifference),
-                                Narration = $"Adjust accumulated depreciation"
-                            });
-                        }
+                        journal.Lines.Add(new JVLineModel
+                        {
+                            AccountId = _currentAsset.AccumDepAccountId,
+                            AccountName = ddlAccumDepAccount.SelectedItem?.ToString() ?? "Accumulated Depreciation",
+                            Debit = amount,
+                            Credit = 0m,
+                            Narration = "Decrease accumulated depreciation after revaluation"
+                        });
+
+                        journal.Lines.Add(new JVLineModel
+                        {
+                            AccountId = revaluationReserveAccountId,
+                            AccountName = ddlRevaluationAccount.SelectedItem?.ToString() ?? "Revaluation Reserve",
+                            Debit = 0m,
+                            Credit = amount,
+                            Narration = "Revaluation adjustment for accumulated depreciation"
+                        });
                     }
 
                     // Post the journal entry
@@ -855,22 +1366,35 @@ namespace pos.FixedAssets
 
                     if (result != null && result.Success)
                     {
-                        // Update asset with new cost
+                        decimal oldWdv = RoundMoney(oldCost - oldAccumulatedDep);
+                        decimal newWdv = RoundMoney(newRevaluationCost - newAccumulatedDep);
+
+                        // Save to revaluation table and update fa_assets values
+                        _assetBLL.RecordRevaluation(
+                            _currentAsset.AssetId,
+                            revaluationDate,
+                            oldCost,
+                            newRevaluationCost,
+                            oldAccumulatedDep,
+                            newAccumulatedDep,
+                            oldWdv,
+                            newWdv,
+                            $"Revaluation voucher {result.VoucherNo}");
+
+                        // Update in-memory asset values
                         _currentAsset.Cost = newRevaluationCost;
                         _currentAsset.AccumulatedDepreciation = newAccumulatedDep;
-                        _currentAsset.CurrentWDV = RoundMoney(newRevaluationCost - newAccumulatedDep);
-
-                        // Note: In a full implementation, you would want to regenerate the depreciation schedule
-                        // based on the new cost and remaining useful life
+                        _currentAsset.CurrentWDV = newWdv;
 
                         string message = string.Format(
                             "Revaluation posted successfully:\n" +
-                            "Old Cost: PKR {0:N2}\n" +
-                            "New Cost: PKR {1:N2}\n" +
-                            "Cost Difference: PKR {2:N2}\n" +
-                            "New Book Value: PKR {3:N2}\n" +
-                            "Voucher ID: {4}",
-                            oldCost, newRevaluationCost, costDifference, _currentAsset.CurrentWDV, result.VoucherId);
+                            "Revaluation Date: {0:yyyy-MM-dd}\n" +
+                            "Old Cost: PKR {1:N2}\n" +
+                            "New Cost: PKR {2:N2}\n" +
+                            "Cost Difference: PKR {3:N2}\n" +
+                            "New Book Value: PKR {4:N2}\n" +
+                            "Voucher ID: {5}",
+                            revaluationDate, oldCost, newRevaluationCost, costDifference, _currentAsset.CurrentWDV, result.VoucherId);
 
                         UiMessages.ShowInfo(message, "تم نشر إعادة التقييم بنجاح");
                         LoadAssetDetail();
@@ -902,13 +1426,15 @@ namespace pos.FixedAssets
             // Auto-recalculate depreciation based on new cost
             if (decimal.TryParse(txtCost.Text, out var cost) && _currentAsset != null)
             {
-                _currentAsset.Cost = cost;
                 if (numUsefulLifeYears.Value > 0)
                 {
                     var depAmount = cost / (int)numUsefulLifeYears.Value;
                     txtDepRate.Text = ((depAmount / cost) * 100).ToString("N2");
                 }
-                LoadDepreciationSchedulePreview();
+
+                // Use edited cost for preview only; keep persisted asset cost unchanged
+                // until explicit save/revaluation action is posted.
+                LoadDepreciationSchedulePreview(cost);
             }
         }
 
@@ -967,13 +1493,6 @@ namespace pos.FixedAssets
             {
                 UiMessages.ShowWarning("Please select an asset category.", "يرجى تحديد فئة أصل");
                 ddlAssetCategory.Focus();
-                return false;
-            }
-
-            if (ddlAssetStatus.SelectedIndex < 0)
-            {
-                UiMessages.ShowWarning("Please select an asset status.", "يرجى تحديد حالة الأصل");
-                ddlAssetStatus.Focus();
                 return false;
             }
 

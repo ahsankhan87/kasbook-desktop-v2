@@ -24,6 +24,19 @@ namespace POS.BLL
                 throw;
             }
         }
+        public DataTable GetAccountsWithAccountType()
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetAccountsWithAccountType();
+            }
+            catch
+            {
+
+                throw;
+            }
+        }
 
         public DataTable GetGroupAccountByParent(int parent_id = 0)
         {

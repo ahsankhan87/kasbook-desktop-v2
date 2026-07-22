@@ -86,6 +86,46 @@ namespace POS.BLL.FixedAssets
             return _dll.UpdateAssetDepreciationState(assetId, accumulatedDepreciation, currentWdv, NormalizePeriodDate(lastDepDate), status);
         }
 
+        public bool HasAssetRevaluation(int assetId)
+        {
+            return _dll.HasAssetRevaluation(assetId);
+        }
+
+        /// <summary>
+        /// Records the disposal in fa_asset_disposals and updates fa_assets disposal fields.
+        /// </summary>
+        public void RecordDisposal(
+            int assetId,
+            DateTime disposalDate,
+            string disposalMethod,
+            decimal disposalProceeds,
+            decimal disposalCost,
+            decimal accumDepAtDisposal,
+            decimal wdvAtDisposal,
+            string notes)
+        {
+            _dll.RecordDisposal(assetId, disposalDate, disposalMethod, disposalProceeds,
+                disposalCost, accumDepAtDisposal, wdvAtDisposal, notes);
+        }
+
+        /// <summary>
+        /// Records one-time revaluation in fa_asset_revaluations and updates asset values.
+        /// </summary>
+        public void RecordRevaluation(
+            int assetId,
+            DateTime revaluationDate,
+            decimal oldCost,
+            decimal newCost,
+            decimal oldAccumDep,
+            decimal newAccumDep,
+            decimal oldWdv,
+            decimal newWdv,
+            string notes)
+        {
+            _dll.RecordRevaluation(assetId, revaluationDate, oldCost, newCost,
+                oldAccumDep, newAccumDep, oldWdv, newWdv, notes);
+        }
+
         public List<DepScheduleLine> GetDepreciationHistory(int assetId)
         {
             DataTable table = _dll.GetDepreciationHistory(assetId);
@@ -102,11 +142,12 @@ namespace POS.BLL.FixedAssets
                     AssetCode = GetString(row, "asset_code"),
                     AssetName = GetString(row, "asset_name"),
                     DepMethod = GetString(row, "dep_method", "STRAIGHT_LINE"),
-                    PeriodDate = GetDateTime(row, "period_date"),
+                    PeriodDate = GetDateTime(row, "period_date", GetDateTime(row, "period_start", GetDateTime(row, "period_end"))),
                     OpeningWDV = GetDecimal(row, "opening_wdv"),
                     DepreciationAmount = GetDecimal(row, "depreciation_amount"),
                     AccumulatedDepreciation = GetDecimal(row, "accumulated_depreciation"),
-                    ClosingWDV = GetDecimal(row, "closing_wdv")
+                    ClosingWDV = GetDecimal(row, "closing_wdv"),
+                    VoucherId = GetNullableInt(row, "voucher_id")
                 });
             }
 
@@ -140,10 +181,14 @@ namespace POS.BLL.FixedAssets
             asset.AssetId = GetInt(row, "asset_id");
             asset.AssetCode = GetString(row, "asset_code");
             asset.AssetName = GetString(row, "asset_name");
+            asset.AssetDescription = GetString(row, "asset_description", GetString(row, "notes"));
             asset.CategoryId = GetInt(row, "category_id", GetInt(row, "cat_id"));
             asset.CategoryName = GetString(row, "category_name", GetString(row, "cat_name"));
             asset.LocationId = GetInt(row, "location_id");
             asset.PurchaseDate = GetDateTime(row, "purchase_date");
+            asset.PurchaseInvoiceNo = GetString(row, "purchase_invoice_no");
+            asset.SerialNumber = GetString(row, "serial_number");
+            asset.ModelNumber = GetString(row, "model_number");
             asset.Cost = GetDecimal(row, "cost");
             asset.ResidualValue = GetDecimal(row, "residual_value", GetDecimal(row, "salvage_value"));
             asset.UsefulLifeMonths = GetInt(row, "useful_life_months", GetInt(row, "default_useful_life", 0));
@@ -400,6 +445,80 @@ namespace POS.BLL.FixedAssets
                 throw new ArgumentException("Asset name is required.");
 
             return _dll.UpdateAssetDetails(assetId, assetName.Trim(), locationId, notes, isActive);
+        }
+
+        public int UpdateAssetInfoTabDetails(
+            int assetId,
+            string assetName,
+            string assetDescription,
+            DateTime purchaseDate,
+            string supplierName,
+            string purchaseInvoiceNo,
+            int? locationId,
+            string serialNumber,
+            string modelNumber,
+            string status)
+        {
+            if (assetId <= 0)
+                throw new ArgumentException("Asset ID is invalid.");
+            if (string.IsNullOrWhiteSpace(assetName))
+                throw new ArgumentException("Asset name is required.");
+
+            return _dll.UpdateAssetInfoTabDetails(
+                assetId,
+                assetName.Trim(),
+                string.IsNullOrWhiteSpace(assetDescription) ? null : assetDescription.Trim(),
+                purchaseDate,
+                string.IsNullOrWhiteSpace(supplierName) ? null : supplierName.Trim(),
+                string.IsNullOrWhiteSpace(purchaseInvoiceNo) ? null : purchaseInvoiceNo.Trim(),
+                locationId,
+                string.IsNullOrWhiteSpace(serialNumber) ? null : serialNumber.Trim(),
+                string.IsNullOrWhiteSpace(modelNumber) ? null : modelNumber.Trim(),
+                string.IsNullOrWhiteSpace(status) ? "Active" : status.Trim());
+        }
+
+        public int UpdateAssetDepreciationAccounts(int assetId, int depAccountId, int accumDepAccountId)
+        {
+            if (assetId <= 0)
+                throw new ArgumentException("Asset ID is invalid.");
+            if (depAccountId <= 0)
+                throw new ArgumentException("Depreciation expense account must be selected.");
+            if (accumDepAccountId <= 0)
+                throw new ArgumentException("Accumulated depreciation account must be selected.");
+
+            return _dll.UpdateAssetDepreciationAccounts(assetId, depAccountId, accumDepAccountId);
+        }
+
+        public bool HasAssetTransactions(int assetId)
+        {
+            if (assetId <= 0)
+                throw new ArgumentException("Asset ID is invalid.");
+
+            return _dll.HasAssetTransactions(assetId);
+        }
+
+        public bool TryDeleteAssetIfNoTransactions(int assetId, out string reason)
+        {
+            if (assetId <= 0)
+                throw new ArgumentException("Asset ID is invalid.");
+
+            if (_dll.HasAssetTransactions(assetId))
+            {
+                reason = "Asset has linked transactions and cannot be deleted.";
+                return false;
+            }
+
+            int deleteResult = _dll.DeleteAsset(assetId);
+            if (deleteResult != 0)
+            {
+                reason = deleteResult == -1
+                    ? "Asset not found. Please verify stored procedure delete check uses @asset_id."
+                    : "Asset could not be deleted.";
+                return false;
+            }
+
+            reason = string.Empty;
+            return true;
         }
     }
 }

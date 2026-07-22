@@ -28,6 +28,7 @@ namespace pos
             this.btnReopen = new System.Windows.Forms.ToolStripButton();
             this.btnViewTransactions = new System.Windows.Forms.ToolStripButton();
             this.btnYearEndClose = new System.Windows.Forms.ToolStripButton();
+            this.btnHelp = new System.Windows.Forms.ToolStripButton();
             this.panelBody = new System.Windows.Forms.Panel();
             this.gridPeriods = new System.Windows.Forms.DataGridView();
             this.colPeriodId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +70,7 @@ namespace pos
             this.lblYearCaption.AutoSize = true;
             this.lblYearCaption.Location = new System.Drawing.Point(16, 37);
             this.lblYearCaption.Name = "lblYearCaption";
-            this.lblYearCaption.Size = new System.Drawing.Size(106, 17);
+            this.lblYearCaption.Size = new System.Drawing.Size(116, 20);
             this.lblYearCaption.TabIndex = 1;
             this.lblYearCaption.Text = "Active Year: N/A";
             // 
@@ -79,22 +80,24 @@ namespace pos
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblTitle.Location = new System.Drawing.Point(14, 9);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(239, 21);
+            this.lblTitle.Size = new System.Drawing.Size(281, 28);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Financial Period Management";
             // 
             // toolActions
             // 
+            this.toolActions.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnOpenNewPeriod,
             this.btnSoftClose,
             this.btnHardLock,
             this.btnReopen,
             this.btnViewTransactions,
-            this.btnYearEndClose});
+            this.btnYearEndClose,
+            this.btnHelp});
             this.toolActions.Location = new System.Drawing.Point(0, 63);
             this.toolActions.Name = "toolActions";
-            this.toolActions.Size = new System.Drawing.Size(1284, 25);
+            this.toolActions.Size = new System.Drawing.Size(1284, 27);
             this.toolActions.TabIndex = 1;
             this.toolActions.Text = "toolStrip1";
             // 
@@ -102,7 +105,7 @@ namespace pos
             // 
             this.btnOpenNewPeriod.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnOpenNewPeriod.Name = "btnOpenNewPeriod";
-            this.btnOpenNewPeriod.Size = new System.Drawing.Size(106, 22);
+            this.btnOpenNewPeriod.Size = new System.Drawing.Size(129, 28);
             this.btnOpenNewPeriod.Tag = "finance.edit";
             this.btnOpenNewPeriod.Text = "Open New Period";
             this.btnOpenNewPeriod.Click += new System.EventHandler(this.btnOpenNewPeriod_Click);
@@ -111,7 +114,7 @@ namespace pos
             // 
             this.btnSoftClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnSoftClose.Name = "btnSoftClose";
-            this.btnSoftClose.Size = new System.Drawing.Size(97, 22);
+            this.btnSoftClose.Size = new System.Drawing.Size(126, 28);
             this.btnSoftClose.Tag = "finance.edit";
             this.btnSoftClose.Text = "Soft Close Period";
             this.btnSoftClose.Click += new System.EventHandler(this.btnSoftClose_Click);
@@ -120,7 +123,7 @@ namespace pos
             // 
             this.btnHardLock.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnHardLock.Name = "btnHardLock";
-            this.btnHardLock.Size = new System.Drawing.Size(95, 22);
+            this.btnHardLock.Size = new System.Drawing.Size(126, 28);
             this.btnHardLock.Tag = "finance.edit";
             this.btnHardLock.Text = "Hard Lock Period";
             this.btnHardLock.Click += new System.EventHandler(this.btnHardLock_Click);
@@ -129,7 +132,7 @@ namespace pos
             // 
             this.btnReopen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnReopen.Name = "btnReopen";
-            this.btnReopen.Size = new System.Drawing.Size(84, 22);
+            this.btnReopen.Size = new System.Drawing.Size(110, 28);
             this.btnReopen.Tag = "finance.edit";
             this.btnReopen.Text = "Reopen Period";
             this.btnReopen.Click += new System.EventHandler(this.btnReopen_Click);
@@ -138,7 +141,7 @@ namespace pos
             // 
             this.btnViewTransactions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnViewTransactions.Name = "btnViewTransactions";
-            this.btnViewTransactions.Size = new System.Drawing.Size(135, 22);
+            this.btnViewTransactions.Size = new System.Drawing.Size(176, 28);
             this.btnViewTransactions.Tag = "finance.view";
             this.btnViewTransactions.Text = "View Period Transactions";
             this.btnViewTransactions.Click += new System.EventHandler(this.btnViewTransactions_Click);
@@ -147,19 +150,28 @@ namespace pos
             // 
             this.btnYearEndClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnYearEndClose.Name = "btnYearEndClose";
-            this.btnYearEndClose.Size = new System.Drawing.Size(132, 22);
+            this.btnYearEndClose.Size = new System.Drawing.Size(134, 28);
             this.btnYearEndClose.Tag = "finance.edit";
             this.btnYearEndClose.Text = "Year-End Closing...";
             this.btnYearEndClose.Click += new System.EventHandler(this.btnYearEndClose_Click);
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(47, 24);
+            this.btnHelp.Tag = "finance.view";
+            this.btnHelp.Text = "Help";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // panelBody
             // 
             this.panelBody.Controls.Add(this.gridPeriods);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 88);
+            this.panelBody.Location = new System.Drawing.Point(0, 90);
             this.panelBody.Name = "panelBody";
             this.panelBody.Padding = new System.Windows.Forms.Padding(8);
-            this.panelBody.Size = new System.Drawing.Size(1284, 573);
+            this.panelBody.Size = new System.Drawing.Size(1284, 571);
             this.panelBody.TabIndex = 2;
             // 
             // gridPeriods
@@ -186,8 +198,9 @@ namespace pos
             this.gridPeriods.Name = "gridPeriods";
             this.gridPeriods.ReadOnly = true;
             this.gridPeriods.RowHeadersVisible = false;
+            this.gridPeriods.RowHeadersWidth = 51;
             this.gridPeriods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridPeriods.Size = new System.Drawing.Size(1268, 557);
+            this.gridPeriods.Size = new System.Drawing.Size(1268, 555);
             this.gridPeriods.TabIndex = 0;
             this.gridPeriods.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gridPeriods_CellPainting);
             this.gridPeriods.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridPeriods_MouseDown);
@@ -196,6 +209,7 @@ namespace pos
             // 
             this.colPeriodId.DataPropertyName = "period_id";
             this.colPeriodId.HeaderText = "Period ID";
+            this.colPeriodId.MinimumWidth = 6;
             this.colPeriodId.Name = "colPeriodId";
             this.colPeriodId.ReadOnly = true;
             this.colPeriodId.Visible = false;
@@ -204,6 +218,7 @@ namespace pos
             // 
             this.colYearId.DataPropertyName = "year_id";
             this.colYearId.HeaderText = "Year ID";
+            this.colYearId.MinimumWidth = 6;
             this.colYearId.Name = "colYearId";
             this.colYearId.ReadOnly = true;
             this.colYearId.Visible = false;
@@ -212,6 +227,7 @@ namespace pos
             // 
             this.colFinancialYear.DataPropertyName = "financial_year";
             this.colFinancialYear.HeaderText = "Financial Year";
+            this.colFinancialYear.MinimumWidth = 6;
             this.colFinancialYear.Name = "colFinancialYear";
             this.colFinancialYear.ReadOnly = true;
             // 
@@ -219,6 +235,7 @@ namespace pos
             // 
             this.colPeriodName.DataPropertyName = "period_name";
             this.colPeriodName.HeaderText = "Period Name";
+            this.colPeriodName.MinimumWidth = 6;
             this.colPeriodName.Name = "colPeriodName";
             this.colPeriodName.ReadOnly = true;
             // 
@@ -226,6 +243,7 @@ namespace pos
             // 
             this.colStartDate.DataPropertyName = "start_date";
             this.colStartDate.HeaderText = "Start Date";
+            this.colStartDate.MinimumWidth = 6;
             this.colStartDate.Name = "colStartDate";
             this.colStartDate.ReadOnly = true;
             // 
@@ -233,6 +251,7 @@ namespace pos
             // 
             this.colEndDate.DataPropertyName = "end_date";
             this.colEndDate.HeaderText = "End Date";
+            this.colEndDate.MinimumWidth = 6;
             this.colEndDate.Name = "colEndDate";
             this.colEndDate.ReadOnly = true;
             // 
@@ -240,6 +259,7 @@ namespace pos
             // 
             this.colStatusBadge.DataPropertyName = "status";
             this.colStatusBadge.HeaderText = "Status";
+            this.colStatusBadge.MinimumWidth = 6;
             this.colStatusBadge.Name = "colStatusBadge";
             this.colStatusBadge.ReadOnly = true;
             // 
@@ -247,6 +267,7 @@ namespace pos
             // 
             this.colClosedBy.DataPropertyName = "closed_by";
             this.colClosedBy.HeaderText = "Closed By";
+            this.colClosedBy.MinimumWidth = 6;
             this.colClosedBy.Name = "colClosedBy";
             this.colClosedBy.ReadOnly = true;
             // 
@@ -254,6 +275,7 @@ namespace pos
             // 
             this.colClosedAt.DataPropertyName = "closed_at";
             this.colClosedAt.HeaderText = "Closed At";
+            this.colClosedAt.MinimumWidth = 6;
             this.colClosedAt.Name = "colClosedAt";
             this.colClosedAt.ReadOnly = true;
             // 
@@ -261,6 +283,7 @@ namespace pos
             // 
             this.colTransactionsCount.DataPropertyName = "transactions_count";
             this.colTransactionsCount.HeaderText = "Transactions Count";
+            this.colTransactionsCount.MinimumWidth = 6;
             this.colTransactionsCount.Name = "colTransactionsCount";
             this.colTransactionsCount.ReadOnly = true;
             // 
@@ -268,11 +291,13 @@ namespace pos
             // 
             this.colCanReopen.DataPropertyName = "can_reopen";
             this.colCanReopen.HeaderText = "Can Reopen";
+            this.colCanReopen.MinimumWidth = 6;
             this.colCanReopen.Name = "colCanReopen";
             this.colCanReopen.ReadOnly = true;
             // 
             // contextPeriodActions
             // 
+            this.contextPeriodActions.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextPeriodActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxOpenNewPeriod,
             this.ctxSoftClose,
@@ -280,56 +305,58 @@ namespace pos
             this.ctxReopen,
             this.ctxViewTransactions});
             this.contextPeriodActions.Name = "contextPeriodActions";
-            this.contextPeriodActions.Size = new System.Drawing.Size(199, 114);
+            this.contextPeriodActions.Size = new System.Drawing.Size(242, 124);
             // 
             // ctxOpenNewPeriod
             // 
             this.ctxOpenNewPeriod.Name = "ctxOpenNewPeriod";
-            this.ctxOpenNewPeriod.Size = new System.Drawing.Size(198, 22);
+            this.ctxOpenNewPeriod.Size = new System.Drawing.Size(241, 24);
             this.ctxOpenNewPeriod.Text = "Open New Period";
             this.ctxOpenNewPeriod.Click += new System.EventHandler(this.btnOpenNewPeriod_Click);
             // 
             // ctxSoftClose
             // 
             this.ctxSoftClose.Name = "ctxSoftClose";
-            this.ctxSoftClose.Size = new System.Drawing.Size(198, 22);
+            this.ctxSoftClose.Size = new System.Drawing.Size(241, 24);
             this.ctxSoftClose.Text = "Soft Close Period";
             this.ctxSoftClose.Click += new System.EventHandler(this.btnSoftClose_Click);
             // 
             // ctxHardLock
             // 
             this.ctxHardLock.Name = "ctxHardLock";
-            this.ctxHardLock.Size = new System.Drawing.Size(198, 22);
+            this.ctxHardLock.Size = new System.Drawing.Size(241, 24);
             this.ctxHardLock.Text = "Hard Lock Period";
             this.ctxHardLock.Click += new System.EventHandler(this.btnHardLock_Click);
             // 
             // ctxReopen
             // 
             this.ctxReopen.Name = "ctxReopen";
-            this.ctxReopen.Size = new System.Drawing.Size(198, 22);
+            this.ctxReopen.Size = new System.Drawing.Size(241, 24);
             this.ctxReopen.Text = "Reopen Period";
             this.ctxReopen.Click += new System.EventHandler(this.btnReopen_Click);
             // 
             // ctxViewTransactions
             // 
             this.ctxViewTransactions.Name = "ctxViewTransactions";
-            this.ctxViewTransactions.Size = new System.Drawing.Size(198, 22);
+            this.ctxViewTransactions.Size = new System.Drawing.Size(241, 24);
             this.ctxViewTransactions.Text = "View Period Transactions";
             this.ctxViewTransactions.Click += new System.EventHandler(this.btnViewTransactions_Click);
             // 
             // frm_financial_periods
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 661);
             this.Controls.Add(this.panelBody);
             this.Controls.Add(this.toolActions);
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.KeyPreview = true;
             this.Name = "frm_financial_periods";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Financial Period Management";
             this.Load += new System.EventHandler(this.frm_financial_periods_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_financial_periods_KeyDown);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             this.toolActions.ResumeLayout(false);
@@ -353,6 +380,7 @@ namespace pos
         private System.Windows.Forms.ToolStripButton btnReopen;
         private System.Windows.Forms.ToolStripButton btnViewTransactions;
         private System.Windows.Forms.ToolStripButton btnYearEndClose;
+        private System.Windows.Forms.ToolStripButton btnHelp;
         private System.Windows.Forms.Panel panelBody;
         private System.Windows.Forms.DataGridView gridPeriods;
         private System.Windows.Forms.ContextMenuStrip contextPeriodActions;

@@ -731,8 +731,7 @@ namespace pos
                 int partyId = GetRowPartyId(row);
                 if (partyId <= 0)
                 {
-                    MessageBox.Show(string.Format("Please select party in line {0} for selected {1} account.", i + 1, refModule.ToLowerInvariant()), "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
+                    continue;
                 }
             }
 
@@ -908,7 +907,7 @@ namespace pos
                     Narration = BuildLineDescription(Convert.ToString(row.Cells["description"].Value)),
                     Debit = debit,
                     Credit = credit,
-                    CostCenterID = row.Cells["cost_center"].Value == null ? 0 : Convert.ToInt32(row.Cells["cost_center"].Value),
+                    CostCenterID = TryGetInt(row.Cells["cost_center"].Value, out int ccId) ? ccId : 0,
                     ModuleName = string.IsNullOrWhiteSpace(refModule) ? "MANUAL" : refModule,
                     RefId = partyId > 0 ? (int?)partyId : null,
                     CustomerId = refModule == "CUSTOMER" && partyId > 0 ? (int?)partyId : null,

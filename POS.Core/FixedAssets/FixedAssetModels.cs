@@ -112,6 +112,8 @@ namespace POS.Core
         public decimal AccumulatedDepreciation { get; set; }
 
         public decimal ClosingWDV { get; set; }
+
+        public int? VoucherId { get; set; }
     }
 
     public class DepreciationRunSummary

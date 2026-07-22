@@ -267,6 +267,12 @@
     <Compile Include="Accounts\ImportProgressForm.Designer.cs">
       <DependentUpon>ImportProgressForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accounts\Maintenance\frm_financial_management_help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Maintenance\frm_financial_management_help.Designer.cs">
+      <DependentUpon>frm_financial_management_help.cs</DependentUpon>
+    </Compile>
     <Compile Include="Accounts\Maintenance\frm_year_end_close_wizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1880,6 +1886,9 @@
     <EmbeddedResource Include="Accounts\Journals\frm_journal_voucher_manager.resx">
       <DependentUpon>frm_journal_voucher_manager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Maintenance\frm_financial_periods.resx">
+      <DependentUpon>frm_financial_periods.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\AP\AccountPayable.ar-SA.resx">
       <DependentUpon>AccountPayable.cs</DependentUpon>
     </EmbeddedResource>
@@ -2045,6 +2054,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Expenses\frm_expense_tracker.resx">
       <DependentUpon>frm_expense_tracker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixedAssets\frm_fixedAssetCategories.resx">
+      <DependentUpon>frm_fixedAssetCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixedAssets\frm_fixedAssetLocations.resx">
+      <DependentUpon>frm_fixedAssetLocations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixedAssets\frm_fixed_asset_register.resx">
       <DependentUpon>frm_fixed_asset_register.cs</DependentUpon>

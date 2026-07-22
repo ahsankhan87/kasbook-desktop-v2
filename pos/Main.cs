@@ -67,7 +67,7 @@ namespace pos
             UI.AppTheme.Apply(this);
             StyleMainForm();
 
-            this.Text = "Nozum ERP V3.0.0 - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_username + " - " + UsersModal.logged_in_user_role + ")";
+            this.Text = "Nozum ERP V3.0.0 - " + UsersModal.logged_in_branch_name + " (" + UsersModal.logged_in_userFullName + " - " + UsersModal.logged_in_user_role + ")";
 
             // Re-apply DB-backed permissions to ensure module-based enabling can't elevate privileges
             AppSecurityContext.RefreshUserClaims();
@@ -75,7 +75,7 @@ namespace pos
 
             mark_checked_lang_menu(); // language menu mark checked
 
-            toolStripStatusLabel_username.Text = UsersModal.logged_in_username + "-" + UsersModal.logged_in_user_role;
+            toolStripStatusLabel_username.Text = UsersModal.logged_in_userFullName + "-" + UsersModal.logged_in_user_role;
             toolStripStatusLabel_branch_name.Text = UsersModal.logged_in_branch_name.ToString();
             toolStripStatusLabel_fiscalyear.Text = UsersModal.fiscal_year.Trim();
             toolStripStatusLabelCompanyName.Text = UsersModal.logged_in_company_name.Trim();
@@ -95,7 +95,7 @@ namespace pos
             }
 
             //App logging 
-            POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_username}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+            POS.DLL.Log.LogAction("User Login", $"User ID: {UsersModal.logged_in_userid}, Name: {UsersModal.logged_in_userFullName}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 
             _currentLoginUsername = ResolveCurrentLoginUsername();
             _cachedSystemId = new HardwareIdentifier().GetUniqueHardwareId();
@@ -141,7 +141,7 @@ namespace pos
             _inactivityTimer.Stop();
 
             DialogResult lockResult;
-            using (var lockForm = new frm_session_lock(UsersModal.logged_in_username, _currentLoginUsername, UsersModal.logged_in_userid))
+            using (var lockForm = new frm_session_lock(UsersModal.logged_in_userFullName, _currentLoginUsername, UsersModal.logged_in_userid))
             {
                 lockResult = lockForm.ShowDialog(this);
             }

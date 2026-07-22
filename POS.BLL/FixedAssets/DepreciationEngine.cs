@@ -195,32 +195,42 @@ namespace POS.BLL.FixedAssets
                 EvaluatedAssets = assets.Count
             };
 
-            try
+            foreach (FixedAssetModel asset in assets)
             {
-                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions
+                try
                 {
-                    IsolationLevel = IsolationLevel.ReadCommitted
-                }))
-                {
-                    foreach (FixedAssetModel asset in assets)
+                    if (_assetBll.DepreciationRunExists(asset.AssetId, normalizedPeriod))
                     {
-                        if (_assetBll.DepreciationRunExists(asset.AssetId, normalizedPeriod))
-                        {
-                            summary.SkippedCount++;
-                            summary.Messages.Add(string.Format(CultureInfo.InvariantCulture, "Asset {0} skipped: depreciation already run for {1:yyyy-MM}.", asset.AssetCode, normalizedPeriod));
-                            continue;
-                        }
+                        summary.SkippedCount++;
+                        summary.Messages.Add(string.Format(CultureInfo.InvariantCulture, "Asset {0} skipped: depreciation already run for {1:yyyy-MM}.", asset.AssetCode, normalizedPeriod));
+                        continue;
+                    }
 
-                        decimal openingWdv = GetCurrentWdv(asset);
-                        decimal depAmount = CalculateAssetDepreciation(asset, normalizedPeriod);
-                        if (depAmount <= 0m)
-                        {
-                            summary.SkippedCount++;
-                            summary.Messages.Add(string.Format(CultureInfo.InvariantCulture, "Asset {0} skipped: no depreciation due for {1:yyyy-MM}.", asset.AssetCode, normalizedPeriod));
-                            continue;
-                        }
+                    decimal openingWdv = GetCurrentWdv(asset);
+                    decimal depAmount = CalculateAssetDepreciation(asset, normalizedPeriod);
+                    if (depAmount <= 0m)
+                    {
+                        summary.SkippedCount++;
+                        summary.Messages.Add(string.Format(CultureInfo.InvariantCulture, "Asset {0} skipped: no depreciation due for {1:yyyy-MM}.", asset.AssetCode, normalizedPeriod));
+                        continue;
+                    }
 
-                        decimal closingWdv = Math.Max(asset.ResidualValue, RoundMoney(openingWdv - depAmount));
+                    // Skip (with a clear message) instead of throwing when accounts are not set up.
+                    if (asset.DepAccountId <= 0 || asset.AccumDepAccountId <= 0)
+                    {
+                        summary.SkippedCount++;
+                        summary.Messages.Add(string.Format(CultureInfo.InvariantCulture,
+                            "Asset {0} skipped: depreciation expense account or accumulated depreciation account is not configured. Please set them up in the asset's depreciation setup.", asset.AssetCode));
+                        continue;
+                    }
+
+                    decimal closingWdv = Math.Max(asset.ResidualValue, RoundMoney(openingWdv - depAmount));
+
+                    using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions
+                    {
+                        IsolationLevel = IsolationLevel.ReadCommitted
+                    }))
+                    {
                         AutoJVModel autoJournal = CreateAutoJournal(asset, depAmount, normalizedPeriod);
                         PostResult journalResult = _journalsBll.PostAutoJournalEntry(autoJournal, userId);
                         if (journalResult == null || !journalResult.Success || journalResult.EntryIds.Count == 0)
@@ -253,19 +263,15 @@ namespace POS.BLL.FixedAssets
                             AccumulatedDepreciation = newAccumulated,
                             ClosingWDV = closingWdv
                         });
-                    }
 
-                    scope.Complete();
+                        scope.Complete();
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                summary.PostedCount = 0;
-                summary.SkippedCount = 0;
-                summary.TotalDepreciation = 0m;
-                summary.PostedLines.Clear();
-                summary.ErrorCount++;
-                summary.Messages.Add(ex.Message);
+                catch (Exception ex)
+                {
+                    summary.ErrorCount++;
+                    summary.Messages.Add(string.Format(CultureInfo.InvariantCulture, "Asset {0} error: {1}", asset.AssetCode, ex.Message));
+                }
             }
 
             return summary;

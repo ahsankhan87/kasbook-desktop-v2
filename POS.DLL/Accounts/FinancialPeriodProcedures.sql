@@ -142,7 +142,7 @@ BEGIN
 		RETURN;
 	END
 
-	IF @close_type = 'Soft' AND @current_status = 'Hard-Locked'
+	IF @close_type = 'Soft' AND @current_status = 'HardLocked'
 	BEGIN
 		SET @result_message = N'Hard-locked period cannot be soft-closed.';
 		RETURN;
@@ -172,20 +172,20 @@ BEGIN
 			RETURN;
 		END
 
-		SET @target_status = 'Soft-Closed';
+		SET @target_status = 'SoftClosed';
 	END
 	ELSE
 	BEGIN
-		SET @target_status = 'Hard-Locked';
+		SET @target_status = 'HardLocked';
 	END
 
-	IF @close_type = 'Hard' AND @current_status = 'Hard-Locked'
+	IF @close_type = 'Hard' AND @current_status = 'HardLocked'
 	BEGIN
 		SET @result_message = N'Period is already hard-locked.';
 		RETURN;
 	END
 
-	IF @close_type = 'Soft' AND @current_status = 'Soft-Closed'
+	IF @close_type = 'Soft' AND @current_status = 'SoftClosed'
 	BEGIN
 		SET @result_message = N'Period is already soft-closed.';
 		RETURN;
@@ -195,7 +195,7 @@ BEGIN
 
 	UPDATE acc_financial_periods
 	SET status = @target_status,
-		closed_by = CAST(@closed_by AS NVARCHAR(50)),
+		closed_by = LEFT(CONCAT('', @closed_by), 50),
 		closed_at = GETDATE()
 	WHERE period_id = @period_id;
 

@@ -231,9 +231,9 @@ namespace POS.DLL
                         cn.Open();
 
                         cmd = new SqlCommand(@"INSERT INTO acc_entries_header
-                            (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, date_created, date_updated, user_id, branch_id)
+                            (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, period_id, date_created, date_updated, user_id, branch_id)
                             VALUES
-                            (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @date_created, @date_updated, @user_id, @branch_id);
+                            (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @period_id, @date_created, @date_updated, @user_id, @branch_id);
                             SELECT CAST(SCOPE_IDENTITY() AS INT);", cn);
                         cmd.Parameters.AddWithValue("@InvoiceNo", obj.invoice_no);
                         cmd.Parameters.AddWithValue("@EntryDate", obj.entry_date.Date);
@@ -248,6 +248,7 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@posted_by", (object)obj.posted_by ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@posted_at", (object)obj.posted_at ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@is_auto_posted", obj.is_auto_posted ? 1 : 0);
+                        cmd.Parameters.AddWithValue("@period_id", (object)obj.period_id ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
@@ -274,9 +275,9 @@ namespace POS.DLL
                     {
                         int headerId;
                         using (SqlCommand headerCmd = new SqlCommand(@"INSERT INTO acc_entries_header
-                            (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, date_created, date_updated, user_id, branch_id)
+                            (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, period_id, date_created, date_updated, user_id, branch_id)
                             VALUES
-                            (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @date_created, @date_updated, @user_id, @branch_id);
+                            (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @period_id, @date_created, @date_updated, @user_id, @branch_id);
                             SELECT CAST(SCOPE_IDENTITY() AS INT);", cn, tx))
                         {
                             headerCmd.Parameters.AddWithValue("@InvoiceNo", header.invoice_no);
@@ -292,6 +293,7 @@ namespace POS.DLL
                             headerCmd.Parameters.AddWithValue("@posted_by", (object)header.posted_by ?? DBNull.Value);
                             headerCmd.Parameters.AddWithValue("@posted_at", (object)header.posted_at ?? DBNull.Value);
                             headerCmd.Parameters.AddWithValue("@is_auto_posted", header.is_auto_posted ? 1 : 0);
+                            headerCmd.Parameters.AddWithValue("@period_id", (object)header.period_id ?? DBNull.Value);
                             headerCmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             headerCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             headerCmd.Parameters.AddWithValue("@date_created", DateTime.Now);
@@ -319,6 +321,7 @@ namespace POS.DLL
                                 lineCmd.Parameters.AddWithValue("@bank_id", line.bank_id);
                                 lineCmd.Parameters.AddWithValue("@entry_id", line.entry_id);
                                 lineCmd.Parameters.AddWithValue("@payment_ref_invoice_no", line.payment_ref_invoice_no);
+                                lineCmd.Parameters.AddWithValue("@period_id", line.period_id);
                                 lineCmd.Parameters.AddWithValue("@OperationType", "1");
                                 lineCmd.ExecuteScalar();
                             }
@@ -647,9 +650,9 @@ WHERE H.InvoiceNo = @invoice_no AND H.branch_id = @branch_id;", cn))
 
                         int reversalHeaderId;
                         using (SqlCommand headerCmd = new SqlCommand(@"INSERT INTO acc_entries_header
-                            (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, date_created, date_updated, user_id, branch_id)
+                            (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, period_id, date_created, date_updated, user_id, branch_id)
                             VALUES
-                            (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @date_created, @date_updated, @user_id, @branch_id);
+                            (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @period_id, @date_created, @date_updated, @user_id, @branch_id);
                             SELECT CAST(SCOPE_IDENTITY() AS INT);", cn, tx))
                         {
                             headerCmd.Parameters.AddWithValue("@InvoiceNo", reversalHeader.invoice_no);
@@ -665,6 +668,7 @@ WHERE H.InvoiceNo = @invoice_no AND H.branch_id = @branch_id;", cn))
                             headerCmd.Parameters.AddWithValue("@posted_by", reversalHeader.posted_by.HasValue ? (object)reversalHeader.posted_by.Value : DBNull.Value);
                             headerCmd.Parameters.AddWithValue("@posted_at", reversalHeader.posted_at.HasValue ? (object)reversalHeader.posted_at.Value : DBNull.Value);
                             headerCmd.Parameters.AddWithValue("@is_auto_posted", reversalHeader.is_auto_posted ? 1 : 0);
+                            headerCmd.Parameters.AddWithValue("@period_id", (object) reversalHeader.period_id ?? DBNull.Value);
                             headerCmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             headerCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             headerCmd.Parameters.AddWithValue("@date_created", DateTime.Now);
@@ -693,6 +697,7 @@ WHERE H.InvoiceNo = @invoice_no AND H.branch_id = @branch_id;", cn))
                                 lineCmd.Parameters.AddWithValue("@bank_id", 0);
                                 lineCmd.Parameters.AddWithValue("@entry_id", reversalHeaderId);
                                 lineCmd.Parameters.AddWithValue("@payment_ref_invoice_no", originalInvoiceNo);
+                                lineCmd.Parameters.AddWithValue("@period_id", reversalHeader.period_id);
                                 lineCmd.Parameters.AddWithValue("@OperationType", "1");
                                 lineCmd.ExecuteScalar();
                             }
@@ -844,6 +849,8 @@ WHERE id IN (" + inClause + @")
                         cmd.Parameters.AddWithValue("@bank_id", obj.bank_id);
                         cmd.Parameters.AddWithValue("@entry_id", obj.entry_id);
                         cmd.Parameters.AddWithValue("@payment_ref_invoice_no", obj.payment_ref_invoice_no);
+                        cmd.Parameters.AddWithValue("@period_id", obj.period_id);
+
                         cmd.Parameters.AddWithValue("@OperationType", "1");
                         
                         //--operation types   
@@ -956,11 +963,7 @@ WHERE id IN (" + inClause + @")
 
             try
             {
-                int periodId = new AccountingDAL(ConnectionString).GetCurrentPeriodId(header.VoucherDate);
-                if (periodId <= 0)
-                {
-                    throw new DataException("No accounting period exists for the voucher date.");
-                }
+                
 
                 header.VoucherNo = string.IsNullOrWhiteSpace(header.VoucherNo)
                     ? new AccountingDAL(ConnectionString).GenerateVoucherNo(header.VoucherType)
@@ -974,9 +977,9 @@ WHERE id IN (" + inClause + @")
 
                 using (SqlCommand cmd = new SqlCommand(@"
 INSERT INTO acc_entries_header
-    (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, date_created, date_updated, user_id, branch_id)
+    (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, Attachment, total_debit, total_credit, status, reversal_of, posted_by, posted_at, is_auto_posted, period_id, date_created, date_updated, user_id, branch_id)
 VALUES
-    (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @date_created, @date_updated, @user_id, @branch_id);
+    (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @Attachment, @total_debit, @total_credit, @status, @reversal_of, @posted_by, @posted_at, @is_auto_posted, @period_id, @date_created, @date_updated, @user_id, @branch_id);
 SELECT CAST(SCOPE_IDENTITY() AS INT);", transaction.Connection, transaction))
                 {
                     cmd.Parameters.AddWithValue("@InvoiceNo", header.VoucherNo);
@@ -992,6 +995,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", transaction.Connection, transaction))
                     cmd.Parameters.AddWithValue("@posted_by", header.PostedBy.HasValue ? (object)header.PostedBy.Value : DBNull.Value);
                     cmd.Parameters.AddWithValue("@posted_at", header.PostedAt.HasValue ? (object)header.PostedAt.Value : DBNull.Value);
                     cmd.Parameters.AddWithValue("@is_auto_posted", header.IsAutoPosted ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@period_id", header.PeriodId);
                     cmd.Parameters.AddWithValue("@date_created", header.CreatedAt.Value);
                     cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
                     cmd.Parameters.AddWithValue("@user_id", header.CreatedBy.HasValue ? (object)header.CreatedBy.Value : UsersModal.logged_in_userid);
@@ -1009,7 +1013,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", transaction.Connection, transaction))
                         line.VoucherId = voucherId;
                     }
 
-                    BulkInsertEntries(lines, transaction, voucherId, header.VoucherNo, header.VoucherDate, periodId, header.CreatedBy ?? 0);
+                    BulkInsertEntries(lines, transaction, voucherId, header.VoucherNo, header.VoucherDate, header.PeriodId, header.CreatedBy ?? 0);
                     return voucherId;
                 }
             }
@@ -1021,10 +1025,10 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", transaction.Connection, transaction))
 
         public int BulkInsertEntries(List<JVLineModel> lines, SqlTransaction transaction)
         {
-            return BulkInsertEntries(lines, transaction, 0, null, DateTime.Today, 0, 0);
+            return BulkInsertEntries(lines, transaction, 0, null, DateTime.Today, null, 0);
         }
 
-        public int BulkInsertEntries(List<JVLineModel> lines, SqlTransaction transaction, int voucherId, string voucherNo, DateTime entryDate, int periodId, int createdBy)
+        public int BulkInsertEntries(List<JVLineModel> lines, SqlTransaction transaction, int voucherId, string voucherNo, DateTime entryDate, int? periodId, int createdBy)
         {
             if (transaction == null)
             {
@@ -1050,6 +1054,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", transaction.Connection, transaction))
                 bulk.ColumnMappings.Add("description", "description");
                 bulk.ColumnMappings.Add("user_id", "user_id");
                 bulk.ColumnMappings.Add("branch_id", "branch_id");
+                bulk.ColumnMappings.Add("period_id", "period_id");
                 bulk.ColumnMappings.Add("date_created", "date_created");
                 bulk.ColumnMappings.Add("cost_center_id", "cost_center_id");
                 bulk.WriteToServer(table);
@@ -1193,7 +1198,18 @@ WHERE id = @voucher_id
             }
         }
 
-        private static DataTable BuildEntriesDataTable(List<JVLineModel> lines, int voucherId, string voucherNo, DateTime entryDate, int periodId, int createdBy)
+        private int? ResolvePeriodId(DateTime voucherDate, int? periodId = null)
+        {
+            if (periodId.HasValue && periodId.Value > 0)
+            {
+                return periodId.Value;
+            }
+
+            int resolved = new AccountingDAL(ConnectionString).GetCurrentPeriodId(voucherDate.Date);
+            return resolved > 0 ? (int?)resolved : null;
+        }
+
+        private static DataTable BuildEntriesDataTable(List<JVLineModel> lines, int voucherId, string voucherNo, DateTime entryDate, int? periodId, int createdBy)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("invoice_no", typeof(string));
@@ -1204,6 +1220,7 @@ WHERE id = @voucher_id
             dt.Columns.Add("description", typeof(string));
             dt.Columns.Add("user_id", typeof(int));
             dt.Columns.Add("branch_id", typeof(int));
+            dt.Columns.Add("period_id", typeof(int));
             dt.Columns.Add("date_created", typeof(DateTime));
             dt.Columns.Add("cost_center_id", typeof(int));
 
@@ -1221,6 +1238,9 @@ WHERE id = @voucher_id
                     (object)NormalizeText(line.Narration) ?? DBNull.Value,
                     effectiveUserId,
                     UsersModal.logged_in_branch_id,
+                    line.PeriodId.HasValue && line.PeriodId.Value > 0
+                        ? (object)line.PeriodId.Value
+                        : (periodId.HasValue && periodId.Value > 0 ? (object)periodId.Value : DBNull.Value),
                     DateTime.Now,
                     line.CostCenterID > 0 ? (object)line.CostCenterID : DBNull.Value);
             }
@@ -1382,6 +1402,19 @@ WHERE id = @voucher_id
                 {
                     result.Messages.AddRange(accountErrors);
                     return result;
+                }
+
+                int? periodId = ResolvePeriodId(header.VoucherDate, header.PeriodId);
+                header.PeriodId = periodId;
+                if (periodId.HasValue && periodId.Value > 0)
+                {
+                    foreach (JVLineModel line in lines)
+                    {
+                        if (!line.PeriodId.HasValue || line.PeriodId.Value <= 0)
+                        {
+                            line.PeriodId = periodId;
+                        }
+                    }
                 }
 
                 if (string.IsNullOrWhiteSpace(header.VoucherNo))
@@ -1602,21 +1635,63 @@ WHERE id = @voucher_id
                 {
                     try
                     {
+                        decimal totalDebit = model.Lines.Sum(x => x.Debit);
+                        decimal totalCredit = model.Lines.Sum(x => x.Credit);
+                        int? periodId = ResolvePeriodId(model.VoucherDate);
+                        int voucherId;
+
+                        using (SqlCommand headerCmd = new SqlCommand(@"
+                            INSERT INTO acc_entries_header
+                                (InvoiceNo, EntryDate, VoucherType, ReferenceNo, Narration, total_debit, total_credit, status, posted_by, posted_at, is_auto_posted, period_id, date_created, date_updated, user_id, branch_id)
+                            VALUES
+                                (@InvoiceNo, @EntryDate, @VoucherType, @ReferenceNo, @Narration, @total_debit, @total_credit, @status, @posted_by, @posted_at, @is_auto_posted, @period_id, @date_created, @date_updated, @user_id, @branch_id);
+                            SELECT CAST(SCOPE_IDENTITY() AS INT);", cn, tx))
+                        {
+                            headerCmd.Parameters.AddWithValue("@InvoiceNo", voucherNo);
+                            headerCmd.Parameters.AddWithValue("@EntryDate", model.VoucherDate.Date);
+                            headerCmd.Parameters.AddWithValue("@VoucherType", string.IsNullOrWhiteSpace(model.ModuleName) ? "Journal" : model.ModuleName.Trim());
+                            headerCmd.Parameters.AddWithValue("@ReferenceNo", string.IsNullOrWhiteSpace(model.ReferenceNo) ? (object)DBNull.Value : model.ReferenceNo.Trim());
+                            headerCmd.Parameters.AddWithValue("@Narration", string.IsNullOrWhiteSpace(model.Narration) ? (object)DBNull.Value : model.Narration.Trim());
+                            headerCmd.Parameters.AddWithValue("@total_debit", totalDebit);
+                            headerCmd.Parameters.AddWithValue("@total_credit", totalCredit);
+                            headerCmd.Parameters.AddWithValue("@status", "Posted");
+                            headerCmd.Parameters.AddWithValue("@posted_by", userId);
+                            headerCmd.Parameters.AddWithValue("@posted_at", DateTime.Now);
+                            headerCmd.Parameters.AddWithValue("@is_auto_posted", model.IsAutoPosted ? 1 : 0);
+                            headerCmd.Parameters.AddWithValue("@period_id", periodId.HasValue && periodId.Value > 0 ? (object)periodId.Value : DBNull.Value);
+                            headerCmd.Parameters.AddWithValue("@date_created", DateTime.Now);
+                            headerCmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
+                            headerCmd.Parameters.AddWithValue("@user_id", userId);
+                            headerCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                            object voucherIdObj = headerCmd.ExecuteScalar();
+                            voucherId = voucherIdObj == null || voucherIdObj == DBNull.Value ? 0 : Convert.ToInt32(voucherIdObj);
+                            if (voucherId <= 0)
+                            {
+                                throw new DataException("Auto journal header insert failed.");
+                            }
+                        }
+
+                        foreach (DataRow row in stagedLines.Rows)
+                        {
+                            row["entry_id"] = voucherId;
+                        }
+
                         if (stagedLines.Rows.Count >= BulkCopyThreshold)
                         {
                             using (SqlCommand createStage = new SqlCommand(@"
-CREATE TABLE #AutoJVLines (
-    line_no INT NOT NULL,
-    account_id INT NOT NULL,
-    debit DECIMAL(18,2) NOT NULL DEFAULT 0,
-    credit DECIMAL(18,2) NOT NULL DEFAULT 0,
-    narration NVARCHAR(MAX) NULL,
-    entry_id INT NULL,
-    payment_ref_invoice_no NVARCHAR(100) NULL,
-    customer_id INT NULL,
-    supplier_id INT NULL,
-    bank_id INT NULL
-);", cn, tx))
+                                CREATE TABLE #AutoJVLines (
+                                    line_no INT NOT NULL,
+                                    account_id INT NOT NULL,
+                                    debit DECIMAL(18,2) NOT NULL DEFAULT 0,
+                                    credit DECIMAL(18,2) NOT NULL DEFAULT 0,
+                                    narration NVARCHAR(MAX) NULL,
+                                    entry_id INT NULL,
+                                    payment_ref_invoice_no NVARCHAR(100) NULL,
+                                    customer_id INT NULL,
+                                    supplier_id INT NULL,
+                                    bank_id INT NULL
+                                );", cn, tx))
                             {
                                 createStage.ExecuteNonQuery();
                             }
@@ -1640,19 +1715,20 @@ CREATE TABLE #AutoJVLines (
                             }
 
                             using (SqlCommand insertCmd = new SqlCommand(@"
-DECLARE @Inserted TABLE (EntryId INT);
-INSERT INTO acc_entries
-    (invoice_no, account_id, entry_date, debit, credit, description, user_id, branch_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no)
-OUTPUT INSERTED.id INTO @Inserted(EntryId)
-SELECT @invoice_no, account_id, @entry_date, debit, credit, narration, @user_id, @branch_id, GETDATE(), customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no
-FROM #AutoJVLines
-ORDER BY line_no;
-SELECT EntryId FROM @Inserted ORDER BY EntryId;", cn, tx))
+                                DECLARE @Inserted TABLE (EntryId INT);
+                                INSERT INTO acc_entries
+                                    (invoice_no, account_id, account_name, entry_date, debit, credit, description, user_id, branch_id, period_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no)
+                                OUTPUT INSERTED.id INTO @Inserted(EntryId)
+                                SELECT @invoice_no, account_id, (SELECT name FROM acc_accounts WHERE id = account_id), @entry_date, debit, credit, narration, @user_id, @branch_id, @period_id, GETDATE(), customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no
+                                FROM #AutoJVLines
+                                ORDER BY line_no;
+                                SELECT EntryId FROM @Inserted ORDER BY EntryId;", cn, tx))
                             {
                                 insertCmd.Parameters.AddWithValue("@invoice_no", voucherNo);
                                 insertCmd.Parameters.AddWithValue("@entry_date", model.VoucherDate.Date);
                                 insertCmd.Parameters.AddWithValue("@user_id", userId);
                                 insertCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                                insertCmd.Parameters.AddWithValue("@period_id", periodId.HasValue && periodId.Value > 0 ? (object)periodId.Value : DBNull.Value);
                                 using (SqlDataReader reader = insertCmd.ExecuteReader())
                                 {
                                     while (reader.Read())
@@ -1670,11 +1746,11 @@ SELECT EntryId FROM @Inserted ORDER BY EntryId;", cn, tx))
                             foreach (JVLineModel line in model.Lines)
                             {
                                 using (SqlCommand insertCmd = new SqlCommand(@"
-INSERT INTO acc_entries
-    (invoice_no, account_id, entry_date, debit, credit, description, user_id, branch_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no)
-OUTPUT INSERTED.id
-VALUES
-    (@invoice_no, @account_id, @entry_date, @debit, @credit, @description, @user_id, @branch_id, GETDATE(), @customer_id, @supplier_id, @bank_id, @entry_id, @payment_ref_invoice_no);", cn, tx))
+                                INSERT INTO acc_entries
+                                    (invoice_no, account_id, account_name, entry_date, debit, credit, description, user_id, branch_id, period_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no)
+                                OUTPUT INSERTED.id
+                                VALUES
+                                    (@invoice_no, @account_id, (SELECT name FROM acc_accounts WHERE id = @account_id), @entry_date, @debit, @credit, @description, @user_id, @branch_id, @period_id, GETDATE(), @customer_id, @supplier_id, @bank_id, @entry_id, @payment_ref_invoice_no);", cn, tx))
                                 {
                                     insertCmd.Parameters.AddWithValue("@invoice_no", voucherNo);
                                     insertCmd.Parameters.AddWithValue("@account_id", line.AccountId);
@@ -1684,10 +1760,11 @@ VALUES
                                     insertCmd.Parameters.AddWithValue("@description", string.IsNullOrWhiteSpace(line.Narration) ? (object)model.Narration ?? DBNull.Value : line.Narration);
                                     insertCmd.Parameters.AddWithValue("@user_id", userId);
                                     insertCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                                    insertCmd.Parameters.AddWithValue("@period_id", periodId.HasValue && periodId.Value > 0 ? (object)periodId.Value : DBNull.Value);
                                     insertCmd.Parameters.AddWithValue("@customer_id", 0);
                                     insertCmd.Parameters.AddWithValue("@supplier_id", 0);
                                     insertCmd.Parameters.AddWithValue("@bank_id", 0);
-                                    insertCmd.Parameters.AddWithValue("@entry_id", model.RefId);
+                                    insertCmd.Parameters.AddWithValue("@entry_id", voucherId);
                                     insertCmd.Parameters.AddWithValue("@payment_ref_invoice_no", string.IsNullOrWhiteSpace(model.ReferenceNo) ? (object)DBNull.Value : model.ReferenceNo);
                                     object inserted = insertCmd.ExecuteScalar();
                                     if (inserted != null && inserted != DBNull.Value)
@@ -1700,7 +1777,9 @@ VALUES
 
                         result.Success = insertedEntryIds.Count > 0;
                         result.VoucherNo = voucherNo;
+                        result.VoucherId = voucherId;
                         result.EntryIds = insertedEntryIds;
+                        tx.Commit();
                         return result;
                     }
                     catch (Exception ex)
@@ -1747,7 +1826,15 @@ VALUES
                     continue;
                 }
 
-                if (line.CustomerId.HasValue && line.CustomerId.Value > 0)
+                bool hasCustomer = line.CustomerId.HasValue && line.CustomerId.Value > 0;
+                bool hasSupplier = line.SupplierId.HasValue && line.SupplierId.Value > 0;
+                bool hasBank = line.BankId.HasValue && line.BankId.Value > 0;
+                if (!hasCustomer && !hasSupplier && !hasBank)
+                {
+                    continue;
+                }
+
+                if (hasCustomer)
                 {
                     using (SqlCommand cmd = new SqlCommand(@"
                         INSERT INTO pos_customers_payments
@@ -1770,7 +1857,7 @@ VALUES
                     }
                 }
 
-                if (line.SupplierId.HasValue && line.SupplierId.Value > 0)
+                if (hasSupplier)
                 {
                     using (SqlCommand cmd = new SqlCommand(@"
                         INSERT INTO pos_suppliers_payments
@@ -1793,7 +1880,7 @@ VALUES
                     }
                 }
 
-                if (line.BankId.HasValue && line.BankId.Value > 0)
+                if (hasBank)
                 {
                     using (SqlCommand cmd = new SqlCommand(@"
                         IF COL_LENGTH('pos_banks_payments', 'invoice_no') IS NOT NULL
@@ -1811,7 +1898,7 @@ VALUES
                             INSERT INTO pos_banks_payments
                                 (invoice_no, debit, credit, description, entry_date, account_id,account_name, bank_id, user_id, branch_id, date_created, entry_id)
                             VALUES
-                                (@invoice_no, @debit, @credit, @description, @entry_date,(SELECT name FROM acc_accounts WHERE id=@account_id), @account_id, @bank_id, @user_id, @branch_id, GETDATE(), @entry_id);
+                                (@invoice_no, @debit, @credit, @description, @entry_date,@account_id,(SELECT name FROM acc_accounts WHERE id=@account_id),  @bank_id, @user_id, @branch_id, GETDATE(), @entry_id);
                         END", cn))
                     {
                         cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
@@ -1936,6 +2023,7 @@ VALUES
                         new XElement("IsAutoPosted", header.IsAutoPosted ? "1" : "0"),
                         new XElement("BranchId", header.BranchId.HasValue ? header.BranchId.Value.ToString(CultureInfo.InvariantCulture) : UsersModal.logged_in_branch_id.ToString(CultureInfo.InvariantCulture)),
                         new XElement("CompanyId", header.CompanyId.HasValue ? header.CompanyId.Value.ToString(CultureInfo.InvariantCulture) : UsersModal.loggedIncompanyID.ToString(CultureInfo.InvariantCulture)),
+                        new XElement("PeriodId", header.PeriodId.HasValue ? header.PeriodId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
                         new XElement("CreatedBy", header.CreatedBy.HasValue ? header.CreatedBy.Value.ToString(CultureInfo.InvariantCulture) : userId.ToString(CultureInfo.InvariantCulture)),
                         new XElement("CreatedAt", header.CreatedAt.HasValue ? header.CreatedAt.Value.ToString("o", CultureInfo.InvariantCulture) : DateTime.Now.ToString("o", CultureInfo.InvariantCulture))
                     ),
@@ -1949,7 +2037,8 @@ VALUES
                                 new XElement("Narration", line.Narration ?? string.Empty),
                                 new XElement("CostCenterID", line.CostCenterID > 0 ? line.CostCenterID.ToString(CultureInfo.InvariantCulture) : string.Empty),
                                 new XElement("ModuleName", line.ModuleName ?? string.Empty),
-                                new XElement("RefId", line.RefId.HasValue ? line.RefId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty)
+                                new XElement("RefId", line.RefId.HasValue ? line.RefId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
+                                new XElement("PeriodId", line.PeriodId.HasValue ? line.PeriodId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty)
                             )
                         )
                     )

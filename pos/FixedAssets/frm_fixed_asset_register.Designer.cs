@@ -32,7 +32,10 @@ namespace pos.FixedAssets
             this.btnManageCategories = new System.Windows.Forms.Button();
             this.btnManageLocations = new System.Windows.Forms.Button();
             this.btnEditAsset = new System.Windows.Forms.Button();
+            this.btnDeleteAsset = new System.Windows.Forms.Button();
             this.pnlFilters = new System.Windows.Forms.Panel();
+            this.btnSaveAssetInfo = new System.Windows.Forms.Button();
+            this.btnRefreshGrid = new System.Windows.Forms.Button();
             this.lblCategory = new System.Windows.Forms.Label();
             this.ddlCategory = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -91,7 +94,7 @@ namespace pos.FixedAssets
             // 
             this.splitContainer.Panel2.Controls.Add(this.rightPanel);
             this.splitContainer.Size = new System.Drawing.Size(1388, 752);
-            this.splitContainer.SplitterDistance = 1013;
+            this.splitContainer.SplitterDistance = 820;
             this.splitContainer.TabIndex = 0;
             // 
             // leftPanel
@@ -106,7 +109,7 @@ namespace pos.FixedAssets
             this.leftPanel.Margin = new System.Windows.Forms.Padding(4);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.leftPanel.Size = new System.Drawing.Size(1013, 752);
+            this.leftPanel.Size = new System.Drawing.Size(720, 752);
             this.leftPanel.TabIndex = 0;
             // 
             // dgvAssets
@@ -131,8 +134,9 @@ namespace pos.FixedAssets
             this.dgvAssets.ReadOnly = true;
             this.dgvAssets.RowHeadersWidth = 51;
             this.dgvAssets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAssets.Size = new System.Drawing.Size(1001, 611);
+            this.dgvAssets.Size = new System.Drawing.Size(808, 611);
             this.dgvAssets.TabIndex = 0;
+            this.dgvAssets.SelectionChanged += new System.EventHandler(this.DgvAssets_SelectionChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -197,11 +201,13 @@ namespace pos.FixedAssets
             this.pnlToolbar.Controls.Add(this.btnManageCategories);
             this.pnlToolbar.Controls.Add(this.btnManageLocations);
             this.pnlToolbar.Controls.Add(this.btnEditAsset);
+            this.pnlToolbar.Controls.Add(this.btnDeleteAsset);
+            this.pnlToolbar.Controls.Add(this.btnRefreshGrid);
             this.pnlToolbar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlToolbar.Location = new System.Drawing.Point(6, 703);
             this.pnlToolbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlToolbar.Name = "pnlToolbar";
-            this.pnlToolbar.Size = new System.Drawing.Size(1001, 43);
+            this.pnlToolbar.Size = new System.Drawing.Size(808, 43);
             this.pnlToolbar.TabIndex = 1;
             // 
             // btnAddAsset
@@ -211,7 +217,7 @@ namespace pos.FixedAssets
             this.btnAddAsset.Name = "btnAddAsset";
             this.btnAddAsset.Size = new System.Drawing.Size(140, 37);
             this.btnAddAsset.TabIndex = 0;
-            this.btnAddAsset.Text = "[Add New Asset]";
+            this.btnAddAsset.Text = "Add New Asset";
             this.btnAddAsset.Click += new System.EventHandler(this.BtnAddAsset_Click);
             // 
             // btnImportAssets
@@ -221,7 +227,7 @@ namespace pos.FixedAssets
             this.btnImportAssets.Name = "btnImportAssets";
             this.btnImportAssets.Size = new System.Drawing.Size(140, 37);
             this.btnImportAssets.TabIndex = 1;
-            this.btnImportAssets.Text = "[Import Assets]";
+            this.btnImportAssets.Text = "Import Assets";
             // 
             // btnManageCategories
             // 
@@ -230,28 +236,48 @@ namespace pos.FixedAssets
             this.btnManageCategories.Name = "btnManageCategories";
             this.btnManageCategories.Size = new System.Drawing.Size(149, 37);
             this.btnManageCategories.TabIndex = 2;
-            this.btnManageCategories.Text = "[Manage Categories]";
+            this.btnManageCategories.Text = "Manage Categories";
             this.btnManageCategories.Click += new System.EventHandler(this.BtnManageCategories_Click);
             // 
             // btnManageLocations
             // 
-            this.btnManageLocations.Location = new System.Drawing.Point(574, 2);
+            this.btnManageLocations.Location = new System.Drawing.Point(529, 2);
             this.btnManageLocations.Margin = new System.Windows.Forms.Padding(4);
             this.btnManageLocations.Name = "btnManageLocations";
             this.btnManageLocations.Size = new System.Drawing.Size(140, 37);
             this.btnManageLocations.TabIndex = 3;
-            this.btnManageLocations.Text = "[Manage Locations]";
+            this.btnManageLocations.Text = "Manage Locations";
             this.btnManageLocations.Click += new System.EventHandler(this.BtnManageLocations_Click);
             // 
             // btnEditAsset
             // 
-            this.btnEditAsset.Location = new System.Drawing.Point(426, 2);
+            this.btnEditAsset.Location = new System.Drawing.Point(435, 2);
             this.btnEditAsset.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditAsset.Name = "btnEditAsset";
-            this.btnEditAsset.Size = new System.Drawing.Size(140, 37);
+            this.btnEditAsset.Size = new System.Drawing.Size(94, 37);
             this.btnEditAsset.TabIndex = 4;
-            this.btnEditAsset.Text = "[Edit Asset]";
-            this.btnEditAsset.Click += new System.EventHandler(this.BtnAddAsset_Click);
+            this.btnEditAsset.Text = "Edit Asset";
+            this.btnEditAsset.Click += new System.EventHandler(this.BtnEditAsset_Click);
+            // 
+            // btnDeleteAsset
+            // 
+            this.btnDeleteAsset.Location = new System.Drawing.Point(669, 2);
+            this.btnDeleteAsset.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteAsset.Name = "btnDeleteAsset";
+            this.btnDeleteAsset.Size = new System.Drawing.Size(105, 37);
+            this.btnDeleteAsset.TabIndex = 5;
+            this.btnDeleteAsset.Text = "Delete Asset";
+            this.btnDeleteAsset.Click += new System.EventHandler(this.BtnDeleteAsset_Click);
+            // 
+            // btnRefreshGrid
+            // 
+            this.btnRefreshGrid.Location = new System.Drawing.Point(774, 2);
+            this.btnRefreshGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefreshGrid.Name = "btnRefreshGrid";
+            this.btnRefreshGrid.Size = new System.Drawing.Size(94, 37);
+            this.btnRefreshGrid.TabIndex = 6;
+            this.btnRefreshGrid.Text = "Refresh";
+            this.btnRefreshGrid.Click += new System.EventHandler(this.BtnRefreshGrid_Click);
             // 
             // pnlFilters
             // 
@@ -265,7 +291,7 @@ namespace pos.FixedAssets
             this.pnlFilters.Location = new System.Drawing.Point(6, 55);
             this.pnlFilters.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFilters.Name = "pnlFilters";
-            this.pnlFilters.Size = new System.Drawing.Size(1001, 37);
+            this.pnlFilters.Size = new System.Drawing.Size(808, 37);
             this.pnlFilters.TabIndex = 2;
             // 
             // lblCategory
@@ -334,7 +360,7 @@ namespace pos.FixedAssets
             this.txtSearch.Location = new System.Drawing.Point(6, 31);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(1001, 24);
+            this.txtSearch.Size = new System.Drawing.Size(808, 24);
             this.txtSearch.TabIndex = 3;
             // 
             // lblSearch
@@ -343,7 +369,7 @@ namespace pos.FixedAssets
             this.lblSearch.Location = new System.Drawing.Point(6, 6);
             this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(1001, 25);
+            this.lblSearch.Size = new System.Drawing.Size(808, 25);
             this.lblSearch.TabIndex = 4;
             this.lblSearch.Text = "Search:";
             // 
@@ -355,7 +381,7 @@ namespace pos.FixedAssets
             this.rightPanel.Margin = new System.Windows.Forms.Padding(4);
             this.rightPanel.Name = "rightPanel";
             this.rightPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.rightPanel.Size = new System.Drawing.Size(371, 752);
+            this.rightPanel.Size = new System.Drawing.Size(564, 752);
             this.rightPanel.TabIndex = 0;
             // 
             // tabControl
@@ -369,7 +395,7 @@ namespace pos.FixedAssets
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(359, 740);
+            this.tabControl.Size = new System.Drawing.Size(552, 740);
             this.tabControl.TabIndex = 0;
             // 
             // tabAssetInfo
@@ -378,7 +404,7 @@ namespace pos.FixedAssets
             this.tabAssetInfo.Margin = new System.Windows.Forms.Padding(4);
             this.tabAssetInfo.Name = "tabAssetInfo";
             this.tabAssetInfo.Padding = new System.Windows.Forms.Padding(12);
-            this.tabAssetInfo.Size = new System.Drawing.Size(351, 711);
+            this.tabAssetInfo.Size = new System.Drawing.Size(544, 711);
             this.tabAssetInfo.TabIndex = 0;
             this.tabAssetInfo.Text = "Asset Information";
             // 
@@ -388,7 +414,7 @@ namespace pos.FixedAssets
             this.tabDepreciationSetup.Margin = new System.Windows.Forms.Padding(4);
             this.tabDepreciationSetup.Name = "tabDepreciationSetup";
             this.tabDepreciationSetup.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDepreciationSetup.Size = new System.Drawing.Size(351, 711);
+            this.tabDepreciationSetup.Size = new System.Drawing.Size(544, 711);
             this.tabDepreciationSetup.TabIndex = 1;
             this.tabDepreciationSetup.Text = "Depreciation Setup";
             // 
@@ -398,7 +424,7 @@ namespace pos.FixedAssets
             this.tabDepreciationHistory.Margin = new System.Windows.Forms.Padding(4);
             this.tabDepreciationHistory.Name = "tabDepreciationHistory";
             this.tabDepreciationHistory.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDepreciationHistory.Size = new System.Drawing.Size(351, 711);
+            this.tabDepreciationHistory.Size = new System.Drawing.Size(544, 711);
             this.tabDepreciationHistory.TabIndex = 2;
             this.tabDepreciationHistory.Text = "Depreciation History";
             // 
@@ -408,7 +434,7 @@ namespace pos.FixedAssets
             this.tabDisposalRevaluation.Margin = new System.Windows.Forms.Padding(4);
             this.tabDisposalRevaluation.Name = "tabDisposalRevaluation";
             this.tabDisposalRevaluation.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDisposalRevaluation.Size = new System.Drawing.Size(351, 711);
+            this.tabDisposalRevaluation.Size = new System.Drawing.Size(544, 711);
             this.tabDisposalRevaluation.TabIndex = 3;
             this.tabDisposalRevaluation.Text = "Disposal / Revaluation";
             // 
@@ -457,6 +483,7 @@ namespace pos.FixedAssets
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_fixed_asset_register";
             this.Text = "Fixed Asset Register";
+            this.Load += new System.EventHandler(this.frm_fixed_asset_register_Load);
             this.mainPanel.ResumeLayout(false);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
@@ -538,11 +565,15 @@ namespace pos.FixedAssets
             this.txtModelNumber = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtModelNumber); y += gap;
 
-            // Status
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Status:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
-            this.ddlAssetStatus = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            // Status (display-only; not editable)
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Status:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h), Visible = false });
+            this.ddlAssetStatus = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h), Visible = false, Enabled = false };
             this.ddlAssetStatus.Items.AddRange(new object[] { "Active", "Under Repair", "Disposed", "Fully Depreciated" });
-            scroll.Controls.Add(this.ddlAssetStatus);
+            scroll.Controls.Add(this.ddlAssetStatus); y += gap;
+
+            // Save Asset Info button (inside Asset Info tab)
+            this.btnSaveAssetInfo = new System.Windows.Forms.Button() { Text = "Save Asset Info", Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
+            scroll.Controls.Add(this.btnSaveAssetInfo);
 
             tab.Controls.Add(scroll);
         }
@@ -595,7 +626,17 @@ namespace pos.FixedAssets
             // Start Dep Date
             scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Start Dep. From:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.dtStartDepreciationDate = new System.Windows.Forms.DateTimePicker() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
-            scroll.Controls.Add(this.dtStartDepreciationDate); y += gap + 8;
+            scroll.Controls.Add(this.dtStartDepreciationDate); y += gap + 4;
+
+            // Save Dep Setup button
+            this.btnSaveDepSetup = new System.Windows.Forms.Button();
+            this.btnSaveDepSetup.Text = "Save Depreciation Setup";
+            this.btnSaveDepSetup.Location = new System.Drawing.Point(cx, y);
+            this.btnSaveDepSetup.Size = new System.Drawing.Size(160, 28);
+            this.btnSaveDepSetup.BackColor = System.Drawing.Color.FromArgb(39, 174, 96);
+            this.btnSaveDepSetup.ForeColor = System.Drawing.Color.White;
+            this.btnSaveDepSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            scroll.Controls.Add(this.btnSaveDepSetup); y += 40;
 
             // Schedule label
             scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Depreciation Schedule Preview:", Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
@@ -685,6 +726,22 @@ namespace pos.FixedAssets
             this.ddlDisposalMethod.Items.AddRange(new object[] { "Sale", "Write-Off", "Donation", "Scrapped" });
             scroll.Controls.Add(this.ddlDisposalMethod); y += gap;
 
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Receipt Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            this.ddlDisposalReceiptAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            scroll.Controls.Add(this.ddlDisposalReceiptAccount); y += gap;
+
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Asset Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            this.ddlDisposalAssetAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            scroll.Controls.Add(this.ddlDisposalAssetAccount); y += gap;
+
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Gain Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            this.ddlDisposalGainAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            scroll.Controls.Add(this.ddlDisposalGainAccount); y += gap;
+
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Loss Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            this.ddlDisposalLossAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            scroll.Controls.Add(this.ddlDisposalLossAccount); y += gap;
+
             scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Proceeds (PKR):", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtDisposalProceeds = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtDisposalProceeds); y += gap;
@@ -707,7 +764,11 @@ namespace pos.FixedAssets
             this.txtNewRevaluedAmount = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtNewRevaluedAmount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Revaluation Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Asset Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            this.ddlRevaluationAssetAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            scroll.Controls.Add(this.ddlRevaluationAssetAccount); y += gap;
+
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Revaluation Reserve:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlRevaluationAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlRevaluationAccount); y += gap;
 
@@ -728,6 +789,9 @@ namespace pos.FixedAssets
         private System.Windows.Forms.Button btnManageCategories;
         private System.Windows.Forms.Button btnManageLocations;
         private System.Windows.Forms.Button btnEditAsset;
+        private System.Windows.Forms.Button btnDeleteAsset;
+        private System.Windows.Forms.Button btnRefreshGrid;
+        private System.Windows.Forms.Button btnSaveAssetInfo;
         private System.Windows.Forms.ComboBox ddlCategory;
         private System.Windows.Forms.ComboBox ddlStatus;
         private System.Windows.Forms.ComboBox ddlLocation;
@@ -763,6 +827,7 @@ namespace pos.FixedAssets
         private System.Windows.Forms.ComboBox ddlDepAccount;
         private System.Windows.Forms.ComboBox ddlAccumDepAccount;
         private System.Windows.Forms.DateTimePicker dtStartDepreciationDate;
+        private System.Windows.Forms.Button btnSaveDepSetup;
         private System.Windows.Forms.DataGridView dgvDepSchedule;
 
         // Depreciation History Tab
@@ -773,11 +838,16 @@ namespace pos.FixedAssets
         // Disposal / Revaluation Tab
         private System.Windows.Forms.DateTimePicker dtDisposalDate;
         private System.Windows.Forms.ComboBox ddlDisposalMethod;
+        private System.Windows.Forms.ComboBox ddlDisposalReceiptAccount;
+        private System.Windows.Forms.ComboBox ddlDisposalAssetAccount;
+        private System.Windows.Forms.ComboBox ddlDisposalGainAccount;
+        private System.Windows.Forms.ComboBox ddlDisposalLossAccount;
         private System.Windows.Forms.TextBox txtDisposalProceeds;
         private System.Windows.Forms.Label lblGainLossDisplay;
         private System.Windows.Forms.Button btnPostDisposal;
         private System.Windows.Forms.DateTimePicker dtRevaluationDate;
         private System.Windows.Forms.TextBox txtNewRevaluedAmount;
+        private System.Windows.Forms.ComboBox ddlRevaluationAssetAccount;
         private System.Windows.Forms.ComboBox ddlRevaluationAccount;
         private System.Windows.Forms.Button btnPostRevaluation;
         private System.Windows.Forms.Panel mainPanel;

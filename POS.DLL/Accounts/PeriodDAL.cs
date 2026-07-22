@@ -28,10 +28,13 @@ namespace POS.DLL
                             p.start_date,
                             p.end_date,
                             p.status,
-                            CAST(p.closed_by AS nvarchar(50)) AS closed_by,
+                            CASE
+                                WHEN p.closed_by IS NULL THEN ''
+                                ELSE LEFT(CONCAT('', p.closed_by), 50)
+                            END AS closed_by,
                             p.closed_at,
                             ISNULL(v.trx_count, 0) AS transactions_count,
-                            CASE WHEN p.status = 'Soft-Closed' THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END AS can_reopen
+                            CASE WHEN p.status = 'SoftClosed' THEN CAST(1 AS bit) ELSE CAST(0 AS bit) END AS can_reopen
                     FROM acc_financial_periods p
                     LEFT JOIN acc_fiscal_years fy ON fy.id = p.year_id
                     OUTER APPLY
@@ -218,21 +221,21 @@ WHERE p.period_id = @period_id;",
             try
             {
                 return ExecuteDataTable(@"
-SELECT h.InvoiceNo AS voucher_no,
-       h.EntryDate AS entry_date,
-       h.VoucherType AS voucher_type,
-       ISNULL(h.ReferenceNo, '') AS reference_no,
-       ISNULL(h.Narration, '') AS narration,
-       ISNULL(SUM(ISNULL(e.debit, 0)), 0) AS debit_total,
-       ISNULL(SUM(ISNULL(e.credit, 0)), 0) AS credit_total
-FROM acc_financial_periods p
-INNER JOIN acc_entries_header h
-    ON h.EntryDate >= p.start_date
-   AND h.EntryDate < DATEADD(DAY, 1, p.end_date)
-LEFT JOIN acc_entries e ON h.InvoiceNo = e.invoice_no
-WHERE p.period_id = @period_id
-GROUP BY h.InvoiceNo, h.EntryDate, h.VoucherType, h.ReferenceNo, h.Narration
-ORDER BY h.EntryDate, h.InvoiceNo;",
+                    SELECT h.InvoiceNo AS voucher_no,
+                           h.EntryDate AS entry_date,
+                           h.VoucherType AS voucher_type,
+                           ISNULL(h.ReferenceNo, '') AS reference_no,
+                           ISNULL(h.Narration, '') AS narration,
+                           ISNULL(SUM(ISNULL(e.debit, 0)), 0) AS debit_total,
+                           ISNULL(SUM(ISNULL(e.credit, 0)), 0) AS credit_total
+                    FROM acc_financial_periods p
+                    INNER JOIN acc_entries_header h
+                        ON h.EntryDate >= p.start_date
+                       AND h.EntryDate < DATEADD(DAY, 1, p.end_date)
+                    LEFT JOIN acc_entries e ON h.InvoiceNo = e.invoice_no
+                    WHERE p.period_id = @period_id
+                    GROUP BY h.InvoiceNo, h.EntryDate, h.VoucherType, h.ReferenceNo, h.Narration
+                    ORDER BY h.EntryDate, h.InvoiceNo;",
                     cmd => cmd.Parameters.AddWithValue("@period_id", periodId));
             }
             catch (Exception ex)
@@ -288,18 +291,18 @@ ORDER BY h.EntryDate, h.InvoiceNo;",
             try
             {
                 return ExecuteNonQuery(@"
-UPDATE acc_financial_periods
-SET status = 'Open',
-    closed_by = NULL,
-    closed_at = NULL
-WHERE period_id = @period_id
-  AND status = 'Soft-Closed';
+                    UPDATE acc_financial_periods
+                    SET status = 'Open',
+                        closed_by = NULL,
+                        closed_at = NULL
+                    WHERE period_id = @period_id
+                      AND status = 'SoftClosed';
 
-IF @@ROWCOUNT > 0 AND OBJECT_ID('acc_financial_period_reopen_logs', 'U') IS NOT NULL
-BEGIN
-    INSERT INTO acc_financial_period_reopen_logs(period_id, reopened_by, reopened_at, reason)
-    VALUES(@period_id, @user_id, GETDATE(), @reason);
-END;",
+                    IF @@ROWCOUNT > 0 AND OBJECT_ID('acc_financial_period_reopen_logs', 'U') IS NOT NULL
+                    BEGIN
+                        INSERT INTO acc_financial_period_reopen_logs(period_id, reopened_by, reopened_at, reason)
+                        VALUES(@period_id, @user_id, GETDATE(), @reason);
+                    END;",
                     cmd =>
                     {
                         cmd.Parameters.AddWithValue("@period_id", periodId);
@@ -321,7 +324,7 @@ END;",
                 using (SqlCommand cmd = new SqlCommand(@"
 UPDATE acc_financial_periods
 SET status = @status,
-    closed_by = CASE WHEN @status = 'Open' THEN NULL ELSE CAST(@user_id AS nvarchar(50)) END,
+    closed_by = CASE WHEN @status = 'Open' THEN NULL ELSE LEFT(CONCAT('', @user_id), 50) END,
     closed_at = CASE WHEN @status = 'Open' THEN NULL ELSE @closed_at END
 WHERE period_id = @period_id;", cn))
                 {

@@ -15,77 +15,199 @@ namespace pos.FixedAssets
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-
-            // Form settings
-            this.ClientSize = new System.Drawing.Size(800, 500);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Text = "Fixed Asset Categories";
-            this.Font = new System.Drawing.Font("Segoe UI", 10);
-            this.Padding = new System.Windows.Forms.Padding(5);
-
-            // Toolbar panel
-            System.Windows.Forms.Panel toolbarPanel = new System.Windows.Forms.Panel();
-            toolbarPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            toolbarPanel.Height = 35;
-            toolbarPanel.Padding = new System.Windows.Forms.Padding(5);
-
-            this.btnAdd = new System.Windows.Forms.Button() { Text = "[Add]", Width = 80, Height = 30, Left = 5, Top = 2 };
-            this.btnAdd.Click += BtnAdd_Click;
-
-            this.btnEdit = new System.Windows.Forms.Button() { Text = "[Edit]", Width = 80, Height = 30, Left = 90, Top = 2 };
-            this.btnEdit.Click += BtnEdit_Click;
-
-            this.btnDelete = new System.Windows.Forms.Button() { Text = "[Delete]", Width = 80, Height = 30, Left = 175, Top = 2 };
-            this.btnDelete.Click += BtnDelete_Click;
-
-            this.btnClose = new System.Windows.Forms.Button() { Text = "[Close]", Width = 80, Height = 30, Left = 260, Top = 2, DialogResult = System.Windows.Forms.DialogResult.Cancel };
-            this.btnClose.Click += BtnClose_Click;
-
-            toolbarPanel.Controls.Add(this.btnAdd);
-            toolbarPanel.Controls.Add(this.btnEdit);
-            toolbarPanel.Controls.Add(this.btnDelete);
-            toolbarPanel.Controls.Add(this.btnClose);
-
-            // Grid panel
-            System.Windows.Forms.Panel gridPanel = new System.Windows.Forms.Panel();
-            gridPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.toolbarPanel = new System.Windows.Forms.Panel();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.gridPanel = new System.Windows.Forms.Panel();
             this.dgvCategories = new System.Windows.Forms.DataGridView();
-            this.dgvCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolbarPanel.SuspendLayout();
+            this.gridPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // toolbarPanel
+            // 
+            this.toolbarPanel.Controls.Add(this.btnAdd);
+            this.toolbarPanel.Controls.Add(this.btnEdit);
+            this.toolbarPanel.Controls.Add(this.btnDelete);
+            this.toolbarPanel.Controls.Add(this.btnClose);
+            this.toolbarPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.toolbarPanel.Location = new System.Drawing.Point(5, 5);
+            this.toolbarPanel.Name = "toolbarPanel";
+            this.toolbarPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.toolbarPanel.Size = new System.Drawing.Size(790, 47);
+            this.toolbarPanel.TabIndex = 1;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(8, 6);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 33);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(89, 6);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 33);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(170, 6);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 33);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(693, 6);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 33);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            // 
+            // gridPanel
+            // 
+            this.gridPanel.Controls.Add(this.dgvCategories);
+            this.gridPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridPanel.Location = new System.Drawing.Point(5, 52);
+            this.gridPanel.Name = "gridPanel";
+            this.gridPanel.Size = new System.Drawing.Size(790, 443);
+            this.gridPanel.TabIndex = 0;
+            // 
+            // dgvCategories
+            // 
             this.dgvCategories.AllowUserToAddRows = false;
             this.dgvCategories.AllowUserToDeleteRows = false;
-            this.dgvCategories.ReadOnly = true;
-            this.dgvCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategories.MultiSelect = false;
             this.dgvCategories.BackgroundColor = System.Drawing.Color.White;
-            this.dgvCategories.GridColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategories.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvCategories.ColumnHeadersHeight = 29;
+            this.dgvCategories.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCategories.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCategories.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.dgvCategories.Location = new System.Drawing.Point(0, 0);
+            this.dgvCategories.MultiSelect = false;
+            this.dgvCategories.Name = "dgvCategories";
+            this.dgvCategories.ReadOnly = true;
             this.dgvCategories.RowHeadersVisible = false;
-            this.dgvCategories.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10);
-            this.dgvCategories.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
-
-            this.dgvCategories.Columns.Add("CategoryId", "ID");
-            this.dgvCategories.Columns.Add("CategoryCode", "Code");
-            this.dgvCategories.Columns.Add("CategoryName", "Name");
-            this.dgvCategories.Columns.Add("DepMethod", "Deprecation Method");
-            this.dgvCategories.Columns.Add("UsefulLife", "Useful Life (Months)");
-            this.dgvCategories.Columns.Add("DepRate", "Annual Rate");
-            this.dgvCategories.Columns.Add("Status", "Status");
-
-            this.dgvCategories.Columns[0].Width = 40;
-            this.dgvCategories.Columns[1].Width = 80;
-            this.dgvCategories.Columns[2].Width = 150;
-            this.dgvCategories.Columns[3].Width = 120;
-            this.dgvCategories.Columns[4].Width = 80;
-            this.dgvCategories.Columns[5].Width = 100;
-            this.dgvCategories.Columns[6].Width = 80;
-
-            gridPanel.Controls.Add(this.dgvCategories);
-
-            this.Controls.Add(gridPanel);
-            this.Controls.Add(toolbarPanel);
-
+            this.dgvCategories.RowHeadersWidth = 51;
+            this.dgvCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCategories.Size = new System.Drawing.Size(790, 443);
+            this.dgvCategories.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Code";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Deprecation Method";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Useful Life (Months)";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Annual Rate";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Status";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 125;
+            // 
+            // frm_fixedAssetCategories
+            // 
+            this.ClientSize = new System.Drawing.Size(800, 500);
+            this.Controls.Add(this.gridPanel);
+            this.Controls.Add(this.toolbarPanel);
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Name = "frm_fixedAssetCategories";
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Text = "Fixed Asset Categories";
+            this.Load += new System.EventHandler(this.frm_fixedAssetCategories_Load);
+            this.toolbarPanel.ResumeLayout(false);
+            this.gridPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         public System.Windows.Forms.DataGridView dgvCategories;
@@ -93,5 +215,14 @@ namespace pos.FixedAssets
         public System.Windows.Forms.Button btnEdit;
         public System.Windows.Forms.Button btnDelete;
         public System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Panel toolbarPanel;
+        private System.Windows.Forms.Panel gridPanel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

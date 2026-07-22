@@ -15,6 +15,7 @@ namespace POS.Core
         public static int logged_in_userid { get; set; }
 
         public static string logged_in_username { get; set; }
+        public static string logged_in_userFullName { get; set; }
 
         public static int logged_in_branch_id { get; set; }
         public static string logged_in_branch_name { get; set; }

@@ -537,6 +537,7 @@ namespace pos
 
                         int userId = 0;
                         string username = "";
+                        string FullName = "";
                         int branchId = 0;
                         string language = "";
                         string userRole = "";
@@ -550,7 +551,8 @@ namespace pos
                         {
                             var dr = dt.Rows[0];
                             userId = (int)dr["id"];
-                            username = dr["name"].ToString();
+                            username = dr["username"].ToString();
+                            FullName = dr["name"].ToString();
                             branchId = (int)dr["branch_id"];
                             language = dr["language"].ToString();
                             userRole = dr["user_role"].ToString();
@@ -593,6 +595,7 @@ namespace pos
                         {
                             UserId = userId,
                             Username = username,
+                            FullName = FullName,
                             BranchId = branchId,
                             BranchName = branchName,
                             Language = language,
@@ -611,6 +614,7 @@ namespace pos
                     // After userData computed and UsersModal fields are set:
                     UsersModal.logged_in_userid = userData.UserId;
                     UsersModal.logged_in_username = userData.Username;
+                    UsersModal.logged_in_userFullName = userData.FullName;
                     UsersModal.logged_in_branch_id = userData.BranchId;
                     UsersModal.logged_in_branch_name = userData.BranchName;
                     UsersModal.logged_in_lang = userData.Language;

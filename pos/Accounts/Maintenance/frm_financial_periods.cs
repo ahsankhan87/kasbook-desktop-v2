@@ -227,7 +227,7 @@ namespace pos
             bool canReopen = gridPeriods.CurrentRow.Cells["colCanReopen"].Value != DBNull.Value &&
                              Convert.ToBoolean(gridPeriods.CurrentRow.Cells["colCanReopen"].Value);
 
-            if (!canReopen || !string.Equals(status, "Soft-Closed", StringComparison.OrdinalIgnoreCase))
+            if (!canReopen || !string.Equals(status, "SoftClosed", StringComparison.OrdinalIgnoreCase))
             {
                 UiMessages.ShowInfo("Only soft-closed periods can be reopened.", "يمكن إعادة فتح الفترات المغلقة أولياً فقط.", "Reopen Period", "إعادة فتح الفترة");
                 return;
@@ -310,6 +310,30 @@ namespace pos
             LoadPeriods();
         }
 
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            ShowFinancialManagementHelp();
+        }
+
+        private void frm_financial_periods_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.F1)
+            {
+                return;
+            }
+
+            e.SuppressKeyPress = true;
+            ShowFinancialManagementHelp();
+        }
+
+        private void ShowFinancialManagementHelp()
+        {
+            using (frm_financial_management_help help = new frm_financial_management_help())
+            {
+                help.ShowDialog(this);
+            }
+        }
+
         private void ShowTransactionsPopup(string periodName, DataTable dt)
         {
             Form popup = new Form();
@@ -387,7 +411,7 @@ namespace pos
             {
                 color = Color.ForestGreen;
             }
-            else if (string.Equals(status, "Soft-Closed", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(status, "SoftClosed", StringComparison.OrdinalIgnoreCase))
             {
                 color = Color.DarkOrange;
             }

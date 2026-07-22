@@ -55,6 +55,7 @@ namespace pos
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.tabSteps.SuspendLayout();
             this.tabChecklist.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridChecklist)).BeginInit();
@@ -437,6 +438,7 @@ namespace pos
             this.panelFooter.Controls.Add(this.btnCancel);
             this.panelFooter.Controls.Add(this.btnNext);
             this.panelFooter.Controls.Add(this.btnBack);
+            this.panelFooter.Controls.Add(this.btnHelp);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelFooter.Location = new System.Drawing.Point(0, 533);
             this.panelFooter.Name = "panelFooter";
@@ -473,6 +475,16 @@ namespace pos
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(624, 14);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(78, 30);
+            this.btnHelp.TabIndex = 3;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // frm_period_close_wizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -482,10 +494,12 @@ namespace pos
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.KeyPreview = true;
             this.Name = "frm_period_close_wizard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Month-End Closing Wizard";
             this.Load += new System.EventHandler(this.frm_period_close_wizard_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_period_close_wizard_KeyDown);
             this.tabSteps.ResumeLayout(false);
             this.tabChecklist.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridChecklist)).EndInit();
@@ -512,6 +526,7 @@ namespace pos
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.DataGridView gridChecklist;
         private System.Windows.Forms.TableLayoutPanel tableSummary;
         private System.Windows.Forms.Label lblTotalTransactions;

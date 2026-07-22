@@ -228,6 +228,30 @@ namespace pos
             Close();
         }
 
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            ShowFinancialManagementHelp();
+        }
+
+        private void frm_period_close_wizard_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.F1)
+            {
+                return;
+            }
+
+            e.SuppressKeyPress = true;
+            ShowFinancialManagementHelp();
+        }
+
+        private void ShowFinancialManagementHelp()
+        {
+            using (frm_financial_management_help help = new frm_financial_management_help())
+            {
+                help.ShowDialog(this);
+            }
+        }
+
         private void tabSteps_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateStepButtons();

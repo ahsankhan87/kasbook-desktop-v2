@@ -17,6 +17,10 @@ namespace pos.FixedAssets
         private List<CategoryModel> _categories;
         private List<LocationModel> _locations;
 
+        // Edit mode
+        private bool _isEditMode = false;
+        private int _editAssetId = 0;
+
         public int NewAssetId { get; set; }
 
         public frm_addFixedAsset()
@@ -29,6 +33,18 @@ namespace pos.FixedAssets
             this.StartPosition = FormStartPosition.CenterParent;
         }
 
+        /// <summary>
+        /// Edit-mode constructor. Locks cost/category/dep-method fields as they are
+        /// accounting-controlled after creation; only name, location and notes are editable.
+        /// </summary>
+        public frm_addFixedAsset(FixedAssetModel asset) : this()
+        {
+            if (asset == null) throw new ArgumentNullException("asset");
+            _isEditMode = true;
+            _editAssetId = asset.AssetId;
+            Tag = asset; // stored for use after Load
+        }
+
         private void frm_addFixedAsset_Load(object sender, EventArgs e)
         {
             try
@@ -36,12 +52,60 @@ namespace pos.FixedAssets
                 AppTheme.Apply(this);
                 LoadCategories();
                 LoadLocations();
-                SetDefaults();
+
+                if (_isEditMode && Tag is FixedAssetModel asset)
+                {
+                    this.Text = "Edit Asset";
+                    PopulateForEdit(asset);
+                }
+                else
+                {
+                    SetDefaults();
+                }
             }
             catch (Exception ex)
             {
                 UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
             }
+        }
+
+        private void PopulateForEdit(FixedAssetModel asset)
+        {
+            // Editable fields
+            txtAssetName.Text = asset.AssetName;
+            txtNotes.Text = asset.AssetDescription ?? "";
+
+            // Locate matching location in the list (offset by 1 due to "(None)" at index 0)
+            int locIdx = _locations.FindIndex(l => l.LocationId == asset.LocationId);
+            ddlLocation.SelectedIndex = locIdx >= 0 ? locIdx + 1 : 0;
+
+            // Read-only fields – show for context but disable editing
+            txtAssetCode.Text = asset.AssetCode;
+            txtAssetCode.ReadOnly = true;
+
+            int catIdx = _categories.FindIndex(c => c.CategoryId == asset.CategoryId);
+            if (catIdx >= 0) ddlCategory.SelectedIndex = catIdx;
+            ddlCategory.Enabled = false;
+
+            dtPurchaseDate.Value = asset.PurchaseDate;
+            dtPurchaseDate.Enabled = false;
+
+            txtCost.Text = asset.Cost.ToString("N2");
+            txtCost.ReadOnly = true;
+
+            txtSalvageValue.Text = asset.ResidualValue.ToString("N2");
+            txtSalvageValue.ReadOnly = true;
+
+            txtUsefulLifeMonths.Text = asset.UsefulLifeMonths.ToString();
+            txtUsefulLifeMonths.ReadOnly = true;
+
+            int depIdx = ddlDeprecationMethod.Items.IndexOf(asset.DepMethod ?? "STRAIGHT_LINE");
+            if (depIdx >= 0) ddlDeprecationMethod.SelectedIndex = depIdx;
+            ddlDeprecationMethod.Enabled = false;
+
+            txtSerialNumber.Text = asset.SerialNumber ?? "";
+            txtReplacementCost.Text = asset.ReplacementCost.HasValue
+                ? asset.ReplacementCost.Value.ToString("N2") : "";
         }
 
         private void LoadCategories()
@@ -106,31 +170,54 @@ namespace pos.FixedAssets
                 if (!ValidateInputs())
                     return;
 
-                using (BusyScope.Show(this, "Creating asset..."))
+                if (_isEditMode)
                 {
-                    int categoryId = GetSelectedCategoryId();
-                    int? locationId = GetSelectedLocationId();
+                    using (BusyScope.Show(this, "Updating asset..."))
+                    {
+                        int? locationId = GetSelectedLocationId();
+                        string notes = string.IsNullOrWhiteSpace(txtNotes.Text) ? null : txtNotes.Text.Trim();
 
-                    NewAssetId = _assetBLL.InsertAsset(
-                        assetCode: txtAssetCode.Text.Trim(),
-                        assetName: txtAssetName.Text.Trim(),
-                        categoryId: categoryId,
-                        locationId: locationId,
-                        serialNumber: string.IsNullOrWhiteSpace(txtSerialNumber.Text) ? null : txtSerialNumber.Text.Trim(),
-                        purchaseDate: dtPurchaseDate.Value,
-                        cost: decimal.Parse(txtCost.Text),
-                        depMethod: ddlDeprecationMethod.SelectedItem.ToString(),
-                        usefulLifeMonths: int.Parse(txtUsefulLifeMonths.Text),
-                        salvageValue: decimal.Parse(txtSalvageValue.Text),
-                        replacementCost: string.IsNullOrWhiteSpace(txtReplacementCost.Text) ? (decimal?)null : decimal.Parse(txtReplacementCost.Text),
-                        notes: string.IsNullOrWhiteSpace(txtNotes.Text) ? null : txtNotes.Text.Trim(),
-                        createdBy: UsersModal.logged_in_userid
-                    );
+                        _assetBLL.UpdateAssetDetails(
+                            assetId: _editAssetId,
+                            assetName: txtAssetName.Text.Trim(),
+                            locationId: locationId,
+                            notes: notes,
+                            isActive: true
+                        );
+                    }
+
+                    UiMessages.ShowInfo("Asset updated successfully.", "تم تحديث الأصل بنجاح", "Success", "نجاح");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
+                else
+                {
+                    using (BusyScope.Show(this, "Creating asset..."))
+                    {
+                        int categoryId = GetSelectedCategoryId();
+                        int? locationId = GetSelectedLocationId();
 
-                UiMessages.ShowInfo("Asset created successfully with ID: " + NewAssetId, "تم إنشاء الأصل بنجاح", "Success", "نجاح");
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                        NewAssetId = _assetBLL.InsertAsset(
+                            assetCode: txtAssetCode.Text.Trim(),
+                            assetName: txtAssetName.Text.Trim(),
+                            categoryId: categoryId,
+                            locationId: locationId,
+                            serialNumber: string.IsNullOrWhiteSpace(txtSerialNumber.Text) ? null : txtSerialNumber.Text.Trim(),
+                            purchaseDate: dtPurchaseDate.Value,
+                            cost: decimal.Parse(txtCost.Text),
+                            depMethod: ddlDeprecationMethod.SelectedItem.ToString(),
+                            usefulLifeMonths: int.Parse(txtUsefulLifeMonths.Text),
+                            salvageValue: decimal.Parse(txtSalvageValue.Text),
+                            replacementCost: string.IsNullOrWhiteSpace(txtReplacementCost.Text) ? (decimal?)null : decimal.Parse(txtReplacementCost.Text),
+                            notes: string.IsNullOrWhiteSpace(txtNotes.Text) ? null : txtNotes.Text.Trim(),
+                            createdBy: UsersModal.logged_in_userid
+                        );
+                    }
+
+                    UiMessages.ShowInfo("Asset created successfully with ID: " + NewAssetId, "تم إنشاء الأصل بنجاح", "Success", "نجاح");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             catch (ArgumentException ex)
             {
@@ -150,13 +237,6 @@ namespace pos.FixedAssets
 
         private bool ValidateInputs()
         {
-            if (string.IsNullOrWhiteSpace(txtAssetCode.Text))
-            {
-                UiMessages.ShowError("Asset code is required", "رمز الأصل مطلوب", "Validation Error", "خطأ في التحقق");
-                txtAssetCode.Focus();
-                return false;
-            }
-
             if (string.IsNullOrWhiteSpace(txtAssetName.Text))
             {
                 UiMessages.ShowError("Asset name is required", "اسم الأصل مطلوب", "Validation Error", "خطأ في التحقق");
@@ -164,39 +244,50 @@ namespace pos.FixedAssets
                 return false;
             }
 
-            if (ddlCategory.SelectedIndex < 0)
+            // The fields below are only relevant when creating a new asset
+            if (!_isEditMode)
             {
-                UiMessages.ShowError("Please select a category", "يرجى تحديد فئة", "Validation Error", "خطأ في التحقق");
-                ddlCategory.Focus();
-                return false;
-            }
+                if (string.IsNullOrWhiteSpace(txtAssetCode.Text))
+                {
+                    UiMessages.ShowError("Asset code is required", "رمز الأصل مطلوب", "Validation Error", "خطأ في التحقق");
+                    txtAssetCode.Focus();
+                    return false;
+                }
 
-            if (!decimal.TryParse(txtCost.Text, out decimal cost) || cost < 0)
-            {
-                UiMessages.ShowError("Cost must be a valid positive number", "التكلفة يجب أن تكون رقما موجبا صحيحا", "Validation Error", "خطأ في التحقق");
-                txtCost.Focus();
-                return false;
-            }
+                if (ddlCategory.SelectedIndex < 0)
+                {
+                    UiMessages.ShowError("Please select a category", "يرجى تحديد فئة", "Validation Error", "خطأ في التحقق");
+                    ddlCategory.Focus();
+                    return false;
+                }
 
-            if (!int.TryParse(txtUsefulLifeMonths.Text, out int months) || months <= 0)
-            {
-                UiMessages.ShowError("Useful life must be greater than 0", "يجب أن تكون فترة الاستخدام المفيدة أكثر من 0", "Validation Error", "خطأ في التحقق");
-                txtUsefulLifeMonths.Focus();
-                return false;
-            }
+                if (!decimal.TryParse(txtCost.Text, out decimal cost) || cost < 0)
+                {
+                    UiMessages.ShowError("Cost must be a valid positive number", "التكلفة يجب أن تكون رقما موجبا صحيحا", "Validation Error", "خطأ في التحقق");
+                    txtCost.Focus();
+                    return false;
+                }
 
-            if (!decimal.TryParse(txtSalvageValue.Text, out decimal salvage) || salvage < 0)
-            {
-                UiMessages.ShowError("Salvage value must be a valid positive number", "قيمة الخردة يجب أن تكون رقما موجبا صحيحا", "Validation Error", "خطأ في التحقق");
-                txtSalvageValue.Focus();
-                return false;
-            }
+                if (!int.TryParse(txtUsefulLifeMonths.Text, out int months) || months <= 0)
+                {
+                    UiMessages.ShowError("Useful life must be greater than 0", "يجب أن تكون فترة الاستخدام المفيدة أكثر من 0", "Validation Error", "خطأ في التحقق");
+                    txtUsefulLifeMonths.Focus();
+                    return false;
+                }
 
-            if (!string.IsNullOrWhiteSpace(txtReplacementCost.Text) && !decimal.TryParse(txtReplacementCost.Text, out decimal replacement))
-            {
-                UiMessages.ShowError("Replacement cost must be a valid number", "تكلفة الاستبدال يجب أن تكون رقما صحيحا", "Validation Error", "خطأ في التحقق");
-                txtReplacementCost.Focus();
-                return false;
+                if (!decimal.TryParse(txtSalvageValue.Text, out decimal salvage) || salvage < 0)
+                {
+                    UiMessages.ShowError("Salvage value must be a valid positive number", "قيمة الخردة يجب أن تكون رقما موجبا صحيحا", "Validation Error", "خطأ في التحقق");
+                    txtSalvageValue.Focus();
+                    return false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtReplacementCost.Text) && !decimal.TryParse(txtReplacementCost.Text, out decimal replacement))
+                {
+                    UiMessages.ShowError("Replacement cost must be a valid number", "تكلفة الاستبدال يجب أن تكون رقما صحيحا", "Validation Error", "خطأ في التحقق");
+                    txtReplacementCost.Focus();
+                    return false;
+                }
             }
 
             return true;
