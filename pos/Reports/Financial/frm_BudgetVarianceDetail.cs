@@ -19,13 +19,15 @@ namespace pos.Reports.Financial
         private readonly int _accId;
         private readonly string _accCode;
         private readonly string _accName;
+        private readonly int? _ccId;
 
-        public frm_BudgetVarianceDetail(int budgetId, int accId, string accCode, string accName)
+        public frm_BudgetVarianceDetail(int budgetId, int accId, string accCode, string accName, int? ccId = null)
         {
             _budgetId = budgetId;
             _accId = accId;
             _accCode = accCode ?? string.Empty;
             _accName = accName ?? string.Empty;
+            _ccId = ccId;
 
             InitializeComponent();
             WireEvents();
@@ -85,7 +87,7 @@ namespace pos.Reports.Financial
             {
                 using (BusyScope.Show(this, UiMessages.T("Loading monthly variance detail...", "جاري تحميل تفاصيل الانحراف الشهرية...")))
                 {
-                    DataTable dt = _budgetBll.GetBudgetMonthlyDetail(_budgetId, _accId);
+                    DataTable dt = _budgetBll.GetBudgetMonthlyDetail(_budgetId, _accId, _ccId);
                     dgvMonthly.DataSource = dt;
                     FormatMonthlyGrid();
                     BindChart(dt);

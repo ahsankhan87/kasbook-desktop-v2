@@ -37,6 +37,8 @@ namespace pos.FixedAssets
             this.lblSalvageValue = new System.Windows.Forms.Label();
             this.ddlLocation = new System.Windows.Forms.ComboBox();
             this.lblLocation = new System.Windows.Forms.Label();
+            this.ddlCostCenter = new System.Windows.Forms.ComboBox();
+            this.lblCostCenter = new System.Windows.Forms.Label();
             this.txtReplacementCost = new System.Windows.Forms.TextBox();
             this.lblReplacementCost = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
@@ -54,6 +56,8 @@ namespace pos.FixedAssets
             this.pnlMain.Controls.Add(this.lblNotes);
             this.pnlMain.Controls.Add(this.txtReplacementCost);
             this.pnlMain.Controls.Add(this.lblReplacementCost);
+            this.pnlMain.Controls.Add(this.ddlCostCenter);
+            this.pnlMain.Controls.Add(this.lblCostCenter);
             this.pnlMain.Controls.Add(this.ddlLocation);
             this.pnlMain.Controls.Add(this.lblLocation);
             this.pnlMain.Controls.Add(this.txtSalvageValue);
@@ -239,38 +243,54 @@ namespace pos.FixedAssets
             this.ddlLocation.Size = new System.Drawing.Size(300, 24);
             this.ddlLocation.TabIndex = 19;
             // 
+            // lblCostCenter
+            // 
+            this.lblCostCenter.Location = new System.Drawing.Point(10, 315);
+            this.lblCostCenter.Name = "lblCostCenter";
+            this.lblCostCenter.Size = new System.Drawing.Size(155, 23);
+            this.lblCostCenter.TabIndex = 20;
+            this.lblCostCenter.Text = "Cost Center:";
+            // 
+            // ddlCostCenter
+            // 
+            this.ddlCostCenter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlCostCenter.Location = new System.Drawing.Point(175, 312);
+            this.ddlCostCenter.Name = "ddlCostCenter";
+            this.ddlCostCenter.Size = new System.Drawing.Size(300, 24);
+            this.ddlCostCenter.TabIndex = 21;
+            // 
             // lblReplacementCost
             // 
-            this.lblReplacementCost.Location = new System.Drawing.Point(10, 315);
+            this.lblReplacementCost.Location = new System.Drawing.Point(10, 345);
             this.lblReplacementCost.Name = "lblReplacementCost";
             this.lblReplacementCost.Size = new System.Drawing.Size(155, 23);
-            this.lblReplacementCost.TabIndex = 20;
+            this.lblReplacementCost.TabIndex = 22;
             this.lblReplacementCost.Text = "Replacement Cost (PKR):";
             // 
             // txtReplacementCost
             // 
-            this.txtReplacementCost.Location = new System.Drawing.Point(175, 312);
+            this.txtReplacementCost.Location = new System.Drawing.Point(175, 342);
             this.txtReplacementCost.Name = "txtReplacementCost";
             this.txtReplacementCost.Size = new System.Drawing.Size(300, 24);
-            this.txtReplacementCost.TabIndex = 21;
+            this.txtReplacementCost.TabIndex = 23;
             this.txtReplacementCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtReplacementCost.Leave += new System.EventHandler(this.TxtReplacementCost_Leave);
             // 
             // lblNotes
             // 
-            this.lblNotes.Location = new System.Drawing.Point(10, 345);
+            this.lblNotes.Location = new System.Drawing.Point(10, 375);
             this.lblNotes.Name = "lblNotes";
             this.lblNotes.Size = new System.Drawing.Size(155, 23);
-            this.lblNotes.TabIndex = 22;
+            this.lblNotes.TabIndex = 24;
             this.lblNotes.Text = "Notes:";
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(175, 342);
+            this.txtNotes.Location = new System.Drawing.Point(175, 372);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(300, 60);
-            this.txtNotes.TabIndex = 23;
+            this.txtNotes.TabIndex = 25;
             // 
             // pnlButtons
             // 
@@ -333,6 +353,7 @@ namespace pos.FixedAssets
         private System.Windows.Forms.Label lblUsefulLifeMonths;
         private System.Windows.Forms.Label lblSalvageValue;
         private System.Windows.Forms.Label lblLocation;
+        private System.Windows.Forms.Label lblCostCenter;
         private System.Windows.Forms.Label lblReplacementCost;
         private System.Windows.Forms.Label lblNotes;
         public System.Windows.Forms.TextBox txtAssetCode;
@@ -345,6 +366,7 @@ namespace pos.FixedAssets
         public System.Windows.Forms.TextBox txtUsefulLifeMonths;
         public System.Windows.Forms.TextBox txtSalvageValue;
         public System.Windows.Forms.ComboBox ddlLocation;
+        public System.Windows.Forms.ComboBox ddlCostCenter;
         public System.Windows.Forms.TextBox txtReplacementCost;
         public System.Windows.Forms.TextBox txtNotes;
         public System.Windows.Forms.Button btnSave;

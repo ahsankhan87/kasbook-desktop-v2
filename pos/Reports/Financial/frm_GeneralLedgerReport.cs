@@ -40,6 +40,7 @@ namespace pos.Reports.Financial
             Load += Frm_GeneralLedgerReport_Load;
             _btnLoad.Click += (s, e) => LoadLedgerFirstPage();
             _btnLoadMore.Click += (s, e) => LoadMore();
+            _btnSearchAccount.Click += BtnSearchAccount_Click;
             _cmbShow.SelectedIndexChanged += (s, e) => LoadLedgerFirstPage();
             _cmbGroupBy.SelectedIndexChanged += (s, e) => RebuildLedgerGridFromRaw();
             _cmbAccount.SelectedIndexChanged += (s, e) => ScheduleAutoLoad();
@@ -164,6 +165,91 @@ namespace pos.Reports.Financial
             }
 
             e.DrawFocusRectangle();
+        }
+
+        private void BtnSearchAccount_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_accountsTable == null || _accountsTable.Rows.Count == 0)
+                {
+                    UiMessages.ShowWarning("No accounts available", "No Accounts");
+                    return;
+                }
+
+                using (var lookup = new frm_account_lookup())
+                {
+                    // Prepare accounts table for the lookup form
+                    DataTable accountsForLookup = _accountsTable.Clone();
+
+                    // Add required columns for the lookup form if they don't exist
+                    if (!accountsForLookup.Columns.Contains("code"))
+                    {
+                        accountsForLookup.Columns.Add("code", typeof(string));
+                    }
+                    if (!accountsForLookup.Columns.Contains("name"))
+                    {
+                        accountsForLookup.Columns.Add("name", typeof(string));
+                    }
+                    if (!accountsForLookup.Columns.Contains("name_2"))
+                    {
+                        accountsForLookup.Columns.Add("name_2", typeof(string));
+                    }
+                    if (!accountsForLookup.Columns.Contains("display"))
+                    {
+                        accountsForLookup.Columns.Add("display", typeof(string));
+                    }
+                    if (!accountsForLookup.Columns.Contains("id"))
+                    {
+                        accountsForLookup.Columns.Add("id", typeof(object));
+                    }
+
+                    // Import rows and populate the required columns from the source data
+                    foreach (DataRow srcRow in _accountsTable.Rows)
+                    {
+                        DataRow newRow = accountsForLookup.NewRow();
+
+                        // Copy all existing columns
+                        foreach (DataColumn col in _accountsTable.Columns)
+                        {
+                            if (accountsForLookup.Columns.Contains(col.ColumnName))
+                            {
+                                newRow[col.ColumnName] = srcRow[col.ColumnName];
+                            }
+                        }
+
+                        // Map the columns for the lookup form
+                        newRow["code"] = srcRow["acc_code"];
+                        newRow["name"] = srcRow["acc_name"];
+                        newRow["name_2"] = srcRow["acc_name"];  // Use acc_name as fallback for name_2
+                        newRow["id"] = srcRow["acc_id"];
+                        newRow["display"] = srcRow["display_text"];  // Use the display_text we already have
+
+                        accountsForLookup.Rows.Add(newRow);
+                    }
+
+                    // Get current search text if any
+                    string initialSearchText = _cmbAccount.Text ?? string.Empty;
+
+                    // Show the lookup form
+                    lookup.LoadAccounts(accountsForLookup, initialSearchText);
+                    if (lookup.ShowDialog(this) != DialogResult.OK || lookup.SelectedAccountRow == null)
+                    {
+                        return;
+                    }
+
+                    // Update the account combo box with the selected account
+                    object accountId = lookup.SelectedAccountRow["acc_id"];
+                    _cmbAccount.SelectedValue = accountId;
+
+                    // Trigger the load
+                    LoadLedgerFirstPage();
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError("Error: " + ex.Message, "Account Search");
+            }
         }
 
         private void ScheduleAutoLoad()

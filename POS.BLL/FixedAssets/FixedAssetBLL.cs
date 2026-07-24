@@ -185,6 +185,7 @@ namespace POS.BLL.FixedAssets
             asset.CategoryId = GetInt(row, "category_id", GetInt(row, "cat_id"));
             asset.CategoryName = GetString(row, "category_name", GetString(row, "cat_name"));
             asset.LocationId = GetInt(row, "location_id");
+            asset.CostCenterId = GetInt(row, "cost_center_id");
             asset.PurchaseDate = GetDateTime(row, "purchase_date");
             asset.PurchaseInvoiceNo = GetString(row, "purchase_invoice_no");
             asset.SerialNumber = GetString(row, "serial_number");
@@ -421,7 +422,7 @@ namespace POS.BLL.FixedAssets
         // Asset Management
         // ============================================================
 
-        public int InsertAsset(string assetCode, string assetName, int categoryId, int? locationId = null, string serialNumber = null, DateTime? purchaseDate = null, decimal cost = 0, string depMethod = "STRAIGHT_LINE", int usefulLifeMonths = 60, decimal salvageValue = 0, decimal? replacementCost = null, string notes = null, int? createdBy = null)
+        public int InsertAsset(string assetCode, string assetName, int categoryId, int? locationId = null, int? costCenterId = null, int? branchId = null, string serialNumber = null, DateTime? purchaseDate = null, decimal cost = 0, string depMethod = "STRAIGHT_LINE", int usefulLifeMonths = 60, decimal salvageValue = 0, decimal? replacementCost = null, string notes = null, int? createdBy = null)
         {
             if (string.IsNullOrWhiteSpace(assetCode))
                 throw new ArgumentException("Asset code is required.");
@@ -434,17 +435,17 @@ namespace POS.BLL.FixedAssets
             if (usefulLifeMonths <= 0)
                 throw new ArgumentException("Useful life months must be greater than 0.");
 
-            return _dll.InsertAsset(assetCode.Trim(), assetName.Trim(), categoryId, locationId, serialNumber, purchaseDate, cost, depMethod, usefulLifeMonths, salvageValue, replacementCost, notes, createdBy);
+            return _dll.InsertAsset(assetCode.Trim(), assetName.Trim(), categoryId, locationId, costCenterId, branchId, serialNumber, purchaseDate, cost, depMethod, usefulLifeMonths, salvageValue, replacementCost, notes, createdBy);
         }
 
-        public int UpdateAssetDetails(int assetId, string assetName, int? locationId = null, string notes = null, bool isActive = true)
+        public int UpdateAssetDetails(int assetId, string assetName, int? locationId = null, int? costCenterId = null, int? branchId = null, string notes = null, bool isActive = true)
         {
             if (assetId <= 0)
                 throw new ArgumentException("Asset ID is invalid.");
             if (string.IsNullOrWhiteSpace(assetName))
                 throw new ArgumentException("Asset name is required.");
 
-            return _dll.UpdateAssetDetails(assetId, assetName.Trim(), locationId, notes, isActive);
+            return _dll.UpdateAssetDetails(assetId, assetName.Trim(), locationId, costCenterId, branchId, notes, isActive);
         }
 
         public int UpdateAssetInfoTabDetails(
@@ -455,6 +456,8 @@ namespace POS.BLL.FixedAssets
             string supplierName,
             string purchaseInvoiceNo,
             int? locationId,
+            int? costCenterId,
+            int? branchId,
             string serialNumber,
             string modelNumber,
             string status)
@@ -472,6 +475,8 @@ namespace POS.BLL.FixedAssets
                 string.IsNullOrWhiteSpace(supplierName) ? null : supplierName.Trim(),
                 string.IsNullOrWhiteSpace(purchaseInvoiceNo) ? null : purchaseInvoiceNo.Trim(),
                 locationId,
+                costCenterId,
+                branchId,
                 string.IsNullOrWhiteSpace(serialNumber) ? null : serialNumber.Trim(),
                 string.IsNullOrWhiteSpace(modelNumber) ? null : modelNumber.Trim(),
                 string.IsNullOrWhiteSpace(status) ? "Active" : status.Trim());

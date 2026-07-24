@@ -21,6 +21,8 @@ namespace POS.Core
 
         public string LocationName { get; set; }
 
+        public int CostCenterId { get; set; }
+
         public DateTime PurchaseDate { get; set; }
 
         public string PurchaseInvoiceNo { get; set; }

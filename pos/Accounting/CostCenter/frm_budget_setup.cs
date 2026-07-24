@@ -449,7 +449,9 @@ namespace pos.Accounting.CostCenter
             DataGridViewRow row = dgvBudgets.Rows[e.RowIndex];
             string columnName = dgvBudgets.Columns[e.ColumnIndex].Name;
 
-            if (string.Equals(columnName, "annual_budget", StringComparison.OrdinalIgnoreCase))
+            bool isAnnualBudgetColumn = string.Equals(columnName, "annual_budget", StringComparison.OrdinalIgnoreCase);
+
+            if (isAnnualBudgetColumn)
             {
                 decimal annual = GetCellDecimal(row, "annual_budget");
                 row.Cells["annual_budget"].Value = annual;
@@ -460,7 +462,7 @@ namespace pos.Accounting.CostCenter
                 row.Cells["annual_budget"].Value = sum;
             }
 
-            RecalculateRow(row, true);
+            RecalculateRow(row, !isAnnualBudgetColumn);
             UpdateTotalsStrip();
 
             if (chkShowComparison.Checked)

@@ -68,13 +68,13 @@ namespace pos.Accounting.CostCenter
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblTitle.Location = new System.Drawing.Point(12, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(290, 25);
+            this.lblTitle.Size = new System.Drawing.Size(382, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Budget Entry && Planning Center";
             // 
             // grpHeader
             // 
-            this.grpHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.grpHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpHeader.Controls.Add(this.btnApprove);
             this.grpHeader.Controls.Add(this.txtNotes);
@@ -106,18 +106,18 @@ namespace pos.Accounting.CostCenter
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(127, 62);
+            this.txtNotes.Location = new System.Drawing.Point(146, 62);
             this.txtNotes.MaxLength = 500;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(1146, 22);
+            this.txtNotes.Size = new System.Drawing.Size(1127, 27);
             this.txtNotes.TabIndex = 9;
             // 
             // lblNotes
             // 
             this.lblNotes.AutoSize = true;
-            this.lblNotes.Location = new System.Drawing.Point(17, 66);
+            this.lblNotes.Location = new System.Drawing.Point(10, 66);
             this.lblNotes.Name = "lblNotes";
-            this.lblNotes.Size = new System.Drawing.Size(104, 15);
+            this.lblNotes.Size = new System.Drawing.Size(130, 20);
             this.lblNotes.TabIndex = 8;
             this.lblNotes.Text = "Notes/Description";
             // 
@@ -127,7 +127,7 @@ namespace pos.Accounting.CostCenter
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Location = new System.Drawing.Point(971, 26);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(155, 23);
+            this.cmbStatus.Size = new System.Drawing.Size(155, 28);
             this.cmbStatus.TabIndex = 7;
             // 
             // lblStatusHeader
@@ -135,7 +135,7 @@ namespace pos.Accounting.CostCenter
             this.lblStatusHeader.AutoSize = true;
             this.lblStatusHeader.Location = new System.Drawing.Point(922, 30);
             this.lblStatusHeader.Name = "lblStatusHeader";
-            this.lblStatusHeader.Size = new System.Drawing.Size(39, 15);
+            this.lblStatusHeader.Size = new System.Drawing.Size(49, 20);
             this.lblStatusHeader.TabIndex = 6;
             this.lblStatusHeader.Text = "Status";
             // 
@@ -145,7 +145,7 @@ namespace pos.Accounting.CostCenter
             this.cmbCostCenter.FormattingEnabled = true;
             this.cmbCostCenter.Location = new System.Drawing.Point(647, 26);
             this.cmbCostCenter.Name = "cmbCostCenter";
-            this.cmbCostCenter.Size = new System.Drawing.Size(260, 23);
+            this.cmbCostCenter.Size = new System.Drawing.Size(260, 28);
             this.cmbCostCenter.TabIndex = 5;
             // 
             // lblCostCenter
@@ -153,7 +153,7 @@ namespace pos.Accounting.CostCenter
             this.lblCostCenter.AutoSize = true;
             this.lblCostCenter.Location = new System.Drawing.Point(571, 30);
             this.lblCostCenter.Name = "lblCostCenter";
-            this.lblCostCenter.Size = new System.Drawing.Size(67, 15);
+            this.lblCostCenter.Size = new System.Drawing.Size(85, 20);
             this.lblCostCenter.TabIndex = 4;
             this.lblCostCenter.Text = "Cost Center";
             // 
@@ -163,7 +163,7 @@ namespace pos.Accounting.CostCenter
             this.cmbVersion.FormattingEnabled = true;
             this.cmbVersion.Location = new System.Drawing.Point(357, 26);
             this.cmbVersion.Name = "cmbVersion";
-            this.cmbVersion.Size = new System.Drawing.Size(196, 23);
+            this.cmbVersion.Size = new System.Drawing.Size(196, 28);
             this.cmbVersion.TabIndex = 3;
             // 
             // lblVersion
@@ -171,7 +171,7 @@ namespace pos.Accounting.CostCenter
             this.lblVersion.AutoSize = true;
             this.lblVersion.Location = new System.Drawing.Point(261, 30);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(88, 15);
+            this.lblVersion.Size = new System.Drawing.Size(109, 20);
             this.lblVersion.TabIndex = 2;
             this.lblVersion.Text = "Budget Version";
             // 
@@ -181,21 +181,21 @@ namespace pos.Accounting.CostCenter
             this.cmbYear.FormattingEnabled = true;
             this.cmbYear.Location = new System.Drawing.Point(127, 26);
             this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(126, 23);
+            this.cmbYear.Size = new System.Drawing.Size(126, 28);
             this.cmbYear.TabIndex = 1;
             // 
             // lblYear
             // 
             this.lblYear.AutoSize = true;
-            this.lblYear.Location = new System.Drawing.Point(17, 30);
+            this.lblYear.Location = new System.Drawing.Point(10, 30);
             this.lblYear.Name = "lblYear";
-            this.lblYear.Size = new System.Drawing.Size(77, 15);
+            this.lblYear.Size = new System.Drawing.Size(99, 20);
             this.lblYear.TabIndex = 0;
             this.lblYear.Text = "Financial Year";
             // 
             // pnlActions
             // 
-            this.pnlActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlActions.Controls.Add(this.chkShowComparison);
             this.pnlActions.Controls.Add(this.btnPrint);
@@ -218,7 +218,7 @@ namespace pos.Accounting.CostCenter
             this.chkShowComparison.AutoSize = true;
             this.chkShowComparison.Location = new System.Drawing.Point(1090, 11);
             this.chkShowComparison.Name = "chkShowComparison";
-            this.chkShowComparison.Size = new System.Drawing.Size(165, 19);
+            this.chkShowComparison.Size = new System.Drawing.Size(203, 24);
             this.chkShowComparison.TabIndex = 10;
             this.chkShowComparison.Text = "Show Budget Comparison";
             this.chkShowComparison.UseVisualStyleBackColor = true;
@@ -315,8 +315,8 @@ namespace pos.Accounting.CostCenter
             // 
             // pnlGrid
             // 
-            this.pnlGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlGrid.Controls.Add(this.dgvBudgets);
@@ -335,12 +335,13 @@ namespace pos.Accounting.CostCenter
             this.dgvBudgets.Location = new System.Drawing.Point(0, 0);
             this.dgvBudgets.Name = "dgvBudgets";
             this.dgvBudgets.RowHeadersVisible = false;
+            this.dgvBudgets.RowHeadersWidth = 51;
             this.dgvBudgets.Size = new System.Drawing.Size(1286, 338);
             this.dgvBudgets.TabIndex = 0;
             // 
             // pnlTotals
             // 
-            this.pnlTotals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlTotals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTotals.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotals.Controls.Add(this.lblNetProfitValue);
@@ -360,7 +361,7 @@ namespace pos.Accounting.CostCenter
             this.lblNetProfitValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblNetProfitValue.Location = new System.Drawing.Point(1118, 10);
             this.lblNetProfitValue.Name = "lblNetProfitValue";
-            this.lblNetProfitValue.Size = new System.Drawing.Size(32, 15);
+            this.lblNetProfitValue.Size = new System.Drawing.Size(40, 20);
             this.lblNetProfitValue.TabIndex = 5;
             this.lblNetProfitValue.Text = "0.00";
             // 
@@ -370,7 +371,7 @@ namespace pos.Accounting.CostCenter
             this.lblNetProfit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblNetProfit.Location = new System.Drawing.Point(1012, 10);
             this.lblNetProfit.Name = "lblNetProfit";
-            this.lblNetProfit.Size = new System.Drawing.Size(102, 15);
+            this.lblNetProfit.Size = new System.Drawing.Size(138, 20);
             this.lblNetProfit.TabIndex = 4;
             this.lblNetProfit.Text = "Net Profit Budget:";
             // 
@@ -380,7 +381,7 @@ namespace pos.Accounting.CostCenter
             this.lblExpenseValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblExpenseValue.Location = new System.Drawing.Point(698, 10);
             this.lblExpenseValue.Name = "lblExpenseValue";
-            this.lblExpenseValue.Size = new System.Drawing.Size(32, 15);
+            this.lblExpenseValue.Size = new System.Drawing.Size(40, 20);
             this.lblExpenseValue.TabIndex = 3;
             this.lblExpenseValue.Text = "0.00";
             // 
@@ -390,7 +391,7 @@ namespace pos.Accounting.CostCenter
             this.lblExpense.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblExpense.Location = new System.Drawing.Point(553, 10);
             this.lblExpense.Name = "lblExpense";
-            this.lblExpense.Size = new System.Drawing.Size(141, 15);
+            this.lblExpense.Size = new System.Drawing.Size(164, 20);
             this.lblExpense.TabIndex = 2;
             this.lblExpense.Text = "Total Expense Budget:";
             // 
@@ -400,7 +401,7 @@ namespace pos.Accounting.CostCenter
             this.lblIncomeValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblIncomeValue.Location = new System.Drawing.Point(205, 10);
             this.lblIncomeValue.Name = "lblIncomeValue";
-            this.lblIncomeValue.Size = new System.Drawing.Size(32, 15);
+            this.lblIncomeValue.Size = new System.Drawing.Size(40, 20);
             this.lblIncomeValue.TabIndex = 1;
             this.lblIncomeValue.Text = "0.00";
             // 
@@ -410,13 +411,13 @@ namespace pos.Accounting.CostCenter
             this.lblIncome.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblIncome.Location = new System.Drawing.Point(20, 10);
             this.lblIncome.Name = "lblIncome";
-            this.lblIncome.Size = new System.Drawing.Size(181, 15);
+            this.lblIncome.Size = new System.Drawing.Size(225, 20);
             this.lblIncome.TabIndex = 0;
             this.lblIncome.Text = "Total Income Budget (Annual):";
             // 
             // pnlComparison
             // 
-            this.pnlComparison.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlComparison.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlComparison.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlComparison.Controls.Add(this.dgvComparison);
@@ -437,6 +438,7 @@ namespace pos.Accounting.CostCenter
             this.dgvComparison.Name = "dgvComparison";
             this.dgvComparison.ReadOnly = true;
             this.dgvComparison.RowHeadersVisible = false;
+            this.dgvComparison.RowHeadersWidth = 51;
             this.dgvComparison.Size = new System.Drawing.Size(1286, 131);
             this.dgvComparison.TabIndex = 1;
             // 
@@ -446,7 +448,7 @@ namespace pos.Accounting.CostCenter
             this.lblComparisonTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.lblComparisonTitle.Location = new System.Drawing.Point(10, 7);
             this.lblComparisonTitle.Name = "lblComparisonTitle";
-            this.lblComparisonTitle.Size = new System.Drawing.Size(269, 15);
+            this.lblComparisonTitle.Size = new System.Drawing.Size(351, 20);
             this.lblComparisonTitle.TabIndex = 0;
             this.lblComparisonTitle.Text = "Budget vs Actual (Budget | Actual | Variance | %)";
             // 
@@ -456,13 +458,13 @@ namespace pos.Accounting.CostCenter
             this.lblStatus.AutoSize = true;
             this.lblStatus.Location = new System.Drawing.Point(14, 762);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(39, 15);
+            this.lblStatus.Size = new System.Drawing.Size(50, 20);
             this.lblStatus.TabIndex = 6;
             this.lblStatus.Text = "Ready";
             // 
             // frm_budget_setup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 786);
             this.Controls.Add(this.lblStatus);

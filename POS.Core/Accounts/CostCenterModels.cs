@@ -46,7 +46,7 @@ namespace POS.Core
 
         /// <summary>
         /// Monthly budget amount allocated to this cost center.
-        /// Deprecated in favor of acc_cost_center_budgets table for per-account tracking.
+        /// Deprecated in favor of acc_budget_headers/acc_budget_lines tables for per-account tracking.
         /// </summary>
         public decimal? MonthlyBudget { get; set; }
 

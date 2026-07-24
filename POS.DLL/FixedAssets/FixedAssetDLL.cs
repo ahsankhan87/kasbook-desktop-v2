@@ -402,7 +402,7 @@ namespace POS.DLL
         // OperationTypes: 1=Insert, 2=Update, 3=Delete, 4=Select One, 5=Select All
         // ============================================================
 
-        public int InsertAsset(string assetCode, string assetName, int categoryId, int? locationId = null, string serialNumber = null, DateTime? purchaseDate = null, decimal cost = 0, string depMethod = "STRAIGHT_LINE", int usefulLifeMonths = 60, decimal salvageValue = 0, decimal? replacementCost = null, string notes = null, int? createdBy = null)
+        public int InsertAsset(string assetCode, string assetName, int categoryId, int? locationId = null, int? costCenterId = null, int? branchId = null, string serialNumber = null, DateTime? purchaseDate = null, decimal cost = 0, string depMethod = "STRAIGHT_LINE", int usefulLifeMonths = 60, decimal salvageValue = 0, decimal? replacementCost = null, string notes = null, int? createdBy = null)
         {
             using (SqlConnection cn = CreateConnection())
             using (SqlCommand cmd = new SqlCommand("dbo.sp_FixedAssetsCrud", cn))
@@ -421,6 +421,8 @@ namespace POS.DLL
                 AddParameter(cmd, "@replacement_cost", replacementCost ?? (object)DBNull.Value);
                 AddParameter(cmd, "@notes", notes ?? (object)DBNull.Value);
                 AddParameter(cmd, "@created_by", createdBy ?? (object)DBNull.Value);
+                AddParameter(cmd, "@CostCenterId", costCenterId ?? (object)DBNull.Value);
+                AddParameter(cmd, "@BranchId", branchId ?? (object)DBNull.Value);
                 AddParameter(cmd, "@is_active", 1);
 
                 SqlParameter idParam = new SqlParameter("@asset_id", SqlDbType.Int) { Direction = ParameterDirection.InputOutput };
@@ -434,7 +436,7 @@ namespace POS.DLL
             }
         }
 
-        public int UpdateAssetDetails(int assetId, string assetName, int? locationId = null, string notes = null, bool isActive = true)
+        public int UpdateAssetDetails(int assetId, string assetName, int? locationId = null, int? costCenterId = null, int? branchId = null, string notes = null, bool isActive = true)
         {
             return ExecuteNonQuery("dbo.sp_FixedAssetsCrud", cmd =>
             {
@@ -442,6 +444,8 @@ namespace POS.DLL
                 AddParameter(cmd, "@asset_id", assetId);
                 AddParameter(cmd, "@asset_name", assetName);
                 AddParameter(cmd, "@location_id", locationId ?? (object)DBNull.Value);
+                AddParameter(cmd, "@cost_center_id", costCenterId ?? (object)DBNull.Value);
+                AddParameter(cmd, "@branch_id", branchId ?? (object)DBNull.Value);
                 AddParameter(cmd, "@notes", notes ?? (object)DBNull.Value);
                 AddParameter(cmd, "@is_active", isActive ? 1 : 0);
                 AddParameter(cmd, "@OperationType", 2); // Update
@@ -456,6 +460,8 @@ namespace POS.DLL
             string supplierName,
             string purchaseInvoiceNo,
             int? locationId,
+            int? costCenterId,
+            int? branchId,
             string serialNumber,
             string modelNumber,
             string status)
@@ -475,6 +481,12 @@ namespace POS.DLL
 
                 IF COL_LENGTH('dbo.fa_assets', 'model_number') IS NOT NULL
                     UPDATE dbo.fa_assets SET model_number = @ModelNumber WHERE asset_id = @AssetId;
+
+                IF COL_LENGTH('dbo.fa_assets', 'cost_center_id') IS NOT NULL
+                    UPDATE dbo.fa_assets SET cost_center_id = @CostCenterId WHERE asset_id = @AssetId;
+
+                IF COL_LENGTH('dbo.fa_assets', 'branch_id') IS NOT NULL
+                    UPDATE dbo.fa_assets SET branch_id = @BranchId WHERE asset_id = @AssetId;
 
                 IF COL_LENGTH('dbo.fa_assets', 'supplier_name') IS NOT NULL
                     UPDATE dbo.fa_assets SET supplier_name = @SupplierName WHERE asset_id = @AssetId;
@@ -497,6 +509,8 @@ namespace POS.DLL
                 AddParameter(cmd, "@SupplierName", supplierName ?? (object)DBNull.Value);
                 AddParameter(cmd, "@PurchaseInvoiceNo", purchaseInvoiceNo ?? (object)DBNull.Value);
                 AddParameter(cmd, "@LocationId", locationId ?? (object)DBNull.Value);
+                AddParameter(cmd, "@CostCenterId", costCenterId ?? (object)DBNull.Value);
+                AddParameter(cmd, "@BranchId", branchId ?? (object)DBNull.Value);
                 AddParameter(cmd, "@SerialNumber", serialNumber ?? (object)DBNull.Value);
                 AddParameter(cmd, "@ModelNumber", modelNumber ?? (object)DBNull.Value);
                 AddParameter(cmd, "@Status", status ?? "Active");

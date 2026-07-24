@@ -227,7 +227,7 @@ namespace pos.FixedAssets
             this.btnImportAssets.Name = "btnImportAssets";
             this.btnImportAssets.Size = new System.Drawing.Size(140, 37);
             this.btnImportAssets.TabIndex = 1;
-            this.btnImportAssets.Text = "Import Assets";
+            this.btnImportAssets.Text = "Reports";
             // 
             // btnManageCategories
             // 
@@ -555,6 +555,11 @@ namespace pos.FixedAssets
             this.ddlAssetLocation = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlAssetLocation); y += gap;
 
+            // Cost Center
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Cost Center:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            this.ddlAssetCostCenter = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            scroll.Controls.Add(this.ddlAssetCostCenter); y += gap;
+
             // Serial Number
             scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Serial Number:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtSerialNumber = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
@@ -590,7 +595,7 @@ namespace pos.FixedAssets
             // Depreciation Method
             scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Dep. Method:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDepMethod = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
-            this.ddlDepMethod.Items.AddRange(new object[] { "STRAIGHT_LINE", "REDUCING_BALANCE", "UNITS_OF_PRODUCTION" });
+            this.ddlDepMethod.Items.AddRange(new object[] { "STRAIGHT_LINE", "REDUCING_BALANCE", "UNITS_OF_PRODUCTION", "NO_DEPRECIATION" });
             scroll.Controls.Add(this.ddlDepMethod); y += gap;
 
             // Useful Life Years
@@ -600,7 +605,7 @@ namespace pos.FixedAssets
 
             // Useful Life Months
             scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Useful Life (Months):", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
-            this.numUsefulLifeMonths = new System.Windows.Forms.NumericUpDown() { Minimum = 0, Maximum = 1200, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
+            this.numUsefulLifeMonths = new System.Windows.Forms.NumericUpDown() { Minimum = 0, Maximum = 11, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.numUsefulLifeMonths); y += gap;
 
             // Residual Value
@@ -814,6 +819,7 @@ namespace pos.FixedAssets
         private System.Windows.Forms.TextBox txtInvoiceNo;
         private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.ComboBox ddlAssetLocation;
+        private System.Windows.Forms.ComboBox ddlAssetCostCenter;
         private System.Windows.Forms.TextBox txtSerialNumber;
         private System.Windows.Forms.TextBox txtModelNumber;
         private System.Windows.Forms.ComboBox ddlAssetStatus;

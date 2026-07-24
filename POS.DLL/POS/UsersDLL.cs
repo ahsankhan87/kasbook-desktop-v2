@@ -157,7 +157,7 @@ namespace POS.DLL
 
                         cmd = new SqlCommand("sp_UsersCrud", cn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@OperationType", "5");
+                        cmd.Parameters.AddWithValue("@OperationType", "7");
 
                     }
 

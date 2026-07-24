@@ -130,8 +130,11 @@ namespace pos.Reports.Financial
         {
             _budgets = _budgetBll.GetAllBudgetHeaders() ?? new DataTable();
 
-            DataTable dt = _budgets.Clone();
-            if (!_budgets.Columns.Contains("budget_id") || !_budgets.Columns.Contains("budget_version"))
+            DataTable dt = new DataTable();
+            dt.Columns.Add("budget_id", typeof(int));
+            dt.Columns.Add("budget_version", typeof(string));
+
+            if (!_budgets.Columns.Contains("budget_id"))
             {
                 cmbBudgetVersion.DataSource = dt;
                 cmbBudgetVersion.DisplayMember = "budget_version";
@@ -144,23 +147,48 @@ namespace pos.Reports.Financial
             bool hasSelectedYear = TryGetSelectedFiscalYearId(out fiscalYearId);
 
             var rows = _budgets.AsEnumerable()
-                .Where(r => !hasSelectedYear || (r.Table.Columns.Contains("financial_year_id") && Convert.ToInt32(r["financial_year_id"]) == fiscalYearId))
-                .OrderByDescending(r => ReadRowDate(r, "created_at"))
-                .ToArray();
+                .Where(r =>
+                {
+                    if (!hasSelectedYear)
+                        return true;
 
-            foreach (var row in rows)
+                    int rowYearId;
+                    return TryReadRowInt(r, "financial_year_id", out rowYearId) && rowYearId == fiscalYearId;
+                })
+                .OrderByDescending(r => ReadRowDate(r, "created_at"))
+                .ToList();
+
+            if (rows.Count == 0)
             {
-                dt.ImportRow(row);
+                rows = _budgets.AsEnumerable()
+                    .OrderByDescending(r => ReadRowDate(r, "created_at"))
+                    .ToList();
+            }
+
+            foreach (DataRow row in rows)
+            {
+                int budgetId;
+                if (!TryReadRowInt(row, "budget_id", out budgetId))
+                    continue;
+
+                string version = row.Table.Columns.Contains("budget_version") ? Convert.ToString(row["budget_version"]) : string.Empty;
+                if (string.IsNullOrWhiteSpace(version))
+                    version = row.Table.Columns.Contains("budget_name") ? Convert.ToString(row["budget_name"]) : string.Empty;
+                if (string.IsNullOrWhiteSpace(version))
+                    version = "Budget #" + budgetId;
+
+                string status = row.Table.Columns.Contains("status") ? Convert.ToString(row["status"]) : string.Empty;
+                string displayText = string.IsNullOrWhiteSpace(status)
+                    ? version
+                    : string.Format("{0} ({1})", version, status);
+
+                dt.Rows.Add(budgetId, displayText);
             }
 
             cmbBudgetVersion.DataSource = dt;
             cmbBudgetVersion.DisplayMember = "budget_version";
             cmbBudgetVersion.ValueMember = "budget_id";
-
-            if (dt.Rows.Count > 0)
-                cmbBudgetVersion.SelectedIndex = 0;
-            else
-                cmbBudgetVersion.SelectedIndex = -1;
+            cmbBudgetVersion.SelectedIndex = dt.Rows.Count > 0 ? 0 : -1;
         }
 
         private bool TryGetSelectedFiscalYearId(out int fiscalYearId)
@@ -185,6 +213,54 @@ namespace pos.Reports.Financial
 
             DateTime value;
             return DateTime.TryParse(Convert.ToString(row[columnName]), out value) ? value : DateTime.MinValue;
+        }
+
+        private bool TryReadRowInt(DataRow row, string columnName, out int value)
+        {
+            value = 0;
+            if (row == null || row.Table == null || !row.Table.Columns.Contains(columnName))
+                return false;
+
+            object raw = row[columnName];
+            if (raw == null || raw == DBNull.Value)
+                return false;
+
+            return int.TryParse(Convert.ToString(raw), out value);
+        }
+
+        private bool TryGetBudgetDateRange(int budgetId, out DateTime fromDate, out DateTime toDate)
+        {
+            fromDate = DateTime.Today.AddMonths(-1);
+            toDate = DateTime.Today;
+
+            if (_budgets == null || _budgets.Rows.Count == 0)
+                return false;
+
+            DataRow selected = _budgets.AsEnumerable()
+                .FirstOrDefault(r =>
+                {
+                    int id;
+                    return TryReadRowInt(r, "budget_id", out id) && id == budgetId;
+                });
+
+            if (selected == null)
+                return false;
+
+            DateTime startDate = ReadRowDate(selected, "start_date");
+            if (startDate == DateTime.MinValue)
+                startDate = ReadRowDate(selected, "from_date");
+
+            DateTime endDate = ReadRowDate(selected, "end_date");
+            if (endDate == DateTime.MinValue)
+                endDate = ReadRowDate(selected, "to_date");
+
+            if (startDate == DateTime.MinValue || endDate == DateTime.MinValue || endDate < startDate)
+                return false;
+
+            fromDate = startDate.Date;
+            DateTime today = DateTime.Today;
+            toDate = (today >= startDate && today <= endDate) ? today : endDate.Date;
+            return true;
         }
 
         private void ConfigureGrid()
@@ -294,10 +370,14 @@ namespace pos.Reports.Financial
                     string periodMode = Convert.ToString(cmbPeriod.SelectedItem);
                     string accountType = Convert.ToString(cmbAccountType.SelectedItem);
 
+                    DateTime fromDate = DateTime.Today.AddMonths(-1);
+                    DateTime toDate = DateTime.Today;
+                    TryGetBudgetDateRange(budgetId, out fromDate, out toDate);
+
                     DataTable raw = _budgetBll.GetBudgetVsActual(
                         budgetId,
-                        DateTime.Today.AddMonths(-1),
-                        DateTime.Today,
+                        fromDate,
+                        toDate,
                         ccId,
                         periodMode,
                         accountType);
@@ -460,8 +540,11 @@ namespace pos.Reports.Financial
             int accId = Convert.ToInt32(row.Cells["acc_id"].Value);
             string accCode = Convert.ToString(row.Cells["acc_code"].Value);
             string accName = Convert.ToString(row.Cells["acc_name"].Value);
+            int? ccId = cmbCostCenter.SelectedValue == null || cmbCostCenter.SelectedValue == DBNull.Value
+                ? (int?)null
+                : Convert.ToInt32(cmbCostCenter.SelectedValue);
 
-            using (var frm = new frm_BudgetVarianceDetail(budgetId, accId, accCode, accName))
+            using (var frm = new frm_BudgetVarianceDetail(budgetId, accId, accCode, accName, ccId))
             {
                 frm.ShowDialog(this);
             }

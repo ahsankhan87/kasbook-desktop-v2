@@ -435,7 +435,8 @@ GO
 
 CREATE PROCEDURE dbo.sp_BudgetMonthlyDetail
 	@BudgetId INT,
-	@AccId INT
+	@AccId INT,
+	@CCId INT = NULL
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -477,6 +478,7 @@ BEGIN
 		  AND aeh.status = 'Posted'
 		  AND ae.entry_date >= @FiscalYearStart
 		  AND DATEDIFF(MONTH, @FiscalYearStart, ae.entry_date) < 12
+		  AND (@CCId IS NULL OR ae.cost_center_id = @CCId)
 		GROUP BY MONTH(ae.entry_date)
 	)
 	SELECT 

@@ -15,10 +15,12 @@ namespace POS.BLL
     public class CostCenterBLL
     {
         private readonly CostCenterDLL _dll;
+        private readonly BudgetDLL _budgetDll;
 
         public CostCenterBLL()
         {
             _dll = new CostCenterDLL();
+            _budgetDll = new BudgetDLL();
         }
 
         #region Cost Center Operations
@@ -142,7 +144,7 @@ namespace POS.BLL
                 if (budgets == null || budgets.Count == 0)
                     throw new ArgumentException("At least one budget entry is required.", nameof(budgets));
 
-                _dll.SetBudgets(ccId, yearId, budgets, userId);
+                _budgetDll.SaveCostCenterBudgets(ccId, yearId, budgets, userId);
             }
             catch (Exception ex)
             {
@@ -163,7 +165,7 @@ namespace POS.BLL
         {
             try
             {
-                return _dll.GetBudgetAlerts(ccId, currentDate);
+                return _budgetDll.GetCostCenterBudgetAlerts(ccId, currentDate);
             }
             catch (Exception ex)
             {
@@ -201,7 +203,7 @@ namespace POS.BLL
                         SeverityLevel = null
                     };
 
-                return _dll.CheckBudgetBeforePosting(ccId, accId, amount, date);
+                return _budgetDll.CheckCostCenterBudgetBeforePosting(ccId, accId, amount, date);
             }
             catch (Exception ex)
             {

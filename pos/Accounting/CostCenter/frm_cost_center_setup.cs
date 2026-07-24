@@ -88,25 +88,12 @@ namespace pos.Accounting.CostCenter
 
         private void SetupManagerDropdown()
         {
-            // Load users from database (simplified - assumes users table exists)
             try
             {
                 UsersBLL usersBLL = new UsersBLL();
                 DataTable dt = new DataTable();
                 dt = usersBLL.GetAll();
-                //using (var cn = new System.Data.SqlClient.SqlConnection(POS.DLL.dbConnection.ConnectionString))
-                //{
-                //    cn.Open();
-                //    const string sql = "SELECT id, name FROM pos_users WHERE is_active = 1 ORDER BY name";
-                //    using (var cmd = new System.Data.SqlClient.SqlCommand(sql, cn))
-                //    {
-                //        using (var da = new System.Data.SqlClient.SqlDataAdapter(cmd))
-                //        {
-                //            da.Fill(dt);
-                //        }
-                //    }
-                //}
-
+                
                 cmbManager.DataSource = dt;
                 cmbManager.DisplayMember = "name";
                 cmbManager.ValueMember = "id";
@@ -162,8 +149,8 @@ namespace pos.Accounting.CostCenter
                         CcCode = txtCode.Text.Trim(),
                         CcName = txtName.Text.Trim(),
                         CcType = cmbType.SelectedItem?.ToString(),
-                        ParentCcId = cmbParent.SelectedValue != null && (int)cmbParent.SelectedValue > 0 ? (int?)cmbParent.SelectedValue : null,
-                        ManagerId = cmbManager.SelectedValue != null && (int)cmbManager.SelectedValue > 0 ? (int?)cmbManager.SelectedValue : null,
+                        ParentCcId = GetNullableSelectedId(cmbParent),
+                        ManagerId = GetNullableSelectedId(cmbManager),
                         MonthlyBudget = string.IsNullOrWhiteSpace(txtBudget.Text) ? null : (decimal?)decimal.Parse(txtBudget.Text),
                         StartDate = dtpStartDate.Value.Date,
                         EndDate = chkHasEndDate.Checked ? (DateTime?)dtpEndDate.Value.Date : null,
@@ -383,6 +370,21 @@ namespace pos.Accounting.CostCenter
             }
         }
 
+        private int? GetNullableSelectedId(ComboBox comboBox)
+        {
+            if (comboBox == null)
+                return null;
+
+            object selectedValue = comboBox.SelectedValue;
+            if (selectedValue == null || selectedValue == DBNull.Value || selectedValue is DataRowView)
+                return null;
+
+            if (int.TryParse(selectedValue.ToString(), out int parsedId) && parsedId > 0)
+                return parsedId;
+
+            return null;
+        }
+
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(txtCode.Text))
@@ -423,8 +425,8 @@ namespace pos.Accounting.CostCenter
             txtBudget.Clear();
             txtDescription.Clear();
             cmbType.SelectedIndex = 0;
-            cmbParent.SelectedIndex = -1;
-            cmbManager.SelectedIndex = -1;
+            cmbParent.SelectedIndex = cmbParent.Items.Count > 0 ? 0 : -1;
+            cmbManager.SelectedIndex = cmbManager.Items.Count > 0 ? 0 : -1;
             dtpStartDate.Value = DateTime.Today;
             chkHasEndDate.Checked = false;
             chkActive.Checked = true;

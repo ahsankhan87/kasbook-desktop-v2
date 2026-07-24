@@ -351,11 +351,11 @@ namespace POS.BLL
         /// <summary>
         /// Gets monthly budget detail for a specific account
         /// </summary>
-        public DataTable GetBudgetMonthlyDetail(int budgetId, int accId)
+        public DataTable GetBudgetMonthlyDetail(int budgetId, int accId, int? ccId = null)
         {
             try
             {
-                return _budgetDll.GetBudgetMonthlyDetail(budgetId, accId);
+                return _budgetDll.GetBudgetMonthlyDetail(budgetId, accId, ccId);
             }
             catch
             {

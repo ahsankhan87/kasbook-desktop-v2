@@ -72,11 +72,11 @@ namespace POS.DLL
                 {
                     // Insert
                     const string insertSql = @"
-INSERT INTO dbo.acc_cost_centers
-(cc_code, cc_name, cc_type, parent_cc_id, manager_id, monthly_budget, start_date, end_date, is_active, description, created_at)
-VALUES
-(@code, @name, @type, @parentId, @managerId, @monthlyBudget, @startDate, @endDate, @isActive, @description, GETDATE());
-SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                        INSERT INTO dbo.acc_cost_centers
+                        (cc_code, cc_name, cc_type, parent_cc_id, manager_id, monthly_budget, start_date, end_date, is_active, description, created_at)
+                        VALUES
+                        (@code, @name, @type, @parentId, @managerId, @monthlyBudget, @startDate, @endDate, @isActive, @description, GETDATE());
+                        SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                     using (SqlCommand insertCmd = new SqlCommand(insertSql, cn))
                     {
@@ -100,19 +100,19 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 {
                     // Update
                     const string updateSql = @"
-UPDATE dbo.acc_cost_centers
-SET cc_code = @code,
-    cc_name = @name,
-    cc_type = @type,
-    parent_cc_id = @parentId,
-    manager_id = @managerId,
-    monthly_budget = @monthlyBudget,
-    start_date = @startDate,
-    end_date = @endDate,
-    is_active = @isActive,
-    description = @description
-WHERE cc_id = @ccId;
-SELECT @ccId;";
+                        UPDATE dbo.acc_cost_centers
+                        SET cc_code = @code,
+                            cc_name = @name,
+                            cc_type = @type,
+                            parent_cc_id = @parentId,
+                            manager_id = @managerId,
+                            monthly_budget = @monthlyBudget,
+                            start_date = @startDate,
+                            end_date = @endDate,
+                            is_active = @isActive,
+                            description = @description
+                        WHERE cc_id = @ccId;
+                        SELECT @ccId;";
 
                     using (SqlCommand updateCmd = new SqlCommand(updateSql, cn))
                     {
@@ -238,304 +238,6 @@ WHERE cc_id = @ccId;";
 
         #endregion
 
-        #region Budget Operations
-
-        /// <summary>
-        /// Saves or replaces monthly budgets for a cost center and fiscal year.
-        /// Validates that all amounts are non-negative and accounts are Income/Expense types.
-        /// </summary>
-        public void SetBudgets(int ccId, int yearId, List<AccountBudget> budgets, int userId)
-        {
-            if (ccId <= 0)
-                throw new ArgumentException("Invalid cost center ID.", nameof(ccId));
-
-            if (yearId <= 0)
-                throw new ArgumentException("Invalid financial year ID.", nameof(yearId));
-
-            if (budgets == null || budgets.Count == 0)
-                throw new ArgumentException("At least one budget entry is required.", nameof(budgets));
-
-            // Validate all amounts are non-negative
-            foreach (var budget in budgets)
-            {
-                if (budget.JanBudget < 0 || budget.FebBudget < 0 || budget.MarBudget < 0 ||
-                    budget.AprBudget < 0 || budget.MayBudget < 0 || budget.JunBudget < 0 ||
-                    budget.JulBudget < 0 || budget.AugBudget < 0 || budget.SepBudget < 0 ||
-                    budget.OctBudget < 0 || budget.NovBudget < 0 || budget.DecBudget < 0)
-                {
-                    throw new ArgumentException("Budget amounts cannot be negative.");
-                }
-            }
-
-            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            {
-                cn.Open();
-
-                using (SqlTransaction tx = cn.BeginTransaction())
-                {
-                    try
-                    {
-                        // Delete existing budgets for this cost center and year
-                        const string deleteSql = @"
-DELETE FROM dbo.acc_cost_center_budgets
-WHERE cc_id = @ccId AND financial_year_id = @yearId;";
-
-                        using (SqlCommand deleteCmd = new SqlCommand(deleteSql, cn, tx))
-                        {
-                            deleteCmd.Parameters.AddWithValue("@ccId", ccId);
-                            deleteCmd.Parameters.AddWithValue("@yearId", yearId);
-                            deleteCmd.ExecuteNonQuery();
-                        }
-
-                        // Insert new budgets
-                        const string insertSql = @"
-INSERT INTO dbo.acc_cost_center_budgets
-(cc_id, financial_year_id, account_id, jan_budget, feb_budget, mar_budget, apr_budget,
- may_budget, jun_budget, jul_budget, aug_budget, sep_budget, oct_budget, nov_budget, dec_budget,
- created_by, created_at)
-VALUES
-(@ccId, @yearId, @accountId, @jan, @feb, @mar, @apr, @may, @jun, @jul, @aug, @sep, @oct, @nov, @dec,
- @createdBy, GETDATE());";
-
-                        foreach (var budget in budgets)
-                        {
-                            using (SqlCommand insertCmd = new SqlCommand(insertSql, cn, tx))
-                            {
-                                insertCmd.Parameters.AddWithValue("@ccId", ccId);
-                                insertCmd.Parameters.AddWithValue("@yearId", yearId);
-                                insertCmd.Parameters.AddWithValue("@accountId", budget.AccountId);
-                                insertCmd.Parameters.AddWithValue("@jan", budget.JanBudget);
-                                insertCmd.Parameters.AddWithValue("@feb", budget.FebBudget);
-                                insertCmd.Parameters.AddWithValue("@mar", budget.MarBudget);
-                                insertCmd.Parameters.AddWithValue("@apr", budget.AprBudget);
-                                insertCmd.Parameters.AddWithValue("@may", budget.MayBudget);
-                                insertCmd.Parameters.AddWithValue("@jun", budget.JunBudget);
-                                insertCmd.Parameters.AddWithValue("@jul", budget.JulBudget);
-                                insertCmd.Parameters.AddWithValue("@aug", budget.AugBudget);
-                                insertCmd.Parameters.AddWithValue("@sep", budget.SepBudget);
-                                insertCmd.Parameters.AddWithValue("@oct", budget.OctBudget);
-                                insertCmd.Parameters.AddWithValue("@nov", budget.NovBudget);
-                                insertCmd.Parameters.AddWithValue("@dec", budget.DecBudget);
-                                insertCmd.Parameters.AddWithValue("@createdBy", userId);
-                                insertCmd.ExecuteNonQuery();
-                            }
-                        }
-
-                        tx.Commit();
-                        Log.LogAction("Cost Center Budgets Set", $"CC: {ccId}, Year: {yearId}, Accounts: {budgets.Count}", userId, UsersModal.logged_in_branch_id);
-                    }
-                    catch
-                    {
-                        tx.Rollback();
-                        throw;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets budget alerts for a cost center in the current month.
-        /// Returns accounts that have exceeded their monthly budget.
-        /// </summary>
-        public List<BudgetAlertModel> GetBudgetAlerts(int ccId, DateTime currentDate)
-        {
-            if (ccId <= 0)
-                return new List<BudgetAlertModel>();
-
-            var alerts = new List<BudgetAlertModel>();
-            int currentMonth = currentDate.Month;
-            DateTime monthStart = new DateTime(currentDate.Year, currentMonth, 1);
-            DateTime monthEnd = monthStart.AddMonths(1).AddDays(-1);
-
-            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            {
-                const string sql = @"
-DECLARE @cc_id INT = @CCId;
-DECLARE @month INT = @Month;
-DECLARE @from_date DATE = @FromDate;
-DECLARE @to_date DATE = @ToDate;
-
-SELECT
-    @cc_id AS cc_id,
-    c.cc_code,
-    b.account_id,
-    a.code AS account_code,
-    a.name AS account_name,
-    @month AS current_month,
-    ISNULL(
-        CASE @month
-            WHEN 1 THEN b.jan_budget
-            WHEN 2 THEN b.feb_budget
-            WHEN 3 THEN b.mar_budget
-            WHEN 4 THEN b.apr_budget
-            WHEN 5 THEN b.may_budget
-            WHEN 6 THEN b.jun_budget
-            WHEN 7 THEN b.jul_budget
-            WHEN 8 THEN b.aug_budget
-            WHEN 9 THEN b.sep_budget
-            WHEN 10 THEN b.oct_budget
-            WHEN 11 THEN b.nov_budget
-            WHEN 12 THEN b.dec_budget
-        END,
-        0
-    ) AS budget_amount,
-    ISNULL(SUM(CASE WHEN E.account_id = b.account_id THEN ISNULL(E.debit, 0) - ISNULL(E.credit, 0) ELSE 0 END), 0) AS actual_amount
-FROM dbo.acc_cost_center_budgets b
-INNER JOIN dbo.acc_cost_centers c ON c.cc_id = b.cc_id
-INNER JOIN dbo.acc_accounts a ON a.id = b.account_id
-LEFT JOIN dbo.acc_entries E
-    ON E.account_id = b.account_id
-    AND E.cost_center_id = @cc_id
-    AND E.entry_date >= @from_date
-    AND E.entry_date <= @to_date
-WHERE b.cc_id = @cc_id
-GROUP BY b.account_id, a.code, a.name, c.cc_code, b.jan_budget, b.feb_budget, b.mar_budget,
-         b.apr_budget, b.may_budget, b.jun_budget, b.jul_budget, b.aug_budget, b.sep_budget,
-         b.oct_budget, b.nov_budget, b.dec_budget;";
-
-                cn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql, cn))
-                {
-                    cmd.Parameters.AddWithValue("@CCId", ccId);
-                    cmd.Parameters.AddWithValue("@Month", currentMonth);
-                    cmd.Parameters.AddWithValue("@FromDate", monthStart.Date);
-                    cmd.Parameters.AddWithValue("@ToDate", monthEnd.Date);
-
-                    using (SqlDataReader r = cmd.ExecuteReader())
-                    {
-                        while (r.Read())
-                        {
-                            decimal budgetAmount = (decimal)(r["budget_amount"] ?? 0m);
-                            decimal actualAmount = (decimal)(r["actual_amount"] ?? 0m);
-                            decimal overspendAmount = Math.Max(0, actualAmount - budgetAmount);
-
-                            if (overspendAmount > 0)
-                            {
-                                decimal overspendPercent = budgetAmount > 0 ? (actualAmount / budgetAmount) * 100 : 0;
-                                string severity = overspendPercent > 120 ? "Critical" : overspendPercent > 105 ? "Warning" : "Info";
-
-                                alerts.Add(new BudgetAlertModel
-                                {
-                                    CcId = ccId,
-                                    CcCode = r["cc_code"]?.ToString() ?? "",
-                                    AccountId = (int)r["account_id"],
-                                    AccountCode = r["account_code"]?.ToString() ?? "",
-                                    AccountName = r["account_name"]?.ToString() ?? "",
-                                    CurrentMonth = currentMonth,
-                                    BudgetAmount = budgetAmount,
-                                    ActualAmount = actualAmount,
-                                    OverspendAmount = overspendAmount,
-                                    OverspendPercent = overspendPercent,
-                                    SeverityLevel = severity
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-
-            return alerts;
-        }
-
-        /// <summary>
-        /// Checks if posting an amount to an account in a cost center would exceed budget.
-        /// Returns detailed result including remaining budget.
-        /// </summary>
-        public BudgetCheckResult CheckBudgetBeforePosting(int ccId, int accountId, decimal amount, DateTime date)
-        {
-            if (ccId <= 0 || accountId <= 0)
-                return new BudgetCheckResult { Message = "Invalid cost center or account." };
-
-            int month = date.Month;
-            DateTime monthStart = new DateTime(date.Year, month, 1);
-            DateTime monthEnd = monthStart.AddMonths(1).AddDays(-1);
-
-            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            {
-                const string sql = @"
-SELECT TOP 1
-    ISNULL(
-        CASE @Month
-            WHEN 1 THEN b.jan_budget
-            WHEN 2 THEN b.feb_budget
-            WHEN 3 THEN b.mar_budget
-            WHEN 4 THEN b.apr_budget
-            WHEN 5 THEN b.may_budget
-            WHEN 6 THEN b.jun_budget
-            WHEN 7 THEN b.jul_budget
-            WHEN 8 THEN b.aug_budget
-            WHEN 9 THEN b.sep_budget
-            WHEN 10 THEN b.oct_budget
-            WHEN 11 THEN b.nov_budget
-            WHEN 12 THEN b.dec_budget
-        END,
-        0
-    ) AS monthly_budget,
-    ISNULL(SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)), 0) AS current_actual
-FROM dbo.acc_cost_center_budgets b
-LEFT JOIN dbo.acc_entries E
-    ON E.account_id = @AccountId
-    AND E.cost_center_id = @CCId
-    AND E.entry_date >= @MonthStart
-    AND E.entry_date <= @MonthEnd
-WHERE b.cc_id = @CCId
-  AND b.account_id = @AccountId
-GROUP BY b.jan_budget, b.feb_budget, b.mar_budget, b.apr_budget, b.may_budget, b.jun_budget,
-         b.jul_budget, b.aug_budget, b.sep_budget, b.oct_budget, b.nov_budget, b.dec_budget;";
-
-                cn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql, cn))
-                {
-                    cmd.Parameters.AddWithValue("@CCId", ccId);
-                    cmd.Parameters.AddWithValue("@AccountId", accountId);
-                    cmd.Parameters.AddWithValue("@Month", month);
-                    cmd.Parameters.AddWithValue("@MonthStart", monthStart.Date);
-                    cmd.Parameters.AddWithValue("@MonthEnd", monthEnd.Date);
-
-                    using (SqlDataReader r = cmd.ExecuteReader(CommandBehavior.SingleRow))
-                    {
-                        if (!r.Read())
-                        {
-                            return new BudgetCheckResult
-                            {
-                                IsOverBudget = false,
-                                RemainingBudget = 0,
-                                Message = "No budget defined for this account in this cost center.",
-                                SeverityLevel = null
-                            };
-                        }
-
-                        decimal monthlyBudget = (decimal)r["monthly_budget"];
-                        decimal currentActual = (decimal)r["current_actual"];
-                        decimal projectedActual = currentActual + amount;
-                        decimal remainingBudget = monthlyBudget - projectedActual;
-                        bool isOver = remainingBudget < 0;
-
-                        string severity = null;
-                        string message = $"Budget: {monthlyBudget:N2}, Current: {currentActual:N2}, Projected: {projectedActual:N2}";
-
-                        if (isOver)
-                        {
-                            decimal overspendPercent = monthlyBudget > 0 ? (projectedActual / monthlyBudget) * 100 : 100;
-                            severity = overspendPercent > 120 ? "Critical" : "Warning";
-                            message = $"⚠ Over budget by {Math.Abs(remainingBudget):N2}. {message}";
-                        }
-
-                        return new BudgetCheckResult
-                        {
-                            IsOverBudget = isOver,
-                            RemainingBudget = remainingBudget,
-                            MonthlyBudget = monthlyBudget,
-                            CurrentActual = currentActual,
-                            Message = message,
-                            SeverityLevel = severity
-                        };
-                    }
-                }
-            }
-        }
-
-        #endregion
 
         #region Allocation Operations
 
@@ -642,15 +344,16 @@ GROUP BY b.jan_budget, b.feb_budget, b.mar_budget, b.apr_budget, b.may_budget, b
 
             // Traverse up the hierarchy from parentId; if we find ccId, it's circular
             const string sql = @"
-WITH Ancestors AS
-(
-    SELECT parent_cc_id FROM dbo.acc_cost_centers WHERE cc_id = @parentId AND parent_cc_id IS NOT NULL
-    UNION ALL
-    SELECT parent_cc_id FROM dbo.acc_cost_centers c
-    INNER JOIN Ancestors a ON c.cc_id = a.parent_cc_id
-    WHERE c.parent_cc_id IS NOT NULL
-)
-SELECT COUNT(1) FROM Ancestors WHERE parent_cc_id = @ccId;";
+                WITH Ancestors AS
+                (
+
+                    SELECT parent_cc_id FROM dbo.acc_cost_centers WHERE cc_id = @parentId AND parent_cc_id IS NOT NULL
+                    UNION ALL
+                    SELECT c.parent_cc_id FROM dbo.acc_cost_centers c
+                    INNER JOIN Ancestors a ON c.cc_id = a.parent_cc_id
+                    WHERE c.parent_cc_id IS NOT NULL
+                )
+                SELECT COUNT(1) FROM Ancestors WHERE parent_cc_id = @ccId;";
 
             using (SqlCommand cmd = new SqlCommand(sql, cn))
             {

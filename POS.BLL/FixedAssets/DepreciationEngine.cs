@@ -117,6 +117,11 @@ namespace POS.BLL.FixedAssets
             ValidateAsset(asset);
 
             List<DepScheduleLine> schedule = new List<DepScheduleLine>();
+            string method = NormalizeMethod(asset.DepMethod);
+            if (method == "NO_DEPRECIATION" || method == "NONE" || method == "NO_DEP")
+            {
+                return schedule;
+            }
             DateTime firstPeriod = new DateTime(asset.PurchaseDate.Year, asset.PurchaseDate.Month, 1);
             decimal openingWdv = asset.Cost;
             decimal accumulatedDep = 0m;
@@ -277,9 +282,19 @@ namespace POS.BLL.FixedAssets
             return summary;
         }
 
+        public decimal CalculateAssetDepreciationForProjection(FixedAssetModel asset, DateTime periodDate)
+        {
+            return CalculateAssetDepreciation(asset, periodDate);
+        }
+
         private decimal CalculateAssetDepreciation(FixedAssetModel asset, DateTime periodDate)
         {
             string method = NormalizeMethod(asset.DepMethod);
+            if (method == "NO_DEPRECIATION" || method == "NONE" || method == "NO_DEP")
+            {
+                return 0m;
+            }
+
             if (method == "REDUCING_BALANCE" || method == "REDUCING" || method == "DB")
             {
                 return CalculateReducingBalance(asset, periodDate);
@@ -298,6 +313,11 @@ namespace POS.BLL.FixedAssets
             string method = NormalizeMethod(asset.DepMethod);
             decimal remaining = Math.Max(0m, asset.Cost - asset.ResidualValue - accumulatedDepreciation);
             if (remaining <= 0m || openingWdv <= asset.ResidualValue)
+            {
+                return 0m;
+            }
+
+            if (method == "NO_DEPRECIATION" || method == "NONE" || method == "NO_DEP")
             {
                 return 0m;
             }
@@ -367,6 +387,7 @@ namespace POS.BLL.FixedAssets
                 VoucherDate = periodDate,
                 ReferenceNo = asset.AssetCode,
                 Narration = narration,
+                CostCenterID = asset.CostCenterId,
                 IsAutoPosted = true
             };
 
@@ -377,6 +398,7 @@ namespace POS.BLL.FixedAssets
                 Debit = depAmount,
                 Credit = 0m,
                 Narration = narration,
+                CostCenterID = asset.CostCenterId,
                 ModuleName = "FixedAssets",
                 RefId = asset.AssetId
             });
@@ -388,10 +410,10 @@ namespace POS.BLL.FixedAssets
                 Debit = 0m,
                 Credit = depAmount,
                 Narration = narration,
+                CostCenterID = asset.CostCenterId,
                 ModuleName = "FixedAssets",
                 RefId = asset.AssetId
             });
-
             return model;
         }
 

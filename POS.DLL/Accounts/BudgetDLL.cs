@@ -384,6 +384,374 @@ namespace POS.DLL
         }
 
         /// <summary>
+        /// Saves or replaces monthly budgets for a cost center and fiscal year using acc_budget_headers/acc_budget_lines.
+        /// </summary>
+        public void SaveCostCenterBudgets(int ccId, int yearId, List<AccountBudget> budgets, int userId)
+        {
+            if (ccId <= 0)
+                throw new ArgumentException("Invalid cost center ID.", nameof(ccId));
+
+            if (yearId <= 0)
+                throw new ArgumentException("Invalid financial year ID.", nameof(yearId));
+
+            if (budgets == null || budgets.Count == 0)
+                throw new ArgumentException("At least one budget entry is required.", nameof(budgets));
+
+            foreach (var budget in budgets)
+            {
+                if (budget.JanBudget < 0 || budget.FebBudget < 0 || budget.MarBudget < 0 ||
+                    budget.AprBudget < 0 || budget.MayBudget < 0 || budget.JunBudget < 0 ||
+                    budget.JulBudget < 0 || budget.AugBudget < 0 || budget.SepBudget < 0 ||
+                    budget.OctBudget < 0 || budget.NovBudget < 0 || budget.DecBudget < 0)
+                {
+                    throw new ArgumentException("Budget amounts cannot be negative.");
+                }
+            }
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                using (SqlTransaction tx = cn.BeginTransaction())
+                {
+                    try
+                    {
+                        int budgetId;
+
+                        const string findBudgetSql = @"
+SELECT TOP 1 budget_id
+FROM acc_budget_headers
+WHERE financial_year_id = @yearId AND cc_id = @ccId
+ORDER BY CASE WHEN status = 'Active' THEN 0 WHEN status = 'Approved' THEN 1 ELSE 2 END,
+         created_at DESC;";
+
+                        using (SqlCommand findCmd = new SqlCommand(findBudgetSql, cn, tx))
+                        {
+                            findCmd.Parameters.AddWithValue("@yearId", yearId);
+                            findCmd.Parameters.AddWithValue("@ccId", ccId);
+                            object existingId = findCmd.ExecuteScalar();
+                            budgetId = existingId == null || existingId == DBNull.Value ? 0 : Convert.ToInt32(existingId);
+                        }
+
+                        if (budgetId <= 0)
+                        {
+                            const string insertHeaderSql = @"
+INSERT INTO acc_budget_headers
+(financial_year_id, budget_version, cc_id, budget_name, status, notes, created_by, created_at)
+VALUES
+(@yearId, @version, @ccId, @name, 'Active', @notes, @userId, GETDATE());
+SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                            using (SqlCommand insertHeaderCmd = new SqlCommand(insertHeaderSql, cn, tx))
+                            {
+                                insertHeaderCmd.Parameters.AddWithValue("@yearId", yearId);
+                                insertHeaderCmd.Parameters.AddWithValue("@version", "Original");
+                                insertHeaderCmd.Parameters.AddWithValue("@ccId", ccId);
+                                insertHeaderCmd.Parameters.AddWithValue("@name", "Cost Center Budget");
+                                insertHeaderCmd.Parameters.AddWithValue("@notes", "Auto-created from cost center budgeting flow.");
+                                insertHeaderCmd.Parameters.AddWithValue("@userId", userId);
+                                budgetId = (int)insertHeaderCmd.ExecuteScalar();
+                            }
+                        }
+                        else
+                        {
+                            const string activateHeaderSql = @"
+UPDATE acc_budget_headers
+SET status = 'Active'
+WHERE budget_id = @budgetId;";
+
+                            using (SqlCommand activateCmd = new SqlCommand(activateHeaderSql, cn, tx))
+                            {
+                                activateCmd.Parameters.AddWithValue("@budgetId", budgetId);
+                                activateCmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        const string deactivateOtherSql = @"
+UPDATE acc_budget_headers
+SET status = 'Approved'
+WHERE financial_year_id = @yearId
+  AND cc_id = @ccId
+  AND budget_id <> @budgetId
+  AND status = 'Active';";
+
+                        using (SqlCommand deactivateCmd = new SqlCommand(deactivateOtherSql, cn, tx))
+                        {
+                            deactivateCmd.Parameters.AddWithValue("@yearId", yearId);
+                            deactivateCmd.Parameters.AddWithValue("@ccId", ccId);
+                            deactivateCmd.Parameters.AddWithValue("@budgetId", budgetId);
+                            deactivateCmd.ExecuteNonQuery();
+                        }
+
+                        const string deleteLinesSql = "DELETE FROM acc_budget_lines WHERE budget_id = @budgetId";
+                        using (SqlCommand deleteCmd = new SqlCommand(deleteLinesSql, cn, tx))
+                        {
+                            deleteCmd.Parameters.AddWithValue("@budgetId", budgetId);
+                            deleteCmd.ExecuteNonQuery();
+                        }
+
+                        const string insertLineSql = @"
+INSERT INTO acc_budget_lines
+(budget_id, account_id, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec)
+VALUES
+(@budgetId, @accountId, @jan, @feb, @mar, @apr, @may, @jun, @jul, @aug, @sep, @oct, @nov, @dec);";
+
+                        foreach (var budget in budgets)
+                        {
+                            using (SqlCommand insertCmd = new SqlCommand(insertLineSql, cn, tx))
+                            {
+                                insertCmd.Parameters.AddWithValue("@budgetId", budgetId);
+                                insertCmd.Parameters.AddWithValue("@accountId", budget.AccountId);
+                                insertCmd.Parameters.AddWithValue("@jan", budget.JanBudget);
+                                insertCmd.Parameters.AddWithValue("@feb", budget.FebBudget);
+                                insertCmd.Parameters.AddWithValue("@mar", budget.MarBudget);
+                                insertCmd.Parameters.AddWithValue("@apr", budget.AprBudget);
+                                insertCmd.Parameters.AddWithValue("@may", budget.MayBudget);
+                                insertCmd.Parameters.AddWithValue("@jun", budget.JunBudget);
+                                insertCmd.Parameters.AddWithValue("@jul", budget.JulBudget);
+                                insertCmd.Parameters.AddWithValue("@aug", budget.AugBudget);
+                                insertCmd.Parameters.AddWithValue("@sep", budget.SepBudget);
+                                insertCmd.Parameters.AddWithValue("@oct", budget.OctBudget);
+                                insertCmd.Parameters.AddWithValue("@nov", budget.NovBudget);
+                                insertCmd.Parameters.AddWithValue("@dec", budget.DecBudget);
+                                insertCmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        tx.Commit();
+                        Log.LogAction("Cost Center Budgets Set", "CC: " + ccId + ", Year: " + yearId + ", Accounts: " + budgets.Count, userId, UsersModal.logged_in_branch_id);
+                    }
+                    catch
+                    {
+                        tx.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets budget alerts for a cost center in the current month using active budget header/lines.
+        /// </summary>
+        public List<BudgetAlertModel> GetCostCenterBudgetAlerts(int ccId, DateTime currentDate)
+        {
+            if (ccId <= 0)
+                return new List<BudgetAlertModel>();
+
+            var alerts = new List<BudgetAlertModel>();
+            int currentMonth = currentDate.Month;
+            DateTime monthStart = new DateTime(currentDate.Year, currentMonth, 1);
+            DateTime monthEnd = monthStart.AddMonths(1).AddDays(-1);
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                const string sql = @"
+WITH SelectedBudget AS
+(
+    SELECT TOP 1 bh.budget_id
+    FROM acc_budget_headers bh
+    INNER JOIN acc_fiscal_years fy ON bh.financial_year_id = fy.id
+    WHERE @AsOfDate BETWEEN fy.from_date AND fy.to_date
+      AND (bh.cc_id = @CCId OR bh.cc_id IS NULL OR bh.cc_id = 0)
+      AND bh.status IN ('Active', 'Approved')
+    ORDER BY CASE WHEN bh.cc_id = @CCId THEN 0 ELSE 1 END,
+             CASE bh.status WHEN 'Active' THEN 0 WHEN 'Approved' THEN 1 ELSE 2 END,
+             bh.created_at DESC
+)
+SELECT
+    @CCId AS cc_id,
+    c.cc_code,
+    bl.account_id,
+    a.code AS account_code,
+    a.name AS account_name,
+    @Month AS current_month,
+    ISNULL(
+        CASE @Month
+            WHEN 1 THEN bl.jan
+            WHEN 2 THEN bl.feb
+            WHEN 3 THEN bl.mar
+            WHEN 4 THEN bl.apr
+            WHEN 5 THEN bl.may
+            WHEN 6 THEN bl.jun
+            WHEN 7 THEN bl.jul
+            WHEN 8 THEN bl.aug
+            WHEN 9 THEN bl.sep
+            WHEN 10 THEN bl.oct
+            WHEN 11 THEN bl.nov
+            WHEN 12 THEN bl.[dec]
+        END,
+        0
+    ) AS budget_amount,
+    ISNULL(SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)), 0) AS actual_amount
+FROM SelectedBudget ab
+INNER JOIN acc_budget_lines bl ON bl.budget_id = ab.budget_id
+INNER JOIN acc_accounts a ON a.id = bl.account_id
+INNER JOIN acc_cost_centers c ON c.cc_id = @CCId
+LEFT JOIN acc_entries E
+    ON E.account_id = bl.account_id
+    AND E.cost_center_id = @CCId
+    AND E.entry_date >= @FromDate
+    AND E.entry_date <= @ToDate
+GROUP BY c.cc_code, bl.account_id, a.code, a.name,
+         bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
+         bl.jul, bl.aug, bl.sep, bl.oct, bl.nov, bl.[dec];";
+
+                cn.Open();
+                using (SqlCommand localCmd = new SqlCommand(sql, cn))
+                {
+                    localCmd.Parameters.AddWithValue("@CCId", ccId);
+                    localCmd.Parameters.AddWithValue("@Month", currentMonth);
+                    localCmd.Parameters.AddWithValue("@FromDate", monthStart.Date);
+                    localCmd.Parameters.AddWithValue("@ToDate", monthEnd.Date);
+                    localCmd.Parameters.AddWithValue("@AsOfDate", currentDate.Date);
+
+                    using (SqlDataReader r = localCmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            decimal budgetAmount = Convert.ToDecimal(r["budget_amount"]);
+                            decimal actualAmount = Convert.ToDecimal(r["actual_amount"]);
+                            decimal overspendAmount = Math.Max(0, actualAmount - budgetAmount);
+
+                            if (overspendAmount <= 0)
+                                continue;
+
+                            decimal overspendPercent = budgetAmount > 0 ? (actualAmount / budgetAmount) * 100 : 0;
+                            string severity = overspendPercent > 120 ? "Critical" : overspendPercent > 105 ? "Warning" : "Info";
+
+                            alerts.Add(new BudgetAlertModel
+                            {
+                                CcId = ccId,
+                                CcCode = Convert.ToString(r["cc_code"]),
+                                AccountId = Convert.ToInt32(r["account_id"]),
+                                AccountCode = Convert.ToString(r["account_code"]),
+                                AccountName = Convert.ToString(r["account_name"]),
+                                CurrentMonth = currentMonth,
+                                BudgetAmount = budgetAmount,
+                                ActualAmount = actualAmount,
+                                OverspendAmount = overspendAmount,
+                                OverspendPercent = overspendPercent,
+                                SeverityLevel = severity
+                            });
+                        }
+                    }
+                }
+            }
+
+            return alerts;
+        }
+
+        /// <summary>
+        /// Checks if posting amount to an account in a cost center would exceed active monthly budget.
+        /// </summary>
+        public BudgetCheckResult CheckCostCenterBudgetBeforePosting(int ccId, int accountId, decimal amount, DateTime date)
+        {
+            if (ccId <= 0 || accountId <= 0)
+                return new BudgetCheckResult { Message = "Invalid cost center or account." };
+
+            int month = date.Month;
+            DateTime monthStart = new DateTime(date.Year, month, 1);
+            DateTime monthEnd = monthStart.AddMonths(1).AddDays(-1);
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                const string sql = @"
+WITH SelectedBudget AS
+(
+    SELECT TOP 1 bh.budget_id
+    FROM acc_budget_headers bh
+    INNER JOIN acc_fiscal_years fy ON bh.financial_year_id = fy.id
+    WHERE @AsOfDate BETWEEN fy.from_date AND fy.to_date
+      AND (bh.cc_id = @CCId OR bh.cc_id IS NULL OR bh.cc_id = 0)
+      AND bh.status IN ('Active', 'Approved')
+    ORDER BY CASE WHEN bh.cc_id = @CCId THEN 0 ELSE 1 END,
+             CASE bh.status WHEN 'Active' THEN 0 WHEN 'Approved' THEN 1 ELSE 2 END,
+             bh.created_at DESC
+)
+SELECT TOP 1
+    ISNULL(
+        CASE @Month
+            WHEN 1 THEN bl.jan
+            WHEN 2 THEN bl.feb
+            WHEN 3 THEN bl.mar
+            WHEN 4 THEN bl.apr
+            WHEN 5 THEN bl.may
+            WHEN 6 THEN bl.jun
+            WHEN 7 THEN bl.jul
+            WHEN 8 THEN bl.aug
+            WHEN 9 THEN bl.sep
+            WHEN 10 THEN bl.oct
+            WHEN 11 THEN bl.nov
+            WHEN 12 THEN bl.[dec]
+        END,
+        0
+    ) AS monthly_budget,
+    ISNULL(SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)), 0) AS current_actual
+FROM SelectedBudget ab
+INNER JOIN acc_budget_lines bl ON bl.budget_id = ab.budget_id
+LEFT JOIN acc_entries E
+    ON E.account_id = @AccountId
+    AND E.cost_center_id = @CCId
+    AND E.entry_date >= @MonthStart
+    AND E.entry_date <= @MonthEnd
+WHERE bl.account_id = @AccountId
+GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
+         bl.jul, bl.aug, bl.sep, bl.oct, bl.nov, bl.[dec];";
+
+                cn.Open();
+                using (SqlCommand localCmd = new SqlCommand(sql, cn))
+                {
+                    localCmd.Parameters.AddWithValue("@CCId", ccId);
+                    localCmd.Parameters.AddWithValue("@AccountId", accountId);
+                    localCmd.Parameters.AddWithValue("@Month", month);
+                    localCmd.Parameters.AddWithValue("@MonthStart", monthStart.Date);
+                    localCmd.Parameters.AddWithValue("@MonthEnd", monthEnd.Date);
+                    localCmd.Parameters.AddWithValue("@AsOfDate", date.Date);
+
+                    using (SqlDataReader r = localCmd.ExecuteReader(CommandBehavior.SingleRow))
+                    {
+                        if (!r.Read())
+                        {
+                            return new BudgetCheckResult
+                            {
+                                IsOverBudget = false,
+                                RemainingBudget = 0,
+                                Message = "No budget defined for this account in this cost center.",
+                                SeverityLevel = null
+                            };
+                        }
+
+                        decimal monthlyBudget = Convert.ToDecimal(r["monthly_budget"]);
+                        decimal currentActual = Convert.ToDecimal(r["current_actual"]);
+                        decimal projectedActual = currentActual + amount;
+                        decimal remainingBudget = monthlyBudget - projectedActual;
+                        bool isOver = remainingBudget < 0;
+
+                        string severity = null;
+                        string message = "Budget: " + monthlyBudget.ToString("N2") + ", Current: " + currentActual.ToString("N2") + ", Projected: " + projectedActual.ToString("N2");
+
+                        if (isOver)
+                        {
+                            decimal overspendPercent = monthlyBudget > 0 ? (projectedActual / monthlyBudget) * 100 : 100;
+                            severity = overspendPercent > 120 ? "Critical" : "Warning";
+                            message = "Over budget by " + Math.Abs(remainingBudget).ToString("N2") + ". " + message;
+                        }
+
+                        return new BudgetCheckResult
+                        {
+                            IsOverBudget = isOver,
+                            RemainingBudget = remainingBudget,
+                            MonthlyBudget = monthlyBudget,
+                            CurrentActual = currentActual,
+                            Message = message,
+                            SeverityLevel = severity
+                        };
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Approves a budget (updates status and approval info)
         /// </summary>
         public void ApproveBudget(int budgetId, int approvedBy)
@@ -583,9 +951,9 @@ namespace POS.DLL
         }
 
         /// <summary>
-        /// Executes sp_BudgetMonthlyDetail stored procedure
+        /// Gets monthly budget vs actual detail for a specific account.
         /// </summary>
-        public DataTable GetBudgetMonthlyDetail(int budgetId, int accId)
+        public DataTable GetBudgetMonthlyDetail(int budgetId, int accId, int? ccId = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -594,10 +962,76 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                         cn.Open();
 
-                    cmd = new SqlCommand("sp_BudgetMonthlyDetail", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    const string sql = @"
+                    DECLARE @FiscalYearStart DATE;
+                    DECLARE @FiscalYearEnd DATE;
+
+                    SELECT
+                        @FiscalYearStart = fy.from_date,
+                        @FiscalYearEnd = fy.to_date
+                    FROM acc_budget_headers bh
+                    INNER JOIN acc_fiscal_years fy ON bh.financial_year_id = fy.id
+                    WHERE bh.budget_id = @BudgetId;
+
+                    IF @FiscalYearStart IS NULL OR @FiscalYearEnd IS NULL
+                    BEGIN
+                        RAISERROR('Invalid budget/fiscal year mapping.', 16, 1);
+                        RETURN;
+                    END
+
+                    ;WITH BudgetLine AS
+                    (
+                        SELECT TOP 1 jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, [dec]
+                        FROM acc_budget_lines
+                        WHERE budget_id = @BudgetId AND account_id = @AccId
+                    ),
+                    MonthlyBudget AS
+                    (
+                        SELECT 1 AS MonthNo, ISNULL(jan, 0) AS BudgetAmount FROM BudgetLine UNION ALL
+                        SELECT 2, ISNULL(feb, 0) FROM BudgetLine UNION ALL
+                        SELECT 3, ISNULL(mar, 0) FROM BudgetLine UNION ALL
+                        SELECT 4, ISNULL(apr, 0) FROM BudgetLine UNION ALL
+                        SELECT 5, ISNULL(may, 0) FROM BudgetLine UNION ALL
+                        SELECT 6, ISNULL(jun, 0) FROM BudgetLine UNION ALL
+                        SELECT 7, ISNULL(jul, 0) FROM BudgetLine UNION ALL
+                        SELECT 8, ISNULL(aug, 0) FROM BudgetLine UNION ALL
+                        SELECT 9, ISNULL(sep, 0) FROM BudgetLine UNION ALL
+                        SELECT 10, ISNULL(oct, 0) FROM BudgetLine UNION ALL
+                        SELECT 11, ISNULL(nov, 0) FROM BudgetLine UNION ALL
+                        SELECT 12, ISNULL([dec], 0) FROM BudgetLine
+                    ),
+                    MonthlyActual AS
+                    (
+                        SELECT
+                            MONTH(ae.entry_date) AS MonthNo,
+                            SUM(ISNULL(ae.debit, 0) - ISNULL(ae.credit, 0)) AS ActualAmount
+                        FROM acc_entries ae
+                        INNER JOIN acc_entries_header aeh
+                            ON ae.invoice_no = aeh.InvoiceNo
+                           AND ae.branch_id = aeh.branch_id
+                        WHERE ae.account_id = @AccId
+                          AND ae.entry_date >= @FiscalYearStart
+                          AND ae.entry_date <= @FiscalYearEnd
+                          AND UPPER(LTRIM(RTRIM(ISNULL(aeh.status, '')))) = 'POSTED'
+                          AND (@CCId IS NULL OR ae.cost_center_id = @CCId)
+                        GROUP BY MONTH(ae.entry_date)
+                    )
+                    SELECT
+                        mb.MonthNo,
+                        DATENAME(MONTH, DATEFROMPARTS(2000, mb.MonthNo, 1)) AS MonthName,
+                        mb.BudgetAmount,
+                        ISNULL(ma.ActualAmount, 0) AS ActualAmount,
+                        ISNULL(ma.ActualAmount, 0) - mb.BudgetAmount AS Variance,
+                        SUM(mb.BudgetAmount) OVER (ORDER BY mb.MonthNo) AS CumulativeBudget,
+                        SUM(ISNULL(ma.ActualAmount, 0)) OVER (ORDER BY mb.MonthNo) AS CumulativeActual
+                    FROM MonthlyBudget mb
+                    LEFT JOIN MonthlyActual ma ON ma.MonthNo = mb.MonthNo
+                    ORDER BY mb.MonthNo;";
+
+                    cmd = new SqlCommand(sql, cn);
                     cmd.Parameters.AddWithValue("@BudgetId", budgetId);
                     cmd.Parameters.AddWithValue("@AccId", accId);
+                    cmd.Parameters.AddWithValue("@CCId", (object)ccId ?? DBNull.Value);
 
                     da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();

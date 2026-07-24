@@ -60,11 +60,37 @@ namespace pos.Reports.Financial
             this._panelLedgerArea = new System.Windows.Forms.Panel();
             this._panelCenter = new System.Windows.Forms.Panel();
             this._gridLedger = new System.Windows.Forms.DataGridView();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VoucherNo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.VoucherType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RefModule = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Narration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RunningBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RefId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._btnLoadMore = new System.Windows.Forms.Button();
             this._panelClosingWrap = new System.Windows.Forms.Panel();
             this._gridClosing = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._panelOpeningWrap = new System.Windows.Forms.Panel();
             this._gridOpening = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._panelSummary = new System.Windows.Forms.Panel();
             this._flowSummary = new System.Windows.Forms.FlowLayoutPanel();
             this._lblSummaryAccount = new System.Windows.Forms.Label();
@@ -90,32 +116,7 @@ namespace pos.Reports.Financial
             this._cmbShow = new System.Windows.Forms.ComboBox();
             this._lblGroupBy = new System.Windows.Forms.Label();
             this._cmbGroupBy = new System.Windows.Forms.ComboBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._btnSearchAccount = new System.Windows.Forms.Button();
             this._panelMain.SuspendLayout();
             this._panelLedgerArea.SuspendLayout();
             this._panelCenter.SuspendLayout();
@@ -137,7 +138,7 @@ namespace pos.Reports.Financial
             this._panelMain.Controls.Add(this._panelTop);
             this._panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this._panelMain.Location = new System.Drawing.Point(0, 0);
-            this._panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelMain.Margin = new System.Windows.Forms.Padding(4);
             this._panelMain.Name = "_panelMain";
             this._panelMain.Padding = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this._panelMain.Size = new System.Drawing.Size(1493, 911);
@@ -150,7 +151,7 @@ namespace pos.Reports.Financial
             this._panelLedgerArea.Controls.Add(this._panelOpeningWrap);
             this._panelLedgerArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this._panelLedgerArea.Location = new System.Drawing.Point(9, 106);
-            this._panelLedgerArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelLedgerArea.Margin = new System.Windows.Forms.Padding(4);
             this._panelLedgerArea.Name = "_panelLedgerArea";
             this._panelLedgerArea.Padding = new System.Windows.Forms.Padding(0, 0, 9, 0);
             this._panelLedgerArea.Size = new System.Drawing.Size(1242, 795);
@@ -162,7 +163,7 @@ namespace pos.Reports.Financial
             this._panelCenter.Controls.Add(this._btnLoadMore);
             this._panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
             this._panelCenter.Location = new System.Drawing.Point(0, 54);
-            this._panelCenter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelCenter.Margin = new System.Windows.Forms.Padding(4);
             this._panelCenter.Name = "_panelCenter";
             this._panelCenter.Size = new System.Drawing.Size(1233, 687);
             this._panelCenter.TabIndex = 0;
@@ -174,20 +175,20 @@ namespace pos.Reports.Financial
             this._gridLedger.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._gridLedger.ColumnHeadersHeight = 29;
             this._gridLedger.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewLinkColumn1,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24,
-            this.dataGridViewTextBoxColumn25});
+            this.Date,
+            this.VoucherNo,
+            this.VoucherType,
+            this.RefModule,
+            this.Narration,
+            this.Debit,
+            this.Credit,
+            this.RunningBalance,
+            this.RefId,
+            this.Status});
             this._gridLedger.Dock = System.Windows.Forms.DockStyle.Fill;
             this._gridLedger.EnableHeadersVisualStyles = false;
             this._gridLedger.Location = new System.Drawing.Point(0, 0);
-            this._gridLedger.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._gridLedger.Margin = new System.Windows.Forms.Padding(4);
             this._gridLedger.MultiSelect = false;
             this._gridLedger.Name = "_gridLedger";
             this._gridLedger.ReadOnly = true;
@@ -197,11 +198,81 @@ namespace pos.Reports.Financial
             this._gridLedger.Size = new System.Drawing.Size(1233, 648);
             this._gridLedger.TabIndex = 0;
             // 
+            // Date
+            // 
+            this.Date.HeaderText = "Date";
+            this.Date.MinimumWidth = 6;
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // VoucherNo
+            // 
+            this.VoucherNo.HeaderText = "Voucher No";
+            this.VoucherNo.MinimumWidth = 6;
+            this.VoucherNo.Name = "VoucherNo";
+            this.VoucherNo.ReadOnly = true;
+            // 
+            // VoucherType
+            // 
+            this.VoucherType.HeaderText = "Voucher Type";
+            this.VoucherType.MinimumWidth = 6;
+            this.VoucherType.Name = "VoucherType";
+            this.VoucherType.ReadOnly = true;
+            // 
+            // RefModule
+            // 
+            this.RefModule.HeaderText = "Module";
+            this.RefModule.MinimumWidth = 6;
+            this.RefModule.Name = "RefModule";
+            this.RefModule.ReadOnly = true;
+            // 
+            // Narration
+            // 
+            this.Narration.HeaderText = "Narration";
+            this.Narration.MinimumWidth = 6;
+            this.Narration.Name = "Narration";
+            this.Narration.ReadOnly = true;
+            // 
+            // Debit
+            // 
+            this.Debit.HeaderText = "Debit";
+            this.Debit.MinimumWidth = 6;
+            this.Debit.Name = "Debit";
+            this.Debit.ReadOnly = true;
+            // 
+            // Credit
+            // 
+            this.Credit.HeaderText = "Credit";
+            this.Credit.MinimumWidth = 6;
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            // 
+            // RunningBalance
+            // 
+            this.RunningBalance.HeaderText = "Running Balance";
+            this.RunningBalance.MinimumWidth = 6;
+            this.RunningBalance.Name = "RunningBalance";
+            this.RunningBalance.ReadOnly = true;
+            // 
+            // RefId
+            // 
+            this.RefId.HeaderText = "Reference ID";
+            this.RefId.MinimumWidth = 6;
+            this.RefId.Name = "RefId";
+            this.RefId.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
             // _btnLoadMore
             // 
             this._btnLoadMore.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._btnLoadMore.Location = new System.Drawing.Point(0, 648);
-            this._btnLoadMore.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._btnLoadMore.Margin = new System.Windows.Forms.Padding(4);
             this._btnLoadMore.Name = "_btnLoadMore";
             this._btnLoadMore.Size = new System.Drawing.Size(1233, 39);
             this._btnLoadMore.TabIndex = 1;
@@ -214,7 +285,7 @@ namespace pos.Reports.Financial
             this._panelClosingWrap.Controls.Add(this._gridClosing);
             this._panelClosingWrap.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._panelClosingWrap.Location = new System.Drawing.Point(0, 741);
-            this._panelClosingWrap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelClosingWrap.Margin = new System.Windows.Forms.Padding(4);
             this._panelClosingWrap.Name = "_panelClosingWrap";
             this._panelClosingWrap.Size = new System.Drawing.Size(1233, 54);
             this._panelClosingWrap.TabIndex = 1;
@@ -239,7 +310,7 @@ namespace pos.Reports.Financial
             this.dataGridViewTextBoxColumn8});
             this._gridClosing.Dock = System.Windows.Forms.DockStyle.Fill;
             this._gridClosing.Location = new System.Drawing.Point(0, 0);
-            this._gridClosing.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._gridClosing.Margin = new System.Windows.Forms.Padding(4);
             this._gridClosing.MultiSelect = false;
             this._gridClosing.Name = "_gridClosing";
             this._gridClosing.ReadOnly = true;
@@ -250,12 +321,68 @@ namespace pos.Reports.Financial
             this._gridClosing.Size = new System.Drawing.Size(1233, 54);
             this._gridClosing.TabIndex = 0;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Date";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Voucher No";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Voucher Type";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ref Module";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Narration";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Debit";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Credit";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Balance";
+            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
             // _panelOpeningWrap
             // 
             this._panelOpeningWrap.Controls.Add(this._gridOpening);
             this._panelOpeningWrap.Dock = System.Windows.Forms.DockStyle.Top;
             this._panelOpeningWrap.Location = new System.Drawing.Point(0, 0);
-            this._panelOpeningWrap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelOpeningWrap.Margin = new System.Windows.Forms.Padding(4);
             this._panelOpeningWrap.Name = "_panelOpeningWrap";
             this._panelOpeningWrap.Size = new System.Drawing.Size(1233, 54);
             this._panelOpeningWrap.TabIndex = 2;
@@ -280,7 +407,7 @@ namespace pos.Reports.Financial
             this.dataGridViewTextBoxColumn16});
             this._gridOpening.Dock = System.Windows.Forms.DockStyle.Fill;
             this._gridOpening.Location = new System.Drawing.Point(0, 0);
-            this._gridOpening.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._gridOpening.Margin = new System.Windows.Forms.Padding(4);
             this._gridOpening.MultiSelect = false;
             this._gridOpening.Name = "_gridOpening";
             this._gridOpening.ReadOnly = true;
@@ -291,13 +418,69 @@ namespace pos.Reports.Financial
             this._gridOpening.Size = new System.Drawing.Size(1233, 54);
             this._gridOpening.TabIndex = 0;
             // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Date";
+            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Voucher No";
+            this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Voucher Type";
+            this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Ref Module";
+            this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Narration";
+            this.dataGridViewTextBoxColumn13.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Debit";
+            this.dataGridViewTextBoxColumn14.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Credit";
+            this.dataGridViewTextBoxColumn15.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "Balance";
+            this.dataGridViewTextBoxColumn16.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
             // _panelSummary
             // 
             this._panelSummary.BackColor = System.Drawing.Color.White;
             this._panelSummary.Controls.Add(this._flowSummary);
             this._panelSummary.Dock = System.Windows.Forms.DockStyle.Right;
             this._panelSummary.Location = new System.Drawing.Point(1251, 106);
-            this._panelSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelSummary.Margin = new System.Windows.Forms.Padding(4);
             this._panelSummary.Name = "_panelSummary";
             this._panelSummary.Padding = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this._panelSummary.Size = new System.Drawing.Size(233, 795);
@@ -319,7 +502,7 @@ namespace pos.Reports.Financial
             this._flowSummary.Dock = System.Windows.Forms.DockStyle.Fill;
             this._flowSummary.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this._flowSummary.Location = new System.Drawing.Point(9, 10);
-            this._flowSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._flowSummary.Margin = new System.Windows.Forms.Padding(4);
             this._flowSummary.Name = "_flowSummary";
             this._flowSummary.Size = new System.Drawing.Size(215, 775);
             this._flowSummary.TabIndex = 0;
@@ -404,8 +587,8 @@ namespace pos.Reports.Financial
             // 
             // _btnViewFullHistory
             // 
-            this._btnViewFullHistory.Location = new System.Drawing.Point(4, 197);
-            this._btnViewFullHistory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._btnViewFullHistory.Location = new System.Drawing.Point(4, 169);
+            this._btnViewFullHistory.Margin = new System.Windows.Forms.Padding(4);
             this._btnViewFullHistory.Name = "_btnViewFullHistory";
             this._btnViewFullHistory.Size = new System.Drawing.Size(198, 37);
             this._btnViewFullHistory.TabIndex = 8;
@@ -414,8 +597,8 @@ namespace pos.Reports.Financial
             // 
             // _btnPrint
             // 
-            this._btnPrint.Location = new System.Drawing.Point(4, 242);
-            this._btnPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._btnPrint.Location = new System.Drawing.Point(4, 214);
+            this._btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this._btnPrint.Name = "_btnPrint";
             this._btnPrint.Size = new System.Drawing.Size(198, 37);
             this._btnPrint.TabIndex = 9;
@@ -424,8 +607,8 @@ namespace pos.Reports.Financial
             // 
             // _btnExport
             // 
-            this._btnExport.Location = new System.Drawing.Point(4, 287);
-            this._btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._btnExport.Location = new System.Drawing.Point(4, 259);
+            this._btnExport.Margin = new System.Windows.Forms.Padding(4);
             this._btnExport.Name = "_btnExport";
             this._btnExport.Size = new System.Drawing.Size(198, 37);
             this._btnExport.TabIndex = 10;
@@ -437,7 +620,7 @@ namespace pos.Reports.Financial
             this._panelTop.Controls.Add(this._tblFilters);
             this._panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this._panelTop.Location = new System.Drawing.Point(9, 10);
-            this._panelTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._panelTop.Margin = new System.Windows.Forms.Padding(4);
             this._panelTop.Name = "_panelTop";
             this._panelTop.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
             this._panelTop.Size = new System.Drawing.Size(1475, 96);
@@ -445,33 +628,32 @@ namespace pos.Reports.Financial
             // 
             // _tblFilters
             // 
-            this._tblFilters.ColumnCount = 12;
+             this._tblFilters.ColumnCount = 8;
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this._tblFilters.Controls.Add(this._lblAccount, 0, 0);
             this._tblFilters.Controls.Add(this._cmbAccount, 1, 0);
-            this._tblFilters.Controls.Add(this._lblFrom, 2, 0);
-            this._tblFilters.Controls.Add(this._dtFrom, 3, 0);
-            this._tblFilters.Controls.Add(this._lblTo, 4, 0);
-            this._tblFilters.Controls.Add(this._dtTo, 5, 0);
-            this._tblFilters.Controls.Add(this._btnLoad, 6, 0);
+            this._tblFilters.Controls.Add(this._btnSearchAccount, 2, 0);
+            this._tblFilters.Controls.Add(this._lblFrom, 3, 0);
+            this._tblFilters.Controls.Add(this._dtFrom, 4, 0);
+            this._tblFilters.Controls.Add(this._lblTo, 5, 0);
+            this._tblFilters.Controls.Add(this._dtTo, 6, 0);
+            this._tblFilters.Controls.Add(this._btnLoad, 7, 0);
             this._tblFilters.Controls.Add(this._lblShow, 0, 1);
             this._tblFilters.Controls.Add(this._cmbShow, 1, 1);
             this._tblFilters.Controls.Add(this._lblGroupBy, 2, 1);
             this._tblFilters.Controls.Add(this._cmbGroupBy, 3, 1);
             this._tblFilters.Dock = System.Windows.Forms.DockStyle.Fill;
             this._tblFilters.Location = new System.Drawing.Point(0, 0);
-            this._tblFilters.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._tblFilters.Margin = new System.Windows.Forms.Padding(4);
             this._tblFilters.Name = "_tblFilters";
             this._tblFilters.RowCount = 2;
             this._tblFilters.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -497,7 +679,7 @@ namespace pos.Reports.Financial
             this._cmbAccount.DropDownHeight = 280;
             this._cmbAccount.IntegralHeight = false;
             this._cmbAccount.Location = new System.Drawing.Point(76, 4);
-            this._cmbAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._cmbAccount.Margin = new System.Windows.Forms.Padding(4);
             this._cmbAccount.Name = "_cmbAccount";
             this._cmbAccount.Size = new System.Drawing.Size(224, 25);
             this._cmbAccount.TabIndex = 1;
@@ -517,7 +699,7 @@ namespace pos.Reports.Financial
             // 
             this._dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this._dtFrom.Location = new System.Drawing.Point(387, 4);
-            this._dtFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._dtFrom.Margin = new System.Windows.Forms.Padding(4);
             this._dtFrom.Name = "_dtFrom";
             this._dtFrom.Size = new System.Drawing.Size(233, 24);
             this._dtFrom.TabIndex = 3;
@@ -538,7 +720,7 @@ namespace pos.Reports.Financial
             // 
             this._dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this._dtTo.Location = new System.Drawing.Point(665, 4);
-            this._dtTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._dtTo.Margin = new System.Windows.Forms.Padding(4);
             this._dtTo.Name = "_dtTo";
             this._dtTo.Size = new System.Drawing.Size(233, 24);
             this._dtTo.TabIndex = 5;
@@ -548,7 +730,7 @@ namespace pos.Reports.Financial
             // 
             this._btnLoad.AutoSize = true;
             this._btnLoad.Location = new System.Drawing.Point(906, 4);
-            this._btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this._btnLoad.Name = "_btnLoad";
             this._btnLoad.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this._btnLoad.Size = new System.Drawing.Size(133, 33);
@@ -577,7 +759,7 @@ namespace pos.Reports.Financial
             "Credits Only",
             "Unposted/Draft Only"});
             this._cmbShow.Location = new System.Drawing.Point(76, 48);
-            this._cmbShow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._cmbShow.Margin = new System.Windows.Forms.Padding(4);
             this._cmbShow.Name = "_cmbShow";
             this._cmbShow.Size = new System.Drawing.Size(135, 24);
             this._cmbShow.TabIndex = 8;
@@ -602,182 +784,21 @@ namespace pos.Reports.Financial
             "By Voucher",
             "By Month"});
             this._cmbGroupBy.Location = new System.Drawing.Point(387, 48);
-            this._cmbGroupBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this._cmbGroupBy.Margin = new System.Windows.Forms.Padding(4);
             this._cmbGroupBy.Name = "_cmbGroupBy";
             this._cmbGroupBy.Size = new System.Drawing.Size(140, 24);
             this._cmbGroupBy.TabIndex = 10;
             // 
-            // dataGridViewTextBoxColumn1
+            // _btnSearchAccount
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Date";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Voucher No";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Voucher Type";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ref Module";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Narration";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Debit";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Credit";
-            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Balance";
-            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Date";
-            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Voucher No";
-            this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Voucher Type";
-            this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Ref Module";
-            this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Narration";
-            this.dataGridViewTextBoxColumn13.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Debit";
-            this.dataGridViewTextBoxColumn14.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Credit";
-            this.dataGridViewTextBoxColumn15.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "Balance";
-            this.dataGridViewTextBoxColumn16.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // dataGridViewLinkColumn1
-            // 
-            this.dataGridViewLinkColumn1.MinimumWidth = 6;
-            this.dataGridViewLinkColumn1.Name = "dataGridViewLinkColumn1";
-            this.dataGridViewLinkColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            this.dataGridViewTextBoxColumn25.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            this.dataGridViewTextBoxColumn25.ReadOnly = true;
+            this._btnSearchAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._btnSearchAccount.Location = new System.Drawing.Point(308, 4);
+            this._btnSearchAccount.Margin = new System.Windows.Forms.Padding(4);
+            this._btnSearchAccount.Name = "_btnSearchAccount";
+            this._btnSearchAccount.Size = new System.Drawing.Size(75, 25);
+            this._btnSearchAccount.TabIndex = 2;
+            this._btnSearchAccount.Text = "Search";
+            this._btnSearchAccount.UseVisualStyleBackColor = true;
             // 
             // frm_GeneralLedgerReport
             // 
@@ -785,7 +806,7 @@ namespace pos.Reports.Financial
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1493, 911);
             this.Controls.Add(this._panelMain);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_GeneralLedgerReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "General Ledger";
@@ -808,16 +829,16 @@ namespace pos.Reports.Financial
 
         }
 
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private DataGridViewLinkColumn dataGridViewLinkColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private DataGridViewTextBoxColumn colDate;
+        private DataGridViewLinkColumn colVoucherNo;
+        private DataGridViewTextBoxColumn colVoucherType;
+        private DataGridViewTextBoxColumn colRefModule;
+        private DataGridViewTextBoxColumn colNarration;
+        private DataGridViewTextBoxColumn colDebit;
+        private DataGridViewTextBoxColumn colCredit;
+        private DataGridViewTextBoxColumn colRunningBalance;
+        private DataGridViewTextBoxColumn colRefId;
+        private DataGridViewTextBoxColumn colStatus;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -834,5 +855,16 @@ namespace pos.Reports.Financial
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private DataGridViewTextBoxColumn Date;
+        private DataGridViewLinkColumn VoucherNo;
+        private DataGridViewTextBoxColumn VoucherType;
+        private DataGridViewTextBoxColumn RefModule;
+        private DataGridViewTextBoxColumn Narration;
+        private DataGridViewTextBoxColumn Debit;
+        private DataGridViewTextBoxColumn Credit;
+        private DataGridViewTextBoxColumn RunningBalance;
+        private DataGridViewTextBoxColumn RefId;
+        private DataGridViewTextBoxColumn Status;
+        private Button _btnSearchAccount;
     }
 }

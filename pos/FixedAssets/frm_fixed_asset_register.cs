@@ -8,6 +8,7 @@ using POS.BLL;
 using POS.BLL.FixedAssets;
 using POS.Core;
 using POS.Core.POS;
+using pos.Reports.FixedAssets;
 using pos.UI;
 using pos.UI.Busy;
 
@@ -20,6 +21,7 @@ namespace pos.FixedAssets
         private FixedAssetModel _currentAsset;
         private List<FixedAssetModel> _allAssets;
         private List<FixedAssetModel> _filteredAssets;
+        private ContextMenuStrip _reportsMenu;
         // Maps account name → account_id for dep-account dropdowns
         private Dictionary<string, int> _accountNameToId = new Dictionary<string, int>();
 
@@ -46,6 +48,7 @@ namespace pos.FixedAssets
 
                 LoadCategories();
                 LoadLocations();
+                LoadCostCenters();
                 LoadSuppliers();
                 LoadDepreciationAccounts();
                 LoadAssets();
@@ -74,6 +77,9 @@ namespace pos.FixedAssets
 
                 btnEditAsset.Click -= BtnEditAsset_Click;
                 btnEditAsset.Click += BtnEditAsset_Click;
+
+                btnImportAssets.Click -= BtnReports_Click;
+                btnImportAssets.Click += BtnReports_Click;
 
                 btnDeleteAsset.Click -= BtnDeleteAsset_Click;
                 btnDeleteAsset.Click += BtnDeleteAsset_Click;
@@ -104,6 +110,15 @@ namespace pos.FixedAssets
 
                 ddlDepMethod.SelectedIndexChanged -= DdlDepMethod_SelectedIndexChanged;
                 ddlDepMethod.SelectedIndexChanged += DdlDepMethod_SelectedIndexChanged;
+
+                numUsefulLifeYears.ValueChanged -= UsefulLife_ValueChanged;
+                numUsefulLifeYears.ValueChanged += UsefulLife_ValueChanged;
+
+                numUsefulLifeMonths.ValueChanged -= UsefulLife_ValueChanged;
+                numUsefulLifeMonths.ValueChanged += UsefulLife_ValueChanged;
+
+                txtResidualValue.TextChanged -= ResidualValue_TextChanged;
+                txtResidualValue.TextChanged += ResidualValue_TextChanged;
 
                 // Initialize form theme for list
                 ApplyAssetListTheme();
@@ -182,6 +197,46 @@ namespace pos.FixedAssets
                 UiMessages.ShowError(
                     $"Error loading locations: {ex.Message}",
                     $"خطأ في تحميل المواقع: {ex.Message}",
+                    "Error", "خطأ");
+            }
+        }
+
+        private void LoadCostCenters()
+        {
+            try
+            {
+                CostCenterBLL costCenterBll = new CostCenterBLL();
+                DataTable source = costCenterBll.GetCostCenterDropdown();
+                DataTable display = new DataTable();
+                display.Columns.Add("id", typeof(int));
+                display.Columns.Add("display_text", typeof(string));
+
+                DataRow noneRow = display.NewRow();
+                noneRow["id"] = 0;
+                noneRow["display_text"] = "Select Cost Center";
+                display.Rows.Add(noneRow);
+
+                if (source != null)
+                {
+                    foreach (DataRow row in source.Rows)
+                    {
+                        DataRow newRow = display.NewRow();
+                        newRow["id"] = row["id"] == DBNull.Value ? 0 : Convert.ToInt32(row["id"]);
+                        newRow["display_text"] = Convert.ToString(row["display_text"]);
+                        display.Rows.Add(newRow);
+                    }
+                }
+
+                ddlAssetCostCenter.DataSource = display;
+                ddlAssetCostCenter.DisplayMember = "display_text";
+                ddlAssetCostCenter.ValueMember = "id";
+                ddlAssetCostCenter.SelectedValue = 0;
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    $"Error loading cost centers: {ex.Message}",
+                    $"خطأ في تحميل مراكز التكلفة: {ex.Message}",
                     "Error", "خطأ");
             }
         }
@@ -469,17 +524,36 @@ namespace pos.FixedAssets
             txtInvoiceNo.Text = _currentAsset.PurchaseInvoiceNo;
             txtCost.Text = _currentAsset.Cost.ToString("N2");
             ddlAssetLocation.SelectedItem = _currentAsset.LocationName;
+            if (_currentAsset.CostCenterId > 0)
+            {
+                ddlAssetCostCenter.SelectedValue = _currentAsset.CostCenterId;
+            }
+            else
+            {
+                ddlAssetCostCenter.SelectedValue = 0;
+            }
             txtSerialNumber.Text = _currentAsset.SerialNumber;
             txtModelNumber.Text = _currentAsset.ModelNumber;
             ddlAssetStatus.SelectedItem = _currentAsset.Status;
 
             // Depreciation Setup Tab
             ddlDepMethod.SelectedItem = _currentAsset.DepreciationMethod;
-            numUsefulLifeYears.Value = (decimal)Math.Min(_currentAsset.UsefulLifeYears, numUsefulLifeYears.Maximum);
-            numUsefulLifeMonths.Value = Math.Min(_currentAsset.UsefulLifeMonths, (int)numUsefulLifeMonths.Maximum);
+            if (ddlDepMethod.SelectedIndex < 0)
+            {
+                ddlDepMethod.SelectedItem = "STRAIGHT_LINE";
+            }
+
+            int totalMonths = Math.Max(0, _currentAsset.UsefulLifeMonths);
+            int lifeYears = totalMonths / 12;
+            int lifeMonths = totalMonths % 12;
+
+            numUsefulLifeYears.Value = Math.Min((decimal)lifeYears, numUsefulLifeYears.Maximum);
+            numUsefulLifeMonths.Value = Math.Min((decimal)lifeMonths, numUsefulLifeMonths.Maximum);
             txtResidualValue.Text = _currentAsset.ResidualValue.ToString("N2");
             txtDepRate.Text = _currentAsset.DepreciationRate.ToString("N2");
             dtStartDepreciationDate.Value = _currentAsset.StartDepreciationFrom;
+
+            RecalculateDepRateFromInputs();
 
             // Pre-select dep accounts based on the asset's stored account IDs
             SelectDropdownByAccountId(ddlDepAccount, _currentAsset.DepAccountId);
@@ -512,25 +586,39 @@ namespace pos.FixedAssets
 
             try
             {
-                var scheduleAsset = _currentAsset;
-
-                if (previewCost.HasValue)
+                decimal effectiveCost = previewCost ?? _currentAsset.Cost;
+                decimal residualValue;
+                if (!decimal.TryParse(txtResidualValue.Text, out residualValue) || residualValue < 0m)
                 {
-                    scheduleAsset = new FixedAssetModel
-                    {
-                        AssetId = _currentAsset.AssetId,
-                        AssetCode = _currentAsset.AssetCode,
-                        AssetName = _currentAsset.AssetName,
-                        PurchaseDate = _currentAsset.PurchaseDate,
-                        Cost = previewCost.Value,
-                        ResidualValue = _currentAsset.ResidualValue,
-                        UsefulLifeMonths = _currentAsset.UsefulLifeMonths,
-                        DepMethod = _currentAsset.DepMethod,
-                        DepRate = _currentAsset.DepRate,
-                        CurrentWDV = _currentAsset.CurrentWDV,
-                        AccumulatedDepreciation = _currentAsset.AccumulatedDepreciation
-                    };
+                    residualValue = _currentAsset.ResidualValue;
                 }
+
+                int usefulLifeMonths = ((int)numUsefulLifeYears.Value * 12) + (int)numUsefulLifeMonths.Value;
+                if (usefulLifeMonths <= 0)
+                {
+                    usefulLifeMonths = Math.Max(1, _currentAsset.UsefulLifeMonths);
+                }
+
+                decimal depRate;
+                if (!decimal.TryParse(txtDepRate.Text, out depRate) || depRate < 0m)
+                {
+                    depRate = _currentAsset.DepRate;
+                }
+
+                var scheduleAsset = new FixedAssetModel
+                {
+                    AssetId = _currentAsset.AssetId,
+                    AssetCode = _currentAsset.AssetCode,
+                    AssetName = _currentAsset.AssetName,
+                    PurchaseDate = _currentAsset.PurchaseDate,
+                    Cost = effectiveCost,
+                    ResidualValue = residualValue,
+                    UsefulLifeMonths = usefulLifeMonths,
+                    DepMethod = ddlDepMethod.SelectedItem != null ? ddlDepMethod.SelectedItem.ToString() : _currentAsset.DepMethod,
+                    DepRate = depRate,
+                    CurrentWDV = _currentAsset.CurrentWDV,
+                    AccumulatedDepreciation = _currentAsset.AccumulatedDepreciation
+                };
 
                 // Generate the full depreciation schedule for this asset
                 List<DepScheduleLine> schedule = _depEngine.GenerateDepreciationSchedule(scheduleAsset);
@@ -650,6 +738,11 @@ namespace pos.FixedAssets
             if (_currentAsset == null)
             {
                 UiMessages.ShowWarning("Please select an asset first.", "يرجى تحديد أصل أولا");
+                return;
+            }
+
+            if (!ValidateDepreciationSetupTab())
+            {
                 return;
             }
 
@@ -847,6 +940,16 @@ namespace pos.FixedAssets
                         locationId = selectedLocation != null ? (int?)selectedLocation.LocationId : null;
                     }
 
+                    int? costCenterId = null;
+                    if (ddlAssetCostCenter.SelectedValue != null && ddlAssetCostCenter.SelectedValue != DBNull.Value)
+                    {
+                        int parsedCostCenterId;
+                        if (int.TryParse(ddlAssetCostCenter.SelectedValue.ToString(), out parsedCostCenterId) && parsedCostCenterId > 0)
+                        {
+                            costCenterId = parsedCostCenterId;
+                        }
+                    }
+
                     _assetBLL.UpdateAssetInfoTabDetails(
                         _currentAsset.AssetId,
                         txtAssetName.Text,
@@ -855,6 +958,8 @@ namespace pos.FixedAssets
                         ddlSupplier.Text,
                         txtInvoiceNo.Text,
                         locationId,
+                        costCenterId,
+                        UsersModal.logged_in_branch_id,
                         txtSerialNumber.Text,
                         txtModelNumber.Text,
                         _currentAsset.Status);
@@ -908,6 +1013,50 @@ namespace pos.FixedAssets
             {
                 UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
             }
+        }
+
+        private void BtnReports_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EnsureReportsMenu();
+                _reportsMenu.Show(btnImportAssets, new Point(0, btnImportAssets.Height));
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
+            }
+        }
+
+        private void EnsureReportsMenu()
+        {
+            if (_reportsMenu != null)
+            {
+                return;
+            }
+
+            _reportsMenu = new ContextMenuStrip();
+            _reportsMenu.Items.Add("Fixed Asset Schedule", null, (s, e) =>
+            {
+                using (frm_fixed_asset_schedule_report frm = new frm_fixed_asset_schedule_report())
+                {
+                    frm.ShowDialog(this);
+                }
+            });
+            _reportsMenu.Items.Add("Asset Register Print", null, (s, e) =>
+            {
+                using (frm_asset_register_print_report frm = new frm_asset_register_print_report())
+                {
+                    frm.ShowDialog(this);
+                }
+            });
+            _reportsMenu.Items.Add("Depreciation Projection", null, (s, e) =>
+            {
+                using (frm_depreciation_projection_report frm = new frm_depreciation_projection_report())
+                {
+                    frm.ShowDialog(this);
+                }
+            });
         }
 
         private void BtnRunDepreciation_Click(object sender, EventArgs e)
@@ -1421,16 +1570,12 @@ namespace pos.FixedAssets
             return Math.Round(value, 2);
         }
 
-        private void TxtCost_TextChanged(object sender, EventArgs e)
+         private void TxtCost_TextChanged(object sender, EventArgs e)
         {
             // Auto-recalculate depreciation based on new cost
             if (decimal.TryParse(txtCost.Text, out var cost) && _currentAsset != null)
             {
-                if (numUsefulLifeYears.Value > 0)
-                {
-                    var depAmount = cost / (int)numUsefulLifeYears.Value;
-                    txtDepRate.Text = ((depAmount / cost) * 100).ToString("N2");
-                }
+                RecalculateDepRateFromInputs();
 
                 // Use edited cost for preview only; keep persisted asset cost unchanged
                 // until explicit save/revaluation action is posted.
@@ -1451,8 +1596,69 @@ namespace pos.FixedAssets
 
         private void DdlDepMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Recalculate depreciation rate based on method
+            RecalculateDepRateFromInputs();
             LoadDepreciationSchedulePreview();
+        }
+
+        private void UsefulLife_ValueChanged(object sender, EventArgs e)
+        {
+            RecalculateDepRateFromInputs();
+            LoadDepreciationSchedulePreview();
+        }
+
+        private void ResidualValue_TextChanged(object sender, EventArgs e)
+        {
+            RecalculateDepRateFromInputs();
+        }
+
+        private void RecalculateDepRateFromInputs()
+        {
+            if (_currentAsset == null)
+            {
+                return;
+            }
+
+            string method = ddlDepMethod.SelectedItem != null ? ddlDepMethod.SelectedItem.ToString() : string.Empty;
+            if (string.Equals(method, "NO_DEPRECIATION", StringComparison.OrdinalIgnoreCase))
+            {
+                txtDepRate.Text = "0.00";
+                return;
+            }
+
+            decimal cost;
+            if (!decimal.TryParse(txtCost.Text, out cost) || cost <= 0m)
+            {
+                return;
+            }
+
+            decimal residual;
+            if (!decimal.TryParse(txtResidualValue.Text, out residual) || residual < 0m)
+            {
+                residual = 0m;
+            }
+
+            int lifeMonths = ((int)numUsefulLifeYears.Value * 12) + (int)numUsefulLifeMonths.Value;
+            if (lifeMonths <= 0)
+            {
+                return;
+            }
+
+            decimal annualRate;
+            if (string.Equals(method, "REDUCING_BALANCE", StringComparison.OrdinalIgnoreCase))
+            {
+                annualRate = _currentAsset.DepRate > 0m ? _currentAsset.DepRate : (100m / ((decimal)lifeMonths / 12m));
+            }
+            else if (string.Equals(method, "UNITS_OF_PRODUCTION", StringComparison.OrdinalIgnoreCase))
+            {
+                annualRate = 100m / ((decimal)lifeMonths / 12m);
+            }
+            else
+            {
+                decimal depreciableBase = Math.Max(0m, cost - residual);
+                annualRate = cost > 0m ? (depreciableBase / cost) * (1200m / lifeMonths) : 0m;
+            }
+
+            txtDepRate.Text = Math.Max(0m, annualRate).ToString("N2");
         }
 
         #region Input Validation Methods
@@ -1509,17 +1715,11 @@ namespace pos.FixedAssets
                 return false;
             }
 
-            if (numUsefulLifeYears.Value <= 0)
+            int totalLifeMonths = ((int)numUsefulLifeYears.Value * 12) + (int)numUsefulLifeMonths.Value;
+            if (totalLifeMonths <= 0)
             {
-                UiMessages.ShowWarning("Useful life in years must be greater than zero.", "يجب أن تكون السنوات المفيدة أكبر من صفر");
+                UiMessages.ShowWarning("Useful life (years + months) must be greater than zero.", "يجب أن يكون العمر الإنتاجي (سنوات + أشهر) أكبر من صفر");
                 numUsefulLifeYears.Focus();
-                return false;
-            }
-
-            if (numUsefulLifeMonths.Value <= 0)
-            {
-                UiMessages.ShowWarning("Useful life in months must be greater than zero.", "يجب أن تكون الأشهر المفيدة أكبر من صفر");
-                numUsefulLifeMonths.Focus();
                 return false;
             }
 
