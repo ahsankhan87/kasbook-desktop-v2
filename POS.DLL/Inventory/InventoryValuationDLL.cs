@@ -147,15 +147,15 @@ namespace POS.DLL.Inventory
             const string sql = @"
                 SELECT
                     p.id AS product_id,
-                    MAX(ph.date_created) AS last_purchase_date,
-                    MAX(CASE WHEN ranked.rn = 1 THEN ranked.unit_cost ELSE NULL END) AS last_purchase_cost
+                    MAX(ph.purchase_date) AS last_purchase_date,
+                    MAX(CASE WHEN ranked.rn = 1 THEN ranked.cost_price ELSE NULL END) AS last_purchase_cost
                 FROM pos_products p
-                INNER JOIN pos_purchase_detail pd ON pd.item_number = p.item_number
-                INNER JOIN pos_purchase ph ON ph.id = pd.purchase_id AND ph.deleted = 0
+                INNER JOIN pos_purchases_items pd ON pd.item_number = p.item_number
+                INNER JOIN pos_purchases ph ON ph.id = pd.purchase_id
                 CROSS APPLY (
-                    SELECT TOP 1 pd2.unit_cost, ROW_NUMBER() OVER (ORDER BY ph2.date_created DESC, pd2.id DESC) AS rn
-                    FROM pos_purchase_detail pd2
-                    INNER JOIN pos_purchase ph2 ON ph2.id = pd2.purchase_id AND ph2.deleted = 0
+                    SELECT TOP 1 pd2.cost_price, ROW_NUMBER() OVER (ORDER BY ph2.purchase_date DESC, pd2.id DESC) AS rn
+                    FROM pos_purchases_items pd2
+                    INNER JOIN pos_purchases ph2 ON ph2.id = pd2.purchase_id
                     WHERE pd2.item_number = p.item_number
                 ) ranked
                 WHERE p.deleted = 0
@@ -357,12 +357,11 @@ namespace POS.DLL.Inventory
             const string sql = @"
                 SELECT
                     p.id AS product_id,
-                    SUM(sd.qty * sd.unit_price) AS sales_value
-                FROM pos_sales_detail sd
+                    SUM(sd.qty_sold * sd.unit_price) AS sales_value
+                FROM pos_sales_items sd
                 INNER JOIN pos_sales sh ON sh.id = sd.sales_id
                 INNER JOIN pos_products p ON p.item_number = sd.item_number
-                WHERE sh.deleted = 0
-                  AND CAST(sh.date_created AS DATE) BETWEEN @from_date AND @to_date
+                  AND CAST(sh.sale_date AS DATE) BETWEEN @from_date AND @to_date
                   AND (@branch_id = 0 OR sh.branch_id = @branch_id)
                 GROUP BY p.id";
 

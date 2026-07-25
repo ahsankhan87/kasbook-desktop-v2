@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using POS.Core;
 using POS.DLL.Inventory;
 
+
 namespace POS.DLL
 {
     public class PurchasesDLL
@@ -401,9 +402,9 @@ namespace POS.DLL
             string costingMethod = "WAC";
             try
             {
-                var valSettings = new InventoryValuationDLL().GetSettings(UsersModal.logged_in_branch_id);
-                if (!string.IsNullOrWhiteSpace(valSettings?.ValuationMethod))
-                    costingMethod = valSettings.ValuationMethod.ToUpperInvariant();
+                var _inventoryValuationDLL = new InventoryValuationDLL().GetSettings(UsersModal.logged_in_branch_id);
+                if (!string.IsNullOrWhiteSpace(_inventoryValuationDLL?.ValuationMethod))
+                    costingMethod = _inventoryValuationDLL.ValuationMethod.ToUpperInvariant();
             }
             catch { /* fall back to WAC — non-fatal */ }
 
@@ -514,18 +515,18 @@ namespace POS.DLL
                             // This runs in the same transaction so it rolls back atomically.
                             if (costingMethod == "FIFO" && detail.item_type != "Service")
                             {
-                                cmd = new SqlCommand("sp_InsertFIFOLayer", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@ProductId",     detail.item_id);
-                                cmd.Parameters.AddWithValue("@ItemNumber",    detail.item_number);
-                                cmd.Parameters.AddWithValue("@BranchId",      UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@PurchaseRefId", newPurchaseID);
-                                cmd.Parameters.AddWithValue("@PurchaseDate",  detail.purchase_date);
-                                cmd.Parameters.AddWithValue("@Qty",           detail.quantity);
-                                cmd.Parameters.AddWithValue("@UnitCost",      detail.cost_price);
-                                cmd.Parameters.AddWithValue("@CurrencyId",    detail.currency_id);
-                                cmd.Parameters.AddWithValue("@ExchangeRate",  detail.exchange_rate > 0 ? detail.exchange_rate : 1m);
-                                cmd.ExecuteScalar();
+                                var _inventoryCostingEngine = new InventoryCostingEngineDLL();
+                                _inventoryCostingEngine.InsertFIFOLayer(
+                                    detail.item_id,
+                                    detail.item_number,
+                                    UsersModal.logged_in_branch_id,
+                                    newPurchaseID,
+                                    detail.purchase_date,
+                                    detail.quantity,
+                                    detail.cost_price,
+                                    detail.currency_id,
+                                    detail.exchange_rate > 0 ? detail.exchange_rate : 1m,
+                                    cn, transaction);
                             }
                             // ── end FIFO layer ───────────────────────────────────────────
 
