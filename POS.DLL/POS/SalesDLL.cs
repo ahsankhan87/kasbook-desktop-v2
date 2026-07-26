@@ -527,56 +527,29 @@ namespace POS.DLL
 
         public int InsertSales(List<SalesModalHeader> sales, List<SalesModal> sales_detail)
         {
-            Int32 newSaleID = 0;
+            int newSaleID = 0;
+            bool isAutoPostSales = false;
+
+            if (sales == null || sales.Count == 0)
+                return newSaleID;
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
-                SqlTransaction transaction;
-
                 if (cn.State == ConnectionState.Closed)
-                {
                     cn.Open();
-                    transaction = cn.BeginTransaction();
 
+                using (SqlTransaction transaction = cn.BeginTransaction())
+                {
                     try
                     {
-                        int CustomerID = 0;
-                        ////if customer name not selected in sales form then whatever text is typed in textbox, it will be saved a new customer
-                        ////else the selected customer id will be used
-                        //if (sales[0].customer_id == 0 && sales[0].customer_name.Length > 0)
-                        //{
-                        //    cmd = new SqlCommand("sp_CustomersCrud", cn, transaction);
-                        //    cmd.CommandType = CommandType.StoredProcedure;
-
-                        //    foreach (SalesModalHeader sale_header in sales)
-                        //    {
-                        //        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                        //        cmd.Parameters.AddWithValue("@first_name", sale_header.customer_name);
-                        //        cmd.Parameters.AddWithValue("@status", 1);
-                        //        //cmd.Parameters.AddWithValue("@contact_no", obj.contact_no);
-                        //        cmd.Parameters.AddWithValue("@vat_no", sale_header.customer_vat);
-                        //        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                        //        //cmd.Parameters.AddWithValue("@credit_limit", obj.credit_limit);
-                        //        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                        //        cmd.Parameters.AddWithValue("@OperationType", "1");
-                        //    }
-                        //    CustomerID = Convert.ToInt32(cmd.ExecuteScalar());
-                        //}
-                        //else
-                        //{
-                        //    CustomerID = sales[0].customer_id;
-                        //}
-
-                        // Disable the above code block and replace with below code to avoid creating duplicate customers
-                        // when same customer name is entered multiple times without selection
-                        CustomerID = sales[0].customer_id;
-
-                        cmd = new SqlCommand("sp_Sales", cn, transaction);
-                        cmd.CommandType = CommandType.StoredProcedure;
+                        int customerID = sales[0].customer_id;
 
                         foreach (SalesModalHeader sale_header in sales)
                         {
+                            cmd = new SqlCommand("sp_Sales", cn, transaction);
+                            cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@customer_id", CustomerID);
+                            cmd.Parameters.AddWithValue("@customer_id", customerID);
                             cmd.Parameters.AddWithValue("@employee_id", sale_header.employee_id);
                             cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
                             cmd.Parameters.AddWithValue("@sale_type", sale_header.sale_type);
@@ -597,560 +570,61 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@payment_terms_id", sale_header.payment_terms_id);
                             cmd.Parameters.AddWithValue("@payment_method_id", sale_header.payment_method_id);
                             cmd.Parameters.AddWithValue("@PONumber", sale_header.PONumber);
-
-                            cmd.Parameters.AddWithValue("@OperationType", "1");
-                        }
-
-                        newSaleID = Convert.ToInt32(cmd.ExecuteScalar());
-
-                        foreach (SalesModal detail in sales_detail)
-                        {
-                            cmd = new SqlCommand("sp_Sales_items", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
-
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
-                            cmd.Parameters.AddWithValue("@item_id", detail.item_id);
-                            cmd.Parameters.AddWithValue("@item_number", detail.item_number);
-                            cmd.Parameters.AddWithValue("@item_code", detail.code);
-                            cmd.Parameters.AddWithValue("@item_name", detail.name);
-                            cmd.Parameters.AddWithValue("@item_type", detail.item_type);
-                            cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
-                            cmd.Parameters.AddWithValue("@sale_id", newSaleID);
-                            cmd.Parameters.AddWithValue("@tax_id", detail.tax_id);
-                            cmd.Parameters.AddWithValue("@unit_price", detail.unit_price);
-                            cmd.Parameters.AddWithValue("@cost_price", detail.cost_price);
-                            cmd.Parameters.AddWithValue("@quantity_sold", detail.quantity_sold);
-                            cmd.Parameters.AddWithValue("@discount_value", detail.discount);
-                            cmd.Parameters.AddWithValue("@discount_percent", detail.discount_percent);
-                            cmd.Parameters.AddWithValue("@tax_rate", detail.tax_rate);
-                            cmd.Parameters.AddWithValue("@sale_date", detail.sale_date);
-                            cmd.Parameters.AddWithValue("@customer_id", detail.customer_id);
-                            cmd.Parameters.AddWithValue("@location_code", detail.location_code);
-                            cmd.Parameters.AddWithValue("@packet_qty", detail.packet_qty);
-
                             cmd.Parameters.AddWithValue("@OperationType", "1");
 
-                            cmd.ExecuteScalar();
+                            newSaleID = Convert.ToInt32(cmd.ExecuteScalar());
                         }
 
-                        /// JOURNAL ENTRIES
-                        foreach (SalesModalHeader sale_header in sales)
+                        if (sales_detail != null)
                         {
-                            if (sale_header.sale_type != "Quotation" && sale_header.sale_type != "Gift")//for sales 
+                            foreach (SalesModal detail in sales_detail)
                             {
-                                if (sale_header.sale_type == "Cash")
-                                {
-                                    //////////////
-                                    //// BANK Entry
-                                    if (sale_header.payment_method_text.Contains("Bank") || sale_header.payment_method_text.Contains("bank") || sale_header.payment_method_text.Contains("banks") || sale_header.payment_method_text.Contains("Banks"))
-                                    {
-                                        ///Bank JOURNAL ENTRY (DEBIT)
-                                        cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        cmd.Parameters.AddWithValue("@account_id", sale_header.bankGLAccountID);
-                                        cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        cmd.Parameters.AddWithValue("@debit", (sale_header.total_amount));
-                                        cmd.Parameters.AddWithValue("@credit", 0);
-                                        cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@customer_id", 0);
-                                        cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        cmd.Parameters.AddWithValue("@bank_id", 0);
-                                        cmd.Parameters.AddWithValue("@entry_id", 0);
-                                        cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        cmd.ExecuteScalar();
-                                        ////
-                                        ///
-                                        if (sale_header.bank_id != 0)
-                                        {
-                                            ///ADD ENTRY INTO bank PAYMENT(DEBIT)
-
-                                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                            cmd.CommandType = CommandType.StoredProcedure;
-                                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                            cmd.Parameters.AddWithValue("@account_id", sale_header.bankGLAccountID);
-                                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                            cmd.Parameters.AddWithValue("@debit", (sale_header.total_amount));
-                                            cmd.Parameters.AddWithValue("@credit", 0);
-                                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                            cmd.Parameters.AddWithValue("@bank_id", sale_header.bank_id);
-                                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                            cmd.ExecuteScalar();
-                                            ////
-                                        }
-                                    } // bank entry end
-                                    else// if bank is not selected in payment metd then cash entry will happen
-                                    {
-                                        ///CASH JOURNAL ENTRY (DEBIT)
-
-                                        cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account_id);
-                                        cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        cmd.Parameters.AddWithValue("@debit", (sale_header.total_amount));
-                                        cmd.Parameters.AddWithValue("@credit", 0);
-                                        cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@customer_id", 0);
-                                        cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        cmd.Parameters.AddWithValue("@entry_id", 0);
-                                        cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        cmd.ExecuteScalar();
-                                        ////
-
-                                    }
-
-                                }
-                                else //saletype is credit
-                                {
-                                    ///ACCOUNT RECEIVABLE JOURNAL ENTRY (DEBIT)
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.receivable_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", (sale_header.total_amount));
-                                    cmd.Parameters.AddWithValue("@credit", 0);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                                    ////
-
-                                    if (CustomerID != 0)
-                                    {
-                                        ///ADD ENTRY INTO CUSTOMER PAYMENT(DEBIT)
-                                        //Insert_Journal_entry(invoice_no, sales_account_id, net_total, 0, sale_date, txt_description.Text, customer_id, 0, entry_id);
-
-                                        cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        cmd.Parameters.AddWithValue("@account_id", sale_header.sales_account_id);
-                                        cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        cmd.Parameters.AddWithValue("@debit", (sale_header.total_amount+sale_header.total_tax-sale_header.total_discount));
-                                        cmd.Parameters.AddWithValue("@credit", 0);
-                                        cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@customer_id", CustomerID);
-                                        cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        cmd.Parameters.AddWithValue("@entry_id", entry_id);
-                                        cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        cmd.ExecuteScalar();
-                                        ////
-                                    }
-
-                                }
-                                ///SALES JOURNAL ENTRY (CREDIT)
-                                //Insert_Journal_entry(invoice_no, sales_account_id, 0, net_total, sale_date, txt_description.Text, 0, 0, 0);
-
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
+                                cmd = new SqlCommand("sp_Sales_items", cn, transaction);
                                 cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.sales_account_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", (sale_header.total_amount));
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+
                                 cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
+                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                                cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
+                                cmd.Parameters.AddWithValue("@item_id", detail.item_id);
+                                cmd.Parameters.AddWithValue("@item_number", detail.item_number);
+                                cmd.Parameters.AddWithValue("@item_code", detail.code);
+                                cmd.Parameters.AddWithValue("@item_name", detail.name);
+                                cmd.Parameters.AddWithValue("@item_type", detail.item_type);
+                                cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
+                                cmd.Parameters.AddWithValue("@sale_id", newSaleID);
+                                cmd.Parameters.AddWithValue("@tax_id", detail.tax_id);
+                                cmd.Parameters.AddWithValue("@unit_price", detail.unit_price);
+                                cmd.Parameters.AddWithValue("@cost_price", detail.cost_price);
+                                cmd.Parameters.AddWithValue("@quantity_sold", detail.quantity_sold);
+                                cmd.Parameters.AddWithValue("@discount_value", detail.discount);
+                                cmd.Parameters.AddWithValue("@discount_percent", detail.discount_percent);
+                                cmd.Parameters.AddWithValue("@tax_rate", detail.tax_rate);
+                                cmd.Parameters.AddWithValue("@sale_date", detail.sale_date);
+                                cmd.Parameters.AddWithValue("@customer_id", detail.customer_id);
+                                cmd.Parameters.AddWithValue("@location_code", detail.location_code);
+                                cmd.Parameters.AddWithValue("@packet_qty", detail.packet_qty);
                                 cmd.Parameters.AddWithValue("@OperationType", "1");
 
                                 cmd.ExecuteScalar();
-                                ////
+                            }
+                        }
 
-                                /// PURCHASES / COST OF SALE JOURNAL ENTRY (DEBIT)
-                                //Insert_Journal_entry(invoice_no, purchases_acc_id, total_cost_amount, 0, sale_date, txt_description.Text, 0, 0, 0);
+                        isAutoPostSales = GetBoolSetting(cn, transaction, SettingKeys.AutoPostSales, false);
 
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.purchases_acc_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", sale_header.total_cost_amount);
-                                cmd.Parameters.AddWithValue("@credit", 0);
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                cmd.ExecuteScalar();
-                                ////
-
-                                ///INVENTORY JOURNAL ENTRY (CREDIT)
-                                //Insert_Journal_entry(invoice_no, inventory_acc_id, 0, total_cost_amount, sale_date, txt_description.Text, 0, 0, 0);
-
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.inventory_acc_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", sale_header.total_cost_amount);
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                cmd.ExecuteScalar();
-                                //// 
-
-
-                                if (sale_header.total_discount > 0)
-                                {
-                                    /// SALES DISCOUNT JOURNAL ENTRY (DEBIT)
-                                    //Int32 entry_id = Insert_Journal_entry(invoice_no, sales_discount_acc_id, net_total_discount, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.sales_discount_acc_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", sale_header.total_discount);
-                                    cmd.Parameters.AddWithValue("@credit", 0);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                                    ////
-
-                                    if (sale_header.sale_type == "Cash") //for cash entry
-                                    {
-                                        //////////////
-                                        //// BANK ENtRY
-                                        /// insert tax into bank entry if bank not select then normal cash tax entry happen
-                                        if (sale_header.payment_method_text.Contains("Bank") || sale_header.payment_method_text.Contains("bank") || sale_header.payment_method_text.Contains("banks") || sale_header.payment_method_text.Contains("Banks"))
-                                        {
-                                            ///Bank JOURNAL ENTRY (DEBIT)
-                                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                            cmd.CommandType = CommandType.StoredProcedure;
-                                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                            cmd.Parameters.AddWithValue("@account_id", sale_header.bankGLAccountID);
-                                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                            cmd.Parameters.AddWithValue("@debit", 0);
-                                            cmd.Parameters.AddWithValue("@credit", sale_header.total_discount);
-                                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                            cmd.ExecuteScalar();
-                                            ////
-                                            ///
-                                            if (sale_header.bank_id != 0)
-                                            {
-                                                ///ADD ENTRY INTO bank PAYMENT(DEBIT)
-
-                                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                                cmd.CommandType = CommandType.StoredProcedure;
-                                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                                cmd.Parameters.AddWithValue("@account_id", sale_header.bankGLAccountID);
-                                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                                cmd.Parameters.AddWithValue("@debit", 0);
-                                                cmd.Parameters.AddWithValue("@credit", sale_header.total_discount);
-                                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                                cmd.Parameters.AddWithValue("@bank_id", sale_header.bank_id);
-                                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                                cmd.ExecuteScalar();
-                                                ////
-                                            }
-                                        } // bank entry end
-                                        else // if bank is not selected in payment metd then cash entry will happen
-                                        {
-                                            ///SALES JOURNAL ENTRY (CREDIT)
-                                            //Insert_Journal_entry(invoice_no, sales_account_id, 0, net_total_discount, sale_date, txt_description.Text, 0, 0, 0);
-
-                                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                            cmd.CommandType = CommandType.StoredProcedure;
-                                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                            cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account_id);
-                                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                            cmd.Parameters.AddWithValue("@debit", 0);
-                                            cmd.Parameters.AddWithValue("@credit", sale_header.total_discount);
-                                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                            cmd.ExecuteScalar();
-                                            ////
-                                            ///
-                                        }
-                                    }
-                                    else //if credit entry
-                                    {
-                                        ///ACCOUNT RECEIVABLE JOURNAL ENTRY (CREDIT)
-                                        cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        cmd.Parameters.AddWithValue("@account_id", sale_header.receivable_account_id);
-                                        cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        cmd.Parameters.AddWithValue("@debit", 0);
-                                        cmd.Parameters.AddWithValue("@credit", sale_header.total_discount);
-                                        cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@customer_id", 0);
-                                        cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        cmd.Parameters.AddWithValue("@entry_id", 0);
-                                        cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        cmd.ExecuteScalar();
-
-                                        //if (CustomerID != 0)
-                                        //{
-                                        //    ///ADD ENTRY INTO CUSTOMER PAYMENT(Credit)
-                                        //    //Insert_Journal_entry(invoice_no, sales_account_id, net_total_discount, 0, sale_date, txt_description.Text, customer_id, 0, entry_id);
-
-                                        //    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        //    cmd.CommandType = CommandType.StoredProcedure;
-                                        //    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        //    cmd.Parameters.AddWithValue("@account_id", sale_header.sales_discount_acc_id);
-                                        //    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        //    cmd.Parameters.AddWithValue("@debit", 0);
-                                        //    cmd.Parameters.AddWithValue("@credit", sale_header.total_discount);
-                                        //    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        //    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        //    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        //    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        //    cmd.Parameters.AddWithValue("@customer_id", CustomerID);
-                                        //    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        //    cmd.Parameters.AddWithValue("@entry_id", entry_id);
-                                        //    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        //    cmd.ExecuteScalar();
-                                        //    ////
-                                        //}
-                                    }
-
-                                }
-                                ///dicount end here
-
-                                if (sale_header.total_tax > 0)
-                                {
-                                    if (sale_header.sale_type == "Cash")
-                                    {
-                                        //////////////
-                                        //// BANK ENtRY
-                                        /// insert tax into bank entry if bank not select then normal cash tax entry happen
-                                        if (sale_header.payment_method_text.Contains("Bank") || sale_header.payment_method_text.Contains("bank") || sale_header.payment_method_text.Contains("banks") || sale_header.payment_method_text.Contains("Banks"))
-                                        {
-                                            ///Bank JOURNAL ENTRY (DEBIT)
-                                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                            cmd.CommandType = CommandType.StoredProcedure;
-                                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                            cmd.Parameters.AddWithValue("@account_id", sale_header.bankGLAccountID);
-                                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                            cmd.Parameters.AddWithValue("@debit", sale_header.total_tax);
-                                            cmd.Parameters.AddWithValue("@credit", 0);
-                                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                            cmd.ExecuteScalar();
-                                            ////
-                                            ///
-                                            if (sale_header.bank_id != 0)
-                                            {
-                                                ///ADD ENTRY INTO bank PAYMENT(DEBIT)
-
-                                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                                cmd.CommandType = CommandType.StoredProcedure;
-                                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                                cmd.Parameters.AddWithValue("@account_id", sale_header.bankGLAccountID);
-                                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                                cmd.Parameters.AddWithValue("@debit", sale_header.total_tax);
-                                                cmd.Parameters.AddWithValue("@credit", 0);
-                                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                                cmd.Parameters.AddWithValue("@bank_id", sale_header.bank_id);
-                                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                                cmd.ExecuteScalar();
-                                                ////
-                                            }
-                                        } // bank entry end
-                                        else // if bank is not selected in payment metd then cash entry will happen
-                                        {
-                                            ///CASH JOURNAL ENTRY (DEBIT)
-                                            //Insert_Journal_entry(invoice_no, cash_account_id, net_total_tax, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                            cmd.CommandType = CommandType.StoredProcedure;
-                                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                            cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account_id);
-                                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                            cmd.Parameters.AddWithValue("@debit", sale_header.total_tax);
-                                            cmd.Parameters.AddWithValue("@credit", 0);
-                                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                            cmd.ExecuteScalar();
-                                            ////
-                                            ///
-                                        }
-                                    }
-                                    else
-                                    {
-                                        ///ACCOUNT RECEIVABLE JOURNAL ENTRY (DEBIT)
-                                        //Int32 entry_id = Insert_Journal_entry(invoice_no, receivable_account_id, net_total_tax, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                        cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        cmd.Parameters.AddWithValue("@account_id", sale_header.receivable_account_id);
-                                        cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        cmd.Parameters.AddWithValue("@debit", sale_header.total_tax);
-                                        cmd.Parameters.AddWithValue("@credit", 0);
-                                        cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@customer_id", 0);
-                                        cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        cmd.Parameters.AddWithValue("@entry_id", 0);
-                                        cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                                        ////
-
-                                        //if (CustomerID != 0)
-                                        //{
-                                        //    ///ADD ENTRY INTO CUSTOMER PAYMENT(DEBIT)
-                                        //    //Insert_Journal_entry(invoice_no, tax_account_id, net_total_tax, 0, sale_date, txt_description.Text, customer_id, 0, entry_id);
-
-                                        //    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                        //    cmd.CommandType = CommandType.StoredProcedure;
-                                        //    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                        //    cmd.Parameters.AddWithValue("@account_id", sale_header.tax_account_id);
-                                        //    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                        //    cmd.Parameters.AddWithValue("@debit", sale_header.total_tax);
-                                        //    cmd.Parameters.AddWithValue("@credit", 0);
-                                        //    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                        //    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                        //    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                        //    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                        //    cmd.Parameters.AddWithValue("@customer_id", CustomerID);
-                                        //    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                        //    cmd.Parameters.AddWithValue("@entry_id", entry_id);
-                                        //    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                        //    cmd.ExecuteScalar();
-                                        //    ////
-                                        //}
-
-                                    }
-                                    ///SALES TAX JOURNAL ENTRY (CREDIT)
-                                    //Insert_Journal_entry(invoice_no, tax_account_id, 0, net_total_tax, sale_date, txt_description.Text, 0, 0, 0);
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.tax_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", sale_header.total_tax);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    cmd.ExecuteScalar();
-                                    ////
-
-                                }
-
+                        if (!isAutoPostSales)
+                        {
+                            foreach (SalesModalHeader sale_header in sales)
+                            {
+                                UpdateSalePostedFlag(cn, transaction, sale_header.invoice_no, false);
                             }
                         }
 
                         transaction.Commit();
 
-                        //insert log when trans commit
                         foreach (SalesModalHeader sale_header in sales)
                         {
                             Log.LogAction("Add Sales", $"InvoiceNo: {sale_header.invoice_no}, Sale Date: {sale_header.sale_date}, Total Amount: {((sale_header.total_amount + sale_header.total_tax) - sale_header.total_discount)}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                         }
-                        //
                     }
                     catch
                     {
@@ -1158,12 +632,541 @@ namespace POS.DLL
                         throw;
                     }
                 }
+            }
 
+            if (isAutoPostSales)
+            {
+                PostSalesJournalsAndUpdatePostedFlag(sales);
+            }
 
-                return newSaleID;
+            return newSaleID;
+        }
 
+        private void PostSalesJournalsAndUpdatePostedFlag(List<SalesModalHeader> sales)
+        {
+            if (sales == null || sales.Count == 0)
+                return;
+
+            JournalsDLL journalsDal = new JournalsDLL();
+
+            foreach (SalesModalHeader saleHeader in sales)
+            {
+                bool posted = false;
+
+                try
+                {
+                    if (ShouldPostSalesJournal(saleHeader))
+                    {
+                        AutoJVModel model = BuildSalesAutoJournalModel(saleHeader);
+                        if (model != null && model.Lines != null && model.Lines.Count > 0)
+                        {
+                            PostResult result = journalsDal.PostAutoJournalEntry(model, UsersModal.logged_in_userid);
+                            posted = result != null && result.Success;
+                        }
+                    }
+                }
+                catch
+                {
+                    posted = false;
+                }
+
+                UpdateSalePostedFlag(saleHeader.invoice_no, posted);
             }
         }
+
+        private AutoJVModel BuildSalesAutoJournalModel(SalesModalHeader saleHeader)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                int cashAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultCashAccount);
+                int receivableAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultArAccount);
+                int salesAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultSalesAccount);
+                int taxAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultSalesTaxAccount);
+                int discountAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultDiscountAccount);
+                int purchasesAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultPurchaseAccount);
+                int inventoryAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultInventoryAccount);
+
+                int collectionAccountId = ResolveCollectionAccountId(saleHeader, cashAccountId, receivableAccountId);
+                if (collectionAccountId <= 0 || salesAccountId <= 0)
+                    return null;
+
+                var lines = new List<JVLineModel>();
+                string narration = saleHeader.description;
+                int? customerId = saleHeader.customer_id > 0 ? (int?)saleHeader.customer_id : null;
+                int? bankId = IsBankPaymentMethod(saleHeader.payment_method_text) && saleHeader.bank_id > 0 ? (int?)saleHeader.bank_id : null;
+
+                if (saleHeader.total_amount > 0)
+                {
+                    AddAutoLine(lines, collectionAccountId, Convert.ToDecimal(saleHeader.total_amount), 0m, narration,
+                        string.Equals(saleHeader.sale_type, "Credit", StringComparison.OrdinalIgnoreCase) ? customerId : null,
+                        bankId);
+
+                    AddAutoLine(lines, salesAccountId, 0m, Convert.ToDecimal(saleHeader.total_amount), narration, null, null);
+                }
+
+                if (saleHeader.total_cost_amount > 0 && purchasesAccountId > 0 && inventoryAccountId > 0)
+                {
+                    AddAutoLine(lines, purchasesAccountId, Convert.ToDecimal(saleHeader.total_cost_amount), 0m, narration, null, null);
+                    AddAutoLine(lines, inventoryAccountId, 0m, Convert.ToDecimal(saleHeader.total_cost_amount), narration, null, null);
+                }
+
+                if (saleHeader.total_discount > 0 && discountAccountId > 0)
+                {
+                    AddAutoLine(lines, discountAccountId, Convert.ToDecimal(saleHeader.total_discount), 0m, narration, null, null);
+                    AddAutoLine(lines, collectionAccountId, 0m, Convert.ToDecimal(saleHeader.total_discount), narration,
+                        string.Equals(saleHeader.sale_type, "Credit", StringComparison.OrdinalIgnoreCase) ? customerId : null,
+                        bankId);
+                }
+
+                if (saleHeader.total_tax > 0 && taxAccountId > 0)
+                {
+                    AddAutoLine(lines, collectionAccountId, Convert.ToDecimal(saleHeader.total_tax), 0m, narration,
+                        string.Equals(saleHeader.sale_type, "Credit", StringComparison.OrdinalIgnoreCase) ? customerId : null,
+                        bankId);
+
+                    AddAutoLine(lines, taxAccountId, 0m, Convert.ToDecimal(saleHeader.total_tax), narration, null, null);
+                }
+
+                if (lines.Count == 0)
+                    return null;
+
+                return new AutoJVModel
+                {
+                    ModuleName = "SALES",
+                    RefModule = "pos_sales",
+                    RefId = 0,
+                    VoucherDate = saleHeader.sale_date,
+                    ReferenceNo = saleHeader.invoice_no,
+                    Narration = narration,
+                    IsAutoPosted = true,
+                    Lines = lines
+                };
+            }
+        }
+
+        private void PostReturnSalesJournalsAndUpdatePostedFlag(List<SalesModalHeader> sales)
+        {
+            if (sales == null || sales.Count == 0)
+                return;
+
+            JournalsDLL journalsDal = new JournalsDLL();
+
+            foreach (SalesModalHeader saleHeader in sales)
+            {
+                bool posted = false;
+
+                try
+                {
+                    if (ShouldPostSalesJournal(saleHeader))
+                    {
+                        int originalVoucherId = GetPostedSalesVoucherIdByInvoiceNo(saleHeader.old_invoice_no);
+                        if (originalVoucherId > 0)
+                        {
+                            decimal originalNet = GetSaleNetAmountByInvoiceNo(saleHeader.old_invoice_no);
+                            decimal returnNet = Convert.ToDecimal(saleHeader.total_amount) + Convert.ToDecimal(saleHeader.total_tax) - Convert.ToDecimal(saleHeader.total_discount);
+
+                            decimal ratio = 0m;
+                            if (originalNet > 0m && returnNet > 0m)
+                            {
+                                ratio = returnNet / originalNet;
+                                if (ratio > 1m)
+                                    ratio = 1m;
+                            }
+
+                            string reason = string.Format("Sales return reversal. Return Invoice: {0}, Original Invoice: {1}", saleHeader.invoice_no, saleHeader.old_invoice_no);
+
+                            if (ratio >= 1m)
+                            {
+                                PostResult result = journalsDal.ReverseJournalVoucher(originalVoucherId, saleHeader.sale_date, reason, UsersModal.logged_in_userid);
+                                posted = result != null && result.Success;
+                            }
+                            else if (ratio > 0m)
+                            {
+                                AutoJVModel partialModel = BuildPartialReturnReversalModel(journalsDal, originalVoucherId, saleHeader, ratio, reason);
+                                if (partialModel != null && partialModel.Lines != null && partialModel.Lines.Count > 0)
+                                {
+                                    PostResult result = journalsDal.PostAutoJournalEntry(partialModel, UsersModal.logged_in_userid);
+                                    posted = result != null && result.Success;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    posted = false;
+                }
+
+                UpdateSalePostedFlag(saleHeader.invoice_no, posted);
+            }
+        }
+
+        private int GetPostedSalesVoucherIdByInvoiceNo(string invoiceNo)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+                return 0;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                using (SqlCommand voucherCmd = new SqlCommand(@"
+                    SELECT TOP 1 id
+                    FROM acc_entries_header
+                    WHERE branch_id = @branch_id
+                      AND ISNULL(status, 'Posted') = 'Posted'
+                      AND VoucherType = @voucher_type
+                      AND ReferenceNo = @reference_no
+                    ORDER BY id DESC", cn))
+                {
+                    voucherCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    voucherCmd.Parameters.AddWithValue("@voucher_type", "SALES");
+                    voucherCmd.Parameters.AddWithValue("@reference_no", invoiceNo.Trim());
+
+                    object idObj = voucherCmd.ExecuteScalar();
+                    if (idObj != null && idObj != DBNull.Value)
+                    {
+                        int voucherId;
+                        if (int.TryParse(Convert.ToString(idObj), out voucherId) && voucherId > 0)
+                            return voucherId;
+                    }
+                }
+            }
+
+            return 0;
+        }
+
+        private decimal GetSaleNetAmountByInvoiceNo(string invoiceNo)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+                return 0m;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                using (SqlCommand cmdNet = new SqlCommand(@"
+                    SELECT TOP 1
+                        CAST(ISNULL(total_amount,0) + ISNULL(total_tax,0) - ISNULL(discount_value,0) AS DECIMAL(18,4))
+                    FROM pos_sales
+                    WHERE branch_id = @branch_id AND invoice_no = @invoice_no
+                    ORDER BY id DESC", cn))
+                {
+                    cmdNet.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    cmdNet.Parameters.AddWithValue("@invoice_no", invoiceNo.Trim());
+
+                    object value = cmdNet.ExecuteScalar();
+                    if (value != null && value != DBNull.Value)
+                    {
+                        decimal parsed;
+                        if (decimal.TryParse(Convert.ToString(value), out parsed) && parsed > 0m)
+                            return parsed;
+                    }
+                }
+            }
+
+            return 0m;
+        }
+
+        private AutoJVModel BuildPartialReturnReversalModel(JournalsDLL journalsDal, int originalVoucherId, SalesModalHeader saleHeader, decimal ratio, string reason)
+        {
+            if (journalsDal == null || saleHeader == null || originalVoucherId <= 0 || ratio <= 0m)
+                return null;
+
+            var source = journalsDal.GetVoucherWithLines(originalVoucherId);
+            if (source.Header == null || source.Lines == null || source.Lines.Count == 0)
+                return null;
+
+            List<JVLineModel> lines = new List<JVLineModel>();
+            foreach (JVLineModel sourceLine in source.Lines)
+            {
+                decimal debit = Math.Round(sourceLine.Credit * ratio, 2, MidpointRounding.AwayFromZero);
+                decimal credit = Math.Round(sourceLine.Debit * ratio, 2, MidpointRounding.AwayFromZero);
+                if (debit <= 0m && credit <= 0m)
+                    continue;
+
+                lines.Add(new JVLineModel
+                {
+                    AccountId = sourceLine.AccountId,
+                    Debit = debit,
+                    Credit = credit,
+                    Narration = string.IsNullOrWhiteSpace(reason) ? sourceLine.Narration : reason,
+                    ModuleName = "SALES_RETURN",
+                    CustomerId = sourceLine.CustomerId,
+                    SupplierId = sourceLine.SupplierId,
+                    BankId = sourceLine.BankId,
+                    PeriodId = sourceLine.PeriodId
+                });
+            }
+
+            RebalanceAutoLines(lines);
+            if (lines.Count == 0)
+                return null;
+
+            return new AutoJVModel
+            {
+                ModuleName = "SALES_RETURN",
+                RefModule = "pos_sales",
+                RefId = 0,
+                VoucherDate = saleHeader.sale_date,
+                ReferenceNo = saleHeader.invoice_no,
+                Narration = reason,
+                IsAutoPosted = true,
+                Lines = lines
+            };
+        }
+
+        private void RebalanceAutoLines(List<JVLineModel> lines)
+        {
+            if (lines == null || lines.Count == 0)
+                return;
+
+            decimal totalDebit = lines.Sum(x => x.Debit);
+            decimal totalCredit = lines.Sum(x => x.Credit);
+            decimal diff = Math.Round(totalDebit - totalCredit, 2, MidpointRounding.AwayFromZero);
+
+            if (diff == 0m)
+                return;
+
+            if (diff > 0m)
+            {
+                JVLineModel line = lines.LastOrDefault(x => x.Credit > 0m);
+                if (line != null)
+                    line.Credit = Math.Round(line.Credit + diff, 2, MidpointRounding.AwayFromZero);
+            }
+            else
+            {
+                JVLineModel line = lines.LastOrDefault(x => x.Debit > 0m);
+                if (line != null)
+                    line.Debit = Math.Round(line.Debit + Math.Abs(diff), 2, MidpointRounding.AwayFromZero);
+            }
+        }
+
+        private AutoJVModel BuildReturnSalesAutoJournalModel(SalesModalHeader saleHeader)
+        {
+            if (saleHeader == null)
+                return null;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                int cashAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultCashAccount);
+                int receivableAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultArAccount);
+                int salesAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultSalesAccount);
+                int taxAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultSalesTaxAccount);
+                int discountAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultDiscountAccount);
+                int purchasesAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultPurchaseAccount);
+                int inventoryAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultInventoryAccount);
+
+                int settlementAccountId = ResolveCollectionAccountId(saleHeader, cashAccountId, receivableAccountId);
+                if (settlementAccountId <= 0 || salesAccountId <= 0)
+                    return null;
+
+                List<JVLineModel> lines = new List<JVLineModel>();
+                string narration = saleHeader.description;
+                int? customerId = saleHeader.customer_id > 0 ? (int?)saleHeader.customer_id : null;
+                int? bankId = IsBankPaymentMethod(saleHeader.payment_method_text) && saleHeader.bank_id > 0 ? (int?)saleHeader.bank_id : null;
+                int? settlementCustomerId = string.Equals(saleHeader.sale_type, "Credit", StringComparison.OrdinalIgnoreCase) ? customerId : null;
+
+                decimal amount = Convert.ToDecimal(saleHeader.total_amount);
+                decimal discount = Convert.ToDecimal(saleHeader.total_discount);
+                decimal tax = Convert.ToDecimal(saleHeader.total_tax);
+                decimal cost = Convert.ToDecimal(saleHeader.total_cost_amount);
+
+                if (amount > 0m)
+                {
+                    AddAutoLine(lines, settlementAccountId, 0m, amount, narration, settlementCustomerId, bankId);
+                    AddAutoLine(lines, salesAccountId, amount, 0m, narration, null, null);
+                }
+
+                if (cost > 0m && purchasesAccountId > 0 && inventoryAccountId > 0)
+                {
+                    AddAutoLine(lines, purchasesAccountId, 0m, cost, narration, null, null);
+                    AddAutoLine(lines, inventoryAccountId, cost, 0m, narration, null, null);
+                }
+
+                if (discount > 0m && discountAccountId > 0)
+                {
+                    AddAutoLine(lines, discountAccountId, 0m, discount, narration, null, null);
+                    AddAutoLine(lines, settlementAccountId, discount, 0m, narration, settlementCustomerId, bankId);
+                }
+
+                if (tax > 0m && taxAccountId > 0)
+                {
+                    AddAutoLine(lines, settlementAccountId, 0m, tax, narration, settlementCustomerId, bankId);
+                    AddAutoLine(lines, taxAccountId, tax, 0m, narration, null, null);
+                }
+
+                if (lines.Count == 0)
+                    return null;
+
+                return new AutoJVModel
+                {
+                    ModuleName = "SALES_RETURN",
+                    RefModule = "pos_sales",
+                    RefId = 0,
+                    VoucherDate = saleHeader.sale_date,
+                    ReferenceNo = saleHeader.invoice_no,
+                    Narration = narration,
+                    IsAutoPosted = true,
+                    Lines = lines
+                };
+            }
+        }
+    
+
+        private void AddAutoLine(List<JVLineModel> lines, int accountId, decimal debit, decimal credit, string narration, int? customerId, int? bankId)
+        {
+            if (accountId <= 0)
+                return;
+
+            if (debit <= 0m && credit <= 0m)
+                return;
+
+            lines.Add(new JVLineModel
+            {
+                AccountId = accountId,
+                Narration = narration,
+                Debit = debit,
+                Credit = credit,
+                ModuleName = "SALES",
+                CustomerId = customerId,
+                BankId = bankId
+            });
+        }
+
+        private int ResolveCollectionAccountId(SalesModalHeader saleHeader, int cashAccountId, int receivableAccountId)
+        {
+            if (string.Equals(saleHeader.sale_type, "Cash", StringComparison.OrdinalIgnoreCase))
+            {
+                if (IsBankPaymentMethod(saleHeader.payment_method_text))
+                {
+                    int bankGl;
+                    if (int.TryParse(Convert.ToString(saleHeader.bankGLAccountID), out bankGl) && bankGl > 0)
+                        return bankGl;
+                }
+
+                return cashAccountId;
+            }
+
+            return receivableAccountId;
+        }
+
+        private bool ShouldPostSalesJournal(SalesModalHeader saleHeader)
+        {
+            if (saleHeader == null)
+                return false;
+
+            return !string.Equals(saleHeader.sale_type, "Quotation", StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(saleHeader.sale_type, "Gift", StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(saleHeader.sale_type, "ICT", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private bool IsBankPaymentMethod(string paymentMethodText)
+        {
+            return !string.IsNullOrWhiteSpace(paymentMethodText)
+                && paymentMethodText.IndexOf("bank", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private bool GetBoolSetting(SqlConnection cn, SqlTransaction tx, string key, bool defaultValue)
+        {
+            using (SqlCommand settingCmd = tx == null
+                ? new SqlCommand("SELECT TOP 1 setting_value FROM pos_settings WHERE setting_key = @key", cn)
+                : new SqlCommand("SELECT TOP 1 setting_value FROM pos_settings WHERE setting_key = @key", cn, tx))
+            {
+                settingCmd.Parameters.AddWithValue("@key", key);
+                object raw = settingCmd.ExecuteScalar();
+                return ParseBoolSetting(raw, defaultValue);
+            }
+        }
+
+        private int ResolveDefaultAccountId(SqlConnection cn, SqlTransaction tx, string settingKey)
+        {
+            string settingValue = string.Empty;
+
+            using (SqlCommand settingCmd = tx == null
+                ? new SqlCommand("SELECT TOP 1 setting_value FROM pos_settings WHERE setting_key = @key", cn)
+                : new SqlCommand("SELECT TOP 1 setting_value FROM pos_settings WHERE setting_key = @key", cn, tx))
+            {
+                settingCmd.Parameters.AddWithValue("@key", settingKey);
+                object raw = settingCmd.ExecuteScalar();
+                settingValue = Convert.ToString(raw);
+            }
+
+            if (string.IsNullOrWhiteSpace(settingValue))
+                return 0;
+
+            using (SqlCommand accountCmd = tx == null
+                ? new SqlCommand("SELECT TOP 1 id FROM acc_accounts WHERE LTRIM(RTRIM(code)) = @code", cn)
+                : new SqlCommand("SELECT TOP 1 id FROM acc_accounts WHERE LTRIM(RTRIM(code)) = @code", cn, tx))
+            {
+                accountCmd.Parameters.AddWithValue("@code", settingValue.Trim());
+                object idObj = accountCmd.ExecuteScalar();
+                if (idObj != null && idObj != DBNull.Value)
+                {
+                    int resolvedId;
+                    if (int.TryParse(Convert.ToString(idObj), out resolvedId) && resolvedId > 0)
+                        return resolvedId;
+                }
+            }
+
+            return 0;
+        }
+
+        private bool ParseBoolSetting(object raw, bool defaultValue)
+        {
+            if (raw == null || raw == DBNull.Value)
+                return defaultValue;
+
+            string text = Convert.ToString(raw);
+            if (string.IsNullOrWhiteSpace(text))
+                return defaultValue;
+
+            text = text.Trim();
+            if (string.Equals(text, "1", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(text, "true", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(text, "yes", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (string.Equals(text, "0", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(text, "false", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(text, "no", StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            return defaultValue;
+        }
+
+        private void UpdateSalePostedFlag(string invoiceNo, bool posted)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+                return;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+                UpdateSalePostedFlag(cn, null, invoiceNo, posted);
+            }
+        }
+
+        private void UpdateSalePostedFlag(SqlConnection cn, SqlTransaction tx, string invoiceNo, bool posted)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+                return;
+
+            using (SqlCommand updateCmd = tx == null
+                ? new SqlCommand("UPDATE pos_sales SET posted = @posted WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn)
+                : new SqlCommand("UPDATE pos_sales SET posted = @posted WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, tx))
+            {
+                updateCmd.Parameters.AddWithValue("@posted", posted ? 1 : 0);
+                updateCmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
+                updateCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                updateCmd.ExecuteNonQuery();
+            }
+        }
+
         public int ict_qty_request(List<SalesModalHeader> sales, List<SalesModal> sales_detail)// for request qty from branch
         {
             int newSaleID = 0;
@@ -1441,6 +1444,7 @@ namespace POS.DLL
         public int InsertReturnSales(List<SalesModalHeader> sales, List<SalesModal> sales_detail)
         {
             Int32 newSaleID = 0;
+            bool isAutoPostSales = false;
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 SqlTransaction transaction;
@@ -1522,352 +1526,17 @@ namespace POS.DLL
                             cmd.ExecuteScalar();
                         }
 
-                        ///
-                        /// for journal entries 
-                        /// 
-                        foreach (SalesModalHeader sale_header in sales)
+                        isAutoPostSales = GetBoolSetting(cn, transaction, SettingKeys.AutoPostSales, false);
+
+                        if (!isAutoPostSales)
                         {
-
-                            if (sale_header.sale_type == "Cash")
+                            foreach (SalesModalHeader sale_header in sales)
                             {
-                                ///CASH JOURNAL ENTRY (cr)
-                                //Insert_Journal_entry(invoice_no, cash_account_id, net_total, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", (sale_header.total_amount));
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                cmd.ExecuteScalar();
-                                ////
+                                UpdateSalePostedFlag(cn, transaction, sale_header.invoice_no, false);
                             }
-                            else if (sale_header.sale_type == "Credit")//saletype is credit
-                            {
-                                ///ACCOUNT RECEIVABLE JOURNAL ENTRY (cr)
-                                //Int32 entry_id = Insert_Journal_entry(invoice_no, receivable_account_id, net_total, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.receivable_account_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", (sale_header.total_amount));
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                                ////
-
-                                if (sale_header.customer_id != 0)
-                                {
-                                    ///ADD ENTRY INTO CUSTOMER PAYMENT(cr)
-                                    //Insert_Journal_entry(invoice_no, sales_account_id, net_total, 0, sale_date, txt_description.Text, customer_id, 0, entry_id);
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.sales_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", (sale_header.total_amount+sale_header.total_tax-sale_header.total_discount));
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", sale_header.customer_id);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", entry_id);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    cmd.ExecuteScalar();
-                                    ////
-                                }
-
-                            }
-                            ///SALES JOURNAL ENTRY (dr)
-                            //Insert_Journal_entry(invoice_no, sales_account_id, 0, net_total, sale_date, txt_description.Text, 0, 0, 0);
-
-                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                            cmd.Parameters.AddWithValue("@account_id", sale_header.sales_account_id);
-                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                            cmd.Parameters.AddWithValue("@debit", (sale_header.total_amount));
-                            cmd.Parameters.AddWithValue("@credit", 0);
-                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                            cmd.ExecuteScalar();
-                            ////
-
-                            /// PURCHASES / COST OF SALE JOURNAL ENTRY (cr)
-                            //Insert_Journal_entry(invoice_no, purchases_acc_id, total_cost_amount, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                            cmd.Parameters.AddWithValue("@account_id", sale_header.purchases_acc_id);
-                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                            cmd.Parameters.AddWithValue("@debit", 0);
-                            cmd.Parameters.AddWithValue("@credit", sale_header.total_cost_amount);
-                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                            cmd.ExecuteScalar();
-                            ////
-
-                            ///INVENTORY JOURNAL ENTRY (dr)
-                            //Insert_Journal_entry(invoice_no, inventory_acc_id, 0, total_cost_amount, sale_date, txt_description.Text, 0, 0, 0);
-
-                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                            cmd.Parameters.AddWithValue("@account_id", sale_header.inventory_acc_id);
-                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                            cmd.Parameters.AddWithValue("@debit", sale_header.total_cost_amount);
-                            cmd.Parameters.AddWithValue("@credit", 0);
-                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                            cmd.ExecuteScalar();
-                            ////
-
-
-                            if (sale_header.total_discount > 0)
-                            {
-                                /// SALES DISCOUNT JOURNAL ENTRY (cr)
-                                //Int32 entry_id = Insert_Journal_entry(invoice_no, sales_discount_acc_id, net_total_discount, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.sales_discount_acc_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", sale_header.total_discount);
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                                ////
-                                if (sale_header.sale_type == "Cash") //for cash entry
-                                {
-                                    ///SALES JOURNAL ENTRY (CREDIT)
-                                    //Insert_Journal_entry(invoice_no, sales_account_id, 0, net_total_discount, sale_date, txt_description.Text, 0, 0, 0);
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", sale_header.total_discount);
-                                    cmd.Parameters.AddWithValue("@credit", 0);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    cmd.ExecuteScalar();
-                                    ////
-                                }
-                                else //if credit entry sale_header.sale_type == "Credit" &&
-                                {
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.receivable_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", sale_header.total_discount);
-                                    cmd.Parameters.AddWithValue("@credit", 0);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    cmd.ExecuteScalar();
-
-
-                                    ////
-
-                                    //if (sale_header.customer_id != 0)
-                                    //{
-                                    //    ///ADD ENTRY INTO CUSTOMER PAYMENT(cr)
-                                    //    //Insert_Journal_entry(invoice_no, sales_account_id, net_total_discount, 0, sale_date, txt_description.Text, customer_id, 0, entry_id);
-
-                                    //    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    //    cmd.CommandType = CommandType.StoredProcedure;
-                                    //    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    //    cmd.Parameters.AddWithValue("@account_id", sale_header.sales_discount_acc_id);
-                                    //    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    //    cmd.Parameters.AddWithValue("@debit", sale_header.total_discount);
-                                    //    cmd.Parameters.AddWithValue("@credit", 0);
-                                    //    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    //    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    //    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    //    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    //    cmd.Parameters.AddWithValue("@customer_id", sale_header.customer_id);
-                                    //    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    //    cmd.Parameters.AddWithValue("@entry_id", entry_id);
-                                    //    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    //    cmd.ExecuteScalar();
-                                    //    ////
-                                    //}
-                                }
-                            }
-
-                            if (sale_header.total_tax > 0)
-                            {
-                                if (sale_header.sale_type == "Cash")
-                                {
-                                    ///CASH JOURNAL ENTRY (cr)
-                                    //Insert_Journal_entry(invoice_no, cash_account_id, net_total_tax, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", sale_header.total_tax);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    cmd.ExecuteScalar();
-                                    ////
-                                }
-                                else if (sale_header.sale_type == "Credit")
-                                {
-                                    ///ACCOUNT RECEIVABLE JOURNAL ENTRY (DEBIT)
-                                    //Int32 entry_id = Insert_Journal_entry(invoice_no, receivable_account_id, net_total_tax, 0, sale_date, txt_description.Text, 0, 0, 0);
-
-                                    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    cmd.Parameters.AddWithValue("@account_id", sale_header.receivable_account_id);
-                                    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    cmd.Parameters.AddWithValue("@debit", 0);
-                                    cmd.Parameters.AddWithValue("@credit", sale_header.total_tax);
-                                    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@customer_id", 0);
-                                    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    cmd.Parameters.AddWithValue("@entry_id", 0);
-                                    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                                    ////
-
-                                    //if (sale_header.customer_id != 0)
-                                    //{
-                                    //    ///ADD ENTRY INTO CUSTOMER PAYMENT(cr)
-                                    //    //Insert_Journal_entry(invoice_no, tax_account_id, net_total_tax, 0, sale_date, txt_description.Text, customer_id, 0, entry_id);
-
-                                    //    cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                    //    cmd.CommandType = CommandType.StoredProcedure;
-                                    //    cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                    //    cmd.Parameters.AddWithValue("@account_id", sale_header.tax_account_id);
-                                    //    cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                    //    cmd.Parameters.AddWithValue("@debit", 0);
-                                    //    cmd.Parameters.AddWithValue("@credit", sale_header.total_tax);
-                                    //    cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                    //    cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                    //    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                    //    cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                    //    cmd.Parameters.AddWithValue("@customer_id", sale_header.customer_id);
-                                    //    cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    //    cmd.Parameters.AddWithValue("@entry_id", entry_id);
-                                    //    cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                    //    cmd.ExecuteScalar();
-                                    //    ////
-                                    //}
-
-                                }
-                                ///SALES TAX JOURNAL ENTRY (dr)
-                                //Insert_Journal_entry(invoice_no, tax_account_id, 0, net_total_tax, sale_date, txt_description.Text, 0, 0, 0);
-
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.tax_account_id);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", sale_header.total_tax);
-                                cmd.Parameters.AddWithValue("@credit", 0);
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                                cmd.ExecuteScalar();
-                                ////
-
-                            }
-
                         }
-                        ///
+
+                        // Return sales journals are posted through PostReturnSalesJournalsAndUpdatePostedFlag after commit.
 
                         transaction.Commit();
                         //insert log when trans commit
@@ -1882,6 +1551,11 @@ namespace POS.DLL
                         transaction.Rollback();
                         throw;
                     }
+                }
+
+                if (isAutoPostSales)
+                {
+                    PostReturnSalesJournalsAndUpdatePostedFlag(sales);
                 }
 
                 return (int)newSaleID;

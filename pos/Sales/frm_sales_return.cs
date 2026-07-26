@@ -491,6 +491,9 @@ namespace pos
                         employee_id = (sales_dr["employee_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["employee_id"].ToString()));
                         int customer_id = (sales_dr["customer_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["customer_id"].ToString()));
                         string sale_type = sales_dr["sale_type"].ToString();
+                        int payment_terms_id = (sales_dr["payment_terms_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["payment_terms_id"].ToString()));
+                        int payment_method_id = (sales_dr["payment_method_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["payment_method_id"].ToString()));
+
                         /////Added sales header into the List
                         sales_model_header.Add(new SalesModalHeader
                         {
@@ -506,8 +509,9 @@ namespace pos
                             sale_date = sale_date,
                             sale_time = sale_date,
                             description = description,
-                            //payment_terms_id = payment_terms_id,
-                            //payment_method_id = payment_method_id,
+                            payment_terms_id = payment_terms_id,
+                            payment_method_id = payment_method_id,
+                            payment_method_text = GetPaymentMethodTextByID(payment_method_id, out string payment_method_text),
                             account = "Return",
                             //is_return = false,
                             old_invoice_no = prev_invoice_no,
@@ -668,6 +672,18 @@ namespace pos
             }
         }
 
+        // Get payment method name / text by ID
+        private string GetPaymentMethodTextByID(int payment_method_id, out string payment_method_text)
+        {
+            payment_method_text = string.Empty;
+            PaymentMethodBLL paymentMethodBLL = new PaymentMethodBLL();
+            DataTable dt = paymentMethodBLL.SearchRecordByPaymentMethodID(payment_method_id);
+            if (dt.Rows.Count > 0)
+            {
+                payment_method_text = dt.Rows[0]["description"].ToString();
+            }
+            return payment_method_text;
+        }
         private int Insert_emp_commission(string invoice_no, int account_id, double debit, double credit, DateTime date,
             string description, int employee_id = 0)
         {

@@ -346,6 +346,30 @@
   <data name="invoice_subtype_code.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <metadata name="payment_method_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="payment_method_id.HeaderText" xml:space="preserve">
+    <value>Payment Method</value>
+  </data>
+  <data name="payment_method_id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="payment_method_id.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="payment_terms_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="payment_terms_id.HeaderText" xml:space="preserve">
+    <value>Payment Terms</value>
+  </data>
+  <data name="payment_terms_id.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="payment_terms_id.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="grid_sales_return.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -874,6 +898,18 @@
     <value>invoice_subtype_code</value>
   </data>
   <data name="&gt;&gt;invoice_subtype_code.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;payment_method_id.Name" xml:space="preserve">
+    <value>payment_method_id</value>
+  </data>
+  <data name="&gt;&gt;payment_method_id.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;payment_terms_id.Name" xml:space="preserve">
+    <value>payment_terms_id</value>
+  </data>
+  <data name="&gt;&gt;payment_terms_id.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

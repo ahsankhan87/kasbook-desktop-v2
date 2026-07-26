@@ -55,7 +55,7 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("SELECT id,name,FROM pos_PaymentMethod WHERE id = @id", cn);
+                        cmd = new SqlCommand("SELECT * FROM pos_payment_method WHERE id = @id", cn);
                         cmd.Parameters.AddWithValue("@id", PaymentMethod_id);
                         
                         da = new SqlDataAdapter(cmd);

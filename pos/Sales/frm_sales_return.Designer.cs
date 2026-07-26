@@ -37,6 +37,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grid_sales_return = new System.Windows.Forms.DataGridView();
+            this.txt_close = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_taxes_title = new System.Windows.Forms.Label();
+            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
+            this.cmbReturnReason = new System.Windows.Forms.ComboBox();
+            this.btn_return = new System.Windows.Forms.Button();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.txt_invoice_no = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,16 +69,8 @@
             this.packet_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_subtype_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_close = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_taxes_title = new System.Windows.Forms.Label();
-            this.chk_sendInvoiceToZatca = new System.Windows.Forms.CheckBox();
-            this.cmbReturnReason = new System.Windows.Forms.ComboBox();
-            this.btn_return = new System.Windows.Forms.Button();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.txt_invoice_no = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.payment_method_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.payment_terms_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_return)).BeginInit();
             this.panel2.SuspendLayout();
@@ -110,12 +112,87 @@
             this.item_id,
             this.packet_qty,
             this.item_number,
-            this.invoice_subtype_code});
+            this.invoice_subtype_code,
+            this.payment_method_id,
+            this.payment_terms_id});
             resources.ApplyResources(this.grid_sales_return, "grid_sales_return");
             this.grid_sales_return.Name = "grid_sales_return";
             this.grid_sales_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grid_sales_return.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.grid_sales_return_CellValidating);
             this.grid_sales_return.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_sales_return_EditingControlShowing);
+            // 
+            // txt_close
+            // 
+            resources.ApplyResources(this.txt_close, "txt_close");
+            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.txt_close.Name = "txt_close";
+            this.txt_close.UseVisualStyleBackColor = true;
+            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel2.Controls.Add(this.lbl_taxes_title);
+            this.panel2.Controls.Add(this.chk_sendInvoiceToZatca);
+            this.panel2.Controls.Add(this.cmbReturnReason);
+            this.panel2.Controls.Add(this.txt_close);
+            this.panel2.Controls.Add(this.btn_return);
+            this.panel2.Controls.Add(this.btn_search);
+            this.panel2.Controls.Add(this.txt_invoice_no);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label1);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_taxes_title
+            // 
+            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
+            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
+            this.lbl_taxes_title.Name = "lbl_taxes_title";
+            // 
+            // chk_sendInvoiceToZatca
+            // 
+            this.chk_sendInvoiceToZatca.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
+            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
+            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
+            // 
+            // cmbReturnReason
+            // 
+            this.cmbReturnReason.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
+            this.cmbReturnReason.Name = "cmbReturnReason";
+            // 
+            // btn_return
+            // 
+            resources.ApplyResources(this.btn_return, "btn_return");
+            this.btn_return.Name = "btn_return";
+            this.btn_return.UseVisualStyleBackColor = true;
+            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
+            // 
+            // btn_search
+            // 
+            resources.ApplyResources(this.btn_search, "btn_search");
+            this.btn_search.Name = "btn_search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // txt_invoice_no
+            // 
+            resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
+            this.txt_invoice_no.Name = "txt_invoice_no";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Name = "label1";
             // 
             // id
             // 
@@ -296,78 +373,17 @@
             resources.ApplyResources(this.invoice_subtype_code, "invoice_subtype_code");
             this.invoice_subtype_code.Name = "invoice_subtype_code";
             // 
-            // txt_close
+            // payment_method_id
             // 
-            resources.ApplyResources(this.txt_close, "txt_close");
-            this.txt_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.txt_close.Name = "txt_close";
-            this.txt_close.UseVisualStyleBackColor = true;
-            this.txt_close.Click += new System.EventHandler(this.txt_close_Click);
+            this.payment_method_id.DataPropertyName = "payment_method_id";
+            resources.ApplyResources(this.payment_method_id, "payment_method_id");
+            this.payment_method_id.Name = "payment_method_id";
             // 
-            // panel2
+            // payment_terms_id
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panel2.Controls.Add(this.lbl_taxes_title);
-            this.panel2.Controls.Add(this.chk_sendInvoiceToZatca);
-            this.panel2.Controls.Add(this.cmbReturnReason);
-            this.panel2.Controls.Add(this.txt_close);
-            this.panel2.Controls.Add(this.btn_return);
-            this.panel2.Controls.Add(this.btn_search);
-            this.panel2.Controls.Add(this.txt_invoice_no);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_taxes_title
-            // 
-            resources.ApplyResources(this.lbl_taxes_title, "lbl_taxes_title");
-            this.lbl_taxes_title.ForeColor = System.Drawing.Color.White;
-            this.lbl_taxes_title.Name = "lbl_taxes_title";
-            // 
-            // chk_sendInvoiceToZatca
-            // 
-            this.chk_sendInvoiceToZatca.ForeColor = System.Drawing.Color.White;
-            resources.ApplyResources(this.chk_sendInvoiceToZatca, "chk_sendInvoiceToZatca");
-            this.chk_sendInvoiceToZatca.Name = "chk_sendInvoiceToZatca";
-            this.chk_sendInvoiceToZatca.UseVisualStyleBackColor = true;
-            // 
-            // cmbReturnReason
-            // 
-            this.cmbReturnReason.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbReturnReason, "cmbReturnReason");
-            this.cmbReturnReason.Name = "cmbReturnReason";
-            // 
-            // btn_return
-            // 
-            resources.ApplyResources(this.btn_return, "btn_return");
-            this.btn_return.Name = "btn_return";
-            this.btn_return.UseVisualStyleBackColor = true;
-            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
-            // 
-            // btn_search
-            // 
-            resources.ApplyResources(this.btn_search, "btn_search");
-            this.btn_search.Name = "btn_search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
-            // txt_invoice_no
-            // 
-            resources.ApplyResources(this.txt_invoice_no, "txt_invoice_no");
-            this.txt_invoice_no.Name = "txt_invoice_no";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Name = "label1";
+            this.payment_terms_id.DataPropertyName = "payment_terms_id";
+            resources.ApplyResources(this.payment_terms_id, "payment_terms_id");
+            this.payment_terms_id.Name = "payment_terms_id";
             // 
             // frm_sales_return
             // 
@@ -401,6 +417,8 @@
         private System.Windows.Forms.Button btn_return;
         private System.Windows.Forms.ComboBox cmbReturnReason;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chk_sendInvoiceToZatca;
+        private System.Windows.Forms.Label lbl_taxes_title;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
@@ -423,8 +441,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn packet_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_subtype_code;
-        private System.Windows.Forms.CheckBox chk_sendInvoiceToZatca;
-        private System.Windows.Forms.Label lbl_taxes_title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn payment_method_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn payment_terms_id;
     }
 }
 

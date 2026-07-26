@@ -1780,6 +1780,13 @@ WHERE id = @voucher_id
                         result.VoucherId = voucherId;
                         result.EntryIds = insertedEntryIds;
                         tx.Commit();
+
+                        if (result.Success)
+                        {
+                            string ledgerInvoiceNo = string.IsNullOrWhiteSpace(model.ReferenceNo) ? voucherNo : model.ReferenceNo;
+                            PostPartyLedgerRows(cn, ledgerInvoiceNo, model.VoucherDate, model.Lines, userId, insertedEntryIds);
+                        }
+
                         return result;
                     }
                     catch (Exception ex)
@@ -2074,9 +2081,9 @@ WHERE id = @voucher_id
                     string.IsNullOrWhiteSpace(line.Narration) ? model.Narration : line.Narration,
                     model.RefId,
                     string.IsNullOrWhiteSpace(model.ReferenceNo) ? DBNull.Value : (object)model.ReferenceNo,
-                    DBNull.Value,
-                    DBNull.Value,
-                    DBNull.Value);
+                    line.CustomerId.HasValue && line.CustomerId.Value > 0 ? (object)line.CustomerId.Value : DBNull.Value,
+                    line.SupplierId.HasValue && line.SupplierId.Value > 0 ? (object)line.SupplierId.Value : DBNull.Value,
+                    line.BankId.HasValue && line.BankId.Value > 0 ? (object)line.BankId.Value : DBNull.Value);
             }
 
             return dt;
