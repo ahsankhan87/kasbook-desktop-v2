@@ -46,15 +46,6 @@
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelGridHost = new System.Windows.Forms.Panel();
             this.grid_journal = new System.Windows.Forms.DataGridView();
-            this.colRowNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.account = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colAccountType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.party = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.cost_center = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.debit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.credit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelBalance = new System.Windows.Forms.Panel();
             this.lbl_line_count_title = new System.Windows.Forms.Label();
             this.lbl_line_count = new System.Windows.Forms.Label();
@@ -78,6 +69,15 @@
             this.lblVoucherDate = new System.Windows.Forms.Label();
             this.txt_invoice_no = new System.Windows.Forms.TextBox();
             this.lblVoucherNo = new System.Windows.Forms.Label();
+            this.colRowNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.account = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colAccountType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.party = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.branch = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.debit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.credit_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelMain.SuspendLayout();
             this.panelFooter.SuspendLayout();
             this.flowFooterButtons.SuspendLayout();
@@ -203,7 +203,7 @@
             this.colAccountType,
             this.description,
             this.party,
-            this.cost_center,
+            this.branch,
             this.debit_amount,
             this.credit_amount,
             this.colRemove});
@@ -234,93 +234,6 @@
             this.grid_journal.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.grid_journal_RowsRemoved);
             this.grid_journal.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.grid_journal_UserDeletingRow);
             this.grid_journal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_journal_KeyDown);
-            // 
-            // colRowNo
-            // 
-            this.colRowNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colRowNo.FillWeight = 30F;
-            resources.ApplyResources(this.colRowNo, "colRowNo");
-            this.colRowNo.Name = "colRowNo";
-            this.colRowNo.ReadOnly = true;
-            this.colRowNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colRowNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // account
-            // 
-            this.account.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.account.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.account.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            resources.ApplyResources(this.account, "account");
-            this.account.Name = "account";
-            this.account.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // colAccountType
-            // 
-            this.colAccountType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.colAccountType, "colAccountType");
-            this.colAccountType.Name = "colAccountType";
-            this.colAccountType.ReadOnly = true;
-            this.colAccountType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colAccountType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.description, "description");
-            this.description.Name = "description";
-            this.description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // party
-            // 
-            this.party.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.party.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.party.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            resources.ApplyResources(this.party, "party");
-            this.party.Name = "party";
-            this.party.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // cost_center
-            // 
-            this.cost_center.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.cost_center.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.cost_center.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            resources.ApplyResources(this.cost_center, "cost_center");
-            this.cost_center.Name = "cost_center";
-            this.cost_center.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // debit_amount
-            // 
-            this.debit_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            this.debit_amount.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.debit_amount, "debit_amount");
-            this.debit_amount.Name = "debit_amount";
-            this.debit_amount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.debit_amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // credit_amount
-            // 
-            this.credit_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.credit_amount.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.credit_amount, "credit_amount");
-            this.credit_amount.Name = "credit_amount";
-            this.credit_amount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.credit_amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colRemove
-            // 
-            this.colRemove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            this.colRemove.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            resources.ApplyResources(this.colRemove, "colRemove");
-            this.colRemove.Name = "colRemove";
-            this.colRemove.Text = "Remove";
-            this.colRemove.UseColumnTextForButtonValue = true;
             // 
             // panelBalance
             // 
@@ -482,6 +395,93 @@
             resources.ApplyResources(this.lblVoucherNo, "lblVoucherNo");
             this.lblVoucherNo.Name = "lblVoucherNo";
             // 
+            // colRowNo
+            // 
+            this.colRowNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colRowNo.FillWeight = 30F;
+            resources.ApplyResources(this.colRowNo, "colRowNo");
+            this.colRowNo.Name = "colRowNo";
+            this.colRowNo.ReadOnly = true;
+            this.colRowNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colRowNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // account
+            // 
+            this.account.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.account.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.account.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.account, "account");
+            this.account.Name = "account";
+            this.account.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // colAccountType
+            // 
+            this.colAccountType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.colAccountType, "colAccountType");
+            this.colAccountType.Name = "colAccountType";
+            this.colAccountType.ReadOnly = true;
+            this.colAccountType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colAccountType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.description, "description");
+            this.description.Name = "description";
+            this.description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // party
+            // 
+            this.party.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.party.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.party.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.party, "party");
+            this.party.Name = "party";
+            this.party.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // branch
+            // 
+            this.branch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.branch.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.branch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.branch, "branch");
+            this.branch.Name = "branch";
+            this.branch.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // debit_amount
+            // 
+            this.debit_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.debit_amount.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.debit_amount, "debit_amount");
+            this.debit_amount.Name = "debit_amount";
+            this.debit_amount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.debit_amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // credit_amount
+            // 
+            this.credit_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.credit_amount.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.credit_amount, "credit_amount");
+            this.credit_amount.Name = "credit_amount";
+            this.credit_amount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.credit_amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colRemove
+            // 
+            this.colRemove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            this.colRemove.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.colRemove, "colRemove");
+            this.colRemove.Name = "colRemove";
+            this.colRemove.Text = "Remove";
+            this.colRemove.UseColumnTextForButtonValue = true;
+            // 
             // frm_journal_entries
             // 
             resources.ApplyResources(this, "$this");
@@ -551,7 +551,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAccountType;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewComboBoxColumn party;
-        private System.Windows.Forms.DataGridViewComboBoxColumn cost_center;
+        private System.Windows.Forms.DataGridViewComboBoxColumn branch;
         private System.Windows.Forms.DataGridViewTextBoxColumn debit_amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn credit_amount;
         private System.Windows.Forms.DataGridViewButtonColumn colRemove;

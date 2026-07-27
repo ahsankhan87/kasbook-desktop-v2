@@ -15,7 +15,7 @@ namespace pos.Accounting.CostCenter
     public partial class frm_cost_center_setup : Form
     {
         private CostCenterBLL bll = new CostCenterBLL();
-        private int currentCcId = 0;
+        private int currentBranchId = 0;
         private bool isNewRecord = true;
         private bool isLoadingGrid = false;
         private readonly int initialCcId;
@@ -25,9 +25,9 @@ namespace pos.Accounting.CostCenter
         {
         }
 
-        public frm_cost_center_setup(int ccId, int? parentCcId = null)
+        public frm_cost_center_setup(int branchId, int? parentCcId = null)
         {
-            initialCcId = ccId;
+            initialCcId = branchId;
             initialParentCcId = parentCcId;
             InitializeComponent();
             InitializeUI();
@@ -41,8 +41,8 @@ namespace pos.Accounting.CostCenter
             // Setup form controls
             SetupTypeDropdown();
             SetupManagerDropdown();
-            LoadParentCostCenterDropdown();
-            LoadCostCenterList();
+            LoadParentBranchDropdown();
+            LoadBranchList();
 
             // Event handlers
             btnNew.Click += BtnNew_Click;
@@ -62,7 +62,7 @@ namespace pos.Accounting.CostCenter
             if (initialCcId > 0)
             {
                 EnableEditControls(false);
-                LoadCostCenter(initialCcId);
+                LoadBranch(initialCcId);
             }
             else
             {
@@ -105,19 +105,19 @@ namespace pos.Accounting.CostCenter
             }
         }
 
-        private void LoadCostCenterList()
+        private void LoadBranchList()
         {
             try
             {
                 isLoadingGrid = true;
-                DataTable dt = bll.GetCostCenterTree(includeBalances: false);
+                DataTable dt = bll.GetBranchTree(includeBalances: false);
                 dgvCostCenters.DataSource = dt;
                 dgvCostCenters.AutoResizeColumns();
                 dgvCostCenters.ClearSelection();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading cost centers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading branches: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -129,7 +129,7 @@ namespace pos.Accounting.CostCenter
         {
             ClearForm();
             isNewRecord = true;
-            currentCcId = 0;
+            currentBranchId = 0;
             EnableEditControls(true);
             txtCode.Focus();
         }
@@ -141,15 +141,15 @@ namespace pos.Accounting.CostCenter
 
             try
             {
-                using (BusyScope.Show(this, "Saving cost center..."))
+                using (BusyScope.Show(this, "Saving branch..."))
                 {
                     var model = new CostCenterModel
                     {
-                        CcId = currentCcId,
-                        CcCode = txtCode.Text.Trim(),
-                        CcName = txtName.Text.Trim(),
-                        CcType = cmbType.SelectedItem?.ToString(),
-                        ParentCcId = GetNullableSelectedId(cmbParent),
+                        BranchId = currentBranchId,
+                        BranchCode = txtCode.Text.Trim(),
+                        BranchName = txtName.Text.Trim(),
+                        BranchType = cmbType.SelectedItem?.ToString(),
+                        ParentBranchId = GetNullableSelectedId(cmbParent),
                         ManagerId = GetNullableSelectedId(cmbManager),
                         MonthlyBudget = string.IsNullOrWhiteSpace(txtBudget.Text) ? null : (decimal?)decimal.Parse(txtBudget.Text),
                         StartDate = dtpStartDate.Value.Date,
@@ -158,10 +158,10 @@ namespace pos.Accounting.CostCenter
                         Description = txtDescription.Text.Trim()
                     };
 
-                    currentCcId = bll.SaveCostCenter(model, UsersModal.logged_in_userid);
-                    MessageBox.Show($"Cost center saved successfully. ID: {currentCcId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    currentBranchId = bll.SaveBranch(model, UsersModal.logged_in_userid);
+                    MessageBox.Show($"Branch saved successfully. ID: {currentBranchId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadCostCenterList();
+                    LoadBranchList();
                     ClearForm();
                     EnableEditControls(false);
                     isNewRecord = true;
@@ -173,7 +173,7 @@ namespace pos.Accounting.CostCenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving cost center: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error saving branch: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -186,27 +186,27 @@ namespace pos.Accounting.CostCenter
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (currentCcId <= 0)
+            if (currentBranchId <= 0)
             {
-                MessageBox.Show("Please select a cost center to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please select a branch to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to deactivate this cost center?", "Confirm Deactivate", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to deactivate this branch?", "Confirm Deactivate", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result != DialogResult.Yes)
                 return;
 
             try
             {
-                using (BusyScope.Show(this, "Deactivating cost center..."))
+                using (BusyScope.Show(this, "Deactivating branch..."))
                 {
-                    var model = bll.GetCostCenterById(currentCcId);
+                    var model = bll.GetBranchById(currentBranchId);
                     if (model != null)
                     {
                         model.IsActive = false;
-                        bll.SaveCostCenter(model, UsersModal.logged_in_userid);
-                        MessageBox.Show("Cost center deactivated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadCostCenterList();
+                        bll.SaveBranch(model, UsersModal.logged_in_userid);
+                        MessageBox.Show("Branch deactivated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadBranchList();
                         ClearForm();
                         EnableEditControls(false);
                     }
@@ -214,7 +214,7 @@ namespace pos.Accounting.CostCenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deactivating cost center: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error deactivating branch: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -222,7 +222,7 @@ namespace pos.Accounting.CostCenter
         {
             if (!isLoadingGrid && e.RowIndex >= 0 && TryGetSelectedCostCenterId(e.RowIndex, out int ccId))
             {
-                LoadCostCenter(ccId);
+                LoadBranch(ccId);
             }
         }
 
@@ -230,7 +230,7 @@ namespace pos.Accounting.CostCenter
         {
             if (!isLoadingGrid && e.RowIndex >= 0 && TryGetSelectedCostCenterId(e.RowIndex, out int ccId))
             {
-                LoadCostCenter(ccId);
+                LoadBranch(ccId);
             }
         }
 
@@ -238,18 +238,18 @@ namespace pos.Accounting.CostCenter
         {
             if (TryGetSelectedCostCenterId(out int ccId))
             {
-                LoadCostCenter(ccId);
+                LoadBranch(ccId);
                 return;
             }
 
-            MessageBox.Show("Please select a cost center to edit.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Please select a branch to edit.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void DgvCostCenters_SelectionChanged(object sender, EventArgs e)
         {
-            if (!isLoadingGrid && TryGetSelectedCostCenterId(out int ccId) && ccId != currentCcId)
+            if (!isLoadingGrid && TryGetSelectedCostCenterId(out int ccId) && ccId != currentBranchId)
             {
-                LoadCostCenter(ccId);
+                LoadBranch(ccId);
             }
         }
 
@@ -308,18 +308,18 @@ namespace pos.Accounting.CostCenter
             return false;
         }
 
-        private void LoadCostCenter(int ccId)
+        private void LoadBranch(int branchId)
         {
             try
             {
-                var model = bll.GetCostCenterById(ccId);
+                var model = bll.GetBranchById(branchId);
                 if (model != null)
                 {
-                    currentCcId = model.CcId;
-                    txtCode.Text = model.CcCode;
-                    txtName.Text = model.CcName;
-                    cmbType.SelectedItem = model.CcType ?? "Department";
-                    cmbParent.SelectedValue = model.ParentCcId ?? -1;
+                    currentBranchId = model.BranchId;
+                    txtCode.Text = model.BranchCode;
+                    txtName.Text = model.BranchName;
+                    cmbType.SelectedItem = model.BranchType ?? "Department";
+                    cmbParent.SelectedValue = model.ParentBranchId ?? -1;
                     cmbManager.SelectedValue = model.ManagerId ?? -1;
                     txtBudget.Text = model.MonthlyBudget?.ToString("N2") ?? "";
                     dtpStartDate.Value = model.StartDate < dtpStartDate.MinDate || model.StartDate > dtpStartDate.MaxDate
@@ -344,15 +344,15 @@ namespace pos.Accounting.CostCenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading cost center: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading branch: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void LoadParentCostCenterDropdown()
+        private void LoadParentBranchDropdown()
         {
             try
             {
-                DataTable dt = bll.GetCostCenterDropdown();
+                DataTable dt = bll.GetBranchDropdown();
                 // Add an empty row for "None"
                 DataRow emptyRow = dt.NewRow();
                 emptyRow["id"] = -1;
@@ -366,7 +366,7 @@ namespace pos.Accounting.CostCenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading parent cost centers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading parent branches: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -389,14 +389,14 @@ namespace pos.Accounting.CostCenter
         {
             if (string.IsNullOrWhiteSpace(txtCode.Text))
             {
-                MessageBox.Show("Cost Center Code is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Branch Code is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCode.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
-                MessageBox.Show("Cost Center Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Branch Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtName.Focus();
                 return false;
             }
@@ -430,7 +430,7 @@ namespace pos.Accounting.CostCenter
             dtpStartDate.Value = DateTime.Today;
             chkHasEndDate.Checked = false;
             chkActive.Checked = true;
-            currentCcId = 0;
+            currentBranchId = 0;
         }
 
         private void EnableEditControls(bool enabled)

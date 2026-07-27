@@ -107,7 +107,7 @@ namespace POS.Core
         public int? CompanyId { get; set; }
 
         public int? PeriodId { get; set; }
-        public int CostCenterID { get; set; }
+        
 
     }
 
@@ -131,7 +131,7 @@ namespace POS.Core
 
         public decimal Credit { get; set; }
 
-        public int CostCenterID { get; set; }
+        public int BranchId { get; set; }
 
         public string ModuleName { get; set; }
 
@@ -159,7 +159,7 @@ namespace POS.Core
         public string Narration { get; set; }
 
         public bool IsAutoPosted { get; set; }
-        public int CostCenterID { get; set; }
+        public int BranchId { get; set; }
 
         public List<JVLineModel> Lines { get; set; } = new List<JVLineModel>();
     }

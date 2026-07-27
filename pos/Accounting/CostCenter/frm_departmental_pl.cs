@@ -47,7 +47,7 @@ namespace pos.Accounting.CostCenter
         {
             try
             {
-                DataTable dt = bll.GetCostCenterDropdown();
+                DataTable dt = bll.GetBranchDropdown();
                 chkListCostCenters.Items.Clear();
 
                 foreach (DataRow row in dt.Rows)

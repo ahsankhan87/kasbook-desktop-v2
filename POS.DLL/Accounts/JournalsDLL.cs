@@ -1222,8 +1222,7 @@ WHERE id = @voucher_id
             dt.Columns.Add("branch_id", typeof(int));
             dt.Columns.Add("period_id", typeof(int));
             dt.Columns.Add("date_created", typeof(DateTime));
-            dt.Columns.Add("cost_center_id", typeof(int));
-
+            
             int effectiveUserId = createdBy > 0 ? createdBy : UsersModal.logged_in_userid;
 
             for (int i = 0; i < lines.Count; i++)
@@ -1237,21 +1236,20 @@ WHERE id = @voucher_id
                     line.Credit,
                     (object)NormalizeText(line.Narration) ?? DBNull.Value,
                     effectiveUserId,
-                    UsersModal.logged_in_branch_id,
+                    line.BranchId > 0 ? (object)line.BranchId : UsersModal.logged_in_branch_id,
                     line.PeriodId.HasValue && line.PeriodId.Value > 0
                         ? (object)line.PeriodId.Value
                         : (periodId.HasValue && periodId.Value > 0 ? (object)periodId.Value : DBNull.Value),
-                    DateTime.Now,
-                    line.CostCenterID > 0 ? (object)line.CostCenterID : DBNull.Value);
+                    DateTime.Now);
             }
 
             return dt;
         }
 
-        private static int? ResolveCostCenterId(string costCenter)
+        private static int? ResolveBranchId(string branch)
         {
             int id;
-            if (int.TryParse(costCenter, out id) && id > 0)
+            if (int.TryParse(branch, out id) && id > 0)
             {
                 return id;
             }
@@ -1540,7 +1538,7 @@ WHERE id = @voucher_id
                         Narration = string.IsNullOrWhiteSpace(reason) ? "Reversal of " + source.Header.VoucherNo : reason,
                         Debit = line.Credit,
                         Credit = line.Debit,
-                        CostCenterID = line.CostCenterID,
+                        BranchId = line.BranchId,
                         ModuleName = "REVERSAL",
                         RefId = voucherId
                     });
@@ -2042,7 +2040,7 @@ WHERE id = @voucher_id
                                 new XElement("Debit", line.Debit.ToString(CultureInfo.InvariantCulture)),
                                 new XElement("Credit", line.Credit.ToString(CultureInfo.InvariantCulture)),
                                 new XElement("Narration", line.Narration ?? string.Empty),
-                                new XElement("CostCenterID", line.CostCenterID > 0 ? line.CostCenterID.ToString(CultureInfo.InvariantCulture) : string.Empty),
+                                new XElement("BranchId", line.BranchId > 0 ? line.BranchId.ToString(CultureInfo.InvariantCulture) : string.Empty),
                                 new XElement("ModuleName", line.ModuleName ?? string.Empty),
                                 new XElement("RefId", line.RefId.HasValue ? line.RefId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
                                 new XElement("PeriodId", line.PeriodId.HasValue ? line.PeriodId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty)
@@ -2068,7 +2066,7 @@ WHERE id = @voucher_id
             dt.Columns.Add("customer_id", typeof(int));
             dt.Columns.Add("supplier_id", typeof(int));
             dt.Columns.Add("bank_id", typeof(int));
-            dt.Columns.Add("cost_center_id", typeof(int));
+            dt.Columns.Add("branch_id", typeof(int));
 
             for (int i = 0; i < model.Lines.Count; i++)
             {
@@ -2244,7 +2242,7 @@ WHERE branch_id = @branch_id
                 line.Narration = row.Table.Columns.Contains("Description") ? Convert.ToString(row["Description"]) : string.Empty;
                 line.Debit = row.Table.Columns.Contains("Debit") && row["Debit"] != DBNull.Value ? Convert.ToDecimal(row["Debit"]) : 0m;
                 line.Credit = row.Table.Columns.Contains("Credit") && row["Credit"] != DBNull.Value ? Convert.ToDecimal(row["Credit"]) : 0m;
-                line.CostCenterID = row.Table.Columns.Contains("cost_center_id") && row["cost_center_id"] != DBNull.Value ? Convert.ToInt32(row["cost_center_id"]) : 0;
+                line.BranchId = row.Table.Columns.Contains("branch_id") && row["branch_id"] != DBNull.Value ? Convert.ToInt32(row["branch_id"]) : 0;
                 line.ModuleName = row.Table.Columns.Contains("ref_module") ? Convert.ToString(row["ref_module"]) : string.Empty;
                 line.RefId = row.Table.Columns.Contains("ref_id") && row["ref_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["ref_id"]) : null;
                 line.CustomerId = row.Table.Columns.Contains("customer_id") && row["customer_id"] != DBNull.Value ? (int?)Convert.ToInt32(row["customer_id"]) : null;

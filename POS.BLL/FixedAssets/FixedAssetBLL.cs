@@ -185,7 +185,7 @@ namespace POS.BLL.FixedAssets
             asset.CategoryId = GetInt(row, "category_id", GetInt(row, "cat_id"));
             asset.CategoryName = GetString(row, "category_name", GetString(row, "cat_name"));
             asset.LocationId = GetInt(row, "location_id");
-            asset.CostCenterId = GetInt(row, "cost_center_id");
+            asset.BranchId   = GetInt(row, "branch_id");
             asset.PurchaseDate = GetDateTime(row, "purchase_date");
             asset.PurchaseInvoiceNo = GetString(row, "purchase_invoice_no");
             asset.SerialNumber = GetString(row, "serial_number");

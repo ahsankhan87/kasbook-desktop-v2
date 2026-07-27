@@ -387,7 +387,7 @@ namespace POS.BLL.FixedAssets
                 VoucherDate = periodDate,
                 ReferenceNo = asset.AssetCode,
                 Narration = narration,
-                CostCenterID = asset.CostCenterId,
+                BranchId = asset.BranchId,
                 IsAutoPosted = true
             };
 
@@ -398,7 +398,7 @@ namespace POS.BLL.FixedAssets
                 Debit = depAmount,
                 Credit = 0m,
                 Narration = narration,
-                CostCenterID = asset.CostCenterId,
+                BranchId = asset.BranchId,
                 ModuleName = "FixedAssets",
                 RefId = asset.AssetId
             });
@@ -410,7 +410,7 @@ namespace POS.BLL.FixedAssets
                 Debit = 0m,
                 Credit = depAmount,
                 Narration = narration,
-                CostCenterID = asset.CostCenterId,
+                BranchId = asset.BranchId,
                 ModuleName = "FixedAssets",
                 RefId = asset.AssetId
             });

@@ -1841,6 +1841,9 @@
     <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_setup.resx">
       <DependentUpon>frm_cost_center_setup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_tree.resx">
+      <DependentUpon>frm_cost_center_tree.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Accounts\frm_accounts.ar-SA.resx">
       <DependentUpon>frm_accounts.cs</DependentUpon>
     </EmbeddedResource>

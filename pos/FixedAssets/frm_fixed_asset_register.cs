@@ -48,7 +48,7 @@ namespace pos.FixedAssets
 
                 LoadCategories();
                 LoadLocations();
-                LoadCostCenters();
+                LoadBranches();
                 LoadSuppliers();
                 LoadDepreciationAccounts();
                 LoadAssets();
@@ -201,19 +201,19 @@ namespace pos.FixedAssets
             }
         }
 
-        private void LoadCostCenters()
+        private void LoadBranches()
         {
             try
             {
                 CostCenterBLL costCenterBll = new CostCenterBLL();
-                DataTable source = costCenterBll.GetCostCenterDropdown();
+                DataTable source = costCenterBll.GetBranchDropdown();
                 DataTable display = new DataTable();
                 display.Columns.Add("id", typeof(int));
                 display.Columns.Add("display_text", typeof(string));
 
                 DataRow noneRow = display.NewRow();
                 noneRow["id"] = 0;
-                noneRow["display_text"] = "Select Cost Center";
+                noneRow["display_text"] = "Select Branch";
                 display.Rows.Add(noneRow);
 
                 if (source != null)
@@ -235,8 +235,8 @@ namespace pos.FixedAssets
             catch (Exception ex)
             {
                 UiMessages.ShowError(
-                    $"Error loading cost centers: {ex.Message}",
-                    $"خطأ في تحميل مراكز التكلفة: {ex.Message}",
+                    $"Error loading branches: {ex.Message}",
+                    $"خطأ في تحميل الفروع: {ex.Message}",
                     "Error", "خطأ");
             }
         }
@@ -524,9 +524,9 @@ namespace pos.FixedAssets
             txtInvoiceNo.Text = _currentAsset.PurchaseInvoiceNo;
             txtCost.Text = _currentAsset.Cost.ToString("N2");
             ddlAssetLocation.SelectedItem = _currentAsset.LocationName;
-            if (_currentAsset.CostCenterId > 0)
+            if (_currentAsset.BranchId > 0)
             {
-                ddlAssetCostCenter.SelectedValue = _currentAsset.CostCenterId;
+                ddlAssetCostCenter.SelectedValue = _currentAsset.BranchId;
             }
             else
             {

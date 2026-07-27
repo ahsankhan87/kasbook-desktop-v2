@@ -19,11 +19,11 @@ namespace pos
     {
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private readonly UserIdentity _currentUser = AppSecurityContext.User;
-        private readonly BindingSource _costCenterBindingSource = new BindingSource();
+        private readonly BindingSource _branchBindingSource = new BindingSource();
         private readonly ContextMenuStrip _templateMenu = new ContextMenuStrip();
 
         private DataTable _accountsTable;
-        private DataTable _costCentersTable;
+        private DataTable _branchesTable;
         private DataTable _customerPartiesTable;
         private DataTable _supplierPartiesTable;
         private DataTable _bankPartiesTable;
@@ -60,7 +60,7 @@ namespace pos
 
             ConfigureVoucherTypes();
             ConfigurePartyLookups();
-            ConfigureCostCenters();
+            ConfigureBranches();
             ConfigureTemplateMenu();
             txt_entry_date.Value = DateTime.Today;
             LoadAccountLookup();
@@ -117,9 +117,9 @@ namespace pos
                     gridRow.Cells["account"].Value = line["account_id"];
                     gridRow.Cells["description"].Value = Convert.ToString(line["Description"]);
 
-                    // Set cost_center from the loaded voucher line
-                    int costCenterId = line["cost_center_id"] != DBNull.Value ? Convert.ToInt32(line["cost_center_id"]) : 0;
-                    gridRow.Cells["cost_center"].Value = costCenterId > 0 ? (object)costCenterId : (object)DBNull.Value;
+                    // Set branch from the loaded voucher line
+                    int branchId = line["branch_id"] != DBNull.Value ? Convert.ToInt32(line["branch_id"]) : 0;
+                    gridRow.Cells["branch"].Value = branchId > 0 ? (object)branchId : (object)DBNull.Value;
 
                     gridRow.Cells["debit_amount"].Value = Convert.ToDecimal(line["Debit"]);
                     gridRow.Cells["credit_amount"].Value = Convert.ToDecimal(line["Credit"]);
@@ -439,39 +439,39 @@ namespace pos
             return JournalPartyMode.General;
         }
 
-        private void ConfigureCostCenters()
+        private void ConfigureBranches()
         {
             try
             {
-                // Load real cost centers from the database using CostCenterBLL
+                // Load real branches from the database using CostCenterBLL
                 CostCenterBLL ccBll = new CostCenterBLL();
-                _costCentersTable = ccBll.GetCostCenterDropdown();
+                _branchesTable = ccBll.GetBranchDropdown();
 
                 // Add empty row for "Unallocated" entries
-                if (_costCentersTable != null && _costCentersTable.Rows.Count >= 0)
+                if (_branchesTable != null && _branchesTable.Rows.Count >= 0)
                 {
-                    DataRow emptyRow = _costCentersTable.NewRow();
+                    DataRow emptyRow = _branchesTable.NewRow();
                     emptyRow["id"] = DBNull.Value;
                     emptyRow["display_text"] = string.Empty;
-                    emptyRow["cc_code"] = string.Empty;
-                    emptyRow["cc_name"] = string.Empty;
-                    _costCentersTable.Rows.InsertAt(emptyRow, 0);
+                    emptyRow["branch_code"] = string.Empty;
+                    emptyRow["name"] = string.Empty;
+                    _branchesTable.Rows.InsertAt(emptyRow, 0);
                 }
 
                 // Bind to BindingSource
-                _costCenterBindingSource.DataSource = _costCentersTable;
-                cost_center.DataSource = _costCenterBindingSource;
-                cost_center.DisplayMember = "display_text";
-                cost_center.ValueMember = "id";
-                cost_center.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                cost_center.FlatStyle = FlatStyle.Flat;
+                _branchBindingSource.DataSource = _branchesTable;
+                branch.DataSource = _branchBindingSource;
+                branch.DisplayMember = "display_text";
+                branch.ValueMember = "id";
+                branch.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                branch.FlatStyle = FlatStyle.Flat;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load cost centers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Failed to load branches: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Fallback: Add empty option so form doesn't crash
-                cost_center.Items.Clear();
-                cost_center.Items.Add(string.Empty);
+                branch.Items.Clear();
+                branch.Items.Add(string.Empty);
             }
         }
 
@@ -539,7 +539,7 @@ namespace pos
             row.Cells["colAccountType"].Value = string.Empty;
             row.Cells["description"].Value = string.Empty;
             row.Cells["party"].Value = 0;
-            row.Cells["cost_center"].Value = string.Empty;
+            row.Cells["branch"].Value = string.Empty;
             row.Cells["debit_amount"].Value = null;
             row.Cells["credit_amount"].Value = null;
 
@@ -666,7 +666,7 @@ namespace pos
                 UpdateAccountTypeForRow(rowIndex);
             }
             row.Cells["description"].Value = descriptionText;
-            row.Cells["cost_center"].Value = costCenterText;
+            row.Cells["branch"].Value = costCenterText;
             row.Cells["debit_amount"].Value = debitAmount == 0m ? null : (object)debitAmount;
             row.Cells["credit_amount"].Value = creditAmount == 0m ? null : (object)creditAmount;
         }
@@ -907,7 +907,7 @@ namespace pos
                     Narration = BuildLineDescription(Convert.ToString(row.Cells["description"].Value)),
                     Debit = debit,
                     Credit = credit,
-                    CostCenterID = TryGetInt(row.Cells["cost_center"].Value, out int ccId) ? ccId : 0,
+                    BranchId = TryGetInt(row.Cells["branch"].Value, out int branchId) ? branchId : 0,
                     ModuleName = string.IsNullOrWhiteSpace(refModule) ? "MANUAL" : refModule,
                     RefId = partyId > 0 ? (int?)partyId : null,
                     CustomerId = refModule == "CUSTOMER" && partyId > 0 ? (int?)partyId : null,
@@ -979,15 +979,15 @@ namespace pos
 
                     lineNumber++;
 
-                    // Get cost center ID from row
-                    object ccValue = row.Cells["cost_center"].Value;
-                    if (ccValue == null || ccValue == DBNull.Value)
+                    // Get branch ID from row
+                    object branchValue = row.Cells["branch"].Value;
+                    if (branchValue == null || branchValue == DBNull.Value)
                     {
                         continue;
                     }
 
-                    int costCenterId;
-                    if (!int.TryParse(Convert.ToString(ccValue), out costCenterId) || costCenterId <= 0)
+                    int branchId;
+                    if (!int.TryParse(Convert.ToString(branchValue), out branchId) || branchId <= 0)
                     {
                         continue;
                     }
@@ -1029,7 +1029,7 @@ namespace pos
                     }
 
                     // Check budget before posting
-                    BudgetCheckResult budgetResult = ccBll.CheckBudgetBeforePosting(costCenterId, accountId, amount, voucherDate);
+                    BudgetCheckResult budgetResult = ccBll.CheckBudgetBeforePosting(branchId, accountId, amount, voucherDate);
 
                     if (budgetResult.IsOverBudget)
                     {

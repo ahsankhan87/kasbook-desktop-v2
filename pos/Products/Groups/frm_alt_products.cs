@@ -254,14 +254,14 @@ namespace pos
 
         }
 
-        public void load_products(string product_id = "")
+        public void load_products(string productNumber = "")
         {
             ProductBLL productsBLL_obj = new ProductBLL();
             DataTable product_dt = new DataTable();
 
-            if (product_id != string.Empty)
+            if (productNumber != string.Empty)
             {
-                product_dt = productsBLL_obj.SearchRecordByProductNumber(product_id);
+                product_dt = productsBLL_obj.SearchRecordByProductNumber(productNumber);
             }
 
             if (product_dt.Rows.Count > 0)

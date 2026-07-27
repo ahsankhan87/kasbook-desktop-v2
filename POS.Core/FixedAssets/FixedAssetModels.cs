@@ -21,7 +21,7 @@ namespace POS.Core
 
         public string LocationName { get; set; }
 
-        public int CostCenterId { get; set; }
+        public int BranchId { get; set; }
 
         public DateTime PurchaseDate { get; set; }
 

@@ -9,8 +9,8 @@ using POS.DLL;
 namespace POS.BLL
 {
     /// <summary>
-    /// Business Logic Layer for Cost Center module.
-    /// Orchestrates cost center CRUD, budget management, and expense allocation workflows.
+    /// Business Logic Layer for Branch module.
+    /// Orchestrates Branch CRUD, budget management, and expense allocation workflows.
     /// </summary>
     public class CostCenterBLL
     {
@@ -23,96 +23,96 @@ namespace POS.BLL
             _budgetDll = new BudgetDLL();
         }
 
-        #region Cost Center Operations
+        #region Branch Operations
 
         /// <summary>
-        /// Saves a cost center (insert or update).
+        /// Saves a Branch (insert or update).
         /// Validates: code uniqueness, parent exists, no circular hierarchy.
         /// </summary>
-        /// <param name="model">Cost center model with all required fields.</param>
+        /// <param name="model">Branch model with all required fields.</param>
         /// <param name="userId">User ID for audit logging.</param>
-        /// <returns>Cost center ID (new or existing).</returns>
+        /// <returns>Branch ID (new or existing).</returns>
         /// <exception cref="ArgumentNullException">If model is null.</exception>
         /// <exception cref="ArgumentException">If required fields are missing or invalid.</exception>
         /// <exception cref="InvalidOperationException">If validation fails (duplicate code, bad parent, circular ref).</exception>
-        public int SaveCostCenter(CostCenterModel model, int userId)
+        public int SaveBranch(CostCenterModel model, int userId)
         {
             try
             {
                 if (model == null)
-                    throw new ArgumentNullException(nameof(model), "Cost center model is required.");
+                    throw new ArgumentNullException(nameof(model), "Branch model is required.");
 
-                if (string.IsNullOrWhiteSpace(model.CcCode))
-                    throw new ArgumentException("Cost center code is required.", nameof(model.CcCode));
+                if (string.IsNullOrWhiteSpace(model.BranchCode))
+                    throw new ArgumentException("Branch code is required.", nameof(model.BranchCode));
 
-                if (string.IsNullOrWhiteSpace(model.CcName))
-                    throw new ArgumentException("Cost center name is required.", nameof(model.CcName));
+                if (string.IsNullOrWhiteSpace(model.BranchName))
+                    throw new ArgumentException("Branch name is required.", nameof(model.BranchName));
 
                 if (model.StartDate == DateTime.MinValue)
                     model.StartDate = DateTime.Now.Date;
 
-                return _dll.SaveCostCenter(model);
+                return _dll.SaveBranch(model);
             }
             catch (Exception ex)
             {
-                Log.LogAction("Error in SaveCostCenter", ex.Message, userId, UsersModal.logged_in_branch_id);
+                Log.LogAction("Error in SaveBranch", ex.Message, userId, UsersModal.logged_in_branch_id);
                 throw;
             }
         }
 
         /// <summary>
-        /// Gets a flat list of active cost centers formatted for dropdown display.
-        /// Excludes inactive cost centers.
+        /// Gets a flat list of active Branches formatted for dropdown display.
+        /// Excludes inactive Branches.
         /// </summary>
-        /// <param name="ccType">Optional filter by cost center type (e.g., "Department", "Profit Center").</param>
-        /// <returns>DataTable with id, display_text, cc_code, cc_name, cc_type columns.</returns>
-        public DataTable GetCostCenterDropdown(string ccType = null)
+        /// <param name="branchType">Optional filter by Branch type (e.g., "Department", "Profit Center").</param>
+        /// <returns>DataTable with id, display_text, branch_code, branch_name, branch_type columns.</returns>
+        public DataTable GetBranchDropdown(string branchType = null)
         {
             try
             {
-                return _dll.GetCostCenterDropdown(ccType);
+                return _dll.GetBranchDropdown(branchType);
             }
             catch (Exception ex)
             {
-                Log.LogAction("Error in GetCostCenterDropdown", ex.Message, UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                Log.LogAction("Error in GetBranchDropdown", ex.Message, UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                 return new DataTable();
             }
         }
 
         /// <summary>
-        /// Gets a single cost center by ID with all details.
+        /// Gets a single Branch by ID with all details.
         /// </summary>
-        /// <param name="ccId">Cost center ID.</param>
-        /// <returns>CostCenterModel or null if not found.</returns>
-        public CostCenterModel GetCostCenterById(int ccId)
+        /// <param name="branchId">Branch ID.</param>
+        /// <returns>BranchModel or null if not found.</returns>
+        public CostCenterModel GetBranchById(int branchId)
         {
             try
             {
-                return _dll.GetCostCenterById(ccId);
+                return _dll.GetBranchById(branchId);
             }
             catch (Exception ex)
             {
-                Log.LogAction("Error in GetCostCenterById", ex.Message, UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                Log.LogAction("Error in GetBranchById", ex.Message, UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                 return null;
             }
         }
 
         /// <summary>
-        /// Gets the cost center hierarchy tree with optional rollup of income/expense balances.
+        /// Gets the Branch hierarchy tree with optional rollup of income/expense balances.
         /// </summary>
         /// <param name="includeBalances">If true, includes total_income, total_expense, net_profit columns.</param>
         /// <param name="fromDate">Period start date for balance calculations (null = all time).</param>
         /// <param name="toDate">Period end date for balance calculations (null = all time).</param>
-        /// <returns>DataTable with hierarchical cost center data.</returns>
-        public DataTable GetCostCenterTree(bool includeBalances = true, DateTime? fromDate = null, DateTime? toDate = null)
+        /// <returns>DataTable with hierarchical Branch data.</returns>
+        public DataTable GetBranchTree(bool includeBalances = true, DateTime? fromDate = null, DateTime? toDate = null)
         {
             try
             {
-                return _dll.GetCostCenterTree(includeBalances, fromDate, toDate);
+                return _dll.GetBranchTree(includeBalances, fromDate, toDate);
             }
             catch (Exception ex)
             {
-                Log.LogAction("Error in GetCostCenterTree", ex.Message, UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                Log.LogAction("Error in GetBranchTree", ex.Message, UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
                 return new DataTable();
             }
         }
@@ -122,21 +122,21 @@ namespace POS.BLL
         #region Budget Operations
 
         /// <summary>
-        /// Saves monthly budgets for a cost center and fiscal year.
+        /// Saves monthly budgets for a Branch and fiscal year.
         /// Replaces any existing budgets for that year.
-        /// Validates: cost center exists, year exists, all amounts non-negative.
+        /// Validates: Branch exists, year exists, all amounts non-negative.
         /// </summary>
-        /// <param name="ccId">Cost center ID.</param>
+        /// <param name="branchId">Branch ID.</param>
         /// <param name="yearId">Fiscal year ID.</param>
         /// <param name="budgets">List of AccountBudget objects with monthly amounts per account.</param>
         /// <param name="userId">User ID for audit logging.</param>
         /// <exception cref="ArgumentException">If validation fails.</exception>
-        public void SetBudget(int ccId, int yearId, List<AccountBudget> budgets, int userId)
+        public void SetBudget(int branchId, int yearId, List<AccountBudget> budgets, int userId)
         {
             try
             {
-                if (ccId <= 0)
-                    throw new ArgumentException("Invalid cost center ID.", nameof(ccId));
+                if (branchId <= 0)
+                    throw new ArgumentException("Invalid Branch ID.", nameof(branchId));
 
                 if (yearId <= 0)
                     throw new ArgumentException("Invalid fiscal year ID.", nameof(yearId));
@@ -144,7 +144,7 @@ namespace POS.BLL
                 if (budgets == null || budgets.Count == 0)
                     throw new ArgumentException("At least one budget entry is required.", nameof(budgets));
 
-                _budgetDll.SaveCostCenterBudgets(ccId, yearId, budgets, userId);
+                _budgetDll.SaveCostCenterBudgets(branchId, yearId, budgets, userId);
             }
             catch (Exception ex)
             {
@@ -154,18 +154,18 @@ namespace POS.BLL
         }
 
         /// <summary>
-        /// Gets budget alerts for a cost center in the current month.
+        /// Gets budget alerts for a Branch in the current month.
         /// Returns list of accounts that have exceeded their monthly budget.
         /// Used to populate a warning panel in the journal entry form.
         /// </summary>
-        /// <param name="ccId">Cost center ID.</param>
+        /// <param name="branchId">Branch ID.</param>
         /// <param name="currentDate">Reference date (typically today); month and year extracted from this.</param>
         /// <returns>List of BudgetAlertModel for over-budget accounts. Empty if none or no budget defined.</returns>
-        public List<BudgetAlertModel> GetBudgetAlert(int ccId, DateTime currentDate)
+        public List<BudgetAlertModel> GetBudgetAlert(int branchId, DateTime currentDate)
         {
             try
             {
-                return _budgetDll.GetCostCenterBudgetAlerts(ccId, currentDate);
+                return _budgetDll.GetCostCenterBudgetAlerts(branchId, currentDate);
             }
             catch (Exception ex)
             {
@@ -175,23 +175,23 @@ namespace POS.BLL
         }
 
         /// <summary>
-        /// Checks if posting an amount to an account in a cost center would exceed the monthly budget.
+        /// Checks if posting an amount to an account in a Branch would exceed the monthly budget.
         /// Called from JournalsBLL before posting a journal entry to enforce budget limits.
         /// </summary>
-        /// <param name="ccId">Cost center ID.</param>
+        /// <param name="branchId">Branch ID.</param>
         /// <param name="accId">GL Account ID.</param>
         /// <param name="amount">Amount to be posted (debit or credit absolute value).</param>
         /// <param name="date">Entry date (month/year used to determine budget period).</param>
         /// <returns>BudgetCheckResult with IsOverBudget flag and remaining budget.</returns>
-        public BudgetCheckResult CheckBudgetBeforePosting(int ccId, int accId, decimal amount, DateTime date)
+        public BudgetCheckResult CheckBudgetBeforePosting(int branchId, int accId, decimal amount, DateTime date)
         {
             try
             {
-                if (ccId <= 0)
+                if (branchId <= 0)
                     return new BudgetCheckResult
                     {
                         IsOverBudget = false,
-                        Message = "No cost center specified.",
+                        Message = "No Branch specified.",
                         SeverityLevel = null
                     };
 
@@ -203,7 +203,7 @@ namespace POS.BLL
                         SeverityLevel = null
                     };
 
-                return _budgetDll.CheckCostCenterBudgetBeforePosting(ccId, accId, amount, date);
+                return _budgetDll.CheckBranchBudgetBeforePosting(branchId, accId, amount, date);
             }
             catch (Exception ex)
             {
@@ -234,7 +234,7 @@ namespace POS.BLL
         /// 4. Validates totals using residual method (last item absorbs rounding differences).
         /// 5. Returns detailed result with per-department amounts.
         /// 
-        /// All entries are posted in a single balanced voucher tagged with cost center IDs.
+        /// All entries are posted in a single balanced voucher tagged with Branch IDs.
         /// </summary>
         /// <param name="period">Period to allocate (any date in the month; 1st of month used).</param>
         /// <param name="userId">User ID initiating the allocation.</param>
@@ -280,14 +280,14 @@ namespace POS.BLL
         #region Reporting
 
         /// <summary>
-        /// Gets a departmental P&L pivot report showing amounts by cost center.
-        /// One row per GL account with columns for each cost center.
+        /// Gets a departmental P&L pivot report showing amounts by Branch.
+        /// One row per GL account with columns for each Branch.
         /// Includes "Unallocated" column for entries with NULL cost_center_id.
         /// </summary>
         /// <param name="fromDate">Period start date.</param>
         /// <param name="toDate">Period end date.</param>
-        /// <param name="ccIds">Optional list of cost center IDs to include. If null, all.</param>
-        /// <returns>DataTable with account rows and cost center columns.</returns>
+        /// <param name="ccIds">Optional list of Branch IDs to include. If null, all.</param>
+        /// <returns>DataTable with account rows and Branch columns.</returns>
         public DataTable GetDepartmentalPL(DateTime fromDate, DateTime toDate, List<int> ccIds = null)
         {
             try
@@ -296,14 +296,14 @@ namespace POS.BLL
                 {
                     cn.Open();
 
-                    // Create TVP for cost center IDs
-                    var ccIdTable = new DataTable();
-                    ccIdTable.Columns.Add("cc_id", typeof(int));
+                    // Create TVP for Branch IDs
+                    var branchIdTable = new DataTable();
+                    branchIdTable.Columns.Add("branch_id", typeof(int));
                     if (ccIds != null && ccIds.Count > 0)
                     {
-                        foreach (int ccId in ccIds)
+                        foreach (int branchId in ccIds)
                         {
-                            ccIdTable.Rows.Add(ccId);
+                            branchIdTable.Rows.Add(branchId);
                         }
                     }
 
@@ -314,7 +314,7 @@ namespace POS.BLL
                         cmd.Parameters.AddWithValue("@ToDate", toDate.Date);
 
                         // Add TVP parameter
-                        var tvpParam = cmd.Parameters.AddWithValue("@CCIds", ccIdTable);
+                        var tvpParam = cmd.Parameters.AddWithValue("@CCIds", branchIdTable);
                         tvpParam.SqlDbType = SqlDbType.Structured;
                         tvpParam.TypeName = "dbo.CostCenterIdListType";
 
@@ -333,13 +333,13 @@ namespace POS.BLL
         }
 
         /// <summary>
-        /// Gets budget vs. actual comparison for a cost center.
+        /// Gets budget vs. actual comparison for a Branch.
         /// One row per account per month showing budget, actual, variance.
         /// </summary>
-        /// <param name="ccId">Cost center ID.</param>
+        /// <param name="branchId">Branch ID.</param>
         /// <param name="yearId">Fiscal year ID.</param>
         /// <returns>DataTable with monthly budget vs. actual rows.</returns>
-        public DataTable GetBudgetVsActual(int ccId, int yearId)
+        public DataTable GetBudgetVsActual(int branchId, int yearId)
         {
             try
             {
@@ -349,7 +349,7 @@ namespace POS.BLL
                     using (SqlCommand cmd = new SqlCommand("sp_CostCenterBudgetVsActual", cn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@CCId", ccId);
+                        cmd.Parameters.AddWithValue("@CCId", branchId);
                         cmd.Parameters.AddWithValue("@FinancialYearId", yearId);
 
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -367,11 +367,11 @@ namespace POS.BLL
         }
 
         /// <summary>
-        /// Gets a summary of all cost centers with income, expense, net profit, and budget variance.
+        /// Gets a summary of all Branches with income, expense, net profit, and budget variance.
         /// </summary>
         /// <param name="fromDate">Period start date.</param>
         /// <param name="toDate">Period end date.</param>
-        /// <returns>DataTable with one row per cost center.</returns>
+        /// <returns>DataTable with one row per Branch.</returns>
         public DataTable GetCostCenterSummary(DateTime fromDate, DateTime toDate)
         {
             try

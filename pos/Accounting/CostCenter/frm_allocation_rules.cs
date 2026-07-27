@@ -91,7 +91,7 @@ ORDER BY code;";
         {
             try
             {
-                DataTable dt = bll.GetCostCenterDropdown();
+                DataTable dt = bll.GetBranchDropdown();
                 cmbTargetCostCenter.DataSource = dt;
                 cmbTargetCostCenter.DisplayMember = "display_text";
                 cmbTargetCostCenter.ValueMember = "id";

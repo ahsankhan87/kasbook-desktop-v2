@@ -53,7 +53,7 @@ namespace pos.Reports.Financial
         private void LoadFilters()
         {
             LoadFiscalYears();
-            LoadCostCenters();
+            LoadBranches();
             LoadPeriodAndTypeCombos();
             LoadBudgetVersions();
         }
@@ -88,14 +88,14 @@ namespace pos.Reports.Financial
             cmbFiscalYear.ValueMember = "id";
         }
 
-        private void LoadCostCenters()
+        private void LoadBranches()
         {
-            DataTable source = _costCenterBll.GetCostCenterDropdown();
+            DataTable source = _costCenterBll.GetBranchDropdown();
             DataTable dt = new DataTable();
             dt.Columns.Add("id", typeof(int));
             dt.Columns.Add("display_text", typeof(string));
 
-            dt.Rows.Add(DBNull.Value, "All Cost Centers");
+            dt.Rows.Add(DBNull.Value, "All Branches");
             if (source != null)
             {
                 foreach (DataRow row in source.Rows)

@@ -19,71 +19,71 @@ namespace POS.DLL
         #region Cost Center Operations
 
         /// <summary>
-        /// Saves a cost center (insert or update).
+        /// Saves a branch (insert or update).
         /// Validates: code uniqueness, parent existence, no circular hierarchy.
         /// </summary>
-        public int SaveCostCenter(CostCenterModel model)
+        public int SaveBranch(CostCenterModel model)
         {
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
 
-            if (string.IsNullOrWhiteSpace(model.CcCode))
-                throw new ArgumentException("Cost center code is required.", nameof(model.CcCode));
+            if (string.IsNullOrWhiteSpace(model.BranchCode))
+                throw new ArgumentException("Branch code is required.", nameof(model.BranchCode));
 
-            if (string.IsNullOrWhiteSpace(model.CcName))
-                throw new ArgumentException("Cost center name is required.", nameof(model.CcName));
+            if (string.IsNullOrWhiteSpace(model.BranchName))
+                throw new ArgumentException("Branch name is required.", nameof(model.BranchName));
 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 cn.Open();
 
                 // Check code uniqueness (if inserting or code changed)
-                if (model.CcId == 0 || HasCcCodeChanged(cn, model))
+                if (model.BranchId == 0 || HasBranchCodeChanged(cn, model))
                 {
-                    const string checkCodeSql = "SELECT COUNT(1) FROM dbo.acc_cost_centers WHERE cc_code = @code AND cc_id <> @ccId";
+                    const string checkCodeSql = "SELECT COUNT(1) FROM dbo.pos_branches WHERE branch_code = @code AND id <> @branchId";
                     using (SqlCommand checkCmd = new SqlCommand(checkCodeSql, cn))
                     {
-                        checkCmd.Parameters.AddWithValue("@code", model.CcCode);
-                        checkCmd.Parameters.AddWithValue("@ccId", model.CcId);
+                        checkCmd.Parameters.AddWithValue("@code", model.BranchCode);
+                        checkCmd.Parameters.AddWithValue("@branchId", model.BranchId);
                         int count = (int)checkCmd.ExecuteScalar();
                         if (count > 0)
-                            throw new InvalidOperationException($"Cost center code '{model.CcCode}' already exists.");
+                            throw new InvalidOperationException($"Branch code '{model.BranchCode}' already exists.");
                     }
                 }
 
                 // Check parent exists and validate hierarchy
-                if (model.ParentCcId.HasValue && model.ParentCcId.Value > 0)
+                if (model.ParentBranchId.HasValue && model.ParentBranchId.Value > 0)
                 {
-                    const string parentCheckSql = "SELECT COUNT(1) FROM dbo.acc_cost_centers WHERE cc_id = @parentId";
+                    const string parentCheckSql = "SELECT COUNT(1) FROM dbo.pos_branches WHERE id = @parentId";
                     using (SqlCommand parentCmd = new SqlCommand(parentCheckSql, cn))
                     {
-                        parentCmd.Parameters.AddWithValue("@parentId", model.ParentCcId.Value);
+                        parentCmd.Parameters.AddWithValue("@parentId", model.ParentBranchId.Value);
                         int count = (int)parentCmd.ExecuteScalar();
                         if (count == 0)
-                            throw new InvalidOperationException("Parent cost center does not exist.");
+                            throw new InvalidOperationException("Parent branch does not exist.");
                     }
 
                     // Check for circular reference
-                    if (HasCircularReference(cn, model.CcId, model.ParentCcId.Value))
-                        throw new InvalidOperationException("Circular hierarchy detected. Parent cannot be a descendant of this cost center.");
+                    if (HasCircularReference(cn, model.BranchId, model.ParentBranchId.Value))
+                        throw new InvalidOperationException("Circular hierarchy detected. Parent cannot be a descendant of this branch.");
                 }
 
-                if (model.CcId == 0)
+                if (model.BranchId == 0)
                 {
                     // Insert
                     const string insertSql = @"
-                        INSERT INTO dbo.acc_cost_centers
-                        (cc_code, cc_name, cc_type, parent_cc_id, manager_id, monthly_budget, start_date, end_date, is_active, description, created_at)
+                        INSERT INTO dbo.pos_branches
+                        (branch_code, name, branch_type, parent_id, manager_id, monthly_budget, start_date, end_date, is_active, description, date_created)
                         VALUES
                         (@code, @name, @type, @parentId, @managerId, @monthlyBudget, @startDate, @endDate, @isActive, @description, GETDATE());
                         SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                     using (SqlCommand insertCmd = new SqlCommand(insertSql, cn))
                     {
-                        insertCmd.Parameters.AddWithValue("@code", model.CcCode);
-                        insertCmd.Parameters.AddWithValue("@name", model.CcName);
-                        insertCmd.Parameters.AddWithValue("@type", (object)model.CcType ?? DBNull.Value);
-                        insertCmd.Parameters.AddWithValue("@parentId", (object)model.ParentCcId ?? DBNull.Value);
+                        insertCmd.Parameters.AddWithValue("@code", model.BranchCode);
+                        insertCmd.Parameters.AddWithValue("@name", model.BranchName);
+                        insertCmd.Parameters.AddWithValue("@type", (object)model.BranchType ?? DBNull.Value);
+                        insertCmd.Parameters.AddWithValue("@parentId", (object)model.ParentBranchId ?? DBNull.Value);
                         insertCmd.Parameters.AddWithValue("@managerId", (object)model.ManagerId ?? DBNull.Value);
                         insertCmd.Parameters.AddWithValue("@monthlyBudget", (object)model.MonthlyBudget ?? DBNull.Value);
                         insertCmd.Parameters.AddWithValue("@startDate", model.StartDate.Date);
@@ -91,36 +91,37 @@ namespace POS.DLL
                         insertCmd.Parameters.AddWithValue("@isActive", model.IsActive ? 1 : 0);
                         insertCmd.Parameters.AddWithValue("@description", (object)model.Description ?? DBNull.Value);
 
-                        model.CcId = (int)insertCmd.ExecuteScalar();
-                        Log.LogAction("Cost Center Created", $"Code: {model.CcCode}, Name: {model.CcName}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
-                        return model.CcId;
+                        model.BranchId = (int)insertCmd.ExecuteScalar();
+                        Log.LogAction("Branch Created", $"Code: {model.BranchCode}, Name: {model.BranchName}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                        return model.BranchId;
                     }
                 }
                 else
                 {
                     // Update
                     const string updateSql = @"
-                        UPDATE dbo.acc_cost_centers
-                        SET cc_code = @code,
-                            cc_name = @name,
-                            cc_type = @type,
-                            parent_cc_id = @parentId,
+                        UPDATE dbo.pos_branches
+                        SET branch_code = @code,
+                            name = @name,
+                            branch_type = @type,
+                            parent_id = @parentId,
                             manager_id = @managerId,
                             monthly_budget = @monthlyBudget,
                             start_date = @startDate,
                             end_date = @endDate,
                             is_active = @isActive,
-                            description = @description
-                        WHERE cc_id = @ccId;
-                        SELECT @ccId;";
+                            description = @description,
+                            date_updated = GETDATE()
+                        WHERE id = @branchId;
+                        SELECT @branchId;";
 
                     using (SqlCommand updateCmd = new SqlCommand(updateSql, cn))
                     {
-                        updateCmd.Parameters.AddWithValue("@ccId", model.CcId);
-                        updateCmd.Parameters.AddWithValue("@code", model.CcCode);
-                        updateCmd.Parameters.AddWithValue("@name", model.CcName);
-                        updateCmd.Parameters.AddWithValue("@type", (object)model.CcType ?? DBNull.Value);
-                        updateCmd.Parameters.AddWithValue("@parentId", (object)model.ParentCcId ?? DBNull.Value);
+                        updateCmd.Parameters.AddWithValue("@branchId", model.BranchId);
+                        updateCmd.Parameters.AddWithValue("@code", model.BranchCode);
+                        updateCmd.Parameters.AddWithValue("@name", model.BranchName);
+                        updateCmd.Parameters.AddWithValue("@type", (object)model.BranchType ?? DBNull.Value);
+                        updateCmd.Parameters.AddWithValue("@parentId", (object)model.ParentBranchId ?? DBNull.Value);
                         updateCmd.Parameters.AddWithValue("@managerId", (object)model.ManagerId ?? DBNull.Value);
                         updateCmd.Parameters.AddWithValue("@monthlyBudget", (object)model.MonthlyBudget ?? DBNull.Value);
                         updateCmd.Parameters.AddWithValue("@startDate", model.StartDate.Date);
@@ -129,37 +130,37 @@ namespace POS.DLL
                         updateCmd.Parameters.AddWithValue("@description", (object)model.Description ?? DBNull.Value);
 
                         updateCmd.ExecuteScalar();
-                        Log.LogAction("Cost Center Updated", $"Code: {model.CcCode}, Name: {model.CcName}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
-                        return model.CcId;
+                        Log.LogAction("Branch Updated", $"Code: {model.BranchCode}, Name: {model.BranchName}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                        return model.BranchId;
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Returns a flat list of active cost centers formatted for dropdown (e.g., "CC-001 — Sales").
-        /// Optionally filtered by cost center type.
+        /// Returns a flat list of active branches formatted for dropdown (e.g., "BR-001 — Sales").
+        /// Optionally filtered by branch type.
         /// </summary>
-        public DataTable GetCostCenterDropdown(string ccType = null)
+        public DataTable GetBranchDropdown(string branchType = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 const string sql = @"
 SELECT
-    cc_id AS id,
-    CONCAT(cc_code, ' — ', cc_name) AS display_text,
-    cc_code,
-    cc_name,
-    cc_type,
+    id AS id,
+    CONCAT(branch_code, ' — ', name) AS display_text,
+    branch_code,
+    name,
+    branch_type,
     is_active
-FROM dbo.acc_cost_centers
+FROM dbo.pos_branches
 WHERE is_active = 1
-  AND (@ccType IS NULL OR cc_type = @ccType)
-ORDER BY cc_code, cc_name;";
+  AND (@branchType IS NULL OR branch_type = @branchType)
+ORDER BY branch_code, name;";
 
                 using (SqlCommand cmd = new SqlCommand(sql, cn))
                 {
-                    cmd.Parameters.AddWithValue("@ccType", (object)ccType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@branchType", (object)branchType ?? DBNull.Value);
                     da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -169,25 +170,25 @@ ORDER BY cc_code, cc_name;";
         }
 
         /// <summary>
-        /// Gets a single cost center by ID.
+        /// Gets a single branch by ID.
         /// </summary>
-        public CostCenterModel GetCostCenterById(int ccId)
+        public CostCenterModel GetBranchById(int branchId)
         {
-            if (ccId <= 0)
+            if (branchId <= 0)
                 return null;
 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 const string sql = @"
 SELECT
-    cc_id, cc_code, cc_name, cc_type, parent_cc_id, manager_id,
-    monthly_budget, start_date, end_date, is_active, description, created_at
-FROM dbo.acc_cost_centers
-WHERE cc_id = @ccId;";
+    id, branch_code, name, branch_type, parent_id, manager_id,
+    monthly_budget, start_date, end_date, is_active, description, date_created
+FROM dbo.pos_branches
+WHERE id = @branchId;";
 
                 using (SqlCommand cmd = new SqlCommand(sql, cn))
                 {
-                    cmd.Parameters.AddWithValue("@ccId", ccId);
+                    cmd.Parameters.AddWithValue("@branchId", branchId);
                     cn.Open();
                     using (SqlDataReader r = cmd.ExecuteReader(CommandBehavior.SingleRow))
                     {
@@ -196,18 +197,18 @@ WHERE cc_id = @ccId;";
 
                         return new CostCenterModel
                         {
-                            CcId = (int)r["cc_id"],
-                            CcCode = r["cc_code"]?.ToString() ?? "",
-                            CcName = r["cc_name"]?.ToString() ?? "",
-                            CcType = r["cc_type"]?.ToString(),
-                            ParentCcId = r["parent_cc_id"] == DBNull.Value ? null : (int?)r["parent_cc_id"],
+                            BranchId = (int)r["id"],
+                            BranchCode = r["branch_code"]?.ToString() ?? "",
+                            BranchName = r["name"]?.ToString() ?? "",
+                            BranchType = r["branch_type"]?.ToString(),
+                            ParentBranchId = r["parent_id"] == DBNull.Value ? null : (int?)r["parent_id"],
                             ManagerId = r["manager_id"] == DBNull.Value ? null : (int?)r["manager_id"],
                             MonthlyBudget = r["monthly_budget"] == DBNull.Value ? null : (decimal?)r["monthly_budget"],
                             StartDate = r["start_date"] == DBNull.Value ? DateTime.Today : (DateTime)r["start_date"],
                             EndDate = r["end_date"] == DBNull.Value ? null : (DateTime?)r["end_date"],
                             IsActive = (bool)r["is_active"],
                             Description = r["description"]?.ToString(),
-                            CreatedAt = r["created_at"] == DBNull.Value ? DateTime.Now : (DateTime)r["created_at"]
+                            CreatedAt = r["date_created"] == DBNull.Value ? DateTime.Now : (DateTime)r["date_created"]
                         };
                     }
                 }
@@ -215,9 +216,9 @@ WHERE cc_id = @ccId;";
         }
 
         /// <summary>
-        /// Gets the cost center tree with hierarchical rollup of income/expense balances.
+        /// Gets the branch tree with hierarchical rollup of income/expense balances.
         /// </summary>
-        public DataTable GetCostCenterTree(bool includeBalances = true, DateTime? fromDate = null, DateTime? toDate = null)
+        public DataTable GetBranchTree(bool includeBalances = true, DateTime? fromDate = null, DateTime? toDate = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -290,7 +291,7 @@ WHERE cc_id = @ccId;";
                                         AllocationRuleId = (int)r["alloc_id"],
                                         AllocationName = r["alloc_name"]?.ToString() ?? "",
                                         SourceAccountId = (int)r["source_acc_id"],
-                                        CostCenterId = (int)r["cc_id"],
+                                        BranchId = (int)r["id"],
                                         AllocationMethod = r["allocation_method"]?.ToString() ?? "",
                                         AllocationPercent = (decimal?)r["allocation_percent"] ?? 0m,
                                         SourceAmount = (decimal?)r["source_amount"] ?? 0m,
@@ -302,7 +303,7 @@ WHERE cc_id = @ccId;";
 
                         if (result.Success)
                         {
-                            Log.LogAction("Cost Center Allocation", $"Period: {result.PeriodStart:yyyy-MM}, Voucher: {result.VoucherNo}, Total: {result.TotalAllocated}", userId, UsersModal.logged_in_branch_id);
+                            Log.LogAction("Branch Allocation", $"Period: {result.PeriodStart:yyyy-MM}, Voucher: {result.VoucherNo}, Total: {result.TotalAllocated}", userId, UsersModal.logged_in_branch_id);
                         }
                     }
                     catch (Exception ex)
@@ -320,44 +321,44 @@ WHERE cc_id = @ccId;";
 
         #region Helper Methods
 
-        private bool HasCcCodeChanged(SqlConnection cn, CostCenterModel model)
+        private bool HasBranchCodeChanged(SqlConnection cn, CostCenterModel model)
         {
-            if (model.CcId <= 0)
+            if (model.BranchId <= 0)
                 return true;
 
-            const string sql = "SELECT cc_code FROM dbo.acc_cost_centers WHERE cc_id = @ccId";
+            const string sql = "SELECT branch_code FROM dbo.pos_branches WHERE id = @branchId";
             using (SqlCommand cmd = new SqlCommand(sql, cn))
             {
-                cmd.Parameters.AddWithValue("@ccId", model.CcId);
+                cmd.Parameters.AddWithValue("@branchId", model.BranchId);
                 object result = cmd.ExecuteScalar();
                 if (result == null || result == DBNull.Value)
                     return true;
 
-                return !result.ToString().Equals(model.CcCode, StringComparison.OrdinalIgnoreCase);
+                return !result.ToString().Equals(model.BranchCode, StringComparison.OrdinalIgnoreCase);
             }
         }
 
-        private bool HasCircularReference(SqlConnection cn, int ccId, int parentId)
+        private bool HasCircularReference(SqlConnection cn, int branchId, int parentId)
         {
-            if (ccId <= 0 || parentId <= 0 || ccId == parentId)
+            if (branchId <= 0 || parentId <= 0 || branchId == parentId)
                 return true;
 
-            // Traverse up the hierarchy from parentId; if we find ccId, it's circular
+            // Traverse up the hierarchy from parentId; if we find branchId, it's circular
             const string sql = @"
                 WITH Ancestors AS
                 (
 
-                    SELECT parent_cc_id FROM dbo.acc_cost_centers WHERE cc_id = @parentId AND parent_cc_id IS NOT NULL
+                    SELECT parent_id FROM dbo.pos_branches WHERE id = @parentId AND parent_id IS NOT NULL
                     UNION ALL
-                    SELECT c.parent_cc_id FROM dbo.acc_cost_centers c
-                    INNER JOIN Ancestors a ON c.cc_id = a.parent_cc_id
-                    WHERE c.parent_cc_id IS NOT NULL
+                    SELECT c.parent_id FROM dbo.pos_branches c
+                    INNER JOIN Ancestors a ON c.id = a.parent_id
+                    WHERE c.parent_id IS NOT NULL
                 )
-                SELECT COUNT(1) FROM Ancestors WHERE parent_cc_id = @ccId;";
+                SELECT COUNT(1) FROM Ancestors WHERE parent_id = @branchId;";
 
             using (SqlCommand cmd = new SqlCommand(sql, cn))
             {
-                cmd.Parameters.AddWithValue("@ccId", ccId);
+                cmd.Parameters.AddWithValue("@branchId", branchId);
                 cmd.Parameters.AddWithValue("@parentId", parentId);
                 int count = (int)cmd.ExecuteScalar();
                 return count > 0;

@@ -12,34 +12,34 @@ namespace POS.Core
         /// <summary>
         /// Primary key. Auto-generated on creation.
         /// </summary>
-        public int CcId { get; set; }
+        public int BranchId { get; set; }
 
         /// <summary>
-        /// Unique code identifier for the cost center (e.g., "CC-001", "DEPT-SALES").
+        /// Unique code identifier for the branch (e.g., "BR-001", "DEPT-SALES").
         /// Required and must be unique within the system.
         /// </summary>
-        public string CcCode { get; set; }
+        public string BranchCode { get; set; }
 
         /// <summary>
         /// Human-readable name (e.g., "Sales Department", "Marketing").
         /// Required.
         /// </summary>
-        public string CcName { get; set; }
+        public string BranchName { get; set; }
 
         /// <summary>
         /// Classification type (e.g., "Department", "Profit Center", "Service Unit").
         /// Used for grouping and reporting.
         /// </summary>
-        public string CcType { get; set; }
+        public string BranchType { get; set; }
 
         /// <summary>
-        /// Parent cost center ID for hierarchical organization.
-        /// Null if this is a root cost center. Validated to prevent circular references.
+        /// Parent branch ID for hierarchical organization.
+        /// Null if this is a root branch. Validated to prevent circular references.
         /// </summary>
-        public int? ParentCcId { get; set; }
+        public int? ParentBranchId { get; set; }
 
         /// <summary>
-        /// User ID of the cost center manager.
+        /// User ID of the branch manager.
         /// Optional; used for approval workflows and notifications.
         /// </summary>
         public int? ManagerId { get; set; }
@@ -101,9 +101,9 @@ namespace POS.Core
         public int BudgetId { get; set; }
 
         /// <summary>
-        /// Cost center ID. Required.
+        /// Branch ID. Required.
         /// </summary>
-        public int CcId { get; set; }
+        public int BranchId { get; set; }
 
         /// <summary>
         /// Fiscal year ID. Required.
@@ -310,9 +310,9 @@ namespace POS.Core
         public int SourceAccountId { get; set; }
 
         /// <summary>
-        /// Target cost center ID.
+        /// Target branch ID.
         /// </summary>
-        public int CostCenterId { get; set; }
+        public int BranchId { get; set; }
 
         /// <summary>
         /// Allocation method used (FIXED_PCT, HEADCOUNT, REVENUE).
@@ -342,14 +342,14 @@ namespace POS.Core
     public class BudgetAlertModel
     {
         /// <summary>
-        /// Cost center ID.
+        /// Branch ID.
         /// </summary>
-        public int CcId { get; set; }
+        public int BranchId { get; set; }
 
         /// <summary>
-        /// Cost center code.
+        /// Branch code.
         /// </summary>
-        public string CcCode { get; set; }
+        public string BranchCode { get; set; }
 
         /// <summary>
         /// GL Account ID.

@@ -141,7 +141,7 @@ namespace pos.Accounting.CostCenter
                 using (BusyScope.Show(this, "Loading budget planner..."))
                 {
                     LoadFiscalYears();
-                    LoadCostCenters();
+                    LoadBranches();
                     LoadBudgetAccounts();
                     StartNewBudget();
                 }
@@ -185,9 +185,9 @@ namespace pos.Accounting.CostCenter
                 cmbYear.SelectedIndex = 0;
         }
 
-        private void LoadCostCenters()
+        private void LoadBranches()
         {
-            DataTable source = _costCenterBll.GetCostCenterDropdown();
+            DataTable source = _costCenterBll.GetBranchDropdown();
             DataTable dt = new DataTable();
             dt.Columns.Add("id", typeof(int));
             dt.Columns.Add("display_text", typeof(string));

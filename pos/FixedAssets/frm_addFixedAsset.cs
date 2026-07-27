@@ -17,7 +17,7 @@ namespace pos.FixedAssets
         private FixedAssetBLL _assetBLL;
         private List<CategoryModel> _categories;
         private List<LocationModel> _locations;
-        private DataTable _costCenters;
+        private DataTable _branches;
 
         // Edit mode
         private bool _isEditMode = false;
@@ -31,7 +31,7 @@ namespace pos.FixedAssets
             _assetBLL = new FixedAssetBLL();
             _categories = new List<CategoryModel>();
             _locations = new List<LocationModel>();
-            _costCenters = new DataTable();
+            _branches = new DataTable();
             this.DialogResult = DialogResult.Cancel;
             this.StartPosition = FormStartPosition.CenterParent;
         }
@@ -55,7 +55,7 @@ namespace pos.FixedAssets
                 AppTheme.Apply(this);
                 LoadCategories();
                 LoadLocations();
-                LoadCostCenters();
+                LoadBranches();
 
                 ddlCategory.SelectedIndexChanged -= DdlCategory_SelectedIndexChanged;
                 ddlCategory.SelectedIndexChanged += DdlCategory_SelectedIndexChanged;
@@ -86,9 +86,9 @@ namespace pos.FixedAssets
             int locIdx = _locations.FindIndex(l => l.LocationId == asset.LocationId);
             ddlLocation.SelectedIndex = locIdx >= 0 ? locIdx + 1 : 0;
 
-            if (asset.CostCenterId > 0)
+            if (asset.BranchId > 0)
             {
-                ddlCostCenter.SelectedValue = asset.CostCenterId;
+                ddlCostCenter.SelectedValue = asset.BranchId;
             }
             else
             {
@@ -167,41 +167,41 @@ namespace pos.FixedAssets
             }
         }
 
-        private void LoadCostCenters()
+        private void LoadBranches()
         {
             try
             {
                 CostCenterBLL costCenterBll = new CostCenterBLL();
-                DataTable source = costCenterBll.GetCostCenterDropdown();
+                DataTable source = costCenterBll.GetBranchDropdown();
 
-                _costCenters = new DataTable();
-                _costCenters.Columns.Add("id", typeof(int));
-                _costCenters.Columns.Add("display_text", typeof(string));
+                _branches = new DataTable();
+                _branches.Columns.Add("id", typeof(int));
+                _branches.Columns.Add("display_text", typeof(string));
 
-                DataRow noneRow = _costCenters.NewRow();
+                DataRow noneRow = _branches.NewRow();
                 noneRow["id"] = 0;
                 noneRow["display_text"] = "(None)";
-                _costCenters.Rows.Add(noneRow);
+                _branches.Rows.Add(noneRow);
 
                 if (source != null)
                 {
                     foreach (DataRow row in source.Rows)
                     {
-                        DataRow dr = _costCenters.NewRow();
+                        DataRow dr = _branches.NewRow();
                         dr["id"] = row["id"] == DBNull.Value ? 0 : Convert.ToInt32(row["id"]);
                         dr["display_text"] = Convert.ToString(row["display_text"]);
-                        _costCenters.Rows.Add(dr);
+                        _branches.Rows.Add(dr);
                     }
                 }
 
-                ddlCostCenter.DataSource = _costCenters;
+                ddlCostCenter.DataSource = _branches;
                 ddlCostCenter.DisplayMember = "display_text";
                 ddlCostCenter.ValueMember = "id";
                 ddlCostCenter.SelectedValue = 0;
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Failed to load cost centers: " + ex.Message, "فشل تحميل مراكز التكلفة", "Error", "خطأ");
+                UiMessages.ShowError("Failed to load branches: " + ex.Message, "فشل تحميل الفروع: " + ex.Message, "Error", "خطأ");
             }
         }
 

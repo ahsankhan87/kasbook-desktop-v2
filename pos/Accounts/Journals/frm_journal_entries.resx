@@ -435,13 +435,13 @@
   <data name="party.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
-  <data name="cost_center.HeaderText" xml:space="preserve">
-    <value>Cost Center</value>
+  <data name="branch.HeaderText" xml:space="preserve">
+    <value>Branch</value>
   </data>
-  <data name="cost_center.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="branch.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="cost_center.Width" type="System.Int32, mscorlib">
+  <data name="branch.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
   <metadata name="debit_amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1251,10 +1251,10 @@
   <data name="&gt;&gt;party.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cost_center.Name" xml:space="preserve">
-    <value>cost_center</value>
+  <data name="&gt;&gt;branch.Name" xml:space="preserve">
+    <value>branch</value>
   </data>
-  <data name="&gt;&gt;cost_center.Type" xml:space="preserve">
+  <data name="&gt;&gt;branch.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;debit_amount.Name" xml:space="preserve">

@@ -10,7 +10,7 @@ using pos.UI.Busy;
 namespace pos.Accounting.CostCenter
 {
     /// <summary>
-    /// Cost Center Tree View Form - Hierarchical view with right-click context menu
+    /// branch Tree View Form - Hierarchical view with right-click context menu
     /// </summary>
     public partial class frm_cost_center_tree : Form
     {
@@ -43,7 +43,7 @@ namespace pos.Accounting.CostCenter
         {
             contextMenu.Items.Clear();
 
-            ToolStripMenuItem itemAddChild = new ToolStripMenuItem("Add Child Cost Center", null, ContextMenu_AddChild);
+            ToolStripMenuItem itemAddChild = new ToolStripMenuItem("Add Child Branch", null, ContextMenu_AddChild);
             ToolStripMenuItem itemEdit = new ToolStripMenuItem("Edit", null, ContextMenu_Edit);
             ToolStripMenuItem itemViewPL = new ToolStripMenuItem("View P&L", null, ContextMenu_ViewPL);
             ToolStripMenuItem itemSetBudget = new ToolStripMenuItem("Set Budget", null, ContextMenu_SetBudget);
@@ -62,9 +62,9 @@ namespace pos.Accounting.CostCenter
         {
             try
             {
-                using (BusyScope.Show(this, "Loading cost center hierarchy..."))
+                using (BusyScope.Show(this, "Loading branch hierarchy..."))
                 {
-                    DataTable dt = bll.GetCostCenterTree(includeBalances: true);
+                    DataTable dt = bll.GetBranchTree(includeBalances: true);
                     treeView.Nodes.Clear();
 
                     // Build tree from flat structure with parent references
@@ -76,9 +76,9 @@ namespace pos.Accounting.CostCenter
                     // First pass: create all nodes
                     foreach (DataRow row in dt.Rows)
                     {
-                        int ccId = (int)row["cc_id"];
-                        string ccCode = row["cc_code"]?.ToString() ?? "";
-                        string ccName = row["cc_name"]?.ToString() ?? "";
+                        int ccId = (int)row["id"];
+                        string ccCode = row["branch_code"]?.ToString() ?? "";
+                        string ccName = row["name"]?.ToString() ?? "";
                         decimal? ytdIncome = (hasYtdIncomeColumn && row["ytd_income"] != DBNull.Value)
                             ? Convert.ToDecimal(row["ytd_income"])
                             : (decimal?)null;
@@ -110,8 +110,8 @@ namespace pos.Accounting.CostCenter
                     // Second pass: link parent-child
                     foreach (DataRow row in dt.Rows)
                     {
-                        int ccId = (int)row["cc_id"];
-                        int? parentId = row["parent_cc_id"] == DBNull.Value ? null : (int?)row["parent_cc_id"];
+                        int ccId = (int)row["id"];
+                        int? parentId = row["parent_id"] == DBNull.Value ? null : (int?)row["parent_id"];
 
                         if (parentId.HasValue && nodeDict.ContainsKey(parentId.Value))
                         {
@@ -137,7 +137,7 @@ namespace pos.Accounting.CostCenter
         {
             if (e.Node?.Tag is int ccId)
             {
-                LoadCostCenterDetails(ccId);
+                LoadBranchDetails(ccId);
             }
         }
 
@@ -150,14 +150,14 @@ namespace pos.Accounting.CostCenter
             }
         }
 
-        private void LoadCostCenterDetails(int ccId)
+        private void LoadBranchDetails(int ccId)
         {
             try
             {
-                var model = bll.GetCostCenterById(ccId);
+                var model = bll.GetBranchById(ccId);
                 if (model != null)
                 {
-                    lblDetails.Text = $"Code: {model.CcCode} | Name: {model.CcName} | Type: {model.CcType} | Active: {(model.IsActive ? "Yes" : "No")}";
+                    lblDetails.Text = $"Code: {model.BranchCode} | Name: {model.BranchName} | Type: {model.BranchType} | Active: {(model.IsActive ? "Yes" : "No")}";
                 }
             }
             catch (Exception ex)
@@ -170,7 +170,7 @@ namespace pos.Accounting.CostCenter
         {
             if (treeView.SelectedNode?.Tag is int parentCcId)
             {
-                // Open cost center form to add child
+                // Open branch form to add child
                 var frm = new frm_cost_center_setup(0, parentCcId);
                 frm.ShowDialog(this);
                 LoadTreeData();
@@ -209,19 +209,19 @@ namespace pos.Accounting.CostCenter
         {
             if (treeView.SelectedNode?.Tag is int ccId)
             {
-                DialogResult result = MessageBox.Show("Deactivate this cost center?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Deactivate this branch?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
                     {
                         using (BusyScope.Show(this, "Deactivating..."))
                         {
-                            var model = bll.GetCostCenterById(ccId);
+                            var model = bll.GetBranchById(ccId);
                             if (model != null)
                             {
                                 model.IsActive = false;
-                                bll.SaveCostCenter(model, UsersModal.logged_in_userid);
-                                MessageBox.Show("Cost center deactivated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                bll.SaveBranch(model, UsersModal.logged_in_userid);
+                                MessageBox.Show("Branch deactivated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 LoadTreeData();
                             }
                         }

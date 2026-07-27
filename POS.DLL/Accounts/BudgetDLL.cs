@@ -552,15 +552,15 @@ WITH SelectedBudget AS
     FROM acc_budget_headers bh
     INNER JOIN acc_fiscal_years fy ON bh.financial_year_id = fy.id
     WHERE @AsOfDate BETWEEN fy.from_date AND fy.to_date
-      AND (bh.cc_id = @CCId OR bh.cc_id IS NULL OR bh.cc_id = 0)
+      AND (bh.branch_id = @CCId OR bh.branch_id IS NULL OR bh.branch_id = 0)
       AND bh.status IN ('Active', 'Approved')
-    ORDER BY CASE WHEN bh.cc_id = @CCId THEN 0 ELSE 1 END,
+    ORDER BY CASE WHEN bh.branch_id = @CCId THEN 0 ELSE 1 END,
              CASE bh.status WHEN 'Active' THEN 0 WHEN 'Approved' THEN 1 ELSE 2 END,
              bh.created_at DESC
 )
 SELECT
-    @CCId AS cc_id,
-    c.cc_code,
+    @CCId AS branch_id,
+    c.branch_code,
     bl.account_id,
     a.code AS account_code,
     a.name AS account_name,
@@ -586,13 +586,13 @@ SELECT
 FROM SelectedBudget ab
 INNER JOIN acc_budget_lines bl ON bl.budget_id = ab.budget_id
 INNER JOIN acc_accounts a ON a.id = bl.account_id
-INNER JOIN acc_cost_centers c ON c.cc_id = @CCId
+INNER JOIN acc_branches c ON c.branch_id = @CCId
 LEFT JOIN acc_entries E
     ON E.account_id = bl.account_id
-    AND E.cost_center_id = @CCId
+    AND E.branch_id = @CCId
     AND E.entry_date >= @FromDate
     AND E.entry_date <= @ToDate
-GROUP BY c.cc_code, bl.account_id, a.code, a.name,
+GROUP BY c.branch_code, bl.account_id, a.code, a.name,
          bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
          bl.jul, bl.aug, bl.sep, bl.oct, bl.nov, bl.[dec];";
 
@@ -621,8 +621,8 @@ GROUP BY c.cc_code, bl.account_id, a.code, a.name,
 
                             alerts.Add(new BudgetAlertModel
                             {
-                                CcId = ccId,
-                                CcCode = Convert.ToString(r["cc_code"]),
+                                BranchId = ccId,
+                                BranchCode = Convert.ToString(r["branch_code"]),
                                 AccountId = Convert.ToInt32(r["account_id"]),
                                 AccountCode = Convert.ToString(r["account_code"]),
                                 AccountName = Convert.ToString(r["account_name"]),
@@ -642,12 +642,12 @@ GROUP BY c.cc_code, bl.account_id, a.code, a.name,
         }
 
         /// <summary>
-        /// Checks if posting amount to an account in a cost center would exceed active monthly budget.
+        /// Checks if posting amount to an account in a branch would exceed active monthly budget.
         /// </summary>
-        public BudgetCheckResult CheckCostCenterBudgetBeforePosting(int ccId, int accountId, decimal amount, DateTime date)
+        public BudgetCheckResult CheckBranchBudgetBeforePosting(int branchId, int accountId, decimal amount, DateTime date)
         {
-            if (ccId <= 0 || accountId <= 0)
-                return new BudgetCheckResult { Message = "Invalid cost center or account." };
+            if (branchId <= 0 || accountId <= 0)
+                return new BudgetCheckResult { Message = "Invalid branch or account." };
 
             int month = date.Month;
             DateTime monthStart = new DateTime(date.Year, month, 1);
@@ -662,9 +662,9 @@ WITH SelectedBudget AS
     FROM acc_budget_headers bh
     INNER JOIN acc_fiscal_years fy ON bh.financial_year_id = fy.id
     WHERE @AsOfDate BETWEEN fy.from_date AND fy.to_date
-      AND (bh.cc_id = @CCId OR bh.cc_id IS NULL OR bh.cc_id = 0)
+      AND (bh.branch_id = @BranchId OR bh.branch_id IS NULL OR bh.branch_id = 0)
       AND bh.status IN ('Active', 'Approved')
-    ORDER BY CASE WHEN bh.cc_id = @CCId THEN 0 ELSE 1 END,
+    ORDER BY CASE WHEN bh.branch_id = @BranchId THEN 0 ELSE 1 END,
              CASE bh.status WHEN 'Active' THEN 0 WHEN 'Approved' THEN 1 ELSE 2 END,
              bh.created_at DESC
 )
@@ -691,7 +691,7 @@ FROM SelectedBudget ab
 INNER JOIN acc_budget_lines bl ON bl.budget_id = ab.budget_id
 LEFT JOIN acc_entries E
     ON E.account_id = @AccountId
-    AND E.cost_center_id = @CCId
+    AND E.branch_id = @BranchId
     AND E.entry_date >= @MonthStart
     AND E.entry_date <= @MonthEnd
 WHERE bl.account_id = @AccountId
@@ -701,7 +701,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                 cn.Open();
                 using (SqlCommand localCmd = new SqlCommand(sql, cn))
                 {
-                    localCmd.Parameters.AddWithValue("@CCId", ccId);
+                    localCmd.Parameters.AddWithValue("@BranchId", branchId);
                     localCmd.Parameters.AddWithValue("@AccountId", accountId);
                     localCmd.Parameters.AddWithValue("@Month", month);
                     localCmd.Parameters.AddWithValue("@MonthStart", monthStart.Date);
@@ -801,17 +801,17 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                         try
                         {
                             // Get fiscal year for this budget
-                            cmd = new SqlCommand("SELECT financial_year_id, cc_id FROM acc_budget_headers WHERE budget_id = @budget_id", cn, trans);
+                            cmd = new SqlCommand("SELECT financial_year_id, branch_id FROM acc_budget_headers WHERE budget_id = @budget_id", cn, trans);
                             cmd.Parameters.AddWithValue("@budget_id", budgetId);
                             SqlDataReader reader = cmd.ExecuteReader();
 
                             int fiscalYearId = 0;
-                            object ccIdObj = null;
+                            object branchIdObj = null;
 
                             if (reader.Read())
                             {
                                 fiscalYearId = Convert.ToInt32(reader["financial_year_id"]);
-                                ccIdObj = reader["cc_id"];
+                                branchIdObj = reader["branch_id"];
                             }
                             reader.Close();
 
@@ -820,13 +820,13 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
 
                             // Deactivate all other budgets for same fiscal year and cost center
                             string deactivateQuery;
-                            if (ccIdObj == DBNull.Value || ccIdObj == null)
+                            if (branchIdObj == DBNull.Value || branchIdObj == null)
                             {
                                 deactivateQuery = @"
                                     UPDATE acc_budget_headers 
                                     SET status = 'Approved' 
                                     WHERE financial_year_id = @fiscal_year_id 
-                                      AND cc_id IS NULL 
+                                      AND branch_id IS NULL 
                                       AND budget_id <> @budget_id 
                                       AND status = 'Active'";
                             }
@@ -836,7 +836,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                                     UPDATE acc_budget_headers 
                                     SET status = 'Approved' 
                                     WHERE financial_year_id = @fiscal_year_id 
-                                      AND cc_id = @cc_id 
+                                      AND branch_id = @branch_id 
                                       AND budget_id <> @budget_id 
                                       AND status = 'Active'";
                             }
@@ -844,8 +844,8 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                             cmd = new SqlCommand(deactivateQuery, cn, trans);
                             cmd.Parameters.AddWithValue("@fiscal_year_id", fiscalYearId);
                             cmd.Parameters.AddWithValue("@budget_id", budgetId);
-                            if (ccIdObj != DBNull.Value && ccIdObj != null)
-                                cmd.Parameters.AddWithValue("@cc_id", ccIdObj);
+                            if (branchIdObj != DBNull.Value && branchIdObj != null)
+                                cmd.Parameters.AddWithValue("@branch_id", branchIdObj);
                             cmd.ExecuteNonQuery();
 
                             // Activate this budget
@@ -872,7 +872,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
         /// <summary>
         /// Gets the active budget for a specific date
         /// </summary>
-        public DataTable GetActiveBudgetForPeriod(DateTime date, int? ccId = null)
+        public DataTable GetActiveBudgetForPeriod(DateTime date, int? branchId = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -888,14 +888,14 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                         INNER JOIN acc_fiscal_years fy ON bh.financial_year_id = fy.id
                         WHERE bh.status = 'Active'
                           AND @date BETWEEN fy.from_date AND fy.to_date
-                          AND (@cc_id IS NULL OR bh.cc_id = @cc_id OR bh.cc_id IS NULL)
+                          AND (@branch_id IS NULL OR bh.branch_id = @branch_id OR bh.branch_id IS NULL)
                         ORDER BY 
-                            CASE WHEN bh.cc_id = @cc_id THEN 0 ELSE 1 END,
+                            CASE WHEN bh.branch_id = @branch_id THEN 0 ELSE 1 END,
                             bh.created_at DESC";
 
                     cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@date", date);
-                    cmd.Parameters.AddWithValue("@cc_id", (object)ccId ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@branch_id ", (object)branchId ?? DBNull.Value);
 
                     da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -920,7 +920,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
         /// <summary>
         /// Executes sp_BudgetVsActual stored procedure with report filters
         /// </summary>
-        public DataTable GetBudgetVsActual(int budgetId, DateTime fromDate, DateTime toDate, int? ccId, string periodMode, string accountTypeFilter)
+        public DataTable GetBudgetVsActual(int budgetId, DateTime fromDate, DateTime toDate, int? branchId, string periodMode, string accountTypeFilter)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -934,7 +934,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                     cmd.Parameters.AddWithValue("@BudgetId", budgetId);
                     cmd.Parameters.AddWithValue("@FromDate", fromDate);
                     cmd.Parameters.AddWithValue("@ToDate", toDate);
-                    cmd.Parameters.AddWithValue("@CCId", (object)ccId ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CCId", (object)branchId ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@PeriodMode", string.IsNullOrWhiteSpace(periodMode) ? "YTD" : periodMode);
                     cmd.Parameters.AddWithValue("@AccountTypeFilter", string.IsNullOrWhiteSpace(accountTypeFilter) ? "All" : accountTypeFilter);
 
@@ -953,7 +953,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
         /// <summary>
         /// Gets monthly budget vs actual detail for a specific account.
         /// </summary>
-        public DataTable GetBudgetMonthlyDetail(int budgetId, int accId, int? ccId = null)
+        public DataTable GetBudgetMonthlyDetail(int budgetId, int accId, int? branchId = null)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1013,7 +1013,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                           AND ae.entry_date >= @FiscalYearStart
                           AND ae.entry_date <= @FiscalYearEnd
                           AND UPPER(LTRIM(RTRIM(ISNULL(aeh.status, '')))) = 'POSTED'
-                          AND (@CCId IS NULL OR ae.cost_center_id = @CCId)
+                          AND (@CCId IS NULL OR ae.branch_id = @CCId)
                         GROUP BY MONTH(ae.entry_date)
                     )
                     SELECT
@@ -1031,7 +1031,7 @@ GROUP BY bl.jan, bl.feb, bl.mar, bl.apr, bl.may, bl.jun,
                     cmd = new SqlCommand(sql, cn);
                     cmd.Parameters.AddWithValue("@BudgetId", budgetId);
                     cmd.Parameters.AddWithValue("@AccId", accId);
-                    cmd.Parameters.AddWithValue("@CCId", (object)ccId ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CCId", (object)branchId ?? DBNull.Value);
 
                     da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();

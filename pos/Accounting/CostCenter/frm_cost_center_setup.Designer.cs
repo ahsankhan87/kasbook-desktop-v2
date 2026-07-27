@@ -17,33 +17,35 @@ namespace pos.Accounting.CostCenter
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlForm = new System.Windows.Forms.Panel();
-            this.lblCode = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.lblType = new System.Windows.Forms.Label();
-            this.cmbType = new System.Windows.Forms.ComboBox();
-            this.lblParent = new System.Windows.Forms.Label();
-            this.cmbParent = new System.Windows.Forms.ComboBox();
-            this.lblManager = new System.Windows.Forms.Label();
-            this.cmbManager = new System.Windows.Forms.ComboBox();
-            this.lblBudget = new System.Windows.Forms.Label();
-            this.txtBudget = new System.Windows.Forms.TextBox();
-            this.lblStartDate = new System.Windows.Forms.Label();
-            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
-            this.chkHasEndDate = new System.Windows.Forms.CheckBox();
-            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.chkActive = new System.Windows.Forms.CheckBox();
-            this.lblDescription = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.chkActive = new System.Windows.Forms.CheckBox();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.chkHasEndDate = new System.Windows.Forms.CheckBox();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.lblStartDate = new System.Windows.Forms.Label();
+            this.txtBudget = new System.Windows.Forms.TextBox();
+            this.lblBudget = new System.Windows.Forms.Label();
+            this.cmbManager = new System.Windows.Forms.ComboBox();
+            this.lblManager = new System.Windows.Forms.Label();
+            this.cmbParent = new System.Windows.Forms.ComboBox();
+            this.lblParent = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.lblType = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.lblCode = new System.Windows.Forms.Label();
             this.pnlButtons = new System.Windows.Forms.Panel();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dgvCostCenters = new System.Windows.Forms.DataGridView();
+            this.pnlForm.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostCenters)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,21 +53,16 @@ namespace pos.Accounting.CostCenter
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(12, 10);
+            this.lblTitle.Location = new System.Drawing.Point(12, 8);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(218, 32);
+            this.lblTitle.Size = new System.Drawing.Size(322, 32);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Cost Center Setup";
+            this.lblTitle.Text = "Branch / Cost Center Setup";
             // 
             // pnlForm
             // 
             this.pnlForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlForm.Location = new System.Drawing.Point(400, 40);
-            this.pnlForm.Name = "pnlForm";
-            this.pnlForm.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlForm.Size = new System.Drawing.Size(380, 520);
-            this.pnlForm.TabIndex = 1;
             this.pnlForm.Controls.Add(this.txtDescription);
             this.pnlForm.Controls.Add(this.lblDescription);
             this.pnlForm.Controls.Add(this.chkActive);
@@ -85,163 +82,11 @@ namespace pos.Accounting.CostCenter
             this.pnlForm.Controls.Add(this.lblName);
             this.pnlForm.Controls.Add(this.txtCode);
             this.pnlForm.Controls.Add(this.lblCode);
-            // 
-            // lblCode
-            // 
-            this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(15, 15);
-            this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(40, 13);
-            this.lblCode.TabIndex = 0;
-            this.lblCode.Text = "Code:";
-            // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(15, 35);
-            this.txtCode.MaxLength = 20;
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(350, 24);
-            this.txtCode.TabIndex = 1;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(15, 65);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(41, 13);
-            this.lblName.TabIndex = 2;
-            this.lblName.Text = "Name:";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(15, 85);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(350, 24);
-            this.txtName.TabIndex = 3;
-            // 
-            // lblType
-            // 
-            this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(15, 115);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(34, 13);
-            this.lblType.TabIndex = 4;
-            this.lblType.Text = "Type:";
-            // 
-            // cmbType
-            // 
-            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbType.Location = new System.Drawing.Point(15, 135);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(350, 24);
-            this.cmbType.TabIndex = 5;
-            // 
-            // lblParent
-            // 
-            this.lblParent.AutoSize = true;
-            this.lblParent.Location = new System.Drawing.Point(15, 165);
-            this.lblParent.Name = "lblParent";
-            this.lblParent.Size = new System.Drawing.Size(88, 13);
-            this.lblParent.TabIndex = 6;
-            this.lblParent.Text = "Parent Cost Ctr:";
-            // 
-            // cmbParent
-            // 
-            this.cmbParent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbParent.Location = new System.Drawing.Point(15, 185);
-            this.cmbParent.Name = "cmbParent";
-            this.cmbParent.Size = new System.Drawing.Size(350, 24);
-            this.cmbParent.TabIndex = 7;
-            // 
-            // lblManager
-            // 
-            this.lblManager.AutoSize = true;
-            this.lblManager.Location = new System.Drawing.Point(15, 215);
-            this.lblManager.Name = "lblManager";
-            this.lblManager.Size = new System.Drawing.Size(53, 13);
-            this.lblManager.TabIndex = 8;
-            this.lblManager.Text = "Manager:";
-            // 
-            // cmbManager
-            // 
-            this.cmbManager.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbManager.Location = new System.Drawing.Point(15, 235);
-            this.cmbManager.Name = "cmbManager";
-            this.cmbManager.Size = new System.Drawing.Size(350, 24);
-            this.cmbManager.TabIndex = 9;
-            // 
-            // lblBudget
-            // 
-            this.lblBudget.AutoSize = true;
-            this.lblBudget.Location = new System.Drawing.Point(15, 265);
-            this.lblBudget.Name = "lblBudget";
-            this.lblBudget.Size = new System.Drawing.Size(97, 13);
-            this.lblBudget.TabIndex = 10;
-            this.lblBudget.Text = "Monthly Budget:";
-            // 
-            // txtBudget
-            // 
-            this.txtBudget.Location = new System.Drawing.Point(15, 285);
-            this.txtBudget.Name = "txtBudget";
-            this.txtBudget.Size = new System.Drawing.Size(175, 24);
-            this.txtBudget.TabIndex = 11;
-            // 
-            // lblStartDate
-            // 
-            this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(15, 315);
-            this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(60, 13);
-            this.lblStartDate.TabIndex = 12;
-            this.lblStartDate.Text = "Start Date:";
-            // 
-            // dtpStartDate
-            // 
-            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStartDate.Location = new System.Drawing.Point(15, 335);
-            this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(150, 24);
-            this.dtpStartDate.TabIndex = 13;
-            // 
-            // chkHasEndDate
-            // 
-            this.chkHasEndDate.AutoSize = true;
-            this.chkHasEndDate.Location = new System.Drawing.Point(15, 365);
-            this.chkHasEndDate.Name = "chkHasEndDate";
-            this.chkHasEndDate.Size = new System.Drawing.Size(77, 17);
-            this.chkHasEndDate.TabIndex = 14;
-            this.chkHasEndDate.Text = "End Date:";
-            this.chkHasEndDate.UseVisualStyleBackColor = true;
-            this.chkHasEndDate.CheckedChanged += new System.EventHandler(this.ChkHasEndDate_CheckedChanged);
-            // 
-            // dtpEndDate
-            // 
-            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEndDate.Location = new System.Drawing.Point(15, 385);
-            this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(150, 24);
-            this.dtpEndDate.TabIndex = 15;
-            // 
-            // chkActive
-            // 
-            this.chkActive.AutoSize = true;
-            this.chkActive.Checked = true;
-            this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(15, 415);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(56, 17);
-            this.chkActive.TabIndex = 16;
-            this.chkActive.Text = "Active";
-            this.chkActive.UseVisualStyleBackColor = true;
-            // 
-            // lblDescription
-            // 
-            this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(15, 440);
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(63, 13);
-            this.lblDescription.TabIndex = 17;
-            this.lblDescription.Text = "Description:";
+            this.pnlForm.Location = new System.Drawing.Point(561, 40);
+            this.pnlForm.Name = "pnlForm";
+            this.pnlForm.Padding = new System.Windows.Forms.Padding(15);
+            this.pnlForm.Size = new System.Drawing.Size(380, 520);
+            this.pnlForm.TabIndex = 1;
             // 
             // txtDescription
             // 
@@ -251,45 +96,184 @@ namespace pos.Accounting.CostCenter
             this.txtDescription.Size = new System.Drawing.Size(350, 45);
             this.txtDescription.TabIndex = 18;
             // 
+            // lblDescription
+            // 
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(15, 440);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(81, 19);
+            this.lblDescription.TabIndex = 17;
+            this.lblDescription.Text = "Description:";
+            // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Checked = true;
+            this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Location = new System.Drawing.Point(15, 415);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(68, 23);
+            this.chkActive.TabIndex = 16;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
+            // 
+            // dtpEndDate
+            // 
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEndDate.Location = new System.Drawing.Point(15, 385);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(150, 26);
+            this.dtpEndDate.TabIndex = 15;
+            // 
+            // chkHasEndDate
+            // 
+            this.chkHasEndDate.AutoSize = true;
+            this.chkHasEndDate.Location = new System.Drawing.Point(15, 365);
+            this.chkHasEndDate.Name = "chkHasEndDate";
+            this.chkHasEndDate.Size = new System.Drawing.Size(90, 23);
+            this.chkHasEndDate.TabIndex = 14;
+            this.chkHasEndDate.Text = "End Date:";
+            this.chkHasEndDate.UseVisualStyleBackColor = true;
+            this.chkHasEndDate.CheckedChanged += new System.EventHandler(this.ChkHasEndDate_CheckedChanged);
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpStartDate.Location = new System.Drawing.Point(15, 335);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(150, 26);
+            this.dtpStartDate.TabIndex = 13;
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Location = new System.Drawing.Point(15, 315);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(74, 19);
+            this.lblStartDate.TabIndex = 12;
+            this.lblStartDate.Text = "Start Date:";
+            // 
+            // txtBudget
+            // 
+            this.txtBudget.Location = new System.Drawing.Point(15, 285);
+            this.txtBudget.Name = "txtBudget";
+            this.txtBudget.Size = new System.Drawing.Size(175, 26);
+            this.txtBudget.TabIndex = 11;
+            // 
+            // lblBudget
+            // 
+            this.lblBudget.AutoSize = true;
+            this.lblBudget.Location = new System.Drawing.Point(15, 265);
+            this.lblBudget.Name = "lblBudget";
+            this.lblBudget.Size = new System.Drawing.Size(112, 19);
+            this.lblBudget.TabIndex = 10;
+            this.lblBudget.Text = "Monthly Budget:";
+            // 
+            // cmbManager
+            // 
+            this.cmbManager.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbManager.Location = new System.Drawing.Point(15, 235);
+            this.cmbManager.Name = "cmbManager";
+            this.cmbManager.Size = new System.Drawing.Size(350, 27);
+            this.cmbManager.TabIndex = 9;
+            // 
+            // lblManager
+            // 
+            this.lblManager.AutoSize = true;
+            this.lblManager.Location = new System.Drawing.Point(15, 215);
+            this.lblManager.Name = "lblManager";
+            this.lblManager.Size = new System.Drawing.Size(67, 19);
+            this.lblManager.TabIndex = 8;
+            this.lblManager.Text = "Manager:";
+            // 
+            // cmbParent
+            // 
+            this.cmbParent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbParent.Location = new System.Drawing.Point(15, 185);
+            this.cmbParent.Name = "cmbParent";
+            this.cmbParent.Size = new System.Drawing.Size(350, 27);
+            this.cmbParent.TabIndex = 7;
+            // 
+            // lblParent
+            // 
+            this.lblParent.AutoSize = true;
+            this.lblParent.Location = new System.Drawing.Point(15, 165);
+            this.lblParent.Name = "lblParent";
+            this.lblParent.Size = new System.Drawing.Size(107, 19);
+            this.lblParent.TabIndex = 6;
+            this.lblParent.Text = "Parent Cost Ctr:";
+            // 
+            // cmbType
+            // 
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.Location = new System.Drawing.Point(15, 135);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(350, 27);
+            this.cmbType.TabIndex = 5;
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(15, 115);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(40, 19);
+            this.lblType.TabIndex = 4;
+            this.lblType.Text = "Type:";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(15, 85);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(350, 26);
+            this.txtName.TabIndex = 3;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(15, 65);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(48, 19);
+            this.lblName.TabIndex = 2;
+            this.lblName.Text = "Name:";
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(15, 35);
+            this.txtCode.MaxLength = 20;
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(350, 26);
+            this.txtCode.TabIndex = 1;
+            // 
+            // lblCode
+            // 
+            this.lblCode.AutoSize = true;
+            this.lblCode.Location = new System.Drawing.Point(15, 15);
+            this.lblCode.Name = "lblCode";
+            this.lblCode.Size = new System.Drawing.Size(44, 19);
+            this.lblCode.TabIndex = 0;
+            this.lblCode.Text = "Code:";
+            // 
             // pnlButtons
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlButtons.Location = new System.Drawing.Point(400, 570);
-            this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(380, 40);
-            this.pnlButtons.TabIndex = 2;
             this.pnlButtons.Controls.Add(this.btnDelete);
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Controls.Add(this.btnEdit);
             this.pnlButtons.Controls.Add(this.btnNew);
+            this.pnlButtons.Location = new System.Drawing.Point(561, 570);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(380, 40);
+            this.pnlButtons.TabIndex = 2;
             // 
-            // btnNew
+            // btnDelete
             // 
-            this.btnNew.Location = new System.Drawing.Point(15, 8);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(60, 25);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "New";
-            this.btnNew.UseVisualStyleBackColor = true;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(80, 8);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(60, 25);
-            this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(145, 8);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(60, 25);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnDelete.Location = new System.Drawing.Point(275, 8);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 25);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Deactivate";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
@@ -300,14 +284,32 @@ namespace pos.Accounting.CostCenter
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnDelete
+            // btnSave
             // 
-            this.btnDelete.Location = new System.Drawing.Point(275, 8);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 25);
-            this.btnDelete.TabIndex = 4;
-            this.btnDelete.Text = "Deactivate";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(145, 8);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(60, 25);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(80, 8);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(60, 25);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(15, 8);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(60, 25);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
             // 
             // splitter1
             // 
@@ -331,14 +333,14 @@ namespace pos.Accounting.CostCenter
             this.dgvCostCenters.ReadOnly = true;
             this.dgvCostCenters.RowHeadersVisible = false;
             this.dgvCostCenters.RowHeadersWidth = 51;
-            this.dgvCostCenters.Size = new System.Drawing.Size(385, 570);
+            this.dgvCostCenters.Size = new System.Drawing.Size(545, 570);
             this.dgvCostCenters.TabIndex = 4;
             // 
             // frm_cost_center_setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 620);
+            this.ClientSize = new System.Drawing.Size(961, 620);
             this.Controls.Add(this.dgvCostCenters);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlButtons);
@@ -347,8 +349,11 @@ namespace pos.Accounting.CostCenter
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Name = "frm_cost_center_setup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cost Center Setup";
+            this.Text = "Branch / Cost Center Setup";
             this.Load += new System.EventHandler(this.FrmCostCenterSetup_Load);
+            this.pnlForm.ResumeLayout(false);
+            this.pnlForm.PerformLayout();
+            this.pnlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostCenters)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
