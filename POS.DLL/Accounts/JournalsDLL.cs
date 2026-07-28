@@ -1688,7 +1688,9 @@ WHERE id = @voucher_id
                                     payment_ref_invoice_no NVARCHAR(100) NULL,
                                     customer_id INT NULL,
                                     supplier_id INT NULL,
-                                    bank_id INT NULL
+                                    bank_id INT NULL,
+                                    ref_module NVARCHAR(100) NULL,
+                                    ref_id INT NULL
                                 );", cn, tx))
                             {
                                 createStage.ExecuteNonQuery();
@@ -1709,15 +1711,17 @@ WHERE id = @voucher_id
                                 bulk.ColumnMappings.Add("customer_id", "customer_id");
                                 bulk.ColumnMappings.Add("supplier_id", "supplier_id");
                                 bulk.ColumnMappings.Add("bank_id", "bank_id");
+                                bulk.ColumnMappings.Add("ref_module", "ref_module");
+                                bulk.ColumnMappings.Add("ref_id", "ref_id");
                                 bulk.WriteToServer(stagedLines);
                             }
 
                             using (SqlCommand insertCmd = new SqlCommand(@"
                                 DECLARE @Inserted TABLE (EntryId INT);
                                 INSERT INTO acc_entries
-                                    (invoice_no, account_id, account_name, entry_date, debit, credit, description, user_id, branch_id, period_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no)
+                                    (invoice_no, account_id, account_name, entry_date, debit, credit, description, user_id, branch_id, period_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no, ref_module, ref_id)
                                 OUTPUT INSERTED.id INTO @Inserted(EntryId)
-                                SELECT @invoice_no, account_id, (SELECT name FROM acc_accounts WHERE id = account_id), @entry_date, debit, credit, narration, @user_id, @branch_id, @period_id, GETDATE(), customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no
+                                SELECT @invoice_no, account_id, (SELECT name FROM acc_accounts WHERE id = account_id), @entry_date, debit, credit, narration, @user_id, @branch_id, @period_id, GETDATE(), customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no, ref_module, ref_id
                                 FROM #AutoJVLines
                                 ORDER BY line_no;
                                 SELECT EntryId FROM @Inserted ORDER BY EntryId;", cn, tx))
@@ -1745,10 +1749,10 @@ WHERE id = @voucher_id
                             {
                                 using (SqlCommand insertCmd = new SqlCommand(@"
                                 INSERT INTO acc_entries
-                                    (invoice_no, account_id, account_name, entry_date, debit, credit, description, user_id, branch_id, period_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no)
+                                    (invoice_no, account_id, account_name, entry_date, debit, credit, description, user_id, branch_id, period_id, date_created, customer_id, supplier_id, bank_id, entry_id, payment_ref_invoice_no, ref_module, ref_id)
                                 OUTPUT INSERTED.id
                                 VALUES
-                                    (@invoice_no, @account_id, (SELECT name FROM acc_accounts WHERE id = @account_id), @entry_date, @debit, @credit, @description, @user_id, @branch_id, @period_id, GETDATE(), @customer_id, @supplier_id, @bank_id, @entry_id, @payment_ref_invoice_no);", cn, tx))
+                                    (@invoice_no, @account_id, (SELECT name FROM acc_accounts WHERE id = @account_id), @entry_date, @debit, @credit, @description, @user_id, @branch_id, @period_id, GETDATE(), @customer_id, @supplier_id, @bank_id, @entry_id, @payment_ref_invoice_no, @ref_module, @ref_id);", cn, tx))
                                 {
                                     insertCmd.Parameters.AddWithValue("@invoice_no", voucherNo);
                                     insertCmd.Parameters.AddWithValue("@account_id", line.AccountId);
@@ -1759,11 +1763,15 @@ WHERE id = @voucher_id
                                     insertCmd.Parameters.AddWithValue("@user_id", userId);
                                     insertCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                                     insertCmd.Parameters.AddWithValue("@period_id", periodId.HasValue && periodId.Value > 0 ? (object)periodId.Value : DBNull.Value);
-                                    insertCmd.Parameters.AddWithValue("@customer_id", 0);
-                                    insertCmd.Parameters.AddWithValue("@supplier_id", 0);
-                                    insertCmd.Parameters.AddWithValue("@bank_id", 0);
+                                    insertCmd.Parameters.AddWithValue("@customer_id", line.CustomerId.HasValue && line.CustomerId.Value > 0 ? (object)line.CustomerId.Value : DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@supplier_id", line.SupplierId.HasValue && line.SupplierId.Value > 0 ? (object)line.SupplierId.Value : DBNull.Value);
+                                    insertCmd.Parameters.AddWithValue("@bank_id", line.BankId.HasValue && line.BankId.Value > 0 ? (object)line.BankId.Value : DBNull.Value);
                                     insertCmd.Parameters.AddWithValue("@entry_id", voucherId);
                                     insertCmd.Parameters.AddWithValue("@payment_ref_invoice_no", string.IsNullOrWhiteSpace(model.ReferenceNo) ? (object)DBNull.Value : model.ReferenceNo);
+                                    string lineRefModule = !string.IsNullOrWhiteSpace(line.ModuleName) ? line.ModuleName : (!string.IsNullOrWhiteSpace(model.RefModule) ? model.RefModule : model.ModuleName);
+                                    insertCmd.Parameters.AddWithValue("@ref_module", string.IsNullOrWhiteSpace(lineRefModule) ? (object)DBNull.Value : lineRefModule);
+                                    int? lineRefId = line.RefId.HasValue && line.RefId.Value > 0 ? line.RefId : (model.RefId > 0 ? (int?)model.RefId : null);
+                                    insertCmd.Parameters.AddWithValue("@ref_id", lineRefId.HasValue ? (object)lineRefId.Value : DBNull.Value);
                                     object inserted = insertCmd.ExecuteScalar();
                                     if (inserted != null && inserted != DBNull.Value)
                                     {
@@ -2066,6 +2074,8 @@ WHERE id = @voucher_id
             dt.Columns.Add("customer_id", typeof(int));
             dt.Columns.Add("supplier_id", typeof(int));
             dt.Columns.Add("bank_id", typeof(int));
+            dt.Columns.Add("ref_module", typeof(string));
+            dt.Columns.Add("ref_id", typeof(int));
             dt.Columns.Add("branch_id", typeof(int));
 
             for (int i = 0; i < model.Lines.Count; i++)
@@ -2081,7 +2091,10 @@ WHERE id = @voucher_id
                     string.IsNullOrWhiteSpace(model.ReferenceNo) ? DBNull.Value : (object)model.ReferenceNo,
                     line.CustomerId.HasValue && line.CustomerId.Value > 0 ? (object)line.CustomerId.Value : DBNull.Value,
                     line.SupplierId.HasValue && line.SupplierId.Value > 0 ? (object)line.SupplierId.Value : DBNull.Value,
-                    line.BankId.HasValue && line.BankId.Value > 0 ? (object)line.BankId.Value : DBNull.Value);
+                    line.BankId.HasValue && line.BankId.Value > 0 ? (object)line.BankId.Value : DBNull.Value,
+                    !string.IsNullOrWhiteSpace(line.ModuleName) ? (object)line.ModuleName : (!string.IsNullOrWhiteSpace(model.RefModule) ? (object)model.RefModule : (string.IsNullOrWhiteSpace(model.ModuleName) ? DBNull.Value : (object)model.ModuleName)),
+                    line.RefId.HasValue && line.RefId.Value > 0 ? (object)line.RefId.Value : (model.RefId > 0 ? (object)model.RefId : DBNull.Value),
+                    UsersModal.logged_in_branch_id);
             }
 
             return dt;
