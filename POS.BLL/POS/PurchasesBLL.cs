@@ -110,11 +110,11 @@ namespace POS.BLL
             return objDLL.GenerateDailyInvoiceNo("pos_hold_purchases", "invoice_no", "PH", branchId, invoiceDate);
         }
 
-        public String GetMaxInvoiceNo()
+        public String GetMaxPurchaseInvoiceNo()
         {
             try
             {
-                return objDLL.GetMaxInvoiceNo();
+                return objDLL.GetMaxPurchaseInvoiceNo();
             }
             catch
             {
@@ -122,11 +122,11 @@ namespace POS.BLL
                 throw;
             }
         }
-        public String GetMaxReturnInvoiceNo()
+        public String GetMaxPurchaseReturnInvoiceNo()
         {
             try
             {
-                return objDLL.GetMaxReturnInvoiceNo();
+                return objDLL.GetMaxPurchaseReturnInvoiceNo();
             }
             catch
             {
@@ -134,11 +134,11 @@ namespace POS.BLL
                 throw;
             }
         }
-        public String GetMaxInvoiceNo_HOLD()
+        public String GetMaxHoldPurchaseInvoiceNo()
         {
             try
             {
-                return objDLL.GetMaxInvoiceNo_HOLD();
+                return objDLL.GetMaxHoldPurchaseInvoiceNo();
             }
             catch
             {

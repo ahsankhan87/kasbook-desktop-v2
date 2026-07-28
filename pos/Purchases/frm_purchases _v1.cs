@@ -101,7 +101,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             PurchasesBLL PurchasesBLL_obj = new PurchasesBLL();
-            return PurchasesBLL_obj.GetMaxInvoiceNo();
+            return PurchasesBLL_obj.GetMaxPurchaseInvoiceNo();
         }
 
         Form purchaseSearchObj;

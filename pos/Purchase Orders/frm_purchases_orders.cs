@@ -375,7 +375,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             Purchases_orderBLL Purchases_orderBLL_obj = new Purchases_orderBLL();
-            return Purchases_orderBLL_obj.GeneratePurchaseOrderInvoiceNo(); // GetMaxInvoiceNo();
+            return Purchases_orderBLL_obj.GetMaxPurchaseOrderInvoiceNo(); // GetMaxInvoiceNo();
         }
         Form purchaseSearchObj;
         private void grid_purchases_order_CellEndEdit(object sender, DataGridViewCellEventArgs e)

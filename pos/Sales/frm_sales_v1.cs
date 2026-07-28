@@ -681,7 +681,7 @@ namespace pos
                             }
                             else
                             {
-                                invoice_no = salesObj.GetMaxSaleInvoiceNo();
+                                invoice_no = salesObj.GenerateSaleInvoiceNo();
                                 
                             }
                         

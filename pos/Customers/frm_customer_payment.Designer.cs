@@ -110,16 +110,16 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.lbl_header_title);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.ForeColor = System.Drawing.Color.Coral;
             this.panel1.Name = "panel1";
             // 
             // btn_cancel
             // 
-            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btn_cancel, "btn_cancel");
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -132,16 +132,16 @@
             // 
             // cmb_GL_account_code
             // 
-            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
             this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
             this.cmb_GL_account_code.FormattingEnabled = true;
             this.cmb_GL_account_code.Name = "cmb_GL_account_code";
             this.cmb_GL_account_code.SelectedIndexChanged += new System.EventHandler(this.cmb_cash_account_code_SelectedIndexChanged);
             // 
             // cmb_ref_account_code
             // 
-            resources.ApplyResources(this.cmb_ref_account_code, "cmb_ref_account_code");
             this.cmb_ref_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_ref_account_code, "cmb_ref_account_code");
             this.cmb_ref_account_code.FormattingEnabled = true;
             this.cmb_ref_account_code.Name = "cmb_ref_account_code";
             // 
@@ -157,12 +157,12 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.groupBox1.Controls.Add(this.lblCustomerName);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.lblGLAccountDebitName);
             this.groupBox1.Controls.Add(this.label8);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -188,19 +188,19 @@
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.cmb_ref_account_code);
             this.groupBox2.Controls.Add(this.cmb_GL_account_code);
             this.groupBox2.Controls.Add(this.label5);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // cmb_pendingInvoices
             // 
-            resources.ApplyResources(this.cmb_pendingInvoices, "cmb_pendingInvoices");
             this.cmb_pendingInvoices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cmb_pendingInvoices, "cmb_pendingInvoices");
             this.cmb_pendingInvoices.FormattingEnabled = true;
             this.cmb_pendingInvoices.Name = "cmb_pendingInvoices";
             // 

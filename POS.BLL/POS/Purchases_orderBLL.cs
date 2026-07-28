@@ -100,11 +100,11 @@ namespace POS.BLL
                 throw;
             }
         }
-        public String GetMaxInvoiceNo()
+        public String GetMaxPurchaseOrderInvoiceNo()
         {
             try
             {
-                return objDLL.GetMaxInvoiceNo();
+                return objDLL.GetMaxPurchaseOrderInvoiceNo();
             }
             catch
             {

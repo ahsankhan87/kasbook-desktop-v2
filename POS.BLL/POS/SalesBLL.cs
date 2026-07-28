@@ -125,32 +125,22 @@ namespace POS.BLL
             }
         }
 
-        public String GetMaxSaleInvoiceNo()
-        {
-            try
-            {
-                SalesDLL objDLL = new SalesDLL();
-                return objDLL.GetMaxInvoiceNo();
-            }
-            catch
-            {
-
-                throw;
-            }
-        }
+        
 
         // SALE (replaces your GenerateSaleInvoiceNo logic to use the common helper)
         public string GenerateSaleInvoiceNo(string prefix = "S", int? branchId = null, DateTime? invoiceDate = null)
         {
             SalesDLL salesDLL = new SalesDLL();
-            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", prefix, branchId, invoiceDate);
+            return salesDLL.GetMaxSaleInvoiceNo();
+            //return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", prefix, branchId, invoiceDate);
         }
 
         // SALES RETURN
         public string GenerateSalesReturnInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
         {
             SalesDLL salesDLL = new SalesDLL();
-            return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "SR", branchId, invoiceDate);
+            return salesDLL.GetMaxSalesReturnInvoiceNo();
+            //return salesDLL.GenerateDailyInvoiceNo("pos_sales", "invoice_no", "SR", branchId, invoiceDate);
         }
 
         // SALES RETURN (skip ZATCA series)
@@ -178,12 +168,14 @@ namespace POS.BLL
         public string GenerateEstimateInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
         {
             SalesDLL salesDLL = new SalesDLL();
-            return salesDLL.GenerateDailyInvoiceNo("pos_estimates", "invoice_no", "E", branchId, invoiceDate);
+            return salesDLL.GetMaxEstimateInvoiceNo();
+            //return salesDLL.GenerateDailyInvoiceNo("pos_estimates", "invoice_no", "E", branchId, invoiceDate);
         }
         public string GenerateAdjustmentInvoiceNo(int? branchId = null, DateTime? invoiceDate = null)
         {
             SalesDLL salesDLL = new SalesDLL();
-            return salesDLL.GenerateDailyInvoiceNo("pos_product_adjustment", "invoice_no", "AD", branchId, invoiceDate);
+            return salesDLL.GetMaxAdjustmentInvoiceNo();
+            //return salesDLL.GenerateDailyInvoiceNo("pos_product_adjustment", "invoice_no", "AD", branchId, invoiceDate);
         }
         public String GetMaxSalesReturnInvoiceNo()
         {

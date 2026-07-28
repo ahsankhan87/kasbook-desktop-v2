@@ -441,6 +441,9 @@
   <data name="branch.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <data name="branch.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="branch.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>

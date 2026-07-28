@@ -2147,11 +2147,10 @@ WHERE InvoiceNo = @voucher_no
             {
                 cn.Open();
                 using (SqlCommand cmd = new SqlCommand(@"
-SELECT id, code, name
-FROM acc_accounts
-WHERE branch_id = @branch_id
-  AND id IN (" + string.Join(",", accountIds.Select((x, i) => "@a" + i)) + @")
-  AND (is_active = 1 OR is_active IS NULL);", cn))
+                SELECT id, code, name
+                FROM acc_accounts
+                WHERE id IN (" + string.Join(",", accountIds.Select((x, i) => "@a" + i)) + @")
+                  AND (is_active = 1 OR is_active IS NULL);", cn))
                 {
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     for (int i = 0; i < accountIds.Count; i++)

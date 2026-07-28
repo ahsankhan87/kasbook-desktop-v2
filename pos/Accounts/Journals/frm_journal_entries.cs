@@ -60,7 +60,7 @@ namespace pos
 
             ConfigureVoucherTypes();
             ConfigurePartyLookups();
-            ConfigureBranches();
+            //ConfigureBranches();
             ConfigureTemplateMenu();
             txt_entry_date.Value = DateTime.Today;
             LoadAccountLookup();
@@ -496,7 +496,7 @@ namespace pos
             {
                 GeneralBLL objBLL = new GeneralBLL();
                 string keyword = "A.id, ISNULL(A.code,'') AS code, ISNULL(A.name,'') AS name, ISNULL(A.name_2,'') AS name_2, ISNULL(T.name,'') AS account_type_name, (ISNULL(A.code,'') + ' - ' + ISNULL(A.name,'')) AS display";
-                string table = "acc_accounts A INNER JOIN acc_groups G ON A.group_id = G.id INNER JOIN acc_account_type T ON G.account_type_id = T.id WHERE A.branch_id = " + UsersModal.logged_in_branch_id + " ORDER BY A.code, A.name";
+                string table = "acc_accounts A INNER JOIN acc_groups G ON A.group_id = G.id INNER JOIN acc_account_type T ON G.account_type_id = T.id ORDER BY A.code, A.name";
 
                 _accountsTable = objBLL.GetRecord(keyword, table);
                 if (!_accountsTable.Columns.Contains("display"))

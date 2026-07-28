@@ -593,7 +593,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             PurchasesBLL PurchasesBLL_obj = new PurchasesBLL();
-            return PurchasesBLL_obj.GeneratePurchaseInvoiceNo(); //.GetMaxInvoiceNo();
+            return PurchasesBLL_obj.GetMaxPurchaseInvoiceNo(); //.GetMaxInvoiceNo();
         }
 
         public string GetMAXInvoiceNo_HOLD()

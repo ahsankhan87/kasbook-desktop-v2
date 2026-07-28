@@ -71,7 +71,7 @@ namespace pos
             }
             else { // Create new inv no for PO
 
-                txt_invoice_no.Text = Purchases_orderBLL_obj.GetMaxInvoiceNo();
+                txt_invoice_no.Text = Purchases_orderBLL_obj.GetMaxPurchaseOrderInvoiceNo();
             }
             
             

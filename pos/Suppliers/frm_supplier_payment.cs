@@ -27,6 +27,7 @@ namespace pos
         public string _invoice_no;
 
         public int cash_account_id = 0;
+        public int bank_account_id = 0;
         public int payable_account_id = 0;
         public int tax_account_id = 0;
         public int purchases_discount_acc_id = 0;
@@ -68,9 +69,27 @@ namespace pos
         {
             GeneralBLL generalBLL_obj = new GeneralBLL();
             string keyword = "id,name";
-            string table = "acc_accounts where id IN (3,19)";
+            List<int> accountIds = new List<int>();
 
-            DataTable accounts = generalBLL_obj.GetRecord(keyword, table);
+            if (cash_account_id > 0)
+                accountIds.Add(cash_account_id);
+
+            if (bank_account_id > 0 && !accountIds.Contains(bank_account_id))
+                accountIds.Add(bank_account_id);
+
+            DataTable accounts;
+            if (accountIds.Count > 0)
+            {
+                string table = "acc_accounts where id IN (" + string.Join(",", accountIds.Distinct()) + ")";
+                accounts = generalBLL_obj.GetRecord(keyword, table);
+            }
+            else
+            {
+                accounts = new DataTable();
+                accounts.Columns.Add("id", typeof(int));
+                accounts.Columns.Add("name", typeof(string));
+            }
+
             DataRow emptyRow = accounts.NewRow();
             emptyRow[0] = 0;
             emptyRow[1] = "Please Select";
@@ -80,7 +99,12 @@ namespace pos
             cmb_GL_account_code.ValueMember = "id";
             cmb_GL_account_code.DataSource = accounts;
 
-            cmb_GL_account_code.SelectedValue = "3";
+            if (cash_account_id > 0)
+                cmb_GL_account_code.SelectedValue = cash_account_id;
+            else if (bank_account_id > 0)
+                cmb_GL_account_code.SelectedValue = bank_account_id;
+            else
+                cmb_GL_account_code.SelectedValue = 0;
         }
 
         public void GetMAXInvoiceNo()
@@ -130,8 +154,27 @@ namespace pos
                     int glAccountId = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));
                     int refAccountId = (cmb_ref_account_code.SelectedValue == null ? 0 : int.Parse(cmb_ref_account_code.SelectedValue.ToString()));
 
-                    bool isBankPayment = new BankBLL().IsBankGlAccount(glAccountId);
+                    if (glAccountId <= 0)
+                    {
+                        UiMessages.ShowInfo("Please select a valid cash or bank account.", "يرجى اختيار حساب نقدي أو بنكي صحيح.", "Validation", "التحقق");
+                        return;
+                    }
+
+                    if (payable_account_id <= 0)
+                    {
+                        UiMessages.ShowInfo("Default accounts payable is not configured. Please configure it in Accounting Settings.", "حساب الذمم الدائنة الافتراضي غير مهيأ. يرجى ضبطه من إعدادات المحاسبة.", "Validation", "التحقق");
+                        return;
+                    }
+
+                    bool isBankPayment = IsBankPaymentAccount(glAccountId);
+                    if (isBankPayment && refAccountId <= 0)
+                    {
+                        UiMessages.ShowInfo("Please select a bank account reference.", "يرجى اختيار مرجع الحساب البنكي.", "Validation", "التحقق");
+                        return;
+                    }
+
                     string bankName = isBankPayment ? GetSelectedReferenceDisplayText() : string.Empty;
+                    int? bankId = isBankPayment ? (int?)refAccountId : null;
                     string userRemarks = GetEffectiveRemarks();
 
                     string ledgerInvoiceNo = string.IsNullOrWhiteSpace(appliedInvoiceNo) ? _invoice_no : appliedInvoiceNo;
@@ -140,27 +183,83 @@ namespace pos
                     string discountJournalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, false, _invoice_no, true, _supplier_name);
                     string discountLedgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, true, _supplier_name);
 
-                    int entry_id = Insert_Journal_entry(_invoice_no, payable_account_id, amount, 0, txt_payment_date.Value.Date, journalDescription, 0, 0, 0, 0);
-                    Insert_Journal_entry(_invoice_no, glAccountId, 0, amount, txt_payment_date.Value.Date, journalDescription, 0, 0, 0, 0);
-
-                    if (refAccountId != 0 && isBankPayment)
+                    List<JVLineModel> lines = new List<JVLineModel>();
+                    lines.Add(new JVLineModel
                     {
-                        Insert_Journal_entry(_invoice_no, glAccountId, 0, amount, txt_payment_date.Value.Date, journalDescription, 0, 0, entry_id, refAccountId);
+                        AccountId = payable_account_id,
+                        Debit = Convert.ToDecimal(amount),
+                        Credit = 0m,
+                        Narration = ledgerDescription,
+                        ModuleName = "SUPPLIER_PAYMENT",
+                        SupplierId = _supplier_id
+                    });
+
+                    lines.Add(new JVLineModel
+                    {
+                        AccountId = glAccountId,
+                        Debit = 0m,
+                        Credit = Convert.ToDecimal(amount),
+                        Narration = journalDescription,
+                        ModuleName = "SUPPLIER_PAYMENT",
+                        BankId = bankId
+                    });
+
+                    if (discountAmount > 0)
+                    {
+                        if (purchases_discount_acc_id <= 0)
+                        {
+                            UiMessages.ShowInfo("Default purchase discount account is not configured. Please configure it in Accounting Settings.", "حساب خصم المشتريات الافتراضي غير مهيأ. يرجى ضبطه من إعدادات المحاسبة.", "Validation", "التحقق");
+                            return;
+                        }
+
+                        lines.Add(new JVLineModel
+                        {
+                            AccountId = payable_account_id,
+                            Debit = Convert.ToDecimal(discountAmount),
+                            Credit = 0m,
+                            Narration = discountLedgerDescription,
+                            ModuleName = "SUPPLIER_PAYMENT",
+                            SupplierId = _supplier_id
+                        });
+
+                        lines.Add(new JVLineModel
+                        {
+                            AccountId = purchases_discount_acc_id,
+                            Debit = 0m,
+                            Credit = Convert.ToDecimal(discountAmount),
+                            Narration = discountJournalDescription,
+                            ModuleName = "SUPPLIER_PAYMENT"
+                        });
                     }
 
-                    // supplier ledger entry should be linked to the credit entry of the payment account for proper reporting of supplier payments in the ledger
-                    Insert_Journal_entry(ledgerInvoiceNo, glAccountId, amount, 0, txt_payment_date.Value.Date, ledgerDescription, 0, _supplier_id, entry_id, 0,_invoice_no);
-
-                    if (!string.IsNullOrWhiteSpace(txt_discount.Text))
+                    AutoJVModel model = new AutoJVModel
                     {
-                        double discount;
-                        if (double.TryParse(txt_discount.Text, out discount) && discount > 0)
+                        ModuleName = "PAYMENT",
+                        RefModule = "pos_suppliers_payments",
+                        RefId = _supplier_id,
+                        VoucherDate = txt_payment_date.Value.Date,
+                        ReferenceNo = ledgerInvoiceNo,
+                        Narration = journalDescription,
+                        IsAutoPosted = true,
+                        BranchId = UsersModal.logged_in_branch_id,
+                        Lines = lines
+                    };
+
+                    JournalsBLL journalsBll = new JournalsBLL();
+                    PostResult postResult = journalsBll.PostAutoJournalEntry(model, UsersModal.logged_in_userid);
+
+                    if (postResult == null || !postResult.Success)
+                    {
+                        string errorMessage = "Payment could not be posted. Please try again.";
+                        if (postResult != null && postResult.Messages != null && postResult.Messages.Count > 0)
                         {
-                            Insert_Journal_entry(_invoice_no, payable_account_id, discount, 0, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
-                            int entry_idd = Insert_Journal_entry(_invoice_no, purchases_discount_acc_id, 0, discount, txt_payment_date.Value.Date, discountJournalDescription, 0, 0, 0, 0);
-                            // Supplier ledger entry for discount should be linked to the credit entry of the discount account for proper reporting of supplier discounts in the ledger
-                            Insert_Journal_entry(ledgerInvoiceNo, purchases_discount_acc_id, discount, 0, txt_payment_date.Value.Date, discountLedgerDescription, 0, _supplier_id, entry_idd, 0,_invoice_no);
+                            ValidationError firstError = postResult.Messages.FirstOrDefault(x => x.IsBlocking) ?? postResult.Messages.FirstOrDefault();
+                            if (firstError != null && !string.IsNullOrWhiteSpace(firstError.Message))
+                                errorMessage = firstError.Message;
                         }
+
+                        UiMessages.ShowError(errorMessage, errorMessage, "Error", "خطأ");
+                        return;
                     }
 
                     UiMessages.ShowInfo(
@@ -173,6 +272,7 @@ namespace pos
                         "Post Supplier Payment",
                         "SupplierId=" + _supplier_id
                         + " | PaymentRef=" + _invoice_no
+                        + " | VoucherNo=" + postResult.VoucherNo
                         + " | AppliedInvoice=" + (string.IsNullOrWhiteSpace(appliedInvoiceNo) ? "(none)" : appliedInvoiceNo)
                         + " | Amount=" + amount.ToString("N2")
                         + " | Discount=" + discountAmount.ToString("N2")
@@ -218,17 +318,68 @@ namespace pos
 
         private void Get_AccountID_From_Company()
         {
-            GeneralBLL objBLL = new GeneralBLL();
-            DataTable companies_dt = objBLL.GetRecord("TOP 1 *", "pos_companies");
-            foreach (DataRow dr in companies_dt.Rows)
+            cash_account_id = ResolveDefaultAccountId(SettingKeys.DefaultCashAccount);
+            bank_account_id = ResolveDefaultAccountId(SettingKeys.DefaultBankAccount);
+            payable_account_id = ResolveDefaultAccountId(SettingKeys.DefaultApAccount);
+            purchases_discount_acc_id = ResolveDefaultAccountId(SettingKeys.DefaultDiscountAccount);
+            inventory_acc_id = ResolveDefaultAccountId(SettingKeys.DefaultInventoryAccount);
+            purchases_acc_id = ResolveDefaultAccountId(SettingKeys.DefaultPurchaseAccount);
+            tax_account_id = ResolveDefaultAccountId("ACC_DEFAULT_TAX_RECEIVABLE");
+            if (tax_account_id <= 0)
+                tax_account_id = ResolveDefaultAccountId(SettingKeys.DefaultSalesTaxAccount);
+        }
+
+        private int ResolveDefaultAccountId(string settingKey)
+        {
+            if (string.IsNullOrWhiteSpace(settingKey))
+                return 0;
+
+            try
             {
-                cash_account_id = (int)dr["cash_acc_id"];
-                payable_account_id = (int)dr["payable_acc_id"];
-                tax_account_id = (int)dr["tax_acc_id"];
-                purchases_discount_acc_id = (int)dr["purchases_discount_acc_id"];
-                inventory_acc_id = (int)dr["inventory_acc_id"];
-                purchases_acc_id = (int)dr["purchases_acc_id"];
+                GeneralBLL objBLL = new GeneralBLL();
+                string safeKey = settingKey.Replace("'", "''");
+                DataTable settingDt = objBLL.GetRecord("TOP 1 setting_value", "pos_settings WHERE setting_key='" + safeKey + "'");
+                if (settingDt == null || settingDt.Rows.Count == 0 || settingDt.Rows[0]["setting_value"] == DBNull.Value)
+                    return 0;
+
+                string accountCode = Convert.ToString(settingDt.Rows[0]["setting_value"]);
+                if (string.IsNullOrWhiteSpace(accountCode))
+                    return 0;
+
+                string safeCode = accountCode.Trim().Replace("'", "''");
+                DataTable accountDt = objBLL.GetRecord("TOP 1 id", "acc_accounts WHERE LTRIM(RTRIM(code))='" + safeCode + "'");
+                if (accountDt == null || accountDt.Rows.Count == 0 || accountDt.Rows[0]["id"] == DBNull.Value)
+                    return 0;
+
+                int accountId;
+                return int.TryParse(Convert.ToString(accountDt.Rows[0]["id"]), out accountId) ? accountId : 0;
             }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        private bool IsBankPaymentAccount(int glAccountId)
+        {
+            if (glAccountId <= 0)
+                return false;
+
+            if (bank_account_id > 0 && glAccountId == bank_account_id)
+                return true;
+
+            try
+            {
+                GeneralBLL objBLL = new GeneralBLL();
+                DataTable bankDt = objBLL.GetRecord("TOP 1 id", "pos_banks WHERE GLAccountID=" + glAccountId);
+                if (bankDt != null && bankDt.Rows.Count > 0)
+                    return true;
+            }
+            catch
+            {
+            }
+
+            return new BankBLL().IsBankGlAccount(glAccountId);
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -315,8 +466,7 @@ namespace pos
                 return;
             }
 
-            BankBLL bankBLL = new BankBLL();
-            if (bankBLL.IsBankGlAccount(glAccountId))
+            if (IsBankPaymentAccount(glAccountId))
             {
                 LoadBankAccountsIntoRefCombo(glAccountId);
                 UpdateSuggestedDescription();
@@ -485,7 +635,7 @@ namespace pos
             if (cmb_GL_account_code == null || cmb_GL_account_code.SelectedValue == null || !int.TryParse(Convert.ToString(cmb_GL_account_code.SelectedValue), out glAccountId))
                 return false;
 
-            return new BankBLL().IsBankGlAccount(glAccountId);
+            return IsBankPaymentAccount(glAccountId);
         }
 
         private string GetEffectiveRemarks()

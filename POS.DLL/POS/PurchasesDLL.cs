@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using POS.Core;
 using POS.DLL.Inventory;
 
@@ -241,83 +243,148 @@ namespace POS.DLL
 
         }
 
-        public String GetMaxInvoiceNo()
+        public String GetMaxPurchaseInvoiceNo()
         {
-            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
-            {
-                try
-                {
-                    if (cn.State == ConnectionState.Closed)
-                    {
-                        cn.Open();
-
-                        cmd = new SqlCommand("SELECT MAX(invoice_no) FROM pos_purchases WHERE SUBSTRING(invoice_no, 1,1) = 'P' AND account <> 'Return' AND branch_id = @branch_id", cn);
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-
-                        string maxId = Convert.ToString(cmd.ExecuteScalar());
-                    
-                        if(maxId == "")
-                        {
-                            return maxId = "P-000001";
-                        }
-                        else
-                        {
-                            int intval = int.Parse(maxId.Substring(2, 6));
-                            intval++;
-                            maxId = String.Format("P-{0:000000}", intval);
-                            return maxId;
-                        }
-                    
-                    }
-                    return "";
-                }
-                catch
-                {
-
-                    throw;
-                }
-            }
-
+            return GetConfiguredVoucherInvoiceNo(
+                "ACC_VOUCHER_PURCHASE_PREFIX",
+                "ACC_VOUCHER_PURCHASE_FORMAT",
+                "ACC_VOUCHER_PURCHASE_START",
+                "P",
+                "YYYY-NNNN",
+                "pos_purchases",
+                "invoice_no",
+                "AND ISNULL(account, '') <> 'Return'");
         }
 
-        public String GetMaxReturnInvoiceNo()
+        public String GetMaxPurchaseReturnInvoiceNo()
         {
+            return GetConfiguredVoucherInvoiceNo(
+                "ACC_VOUCHER_PURCHASE_RETURN_PREFIX",
+                "ACC_VOUCHER_PURCHASE_RETURN_FORMAT",
+                "ACC_VOUCHER_PURCHASE_RETURN_START",
+                "PR",
+                "YYYY-NNNN",
+                "pos_purchases",
+                "invoice_no",
+                string.Empty);
+        }
+
+        private string GetConfiguredVoucherInvoiceNo(
+            string prefixKey,
+            string formatKey,
+            string startKey,
+            string defaultPrefix,
+            string defaultFormat,
+            string tableName,
+            string invoiceColumn,
+            string extraWhereClause)
+        {
+            string configuredPrefix = string.Empty;
+            string configuredFormat = defaultFormat;
+            int startNo = 1;
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
-                try
+                cn.Open();
+
+                string settingsQuery = string.Format(@"
+                    SELECT setting_key, setting_value
+                    FROM pos_settings
+                    WHERE setting_key IN ('{0}', '{1}', '{2}');", prefixKey, formatKey, startKey);
+
+                using (SqlCommand readSettings = new SqlCommand(settingsQuery, cn))
+                using (SqlDataReader rdr = readSettings.ExecuteReader())
                 {
-                    if (cn.State == ConnectionState.Closed)
+                    while (rdr.Read())
                     {
-                        cn.Open();
+                        string key = Convert.ToString(rdr[0]);
+                        string val = Convert.ToString(rdr[1]);
 
-                        cmd = new SqlCommand("SELECT MAX(invoice_no) FROM pos_purchases WHERE SUBSTRING(invoice_no, 1,2) = 'PR'  AND branch_id = @branch_id", cn);
-                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-
-                        string maxId = Convert.ToString(cmd.ExecuteScalar());
-
-                        if (maxId == "")
+                        if (string.Equals(key, prefixKey, StringComparison.OrdinalIgnoreCase))
+                            configuredPrefix = val;
+                        else if (string.Equals(key, formatKey, StringComparison.OrdinalIgnoreCase))
+                            configuredFormat = string.IsNullOrWhiteSpace(val) ? defaultFormat : val;
+                        else if (string.Equals(key, startKey, StringComparison.OrdinalIgnoreCase))
                         {
-                            return maxId = "PR-000001";
+                            int parsed;
+                            if (int.TryParse(val, out parsed) && parsed > 0)
+                                startNo = parsed;
                         }
-                        else
-                        {
-                            int intval = int.Parse(maxId.Substring(3, 6));
-                            intval++;
-                            maxId = String.Format("PR-{00:000000}", intval);
-                            return maxId;
-                        }
-
                     }
-                    return "";
                 }
-                catch
+
+                string effectivePrefix = string.IsNullOrWhiteSpace(configuredPrefix) ? defaultPrefix : configuredPrefix.Trim();
+                string format = string.IsNullOrWhiteSpace(configuredFormat) ? defaultFormat : configuredFormat.Trim();
+
+                DateTime today = DateTime.Today;
+                string yyyy = today.ToString("yyyy", CultureInfo.InvariantCulture);
+                string yy = today.ToString("yy", CultureInfo.InvariantCulture);
+                string mm = today.ToString("MM", CultureInfo.InvariantCulture);
+                string dd = today.ToString("dd", CultureInfo.InvariantCulture);
+
+                string formatForLike = format.ToUpperInvariant()
+                    .Replace("YYYY", yyyy)
+                    .Replace("YY", yy)
+                    .Replace("MM", mm)
+                    .Replace("DD", dd);
+
+                string formatLikePart = Regex.Replace(formatForLike, "N+", "%");
+                string invoicePrefix = string.Format("{0}{1}-", effectivePrefix, UsersModal.logged_in_branch_id);
+                string likePattern = invoicePrefix + formatLikePart;
+
+                int maxSequence = 0;
+                string invoiceQuery = string.Format(@"
+                    SELECT {0}
+                    FROM {1}
+                    WHERE branch_id = @branch_id
+                      AND {0} LIKE @likePattern {2};", invoiceColumn, tableName, extraWhereClause);
+
+                using (SqlCommand findExisting = new SqlCommand(invoiceQuery, cn))
                 {
+                    findExisting.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    findExisting.Parameters.AddWithValue("@likePattern", likePattern);
 
-                    throw;
+                    using (SqlDataReader rdr = findExisting.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            string inv = Convert.ToString(rdr[0]);
+                            if (string.IsNullOrWhiteSpace(inv))
+                                continue;
+
+                            int lastDash = inv.LastIndexOf('-');
+                            if (lastDash < 0 || lastDash == inv.Length - 1)
+                                continue;
+
+                            int seq;
+                            if (int.TryParse(inv.Substring(lastDash + 1), out seq) && seq > maxSequence)
+                                maxSequence = seq;
+                        }
+                    }
                 }
-            }
 
+                int next = maxSequence > 0 ? (maxSequence + 1) : startNo;
+
+                string finalFormat = formatForLike;
+                int nIndex = finalFormat.IndexOf('N');
+                if (nIndex >= 0)
+                {
+                    int nLen = 0;
+                    while (nIndex + nLen < finalFormat.Length && finalFormat[nIndex + nLen] == 'N')
+                        nLen++;
+
+                    string padded = next.ToString().PadLeft(nLen, '0');
+                    finalFormat = finalFormat.Substring(0, nIndex) + padded + finalFormat.Substring(nIndex + nLen);
+                }
+                else
+                {
+                    finalFormat = finalFormat + "-" + next.ToString("D4", CultureInfo.InvariantCulture);
+                }
+
+                return invoicePrefix + finalFormat;
+            }
         }
+
         // Add inside PurchasesDLL class (recommended near GetMaxInvoiceNo)
         public string GenerateDailyInvoiceNo(string tableName, string invoiceColumn, string prefix, int? branchId = null, DateTime? invoiceDate = null)
         {
@@ -325,12 +392,13 @@ namespace POS.DLL
             DateTime d = (invoiceDate ?? DateTime.Now).Date;
 
             string datePart = d.ToString("yyyyMMdd");
-            string start = prefix + bId + "-" + datePart + "-"; // e.g. "P1-20260128-"
-            string like = start + "%";
+            string invoicePrefix = prefix + bId + "-";
+            string start = invoicePrefix + datePart + "-"; // e.g. "P1-20260128-"
+            string like = invoicePrefix + "%";
 
             using (var cn = new SqlConnection(dbConnection.ConnectionString))
             using (var cmd = new SqlCommand($@"
-            SELECT MAX({invoiceColumn})
+            SELECT {invoiceColumn}
             FROM {tableName}
             WHERE branch_id = @branch_id
               AND {invoiceColumn} LIKE @like;", cn))
@@ -339,22 +407,32 @@ namespace POS.DLL
                 cmd.Parameters.AddWithValue("@like", like);
 
                 cn.Open();
-                string lastRef = Convert.ToString(cmd.ExecuteScalar());
+                int maxSequence = 0;
 
-                int newNum = 1;
-                if (!string.IsNullOrWhiteSpace(lastRef) && lastRef.StartsWith(start, StringComparison.OrdinalIgnoreCase))
+                using (var rdr = cmd.ExecuteReader())
                 {
-                    string tail = lastRef.Substring(start.Length); // "0001"
-                    int lastNum;
-                    if (int.TryParse(tail, out lastNum))
-                        newNum = lastNum + 1;
+                    while (rdr.Read())
+                    {
+                        string current = Convert.ToString(rdr[0]);
+                        if (string.IsNullOrWhiteSpace(current))
+                            continue;
+
+                        int lastDash = current.LastIndexOf('-');
+                        if (lastDash < 0 || lastDash == current.Length - 1)
+                            continue;
+
+                        int seq;
+                        if (int.TryParse(current.Substring(lastDash + 1), out seq) && seq > maxSequence)
+                            maxSequence = seq;
+                    }
                 }
 
-                return start + newNum.ToString("0000");
+                int newNum = maxSequence > 0 ? (maxSequence + 1) : 1;
+                return start + newNum.ToString("00000");
             }
         }
 
-        public String GetMaxInvoiceNo_HOLD()
+        public String GetMaxHoldPurchaseInvoiceNo()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {

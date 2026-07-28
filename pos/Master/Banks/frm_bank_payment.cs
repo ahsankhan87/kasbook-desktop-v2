@@ -87,20 +87,41 @@ namespace pos.Master.Banks
         {
             GeneralBLL generalBLL_obj = new GeneralBLL();
             string keyword = "id,name";
-            string table = "acc_accounts";
 
-            DataTable accounts = generalBLL_obj.GetRecord(keyword, table);
+            int defaultCashAccountId = ResolveDefaultAccountId(SettingKeys.DefaultCashAccount);
+            int defaultBankAccountId = ResolveDefaultAccountId(SettingKeys.DefaultBankAccount);
+
+            List<int> accountIds = new List<int>();
+            if (defaultCashAccountId > 0)
+                accountIds.Add(defaultCashAccountId);
+            if (defaultBankAccountId > 0 && !accountIds.Contains(defaultBankAccountId))
+                accountIds.Add(defaultBankAccountId);
+            if (_bank_account_code > 0 && !accountIds.Contains(_bank_account_code))
+                accountIds.Add(_bank_account_code);
+
+            DataTable accounts;
+            if (accountIds.Count > 0)
+            {
+                string table = "acc_accounts where id IN (" + string.Join(",", accountIds.Distinct()) + ")";
+                accounts = generalBLL_obj.GetRecord(keyword, table);
+            }
+            else
+            {
+                accounts = new DataTable();
+                accounts.Columns.Add("id", typeof(int));
+                accounts.Columns.Add("name", typeof(string));
+            }
+
             DataRow emptyRow = accounts.NewRow();
-            emptyRow[0] = 0;              // Set Column Value
-            emptyRow[1] = "Please Select";              // Set Column Value
+            emptyRow[0] = 0;
+            emptyRow[1] = "Please Select";
             accounts.Rows.InsertAt(emptyRow, 0);
 
             cmb_cash_account_code.DisplayMember = "name";
             cmb_cash_account_code.ValueMember = "id";
             cmb_cash_account_code.DataSource = accounts;
 
-            cmb_cash_account_code.SelectedValue = "3";
-
+            cmb_cash_account_code.SelectedValue = defaultCashAccountId > 0 ? defaultCashAccountId : 0;
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -192,33 +213,73 @@ namespace pos.Master.Banks
                 {
                     _invoice_no = GetMAXInvoiceNo();
 
-                    // CASH JOURNAL ENTRY (DEBIT)
-                    Insert_Journal_entry(_invoice_no, cash_account_id, amount, 0, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
-
-                    // BANK JOURNAL ENTRY (CREDIT)
-                    int entry_id = Insert_Journal_entry(_invoice_no, _bank_account_code, 0, amount, txt_payment_date.Value.Date, txt_description.Text, 0, 0, 0);
-
-                    // ADD ENTRY INTO bank PAYMENT (CREDIT)
-                    Insert_Journal_entry(_invoice_no, cash_account_id, 0, amount, txt_payment_date.Value.Date, txt_description.Text, _bank_id, 0, entry_id);
-
-                    if (entry_id > 0)
+                    if (string.IsNullOrWhiteSpace(_invoice_no))
                     {
-                        UiMessages.ShowInfo(
-                            "Payment has been posted successfully.",
-                            "تم ترحيل الدفعة بنجاح.",
-                            "Success",
-                            "نجاح"
-                        );
+                        UiMessages.ShowError("Voucher number could not be generated.", "تعذر إنشاء رقم القيد.", "Error", "خطأ");
+                        return;
                     }
-                    else
+
+                    if (cash_account_id == _bank_account_code)
                     {
-                        UiMessages.ShowError(
-                            "Payment could not be posted. Please try again.",
-                            "تعذر ترحيل الدفعة. يرجى المحاولة مرة أخرى.",
-                            "Error",
-                            "خطأ"
-                        );
+                        UiMessages.ShowInfo("Source and destination account cannot be the same.", "لا يمكن أن يكون حساب المصدر والوجهة نفس الحساب.", "Validation", "التحقق");
+                        return;
                     }
+
+                    List<JVLineModel> lines = new List<JVLineModel>
+                    {
+                        new JVLineModel
+                        {
+                            AccountId = cash_account_id,
+                            Debit = Convert.ToDecimal(amount),
+                            Credit = 0m,
+                            Narration = txt_description.Text.Trim(),
+                            ModuleName = "BANK_PAYMENT"
+                        },
+                        new JVLineModel
+                        {
+                            AccountId = _bank_account_code,
+                            Debit = 0m,
+                            Credit = Convert.ToDecimal(amount),
+                            Narration = txt_description.Text.Trim(),
+                            ModuleName = "BANK_PAYMENT",
+                            BankId = _bank_id
+                        }
+                    };
+
+                    AutoJVModel model = new AutoJVModel
+                    {
+                        ModuleName = "PAYMENT",
+                        RefModule = "pos_banks_payments",
+                        RefId = _bank_id,
+                        VoucherDate = txt_payment_date.Value.Date,
+                        ReferenceNo = _invoice_no,
+                        Narration = txt_description.Text.Trim(),
+                        IsAutoPosted = true,
+                        BranchId = UsersModal.logged_in_branch_id,
+                        Lines = lines
+                    };
+
+                    PostResult postResult = new JournalsBLL().PostAutoJournalEntry(model, UsersModal.logged_in_userid);
+                    if (postResult == null || !postResult.Success)
+                    {
+                        string errorMessage = "Payment could not be posted. Please try again.";
+                        if (postResult != null && postResult.Messages != null && postResult.Messages.Count > 0)
+                        {
+                            ValidationError firstError = postResult.Messages.FirstOrDefault(x => x.IsBlocking) ?? postResult.Messages.FirstOrDefault();
+                            if (firstError != null && !string.IsNullOrWhiteSpace(firstError.Message))
+                                errorMessage = firstError.Message;
+                        }
+
+                        UiMessages.ShowError(errorMessage, errorMessage, "Error", "خطأ");
+                        return;
+                    }
+
+                    UiMessages.ShowInfo(
+                        "Payment has been posted successfully.",
+                        "تم ترحيل الدفعة بنجاح.",
+                        "Success",
+                        "نجاح"
+                    );
 
                     if (mainForm != null)
                         mainForm.load_banks_transactions_grid(_bank_id);
@@ -231,28 +292,37 @@ namespace pos.Master.Banks
                 UiMessages.ShowError(ex.Message, ex.Message);
             }
         }
-        private int Insert_Journal_entry(string invoice_no, int account_id, double debit, double credit, DateTime date,
-          string description, int bank_id, int supplier_id, int entry_id)
+        private int ResolveDefaultAccountId(string settingKey)
         {
-            int journal_id = 0;
-            JournalsModal JournalsModal_obj = new JournalsModal();
-            JournalsBLL JournalsObj = new JournalsBLL();
+            if (string.IsNullOrWhiteSpace(settingKey))
+                return 0;
 
-            JournalsModal_obj.invoice_no = invoice_no;
-            JournalsModal_obj.entry_date = date;
-            JournalsModal_obj.debit = debit;
-            JournalsModal_obj.credit = credit;
-            JournalsModal_obj.account_id = account_id;
-            JournalsModal_obj.description = description;
-            JournalsModal_obj.bank_id = bank_id;
-            JournalsModal_obj.supplier_id = supplier_id;
-            JournalsModal_obj.entry_id = entry_id;
+            try
+            {
+                GeneralBLL objBLL = new GeneralBLL();
+                string safeKey = settingKey.Replace("'", "''");
+                DataTable settingDt = objBLL.GetRecord("TOP 1 setting_value", "pos_settings WHERE setting_key='" + safeKey + "'");
+                if (settingDt == null || settingDt.Rows.Count == 0 || settingDt.Rows[0]["setting_value"] == DBNull.Value)
+                    return 0;
 
-            journal_id = JournalsObj.Insert(JournalsModal_obj);
-            return journal_id;
+                string accountCode = Convert.ToString(settingDt.Rows[0]["setting_value"]);
+                if (string.IsNullOrWhiteSpace(accountCode))
+                    return 0;
+
+                string safeCode = accountCode.Trim().Replace("'", "''");
+                DataTable accountDt = objBLL.GetRecord("TOP 1 id", "acc_accounts WHERE LTRIM(RTRIM(code))='" + safeCode + "'");
+                if (accountDt == null || accountDt.Rows.Count == 0 || accountDt.Rows[0]["id"] == DBNull.Value)
+                    return 0;
+
+                int accountId;
+                return int.TryParse(Convert.ToString(accountDt.Rows[0]["id"]), out accountId) ? accountId : 0;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
-       
         private void txt_total_amount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
