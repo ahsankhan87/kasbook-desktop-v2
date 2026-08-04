@@ -107,6 +107,7 @@ namespace pos.Reports.Financial
             this._tblFilters = new System.Windows.Forms.TableLayoutPanel();
             this._lblAccount = new System.Windows.Forms.Label();
             this._cmbAccount = new System.Windows.Forms.ComboBox();
+            this._btnSearchAccount = new System.Windows.Forms.Button();
             this._lblFrom = new System.Windows.Forms.Label();
             this._dtFrom = new System.Windows.Forms.DateTimePicker();
             this._lblTo = new System.Windows.Forms.Label();
@@ -116,7 +117,6 @@ namespace pos.Reports.Financial
             this._cmbShow = new System.Windows.Forms.ComboBox();
             this._lblGroupBy = new System.Windows.Forms.Label();
             this._cmbGroupBy = new System.Windows.Forms.ComboBox();
-            this._btnSearchAccount = new System.Windows.Forms.Button();
             this._panelMain.SuspendLayout();
             this._panelLedgerArea.SuspendLayout();
             this._panelCenter.SuspendLayout();
@@ -628,7 +628,7 @@ namespace pos.Reports.Financial
             // 
             // _tblFilters
             // 
-             this._tblFilters.ColumnCount = 8;
+            this._tblFilters.ColumnCount = 8;
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -681,14 +681,25 @@ namespace pos.Reports.Financial
             this._cmbAccount.Location = new System.Drawing.Point(76, 4);
             this._cmbAccount.Margin = new System.Windows.Forms.Padding(4);
             this._cmbAccount.Name = "_cmbAccount";
-            this._cmbAccount.Size = new System.Drawing.Size(224, 25);
+            this._cmbAccount.Size = new System.Drawing.Size(401, 25);
             this._cmbAccount.TabIndex = 1;
+            // 
+            // _btnSearchAccount
+            // 
+            this._btnSearchAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._btnSearchAccount.Location = new System.Drawing.Point(485, 4);
+            this._btnSearchAccount.Margin = new System.Windows.Forms.Padding(4);
+            this._btnSearchAccount.Name = "_btnSearchAccount";
+            this._btnSearchAccount.Size = new System.Drawing.Size(75, 36);
+            this._btnSearchAccount.TabIndex = 2;
+            this._btnSearchAccount.Text = "Search";
+            this._btnSearchAccount.UseVisualStyleBackColor = true;
             // 
             // _lblFrom
             // 
             this._lblFrom.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this._lblFrom.AutoSize = true;
-            this._lblFrom.Location = new System.Drawing.Point(308, 13);
+            this._lblFrom.Location = new System.Drawing.Point(568, 13);
             this._lblFrom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._lblFrom.Name = "_lblFrom";
             this._lblFrom.Size = new System.Drawing.Size(45, 17);
@@ -698,7 +709,7 @@ namespace pos.Reports.Financial
             // _dtFrom
             // 
             this._dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this._dtFrom.Location = new System.Drawing.Point(387, 4);
+            this._dtFrom.Location = new System.Drawing.Point(716, 4);
             this._dtFrom.Margin = new System.Windows.Forms.Padding(4);
             this._dtFrom.Name = "_dtFrom";
             this._dtFrom.Size = new System.Drawing.Size(233, 24);
@@ -709,7 +720,7 @@ namespace pos.Reports.Financial
             // 
             this._lblTo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this._lblTo.AutoSize = true;
-            this._lblTo.Location = new System.Drawing.Point(628, 13);
+            this._lblTo.Location = new System.Drawing.Point(1008, 13);
             this._lblTo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._lblTo.Name = "_lblTo";
             this._lblTo.Size = new System.Drawing.Size(29, 17);
@@ -719,7 +730,7 @@ namespace pos.Reports.Financial
             // _dtTo
             // 
             this._dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this._dtTo.Location = new System.Drawing.Point(665, 4);
+            this._dtTo.Location = new System.Drawing.Point(1045, 4);
             this._dtTo.Margin = new System.Windows.Forms.Padding(4);
             this._dtTo.Name = "_dtTo";
             this._dtTo.Size = new System.Drawing.Size(233, 24);
@@ -729,7 +740,7 @@ namespace pos.Reports.Financial
             // _btnLoad
             // 
             this._btnLoad.AutoSize = true;
-            this._btnLoad.Location = new System.Drawing.Point(906, 4);
+            this._btnLoad.Location = new System.Drawing.Point(1337, 4);
             this._btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this._btnLoad.Name = "_btnLoad";
             this._btnLoad.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
@@ -768,7 +779,7 @@ namespace pos.Reports.Financial
             // 
             this._lblGroupBy.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this._lblGroupBy.AutoSize = true;
-            this._lblGroupBy.Location = new System.Drawing.Point(308, 58);
+            this._lblGroupBy.Location = new System.Drawing.Point(485, 58);
             this._lblGroupBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._lblGroupBy.Name = "_lblGroupBy";
             this._lblGroupBy.Size = new System.Drawing.Size(71, 17);
@@ -783,22 +794,11 @@ namespace pos.Reports.Financial
             "None",
             "By Voucher",
             "By Month"});
-            this._cmbGroupBy.Location = new System.Drawing.Point(387, 48);
+            this._cmbGroupBy.Location = new System.Drawing.Point(568, 48);
             this._cmbGroupBy.Margin = new System.Windows.Forms.Padding(4);
             this._cmbGroupBy.Name = "_cmbGroupBy";
             this._cmbGroupBy.Size = new System.Drawing.Size(140, 24);
             this._cmbGroupBy.TabIndex = 10;
-            // 
-            // _btnSearchAccount
-            // 
-            this._btnSearchAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._btnSearchAccount.Location = new System.Drawing.Point(308, 4);
-            this._btnSearchAccount.Margin = new System.Windows.Forms.Padding(4);
-            this._btnSearchAccount.Name = "_btnSearchAccount";
-            this._btnSearchAccount.Size = new System.Drawing.Size(75, 25);
-            this._btnSearchAccount.TabIndex = 2;
-            this._btnSearchAccount.Text = "Search";
-            this._btnSearchAccount.UseVisualStyleBackColor = true;
             // 
             // frm_GeneralLedgerReport
             // 

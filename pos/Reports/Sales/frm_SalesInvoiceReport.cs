@@ -127,17 +127,57 @@ namespace pos.Reports.Sales
 
                     foreach (DataRow dr in sales_invoice_report_dt.Rows)
                     {
-                        _total_items_sum += (dr["total_items"] == DBNull.Value ? 0 : Convert.ToDouble(dr["total_items"]));
-                        _subtotal_sum += (dr["subtotal"] == DBNull.Value ? 0 : Convert.ToDouble(dr["subtotal"]));
-                        _discount_value_sum += (dr["discount_value"] == DBNull.Value ? 0 : Convert.ToDouble(dr["discount_value"]));
-                        _vat_sum += (dr["vat"] == DBNull.Value ? 0 : Convert.ToDouble(dr["vat"]));
-                        _total_sum += (dr["total"] == DBNull.Value ? 0 : Convert.ToDouble(dr["total"]));
-                        _total_with_vat_sum += (dr["total_with_vat"] == DBNull.Value ? 0 : Convert.ToDouble(dr["total_with_vat"]));
+                        string accountType = sales_invoice_report_dt.Columns.Contains("account")
+                            ? Convert.ToString(dr["account"]) ?? string.Empty
+                            : string.Empty;
+                        bool isReturn = accountType.Equals("Return", StringComparison.OrdinalIgnoreCase);
+
+                        double rowTotalItems = (dr["total_items"] == DBNull.Value ? 0 : Convert.ToDouble(dr["total_items"]));
+                        double rowSubtotal = (dr["subtotal"] == DBNull.Value ? 0 : Convert.ToDouble(dr["subtotal"]));
+                        double rowDiscount = (dr["discount_value"] == DBNull.Value ? 0 : Convert.ToDouble(dr["discount_value"]));
+                        double rowVat = (dr["vat"] == DBNull.Value ? 0 : Convert.ToDouble(dr["vat"]));
+                        double rowTotal = (dr["total"] == DBNull.Value ? 0 : Convert.ToDouble(dr["total"]));
+                        double rowTotalWithVat = (dr["total_with_vat"] == DBNull.Value ? 0 : Convert.ToDouble(dr["total_with_vat"]));
+
+                        if (isReturn)
+                        {
+                            rowTotalItems = -Math.Abs(rowTotalItems);
+                            rowSubtotal = -Math.Abs(rowSubtotal);
+                            rowDiscount = -Math.Abs(rowDiscount);
+                            rowVat = -Math.Abs(rowVat);
+                            rowTotal = -Math.Abs(rowTotal);
+                            rowTotalWithVat = -Math.Abs(rowTotalWithVat);
+                        }
+
+                        dr["total_items"] = rowTotalItems;
+                        dr["subtotal"] = rowSubtotal;
+                        dr["discount_value"] = rowDiscount;
+                        dr["vat"] = rowVat;
+                        dr["total"] = rowTotal;
+                        dr["total_with_vat"] = rowTotalWithVat;
+
+                        _total_items_sum += rowTotalItems;
+                        _subtotal_sum += rowSubtotal;
+                        _discount_value_sum += rowDiscount;
+                        _vat_sum += rowVat;
+                        _total_sum += rowTotal;
+                        _total_with_vat_sum += rowTotalWithVat;
 
                         if (showProfit)
                         {
-                            _profit_sum += (dr["profit"] == DBNull.Value ? 0 : Convert.ToDouble(dr["profit"]));
-                            _cost_total_sum += (dr["cost_total"] == DBNull.Value ? 0 : Convert.ToDouble(dr["cost_total"]));
+                            double rowCostTotal = (dr["cost_total"] == DBNull.Value ? 0 : Convert.ToDouble(dr["cost_total"]));
+
+                            // Build profit from magnitudes, then apply transaction direction.
+                            double profitMagnitude = (Math.Abs(rowSubtotal) - Math.Abs(rowDiscount)) - Math.Abs(rowCostTotal);
+                            double rowProfit = isReturn ? -profitMagnitude : profitMagnitude;
+
+                            // Keep cost sign consistent with transaction direction.
+                            rowCostTotal = isReturn ? -Math.Abs(rowCostTotal) : Math.Abs(rowCostTotal);
+
+                            dr["profit"] = rowProfit;
+                            dr["cost_total"] = rowCostTotal;
+                            _profit_sum += rowProfit;
+                            _cost_total_sum += rowCostTotal;
                         }
                         else
                         {

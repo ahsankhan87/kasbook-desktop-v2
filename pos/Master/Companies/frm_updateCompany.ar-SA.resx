@@ -117,78 +117,81 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1028, 11</value>
+  </data>
   <data name="btn_save.Text" xml:space="preserve">
     <value>تحديث</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 25</value>
   </data>
   <data name="lbl_header_title.Text" xml:space="preserve">
     <value>شركة التحديث</value>
   </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1148, 80</value>
+  </data>
+  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1028, 41</value>
+  </data>
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
-  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
+  <data name="cmb_currency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 198</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>تفاصيل الشركة</value>
+  <data name="cmb_currency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 30</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 417</value>
   </data>
   <data name="chk_use_zatca_e_invoice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 26</value>
+    <value>251, 26</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Text" xml:space="preserve">
+    <value>تفعيل الفواتير الإلكترونية (ZATCA)</value>
   </data>
   <data name="txt_address.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 270</value>
+    <value>149, 268</value>
   </data>
   <data name="txt_address.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 96</value>
   </data>
   <data name="txt_name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 54</value>
+    <value>149, 62</value>
   </data>
   <data name="txt_name.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
   </data>
-  <data name="txt_countryName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 369</value>
-  </data>
-  <data name="txt_countryName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 28</value>
-  </data>
   <data name="txt_vat_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 90</value>
+    <value>149, 96</value>
   </data>
   <data name="txt_vat_no.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
   </data>
   <data name="txt_email.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 126</value>
+    <value>149, 130</value>
   </data>
   <data name="txt_email.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
   </data>
   <data name="txt_contact_no.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 162</value>
+    <value>149, 164</value>
   </data>
   <data name="txt_contact_no.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
   </data>
-  <data name="txt_currency_id.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 198</value>
-  </data>
-  <data name="txt_currency_id.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 28</value>
-  </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 31</value>
+    <value>13, 31</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 22</value>
   </data>
   <data name="txt_image.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 234</value>
+    <value>149, 234</value>
   </data>
   <data name="txt_image.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
@@ -206,7 +209,7 @@
     <value>عنوان:</value>
   </data>
   <data name="txt_id.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 28</value>
+    <value>149, 28</value>
   </data>
   <data name="txt_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
@@ -215,7 +218,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 234</value>
+    <value>13, 233</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 22</value>
@@ -227,7 +230,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 52</value>
+    <value>13, 62</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 22</value>
@@ -235,23 +238,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>اسم الشركة:</value>
   </data>
-  <data name="label27.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.8pt</value>
-  </data>
-  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 337</value>
-  </data>
-  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 22</value>
-  </data>
-  <data name="label27.Text" xml:space="preserve">
-    <value>دولة</value>
-  </data>
   <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 197</value>
+    <value>13, 201</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 22</value>
@@ -263,7 +254,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 87</value>
+    <value>13, 97</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 22</value>
@@ -275,7 +266,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 129</value>
+    <value>13, 133</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 22</value>
@@ -287,7 +278,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 160</value>
+    <value>13, 166</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
@@ -295,11 +286,35 @@
   <data name="label3.Text" xml:space="preserve">
     <value>عنوان بريد الكتروني</value>
   </data>
-  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>الحسابات العامة</value>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>401, 532</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>تفاصيل الشركة</value>
+  </data>
+  <data name="txt_countryName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 360</value>
+  </data>
+  <data name="txt_countryName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 28</value>
+  </data>
+  <data name="label27.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 333</value>
+  </data>
+  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 22</value>
+  </data>
+  <data name="label27.Text" xml:space="preserve">
+    <value>دولة</value>
+  </data>
+  <data name="cmb_payable_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 285</value>
   </data>
   <data name="cmb_payable_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
@@ -307,11 +322,17 @@
   <data name="cmb_cash_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
   </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 60</value>
+  </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 22</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>حساب نقدي:</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 291</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 22</value>
@@ -319,8 +340,14 @@
   <data name="label12.Text" xml:space="preserve">
     <value>حساب الدفع:</value>
   </data>
+  <data name="cmb_receivable_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 252</value>
+  </data>
   <data name="cmb_receivable_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 258</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 22</value>
@@ -328,14 +355,23 @@
   <data name="label10.Text" xml:space="preserve">
     <value>حساب القبض :</value>
   </data>
+  <data name="cmb_tax_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 219</value>
+  </data>
   <data name="cmb_tax_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 225</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 22</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>حساب عام للضرائب:</value>
+  </data>
+  <data name="cmb_commission_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 417</value>
   </data>
   <data name="cmb_commission_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
@@ -346,8 +382,14 @@
   <data name="label21.Text" xml:space="preserve">
     <value>حساب العمولة</value>
   </data>
+  <data name="cmb_item_variance_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 384</value>
+  </data>
   <data name="cmb_item_variance_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 390</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 22</value>
@@ -355,8 +397,14 @@
   <data name="label20.Text" xml:space="preserve">
     <value>تباين المنتج</value>
   </data>
+  <data name="cmb_purchases_disc_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 351</value>
+  </data>
   <data name="cmb_purchases_disc_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 357</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 22</value>
@@ -364,11 +412,20 @@
   <data name="label19.Text" xml:space="preserve">
     <value>خصم شراء:</value>
   </data>
+  <data name="cmb_sales_disc_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 186</value>
+  </data>
   <data name="cmb_sales_disc_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
   </data>
+  <data name="cmb_purchases_return_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 318</value>
+  </data>
   <data name="cmb_purchases_return_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 192</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 22</value>
@@ -376,20 +433,32 @@
   <data name="label17.Text" xml:space="preserve">
     <value>حساب خصم المبيعات:</value>
   </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 324</value>
+  </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 22</value>
   </data>
   <data name="label18.Text" xml:space="preserve">
     <value>عودة شراء:</value>
   </data>
+  <data name="cmb_sales_return_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 153</value>
+  </data>
   <data name="cmb_sales_return_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 159</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 22</value>
   </data>
   <data name="label16.Text" xml:space="preserve">
     <value>حساب عائد المبيعات:</value>
+  </data>
+  <data name="cmb_purchases_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 120</value>
   </data>
   <data name="cmb_purchases_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
@@ -400,8 +469,14 @@
   <data name="label15.Text" xml:space="preserve">
     <value>حساب المشتريات:</value>
   </data>
+  <data name="cmb_inventory_acc_id.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 87</value>
+  </data>
   <data name="cmb_inventory_acc_id.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 30</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 93</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 22</value>
@@ -418,6 +493,15 @@
   <data name="label13.Text" xml:space="preserve">
     <value>حسابات المبيعات:</value>
   </data>
+  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.8pt</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>735, 88</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>الحسابات العامة</value>
+  </data>
   <data name="label22.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
@@ -428,7 +512,7 @@
     <value>اسم الشارع</value>
   </data>
   <data name="txt_StreetName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 62</value>
+    <value>19, 60</value>
   </data>
   <data name="txt_StreetName.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 28</value>
@@ -437,7 +521,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 91</value>
+    <value>19, 93</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 22</value>
@@ -446,7 +530,7 @@
     <value>رقم المبنى</value>
   </data>
   <data name="txt_buildingNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 116</value>
+    <value>19, 120</value>
   </data>
   <data name="txt_buildingNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 28</value>
@@ -455,7 +539,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 147</value>
+    <value>19, 153</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 22</value>
@@ -464,7 +548,7 @@
     <value>اسم تقسيم المدينة</value>
   </data>
   <data name="txt_citySubdivisionName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 171</value>
+    <value>19, 180</value>
   </data>
   <data name="txt_citySubdivisionName.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 28</value>
@@ -473,7 +557,7 @@
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 205</value>
+    <value>19, 213</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 22</value>
@@ -482,7 +566,7 @@
     <value>اسم المدينة</value>
   </data>
   <data name="txt_cityName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 235</value>
+    <value>19, 240</value>
   </data>
   <data name="txt_cityName.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 28</value>
@@ -500,7 +584,7 @@
     <value>رمز بريدي</value>
   </data>
   <data name="txt_postalCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 303</value>
+    <value>19, 300</value>
   </data>
   <data name="txt_postalCode.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 28</value>
@@ -508,8 +592,17 @@
   <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt</value>
   </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>418, 88</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 532</value>
+  </data>
   <data name="groupBox3.Text" xml:space="preserve">
     <value>العنوان الوطني</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1148, 633</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

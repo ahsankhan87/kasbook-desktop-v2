@@ -84,6 +84,7 @@ WHERE ba.is_bank = 1
 UNION ALL
 
 -- Journal Voucher Entries (General Ledger cash transactions)
+-- EXCLUDE entries that are auto-generated from party payments to avoid duplicates
 SELECT
 	aa.id AS cash_account_id,
 	jv.EntryDate AS transaction_date,
@@ -100,6 +101,19 @@ FROM acc_entries_header jv
 INNER JOIN acc_entries jvd ON jv.InvoiceNo = jvd.invoice_no
 INNER JOIN acc_accounts aa ON jvd.account_id = aa.id
 WHERE jv.status = 'Posted' 
-  AND (aa.is_cash = 1 OR aa.is_bank = 1);
+  AND (aa.is_cash = 1 OR aa.is_bank = 1)
+  -- Exclude JV entries that are sourced from party payments
+  AND jv.ReferenceNo  NOT IN (
+	  SELECT ISNULL(cp.invoice_no, 'CP-' + CAST(cp.id AS NVARCHAR(20))) 
+	  FROM pos_customers_payments cp WHERE cp.invoice_no IS NOT NULL
+  )
+  AND jv.ReferenceNo  NOT IN (
+	  SELECT ISNULL(sp.invoice_no, 'SP-' + CAST(sp.id AS NVARCHAR(20))) 
+	  FROM pos_suppliers_payments sp WHERE sp.invoice_no IS NOT NULL
+  )
+  AND jv.ReferenceNo NOT IN (
+	  SELECT ISNULL(bd.invoice_no, '') 
+	  FROM pos_banks_payments bd WHERE bd.invoice_no IS NOT NULL AND bd.invoice_no != ''
+  );
 
 GO

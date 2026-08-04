@@ -28,6 +28,7 @@ namespace pos.Reports.Financial
         private decimal _openingBalance;
         private decimal _periodDebit;
         private decimal _periodCredit;
+        private int _preloadAccountId = 0;
 
         public frm_GeneralLedgerReport()
         {
@@ -67,12 +68,34 @@ namespace pos.Reports.Financial
         private void Frm_GeneralLedgerReport_Load(object sender, EventArgs e)
         {
             AppTheme.Apply(this);
+
+            // Initialize date range to current month
+            DateTime today = DateTime.Today;
+            _dtFrom.Value = new DateTime(today.Year, today.Month, 1);
+            _dtTo.Value = today;
+
             LoadAccounts();
+
+            // If an account was pre-loaded, select it and load its ledger
+            if (_preloadAccountId > 0)
+            {
+                var matchingRows = _accountsFiltered.AsEnumerable()
+                    .Where(x => Convert.ToInt32(x["acc_id"]) == _preloadAccountId)
+                    .ToList();
+
+                if (matchingRows.Count > 0)
+                {
+                    _cmbAccount.SelectedValue = _preloadAccountId;
+                    // Trigger load immediately instead of using debounce timer
+                    LoadLedgerFirstPage();
+                }
+            }
+
             ResetSummary();
             SetPinnedRows(0m, 0m, 0m);
         }
 
-        private void LoadAccounts()
+        public void LoadAccounts()
         {
             try
             {
@@ -89,11 +112,11 @@ namespace pos.Reports.Financial
 
                 foreach (DataRow row in _accountsTable.Rows)
                 {
-                    decimal current = row["current_balance"] == DBNull.Value ? 0m : Convert.ToDecimal(row["current_balance"]);
+                    //decimal current = row["current_balance"] == DBNull.Value ? 0m : Convert.ToDecimal(row["current_balance"]);
                     string code = Convert.ToString(row["acc_code"]);
                     string name = Convert.ToString(row["acc_name"]);
                     string type = Convert.ToString(row["account_type"]);
-                    row["display_text"] = string.Format("{0} - {1}    [{2}]    Bal: {3}", code, name, type, FormatSigned(current));
+                    row["display_text"] = string.Format("{0} - {1}    [{2}]", code, name, type); //FormatSigned(current)
                     row["search_text"] = (code + " " + name + " " + type).ToLowerInvariant();
                 }
 
@@ -101,7 +124,9 @@ namespace pos.Reports.Financial
                 _cmbAccount.DataSource = _accountsFiltered;
                 _cmbAccount.DisplayMember = "display_text";
                 _cmbAccount.ValueMember = "acc_id";
-                _cmbAccount.SelectedIndex = _accountsFiltered.Rows.Count > 0 ? 0 : -1;
+               
+                    _cmbAccount.SelectedIndex = _accountsFiltered.Rows.Count > 0 ? 0 : -1;
+                
             }
             catch (Exception ex)
             {
@@ -694,7 +719,7 @@ namespace pos.Reports.Financial
             table.Columns.Add("Narration");
             table.Columns.Add("Debit");
             table.Columns.Add("Credit");
-            table.Columns.Add("Balance");
+            table.Columns.Add("RunningBalance");
 
             table.Rows.Add("Opening Balance", "", "", "", "Balance before From Date", _gridOpening.Rows[0].Cells[5].Value, _gridOpening.Rows[0].Cells[6].Value, _gridOpening.Rows[0].Cells[7].Value);
 
@@ -713,11 +738,16 @@ namespace pos.Reports.Financial
                     row.Cells["Narration"].Value,
                     row.Cells["Debit"].Value,
                     row.Cells["Credit"].Value,
-                    row.Cells["Balance"].Value);
+                    row.Cells["RunningBalance"].Value);
             }
 
             table.Rows.Add("Closing Balance", "", "", "", "Totals", _gridClosing.Rows[0].Cells[5].Value, _gridClosing.Rows[0].Cells[6].Value, _gridClosing.Rows[0].Cells[7].Value);
             ExcelExportHelper.ExportDataTableToExcel(table, "GeneralLedger", this, true);
+        }
+
+        public void LoadForAccount(int accountId)
+        {
+            _preloadAccountId = accountId;
         }
 
         private void ResetSummary()

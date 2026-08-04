@@ -641,7 +641,7 @@ namespace pos
                     return;
                 }
 
-                if (txt_first_name.Text != string.Empty && txt_registrationName.Text != string.Empty && txt_vatno.Text != string.Empty)
+                if (txt_first_name.Text != string.Empty && txt_registrationName.Text != string.Empty)
                 {
                     var confirmUpdate = UiMessages.ConfirmYesNo(
                         "Update this customer?",
@@ -753,8 +753,8 @@ namespace pos
                 else
                 {
                     UiMessages.ShowInfo(
-                        "Customer name, registration no. and vat no. are requried",
-                        "يرجى إدخال الاسم الأول",
+                        "Customer name and registration no. are required",
+                        "يرجى إدخال الاسم الأول واسم التسجيل",
                         "Required Field",
                         "حقل مطلوب"
                     );

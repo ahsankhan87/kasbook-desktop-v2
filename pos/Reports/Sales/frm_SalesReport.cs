@@ -184,28 +184,30 @@ namespace pos
 
                         if (showProfit)
                         {
+                            string accountType = sales_report_dt.Columns.Contains("account")
+                                ? Convert.ToString(dr["account"]) ?? string.Empty
+                                : string.Empty;
+                            bool isReturn = accountType.Equals("Return", StringComparison.OrdinalIgnoreCase);
+
+                            // Build profit from magnitudes, then apply sign by transaction type.
                             double avgCost = (sales_report_dt.Columns.Contains("cost_price") && dr["cost_price"].ToString() != "")
-                                ? Convert.ToDouble(dr["cost_price"])
+                                ? Math.Abs(Convert.ToDouble(dr["cost_price"]))
                                 : 0;
 
-                            double unitPrice = (dr["unit_price"].ToString() == "" ? 0 : Convert.ToDouble(dr["unit_price"]));
-                            double discountValueRaw = (dr["discount_value"].ToString() == "" ? 0 : Convert.ToDouble(dr["discount_value"]));
+                            double unitPrice = (dr["unit_price"].ToString() == "" ? 0 : Math.Abs(Convert.ToDouble(dr["unit_price"])));
+                            double discountValue = (dr["discount_value"].ToString() == "" ? 0 : Math.Abs(Convert.ToDouble(dr["discount_value"])));
+                            double absQty = Math.Abs(qty);
 
-                            // Normalize discount sign to follow quantity sign
-                            double discountValue = (qty < 0) ? -Math.Abs(discountValueRaw) : Math.Abs(discountValueRaw);
+                            double lineRevenueMagnitude = (unitPrice * absQty) - discountValue;
+                            double costTotalMagnitude = avgCost * absQty;
+                            double profit = lineRevenueMagnitude - costTotalMagnitude;
 
-                            double lineRevenue = (unitPrice * qty) - discountValue;
+                            double lineRevenue = isReturn ? -lineRevenueMagnitude : lineRevenueMagnitude;
+                            double costTotal = isReturn ? -costTotalMagnitude : costTotalMagnitude;
+                            if (isReturn)
+                                profit = -profit;
 
-                            // Cost follows qty sign
-                            double costTotal = avgCost * qty;
                             dr["cost_total"] = costTotal;
-                            
-                            double profit = lineRevenue - costTotal;
-
-                            // Enforce profit sign to follow qty (returns must be negative impact)
-                            if (qty < 0) profit = -Math.Abs(profit);
-                            else profit = Math.Abs(profit);
-
                             dr["profit"] = profit;
 
                             var pctBase = lineRevenue;

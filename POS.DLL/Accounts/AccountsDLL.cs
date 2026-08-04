@@ -456,18 +456,17 @@ GROUP BY E.account_id;";
                     cn.Open();
                     const string query = @"
                         SELECT DISTINCT
-                            E.cost_center_id AS id,
+                            E.branch_id AS id,
                             CASE
-                                WHEN E.cost_center_id IS NULL OR LTRIM(RTRIM(CONVERT(VARCHAR(50), E.cost_center_id))) = '' THEN 'Unassigned'
-                                ELSE 'Department ' + CONVERT(VARCHAR(50), E.cost_center_id)
+                                WHEN E.branch_id IS NULL OR LTRIM(RTRIM(CONVERT(VARCHAR(50), E.branch_id))) = '' THEN 'Unassigned'
+                                ELSE 'Department ' + CONVERT(VARCHAR(50), E.branch_id)
                             END AS name
                         FROM acc_entries E
-                        WHERE E.branch_id = @branch_id
                         ORDER BY name;";
 
                     using (SqlCommand localCmd = new SqlCommand(query, cn))
                     {
-                        localCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        //localCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(localCmd))
                         {
                             DataTable table = new DataTable();
@@ -491,11 +490,11 @@ GROUP BY E.account_id;";
                 {
                     cn.Open();
                     const string query = @"
-SELECT ISNULL(SUM(ISNULL(I.qty, 0) * ISNULL(P.avg_cost, 0)), 0)
-FROM pos_inventory I
-INNER JOIN pos_products P ON P.item_number = I.item_number
-WHERE I.branch_id = @branch_id
-  AND I.trans_date <= @as_of_date;";
+                        SELECT ISNULL(SUM(ISNULL(I.qty, 0) * ISNULL(P.avg_cost, 0)), 0)
+                        FROM pos_inventory I
+                        INNER JOIN pos_products P ON P.item_number = I.item_number
+                        WHERE I.branch_id = @branch_id
+                          AND I.trans_date <= @as_of_date;";
 
                     using (SqlCommand localCmd = new SqlCommand(query, cn))
                     {
@@ -522,8 +521,10 @@ WHERE I.branch_id = @branch_id
                     const string query = @"
 SELECT ISNULL(SUM(
     CASE
-        WHEN LOWER(ISNULL(T.name, '')) LIKE '%income%' OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%' THEN ISNULL(E.credit, 0) - ISNULL(E.debit, 0)
-        WHEN LOWER(ISNULL(T.name, '')) LIKE '%expense%' OR LOWER(ISNULL(T.name, '')) LIKE '%cogs%' OR LOWER(ISNULL(T.name, '')) LIKE '%cost%' THEN ISNULL(E.debit, 0) - ISNULL(E.credit, 0)
+        WHEN LOWER(ISNULL(T.name, '')) LIKE '%income%' OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%' 
+            THEN ISNULL(E.credit, 0) - ISNULL(E.debit, 0)
+        WHEN LOWER(ISNULL(T.name, '')) LIKE '%expense%' OR LOWER(ISNULL(T.name, '')) LIKE '%cogs%' OR LOWER(ISNULL(T.name, '')) LIKE '%cost%' 
+            THEN -(ISNULL(E.debit, 0) - ISNULL(E.credit, 0))
         ELSE 0
     END), 0)
 FROM acc_entries E
@@ -575,12 +576,67 @@ WHERE E.branch_id = @branch_id
 
                     string predicateSql = predicates.Count == 0 ? "1=1" : string.Join(" OR ", predicates);
                     localCmd.CommandText = @"
-SELECT ISNULL(SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)), 0)
-FROM acc_entries E
-INNER JOIN acc_accounts A ON A.id = E.account_id
-WHERE E.branch_id = @branch_id
-  AND E.entry_date <= @as_of_date
-  AND (" + predicateSql + ")";
+                        SELECT ISNULL(SUM(ISNULL(E.debit, 0) - ISNULL(E.credit, 0)), 0)
+                        FROM acc_entries E
+                        INNER JOIN acc_accounts A ON A.id = E.account_id
+                        WHERE E.branch_id = @branch_id
+                          AND E.entry_date <= @as_of_date
+                          AND (" + predicateSql + ")";
+
+                    object result = localCmd.ExecuteScalar();
+                    return result == DBNull.Value || result == null ? 0m : Convert.ToDecimal(result);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public decimal GetBalanceByAccountNamePatternsAsOfWithAccountType(DateTime asOfDate, string accountTypeName, params string[] namePatterns)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+
+                    List<string> predicates = new List<string>();
+                    SqlCommand localCmd = new SqlCommand();
+                    localCmd.Connection = cn;
+                    localCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    localCmd.Parameters.AddWithValue("@as_of_date", asOfDate.Date);
+                    localCmd.Parameters.AddWithValue("@account_type", accountTypeName ?? string.Empty);
+
+                    if (namePatterns != null)
+                    {
+                        for (int i = 0; i < namePatterns.Length; i++)
+                        {
+                            string parameterName = "@p" + i;
+                            predicates.Add("(LOWER(ISNULL(A.name, '')) LIKE " + parameterName + " OR LOWER(ISNULL(A.name_2, '')) LIKE " + parameterName + ")");
+                            localCmd.Parameters.AddWithValue(parameterName, "%" + (namePatterns[i] ?? string.Empty).Trim().ToLowerInvariant() + "%");
+                        }
+                    }
+
+                    string predicateSql = predicates.Count == 0 ? "1=1" : string.Join(" OR ", predicates);
+
+                    // Query that calculates balance based on account type normal balance
+                    // For LIABILITY/EQUITY: Credit - Debit (so we negate the asset calculation)
+                    localCmd.CommandText = @"
+                        SELECT ISNULL(SUM(
+                           CASE 
+                               WHEN AT.name IN ('LIABILITY', 'EQUITY', 'REVENUE', 'GAIN')
+                                   THEN ISNULL(E.credit, 0) - ISNULL(E.debit, 0)
+                               ELSE ISNULL(E.debit, 0) - ISNULL(E.credit, 0)
+                           END
+                        ), 0)
+                        FROM acc_entries E
+                        INNER JOIN acc_accounts A ON A.id = E.account_id
+                        INNER JOIN acc_groups G ON G.id = A.group_id
+                        LEFT JOIN acc_account_type AT ON AT.id = G.account_type_id
+                        WHERE E.branch_id = @branch_id
+                          AND E.entry_date <= @as_of_date
+                          AND (" + predicateSql + ")";
 
                     object result = localCmd.ExecuteScalar();
                     return result == DBNull.Value || result == null ? 0m : Convert.ToDecimal(result);
@@ -871,6 +927,8 @@ WHERE E.branch_id = @branch_id
                         cmd.Parameters.AddWithValue("@description", obj.description);
                         cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                         cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@is_cash_account", obj.isCashAccount);
+                        cmd.Parameters.AddWithValue("@is_bank_account", obj.isBankAccount);
                         cmd.Parameters.AddWithValue("@OperationType", "1");
                         
                         //--operation types   
@@ -914,6 +972,8 @@ WHERE E.branch_id = @branch_id
                         cmd.Parameters.AddWithValue("@name", obj.name);
                         cmd.Parameters.AddWithValue("@name_2", obj.name_2);
                         cmd.Parameters.AddWithValue("@date_updated", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@is_cash_account", obj.isCashAccount);
+                        cmd.Parameters.AddWithValue("@is_bank_account", obj.isBankAccount);
                         cmd.Parameters.AddWithValue("@OperationType", "2");
                         
                         //--operation types   

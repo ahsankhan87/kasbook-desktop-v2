@@ -35,16 +35,16 @@ namespace pos.Reports.Accounts
                 using (BusyScope.Show(this, "Loading cash accounts..."))
                 {
                     // Load cash accounts from database
-                    DataTable dt = _generalBll.GetRecord("id,acc_name", "acc_accounts WHERE group_id = (SELECT id FROM acc_groups WHERE group_name LIKE '%Cash%')");
+                    DataTable dt = _generalBll.GetRecord("id,name", "acc_accounts WHERE name LIKE '%Cash%'");
 
                     if (dt != null && dt.Rows.Count > 0)
                     {
                         DataRow emptyRow = dt.NewRow();
                         emptyRow["id"] = 0;
-                        emptyRow["acc_name"] = "-- All Cash Accounts --";
+                        emptyRow["name"] = "-- All Cash Accounts --";
                         dt.Rows.InsertAt(emptyRow, 0);
 
-                        cmbEntity.DisplayMember = "acc_name";
+                        cmbEntity.DisplayMember = "name";
                         cmbEntity.ValueMember = "id";
                         cmbEntity.DataSource = dt;
                         cmbEntity.SelectedIndex = 0;
@@ -81,7 +81,7 @@ namespace pos.Reports.Accounts
             {
                 try
                 {
-                    DataTable dtAccount = _generalBll.GetRecord("id,acc_code,acc_name", $"acc_accounts WHERE id = {_selectedEntityId}");
+                    DataTable dtAccount = _generalBll.GetRecord("id,code as acc_code, name as acc_name", $"acc_accounts WHERE id = {_selectedEntityId}");
                     if (dtAccount != null && dtAccount.Rows.Count > 0)
                     {
                         DataRow row = dtAccount.Rows[0];
@@ -168,7 +168,7 @@ namespace pos.Reports.Accounts
             {
                 try
                 {
-                    DataTable dtAccount = _generalBll.GetRecord("acc_name", $"acc_accounts WHERE id = {_selectedEntityId}");
+                    DataTable dtAccount = _generalBll.GetRecord("name as acc_name", $"acc_accounts WHERE id = {_selectedEntityId}");
                     if (dtAccount != null && dtAccount.Rows.Count > 0)
                     {
                         accountInfo = dtAccount.Rows[0]["acc_name"]?.ToString() ?? "Unknown";

@@ -2550,6 +2550,9 @@
     <EmbeddedResource Include="Master\frm_shortcuts.resx">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmCustomerSubLedger.resx">
+      <DependentUpon>FrmCustomerSubLedger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Accounts\frm_AccountPayableAging.resx">
       <DependentUpon>frm_AccountPayableAging.cs</DependentUpon>
     </EmbeddedResource>
@@ -2578,6 +2581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_BalanceSheetReport.resx">
+      <DependentUpon>frm_BalanceSheetReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_BudgetVsActualReport.resx">
       <DependentUpon>frm_BudgetVsActualReport.cs</DependentUpon>

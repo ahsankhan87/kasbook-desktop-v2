@@ -97,16 +97,16 @@ namespace pos.Reports.Financial
             this.lblAsOfDate.AutoSize = true;
             this.lblAsOfDate.Location = new System.Drawing.Point(14, 16);
             this.lblAsOfDate.Name = "lblAsOfDate";
-            this.lblAsOfDate.Size = new System.Drawing.Size(69, 15);
+            this.lblAsOfDate.Size = new System.Drawing.Size(76, 17);
             this.lblAsOfDate.TabIndex = 0;
             this.lblAsOfDate.Text = "As of Date:";
             // 
             // dtpAsOfDate
             // 
             this.dtpAsOfDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpAsOfDate.Location = new System.Drawing.Point(89, 12);
+            this.dtpAsOfDate.Location = new System.Drawing.Point(95, 12);
             this.dtpAsOfDate.Name = "dtpAsOfDate";
-            this.dtpAsOfDate.Size = new System.Drawing.Size(120, 23);
+            this.dtpAsOfDate.Size = new System.Drawing.Size(120, 24);
             this.dtpAsOfDate.TabIndex = 1;
             // 
             // chkShowComparison
@@ -114,7 +114,7 @@ namespace pos.Reports.Financial
             this.chkShowComparison.AutoSize = true;
             this.chkShowComparison.Location = new System.Drawing.Point(231, 14);
             this.chkShowComparison.Name = "chkShowComparison";
-            this.chkShowComparison.Size = new System.Drawing.Size(128, 19);
+            this.chkShowComparison.Size = new System.Drawing.Size(139, 21);
             this.chkShowComparison.TabIndex = 2;
             this.chkShowComparison.Text = "Show comparison";
             this.chkShowComparison.UseVisualStyleBackColor = true;
@@ -124,24 +124,24 @@ namespace pos.Reports.Financial
             this.lblComparisonDate.AutoSize = true;
             this.lblComparisonDate.Location = new System.Drawing.Point(389, 16);
             this.lblComparisonDate.Name = "lblComparisonDate";
-            this.lblComparisonDate.Size = new System.Drawing.Size(99, 15);
+            this.lblComparisonDate.Size = new System.Drawing.Size(117, 17);
             this.lblComparisonDate.TabIndex = 3;
             this.lblComparisonDate.Text = "Comparison date:";
             // 
             // dtpComparisonDate
             // 
             this.dtpComparisonDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpComparisonDate.Location = new System.Drawing.Point(494, 12);
+            this.dtpComparisonDate.Location = new System.Drawing.Point(513, 12);
             this.dtpComparisonDate.Name = "dtpComparisonDate";
-            this.dtpComparisonDate.Size = new System.Drawing.Size(120, 23);
+            this.dtpComparisonDate.Size = new System.Drawing.Size(120, 24);
             this.dtpComparisonDate.TabIndex = 4;
             // 
             // lblDetailLevel
             // 
             this.lblDetailLevel.AutoSize = true;
-            this.lblDetailLevel.Location = new System.Drawing.Point(643, 16);
+            this.lblDetailLevel.Location = new System.Drawing.Point(705, 16);
             this.lblDetailLevel.Name = "lblDetailLevel";
-            this.lblDetailLevel.Size = new System.Drawing.Size(73, 15);
+            this.lblDetailLevel.Size = new System.Drawing.Size(76, 17);
             this.lblDetailLevel.TabIndex = 5;
             this.lblDetailLevel.Text = "Detail level:";
             // 
@@ -149,9 +149,9 @@ namespace pos.Reports.Financial
             // 
             this.cmbDetailLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDetailLevel.FormattingEnabled = true;
-            this.cmbDetailLevel.Location = new System.Drawing.Point(722, 12);
+            this.cmbDetailLevel.Location = new System.Drawing.Point(784, 12);
             this.cmbDetailLevel.Name = "cmbDetailLevel";
-            this.cmbDetailLevel.Size = new System.Drawing.Size(170, 23);
+            this.cmbDetailLevel.Size = new System.Drawing.Size(170, 24);
             this.cmbDetailLevel.TabIndex = 6;
             // 
             // btnGenerate
@@ -238,13 +238,14 @@ namespace pos.Reports.Financial
             this.colAssetsComparison,
             this.colAssetsNotes});
             this.dgvAssets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAssets.Location = new System.Drawing.Point(10, 26);
+            this.dgvAssets.Location = new System.Drawing.Point(10, 27);
             this.dgvAssets.MultiSelect = false;
             this.dgvAssets.Name = "dgvAssets";
             this.dgvAssets.ReadOnly = true;
             this.dgvAssets.RowHeadersVisible = false;
+            this.dgvAssets.RowHeadersWidth = 51;
             this.dgvAssets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAssets.Size = new System.Drawing.Size(671, 489);
+            this.dgvAssets.Size = new System.Drawing.Size(671, 488);
             this.dgvAssets.TabIndex = 0;
             // 
             // colAssetsItem
@@ -252,6 +253,7 @@ namespace pos.Reports.Financial
             this.colAssetsItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAssetsItem.DataPropertyName = "LineItem";
             this.colAssetsItem.HeaderText = "Line Item";
+            this.colAssetsItem.MinimumWidth = 6;
             this.colAssetsItem.Name = "colAssetsItem";
             this.colAssetsItem.ReadOnly = true;
             // 
@@ -259,6 +261,7 @@ namespace pos.Reports.Financial
             // 
             this.colAssetsAmount.DataPropertyName = "Amount";
             this.colAssetsAmount.HeaderText = "Amount";
+            this.colAssetsAmount.MinimumWidth = 6;
             this.colAssetsAmount.Name = "colAssetsAmount";
             this.colAssetsAmount.ReadOnly = true;
             this.colAssetsAmount.Width = 110;
@@ -267,6 +270,7 @@ namespace pos.Reports.Financial
             // 
             this.colAssetsComparison.DataPropertyName = "Comparison";
             this.colAssetsComparison.HeaderText = "Comparison";
+            this.colAssetsComparison.MinimumWidth = 6;
             this.colAssetsComparison.Name = "colAssetsComparison";
             this.colAssetsComparison.ReadOnly = true;
             this.colAssetsComparison.Width = 110;
@@ -275,6 +279,7 @@ namespace pos.Reports.Financial
             // 
             this.colAssetsNotes.DataPropertyName = "Notes";
             this.colAssetsNotes.HeaderText = "Notes";
+            this.colAssetsNotes.MinimumWidth = 6;
             this.colAssetsNotes.Name = "colAssetsNotes";
             this.colAssetsNotes.ReadOnly = true;
             this.colAssetsNotes.Width = 180;
@@ -303,13 +308,14 @@ namespace pos.Reports.Financial
             this.colLiabComparison,
             this.colLiabNotes});
             this.dgvLiabilitiesEquity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLiabilitiesEquity.Location = new System.Drawing.Point(10, 26);
+            this.dgvLiabilitiesEquity.Location = new System.Drawing.Point(10, 27);
             this.dgvLiabilitiesEquity.MultiSelect = false;
             this.dgvLiabilitiesEquity.Name = "dgvLiabilitiesEquity";
             this.dgvLiabilitiesEquity.ReadOnly = true;
             this.dgvLiabilitiesEquity.RowHeadersVisible = false;
+            this.dgvLiabilitiesEquity.RowHeadersWidth = 51;
             this.dgvLiabilitiesEquity.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLiabilitiesEquity.Size = new System.Drawing.Size(669, 489);
+            this.dgvLiabilitiesEquity.Size = new System.Drawing.Size(669, 488);
             this.dgvLiabilitiesEquity.TabIndex = 0;
             // 
             // colLiabItem
@@ -317,6 +323,7 @@ namespace pos.Reports.Financial
             this.colLiabItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colLiabItem.DataPropertyName = "LineItem";
             this.colLiabItem.HeaderText = "Line Item";
+            this.colLiabItem.MinimumWidth = 6;
             this.colLiabItem.Name = "colLiabItem";
             this.colLiabItem.ReadOnly = true;
             // 
@@ -324,6 +331,7 @@ namespace pos.Reports.Financial
             // 
             this.colLiabAmount.DataPropertyName = "Amount";
             this.colLiabAmount.HeaderText = "Amount";
+            this.colLiabAmount.MinimumWidth = 6;
             this.colLiabAmount.Name = "colLiabAmount";
             this.colLiabAmount.ReadOnly = true;
             this.colLiabAmount.Width = 110;
@@ -332,6 +340,7 @@ namespace pos.Reports.Financial
             // 
             this.colLiabComparison.DataPropertyName = "Comparison";
             this.colLiabComparison.HeaderText = "Comparison";
+            this.colLiabComparison.MinimumWidth = 6;
             this.colLiabComparison.Name = "colLiabComparison";
             this.colLiabComparison.ReadOnly = true;
             this.colLiabComparison.Width = 110;
@@ -340,6 +349,7 @@ namespace pos.Reports.Financial
             // 
             this.colLiabNotes.DataPropertyName = "Notes";
             this.colLiabNotes.HeaderText = "Notes";
+            this.colLiabNotes.MinimumWidth = 6;
             this.colLiabNotes.Name = "colLiabNotes";
             this.colLiabNotes.ReadOnly = true;
             this.colLiabNotes.Width = 180;
@@ -359,13 +369,14 @@ namespace pos.Reports.Financial
             // tvNotes
             // 
             this.tvNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvNotes.Location = new System.Drawing.Point(10, 26);
+            this.tvNotes.Location = new System.Drawing.Point(10, 27);
             this.tvNotes.Name = "tvNotes";
-            this.tvNotes.Size = new System.Drawing.Size(1364, 115);
+            this.tvNotes.Size = new System.Drawing.Size(1364, 114);
             this.tvNotes.TabIndex = 0;
             // 
             // frm_BalanceSheetReport
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 792);
             this.Controls.Add(this.splitBody);
@@ -379,9 +390,9 @@ namespace pos.Reports.Financial
             this.pnlFilters.ResumeLayout(false);
             this.pnlFilters.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitBody)).EndInit();
             this.splitBody.Panel1.ResumeLayout(false);
             this.splitBody.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBody)).EndInit();
             this.splitBody.ResumeLayout(false);
             this.grpAssets.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssets)).EndInit();
@@ -389,6 +400,7 @@ namespace pos.Reports.Financial
             ((System.ComponentModel.ISupportInitialize)(this.dgvLiabilitiesEquity)).EndInit();
             this.grpNotes.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
     }
 }

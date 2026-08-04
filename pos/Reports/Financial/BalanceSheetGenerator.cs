@@ -35,14 +35,14 @@ namespace pos.Reports.Financial
             decimal comparisonNetFixedAssets = comparisonPpe + comparisonAccumDep;
             decimal comparisonTotalAssets = comparisonCurrentAssets + comparisonNetFixedAssets;
 
-            decimal comparisonAp = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "accounts payable", "trade payable", "creditors") : 0m;
-            decimal comparisonShortLoans = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "short term loan", "short-term loan", "current portion loan") : 0m;
-            decimal comparisonTax = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "tax payable", "sales tax payable", "vat payable") : 0m;
+            decimal comparisonAp = comparisonDate.HasValue ? GetBalanceWithType(accountsBll, comparisonDate.Value, "LIABILITY", "accounts payable", "trade payable", "creditors") : 0m;
+            decimal comparisonShortLoans = comparisonDate.HasValue ? GetBalanceWithType(accountsBll, comparisonDate.Value, "LIABILITY", "short term loan", "short-term loan", "current portion loan") : 0m;
+            decimal comparisonTax = comparisonDate.HasValue ? GetBalanceWithType(accountsBll, comparisonDate.Value, "LIABILITY", "tax payable", "sales tax payable", "vat payable") : 0m;
             decimal comparisonCurrentLiabilities = comparisonAp + comparisonShortLoans + comparisonTax;
-            decimal comparisonLongLoans = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "long term loan", "long-term loan", "lease liability") : 0m;
+            decimal comparisonLongLoans = comparisonDate.HasValue ? GetBalanceWithType(accountsBll, comparisonDate.Value, "LIABILITY", "long term loan", "long-term loan", "lease liability") : 0m;
             decimal comparisonTotalLiabilities = comparisonCurrentLiabilities + comparisonLongLoans;
 
-            decimal comparisonCapital = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "owner capital", "share capital", "capital", "paid in capital") : 0m;
+            decimal comparisonCapital = comparisonDate.HasValue ? GetBalanceWithType(accountsBll, comparisonDate.Value, "EQUITY", "owner capital", "share capital", "capital", "paid in capital") : 0m;
             decimal comparisonRetained = comparisonDate.HasValue ? GetHistoricalRetainedEarnings(accountsBll, comparisonDate.Value.Date) : 0m;
             decimal comparisonNetProfit = comparisonDate.HasValue ? GetCurrentPeriodNetProfit(accountsBll, comparisonDate.Value.Date) : 0m;
             decimal comparisonTotalEquity = comparisonCapital + comparisonRetained + comparisonNetProfit;
@@ -60,15 +60,15 @@ namespace pos.Reports.Financial
             decimal netFixedAssets = propertyPlantEquipment + accumulatedDepreciation;
             decimal totalAssets = totalCurrentAssets + netFixedAssets;
 
-            decimal accountsPayable = GetBalance(accountsBll, asOfDate, "accounts payable", "trade payable", "creditors");
-            decimal shortTermLoans = GetBalance(accountsBll, asOfDate, "short term loan", "short-term loan", "current portion loan");
-            decimal taxPayable = GetBalance(accountsBll, asOfDate, "tax payable", "sales tax payable", "vat payable");
+            decimal accountsPayable = GetBalanceWithType(accountsBll, asOfDate, "LIABILITY", "accounts payable", "trade payable", "creditors");
+            decimal shortTermLoans = GetBalanceWithType(accountsBll, asOfDate, "LIABILITY", "short term loan", "short-term loan", "current portion loan");
+            decimal taxPayable = GetBalanceWithType(accountsBll, asOfDate, "LIABILITY", "tax payable", "sales tax payable", "vat payable");
             decimal totalCurrentLiabilities = accountsPayable + shortTermLoans + taxPayable;
 
-            decimal longTermLiabilities = GetBalance(accountsBll, asOfDate, "long term loan", "long-term loan", "lease liability");
+            decimal longTermLiabilities = GetBalanceWithType(accountsBll, asOfDate, "LIABILITY", "long term loan", "long-term loan", "lease liability");
             decimal totalLiabilities = totalCurrentLiabilities + longTermLiabilities;
 
-            decimal ownerCapital = GetBalance(accountsBll, asOfDate, "owner capital", "share capital", "capital", "paid in capital");
+            decimal ownerCapital = GetBalanceWithType(accountsBll, asOfDate, "EQUITY", "owner capital", "share capital", "capital", "paid in capital");
             decimal retainedEarnings = GetHistoricalRetainedEarnings(accountsBll, asOfDate.Date);
             decimal currentPeriodNetProfit = GetCurrentPeriodNetProfit(accountsBll, asOfDate.Date);
             decimal totalEquity = ownerCapital + retainedEarnings + currentPeriodNetProfit;
@@ -175,6 +175,12 @@ namespace pos.Reports.Financial
         private static decimal GetBalance(AccountsBLL accountsBll, DateTime asOfDate, params string[] patterns)
         {
             decimal value = accountsBll.GetBalanceByAccountNamePatternsAsOf(asOfDate.Date, patterns);
+            return value;
+        }
+
+        private static decimal GetBalanceWithType(AccountsBLL accountsBll, DateTime asOfDate, string accountType, params string[] patterns)
+        {
+            decimal value = accountsBll.GetBalanceByAccountNamePatternsAsOfWithAccountType(asOfDate.Date, accountType, patterns);
             return value;
         }
 

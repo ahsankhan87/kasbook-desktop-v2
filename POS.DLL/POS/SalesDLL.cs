@@ -151,7 +151,7 @@ namespace POS.DLL
                             " S.discount_percent AS total_disc_percent,S.discount_value AS total_disc_value,S.flatDiscountValue, " +
                             " SI.id,SI.item_code,SI.item_number,SI.quantity_sold,SI.unit_price,SI.item_name AS product_name,SI.tax_rate,SI.tax_id,SI.discount_value, " +
                             " (SI.unit_price*SI.quantity_sold) AS total, " +
-                            " ((SI.unit_price*SI.quantity_sold-SI.discount_value)*SI.tax_rate/100) AS vat," +
+                            " ((ABS(SI.unit_price*SI.quantity_sold) - ABS(SI.discount_value))*SI.tax_rate/100) AS vat," +
                             " C.first_name AS customer_name, C.vat_no AS customer_vat, C.RegistrationName AS customer_company, " +
                             " C.StreetName, C.BuildingNumber, C.CitySubdivisionName, C.CityName, C.PostalCode, C.CountryName, C.cr_number AS customer_cr_number," +
                             " U.name AS username, PM.description AS payment_method," +

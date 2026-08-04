@@ -102,7 +102,7 @@ namespace POS.DLL
                         cn.Open();
 
                         // NOTE: avg_cost is used as product cost for profit reporting
-                        String query = "SELECT S.id,S.sale_date,S.invoice_no," +
+                        String query = "SELECT S.id,S.sale_date,S.invoice_no,S.account," +
                             " C.first_name AS customer_name," +
                             " SI.item_code,SI.item_code as code,SI.item_number,SI.item_name AS product_name,SI.loc_code,SI.quantity_sold,SI.unit_price," +
                             " SI.discount_value," +
@@ -472,6 +472,7 @@ namespace POS.DLL
                                 S.id,
                                 S.sale_date,
                                 S.invoice_no,
+                                S.account,
                                 C.first_name AS customer_name,
                                 COUNT(SI.id) AS total_items,
                                 SUM(SI.unit_price * SI.quantity_sold) AS subtotal,
@@ -513,7 +514,7 @@ namespace POS.DLL
                             query += " AND S.invoice_no NOT LIKE 'ZS%'";
                         }
 
-                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, C.first_name ORDER BY S.sale_date DESC, S.id DESC";
+                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, C.first_name ORDER BY S.sale_date DESC, S.id DESC";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@from_date", from_date);

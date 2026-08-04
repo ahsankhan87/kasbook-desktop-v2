@@ -124,14 +124,14 @@ Added wrapper methods for all DLL methods above, following standard exception ha
 ## Database Schema Assumptions
 
 The implementation assumes the following table structures:
-- `pos_sales_master` - Sales invoices
-- `pos_purchase_master` - Purchase invoices
+- `pos_sales` - Sales invoices
+- `pos_purchases` - Purchase invoices
 - `pos_customer_payments` - Customer payment records
 - `pos_supplier_payments` - Supplier payment records
 - `pos_customers` - Customer master
 - `pos_suppliers` - Supplier master
 - `acc_accounts` - GL accounts
-- `acc_journal_vouchers`, `acc_journal_voucher_details` - Journal entries
+- `acc_entries_header`, `acc_entries` - Journal entries
 - `pos_bank_accounts`, `pos_bank_deposits`, `pos_bank_withdrawals` - Banking transactions
 
 **Note:** The views reference these tables but may need adjustment if actual table/column names differ.

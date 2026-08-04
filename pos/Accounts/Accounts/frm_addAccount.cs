@@ -24,6 +24,9 @@ namespace pos
         public TextBox tb_op_dr_balance;
         public TextBox tb_op_cr_balance;
         public Label tb_lbl_is_edit;
+        public RadioButton tb_isBankAccount;
+        public RadioButton tb_isCashAccount;
+
         private frm_accounts mainForm;
         
         public frm_addAccount(frm_accounts mainForm): this()
@@ -45,6 +48,8 @@ namespace pos
             tb_group_id = cmb_group_id;
             tb_op_dr_balance = txt_op_dr_balance;
             tb_op_cr_balance = txt_op_cr_balance;
+            tb_isCashAccount = rd_isCashAccount;
+            tb_isBankAccount = rd_isBankAccount;
 
             tb_lbl_is_edit = lbl_edit_status;
 
@@ -132,8 +137,10 @@ namespace pos
                 info.code = txt_account_code.Text;
                 info.op_dr_balance = (String.IsNullOrEmpty(txt_op_dr_balance.Text)) ? 0 : Convert.ToDouble(txt_op_dr_balance.Text);
                 info.op_cr_balance = (String.IsNullOrEmpty(txt_op_cr_balance.Text)) ? 0 : Convert.ToDouble(txt_op_cr_balance.Text);
-                info.group_id = Convert.ToInt32(cmb_group_id.SelectedValue.ToString()); 
-                    
+                info.group_id = Convert.ToInt32(cmb_group_id.SelectedValue.ToString());
+                info.isBankAccount = rd_isBankAccount.Checked;
+                info.isCashAccount = rd_isCashAccount.Checked;
+
                 AccountsBLL objBLL = new AccountsBLL();
                     
                 if (lbl_edit_status.Text == "true")

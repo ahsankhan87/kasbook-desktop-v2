@@ -200,6 +200,19 @@ namespace POS.BLL
             }
         }
 
+        public decimal GetBalanceByAccountNamePatternsAsOfWithAccountType(DateTime asOfDate, string accountTypeName, params string[] namePatterns)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetBalanceByAccountNamePatternsAsOfWithAccountType(asOfDate, accountTypeName, namePatterns);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public DataTable GetLedgerAccounts()
         {
             try

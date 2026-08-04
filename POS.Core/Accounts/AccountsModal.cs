@@ -29,5 +29,8 @@ namespace POS.Core
         public string date_created { get; set; }
 
         public string date_updated { get; set; }
+        public bool isCashAccount { get; set; } = false;
+        public bool isBankAccount { get; set; } = false;
+
     }
 }

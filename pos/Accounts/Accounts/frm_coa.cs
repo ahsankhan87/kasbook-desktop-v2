@@ -11,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using pos.Reports.Financial;
 
 namespace pos
 {
@@ -251,7 +252,7 @@ namespace pos
 
             var groupTypes = _generalBll.GetRecord("id,name", "acc_account_type");
             var allGroups = _generalBll.GetRecord("*", "acc_groups");
-            var allAccounts = _generalBll.GetRecord("*", "acc_accounts WHERE branch_id = " + UsersModal.logged_in_branch_id);
+            var allAccounts = _generalBll.GetRecord("*", "acc_accounts");
 
             BindCombo(_cmbGroupType, groupTypes, true);
             BindCombo(_cmbAccountType, groupTypes, true);
@@ -290,9 +291,9 @@ namespace pos
                     Description = GetString(row, "description"),
                     OpeningDebit = GetDouble(row, "op_dr_balance"),
                     OpeningCredit = GetDouble(row, "op_cr_balance"),
-                    OpeningBalanceDate = GetNullableDate(row, "opening_balance_date"),
-                    IsBankAccount = GetBool(row, "is_bank_account", false),
-                    IsCashAccount = GetBool(row, "is_cash_account", false),
+                    OpeningBalanceDate = GetNullableDate(row, "opening_date"),
+                    IsBankAccount = GetBool(row, "is_bank", false),
+                    IsCashAccount = GetBool(row, "is_cash", false),
                     BankName = GetString(row, "bank_name"),
                     BankBranch = GetString(row, "branch"),
                     AccountNo = GetString(row, "account_no"),
@@ -745,6 +746,8 @@ namespace pos
                 form.tb_group_id.SelectedValue = account.GroupId;
                 form.tb_op_dr_balance.Text = account.OpeningDebit.ToString();
                 form.tb_op_cr_balance.Text = account.OpeningCredit.ToString();
+                form.tb_isCashAccount.Checked = account.IsCashAccount;
+                form.tb_isBankAccount.Checked = account.IsBankAccount;
                 form.ShowDialog(this);
             }
 
@@ -798,7 +801,7 @@ namespace pos
             var tag = (CoaNodeTag)_tree.SelectedNode.Tag;
             if (tag.Kind == CoaNodeKind.Account)
             {
-                var form = new frm_account_report();
+                var form = new frm_GeneralLedgerReport();
                 form.LoadForAccount(tag.Id);
                 form.ShowDialog(this);
             }
@@ -831,7 +834,7 @@ namespace pos
                 PageNumberInHeader = false,
                 PorportionalColumns = false,
                 HeaderCellAlignment = StringAlignment.Near,
-                Footer = "khybersoft.com",
+                Footer = "nozumtech.com",
                 FooterSpacing = 15
             };
             printer.PrintPreviewDataGridView(_printGrid);
@@ -924,6 +927,8 @@ namespace pos
                 int otherIncome = EnsureGroup(income, "4200", "Other Income", "إيرادات أخرى", incomeType, "Other income accounts");
                 int costOfSales = EnsureGroup(expenses, "5100", "Cost of Sales", "تكلفة المبيعات", expenseType, "Cost of goods sold accounts");
                 int operatingExpenses = EnsureGroup(expenses, "5200", "Operating Expenses", "المصروفات التشغيلية", expenseType, "Operating expense accounts");
+                int gainsAndLosses = EnsureGroup(income, "4300", "Gains and Losses", "الأرباح والخسائر", incomeType, "Gain and loss accounts");
+                int assetReserves = EnsureGroup(equity, "3300", "Reserves and Revaluation", "الاحتياطيات وإعادة التقييم", equityType, "Reserve and asset revaluation accounts");
 
                 int cashAndBanks = EnsureGroup(currentAssets, "1110", "Cash and Banks", "النقدية والبنوك", assetsType, "Cash and bank balances");
                 int receivables = EnsureGroup(currentAssets, "1130", "Receivables", "الذمم المدينة", assetsType, "Customer and employee receivables");
@@ -998,6 +1003,16 @@ namespace pos
                 EnsureAccount(operatingExpenses, "5280", "Telephone and Internet Expense", "مصروف الهاتف والإنترنت", "Communication expenses");
                 EnsureAccount(operatingExpenses, "5290", "Stationery Expense", "مصروف القرطاسية", "Stationery and office supplies");
 
+                EnsureAccount(gainsAndLosses, "4310", "Gain on Asset Disposal", "ربح بيع الأصول", "Gains from disposal of fixed assets");
+                EnsureAccount(gainsAndLosses, "4320", "Gain on Foreign Exchange", "ربح الصرف الأجنبي", "Gains from currency exchange");
+                EnsureAccount(gainsAndLosses, "5310", "Loss on Asset Disposal", "خسارة بيع الأصول", "Losses from disposal of fixed assets");
+                EnsureAccount(gainsAndLosses, "5320", "Loss on Foreign Exchange", "خسارة الصرف الأجنبي", "Losses from currency exchange");
+
+                EnsureAccount(assetReserves, "3310", "Asset Revaluation Reserve", "احتياطي إعادة تقييم الأصول", "Accumulated gains/losses from asset revaluation");
+                EnsureAccount(assetReserves, "3320", "General Reserve", "احتياطي عام", "General contingency reserve");
+                EnsureAccount(assetReserves, "3330", "Legal Reserve", "احتياطي قانوني", "Statutory reserve requirements");
+                EnsureAccount(assetReserves, "3340", "Provision for Bad Debts", "مخصص الديون المشكوك فيها", "Allowance for doubtful receivables");
+
                 ReloadAll();
             }
         }
@@ -1066,7 +1081,7 @@ namespace pos
 
         private int FindAccountIdByCode(string code)
         {
-            var dt = _generalBll.GetRecord("id", "acc_accounts WHERE branch_id = " + UsersModal.logged_in_branch_id + " AND code = '" + Escape(code) + "'");
+            var dt = _generalBll.GetRecord("id", "acc_accounts WHERE code = '" + Escape(code) + "'");
             return dt.Rows.Count > 0 ? GetInt(dt.Rows[0], "id") : 0;
         }
 

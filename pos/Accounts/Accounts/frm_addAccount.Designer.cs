@@ -50,6 +50,10 @@
             this.cmb_group_id = new System.Windows.Forms.ComboBox();
             this.txt_name_2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.rd_isCashAccount = new System.Windows.Forms.RadioButton();
+            this.rd_isBankAccount = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,11 +176,37 @@
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
             // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // rd_isCashAccount
+            // 
+            resources.ApplyResources(this.rd_isCashAccount, "rd_isCashAccount");
+            this.rd_isCashAccount.Name = "rd_isCashAccount";
+            this.rd_isCashAccount.TabStop = true;
+            this.rd_isCashAccount.UseVisualStyleBackColor = true;
+            // 
+            // rd_isBankAccount
+            // 
+            resources.ApplyResources(this.rd_isBankAccount, "rd_isBankAccount");
+            this.rd_isBankAccount.Name = "rd_isBankAccount";
+            this.rd_isBankAccount.TabStop = true;
+            this.rd_isBankAccount.UseVisualStyleBackColor = true;
+            // 
             // frm_addAccount
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_cancel;
+            this.Controls.Add(this.rd_isBankAccount);
+            this.Controls.Add(this.rd_isCashAccount);
             this.Controls.Add(this.cmb_group_id);
             this.Controls.Add(this.lbl_edit_status);
             this.Controls.Add(this.btn_cancel);
@@ -188,6 +218,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_id);
@@ -233,5 +265,9 @@
         private System.Windows.Forms.ComboBox cmb_group_id;
         private System.Windows.Forms.TextBox txt_name_2;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RadioButton rd_isCashAccount;
+        private System.Windows.Forms.RadioButton rd_isBankAccount;
     }
 }

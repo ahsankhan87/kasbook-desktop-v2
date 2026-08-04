@@ -173,6 +173,120 @@ namespace pos
             txt_total_disc_percent.BackColor = txt_total_disc_percent.Enabled ? SystemColors.Window : Color.Gainsboro;
         }
 
+
+        /// <summary>
+        /// Validates that products with zero cost price are allowed only if user has permission.
+        /// Returns true if row is valid, false if validation failed and permission is denied.
+        /// If cost_price is zero and unit_price is set, applies permission-based logic.
+        /// </summary>
+        private bool ValidateCostPriceForRow(int rowIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid_sales.Rows.Count)
+                return true;
+
+            var costPriceCell = grid_sales.Rows[rowIndex].Cells["cost_price"].Value;
+            var unitPriceCell = grid_sales.Rows[rowIndex].Cells["unit_price"].Value;
+
+            double costPrice = costPriceCell == null || string.IsNullOrWhiteSpace(Convert.ToString(costPriceCell))
+                ? 0
+                : Convert.ToDouble(costPriceCell);
+
+            double unitPrice = unitPriceCell == null || string.IsNullOrWhiteSpace(Convert.ToString(unitPriceCell))
+                ? 0
+                : Convert.ToDouble(unitPriceCell);
+
+            // Check if cost is zero AND unit price is set
+            if (costPrice == 0 && unitPrice > 0)
+            {
+                // Check if user has permission to allow zero-cost sales
+                bool canAllowZeroCost = _auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroCostSale);
+
+                if (!canAllowZeroCost)
+                {
+                    // User does NOT have permission - show warning and mark as invalid
+                    UiMessages.ShowWarning(
+                        "Warning: This product has zero cost price. You do not have permission to sell items with zero cost.",
+                        "تنبيه: هذا المنتج بدون تكلفة. ليس لديك صلاحية لبيع المنتجات بدون تكلفة.");
+
+                    grid_sales.Rows[rowIndex].Cells["cost_price"].Style.BackColor = Color.MistyRose;
+                    grid_sales.Rows[rowIndex].Cells["unit_price"].Style.BackColor = Color.MistyRose;
+                    return false; // Invalid - prevent saving
+                }
+                else
+                {
+                    UiMessages.ShowWarning(
+                        "Warning: Cost price is zero. The invoice will be saved with this price.",
+                        "تنبيه: سعر الوحدة أقل من سعر التكلفة. سيتم حفظ الفاتورة بهذا السعر.");
+                    // User has permission - allow but mark for awareness
+                    grid_sales.Rows[rowIndex].Cells["cost_price"].Style.BackColor = Color.LightYellow;
+                    grid_sales.Rows[rowIndex].Cells["unit_price"].Style.BackColor = Color.LightYellow;
+                    return true; // Valid - can save
+                }
+            }
+            else if (unitPrice < costPrice) // check if unit price is lower than cost price
+            {
+
+                // Check if user has permission to allow zero-cost sales
+                bool canAllowZeroCost = _auth.HasPermission(_currentUser, AppPermissions.Sales_allowZeroCostSale);
+
+                if (!canAllowZeroCost)
+                {
+                    // User does NOT have permission - show warning and mark as invalid
+                    UiMessages.ShowWarning(
+                        "Warning: This product has lower cost price than unit price. You do not have permission to sell items with lower cost.",
+                        "تنبيه: هذا المنتج بدون تكلفة. ليس لديك صلاحية لبيع المنتجات بدون تكلفة.");
+
+                    grid_sales.Rows[rowIndex].Cells["cost_price"].Style.BackColor = Color.MistyRose;
+                    grid_sales.Rows[rowIndex].Cells["unit_price"].Style.BackColor = Color.MistyRose;
+                    return false; // Invalid - prevent saving
+                }
+                else
+                {
+                    UiMessages.ShowWarning(
+                        "Warning: Unit price is lower than cost price. The invoice will be saved with this price.",
+                        "تنبيه: سعر الوحدة أقل من سعر التكلفة. سيتم حفظ الفاتورة بهذا السعر.");
+                    // User has permission - allow but mark for awareness
+                    grid_sales.Rows[rowIndex].Cells["cost_price"].Style.BackColor = Color.LightYellow;
+                    grid_sales.Rows[rowIndex].Cells["unit_price"].Style.BackColor = Color.LightYellow;
+                    return true; // Valid - can save
+                }
+            }
+            else
+            {
+                // No zero cost issue - row is valid
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Validates all rows in the grid for zero cost price violations.
+        /// Skips validation for Quotation and ICT invoice types.
+        /// Returns false if any row has zero cost price and user lacks permission.
+        /// </summary>
+        private bool ValidateAllRowsBeforeSave()
+        {
+            // Get current sale type
+            string currentSaleType = cmb_sale_type.SelectedValue?.ToString() ?? "";
+
+            // Skip validation for Quotation and ICT invoice types
+            if (currentSaleType == "Quotation" || currentSaleType == "ICT")
+                return true;
+
+            for (int i = 0; i < grid_sales.Rows.Count; i++)
+            {
+                // Skip empty rows
+                var idCell = grid_sales.Rows[i].Cells["id"].Value;
+                if (idCell == null || string.IsNullOrWhiteSpace(idCell.ToString()))
+                    continue;
+
+                if (!ValidateCostPriceForRow(i))
+                {
+                    return false; // Found invalid row
+                }
+            }
+            return true; // All rows are valid
+        }
+
         private void grid_sales_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             string colName = grid_sales.Columns[e.ColumnIndex].Name;
@@ -328,30 +442,10 @@ namespace pos
                     return val == null || string.IsNullOrWhiteSpace(Convert.ToString(val)) ? 0 : Convert.ToDouble(val);
                 }
 
-                // Prevent unit_price below cost_price
+                // Validate zero cost price on unit_price edit
                 if (columnName.Equals("unit_price", StringComparison.OrdinalIgnoreCase))
                 {
-                    var costPriceVal = grid_sales.Rows[e.RowIndex].Cells["cost_price"].Value;
-                    var unitPriceVal = grid_sales.Rows[e.RowIndex].Cells["unit_price"].Value;
-
-                    double costPrice = costPriceVal == null || string.IsNullOrWhiteSpace(Convert.ToString(costPriceVal))
-                        ? 0
-                        : Convert.ToDouble(costPriceVal);
-
-                    double unitPriceInput = unitPriceVal == null || string.IsNullOrWhiteSpace(Convert.ToString(unitPriceVal))
-                        ? 0
-                        : Convert.ToDouble(unitPriceVal);
-
-                    if (unitPriceInput < costPrice)
-                    {
-                        UiMessages.ShowWarning(
-                            "Warning: Unit price is lower than cost price. The invoice will be saved with this price.",
-                            "تنبيه: سعر الوحدة أقل من سعر التكلفة. سيتم حفظ الفاتورة بهذا السعر.");
-
-                        grid_sales.Rows[e.RowIndex].Cells["unit_price"].Style.BackColor = Color.MistyRose;
-
-                        // Continue (do not reset value; do not return)
-                    }
+                    ValidateCostPriceForRow(e.RowIndex);
                 }
 
                 double unitPrice = GetCellDouble("unit_price");
@@ -604,6 +698,9 @@ namespace pos
                         //fill_locations_grid_combo(RowIndex, "", myProductView["id"].ToString());
                         ////
 
+                        // Validate cost price for newly added row
+                        ValidateCostPriceForRow(RowIndex);
+
                         if (Convert.ToDouble(myProductView["qty"]) <= 0 || myProductView["qty"].ToString() == string.Empty)
                         {
                             grid_sales.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Red;
@@ -750,6 +847,9 @@ namespace pos
                             grid_sales.Rows.RemoveAt(0);
 
                         int RowIndex = grid_sales.Rows.Add(row0);
+
+                        // Validate cost price for newly added row
+                        ValidateCostPriceForRow(RowIndex);
 
                         if (Convert.ToDouble(myProductView["qty"]) <= 0 || myProductView["qty"].ToString() == string.Empty)
                             grid_sales.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Red;
@@ -1574,6 +1674,9 @@ namespace pos
                                             btn_delete, shop_qty, tax_id.ToString(), tax_rate.ToString(), cost_price.ToString(),
                                             item_type, category_code, item_number};
                         int rowIndex = grid_sales.Rows.Add(row0);
+
+                        // Validate cost price for newly added row
+                        ValidateCostPriceForRow(rowIndex);
 
                         ////////
                         //fill_locations_grid_combo(rowIndex, "", id.ToString());
@@ -2493,6 +2596,10 @@ namespace pos
                     }
 
                     if (!ValidateSaleGridQuantitiesBeforeSave())
+                        return;
+
+                    // Validate zero cost price products - check permission before allowing save
+                    if (!ValidateAllRowsBeforeSave())
                         return;
 
                     // Existing Standard subtype check

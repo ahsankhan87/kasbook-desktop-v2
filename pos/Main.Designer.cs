@@ -132,7 +132,6 @@
             this.subLedgersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.customerARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supplierAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cashBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.incomeStatementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.balanceSheetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.financialPeriodManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,6 +148,7 @@
             this.budgetVsActualReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fixedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailySaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,7 +209,7 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.fixedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -791,6 +791,7 @@
             this.costCentersToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.importDataToolStripMenuItem,
+            this.cashBookToolStripMenuItem,
             this.fixedAssetsToolStripMenuItem});
             this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
             resources.ApplyResources(this.accountsToolStripMenuItem, "accountsToolStripMenuItem");
@@ -925,8 +926,7 @@
             // 
             this.subLedgersToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.customerARToolStripMenuItem,
-            this.supplierAPToolStripMenuItem,
-            this.cashBookToolStripMenuItem});
+            this.supplierAPToolStripMenuItem});
             this.subLedgersToolStripMenuItem1.Name = "subLedgersToolStripMenuItem1";
             resources.ApplyResources(this.subLedgersToolStripMenuItem1, "subLedgersToolStripMenuItem1");
             // 
@@ -941,12 +941,6 @@
             this.supplierAPToolStripMenuItem.Name = "supplierAPToolStripMenuItem";
             resources.ApplyResources(this.supplierAPToolStripMenuItem, "supplierAPToolStripMenuItem");
             this.supplierAPToolStripMenuItem.Click += new System.EventHandler(this.supplierAPToolStripMenuItem_Click);
-            // 
-            // cashBookToolStripMenuItem
-            // 
-            this.cashBookToolStripMenuItem.Name = "cashBookToolStripMenuItem";
-            resources.ApplyResources(this.cashBookToolStripMenuItem, "cashBookToolStripMenuItem");
-            this.cashBookToolStripMenuItem.Click += new System.EventHandler(this.cashBookToolStripMenuItem_Click);
             // 
             // incomeStatementToolStripMenuItem
             // 
@@ -1049,6 +1043,12 @@
             this.importDataToolStripMenuItem.Name = "importDataToolStripMenuItem";
             resources.ApplyResources(this.importDataToolStripMenuItem, "importDataToolStripMenuItem");
             this.importDataToolStripMenuItem.Click += new System.EventHandler(this.importDataToolStripMenuItem_Click);
+            // 
+            // fixedAssetsToolStripMenuItem
+            // 
+            this.fixedAssetsToolStripMenuItem.Name = "fixedAssetsToolStripMenuItem";
+            resources.ApplyResources(this.fixedAssetsToolStripMenuItem, "fixedAssetsToolStripMenuItem");
+            this.fixedAssetsToolStripMenuItem.Click += new System.EventHandler(this.fixedAssetsToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -1467,11 +1467,11 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // fixedAssetsToolStripMenuItem
+            // cashBookToolStripMenuItem
             // 
-            this.fixedAssetsToolStripMenuItem.Name = "fixedAssetsToolStripMenuItem";
-            resources.ApplyResources(this.fixedAssetsToolStripMenuItem, "fixedAssetsToolStripMenuItem");
-            this.fixedAssetsToolStripMenuItem.Click += new System.EventHandler(this.fixedAssetsToolStripMenuItem_Click);
+            this.cashBookToolStripMenuItem.Name = "cashBookToolStripMenuItem";
+            resources.ApplyResources(this.cashBookToolStripMenuItem, "cashBookToolStripMenuItem");
+            this.cashBookToolStripMenuItem.Click += new System.EventHandler(this.cashBookToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1661,7 +1661,6 @@
         private System.Windows.Forms.ToolStripMenuItem subLedgersToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem customerARToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supplierAPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cashBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem incomeStatementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem balanceSheetToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem financialPeriodManagementToolStripMenuItem;
@@ -1682,5 +1681,6 @@
         private System.Windows.Forms.ToolStripMenuItem importDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventoryValuationSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fixedAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cashBookToolStripMenuItem;
     }
 }

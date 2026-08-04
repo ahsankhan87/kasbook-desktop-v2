@@ -37,6 +37,7 @@
             this.lblExpiryDate = new System.Windows.Forms.Label();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmb_currency = new System.Windows.Forms.ComboBox();
             this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.txt_address = new System.Windows.Forms.TextBox();
             this.txt_name = new System.Windows.Forms.TextBox();
@@ -93,7 +94,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.txt_postalCode = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cmb_currency = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -179,6 +179,12 @@
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // cmb_currency
+            // 
+            this.cmb_currency.FormattingEnabled = true;
+            resources.ApplyResources(this.cmb_currency, "cmb_currency");
+            this.cmb_currency.Name = "cmb_currency";
             // 
             // chk_use_zatca_e_invoice
             // 
@@ -540,12 +546,6 @@
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            // 
-            // cmb_currency
-            // 
-            this.cmb_currency.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_currency, "cmb_currency");
-            this.cmb_currency.Name = "cmb_currency";
             // 
             // frm_updateCompany
             // 

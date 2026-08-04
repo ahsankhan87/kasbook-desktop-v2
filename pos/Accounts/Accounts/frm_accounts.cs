@@ -49,7 +49,7 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_accounts.AutoGenerateColumns = false;
 
-                String keyword = "AC.id,AC.group_id,G.name AS group_name,G.name_2 AS group_name_2,AC.code,AC.name,AC.name_2 AS name_2,AC.description,AC.op_dr_balance,AC.op_cr_balance,AC.date_created";
+                String keyword = "AC.*,G.name AS group_name,G.name_2 AS group_name_2";
                 String table = "acc_accounts AC LEFT JOIN acc_groups G ON AC.group_id=G.id WHERE AC.branch_id = "+UsersModal.logged_in_branch_id+"";
                 grid_accounts.DataSource = objBLL.GetRecord(keyword, table);
             }
@@ -99,13 +99,15 @@ namespace pos
                 return;
             }
 
-            string id = grid_accounts.CurrentRow.Cells["id"].Value.ToString();
-            string name = grid_accounts.CurrentRow.Cells["name"].Value.ToString();
-            string name_2 = grid_accounts.CurrentRow.Cells["name_2"].Value.ToString();
-            string code = grid_accounts.CurrentRow.Cells["code"].Value.ToString();
-            string group_id = grid_accounts.CurrentRow.Cells["group_id"].Value.ToString();
-            string op_dr_balance = grid_accounts.CurrentRow.Cells["op_dr_balance"].Value.ToString();
-            string op_cr_balance = grid_accounts.CurrentRow.Cells["op_cr_balance"].Value.ToString();
+            string id = grid_accounts.CurrentRow.Cells["id"].Value?.ToString() ?? "";
+            string name = grid_accounts.CurrentRow.Cells["name"].Value?.ToString() ?? "";
+            string name_2 = grid_accounts.CurrentRow.Cells["name_2"].Value?.ToString() ?? "";
+            string code = grid_accounts.CurrentRow.Cells["code"].Value?.ToString() ?? "";
+            string group_id = grid_accounts.CurrentRow.Cells["group_id"].Value?.ToString() ?? "";
+            string op_dr_balance = grid_accounts.CurrentRow.Cells["op_dr_balance"].Value?.ToString() ?? "";
+            string op_cr_balance = grid_accounts.CurrentRow.Cells["op_cr_balance"].Value?.ToString() ?? "";
+            string isCashAccount = grid_accounts.CurrentRow.Cells["is_cash"].Value?.ToString() ?? "";
+            string isBankAccount = grid_accounts.CurrentRow.Cells["is_bank"].Value?.ToString() ?? "";
             
             frm_addAccount frm_addAccount_obj = new frm_addAccount(this);
             frm_addAccount.instance.tb_lbl_is_edit.Text = "true";
@@ -116,6 +118,8 @@ namespace pos
             frm_addAccount.instance.tb_code.Text = code;
             frm_addAccount.instance.tb_op_dr_balance.Text = op_dr_balance;
             frm_addAccount.instance.tb_op_cr_balance.Text = op_cr_balance;
+            frm_addAccount.instance.tb_isCashAccount.Checked = Convert.ToBoolean((isCashAccount == "True" ? true : false));
+            frm_addAccount.instance.tb_isBankAccount.Checked = Convert.ToBoolean((isBankAccount == "True" ? true : false));
             frm_addAccount.instance.tb_group_id.SelectedValue = group_id;
             frm_addAccount.instance.Show();
         }
@@ -134,7 +138,7 @@ namespace pos
                 MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string id = grid_accounts.CurrentRow.Cells[0].Value.ToString();
+            string id = grid_accounts.CurrentRow.Cells[0].Value?.ToString() ?? "";
 
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);

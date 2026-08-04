@@ -184,22 +184,23 @@ namespace pos.Reports.Financial
         /// </summary>
         protected virtual void UpdateAgingPanel()
         {
-            if (_agingData == null || _agingData.Rows.Count == 0)
+            if (_agingData?.Rows.Count > 0)
+            {
+                DataRow row = _agingData.Rows[0];
+                decimal bucket0_30 = row["bucket_0_30"] != DBNull.Value ? Convert.ToDecimal(row["bucket_0_30"]) : 0;
+                decimal bucket31_60 = row["bucket_31_60"] != DBNull.Value ? Convert.ToDecimal(row["bucket_31_60"]) : 0;
+                decimal bucket61_90 = row["bucket_61_90"] != DBNull.Value ? Convert.ToDecimal(row["bucket_61_90"]) : 0;
+                decimal bucket90Plus = row["bucket_90_plus"] != DBNull.Value ? Convert.ToDecimal(row["bucket_90_plus"]) : 0;
+
+                lbl0_30.Text = $"0-30: {bucket0_30:N2}";
+                lbl31_60.Text = $"31-60: {bucket31_60:N2}";
+                lbl61_90.Text = $"61-90: {bucket61_90:N2}";
+                lbl90Plus.Text = $"90+: {bucket90Plus:N2}";
+            }
+            else
             {
                 ResetAgingPanel();
-                return;
             }
-
-            DataRow row = _agingData.Rows[0];
-            decimal bucket0_30 = row["bucket_0_30"] != DBNull.Value ? Convert.ToDecimal(row["bucket_0_30"]) : 0;
-            decimal bucket31_60 = row["bucket_31_60"] != DBNull.Value ? Convert.ToDecimal(row["bucket_31_60"]) : 0;
-            decimal bucket61_90 = row["bucket_61_90"] != DBNull.Value ? Convert.ToDecimal(row["bucket_61_90"]) : 0;
-            decimal bucket90Plus = row["bucket_90_plus"] != DBNull.Value ? Convert.ToDecimal(row["bucket_90_plus"]) : 0;
-
-            lbl0_30.Text = $"0-30: {bucket0_30:N2}";
-            lbl31_60.Text = $"31-60: {bucket31_60:N2}";
-            lbl61_90.Text = $"61-90: {bucket61_90:N2}";
-            lbl90Plus.Text = $"90+: {bucket90Plus:N2}";
         }
 
         /// <summary>
