@@ -158,7 +158,7 @@ namespace POS.DLL
                         cmd = new SqlCommand("sp_UsersCrud", cn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@OperationType", "7");
-
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     }
 
                     da = new SqlDataAdapter(cmd);

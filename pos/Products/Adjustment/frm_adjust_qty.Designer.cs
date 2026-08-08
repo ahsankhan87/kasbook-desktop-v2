@@ -125,7 +125,6 @@ namespace pos.Products.Adjustment
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_adjust_qty";
-            this.Load += new System.EventHandler(this.frm_adjust_qty_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_adjust_qty_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();

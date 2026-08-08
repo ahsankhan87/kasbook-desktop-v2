@@ -315,6 +315,9 @@
     <Compile Include="Inventory\frm_valuation_settings.Designer.cs">
       <DependentUpon>frm_valuation_settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\Adjustment\frm_product_adjustment.Designer_New.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2895,6 +2898,7 @@
     <None Include="Accounts\IMPORT_USER_GUIDE.md" />
     <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
     <None Include="Products\Adjustment\SHORTCUTS_README.md" />
+    <None Include="Products\Adjustment\update_names.ps1" />
     <None Include="Products\Labels\product_labels.xsc">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>

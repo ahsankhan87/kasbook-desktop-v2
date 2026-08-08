@@ -1465,7 +1465,7 @@ namespace POS.DLL
                                 " LEFT JOIN pos_taxes T ON T.id=P.tax_id" +
                                 " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                                 " LEFT JOIN pos_categories C ON C.code=P.category_code" +
-                                " WHERE p.deleted=0 AND P.code = @code";
+                                " WHERE p.deleted=0 AND (P.code = @code OR P.part_number = @code)";
 
                             cmd.Parameters.AddWithValue("@code", product_code);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);

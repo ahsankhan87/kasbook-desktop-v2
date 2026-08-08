@@ -70,6 +70,7 @@ namespace pos
             cmb_sale_type.SelectedIndex = 0;
             cmb_sale_account.SelectedIndex = 0;
             get_employees_dropdownlist();
+            get_users_dropdownlist();
 
             SetupCustomersDataGridView();
             ApplyProfitColumnVisibility();
@@ -101,7 +102,22 @@ namespace pos
 
 
         }
-        
+
+        public void get_users_dropdownlist()
+        {
+            UsersBLL usersBLL = new UsersBLL();
+
+            DataTable users = usersBLL.GetAll();
+            DataRow emptyRow = users.NewRow();
+            emptyRow["id"] = 0;              // Set Column Value (id)
+            emptyRow["name"] = "All Users";    // Set Column Value (name)
+            users.Rows.InsertAt(emptyRow, 0);
+
+            cmb_users.DisplayMember = "name";
+            cmb_users.ValueMember = "id";
+            cmb_users.DataSource = users;
+            cmb_users.SelectedIndex = 0;
+        }
 
         public void get_products_dropdownlist()
         {
@@ -136,6 +152,7 @@ namespace pos
                     string sale_account = cmb_sale_account.SelectedItem.ToString();
                     int branch_id = UsersModal.logged_in_branch_id;
                     bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
+                    int user_id = Convert.ToInt16(cmb_users.SelectedValue);         
 
                     grid_sales_report.AutoGenerateColumns = false;
 
@@ -143,7 +160,7 @@ namespace pos
                     sales_report_dt = await Task.Run(() =>
                     {
                         SalesReportBLL sale_report_obj = new SalesReportBLL();
-                        return sale_report_obj.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice);
+                        return sale_report_obj.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice, user_id);
                     });
 
                     // Ensure profit column exists (you said you created it; this is a safety net)
@@ -229,14 +246,15 @@ namespace pos
                     if (sales_report_dt.Rows.Count > 0)
                     {
                         DataRow newRow = sales_report_dt.NewRow();
-                        newRow[8] = "Total";
-                        newRow[9] = _quantity_sold_total;
-                        newRow[10] = _unit_price_total;
-                        newRow[11] = _discount_value_total;
-                        newRow[13] = _vat_total;
-                        newRow[14] = _total_with_vat;
-                        newRow[15] = _total;
-                        newRow[16] = _cost_price_total;
+                        // Use named columns instead of ordinal indices for clarity and maintainability
+                        newRow["product_name"] = "Total";
+                        newRow["quantity_sold"] = _quantity_sold_total;
+                        newRow["unit_price"] = _unit_price_total;
+                        newRow["discount_value"] = _discount_value_total;
+                        newRow["total"] = _total;
+                        newRow["vat"] = _vat_total;
+                        newRow["total_with_vat"] = _total_with_vat;
+                        newRow["cost_price"] = _cost_price_total;
 
                         if (sales_report_dt.Columns.Contains("profit"))
                             newRow["profit"] = _profit_total;

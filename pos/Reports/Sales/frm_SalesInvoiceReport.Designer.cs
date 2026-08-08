@@ -41,6 +41,7 @@ namespace pos.Reports.Sales
             this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             this.txtCustomerSearch = new System.Windows.Forms.TextBox();
             this.CmbCondition = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmb_employees = new System.Windows.Forms.ComboBox();
             this.btn_print = new System.Windows.Forms.Button();
@@ -59,19 +60,21 @@ namespace pos.Reports.Sales
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_sales_invoice_report = new System.Windows.Forms.DataGridView();
-            this.label9 = new System.Windows.Forms.Label();
+            this.cmb_users = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sale_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_items = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_with_vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_invoice_report)).BeginInit();
@@ -79,6 +82,8 @@ namespace pos.Reports.Sales
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmb_users);
+            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.txt_search);
             this.panel1.Controls.Add(this.chk_ShowZatcaInvoice);
             this.panel1.Controls.Add(this.txtCustomerSearch);
@@ -102,7 +107,7 @@ namespace pos.Reports.Sales
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1517, 148);
             this.panel1.TabIndex = 0;
@@ -110,8 +115,8 @@ namespace pos.Reports.Sales
             // txt_search
             // 
             this.txt_search.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_search.Location = new System.Drawing.Point(761, 60);
-            this.txt_search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_search.Location = new System.Drawing.Point(761, 42);
+            this.txt_search.Margin = new System.Windows.Forms.Padding(4);
             this.txt_search.Name = "txt_search";
             this.txt_search.Size = new System.Drawing.Size(209, 29);
             this.txt_search.TabIndex = 50;
@@ -121,7 +126,7 @@ namespace pos.Reports.Sales
             this.chk_ShowZatcaInvoice.AutoSize = true;
             this.chk_ShowZatcaInvoice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_ShowZatcaInvoice.Location = new System.Drawing.Point(679, 111);
-            this.chk_ShowZatcaInvoice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chk_ShowZatcaInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
             this.chk_ShowZatcaInvoice.Size = new System.Drawing.Size(107, 24);
             this.chk_ShowZatcaInvoice.TabIndex = 49;
@@ -131,11 +136,12 @@ namespace pos.Reports.Sales
             // txtCustomerSearch
             // 
             this.txtCustomerSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerSearch.Location = new System.Drawing.Point(455, 12);
-            this.txtCustomerSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCustomerSearch.Location = new System.Drawing.Point(455, 10);
+            this.txtCustomerSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtCustomerSearch.Name = "txtCustomerSearch";
             this.txtCustomerSearch.Size = new System.Drawing.Size(209, 29);
             this.txtCustomerSearch.TabIndex = 48;
+            this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged_1);
             // 
             // CmbCondition
             // 
@@ -143,11 +149,22 @@ namespace pos.Reports.Sales
             this.CmbCondition.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmbCondition.FormattingEnabled = true;
             this.CmbCondition.Location = new System.Drawing.Point(135, 10);
-            this.CmbCondition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CmbCondition.Margin = new System.Windows.Forms.Padding(4);
             this.CmbCondition.Name = "CmbCondition";
             this.CmbCondition.Size = new System.Drawing.Size(209, 29);
             this.CmbCondition.TabIndex = 47;
             this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(675, 48);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 20);
+            this.label9.TabIndex = 46;
+            this.label9.Text = "Search:";
             // 
             // label7
             // 
@@ -166,8 +183,8 @@ namespace pos.Reports.Sales
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_employees.FormattingEnabled = true;
-            this.cmb_employees.Location = new System.Drawing.Point(761, 12);
-            this.cmb_employees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_employees.Location = new System.Drawing.Point(761, 10);
+            this.cmb_employees.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_employees.Name = "cmb_employees";
             this.cmb_employees.Size = new System.Drawing.Size(209, 29);
             this.cmb_employees.TabIndex = 45;
@@ -175,8 +192,8 @@ namespace pos.Reports.Sales
             // btn_print
             // 
             this.btn_print.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_print.Location = new System.Drawing.Point(1266, 62);
-            this.btn_print.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_print.Location = new System.Drawing.Point(993, 56);
+            this.btn_print.Margin = new System.Windows.Forms.Padding(4);
             this.btn_print.Name = "btn_print";
             this.btn_print.Size = new System.Drawing.Size(146, 34);
             this.btn_print.TabIndex = 44;
@@ -187,8 +204,8 @@ namespace pos.Reports.Sales
             // btn_export
             // 
             this.btn_export.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_export.Location = new System.Drawing.Point(1266, 17);
-            this.btn_export.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_export.Location = new System.Drawing.Point(993, 12);
+            this.btn_export.Margin = new System.Windows.Forms.Padding(4);
             this.btn_export.Name = "btn_export";
             this.btn_export.Size = new System.Drawing.Size(146, 34);
             this.btn_export.TabIndex = 43;
@@ -199,8 +216,8 @@ namespace pos.Reports.Sales
             // btn_search
             // 
             this.btn_search.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_search.Location = new System.Drawing.Point(1266, 106);
-            this.btn_search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_search.Location = new System.Drawing.Point(993, 100);
+            this.btn_search.Margin = new System.Windows.Forms.Padding(4);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(146, 34);
             this.btn_search.TabIndex = 42;
@@ -217,8 +234,8 @@ namespace pos.Reports.Sales
             "All",
             "Sale",
             "Return"});
-            this.cmb_sale_account.Location = new System.Drawing.Point(455, 108);
-            this.cmb_sale_account.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_sale_account.Location = new System.Drawing.Point(455, 74);
+            this.cmb_sale_account.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_sale_account.Name = "cmb_sale_account";
             this.cmb_sale_account.Size = new System.Drawing.Size(209, 29);
             this.cmb_sale_account.TabIndex = 41;
@@ -232,8 +249,8 @@ namespace pos.Reports.Sales
             "All",
             "Cash",
             "Credit"});
-            this.cmb_sale_type.Location = new System.Drawing.Point(455, 60);
-            this.cmb_sale_type.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_sale_type.Location = new System.Drawing.Point(455, 42);
+            this.cmb_sale_type.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_sale_type.Name = "cmb_sale_type";
             this.cmb_sale_type.Size = new System.Drawing.Size(209, 29);
             this.cmb_sale_type.TabIndex = 40;
@@ -242,8 +259,8 @@ namespace pos.Reports.Sales
             // 
             this.txt_to_date.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_to_date.Location = new System.Drawing.Point(135, 106);
-            this.txt_to_date.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_to_date.Location = new System.Drawing.Point(135, 74);
+            this.txt_to_date.Margin = new System.Windows.Forms.Padding(4);
             this.txt_to_date.Name = "txt_to_date";
             this.txt_to_date.Size = new System.Drawing.Size(209, 29);
             this.txt_to_date.TabIndex = 39;
@@ -252,7 +269,7 @@ namespace pos.Reports.Sales
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(370, 113);
+            this.label6.Location = new System.Drawing.Point(352, 77);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 20);
@@ -263,8 +280,8 @@ namespace pos.Reports.Sales
             // 
             this.txt_from_date.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_from_date.Location = new System.Drawing.Point(135, 58);
-            this.txt_from_date.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_from_date.Location = new System.Drawing.Point(135, 42);
+            this.txt_from_date.Margin = new System.Windows.Forms.Padding(4);
             this.txt_from_date.Name = "txt_from_date";
             this.txt_from_date.Size = new System.Drawing.Size(209, 29);
             this.txt_from_date.TabIndex = 37;
@@ -273,7 +290,7 @@ namespace pos.Reports.Sales
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 108);
+            this.label2.Location = new System.Drawing.Point(13, 76);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 20);
@@ -284,7 +301,7 @@ namespace pos.Reports.Sales
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(370, 65);
+            this.label5.Location = new System.Drawing.Point(352, 47);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 20);
@@ -306,7 +323,7 @@ namespace pos.Reports.Sales
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(370, 17);
+            this.label3.Location = new System.Drawing.Point(352, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 20);
@@ -317,7 +334,7 @@ namespace pos.Reports.Sales
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 60);
+            this.label1.Location = new System.Drawing.Point(13, 44);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 20);
@@ -339,7 +356,7 @@ namespace pos.Reports.Sales
             this.panel2.Controls.Add(this.grid_sales_invoice_report);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 148);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1517, 652);
             this.panel2.TabIndex = 1;
@@ -356,17 +373,18 @@ namespace pos.Reports.Sales
             this.sale_date,
             this.invoice_no,
             this.customer_name,
+            this.sale_type,
             this.total_items,
+            this.cost_total,
             this.subtotal,
             this.discount_value,
             this.vat,
             this.total,
             this.total_with_vat,
-            this.profit,
-            this.cost_total});
+            this.profit});
             this.grid_sales_invoice_report.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid_sales_invoice_report.Location = new System.Drawing.Point(0, 0);
-            this.grid_sales_invoice_report.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grid_sales_invoice_report.Margin = new System.Windows.Forms.Padding(4);
             this.grid_sales_invoice_report.Name = "grid_sales_invoice_report";
             this.grid_sales_invoice_report.ReadOnly = true;
             this.grid_sales_invoice_report.RowHeadersWidth = 51;
@@ -375,16 +393,27 @@ namespace pos.Reports.Sales
             this.grid_sales_invoice_report.TabIndex = 0;
             this.grid_sales_invoice_report.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_sales_invoice_report_CellDoubleClick);
             // 
-            // label9
+            // cmb_users
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(675, 64);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 20);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "Search:";
+            this.cmb_users.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_users.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_users.FormattingEnabled = true;
+            this.cmb_users.Location = new System.Drawing.Point(761, 74);
+            this.cmb_users.Margin = new System.Windows.Forms.Padding(4);
+            this.cmb_users.Name = "cmb_users";
+            this.cmb_users.Size = new System.Drawing.Size(209, 24);
+            this.cmb_users.TabIndex = 53;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label10.Location = new System.Drawing.Point(676, 81);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 17);
+            this.label10.TabIndex = 54;
+            this.label10.Text = "Users:";
             // 
             // id
             // 
@@ -423,6 +452,14 @@ namespace pos.Reports.Sales
             this.customer_name.Name = "customer_name";
             this.customer_name.ReadOnly = true;
             // 
+            // sale_type
+            // 
+            this.sale_type.DataPropertyName = "sale_type";
+            this.sale_type.HeaderText = "Type";
+            this.sale_type.MinimumWidth = 6;
+            this.sale_type.Name = "sale_type";
+            this.sale_type.ReadOnly = true;
+            // 
             // total_items
             // 
             this.total_items.DataPropertyName = "total_items";
@@ -434,12 +471,25 @@ namespace pos.Reports.Sales
             this.total_items.Name = "total_items";
             this.total_items.ReadOnly = true;
             // 
+            // cost_total
+            // 
+            this.cost_total.DataPropertyName = "cost_total";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cost_total.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cost_total.FillWeight = 70F;
+            this.cost_total.HeaderText = "Cost Total";
+            this.cost_total.MinimumWidth = 6;
+            this.cost_total.Name = "cost_total";
+            this.cost_total.ReadOnly = true;
+            // 
             // subtotal
             // 
             this.subtotal.DataPropertyName = "subtotal";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.subtotal.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.subtotal.DefaultCellStyle = dataGridViewCellStyle3;
             this.subtotal.FillWeight = 80F;
             this.subtotal.HeaderText = "Subtotal";
             this.subtotal.MinimumWidth = 6;
@@ -449,9 +499,9 @@ namespace pos.Reports.Sales
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle4;
             this.discount_value.FillWeight = 70F;
             this.discount_value.HeaderText = "Discount";
             this.discount_value.MinimumWidth = 6;
@@ -461,9 +511,9 @@ namespace pos.Reports.Sales
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.vat.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.vat.DefaultCellStyle = dataGridViewCellStyle5;
             this.vat.FillWeight = 60F;
             this.vat.HeaderText = "VAT";
             this.vat.MinimumWidth = 6;
@@ -473,9 +523,9 @@ namespace pos.Reports.Sales
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.total.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.total.DefaultCellStyle = dataGridViewCellStyle6;
             this.total.FillWeight = 80F;
             this.total.HeaderText = "Total";
             this.total.MinimumWidth = 6;
@@ -485,9 +535,9 @@ namespace pos.Reports.Sales
             // total_with_vat
             // 
             this.total_with_vat.DataPropertyName = "total_with_vat";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle7;
             this.total_with_vat.FillWeight = 80F;
             this.total_with_vat.HeaderText = "Total (VAT)";
             this.total_with_vat.MinimumWidth = 6;
@@ -497,28 +547,14 @@ namespace pos.Reports.Sales
             // profit
             // 
             this.profit.DataPropertyName = "profit";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            this.profit.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.profit.DefaultCellStyle = dataGridViewCellStyle8;
             this.profit.FillWeight = 70F;
             this.profit.HeaderText = "Profit";
             this.profit.MinimumWidth = 6;
             this.profit.Name = "profit";
             this.profit.ReadOnly = true;
-            // 
-            // cost_total
-            // 
-            this.cost_total.DataPropertyName = "cost_total";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.cost_total.DefaultCellStyle = dataGridViewCellStyle8;
-            this.cost_total.FillWeight = 70F;
-            this.cost_total.HeaderText = "Cost Total";
-            this.cost_total.MinimumWidth = 6;
-            this.cost_total.Name = "cost_total";
-            this.cost_total.ReadOnly = true;
-            this.cost_total.Visible = false;
             // 
             // frm_SalesInvoiceReport
             // 
@@ -528,7 +564,7 @@ namespace pos.Reports.Sales
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_SalesInvoiceReport";
             this.ShowIcon = false;
             this.Text = "Sales Invoice Report";
@@ -569,17 +605,20 @@ namespace pos.Reports.Sales
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView grid_sales_invoice_report;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmb_users;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sale_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_items;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cost_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_with_vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cost_total;
     }
 }

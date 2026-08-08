@@ -1,9 +1,8 @@
-using pos.Security.Authorization;
+ï»¿using pos.Security.Authorization;
 using pos.UI;
 using POS.BLL;
 using System;
 using System.ComponentModel;
-using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -45,9 +44,9 @@ namespace pos.Products.Adjustment
             {
                 UiMessages.ShowWarning(
                     "Please enter a quantity.",
-                    "íÑÌì ÅÏÎÇá ÇáßãíÉ.",
+                    "ÙŠØ±Ø¬Ù‰ Ø¥Ø¯Ø®Ø§Ù„ Ø§Ù„ÙƒÙ…ÙŠØ©.",
                     captionEn: "Adjustment",
-                    captionAr: "ÊÓæíÉ");
+                    captionAr: "ØªØ³ÙˆÙŠØ©");
                 DialogResult = DialogResult.None;
                 txtQty.Focus();
                 txtQty.SelectAll();
@@ -60,9 +59,9 @@ namespace pos.Products.Adjustment
             {
                 UiMessages.ShowWarning(
                     "Please enter a valid quantity (numbers only).",
-                    "íÑÌì ÅÏÎÇá ßãíÉ ÕÍíÍÉ (ÃÑŞÇã İŞØ).",
+                    "ÙŠØ±Ø¬Ù‰ Ø¥Ø¯Ø®Ø§Ù„ ÙƒÙ…ÙŠØ© ØµØ­ÙŠØ­Ø© (Ø£Ø±Ù‚Ø§Ù… ÙÙ‚Ø·).",
                     captionEn: "Adjustment",
-                    captionAr: "ÊÓæíÉ");
+                    captionAr: "ØªØ³ÙˆÙŠØ©");
                 DialogResult = DialogResult.None;
                 txtQty.Focus();
                 txtQty.SelectAll();
@@ -73,9 +72,9 @@ namespace pos.Products.Adjustment
             {
                 UiMessages.ShowWarning(
                     "Quantity cannot be negative.",
-                    "áÇ íãßä Ãä Êßæä ÇáßãíÉ ÓÇáÈÉ.",
+                    "Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø£Ù† ØªÙƒÙˆÙ† Ø§Ù„ÙƒÙ…ÙŠØ© Ø³Ø§Ù„Ø¨Ø©.",
                     captionEn: "Adjustment",
-                    captionAr: "ÊÓæíÉ");
+                    captionAr: "ØªØ³ÙˆÙŠØ©");
                 DialogResult = DialogResult.None;
                 txtQty.Focus();
                 txtQty.SelectAll();
@@ -120,9 +119,9 @@ namespace pos.Products.Adjustment
             {
                 UiMessages.ShowWarning(
                     "You do not have permission to delete products.",
-                    "áíÓ áÏíß ÕáÇÍíÉ áÍĞİ ÇáãäÊÌÇÊ.",
+                    "Ù„ÙŠØ³ Ù„Ø¯ÙŠÙƒ ØµÙ„Ø§Ø­ÙŠØ© Ù„Ø­Ø°Ù Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª.",
                     "Permission Denied",
-                    "Êã ÑİÖ ÇáÕáÇÍíÉ"
+                    "ØªÙ… Ø±ÙØ¶ Ø§Ù„ØµÙ„Ø§Ø­ÙŠØ©"
                 );
                 return;
             }
@@ -132,9 +131,9 @@ namespace pos.Products.Adjustment
             {
                 var confirm = UiMessages.ConfirmYesNo(
                     "Delete this product? This action cannot be undone.",
-                    "åá ÊÑíÏ ÍĞİ åĞÇ ÇáãäÊÌ¿ áÇ íãßä ÇáÊÑÇÌÚ Úä åĞÇ ÇáÅÌÑÇÁ.",
+                    "Ù‡Ù„ ØªØ±ÙŠØ¯ Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ù…Ù†ØªØ¬ØŸ Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø§Ù„ØªØ±Ø§Ø¬Ø¹ Ø¹Ù† Ù‡Ø°Ø§ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡.",
                     captionEn: "Confirm Delete",
-                    captionAr: "ÊÃßíÏ ÇáÍĞİ"
+                    captionAr: "ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù"
                 );
 
                 if (confirm == DialogResult.Yes)
@@ -145,9 +144,9 @@ namespace pos.Products.Adjustment
 
                     UiMessages.ShowInfo(
                         "Product has been deleted successfully.",
-                        "Êã ÍĞİ ÇáãäÊÌ ÈäÌÇÍ.",
+                        "ØªÙ… Ø­Ø°Ù Ø§Ù„Ù…Ù†ØªØ¬ Ø¨Ù†Ø¬Ø§Ø­.",
                         "Deleted",
-                        "Êã ÇáÍĞİ"
+                        "ØªÙ… Ø§Ù„Ø­Ø°Ù"
                     );
 
                     DialogResult = DialogResult.Cancel;
@@ -159,9 +158,9 @@ namespace pos.Products.Adjustment
             {
                 UiMessages.ShowInfo(
                     "Please select a product record first.",
-                    "íÑÌì ÇÎÊíÇÑ ÓÌá ãäÊÌ ÃæáÇğ.",
+                    "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ø³Ø¬Ù„ Ù…Ù†ØªØ¬ Ø£ÙˆÙ„Ø§Ù‹.",
                     "Product",
-                    "ÇáãäÊÌ"
+                    "Ø§Ù„Ù…Ù†ØªØ¬"
                 );
             }
         }
@@ -181,11 +180,5 @@ namespace pos.Products.Adjustment
                 btn_deleteProduct.PerformClick();
             }
         }
-
-        private void frm_adjust_qty_Load(object sender, EventArgs e)
-        {
-            
-        }
-        
     }
 }

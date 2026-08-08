@@ -91,7 +91,7 @@ namespace POS.DLL
         }
 
         public DataTable SaleReport(DateTime from_date, DateTime to_date, int customer_id = 0, string product_code = "", 
-            string sale_type = "", int employee_id = 0,string sale_account="",int branch_id=0, bool SkipSmallInvoices=true)
+            string sale_type = "", int employee_id = 0,string sale_account="",int branch_id=0, bool SkipSmallInvoices=true, int user_id = 0)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -139,6 +139,10 @@ namespace POS.DLL
                         {
                             query += " AND S.employee_id = @employee_id";
                         }
+                        if (user_id != 0)
+                        {
+                            query += " AND S.user_id = @user_id";
+                        }
 
                         if (!SkipSmallInvoices)
                         {
@@ -173,6 +177,10 @@ namespace POS.DLL
                         {
                             cmd.Parameters.AddWithValue("@employee_id", employee_id);
 
+                        }
+                        if (user_id != 0)
+                        {
+                            cmd.Parameters.AddWithValue("@user_id", user_id);
                         }
                     }
 
@@ -456,7 +464,7 @@ namespace POS.DLL
         }
 
         public DataTable SalesInvoiceReport(DateTime from_date, DateTime to_date, int customer_id = 0, string product_code = "",
-            string sale_type = "", int employee_id = 0, string sale_account = "", int branch_id = 0, bool SkipSmallInvoices = true)
+            string sale_type = "", int employee_id = 0, string sale_account = "", int branch_id = 0, bool SkipSmallInvoices = true, int user_id = 0)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -473,6 +481,7 @@ namespace POS.DLL
                                 S.sale_date,
                                 S.invoice_no,
                                 S.account,
+                                S.sale_type,
                                 C.first_name AS customer_name,
                                 COUNT(SI.id) AS total_items,
                                 SUM(SI.unit_price * SI.quantity_sold) AS subtotal,
@@ -509,12 +518,16 @@ namespace POS.DLL
                         {
                             query += " AND S.employee_id = @employee_id";
                         }
+                        if (user_id != 0)
+                        {
+                            query += " AND S.user_id = @user_id";
+                        }
                         if (!SkipSmallInvoices)
                         {
                             query += " AND S.invoice_no NOT LIKE 'ZS%'";
                         }
 
-                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, C.first_name ORDER BY S.sale_date DESC, S.id DESC";
+                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, S.sale_type, C.first_name ORDER BY S.sale_date DESC, S.id DESC";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@from_date", from_date);
@@ -540,6 +553,10 @@ namespace POS.DLL
                         if (employee_id != 0)
                         {
                             cmd.Parameters.AddWithValue("@employee_id", employee_id);
+                        }
+                        if (user_id != 0)
+                        {
+                            cmd.Parameters.AddWithValue("@user_id", user_id);
                         }
                     }
 

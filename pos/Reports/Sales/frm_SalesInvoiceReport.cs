@@ -65,6 +65,7 @@ namespace pos.Reports.Sales
             cmb_sale_type.SelectedIndex = 0;
             cmb_sale_account.SelectedIndex = 0;
             get_employees_dropdownlist();
+            get_users_dropdownlist();
 
             SetupCustomersDataGridView();
             ApplyProfitColumnVisibility();
@@ -73,6 +74,22 @@ namespace pos.Reports.Sales
         private void StyleForm()
         {
             AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_sales_invoice_report, id);
+        }
+
+        public void get_users_dropdownlist()
+        {
+            UsersBLL usersBLL = new UsersBLL();
+
+            DataTable users = usersBLL.GetAll();
+            DataRow emptyRow = users.NewRow();
+            emptyRow["id"] = 0;              // Set Column Value (id)
+            emptyRow["name"] = "All Users";    // Set Column Value (name)
+            users.Rows.InsertAt(emptyRow, 0);
+
+            cmb_users.DisplayMember = "name";
+            cmb_users.ValueMember = "id";
+            cmb_users.DataSource = users;
+            cmb_users.SelectedIndex = 0;
         }
 
         public void get_employees_dropdownlist()
@@ -105,13 +122,14 @@ namespace pos.Reports.Sales
                     string sale_account = cmb_sale_account.SelectedItem.ToString();
                     int branch_id = UsersModal.logged_in_branch_id;
                     bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
+                    int user_id = Convert.ToInt16(cmb_users.SelectedValue);
 
                     grid_sales_invoice_report.AutoGenerateColumns = false;
 
                     sales_invoice_report_dt = await Task.Run(() =>
                     {
                         SalesReportBLL sale_report_obj = new SalesReportBLL();
-                        return sale_report_obj.SalesInvoiceReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice);
+                        return sale_report_obj.SalesInvoiceReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice, user_id);
                     });
 
                     bool showProfit = CanViewProfit();
@@ -780,6 +798,11 @@ namespace pos.Reports.Sales
             {
                 btn_print.PerformClick();
             }
+        }
+
+        private void txtCustomerSearch_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

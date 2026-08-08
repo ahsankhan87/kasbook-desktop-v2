@@ -25,19 +25,19 @@ namespace POS.BLL
                 throw;
             }
         }
-        
-        public DataTable SaleReport(DateTime from_date, DateTime to_date, 
-            int customer_id = 0, string product_code = "", string sale_type = "",int employee_id=0,string sale_account="", 
-            int branch_id = 0,bool showZatcaSkipInvoice= true)
+
+        public DataTable SaleReport(DateTime from_date, DateTime to_date,
+            int customer_id = 0, string product_code = "", string sale_type = "", int employee_id = 0, string sale_account = "",
+            int branch_id = 0, bool showZatcaSkipInvoice = true, int user_id = 0)
         {
             try
             {
                 SalesReportDLL objDLL = new SalesReportDLL();
-                return objDLL.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id,showZatcaSkipInvoice);
+                return objDLL.SaleReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice, user_id);
             }
             catch
             {
-                
+
                 throw;
             }
         }
@@ -89,12 +89,12 @@ namespace POS.BLL
 
         public DataTable SalesInvoiceReport(DateTime from_date, DateTime to_date,
             int customer_id = 0, string product_code = "", string sale_type = "", int employee_id = 0, string sale_account = "",
-            int branch_id = 0, bool showZatcaSkipInvoice = true)
+            int branch_id = 0, bool showZatcaSkipInvoice = true, int user_id = 0)
         {
             try
             {
                 SalesReportDLL objDLL = new SalesReportDLL();
-                return objDLL.SalesInvoiceReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice);
+                return objDLL.SalesInvoiceReport(from_date, to_date, customer_id, product_code, sale_type, employee_id, sale_account, branch_id, showZatcaSkipInvoice, user_id);
             }
             catch
             {
