@@ -1,43 +1,60 @@
-IF OBJECT_ID(N'dbo.acc_bank_reconciliation_header', N'U') IS NULL
-BEGIN
-	CREATE TABLE dbo.acc_bank_reconciliation_header
-	(
-		id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		branch_id INT NOT NULL,
-		bank_account_id INT NOT NULL,
-		statement_date DATE NOT NULL,
-		bank_statement_balance DECIMAL(18,2) NOT NULL,
-		adjusted_balance DECIMAL(18,2) NOT NULL,
-		book_balance DECIMAL(18,2) NOT NULL,
-		difference DECIMAL(18,2) NOT NULL,
-		reconciled_by INT NULL,
-		reconciled_on DATETIME NOT NULL CONSTRAINT DF_acc_bank_reconciliation_header_reconciled_on DEFAULT(GETDATE()),
-		date_created DATETIME NOT NULL CONSTRAINT DF_acc_bank_reconciliation_header_date_created DEFAULT(GETDATE())
-	);
+-- ============================================================================
+-- ADD BANK_ID COLUMN TO ACC_ENTRIES - SOLUTION TO BANK FILTERING ISSUE
+-- ============================================================================
+-- Problem: All banks point to same GLAccountID in Chart of Accounts,
+--          so entries cannot be distinguished by account_id alone.
+--
+-- Solution: Add bank_id column to acc_entries to track which bank account
+--           each entry belongs to.
+-- ============================================================================
 
-	CREATE UNIQUE INDEX UX_acc_bank_rec_header_branch_account_date
-	ON dbo.acc_bank_reconciliation_header(branch_id, bank_account_id, statement_date);
+-- STEP 1: Add bank_id column to acc_entries (if not already exists)
+IF NOT EXISTS (
+	SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS 
+	WHERE TABLE_NAME = 'acc_entries' AND COLUMN_NAME = 'bank_id'
+)
+BEGIN
+	ALTER TABLE dbo.acc_entries 
+	ADD bank_id INT NULL;
+
+	PRINT 'Column bank_id added to acc_entries';
+END
+ELSE
+BEGIN
+	PRINT 'Column bank_id already exists on acc_entries';
 END
 GO
 
-IF OBJECT_ID(N'dbo.acc_bank_reconciliation_items', N'U') IS NULL
+-- STEP 2: Create index on bank_id for faster queries
+IF NOT EXISTS (
+	SELECT 1 FROM sys.indexes 
+	WHERE name = 'IX_acc_entries_bank_id' AND object_id = OBJECT_ID('dbo.acc_entries')
+)
 BEGIN
-	CREATE TABLE dbo.acc_bank_reconciliation_items
-	(
-		id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		reconciliation_id INT NOT NULL,
-		entry_id INT NOT NULL,
-		is_cleared BIT NOT NULL,
-		updated_by INT NULL,
-		updated_on DATETIME NOT NULL CONSTRAINT DF_acc_bank_reconciliation_items_updated_on DEFAULT(GETDATE()),
-		CONSTRAINT FK_acc_bank_reconciliation_items_header FOREIGN KEY (reconciliation_id)
-			REFERENCES dbo.acc_bank_reconciliation_header(id)
-	);
-
-	CREATE UNIQUE INDEX UX_acc_bank_rec_items_recon_entry
-	ON dbo.acc_bank_reconciliation_items(reconciliation_id, entry_id);
+	CREATE INDEX IX_acc_entries_bank_id ON dbo.acc_entries(bank_id) WHERE bank_id IS NOT NULL;
+	PRINT 'Index IX_acc_entries_bank_id created';
+END
+ELSE
+BEGIN
+	PRINT 'Index IX_acc_entries_bank_id already exists';
 END
 GO
+
+-- STEP 3: Update existing entries to populate bank_id
+-- This assumes you can identify which bank based on the entry content
+-- Adjust the logic based on your business rules
+/*
+UPDATE E
+SET E.bank_id = B.id
+FROM dbo.acc_entries E
+INNER JOIN dbo.pos_banks B ON B.GLAccountID = E.account_id
+WHERE E.bank_id IS NULL AND E.account_id = B.GLAccountID;
+
+PRINT 'Existing entries updated with bank_id';
+*/
+
+-- STEP 4: Update stored procedure sp_BankReconciliation to use bank_id
+-- Replace the existing procedure with this updated version
 
 IF OBJECT_ID(N'dbo.sp_BankReconciliation', N'P') IS NOT NULL
 	DROP PROCEDURE dbo.sp_BankReconciliation;
@@ -47,7 +64,7 @@ CREATE PROCEDURE dbo.sp_BankReconciliation
 	@OperationType INT,
 	@ReconciliationId INT = NULL,
 	@BranchId INT = NULL,
-	@BankAccountId INT = NULL,
+	@BankAccountId INT = NULL,      -- Now this is pos_banks.id, not GLAccountID
 	@StatementDate DATE = NULL,
 	@BankStatementBalance DECIMAL(18,2) = NULL,
 	@AdjustedBalance DECIMAL(18,2) = NULL,
@@ -72,8 +89,10 @@ BEGIN
 		  AND H.statement_date = @StatementDate
 		ORDER BY H.id DESC;
 
+		-- Filter by bank_id instead of account_id
 		SELECT
 			E.id AS entry_id,
+			E.bank_id,
 			E.account_id,
 			E.entry_date,
 			E.invoice_no,
@@ -88,7 +107,7 @@ BEGIN
 		   AND I.reconciliation_id = @LatestRecId
 		   AND @LatestRecId IS NOT NULL
 		WHERE E.branch_id = @BranchId
-		  AND E.account_id = @BankAccountId
+		  AND E.bank_id = @BankAccountId  -- FIX: Filter by bank_id
 		  AND E.entry_date <= @StatementDate
 		ORDER BY E.entry_date, E.id;
 
@@ -194,6 +213,7 @@ BEGIN
 
 		SELECT
 			E.id AS entry_id,
+			E.bank_id,
 			E.account_id,
 			E.entry_date,
 			E.invoice_no,
@@ -207,7 +227,7 @@ BEGIN
 		   AND I.reconciliation_id = @RecId
 		   AND @RecId IS NOT NULL
 		WHERE E.branch_id = @BranchId
-		  AND E.account_id = @BankAccountId
+		  AND E.bank_id = @BankAccountId  -- FIX: Filter by bank_id
 		  AND E.entry_date <= @StatementDate
 		  AND ISNULL(I.is_cleared, 0) = 0
 		ORDER BY E.entry_date, E.id;
@@ -216,3 +236,5 @@ BEGIN
 	END
 END
 GO
+
+PRINT 'Stored procedure sp_BankReconciliation updated with bank_id filtering!';

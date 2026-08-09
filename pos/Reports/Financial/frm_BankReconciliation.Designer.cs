@@ -56,6 +56,7 @@ namespace pos.Reports.Financial
             this.colUnclearedDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnclearedCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnclearedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblUnclearedTransactions = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
@@ -83,67 +84,75 @@ namespace pos.Reports.Financial
             this.pnlTop.Controls.Add(this.lblBankAccount);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1240, 76);
+            this.pnlTop.Size = new System.Drawing.Size(1447, 94);
             this.pnlTop.TabIndex = 0;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(1132, 24);
+            this.btnPrint.Location = new System.Drawing.Point(1321, 30);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(96, 28);
+            this.btnPrint.Size = new System.Drawing.Size(112, 44);
             this.btnPrint.TabIndex = 8;
             this.btnPrint.Text = "Print Bank Rec";
             this.btnPrint.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(1024, 24);
+            this.btnSave.Location = new System.Drawing.Point(1195, 30);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(117, 44);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Save Reconciliation";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(926, 24);
+            this.btnLoad.Location = new System.Drawing.Point(1080, 30);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(90, 28);
+            this.btnLoad.Size = new System.Drawing.Size(105, 44);
             this.btnLoad.TabIndex = 6;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             // 
             // txtStatementBalance
             // 
-            this.txtStatementBalance.Location = new System.Drawing.Point(744, 28);
+            this.txtStatementBalance.Location = new System.Drawing.Point(868, 34);
+            this.txtStatementBalance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtStatementBalance.Name = "txtStatementBalance";
-            this.txtStatementBalance.Size = new System.Drawing.Size(168, 20);
+            this.txtStatementBalance.Size = new System.Drawing.Size(195, 24);
             this.txtStatementBalance.TabIndex = 5;
             // 
             // lblStatementBalance
             // 
             this.lblStatementBalance.AutoSize = true;
-            this.lblStatementBalance.Location = new System.Drawing.Point(607, 31);
+            this.lblStatementBalance.Location = new System.Drawing.Point(708, 38);
+            this.lblStatementBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatementBalance.Name = "lblStatementBalance";
-            this.lblStatementBalance.Size = new System.Drawing.Size(131, 13);
+            this.lblStatementBalance.Size = new System.Drawing.Size(156, 17);
             this.lblStatementBalance.TabIndex = 4;
             this.lblStatementBalance.Text = "Bank Statement Balance";
             // 
             // dtpStatementDate
             // 
             this.dtpStatementDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStatementDate.Location = new System.Drawing.Point(485, 28);
+            this.dtpStatementDate.Location = new System.Drawing.Point(566, 34);
+            this.dtpStatementDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpStatementDate.Name = "dtpStatementDate";
-            this.dtpStatementDate.Size = new System.Drawing.Size(108, 20);
+            this.dtpStatementDate.Size = new System.Drawing.Size(125, 24);
             this.dtpStatementDate.TabIndex = 3;
             // 
             // lblStatementDate
             // 
             this.lblStatementDate.AutoSize = true;
-            this.lblStatementDate.Location = new System.Drawing.Point(400, 31);
+            this.lblStatementDate.Location = new System.Drawing.Point(453, 37);
+            this.lblStatementDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatementDate.Name = "lblStatementDate";
-            this.lblStatementDate.Size = new System.Drawing.Size(79, 13);
+            this.lblStatementDate.Size = new System.Drawing.Size(105, 17);
             this.lblStatementDate.TabIndex = 2;
             this.lblStatementDate.Text = "Statement Date";
             // 
@@ -151,24 +160,27 @@ namespace pos.Reports.Financial
             // 
             this.cmbBankAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBankAccount.FormattingEnabled = true;
-            this.cmbBankAccount.Location = new System.Drawing.Point(95, 28);
+            this.cmbBankAccount.Location = new System.Drawing.Point(111, 34);
+            this.cmbBankAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbBankAccount.Name = "cmbBankAccount";
-            this.cmbBankAccount.Size = new System.Drawing.Size(287, 21);
+            this.cmbBankAccount.Size = new System.Drawing.Size(334, 24);
             this.cmbBankAccount.TabIndex = 1;
             // 
             // lblBankAccount
             // 
             this.lblBankAccount.AutoSize = true;
-            this.lblBankAccount.Location = new System.Drawing.Point(15, 31);
+            this.lblBankAccount.Location = new System.Drawing.Point(18, 38);
+            this.lblBankAccount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBankAccount.Name = "lblBankAccount";
-            this.lblBankAccount.Size = new System.Drawing.Size(74, 13);
+            this.lblBankAccount.Size = new System.Drawing.Size(93, 17);
             this.lblBankAccount.TabIndex = 0;
             this.lblBankAccount.Text = "Bank Account";
             // 
             // mainSplit
             // 
             this.mainSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainSplit.Location = new System.Drawing.Point(0, 76);
+            this.mainSplit.Location = new System.Drawing.Point(0, 94);
+            this.mainSplit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainSplit.Name = "mainSplit";
             // 
             // mainSplit.Panel1
@@ -178,8 +190,9 @@ namespace pos.Reports.Financial
             // mainSplit.Panel2
             // 
             this.mainSplit.Panel2.Controls.Add(this.rightSplit);
-            this.mainSplit.Size = new System.Drawing.Size(1240, 586);
-            this.mainSplit.SplitterDistance = 620;
+            this.mainSplit.Size = new System.Drawing.Size(1447, 721);
+            this.mainSplit.SplitterDistance = 723;
+            this.mainSplit.SplitterWidth = 5;
             this.mainSplit.TabIndex = 1;
             // 
             // dgvSystemTransactions
@@ -199,10 +212,12 @@ namespace pos.Reports.Financial
             this.colEntryId});
             this.dgvSystemTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSystemTransactions.Location = new System.Drawing.Point(0, 0);
+            this.dgvSystemTransactions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvSystemTransactions.Name = "dgvSystemTransactions";
             this.dgvSystemTransactions.RowHeadersVisible = false;
+            this.dgvSystemTransactions.RowHeadersWidth = 51;
             this.dgvSystemTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSystemTransactions.Size = new System.Drawing.Size(620, 586);
+            this.dgvSystemTransactions.Size = new System.Drawing.Size(723, 721);
             this.dgvSystemTransactions.TabIndex = 0;
             // 
             // colCleared
@@ -210,6 +225,7 @@ namespace pos.Reports.Financial
             this.colCleared.DataPropertyName = "is_cleared";
             this.colCleared.FillWeight = 45F;
             this.colCleared.HeaderText = "Cleared";
+            this.colCleared.MinimumWidth = 6;
             this.colCleared.Name = "colCleared";
             // 
             // colEntryDate
@@ -217,6 +233,7 @@ namespace pos.Reports.Financial
             this.colEntryDate.DataPropertyName = "entry_date";
             this.colEntryDate.FillWeight = 75F;
             this.colEntryDate.HeaderText = "Date";
+            this.colEntryDate.MinimumWidth = 6;
             this.colEntryDate.Name = "colEntryDate";
             this.colEntryDate.ReadOnly = true;
             // 
@@ -225,6 +242,7 @@ namespace pos.Reports.Financial
             this.colInvoice.DataPropertyName = "invoice_no";
             this.colInvoice.FillWeight = 80F;
             this.colInvoice.HeaderText = "Invoice";
+            this.colInvoice.MinimumWidth = 6;
             this.colInvoice.Name = "colInvoice";
             this.colInvoice.ReadOnly = true;
             // 
@@ -233,6 +251,7 @@ namespace pos.Reports.Financial
             this.colDescription.DataPropertyName = "description";
             this.colDescription.FillWeight = 160F;
             this.colDescription.HeaderText = "Description";
+            this.colDescription.MinimumWidth = 6;
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
@@ -241,6 +260,7 @@ namespace pos.Reports.Financial
             this.colDebit.DataPropertyName = "debit";
             this.colDebit.FillWeight = 70F;
             this.colDebit.HeaderText = "Debit";
+            this.colDebit.MinimumWidth = 6;
             this.colDebit.Name = "colDebit";
             this.colDebit.ReadOnly = true;
             // 
@@ -249,6 +269,7 @@ namespace pos.Reports.Financial
             this.colCredit.DataPropertyName = "credit";
             this.colCredit.FillWeight = 70F;
             this.colCredit.HeaderText = "Credit";
+            this.colCredit.MinimumWidth = 6;
             this.colCredit.Name = "colCredit";
             this.colCredit.ReadOnly = true;
             // 
@@ -257,6 +278,7 @@ namespace pos.Reports.Financial
             this.colAmount.DataPropertyName = "amount";
             this.colAmount.FillWeight = 70F;
             this.colAmount.HeaderText = "Amount";
+            this.colAmount.MinimumWidth = 6;
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             // 
@@ -264,6 +286,7 @@ namespace pos.Reports.Financial
             // 
             this.colEntryId.DataPropertyName = "entry_id";
             this.colEntryId.HeaderText = "EntryId";
+            this.colEntryId.MinimumWidth = 6;
             this.colEntryId.Name = "colEntryId";
             this.colEntryId.ReadOnly = true;
             this.colEntryId.Visible = false;
@@ -272,6 +295,7 @@ namespace pos.Reports.Financial
             // 
             this.rightSplit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightSplit.Location = new System.Drawing.Point(0, 0);
+            this.rightSplit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rightSplit.Name = "rightSplit";
             this.rightSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -282,12 +306,14 @@ namespace pos.Reports.Financial
             // rightSplit.Panel2
             // 
             this.rightSplit.Panel2.Controls.Add(this.dgvUncleared);
-            this.rightSplit.Size = new System.Drawing.Size(616, 586);
-            this.rightSplit.SplitterDistance = 260;
+            this.rightSplit.Size = new System.Drawing.Size(719, 721);
+            this.rightSplit.SplitterDistance = 319;
+            this.rightSplit.SplitterWidth = 5;
             this.rightSplit.TabIndex = 0;
             // 
             // pnlSummary
             // 
+            this.pnlSummary.Controls.Add(this.lblUnclearedTransactions);
             this.pnlSummary.Controls.Add(this.lblDifference);
             this.pnlSummary.Controls.Add(this.lblDifferenceValue);
             this.pnlSummary.Controls.Add(this.lblBookBalance);
@@ -302,26 +328,29 @@ namespace pos.Reports.Financial
             this.pnlSummary.Controls.Add(this.lblStatementValue);
             this.pnlSummary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSummary.Location = new System.Drawing.Point(0, 0);
+            this.pnlSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSummary.Name = "pnlSummary";
-            this.pnlSummary.Size = new System.Drawing.Size(616, 260);
+            this.pnlSummary.Size = new System.Drawing.Size(719, 319);
             this.pnlSummary.TabIndex = 0;
             // 
             // lblDifference
             // 
             this.lblDifference.AutoSize = true;
             this.lblDifference.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblDifference.Location = new System.Drawing.Point(16, 212);
+            this.lblDifference.Location = new System.Drawing.Point(19, 261);
+            this.lblDifference.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDifference.Name = "lblDifference";
-            this.lblDifference.Size = new System.Drawing.Size(69, 15);
+            this.lblDifference.Size = new System.Drawing.Size(96, 20);
             this.lblDifference.TabIndex = 11;
             this.lblDifference.Text = "DIFFERENCE";
             // 
             // lblDifferenceValue
             // 
             this.lblDifferenceValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblDifferenceValue.Location = new System.Drawing.Point(335, 208);
+            this.lblDifferenceValue.Location = new System.Drawing.Point(391, 256);
+            this.lblDifferenceValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDifferenceValue.Name = "lblDifferenceValue";
-            this.lblDifferenceValue.Size = new System.Drawing.Size(266, 23);
+            this.lblDifferenceValue.Size = new System.Drawing.Size(310, 28);
             this.lblDifferenceValue.TabIndex = 10;
             this.lblDifferenceValue.Text = "0.00";
             this.lblDifferenceValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -329,17 +358,19 @@ namespace pos.Reports.Financial
             // lblBookBalance
             // 
             this.lblBookBalance.AutoSize = true;
-            this.lblBookBalance.Location = new System.Drawing.Point(16, 172);
+            this.lblBookBalance.Location = new System.Drawing.Point(19, 212);
+            this.lblBookBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBookBalance.Name = "lblBookBalance";
-            this.lblBookBalance.Size = new System.Drawing.Size(106, 13);
+            this.lblBookBalance.Size = new System.Drawing.Size(139, 17);
             this.lblBookBalance.TabIndex = 9;
             this.lblBookBalance.Text = "System Book Balance";
             // 
             // lblBookBalanceValue
             // 
-            this.lblBookBalanceValue.Location = new System.Drawing.Point(335, 168);
+            this.lblBookBalanceValue.Location = new System.Drawing.Point(391, 207);
+            this.lblBookBalanceValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBookBalanceValue.Name = "lblBookBalanceValue";
-            this.lblBookBalanceValue.Size = new System.Drawing.Size(266, 23);
+            this.lblBookBalanceValue.Size = new System.Drawing.Size(310, 28);
             this.lblBookBalanceValue.TabIndex = 8;
             this.lblBookBalanceValue.Text = "0.00";
             this.lblBookBalanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -347,17 +378,19 @@ namespace pos.Reports.Financial
             // lblAdjustedBalance
             // 
             this.lblAdjustedBalance.AutoSize = true;
-            this.lblAdjustedBalance.Location = new System.Drawing.Point(16, 132);
+            this.lblAdjustedBalance.Location = new System.Drawing.Point(19, 162);
+            this.lblAdjustedBalance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAdjustedBalance.Name = "lblAdjustedBalance";
-            this.lblAdjustedBalance.Size = new System.Drawing.Size(112, 13);
+            this.lblAdjustedBalance.Size = new System.Drawing.Size(146, 17);
             this.lblAdjustedBalance.TabIndex = 7;
             this.lblAdjustedBalance.Text = "Adjusted Bank Balance";
             // 
             // lblAdjustedBalanceValue
             // 
-            this.lblAdjustedBalanceValue.Location = new System.Drawing.Point(335, 128);
+            this.lblAdjustedBalanceValue.Location = new System.Drawing.Point(391, 158);
+            this.lblAdjustedBalanceValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAdjustedBalanceValue.Name = "lblAdjustedBalanceValue";
-            this.lblAdjustedBalanceValue.Size = new System.Drawing.Size(266, 23);
+            this.lblAdjustedBalanceValue.Size = new System.Drawing.Size(310, 28);
             this.lblAdjustedBalanceValue.TabIndex = 6;
             this.lblAdjustedBalanceValue.Text = "0.00";
             this.lblAdjustedBalanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -365,17 +398,19 @@ namespace pos.Reports.Financial
             // lblOutstandingCheques
             // 
             this.lblOutstandingCheques.AutoSize = true;
-            this.lblOutstandingCheques.Location = new System.Drawing.Point(16, 92);
+            this.lblOutstandingCheques.Location = new System.Drawing.Point(19, 113);
+            this.lblOutstandingCheques.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutstandingCheques.Name = "lblOutstandingCheques";
-            this.lblOutstandingCheques.Size = new System.Drawing.Size(120, 13);
+            this.lblOutstandingCheques.Size = new System.Drawing.Size(159, 17);
             this.lblOutstandingCheques.TabIndex = 5;
             this.lblOutstandingCheques.Text = "Outstanding Cheques (-)";
             // 
             // lblOutstandingChequesValue
             // 
-            this.lblOutstandingChequesValue.Location = new System.Drawing.Point(335, 88);
+            this.lblOutstandingChequesValue.Location = new System.Drawing.Point(391, 108);
+            this.lblOutstandingChequesValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutstandingChequesValue.Name = "lblOutstandingChequesValue";
-            this.lblOutstandingChequesValue.Size = new System.Drawing.Size(266, 23);
+            this.lblOutstandingChequesValue.Size = new System.Drawing.Size(310, 28);
             this.lblOutstandingChequesValue.TabIndex = 4;
             this.lblOutstandingChequesValue.Text = "0.00";
             this.lblOutstandingChequesValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -383,17 +418,19 @@ namespace pos.Reports.Financial
             // lblOutstandingDeposits
             // 
             this.lblOutstandingDeposits.AutoSize = true;
-            this.lblOutstandingDeposits.Location = new System.Drawing.Point(16, 52);
+            this.lblOutstandingDeposits.Location = new System.Drawing.Point(19, 64);
+            this.lblOutstandingDeposits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutstandingDeposits.Name = "lblOutstandingDeposits";
-            this.lblOutstandingDeposits.Size = new System.Drawing.Size(117, 13);
+            this.lblOutstandingDeposits.Size = new System.Drawing.Size(163, 17);
             this.lblOutstandingDeposits.TabIndex = 3;
             this.lblOutstandingDeposits.Text = "Outstanding Deposits (+)";
             // 
             // lblOutstandingDepositsValue
             // 
-            this.lblOutstandingDepositsValue.Location = new System.Drawing.Point(335, 48);
+            this.lblOutstandingDepositsValue.Location = new System.Drawing.Point(391, 59);
+            this.lblOutstandingDepositsValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutstandingDepositsValue.Name = "lblOutstandingDepositsValue";
-            this.lblOutstandingDepositsValue.Size = new System.Drawing.Size(266, 23);
+            this.lblOutstandingDepositsValue.Size = new System.Drawing.Size(310, 28);
             this.lblOutstandingDepositsValue.TabIndex = 2;
             this.lblOutstandingDepositsValue.Text = "0.00";
             this.lblOutstandingDepositsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -401,17 +438,19 @@ namespace pos.Reports.Financial
             // lblStatement
             // 
             this.lblStatement.AutoSize = true;
-            this.lblStatement.Location = new System.Drawing.Point(16, 12);
+            this.lblStatement.Location = new System.Drawing.Point(19, 15);
+            this.lblStatement.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatement.Name = "lblStatement";
-            this.lblStatement.Size = new System.Drawing.Size(121, 13);
+            this.lblStatement.Size = new System.Drawing.Size(156, 17);
             this.lblStatement.TabIndex = 1;
             this.lblStatement.Text = "Bank Statement Balance";
             // 
             // lblStatementValue
             // 
-            this.lblStatementValue.Location = new System.Drawing.Point(335, 8);
+            this.lblStatementValue.Location = new System.Drawing.Point(391, 10);
+            this.lblStatementValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatementValue.Name = "lblStatementValue";
-            this.lblStatementValue.Size = new System.Drawing.Size(266, 23);
+            this.lblStatementValue.Size = new System.Drawing.Size(310, 28);
             this.lblStatementValue.TabIndex = 0;
             this.lblStatementValue.Text = "0.00";
             this.lblStatementValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -431,11 +470,13 @@ namespace pos.Reports.Financial
             this.colUnclearedAmount});
             this.dgvUncleared.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUncleared.Location = new System.Drawing.Point(0, 0);
+            this.dgvUncleared.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvUncleared.Name = "dgvUncleared";
             this.dgvUncleared.ReadOnly = true;
             this.dgvUncleared.RowHeadersVisible = false;
+            this.dgvUncleared.RowHeadersWidth = 51;
             this.dgvUncleared.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUncleared.Size = new System.Drawing.Size(616, 322);
+            this.dgvUncleared.Size = new System.Drawing.Size(719, 397);
             this.dgvUncleared.TabIndex = 0;
             // 
             // colUnclearedDate
@@ -443,6 +484,7 @@ namespace pos.Reports.Financial
             this.colUnclearedDate.DataPropertyName = "entry_date";
             this.colUnclearedDate.FillWeight = 70F;
             this.colUnclearedDate.HeaderText = "Date";
+            this.colUnclearedDate.MinimumWidth = 6;
             this.colUnclearedDate.Name = "colUnclearedDate";
             this.colUnclearedDate.ReadOnly = true;
             // 
@@ -451,6 +493,7 @@ namespace pos.Reports.Financial
             this.colUnclearedInvoice.DataPropertyName = "invoice_no";
             this.colUnclearedInvoice.FillWeight = 80F;
             this.colUnclearedInvoice.HeaderText = "Invoice";
+            this.colUnclearedInvoice.MinimumWidth = 6;
             this.colUnclearedInvoice.Name = "colUnclearedInvoice";
             this.colUnclearedInvoice.ReadOnly = true;
             // 
@@ -459,6 +502,7 @@ namespace pos.Reports.Financial
             this.colUnclearedDescription.DataPropertyName = "description";
             this.colUnclearedDescription.FillWeight = 150F;
             this.colUnclearedDescription.HeaderText = "Description";
+            this.colUnclearedDescription.MinimumWidth = 6;
             this.colUnclearedDescription.Name = "colUnclearedDescription";
             this.colUnclearedDescription.ReadOnly = true;
             // 
@@ -467,6 +511,7 @@ namespace pos.Reports.Financial
             this.colUnclearedDebit.DataPropertyName = "debit";
             this.colUnclearedDebit.FillWeight = 65F;
             this.colUnclearedDebit.HeaderText = "Debit";
+            this.colUnclearedDebit.MinimumWidth = 6;
             this.colUnclearedDebit.Name = "colUnclearedDebit";
             this.colUnclearedDebit.ReadOnly = true;
             // 
@@ -475,6 +520,7 @@ namespace pos.Reports.Financial
             this.colUnclearedCredit.DataPropertyName = "credit";
             this.colUnclearedCredit.FillWeight = 65F;
             this.colUnclearedCredit.HeaderText = "Credit";
+            this.colUnclearedCredit.MinimumWidth = 6;
             this.colUnclearedCredit.Name = "colUnclearedCredit";
             this.colUnclearedCredit.ReadOnly = true;
             // 
@@ -483,16 +529,30 @@ namespace pos.Reports.Financial
             this.colUnclearedAmount.DataPropertyName = "amount";
             this.colUnclearedAmount.FillWeight = 70F;
             this.colUnclearedAmount.HeaderText = "Amount";
+            this.colUnclearedAmount.MinimumWidth = 6;
             this.colUnclearedAmount.Name = "colUnclearedAmount";
             this.colUnclearedAmount.ReadOnly = true;
             // 
+            // lblUnclearedTransactions
+            // 
+            this.lblUnclearedTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblUnclearedTransactions.AutoSize = true;
+            this.lblUnclearedTransactions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblUnclearedTransactions.Location = new System.Drawing.Point(7, 299);
+            this.lblUnclearedTransactions.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUnclearedTransactions.Name = "lblUnclearedTransactions";
+            this.lblUnclearedTransactions.Size = new System.Drawing.Size(171, 20);
+            this.lblUnclearedTransactions.TabIndex = 11;
+            this.lblUnclearedTransactions.Text = "Uncleared Transactions";
+            // 
             // frm_BankReconciliation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1240, 662);
+            this.ClientSize = new System.Drawing.Size(1447, 815);
             this.Controls.Add(this.mainSplit);
             this.Controls.Add(this.pnlTop);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frm_BankReconciliation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bank Reconciliation";
@@ -555,5 +615,6 @@ namespace pos.Reports.Financial
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnclearedDebit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnclearedCredit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnclearedAmount;
+        private System.Windows.Forms.Label lblUnclearedTransactions;
     }
 }

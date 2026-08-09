@@ -8,6 +8,7 @@ using pos.UI.Busy;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -29,6 +30,8 @@ namespace pos
         private readonly Dictionary<int, CoaAggregate> _groupAggregates = new Dictionary<int, CoaAggregate>();
         private readonly Dictionary<int, CoaAggregate> _accountAggregates = new Dictionary<int, CoaAggregate>();
         private readonly Dictionary<int, TreeNode> _nodeLookup = new Dictionary<int, TreeNode>();
+        private readonly Dictionary<int, List<CoaGroupInfo>> _groupChildrenLookup = new Dictionary<int, List<CoaGroupInfo>>();
+        private readonly Dictionary<int, List<CoaAccountInfo>> _accountsByGroupLookup = new Dictionary<int, List<CoaAccountInfo>>();
 
         private ContextMenuStrip _treeMenu;
         private ImageList _treeImages;
@@ -230,12 +233,19 @@ namespace pos
 
         private void ReloadAll()
         {
-            LoadLookupData();
-            LoadTree(string.Empty);
-            if (_tree.Nodes.Count > 0)
+            using (BusyScope.Show(this, UiMessages.T("Loading Chart of Accounts ...", "جاري إنشاء قائمة الدخل...")))
             {
-                _tree.ExpandAll();
-                _tree.SelectedNode = _tree.Nodes[0];
+                var sw = Stopwatch.StartNew();
+                LoadLookupData();
+                TraceStartup("LoadLookupData", sw);
+                LoadTree(string.Empty, false);
+                TraceStartup("LoadTree", sw);
+                if (_tree.Nodes.Count > 0)
+                {
+                    _tree.SelectedNode = _tree.Nodes[0];
+                    BeginInvoke(new MethodInvoker(() => _tree.ExpandAll()));
+                }
+                TraceStartup("ReloadAll complete", sw);
             }
         }
 
@@ -249,6 +259,8 @@ namespace pos
             _groupAggregates.Clear();
             _accountAggregates.Clear();
             _nodeLookup.Clear();
+            _groupChildrenLookup.Clear();
+            _accountsByGroupLookup.Clear();
 
             var groupTypes = _generalBll.GetRecord("id,name", "acc_account_type");
             var allGroups = _generalBll.GetRecord("*", "acc_groups");
@@ -258,6 +270,8 @@ namespace pos
             BindCombo(_cmbAccountType, groupTypes, true);
             BindGroupCombo(_cmbGroupParent, allGroups);
             BindGroupCombo(_cmbAccountParent, allGroups);
+
+            var accountAggregateMap = LoadAccountAggregatesByAccountId();
 
             foreach (DataRow row in allGroups.Rows)
             {
@@ -300,10 +314,12 @@ namespace pos
                     Iban = GetString(row, "iban"),
                     IsActive = !HasColumn(row, "is_active") || GetBool(row, "is_active", true)
                 };
-                account.Aggregate = GetAccountAggregate(account.Id, account.OpeningDebit, account.OpeningCredit);
+                account.Aggregate = BuildAccountAggregate(accountAggregateMap, account.Id, account.OpeningDebit, account.OpeningCredit);
                 _accounts[id] = account;
                 _accountAggregates[id] = account.Aggregate;
             }
+
+            BuildHierarchyLookups();
 
             foreach (var group in _groups.Values)
             {
@@ -341,6 +357,116 @@ namespace pos
             return aggregate;
         }
 
+        private Dictionary<int, CoaAggregate> LoadAccountAggregatesByAccountId()
+        {
+            // Use current fiscal-year dates from cache (updated in LoadLookupData)
+            DateTime fyFromDate = _currentFiscalYearDates != null ? _currentFiscalYearDates.Item1 : UsersModal.fy_from_date;
+            DateTime fyToDate = _currentFiscalYearDates != null ? _currentFiscalYearDates.Item2 : UsersModal.fy_to_date;
+
+            string whereClause = "acc_entries WHERE branch_id = " + UsersModal.logged_in_branch_id +
+                " AND entry_date >= '" + fyFromDate.ToString("yyyy-MM-dd") + "'" +
+                " AND entry_date <= '" + fyToDate.ToString("yyyy-MM-dd") + "' GROUP BY account_id";
+
+            DataTable dt = _generalBll.GetRecord("account_id, COUNT(*) AS txn_count, MAX(entry_date) AS last_transaction_date, COALESCE(SUM(debit),0) AS debit_total, COALESCE(SUM(credit),0) AS credit_total", whereClause);
+            var map = new Dictionary<int, CoaAggregate>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                int accountId = GetInt(row, "account_id");
+                if (accountId == 0)
+                {
+                    continue;
+                }
+
+                map[accountId] = new CoaAggregate
+                {
+                    Debit = GetDouble(row, "debit_total"),
+                    Credit = GetDouble(row, "credit_total"),
+                    TransactionCount = GetInt(row, "txn_count"),
+                    LastTransactionDate = GetNullableDate(row, "last_transaction_date")
+                };
+            }
+
+            return map;
+        }
+
+        private CoaAggregate BuildAccountAggregate(Dictionary<int, CoaAggregate> accountAggregateMap, int accountId, double openingDebit, double openingCredit)
+        {
+            CoaAggregate aggregate;
+            if (!accountAggregateMap.TryGetValue(accountId, out aggregate))
+            {
+                aggregate = new CoaAggregate();
+            }
+
+            var result = new CoaAggregate
+            {
+                Debit = aggregate.Debit + openingDebit,
+                Credit = aggregate.Credit + openingCredit,
+                TransactionCount = aggregate.TransactionCount,
+                LastTransactionDate = aggregate.LastTransactionDate
+            };
+
+            result.Balance = result.Debit - result.Credit;
+            return result;
+        }
+
+        private void BuildHierarchyLookups()
+        {
+            foreach (var group in _groups.Values)
+            {
+                List<CoaGroupInfo> children;
+                if (!_groupChildrenLookup.TryGetValue(group.ParentId, out children))
+                {
+                    children = new List<CoaGroupInfo>();
+                    _groupChildrenLookup[group.ParentId] = children;
+                }
+
+                children.Add(group);
+            }
+
+            foreach (var account in _accounts.Values)
+            {
+                List<CoaAccountInfo> accounts;
+                if (!_accountsByGroupLookup.TryGetValue(account.GroupId, out accounts))
+                {
+                    accounts = new List<CoaAccountInfo>();
+                    _accountsByGroupLookup[account.GroupId] = accounts;
+                }
+
+                accounts.Add(account);
+            }
+
+            foreach (var childList in _groupChildrenLookup.Values)
+            {
+                childList.Sort((a, b) =>
+                {
+                    int byCode = string.Compare(a.Code, b.Code, StringComparison.OrdinalIgnoreCase);
+                    return byCode != 0 ? byCode : string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
+                });
+            }
+
+            foreach (var accountList in _accountsByGroupLookup.Values)
+            {
+                accountList.Sort((a, b) =>
+                {
+                    int byCode = string.Compare(a.Code, b.Code, StringComparison.OrdinalIgnoreCase);
+                    return byCode != 0 ? byCode : string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
+                });
+            }
+        }
+
+        private IEnumerable<CoaGroupInfo> GetChildGroups(int parentId)
+        {
+            List<CoaGroupInfo> children;
+            return _groupChildrenLookup.TryGetValue(parentId, out children) ? children : Enumerable.Empty<CoaGroupInfo>();
+        }
+
+        private IEnumerable<CoaAccountInfo> GetAccountsForGroup(int groupId)
+        {
+            List<CoaAccountInfo> accounts;
+            return _accountsByGroupLookup.TryGetValue(groupId, out accounts) ? accounts : Enumerable.Empty<CoaAccountInfo>();
+        }
+
         private CoaAggregate GetGroupAggregate(int groupId)
         {
             if (_groupAggregates.ContainsKey(groupId))
@@ -356,7 +482,7 @@ namespace pos
             var aggregate = new CoaAggregate();
             _groupAggregates[groupId] = aggregate;
 
-            foreach (var childGroup in _groups.Values.Where(x => x.ParentId == groupId))
+            foreach (var childGroup in GetChildGroups(groupId))
             {
                 if (childGroup.Id == groupId)
                 {
@@ -367,7 +493,7 @@ namespace pos
                 aggregate.Add(childAggregate);
             }
 
-            foreach (var account in _accounts.Values.Where(x => x.GroupId == groupId))
+            foreach (var account in GetAccountsForGroup(groupId))
             {
                 aggregate.Add(account.Aggregate);
             }
@@ -375,7 +501,7 @@ namespace pos
             return aggregate;
         }
 
-        private void LoadTree(string filter)
+        private void LoadTree(string filter, bool expandAll)
         {
             _tree.BeginUpdate();
             try
@@ -383,11 +509,14 @@ namespace pos
                 _tree.Nodes.Clear();
                 _nodeLookup.Clear();
                 var normalized = string.IsNullOrWhiteSpace(filter) ? string.Empty : filter.Trim();
-                foreach (var root in _groups.Values.Where(g => g.ParentId == 0).OrderBy(g => g.Code).ThenBy(g => g.Name))
+                foreach (var root in GetChildGroups(0))
                 {
                     AddGroupNode(_tree.Nodes, root, 1, normalized);
                 }
-                _tree.ExpandAll();
+                if (expandAll)
+                {
+                    _tree.ExpandAll();
+                }
             }
             finally
             {
@@ -415,12 +544,12 @@ namespace pos
             nodes.Add(node);
             _nodeLookup[group.Id] = node;
 
-            foreach (var childGroup in _groups.Values.Where(x => x.ParentId == group.Id).OrderBy(x => x.Code).ThenBy(x => x.Name))
+            foreach (var childGroup in GetChildGroups(group.Id))
             {
                 AddGroupNode(node.Nodes, childGroup, level + 1, filter);
             }
 
-            foreach (var account in _accounts.Values.Where(x => x.GroupId == group.Id).OrderBy(x => x.Code).ThenBy(x => x.Name))
+            foreach (var account in GetAccountsForGroup(group.Id))
             {
                 if (!MatchesAccount(account, filter) && !string.IsNullOrWhiteSpace(filter)) continue;
                 AddAccountNode(node.Nodes, account, level + 1, filter);
@@ -445,8 +574,8 @@ namespace pos
         {
             if (string.IsNullOrWhiteSpace(filter)) return true;
             if (MatchesGroup(_groups[groupId], filter)) return true;
-            return _groups.Values.Where(x => x.ParentId == groupId).Any(x => ShouldIncludeGroup(x.Id, filter)) ||
-                   _accounts.Values.Any(x => x.GroupId == groupId && MatchesAccount(x, filter));
+            return GetChildGroups(groupId).Any(x => ShouldIncludeGroup(x.Id, filter)) ||
+                   GetAccountsForGroup(groupId).Any(x => MatchesAccount(x, filter));
         }
 
         private bool MatchesGroup(CoaGroupInfo group, string filter)
@@ -513,7 +642,12 @@ namespace pos
         private void SearchTimer_Tick(object sender, EventArgs e)
         {
             _searchTimer.Stop();
-            LoadTree(_searchBox.Text);
+            LoadTree(_searchBox.Text, true);
+        }
+
+        private void TraceStartup(string stage, Stopwatch sw)
+        {
+            Debug.WriteLine("frm_coa startup - " + stage + ": " + sw.ElapsedMilliseconds + " ms");
         }
 
         private void Tree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -1223,7 +1357,7 @@ namespace pos
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            LoadTree(_searchBox != null ? _searchBox.Text : string.Empty);
+            LoadTree(_searchBox != null ? _searchBox.Text : string.Empty, true);
         }
 
         private sealed class CoaGroupInfo

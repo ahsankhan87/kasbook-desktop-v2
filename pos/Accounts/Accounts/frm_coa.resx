@@ -129,10 +129,10 @@
     <value>Fill</value>
   </data>
   <data name="_tree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 39</value>
+    <value>8, 35</value>
   </data>
   <data name="_tree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 853</value>
+    <value>414, 857</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_tree.TabIndex" type="System.Int32, mscorlib">
@@ -154,22 +154,22 @@
     <value>17, 17</value>
   </metadata>
   <data name="_btnAddGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 28</value>
+    <value>86, 24</value>
   </data>
   <data name="_btnAddGroup.Text" xml:space="preserve">
     <value>Add Group</value>
   </data>
   <data name="_btnAddAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 28</value>
+    <value>99, 24</value>
   </data>
   <data name="_btnAddAccount.Text" xml:space="preserve">
     <value>Add Account</value>
   </data>
   <data name="_toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 31</value>
+    <value>6, 27</value>
   </data>
   <data name="_searchLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 28</value>
+    <value>53, 24</value>
   </data>
   <data name="_searchLabel.Text" xml:space="preserve">
     <value>Search</value>
@@ -214,7 +214,7 @@
     <value>8, 8</value>
   </data>
   <data name="_toolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 31</value>
+    <value>414, 27</value>
   </data>
   <data name="_toolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

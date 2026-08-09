@@ -315,9 +315,6 @@
     <Compile Include="Inventory\frm_valuation_settings.Designer.cs">
       <DependentUpon>frm_valuation_settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\Adjustment\frm_product_adjustment.Designer_New.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2588,6 +2585,9 @@
     <EmbeddedResource Include="Reports\Financial\frm_BalanceSheetReport.resx">
       <DependentUpon>frm_BalanceSheetReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_BankReconciliation.resx">
+      <DependentUpon>frm_BankReconciliation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_BudgetVsActualReport.resx">
       <DependentUpon>frm_BudgetVsActualReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -2596,6 +2596,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_ProfitAndLossReport.resx">
       <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_TrialBalanceReport.resx">
+      <DependentUpon>frm_TrialBalanceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Inventory\frm_AgingInventoryReport.resx">
       <DependentUpon>frm_AgingInventoryReport.cs</DependentUpon>
@@ -2898,7 +2901,6 @@
     <None Include="Accounts\IMPORT_USER_GUIDE.md" />
     <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
     <None Include="Products\Adjustment\SHORTCUTS_README.md" />
-    <None Include="Products\Adjustment\update_names.ps1" />
     <None Include="Products\Labels\product_labels.xsc">
       <DependentUpon>product_labels.xsd</DependentUpon>
     </None>
@@ -3035,6 +3037,8 @@
     <Compile Include="Reports\FixedAssets\frm_fixed_asset_schedule_report.Designer.cs">
       <DependentUpon>frm_fixed_asset_schedule_report.cs</DependentUpon>
     </Compile>
+    <None Include="UI\MENU_STRUCTURE_DESIGN.md" />
+    <None Include="UI\QUICK_ACCESS_TOOLBAR_GUIDE.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

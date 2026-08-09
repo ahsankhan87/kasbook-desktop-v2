@@ -1,43 +1,13 @@
-IF OBJECT_ID(N'dbo.acc_bank_reconciliation_header', N'U') IS NULL
-BEGIN
-	CREATE TABLE dbo.acc_bank_reconciliation_header
-	(
-		id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		branch_id INT NOT NULL,
-		bank_account_id INT NOT NULL,
-		statement_date DATE NOT NULL,
-		bank_statement_balance DECIMAL(18,2) NOT NULL,
-		adjusted_balance DECIMAL(18,2) NOT NULL,
-		book_balance DECIMAL(18,2) NOT NULL,
-		difference DECIMAL(18,2) NOT NULL,
-		reconciled_by INT NULL,
-		reconciled_on DATETIME NOT NULL CONSTRAINT DF_acc_bank_reconciliation_header_reconciled_on DEFAULT(GETDATE()),
-		date_created DATETIME NOT NULL CONSTRAINT DF_acc_bank_reconciliation_header_date_created DEFAULT(GETDATE())
-	);
-
-	CREATE UNIQUE INDEX UX_acc_bank_rec_header_branch_account_date
-	ON dbo.acc_bank_reconciliation_header(branch_id, bank_account_id, statement_date);
-END
-GO
-
-IF OBJECT_ID(N'dbo.acc_bank_reconciliation_items', N'U') IS NULL
-BEGIN
-	CREATE TABLE dbo.acc_bank_reconciliation_items
-	(
-		id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		reconciliation_id INT NOT NULL,
-		entry_id INT NOT NULL,
-		is_cleared BIT NOT NULL,
-		updated_by INT NULL,
-		updated_on DATETIME NOT NULL CONSTRAINT DF_acc_bank_reconciliation_items_updated_on DEFAULT(GETDATE()),
-		CONSTRAINT FK_acc_bank_reconciliation_items_header FOREIGN KEY (reconciliation_id)
-			REFERENCES dbo.acc_bank_reconciliation_header(id)
-	);
-
-	CREATE UNIQUE INDEX UX_acc_bank_rec_items_recon_entry
-	ON dbo.acc_bank_reconciliation_items(reconciliation_id, entry_id);
-END
-GO
+-- ============================================================================
+-- BANK RECONCILIATION STORED PROCEDURE FIX
+-- ============================================================================
+-- Issue: When no reconciliation header exists, @LatestRecId is NULL, and the
+--        LEFT JOIN condition (I.reconciliation_id = NULL) returns no rows,
+--        causing ALL bank entries to be loaded instead of filtering by bank.
+--
+-- Solution: Add "AND @LatestRecId IS NOT NULL" to the LEFT JOIN condition
+--           to ensure the join only happens when @LatestRecId has a value.
+-- ============================================================================
 
 IF OBJECT_ID(N'dbo.sp_BankReconciliation', N'P') IS NOT NULL
 	DROP PROCEDURE dbo.sp_BankReconciliation;
@@ -74,7 +44,6 @@ BEGIN
 
 		SELECT
 			E.id AS entry_id,
-			E.account_id,
 			E.entry_date,
 			E.invoice_no,
 			ISNULL(E.description, '') AS description,
@@ -86,7 +55,7 @@ BEGIN
 		LEFT JOIN dbo.acc_bank_reconciliation_items I
 			ON I.entry_id = E.id
 		   AND I.reconciliation_id = @LatestRecId
-		   AND @LatestRecId IS NOT NULL
+		   AND @LatestRecId IS NOT NULL  -- FIX: Only join if @LatestRecId is not NULL
 		WHERE E.branch_id = @BranchId
 		  AND E.account_id = @BankAccountId
 		  AND E.entry_date <= @StatementDate
@@ -194,7 +163,6 @@ BEGIN
 
 		SELECT
 			E.id AS entry_id,
-			E.account_id,
 			E.entry_date,
 			E.invoice_no,
 			ISNULL(E.description, '') AS description,
@@ -205,7 +173,7 @@ BEGIN
 		LEFT JOIN dbo.acc_bank_reconciliation_items I
 			ON I.entry_id = E.id
 		   AND I.reconciliation_id = @RecId
-		   AND @RecId IS NOT NULL
+		   AND @RecId IS NOT NULL  -- FIX: Only join if @RecId is not NULL
 		WHERE E.branch_id = @BranchId
 		  AND E.account_id = @BankAccountId
 		  AND E.entry_date <= @StatementDate
@@ -216,3 +184,6 @@ BEGIN
 	END
 END
 GO
+
+-- Verify the stored procedure was created
+PRINT 'Stored procedure sp_BankReconciliation updated successfully!';

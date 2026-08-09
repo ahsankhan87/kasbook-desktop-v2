@@ -175,16 +175,16 @@ namespace POS.DLL
                 {
                     cn.Open();
                     const string query = @"
-SELECT
-    B.id AS bank_id,
-    B.name AS bank_name,
-    B.GLAccountID AS account_id,
-    ISNULL(A.code, '') AS account_code,
-    ISNULL(A.name, B.name) AS account_name
-FROM pos_banks B
-INNER JOIN acc_accounts A ON A.id = B.GLAccountID
-WHERE B.branch_id = @branch_id
-ORDER BY B.name;";
+                        SELECT
+                            B.id AS bank_id,
+                            B.name AS bank_name,
+                            B.GLAccountID AS account_id,
+                            ISNULL(A.code, '') AS account_code,
+                            ISNULL(A.name, B.name) AS account_name
+                        FROM pos_banks B
+                        INNER JOIN acc_accounts A ON A.id = B.GLAccountID
+                        WHERE B.branch_id = @branch_id
+                        ORDER BY B.name;";
 
                     using (SqlCommand localCmd = new SqlCommand(query, cn))
                     {

@@ -32,6 +32,10 @@ namespace pos.Reports.Financial
             btnSave.Click += (s, e) => SaveReconciliation();
             btnPrint.Click += (s, e) => PrintReconciliation();
 
+            // Auto-reload when bank account or statement date changes
+            cmbBankAccount.SelectedIndexChanged += (s, e) => LoadReconciliation();
+            dtpStatementDate.ValueChanged += (s, e) => LoadReconciliation();
+
             dgvSystemTransactions.CurrentCellDirtyStateChanged += (s, e) =>
             {
                 if (dgvSystemTransactions.IsCurrentCellDirty)
@@ -47,7 +51,6 @@ namespace pos.Reports.Financial
                 }
             };
             txtStatementBalance.TextChanged += (s, e) => RefreshSummary();
-            dtpStatementDate.ValueChanged += (s, e) => LoadReconciliation();
         }
 
         private void Frm_BankReconciliation_Load(object sender, EventArgs e)
@@ -55,12 +58,8 @@ namespace pos.Reports.Financial
             AppTheme.Apply(this);
             ConfigureGrids();
             LoadBankAccounts();
-
-            if (cmbBankAccount.Items.Count > 0)
-            {
-                cmbBankAccount.SelectedIndex = 0;
-                LoadReconciliation();
-            }
+            // LoadBankAccounts already sets SelectedIndex = 0, 
+            // which triggers SelectedIndexChanged event and calls LoadReconciliation()
         }
 
         private void ConfigureGrids()
@@ -93,9 +92,21 @@ namespace pos.Reports.Financial
             try
             {
                 DataTable accounts = _bankBll.GetBankAccountsForReconciliation();
+                if (accounts == null || accounts.Rows.Count == 0)
+                {
+                    UiMessages.ShowWarning("No bank accounts available.", "لا توجد حسابات بنكية متاحة.");
+                    return;
+                }
+
                 cmbBankAccount.DisplayMember = "bank_name";
-                cmbBankAccount.ValueMember = "account_id";
+                cmbBankAccount.ValueMember = "bank_id";  // Changed: Use bank_id instead of account_id
                 cmbBankAccount.DataSource = accounts;
+
+                // Ensure first bank is selected and data loads
+                if (cmbBankAccount.Items.Count > 0)
+                {
+                    cmbBankAccount.SelectedIndex = 0;
+                }
             }
             catch (Exception ex)
             {
@@ -105,9 +116,12 @@ namespace pos.Reports.Financial
 
         private void LoadReconciliation()
         {
-            int bankAccountId = GetSelectedBankAccountId();
-            if (bankAccountId <= 0)
+            int bankId = GetSelectedBankAccountId();
+            if (bankId <= 0)
             {
+                dgvSystemTransactions.DataSource = null;
+                dgvUncleared.DataSource = null;
+                RefreshSummary();
                 return;
             }
 
@@ -115,8 +129,12 @@ namespace pos.Reports.Financial
             {
                 using (BusyScope.Show(this, UiMessages.T("Loading bank reconciliation...", "جاري تحميل مطابقة البنك...")))
                 {
-                    _transactions = _bankBll.GetBankReconciliationTransactions(bankAccountId, dtpStatementDate.Value.Date);
-                    _uncleared = _bankBll.GetUnclearedBankTransactions(bankAccountId, dtpStatementDate.Value.Date);
+                    _transactions = _bankBll.GetBankReconciliationTransactions(bankId, dtpStatementDate.Value.Date);
+                    _uncleared = _bankBll.GetUnclearedBankTransactions(bankId, dtpStatementDate.Value.Date);
+
+                    // Defensive filtering at UI layer for additional safety
+                    _transactions = FilterByAccountId(_transactions, bankId);
+                    _uncleared = FilterByAccountId(_uncleared, bankId);
 
                     EnsureBooleanColumn(_transactions, "is_cleared");
 
@@ -129,6 +147,23 @@ namespace pos.Reports.Financial
             {
                 UiMessages.ShowError("Unable to load reconciliation transactions.", ex.Message);
             }
+        }
+
+        private static DataTable FilterByAccountId(DataTable source, int bankId)
+        {
+            if (source == null)
+            {
+                return new DataTable();
+            }
+
+            if (!source.Columns.Contains("bank_id"))
+            {
+                return source;
+            }
+
+            DataView view = new DataView(source);
+            view.RowFilter = "bank_id = " + bankId;
+            return view.ToTable();
         }
 
         private static void EnsureBooleanColumn(DataTable table, string columnName)
@@ -273,13 +308,42 @@ namespace pos.Reports.Financial
 
         private int GetSelectedBankAccountId()
         {
-            if (cmbBankAccount.SelectedValue == null || cmbBankAccount.SelectedValue == DBNull.Value)
+            try
             {
+                // Check if combo box has a valid selection
+                if (cmbBankAccount.SelectedIndex < 0)
+                {
+                    return 0; // No item selected
+                }
+
+                if (cmbBankAccount.SelectedValue == null)
+                {
+                    return 0; // SelectedValue is null
+                }
+
+                if (cmbBankAccount.SelectedValue == DBNull.Value)
+                {
+                    return 0; // SelectedValue is DBNull
+                }
+
+                string selectedValue = Convert.ToString(cmbBankAccount.SelectedValue);
+                if (string.IsNullOrWhiteSpace(selectedValue))
+                {
+                    return 0; // SelectedValue is empty string
+                }
+
+                if (int.TryParse(selectedValue, out int accountId) && accountId > 0)
+                {
+                    return accountId;
+                }
+
                 return 0;
             }
-
-            int accountId;
-            return int.TryParse(Convert.ToString(cmbBankAccount.SelectedValue), out accountId) ? accountId : 0;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("GetSelectedBankAccountId Error: " + ex.Message);
+                return 0;
+            }
         }
 
         private static decimal ParseAmount(string text)

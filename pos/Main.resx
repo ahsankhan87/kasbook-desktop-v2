@@ -121,33 +121,42 @@
     <value>21, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
-  </data>
   <data name="profileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>188, 26</value>
   </data>
   <data name="profileToolStripMenuItem.Text" xml:space="preserve">
     <value>Profile</value>
   </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
-  </data>
   <data name="countryOriginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>188, 26</value>
   </data>
   <data name="countryOriginToolStripMenuItem.Text" xml:space="preserve">
     <value>Country Origin</value>
   </data>
-  <data name="branchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+  <data name="setupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 26</value>
   </data>
-  <data name="branchToolStripMenuItem.Text" xml:space="preserve">
-    <value>Branches</value>
+  <data name="setupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Branch Setup</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="branchToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="branchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 26</value>
+  </data>
+  <data name="branchToolStripMenuItem.Text" xml:space="preserve">
+    <value>Branch</value>
+  </data>
   <data name="branchToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="companySetupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 26</value>
+  </data>
+  <data name="companySetupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Company Setup</value>
   </data>
   <data name="paymentTermsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 26</value>
@@ -167,261 +176,56 @@
   <data name="currenciesToolStripMenuItem.Text" xml:space="preserve">
     <value>Currencies</value>
   </data>
-  <data name="financialYearsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+  <data name="transactionsSetupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 26</value>
   </data>
-  <data name="financialYearsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Financial Years</value>
+  <data name="transactionsSetupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Transactions Setup</value>
+  </data>
+  <data name="taxesVATToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 26</value>
+  </data>
+  <data name="taxesVATToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Taxes / VAT</value>
+  </data>
+  <data name="discountSchemesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 26</value>
+  </data>
+  <data name="discountSchemesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Discounts Schemes</value>
+  </data>
+  <data name="taxesDiscountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 26</value>
+  </data>
+  <data name="taxesDiscountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Taxes &amp;&amp; Discounts</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>215, 26</value>
   </data>
   <data name="dBBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>DB Backup</value>
   </data>
-  <data name="settingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
-  </data>
-  <data name="settingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Se&amp;tting</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
-  </data>
-  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
-  </data>
-  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
-  </data>
-  <data name="securityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
-  </data>
-  <data name="securityToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Security</value>
-  </data>
-  <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
-  </data>
-  <data name="applicationLogsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Application &amp;Logs</value>
-  </data>
-  <data name="usersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
-  </data>
-  <data name="usersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Users</value>
-  </data>
   <data name="logoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>215, 26</value>
   </data>
   <data name="logoutToolStripMenuItem.Text" xml:space="preserve">
     <value>Logout</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 6</value>
+    <value>212, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 26</value>
+    <value>215, 26</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="masterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 24</value>
-  </data>
-  <data name="masterToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Master</value>
-  </data>
-  <data name="itemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
-  </data>
-  <data name="itemsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Items</value>
-  </data>
-  <data name="pOSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 24</value>
   </data>
-  <data name="pOSToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Purchases</value>
-  </data>
-  <data name="salesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 24</value>
-  </data>
-  <data name="salesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Sales</value>
-  </data>
-  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 24</value>
-  </data>
-  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Accounts</value>
-  </data>
-  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 24</value>
-  </data>
-  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Reports</value>
-  </data>
-  <data name="purchasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 24</value>
-  </data>
-  <data name="purchasesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ser&amp;vices</value>
-  </data>
-  <data name="humanResourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 24</value>
-  </data>
-  <data name="humanResourceToolStripMenuItem.Text" xml:space="preserve">
-    <value>H&amp;uman Resource</value>
-  </data>
-  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 24</value>
-  </data>
-  <data name="windowsMenu.Text" xml:space="preserve">
-    <value>&amp;Windows</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 4, 0, 4</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1228, 32</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 26</value>
-  </data>
-  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="arabicToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 26</value>
-  </data>
-  <data name="arabicToolStripMenuItem.Text" xml:space="preserve">
-    <value>Arabic</value>
-  </data>
-  <data name="rolePermissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 26</value>
-  </data>
-  <data name="rolePermissionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Role Permissions</value>
-  </data>
-  <data name="permissionsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="permissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 26</value>
-  </data>
-  <data name="permissionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Permissions</value>
-  </data>
-  <data name="userClaimsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 26</value>
-  </data>
-  <data name="userClaimsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;User Claims</value>
-  </data>
-  <data name="warehousetoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="warehousetoolStripMenuItem.Text" xml:space="preserve">
-    <value>Warehouse</value>
-  </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
-    <value>Item Files</value>
-  </data>
-  <data name="تقريرعنصنفToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
-  </data>
-  <data name="تقريرعنصنفToolStripMenuItem.Text" xml:space="preserve">
-    <value>Class Report</value>
-  </data>
-  <data name="editItemDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 26</value>
-  </data>
-  <data name="editItemDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit Item Data</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="toolStripMenuItem4.Text" xml:space="preserve">
-    <value>Inventory</value>
-  </data>
-  <data name="اجماليالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
-  </data>
-  <data name="اجماليالمخزونToolStripMenuItem.Text" xml:space="preserve">
-    <value>Total Stock</value>
-  </data>
-  <data name="lowStockInventoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
-  </data>
-  <data name="lowStockInventoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Low Stock Inventory</value>
-  </data>
-  <data name="تقريرعنالمخزونToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="تقريرعنالمخزونToolStripMenuItem.Text" xml:space="preserve">
-    <value>Inventory Report</value>
-  </data>
-  <data name="quantityOnHandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 26</value>
-  </data>
-  <data name="quantityOnHandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Quantity on hand</value>
-  </data>
-  <data name="lowStockReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 26</value>
-  </data>
-  <data name="lowStockReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Low Stock Report</value>
-  </data>
-  <data name="الاصنافالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="الاصنافالمتحركهToolStripMenuItem.Text" xml:space="preserve">
-    <value>Moving Items</value>
-  </data>
-  <data name="الاصنافغيرالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="الاصنافغيرالمتحركهToolStripMenuItem.Text" xml:space="preserve">
-    <value>Non-Moving Items</value>
+  <data name="masterToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;MASTERS</value>
   </data>
   <data name="productsServicesToolStripMenuItem.ShortcutKeyDisplayString" xml:space="preserve">
     <value />
@@ -430,22 +234,52 @@
     <value>False</value>
   </data>
   <data name="productsServicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
+    <value>214, 26</value>
   </data>
   <data name="productsServicesToolStripMenuItem.Text" xml:space="preserve">
     <value>Products</value>
   </data>
   <data name="brandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
+    <value>214, 26</value>
   </data>
   <data name="brandToolStripMenuItem.Text" xml:space="preserve">
     <value>Brands</value>
   </data>
   <data name="categoriesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
+    <value>214, 26</value>
   </data>
   <data name="categoriesToolStripMenuItem.Text" xml:space="preserve">
     <value>Categories</value>
+  </data>
+  <data name="productGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="productGroupsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Product Groups</value>
+  </data>
+  <data name="locationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="locationsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Locations</value>
+  </data>
+  <data name="unitsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="unitsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="labelsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="labelsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Product Labels</value>
+  </data>
+  <data name="alternateProductsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="alternateProductsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alternate Products</value>
   </data>
   <data name="productAdjustmentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 26</value>
@@ -459,47 +293,11 @@
   <data name="productLocationTransferToolStripMenuItem.Text" xml:space="preserve">
     <value>Product Location Transfer</value>
   </data>
-  <data name="labelsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="stockCheckAndAdjustmentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 26</value>
   </data>
-  <data name="labelsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Product Labels</value>
-  </data>
-  <data name="alternateProductsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="alternateProductsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Alternate Products</value>
-  </data>
-  <data name="productGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="productGroupsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Product Groups</value>
-  </data>
-  <data name="locationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="locationsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Locations</value>
-  </data>
-  <data name="unitsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="unitsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Units</value>
-  </data>
-  <data name="taxesVATToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="taxesVATToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Taxes / VAT</value>
-  </data>
-  <data name="discountSchemesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
-  </data>
-  <data name="discountSchemesToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Discounts Schemes</value>
+  <data name="stockCheckAndAdjustmentToolStripMenuItem.Text" xml:space="preserve">
+    <value>Stock Check and Adjustment</value>
   </data>
   <data name="stockSuppressionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 26</value>
@@ -507,68 +305,158 @@
   <data name="stockSuppressionToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Stock Suppressions</value>
   </data>
-  <data name="stockCheckAndAdjustmentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
+  <data name="operationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
   </data>
-  <data name="stockCheckAndAdjustmentToolStripMenuItem.Text" xml:space="preserve">
-    <value>Stock Check and Adjustment</value>
+  <data name="operationsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="editItemDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="editItemDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit Item Data</value>
+  </data>
+  <data name="lowStockInventoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="lowStockInventoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Low Stock Inventory</value>
+  </data>
+  <data name="quantityOnHandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="quantityOnHandToolStripMenuItem.Text" xml:space="preserve">
+    <value>Quantity on hand</value>
+  </data>
+  <data name="lowStockReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="lowStockReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Low Stock Report</value>
+  </data>
+  <data name="warehouseToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="warehouseToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Warehouse</value>
+  </data>
+  <data name="الاصنافالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="الاصنافالمتحركهToolStripMenuItem.Text" xml:space="preserve">
+    <value>Moving Items</value>
+  </data>
+  <data name="الاصنافغيرالمتحركهToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="الاصنافغيرالمتحركهToolStripMenuItem.Text" xml:space="preserve">
+    <value>Non-Moving Items</value>
+  </data>
+  <data name="warehousetoolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="warehousetoolStripMenuItem.Text" xml:space="preserve">
+    <value>Warehouse</value>
   </data>
   <data name="inventoryValuationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
+    <value>276, 26</value>
   </data>
   <data name="inventoryValuationToolStripMenuItem.Text" xml:space="preserve">
     <value>Inventory Valuation</value>
   </data>
   <data name="inventoryValuationSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 26</value>
+    <value>276, 26</value>
   </data>
   <data name="inventoryValuationSettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Inventory Valuation Settings</value>
   </data>
+  <data name="valautionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="valautionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Valaution</value>
+  </data>
+  <data name="itemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 24</value>
+  </data>
+  <data name="itemsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;INVENTORY</value>
+  </data>
   <data name="newTransactionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>226, 26</value>
   </data>
   <data name="newTransactionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Purchase Transaction</value>
+    <value>New Purchase</value>
   </data>
   <data name="purchaseReturnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>226, 26</value>
   </data>
   <data name="purchaseReturnToolStripMenuItem.Text" xml:space="preserve">
     <value>Purchase Return</value>
   </data>
-  <data name="purchaseSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
-  </data>
-  <data name="purchaseSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Purchase Summary</value>
+  <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 6</value>
   </data>
   <data name="allPurchasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>226, 26</value>
   </data>
   <data name="allPurchasesToolStripMenuItem.Text" xml:space="preserve">
     <value>All Purchases</value>
   </data>
+  <data name="purchaseSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 26</value>
+  </data>
+  <data name="purchaseSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Purchase Summary</value>
+  </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 6</value>
+    <value>223, 6</value>
   </data>
   <data name="purchaseOrdersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>226, 26</value>
   </data>
   <data name="purchaseOrdersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Purchase Orders</value>
+    <value>New Purchase Order</value>
   </data>
   <data name="allPurchaseOrdersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 26</value>
+    <value>226, 26</value>
   </data>
   <data name="allPurchaseOrdersToolStripMenuItem.Text" xml:space="preserve">
     <value>All Purchase Orders</value>
+  </data>
+  <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 6</value>
+  </data>
+  <data name="purchaseInvoiceReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 26</value>
+  </data>
+  <data name="purchaseInvoiceReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Purchase Invoice Report</value>
+  </data>
+  <data name="purchaseReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 26</value>
+  </data>
+  <data name="purchaseReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Purchase Items Report</value>
+  </data>
+  <data name="reportsToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 26</value>
+  </data>
+  <data name="reportsToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="pOSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="pOSToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;PURCHASES</value>
   </data>
   <data name="newTransactionToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 26</value>
   </data>
   <data name="newTransactionToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Sale Transaction</value>
+    <value>New Sale</value>
   </data>
   <data name="salesReturnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 26</value>
@@ -582,6 +470,9 @@
   <data name="debitNoteToolStripMenuItem.Text" xml:space="preserve">
     <value>Debit Note</value>
   </data>
+  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
   <data name="salesSummaryToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 26</value>
   </data>
@@ -593,6 +484,12 @@
   </data>
   <data name="allTransactionToolStripMenuItem1.Text" xml:space="preserve">
     <value>All Sales</value>
+  </data>
+  <data name="allQuotationsEstimatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 26</value>
+  </data>
+  <data name="allQuotationsEstimatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>All Quotations / Estimates</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -612,11 +509,77 @@
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
   </data>
-  <data name="allQuotationsEstimatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="salesInvoiceReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="salesInvoiceReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sales Invoice Report</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="toolStripMenuItem2.Text" xml:space="preserve">
+    <value>Sales Items Report</value>
+  </data>
+  <data name="customerWiseSalesReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="customerWiseSalesReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Customer-wise Sales Summary</value>
+  </data>
+  <data name="productWiseSalesSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="productWiseSalesSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Product-wise Sales Summary</value>
+  </data>
+  <data name="categoryWiseSalesSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="categoryWiseSalesSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Category-wise Sales Summary</value>
+  </data>
+  <data name="byPaymentMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="byPaymentMethodToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sales By Payment Method</value>
+  </data>
+  <data name="salesSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="salesSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sales Summary</value>
+  </data>
+  <data name="salesExpensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="salesExpensesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sales Expenses </value>
+  </data>
+  <data name="branchSummaryToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="branchSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="branchSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Branch Summary</value>
+  </data>
+  <data name="dailySaleReportToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dailySaleReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 26</value>
+  </data>
+  <data name="dailySaleReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Daily Sale Report</value>
+  </data>
+  <data name="reportsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 26</value>
   </data>
-  <data name="allQuotationsEstimatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>All Quotations / Estimates</value>
+  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Reports</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -639,23 +602,11 @@
   <data name="iCTReleaseToolStripMenuItem.Text" xml:space="preserve">
     <value>ICT Release</value>
   </data>
-  <data name="accountingDashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="salesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 24</value>
   </data>
-  <data name="accountingDashboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Accounting Dashboard</value>
-  </data>
-  <data name="customersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
-  </data>
-  <data name="customersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Customers</value>
-  </data>
-  <data name="customersSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
-  </data>
-  <data name="customersSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Customers Summary</value>
+  <data name="salesToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;SALES</value>
   </data>
   <data name="createNewCustomerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 26</value>
@@ -663,17 +614,17 @@
   <data name="createNewCustomerToolStripMenuItem.Text" xml:space="preserve">
     <value>Create New Customer</value>
   </data>
-  <data name="suppliersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="customersSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 26</value>
   </data>
-  <data name="suppliersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Suppliers</value>
+  <data name="customersSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Customers Summary</value>
   </data>
-  <data name="suppliersSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 26</value>
+  <data name="customersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 26</value>
   </data>
-  <data name="suppliersSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Suppliers Summary</value>
+  <data name="customersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Customers</value>
   </data>
   <data name="createNewSupplierToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 26</value>
@@ -681,38 +632,35 @@
   <data name="createNewSupplierToolStripMenuItem.Text" xml:space="preserve">
     <value>Create New Supplier</value>
   </data>
+  <data name="suppliersSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 26</value>
+  </data>
+  <data name="suppliersSummaryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Suppliers Summary</value>
+  </data>
+  <data name="suppliersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 26</value>
+  </data>
+  <data name="suppliersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Suppliers</value>
+  </data>
   <data name="banksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>161, 26</value>
   </data>
   <data name="banksToolStripMenuItem.Text" xml:space="preserve">
     <value>Banks</value>
   </data>
-  <data name="expensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 24</value>
+  </data>
+  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;CRM</value>
+  </data>
+  <data name="accountingDashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 26</value>
   </data>
-  <data name="expensesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Expenses</value>
-  </data>
-  <data name="createNewExpenseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
-  </data>
-  <data name="createNewExpenseToolStripMenuItem.Text" xml:space="preserve">
-    <value>Create new expense</value>
-  </data>
-  <data name="expenseListToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
-  </data>
-  <data name="expenseListToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Expense List</value>
-  </data>
-  <data name="expenseDashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
-  </data>
-  <data name="expenseDashboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Expense Dashboard</value>
-  </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 6</value>
+  <data name="accountingDashboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Accounting Dashboard</value>
   </data>
   <data name="chartOfAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 26</value>
@@ -720,92 +668,140 @@
   <data name="chartOfAccountsToolStripMenuItem.Text" xml:space="preserve">
     <value>Chart of Accounts</value>
   </data>
-  <data name="journalVoucherListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="fixedAssetsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 26</value>
   </data>
-  <data name="journalVoucherListToolStripMenuItem.Text" xml:space="preserve">
-    <value>Journal Voucher List</value>
+  <data name="fixedAssetsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Fixed Assets</value>
   </data>
   <data name="journalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>233, 26</value>
   </data>
   <data name="journalToolStripMenuItem.Text" xml:space="preserve">
     <value>Journal Voucher Entry</value>
   </data>
+  <data name="journalVoucherListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 26</value>
+  </data>
+  <data name="journalVoucherListToolStripMenuItem.Text" xml:space="preserve">
+    <value>Journal Voucher List</value>
+  </data>
   <data name="groupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>233, 26</value>
   </data>
   <data name="groupsToolStripMenuItem.Text" xml:space="preserve">
     <value>Groups</value>
   </data>
   <data name="accountsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>233, 26</value>
   </data>
   <data name="accountsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Accounts</value>
   </data>
-  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 6</value>
+  <data name="transactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 26</value>
+  </data>
+  <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Transactions</value>
   </data>
   <data name="generalLedgerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="generalLedgerToolStripMenuItem.Text" xml:space="preserve">
     <value>General Ledger</value>
   </data>
   <data name="customerARToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="customerARToolStripMenuItem.Text" xml:space="preserve">
-    <value>Customer (AR)</value>
+    <value>Customer Ledger (AR)</value>
   </data>
   <data name="supplierAPToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="supplierAPToolStripMenuItem.Text" xml:space="preserve">
-    <value>Supplier (AP)</value>
+    <value>Supplier Ledger (AP)</value>
   </data>
-  <data name="subLedgersToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="trialBalanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
   </data>
-  <data name="subLedgersToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Sub-Ledgers</value>
-  </data>
-  <data name="subLedgersToolStripMenuItem1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="trialBalanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Trial Balance</value>
   </data>
   <data name="incomeStatementToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="incomeStatementToolStripMenuItem.Text" xml:space="preserve">
     <value>Income Statement</value>
   </data>
   <data name="balanceSheetToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="balanceSheetToolStripMenuItem1.Text" xml:space="preserve">
     <value>Balance Sheet</value>
   </data>
-  <data name="financialPeriodManagementToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="journalDaybookToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
   </data>
-  <data name="financialPeriodManagementToolStripMenuItem.Text" xml:space="preserve">
-    <value>Financial Period Management</value>
+  <data name="journalDaybookToolStripMenuItem.Text" xml:space="preserve">
+    <value>Journal Daybook</value>
   </data>
-  <data name="cashFlowManagementToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="accountReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
   </data>
-  <data name="cashFlowManagementToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cash Flow Management</value>
+  <data name="accountReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Account Report</value>
   </data>
-  <data name="bankReconciliationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="groupReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
   </data>
-  <data name="bankReconciliationToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bank Reconciliation</value>
+  <data name="groupReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Group Report</value>
+  </data>
+  <data name="profitLossToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="profitLossToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
+  </data>
+  <data name="profitLossToolStripMenuItem.Text" xml:space="preserve">
+    <value>Profit and Loss</value>
+  </data>
+  <data name="profitLossToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="balanceSheetToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="balanceSheetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
+  </data>
+  <data name="balanceSheetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="balanceSheetToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="accountReceivableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
+  </data>
+  <data name="accountReceivableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Account Receivable</value>
+  </data>
+  <data name="accountPayableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
+  </data>
+  <data name="accountPayableToolStripMenuItem.Text" xml:space="preserve">
+    <value>Account Payable</value>
+  </data>
+  <data name="banksReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 26</value>
+  </data>
+  <data name="banksReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Banks Report</value>
   </data>
   <data name="salesTaxSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="salesTaxSummaryToolStripMenuItem.Text" xml:space="preserve">
     <value>Sales Tax Summary</value>
@@ -814,7 +810,7 @@
     <value>False</value>
   </data>
   <data name="taxTrialBalanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+    <value>238, 26</value>
   </data>
   <data name="taxTrialBalanceToolStripMenuItem.Text" xml:space="preserve">
     <value>Tax Trial Balance</value>
@@ -822,16 +818,16 @@
   <data name="taxTrialBalanceToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="costCentersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="reportsToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 26</value>
   </data>
-  <data name="costCentersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cost Centers</value>
+  <data name="reportsToolStripMenuItem3.Text" xml:space="preserve">
+    <value>Reports</value>
   </data>
-  <data name="setupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="setupToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 26</value>
   </data>
-  <data name="setupToolStripMenuItem.Text" xml:space="preserve">
+  <data name="setupToolStripMenuItem1.Text" xml:space="preserve">
     <value>Setup</value>
   </data>
   <data name="hierarchyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -864,191 +860,215 @@
   <data name="budgetVsActualReportToolStripMenuItem.Text" xml:space="preserve">
     <value>Budget Vs Actual Report</value>
   </data>
-  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="costCentersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 26</value>
   </data>
-  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="costCentersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Branch / Cost Centers</value>
   </data>
-  <data name="importDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 26</value>
   </data>
-  <data name="importDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import Data</value>
+  <data name="toolStripMenuItem1.Text" xml:space="preserve">
+    <value>d</value>
   </data>
-  <data name="fixedAssetsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
-  </data>
-  <data name="fixedAssetsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Fixed Assets</value>
-  </data>
-  <data name="salesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="salesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sales</value>
-  </data>
-  <data name="dailySaleReportToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="dailySaleReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="dailySaleReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Daily Sale Report</value>
-  </data>
-  <data name="dailySaleReportToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="salesInvoiceReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="salesInvoiceReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sales Invoice Report</value>
-  </data>
-  <data name="salesReportToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="salesReportToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Sales Items Report</value>
-  </data>
-  <data name="customerWiseSalesReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="customerWiseSalesReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Customer Wise Sales Summary</value>
-  </data>
-  <data name="productWiseSalesSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="productWiseSalesSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Product Wise Sales Summary</value>
-  </data>
-  <data name="categoryWiseSalesSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="categoryWiseSalesSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Category Wise Sales Summary</value>
-  </data>
-  <data name="byPaymentMethodToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="byPaymentMethodToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sales By Payment Method</value>
-  </data>
-  <data name="salesSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
-  </data>
-  <data name="salesSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sales Summary</value>
-  </data>
-  <data name="purchasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="purchasesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Purchases</value>
-  </data>
-  <data name="purchaseReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cashFlowManagementToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 26</value>
   </data>
-  <data name="purchaseReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Purchase Report</value>
+  <data name="cashFlowManagementToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cash Flow Management</value>
   </data>
-  <data name="purchaseInvoiceReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cashBookToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 26</value>
   </data>
-  <data name="purchaseInvoiceReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Purchase Invoice Report</value>
+  <data name="cashBookToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cash Book</value>
   </data>
-  <data name="warehouseToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="bankReconciliationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 26</value>
   </data>
-  <data name="warehouseToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Warehouse</value>
+  <data name="bankReconciliationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Bank Reconciliation</value>
   </data>
-  <data name="salesExpensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="cashManagementToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 26</value>
   </data>
-  <data name="salesExpensesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sales Expenses </value>
+  <data name="cashManagementToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cash Management</value>
   </data>
-  <data name="branchSummaryToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="financialYearsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
   </data>
-  <data name="branchSummaryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="financialYearsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Financial Years</value>
   </data>
-  <data name="branchSummaryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Branch Summary</value>
+  <data name="financialPeriodManagementToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
   </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 6</value>
+  <data name="financialPeriodManagementToolStripMenuItem.Text" xml:space="preserve">
+    <value>Financial Period</value>
   </data>
-  <data name="journalDaybookToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+  <data name="financialPeriodManagementToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 26</value>
   </data>
-  <data name="journalDaybookToolStripMenuItem.Text" xml:space="preserve">
-    <value>Journal Daybook</value>
-  </data>
-  <data name="accountReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="accountReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Account Report</value>
-  </data>
-  <data name="groupReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="groupReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Group Report</value>
-  </data>
-  <data name="trialBalanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="trialBalanceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Trial Balance</value>
-  </data>
-  <data name="profitLossToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="profitLossToolStripMenuItem.Text" xml:space="preserve">
-    <value>Profit and Loss</value>
-  </data>
-  <data name="balanceSheetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="balanceSheetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Balance Sheet</value>
-  </data>
-  <data name="accountReceivableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="accountReceivableToolStripMenuItem.Text" xml:space="preserve">
-    <value>Account Receivable</value>
-  </data>
-  <data name="accountPayableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="accountPayableToolStripMenuItem.Text" xml:space="preserve">
-    <value>Account Payable</value>
-  </data>
-  <data name="banksReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
-  </data>
-  <data name="banksReportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Banks Report</value>
+  <data name="financialPeriodManagementToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Financial Period Management</value>
   </data>
   <data name="vATDashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 26</value>
+    <value>288, 26</value>
   </data>
   <data name="vATDashboardToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;VAT Dashboard</value>
+  </data>
+  <data name="fINANCEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 24</value>
+  </data>
+  <data name="fINANCEToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;FINANCE</value>
+  </data>
+  <data name="createNewExpenseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="createNewExpenseToolStripMenuItem.Text" xml:space="preserve">
+    <value>Create new expense</value>
+  </data>
+  <data name="expenseListToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="expenseListToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Expense List</value>
+  </data>
+  <data name="expenseDashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="expenseDashboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Expense Dashboard</value>
+  </data>
+  <data name="expensesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="expensesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;EXPENSES</value>
   </data>
   <data name="employeesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 26</value>
   </data>
   <data name="employeesToolStripMenuItem.Text" xml:space="preserve">
     <value>Employees</value>
+  </data>
+  <data name="humanResourceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 24</value>
+  </data>
+  <data name="humanResourceToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;HR</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 26</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="importDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 26</value>
+  </data>
+  <data name="importDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
+  <data name="settingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 26</value>
+  </data>
+  <data name="settingToolStripMenuItem.Text" xml:space="preserve">
+    <value>POS Se&amp;tting</value>
+  </data>
+  <data name="configurationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 26</value>
+  </data>
+  <data name="configurationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 26</value>
+  </data>
+  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="arabicToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 26</value>
+  </data>
+  <data name="arabicToolStripMenuItem.Text" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 26</value>
+  </data>
+  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="rolePermissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 26</value>
+  </data>
+  <data name="rolePermissionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Role Permissions</value>
+  </data>
+  <data name="applicationLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 26</value>
+  </data>
+  <data name="applicationLogsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Application &amp;Logs</value>
+  </data>
+  <data name="usersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 26</value>
+  </data>
+  <data name="usersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="permissionsToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="permissionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 26</value>
+  </data>
+  <data name="permissionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Permissions</value>
+  </data>
+  <data name="permissionsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="userClaimsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 26</value>
+  </data>
+  <data name="userClaimsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;User Claims</value>
+  </data>
+  <data name="securityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 26</value>
+  </data>
+  <data name="securityToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Security</value>
+  </data>
+  <data name="sETTINGSToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 24</value>
+  </data>
+  <data name="sETTINGSToolStripMenuItem1.Text" xml:space="preserve">
+    <value>SE&amp;TTINGS</value>
+  </data>
+  <data name="shortcutsKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 26</value>
+  </data>
+  <data name="shortcutsKeysToolStripMenuItem.Text" xml:space="preserve">
+    <value>Shortcuts Keys</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 26</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 24</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>HEL&amp;P</value>
   </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 26</value>
@@ -1074,48 +1094,43 @@
   <data name="CloseAllToolStripMenuItem.Text" xml:space="preserve">
     <value>C&amp;lose All</value>
   </data>
-  <data name="shortcutsKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 26</value>
+  <data name="windowsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 24</value>
   </data>
-  <data name="shortcutsKeysToolStripMenuItem.Text" xml:space="preserve">
-    <value>Shortcuts Keys</value>
+  <data name="windowsMenu.Text" xml:space="preserve">
+    <value>&amp;WINDOW</value>
   </data>
-  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 26</value>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>About</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 4, 0, 4</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1228, 32</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 702</value>
-  </data>
-  <data name="statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 0, 18, 0</value>
-  </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1228, 26</value>
-  </data>
-  <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="statusStrip1.Text" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="toolStripStatusLabel_user.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
   </data>
@@ -1164,6 +1179,33 @@
   <data name="toolStripStatusLabelCompanyName.Text" xml:space="preserve">
     <value>Company name</value>
   </data>
+  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 702</value>
+  </data>
+  <data name="statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 18, 0</value>
+  </data>
+  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1228, 26</value>
+  </data>
+  <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="statusStrip1.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="sideMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>293, 17</value>
   </metadata>
@@ -1172,36 +1214,6 @@
   </data>
   <data name="sideMenu.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 32</value>
-  </data>
-  <data name="sideMenu.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="sideMenu.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 670</value>
-  </data>
-  <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="sideMenu.Text" xml:space="preserve">
-    <value>sideMenu</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.Name" xml:space="preserve">
-    <value>sideMenu</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;sideMenu.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="toolStripButton_dashboard.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1398,11 +1410,35 @@
   <data name="toolStripButtonNewPOS.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="cashBookToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 26</value>
+  <data name="sideMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
   </data>
-  <data name="cashBookToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cash Book</value>
+  <data name="sideMenu.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="sideMenu.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 670</value>
+  </data>
+  <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="sideMenu.Text" xml:space="preserve">
+    <value>sideMenu</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.Name" xml:space="preserve">
+    <value>sideMenu</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sideMenu.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1507,11 +1543,11 @@
   <data name="&gt;&gt;masterToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
-    <value>toolStripSeparator10</value>
+  <data name="&gt;&gt;companySetupToolStripMenuItem.Name" xml:space="preserve">
+    <value>companySetupToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;companySetupToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;profileToolStripMenuItem.Name" xml:space="preserve">
     <value>profileToolStripMenuItem</value>
@@ -1519,22 +1555,28 @@
   <data name="&gt;&gt;profileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
-    <value>toolStripSeparator6</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;countryOriginToolStripMenuItem.Name" xml:space="preserve">
     <value>countryOriginToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;countryOriginToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;setupToolStripMenuItem.Name" xml:space="preserve">
+    <value>setupToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;setupToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;branchToolStripMenuItem.Name" xml:space="preserve">
     <value>branchToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;branchToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;transactionsSetupToolStripMenuItem.Name" xml:space="preserve">
+    <value>transactionsSetupToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;transactionsSetupToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;paymentTermsToolStripMenuItem.Name" xml:space="preserve">
@@ -1555,88 +1597,28 @@
   <data name="&gt;&gt;currenciesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;financialYearsToolStripMenuItem.Name" xml:space="preserve">
-    <value>financialYearsToolStripMenuItem</value>
+  <data name="&gt;&gt;taxesDiscountsToolStripMenuItem.Name" xml:space="preserve">
+    <value>taxesDiscountsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;financialYearsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;taxesDiscountsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taxesVATToolStripMenuItem1.Name" xml:space="preserve">
+    <value>taxesVATToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;taxesVATToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;discountSchemesToolStripMenuItem.Name" xml:space="preserve">
+    <value>discountSchemesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;discountSchemesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dBBackupToolStripMenuItem.Name" xml:space="preserve">
     <value>dBBackupToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;dBBackupToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;settingToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
-    <value>toolStripSeparator5</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
-    <value>languageToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;languageToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
-    <value>englishToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;englishToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;arabicToolStripMenuItem.Name" xml:space="preserve">
-    <value>arabicToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;arabicToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
-    <value>toolStripSeparator8</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;securityToolStripMenuItem.Name" xml:space="preserve">
-    <value>securityToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;securityToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rolePermissionsToolStripMenuItem.Name" xml:space="preserve">
-    <value>rolePermissionsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;rolePermissionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;permissionsToolStripMenuItem.Name" xml:space="preserve">
-    <value>permissionsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;permissionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;userClaimsToolStripMenuItem.Name" xml:space="preserve">
-    <value>userClaimsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;userClaimsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;applicationLogsToolStripMenuItem.Name" xml:space="preserve">
-    <value>applicationLogsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;applicationLogsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usersToolStripMenuItem.Name" xml:space="preserve">
-    <value>usersToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;usersToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;logoutToolStripMenuItem.Name" xml:space="preserve">
@@ -1663,78 +1645,6 @@
   <data name="&gt;&gt;itemsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warehousetoolStripMenuItem.Name" xml:space="preserve">
-    <value>warehousetoolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;warehousetoolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">
-    <value>toolStripMenuItem3</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;تقريرعنصنفToolStripMenuItem.Name" xml:space="preserve">
-    <value>تقريرعنصنفToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;تقريرعنصنفToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;editItemDataToolStripMenuItem.Name" xml:space="preserve">
-    <value>editItemDataToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;editItemDataToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
-    <value>toolStripMenuItem4</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;اجماليالمخزونToolStripMenuItem.Name" xml:space="preserve">
-    <value>اجماليالمخزونToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;اجماليالمخزونToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lowStockInventoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>lowStockInventoryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;lowStockInventoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;تقريرعنالمخزونToolStripMenuItem.Name" xml:space="preserve">
-    <value>تقريرعنالمخزونToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;تقريرعنالمخزونToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;quantityOnHandToolStripMenuItem.Name" xml:space="preserve">
-    <value>quantityOnHandToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;quantityOnHandToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lowStockReportToolStripMenuItem.Name" xml:space="preserve">
-    <value>lowStockReportToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;lowStockReportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;الاصنافالمتحركهToolStripMenuItem.Name" xml:space="preserve">
-    <value>الاصنافالمتحركهToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;الاصنافالمتحركهToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;الاصنافغيرالمتحركهToolStripMenuItem.Name" xml:space="preserve">
-    <value>الاصنافغيرالمتحركهToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;الاصنافغيرالمتحركهToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;productsServicesToolStripMenuItem.Name" xml:space="preserve">
     <value>productsServicesToolStripMenuItem</value>
   </data>
@@ -1751,30 +1661,6 @@
     <value>categoriesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;categoriesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;productAdjustmentToolStripMenuItem.Name" xml:space="preserve">
-    <value>productAdjustmentToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;productAdjustmentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;productLocationTransferToolStripMenuItem.Name" xml:space="preserve">
-    <value>productLocationTransferToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;productLocationTransferToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelsToolStripMenuItem.Name" xml:space="preserve">
-    <value>labelsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;labelsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;alternateProductsToolStripMenuItem.Name" xml:space="preserve">
-    <value>alternateProductsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;alternateProductsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;productGroupsToolStripMenuItem.Name" xml:space="preserve">
@@ -1795,16 +1681,40 @@
   <data name="&gt;&gt;unitsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;taxesVATToolStripMenuItem1.Name" xml:space="preserve">
-    <value>taxesVATToolStripMenuItem1</value>
+  <data name="&gt;&gt;labelsToolStripMenuItem.Name" xml:space="preserve">
+    <value>labelsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;taxesVATToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;discountSchemesToolStripMenuItem.Name" xml:space="preserve">
-    <value>discountSchemesToolStripMenuItem</value>
+  <data name="&gt;&gt;alternateProductsToolStripMenuItem.Name" xml:space="preserve">
+    <value>alternateProductsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;discountSchemesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;alternateProductsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;operationsToolStripMenuItem.Name" xml:space="preserve">
+    <value>operationsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;operationsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;productAdjustmentToolStripMenuItem.Name" xml:space="preserve">
+    <value>productAdjustmentToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;productAdjustmentToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;productLocationTransferToolStripMenuItem.Name" xml:space="preserve">
+    <value>productLocationTransferToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;productLocationTransferToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stockCheckAndAdjustmentToolStripMenuItem.Name" xml:space="preserve">
+    <value>stockCheckAndAdjustmentToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;stockCheckAndAdjustmentToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;stockSuppressionToolStripMenuItem.Name" xml:space="preserve">
@@ -1813,10 +1723,58 @@
   <data name="&gt;&gt;stockSuppressionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;stockCheckAndAdjustmentToolStripMenuItem.Name" xml:space="preserve">
-    <value>stockCheckAndAdjustmentToolStripMenuItem</value>
+  <data name="&gt;&gt;warehousetoolStripMenuItem.Name" xml:space="preserve">
+    <value>warehousetoolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;stockCheckAndAdjustmentToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;warehousetoolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;editItemDataToolStripMenuItem.Name" xml:space="preserve">
+    <value>editItemDataToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;editItemDataToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lowStockInventoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>lowStockInventoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;lowStockInventoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;quantityOnHandToolStripMenuItem.Name" xml:space="preserve">
+    <value>quantityOnHandToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;quantityOnHandToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lowStockReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>lowStockReportToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;lowStockReportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;warehouseToolStripMenuItem1.Name" xml:space="preserve">
+    <value>warehouseToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;warehouseToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;الاصنافالمتحركهToolStripMenuItem.Name" xml:space="preserve">
+    <value>الاصنافالمتحركهToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;الاصنافالمتحركهToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;الاصنافغيرالمتحركهToolStripMenuItem.Name" xml:space="preserve">
+    <value>الاصنافغيرالمتحركهToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;الاصنافغيرالمتحركهToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;valautionToolStripMenuItem.Name" xml:space="preserve">
+    <value>valautionToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;valautionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;inventoryValuationToolStripMenuItem.Name" xml:space="preserve">
@@ -1849,16 +1807,22 @@
   <data name="&gt;&gt;purchaseReturnToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;purchaseSummaryToolStripMenuItem.Name" xml:space="preserve">
-    <value>purchaseSummaryToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
+    <value>toolStripSeparator14</value>
   </data>
-  <data name="&gt;&gt;purchaseSummaryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;allPurchasesToolStripMenuItem.Name" xml:space="preserve">
     <value>allPurchasesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;allPurchasesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;purchaseSummaryToolStripMenuItem.Name" xml:space="preserve">
+    <value>purchaseSummaryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;purchaseSummaryToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
@@ -1877,6 +1841,30 @@
     <value>allPurchaseOrdersToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;allPurchaseOrdersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
+    <value>toolStripSeparator15</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;reportsToolStripMenuItem2.Name" xml:space="preserve">
+    <value>reportsToolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;reportsToolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;purchaseInvoiceReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>purchaseInvoiceReportToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;purchaseInvoiceReportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;purchaseReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>purchaseReportToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;purchaseReportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;salesToolStripMenuItem1.Name" xml:space="preserve">
@@ -1903,6 +1891,12 @@
   <data name="&gt;&gt;debitNoteToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator13.Name" xml:space="preserve">
+    <value>toolStripSeparator13</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;salesSummaryToolStripMenuItem1.Name" xml:space="preserve">
     <value>salesSummaryToolStripMenuItem1</value>
   </data>
@@ -1913,6 +1907,12 @@
     <value>allTransactionToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;allTransactionToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;allQuotationsEstimatesToolStripMenuItem.Name" xml:space="preserve">
+    <value>allQuotationsEstimatesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;allQuotationsEstimatesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
@@ -1939,298 +1939,10 @@
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;allQuotationsEstimatesToolStripMenuItem.Name" xml:space="preserve">
-    <value>allQuotationsEstimatesToolStripMenuItem</value>
+  <data name="&gt;&gt;reportsToolStripMenuItem1.Name" xml:space="preserve">
+    <value>reportsToolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;allQuotationsEstimatesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
-    <value>toolStripSeparator3</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;iCTToolStripMenuItem.Name" xml:space="preserve">
-    <value>iCTToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;iCTToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;iCTRequestToolStripMenuItem.Name" xml:space="preserve">
-    <value>iCTRequestToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;iCTRequestToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;iCTReleaseToolStripMenuItem.Name" xml:space="preserve">
-    <value>iCTReleaseToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;iCTReleaseToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;accountsToolStripMenuItem.Name" xml:space="preserve">
-    <value>accountsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;accountsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;accountingDashboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>accountingDashboardToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;accountingDashboardToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customersToolStripMenuItem.Name" xml:space="preserve">
-    <value>customersToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;customersToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customersSummaryToolStripMenuItem.Name" xml:space="preserve">
-    <value>customersSummaryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;customersSummaryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;createNewCustomerToolStripMenuItem.Name" xml:space="preserve">
-    <value>createNewCustomerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;createNewCustomerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;suppliersToolStripMenuItem.Name" xml:space="preserve">
-    <value>suppliersToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;suppliersToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;suppliersSummaryToolStripMenuItem.Name" xml:space="preserve">
-    <value>suppliersSummaryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;suppliersSummaryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;createNewSupplierToolStripMenuItem.Name" xml:space="preserve">
-    <value>createNewSupplierToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;createNewSupplierToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;banksToolStripMenuItem.Name" xml:space="preserve">
-    <value>banksToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;banksToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;expensesToolStripMenuItem.Name" xml:space="preserve">
-    <value>expensesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;expensesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;createNewExpenseToolStripMenuItem.Name" xml:space="preserve">
-    <value>createNewExpenseToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;createNewExpenseToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;expenseListToolStripMenuItem1.Name" xml:space="preserve">
-    <value>expenseListToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;expenseListToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;expenseDashboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>expenseDashboardToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;expenseDashboardToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
-    <value>toolStripSeparator9</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chartOfAccountsToolStripMenuItem.Name" xml:space="preserve">
-    <value>chartOfAccountsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;chartOfAccountsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;journalVoucherListToolStripMenuItem.Name" xml:space="preserve">
-    <value>journalVoucherListToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;journalVoucherListToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;journalToolStripMenuItem.Name" xml:space="preserve">
-    <value>journalToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;journalToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupsToolStripMenuItem.Name" xml:space="preserve">
-    <value>groupsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;groupsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;accountsToolStripMenuItem1.Name" xml:space="preserve">
-    <value>accountsToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;accountsToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
-    <value>toolStripSeparator7</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;generalLedgerToolStripMenuItem.Name" xml:space="preserve">
-    <value>generalLedgerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;generalLedgerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;subLedgersToolStripMenuItem1.Name" xml:space="preserve">
-    <value>subLedgersToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;subLedgersToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;customerARToolStripMenuItem.Name" xml:space="preserve">
-    <value>customerARToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;customerARToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;supplierAPToolStripMenuItem.Name" xml:space="preserve">
-    <value>supplierAPToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;supplierAPToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;incomeStatementToolStripMenuItem.Name" xml:space="preserve">
-    <value>incomeStatementToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;incomeStatementToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;balanceSheetToolStripMenuItem1.Name" xml:space="preserve">
-    <value>balanceSheetToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;balanceSheetToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;financialPeriodManagementToolStripMenuItem.Name" xml:space="preserve">
-    <value>financialPeriodManagementToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;financialPeriodManagementToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cashFlowManagementToolStripMenuItem.Name" xml:space="preserve">
-    <value>cashFlowManagementToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;cashFlowManagementToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bankReconciliationToolStripMenuItem.Name" xml:space="preserve">
-    <value>bankReconciliationToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;bankReconciliationToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;salesTaxSummaryToolStripMenuItem.Name" xml:space="preserve">
-    <value>salesTaxSummaryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;salesTaxSummaryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taxTrialBalanceToolStripMenuItem.Name" xml:space="preserve">
-    <value>taxTrialBalanceToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;taxTrialBalanceToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;costCentersToolStripMenuItem.Name" xml:space="preserve">
-    <value>costCentersToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;costCentersToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;setupToolStripMenuItem.Name" xml:space="preserve">
-    <value>setupToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;setupToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;hierarchyToolStripMenuItem.Name" xml:space="preserve">
-    <value>hierarchyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;hierarchyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;budgetToolStripMenuItem.Name" xml:space="preserve">
-    <value>budgetToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;budgetToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;allocationRulesToolStripMenuItem.Name" xml:space="preserve">
-    <value>allocationRulesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;allocationRulesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;departmentalPLToolStripMenuItem.Name" xml:space="preserve">
-    <value>departmentalPLToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;departmentalPLToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;budgetVsActualReportToolStripMenuItem.Name" xml:space="preserve">
-    <value>budgetVsActualReportToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;budgetVsActualReportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;importDataToolStripMenuItem.Name" xml:space="preserve">
-    <value>importDataToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;importDataToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fixedAssetsToolStripMenuItem.Name" xml:space="preserve">
-    <value>fixedAssetsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;fixedAssetsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;reportsToolStripMenuItem.Name" xml:space="preserve">
-    <value>reportsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;reportsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;salesToolStripMenuItem.Name" xml:space="preserve">
-    <value>salesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;salesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dailySaleReportToolStripMenuItem.Name" xml:space="preserve">
-    <value>dailySaleReportToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;dailySaleReportToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;reportsToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;salesInvoiceReportToolStripMenuItem.Name" xml:space="preserve">
@@ -2239,10 +1951,10 @@
   <data name="&gt;&gt;salesInvoiceReportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;salesReportToolStripMenuItem1.Name" xml:space="preserve">
-    <value>salesReportToolStripMenuItem1</value>
+  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
+    <value>toolStripMenuItem2</value>
   </data>
-  <data name="&gt;&gt;salesReportToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customerWiseSalesReportToolStripMenuItem.Name" xml:space="preserve">
@@ -2275,30 +1987,6 @@
   <data name="&gt;&gt;salesSummaryToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;purchasesToolStripMenuItem1.Name" xml:space="preserve">
-    <value>purchasesToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;purchasesToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;purchaseReportToolStripMenuItem.Name" xml:space="preserve">
-    <value>purchaseReportToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;purchaseReportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;purchaseInvoiceReportToolStripMenuItem.Name" xml:space="preserve">
-    <value>purchaseInvoiceReportToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;purchaseInvoiceReportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;warehouseToolStripMenuItem1.Name" xml:space="preserve">
-    <value>warehouseToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;warehouseToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;salesExpensesToolStripMenuItem.Name" xml:space="preserve">
     <value>salesExpensesToolStripMenuItem</value>
   </data>
@@ -2311,11 +1999,179 @@
   <data name="&gt;&gt;branchSummaryToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
-    <value>toolStripSeparator11</value>
+  <data name="&gt;&gt;dailySaleReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>dailySaleReportToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+  <data name="&gt;&gt;dailySaleReportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iCTToolStripMenuItem.Name" xml:space="preserve">
+    <value>iCTToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;iCTToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iCTRequestToolStripMenuItem.Name" xml:space="preserve">
+    <value>iCTRequestToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;iCTRequestToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iCTReleaseToolStripMenuItem.Name" xml:space="preserve">
+    <value>iCTReleaseToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;iCTReleaseToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;accountsToolStripMenuItem.Name" xml:space="preserve">
+    <value>accountsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;accountsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customersToolStripMenuItem.Name" xml:space="preserve">
+    <value>customersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;customersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;createNewCustomerToolStripMenuItem.Name" xml:space="preserve">
+    <value>createNewCustomerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;createNewCustomerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customersSummaryToolStripMenuItem.Name" xml:space="preserve">
+    <value>customersSummaryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;customersSummaryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;suppliersToolStripMenuItem.Name" xml:space="preserve">
+    <value>suppliersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;suppliersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;createNewSupplierToolStripMenuItem.Name" xml:space="preserve">
+    <value>createNewSupplierToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;createNewSupplierToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;suppliersSummaryToolStripMenuItem.Name" xml:space="preserve">
+    <value>suppliersSummaryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;suppliersSummaryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;banksToolStripMenuItem.Name" xml:space="preserve">
+    <value>banksToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;banksToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fINANCEToolStripMenuItem.Name" xml:space="preserve">
+    <value>fINANCEToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fINANCEToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;accountingDashboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>accountingDashboardToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;accountingDashboardToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chartOfAccountsToolStripMenuItem.Name" xml:space="preserve">
+    <value>chartOfAccountsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;chartOfAccountsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fixedAssetsToolStripMenuItem.Name" xml:space="preserve">
+    <value>fixedAssetsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fixedAssetsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;transactionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>transactionsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;transactionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;journalToolStripMenuItem.Name" xml:space="preserve">
+    <value>journalToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;journalToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;journalVoucherListToolStripMenuItem.Name" xml:space="preserve">
+    <value>journalVoucherListToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;journalVoucherListToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupsToolStripMenuItem.Name" xml:space="preserve">
+    <value>groupsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;groupsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;accountsToolStripMenuItem1.Name" xml:space="preserve">
+    <value>accountsToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;accountsToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;reportsToolStripMenuItem3.Name" xml:space="preserve">
+    <value>reportsToolStripMenuItem3</value>
+  </data>
+  <data name="&gt;&gt;reportsToolStripMenuItem3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;generalLedgerToolStripMenuItem.Name" xml:space="preserve">
+    <value>generalLedgerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;generalLedgerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customerARToolStripMenuItem.Name" xml:space="preserve">
+    <value>customerARToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;customerARToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;supplierAPToolStripMenuItem.Name" xml:space="preserve">
+    <value>supplierAPToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;supplierAPToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trialBalanceToolStripMenuItem.Name" xml:space="preserve">
+    <value>trialBalanceToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;trialBalanceToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;incomeStatementToolStripMenuItem.Name" xml:space="preserve">
+    <value>incomeStatementToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;incomeStatementToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;balanceSheetToolStripMenuItem1.Name" xml:space="preserve">
+    <value>balanceSheetToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;balanceSheetToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;journalDaybookToolStripMenuItem.Name" xml:space="preserve">
     <value>journalDaybookToolStripMenuItem</value>
@@ -2333,12 +2189,6 @@
     <value>groupReportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;groupReportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;trialBalanceToolStripMenuItem.Name" xml:space="preserve">
-    <value>trialBalanceToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;trialBalanceToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;profitLossToolStripMenuItem.Name" xml:space="preserve">
@@ -2371,16 +2221,130 @@
   <data name="&gt;&gt;banksReportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;vATDashboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>vATDashboardToolStripMenuItem</value>
+  <data name="&gt;&gt;salesTaxSummaryToolStripMenuItem.Name" xml:space="preserve">
+    <value>salesTaxSummaryToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;vATDashboardToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;salesTaxSummaryToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;purchasesToolStripMenuItem.Name" xml:space="preserve">
-    <value>purchasesToolStripMenuItem</value>
+  <data name="&gt;&gt;taxTrialBalanceToolStripMenuItem.Name" xml:space="preserve">
+    <value>taxTrialBalanceToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;purchasesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;taxTrialBalanceToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;costCentersToolStripMenuItem.Name" xml:space="preserve">
+    <value>costCentersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;costCentersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;setupToolStripMenuItem1.Name" xml:space="preserve">
+    <value>setupToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;setupToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hierarchyToolStripMenuItem.Name" xml:space="preserve">
+    <value>hierarchyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;hierarchyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;budgetToolStripMenuItem.Name" xml:space="preserve">
+    <value>budgetToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;budgetToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;allocationRulesToolStripMenuItem.Name" xml:space="preserve">
+    <value>allocationRulesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;allocationRulesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;departmentalPLToolStripMenuItem.Name" xml:space="preserve">
+    <value>departmentalPLToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;departmentalPLToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;budgetVsActualReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>budgetVsActualReportToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;budgetVsActualReportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cashManagementToolStripMenuItem.Name" xml:space="preserve">
+    <value>cashManagementToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;cashManagementToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cashFlowManagementToolStripMenuItem.Name" xml:space="preserve">
+    <value>cashFlowManagementToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;cashFlowManagementToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cashBookToolStripMenuItem.Name" xml:space="preserve">
+    <value>cashBookToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;cashBookToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bankReconciliationToolStripMenuItem.Name" xml:space="preserve">
+    <value>bankReconciliationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;bankReconciliationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;financialPeriodManagementToolStripMenuItem1.Name" xml:space="preserve">
+    <value>financialPeriodManagementToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;financialPeriodManagementToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;financialYearsToolStripMenuItem.Name" xml:space="preserve">
+    <value>financialYearsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;financialYearsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;financialPeriodManagementToolStripMenuItem.Name" xml:space="preserve">
+    <value>financialPeriodManagementToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;financialPeriodManagementToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;expensesToolStripMenuItem.Name" xml:space="preserve">
+    <value>expensesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;expensesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;createNewExpenseToolStripMenuItem.Name" xml:space="preserve">
+    <value>createNewExpenseToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;createNewExpenseToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;expenseListToolStripMenuItem1.Name" xml:space="preserve">
+    <value>expenseListToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;expenseListToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;expenseDashboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>expenseDashboardToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;expenseDashboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;humanResourceToolStripMenuItem.Name" xml:space="preserve">
@@ -2393,6 +2357,108 @@
     <value>employeesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;employeesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sETTINGSToolStripMenuItem1.Name" xml:space="preserve">
+    <value>sETTINGSToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;sETTINGSToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;configurationToolStripMenuItem.Name" xml:space="preserve">
+    <value>configurationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;configurationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>settingsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;importDataToolStripMenuItem.Name" xml:space="preserve">
+    <value>importDataToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;importDataToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingToolStripMenuItem.Name" xml:space="preserve">
+    <value>settingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;settingToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
+    <value>languageToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;languageToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
+    <value>englishToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;englishToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;arabicToolStripMenuItem.Name" xml:space="preserve">
+    <value>arabicToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;arabicToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;securityToolStripMenuItem.Name" xml:space="preserve">
+    <value>securityToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;securityToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rolePermissionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>rolePermissionsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;rolePermissionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;applicationLogsToolStripMenuItem.Name" xml:space="preserve">
+    <value>applicationLogsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;applicationLogsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;usersToolStripMenuItem.Name" xml:space="preserve">
+    <value>usersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;usersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;permissionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>permissionsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;permissionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userClaimsToolStripMenuItem.Name" xml:space="preserve">
+    <value>userClaimsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;userClaimsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
+    <value>helpToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;shortcutsKeysToolStripMenuItem.Name" xml:space="preserve">
+    <value>shortcutsKeysToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;shortcutsKeysToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>aboutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;windowsMenu.Name" xml:space="preserve">
@@ -2423,24 +2489,6 @@
     <value>CloseAllToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;CloseAllToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
-    <value>helpToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;shortcutsKeysToolStripMenuItem.Name" xml:space="preserve">
-    <value>shortcutsKeysToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;shortcutsKeysToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
-    <value>aboutToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripStatusLabel_user.Name" xml:space="preserve">
@@ -2563,10 +2611,10 @@
   <data name="&gt;&gt;toolStripButtonNewPOS.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cashBookToolStripMenuItem.Name" xml:space="preserve">
-    <value>cashBookToolStripMenuItem</value>
+  <data name="&gt;&gt;vATDashboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>vATDashboardToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;cashBookToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;vATDashboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

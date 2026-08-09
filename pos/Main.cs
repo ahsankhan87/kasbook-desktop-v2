@@ -380,7 +380,7 @@ namespace pos
                 if (newTransactionToolStripMenuItem2 != null) newTransactionToolStripMenuItem2.Tag = Permissions.Sales_Create;
                 if (allTransactionToolStripMenuItem1 != null) allTransactionToolStripMenuItem1.Tag = Permissions.Sales_View;
                 if (salesReturnToolStripMenuItem != null) salesReturnToolStripMenuItem.Tag = Permissions.Sales_Return;
-                if (salesReportToolStripMenuItem1 != null) salesReportToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
+                //if (salesReportToolStripMenuItem1 != null) salesReportToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
                 if (dailySaleReportToolStripMenuItem != null) dailySaleReportToolStripMenuItem.Tag = Permissions.Reports_SalesView;
                 if (newTransactionToolStripMenuItem != null) newTransactionToolStripMenuItem.Tag = Permissions.Purchases_Create;
                 if (allPurchasesToolStripMenuItem != null) allPurchasesToolStripMenuItem.Tag = Permissions.Purchases_View;
@@ -572,10 +572,10 @@ namespace pos
                         break;
                     ////Reports
                     case "Sales":
-                        salesToolStripMenuItem.Enabled = true;
+                        //salesToolStripMenuItem.Enabled = true;
                         break;
                     case "Purchases":
-                        purchasesToolStripMenuItem1.Enabled = true;
+                        //purchasesToolStripMenuItem1.Enabled = true;
                         break;
                     case "Account Report":
                         accountReportToolStripMenuItem.Enabled = true;

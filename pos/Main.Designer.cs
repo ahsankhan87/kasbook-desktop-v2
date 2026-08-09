@@ -31,162 +31,164 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.companySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.countryOriginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionsSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentTermsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.financialYearsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxesDiscountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxesVATToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.discountSchemesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dBBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.arabicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolePermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.permissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userClaimsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.applicationLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.warehousetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.تقريرعنصنفToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editItemDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.اجماليالمخزونToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowStockInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.تقريرعنالمخزونToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quantityOnHandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowStockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.الاصنافالمتحركهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.الاصنافغيرالمتحركهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productLocationTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alternateProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.locationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.taxesVATToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.discountSchemesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stockSuppressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alternateProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productLocationTransferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockCheckAndAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stockSuppressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warehousetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editItemDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowStockInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quantityOnHandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowStockReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.الاصنافالمتحركهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.الاصنافغيرالمتحركهToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.valautionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryValuationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryValuationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchaseSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.allPurchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.purchaseOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allPurchaseOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.reportsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseInvoiceReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.salesReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debitNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.salesSummaryToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.allTransactionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.allQuotationsEstimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.generateZATCACSIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zatcaInvoicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.allQuotationsEstimatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.iCTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iCTRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iCTReleaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountingDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customersSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createNewCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.suppliersSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createNewSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.banksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createNewExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expenseListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.expenseDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.chartOfAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.journalVoucherListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.journalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.generalLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.subLedgersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.customerARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.supplierAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.incomeStatementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.balanceSheetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.financialPeriodManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cashFlowManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bankReconciliationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salesTaxSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.taxTrialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.costCentersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hierarchyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.budgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allocationRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.departmentalPLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.budgetVsActualReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fixedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dailySaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.salesInvoiceReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salesReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.customerWiseSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoryWiseSalesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.byPaymentMethodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchasesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchaseReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchaseInvoiceReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.warehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.salesExpensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.branchSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.dailySaleReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.iCTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCTRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCTReleaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customersSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.banksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fINANCEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountingDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chartOfAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fixedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.journalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.journalVoucherListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.generalLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customerARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supplierAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.incomeStatementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.balanceSheetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.journalDaybookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profitLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.balanceSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReceivableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountPayableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.banksReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vATDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesTaxSummaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxTrialBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.costCentersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hierarchyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.budgetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allocationRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.departmentalPLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.budgetVsActualReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashFlowManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankReconciliationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.financialPeriodManagementToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.financialYearsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.financialPeriodManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.expenseDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.humanResourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sETTINGSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.arabicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolePermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applicationLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.permissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userClaimsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shortcutsKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TileHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shortcutsKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_user = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_username = new System.Windows.Forms.ToolStripStatusLabel();
@@ -209,7 +211,7 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.cashBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vATDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -224,11 +226,12 @@
             this.pOSToolStripMenuItem,
             this.salesToolStripMenuItem1,
             this.accountsToolStripMenuItem,
-            this.reportsToolStripMenuItem,
-            this.purchasesToolStripMenuItem,
+            this.fINANCEToolStripMenuItem,
+            this.expensesToolStripMenuItem,
             this.humanResourceToolStripMenuItem,
-            this.windowsMenu,
-            this.helpToolStripMenuItem});
+            this.sETTINGSToolStripMenuItem1,
+            this.helpToolStripMenuItem,
+            this.windowsMenu});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.MdiWindowListItem = this.windowsMenu;
             this.menuStrip1.Name = "menuStrip1";
@@ -236,33 +239,25 @@
             // masterToolStripMenuItem
             // 
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator10,
-            this.profileToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.countryOriginToolStripMenuItem,
-            this.branchToolStripMenuItem,
-            this.paymentTermsToolStripMenuItem,
-            this.paymentMethodToolStripMenuItem,
-            this.currenciesToolStripMenuItem,
-            this.financialYearsToolStripMenuItem,
+            this.companySetupToolStripMenuItem,
+            this.transactionsSetupToolStripMenuItem,
+            this.taxesDiscountsToolStripMenuItem,
             this.dBBackupToolStripMenuItem,
-            this.settingToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.languageToolStripMenuItem,
-            this.toolStripSeparator8,
-            this.securityToolStripMenuItem,
-            this.applicationLogsToolStripMenuItem,
-            this.usersToolStripMenuItem,
             this.logoutToolStripMenuItem,
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
             this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
             resources.ApplyResources(this.masterToolStripMenuItem, "masterToolStripMenuItem");
             // 
-            // toolStripSeparator10
+            // companySetupToolStripMenuItem
             // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            this.companySetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.profileToolStripMenuItem,
+            this.countryOriginToolStripMenuItem,
+            this.setupToolStripMenuItem,
+            this.branchToolStripMenuItem});
+            this.companySetupToolStripMenuItem.Name = "companySetupToolStripMenuItem";
+            resources.ApplyResources(this.companySetupToolStripMenuItem, "companySetupToolStripMenuItem");
             // 
             // profileToolStripMenuItem
             // 
@@ -270,22 +265,32 @@
             resources.ApplyResources(this.profileToolStripMenuItem, "profileToolStripMenuItem");
             this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
             // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
             // countryOriginToolStripMenuItem
             // 
             this.countryOriginToolStripMenuItem.Name = "countryOriginToolStripMenuItem";
             resources.ApplyResources(this.countryOriginToolStripMenuItem, "countryOriginToolStripMenuItem");
             this.countryOriginToolStripMenuItem.Click += new System.EventHandler(this.countryOriginToolStripMenuItem_Click);
             // 
+            // setupToolStripMenuItem
+            // 
+            this.setupToolStripMenuItem.Name = "setupToolStripMenuItem";
+            resources.ApplyResources(this.setupToolStripMenuItem, "setupToolStripMenuItem");
+            this.setupToolStripMenuItem.Click += new System.EventHandler(this.setupToolStripMenuItem_Click);
+            // 
             // branchToolStripMenuItem
             // 
-            this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
             resources.ApplyResources(this.branchToolStripMenuItem, "branchToolStripMenuItem");
+            this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
             this.branchToolStripMenuItem.Click += new System.EventHandler(this.branchToolStripMenuItem_Click);
+            // 
+            // transactionsSetupToolStripMenuItem
+            // 
+            this.transactionsSetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.paymentTermsToolStripMenuItem,
+            this.paymentMethodToolStripMenuItem,
+            this.currenciesToolStripMenuItem});
+            this.transactionsSetupToolStripMenuItem.Name = "transactionsSetupToolStripMenuItem";
+            resources.ApplyResources(this.transactionsSetupToolStripMenuItem, "transactionsSetupToolStripMenuItem");
             // 
             // paymentTermsToolStripMenuItem
             // 
@@ -305,92 +310,31 @@
             resources.ApplyResources(this.currenciesToolStripMenuItem, "currenciesToolStripMenuItem");
             this.currenciesToolStripMenuItem.Click += new System.EventHandler(this.currenciesToolStripMenuItem_Click);
             // 
-            // financialYearsToolStripMenuItem
+            // taxesDiscountsToolStripMenuItem
             // 
-            this.financialYearsToolStripMenuItem.Name = "financialYearsToolStripMenuItem";
-            resources.ApplyResources(this.financialYearsToolStripMenuItem, "financialYearsToolStripMenuItem");
-            this.financialYearsToolStripMenuItem.Click += new System.EventHandler(this.financialYearsToolStripMenuItem_Click);
+            this.taxesDiscountsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.taxesVATToolStripMenuItem1,
+            this.discountSchemesToolStripMenuItem});
+            this.taxesDiscountsToolStripMenuItem.Name = "taxesDiscountsToolStripMenuItem";
+            resources.ApplyResources(this.taxesDiscountsToolStripMenuItem, "taxesDiscountsToolStripMenuItem");
+            // 
+            // taxesVATToolStripMenuItem1
+            // 
+            this.taxesVATToolStripMenuItem1.Name = "taxesVATToolStripMenuItem1";
+            resources.ApplyResources(this.taxesVATToolStripMenuItem1, "taxesVATToolStripMenuItem1");
+            this.taxesVATToolStripMenuItem1.Click += new System.EventHandler(this.taxesVATToolStripMenuItem1_Click);
+            // 
+            // discountSchemesToolStripMenuItem
+            // 
+            this.discountSchemesToolStripMenuItem.Name = "discountSchemesToolStripMenuItem";
+            resources.ApplyResources(this.discountSchemesToolStripMenuItem, "discountSchemesToolStripMenuItem");
+            this.discountSchemesToolStripMenuItem.Click += new System.EventHandler(this.discountSchemesToolStripMenuItem_Click);
             // 
             // dBBackupToolStripMenuItem
             // 
             this.dBBackupToolStripMenuItem.Name = "dBBackupToolStripMenuItem";
             resources.ApplyResources(this.dBBackupToolStripMenuItem, "dBBackupToolStripMenuItem");
             this.dBBackupToolStripMenuItem.Click += new System.EventHandler(this.dBBackupToolStripMenuItem_Click);
-            // 
-            // settingToolStripMenuItem
-            // 
-            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
-            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
-            // 
-            // languageToolStripMenuItem
-            // 
-            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.englishToolStripMenuItem,
-            this.arabicToolStripMenuItem});
-            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
-            // 
-            // englishToolStripMenuItem
-            // 
-            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
-            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
-            // 
-            // arabicToolStripMenuItem
-            // 
-            this.arabicToolStripMenuItem.Name = "arabicToolStripMenuItem";
-            resources.ApplyResources(this.arabicToolStripMenuItem, "arabicToolStripMenuItem");
-            this.arabicToolStripMenuItem.Click += new System.EventHandler(this.arabicToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // securityToolStripMenuItem
-            // 
-            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolePermissionsToolStripMenuItem,
-            this.permissionsToolStripMenuItem,
-            this.userClaimsToolStripMenuItem});
-            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            resources.ApplyResources(this.securityToolStripMenuItem, "securityToolStripMenuItem");
-            // 
-            // rolePermissionsToolStripMenuItem
-            // 
-            this.rolePermissionsToolStripMenuItem.Name = "rolePermissionsToolStripMenuItem";
-            resources.ApplyResources(this.rolePermissionsToolStripMenuItem, "rolePermissionsToolStripMenuItem");
-            this.rolePermissionsToolStripMenuItem.Click += new System.EventHandler(this.rolePermissionsToolStripMenuItem_Click);
-            // 
-            // permissionsToolStripMenuItem
-            // 
-            resources.ApplyResources(this.permissionsToolStripMenuItem, "permissionsToolStripMenuItem");
-            this.permissionsToolStripMenuItem.Name = "permissionsToolStripMenuItem";
-            this.permissionsToolStripMenuItem.Click += new System.EventHandler(this.permissionsToolStripMenuItem_Click);
-            // 
-            // userClaimsToolStripMenuItem
-            // 
-            this.userClaimsToolStripMenuItem.Name = "userClaimsToolStripMenuItem";
-            resources.ApplyResources(this.userClaimsToolStripMenuItem, "userClaimsToolStripMenuItem");
-            this.userClaimsToolStripMenuItem.Click += new System.EventHandler(this.userClaimsToolStripMenuItem_Click);
-            // 
-            // applicationLogsToolStripMenuItem
-            // 
-            this.applicationLogsToolStripMenuItem.Name = "applicationLogsToolStripMenuItem";
-            resources.ApplyResources(this.applicationLogsToolStripMenuItem, "applicationLogsToolStripMenuItem");
-            this.applicationLogsToolStripMenuItem.Click += new System.EventHandler(this.applicationLogsToolStripMenuItem_Click);
-            // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
-            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
@@ -412,105 +356,19 @@
             // itemsToolStripMenuItem
             // 
             this.itemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.warehousetoolStripMenuItem,
             this.productsServicesToolStripMenuItem,
             this.brandToolStripMenuItem,
             this.categoriesToolStripMenuItem,
-            this.productAdjustmentToolStripMenuItem,
-            this.productLocationTransferToolStripMenuItem,
-            this.labelsToolStripMenuItem,
-            this.alternateProductsToolStripMenuItem,
             this.productGroupsToolStripMenuItem,
             this.locationsToolStripMenuItem,
             this.unitsToolStripMenuItem,
-            this.taxesVATToolStripMenuItem1,
-            this.discountSchemesToolStripMenuItem,
-            this.stockSuppressionToolStripMenuItem,
-            this.stockCheckAndAdjustmentToolStripMenuItem,
-            this.inventoryValuationToolStripMenuItem,
-            this.inventoryValuationSettingsToolStripMenuItem});
+            this.labelsToolStripMenuItem,
+            this.alternateProductsToolStripMenuItem,
+            this.operationsToolStripMenuItem,
+            this.warehousetoolStripMenuItem,
+            this.valautionToolStripMenuItem});
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
             resources.ApplyResources(this.itemsToolStripMenuItem, "itemsToolStripMenuItem");
-            // 
-            // warehousetoolStripMenuItem
-            // 
-            this.warehousetoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4,
-            this.تقريرعنالمخزونToolStripMenuItem,
-            this.الاصنافالمتحركهToolStripMenuItem,
-            this.الاصنافغيرالمتحركهToolStripMenuItem});
-            this.warehousetoolStripMenuItem.Name = "warehousetoolStripMenuItem";
-            resources.ApplyResources(this.warehousetoolStripMenuItem, "warehousetoolStripMenuItem");
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.تقريرعنصنفToolStripMenuItem,
-            this.editItemDataToolStripMenuItem});
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
-            // 
-            // تقريرعنصنفToolStripMenuItem
-            // 
-            this.تقريرعنصنفToolStripMenuItem.Name = "تقريرعنصنفToolStripMenuItem";
-            resources.ApplyResources(this.تقريرعنصنفToolStripMenuItem, "تقريرعنصنفToolStripMenuItem");
-            // 
-            // editItemDataToolStripMenuItem
-            // 
-            this.editItemDataToolStripMenuItem.Name = "editItemDataToolStripMenuItem";
-            resources.ApplyResources(this.editItemDataToolStripMenuItem, "editItemDataToolStripMenuItem");
-            this.editItemDataToolStripMenuItem.Click += new System.EventHandler(this.editItemDataToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.اجماليالمخزونToolStripMenuItem,
-            this.lowStockInventoryToolStripMenuItem});
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
-            // 
-            // اجماليالمخزونToolStripMenuItem
-            // 
-            this.اجماليالمخزونToolStripMenuItem.Name = "اجماليالمخزونToolStripMenuItem";
-            resources.ApplyResources(this.اجماليالمخزونToolStripMenuItem, "اجماليالمخزونToolStripMenuItem");
-            this.اجماليالمخزونToolStripMenuItem.Click += new System.EventHandler(this.اجماليالمخزونToolStripMenuItem_Click);
-            // 
-            // lowStockInventoryToolStripMenuItem
-            // 
-            this.lowStockInventoryToolStripMenuItem.Name = "lowStockInventoryToolStripMenuItem";
-            resources.ApplyResources(this.lowStockInventoryToolStripMenuItem, "lowStockInventoryToolStripMenuItem");
-            this.lowStockInventoryToolStripMenuItem.Click += new System.EventHandler(this.lowStockInventoryToolStripMenuItem_Click);
-            // 
-            // تقريرعنالمخزونToolStripMenuItem
-            // 
-            this.تقريرعنالمخزونToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.quantityOnHandToolStripMenuItem,
-            this.lowStockReportToolStripMenuItem});
-            this.تقريرعنالمخزونToolStripMenuItem.Name = "تقريرعنالمخزونToolStripMenuItem";
-            resources.ApplyResources(this.تقريرعنالمخزونToolStripMenuItem, "تقريرعنالمخزونToolStripMenuItem");
-            // 
-            // quantityOnHandToolStripMenuItem
-            // 
-            this.quantityOnHandToolStripMenuItem.Name = "quantityOnHandToolStripMenuItem";
-            resources.ApplyResources(this.quantityOnHandToolStripMenuItem, "quantityOnHandToolStripMenuItem");
-            this.quantityOnHandToolStripMenuItem.Click += new System.EventHandler(this.quantityOnHandToolStripMenuItem_Click);
-            // 
-            // lowStockReportToolStripMenuItem
-            // 
-            this.lowStockReportToolStripMenuItem.Name = "lowStockReportToolStripMenuItem";
-            resources.ApplyResources(this.lowStockReportToolStripMenuItem, "lowStockReportToolStripMenuItem");
-            this.lowStockReportToolStripMenuItem.Click += new System.EventHandler(this.lowStockReportToolStripMenuItem_Click);
-            // 
-            // الاصنافالمتحركهToolStripMenuItem
-            // 
-            this.الاصنافالمتحركهToolStripMenuItem.Name = "الاصنافالمتحركهToolStripMenuItem";
-            resources.ApplyResources(this.الاصنافالمتحركهToolStripMenuItem, "الاصنافالمتحركهToolStripMenuItem");
-            // 
-            // الاصنافغيرالمتحركهToolStripMenuItem
-            // 
-            this.الاصنافغيرالمتحركهToolStripMenuItem.Name = "الاصنافغيرالمتحركهToolStripMenuItem";
-            resources.ApplyResources(this.الاصنافغيرالمتحركهToolStripMenuItem, "الاصنافغيرالمتحركهToolStripMenuItem");
             // 
             // productsServicesToolStripMenuItem
             // 
@@ -531,30 +389,6 @@
             resources.ApplyResources(this.categoriesToolStripMenuItem, "categoriesToolStripMenuItem");
             this.categoriesToolStripMenuItem.Click += new System.EventHandler(this.categoriesToolStripMenuItem_Click);
             // 
-            // productAdjustmentToolStripMenuItem
-            // 
-            this.productAdjustmentToolStripMenuItem.Name = "productAdjustmentToolStripMenuItem";
-            resources.ApplyResources(this.productAdjustmentToolStripMenuItem, "productAdjustmentToolStripMenuItem");
-            this.productAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.productAdjustmentToolStripMenuItem_Click);
-            // 
-            // productLocationTransferToolStripMenuItem
-            // 
-            this.productLocationTransferToolStripMenuItem.Name = "productLocationTransferToolStripMenuItem";
-            resources.ApplyResources(this.productLocationTransferToolStripMenuItem, "productLocationTransferToolStripMenuItem");
-            this.productLocationTransferToolStripMenuItem.Click += new System.EventHandler(this.editItemDataToolStripMenuItem_Click);
-            // 
-            // labelsToolStripMenuItem
-            // 
-            this.labelsToolStripMenuItem.Name = "labelsToolStripMenuItem";
-            resources.ApplyResources(this.labelsToolStripMenuItem, "labelsToolStripMenuItem");
-            this.labelsToolStripMenuItem.Click += new System.EventHandler(this.labelsToolStripMenuItem_Click);
-            // 
-            // alternateProductsToolStripMenuItem
-            // 
-            this.alternateProductsToolStripMenuItem.Name = "alternateProductsToolStripMenuItem";
-            resources.ApplyResources(this.alternateProductsToolStripMenuItem, "alternateProductsToolStripMenuItem");
-            this.alternateProductsToolStripMenuItem.Click += new System.EventHandler(this.alternateProductsToolStripMenuItem_Click);
-            // 
             // productGroupsToolStripMenuItem
             // 
             this.productGroupsToolStripMenuItem.Name = "productGroupsToolStripMenuItem";
@@ -573,17 +407,45 @@
             resources.ApplyResources(this.unitsToolStripMenuItem, "unitsToolStripMenuItem");
             this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
-            // taxesVATToolStripMenuItem1
+            // labelsToolStripMenuItem
             // 
-            this.taxesVATToolStripMenuItem1.Name = "taxesVATToolStripMenuItem1";
-            resources.ApplyResources(this.taxesVATToolStripMenuItem1, "taxesVATToolStripMenuItem1");
-            this.taxesVATToolStripMenuItem1.Click += new System.EventHandler(this.taxesVATToolStripMenuItem1_Click);
+            this.labelsToolStripMenuItem.Name = "labelsToolStripMenuItem";
+            resources.ApplyResources(this.labelsToolStripMenuItem, "labelsToolStripMenuItem");
+            this.labelsToolStripMenuItem.Click += new System.EventHandler(this.labelsToolStripMenuItem_Click);
             // 
-            // discountSchemesToolStripMenuItem
+            // alternateProductsToolStripMenuItem
             // 
-            this.discountSchemesToolStripMenuItem.Name = "discountSchemesToolStripMenuItem";
-            resources.ApplyResources(this.discountSchemesToolStripMenuItem, "discountSchemesToolStripMenuItem");
-            this.discountSchemesToolStripMenuItem.Click += new System.EventHandler(this.discountSchemesToolStripMenuItem_Click);
+            this.alternateProductsToolStripMenuItem.Name = "alternateProductsToolStripMenuItem";
+            resources.ApplyResources(this.alternateProductsToolStripMenuItem, "alternateProductsToolStripMenuItem");
+            this.alternateProductsToolStripMenuItem.Click += new System.EventHandler(this.alternateProductsToolStripMenuItem_Click);
+            // 
+            // operationsToolStripMenuItem
+            // 
+            this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productAdjustmentToolStripMenuItem,
+            this.productLocationTransferToolStripMenuItem,
+            this.stockCheckAndAdjustmentToolStripMenuItem,
+            this.stockSuppressionToolStripMenuItem});
+            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
+            resources.ApplyResources(this.operationsToolStripMenuItem, "operationsToolStripMenuItem");
+            // 
+            // productAdjustmentToolStripMenuItem
+            // 
+            this.productAdjustmentToolStripMenuItem.Name = "productAdjustmentToolStripMenuItem";
+            resources.ApplyResources(this.productAdjustmentToolStripMenuItem, "productAdjustmentToolStripMenuItem");
+            this.productAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.productAdjustmentToolStripMenuItem_Click);
+            // 
+            // productLocationTransferToolStripMenuItem
+            // 
+            this.productLocationTransferToolStripMenuItem.Name = "productLocationTransferToolStripMenuItem";
+            resources.ApplyResources(this.productLocationTransferToolStripMenuItem, "productLocationTransferToolStripMenuItem");
+            this.productLocationTransferToolStripMenuItem.Click += new System.EventHandler(this.productLocationTransferToolStripMenuItem_Click);
+            // 
+            // stockCheckAndAdjustmentToolStripMenuItem
+            // 
+            this.stockCheckAndAdjustmentToolStripMenuItem.Name = "stockCheckAndAdjustmentToolStripMenuItem";
+            resources.ApplyResources(this.stockCheckAndAdjustmentToolStripMenuItem, "stockCheckAndAdjustmentToolStripMenuItem");
+            this.stockCheckAndAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.stockCheckAndAdjustmentToolStripMenuItem_Click);
             // 
             // stockSuppressionToolStripMenuItem
             // 
@@ -591,11 +453,66 @@
             resources.ApplyResources(this.stockSuppressionToolStripMenuItem, "stockSuppressionToolStripMenuItem");
             this.stockSuppressionToolStripMenuItem.Click += new System.EventHandler(this.stockSupressionToolStripMenuItem_Click);
             // 
-            // stockCheckAndAdjustmentToolStripMenuItem
+            // warehousetoolStripMenuItem
             // 
-            this.stockCheckAndAdjustmentToolStripMenuItem.Name = "stockCheckAndAdjustmentToolStripMenuItem";
-            resources.ApplyResources(this.stockCheckAndAdjustmentToolStripMenuItem, "stockCheckAndAdjustmentToolStripMenuItem");
-            this.stockCheckAndAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.stockCheckAndAdjustmentToolStripMenuItem_Click);
+            this.warehousetoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editItemDataToolStripMenuItem,
+            this.lowStockInventoryToolStripMenuItem,
+            this.quantityOnHandToolStripMenuItem,
+            this.lowStockReportToolStripMenuItem,
+            this.warehouseToolStripMenuItem1,
+            this.الاصنافالمتحركهToolStripMenuItem,
+            this.الاصنافغيرالمتحركهToolStripMenuItem});
+            this.warehousetoolStripMenuItem.Name = "warehousetoolStripMenuItem";
+            resources.ApplyResources(this.warehousetoolStripMenuItem, "warehousetoolStripMenuItem");
+            // 
+            // editItemDataToolStripMenuItem
+            // 
+            this.editItemDataToolStripMenuItem.Name = "editItemDataToolStripMenuItem";
+            resources.ApplyResources(this.editItemDataToolStripMenuItem, "editItemDataToolStripMenuItem");
+            this.editItemDataToolStripMenuItem.Click += new System.EventHandler(this.editItemDataToolStripMenuItem_Click);
+            // 
+            // lowStockInventoryToolStripMenuItem
+            // 
+            this.lowStockInventoryToolStripMenuItem.Name = "lowStockInventoryToolStripMenuItem";
+            resources.ApplyResources(this.lowStockInventoryToolStripMenuItem, "lowStockInventoryToolStripMenuItem");
+            this.lowStockInventoryToolStripMenuItem.Click += new System.EventHandler(this.lowStockInventoryToolStripMenuItem_Click);
+            // 
+            // quantityOnHandToolStripMenuItem
+            // 
+            this.quantityOnHandToolStripMenuItem.Name = "quantityOnHandToolStripMenuItem";
+            resources.ApplyResources(this.quantityOnHandToolStripMenuItem, "quantityOnHandToolStripMenuItem");
+            this.quantityOnHandToolStripMenuItem.Click += new System.EventHandler(this.quantityOnHandToolStripMenuItem_Click);
+            // 
+            // lowStockReportToolStripMenuItem
+            // 
+            this.lowStockReportToolStripMenuItem.Name = "lowStockReportToolStripMenuItem";
+            resources.ApplyResources(this.lowStockReportToolStripMenuItem, "lowStockReportToolStripMenuItem");
+            this.lowStockReportToolStripMenuItem.Click += new System.EventHandler(this.lowStockReportToolStripMenuItem_Click);
+            // 
+            // warehouseToolStripMenuItem1
+            // 
+            this.warehouseToolStripMenuItem1.Name = "warehouseToolStripMenuItem1";
+            resources.ApplyResources(this.warehouseToolStripMenuItem1, "warehouseToolStripMenuItem1");
+            this.warehouseToolStripMenuItem1.Click += new System.EventHandler(this.warehouseToolStripMenuItem1_Click);
+            // 
+            // الاصنافالمتحركهToolStripMenuItem
+            // 
+            this.الاصنافالمتحركهToolStripMenuItem.Name = "الاصنافالمتحركهToolStripMenuItem";
+            resources.ApplyResources(this.الاصنافالمتحركهToolStripMenuItem, "الاصنافالمتحركهToolStripMenuItem");
+            // 
+            // الاصنافغيرالمتحركهToolStripMenuItem
+            // 
+            this.الاصنافغيرالمتحركهToolStripMenuItem.Name = "الاصنافغيرالمتحركهToolStripMenuItem";
+            resources.ApplyResources(this.الاصنافغيرالمتحركهToolStripMenuItem, "الاصنافغيرالمتحركهToolStripMenuItem");
+            // 
+            // valautionToolStripMenuItem
+            // 
+            this.valautionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inventoryValuationToolStripMenuItem,
+            this.inventoryValuationSettingsToolStripMenuItem});
+            this.valautionToolStripMenuItem.Name = "valautionToolStripMenuItem";
+            resources.ApplyResources(this.valautionToolStripMenuItem, "valautionToolStripMenuItem");
             // 
             // inventoryValuationToolStripMenuItem
             // 
@@ -614,11 +531,14 @@
             this.pOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTransactionToolStripMenuItem,
             this.purchaseReturnToolStripMenuItem,
-            this.purchaseSummaryToolStripMenuItem,
+            this.toolStripSeparator14,
             this.allPurchasesToolStripMenuItem,
+            this.purchaseSummaryToolStripMenuItem,
             this.toolStripSeparator12,
             this.purchaseOrdersToolStripMenuItem,
-            this.allPurchaseOrdersToolStripMenuItem});
+            this.allPurchaseOrdersToolStripMenuItem,
+            this.toolStripSeparator15,
+            this.reportsToolStripMenuItem2});
             this.pOSToolStripMenuItem.Name = "pOSToolStripMenuItem";
             resources.ApplyResources(this.pOSToolStripMenuItem, "pOSToolStripMenuItem");
             // 
@@ -634,17 +554,22 @@
             resources.ApplyResources(this.purchaseReturnToolStripMenuItem, "purchaseReturnToolStripMenuItem");
             this.purchaseReturnToolStripMenuItem.Click += new System.EventHandler(this.purchaseReturnToolStripMenuItem_Click);
             // 
-            // purchaseSummaryToolStripMenuItem
+            // toolStripSeparator14
             // 
-            this.purchaseSummaryToolStripMenuItem.Name = "purchaseSummaryToolStripMenuItem";
-            resources.ApplyResources(this.purchaseSummaryToolStripMenuItem, "purchaseSummaryToolStripMenuItem");
-            this.purchaseSummaryToolStripMenuItem.Click += new System.EventHandler(this.purchaseSummaryToolStripMenuItem_Click);
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
             // 
             // allPurchasesToolStripMenuItem
             // 
             this.allPurchasesToolStripMenuItem.Name = "allPurchasesToolStripMenuItem";
             resources.ApplyResources(this.allPurchasesToolStripMenuItem, "allPurchasesToolStripMenuItem");
             this.allPurchasesToolStripMenuItem.Click += new System.EventHandler(this.allPurchasesToolStripMenuItem_Click);
+            // 
+            // purchaseSummaryToolStripMenuItem
+            // 
+            this.purchaseSummaryToolStripMenuItem.Name = "purchaseSummaryToolStripMenuItem";
+            resources.ApplyResources(this.purchaseSummaryToolStripMenuItem, "purchaseSummaryToolStripMenuItem");
+            this.purchaseSummaryToolStripMenuItem.Click += new System.EventHandler(this.purchaseSummaryToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
@@ -663,19 +588,46 @@
             resources.ApplyResources(this.allPurchaseOrdersToolStripMenuItem, "allPurchaseOrdersToolStripMenuItem");
             this.allPurchaseOrdersToolStripMenuItem.Click += new System.EventHandler(this.allPurchaseOrdersToolStripMenuItem_Click);
             // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
+            // 
+            // reportsToolStripMenuItem2
+            // 
+            this.reportsToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.purchaseInvoiceReportToolStripMenuItem,
+            this.purchaseReportToolStripMenuItem});
+            this.reportsToolStripMenuItem2.Name = "reportsToolStripMenuItem2";
+            resources.ApplyResources(this.reportsToolStripMenuItem2, "reportsToolStripMenuItem2");
+            // 
+            // purchaseInvoiceReportToolStripMenuItem
+            // 
+            this.purchaseInvoiceReportToolStripMenuItem.Name = "purchaseInvoiceReportToolStripMenuItem";
+            resources.ApplyResources(this.purchaseInvoiceReportToolStripMenuItem, "purchaseInvoiceReportToolStripMenuItem");
+            this.purchaseInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseInvoiceReportToolStripMenuItem_Click);
+            // 
+            // purchaseReportToolStripMenuItem
+            // 
+            this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
+            resources.ApplyResources(this.purchaseReportToolStripMenuItem, "purchaseReportToolStripMenuItem");
+            this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
+            // 
             // salesToolStripMenuItem1
             // 
             this.salesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newTransactionToolStripMenuItem2,
             this.salesReturnToolStripMenuItem,
             this.debitNoteToolStripMenuItem,
+            this.toolStripSeparator13,
             this.salesSummaryToolStripMenuItem1,
             this.allTransactionToolStripMenuItem1,
+            this.allQuotationsEstimatesToolStripMenuItem,
             this.toolStripSeparator1,
             this.generateZATCACSIDToolStripMenuItem,
             this.zatcaInvoicesToolStripMenuItem,
             this.toolStripSeparator2,
-            this.allQuotationsEstimatesToolStripMenuItem,
+            this.reportsToolStripMenuItem1,
             this.toolStripSeparator3,
             this.iCTToolStripMenuItem,
             this.iCTRequestToolStripMenuItem,
@@ -701,6 +653,11 @@
             resources.ApplyResources(this.debitNoteToolStripMenuItem, "debitNoteToolStripMenuItem");
             this.debitNoteToolStripMenuItem.Click += new System.EventHandler(this.debitNoteToolStripMenuItem_Click);
             // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
+            // 
             // salesSummaryToolStripMenuItem1
             // 
             this.salesSummaryToolStripMenuItem1.Name = "salesSummaryToolStripMenuItem1";
@@ -712,6 +669,12 @@
             this.allTransactionToolStripMenuItem1.Name = "allTransactionToolStripMenuItem1";
             resources.ApplyResources(this.allTransactionToolStripMenuItem1, "allTransactionToolStripMenuItem1");
             this.allTransactionToolStripMenuItem1.Click += new System.EventHandler(this.allTransactionToolStripMenuItem1_Click);
+            // 
+            // allQuotationsEstimatesToolStripMenuItem
+            // 
+            this.allQuotationsEstimatesToolStripMenuItem.Name = "allQuotationsEstimatesToolStripMenuItem";
+            resources.ApplyResources(this.allQuotationsEstimatesToolStripMenuItem, "allQuotationsEstimatesToolStripMenuItem");
+            this.allQuotationsEstimatesToolStripMenuItem.Click += new System.EventHandler(this.allQuotationsEstimatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -735,362 +698,21 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
-            // allQuotationsEstimatesToolStripMenuItem
+            // reportsToolStripMenuItem1
             // 
-            this.allQuotationsEstimatesToolStripMenuItem.Name = "allQuotationsEstimatesToolStripMenuItem";
-            resources.ApplyResources(this.allQuotationsEstimatesToolStripMenuItem, "allQuotationsEstimatesToolStripMenuItem");
-            this.allQuotationsEstimatesToolStripMenuItem.Click += new System.EventHandler(this.allQuotationsEstimatesToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // iCTToolStripMenuItem
-            // 
-            this.iCTToolStripMenuItem.Name = "iCTToolStripMenuItem";
-            resources.ApplyResources(this.iCTToolStripMenuItem, "iCTToolStripMenuItem");
-            this.iCTToolStripMenuItem.Click += new System.EventHandler(this.iCTToolStripMenuItem_Click);
-            // 
-            // iCTRequestToolStripMenuItem
-            // 
-            this.iCTRequestToolStripMenuItem.Name = "iCTRequestToolStripMenuItem";
-            resources.ApplyResources(this.iCTRequestToolStripMenuItem, "iCTRequestToolStripMenuItem");
-            this.iCTRequestToolStripMenuItem.Click += new System.EventHandler(this.iCTRequestToolStripMenuItem_Click);
-            // 
-            // iCTReleaseToolStripMenuItem
-            // 
-            this.iCTReleaseToolStripMenuItem.Name = "iCTReleaseToolStripMenuItem";
-            resources.ApplyResources(this.iCTReleaseToolStripMenuItem, "iCTReleaseToolStripMenuItem");
-            this.iCTReleaseToolStripMenuItem.Click += new System.EventHandler(this.iCTReleaseToolStripMenuItem_Click);
-            // 
-            // accountsToolStripMenuItem
-            // 
-            this.accountsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.accountingDashboardToolStripMenuItem,
-            this.customersToolStripMenuItem,
-            this.suppliersToolStripMenuItem,
-            this.banksToolStripMenuItem,
-            this.expensesToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.chartOfAccountsToolStripMenuItem,
-            this.journalVoucherListToolStripMenuItem,
-            this.journalToolStripMenuItem,
-            this.groupsToolStripMenuItem,
-            this.accountsToolStripMenuItem1,
-            this.toolStripSeparator7,
-            this.generalLedgerToolStripMenuItem,
-            this.subLedgersToolStripMenuItem1,
-            this.incomeStatementToolStripMenuItem,
-            this.balanceSheetToolStripMenuItem1,
-            this.financialPeriodManagementToolStripMenuItem,
-            this.cashFlowManagementToolStripMenuItem,
-            this.bankReconciliationToolStripMenuItem,
-            this.salesTaxSummaryToolStripMenuItem,
-            this.taxTrialBalanceToolStripMenuItem,
-            this.costCentersToolStripMenuItem,
-            this.settingsToolStripMenuItem,
-            this.importDataToolStripMenuItem,
-            this.cashBookToolStripMenuItem,
-            this.fixedAssetsToolStripMenuItem});
-            this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
-            resources.ApplyResources(this.accountsToolStripMenuItem, "accountsToolStripMenuItem");
-            // 
-            // accountingDashboardToolStripMenuItem
-            // 
-            this.accountingDashboardToolStripMenuItem.Name = "accountingDashboardToolStripMenuItem";
-            resources.ApplyResources(this.accountingDashboardToolStripMenuItem, "accountingDashboardToolStripMenuItem");
-            this.accountingDashboardToolStripMenuItem.Click += new System.EventHandler(this.accountingDashboardToolStripMenuItem_Click);
-            // 
-            // customersToolStripMenuItem
-            // 
-            this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customersSummaryToolStripMenuItem,
-            this.createNewCustomerToolStripMenuItem});
-            this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
-            resources.ApplyResources(this.customersToolStripMenuItem, "customersToolStripMenuItem");
-            // 
-            // customersSummaryToolStripMenuItem
-            // 
-            this.customersSummaryToolStripMenuItem.Name = "customersSummaryToolStripMenuItem";
-            resources.ApplyResources(this.customersSummaryToolStripMenuItem, "customersSummaryToolStripMenuItem");
-            this.customersSummaryToolStripMenuItem.Click += new System.EventHandler(this.customersSummaryToolStripMenuItem_Click);
-            // 
-            // createNewCustomerToolStripMenuItem
-            // 
-            this.createNewCustomerToolStripMenuItem.Name = "createNewCustomerToolStripMenuItem";
-            resources.ApplyResources(this.createNewCustomerToolStripMenuItem, "createNewCustomerToolStripMenuItem");
-            this.createNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
-            // 
-            // suppliersToolStripMenuItem
-            // 
-            this.suppliersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.suppliersSummaryToolStripMenuItem,
-            this.createNewSupplierToolStripMenuItem});
-            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
-            resources.ApplyResources(this.suppliersToolStripMenuItem, "suppliersToolStripMenuItem");
-            this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
-            // 
-            // suppliersSummaryToolStripMenuItem
-            // 
-            this.suppliersSummaryToolStripMenuItem.Name = "suppliersSummaryToolStripMenuItem";
-            resources.ApplyResources(this.suppliersSummaryToolStripMenuItem, "suppliersSummaryToolStripMenuItem");
-            this.suppliersSummaryToolStripMenuItem.Click += new System.EventHandler(this.suppliersSummaryToolStripMenuItem_Click);
-            // 
-            // createNewSupplierToolStripMenuItem
-            // 
-            this.createNewSupplierToolStripMenuItem.Name = "createNewSupplierToolStripMenuItem";
-            resources.ApplyResources(this.createNewSupplierToolStripMenuItem, "createNewSupplierToolStripMenuItem");
-            this.createNewSupplierToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
-            // 
-            // banksToolStripMenuItem
-            // 
-            this.banksToolStripMenuItem.Name = "banksToolStripMenuItem";
-            resources.ApplyResources(this.banksToolStripMenuItem, "banksToolStripMenuItem");
-            this.banksToolStripMenuItem.Click += new System.EventHandler(this.banksToolStripMenuItem_Click);
-            // 
-            // expensesToolStripMenuItem
-            // 
-            this.expensesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createNewExpenseToolStripMenuItem,
-            this.expenseListToolStripMenuItem1,
-            this.expenseDashboardToolStripMenuItem});
-            this.expensesToolStripMenuItem.Name = "expensesToolStripMenuItem";
-            resources.ApplyResources(this.expensesToolStripMenuItem, "expensesToolStripMenuItem");
-            // 
-            // createNewExpenseToolStripMenuItem
-            // 
-            this.createNewExpenseToolStripMenuItem.Name = "createNewExpenseToolStripMenuItem";
-            resources.ApplyResources(this.createNewExpenseToolStripMenuItem, "createNewExpenseToolStripMenuItem");
-            this.createNewExpenseToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
-            // 
-            // expenseListToolStripMenuItem1
-            // 
-            this.expenseListToolStripMenuItem1.Name = "expenseListToolStripMenuItem1";
-            resources.ApplyResources(this.expenseListToolStripMenuItem1, "expenseListToolStripMenuItem1");
-            this.expenseListToolStripMenuItem1.Click += new System.EventHandler(this.expenseListToolStripMenuItem_Click);
-            // 
-            // expenseDashboardToolStripMenuItem
-            // 
-            this.expenseDashboardToolStripMenuItem.Name = "expenseDashboardToolStripMenuItem";
-            resources.ApplyResources(this.expenseDashboardToolStripMenuItem, "expenseDashboardToolStripMenuItem");
-            this.expenseDashboardToolStripMenuItem.Click += new System.EventHandler(this.expenseDashboardToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // chartOfAccountsToolStripMenuItem
-            // 
-            this.chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
-            resources.ApplyResources(this.chartOfAccountsToolStripMenuItem, "chartOfAccountsToolStripMenuItem");
-            this.chartOfAccountsToolStripMenuItem.Click += new System.EventHandler(this.chartOfAccountsToolStripMenuItem_Click);
-            // 
-            // journalVoucherListToolStripMenuItem
-            // 
-            this.journalVoucherListToolStripMenuItem.Name = "journalVoucherListToolStripMenuItem";
-            resources.ApplyResources(this.journalVoucherListToolStripMenuItem, "journalVoucherListToolStripMenuItem");
-            this.journalVoucherListToolStripMenuItem.Click += new System.EventHandler(this.journalVoucherListToolStripMenuItem_Click);
-            // 
-            // journalToolStripMenuItem
-            // 
-            this.journalToolStripMenuItem.Name = "journalToolStripMenuItem";
-            resources.ApplyResources(this.journalToolStripMenuItem, "journalToolStripMenuItem");
-            this.journalToolStripMenuItem.Click += new System.EventHandler(this.journalToolStripMenuItem_Click);
-            // 
-            // groupsToolStripMenuItem
-            // 
-            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
-            resources.ApplyResources(this.groupsToolStripMenuItem, "groupsToolStripMenuItem");
-            this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
-            // 
-            // accountsToolStripMenuItem1
-            // 
-            this.accountsToolStripMenuItem1.Name = "accountsToolStripMenuItem1";
-            resources.ApplyResources(this.accountsToolStripMenuItem1, "accountsToolStripMenuItem1");
-            this.accountsToolStripMenuItem1.Click += new System.EventHandler(this.accountsToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            // 
-            // generalLedgerToolStripMenuItem
-            // 
-            this.generalLedgerToolStripMenuItem.Name = "generalLedgerToolStripMenuItem";
-            resources.ApplyResources(this.generalLedgerToolStripMenuItem, "generalLedgerToolStripMenuItem");
-            this.generalLedgerToolStripMenuItem.Click += new System.EventHandler(this.generalLedgerToolStripMenuItem_Click);
-            // 
-            // subLedgersToolStripMenuItem1
-            // 
-            this.subLedgersToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customerARToolStripMenuItem,
-            this.supplierAPToolStripMenuItem});
-            this.subLedgersToolStripMenuItem1.Name = "subLedgersToolStripMenuItem1";
-            resources.ApplyResources(this.subLedgersToolStripMenuItem1, "subLedgersToolStripMenuItem1");
-            // 
-            // customerARToolStripMenuItem
-            // 
-            this.customerARToolStripMenuItem.Name = "customerARToolStripMenuItem";
-            resources.ApplyResources(this.customerARToolStripMenuItem, "customerARToolStripMenuItem");
-            this.customerARToolStripMenuItem.Click += new System.EventHandler(this.customerARToolStripMenuItem_Click);
-            // 
-            // supplierAPToolStripMenuItem
-            // 
-            this.supplierAPToolStripMenuItem.Name = "supplierAPToolStripMenuItem";
-            resources.ApplyResources(this.supplierAPToolStripMenuItem, "supplierAPToolStripMenuItem");
-            this.supplierAPToolStripMenuItem.Click += new System.EventHandler(this.supplierAPToolStripMenuItem_Click);
-            // 
-            // incomeStatementToolStripMenuItem
-            // 
-            this.incomeStatementToolStripMenuItem.Name = "incomeStatementToolStripMenuItem";
-            resources.ApplyResources(this.incomeStatementToolStripMenuItem, "incomeStatementToolStripMenuItem");
-            this.incomeStatementToolStripMenuItem.Click += new System.EventHandler(this.incomeStatementToolStripMenuItem_Click);
-            // 
-            // balanceSheetToolStripMenuItem1
-            // 
-            this.balanceSheetToolStripMenuItem1.Name = "balanceSheetToolStripMenuItem1";
-            resources.ApplyResources(this.balanceSheetToolStripMenuItem1, "balanceSheetToolStripMenuItem1");
-            this.balanceSheetToolStripMenuItem1.Click += new System.EventHandler(this.balanceSheetToolStripMenuItem1_Click);
-            // 
-            // financialPeriodManagementToolStripMenuItem
-            // 
-            this.financialPeriodManagementToolStripMenuItem.Name = "financialPeriodManagementToolStripMenuItem";
-            resources.ApplyResources(this.financialPeriodManagementToolStripMenuItem, "financialPeriodManagementToolStripMenuItem");
-            this.financialPeriodManagementToolStripMenuItem.Click += new System.EventHandler(this.financialPeriodManagementToolStripMenuItem_Click);
-            // 
-            // cashFlowManagementToolStripMenuItem
-            // 
-            this.cashFlowManagementToolStripMenuItem.Name = "cashFlowManagementToolStripMenuItem";
-            resources.ApplyResources(this.cashFlowManagementToolStripMenuItem, "cashFlowManagementToolStripMenuItem");
-            this.cashFlowManagementToolStripMenuItem.Click += new System.EventHandler(this.cashFlowManagementToolStripMenuItem_Click);
-            // 
-            // bankReconciliationToolStripMenuItem
-            // 
-            this.bankReconciliationToolStripMenuItem.Name = "bankReconciliationToolStripMenuItem";
-            resources.ApplyResources(this.bankReconciliationToolStripMenuItem, "bankReconciliationToolStripMenuItem");
-            this.bankReconciliationToolStripMenuItem.Click += new System.EventHandler(this.bankReconciliationToolStripMenuItem_Click);
-            // 
-            // salesTaxSummaryToolStripMenuItem
-            // 
-            this.salesTaxSummaryToolStripMenuItem.Name = "salesTaxSummaryToolStripMenuItem";
-            resources.ApplyResources(this.salesTaxSummaryToolStripMenuItem, "salesTaxSummaryToolStripMenuItem");
-            this.salesTaxSummaryToolStripMenuItem.Click += new System.EventHandler(this.salesTaxSummaryToolStripMenuItem_Click);
-            // 
-            // taxTrialBalanceToolStripMenuItem
-            // 
-            this.taxTrialBalanceToolStripMenuItem.Name = "taxTrialBalanceToolStripMenuItem";
-            resources.ApplyResources(this.taxTrialBalanceToolStripMenuItem, "taxTrialBalanceToolStripMenuItem");
-            this.taxTrialBalanceToolStripMenuItem.Click += new System.EventHandler(this.taxTrialBalanceToolStripMenuItem_Click);
-            // 
-            // costCentersToolStripMenuItem
-            // 
-            this.costCentersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setupToolStripMenuItem,
-            this.hierarchyToolStripMenuItem,
-            this.budgetToolStripMenuItem,
-            this.allocationRulesToolStripMenuItem,
-            this.departmentalPLToolStripMenuItem,
-            this.budgetVsActualReportToolStripMenuItem});
-            this.costCentersToolStripMenuItem.Name = "costCentersToolStripMenuItem";
-            resources.ApplyResources(this.costCentersToolStripMenuItem, "costCentersToolStripMenuItem");
-            // 
-            // setupToolStripMenuItem
-            // 
-            this.setupToolStripMenuItem.Name = "setupToolStripMenuItem";
-            resources.ApplyResources(this.setupToolStripMenuItem, "setupToolStripMenuItem");
-            this.setupToolStripMenuItem.Click += new System.EventHandler(this.setupToolStripMenuItem_Click);
-            // 
-            // hierarchyToolStripMenuItem
-            // 
-            this.hierarchyToolStripMenuItem.Name = "hierarchyToolStripMenuItem";
-            resources.ApplyResources(this.hierarchyToolStripMenuItem, "hierarchyToolStripMenuItem");
-            this.hierarchyToolStripMenuItem.Click += new System.EventHandler(this.hierarchyToolStripMenuItem_Click);
-            // 
-            // budgetToolStripMenuItem
-            // 
-            this.budgetToolStripMenuItem.Name = "budgetToolStripMenuItem";
-            resources.ApplyResources(this.budgetToolStripMenuItem, "budgetToolStripMenuItem");
-            this.budgetToolStripMenuItem.Click += new System.EventHandler(this.budgetToolStripMenuItem_Click);
-            // 
-            // allocationRulesToolStripMenuItem
-            // 
-            this.allocationRulesToolStripMenuItem.Name = "allocationRulesToolStripMenuItem";
-            resources.ApplyResources(this.allocationRulesToolStripMenuItem, "allocationRulesToolStripMenuItem");
-            this.allocationRulesToolStripMenuItem.Click += new System.EventHandler(this.allocationRulesToolStripMenuItem_Click);
-            // 
-            // departmentalPLToolStripMenuItem
-            // 
-            this.departmentalPLToolStripMenuItem.Name = "departmentalPLToolStripMenuItem";
-            resources.ApplyResources(this.departmentalPLToolStripMenuItem, "departmentalPLToolStripMenuItem");
-            this.departmentalPLToolStripMenuItem.Click += new System.EventHandler(this.departmentalPLToolStripMenuItem_Click);
-            // 
-            // budgetVsActualReportToolStripMenuItem
-            // 
-            this.budgetVsActualReportToolStripMenuItem.Name = "budgetVsActualReportToolStripMenuItem";
-            resources.ApplyResources(this.budgetVsActualReportToolStripMenuItem, "budgetVsActualReportToolStripMenuItem");
-            this.budgetVsActualReportToolStripMenuItem.Click += new System.EventHandler(this.budgetVsActualReportToolStripMenuItem_Click);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
-            // importDataToolStripMenuItem
-            // 
-            this.importDataToolStripMenuItem.Name = "importDataToolStripMenuItem";
-            resources.ApplyResources(this.importDataToolStripMenuItem, "importDataToolStripMenuItem");
-            this.importDataToolStripMenuItem.Click += new System.EventHandler(this.importDataToolStripMenuItem_Click);
-            // 
-            // fixedAssetsToolStripMenuItem
-            // 
-            this.fixedAssetsToolStripMenuItem.Name = "fixedAssetsToolStripMenuItem";
-            resources.ApplyResources(this.fixedAssetsToolStripMenuItem, "fixedAssetsToolStripMenuItem");
-            this.fixedAssetsToolStripMenuItem.Click += new System.EventHandler(this.fixedAssetsToolStripMenuItem_Click);
-            // 
-            // reportsToolStripMenuItem
-            // 
-            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salesToolStripMenuItem,
-            this.purchasesToolStripMenuItem1,
-            this.warehouseToolStripMenuItem1,
-            this.salesExpensesToolStripMenuItem,
-            this.branchSummaryToolStripMenuItem,
-            this.toolStripSeparator11,
-            this.journalDaybookToolStripMenuItem,
-            this.accountReportToolStripMenuItem,
-            this.groupReportToolStripMenuItem,
-            this.trialBalanceToolStripMenuItem,
-            this.profitLossToolStripMenuItem,
-            this.balanceSheetToolStripMenuItem,
-            this.accountReceivableToolStripMenuItem,
-            this.accountPayableToolStripMenuItem,
-            this.banksReportToolStripMenuItem,
-            this.vATDashboardToolStripMenuItem});
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            resources.ApplyResources(this.reportsToolStripMenuItem, "reportsToolStripMenuItem");
-            // 
-            // salesToolStripMenuItem
-            // 
-            this.salesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dailySaleReportToolStripMenuItem,
+            this.reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salesInvoiceReportToolStripMenuItem,
-            this.salesReportToolStripMenuItem1,
+            this.toolStripMenuItem2,
             this.customerWiseSalesReportToolStripMenuItem,
             this.productWiseSalesSummaryToolStripMenuItem,
             this.categoryWiseSalesSummaryToolStripMenuItem,
             this.byPaymentMethodToolStripMenuItem,
-            this.salesSummaryToolStripMenuItem});
-            this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            resources.ApplyResources(this.salesToolStripMenuItem, "salesToolStripMenuItem");
-            // 
-            // dailySaleReportToolStripMenuItem
-            // 
-            resources.ApplyResources(this.dailySaleReportToolStripMenuItem, "dailySaleReportToolStripMenuItem");
-            this.dailySaleReportToolStripMenuItem.Name = "dailySaleReportToolStripMenuItem";
-            this.dailySaleReportToolStripMenuItem.Click += new System.EventHandler(this.dailySaleReportToolStripMenuItem_Click);
+            this.salesSummaryToolStripMenuItem,
+            this.salesExpensesToolStripMenuItem,
+            this.branchSummaryToolStripMenuItem,
+            this.dailySaleReportToolStripMenuItem});
+            this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
+            resources.ApplyResources(this.reportsToolStripMenuItem1, "reportsToolStripMenuItem1");
             // 
             // salesInvoiceReportToolStripMenuItem
             // 
@@ -1098,11 +720,11 @@
             resources.ApplyResources(this.salesInvoiceReportToolStripMenuItem, "salesInvoiceReportToolStripMenuItem");
             this.salesInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.salesInvoiceReportToolStripMenuItem_Click);
             // 
-            // salesReportToolStripMenuItem1
+            // toolStripMenuItem2
             // 
-            this.salesReportToolStripMenuItem1.Name = "salesReportToolStripMenuItem1";
-            resources.ApplyResources(this.salesReportToolStripMenuItem1, "salesReportToolStripMenuItem1");
-            this.salesReportToolStripMenuItem1.Click += new System.EventHandler(this.salesReportToolStripMenuItem1_Click);
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.salesReportToolStripMenuItem1_Click);
             // 
             // customerWiseSalesReportToolStripMenuItem
             // 
@@ -1134,32 +756,6 @@
             resources.ApplyResources(this.salesSummaryToolStripMenuItem, "salesSummaryToolStripMenuItem");
             this.salesSummaryToolStripMenuItem.Click += new System.EventHandler(this.salesSummaryToolStripMenuItem_Click);
             // 
-            // purchasesToolStripMenuItem1
-            // 
-            this.purchasesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.purchaseReportToolStripMenuItem,
-            this.purchaseInvoiceReportToolStripMenuItem});
-            this.purchasesToolStripMenuItem1.Name = "purchasesToolStripMenuItem1";
-            resources.ApplyResources(this.purchasesToolStripMenuItem1, "purchasesToolStripMenuItem1");
-            // 
-            // purchaseReportToolStripMenuItem
-            // 
-            this.purchaseReportToolStripMenuItem.Name = "purchaseReportToolStripMenuItem";
-            resources.ApplyResources(this.purchaseReportToolStripMenuItem, "purchaseReportToolStripMenuItem");
-            this.purchaseReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseReportToolStripMenuItem_Click);
-            // 
-            // purchaseInvoiceReportToolStripMenuItem
-            // 
-            this.purchaseInvoiceReportToolStripMenuItem.Name = "purchaseInvoiceReportToolStripMenuItem";
-            resources.ApplyResources(this.purchaseInvoiceReportToolStripMenuItem, "purchaseInvoiceReportToolStripMenuItem");
-            this.purchaseInvoiceReportToolStripMenuItem.Click += new System.EventHandler(this.purchaseInvoiceReportToolStripMenuItem_Click);
-            // 
-            // warehouseToolStripMenuItem1
-            // 
-            this.warehouseToolStripMenuItem1.Name = "warehouseToolStripMenuItem1";
-            resources.ApplyResources(this.warehouseToolStripMenuItem1, "warehouseToolStripMenuItem1");
-            this.warehouseToolStripMenuItem1.Click += new System.EventHandler(this.warehouseToolStripMenuItem1_Click);
-            // 
             // salesExpensesToolStripMenuItem
             // 
             this.salesExpensesToolStripMenuItem.Name = "salesExpensesToolStripMenuItem";
@@ -1172,10 +768,214 @@
             this.branchSummaryToolStripMenuItem.Name = "branchSummaryToolStripMenuItem";
             this.branchSummaryToolStripMenuItem.Click += new System.EventHandler(this.branchSummaryToolStripMenuItem_Click);
             // 
-            // toolStripSeparator11
+            // dailySaleReportToolStripMenuItem
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            resources.ApplyResources(this.dailySaleReportToolStripMenuItem, "dailySaleReportToolStripMenuItem");
+            this.dailySaleReportToolStripMenuItem.Name = "dailySaleReportToolStripMenuItem";
+            this.dailySaleReportToolStripMenuItem.Click += new System.EventHandler(this.dailySaleReportToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // iCTToolStripMenuItem
+            // 
+            this.iCTToolStripMenuItem.Name = "iCTToolStripMenuItem";
+            resources.ApplyResources(this.iCTToolStripMenuItem, "iCTToolStripMenuItem");
+            this.iCTToolStripMenuItem.Click += new System.EventHandler(this.iCTToolStripMenuItem_Click);
+            // 
+            // iCTRequestToolStripMenuItem
+            // 
+            this.iCTRequestToolStripMenuItem.Name = "iCTRequestToolStripMenuItem";
+            resources.ApplyResources(this.iCTRequestToolStripMenuItem, "iCTRequestToolStripMenuItem");
+            this.iCTRequestToolStripMenuItem.Click += new System.EventHandler(this.iCTRequestToolStripMenuItem_Click);
+            // 
+            // iCTReleaseToolStripMenuItem
+            // 
+            this.iCTReleaseToolStripMenuItem.Name = "iCTReleaseToolStripMenuItem";
+            resources.ApplyResources(this.iCTReleaseToolStripMenuItem, "iCTReleaseToolStripMenuItem");
+            this.iCTReleaseToolStripMenuItem.Click += new System.EventHandler(this.iCTReleaseToolStripMenuItem_Click);
+            // 
+            // accountsToolStripMenuItem
+            // 
+            this.accountsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.customersToolStripMenuItem,
+            this.suppliersToolStripMenuItem,
+            this.banksToolStripMenuItem});
+            this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
+            resources.ApplyResources(this.accountsToolStripMenuItem, "accountsToolStripMenuItem");
+            // 
+            // customersToolStripMenuItem
+            // 
+            this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewCustomerToolStripMenuItem,
+            this.customersSummaryToolStripMenuItem});
+            this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
+            resources.ApplyResources(this.customersToolStripMenuItem, "customersToolStripMenuItem");
+            // 
+            // createNewCustomerToolStripMenuItem
+            // 
+            this.createNewCustomerToolStripMenuItem.Name = "createNewCustomerToolStripMenuItem";
+            resources.ApplyResources(this.createNewCustomerToolStripMenuItem, "createNewCustomerToolStripMenuItem");
+            this.createNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
+            // 
+            // customersSummaryToolStripMenuItem
+            // 
+            this.customersSummaryToolStripMenuItem.Name = "customersSummaryToolStripMenuItem";
+            resources.ApplyResources(this.customersSummaryToolStripMenuItem, "customersSummaryToolStripMenuItem");
+            this.customersSummaryToolStripMenuItem.Click += new System.EventHandler(this.customersDashboardToolStripMenuItem_Click);
+            // 
+            // suppliersToolStripMenuItem
+            // 
+            this.suppliersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewSupplierToolStripMenuItem,
+            this.suppliersSummaryToolStripMenuItem});
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            resources.ApplyResources(this.suppliersToolStripMenuItem, "suppliersToolStripMenuItem");
+            // 
+            // createNewSupplierToolStripMenuItem
+            // 
+            this.createNewSupplierToolStripMenuItem.Name = "createNewSupplierToolStripMenuItem";
+            resources.ApplyResources(this.createNewSupplierToolStripMenuItem, "createNewSupplierToolStripMenuItem");
+            this.createNewSupplierToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
+            // 
+            // suppliersSummaryToolStripMenuItem
+            // 
+            this.suppliersSummaryToolStripMenuItem.Name = "suppliersSummaryToolStripMenuItem";
+            resources.ApplyResources(this.suppliersSummaryToolStripMenuItem, "suppliersSummaryToolStripMenuItem");
+            this.suppliersSummaryToolStripMenuItem.Click += new System.EventHandler(this.suppliersSummaryToolStripMenuItem_Click);
+            // 
+            // banksToolStripMenuItem
+            // 
+            this.banksToolStripMenuItem.Name = "banksToolStripMenuItem";
+            resources.ApplyResources(this.banksToolStripMenuItem, "banksToolStripMenuItem");
+            this.banksToolStripMenuItem.Click += new System.EventHandler(this.banksToolStripMenuItem_Click);
+            // 
+            // fINANCEToolStripMenuItem
+            // 
+            this.fINANCEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.accountingDashboardToolStripMenuItem,
+            this.chartOfAccountsToolStripMenuItem,
+            this.fixedAssetsToolStripMenuItem,
+            this.transactionsToolStripMenuItem,
+            this.reportsToolStripMenuItem3,
+            this.costCentersToolStripMenuItem,
+            this.cashManagementToolStripMenuItem,
+            this.financialPeriodManagementToolStripMenuItem1,
+            this.vATDashboardToolStripMenuItem});
+            this.fINANCEToolStripMenuItem.Name = "fINANCEToolStripMenuItem";
+            resources.ApplyResources(this.fINANCEToolStripMenuItem, "fINANCEToolStripMenuItem");
+            // 
+            // accountingDashboardToolStripMenuItem
+            // 
+            this.accountingDashboardToolStripMenuItem.Name = "accountingDashboardToolStripMenuItem";
+            resources.ApplyResources(this.accountingDashboardToolStripMenuItem, "accountingDashboardToolStripMenuItem");
+            this.accountingDashboardToolStripMenuItem.Click += new System.EventHandler(this.accountingDashboardToolStripMenuItem_Click);
+            // 
+            // chartOfAccountsToolStripMenuItem
+            // 
+            this.chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
+            resources.ApplyResources(this.chartOfAccountsToolStripMenuItem, "chartOfAccountsToolStripMenuItem");
+            this.chartOfAccountsToolStripMenuItem.Click += new System.EventHandler(this.chartOfAccountsToolStripMenuItem_Click);
+            // 
+            // fixedAssetsToolStripMenuItem
+            // 
+            this.fixedAssetsToolStripMenuItem.Name = "fixedAssetsToolStripMenuItem";
+            resources.ApplyResources(this.fixedAssetsToolStripMenuItem, "fixedAssetsToolStripMenuItem");
+            this.fixedAssetsToolStripMenuItem.Click += new System.EventHandler(this.fixedAssetsToolStripMenuItem_Click);
+            // 
+            // transactionsToolStripMenuItem
+            // 
+            this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.journalToolStripMenuItem,
+            this.journalVoucherListToolStripMenuItem,
+            this.groupsToolStripMenuItem,
+            this.accountsToolStripMenuItem1});
+            this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
+            resources.ApplyResources(this.transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
+            // 
+            // journalToolStripMenuItem
+            // 
+            this.journalToolStripMenuItem.Name = "journalToolStripMenuItem";
+            resources.ApplyResources(this.journalToolStripMenuItem, "journalToolStripMenuItem");
+            this.journalToolStripMenuItem.Click += new System.EventHandler(this.journalToolStripMenuItem_Click);
+            // 
+            // journalVoucherListToolStripMenuItem
+            // 
+            this.journalVoucherListToolStripMenuItem.Name = "journalVoucherListToolStripMenuItem";
+            resources.ApplyResources(this.journalVoucherListToolStripMenuItem, "journalVoucherListToolStripMenuItem");
+            this.journalVoucherListToolStripMenuItem.Click += new System.EventHandler(this.journalVoucherListToolStripMenuItem_Click);
+            // 
+            // groupsToolStripMenuItem
+            // 
+            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
+            resources.ApplyResources(this.groupsToolStripMenuItem, "groupsToolStripMenuItem");
+            this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
+            // 
+            // accountsToolStripMenuItem1
+            // 
+            this.accountsToolStripMenuItem1.Name = "accountsToolStripMenuItem1";
+            resources.ApplyResources(this.accountsToolStripMenuItem1, "accountsToolStripMenuItem1");
+            this.accountsToolStripMenuItem1.Click += new System.EventHandler(this.accountsToolStripMenuItem1_Click);
+            // 
+            // reportsToolStripMenuItem3
+            // 
+            this.reportsToolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalLedgerToolStripMenuItem,
+            this.customerARToolStripMenuItem,
+            this.supplierAPToolStripMenuItem,
+            this.trialBalanceToolStripMenuItem,
+            this.incomeStatementToolStripMenuItem,
+            this.balanceSheetToolStripMenuItem1,
+            this.journalDaybookToolStripMenuItem,
+            this.accountReportToolStripMenuItem,
+            this.groupReportToolStripMenuItem,
+            this.profitLossToolStripMenuItem,
+            this.balanceSheetToolStripMenuItem,
+            this.accountReceivableToolStripMenuItem,
+            this.accountPayableToolStripMenuItem,
+            this.banksReportToolStripMenuItem,
+            this.salesTaxSummaryToolStripMenuItem,
+            this.taxTrialBalanceToolStripMenuItem});
+            this.reportsToolStripMenuItem3.Name = "reportsToolStripMenuItem3";
+            resources.ApplyResources(this.reportsToolStripMenuItem3, "reportsToolStripMenuItem3");
+            // 
+            // generalLedgerToolStripMenuItem
+            // 
+            this.generalLedgerToolStripMenuItem.Name = "generalLedgerToolStripMenuItem";
+            resources.ApplyResources(this.generalLedgerToolStripMenuItem, "generalLedgerToolStripMenuItem");
+            this.generalLedgerToolStripMenuItem.Click += new System.EventHandler(this.generalLedgerToolStripMenuItem_Click);
+            // 
+            // customerARToolStripMenuItem
+            // 
+            this.customerARToolStripMenuItem.Name = "customerARToolStripMenuItem";
+            resources.ApplyResources(this.customerARToolStripMenuItem, "customerARToolStripMenuItem");
+            this.customerARToolStripMenuItem.Click += new System.EventHandler(this.customerARToolStripMenuItem_Click);
+            // 
+            // supplierAPToolStripMenuItem
+            // 
+            this.supplierAPToolStripMenuItem.Name = "supplierAPToolStripMenuItem";
+            resources.ApplyResources(this.supplierAPToolStripMenuItem, "supplierAPToolStripMenuItem");
+            this.supplierAPToolStripMenuItem.Click += new System.EventHandler(this.supplierAPToolStripMenuItem_Click);
+            // 
+            // trialBalanceToolStripMenuItem
+            // 
+            this.trialBalanceToolStripMenuItem.Name = "trialBalanceToolStripMenuItem";
+            resources.ApplyResources(this.trialBalanceToolStripMenuItem, "trialBalanceToolStripMenuItem");
+            this.trialBalanceToolStripMenuItem.Click += new System.EventHandler(this.trialBalanceToolStripMenuItem_Click);
+            // 
+            // incomeStatementToolStripMenuItem
+            // 
+            this.incomeStatementToolStripMenuItem.Name = "incomeStatementToolStripMenuItem";
+            resources.ApplyResources(this.incomeStatementToolStripMenuItem, "incomeStatementToolStripMenuItem");
+            this.incomeStatementToolStripMenuItem.Click += new System.EventHandler(this.incomeStatementToolStripMenuItem_Click);
+            // 
+            // balanceSheetToolStripMenuItem1
+            // 
+            this.balanceSheetToolStripMenuItem1.Name = "balanceSheetToolStripMenuItem1";
+            resources.ApplyResources(this.balanceSheetToolStripMenuItem1, "balanceSheetToolStripMenuItem1");
+            this.balanceSheetToolStripMenuItem1.Click += new System.EventHandler(this.balanceSheetToolStripMenuItem1_Click);
             // 
             // journalDaybookToolStripMenuItem
             // 
@@ -1195,22 +995,16 @@
             resources.ApplyResources(this.groupReportToolStripMenuItem, "groupReportToolStripMenuItem");
             this.groupReportToolStripMenuItem.Click += new System.EventHandler(this.groupReportToolStripMenuItem_Click);
             // 
-            // trialBalanceToolStripMenuItem
-            // 
-            this.trialBalanceToolStripMenuItem.Name = "trialBalanceToolStripMenuItem";
-            resources.ApplyResources(this.trialBalanceToolStripMenuItem, "trialBalanceToolStripMenuItem");
-            this.trialBalanceToolStripMenuItem.Click += new System.EventHandler(this.trialBalanceToolStripMenuItem_Click);
-            // 
             // profitLossToolStripMenuItem
             // 
-            this.profitLossToolStripMenuItem.Name = "profitLossToolStripMenuItem";
             resources.ApplyResources(this.profitLossToolStripMenuItem, "profitLossToolStripMenuItem");
+            this.profitLossToolStripMenuItem.Name = "profitLossToolStripMenuItem";
             this.profitLossToolStripMenuItem.Click += new System.EventHandler(this.profitLossToolStripMenuItem_Click);
             // 
             // balanceSheetToolStripMenuItem
             // 
-            this.balanceSheetToolStripMenuItem.Name = "balanceSheetToolStripMenuItem";
             resources.ApplyResources(this.balanceSheetToolStripMenuItem, "balanceSheetToolStripMenuItem");
+            this.balanceSheetToolStripMenuItem.Name = "balanceSheetToolStripMenuItem";
             this.balanceSheetToolStripMenuItem.Click += new System.EventHandler(this.balanceSheetToolStripMenuItem_Click);
             // 
             // accountReceivableToolStripMenuItem
@@ -1231,16 +1025,146 @@
             resources.ApplyResources(this.banksReportToolStripMenuItem, "banksReportToolStripMenuItem");
             this.banksReportToolStripMenuItem.Click += new System.EventHandler(this.banksReportToolStripMenuItem_Click);
             // 
-            // vATDashboardToolStripMenuItem
+            // salesTaxSummaryToolStripMenuItem
             // 
-            this.vATDashboardToolStripMenuItem.Name = "vATDashboardToolStripMenuItem";
-            resources.ApplyResources(this.vATDashboardToolStripMenuItem, "vATDashboardToolStripMenuItem");
-            this.vATDashboardToolStripMenuItem.Click += new System.EventHandler(this.vATDashboardToolStripMenuItem_Click);
+            this.salesTaxSummaryToolStripMenuItem.Name = "salesTaxSummaryToolStripMenuItem";
+            resources.ApplyResources(this.salesTaxSummaryToolStripMenuItem, "salesTaxSummaryToolStripMenuItem");
+            this.salesTaxSummaryToolStripMenuItem.Click += new System.EventHandler(this.salesTaxSummaryToolStripMenuItem_Click);
             // 
-            // purchasesToolStripMenuItem
+            // taxTrialBalanceToolStripMenuItem
             // 
-            this.purchasesToolStripMenuItem.Name = "purchasesToolStripMenuItem";
-            resources.ApplyResources(this.purchasesToolStripMenuItem, "purchasesToolStripMenuItem");
+            this.taxTrialBalanceToolStripMenuItem.Name = "taxTrialBalanceToolStripMenuItem";
+            resources.ApplyResources(this.taxTrialBalanceToolStripMenuItem, "taxTrialBalanceToolStripMenuItem");
+            this.taxTrialBalanceToolStripMenuItem.Click += new System.EventHandler(this.taxTrialBalanceToolStripMenuItem_Click);
+            // 
+            // costCentersToolStripMenuItem
+            // 
+            this.costCentersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setupToolStripMenuItem1,
+            this.hierarchyToolStripMenuItem,
+            this.budgetToolStripMenuItem,
+            this.allocationRulesToolStripMenuItem,
+            this.departmentalPLToolStripMenuItem,
+            this.budgetVsActualReportToolStripMenuItem});
+            this.costCentersToolStripMenuItem.Name = "costCentersToolStripMenuItem";
+            resources.ApplyResources(this.costCentersToolStripMenuItem, "costCentersToolStripMenuItem");
+            // 
+            // setupToolStripMenuItem1
+            // 
+            this.setupToolStripMenuItem1.Name = "setupToolStripMenuItem1";
+            resources.ApplyResources(this.setupToolStripMenuItem1, "setupToolStripMenuItem1");
+            this.setupToolStripMenuItem1.Click += new System.EventHandler(this.setupToolStripMenuItem_Click);
+            // 
+            // hierarchyToolStripMenuItem
+            // 
+            this.hierarchyToolStripMenuItem.Name = "hierarchyToolStripMenuItem";
+            resources.ApplyResources(this.hierarchyToolStripMenuItem, "hierarchyToolStripMenuItem");
+            this.hierarchyToolStripMenuItem.Click += new System.EventHandler(this.hierarchyToolStripMenuItem_Click);
+            // 
+            // budgetToolStripMenuItem
+            // 
+            this.budgetToolStripMenuItem.Name = "budgetToolStripMenuItem";
+            resources.ApplyResources(this.budgetToolStripMenuItem, "budgetToolStripMenuItem");
+            this.budgetToolStripMenuItem.Click += new System.EventHandler(this.budgetToolStripMenuItem_Click);
+            // 
+            // allocationRulesToolStripMenuItem
+            // 
+            this.allocationRulesToolStripMenuItem.Name = "allocationRulesToolStripMenuItem";
+            resources.ApplyResources(this.allocationRulesToolStripMenuItem, "allocationRulesToolStripMenuItem");
+            this.allocationRulesToolStripMenuItem.Click += new System.EventHandler(this.allocationRulesToolStripMenuItem_Click);
+            // 
+            // departmentalPLToolStripMenuItem
+            // 
+            this.departmentalPLToolStripMenuItem.Name = "departmentalPLToolStripMenuItem";
+            resources.ApplyResources(this.departmentalPLToolStripMenuItem, "departmentalPLToolStripMenuItem");
+            this.departmentalPLToolStripMenuItem.Click += new System.EventHandler(this.departmentalPLToolStripMenuItem_Click);
+            // 
+            // budgetVsActualReportToolStripMenuItem
+            // 
+            this.budgetVsActualReportToolStripMenuItem.Name = "budgetVsActualReportToolStripMenuItem";
+            resources.ApplyResources(this.budgetVsActualReportToolStripMenuItem, "budgetVsActualReportToolStripMenuItem");
+            this.budgetVsActualReportToolStripMenuItem.Click += new System.EventHandler(this.budgetVsActualReportToolStripMenuItem_Click);
+            // 
+            // cashManagementToolStripMenuItem
+            // 
+            this.cashManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cashFlowManagementToolStripMenuItem,
+            this.cashBookToolStripMenuItem,
+            this.bankReconciliationToolStripMenuItem});
+            this.cashManagementToolStripMenuItem.Name = "cashManagementToolStripMenuItem";
+            resources.ApplyResources(this.cashManagementToolStripMenuItem, "cashManagementToolStripMenuItem");
+            // 
+            // cashFlowManagementToolStripMenuItem
+            // 
+            this.cashFlowManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.cashFlowManagementToolStripMenuItem.Name = "cashFlowManagementToolStripMenuItem";
+            resources.ApplyResources(this.cashFlowManagementToolStripMenuItem, "cashFlowManagementToolStripMenuItem");
+            this.cashFlowManagementToolStripMenuItem.Click += new System.EventHandler(this.cashFlowManagementToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // cashBookToolStripMenuItem
+            // 
+            this.cashBookToolStripMenuItem.Name = "cashBookToolStripMenuItem";
+            resources.ApplyResources(this.cashBookToolStripMenuItem, "cashBookToolStripMenuItem");
+            this.cashBookToolStripMenuItem.Click += new System.EventHandler(this.cashBookToolStripMenuItem_Click);
+            // 
+            // bankReconciliationToolStripMenuItem
+            // 
+            this.bankReconciliationToolStripMenuItem.Name = "bankReconciliationToolStripMenuItem";
+            resources.ApplyResources(this.bankReconciliationToolStripMenuItem, "bankReconciliationToolStripMenuItem");
+            this.bankReconciliationToolStripMenuItem.Click += new System.EventHandler(this.bankReconciliationToolStripMenuItem_Click);
+            // 
+            // financialPeriodManagementToolStripMenuItem1
+            // 
+            this.financialPeriodManagementToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.financialYearsToolStripMenuItem,
+            this.financialPeriodManagementToolStripMenuItem});
+            this.financialPeriodManagementToolStripMenuItem1.Name = "financialPeriodManagementToolStripMenuItem1";
+            resources.ApplyResources(this.financialPeriodManagementToolStripMenuItem1, "financialPeriodManagementToolStripMenuItem1");
+            // 
+            // financialYearsToolStripMenuItem
+            // 
+            this.financialYearsToolStripMenuItem.Name = "financialYearsToolStripMenuItem";
+            resources.ApplyResources(this.financialYearsToolStripMenuItem, "financialYearsToolStripMenuItem");
+            this.financialYearsToolStripMenuItem.Click += new System.EventHandler(this.financialYearsToolStripMenuItem_Click);
+            // 
+            // financialPeriodManagementToolStripMenuItem
+            // 
+            this.financialPeriodManagementToolStripMenuItem.Name = "financialPeriodManagementToolStripMenuItem";
+            resources.ApplyResources(this.financialPeriodManagementToolStripMenuItem, "financialPeriodManagementToolStripMenuItem");
+            this.financialPeriodManagementToolStripMenuItem.Click += new System.EventHandler(this.financialPeriodManagementToolStripMenuItem_Click);
+            // 
+            // expensesToolStripMenuItem
+            // 
+            this.expensesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewExpenseToolStripMenuItem,
+            this.expenseListToolStripMenuItem1,
+            this.expenseDashboardToolStripMenuItem});
+            this.expensesToolStripMenuItem.Name = "expensesToolStripMenuItem";
+            resources.ApplyResources(this.expensesToolStripMenuItem, "expensesToolStripMenuItem");
+            // 
+            // createNewExpenseToolStripMenuItem
+            // 
+            this.createNewExpenseToolStripMenuItem.Name = "createNewExpenseToolStripMenuItem";
+            resources.ApplyResources(this.createNewExpenseToolStripMenuItem, "createNewExpenseToolStripMenuItem");
+            this.createNewExpenseToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
+            // 
+            // expenseListToolStripMenuItem1
+            // 
+            this.expenseListToolStripMenuItem1.Name = "expenseListToolStripMenuItem1";
+            resources.ApplyResources(this.expenseListToolStripMenuItem1, "expenseListToolStripMenuItem1");
+            this.expenseListToolStripMenuItem1.Click += new System.EventHandler(this.expenseListToolStripMenuItem_Click);
+            // 
+            // expenseDashboardToolStripMenuItem
+            // 
+            this.expenseDashboardToolStripMenuItem.Name = "expenseDashboardToolStripMenuItem";
+            resources.ApplyResources(this.expenseDashboardToolStripMenuItem, "expenseDashboardToolStripMenuItem");
+            this.expenseDashboardToolStripMenuItem.Click += new System.EventHandler(this.expenseDashboardToolStripMenuItem_Click);
             // 
             // humanResourceToolStripMenuItem
             // 
@@ -1254,6 +1178,123 @@
             this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
             resources.ApplyResources(this.employeesToolStripMenuItem, "employeesToolStripMenuItem");
             this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
+            // 
+            // sETTINGSToolStripMenuItem1
+            // 
+            this.sETTINGSToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configurationToolStripMenuItem,
+            this.languageToolStripMenuItem,
+            this.securityToolStripMenuItem});
+            this.sETTINGSToolStripMenuItem1.Name = "sETTINGSToolStripMenuItem1";
+            resources.ApplyResources(this.sETTINGSToolStripMenuItem1, "sETTINGSToolStripMenuItem1");
+            // 
+            // configurationToolStripMenuItem
+            // 
+            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
+            this.importDataToolStripMenuItem,
+            this.settingToolStripMenuItem});
+            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            resources.ApplyResources(this.configurationToolStripMenuItem, "configurationToolStripMenuItem");
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // importDataToolStripMenuItem
+            // 
+            this.importDataToolStripMenuItem.Name = "importDataToolStripMenuItem";
+            resources.ApplyResources(this.importDataToolStripMenuItem, "importDataToolStripMenuItem");
+            this.importDataToolStripMenuItem.Click += new System.EventHandler(this.importDataToolStripMenuItem_Click);
+            // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
+            // languageToolStripMenuItem
+            // 
+            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.arabicToolStripMenuItem});
+            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
+            // 
+            // arabicToolStripMenuItem
+            // 
+            this.arabicToolStripMenuItem.Name = "arabicToolStripMenuItem";
+            resources.ApplyResources(this.arabicToolStripMenuItem, "arabicToolStripMenuItem");
+            this.arabicToolStripMenuItem.Click += new System.EventHandler(this.arabicToolStripMenuItem_Click);
+            // 
+            // securityToolStripMenuItem
+            // 
+            this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rolePermissionsToolStripMenuItem,
+            this.applicationLogsToolStripMenuItem,
+            this.usersToolStripMenuItem,
+            this.permissionsToolStripMenuItem,
+            this.userClaimsToolStripMenuItem});
+            this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
+            resources.ApplyResources(this.securityToolStripMenuItem, "securityToolStripMenuItem");
+            // 
+            // rolePermissionsToolStripMenuItem
+            // 
+            this.rolePermissionsToolStripMenuItem.Name = "rolePermissionsToolStripMenuItem";
+            resources.ApplyResources(this.rolePermissionsToolStripMenuItem, "rolePermissionsToolStripMenuItem");
+            this.rolePermissionsToolStripMenuItem.Click += new System.EventHandler(this.rolePermissionsToolStripMenuItem_Click);
+            // 
+            // applicationLogsToolStripMenuItem
+            // 
+            this.applicationLogsToolStripMenuItem.Name = "applicationLogsToolStripMenuItem";
+            resources.ApplyResources(this.applicationLogsToolStripMenuItem, "applicationLogsToolStripMenuItem");
+            this.applicationLogsToolStripMenuItem.Click += new System.EventHandler(this.applicationLogsToolStripMenuItem_Click);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+            // 
+            // permissionsToolStripMenuItem
+            // 
+            resources.ApplyResources(this.permissionsToolStripMenuItem, "permissionsToolStripMenuItem");
+            this.permissionsToolStripMenuItem.Name = "permissionsToolStripMenuItem";
+            this.permissionsToolStripMenuItem.Click += new System.EventHandler(this.permissionsToolStripMenuItem_Click);
+            // 
+            // userClaimsToolStripMenuItem
+            // 
+            this.userClaimsToolStripMenuItem.Name = "userClaimsToolStripMenuItem";
+            resources.ApplyResources(this.userClaimsToolStripMenuItem, "userClaimsToolStripMenuItem");
+            this.userClaimsToolStripMenuItem.Click += new System.EventHandler(this.userClaimsToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.shortcutsKeysToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // shortcutsKeysToolStripMenuItem
+            // 
+            this.shortcutsKeysToolStripMenuItem.Name = "shortcutsKeysToolStripMenuItem";
+            resources.ApplyResources(this.shortcutsKeysToolStripMenuItem, "shortcutsKeysToolStripMenuItem");
+            this.shortcutsKeysToolStripMenuItem.Click += new System.EventHandler(this.shortcutsKeysToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // windowsMenu
             // 
@@ -1288,26 +1329,6 @@
             this.CloseAllToolStripMenuItem.Name = "CloseAllToolStripMenuItem";
             resources.ApplyResources(this.CloseAllToolStripMenuItem, "CloseAllToolStripMenuItem");
             this.CloseAllToolStripMenuItem.Click += new System.EventHandler(this.CloseAllToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.shortcutsKeysToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
-            // 
-            // shortcutsKeysToolStripMenuItem
-            // 
-            this.shortcutsKeysToolStripMenuItem.Name = "shortcutsKeysToolStripMenuItem";
-            resources.ApplyResources(this.shortcutsKeysToolStripMenuItem, "shortcutsKeysToolStripMenuItem");
-            this.shortcutsKeysToolStripMenuItem.Click += new System.EventHandler(this.shortcutsKeysToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -1467,11 +1488,11 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // cashBookToolStripMenuItem
+            // vATDashboardToolStripMenuItem
             // 
-            this.cashBookToolStripMenuItem.Name = "cashBookToolStripMenuItem";
-            resources.ApplyResources(this.cashBookToolStripMenuItem, "cashBookToolStripMenuItem");
-            this.cashBookToolStripMenuItem.Click += new System.EventHandler(this.cashBookToolStripMenuItem_Click);
+            this.vATDashboardToolStripMenuItem.Name = "vATDashboardToolStripMenuItem";
+            resources.ApplyResources(this.vATDashboardToolStripMenuItem, "vATDashboardToolStripMenuItem");
+            this.vATDashboardToolStripMenuItem.Click += new System.EventHandler(this.vATDashboardToolStripMenuItem_Click);
             // 
             // frm_main
             // 
@@ -1503,58 +1524,18 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem pOSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem purchasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem masterToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem dBBackupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem arabicToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newTransactionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allPurchasesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem humanResourceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseReturnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem branchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem journalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesReportToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem customerWiseSalesReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem productWiseSalesSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem categoryWiseSalesSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem purchasesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem purchaseInvoiceReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem journalDaybookToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem groupReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trialBalanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem profitLossToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem balanceSheetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem warehouseToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem purchaseOrdersToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem allPurchaseOrdersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem countryOriginToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem financialYearsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dailySaleReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_sales;
         private System.Windows.Forms.ToolStripButton toolStripButton_purchase;
         private System.Windows.Forms.ToolStripButton toolStripButton_products;
@@ -1568,26 +1549,14 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_branch_name;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_fyear;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_fiscalyear;
-        private System.Windows.Forms.ToolStripMenuItem paymentTermsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem paymentMethodToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem chartOfAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_salesv1;
         private System.Windows.Forms.ToolStripMenuItem itemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warehousetoolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem تقريرعنصنفToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editItemDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem اجماليالمخزونToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lowStockInventoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem تقريرعنالمخزونToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem الاصنافالمتحركهToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem الاصنافغيرالمتحركهToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem brandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem categoriesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem productAdjustmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productGroupsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem productLocationTransferToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem labelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alternateProductsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem locationsToolStripMenuItem;
@@ -1600,25 +1569,16 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem allQuotationsEstimatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem taxesVATToolStripMenuItem1;
         private System.Windows.Forms.ToolStripButton toolStripButton_purchasesV1;
         private System.Windows.Forms.ToolStripMenuItem shortcutsKeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iCTToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem expensesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iCTRequestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iCTReleaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem branchSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem banksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowsMenu;
         private System.Windows.Forms.ToolStripMenuItem CascadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TileVerticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TileHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CloseAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem applicationLogsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountReceivableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountPayableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quantityOnHandToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lowStockReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zatcaInvoicesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debitNoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -1627,60 +1587,123 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCompanyName;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton_dashboard;
-        private System.Windows.Forms.ToolStripMenuItem banksReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem byPaymentMethodToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesExpensesToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonNewPOS;
-        private System.Windows.Forms.ToolStripMenuItem securityToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolePermissionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem userClaimsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem permissionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_Help;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem vATDashboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem discountSchemesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stockSuppressionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewExpenseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem expenseListToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem expenseDashboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem suppliersSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewSupplierToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseSummaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesSummaryToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem customersSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createNewCustomerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editItemDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lowStockInventoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quantityOnHandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lowStockReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productAdjustmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productLocationTransferToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockCheckAndAdjustmentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem currenciesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesInvoiceReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stockSuppressionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem valautionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fINANCEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountingDashboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chartOfAccountsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem journalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem journalVoucherListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem generalLedgerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem subLedgersToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem customerARToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supplierAPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trialBalanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem incomeStatementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem balanceSheetToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem financialPeriodManagementToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cashFlowManagementToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bankReconciliationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesTaxSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem taxTrialBalanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem accountingDashboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem journalDaybookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem groupReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem costCentersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hierarchyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem budgetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allocationRulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem departmentalPLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem budgetVsActualReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inventoryValuationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inventoryValuationSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fixedAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cashManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cashFlowManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cashBookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bankReconciliationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financialPeriodManagementToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem financialYearsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financialPeriodManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem salesInvoiceReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customerWiseSalesReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productWiseSalesSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem categoryWiseSalesSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byPaymentMethodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expensesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNewExpenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expenseListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem expenseDashboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem companySetupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem countryOriginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem branchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transactionsSetupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentTermsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentMethodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currenciesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxesDiscountsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxesVATToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem discountSchemesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fixedAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNewCustomerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customersSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNewSupplierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem banksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem salesTaxSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxTrialBalanceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sETTINGSToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem arabicToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem securityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolePermissionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem permissionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userClaimsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem applicationLogsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dailySaleReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem profitLossToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem balanceSheetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountReceivableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountPayableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem banksReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem warehouseToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem purchaseInvoiceReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesExpensesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem branchSummaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryValuationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryValuationSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem humanResourceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem vATDashboardToolStripMenuItem;
     }
 }

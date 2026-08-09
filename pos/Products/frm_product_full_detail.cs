@@ -99,9 +99,9 @@ namespace pos
             //when this is true it will focus on history tab
             if (_loadMovementHistory)
             {
-                Products_tab.SelectedTab = tabPage3; // Switch to history tab
+                // Defer tab switching until movement data is loaded (prevents blinking)
                 BeginInvoke((Action)(() => LoadMovementHistoryIfNeeded()));
-                
+
             }
             ApplyGregorianCalendarForDatePickersIfArabic();
 
@@ -332,6 +332,7 @@ namespace pos
             lbl_product_name.Visible = true;
             lbl_product_name.Text = txt_code.Text+' '+txt_name.Text;
             btn_other_stock.Enabled = true;
+            txt_cost_price.ReadOnly = true;
         }
 
         private void LoadMovementHistoryIfNeeded()
@@ -921,6 +922,7 @@ namespace pos
             txt_code.Text = "";
             txt_part_number.Text = "";
             txt_part_number.ReadOnly = false;
+            txt_cost_price.ReadOnly = false;
             txt_alt_item_number.Text = "";
             txt_packet_qty.Text = "";
 
@@ -1071,36 +1073,53 @@ namespace pos
 
                 if (product_dt.Rows.Count > 0)
                 {
-                    int RowIndex = 0;
-                    foreach (DataRow row in product_dt.Rows)
+                    // Suspend layout updates during grid population to prevent flickering
+                    grid_movements.SuspendLayout();
+                    try
                     {
-                        int id = Convert.ToInt32(row["id"]);
-                        string invoice_no = row["invoice_no"].ToString();
-                        string qty = Convert.ToDecimal(row["qty"]).ToString("N2");
-                        string balance = Convert.ToDecimal(row["balance_qty"]).ToString("N2");
-                        string cost_price = Convert.ToDecimal(row["cost_price"]).ToString("N2");
-                        string unit_price = Convert.ToDecimal(row["unit_price"]).ToString("N2");
-                        string location = row["loc_code"].ToString();
-                        string description = row["description"].ToString();
-                        string supplier = row["supplier"].ToString();
-                        string customer = row["customer"].ToString();
-                        string date = row["trans_date"].ToString();
-                        string username = row["username"].ToString();
+                        int RowIndex = 0;
+                        foreach (DataRow row in product_dt.Rows)
+                        {
+                            int id = Convert.ToInt32(row["id"]);
+                            string invoice_no = row["invoice_no"].ToString();
+                            string qty = Convert.ToDecimal(row["qty"]).ToString("N2");
+                            string balance = Convert.ToDecimal(row["balance_qty"]).ToString("N2");
+                            string cost_price = Convert.ToDecimal(row["cost_price"]).ToString("N2");
+                            string unit_price = Convert.ToDecimal(row["unit_price"]).ToString("N2");
+                            string location = row["loc_code"].ToString();
+                            string description = row["description"].ToString();
+                            string supplier = row["supplier"].ToString();
+                            string customer = row["customer"].ToString();
+                            string date = row["trans_date"].ToString();
+                            string username = row["username"].ToString();
 
-                        string[] row0 = { id.ToString(), invoice_no, qty, balance, cost_price.ToString(), unit_price.ToString(),
-                                  location,description, supplier, customer, date, username };
+                            string[] row0 = { id.ToString(), invoice_no, qty, balance, cost_price.ToString(), unit_price.ToString(),
+                                      location,description, supplier, customer, date, username };
 
-                        grid_movements.Rows.Add(row0);
+                            grid_movements.Rows.Add(row0);
 
-                        if (description == "Sale")
-                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
-                        else if (description == "Purchase")
-                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
-                        else if (description == "Adjustment")
-                            grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                            if (description == "Sale")
+                                grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+                            else if (description == "Purchase")
+                                grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+                            else if (description == "Adjustment")
+                                grid_movements.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
 
-                        RowIndex++;
+                            RowIndex++;
+                        }
                     }
+                    finally
+                    {
+                        // Always resume layout, even if an exception occurs
+                        grid_movements.ResumeLayout(false);
+                        grid_movements.Invalidate();
+                    }
+                }
+
+                // Switch to history tab only AFTER data is fully loaded and rendered
+                if (_loadMovementHistory)
+                {
+                    Products_tab.SelectedTab = tabPage3;
                 }
             }
             catch (Exception ex)
