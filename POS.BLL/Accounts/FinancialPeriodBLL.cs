@@ -39,6 +39,47 @@ namespace POS.BLL
             return _periodDal.GetPeriodTransactions(periodId);
         }
 
+        /// <summary>
+        /// Checks if a transaction date falls in a locked/closed financial period.
+        /// Used by UI forms to prevent saving transactions in soft-closed or hard-locked periods.
+        /// </summary>
+        /// <param name="transactionDate">The date of the transaction (e.g., invoice date, payment date)</param>
+        /// <returns>True if the period is locked (SoftClosed or HardLocked); False if Open or no period found</returns>
+        public bool IsPeriodLocked(DateTime transactionDate)
+        {
+            try
+            {
+                return _periodDal.IsPeriodLocked(transactionDate);
+            }
+            catch
+            {
+                // If check fails, assume period is NOT locked to allow transaction (fail-open)
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets a user-friendly message explaining why a date is locked for posting.
+        /// </summary>
+        /// <param name="transactionDate">The date of the transaction</param>
+        /// <returns>Localized error message or empty string if not locked</returns>
+        public string GetPeriodLockReason(DateTime transactionDate)
+        {
+            try
+            {
+                if (_periodDal.IsPeriodLocked(transactionDate))
+                {
+                    return "The financial period for this date is closed or locked. No new transactions are allowed.";
+                }
+            }
+            catch
+            {
+                // Silently fail to avoid blocking the user on error
+            }
+
+            return string.Empty;
+        }
+
         public FinancialPeriodCloseResultModal SoftClosePeriod(FinancialPeriodCloseOptionsModal options)
         {
             if (options == null)

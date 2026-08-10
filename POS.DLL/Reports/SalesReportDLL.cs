@@ -464,7 +464,7 @@ namespace POS.DLL
         }
 
         public DataTable SalesInvoiceReport(DateTime from_date, DateTime to_date, int customer_id = 0, string product_code = "",
-            string sale_type = "", int employee_id = 0, string sale_account = "", int branch_id = 0, bool SkipSmallInvoices = true, int user_id = 0)
+            string sale_type = "", int employee_id = 0, string sale_account = "", int branch_id = 0, bool SkipSmallInvoices = true, int user_id = 0, string payment_method = "")
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -483,6 +483,7 @@ namespace POS.DLL
                                 S.account,
                                 S.sale_type,
                                 C.first_name AS customer_name,
+                                PM.name AS payment_method,
                                 COUNT(SI.id) AS total_items,
                                 SUM(SI.unit_price * SI.quantity_sold) AS subtotal,
                                 SUM(SI.discount_value) AS discount_value,
@@ -495,6 +496,7 @@ namespace POS.DLL
                             FROM pos_sales S
                             LEFT JOIN pos_sales_items SI ON S.id = SI.sale_id
                             LEFT JOIN pos_customers C ON C.id = S.customer_id
+                            LEFT JOIN pos_payment_method PM ON S.payment_method_id = PM.id
                             WHERE S.branch_id = @branch_id 
                               AND S.sale_date BETWEEN @from_date AND @to_date";
 
@@ -522,12 +524,16 @@ namespace POS.DLL
                         {
                             query += " AND S.user_id = @user_id";
                         }
+                        if (!string.IsNullOrEmpty(payment_method))
+                        {
+                            query += " AND PM.name = @payment_method";
+                        }
                         if (!SkipSmallInvoices)
                         {
                             query += " AND S.invoice_no NOT LIKE 'ZS%'";
                         }
 
-                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, S.sale_type, C.first_name ORDER BY S.sale_date DESC, S.id DESC";
+                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, S.sale_type, C.first_name, PM.name ORDER BY S.sale_date DESC, S.id DESC";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@from_date", from_date);
@@ -558,6 +564,11 @@ namespace POS.DLL
                         {
                             cmd.Parameters.AddWithValue("@user_id", user_id);
                         }
+                        if (!string.IsNullOrEmpty(payment_method))
+                        {
+                            cmd.Parameters.AddWithValue("@payment_method", payment_method);
+                        }
+
                     }
 
                     da = new SqlDataAdapter(cmd);

@@ -36,7 +36,11 @@ namespace POS.DLL
               OR LOWER(ISNULL(A.name, '')) LIKE '%payable%'
               OR LOWER(ISNULL(A.name, '')) LIKE '%creditor%'
                 THEN 'Payable'
-            WHEN LOWER(ISNULL(A.name, '')) LIKE '%cash%'
+            WHEN LOWER(ISNULL(T.name, '')) LIKE '%cash%'
+              OR LOWER(ISNULL(T.name, '')) LIKE '%bank%'
+              OR LOWER(ISNULL(G.name, '')) LIKE '%cash%'
+              OR LOWER(ISNULL(G.name, '')) LIKE '%bank%'
+              OR LOWER(ISNULL(A.name, '')) LIKE '%cash%'
               OR LOWER(ISNULL(A.name, '')) LIKE '%bank%'
                 THEN 'CashBank'
             ELSE 'Other'
@@ -58,6 +62,35 @@ namespace POS.DLL
 
             string sql = AccountClassifyCte + @"
 SELECT
+    CashBalance = ISNULL((
+        SELECT SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0))
+        FROM acc_entries E
+        INNER JOIN acc_accounts A ON A.id = E.account_id
+        LEFT JOIN acc_groups G ON G.id = A.group_id
+        LEFT JOIN acc_account_type T ON T.id = G.account_type_id
+        WHERE E.branch_id = @branch_id
+          AND E.entry_date < @to_exclusive
+          AND (
+                LOWER(ISNULL(A.name, '')) LIKE '%cash%'
+             OR LOWER(ISNULL(G.name, '')) LIKE '%cash%'
+             OR LOWER(ISNULL(T.name, '')) LIKE '%cash%'
+          )
+          AND LOWER(ISNULL(A.name, '')) NOT LIKE '%bank%'
+    ), 0),
+    BankBalance = ISNULL((
+        SELECT SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0))
+        FROM acc_entries E
+        INNER JOIN acc_accounts A ON A.id = E.account_id
+        LEFT JOIN acc_groups G ON G.id = A.group_id
+        LEFT JOIN acc_account_type T ON T.id = G.account_type_id
+        WHERE E.branch_id = @branch_id
+          AND E.entry_date < @to_exclusive
+          AND (
+                LOWER(ISNULL(A.name, '')) LIKE '%bank%'
+             OR LOWER(ISNULL(G.name, '')) LIKE '%bank%'
+             OR LOWER(ISNULL(T.name, '')) LIKE '%bank%'
+          )
+    ), 0),
     CashBankBalance = ISNULL((
         SELECT SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0))
         FROM acc_entries E
@@ -69,29 +102,29 @@ SELECT
     TotalReceivables = ISNULL((
         SELECT SUM(CASE WHEN B.balance > 0 THEN B.balance ELSE 0 END)
         FROM (
-            SELECT E.invoice_no, SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0)) AS balance
+            SELECT E.account_id, SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0)) AS balance
             FROM acc_entries E
             INNER JOIN AccountClassify C ON C.account_id = E.account_id
             WHERE E.branch_id = @branch_id
               AND E.entry_date < @to_exclusive
               AND C.account_class = 'Receivable'
-            GROUP BY E.invoice_no
+            GROUP BY E.account_id
         ) B
     ), 0),
     TotalPayables = ISNULL((
         SELECT SUM(CASE WHEN B.balance > 0 THEN B.balance ELSE 0 END)
         FROM (
-            SELECT E.invoice_no, SUM(ISNULL(E.credit,0) - ISNULL(E.debit,0)) AS balance
+            SELECT E.account_id, SUM(ISNULL(E.credit,0) - ISNULL(E.debit,0)) AS balance
             FROM acc_entries E
             INNER JOIN AccountClassify C ON C.account_id = E.account_id
             WHERE E.branch_id = @branch_id
               AND E.entry_date < @to_exclusive
               AND C.account_class = 'Payable'
-            GROUP BY E.invoice_no
+            GROUP BY E.account_id
         ) B
     ), 0),
     RevenuePeriod = ISNULL((
-        SELECT SUM(ISNULL(E.credit,0))
+        SELECT SUM(ISNULL(E.credit,0) - ISNULL(E.debit,0))
         FROM acc_entries E
         INNER JOIN AccountClassify C ON C.account_id = E.account_id
         WHERE E.branch_id = @branch_id
@@ -100,7 +133,7 @@ SELECT
           AND C.account_class = 'Revenue'
     ), 0),
     ExpensesPeriod = ISNULL((
-        SELECT SUM(ISNULL(E.debit,0))
+        SELECT SUM(ISNULL(E.debit,0) - ISNULL(E.credit,0))
         FROM acc_entries E
         INNER JOIN AccountClassify C ON C.account_id = E.account_id
         WHERE E.branch_id = @branch_id
@@ -342,6 +375,7 @@ LEFT JOIN acc_bank_reconciliation_header H
    AND H.statement_date >= @month_start
    AND H.statement_date <= @as_of_date
 WHERE (LOWER(ISNULL(A.name, '')) LIKE '%bank%')
+  AND A.branch_id = @branch_id
   AND H.id IS NULL
 ORDER BY A.name;";
 
@@ -366,7 +400,7 @@ SELECT TOP (@top_n)
     [Date] = CAST(H.EntryDate AS DATE),
     VoucherNo = H.InvoiceNo,
     [Description] = ISNULL(H.Narration, ''),
-    [Amount] = ABS(ISNULL(H.total_debit, 0) - ISNULL(H.total_credit, 0)),
+    [Amount] = ISNULL(H.total_debit, 0),
     PostedBy = ISNULL(U.name, ISNULL(U.username, 'System')),
     ModuleSource = ISNULL(H.VoucherType, 'General'),
     [Status] = ISNULL(H.status, 'Draft')
@@ -470,6 +504,7 @@ FROM
        AND H.statement_date >= @month_start
        AND H.statement_date <= @as_of_date
     WHERE LOWER(ISNULL(A.name, '')) LIKE '%bank%'
+      AND A.branch_id = @branch_id
     GROUP BY A.id
     HAVING COUNT(H.id) = 0
 ) X;";

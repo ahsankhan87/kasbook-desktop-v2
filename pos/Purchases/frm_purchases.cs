@@ -2784,6 +2784,20 @@ namespace pos
 
                     if (result == DialogResult.Yes)
                     {
+                        // CHECK PERIOD LOCK BEFORE SAVING
+                        DateTime purchaseDate = DateTime.Parse(txt_purchase_date.Text);
+                        FinancialPeriodBLL periodBll = new FinancialPeriodBLL();
+                        if (periodBll.IsPeriodLocked(purchaseDate))
+                        {
+                            UiMessages.ShowError(
+                                periodBll.GetPeriodLockReason(purchaseDate),
+                                "The financial period for this date is closed or locked. No new transactions are allowed.",
+                                "Period Locked",
+                                "الفترة مقفلة"
+                            );
+                            return;
+                        }
+
                         if (grid_purchases.Rows.Count > 0)
                         {
                             List<PurchaseModalHeader> purchase_model_header = new List<PurchaseModalHeader> { };

@@ -37,6 +37,8 @@ namespace pos.Reports.Sales
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmb_users = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             this.txtCustomerSearch = new System.Windows.Forms.TextBox();
@@ -60,13 +62,12 @@ namespace pos.Reports.Sales
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_sales_invoice_report = new System.Windows.Forms.DataGridView();
-            this.cmb_users = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sale_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.payment_method = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_items = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +76,8 @@ namespace pos.Reports.Sales
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_with_vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmb_payment_method = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_invoice_report)).BeginInit();
@@ -82,6 +85,7 @@ namespace pos.Reports.Sales
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmb_payment_method);
             this.panel1.Controls.Add(this.cmb_users);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.txt_search);
@@ -97,6 +101,7 @@ namespace pos.Reports.Sales
             this.panel1.Controls.Add(this.cmb_sale_account);
             this.panel1.Controls.Add(this.cmb_sale_type);
             this.panel1.Controls.Add(this.txt_to_date);
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txt_from_date);
             this.panel1.Controls.Add(this.label2);
@@ -111,6 +116,28 @@ namespace pos.Reports.Sales
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1517, 148);
             this.panel1.TabIndex = 0;
+            // 
+            // cmb_users
+            // 
+            this.cmb_users.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_users.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_users.FormattingEnabled = true;
+            this.cmb_users.Location = new System.Drawing.Point(761, 74);
+            this.cmb_users.Margin = new System.Windows.Forms.Padding(4);
+            this.cmb_users.Name = "cmb_users";
+            this.cmb_users.Size = new System.Drawing.Size(209, 24);
+            this.cmb_users.TabIndex = 53;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label10.Location = new System.Drawing.Point(676, 81);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 17);
+            this.label10.TabIndex = 54;
+            this.label10.Text = "Users:";
             // 
             // txt_search
             // 
@@ -374,6 +401,7 @@ namespace pos.Reports.Sales
             this.invoice_no,
             this.customer_name,
             this.sale_type,
+            this.payment_method,
             this.total_items,
             this.cost_total,
             this.subtotal,
@@ -392,28 +420,6 @@ namespace pos.Reports.Sales
             this.grid_sales_invoice_report.Size = new System.Drawing.Size(1517, 652);
             this.grid_sales_invoice_report.TabIndex = 0;
             this.grid_sales_invoice_report.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_sales_invoice_report_CellDoubleClick);
-            // 
-            // cmb_users
-            // 
-            this.cmb_users.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_users.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_users.FormattingEnabled = true;
-            this.cmb_users.Location = new System.Drawing.Point(761, 74);
-            this.cmb_users.Margin = new System.Windows.Forms.Padding(4);
-            this.cmb_users.Name = "cmb_users";
-            this.cmb_users.Size = new System.Drawing.Size(209, 24);
-            this.cmb_users.TabIndex = 53;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label10.Location = new System.Drawing.Point(676, 81);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 17);
-            this.label10.TabIndex = 54;
-            this.label10.Text = "Users:";
             // 
             // id
             // 
@@ -455,10 +461,20 @@ namespace pos.Reports.Sales
             // sale_type
             // 
             this.sale_type.DataPropertyName = "sale_type";
+            this.sale_type.FillWeight = 50F;
             this.sale_type.HeaderText = "Type";
             this.sale_type.MinimumWidth = 6;
             this.sale_type.Name = "sale_type";
             this.sale_type.ReadOnly = true;
+            // 
+            // payment_method
+            // 
+            this.payment_method.DataPropertyName = "payment_method";
+            this.payment_method.FillWeight = 50F;
+            this.payment_method.HeaderText = "Method";
+            this.payment_method.MinimumWidth = 6;
+            this.payment_method.Name = "payment_method";
+            this.payment_method.ReadOnly = true;
             // 
             // total_items
             // 
@@ -556,6 +572,31 @@ namespace pos.Reports.Sales
             this.profit.Name = "profit";
             this.profit.ReadOnly = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(352, 108);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 20);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Pay Method:";
+            // 
+            // cmb_payment_method
+            // 
+            this.cmb_payment_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_payment_method.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.cmb_payment_method.FormattingEnabled = true;
+            this.cmb_payment_method.Location = new System.Drawing.Point(455, 107);
+            this.cmb_payment_method.Margin = new System.Windows.Forms.Padding(4);
+            this.cmb_payment_method.Name = "cmb_payment_method";
+            this.cmb_payment_method.Size = new System.Drawing.Size(209, 28);
+            this.cmb_payment_method.TabIndex = 55;
+            // 
             // frm_SalesInvoiceReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -612,6 +653,7 @@ namespace pos.Reports.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn sale_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn payment_method;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_items;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
@@ -620,5 +662,7 @@ namespace pos.Reports.Sales
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_with_vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn profit;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmb_payment_method;
     }
 }

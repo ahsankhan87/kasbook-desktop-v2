@@ -575,27 +575,10 @@ namespace pos
             //throw new NotImplementedException();
         }
 
-        Form trial_obj;
         private void trialBalanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (trial_obj == null)
-            {
-                trial_obj = new frm_trialbalance_report();
-                trial_obj.MdiParent = this;
-                trial_obj.FormClosed += new FormClosedEventHandler(trial_obj_FormClosed);
-                trial_obj.Show();
-            }
-            else
-            {
-                trial_obj.Activate();
-            }
-            
-        }
-
-        void trial_obj_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            trial_obj = null;
-            //throw new NotImplementedException();
+            var frm_trialBalance = new pos.Reports.Financial.FrmTrialBalanceReport();
+            frm_trialBalance.ShowDialog(this);
         }
 
         Form customerWiseSalesReport;

@@ -227,98 +227,100 @@ namespace POS.DLL
 
                     try
                     {
-                        cmd = new SqlCommand("sp_Sales", cn, transaction);
-                        cmd.CommandType = CommandType.StoredProcedure;
+                        JournalsDLL journalsDal = new JournalsDLL();
 
-                        ///
                         foreach (ExpenseModal_Header sale_header in sales)
                         {
-                            
-                            ///CASH JOURNAL ENTRY (Credit)
-                            
-                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                            cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account);
-                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                            cmd.Parameters.AddWithValue("@debit", 0);
-                            cmd.Parameters.AddWithValue("@credit", sale_header.amount);
-                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                            cmd.Parameters.AddWithValue("@OperationType", "1");
+                            int cashAccountId;
+                            int expenseAccountId;
+                            int vatAccountId;
 
-                            cmd.ExecuteScalar();
+                            if (!int.TryParse(Convert.ToString(sale_header.cash_account), out cashAccountId) || cashAccountId <= 0)
+                                throw new DataException("Invalid cash/bank account for expense posting.");
 
-                            //expense JOURNAL ENTRY (debit)
+                            if (!int.TryParse(Convert.ToString(sale_header.expense_account), out expenseAccountId) || expenseAccountId <= 0)
+                                throw new DataException("Invalid expense account for expense posting.");
 
-                            cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                            cmd.Parameters.AddWithValue("@account_id", sale_header.expense_account);
-                            cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                            cmd.Parameters.AddWithValue("@debit", sale_header.amount);
-                            cmd.Parameters.AddWithValue("@credit", 0);
-                            cmd.Parameters.AddWithValue("@description", sale_header.description);
-                            cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                            cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@customer_id", 0);
-                            cmd.Parameters.AddWithValue("@supplier_id", 0);
-                            cmd.Parameters.AddWithValue("@entry_id", 0);
-                            cmd.Parameters.AddWithValue("@OperationType", "1");
-
-                            Int32 entry_id = Convert.ToInt32(cmd.ExecuteScalar());
-                            ////
-                            ///
-
-                            if (sale_header.vat_amount > 0)
+                            vatAccountId = expenseAccountId;
+                            if (!string.IsNullOrWhiteSpace(sale_header.vat_account))
                             {
-                                ///VAT JOURNAL ENTRY (Credit side from payment account)
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", sale_header.cash_account);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", 0);
-                                cmd.Parameters.AddWithValue("@credit", sale_header.vat_amount);
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
+                                int parsedVatAccountId;
+                                if (int.TryParse(Convert.ToString(sale_header.vat_account), out parsedVatAccountId) && parsedVatAccountId > 0)
+                                    vatAccountId = parsedVatAccountId;
+                            }
 
-                                cmd.ExecuteScalar();
+                            decimal amount = Convert.ToDecimal(sale_header.amount);
+                            decimal vatAmount = Convert.ToDecimal(sale_header.vat_amount);
 
-                                var vatDebitAccount = string.IsNullOrWhiteSpace(sale_header.vat_account)
-                                    ? sale_header.expense_account
-                                    : sale_header.vat_account;
+                            List<JVLineModel> lines = new List<JVLineModel>();
+                            lines.Add(new JVLineModel
+                            {
+                                AccountId = expenseAccountId,
+                                Debit = amount,
+                                Credit = 0m,
+                                Narration = sale_header.description,
+                                ModuleName = "EXPENSE"
+                            });
 
-                                ///VAT JOURNAL ENTRY (Debit side to VAT account)
-                                cmd = new SqlCommand("sp_JournalsCrud", cn, transaction);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@invoice_no", sale_header.invoice_no);
-                                cmd.Parameters.AddWithValue("@account_id", vatDebitAccount);
-                                cmd.Parameters.AddWithValue("@entry_date", sale_header.sale_date);
-                                cmd.Parameters.AddWithValue("@debit", sale_header.vat_amount);
-                                cmd.Parameters.AddWithValue("@credit", 0);
-                                cmd.Parameters.AddWithValue("@description", sale_header.description);
-                                cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-                                cmd.Parameters.AddWithValue("@date_created", DateTime.Now);
-                                cmd.Parameters.AddWithValue("@customer_id", 0);
-                                cmd.Parameters.AddWithValue("@supplier_id", 0);
-                                cmd.Parameters.AddWithValue("@entry_id", 0);
-                                cmd.Parameters.AddWithValue("@OperationType", "1");
+                            lines.Add(new JVLineModel
+                            {
+                                AccountId = cashAccountId,
+                                Debit = 0m,
+                                Credit = amount,
+                                Narration = sale_header.description,
+                                ModuleName = "EXPENSE"
+                            });
 
-                                cmd.ExecuteScalar();
+                            if (vatAmount > 0m)
+                            {
+                                lines.Add(new JVLineModel
+                                {
+                                    AccountId = vatAccountId,
+                                    Debit = vatAmount,
+                                    Credit = 0m,
+                                    Narration = sale_header.description,
+                                    ModuleName = "EXPENSE"
+                                });
+
+                                lines.Add(new JVLineModel
+                                {
+                                    AccountId = cashAccountId,
+                                    Debit = 0m,
+                                    Credit = vatAmount,
+                                    Narration = sale_header.description,
+                                    ModuleName = "EXPENSE"
+                                });
+                            }
+
+                            AutoJVModel model = new AutoJVModel
+                            {
+                                VoucherNo = sale_header.invoice_no,
+                                ModuleName = "EXPENSE",
+                                RefModule = "pos_expenses",
+                                RefId = 0,
+                                VoucherDate = sale_header.sale_date.Date,
+                                ReferenceNo = string.IsNullOrWhiteSpace(sale_header.referenceNo) ? sale_header.invoice_no : sale_header.referenceNo,
+                                Narration = sale_header.description,
+                                IsAutoPosted = true,
+                                BranchId = UsersModal.logged_in_branch_id,
+                                Lines = lines
+                            };
+
+                            PostResult postResult = journalsDal.PostAutoJournalEntry(model, UsersModal.logged_in_userid);
+                            if (postResult == null || !postResult.Success || postResult.VoucherId <= 0)
+                            {
+                                string errorMessage = "Expense voucher could not be posted.";
+                                if (postResult != null && postResult.Messages != null && postResult.Messages.Count > 0)
+                                {
+                                    ValidationError firstError = postResult.Messages.Find(x => x.IsBlocking);
+                                    if (firstError == null)
+                                        firstError = postResult.Messages[0];
+
+                                    if (firstError != null && !string.IsNullOrWhiteSpace(firstError.Message))
+                                        errorMessage = firstError.Message;
+                                }
+
+                                throw new DataException(errorMessage);
                             }
 
                             String query = "INSERT INTO acc_payments (invoice_no,account_code,name,amount,description,tax_rate,tax_amount,payment_date,branch_id,user_id,entry_id,supplier_invoice_no,vat_no,paymentType)" +
@@ -335,15 +337,12 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@payment_date", sale_header.sale_date);
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
-                            cmd.Parameters.AddWithValue("@entry_id", entry_id);
+                            cmd.Parameters.AddWithValue("@entry_id", postResult.VoucherId);
                             cmd.Parameters.AddWithValue("@supplier_invoice_no", sale_header.referenceNo);
                             cmd.Parameters.AddWithValue("@vat_no", sale_header.VATNumber);
                             cmd.Parameters.AddWithValue("@paymentType", sale_header.PaymentType);
 
-
                             newSaleID = Convert.ToInt32(cmd.ExecuteScalar());
-                            ///
-
                         }
 
                         transaction.Commit();
@@ -354,7 +353,6 @@ namespace POS.DLL
                         throw;
                     }
                 }
-
 
                 return newSaleID;
 
@@ -443,24 +441,24 @@ namespace POS.DLL
                     cn.Open();
 
                     string query = @"SELECT
-P.invoice_no AS VoucherNo,
-P.payment_date AS [Date],
-P.name AS AccountName,
-P.description AS [Description],
-CASE
-WHEN LOWER(P.description) LIKE '%mode: cash%' THEN 'Cash'
-WHEN LOWER(P.description) LIKE '%mode: bank%' THEN 'Bank'
-WHEN LOWER(P.description) LIKE '%mode: credit%' THEN 'Credit'
-ELSE 'Cash'
-END AS PaymentMode,
-P.amount AS Amount,
-P.tax_amount AS Tax,
-(P.amount + P.tax_amount) AS NetAmount,
-CASE WHEN LOWER(P.description) LIKE '%attachment:%' THEN 1 ELSE 0 END AS HasAttachment,
-CASE WHEN EXISTS (SELECT 1 FROM acc_entries E WHERE E.invoice_no = P.invoice_no AND E.branch_id = P.branch_id) THEN 1 ELSE 0 END AS Posted
-FROM acc_payments P
-WHERE P.branch_id = @branch_id
-AND P.payment_date BETWEEN @fromDate AND @toDate";
+                        P.invoice_no AS VoucherNo,
+                        P.payment_date AS [Date],
+                        P.name AS AccountName,
+                        P.description AS [Description],
+                        CASE
+                        WHEN LOWER(P.description) LIKE '%mode: cash%' THEN 'Cash'
+                        WHEN LOWER(P.description) LIKE '%mode: bank%' THEN 'Bank'
+                        WHEN LOWER(P.description) LIKE '%mode: credit%' THEN 'Credit'
+                        ELSE 'Cash'
+                        END AS PaymentMode,
+                        P.amount AS Amount,
+                        P.tax_amount AS Tax,
+                        (P.amount + P.tax_amount) AS NetAmount,
+                        CASE WHEN LOWER(P.description) LIKE '%attachment:%' THEN 1 ELSE 0 END AS HasAttachment,
+                        CASE WHEN EXISTS (SELECT 1 FROM acc_entries E WHERE E.invoice_no = P.invoice_no AND E.branch_id = P.branch_id) THEN 1 ELSE 0 END AS Posted
+                        FROM acc_payments P
+                        WHERE P.branch_id = @branch_id
+                        AND P.payment_date BETWEEN @fromDate AND @toDate";
 
                     if (expenseAccountId > 0)
                     {
@@ -520,17 +518,17 @@ AND P.payment_date BETWEEN @fromDate AND @toDate";
                     cn.Open();
 
                     string query = @"SELECT TOP 1
-invoice_no,
-payment_date,
-account_code,
-name,
-amount,
-tax_rate,
-tax_amount,
-description
-FROM acc_payments
-WHERE branch_id = @branch_id AND invoice_no = @invoice_no
-ORDER BY id DESC";
+                        invoice_no,
+                        payment_date,
+                        account_code,
+                        name,
+                        amount,
+                        tax_rate,
+                        tax_amount,
+                        description
+                        FROM acc_payments
+                        WHERE branch_id = @branch_id AND invoice_no = @invoice_no
+                        ORDER BY id DESC";
 
                     cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -560,6 +558,11 @@ ORDER BY id DESC";
                     int result = 0;
 
                     cmd = new SqlCommand("DELETE FROM acc_entries WHERE branch_id=@branch_id AND invoice_no=@invoice_no", cn, transaction);
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    cmd.Parameters.AddWithValue("@invoice_no", voucherNo);
+                    cmd.ExecuteNonQuery();
+
+                    cmd = new SqlCommand("DELETE FROM acc_entries_header WHERE branch_id=@branch_id AND InvoiceNo=@invoice_no", cn, transaction);
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     cmd.Parameters.AddWithValue("@invoice_no", voucherNo);
                     cmd.ExecuteNonQuery();

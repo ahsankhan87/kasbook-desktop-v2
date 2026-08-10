@@ -63,7 +63,7 @@ namespace POS.DLL
                         VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
                     FROM acc_payments
                     WHERE payment_date >= @from AND payment_date < DATEADD(day,1,@to)
-                      AND ISNULL(invoice_no,'') LIKE 'N-%'
+                      
                 )
                 SELECT * FROM (
                     SELECT
@@ -186,7 +186,7 @@ namespace POS.DLL
                         VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
                     FROM acc_payments
                     WHERE payment_date >= @from AND payment_date < DATEADD(day,1,@to)
-                      AND ISNULL(invoice_no,'') LIKE 'N-%'
+                      
                     GROUP BY branch_id
                 ),
                 Branches AS (
@@ -262,7 +262,7 @@ namespace POS.DLL
                     SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(amount,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
                     FROM acc_payments
                     WHERE branch_id = @branch_id AND payment_date >= @from AND payment_date < DATEADD(day,1,@to)
-                      AND ISNULL(invoice_no,'') LIKE 'N-%'
+                      
                 )
                 SELECT * FROM (
                     SELECT Terms = 'Sales', Docs = (SELECT Docs FROM SalesAgg), Flag = 'Sales', NetAmount = (SELECT NetAmount FROM SalesAgg), VatAmount = (SELECT VatAmount FROM SalesAgg), SortOrder = 1
@@ -352,7 +352,7 @@ namespace POS.DLL
                         Description = ISNULL(e.description, '')
                     FROM acc_payments e
                     WHERE e.payment_date >= @pFrom AND e.payment_date < DATEADD(day,1,@pTo)
-                      AND ISNULL(e.invoice_no,'') LIKE 'N-%'";
+                     ";
 
                 string sql;
                 switch (normalizedTerm.ToLowerInvariant())

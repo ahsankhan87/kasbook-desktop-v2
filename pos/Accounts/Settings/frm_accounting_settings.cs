@@ -83,7 +83,7 @@ namespace pos
 
             _accountSettingMap[cmbInventoryAsset] = SettingKeys.DefaultInventoryAccount;
             _accountSettingMap[cmbInventoryCogs] = SettingKeys.DefaultCogsAccount;
-            _accountSettingMap[cmbInventoryAdjustment] = "ACC_DEFAULT_STOCK_ADJUSTMENT_ACCOUNT";
+            _accountSettingMap[cmbInventoryAdjustment] = SettingKeys.DefaultStockAdjustmentAccount;
 
             _accountSettingMap[cmbFaAsset] = "ACC_DEFAULT_FA_ASSET_ACCOUNT";
             _accountSettingMap[cmbFaAccumDep] = "ACC_DEFAULT_FA_ACCUM_DEP_ACCOUNT";
@@ -159,7 +159,15 @@ namespace pos
             txtRegistrationNo.Text = GetRowString(row, "registration_no");
             txtNtnVat.Text = string.IsNullOrWhiteSpace(GetRowString(row, "ntn")) ? GetRowString(row, "vat_no") : GetRowString(row, "ntn");
             txtStrn.Text = GetRowString(row, "strn");
-
+            
+            chk_use_zatca_e_invoice.Checked = (string.IsNullOrEmpty(row["useZatcaEInvoice"].ToString()) ? false : Convert.ToBoolean(row["useZatcaEInvoice"]));
+            txt_buildingNumber.Text = row["BuildingNumber"].ToString();
+            txt_citySubdivisionName.Text = row["CitySubdivisionName"].ToString();
+            txt_StreetName.Text = row["StreetName"].ToString();
+            txt_cityName.Text = row["CityName"].ToString();
+            txt_postalCode.Text = row["PostalCode"].ToString();
+            txt_countryName.Text = row["CountryName"].ToString();
+            
             SelectComboByText(cmbCountry, GetRowString(row, "countryName"));
 
             var logoPath = txtLogoPath.Text.Trim();
@@ -406,8 +414,8 @@ namespace pos
                 image = txtLogoPath.Text.Trim(),
                 currency_id = cmbBaseCurrency.SelectedValue == null ? 0 : Convert.ToInt32(cmbBaseCurrency.SelectedValue),
                 user_id = UsersModal.logged_in_userid,
-                countryName = cmbCountry.Text,
-                useZatcaEInvoice = true,
+                //countryName = cmbCountry.Text,
+                useZatcaEInvoice = chk_use_zatca_e_invoice.Checked,
                 cash_acc_id = GetIntOrDefault(row, "cash_acc_id"),
                 sales_acc_id = GetIntOrDefault(row, "sales_acc_id"),
                 inventory_acc_id = GetIntOrDefault(row, "inventory_acc_id"),
@@ -425,7 +433,14 @@ namespace pos
                 registration_no = txtRegistrationNo.Text,
                 strn = txtStrn.Text,
                 website = txtWebsite.Text,
-                financial_year_start_month = cmbFyStartMonth.SelectedIndex + 1
+                financial_year_start_month = cmbFyStartMonth.SelectedIndex + 1,
+
+                buildingNumber = txt_buildingNumber.Text.Trim(),
+                citySubdivisionName = txt_citySubdivisionName.Text.Trim(),
+                streetName = txt_StreetName.Text.Trim(),
+                cityName = txt_cityName.Text.Trim(),
+                postalCode = txt_postalCode.Text.Trim(),
+                countryName = txt_countryName.Text.Trim()
             };
 
             _companiesBll.Update(modal);

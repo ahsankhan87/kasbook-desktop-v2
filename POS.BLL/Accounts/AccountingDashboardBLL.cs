@@ -6,6 +6,8 @@ namespace POS.BLL
 {
     public class AccountingDashboardData
     {
+        public decimal CashBalance { get; set; }
+        public decimal BankBalance { get; set; }
         public decimal CashBankBalance { get; set; }
         public decimal TotalReceivables { get; set; }
         public decimal TotalPayables { get; set; }
@@ -33,6 +35,8 @@ namespace POS.BLL
             if (kpis != null && kpis.Rows.Count > 0)
             {
                 DataRow row = kpis.Rows[0];
+                result.CashBalance = ReadDecimal(row, "CashBalance");
+                result.BankBalance = ReadDecimal(row, "BankBalance");
                 result.CashBankBalance = ReadDecimal(row, "CashBankBalance");
                 result.TotalReceivables = ReadDecimal(row, "TotalReceivables");
                 result.TotalPayables = ReadDecimal(row, "TotalPayables");

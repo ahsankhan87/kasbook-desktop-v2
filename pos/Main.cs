@@ -623,10 +623,6 @@ namespace pos
         }
 
         Form frm_customer_obj;
-        private void customersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         void frm_customer_obj_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1247,27 +1243,10 @@ namespace pos
             //throw new NotImplementedException();
         }
 
-        Form trial_obj;
         private void trialBalanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (trial_obj == null)
-            {
-                trial_obj = new frm_trialbalance_report();
-                trial_obj.MdiParent = this;
-                trial_obj.FormClosed += new FormClosedEventHandler(trial_obj_FormClosed);
-                trial_obj.Show();
-            }
-            else
-            {
-                trial_obj.Activate();
-            }
-
-        }
-
-        void trial_obj_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            trial_obj = null;
-            //throw new NotImplementedException();
+            var frm_trialBalance = new pos.Reports.Financial.FrmTrialBalanceReport();
+            frm_trialBalance.ShowDialog(this);
         }
 
         Form customerWiseSalesReport;
@@ -2544,11 +2523,6 @@ namespace pos
             accountingDashboard.ShowDialog(this);
         }
 
-        private void customersDashboardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void suppliersSummaryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frm_suppliersSummary = new pos.frm_suppliers();
@@ -2643,6 +2617,12 @@ namespace pos
         {
             var frm_cashBook = new pos.Reports.Accounts.FrmCashBook();
             frm_cashBook.ShowDialog(this);
+        }
+
+        private void dailyCashBankReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm_dailyCashBankReport = new pos.Reports.Accounts.FrmDailyCashBankReport();
+            frm_dailyCashBankReport.ShowDialog(this);
         }
 
         private void incomeStatementToolStripMenuItem_Click(object sender, EventArgs e)

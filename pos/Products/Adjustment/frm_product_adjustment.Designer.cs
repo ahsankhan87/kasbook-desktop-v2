@@ -51,7 +51,6 @@ namespace pos
             this.item_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblLocation = new System.Windows.Forms.Label();
-            this.ddlAdjustmentAccount = new System.Windows.Forms.ComboBox();
             this.txt_date = new System.Windows.Forms.DateTimePicker();
             this.txt_ref_no = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -218,8 +217,6 @@ namespace pos
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.lblLocation);
-            this.panel1.Controls.Add(this.ddlAdjustmentAccount);
             this.panel1.Controls.Add(this.txt_date);
             this.panel1.Controls.Add(this.txt_ref_no);
             this.panel1.Controls.Add(this.label4);
@@ -242,12 +239,6 @@ namespace pos
             // 
             resources.ApplyResources(this.lblLocation, "lblLocation");
             this.lblLocation.Name = "lblLocation";
-            // 
-            // ddlAdjustmentAccount
-            // 
-            this.ddlAdjustmentAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.ddlAdjustmentAccount, "ddlAdjustmentAccount");
-            this.ddlAdjustmentAccount.Name = "ddlAdjustmentAccount";
             // 
             // txt_date
             // 

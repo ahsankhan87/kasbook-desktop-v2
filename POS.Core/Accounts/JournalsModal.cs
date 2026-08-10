@@ -146,6 +146,8 @@ namespace POS.Core
 
     public class AutoJVModel
     {
+        public string VoucherNo { get; set; }
+
         public string ModuleName { get; set; }
 
         public string RefModule { get; set; }

@@ -46,6 +46,9 @@ namespace POS.Core
         /// <summary>Account code for freight / carriage inward.</summary>
         public const string DefaultFreightAccount     = "ACC_DEFAULT_FREIGHT_ACCOUNT";
 
+        /// <summary>Account code for inventory adjustments / stock variance.</summary>
+        public const string DefaultStockAdjustmentAccount = "ACC_DEFAULT_STOCK_ADJUSTMENT_ACCOUNT";
+
         // ── Accounting Behaviour ──────────────────────────────────────────
         /// <summary>Month (1-12) when the financial year starts. 7 = July.</summary>
         public const string FinancialYearStartMonth   = "ACC_FINANCIAL_YEAR_START_MONTH";

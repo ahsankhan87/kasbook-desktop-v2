@@ -157,10 +157,12 @@
             this.cashFlowManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cashBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dailyCashBankReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankReconciliationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.financialPeriodManagementToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.financialYearsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.financialPeriodManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vATDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewExpenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expenseListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -211,7 +213,6 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
-            this.vATDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -818,13 +819,13 @@
             // 
             this.createNewCustomerToolStripMenuItem.Name = "createNewCustomerToolStripMenuItem";
             resources.ApplyResources(this.createNewCustomerToolStripMenuItem, "createNewCustomerToolStripMenuItem");
-            this.createNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.customersToolStripMenuItem_Click);
+            this.createNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.CustomersToolStripButton_Click);
             // 
             // customersSummaryToolStripMenuItem
             // 
             this.customersSummaryToolStripMenuItem.Name = "customersSummaryToolStripMenuItem";
             resources.ApplyResources(this.customersSummaryToolStripMenuItem, "customersSummaryToolStripMenuItem");
-            this.customersSummaryToolStripMenuItem.Click += new System.EventHandler(this.customersDashboardToolStripMenuItem_Click);
+            this.customersSummaryToolStripMenuItem.Click += new System.EventHandler(this.customersSummaryToolStripMenuItem_Click);
             // 
             // suppliersToolStripMenuItem
             // 
@@ -1090,6 +1091,7 @@
             this.cashManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cashFlowManagementToolStripMenuItem,
             this.cashBookToolStripMenuItem,
+            this.dailyCashBankReportToolStripMenuItem,
             this.bankReconciliationToolStripMenuItem});
             this.cashManagementToolStripMenuItem.Name = "cashManagementToolStripMenuItem";
             resources.ApplyResources(this.cashManagementToolStripMenuItem, "cashManagementToolStripMenuItem");
@@ -1112,6 +1114,12 @@
             this.cashBookToolStripMenuItem.Name = "cashBookToolStripMenuItem";
             resources.ApplyResources(this.cashBookToolStripMenuItem, "cashBookToolStripMenuItem");
             this.cashBookToolStripMenuItem.Click += new System.EventHandler(this.cashBookToolStripMenuItem_Click);
+            // 
+            // dailyCashBankReportToolStripMenuItem
+            // 
+            this.dailyCashBankReportToolStripMenuItem.Name = "dailyCashBankReportToolStripMenuItem";
+            resources.ApplyResources(this.dailyCashBankReportToolStripMenuItem, "dailyCashBankReportToolStripMenuItem");
+            this.dailyCashBankReportToolStripMenuItem.Click += new System.EventHandler(this.dailyCashBankReportToolStripMenuItem_Click);
             // 
             // bankReconciliationToolStripMenuItem
             // 
@@ -1138,6 +1146,12 @@
             this.financialPeriodManagementToolStripMenuItem.Name = "financialPeriodManagementToolStripMenuItem";
             resources.ApplyResources(this.financialPeriodManagementToolStripMenuItem, "financialPeriodManagementToolStripMenuItem");
             this.financialPeriodManagementToolStripMenuItem.Click += new System.EventHandler(this.financialPeriodManagementToolStripMenuItem_Click);
+            // 
+            // vATDashboardToolStripMenuItem
+            // 
+            this.vATDashboardToolStripMenuItem.Name = "vATDashboardToolStripMenuItem";
+            resources.ApplyResources(this.vATDashboardToolStripMenuItem, "vATDashboardToolStripMenuItem");
+            this.vATDashboardToolStripMenuItem.Click += new System.EventHandler(this.vATDashboardToolStripMenuItem_Click);
             // 
             // expensesToolStripMenuItem
             // 
@@ -1488,12 +1502,6 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
-            // vATDashboardToolStripMenuItem
-            // 
-            this.vATDashboardToolStripMenuItem.Name = "vATDashboardToolStripMenuItem";
-            resources.ApplyResources(this.vATDashboardToolStripMenuItem, "vATDashboardToolStripMenuItem");
-            this.vATDashboardToolStripMenuItem.Click += new System.EventHandler(this.vATDashboardToolStripMenuItem_Click);
-            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1634,6 +1642,7 @@
         private System.Windows.Forms.ToolStripMenuItem cashFlowManagementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cashBookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dailyCashBankReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankReconciliationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem financialPeriodManagementToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem financialYearsToolStripMenuItem;

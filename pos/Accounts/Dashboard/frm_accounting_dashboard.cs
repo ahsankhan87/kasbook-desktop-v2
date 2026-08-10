@@ -12,6 +12,7 @@ namespace pos
     public partial class frm_accounting_dashboard : Form
     {
         private readonly AccountingDashboardBLL _bll = new AccountingDashboardBLL();
+        private bool _isInitializing;
 
         public frm_accounting_dashboard()
         {
@@ -25,8 +26,18 @@ namespace pos
             LoadPeriods();
             ConfigureCharts();
             ConfigureGrids();
-            cmbPeriod.SelectedIndex = 0;
-            LoadDashboard();
+
+            _isInitializing = true;
+            try
+            {
+                cmbPeriod.SelectedIndex = 0;
+            }
+            finally
+            {
+                _isInitializing = false;
+            }
+
+            BeginInvoke(new Action(LoadDashboard));
         }
 
         private void LoadPeriods()
@@ -225,7 +236,11 @@ namespace pos
 
         private void BindKpis(AccountingDashboardData dashboard)
         {
-            lblCashValue.Text = dashboard.CashBankBalance.ToString("N2");
+            lblCashValue.Text = string.Format(
+                "Cash: {0:N2}{2}Bank: {1:N2}",
+                dashboard.CashBalance,
+                dashboard.BankBalance,
+                Environment.NewLine);
             lblReceivableValue.Text = dashboard.TotalReceivables.ToString("N2");
             lblPayableValue.Text = dashboard.TotalPayables.ToString("N2");
             lblRevenueValue.Text = dashboard.Revenue.ToString("N2");
@@ -402,6 +417,11 @@ namespace pos
 
         private void cmbPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_isInitializing)
+            {
+                return;
+            }
+
             LoadDashboard();
         }
 
@@ -486,13 +506,13 @@ namespace pos
 
         private void cardReceivable_Click(object sender, EventArgs e)
         {
-            var frm = new Reports.Accounts.frm_ARAgingReport();
+            var frm = new Reports.Accounts.FrmCustomerSubLedger();
             frm.ShowDialog(this);
         }
 
         private void cardPayable_Click(object sender, EventArgs e)
         {
-            var frm = new Reports.Accounts.frm_APAgingReport();
+            var frm = new Reports.Accounts.FrmSupplierSubLedger();
             frm.ShowDialog(this);
         }
 

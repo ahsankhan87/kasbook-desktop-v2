@@ -2698,6 +2698,20 @@ namespace pos
 
                         if (grid_sales.Rows.Count > 0)
                         {
+                            // CHECK PERIOD LOCK BEFORE SAVING
+                            DateTime saleDate = DateTime.Parse(txt_sale_date.Text);
+                            FinancialPeriodBLL periodBll = new FinancialPeriodBLL();
+                            if (periodBll.IsPeriodLocked(saleDate))
+                            {
+                                UiMessages.ShowError(
+                                    periodBll.GetPeriodLockReason(saleDate),
+                                    "The financial period for this date is closed or locked. No new transactions are allowed.",
+                                    "Period Locked",
+                                    "الفترة مقفلة"
+                                );
+                                return;
+                            }
+
                             List<SalesModalHeader> sales_model_header = new List<SalesModalHeader> { };
                             List<SalesModal> sales_model_detail = new List<SalesModal> { };
 

@@ -152,6 +152,20 @@ namespace pos
             this.panelBottom = new System.Windows.Forms.Panel();
             this.btnResetDefaults = new System.Windows.Forms.Button();
             this.btnSaveSettings = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_buildingNumber = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txt_countryName = new System.Windows.Forms.TextBox();
+            this.txt_postalCode = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_cityName = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txt_citySubdivisionName = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txt_StreetName = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.tabMain.SuspendLayout();
             this.tabCompany.SuspendLayout();
             this.groupCompanyHeader.SuspendLayout();
@@ -172,6 +186,7 @@ namespace pos
             this.tabReports.SuspendLayout();
             this.groupReports.SuspendLayout();
             this.panelBottom.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -214,6 +229,8 @@ namespace pos
             // 
             // groupCompanyHeader
             // 
+            this.groupCompanyHeader.Controls.Add(this.chk_use_zatca_e_invoice);
+            this.groupCompanyHeader.Controls.Add(this.groupBox3);
             this.groupCompanyHeader.Controls.Add(this.lblCurrencyLockNote);
             this.groupCompanyHeader.Controls.Add(this.txtLogoPath);
             this.groupCompanyHeader.Controls.Add(this.btnBrowseLogo);
@@ -256,21 +273,22 @@ namespace pos
             // 
             this.lblCurrencyLockNote.AutoSize = true;
             this.lblCurrencyLockNote.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblCurrencyLockNote.Location = new System.Drawing.Point(436, 288);
+            this.lblCurrencyLockNote.Location = new System.Drawing.Point(25, 321);
             this.lblCurrencyLockNote.Name = "lblCurrencyLockNote";
-            this.lblCurrencyLockNote.Size = new System.Drawing.Size(0, 23);
+            this.lblCurrencyLockNote.Size = new System.Drawing.Size(49, 23);
             this.lblCurrencyLockNote.TabIndex = 29;
+            this.lblCurrencyLockNote.Text = "note:";
             // 
             // txtLogoPath
             // 
-            this.txtLogoPath.Location = new System.Drawing.Point(154, 396);
+            this.txtLogoPath.Location = new System.Drawing.Point(942, 165);
             this.txtLogoPath.Name = "txtLogoPath";
-            this.txtLogoPath.Size = new System.Drawing.Size(600, 29);
+            this.txtLogoPath.Size = new System.Drawing.Size(350, 29);
             this.txtLogoPath.TabIndex = 14;
             // 
             // btnBrowseLogo
             // 
-            this.btnBrowseLogo.Location = new System.Drawing.Point(769, 396);
+            this.btnBrowseLogo.Location = new System.Drawing.Point(1047, 200);
             this.btnBrowseLogo.Name = "btnBrowseLogo";
             this.btnBrowseLogo.Size = new System.Drawing.Size(75, 29);
             this.btnBrowseLogo.TabIndex = 15;
@@ -299,7 +317,7 @@ namespace pos
             // cmbBaseCurrency
             // 
             this.cmbBaseCurrency.FormattingEnabled = true;
-            this.cmbBaseCurrency.Location = new System.Drawing.Point(159, 285);
+            this.cmbBaseCurrency.Location = new System.Drawing.Point(159, 288);
             this.cmbBaseCurrency.Name = "cmbBaseCurrency";
             this.cmbBaseCurrency.Size = new System.Drawing.Size(300, 29);
             this.cmbBaseCurrency.TabIndex = 12;
@@ -307,7 +325,7 @@ namespace pos
             // cmbFyEndMonth
             // 
             this.cmbFyEndMonth.FormattingEnabled = true;
-            this.cmbFyEndMonth.Location = new System.Drawing.Point(602, 181);
+            this.cmbFyEndMonth.Location = new System.Drawing.Point(602, 252);
             this.cmbFyEndMonth.Name = "cmbFyEndMonth";
             this.cmbFyEndMonth.Size = new System.Drawing.Size(294, 29);
             this.cmbFyEndMonth.TabIndex = 11;
@@ -330,9 +348,9 @@ namespace pos
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(159, 213);
+            this.txtEmail.Location = new System.Drawing.Point(602, 181);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(300, 29);
+            this.txtEmail.Size = new System.Drawing.Size(294, 29);
             this.txtEmail.TabIndex = 8;
             // 
             // txtPhone
@@ -347,7 +365,7 @@ namespace pos
             this.txtAddress.Location = new System.Drawing.Point(159, 145);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(300, 60);
+            this.txtAddress.Size = new System.Drawing.Size(300, 95);
             this.txtAddress.TabIndex = 6;
             // 
             // txtStrn
@@ -406,7 +424,7 @@ namespace pos
             // lblFyEnd
             // 
             this.lblFyEnd.AutoSize = true;
-            this.lblFyEnd.Location = new System.Drawing.Point(467, 181);
+            this.lblFyEnd.Location = new System.Drawing.Point(467, 252);
             this.lblFyEnd.Name = "lblFyEnd";
             this.lblFyEnd.Size = new System.Drawing.Size(117, 23);
             this.lblFyEnd.TabIndex = 10;
@@ -433,7 +451,7 @@ namespace pos
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(25, 216);
+            this.lblEmail.Location = new System.Drawing.Point(467, 184);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(51, 23);
             this.lblEmail.TabIndex = 7;
@@ -1523,6 +1541,153 @@ namespace pos
             this.btnSaveSettings.UseVisualStyleBackColor = true;
             this.btnSaveSettings.Click += new System.EventHandler(this.btnSaveSettings_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txt_buildingNumber);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.txt_countryName);
+            this.groupBox3.Controls.Add(this.txt_postalCode);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.txt_cityName);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.txt_citySubdivisionName);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.txt_StreetName);
+            this.groupBox3.Controls.Add(this.label27);
+            this.groupBox3.Location = new System.Drawing.Point(6, 375);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(532, 218);
+            this.groupBox3.TabIndex = 30;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Postal Address";
+            // 
+            // txt_buildingNumber
+            // 
+            this.txt_buildingNumber.Location = new System.Drawing.Point(266, 59);
+            this.txt_buildingNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_buildingNumber.Name = "txt_buildingNumber";
+            this.txt_buildingNumber.Size = new System.Drawing.Size(241, 29);
+            this.txt_buildingNumber.TabIndex = 2;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label22.Location = new System.Drawing.Point(17, 33);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(105, 23);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "Street Name";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label23.Location = new System.Drawing.Point(266, 33);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(140, 23);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "Building Number";
+            // 
+            // txt_countryName
+            // 
+            this.txt_countryName.Location = new System.Drawing.Point(266, 176);
+            this.txt_countryName.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_countryName.Name = "txt_countryName";
+            this.txt_countryName.Size = new System.Drawing.Size(241, 29);
+            this.txt_countryName.TabIndex = 6;
+            this.txt_countryName.Text = "SA";
+            // 
+            // txt_postalCode
+            // 
+            this.txt_postalCode.Location = new System.Drawing.Point(17, 176);
+            this.txt_postalCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_postalCode.Name = "txt_postalCode";
+            this.txt_postalCode.Size = new System.Drawing.Size(241, 29);
+            this.txt_postalCode.TabIndex = 5;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label24.Location = new System.Drawing.Point(17, 92);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(181, 23);
+            this.label24.TabIndex = 1;
+            this.label24.Text = "City Subdivision Name";
+            // 
+            // txt_cityName
+            // 
+            this.txt_cityName.Location = new System.Drawing.Point(266, 118);
+            this.txt_cityName.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_cityName.Name = "txt_cityName";
+            this.txt_cityName.Size = new System.Drawing.Size(241, 29);
+            this.txt_cityName.TabIndex = 4;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label25.Location = new System.Drawing.Point(266, 92);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(90, 23);
+            this.label25.TabIndex = 1;
+            this.label25.Text = "City Name";
+            // 
+            // txt_citySubdivisionName
+            // 
+            this.txt_citySubdivisionName.Location = new System.Drawing.Point(17, 118);
+            this.txt_citySubdivisionName.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_citySubdivisionName.Name = "txt_citySubdivisionName";
+            this.txt_citySubdivisionName.Size = new System.Drawing.Size(241, 29);
+            this.txt_citySubdivisionName.TabIndex = 3;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label26.Location = new System.Drawing.Point(17, 150);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(100, 23);
+            this.label26.TabIndex = 1;
+            this.label26.Text = "Postal Code";
+            // 
+            // txt_StreetName
+            // 
+            this.txt_StreetName.Location = new System.Drawing.Point(17, 59);
+            this.txt_StreetName.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_StreetName.Name = "txt_StreetName";
+            this.txt_StreetName.Size = new System.Drawing.Size(241, 29);
+            this.txt_StreetName.TabIndex = 1;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label27.Location = new System.Drawing.Point(266, 150);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(71, 23);
+            this.label27.TabIndex = 1;
+            this.label27.Text = "Country";
+            // 
+            // chk_use_zatca_e_invoice
+            // 
+            this.chk_use_zatca_e_invoice.AutoSize = true;
+            this.chk_use_zatca_e_invoice.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.chk_use_zatca_e_invoice.Location = new System.Drawing.Point(602, 300);
+            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
+            this.chk_use_zatca_e_invoice.Size = new System.Drawing.Size(238, 27);
+            this.chk_use_zatca_e_invoice.TabIndex = 113;
+            this.chk_use_zatca_e_invoice.Text = "Enable E-Invoicing (ZATCA)";
+            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
+            // 
             // frm_accounting_settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -1560,6 +1725,8 @@ namespace pos
             this.groupReports.ResumeLayout(false);
             this.groupReports.PerformLayout();
             this.panelBottom.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1708,5 +1875,19 @@ namespace pos
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnSaveSettings;
         private System.Windows.Forms.Button btnResetDefaults;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txt_buildingNumber;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txt_countryName;
+        private System.Windows.Forms.TextBox txt_postalCode;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txt_cityName;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txt_citySubdivisionName;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox txt_StreetName;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.CheckBox chk_use_zatca_e_invoice;
     }
 }

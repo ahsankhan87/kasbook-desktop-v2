@@ -425,5 +425,18 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public DataSet GetDailyCashBankReport(DateTime? fromDate = null, DateTime? toDate = null, int? accountId = null, int? branchId = null)
+        {
+            try
+            {
+                AccountsDLL objDLL = new AccountsDLL();
+                return objDLL.GetDailyCashBankReport(fromDate, toDate, accountId, branchId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

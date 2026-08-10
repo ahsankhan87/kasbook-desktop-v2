@@ -15,9 +15,7 @@ namespace pos
     {
 
         public int inventory_acc_id = 0;
-        public int item_variance_acc_id = 0;
-        public int SelectedAdjustmentAccountId { get; private set; }
-        private readonly Dictionary<string, int> _accountNameToId = new Dictionary<string, int>();
+        public int item_adjustment_acc_id = 0;
 
         private readonly List<DeletedProductAdjustment> _deletedProducts = new List<DeletedProductAdjustment>();
 
@@ -61,7 +59,30 @@ namespace pos
             {
                 txt_ref_no.Text = GetMAXInvoiceNo();
                 Get_AccountID_From_Settings();
-                LoadInventoryAdjustmentAccounts();
+
+                // Validate that required accounts are configured before proceeding
+                if (inventory_acc_id <= 0)
+                {
+                    UiMessages.ShowError(
+                        "Default inventory account is not configured. Please go to Accounting Settings ? Default Accounts.",
+                        "áã íÊã Êßæíä ÍÓÇÈ ÇáãÎÒæä ÇáÇÝÊÑÇÖí. íÑÌì ÇáÐåÇÈ Åáì ÅÚÏÇÏÇÊ ÇáãÍÇÓÈÉ ? ÇáÍÓÇÈÇÊ ÇáÇÝÊÑÇÖíÉ.",
+                        captionEn: "Configuration Error",
+                        captionAr: "ÎØÃ Ýí ÇáÊßæíä");
+                    this.Close();
+                    return;
+                }
+
+                if (item_adjustment_acc_id <= 0)
+                {
+                    UiMessages.ShowError(
+                        "Inventory adjustment account is not configured. Please go to Accounting Settings ? Default Accounts.",
+                        "áã íÊã Êßæíä ÍÓÇÈ ÊÓæíÉ ÇáãÎÒæä. íÑÌì ÇáÐåÇÈ Åáì ÅÚÏÇÏÇÊ ÇáãÍÇÓÈÉ ? ÇáÍÓÇÈÇÊ ÇáÇÝÊÑÇÖíÉ.",
+                        captionEn: "Configuration Error",
+                        captionAr: "ÎØÃ Ýí ÇáÊßæíä");
+                    this.Close();
+                    return;
+                }
+
                 ConfigureGridEditability();
             }
         }
@@ -77,8 +98,6 @@ namespace pos
             {
                 try
                 {
-                    SelectedAdjustmentAccountId = ResolveSelectedAdjustmentAccountId();
-
                     if (grid_search_products.Rows.Count <= 0 && _deletedProducts.Count == 0)
                     {
                         UiMessages.ShowWarning(
@@ -136,9 +155,7 @@ namespace pos
                         var rowMeta = row.Tag as AdjustmentRowMeta;
                         decimal originalQty = rowMeta != null ? rowMeta.OriginalQty : Convert.ToDecimal(qty);
                         decimal originalAvgCost = rowMeta != null ? rowMeta.OriginalAvgCost : Convert.ToDecimal(avg_cost);
-                        int adjustmentAccountId = SelectedAdjustmentAccountId > 0
-                            ? SelectedAdjustmentAccountId
-                            : item_variance_acc_id;
+                        int adjustmentAccountId = item_adjustment_acc_id;
 
                         if (avg_cost < 0 || unit_price < 0)
                         {
@@ -217,7 +234,7 @@ namespace pos
                         decimal inventoryImpact = Math.Round(0m - oldInventoryValue, 2);
                         int adjustmentAccountId = deleted.AdjustmentAccountId > 0
                             ? deleted.AdjustmentAccountId
-                            : (SelectedAdjustmentAccountId > 0 ? SelectedAdjustmentAccountId : item_variance_acc_id);
+                            : item_adjustment_acc_id;
 
                         if (inventoryImpact != 0m && adjustmentAccountId <= 0)
                         {
@@ -459,15 +476,15 @@ namespace pos
         private void Get_AccountID_From_Settings()
         {
             inventory_acc_id = 0;
-            item_variance_acc_id = 0;
+            item_adjustment_acc_id = 0;
 
             var settings = AccountingSettingsService.Instance;
             var inventoryAccount = settings.GetDefaultAccount("INVENTORY");
             if (inventoryAccount != null && inventoryAccount.id > 0)
                 inventory_acc_id = inventoryAccount.id;
 
-            string adjustmentAccountCode = settings.GetString("ACC_DEFAULT_STOCK_ADJUSTMENT_ACCOUNT", string.Empty);
-            item_variance_acc_id = ResolveAccountIdByCode(adjustmentAccountCode);
+            string adjustmentAccountCode = settings.GetString(SettingKeys.DefaultStockAdjustmentAccount, string.Empty);
+            item_adjustment_acc_id = ResolveAccountIdByCode(adjustmentAccountCode);
         }
 
         private int ResolveAccountIdByCode(string accountCode)
@@ -666,7 +683,7 @@ namespace pos
                                 {
                                     OriginalQty = qty,
                                     OriginalAvgCost = avg_cost,
-                                    AdjustmentAccountId = item_variance_acc_id
+                                    AdjustmentAccountId = item_adjustment_acc_id
                                 };
                             }
                         }
@@ -702,88 +719,6 @@ namespace pos
                 captionEn: "Adjustment",
                 captionAr: "ÊÓæíÉ");
 
-        }
-        private void LoadInventoryAdjustmentAccounts()
-        {
-            try
-            {
-                AccountsBLL accountsBll = new AccountsBLL();
-
-                // Load all accounts
-                DataTable allAccounts = accountsBll.GetAccountsWithAccountType();
-
-                ddlAdjustmentAccount.Items.Clear();
-                _accountNameToId.Clear();
-
-                // Build name?id map for all accounts so we can look up IDs when saving/posting
-                foreach (DataRow row in allAccounts.Rows)
-                {
-                    string accountName = row["name"]?.ToString() ?? "";
-                    int accountId = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : 0;
-                    if (!string.IsNullOrEmpty(accountName) && accountId > 0 && !_accountNameToId.ContainsKey(accountName))
-                    {
-                        _accountNameToId[accountName] = accountId;
-                    }
-                }
-
-                foreach (DataRow row in allAccounts.Rows)
-                {
-                    string accountName = row["name"]?.ToString() ?? "";
-                    string accountType = row["account_type"]?.ToString() ?? "";
-
-                    if (string.IsNullOrEmpty(accountName))
-                    {
-                        continue;
-                    }
-
-                    // Adjustment Expense accounts (expense type)
-                    if (accountType == "Expense" || accountName.IndexOf("Inventory Adjustment", StringComparison.OrdinalIgnoreCase) >= 0
-                        || accountName.IndexOf("Adjustment", StringComparison.OrdinalIgnoreCase) >= 0
-                        || accountName.IndexOf("Variance", StringComparison.OrdinalIgnoreCase) >= 0
-                    )
-                    {
-                        ddlAdjustmentAccount.Items.Add(accountName);
-                    }
-
-                }
-
-                // Set defaults if available
-                if (ddlAdjustmentAccount.Items.Count > 0) ddlAdjustmentAccount.SelectedIndex = 0;
-
-                bool selectedFromSettings = false;
-                if (item_variance_acc_id > 0)
-                {
-                    foreach (DataRow row in allAccounts.Rows)
-                    {
-                        int accountId = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : 0;
-                        if (accountId != item_variance_acc_id)
-                            continue;
-
-                        string accountName = row["name"]?.ToString() ?? string.Empty;
-                        if (!string.IsNullOrWhiteSpace(accountName) && ddlAdjustmentAccount.Items.Contains(accountName))
-                        {
-                            ddlAdjustmentAccount.SelectedItem = accountName;
-                            selectedFromSettings = true;
-                        }
-                        break;
-                    }
-                }
-
-                if (!selectedFromSettings)
-                {
-                    SelectFirstMatchingAccount(ddlAdjustmentAccount, "Inventory Adjustment", "Inventory", "Variance", "Adjustment");
-                }
-
-                SelectedAdjustmentAccountId = ResolveSelectedAdjustmentAccountId();
-
-            }
-            catch (Exception ex)
-            {
-                UiMessages.ShowError(
-                    $"Error loading accounts: {ex.Message}",
-                    $"ÎØÃ Ýí ÊÍãíá ÇáÍÓÇÈÇÊ: {ex.Message}",
-                    "Error", "ÎØÃ");
-            }
         }
 
         private void ConfigureGridEditability()
@@ -1093,7 +1028,7 @@ namespace pos
                 {
                     OriginalQty = qty,
                     OriginalAvgCost = avgCostDb,
-                    AdjustmentAccountId = adjustmentAccountId > 0 ? adjustmentAccountId : item_variance_acc_id
+                    AdjustmentAccountId = adjustmentAccountId > 0 ? adjustmentAccountId : item_adjustment_acc_id
                 };
                 return;
             }
@@ -1106,7 +1041,7 @@ namespace pos
             var meta = row.Tag as AdjustmentRowMeta;
             if (meta != null)
             {
-                meta.AdjustmentAccountId = adjustmentAccountId > 0 ? adjustmentAccountId : item_variance_acc_id;
+                meta.AdjustmentAccountId = adjustmentAccountId > 0 ? adjustmentAccountId : item_adjustment_acc_id;
             }
         }
 
@@ -1128,45 +1063,11 @@ namespace pos
 
             return -1;
         }
-        private void SelectFirstMatchingAccount(ComboBox ddl, params string[] keywords)
-        {
-            if (ddl == null || ddl.Items.Count == 0 || keywords == null || keywords.Length == 0)
-            {
-                return;
-            }
-
-            for (int i = 0; i < ddl.Items.Count; i++)
-            {
-                string accountName = ddl.Items[i]?.ToString() ?? string.Empty;
-                foreach (string keyword in keywords)
-                {
-                    if (!string.IsNullOrWhiteSpace(keyword) && accountName.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        ddl.SelectedIndex = i;
-                        return;
-                    }
-                }
-            }
-        }
 
         private int ResolveSelectedAdjustmentAccountId()
         {
-            try
-            {
-                string accountName = ddlAdjustmentAccount.SelectedItem?.ToString() ?? string.Empty;
-                if (string.IsNullOrWhiteSpace(accountName))
-                    return 0;
-
-                int accountId;
-                if (_accountNameToId.TryGetValue(accountName, out accountId) && accountId > 0)
-                    return accountId;
-            }
-            catch
-            {
-                return 0;
-            }
-
-            return 0;
+            // Return the inventory adjustment account configured in settings
+            return item_adjustment_acc_id;
         }
 
         private static bool ValidateAdjustmentQty(DataGridViewRow row, out string message)

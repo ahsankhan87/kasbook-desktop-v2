@@ -287,8 +287,8 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT AA.name AS account_name," +
-                            " SUM(AE.debit) as debit,SUM(AE.credit) as credit, SUM(AE.debit)-SUM(AE.credit) AS balance" +
+                        String query = "SELECT AA.name AS AccountName," +
+                            " SUM(AE.debit) as TotalDebit,SUM(AE.credit) as TotalCredit, SUM(AE.debit)-SUM(AE.credit) AS ClosingBalance" +
                             " FROM acc_entries AE" +
                             " LEFT JOIN acc_accounts AS AA  ON AE.account_id = AA.id" +
                             " WHERE entry_date BETWEEN @from_date AND @to_date"+
@@ -1209,6 +1209,45 @@ WHERE E.branch_id = @branch_id
                     dt = new DataTable();
                     da.Fill(dt);
                     return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get daily cash and bank report with opening/closing balances
+        /// Returns DataSet with 3 tables: [0]=Consolidated daily, [1]=By-account detail, [2]=Summary
+        /// </summary>
+        public DataSet GetDailyCashBankReport(DateTime? fromDate = null, DateTime? toDate = null, int? accountId = null, int? branchId = null)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        cmd = new SqlCommand("sp_DailyCashBankReport", cn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@FromDate", (object)fromDate ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ToDate", (object)toDate ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@BranchId", (object)branchId ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@AccountId", (object)accountId ?? DBNull.Value);
+                    }
+
+                    da = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+
+                    // Name the tables for easier access
+                    if (ds.Tables.Count > 0) ds.Tables[0].TableName = "ConsolidatedDaily";
+                    if (ds.Tables.Count > 1) ds.Tables[1].TableName = "ByAccountDetail";
+                    if (ds.Tables.Count > 2) ds.Tables[2].TableName = "Summary";
+
+                    return ds;
                 }
                 catch
                 {

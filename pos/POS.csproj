@@ -315,6 +315,18 @@
     <Compile Include="Inventory\frm_valuation_settings.Designer.cs">
       <DependentUpon>frm_valuation_settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Accounts\FrmDailyCashBankReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Accounts\FrmDailyCashBankReport.Designer.cs">
+      <DependentUpon>FrmDailyCashBankReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Financial\FrmTrialBalanceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Financial\FrmTrialBalanceReport.Designer.cs">
+      <DependentUpon>FrmTrialBalanceReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Financial\frm_BalanceSheetReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -464,12 +476,6 @@
     </Compile>
     <Compile Include="Accounts\Reports\frm_profitandloss_report.Designer.cs">
       <DependentUpon>frm_profitandloss_report.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Accounts\Reports\frm_trialbalance_report.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Accounts\Reports\frm_trialbalance_report.Designer.cs">
-      <DependentUpon>frm_trialbalance_report.cs</DependentUpon>
     </Compile>
     <Compile Include="Accounts\Reports\frm_group_report.cs">
       <SubType>Form</SubType>
@@ -1041,33 +1047,6 @@
     <Compile Include="Reports\Accounts\FrmSupplierSubLedger.Designer.cs">
       <DependentUpon>FrmSupplierSubLedger.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Accounts\frm_AccountPayableAging.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_AccountReceivableAging.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_APAgingReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_ARAgingReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_CustomerLedgerReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_DaybookReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_DuePaymentsReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_OverdueReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Accounts\frm_SupplierLedgerReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\Adjustment\AdjustmentReportPrintHelper.cs" />
     <Compile Include="Reports\Adjustment\frm_adj_voucher_report.cs">
       <SubType>Form</SubType>
@@ -1155,9 +1134,6 @@
     </Compile>
     <Compile Include="Reports\Financial\frm_BudgetVarianceDetail.Designer.cs">
       <DependentUpon>frm_BudgetVarianceDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\Financial\frm_TrialBalanceReport.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\Inventory\frm_AgingInventoryReport.cs">
       <SubType>Form</SubType>
@@ -1936,12 +1912,6 @@
     <EmbeddedResource Include="Accounts\Reports\frm_profitandloss_report.resx">
       <DependentUpon>frm_profitandloss_report.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Accounts\Reports\frm_trialbalance_report.ar-SA.resx">
-      <DependentUpon>frm_trialbalance_report.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Accounts\Reports\frm_trialbalance_report.resx">
-      <DependentUpon>frm_trialbalance_report.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\frm_group_report.resx">
       <DependentUpon>frm_group_report.cs</DependentUpon>
     </EmbeddedResource>
@@ -2553,18 +2523,6 @@
     <EmbeddedResource Include="Reports\Accounts\FrmCustomerSubLedger.resx">
       <DependentUpon>FrmCustomerSubLedger.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Accounts\frm_AccountPayableAging.resx">
-      <DependentUpon>frm_AccountPayableAging.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Accounts\frm_AccountReceivableAging.resx">
-      <DependentUpon>frm_AccountReceivableAging.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Accounts\frm_APAgingReport.resx">
-      <DependentUpon>frm_APAgingReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Accounts\frm_CustomerLedgerReport.resx">
-      <DependentUpon>frm_CustomerLedgerReport.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Banks\BankLedger.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BankLedger.cs</LastGenOutput>
@@ -2582,6 +2540,9 @@
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\FrmTrialBalanceReport.resx">
+      <DependentUpon>FrmTrialBalanceReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_BalanceSheetReport.resx">
       <DependentUpon>frm_BalanceSheetReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -2596,9 +2557,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_ProfitAndLossReport.resx">
       <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Financial\frm_TrialBalanceReport.resx">
-      <DependentUpon>frm_TrialBalanceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Inventory\frm_AgingInventoryReport.resx">
       <DependentUpon>frm_AgingInventoryReport.cs</DependentUpon>
@@ -2918,6 +2876,13 @@
     <None Include="Products\Suppression\STOCK_SUPPRESSION_GUIDE.md" />
     <None Include="Products\Suppression\TECHNICAL_REFERENCE.md" />
     <None Include="Products\Suppression\VISUAL_GUIDE.md" />
+    <None Include="Reports\Financial\DESIGN_SPECIFICATION_TrialBalance.md" />
+    <None Include="Reports\Financial\FINAL_DELIVERY_SUMMARY.md" />
+    <None Include="Reports\Financial\IMPLEMENTATION_CHECKLIST_TrialBalance.md" />
+    <None Include="Reports\Financial\PROJECT_SUMMARY_TrialBalance.md" />
+    <None Include="Reports\Financial\QUICK_START_GUIDE.md" />
+    <None Include="Reports\Financial\README_TrialBalanceReport.md" />
+    <None Include="Reports\Financial\VISUAL_PREVIEW_TrialBalance.md" />
     <None Include="Reports\Products\Products_dataset.xsc">
       <DependentUpon>Products_dataset.xsd</DependentUpon>
     </None>

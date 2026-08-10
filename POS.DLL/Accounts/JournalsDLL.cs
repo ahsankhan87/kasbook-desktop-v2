@@ -1389,7 +1389,7 @@ WHERE id = @voucher_id
                     result.Messages.Add(new ValidationError
                     {
                         FieldName = "VoucherDate",
-                        Message = "Voucher date falls outside the allowed posting period.",
+                        Message = GetVoucherDateLockReason(header.VoucherDate),
                         Severity = "Error",
                         IsBlocking = true
                     });
@@ -1609,7 +1609,7 @@ WHERE id = @voucher_id
                 result.Messages.Add(new ValidationError
                 {
                     FieldName = "VoucherDate",
-                    Message = "Journal date falls outside the allowed posting period.",
+                    Message = GetVoucherDateLockReason(model.VoucherDate),
                     Severity = "Error",
                     IsBlocking = true
                 });
@@ -2102,6 +2102,7 @@ WHERE id = @voucher_id
 
         private bool IsVoucherDateLocked(DateTime voucherDate)
         {
+            // Check fiscal year boundaries
             if (UsersModal.fy_from_date == default(DateTime) && UsersModal.fy_to_date == default(DateTime))
             {
                 return false;
@@ -2117,7 +2118,51 @@ WHERE id = @voucher_id
                 return true;
             }
 
+            // Check period lock status: ensure the period is "Open" (not SoftClosed or HardLocked)
+            try
+            {
+                PeriodDAL periodDal = new PeriodDAL();
+                bool periodLocked = periodDal.IsPeriodLocked(voucherDate);
+                if (periodLocked)
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                // If period check fails, allow posting (fail-open to avoid blocking legitimate transactions)
+            }
+
             return false;
+        }
+
+        private string GetVoucherDateLockReason(DateTime voucherDate)
+        {
+            // Determine whether date is locked due to fiscal year or period closure
+            if (UsersModal.fy_from_date != default(DateTime) && voucherDate.Date < UsersModal.fy_from_date.Date)
+            {
+                return "Voucher date is before the fiscal year start date.";
+            }
+
+            if (UsersModal.fy_to_date != default(DateTime) && voucherDate.Date > UsersModal.fy_to_date.Date)
+            {
+                return "Voucher date is after the fiscal year end date.";
+            }
+
+            try
+            {
+                PeriodDAL periodDal = new PeriodDAL();
+                if (periodDal.IsPeriodLocked(voucherDate))
+                {
+                    return "The financial period for this date is closed or locked. No new transactions are allowed.";
+                }
+            }
+            catch
+            {
+                // Fall back to generic message if period check fails
+            }
+
+            return "Voucher date falls outside the allowed posting period.";
         }
 
         private bool VoucherNoExists(string voucherNo, int? excludeVoucherId = null)

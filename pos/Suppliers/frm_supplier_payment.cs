@@ -149,6 +149,20 @@ namespace pos
                 if (confirm != DialogResult.Yes)
                     return;
 
+                // CHECK PERIOD LOCK BEFORE POSTING
+                DateTime paymentDate = txt_payment_date.Value.Date;
+                FinancialPeriodBLL periodBll = new FinancialPeriodBLL();
+                if (periodBll.IsPeriodLocked(paymentDate))
+                {
+                    UiMessages.ShowError(
+                        periodBll.GetPeriodLockReason(paymentDate),
+                        "The financial period for this date is closed or locked. No new transactions are allowed.",
+                        "Period Locked",
+                        "الفترة مقفلة"
+                    );
+                    return;
+                }
+
                 using (BusyScope.Show(this, UiMessages.T("Posting payment...", "جاري ترحيل الدفعة...")))
                 {
                     int glAccountId = (cmb_GL_account_code.SelectedValue == null ? 0 : int.Parse(cmb_GL_account_code.SelectedValue.ToString()));

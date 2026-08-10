@@ -35,10 +35,10 @@ namespace pos.Reports.Accounts
                     {
                         DataRow emptyRow = dt.NewRow();
                         emptyRow["id"] = 0;
-                        emptyRow["name"] = "-- Select Supplier --";
+                        emptyRow["first_name"] = "-- Select Supplier --";
                         dt.Rows.InsertAt(emptyRow, 0);
 
-                        cmbEntity.DisplayMember = "name";
+                        cmbEntity.DisplayMember = "first_name";
                         cmbEntity.ValueMember = "id";
                         cmbEntity.DataSource = dt;
                         cmbEntity.SelectedIndex = 0;
@@ -79,8 +79,8 @@ namespace pos.Reports.Accounts
                 if (dtSupplier != null && dtSupplier.Rows.Count > 0)
                 {
                     DataRow row = dtSupplier.Rows[0];
-                    string name = row["name"]?.ToString() ?? "";
-                    string phone = row["contact_number"]?.ToString() ?? "";
+                    string name = row["first_name"]?.ToString() ?? "";
+                    string phone = row["contact_no"]?.ToString() ?? "";
                     string email = row["email"]?.ToString() ?? "";
                     string address = row["address"]?.ToString() ?? "";
 
@@ -130,7 +130,7 @@ namespace pos.Reports.Accounts
             string supplierName = "Unknown";
             if (cmbEntity.SelectedItem is DataRowView drv)
             {
-                supplierName = drv["name"]?.ToString() ?? "Unknown";
+                supplierName = drv["first_name"]?.ToString() ?? "Unknown";
             }
             return $"Supplier Sub-Ledger (AP) - {supplierName}";
         }
@@ -154,7 +154,7 @@ namespace pos.Reports.Accounts
                 string supplierName = "";
                 if (cmbEntity.SelectedItem is DataRowView drv)
                 {
-                    supplierName = drv["name"]?.ToString() ?? "";
+                    supplierName = drv["first_name"]?.ToString() ?? "";
                 }
 
                 // Open supplier payment form

@@ -187,6 +187,18 @@ namespace pos.Reports.Financial
             if (_agingData?.Rows.Count > 0)
             {
                 DataRow row = _agingData.Rows[0];
+
+                // Validate that expected aging columns exist before accessing them
+                if (!_agingData.Columns.Contains("bucket_0_30") || 
+                    !_agingData.Columns.Contains("bucket_31_60") || 
+                    !_agingData.Columns.Contains("bucket_61_90") || 
+                    !_agingData.Columns.Contains("bucket_90_plus"))
+                {
+                    // Aging data schema mismatch - columns missing from result set
+                    ResetAgingPanel();
+                    return;
+                }
+
                 decimal bucket0_30 = row["bucket_0_30"] != DBNull.Value ? Convert.ToDecimal(row["bucket_0_30"]) : 0;
                 decimal bucket31_60 = row["bucket_31_60"] != DBNull.Value ? Convert.ToDecimal(row["bucket_31_60"]) : 0;
                 decimal bucket61_90 = row["bucket_61_90"] != DBNull.Value ? Convert.ToDecimal(row["bucket_61_90"]) : 0;
