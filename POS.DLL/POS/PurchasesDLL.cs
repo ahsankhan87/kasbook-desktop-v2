@@ -528,6 +528,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@foreign_total_amount", purchase_header.foreign_total_amount);
                             cmd.Parameters.AddWithValue("@foreign_total_tax", purchase_header.foreign_total_tax);
                             cmd.Parameters.AddWithValue("@foreign_total_discount", purchase_header.foreign_total_discount);
+                            cmd.Parameters.AddWithValue("@bankId", purchase_header.bank_id);
 
                             cmd.Parameters.AddWithValue("@OperationType", "1");
                         }
@@ -698,6 +699,8 @@ namespace POS.DLL
             {
                 cn.Open();
 
+                System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] Starting journal model build for {purchaseHeader.invoice_no}");
+
                 int cashAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultCashAccount);
                 int payableAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultApAccount);
                 int inventoryAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultInventoryAccount);
@@ -706,9 +709,33 @@ namespace POS.DLL
                 if (taxInputAccountId <= 0)
                     taxInputAccountId = ResolveDefaultAccountId(cn, null, SettingKeys.DefaultSalesTaxAccount);
 
+                System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] Resolved accounts:");
+                System.Diagnostics.Debug.WriteLine($"  - Cash Account ID: {cashAccountId}");
+                System.Diagnostics.Debug.WriteLine($"  - Payable Account ID: {payableAccountId}");
+                System.Diagnostics.Debug.WriteLine($"  - Inventory Account ID: {inventoryAccountId}");
+                System.Diagnostics.Debug.WriteLine($"  - Discount Account ID: {purchaseDiscountAccountId}");
+                System.Diagnostics.Debug.WriteLine($"  - Tax Account ID: {taxInputAccountId}");
+
                 int settlementAccountId = ResolvePurchaseSettlementAccountId(cn, purchaseHeader, cashAccountId, payableAccountId);
-                if (inventoryAccountId <= 0 || settlementAccountId <= 0)
+                System.Diagnostics.Debug.WriteLine($"  - Settlement Account ID: {settlementAccountId}");
+
+                if (settlementAccountId <= 0 && payableAccountId > 0)
+                {
+                    settlementAccountId = payableAccountId;
+                    System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] Using payable account as fallback settlement account: {settlementAccountId}");
+                }
+
+                if (inventoryAccountId <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] FAILED - Missing inventory account. Inventory: {inventoryAccountId}");
                     return null;
+                }
+
+                if (settlementAccountId <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] FAILED - Missing settlement account. Settlement: {settlementAccountId}");
+                    return null;
+                }
 
                 int? supplierId = string.Equals(purchaseHeader.purchase_type, "Credit", StringComparison.OrdinalIgnoreCase)
                     && purchaseHeader.supplier_id > 0
@@ -719,10 +746,10 @@ namespace POS.DLL
                     ? (int?)purchaseHeader.bank_id
                     : null;
 
-                string narration = purchaseHeader.description;
-                decimal amount = purchaseHeader.total_amount;
-                decimal discount = purchaseHeader.total_discount;
-                decimal tax = purchaseHeader.total_tax;
+                string narration = string.IsNullOrWhiteSpace(purchaseHeader.description) ? purchaseHeader.invoice_no : purchaseHeader.description;
+                decimal amount = purchaseHeader.total_amount > 0 ? purchaseHeader.total_amount : 0m;
+                decimal discount = purchaseHeader.total_discount > 0 ? purchaseHeader.total_discount : 0m;
+                decimal tax = purchaseHeader.total_tax > 0 ? purchaseHeader.total_tax : 0m;
 
                 List<JVLineModel> lines = new List<JVLineModel>();
 
@@ -732,20 +759,44 @@ namespace POS.DLL
                     AddPurchaseAutoLine(lines, settlementAccountId, 0m, amount, narration, supplierId, bankId);
                 }
 
-                if (discount > 0 && purchaseDiscountAccountId > 0)
+                if (discount > 0)
                 {
-                    AddPurchaseAutoLine(lines, settlementAccountId, discount, 0m, narration, supplierId, bankId);
-                    AddPurchaseAutoLine(lines, purchaseDiscountAccountId, 0m, discount, narration, null, null);
+                    if (purchaseDiscountAccountId > 0)
+                    {
+                        AddPurchaseAutoLine(lines, purchaseDiscountAccountId, discount, 0m, narration, null, null);
+                        AddPurchaseAutoLine(lines, settlementAccountId, 0m, discount, narration, supplierId, bankId);
+                    }
+                    else
+                    {
+                        AddPurchaseAutoLine(lines, settlementAccountId, discount, 0m, narration, supplierId, bankId);
+                    }
                 }
 
-                if (tax > 0 && taxInputAccountId > 0)
+                if (tax > 0)
                 {
-                    AddPurchaseAutoLine(lines, taxInputAccountId, tax, 0m, narration, null, null);
-                    AddPurchaseAutoLine(lines, settlementAccountId, 0m, tax, narration, supplierId, bankId);
+                    if (taxInputAccountId > 0)
+                    {
+                        AddPurchaseAutoLine(lines, taxInputAccountId, tax, 0m, narration, null, null);
+                        AddPurchaseAutoLine(lines, settlementAccountId, 0m, tax, narration, supplierId, bankId);
+                    }
+                    else
+                    {
+                        AddPurchaseAutoLine(lines, settlementAccountId, tax, 0m, narration, supplierId, bankId);
+                    }
                 }
 
                 if (lines.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] No journal lines generated for {purchaseHeader.invoice_no}");
                     return null;
+                }
+
+                decimal totalDebit = lines.Sum(x => x.Debit);
+                decimal totalCredit = lines.Sum(x => x.Credit);
+                if (Math.Abs(totalDebit - totalCredit) >= 0.005m)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[BuildPurchaseAutoJournalModel] Journal is not balanced. Debit={totalDebit:N2}, Credit={totalCredit:N2}");
+                }
 
                 return new AutoJVModel
                 {
@@ -2376,6 +2427,256 @@ END";
                 cn.Open();
                 var result = cmd.ExecuteScalar();
                 return result != null && result != DBNull.Value ? Convert.ToDecimal(result) : 0m;
+            }
+        }
+
+        /// <summary>
+        /// Get purchase entries by date range for reconciliation
+        /// </summary>
+        public DataTable GetPurchaseEntriesByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        SELECT 
+                            p.id,
+                            p.invoice_no,
+                            p.purchase_date AS invoice_date,
+                            COALESCE(s.first_name + ' ' + ISNULL(s.last_name, ''), '') AS supplier_name,
+                            CAST(ISNULL(p.total_amount, 0) + ISNULL(p.total_tax, 0) - ISNULL(p.discount_value, 0) AS decimal(18,2)) AS total_amount,
+                            p.posted as status,
+                            'Purchase' AS entry_type
+                        FROM pos_purchases p
+                        LEFT JOIN pos_suppliers s ON p.supplier_id = s.id
+                        WHERE p.purchase_date BETWEEN @fromDate AND @toDate
+                        ORDER BY p.purchase_date DESC
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                    cmd.Parameters.AddWithValue("@toDate", toDate);
+
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public bool PostPurchaseToJournal(string invoiceNo, int userId)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+            {
+                System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Invalid invoice number: {invoiceNo}");
+                return false;
+            }
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+
+                    // Retrieve purchase header
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Retrieving purchase header for invoice: {invoiceNo}");
+                    DataTable purchaseTable = GetPurchaseHeader(cn, invoiceNo);
+                    if (purchaseTable == null || purchaseTable.Rows.Count == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Invoice {invoiceNo} not found in database");
+                        return false;
+                    }
+
+                    DataRow purchaseRow = purchaseTable.Rows[0];
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Found purchase record. Available columns: {string.Join(", ", purchaseTable.Columns.Cast<DataColumn>().Select(c => c.ColumnName))}");
+
+                    PurchaseModalHeader purchaseHeader = MapPurchaseRowToHeader(purchaseRow);
+
+                    if (purchaseHeader == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Failed to map purchase header for {invoiceNo}");
+                        return false;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Mapped purchase: Amount={purchaseHeader.total_amount}, Tax={purchaseHeader.total_tax}, Discount={purchaseHeader.total_discount}");
+
+                    // Check if already posted
+                    bool alreadyPosted = false;
+                    if (purchaseRow.Table.Columns.Contains("posted"))
+                    {
+                        if (purchaseRow["posted"] != null && purchaseRow["posted"] != DBNull.Value)
+                        {
+                            object postedValue = purchaseRow["posted"];
+                            if (postedValue is bool)
+                                alreadyPosted = (bool)postedValue;
+                            else if (postedValue is int)
+                                alreadyPosted = Convert.ToInt32(postedValue) != 0;
+                            else
+                                alreadyPosted = !string.IsNullOrEmpty(Convert.ToString(postedValue)) && !Convert.ToString(postedValue).Equals("0");
+                        }
+                    }
+
+                    if (alreadyPosted)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Invoice {invoiceNo} already posted");
+                        return true; // Already posted
+                    }
+
+                    // Create and post journal entry
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Building journal model for {invoiceNo}");
+                    JournalsDLL journalsDal = new JournalsDLL();
+                    AutoJVModel model = BuildPurchaseAutoJournalModel(purchaseHeader);
+
+                    if (model == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Failed to build journal model for {invoiceNo} - possible missing account settings");
+                        return false;
+                    }
+
+                    if (model.Lines == null || model.Lines.Count == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] No journal lines generated for {invoiceNo} - possibly due to zero amounts");
+                        // No journal lines to post, but mark as posted
+                        UpdatePurchasePostedFlag(cn, null, invoiceNo, true);
+                        return true;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Generated {model.Lines.Count} journal lines for {invoiceNo}:");
+                    foreach (var line in model.Lines)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"  - Account: {line.AccountName} ({line.AccountCode}), Debit: {line.Debit}, Credit: {line.Credit}");
+                    }
+
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Posting invoice {invoiceNo} with {model.Lines.Count} journal lines to user {userId}");
+
+                    PostResult result = journalsDal.PostAutoJournalEntry(model, userId);
+                    bool posted = result != null && result.Success;
+                    string failureMessage = string.Empty;
+
+                    if (result != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] PostResult - Success: {result.Success}, VoucherNo: {result.VoucherNo}, VoucherId: {result.VoucherId}");
+
+                        if (!posted && result.Messages != null && result.Messages.Count > 0)
+                        {
+                            failureMessage = string.Join("\n", result.Messages.Select(m => m.Message).Where(m => !string.IsNullOrWhiteSpace(m)).Distinct());
+                            System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Post validation errors for {invoiceNo}: {failureMessage}");
+                        }
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] PostAutoJournalEntry returned null result for {invoiceNo}");
+                        failureMessage = "The journal service returned no result.";
+                    }
+
+                    // Update posted flag only when the posting succeeded. If the journal service rejected the entry,
+                    // leave the posted flag as false so the user can fix the setup and retry.
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Updating posted flag to {posted} for {invoiceNo}");
+                    UpdatePurchasePostedFlag(cn, null, invoiceNo, posted);
+
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Invoice {invoiceNo} posting result: {(posted ? "SUCCESS" : "FAILED")}");
+
+                    if (!posted && !string.IsNullOrWhiteSpace(failureMessage))
+                    {
+                        throw new InvalidOperationException(failureMessage);
+                    }
+
+                    return posted;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Exception for {invoiceNo}: {ex.GetType().Name} - {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"[PostPurchaseToJournal] Stack trace: {ex.StackTrace}");
+                    throw;
+                }
+            }
+        }
+
+        private DataTable GetPurchaseHeader(SqlConnection cn, string invoiceNo)
+        {
+            using (SqlCommand cmd = new SqlCommand(
+                "SELECT PP.* FROM pos_purchases PP WHERE PP.invoice_no = @invoice_no AND PP.branch_id = @branch_id",
+                cn))
+            {
+                cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                DataTable dt = new DataTable();
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        /// <summary>
+        /// Helper to map a purchase data row to PurchaseModalHeader.
+        /// </summary>
+        private PurchaseModalHeader MapPurchaseRowToHeader(DataRow row)
+        {
+            try
+            {
+                // Safely get purchase_type (default to "Cash" if not available)
+                string purchaseType = "Cash";
+                if (row.Table.Columns.Contains("purchase_type") && row["purchase_type"] != DBNull.Value)
+                    purchaseType = Convert.ToString(row["purchase_type"]);
+
+                // Safely get payment_method_text (default to empty if not available)
+                string paymentMethodText = "";
+                if (row.Table.Columns.Contains("payment_method_text") && row["payment_method_text"] != DBNull.Value)
+                    paymentMethodText = Convert.ToString(row["payment_method_text"]);
+
+                // Safely get bank_id (default to 0 if not available)
+                int bankId = 0;
+                if (row.Table.Columns.Contains("bank_id") && row["bank_id"] != DBNull.Value)
+                    bankId = Convert.ToInt32(row["bank_id"]);
+
+                // Safely get account (default to "Purchase" if not available)
+                string account = "Purchase";
+                if (row.Table.Columns.Contains("account") && row["account"] != DBNull.Value)
+                    account = Convert.ToString(row["account"]);
+
+                string invoiceNo = Convert.ToString(row["invoice_no"] ?? "");
+
+                System.Diagnostics.Debug.WriteLine($"[MapPurchaseRowToHeader] Mapping purchase {invoiceNo}:");
+                System.Diagnostics.Debug.WriteLine($"  - invoice_no: {invoiceNo}");
+                System.Diagnostics.Debug.WriteLine($"  - purchase_date: {Convert.ToDateTime(row["purchase_date"])}");
+                System.Diagnostics.Debug.WriteLine($"  - supplier_id: {(row["supplier_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["supplier_id"]))}");
+                System.Diagnostics.Debug.WriteLine($"  - total_amount: {(row["total_amount"] == DBNull.Value ? 0 : Convert.ToDecimal(row["total_amount"]))}");
+                System.Diagnostics.Debug.WriteLine($"  - total_tax: {(row["total_tax"] == DBNull.Value ? 0 : Convert.ToDecimal(row["total_tax"]))}");
+                System.Diagnostics.Debug.WriteLine($"  - total_discount: {(row["discount_value"] == DBNull.Value ? 0 : Convert.ToDecimal(row["discount_value"]))}");
+                System.Diagnostics.Debug.WriteLine($"  - purchase_type: {purchaseType}");
+                System.Diagnostics.Debug.WriteLine($"  - account: {account}");
+
+                return new PurchaseModalHeader
+                {
+                    invoice_no = invoiceNo,
+                    purchase_date = Convert.ToDateTime(row["purchase_date"]),
+                    supplier_id = row["supplier_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["supplier_id"]),
+                    total_amount = row["total_amount"] == DBNull.Value ? 0 : Convert.ToDecimal(row["total_amount"]),
+                    total_tax = row["total_tax"] == DBNull.Value ? 0 : Convert.ToDecimal(row["total_tax"]),
+                    total_discount = row["discount_value"] == DBNull.Value ? 0 : Convert.ToDecimal(row["discount_value"]),
+                    description = Convert.ToString(row["description"] ?? ""),
+                    payment_method_text = paymentMethodText,
+                    bank_id = bankId,
+                    purchase_type = purchaseType,
+                    account = account,
+                };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[MapPurchaseRowToHeader] Error mapping purchase row: {ex.GetType().Name} - {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"[MapPurchaseRowToHeader] Available columns: {string.Join(", ", row.Table.Columns.Cast<DataColumn>().Select(c => c.ColumnName))}");
+                return null;
             }
         }
     }

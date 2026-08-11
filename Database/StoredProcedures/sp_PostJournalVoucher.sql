@@ -143,11 +143,14 @@ BEGIN
 		CostCenterId        INT NULL,
 		ModuleName          NVARCHAR(50),
 		RefId               INT NULL,
-		PeriodId            INT NULL
+		PeriodId            INT NULL,
+		CustomerId          INT NULL,
+		SupplierId          INT NULL,
+		BankId              INT NULL
 	);
 
 	INSERT INTO @Lines
-		([LineNo], AccountId, Debit, Credit, Narration, CostCenterId, ModuleName, RefId, PeriodId)
+		([LineNo], AccountId, Debit, Credit, Narration, CostCenterId, ModuleName, RefId, PeriodId, CustomerId, SupplierId, BankId)
 	SELECT
 		Ln.value('(LineNo/text())[1]', 'int'),
 		Ln.value('(AccountId/text())[1]', 'int'),
@@ -157,7 +160,10 @@ BEGIN
 		NULLIF(Ln.value('(CostCenterID/text())[1]', 'int'), 0),
 		NULLIF(Ln.value('(ModuleName/text())[1]', 'nvarchar(50)'), ''),
 		NULLIF(Ln.value('(RefId/text())[1]', 'int'), 0),
-		NULLIF(Ln.value('(PeriodId/text())[1]', 'int'), 0)
+		NULLIF(Ln.value('(PeriodId/text())[1]', 'int'), 0),
+		NULLIF(Ln.value('(CustomerId/text())[1]', 'int'), 0),
+		NULLIF(Ln.value('(SupplierId/text())[1]', 'int'), 0),
+		NULLIF(Ln.value('(BankId/text())[1]', 'int'), 0)
 	FROM @VoucherXml.nodes('/Voucher/Lines/Line') AS X(Ln);
 
 	IF NOT EXISTS (SELECT 1 FROM @Lines)
@@ -215,9 +221,9 @@ BEGIN
 			@BranchId,
 			COALESCE(L.PeriodId, @PeriodId),
 			GETDATE(),
-			NULL,
-			NULL,
-			NULL,
+			L.CustomerId,
+			L.SupplierId,
+			L.BankId,
 			L.CostCenterId,
 			@HeaderId,
 			@ReferenceNo

@@ -621,7 +621,7 @@
     <value>Customers Summary</value>
   </data>
   <data name="customersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>161, 26</value>
   </data>
   <data name="customersToolStripMenuItem.Text" xml:space="preserve">
     <value>Customers</value>
@@ -639,13 +639,13 @@
     <value>Suppliers Summary</value>
   </data>
   <data name="suppliersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>161, 26</value>
   </data>
   <data name="suppliersToolStripMenuItem.Text" xml:space="preserve">
     <value>Suppliers</value>
   </data>
   <data name="banksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 26</value>
+    <value>161, 26</value>
   </data>
   <data name="banksToolStripMenuItem.Text" xml:space="preserve">
     <value>Banks</value>
@@ -925,6 +925,12 @@
   </data>
   <data name="vATDashboardToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;VAT Dashboard</value>
+  </data>
+  <data name="reconciliationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 26</value>
+  </data>
+  <data name="reconciliationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reconciliation</value>
   </data>
   <data name="fINANCEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 24</value>
@@ -1225,7 +1231,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_dashboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_dashboard.Text" xml:space="preserve">
     <value>Dashboard</value>
@@ -1237,7 +1243,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_sales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_sales.Text" xml:space="preserve">
     <value>Sales</value>
@@ -1249,7 +1255,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_purchase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_purchase.Text" xml:space="preserve">
     <value>Purchases</value>
@@ -1261,7 +1267,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_products.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_products.Text" xml:space="preserve">
     <value>Products</value>
@@ -1273,7 +1279,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_customers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_customers.Text" xml:space="preserve">
     <value>Customers</value>
@@ -1285,7 +1291,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_suppliers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_suppliers.Text" xml:space="preserve">
     <value>Suppliers</value>
@@ -1300,7 +1306,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonDailySaleReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButtonDailySaleReport.Text" xml:space="preserve">
     <value>Sale Report</value>
@@ -1312,7 +1318,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton_Help.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButton_Help.Text" xml:space="preserve">
     <value>Help</value>
@@ -1387,7 +1393,7 @@
     <value>False</value>
   </data>
   <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 4</value>
+    <value>94, 4</value>
   </data>
   <data name="toolStripButtonNewPOS.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1408,7 +1414,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonNewPOS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 48</value>
+    <value>94, 48</value>
   </data>
   <data name="toolStripButtonNewPOS.Text" xml:space="preserve">
     <value>New POS</value>
@@ -1426,7 +1432,7 @@
     <value>Yes</value>
   </data>
   <data name="sideMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 670</value>
+    <value>101, 670</value>
   </data>
   <data name="sideMenu.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2628,6 +2634,12 @@
   </data>
   <data name="&gt;&gt;toolStripButtonNewPOS.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;reconciliationToolStripMenuItem.Name" xml:space="preserve">
+    <value>reconciliationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;reconciliationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frm_main</value>

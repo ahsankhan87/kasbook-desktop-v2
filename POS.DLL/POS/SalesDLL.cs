@@ -58,6 +58,109 @@ namespace POS.DLL
 
         }
 
+        /// <summary>
+        /// Bulk-post sales using the same internal flow as insert-sale auto posting.
+        /// This reuses PostSalesJournalsAndUpdatePostedFlag for account-accurate entries.
+        /// </summary>
+        public Dictionary<string, bool> BulkPostSalesToJournal(List<string> invoiceNos, int userId)
+        {
+            Dictionary<string, bool> resultMap = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+            if (invoiceNos == null || invoiceNos.Count == 0)
+                return resultMap;
+
+            List<string> normalized = invoiceNos
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Select(x => x.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (normalized.Count == 0)
+                return resultMap;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+
+                List<SalesModalHeader> headers = new List<SalesModalHeader>();
+
+                string paramList = string.Join(",", normalized.Select((x, i) => "@inv" + i));
+                string query = "SELECT SI.*, PM.description AS computed_payment_method_text, B.GLAccountID AS computed_bank_gl_account_id, " +
+                               "ISNULL((SELECT SUM(ISNULL(SI2.cost_price,0) * ISNULL(SI2.quantity_sold,0)) " +
+                               "        FROM pos_sales_items SI2 " +
+                               "        WHERE SI2.invoice_no = SI.invoice_no AND SI2.branch_id = SI.branch_id), 0) AS computed_total_cost_amount " +
+                               "FROM pos_sales SI " +
+                               "LEFT JOIN pos_payment_method PM ON PM.id = SI.payment_method_id " +
+                               "LEFT JOIN pos_banks B ON B.id = SI.bank_id " +
+                               "WHERE SI.branch_id = @branch_id AND SI.invoice_no IN (" + paramList + ")";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    for (int i = 0; i < normalized.Count; i++)
+                        cmd.Parameters.AddWithValue("@inv" + i, normalized[i]);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable headerTable = new DataTable();
+                        da.Fill(headerTable);
+
+                        foreach (DataRow row in headerTable.Rows)
+                        {
+                            SalesModalHeader header = MapSalesRowToHeader(row);
+                            if (header != null)
+                                headers.Add(header);
+                        }
+                    }
+                }
+
+                // Use the same function used by insert-sale auto posting.
+                PostSalesJournalsAndUpdatePostedFlag(headers);
+
+                // Read back posted status for requested invoices.
+                using (SqlCommand statusCmd = new SqlCommand(query, cn))
+                {
+                    statusCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    for (int i = 0; i < normalized.Count; i++)
+                        statusCmd.Parameters.AddWithValue("@inv" + i, normalized[i]);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(statusCmd))
+                    {
+                        DataTable postedDt = new DataTable();
+                        da.Fill(postedDt);
+
+                        foreach (string invoice in normalized)
+                            resultMap[invoice] = false;
+
+                        foreach (DataRow row in postedDt.Rows)
+                        {
+                            string invoiceNo = Convert.ToString(row["invoice_no"]);
+                            bool isPosted = false;
+                            if (row.Table.Columns.Contains("posted") && row["posted"] != DBNull.Value)
+                            {
+                                object postedObj = row["posted"];
+                                if (postedObj is bool)
+                                    isPosted = (bool)postedObj;
+                                else if (postedObj is int)
+                                    isPosted = Convert.ToInt32(postedObj) != 0;
+                                else
+                                {
+                                    string postedText = Convert.ToString(postedObj);
+                                    isPosted = !string.IsNullOrWhiteSpace(postedText)
+                                        && !string.Equals(postedText, "0", StringComparison.OrdinalIgnoreCase)
+                                        && !string.Equals(postedText, "false", StringComparison.OrdinalIgnoreCase);
+                                }
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(invoiceNo))
+                                resultMap[invoiceNo] = isPosted;
+                        }
+                    }
+                }
+            }
+
+            return resultMap;
+        }
+
         public DataTable GetAllSales(bool showZSInvoices = true)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -622,6 +725,7 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@payment_terms_id", sale_header.payment_terms_id);
                             cmd.Parameters.AddWithValue("@payment_method_id", sale_header.payment_method_id);
                             cmd.Parameters.AddWithValue("@PONumber", sale_header.PONumber);
+                            cmd.Parameters.AddWithValue("@bankId", sale_header.bank_id);
                             cmd.Parameters.AddWithValue("@OperationType", "1");
 
                             newSaleID = Convert.ToInt32(cmd.ExecuteScalar());
@@ -831,7 +935,14 @@ namespace POS.DLL
 
                             if (ratio >= 1m)
                             {
-                                PostResult result = journalsDal.ReverseJournalVoucher(originalVoucherId, saleHeader.sale_date, reason, UsersModal.logged_in_userid);
+                                // Full reversal: pass sales return invoice as referenceNo and original invoice as originalInvoiceNo
+                                PostResult result = journalsDal.ReverseJournalVoucher(
+                                    originalVoucherId, 
+                                    saleHeader.sale_date, 
+                                    reason, 
+                                    UsersModal.logged_in_userid,
+                                    saleHeader.invoice_no,           // payment_ref_invoice_no: sales return invoice
+                                    saleHeader.invoice_no);       // ReferenceNo: original sales invoice
                                 posted = result != null && result.Success;
                             }
                             else if (ratio > 0m)
@@ -1120,7 +1231,7 @@ namespace POS.DLL
         private bool IsBankPaymentMethod(string paymentMethodText)
         {
             return !string.IsNullOrWhiteSpace(paymentMethodText)
-                && paymentMethodText.IndexOf("bank", StringComparison.OrdinalIgnoreCase) >= 0;
+                && (paymentMethodText.IndexOf("bank", StringComparison.OrdinalIgnoreCase) >= 0 || paymentMethodText.IndexOf("Bank", StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private bool GetBoolSetting(SqlConnection cn, SqlTransaction tx, string key, bool defaultValue)
@@ -2680,6 +2791,282 @@ namespace POS.DLL
                 int intval = int.Parse(maxId.Substring(3, 6));
                 intval++;
                 return string.Format("ZS-{0:000000}", intval);
+            }
+        }
+
+        /// <summary>
+        /// Get sales entries by date range for reconciliation
+        /// </summary>
+        public DataTable GetSalesEntriesByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        SELECT 
+                            s.id,
+                            s.invoice_no,
+                            s.sale_date as invoice_date,
+                            COALESCE(c.first_name + ' ' + ISNULL(c.last_name, ''), s.customer_name) AS customer_name,
+                            s.total_amount,
+                            s.posted as status,
+                            'Sales' AS entry_type
+                        FROM pos_sales s
+                        LEFT JOIN pos_customers c ON s.customer_id = c.id
+                        WHERE s.sale_date BETWEEN @fromDate AND @toDate
+                        ORDER BY s.sale_date DESC
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                    cmd.Parameters.AddWithValue("@toDate", toDate);
+
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get unposted sales (where posted = 0 or NULL) for bulk journal posting.
+        /// </summary>
+        public DataTable GetUnpostedSales()
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        String query = "SELECT TOP 10000 SI.*,IIF(invoice_subtype_code = '02','Simplified','Standard') AS invoice_subtype, " +
+                            "(SI.total_tax+SI.total_amount-SI.discount_value) as total, " +
+                            "CONCAT(C.first_name,' ',C.last_name) AS customer " +
+                            "FROM pos_sales SI " +
+                            "LEFT JOIN pos_customers C ON C.id=SI.customer_id" +
+                            " WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date " +
+                            " AND SI.branch_id = @branch_id " +
+                            " AND (SI.posted = 0 OR SI.posted IS NULL) " +
+                            " ORDER BY SI.id DESC";
+
+                        cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@FY_from_date", UsersModal.fy_from_date);
+                        cmd.Parameters.AddWithValue("@FY_to_date", UsersModal.fy_to_date);
+                    }
+
+                    dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Post a single sale to journal entries and update the posted flag.
+        /// Uses the existing auto-journal posting logic.
+        /// </summary>
+        public bool PostSaleToJournal(string invoiceNo, int userId)
+        {
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+                return false;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    cn.Open();
+
+                    // Retrieve sale header
+                    DataTable saleTable = GetSaleHeader(cn, invoiceNo);
+                    if (saleTable == null || saleTable.Rows.Count == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Invoice {invoiceNo} not found");
+                        return false;
+                    }
+
+                    DataRow saleRow = saleTable.Rows[0];
+                    SalesModalHeader saleHeader = MapSalesRowToHeader(saleRow);
+
+                    if (saleHeader == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Failed to map sale header for {invoiceNo}");
+                        return false;
+                    }
+
+                    // Check if already posted
+                    bool alreadyPosted = false;
+                    if (saleRow["posted"] != null && saleRow["posted"] != DBNull.Value)
+                    {
+                        alreadyPosted = Convert.ToBoolean(saleRow["posted"] ?? false);
+                    }
+
+                    if (alreadyPosted)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Invoice {invoiceNo} already posted");
+                        return true; // Already posted
+                    }
+
+                    // Create and post journal entry
+                    JournalsDLL journalsDal = new JournalsDLL();
+                    AutoJVModel model = BuildSalesAutoJournalModel(saleHeader);
+
+                    if (model == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Failed to build journal model for {invoiceNo}");
+                        return false;
+                    }
+
+                    if (model.Lines == null || model.Lines.Count == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] No journal lines generated for {invoiceNo}");
+                        // No journal lines to post, but mark as posted
+                        UpdateSalePostedFlag(cn, null, invoiceNo, true);
+                        return true;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Posting invoice {invoiceNo} with {model.Lines.Count} journal lines");
+
+                    PostResult result = journalsDal.PostAutoJournalEntry(model, userId);
+                    bool posted = result != null && result.Success;
+
+                    if (!posted && result != null && result.Messages != null && result.Messages.Count > 0)
+                    {
+                        string errorMsg = string.Join("; ", result.Messages.Select(m => m.Message));
+                        System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Post failed for {invoiceNo}: {errorMsg}");
+                    }
+
+                    // Update posted flag
+                    UpdateSalePostedFlag(cn, null, invoiceNo, posted);
+
+                    System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Invoice {invoiceNo} posting result: {(posted ? "SUCCESS" : "FAILED")}");
+
+                    return posted;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[PostSaleToJournal] Exception for {invoiceNo}: {ex.Message}");
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Helper to retrieve sale header by invoice number.
+        /// </summary>
+        private DataTable GetSaleHeader(SqlConnection cn, string invoiceNo)
+        {
+            using (SqlCommand cmd = new SqlCommand(
+                "SELECT SI.*, PM.description AS computed_payment_method_text, B.GLAccountID AS computed_bank_gl_account_id, " +
+                "ISNULL((SELECT SUM(ISNULL(SI2.cost_price,0) * ISNULL(SI2.quantity_sold,0)) " +
+                "        FROM pos_sales_items SI2 " +
+                "        WHERE SI2.invoice_no = SI.invoice_no AND SI2.branch_id = SI.branch_id), 0) AS computed_total_cost_amount " +
+                "FROM pos_sales SI " +
+                "LEFT JOIN pos_payment_method PM ON PM.id = SI.payment_method_id " +
+                "LEFT JOIN pos_banks B ON B.id = SI.bank_id " +
+                "WHERE SI.invoice_no = @invoice_no AND SI.branch_id = @branch_id",
+                cn))
+            {
+                cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
+                cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                DataTable dt = new DataTable();
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    da.Fill(dt);
+                }
+                return dt;
+            }
+        }
+
+        /// <summary>
+        /// Helper to map a sales data row to SalesModalHeader.
+        /// </summary>
+        private SalesModalHeader MapSalesRowToHeader(DataRow row)
+        {
+            try
+            {
+                // Safely get sale_type (default to "Cash" if not available)
+                string saleType = "Cash";
+                if (row.Table.Columns.Contains("sale_type") && row["sale_type"] != DBNull.Value)
+                    saleType = Convert.ToString(row["sale_type"]);
+
+                // Safely get total_cost_amount (fallback to computed_total_cost_amount from sales items)
+                double totalCostAmount = 0;
+                if (row.Table.Columns.Contains("total_cost_amount") && row["total_cost_amount"] != DBNull.Value)
+                    totalCostAmount = Convert.ToDouble(row["total_cost_amount"]);
+
+                if (totalCostAmount <= 0
+                    && row.Table.Columns.Contains("computed_total_cost_amount")
+                    && row["computed_total_cost_amount"] != DBNull.Value)
+                {
+                    totalCostAmount = Convert.ToDouble(row["computed_total_cost_amount"]);
+                }
+
+                // Safely get payment_method_text (default to empty if not available)
+                string paymentMethodText = "";
+                if (row.Table.Columns.Contains("payment_method_text") && row["payment_method_text"] != DBNull.Value)
+                    paymentMethodText = Convert.ToString(row["payment_method_text"]);
+
+                if (string.IsNullOrWhiteSpace(paymentMethodText)
+                    && row.Table.Columns.Contains("computed_payment_method_text")
+                    && row["computed_payment_method_text"] != DBNull.Value)
+                {
+                    paymentMethodText = Convert.ToString(row["computed_payment_method_text"]);
+                }
+
+                // Safely get bank_id (default to 0 if not available)
+                int bankId = 0;
+                if (row.Table.Columns.Contains("bank_id") && row["bank_id"] != DBNull.Value)
+                    bankId = Convert.ToInt32(row["bank_id"]);
+
+                // Safely get bankGLAccountID (fallback from joined pos_banks)
+                string bankGLAccountID = "";
+                if (row.Table.Columns.Contains("bankGLAccountID") && row["bankGLAccountID"] != DBNull.Value)
+                    bankGLAccountID = Convert.ToString(row["bankGLAccountID"]);
+
+                if (string.IsNullOrWhiteSpace(bankGLAccountID)
+                    && row.Table.Columns.Contains("computed_bank_gl_account_id")
+                    && row["computed_bank_gl_account_id"] != DBNull.Value)
+                {
+                    bankGLAccountID = Convert.ToString(row["computed_bank_gl_account_id"]);
+                }
+
+                return new SalesModalHeader
+                {
+                    invoice_no = Convert.ToString(row["invoice_no"]),
+                    sale_date = Convert.ToDateTime(row["sale_date"]),
+                    customer_id = row["customer_id"] == DBNull.Value ? 0 : Convert.ToInt32(row["customer_id"]),
+                    total_amount = row["total_amount"] == DBNull.Value ? 0 : Convert.ToDouble(row["total_amount"]),
+                    total_tax = row["total_tax"] == DBNull.Value ? 0 : Convert.ToDouble(row["total_tax"]),
+                    total_discount = row["discount_value"] == DBNull.Value ? 0 : Convert.ToDouble(row["discount_value"]),
+                    total_cost_amount = totalCostAmount,
+                    description = Convert.ToString(row["description"] ?? ""),
+                    payment_method_text = paymentMethodText,
+                    bank_id = bankId,
+                    bankGLAccountID = bankGLAccountID,
+                    account = Convert.ToString(row["account"] ?? ""),
+                    sale_type = saleType,
+                };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[MapSalesRowToHeader] Error mapping sales row: {ex.Message}");
+                return null;
             }
         }
     }

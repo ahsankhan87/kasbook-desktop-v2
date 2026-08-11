@@ -29,23 +29,17 @@ namespace pos.Accounts.Reports
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_account_report = new System.Windows.Forms.DataGridView();
-            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.account_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.grid_sales_detail = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +52,13 @@ namespace pos.Accounts.Reports
             this.discount_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.net_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.account_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.payment_ref_invoice_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_account_report)).BeginInit();
             this.panel3.SuspendLayout();
@@ -69,7 +70,7 @@ namespace pos.Accounts.Reports
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1090, 50);
+            this.panel1.Size = new System.Drawing.Size(1114, 50);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -78,7 +79,7 @@ namespace pos.Accounts.Reports
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 50);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1090, 394);
+            this.panel2.Size = new System.Drawing.Size(1114, 394);
             this.panel2.TabIndex = 0;
             // 
             // grid_account_report
@@ -92,6 +93,7 @@ namespace pos.Accounts.Reports
             this.debit,
             this.credit,
             this.balance,
+            this.payment_ref_invoice_no,
             this.description});
             this.grid_account_report.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid_account_report.Location = new System.Drawing.Point(0, 0);
@@ -100,76 +102,9 @@ namespace pos.Accounts.Reports
             this.grid_account_report.ReadOnly = true;
             this.grid_account_report.RowHeadersWidth = 51;
             this.grid_account_report.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_account_report.Size = new System.Drawing.Size(1090, 394);
+            this.grid_account_report.Size = new System.Drawing.Size(1114, 394);
             this.grid_account_report.TabIndex = 6;
             this.grid_account_report.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_account_report_CellClick);
-            // 
-            // invoice_no
-            // 
-            this.invoice_no.DataPropertyName = "invoice_no";
-            this.invoice_no.HeaderText = "Invoice No.";
-            this.invoice_no.MinimumWidth = 6;
-            this.invoice_no.Name = "invoice_no";
-            this.invoice_no.ReadOnly = true;
-            this.invoice_no.Width = 125;
-            // 
-            // account_name
-            // 
-            this.account_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.account_name.DataPropertyName = "account_name";
-            this.account_name.HeaderText = "Account";
-            this.account_name.MinimumWidth = 6;
-            this.account_name.Name = "account_name";
-            this.account_name.ReadOnly = true;
-            this.account_name.Width = 88;
-            // 
-            // debit
-            // 
-            this.debit.DataPropertyName = "debit";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.debit.DefaultCellStyle = dataGridViewCellStyle9;
-            this.debit.HeaderText = "Debit";
-            this.debit.MinimumWidth = 6;
-            this.debit.Name = "debit";
-            this.debit.ReadOnly = true;
-            this.debit.Width = 125;
-            // 
-            // credit
-            // 
-            this.credit.DataPropertyName = "credit";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.credit.DefaultCellStyle = dataGridViewCellStyle10;
-            this.credit.HeaderText = "Credit";
-            this.credit.MinimumWidth = 6;
-            this.credit.Name = "credit";
-            this.credit.ReadOnly = true;
-            this.credit.Width = 125;
-            // 
-            // balance
-            // 
-            this.balance.DataPropertyName = "balance";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.balance.DefaultCellStyle = dataGridViewCellStyle11;
-            this.balance.HeaderText = "Balance";
-            this.balance.MinimumWidth = 6;
-            this.balance.Name = "balance";
-            this.balance.ReadOnly = true;
-            this.balance.Width = 125;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.description.DataPropertyName = "description";
-            this.description.HeaderText = "Description";
-            this.description.MinimumWidth = 10;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
             // 
             // panel3
             // 
@@ -177,7 +112,7 @@ namespace pos.Accounts.Reports
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 444);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1090, 352);
+            this.panel3.Size = new System.Drawing.Size(1114, 352);
             this.panel3.TabIndex = 0;
             // 
             // grid_sales_detail
@@ -205,7 +140,7 @@ namespace pos.Accounts.Reports
             this.grid_sales_detail.ReadOnly = true;
             this.grid_sales_detail.RowHeadersWidth = 51;
             this.grid_sales_detail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_sales_detail.Size = new System.Drawing.Size(1090, 352);
+            this.grid_sales_detail.Size = new System.Drawing.Size(1114, 352);
             this.grid_sales_detail.TabIndex = 1;
             // 
             // id
@@ -306,11 +241,87 @@ namespace pos.Accounts.Reports
             this.net_total.Name = "net_total";
             this.net_total.ReadOnly = true;
             // 
+            // invoice_no
+            // 
+            this.invoice_no.DataPropertyName = "invoice_no";
+            this.invoice_no.HeaderText = "Invoice No.";
+            this.invoice_no.MinimumWidth = 6;
+            this.invoice_no.Name = "invoice_no";
+            this.invoice_no.ReadOnly = true;
+            this.invoice_no.Width = 125;
+            // 
+            // account_name
+            // 
+            this.account_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.account_name.DataPropertyName = "account_name";
+            this.account_name.HeaderText = "Account";
+            this.account_name.MinimumWidth = 6;
+            this.account_name.Name = "account_name";
+            this.account_name.ReadOnly = true;
+            this.account_name.Width = 88;
+            // 
+            // debit
+            // 
+            this.debit.DataPropertyName = "debit";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.debit.DefaultCellStyle = dataGridViewCellStyle9;
+            this.debit.HeaderText = "Debit";
+            this.debit.MinimumWidth = 6;
+            this.debit.Name = "debit";
+            this.debit.ReadOnly = true;
+            this.debit.Width = 125;
+            // 
+            // credit
+            // 
+            this.credit.DataPropertyName = "credit";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.credit.DefaultCellStyle = dataGridViewCellStyle10;
+            this.credit.HeaderText = "Credit";
+            this.credit.MinimumWidth = 6;
+            this.credit.Name = "credit";
+            this.credit.ReadOnly = true;
+            this.credit.Width = 125;
+            // 
+            // balance
+            // 
+            this.balance.DataPropertyName = "balance";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.balance.DefaultCellStyle = dataGridViewCellStyle11;
+            this.balance.HeaderText = "Balance";
+            this.balance.MinimumWidth = 6;
+            this.balance.Name = "balance";
+            this.balance.ReadOnly = true;
+            this.balance.Width = 125;
+            // 
+            // payment_ref_invoice_no
+            // 
+            this.payment_ref_invoice_no.DataPropertyName = "payment_ref_invoice_no";
+            this.payment_ref_invoice_no.HeaderText = "Ref No";
+            this.payment_ref_invoice_no.MinimumWidth = 6;
+            this.payment_ref_invoice_no.Name = "payment_ref_invoice_no";
+            this.payment_ref_invoice_no.ReadOnly = true;
+            this.payment_ref_invoice_no.Width = 125;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 10;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
             // FrmAccountDetail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 796);
+            this.ClientSize = new System.Drawing.Size(1114, 796);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -333,12 +344,6 @@ namespace pos.Accounts.Reports
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView grid_account_report;
-        private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn account_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn debit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn credit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn balance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridView grid_sales_detail;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -350,5 +355,12 @@ namespace pos.Accounts.Reports
         private System.Windows.Forms.DataGridViewTextBoxColumn discount_value;
         private System.Windows.Forms.DataGridViewTextBoxColumn vat;
         private System.Windows.Forms.DataGridViewTextBoxColumn net_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoice_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn account_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn credit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn balance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn payment_ref_invoice_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
     }
 }

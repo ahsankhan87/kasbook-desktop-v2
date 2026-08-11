@@ -105,15 +105,15 @@ namespace pos.Accounts.Reports
 
         private void grid_account_report_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var invoice_no = grid_account_report.CurrentRow.Cells["invoice_no"].Value.ToString();
-            string invoice_chr = invoice_no.Substring(0, 1);
+            var payment_ref_invoice_no = grid_account_report.CurrentRow.Cells["payment_ref_invoice_no"].Value.ToString();
+            string invoice_chr = payment_ref_invoice_no.Substring(0, 1);
 
             if (invoice_chr.ToUpper() == "S")// for invoice check
             {
-                LoadSalesInvoiceDetail(invoice_no);
+                LoadSalesInvoiceDetail(payment_ref_invoice_no);
             }else if(invoice_chr.ToUpper() == "P")
             {
-                LoadPurchaseDetail(invoice_no);
+                LoadPurchaseDetail(payment_ref_invoice_no);
             }
             
         }

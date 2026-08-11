@@ -150,7 +150,7 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT id,account_name,invoice_no,debit,credit,(debit-credit) AS balance,description" +
+                        String query = "SELECT id,account_name,invoice_no,payment_ref_invoice_no,debit,credit,(debit-credit) AS balance,description" +
                             " FROM acc_entries" +
                             " WHERE branch_id=@branch_id AND entry_date BETWEEN @from_date AND @to_date";
 

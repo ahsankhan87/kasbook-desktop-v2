@@ -279,6 +279,18 @@
     <Compile Include="Accounts\Maintenance\frm_year_end_close_wizard.Designer.cs">
       <DependentUpon>frm_year_end_close_wizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accounts\Reconciliation\FrmAdvancedReconciliationMatcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Reconciliation\FrmAdvancedReconciliationMatcher.Designer.cs">
+      <DependentUpon>FrmAdvancedReconciliationMatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\Reconciliation\FrmJournalReconciliation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts\Reconciliation\FrmJournalReconciliation.Designer.cs">
+      <DependentUpon>FrmJournalReconciliation.cs</DependentUpon>
+    </Compile>
     <Compile Include="FixedAssets\frm_addFixedAsset.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1868,6 +1880,12 @@
     <EmbeddedResource Include="Accounts\Maintenance\frm_financial_periods.resx">
       <DependentUpon>frm_financial_periods.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reconciliation\FrmAdvancedReconciliationMatcher.resx">
+      <DependentUpon>FrmAdvancedReconciliationMatcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Reconciliation\FrmJournalReconciliation.resx">
+      <DependentUpon>FrmJournalReconciliation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\AP\AccountPayable.ar-SA.resx">
       <DependentUpon>AccountPayable.cs</DependentUpon>
     </EmbeddedResource>
@@ -2857,6 +2875,16 @@
     </None>
     <None Include="Accounts\IMPORT_ENGINE_INTEGRATION_SUMMARY.md" />
     <None Include="Accounts\IMPORT_USER_GUIDE.md" />
+    <None Include="Accounts\Reconciliation\BOTH_FORMS_IMPLEMENTATION.md" />
+    <None Include="Accounts\Reconciliation\COMPLETE_DELIVERY_SUMMARY.md" />
+    <None Include="Accounts\Reconciliation\DELIVERABLES_CHECKLIST.md" />
+    <None Include="Accounts\Reconciliation\IMPLEMENTATION_COMPLETE.md" />
+    <None Include="Accounts\Reconciliation\IMPLEMENTATION_GUIDE.md" />
+    <None Include="Accounts\Reconciliation\INDEX.md" />
+    <None Include="Accounts\Reconciliation\MATCHING_LOGIC.md" />
+    <None Include="Accounts\Reconciliation\QUICKSTART.md" />
+    <None Include="Accounts\Reconciliation\README_JOURNAL_RECONCILIATION.md" />
+    <None Include="Accounts\Reconciliation\SUMMARY.md" />
     <None Include="Customers\Customer Ledger Report\CustomerLedger.rpt" />
     <None Include="Products\Adjustment\SHORTCUTS_README.md" />
     <None Include="Products\Labels\product_labels.xsc">

@@ -493,6 +493,7 @@ namespace pos
                         string sale_type = sales_dr["sale_type"].ToString();
                         int payment_terms_id = (sales_dr["payment_terms_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["payment_terms_id"].ToString()));
                         int payment_method_id = (sales_dr["payment_method_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["payment_method_id"].ToString()));
+                        int bank_id = (sales_dr["bank_id"].ToString() == string.Empty ? 0 : int.Parse(sales_dr["bank_id"].ToString()));
 
                         /////Added sales header into the List
                         sales_model_header.Add(new SalesModalHeader
@@ -518,6 +519,7 @@ namespace pos
                             previousInvoiceDate = prev_invoice_date,
                             returnReasonCode = returnReasonCode,
                             returnReason = returnReason,
+                            bank_id = bank_id,
 
                             total_cost_amount = total_cost_amount,
                             cash_account_id = cash_account_id,

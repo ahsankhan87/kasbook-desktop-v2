@@ -279,5 +279,101 @@ namespace POS.BLL
         {
             return new JournalsDLL().BatchPostVouchers(voucherIds, userId);
         }
+
+        /// <summary>
+        /// Get journal entries within a date range for reconciliation
+        /// </summary>
+        public DataTable GetJournalEntriesByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                JournalsDLL objDLL = new JournalsDLL();
+                return objDLL.GetJournalEntriesByDateRange(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get unreconciled entries
+        /// </summary>
+        public DataTable GetUnreconciledEntries(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                JournalsDLL objDLL = new JournalsDLL();
+                return objDLL.GetUnreconciledEntries(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get voucher details by invoice number
+        /// </summary>
+        public DataTable GetVoucherDetailsByInvoiceNo(string invoiceNo)
+        {
+            try
+            {
+                JournalsDLL objDLL = new JournalsDLL();
+                return objDLL.GetVoucherDetailsByInvoiceNo(invoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update reconciliation status for a journal entry
+        /// </summary>
+        public bool UpdateReconciliationStatus(string invoiceNo, bool isReconciled, int userId, DateTime reconcileDate)
+        {
+            try
+            {
+                JournalsDLL objDLL = new JournalsDLL();
+                return objDLL.UpdateReconciliationStatus(invoiceNo, isReconciled, userId, reconcileDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get reconciliation history for audit trail
+        /// </summary>
+        public DataTable GetReconciliationHistory(string invoiceNo)
+        {
+            try
+            {
+                JournalsDLL objDLL = new JournalsDLL();
+                return objDLL.GetReconciliationHistory(invoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Batch reconcile multiple entries
+        /// </summary>
+        public bool BatchReconcile(List<string> invoiceNos, int userId, DateTime reconcileDate)
+        {
+            try
+            {
+                JournalsDLL objDLL = new JournalsDLL();
+                return objDLL.BatchReconcile(invoiceNos, userId, reconcileDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

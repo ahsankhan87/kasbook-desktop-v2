@@ -2794,5 +2794,11 @@ namespace pos
             var frm = new pos.FixedAssets.frm_fixed_asset_register();
             frm.ShowDialog(this);
         }
+
+        private void reconciliationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new pos.Accounts.Reconciliation.FrmJournalReconciliation();
+            form.Show();
+        }
     }
 }

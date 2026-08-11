@@ -2,9 +2,12 @@
 using pos.UI;
 using pos.UI.Busy;
 using POS.BLL;
+using POS.Core;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace pos
@@ -20,12 +23,21 @@ namespace pos
         public frm_all_purchases()
         {
             InitializeComponent();
+
+            // Wire up bulk posting button
+            if (btnPostToJournalEntry != null)
+                btnPostToJournalEntry.Click += btnPostToJournalEntry_Click;
         }
 
         public void frm_all_purchases_Load(object sender, EventArgs e)
         {
             AppTheme.Apply(this);
             StyleForm();
+
+            // Wire up grid formatting events
+            grid_all_purchases.DataBindingComplete += Grid_DataBindingComplete;
+            grid_all_purchases.CellFormatting += Grid_CellFormatting;
+
             load_all_purchases_grid();
         }
 
@@ -380,6 +392,272 @@ namespace pos
                     ex.Message,
                     captionEn: "Error",
                     captionAr: "خطأ");
+            }
+        }
+
+        /// <summary>
+        /// Get list of checked (selected) unposted rows for bulk posting.
+        /// Only returns rows where posted = false/0.
+        /// </summary>
+        private List<DataGridViewRow> GetCheckedUnpostedRows()
+        {
+            List<DataGridViewRow> checkedRows = new List<DataGridViewRow>();
+            foreach (DataGridViewRow row in grid_all_purchases.Rows)
+            {
+                // Check if row is selected via checkbox
+                object cellValue = row.Cells["colSelect"].Value;
+                if (cellValue is bool && (bool)cellValue)
+                {
+                    // Verify row is actually unposted (posted = false/0)
+                    object postedObj = row.Cells["posted"].Value;
+                    bool isPosted = false;
+
+                    if (postedObj != null && postedObj != DBNull.Value)
+                    {
+                        if (postedObj is bool)
+                            isPosted = (bool)postedObj;
+                        else if (postedObj is int)
+                            isPosted = Convert.ToInt32(postedObj) != 0;
+                        else if (postedObj is string)
+                            isPosted = !string.IsNullOrEmpty(Convert.ToString(postedObj)) && 
+                                      !Convert.ToString(postedObj).Equals("0", StringComparison.OrdinalIgnoreCase) &&
+                                      !Convert.ToString(postedObj).Equals("false", StringComparison.OrdinalIgnoreCase);
+                    }
+
+                    // Only include if not posted
+                    if (!isPosted)
+                    {
+                        checkedRows.Add(row);
+                    }
+                }
+            }
+            return checkedRows;
+        }
+
+        /// <summary>
+        /// Bulk post selected unposted purchases to journal entries.
+        /// </summary>
+        private void btnPostToJournalEntry_Click(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> selectedRows = GetCheckedUnpostedRows();
+
+            if (selectedRows.Count == 0)
+            {
+                UiMessages.ShowInfo(
+                    UiMessages.T("Please select one or more unposted purchases to post to journal.", 
+                                  "يرجى اختيار شراء واحد أو أكثر من المشتريات غير المسجلة للنشر في دفتر اليوميات."),
+                    UiMessages.T("No Selection", "لا توجد اختيارات"),
+                    UiMessages.T("Purchases", "المشتريات"),
+                    UiMessages.T("المشتريات", "المشتريات"));
+                return;
+            }
+
+            // Confirm bulk posting
+            string confirmMsg = UiMessages.T(
+                string.Format("Post {0} purchases to journal entries?", selectedRows.Count),
+                string.Format("نشر {0} شراء في دفتر اليوميات؟", selectedRows.Count));
+
+            if (UiMessages.ConfirmYesNo(confirmMsg, "Confirm Post to Journal", "تأكيد النشر في دفتر اليوميات") != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (BusyScope.Show(this, UiMessages.T("Posting purchases to journal...", "جاري نشر المشتريات في دفتر اليوميات...")))
+                {
+                    // Extract invoice numbers from selected rows
+                    List<string> invoiceNos = new List<string>();
+                    foreach (DataGridViewRow row in selectedRows)
+                    {
+                        object invObj = row.Cells["invoice_no"].Value;
+                        if (invObj != null)
+                        {
+                            string invoiceNo = Convert.ToString(invObj);
+                            if (!string.IsNullOrWhiteSpace(invoiceNo))
+                                invoiceNos.Add(invoiceNo);
+                        }
+                    }
+
+                    if (invoiceNos.Count == 0)
+                    {
+                        UiMessages.ShowWarning(
+                            UiMessages.T("No valid invoice numbers found.", "لم يتم العثور على أرقام فواتير صحيحة."),
+                            UiMessages.T("Invalid Data", "بيانات غير صحيحة"));
+                        return;
+                    }
+
+                    // Call BLL to post purchases to journal
+                    int successCount = 0;
+                    int failureCount = 0;
+                    List<string> failedInvoices = new List<string>();
+
+                    foreach (string invoiceNo in invoiceNos)
+                    {
+                        try
+                        {
+                            bool posted = objBLL.PostPurchaseToJournal(invoiceNo, UsersModal.logged_in_userid);
+                            if (posted)
+                                successCount++;
+                            else
+                            {
+                                failureCount++;
+                                failedInvoices.Add(invoiceNo);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            failureCount++;
+                            failedInvoices.Add(invoiceNo + " - " + ex.Message);
+                        }
+                    }
+
+                    // Show results
+                    string resultMsg = string.Format(
+                        UiMessages.T("Posted: {0}\r\nFailed: {1}", "تم النشر: {0}\r\nفشل: {1}"),
+                        successCount, failureCount);
+
+                    if (failedInvoices.Count > 0)
+                    {
+                        resultMsg += "\r\n\r\n" + UiMessages.T("Failed Invoices:", "الفواتير الفاشلة:") + "\r\n";
+                        resultMsg += string.Join("\r\n", failedInvoices.Take(10)); // Show first 10
+                        if (failedInvoices.Count > 10)
+                            resultMsg += string.Format("\r\n... and {0} more", failedInvoices.Count - 10);
+                    }
+
+                    UiMessages.ShowInfo(resultMsg, 
+                        UiMessages.T("Bulk Post Result", "نتيجة النشر الجماعي"),
+                        UiMessages.T("Purchases", "المشتريات"),
+                        UiMessages.T("المشتريات", "المشتريات"));
+
+                    // Reload data to refresh posted flags
+                    load_all_purchases_grid();
+
+                    // Clear checkbox selections for newly posted purchases
+                    foreach (DataGridViewRow row in grid_all_purchases.Rows)
+                    {
+                        object postedObj = row.Cells["posted"].Value;
+                        bool isPosted = false;
+
+                        if (postedObj != null && postedObj != DBNull.Value)
+                        {
+                            if (postedObj is bool)
+                                isPosted = (bool)postedObj;
+                            else if (postedObj is int)
+                                isPosted = Convert.ToInt32(postedObj) != 0;
+                            else if (postedObj is string)
+                                isPosted = !string.IsNullOrEmpty(Convert.ToString(postedObj)) && 
+                                          !Convert.ToString(postedObj).Equals("0", StringComparison.OrdinalIgnoreCase);
+                        }
+
+                        // Uncheck posted purchases
+                        if (isPosted && row.Cells["colSelect"].Value is bool)
+                            row.Cells["colSelect"].Value = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    UiMessages.T("Failed to post purchases to journal.", "فشل نشر المشتريات في دفتر اليوميات."),
+                    ex.Message,
+                    captionEn: "Post to Journal",
+                    captionAr: "نشر في دفتر اليوميات");
+            }
+        }
+
+        /// <summary>
+        /// Format grid after data binding: disable checkboxes for posted rows and color unposted rows.
+        /// </summary>
+        private void Grid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            try
+            {
+                foreach (DataGridViewRow row in grid_all_purchases.Rows)
+                {
+                    // Get posted status
+                    object postedObj = row.Cells["posted"].Value;
+                    bool isPosted = false;
+
+                    if (postedObj != null && postedObj != DBNull.Value)
+                    {
+                        if (postedObj is bool)
+                            isPosted = (bool)postedObj;
+                        else if (postedObj is int)
+                            isPosted = Convert.ToInt32(postedObj) != 0;
+                        else if (postedObj is string)
+                            isPosted = !string.IsNullOrEmpty(Convert.ToString(postedObj)) && 
+                                      !Convert.ToString(postedObj).Equals("0", StringComparison.OrdinalIgnoreCase) &&
+                                      !Convert.ToString(postedObj).Equals("false", StringComparison.OrdinalIgnoreCase);
+                    }
+
+                    // Disable checkbox for posted purchases
+                    if (row.Cells["colSelect"] is DataGridViewCheckBoxCell checkCell)
+                    {
+                        checkCell.ReadOnly = isPosted;
+                    }
+
+                    // Color unposted rows light red
+                    if (!isPosted)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 230, 230); // Light red
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White; // White for posted
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Silent fail for formatting (doesn't block functionality)
+                System.Diagnostics.Debug.WriteLine("Grid formatting error: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Format individual cells: prevent checkbox editing for posted rows.
+        /// </summary>
+        private void Grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                // Check if this is the checkbox column
+                if (e.ColumnIndex >= 0 && grid_all_purchases.Columns[e.ColumnIndex].Name == "colSelect")
+                {
+                    DataGridViewRow row = grid_all_purchases.Rows[e.RowIndex];
+
+                    // Get posted status
+                    object postedObj = row.Cells["posted"].Value;
+                    bool isPosted = false;
+
+                    if (postedObj != null && postedObj != DBNull.Value)
+                    {
+                        if (postedObj is bool)
+                            isPosted = (bool)postedObj;
+                        else if (postedObj is int)
+                            isPosted = Convert.ToInt32(postedObj) != 0;
+                        else if (postedObj is string)
+                            isPosted = !string.IsNullOrEmpty(Convert.ToString(postedObj)) && 
+                                      !Convert.ToString(postedObj).Equals("0", StringComparison.OrdinalIgnoreCase) &&
+                                      !Convert.ToString(postedObj).Equals("false", StringComparison.OrdinalIgnoreCase);
+                    }
+
+                    // Disable/enable checkbox based on posted status
+                    if (row.Cells["colSelect"] is DataGridViewCheckBoxCell checkCell)
+                    {
+                        checkCell.ReadOnly = isPosted;
+
+                        // If posted, clear the checkbox
+                        if (isPosted && row.Cells["colSelect"].Value is bool)
+                        {
+                            row.Cells["colSelect"].Value = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Silent fail for formatting
+                System.Diagnostics.Debug.WriteLine("Cell formatting error: " + ex.Message);
             }
         }
     }

@@ -213,6 +213,7 @@
             this.toolStripButton_purchasesV1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
+            this.reconciliationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -864,7 +865,8 @@
             this.costCentersToolStripMenuItem,
             this.cashManagementToolStripMenuItem,
             this.financialPeriodManagementToolStripMenuItem1,
-            this.vATDashboardToolStripMenuItem});
+            this.vATDashboardToolStripMenuItem,
+            this.reconciliationToolStripMenuItem});
             this.fINANCEToolStripMenuItem.Name = "fINANCEToolStripMenuItem";
             resources.ApplyResources(this.fINANCEToolStripMenuItem, "fINANCEToolStripMenuItem");
             // 
@@ -1502,6 +1504,12 @@
             this.toolStripButtonNewPOS.Name = "toolStripButtonNewPOS";
             this.toolStripButtonNewPOS.Click += new System.EventHandler(this.toolStripButtonNewPOS_Click);
             // 
+            // reconciliationToolStripMenuItem
+            // 
+            this.reconciliationToolStripMenuItem.Name = "reconciliationToolStripMenuItem";
+            resources.ApplyResources(this.reconciliationToolStripMenuItem, "reconciliationToolStripMenuItem");
+            this.reconciliationToolStripMenuItem.Click += new System.EventHandler(this.reconciliationToolStripMenuItem_Click);
+            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1714,5 +1722,6 @@
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem vATDashboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reconciliationToolStripMenuItem;
     }
 }

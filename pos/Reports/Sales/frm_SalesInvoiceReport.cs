@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static com.sun.tools.@internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 namespace pos.Reports.Sales
 {
@@ -78,7 +79,21 @@ namespace pos.Reports.Sales
             AppTheme.ApplyListFormStyleLightHeader(panel1, null, panel2, grid_sales_invoice_report, id);
         }
 
-        public void get_payment_method_dropdownlist() { SalesDropdownHelper.PopulatePaymentMethodsDropdown(cmb_payment_method); }
+        public void get_payment_method_dropdownlist() {
+
+            PaymentMethodBLL paymentMethodBLL_obj = new PaymentMethodBLL();
+            DataTable dt = paymentMethodBLL_obj.GetAll();
+            
+            DataRow emptyRow = dt.NewRow();
+            emptyRow["id"] = 0;              // Set Column Value (id)
+            emptyRow["description"] = "All";    // Set Column Value (description)
+            dt.Rows.InsertAt(emptyRow, 0);
+
+            cmb_payment_method.DisplayMember = "description";
+            cmb_payment_method.ValueMember = "id";
+            cmb_payment_method.DataSource = dt;
+            cmb_payment_method.SelectedIndex = 0;
+        }
 
         public void get_users_dropdownlist()
         {
@@ -127,7 +142,7 @@ namespace pos.Reports.Sales
                     int branch_id = UsersModal.logged_in_branch_id;
                     bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
                     int user_id = Convert.ToInt16(cmb_users.SelectedValue);
-                    string payment_method = cmb_payment_method.SelectedItem.ToString();
+                    string payment_method = cmb_payment_method.SelectedValue.ToString();
 
                     grid_sales_invoice_report.AutoGenerateColumns = false;
 

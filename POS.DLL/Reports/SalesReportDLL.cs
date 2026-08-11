@@ -483,7 +483,7 @@ namespace POS.DLL
                                 S.account,
                                 S.sale_type,
                                 C.first_name AS customer_name,
-                                PM.name AS payment_method,
+                                PM.description AS payment_method,
                                 COUNT(SI.id) AS total_items,
                                 SUM(SI.unit_price * SI.quantity_sold) AS subtotal,
                                 SUM(SI.discount_value) AS discount_value,
@@ -524,16 +524,16 @@ namespace POS.DLL
                         {
                             query += " AND S.user_id = @user_id";
                         }
-                        if (!string.IsNullOrEmpty(payment_method))
+                        if (payment_method != "0")
                         {
-                            query += " AND PM.name = @payment_method";
+                            query += " AND PM.id = @payment_method";
                         }
                         if (!SkipSmallInvoices)
                         {
                             query += " AND S.invoice_no NOT LIKE 'ZS%'";
                         }
 
-                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, S.sale_type, C.first_name, PM.name ORDER BY S.sale_date DESC, S.id DESC";
+                        query += " GROUP BY S.id, S.sale_date, S.invoice_no, S.account, S.sale_type, C.first_name, PM.description ORDER BY S.sale_date DESC, S.id DESC";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@from_date", from_date);
@@ -564,7 +564,7 @@ namespace POS.DLL
                         {
                             cmd.Parameters.AddWithValue("@user_id", user_id);
                         }
-                        if (!string.IsNullOrEmpty(payment_method))
+                        if (payment_method != "All")
                         {
                             cmd.Parameters.AddWithValue("@payment_method", payment_method);
                         }

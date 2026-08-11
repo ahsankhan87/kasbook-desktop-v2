@@ -55,6 +55,19 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        public Dictionary<string, bool> BulkPostSalesToJournal(List<string> invoiceNos, int userId)
+        {
+            try
+            {
+                return salesDAL.BulkPostSalesToJournal(invoiceNos, userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public DataSet GetSaleAndItemsDataSet(string invoice_no)
         {
             try
@@ -533,6 +546,54 @@ namespace POS.BLL
             catch
             {
 
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get sales entries within a date range for reconciliation
+        /// </summary>
+        public DataTable GetSalesEntriesByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetSalesEntriesByDateRange(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get unposted sales that have not been posted to journal entries yet.
+        /// </summary>
+        public DataTable GetUnpostedSales()
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetUnpostedSales();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Post a single sale to journal entries and update the posted flag.
+        /// </summary>
+        public bool PostSaleToJournal(string invoiceNo, int userId)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.PostSaleToJournal(invoiceNo, userId);
+            }
+            catch
+            {
                 throw;
             }
         }

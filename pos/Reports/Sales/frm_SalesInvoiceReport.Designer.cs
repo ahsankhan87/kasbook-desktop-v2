@@ -37,6 +37,7 @@ namespace pos.Reports.Sales
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmb_payment_method = new System.Windows.Forms.ComboBox();
             this.cmb_users = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
@@ -52,6 +53,7 @@ namespace pos.Reports.Sales
             this.cmb_sale_account = new System.Windows.Forms.ComboBox();
             this.cmb_sale_type = new System.Windows.Forms.ComboBox();
             this.txt_to_date = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_from_date = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -76,8 +78,6 @@ namespace pos.Reports.Sales
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_with_vat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmb_payment_method = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_invoice_report)).BeginInit();
@@ -116,6 +116,20 @@ namespace pos.Reports.Sales
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1517, 148);
             this.panel1.TabIndex = 0;
+            // 
+            // cmb_payment_method
+            // 
+            this.cmb_payment_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_payment_method.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.cmb_payment_method.FormattingEnabled = true;
+            this.cmb_payment_method.Location = new System.Drawing.Point(455, 107);
+            this.cmb_payment_method.Margin = new System.Windows.Forms.Padding(4);
+            this.cmb_payment_method.Name = "cmb_payment_method";
+            this.cmb_payment_method.Size = new System.Drawing.Size(186, 28);
+            this.cmb_payment_method.TabIndex = 55;
             // 
             // cmb_users
             // 
@@ -291,6 +305,17 @@ namespace pos.Reports.Sales
             this.txt_to_date.Name = "txt_to_date";
             this.txt_to_date.Size = new System.Drawing.Size(209, 29);
             this.txt_to_date.TabIndex = 39;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(352, 108);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 20);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Pay Method:";
             // 
             // label6
             // 
@@ -571,31 +596,6 @@ namespace pos.Reports.Sales
             this.profit.MinimumWidth = 6;
             this.profit.Name = "profit";
             this.profit.ReadOnly = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(352, 108);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 20);
-            this.label11.TabIndex = 38;
-            this.label11.Text = "Pay Method:";
-            // 
-            // cmb_payment_method
-            // 
-            this.cmb_payment_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_payment_method.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.cmb_payment_method.FormattingEnabled = true;
-            this.cmb_payment_method.Location = new System.Drawing.Point(455, 107);
-            this.cmb_payment_method.Margin = new System.Windows.Forms.Padding(4);
-            this.cmb_payment_method.Name = "cmb_payment_method";
-            this.cmb_payment_method.Size = new System.Drawing.Size(209, 28);
-            this.cmb_payment_method.TabIndex = 55;
             // 
             // frm_SalesInvoiceReport
             // 

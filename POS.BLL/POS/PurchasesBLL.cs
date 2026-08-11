@@ -460,5 +460,35 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get purchase entries within a date range for reconciliation
+        /// </summary>
+        public DataTable GetPurchaseEntriesByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return objDLL.GetPurchaseEntriesByDateRange(fromDate, toDate);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Post a single purchase to journal entries and update the posted flag.
+        /// </summary>
+        public bool PostPurchaseToJournal(string invoiceNo, int userId)
+        {
+            try
+            {
+                return objDLL.PostPurchaseToJournal(invoiceNo, userId);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

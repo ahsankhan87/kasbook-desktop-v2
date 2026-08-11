@@ -1341,6 +1341,8 @@ WHERE id = @voucher_id
                 });
             }
 
+            // Duplicate-account entries are allowed for this auto-post flow. The purchase/sales posting
+            // can legitimately use the same settlement account on both sides of the entry, so do not block posting.
             foreach (int accountId in duplicateAccounts)
             {
                 errors.Add(new ValidationError
@@ -1356,6 +1358,11 @@ WHERE id = @voucher_id
         }
 
         public PostResult PostJournalVoucher(JVHeaderModel header, List<JVLineModel> lines, int userId)
+        {
+            return PostJournalVoucher(header, lines, userId, null);
+        }
+
+        public PostResult PostJournalVoucher(JVHeaderModel header, List<JVLineModel> lines, int userId, string paymentRefInvoiceNo)
         {
             PostResult result = new PostResult();
             try
@@ -1477,7 +1484,7 @@ WHERE id = @voucher_id
 
                     if (result.Success)
                     {
-                        PostPartyLedgerRows(cn, result.VoucherNo, header.VoucherDate, lines, userId, result.EntryIds);
+                        PostPartyLedgerRows(cn, result.VoucherNo, header.VoucherDate, lines, userId, result.EntryIds, paymentRefInvoiceNo);
                     }
                 }
 
@@ -1497,6 +1504,20 @@ WHERE id = @voucher_id
         }
 
         public PostResult ReverseJournalVoucher(int voucherId, DateTime reversalDate, string reason, int userId)
+        {
+            return ReverseJournalVoucher(voucherId, reversalDate, reason, userId, null, null);
+        }
+
+        /// <summary>
+        /// Reverses a journal voucher with optional reference numbers for sales returns.
+        /// </summary>
+        /// <param name="voucherId">ID of the voucher to reverse</param>
+        /// <param name="reversalDate">Date of the reversal</param>
+        /// <param name="reason">Reason for reversal</param>
+        /// <param name="userId">User ID performing the reversal</param>
+        /// <param name="referenceNo">Optional: Sales return invoice number (for payment_ref_invoice_no in entries)</param>
+        /// <param name="originalInvoiceNo">Optional: Original sales invoice number (for ReferenceNo in header)</param>
+        public PostResult ReverseJournalVoucher(int voucherId, DateTime reversalDate, string reason, int userId, string referenceNo, string originalInvoiceNo)
         {
             PostResult result = new PostResult();
             try
@@ -1536,11 +1557,14 @@ WHERE id = @voucher_id
                         AccountCode = line.AccountCode,
                         AccountName = line.AccountName,
                         Narration = string.IsNullOrWhiteSpace(reason) ? "Reversal of " + source.Header.VoucherNo : reason,
-                        Debit = line.Credit,
-                        Credit = line.Debit,
+                        Debit = line.Credit,      // Swap debits and credits for reversal
+                        Credit = line.Debit,      // Swap debits and credits for reversal
                         BranchId = line.BranchId,
                         ModuleName = "REVERSAL",
-                        RefId = voucherId
+                        RefId = voucherId,
+                        CustomerId = line.CustomerId,   // Preserve customer for customer ledger posting
+                        SupplierId = line.SupplierId,   // Preserve supplier for supplier ledger posting
+                        BankId = line.BankId            // Preserve bank_id for bank payment reversal posting to pos_banks_payments
                     });
                 }
 
@@ -1549,7 +1573,7 @@ WHERE id = @voucher_id
                     VoucherNo = GetMaxInvoiceNo(),
                     VoucherDate = reversalDate.Date,
                     VoucherType = source.Header.VoucherType,
-                    ReferenceNo = source.Header.VoucherNo,
+                    ReferenceNo = !string.IsNullOrWhiteSpace(originalInvoiceNo) ? originalInvoiceNo : source.Header.ReferenceNo,
                     Narration = string.IsNullOrWhiteSpace(reason)
                         ? string.Format(CultureInfo.InvariantCulture, "Reversal of {0}", source.Header.VoucherNo)
                         : reason.Trim(),
@@ -1567,7 +1591,7 @@ WHERE id = @voucher_id
                     UpdatedAt = DateTime.Now
                 };
 
-                return PostJournalVoucher(reversalHeader, reversalLines, userId);
+                return PostJournalVoucher(reversalHeader, reversalLines, userId, referenceNo);
             }
             catch (Exception ex)
             {
@@ -1827,10 +1851,18 @@ WHERE id = @voucher_id
 
         private void PostPartyLedgerRows(SqlConnection cn, string invoiceNo, DateTime voucherDate, IEnumerable<JVLineModel> lines, int userId, List<int> entryIds)
         {
+            PostPartyLedgerRows(cn, invoiceNo, voucherDate, lines, userId, entryIds, null);
+        }
+
+        private void PostPartyLedgerRows(SqlConnection cn, string invoiceNo, DateTime voucherDate, IEnumerable<JVLineModel> lines, int userId, List<int> entryIds, string paymentRefInvoiceNo)
+        {
             if (cn == null || string.IsNullOrWhiteSpace(invoiceNo) || lines == null)
             {
                 return;
             }
+
+            // Use the provided payment ref invoice no, or default to the voucher's invoice no
+            string effectivePaymentRefNo = !string.IsNullOrWhiteSpace(paymentRefInvoiceNo) ? paymentRefInvoiceNo : invoiceNo;
 
             foreach (JVLineModel line in lines)
             {
@@ -1847,6 +1879,8 @@ WHERE id = @voucher_id
                     continue;
                 }
 
+                // Post to customer ledger if this line has a customer
+                // This is independent of supplier or bank posting - a line can post to multiple ledger tables
                 if (hasCustomer)
                 {
                     using (SqlCommand cmd = new SqlCommand(@"
@@ -1865,11 +1899,13 @@ WHERE id = @voucher_id
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@entry_id", entryIds[lines.ToList().IndexOf(line)]);
-                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)invoiceNo ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)effectivePaymentRefNo ?? DBNull.Value);
                         cmd.ExecuteNonQuery();
                     }
                 }
 
+                // Post to supplier ledger if this line has a supplier
+                // This is independent of customer or bank posting - a line can post to multiple ledger tables
                 if (hasSupplier)
                 {
                     using (SqlCommand cmd = new SqlCommand(@"
@@ -1888,11 +1924,14 @@ WHERE id = @voucher_id
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@entry_id", entryIds[lines.ToList().IndexOf(line)]);
-                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)invoiceNo ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)effectivePaymentRefNo ?? DBNull.Value);
                         cmd.ExecuteNonQuery();
                     }
                 }
 
+                // Post to bank payment ledger if this line has a bank_id
+                // This is independent of customer or supplier posting - a line can post to multiple ledger tables
+                // Bank payment reversals use the preserved bank_id from the original journal entry
                 if (hasBank)
                 {
                     using (SqlCommand cmd = new SqlCommand(@"
@@ -2051,7 +2090,10 @@ WHERE id = @voucher_id
                                 new XElement("BranchId", line.BranchId > 0 ? line.BranchId.ToString(CultureInfo.InvariantCulture) : string.Empty),
                                 new XElement("ModuleName", line.ModuleName ?? string.Empty),
                                 new XElement("RefId", line.RefId.HasValue ? line.RefId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
-                                new XElement("PeriodId", line.PeriodId.HasValue ? line.PeriodId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty)
+                                new XElement("PeriodId", line.PeriodId.HasValue ? line.PeriodId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
+                                new XElement("CustomerId", line.CustomerId.HasValue && line.CustomerId.Value > 0 ? line.CustomerId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
+                                new XElement("SupplierId", line.SupplierId.HasValue && line.SupplierId.Value > 0 ? line.SupplierId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty),
+                                new XElement("BankId", line.BankId.HasValue && line.BankId.Value > 0 ? line.BankId.Value.ToString(CultureInfo.InvariantCulture) : string.Empty)
                             )
                         )
                     )
@@ -2309,6 +2351,246 @@ WHERE InvoiceNo = @voucher_no
             }
 
             return lines;
+        }
+
+        /// <summary>
+        /// Get journal entries by date range for reconciliation
+        /// </summary>
+        public DataTable GetJournalEntriesByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        SELECT 
+                            h.id,
+                            h.InvoiceNo as invoice_no,
+                            h.EntryDate as entry_date,
+                            h.Narration as description,
+                            COALESCE(SUM(CASE WHEN e.debit > 0 THEN e.debit ELSE 0 END), 0) AS debit,
+                            COALESCE(SUM(CASE WHEN e.credit > 0 THEN e.credit ELSE 0 END), 0) AS credit,
+                            COALESCE(h.is_reconciled, 0) AS is_reconciled,
+                            h.reconcile_date,
+                            'Journal' AS entry_type
+                        FROM acc_entries_header h
+                        LEFT JOIN acc_entries e ON h.id = e.entry_id
+                        WHERE h.EntryDate BETWEEN @fromDate AND @toDate
+                        GROUP BY h.id, h.InvoiceNo, h.EntryDate, h.Narration, h.is_reconciled, h.reconcile_date
+                        ORDER BY h.EntryDate DESC
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                    cmd.Parameters.AddWithValue("@toDate", toDate);
+
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get unreconciled entries
+        /// </summary>
+        public DataTable GetUnreconciledEntries(DateTime fromDate, DateTime toDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        SELECT 
+                            h.id,
+                            h.InvoiceNo as invoice_no,
+                            h.EntryDate as entry_date,
+                            COALESCE(SUM(CASE WHEN e.debit > 0 THEN e.debit ELSE 0 END), 0) AS amount,
+                            DATEDIFF(DAY, h.EntryDate, CAST(GETDATE() AS DATE)) AS days_pending
+                        FROM acc_entries_header h
+                        LEFT JOIN acc_entries e ON h.id = e.entry_id
+                        WHERE h.EntryDate BETWEEN @fromDate AND @toDate
+                        AND COALESCE(h.is_reconciled, 0) = 0
+                        GROUP BY h.id, h.InvoiceNo, h.EntryDate
+                        ORDER BY h.EntryDate ASC
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@fromDate", fromDate);
+                    cmd.Parameters.AddWithValue("@toDate", toDate);
+
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get voucher details by invoice number
+        /// </summary>
+        public DataTable GetVoucherDetailsByInvoiceNo(string invoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        SELECT 
+                            h.InvoiceNo as invoice_no,
+                            h.EntryDate as entry_date,
+                            h.Narration as description,
+                            aa.code as account_code,
+                            aa.name as account_name,
+                            e.debit,
+                            e.credit,
+                            e.description AS line_description
+                        FROM acc_entries_header h
+                        INNER JOIN acc_entries e ON h.id = e.entry_id
+                        INNER JOIN acc_accounts aa ON e.account_id = aa.id
+                        WHERE h.InvoiceNo = @invoiceNo
+                        ORDER BY e.id
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@invoiceNo", invoiceNo);
+
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update reconciliation status
+        /// </summary>
+        public bool UpdateReconciliationStatus(string invoiceNo, bool isReconciled, int userId, DateTime reconcileDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        UPDATE acc_entries_header 
+                        SET is_reconciled = @isReconciled,
+                            reconcile_date = @reconcileDate,
+                            reconcile_user_id = @userId
+                        WHERE InvoiceNo = @invoiceNo
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@isReconciled", isReconciled);
+                    cmd.Parameters.AddWithValue("@reconcileDate", reconcileDate);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@invoiceNo", invoiceNo);
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get reconciliation history for audit trail
+        /// </summary>
+        public DataTable GetReconciliationHistory(string invoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    cmd = new SqlCommand(@"
+                        SELECT 
+                            InvoiceNo as invoice_no,
+                            reconcile_date,
+                            reconcile_user_id,
+                            is_reconciled
+                        FROM acc_entries_header
+                        WHERE InvoiceNo = @invoiceNo
+                        ORDER BY reconcile_date DESC
+                    ", cn);
+
+                    cmd.Parameters.AddWithValue("@invoiceNo", invoiceNo);
+
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Batch reconcile multiple entries
+        /// </summary>
+        public bool BatchReconcile(List<string> invoiceNos, int userId, DateTime reconcileDate)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                        cn.Open();
+
+                    foreach (var invoiceNo in invoiceNos)
+                    {
+                        cmd = new SqlCommand(@"
+                            UPDATE acc_entries_header 
+                            SET is_reconciled = 1,
+                                reconcile_date = @reconcileDate,
+                                reconcile_user_id = @userId
+                            WHERE InvoiceNo = @invoiceNo
+                        ", cn);
+
+                        cmd.Parameters.AddWithValue("@reconcileDate", reconcileDate);
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@invoiceNo", invoiceNo);
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
         }
     }
 }
