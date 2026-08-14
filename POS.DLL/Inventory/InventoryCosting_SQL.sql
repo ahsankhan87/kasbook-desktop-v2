@@ -200,29 +200,54 @@ GO
 
 CREATE PROCEDURE dbo.sp_GetFIFOLayers
 	@ProductId  INT,
-	@BranchId   INT  = NULL
+	@BranchId   INT  = NULL,
+	@ForUpdate  BIT  = 0
 AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT
-		layer_id,
-		product_id,
-		item_number,
-		branch_id,
-		purchase_ref_id,
-		purchase_date,
-		original_qty,
-		remaining_qty,
-		unit_cost,
-		currency_id,
-		exchange_rate,
-		created_at
-	FROM dbo.inv_cost_layers
-	WHERE product_id  = @ProductId
-	  AND remaining_qty > 0
-	  AND (@BranchId IS NULL OR branch_id = @BranchId)
-	ORDER BY purchase_date ASC, layer_id ASC;
+	IF @ForUpdate = 1
+	BEGIN
+		SELECT
+			layer_id,
+			product_id,
+			item_number,
+			branch_id,
+			purchase_ref_id,
+			purchase_date,
+			original_qty,
+			remaining_qty,
+			unit_cost,
+			currency_id,
+			exchange_rate,
+			created_at
+		FROM dbo.inv_cost_layers WITH (UPDLOCK, ROWLOCK)
+		WHERE product_id  = @ProductId
+		  AND remaining_qty > 0
+		  AND (@BranchId IS NULL OR branch_id = @BranchId)
+		ORDER BY purchase_date ASC, layer_id ASC;
+	END
+	ELSE
+	BEGIN
+		SELECT
+			layer_id,
+			product_id,
+			item_number,
+			branch_id,
+			purchase_ref_id,
+			purchase_date,
+			original_qty,
+			remaining_qty,
+			unit_cost,
+			currency_id,
+			exchange_rate,
+			created_at
+		FROM dbo.inv_cost_layers
+		WHERE product_id  = @ProductId
+		  AND remaining_qty > 0
+		  AND (@BranchId IS NULL OR branch_id = @BranchId)
+		ORDER BY purchase_date ASC, layer_id ASC;
+	END
 END
 GO
 
@@ -243,7 +268,7 @@ CREATE PROCEDURE dbo.sp_PostCOGSBatch
 	@InventoryAccountId INT,
 	@UserId             INT  = 1,
 	@BranchId           INT  = 1,
-	@CostingMethod      NVARCHAR(10) = 'WAC',   -- 'WAC' or 'FIFO'
+	@CostingMethod      NVARCHAR(10) = 'WAC',   -- 'WAC' | 'FIFO' | 'STANDARD'
 	@HeaderRef          NVARCHAR(100) = NULL     -- voucher / journal ref
 AS
 BEGIN
@@ -286,6 +311,35 @@ BEGIN
 			  WHERE x.sale_invoice_no = @InvoiceNo
 				AND x.branch_id       = @BranchId
 				AND x.journal_ref IS NOT NULL
+		  );
+	END
+	ELSE IF @CostingMethod = 'STANDARD'
+	BEGIN
+		INSERT INTO #cogs_lines (product_id, item_number, qty_sold, unit_cost, cogs_amount)
+		SELECT
+			p.id             AS product_id,
+			si.item_number,
+			ABS(si.quantity_sold) AS qty_sold,
+			CASE WHEN ISNULL(p.standard_cost, 0) > 0
+				 THEN ISNULL(p.standard_cost, 0)
+				 ELSE ISNULL(p.avg_cost, 0)
+			END AS unit_cost,
+			ROUND(
+				ABS(si.quantity_sold)
+				* (CASE WHEN ISNULL(p.standard_cost, 0) > 0
+						THEN ISNULL(p.standard_cost, 0)
+						ELSE ISNULL(p.avg_cost, 0)
+				   END), 4) AS cogs_amount
+		FROM dbo.pos_sales_items si
+		INNER JOIN dbo.pos_sales sh ON sh.id = si.sale_id
+		INNER JOIN dbo.pos_products p ON p.item_number = si.item_number
+		WHERE sh.invoice_no = @InvoiceNo
+		  AND sh.branch_id  = @BranchId
+		  AND NOT EXISTS (
+			  SELECT 1 FROM dbo.inv_cogs_log lg
+			  WHERE lg.sale_invoice_no = @InvoiceNo
+				AND lg.branch_id       = @BranchId
+				AND lg.journal_ref IS NOT NULL
 		  );
 	END
 	ELSE  -- WAC (default)
@@ -378,8 +432,8 @@ BEGIN
 		WHERE  sale_invoice_no = @InvoiceNo
 		  AND  branch_id       = @BranchId;
 
-		-- If WAC (rows weren't pre-inserted), insert them now
-		IF @CostingMethod = 'WAC'
+		-- If rows weren't pre-inserted (WAC/STANDARD), insert them now
+		IF @CostingMethod IN ('WAC', 'STANDARD')
 		BEGIN
 			INSERT INTO dbo.inv_cogs_log
 				(sale_invoice_no, sale_id, product_id, item_number, branch_id,
@@ -394,7 +448,7 @@ BEGIN
 				cl.qty_sold,
 				cl.unit_cost,
 				cl.cogs_amount,
-				'WAC',
+				@CostingMethod,
 				@VoucherRef,
 				GETDATE(),
 				@UserId
@@ -587,6 +641,12 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	IF @ConsumeQty <= 0
+	BEGIN
+		RAISERROR('ConsumeQty must be greater than zero.', 16, 1);
+		RETURN;
+	END
+
 	UPDATE dbo.inv_cost_layers
 	SET    remaining_qty = remaining_qty - @ConsumeQty
 	WHERE  layer_id = @LayerId
@@ -594,6 +654,10 @@ BEGIN
 
 	IF @@ROWCOUNT = 0
 		RAISERROR('Layer %d has insufficient remaining_qty for FIFO consumption.', 16, 1, @LayerId);
+
+	SELECT remaining_qty
+	FROM dbo.inv_cost_layers
+	WHERE layer_id = @LayerId;
 END
 GO
 

@@ -59,7 +59,9 @@ BEGIN
 			p.avg_cost,
 			p.standard_cost,
 			p.last_cost,
-			ISNULL(bs.current_qty, 0) AS current_qty
+			ISNULL(bs.current_qty, 0) AS current_qty,
+			p.supplier_id,
+			p.location_code
 		FROM pos_products p
 		LEFT JOIN BranchStock bs ON bs.item_number = p.item_number
 		WHERE p.deleted = 0
@@ -97,6 +99,8 @@ BEGIN
 		pb.category_code,
 		pb.brand_code,
 		pb.current_qty,
+		pb.supplier_id,
+		pb.location_code,
 
 		-- Effective method: product-level override takes priority, else use parameter
 		CASE
@@ -426,14 +430,14 @@ BEGIN
 	COGSValues AS (
 		SELECT
 			p.id        AS product_id,
-			SUM(sd.qty) AS sold_qty,
+			SUM(sd.quantity_sold) AS sold_qty,
 			-- Use cost_price on sale line if available, else current avg_cost
-			SUM(sd.qty * ISNULL(NULLIF(sd.cost_price, 0), p.avg_cost)) AS cogs_value
-		FROM pos_sales_detail sd
-		INNER JOIN pos_sales sh ON sh.id = sd.sales_id
+			SUM(sd.quantity_sold * ISNULL(NULLIF(sd.cost_price, 0), p.avg_cost)) AS cogs_value
+		FROM pos_sales_items sd
+		INNER JOIN pos_sales sh ON sh.id = sd.sale_id
 		INNER JOIN pos_products p ON p.item_number = sd.item_number
 		WHERE
-			CAST(sh.date_created AS DATE) BETWEEN @FromDate AND @ToDate
+			CAST(sh.sale_date AS DATE) BETWEEN @FromDate AND @ToDate
 			AND sh.deleted = 0
 			AND (@BranchId = 0 OR sh.branch_id = @BranchId)
 		GROUP BY p.id

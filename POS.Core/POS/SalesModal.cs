@@ -184,11 +184,15 @@ namespace POS.Core
         public int LineId { get; set; }
         public int AdjId { get; set; }
         public int ProductId { get; set; }
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
+        public string Category { get; set; }
         public decimal SystemQty { get; set; }
         public decimal PhysicalQty { get; set; }
         public decimal QtyDifference { get; set; }
         public decimal CurrentSalePrice { get; set; }
         public decimal NewSalePrice { get; set; }
+        public decimal PriceDifference { get; set; }
         public string CurrentLocation { get; set; }
         public string NewLocation { get; set; }
         public string Reason { get; set; }
@@ -271,6 +275,9 @@ namespace POS.Core
     {
         public bool Success { get; set; }
         public int AffectedRows { get; set; }
+        public int QtyChanges { get; set; }
+        public int PriceChanges { get; set; }
+        public int LocationChanges { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

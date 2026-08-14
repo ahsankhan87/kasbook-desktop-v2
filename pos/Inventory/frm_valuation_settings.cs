@@ -5,6 +5,7 @@ using pos.UI;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using POS.BLL;
 
 namespace pos.Inventory
 {
@@ -32,16 +33,16 @@ namespace pos.Inventory
                 // COGS — expense accounts
                 DataTable cogsAccounts = _bll.GetExpenseAccounts();
                 cmbCogsAccount.DataSource    = cogsAccounts;
-                cmbCogsAccount.DisplayMember = "account_name";
+                cmbCogsAccount.DisplayMember = "name";
                 cmbCogsAccount.ValueMember   = "id";
-                cmbCogsAccount.SelectedIndex = -1;
+                cmbCogsAccount.SelectedIndex = 0;
 
                 // Inventory — asset accounts
                 DataTable invAccounts = _bll.GetAssetAccounts();
                 cmbInventoryAccount.DataSource    = invAccounts;
-                cmbInventoryAccount.DisplayMember = "account_name";
+                cmbInventoryAccount.DisplayMember = "name";
                 cmbInventoryAccount.ValueMember   = "id";
-                cmbInventoryAccount.SelectedIndex = -1;
+                cmbInventoryAccount.SelectedValue = 9; // 9=Inventory id. Default to "Inventory" account            
             }
             catch (Exception ex)
             {

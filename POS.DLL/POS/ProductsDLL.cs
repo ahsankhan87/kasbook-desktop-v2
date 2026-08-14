@@ -2416,7 +2416,7 @@ namespace POS.DLL
                     string select = @"SELECT p.id, p.item_number, p.part_number, p.code, p.name, p.name_ar, p.category_code, 
                                          p.item_type, p.brand_code, p.avg_cost, p.cost_price, p.unit_price, p.unit_price_2,
                                          p.tax_id, p.location_code, p.unit_id, p.re_stock_level, p.description, p.group_code,
-                                         p.alt_no, p.packet_qty, ISNULL(bs.branch_qty,0) AS qty,
+                                         p.alt_no AS alternate_no, p.packet_qty, ISNULL(bs.branch_qty,0) AS qty,
                                          C.name AS category, C.id AS category_id";
 
                     string joinStock = @"LEFT JOIN (

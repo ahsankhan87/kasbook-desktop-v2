@@ -100,6 +100,28 @@ namespace pos.Inventory
                 cmbBrand.DataSource    = brands;
                 cmbBrand.DisplayMember = "name";
                 cmbBrand.ValueMember   = "code";
+
+                // Suppliers
+                var suppBll = new SupplierBLL();
+                DataTable suppliers = suppBll.GetAll();
+                var allSupp = suppliers.NewRow();
+                allSupp["id"] = 0;
+                allSupp["first_name"] = "(All Suppliers)";
+                suppliers.Rows.InsertAt(allSupp, 0);
+                cmbSupplier.DataSource    = suppliers;
+                cmbSupplier.DisplayMember = "first_name";
+                cmbSupplier.ValueMember   = "id";
+
+                // Locations
+                var locBll = new LocationsBLL();
+                DataTable locations = locBll.GetAll();
+                var allLoc = locations.NewRow();
+                allLoc["code"] = "";
+                allLoc["name"] = "(All Locations)";
+                locations.Rows.InsertAt(allLoc, 0);
+                cmbLocation.DataSource    = locations;
+                cmbLocation.DisplayMember = "name";
+                cmbLocation.ValueMember   = "code";
             }
             catch
             {
@@ -135,6 +157,15 @@ namespace pos.Inventory
                 string   method      = _settings?.ValuationMethod ?? "WAC";
                 string   categoryCode = cmbCategory.SelectedValue?.ToString() ?? "";
                 string   brandCode    = cmbBrand.SelectedValue?.ToString() ?? "";
+
+                // New: Supplier and Location filters
+                int? supplierId = null;
+                var suppValue = cmbSupplier.SelectedValue;
+                if (suppValue != null && int.TryParse(suppValue.ToString(), out int suppId) && suppId > 0)
+                    supplierId = suppId;
+
+                string locationCode = cmbLocation.SelectedValue?.ToString() ?? "";
+
                 bool     showZero     = chkShowZero.Checked;
                 int      branchId     = UsersModal.logged_in_branch_id;
 
@@ -142,7 +173,7 @@ namespace pos.Inventory
                     _bll.CalculateValuation(
                         asOf, method, branchId,
                         categoryCode, brandCode,
-                        null, null, showZero));
+                        supplierId, locationCode, showZero));
 
                 var summary = await Task.Run(() => _bll.BuildSummary(lines, branchId));
 
@@ -152,6 +183,7 @@ namespace pos.Inventory
                 BindValuationGrid(lines);
                 UpdateSummaryPanel(summary);
                 panelChart.Invalidate();
+                panelChartSuppliers.Invalidate();
             }
             catch (Exception ex)
             {
@@ -205,6 +237,46 @@ namespace pos.Inventory
             lblTotalSkuVal.Text   = s.TotalSKUs.ToString("N0");
             lblTotalQtyVal.Text   = s.TotalQty.ToString("N2");
             lblAvgCostVal.Text    = s.AvgCostPerUnit.ToString("N4");
+        }
+
+        // ===================================================================
+        // Pie Chart (GDI+) — top 5 suppliers by value
+        // ===================================================================
+
+        private void panelChartSuppliers_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            if (_summary == null || _summary.TopSuppliersByValue == null ||
+                _summary.TopSuppliersByValue.Count == 0) return;
+
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            var items = _summary.TopSuppliersByValue;
+            Rectangle pieRect = new Rectangle(8, 8, 160, 160);
+            float startAngle = -90f;
+            float total = items.Sum(x => (float)x.TotalValue);
+            if (total <= 0) return;
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                float sweep = (float)(items[i].TotalValue / (decimal)total * 360m);
+                using (SolidBrush br = new SolidBrush(PieColours[i % PieColours.Length]))
+                    g.FillPie(br, pieRect, startAngle, sweep);
+                startAngle += sweep;
+            }
+
+            // Legend
+            int legendX = 180;
+            int legendY = 8;
+            for (int i = 0; i < items.Count; i++)
+            {
+                using (SolidBrush br = new SolidBrush(PieColours[i % PieColours.Length]))
+                    g.FillRectangle(br, legendX, legendY + i * 26, 14, 14);
+
+                string label = $"{items[i].SupplierName} ({items[i].TotalValue:N0})";
+                g.DrawString(label, AppTheme.FontSmall, Brushes.Black,
+                    legendX + 18, legendY + i * 26 - 1);
+            }
         }
 
         // ===================================================================

@@ -2073,6 +2073,9 @@
     <EmbeddedResource Include="frm_session_lock.resx">
       <DependentUpon>frm_session_lock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frm_inventory_valuation.resx">
+      <DependentUpon>frm_inventory_valuation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventory\frm_valuation_settings.resx">
       <DependentUpon>frm_valuation_settings.cs</DependentUpon>
     </EmbeddedResource>

@@ -66,6 +66,8 @@ BEGIN
 		description,serialnumber,item_number,currency_id,exchange_rate,foreign_unit_price,foreign_cost_price,foreign_discount_value) 
 		VALUES (@branch_id,@purchase_id,@invoice_no,@item_code,@quantity,@cost_price, @unit_price,@discount_value,@discount_percent,@tax_id,@tax_rate,@location_code,@packet_qty,
 		@purchase_type,@serialNo,@item_number,@currency_id,@exchange_rate,@foreign_unit_price,@foreign_cost_price,@foreign_discount_value)  
+
+		DECLARE @purchase_item_id INT = SCOPE_IDENTITY();
     
 		-- GET AVG COST AND SAVE IN TABLE
 		declare @old_qty decimal(18,6) = COALESCE((SELECT TOP 1 ISNULL(qty,0) AS qty FROM pos_product_stocks WHERE item_number = @item_number AND branch_id=@branch_id),0);
@@ -157,12 +159,16 @@ BEGIN
 		BEGIN
 		UPDATE pos_purchases_order_items SET status= @PO_status, trans_invoice_no=@invoice_no WHERE invoice_no=@PO_invoice_no AND item_number = @item_number;
 		END
+
+		SELECT @purchase_item_id AS purchase_item_id;
 	END 
 	
 	ELSE IF @OperationType=2  --Return Purchases
     BEGIN  
         INSERT INTO pos_purchases_items(branch_id,purchase_id,invoice_no,item_code,quantity,cost_price,unit_price,discount_value,tax_id,tax_rate,loc_code,packet_qty,item_number) 
 		VALUES (@branch_id,@purchase_id,@invoice_no,@item_code,-@quantity,-@cost_price, -@unit_price,-@discount_value,@tax_id,@tax_rate,@location_code,+@packet_qty,@item_number)  
+
+		DECLARE @purchase_return_item_id INT = SCOPE_IDENTITY();
 		
 		-- GET AVG COST AND SAVE IN TABLE
 		declare @old_qty_rt decimal(18,6) = COALESCE((SELECT TOP 1 ISNULL(qty,0) AS qty FROM pos_product_stocks WHERE item_number = @item_number AND branch_id=@branch_id),0);
@@ -210,6 +216,8 @@ BEGIN
 		VALUES (@purchase_id,@old_invoice_no,@item_number,@item_code,@quantity,(@quantity*@cost_price),@returnReason,@user_id,GETDATE(),@branch_id)
 
 		INSERT INTO pos_inventory VALUES (@item_code,-@quantity,-@cost_price,-@unit_price,@branch_id,@user_id,'Purchase Return',@invoice_no, @purchase_date,GETDATE(),@customer_id,@supplier_id,@total_product_qty,@purchase_date,@location_code,-@packet_qty,@item_number)	
+
+		SELECT @purchase_return_item_id AS purchase_item_id;
 	
 	END  
 END

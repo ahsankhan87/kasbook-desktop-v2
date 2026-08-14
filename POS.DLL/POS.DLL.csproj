@@ -135,6 +135,7 @@
     <Content Include="..\Database\FixedAssetsDepreciationProcedures.sql">
       <Link>FixedAssets\FixedAssetsDepreciationProcedures.sql</Link>
     </Content>
+    <Content Include="Inventory\sp_purchases_items.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Accounts\BUDGET_MODULE_README.md" />

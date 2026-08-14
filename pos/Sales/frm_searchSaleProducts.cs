@@ -32,9 +32,25 @@ namespace pos
         int _pageSize = 100; // adjust as needed
         Timer _debounceTimer;
         private ProductBLL _productBll = new ProductBLL();
+        private DataTable _virtualProductPage;
         int _totalCount = 0;
         int _totalPages = 0;
         Label _lblPages; // runtime created label
+
+        private readonly string[] _productGridColumns =
+        {
+            "id",
+            "code",
+            "name",
+            "qty",
+            "unit_price",
+            "location_code",
+            "category",
+            "description",
+            "group_code",
+            "alternate_no",
+            "item_number"
+        };
 
         public frm_searchSaleProducts(frm_sales mainForm, string product_code, string category_code, string brand_code, bool isGrid = false, string group_code = "")
         {
@@ -49,6 +65,9 @@ namespace pos
 
             InitializeComponent();
 
+            grid_search_products.VirtualMode = true;
+            grid_search_products.CellValueNeeded += grid_search_products_CellValueNeeded;
+
             _debounceTimer = new Timer();
             _debounceTimer.Interval = 300; // 300ms debounce
             _debounceTimer.Tick += (s, e) =>
@@ -62,6 +81,9 @@ namespace pos
         public frm_searchSaleProducts()
         {
             InitializeComponent();
+
+            grid_search_products.VirtualMode = true;
+            grid_search_products.CellValueNeeded += grid_search_products_CellValueNeeded;
 
             _debounceTimer = new Timer();
             _debounceTimer.Interval = 300;
@@ -106,7 +128,8 @@ namespace pos
                     string condition = txt_search.Text.Trim();
                     if (string.IsNullOrWhiteSpace(condition))
                     {
-                        grid_search_products.DataSource = null;
+                        _virtualProductPage = null;
+                        grid_search_products.RowCount = 0;
                         _totalCount = 0;
                         _totalPages = 0;
                         UpdatePagingLabel();
@@ -141,8 +164,9 @@ namespace pos
                             out _totalCount);
                     }
 
-                    grid_search_products.AutoGenerateColumns = false;
-                    grid_search_products.DataSource = dt;
+                    _virtualProductPage = dt;
+                    grid_search_products.RowCount = dt.Rows.Count;
+                    grid_search_products.Invalidate();
                     UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
                     this.Text = $"Products (Page {_pageIndex + 1}/{_totalPages})";
 
@@ -160,7 +184,9 @@ namespace pos
                             frm_products.ShowDialog();
                             dt = _productBll.SearchProductsPagedWithCount(condition, _category_code, _brand_code, _group_code, _pageIndex, _pageSize, out _totalCount);
                             _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
-                            grid_search_products.DataSource = dt;
+                            _virtualProductPage = dt;
+                            grid_search_products.RowCount = dt.Rows.Count;
+                            grid_search_products.Invalidate();
                             UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
                         }
                         else
@@ -170,14 +196,15 @@ namespace pos
                     }
                     else
                     {
-                        if (grid_search_products.CurrentRow != null)
+                        var selectedRow = GetCurrentVirtualRow();
+                        if (selectedRow != null)
                         {
-                            string productID = grid_search_products.CurrentRow.Cells["id"].Value?.ToString();
-                            string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value?.ToString();
+                            string productID = selectedRow["id"]?.ToString();
+                            string item_number = selectedRow["item_number"]?.ToString();
 
                             int alternate_no = 0;
-                            if (grid_search_products.CurrentRow.Cells["alternate_no"] != null)
-                                int.TryParse(grid_search_products.CurrentRow.Cells["alternate_no"].Value?.ToString(), out alternate_no);
+                            if (selectedRow["alternate_no"] != DBNull.Value && selectedRow["alternate_no"] != null)
+                                int.TryParse(selectedRow["alternate_no"].ToString(), out alternate_no);
 
                             load_alternate_product(alternate_no);
 
@@ -222,7 +249,10 @@ namespace pos
         {
             if (grid_search_products.SelectedCells.Count > 0)
             {
-                string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
+                var selectedRow = GetCurrentVirtualRow();
+                string item_number = selectedRow != null && selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null
+                    ? selectedRow["item_number"].ToString()
+                    : "";
 
                 if (_isGrid)
                 {
@@ -256,9 +286,19 @@ namespace pos
         {
             if (grid_search_products.RowCount > 0)
             {
-                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-                string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
-                string product_name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
+                var selectedRow = GetCurrentVirtualRow();
+                if (selectedRow == null)
+                    return;
+
+                string item_number = selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null
+                    ? selectedRow["item_number"].ToString()
+                    : string.Empty;
+                string code = selectedRow["code"] != DBNull.Value && selectedRow["code"] != null
+                    ? selectedRow["code"].ToString()
+                    : string.Empty;
+                string product_name = selectedRow["name"] != DBNull.Value && selectedRow["name"] != null
+                    ? selectedRow["name"].ToString()
+                    : string.Empty;
                 string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
 
                 if (string.IsNullOrEmpty(item_number))
@@ -388,9 +428,15 @@ namespace pos
             {
                 if (grid_search_products.Focused && grid_search_products.RowCount > 0)
                 {
-                    string productID = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
-                    int alternate_no = (grid_search_products.CurrentRow.Cells["alternate_no"].Value != null ? Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value) : 0);
-                    string item_number = (grid_search_products.CurrentRow.Cells["item_number"].Value != null ? grid_search_products.CurrentRow.Cells["item_number"].Value.ToString() : "");
+                    var selectedRow = GetCurrentVirtualRow();
+                    if (selectedRow == null)
+                        return;
+
+                    string productID = selectedRow.Table.Columns.Contains("id") && selectedRow["id"] != DBNull.Value && selectedRow["id"] != null ? selectedRow["id"].ToString() : string.Empty;
+                    int alternate_no = 0;
+                    if (selectedRow.Table.Columns.Contains("alternate_no") && selectedRow["alternate_no"] != DBNull.Value && selectedRow["alternate_no"] != null)
+                        int.TryParse(selectedRow["alternate_no"].ToString(), out alternate_no);
+                    string item_number = selectedRow.Table.Columns.Contains("item_number") && selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null ? selectedRow["item_number"].ToString() : string.Empty;
                     load_alternate_product(alternate_no);
                     load_other_stock(productID, item_number);
                 }
@@ -447,6 +493,39 @@ namespace pos
             catch { }
         }
 
+        private void grid_search_products_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (_virtualProductPage == null || e.RowIndex < 0 || e.RowIndex >= _virtualProductPage.Rows.Count)
+            {
+                e.Value = null;
+                return;
+            }
+
+            DataRow row = _virtualProductPage.Rows[e.RowIndex];
+            string columnName = grid_search_products.Columns[e.ColumnIndex].Name;
+
+            if (row.Table.Columns.Contains(columnName))
+            {
+                e.Value = row[columnName];
+            }
+            else
+            {
+                e.Value = null;
+            }
+        }
+
+        private DataRow GetCurrentVirtualRow()
+        {
+            if (_virtualProductPage == null || grid_search_products.CurrentCell == null)
+                return null;
+
+            int rowIndex = grid_search_products.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= _virtualProductPage.Rows.Count)
+                return null;
+
+            return _virtualProductPage.Rows[rowIndex];
+        }
+
         private void grid_group_products_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             foreach (DataGridViewRow gvr in grid_group_products.Rows)
@@ -467,19 +546,10 @@ namespace pos
             if (grid_search_products.RowCount > 0)
             {
                 ProductBLL objBLL = new ProductBLL();
-                grid_other_stock.DataSource = null;
-                grid_other_stock.Rows.Clear();
-
                 DataTable dt = objBLL.Get_otherStock(productID, ProductNumber);
-                foreach (DataRow myProductView in dt.Rows)
-                {
-                    string compnay_name = myProductView["branch_name"].ToString();
-                    string qty = myProductView["qty"].ToString();
 
-                    string[] row0 = { compnay_name, qty };
-
-                    grid_other_stock.Rows.Add(row0);
-                }
+                grid_other_stock.AutoGenerateColumns = false;
+                grid_other_stock.DataSource = dt;
             }
         }
     }

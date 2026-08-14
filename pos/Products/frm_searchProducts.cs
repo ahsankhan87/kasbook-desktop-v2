@@ -39,10 +39,57 @@ namespace pos
         private const int DebounceMs = 250;
         private string _pendingSearchText = string.Empty;
         private Dictionary<string, DataTable> _searchCache = new Dictionary<string, DataTable>(StringComparer.OrdinalIgnoreCase);
+        private DataTable _virtualProductPage;
         private int _pageIndex = 0;
         private const int _pageSize = 100;
         private int _totalCount = 0;
         private int _totalPages = 0;
+
+        private DataRow GetCurrentVirtualRow()
+        {
+            if (_virtualProductPage == null || grid_search_products.CurrentCell == null)
+                return null;
+
+            int rowIndex = grid_search_products.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= _virtualProductPage.Rows.Count)
+                return null;
+
+            return _virtualProductPage.Rows[rowIndex];
+        }
+
+        private void grid_search_products_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (_virtualProductPage == null || e.RowIndex < 0 || e.RowIndex >= _virtualProductPage.Rows.Count)
+            {
+                e.Value = null;
+                return;
+            }
+
+            DataRow row = _virtualProductPage.Rows[e.RowIndex];
+            string columnName = grid_search_products.Columns[e.ColumnIndex].Name;
+            if (row.Table.Columns.Contains(columnName))
+            {
+                e.Value = row[columnName];
+            }
+            else
+            {
+                e.Value = null;
+            }
+        }
+
+        private void BindVirtualPage(DataTable dt)
+        {
+            _virtualProductPage = dt;
+            grid_search_products.RowCount = dt == null ? 0 : dt.Rows.Count;
+            grid_search_products.Invalidate();
+        }
+
+        private void ClearVirtualPage()
+        {
+            _virtualProductPage = null;
+            grid_search_products.RowCount = 0;
+            grid_search_products.Invalidate();
+        }
 
         public frm_searchProducts(frm_sales mainForm, frm_assign_products assign_product_frm, frm_alt_products frm_alt_products,
             string product_code, string category_id, string brand_id, int rowIndex = 0, bool isGrid = false, bool source_product = false,
@@ -66,6 +113,8 @@ namespace pos
             _location_code = location_code;
 
             InitializeComponent();
+            grid_search_products.VirtualMode = true;
+            grid_search_products.CellValueNeeded += grid_search_products_CellValueNeeded;
 
             _debounceTimer.Interval = DebounceMs;
             _debounceTimer.Tick += DebounceTimer_Tick;
@@ -74,6 +123,8 @@ namespace pos
         public frm_searchProducts()
         {
             InitializeComponent();
+            grid_search_products.VirtualMode = true;
+            grid_search_products.CellValueNeeded += grid_search_products_CellValueNeeded;
 
             _debounceTimer.Interval = DebounceMs;
             _debounceTimer.Tick += DebounceTimer_Tick;
@@ -127,14 +178,15 @@ namespace pos
 
         private async Task LoadProductsGridAsync()
         {
-            grid_search_products.DataSource = null;
             grid_search_products.AutoGenerateColumns = false;
 
             string condition = (txt_search.Text ?? string.Empty).Trim();
             if (condition == string.Empty)
             {
+                ClearVirtualPage();
                 _totalCount = 0;
                 _totalPages = 0;
+                UpdateTotalProductsLabel();
                 return;
             }
 
@@ -152,7 +204,7 @@ namespace pos
                 _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
             }
 
-            grid_search_products.DataSource = dt;
+            BindVirtualPage(dt);
             UpdateTotalProductsLabel();
         }
 
@@ -174,13 +226,16 @@ namespace pos
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if (grid_search_products.SelectedCells.Count > 0)
+            var selectedRow = GetCurrentVirtualRow();
+            if (selectedRow != null && selectedRow.Table.Columns.Contains("item_number") && selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null)
             {
-                string product_id = grid_search_products.CurrentRow.Cells["id"].Value.ToString();
-                string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
-                string name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
-                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-                int alternate_no = Convert.ToInt32(grid_search_products.CurrentRow.Cells["alternate_no"].Value);
+                string product_id = selectedRow.Table.Columns.Contains("id") && selectedRow["id"] != DBNull.Value && selectedRow["id"] != null ? selectedRow["id"].ToString() : string.Empty;
+                string code = selectedRow.Table.Columns.Contains("code") && selectedRow["code"] != DBNull.Value && selectedRow["code"] != null ? selectedRow["code"].ToString() : string.Empty;
+                string name = selectedRow.Table.Columns.Contains("name") && selectedRow["name"] != DBNull.Value && selectedRow["name"] != null ? selectedRow["name"].ToString() : string.Empty;
+                string item_number = selectedRow["item_number"].ToString();
+                int alternate_no = 0;
+                if (selectedRow.Table.Columns.Contains("alternate_no") && selectedRow["alternate_no"] != DBNull.Value && selectedRow["alternate_no"] != null)
+                    int.TryParse(selectedRow["alternate_no"].ToString(), out alternate_no);
 
                 if (_isGrid)
                 {
@@ -264,7 +319,7 @@ namespace pos
             string condition = (_pendingSearchText ?? string.Empty).Trim();
             if (condition.Length == 0)
             {
-                grid_search_products.DataSource = null;
+                ClearVirtualPage();
                 _totalCount = 0;
                 _totalPages = 0;
                 UpdateTotalProductsLabel();
@@ -275,7 +330,7 @@ namespace pos
 
             if (_searchCache.TryGetValue(cacheKey, out var cached))
             {
-                grid_search_products.DataSource = cached;
+                BindVirtualPage(cached);
                 UpdateTotalProductsLabel();
                 return;
             }
@@ -289,7 +344,7 @@ namespace pos
                     _totalCount = result.Item2;
                     _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
                     _searchCache[cacheKey] = dt;
-                    grid_search_products.DataSource = dt;
+                    BindVirtualPage(dt);
                     UpdateTotalProductsLabel();
                 }
                 catch (Exception ex)
@@ -371,7 +426,7 @@ namespace pos
 
         private void UpdateTotalProductsLabel()
         {
-            int count = (grid_search_products.DataSource as DataTable)?.Rows.Count ?? grid_search_products.Rows.Count;
+            int count = _virtualProductPage != null ? _virtualProductPage.Rows.Count : grid_search_products.Rows.Count;
             lbl_totalCount.Text = UiMessages.T(
                 "Products " + count + "/" + _totalCount + " (Page " + (_pageIndex + 1) + "/" + Math.Max(1, _totalPages) + ")",
                 "الأصناف " + count + "/" + _totalCount + " (صفحة " + (_pageIndex + 1) + "/" + Math.Max(1, _totalPages) + ")");

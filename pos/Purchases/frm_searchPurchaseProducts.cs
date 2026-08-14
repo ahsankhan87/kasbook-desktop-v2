@@ -33,8 +33,69 @@ namespace pos
         int _pageSize = 100;
         Timer _debounceTimer;
         private ProductBLL _productBll = new ProductBLL();
+        private DataTable _virtualProductPage;
         int _totalCount = 0;
         int _totalPages = 0;
+
+        private readonly string[] _productGridColumns =
+        {
+            "id",
+            "code",
+            "name",
+            "qty",
+            "avg_cost",
+            "location_code",
+            "category",
+            "group_code",
+            "alternate_no",
+            "item_number"
+        };
+
+        private DataRow GetCurrentVirtualRow()
+        {
+            if (_virtualProductPage == null || grid_search_products.CurrentCell == null)
+                return null;
+
+            int rowIndex = grid_search_products.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= _virtualProductPage.Rows.Count)
+                return null;
+
+            return _virtualProductPage.Rows[rowIndex];
+        }
+
+        private void grid_search_products_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (_virtualProductPage == null || e.RowIndex < 0 || e.RowIndex >= _virtualProductPage.Rows.Count)
+            {
+                e.Value = null;
+                return;
+            }
+
+            DataRow row = _virtualProductPage.Rows[e.RowIndex];
+            string columnName = grid_search_products.Columns[e.ColumnIndex].Name;
+            if (row.Table.Columns.Contains(columnName))
+            {
+                e.Value = row[columnName];
+            }
+            else
+            {
+                e.Value = null;
+            }
+        }
+
+        private void BindVirtualPage(DataTable dt)
+        {
+            _virtualProductPage = dt;
+            grid_search_products.RowCount = dt == null ? 0 : dt.Rows.Count;
+            grid_search_products.Invalidate();
+        }
+
+        private void ClearVirtualPage()
+        {
+            _virtualProductPage = null;
+            grid_search_products.RowCount = 0;
+            grid_search_products.Invalidate();
+        }
 
         public frm_searchPurchaseProducts(frm_purchases mainForm,frm_purchases_order purchase_orderForm, string product_code, string category_id, string brand_id, int rowIndex = 0, bool isGrid = false,string group_code="")
         {
@@ -48,6 +109,8 @@ namespace pos
             _brand_id = brand_id;
             _group_code = group_code;
             InitializeComponent();
+            grid_search_products.VirtualMode = true;
+            grid_search_products.CellValueNeeded += grid_search_products_CellValueNeeded;
             _debounceTimer = new Timer();
             _debounceTimer.Interval = 300; // debounce interval
             _debounceTimer.Tick += (s, e) => { _debounceTimer.Stop(); _pageIndex = 0; PerformPagedSearch(); };
@@ -56,6 +119,8 @@ namespace pos
         public frm_searchPurchaseProducts()
         {
             InitializeComponent();
+            grid_search_products.VirtualMode = true;
+            grid_search_products.CellValueNeeded += grid_search_products_CellValueNeeded;
             _debounceTimer = new Timer();
             _debounceTimer.Interval = 300;
             _debounceTimer.Tick += (s, e) => { _debounceTimer.Stop(); _pageIndex = 0; PerformPagedSearch(); };
@@ -86,7 +151,7 @@ namespace pos
                 string condition = txt_search.Text.Trim();
                 if (string.IsNullOrWhiteSpace(condition))
                 {
-                    grid_search_products.DataSource = null;
+                    ClearVirtualPage();
                     _totalCount = 0; _totalPages = 0; UpdatePagingLabel();
                     return;
                 }
@@ -105,7 +170,7 @@ namespace pos
                     }
 
                     grid_search_products.AutoGenerateColumns = false;
-                    grid_search_products.DataSource = dt;
+                    BindVirtualPage(dt);
                     UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
                     this.Text = $"Products (Page {_pageIndex + 1}/{_totalPages})";
 
@@ -124,7 +189,7 @@ namespace pos
 
                             dt = _productBll.SearchProductsPagedWithCount(condition, _category_id, _brand_id, _group_code, _pageIndex, _pageSize, out _totalCount);
                             _totalPages = (_totalCount + _pageSize - 1) / _pageSize;
-                            grid_search_products.DataSource = dt;
+                            BindVirtualPage(dt);
                             UpdatePagingLabel(sw.ElapsedMilliseconds, dt.Rows.Count);
                         }
                         else
@@ -134,9 +199,10 @@ namespace pos
                     }
                     else
                     {
-                        if (grid_search_products.CurrentRow != null)
+                        var selectedRow = GetCurrentVirtualRow();
+                        if (selectedRow != null)
                         {
-                            load_alternate_product(); // uses current row's alternate_no internally
+                            load_alternate_product(selectedRow);
                         }
                     }
                 }
@@ -207,9 +273,10 @@ namespace pos
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            if (grid_search_products.SelectedCells.Count > 0 && grid_search_products.CurrentRow != null)
+            var selectedRow = GetCurrentVirtualRow();
+            if (selectedRow != null && selectedRow.Table.Columns.Contains("item_number") && selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null)
             {
-                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
+                string item_number = selectedRow["item_number"].ToString();
 
                 if (_isGrid)
                 {
@@ -222,7 +289,7 @@ namespace pos
                         purchase_orderForm.Load_products_to_grid(item_number, _grid_row_index);
                         _returnStatus = true;
                     }
-                    
+
                 }
                 else
                 {
@@ -234,10 +301,9 @@ namespace pos
                     {
                         purchase_orderForm.load_products(item_number);
                     }
-                  
+
                 }
-                
-                //this.Visible = false;
+
                 this.Visible = false;
             }
             else
@@ -273,9 +339,19 @@ namespace pos
         {
             if (grid_search_products.RowCount > 0)
             {
-                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-                string code = grid_search_products.CurrentRow.Cells["code"].Value.ToString();
-                string product_name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
+                var selectedRow = GetCurrentVirtualRow();
+                if (selectedRow == null)
+                    return;
+
+                string item_number = selectedRow.Table.Columns.Contains("item_number") && selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null
+                    ? selectedRow["item_number"].ToString()
+                    : string.Empty;
+                string code = selectedRow.Table.Columns.Contains("code") && selectedRow["code"] != DBNull.Value && selectedRow["code"] != null
+                    ? selectedRow["code"].ToString()
+                    : string.Empty;
+                string product_name = selectedRow.Table.Columns.Contains("name") && selectedRow["name"] != DBNull.Value && selectedRow["name"] != null
+                    ? selectedRow["name"].ToString()
+                    : string.Empty;
                 string display_name = !string.IsNullOrEmpty(code) ? $"{code} - {product_name}" : product_name;
 
                 if (string.IsNullOrEmpty(item_number))
@@ -290,7 +366,7 @@ namespace pos
                     "Please select a product first.",
                     "يرجى تحديد منتج أولاً.");
             }
-            
+
         }
 
         private void grid_group_products_DoubleClick(object sender, EventArgs e)
@@ -353,13 +429,18 @@ namespace pos
         {
             try
             {
-                if (grid_search_products.Focused)
+                if (grid_search_products.Focused && grid_search_products.RowCount > 0)
                 {
-                    load_alternate_product();
-
-                } 
-                
-               
+                    var selectedRow = GetCurrentVirtualRow();
+                    if (selectedRow != null)
+                    {
+                        load_alternate_product(selectedRow);
+                    }
+                }
+                else
+                {
+                    grid_group_products.DataSource = null;
+                }
             }
             catch (Exception)
             {
@@ -369,11 +450,14 @@ namespace pos
             }
         }
 
-       private void load_alternate_product()
-       {
-           try
-           {
-                if (grid_search_products.Rows.Count <= 0 || grid_search_products.CurrentRow == null)
+        private void load_alternate_product(DataRow selectedRow = null)
+        {
+            try
+            {
+                if (selectedRow == null)
+                    selectedRow = GetCurrentVirtualRow();
+
+                if (selectedRow == null)
                 {
                     grid_group_products.DataSource = null;
                     return;
@@ -382,21 +466,15 @@ namespace pos
                 using (BusyScope.Show(this, UiMessages.T("Loading related products...", "جارٍ تحميل المنتجات المرتبطة...")))
                 {
                     grid_group_products.Refresh();
-                    //grid_group_products.Rows.Clear();
-                    // set it to false if not needed for fast load
                     grid_group_products.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-                    // or even better, use .DisableResizing. Most time consuming enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
                     grid_group_products.RowHeadersVisible = false;
 
-
-                    //bind data in data grid view  
                     ProductBLL objBLL = new ProductBLL();
                     grid_group_products.AutoGenerateColumns = false;
 
                     int alternate_no = 0;
-                    if (grid_search_products.CurrentRow.Cells["alternate_no"] != null)
-                        int.TryParse(grid_search_products.CurrentRow.Cells["alternate_no"].Value?.ToString(), out alternate_no);
-
+                    if (selectedRow.Table.Columns.Contains("alternate_no") && selectedRow["alternate_no"] != DBNull.Value && selectedRow["alternate_no"] != null)
+                        int.TryParse(selectedRow["alternate_no"].ToString(), out alternate_no);
 
                     if (alternate_no != 0)
                     {
@@ -408,13 +486,13 @@ namespace pos
                     }
                 }
 
-           }
-           catch (Exception)
-           {
-               UiMessages.ShowWarning(
-                   "Unable to load related (alternate) products.",
-                   "تعذر تحميل المنتجات المرتبطة (البديلة).");
-           }
-       }
+            }
+            catch (Exception)
+            {
+                UiMessages.ShowWarning(
+                    "Unable to load related (alternate) products.",
+                    "تعذر تحميل المنتجات المرتبطة (البديلة).");
+            }
+        }
     }
 }

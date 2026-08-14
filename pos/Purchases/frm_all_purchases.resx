@@ -135,6 +135,9 @@
   <data name="btnPostToJournalEntry.Text" xml:space="preserve">
     <value>Post</value>
   </data>
+  <data name="btnPostToJournalEntry.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;btnPostToJournalEntry.Name" xml:space="preserve">
     <value>btnPostToJournalEntry</value>
   </data>
@@ -352,7 +355,7 @@
     <value>False</value>
   </data>
   <data name="id.Width" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>125</value>
   </data>
   <metadata name="invoice_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -421,7 +424,7 @@
     <value>6</value>
   </data>
   <data name="purchase_type.Width" type="System.Int32, mscorlib">
-    <value>128</value>
+    <value>118</value>
   </data>
   <data name="currency_code.HeaderText" xml:space="preserve">
     <value>Currency</value>

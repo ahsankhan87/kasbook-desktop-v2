@@ -130,7 +130,7 @@ namespace pos.Inventory
             // cmbCogsAccount
             // 
             this.cmbCogsAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCogsAccount.Location = new System.Drawing.Point(180, 22);
+            this.cmbCogsAccount.Location = new System.Drawing.Point(202, 22);
             this.cmbCogsAccount.Name = "cmbCogsAccount";
             this.cmbCogsAccount.Size = new System.Drawing.Size(262, 24);
             this.cmbCogsAccount.TabIndex = 1;
@@ -147,7 +147,7 @@ namespace pos.Inventory
             // cmbInventoryAccount
             // 
             this.cmbInventoryAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInventoryAccount.Location = new System.Drawing.Point(180, 58);
+            this.cmbInventoryAccount.Location = new System.Drawing.Point(202, 58);
             this.cmbInventoryAccount.Name = "cmbInventoryAccount";
             this.cmbInventoryAccount.Size = new System.Drawing.Size(262, 24);
             this.cmbInventoryAccount.TabIndex = 3;

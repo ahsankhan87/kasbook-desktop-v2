@@ -593,7 +593,10 @@ namespace POS.DLL
                             // For FIFO valuation we also record a cost layer so that the
                             // costing engine can consume layers on sale (FIFO depletion).
                             // This runs in the same transaction so it rolls back atomically.
-                            if (costingMethod == "FIFO" && detail.item_type != "Service")
+                            if (costingMethod == "FIFO"
+                                && detail.item_type != "Service"
+                                && detail.quantity > 0
+                                && !string.Equals(detail.purchase_type, "Return", StringComparison.OrdinalIgnoreCase))
                             {
                                 var _inventoryCostingEngine = new InventoryCostingEngineDLL();
                                 _inventoryCostingEngine.InsertFIFOLayer(
@@ -1504,6 +1507,22 @@ END";
         {
             Int32 newProdID = 0;
             bool isAutoPostPurchases = false;
+            string valuationMethod = "WAC";
+
+            try
+            {
+                var valuationSettings = new InventoryValuationDLL().GetSettings(UsersModal.logged_in_branch_id);
+                if (!string.IsNullOrWhiteSpace(valuationSettings?.ValuationMethod))
+                    valuationMethod = valuationSettings.ValuationMethod.ToUpperInvariant();
+            }
+            catch
+            {
+                valuationMethod = "WAC";
+            }
+
+            if (valuationMethod != "WAC" && valuationMethod != "FIFO" && valuationMethod != "STANDARD")
+                valuationMethod = "WAC";
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 SqlTransaction transaction;
@@ -1513,6 +1532,9 @@ END";
                     transaction = cn.BeginTransaction();
                     try
                     {
+                        var costingEngineDLL = new InventoryCostingEngineDLL();
+                        var productIdMap = LoadProductIdMapForPurchaseDetails(cn, transaction, purchase_detail);
+
                         cmd = new SqlCommand("sp_Purchases", cn, transaction);
                         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -1544,6 +1566,9 @@ END";
 
                         foreach (PurchasesModal detail in purchase_detail)
                         {
+                            decimal qtyReturned = Math.Abs(Convert.ToDecimal(detail.quantity));
+                            decimal fallbackCost = Convert.ToDecimal(detail.cost_price);
+
                             cmd = new SqlCommand("sp_Purchase_items", cn, transaction);
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
@@ -1571,6 +1596,28 @@ END";
                             cmd.Parameters.AddWithValue("@OperationType", "2");
 
                             cmd.ExecuteScalar();
+
+                            if (valuationMethod == "FIFO"
+                                && !string.Equals(detail.item_type, "Service", StringComparison.OrdinalIgnoreCase)
+                                && qtyReturned > 0m)
+                            {
+                                int productId = detail.item_id;
+                                if (productId <= 0 && !string.IsNullOrWhiteSpace(detail.item_number))
+                                {
+                                    productIdMap.TryGetValue(detail.item_number.Trim(), out productId);
+                                }
+
+                                if (productId > 0)
+                                {
+                                    costingEngineDLL.ConsumeFIFOAndGetUnitCost(
+                                        productId,
+                                        UsersModal.logged_in_branch_id,
+                                        qtyReturned,
+                                        fallbackCost,
+                                        cn,
+                                        transaction);
+                                }
+                            }
                         }
 
                         isAutoPostPurchases = GetBoolSetting(cn, transaction, SettingKeys.AutoPostPurchases, false);
@@ -1609,8 +1656,71 @@ END";
             }
         }
 
+        private Dictionary<string, int> LoadProductIdMapForPurchaseDetails(
+            SqlConnection cn,
+            SqlTransaction transaction,
+            List<PurchasesModal> purchaseDetail)
+        {
+            var map = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+            if (purchaseDetail == null || purchaseDetail.Count == 0)
+                return map;
+
+            var itemNumbers = purchaseDetail
+                .Where(x => x != null && !string.IsNullOrWhiteSpace(x.item_number))
+                .Select(x => x.item_number.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (itemNumbers.Count == 0)
+                return map;
+
+            var parameterNames = new List<string>(itemNumbers.Count);
+            for (int i = 0; i < itemNumbers.Count; i++)
+                parameterNames.Add("@n" + i.ToString(CultureInfo.InvariantCulture));
+
+            string sql = @"SELECT id, item_number
+                           FROM dbo.pos_products
+                           WHERE item_number IN (" + string.Join(",", parameterNames) + ")";
+
+            using (var getProducts = new SqlCommand(sql, cn, transaction))
+            {
+                for (int i = 0; i < itemNumbers.Count; i++)
+                    getProducts.Parameters.AddWithValue(parameterNames[i], itemNumbers[i]);
+
+                using (var rdr = getProducts.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        string itemNumber = Convert.ToString(rdr["item_number"]);
+                        if (string.IsNullOrWhiteSpace(itemNumber))
+                            continue;
+
+                        map[itemNumber] = Convert.ToInt32(rdr["id"]);
+                    }
+                }
+            }
+
+            return map;
+        }
+
         public int InsertReturnPurchaseItems(PurchasesModal obj)
         {
+            string valuationMethod = "WAC";
+
+            try
+            {
+                var valuationSettings = new InventoryValuationDLL().GetSettings(UsersModal.logged_in_branch_id);
+                if (!string.IsNullOrWhiteSpace(valuationSettings?.ValuationMethod))
+                    valuationMethod = valuationSettings.ValuationMethod.ToUpperInvariant();
+            }
+            catch
+            {
+                valuationMethod = "WAC";
+            }
+
+            if (valuationMethod != "WAC" && valuationMethod != "FIFO" && valuationMethod != "STANDARD")
+                valuationMethod = "WAC";
 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1638,22 +1748,51 @@ END";
                         cmd.Parameters.AddWithValue("@supplier_id", obj.supplier_id);
                         cmd.Parameters.AddWithValue("@location_code", obj.location_code);
                         cmd.Parameters.AddWithValue("@OperationType", "2");
-
-
                     }
 
                     int result = Convert.ToInt32(cmd.ExecuteScalar());
 
+                    decimal qtyReturned = Math.Abs(Convert.ToDecimal(obj.quantity));
+                    if (valuationMethod == "FIFO"
+                        && !string.Equals(obj.item_type, "Service", StringComparison.OrdinalIgnoreCase)
+                        && qtyReturned > 0m)
+                    {
+                        int productId = obj.item_id;
+                        if (productId <= 0 && !string.IsNullOrWhiteSpace(obj.item_number))
+                        {
+                            using (var productCmd = new SqlCommand(
+                                "SELECT TOP 1 id FROM dbo.pos_products WHERE item_number = @item_number AND branch_id = @branch_id",
+                                cn))
+                            {
+                                productCmd.Parameters.AddWithValue("@item_number", obj.item_number);
+                                productCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                                var productIdValue = productCmd.ExecuteScalar();
+                                if (productIdValue != null && productIdValue != DBNull.Value)
+                                    productId = Convert.ToInt32(productIdValue);
+                            }
+                        }
+
+                        if (productId > 0)
+                        {
+                            new InventoryCostingEngineDLL().ConsumeFIFOAndGetUnitCost(
+                                productId,
+                                UsersModal.logged_in_branch_id,
+                                qtyReturned,
+                                Convert.ToDecimal(obj.cost_price),
+                                cn,
+                                null);
+                        }
+                    }
 
                     return result;
                 }
                 catch
                 {
-
                     throw;
                 }
             }
         }
+
 
         public int DeletePurchases(string invoice_no)
         {

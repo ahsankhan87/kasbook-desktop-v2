@@ -95,6 +95,7 @@ namespace POS.DLL.Inventory
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ItemNumber",   itemNumber);
+                cmd.Parameters.AddWithValue("@BranchId",     UsersModal.logged_in_branch_id);
                 cmd.Parameters.AddWithValue("@PurchaseQty",  purchaseQty);
                 cmd.Parameters.AddWithValue("@PurchaseCost", purchaseCost);
 
@@ -186,6 +187,85 @@ namespace POS.DLL.Inventory
                 cmd.Parameters.AddWithValue("@ConsumeQty", consumeQty);
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        /// <summary>
+        /// Consumes FIFO layers for one sale line inside the caller transaction
+        /// and returns the weighted unit cost actually consumed.
+        /// </summary>
+        public decimal ConsumeFIFOAndGetUnitCost(
+            int productId,
+            int branchId,
+            decimal qtyToSell,
+            decimal fallbackUnitCost,
+            SqlConnection cn,
+            SqlTransaction txn)
+        {
+            if (qtyToSell <= 0m)
+                return fallbackUnitCost;
+
+            if (productId <= 0)
+                return fallbackUnitCost;
+
+            var layers = GetFIFOLayersInTransaction(productId, branchId, cn, txn, true);
+            if (layers.Count == 0)
+                return fallbackUnitCost;
+
+            decimal remainingQty = qtyToSell;
+            decimal totalCost = 0m;
+
+            foreach (var layer in layers)
+            {
+                if (remainingQty <= 0m)
+                    break;
+
+                decimal consumeQty = remainingQty <= layer.RemainingQty
+                    ? remainingQty
+                    : layer.RemainingQty;
+
+                if (consumeQty <= 0m)
+                    continue;
+
+                ConsumeFIFOLayer(layer.LayerId, consumeQty, cn, txn);
+
+                totalCost += Math.Round(consumeQty * layer.UnitCost, 6, MidpointRounding.AwayFromZero);
+                remainingQty -= consumeQty;
+            }
+
+            if (remainingQty > 0m)
+            {
+                totalCost += Math.Round(remainingQty * fallbackUnitCost, 6, MidpointRounding.AwayFromZero);
+            }
+
+            return Math.Round(totalCost / qtyToSell, 6, MidpointRounding.AwayFromZero);
+        }
+
+        private List<FIFOCostLayer> GetFIFOLayersInTransaction(
+            int productId,
+            int branchId,
+            SqlConnection cn,
+            SqlTransaction txn,
+            bool forUpdate)
+        {
+            var layers = new List<FIFOCostLayer>();
+
+            using (var cmd = new SqlCommand("sp_GetFIFOLayers", cn, txn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+                cmd.Parameters.AddWithValue("@BranchId", branchId > 0 ? (object)branchId : DBNull.Value);
+                cmd.Parameters.AddWithValue("@ForUpdate", forUpdate ? 1 : 0);
+
+                using (var da = new SqlDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    foreach (DataRow r in dt.Rows)
+                        layers.Add(MapFIFOLayerRow(r));
+                }
+            }
+
+            return layers;
         }
 
         // ─────────────────────────────────────────────────────────────────

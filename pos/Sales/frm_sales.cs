@@ -5,6 +5,7 @@ using pos.UI; // <-- Added Ui namespace
 using pos.Reports.Common;
 using pos.Sales.Helpers;
 using POS.BLL;
+using POS.BLL.Inventory;
 using POS.Core;
 using System.ComponentModel;
 using System;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -1856,7 +1858,7 @@ namespace pos
                 {
                     string shop_qty = "";
                     string company_qty = "";
-                    string avg_cost = "";
+                    string displayCost = "";
 
                     DataTable dt = productsBLL_obj.GetAllByProductByItemNumber(item_number);
                     if (dt.Rows.Count > 0)
@@ -1865,7 +1867,7 @@ namespace pos
                         {
                             shop_qty = myProductView["qty"].ToString();
                             company_qty = myProductView["company_qty"].ToString();
-                            avg_cost = Math.Round(double.Parse(myProductView["avg_cost"].ToString()), 4).ToString();
+                            displayCost = Math.Round(Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(myProductView, UsersModal.logged_in_branch_id, item_number)), 4).ToString();
                             //total_cost += Math.Round(Convert.ToDouble(myProductView["avg_cost"].ToString()),4);
 
                             if (myProductView["picture"].ToString() != "" && myProductView["picture"].ToString() != "0x")
@@ -1897,7 +1899,7 @@ namespace pos
                         }
 
                         double unitCost = 0;
-                        double.TryParse(avg_cost, out unitCost);
+                        double.TryParse(displayCost, out unitCost);
                         double unitVat = (unitCost * tax_rate / 100);
 
                         txt_cost_price.Text = Math.Round(unitCost, 3).ToString();
@@ -2699,7 +2701,21 @@ namespace pos
                         if (grid_sales.Rows.Count > 0)
                         {
                             // CHECK PERIOD LOCK BEFORE SAVING
-                            DateTime saleDate = DateTime.Parse(txt_sale_date.Text);
+                            DateTime saleDate;
+                            if (!DateTime.TryParseExact(
+                                    txt_sale_date.Text,
+                                    new[] { "dd/MM/yyyy", "d/M/yyyy", "M/d/yyyy", "MM/dd/yyyy" },
+                                    CultureInfo.InvariantCulture,
+                                    DateTimeStyles.None,
+                                    out saleDate))
+                            {
+                                UiMessages.ShowWarning(
+                                    "Invalid sale date format.",
+                                    "تنسيق تاريخ البيع غير صالح",
+                                    "Sale Transaction",
+                                    "معاملة البيع");
+                                return;
+                            }
                             FinancialPeriodBLL periodBll = new FinancialPeriodBLL();
                             if (periodBll.IsPeriodLocked(saleDate))
                             {
@@ -3403,7 +3419,7 @@ namespace pos
             grid_sales.Rows[rowIndex].Cells["code"].Value = Convert.ToString(productRow["code"]);
             grid_sales.Rows[rowIndex].Cells["name"].Value = Convert.ToString(productRow["name"]);
             grid_sales.Rows[rowIndex].Cells["Qty"].Value = qtyToImport;
-            grid_sales.Rows[rowIndex].Cells["cost_price"].Value = Math.Round(Convert.ToDouble(productRow["avg_cost"]), 2);
+            grid_sales.Rows[rowIndex].Cells["cost_price"].Value = Math.Round(Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(productRow, UsersModal.logged_in_branch_id, Convert.ToString(productRow["item_number"]))), 2);
             grid_sales.Rows[rowIndex].Cells["discount"].Value = 0.00;
             grid_sales.Rows[rowIndex].Cells["discount_percent"].Value = 0.00;
             grid_sales.Rows[rowIndex].Cells["location_code"].Value = Convert.ToString(productRow["location_code"]);

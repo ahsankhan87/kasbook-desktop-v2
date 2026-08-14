@@ -68,9 +68,6 @@
             this.warehouseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MovingItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NonMovingItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.valautionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inventoryValuationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inventoryValuationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseReturnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,7 +121,6 @@
             this.chartOfAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.journalVoucherListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,7 +173,6 @@
             this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rolePermissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userClaimsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,6 +208,10 @@
             this.toolStripButtonNewPOS = new System.Windows.Forms.ToolStripButton();
             this.productAdjustmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reconciliationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryValuationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventoryValuationSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.journalVoucherListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sideMenu.SuspendLayout();
@@ -368,7 +367,7 @@
             this.alternateProductsToolStripMenuItem,
             this.operationsToolStripMenuItem,
             this.warehousetoolStripMenuItem,
-            this.valautionToolStripMenuItem});
+            this.inventoryValuationToolStripMenuItem});
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
             resources.ApplyResources(this.itemsToolStripMenuItem, "itemsToolStripMenuItem");
             // 
@@ -502,26 +501,6 @@
             this.NonMovingItemsToolStripMenuItem.Name = "NonMovingItemsToolStripMenuItem";
             resources.ApplyResources(this.NonMovingItemsToolStripMenuItem, "NonMovingItemsToolStripMenuItem");
             this.NonMovingItemsToolStripMenuItem.Click += new System.EventHandler(this.NonMovingItemsToolStripMenuItem_Click);
-            // 
-            // valautionToolStripMenuItem
-            // 
-            this.valautionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.inventoryValuationToolStripMenuItem,
-            this.inventoryValuationSettingsToolStripMenuItem});
-            this.valautionToolStripMenuItem.Name = "valautionToolStripMenuItem";
-            resources.ApplyResources(this.valautionToolStripMenuItem, "valautionToolStripMenuItem");
-            // 
-            // inventoryValuationToolStripMenuItem
-            // 
-            this.inventoryValuationToolStripMenuItem.Name = "inventoryValuationToolStripMenuItem";
-            resources.ApplyResources(this.inventoryValuationToolStripMenuItem, "inventoryValuationToolStripMenuItem");
-            this.inventoryValuationToolStripMenuItem.Click += new System.EventHandler(this.inventoryValuationToolStripMenuItem_Click);
-            // 
-            // inventoryValuationSettingsToolStripMenuItem
-            // 
-            this.inventoryValuationSettingsToolStripMenuItem.Name = "inventoryValuationSettingsToolStripMenuItem";
-            resources.ApplyResources(this.inventoryValuationSettingsToolStripMenuItem, "inventoryValuationSettingsToolStripMenuItem");
-            this.inventoryValuationSettingsToolStripMenuItem.Click += new System.EventHandler(this.inventoryValuationSettingsToolStripMenuItem_Click);
             // 
             // pOSToolStripMenuItem
             // 
@@ -855,6 +834,7 @@
             this.accountingDashboardToolStripMenuItem,
             this.chartOfAccountsToolStripMenuItem,
             this.journalToolStripMenuItem,
+            this.journalVoucherListToolStripMenuItem,
             this.fixedAssetsToolStripMenuItem,
             this.transactionsToolStripMenuItem,
             this.reportsToolStripMenuItem3,
@@ -886,17 +866,10 @@
             // transactionsToolStripMenuItem
             // 
             this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.journalVoucherListToolStripMenuItem,
             this.groupsToolStripMenuItem,
             this.accountsToolStripMenuItem1});
             this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
             resources.ApplyResources(this.transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
-            // 
-            // journalVoucherListToolStripMenuItem
-            // 
-            this.journalVoucherListToolStripMenuItem.Name = "journalVoucherListToolStripMenuItem";
-            resources.ApplyResources(this.journalVoucherListToolStripMenuItem, "journalVoucherListToolStripMenuItem");
-            this.journalVoucherListToolStripMenuItem.Click += new System.EventHandler(this.journalVoucherListToolStripMenuItem_Click);
             // 
             // groupsToolStripMenuItem
             // 
@@ -1182,6 +1155,7 @@
             this.sETTINGSToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurationToolStripMenuItem,
             this.languageToolStripMenuItem,
+            this.usersToolStripMenuItem,
             this.securityToolStripMenuItem});
             this.sETTINGSToolStripMenuItem1.Name = "sETTINGSToolStripMenuItem1";
             resources.ApplyResources(this.sETTINGSToolStripMenuItem1, "sETTINGSToolStripMenuItem1");
@@ -1190,6 +1164,7 @@
             // 
             this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
+            this.inventoryValuationSettingsToolStripMenuItem,
             this.importDataToolStripMenuItem,
             this.settingToolStripMenuItem});
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
@@ -1237,10 +1212,9 @@
             // 
             this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rolePermissionsToolStripMenuItem,
-            this.applicationLogsToolStripMenuItem,
-            this.usersToolStripMenuItem,
+            this.userClaimsToolStripMenuItem,
             this.permissionsToolStripMenuItem,
-            this.userClaimsToolStripMenuItem});
+            this.applicationLogsToolStripMenuItem});
             this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
             resources.ApplyResources(this.securityToolStripMenuItem, "securityToolStripMenuItem");
             // 
@@ -1255,12 +1229,6 @@
             this.applicationLogsToolStripMenuItem.Name = "applicationLogsToolStripMenuItem";
             resources.ApplyResources(this.applicationLogsToolStripMenuItem, "applicationLogsToolStripMenuItem");
             this.applicationLogsToolStripMenuItem.Click += new System.EventHandler(this.applicationLogsToolStripMenuItem_Click);
-            // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
-            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // permissionsToolStripMenuItem
             // 
@@ -1504,6 +1472,30 @@
             resources.ApplyResources(this.reconciliationToolStripMenuItem, "reconciliationToolStripMenuItem");
             this.reconciliationToolStripMenuItem.Click += new System.EventHandler(this.reconciliationToolStripMenuItem_Click);
             // 
+            // inventoryValuationToolStripMenuItem
+            // 
+            this.inventoryValuationToolStripMenuItem.Name = "inventoryValuationToolStripMenuItem";
+            resources.ApplyResources(this.inventoryValuationToolStripMenuItem, "inventoryValuationToolStripMenuItem");
+            this.inventoryValuationToolStripMenuItem.Click += new System.EventHandler(this.inventoryValuationToolStripMenuItem_Click);
+            // 
+            // inventoryValuationSettingsToolStripMenuItem
+            // 
+            this.inventoryValuationSettingsToolStripMenuItem.Name = "inventoryValuationSettingsToolStripMenuItem";
+            resources.ApplyResources(this.inventoryValuationSettingsToolStripMenuItem, "inventoryValuationSettingsToolStripMenuItem");
+            this.inventoryValuationSettingsToolStripMenuItem.Click += new System.EventHandler(this.inventoryValuationSettingsToolStripMenuItem_Click);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            resources.ApplyResources(this.usersToolStripMenuItem, "usersToolStripMenuItem");
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+            // 
+            // journalVoucherListToolStripMenuItem
+            // 
+            this.journalVoucherListToolStripMenuItem.Name = "journalVoucherListToolStripMenuItem";
+            resources.ApplyResources(this.journalVoucherListToolStripMenuItem, "journalVoucherListToolStripMenuItem");
+            this.journalVoucherListToolStripMenuItem.Click += new System.EventHandler(this.journalVoucherListToolStripMenuItem_Click);
+            // 
             // frm_main
             // 
             resources.ApplyResources(this, "$this");
@@ -1616,12 +1608,10 @@
         private System.Windows.Forms.ToolStripMenuItem productLocationTransferToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockCheckAndAdjustmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockSuppressionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem valautionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fINANCEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountingDashboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chartOfAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem journalVoucherListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem generalLedgerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customerARToolStripMenuItem;
@@ -1694,7 +1684,6 @@
         private System.Windows.Forms.ToolStripMenuItem permissionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userClaimsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationLogsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dailySaleReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profitLossToolStripMenuItem;
@@ -1707,8 +1696,6 @@
         private System.Windows.Forms.ToolStripMenuItem purchaseReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salesExpensesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem branchSummaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inventoryValuationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inventoryValuationSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem humanResourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem1;
@@ -1716,5 +1703,9 @@
         private System.Windows.Forms.ToolStripMenuItem journalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productAdjustmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reconciliationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryValuationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryValuationSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem journalVoucherListToolStripMenuItem;
     }
 }

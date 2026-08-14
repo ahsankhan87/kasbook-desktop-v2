@@ -109,6 +109,22 @@ namespace POS.BLL.Inventory
                     !string.Equals(row["brand_code"].ToString(), brandCode, StringComparison.OrdinalIgnoreCase))
                     continue;
 
+                // Filter by Supplier (if provided and column exists)
+                if (supplierId.HasValue && supplierId.Value > 0 && row.Table.Columns.Contains("supplier_id"))
+                {
+                    int? prodSupplier = SafeNullInt(row, "supplier_id");
+                    if (!prodSupplier.HasValue || prodSupplier.Value != supplierId.Value)
+                        continue;
+                }
+
+                // Filter by Location (if provided and column exists)
+                if (!string.IsNullOrEmpty(locationCode) && row.Table.Columns.Contains("location_code"))
+                {
+                    string prodLocation = row["location_code"]?.ToString() ?? "";
+                    if (!string.Equals(prodLocation, locationCode, StringComparison.OrdinalIgnoreCase))
+                        continue;
+                }
+
                 if (!showZeroStock && qty == 0)
                     continue;
 
@@ -310,6 +326,12 @@ namespace POS.BLL.Inventory
         {
             object v = r[col];
             return (v == null || v == DBNull.Value) ? 0m : Convert.ToDecimal(v);
+        }
+
+        private static int? SafeNullInt(DataRow r, string col)
+        {
+            object v = r[col];
+            return (v == null || v == DBNull.Value) ? (int?)null : Convert.ToInt32(v);
         }
 
         private static DateTime? SafeNullDate(DataRow r, string col)

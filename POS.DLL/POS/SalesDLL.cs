@@ -1,6 +1,8 @@
 ﻿using POS.Core;
+using POS.Core.Inventory;
 using POS.DAL;
 using POS.DLL;
+using POS.DLL.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -684,9 +686,28 @@ namespace POS.DLL
         {
             int newSaleID = 0;
             bool isAutoPostSales = false;
+            string valuationMethod = "WAC";
 
             if (sales == null || sales.Count == 0)
                 return newSaleID;
+
+            try
+            {
+                InventoryValuationSettings valuationSettings = new InventoryValuationDLL()
+                    .GetSettings(UsersModal.logged_in_branch_id);
+
+                if (!string.IsNullOrWhiteSpace(valuationSettings?.ValuationMethod))
+                {
+                    valuationMethod = valuationSettings.ValuationMethod.ToUpperInvariant();
+                }
+            }
+            catch
+            {
+                valuationMethod = "WAC";
+            }
+
+            if (valuationMethod != "WAC" && valuationMethod != "FIFO" && valuationMethod != "STANDARD")
+                valuationMethod = "WAC";
 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -698,6 +719,9 @@ namespace POS.DLL
                     try
                     {
                         int customerID = sales[0].customer_id;
+                        var costingEngineDLL = new InventoryCostingEngineDLL();
+                        var productCostMap = LoadProductCostSnapshotMap(cn, transaction, sales_detail);
+                        var cogsByInvoice = new Dictionary<string, decimal>(StringComparer.OrdinalIgnoreCase);
 
                         foreach (SalesModalHeader sale_header in sales)
                         {
@@ -735,6 +759,58 @@ namespace POS.DLL
                         {
                             foreach (SalesModal detail in sales_detail)
                             {
+                                decimal qtySold = Convert.ToDecimal(detail.quantity_sold);
+                                decimal resolvedUnitCost = Convert.ToDecimal(detail.cost_price);
+                                ProductCostSnapshot snapshot = null;
+                                string itemNumber = detail.item_number ?? string.Empty;
+                                bool hasSnapshot = !string.IsNullOrWhiteSpace(itemNumber)
+                                                   && productCostMap.TryGetValue(itemNumber, out snapshot);
+
+                                if (!string.Equals(detail.item_type, "Service", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    decimal avgCost = hasSnapshot ? snapshot.AvgCost : resolvedUnitCost;
+                                    decimal stdCost = hasSnapshot && snapshot.StandardCost > 0m
+                                        ? snapshot.StandardCost
+                                        : avgCost;
+
+                                    if (valuationMethod == "STANDARD")
+                                    {
+                                        resolvedUnitCost = stdCost;
+                                    }
+                                    else if (valuationMethod == "FIFO")
+                                    {
+                                        int productId = detail.item_id > 0
+                                            ? detail.item_id
+                                            : (hasSnapshot ? snapshot.ProductId : 0);
+
+                                        resolvedUnitCost = costingEngineDLL.ConsumeFIFOAndGetUnitCost(
+                                            productId,
+                                            UsersModal.logged_in_branch_id,
+                                            qtySold,
+                                            avgCost,
+                                            cn,
+                                            transaction);
+                                    }
+                                    else
+                                    {
+                                        resolvedUnitCost = avgCost;
+                                    }
+
+                                    if (resolvedUnitCost < 0m)
+                                        resolvedUnitCost = 0m;
+
+                                    detail.cost_price = Convert.ToDouble(resolvedUnitCost);
+
+                                    string invoiceNo = detail.invoice_no ?? string.Empty;
+                                    if (!string.IsNullOrWhiteSpace(invoiceNo))
+                                    {
+                                        decimal lineCost = Math.Round(resolvedUnitCost * qtySold, 4, MidpointRounding.AwayFromZero);
+                                        if (!cogsByInvoice.ContainsKey(invoiceNo))
+                                            cogsByInvoice[invoiceNo] = 0m;
+                                        cogsByInvoice[invoiceNo] += lineCost;
+                                    }
+                                }
+
                                 cmd = new SqlCommand("sp_Sales_items", cn, transaction);
                                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -762,6 +838,18 @@ namespace POS.DLL
                                 cmd.Parameters.AddWithValue("@OperationType", "1");
 
                                 cmd.ExecuteScalar();
+                            }
+                        }
+
+                        foreach (SalesModalHeader saleHeader in sales)
+                        {
+                            decimal totalCost;
+                            if (saleHeader != null
+                                && !string.IsNullOrWhiteSpace(saleHeader.invoice_no)
+                                && cogsByInvoice.TryGetValue(saleHeader.invoice_no, out totalCost))
+                            {
+                                saleHeader.total_cost_amount = Convert.ToDouble(
+                                    Math.Round(totalCost, 4, MidpointRounding.AwayFromZero));
                             }
                         }
 
@@ -796,6 +884,68 @@ namespace POS.DLL
             }
 
             return newSaleID;
+        }
+
+        private sealed class ProductCostSnapshot
+        {
+            public int ProductId { get; set; }
+            public decimal AvgCost { get; set; }
+            public decimal StandardCost { get; set; }
+        }
+
+        private Dictionary<string, ProductCostSnapshot> LoadProductCostSnapshotMap(
+            SqlConnection cn,
+            SqlTransaction transaction,
+            List<SalesModal> salesDetail)
+        {
+            var map = new Dictionary<string, ProductCostSnapshot>(StringComparer.OrdinalIgnoreCase);
+
+            if (salesDetail == null || salesDetail.Count == 0)
+                return map;
+
+            var itemNumbers = salesDetail
+                .Where(x => x != null
+                            && !string.IsNullOrWhiteSpace(x.item_number)
+                            && !string.Equals(x.item_type, "Service", StringComparison.OrdinalIgnoreCase))
+                .Select(x => x.item_number.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (itemNumbers.Count == 0)
+                return map;
+
+            var parameterNames = new List<string>(itemNumbers.Count);
+            for (int i = 0; i < itemNumbers.Count; i++)
+                parameterNames.Add("@n" + i.ToString(CultureInfo.InvariantCulture));
+
+            string sql = @"SELECT id, item_number, ISNULL(avg_cost,0) AS avg_cost, ISNULL(standard_cost,0) AS standard_cost
+                           FROM dbo.pos_products
+                           WHERE item_number IN (" + string.Join(",", parameterNames) + ")";
+
+            using (var loadCmd = new SqlCommand(sql, cn, transaction))
+            {
+                for (int i = 0; i < itemNumbers.Count; i++)
+                    loadCmd.Parameters.AddWithValue(parameterNames[i], itemNumbers[i]);
+
+                using (var rdr = loadCmd.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        string itemNumber = Convert.ToString(rdr["item_number"]);
+                        if (string.IsNullOrWhiteSpace(itemNumber))
+                            continue;
+
+                        map[itemNumber] = new ProductCostSnapshot
+                        {
+                            ProductId = Convert.ToInt32(rdr["id"]),
+                            AvgCost = Convert.ToDecimal(rdr["avg_cost"]),
+                            StandardCost = Convert.ToDecimal(rdr["standard_cost"])
+                        };
+                    }
+                }
+            }
+
+            return map;
         }
 
         private void PostSalesJournalsAndUpdatePostedFlag(List<SalesModalHeader> sales)
@@ -1608,6 +1758,24 @@ namespace POS.DLL
         {
             Int32 newSaleID = 0;
             bool isAutoPostSales = false;
+            string valuationMethod = "WAC";
+
+            try
+            {
+                InventoryValuationSettings valuationSettings = new InventoryValuationDLL()
+                    .GetSettings(UsersModal.logged_in_branch_id);
+
+                if (!string.IsNullOrWhiteSpace(valuationSettings?.ValuationMethod))
+                    valuationMethod = valuationSettings.ValuationMethod.ToUpperInvariant();
+            }
+            catch
+            {
+                valuationMethod = "WAC";
+            }
+
+            if (valuationMethod != "WAC" && valuationMethod != "FIFO" && valuationMethod != "STANDARD")
+                valuationMethod = "WAC";
+
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
                 SqlTransaction transaction;
@@ -1618,6 +1786,10 @@ namespace POS.DLL
 
                     try
                     {
+                        var costingEngineDLL = new InventoryCostingEngineDLL();
+                        var productCostMap = LoadProductCostSnapshotMap(cn, transaction, sales_detail);
+                        var cogsByInvoice = new Dictionary<string, decimal>(StringComparer.OrdinalIgnoreCase);
+
                         cmd = new SqlCommand("sp_Sales", cn, transaction);
                         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -1656,6 +1828,41 @@ namespace POS.DLL
 
                         foreach (SalesModal detail in sales_detail)
                         {
+                            decimal qtyReturned = Math.Abs(Convert.ToDecimal(detail.quantity_sold));
+                            decimal resolvedUnitCost = Convert.ToDecimal(detail.cost_price);
+                            ProductCostSnapshot snapshot = null;
+                            string itemNumber = detail.item_number ?? string.Empty;
+                            bool hasSnapshot = !string.IsNullOrWhiteSpace(itemNumber)
+                                               && productCostMap.TryGetValue(itemNumber, out snapshot);
+
+                            if (!string.Equals(detail.item_type, "Service", StringComparison.OrdinalIgnoreCase))
+                            {
+                                decimal avgCost = hasSnapshot ? snapshot.AvgCost : resolvedUnitCost;
+                                decimal stdCost = hasSnapshot && snapshot.StandardCost > 0m
+                                    ? snapshot.StandardCost
+                                    : avgCost;
+
+                                if (valuationMethod == "STANDARD")
+                                {
+                                    resolvedUnitCost = stdCost;
+                                }
+                                else if (valuationMethod == "FIFO")
+                                {
+                                    // For sales return, put stock back at returned line cost
+                                    // (usually original sale cost_price); fallback to avg_cost.
+                                    resolvedUnitCost = resolvedUnitCost > 0m ? resolvedUnitCost : avgCost;
+                                }
+                                else
+                                {
+                                    resolvedUnitCost = avgCost;
+                                }
+
+                                if (resolvedUnitCost < 0m)
+                                    resolvedUnitCost = 0m;
+
+                                detail.cost_price = Convert.ToDouble(resolvedUnitCost);
+                            }
+
                             cmd = new SqlCommand("sp_Sales_items", cn, transaction);
                             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -1687,6 +1894,53 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@OperationType", "2");
 
                             cmd.ExecuteScalar();
+
+                            if (!string.Equals(detail.item_type, "Service", StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (valuationMethod == "FIFO")
+                                {
+                                    int productId = detail.item_id > 0
+                                        ? detail.item_id
+                                        : (hasSnapshot ? snapshot.ProductId : 0);
+
+                                    if (productId > 0 && qtyReturned > 0m)
+                                    {
+                                        costingEngineDLL.InsertFIFOLayer(
+                                            productId,
+                                            detail.item_number,
+                                            UsersModal.logged_in_branch_id,
+                                            newSaleID,
+                                            detail.sale_date,
+                                            qtyReturned,
+                                            resolvedUnitCost,
+                                            0,
+                                            1m,
+                                            cn,
+                                            transaction);
+                                    }
+                                }
+
+                                string invoiceNo = detail.invoice_no ?? string.Empty;
+                                if (!string.IsNullOrWhiteSpace(invoiceNo))
+                                {
+                                    decimal lineCost = Math.Round(resolvedUnitCost * qtyReturned, 4, MidpointRounding.AwayFromZero);
+                                    if (!cogsByInvoice.ContainsKey(invoiceNo))
+                                        cogsByInvoice[invoiceNo] = 0m;
+                                    cogsByInvoice[invoiceNo] += lineCost;
+                                }
+                            }
+                        }
+
+                        foreach (SalesModalHeader saleHeader in sales)
+                        {
+                            decimal totalCost;
+                            if (saleHeader != null
+                                && !string.IsNullOrWhiteSpace(saleHeader.invoice_no)
+                                && cogsByInvoice.TryGetValue(saleHeader.invoice_no, out totalCost))
+                            {
+                                saleHeader.total_cost_amount = Convert.ToDouble(
+                                    Math.Round(totalCost, 4, MidpointRounding.AwayFromZero));
+                            }
                         }
 
                         isAutoPostSales = GetBoolSetting(cn, transaction, SettingKeys.AutoPostSales, false);
@@ -1728,6 +1982,23 @@ namespace POS.DLL
 
         public int InsertReturnSalesItems(SalesModal obj)
         {
+            string valuationMethod = "WAC";
+
+            try
+            {
+                InventoryValuationSettings valuationSettings = new InventoryValuationDLL()
+                    .GetSettings(UsersModal.logged_in_branch_id);
+
+                if (!string.IsNullOrWhiteSpace(valuationSettings?.ValuationMethod))
+                    valuationMethod = valuationSettings.ValuationMethod.ToUpperInvariant();
+            }
+            catch
+            {
+                valuationMethod = "WAC";
+            }
+
+            if (valuationMethod != "WAC" && valuationMethod != "FIFO" && valuationMethod != "STANDARD")
+                valuationMethod = "WAC";
 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -1756,20 +2027,65 @@ namespace POS.DLL
                         cmd.Parameters.AddWithValue("@customer_id", obj.customer_id);
                         cmd.Parameters.AddWithValue("@location_code", obj.location_code);
                         cmd.Parameters.AddWithValue("@OperationType", "2");
-
-
                     }
 
                     int result = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    decimal qtyReturned = Math.Abs(Convert.ToDecimal(obj.quantity_sold));
+                    if (valuationMethod == "FIFO"
+                        && !string.Equals(obj.item_type, "Service", StringComparison.OrdinalIgnoreCase)
+                        && qtyReturned > 0m)
+                    {
+                        int productId = obj.item_id;
+                        if (productId <= 0 && !string.IsNullOrWhiteSpace(obj.item_number))
+                        {
+                            using (var productCmd = new SqlCommand(
+                                "SELECT TOP 1 id FROM dbo.pos_products WHERE item_number = @item_number AND branch_id = @branch_id",
+                                cn))
+                            {
+                                productCmd.Parameters.AddWithValue("@item_number", obj.item_number);
+                                productCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                                var productIdValue = productCmd.ExecuteScalar();
+                                if (productIdValue != null && productIdValue != DBNull.Value)
+                                    productId = Convert.ToInt32(productIdValue);
+                            }
+                        }
+
+                        if (productId > 0)
+                        {
+                            var costingEngineDLL = new InventoryCostingEngineDLL();
+                            decimal resolvedUnitCost = Convert.ToDecimal(obj.cost_price);
+                            if (resolvedUnitCost <= 0m)
+                            {
+                                decimal avgCost = costingEngineDLL.GetStoredWAC(obj.item_number);
+                                if (avgCost > 0m)
+                                    resolvedUnitCost = avgCost;
+                            }
+
+                            costingEngineDLL.InsertFIFOLayer(
+                                productId,
+                                obj.item_number,
+                                UsersModal.logged_in_branch_id,
+                                obj.sale_id,
+                                obj.sale_date,
+                                qtyReturned,
+                                resolvedUnitCost,
+                                0,
+                                1m,
+                                cn,
+                                null);
+                        }
+                    }
+
                     return result;
                 }
                 catch
                 {
-
                     throw;
                 }
             }
         }
+
 
         public int Update(SalesModal obj)
         {

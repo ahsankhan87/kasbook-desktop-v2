@@ -4,12 +4,14 @@ using pos.Security.Authorization;
 using pos.UI;
 using pos.UI.Busy;
 using POS.BLL;
+using POS.BLL.Inventory;
 using POS.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -1303,7 +1305,8 @@ namespace pos
                 foreach (DataRow myProductView in product_dt.Rows)
                 {
                     double qty = Convert.ToDouble(myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? "1" : myProductView["purchase_demand_qty"].ToString());
-                    double total = qty * double.Parse(myProductView["avg_cost"].ToString());
+                    double effectiveCost = Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(myProductView, UsersModal.logged_in_branch_id, Convert.ToString(myProductView["item_number"])));
+                    double total = qty * effectiveCost;
                     double tax_rate = (myProductView["tax_rate"].ToString() == "" ? 0 : double.Parse(myProductView["tax_rate"].ToString()));
                     double tax = (total * tax_rate / 100);
                     double current_sub_total = tax + total;
@@ -1312,7 +1315,7 @@ namespace pos
                     string code = myProductView["code"].ToString();
                     string name = myProductView["name"].ToString();
                     //string qty= (myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? "1" : myProductView["purchase_demand_qty"].ToString());
-                    double avg_cost = Convert.ToDouble(myProductView["avg_cost"]);
+                    double avg_cost = effectiveCost;
                     double unit_price = Convert.ToDouble(myProductView["unit_price"]);
                     double discount = 0.00;
                     double discount_percent = 0.00;
@@ -2791,7 +2794,21 @@ namespace pos
                     if (result == DialogResult.Yes)
                     {
                         // CHECK PERIOD LOCK BEFORE SAVING
-                        DateTime purchaseDate = DateTime.ParseExact(txt_purchase_date.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        DateTime purchaseDate;
+                        if (!DateTime.TryParseExact(
+                                txt_purchase_date.Text,
+                                new[] { "dd/MM/yyyy", "d/M/yyyy", "M/d/yyyy", "MM/dd/yyyy" },
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out purchaseDate))
+                        {
+                            UiMessages.ShowWarning(
+                                "Invalid purchase date format.",
+                                "تنسيق تاريخ الشراء غير صالح",
+                                "Purchase Transaction",
+                                "معاملة الشراء");
+                            return;
+                        }
                         FinancialPeriodBLL periodBll = new FinancialPeriodBLL();
                         if (periodBll.IsPeriodLocked(purchaseDate))
                         {
@@ -2825,7 +2842,7 @@ namespace pos
                                 return;
                             }
 
-                            DateTime purchase_date = txt_purchase_date.Value.Date;
+                            DateTime purchase_date = purchaseDate;
 
                             int employee_id = (cmb_employees.SelectedValue.ToString() == null ? 0 : int.Parse(cmb_employees.SelectedValue.ToString()));
                             string po_invoice_no_1 = "";
@@ -3156,7 +3173,7 @@ namespace pos
                 var qtyToImport = Convert.ToDouble(item.Qty ?? 1m);
                 var importedPrice = item.Price.HasValue
                     ? Convert.ToDouble(item.Price.Value)
-                    : Convert.ToDouble(productRow["avg_cost"]);
+                    : Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(productRow, UsersModal.logged_in_branch_id, Convert.ToString(productRow["item_number"])));
 
                 ImportProductIntoPurchasesGrid(productRow, qtyToImport, importedPrice);
                 importedCount++;
