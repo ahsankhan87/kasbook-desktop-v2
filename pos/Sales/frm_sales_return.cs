@@ -295,6 +295,7 @@ namespace pos
                 UiMessages.ShowError(ex.Message, ex.Message, "Error", "خطأ");
             }
         }
+
         private void MarkFullyReturnedRows()
         {
             foreach (DataGridViewRow row in grid_sales_return.Rows)

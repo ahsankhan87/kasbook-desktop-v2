@@ -214,7 +214,7 @@ namespace pos
             cmb_GL_account_code.ValueMember = "id";
             cmb_GL_account_code.DataSource = accounts;
 
-            cmb_GL_account_code.SelectedValue = "6"; // 6 is the default Ac payable Account id in acc_accounts table
+            cmb_GL_account_code.SelectedValue = "21"; // 21 is the default Ac payable Account id in acc_accounts table
 
         }
 

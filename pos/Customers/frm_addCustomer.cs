@@ -191,7 +191,7 @@ namespace pos
             cmb_GL_account_code.ValueMember = "id";
             cmb_GL_account_code.DataSource = accounts;
 
-            cmb_GL_account_code.SelectedValue = "5"; // 5 is the default Ac receiavable Account id in acc_accounts table
+            cmb_GL_account_code.SelectedValue = "6"; // 6 is the default Ac receiavable Account id in acc_accounts table
 
         }
         public void load_customer_detail(int customer_id)

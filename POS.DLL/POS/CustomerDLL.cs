@@ -1090,9 +1090,11 @@ END";
                 result += DeleteCustomerPaymentTransactionRecords(cn, transaction, invoiceNo);
                 result += DeleteOptionalPaymentTransactionRecords(cn, transaction, "acc_entries_header", invoiceNo);
                 result += DeletePaymentTransactionRecords(cn, transaction, "acc_entries", invoiceNo);
-                result += DeletePaymentTransactionRecords(cn, transaction, "pos_banks_payments", invoiceNo);
+                result += DeleteBankPaymentTransactionRecords(cn, transaction, invoiceNo);
 
                 transaction.Commit();
+
+                LogAction("Delete Payment Transaction", 0, new CustomerModal { customer_code = invoiceNo });
 
                 return result;
             }
@@ -1132,6 +1134,30 @@ END";
             return deleteCommand.ExecuteNonQuery();
         }
     }
+    private static int DeleteBankPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string paymentReferenceInvoiceNo)
+    {
+        const string query = @"DELETE FROM pos_banks_payments
+        WHERE branch_id = @branch_id
+            AND (
+                payment_ref_invoice_no = @invoice_no
+                OR invoice_no = @invoice_no
+                OR (ISNULL(description, '') <> '' AND CHARINDEX(@payment_ref_token, description) > 0)
+                OR entry_id IN (
+                    SELECT id
+                    FROM acc_entries
+                    WHERE branch_id = @branch_id
+                        AND invoice_no = @invoice_no
+                )
+                )";
+
+        using (SqlCommand deleteCommand = new SqlCommand(query, cn, transaction))
+        {
+            deleteCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = paymentReferenceInvoiceNo;
+            deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+            deleteCommand.Parameters.Add("@payment_ref_token", SqlDbType.NVarChar).Value = "[Payment Ref: " + paymentReferenceInvoiceNo + "]";
+            return deleteCommand.ExecuteNonQuery();
+        }
+    }
 
     private static int DeletePaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string tableName, string invoiceNo)
     {
@@ -1145,16 +1171,12 @@ END";
 
     private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string tableName, string invoiceNo)
     {
-        using (SqlCommand countCommand = new SqlCommand($"SELECT COUNT(1) FROM {tableName} WHERE InvoiceNo = @invoice_no AND branch_id = @branch_id", cn, transaction))
+        using(SqlCommand deleteCommand = new SqlCommand($"DELETE FROM {tableName} WHERE InvoiceNo = @invoice_no AND branch_id = @branch_id", cn, transaction))
         {
-            countCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
-            countCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
-
-            if (Convert.ToInt32(countCommand.ExecuteScalar()) <= 0)
-                return 0;
+            deleteCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
+            deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+            return deleteCommand.ExecuteNonQuery();
         }
-
-        return DeletePaymentTransactionRecords(cn, transaction, tableName, invoiceNo);
     }
 
     private void SetCommonParameters(SqlCommand cmd, CustomerModal obj)

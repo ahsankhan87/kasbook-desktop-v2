@@ -1814,7 +1814,7 @@ WHERE id = @voucher_id
                         if (result.Success)
                         {
                             string ledgerInvoiceNo = string.IsNullOrWhiteSpace(model.ReferenceNo) ? voucherNo : model.ReferenceNo;
-                            PostPartyLedgerRows(cn, ledgerInvoiceNo, model.VoucherDate, model.Lines, userId, insertedEntryIds);
+                            PostPartyLedgerRows(cn, ledgerInvoiceNo, model.VoucherDate, model.Lines, userId, insertedEntryIds, voucherNo);
                         }
 
                         return result;
@@ -1946,11 +1946,12 @@ WHERE id = @voucher_id
                         AND COL_LENGTH('pos_banks_payments', 'branch_id') IS NOT NULL
                         AND COL_LENGTH('pos_banks_payments', 'date_created') IS NOT NULL
                         AND COL_LENGTH('pos_banks_payments', 'entry_id') IS NOT NULL
+                        AND COL_LENGTH('pos_banks_payments', 'payment_ref_invoice_no') IS NOT NULL
                         BEGIN
                             INSERT INTO pos_banks_payments
-                                (invoice_no, debit, credit, description, entry_date, account_id,account_name, bank_id, user_id, branch_id, date_created, entry_id)
+                                (invoice_no, debit, credit, description, entry_date, account_id,account_name, bank_id, user_id, branch_id, date_created, entry_id, payment_ref_invoice_no)
                             VALUES
-                                (@invoice_no, @debit, @credit, @description, @entry_date,@account_id,(SELECT name FROM acc_accounts WHERE id=@account_id),  @bank_id, @user_id, @branch_id, GETDATE(), @entry_id);
+                                (@invoice_no, @debit, @credit, @description, @entry_date,@account_id,(SELECT name FROM acc_accounts WHERE id=@account_id),  @bank_id, @user_id, @branch_id, GETDATE(), @entry_id,@payment_ref_invoice_no);
                         END", cn))
                     {
                         cmd.Parameters.AddWithValue("@invoice_no", invoiceNo);
@@ -1963,6 +1964,8 @@ WHERE id = @voucher_id
                         cmd.Parameters.AddWithValue("@user_id", userId);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                         cmd.Parameters.AddWithValue("@entry_id", entryIds[lines.ToList().IndexOf(line)]);
+                        cmd.Parameters.AddWithValue("@payment_ref_invoice_no", (object)effectivePaymentRefNo ?? DBNull.Value);
+
                         cmd.ExecuteNonQuery();
                     }
                 }

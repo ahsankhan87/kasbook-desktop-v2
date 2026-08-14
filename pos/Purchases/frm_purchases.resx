@@ -1738,7 +1738,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>814, 4</value>
+    <value>903, 9</value>
   </data>
   <data name="lbl_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1880,6 +1880,35 @@
   </data>
   <data name="ForeignPurchasetoolStripButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
+  </data>
+  <data name="PurchaseReturnToolStripButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PurchaseReturnToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAG5SURBVFhH7dbNK0RRHMbx8ZYFCxIb2ZOUlAVJKUmsEMnK
+        hh0lG/IfeFtYSEkW7BSKsrDykg1FFBF5WSApylss8H0up8a4GLnOtfDUp+acOd3f757pzj2BD5KGNewg
+        RRM2o+J7eHpVCGsJLT6ECFiJiu/CFB9GJKzE9+LB276OEhT/QBZiEFZWYYp76R7LaMWnT9I23C7gpRu0
+        wXVX0nECs1jPf/UP1KAJfThAcCNLSMK7qIljmIU98CoVCN7lLYTVRDe8SjwmYK49A9enLLSJTniVKKiw
+        uXYDXBPaRD68SgLOoOseIRauUROHOEWqJjxMM8zNVWrio2jLol8+eppEPEAN6F3jSxagBjackQ8ZgRo4
+        d0Y+pB9q4M4Z+ZBJqIF9Z+RDVFgNzDkjy8mBikuHJmxnDCr+iExN2EwZVFgNjGvCZrJxCRW/RQaspRZX
+        ML99PX49egVXYR6msLa/HW8yi1xosflvHkU5CjCtCdILrf2K/mZ1yNWZ0BSWC2gn3kVflqIFm5ogOko1
+        Qm8rneeU4Dv5jmsMIBmuWUEe6qBHRJmCjlJFWNQEGYTWhkO71gXdcRz+81cTCDwDBevRf+9W4TEAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
+  <data name="PurchaseReturnToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="PurchaseReturnToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 42</value>
+  </data>
+  <data name="PurchaseReturnToolStripButton.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="PurchaseReturnToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Sales Return (Ctrl+Alt+R)</value>
   </data>
   <data name="PurchaseToolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -2395,13 +2424,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_brand_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 122</value>
+    <value>214, 122</value>
   </data>
   <data name="txt_brand_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_brand_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 24</value>
+    <value>56, 24</value>
   </data>
   <data name="txt_brand_code.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -2422,13 +2451,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_category_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 96</value>
+    <value>214, 96</value>
   </data>
   <data name="txt_category_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_category_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 24</value>
+    <value>56, 24</value>
   </data>
   <data name="txt_category_code.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2449,13 +2478,13 @@
     <value>Left, Right</value>
   </data>
   <data name="txt_group_code.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 58</value>
+    <value>214, 58</value>
   </data>
   <data name="txt_group_code.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_group_code.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 24</value>
+    <value>56, 24</value>
   </data>
   <data name="txt_group_code.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2482,7 +2511,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_groups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 24</value>
+    <value>125, 24</value>
   </data>
   <data name="txt_groups.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2509,7 +2538,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_categories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 24</value>
+    <value>125, 24</value>
   </data>
   <data name="txt_categories.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2536,7 +2565,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_brands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 24</value>
+    <value>125, 24</value>
   </data>
   <data name="txt_brands.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2722,7 +2751,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.79904,Percent,62.20096,Absolute,59" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,26,Absolute,28" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txt_barcode" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txt_brand_code" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_category_code" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_group_code" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txt_groups" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_categories" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txt_brands" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label8" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,37.79904,Percent,62.20096,Absolute,61" /&gt;&lt;Rows Styles="Percent,50,Percent,50,Absolute,26,Absolute,28" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox_products.Location" type="System.Drawing.Point, System.Drawing">
     <value>707, 48</value>
@@ -3271,6 +3300,12 @@
     <value>ForeignPurchasetoolStripButton</value>
   </data>
   <data name="&gt;&gt;ForeignPurchasetoolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PurchaseReturnToolStripButton.Name" xml:space="preserve">
+    <value>PurchaseReturnToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;PurchaseReturnToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;addNewRowToolStripMenuItem.Name" xml:space="preserve">

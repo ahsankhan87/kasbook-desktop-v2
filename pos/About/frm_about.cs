@@ -370,12 +370,12 @@ namespace pos.About
             try
             {
                 var v = Assembly.GetEntryAssembly()?.GetName()?.Version;
-                if (v == null) return "1.0.0";
+                if (v == null) return "3.0.0";
                 return v.Major + "." + v.Minor + "." + v.Build;
             }
             catch
             {
-                return "1.0.0";
+                return "3.0.0";
             }
         }
 

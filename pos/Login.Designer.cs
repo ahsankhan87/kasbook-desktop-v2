@@ -31,6 +31,7 @@ namespace pos
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblVersionBadge = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -42,12 +43,13 @@ namespace pos
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblVersionSubtitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label11 = new System.Windows.Forms.Label();
             this.BtnRegister = new System.Windows.Forms.Button();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.Btn_forget_password = new System.Windows.Forms.Button();
@@ -73,7 +75,8 @@ namespace pos
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
+            this.panel1.Controls.Add(this.lblVersionBadge);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.pictureBox3);
@@ -81,8 +84,21 @@ namespace pos
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(24, 20, 24, 20);
             this.panel1.Size = new System.Drawing.Size(262, 530);
             this.panel1.TabIndex = 3;
+            // 
+            // lblVersionBadge
+            // 
+            this.lblVersionBadge.AutoSize = true;
+            this.lblVersionBadge.BackColor = System.Drawing.Color.Transparent;
+            this.lblVersionBadge.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            this.lblVersionBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
+            this.lblVersionBadge.Location = new System.Drawing.Point(18, 12);
+            this.lblVersionBadge.Name = "lblVersionBadge";
+            this.lblVersionBadge.Size = new System.Drawing.Size(39, 20);
+            this.lblVersionBadge.TabIndex = 7;
+            this.lblVersionBadge.Text = "v3.0";
             // 
             // tableLayoutPanel2
             // 
@@ -102,26 +118,27 @@ namespace pos
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 8F);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(106, 0);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(200)))), ((int)(((byte)(240)))));
+            this.label1.Location = new System.Drawing.Point(116, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 18);
+            this.label1.Size = new System.Drawing.Size(81, 18);
             this.label1.TabIndex = 3;
             this.label1.Text = "Develop By:";
             // 
             // linkLabel2
             // 
+            this.linkLabel2.ActiveLinkColor = System.Drawing.Color.White;
             this.linkLabel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.linkLabel2.LinkColor = System.Drawing.Color.White;
-            this.linkLabel2.Location = new System.Drawing.Point(93, 19);
+            this.linkLabel2.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
+            this.linkLabel2.Location = new System.Drawing.Point(83, 18);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(104, 17);
-            this.linkLabel2.TabIndex = 3;
+            this.linkLabel2.Size = new System.Drawing.Size(114, 20);
+            this.linkLabel2.TabIndex = 7;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "khybersoft.com";
+            this.linkLabel2.Text = "nozumtech.com";
             // 
             // tableLayoutPanel1
             // 
@@ -145,11 +162,11 @@ namespace pos
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(62, 34);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.label4.Location = new System.Drawing.Point(53, 36);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(185, 34);
+            this.label4.Size = new System.Drawing.Size(194, 30);
             this.label4.TabIndex = 3;
             this.label4.Text = "Accounts and Parts";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -158,11 +175,11 @@ namespace pos
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(63, 69);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.label5.Location = new System.Drawing.Point(105, 70);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(184, 31);
+            this.label5.Size = new System.Drawing.Size(142, 30);
             this.label5.TabIndex = 3;
             this.label5.Text = "Management";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -171,11 +188,11 @@ namespace pos
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(150, 105);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.label6.Location = new System.Drawing.Point(165, 105);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 31);
+            this.label6.Size = new System.Drawing.Size(82, 30);
             this.label6.TabIndex = 3;
             this.label6.Text = "System";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -184,11 +201,11 @@ namespace pos
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(39, 1);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.label3.Location = new System.Drawing.Point(80, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(208, 31);
+            this.label3.Size = new System.Drawing.Size(167, 30);
             this.label3.TabIndex = 3;
             this.label3.Text = "Welcome to the";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -205,19 +222,20 @@ namespace pos
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(75, 186);
+            this.label2.Location = new System.Drawing.Point(0, 185);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 29);
+            this.label2.Size = new System.Drawing.Size(262, 36);
             this.label2.TabIndex = 3;
-            this.label2.Text = "NOZUM";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label2.Text = "NOZUM ERP";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.lblVersionSubtitle);
             this.panel2.Controls.Add(this.tableLayoutPanel3);
             this.panel2.Controls.Add(this.BtnRegister);
             this.panel2.Controls.Add(this.BtnLogin);
@@ -231,6 +249,17 @@ namespace pos
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(394, 530);
             this.panel2.TabIndex = 0;
+            // 
+            // lblVersionSubtitle
+            // 
+            this.lblVersionSubtitle.AutoSize = true;
+            this.lblVersionSubtitle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblVersionSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblVersionSubtitle.Location = new System.Drawing.Point(18, 162);
+            this.lblVersionSubtitle.Name = "lblVersionSubtitle";
+            this.lblVersionSubtitle.Size = new System.Drawing.Size(222, 20);
+            this.lblVersionSubtitle.TabIndex = 39;
+            this.lblVersionSubtitle.Text = "Platform v3.0 — Modern Edition";
             // 
             // tableLayoutPanel3
             // 
@@ -252,18 +281,18 @@ namespace pos
             this.tableLayoutPanel3.Size = new System.Drawing.Size(373, 88);
             this.tableLayoutPanel3.TabIndex = 38;
             // 
-            // label11
+            // label8
             // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label11.AutoSize = true;
-            this.tableLayoutPanel3.SetColumnSpan(this.label11, 2);
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 8F);
-            this.label11.ForeColor = System.Drawing.Color.DimGray;
-            this.label11.Location = new System.Drawing.Point(3, 67);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(234, 19);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "or WhatsApp to: +966 561556977";
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label8.AutoSize = true;
+            this.tableLayoutPanel3.SetColumnSpan(this.label8, 2);
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 8F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(159)))), ((int)(((byte)(157)))));
+            this.label8.Location = new System.Drawing.Point(3, 1);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 19);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "Support:";
             // 
             // label9
             // 
@@ -271,32 +300,19 @@ namespace pos
             this.label9.AutoSize = true;
             this.tableLayoutPanel3.SetColumnSpan(this.label9, 2);
             this.label9.Font = new System.Drawing.Font("Century Gothic", 8F);
-            this.label9.ForeColor = System.Drawing.Color.Silver;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(159)))), ((int)(((byte)(157)))));
             this.label9.Location = new System.Drawing.Point(3, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(331, 22);
             this.label9.TabIndex = 35;
             this.label9.Text = "To obatain access to this App or any questions about it";
             // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.tableLayoutPanel3.SetColumnSpan(this.label8, 2);
-            this.label8.Font = new System.Drawing.Font("Century Gothic", 8F);
-            this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(3, 1);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 19);
-            this.label8.TabIndex = 34;
-            this.label8.Text = "Support:";
-            // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 8F);
-            this.label10.ForeColor = System.Drawing.Color.Silver;
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(159)))), ((int)(((byte)(157)))));
             this.label10.Location = new System.Drawing.Point(3, 44);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(123, 22);
@@ -308,24 +324,37 @@ namespace pos
             this.linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.linkLabel1.Location = new System.Drawing.Point(189, 46);
+            this.linkLabel1.Location = new System.Drawing.Point(189, 45);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(166, 17);
-            this.linkLabel1.TabIndex = 5;
+            this.linkLabel1.Size = new System.Drawing.Size(179, 20);
+            this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "support@khybersoft.com";
+            this.linkLabel1.Text = "support@nozumtech.com";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label11.AutoSize = true;
+            this.tableLayoutPanel3.SetColumnSpan(this.label11, 2);
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 8F);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(159)))), ((int)(((byte)(157)))));
+            this.label11.Location = new System.Drawing.Point(3, 67);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(234, 19);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "or WhatsApp to: +966 561556977";
             // 
             // BtnRegister
             // 
-            this.BtnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.BtnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(175)))), ((int)(((byte)(80)))));
             this.BtnRegister.FlatAppearance.BorderSize = 0;
             this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRegister.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnRegister.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F);
             this.BtnRegister.ForeColor = System.Drawing.Color.White;
             this.BtnRegister.Location = new System.Drawing.Point(251, 358);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(131, 38);
-            this.BtnRegister.TabIndex = 3;
+            this.BtnRegister.TabIndex = 4;
             this.BtnRegister.Text = "REGISTER";
             this.BtnRegister.UseVisualStyleBackColor = false;
             this.BtnRegister.Visible = false;
@@ -333,16 +362,16 @@ namespace pos
             // 
             // BtnLogin
             // 
-            this.BtnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.BtnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
             this.BtnLogin.FlatAppearance.BorderSize = 0;
             this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLogin.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnLogin.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnLogin.ForeColor = System.Drawing.Color.White;
             this.BtnLogin.Location = new System.Drawing.Point(252, 314);
             this.BtnLogin.Name = "BtnLogin";
-            this.BtnLogin.Size = new System.Drawing.Size(131, 38);
+            this.BtnLogin.Size = new System.Drawing.Size(131, 42);
             this.BtnLogin.TabIndex = 3;
-            this.BtnLogin.Text = "LOGIN";
+            this.BtnLogin.Text = "Sign In";
             this.BtnLogin.UseVisualStyleBackColor = false;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
@@ -350,12 +379,12 @@ namespace pos
             // 
             this.Btn_forget_password.FlatAppearance.BorderSize = 0;
             this.Btn_forget_password.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_forget_password.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_forget_password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.Btn_forget_password.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.Btn_forget_password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
             this.Btn_forget_password.Location = new System.Drawing.Point(108, 319);
             this.Btn_forget_password.Name = "Btn_forget_password";
             this.Btn_forget_password.Size = new System.Drawing.Size(139, 31);
-            this.Btn_forget_password.TabIndex = 4;
+            this.Btn_forget_password.TabIndex = 5;
             this.Btn_forget_password.Text = "Forget Password ?";
             this.Btn_forget_password.UseVisualStyleBackColor = true;
             this.Btn_forget_password.Visible = false;
@@ -375,8 +404,8 @@ namespace pos
             // 
             this.TxtPassword.BackColor = System.Drawing.SystemColors.Control;
             this.TxtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TxtPassword.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.TxtPassword.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.TxtPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
             this.TxtPassword.Location = new System.Drawing.Point(39, 12);
             this.TxtPassword.Name = "TxtPassword";
             this.TxtPassword.Size = new System.Drawing.Size(344, 25);
@@ -384,6 +413,7 @@ namespace pos
             this.TxtPassword.UseSystemPasswordChar = true;
             this.TxtPassword.Click += new System.EventHandler(this.TxtPassword_Click);
             this.TxtPassword.Enter += new System.EventHandler(this.TxtPassword_Enter);
+            this.TxtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPassword_KeyDown);
             // 
             // pictureBox2
             // 
@@ -410,8 +440,8 @@ namespace pos
             // 
             this.TxtUsername.BackColor = System.Drawing.SystemColors.Control;
             this.TxtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TxtUsername.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.TxtUsername.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.TxtUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
             this.TxtUsername.Location = new System.Drawing.Point(39, 12);
             this.TxtUsername.Name = "TxtUsername";
             this.TxtUsername.Size = new System.Drawing.Size(344, 25);
@@ -436,11 +466,11 @@ namespace pos
             this.Btn_close.FlatAppearance.BorderSize = 0;
             this.Btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_close.Font = new System.Drawing.Font("Verdana", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.Btn_close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
             this.Btn_close.Location = new System.Drawing.Point(338, 0);
             this.Btn_close.Name = "Btn_close";
             this.Btn_close.Size = new System.Drawing.Size(56, 42);
-            this.Btn_close.TabIndex = 6;
+            this.Btn_close.TabIndex = 60;
             this.Btn_close.Text = "X";
             this.Btn_close.UseVisualStyleBackColor = true;
             this.Btn_close.Click += new System.EventHandler(this.Btn_close_Click);
@@ -449,7 +479,7 @@ namespace pos
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
             this.label7.Location = new System.Drawing.Point(18, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(280, 31);
@@ -458,13 +488,15 @@ namespace pos
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.CancelButton = this.Btn_close;
             this.ClientSize = new System.Drawing.Size(656, 530);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -524,7 +556,9 @@ namespace pos
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-    }
-}
+                 private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+                private System.Windows.Forms.Label lblVersionBadge;
+                private System.Windows.Forms.Label lblVersionSubtitle;
+            }
+        }
 

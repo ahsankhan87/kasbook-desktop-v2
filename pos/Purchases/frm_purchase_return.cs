@@ -28,12 +28,20 @@ namespace pos
         private CheckBox _chkHeader;
         private bool _bulkChecking;
 
+        string _invoice_no = "";
+
         public frm_purchase_return()
         {
             InitializeComponent();
             Get_AccountID_From_Company();
         }
+        public frm_purchase_return(string invoiceNo)
+        {
+            InitializeComponent();
+            _invoice_no = invoiceNo;
+            txt_invoice_no.Text = _invoice_no;
 
+        }
         public void frm_purchase_return_Load(object sender, EventArgs e)
         {
             AppTheme.Apply(this);
@@ -45,6 +53,10 @@ namespace pos
 
             SetupHeaderCheckBox();
             txt_invoice_no.Focus();
+
+            // If invoice already provided, load it; otherwise keep grid empty
+            if (!string.IsNullOrWhiteSpace(txt_invoice_no.Text))
+                LoadPurchaseReturnGrid();
         }
 
         private void StyleForm()
@@ -194,6 +206,12 @@ namespace pos
 
         private void btn_search_Click(object sender, EventArgs e)
         {
+            LoadPurchaseReturnGrid();
+        }
+
+        public void LoadPurchaseReturnGrid()
+        {
+
             var invoiceNo = txt_invoice_no.Text.Trim();
             if (string.IsNullOrWhiteSpace(invoiceNo))
             {
@@ -243,6 +261,11 @@ namespace pos
                     row.ReadOnly = true;
                     row.Cells["ReturnQty"].Value = 0m;
                     row.Cells["chk"].Value = false;
+                }
+                else
+                {
+                    // Auto-populate ReturnQty with ReturnableQty for user convenience
+                    row.Cells["ReturnQty"].Value = avail;
                 }
             }
             ApplyRowStyles();
@@ -415,6 +438,7 @@ namespace pos
                             account = "Return",
                             old_invoice_no = prev_invoice_no,
                             returnReason = returnReason,
+                            bank_id = (Purchases_dr["bank_id"].ToString() == string.Empty ? 0 : int.Parse(Purchases_dr["bank_id"].ToString())),
 
                             cash_account_id = cash_account_id,
                             payable_account_id = payable_account_id,
@@ -543,7 +567,7 @@ namespace pos
         public string GetMAXInvoiceNo()
         {
             PurchasesBLL PurchasesBLL_obj = new PurchasesBLL();
-            return PurchasesBLL_obj.GeneratePurchaseReturnInvoiceNo(); //.GetMaxReturnInvoiceNo();
+            return PurchasesBLL_obj.GetMaxPurchaseReturnInvoiceNo(); //.GetMaxReturnInvoiceNo();
         }
 
         public void autoCompleteInvoice()

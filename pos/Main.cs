@@ -377,35 +377,68 @@ namespace pos
             // Menu items (names must match Designer)
             try
             {
+                // ===== SALES =====
                 if (newTransactionToolStripMenuItem2 != null) newTransactionToolStripMenuItem2.Tag = Permissions.Sales_Create;
                 if (allTransactionToolStripMenuItem1 != null) allTransactionToolStripMenuItem1.Tag = Permissions.Sales_View;
                 if (salesReturnToolStripMenuItem != null) salesReturnToolStripMenuItem.Tag = Permissions.Sales_Return;
-                //if (salesReportToolStripMenuItem1 != null) salesReportToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
                 if (dailySaleReportToolStripMenuItem != null) dailySaleReportToolStripMenuItem.Tag = Permissions.Reports_SalesView;
+                if (debitNoteToolStripMenuItem != null) debitNoteToolStripMenuItem.Tag = Permissions.Sales_DebitNote;
+                if (salesInvoiceReportToolStripMenuItem != null) salesInvoiceReportToolStripMenuItem.Tag = Permissions.SalesInvoiceReport_View;
+                if (salesTaxSummaryToolStripMenuItem != null) salesTaxSummaryToolStripMenuItem.Tag = Permissions.SalesTaxSummary_View;
+                if (categoryWiseSalesSummaryToolStripMenuItem != null) categoryWiseSalesSummaryToolStripMenuItem.Tag = Permissions.CategoryWiseSales_View;
+                if (productWiseSalesSummaryToolStripMenuItem != null) productWiseSalesSummaryToolStripMenuItem.Tag = Permissions.ProductWiseSales_View;
+                if (customerWiseSalesReportToolStripMenuItem != null) customerWiseSalesReportToolStripMenuItem.Tag = Permissions.CustomerWiseSales_View;
+
+                // ===== PURCHASES =====
                 if (newTransactionToolStripMenuItem != null) newTransactionToolStripMenuItem.Tag = Permissions.Purchases_Create;
                 if (allPurchasesToolStripMenuItem != null) allPurchasesToolStripMenuItem.Tag = Permissions.Purchases_View;
                 if (purchaseReturnToolStripMenuItem != null) purchaseReturnToolStripMenuItem.Tag = Permissions.Purchases_Return;
                 if (purchaseReportToolStripMenuItem != null) purchaseReportToolStripMenuItem.Tag = Permissions.Reports_PurchasesView;
-                if (suppliersToolStripMenuItem != null) suppliersToolStripMenuItem.Tag = Permissions.Suppliers_View;
-                if (itemsToolStripMenuItem != null) itemsToolStripMenuItem.Tag = Permissions.Products_View;
-                if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
-                if (zatcaInvoicesToolStripMenuItem != null) zatcaInvoicesToolStripMenuItem.Tag = Permissions.Sales_Zatca_View;
-                if (generateZATCACSIDToolStripMenuItem != null) generateZATCACSIDToolStripMenuItem.Tag = Permissions.Sales_Zatca_Configure;
-                if (debitNoteToolStripMenuItem != null) debitNoteToolStripMenuItem.Tag = Permissions.Sales_DebitNote;
+                if (purchaseInvoiceReportToolStripMenuItem != null) purchaseInvoiceReportToolStripMenuItem.Tag = Permissions.PurchaseInvoiceReport_View;
+                if (purchaseSummaryToolStripMenuItem != null) purchaseSummaryToolStripMenuItem.Tag = Permissions.Reports_PurchasesView;
+                if (allPurchaseOrdersToolStripMenuItem != null) allPurchaseOrdersToolStripMenuItem.Tag = Permissions.PurchaseOrders_View;
+                if (purchaseOrdersToolStripMenuItem != null) purchaseOrdersToolStripMenuItem.Tag = Permissions.PurchaseOrders_View;
 
-                // Inventory / Products
+                // ===== INVENTORY / PRODUCTS =====
+                if (itemsToolStripMenuItem != null) itemsToolStripMenuItem.Tag = Permissions.Products_View;
                 if (productsServicesToolStripMenuItem != null) productsServicesToolStripMenuItem.Tag = Permissions.Inventory_View;
                 if (productAdjustmentToolStripMenuItem != null) productAdjustmentToolStripMenuItem.Tag = Permissions.Inventory_Edit;
                 if (labelsToolStripMenuItem != null) labelsToolStripMenuItem.Tag = Permissions.Inventory_View;
                 if (quantityOnHandToolStripMenuItem != null) quantityOnHandToolStripMenuItem.Tag = Permissions.Reports_InventoryView;
                 if (lowStockReportToolStripMenuItem != null) lowStockReportToolStripMenuItem.Tag = Permissions.Reports_InventoryView;
+                if (brandToolStripMenuItem != null) brandToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (categoriesToolStripMenuItem != null) categoriesToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (productGroupsToolStripMenuItem != null) productGroupsToolStripMenuItem.Tag = Permissions.ProductGroups_View;
+                if (locationsToolStripMenuItem != null) locationsToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (unitsToolStripMenuItem != null) unitsToolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (warehousetoolStripMenuItem != null) warehousetoolStripMenuItem.Tag = Permissions.Inventory_View;
+                if (alternateProductsToolStripMenuItem != null) alternateProductsToolStripMenuItem.Tag = Permissions.AlternateProducts_View;
+                if (productLocationTransferToolStripMenuItem != null) productLocationTransferToolStripMenuItem.Tag = Permissions.ProductLocationTransfer_View;
+                if (stockCheckAndAdjustmentToolStripMenuItem != null) stockCheckAndAdjustmentToolStripMenuItem.Tag = Permissions.StockCheckAdjustment_View;
+                if (stockSuppressionToolStripMenuItem != null) stockSuppressionToolStripMenuItem.Tag = Permissions.Inventory_Edit;
+                if (editItemDataToolStripMenuItem != null) editItemDataToolStripMenuItem.Tag = Permissions.EditItemData_View;
+                if (lowStockInventoryToolStripMenuItem != null) lowStockInventoryToolStripMenuItem.Tag = Permissions.LowStockInventory_View;
+                if (MovingItemsToolStripMenuItem != null) MovingItemsToolStripMenuItem.Tag = Permissions.InventoryMovingItems_View;
+                if (NonMovingItemsToolStripMenuItem != null) NonMovingItemsToolStripMenuItem.Tag = Permissions.InventoryNonMovingItems_View;
+                if (inventoryValuationToolStripMenuItem != null) inventoryValuationToolStripMenuItem.Tag = Permissions.InventoryValuation_View;
+                if (inventoryValuationSettingsToolStripMenuItem != null) inventoryValuationSettingsToolStripMenuItem.Tag = Permissions.InventoryValuation_Settings;
 
-                // Customers
+                // ===== CUSTOMERS =====
                 if (customersToolStripMenuItem != null) customersToolStripMenuItem.Tag = Permissions.Customers_View;
+                if (customersSummaryToolStripMenuItem != null) customersSummaryToolStripMenuItem.Tag = Permissions.Customers_View;
+                if (createNewCustomerToolStripMenuItem != null) createNewCustomerToolStripMenuItem.Tag = Permissions.Customers_Create;
+                if (customerARToolStripMenuItem != null) customerARToolStripMenuItem.Tag = Permissions.AccountsReceivable_View;
 
-                // Finance / Reports
+                // ===== SUPPLIERS =====
+                if (suppliersToolStripMenuItem != null) suppliersToolStripMenuItem.Tag = Permissions.Suppliers_View;
+                if (suppliersSummaryToolStripMenuItem != null) suppliersSummaryToolStripMenuItem.Tag = Permissions.Suppliers_View;
+                if (createNewSupplierToolStripMenuItem != null) createNewSupplierToolStripMenuItem.Tag = Permissions.Suppliers_Create;
+                if (supplierAPToolStripMenuItem != null) supplierAPToolStripMenuItem.Tag = Permissions.AccountsPayable_View;
+
+                // ===== FINANCE / ACCOUNTS =====
                 if (journalToolStripMenuItem != null) journalToolStripMenuItem.Tag = Permissions.Journal_View;
                 if (journalDaybookToolStripMenuItem != null) journalDaybookToolStripMenuItem.Tag = Permissions.Finance_View;
+                if (journalVoucherListToolStripMenuItem != null) journalVoucherListToolStripMenuItem.Tag = Permissions.Journal_View;
                 if (trialBalanceToolStripMenuItem != null) trialBalanceToolStripMenuItem.Tag = Permissions.Finance_Report;
                 if (profitLossToolStripMenuItem != null) profitLossToolStripMenuItem.Tag = Permissions.Finance_Report;
                 if (balanceSheetToolStripMenuItem != null) balanceSheetToolStripMenuItem.Tag = Permissions.Finance_Report;
@@ -414,49 +447,106 @@ namespace pos
                 if (banksReportToolStripMenuItem != null) banksReportToolStripMenuItem.Tag = Permissions.Finance_Report;
                 if (accountPayableToolStripMenuItem != null) accountPayableToolStripMenuItem.Tag = Permissions.Reports_AccountsView;
                 if (accountReceivableToolStripMenuItem != null) accountReceivableToolStripMenuItem.Tag = Permissions.Reports_AccountsView;
+                if (chartOfAccountsToolStripMenuItem != null) chartOfAccountsToolStripMenuItem.Tag = Permissions.Account_View;
+                if (groupsToolStripMenuItem != null) groupsToolStripMenuItem.Tag = Permissions.Group_View;
+                if (accountsToolStripMenuItem1 != null) accountsToolStripMenuItem1.Tag = Permissions.Account_View;
+
+                // ===== REPORTS - FINANCE =====
                 if (vATDashboardToolStripMenuItem != null) vATDashboardToolStripMenuItem.Tag = Permissions.Reports_FinanceView;
                 if (byPaymentMethodToolStripMenuItem != null) byPaymentMethodToolStripMenuItem.Tag = Permissions.Reports_SalesView;
                 if (salesExpensesToolStripMenuItem != null) salesExpensesToolStripMenuItem.Tag = Permissions.Reports_FinanceView;
                 if (salesSummaryToolStripMenuItem != null) salesSummaryToolStripMenuItem.Tag = Permissions.Reports_SalesView;
                 if (salesSummaryToolStripMenuItem1 != null) salesSummaryToolStripMenuItem1.Tag = Permissions.Reports_SalesView;
-                if (purchaseSummaryToolStripMenuItem != null) purchaseSummaryToolStripMenuItem.Tag = Permissions.Reports_PurchasesView;
-                if (customersSummaryToolStripMenuItem != null) customersSummaryToolStripMenuItem.Tag = Permissions.Customers_View;
-                if (suppliersSummaryToolStripMenuItem != null) suppliersSummaryToolStripMenuItem.Tag = Permissions.Suppliers_View;
-                if (expenseDashboardToolStripMenuItem != null) expenseDashboardToolStripMenuItem.Tag = Permissions.Expenses_View;
                 if (accountingDashboardToolStripMenuItem != null) accountingDashboardToolStripMenuItem.Tag = Permissions.Finance_View;
+                if (generalLedgerToolStripMenuItem != null) generalLedgerToolStripMenuItem.Tag = Permissions.GeneralLedger_View;
+                if (taxTrialBalanceToolStripMenuItem != null) taxTrialBalanceToolStripMenuItem.Tag = Permissions.TaxTrialBalance_View;
+                if (bankReconciliationToolStripMenuItem != null) bankReconciliationToolStripMenuItem.Tag = Permissions.BankReconciliation_View;
+                if (cashBookToolStripMenuItem != null) cashBookToolStripMenuItem.Tag = Permissions.CashBook_View;
+                if (dailyCashBankReportToolStripMenuItem != null) dailyCashBankReportToolStripMenuItem.Tag = Permissions.DailyCashBankReport_View;
+                if (cashFlowManagementToolStripMenuItem != null) cashFlowManagementToolStripMenuItem.Tag = Permissions.CashFlowManagement_View;
+                if (cashManagementToolStripMenuItem != null) cashManagementToolStripMenuItem.Tag = Permissions.CashManagement_View;
+                if (departmentalPLToolStripMenuItem != null) departmentalPLToolStripMenuItem.Tag = Permissions.DepartmentalPL_View;
+                if (incomeStatementToolStripMenuItem != null) incomeStatementToolStripMenuItem.Tag = Permissions.IncomeStatement_View;
 
-                // Security admin
-                if (permissionsToolStripMenuItem != null) permissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
-                if (rolePermissionsToolStripMenuItem != null) rolePermissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_Create;
-                if (userClaimsToolStripMenuItem != null) userClaimsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
-                if (applicationLogsToolStripMenuItem != null) applicationLogsToolStripMenuItem.Tag = Permissions.ApplicationLogs_View;
-
-                // users
-                if (usersToolStripMenuItem != null) usersToolStripMenuItem.Tag = Permissions.Security_Users_View;
-                if (warehousetoolStripMenuItem != null) warehousetoolStripMenuItem.Tag = Permissions.Inventory_View;
-                if (categoriesToolStripMenuItem != null) categoriesToolStripMenuItem.Tag = Permissions.Inventory_View;
-                if (unitsToolStripMenuItem != null) unitsToolStripMenuItem.Tag = Permissions.Inventory_View;
-                if (locationsToolStripMenuItem != null) locationsToolStripMenuItem.Tag = Permissions.Inventory_View;
-                if (brandToolStripMenuItem != null) brandToolStripMenuItem.Tag = Permissions.Inventory_View;
-                if (branchToolStripMenuItem != null) branchToolStripMenuItem.Tag = Permissions.Branches_View;
+                // ===== MASTER / SETUP =====
+                if (companySetupToolStripMenuItem != null) companySetupToolStripMenuItem.Tag = Permissions.CompanySetup_View;
                 if (profileToolStripMenuItem != null) profileToolStripMenuItem.Tag = Permissions.Profile_View;
+                if (countryOriginToolStripMenuItem != null) countryOriginToolStripMenuItem.Tag = Permissions.CompanySetup_Edit;
+                if (setupToolStripMenuItem != null) setupToolStripMenuItem.Tag = Permissions.TransactionsSetup_View;
+                if (branchToolStripMenuItem != null) branchToolStripMenuItem.Tag = Permissions.Branches_View;
+                if (branchSummaryToolStripMenuItem != null) branchSummaryToolStripMenuItem.Tag = Permissions.Branches_View;
+                if (transactionsSetupToolStripMenuItem != null) transactionsSetupToolStripMenuItem.Tag = Permissions.TransactionsSetup_View;
+                if (paymentTermsToolStripMenuItem != null) paymentTermsToolStripMenuItem.Tag = Permissions.PaymentTerms_View;
+                if (paymentMethodToolStripMenuItem != null) paymentMethodToolStripMenuItem.Tag = Permissions.PaymentMethods_View;
+                if (currenciesToolStripMenuItem != null) currenciesToolStripMenuItem.Tag = Permissions.Currencies_View;
+                if (taxesVATToolStripMenuItem1 != null) taxesVATToolStripMenuItem1.Tag = Permissions.TaxesVAT_View;
+                if (taxesDiscountsToolStripMenuItem != null) taxesDiscountsToolStripMenuItem.Tag = Permissions.TaxesVAT_View;
+                if (discountSchemesToolStripMenuItem != null) discountSchemesToolStripMenuItem.Tag = Permissions.Discounts_ManageSchemes;
+                if (dBBackupToolStripMenuItem != null) dBBackupToolStripMenuItem.Tag = Permissions.DatabaseBackup_View;
                 if (financialYearsToolStripMenuItem != null) financialYearsToolStripMenuItem.Tag = Permissions.FinancialYears_View;
+                if (financialPeriodManagementToolStripMenuItem != null) financialPeriodManagementToolStripMenuItem.Tag = Permissions.FinancialPeriodManagement_View;
 
-                // Accounts / Banks / Expenses
-                if (groupsToolStripMenuItem != null) groupsToolStripMenuItem.Tag = Permissions.Group_View;
-                if (accountsToolStripMenuItem1 != null) accountsToolStripMenuItem1.Tag = Permissions.Account_View;
-                if (chartOfAccountsToolStripMenuItem != null) chartOfAccountsToolStripMenuItem.Tag = Permissions.Account_View;
-                if (banksToolStripMenuItem != null) banksToolStripMenuItem.Tag = Permissions.Bank_View;
-                if (expensesToolStripMenuItem != null) expensesToolStripMenuItem.Tag = Permissions.Expenses_View;
-
-                // ICT
+                // ===== TRANSACTIONS / ICT =====
+                if (transactionsToolStripMenuItem != null) transactionsToolStripMenuItem.Tag = Permissions.Sales_View;
+                if (allQuotationsEstimatesToolStripMenuItem != null) allQuotationsEstimatesToolStripMenuItem.Tag = Permissions.Quotes_View;
                 if (iCTToolStripMenuItem != null) iCTToolStripMenuItem.Tag = Permissions.Sales_ictTransactions_View;
                 if (iCTRequestToolStripMenuItem != null) iCTRequestToolStripMenuItem.Tag = Permissions.Sales_ictTransactions_Request;
                 if (iCTReleaseToolStripMenuItem != null) iCTReleaseToolStripMenuItem.Tag = Permissions.Sales_ictTransactions_Release;
 
-                // Discounts
-                if (discountSchemesToolStripMenuItem != null) discountSchemesToolStripMenuItem.Tag = Permissions.Discounts_ManageSchemes;
-                if (stockSuppressionToolStripMenuItem != null) stockSuppressionToolStripMenuItem.Tag = Permissions.Inventory_Edit;
+                // ===== EXPENSES =====
+                if (expensesToolStripMenuItem != null) expensesToolStripMenuItem.Tag = Permissions.Expenses_View;
+                if (expenseDashboardToolStripMenuItem != null) expenseDashboardToolStripMenuItem.Tag = Permissions.Expenses_View;
+                if (createNewExpenseToolStripMenuItem != null) createNewExpenseToolStripMenuItem.Tag = Permissions.Expenses_Create;
+
+                // ===== BANKS =====
+                if (banksToolStripMenuItem != null) banksToolStripMenuItem.Tag = Permissions.Bank_View;
+
+                // ===== SECURITY & ADMIN =====
+                if (permissionsToolStripMenuItem != null) permissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
+                if (rolePermissionsToolStripMenuItem != null) rolePermissionsToolStripMenuItem.Tag = Permissions.Security_Permissions_Create;
+                if (userClaimsToolStripMenuItem != null) userClaimsToolStripMenuItem.Tag = Permissions.Security_Permissions_View;
+                if (applicationLogsToolStripMenuItem != null) applicationLogsToolStripMenuItem.Tag = Permissions.ApplicationLogs_View;
+                if (usersToolStripMenuItem != null) usersToolStripMenuItem.Tag = Permissions.Security_Users_View;
+
+                // ===== HR / EMPLOYEES =====
+                if (employeesToolStripMenuItem != null) employeesToolStripMenuItem.Tag = Permissions.Employees_View;
+                if (humanResourceToolStripMenuItem != null) humanResourceToolStripMenuItem.Tag = Permissions.Employees_View;
+
+                // ===== ACCOUNTING / ADVANCED =====
+                if (costCentersToolStripMenuItem != null) costCentersToolStripMenuItem.Tag = Permissions.CostCenters_View;
+                if (fixedAssetsToolStripMenuItem != null) fixedAssetsToolStripMenuItem.Tag = Permissions.FixedAssets_View;
+                if (budgetToolStripMenuItem != null) budgetToolStripMenuItem.Tag = Permissions.Budget_View;
+                if (budgetVsActualReportToolStripMenuItem != null) budgetVsActualReportToolStripMenuItem.Tag = Permissions.BudgetVsActual_View;
+                if (allocationRulesToolStripMenuItem != null) allocationRulesToolStripMenuItem.Tag = Permissions.AllocationRules_View;
+                if (reconciliationToolStripMenuItem != null) reconciliationToolStripMenuItem.Tag = Permissions.Reconciliation_View;
+
+                // ===== TOOLS / UTILITIES =====
+                if (importDataToolStripMenuItem != null) importDataToolStripMenuItem.Tag = Permissions.ImportData_View;
+                if (configurationToolStripMenuItem != null) configurationToolStripMenuItem.Tag = Permissions.Configuration_View;
+                if (hierarchyToolStripMenuItem != null) hierarchyToolStripMenuItem.Tag = Permissions.Account_View;
+
+                // ===== ZATCA =====
+                if (zatcaInvoicesToolStripMenuItem != null) zatcaInvoicesToolStripMenuItem.Tag = Permissions.Sales_Zatca_View;
+                if (generateZATCACSIDToolStripMenuItem != null) generateZATCACSIDToolStripMenuItem.Tag = Permissions.Sales_Zatca_Configure;
+
+                // ===== WINDOW MANAGEMENT (No Permission Check) =====
+                // These don't require permissions
+                // if (CascadeToolStripMenuItem != null) CascadeToolStripMenuItem.Tag = ...;
+                // if (TileHorizontalToolStripMenuItem != null) TileHorizontalToolStripMenuItem.Tag = ...;
+                // if (TileVerticalToolStripMenuItem != null) TileVerticalToolStripMenuItem.Tag = ...;
+                // if (CloseAllToolStripMenuItem != null) CloseAllToolStripMenuItem.Tag = ...;
+
+                // ===== LANGUAGE & HELP (No Permission Check) =====
+                // if (languageToolStripMenuItem != null) languageToolStripMenuItem.Tag = ...;
+                // if (englishToolStripMenuItem != null) englishToolStripMenuItem.Tag = ...;
+                // if (arabicToolStripMenuItem != null) arabicToolStripMenuItem.Tag = ...;
+                // if (helpToolStripMenuItem != null) helpToolStripMenuItem.Tag = Permissions.Help_View;
+                // if (shortcutsKeysToolStripMenuItem != null) shortcutsKeysToolStripMenuItem.Tag = ...;
+                // if (aboutToolStripMenuItem != null) aboutToolStripMenuItem.Tag = ...;
+                // if (logoutToolStripMenuItem != null) logoutToolStripMenuItem.Tag = ...;
+                // if (exitToolStripMenuItem != null) exitToolStripMenuItem.Tag = ...;
+                // if (settingToolStripMenuItem != null) settingToolStripMenuItem.Tag = ...;
+                // if (settingsToolStripMenuItem != null) settingsToolStripMenuItem.Tag = ...;
             }
             catch { /* ignore if some items are not present in this build */ }
 
@@ -474,126 +564,7 @@ namespace pos
             catch { /* ignore */ }
         }
 
-        private void load_modules()
-        {
-            UsersDLL usersBLL_obj = new UsersDLL();
-
-            DataTable users_modules = usersBLL_obj.GetUserModules(UsersModal.logged_in_userid);
-            string module_name = "";
-            foreach (DataRow dr in users_modules.Rows)
-            {
-                module_name = dr["module_name"].ToString();
-
-                switch (module_name)
-                {
-                    //Master
-                    case "Warehouse":
-                        warehousetoolStripMenuItem.Enabled = true;
-                        break;
-                    case "Brands":
-                        brandToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Branches":
-                        branchToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Categories":
-                        categoriesToolStripMenuItem.Enabled = true;
-                        break;
-                    case "DB Backup":
-                        dBBackupToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Profile":
-                        profileToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Locations":
-                        locationsToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Language":
-                        languageToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Taxes":
-                        taxesVATToolStripMenuItem1.Enabled = true;
-                        break;
-                    case "Users":
-                        usersToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Units":
-                        unitsToolStripMenuItem.Enabled = true;
-                        break;
-                    //////POS
-                    case "Sales Transaction":
-                        newTransactionToolStripMenuItem2.Enabled = true;
-                        break;
-                    case "Sales Return":
-                        salesReturnToolStripMenuItem.Enabled = true;
-                        break;
-                    case "All Sales":
-                        allTransactionToolStripMenuItem1.Enabled = true;
-                        break;
-                    case "Purchase Transaction":
-                        newTransactionToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Purchase Return":
-                        purchaseReturnToolStripMenuItem.Enabled = true;
-                        break;
-                    case "All Purchases":
-                        allPurchasesToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Products":
-                        productsServicesToolStripMenuItem.Enabled = true;
-                        break;
-                    ////Accounts
-                    case "Customers":
-                        customersToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Suppliers":
-                        suppliersToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Journal":
-                        journalToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Groups":
-                        groupsToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Accounts":
-                        accountsToolStripMenuItem1.Enabled = true;
-                        break;
-                    case "Journal Daybook":
-                        journalDaybookToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Trial Balance":
-                        trialBalanceToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Profit and Loss":
-                        profitLossToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Balance Sheet":
-                        balanceSheetToolStripMenuItem.Enabled = true;
-                        break;
-                    ////Reports
-                    case "Sales":
-                        //salesToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Purchases":
-                        //purchasesToolStripMenuItem1.Enabled = true;
-                        break;
-                    case "Account Report":
-                        accountReportToolStripMenuItem.Enabled = true;
-                        break;
-                    case "Group Report":
-                        groupReportToolStripMenuItem.Enabled = true;
-                        break;
-                    ///
-                    //HR
-                    case "Employees":
-                        employeesToolStripMenuItem.Enabled = true;
-                        break;
-                }
-
-            }
-
-        }
-
+        
         void mark_checked_lang_menu()
         {
             var current_lang_code = System.Globalization.CultureInfo.CurrentCulture;
@@ -1347,7 +1318,7 @@ namespace pos
             }
             this.Controls.Clear();
             InitializeComponent();
-            load_modules();
+            ////load_modules();
         }
 
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1361,7 +1332,7 @@ namespace pos
             }
             this.Controls.Clear();
             InitializeComponent();
-            load_modules();
+            //load_modules();
         }
 
         frm_warehouse_report warehousefrm;
@@ -2799,6 +2770,18 @@ namespace pos
         {
             var form = new pos.Accounts.Reconciliation.FrmJournalReconciliation();
             form.Show();
+        }
+
+        private void MovingItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Reports.Products.Inventory.FrmMovingItemsReport();
+            frm.ShowDialog(this);
+        }
+
+        private void NonMovingItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new pos.Reports.Products.Inventory.FrmNonMovingItemsReport();
+            frm.ShowDialog(this);
         }
     }
 }

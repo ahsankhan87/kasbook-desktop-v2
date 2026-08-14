@@ -113,6 +113,7 @@
             this.LoadPOToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PrinttoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ForeignPurchasetoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.PurchaseReturnToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cmb_payment_terms = new System.Windows.Forms.ComboBox();
@@ -638,7 +639,8 @@
             this.HistoryToolStripButton,
             this.LoadPOToolStripButton,
             this.PrinttoolStripButton,
-            this.ForeignPurchasetoolStripButton});
+            this.ForeignPurchasetoolStripButton,
+            this.PurchaseReturnToolStripButton});
             this.PurchaseToolStrip.Name = "PurchaseToolStrip";
             // 
             // NewToolStripButton
@@ -702,6 +704,12 @@
             resources.ApplyResources(this.ForeignPurchasetoolStripButton, "ForeignPurchasetoolStripButton");
             this.ForeignPurchasetoolStripButton.Name = "ForeignPurchasetoolStripButton";
             this.ForeignPurchasetoolStripButton.Click += new System.EventHandler(this.ForeignPurchasetoolStripButton_Click);
+            // 
+            // PurchaseReturnToolStripButton
+            // 
+            resources.ApplyResources(this.PurchaseReturnToolStripButton, "PurchaseReturnToolStripButton");
+            this.PurchaseReturnToolStripButton.Name = "PurchaseReturnToolStripButton";
+            this.PurchaseReturnToolStripButton.Click += new System.EventHandler(this.PurchaseReturnToolStripButton_Click);
             // 
             // groupBox4
             // 
@@ -1345,5 +1353,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmb_currency;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ToolStripButton PurchaseReturnToolStripButton;
     }
 }

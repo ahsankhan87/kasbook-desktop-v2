@@ -557,18 +557,14 @@ namespace POS.DLL
                 return deleteCommand.ExecuteNonQuery();
             }
         }
-        private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string invoiceNo, string tableName)
+        private static int DeleteOptionalPaymentTransactionRecords(SqlConnection cn, SqlTransaction transaction, string tableName, string invoiceNo)
         {
-            using (SqlCommand countCommand = new SqlCommand($"SELECT COUNT(1) FROM {tableName} WHERE InvoiceNo = @invoice_no AND branch_id = @branch_id", cn, transaction))
+            using (SqlCommand deleteCommand = new SqlCommand($"DELETE FROM {tableName} WHERE InvoiceNo = @invoice_no AND branch_id = @branch_id", cn, transaction))
             {
-                countCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
-                countCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
-
-                if (Convert.ToInt32(countCommand.ExecuteScalar()) <= 0)
-                    return 0;
+                deleteCommand.Parameters.Add("@invoice_no", SqlDbType.NVarChar).Value = invoiceNo;
+                deleteCommand.Parameters.Add("@branch_id", SqlDbType.Int).Value = UsersModal.logged_in_branch_id;
+                return deleteCommand.ExecuteNonQuery();
             }
-
-            return DeletePaymentTransactionRecords(cn, transaction, tableName, invoiceNo);
         }
 
     }

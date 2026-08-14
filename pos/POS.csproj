@@ -1180,6 +1180,18 @@
     <Compile Include="Reports\Products\Inventory\FrmLowStockReport.Designer.cs">
       <DependentUpon>FrmLowStockReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Products\Inventory\FrmMovingItemsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Products\Inventory\FrmMovingItemsReport.Designer.cs">
+      <DependentUpon>FrmMovingItemsReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Products\Inventory\FrmNonMovingItemsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Products\Inventory\FrmNonMovingItemsReport.Designer.cs">
+      <DependentUpon>FrmNonMovingItemsReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Products\Inventory\InventoryReportQOH.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2591,6 +2603,12 @@
     <EmbeddedResource Include="Reports\Products\Inventory\FrmLowStockReport.resx">
       <DependentUpon>FrmLowStockReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Products\Inventory\FrmMovingItemsReport.resx">
+      <DependentUpon>FrmMovingItemsReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Products\Inventory\FrmNonMovingItemsReport.resx">
+      <DependentUpon>FrmNonMovingItemsReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\Inventory\InventoryReportQOH.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InventoryReportQOH.cs</LastGenOutput>
@@ -2911,6 +2929,8 @@
     <None Include="Reports\Financial\QUICK_START_GUIDE.md" />
     <None Include="Reports\Financial\README_TrialBalanceReport.md" />
     <None Include="Reports\Financial\VISUAL_PREVIEW_TrialBalance.md" />
+    <None Include="Reports\Products\Inventory\IMPLEMENTATION_CHECKLIST.md" />
+    <None Include="Reports\Products\Inventory\MOVING_ITEMS_REPORT_README.md" />
     <None Include="Reports\Products\Products_dataset.xsc">
       <DependentUpon>Products_dataset.xsd</DependentUpon>
     </None>

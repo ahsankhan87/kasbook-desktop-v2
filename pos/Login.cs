@@ -32,8 +32,6 @@ namespace pos
         
         private void Frm_Login_Load(object sender, EventArgs e)
         {
-            StyleLoginForm();
-
             TxtUsername.Focus();
             this.ActiveControl = TxtUsername;
             ActivateTxtUsername();
@@ -102,6 +100,10 @@ namespace pos
             label7.ForeColor = AppTheme.TextPrimary;
             label7.BackColor = AppTheme.Surface;
             label7.Text      = "Sign In";
+
+            // v3.0 Subtitle
+            lblVersionSubtitle.ForeColor = AppTheme.TextSecondary;
+            lblVersionSubtitle.BackColor = AppTheme.Surface;
 
             // Input panels — set to inactive state initially
             StyleInputPanel(panel3, TxtUsername, active: false);
@@ -386,13 +388,19 @@ namespace pos
 
         private async void BtnLogin_Click(object sender, EventArgs e)
         {
-            using (pos.UI.Busy.BusyScope.Show(this, "Signing in..."))
+            // Disable button to prevent double-click
+            BtnLogin.Enabled = false;
+            BtnLogin.Text = "Signing in...";
+
+            try
             {
-                try
+                using (pos.UI.Busy.BusyScope.Show(this, "Signing in..."))
                 {
-                    // Run heavy/IO work off the UI thread.
-                    var loginResult = await Task.Run(() =>
+                    try
                     {
+                        // Run heavy/IO work off the UI thread.
+                        var loginResult = await Task.Run(() =>
+                        {
                         // ---------- NOTE ----------
                         // This block MUST NOT touch any UI components.
                         // --------------------------
@@ -683,11 +691,22 @@ namespace pos
                     this.Hide();
                     var frm_main_obj = new frm_main();
                     frm_main_obj.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred during login: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // Re-enable button on error
+                        BtnLogin.Enabled = true;
+                        BtnLogin.Text = "Sign In";
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred during login: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Login failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Re-enable button on error
+                BtnLogin.Enabled = true;
+                BtnLogin.Text = "Sign In";
             }
         }
 
@@ -735,6 +754,15 @@ namespace pos
         private void TxtPassword_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void TxtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            // When enter key is pressed in the password field, trigger the login button click event
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnLogin_Click(sender, e);
+            }
         }
     }
 }

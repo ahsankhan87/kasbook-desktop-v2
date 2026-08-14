@@ -1418,6 +1418,10 @@ namespace pos
                     categoriesDataGridView.Focus();
                     groupsDataGridView.Focus();
                 }
+                if (e.Control && e.Alt && e.KeyCode == Keys.R)
+                {
+                    PurchaseReturnToolStripButton.PerformClick();
+                }
             }
             catch (Exception ex)
             {
@@ -1458,6 +1462,7 @@ namespace pos
                 //cmb_suppliers.SelectedValue = 0;
                 //cmb_suppliers.Refresh();
                 //cmb_categories.SelectedValue = 0;
+                PurchaseReturnToolStripButton.Enabled = false;
                 cmb_employees.SelectedValue = 0;
                 cmb_purchase_type.SelectedValue = "Cash";
                 //cmb_brands.SelectedValue = 0;
@@ -1815,6 +1820,7 @@ namespace pos
                     _editingHoldPurchase = isHoldInvoice;
                     _editingInvoiceNo = invoice_no;
                     PrinttoolStripButton.Enabled = !isHoldInvoice;
+                    PurchaseReturnToolStripButton.Enabled = true;
                 }
 
                 if (_dt != null && _dt.Rows.Count > 0)
@@ -2785,7 +2791,7 @@ namespace pos
                     if (result == DialogResult.Yes)
                     {
                         // CHECK PERIOD LOCK BEFORE SAVING
-                        DateTime purchaseDate = DateTime.Parse(txt_purchase_date.Text);
+                        DateTime purchaseDate = DateTime.ParseExact(txt_purchase_date.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         FinancialPeriodBLL periodBll = new FinancialPeriodBLL();
                         if (periodBll.IsPeriodLocked(purchaseDate))
                         {
@@ -2972,6 +2978,20 @@ namespace pos
 
                             if (purchase_id > 0)
                             {
+                                // If converting hold purchase to regular purchase, delete the hold purchase record
+                                if (_editingHoldPurchase && !string.IsNullOrWhiteSpace(_editingInvoiceNo))
+                                {
+                                    try
+                                    {
+                                        purchasesObj.DeleteHoldPurchases(_editingInvoiceNo);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        // Log the error but don't fail the entire operation
+                                        System.Diagnostics.Debug.WriteLine($"Warning: Failed to delete hold purchase {_editingInvoiceNo}: {ex.Message}");
+                                    }
+                                }
+
                                 UiMessages.ShowInfo(
                                     (isEditingPurchase ? "Purchase updated successfully. Invoice: " : "Purchase created successfully. Invoice: ") + invoice_no,
                                     (isEditingPurchase ? "تم تحديث عملية الشراء بنجاح. رقم الفاتورة: " : "تم إنشاء عملية الشراء بنجاح. رقم الفاتورة: ") + invoice_no,
@@ -3827,6 +3847,22 @@ namespace pos
             }
 
             return true;
+        }
+
+        private void PurchaseReturnToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txt_invoice_no.Text))
+            {
+                using (BusyScope.Show(this, UiMessages.T("Loading...", "تحميل...")))
+                {
+                    using (frm_purchase_return obj = new frm_purchase_return(txt_invoice_no.Text))
+                    {
+                        obj.ShowDialog();
+                        //obj.LoadSalesReturnGrid(); // send print direct to printer without showing dialog
+                        obj.Close();
+                    }
+                }
+            }
         }
     }
 }

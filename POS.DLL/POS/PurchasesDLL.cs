@@ -843,7 +843,14 @@ namespace POS.DLL
 
                         if (ratio >= 1m)
                         {
-                            PostResult result = journalsDal.ReverseJournalVoucher(originalVoucherId, purchaseHeader.purchase_date, reason, UsersModal.logged_in_userid);
+                            PostResult result = journalsDal.ReverseJournalVoucher(
+                                originalVoucherId, 
+                                purchaseHeader.purchase_date, 
+                                reason, 
+                                UsersModal.logged_in_userid,
+                                purchaseHeader.invoice_no,
+                                purchaseHeader.invoice_no
+                                );
                             posted = result != null && result.Success;
                         }
                         else if (ratio > 0m)

@@ -192,10 +192,11 @@ namespace pos
                     string userRemarks = GetEffectiveRemarks();
 
                     string ledgerInvoiceNo = string.IsNullOrWhiteSpace(appliedInvoiceNo) ? _invoice_no : appliedInvoiceNo;
-                    string journalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, false, _invoice_no, false, _supplier_name);
-                    string ledgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, false, _supplier_name);
-                    string discountJournalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, false, _invoice_no, true, _supplier_name);
-                    string discountLedgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, true, _supplier_name);
+                     // For bank payments, include payment reference in the bank account description for proper deletion tracking
+                     string journalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, isBankPayment, _invoice_no, false, _supplier_name);
+                     string ledgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, false, _supplier_name);
+                     string discountJournalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, isBankPayment, _invoice_no, true, _supplier_name);
+                     string discountLedgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, true, _supplier_name);
 
                     List<JVLineModel> lines = new List<JVLineModel>();
                     lines.Add(new JVLineModel

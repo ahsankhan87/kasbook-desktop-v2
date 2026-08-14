@@ -221,6 +221,106 @@ namespace pos.Security.Authorization
         public const string Discounts_ManageSchemes    = "discounts.manageschemes";
         public const string Discounts_ApproveOverride  = "discounts.approveoverride";
         public const string Discounts_ViewReports      = "discounts.viewreports";
+
+        // Stock Management
+        public const string StockTransfers_View        = "transfers.view";
+
+        // Company & Settings
+        public const string CompanySetup_View          = "company.setup.view";
+        public const string CompanySetup_Edit          = "company.setup.edit";
+
+        // Transactions Setup (Payment Terms, Methods, etc.)
+        public const string TransactionsSetup_View     = "transactions.setup.view";
+        public const string PaymentTerms_View          = "paymentterms.view";
+        public const string PaymentMethods_View        = "paymentmethods.view";
+        public const string Currencies_View            = "currencies.view";
+        public const string Currencies_Edit            = "currencies.edit";
+        public const string TaxesVAT_View              = "taxes.vat.view";
+        public const string TaxesVAT_Edit              = "taxes.vat.edit";
+
+        // Inventory Management 
+        public const string ProductGroups_View         = "productgroups.view";
+        public const string ProductGroups_Edit         = "productgroups.edit";
+        public const string AlternateProducts_View     = "alternateproducts.view";
+        public const string AlternateProducts_Edit     = "alternateproducts.edit";
+        public const string ProductLocationTransfer_Create = "productlocationtransfer.create";
+        public const string ProductLocationTransfer_View = "productlocationtransfer.view";
+        public const string StockCheckAdjustment_View  = "stockcheck.adjustment.view";
+        public const string StockCheckAdjustment_Create = "stockcheck.adjustment.create";
+        public const string EditItemData_View          = "edititemdata.view";
+        public const string LowStockInventory_View     = "lowstockinventory.view";
+        public const string InventoryValuation_View    = "inventoryvaluation.view";
+        public const string InventoryValuation_Settings = "inventoryvaluation.settings";
+        public const string InventoryMovingItems_View  = "inventory.movingitems.view";
+        public const string InventoryNonMovingItems_View = "inventory.nonmovingitems.view";
+
+        // Reports - Sales
+        public const string SalesInvoiceReport_View    = "reports.salesinvoice.view";
+        public const string SalesInvoiceReport_Print   = "reports.salesinvoice.print";
+        public const string DailySalesReport_View      = "reports.dailysales.view";
+        public const string SalesSummary_View          = "reports.salessummary.view";
+        public const string CategoryWiseSales_View     = "reports.categorywisesales.view";
+        public const string ProductWiseSales_View      = "reports.productwisesales.view";
+        public const string CustomerWiseSales_View     = "reports.customerwisesales.view";
+
+        // Reports - Purchases
+        public const string PurchaseInvoiceReport_View = "reports.purchaseinvoice.view";
+        public const string PurchaseReport_View        = "reports.purchase.view";
+        public const string PurchaseSummary_View       = "reports.purchasesummary.view";
+
+        // Reports - Finance
+        public const string GeneralLedger_View         = "reports.generalledger.view";
+        public const string TaxTrialBalance_View       = "reports.taxtrial balance.view";
+        public const string SalesTaxSummary_View       = "reports.salestaxsummary.view";
+        public const string AccountsReceivable_View    = "reports.accountsreceivable.view";
+        public const string AccountsPayable_View       = "reports.accountspayable.view";
+        public const string BankReconciliation_View    = "reports.bankreconciliation.view";
+        public const string CashBook_View              = "reports.cashbook.view";
+        public const string DailyCashBankReport_View   = "reports.dailycashbank.view";
+        public const string CashFlowManagement_View    = "reports.cashflow.view";
+        public const string CashManagement_View        = "reports.cashmanagement.view";
+        public const string DepartmentalPL_View        = "reports.departmentalpl.view";
+        public const string IncomeStatement_View       = "reports.incomestatement.view";
+
+        // Employees/HR
+        public const string Employees_View             = "employees.view";
+        public const string Employees_Create           = "employees.create";
+        public const string Employees_Edit             = "employees.edit";
+
+        // Fixed Assets
+        public const string FixedAssets_View           = "fixedassets.view";
+        public const string FixedAssets_Create         = "fixedassets.create";
+
+        // Cost Centers
+        public const string CostCenters_View           = "costcenters.view";
+        public const string CostCenters_Create         = "costcenters.create";
+        public const string CostCenters_Edit           = "costcenters.edit";
+
+        // Budget
+        public const string Budget_View                = "budget.view";
+        public const string Budget_Create              = "budget.create";
+        public const string BudgetVsActual_View        = "budget.vsactual.view";
+
+        // Allocation Rules
+        public const string AllocationRules_View       = "allocationrules.view";
+        public const string AllocationRules_Create     = "allocationrules.create";
+
+        // Financial Period Management
+        public const string FinancialPeriodManagement_View = "financialperiod.management.view";
+
+        // Reconciliation
+        public const string Reconciliation_View        = "reconciliation.view";
+
+        // Import/Export
+        public const string ImportData_View            = "importdata.view";
+
+        // Configuration
+        public const string Configuration_View         = "configuration.view";
+
+        
+        // Database Backup
+        public const string DatabaseBackup_View        = "database.backup.view";
+        public const string DatabaseBackup_Execute     = "database.backup.execute";
     }
 
     public sealed class UserIdentity

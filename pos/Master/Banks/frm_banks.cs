@@ -132,7 +132,7 @@ namespace pos.Master.Banks
             cmb_GL_account_code.ValueMember = "id";
             cmb_GL_account_code.DataSource = accounts;
 
-            cmb_GL_account_code.SelectedValue = "19"; // 19 is the default Bank Account id in acc_accounts table
+            cmb_GL_account_code.SelectedValue = "3"; // 3 is the default Bank Account id in acc_accounts table
 
         }
 

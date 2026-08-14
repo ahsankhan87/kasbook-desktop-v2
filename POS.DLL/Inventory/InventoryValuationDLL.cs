@@ -285,7 +285,7 @@ namespace POS.DLL.Inventory
         {
             string sql = $@"
                 SELECT TOP {topN}
-                    ISNULL(s.name, 'Unassigned') AS supplier_name,
+                    ISNULL(s.first_name, 'Unassigned') AS supplier_name,
                     SUM(ISNULL(ps.branch_qty, 0) * p.avg_cost) AS total_value
                 FROM pos_products p
                 LEFT JOIN pos_suppliers s ON s.id = p.supplier_id
@@ -296,7 +296,7 @@ namespace POS.DLL.Inventory
                     GROUP BY item_number
                 ) ps ON ps.item_number = p.item_number
                 WHERE p.deleted = 0
-                GROUP BY s.name
+                GROUP BY s.first_name
                 ORDER BY total_value DESC";
 
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
@@ -357,7 +357,7 @@ namespace POS.DLL.Inventory
             const string sql = @"
                 SELECT
                     p.id AS product_id,
-                    SUM(sd.qty_sold * sd.unit_price) AS sales_value
+                    SUM(sd.quantity_sold * sd.unit_price) AS sales_value
                 FROM pos_sales_items sd
                 INNER JOIN pos_sales sh ON sh.id = sd.sales_id
                 INNER JOIN pos_products p ON p.item_number = sd.item_number

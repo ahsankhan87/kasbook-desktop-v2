@@ -251,9 +251,9 @@ namespace pos
 
                     string userRemarks = GetEffectiveRemarks();
                     string ledgerInvoiceNo = string.IsNullOrWhiteSpace(appliedInvoiceNo) ? _invoice_no : appliedInvoiceNo;
-                    string journalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, false, _invoice_no, false, _customer_name);
+                    string journalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, isBankPayment, _invoice_no, false, _customer_name);
                     string ledgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, false, _customer_name);
-                    string discountJournalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, false, _invoice_no, true, _customer_name);
+                    string discountJournalDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, isBankPayment, _invoice_no, true, _customer_name);
                     string discountLedgerDescription = BuildPaymentDescription(appliedInvoiceNo, userRemarks, isBankPayment, bankName, true, _invoice_no, true, _customer_name);
 
                     List<JVLineModel> lines = new List<JVLineModel>();
