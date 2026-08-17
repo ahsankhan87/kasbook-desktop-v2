@@ -2,6 +2,7 @@
 using pos.UI.Busy;
 using pos.Security.Authorization;
 using POS.BLL;
+using POS.BLL.Inventory;
 using POS.Core;
 using System;
 using System.Data;
@@ -504,6 +505,15 @@ namespace pos
             DataRow row = _virtualProductPage.Rows[e.RowIndex];
             string columnName = grid_search_products.Columns[e.ColumnIndex].Name;
 
+            if (IsCostColumnName(columnName))
+            {
+                string itemNumber = row.Table.Columns.Contains("item_number") && row["item_number"] != DBNull.Value && row["item_number"] != null
+                    ? Convert.ToString(row["item_number"])
+                    : string.Empty;
+                e.Value = InventoryValuationHelper.GetEffectiveProductCost(row, 0, itemNumber);
+                return;
+            }
+
             if (row.Table.Columns.Contains(columnName))
             {
                 e.Value = row[columnName];
@@ -512,6 +522,14 @@ namespace pos
             {
                 e.Value = null;
             }
+        }
+
+        private bool IsCostColumnName(string columnName)
+        {
+            return string.Equals(columnName, "avg_cost", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(columnName, "cost_price", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(columnName, "unit_cost", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(columnName, "effective_cost", StringComparison.OrdinalIgnoreCase);
         }
 
         private DataRow GetCurrentVirtualRow()

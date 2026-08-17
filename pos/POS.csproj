@@ -2556,6 +2556,9 @@
     <EmbeddedResource Include="Reports\Accounts\FrmCustomerSubLedger.resx">
       <DependentUpon>FrmCustomerSubLedger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmDailyCashBankReport.resx">
+      <DependentUpon>FrmDailyCashBankReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Banks\BankLedger.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BankLedger.cs</LastGenOutput>

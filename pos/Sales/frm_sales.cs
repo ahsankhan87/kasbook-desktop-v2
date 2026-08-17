@@ -674,7 +674,7 @@ namespace pos
                         grid_sales.Rows[RowIndex].Cells["code"].Value = myProductView["code"].ToString();
                         grid_sales.Rows[RowIndex].Cells["name"].Value = myProductView["name"].ToString();
                         grid_sales.Rows[RowIndex].Cells["qty"].Value = qty;
-                        grid_sales.Rows[RowIndex].Cells["cost_price"].Value = Math.Round(Decimal.Parse(myProductView["avg_cost"].ToString()), 2);
+                        grid_sales.Rows[RowIndex].Cells["cost_price"].Value = Math.Round(Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(myProductView, UsersModal.logged_in_branch_id, Convert.ToString(myProductView["item_number"]))), 4); //Math.Round(Decimal.Parse(myProductView["avg_cost"].ToString()), 2);
                         grid_sales.Rows[RowIndex].Cells["unit_price"].Value = Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2);
                         int? _schemeId = (myProductView["discount_scheme_id"] != DBNull.Value && myProductView["discount_scheme_id"] != null) ? (int?)Convert.ToInt32(myProductView["discount_scheme_id"]) : null;
                         var _dr = _discountEngine.ResolveItemDiscount(_schemeId, qty, (double)Math.Round(Decimal.Parse(myProductView["unit_price"].ToString()), 2));
@@ -819,7 +819,7 @@ namespace pos
                         int id = Convert.ToInt32(myProductView["id"]);
                         string code = myProductView["code"].ToString();
                         string name = myProductView["name"].ToString();
-                        double cost_price = Math.Round(Convert.ToDouble(myProductView["avg_cost"]), 2);
+                        double cost_price = Math.Round(Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(myProductView, UsersModal.logged_in_branch_id, Convert.ToString(myProductView["item_number"]))), 4);
 
                         int? _schemeId = (myProductView["discount_scheme_id"] != DBNull.Value && myProductView["discount_scheme_id"] != null)
                             ? (int?)Convert.ToInt32(myProductView["discount_scheme_id"]) : null;

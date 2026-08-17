@@ -28,14 +28,14 @@ namespace pos.Reports.Sales
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmb_payment_method = new System.Windows.Forms.ComboBox();
             this.cmb_users = new System.Windows.Forms.ComboBox();
@@ -119,16 +119,15 @@ namespace pos.Reports.Sales
             // 
             // cmb_payment_method
             // 
-            this.cmb_payment_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_payment_method.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.cmb_payment_method.FormattingEnabled = true;
-            this.cmb_payment_method.Location = new System.Drawing.Point(455, 107);
+            this.cmb_payment_method.Location = new System.Drawing.Point(135, 106);
             this.cmb_payment_method.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_payment_method.Name = "cmb_payment_method";
-            this.cmb_payment_method.Size = new System.Drawing.Size(186, 28);
+            this.cmb_payment_method.Size = new System.Drawing.Size(209, 28);
             this.cmb_payment_method.TabIndex = 55;
             // 
             // cmb_users
@@ -166,7 +165,7 @@ namespace pos.Reports.Sales
             // 
             this.chk_ShowZatcaInvoice.AutoSize = true;
             this.chk_ShowZatcaInvoice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ShowZatcaInvoice.Location = new System.Drawing.Point(679, 111);
+            this.chk_ShowZatcaInvoice.Location = new System.Drawing.Point(761, 109);
             this.chk_ShowZatcaInvoice.Margin = new System.Windows.Forms.Padding(4);
             this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
             this.chk_ShowZatcaInvoice.Size = new System.Drawing.Size(107, 24);
@@ -233,7 +232,7 @@ namespace pos.Reports.Sales
             // btn_print
             // 
             this.btn_print.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_print.Location = new System.Drawing.Point(993, 56);
+            this.btn_print.Location = new System.Drawing.Point(993, 55);
             this.btn_print.Margin = new System.Windows.Forms.Padding(4);
             this.btn_print.Name = "btn_print";
             this.btn_print.Size = new System.Drawing.Size(146, 34);
@@ -245,7 +244,7 @@ namespace pos.Reports.Sales
             // btn_export
             // 
             this.btn_export.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_export.Location = new System.Drawing.Point(993, 12);
+            this.btn_export.Location = new System.Drawing.Point(993, 98);
             this.btn_export.Margin = new System.Windows.Forms.Padding(4);
             this.btn_export.Name = "btn_export";
             this.btn_export.Size = new System.Drawing.Size(146, 34);
@@ -257,7 +256,7 @@ namespace pos.Reports.Sales
             // btn_search
             // 
             this.btn_search.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_search.Location = new System.Drawing.Point(993, 100);
+            this.btn_search.Location = new System.Drawing.Point(993, 12);
             this.btn_search.Margin = new System.Windows.Forms.Padding(4);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(146, 34);
@@ -310,7 +309,7 @@ namespace pos.Reports.Sales
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(352, 108);
+            this.label11.Location = new System.Drawing.Point(13, 108);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 20);
@@ -504,8 +503,8 @@ namespace pos.Reports.Sales
             // total_items
             // 
             this.total_items.DataPropertyName = "total_items";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.total_items.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.total_items.DefaultCellStyle = dataGridViewCellStyle9;
             this.total_items.FillWeight = 50F;
             this.total_items.HeaderText = "Items";
             this.total_items.MinimumWidth = 6;
@@ -515,10 +514,10 @@ namespace pos.Reports.Sales
             // cost_total
             // 
             this.cost_total.DataPropertyName = "cost_total";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.cost_total.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.cost_total.DefaultCellStyle = dataGridViewCellStyle10;
             this.cost_total.FillWeight = 70F;
             this.cost_total.HeaderText = "Cost Total";
             this.cost_total.MinimumWidth = 6;
@@ -528,9 +527,9 @@ namespace pos.Reports.Sales
             // subtotal
             // 
             this.subtotal.DataPropertyName = "subtotal";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.subtotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            this.subtotal.DefaultCellStyle = dataGridViewCellStyle11;
             this.subtotal.FillWeight = 80F;
             this.subtotal.HeaderText = "Subtotal";
             this.subtotal.MinimumWidth = 6;
@@ -540,9 +539,9 @@ namespace pos.Reports.Sales
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle12;
             this.discount_value.FillWeight = 70F;
             this.discount_value.HeaderText = "Discount";
             this.discount_value.MinimumWidth = 6;
@@ -552,9 +551,9 @@ namespace pos.Reports.Sales
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.vat.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            this.vat.DefaultCellStyle = dataGridViewCellStyle13;
             this.vat.FillWeight = 60F;
             this.vat.HeaderText = "VAT";
             this.vat.MinimumWidth = 6;
@@ -564,9 +563,9 @@ namespace pos.Reports.Sales
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.total.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N2";
+            this.total.DefaultCellStyle = dataGridViewCellStyle14;
             this.total.FillWeight = 80F;
             this.total.HeaderText = "Total";
             this.total.MinimumWidth = 6;
@@ -576,9 +575,9 @@ namespace pos.Reports.Sales
             // total_with_vat
             // 
             this.total_with_vat.DataPropertyName = "total_with_vat";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N2";
+            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle15;
             this.total_with_vat.FillWeight = 80F;
             this.total_with_vat.HeaderText = "Total (VAT)";
             this.total_with_vat.MinimumWidth = 6;
@@ -588,9 +587,9 @@ namespace pos.Reports.Sales
             // profit
             // 
             this.profit.DataPropertyName = "profit";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.profit.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N2";
+            this.profit.DefaultCellStyle = dataGridViewCellStyle16;
             this.profit.FillWeight = 70F;
             this.profit.HeaderText = "Profit";
             this.profit.MinimumWidth = 6;

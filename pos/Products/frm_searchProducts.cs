@@ -1,4 +1,5 @@
 ﻿using POS.BLL;
+using POS.BLL.Inventory;
 using POS.DLL;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,16 @@ namespace pos
 
             DataRow row = _virtualProductPage.Rows[e.RowIndex];
             string columnName = grid_search_products.Columns[e.ColumnIndex].Name;
+
+            if (IsCostColumnName(columnName))
+            {
+                string itemNumber = row.Table.Columns.Contains("item_number") && row["item_number"] != DBNull.Value && row["item_number"] != null
+                    ? Convert.ToString(row["item_number"])
+                    : string.Empty;
+                e.Value = InventoryValuationHelper.GetEffectiveProductCost(row, 0, itemNumber);
+                return;
+            }
+
             if (row.Table.Columns.Contains(columnName))
             {
                 e.Value = row[columnName];
@@ -75,6 +86,14 @@ namespace pos
             {
                 e.Value = null;
             }
+        }
+
+        private bool IsCostColumnName(string columnName)
+        {
+            return string.Equals(columnName, "avg_cost", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(columnName, "cost_price", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(columnName, "unit_cost", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(columnName, "effective_cost", StringComparison.OrdinalIgnoreCase);
         }
 
         private void BindVirtualPage(DataTable dt)
@@ -384,10 +403,21 @@ namespace pos
         {
             if (grid_search_products.RowCount > 0)
             {
-                string item_number = grid_search_products.CurrentRow.Cells["item_number"].Value.ToString();
-                string product_name = grid_search_products.CurrentRow.Cells["name"].Value.ToString();
-                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number,product_name);
+                var selectedRow = GetCurrentVirtualRow();
+                if (selectedRow == null)
+                    return;
 
+                string item_number = selectedRow.Table.Columns.Contains("item_number") && selectedRow["item_number"] != DBNull.Value && selectedRow["item_number"] != null
+                    ? selectedRow["item_number"].ToString()
+                    : string.Empty;
+                string product_name = selectedRow.Table.Columns.Contains("name") && selectedRow["name"] != DBNull.Value && selectedRow["name"] != null
+                    ? selectedRow["name"].ToString()
+                    : string.Empty;
+
+                if (string.IsNullOrEmpty(item_number))
+                    return;
+
+                frm_productsMovements frm_prod_move_obj = new frm_productsMovements(item_number, product_name);
                 frm_prod_move_obj.ShowDialog();
             }
             else
@@ -397,6 +427,22 @@ namespace pos
                     "لم يتم اختيار صنف.",
                     captionEn: "Products",
                     captionAr: "الأصناف");
+            }
+        }
+
+        private void grid_search_products_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (grid_search_products.Focused && grid_search_products.RowCount > 0)
+                {
+                    var selectedRow = GetCurrentVirtualRow();
+                    if (selectedRow == null)
+                        return;
+                }
+            }
+            catch
+            {
             }
         }
 

@@ -136,21 +136,21 @@ namespace pos
                 info.postalCode = txt_postalCode.Text.Trim();
                 info.countryName = txt_countryName.Text.Trim();
                 info.useZatcaEInvoice = chk_use_zatca_e_invoice.Checked;
-                info.tax_acc_id = Convert.ToInt32(cmb_tax_acc_id.SelectedValue.ToString());
-                info.cash_acc_id = Convert.ToInt32(cmb_cash_acc_id.SelectedValue.ToString());
-                info.inventory_acc_id = Convert.ToInt32(cmb_inventory_acc_id.SelectedValue.ToString());
-                info.payable_acc_id = Convert.ToInt32(cmb_payable_acc_id.SelectedValue.ToString());
-                info.purchases_acc_id = Convert.ToInt32(cmb_purchases_acc_id.SelectedValue.ToString());
-                info.purchases_discount_acc_id = Convert.ToInt32(cmb_purchases_disc_acc_id.SelectedValue.ToString());
-                info.purchases_return_acc_id = Convert.ToInt32(cmb_purchases_return_acc_id.SelectedValue.ToString());
-                info.receivable_acc_id = Convert.ToInt32(cmb_receivable_acc_id.SelectedValue.ToString());
-                info.sales_acc_id = Convert.ToInt32(cmb_sales_acc_id.SelectedValue.ToString());
-                info.sales_discount_acc_id = Convert.ToInt32(cmb_sales_disc_acc_id.SelectedValue.ToString());
-                info.sales_return_acc_id = Convert.ToInt32(cmb_sales_return_acc_id.SelectedValue.ToString());
-                info.sales_return_acc_id = Convert.ToInt32(cmb_sales_return_acc_id.SelectedValue.ToString());
-                info.sales_return_acc_id = Convert.ToInt32(cmb_sales_return_acc_id.SelectedValue.ToString());
-                info.item_variance_acc_id = Convert.ToInt32(cmb_item_variance_acc_id.SelectedValue.ToString());
-                info.commission_acc_id = Convert.ToInt32(cmb_commission_acc_id.SelectedValue.ToString());
+                //info.tax_acc_id = Convert.ToInt32(cmb_tax_acc_id.SelectedValue.ToString());
+                //info.cash_acc_id = Convert.ToInt32(cmb_cash_acc_id.SelectedValue.ToString());
+                //info.inventory_acc_id = Convert.ToInt32(cmb_inventory_acc_id.SelectedValue.ToString());
+                //info.payable_acc_id = Convert.ToInt32(cmb_payable_acc_id.SelectedValue.ToString());
+                //info.purchases_acc_id = Convert.ToInt32(cmb_purchases_acc_id.SelectedValue.ToString());
+                //info.purchases_discount_acc_id = Convert.ToInt32(cmb_purchases_disc_acc_id.SelectedValue.ToString());
+                //info.purchases_return_acc_id = Convert.ToInt32(cmb_purchases_return_acc_id.SelectedValue.ToString());
+                //info.receivable_acc_id = Convert.ToInt32(cmb_receivable_acc_id.SelectedValue.ToString());
+                //info.sales_acc_id = Convert.ToInt32(cmb_sales_acc_id.SelectedValue.ToString());
+                //info.sales_discount_acc_id = Convert.ToInt32(cmb_sales_disc_acc_id.SelectedValue.ToString());
+                //info.sales_return_acc_id = Convert.ToInt32(cmb_sales_return_acc_id.SelectedValue.ToString());
+                //info.sales_return_acc_id = Convert.ToInt32(cmb_sales_return_acc_id.SelectedValue.ToString());
+                //info.sales_return_acc_id = Convert.ToInt32(cmb_sales_return_acc_id.SelectedValue.ToString());
+                //info.item_variance_acc_id = Convert.ToInt32(cmb_item_variance_acc_id.SelectedValue.ToString());
+                //info.commission_acc_id = Convert.ToInt32(cmb_commission_acc_id.SelectedValue.ToString());
 
                 // update static variable of E-Invoice usage
                 UsersModal.useZatcaEInvoice = chk_use_zatca_e_invoice.Checked;

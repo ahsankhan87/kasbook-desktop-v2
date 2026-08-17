@@ -46,7 +46,6 @@
             this.cmb_units = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grid_sales_report = new System.Windows.Forms.DataGridView();
@@ -81,7 +80,6 @@
             this.panel1.Controls.Add(this.cmb_units);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label1);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
@@ -120,6 +118,8 @@
             // chk_qty_on_hand
             // 
             resources.ApplyResources(this.chk_qty_on_hand, "chk_qty_on_hand");
+            this.chk_qty_on_hand.Checked = true;
+            this.chk_qty_on_hand.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_qty_on_hand.Name = "chk_qty_on_hand";
             this.chk_qty_on_hand.UseVisualStyleBackColor = true;
             // 
@@ -168,11 +168,6 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
             // 
             // label1
             // 
@@ -352,7 +347,6 @@
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chk_qty_on_hand;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_print;
         private System.Windows.Forms.ListBox lb_brands;
         private System.Windows.Forms.ListBox lb_category;

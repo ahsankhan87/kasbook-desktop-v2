@@ -138,6 +138,9 @@
   <data name="btn_save.Text" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="btn_save.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;btn_save.Name" xml:space="preserve">
     <value>btn_save</value>
   </data>

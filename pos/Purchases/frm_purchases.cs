@@ -867,7 +867,7 @@ namespace pos
                
                 foreach (DataRow myProductView in products_dt.Rows)
                 {
-                    double avg_cost = (myProductView["avg_cost"].ToString() != "" ? double.Parse(myProductView["avg_cost"].ToString()) : 0);
+                    double avg_cost = Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(myProductView, UsersModal.logged_in_branch_id, Convert.ToString(myProductView["item_number"]))); // (myProductView["avg_cost"].ToString() != "" ? double.Parse(myProductView["avg_cost"].ToString()) : 0);
                     double unit_price = (myProductView["unit_price"].ToString() != "" ? double.Parse(myProductView["unit_price"].ToString()) : 0);
                     double qty = Convert.ToDouble(myProductView["purchase_demand_qty"].ToString() == string.Empty || (decimal)myProductView["purchase_demand_qty"] == 0 ? "1" : myProductView["purchase_demand_qty"].ToString());
                     double total = qty * avg_cost;

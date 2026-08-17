@@ -64,12 +64,14 @@ namespace POS.BLL.Inventory
                         var layers = new InventoryCostingEngineDLL().GetFIFOLayers(productId, branchId > 0 ? branchId : UsersModal.logged_in_branch_id);
                         if (layers != null && layers.Count > 0)
                         {
-                            decimal totalRemainingQty = layers.Sum(l => l.RemainingQty);
-                            if (totalRemainingQty > 0m)
-                            {
-                                decimal totalRemainingValue = layers.Sum(l => l.RemainingQty * l.UnitCost);
-                                return Math.Round(totalRemainingValue / totalRemainingQty, 4, MidpointRounding.AwayFromZero);
-                            }
+                            var activeLayer = layers
+                                .Where(l => l.RemainingQty > 0m)
+                                .OrderBy(l => l.PurchaseDate)
+                                .ThenBy(l => l.LayerId)
+                                .FirstOrDefault();
+
+                            if (activeLayer != null && activeLayer.UnitCost > 0m)
+                                return Math.Round(activeLayer.UnitCost, 4, MidpointRounding.AwayFromZero);
                         }
                     }
                 }
