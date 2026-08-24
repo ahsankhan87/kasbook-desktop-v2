@@ -230,19 +230,6 @@
   <data name="label5.Text" xml:space="preserve">
     <value>لغة التطبيق</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>927, 451</value>
-  </data>
-  <data name="user_detail_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 422</value>
-  </data>
-  <data name="user_detail_tab.Text" xml:space="preserve">
-    <value>تفاصيل المستخدم</value>
-  </data>
   <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -315,29 +302,20 @@
   <data name="lbl_cpwd.Text" xml:space="preserve">
     <value>تأكيد كلمة المرور:</value>
   </data>
+  <data name="user_detail_tab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>919, 422</value>
+  </data>
+  <data name="user_detail_tab.Text" xml:space="preserve">
+    <value>تفاصيل المستخدم</value>
+  </data>
   <data name="module_permission_tab.Size" type="System.Drawing.Size, System.Drawing">
     <value>919, 422</value>
   </data>
   <data name="module_permission_tab.Text" xml:space="preserve">
     <value>إذن الوحدة النمطية</value>
   </data>
-  <data name="user_rights_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>919, 422</value>
-  </data>
-  <data name="user_rights_tab.Text" xml:space="preserve">
-    <value>حقوق</value>
-  </data>
   <data name="groupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>528, 22</value>
-  </data>
-  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 196</value>
-  </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>المشتريات</value>
   </data>
   <data name="chk_allow_credit_purchase.Location" type="System.Drawing.Point, System.Drawing">
     <value>182, 64</value>
@@ -375,14 +353,17 @@
   <data name="label14.Text" xml:space="preserve">
     <value>حد مبلغ الشراء:</value>
   </data>
+  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>528, 22</value>
+  </data>
+  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 196</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>المشتريات</value>
+  </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>مبيعات</value>
   </data>
   <data name="chk_allow_credit_sales.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 64</value>
@@ -420,6 +401,12 @@
   <data name="label3.Text" xml:space="preserve">
     <value>كلمه السر:</value>
   </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>مبيعات</value>
+  </data>
   <data name="txt_max_discount_amount.Location" type="System.Drawing.Point, System.Drawing">
     <value>635, 258</value>
   </data>
@@ -444,20 +431,17 @@
   <data name="txt_credit_sales_amt.Location" type="System.Drawing.Point, System.Drawing">
     <value>635, 235</value>
   </data>
-  <data name="user_commission.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="user_rights_tab.Size" type="System.Drawing.Size, System.Drawing">
     <value>919, 422</value>
   </data>
-  <data name="user_commission.Text" xml:space="preserve">
-    <value>عمولة</value>
+  <data name="user_rights_tab.Text" xml:space="preserve">
+    <value>حقوق</value>
   </data>
   <data name="btn_payment.Text" xml:space="preserve">
     <value>دفع</value>
   </data>
   <data name="btn_refresh.Text" xml:space="preserve">
     <value>ينعش</value>
-  </data>
-  <data name="grid_commission.Size" type="System.Drawing.Size, System.Drawing">
-    <value>917, 370</value>
   </data>
   <data name="entry_date.HeaderText" xml:space="preserve">
     <value>تاريخ</value>
@@ -476,6 +460,22 @@
   </data>
   <data name="description.HeaderText" xml:space="preserve">
     <value>وصف</value>
+  </data>
+  <data name="grid_commission.Size" type="System.Drawing.Size, System.Drawing">
+    <value>917, 370</value>
+  </data>
+  <data name="user_commission.Size" type="System.Drawing.Size, System.Drawing">
+    <value>919, 422</value>
+  </data>
+  <data name="user_commission.Text" xml:space="preserve">
+    <value>عمولة</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabControl1.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>927, 451</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>927, 451</value>

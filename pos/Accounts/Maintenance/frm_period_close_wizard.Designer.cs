@@ -17,6 +17,7 @@ namespace pos
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_period_close_wizard));
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabSteps = new System.Windows.Forms.TabControl();
             this.tabChecklist = new System.Windows.Forms.TabPage();
@@ -68,14 +69,8 @@ namespace pos
             // 
             // lblTitle
             // 
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Padding = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.lblTitle.Size = new System.Drawing.Size(984, 48);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Month-End Closing Wizard";
             // 
             // tabSteps
             // 
@@ -83,23 +78,16 @@ namespace pos
             this.tabSteps.Controls.Add(this.tabSummary);
             this.tabSteps.Controls.Add(this.tabAdjustments);
             this.tabSteps.Controls.Add(this.tabConfirm);
-            this.tabSteps.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabSteps.Location = new System.Drawing.Point(0, 48);
+            resources.ApplyResources(this.tabSteps, "tabSteps");
             this.tabSteps.Name = "tabSteps";
             this.tabSteps.SelectedIndex = 0;
-            this.tabSteps.Size = new System.Drawing.Size(984, 485);
-            this.tabSteps.TabIndex = 1;
             this.tabSteps.SelectedIndexChanged += new System.EventHandler(this.tabSteps_SelectedIndexChanged);
             // 
             // tabChecklist
             // 
             this.tabChecklist.Controls.Add(this.gridChecklist);
-            this.tabChecklist.Location = new System.Drawing.Point(4, 26);
+            resources.ApplyResources(this.tabChecklist, "tabChecklist");
             this.tabChecklist.Name = "tabChecklist";
-            this.tabChecklist.Padding = new System.Windows.Forms.Padding(8);
-            this.tabChecklist.Size = new System.Drawing.Size(976, 455);
-            this.tabChecklist.TabIndex = 0;
-            this.tabChecklist.Text = "Step 1 - Pre-Close Checklist";
             this.tabChecklist.UseVisualStyleBackColor = true;
             // 
             // gridChecklist
@@ -116,63 +104,58 @@ namespace pos
             this.colChecklistPending,
             this.colFixModule,
             this.colFixIssues});
-            this.gridChecklist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridChecklist.Location = new System.Drawing.Point(8, 8);
+            resources.ApplyResources(this.gridChecklist, "gridChecklist");
             this.gridChecklist.Name = "gridChecklist";
             this.gridChecklist.ReadOnly = true;
             this.gridChecklist.RowHeadersVisible = false;
             this.gridChecklist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridChecklist.Size = new System.Drawing.Size(960, 439);
-            this.gridChecklist.TabIndex = 0;
             this.gridChecklist.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridChecklist_CellContentClick);
             this.gridChecklist.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridChecklist_CellFormatting);
             // 
             // colChecklistKey
             // 
             this.colChecklistKey.DataPropertyName = "item_key";
-            this.colChecklistKey.HeaderText = "Key";
+            resources.ApplyResources(this.colChecklistKey, "colChecklistKey");
             this.colChecklistKey.Name = "colChecklistKey";
             this.colChecklistKey.ReadOnly = true;
-            this.colChecklistKey.Visible = false;
             // 
             // colChecklistItem
             // 
             this.colChecklistItem.DataPropertyName = "item_name";
-            this.colChecklistItem.HeaderText = "Checklist Item";
+            resources.ApplyResources(this.colChecklistItem, "colChecklistItem");
             this.colChecklistItem.Name = "colChecklistItem";
             this.colChecklistItem.ReadOnly = true;
             // 
             // colChecklistPassed
             // 
             this.colChecklistPassed.DataPropertyName = "is_passed";
-            this.colChecklistPassed.HeaderText = "Passed";
+            resources.ApplyResources(this.colChecklistPassed, "colChecklistPassed");
             this.colChecklistPassed.Name = "colChecklistPassed";
             this.colChecklistPassed.ReadOnly = true;
-            this.colChecklistPassed.Visible = false;
             // 
             // colChecklistStatus
             // 
-            this.colChecklistStatus.HeaderText = "Status";
+            resources.ApplyResources(this.colChecklistStatus, "colChecklistStatus");
             this.colChecklistStatus.Name = "colChecklistStatus";
             this.colChecklistStatus.ReadOnly = true;
             // 
             // colChecklistPending
             // 
             this.colChecklistPending.DataPropertyName = "pending_count";
-            this.colChecklistPending.HeaderText = "Pending Count";
+            resources.ApplyResources(this.colChecklistPending, "colChecklistPending");
             this.colChecklistPending.Name = "colChecklistPending";
             this.colChecklistPending.ReadOnly = true;
             // 
             // colFixModule
             // 
             this.colFixModule.DataPropertyName = "fix_module";
-            this.colFixModule.HeaderText = "Fix Module";
+            resources.ApplyResources(this.colFixModule, "colFixModule");
             this.colFixModule.Name = "colFixModule";
             this.colFixModule.ReadOnly = true;
             // 
             // colFixIssues
             // 
-            this.colFixIssues.HeaderText = "Fix Issues";
+            resources.ApplyResources(this.colFixIssues, "colFixIssues");
             this.colFixIssues.Name = "colFixIssues";
             this.colFixIssues.ReadOnly = true;
             this.colFixIssues.Text = "Fix Issues";
@@ -181,19 +164,13 @@ namespace pos
             // tabSummary
             // 
             this.tabSummary.Controls.Add(this.tableSummary);
-            this.tabSummary.Location = new System.Drawing.Point(4, 26);
+            resources.ApplyResources(this.tabSummary, "tabSummary");
             this.tabSummary.Name = "tabSummary";
-            this.tabSummary.Padding = new System.Windows.Forms.Padding(12);
-            this.tabSummary.Size = new System.Drawing.Size(976, 455);
-            this.tabSummary.TabIndex = 1;
-            this.tabSummary.Text = "Step 2 - Period Summary";
             this.tabSummary.UseVisualStyleBackColor = true;
             // 
             // tableSummary
             // 
-            this.tableSummary.ColumnCount = 2;
-            this.tableSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            resources.ApplyResources(this.tableSummary, "tableSummary");
             this.tableSummary.Controls.Add(this.lblTotalTransactions, 0, 0);
             this.tableSummary.Controls.Add(this.lblTotalTransactionsValue, 1, 0);
             this.tableSummary.Controls.Add(this.lblTotalJournals, 0, 1);
@@ -206,169 +183,86 @@ namespace pos
             this.tableSummary.Controls.Add(this.lblNetProfitValue, 1, 4);
             this.tableSummary.Controls.Add(this.lblOutOfBalance, 0, 5);
             this.tableSummary.Controls.Add(this.lblOutOfBalanceValue, 1, 5);
-            this.tableSummary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableSummary.Location = new System.Drawing.Point(12, 12);
             this.tableSummary.Name = "tableSummary";
-            this.tableSummary.RowCount = 6;
-            this.tableSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableSummary.Size = new System.Drawing.Size(952, 260);
-            this.tableSummary.TabIndex = 0;
             // 
             // lblTotalTransactions
             // 
-            this.lblTotalTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalTransactions.Location = new System.Drawing.Point(3, 0);
+            resources.ApplyResources(this.lblTotalTransactions, "lblTotalTransactions");
             this.lblTotalTransactions.Name = "lblTotalTransactions";
-            this.lblTotalTransactions.Size = new System.Drawing.Size(565, 42);
-            this.lblTotalTransactions.TabIndex = 0;
-            this.lblTotalTransactions.Text = "Total Transactions:";
-            this.lblTotalTransactions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTotalTransactionsValue
             // 
-            this.lblTotalTransactionsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalTransactionsValue.Location = new System.Drawing.Point(574, 0);
+            resources.ApplyResources(this.lblTotalTransactionsValue, "lblTotalTransactionsValue");
             this.lblTotalTransactionsValue.Name = "lblTotalTransactionsValue";
-            this.lblTotalTransactionsValue.Size = new System.Drawing.Size(375, 42);
-            this.lblTotalTransactionsValue.TabIndex = 1;
-            this.lblTotalTransactionsValue.Text = "0";
-            this.lblTotalTransactionsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTotalJournals
             // 
-            this.lblTotalJournals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalJournals.Location = new System.Drawing.Point(3, 42);
+            resources.ApplyResources(this.lblTotalJournals, "lblTotalJournals");
             this.lblTotalJournals.Name = "lblTotalJournals";
-            this.lblTotalJournals.Size = new System.Drawing.Size(565, 42);
-            this.lblTotalJournals.TabIndex = 2;
-            this.lblTotalJournals.Text = "Total Journals:";
-            this.lblTotalJournals.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTotalJournalsValue
             // 
-            this.lblTotalJournalsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalJournalsValue.Location = new System.Drawing.Point(574, 42);
+            resources.ApplyResources(this.lblTotalJournalsValue, "lblTotalJournalsValue");
             this.lblTotalJournalsValue.Name = "lblTotalJournalsValue";
-            this.lblTotalJournalsValue.Size = new System.Drawing.Size(375, 42);
-            this.lblTotalJournalsValue.TabIndex = 3;
-            this.lblTotalJournalsValue.Text = "0";
-            this.lblTotalJournalsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblDebits
             // 
-            this.lblDebits.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDebits.Location = new System.Drawing.Point(3, 84);
+            resources.ApplyResources(this.lblDebits, "lblDebits");
             this.lblDebits.Name = "lblDebits";
-            this.lblDebits.Size = new System.Drawing.Size(565, 42);
-            this.lblDebits.TabIndex = 4;
-            this.lblDebits.Text = "Total Debits:";
-            this.lblDebits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblDebitsValue
             // 
-            this.lblDebitsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDebitsValue.Location = new System.Drawing.Point(574, 84);
+            resources.ApplyResources(this.lblDebitsValue, "lblDebitsValue");
             this.lblDebitsValue.Name = "lblDebitsValue";
-            this.lblDebitsValue.Size = new System.Drawing.Size(375, 42);
-            this.lblDebitsValue.TabIndex = 5;
-            this.lblDebitsValue.Text = "0.00";
-            this.lblDebitsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblCredits
             // 
-            this.lblCredits.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCredits.Location = new System.Drawing.Point(3, 126);
+            resources.ApplyResources(this.lblCredits, "lblCredits");
             this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(565, 42);
-            this.lblCredits.TabIndex = 6;
-            this.lblCredits.Text = "Total Credits:";
-            this.lblCredits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblCreditsValue
             // 
-            this.lblCreditsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCreditsValue.Location = new System.Drawing.Point(574, 126);
+            resources.ApplyResources(this.lblCreditsValue, "lblCreditsValue");
             this.lblCreditsValue.Name = "lblCreditsValue";
-            this.lblCreditsValue.Size = new System.Drawing.Size(375, 42);
-            this.lblCreditsValue.TabIndex = 7;
-            this.lblCreditsValue.Text = "0.00";
-            this.lblCreditsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblNetProfit
             // 
-            this.lblNetProfit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNetProfit.Location = new System.Drawing.Point(3, 168);
+            resources.ApplyResources(this.lblNetProfit, "lblNetProfit");
             this.lblNetProfit.Name = "lblNetProfit";
-            this.lblNetProfit.Size = new System.Drawing.Size(565, 42);
-            this.lblNetProfit.TabIndex = 8;
-            this.lblNetProfit.Text = "Net Profit for period:";
-            this.lblNetProfit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblNetProfitValue
             // 
-            this.lblNetProfitValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNetProfitValue.Location = new System.Drawing.Point(574, 168);
+            resources.ApplyResources(this.lblNetProfitValue, "lblNetProfitValue");
             this.lblNetProfitValue.Name = "lblNetProfitValue";
-            this.lblNetProfitValue.Size = new System.Drawing.Size(375, 42);
-            this.lblNetProfitValue.TabIndex = 9;
-            this.lblNetProfitValue.Text = "0.00";
-            this.lblNetProfitValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblOutOfBalance
             // 
-            this.lblOutOfBalance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOutOfBalance.Location = new System.Drawing.Point(3, 210);
+            resources.ApplyResources(this.lblOutOfBalance, "lblOutOfBalance");
             this.lblOutOfBalance.Name = "lblOutOfBalance";
-            this.lblOutOfBalance.Size = new System.Drawing.Size(565, 50);
-            this.lblOutOfBalance.TabIndex = 10;
-            this.lblOutOfBalance.Text = "Out-of-balance entries:";
-            this.lblOutOfBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblOutOfBalanceValue
             // 
-            this.lblOutOfBalanceValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOutOfBalanceValue.Location = new System.Drawing.Point(574, 210);
+            resources.ApplyResources(this.lblOutOfBalanceValue, "lblOutOfBalanceValue");
             this.lblOutOfBalanceValue.Name = "lblOutOfBalanceValue";
-            this.lblOutOfBalanceValue.Size = new System.Drawing.Size(375, 50);
-            this.lblOutOfBalanceValue.TabIndex = 11;
-            this.lblOutOfBalanceValue.Text = "0";
-            this.lblOutOfBalanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tabAdjustments
             // 
             this.tabAdjustments.Controls.Add(this.chkReverseAccruals);
             this.tabAdjustments.Controls.Add(this.chkAutoDepreciation);
-            this.tabAdjustments.Location = new System.Drawing.Point(4, 26);
+            resources.ApplyResources(this.tabAdjustments, "tabAdjustments");
             this.tabAdjustments.Name = "tabAdjustments";
-            this.tabAdjustments.Padding = new System.Windows.Forms.Padding(16);
-            this.tabAdjustments.Size = new System.Drawing.Size(976, 455);
-            this.tabAdjustments.TabIndex = 2;
-            this.tabAdjustments.Text = "Step 3 - Depreciation && Accruals";
             this.tabAdjustments.UseVisualStyleBackColor = true;
             // 
             // chkReverseAccruals
             // 
-            this.chkReverseAccruals.AutoSize = true;
-            this.chkReverseAccruals.Location = new System.Drawing.Point(20, 64);
+            resources.ApplyResources(this.chkReverseAccruals, "chkReverseAccruals");
             this.chkReverseAccruals.Name = "chkReverseAccruals";
-            this.chkReverseAccruals.Size = new System.Drawing.Size(281, 21);
-            this.chkReverseAccruals.TabIndex = 1;
-            this.chkReverseAccruals.Text = "Reverse accrual entries from prior period";
             this.chkReverseAccruals.UseVisualStyleBackColor = true;
             // 
             // chkAutoDepreciation
             // 
-            this.chkAutoDepreciation.AutoSize = true;
-            this.chkAutoDepreciation.Location = new System.Drawing.Point(20, 28);
+            resources.ApplyResources(this.chkAutoDepreciation, "chkAutoDepreciation");
             this.chkAutoDepreciation.Name = "chkAutoDepreciation";
-            this.chkAutoDepreciation.Size = new System.Drawing.Size(269, 21);
-            this.chkAutoDepreciation.TabIndex = 0;
-            this.chkAutoDepreciation.Text = "Auto-post depreciation entries for period";
             this.chkAutoDepreciation.UseVisualStyleBackColor = true;
             // 
             // tabConfirm
@@ -378,60 +272,40 @@ namespace pos
             this.tabConfirm.Controls.Add(this.lblPin);
             this.tabConfirm.Controls.Add(this.chkConfirmReviewed);
             this.tabConfirm.Controls.Add(this.lblConfirmText);
-            this.tabConfirm.Location = new System.Drawing.Point(4, 26);
+            resources.ApplyResources(this.tabConfirm, "tabConfirm");
             this.tabConfirm.Name = "tabConfirm";
-            this.tabConfirm.Padding = new System.Windows.Forms.Padding(16);
-            this.tabConfirm.Size = new System.Drawing.Size(976, 455);
-            this.tabConfirm.TabIndex = 3;
-            this.tabConfirm.Text = "Step 4 - Confirm Close";
             this.tabConfirm.UseVisualStyleBackColor = true;
             // 
             // btnCompleteClosing
             // 
             this.btnCompleteClosing.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnCompleteClosing.ForeColor = System.Drawing.Color.White;
-            this.btnCompleteClosing.Location = new System.Drawing.Point(20, 152);
+            resources.ApplyResources(this.btnCompleteClosing, "btnCompleteClosing");
             this.btnCompleteClosing.Name = "btnCompleteClosing";
-            this.btnCompleteClosing.Size = new System.Drawing.Size(172, 36);
-            this.btnCompleteClosing.TabIndex = 4;
-            this.btnCompleteClosing.Text = "Complete Closing";
             this.btnCompleteClosing.UseVisualStyleBackColor = false;
             this.btnCompleteClosing.Click += new System.EventHandler(this.btnCompleteClosing_Click);
             // 
             // txtPinPassword
             // 
-            this.txtPinPassword.Location = new System.Drawing.Point(20, 115);
+            resources.ApplyResources(this.txtPinPassword, "txtPinPassword");
             this.txtPinPassword.Name = "txtPinPassword";
-            this.txtPinPassword.Size = new System.Drawing.Size(273, 25);
-            this.txtPinPassword.TabIndex = 3;
             this.txtPinPassword.UseSystemPasswordChar = true;
             // 
             // lblPin
             // 
-            this.lblPin.AutoSize = true;
-            this.lblPin.Location = new System.Drawing.Point(17, 92);
+            resources.ApplyResources(this.lblPin, "lblPin");
             this.lblPin.Name = "lblPin";
-            this.lblPin.Size = new System.Drawing.Size(191, 17);
-            this.lblPin.TabIndex = 2;
-            this.lblPin.Text = "Password / PIN confirmation:";
             // 
             // chkConfirmReviewed
             // 
-            this.chkConfirmReviewed.AutoSize = true;
-            this.chkConfirmReviewed.Location = new System.Drawing.Point(20, 58);
+            resources.ApplyResources(this.chkConfirmReviewed, "chkConfirmReviewed");
             this.chkConfirmReviewed.Name = "chkConfirmReviewed";
-            this.chkConfirmReviewed.Size = new System.Drawing.Size(15, 14);
-            this.chkConfirmReviewed.TabIndex = 1;
             this.chkConfirmReviewed.UseVisualStyleBackColor = true;
             // 
             // lblConfirmText
             // 
-            this.lblConfirmText.AutoSize = true;
-            this.lblConfirmText.Location = new System.Drawing.Point(41, 56);
+            resources.ApplyResources(this.lblConfirmText, "lblConfirmText");
             this.lblConfirmText.Name = "lblConfirmText";
-            this.lblConfirmText.Size = new System.Drawing.Size(322, 17);
-            this.lblConfirmText.TabIndex = 0;
-            this.lblConfirmText.Text = "I confirm all transactions for [period] have been reviewed";
             // 
             // panelFooter
             // 
@@ -439,65 +313,46 @@ namespace pos
             this.panelFooter.Controls.Add(this.btnNext);
             this.panelFooter.Controls.Add(this.btnBack);
             this.panelFooter.Controls.Add(this.btnHelp);
-            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 533);
+            resources.ApplyResources(this.panelFooter, "panelFooter");
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(984, 58);
-            this.panelFooter.TabIndex = 2;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(894, 14);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(78, 30);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(804, 14);
+            resources.ApplyResources(this.btnNext, "btnNext");
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(78, 30);
-            this.btnNext.TabIndex = 1;
-            this.btnNext.Text = "Next >";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(714, 14);
+            resources.ApplyResources(this.btnBack, "btnBack");
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(78, 30);
-            this.btnBack.TabIndex = 0;
-            this.btnBack.Text = "< Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(624, 14);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(78, 30);
-            this.btnHelp.TabIndex = 3;
-            this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // frm_period_close_wizard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 591);
             this.Controls.Add(this.tabSteps);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.lblTitle);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.KeyPreview = true;
             this.Name = "frm_period_close_wizard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Month-End Closing Wizard";
             this.Load += new System.EventHandler(this.frm_period_close_wizard_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_period_close_wizard_KeyDown);
             this.tabSteps.ResumeLayout(false);

@@ -554,6 +554,7 @@ namespace pos
                         double maxDiscountAmount = 0;
                         bool AllowUserCreditSale = false;
                         double UserSaleInvoiceLimit = 0;
+                        bool isInactive = false;
 
                         if (dt != null && dt.Rows.Count > 0)
                         {
@@ -565,38 +566,61 @@ namespace pos
                             language = dr["language"].ToString();
                             userRole = dr["user_role"].ToString();
                             userLevel = (int)dr["user_level"];
+
+                            // Validate user status: only allow users with status = 1
+                            int userStatus = 0;
+                            if (dr.Table.Columns.Contains("status") && dr["status"] != DBNull.Value)
+                            {
+                                userStatus = Convert.ToInt32(dr["status"]);
+                            }
+
+                            if (userStatus != 1)
+                            {
+                                // Mark user as inactive and skip further processing
+                                isInactive = true;
+                            }
                         }
 
-                        // Load user discount limits
-                        var usersBLL = new UsersBLL();
-                        DataTable userRightsDt = usersBLL.GetUserRights(userId);
-                        if (userRightsDt != null && userRightsDt.Rows.Count > 0)
+                        // Only load additional data if user is active
+                        if (!isInactive)
                         {
-                            var dr = userRightsDt.Rows[0];
-                            if (dr.Table.Columns.Contains("max_discount_percent") && dr["max_discount_percent"] != DBNull.Value)
-                                maxDiscountPercent = Convert.ToDouble(dr["max_discount_percent"]);
-                            if (dr.Table.Columns.Contains("max_discount_amount") && dr["max_discount_amount"] != DBNull.Value)
-                                maxDiscountAmount = Convert.ToDouble(dr["max_discount_amount"]);
-                            if(dr.Table.Columns.Contains("cash_sales_amount") && dr["cash_sales_amount"] != DBNull.Value)
-                                UserSaleInvoiceLimit = Convert.ToDouble(dr["cash_sales_amount"]);
-                            if(dr.Table.Columns.Contains("allow_credit_sales") && dr["allow_credit_sales"] != DBNull.Value)
-                                AllowUserCreditSale = Convert.ToBoolean(dr["allow_credit_sales"]);
+                            // Load user discount limits
+                            var usersBLL = new UsersBLL();
+                            DataTable userRightsDt = usersBLL.GetUserRights(userId);
+                            if (userRightsDt != null && userRightsDt.Rows.Count > 0)
+                            {
+                                var dr = userRightsDt.Rows[0];
+                                if (dr.Table.Columns.Contains("max_discount_percent") && dr["max_discount_percent"] != DBNull.Value)
+                                    maxDiscountPercent = Convert.ToDouble(dr["max_discount_percent"]);
+                                if (dr.Table.Columns.Contains("max_discount_amount") && dr["max_discount_amount"] != DBNull.Value)
+                                    maxDiscountAmount = Convert.ToDouble(dr["max_discount_amount"]);
+                                if(dr.Table.Columns.Contains("cash_sales_amount") && dr["cash_sales_amount"] != DBNull.Value)
+                                    UserSaleInvoiceLimit = Convert.ToDouble(dr["cash_sales_amount"]);
+                                if(dr.Table.Columns.Contains("allow_credit_sales") && dr["allow_credit_sales"] != DBNull.Value)
+                                    AllowUserCreditSale = Convert.ToBoolean(dr["allow_credit_sales"]);
+                            }
                         }
 
-                        var branchesBLL = new BranchesBLL();
-                        string branchName = branchId > 0 ? branchesBLL.GetBranchNameByID(branchId) : "";
-
-                        var fiscalyear_obj = new FiscalYearBLL();
-                        DataTable fiscalyear_dt = fiscalyear_obj.GetActiveFiscalYear();
+                        // Only load additional data if user is active
+                        string branchName = "";
                         string fyName = "";
                         DateTime fyFrom = DateTime.MinValue;
                         DateTime fyTo = DateTime.MinValue;
-                        if (fiscalyear_dt != null && fiscalyear_dt.Rows.Count > 0)
+
+                        if (!isInactive)
                         {
-                            var fy = fiscalyear_dt.Rows[0];
-                            fyName = fy["name"].ToString();
-                            fyFrom = Convert.ToDateTime(fy["from_date"]);
-                            fyTo = Convert.ToDateTime(fy["to_date"]);
+                            var branchesBLL = new BranchesBLL();
+                            branchName = branchId > 0 ? branchesBLL.GetBranchNameByID(branchId) : "";
+
+                            var fiscalyear_obj = new FiscalYearBLL();
+                            DataTable fiscalyear_dt = fiscalyear_obj.GetActiveFiscalYear();
+                            if (fiscalyear_dt != null && fiscalyear_dt.Rows.Count > 0)
+                            {
+                                var fy = fiscalyear_dt.Rows[0];
+                                fyName = fy["name"].ToString();
+                                fyFrom = Convert.ToDateTime(fy["from_date"]);
+                                fyTo = Convert.ToDateTime(fy["to_date"]);
+                            }
                         }
 
                         return new
@@ -615,9 +639,19 @@ namespace pos
                             MaxDiscountPercent = maxDiscountPercent,
                             MaxDiscountAmount = maxDiscountAmount,
                             AllowUserCreditSale = AllowUserCreditSale,
-                            UserSaleInvoiceLimit = UserSaleInvoiceLimit
+                            UserSaleInvoiceLimit = UserSaleInvoiceLimit,
+                            IsInactive = isInactive
                         };
                     });
+
+                    // Check if user is inactive
+                    if (userData.IsInactive)
+                    {
+                        UiMessages.ShowUserInactiveError();
+                        TxtUsername.Focus();
+                        this.ActiveControl = TxtUsername;
+                        return;
+                    }
 
                     // After userData computed and UsersModal fields are set:
                     UsersModal.logged_in_userid = userData.UserId;

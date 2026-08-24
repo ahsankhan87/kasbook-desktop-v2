@@ -118,98 +118,131 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
+  <data name="lblYearCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1101, 33</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>إسم الحساب:</value>
+  <data name="lblYearCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
   </data>
-  <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
+  <data name="lblYearCaption.Text" xml:space="preserve">
+    <value>السنة النشطة: لا توجد</value>
   </data>
-  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 19</value>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1076, 5</value>
   </data>
-  <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 25</value>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 28</value>
   </data>
-  <data name="lbl_header_title.Text" xml:space="preserve">
-    <value>حساب جديد</value>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>إدارة الفترات المالية</value>
   </data>
-  <data name="btn_cancel.Text" xml:space="preserve">
-    <value>إلغاء</value>
+  <data name="btnOpenNewPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 24</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
+  <data name="btnOpenNewPeriod.Text" xml:space="preserve">
+    <value>فتح فترة جديدة</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>وصف:</value>
+  <data name="btnSoftClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 17</value>
+  <data name="btnSoftClose.Text" xml:space="preserve">
+    <value>إغلاق أولي</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>رمز الحساب:</value>
+  <data name="btnHardLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 24</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 17</value>
+  <data name="btnHardLock.Text" xml:space="preserve">
+    <value>قفل الفترة</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>مجموعة:</value>
+  <data name="btnReopen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 24</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 17</value>
+  <data name="btnReopen.Text" xml:space="preserve">
+    <value>إعادة فتح</value>
   </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>فتح الرصيد المدين:</value>
+  <data name="btnViewTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 24</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
+  <data name="btnViewTransactions.Text" xml:space="preserve">
+    <value>عرض معاملات الفترة</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>فتح رصيد دائن:</value>
+  <data name="btnYearEndClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 24</value>
   </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 17</value>
+  <data name="btnYearEndClose.Text" xml:space="preserve">
+    <value>إغلاق نهاية السنة...</value>
   </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>اسم الحساب 2:</value>
+  <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 24</value>
   </data>
-  <data name="rd_isCashAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+  <data name="btnHelp.Text" xml:space="preserve">
+    <value>مساعدة</value>
   </data>
-  <data name="rd_isCashAccount.Text" xml:space="preserve">
-    <value>هل هو حساب نقدي؟</value>
+  <data name="colPeriodId.HeaderText" xml:space="preserve">
+    <value>معرّف الفترة</value>
   </data>
-  <data name="rd_isBankAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
+  <data name="colYearId.HeaderText" xml:space="preserve">
+    <value>معرّف السنة</value>
   </data>
-  <data name="rd_isBankAccount.Text" xml:space="preserve">
-    <value>هل هو حساب مصرفي؟</value>
+  <data name="colFinancialYear.HeaderText" xml:space="preserve">
+    <value>السنة المالية</value>
   </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
-        AAD///7///////bGdP/otUv/8LlJ//K2R//yu1H/8blT/+68U//suVX/8rdL//S5Rv/st0b/68R2////
-        //////7////+///////3xnP/6bdN/+zKef/py4X/6sJr//O7Vf/yvVD/7bxd/+vHf//lyIn/671a//XD
-        c//////////+/////v//////8cdt/+m1U//88dr//////+zbqf/ttE7/6rVM//Dcov//////+vnu/+u+
-        Yv/+w2z//////////v////7//////+/Ia//ntFf/++7d//z////s2af/8rU//+zFa//y+Oz/+v7///HX
-        nv/nsz//+Mhz//7///////7////+///////0x3H/7bdR//jw3f/8////9N2t/+GwQP/15rL/8f////bt
-        1P/ruVz/7rdM//HGc//////////+/////v//////9Mdx/+22Uf/989z//v////v46//m2rP/+/j2//3+
-        ///wzYL/67dM/+64Uf/xxnL//////////v////7///////THcf/ttlH/+/Ld//79/////P7//P/7//r/
-        ///15MP/67dX//O9U//tt0//8cZy//////////7////+///////0x3H/7bZR//vx3v/5/P//+/js//L7
-        +f/6//z/68yR/+y2RP/wwVX/5rVQ/+/Dc//////////+/////v//////9Mdx/+23Uf/58Nz//v///+rW
-        qv/x47r/+f////r26v/rxXX/7bdH//W8Tf/zxHH//////////v////7///////THcf/ttlH/+vLY//z/
-        ///32J//5rRQ//Xv1P/2/////fnp/+rGfv/utEn/+Mlu//////////7////+///////0x3H/7bZS//zz
-        0//6////9tmn/++3P//qwWL/+OjB//Pv3P/05Lj/5bVa//XHbv/////////+/////v//////9Mdx/+22
-        Uf/48tj//P///+zcov/us0z/7rpV/+23T//tt07/7rlT/+64Tv/xxnL//////////v////7///////TH
-        cf/tt1H/+vHa///////y2qf/77BP/+68WP/uu1b/7rtW/+67V//tt07/8cZy//////////7////+////
-        ///0x3D/7bdS//jy2f/7////8dyf//W1Sv/uu1j/7rpV/+66Vf/uu1f/7bdO//HGcv/////////+////
-        /v//////8sZy/+63UP/txXL/7Md7/+zBY//wulH/7rpW/+66Vf/uulX/7rtX/+23Tv/xxnL/////////
-        /v////7///////HGcv/tt07/7rhQ/+63TP/uuFL/7bpW/+66Vf/uulX/7rpV/+67V//tt07/8cZy////
-        //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA==
-</value>
+  <data name="colPeriodName.HeaderText" xml:space="preserve">
+    <value>اسم الفترة</value>
+  </data>
+  <data name="colStartDate.HeaderText" xml:space="preserve">
+    <value>تاريخ البداية</value>
+  </data>
+  <data name="colEndDate.HeaderText" xml:space="preserve">
+    <value>تاريخ النهاية</value>
+  </data>
+  <data name="colStatusBadge.HeaderText" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="colClosedBy.HeaderText" xml:space="preserve">
+    <value>مغلقة بواسطة</value>
+  </data>
+  <data name="colClosedAt.HeaderText" xml:space="preserve">
+    <value>مغلقة في</value>
+  </data>
+  <data name="colTransactionsCount.HeaderText" xml:space="preserve">
+    <value>عدد المعاملات</value>
+  </data>
+  <data name="colCanReopen.HeaderText" xml:space="preserve">
+    <value>يمكن إعادة الفتح</value>
+  </data>
+  <data name="contextPeriodActions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 124</value>
+  </data>
+  <data name="ctxOpenNewPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 24</value>
+  </data>
+  <data name="ctxOpenNewPeriod.Text" xml:space="preserve">
+    <value>فتح فترة جديدة</value>
+  </data>
+  <data name="ctxSoftClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 24</value>
+  </data>
+  <data name="ctxSoftClose.Text" xml:space="preserve">
+    <value>إغلاق أولي</value>
+  </data>
+  <data name="ctxHardLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 24</value>
+  </data>
+  <data name="ctxHardLock.Text" xml:space="preserve">
+    <value>قفل الفترة</value>
+  </data>
+  <data name="ctxReopen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 24</value>
+  </data>
+  <data name="ctxReopen.Text" xml:space="preserve">
+    <value>إعادة فتح</value>
+  </data>
+  <data name="ctxViewTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 24</value>
+  </data>
+  <data name="ctxViewTransactions.Text" xml:space="preserve">
+    <value>عرض معاملات الفترة</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -220,6 +253,6 @@
     <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>حساب جديد</value>
+    <value>إدارة الفترات المالية</value>
   </data>
 </root>

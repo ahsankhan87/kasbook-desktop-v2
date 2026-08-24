@@ -68,5 +68,15 @@ namespace pos.UI
 
             return MessageBox.Show(T(en, ar), T(captionEn, captionAr), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, defaultButton);
         }
+
+        public static void ShowUserInactiveError()
+        {
+            ShowError(
+                "Your account has been deactivated. Please contact your administrator.",
+                " „  ⁄ÿÌ· Õ”«»ﬂ. Ì—ÃÏ «·« ’«· »«·„”ƒÊ·.",
+                "Access Denied",
+                " „ —›÷ «·Ê’Ê·"
+            );
+        }
     }
 }

@@ -47,13 +47,29 @@ namespace pos
             grid_journal.DataError += grid_journal_DataError;
         }
 
+        /// <summary>
+        /// Translates text based on current user language (Arabic/English).
+        /// </summary>
+        private string T(string englishText, string arabicText)
+        {
+            return string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase) 
+                ? arabicText 
+                : englishText;
+        }
+
         private void frm_journal_entries_Load(object sender, EventArgs e)
         {
+            // Translate form title
+            this.Text = T("Journal Entry", "قيد يومي");
+
             AppTheme.Apply(this);
 
+            // Fix RTL layout issues for txt_dr_total and txt_cr_total textboxes
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+            
             if (!_auth.HasPermission(_currentUser, Permissions.Journal_Create))
             {
-                MessageBox.Show("You do not have permission to access this module.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(T("You do not have permission to access this module.", "ليس لديك إذن للوصول إلى هذه الوحدة."), T("Permission Denied", "إذن مرفوض"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
                 return;
             }
@@ -502,9 +518,29 @@ namespace pos
                 if (!_accountsTable.Columns.Contains("display"))
                 {
                     _accountsTable.Columns.Add("display", typeof(string));
+                }
+
+                // Detect if Arabic mode for bilingual account names
+                bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+
                     foreach (DataRow row in _accountsTable.Rows)
                     {
-                        row["display"] = string.Format("{0} - {1}", row["code"], row["name"]);
+                    string code = Convert.ToString(row["code"]).Trim();
+                    string englishName = Convert.ToString(row["name"]).Trim();
+                    string arabicName = Convert.ToString(row["name_2"]).Trim();
+
+                    // Build display text: if Arabic mode, show name_2; otherwise show name
+                    if (isArabic && !string.IsNullOrWhiteSpace(arabicName))
+                    {
+                        row["display"] = string.IsNullOrWhiteSpace(code) 
+                            ? arabicName 
+                            : string.Format("{0} - {1}", code, arabicName);
+                    }
+                    else
+                    {
+                        row["display"] = string.IsNullOrWhiteSpace(code) 
+                            ? englishName 
+                            : string.Format("{0} - {1}", code, englishName);
                     }
                 }
 
@@ -516,7 +552,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, T("Message", "رسالة"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
         }

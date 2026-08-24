@@ -15,6 +15,7 @@ namespace pos.Accounting.CostCenter
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_budget_setup));
             this.lblTitle = new System.Windows.Forms.Label();
             this.grpHeader = new System.Windows.Forms.GroupBox();
             this.btnApprove = new System.Windows.Forms.Button();
@@ -64,18 +65,12 @@ namespace pos.Accounting.CostCenter
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(12, 10);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(382, 32);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Budget Entry && Planning Center";
             // 
             // grpHeader
             // 
-            this.grpHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.grpHeader, "grpHeader");
             this.grpHeader.Controls.Add(this.btnApprove);
             this.grpHeader.Controls.Add(this.txtNotes);
             this.grpHeader.Controls.Add(this.lblNotes);
@@ -87,116 +82,77 @@ namespace pos.Accounting.CostCenter
             this.grpHeader.Controls.Add(this.lblVersion);
             this.grpHeader.Controls.Add(this.cmbYear);
             this.grpHeader.Controls.Add(this.lblYear);
-            this.grpHeader.Location = new System.Drawing.Point(12, 42);
             this.grpHeader.Name = "grpHeader";
-            this.grpHeader.Size = new System.Drawing.Size(1288, 108);
-            this.grpHeader.TabIndex = 1;
             this.grpHeader.TabStop = false;
-            this.grpHeader.Text = "Budget Header";
             // 
             // btnApprove
             // 
-            this.btnApprove.Location = new System.Drawing.Point(1145, 24);
+            resources.ApplyResources(this.btnApprove, "btnApprove");
             this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(128, 28);
-            this.btnApprove.TabIndex = 10;
             this.btnApprove.Tag = "finance.edit";
-            this.btnApprove.Text = "Approve Budget";
             this.btnApprove.UseVisualStyleBackColor = true;
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(146, 62);
-            this.txtNotes.MaxLength = 500;
+            resources.ApplyResources(this.txtNotes, "txtNotes");
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(1127, 27);
-            this.txtNotes.TabIndex = 9;
             // 
             // lblNotes
             // 
-            this.lblNotes.AutoSize = true;
-            this.lblNotes.Location = new System.Drawing.Point(10, 66);
+            resources.ApplyResources(this.lblNotes, "lblNotes");
             this.lblNotes.Name = "lblNotes";
-            this.lblNotes.Size = new System.Drawing.Size(130, 20);
-            this.lblNotes.TabIndex = 8;
-            this.lblNotes.Text = "Notes/Description";
             // 
             // cmbStatus
             // 
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(971, 26);
+            resources.ApplyResources(this.cmbStatus, "cmbStatus");
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(155, 28);
-            this.cmbStatus.TabIndex = 7;
             // 
             // lblStatusHeader
             // 
-            this.lblStatusHeader.AutoSize = true;
-            this.lblStatusHeader.Location = new System.Drawing.Point(922, 30);
+            resources.ApplyResources(this.lblStatusHeader, "lblStatusHeader");
             this.lblStatusHeader.Name = "lblStatusHeader";
-            this.lblStatusHeader.Size = new System.Drawing.Size(49, 20);
-            this.lblStatusHeader.TabIndex = 6;
-            this.lblStatusHeader.Text = "Status";
             // 
             // cmbCostCenter
             // 
             this.cmbCostCenter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCostCenter.FormattingEnabled = true;
-            this.cmbCostCenter.Location = new System.Drawing.Point(647, 26);
+            resources.ApplyResources(this.cmbCostCenter, "cmbCostCenter");
             this.cmbCostCenter.Name = "cmbCostCenter";
-            this.cmbCostCenter.Size = new System.Drawing.Size(260, 28);
-            this.cmbCostCenter.TabIndex = 5;
             // 
             // lblCostCenter
             // 
-            this.lblCostCenter.AutoSize = true;
-            this.lblCostCenter.Location = new System.Drawing.Point(571, 30);
+            resources.ApplyResources(this.lblCostCenter, "lblCostCenter");
             this.lblCostCenter.Name = "lblCostCenter";
-            this.lblCostCenter.Size = new System.Drawing.Size(85, 20);
-            this.lblCostCenter.TabIndex = 4;
-            this.lblCostCenter.Text = "Cost Center";
             // 
             // cmbVersion
             // 
             this.cmbVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVersion.FormattingEnabled = true;
-            this.cmbVersion.Location = new System.Drawing.Point(357, 26);
+            resources.ApplyResources(this.cmbVersion, "cmbVersion");
             this.cmbVersion.Name = "cmbVersion";
-            this.cmbVersion.Size = new System.Drawing.Size(196, 28);
-            this.cmbVersion.TabIndex = 3;
             // 
             // lblVersion
             // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(261, 30);
+            resources.ApplyResources(this.lblVersion, "lblVersion");
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(109, 20);
-            this.lblVersion.TabIndex = 2;
-            this.lblVersion.Text = "Budget Version";
             // 
             // cmbYear
             // 
             this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(127, 26);
+            resources.ApplyResources(this.cmbYear, "cmbYear");
             this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(126, 28);
-            this.cmbYear.TabIndex = 1;
             // 
             // lblYear
             // 
-            this.lblYear.AutoSize = true;
-            this.lblYear.Location = new System.Drawing.Point(10, 30);
+            resources.ApplyResources(this.lblYear, "lblYear");
             this.lblYear.Name = "lblYear";
-            this.lblYear.Size = new System.Drawing.Size(99, 20);
-            this.lblYear.TabIndex = 0;
-            this.lblYear.Text = "Financial Year";
             // 
             // pnlActions
             // 
-            this.pnlActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.pnlActions, "pnlActions");
             this.pnlActions.Controls.Add(this.chkShowComparison);
             this.pnlActions.Controls.Add(this.btnPrint);
             this.pnlActions.Controls.Add(this.btnImportExcel);
@@ -208,122 +164,80 @@ namespace pos.Accounting.CostCenter
             this.pnlActions.Controls.Add(this.btnSave);
             this.pnlActions.Controls.Add(this.btnLoad);
             this.pnlActions.Controls.Add(this.btnNew);
-            this.pnlActions.Location = new System.Drawing.Point(12, 156);
             this.pnlActions.Name = "pnlActions";
-            this.pnlActions.Size = new System.Drawing.Size(1288, 42);
-            this.pnlActions.TabIndex = 2;
             // 
             // chkShowComparison
             // 
-            this.chkShowComparison.AutoSize = true;
-            this.chkShowComparison.Location = new System.Drawing.Point(1090, 11);
+            resources.ApplyResources(this.chkShowComparison, "chkShowComparison");
             this.chkShowComparison.Name = "chkShowComparison";
-            this.chkShowComparison.Size = new System.Drawing.Size(203, 24);
-            this.chkShowComparison.TabIndex = 10;
-            this.chkShowComparison.Text = "Show Budget Comparison";
             this.chkShowComparison.UseVisualStyleBackColor = true;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(972, 6);
+            resources.ApplyResources(this.btnPrint, "btnPrint");
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(102, 30);
-            this.btnPrint.TabIndex = 9;
-            this.btnPrint.Text = "Print Budget";
             this.btnPrint.UseVisualStyleBackColor = true;
             // 
             // btnImportExcel
             // 
-            this.btnImportExcel.Location = new System.Drawing.Point(860, 6);
+            resources.ApplyResources(this.btnImportExcel, "btnImportExcel");
             this.btnImportExcel.Name = "btnImportExcel";
-            this.btnImportExcel.Size = new System.Drawing.Size(108, 30);
-            this.btnImportExcel.TabIndex = 8;
-            this.btnImportExcel.Text = "Import from Excel";
             this.btnImportExcel.UseVisualStyleBackColor = true;
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Location = new System.Drawing.Point(745, 6);
+            resources.ApplyResources(this.btnExportExcel, "btnExportExcel");
             this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.Size = new System.Drawing.Size(111, 30);
-            this.btnExportExcel.TabIndex = 7;
-            this.btnExportExcel.Text = "Export to Excel";
             this.btnExportExcel.UseVisualStyleBackColor = true;
             // 
             // btnCopyGrowth
             // 
-            this.btnCopyGrowth.Location = new System.Drawing.Point(588, 6);
+            resources.ApplyResources(this.btnCopyGrowth, "btnCopyGrowth");
             this.btnCopyGrowth.Name = "btnCopyGrowth";
-            this.btnCopyGrowth.Size = new System.Drawing.Size(153, 30);
-            this.btnCopyGrowth.TabIndex = 6;
-            this.btnCopyGrowth.Text = "Copy Last Year + X%";
             this.btnCopyGrowth.UseVisualStyleBackColor = true;
             // 
             // btnCopyLastYear
             // 
-            this.btnCopyLastYear.Location = new System.Drawing.Point(471, 6);
+            resources.ApplyResources(this.btnCopyLastYear, "btnCopyLastYear");
             this.btnCopyLastYear.Name = "btnCopyLastYear";
-            this.btnCopyLastYear.Size = new System.Drawing.Size(113, 30);
-            this.btnCopyLastYear.TabIndex = 5;
-            this.btnCopyLastYear.Text = "Copy Last Year";
             this.btnCopyLastYear.UseVisualStyleBackColor = true;
             // 
             // btnSeasonality
             // 
-            this.btnSeasonality.Location = new System.Drawing.Point(348, 6);
+            resources.ApplyResources(this.btnSeasonality, "btnSeasonality");
             this.btnSeasonality.Name = "btnSeasonality";
-            this.btnSeasonality.Size = new System.Drawing.Size(119, 30);
-            this.btnSeasonality.TabIndex = 4;
-            this.btnSeasonality.Text = "Spread Seasonality";
             this.btnSeasonality.UseVisualStyleBackColor = true;
             // 
             // btnSpreadEven
             // 
-            this.btnSpreadEven.Location = new System.Drawing.Point(226, 6);
+            resources.ApplyResources(this.btnSpreadEven, "btnSpreadEven");
             this.btnSpreadEven.Name = "btnSpreadEven";
-            this.btnSpreadEven.Size = new System.Drawing.Size(118, 30);
-            this.btnSpreadEven.TabIndex = 3;
-            this.btnSpreadEven.Text = "Spread Evenly";
             this.btnSpreadEven.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(153, 6);
+            resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(69, 30);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(79, 6);
+            resources.ApplyResources(this.btnLoad, "btnLoad");
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(70, 30);
-            this.btnLoad.TabIndex = 1;
-            this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(6, 6);
+            resources.ApplyResources(this.btnNew, "btnNew");
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(69, 30);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
             // 
             // pnlGrid
             // 
-            this.pnlGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.pnlGrid, "pnlGrid");
             this.pnlGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlGrid.Controls.Add(this.dgvBudgets);
-            this.pnlGrid.Location = new System.Drawing.Point(12, 204);
             this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(1288, 340);
-            this.pnlGrid.TabIndex = 3;
             // 
             // dgvBudgets
             // 
@@ -331,18 +245,13 @@ namespace pos.Accounting.CostCenter
             this.dgvBudgets.AllowUserToDeleteRows = false;
             this.dgvBudgets.BackgroundColor = System.Drawing.Color.White;
             this.dgvBudgets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBudgets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBudgets.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.dgvBudgets, "dgvBudgets");
             this.dgvBudgets.Name = "dgvBudgets";
             this.dgvBudgets.RowHeadersVisible = false;
-            this.dgvBudgets.RowHeadersWidth = 51;
-            this.dgvBudgets.Size = new System.Drawing.Size(1286, 338);
-            this.dgvBudgets.TabIndex = 0;
             // 
             // pnlTotals
             // 
-            this.pnlTotals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.pnlTotals, "pnlTotals");
             this.pnlTotals.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotals.Controls.Add(this.lblNetProfitValue);
             this.pnlTotals.Controls.Add(this.lblNetProfit);
@@ -350,82 +259,45 @@ namespace pos.Accounting.CostCenter
             this.pnlTotals.Controls.Add(this.lblExpense);
             this.pnlTotals.Controls.Add(this.lblIncomeValue);
             this.pnlTotals.Controls.Add(this.lblIncome);
-            this.pnlTotals.Location = new System.Drawing.Point(12, 550);
             this.pnlTotals.Name = "pnlTotals";
-            this.pnlTotals.Size = new System.Drawing.Size(1288, 38);
-            this.pnlTotals.TabIndex = 4;
             // 
             // lblNetProfitValue
             // 
-            this.lblNetProfitValue.AutoSize = true;
-            this.lblNetProfitValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNetProfitValue.Location = new System.Drawing.Point(1118, 10);
+            resources.ApplyResources(this.lblNetProfitValue, "lblNetProfitValue");
             this.lblNetProfitValue.Name = "lblNetProfitValue";
-            this.lblNetProfitValue.Size = new System.Drawing.Size(40, 20);
-            this.lblNetProfitValue.TabIndex = 5;
-            this.lblNetProfitValue.Text = "0.00";
             // 
             // lblNetProfit
             // 
-            this.lblNetProfit.AutoSize = true;
-            this.lblNetProfit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNetProfit.Location = new System.Drawing.Point(1012, 10);
+            resources.ApplyResources(this.lblNetProfit, "lblNetProfit");
             this.lblNetProfit.Name = "lblNetProfit";
-            this.lblNetProfit.Size = new System.Drawing.Size(138, 20);
-            this.lblNetProfit.TabIndex = 4;
-            this.lblNetProfit.Text = "Net Profit Budget:";
             // 
             // lblExpenseValue
             // 
-            this.lblExpenseValue.AutoSize = true;
-            this.lblExpenseValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblExpenseValue.Location = new System.Drawing.Point(698, 10);
+            resources.ApplyResources(this.lblExpenseValue, "lblExpenseValue");
             this.lblExpenseValue.Name = "lblExpenseValue";
-            this.lblExpenseValue.Size = new System.Drawing.Size(40, 20);
-            this.lblExpenseValue.TabIndex = 3;
-            this.lblExpenseValue.Text = "0.00";
             // 
             // lblExpense
             // 
-            this.lblExpense.AutoSize = true;
-            this.lblExpense.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblExpense.Location = new System.Drawing.Point(553, 10);
+            resources.ApplyResources(this.lblExpense, "lblExpense");
             this.lblExpense.Name = "lblExpense";
-            this.lblExpense.Size = new System.Drawing.Size(164, 20);
-            this.lblExpense.TabIndex = 2;
-            this.lblExpense.Text = "Total Expense Budget:";
             // 
             // lblIncomeValue
             // 
-            this.lblIncomeValue.AutoSize = true;
-            this.lblIncomeValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblIncomeValue.Location = new System.Drawing.Point(205, 10);
+            resources.ApplyResources(this.lblIncomeValue, "lblIncomeValue");
             this.lblIncomeValue.Name = "lblIncomeValue";
-            this.lblIncomeValue.Size = new System.Drawing.Size(40, 20);
-            this.lblIncomeValue.TabIndex = 1;
-            this.lblIncomeValue.Text = "0.00";
             // 
             // lblIncome
             // 
-            this.lblIncome.AutoSize = true;
-            this.lblIncome.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblIncome.Location = new System.Drawing.Point(20, 10);
+            resources.ApplyResources(this.lblIncome, "lblIncome");
             this.lblIncome.Name = "lblIncome";
-            this.lblIncome.Size = new System.Drawing.Size(225, 20);
-            this.lblIncome.TabIndex = 0;
-            this.lblIncome.Text = "Total Income Budget (Annual):";
             // 
             // pnlComparison
             // 
-            this.pnlComparison.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.pnlComparison, "pnlComparison");
             this.pnlComparison.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlComparison.Controls.Add(this.dgvComparison);
             this.pnlComparison.Controls.Add(this.lblComparisonTitle);
-            this.pnlComparison.Location = new System.Drawing.Point(12, 594);
             this.pnlComparison.Name = "pnlComparison";
-            this.pnlComparison.Size = new System.Drawing.Size(1288, 161);
-            this.pnlComparison.TabIndex = 5;
             // 
             // dgvComparison
             // 
@@ -433,40 +305,25 @@ namespace pos.Accounting.CostCenter
             this.dgvComparison.AllowUserToDeleteRows = false;
             this.dgvComparison.BackgroundColor = System.Drawing.Color.White;
             this.dgvComparison.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComparison.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvComparison.Location = new System.Drawing.Point(0, 28);
+            resources.ApplyResources(this.dgvComparison, "dgvComparison");
             this.dgvComparison.Name = "dgvComparison";
             this.dgvComparison.ReadOnly = true;
             this.dgvComparison.RowHeadersVisible = false;
-            this.dgvComparison.RowHeadersWidth = 51;
-            this.dgvComparison.Size = new System.Drawing.Size(1286, 131);
-            this.dgvComparison.TabIndex = 1;
             // 
             // lblComparisonTitle
             // 
-            this.lblComparisonTitle.AutoSize = true;
-            this.lblComparisonTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblComparisonTitle.Location = new System.Drawing.Point(10, 7);
+            resources.ApplyResources(this.lblComparisonTitle, "lblComparisonTitle");
             this.lblComparisonTitle.Name = "lblComparisonTitle";
-            this.lblComparisonTitle.Size = new System.Drawing.Size(351, 20);
-            this.lblComparisonTitle.TabIndex = 0;
-            this.lblComparisonTitle.Text = "Budget vs Actual (Budget | Actual | Variance | %)";
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(14, 762);
+            resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(50, 20);
-            this.lblStatus.TabIndex = 6;
-            this.lblStatus.Text = "Ready";
             // 
             // frm_budget_setup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 786);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.pnlComparison);
             this.Controls.Add(this.pnlTotals);
@@ -474,11 +331,7 @@ namespace pos.Accounting.CostCenter
             this.Controls.Add(this.pnlActions);
             this.Controls.Add(this.grpHeader);
             this.Controls.Add(this.lblTitle);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.MinimumSize = new System.Drawing.Size(1180, 760);
             this.Name = "frm_budget_setup";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Budget Entry && Planning";
             this.Load += new System.EventHandler(this.FrmBudgetSetup_Load);
             this.grpHeader.ResumeLayout(false);
             this.grpHeader.PerformLayout();

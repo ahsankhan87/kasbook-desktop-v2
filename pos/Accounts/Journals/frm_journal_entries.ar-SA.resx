@@ -117,42 +117,92 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="grpVoucherInformation.Text" xml:space="preserve">
+    <value>تفاصيل القسيمة</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="flowFooterButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="flowFooterButtons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 10</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btn_post_new.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_post_new.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1258, 3</value>
+  </data>
+  <data name="btn_post_new.Text" xml:space="preserve">
+    <value>منشور وجديد</value>
+  </data>
+  <data name="btn_print.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1143, 3</value>
+  </data>
+  <data name="btn_print.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 34</value>
+  </data>
+  <data name="btn_print.Text" xml:space="preserve">
+    <value>طباعة القسيمة</value>
+  </data>
+  <data name="btn_close.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_close.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1059, 3</value>
+  </data>
+  <data name="btn_close.Text" xml:space="preserve">
+    <value>يغلق</value>
+  </data>
+  <data name="btn_add_line.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_add_line.Location" type="System.Drawing.Point, System.Drawing">
+    <value>965, 3</value>
+  </data>
+  <data name="btn_add_line.Text" xml:space="preserve">
+    <value>أضف سطراً</value>
+  </data>
+  <data name="btn_new.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_new.Location" type="System.Drawing.Point, System.Drawing">
+    <value>871, 3</value>
+  </data>
   <data name="btn_new.Text" xml:space="preserve">
     <value>جديد (F1)</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 16</value>
+  <data name="btn_save_draft.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>تاريخ الدخول:</value>
+  <data name="btn_save_draft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>763, 3</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 16</value>
+  <data name="btn_save_draft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 34</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>رقم الفاتورة:</value>
+  <data name="btn_save_draft.Text" xml:space="preserve">
+    <value>حفظ المسودة</value>
+  </data>
+  <data name="btn_save.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btn_save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>604, 3</value>
   </data>
   <data name="btn_save.Text" xml:space="preserve">
     <value>حفظ (F3)</value>
   </data>
-  <data name="txt_cr_total.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 9</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>492, 8</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>المجموع:</value>
-  </data>
-  <data name="txt_dr_total.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 9</value>
-  </data>
   <data name="account.HeaderText" xml:space="preserve">
     <value>التفاصيل / الحسابات</value>
+  </data>
+  <data name="description.HeaderText" xml:space="preserve">
+    <value>وصف</value>
   </data>
   <data name="debit_amount.HeaderText" xml:space="preserve">
     <value>Debit Amount/ دَين</value>
@@ -160,8 +210,110 @@
   <data name="credit_amount.HeaderText" xml:space="preserve">
     <value>Credit Amount / ائتمان</value>
   </data>
-  <data name="description.HeaderText" xml:space="preserve">
-    <value>وصف</value>
+  <data name="lbl_line_count_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 23</value>
+  </data>
+  <data name="lbl_line_count_title.Text" xml:space="preserve">
+    <value>عدد الأسطر</value>
+  </data>
+  <data name="lbl_balance_status.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 35</value>
+  </data>
+  <data name="lbl_balance_status.Text" xml:space="preserve">
+    <value>متوازن ✓</value>
+  </data>
+  <data name="lbl_difference_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 23</value>
+  </data>
+  <data name="lbl_difference_title.Text" xml:space="preserve">
+    <value>اختلاف</value>
+  </data>
+  <data name="lbl_cr_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="lbl_cr_title.Text" xml:space="preserve">
+    <value>إجمالي الساعات المعتمدة</value>
+  </data>
+  <data name="lbl_dr_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 23</value>
+  </data>
+  <data name="lbl_dr_title.Text" xml:space="preserve">
+    <value>إجمالي المبالغ المدينة</value>
+  </data>
+  <data name="btn_load_template.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1164, 55</value>
+  </data>
+  <data name="btn_load_template.Text" xml:space="preserve">
+    <value>تحميل القالب</value>
+  </data>
+  <data name="btn_attachment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1164, 21</value>
+  </data>
+  <data name="btn_attachment.Text" xml:space="preserve">
+    <value>مرفق</value>
+  </data>
+  <data name="txt_narration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 93</value>
+  </data>
+  <data name="lblNarration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 101</value>
+  </data>
+  <data name="lblNarration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 19</value>
+  </data>
+  <data name="lblNarration.Text" xml:space="preserve">
+    <value>السرد</value>
+  </data>
+  <data name="txt_reference_no.Location" type="System.Drawing.Point, System.Drawing">
+    <value>688, 59</value>
+  </data>
+  <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>590, 63</value>
+  </data>
+  <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 19</value>
+  </data>
+  <data name="lblReferenceNo.Text" xml:space="preserve">
+    <value>رقم المرجع</value>
+  </data>
+  <data name="cmb_voucher_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 59</value>
+  </data>
+  <data name="lblVoucherType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 63</value>
+  </data>
+  <data name="lblVoucherType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 19</value>
+  </data>
+  <data name="lblVoucherType.Text" xml:space="preserve">
+    <value>نوع القسيمة</value>
+  </data>
+  <data name="txt_entry_date.Location" type="System.Drawing.Point, System.Drawing">
+    <value>992, 27</value>
+  </data>
+  <data name="lblVoucherDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>894, 31</value>
+  </data>
+  <data name="lblVoucherDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 19</value>
+  </data>
+  <data name="lblVoucherDate.Text" xml:space="preserve">
+    <value>تاريخ القسيمة</value>
+  </data>
+  <data name="txt_invoice_no.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 27</value>
+  </data>
+  <data name="lblVoucherNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 31</value>
+  </data>
+  <data name="lblVoucherNo.Text" xml:space="preserve">
+    <value>رقم القسيمة</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>إدخالات دفتر اليومية</value>

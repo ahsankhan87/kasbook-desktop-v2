@@ -17,11 +17,7 @@ namespace pos
 
         private void InitializeComponent()
         {
-            this.panelHeader = new System.Windows.Forms.Panel();
-            this.lblYearValue = new System.Windows.Forms.Label();
-            this.lblYearCaption = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.panelMain = new System.Windows.Forms.Panel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_year_end_close_wizard));
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.grpValidation = new System.Windows.Forms.GroupBox();
             this.gridValidation = new System.Windows.Forms.DataGridView();
@@ -42,10 +38,13 @@ namespace pos
             this.btnExecuteClose = new System.Windows.Forms.Button();
             this.txtConfirmClose = new System.Windows.Forms.TextBox();
             this.lblConfirmHint = new System.Windows.Forms.Label();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.lblYearValue = new System.Windows.Forms.Label();
+            this.lblYearCaption = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.panelMain = new System.Windows.Forms.Panel();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.panelHeader.SuspendLayout();
-            this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
@@ -55,93 +54,38 @@ namespace pos
             this.panelValidationActions.SuspendLayout();
             this.grpProgress.SuspendLayout();
             this.grpExecution.SuspendLayout();
+            this.panelHeader.SuspendLayout();
+            this.panelMain.SuspendLayout();
             this.panelFooter.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelHeader
-            // 
-            this.panelHeader.Controls.Add(this.lblYearValue);
-            this.panelHeader.Controls.Add(this.lblYearCaption);
-            this.panelHeader.Controls.Add(this.lblTitle);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1244, 72);
-            this.panelHeader.TabIndex = 0;
-            // 
-            // lblYearValue
-            // 
-            this.lblYearValue.AutoSize = true;
-            this.lblYearValue.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.lblYearValue.Location = new System.Drawing.Point(101, 43);
-            this.lblYearValue.Name = "lblYearValue";
-            this.lblYearValue.Size = new System.Drawing.Size(34, 15);
-            this.lblYearValue.TabIndex = 2;
-            this.lblYearValue.Text = "N/A";
-            // 
-            // lblYearCaption
-            // 
-            this.lblYearCaption.AutoSize = true;
-            this.lblYearCaption.Location = new System.Drawing.Point(16, 43);
-            this.lblYearCaption.Name = "lblYearCaption";
-            this.lblYearCaption.Size = new System.Drawing.Size(78, 15);
-            this.lblYearCaption.TabIndex = 1;
-            this.lblYearCaption.Text = "Closing Year:";
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.lblTitle.Location = new System.Drawing.Point(14, 12);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(244, 21);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Year-End Closing Management";
-            // 
-            // panelMain
-            // 
-            this.panelMain.Controls.Add(this.splitMain);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 72);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(10);
-            this.panelMain.Size = new System.Drawing.Size(1244, 560);
-            this.panelMain.TabIndex = 1;
-            // 
             // splitMain
             // 
-            this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitMain.Location = new System.Drawing.Point(10, 10);
+            resources.ApplyResources(this.splitMain, "splitMain");
             this.splitMain.Name = "splitMain";
-            this.splitMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitMain.Panel1
             // 
+            resources.ApplyResources(this.splitMain.Panel1, "splitMain.Panel1");
             this.splitMain.Panel1.Controls.Add(this.grpValidation);
             // 
             // splitMain.Panel2
             // 
+            resources.ApplyResources(this.splitMain.Panel2, "splitMain.Panel2");
             this.splitMain.Panel2.Controls.Add(this.grpProgress);
             this.splitMain.Panel2.Controls.Add(this.grpExecution);
-            this.splitMain.Size = new System.Drawing.Size(1224, 540);
-            this.splitMain.SplitterDistance = 268;
-            this.splitMain.TabIndex = 0;
             // 
             // grpValidation
             // 
+            resources.ApplyResources(this.grpValidation, "grpValidation");
             this.grpValidation.Controls.Add(this.gridValidation);
             this.grpValidation.Controls.Add(this.panelValidationActions);
-            this.grpValidation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpValidation.Location = new System.Drawing.Point(0, 0);
             this.grpValidation.Name = "grpValidation";
-            this.grpValidation.Padding = new System.Windows.Forms.Padding(10);
-            this.grpValidation.Size = new System.Drawing.Size(1224, 268);
-            this.grpValidation.TabIndex = 0;
             this.grpValidation.TabStop = false;
-            this.grpValidation.Text = "Pre-Close Validation Report";
             // 
             // gridValidation
             // 
+            resources.ApplyResources(this.gridValidation, "gridValidation");
             this.gridValidation.AllowUserToAddRows = false;
             this.gridValidation.AllowUserToDeleteRows = false;
             this.gridValidation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -153,211 +97,178 @@ namespace pos
             this.colCheckStatus,
             this.colCheckFailedCount,
             this.colCheckDetails});
-            this.gridValidation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridValidation.Location = new System.Drawing.Point(10, 25);
             this.gridValidation.Name = "gridValidation";
             this.gridValidation.ReadOnly = true;
             this.gridValidation.RowHeadersVisible = false;
             this.gridValidation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridValidation.Size = new System.Drawing.Size(1204, 198);
-            this.gridValidation.TabIndex = 0;
             // 
             // colCheckKey
             // 
             this.colCheckKey.DataPropertyName = "check_key";
-            this.colCheckKey.HeaderText = "Key";
+            resources.ApplyResources(this.colCheckKey, "colCheckKey");
             this.colCheckKey.Name = "colCheckKey";
             this.colCheckKey.ReadOnly = true;
-            this.colCheckKey.Visible = false;
             // 
             // colCheckName
             // 
             this.colCheckName.DataPropertyName = "check_name";
-            this.colCheckName.HeaderText = "Validation Check";
+            resources.ApplyResources(this.colCheckName, "colCheckName");
             this.colCheckName.Name = "colCheckName";
             this.colCheckName.ReadOnly = true;
             // 
             // colCheckPassed
             // 
             this.colCheckPassed.DataPropertyName = "is_passed";
-            this.colCheckPassed.HeaderText = "Passed";
+            resources.ApplyResources(this.colCheckPassed, "colCheckPassed");
             this.colCheckPassed.Name = "colCheckPassed";
             this.colCheckPassed.ReadOnly = true;
-            this.colCheckPassed.Visible = false;
             // 
             // colCheckStatus
             // 
-            this.colCheckStatus.HeaderText = "Status";
+            resources.ApplyResources(this.colCheckStatus, "colCheckStatus");
             this.colCheckStatus.Name = "colCheckStatus";
             this.colCheckStatus.ReadOnly = true;
             // 
             // colCheckFailedCount
             // 
             this.colCheckFailedCount.DataPropertyName = "failed_count";
-            this.colCheckFailedCount.HeaderText = "Failed Count";
+            resources.ApplyResources(this.colCheckFailedCount, "colCheckFailedCount");
             this.colCheckFailedCount.Name = "colCheckFailedCount";
             this.colCheckFailedCount.ReadOnly = true;
             // 
             // colCheckDetails
             // 
             this.colCheckDetails.DataPropertyName = "details";
-            this.colCheckDetails.HeaderText = "Details";
+            resources.ApplyResources(this.colCheckDetails, "colCheckDetails");
             this.colCheckDetails.Name = "colCheckDetails";
             this.colCheckDetails.ReadOnly = true;
             // 
             // panelValidationActions
             // 
+            resources.ApplyResources(this.panelValidationActions, "panelValidationActions");
             this.panelValidationActions.Controls.Add(this.btnRefreshValidation);
-            this.panelValidationActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelValidationActions.Location = new System.Drawing.Point(10, 223);
             this.panelValidationActions.Name = "panelValidationActions";
-            this.panelValidationActions.Size = new System.Drawing.Size(1204, 35);
-            this.panelValidationActions.TabIndex = 1;
             // 
             // btnRefreshValidation
             // 
-            this.btnRefreshValidation.Location = new System.Drawing.Point(0, 5);
+            resources.ApplyResources(this.btnRefreshValidation, "btnRefreshValidation");
             this.btnRefreshValidation.Name = "btnRefreshValidation";
-            this.btnRefreshValidation.Size = new System.Drawing.Size(172, 26);
-            this.btnRefreshValidation.TabIndex = 0;
-            this.btnRefreshValidation.Text = "Refresh Validation Report";
             this.btnRefreshValidation.UseVisualStyleBackColor = true;
             this.btnRefreshValidation.Click += new System.EventHandler(this.btnRefreshValidation_Click);
             // 
             // grpProgress
             // 
+            resources.ApplyResources(this.grpProgress, "grpProgress");
             this.grpProgress.Controls.Add(this.lstProgress);
-            this.grpProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpProgress.Location = new System.Drawing.Point(0, 131);
             this.grpProgress.Name = "grpProgress";
-            this.grpProgress.Padding = new System.Windows.Forms.Padding(10);
-            this.grpProgress.Size = new System.Drawing.Size(1224, 137);
-            this.grpProgress.TabIndex = 1;
             this.grpProgress.TabStop = false;
-            this.grpProgress.Text = "Execution Progress";
             // 
             // lstProgress
             // 
-            this.lstProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.lstProgress, "lstProgress");
             this.lstProgress.FormattingEnabled = true;
-            this.lstProgress.ItemHeight = 15;
-            this.lstProgress.Location = new System.Drawing.Point(10, 25);
             this.lstProgress.Name = "lstProgress";
-            this.lstProgress.Size = new System.Drawing.Size(1204, 102);
-            this.lstProgress.TabIndex = 0;
             // 
             // grpExecution
             // 
+            resources.ApplyResources(this.grpExecution, "grpExecution");
             this.grpExecution.Controls.Add(this.lblResultValue);
             this.grpExecution.Controls.Add(this.lblResultCaption);
             this.grpExecution.Controls.Add(this.btnRollback);
             this.grpExecution.Controls.Add(this.btnExecuteClose);
             this.grpExecution.Controls.Add(this.txtConfirmClose);
             this.grpExecution.Controls.Add(this.lblConfirmHint);
-            this.grpExecution.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpExecution.Location = new System.Drawing.Point(0, 0);
             this.grpExecution.Name = "grpExecution";
-            this.grpExecution.Padding = new System.Windows.Forms.Padding(10);
-            this.grpExecution.Size = new System.Drawing.Size(1224, 131);
-            this.grpExecution.TabIndex = 0;
             this.grpExecution.TabStop = false;
-            this.grpExecution.Text = "Year-End Actions";
             // 
             // lblResultValue
             // 
-            this.lblResultValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResultValue.Location = new System.Drawing.Point(540, 25);
+            resources.ApplyResources(this.lblResultValue, "lblResultValue");
             this.lblResultValue.Name = "lblResultValue";
-            this.lblResultValue.Size = new System.Drawing.Size(670, 96);
-            this.lblResultValue.TabIndex = 5;
-            this.lblResultValue.Text = "Not executed yet.";
             // 
             // lblResultCaption
             // 
-            this.lblResultCaption.AutoSize = true;
-            this.lblResultCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.lblResultCaption.Location = new System.Drawing.Point(474, 25);
+            resources.ApplyResources(this.lblResultCaption, "lblResultCaption");
             this.lblResultCaption.Name = "lblResultCaption";
-            this.lblResultCaption.Size = new System.Drawing.Size(44, 15);
-            this.lblResultCaption.TabIndex = 4;
-            this.lblResultCaption.Text = "Result:";
             // 
             // btnRollback
             // 
-            this.btnRollback.Location = new System.Drawing.Point(178, 84);
+            resources.ApplyResources(this.btnRollback, "btnRollback");
             this.btnRollback.Name = "btnRollback";
-            this.btnRollback.Size = new System.Drawing.Size(153, 30);
-            this.btnRollback.TabIndex = 3;
-            this.btnRollback.Text = "Rollback Year-End Close";
             this.btnRollback.UseVisualStyleBackColor = true;
             this.btnRollback.Click += new System.EventHandler(this.btnRollback_Click);
             // 
             // btnExecuteClose
             // 
+            resources.ApplyResources(this.btnExecuteClose, "btnExecuteClose");
             this.btnExecuteClose.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnExecuteClose.ForeColor = System.Drawing.Color.White;
-            this.btnExecuteClose.Location = new System.Drawing.Point(13, 84);
             this.btnExecuteClose.Name = "btnExecuteClose";
-            this.btnExecuteClose.Size = new System.Drawing.Size(153, 30);
-            this.btnExecuteClose.TabIndex = 2;
-            this.btnExecuteClose.Text = "Execute Year-End Close";
             this.btnExecuteClose.UseVisualStyleBackColor = false;
             this.btnExecuteClose.Click += new System.EventHandler(this.btnExecuteClose_Click);
             // 
             // txtConfirmClose
             // 
-            this.txtConfirmClose.Location = new System.Drawing.Point(13, 47);
+            resources.ApplyResources(this.txtConfirmClose, "txtConfirmClose");
             this.txtConfirmClose.Name = "txtConfirmClose";
-            this.txtConfirmClose.Size = new System.Drawing.Size(318, 23);
-            this.txtConfirmClose.TabIndex = 1;
             // 
             // lblConfirmHint
             // 
-            this.lblConfirmHint.AutoSize = true;
-            this.lblConfirmHint.Location = new System.Drawing.Point(10, 25);
+            resources.ApplyResources(this.lblConfirmHint, "lblConfirmHint");
             this.lblConfirmHint.Name = "lblConfirmHint";
-            this.lblConfirmHint.Size = new System.Drawing.Size(304, 15);
-            this.lblConfirmHint.TabIndex = 0;
-            this.lblConfirmHint.Text = "Type CLOSE YEAR to confirm this irreversible operation.";
+            // 
+            // panelHeader
+            // 
+            resources.ApplyResources(this.panelHeader, "panelHeader");
+            this.panelHeader.Controls.Add(this.lblYearValue);
+            this.panelHeader.Controls.Add(this.lblYearCaption);
+            this.panelHeader.Controls.Add(this.lblTitle);
+            this.panelHeader.Name = "panelHeader";
+            // 
+            // lblYearValue
+            // 
+            resources.ApplyResources(this.lblYearValue, "lblYearValue");
+            this.lblYearValue.Name = "lblYearValue";
+            // 
+            // lblYearCaption
+            // 
+            resources.ApplyResources(this.lblYearCaption, "lblYearCaption");
+            this.lblYearCaption.Name = "lblYearCaption";
+            // 
+            // lblTitle
+            // 
+            resources.ApplyResources(this.lblTitle, "lblTitle");
+            this.lblTitle.Name = "lblTitle";
+            // 
+            // panelMain
+            // 
+            resources.ApplyResources(this.panelMain, "panelMain");
+            this.panelMain.Controls.Add(this.splitMain);
+            this.panelMain.Name = "panelMain";
             // 
             // panelFooter
             // 
+            resources.ApplyResources(this.panelFooter, "panelFooter");
             this.panelFooter.Controls.Add(this.btnClose);
-            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 632);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(1244, 44);
-            this.panelFooter.TabIndex = 2;
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(1151, 9);
+            resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(81, 28);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frm_year_end_close_wizard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 676);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelHeader);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "frm_year_end_close_wizard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Year-End Closing";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frm_year_end_close_wizard_FormClosed);
             this.Load += new System.EventHandler(this.frm_year_end_close_wizard_Load);
-            this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
-            this.panelMain.ResumeLayout(false);
             this.splitMain.Panel1.ResumeLayout(false);
             this.splitMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
@@ -368,6 +279,9 @@ namespace pos
             this.grpProgress.ResumeLayout(false);
             this.grpExecution.ResumeLayout(false);
             this.grpExecution.PerformLayout();
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
+            this.panelMain.ResumeLayout(false);
             this.panelFooter.ResumeLayout(false);
             this.ResumeLayout(false);
 

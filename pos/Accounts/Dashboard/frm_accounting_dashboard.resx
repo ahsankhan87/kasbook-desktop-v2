@@ -117,4 +117,1597 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitMiddle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitMiddle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 8</value>
+  </data>
+  <data name="colBankName.HeaderText" xml:space="preserve">
+    <value>Bank Account</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="colBankName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colBankReconcile.HeaderText" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="colBankReconcile.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colBankReconcile.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="gridUnreconciledBanks.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridUnreconciledBanks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 230</value>
+  </data>
+  <data name="gridUnreconciledBanks.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="gridUnreconciledBanks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>721, 47</value>
+  </data>
+  <data name="gridUnreconciledBanks.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;gridUnreconciledBanks.Name" xml:space="preserve">
+    <value>gridUnreconciledBanks</value>
+  </data>
+  <data name="&gt;&gt;gridUnreconciledBanks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridUnreconciledBanks.Parent" xml:space="preserve">
+    <value>splitMiddle.Panel1</value>
+  </data>
+  <data name="&gt;&gt;gridUnreconciledBanks.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblUnreconciledTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblUnreconciledTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="lblUnreconciledTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 206</value>
+  </data>
+  <data name="lblUnreconciledTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>721, 24</value>
+  </data>
+  <data name="lblUnreconciledTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblUnreconciledTitle.Text" xml:space="preserve">
+    <value>Bank accounts not reconciled this month</value>
+  </data>
+  <data name="lblUnreconciledTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblUnreconciledTitle.Name" xml:space="preserve">
+    <value>lblUnreconciledTitle</value>
+  </data>
+  <data name="&gt;&gt;lblUnreconciledTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUnreconciledTitle.Parent" xml:space="preserve">
+    <value>splitMiddle.Panel1</value>
+  </data>
+  <data name="&gt;&gt;lblUnreconciledTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="colAttentionItem.HeaderText" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="colAttentionItem.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colAttentionCount.HeaderText" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="colAttentionCount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colAttentionCount.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="colAttentionAmount.HeaderText" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="colAttentionAmount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colAttentionAmount.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="colAttentionAction.HeaderText" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="colAttentionAction.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colAttentionAction.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="gridAttention.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="gridAttention.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 28</value>
+  </data>
+  <data name="gridAttention.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="gridAttention.Size" type="System.Drawing.Size, System.Drawing">
+    <value>721, 178</value>
+  </data>
+  <data name="gridAttention.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;gridAttention.Name" xml:space="preserve">
+    <value>gridAttention</value>
+  </data>
+  <data name="&gt;&gt;gridAttention.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridAttention.Parent" xml:space="preserve">
+    <value>splitMiddle.Panel1</value>
+  </data>
+  <data name="&gt;&gt;gridAttention.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblAttentionTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblAttentionTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblAttentionTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblAttentionTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>721, 28</value>
+  </data>
+  <data name="lblAttentionTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblAttentionTitle.Text" xml:space="preserve">
+    <value>Accounts Requiring Attention</value>
+  </data>
+  <data name="lblAttentionTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAttentionTitle.Name" xml:space="preserve">
+    <value>lblAttentionTitle</value>
+  </data>
+  <data name="&gt;&gt;lblAttentionTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAttentionTitle.Parent" xml:space="preserve">
+    <value>splitMiddle.Panel1</value>
+  </data>
+  <data name="&gt;&gt;lblAttentionTitle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel1.Name" xml:space="preserve">
+    <value>splitMiddle.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel1.Parent" xml:space="preserve">
+    <value>splitMiddle</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gridRecentJournals.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridRecentJournals.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 28</value>
+  </data>
+  <data name="gridRecentJournals.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="gridRecentJournals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>735, 249</value>
+  </data>
+  <data name="gridRecentJournals.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;gridRecentJournals.Name" xml:space="preserve">
+    <value>gridRecentJournals</value>
+  </data>
+  <data name="&gt;&gt;gridRecentJournals.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridRecentJournals.Parent" xml:space="preserve">
+    <value>splitMiddle.Panel2</value>
+  </data>
+  <data name="&gt;&gt;gridRecentJournals.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblJournalTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblJournalTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblJournalTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblJournalTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>735, 28</value>
+  </data>
+  <data name="lblJournalTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblJournalTitle.Text" xml:space="preserve">
+    <value>Recent Journal Activity</value>
+  </data>
+  <data name="lblJournalTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblJournalTitle.Name" xml:space="preserve">
+    <value>lblJournalTitle</value>
+  </data>
+  <data name="&gt;&gt;lblJournalTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblJournalTitle.Parent" xml:space="preserve">
+    <value>splitMiddle.Panel2</value>
+  </data>
+  <data name="&gt;&gt;lblJournalTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel2.Name" xml:space="preserve">
+    <value>splitMiddle.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel2.Parent" xml:space="preserve">
+    <value>splitMiddle</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitMiddle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 277</value>
+  </data>
+  <data name="splitMiddle.SplitterDistance" type="System.Int32, mscorlib">
+    <value>721</value>
+  </data>
+  <data name="splitMiddle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Name" xml:space="preserve">
+    <value>splitMiddle</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.Parent" xml:space="preserve">
+    <value>panelMiddle</value>
+  </data>
+  <data name="&gt;&gt;splitMiddle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnRefresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 14</value>
+  </data>
+  <data name="btnRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 30</value>
+  </data>
+  <data name="btnRefresh.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnRefresh.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.Name" xml:space="preserve">
+    <value>btnRefresh</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmbPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 15</value>
+  </data>
+  <data name="cmbPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 33</value>
+  </data>
+  <data name="cmbPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.Name" xml:space="preserve">
+    <value>cmbPeriod</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblPeriod.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 19</value>
+  </data>
+  <data name="lblPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 25</value>
+  </data>
+  <data name="lblPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblPeriod.Text" xml:space="preserve">
+    <value>Period:</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.Name" xml:space="preserve">
+    <value>lblPeriod</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 12, 16, 8</value>
+  </data>
+  <data name="panelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1484, 56</value>
+  </data>
+  <data name="panelHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Name" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelMiddle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelMiddle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 446</value>
+  </data>
+  <data name="panelMiddle.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 8, 0, 0</value>
+  </data>
+  <data name="panelMiddle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 285</value>
+  </data>
+  <data name="panelMiddle.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panelMiddle.Name" xml:space="preserve">
+    <value>panelMiddle</value>
+  </data>
+  <data name="&gt;&gt;panelMiddle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelMiddle.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelMiddle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableCharts.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="chartPnl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chartPnl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="chartPnl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 176</value>
+  </data>
+  <data name="chartPnl.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chartPnl.Text" xml:space="preserve">
+    <value>chart1</value>
+  </data>
+  <data name="&gt;&gt;chartPnl.Name" xml:space="preserve">
+    <value>chartPnl</value>
+  </data>
+  <data name="&gt;&gt;chartPnl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;chartPnl.Parent" xml:space="preserve">
+    <value>panelChartPnl</value>
+  </data>
+  <data name="&gt;&gt;chartPnl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblChartPnl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblChartPnl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="lblChartPnl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblChartPnl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 24</value>
+  </data>
+  <data name="lblChartPnl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblChartPnl.Text" xml:space="preserve">
+    <value>Monthly P&amp;&amp;L Comparison (Last 6 Months)</value>
+  </data>
+  <data name="lblChartPnl.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblChartPnl.Name" xml:space="preserve">
+    <value>lblChartPnl</value>
+  </data>
+  <data name="&gt;&gt;lblChartPnl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblChartPnl.Parent" xml:space="preserve">
+    <value>panelChartPnl</value>
+  </data>
+  <data name="&gt;&gt;lblChartPnl.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelChartPnl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelChartPnl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="panelChartPnl.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 6, 0</value>
+  </data>
+  <data name="panelChartPnl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 200</value>
+  </data>
+  <data name="panelChartPnl.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelChartPnl.Name" xml:space="preserve">
+    <value>panelChartPnl</value>
+  </data>
+  <data name="&gt;&gt;panelChartPnl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelChartPnl.Parent" xml:space="preserve">
+    <value>tableCharts</value>
+  </data>
+  <data name="&gt;&gt;panelChartPnl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chartCashFlow.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chartCashFlow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="chartCashFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 176</value>
+  </data>
+  <data name="chartCashFlow.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chartCashFlow.Text" xml:space="preserve">
+    <value>chart2</value>
+  </data>
+  <data name="&gt;&gt;chartCashFlow.Name" xml:space="preserve">
+    <value>chartCashFlow</value>
+  </data>
+  <data name="&gt;&gt;chartCashFlow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;chartCashFlow.Parent" xml:space="preserve">
+    <value>panelChartCash</value>
+  </data>
+  <data name="&gt;&gt;chartCashFlow.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblChartCash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblChartCash.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="lblChartCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblChartCash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 24</value>
+  </data>
+  <data name="lblChartCash.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblChartCash.Text" xml:space="preserve">
+    <value>Cash &amp;&amp; Bank Trend (Last 12 Months)</value>
+  </data>
+  <data name="lblChartCash.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblChartCash.Name" xml:space="preserve">
+    <value>lblChartCash</value>
+  </data>
+  <data name="&gt;&gt;lblChartCash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblChartCash.Parent" xml:space="preserve">
+    <value>panelChartCash</value>
+  </data>
+  <data name="&gt;&gt;lblChartCash.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelChartCash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelChartCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 3</value>
+  </data>
+  <data name="panelChartCash.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 6, 0</value>
+  </data>
+  <data name="panelChartCash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 200</value>
+  </data>
+  <data name="panelChartCash.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelChartCash.Name" xml:space="preserve">
+    <value>panelChartCash</value>
+  </data>
+  <data name="&gt;&gt;panelChartCash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelChartCash.Parent" xml:space="preserve">
+    <value>tableCharts</value>
+  </data>
+  <data name="&gt;&gt;panelChartCash.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chartExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chartExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="chartExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 176</value>
+  </data>
+  <data name="chartExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chartExpense.Text" xml:space="preserve">
+    <value>chart3</value>
+  </data>
+  <data name="&gt;&gt;chartExpense.Name" xml:space="preserve">
+    <value>chartExpense</value>
+  </data>
+  <data name="&gt;&gt;chartExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;chartExpense.Parent" xml:space="preserve">
+    <value>panelChartExpense</value>
+  </data>
+  <data name="&gt;&gt;chartExpense.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblChartExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblChartExpense.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="lblChartExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblChartExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 24</value>
+  </data>
+  <data name="lblChartExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblChartExpense.Text" xml:space="preserve">
+    <value>Expense Breakdown (Top 5)</value>
+  </data>
+  <data name="lblChartExpense.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblChartExpense.Name" xml:space="preserve">
+    <value>lblChartExpense</value>
+  </data>
+  <data name="&gt;&gt;lblChartExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblChartExpense.Parent" xml:space="preserve">
+    <value>panelChartExpense</value>
+  </data>
+  <data name="&gt;&gt;lblChartExpense.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelChartExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelChartExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>975, 3</value>
+  </data>
+  <data name="panelChartExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 200</value>
+  </data>
+  <data name="panelChartExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panelChartExpense.Name" xml:space="preserve">
+    <value>panelChartExpense</value>
+  </data>
+  <data name="&gt;&gt;panelChartExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelChartExpense.Parent" xml:space="preserve">
+    <value>tableCharts</value>
+  </data>
+  <data name="&gt;&gt;panelChartExpense.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableCharts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableCharts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 8</value>
+  </data>
+  <data name="tableCharts.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableCharts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 206</value>
+  </data>
+  <data name="tableCharts.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableCharts.Name" xml:space="preserve">
+    <value>tableCharts</value>
+  </data>
+  <data name="&gt;&gt;tableCharts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableCharts.Parent" xml:space="preserve">
+    <value>panelCharts</value>
+  </data>
+  <data name="&gt;&gt;tableCharts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableCharts.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelChartPnl" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelChartCash" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panelChartExpense" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="panelCharts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelCharts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 232</value>
+  </data>
+  <data name="panelCharts.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 8, 0, 0</value>
+  </data>
+  <data name="panelCharts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 214</value>
+  </data>
+  <data name="panelCharts.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelCharts.Name" xml:space="preserve">
+    <value>panelCharts</value>
+  </data>
+  <data name="&gt;&gt;panelCharts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelCharts.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelCharts.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableKpis.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblCashValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCashValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 16pt, style=Bold</value>
+  </data>
+  <data name="lblCashValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 46</value>
+  </data>
+  <data name="lblCashValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 37</value>
+  </data>
+  <data name="lblCashValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblCashValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblCashValue.Name" xml:space="preserve">
+    <value>lblCashValue</value>
+  </data>
+  <data name="&gt;&gt;lblCashValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCashValue.Parent" xml:space="preserve">
+    <value>cardCash</value>
+  </data>
+  <data name="&gt;&gt;lblCashValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblCashTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCashTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblCashTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="lblCashTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 23</value>
+  </data>
+  <data name="lblCashTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblCashTitle.Text" xml:space="preserve">
+    <value>Cash &amp;&amp; Bank Balance</value>
+  </data>
+  <data name="&gt;&gt;lblCashTitle.Name" xml:space="preserve">
+    <value>lblCashTitle</value>
+  </data>
+  <data name="&gt;&gt;lblCashTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCashTitle.Parent" xml:space="preserve">
+    <value>cardCash</value>
+  </data>
+  <data name="&gt;&gt;lblCashTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardCash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="cardCash.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="cardCash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 104</value>
+  </data>
+  <data name="cardCash.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cardCash.Name" xml:space="preserve">
+    <value>cardCash</value>
+  </data>
+  <data name="&gt;&gt;cardCash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardCash.Parent" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;cardCash.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblReceivableValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblReceivableValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 16pt, style=Bold</value>
+  </data>
+  <data name="lblReceivableValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 46</value>
+  </data>
+  <data name="lblReceivableValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 37</value>
+  </data>
+  <data name="lblReceivableValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblReceivableValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableValue.Name" xml:space="preserve">
+    <value>lblReceivableValue</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableValue.Parent" xml:space="preserve">
+    <value>cardReceivable</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblReceivableTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblReceivableTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblReceivableTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="lblReceivableTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
+  </data>
+  <data name="lblReceivableTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblReceivableTitle.Text" xml:space="preserve">
+    <value>Total Receivables</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableTitle.Name" xml:space="preserve">
+    <value>lblReceivableTitle</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableTitle.Parent" xml:space="preserve">
+    <value>cardReceivable</value>
+  </data>
+  <data name="&gt;&gt;lblReceivableTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardReceivable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardReceivable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 3</value>
+  </data>
+  <data name="cardReceivable.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="cardReceivable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 104</value>
+  </data>
+  <data name="cardReceivable.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cardReceivable.Name" xml:space="preserve">
+    <value>cardReceivable</value>
+  </data>
+  <data name="&gt;&gt;cardReceivable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardReceivable.Parent" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;cardReceivable.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblPayableValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPayableValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 16pt, style=Bold</value>
+  </data>
+  <data name="lblPayableValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 46</value>
+  </data>
+  <data name="lblPayableValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 37</value>
+  </data>
+  <data name="lblPayableValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblPayableValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblPayableValue.Name" xml:space="preserve">
+    <value>lblPayableValue</value>
+  </data>
+  <data name="&gt;&gt;lblPayableValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPayableValue.Parent" xml:space="preserve">
+    <value>cardPayable</value>
+  </data>
+  <data name="&gt;&gt;lblPayableValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblPayableTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPayableTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblPayableTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="lblPayableTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 23</value>
+  </data>
+  <data name="lblPayableTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblPayableTitle.Text" xml:space="preserve">
+    <value>Total Payables</value>
+  </data>
+  <data name="&gt;&gt;lblPayableTitle.Name" xml:space="preserve">
+    <value>lblPayableTitle</value>
+  </data>
+  <data name="&gt;&gt;lblPayableTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPayableTitle.Parent" xml:space="preserve">
+    <value>cardPayable</value>
+  </data>
+  <data name="&gt;&gt;lblPayableTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardPayable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardPayable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>975, 3</value>
+  </data>
+  <data name="cardPayable.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="cardPayable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 104</value>
+  </data>
+  <data name="cardPayable.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cardPayable.Name" xml:space="preserve">
+    <value>cardPayable</value>
+  </data>
+  <data name="&gt;&gt;cardPayable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardPayable.Parent" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;cardPayable.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblRevenueValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRevenueValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 16pt, style=Bold</value>
+  </data>
+  <data name="lblRevenueValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 46</value>
+  </data>
+  <data name="lblRevenueValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 37</value>
+  </data>
+  <data name="lblRevenueValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblRevenueValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.Name" xml:space="preserve">
+    <value>lblRevenueValue</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.Parent" xml:space="preserve">
+    <value>cardRevenue</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblRevenueTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRevenueTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblRevenueTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="lblRevenueTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 23</value>
+  </data>
+  <data name="lblRevenueTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblRevenueTitle.Text" xml:space="preserve">
+    <value>Revenue This Month</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.Name" xml:space="preserve">
+    <value>lblRevenueTitle</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.Parent" xml:space="preserve">
+    <value>cardRevenue</value>
+  </data>
+  <data name="&gt;&gt;lblRevenueTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardRevenue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardRevenue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 113</value>
+  </data>
+  <data name="cardRevenue.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="cardRevenue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 104</value>
+  </data>
+  <data name="cardRevenue.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cardRevenue.Name" xml:space="preserve">
+    <value>cardRevenue</value>
+  </data>
+  <data name="&gt;&gt;cardRevenue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardRevenue.Parent" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;cardRevenue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblExpensesValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblExpensesValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 16pt, style=Bold</value>
+  </data>
+  <data name="lblExpensesValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 46</value>
+  </data>
+  <data name="lblExpensesValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 37</value>
+  </data>
+  <data name="lblExpensesValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblExpensesValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesValue.Name" xml:space="preserve">
+    <value>lblExpensesValue</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesValue.Parent" xml:space="preserve">
+    <value>cardExpenses</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblExpensesTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblExpensesTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblExpensesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="lblExpensesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 23</value>
+  </data>
+  <data name="lblExpensesTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblExpensesTitle.Text" xml:space="preserve">
+    <value>Expenses This Month</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesTitle.Name" xml:space="preserve">
+    <value>lblExpensesTitle</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesTitle.Parent" xml:space="preserve">
+    <value>cardExpenses</value>
+  </data>
+  <data name="&gt;&gt;lblExpensesTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardExpenses.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardExpenses.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 113</value>
+  </data>
+  <data name="cardExpenses.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="cardExpenses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 104</value>
+  </data>
+  <data name="cardExpenses.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cardExpenses.Name" xml:space="preserve">
+    <value>cardExpenses</value>
+  </data>
+  <data name="&gt;&gt;cardExpenses.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardExpenses.Parent" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;cardExpenses.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblNetProfitValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNetProfitValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 16pt, style=Bold</value>
+  </data>
+  <data name="lblNetProfitValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 46</value>
+  </data>
+  <data name="lblNetProfitValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 37</value>
+  </data>
+  <data name="lblNetProfitValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblNetProfitValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.Name" xml:space="preserve">
+    <value>lblNetProfitValue</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.Parent" xml:space="preserve">
+    <value>cardNetProfit</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblNetProfitTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNetProfitTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblNetProfitTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 15</value>
+  </data>
+  <data name="lblNetProfitTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="lblNetProfitTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNetProfitTitle.Text" xml:space="preserve">
+    <value>Net Profit This Month</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitTitle.Name" xml:space="preserve">
+    <value>lblNetProfitTitle</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitTitle.Parent" xml:space="preserve">
+    <value>cardNetProfit</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardNetProfit.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardNetProfit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>975, 113</value>
+  </data>
+  <data name="cardNetProfit.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 10, 14, 10</value>
+  </data>
+  <data name="cardNetProfit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 104</value>
+  </data>
+  <data name="cardNetProfit.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cardNetProfit.Name" xml:space="preserve">
+    <value>cardNetProfit</value>
+  </data>
+  <data name="&gt;&gt;cardNetProfit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardNetProfit.Parent" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;cardNetProfit.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tableKpis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableKpis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableKpis.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableKpis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 220</value>
+  </data>
+  <data name="tableKpis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableKpis.Name" xml:space="preserve">
+    <value>tableKpis</value>
+  </data>
+  <data name="&gt;&gt;tableKpis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableKpis.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;tableKpis.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableKpis.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cardCash" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cardReceivable" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cardPayable" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cardRevenue" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cardExpenses" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cardNetProfit" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="panelKpis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelKpis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="panelKpis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 220</value>
+  </data>
+  <data name="panelKpis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Name" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnNewJv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnNewJv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 34</value>
+  </data>
+  <data name="btnNewJv.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnNewJv.Text" xml:space="preserve">
+    <value>New JV</value>
+  </data>
+  <data name="&gt;&gt;btnNewJv.Name" xml:space="preserve">
+    <value>btnNewJv</value>
+  </data>
+  <data name="&gt;&gt;btnNewJv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNewJv.Parent" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;btnNewJv.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnReceivePayment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 3</value>
+  </data>
+  <data name="btnReceivePayment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 34</value>
+  </data>
+  <data name="btnReceivePayment.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnReceivePayment.Text" xml:space="preserve">
+    <value>Receive Payment</value>
+  </data>
+  <data name="btnReceivePayment.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnReceivePayment.Name" xml:space="preserve">
+    <value>btnReceivePayment</value>
+  </data>
+  <data name="&gt;&gt;btnReceivePayment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReceivePayment.Parent" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;btnReceivePayment.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnMakePayment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>329, 3</value>
+  </data>
+  <data name="btnMakePayment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 34</value>
+  </data>
+  <data name="btnMakePayment.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnMakePayment.Text" xml:space="preserve">
+    <value>Make Payment</value>
+  </data>
+  <data name="btnMakePayment.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnMakePayment.Name" xml:space="preserve">
+    <value>btnMakePayment</value>
+  </data>
+  <data name="&gt;&gt;btnMakePayment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMakePayment.Parent" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;btnMakePayment.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnBankRec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>517, 3</value>
+  </data>
+  <data name="btnBankRec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 34</value>
+  </data>
+  <data name="btnBankRec.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnBankRec.Text" xml:space="preserve">
+    <value>Bank Rec</value>
+  </data>
+  <data name="&gt;&gt;btnBankRec.Name" xml:space="preserve">
+    <value>btnBankRec</value>
+  </data>
+  <data name="&gt;&gt;btnBankRec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBankRec.Parent" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;btnBankRec.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnRunPL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>663, 3</value>
+  </data>
+  <data name="btnRunPL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 34</value>
+  </data>
+  <data name="btnRunPL.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnRunPL.Text" xml:space="preserve">
+    <value>Run P&amp;&amp;L</value>
+  </data>
+  <data name="&gt;&gt;btnRunPL.Name" xml:space="preserve">
+    <value>btnRunPL</value>
+  </data>
+  <data name="&gt;&gt;btnRunPL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRunPL.Parent" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;btnRunPL.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnRunBalanceSheet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>809, 3</value>
+  </data>
+  <data name="btnRunBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 34</value>
+  </data>
+  <data name="btnRunBalanceSheet.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnRunBalanceSheet.Text" xml:space="preserve">
+    <value>Run Balance Sheet</value>
+  </data>
+  <data name="&gt;&gt;btnRunBalanceSheet.Name" xml:space="preserve">
+    <value>btnRunBalanceSheet</value>
+  </data>
+  <data name="&gt;&gt;btnRunBalanceSheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRunBalanceSheet.Parent" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;btnRunBalanceSheet.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="flowQuickActions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="flowQuickActions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 8</value>
+  </data>
+  <data name="flowQuickActions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 44</value>
+  </data>
+  <data name="flowQuickActions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;flowQuickActions.Name" xml:space="preserve">
+    <value>flowQuickActions</value>
+  </data>
+  <data name="&gt;&gt;flowQuickActions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowQuickActions.Parent" xml:space="preserve">
+    <value>panelBottomActions</value>
+  </data>
+  <data name="&gt;&gt;flowQuickActions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelBottomActions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="panelBottomActions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 731</value>
+  </data>
+  <data name="panelBottomActions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 8, 0, 0</value>
+  </data>
+  <data name="panelBottomActions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1460, 52</value>
+  </data>
+  <data name="panelBottomActions.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;panelBottomActions.Name" xml:space="preserve">
+    <value>panelBottomActions</value>
+  </data>
+  <data name="&gt;&gt;panelBottomActions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelBottomActions.Parent" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelBottomActions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panelMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 56</value>
+  </data>
+  <data name="panelMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1484, 795</value>
+  </data>
+  <data name="panelMain.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Name" xml:space="preserve">
+    <value>panelMain</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>10, 25</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1484, 851</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Accounting Dashboard</value>
+  </data>
+  <data name="&gt;&gt;colBankName.Name" xml:space="preserve">
+    <value>colBankName</value>
+  </data>
+  <data name="&gt;&gt;colBankName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colBankReconcile.Name" xml:space="preserve">
+    <value>colBankReconcile</value>
+  </data>
+  <data name="&gt;&gt;colBankReconcile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colAttentionItem.Name" xml:space="preserve">
+    <value>colAttentionItem</value>
+  </data>
+  <data name="&gt;&gt;colAttentionItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colAttentionCount.Name" xml:space="preserve">
+    <value>colAttentionCount</value>
+  </data>
+  <data name="&gt;&gt;colAttentionCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colAttentionAmount.Name" xml:space="preserve">
+    <value>colAttentionAmount</value>
+  </data>
+  <data name="&gt;&gt;colAttentionAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colAttentionAction.Name" xml:space="preserve">
+    <value>colAttentionAction</value>
+  </data>
+  <data name="&gt;&gt;colAttentionAction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_accounting_dashboard</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -117,4 +117,3703 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtPhone.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label27.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBaseCurrency.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblFaDepExpense.Text" xml:space="preserve">
+    <value>Depreciation Expense</value>
+  </data>
+  <data name="&gt;&gt;tabTax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAsset.Name" xml:space="preserve">
+    <value>cmbInventoryAsset</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAsset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblDateFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="lblNtnVat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panelBottom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="colWhtType.HeaderText" xml:space="preserve">
+    <value>WHT Type</value>
+  </data>
+  <data name="lblStrn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 73</value>
+  </data>
+  <data name="label22.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabReports.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryExpense.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="cmbFaAccumDep.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;txt_postalCode.Name" xml:space="preserve">
+    <value>txt_postalCode</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostPurchases.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtRegistrationNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbReportDateFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblInterBranchRec.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblInterBranchRec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 320</value>
+  </data>
+  <data name="cmbInventoryAsset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="colWhtRate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblRegistration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRegistration.Name" xml:space="preserve">
+    <value>lblRegistration</value>
+  </data>
+  <data name="lblBaseCurrency.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtLogoPath.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmbBaseCurrency.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="txtStrn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="lblLegalName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 40</value>
+  </data>
+  <data name="txt_citySubdivisionName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 29</value>
+  </data>
+  <data name="colWhtType.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblPurchaseCogs.Text" xml:space="preserve">
+    <value>Purchase/COGS</value>
+  </data>
+  <data name="numApprovalThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmbReportDateFormat.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="lblInventoryCogs.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblEmail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txt_StreetName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 59</value>
+  </data>
+  <data name="cmbPurchaseCogs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblFilingFrequency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>758, 67</value>
+  </data>
+  <data name="&gt;&gt;txt_countryName.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="colVoucherBranchId.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cmbInventoryAsset.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblFaAccumDep.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="lblInterBranchPay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 50</value>
+  </data>
+  <data name="label26.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPurchaseTaxInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="groupReports.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="&gt;&gt;lblSalesRevenue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtWebsite.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="colVoucherStart.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblSalesAr.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;txtStrn.Name" xml:space="preserve">
+    <value>txtStrn</value>
+  </data>
+  <data name="cmbInterBranchPay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;colWhtType.Name" xml:space="preserve">
+    <value>colWhtType</value>
+  </data>
+  <data name="txt_countryName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 176</value>
+  </data>
+  <data name="txt_countryName.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblCompanyName.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="gridWhtRates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 134</value>
+  </data>
+  <data name="cmbDefaultCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 123</value>
+  </data>
+  <data name="cmbSalaryExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 163</value>
+  </data>
+  <data name="gridWhtRates.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblSalesTaxOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="&gt;&gt;lblFbrStrn.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="cmbReportDateFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 29</value>
+  </data>
+  <data name="lblDefaultExpense.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblEmail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 23</value>
+  </data>
+  <data name="groupPosting.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbInventoryCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 243</value>
+  </data>
+  <data name="cmbSalesAr.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbOpeningEquity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 363</value>
+  </data>
+  <data name="&gt;&gt;txt_StreetName.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesTaxOutput.Name" xml:space="preserve">
+    <value>cmbSalesTaxOutput</value>
+  </data>
+  <data name="lblSalesRevenue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 0</value>
+  </data>
+  <data name="panelBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1360, 45</value>
+  </data>
+  <data name="cmbDefaultCash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAp.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseLogo.Name" xml:space="preserve">
+    <value>btnBrowseLogo</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultBank.Name" xml:space="preserve">
+    <value>lblDefaultBank</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchPay.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="lblDefaultBank.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;numBudgetWarningPct.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultExpense.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;tblDefaults.Parent" xml:space="preserve">
+    <value>tabDefaults</value>
+  </data>
+  <data name="&gt;&gt;tabVoucher.Parent" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="lblDigitalSignature.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtEmail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colEffectiveFrom.HeaderText" xml:space="preserve">
+    <value>Effective From</value>
+  </data>
+  <data name="lblPhone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 23</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbCountry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 217</value>
+  </data>
+  <data name="cmbFaAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 283</value>
+  </data>
+  <data name="tabReports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1352, 627</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAccumDep.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;chkRequireNarration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCompanyName.Text" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="txtLogoPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 29</value>
+  </data>
+  <data name="&gt;&gt;lblRegistration.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;lblFyStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTestAutoPostingRules.Parent" xml:space="preserve">
+    <value>tabDefaults</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultExpense.Name" xml:space="preserve">
+    <value>cmbDefaultExpense</value>
+  </data>
+  <data name="&gt;&gt;label25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblApprovalThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblWebsite.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="txtReportFooter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 70</value>
+  </data>
+  <data name="&gt;&gt;txtDigitalSignature.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCompanyName.Name" xml:space="preserve">
+    <value>lblCompanyName</value>
+  </data>
+  <data name="lblSalesTaxRate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 23</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAdjustment.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="txtLegalName.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryCogs.Name" xml:space="preserve">
+    <value>lblInventoryCogs</value>
+  </data>
+  <data name="txtAddress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 145</value>
+  </data>
+  <data name="lblDigitalSignature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 23</value>
+  </data>
+  <data name="&gt;&gt;cmbAmountFormat.Name" xml:space="preserve">
+    <value>cmbAmountFormat</value>
+  </data>
+  <data name="&gt;&gt;cmbReportDateFormat.Name" xml:space="preserve">
+    <value>cmbReportDateFormat</value>
+  </data>
+  <data name="&gt;&gt;tblDefaults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtNtnVat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 23</value>
+  </data>
+  <data name="cmbSalesRevenue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 3</value>
+  </data>
+  <data name="&gt;&gt;tabTax.Parent" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="&gt;&gt;colEffectiveFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblApprovalThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 23</value>
+  </data>
+  <data name="&gt;&gt;cmbFyStartMonth.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;label22.Name" xml:space="preserve">
+    <value>label22</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchRec.Name" xml:space="preserve">
+    <value>cmbInterBranchRec</value>
+  </data>
+  <data name="groupCompanyHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 611</value>
+  </data>
+  <data name="&gt;&gt;chk_use_zatca_e_invoice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDigitalSignature.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="numBudgetWarningPct.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 29</value>
+  </data>
+  <data name="&gt;&gt;lblBackdatingDays.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>Building Number</value>
+  </data>
+  <data name="&gt;&gt;label24.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="lblTaxMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 23</value>
+  </data>
+  <data name="&gt;&gt;txtAddress.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;lblFyEnd.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="groupTaxTop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="&gt;&gt;lblStrn.Name" xml:space="preserve">
+    <value>lblStrn</value>
+  </data>
+  <data name="txtReportHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 29</value>
+  </data>
+  <data name="chkAutoPostSales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 27</value>
+  </data>
+  <data name="&gt;&gt;colVoucherBranchId.Name" xml:space="preserve">
+    <value>colVoucherBranchId</value>
+  </data>
+  <data name="txtLegalName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 34</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxOutput.Name" xml:space="preserve">
+    <value>lblSalesTaxOutput</value>
+  </data>
+  <data name="&gt;&gt;chkAllowLockedPeriodPosting.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="lblShowAmountsIn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLegalName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblFbrStrn.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblPurchaseAp.Text" xml:space="preserve">
+    <value>Purchase AP Account</value>
+  </data>
+  <data name="label23.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 92</value>
+  </data>
+  <data name="tabDefaults.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="&gt;&gt;lblFaAccumDep.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;groupTaxTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupPosting.Parent" xml:space="preserve">
+    <value>tabPosting</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultCash.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultBank.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="lblSalaryExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultCash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtWebsite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="&gt;&gt;lblReportFooter.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="&gt;&gt;lblPhone.Name" xml:space="preserve">
+    <value>lblPhone</value>
+  </data>
+  <data name="&gt;&gt;txtWebsite.Name" xml:space="preserve">
+    <value>txtWebsite</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>532, 218</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabVoucher.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAsset.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;groupReports.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmbFyEndMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtReportHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningEquity.Name" xml:space="preserve">
+    <value>lblOpeningEquity</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.Text" xml:space="preserve">
+    <value>Allow posting to locked periods (Admin)</value>
+  </data>
+  <data name="lblFaAccumDep.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultExpense.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;lblFyStart.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;colVoucherFormat.Name" xml:space="preserve">
+    <value>colVoucherFormat</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryPayable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelBottom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 707</value>
+  </data>
+  <data name="&gt;&gt;lblBudgetWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="numSalesTaxRate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;colVoucherFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtLogoPath.Name" xml:space="preserve">
+    <value>txtLogoPath</value>
+  </data>
+  <data name="lblFaAccumDep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 280</value>
+  </data>
+  <data name="cmbCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="lblBudgetWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 167</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchPay.Name" xml:space="preserve">
+    <value>cmbInterBranchPay</value>
+  </data>
+  <data name="colVoucherPreview.HeaderText" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="colVoucherPrefix.HeaderText" xml:space="preserve">
+    <value>Prefix</value>
+  </data>
+  <data name="&gt;&gt;btnResetDefaults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbBaseCurrency.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colVoucherPreview.Name" xml:space="preserve">
+    <value>colVoucherPreview</value>
+  </data>
+  <data name="&gt;&gt;tabVoucher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txt_postalCode.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cmbTaxMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 29</value>
+  </data>
+  <data name="&gt;&gt;lblReportFooter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPosting.Name" xml:space="preserve">
+    <value>tabPosting</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultBank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseCogs.Name" xml:space="preserve">
+    <value>lblPurchaseCogs</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseAp.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblFaAsset.Text" xml:space="preserve">
+    <value>FA Asset</value>
+  </data>
+  <data name="&gt;&gt;lblWebsite.Name" xml:space="preserve">
+    <value>lblWebsite</value>
+  </data>
+  <data name="lblFbrStrn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 23</value>
+  </data>
+  <data name="lblFaDepExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 320</value>
+  </data>
+  <data name="lblAddress.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblStrn.Text" xml:space="preserve">
+    <value>STRN</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 92</value>
+  </data>
+  <data name="lblDefaultExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="cmbDefaultExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txt_StreetName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 29</value>
+  </data>
+  <data name="tabMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1360, 661</value>
+  </data>
+  <data name="&gt;&gt;panelBottom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblInterBranchRec.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseTaxInput.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesRevenue.Name" xml:space="preserve">
+    <value>cmbSalesRevenue</value>
+  </data>
+  <data name="&gt;&gt;btnSaveSettings.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSalesAr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="&gt;&gt;txtNtnVat.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 150</value>
+  </data>
+  <data name="&gt;&gt;txtReportFooter.Name" xml:space="preserve">
+    <value>txtReportFooter</value>
+  </data>
+  <data name="&gt;&gt;lblSalesRevenue.Name" xml:space="preserve">
+    <value>lblSalesRevenue</value>
+  </data>
+  <data name="txt_StreetName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblSalesRevenue.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="lblWebsite.Text" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="btnResetDefaults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 33</value>
+  </data>
+  <data name="txt_buildingNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 59</value>
+  </data>
+  <data name="groupTaxTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="cmbInventoryCogs.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;cmbCountry.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;txtLegalName.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="label27.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;tabDefaults.Name" xml:space="preserve">
+    <value>tabDefaults</value>
+  </data>
+  <data name="&gt;&gt;btnSaveSettings.Name" xml:space="preserve">
+    <value>btnSaveSettings</value>
+  </data>
+  <data name="lblSalaryPayable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="tabReports.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="&gt;&gt;txt_StreetName.Name" xml:space="preserve">
+    <value>txt_StreetName</value>
+  </data>
+  <data name="lblDefaultBank.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="cmbReportDateFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 69</value>
+  </data>
+  <data name="&gt;&gt;lblAmountFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupTaxTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 126</value>
+  </data>
+  <data name="&gt;&gt;cmbOpeningEquity.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;colWhtRate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryCogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txt_buildingNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblApprovalThreshold.Text" xml:space="preserve">
+    <value>Approval threshold amount</value>
+  </data>
+  <data name="&gt;&gt;txt_cityName.Name" xml:space="preserve">
+    <value>txt_cityName</value>
+  </data>
+  <data name="cmbPurchaseCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 83</value>
+  </data>
+  <data name="&gt;&gt;txtFbrStrn.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="txtPhone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbTaxMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkAutoPostPurchases.Text" xml:space="preserve">
+    <value>Auto-post purchase bills</value>
+  </data>
+  <data name="lblFbrStrn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAdjustment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbPurchaseAp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="numBudgetWarningPct.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 164</value>
+  </data>
+  <data name="groupCompanyHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;numBackdatingDays.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="lblSalaryPayable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="txtCompanyName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 71</value>
+  </data>
+  <data name="&gt;&gt;lblFbrStrn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_countryName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblApprovalThreshold.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSalaryPayable.Text" xml:space="preserve">
+    <value>Salary Payable</value>
+  </data>
+  <data name="lblFyStart.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="colVoucherBranchId.HeaderText" xml:space="preserve">
+    <value>Branch ID</value>
+  </data>
+  <data name="&gt;&gt;chkRequireNarration.Name" xml:space="preserve">
+    <value>chkRequireNarration</value>
+  </data>
+  <data name="&gt;&gt;cmbOpeningEquity.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="cmbFyStartMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 250</value>
+  </data>
+  <data name="&gt;&gt;cmbBaseCurrency.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;txtLogoPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_postalCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbFilingFrequency.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;colWhtRate.Name" xml:space="preserve">
+    <value>colWhtRate</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryPayable.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="lblBackdatingDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
+  </data>
+  <data name="lblEmail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 184</value>
+  </data>
+  <data name="gridWhtRates.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="txtFbrNtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 29</value>
+  </data>
+  <data name="colVoucherReset.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupReports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 611</value>
+  </data>
+  <data name="tabCompany.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="lblFyStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 252</value>
+  </data>
+  <data name="cmbFyEndMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 252</value>
+  </data>
+  <data name="lblReportHeader.Text" xml:space="preserve">
+    <value>Report header</value>
+  </data>
+  <data name="tblDefaults.RowCount" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningEquity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchRec.Name" xml:space="preserve">
+    <value>lblInterBranchRec</value>
+  </data>
+  <data name="lblEmail.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblStrn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 23</value>
+  </data>
+  <data name="lblPurchaseAp.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="tblDefaults.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblSalesAr" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbSalesAr" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblSalesRevenue" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbSalesRevenue" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblSalesTaxOutput" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbSalesTaxOutput" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblPurchaseAp" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbPurchaseAp" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblPurchaseCogs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbPurchaseCogs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblPurchaseTaxInput" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbPurchaseTaxInput" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultExpense" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbDefaultExpense" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultCash" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbDefaultCash" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultBank" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbDefaultBank" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblSalaryExpense" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbSalaryExpense" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblSalaryPayable" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbSalaryPayable" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblInventoryAsset" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbInventoryAsset" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblInventoryCogs" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbInventoryCogs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblInventoryAdjustment" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbInventoryAdjustment" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblFaAsset" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbFaAsset" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFaAccumDep" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbFaAccumDep" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblFaDepExpense" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbFaDepExpense" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblInterBranchRec" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbInterBranchRec" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblInterBranchPay" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cmbInterBranchPay" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblOpeningEquity" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cmbOpeningEquity" Row="9" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,200,Percent,50,Absolute,220,Percent,50" /&gt;&lt;Rows Styles="Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40,Absolute,40" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tblDefaults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;groupTaxTop.Name" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="&gt;&gt;cmbTaxMode.Name" xml:space="preserve">
+    <value>cmbTaxMode</value>
+  </data>
+  <data name="lblBackdatingDays.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txt_cityName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCurrencyLockNote.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="lblSalaryPayable.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblBudgetWarning.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblRegistration.Text" xml:space="preserve">
+    <value>Registration No</value>
+  </data>
+  <data name="lblPurchaseTaxInput.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseLogo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gridVoucher.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="numApprovalThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbFaDepExpense.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="cmbFyStartMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridWhtRates.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;groupPosting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnResetDefaults.Parent" xml:space="preserve">
+    <value>panelBottom</value>
+  </data>
+  <data name="cmbAmountFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 33</value>
+  </data>
+  <data name="cmbFyStartMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 29</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxOutput.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="colWhtId.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="&gt;&gt;txt_citySubdivisionName.Name" xml:space="preserve">
+    <value>txt_citySubdivisionName</value>
+  </data>
+  <data name="lblNtnVat.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblDefaultExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblPurchaseTaxInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 80</value>
+  </data>
+  <data name="lblOpeningEquity.Text" xml:space="preserve">
+    <value>Opening Balance Equity</value>
+  </data>
+  <data name="lblPurchaseTaxInput.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblSalesAr.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblNtnVat.Text" xml:space="preserve">
+    <value>NTN/VAT No.</value>
+  </data>
+  <data name="&gt;&gt;txtLegalName.Name" xml:space="preserve">
+    <value>txtLegalName</value>
+  </data>
+  <data name="&gt;&gt;groupCompanyHeader.Name" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="txtDigitalSignature.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNtnVat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 112</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseTaxInput.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;lblEmail.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="lblRegistration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 23</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesRevenue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="numApprovalThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 236</value>
+  </data>
+  <data name="&gt;&gt;colWhtType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostPurchases.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="tblDefaults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 410</value>
+  </data>
+  <data name="tabPosting.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txt_countryName.Name" xml:space="preserve">
+    <value>txt_countryName</value>
+  </data>
+  <data name="&gt;&gt;lblSalesRevenue.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabDefaults.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblPhone.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 92</value>
+  </data>
+  <data name="&gt;&gt;cmbAmountFormat.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="lblOpeningEquity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbShowAmountsIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbReportDateFormat.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;txt_postalCode.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="colIsActive.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 23</value>
+  </data>
+  <data name="&gt;&gt;tabTax.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupReports.Text" xml:space="preserve">
+    <value>Report Presentation</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="&gt;&gt;cmbBaseCurrency.Name" xml:space="preserve">
+    <value>cmbBaseCurrency</value>
+  </data>
+  <data name="lblTaxMode.Text" xml:space="preserve">
+    <value>Default Tax Mode</value>
+  </data>
+  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 23</value>
+  </data>
+  <data name="cmbPurchaseAp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="btnBrowseLogo.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cmbBaseCurrency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 29</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>9, 21</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryPayable.Name" xml:space="preserve">
+    <value>lblSalaryPayable</value>
+  </data>
+  <data name="lblBaseCurrency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 288</value>
+  </data>
+  <data name="&gt;&gt;lblApprovalThreshold.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="lblApprovalThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 239</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 23</value>
+  </data>
+  <data name="lblInterBranchPay.Text" xml:space="preserve">
+    <value>Inter-Branch Payable</value>
+  </data>
+  <data name="lblSalesAr.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblInterBranchRec.Text" xml:space="preserve">
+    <value>Inter-Branch Receivable</value>
+  </data>
+  <data name="&gt;&gt;cmbFyEndMonth.Name" xml:space="preserve">
+    <value>cmbFyEndMonth</value>
+  </data>
+  <data name="&gt;&gt;cmbCountry.Name" xml:space="preserve">
+    <value>cmbCountry</value>
+  </data>
+  <data name="lblCompanyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="&gt;&gt;lblFaAsset.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;lblBudgetWarning.Name" xml:space="preserve">
+    <value>lblBudgetWarning</value>
+  </data>
+  <data name="label25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblPhone.Text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="&gt;&gt;lblDateFormat.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="txt_citySubdivisionName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 118</value>
+  </data>
+  <data name="&gt;&gt;txtStrn.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;txtReportHeader.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAdjustment.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryPayable.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseTaxInput.Name" xml:space="preserve">
+    <value>lblPurchaseTaxInput</value>
+  </data>
+  <data name="&gt;&gt;lblApprovalThreshold.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_accounting_settings</value>
+  </data>
+  <data name="&gt;&gt;lblFilingFrequency.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tblDefaults.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblSalesAr.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbSalaryPayable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="tabReports.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 33</value>
+  </data>
+  <data name="txt_cityName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lblNtnVat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tblDefaults.Name" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;lblDigitalSignature.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblReportHeader.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblFilingFrequency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 23</value>
+  </data>
+  <data name="cmbInventoryAdjustment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;tabReports.Parent" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="&gt;&gt;txtAddress.Name" xml:space="preserve">
+    <value>txtAddress</value>
+  </data>
+  <data name="colIsActive.HeaderText" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseAp.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="cmbDefaultExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbFyEndMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblLegalName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 23</value>
+  </data>
+  <data name="lblShowAmountsIn.Text" xml:space="preserve">
+    <value>Show amounts in</value>
+  </data>
+  <data name="lblTaxMode.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;cmbBaseCurrency.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="lblDefaultCash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="lblPurchaseTaxInput.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.TabIndex" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
+  <data name="&gt;&gt;lblShowAmountsIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1352, 627</value>
+  </data>
+  <data name="lblPhone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 109</value>
+  </data>
+  <data name="&gt;&gt;cmbFaDepExpense.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblPurchaseCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="&gt;&gt;lblFaDepExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFyEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCountry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 217</value>
+  </data>
+  <data name="lblPhone.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cmbInventoryAdjustment.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="lblDateFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 72</value>
+  </data>
+  <data name="&gt;&gt;groupReports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesRevenue.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;btnResetDefaults.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblInventoryAsset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="lblLegalName.Text" xml:space="preserve">
+    <value>Legal Name</value>
+  </data>
+  <data name="&gt;&gt;lblFaAsset.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="numBackdatingDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 29</value>
+  </data>
+  <data name="colTaxSection.HeaderText" xml:space="preserve">
+    <value>Tax Section</value>
+  </data>
+  <data name="tabCompany.Text" xml:space="preserve">
+    <value>Company &amp; Financial Year</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseCogs.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblBaseCurrency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 23</value>
+  </data>
+  <data name="&gt;&gt;chkRequireNarration.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="&gt;&gt;txtNtnVat.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="lblPurchaseCogs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxRate.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="chkAutoPostSales.Text" xml:space="preserve">
+    <value>Auto-post sales invoices</value>
+  </data>
+  <data name="&gt;&gt;lblStrn.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;lblTaxMode.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="cmbInterBranchRec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="lblNtnVat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 23</value>
+  </data>
+  <data name="cmbBaseCurrency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 288</value>
+  </data>
+  <data name="lblDefaultCash.Text" xml:space="preserve">
+    <value>Default Cash</value>
+  </data>
+  <data name="&gt;&gt;txtReportFooter.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;picLogoPreview.Name" xml:space="preserve">
+    <value>picLogoPreview</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAsset.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;numSalesTaxRate.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="lblInventoryAdjustment.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="tabDefaults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1352, 627</value>
+  </data>
+  <data name="cmbFaDepExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="chkRequireNarration.Text" xml:space="preserve">
+    <value>Require narration on journal entries</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxRate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryExpense.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="colVoucherStart.HeaderText" xml:space="preserve">
+    <value>Starting Number</value>
+  </data>
+  <data name="txtEmail.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbInterBranchRec.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseTaxInput.Name" xml:space="preserve">
+    <value>cmbPurchaseTaxInput</value>
+  </data>
+  <data name="colWhtId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lblDateFormat.Text" xml:space="preserve">
+    <value>Date format</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryExpense.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;lblFbrStrn.Name" xml:space="preserve">
+    <value>lblFbrStrn</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 27</value>
+  </data>
+  <data name="&gt;&gt;lblReportHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabCompany.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1352, 627</value>
+  </data>
+  <data name="cmbCountry.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="cmbSalaryExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchRec.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="gridWhtRates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultCash.Name" xml:space="preserve">
+    <value>lblDefaultCash</value>
+  </data>
+  <data name="&gt;&gt;lblPhone.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="btnSaveSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblFyEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="txtRegistrationNo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseTaxInput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFilingFrequency.Name" xml:space="preserve">
+    <value>lblFilingFrequency</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchRec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtReportFooter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 177</value>
+  </data>
+  <data name="&gt;&gt;cmbFilingFrequency.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="&gt;&gt;txtEmail.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblRegistration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 37</value>
+  </data>
+  <data name="lblAddress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 23</value>
+  </data>
+  <data name="lblInventoryAsset.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAsset.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="chkAutoPostPurchases.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 27</value>
+  </data>
+  <data name="lblOpeningEquity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblFbrNtn.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 375</value>
+  </data>
+  <data name="&gt;&gt;txtLogoPath.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.Name" xml:space="preserve">
+    <value>lblCountry</value>
+  </data>
+  <data name="&gt;&gt;btnResetDefaults.Name" xml:space="preserve">
+    <value>btnResetDefaults</value>
+  </data>
+  <data name="cmbPurchaseCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="txtEmail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="lblInventoryAdjustment.Text" xml:space="preserve">
+    <value>Stock Adjustment</value>
+  </data>
+  <data name="lblOpeningEquity.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="lblFyEnd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFyEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 252</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>City Subdivision Name</value>
+  </data>
+  <data name="lblFilingFrequency.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblFyStart.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="lblFbrNtn.Text" xml:space="preserve">
+    <value>FBR/ZATCA NTN</value>
+  </data>
+  <data name="&gt;&gt;groupCompanyHeader.Parent" xml:space="preserve">
+    <value>tabCompany</value>
+  </data>
+  <data name="&gt;&gt;cmbFyStartMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAddress.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="&gt;&gt;label26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseCogs.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="cmbSalesRevenue.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cmbCountry.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtRegistrationNo.Name" xml:space="preserve">
+    <value>txtRegistrationNo</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxRate.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="lblCountry.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;cmbTaxMode.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="lblFyStart.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryExpense.Name" xml:space="preserve">
+    <value>cmbSalaryExpense</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAsset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAmountFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="lblDefaultBank.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 160</value>
+  </data>
+  <data name="lblBudgetWarning.Text" xml:space="preserve">
+    <value>Budget warning threshold %</value>
+  </data>
+  <data name="&gt;&gt;chkAllowLockedPeriodPosting.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblStrn.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;txtCompanyName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbShowAmountsIn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblReportFooter.Name" xml:space="preserve">
+    <value>lblReportFooter</value>
+  </data>
+  <data name="colVoucherFormat.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblAmountFormat.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;numSalesTaxRate.Name" xml:space="preserve">
+    <value>numSalesTaxRate</value>
+  </data>
+  <data name="lblAmountFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAccumDep.Name" xml:space="preserve">
+    <value>cmbFaAccumDep</value>
+  </data>
+  <data name="lblEmail.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="txtFbrNtn.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabCompany.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="btnTestAutoPostingRules.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtNtnVat.Name" xml:space="preserve">
+    <value>txtNtnVat</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultExpense.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="cmbSalesAr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;lblFaDepExpense.Name" xml:space="preserve">
+    <value>lblFaDepExpense</value>
+  </data>
+  <data name="tabCompany.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cmbDefaultBank.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 163</value>
+  </data>
+  <data name="tabMain.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;colIsActive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAddress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultExpense.Name" xml:space="preserve">
+    <value>lblDefaultExpense</value>
+  </data>
+  <data name="cmbPurchaseCogs.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblFaAsset.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;tabReports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLegalName.Name" xml:space="preserve">
+    <value>lblLegalName</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1384, 761</value>
+  </data>
+  <data name="lblCompanyName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;picLogoPreview.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblLegalName.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;groupCompanyHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesTaxOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbFaAsset.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;txtRegistrationNo.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cmbSalesTaxOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="lblInventoryAsset.Text" xml:space="preserve">
+    <value>Inventory Asset</value>
+  </data>
+  <data name="&gt;&gt;panelBottom.Name" xml:space="preserve">
+    <value>panelBottom</value>
+  </data>
+  <data name="&gt;&gt;lblBackdatingDays.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picLogoPreview.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;btnTestAutoPostingRules.Name" xml:space="preserve">
+    <value>btnTestAutoPostingRules</value>
+  </data>
+  <data name="cmbInterBranchPay.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;lblCurrencyLockNote.Name" xml:space="preserve">
+    <value>lblCurrencyLockNote</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesAr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnResetDefaults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1126, 7</value>
+  </data>
+  <data name="lblDefaultExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 120</value>
+  </data>
+  <data name="label24.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryCogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tblDefaults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblSalesRevenue.Text" xml:space="preserve">
+    <value>Sales Revenue</value>
+  </data>
+  <data name="lblFbrNtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 23</value>
+  </data>
+  <data name="lblRegistration.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryPayable.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;cmbAmountFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colEffectiveFrom.Name" xml:space="preserve">
+    <value>colEffectiveFrom</value>
+  </data>
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cmbInventoryAsset.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;lblFilingFrequency.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStrn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numApprovalThreshold.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtPhone.Name" xml:space="preserve">
+    <value>txtPhone</value>
+  </data>
+  <data name="&gt;&gt;lblReportFooter.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label25.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultBank.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostSales.Name" xml:space="preserve">
+    <value>chkAutoPostSales</value>
+  </data>
+  <data name="cmbFaAsset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="lblPurchaseCogs.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;tabDefaults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReportHeader.Name" xml:space="preserve">
+    <value>lblReportHeader</value>
+  </data>
+  <data name="&gt;&gt;cmbShowAmountsIn.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="lblSalesRevenue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnSaveSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1242, 7</value>
+  </data>
+  <data name="&gt;&gt;txtDigitalSignature.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblSalaryPayable.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lblBudgetWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;chkAllowLockedPeriodPosting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBackdatingDays.Name" xml:space="preserve">
+    <value>lblBackdatingDays</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Accounting Settings</value>
+  </data>
+  <data name="&gt;&gt;txtAddress.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblSalesRevenue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbSalesTaxOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 43</value>
+  </data>
+  <data name="cmbSalesAr.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAdjustment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryCogs.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblReportHeader.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="cmbDefaultExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 123</value>
+  </data>
+  <data name="&gt;&gt;lblCompanyName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultCash.Name" xml:space="preserve">
+    <value>cmbDefaultCash</value>
+  </data>
+  <data name="numBudgetWarningPct.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnTestAutoPostingRules.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="lblBackdatingDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 203</value>
+  </data>
+  <data name="&gt;&gt;picLogoPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFyEnd.Text" xml:space="preserve">
+    <value>FY End Month</value>
+  </data>
+  <data name="&gt;&gt;txt_citySubdivisionName.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblDigitalSignature.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtLogoPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>942, 165</value>
+  </data>
+  <data name="tabTax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1352, 627</value>
+  </data>
+  <data name="lblReportFooter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 180</value>
+  </data>
+  <data name="tabTax.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="cmbFyEndMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 150</value>
+  </data>
+  <data name="txtEmail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 181</value>
+  </data>
+  <data name="&gt;&gt;txtFbrNtn.Name" xml:space="preserve">
+    <value>txtFbrNtn</value>
+  </data>
+  <data name="lblFbrStrn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 70</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colVoucherPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTestAutoPostingRules.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="numSalesTaxRate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 29</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Text" xml:space="preserve">
+    <value>Enable E-Invoicing (ZATCA)</value>
+  </data>
+  <data name="btnTestAutoPostingRules.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 27</value>
+  </data>
+  <data name="btnResetDefaults.Text" xml:space="preserve">
+    <value>Reset Defaults</value>
+  </data>
+  <data name="colVoucherType.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryPayable.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="lblInterBranchPay.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchRec.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAp.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;chkRequireNarration.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSalesTaxRate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFaAccumDep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="lblAmountFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 36</value>
+  </data>
+  <data name="lblFaAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 280</value>
+  </data>
+  <data name="lblInventoryCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 240</value>
+  </data>
+  <data name="txt_postalCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tblDefaults.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmbDefaultExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="txtStrn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cmbFyEndMonth.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;cmbFilingFrequency.Name" xml:space="preserve">
+    <value>cmbFilingFrequency</value>
+  </data>
+  <data name="txtRegistrationNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 37</value>
+  </data>
+  <data name="&gt;&gt;txt_cityName.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblShowAmountsIn.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="gridVoucher.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostSales.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblSalaryExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="tabDefaults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="&gt;&gt;numBudgetWarningPct.Name" xml:space="preserve">
+    <value>numBudgetWarningPct</value>
+  </data>
+  <data name="&gt;&gt;lblEmail.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="cmbFilingFrequency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>897, 67</value>
+  </data>
+  <data name="&gt;&gt;tabMain.Name" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="tabMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 40</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseLogo.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtDigitalSignature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 29</value>
+  </data>
+  <data name="&gt;&gt;lblFbrNtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPosting.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesAr.Name" xml:space="preserve">
+    <value>cmbSalesAr</value>
+  </data>
+  <data name="lblInventoryCogs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbInterBranchRec.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;gridWhtRates.Parent" xml:space="preserve">
+    <value>tabTax</value>
+  </data>
+  <data name="txtReportHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 141</value>
+  </data>
+  <data name="&gt;&gt;txt_citySubdivisionName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblDateFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostPurchases.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txt_buildingNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cmbDefaultCash.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cmbPurchaseTaxInput.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbFaAccumDep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;numApprovalThreshold.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colVoucherPrefix.Name" xml:space="preserve">
+    <value>colVoucherPrefix</value>
+  </data>
+  <data name="&gt;&gt;txt_cityName.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseCogs.Name" xml:space="preserve">
+    <value>cmbPurchaseCogs</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAdjustment.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="txtFbrStrn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 29</value>
+  </data>
+  <data name="&gt;&gt;colVoucherPrefix.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtReportFooter.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="colTaxSection.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtLegalName.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 300</value>
+  </data>
+  <data name="lblReportHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 23</value>
+  </data>
+  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;txt_buildingNumber.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkRequireNarration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 122</value>
+  </data>
+  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="&gt;&gt;lblSalesAr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSalesTaxRate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 33</value>
+  </data>
+  <data name="&gt;&gt;txt_StreetName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_buildingNumber.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="txt_citySubdivisionName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="colVoucherReset.HeaderText" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="cmbSalesTaxOutput.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblDefaultBank.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;colTaxSection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFbrNtn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkRequireNarration.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblFaDepExpense.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAccumDep.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbPurchaseTaxInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="cmbSalaryExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryCogs.Name" xml:space="preserve">
+    <value>cmbInventoryCogs</value>
+  </data>
+  <data name="chkAutoPostPurchases.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txt_buildingNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryPayable.Name" xml:space="preserve">
+    <value>cmbSalaryPayable</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;label24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWebsite.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="txtLogoPath.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="groupPosting.Text" xml:space="preserve">
+    <value>Posting / Control Rules</value>
+  </data>
+  <data name="&gt;&gt;lblFaAccumDep.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchPay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabDefaults.Text" xml:space="preserve">
+    <value>Default Accounts</value>
+  </data>
+  <data name="&gt;&gt;gridVoucher.Parent" xml:space="preserve">
+    <value>tabVoucher</value>
+  </data>
+  <data name="txt_buildingNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 29</value>
+  </data>
+  <data name="lblDefaultCash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbFilingFrequency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 29</value>
+  </data>
+  <data name="numSalesTaxRate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 30</value>
+  </data>
+  <data name="btnResetDefaults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblWebsite.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRegistration.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSalaryExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="picLogoPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 120</value>
+  </data>
+  <data name="lblPurchaseAp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;txtDigitalSignature.Name" xml:space="preserve">
+    <value>txtDigitalSignature</value>
+  </data>
+  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tabPosting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultCash.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="btnSaveSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 33</value>
+  </data>
+  <data name="lblFbrNtn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnSaveSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxRate.Name" xml:space="preserve">
+    <value>lblSalesTaxRate</value>
+  </data>
+  <data name="&gt;&gt;label27.Name" xml:space="preserve">
+    <value>label27</value>
+  </data>
+  <data name="lblInventoryCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="&gt;&gt;numApprovalThreshold.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="label22.Text" xml:space="preserve">
+    <value>Street Name</value>
+  </data>
+  <data name="&gt;&gt;txtFbrNtn.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchPay.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="txt_cityName.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;numBudgetWarningPct.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="&gt;&gt;groupPosting.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tabDefaults.Parent" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="cmbSalesTaxOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label23.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseCogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupCompanyHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;colVoucherReset.Name" xml:space="preserve">
+    <value>colVoucherReset</value>
+  </data>
+  <data name="&gt;&gt;colWhtDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLegalName.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="chkAutoPostSales.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInventoryAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 200</value>
+  </data>
+  <data name="lblSalaryExpense.Text" xml:space="preserve">
+    <value>Salary Expense</value>
+  </data>
+  <data name="&gt;&gt;lblDateFormat.Name" xml:space="preserve">
+    <value>lblDateFormat</value>
+  </data>
+  <data name="&gt;&gt;groupReports.Parent" xml:space="preserve">
+    <value>tabReports</value>
+  </data>
+  <data name="lblEmail.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Accounting Settings (Admin)</value>
+  </data>
+  <data name="lblSalesAr.Text" xml:space="preserve">
+    <value>Sales AR Account</value>
+  </data>
+  <data name="&gt;&gt;lblFaAsset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txt_citySubdivisionName.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblFyEnd.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="txtDigitalSignature.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 259</value>
+  </data>
+  <data name="lblReportFooter.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblShowAmountsIn.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostPurchases.Name" xml:space="preserve">
+    <value>chkAutoPostPurchases</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultBank.Name" xml:space="preserve">
+    <value>cmbDefaultBank</value>
+  </data>
+  <data name="&gt;&gt;cmbOpeningEquity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbShowAmountsIn.Name" xml:space="preserve">
+    <value>cmbShowAmountsIn</value>
+  </data>
+  <data name="&gt;&gt;txtFbrStrn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtCompanyName.Name" xml:space="preserve">
+    <value>txtCompanyName</value>
+  </data>
+  <data name="txtWebsite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 145</value>
+  </data>
+  <data name="&gt;&gt;tabTax.Name" xml:space="preserve">
+    <value>tabTax</value>
+  </data>
+  <data name="cmbPurchaseTaxInput.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="groupCompanyHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="colVoucherType.HeaderText" xml:space="preserve">
+    <value>Voucher Type</value>
+  </data>
+  <data name="txtAddress.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chk_use_zatca_e_invoice.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseTaxInput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabReports.Text" xml:space="preserve">
+    <value>Report Settings</value>
+  </data>
+  <data name="cmbDefaultBank.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;colVoucherReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtLegalName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseAp.Name" xml:space="preserve">
+    <value>cmbPurchaseAp</value>
+  </data>
+  <data name="cmbFaDepExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="colVoucherFormat.HeaderText" xml:space="preserve">
+    <value>Number Format</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 28</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAsset.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="cmbFaAccumDep.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblInterBranchRec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="cmbSalesRevenue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbTaxMode.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblFaAsset.Name" xml:space="preserve">
+    <value>lblFaAsset</value>
+  </data>
+  <data name="cmbOpeningEquity.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="lblTaxMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 33</value>
+  </data>
+  <data name="lblPurchaseAp.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblFaAccumDep.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="lblPurchaseCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 80</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblInterBranchPay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 33</value>
+  </data>
+  <data name="&gt;&gt;lblCurrencyLockNote.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label24.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblInventoryAsset.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;lblTaxMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtAddress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 95</value>
+  </data>
+  <data name="&gt;&gt;cmbTaxMode.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryCogs.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="lblReportHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 144</value>
+  </data>
+  <data name="&gt;&gt;lblAmountFormat.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="groupReports.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblFyStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 23</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningEquity.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;lblFbrNtn.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gridVoucher.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblSalesAr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblBackdatingDays.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblInventoryAsset.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;colVoucherType.Name" xml:space="preserve">
+    <value>colVoucherType</value>
+  </data>
+  <data name="&gt;&gt;lblSalesAr.Name" xml:space="preserve">
+    <value>lblSalesAr</value>
+  </data>
+  <data name="btnBrowseLogo.Text" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="lblAddress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 148</value>
+  </data>
+  <data name="&gt;&gt;cmbFilingFrequency.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxOutput.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tabReports.Name" xml:space="preserve">
+    <value>tabReports</value>
+  </data>
+  <data name="&gt;&gt;tabCompany.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblBudgetWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 23</value>
+  </data>
+  <data name="&gt;&gt;txtReportHeader.Name" xml:space="preserve">
+    <value>txtReportHeader</value>
+  </data>
+  <data name="txt_postalCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 29</value>
+  </data>
+  <data name="&gt;&gt;tabCompany.Name" xml:space="preserve">
+    <value>tabCompany</value>
+  </data>
+  <data name="&gt;&gt;label24.Name" xml:space="preserve">
+    <value>label24</value>
+  </data>
+  <data name="lblTaxMode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDefaultBank.Text" xml:space="preserve">
+    <value>Default Bank</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAp.Name" xml:space="preserve">
+    <value>lblPurchaseAp</value>
+  </data>
+  <data name="txt_cityName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 29</value>
+  </data>
+  <data name="&gt;&gt;lblSalesAr.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblShowAmountsIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 23</value>
+  </data>
+  <data name="&gt;&gt;lblFaAccumDep.Name" xml:space="preserve">
+    <value>lblFaAccumDep</value>
+  </data>
+  <data name="lblInterBranchPay.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;numBackdatingDays.Name" xml:space="preserve">
+    <value>numBackdatingDays</value>
+  </data>
+  <data name="tabTax.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="gridWhtRates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 485</value>
+  </data>
+  <data name="lblInterBranchRec.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;cmbOpeningEquity.Name" xml:space="preserve">
+    <value>cmbOpeningEquity</value>
+  </data>
+  <data name="lblFbrStrn.Text" xml:space="preserve">
+    <value>STRN</value>
+  </data>
+  <data name="&gt;&gt;lblNtnVat.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="lblFyStart.Text" xml:space="preserve">
+    <value>FY Start Month</value>
+  </data>
+  <data name="cmbPurchaseTaxInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 83</value>
+  </data>
+  <data name="cmbOpeningEquity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblDigitalSignature.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="tabVoucher.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1352, 627</value>
+  </data>
+  <data name="colWhtDescription.HeaderText" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblFbrStrn.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="txtNtnVat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 29</value>
+  </data>
+  <data name="&gt;&gt;chk_use_zatca_e_invoice.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;colWhtId.Name" xml:space="preserve">
+    <value>colWhtId</value>
+  </data>
+  <data name="txt_StreetName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtRegistrationNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.Name" xml:space="preserve">
+    <value>lblAddress</value>
+  </data>
+  <data name="&gt;&gt;txtPhone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblReportHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="colVoucherPrefix.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnSaveSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelBottom.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmbAmountFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="chkAutoPostSales.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblDigitalSignature.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 262</value>
+  </data>
+  <data name="&gt;&gt;lblFbrNtn.Parent" xml:space="preserve">
+    <value>groupTaxTop</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultBank.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchRec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbInventoryCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="lblDateFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="cmbFilingFrequency.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cmbSalaryPayable.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;txt_citySubdivisionName.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="lblReportFooter.Text" xml:space="preserve">
+    <value>Report footer</value>
+  </data>
+  <data name="label26.Text" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAsset.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="cmbPurchaseAp.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label23.Name" xml:space="preserve">
+    <value>label23</value>
+  </data>
+  <data name="&gt;&gt;cmbAmountFormat.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblFaAsset.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultBank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblPhone.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtPhone.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;txtReportHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numSalesTaxRate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmbAmountFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 29</value>
+  </data>
+  <data name="cmbFaAsset.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbTaxMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 29</value>
+  </data>
+  <data name="lblCurrencyLockNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;groupTaxTop.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="colWhtRate.HeaderText" xml:space="preserve">
+    <value>Rate %</value>
+  </data>
+  <data name="&gt;&gt;lblPhone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFaDepExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="txt_countryName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblDefaultExpense.Text" xml:space="preserve">
+    <value>Default Expense</value>
+  </data>
+  <data name="&gt;&gt;txtCompanyName.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryPayable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbInterBranchPay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblLegalName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblDateFormat.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="txt_countryName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 29</value>
+  </data>
+  <data name="tabPosting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAdjustment.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;groupTaxTop.Parent" xml:space="preserve">
+    <value>tabTax</value>
+  </data>
+  <data name="&gt;&gt;numBackdatingDays.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtFbrStrn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblFilingFrequency.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblApprovalThreshold.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txt_StreetName.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="numBackdatingDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 200</value>
+  </data>
+  <data name="tabPosting.Text" xml:space="preserve">
+    <value>Posting Rules</value>
+  </data>
+  <data name="cmbSalaryPayable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 203</value>
+  </data>
+  <data name="cmbInventoryAdjustment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="lblSalesRevenue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="lblInventoryCogs.Text" xml:space="preserve">
+    <value>Inventory COGS</value>
+  </data>
+  <data name="&gt;&gt;cmbFyEndMonth.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="groupCompanyHeader.Text" xml:space="preserve">
+    <value>Company Profile</value>
+  </data>
+  <data name="picLogoPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="lblInventoryCogs.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;txt_buildingNumber.Name" xml:space="preserve">
+    <value>txt_buildingNumber</value>
+  </data>
+  <data name="btnBrowseLogo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1047, 200</value>
+  </data>
+  <data name="&gt;&gt;cmbFyStartMonth.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;colVoucherType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtReportFooter.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="&gt;&gt;txtReportHeader.Parent" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="txtStrn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 73</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseLogo.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesAr.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="lblInventoryAdjustment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="txtWebsite.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmbInterBranchRec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 323</value>
+  </data>
+  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt</value>
+  </data>
+  <data name="&gt;&gt;gridWhtRates.Name" xml:space="preserve">
+    <value>gridWhtRates</value>
+  </data>
+  <data name="&gt;&gt;tabPosting.Parent" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="&gt;&gt;txtLegalName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtWebsite.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblTaxMode.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblStrn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblDefaultCash.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;chkAllowLockedPeriodPosting.Name" xml:space="preserve">
+    <value>chkAllowLockedPeriodPosting</value>
+  </data>
+  <data name="&gt;&gt;txtRegistrationNo.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="cmbSalesRevenue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAccumDep.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;groupPosting.Name" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="&gt;&gt;lblBaseCurrency.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;txt_countryName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesAr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCountry.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="lblDigitalSignature.Text" xml:space="preserve">
+    <value>Digital signature placeholder</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAdjustment.Name" xml:space="preserve">
+    <value>cmbInventoryAdjustment</value>
+  </data>
+  <data name="cmbSalaryPayable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;colVoucherStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRegistration.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="groupPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 611</value>
+  </data>
+  <data name="&gt;&gt;lblSalesTaxOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFilingFrequency.Text" xml:space="preserve">
+    <value>Filing Frequency</value>
+  </data>
+  <data name="&gt;&gt;lblAmountFormat.Name" xml:space="preserve">
+    <value>lblAmountFormat</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseAp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabVoucher.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="&gt;&gt;numBudgetWarningPct.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabMain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSalesRevenue.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label27.Text" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="lblOpeningEquity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 360</value>
+  </data>
+  <data name="tabVoucher.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="picLogoPreview.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="colWhtDescription.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tabTax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchRec.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostSales.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="cmbShowAmountsIn.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblCurrencyLockNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtCompanyName.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;panelBottom.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabCompany.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnResetDefaults.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblNtnVat.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="btnBrowseLogo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 29</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAdjustment.Name" xml:space="preserve">
+    <value>lblInventoryAdjustment</value>
+  </data>
+  <data name="&gt;&gt;colVoucherStart.Name" xml:space="preserve">
+    <value>colVoucherStart</value>
+  </data>
+  <data name="&gt;&gt;btnTestAutoPostingRules.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseCogs.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tabVoucher.Name" xml:space="preserve">
+    <value>tabVoucher</value>
+  </data>
+  <data name="&gt;&gt;txtReportFooter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
+  </data>
+  <data name="lblWebsite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 23</value>
+  </data>
+  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryCogs.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningEquity.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="btnSaveSettings.Text" xml:space="preserve">
+    <value>Save Settings</value>
+  </data>
+  <data name="chkAutoPostPurchases.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="txt_cityName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 118</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultBank.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="gridVoucher.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1336, 611</value>
+  </data>
+  <data name="panelBottom.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;chkAutoPostSales.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbOpeningEquity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAsset.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="txtReportFooter.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tabPosting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFaAsset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 40</value>
+  </data>
+  <data name="txtCompanyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 29</value>
+  </data>
+  <data name="lblPurchaseAp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 40</value>
+  </data>
+  <data name="lblInventoryAdjustment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;label26.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="cmbInventoryCogs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblLegalName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBaseCurrency.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="lblFaAsset.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="lblWebsite.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="cmbFaDepExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 323</value>
+  </data>
+  <data name="lblReportFooter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 23</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
+  </data>
+  <data name="&gt;&gt;tabReports.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseTaxInput.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;txt_postalCode.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;gridVoucher.Name" xml:space="preserve">
+    <value>gridVoucher</value>
+  </data>
+  <data name="&gt;&gt;lblDateFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label26.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;groupReports.Name" xml:space="preserve">
+    <value>groupReports</value>
+  </data>
+  <data name="&gt;&gt;lblApprovalThreshold.Name" xml:space="preserve">
+    <value>lblApprovalThreshold</value>
+  </data>
+  <data name="tabTax.Text" xml:space="preserve">
+    <value>Tax Configuration</value>
+  </data>
+  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="lblCountry.Text" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="lblFaDepExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;tabCompany.Parent" xml:space="preserve">
+    <value>tabMain</value>
+  </data>
+  <data name="lblBaseCurrency.Text" xml:space="preserve">
+    <value>Base Currency</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryCogs.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchPay.Name" xml:space="preserve">
+    <value>lblInterBranchPay</value>
+  </data>
+  <data name="&gt;&gt;lblBackdatingDays.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="txtFbrStrn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 66</value>
+  </data>
+  <data name="lblSalesTaxOutput.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseTaxInput.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;colWhtId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultCash.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="txtAddress.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblNtnVat.Name" xml:space="preserve">
+    <value>lblNtnVat</value>
+  </data>
+  <data name="&gt;&gt;txtStrn.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Postal Address</value>
+  </data>
+  <data name="lblFyEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 23</value>
+  </data>
+  <data name="&gt;&gt;label27.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblWebsite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 145</value>
+  </data>
+  <data name="&gt;&gt;lblFyEnd.Name" xml:space="preserve">
+    <value>lblFyEnd</value>
+  </data>
+  <data name="&gt;&gt;cmbFyStartMonth.Name" xml:space="preserve">
+    <value>cmbFyStartMonth</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultCash.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="tabMain.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="cmbSalaryExpense.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;colTaxSection.Name" xml:space="preserve">
+    <value>colTaxSection</value>
+  </data>
+  <data name="&gt;&gt;gridVoucher.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblFaDepExpense.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;lblBudgetWarning.Parent" xml:space="preserve">
+    <value>groupPosting</value>
+  </data>
+  <data name="&gt;&gt;groupCompanyHeader.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmbPurchaseAp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 43</value>
+  </data>
+  <data name="chkRequireNarration.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblPurchaseTaxInput.Text" xml:space="preserve">
+    <value>Purchase Tax Input</value>
+  </data>
+  <data name="&gt;&gt;colWhtDescription.Name" xml:space="preserve">
+    <value>colWhtDescription</value>
+  </data>
+  <data name="cmbInventoryAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 203</value>
+  </data>
+  <data name="&gt;&gt;gridVoucher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtNtnVat.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblFaAccumDep.Text" xml:space="preserve">
+    <value>Accum Depreciation</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAsset.Name" xml:space="preserve">
+    <value>lblInventoryAsset</value>
+  </data>
+  <data name="groupPosting.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblSalesTaxOutput.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesTaxOutput.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;txtFbrNtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtNtnVat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 108</value>
+  </data>
+  <data name="&gt;&gt;label23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSalaryExpense.Name" xml:space="preserve">
+    <value>lblSalaryExpense</value>
+  </data>
+  <data name="lblSalaryExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 160</value>
+  </data>
+  <data name="lblSalesTaxRate.Text" xml:space="preserve">
+    <value>Default Sales Tax %</value>
+  </data>
+  <data name="cmbDefaultBank.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="&gt;&gt;tabVoucher.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblInventoryAdjustment.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesTaxOutput.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="groupTaxTop.Text" xml:space="preserve">
+    <value>Tax Defaults / FBR-ZATCA</value>
+  </data>
+  <data name="label25.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblShowAmountsIn.Name" xml:space="preserve">
+    <value>lblShowAmountsIn</value>
+  </data>
+  <data name="&gt;&gt;numApprovalThreshold.Name" xml:space="preserve">
+    <value>numApprovalThreshold</value>
+  </data>
+  <data name="txt_postalCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 176</value>
+  </data>
+  <data name="chkRequireNarration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 27</value>
+  </data>
+  <data name="lblDefaultCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 120</value>
+  </data>
+  <data name="label27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picLogoPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>942, 28</value>
+  </data>
+  <data name="lblAmountFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="btnTestAutoPostingRules.Text" xml:space="preserve">
+    <value>Test Auto-Posting Rules</value>
+  </data>
+  <data name="txtFbrNtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 67</value>
+  </data>
+  <data name="cmbFaDepExpense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 29</value>
+  </data>
+  <data name="lblInventoryAdjustment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 240</value>
+  </data>
+  <data name="&gt;&gt;txtPhone.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="groupPosting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="&gt;&gt;numBackdatingDays.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label25.Name" xml:space="preserve">
+    <value>label25</value>
+  </data>
+  <data name="lblFilingFrequency.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFbrNtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 70</value>
+  </data>
+  <data name="gridVoucher.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="label23.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseCogs.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchPay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbFaAccumDep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 283</value>
+  </data>
+  <data name="&gt;&gt;lblWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label25.Text" xml:space="preserve">
+    <value>City Name</value>
+  </data>
+  <data name="chkAutoPostSales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 32</value>
+  </data>
+  <data name="&gt;&gt;tblDefaults.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblFaDepExpense.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblDefaultExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cmbSalesAr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 3</value>
+  </data>
+  <data name="&gt;&gt;cmbInterBranchRec.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;lblShowAmountsIn.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="colVoucherPreview.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblAddress.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cmbSalesRevenue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numSalesTaxRate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDefaultCash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCompanyName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblFbrNtn.Name" xml:space="preserve">
+    <value>lblFbrNtn</value>
+  </data>
+  <data name="label25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="cmbShowAmountsIn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 105</value>
+  </data>
+  <data name="&gt;&gt;cmbFaAsset.Name" xml:space="preserve">
+    <value>cmbFaAsset</value>
+  </data>
+  <data name="btnTestAutoPostingRules.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1121, 594</value>
+  </data>
+  <data name="&gt;&gt;txtFbrStrn.Name" xml:space="preserve">
+    <value>txtFbrStrn</value>
+  </data>
+  <data name="lblFaAccumDep.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 27</value>
+  </data>
+  <data name="lblDefaultCash.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;cmbShowAmountsIn.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cmbSalaryExpense.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="lblInterBranchPay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 360</value>
+  </data>
+  <data name="txtCompanyName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmbFaDepExpense.Name" xml:space="preserve">
+    <value>cmbFaDepExpense</value>
+  </data>
+  <data name="txtPhone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 109</value>
+  </data>
+  <data name="&gt;&gt;cmbDefaultExpense.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblOpeningEquity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 50</value>
+  </data>
+  <data name="lblBackdatingDays.Text" xml:space="preserve">
+    <value>Max backdating days</value>
+  </data>
+  <data name="colWhtId.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblPurchaseAp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>661, 40</value>
+  </data>
+  <data name="chkAutoPostPurchases.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 62</value>
+  </data>
+  <data name="lblCountry.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;colVoucherBranchId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCurrencyLockNote.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lblBudgetWarning.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCurrencyLockNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 23</value>
+  </data>
+  <data name="&gt;&gt;gridWhtRates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="lblSalesTaxOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 40</value>
+  </data>
+  <data name="cmbDefaultCash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label22.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cmbFaDepExpense.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSalaryExpense.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="cmbReportDateFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblSalesTaxOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="txt_countryName.Text" xml:space="preserve">
+    <value>SA</value>
+  </data>
+  <data name="&gt;&gt;lblCompanyName.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;txtStrn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDigitalSignature.Name" xml:space="preserve">
+    <value>lblDigitalSignature</value>
+  </data>
+  <data name="lblAmountFormat.Text" xml:space="preserve">
+    <value>Amount format</value>
+  </data>
+  <data name="colEffectiveFrom.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblDigitalSignature.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupTaxTop.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblPurchaseCogs.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnSaveSettings.Parent" xml:space="preserve">
+    <value>panelBottom</value>
+  </data>
+  <data name="&gt;&gt;lblBaseCurrency.Name" xml:space="preserve">
+    <value>lblBaseCurrency</value>
+  </data>
+  <data name="&gt;&gt;tabDefaults.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmbCountry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbInventoryAdjustment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>881, 243</value>
+  </data>
+  <data name="cmbInterBranchPay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 363</value>
+  </data>
+  <data name="&gt;&gt;lblEmail.Name" xml:space="preserve">
+    <value>lblEmail</value>
+  </data>
+  <data name="&gt;&gt;txtFbrStrn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchPay.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="lblSalaryPayable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 200</value>
+  </data>
+  <data name="label23.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label27.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblFyStart.Name" xml:space="preserve">
+    <value>lblFyStart</value>
+  </data>
+  <data name="lblReportHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCompanyName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 76</value>
+  </data>
+  <data name="tabVoucher.Text" xml:space="preserve">
+    <value>Voucher Numbering</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;colIsActive.Name" xml:space="preserve">
+    <value>colIsActive</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAsset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblDefaultBank.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="numBackdatingDays.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmbPurchaseCogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbDefaultBank.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblShowAmountsIn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 108</value>
+  </data>
+  <data name="&gt;&gt;lblInterBranchPay.Parent" xml:space="preserve">
+    <value>tblDefaults</value>
+  </data>
+  <data name="&gt;&gt;label26.Name" xml:space="preserve">
+    <value>label26</value>
+  </data>
+  <data name="lblCurrencyLockNote.Text" xml:space="preserve">
+    <value>note:</value>
+  </data>
+  <data name="&gt;&gt;lblBaseCurrency.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSalesTaxOutput.Text" xml:space="preserve">
+    <value>Sales Tax Output</value>
+  </data>
+  <data name="lblReportFooter.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblTaxMode.Name" xml:space="preserve">
+    <value>lblTaxMode</value>
+  </data>
+  <data name="lblCurrencyLockNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 321</value>
+  </data>
+  <data name="lblStrn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupReports.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblFaDepExpense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;txtEmail.Parent" xml:space="preserve">
+    <value>groupCompanyHeader</value>
+  </data>
+  <data name="&gt;&gt;txtEmail.Name" xml:space="preserve">
+    <value>txtEmail</value>
+  </data>
+  <data name="&gt;&gt;chk_use_zatca_e_invoice.Name" xml:space="preserve">
+    <value>chk_use_zatca_e_invoice</value>
+  </data>
+  <data name="lblSalesTaxRate.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

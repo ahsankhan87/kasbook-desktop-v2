@@ -18,12 +18,46 @@ namespace pos.Accounting.CostCenter
 
         public frm_allocation_rules()
         {
+            // Set RTL mode based on user language
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+            this.RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No;
+            this.RightToLeftLayout = isArabic;
+
             InitializeComponent();
             InitializeUI();
         }
 
+        /// <summary>
+        /// Translates text based on current user language (Arabic/English).
+        /// </summary>
+        private string T(string englishText, string arabicText)
+        {
+            return string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase) 
+                ? arabicText 
+                : englishText;
+        }
+
         private void InitializeUI()
         {
+            // Translate form title
+            this.Text = T("Allocation Rules", "قواعد التوزيع");
+
+            // Translate UI labels and buttons
+            lblTitle.Text = T("Allocation Rules & Auto-Allocation", "قواعد التوزيع والتوزيع التلقائي");
+            lblName.Text = T("Rule Name:", "اسم القاعدة:");
+            lblSourceAccount.Text = T("Source Account:", "حساب المصدر:");
+            lblTargetCC.Text = T("Target Cost Center:", "مركز التكلفة المستهدف:");
+            lblMethod.Text = T("Allocation Method:", "طريقة التوزيع:");
+            lblPercent.Text = T("Allocation Percent:", "نسبة التوزيع:");
+            chkActive.Text = T("Active", "نشط");
+            lblPeriod.Text = T("Period:", "الفترة:");
+            btnNew.Text = T("New", "جديد");
+            btnSave.Text = T("Save", "حفظ");
+            btnCancel.Text = T("Cancel", "إلغاء");
+            btnDelete.Text = T("Delete", "حذف");
+            btnRunAllocation.Text = T("Run Allocation", "تشغيل التوزيع");
+            pnlAllocation.Text = T("Execute Allocation", "تنفيذ التوزيع");
+
             // Apply theme
             AppTheme.Apply(this);
 
@@ -62,11 +96,11 @@ namespace pos.Accounting.CostCenter
                 {
                     cn.Open();
                     const string sql = @"
-SELECT id, CONCAT(code, ' — ', name) AS display_text
-FROM dbo.acc_accounts
-WHERE group_id IN (SELECT id FROM dbo.acc_groups WHERE account_type_id IN 
-  (SELECT id FROM dbo.acc_account_type WHERE name LIKE '%Expense%'))
-ORDER BY code;";
+                        SELECT id, CONCAT(code, ' — ', name) AS display_text
+                        FROM dbo.acc_accounts
+                        WHERE group_id IN (SELECT id FROM dbo.acc_groups WHERE account_type_id IN 
+                          (SELECT id FROM dbo.acc_account_type WHERE name LIKE '%Expense%'))
+                        ORDER BY code;";
                     using (var cmd = new System.Data.SqlClient.SqlCommand(sql, cn))
                     {
                         using (var da = new System.Data.SqlClient.SqlDataAdapter(cmd))
@@ -83,7 +117,7 @@ ORDER BY code;";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading accounts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error loading accounts:", "خطأ في تحميل الحسابات:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -99,7 +133,7 @@ ORDER BY code;";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading cost centers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error loading cost centers:", "خطأ في تحميل مراكز التكلفة:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -137,10 +171,30 @@ ORDER BY a.alloc_name;";
 
                 dgvRules.DataSource = dt;
                 dgvRules.AutoResizeColumns();
+
+                // Translate grid column headers
+                if (dgvRules.Columns.Contains("alloc_id"))
+                    dgvRules.Columns["alloc_id"].HeaderText = T("ID", "رقم");
+                if (dgvRules.Columns.Contains("alloc_name"))
+                    dgvRules.Columns["alloc_name"].HeaderText = T("Rule Name", "اسم القاعدة");
+                if (dgvRules.Columns.Contains("source_account_code"))
+                    dgvRules.Columns["source_account_code"].HeaderText = T("Source Code", "رمز المصدر");
+                if (dgvRules.Columns.Contains("source_account_name"))
+                    dgvRules.Columns["source_account_name"].HeaderText = T("Source Account", "حساب المصدر");
+                if (dgvRules.Columns.Contains("target_cc_code"))
+                    dgvRules.Columns["target_cc_code"].HeaderText = T("CC Code", "رمز مركز التكلفة");
+                if (dgvRules.Columns.Contains("target_cc_name"))
+                    dgvRules.Columns["target_cc_name"].HeaderText = T("Cost Center", "مركز التكلفة");
+                if (dgvRules.Columns.Contains("allocation_percent"))
+                    dgvRules.Columns["allocation_percent"].HeaderText = T("Percent", "النسبة");
+                if (dgvRules.Columns.Contains("allocation_method"))
+                    dgvRules.Columns["allocation_method"].HeaderText = T("Method", "الطريقة");
+                if (dgvRules.Columns.Contains("is_active"))
+                    dgvRules.Columns["is_active"].HeaderText = T("Active", "نشط");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading rules: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error loading rules:", "خطأ في تحميل القواعد:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -199,7 +253,7 @@ END";
                         }
                     }
 
-                    MessageBox.Show("Allocation rule saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(T("Allocation rule saved successfully.", "تم حفظ قاعدة التوزيع بنجاح."), T("Success", "نجح"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadRules();
                     ClearForm();
                     EnableEditControls(false);
@@ -207,7 +261,7 @@ END";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving rule: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error saving rule:", "خطأ في حفظ القاعدة:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -221,17 +275,17 @@ END";
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
-                MessageBox.Show("Please select a rule to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(T("Please select a rule to delete.", "يرجى تحديد القاعدة التي تريد حذفها."), T("Information", "معلومات"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to delete this rule?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(T("Are you sure you want to delete this rule?", "هل أنت متأكد من حذف هذه القاعدة؟"), T("Confirm Delete", "تأكيد الحذف"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result != DialogResult.Yes)
                 return;
 
             try
             {
-                using (BusyScope.Show(this, "Deleting rule..."))
+                using (BusyScope.Show(this, T("Deleting rule...", "جاري حذف القاعدة...")))
                 {
                     const string sql = "DELETE FROM dbo.acc_cost_center_allocations WHERE alloc_name = @name";
                     using (var cn = new System.Data.SqlClient.SqlConnection(POS.DLL.dbConnection.ConnectionString))
@@ -244,7 +298,7 @@ END";
                         }
                     }
 
-                    MessageBox.Show("Rule deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(T("Rule deleted.", "تم حذف القاعدة."), T("Success", "نجح"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadRules();
                     ClearForm();
                     EnableEditControls(false);
@@ -252,7 +306,7 @@ END";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting rule: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error deleting rule:", "خطأ في حذف القاعدة:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -261,8 +315,9 @@ END";
             var period = dtpPeriod.Value.Date;
 
             DialogResult result = MessageBox.Show(
-                $"Run allocation for period: {period:yyyy-MM}?\n\nThis will create journal entries distributing expenses.",
-                "Confirm Allocation",
+                T($"Run allocation for period: {period:yyyy-MM}?\n\nThis will create journal entries distributing expenses.",
+                  $"تشغيل التوزيع للفترة: {period:yyyy-MM}؟\n\nسيقوم هذا بإنشاء قيود يومية توزع المصاريف."),
+                T("Confirm Allocation", "تأكيد التوزيع"),
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -271,27 +326,31 @@ END";
 
             try
             {
-                using (BusyScope.Show(this, "Running allocation..."))
+                using (BusyScope.Show(this, T("Running allocation...", "جاري تشغيل التوزيع...")))
                 {
                     var allocationResult = bll.RunExpenseAllocation(period, UsersModal.logged_in_userid);
 
                     if (allocationResult.Success)
                     {
-                        string message = $"Allocation completed successfully!\n\n" +
+                        string message = T($"Allocation completed successfully!\n\n" +
                             $"Voucher: {allocationResult.VoucherNo}\n" +
                             $"Total Allocated: {allocationResult.TotalAllocated:N2}\n" +
-                            $"Departments: {allocationResult.Allocations.Count}";
-                        MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            $"Departments: {allocationResult.Allocations.Count}",
+                            $"تم إكمال التوزيع بنجاح!\n\n" +
+                            $"الكشف: {allocationResult.VoucherNo}\n" +
+                            $"الإجمالي الموزع: {allocationResult.TotalAllocated:N2}\n" +
+                            $"الأقسام: {allocationResult.Allocations.Count}");
+                        MessageBox.Show(message, T("Success", "نجح"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show($"Error: {allocationResult.Message}", "Allocation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"{T("Error:", "خطأ:")} {allocationResult.Message}", T("Allocation Failed", "فشل التوزيع"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error running allocation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error running allocation:", "خطأ في تشغيل التوزيع:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -345,7 +404,7 @@ WHERE alloc_name = @name;";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading rule: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{T("Error loading rule:", "خطأ في تحميل القاعدة:")} {ex.Message}", T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -353,28 +412,28 @@ WHERE alloc_name = @name;";
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
-                MessageBox.Show("Rule Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(T("Rule Name is required.", "اسم القاعدة مطلوب."), T("Validation Error", "خطأ في التحقق"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtName.Focus();
                 return false;
             }
 
             if (cmbSourceAccount.SelectedValue == null)
             {
-                MessageBox.Show("Source Account is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(T("Source Account is required.", "حساب المصدر مطلوب."), T("Validation Error", "خطأ في التحقق"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbSourceAccount.Focus();
                 return false;
             }
 
             if (cmbTargetCostCenter.SelectedValue == null)
             {
-                MessageBox.Show("Target Cost Center is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(T("Target Cost Center is required.", "مركز التكلفة الهدف مطلوب."), T("Validation Error", "خطأ في التحقق"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbTargetCostCenter.Focus();
                 return false;
             }
 
             if (!decimal.TryParse(txtPercent.Text, out decimal percent) || percent <= 0 || percent > 100)
             {
-                MessageBox.Show("Allocation Percent must be between 0.01 and 100.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(T("Allocation Percent must be between 0.01 and 100.", "يجب أن تكون نسبة التوزيع بين 0.01 و 100."), T("Validation Error", "خطأ في التحقق"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPercent.Focus();
                 return false;
             }

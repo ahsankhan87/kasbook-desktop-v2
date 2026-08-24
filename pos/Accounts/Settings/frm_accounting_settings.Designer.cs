@@ -17,10 +17,25 @@ namespace pos
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_accounting_settings));
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabCompany = new System.Windows.Forms.TabPage();
             this.groupCompanyHeader = new System.Windows.Forms.GroupBox();
+            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_buildingNumber = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txt_countryName = new System.Windows.Forms.TextBox();
+            this.txt_postalCode = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_cityName = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txt_citySubdivisionName = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txt_StreetName = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.lblCurrencyLockNote = new System.Windows.Forms.Label();
             this.txtLogoPath = new System.Windows.Forms.TextBox();
             this.btnBrowseLogo = new System.Windows.Forms.Button();
@@ -152,23 +167,10 @@ namespace pos
             this.panelBottom = new System.Windows.Forms.Panel();
             this.btnResetDefaults = new System.Windows.Forms.Button();
             this.btnSaveSettings = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txt_buildingNumber = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txt_countryName = new System.Windows.Forms.TextBox();
-            this.txt_postalCode = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txt_cityName = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.txt_citySubdivisionName = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.txt_StreetName = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.chk_use_zatca_e_invoice = new System.Windows.Forms.CheckBox();
             this.tabMain.SuspendLayout();
             this.tabCompany.SuspendLayout();
             this.groupCompanyHeader.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoPreview)).BeginInit();
             this.tabDefaults.SuspendLayout();
             this.tblDefaults.SuspendLayout();
@@ -186,49 +188,35 @@ namespace pos
             this.tabReports.SuspendLayout();
             this.groupReports.SuspendLayout();
             this.panelBottom.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(275, 28);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Accounting Settings (Admin)";
             // 
             // tabMain
             // 
-            this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.tabMain, "tabMain");
             this.tabMain.Controls.Add(this.tabCompany);
             this.tabMain.Controls.Add(this.tabDefaults);
             this.tabMain.Controls.Add(this.tabVoucher);
             this.tabMain.Controls.Add(this.tabTax);
             this.tabMain.Controls.Add(this.tabPosting);
             this.tabMain.Controls.Add(this.tabReports);
-            this.tabMain.Location = new System.Drawing.Point(12, 40);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1360, 661);
-            this.tabMain.TabIndex = 1;
             // 
             // tabCompany
             // 
+            resources.ApplyResources(this.tabCompany, "tabCompany");
             this.tabCompany.Controls.Add(this.groupCompanyHeader);
-            this.tabCompany.Location = new System.Drawing.Point(4, 30);
             this.tabCompany.Name = "tabCompany";
-            this.tabCompany.Padding = new System.Windows.Forms.Padding(8);
-            this.tabCompany.Size = new System.Drawing.Size(1352, 627);
-            this.tabCompany.TabIndex = 0;
-            this.tabCompany.Text = "Company & Financial Year";
             this.tabCompany.UseVisualStyleBackColor = true;
             // 
             // groupCompanyHeader
             // 
+            resources.ApplyResources(this.groupCompanyHeader, "groupCompanyHeader");
             this.groupCompanyHeader.Controls.Add(this.chk_use_zatca_e_invoice);
             this.groupCompanyHeader.Controls.Add(this.groupBox3);
             this.groupCompanyHeader.Controls.Add(this.lblCurrencyLockNote);
@@ -261,295 +249,271 @@ namespace pos
             this.groupCompanyHeader.Controls.Add(this.lblRegistration);
             this.groupCompanyHeader.Controls.Add(this.lblLegalName);
             this.groupCompanyHeader.Controls.Add(this.lblCompanyName);
-            this.groupCompanyHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupCompanyHeader.Location = new System.Drawing.Point(8, 8);
             this.groupCompanyHeader.Name = "groupCompanyHeader";
-            this.groupCompanyHeader.Size = new System.Drawing.Size(1336, 611);
-            this.groupCompanyHeader.TabIndex = 0;
             this.groupCompanyHeader.TabStop = false;
-            this.groupCompanyHeader.Text = "Company Profile";
+            // 
+            // chk_use_zatca_e_invoice
+            // 
+            resources.ApplyResources(this.chk_use_zatca_e_invoice, "chk_use_zatca_e_invoice");
+            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
+            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.txt_buildingNumber);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.txt_countryName);
+            this.groupBox3.Controls.Add(this.txt_postalCode);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.txt_cityName);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.txt_citySubdivisionName);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.txt_StreetName);
+            this.groupBox3.Controls.Add(this.label27);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // txt_buildingNumber
+            // 
+            resources.ApplyResources(this.txt_buildingNumber, "txt_buildingNumber");
+            this.txt_buildingNumber.Name = "txt_buildingNumber";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            // 
+            // txt_countryName
+            // 
+            resources.ApplyResources(this.txt_countryName, "txt_countryName");
+            this.txt_countryName.Name = "txt_countryName";
+            // 
+            // txt_postalCode
+            // 
+            resources.ApplyResources(this.txt_postalCode, "txt_postalCode");
+            this.txt_postalCode.Name = "txt_postalCode";
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            // 
+            // txt_cityName
+            // 
+            resources.ApplyResources(this.txt_cityName, "txt_cityName");
+            this.txt_cityName.Name = "txt_cityName";
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            // 
+            // txt_citySubdivisionName
+            // 
+            resources.ApplyResources(this.txt_citySubdivisionName, "txt_citySubdivisionName");
+            this.txt_citySubdivisionName.Name = "txt_citySubdivisionName";
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            // 
+            // txt_StreetName
+            // 
+            resources.ApplyResources(this.txt_StreetName, "txt_StreetName");
+            this.txt_StreetName.Name = "txt_StreetName";
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
             // 
             // lblCurrencyLockNote
             // 
-            this.lblCurrencyLockNote.AutoSize = true;
+            resources.ApplyResources(this.lblCurrencyLockNote, "lblCurrencyLockNote");
             this.lblCurrencyLockNote.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblCurrencyLockNote.Location = new System.Drawing.Point(25, 321);
             this.lblCurrencyLockNote.Name = "lblCurrencyLockNote";
-            this.lblCurrencyLockNote.Size = new System.Drawing.Size(49, 23);
-            this.lblCurrencyLockNote.TabIndex = 29;
-            this.lblCurrencyLockNote.Text = "note:";
             // 
             // txtLogoPath
             // 
-            this.txtLogoPath.Location = new System.Drawing.Point(942, 165);
+            resources.ApplyResources(this.txtLogoPath, "txtLogoPath");
             this.txtLogoPath.Name = "txtLogoPath";
-            this.txtLogoPath.Size = new System.Drawing.Size(350, 29);
-            this.txtLogoPath.TabIndex = 14;
             // 
             // btnBrowseLogo
             // 
-            this.btnBrowseLogo.Location = new System.Drawing.Point(1047, 200);
+            resources.ApplyResources(this.btnBrowseLogo, "btnBrowseLogo");
             this.btnBrowseLogo.Name = "btnBrowseLogo";
-            this.btnBrowseLogo.Size = new System.Drawing.Size(75, 29);
-            this.btnBrowseLogo.TabIndex = 15;
-            this.btnBrowseLogo.Text = "Browse";
             this.btnBrowseLogo.UseVisualStyleBackColor = true;
             this.btnBrowseLogo.Click += new System.EventHandler(this.btnBrowseLogo_Click);
             // 
             // picLogoPreview
             // 
+            resources.ApplyResources(this.picLogoPreview, "picLogoPreview");
             this.picLogoPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picLogoPreview.Location = new System.Drawing.Point(942, 28);
             this.picLogoPreview.Name = "picLogoPreview";
-            this.picLogoPreview.Size = new System.Drawing.Size(180, 120);
-            this.picLogoPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogoPreview.TabIndex = 26;
             this.picLogoPreview.TabStop = false;
             // 
             // cmbCountry
             // 
+            resources.ApplyResources(this.cmbCountry, "cmbCountry");
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(602, 217);
             this.cmbCountry.Name = "cmbCountry";
-            this.cmbCountry.Size = new System.Drawing.Size(294, 29);
-            this.cmbCountry.TabIndex = 13;
             // 
             // cmbBaseCurrency
             // 
+            resources.ApplyResources(this.cmbBaseCurrency, "cmbBaseCurrency");
             this.cmbBaseCurrency.FormattingEnabled = true;
-            this.cmbBaseCurrency.Location = new System.Drawing.Point(159, 288);
             this.cmbBaseCurrency.Name = "cmbBaseCurrency";
-            this.cmbBaseCurrency.Size = new System.Drawing.Size(300, 29);
-            this.cmbBaseCurrency.TabIndex = 12;
             // 
             // cmbFyEndMonth
             // 
+            resources.ApplyResources(this.cmbFyEndMonth, "cmbFyEndMonth");
             this.cmbFyEndMonth.FormattingEnabled = true;
-            this.cmbFyEndMonth.Location = new System.Drawing.Point(602, 252);
             this.cmbFyEndMonth.Name = "cmbFyEndMonth";
-            this.cmbFyEndMonth.Size = new System.Drawing.Size(294, 29);
-            this.cmbFyEndMonth.TabIndex = 11;
             // 
             // cmbFyStartMonth
             // 
+            resources.ApplyResources(this.cmbFyStartMonth, "cmbFyStartMonth");
             this.cmbFyStartMonth.FormattingEnabled = true;
-            this.cmbFyStartMonth.Location = new System.Drawing.Point(159, 250);
             this.cmbFyStartMonth.Name = "cmbFyStartMonth";
-            this.cmbFyStartMonth.Size = new System.Drawing.Size(300, 29);
-            this.cmbFyStartMonth.TabIndex = 10;
             this.cmbFyStartMonth.SelectedIndexChanged += new System.EventHandler(this.cmbFyStartMonth_SelectedIndexChanged);
             // 
             // txtWebsite
             // 
-            this.txtWebsite.Location = new System.Drawing.Point(602, 145);
+            resources.ApplyResources(this.txtWebsite, "txtWebsite");
             this.txtWebsite.Name = "txtWebsite";
-            this.txtWebsite.Size = new System.Drawing.Size(294, 29);
-            this.txtWebsite.TabIndex = 9;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(602, 181);
+            resources.ApplyResources(this.txtEmail, "txtEmail");
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(294, 29);
-            this.txtEmail.TabIndex = 8;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(602, 109);
+            resources.ApplyResources(this.txtPhone, "txtPhone");
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(294, 29);
-            this.txtPhone.TabIndex = 7;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(159, 145);
-            this.txtAddress.Multiline = true;
+            resources.ApplyResources(this.txtAddress, "txtAddress");
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(300, 95);
-            this.txtAddress.TabIndex = 6;
             // 
             // txtStrn
             // 
-            this.txtStrn.Location = new System.Drawing.Point(602, 73);
+            resources.ApplyResources(this.txtStrn, "txtStrn");
             this.txtStrn.Name = "txtStrn";
-            this.txtStrn.Size = new System.Drawing.Size(294, 29);
-            this.txtStrn.TabIndex = 5;
             // 
             // txtNtnVat
             // 
-            this.txtNtnVat.Location = new System.Drawing.Point(159, 108);
+            resources.ApplyResources(this.txtNtnVat, "txtNtnVat");
             this.txtNtnVat.Name = "txtNtnVat";
-            this.txtNtnVat.Size = new System.Drawing.Size(300, 29);
-            this.txtNtnVat.TabIndex = 4;
             // 
             // txtRegistrationNo
             // 
-            this.txtRegistrationNo.Location = new System.Drawing.Point(602, 37);
+            resources.ApplyResources(this.txtRegistrationNo, "txtRegistrationNo");
             this.txtRegistrationNo.Name = "txtRegistrationNo";
-            this.txtRegistrationNo.Size = new System.Drawing.Size(294, 29);
-            this.txtRegistrationNo.TabIndex = 3;
             // 
             // txtLegalName
             // 
-            this.txtLegalName.Location = new System.Drawing.Point(159, 34);
+            resources.ApplyResources(this.txtLegalName, "txtLegalName");
             this.txtLegalName.Name = "txtLegalName";
-            this.txtLegalName.Size = new System.Drawing.Size(300, 29);
-            this.txtLegalName.TabIndex = 2;
             // 
             // txtCompanyName
             // 
-            this.txtCompanyName.Location = new System.Drawing.Point(159, 71);
+            resources.ApplyResources(this.txtCompanyName, "txtCompanyName");
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(300, 29);
-            this.txtCompanyName.TabIndex = 1;
             // 
             // lblCountry
             // 
-            this.lblCountry.AutoSize = true;
-            this.lblCountry.Location = new System.Drawing.Point(467, 217);
+            resources.ApplyResources(this.lblCountry, "lblCountry");
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(71, 23);
-            this.lblCountry.TabIndex = 12;
-            this.lblCountry.Text = "Country";
             // 
             // lblBaseCurrency
             // 
-            this.lblBaseCurrency.AutoSize = true;
-            this.lblBaseCurrency.Location = new System.Drawing.Point(25, 288);
+            resources.ApplyResources(this.lblBaseCurrency, "lblBaseCurrency");
             this.lblBaseCurrency.Name = "lblBaseCurrency";
-            this.lblBaseCurrency.Size = new System.Drawing.Size(118, 23);
-            this.lblBaseCurrency.TabIndex = 11;
-            this.lblBaseCurrency.Text = "Base Currency";
             // 
             // lblFyEnd
             // 
-            this.lblFyEnd.AutoSize = true;
-            this.lblFyEnd.Location = new System.Drawing.Point(467, 252);
+            resources.ApplyResources(this.lblFyEnd, "lblFyEnd");
             this.lblFyEnd.Name = "lblFyEnd";
-            this.lblFyEnd.Size = new System.Drawing.Size(117, 23);
-            this.lblFyEnd.TabIndex = 10;
-            this.lblFyEnd.Text = "FY End Month";
             // 
             // lblFyStart
             // 
-            this.lblFyStart.AutoSize = true;
-            this.lblFyStart.Location = new System.Drawing.Point(25, 252);
+            resources.ApplyResources(this.lblFyStart, "lblFyStart");
             this.lblFyStart.Name = "lblFyStart";
-            this.lblFyStart.Size = new System.Drawing.Size(123, 23);
-            this.lblFyStart.TabIndex = 9;
-            this.lblFyStart.Text = "FY Start Month";
             // 
             // lblWebsite
             // 
-            this.lblWebsite.AutoSize = true;
-            this.lblWebsite.Location = new System.Drawing.Point(467, 145);
+            resources.ApplyResources(this.lblWebsite, "lblWebsite");
             this.lblWebsite.Name = "lblWebsite";
-            this.lblWebsite.Size = new System.Drawing.Size(70, 23);
-            this.lblWebsite.TabIndex = 8;
-            this.lblWebsite.Text = "Website";
             // 
             // lblEmail
             // 
-            this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(467, 184);
+            resources.ApplyResources(this.lblEmail, "lblEmail");
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(51, 23);
-            this.lblEmail.TabIndex = 7;
-            this.lblEmail.Text = "Email";
             // 
             // lblPhone
             // 
-            this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(467, 109);
+            resources.ApplyResources(this.lblPhone, "lblPhone");
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(59, 23);
-            this.lblPhone.TabIndex = 6;
-            this.lblPhone.Text = "Phone";
             // 
             // lblAddress
             // 
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(25, 148);
+            resources.ApplyResources(this.lblAddress, "lblAddress");
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(70, 23);
-            this.lblAddress.TabIndex = 5;
-            this.lblAddress.Text = "Address";
             // 
             // lblStrn
             // 
-            this.lblStrn.AutoSize = true;
-            this.lblStrn.Location = new System.Drawing.Point(467, 73);
+            resources.ApplyResources(this.lblStrn, "lblStrn");
             this.lblStrn.Name = "lblStrn";
-            this.lblStrn.Size = new System.Drawing.Size(51, 23);
-            this.lblStrn.TabIndex = 4;
-            this.lblStrn.Text = "STRN";
             // 
             // lblNtnVat
             // 
-            this.lblNtnVat.AutoSize = true;
-            this.lblNtnVat.Location = new System.Drawing.Point(25, 112);
+            resources.ApplyResources(this.lblNtnVat, "lblNtnVat");
             this.lblNtnVat.Name = "lblNtnVat";
-            this.lblNtnVat.Size = new System.Drawing.Size(113, 23);
-            this.lblNtnVat.TabIndex = 3;
-            this.lblNtnVat.Text = "NTN/VAT No.";
             // 
             // lblRegistration
             // 
-            this.lblRegistration.AutoSize = true;
-            this.lblRegistration.Location = new System.Drawing.Point(467, 37);
+            resources.ApplyResources(this.lblRegistration, "lblRegistration");
             this.lblRegistration.Name = "lblRegistration";
-            this.lblRegistration.Size = new System.Drawing.Size(129, 23);
-            this.lblRegistration.TabIndex = 2;
-            this.lblRegistration.Text = "Registration No";
             // 
             // lblLegalName
             // 
-            this.lblLegalName.AutoSize = true;
-            this.lblLegalName.Location = new System.Drawing.Point(25, 40);
+            resources.ApplyResources(this.lblLegalName, "lblLegalName");
             this.lblLegalName.Name = "lblLegalName";
-            this.lblLegalName.Size = new System.Drawing.Size(101, 23);
-            this.lblLegalName.TabIndex = 1;
-            this.lblLegalName.Text = "Legal Name";
             // 
             // lblCompanyName
             // 
-            this.lblCompanyName.AutoSize = true;
-            this.lblCompanyName.Location = new System.Drawing.Point(25, 76);
+            resources.ApplyResources(this.lblCompanyName, "lblCompanyName");
             this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(134, 23);
-            this.lblCompanyName.TabIndex = 0;
-            this.lblCompanyName.Text = "Company Name";
             // 
             // tabDefaults
             // 
+            resources.ApplyResources(this.tabDefaults, "tabDefaults");
             this.tabDefaults.Controls.Add(this.btnTestAutoPostingRules);
             this.tabDefaults.Controls.Add(this.tblDefaults);
-            this.tabDefaults.Location = new System.Drawing.Point(4, 30);
             this.tabDefaults.Name = "tabDefaults";
-            this.tabDefaults.Padding = new System.Windows.Forms.Padding(8);
-            this.tabDefaults.Size = new System.Drawing.Size(1352, 627);
-            this.tabDefaults.TabIndex = 1;
-            this.tabDefaults.Text = "Default Accounts";
             this.tabDefaults.UseVisualStyleBackColor = true;
             // 
             // btnTestAutoPostingRules
             // 
-            this.btnTestAutoPostingRules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTestAutoPostingRules.Location = new System.Drawing.Point(1121, 594);
+            resources.ApplyResources(this.btnTestAutoPostingRules, "btnTestAutoPostingRules");
             this.btnTestAutoPostingRules.Name = "btnTestAutoPostingRules";
-            this.btnTestAutoPostingRules.Size = new System.Drawing.Size(220, 27);
-            this.btnTestAutoPostingRules.TabIndex = 1;
-            this.btnTestAutoPostingRules.Text = "Test Auto-Posting Rules";
             this.btnTestAutoPostingRules.UseVisualStyleBackColor = true;
             this.btnTestAutoPostingRules.Click += new System.EventHandler(this.btnTestAutoPostingRules_Click);
             // 
             // tblDefaults
             // 
-            this.tblDefaults.ColumnCount = 4;
-            this.tblDefaults.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tblDefaults.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblDefaults.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
-            this.tblDefaults.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            resources.ApplyResources(this.tblDefaults, "tblDefaults");
             this.tblDefaults.Controls.Add(this.lblSalesAr, 0, 0);
             this.tblDefaults.Controls.Add(this.cmbSalesAr, 1, 0);
             this.tblDefaults.Controls.Add(this.lblSalesRevenue, 2, 0);
@@ -590,416 +554,238 @@ namespace pos
             this.tblDefaults.Controls.Add(this.cmbInterBranchPay, 1, 9);
             this.tblDefaults.Controls.Add(this.lblOpeningEquity, 2, 9);
             this.tblDefaults.Controls.Add(this.cmbOpeningEquity, 3, 9);
-            this.tblDefaults.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblDefaults.Location = new System.Drawing.Point(8, 8);
             this.tblDefaults.Name = "tblDefaults";
-            this.tblDefaults.RowCount = 10;
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tblDefaults.Size = new System.Drawing.Size(1336, 410);
-            this.tblDefaults.TabIndex = 0;
             // 
             // lblSalesAr
             // 
-            this.lblSalesAr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSalesAr.Location = new System.Drawing.Point(3, 0);
+            resources.ApplyResources(this.lblSalesAr, "lblSalesAr");
             this.lblSalesAr.Name = "lblSalesAr";
-            this.lblSalesAr.Size = new System.Drawing.Size(194, 40);
-            this.lblSalesAr.TabIndex = 0;
-            this.lblSalesAr.Text = "Sales AR Account";
-            this.lblSalesAr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSalesAr
             // 
-            this.cmbSalesAr.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbSalesAr, "cmbSalesAr");
             this.cmbSalesAr.FormattingEnabled = true;
-            this.cmbSalesAr.Location = new System.Drawing.Point(203, 3);
             this.cmbSalesAr.Name = "cmbSalesAr";
-            this.cmbSalesAr.Size = new System.Drawing.Size(452, 29);
-            this.cmbSalesAr.TabIndex = 1;
             // 
             // lblSalesRevenue
             // 
-            this.lblSalesRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSalesRevenue.Location = new System.Drawing.Point(661, 0);
+            resources.ApplyResources(this.lblSalesRevenue, "lblSalesRevenue");
             this.lblSalesRevenue.Name = "lblSalesRevenue";
-            this.lblSalesRevenue.Size = new System.Drawing.Size(214, 40);
-            this.lblSalesRevenue.TabIndex = 2;
-            this.lblSalesRevenue.Text = "Sales Revenue";
-            this.lblSalesRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSalesRevenue
             // 
-            this.cmbSalesRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbSalesRevenue, "cmbSalesRevenue");
             this.cmbSalesRevenue.FormattingEnabled = true;
-            this.cmbSalesRevenue.Location = new System.Drawing.Point(881, 3);
             this.cmbSalesRevenue.Name = "cmbSalesRevenue";
-            this.cmbSalesRevenue.Size = new System.Drawing.Size(452, 29);
-            this.cmbSalesRevenue.TabIndex = 3;
             // 
             // lblSalesTaxOutput
             // 
-            this.lblSalesTaxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSalesTaxOutput.Location = new System.Drawing.Point(3, 40);
+            resources.ApplyResources(this.lblSalesTaxOutput, "lblSalesTaxOutput");
             this.lblSalesTaxOutput.Name = "lblSalesTaxOutput";
-            this.lblSalesTaxOutput.Size = new System.Drawing.Size(194, 40);
-            this.lblSalesTaxOutput.TabIndex = 4;
-            this.lblSalesTaxOutput.Text = "Sales Tax Output";
-            this.lblSalesTaxOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSalesTaxOutput
             // 
-            this.cmbSalesTaxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbSalesTaxOutput, "cmbSalesTaxOutput");
             this.cmbSalesTaxOutput.FormattingEnabled = true;
-            this.cmbSalesTaxOutput.Location = new System.Drawing.Point(203, 43);
             this.cmbSalesTaxOutput.Name = "cmbSalesTaxOutput";
-            this.cmbSalesTaxOutput.Size = new System.Drawing.Size(452, 29);
-            this.cmbSalesTaxOutput.TabIndex = 5;
             // 
             // lblPurchaseAp
             // 
-            this.lblPurchaseAp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPurchaseAp.Location = new System.Drawing.Point(661, 40);
+            resources.ApplyResources(this.lblPurchaseAp, "lblPurchaseAp");
             this.lblPurchaseAp.Name = "lblPurchaseAp";
-            this.lblPurchaseAp.Size = new System.Drawing.Size(214, 40);
-            this.lblPurchaseAp.TabIndex = 6;
-            this.lblPurchaseAp.Text = "Purchase AP Account";
-            this.lblPurchaseAp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbPurchaseAp
             // 
-            this.cmbPurchaseAp.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbPurchaseAp, "cmbPurchaseAp");
             this.cmbPurchaseAp.FormattingEnabled = true;
-            this.cmbPurchaseAp.Location = new System.Drawing.Point(881, 43);
             this.cmbPurchaseAp.Name = "cmbPurchaseAp";
-            this.cmbPurchaseAp.Size = new System.Drawing.Size(452, 29);
-            this.cmbPurchaseAp.TabIndex = 7;
             // 
             // lblPurchaseCogs
             // 
-            this.lblPurchaseCogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPurchaseCogs.Location = new System.Drawing.Point(3, 80);
+            resources.ApplyResources(this.lblPurchaseCogs, "lblPurchaseCogs");
             this.lblPurchaseCogs.Name = "lblPurchaseCogs";
-            this.lblPurchaseCogs.Size = new System.Drawing.Size(194, 40);
-            this.lblPurchaseCogs.TabIndex = 8;
-            this.lblPurchaseCogs.Text = "Purchase/COGS";
-            this.lblPurchaseCogs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbPurchaseCogs
             // 
-            this.cmbPurchaseCogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbPurchaseCogs, "cmbPurchaseCogs");
             this.cmbPurchaseCogs.FormattingEnabled = true;
-            this.cmbPurchaseCogs.Location = new System.Drawing.Point(203, 83);
             this.cmbPurchaseCogs.Name = "cmbPurchaseCogs";
-            this.cmbPurchaseCogs.Size = new System.Drawing.Size(452, 29);
-            this.cmbPurchaseCogs.TabIndex = 9;
             // 
             // lblPurchaseTaxInput
             // 
-            this.lblPurchaseTaxInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPurchaseTaxInput.Location = new System.Drawing.Point(661, 80);
+            resources.ApplyResources(this.lblPurchaseTaxInput, "lblPurchaseTaxInput");
             this.lblPurchaseTaxInput.Name = "lblPurchaseTaxInput";
-            this.lblPurchaseTaxInput.Size = new System.Drawing.Size(214, 40);
-            this.lblPurchaseTaxInput.TabIndex = 10;
-            this.lblPurchaseTaxInput.Text = "Purchase Tax Input";
-            this.lblPurchaseTaxInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbPurchaseTaxInput
             // 
-            this.cmbPurchaseTaxInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbPurchaseTaxInput, "cmbPurchaseTaxInput");
             this.cmbPurchaseTaxInput.FormattingEnabled = true;
-            this.cmbPurchaseTaxInput.Location = new System.Drawing.Point(881, 83);
             this.cmbPurchaseTaxInput.Name = "cmbPurchaseTaxInput";
-            this.cmbPurchaseTaxInput.Size = new System.Drawing.Size(452, 29);
-            this.cmbPurchaseTaxInput.TabIndex = 11;
             // 
             // lblDefaultExpense
             // 
-            this.lblDefaultExpense.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDefaultExpense.Location = new System.Drawing.Point(3, 120);
+            resources.ApplyResources(this.lblDefaultExpense, "lblDefaultExpense");
             this.lblDefaultExpense.Name = "lblDefaultExpense";
-            this.lblDefaultExpense.Size = new System.Drawing.Size(194, 40);
-            this.lblDefaultExpense.TabIndex = 12;
-            this.lblDefaultExpense.Text = "Default Expense";
-            this.lblDefaultExpense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbDefaultExpense
             // 
-            this.cmbDefaultExpense.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbDefaultExpense, "cmbDefaultExpense");
             this.cmbDefaultExpense.FormattingEnabled = true;
-            this.cmbDefaultExpense.Location = new System.Drawing.Point(203, 123);
             this.cmbDefaultExpense.Name = "cmbDefaultExpense";
-            this.cmbDefaultExpense.Size = new System.Drawing.Size(452, 29);
-            this.cmbDefaultExpense.TabIndex = 13;
             // 
             // lblDefaultCash
             // 
-            this.lblDefaultCash.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDefaultCash.Location = new System.Drawing.Point(661, 120);
+            resources.ApplyResources(this.lblDefaultCash, "lblDefaultCash");
             this.lblDefaultCash.Name = "lblDefaultCash";
-            this.lblDefaultCash.Size = new System.Drawing.Size(214, 40);
-            this.lblDefaultCash.TabIndex = 14;
-            this.lblDefaultCash.Text = "Default Cash";
-            this.lblDefaultCash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbDefaultCash
             // 
-            this.cmbDefaultCash.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbDefaultCash, "cmbDefaultCash");
             this.cmbDefaultCash.FormattingEnabled = true;
-            this.cmbDefaultCash.Location = new System.Drawing.Point(881, 123);
             this.cmbDefaultCash.Name = "cmbDefaultCash";
-            this.cmbDefaultCash.Size = new System.Drawing.Size(452, 29);
-            this.cmbDefaultCash.TabIndex = 15;
             // 
             // lblDefaultBank
             // 
-            this.lblDefaultBank.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDefaultBank.Location = new System.Drawing.Point(3, 160);
+            resources.ApplyResources(this.lblDefaultBank, "lblDefaultBank");
             this.lblDefaultBank.Name = "lblDefaultBank";
-            this.lblDefaultBank.Size = new System.Drawing.Size(194, 40);
-            this.lblDefaultBank.TabIndex = 16;
-            this.lblDefaultBank.Text = "Default Bank";
-            this.lblDefaultBank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbDefaultBank
             // 
-            this.cmbDefaultBank.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbDefaultBank, "cmbDefaultBank");
             this.cmbDefaultBank.FormattingEnabled = true;
-            this.cmbDefaultBank.Location = new System.Drawing.Point(203, 163);
             this.cmbDefaultBank.Name = "cmbDefaultBank";
-            this.cmbDefaultBank.Size = new System.Drawing.Size(452, 29);
-            this.cmbDefaultBank.TabIndex = 17;
             // 
             // lblSalaryExpense
             // 
-            this.lblSalaryExpense.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSalaryExpense.Location = new System.Drawing.Point(661, 160);
+            resources.ApplyResources(this.lblSalaryExpense, "lblSalaryExpense");
             this.lblSalaryExpense.Name = "lblSalaryExpense";
-            this.lblSalaryExpense.Size = new System.Drawing.Size(214, 40);
-            this.lblSalaryExpense.TabIndex = 18;
-            this.lblSalaryExpense.Text = "Salary Expense";
-            this.lblSalaryExpense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSalaryExpense
             // 
-            this.cmbSalaryExpense.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbSalaryExpense, "cmbSalaryExpense");
             this.cmbSalaryExpense.FormattingEnabled = true;
-            this.cmbSalaryExpense.Location = new System.Drawing.Point(881, 163);
             this.cmbSalaryExpense.Name = "cmbSalaryExpense";
-            this.cmbSalaryExpense.Size = new System.Drawing.Size(452, 29);
-            this.cmbSalaryExpense.TabIndex = 19;
             // 
             // lblSalaryPayable
             // 
-            this.lblSalaryPayable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSalaryPayable.Location = new System.Drawing.Point(3, 200);
+            resources.ApplyResources(this.lblSalaryPayable, "lblSalaryPayable");
             this.lblSalaryPayable.Name = "lblSalaryPayable";
-            this.lblSalaryPayable.Size = new System.Drawing.Size(194, 40);
-            this.lblSalaryPayable.TabIndex = 20;
-            this.lblSalaryPayable.Text = "Salary Payable";
-            this.lblSalaryPayable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSalaryPayable
             // 
-            this.cmbSalaryPayable.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbSalaryPayable, "cmbSalaryPayable");
             this.cmbSalaryPayable.FormattingEnabled = true;
-            this.cmbSalaryPayable.Location = new System.Drawing.Point(203, 203);
             this.cmbSalaryPayable.Name = "cmbSalaryPayable";
-            this.cmbSalaryPayable.Size = new System.Drawing.Size(452, 29);
-            this.cmbSalaryPayable.TabIndex = 21;
             // 
             // lblInventoryAsset
             // 
-            this.lblInventoryAsset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInventoryAsset.Location = new System.Drawing.Point(661, 200);
+            resources.ApplyResources(this.lblInventoryAsset, "lblInventoryAsset");
             this.lblInventoryAsset.Name = "lblInventoryAsset";
-            this.lblInventoryAsset.Size = new System.Drawing.Size(214, 40);
-            this.lblInventoryAsset.TabIndex = 22;
-            this.lblInventoryAsset.Text = "Inventory Asset";
-            this.lblInventoryAsset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbInventoryAsset
             // 
-            this.cmbInventoryAsset.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbInventoryAsset, "cmbInventoryAsset");
             this.cmbInventoryAsset.FormattingEnabled = true;
-            this.cmbInventoryAsset.Location = new System.Drawing.Point(881, 203);
             this.cmbInventoryAsset.Name = "cmbInventoryAsset";
-            this.cmbInventoryAsset.Size = new System.Drawing.Size(452, 29);
-            this.cmbInventoryAsset.TabIndex = 23;
             // 
             // lblInventoryCogs
             // 
-            this.lblInventoryCogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInventoryCogs.Location = new System.Drawing.Point(3, 240);
+            resources.ApplyResources(this.lblInventoryCogs, "lblInventoryCogs");
             this.lblInventoryCogs.Name = "lblInventoryCogs";
-            this.lblInventoryCogs.Size = new System.Drawing.Size(194, 40);
-            this.lblInventoryCogs.TabIndex = 24;
-            this.lblInventoryCogs.Text = "Inventory COGS";
-            this.lblInventoryCogs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbInventoryCogs
             // 
-            this.cmbInventoryCogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbInventoryCogs, "cmbInventoryCogs");
             this.cmbInventoryCogs.FormattingEnabled = true;
-            this.cmbInventoryCogs.Location = new System.Drawing.Point(203, 243);
             this.cmbInventoryCogs.Name = "cmbInventoryCogs";
-            this.cmbInventoryCogs.Size = new System.Drawing.Size(452, 29);
-            this.cmbInventoryCogs.TabIndex = 25;
             // 
             // lblInventoryAdjustment
             // 
-            this.lblInventoryAdjustment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInventoryAdjustment.Location = new System.Drawing.Point(661, 240);
+            resources.ApplyResources(this.lblInventoryAdjustment, "lblInventoryAdjustment");
             this.lblInventoryAdjustment.Name = "lblInventoryAdjustment";
-            this.lblInventoryAdjustment.Size = new System.Drawing.Size(214, 40);
-            this.lblInventoryAdjustment.TabIndex = 26;
-            this.lblInventoryAdjustment.Text = "Stock Adjustment";
-            this.lblInventoryAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbInventoryAdjustment
             // 
-            this.cmbInventoryAdjustment.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbInventoryAdjustment, "cmbInventoryAdjustment");
             this.cmbInventoryAdjustment.FormattingEnabled = true;
-            this.cmbInventoryAdjustment.Location = new System.Drawing.Point(881, 243);
             this.cmbInventoryAdjustment.Name = "cmbInventoryAdjustment";
-            this.cmbInventoryAdjustment.Size = new System.Drawing.Size(452, 29);
-            this.cmbInventoryAdjustment.TabIndex = 27;
             // 
             // lblFaAsset
             // 
-            this.lblFaAsset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFaAsset.Location = new System.Drawing.Point(3, 280);
+            resources.ApplyResources(this.lblFaAsset, "lblFaAsset");
             this.lblFaAsset.Name = "lblFaAsset";
-            this.lblFaAsset.Size = new System.Drawing.Size(194, 40);
-            this.lblFaAsset.TabIndex = 28;
-            this.lblFaAsset.Text = "FA Asset";
-            this.lblFaAsset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbFaAsset
             // 
-            this.cmbFaAsset.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbFaAsset, "cmbFaAsset");
             this.cmbFaAsset.FormattingEnabled = true;
-            this.cmbFaAsset.Location = new System.Drawing.Point(203, 283);
             this.cmbFaAsset.Name = "cmbFaAsset";
-            this.cmbFaAsset.Size = new System.Drawing.Size(452, 29);
-            this.cmbFaAsset.TabIndex = 29;
             // 
             // lblFaAccumDep
             // 
-            this.lblFaAccumDep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFaAccumDep.Location = new System.Drawing.Point(661, 280);
+            resources.ApplyResources(this.lblFaAccumDep, "lblFaAccumDep");
             this.lblFaAccumDep.Name = "lblFaAccumDep";
-            this.lblFaAccumDep.Size = new System.Drawing.Size(214, 40);
-            this.lblFaAccumDep.TabIndex = 30;
-            this.lblFaAccumDep.Text = "Accum Depreciation";
-            this.lblFaAccumDep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbFaAccumDep
             // 
-            this.cmbFaAccumDep.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbFaAccumDep, "cmbFaAccumDep");
             this.cmbFaAccumDep.FormattingEnabled = true;
-            this.cmbFaAccumDep.Location = new System.Drawing.Point(881, 283);
             this.cmbFaAccumDep.Name = "cmbFaAccumDep";
-            this.cmbFaAccumDep.Size = new System.Drawing.Size(452, 29);
-            this.cmbFaAccumDep.TabIndex = 31;
             // 
             // lblFaDepExpense
             // 
-            this.lblFaDepExpense.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFaDepExpense.Location = new System.Drawing.Point(3, 320);
+            resources.ApplyResources(this.lblFaDepExpense, "lblFaDepExpense");
             this.lblFaDepExpense.Name = "lblFaDepExpense";
-            this.lblFaDepExpense.Size = new System.Drawing.Size(194, 40);
-            this.lblFaDepExpense.TabIndex = 32;
-            this.lblFaDepExpense.Text = "Depreciation Expense";
-            this.lblFaDepExpense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbFaDepExpense
             // 
-            this.cmbFaDepExpense.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbFaDepExpense, "cmbFaDepExpense");
             this.cmbFaDepExpense.FormattingEnabled = true;
-            this.cmbFaDepExpense.Location = new System.Drawing.Point(203, 323);
             this.cmbFaDepExpense.Name = "cmbFaDepExpense";
-            this.cmbFaDepExpense.Size = new System.Drawing.Size(452, 29);
-            this.cmbFaDepExpense.TabIndex = 33;
             // 
             // lblInterBranchRec
             // 
-            this.lblInterBranchRec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInterBranchRec.Location = new System.Drawing.Point(661, 320);
+            resources.ApplyResources(this.lblInterBranchRec, "lblInterBranchRec");
             this.lblInterBranchRec.Name = "lblInterBranchRec";
-            this.lblInterBranchRec.Size = new System.Drawing.Size(214, 40);
-            this.lblInterBranchRec.TabIndex = 34;
-            this.lblInterBranchRec.Text = "Inter-Branch Receivable";
-            this.lblInterBranchRec.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbInterBranchRec
             // 
-            this.cmbInterBranchRec.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbInterBranchRec, "cmbInterBranchRec");
             this.cmbInterBranchRec.FormattingEnabled = true;
-            this.cmbInterBranchRec.Location = new System.Drawing.Point(881, 323);
             this.cmbInterBranchRec.Name = "cmbInterBranchRec";
-            this.cmbInterBranchRec.Size = new System.Drawing.Size(452, 29);
-            this.cmbInterBranchRec.TabIndex = 35;
             // 
             // lblInterBranchPay
             // 
-            this.lblInterBranchPay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInterBranchPay.Location = new System.Drawing.Point(3, 360);
+            resources.ApplyResources(this.lblInterBranchPay, "lblInterBranchPay");
             this.lblInterBranchPay.Name = "lblInterBranchPay";
-            this.lblInterBranchPay.Size = new System.Drawing.Size(194, 50);
-            this.lblInterBranchPay.TabIndex = 36;
-            this.lblInterBranchPay.Text = "Inter-Branch Payable";
-            this.lblInterBranchPay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbInterBranchPay
             // 
-            this.cmbInterBranchPay.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbInterBranchPay, "cmbInterBranchPay");
             this.cmbInterBranchPay.FormattingEnabled = true;
-            this.cmbInterBranchPay.Location = new System.Drawing.Point(203, 363);
             this.cmbInterBranchPay.Name = "cmbInterBranchPay";
-            this.cmbInterBranchPay.Size = new System.Drawing.Size(452, 29);
-            this.cmbInterBranchPay.TabIndex = 37;
             // 
             // lblOpeningEquity
             // 
-            this.lblOpeningEquity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOpeningEquity.Location = new System.Drawing.Point(661, 360);
+            resources.ApplyResources(this.lblOpeningEquity, "lblOpeningEquity");
             this.lblOpeningEquity.Name = "lblOpeningEquity";
-            this.lblOpeningEquity.Size = new System.Drawing.Size(214, 50);
-            this.lblOpeningEquity.TabIndex = 38;
-            this.lblOpeningEquity.Text = "Opening Balance Equity";
-            this.lblOpeningEquity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbOpeningEquity
             // 
-            this.cmbOpeningEquity.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.cmbOpeningEquity, "cmbOpeningEquity");
             this.cmbOpeningEquity.FormattingEnabled = true;
-            this.cmbOpeningEquity.Location = new System.Drawing.Point(881, 363);
             this.cmbOpeningEquity.Name = "cmbOpeningEquity";
-            this.cmbOpeningEquity.Size = new System.Drawing.Size(452, 29);
-            this.cmbOpeningEquity.TabIndex = 39;
             // 
             // tabVoucher
             // 
+            resources.ApplyResources(this.tabVoucher, "tabVoucher");
             this.tabVoucher.Controls.Add(this.gridVoucher);
-            this.tabVoucher.Location = new System.Drawing.Point(4, 30);
             this.tabVoucher.Name = "tabVoucher";
-            this.tabVoucher.Padding = new System.Windows.Forms.Padding(8);
-            this.tabVoucher.Size = new System.Drawing.Size(1352, 627);
-            this.tabVoucher.TabIndex = 2;
-            this.tabVoucher.Text = "Voucher Numbering";
             this.tabVoucher.UseVisualStyleBackColor = true;
             // 
             // gridVoucher
             // 
+            resources.ApplyResources(this.gridVoucher, "gridVoucher");
             this.gridVoucher.AllowUserToAddRows = false;
             this.gridVoucher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridVoucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1011,37 +797,29 @@ namespace pos
             this.colVoucherReset,
             this.colVoucherStart,
             this.colVoucherPreview});
-            this.gridVoucher.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridVoucher.Location = new System.Drawing.Point(8, 8);
             this.gridVoucher.Name = "gridVoucher";
-            this.gridVoucher.RowHeadersWidth = 51;
-            this.gridVoucher.Size = new System.Drawing.Size(1336, 611);
-            this.gridVoucher.TabIndex = 0;
             this.gridVoucher.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridVoucher_CellEndEdit);
             // 
             // colVoucherType
             // 
-            this.colVoucherType.HeaderText = "Voucher Type";
-            this.colVoucherType.MinimumWidth = 6;
+            resources.ApplyResources(this.colVoucherType, "colVoucherType");
             this.colVoucherType.Name = "colVoucherType";
             this.colVoucherType.ReadOnly = true;
             // 
             // colVoucherPrefix
             // 
-            this.colVoucherPrefix.HeaderText = "Prefix";
-            this.colVoucherPrefix.MinimumWidth = 6;
+            resources.ApplyResources(this.colVoucherPrefix, "colVoucherPrefix");
             this.colVoucherPrefix.Name = "colVoucherPrefix";
             // 
             // colVoucherBranchId
             // 
-            this.colVoucherBranchId.HeaderText = "Branch ID";
-            this.colVoucherBranchId.MinimumWidth = 6;
+            resources.ApplyResources(this.colVoucherBranchId, "colVoucherBranchId");
             this.colVoucherBranchId.Name = "colVoucherBranchId";
             this.colVoucherBranchId.ReadOnly = true;
             // 
             // colVoucherFormat
             // 
-            this.colVoucherFormat.HeaderText = "Number Format";
+            resources.ApplyResources(this.colVoucherFormat, "colVoucherFormat");
             this.colVoucherFormat.Items.AddRange(new object[] {
             "YYYY-NNNN",
             "YY-NNNN",
@@ -1050,47 +828,40 @@ namespace pos
             "YYYY-MM-DD-NNNN",
             "YYYYMMDD-YYYY-NNNN",
             "YYYY-MM-DD-YYYY-NNNN"});
-            this.colVoucherFormat.MinimumWidth = 6;
             this.colVoucherFormat.Name = "colVoucherFormat";
             // 
             // colVoucherReset
             // 
-            this.colVoucherReset.HeaderText = "Reset";
+            resources.ApplyResources(this.colVoucherReset, "colVoucherReset");
             this.colVoucherReset.Items.AddRange(new object[] {
             "Daily",
             "Annually",
             "Never",
             "Per Financial Year"});
-            this.colVoucherReset.MinimumWidth = 6;
             this.colVoucherReset.Name = "colVoucherReset";
             // 
             // colVoucherStart
             // 
-            this.colVoucherStart.HeaderText = "Starting Number";
-            this.colVoucherStart.MinimumWidth = 6;
+            resources.ApplyResources(this.colVoucherStart, "colVoucherStart");
             this.colVoucherStart.Name = "colVoucherStart";
             // 
             // colVoucherPreview
             // 
-            this.colVoucherPreview.HeaderText = "Preview";
-            this.colVoucherPreview.MinimumWidth = 6;
+            resources.ApplyResources(this.colVoucherPreview, "colVoucherPreview");
             this.colVoucherPreview.Name = "colVoucherPreview";
             this.colVoucherPreview.ReadOnly = true;
             // 
             // tabTax
             // 
+            resources.ApplyResources(this.tabTax, "tabTax");
             this.tabTax.Controls.Add(this.gridWhtRates);
             this.tabTax.Controls.Add(this.groupTaxTop);
-            this.tabTax.Location = new System.Drawing.Point(4, 30);
             this.tabTax.Name = "tabTax";
-            this.tabTax.Padding = new System.Windows.Forms.Padding(8);
-            this.tabTax.Size = new System.Drawing.Size(1352, 627);
-            this.tabTax.TabIndex = 3;
-            this.tabTax.Text = "Tax Configuration";
             this.tabTax.UseVisualStyleBackColor = true;
             // 
             // gridWhtRates
             // 
+            resources.ApplyResources(this.gridWhtRates, "gridWhtRates");
             this.gridWhtRates.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridWhtRates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridWhtRates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1101,58 +872,46 @@ namespace pos
             this.colWhtRate,
             this.colEffectiveFrom,
             this.colIsActive});
-            this.gridWhtRates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridWhtRates.Location = new System.Drawing.Point(8, 134);
             this.gridWhtRates.Name = "gridWhtRates";
-            this.gridWhtRates.RowHeadersWidth = 51;
-            this.gridWhtRates.Size = new System.Drawing.Size(1336, 485);
-            this.gridWhtRates.TabIndex = 1;
             // 
             // colWhtId
             // 
-            this.colWhtId.HeaderText = "ID";
-            this.colWhtId.MinimumWidth = 6;
+            resources.ApplyResources(this.colWhtId, "colWhtId");
             this.colWhtId.Name = "colWhtId";
-            this.colWhtId.Visible = false;
             // 
             // colWhtType
             // 
-            this.colWhtType.HeaderText = "WHT Type";
-            this.colWhtType.MinimumWidth = 6;
+            resources.ApplyResources(this.colWhtType, "colWhtType");
             this.colWhtType.Name = "colWhtType";
             // 
             // colTaxSection
             // 
-            this.colTaxSection.HeaderText = "Tax Section";
-            this.colTaxSection.MinimumWidth = 6;
+            resources.ApplyResources(this.colTaxSection, "colTaxSection");
             this.colTaxSection.Name = "colTaxSection";
             // 
             // colWhtDescription
             // 
-            this.colWhtDescription.HeaderText = "Description";
-            this.colWhtDescription.MinimumWidth = 6;
+            resources.ApplyResources(this.colWhtDescription, "colWhtDescription");
             this.colWhtDescription.Name = "colWhtDescription";
             // 
             // colWhtRate
             // 
-            this.colWhtRate.HeaderText = "Rate %";
-            this.colWhtRate.MinimumWidth = 6;
+            resources.ApplyResources(this.colWhtRate, "colWhtRate");
             this.colWhtRate.Name = "colWhtRate";
             // 
             // colEffectiveFrom
             // 
-            this.colEffectiveFrom.HeaderText = "Effective From";
-            this.colEffectiveFrom.MinimumWidth = 6;
+            resources.ApplyResources(this.colEffectiveFrom, "colEffectiveFrom");
             this.colEffectiveFrom.Name = "colEffectiveFrom";
             // 
             // colIsActive
             // 
-            this.colIsActive.HeaderText = "Is Active";
-            this.colIsActive.MinimumWidth = 6;
+            resources.ApplyResources(this.colIsActive, "colIsActive");
             this.colIsActive.Name = "colIsActive";
             // 
             // groupTaxTop
             // 
+            resources.ApplyResources(this.groupTaxTop, "groupTaxTop");
             this.groupTaxTop.Controls.Add(this.cmbFilingFrequency);
             this.groupTaxTop.Controls.Add(this.txtFbrStrn);
             this.groupTaxTop.Controls.Add(this.txtFbrNtn);
@@ -1163,108 +922,70 @@ namespace pos
             this.groupTaxTop.Controls.Add(this.lblFbrNtn);
             this.groupTaxTop.Controls.Add(this.lblTaxMode);
             this.groupTaxTop.Controls.Add(this.lblSalesTaxRate);
-            this.groupTaxTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupTaxTop.Location = new System.Drawing.Point(8, 8);
             this.groupTaxTop.Name = "groupTaxTop";
-            this.groupTaxTop.Size = new System.Drawing.Size(1336, 126);
-            this.groupTaxTop.TabIndex = 0;
             this.groupTaxTop.TabStop = false;
-            this.groupTaxTop.Text = "Tax Defaults / FBR-ZATCA";
             // 
             // cmbFilingFrequency
             // 
-            this.cmbFilingFrequency.Location = new System.Drawing.Point(897, 67);
+            resources.ApplyResources(this.cmbFilingFrequency, "cmbFilingFrequency");
             this.cmbFilingFrequency.Name = "cmbFilingFrequency";
-            this.cmbFilingFrequency.Size = new System.Drawing.Size(200, 29);
-            this.cmbFilingFrequency.TabIndex = 0;
             // 
             // txtFbrStrn
             // 
-            this.txtFbrStrn.Location = new System.Drawing.Point(549, 66);
+            resources.ApplyResources(this.txtFbrStrn, "txtFbrStrn");
             this.txtFbrStrn.Name = "txtFbrStrn";
-            this.txtFbrStrn.Size = new System.Drawing.Size(200, 29);
-            this.txtFbrStrn.TabIndex = 1;
             // 
             // txtFbrNtn
             // 
-            this.txtFbrNtn.Location = new System.Drawing.Point(180, 67);
+            resources.ApplyResources(this.txtFbrNtn, "txtFbrNtn");
             this.txtFbrNtn.Name = "txtFbrNtn";
-            this.txtFbrNtn.Size = new System.Drawing.Size(220, 29);
-            this.txtFbrNtn.TabIndex = 2;
             // 
             // cmbTaxMode
             // 
-            this.cmbTaxMode.Location = new System.Drawing.Point(549, 29);
+            resources.ApplyResources(this.cmbTaxMode, "cmbTaxMode");
             this.cmbTaxMode.Name = "cmbTaxMode";
-            this.cmbTaxMode.Size = new System.Drawing.Size(200, 29);
-            this.cmbTaxMode.TabIndex = 3;
             // 
             // numSalesTaxRate
             // 
+            resources.ApplyResources(this.numSalesTaxRate, "numSalesTaxRate");
             this.numSalesTaxRate.DecimalPlaces = 2;
-            this.numSalesTaxRate.Location = new System.Drawing.Point(180, 30);
             this.numSalesTaxRate.Name = "numSalesTaxRate";
-            this.numSalesTaxRate.Size = new System.Drawing.Size(120, 29);
-            this.numSalesTaxRate.TabIndex = 4;
             // 
             // lblFilingFrequency
             // 
-            this.lblFilingFrequency.AutoSize = true;
-            this.lblFilingFrequency.Location = new System.Drawing.Point(758, 67);
+            resources.ApplyResources(this.lblFilingFrequency, "lblFilingFrequency");
             this.lblFilingFrequency.Name = "lblFilingFrequency";
-            this.lblFilingFrequency.Size = new System.Drawing.Size(133, 23);
-            this.lblFilingFrequency.TabIndex = 5;
-            this.lblFilingFrequency.Text = "Filing Frequency";
             // 
             // lblFbrStrn
             // 
-            this.lblFbrStrn.AutoSize = true;
-            this.lblFbrStrn.Location = new System.Drawing.Point(483, 70);
+            resources.ApplyResources(this.lblFbrStrn, "lblFbrStrn");
             this.lblFbrStrn.Name = "lblFbrStrn";
-            this.lblFbrStrn.Size = new System.Drawing.Size(51, 23);
-            this.lblFbrStrn.TabIndex = 6;
-            this.lblFbrStrn.Text = "STRN";
             // 
             // lblFbrNtn
             // 
-            this.lblFbrNtn.AutoSize = true;
-            this.lblFbrNtn.Location = new System.Drawing.Point(20, 70);
+            resources.ApplyResources(this.lblFbrNtn, "lblFbrNtn");
             this.lblFbrNtn.Name = "lblFbrNtn";
-            this.lblFbrNtn.Size = new System.Drawing.Size(135, 23);
-            this.lblFbrNtn.TabIndex = 7;
-            this.lblFbrNtn.Text = "FBR/ZATCA NTN";
             // 
             // lblTaxMode
             // 
-            this.lblTaxMode.AutoSize = true;
-            this.lblTaxMode.Location = new System.Drawing.Point(400, 33);
+            resources.ApplyResources(this.lblTaxMode, "lblTaxMode");
             this.lblTaxMode.Name = "lblTaxMode";
-            this.lblTaxMode.Size = new System.Drawing.Size(143, 23);
-            this.lblTaxMode.TabIndex = 8;
-            this.lblTaxMode.Text = "Default Tax Mode";
             // 
             // lblSalesTaxRate
             // 
-            this.lblSalesTaxRate.AutoSize = true;
-            this.lblSalesTaxRate.Location = new System.Drawing.Point(20, 33);
+            resources.ApplyResources(this.lblSalesTaxRate, "lblSalesTaxRate");
             this.lblSalesTaxRate.Name = "lblSalesTaxRate";
-            this.lblSalesTaxRate.Size = new System.Drawing.Size(156, 23);
-            this.lblSalesTaxRate.TabIndex = 9;
-            this.lblSalesTaxRate.Text = "Default Sales Tax %";
             // 
             // tabPosting
             // 
+            resources.ApplyResources(this.tabPosting, "tabPosting");
             this.tabPosting.Controls.Add(this.groupPosting);
-            this.tabPosting.Location = new System.Drawing.Point(4, 30);
             this.tabPosting.Name = "tabPosting";
-            this.tabPosting.Padding = new System.Windows.Forms.Padding(8);
-            this.tabPosting.Size = new System.Drawing.Size(1352, 627);
-            this.tabPosting.TabIndex = 4;
-            this.tabPosting.Text = "Posting Rules";
             this.tabPosting.UseVisualStyleBackColor = true;
             // 
             // groupPosting
             // 
+            resources.ApplyResources(this.groupPosting, "groupPosting");
             this.groupPosting.Controls.Add(this.numApprovalThreshold);
             this.groupPosting.Controls.Add(this.numBackdatingDays);
             this.groupPosting.Controls.Add(this.numBudgetWarningPct);
@@ -1275,122 +996,80 @@ namespace pos
             this.groupPosting.Controls.Add(this.lblApprovalThreshold);
             this.groupPosting.Controls.Add(this.lblBackdatingDays);
             this.groupPosting.Controls.Add(this.lblBudgetWarning);
-            this.groupPosting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupPosting.Location = new System.Drawing.Point(8, 8);
             this.groupPosting.Name = "groupPosting";
-            this.groupPosting.Size = new System.Drawing.Size(1336, 611);
-            this.groupPosting.TabIndex = 0;
             this.groupPosting.TabStop = false;
-            this.groupPosting.Text = "Posting / Control Rules";
             // 
             // numApprovalThreshold
             // 
+            resources.ApplyResources(this.numApprovalThreshold, "numApprovalThreshold");
             this.numApprovalThreshold.DecimalPlaces = 2;
-            this.numApprovalThreshold.Location = new System.Drawing.Point(260, 236);
             this.numApprovalThreshold.Maximum = new decimal(new int[] {
             1000000000,
             0,
             0,
             0});
             this.numApprovalThreshold.Name = "numApprovalThreshold";
-            this.numApprovalThreshold.Size = new System.Drawing.Size(120, 29);
-            this.numApprovalThreshold.TabIndex = 0;
             // 
             // numBackdatingDays
             // 
-            this.numBackdatingDays.Location = new System.Drawing.Point(260, 200);
+            resources.ApplyResources(this.numBackdatingDays, "numBackdatingDays");
             this.numBackdatingDays.Maximum = new decimal(new int[] {
             3650,
             0,
             0,
             0});
             this.numBackdatingDays.Name = "numBackdatingDays";
-            this.numBackdatingDays.Size = new System.Drawing.Size(120, 29);
-            this.numBackdatingDays.TabIndex = 1;
             // 
             // numBudgetWarningPct
             // 
-            this.numBudgetWarningPct.Location = new System.Drawing.Point(260, 164);
+            resources.ApplyResources(this.numBudgetWarningPct, "numBudgetWarningPct");
             this.numBudgetWarningPct.Name = "numBudgetWarningPct";
-            this.numBudgetWarningPct.Size = new System.Drawing.Size(120, 29);
-            this.numBudgetWarningPct.TabIndex = 2;
             // 
             // chkRequireNarration
             // 
-            this.chkRequireNarration.AutoSize = true;
-            this.chkRequireNarration.Location = new System.Drawing.Point(30, 122);
+            resources.ApplyResources(this.chkRequireNarration, "chkRequireNarration");
             this.chkRequireNarration.Name = "chkRequireNarration";
-            this.chkRequireNarration.Size = new System.Drawing.Size(304, 27);
-            this.chkRequireNarration.TabIndex = 3;
-            this.chkRequireNarration.Text = "Require narration on journal entries";
             // 
             // chkAllowLockedPeriodPosting
             // 
-            this.chkAllowLockedPeriodPosting.AutoSize = true;
-            this.chkAllowLockedPeriodPosting.Location = new System.Drawing.Point(30, 92);
+            resources.ApplyResources(this.chkAllowLockedPeriodPosting, "chkAllowLockedPeriodPosting");
             this.chkAllowLockedPeriodPosting.Name = "chkAllowLockedPeriodPosting";
-            this.chkAllowLockedPeriodPosting.Size = new System.Drawing.Size(336, 27);
-            this.chkAllowLockedPeriodPosting.TabIndex = 4;
-            this.chkAllowLockedPeriodPosting.Text = "Allow posting to locked periods (Admin)";
             // 
             // chkAutoPostPurchases
             // 
-            this.chkAutoPostPurchases.AutoSize = true;
-            this.chkAutoPostPurchases.Location = new System.Drawing.Point(30, 62);
+            resources.ApplyResources(this.chkAutoPostPurchases, "chkAutoPostPurchases");
             this.chkAutoPostPurchases.Name = "chkAutoPostPurchases";
-            this.chkAutoPostPurchases.Size = new System.Drawing.Size(217, 27);
-            this.chkAutoPostPurchases.TabIndex = 5;
-            this.chkAutoPostPurchases.Text = "Auto-post purchase bills";
             // 
             // chkAutoPostSales
             // 
-            this.chkAutoPostSales.AutoSize = true;
-            this.chkAutoPostSales.Location = new System.Drawing.Point(30, 32);
+            resources.ApplyResources(this.chkAutoPostSales, "chkAutoPostSales");
             this.chkAutoPostSales.Name = "chkAutoPostSales";
-            this.chkAutoPostSales.Size = new System.Drawing.Size(215, 27);
-            this.chkAutoPostSales.TabIndex = 6;
-            this.chkAutoPostSales.Text = "Auto-post sales invoices";
             // 
             // lblApprovalThreshold
             // 
-            this.lblApprovalThreshold.AutoSize = true;
-            this.lblApprovalThreshold.Location = new System.Drawing.Point(30, 239);
+            resources.ApplyResources(this.lblApprovalThreshold, "lblApprovalThreshold");
             this.lblApprovalThreshold.Name = "lblApprovalThreshold";
-            this.lblApprovalThreshold.Size = new System.Drawing.Size(220, 23);
-            this.lblApprovalThreshold.TabIndex = 7;
-            this.lblApprovalThreshold.Text = "Approval threshold amount";
             // 
             // lblBackdatingDays
             // 
-            this.lblBackdatingDays.AutoSize = true;
-            this.lblBackdatingDays.Location = new System.Drawing.Point(30, 203);
+            resources.ApplyResources(this.lblBackdatingDays, "lblBackdatingDays");
             this.lblBackdatingDays.Name = "lblBackdatingDays";
-            this.lblBackdatingDays.Size = new System.Drawing.Size(170, 23);
-            this.lblBackdatingDays.TabIndex = 8;
-            this.lblBackdatingDays.Text = "Max backdating days";
             // 
             // lblBudgetWarning
             // 
-            this.lblBudgetWarning.AutoSize = true;
-            this.lblBudgetWarning.Location = new System.Drawing.Point(30, 167);
+            resources.ApplyResources(this.lblBudgetWarning, "lblBudgetWarning");
             this.lblBudgetWarning.Name = "lblBudgetWarning";
-            this.lblBudgetWarning.Size = new System.Drawing.Size(227, 23);
-            this.lblBudgetWarning.TabIndex = 9;
-            this.lblBudgetWarning.Text = "Budget warning threshold %";
             // 
             // tabReports
             // 
+            resources.ApplyResources(this.tabReports, "tabReports");
             this.tabReports.Controls.Add(this.groupReports);
-            this.tabReports.Location = new System.Drawing.Point(4, 30);
             this.tabReports.Name = "tabReports";
-            this.tabReports.Padding = new System.Windows.Forms.Padding(8);
-            this.tabReports.Size = new System.Drawing.Size(1352, 627);
-            this.tabReports.TabIndex = 5;
-            this.tabReports.Text = "Report Settings";
             this.tabReports.UseVisualStyleBackColor = true;
             // 
             // groupReports
             // 
+            resources.ApplyResources(this.groupReports, "groupReports");
             this.groupReports.Controls.Add(this.txtDigitalSignature);
             this.groupReports.Controls.Add(this.txtReportFooter);
             this.groupReports.Controls.Add(this.txtReportHeader);
@@ -1403,308 +1082,105 @@ namespace pos
             this.groupReports.Controls.Add(this.lblShowAmountsIn);
             this.groupReports.Controls.Add(this.lblDateFormat);
             this.groupReports.Controls.Add(this.lblAmountFormat);
-            this.groupReports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupReports.Location = new System.Drawing.Point(8, 8);
             this.groupReports.Name = "groupReports";
-            this.groupReports.Size = new System.Drawing.Size(1336, 611);
-            this.groupReports.TabIndex = 0;
             this.groupReports.TabStop = false;
-            this.groupReports.Text = "Report Presentation";
             // 
             // txtDigitalSignature
             // 
-            this.txtDigitalSignature.Location = new System.Drawing.Point(257, 259);
+            resources.ApplyResources(this.txtDigitalSignature, "txtDigitalSignature");
             this.txtDigitalSignature.Name = "txtDigitalSignature";
-            this.txtDigitalSignature.Size = new System.Drawing.Size(650, 29);
-            this.txtDigitalSignature.TabIndex = 0;
             // 
             // txtReportFooter
             // 
-            this.txtReportFooter.Location = new System.Drawing.Point(257, 177);
-            this.txtReportFooter.Multiline = true;
+            resources.ApplyResources(this.txtReportFooter, "txtReportFooter");
             this.txtReportFooter.Name = "txtReportFooter";
-            this.txtReportFooter.Size = new System.Drawing.Size(650, 70);
-            this.txtReportFooter.TabIndex = 1;
             // 
             // txtReportHeader
             // 
-            this.txtReportHeader.Location = new System.Drawing.Point(257, 141);
+            resources.ApplyResources(this.txtReportHeader, "txtReportHeader");
             this.txtReportHeader.Name = "txtReportHeader";
-            this.txtReportHeader.Size = new System.Drawing.Size(650, 29);
-            this.txtReportHeader.TabIndex = 2;
             // 
             // cmbShowAmountsIn
             // 
-            this.cmbShowAmountsIn.Location = new System.Drawing.Point(257, 105);
+            resources.ApplyResources(this.cmbShowAmountsIn, "cmbShowAmountsIn");
             this.cmbShowAmountsIn.Name = "cmbShowAmountsIn";
-            this.cmbShowAmountsIn.Size = new System.Drawing.Size(250, 29);
-            this.cmbShowAmountsIn.TabIndex = 3;
             // 
             // cmbReportDateFormat
             // 
-            this.cmbReportDateFormat.Location = new System.Drawing.Point(257, 69);
+            resources.ApplyResources(this.cmbReportDateFormat, "cmbReportDateFormat");
             this.cmbReportDateFormat.Name = "cmbReportDateFormat";
-            this.cmbReportDateFormat.Size = new System.Drawing.Size(250, 29);
-            this.cmbReportDateFormat.TabIndex = 4;
             // 
             // cmbAmountFormat
             // 
-            this.cmbAmountFormat.Location = new System.Drawing.Point(257, 33);
+            resources.ApplyResources(this.cmbAmountFormat, "cmbAmountFormat");
             this.cmbAmountFormat.Name = "cmbAmountFormat";
-            this.cmbAmountFormat.Size = new System.Drawing.Size(250, 29);
-            this.cmbAmountFormat.TabIndex = 5;
             // 
             // lblDigitalSignature
             // 
-            this.lblDigitalSignature.AutoSize = true;
-            this.lblDigitalSignature.Location = new System.Drawing.Point(25, 262);
+            resources.ApplyResources(this.lblDigitalSignature, "lblDigitalSignature");
             this.lblDigitalSignature.Name = "lblDigitalSignature";
-            this.lblDigitalSignature.Size = new System.Drawing.Size(229, 23);
-            this.lblDigitalSignature.TabIndex = 6;
-            this.lblDigitalSignature.Text = "Digital signature placeholder";
             // 
             // lblReportFooter
             // 
-            this.lblReportFooter.AutoSize = true;
-            this.lblReportFooter.Location = new System.Drawing.Point(25, 180);
+            resources.ApplyResources(this.lblReportFooter, "lblReportFooter");
             this.lblReportFooter.Name = "lblReportFooter";
-            this.lblReportFooter.Size = new System.Drawing.Size(112, 23);
-            this.lblReportFooter.TabIndex = 7;
-            this.lblReportFooter.Text = "Report footer";
             // 
             // lblReportHeader
             // 
-            this.lblReportHeader.AutoSize = true;
-            this.lblReportHeader.Location = new System.Drawing.Point(25, 144);
+            resources.ApplyResources(this.lblReportHeader, "lblReportHeader");
             this.lblReportHeader.Name = "lblReportHeader";
-            this.lblReportHeader.Size = new System.Drawing.Size(119, 23);
-            this.lblReportHeader.TabIndex = 8;
-            this.lblReportHeader.Text = "Report header";
             // 
             // lblShowAmountsIn
             // 
-            this.lblShowAmountsIn.AutoSize = true;
-            this.lblShowAmountsIn.Location = new System.Drawing.Point(25, 108);
+            resources.ApplyResources(this.lblShowAmountsIn, "lblShowAmountsIn");
             this.lblShowAmountsIn.Name = "lblShowAmountsIn";
-            this.lblShowAmountsIn.Size = new System.Drawing.Size(142, 23);
-            this.lblShowAmountsIn.TabIndex = 9;
-            this.lblShowAmountsIn.Text = "Show amounts in";
             // 
             // lblDateFormat
             // 
-            this.lblDateFormat.AutoSize = true;
-            this.lblDateFormat.Location = new System.Drawing.Point(25, 72);
+            resources.ApplyResources(this.lblDateFormat, "lblDateFormat");
             this.lblDateFormat.Name = "lblDateFormat";
-            this.lblDateFormat.Size = new System.Drawing.Size(102, 23);
-            this.lblDateFormat.TabIndex = 10;
-            this.lblDateFormat.Text = "Date format";
             // 
             // lblAmountFormat
             // 
-            this.lblAmountFormat.AutoSize = true;
-            this.lblAmountFormat.Location = new System.Drawing.Point(25, 36);
+            resources.ApplyResources(this.lblAmountFormat, "lblAmountFormat");
             this.lblAmountFormat.Name = "lblAmountFormat";
-            this.lblAmountFormat.Size = new System.Drawing.Size(128, 23);
-            this.lblAmountFormat.TabIndex = 11;
-            this.lblAmountFormat.Text = "Amount format";
             // 
             // panelBottom
             // 
-            this.panelBottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panelBottom, "panelBottom");
             this.panelBottom.Controls.Add(this.btnResetDefaults);
             this.panelBottom.Controls.Add(this.btnSaveSettings);
-            this.panelBottom.Location = new System.Drawing.Point(12, 707);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1360, 45);
-            this.panelBottom.TabIndex = 2;
             // 
             // btnResetDefaults
             // 
-            this.btnResetDefaults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnResetDefaults.Location = new System.Drawing.Point(1126, 7);
+            resources.ApplyResources(this.btnResetDefaults, "btnResetDefaults");
             this.btnResetDefaults.Name = "btnResetDefaults";
-            this.btnResetDefaults.Size = new System.Drawing.Size(110, 33);
-            this.btnResetDefaults.TabIndex = 1;
-            this.btnResetDefaults.Text = "Reset Defaults";
             this.btnResetDefaults.UseVisualStyleBackColor = true;
             this.btnResetDefaults.Click += new System.EventHandler(this.btnResetDefaults_Click);
             // 
             // btnSaveSettings
             // 
-            this.btnSaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveSettings.Location = new System.Drawing.Point(1242, 7);
+            resources.ApplyResources(this.btnSaveSettings, "btnSaveSettings");
             this.btnSaveSettings.Name = "btnSaveSettings";
-            this.btnSaveSettings.Size = new System.Drawing.Size(110, 33);
-            this.btnSaveSettings.TabIndex = 0;
-            this.btnSaveSettings.Text = "Save Settings";
             this.btnSaveSettings.UseVisualStyleBackColor = true;
             this.btnSaveSettings.Click += new System.EventHandler(this.btnSaveSettings_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txt_buildingNumber);
-            this.groupBox3.Controls.Add(this.label22);
-            this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Controls.Add(this.txt_countryName);
-            this.groupBox3.Controls.Add(this.txt_postalCode);
-            this.groupBox3.Controls.Add(this.label24);
-            this.groupBox3.Controls.Add(this.txt_cityName);
-            this.groupBox3.Controls.Add(this.label25);
-            this.groupBox3.Controls.Add(this.txt_citySubdivisionName);
-            this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Controls.Add(this.txt_StreetName);
-            this.groupBox3.Controls.Add(this.label27);
-            this.groupBox3.Location = new System.Drawing.Point(6, 375);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(532, 218);
-            this.groupBox3.TabIndex = 30;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Postal Address";
-            // 
-            // txt_buildingNumber
-            // 
-            this.txt_buildingNumber.Location = new System.Drawing.Point(266, 59);
-            this.txt_buildingNumber.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_buildingNumber.Name = "txt_buildingNumber";
-            this.txt_buildingNumber.Size = new System.Drawing.Size(241, 29);
-            this.txt_buildingNumber.TabIndex = 2;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label22.Location = new System.Drawing.Point(17, 33);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(105, 23);
-            this.label22.TabIndex = 1;
-            this.label22.Text = "Street Name";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label23.Location = new System.Drawing.Point(266, 33);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(140, 23);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "Building Number";
-            // 
-            // txt_countryName
-            // 
-            this.txt_countryName.Location = new System.Drawing.Point(266, 176);
-            this.txt_countryName.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_countryName.Name = "txt_countryName";
-            this.txt_countryName.Size = new System.Drawing.Size(241, 29);
-            this.txt_countryName.TabIndex = 6;
-            this.txt_countryName.Text = "SA";
-            // 
-            // txt_postalCode
-            // 
-            this.txt_postalCode.Location = new System.Drawing.Point(17, 176);
-            this.txt_postalCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_postalCode.Name = "txt_postalCode";
-            this.txt_postalCode.Size = new System.Drawing.Size(241, 29);
-            this.txt_postalCode.TabIndex = 5;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label24.Location = new System.Drawing.Point(17, 92);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(181, 23);
-            this.label24.TabIndex = 1;
-            this.label24.Text = "City Subdivision Name";
-            // 
-            // txt_cityName
-            // 
-            this.txt_cityName.Location = new System.Drawing.Point(266, 118);
-            this.txt_cityName.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_cityName.Name = "txt_cityName";
-            this.txt_cityName.Size = new System.Drawing.Size(241, 29);
-            this.txt_cityName.TabIndex = 4;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label25.Location = new System.Drawing.Point(266, 92);
-            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(90, 23);
-            this.label25.TabIndex = 1;
-            this.label25.Text = "City Name";
-            // 
-            // txt_citySubdivisionName
-            // 
-            this.txt_citySubdivisionName.Location = new System.Drawing.Point(17, 118);
-            this.txt_citySubdivisionName.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_citySubdivisionName.Name = "txt_citySubdivisionName";
-            this.txt_citySubdivisionName.Size = new System.Drawing.Size(241, 29);
-            this.txt_citySubdivisionName.TabIndex = 3;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label26.Location = new System.Drawing.Point(17, 150);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(100, 23);
-            this.label26.TabIndex = 1;
-            this.label26.Text = "Postal Code";
-            // 
-            // txt_StreetName
-            // 
-            this.txt_StreetName.Location = new System.Drawing.Point(17, 59);
-            this.txt_StreetName.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_StreetName.Name = "txt_StreetName";
-            this.txt_StreetName.Size = new System.Drawing.Size(241, 29);
-            this.txt_StreetName.TabIndex = 1;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label27.Location = new System.Drawing.Point(266, 150);
-            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(71, 23);
-            this.label27.TabIndex = 1;
-            this.label27.Text = "Country";
-            // 
-            // chk_use_zatca_e_invoice
-            // 
-            this.chk_use_zatca_e_invoice.AutoSize = true;
-            this.chk_use_zatca_e_invoice.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chk_use_zatca_e_invoice.Location = new System.Drawing.Point(602, 300);
-            this.chk_use_zatca_e_invoice.Name = "chk_use_zatca_e_invoice";
-            this.chk_use_zatca_e_invoice.Size = new System.Drawing.Size(238, 27);
-            this.chk_use_zatca_e_invoice.TabIndex = 113;
-            this.chk_use_zatca_e_invoice.Text = "Enable E-Invoicing (ZATCA)";
-            this.chk_use_zatca_e_invoice.UseVisualStyleBackColor = true;
-            // 
             // frm_accounting_settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1384, 761);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.lblTitle);
-            this.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.Name = "frm_accounting_settings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Accounting Settings";
             this.Load += new System.EventHandler(this.frm_accounting_settings_Load);
             this.tabMain.ResumeLayout(false);
             this.tabCompany.ResumeLayout(false);
             this.groupCompanyHeader.ResumeLayout(false);
             this.groupCompanyHeader.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoPreview)).EndInit();
             this.tabDefaults.ResumeLayout(false);
             this.tblDefaults.ResumeLayout(false);
@@ -1725,8 +1201,6 @@ namespace pos
             this.groupReports.ResumeLayout(false);
             this.groupReports.PerformLayout();
             this.panelBottom.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,5 +1,6 @@
 using DGVPrinterHelper;
 using pos.Reports.Common;
+using pos.UI;
 using POS.BLL;
 using POS.Core;
 using System;
@@ -48,54 +49,87 @@ namespace pos
 
         public frm_journal_voucher_manager()
         {
+            // Set RTL mode based on user language
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+            this.RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No;
+            this.RightToLeftLayout = isArabic;
+
             BuildUi();
+        }
+
+        /// <summary>
+        /// Translates text based on current user language (Arabic/English).
+        /// </summary>
+        private string T(string englishText, string arabicText)
+        {
+            return string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase) 
+                ? arabicText 
+                : englishText;
         }
 
         private void BuildUi()
         {
-            Text = "Journal Voucher List & Posting Manager";
+            Text = T("Journal Voucher List & Posting Manager", "قائمة كشوفات اليومية وإدارة الترحيل");
             WindowState = FormWindowState.Maximized;
             StartPosition = FormStartPosition.CenterParent;
             BackColor = Color.White;
             Font = new Font("Segoe UI", 8.75F, FontStyle.Regular, GraphicsUnit.Point);
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
 
             var filters = new Panel { Dock = DockStyle.Top, Height = 54, BackColor = Color.FromArgb(245, 247, 250), Padding = new Padding(10, 8, 10, 6) };
             var filterFlow = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.LeftToRight, WrapContents = false, AutoScroll = true };
             filters.Controls.Add(filterFlow);
 
-            filterFlow.Controls.Add(MakeLabel("Date From"));
+            filterFlow.Controls.Add(MakeLabel(T("Date From", "من التاريخ")));
             _dtpFrom = new DateTimePicker { Format = DateTimePickerFormat.Short, Value = DateTime.Today.AddMonths(-1), Width = 102 };
             filterFlow.Controls.Add(_dtpFrom);
-            filterFlow.Controls.Add(MakeLabel("Date To"));
+            filterFlow.Controls.Add(MakeLabel(T("Date To", "إلى التاريخ")));
             _dtpTo = new DateTimePicker { Format = DateTimePickerFormat.Short, Value = DateTime.Today, Width = 102 };
             filterFlow.Controls.Add(_dtpTo);
-            filterFlow.Controls.Add(MakeLabel("Voucher Type"));
+            filterFlow.Controls.Add(MakeLabel(T("Voucher Type", "نوع الكشف")));
             _cmbVoucherType = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 150 };
-            _cmbVoucherType.Items.AddRange(new object[] { "All", "General Journal", "Opening Entry", "Adjusting Entry", "Closing Entry", "Reversal Entry" });
+            _cmbVoucherType.Items.Add(new ComboBoxItem("All", T("All", "الكل")));
+            _cmbVoucherType.Items.Add(new ComboBoxItem("General Journal", T("General Journal", "قيد عام")));
+            _cmbVoucherType.Items.Add(new ComboBoxItem("Opening Entry", T("Opening Entry", "قيد افتتاحي")));
+            _cmbVoucherType.Items.Add(new ComboBoxItem("Adjusting Entry", T("Adjusting Entry", "قيد تسوية")));
+            _cmbVoucherType.Items.Add(new ComboBoxItem("Closing Entry", T("Closing Entry", "قيد إقفال")));
+            _cmbVoucherType.Items.Add(new ComboBoxItem("Reversal Entry", T("Reversal Entry", "قيد معاكس")));
             _cmbVoucherType.SelectedIndex = 0;
             filterFlow.Controls.Add(_cmbVoucherType);
-            filterFlow.Controls.Add(MakeLabel("Status"));
+            filterFlow.Controls.Add(MakeLabel(T("Status", "الحالة")));
             _cmbStatus = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 105 };
-            _cmbStatus.Items.AddRange(new object[] { "All", "Draft", "Posted", "Reversed" });
+            _cmbStatus.Items.Add(new ComboBoxItem("All", T("All", "الكل")));
+            _cmbStatus.Items.Add(new ComboBoxItem("Draft", T("Draft", "مسودة")));
+            _cmbStatus.Items.Add(new ComboBoxItem("Posted", T("Posted", "مرحل")));
+            _cmbStatus.Items.Add(new ComboBoxItem("Reversed", T("Reversed", "معاكس")));
             _cmbStatus.SelectedIndex = 0;
             filterFlow.Controls.Add(_cmbStatus);
-            filterFlow.Controls.Add(MakeLabel("Search"));
+            filterFlow.Controls.Add(MakeLabel(T("Search", "بحث")));
             _txtSearch = new TextBox { Width = 230 };
             filterFlow.Controls.Add(_txtSearch);
-            _btnSearch = MakeButton("Search", Color.FromArgb(21, 101, 192));
-            _btnClear = MakeButton("Clear", Color.FromArgb(96, 125, 139));
-            _btnRefresh = MakeButton("Refresh", Color.FromArgb(46, 125, 50));
+            _btnSearch = MakeButton(T("Search", "بحث"), Color.FromArgb(21, 101, 192));
+            _btnClear = MakeButton(T("Clear", "مسح"), Color.FromArgb(96, 125, 139));
+            _btnRefresh = MakeButton(T("Refresh", "تحديث"), Color.FromArgb(46, 125, 50));
             filterFlow.Controls.Add(_btnSearch);
             filterFlow.Controls.Add(_btnClear);
             filterFlow.Controls.Add(_btnRefresh);
 
             var batch = new Panel { Dock = DockStyle.Top, Height = 44, BackColor = Color.White, Padding = new Padding(10, 5, 10, 5) };
-            var batchFlow = new FlowLayoutPanel { Dock = DockStyle.Left, FlowDirection = FlowDirection.LeftToRight, WrapContents = false };
+
+            // Use the same RTL detection for batch panel
+            var batchFlow = new FlowLayoutPanel 
+            { 
+                Dock = DockStyle.Fill, 
+                FlowDirection = isArabic ? FlowDirection.RightToLeft : FlowDirection.LeftToRight, 
+                WrapContents = true,
+                AutoScroll = true,
+                RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No
+            };
             batch.Controls.Add(batchFlow);
-            _btnPostSelected = MakeButton("Post Selected", Color.FromArgb(46, 125, 50));
-            _btnReverseSelected = MakeButton("Reverse Selected", Color.FromArgb(192, 57, 43));
-            _btnDeleteSelected = MakeButton("Delete Selected", Color.FromArgb(231, 76, 60));
-            _btnExport = MakeButton("Export to Excel", Color.FromArgb(84, 110, 122));
+            _btnPostSelected = MakeButton(T("Post Selected", "ترحيل المختار"), Color.FromArgb(46, 125, 50));
+            _btnReverseSelected = MakeButton(T("Reverse Selected", "معاكسة المختار"), Color.FromArgb(192, 57, 43));
+            _btnDeleteSelected = MakeButton(T("Delete Selected", "حذف المختار"), Color.FromArgb(231, 76, 60));
+            _btnExport = MakeButton(T("Export to Excel", "تصدير إلى إكسل"), Color.FromArgb(84, 110, 122));
             batchFlow.Controls.Add(_btnPostSelected);
             batchFlow.Controls.Add(_btnReverseSelected);
             batchFlow.Controls.Add(_btnDeleteSelected);
@@ -119,17 +153,17 @@ namespace pos
             _grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             _grid.ColumnHeadersHeight = 32;
             _grid.Columns.Add(new DataGridViewCheckBoxColumn { Name = "colSelect", HeaderText = string.Empty, Width = 30 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "VoucherNo", HeaderText = "Voucher No", Width = 130, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "VoucherDate", HeaderText = "Date", Width = 90, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "VoucherType", HeaderText = "Type", Width = 140, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Narration", HeaderText = "Narration", Width = 230, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "LinesCount", HeaderText = "Lines", Width = 60, ReadOnly = true, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight } });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "TotalDebit", HeaderText = "Total Debit", Width = 110, ReadOnly = true, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "TotalCredit", HeaderText = "Total Credit", Width = 110, ReadOnly = true, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Status", Width = 90, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "CreatedBy", HeaderText = "Created By", Width = 130, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "PostedBy", HeaderText = "Posted By", Width = 130, ReadOnly = true });
-            _grid.Columns.Add(new DataGridViewButtonColumn { Name = "Actions", HeaderText = "Actions", Width = 85, Text = "Open", UseColumnTextForButtonValue = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "VoucherNo", HeaderText = T("Voucher No", "رقم الكشف"), Width = 130, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "VoucherDate", HeaderText = T("Date", "التاريخ"), Width = 90, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "VoucherType", HeaderText = T("Type", "النوع"), Width = 140, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Narration", HeaderText = T("Narration", "الوصف"), Width = 230, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "LinesCount", HeaderText = T("Lines", "البنود"), Width = 60, ReadOnly = true, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight } });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "TotalDebit", HeaderText = T("Total Debit", "إجمالي المدين"), Width = 110, ReadOnly = true, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "TotalCredit", HeaderText = T("Total Credit", "إجمالي الدائن"), Width = 110, ReadOnly = true, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = T("Status", "الحالة"), Width = 90, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "CreatedBy", HeaderText = T("Created By", "أنشأه"), Width = 130, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "PostedBy", HeaderText = T("Posted By", "رحله"), Width = 130, ReadOnly = true });
+            _grid.Columns.Add(new DataGridViewButtonColumn { Name = "Actions", HeaderText = T("Actions", "إجراءات"), Width = 85, Text = T("Open", "فتح"), UseColumnTextForButtonValue = true });
 
             var previewPanel = new Panel { Dock = DockStyle.Bottom, Height = 230, BackColor = Color.FromArgb(250, 251, 253), Padding = new Padding(10) };
             var previewLayout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1 };
@@ -137,7 +171,7 @@ namespace pos
             previewLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 230F));
 
             var previewLeft = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 0, 10, 0) };
-            _lblPreviewTitle = new Label { Dock = DockStyle.Top, Height = 20, Text = "Detail Preview", Font = new Font("Segoe UI", 9F, FontStyle.Bold) };
+            _lblPreviewTitle = new Label { Dock = DockStyle.Top, Height = 20, Text = T("Detail Preview", "معاينة التفاصيل"), Font = new Font("Segoe UI", 9F, FontStyle.Bold) };
             _previewGrid = new DataGridView
             {
                 Dock = DockStyle.Fill,
@@ -155,22 +189,22 @@ namespace pos
             _previewGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
             _previewGrid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
             _previewGrid.ColumnHeadersHeight = 28;
-            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "AccountCode", HeaderText = "Account Code", ReadOnly = true, Width = 90 });
-            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "AccountName", HeaderText = "Account Name", ReadOnly = true, Width = 150 });
-            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = "Description", ReadOnly = true });
-            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Debit", HeaderText = "Debit", ReadOnly = true, Width = 90, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
-            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Credit", HeaderText = "Credit", ReadOnly = true, Width = 90, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
+            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "AccountCode", HeaderText = T("Account Code", "كود الحساب"), ReadOnly = true, Width = 90 });
+            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "AccountName", HeaderText = T("Account Name", "اسم الحساب"), ReadOnly = true, Width = 150 });
+            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = T("Description", "الوصف"), ReadOnly = true });
+            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Debit", HeaderText = T("Debit", "مدين"), ReadOnly = true, Width = 90, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
+            _previewGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Credit", HeaderText = T("Credit", "دائن"), ReadOnly = true, Width = 90, DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight, Format = "N2" } });
             previewLeft.Controls.Add(_previewGrid);
             previewLeft.Controls.Add(_lblPreviewTitle);
 
             var previewRight = new Panel { Dock = DockStyle.Fill, BackColor = Color.WhiteSmoke, Padding = new Padding(12) };
-            _lblPreviewDr = new Label { AutoSize = true, Location = new Point(12, 18), Font = new Font("Segoe UI", 11F, FontStyle.Bold), ForeColor = Color.MidnightBlue, Text = "Debit: 0.00" };
-            _lblPreviewCr = new Label { AutoSize = true, Location = new Point(12, 48), Font = new Font("Segoe UI", 11F, FontStyle.Bold), ForeColor = Color.MidnightBlue, Text = "Credit: 0.00" };
-            _lblPreviewBalance = new Label { AutoSize = true, Location = new Point(12, 78), Font = new Font("Segoe UI", 11F, FontStyle.Bold), ForeColor = Color.DarkGreen, Text = "Balanced ✓" };
-            _btnEdit = MakeButton("Edit", Color.FromArgb(21, 101, 192));
-            _btnPost = MakeButton("Post", Color.FromArgb(46, 125, 50));
-            _btnPrint = MakeButton("Print", Color.FromArgb(84, 110, 122));
-            _btnReverse = MakeButton("Reverse", Color.FromArgb(192, 57, 43));
+            _lblPreviewDr = new Label { AutoSize = true, Location = new Point(12, 18), Font = new Font("Segoe UI", 11F, FontStyle.Bold), ForeColor = Color.MidnightBlue, Text = T("Debit: 0.00", "مدين: 0.00") };
+            _lblPreviewCr = new Label { AutoSize = true, Location = new Point(12, 48), Font = new Font("Segoe UI", 11F, FontStyle.Bold), ForeColor = Color.MidnightBlue, Text = T("Credit: 0.00", "دائن: 0.00") };
+            _lblPreviewBalance = new Label { AutoSize = true, Location = new Point(12, 78), Font = new Font("Segoe UI", 11F, FontStyle.Bold), ForeColor = Color.DarkGreen, Text = T("Balanced ✓", "متوازن ✓") };
+            _btnEdit = MakeButton(T("Edit", "تعديل"), Color.FromArgb(21, 101, 192));
+            _btnPost = MakeButton(T("Post", "ترحيل"), Color.FromArgb(46, 125, 50));
+            _btnPrint = MakeButton(T("Print", "طباعة"), Color.FromArgb(84, 110, 122));
+            _btnReverse = MakeButton(T("Reverse", "معاكسة"), Color.FromArgb(192, 57, 43));
             _btnEdit.SetBounds(12, 116, 86, 30);
             _btnPost.SetBounds(102, 116, 86, 30);
             _btnPrint.SetBounds(12, 152, 86, 30);
@@ -188,10 +222,10 @@ namespace pos
             previewPanel.Controls.Add(previewLayout);
 
             _statusStrip = new StatusStrip { SizingGrip = false };
-            _lblViewCount = new ToolStripStatusLabel("Total vouchers in view: 0");
-            _lblPostedCount = new ToolStripStatusLabel("Posted: 0");
-            _lblDraftCount = new ToolStripStatusLabel("Draft: 0");
-            _lblDebitSum = new ToolStripStatusLabel("Filtered debit sum: 0.00");
+            _lblViewCount = new ToolStripStatusLabel(T("Total vouchers in view: 0", "إجمالي الكشوفات المعروضة: 0"));
+            _lblPostedCount = new ToolStripStatusLabel(T("Posted: 0", "المرحل: 0"));
+            _lblDraftCount = new ToolStripStatusLabel(T("Draft: 0", "المسودة: 0"));
+            _lblDebitSum = new ToolStripStatusLabel(T("Filtered debit sum: 0.00", "مجموع المدين المصفى: 0.00"));
             _statusStrip.Items.AddRange(new ToolStripItem[] { _lblViewCount, _lblPostedCount, _lblDraftCount, _lblDebitSum });
 
             Controls.Add(_grid);
@@ -251,8 +285,16 @@ namespace pos
         {
             try
             {
-                string voucherType = Convert.ToString(_cmbVoucherType.SelectedItem);
-                string status = Convert.ToString(_cmbStatus.SelectedItem);
+                // Extract English values from ComboBoxItem for BLL queries
+                string voucherType = "All";
+                string status = "All";
+
+                if (_cmbVoucherType.SelectedItem is ComboBoxItem voucherItem)
+                    voucherType = voucherItem.Value;
+
+                if (_cmbStatus.SelectedItem is ComboBoxItem statusItem)
+                    status = statusItem.Value;
+
                 string search = _txtSearch.Text.Trim();
                 _voucherTable = _bll.GetVoucherHeaders(_dtpFrom.Value, _dtpTo.Value, voucherType, status, search);
                 RenderGrid();
@@ -260,7 +302,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, T("Load Error", "خطأ التحميل"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -318,10 +360,10 @@ namespace pos
         {
             if (_voucherTable == null)
             {
-                _lblViewCount.Text = "Total vouchers in view: 0";
-                _lblPostedCount.Text = "Posted: 0";
-                _lblDraftCount.Text = "Draft: 0";
-                _lblDebitSum.Text = "Filtered debit sum: 0.00";
+                _lblViewCount.Text = T("Total vouchers in view: 0", "إجمالي الكشوفات المعروضة: 0");
+                _lblPostedCount.Text = T("Posted: 0", "المرحل: 0");
+                _lblDraftCount.Text = T("Draft: 0", "المسودة: 0");
+                _lblDebitSum.Text = T("Filtered debit sum: 0.00", "مجموع المدين المصفى: 0.00");
                 return;
             }
 
@@ -330,10 +372,10 @@ namespace pos
             int draft = _voucherTable.AsEnumerable().Count(r => string.Equals(Convert.ToString(r["Status"]), "Draft", StringComparison.OrdinalIgnoreCase));
             decimal debitSum = _voucherTable.AsEnumerable().Sum(r => r["TotalDebit"] == DBNull.Value ? 0m : Convert.ToDecimal(r["TotalDebit"]));
 
-            _lblViewCount.Text = string.Format("Total vouchers in view: {0}", total);
-            _lblPostedCount.Text = string.Format("Posted: {0}", posted);
-            _lblDraftCount.Text = string.Format("Draft: {0}", draft);
-            _lblDebitSum.Text = string.Format("Filtered debit sum: {0:N2}", debitSum);
+            _lblViewCount.Text = string.Format(T("Total vouchers in view: {0}", "إجمالي الكشوفات المعروضة: {0}"), total);
+            _lblPostedCount.Text = string.Format(T("Posted: {0}", "المرحل: {0}"), posted);
+            _lblDraftCount.Text = string.Format(T("Draft: {0}", "المسودة: {0}"), draft);
+            _lblDebitSum.Text = string.Format(T("Filtered debit sum: {0:N2}", "مجموع المدين المصفى: {0:N2}"), debitSum);
         }
 
         private void UpdatePreviewFromSelection()
@@ -353,12 +395,16 @@ namespace pos
             }
 
             string invoiceNo = Convert.ToString(headerRow["VoucherNo"]);
-            _lblPreviewTitle.Text = string.Format("Detail Preview - {0}", invoiceNo);
+            _lblPreviewTitle.Text = string.Format(T("Detail Preview - {0}", "معاينة التفاصيل - {0}"), invoiceNo);
             _previewTable = _bll.GetVoucherLines(invoiceNo);
             _previewGrid.Rows.Clear();
 
             decimal dr = 0m;
             decimal cr = 0m;
+
+            // Detect if Arabic mode for loading account names
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+
             if (_previewTable != null)
             {
                 foreach (DataRow line in _previewTable.Rows)
@@ -367,14 +413,30 @@ namespace pos
                     decimal credit = line["Credit"] == DBNull.Value ? 0m : Convert.ToDecimal(line["Credit"]);
                     dr += debit;
                     cr += credit;
-                    _previewGrid.Rows.Add(Convert.ToString(line["AccountCode"]), Convert.ToString(line["AccountName"]), Convert.ToString(line["Description"]), debit, credit);
+
+                    // Load account name based on language mode
+                    string accountName = Convert.ToString(line["AccountName"]);
+                    if (isArabic && line.Table.Columns.Contains("AccountName_2"))
+                    {
+                        string accountName2 = Convert.ToString(line["AccountName_2"]);
+                        if (!string.IsNullOrWhiteSpace(accountName2))
+                            accountName = accountName2;
+                    }
+
+                    _previewGrid.Rows.Add(
+                        Convert.ToString(line["AccountCode"]), 
+                        accountName, 
+                        Convert.ToString(line["Description"]), 
+                        debit, 
+                        credit
+                    );
                 }
             }
 
-            _lblPreviewDr.Text = string.Format("Debit: {0:N2}", dr);
-            _lblPreviewCr.Text = string.Format("Credit: {0:N2}", cr);
+            _lblPreviewDr.Text = string.Format(T("Debit: {0:N2}", "مدين: {0:N2}"), dr);
+            _lblPreviewCr.Text = string.Format(T("Credit: {0:N2}", "دائن: {0:N2}"), cr);
             bool balanced = Math.Abs(dr - cr) < 0.005m;
-            _lblPreviewBalance.Text = balanced ? "Balanced ✓" : "Not Balanced";
+            _lblPreviewBalance.Text = balanced ? T("Balanced ✓", "متوازن ✓") : T("Not Balanced", "غير متوازن");
             _lblPreviewBalance.ForeColor = balanced ? Color.DarkGreen : Color.DarkRed;
 
             SetQuickButtons(headerRow);
@@ -382,10 +444,10 @@ namespace pos
 
         private void ClearPreview()
         {
-            _lblPreviewTitle.Text = "Detail Preview";
+            _lblPreviewTitle.Text = T("Detail Preview", "معاينة التفاصيل");
             _previewGrid.Rows.Clear();
-            _lblPreviewDr.Text = "Debit: 0.00";
-            _lblPreviewCr.Text = "Credit: 0.00";
+            _lblPreviewDr.Text = T("Debit: 0.00", "مدين: 0.00");
+            _lblPreviewCr.Text = T("Credit: 0.00", "دائن: 0.00");
             _lblPreviewBalance.Text = "Balanced ✓";
             _lblPreviewBalance.ForeColor = Color.DarkGreen;
             _btnEdit.Enabled = false;
@@ -512,24 +574,24 @@ namespace pos
             List<DataRow> drafts = GetCheckedHeaderRows("Draft");
             if (drafts.Count == 0)
             {
-                MessageBox.Show(this, "Select one or more Draft vouchers.", "Post Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, T("Select one or more Draft vouchers.", "اختر واحد أو أكثر من الكشوفات المسودة."), T("Post Selected", "ترحيل المختار"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBox.Show(this, string.Format("Post {0} vouchers?", drafts.Count), "Confirm Post", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(this, string.Format(T("Post {0} vouchers?", "هل تريد ترحيل {0} كشف؟"), drafts.Count), T("Confirm Post", "تأكيد الترحيل"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             {
                 return;
             }
 
             List<int> ids = drafts.Select(r => Convert.ToInt32(r["id"])).ToList();
             BatchPostResult result = _bll.BatchPostVouchers(ids, UsersModal.logged_in_userid);
-            string message = string.Format("Posted: {0}\r\nFailed: {1}", result.SuccessCount, result.FailureCount);
+            string message = string.Format(T("Posted: {0}\r\nFailed: {1}", "مرحل: {0}\r\nفشل: {1}"), result.SuccessCount, result.FailureCount);
             if (result.FailedVouchers.Count > 0)
             {
                 message += "\r\n\r\n" + string.Join("\r\n", result.FailedVouchers.Select(x => string.Format("{0}: {1}", x.VoucherNo, x.Message)));
             }
 
-            MessageBox.Show(this, message, "Batch Post", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, message, T("Batch Post", "ترحيل جماعي"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
         }
 
@@ -538,11 +600,11 @@ namespace pos
             List<DataRow> drafts = GetCheckedHeaderRows("Draft");
             if (drafts.Count == 0)
             {
-                MessageBox.Show(this, "Select one or more Draft vouchers.", "Delete Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, T("Select one or more Draft vouchers.", "اختر واحد أو أكثر من الكشوفات المسودة."), T("Delete Selected", "حذف المختار"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBox.Show(this, string.Format("Delete {0} draft vouchers?", drafts.Count), "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+            if (MessageBox.Show(this, string.Format(T("Delete {0} draft vouchers?", "هل تريد حذف {0} من الكشوفات المسودة؟"), drafts.Count), T("Confirm Delete", "تأكيد الحذف"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
             {
                 return;
             }
@@ -557,7 +619,7 @@ namespace pos
             List<DataRow> posted = GetCheckedHeaderRows("Posted");
             if (posted.Count == 0)
             {
-                MessageBox.Show(this, "Select one or more Posted vouchers.", "Reverse Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, T("Select one or more Posted vouchers.", "اختر واحد أو أكثر من الكشوفات المرحلة."), T("Reverse Selected", "معاكسة المختار"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -565,13 +627,15 @@ namespace pos
             DataTable lines = _bll.GetVoucherLines(Convert.ToString(sample["VoucherNo"]));
             using (var dlg = new frm_journal_reversal(sample, lines))
             {
-                dlg.Text = posted.Count > 1 ? string.Format("Create Reversal Entry ({0} vouchers selected)", posted.Count) : "Create Reversal Entry";
+                dlg.Text = posted.Count > 1 
+                    ? string.Format(T("Create Reversal Entry ({0} vouchers selected)", "إنشاء قيد معاكس ({0} كشف مختار)"), posted.Count) 
+                    : T("Create Reversal Entry", "إنشاء قيد معاكس");
                 if (dlg.ShowDialog(this) != DialogResult.OK)
                 {
                     return;
                 }
 
-                if (MessageBox.Show(this, string.Format("Create reversal entries for {0} vouchers?", posted.Count), "Confirm Reversal", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (MessageBox.Show(this, string.Format(T("Create reversal entries for {0} vouchers?", "هل تريد إنشاء قيود معاكسة لـ {0} كشف؟"), posted.Count), T("Confirm Reversal", "تأكيد المعاكسة"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     return;
                 }
@@ -581,7 +645,7 @@ namespace pos
                     PostResult result = _bll.ReverseJournalVoucher(Convert.ToInt32(row["id"]), dlg.ReversalDate, dlg.Reason, UsersModal.logged_in_userid);
                     if (!result.Success && result.Messages.Count > 0)
                     {
-                        MessageBox.Show(this, string.Join("\r\n", result.Messages.Select(x => x.Message)), "Reversal Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(this, string.Join("\r\n", result.Messages.Select(x => x.Message)), T("Reversal Failed", "فشلت المعاكسة"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -639,7 +703,29 @@ namespace pos
 
         private void frm_journal_voucher_manager_Load(object sender, EventArgs e)
         {
+            AppTheme.Apply(this);
+            //LoadData();
+        }
+    }
 
+    /// <summary>
+    /// Helper class to store both display text and underlying value for ComboBox items.
+    /// Enables multilingual display while preserving English values for database queries.
+    /// </summary>
+    internal class ComboBoxItem
+    {
+        public string Value { get; set; }
+        public string Display { get; set; }
+
+        public ComboBoxItem(string value, string display)
+        {
+            Value = value;
+            Display = display;
+        }
+
+        public override string ToString()
+        {
+            return Display;
         }
     }
 }

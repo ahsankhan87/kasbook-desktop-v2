@@ -118,98 +118,29 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
+  <data name="grpHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1296, 108</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>إسم الحساب:</value>
+  <data name="pnlActions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1296, 42</value>
   </data>
-  <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
+  <data name="dgvBudgets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1294, 338</value>
   </data>
-  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 19</value>
+  <data name="pnlGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1296, 340</value>
   </data>
-  <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 25</value>
+  <data name="pnlTotals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1296, 38</value>
   </data>
-  <data name="lbl_header_title.Text" xml:space="preserve">
-    <value>حساب جديد</value>
+  <data name="dgvComparison.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1294, 131</value>
   </data>
-  <data name="btn_cancel.Text" xml:space="preserve">
-    <value>إلغاء</value>
+  <data name="pnlComparison.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1296, 161</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>وصف:</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 17</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>رمز الحساب:</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 17</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>مجموعة:</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 17</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>فتح الرصيد المدين:</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>فتح رصيد دائن:</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 17</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>اسم الحساب 2:</value>
-  </data>
-  <data name="rd_isCashAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
-  </data>
-  <data name="rd_isCashAccount.Text" xml:space="preserve">
-    <value>هل هو حساب نقدي؟</value>
-  </data>
-  <data name="rd_isBankAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
-  </data>
-  <data name="rd_isBankAccount.Text" xml:space="preserve">
-    <value>هل هو حساب مصرفي؟</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
-        AAD///7///////bGdP/otUv/8LlJ//K2R//yu1H/8blT/+68U//suVX/8rdL//S5Rv/st0b/68R2////
-        //////7////+///////3xnP/6bdN/+zKef/py4X/6sJr//O7Vf/yvVD/7bxd/+vHf//lyIn/671a//XD
-        c//////////+/////v//////8cdt/+m1U//88dr//////+zbqf/ttE7/6rVM//Dcov//////+vnu/+u+
-        Yv/+w2z//////////v////7//////+/Ia//ntFf/++7d//z////s2af/8rU//+zFa//y+Oz/+v7///HX
-        nv/nsz//+Mhz//7///////7////+///////0x3H/7bdR//jw3f/8////9N2t/+GwQP/15rL/8f////bt
-        1P/ruVz/7rdM//HGc//////////+/////v//////9Mdx/+22Uf/989z//v////v46//m2rP/+/j2//3+
-        ///wzYL/67dM/+64Uf/xxnL//////////v////7///////THcf/ttlH/+/Ld//79/////P7//P/7//r/
-        ///15MP/67dX//O9U//tt0//8cZy//////////7////+///////0x3H/7bZR//vx3v/5/P//+/js//L7
-        +f/6//z/68yR/+y2RP/wwVX/5rVQ/+/Dc//////////+/////v//////9Mdx/+23Uf/58Nz//v///+rW
-        qv/x47r/+f////r26v/rxXX/7bdH//W8Tf/zxHH//////////v////7///////THcf/ttlH/+vLY//z/
-        ///32J//5rRQ//Xv1P/2/////fnp/+rGfv/utEn/+Mlu//////////7////+///////0x3H/7bZS//zz
-        0//6////9tmn/++3P//qwWL/+OjB//Pv3P/05Lj/5bVa//XHbv/////////+/////v//////9Mdx/+22
-        Uf/48tj//P///+zcov/us0z/7rpV/+23T//tt07/7rlT/+64Tv/xxnL//////////v////7///////TH
-        cf/tt1H/+vHa///////y2qf/77BP/+68WP/uu1b/7rtW/+67V//tt07/8cZy//////////7////+////
-        ///0x3D/7bdS//jy2f/7////8dyf//W1Sv/uu1j/7rpV/+66Vf/uu1f/7bdO//HGcv/////////+////
-        /v//////8sZy/+63UP/txXL/7Md7/+zBY//wulH/7rpW/+66Vf/uulX/7rtX/+23Tv/xxnL/////////
-        /v////7///////HGcv/tt07/7rhQ/+63TP/uuFL/7bpW/+66Vf/uulX/7rpV/+67V//tt07/8cZy////
-        //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA==
-</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1320, 786</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -220,6 +151,81 @@
     <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>حساب جديد</value>
+    <value>إدخال وتخطيط الميزانية</value>
   </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>مركز إدخال وتخطيط الميزانية</value>
+  </data>
+  <data name="lblYear.Text" xml:space="preserve">
+    <value>السنة المالية</value>
+  </data>
+  <data name="lblVersion.Text" xml:space="preserve">
+    <value>إصدار الميزانية</value>
+  </data>
+  <data name="lblCostCenter.Text" xml:space="preserve">
+    <value>الفرع</value>
+  </data>
+  <data name="lblStatusHeader.Text" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="lblNotes.Text" xml:space="preserve">
+    <value>الملاحظات/الوصف</value>
+  </data>
+  <data name="lblIncome.Text" xml:space="preserve">
+    <value>إجمالي الدخل المتوقع:</value>
+  </data>
+  <data name="lblExpense.Text" xml:space="preserve">
+    <value>إجمالي المصاريف المتوقعة:</value>
+  </data>
+  <data name="lblNetProfit.Text" xml:space="preserve">
+    <value>ميزانية الربح الصافي:</value>
+  </data>
+  <data name="lblComparisonTitle.Text" xml:space="preserve">
+    <value>مقارنة الميزانية</value>
+  </data>
+  <data name="btnNew.Text" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="btnLoad.Text" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="btnPrint.Text" xml:space="preserve">
+    <value>طباعة الميزانية</value>
+  </data>
+  <data name="btnApprove.Text" xml:space="preserve">
+    <value>الموافقة على الميزانية</value>
+  </data>
+  <data name="btnExportExcel.Text" xml:space="preserve">
+    <value>تصدير إلى Excel</value>
+  </data>
+  <data name="btnImportExcel.Text" xml:space="preserve">
+    <value>استيراد من Excel</value>
+  </data>
+  <data name="btnCopyLastYear.Text" xml:space="preserve">
+    <value>نسخ السنة الماضية</value>
+  </data>
+  <data name="btnCopyGrowth.Text" xml:space="preserve">
+    <value>نسخ مع نمو</value>
+  </data>
+  <data name="btnSpreadEven.Text" xml:space="preserve">
+    <value>توزيع بالتساوي</value>
+  </data>
+  <data name="btnSeasonality.Text" xml:space="preserve">
+    <value>توزيع موسمي</value>
+  </data>
+  <data name="chkShowComparison.Text" xml:space="preserve">
+    <value>عرض مقارنة الميزانية</value>
+  </data>
+  <data name="grpHeader.Text" xml:space="preserve">
+    <value>رأس الميزانية</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-SA</value>
+  </metadata>
 </root>

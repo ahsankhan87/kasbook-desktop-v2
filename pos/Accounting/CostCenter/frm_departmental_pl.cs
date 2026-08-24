@@ -10,12 +10,12 @@ using pos.UI.Busy;
 namespace pos.Accounting.CostCenter
 {
     /// <summary>
-    /// Departmental P&L Report Form - Shows income/expense breakdown by cost center
+    /// Departmental P&L Report Form - Shows income/expense breakdown by branch
     /// </summary>
     public partial class frm_departmental_pl : Form
     {
         private CostCenterBLL bll = new CostCenterBLL();
-        private List<int> selectedCostCenterIds = new List<int>();
+        private List<int> selectedBranchIds = new List<int>();
 
         public frm_departmental_pl()
         {
@@ -39,11 +39,11 @@ namespace pos.Accounting.CostCenter
             dtpFromDate.Value = new DateTime(DateTime.Today.Year, 1, 1);
             dtpToDate.Value = DateTime.Today;
 
-            // Setup cost center checklist
-            LoadCostCenters();
+            // Setup branch checklist
+            LoadBranches();
         }
 
-        private void LoadCostCenters()
+        private void LoadBranches()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace pos.Accounting.CostCenter
                 {
                     string displayText = row["display_text"]?.ToString() ?? "";
                     int id = (int)row["id"];
-                    chkListCostCenters.Items.Add(new CostCenterItem { Id = id, Text = displayText });
+                    chkListCostCenters.Items.Add(new BranchItem { Id = id, Text = displayText });
                 }
 
                 // Select all by default
@@ -63,7 +63,7 @@ namespace pos.Accounting.CostCenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading cost centers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading branches: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -89,12 +89,12 @@ namespace pos.Accounting.CostCenter
                     return;
                 }
 
-                // Get selected cost center IDs
-                selectedCostCenterIds.Clear();
+                // Get selected branch IDs
+                selectedBranchIds.Clear();
                 foreach (var item in chkListCostCenters.CheckedItems)
                 {
-                    if (item is CostCenterItem ccItem)
-                        selectedCostCenterIds.Add(ccItem.Id);
+                    if (item is BranchItem branchItem)
+                        selectedBranchIds.Add(branchItem.Id);
                 }
 
                 using (BusyScope.Show(this, "Loading departmental P&L..."))
@@ -102,7 +102,7 @@ namespace pos.Accounting.CostCenter
                     DataTable dt = bll.GetDepartmentalPL(
                         dtpFromDate.Value.Date,
                         dtpToDate.Value.Date,
-                        selectedCostCenterIds.Count > 0 ? selectedCostCenterIds : null
+                        selectedBranchIds.Count > 0 ? selectedBranchIds : null
                     );
 
                     dgvReport.DataSource = dt;
@@ -212,7 +212,7 @@ namespace pos.Accounting.CostCenter
             }
         }
 
-        private class CostCenterItem
+        private class BranchItem
         {
             public int Id { get; set; }
             public string Text { get; set; }

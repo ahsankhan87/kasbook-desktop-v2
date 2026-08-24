@@ -1,4 +1,5 @@
 using pos.UI;
+using POS.Core;
 using System;
 using System.Data;
 using System.Linq;
@@ -14,8 +15,23 @@ namespace pos
 
         public frm_account_lookup()
         {
+            // Set RTL mode based on user language
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+            this.RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No;
+            this.RightToLeftLayout = isArabic;
+
             InitializeComponent();
             gridAccounts.AutoGenerateColumns = false;
+        }
+
+        /// <summary>
+        /// Translates text based on current user language (Arabic/English).
+        /// </summary>
+        private string T(string englishText, string arabicText)
+        {
+            return string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase) 
+                ? arabicText 
+                : englishText;
         }
 
         public DataRow SelectedAccountRow { get; private set; }
@@ -28,6 +44,20 @@ namespace pos
 
         private void frm_account_lookup_Load(object sender, EventArgs e)
         {
+            // Set RTL-aware form title
+            this.Text = T("Account Lookup", "البحث عن حساب");
+
+            // Translate UI labels and buttons
+            lblSearch.Text = T("Search", "بحث");
+            btnSelect.Text = T("Select", "تحديد");
+            btnCancel.Text = T("Cancel", "إلغاء");
+
+            // Translate grid column headers
+            colCode.HeaderText = T("Code", "الرمز");
+            colName.HeaderText = T("Account Name", "اسم الحساب");
+            if (colName2 != null)
+                colName2.HeaderText = T("Arabic Name", "الاسم بالعربية");
+
             AppTheme.Apply(this);
 
             _accountsView = _accountsTable != null ? new DataView(_accountsTable) : new DataView(new DataTable());
@@ -151,6 +181,7 @@ namespace pos
         private string BuildTermFilter(string term)
         {
             string value = EscapeRowFilterValue(term);
+            // Search in account code, English name, Arabic name (name_2), and display fields
             return string.Format("(code LIKE '%{0}%' OR name LIKE '%{0}%' OR name_2 LIKE '%{0}%' OR display LIKE '%{0}%')", value);
         }
 

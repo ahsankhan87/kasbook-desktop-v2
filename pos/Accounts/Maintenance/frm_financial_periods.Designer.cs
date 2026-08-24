@@ -18,6 +18,7 @@ namespace pos
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_financial_periods));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblYearCaption = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -59,30 +60,18 @@ namespace pos
             // 
             this.panelHeader.Controls.Add(this.lblYearCaption);
             this.panelHeader.Controls.Add(this.lblTitle);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panelHeader, "panelHeader");
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1284, 63);
-            this.panelHeader.TabIndex = 0;
             // 
             // lblYearCaption
             // 
-            this.lblYearCaption.AutoSize = true;
-            this.lblYearCaption.Location = new System.Drawing.Point(16, 37);
+            resources.ApplyResources(this.lblYearCaption, "lblYearCaption");
             this.lblYearCaption.Name = "lblYearCaption";
-            this.lblYearCaption.Size = new System.Drawing.Size(116, 20);
-            this.lblYearCaption.TabIndex = 1;
-            this.lblYearCaption.Text = "Active Year: N/A";
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.lblTitle.Location = new System.Drawing.Point(14, 9);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(281, 28);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Financial Period Management";
             // 
             // toolActions
             // 
@@ -95,84 +84,70 @@ namespace pos
             this.btnViewTransactions,
             this.btnYearEndClose,
             this.btnHelp});
-            this.toolActions.Location = new System.Drawing.Point(0, 63);
+            resources.ApplyResources(this.toolActions, "toolActions");
             this.toolActions.Name = "toolActions";
-            this.toolActions.Size = new System.Drawing.Size(1284, 27);
-            this.toolActions.TabIndex = 1;
-            this.toolActions.Text = "toolStrip1";
             // 
             // btnOpenNewPeriod
             // 
             this.btnOpenNewPeriod.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnOpenNewPeriod.Name = "btnOpenNewPeriod";
-            this.btnOpenNewPeriod.Size = new System.Drawing.Size(129, 28);
+            resources.ApplyResources(this.btnOpenNewPeriod, "btnOpenNewPeriod");
             this.btnOpenNewPeriod.Tag = "finance.edit";
-            this.btnOpenNewPeriod.Text = "Open New Period";
             this.btnOpenNewPeriod.Click += new System.EventHandler(this.btnOpenNewPeriod_Click);
             // 
             // btnSoftClose
             // 
             this.btnSoftClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnSoftClose.Name = "btnSoftClose";
-            this.btnSoftClose.Size = new System.Drawing.Size(126, 28);
+            resources.ApplyResources(this.btnSoftClose, "btnSoftClose");
             this.btnSoftClose.Tag = "finance.edit";
-            this.btnSoftClose.Text = "Soft Close Period";
             this.btnSoftClose.Click += new System.EventHandler(this.btnSoftClose_Click);
             // 
             // btnHardLock
             // 
             this.btnHardLock.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnHardLock.Name = "btnHardLock";
-            this.btnHardLock.Size = new System.Drawing.Size(126, 28);
+            resources.ApplyResources(this.btnHardLock, "btnHardLock");
             this.btnHardLock.Tag = "finance.edit";
-            this.btnHardLock.Text = "Hard Lock Period";
             this.btnHardLock.Click += new System.EventHandler(this.btnHardLock_Click);
             // 
             // btnReopen
             // 
             this.btnReopen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnReopen.Name = "btnReopen";
-            this.btnReopen.Size = new System.Drawing.Size(110, 28);
+            resources.ApplyResources(this.btnReopen, "btnReopen");
             this.btnReopen.Tag = "finance.edit";
-            this.btnReopen.Text = "Reopen Period";
             this.btnReopen.Click += new System.EventHandler(this.btnReopen_Click);
             // 
             // btnViewTransactions
             // 
             this.btnViewTransactions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnViewTransactions.Name = "btnViewTransactions";
-            this.btnViewTransactions.Size = new System.Drawing.Size(176, 28);
+            resources.ApplyResources(this.btnViewTransactions, "btnViewTransactions");
             this.btnViewTransactions.Tag = "finance.view";
-            this.btnViewTransactions.Text = "View Period Transactions";
             this.btnViewTransactions.Click += new System.EventHandler(this.btnViewTransactions_Click);
             // 
             // btnYearEndClose
             // 
             this.btnYearEndClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnYearEndClose.Name = "btnYearEndClose";
-            this.btnYearEndClose.Size = new System.Drawing.Size(134, 28);
+            resources.ApplyResources(this.btnYearEndClose, "btnYearEndClose");
             this.btnYearEndClose.Tag = "finance.edit";
-            this.btnYearEndClose.Text = "Year-End Closing...";
             this.btnYearEndClose.Click += new System.EventHandler(this.btnYearEndClose_Click);
             // 
             // btnHelp
             // 
             this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(47, 24);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Tag = "finance.view";
-            this.btnHelp.Text = "Help";
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // panelBody
             // 
             this.panelBody.Controls.Add(this.gridPeriods);
-            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 90);
+            resources.ApplyResources(this.panelBody, "panelBody");
             this.panelBody.Name = "panelBody";
-            this.panelBody.Padding = new System.Windows.Forms.Padding(8);
-            this.panelBody.Size = new System.Drawing.Size(1284, 571);
-            this.panelBody.TabIndex = 2;
             // 
             // gridPeriods
             // 
@@ -192,106 +167,89 @@ namespace pos
             this.colClosedAt,
             this.colTransactionsCount,
             this.colCanReopen});
-            this.gridPeriods.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridPeriods.Location = new System.Drawing.Point(8, 8);
+            resources.ApplyResources(this.gridPeriods, "gridPeriods");
             this.gridPeriods.MultiSelect = false;
             this.gridPeriods.Name = "gridPeriods";
             this.gridPeriods.ReadOnly = true;
             this.gridPeriods.RowHeadersVisible = false;
-            this.gridPeriods.RowHeadersWidth = 51;
             this.gridPeriods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridPeriods.Size = new System.Drawing.Size(1268, 555);
-            this.gridPeriods.TabIndex = 0;
             this.gridPeriods.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.gridPeriods_CellPainting);
             this.gridPeriods.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridPeriods_MouseDown);
             // 
             // colPeriodId
             // 
             this.colPeriodId.DataPropertyName = "period_id";
-            this.colPeriodId.HeaderText = "Period ID";
-            this.colPeriodId.MinimumWidth = 6;
+            resources.ApplyResources(this.colPeriodId, "colPeriodId");
             this.colPeriodId.Name = "colPeriodId";
             this.colPeriodId.ReadOnly = true;
-            this.colPeriodId.Visible = false;
             // 
             // colYearId
             // 
             this.colYearId.DataPropertyName = "year_id";
-            this.colYearId.HeaderText = "Year ID";
-            this.colYearId.MinimumWidth = 6;
+            resources.ApplyResources(this.colYearId, "colYearId");
             this.colYearId.Name = "colYearId";
             this.colYearId.ReadOnly = true;
-            this.colYearId.Visible = false;
             // 
             // colFinancialYear
             // 
             this.colFinancialYear.DataPropertyName = "financial_year";
-            this.colFinancialYear.HeaderText = "Financial Year";
-            this.colFinancialYear.MinimumWidth = 6;
+            resources.ApplyResources(this.colFinancialYear, "colFinancialYear");
             this.colFinancialYear.Name = "colFinancialYear";
             this.colFinancialYear.ReadOnly = true;
             // 
             // colPeriodName
             // 
             this.colPeriodName.DataPropertyName = "period_name";
-            this.colPeriodName.HeaderText = "Period Name";
-            this.colPeriodName.MinimumWidth = 6;
+            resources.ApplyResources(this.colPeriodName, "colPeriodName");
             this.colPeriodName.Name = "colPeriodName";
             this.colPeriodName.ReadOnly = true;
             // 
             // colStartDate
             // 
             this.colStartDate.DataPropertyName = "start_date";
-            this.colStartDate.HeaderText = "Start Date";
-            this.colStartDate.MinimumWidth = 6;
+            resources.ApplyResources(this.colStartDate, "colStartDate");
             this.colStartDate.Name = "colStartDate";
             this.colStartDate.ReadOnly = true;
             // 
             // colEndDate
             // 
             this.colEndDate.DataPropertyName = "end_date";
-            this.colEndDate.HeaderText = "End Date";
-            this.colEndDate.MinimumWidth = 6;
+            resources.ApplyResources(this.colEndDate, "colEndDate");
             this.colEndDate.Name = "colEndDate";
             this.colEndDate.ReadOnly = true;
             // 
             // colStatusBadge
             // 
             this.colStatusBadge.DataPropertyName = "status";
-            this.colStatusBadge.HeaderText = "Status";
-            this.colStatusBadge.MinimumWidth = 6;
+            resources.ApplyResources(this.colStatusBadge, "colStatusBadge");
             this.colStatusBadge.Name = "colStatusBadge";
             this.colStatusBadge.ReadOnly = true;
             // 
             // colClosedBy
             // 
             this.colClosedBy.DataPropertyName = "closed_by";
-            this.colClosedBy.HeaderText = "Closed By";
-            this.colClosedBy.MinimumWidth = 6;
+            resources.ApplyResources(this.colClosedBy, "colClosedBy");
             this.colClosedBy.Name = "colClosedBy";
             this.colClosedBy.ReadOnly = true;
             // 
             // colClosedAt
             // 
             this.colClosedAt.DataPropertyName = "closed_at";
-            this.colClosedAt.HeaderText = "Closed At";
-            this.colClosedAt.MinimumWidth = 6;
+            resources.ApplyResources(this.colClosedAt, "colClosedAt");
             this.colClosedAt.Name = "colClosedAt";
             this.colClosedAt.ReadOnly = true;
             // 
             // colTransactionsCount
             // 
             this.colTransactionsCount.DataPropertyName = "transactions_count";
-            this.colTransactionsCount.HeaderText = "Transactions Count";
-            this.colTransactionsCount.MinimumWidth = 6;
+            resources.ApplyResources(this.colTransactionsCount, "colTransactionsCount");
             this.colTransactionsCount.Name = "colTransactionsCount";
             this.colTransactionsCount.ReadOnly = true;
             // 
             // colCanReopen
             // 
             this.colCanReopen.DataPropertyName = "can_reopen";
-            this.colCanReopen.HeaderText = "Can Reopen";
-            this.colCanReopen.MinimumWidth = 6;
+            resources.ApplyResources(this.colCanReopen, "colCanReopen");
             this.colCanReopen.Name = "colCanReopen";
             this.colCanReopen.ReadOnly = true;
             // 
@@ -305,56 +263,47 @@ namespace pos
             this.ctxReopen,
             this.ctxViewTransactions});
             this.contextPeriodActions.Name = "contextPeriodActions";
-            this.contextPeriodActions.Size = new System.Drawing.Size(242, 124);
+            resources.ApplyResources(this.contextPeriodActions, "contextPeriodActions");
             // 
             // ctxOpenNewPeriod
             // 
             this.ctxOpenNewPeriod.Name = "ctxOpenNewPeriod";
-            this.ctxOpenNewPeriod.Size = new System.Drawing.Size(241, 24);
-            this.ctxOpenNewPeriod.Text = "Open New Period";
+            resources.ApplyResources(this.ctxOpenNewPeriod, "ctxOpenNewPeriod");
             this.ctxOpenNewPeriod.Click += new System.EventHandler(this.btnOpenNewPeriod_Click);
             // 
             // ctxSoftClose
             // 
             this.ctxSoftClose.Name = "ctxSoftClose";
-            this.ctxSoftClose.Size = new System.Drawing.Size(241, 24);
-            this.ctxSoftClose.Text = "Soft Close Period";
+            resources.ApplyResources(this.ctxSoftClose, "ctxSoftClose");
             this.ctxSoftClose.Click += new System.EventHandler(this.btnSoftClose_Click);
             // 
             // ctxHardLock
             // 
             this.ctxHardLock.Name = "ctxHardLock";
-            this.ctxHardLock.Size = new System.Drawing.Size(241, 24);
-            this.ctxHardLock.Text = "Hard Lock Period";
+            resources.ApplyResources(this.ctxHardLock, "ctxHardLock");
             this.ctxHardLock.Click += new System.EventHandler(this.btnHardLock_Click);
             // 
             // ctxReopen
             // 
             this.ctxReopen.Name = "ctxReopen";
-            this.ctxReopen.Size = new System.Drawing.Size(241, 24);
-            this.ctxReopen.Text = "Reopen Period";
+            resources.ApplyResources(this.ctxReopen, "ctxReopen");
             this.ctxReopen.Click += new System.EventHandler(this.btnReopen_Click);
             // 
             // ctxViewTransactions
             // 
             this.ctxViewTransactions.Name = "ctxViewTransactions";
-            this.ctxViewTransactions.Size = new System.Drawing.Size(241, 24);
-            this.ctxViewTransactions.Text = "View Period Transactions";
+            resources.ApplyResources(this.ctxViewTransactions, "ctxViewTransactions");
             this.ctxViewTransactions.Click += new System.EventHandler(this.btnViewTransactions_Click);
             // 
             // frm_financial_periods
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 661);
             this.Controls.Add(this.panelBody);
             this.Controls.Add(this.toolActions);
             this.Controls.Add(this.panelHeader);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.KeyPreview = true;
             this.Name = "frm_financial_periods";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Financial Period Management";
             this.Load += new System.EventHandler(this.frm_financial_periods_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_financial_periods_KeyDown);
             this.panelHeader.ResumeLayout(false);

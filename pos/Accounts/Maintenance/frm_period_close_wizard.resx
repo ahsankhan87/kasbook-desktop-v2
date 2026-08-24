@@ -1,0 +1,1119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblTitle.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 10, 12, 10</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 48</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Month-End Closing Wizard</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="colChecklistKey.HeaderText" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="colChecklistKey.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colChecklistKey.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="colChecklistItem.HeaderText" xml:space="preserve">
+    <value>Checklist Item</value>
+  </data>
+  <data name="colChecklistItem.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colChecklistPassed.HeaderText" xml:space="preserve">
+    <value>Passed</value>
+  </data>
+  <data name="colChecklistPassed.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colChecklistPassed.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="colChecklistStatus.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="colChecklistStatus.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colChecklistPending.HeaderText" xml:space="preserve">
+    <value>Pending Count</value>
+  </data>
+  <data name="colChecklistPending.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colFixModule.HeaderText" xml:space="preserve">
+    <value>Fix Module</value>
+  </data>
+  <data name="colFixModule.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colFixIssues.HeaderText" xml:space="preserve">
+    <value>Fix Issues</value>
+  </data>
+  <data name="colFixIssues.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="gridChecklist.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridChecklist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="gridChecklist.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="gridChecklist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>960, 436</value>
+  </data>
+  <data name="gridChecklist.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;gridChecklist.Name" xml:space="preserve">
+    <value>gridChecklist</value>
+  </data>
+  <data name="&gt;&gt;gridChecklist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridChecklist.Parent" xml:space="preserve">
+    <value>tabChecklist</value>
+  </data>
+  <data name="&gt;&gt;gridChecklist.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabChecklist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
+  </data>
+  <data name="tabChecklist.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="tabChecklist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>976, 452</value>
+  </data>
+  <data name="tabChecklist.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabChecklist.Text" xml:space="preserve">
+    <value>Step 1 - Pre-Close Checklist</value>
+  </data>
+  <data name="&gt;&gt;tabChecklist.Name" xml:space="preserve">
+    <value>tabChecklist</value>
+  </data>
+  <data name="&gt;&gt;tabChecklist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabChecklist.Parent" xml:space="preserve">
+    <value>tabSteps</value>
+  </data>
+  <data name="&gt;&gt;tabChecklist.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableSummary.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblTotalTransactions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblTotalTransactions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="lblTotalTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>565, 42</value>
+  </data>
+  <data name="lblTotalTransactions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblTotalTransactions.Text" xml:space="preserve">
+    <value>Total Transactions:</value>
+  </data>
+  <data name="lblTotalTransactions.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactions.Name" xml:space="preserve">
+    <value>lblTotalTransactions</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactions.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTotalTransactionsValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblTotalTransactionsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 0</value>
+  </data>
+  <data name="lblTotalTransactionsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 42</value>
+  </data>
+  <data name="lblTotalTransactionsValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTotalTransactionsValue.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTotalTransactionsValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactionsValue.Name" xml:space="preserve">
+    <value>lblTotalTransactionsValue</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactionsValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactionsValue.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTransactionsValue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblTotalJournals.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblTotalJournals.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 42</value>
+  </data>
+  <data name="lblTotalJournals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>565, 42</value>
+  </data>
+  <data name="lblTotalJournals.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblTotalJournals.Text" xml:space="preserve">
+    <value>Total Journals:</value>
+  </data>
+  <data name="lblTotalJournals.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournals.Name" xml:space="preserve">
+    <value>lblTotalJournals</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournals.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournals.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournals.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblTotalJournalsValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblTotalJournalsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 42</value>
+  </data>
+  <data name="lblTotalJournalsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 42</value>
+  </data>
+  <data name="lblTotalJournalsValue.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblTotalJournalsValue.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTotalJournalsValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournalsValue.Name" xml:space="preserve">
+    <value>lblTotalJournalsValue</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournalsValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournalsValue.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblTotalJournalsValue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblDebits.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblDebits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 84</value>
+  </data>
+  <data name="lblDebits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>565, 42</value>
+  </data>
+  <data name="lblDebits.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblDebits.Text" xml:space="preserve">
+    <value>Total Debits:</value>
+  </data>
+  <data name="lblDebits.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDebits.Name" xml:space="preserve">
+    <value>lblDebits</value>
+  </data>
+  <data name="&gt;&gt;lblDebits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDebits.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblDebits.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblDebitsValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblDebitsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 84</value>
+  </data>
+  <data name="lblDebitsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 42</value>
+  </data>
+  <data name="lblDebitsValue.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblDebitsValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblDebitsValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsValue.Name" xml:space="preserve">
+    <value>lblDebitsValue</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsValue.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsValue.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblCredits.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblCredits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 126</value>
+  </data>
+  <data name="lblCredits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>565, 42</value>
+  </data>
+  <data name="lblCredits.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblCredits.Text" xml:space="preserve">
+    <value>Total Credits:</value>
+  </data>
+  <data name="lblCredits.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblCredits.Name" xml:space="preserve">
+    <value>lblCredits</value>
+  </data>
+  <data name="&gt;&gt;lblCredits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCredits.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblCredits.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblCreditsValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblCreditsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 126</value>
+  </data>
+  <data name="lblCreditsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 42</value>
+  </data>
+  <data name="lblCreditsValue.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblCreditsValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblCreditsValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsValue.Name" xml:space="preserve">
+    <value>lblCreditsValue</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsValue.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblNetProfit.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblNetProfit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 168</value>
+  </data>
+  <data name="lblNetProfit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>565, 42</value>
+  </data>
+  <data name="lblNetProfit.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblNetProfit.Text" xml:space="preserve">
+    <value>Net Profit for period:</value>
+  </data>
+  <data name="lblNetProfit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfit.Name" xml:space="preserve">
+    <value>lblNetProfit</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfit.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfit.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblNetProfitValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblNetProfitValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 168</value>
+  </data>
+  <data name="lblNetProfitValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 42</value>
+  </data>
+  <data name="lblNetProfitValue.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblNetProfitValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblNetProfitValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.Name" xml:space="preserve">
+    <value>lblNetProfitValue</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblNetProfitValue.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblOutOfBalance.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblOutOfBalance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 210</value>
+  </data>
+  <data name="lblOutOfBalance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>565, 50</value>
+  </data>
+  <data name="lblOutOfBalance.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblOutOfBalance.Text" xml:space="preserve">
+    <value>Out-of-balance entries:</value>
+  </data>
+  <data name="lblOutOfBalance.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalance.Name" xml:space="preserve">
+    <value>lblOutOfBalance</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalance.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalance.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblOutOfBalanceValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblOutOfBalanceValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 210</value>
+  </data>
+  <data name="lblOutOfBalanceValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 50</value>
+  </data>
+  <data name="lblOutOfBalanceValue.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblOutOfBalanceValue.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblOutOfBalanceValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalanceValue.Name" xml:space="preserve">
+    <value>lblOutOfBalanceValue</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalanceValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalanceValue.Parent" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;lblOutOfBalanceValue.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tableSummary.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="tableSummary.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>952, 260</value>
+  </data>
+  <data name="tableSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableSummary.Name" xml:space="preserve">
+    <value>tableSummary</value>
+  </data>
+  <data name="&gt;&gt;tableSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableSummary.Parent" xml:space="preserve">
+    <value>tabSummary</value>
+  </data>
+  <data name="&gt;&gt;tableSummary.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableSummary.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblTotalTransactions" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblTotalTransactionsValue" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblTotalJournals" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblTotalJournalsValue" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblDebits" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDebitsValue" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblCredits" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCreditsValue" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblNetProfit" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblNetProfitValue" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblOutOfBalance" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblOutOfBalanceValue" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,60,Percent,40" /&gt;&lt;Rows Styles="Absolute,42,Absolute,42,Absolute,42,Absolute,42,Absolute,42,Absolute,42" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tabSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
+  </data>
+  <data name="tabSummary.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="tabSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>976, 452</value>
+  </data>
+  <data name="tabSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabSummary.Text" xml:space="preserve">
+    <value>Step 2 - Period Summary</value>
+  </data>
+  <data name="&gt;&gt;tabSummary.Name" xml:space="preserve">
+    <value>tabSummary</value>
+  </data>
+  <data name="&gt;&gt;tabSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabSummary.Parent" xml:space="preserve">
+    <value>tabSteps</value>
+  </data>
+  <data name="&gt;&gt;tabSummary.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkReverseAccruals.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkReverseAccruals.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 64</value>
+  </data>
+  <data name="chkReverseAccruals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 24</value>
+  </data>
+  <data name="chkReverseAccruals.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkReverseAccruals.Text" xml:space="preserve">
+    <value>Reverse accrual entries from prior period</value>
+  </data>
+  <data name="&gt;&gt;chkReverseAccruals.Name" xml:space="preserve">
+    <value>chkReverseAccruals</value>
+  </data>
+  <data name="&gt;&gt;chkReverseAccruals.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkReverseAccruals.Parent" xml:space="preserve">
+    <value>tabAdjustments</value>
+  </data>
+  <data name="&gt;&gt;chkReverseAccruals.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkAutoDepreciation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkAutoDepreciation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 28</value>
+  </data>
+  <data name="chkAutoDepreciation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 24</value>
+  </data>
+  <data name="chkAutoDepreciation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkAutoDepreciation.Text" xml:space="preserve">
+    <value>Auto-post depreciation entries for period</value>
+  </data>
+  <data name="&gt;&gt;chkAutoDepreciation.Name" xml:space="preserve">
+    <value>chkAutoDepreciation</value>
+  </data>
+  <data name="&gt;&gt;chkAutoDepreciation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkAutoDepreciation.Parent" xml:space="preserve">
+    <value>tabAdjustments</value>
+  </data>
+  <data name="&gt;&gt;chkAutoDepreciation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabAdjustments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
+  </data>
+  <data name="tabAdjustments.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 16, 16, 16</value>
+  </data>
+  <data name="tabAdjustments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>976, 452</value>
+  </data>
+  <data name="tabAdjustments.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabAdjustments.Text" xml:space="preserve">
+    <value>Step 3 - Depreciation &amp;&amp; Accruals</value>
+  </data>
+  <data name="&gt;&gt;tabAdjustments.Name" xml:space="preserve">
+    <value>tabAdjustments</value>
+  </data>
+  <data name="&gt;&gt;tabAdjustments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabAdjustments.Parent" xml:space="preserve">
+    <value>tabSteps</value>
+  </data>
+  <data name="&gt;&gt;tabAdjustments.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnCompleteClosing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 152</value>
+  </data>
+  <data name="btnCompleteClosing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 36</value>
+  </data>
+  <data name="btnCompleteClosing.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnCompleteClosing.Text" xml:space="preserve">
+    <value>Complete Closing</value>
+  </data>
+  <data name="&gt;&gt;btnCompleteClosing.Name" xml:space="preserve">
+    <value>btnCompleteClosing</value>
+  </data>
+  <data name="&gt;&gt;btnCompleteClosing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCompleteClosing.Parent" xml:space="preserve">
+    <value>tabConfirm</value>
+  </data>
+  <data name="&gt;&gt;btnCompleteClosing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtPinPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 115</value>
+  </data>
+  <data name="txtPinPassword.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 27</value>
+  </data>
+  <data name="txtPinPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtPinPassword.Name" xml:space="preserve">
+    <value>txtPinPassword</value>
+  </data>
+  <data name="&gt;&gt;txtPinPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtPinPassword.Parent" xml:space="preserve">
+    <value>tabConfirm</value>
+  </data>
+  <data name="&gt;&gt;txtPinPassword.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblPin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 92</value>
+  </data>
+  <data name="lblPin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 20</value>
+  </data>
+  <data name="lblPin.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblPin.Text" xml:space="preserve">
+    <value>Password / PIN confirmation:</value>
+  </data>
+  <data name="&gt;&gt;lblPin.Name" xml:space="preserve">
+    <value>lblPin</value>
+  </data>
+  <data name="&gt;&gt;lblPin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPin.Parent" xml:space="preserve">
+    <value>tabConfirm</value>
+  </data>
+  <data name="&gt;&gt;lblPin.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkConfirmReviewed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkConfirmReviewed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 58</value>
+  </data>
+  <data name="chkConfirmReviewed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 24</value>
+  </data>
+  <data name="chkConfirmReviewed.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkConfirmReviewed.Text" xml:space="preserve">
+    <value>I confirm all transactions for [period] have been reviewed</value>
+  </data>
+  <data name="&gt;&gt;chkConfirmReviewed.Name" xml:space="preserve">
+    <value>chkConfirmReviewed</value>
+  </data>
+  <data name="&gt;&gt;chkConfirmReviewed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkConfirmReviewed.Parent" xml:space="preserve">
+    <value>tabConfirm</value>
+  </data>
+  <data name="&gt;&gt;chkConfirmReviewed.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblConfirmText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblConfirmText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="lblConfirmText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 20</value>
+  </data>
+  <data name="lblConfirmText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblConfirmText.Name" xml:space="preserve">
+    <value>lblConfirmText</value>
+  </data>
+  <data name="&gt;&gt;lblConfirmText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblConfirmText.Parent" xml:space="preserve">
+    <value>tabConfirm</value>
+  </data>
+  <data name="&gt;&gt;lblConfirmText.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tabConfirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
+  </data>
+  <data name="tabConfirm.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 16, 16, 16</value>
+  </data>
+  <data name="tabConfirm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>976, 452</value>
+  </data>
+  <data name="tabConfirm.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabConfirm.Text" xml:space="preserve">
+    <value>Step 4 - Confirm Close</value>
+  </data>
+  <data name="&gt;&gt;tabConfirm.Name" xml:space="preserve">
+    <value>tabConfirm</value>
+  </data>
+  <data name="&gt;&gt;tabConfirm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabConfirm.Parent" xml:space="preserve">
+    <value>tabSteps</value>
+  </data>
+  <data name="&gt;&gt;tabConfirm.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabSteps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabSteps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 48</value>
+  </data>
+  <data name="tabSteps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 485</value>
+  </data>
+  <data name="tabSteps.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tabSteps.Name" xml:space="preserve">
+    <value>tabSteps</value>
+  </data>
+  <data name="&gt;&gt;tabSteps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabSteps.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabSteps.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>894, 14</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 30</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnNext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>804, 14</value>
+  </data>
+  <data name="btnNext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 30</value>
+  </data>
+  <data name="btnNext.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnNext.Text" xml:space="preserve">
+    <value>Next &gt;</value>
+  </data>
+  <data name="&gt;&gt;btnNext.Name" xml:space="preserve">
+    <value>btnNext</value>
+  </data>
+  <data name="&gt;&gt;btnNext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnNext.Parent" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="&gt;&gt;btnNext.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnBack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>714, 14</value>
+  </data>
+  <data name="btnBack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 30</value>
+  </data>
+  <data name="btnBack.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnBack.Text" xml:space="preserve">
+    <value>&lt; Back</value>
+  </data>
+  <data name="&gt;&gt;btnBack.Name" xml:space="preserve">
+    <value>btnBack</value>
+  </data>
+  <data name="&gt;&gt;btnBack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBack.Parent" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="&gt;&gt;btnBack.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>624, 14</value>
+  </data>
+  <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 30</value>
+  </data>
+  <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Name" xml:space="preserve">
+    <value>btnHelp</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panelFooter.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="panelFooter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 533</value>
+  </data>
+  <data name="panelFooter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 58</value>
+  </data>
+  <data name="panelFooter.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.Name" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 20</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>984, 591</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Month-End Closing Wizard</value>
+  </data>
+  <data name="&gt;&gt;colChecklistKey.Name" xml:space="preserve">
+    <value>colChecklistKey</value>
+  </data>
+  <data name="&gt;&gt;colChecklistKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colChecklistItem.Name" xml:space="preserve">
+    <value>colChecklistItem</value>
+  </data>
+  <data name="&gt;&gt;colChecklistItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colChecklistPassed.Name" xml:space="preserve">
+    <value>colChecklistPassed</value>
+  </data>
+  <data name="&gt;&gt;colChecklistPassed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colChecklistStatus.Name" xml:space="preserve">
+    <value>colChecklistStatus</value>
+  </data>
+  <data name="&gt;&gt;colChecklistStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colChecklistPending.Name" xml:space="preserve">
+    <value>colChecklistPending</value>
+  </data>
+  <data name="&gt;&gt;colChecklistPending.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colFixModule.Name" xml:space="preserve">
+    <value>colFixModule</value>
+  </data>
+  <data name="&gt;&gt;colFixModule.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colFixIssues.Name" xml:space="preserve">
+    <value>colFixIssues</value>
+  </data>
+  <data name="&gt;&gt;colFixIssues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_period_close_wizard</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

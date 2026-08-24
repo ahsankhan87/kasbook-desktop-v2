@@ -117,10 +117,487 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblYearCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblYearCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 37</value>
+  </data>
+  <data name="lblYearCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="lblYearCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblYearCaption.Text" xml:space="preserve">
+    <value>Active Year: N/A</value>
+  </data>
+  <data name="&gt;&gt;lblYearCaption.Name" xml:space="preserve">
+    <value>lblYearCaption</value>
+  </data>
+  <data name="&gt;&gt;lblYearCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYearCaption.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;lblYearCaption.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 9</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 28</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Financial Period Management</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 63</value>
+  </data>
+  <data name="panelHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Name" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="toolActions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="btnOpenNewPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 24</value>
+  </data>
+  <data name="btnOpenNewPeriod.Text" xml:space="preserve">
+    <value>Open New Period</value>
+  </data>
+  <data name="btnSoftClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 24</value>
+  </data>
+  <data name="btnSoftClose.Text" xml:space="preserve">
+    <value>Soft Close Period</value>
+  </data>
+  <data name="btnHardLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 24</value>
+  </data>
+  <data name="btnHardLock.Text" xml:space="preserve">
+    <value>Hard Lock Period</value>
+  </data>
+  <data name="btnReopen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 24</value>
+  </data>
+  <data name="btnReopen.Text" xml:space="preserve">
+    <value>Reopen Period</value>
+  </data>
+  <data name="btnViewTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 24</value>
+  </data>
+  <data name="btnViewTransactions.Text" xml:space="preserve">
+    <value>View Period Transactions</value>
+  </data>
+  <data name="btnYearEndClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 24</value>
+  </data>
+  <data name="btnYearEndClose.Text" xml:space="preserve">
+    <value>Year-End Closing...</value>
+  </data>
+  <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 24</value>
+  </data>
+  <data name="btnHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="toolActions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 63</value>
+  </data>
+  <data name="toolActions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 27</value>
+  </data>
+  <data name="toolActions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolActions.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolActions.Name" xml:space="preserve">
+    <value>toolActions</value>
+  </data>
+  <data name="&gt;&gt;toolActions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolActions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolActions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="colPeriodId.HeaderText" xml:space="preserve">
+    <value>Period ID</value>
+  </data>
+  <data name="colPeriodId.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colPeriodId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="colYearId.HeaderText" xml:space="preserve">
+    <value>Year ID</value>
+  </data>
+  <data name="colYearId.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colYearId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="colFinancialYear.HeaderText" xml:space="preserve">
+    <value>Financial Year</value>
+  </data>
+  <data name="colFinancialYear.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colPeriodName.HeaderText" xml:space="preserve">
+    <value>Period Name</value>
+  </data>
+  <data name="colPeriodName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colStartDate.HeaderText" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="colStartDate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colEndDate.HeaderText" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="colEndDate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colStatusBadge.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="colStatusBadge.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colClosedBy.HeaderText" xml:space="preserve">
+    <value>Closed By</value>
+  </data>
+  <data name="colClosedBy.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colClosedAt.HeaderText" xml:space="preserve">
+    <value>Closed At</value>
+  </data>
+  <data name="colClosedAt.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colTransactionsCount.HeaderText" xml:space="preserve">
+    <value>Transactions Count</value>
+  </data>
+  <data name="colTransactionsCount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colCanReopen.HeaderText" xml:space="preserve">
+    <value>Can Reopen</value>
+  </data>
+  <data name="colCanReopen.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="gridPeriods.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridPeriods.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="gridPeriods.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="gridPeriods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1268, 555</value>
+  </data>
+  <data name="gridPeriods.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;gridPeriods.Name" xml:space="preserve">
+    <value>gridPeriods</value>
+  </data>
+  <data name="&gt;&gt;gridPeriods.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridPeriods.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="&gt;&gt;gridPeriods.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelBody.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 90</value>
+  </data>
+  <data name="panelBody.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="panelBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 571</value>
+  </data>
+  <data name="panelBody.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Name" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelBody.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="contextPeriodActions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>153, 17</value>
   </metadata>
+  <data name="ctxOpenNewPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 24</value>
+  </data>
+  <data name="ctxOpenNewPeriod.Text" xml:space="preserve">
+    <value>Open New Period</value>
+  </data>
+  <data name="ctxSoftClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 24</value>
+  </data>
+  <data name="ctxSoftClose.Text" xml:space="preserve">
+    <value>Soft Close Period</value>
+  </data>
+  <data name="ctxHardLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 24</value>
+  </data>
+  <data name="ctxHardLock.Text" xml:space="preserve">
+    <value>Hard Lock Period</value>
+  </data>
+  <data name="ctxReopen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 24</value>
+  </data>
+  <data name="ctxReopen.Text" xml:space="preserve">
+    <value>Reopen Period</value>
+  </data>
+  <data name="ctxViewTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 24</value>
+  </data>
+  <data name="ctxViewTransactions.Text" xml:space="preserve">
+    <value>View Period Transactions</value>
+  </data>
+  <data name="contextPeriodActions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 124</value>
+  </data>
+  <data name="&gt;&gt;contextPeriodActions.Name" xml:space="preserve">
+    <value>contextPeriodActions</value>
+  </data>
+  <data name="&gt;&gt;contextPeriodActions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 20</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1284, 661</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Financial Period Management</value>
+  </data>
+  <data name="&gt;&gt;btnOpenNewPeriod.Name" xml:space="preserve">
+    <value>btnOpenNewPeriod</value>
+  </data>
+  <data name="&gt;&gt;btnOpenNewPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSoftClose.Name" xml:space="preserve">
+    <value>btnSoftClose</value>
+  </data>
+  <data name="&gt;&gt;btnSoftClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnHardLock.Name" xml:space="preserve">
+    <value>btnHardLock</value>
+  </data>
+  <data name="&gt;&gt;btnHardLock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReopen.Name" xml:space="preserve">
+    <value>btnReopen</value>
+  </data>
+  <data name="&gt;&gt;btnReopen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnViewTransactions.Name" xml:space="preserve">
+    <value>btnViewTransactions</value>
+  </data>
+  <data name="&gt;&gt;btnViewTransactions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnYearEndClose.Name" xml:space="preserve">
+    <value>btnYearEndClose</value>
+  </data>
+  <data name="&gt;&gt;btnYearEndClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Name" xml:space="preserve">
+    <value>btnHelp</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colPeriodId.Name" xml:space="preserve">
+    <value>colPeriodId</value>
+  </data>
+  <data name="&gt;&gt;colPeriodId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colYearId.Name" xml:space="preserve">
+    <value>colYearId</value>
+  </data>
+  <data name="&gt;&gt;colYearId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colFinancialYear.Name" xml:space="preserve">
+    <value>colFinancialYear</value>
+  </data>
+  <data name="&gt;&gt;colFinancialYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colPeriodName.Name" xml:space="preserve">
+    <value>colPeriodName</value>
+  </data>
+  <data name="&gt;&gt;colPeriodName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colStartDate.Name" xml:space="preserve">
+    <value>colStartDate</value>
+  </data>
+  <data name="&gt;&gt;colStartDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colEndDate.Name" xml:space="preserve">
+    <value>colEndDate</value>
+  </data>
+  <data name="&gt;&gt;colEndDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colStatusBadge.Name" xml:space="preserve">
+    <value>colStatusBadge</value>
+  </data>
+  <data name="&gt;&gt;colStatusBadge.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colClosedBy.Name" xml:space="preserve">
+    <value>colClosedBy</value>
+  </data>
+  <data name="&gt;&gt;colClosedBy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colClosedAt.Name" xml:space="preserve">
+    <value>colClosedAt</value>
+  </data>
+  <data name="&gt;&gt;colClosedAt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colTransactionsCount.Name" xml:space="preserve">
+    <value>colTransactionsCount</value>
+  </data>
+  <data name="&gt;&gt;colTransactionsCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colCanReopen.Name" xml:space="preserve">
+    <value>colCanReopen</value>
+  </data>
+  <data name="&gt;&gt;colCanReopen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ctxOpenNewPeriod.Name" xml:space="preserve">
+    <value>ctxOpenNewPeriod</value>
+  </data>
+  <data name="&gt;&gt;ctxOpenNewPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ctxSoftClose.Name" xml:space="preserve">
+    <value>ctxSoftClose</value>
+  </data>
+  <data name="&gt;&gt;ctxSoftClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ctxHardLock.Name" xml:space="preserve">
+    <value>ctxHardLock</value>
+  </data>
+  <data name="&gt;&gt;ctxHardLock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ctxReopen.Name" xml:space="preserve">
+    <value>ctxReopen</value>
+  </data>
+  <data name="&gt;&gt;ctxReopen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ctxViewTransactions.Name" xml:space="preserve">
+    <value>ctxViewTransactions</value>
+  </data>
+  <data name="&gt;&gt;ctxViewTransactions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_financial_periods</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

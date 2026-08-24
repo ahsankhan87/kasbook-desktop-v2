@@ -377,22 +377,22 @@ BEGIN
 
 	DECLARE @SelectedCC TABLE
 	(
-		cc_id INT NOT NULL PRIMARY KEY,
-		cc_code VARCHAR(20) NOT NULL
+		branch_id INT NOT NULL PRIMARY KEY,
+		branch_name VARCHAR(255) NOT NULL
 	);
 
 	IF EXISTS (SELECT 1 FROM @CCIds)
 	BEGIN
-		INSERT INTO @SelectedCC(cc_id, cc_code)
-		SELECT c.cc_id, c.cc_code
-		FROM dbo.acc_cost_centers c
-		INNER JOIN @CCIds i ON i.cc_id = c.cc_id;
+		INSERT INTO @SelectedCC(branch_id, branch_name)
+		SELECT b.id, b.name
+		FROM dbo.pos_branches b
+		INNER JOIN @CCIds i ON i.cc_id = b.id;
 	END
 	ELSE
 	BEGIN
-		INSERT INTO @SelectedCC(cc_id, cc_code)
-		SELECT c.cc_id, c.cc_code
-		FROM dbo.acc_cost_centers c;
+		INSERT INTO @SelectedCC(branch_id, branch_name)
+		SELECT b.id, b.name
+		FROM dbo.pos_branches b;
 	END
 
 	DECLARE @Columns NVARCHAR(MAX) = N'';
@@ -401,9 +401,9 @@ BEGIN
 
 	SELECT @Columns = STUFF(
 		(
-			SELECT N',' + QUOTENAME(cc_code)
+			SELECT N',' + QUOTENAME(branch_name)
 			FROM @SelectedCC
-			ORDER BY cc_code
+			ORDER BY branch_name
 			FOR XML PATH(''), TYPE
 		).value('.', 'NVARCHAR(MAX)'),
 		1,
@@ -413,9 +413,9 @@ BEGIN
 
 	SELECT @ColumnsWithAlias = STUFF(
 		(
-			SELECT N',ISNULL(p.' + QUOTENAME(cc_code) + N',0) AS ' + QUOTENAME(cc_code)
+			SELECT N',ISNULL(p.' + QUOTENAME(branch_name) + N',0) AS ' + QUOTENAME(branch_name)
 			FROM @SelectedCC
-			ORDER BY cc_code
+			ORDER BY branch_name
 			FOR XML PATH(''), TYPE
 		).value('.', 'NVARCHAR(MAX)'),
 		1,
@@ -425,9 +425,9 @@ BEGIN
 
 	SELECT @GrandExpr = STUFF(
 		(
-			SELECT N' + ISNULL(p.' + QUOTENAME(cc_code) + N',0)'
+			SELECT N' + ISNULL(p.' + QUOTENAME(branch_name) + N',0)'
 			FROM @SelectedCC
-			ORDER BY cc_code
+			ORDER BY branch_name
 			FOR XML PATH(''), TYPE
 		).value('.', 'NVARCHAR(MAX)'),
 		1,
@@ -475,8 +475,8 @@ BaseBuckets AS
 	SELECT
 		E.account_id,
 		CASE
-			WHEN E.cost_center_id IS NULL THEN ''Unallocated''
-			ELSE S.cc_code
+			WHEN E.branch_id IS NULL THEN ''Unallocated''
+			ELSE S.branch_name
 		END AS bucket_name,
 		SUM(CASE
 				WHEN C.section = ''Income'' THEN ISNULL(E.credit, 0) - ISNULL(E.debit, 0)
@@ -485,16 +485,16 @@ BaseBuckets AS
 			END) AS amount
 	FROM dbo.acc_entries E
 	INNER JOIN AccountClassify C ON C.account_id = E.account_id
-	LEFT JOIN #SelectedCC S ON S.cc_id = E.cost_center_id
+	LEFT JOIN #SelectedCC S ON S.branch_id = E.branch_id
 	WHERE E.entry_date >= @FromDate
 	  AND E.entry_date < @ToExclusive
 	  AND (
-			E.cost_center_id IS NULL
-			OR EXISTS (SELECT 1 FROM #SelectedCC SC WHERE SC.cc_id = E.cost_center_id)
+			E.branch_id IS NULL
+			OR EXISTS (SELECT 1 FROM #SelectedCC SC WHERE SC.branch_id = E.branch_id)
 		  )
 	  AND C.section IN (''Income'', ''Expense'')
 	GROUP BY E.account_id,
-			 CASE WHEN E.cost_center_id IS NULL THEN ''Unallocated'' ELSE S.cc_code END
+			 CASE WHEN E.branch_id IS NULL THEN ''Unallocated'' ELSE S.branch_name END
 ),
 SingleEntity AS
 (
@@ -510,8 +510,8 @@ SingleEntity AS
 	WHERE E.entry_date >= @FromDate
 	  AND E.entry_date < @ToExclusive
 	  AND (
-			E.cost_center_id IS NULL
-			OR EXISTS (SELECT 1 FROM #SelectedCC SC WHERE SC.cc_id = E.cost_center_id)
+			E.branch_id IS NULL
+			OR EXISTS (SELECT 1 FROM #SelectedCC SC WHERE SC.branch_id = E.branch_id)
 		  )
 	  AND C.section IN (''Income'', ''Expense'')
 	GROUP BY E.account_id
@@ -555,12 +555,12 @@ FROM
 
 	CREATE TABLE #SelectedCC
 	(
-		cc_id INT NOT NULL PRIMARY KEY,
-		cc_code VARCHAR(20) NOT NULL
+		branch_id INT NOT NULL PRIMARY KEY,
+		branch_name VARCHAR(255) NOT NULL
 	);
 
-	INSERT INTO #SelectedCC(cc_id, cc_code)
-	SELECT cc_id, cc_code
+	INSERT INTO #SelectedCC(branch_id, branch_name)
+	SELECT branch_id, branch_name
 	FROM @SelectedCC;
 
 	EXEC sp_executesql

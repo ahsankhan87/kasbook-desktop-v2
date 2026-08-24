@@ -117,58 +117,370 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btn_close.Text" xml:space="preserve">
-    <value>قريب</value>
-  </data>
-  <data name="btn_print.Text" xml:space="preserve">
-    <value>مطبعة</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>حتي اليوم:
-</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>من التاريخ:
-</value>
-  </data>
-  <data name="account_name.HeaderText" xml:space="preserve">
-    <value>الحساب</value>
-  </data>
-  <data name="name_2.HeaderText" xml:space="preserve">
-    <value>الاسم 2
-</value>
-  </data>
-  <data name="debit.HeaderText" xml:space="preserve">
-    <value>Dabit/ 
-مدين</value>
-  </data>
-  <data name="credit.HeaderText" xml:space="preserve">
-    <value>Credit/تنسب إليه</value>
-  </data>
-  <data name="balance.HeaderText" xml:space="preserve">
-    <value>الرصيد
-</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="_splitContainer.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="_splitContainer.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_tree.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_toolStrip.Text" xml:space="preserve">
+    <value>شريط الأدوات</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="_btnAddGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 24</value>
+  </data>
+  <data name="_btnAddGroup.Text" xml:space="preserve">
+    <value>إضافة مجموعة</value>
+  </data>
+  <data name="_btnAddAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 24</value>
+  </data>
+  <data name="_btnAddAccount.Text" xml:space="preserve">
+    <value>إضافة حساب</value>
+  </data>
+  <data name="_searchLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 24</value>
+  </data>
+  <data name="_searchLabel.Text" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="_btnExpandAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 24</value>
+  </data>
+  <data name="_btnExpandAll.Text" xml:space="preserve">
+    <value>توسيع الجميع</value>
+  </data>
+  <data name="_btnCollapseAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 24</value>
+  </data>
+  <data name="_btnCollapseAll.Text" xml:space="preserve">
+    <value>طي الجميع</value>
+  </data>
+  <data name="_btnPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 24</value>
+  </data>
+  <data name="_btnPrint.Text" xml:space="preserve">
+    <value>طباعة جدول الحسابات</value>
+  </data>
+  <data name="_btnSetupStandard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 24</value>
+  </data>
+  <data name="_btnSetupStandard.Text" xml:space="preserve">
+    <value>إعداد جدول حسابات قياسي</value>
+  </data>
+  <data name="_groupTab.Text" xml:space="preserve">
+    <value>تفاصيل المجموعة</value>
+  </data>
+  <data name="_groupLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>928, 255</value>
+  </data>
+  <data name="_lblGroupCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 0</value>
+  </data>
+  <data name="_lblGroupCode.Text" xml:space="preserve">
+    <value>رمز المجموعة</value>
+  </data>
+  <data name="_txtGroupCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="_lblGroupName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 33</value>
+  </data>
+  <data name="_lblGroupName.Text" xml:space="preserve">
+    <value>اسم المجموعة</value>
+  </data>
+  <data name="_txtGroupName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="_lblGroupParent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 66</value>
+  </data>
+  <data name="_lblGroupParent.Text" xml:space="preserve">
+    <value>مجموعة أب</value>
+  </data>
+  <data name="_cmbGroupParent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 69</value>
+  </data>
+  <data name="_lblGroupType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 100</value>
+  </data>
+  <data name="_lblGroupType.Text" xml:space="preserve">
+    <value>نوع المجموعة</value>
+  </data>
+  <data name="_cmbGroupType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 103</value>
+  </data>
+  <data name="_lblGroupDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 134</value>
+  </data>
+  <data name="_lblGroupDescription.Text" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="_txtGroupDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 137</value>
+  </data>
+  <data name="_lblGroupStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 207</value>
+  </data>
+  <data name="_lblGroupStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 48</value>
+  </data>
+  <data name="_lblGroupStatus.Text" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="_chkGroupActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 210</value>
+  </data>
+  <data name="_chkGroupActive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 24</value>
+  </data>
+  <data name="_chkGroupActive.Text" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="_accountTab.Text" xml:space="preserve">
+    <value>تفاصيل الحساب</value>
+  </data>
+  <data name="_bankGroup.Text" xml:space="preserve">
+    <value>علامات البنك / النقد</value>
+  </data>
+  <data name="_chkIsCashAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 24</value>
+  </data>
+  <data name="_chkIsCashAccount.Text" xml:space="preserve">
+    <value>حساب نقد</value>
+  </data>
+  <data name="_chkIsBankAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 24</value>
+  </data>
+  <data name="_chkIsBankAccount.Text" xml:space="preserve">
+    <value>حساب بنكي</value>
+  </data>
+  <data name="_lblAccountCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 0</value>
+  </data>
+  <data name="_lblAccountCode.Text" xml:space="preserve">
+    <value>رمز الحساب</value>
+  </data>
+  <data name="_txtAccountCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="_lblAccountName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 33</value>
+  </data>
+  <data name="_lblAccountName.Text" xml:space="preserve">
+    <value>اسم الحساب</value>
+  </data>
+  <data name="_txtAccountName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="_lblAccountParent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 66</value>
+  </data>
+  <data name="_lblAccountParent.Text" xml:space="preserve">
+    <value>المجموعة الأب</value>
+  </data>
+  <data name="_cmbAccountParent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 69</value>
+  </data>
+  <data name="_lblAccountType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 100</value>
+  </data>
+  <data name="_lblAccountType.Text" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="_cmbAccountType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 103</value>
+  </data>
+  <data name="_lblOpeningDebit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 134</value>
+  </data>
+  <data name="_lblOpeningDebit.Text" xml:space="preserve">
+    <value>رصيد افتتاحي مدين</value>
+  </data>
+  <data name="_txtOpeningDebit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 137</value>
+  </data>
+  <data name="_lblOpeningCredit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 167</value>
+  </data>
+  <data name="_lblOpeningCredit.Text" xml:space="preserve">
+    <value>رصيد افتتاحي دائن</value>
+  </data>
+  <data name="_txtOpeningCredit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 170</value>
+  </data>
+  <data name="_lblOpeningDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 200</value>
+  </data>
+  <data name="_lblOpeningDate.Text" xml:space="preserve">
+    <value>تاريخ الفتح</value>
+  </data>
+  <data name="_dtpOpeningBalanceDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 203</value>
+  </data>
+  <data name="_lblAccountDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 233</value>
+  </data>
+  <data name="_lblAccountDescription.Text" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="_txtAccountDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 236</value>
+  </data>
+  <data name="_lblAccountStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 306</value>
+  </data>
+  <data name="_lblAccountStatus.Text" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="_chkAccountActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 309</value>
+  </data>
+  <data name="_chkAccountActive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 24</value>
+  </data>
+  <data name="_chkAccountActive.Text" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="_btnEditSelected.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 11</value>
+  </data>
+  <data name="_btnEditSelected.Text" xml:space="preserve">
+    <value>تحرير المحدد</value>
+  </data>
+  <data name="_btnRefresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 11</value>
+  </data>
+  <data name="_btnRefresh.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="_btnViewLedger.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 11</value>
+  </data>
+  <data name="_btnViewLedger.Text" xml:space="preserve">
+    <value>عرض الدفتر</value>
+  </data>
+  <data name="_btnViewTransactions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>333, 11</value>
+  </data>
+  <data name="_btnViewTransactions.Text" xml:space="preserve">
+    <value>عرض العمليات</value>
+  </data>
+  <data name="_btnNewAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>483, 11</value>
+  </data>
+  <data name="_btnNewAccount.Text" xml:space="preserve">
+    <value>حساب جديد</value>
+  </data>
+  <data name="_btnNewGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>608, 11</value>
+  </data>
+  <data name="_btnNewGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="_btnNewGroup.Text" xml:space="preserve">
+    <value>مجموعة جديدة</value>
+  </data>
+  <data name="btn_codes_maintenance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>729, 11</value>
+  </data>
+  <data name="btn_codes_maintenance.Text" xml:space="preserve">
+    <value>صيانة الرموز</value>
+  </data>
+  <data name="_summaryGroup.Text" xml:space="preserve">
+    <value>ملخص الاختيار</value>
+  </data>
+  <data name="_summaryNodeTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>741, 0</value>
+  </data>
+  <data name="_summaryNodeTypeLabel.Text" xml:space="preserve">
+    <value>نوع العقدة</value>
+  </data>
+  <data name="_summaryNodeType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>465, 3</value>
+  </data>
+  <data name="_summaryCodeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 0</value>
+  </data>
+  <data name="_summaryCodeLabel.Text" xml:space="preserve">
+    <value>الرمز</value>
+  </data>
+  <data name="_summaryCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="_summaryNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>741, 42</value>
+  </data>
+  <data name="_summaryNameLabel.Text" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="_summaryName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>465, 45</value>
+  </data>
+  <data name="_lblSummaryDebit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 42</value>
+  </data>
+  <data name="_lblSummaryDebit.Text" xml:space="preserve">
+    <value>مدين</value>
+  </data>
+  <data name="_summaryDebit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 45</value>
+  </data>
+  <data name="_lblSummaryCredit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>741, 84</value>
+  </data>
+  <data name="_lblSummaryCredit.Text" xml:space="preserve">
+    <value>دائن</value>
+  </data>
+  <data name="_summaryCredit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>465, 87</value>
+  </data>
+  <data name="_lblSummaryBalanceMeta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 84</value>
+  </data>
+  <data name="_lblSummaryBalanceMeta.Text" xml:space="preserve">
+    <value>الرصيد / آخر عملية / العدد</value>
+  </data>
+  <data name="_summaryCompositePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 87</value>
+  </data>
+  <data name="_subtitleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="_subtitleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>36, 42</value>
+  </data>
+  <data name="_subtitleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 20</value>
+  </data>
+  <data name="_subtitleLabel.Text" xml:space="preserve">
+    <value>حدد عقدة لعرض التفاصيل وملخصات الرصيد والإجراءات السريعة.</value>
+  </data>
+  <data name="_titleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="_titleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 8</value>
+  </data>
+  <data name="_titleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 32</value>
+  </data>
+  <data name="_titleLabel.Text" xml:space="preserve">
+    <value>مدير جدول الحسابات</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>جدول الحسابات
-</value>
+    <value>جدول الحسابات</value>
   </data>
 </root>

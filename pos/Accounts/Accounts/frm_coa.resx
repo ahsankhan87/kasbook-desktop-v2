@@ -738,6 +738,36 @@
   <data name="&gt;&gt;_txtBankAccountNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="_chkIsCashAccount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_chkIsCashAccount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="_chkIsCashAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 160</value>
+  </data>
+  <data name="_chkIsCashAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 24</value>
+  </data>
+  <data name="_chkIsCashAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="_chkIsCashAccount.Text" xml:space="preserve">
+    <value>Cash Account</value>
+  </data>
+  <data name="&gt;&gt;_chkIsCashAccount.Name" xml:space="preserve">
+    <value>_chkIsCashAccount</value>
+  </data>
+  <data name="&gt;&gt;_chkIsCashAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_chkIsCashAccount.Parent" xml:space="preserve">
+    <value>_bankGroup</value>
+  </data>
+  <data name="&gt;&gt;_chkIsCashAccount.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="_txtBankBranch.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 61</value>
   </data>
@@ -757,7 +787,37 @@
     <value>_bankGroup</value>
   </data>
   <data name="&gt;&gt;_txtBankBranch.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="_chkIsBankAccount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_chkIsBankAccount.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="_chkIsBankAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 160</value>
+  </data>
+  <data name="_chkIsBankAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
+  </data>
+  <data name="_chkIsBankAccount.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="_chkIsBankAccount.Text" xml:space="preserve">
+    <value>Bank Account</value>
+  </data>
+  <data name="&gt;&gt;_chkIsBankAccount.Name" xml:space="preserve">
+    <value>_chkIsBankAccount</value>
+  </data>
+  <data name="&gt;&gt;_chkIsBankAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_chkIsBankAccount.Parent" xml:space="preserve">
+    <value>_bankGroup</value>
+  </data>
+  <data name="&gt;&gt;_chkIsBankAccount.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="_txtBankName.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 28</value>
@@ -778,19 +838,19 @@
     <value>_bankGroup</value>
   </data>
   <data name="&gt;&gt;_txtBankName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="_bankGroup.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="_bankGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 465</value>
+    <value>3, 352</value>
   </data>
   <data name="_bankGroup.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 10, 10, 10</value>
   </data>
   <data name="_bankGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>928, 150</value>
+    <value>928, 195</value>
   </data>
   <data name="_bankGroup.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1297,7 +1357,7 @@
     <value>0, 8, 0, 0</value>
   </data>
   <data name="_lblAccountStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 156</value>
+    <value>164, 43</value>
   </data>
   <data name="_lblAccountStatus.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1357,7 +1417,7 @@
     <value>9</value>
   </data>
   <data name="_accountLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>928, 462</value>
+    <value>928, 349</value>
   </data>
   <data name="_accountLayout.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1376,66 +1436,6 @@
   </data>
   <data name="_accountLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_lblAccountCode" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtAccountCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblAccountName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtAccountName" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblAccountParent" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_cmbAccountParent" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblAccountType" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_cmbAccountType" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblOpeningDebit" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtOpeningDebit" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblOpeningCredit" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtOpeningCredit" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblOpeningDate" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_dtpOpeningBalanceDate" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblAccountDescription" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtAccountDescription" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_lblAccountStatus" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_chkAccountActive" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,170,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="_chkIsCashAccount.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_chkIsCashAccount.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="_chkIsCashAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 471</value>
-  </data>
-  <data name="_chkIsCashAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 24</value>
-  </data>
-  <data name="_chkIsCashAccount.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="_chkIsCashAccount.Text" xml:space="preserve">
-    <value>Cash Account</value>
-  </data>
-  <data name="&gt;&gt;_chkIsCashAccount.Name" xml:space="preserve">
-    <value>_chkIsCashAccount</value>
-  </data>
-  <data name="&gt;&gt;_chkIsCashAccount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_chkIsCashAccount.Parent" xml:space="preserve">
-    <value>_accountTab</value>
-  </data>
-  <data name="&gt;&gt;_chkIsCashAccount.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="_chkIsBankAccount.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_chkIsBankAccount.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="_chkIsBankAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 471</value>
-  </data>
-  <data name="_chkIsBankAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
-  </data>
-  <data name="_chkIsBankAccount.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="_chkIsBankAccount.Text" xml:space="preserve">
-    <value>Bank Account</value>
-  </data>
-  <data name="&gt;&gt;_chkIsBankAccount.Name" xml:space="preserve">
-    <value>_chkIsBankAccount</value>
-  </data>
-  <data name="&gt;&gt;_chkIsBankAccount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_chkIsBankAccount.Parent" xml:space="preserve">
-    <value>_accountTab</value>
-  </data>
-  <data name="&gt;&gt;_chkIsBankAccount.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="_accountTab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
@@ -2131,7 +2131,7 @@
     <value>True</value>
   </data>
   <data name="_subtitleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 42</value>
+    <value>20, 38</value>
   </data>
   <data name="_subtitleLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>432, 20</value>
@@ -2161,7 +2161,7 @@
     <value>Segoe UI Semibold, 14pt, style=Bold</value>
   </data>
   <data name="_titleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 12</value>
+    <value>19, 8</value>
   </data>
   <data name="_titleLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>315, 32</value>

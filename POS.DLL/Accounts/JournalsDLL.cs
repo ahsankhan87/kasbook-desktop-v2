@@ -412,25 +412,26 @@ namespace POS.DLL
             {
                 cn.Open();
                 using (SqlCommand command = new SqlCommand(@"
-SELECT E.id,
-       E.account_id,
-       ISNULL(A.code,'') AS AccountCode,
-       ISNULL(A.name,'') AS AccountName,
-       ISNULL(A.code,'') + CASE WHEN ISNULL(A.name,'') <> '' THEN ' - ' + ISNULL(A.name,'') ELSE '' END AS AccountDisplay,
-       ISNULL(E.description,'') AS Description,
-       ISNULL(E.debit,0) AS Debit,
-       ISNULL(E.credit,0) AS Credit,
-       ISNULL(E.cost_center_id, 0) AS cost_center_id,
-       ISNULL(E.ref_module, '') AS ref_module,
-       ISNULL(E.ref_id, 0) AS ref_id,
-       ISNULL(E.customer_id, 0) AS customer_id,
-       ISNULL(E.supplier_id, 0) AS supplier_id,
-       ISNULL(E.bank_id, 0) AS bank_id
-FROM acc_entries E
-LEFT JOIN acc_accounts A ON A.id = E.account_id
-WHERE E.invoice_no = @invoice_no
-  AND E.branch_id = @branch_id
-ORDER BY E.id;", cn))
+                    SELECT E.id,
+                           E.account_id,
+                           ISNULL(A.code,'') AS AccountCode,
+                           ISNULL(A.name,'') AS AccountName,
+                           ISNULL(A.name_2,'') AS AccountName_2,
+                           ISNULL(A.code,'') + CASE WHEN ISNULL(A.name,'') <> '' THEN ' - ' + ISNULL(A.name,'') ELSE '' END AS AccountDisplay,
+                           ISNULL(E.description,'') AS Description,
+                           ISNULL(E.debit,0) AS Debit,
+                           ISNULL(E.credit,0) AS Credit,
+                           ISNULL(E.cost_center_id, 0) AS cost_center_id,
+                           ISNULL(E.ref_module, '') AS ref_module,
+                           ISNULL(E.ref_id, 0) AS ref_id,
+                           ISNULL(E.customer_id, 0) AS customer_id,
+                           ISNULL(E.supplier_id, 0) AS supplier_id,
+                           ISNULL(E.bank_id, 0) AS bank_id
+                    FROM acc_entries E
+                    LEFT JOIN acc_accounts A ON A.id = E.account_id
+                    WHERE E.invoice_no = @invoice_no
+                      AND E.branch_id = @branch_id
+                    ORDER BY E.id;", cn))
                 {
                     command.Parameters.AddWithValue("@invoice_no", invoiceNo);
                     command.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);

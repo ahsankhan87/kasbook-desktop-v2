@@ -528,7 +528,7 @@ namespace pos
         {
             if (!ShouldIncludeGroup(group.Id, filter)) return;
 
-            var node = new TreeNode(BuildNodeText(group.Code, group.Name))
+            var node = new TreeNode(BuildNodeText(group.Code, group.Name, group.Name2))
             {
                 ImageKey = GetGroupImageKey(group.Name, level),
                 SelectedImageKey = GetGroupImageKey(group.Name, level),
@@ -590,15 +590,28 @@ namespace pos
             return Contains(account.Code, filter) || Contains(account.Name, filter) || Contains(account.Name2, filter);
         }
 
-        private string BuildNodeText(string code, string name)
+        private string GetDisplayName(string nameEn, string nameAr)
         {
-            if (string.IsNullOrWhiteSpace(code)) return name;
-            return code + " — " + name;
+            // Use Arabic name (name_2) if current language is Arabic and name is available
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+            if (isArabic && !string.IsNullOrWhiteSpace(nameAr))
+            {
+                return nameAr;
+            }
+            return nameEn; // Fallback to English or default name
+        }
+
+        private string BuildNodeText(string code, string name, string name2 = null)
+        {
+            var displayName = GetDisplayName(name, name2);
+            if (string.IsNullOrWhiteSpace(code)) return displayName;
+            return code + " — " + displayName;
         }
 
         private string BuildLeafText(CoaAccountInfo account)
         {
-            return string.Format("{0} — {1} ({2})", account.Code, account.Name, FormatBalanceSide(account.Aggregate.Balance));
+            var displayName = GetDisplayName(account.Name, account.Name2);
+            return string.Format("{0} — {1} ({2})", account.Code, displayName, FormatBalanceSide(account.Aggregate.Balance));
         }
 
         private string FormatBalanceSide(double value)
@@ -706,7 +719,7 @@ namespace pos
             _summaryTxnCount.Text = aggregate.TransactionCount.ToString("N0");
 
             _txtGroupCode.Text = group.Code;
-            _txtGroupName.Text = group.Name;
+            _txtGroupName.Text = GetDisplayName(group.Name, group.Name2);
             _cmbGroupParent.SelectedValue = group.ParentId;
             _cmbGroupType.SelectedValue = group.AccountTypeId;
             _txtGroupDescription.Text = group.Description;
@@ -719,7 +732,7 @@ namespace pos
         {
             _summaryNodeType.Text = "Level 3 Account";
             _summaryCode.Text = account.Code;
-            _summaryName.Text = account.Name;
+            _summaryName.Text = GetDisplayName(account.Name, account.Name2);
             _summaryDebit.Text = aggregate.Debit.ToString("N0");
             _summaryCredit.Text = aggregate.Credit.ToString("N0");
             _summaryBalance.Text = FormatBalanceSide(aggregate.Balance);
@@ -727,7 +740,7 @@ namespace pos
             _summaryTxnCount.Text = aggregate.TransactionCount.ToString("N0");
 
             _txtAccountCode.Text = account.Code;
-            _txtAccountName.Text = account.Name;
+            _txtAccountName.Text = GetDisplayName(account.Name, account.Name2);
             _cmbAccountParent.SelectedValue = account.GroupId;
             _cmbAccountType.SelectedValue = GetAccountTypeIdForGroup(account.GroupId);
             _txtOpeningDebit.Text = account.OpeningDebit.ToString("N0");

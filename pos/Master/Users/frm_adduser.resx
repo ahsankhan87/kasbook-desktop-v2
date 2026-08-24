@@ -150,9 +150,6 @@
   <data name="&gt;&gt;label21.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;btn_pwd_change.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 359</value>
   </data>
@@ -171,8 +168,8 @@
   <data name="txt_cash_purchase_amt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="lbl_pwd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 353</value>
   </data>
   <data name="chk_accounts.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -189,11 +186,11 @@
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 353</value>
-  </data>
   <data name="txt_cash_sales_amt.Location" type="System.Drawing.Point, System.Drawing">
     <value>205, 31</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -219,14 +216,17 @@
   <data name="txt_id.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
+  <data name="&gt;&gt;cmb_branches.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="checkedListBox_Master.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 270</value>
   </data>
   <data name="&gt;&gt;cmb_user_role.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;checkedListBox_Reports.Parent" xml:space="preserve">
+    <value>groupBox5</value>
   </data>
   <data name="checkedListBox_HR.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -309,6 +309,9 @@
   <data name="&gt;&gt;txt_commission_percent.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="txt_credit_purchase_amt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="invoice_no.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -384,14 +387,14 @@
   <data name="&gt;&gt;txt_cash_sales_amt.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>user_detail_tab</value>
   </data>
   <data name="&gt;&gt;btn_cancel.Name" xml:space="preserve">
     <value>btn_cancel</value>
   </data>
-  <data name="&gt;&gt;txt_credit_purchase_amt.Name" xml:space="preserve">
-    <value>txt_credit_purchase_amt</value>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>module_permission_tab</value>
   </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
@@ -405,14 +408,8 @@
   <data name="&gt;&gt;checkedListBox_Master.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>user_detail_tab</value>
-  </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
   </data>
   <data name="&gt;&gt;txt_username.Name" xml:space="preserve">
     <value>txt_username</value>
@@ -420,8 +417,8 @@
   <data name="btn_save.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="checkedListBox_Services.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 54</value>
+  <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chk_pos.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 21</value>
@@ -465,6 +462,9 @@
   <data name="chk_reports.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 21</value>
   </data>
+  <data name="txt_id.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 24</value>
+  </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
@@ -492,8 +492,8 @@
   <data name="cmb_lang.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>module_permission_tab</value>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -528,11 +528,8 @@
   <data name="&gt;&gt;txt_max_discount_percent.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="checkedListBox_Services.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 54</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -563,9 +560,6 @@
   </data>
   <data name="checkedListBox_Accounts.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 53</value>
-  </data>
-  <data name="groupBox6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_confirm_pwd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -633,6 +627,9 @@
   <data name="&gt;&gt;btn_update.Name" xml:space="preserve">
     <value>btn_update</value>
   </data>
+  <data name="checkedListBox_POS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 270</value>
+  </data>
   <data name="&gt;&gt;user_commission.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -654,20 +651,17 @@
   <data name="grid_commission.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="groupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 61</value>
   </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>user_detail_tab</value>
   </data>
-  <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
   <data name="checkedListBox_Services.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 270</value>
-  </data>
-  <data name="&gt;&gt;chk_hr.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;entry_date.Name" xml:space="preserve">
     <value>entry_date</value>
@@ -693,8 +687,8 @@
   <data name="btn_main_refresh.Text" xml:space="preserve">
     <value>Refresh (F5)</value>
   </data>
-  <data name="lbl_cpwd.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;chk_hr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -705,11 +699,14 @@
   <data name="&gt;&gt;lbl_cpwd.Name" xml:space="preserve">
     <value>lbl_cpwd</value>
   </data>
+  <data name="panel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;btn_main_refresh.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -719,6 +716,9 @@
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Full Name:</value>
+  </data>
+  <data name="&gt;&gt;chk_services.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_main_refresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 28</value>
@@ -732,8 +732,8 @@
   <data name="label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 33</value>
+  <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="txt_credit_sales_amt.Location" type="System.Drawing.Point, System.Drawing">
     <value>222, 224</value>
@@ -759,6 +759,9 @@
   <data name="chk_accounts.Text" xml:space="preserve">
     <value>All</value>
   </data>
+  <data name="label13.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -780,26 +783,17 @@
   <data name="txt_credit_sales_amt.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="btn_main_refresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
+  </data>
+  <data name="checkedListBox_Master.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="txt_credit_sales_amt.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
   </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 294</value>
-  </data>
   <data name="groupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
-  </data>
-  <data name="lbl_pwd.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;checkedListBox_Reports.Name" xml:space="preserve">
     <value>checkedListBox_Reports</value>
@@ -813,11 +807,11 @@
   <data name="&gt;&gt;lbl_cpwd.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>user_rights_tab</value>
-  </data>
   <data name="btn_payment.Text" xml:space="preserve">
     <value>Payment</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox_Reports.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -855,9 +849,6 @@
   <data name="credit.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -869,6 +860,12 @@
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="chk_services.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 30</value>
+  </data>
+  <data name="&gt;&gt;txt_cash_sales_amt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chk_reports.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -918,8 +915,8 @@
   <data name="txt_credit_purchase_amt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="txt_id.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 24</value>
+  <data name="&gt;&gt;txt_max_discount_amount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -942,11 +939,11 @@
   <data name="btn_blank.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
   </data>
-  <data name="btn_main_refresh.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="groupBox9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
+  </data>
+  <data name="txt_password.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>924, 60</value>
@@ -986,9 +983,6 @@
   </data>
   <data name="groupBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
-  </data>
-  <data name="btn_save.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8pt</value>
   </data>
   <data name="&gt;&gt;module_permission_tab.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -1032,8 +1026,8 @@
   <data name="&gt;&gt;checkedListBox_POS.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="panel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 46</value>
   </data>
   <data name="&gt;&gt;txt_confirm_pwd.Name" xml:space="preserve">
     <value>txt_confirm_pwd</value>
@@ -1047,6 +1041,9 @@
   <data name="&gt;&gt;checkedListBox_HR.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
   <data name="&gt;&gt;debit.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1059,6 +1056,9 @@
   <data name="&gt;&gt;txt_commission_percent.Name" xml:space="preserve">
     <value>txt_commission_percent</value>
   </data>
+  <data name="btn_pwd_change.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="label21.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
   </data>
@@ -1068,8 +1068,8 @@
   <data name="&gt;&gt;txt_password.Name" xml:space="preserve">
     <value>txt_password</value>
   </data>
-  <data name="user_commission.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chk_allow_credit_purchase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1088,9 +1088,6 @@
   </data>
   <data name="btn_payment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
-  </data>
-  <data name="&gt;&gt;user_commission.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 137</value>
@@ -1112,6 +1109,9 @@
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;btn_cancel.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -1158,9 +1158,6 @@
   <data name="&gt;&gt;checkedListBox_Accounts.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cmb_user_role.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="groupBox4.Text" xml:space="preserve">
     <value>Accounts</value>
   </data>
@@ -1179,11 +1176,14 @@
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <data name="lbl_pwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 75</value>
+  </data>
   <data name="user_detail_tab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
+  <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 28</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1254,20 +1254,26 @@
   <data name="lbl_pwd.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
   </data>
-  <data name="checkedListBox_Master.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="lbl_cpwd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>342, 17</value>
   </data>
-  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 359</value>
+  </data>
+  <data name="lbl_pwd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
-  <data name="module_permission_tab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="user_commission.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
   </data>
   <data name="&gt;&gt;chk_master.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1302,9 +1308,6 @@
   <data name="&gt;&gt;btn_save.Parent" xml:space="preserve">
     <value>groupBox9</value>
   </data>
-  <data name="btn_refresh.Text" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
   <data name="cmb_user_role.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 164</value>
   </data>
@@ -1325,6 +1328,12 @@
   </data>
   <data name="&gt;&gt;chk_allow_credit_sales.Parent" xml:space="preserve">
     <value>groupBox1</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Credit Purchase Amount Limit:</value>
+  </data>
+  <data name="btn_pwd_change.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 185</value>
   </data>
   <data name="&gt;&gt;chk_reports.Name" xml:space="preserve">
     <value>chk_reports</value>
@@ -1371,6 +1380,9 @@
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lbl_name.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1398,17 +1410,11 @@
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>Invoice No.</value>
   </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
     <value>groupBox8</value>
   </data>
   <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
     <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;btn_update.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_pwd.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1425,6 +1431,9 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 60</value>
   </data>
@@ -1434,8 +1443,8 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Sales Commission %</value>
   </data>
-  <data name="&gt;&gt;btn_pwd_change.Name" xml:space="preserve">
-    <value>btn_pwd_change</value>
+  <data name="module_permission_tab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="chk_allow_credit_sales.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1461,9 +1470,6 @@
   <data name="btn_save.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 28</value>
   </data>
-  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;grid_commission.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -1485,8 +1491,8 @@
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkedListBox_Reports.Parent" xml:space="preserve">
-    <value>groupBox5</value>
+  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="chk_allow_credit_sales.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 17</value>
@@ -1515,6 +1521,9 @@
   <data name="&gt;&gt;txt_cash_purchase_amt.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;label21.Name" xml:space="preserve">
+    <value>label21</value>
+  </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -1536,6 +1545,9 @@
   <data name="&gt;&gt;txt_password.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="lbl_cpwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 17</value>
+  </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -1548,9 +1560,6 @@
   <data name="checkedListBox_Services.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
-  <data name="chk_allow_credit_sales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 61</value>
-  </data>
   <data name="&gt;&gt;entry_date.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1562,9 +1571,6 @@
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 28</value>
-  </data>
-  <data name="chk_hr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;cmb_user_role.Parent" xml:space="preserve">
     <value>user_detail_tab</value>
@@ -1590,9 +1596,6 @@
   <data name="&gt;&gt;chk_allow_credit_sales.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
   <data name="&gt;&gt;txt_cash_sales_amt.Name" xml:space="preserve">
     <value>txt_cash_sales_amt</value>
   </data>
@@ -1602,17 +1605,11 @@
   <data name="&gt;&gt;lbl_cpwd.Parent" xml:space="preserve">
     <value>user_detail_tab</value>
   </data>
-  <data name="user_rights_tab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>916, 422</value>
-  </data>
   <data name="&gt;&gt;cmb_branches.Name" xml:space="preserve">
     <value>cmb_branches</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Allow Credit Sales:</value>
-  </data>
-  <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;btn_update.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -1629,9 +1626,6 @@
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -1643,6 +1637,9 @@
   </data>
   <data name="&gt;&gt;checkedListBox_Services.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>App Language</value>
@@ -1698,8 +1695,8 @@
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
     <value>user_detail_tab</value>
   </data>
-  <data name="&gt;&gt;chk_services.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1731,8 +1728,8 @@
   <data name="lbl_name.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 22</value>
   </data>
-  <data name="description.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;btn_main_refresh.Parent" xml:space="preserve">
+    <value>groupBox9</value>
   </data>
   <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -1751,9 +1748,6 @@
   </data>
   <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;chk_allow_credit_purchase.Name" xml:space="preserve">
     <value>chk_allow_credit_purchase</value>
@@ -1851,6 +1845,9 @@
   <data name="&gt;&gt;label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 33</value>
+  </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 85</value>
   </data>
@@ -1863,8 +1860,8 @@
   <data name="&gt;&gt;txt_username.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;chk_hr.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="groupBox7.Text" xml:space="preserve">
     <value>Services</value>
@@ -1872,17 +1869,11 @@
   <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="&gt;&gt;txt_max_discount_amount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>783, 15</value>
   </data>
   <data name="chk_services.Text" xml:space="preserve">
     <value>All</value>
-  </data>
-  <data name="&gt;&gt;chk_hr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label15.Text" xml:space="preserve">
     <value>Max discount percent %:</value>
@@ -1893,8 +1884,8 @@
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 17</value>
   </data>
-  <data name="checkedListBox_POS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 270</value>
+  <data name="btn_refresh.Text" xml:space="preserve">
+    <value>Refresh</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -1914,8 +1905,8 @@
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;cmb_branches.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1060, 511</value>
@@ -1923,14 +1914,20 @@
   <data name="txt_cash_purchase_amt.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 28</value>
   </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 17</value>
+  </data>
   <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="description.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 28</value>
   </data>
   <data name="txt_username.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 24</value>
@@ -1940,6 +1937,9 @@
   </data>
   <data name="&gt;&gt;txt_max_discount_amount.Name" xml:space="preserve">
     <value>txt_max_discount_amount</value>
+  </data>
+  <data name="btn_cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 294</value>
   </data>
   <data name="lbl_name.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1953,23 +1953,14 @@
   <data name="lbl_cpwd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
   <data name="&gt;&gt;checkedListBox_Services.Parent" xml:space="preserve">
     <value>groupBox7</value>
-  </data>
-  <data name="groupBox8.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="groupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
-  </data>
-  <data name="&gt;&gt;btn_main_refresh.Parent" xml:space="preserve">
-    <value>groupBox9</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1980,8 +1971,8 @@
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 46</value>
+  <data name="chk_hr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
     <value>Search</value>
@@ -1992,14 +1983,17 @@
   <data name="&gt;&gt;chk_accounts.Name" xml:space="preserve">
     <value>chk_accounts</value>
   </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
   <data name="btn_blank.Text" xml:space="preserve">
     <value>Blank All</value>
   </data>
   <data name="cmb_lang.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 24</value>
   </data>
-  <data name="&gt;&gt;checkedListBox_Reports.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="btn_cancel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
@@ -2016,11 +2010,17 @@
   <data name="groupBox5.Text" xml:space="preserve">
     <value>Reports</value>
   </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="label13.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="label13.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Sales</value>
+  </data>
+  <data name="&gt;&gt;btn_cancel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2034,14 +2034,11 @@
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 167</value>
   </data>
-  <data name="txt_password.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
   </data>
   <data name="chk_services.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -2052,8 +2049,8 @@
   <data name="&gt;&gt;btn_payment.Parent" xml:space="preserve">
     <value>user_commission</value>
   </data>
-  <data name="chk_services.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 30</value>
+  <data name="lbl_pwd.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -2088,14 +2085,11 @@
   <data name="&gt;&gt;label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txt_cash_sales_amt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="&gt;&gt;cmb_branches.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btn_pwd_change.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 42</value>
   </data>
   <data name="btn_update.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
@@ -2112,6 +2106,9 @@
   <data name="groupBox7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="grid_commission.Size" type="System.Drawing.Size, System.Drawing">
     <value>934, 370</value>
   </data>
@@ -2124,11 +2121,11 @@
   <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="lbl_pwd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 75</value>
+  <data name="&gt;&gt;user_commission.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="txt_credit_purchase_amt.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="cmb_user_role.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;chk_accounts.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2169,8 +2166,8 @@
   <data name="txt_password.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 24</value>
   </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label13.Name" xml:space="preserve">
     <value>label13</value>
@@ -2184,8 +2181,8 @@
   <data name="grid_commission.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 17</value>
+  <data name="user_rights_tab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>916, 422</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2196,8 +2193,8 @@
   <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 359</value>
+  <data name="&gt;&gt;txt_credit_purchase_amt.Name" xml:space="preserve">
+    <value>txt_credit_purchase_amt</value>
   </data>
   <data name="&gt;&gt;txt_confirm_pwd.Parent" xml:space="preserve">
     <value>user_detail_tab</value>
@@ -2223,8 +2220,8 @@
   <data name="&gt;&gt;module_permission_tab.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="&gt;&gt;btn_update.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2253,8 +2250,8 @@
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 17</value>
   </data>
-  <data name="lbl_cpwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 17</value>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="user_commission.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2304,8 +2301,8 @@
   <data name="&gt;&gt;txt_max_discount_amount.Parent" xml:space="preserve">
     <value>user_rights_tab</value>
   </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btn_save.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8pt</value>
   </data>
   <data name="&gt;&gt;chk_allow_credit_purchase.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2316,14 +2313,14 @@
   <data name="lbl_name.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;btn_pwd_change.Parent" xml:space="preserve">
+    <value>groupBox9</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Sales</value>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>groupBox8</value>
+  <data name="groupBox8.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="&gt;&gt;checkedListBox_Reports.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2346,8 +2343,8 @@
   <data name="&gt;&gt;txt_credit_purchase_amt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="btn_main_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;txt_max_discount_percent.Name" xml:space="preserve">
     <value>txt_max_discount_percent</value>
@@ -2357,6 +2354,9 @@
   </data>
   <data name="&gt;&gt;checkedListBox_Services.Name" xml:space="preserve">
     <value>checkedListBox_Services</value>
+  </data>
+  <data name="user_rights_tab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txt_max_discount_amount.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -2373,8 +2373,8 @@
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 85</value>
   </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>Credit Purchase Amount Limit:</value>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
     <value>txt_search</value>
@@ -2397,8 +2397,11 @@
   <data name="&gt;&gt;checkedListBox_Services.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btn_pwd_change.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 185</value>
+  <data name="&gt;&gt;checkedListBox_Accounts.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 20</value>
@@ -2406,11 +2409,8 @@
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="user_rights_tab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="btn_main_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="btn_main_refresh.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;checkedListBox_Master.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -2427,8 +2427,8 @@
   <data name="&gt;&gt;btn_update.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btn_pwd_change.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 42</value>
   </data>
   <data name="lbl_name.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.8pt, style=Bold</value>
@@ -2472,8 +2472,8 @@
   <data name="&gt;&gt;btn_payment.Name" xml:space="preserve">
     <value>btn_payment</value>
   </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>user_rights_tab</value>
   </data>
   <data name="txt_password.Location" type="System.Drawing.Point, System.Drawing">
     <value>589, 73</value>
@@ -2487,8 +2487,8 @@
   <data name="chk_pos.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btn_pwd_change.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="chk_allow_credit_sales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 61</value>
   </data>
   <data name="module_permission_tab.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2496,8 +2496,8 @@
   <data name="lbl_pwd.Text" xml:space="preserve">
     <value>Password:</value>
   </data>
-  <data name="&gt;&gt;checkedListBox_Accounts.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+  <data name="&gt;&gt;btn_pwd_change.Name" xml:space="preserve">
+    <value>btn_pwd_change</value>
   </data>
   <data name="chk_allow_credit_purchase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
@@ -2505,9 +2505,6 @@
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>644, 15</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ar-SA</value>
-  </metadata>
   <metadata name="balance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2523,13 +2520,13 @@
   <metadata name="debit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="credit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="entry_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="credit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>

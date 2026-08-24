@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,108 +118,153 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
+  <data name="btnTestAutoPostingRules.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1121, 588</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>إسم الحساب:</value>
+  <data name="btnTestAutoPostingRules.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 33</value>
   </data>
-  <data name="btn_save.Text" xml:space="preserve">
-    <value>حفظ</value>
+  <data name="lblSalesAr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 0</value>
   </data>
-  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 19</value>
+  <data name="cmbSalesAr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 3</value>
   </data>
-  <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 25</value>
+  <data name="lblSalesRevenue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 0</value>
   </data>
-  <data name="lbl_header_title.Text" xml:space="preserve">
-    <value>حساب جديد</value>
+  <data name="cmbSalesRevenue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="btn_cancel.Text" xml:space="preserve">
-    <value>إلغاء</value>
+  <data name="lblSalesTaxOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 40</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
+  <data name="cmbSalesTaxOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 43</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>وصف:</value>
+  <data name="lblPurchaseAp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 40</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 17</value>
+  <data name="cmbPurchaseAp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 43</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>رمز الحساب:</value>
+  <data name="lblPurchaseCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 80</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 17</value>
+  <data name="cmbPurchaseCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 83</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>مجموعة:</value>
+  <data name="lblPurchaseTaxInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 80</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 17</value>
+  <data name="cmbPurchaseTaxInput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 83</value>
   </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>فتح الرصيد المدين:</value>
+  <data name="lblDefaultExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 120</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
+  <data name="cmbDefaultExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 123</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>فتح رصيد دائن:</value>
+  <data name="lblDefaultCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 120</value>
   </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 17</value>
+  <data name="cmbDefaultCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 123</value>
   </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>اسم الحساب 2:</value>
+  <data name="lblDefaultBank.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 160</value>
   </data>
-  <data name="rd_isCashAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 21</value>
+  <data name="cmbDefaultBank.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 163</value>
   </data>
-  <data name="rd_isCashAccount.Text" xml:space="preserve">
-    <value>هل هو حساب نقدي؟</value>
+  <data name="lblSalaryExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 160</value>
   </data>
-  <data name="rd_isBankAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 21</value>
+  <data name="cmbSalaryExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 163</value>
   </data>
-  <data name="rd_isBankAccount.Text" xml:space="preserve">
-    <value>هل هو حساب مصرفي؟</value>
+  <data name="lblSalaryPayable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 200</value>
   </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
-        AAD///7///////bGdP/otUv/8LlJ//K2R//yu1H/8blT/+68U//suVX/8rdL//S5Rv/st0b/68R2////
-        //////7////+///////3xnP/6bdN/+zKef/py4X/6sJr//O7Vf/yvVD/7bxd/+vHf//lyIn/671a//XD
-        c//////////+/////v//////8cdt/+m1U//88dr//////+zbqf/ttE7/6rVM//Dcov//////+vnu/+u+
-        Yv/+w2z//////////v////7//////+/Ia//ntFf/++7d//z////s2af/8rU//+zFa//y+Oz/+v7///HX
-        nv/nsz//+Mhz//7///////7////+///////0x3H/7bdR//jw3f/8////9N2t/+GwQP/15rL/8f////bt
-        1P/ruVz/7rdM//HGc//////////+/////v//////9Mdx/+22Uf/989z//v////v46//m2rP/+/j2//3+
-        ///wzYL/67dM/+64Uf/xxnL//////////v////7///////THcf/ttlH/+/Ld//79/////P7//P/7//r/
-        ///15MP/67dX//O9U//tt0//8cZy//////////7////+///////0x3H/7bZR//vx3v/5/P//+/js//L7
-        +f/6//z/68yR/+y2RP/wwVX/5rVQ/+/Dc//////////+/////v//////9Mdx/+23Uf/58Nz//v///+rW
-        qv/x47r/+f////r26v/rxXX/7bdH//W8Tf/zxHH//////////v////7///////THcf/ttlH/+vLY//z/
-        ///32J//5rRQ//Xv1P/2/////fnp/+rGfv/utEn/+Mlu//////////7////+///////0x3H/7bZS//zz
-        0//6////9tmn/++3P//qwWL/+OjB//Pv3P/05Lj/5bVa//XHbv/////////+/////v//////9Mdx/+22
-        Uf/48tj//P///+zcov/us0z/7rpV/+23T//tt07/7rlT/+64Tv/xxnL//////////v////7///////TH
-        cf/tt1H/+vHa///////y2qf/77BP/+68WP/uu1b/7rtW/+67V//tt07/8cZy//////////7////+////
-        ///0x3D/7bdS//jy2f/7////8dyf//W1Sv/uu1j/7rpV/+66Vf/uu1f/7bdO//HGcv/////////+////
-        /v//////8sZy/+63UP/txXL/7Md7/+zBY//wulH/7rpW/+66Vf/uulX/7rtX/+23Tv/xxnL/////////
-        /v////7///////HGcv/tt07/7rhQ/+63TP/uuFL/7bpW/+66Vf/uulX/7rpV/+67V//tt07/8cZy////
-        //////7/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA==
-</value>
+  <data name="cmbSalaryPayable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 203</value>
+  </data>
+  <data name="lblInventoryAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 200</value>
+  </data>
+  <data name="cmbInventoryAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 203</value>
+  </data>
+  <data name="lblInventoryCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 240</value>
+  </data>
+  <data name="cmbInventoryCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 243</value>
+  </data>
+  <data name="lblInventoryAdjustment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 240</value>
+  </data>
+  <data name="cmbInventoryAdjustment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 243</value>
+  </data>
+  <data name="lblFaAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 280</value>
+  </data>
+  <data name="cmbFaAsset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 283</value>
+  </data>
+  <data name="lblFaAccumDep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 280</value>
+  </data>
+  <data name="cmbFaAccumDep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 283</value>
+  </data>
+  <data name="lblFaDepExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 320</value>
+  </data>
+  <data name="cmbFaDepExpense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 323</value>
+  </data>
+  <data name="lblInterBranchRec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 320</value>
+  </data>
+  <data name="cmbInterBranchRec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 323</value>
+  </data>
+  <data name="lblInterBranchPay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1139, 360</value>
+  </data>
+  <data name="cmbInterBranchPay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>681, 363</value>
+  </data>
+  <data name="lblOpeningEquity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>461, 360</value>
+  </data>
+  <data name="cmbOpeningEquity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 363</value>
+  </data>
+  <data name="chkRequireNarration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 118</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 88</value>
+  </data>
+  <data name="chkAutoPostPurchases.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 58</value>
+  </data>
+  <data name="chkAutoPostSales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 28</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabMain.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>حساب جديد</value>
   </data>
 </root>

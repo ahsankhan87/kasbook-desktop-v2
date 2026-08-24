@@ -784,9 +784,24 @@ namespace pos
 
                 if (columnName == "discount")//if discount is changed
                 {
+                    // Calculate discount percent based on ORIGINAL totalValue (before any cost adjustment)
                     double discountPercent = totalValue == 0 ? 0 : (discount / totalValue) * 100;
-                    tax = ((totalValue - discount) * taxRate) / 100;
-                    double finalSubtotal = totalValue - discount + tax;
+                    double netTotalValue = totalValue; // Use original totalValue for tax calculation
+
+                    // Check if discount should be applied on cost price
+                    if (ck_applyDiscountOnCost != null && ck_applyDiscountOnCost.Checked && qty > 0)
+                    {
+                        // When checkbox is checked: deduct discount per unit from average cost
+                        double discountPerUnit = discount / qty;
+                        double adjustedAvgCost = avgCost - discountPerUnit;
+                        grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value = Math.Round(adjustedAvgCost, 4);
+
+                        // Use original totalValue for tax calculation (discount is applied to cost, not to the taxable amount)
+                        netTotalValue = totalValue;
+                    }
+
+                    tax = ((netTotalValue - discount) * taxRate) / 100;
+                    double finalSubtotal = netTotalValue - discount + tax;
 
                     grid_purchases.Rows[e.RowIndex].Cells["discount_percent"].Value = Math.Round(discountPercent, 4);
                     grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = finalSubtotal;
@@ -806,9 +821,24 @@ namespace pos
                 if (columnName == "discount_percent")
                 {
                     double discountPercent = GetCellDouble("discount_percent");
+                    // Calculate discount value on ORIGINAL totalValue (before any cost adjustment)
                     double discountValue = (totalValue * discountPercent) / 100;
-                    tax = ((totalValue - discountValue) * taxRate) / 100;
-                    double finalSubtotal = totalValue - discountValue + tax;
+                    double netTotalValue = totalValue; // Use original totalValue for tax calculation
+
+                    // Check if discount should be applied on cost price
+                    if (ck_applyDiscountOnCost != null && ck_applyDiscountOnCost.Checked && qty > 0)
+                    {
+                        // When checkbox is checked: deduct discount per unit from average cost
+                        double discountPerUnit = discountValue / qty;
+                        double adjustedAvgCost = avgCost - discountPerUnit;
+                        grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value = Math.Round(adjustedAvgCost, 4);
+
+                        // Use original totalValue for tax calculation (discount is applied to cost, not to the taxable amount)
+                        netTotalValue = totalValue;
+                    }
+
+                    tax = ((netTotalValue - discountValue) * taxRate) / 100;
+                    double finalSubtotal = netTotalValue - discountValue + tax;
 
                     grid_purchases.Rows[e.RowIndex].Cells["discount"].Value = Math.Round(discountValue, 4);
                     grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = Math.Round(finalSubtotal, 4);

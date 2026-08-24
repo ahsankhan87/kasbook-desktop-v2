@@ -267,6 +267,9 @@
     <Compile Include="Accounts\ImportProgressForm.Designer.cs">
       <DependentUpon>ImportProgressForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accounts\Journals\frm_journal_voucher_manager.Designer.cs">
+      <DependentUpon>frm_journal_voucher_manager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Accounts\Maintenance\frm_financial_management_help.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1835,14 +1838,28 @@
     <EmbeddedResource Include="Accounting\CostCenter\frm_allocation_rules.resx">
       <DependentUpon>frm_allocation_rules.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounting\CostCenter\frm_budget_setup.ar-SA.resx">
+      <DependentUpon>frm_budget_setup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounting\CostCenter\frm_budget_setup.resx">
       <DependentUpon>frm_budget_setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_setup.ar-SA.resx">
+      <DependentUpon>frm_cost_center_setup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_setup.resx">
       <DependentUpon>frm_cost_center_setup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounting\CostCenter\frm_cost_center_tree.resx">
       <DependentUpon>frm_cost_center_tree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting\CostCenter\frm_departmental_pl.ar-SA.resx">
+      <DependentUpon>frm_departmental_pl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting\CostCenter\frm_departmental_pl.resx">
+      <DependentUpon>frm_departmental_pl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Accounts\frm_accounts.ar-SA.resx">
       <DependentUpon>frm_accounts.cs</DependentUpon>
@@ -1858,6 +1875,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Accounts\frm_coa.ar-SA.resx">
       <DependentUpon>frm_coa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Dashboard\frm_accounting_dashboard.ar-SA.resx">
+      <DependentUpon>frm_accounting_dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Dashboard\frm_accounting_dashboard.resx">
       <DependentUpon>frm_accounting_dashboard.cs</DependentUpon>
@@ -1889,8 +1910,28 @@
     <EmbeddedResource Include="Accounts\Journals\frm_journal_voucher_manager.resx">
       <DependentUpon>frm_journal_voucher_manager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Maintenance\frm_financial_periods.ar-SA.resx">
+      <DependentUpon>frm_financial_periods.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Maintenance\frm_financial_periods.resx">
       <DependentUpon>frm_financial_periods.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Maintenance\frm_period_close_wizard.ar-SA.resx">
+      <DependentUpon>frm_period_close_wizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Maintenance\frm_period_close_wizard.resx">
+      <DependentUpon>frm_period_close_wizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Maintenance\frm_year_end_close_wizard.ar-SA.resx">
+      <DependentUpon>frm_year_end_close_wizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Maintenance\frm_year_end_close_wizard.resx">
+      <DependentUpon>frm_year_end_close_wizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reconciliation\FrmAdvancedReconciliationMatcher.resx">
       <DependentUpon>FrmAdvancedReconciliationMatcher.cs</DependentUpon>
@@ -1955,8 +1996,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>sales_invoice.cs</LastGenOutput>
     </EmbeddedResource> -->
+    <EmbeddedResource Include="Accounts\Settings\frm_accounting_settings.ar-SA.resx">
+      <DependentUpon>frm_accounting_settings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Settings\frm_accounting_settings.resx">
       <DependentUpon>frm_accounting_settings.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Customers\Customer Ledger Report\CustomerPayment.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

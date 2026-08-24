@@ -50,7 +50,9 @@
             this._bankGroup = new System.Windows.Forms.GroupBox();
             this._txtIban = new System.Windows.Forms.TextBox();
             this._txtBankAccountNo = new System.Windows.Forms.TextBox();
+            this._chkIsCashAccount = new System.Windows.Forms.CheckBox();
             this._txtBankBranch = new System.Windows.Forms.TextBox();
+            this._chkIsBankAccount = new System.Windows.Forms.CheckBox();
             this._txtBankName = new System.Windows.Forms.TextBox();
             this._accountLayout = new System.Windows.Forms.TableLayoutPanel();
             this._lblAccountCode = new System.Windows.Forms.Label();
@@ -71,8 +73,6 @@
             this._txtAccountDescription = new System.Windows.Forms.TextBox();
             this._lblAccountStatus = new System.Windows.Forms.Label();
             this._chkAccountActive = new System.Windows.Forms.CheckBox();
-            this._chkIsCashAccount = new System.Windows.Forms.CheckBox();
-            this._chkIsBankAccount = new System.Windows.Forms.CheckBox();
             this._footerButtons = new System.Windows.Forms.FlowLayoutPanel();
             this._btnEditSelected = new System.Windows.Forms.Button();
             this._btnRefresh = new System.Windows.Forms.Button();
@@ -355,8 +355,6 @@
             this._accountTab.BackColor = System.Drawing.Color.White;
             this._accountTab.Controls.Add(this._bankGroup);
             this._accountTab.Controls.Add(this._accountLayout);
-            this._accountTab.Controls.Add(this._chkIsCashAccount);
-            this._accountTab.Controls.Add(this._chkIsBankAccount);
             resources.ApplyResources(this._accountTab, "_accountTab");
             this._accountTab.Name = "_accountTab";
             // 
@@ -365,7 +363,9 @@
             this._bankGroup.BackColor = System.Drawing.Color.White;
             this._bankGroup.Controls.Add(this._txtIban);
             this._bankGroup.Controls.Add(this._txtBankAccountNo);
+            this._bankGroup.Controls.Add(this._chkIsCashAccount);
             this._bankGroup.Controls.Add(this._txtBankBranch);
+            this._bankGroup.Controls.Add(this._chkIsBankAccount);
             this._bankGroup.Controls.Add(this._txtBankName);
             resources.ApplyResources(this._bankGroup, "_bankGroup");
             this._bankGroup.Name = "_bankGroup";
@@ -383,11 +383,23 @@
             this._txtBankAccountNo.Name = "_txtBankAccountNo";
             this._txtBankAccountNo.ReadOnly = true;
             // 
+            // _chkIsCashAccount
+            // 
+            resources.ApplyResources(this._chkIsCashAccount, "_chkIsCashAccount");
+            this._chkIsCashAccount.Name = "_chkIsCashAccount";
+            this._chkIsCashAccount.UseVisualStyleBackColor = true;
+            // 
             // _txtBankBranch
             // 
             resources.ApplyResources(this._txtBankBranch, "_txtBankBranch");
             this._txtBankBranch.Name = "_txtBankBranch";
             this._txtBankBranch.ReadOnly = true;
+            // 
+            // _chkIsBankAccount
+            // 
+            resources.ApplyResources(this._chkIsBankAccount, "_chkIsBankAccount");
+            this._chkIsBankAccount.Name = "_chkIsBankAccount";
+            this._chkIsBankAccount.UseVisualStyleBackColor = true;
             // 
             // _txtBankName
             // 
@@ -527,18 +539,6 @@
             resources.ApplyResources(this._chkAccountActive, "_chkAccountActive");
             this._chkAccountActive.Name = "_chkAccountActive";
             this._chkAccountActive.UseVisualStyleBackColor = true;
-            // 
-            // _chkIsCashAccount
-            // 
-            resources.ApplyResources(this._chkIsCashAccount, "_chkIsCashAccount");
-            this._chkIsCashAccount.Name = "_chkIsCashAccount";
-            this._chkIsCashAccount.UseVisualStyleBackColor = true;
-            // 
-            // _chkIsBankAccount
-            // 
-            resources.ApplyResources(this._chkIsBankAccount, "_chkIsBankAccount");
-            this._chkIsBankAccount.Name = "_chkIsBankAccount";
-            this._chkIsBankAccount.UseVisualStyleBackColor = true;
             // 
             // _footerButtons
             // 
@@ -777,7 +777,6 @@
             this._groupLayout.ResumeLayout(false);
             this._groupLayout.PerformLayout();
             this._accountTab.ResumeLayout(false);
-            this._accountTab.PerformLayout();
             this._bankGroup.ResumeLayout(false);
             this._bankGroup.PerformLayout();
             this._accountLayout.ResumeLayout(false);
