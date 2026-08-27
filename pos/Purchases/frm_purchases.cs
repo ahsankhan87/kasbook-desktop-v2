@@ -277,6 +277,8 @@ namespace pos
                 _applyShippingCostToItems = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
                 ClearForeignPurchaseMode();
                 UpdateForeignPurchaseBanner();
+                // Setup Trade Discount Checkbox Tooltip  <-- ADD THIS LINE
+                SetupTradeDiscountTooltip();              
 
                 foreach (DataGridViewColumn column in grid_purchases.Columns)
                 {
@@ -789,19 +791,19 @@ namespace pos
                     double netTotalValue = totalValue; // Use original totalValue for tax calculation
 
                     // Check if discount should be applied on cost price
-                    if (ck_applyDiscountOnCost != null && ck_applyDiscountOnCost.Checked && qty > 0)
+                    if (ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked && qty > 0)
                     {
-                        // When checkbox is checked: deduct discount per unit from average cost
+                        // Trade discount already applied to cost - recalculate totalValue
                         double discountPerUnit = discount / qty;
                         double adjustedAvgCost = avgCost - discountPerUnit;
+                        netTotalValue = adjustedAvgCost * qty;
                         grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value = Math.Round(adjustedAvgCost, 4);
-
-                        // Use original totalValue for tax calculation (discount is applied to cost, not to the taxable amount)
-                        netTotalValue = totalValue;
                     }
 
-                    tax = ((netTotalValue - discount) * taxRate) / 100;
-                    double finalSubtotal = netTotalValue - discount + tax;
+                    // Only subtract discount from total if it's NOT a trade discount
+                    double discountToApply = (ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked && qty > 0) ? 0 : discount;
+                    tax = ((netTotalValue - discountToApply) * taxRate) / 100;
+                    double finalSubtotal = netTotalValue - discountToApply + tax;
 
                     grid_purchases.Rows[e.RowIndex].Cells["discount_percent"].Value = Math.Round(discountPercent, 4);
                     grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = finalSubtotal;
@@ -826,19 +828,19 @@ namespace pos
                     double netTotalValue = totalValue; // Use original totalValue for tax calculation
 
                     // Check if discount should be applied on cost price
-                    if (ck_applyDiscountOnCost != null && ck_applyDiscountOnCost.Checked && qty > 0)
+                    if (ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked && qty > 0)
                     {
-                        // When checkbox is checked: deduct discount per unit from average cost
+                        // Trade discount already applied to cost - recalculate totalValue
                         double discountPerUnit = discountValue / qty;
                         double adjustedAvgCost = avgCost - discountPerUnit;
+                        netTotalValue = adjustedAvgCost * qty;
                         grid_purchases.Rows[e.RowIndex].Cells["avg_cost"].Value = Math.Round(adjustedAvgCost, 4);
-
-                        // Use original totalValue for tax calculation (discount is applied to cost, not to the taxable amount)
-                        netTotalValue = totalValue;
                     }
 
-                    tax = ((netTotalValue - discountValue) * taxRate) / 100;
-                    double finalSubtotal = netTotalValue - discountValue + tax;
+                    // Only subtract discount from total if it's NOT a trade discount
+                    double discountToApply = (ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked && qty > 0) ? 0 : discountValue;
+                    tax = ((netTotalValue - discountToApply) * taxRate) / 100;
+                    double finalSubtotal = netTotalValue - discountToApply + tax;
 
                     grid_purchases.Rows[e.RowIndex].Cells["discount"].Value = Math.Round(discountValue, 4);
                     grid_purchases.Rows[e.RowIndex].Cells["sub_total"].Value = Math.Round(finalSubtotal, 4);
@@ -1122,6 +1124,7 @@ namespace pos
         private void get_total_amount()
         {
             total_amount = 0;
+            bool isTradeDiscount = ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked;
 
             for (int i = 0; i <= grid_purchases.Rows.Count - 1; i++)
             {
@@ -1130,8 +1133,12 @@ namespace pos
 
             bool applyShippingToItems = new SettingsBLL().GetApplyShippingCostToPurchaseItems(false);
             decimal shippingCost = (string.IsNullOrWhiteSpace(txt_shipping_cost.Text) ? 0 : Convert.ToDecimal(txt_shipping_cost.Text));
-            decimal net = (total_amount + total_tax - total_discount + (applyShippingToItems ? 0 : shippingCost));
-            txt_total_amount.Text = Math.Round(net,2).ToString();
+
+            // If trade discount: cost is already reduced, so don't subtract discount again
+            // If normal discount: cost is normal, so subtract the line-item discount
+            decimal discountToSubtract = isTradeDiscount ? 0 : total_discount;
+            decimal net = (total_amount + total_tax - discountToSubtract + (applyShippingToItems ? 0 : shippingCost));
+            txt_total_amount.Text = Math.Round(net, 2).ToString();
         }
 
         private void txt_shipping_cost_TextChanged(object sender, EventArgs e)
@@ -1253,10 +1260,16 @@ namespace pos
         private void get_total_discount()
         {
             total_discount = 0;
+            bool isTradeDiscount = ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked;
 
             for (int i = 0; i <= grid_purchases.Rows.Count - 1; i++)
             {
-                total_discount += Convert.ToDecimal(grid_purchases.Rows[i].Cells["discount"].Value);
+                if (!isTradeDiscount)
+                {
+                    // Normal discount: count as line-item discount
+                    total_discount += Convert.ToDecimal(grid_purchases.Rows[i].Cells["discount"].Value);
+                }
+                // If trade discount: discount is already in cost, don't count separately
             }
 
             txt_total_discount.Text = Math.Round(total_discount,2).ToString();
@@ -2486,7 +2499,8 @@ namespace pos
         {
             int total_rows = grid_purchases.Rows.Count;
             int filled_rows = 0;
-            
+            bool isTradeDiscount = ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked;
+
             for (int i = 0; i <= total_rows - 1; i++)
             {
                 Int32 product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
@@ -2495,35 +2509,54 @@ namespace pos
                     filled_rows++;
                 }
             }
-            //txt_total_amount.Text = round_total_amount.ToString();
-            //double total_diff_amount = old_total_amount - new_amount; // calculate difference amount and add to single item unit price
-            //double total_item_share = sub_total * 100 / old_total_amount;
-            //double total_tax_share = (old_total_amount - sub_total) * 100 / old_total_amount;
-            decimal diff_amount_per_item = (filled_rows > 0 ? (total_discount_value / filled_rows) : 0);
 
-            //double new_amount_total = 0;
-            //double new_amount_single = 0;
-            //double new_vat_total = 0;
-            //double net_total = 0;
+            decimal diff_amount_per_item = (filled_rows > 0 ? (total_discount_value / filled_rows) : 0);
 
             double tax_1 = 0;
             double total_value = 0;
             double tax_rate = 0;
             double sub_total_1 = 0;
+
             for (int i = 0; i <= filled_rows - 1; i++)
             {
                 int product_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["id"].Value);
                 if (product_id > 0)
                 {
-                    grid_purchases.Rows[i].Cells["discount"].Value = Math.Round(diff_amount_per_item, 3);
-                    decimal baseValue = Convert.ToDecimal(grid_purchases.Rows[i].Cells["avg_cost"].Value) * Convert.ToDecimal(grid_purchases.Rows[i].Cells["qty"].Value);
-                    decimal rowPercent = baseValue == 0 ? 0 : (diff_amount_per_item / baseValue) * 100;
-                    grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(rowPercent, 4);
+                    double qty = Convert.ToDouble(grid_purchases.Rows[i].Cells["qty"].Value);
+                    double avgCost = Convert.ToDouble(grid_purchases.Rows[i].Cells["avg_cost"].Value);
 
-                    tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
-                    total_value = Convert.ToDouble(grid_purchases.Rows[i].Cells["avg_cost"].Value) * Convert.ToDouble(grid_purchases.Rows[i].Cells["qty"].Value);
-                    tax_1 = ((total_value - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value)) * tax_rate / 100);
-                    sub_total_1 = tax_1 + total_value - Convert.ToDouble(grid_purchases.Rows[i].Cells["discount"].Value);
+                    if (isTradeDiscount && qty > 0)
+                    {
+                        // Trade Discount: Apply to cost, not as line deduction
+                        double discountPerUnit = Convert.ToDouble(diff_amount_per_item) / qty;
+                        double adjustedCost = avgCost - discountPerUnit;
+                        grid_purchases.Rows[i].Cells["avg_cost"].Value = Math.Round(adjustedCost, 4);
+                        total_value = adjustedCost * qty;
+
+                        // Discount already in cost
+                        tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
+                        tax_1 = (total_value * tax_rate / 100);
+                        sub_total_1 = tax_1 + total_value;
+
+                        // Show discount value and calculate percentage
+                        grid_purchases.Rows[i].Cells["discount"].Value = Math.Round(diff_amount_per_item, 3);
+                        decimal baseValue = Convert.ToDecimal(avgCost + discountPerUnit) * Convert.ToDecimal(qty);
+                        decimal rowPercent = baseValue == 0 ? 0 : (diff_amount_per_item / baseValue) * 100;
+                        grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(rowPercent, 4);
+                    }
+                    else
+                    {
+                        // Normal Discount: Subtract from line total
+                        grid_purchases.Rows[i].Cells["discount"].Value = Math.Round(diff_amount_per_item, 3);
+                        decimal baseValue = Convert.ToDecimal(avgCost) * Convert.ToDecimal(qty);
+                        decimal rowPercent = baseValue == 0 ? 0 : (diff_amount_per_item / baseValue) * 100;
+                        grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(rowPercent, 4);
+
+                        tax_rate = (grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString()));
+                        total_value = Convert.ToDouble(avgCost) * Convert.ToDouble(qty);
+                        tax_1 = ((total_value - Convert.ToDouble(diff_amount_per_item)) * tax_rate / 100);
+                        sub_total_1 = tax_1 + total_value - Convert.ToDouble(diff_amount_per_item);
+                    }
 
                     grid_purchases.Rows[i].Cells["sub_total"].Value = sub_total_1;
                     grid_purchases.Rows[i].Cells["tax"].Value = tax_1;
@@ -2540,6 +2573,7 @@ namespace pos
         public void total_discount_percent(decimal total_discount_percent)
         {
             int total_rows = grid_purchases.Rows.Count;
+            bool isTradeDiscount = ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked;
 
             for (int i = 0; i <= total_rows - 1; i++)
             {
@@ -2553,18 +2587,38 @@ namespace pos
                 decimal totalValue = qty * avgCost;
 
                 decimal discountValue = Math.Round((totalValue * total_discount_percent) / 100, 4);
-                grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(total_discount_percent, 4);
-                grid_purchases.Rows[i].Cells["discount"].Value = discountValue;
-
                 decimal taxRate = (grid_purchases.Rows[i].Cells["tax_rate"].Value == null || grid_purchases.Rows[i].Cells["tax_rate"].Value.ToString() == ""
                     ? 0
                     : Convert.ToDecimal(grid_purchases.Rows[i].Cells["tax_rate"].Value));
 
-                decimal tax = Math.Round(((totalValue - discountValue) * taxRate) / 100, 4);
-                decimal subTotal = Math.Round((totalValue - discountValue) + tax, 4);
+                if (isTradeDiscount && qty > 0)
+                {
+                    // Trade Discount: Apply to cost, not as line deduction
+                    decimal discountPerUnit = discountValue / qty;
+                    decimal adjustedCost = avgCost - discountPerUnit;
+                    grid_purchases.Rows[i].Cells["avg_cost"].Value = Math.Round(adjustedCost, 4);
 
-                grid_purchases.Rows[i].Cells["tax"].Value = tax;
-                grid_purchases.Rows[i].Cells["sub_total"].Value = subTotal;
+                    // Recalculate with adjusted cost
+                    decimal newTotalValue = adjustedCost * qty;
+                    decimal tax = Math.Round((newTotalValue * taxRate) / 100, 4);
+                    decimal subTotal = Math.Round(newTotalValue + tax, 4);
+
+                    grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(total_discount_percent, 4);
+                    grid_purchases.Rows[i].Cells["discount"].Value = discountValue; // Discount already in cost
+                    grid_purchases.Rows[i].Cells["tax"].Value = tax;
+                    grid_purchases.Rows[i].Cells["sub_total"].Value = subTotal;
+                }
+                else
+                {
+                    // Normal Discount: Subtract from line total
+                    decimal tax = Math.Round(((totalValue - discountValue) * taxRate) / 100, 4);
+                    decimal subTotal = Math.Round((totalValue - discountValue) + tax, 4);
+
+                    grid_purchases.Rows[i].Cells["discount_percent"].Value = Math.Round(total_discount_percent, 4);
+                    grid_purchases.Rows[i].Cells["discount"].Value = discountValue;
+                    grid_purchases.Rows[i].Cells["tax"].Value = tax;
+                    grid_purchases.Rows[i].Cells["sub_total"].Value = subTotal;
+                }
             }
 
             get_total_tax();
@@ -2990,6 +3044,7 @@ namespace pos
                                     decimal baseCostPrice = Math.Round(enteredCostPrice * exchangeRate, 4);
                                     decimal baseUnitPrice = Math.Round(enteredUnitPrice * exchangeRate, 4);
                                     decimal baseDiscount = Math.Round(enteredDiscount * exchangeRate, 4);
+                                    bool isTradeDiscount = ck_applyTradeDiscount != null && ck_applyTradeDiscount.Checked;
 
                                     purchase_model_detail.Add(new PurchasesModal
                                     {
@@ -3001,7 +3056,7 @@ namespace pos
                                         quantity = qtyValue,
                                         cost_price = baseCostPrice,
                                         unit_price = baseUnitPrice,
-                                        discount = baseDiscount,
+                                        discount = (isTradeDiscount ? 0 : baseDiscount),
                                         line_discount_percent = return_minus_value * (string.IsNullOrEmpty(grid_purchases.Rows[i].Cells["discount_percent"].Value.ToString()) ? 0 : Math.Round(decimal.Parse(grid_purchases.Rows[i].Cells["discount_percent"].Value.ToString()), 4)),
                                         tax_id = Convert.ToInt32(grid_purchases.Rows[i].Cells["tax_id"].Value.ToString()),
                                         tax_rate = tax_rate,
@@ -3909,6 +3964,43 @@ namespace pos
                         obj.Close();
                     }
                 }
+            }
+        }
+        private void SetupTradeDiscountTooltip()
+        {
+            if (ck_applyTradeDiscount != null)
+            {
+                // Create a ToolTip control
+                ToolTip tradeDiscountTip = new ToolTip();
+
+                // Set English tooltip
+                string tooltipEN = "Trade Discount Mode\n" +
+                                   "• Discount is applied to the cost price (deducted from cost)\n" +
+                                   "• Final cost will be reduced by the discount amount\n" +
+                                   "• Tax is calculated on the adjusted cost\n" +
+                                   "• Discount value is NOT saved as a separate line item\n" +
+                                   "• Only the adjusted cost is stored in the database";
+
+                // Set Arabic tooltip
+                string tooltipAR = "وضع خصم التجارة\n" +
+                                   "• يتم تطبيق الخصم على سعر التكلفة (خصمها من التكلفة)\n" +
+                                   "• ستنخفض التكلفة النهائية بمبلغ الخصم\n" +
+                                   "• يتم حساب الضريبة على التكلفة المعدلة\n" +
+                                   "• قيمة الخصم لن يتم حفظها كعنصر خط منفصل\n" +
+                                   "• فقط التكلفة المعدلة يتم تخزينها في قاعدة البيانات";
+
+                // Set tooltip text based on current language
+                string tooltipText = (UsersModal.logged_in_lang == "ar-SA") ? tooltipAR : tooltipEN;
+
+                // Configure tooltip appearance
+                tradeDiscountTip.SetToolTip(ck_applyTradeDiscount, tooltipText);
+                tradeDiscountTip.BackColor = Color.LightYellow;
+                tradeDiscountTip.ForeColor = Color.Black;
+                tradeDiscountTip.ToolTipTitle = (UsersModal.logged_in_lang == "ar-SA") ? "ملاحظة مهمة" : "Important Notice";
+                tradeDiscountTip.IsBalloon = true;
+                tradeDiscountTip.InitialDelay = 500;
+                tradeDiscountTip.AutoPopDelay = 5000;
+                tradeDiscountTip.ReshowDelay = 500;
             }
         }
     }

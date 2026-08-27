@@ -557,12 +557,12 @@ namespace POS.DLL
 
                     int result = 0;
 
-                    cmd = new SqlCommand("DELETE FROM acc_entries WHERE branch_id=@branch_id AND invoice_no=@invoice_no", cn, transaction);
+                    cmd = new SqlCommand("DELETE FROM acc_entries WHERE branch_id=@branch_id AND payment_ref_invoice_no=@invoice_no", cn, transaction);
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     cmd.Parameters.AddWithValue("@invoice_no", voucherNo);
                     cmd.ExecuteNonQuery();
 
-                    cmd = new SqlCommand("DELETE FROM acc_entries_header WHERE branch_id=@branch_id AND InvoiceNo=@invoice_no", cn, transaction);
+                    cmd = new SqlCommand("DELETE FROM acc_entries_header WHERE branch_id=@branch_id AND ReferenceNo=@invoice_no", cn, transaction);
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     cmd.Parameters.AddWithValue("@invoice_no", voucherNo);
                     cmd.ExecuteNonQuery();
