@@ -28,6 +28,7 @@
             this.lblVoucherDate = new System.Windows.Forms.Label();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.grpExpenseDetails = new System.Windows.Forms.GroupBox();
+            this.txtVATNumber = new System.Windows.Forms.TextBox();
             this.txtNetTotal = new System.Windows.Forms.TextBox();
             this.lblNetTotal = new System.Windows.Forms.Label();
             this.txtTaxAmount = new System.Windows.Forms.TextBox();
@@ -58,7 +59,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tslLastSaved = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtVATNumber = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.grpVoucherInfo.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -146,12 +147,18 @@
             this.grpExpenseDetails.Controls.Add(this.txtNarration);
             this.grpExpenseDetails.Controls.Add(this.lblNarration);
             this.grpExpenseDetails.Controls.Add(this.nudAmount);
+            this.grpExpenseDetails.Controls.Add(this.label1);
             this.grpExpenseDetails.Controls.Add(this.lblAmount);
             this.grpExpenseDetails.Controls.Add(this.cmbExpenseAccount);
             this.grpExpenseDetails.Controls.Add(this.lblExpenseAccount);
             resources.ApplyResources(this.grpExpenseDetails, "grpExpenseDetails");
             this.grpExpenseDetails.Name = "grpExpenseDetails";
             this.grpExpenseDetails.TabStop = false;
+            // 
+            // txtVATNumber
+            // 
+            resources.ApplyResources(this.txtVATNumber, "txtVATNumber");
+            this.txtVATNumber.Name = "txtVATNumber";
             // 
             // txtNetTotal
             // 
@@ -360,10 +367,10 @@
             // 
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
-            // txtVATNumber
+            // label1
             // 
-            resources.ApplyResources(this.txtVATNumber, "txtVATNumber");
-            this.txtVATNumber.Name = "txtVATNumber";
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // frm_expenses
             // 
@@ -438,5 +445,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tslLastSaved;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txtVATNumber;
+        private System.Windows.Forms.Label label1;
     }
 }

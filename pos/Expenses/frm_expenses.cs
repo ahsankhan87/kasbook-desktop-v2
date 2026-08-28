@@ -114,8 +114,8 @@ namespace pos.Expenses
         {
             var generalBLL = new GeneralBLL();
             var dt = generalBLL.GetRecord(
-                "id,name",
-                "acc_accounts WHERE branch_id = " + UsersModal.logged_in_branch_id
+                "A.id,A.name",
+                "acc_accounts A INNER JOIN acc_groups G ON A.group_id = G.id WHERE G.account_type_id = 2 and A.branch_id = " + UsersModal.logged_in_branch_id
             );
 
             cmbVatAccount.DataSource = dt;
@@ -136,6 +136,7 @@ namespace pos.Expenses
             var vatItem = cmbVatAccount.Items
                 .Cast<DataRowView>()
                 .FirstOrDefault(x =>
+                    x["name"].ToString().IndexOf("vat payable", StringComparison.OrdinalIgnoreCase) >= 0 ||
                     x["name"].ToString().IndexOf("vat", StringComparison.OrdinalIgnoreCase) >= 0 ||
                     x["name"].ToString().IndexOf("tax", StringComparison.OrdinalIgnoreCase) >= 0 ||
                     x["name"].ToString().IndexOf("ضريبة", StringComparison.OrdinalIgnoreCase) >= 0);
@@ -650,6 +651,7 @@ namespace pos.Expenses
 
             nudAmount.Value = 0;
             txtNarration.Text = string.Empty;
+            txtVATNumber.Text = string.Empty;
             _selectedAttachmentPath = string.Empty;
             txtAttachment.Text = string.Empty;
             CalculateTotals();
