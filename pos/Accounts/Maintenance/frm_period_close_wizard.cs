@@ -28,7 +28,7 @@ namespace pos
         {
             AppTheme.Apply(this);
             lblTitle.Text = string.Format("Month-End Closing Wizard - {0}", _periodName);
-            lblConfirmText.Text = string.Format("I confirm all transactions for {0} have been reviewed", _periodName);
+            chkConfirmReviewed.Text = string.Format("I confirm all transactions for {0} have been reviewed", _periodName);
             tabSteps.SelectedIndex = 0;
             UpdateStepButtons();
             LoadStep1Checklist();
@@ -183,6 +183,8 @@ namespace pos
                 txtPinPassword.Focus();
                 return;
             }
+
+            
 
             try
             {

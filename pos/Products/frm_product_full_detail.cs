@@ -1184,7 +1184,7 @@ namespace pos
                 );
                 return;
             }
-
+           
             string id = txt_id.Text;
 
             if (!string.IsNullOrWhiteSpace(id))
@@ -1198,17 +1198,30 @@ namespace pos
 
                 if (confirm == DialogResult.Yes)
                 {
-                    ProductBLL objBLL = new ProductBLL();
-                    objBLL.Delete(int.Parse(id));
+                    try
+                    {
+                        ProductBLL objBLL = new ProductBLL();
+                        objBLL.Delete(txtItemNumber.Text);
 
-                    UiMessages.ShowInfo(
-                        "Product has been deleted successfully.",
-                        "تم حذف المنتج بنجاح.",
-                        "Deleted",
-                        "تم الحذف"
-                    );
-                    clear_all();
-                    txt_part_number.Focus();
+                        UiMessages.ShowInfo(
+                            "Product has been deleted successfully.",
+                            "تم حذف المنتج بنجاح.",
+                            "Deleted",
+                            "تم الحذف"
+                        );
+                        clear_all();
+                        txt_part_number.Focus();
+                    }
+                    catch (Exception ex)
+                    {
+                        UiMessages.ShowError(
+                            "An error occurred while deleting the product: " + ex.Message,
+                            "حدث خطأ أثناء حذف المنتج: " + ex.Message,
+                            "Error",
+                            "خطأ"
+                        );
+
+                    }
                 }
             }
             else

@@ -35,7 +35,7 @@ namespace pos
                 GeneralBLL objBLL = new GeneralBLL();
                 grid_products.AutoGenerateColumns = false;
 
-                String keyword = "TOP 500 id,code,name,item_type,barcode,qty,avg_cost,unit_price,location_code,description,date_created";
+                String keyword = "TOP 500 id,item_number,code,name,item_type,barcode,qty,avg_cost,unit_price,location_code,description,date_created";
                 String table = "pos_products ORDER BY id desc";
                 grid_products.DataSource = objBLL.GetRecord(keyword, table);
             }
@@ -65,15 +65,16 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_products.CurrentRow.Cells[0].Value.ToString();
-            
+            string id = grid_products.CurrentRow.Cells["id"].Value.ToString();
+            string item_number = grid_products.CurrentRow.Cells["item_number"].Value.ToString();
+
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);  
 
             if (result == DialogResult.Yes)
             {
                 ProductBLL objBLL = new ProductBLL();
-                objBLL.Delete(int.Parse(id));
+                objBLL.Delete(item_number);
 
                 MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 load_Products_grid();
@@ -169,14 +170,14 @@ namespace pos
             else if (name == "delete")
             {
                 string id = grid_products.CurrentRow.Cells["id"].Value.ToString();
-
+                string item_number = grid_products.CurrentRow.Cells["item_number"].Value.ToString();
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
                     ProductBLL objBLL = new ProductBLL();
-                    objBLL.Delete(int.Parse(id));
+                    objBLL.Delete(item_number);
 
                     MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     load_Products_grid();

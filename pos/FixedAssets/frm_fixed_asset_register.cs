@@ -665,7 +665,7 @@ namespace pos.FixedAssets
                     );
                 }
 
-                lblCurrentWDV.Text = $"Current Book Value (WDV): PKR {_currentAsset.CurrentWDV:N2}";
+                lblCurrentWDV.Text = $"Current Book Value (WDV): {_currentAsset.CurrentWDV:N2}";
             }
             catch (Exception ex)
             {
@@ -686,7 +686,7 @@ namespace pos.FixedAssets
             var depreciation = _currentAsset.Cost - _currentAsset.CurrentWDV;
 
             lblAssetNameSummary.Text = _currentAsset.AssetName;
-            lblCostSummary.Text = $"Cost: PKR {_currentAsset.Cost:N2} | Book Value: PKR {_currentAsset.CurrentWDV:N2} | Age: {years} years {months} months | Depreciation to Date: PKR {depreciation:N2}";
+            lblCostSummary.Text = $"Cost: {_currentAsset.Cost:N2} | Book Value: {_currentAsset.CurrentWDV:N2} | Age: {years} years {months} months | Depreciation to Date: {depreciation:N2}";
         }
 
         private void SelectDropdownByAccountId(ComboBox ddl, int accountId)
@@ -1086,7 +1086,7 @@ namespace pos.FixedAssets
                             "Posted: {2}\n" +
                             "Skipped: {3}\n" +
                             "Errors: {4}\n" +
-                            "Total Depreciation: PKR {5:N2}",
+                            "Total Depreciation: {5:N2}",
                             result.PeriodDate, result.EvaluatedAssets, result.PostedCount,
                             result.SkippedCount, result.ErrorCount, result.TotalDepreciation);
 
@@ -1310,9 +1310,9 @@ namespace pos.FixedAssets
                         string message = string.Format(
                             "Disposal posted successfully:\n" +
                             "Disposal Date: {0:yyyy-MM-dd}\n" +
-                            "Book Value: PKR {1:N2}\n" +
-                            "Disposal Proceeds: PKR {2:N2}\n" +
-                            "Gain/Loss: PKR {3:N2}\n" +
+                            "Book Value: {1:N2}\n" +
+                            "Disposal Proceeds: {2:N2}\n" +
+                            "Gain/Loss: {3:N2}\n" +
                             "Voucher ID: {4}",
                             disposalDate, bookValue, disposalProceeds, gainLoss, result.VoucherId);
 
@@ -1538,10 +1538,10 @@ namespace pos.FixedAssets
                         string message = string.Format(
                             "Revaluation posted successfully:\n" +
                             "Revaluation Date: {0:yyyy-MM-dd}\n" +
-                            "Old Cost: PKR {1:N2}\n" +
-                            "New Cost: PKR {2:N2}\n" +
-                            "Cost Difference: PKR {3:N2}\n" +
-                            "New Book Value: PKR {4:N2}\n" +
+                            "Old Cost: {1:N2}\n" +
+                            "New Cost: {2:N2}\n" +
+                            "Cost Difference: {3:N2}\n" +
+                            "New Book Value: {4:N2}\n" +
                             "Voucher ID: {5}",
                             revaluationDate, oldCost, newRevaluationCost, costDifference, _currentAsset.CurrentWDV, result.VoucherId);
 
@@ -1589,7 +1589,7 @@ namespace pos.FixedAssets
             if (decimal.TryParse(txtDisposalProceeds.Text, out var proceeds) && _currentAsset != null)
             {
                 var gainLoss = proceeds - _currentAsset.CurrentWDV;
-                lblGainLossDisplay.Text = $"PKR {gainLoss:N2}";
+                lblGainLossDisplay.Text = $" {gainLoss:N2}";
                 lblGainLossDisplay.ForeColor = gainLoss >= 0 ? Color.Green : Color.Red;
             }
         }

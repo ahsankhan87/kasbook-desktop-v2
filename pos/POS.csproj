@@ -1150,21 +1150,6 @@
     <Compile Include="Reports\Financial\frm_BudgetVarianceDetail.Designer.cs">
       <DependentUpon>frm_BudgetVarianceDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Inventory\frm_AgingInventoryReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Inventory\frm_InventoryQohReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Inventory\frm_InventoryValuationReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Inventory\frm_LowStockReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\Inventory\frm_StockMovementReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\Products\frm_products_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2640,12 +2625,6 @@
     <EmbeddedResource Include="Reports\Financial\frm_ProfitAndLossReport.resx">
       <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Inventory\frm_AgingInventoryReport.resx">
-      <DependentUpon>frm_AgingInventoryReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Inventory\frm_LowStockReport.resx">
-      <DependentUpon>frm_LowStockReport.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\frm_products_report.resx">
       <DependentUpon>frm_products_report.cs</DependentUpon>
     </EmbeddedResource>
@@ -3128,6 +3107,7 @@
   <ItemGroup>
     <Folder Include="Accounts\Reports\Trial Balance\" />
     <Folder Include="Properties\DataSources\" />
+    <Folder Include="Reports\Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

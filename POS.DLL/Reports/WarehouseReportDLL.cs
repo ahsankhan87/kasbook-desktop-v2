@@ -14,7 +14,7 @@ namespace POS.DLL
         private SqlCommand cmd;
         private SqlDataAdapter da;
         private DataTable dt = new DataTable();
-       // private WarehouseModal info = new WarehouseModal();
+        // private WarehouseModal info = new WarehouseModal();
 
         public DataTable WarehouseReport(string[] category_code, string[] brand_code, string[] location_code, int unit_id = 0, string item_type = "", bool qty_onhand = false)
         {
@@ -31,8 +31,8 @@ namespace POS.DLL
                         string location = "loc";
                         string category = "cat";
 
-                        String query = "SELECT P.code,P.name,"+
-                            " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," + //branch wise qty
+                        String query = "SELECT P.code,P.name," +
+                            " COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) as qty," +
                             " P.avg_cost as cost_price,P.unit_price,P.brand_code,P.item_type,P.location_code," +
                             " C.name AS category_name," +
                             " U.name AS unit," +
@@ -42,31 +42,24 @@ namespace POS.DLL
                             " LEFT JOIN pos_units U ON U.id=P.unit_id" +
                             " LEFT JOIN pos_categories C ON C.code=P.category_code" +
                             " LEFT JOIN pos_brands B ON B.code=P.brand_code" +
-                            //" LEFT JOIN pos_product_stocks PS ON PS.item_id=P.id" +
-                            " WHERE ("; // 4 empty spaces is needed, it further remove in below code
+
+                            " WHERE P.deleted = 0 AND ("; // 4 empty spaces is needed, it further remove in below code
 
                         if (brand_code.Length > 0)
                         {
-                            //query += " (";
-
                             foreach (string word in brand_code)
                             {
-                                if(word != "0")
+                                if (word != "0")
                                 {
                                     brand += i++;
                                     query += string.Format(" P.brand_code = @{0} OR ", brand);
                                     cmd.Parameters.AddWithValue(String.Format("@{0}", brand), string.Format("{0}", word));
                                 }
-                                
                             }
-                            //query = query.Substring(0, query.Length - 4);// remove last 4 letter i.e. AND from query
-                           // query += ")";
-
                         }
+
                         if (location_code.Length > 0)
                         {
-                            //query += " (";
-
                             foreach (string word in location_code)
                             {
                                 if (word != "0")
@@ -76,16 +69,11 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue(String.Format("@{0}", location), string.Format("{0}", word));
                                 }
                             }
-                            //query = query.Substring(0, query.Length - 4);// remove last 4 letter i.e. AND from query
-                            //query += ")";
-
                         }
 
                         if (category_code.Length > 0)
                         {
-                            //query += " (";
-
-                            foreach (string word in brand_code)
+                            foreach (string word in category_code)
                             {
                                 if (word != "0")
                                 {
@@ -94,43 +82,37 @@ namespace POS.DLL
                                     cmd.Parameters.AddWithValue(String.Format("@{0}", category), string.Format("{0}", word));
                                 }
                             }
-                            //query = query.Substring(0, query.Length - 4);// remove last 4 letter i.e. AND from query
-                            //query += ")";
-
                         }
-                        
+
                         if (category_code.Length <= 0 && location_code.Length <= 0 && brand_code.Length <= 0)
                         {
-                            query = query.Substring(0, query.Length - 8);
-                            query += " WHERE 1=1";
+                            query = query.Substring(0, query.Length - 5);
+                            query += " ";
                         }
                         else
                         {
                             query = query.Substring(0, query.Length - 4);
                             query += ")";
-
                         }
-                        
+
                         if (item_type != "All")
                         {
                             query += " AND P.item_type = @item_type";
                             cmd.Parameters.AddWithValue("@item_type", item_type);
                         }
-                        
+
                         if (unit_id != 0)
                         {
                             query += " AND P.unit_id = @unit_id";
                             cmd.Parameters.AddWithValue("@unit_id", unit_id);
                         }
+
                         if (qty_onhand)
                         {
                             query += " AND COALESCE((select TOP 1 COALESCE(s.qty,0) as qty from pos_product_stocks s where s.item_number=P.item_number and s.branch_id=@branch_id),0) > 0";
                         }
 
-
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
-
-                        //cmd.Parameters.AddWithValue("@OperationType", "5");
                         cmd.CommandText = query;
                         cmd.Connection = cn;
                     }
@@ -141,13 +123,10 @@ namespace POS.DLL
                 }
                 catch
                 {
-
                     throw;
                 }
             }
-
         }
-
 
         public DataTable WarehouseReport_total_amount(string[] category_code, string[] brand_code, string[] location_code, int unit_id = 0, string item_type = "", bool qty_onhand = false)
         {

@@ -59,7 +59,28 @@ namespace POS.DLL
             }
 
         }
-
+        public int GetSalesCountByItemNumber(string itemNumber)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        cmd = new SqlCommand("SELECT COUNT(*) FROM pos_sales_items WHERE item_number = @itemNumber AND branch_id = @branch_id", cn);
+                        cmd.Parameters.AddWithValue("@itemNumber", itemNumber);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    }
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
         /// <summary>
         /// Bulk-post sales using the same internal flow as insert-sale auto posting.
         /// This reuses PostSalesJournalsAndUpdatePostedFlag for account-accurate entries.

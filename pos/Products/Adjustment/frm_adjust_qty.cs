@@ -16,19 +16,19 @@ namespace pos.Products.Adjustment
         public string locationCode { get; set; }
         public bool IsProductDeleted { get; private set; }
 
-        public int _productID { get; private set; }
+        public string _itemNumber { get; private set; }
         public string _productCode { get; private set; }
 
         // Use centralized, DB-backed authorization and current user
         private readonly IAuthorizationService _auth = AppSecurityContext.Auth;
         private UserIdentity _currentUser = AppSecurityContext.User;
 
-        public frm_adjust_qty(decimal defaultQty = 0m,decimal price = 0m, string locationCode = null, int productID = 0, string productCode = null,decimal costPrice = 0m)
+        public frm_adjust_qty(decimal defaultQty = 0m,decimal price = 0m, string locationCode = null, string itemNumber = null, string productCode = null,decimal costPrice = 0m)
         {
             InitializeComponent();
             txtQty.Text = defaultQty.ToString("N2");
             txtQty.Focus();
-            _productID = productID;
+            _itemNumber = itemNumber;
             _productCode = productCode;
             txt_location.Text = locationCode;
             txt_sale_price.Text = price.ToString();
@@ -127,7 +127,7 @@ namespace pos.Products.Adjustment
             }
 
             // delete product permanently from the system
-            if (_productID > 0)
+            if (!string.IsNullOrEmpty(_itemNumber))
             {
                 var confirm = UiMessages.ConfirmYesNo(
                     "Delete this product? This action cannot be undone.",
@@ -138,20 +138,33 @@ namespace pos.Products.Adjustment
 
                 if (confirm == DialogResult.Yes)
                 {
-                    ProductBLL objBLL = new ProductBLL();
-                    objBLL.Delete(_productID);
-                    IsProductDeleted = true;
+                    try
+                    {
+                        ProductBLL objBLL = new ProductBLL();
+                        objBLL.Delete(_itemNumber);
+                        IsProductDeleted = true;
 
-                    UiMessages.ShowInfo(
-                        "Product has been deleted successfully.",
-                        "تم حذف المنتج بنجاح.",
-                        "Deleted",
-                        "تم الحذف"
-                    );
+                        UiMessages.ShowInfo(
+                            "Product has been deleted successfully.",
+                            "تم حذف المنتج بنجاح.",
+                            "Deleted",
+                            "تم الحذف"
+                        );
 
-                    DialogResult = DialogResult.Cancel;
-                    this.Close();
-                    return;
+                        DialogResult = DialogResult.Cancel;
+                        this.Close();
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        UiMessages.ShowError(
+                            "An error occurred while deleting the product: " + ex.Message,
+                            "حدث خطأ أثناء حذف المنتج: " + ex.Message,
+                            "Error",
+                            "خطأ"
+                        );
+
+                    }
                 }
             }
             else

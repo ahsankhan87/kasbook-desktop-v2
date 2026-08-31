@@ -26,7 +26,7 @@ namespace pos.Reports.Financial
             decimal comparisonCash = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "cash") : 0m;
             decimal comparisonBank = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "bank") : 0m;
             decimal comparisonAr = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "accounts receivable", "trade receivable", "debtors") : 0m;
-            decimal comparisonInventory = comparisonDate.HasValue ? accountsBll.GetInventoryValueAsOf(comparisonDate.Value.Date) : 0m;
+            decimal comparisonInventory = comparisonDate.HasValue ? GetBalance(accountsBll, asOfDate, "inventory asset", "stocks", "stock", "merchandise")  : 0m;
             decimal comparisonPrepaid = comparisonDate.HasValue ? GetBalance(accountsBll, comparisonDate.Value, "prepaid") : 0m;
             decimal comparisonCurrentAssets = comparisonCash + comparisonBank + comparisonAr + comparisonInventory + comparisonPrepaid;
 
@@ -51,7 +51,7 @@ namespace pos.Reports.Financial
             decimal cash = GetBalance(accountsBll, asOfDate, "cash");
             decimal bank = GetBalance(accountsBll, asOfDate, "bank");
             decimal accountsReceivable = GetBalance(accountsBll, asOfDate, "accounts receivable", "trade receivable", "debtors");
-            decimal inventory = accountsBll.GetInventoryValueAsOf(asOfDate.Date);
+            decimal inventory = GetBalance(accountsBll, asOfDate, "inventory asset", "stocks","stock", "merchandise"); // accountsBll.GetInventoryValueAsOf(asOfDate.Date);
             decimal prepaid = GetBalance(accountsBll, asOfDate, "prepaid");
             decimal totalCurrentAssets = cash + bank + accountsReceivable + inventory + prepaid;
 

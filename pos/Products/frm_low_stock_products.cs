@@ -1,15 +1,16 @@
-﻿using System;
+﻿using pos.UI;
+using POS.BLL;
+using POS.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using POS.BLL;
-using POS.Core;
 
 namespace pos
 {
@@ -35,12 +36,8 @@ namespace pos
                 grid_low_stock_products.DataSource = null;
 
                 //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
                 grid_low_stock_products.AutoGenerateColumns = false;
-
-                String keyword = "id,code,name,qty,avg_cost,unit_price,loc_code, (1) AS purchase_order_qty";
-                String table = "pos_products_location_view WHERE qty <= re_stock_level ORDER BY id desc";
-                grid_low_stock_products.DataSource = objBLL.GetRecord(keyword, table);
+                grid_low_stock_products.DataSource = GetProducts();
             }
             catch (Exception ex)
             {
@@ -53,25 +50,39 @@ namespace pos
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            string id = grid_low_stock_products.CurrentRow.Cells[0].Value.ToString();
-            
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);  
-
-            if (result == DialogResult.Yes)
+            try
             {
-                ProductBLL objBLL = new ProductBLL();
-                objBLL.Delete(int.Parse(id));
 
-                MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                load_low_stock_products_grid();
+                string id = grid_low_stock_products.CurrentRow.Cells[0].Value.ToString();
+                string item_number = grid_low_stock_products.CurrentRow.Cells["item_number"].Value.ToString();
+
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    ProductBLL objBLL = new ProductBLL();
+                    objBLL.Delete(item_number);
+
+                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    load_low_stock_products_grid();
+                }
+                else
+                {
+                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessages.ShowError(
+                    "An error occurred while deleting the product: " + ex.Message,
+                    "حدث خطأ أثناء حذف المنتج: " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
 
             }
-            
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)
@@ -88,14 +99,8 @@ namespace pos
 
                 grid_low_stock_products.DataSource = null;
 
-                //bind data in data grid view  
-                GeneralBLL objBLL = new GeneralBLL();
                 grid_low_stock_products.AutoGenerateColumns = false;
-
-                String keyword = "id,code,name,qty,avg_cost,unit_price,loc_code, (1) AS purchase_order_qty";
-                String table = string.Format("pos_products_location_view WHERE qty <= re_stock_level AND brand_code LIKE '%{0}%' ORDER BY id desc", brand_code);
-                
-                grid_low_stock_products.DataSource = objBLL.GetRecord(keyword, table);
+                grid_low_stock_products.DataSource = GetProducts(brand_code);
                     
                 txt_search.Text = "";
                 
@@ -106,6 +111,13 @@ namespace pos
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } 
             
+        }
+        private DataTable GetProducts(string brandCode = "")
+        {
+            GeneralBLL objBLL = new GeneralBLL();
+            String keyword = "id,code,name,qty,avg_cost,unit_price,loc_code, (1) AS purchase_order_qty, item_number";
+            String table = string.Format("pos_products_location_view WHERE deleted = 0 AND qty <= re_stock_level AND brand_code LIKE '%{0}%' ORDER BY id desc", brandCode);
+            return objBLL.GetRecord(keyword, table);
         }
 
         private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
@@ -118,36 +130,49 @@ namespace pos
 
         private void grid_low_stock_products_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string name = grid_low_stock_products.Columns[e.ColumnIndex].Name;
-            if(name == "edit")
+            try
             {
-                string product_id = grid_low_stock_products.CurrentRow.Cells["id"].Value.ToString();
-                //frm_addProduct frm_addProduct_obj = new frm_addProduct(this, int.Parse(product_id), "true");
-                //frm_addProduct_obj.ShowDialog();
-            
-            }
-            else if (name == "delete")
-            {
-                string id = grid_low_stock_products.CurrentRow.Cells["id"].Value.ToString();
-
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                string name = grid_low_stock_products.Columns[e.ColumnIndex].Name;
+                if (name == "edit")
                 {
-                    ProductBLL objBLL = new ProductBLL();
-                    objBLL.Delete(int.Parse(id));
+                    string product_id = grid_low_stock_products.CurrentRow.Cells["id"].Value.ToString();
+                    //frm_addProduct frm_addProduct_obj = new frm_addProduct(this, int.Parse(product_id), "true");
+                    //frm_addProduct_obj.ShowDialog();
 
-                    MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (name == "delete")
+                {
+                    string item_number = grid_low_stock_products.CurrentRow.Cells["item_number"].Value.ToString();
+
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete", "Delete Record", buttons, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        ProductBLL objBLL = new ProductBLL();
+                        objBLL.Delete(item_number);
+
+                        MessageBox.Show("Record deleted successfully.", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        load_low_stock_products_grid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
                     load_low_stock_products_grid();
                 }
-                else
-                {
-                    MessageBox.Show("Please select record", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                UiMessages.ShowError(
+                    "An error occurred while deleting the product: " + ex.Message,
+                    "حدث خطأ أثناء حذف المنتج: " + ex.Message,
+                    "Error",
+                    "خطأ"
+                );
 
-                }
-
-                load_low_stock_products_grid();
             }
         }
 

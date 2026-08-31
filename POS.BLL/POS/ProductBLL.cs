@@ -461,12 +461,35 @@ namespace POS.BLL
             }
         }
 
-        public int Delete(int ProductId)
+        public int Delete(string item_number)
         {
             try
             {
-                ProductDLL objDLL = new ProductDLL();
-                return objDLL.Delete(ProductId);
+                SalesBLL salesBLL = new SalesBLL();
+                int salesCount = salesBLL.GetSalesCountByItemNumber(item_number);
+                if (salesCount > 0)
+                {
+                    throw new InvalidOperationException("Cannot delete product with existing sales.");
+                }
+                PurchasesBLL purchasesBLL = new PurchasesBLL();
+                int purchaseCount = purchasesBLL.GetPurchaseCountByItemNumber(item_number);
+                if (purchaseCount > 0)
+                {
+                    throw new InvalidOperationException("Cannot delete product with existing purchases.");
+                }
+                ProductDLL productDLL = new ProductDLL();
+                int stockCount = productDLL.HasStock(item_number);
+                if (stockCount > 0)
+                {
+                    throw new InvalidOperationException("Cannot delete product with existing stock.");
+                }
+                int otherBranchStockCount = productDLL.HasStockInOtherBranches(item_number);
+                if (otherBranchStockCount > 0)
+                {
+                    throw new InvalidOperationException("Cannot delete product with existing stock in other branches.");
+                }
+
+                return productDLL.Delete(item_number);
             }
             catch
             {

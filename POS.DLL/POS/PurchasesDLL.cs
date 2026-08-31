@@ -163,6 +163,29 @@ namespace POS.DLL
                 }
             }
         }
+        public int GetPurchaseCountByItemNumber(string itemNumber)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        cmd = new SqlCommand("SELECT COUNT(*) FROM pos_purchases_items WHERE item_number = @item_number AND branch_id = @branch_id", cn);
+                        cmd.Parameters.AddWithValue("@item_number", itemNumber);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        return count;
+                    }
+                    return 0;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
 
         public DataTable SearchRecord(String condition)
         {

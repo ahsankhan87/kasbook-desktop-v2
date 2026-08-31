@@ -178,7 +178,7 @@ namespace pos.Reports.Financial
             lblBalanceStatus.ForeColor = report.IsBalanced ? Color.DarkGreen : Color.DarkRed;
             lblBalanceStatus.Text = report.IsBalanced
                 ? "Assets = Liabilities + Equity ?"
-                : string.Format("OUT OF BALANCE by PKR {0:N2} ?", Math.Abs(report.Difference));
+                : string.Format("OUT OF BALANCE by {0:N2} ?", Math.Abs(report.Difference));
 
             btnFindDiscrepancy.Enabled = !report.IsBalanced;
             btnFindDiscrepancy.Tag = report;

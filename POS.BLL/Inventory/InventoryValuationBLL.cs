@@ -50,7 +50,7 @@ namespace POS.BLL.Inventory
         public DataTable GetExpenseAccounts()
         {
             // account_type_id = 5 (Expenses)
-            try { return _dll.GetAccountsByType(5); }
+            try { return _dll.GetAccountsByType(); }
             catch { throw; }
         }
 

@@ -1,11 +1,12 @@
+using pos.UI;
+using POS.BLL;
 using POS.BLL.Inventory;
 using POS.Core;
 using POS.Core.Inventory;
-using pos.UI;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
-using POS.BLL;
 
 namespace pos.Inventory
 {
@@ -30,25 +31,74 @@ namespace pos.Inventory
         {
             try
             {
+                
                 // COGS — expense accounts
                 DataTable cogsAccounts = _bll.GetExpenseAccounts();
                 cmbCogsAccount.DataSource    = cogsAccounts;
                 cmbCogsAccount.DisplayMember = "name";
                 cmbCogsAccount.ValueMember   = "id";
-                cmbCogsAccount.SelectedIndex = 0;
+                SelectDefaultCOGSAccount();
 
                 // Inventory — asset accounts
                 DataTable invAccounts = _bll.GetAssetAccounts();
                 cmbInventoryAccount.DataSource    = invAccounts;
                 cmbInventoryAccount.DisplayMember = "name";
                 cmbInventoryAccount.ValueMember   = "id";
-                cmbInventoryAccount.SelectedValue = 9; // 9=Inventory id. Default to "Inventory" account            
+                SelectDefaultInventoryAccount();
             }
             catch (Exception ex)
             {
                 UiMessages.ShowError(
                     "Failed to load accounts: " + ex.Message,
                     "فشل تحميل الحسابات: " + ex.Message);
+            }
+        }
+        private void SelectDefaultCOGSAccount()
+        {
+            if (cmbCogsAccount.Items.Count == 0)
+            {
+                cmbCogsAccount.SelectedIndex = -1;
+                return;
+            }
+
+            var vatItem = cmbCogsAccount.Items
+                .Cast<DataRowView>()
+                .FirstOrDefault(x =>
+                    x["name"].ToString().IndexOf("cogs", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x["name"].ToString().IndexOf("cost of goods sold", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x["name"].ToString().IndexOf("expense", StringComparison.OrdinalIgnoreCase) >= 0);
+
+            if (vatItem != null)
+            {
+                cmbCogsAccount.SelectedValue = vatItem["id"];
+            }
+            else
+            {
+                cmbCogsAccount.SelectedIndex = 0;
+            }
+        }
+
+        private void SelectDefaultInventoryAccount()
+        {
+            if (cmbInventoryAccount.Items.Count == 0)
+            {
+                cmbInventoryAccount.SelectedIndex = -1;
+                return;
+            }
+
+            var vatItem = cmbInventoryAccount.Items
+                .Cast<DataRowView>()
+                .FirstOrDefault(x =>
+                    x["name"].ToString().IndexOf("inventory", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x["name"].ToString().IndexOf("asset", StringComparison.OrdinalIgnoreCase) >= 0);
+
+            if (vatItem != null)
+            {
+                cmbInventoryAccount.SelectedValue = vatItem["id"];
+            }
+            else
+            {
+                cmbInventoryAccount.SelectedIndex = 0;
             }
         }
 

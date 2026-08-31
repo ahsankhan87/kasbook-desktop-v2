@@ -28,7 +28,6 @@ namespace pos.Reports.Financial
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTrialBalanceReport));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlFilters = new System.Windows.Forms.Panel();
@@ -57,9 +56,10 @@ namespace pos.Reports.Financial
             this.pnlTop.Controls.Add(this.lblTitle);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlTop.Size = new System.Drawing.Size(1000, 60);
+            this.pnlTop.Padding = new System.Windows.Forms.Padding(18, 18, 18, 18);
+            this.pnlTop.Size = new System.Drawing.Size(1167, 74);
             this.pnlTop.TabIndex = 0;
             // 
             // lblTitle
@@ -67,9 +67,10 @@ namespace pos.Reports.Financial
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(15, 15);
+            this.lblTitle.Location = new System.Drawing.Point(18, 18);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(217, 30);
+            this.lblTitle.Size = new System.Drawing.Size(275, 37);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Trial Balance Report";
             // 
@@ -83,10 +84,11 @@ namespace pos.Reports.Financial
             this.pnlFilters.Controls.Add(this.label3);
             this.pnlFilters.Controls.Add(this.cmbDateRange);
             this.pnlFilters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilters.Location = new System.Drawing.Point(0, 60);
+            this.pnlFilters.Location = new System.Drawing.Point(0, 74);
+            this.pnlFilters.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlFilters.Name = "pnlFilters";
-            this.pnlFilters.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlFilters.Size = new System.Drawing.Size(1000, 120);
+            this.pnlFilters.Padding = new System.Windows.Forms.Padding(18, 18, 18, 18);
+            this.pnlFilters.Size = new System.Drawing.Size(1167, 148);
             this.pnlFilters.TabIndex = 1;
             // 
             // btnExport
@@ -94,11 +96,12 @@ namespace pos.Reports.Financial
             this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.btnExport.FlatAppearance.BorderSize = 0;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular);
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(880, 70);
+            this.btnExport.Location = new System.Drawing.Point(1027, 86);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(90, 32);
+            this.btnExport.Size = new System.Drawing.Size(105, 39);
             this.btnExport.TabIndex = 5;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = false;
@@ -108,11 +111,12 @@ namespace pos.Reports.Financial
             this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.btnPrint.FlatAppearance.BorderSize = 0;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular);
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(780, 70);
+            this.btnPrint.Location = new System.Drawing.Point(910, 86);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(90, 32);
+            this.btnPrint.Size = new System.Drawing.Size(105, 39);
             this.btnPrint.TabIndex = 4;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = false;
@@ -122,11 +126,12 @@ namespace pos.Reports.Financial
             this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.btnLoad.FlatAppearance.BorderSize = 0;
             this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoad.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular);
+            this.btnLoad.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnLoad.ForeColor = System.Drawing.Color.White;
-            this.btnLoad.Location = new System.Drawing.Point(680, 70);
+            this.btnLoad.Location = new System.Drawing.Point(793, 86);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(90, 32);
+            this.btnLoad.Size = new System.Drawing.Size(105, 39);
             this.btnLoad.TabIndex = 3;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = false;
@@ -137,9 +142,10 @@ namespace pos.Reports.Financial
             this.pnlDatePickers.Controls.Add(this.label1);
             this.pnlDatePickers.Controls.Add(this.dtpToDate);
             this.pnlDatePickers.Controls.Add(this.dtpFromDate);
-            this.pnlDatePickers.Location = new System.Drawing.Point(15, 65);
+            this.pnlDatePickers.Location = new System.Drawing.Point(18, 80);
+            this.pnlDatePickers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlDatePickers.Name = "pnlDatePickers";
-            this.pnlDatePickers.Size = new System.Drawing.Size(650, 45);
+            this.pnlDatePickers.Size = new System.Drawing.Size(758, 55);
             this.pnlDatePickers.TabIndex = 2;
             // 
             // label2
@@ -147,9 +153,10 @@ namespace pos.Reports.Financial
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label2.Location = new System.Drawing.Point(330, 12);
+            this.label2.Location = new System.Drawing.Point(385, 15);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 15);
+            this.label2.Size = new System.Drawing.Size(28, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "To:";
             // 
@@ -158,26 +165,29 @@ namespace pos.Reports.Financial
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label1.Location = new System.Drawing.Point(5, 12);
+            this.label1.Location = new System.Drawing.Point(6, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
+            this.label1.Size = new System.Drawing.Size(46, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "From:";
             // 
             // dtpToDate
             // 
             this.dtpToDate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpToDate.Location = new System.Drawing.Point(355, 8);
+            this.dtpToDate.Location = new System.Drawing.Point(414, 10);
+            this.dtpToDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(280, 23);
+            this.dtpToDate.Size = new System.Drawing.Size(326, 27);
             this.dtpToDate.TabIndex = 1;
             // 
             // dtpFromDate
             // 
             this.dtpFromDate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpFromDate.Location = new System.Drawing.Point(45, 8);
+            this.dtpFromDate.Location = new System.Drawing.Point(52, 10);
+            this.dtpFromDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(280, 23);
+            this.dtpFromDate.Size = new System.Drawing.Size(326, 27);
             this.dtpFromDate.TabIndex = 0;
             // 
             // label3
@@ -185,9 +195,10 @@ namespace pos.Reports.Financial
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label3.Location = new System.Drawing.Point(15, 20);
+            this.label3.Location = new System.Drawing.Point(18, 25);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 15);
+            this.label3.Size = new System.Drawing.Size(90, 20);
             this.label3.TabIndex = 1;
             this.label3.Text = "Date Range:";
             // 
@@ -196,9 +207,10 @@ namespace pos.Reports.Financial
             this.cmbDateRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDateRange.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbDateRange.FormattingEnabled = true;
-            this.cmbDateRange.Location = new System.Drawing.Point(95, 17);
+            this.cmbDateRange.Location = new System.Drawing.Point(111, 21);
+            this.cmbDateRange.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbDateRange.Name = "cmbDateRange";
-            this.cmbDateRange.Size = new System.Drawing.Size(280, 23);
+            this.cmbDateRange.Size = new System.Drawing.Size(326, 28);
             this.cmbDateRange.TabIndex = 0;
             // 
             // pnlContent
@@ -206,32 +218,36 @@ namespace pos.Reports.Financial
             this.pnlContent.BackColor = System.Drawing.Color.White;
             this.pnlContent.Controls.Add(this.dgvReport);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(0, 180);
+            this.pnlContent.Location = new System.Drawing.Point(0, 222);
+            this.pnlContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlContent.Size = new System.Drawing.Size(1000, 420);
+            this.pnlContent.Padding = new System.Windows.Forms.Padding(18, 18, 18, 18);
+            this.pnlContent.Size = new System.Drawing.Size(1167, 516);
             this.pnlContent.TabIndex = 2;
             // 
             // dgvReport
             // 
             this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvReport.Location = new System.Drawing.Point(15, 15);
+            this.dgvReport.Location = new System.Drawing.Point(18, 18);
+            this.dgvReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvReport.Name = "dgvReport";
-            this.dgvReport.Size = new System.Drawing.Size(970, 390);
+            this.dgvReport.RowHeadersWidth = 51;
+            this.dgvReport.Size = new System.Drawing.Size(1131, 480);
             this.dgvReport.TabIndex = 0;
+            this.dgvReport.DoubleClick += new System.EventHandler(this.dgvReport_DoubleClick);
             // 
             // FrmTrialBalanceReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(248)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.ClientSize = new System.Drawing.Size(1167, 738);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlFilters);
             this.Controls.Add(this.pnlTop);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(800, 400);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(930, 481);
             this.Name = "FrmTrialBalanceReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trial Balance Report";

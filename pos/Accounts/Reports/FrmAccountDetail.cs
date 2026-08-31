@@ -63,10 +63,10 @@ namespace pos.Accounts.Reports
                 }
 
                 DataRow newRow = accounts_dt.NewRow();
-                newRow[1] = "Total";
-                newRow[3] = _dr_total;
-                newRow[4] = _cr_total;
-                newRow[5] = (_dr_total - _cr_total);
+                newRow["account_name"] = "Total";
+                newRow["debit"] = _dr_total;
+                newRow["credit"] = _cr_total;
+                newRow["balance"] = (_dr_total - _cr_total);
                 accounts_dt.Rows.InsertAt(newRow, accounts_dt.Rows.Count);
 
                 grid_account_report.DataSource = accounts_dt;

@@ -201,7 +201,7 @@ namespace pos
         public void get_accounts_dropdownlist()
         {
             GeneralBLL generalBLL_obj = new GeneralBLL();
-            string keyword = "id,name";
+            string keyword = "id,CONCAT(code, ' - ', name) as name";
             string table = "acc_accounts";
 
             DataTable accounts = generalBLL_obj.GetRecord(keyword, table);
@@ -214,8 +214,33 @@ namespace pos
             cmb_GL_account_code.ValueMember = "id";
             cmb_GL_account_code.DataSource = accounts;
 
-            cmb_GL_account_code.SelectedValue = "21"; // 21 is the default Ac payable Account id in acc_accounts table
+            SelectDefaultAPAccount(); // 21 is the default Ac payable Account id in acc_accounts table
 
+        }
+        private void SelectDefaultAPAccount()
+        {
+            if (cmb_GL_account_code.Items.Count == 0)
+            {
+                cmb_GL_account_code.SelectedIndex = -1;
+                return;
+            }
+
+            var vatItem = cmb_GL_account_code.Items
+                .Cast<DataRowView>()
+                .FirstOrDefault(x =>
+                    x["name"].ToString().IndexOf("account payable", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x["name"].ToString().IndexOf("AP", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x["name"].ToString().IndexOf("a/c payable", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    x["name"].ToString().IndexOf("payable", StringComparison.OrdinalIgnoreCase) >= 0);
+
+            if (vatItem != null)
+            {
+                cmb_GL_account_code.SelectedValue = vatItem["id"];
+            }
+            else
+            {
+                cmb_GL_account_code.SelectedIndex = 0;
+            }
         }
 
         public DataTable get_GL_accounts_dt()

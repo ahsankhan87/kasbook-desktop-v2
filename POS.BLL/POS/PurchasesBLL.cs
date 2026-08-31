@@ -76,7 +76,17 @@ namespace POS.BLL
                 throw;
             }
         }
-
+        public int GetPurchaseCountByItemNumber(string item_number)
+        {
+            try
+            {
+                return objDLL.GetPurchaseCountByItemNumber(item_number);
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public DataTable GetAll_Hold_PurchaseByInvoice(string invoice_no)
         {
             try

@@ -87,6 +87,15 @@ namespace POS.BLL
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (!ValidateCurrentUserPassword(options.pin_or_password))
+            {
+                return new FinancialPeriodCloseResultModal
+                {
+                    success = false,
+                    message = "Invalid admin password/PIN."
+                };
+            }
+
             options.close_type = "Soft";
             return _periodDal.ClosePeriod(options);
         }

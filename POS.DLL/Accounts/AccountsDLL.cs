@@ -76,6 +76,41 @@ namespace POS.DLL
             }
 
         }
+        public DataTable GetAccountsByAccountType(string AccountTypeName)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                        String query = "SELECT a.id,a.code,a.name,g.name AS group_name,at.name AS account_type,at.id AS account_type_id    " +
+                            "FROM acc_accounts a    " +
+                            "LEFT JOIN acc_groups g ON g.id = a.group_id    " +
+                            "LEFT JOIN acc_account_type at ON at.id = g.account_type_id    " +
+                            "WHERE a.is_active = 1        " +
+                            "AND(@AccountTypeName = '' OR at.name = @AccountTypeName)    " +
+                            "ORDER BY a.code";
+
+
+                        cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@AccountTypeName", AccountTypeName);
+
+                    }
+
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch
+                {
+
+                    throw;
+                }
+            }
+
+        }
 
         public DataTable GetGroupAccountByParent(int parent_id = 0)
         {
@@ -287,12 +322,12 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT AA.name AS AccountName," +
+                        String query = "SELECT AA.id AS AccountID, AA.name AS AccountName," +
                             " SUM(AE.debit) as TotalDebit,SUM(AE.credit) as TotalCredit, SUM(AE.debit)-SUM(AE.credit) AS ClosingBalance" +
                             " FROM acc_entries AE" +
                             " LEFT JOIN acc_accounts AS AA  ON AE.account_id = AA.id" +
                             " WHERE entry_date BETWEEN @from_date AND @to_date"+
-                            " AND AE.branch_id=@branch_id GROUP BY AA.name";
+                            " AND AE.branch_id=@branch_id GROUP BY AA.name, AA.id";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@from_date", from_date);

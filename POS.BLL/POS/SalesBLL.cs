@@ -55,6 +55,18 @@ namespace POS.BLL
                 throw;
             }
         }
+        public int GetSalesCountByItemNumber(string item_number)
+        {
+            try
+            {
+                SalesDLL objDLL = new SalesDLL();
+                return objDLL.GetSalesCountByItemNumber(item_number);
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         public Dictionary<string, bool> BulkPostSalesToJournal(List<string> invoiceNos, int userId)
         {

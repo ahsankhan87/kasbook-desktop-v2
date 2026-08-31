@@ -129,6 +129,8 @@ namespace pos.Inventory
             // 
             // cmbCogsAccount
             // 
+            this.cmbCogsAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbCogsAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCogsAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCogsAccount.Location = new System.Drawing.Point(202, 22);
             this.cmbCogsAccount.Name = "cmbCogsAccount";
@@ -146,6 +148,8 @@ namespace pos.Inventory
             // 
             // cmbInventoryAccount
             // 
+            this.cmbInventoryAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbInventoryAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbInventoryAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInventoryAccount.Location = new System.Drawing.Point(202, 58);
             this.cmbInventoryAccount.Name = "cmbInventoryAccount";

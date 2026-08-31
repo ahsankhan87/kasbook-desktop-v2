@@ -37,7 +37,7 @@ namespace pos
 
         private sealed class DeletedProductAdjustment
         {
-            public int ProductId { get; set; }
+            public string productNumber { get; set; }
             public string ProductCode { get; set; }
             public decimal Qty { get; set; }
             public decimal CostPrice { get; set; }
@@ -227,7 +227,7 @@ namespace pos
                     for (int i = 0; i < _deletedProducts.Count; i++)
                     {
                         var deleted = _deletedProducts[i];
-                        if (deleted == null || deleted.ProductId <= 0)
+                        if (deleted == null || string.IsNullOrEmpty(deleted.productNumber))
                             continue;
 
                         decimal oldInventoryValue = Math.Round(deleted.Qty * deleted.CostPrice, 2);
@@ -402,17 +402,17 @@ namespace pos
 
                             // Show qty dialog per product; default to current qty
                             decimal enteredQty = qty;
-                            int productID = id;
+                            string productNumber = item_number;
                             string productCode = code;
                             int selectedAdjustmentAccountId = ResolveSelectedAdjustmentAccountId();
                             
 
-                            using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty, unit_price, location_code, productID, productCode,avg_cost))
+                            using (var qtyDlg = new pos.Products.Adjustment.frm_adjust_qty(qty, unit_price, location_code, productNumber, productCode,avg_cost))
                             {
                                 if (qtyDlg.ShowDialog(this) == DialogResult.OK)
                                 {
                                     enteredQty = qtyDlg.EnteredQty; // this is a decimal
-                                    productID = qtyDlg._productID; // in case you need it for something
+                                    productNumber = qtyDlg._itemNumber; // in case you need it for something
                                     productCode = qtyDlg._productCode; // in case you need it for something
                                     location_code = qtyDlg.locationCode; // in case location can be changed in dialog
                                     unit_price = qtyDlg.Price; // in case price can be changed in dialog
@@ -424,7 +424,7 @@ namespace pos
                                     {
                                         _deletedProducts.Add(new DeletedProductAdjustment
                                         {
-                                            ProductId = productID,
+                                            productNumber = productNumber,
                                             ProductCode = productCode,
                                             Qty = qty,
                                             CostPrice = original_avg_cost,

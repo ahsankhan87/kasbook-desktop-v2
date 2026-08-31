@@ -2061,8 +2061,59 @@ namespace POS.DLL
                 }
             }
         }
-
-        public int Delete(int ProductId)
+        public int HasStockInOtherBranches(string item_number)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        if (cn.State == ConnectionState.Closed)
+                        {
+                            cn.Open();
+                            cmd.Connection = cn;
+                            cmd.CommandText = @"SELECT COUNT(*) FROM pos_product_stocks WHERE qty > 0 AND item_number = @item_number AND branch_id <> @branch_id";
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        }
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        return count;
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+        public int HasStock(string item_number)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        if (cn.State == ConnectionState.Closed)
+                        {
+                            cn.Open();
+                            cmd.Connection = cn;
+                            cmd.CommandText = @"SELECT COUNT(*) FROM pos_product_stocks WHERE qty > 0 AND item_number = @item_number AND branch_id = @branch_id";
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
+                            cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        }
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        return count;
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+        public int Delete(string item_number)
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
             {
@@ -2075,13 +2126,13 @@ namespace POS.DLL
                             cn.Open();
 
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@id", ProductId);
+                            cmd.Parameters.AddWithValue("@item_number", item_number);
                             cmd.Parameters.AddWithValue("@OperationType", "3");
 
                         }
 
                         int result = cmd.ExecuteNonQuery();
-                        Log.LogAction("Delete Product", $"Product ID: {ProductId}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                        Log.LogAction("Delete Product", $"Product Number: {item_number}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
 
                         return result;
                     }
@@ -2092,7 +2143,6 @@ namespace POS.DLL
                 }
             }
         }
-
 
         public String GetMaxLocationTransferInvoiceNo()
         {

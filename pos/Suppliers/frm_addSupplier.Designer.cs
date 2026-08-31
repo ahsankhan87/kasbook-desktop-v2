@@ -294,7 +294,8 @@
             // cmb_GL_account_code
             // 
             resources.ApplyResources(this.cmb_GL_account_code, "cmb_GL_account_code");
-            this.cmb_GL_account_code.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_GL_account_code.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_GL_account_code.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_GL_account_code.FormattingEnabled = true;
             this.cmb_GL_account_code.Name = "cmb_GL_account_code";
             // 

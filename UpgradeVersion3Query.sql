@@ -123,6 +123,11 @@ INSERT Logs ([Id], [BranchId], [UserId], [Action], [Timestamp], [Details], [PcNa
 select [Id], [BranchId], [UserId], [Action], [Timestamp], [Details], [PcName], [AdditionalInfo] from pos_db.dbo.Logs
 SET IDENTITY_INSERT Logs OFF;
 
+SET IDENTITY_INSERT zatca_credentials ON;
+INSERT zatca_credentials ([id], [company_id], [user_id], [branch_id], [cert_type], [mode], [cert_base64], [private_key], [secret_key], [updated_at], [csr_text], [created_at], [otp], [status], [compliance_request_id], [parent_id])
+select [id], [company_id], [user_id], [branch_id], [cert_type], [mode], [cert_base64], [private_key], [secret_key], [updated_at], [csr_text], [created_at], [otp], [status], [compliance_request_id], [parent_id] from pos_db.dbo.zatca_credentials
+SET IDENTITY_INSERT zatca_credentials OFF;
+
 update pos_customers set GLAccountID=6
 update pos_suppliers set GLAccountID=21
 update pos_banks set GLAccountID=3

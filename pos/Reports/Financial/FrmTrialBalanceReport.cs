@@ -1,12 +1,15 @@
+using CrystalDecisions.Shared;
+using DGVPrinterHelper;
+using pos.Accounts.Reports;
+using pos.UI;
+using pos.UI.Busy;
+using POS.BLL;
+using POS.Core;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using DGVPrinterHelper;
-using POS.BLL;
-using POS.Core;
-using pos.UI;
-using pos.UI.Busy;
 
 namespace pos.Reports.Financial
 {
@@ -412,6 +415,21 @@ namespace pos.Reports.Financial
                     writer.WriteLine();
                 }
             }
+        }
+
+        private void dgvReport_DoubleClick(object sender, EventArgs e)
+        {
+            int accountId = Convert.ToInt16(dgvReport.CurrentRow.Cells["AccountID"].Value ?? "0");
+
+            if (accountId == null || accountId == 0)
+            {
+                return;
+            }
+            DateTime fromDate = dtpFromDate.Value.Date;
+            DateTime toDate = dtpToDate.Value.Date;
+
+            var ledger = new FrmAccountDetail(accountId, fromDate, toDate);
+            ledger.ShowDialog(this);
         }
     }
 }
