@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnRefresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>519, 14</value>
+  <data name="btnRefresh.Text" xml:space="preserve">
+    <value>تحديث</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>422, 17</value>
   </data>
@@ -130,11 +130,80 @@
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 24</value>
   </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>إلى</value>
+  </data>
   <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, 16</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 24</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="lblPeriod.Text" xml:space="preserve">
+    <value>الفترة</value>
+  </data>
+  <data name="lblPendingTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="lblPendingTrend.Text" xml:space="preserve">
+    <value>الاتجاه</value>
+  </data>
+  <data name="lblPendingTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 23</value>
+  </data>
+  <data name="lblPendingTitle.Text" xml:space="preserve">
+    <value>قيد/غير منشور</value>
+  </data>
+  <data name="lblYearTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="lblYearTrend.Text" xml:space="preserve">
+    <value>الاتجاه</value>
+  </data>
+  <data name="lblYearTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 23</value>
+  </data>
+  <data name="lblYearTitle.Text" xml:space="preserve">
+    <value>هذا العام</value>
+  </data>
+  <data name="lblMonthTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="lblMonthTrend.Text" xml:space="preserve">
+    <value>الاتجاه</value>
+  </data>
+  <data name="lblMonthTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 23</value>
+  </data>
+  <data name="lblMonthTitle.Text" xml:space="preserve">
+    <value>هذا الشهر</value>
+  </data>
+  <data name="lblTodayTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="lblTodayTrend.Text" xml:space="preserve">
+    <value>الاتجاه</value>
+  </data>
+  <data name="lblTodayTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <data name="lblTodayTitle.Text" xml:space="preserve">
+    <value>مصروفات اليوم</value>
+  </data>
+  <data name="lblTopAccounts.Text" xml:space="preserve">
+    <value>أعلى حسابات المصروفات</value>
+  </data>
+  <data name="lblRecent.Text" xml:space="preserve">
+    <value>المعاملات الأخيرة</value>
+  </data>
+  <data name="lblBreakdown.Text" xml:space="preserve">
+    <value>تفصيل المصروفات حسب الحساب</value>
+  </data>
+  <data name="lblMonthlyChart.Text" xml:space="preserve">
+    <value>مقارنة المصروفات الشهرية</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -146,65 +215,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>لوحة معلومات المصروفات</value>
-  </data>
-  <data name="lblRecent.Text" xml:space="preserve">
-    <value>المعاملات الأخيرة</value>
-  </data>
-  <data name="lblMonthlyChart.Text" xml:space="preserve">
-    <value>مقارنة المصروفات الشهرية</value>
-  </data>
-  <data name="lblPendingTrend.Text" xml:space="preserve">
-    <value>الاتجاه</value>
-  </data>
-  <data name="lblPeriod.Text" xml:space="preserve">
-    <value>الفترة</value>
-  </data>
-  <data name="lblPendingAmount.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblTodayAmount.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblYearTitle.Text" xml:space="preserve">
-    <value>هذا العام</value>
-  </data>
-  <data name="lblTodayTrend.Text" xml:space="preserve">
-    <value>الاتجاه</value>
-  </data>
-  <data name="lblTodayTitle.Text" xml:space="preserve">
-    <value>مصروفات اليوم</value>
-  </data>
-  <data name="lblMonthTitle.Text" xml:space="preserve">
-    <value>هذا الشهر</value>
-  </data>
-  <data name="lblTo.Text" xml:space="preserve">
-    <value>إلى</value>
-  </data>
-  <data name="btnRefresh.Text" xml:space="preserve">
-    <value>تحديث</value>
-  </data>
-  <data name="lblYearAmount.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblYearTrend.Text" xml:space="preserve">
-    <value>الاتجاه</value>
-  </data>
-  <data name="lblMonthAmount.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblTopAccounts.Text" xml:space="preserve">
-    <value>أعلى حسابات المصروفات</value>
-  </data>
-  <data name="lblPendingTitle.Text" xml:space="preserve">
-    <value>قيد/غير منشور</value>
-  </data>
-  <data name="lblFrom.Text" xml:space="preserve">
-    <value>من</value>
-  </data>
-  <data name="lblMonthTrend.Text" xml:space="preserve">
-    <value>الاتجاه</value>
-  </data>
-  <data name="lblBreakdown.Text" xml:space="preserve">
-    <value>تفصيل المصروفات حسب الحساب</value>
   </data>
 </root>

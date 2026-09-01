@@ -306,6 +306,7 @@ namespace POS.DLL
                            E.branch_id,
                            E.ref_module,
                            E.ref_id,
+                           E.payment_ref_invoice_no AS reference_no,
                            E.period_id,
                            E.user_id AS created_by,
                            E.date_created AS created_at,

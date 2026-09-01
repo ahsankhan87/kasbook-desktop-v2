@@ -60,16 +60,6 @@ namespace pos.Reports.Financial
             this._panelLedgerArea = new System.Windows.Forms.Panel();
             this._panelCenter = new System.Windows.Forms.Panel();
             this._gridLedger = new System.Windows.Forms.DataGridView();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VoucherNo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.VoucherType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RefModule = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Narration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RunningBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RefId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._btnLoadMore = new System.Windows.Forms.Button();
             this._panelClosingWrap = new System.Windows.Forms.Panel();
             this._gridClosing = new System.Windows.Forms.DataGridView();
@@ -117,6 +107,16 @@ namespace pos.Reports.Financial
             this._cmbShow = new System.Windows.Forms.ComboBox();
             this._lblGroupBy = new System.Windows.Forms.Label();
             this._cmbGroupBy = new System.Windows.Forms.ComboBox();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VoucherNo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.VoucherType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RefModule = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Narration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Debit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RunningBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReferenceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._panelMain.SuspendLayout();
             this._panelLedgerArea.SuspendLayout();
             this._panelCenter.SuspendLayout();
@@ -183,7 +183,7 @@ namespace pos.Reports.Financial
             this.Debit,
             this.Credit,
             this.RunningBalance,
-            this.RefId,
+            this.ReferenceNo,
             this.Status});
             this._gridLedger.Dock = System.Windows.Forms.DockStyle.Fill;
             this._gridLedger.EnableHeadersVisualStyles = false;
@@ -197,76 +197,6 @@ namespace pos.Reports.Financial
             this._gridLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._gridLedger.Size = new System.Drawing.Size(1233, 648);
             this._gridLedger.TabIndex = 0;
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Date";
-            this.Date.MinimumWidth = 6;
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // VoucherNo
-            // 
-            this.VoucherNo.HeaderText = "Voucher No";
-            this.VoucherNo.MinimumWidth = 6;
-            this.VoucherNo.Name = "VoucherNo";
-            this.VoucherNo.ReadOnly = true;
-            // 
-            // VoucherType
-            // 
-            this.VoucherType.HeaderText = "Voucher Type";
-            this.VoucherType.MinimumWidth = 6;
-            this.VoucherType.Name = "VoucherType";
-            this.VoucherType.ReadOnly = true;
-            // 
-            // RefModule
-            // 
-            this.RefModule.HeaderText = "Module";
-            this.RefModule.MinimumWidth = 6;
-            this.RefModule.Name = "RefModule";
-            this.RefModule.ReadOnly = true;
-            // 
-            // Narration
-            // 
-            this.Narration.HeaderText = "Narration";
-            this.Narration.MinimumWidth = 6;
-            this.Narration.Name = "Narration";
-            this.Narration.ReadOnly = true;
-            // 
-            // Debit
-            // 
-            this.Debit.HeaderText = "Debit";
-            this.Debit.MinimumWidth = 6;
-            this.Debit.Name = "Debit";
-            this.Debit.ReadOnly = true;
-            // 
-            // Credit
-            // 
-            this.Credit.HeaderText = "Credit";
-            this.Credit.MinimumWidth = 6;
-            this.Credit.Name = "Credit";
-            this.Credit.ReadOnly = true;
-            // 
-            // RunningBalance
-            // 
-            this.RunningBalance.HeaderText = "Running Balance";
-            this.RunningBalance.MinimumWidth = 6;
-            this.RunningBalance.Name = "RunningBalance";
-            this.RunningBalance.ReadOnly = true;
-            // 
-            // RefId
-            // 
-            this.RefId.HeaderText = "Reference ID";
-            this.RefId.MinimumWidth = 6;
-            this.RefId.Name = "RefId";
-            this.RefId.ReadOnly = true;
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Status";
-            this.Status.MinimumWidth = 6;
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
             // 
             // _btnLoadMore
             // 
@@ -800,6 +730,76 @@ namespace pos.Reports.Financial
             this._cmbGroupBy.Size = new System.Drawing.Size(140, 24);
             this._cmbGroupBy.TabIndex = 10;
             // 
+            // Date
+            // 
+            this.Date.HeaderText = "Date";
+            this.Date.MinimumWidth = 6;
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // VoucherNo
+            // 
+            this.VoucherNo.HeaderText = "Voucher No";
+            this.VoucherNo.MinimumWidth = 6;
+            this.VoucherNo.Name = "VoucherNo";
+            this.VoucherNo.ReadOnly = true;
+            // 
+            // VoucherType
+            // 
+            this.VoucherType.HeaderText = "Voucher Type";
+            this.VoucherType.MinimumWidth = 6;
+            this.VoucherType.Name = "VoucherType";
+            this.VoucherType.ReadOnly = true;
+            // 
+            // RefModule
+            // 
+            this.RefModule.HeaderText = "Module";
+            this.RefModule.MinimumWidth = 6;
+            this.RefModule.Name = "RefModule";
+            this.RefModule.ReadOnly = true;
+            // 
+            // Narration
+            // 
+            this.Narration.HeaderText = "Narration";
+            this.Narration.MinimumWidth = 6;
+            this.Narration.Name = "Narration";
+            this.Narration.ReadOnly = true;
+            // 
+            // Debit
+            // 
+            this.Debit.HeaderText = "Debit";
+            this.Debit.MinimumWidth = 6;
+            this.Debit.Name = "Debit";
+            this.Debit.ReadOnly = true;
+            // 
+            // Credit
+            // 
+            this.Credit.HeaderText = "Credit";
+            this.Credit.MinimumWidth = 6;
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            // 
+            // RunningBalance
+            // 
+            this.RunningBalance.HeaderText = "Running Balance";
+            this.RunningBalance.MinimumWidth = 6;
+            this.RunningBalance.Name = "RunningBalance";
+            this.RunningBalance.ReadOnly = true;
+            // 
+            // ReferenceNo
+            // 
+            this.ReferenceNo.HeaderText = "Reference #";
+            this.ReferenceNo.MinimumWidth = 6;
+            this.ReferenceNo.Name = "ReferenceNo";
+            this.ReferenceNo.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
             // frm_GeneralLedgerReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -855,6 +855,7 @@ namespace pos.Reports.Financial
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private Button _btnSearchAccount;
         private DataGridViewTextBoxColumn Date;
         private DataGridViewLinkColumn VoucherNo;
         private DataGridViewTextBoxColumn VoucherType;
@@ -863,8 +864,7 @@ namespace pos.Reports.Financial
         private DataGridViewTextBoxColumn Debit;
         private DataGridViewTextBoxColumn Credit;
         private DataGridViewTextBoxColumn RunningBalance;
-        private DataGridViewTextBoxColumn RefId;
+        private DataGridViewTextBoxColumn ReferenceNo;
         private DataGridViewTextBoxColumn Status;
-        private Button _btnSearchAccount;
     }
 }

@@ -64,7 +64,6 @@ namespace pos.Expenses
             // 
             // panelFilters
             // 
-            resources.ApplyResources(this.panelFilters, "panelFilters");
             this.panelFilters.Controls.Add(this.btnFilter);
             this.panelFilters.Controls.Add(this.txtSearch);
             this.panelFilters.Controls.Add(this.lblSearch);
@@ -78,6 +77,7 @@ namespace pos.Expenses
             this.panelFilters.Controls.Add(this.lblFrom);
             this.panelFilters.Controls.Add(this.btnPrint);
             this.panelFilters.Controls.Add(this.btnExport);
+            resources.ApplyResources(this.panelFilters, "panelFilters");
             this.panelFilters.Name = "panelFilters";
             // 
             // btnFilter
@@ -100,9 +100,9 @@ namespace pos.Expenses
             // 
             // cmbPaymentMode
             // 
-            resources.ApplyResources(this.cmbPaymentMode, "cmbPaymentMode");
             this.cmbPaymentMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPaymentMode.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbPaymentMode, "cmbPaymentMode");
             this.cmbPaymentMode.Name = "cmbPaymentMode";
             // 
             // lblPaymentMode
@@ -112,9 +112,9 @@ namespace pos.Expenses
             // 
             // cmbExpenseAccount
             // 
-            resources.ApplyResources(this.cmbExpenseAccount, "cmbExpenseAccount");
             this.cmbExpenseAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExpenseAccount.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbExpenseAccount, "cmbExpenseAccount");
             this.cmbExpenseAccount.Name = "cmbExpenseAccount";
             // 
             // lblExpenseAccount
@@ -124,8 +124,8 @@ namespace pos.Expenses
             // 
             // dtpTo
             // 
-            resources.ApplyResources(this.dtpTo, "dtpTo");
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpTo, "dtpTo");
             this.dtpTo.Name = "dtpTo";
             // 
             // lblTo
@@ -135,8 +135,8 @@ namespace pos.Expenses
             // 
             // dtpFrom
             // 
-            resources.ApplyResources(this.dtpFrom, "dtpFrom");
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpFrom, "dtpFrom");
             this.dtpFrom.Name = "dtpFrom";
             // 
             // lblFrom
@@ -160,18 +160,18 @@ namespace pos.Expenses
             // 
             // panelBody
             // 
-            resources.ApplyResources(this.panelBody, "panelBody");
             this.panelBody.Controls.Add(this.gridExpenses);
+            resources.ApplyResources(this.panelBody, "panelBody");
             this.panelBody.Name = "panelBody";
             // 
             // gridExpenses
             // 
-            resources.ApplyResources(this.gridExpenses, "gridExpenses");
             this.gridExpenses.AllowUserToAddRows = false;
             this.gridExpenses.AllowUserToDeleteRows = false;
             this.gridExpenses.BackgroundColor = System.Drawing.Color.White;
             this.gridExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridExpenses.ContextMenuStrip = this.ctxGrid;
+            resources.ApplyResources(this.gridExpenses, "gridExpenses");
             this.gridExpenses.MultiSelect = false;
             this.gridExpenses.Name = "gridExpenses";
             this.gridExpenses.ReadOnly = true;
@@ -183,7 +183,6 @@ namespace pos.Expenses
             // 
             // ctxGrid
             // 
-            resources.ApplyResources(this.ctxGrid, "ctxGrid");
             this.ctxGrid.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ctxGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuViewDetails,
@@ -193,55 +192,56 @@ namespace pos.Expenses
             this.mnuPrintVoucher,
             this.mnuViewJournal});
             this.ctxGrid.Name = "ctxGrid";
+            resources.ApplyResources(this.ctxGrid, "ctxGrid");
             // 
             // mnuViewDetails
             // 
-            resources.ApplyResources(this.mnuViewDetails, "mnuViewDetails");
             this.mnuViewDetails.Name = "mnuViewDetails";
+            resources.ApplyResources(this.mnuViewDetails, "mnuViewDetails");
             this.mnuViewDetails.Click += new System.EventHandler(this.mnuViewDetails_Click);
             // 
             // mnuEdit
             // 
-            resources.ApplyResources(this.mnuEdit, "mnuEdit");
             this.mnuEdit.Name = "mnuEdit";
+            resources.ApplyResources(this.mnuEdit, "mnuEdit");
             this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click);
             // 
             // mnuDelete
             // 
-            resources.ApplyResources(this.mnuDelete, "mnuDelete");
             this.mnuDelete.Name = "mnuDelete";
+            resources.ApplyResources(this.mnuDelete, "mnuDelete");
             this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // mnuPrintVoucher
             // 
-            resources.ApplyResources(this.mnuPrintVoucher, "mnuPrintVoucher");
             this.mnuPrintVoucher.Name = "mnuPrintVoucher";
+            resources.ApplyResources(this.mnuPrintVoucher, "mnuPrintVoucher");
             this.mnuPrintVoucher.Click += new System.EventHandler(this.mnuPrintVoucher_Click);
             // 
             // mnuViewJournal
             // 
-            resources.ApplyResources(this.mnuViewJournal, "mnuViewJournal");
             this.mnuViewJournal.Name = "mnuViewJournal";
+            resources.ApplyResources(this.mnuViewJournal, "mnuViewJournal");
             this.mnuViewJournal.Click += new System.EventHandler(this.mnuViewJournal_Click);
             // 
             // panelSummary
             // 
-            resources.ApplyResources(this.panelSummary, "panelSummary");
             this.panelSummary.Controls.Add(this.cardNetTotal);
             this.panelSummary.Controls.Add(this.cardTotalTax);
             this.panelSummary.Controls.Add(this.cardTotalExpenses);
+            resources.ApplyResources(this.panelSummary, "panelSummary");
             this.panelSummary.Name = "panelSummary";
             // 
             // cardNetTotal
             // 
-            resources.ApplyResources(this.cardNetTotal, "cardNetTotal");
             this.cardNetTotal.Controls.Add(this.lblNetTotalValue);
             this.cardNetTotal.Controls.Add(this.lblNetTotalTitle);
+            resources.ApplyResources(this.cardNetTotal, "cardNetTotal");
             this.cardNetTotal.Name = "cardNetTotal";
             // 
             // lblNetTotalValue
@@ -256,9 +256,9 @@ namespace pos.Expenses
             // 
             // cardTotalTax
             // 
-            resources.ApplyResources(this.cardTotalTax, "cardTotalTax");
             this.cardTotalTax.Controls.Add(this.lblTotalTaxValue);
             this.cardTotalTax.Controls.Add(this.lblTotalTaxTitle);
+            resources.ApplyResources(this.cardTotalTax, "cardTotalTax");
             this.cardTotalTax.Name = "cardTotalTax";
             // 
             // lblTotalTaxValue
@@ -273,9 +273,9 @@ namespace pos.Expenses
             // 
             // cardTotalExpenses
             // 
-            resources.ApplyResources(this.cardTotalExpenses, "cardTotalExpenses");
             this.cardTotalExpenses.Controls.Add(this.lblTotalExpensesValue);
             this.cardTotalExpenses.Controls.Add(this.lblTotalExpensesTitle);
+            resources.ApplyResources(this.cardTotalExpenses, "cardTotalExpenses");
             this.cardTotalExpenses.Name = "cardTotalExpenses";
             // 
             // lblTotalExpensesValue

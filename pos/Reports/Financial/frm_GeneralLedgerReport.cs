@@ -10,6 +10,7 @@ using pos.Expenses;
 using pos.Reports.Common;
 using pos.UI;
 using pos.UI.Busy;
+using pos.Accounts.Reports;
 
 namespace pos.Reports.Financial
 {
@@ -414,7 +415,8 @@ namespace pos.Reports.Financial
                         VoucherType = Convert.ToString(r["voucher_type"]),
                         RefModule = Convert.ToString(r["ref_module"]),
                         RefId = Convert.ToString(r["ref_id"]),
-                        Status = Convert.ToString(r["status"])
+                        Status = Convert.ToString(r["status"]),
+                        ReferenceNo = Convert.ToString(r["reference_no"])
                     })
                     .OrderBy(g => g.Key.Date)
                     .ThenBy(g => g.Key.VoucherNo);
@@ -425,7 +427,7 @@ namespace pos.Reports.Financial
                     decimal credit = g.Sum(x => x.Field<decimal>("credit"));
                     running += debit - credit;
                     string narration = string.Join(" | ", g.Select(x => Convert.ToString(x["narration"]).Trim()).Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().Take(3));
-                    AddLedgerRow(g.Key.Date.ToString("yyyy-MM-dd"), g.Key.VoucherNo, g.Key.VoucherType, g.Key.RefModule, narration, debit, credit, running, g.Key.RefId, g.Key.Status);
+                    AddLedgerRow(g.Key.Date.ToString("yyyy-MM-dd"), g.Key.VoucherNo, g.Key.VoucherType, g.Key.RefModule, narration, debit, credit, running, g.Key.ReferenceNo, g.Key.Status);
                 }
             }
             else if (string.Equals(groupMode, "By Month", StringComparison.OrdinalIgnoreCase))
@@ -459,7 +461,7 @@ namespace pos.Reports.Financial
                         debit,
                         credit,
                         balance,
-                        Convert.ToString(row["ref_id"]),
+                        Convert.ToString(row["reference_no"]),
                         Convert.ToString(row["status"]));
                 }
             }
@@ -468,7 +470,7 @@ namespace pos.Reports.Financial
             UpdateLoadMoreState();
         }
 
-        private void AddLedgerRow(string date, string voucherNo, string voucherType, string refModule, string narration, decimal debit, decimal credit, decimal running, string refId, string status)
+        private void AddLedgerRow(string date, string voucherNo, string voucherType, string refModule, string narration, decimal debit, decimal credit, decimal running, string referenceNo, string status)
         {
             _gridLedger.Rows.Add(
                 date,
@@ -479,7 +481,7 @@ namespace pos.Reports.Financial
                 debit.ToString("N2"),
                 credit.ToString("N2"),
                 FormatSigned(running),
-                refId,
+                referenceNo,
                 status);
         }
 
@@ -563,42 +565,74 @@ namespace pos.Reports.Financial
         {
             string voucherNo = Convert.ToString(row.Cells["VoucherNo"].Value);
             string refModule = Convert.ToString(row.Cells["RefModule"].Value).ToUpperInvariant();
-            string refId = Convert.ToString(row.Cells["RefId"].Value);
+            //string refId = Convert.ToString(row.Cells["RefId"].Value);
+            string referenceNo = Convert.ToString(row.Cells["ReferenceNo"].Value);
+            int accountId = GetSelectedAccountId();
+            DateTime fromDate = DateTime.Parse(Convert.ToString(row.Cells["Date"].Value));
+            DateTime toDate = DateTime.Parse(Convert.ToString(row.Cells["Date"].Value));
 
-            if (string.IsNullOrWhiteSpace(voucherNo) || voucherNo.Length < 2)
+            if (string.IsNullOrWhiteSpace(referenceNo) || referenceNo.Length < 2)
             {
                 return;
             }
 
             try
             {
-                if (refModule == "SALE" || voucherNo.StartsWith("S", StringComparison.OrdinalIgnoreCase))
+                //Show account detail
+                //using (var frm = new FrmAccountDetail(accountId, fromDate, toDate))
+                //{
+                //    frm.ShowDialog(this);
+                //    return;
+                //}
+
+                if (refModule == "SALE" || refModule == "SALES" || referenceNo.StartsWith("S", StringComparison.OrdinalIgnoreCase) || referenceNo.StartsWith("Z", StringComparison.OrdinalIgnoreCase))
                 {
-                    int saleId;
-                    if (int.TryParse(refId, out saleId) && saleId > 0)
+                    
+                    using (var frm = new frm_sales_detail(0, referenceNo))
                     {
-                        using (var frm = new frm_sales_detail(saleId, voucherNo))
-                        {
-                            frm.ShowDialog(this);
-                        }
+                        frm.ShowDialog(this);
                     }
+                    
                     return;
                 }
 
-                if (refModule == "PURCHASE" || voucherNo.StartsWith("P", StringComparison.OrdinalIgnoreCase))
+                if (refModule == "PURCHASES" || refModule == "PURCHASE")
                 {
                     using (var frm = new frm_purchases_detail())
                     {
-                        frm.load_purchases_detail_grid(voucherNo);
+                        frm.load_purchases_detail_grid(referenceNo);
                         frm.ShowDialog(this);
                     }
                     return;
                 }
 
-                if (refModule == "EXPENSE" || refModule == "PAYMENT" || voucherNo.StartsWith("E", StringComparison.OrdinalIgnoreCase))
+                if ((refModule == "EXPENSE" || refModule == "PAYMENT") && referenceNo.StartsWith("PV", StringComparison.OrdinalIgnoreCase))
                 {
-                    using (var frm = new frm_expenses(voucherNo))
+                    using (var frm = new frm_expenses(referenceNo))
                     {
+                        frm.ShowDialog(this);
+                    }
+                    return;
+                }
+
+                // FOR RETURN SALES
+                if (refModule == "REVERSAL" && (referenceNo.StartsWith("S", StringComparison.OrdinalIgnoreCase) || referenceNo.StartsWith("Z", StringComparison.OrdinalIgnoreCase)))
+                {
+
+                    using (var frm = new frm_sales_detail(0, referenceNo))
+                    {
+                        frm.ShowDialog(this);
+                    }
+
+                    return;
+                }
+
+                // FOR RETURN PURCHASES
+                if (refModule == "REVERSAL" && referenceNo.StartsWith("P", StringComparison.OrdinalIgnoreCase))
+                {
+                    using (var frm = new frm_purchases_detail())
+                    {
+                        frm.load_purchases_detail_grid(referenceNo);
                         frm.ShowDialog(this);
                     }
                     return;
@@ -659,7 +693,9 @@ namespace pos.Reports.Financial
         {
             switch ((module ?? string.Empty).Trim().ToUpperInvariant())
             {
+                case "SALES": return Color.FromArgb(0, 120, 212);
                 case "SALE": return Color.FromArgb(0, 120, 212);
+                case "PURCHASES": return Color.FromArgb(16, 124, 16);
                 case "PURCHASE": return Color.FromArgb(16, 124, 16);
                 case "EXPENSE": return Color.FromArgb(255, 185, 0);
                 case "JV": return Color.FromArgb(136, 84, 208);
@@ -741,7 +777,7 @@ namespace pos.Reports.Financial
                     row.Cells["RunningBalance"].Value);
             }
 
-            table.Rows.Add("Closing Balance", "", "", "", "Totals", _gridClosing.Rows[0].Cells[5].Value, _gridClosing.Rows[0].Cells[6].Value, _gridClosing.Rows[0].Cells[7].Value);
+            table.Rows.Add("Closing Balance", "", "",  "Totals", _gridClosing.Rows[0].Cells[5].Value, _gridClosing.Rows[0].Cells[6].Value, _gridClosing.Rows[0].Cells[7].Value, "");
             ExcelExportHelper.ExportDataTableToExcel(table, "GeneralLedger", this, true);
         }
 
