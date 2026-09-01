@@ -125,4 +125,64 @@
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>متابعة المصروفات</value>
+  </data>
+  <data name="lblExpenseAccount.Text" xml:space="preserve">
+    <value>حساب المصروفات</value>
+  </data>
+  <data name="lblSearch.Text" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="mnuViewDetails.Text" xml:space="preserve">
+    <value>عرض التفاصيل</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>تصدير إلى Excel</value>
+  </data>
+  <data name="btnPrint.Text" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="mnuPrintVoucher.Text" xml:space="preserve">
+    <value>طباعة القيد</value>
+  </data>
+  <data name="lblNetTotalTitle.Text" xml:space="preserve">
+    <value>صافي الإجمالي</value>
+  </data>
+  <data name="mnuDelete.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="lblNetTotalValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblTotalTaxValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="mnuViewJournal.Text" xml:space="preserve">
+    <value>عرض قيد اليومية</value>
+  </data>
+  <data name="lblPaymentMode.Text" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="lblTotalExpensesValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblTotalTaxTitle.Text" xml:space="preserve">
+    <value>إجمالي الضريبة</value>
+  </data>
+  <data name="btnFilter.Text" xml:space="preserve">
+    <value>تطبيق</value>
+  </data>
+  <data name="mnuEdit.Text" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="lblTotalExpensesTitle.Text" xml:space="preserve">
+    <value>إجمالي المصروفات</value>
+  </data>
 </root>
