@@ -83,7 +83,6 @@ namespace pos.Expenses
             // 
             // panelFilters
             // 
-            resources.ApplyResources(this.panelFilters, "panelFilters");
             this.panelFilters.Controls.Add(this.btnRefresh);
             this.panelFilters.Controls.Add(this.dtpTo);
             this.panelFilters.Controls.Add(this.lblTo);
@@ -91,6 +90,7 @@ namespace pos.Expenses
             this.panelFilters.Controls.Add(this.lblFrom);
             this.panelFilters.Controls.Add(this.cmbPeriod);
             this.panelFilters.Controls.Add(this.lblPeriod);
+            resources.ApplyResources(this.panelFilters, "panelFilters");
             this.panelFilters.Name = "panelFilters";
             // 
             // btnRefresh
@@ -102,8 +102,8 @@ namespace pos.Expenses
             // 
             // dtpTo
             // 
-            resources.ApplyResources(this.dtpTo, "dtpTo");
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpTo, "dtpTo");
             this.dtpTo.Name = "dtpTo";
             // 
             // lblTo
@@ -113,8 +113,8 @@ namespace pos.Expenses
             // 
             // dtpFrom
             // 
-            resources.ApplyResources(this.dtpFrom, "dtpFrom");
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpFrom, "dtpFrom");
             this.dtpFrom.Name = "dtpFrom";
             // 
             // lblFrom
@@ -124,9 +124,9 @@ namespace pos.Expenses
             // 
             // cmbPeriod
             // 
-            resources.ApplyResources(this.cmbPeriod, "cmbPeriod");
             this.cmbPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPeriod.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbPeriod, "cmbPeriod");
             this.cmbPeriod.Name = "cmbPeriod";
             this.cmbPeriod.SelectedIndexChanged += new System.EventHandler(this.cmbPeriod_SelectedIndexChanged);
             // 
@@ -137,20 +137,20 @@ namespace pos.Expenses
             // 
             // panelKpis
             // 
-            resources.ApplyResources(this.panelKpis, "panelKpis");
             this.panelKpis.Controls.Add(this.cardPending);
             this.panelKpis.Controls.Add(this.cardYear);
             this.panelKpis.Controls.Add(this.cardMonth);
             this.panelKpis.Controls.Add(this.cardToday);
+            resources.ApplyResources(this.panelKpis, "panelKpis");
             this.panelKpis.Name = "panelKpis";
             // 
             // cardPending
             // 
-            resources.ApplyResources(this.cardPending, "cardPending");
             this.cardPending.Controls.Add(this.lblPendingTrend);
             this.cardPending.Controls.Add(this.lblPendingAmount);
             this.cardPending.Controls.Add(this.lblPendingTitle);
             this.cardPending.Controls.Add(this.picPending);
+            resources.ApplyResources(this.cardPending, "cardPending");
             this.cardPending.Name = "cardPending";
             // 
             // lblPendingTrend
@@ -170,18 +170,18 @@ namespace pos.Expenses
             // 
             // picPending
             // 
-            resources.ApplyResources(this.picPending, "picPending");
             this.picPending.BackColor = System.Drawing.Color.Tomato;
+            resources.ApplyResources(this.picPending, "picPending");
             this.picPending.Name = "picPending";
             this.picPending.TabStop = false;
             // 
             // cardYear
             // 
-            resources.ApplyResources(this.cardYear, "cardYear");
             this.cardYear.Controls.Add(this.lblYearTrend);
             this.cardYear.Controls.Add(this.lblYearAmount);
             this.cardYear.Controls.Add(this.lblYearTitle);
             this.cardYear.Controls.Add(this.picYear);
+            resources.ApplyResources(this.cardYear, "cardYear");
             this.cardYear.Name = "cardYear";
             // 
             // lblYearTrend
@@ -201,18 +201,18 @@ namespace pos.Expenses
             // 
             // picYear
             // 
-            resources.ApplyResources(this.picYear, "picYear");
             this.picYear.BackColor = System.Drawing.Color.Gold;
+            resources.ApplyResources(this.picYear, "picYear");
             this.picYear.Name = "picYear";
             this.picYear.TabStop = false;
             // 
             // cardMonth
             // 
-            resources.ApplyResources(this.cardMonth, "cardMonth");
             this.cardMonth.Controls.Add(this.lblMonthTrend);
             this.cardMonth.Controls.Add(this.lblMonthAmount);
             this.cardMonth.Controls.Add(this.lblMonthTitle);
             this.cardMonth.Controls.Add(this.picMonth);
+            resources.ApplyResources(this.cardMonth, "cardMonth");
             this.cardMonth.Name = "cardMonth";
             // 
             // lblMonthTrend
@@ -232,18 +232,18 @@ namespace pos.Expenses
             // 
             // picMonth
             // 
-            resources.ApplyResources(this.picMonth, "picMonth");
             this.picMonth.BackColor = System.Drawing.Color.Teal;
+            resources.ApplyResources(this.picMonth, "picMonth");
             this.picMonth.Name = "picMonth";
             this.picMonth.TabStop = false;
             // 
             // cardToday
             // 
-            resources.ApplyResources(this.cardToday, "cardToday");
             this.cardToday.Controls.Add(this.lblTodayTrend);
             this.cardToday.Controls.Add(this.lblTodayAmount);
             this.cardToday.Controls.Add(this.lblTodayTitle);
             this.cardToday.Controls.Add(this.picToday);
+            resources.ApplyResources(this.cardToday, "cardToday");
             this.cardToday.Name = "cardToday";
             // 
             // lblTodayTrend
@@ -263,25 +263,25 @@ namespace pos.Expenses
             // 
             // picToday
             // 
-            resources.ApplyResources(this.picToday, "picToday");
             this.picToday.BackColor = System.Drawing.Color.DodgerBlue;
+            resources.ApplyResources(this.picToday, "picToday");
             this.picToday.Name = "picToday";
             this.picToday.TabStop = false;
             // 
             // panelContent
             // 
-            resources.ApplyResources(this.panelContent, "panelContent");
             this.panelContent.Controls.Add(this.cardTopAccounts);
             this.panelContent.Controls.Add(this.cardRecent);
             this.panelContent.Controls.Add(this.cardPieChart);
             this.panelContent.Controls.Add(this.cardMonthlyChart);
+            resources.ApplyResources(this.panelContent, "panelContent");
             this.panelContent.Name = "panelContent";
             // 
             // cardTopAccounts
             // 
-            resources.ApplyResources(this.cardTopAccounts, "cardTopAccounts");
             this.cardTopAccounts.Controls.Add(this.gridTopAccounts);
             this.cardTopAccounts.Controls.Add(this.lblTopAccounts);
+            resources.ApplyResources(this.cardTopAccounts, "cardTopAccounts");
             this.cardTopAccounts.Name = "cardTopAccounts";
             // 
             // gridTopAccounts
@@ -296,9 +296,9 @@ namespace pos.Expenses
             // 
             // cardRecent
             // 
-            resources.ApplyResources(this.cardRecent, "cardRecent");
             this.cardRecent.Controls.Add(this.gridRecentTransactions);
             this.cardRecent.Controls.Add(this.lblRecent);
+            resources.ApplyResources(this.cardRecent, "cardRecent");
             this.cardRecent.Name = "cardRecent";
             // 
             // gridRecentTransactions
@@ -313,9 +313,9 @@ namespace pos.Expenses
             // 
             // cardPieChart
             // 
-            resources.ApplyResources(this.cardPieChart, "cardPieChart");
             this.cardPieChart.Controls.Add(this.chartBreakdown);
             this.cardPieChart.Controls.Add(this.lblBreakdown);
+            resources.ApplyResources(this.cardPieChart, "cardPieChart");
             this.cardPieChart.Name = "cardPieChart";
             // 
             // chartBreakdown
@@ -330,9 +330,9 @@ namespace pos.Expenses
             // 
             // cardMonthlyChart
             // 
-            resources.ApplyResources(this.cardMonthlyChart, "cardMonthlyChart");
             this.cardMonthlyChart.Controls.Add(this.chartMonthly);
             this.cardMonthlyChart.Controls.Add(this.lblMonthlyChart);
+            resources.ApplyResources(this.cardMonthlyChart, "cardMonthlyChart");
             this.cardMonthlyChart.Name = "cardMonthlyChart";
             // 
             // chartMonthly
