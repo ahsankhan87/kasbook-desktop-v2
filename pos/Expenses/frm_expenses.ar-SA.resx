@@ -126,6 +126,66 @@
     <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>منصرف</value>
+    <value>المصروفات</value>
+  </data>
+  <data name="grpVoucherInfo.Text" xml:space="preserve">
+    <value>معلومات القسيمة</value>
+  </data>
+  <data name="lblReferenceNo.Text" xml:space="preserve">
+    <value>رقم المرجع</value>
+  </data>
+  <data name="lblVoucherNo.Text" xml:space="preserve">
+    <value>رقم القسيمة</value>
+  </data>
+  <data name="lblVoucherDate.Text" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="lblNetTotal.Text" xml:space="preserve">
+    <value>إجمالي الصافي</value>
+  </data>
+  <data name="lblTaxAmount.Text" xml:space="preserve">
+    <value>مبلغ ضريبة القيمة المضافة</value>
+  </data>
+  <data name="lblTaxPercent.Text" xml:space="preserve">
+    <value>نسبة ضريبة السلع والخدمات / الضريبة %</value>
+  </data>
+  <data name="lblVatAccount.Text" xml:space="preserve">
+    <value>رقم ضريبة القيمة المضافة</value>
+  </data>
+  <data name="btnAttachment.Text" xml:space="preserve">
+    <value>تصفح</value>
+  </data>
+  <data name="lblAttachment.Text" xml:space="preserve">
+    <value>مرفق</value>
+  </data>
+  <data name="lblNarration.Text" xml:space="preserve">
+    <value>الشرح</value>
+  </data>
+  <data name="lblAmount.Text" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="lblExpenseAccount.Text" xml:space="preserve">
+    <value>حساب المصروفات</value>
+  </data>
+  <data name="grpExpenseDetails.Text" xml:space="preserve">
+    <value>تفاصيل المصروفات</value>
+  </data>
+  <data name="grpPaymentInfo.Text" xml:space="preserve">
+    <value>معلومات الدفع</value>
+  </data>
+  <data name="lblCreditAccount.Text" xml:space="preserve">
+    <value>حساب الدائن</value>
+  </data>
+  <data name="lblPaymentMode.Text" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="btnClose.Text" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="btnClear.Text" xml:space="preserve">
+    <value>مسح (F1)</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>حفظ (F3)</value>
   </data>
 </root>
