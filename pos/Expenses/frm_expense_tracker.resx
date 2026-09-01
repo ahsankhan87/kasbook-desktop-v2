@@ -117,7 +117,856 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtSearch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mnuEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 24</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>996, 577</value>
+  </data>
+  <data name="&gt;&gt;lblExpenseAccount.Name" xml:space="preserve">
+    <value>lblExpenseAccount</value>
+  </data>
+  <data name="lblExpenseAccount.Text" xml:space="preserve">
+    <value>Expense Account</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTotalTaxValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnExport.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="txtSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>758, 10</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalTitle.Name" xml:space="preserve">
+    <value>lblNetTotalTitle</value>
+  </data>
+  <data name="btnExport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>685, 10</value>
+  </data>
+  <data name="&gt;&gt;mnuDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblNetTotalValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="lblNetTotalValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesTitle.Name" xml:space="preserve">
+    <value>lblTotalExpensesTitle</value>
+  </data>
+  <data name="lblExpenseAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
+    <value>lblTo</value>
+  </data>
+  <data name="&gt;&gt;cardNetTotal.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmbExpenseAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cmbPaymentMode.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSearch.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="&gt;&gt;cardNetTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblPaymentMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTotalTaxTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="mnuViewDetails.Text" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+  <data name="&gt;&gt;btnFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="panelSummary.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 6, 9, 8</value>
+  </data>
+  <data name="panelFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesTitle.Parent" xml:space="preserve">
+    <value>cardTotalExpenses</value>
+  </data>
+  <data name="&gt;&gt;cardTotalTax.Name" xml:space="preserve">
+    <value>cardTotalTax</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
+  </data>
+  <data name="cardNetTotal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 67</value>
+  </data>
+  <data name="lblPaymentMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 24</value>
+  </data>
+  <data name="&gt;&gt;panelSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelSummary.Name" xml:space="preserve">
+    <value>panelSummary</value>
+  </data>
+  <data name="&gt;&gt;btnFilter.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;cardTotalExpenses.Name" xml:space="preserve">
+    <value>cardTotalExpenses</value>
+  </data>
+  <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 24</value>
+  </data>
+  <data name="btnFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblSearch.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardTotalTax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 10</value>
+  </data>
+  <data name="cardNetTotal.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblTotalTaxTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblPaymentMode.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;ctxGrid.Name" xml:space="preserve">
+    <value>ctxGrid</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Export Excel</value>
+  </data>
+  <data name="lblTo.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.Name" xml:space="preserve">
+    <value>btnPrint</value>
+  </data>
+  <data name="dtpFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblPaymentMode.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnPrint.Text" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="panelSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>996, 86</value>
+  </data>
+  <data name="&gt;&gt;cardTotalExpenses.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardTotalExpenses.Parent" xml:space="preserve">
+    <value>panelSummary</value>
+  </data>
+  <data name="&gt;&gt;cardNetTotal.Parent" xml:space="preserve">
+    <value>panelSummary</value>
+  </data>
+  <data name="cmbExpenseAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 24</value>
+  </data>
+  <data name="lblTotalExpensesValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mnuViewDetails.Name" xml:space="preserve">
+    <value>mnuViewDetails</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardTotalExpenses.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblNetTotalValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblTo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblTotalExpensesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblTotalExpensesTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblPaymentMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>491, 10</value>
+  </data>
+  <data name="mnuPrintVoucher.Text" xml:space="preserve">
+    <value>Print Voucher</value>
+  </data>
+  <data name="lblTotalExpensesValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 43</value>
+  </data>
+  <data name="panelSummary.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="lblNetTotalTitle.Text" xml:space="preserve">
+    <value>Net Total</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesValue.Name" xml:space="preserve">
+    <value>lblTotalExpensesValue</value>
+  </data>
+  <data name="&gt;&gt;lblPaymentMode.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="cardNetTotal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>670, 10</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSearch.Name" xml:space="preserve">
+    <value>txtSearch</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesValue.Parent" xml:space="preserve">
+    <value>cardTotalExpenses</value>
+  </data>
+  <data name="lblNetTotalValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;lblExpenseAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 24</value>
+  </data>
+  <data name="lblNetTotalValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 43</value>
+  </data>
+  <data name="&gt;&gt;cmbPaymentMode.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="lblTotalTaxTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 24</value>
+  </data>
+  <data name="lblNetTotalTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="cmbExpenseAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>343, 11</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>891, 38</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_expense_tracker</value>
+  </data>
+  <data name="&gt;&gt;btnFilter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxValue.Name" xml:space="preserve">
+    <value>lblTotalTaxValue</value>
+  </data>
+  <data name="panelFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>996, 70</value>
+  </data>
+  <data name="&gt;&gt;cardTotalTax.Parent" xml:space="preserve">
+    <value>panelSummary</value>
+  </data>
+  <data name="btnPrint.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="mnuDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="panelFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="lblNetTotalValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblTotalTaxValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalValue.Parent" xml:space="preserve">
+    <value>cardNetTotal</value>
+  </data>
+  <data name="cmbPaymentMode.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="dtpTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="&gt;&gt;lblSearch.Name" xml:space="preserve">
+    <value>lblSearch</value>
+  </data>
+  <data name="&gt;&gt;panelSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Expense Tracker</value>
+  </data>
+  <data name="&gt;&gt;mnuPrintVoucher.Name" xml:space="preserve">
+    <value>mnuPrintVoucher</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Name" xml:space="preserve">
+    <value>dtpFrom</value>
+  </data>
+  <data name="lblSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;txtSearch.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;mnuEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.Name" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;lblExpenseAccount.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cardTotalTax.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="panelFilters.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbPaymentMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panelBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblNetTotalTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 24</value>
+  </data>
+  <data name="lblTotalExpensesTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Name" xml:space="preserve">
+    <value>dtpTo</value>
+  </data>
+  <data name="dtpTo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cardTotalExpenses.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTotalTaxValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;gridExpenses.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPaymentMode.Name" xml:space="preserve">
+    <value>lblPaymentMode</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxValue.Parent" xml:space="preserve">
+    <value>cardTotalTax</value>
+  </data>
+  <data name="&gt;&gt;ctxGrid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>996, 421</value>
+  </data>
+  <data name="lblSearch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="gridExpenses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>978, 421</value>
+  </data>
+  <data name="gridExpenses.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="cardTotalExpenses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 67</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblPaymentMode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblNetTotalValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ctxGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 130</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="lblTotalExpensesTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cmbExpenseAccount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 24</value>
+  </data>
+  <data name="mnuViewJournal.Text" xml:space="preserve">
+    <value>View Journal Entry</value>
+  </data>
+  <data name="gridExpenses.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblPaymentMode.Text" xml:space="preserve">
+    <value>Payment Mode</value>
+  </data>
+  <data name="lblExpenseAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 24</value>
+  </data>
+  <data name="&gt;&gt;lblSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuViewJournal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 24</value>
+  </data>
+  <data name="&gt;&gt;mnuViewJournal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTotalExpensesTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="lblExpenseAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 10</value>
+  </data>
+  <data name="&gt;&gt;cardNetTotal.Name" xml:space="preserve">
+    <value>cardNetTotal</value>
+  </data>
+  <data name="&gt;&gt;cmbExpenseAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gridExpenses.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTotalTaxValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTotalExpensesValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="dtpFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 24</value>
+  </data>
+  <data name="&gt;&gt;panelBody.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cardNetTotal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTotalExpensesValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridExpenses.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 0</value>
+  </data>
+  <data name="&gt;&gt;lblSearch.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnFilter.Name" xml:space="preserve">
+    <value>btnFilter</value>
+  </data>
+  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 24</value>
+  </data>
+  <data name="lblFrom.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 10</value>
+  </data>
+  <data name="&gt;&gt;gridExpenses.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="lblNetTotalTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="mnuPrintVoucher.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 24</value>
+  </data>
+  <data name="&gt;&gt;gridExpenses.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;mnuPrintVoucher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
+    <value>lblFrom</value>
+  </data>
+  <data name="lblPaymentMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTotalTaxTitle.Text" xml:space="preserve">
+    <value>Total Tax</value>
+  </data>
+  <data name="panelFilters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 24</value>
+  </data>
+  <data name="btnFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>915, 10</value>
+  </data>
+  <data name="mnuViewDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 24</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="btnFilter.Text" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="panelBody.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panelBody.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mnuEdit.Name" xml:space="preserve">
+    <value>mnuEdit</value>
+  </data>
+  <data name="lblTotalTaxValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 43</value>
+  </data>
+  <data name="&gt;&gt;gridExpenses.Name" xml:space="preserve">
+    <value>gridExpenses</value>
+  </data>
+  <data name="lblTotalTaxValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 8</value>
+  </data>
+  <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 24</value>
+  </data>
+  <data name="btnPrint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
+    <value>btnExport</value>
+  </data>
+  <data name="lblTotalExpensesValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="lblTotalExpensesValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblExpenseAccount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="mnuEdit.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="panelBody.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 0, 9, 0</value>
+  </data>
+  <data name="lblFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblExpenseAccount.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;mnuViewDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSearch.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;txtSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblExpenseAccount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 10</value>
+  </data>
+  <data name="gridExpenses.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cmbPaymentMode.Name" xml:space="preserve">
+    <value>cmbPaymentMode</value>
+  </data>
+  <data name="&gt;&gt;cmbExpenseAccount.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="btnPrint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>817, 38</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="lblNetTotalTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblTotalTaxValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="cmbPaymentMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 24</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 6</value>
+  </data>
+  <data name="dtpTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 8</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalTitle.Parent" xml:space="preserve">
+    <value>cardNetTotal</value>
+  </data>
+  <data name="&gt;&gt;cmbExpenseAccount.Name" xml:space="preserve">
+    <value>cmbExpenseAccount</value>
+  </data>
+  <data name="&gt;&gt;mnuDelete.Name" xml:space="preserve">
+    <value>mnuDelete</value>
+  </data>
+  <data name="&gt;&gt;cardTotalTax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTotalTaxTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="cardTotalTax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 67</value>
+  </data>
+  <data name="lblNetTotalTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="lblTotalExpensesValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="panelFilters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 8, 9, 6</value>
+  </data>
+  <data name="&gt;&gt;lblNetTotalValue.Name" xml:space="preserve">
+    <value>lblNetTotalValue</value>
+  </data>
+  <data name="&gt;&gt;lblTotalExpensesTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelSummary.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="btnPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 24</value>
+  </data>
+  <data name="lblTotalExpensesTitle.Text" xml:space="preserve">
+    <value>Total Expenses</value>
+  </data>
+  <data name="cardTotalExpenses.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 10</value>
+  </data>
+  <data name="panelBody.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 70</value>
+  </data>
+  <data name="btnFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 24</value>
+  </data>
+  <data name="cardTotalTax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblSearch.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblTotalTaxTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;cmbPaymentMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxTitle.Name" xml:space="preserve">
+    <value>lblTotalTaxTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTotalTaxTitle.Parent" xml:space="preserve">
+    <value>cardTotalTax</value>
+  </data>
+  <data name="panelSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblTotalExpensesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 24</value>
+  </data>
+  <data name="panelSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 491</value>
+  </data>
+  <data name="&gt;&gt;cardTotalTax.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblNetTotalTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;cmbExpenseAccount.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Name" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuViewJournal.Name" xml:space="preserve">
+    <value>mnuViewJournal</value>
+  </data>
+  <data name="cmbPaymentMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>559, 11</value>
+  </data>
+  <data name="lblTotalTaxTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cardTotalExpenses.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <metadata name="ctxGrid.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-SA</value>
   </metadata>
 </root>

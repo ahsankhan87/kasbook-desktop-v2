@@ -2,3 +2,70 @@
 # Build artifacts
 *.resx
 ```
+```
+# Build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.so
+*.dylib
+*.jar
+*.war
+*.class
+
+# Dependencies
+packages/
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+*.env.*
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# Test and coverage
+coverage/
+htmlcov/
+.coverage
+*.gcda
+*.gcno
+
+# Distribution artifacts
+dist/
+build/
+target/
+```
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+# [Ll]og/
+# [Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/

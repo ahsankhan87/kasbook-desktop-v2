@@ -2083,8 +2083,14 @@
     <EmbeddedResource Include="Expenses\frm_expenses.resx">
       <DependentUpon>frm_expenses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Expenses\frm_expense_dashboard.ar-SA.resx">
+      <DependentUpon>frm_expense_dashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Expenses\frm_expense_dashboard.resx">
       <DependentUpon>frm_expense_dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Expenses\frm_expense_tracker.ar-SA.resx">
+      <DependentUpon>frm_expense_tracker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Expenses\frm_expense_tracker.resx">
       <DependentUpon>frm_expense_tracker.cs</DependentUpon>

@@ -1,5 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,4 +117,1249 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picPending.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 19</value>
+  </data>
+  <data name="&gt;&gt;cardPieChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="picPending.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 34</value>
+  </data>
+  <data name="picYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 19</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblRecent.Text" xml:space="preserve">
+    <value>Recent Transactions</value>
+  </data>
+  <data name="cardPending.Location" type="System.Drawing.Point, System.Drawing">
+    <value>817, 11</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chartBreakdown.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="cardYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTopAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.Name" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="dtpTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblYearTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblMonthAmount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt, style=Bold</value>
+  </data>
+  <data name="lblTodayTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="&gt;&gt;picYear.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblPendingAmount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPendingTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTrend.Parent" xml:space="preserve">
+    <value>cardToday</value>
+  </data>
+  <data name="&gt;&gt;cardTopAccounts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblMonthAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblMonthlyChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTodayTrend.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cardYear.Name" xml:space="preserve">
+    <value>cardYear</value>
+  </data>
+  <data name="lblRecent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblYearTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 23</value>
+  </data>
+  <data name="panelFilters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTrend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardPieChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>544, 11</value>
+  </data>
+  <data name="&gt;&gt;cardPieChart.Parent" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="&gt;&gt;lblTopAccounts.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 101</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblMonthTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="btnRefresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;picMonth.Parent" xml:space="preserve">
+    <value>cardMonth</value>
+  </data>
+  <data name="&gt;&gt;cardPending.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTitle.Parent" xml:space="preserve">
+    <value>cardPending</value>
+  </data>
+  <data name="&gt;&gt;gridRecentTransactions.Parent" xml:space="preserve">
+    <value>cardRecent</value>
+  </data>
+  <data name="&gt;&gt;cardMonth.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblTodayTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="cardMonthlyChart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblMonthlyChart.Text" xml:space="preserve">
+    <value>Monthly Expense Comparison</value>
+  </data>
+  <data name="lblPendingTrend.Text" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="&gt;&gt;cardMonth.Name" xml:space="preserve">
+    <value>cardMonth</value>
+  </data>
+  <data name="lblRecent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>11, 8, 0, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTodayAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="dtpFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cardToday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="picYear.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 14</value>
+  </data>
+  <data name="&gt;&gt;cardYear.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.Name" xml:space="preserve">
+    <value>lblPeriod</value>
+  </data>
+  <data name="panelKpis.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblYearTrend.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblMonthlyChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblMonthlyChart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>11, 8, 0, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.Name" xml:space="preserve">
+    <value>btnRefresh</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTrend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1073, 56</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 17</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTitle.Name" xml:space="preserve">
+    <value>lblMonthTitle</value>
+  </data>
+  <data name="lblFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYearTitle.Parent" xml:space="preserve">
+    <value>cardYear</value>
+  </data>
+  <data name="lblBreakdown.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="btnRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 26</value>
+  </data>
+  <data name="lblTo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblTopAccounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 32</value>
+  </data>
+  <data name="&gt;&gt;picPending.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPendingAmount.Parent" xml:space="preserve">
+    <value>cardPending</value>
+  </data>
+  <data name="cardTopAccounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 208</value>
+  </data>
+  <data name="&gt;&gt;cardTopAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblYearTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblYearTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblTopAccounts.Parent" xml:space="preserve">
+    <value>cardTopAccounts</value>
+  </data>
+  <data name="&gt;&gt;lblRecent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTrend.Name" xml:space="preserve">
+    <value>lblTodayTrend</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1073, 656</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblBreakdown.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>11, 8, 0, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTrend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cardPending.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTrend.Parent" xml:space="preserve">
+    <value>cardMonth</value>
+  </data>
+  <data name="&gt;&gt;picToday.Name" xml:space="preserve">
+    <value>picToday</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTrend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYearTitle.Name" xml:space="preserve">
+    <value>lblYearTitle</value>
+  </data>
+  <data name="cardMonthlyChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 216</value>
+  </data>
+  <data name="lblYearTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblPeriod.Text" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.Parent" xml:space="preserve">
+    <value>cardMonthlyChart</value>
+  </data>
+  <data name="lblPendingTrend.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;lblBreakdown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblTodayAmount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="lblYearAmount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="cardYear.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cardTopAccounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>544, 243</value>
+  </data>
+  <data name="lblPendingAmount.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;panelContent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblPendingTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnRefresh.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblTodayAmount.Parent" xml:space="preserve">
+    <value>cardToday</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblTodayAmount.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;cardMonth.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTitle.Parent" xml:space="preserve">
+    <value>cardToday</value>
+  </data>
+  <data name="panelKpis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 56</value>
+  </data>
+  <data name="panelFilters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 11, 14, 6</value>
+  </data>
+  <data name="lblYearTitle.Text" xml:space="preserve">
+    <value>This Year</value>
+  </data>
+  <data name="lblTodayTrend.Text" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="&gt;&gt;lblTopAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblBreakdown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 32</value>
+  </data>
+  <data name="cardToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 101</value>
+  </data>
+  <data name="&gt;&gt;cardPieChart.Name" xml:space="preserve">
+    <value>cardPieChart</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblMonthAmount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="&gt;&gt;lblYearAmount.Parent" xml:space="preserve">
+    <value>cardYear</value>
+  </data>
+  <data name="&gt;&gt;lblYearAmount.Name" xml:space="preserve">
+    <value>lblYearAmount</value>
+  </data>
+  <data name="lblPendingTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 73</value>
+  </data>
+  <data name="dtpFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblYearAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTodayTitle.Text" xml:space="preserve">
+    <value>Today's Expenses</value>
+  </data>
+  <data name="&gt;&gt;gridTopAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="picMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 34</value>
+  </data>
+  <data name="&gt;&gt;lblBreakdown.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gridTopAccounts.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="chartMonthly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 184</value>
+  </data>
+  <data name="&gt;&gt;lblMonthAmount.Name" xml:space="preserve">
+    <value>lblMonthAmount</value>
+  </data>
+  <data name="lblRecent.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblTodayTrend.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYearAmount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblPendingAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblRecent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 32</value>
+  </data>
+  <data name="picToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 34</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblRecent.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;chartMonthly.Name" xml:space="preserve">
+    <value>chartMonthly</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="lblMonthTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 23</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTrend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelKpis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTodayTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chartMonthly.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="gridRecentTransactions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblPendingAmount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;lblRecent.Name" xml:space="preserve">
+    <value>lblRecent</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.Name" xml:space="preserve">
+    <value>cmbPeriod</value>
+  </data>
+  <data name="lblPendingTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblYearAmount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 38</value>
+  </data>
+  <data name="lblMonthTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 17</value>
+  </data>
+  <data name="&gt;&gt;cardMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelContent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1073, 472</value>
+  </data>
+  <data name="lblYearAmount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt, style=Bold</value>
+  </data>
+  <data name="lblPendingTrend.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;gridRecentTransactions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;picMonth.Name" xml:space="preserve">
+    <value>picMonth</value>
+  </data>
+  <data name="&gt;&gt;chartMonthly.Parent" xml:space="preserve">
+    <value>cardMonthlyChart</value>
+  </data>
+  <data name="lblPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;picYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFrom.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="cardPending.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panelContent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTodayAmount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblPendingAmount.Name" xml:space="preserve">
+    <value>lblPendingAmount</value>
+  </data>
+  <data name="cardMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblMonthTrend.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPendingTrend.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblMonthTitle.Text" xml:space="preserve">
+    <value>This Month</value>
+  </data>
+  <data name="lblMonthAmount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 38</value>
+  </data>
+  <data name="&gt;&gt;chartBreakdown.Parent" xml:space="preserve">
+    <value>cardPieChart</value>
+  </data>
+  <data name="lblPendingAmount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="&gt;&gt;picPending.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cardPending.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Name" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;cardYear.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="lblMonthlyChart.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="lblYearTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 73</value>
+  </data>
+  <data name="picToday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelContent.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cardToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYearTrend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chartBreakdown.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 14</value>
+  </data>
+  <data name="cmbPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="panelFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="gridRecentTransactions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblMonthTrend.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;panelContent.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gridTopAccounts.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;cardRecent.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.Name" xml:space="preserve">
+    <value>lblMonthlyChart</value>
+  </data>
+  <data name="&gt;&gt;lblBreakdown.Parent" xml:space="preserve">
+    <value>cardPieChart</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;lblTodayTitle.Name" xml:space="preserve">
+    <value>lblTodayTitle</value>
+  </data>
+  <data name="cardRecent.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="picToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 19</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="panelContent.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cardMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 11</value>
+  </data>
+  <data name="&gt;&gt;panelContent.Name" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="&gt;&gt;picPending.Parent" xml:space="preserve">
+    <value>cardPending</value>
+  </data>
+  <data name="lblPendingAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTopAccounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Name" xml:space="preserve">
+    <value>dtpTo</value>
+  </data>
+  <data name="lblTopAccounts.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>11, 8, 0, 0</value>
+  </data>
+  <data name="&gt;&gt;chartBreakdown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="gridRecentTransactions.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="lblPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;chartBreakdown.Name" xml:space="preserve">
+    <value>chartBreakdown</value>
+  </data>
+  <data name="lblYearTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <data name="lblTodayAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblMonthlyChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 32</value>
+  </data>
+  <data name="&gt;&gt;gridTopAccounts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmbPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 16</value>
+  </data>
+  <data name="dtpTo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;picToday.Parent" xml:space="preserve">
+    <value>cardToday</value>
+  </data>
+  <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 24</value>
+  </data>
+  <data name="panelKpis.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 8, 14, 6</value>
+  </data>
+  <data name="&gt;&gt;cardPending.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelFilters.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="picMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblBreakdown.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTrend.Name" xml:space="preserve">
+    <value>lblMonthTrend</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTitle.Parent" xml:space="preserve">
+    <value>cardMonth</value>
+  </data>
+  <data name="&gt;&gt;gridTopAccounts.Parent" xml:space="preserve">
+    <value>cardTopAccounts</value>
+  </data>
+  <data name="&gt;&gt;gridRecentTransactions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="panelKpis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="lblPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 24</value>
+  </data>
+  <data name="cardMonthlyChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 11</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="picToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblYearTrend.Parent" xml:space="preserve">
+    <value>cardYear</value>
+  </data>
+  <data name="&gt;&gt;cardRecent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picMonth.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cardTopAccounts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 24</value>
+  </data>
+  <data name="chartMonthly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_expense_dashboard</value>
+  </data>
+  <data name="&gt;&gt;cardMonthlyChart.Parent" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="cardMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 101</value>
+  </data>
+  <data name="&gt;&gt;cardTopAccounts.Name" xml:space="preserve">
+    <value>cardTopAccounts</value>
+  </data>
+  <data name="lblPeriod.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblMonthTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTodayTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <data name="gridRecentTransactions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cardMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cardYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardTopAccounts.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cardYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>548, 11</value>
+  </data>
+  <data name="&gt;&gt;picToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRefresh.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="&gt;&gt;cardRecent.Name" xml:space="preserve">
+    <value>cardRecent</value>
+  </data>
+  <data name="lblBreakdown.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="btnRefresh.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="lblYearAmount.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;cardMonthlyChart.Name" xml:space="preserve">
+    <value>cardMonthlyChart</value>
+  </data>
+  <data name="&gt;&gt;picToday.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="chartMonthly.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cardToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 11</value>
+  </data>
+  <data name="chartBreakdown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="lblRecent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="picPending.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cmbPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 24</value>
+  </data>
+  <data name="&gt;&gt;lblYearTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblYearTrend.Text" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="gridRecentTransactions.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="panelKpis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1073, 128</value>
+  </data>
+  <data name="&gt;&gt;lblPendingAmount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelContent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 184</value>
+  </data>
+  <data name="lblPendingTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 23</value>
+  </data>
+  <data name="lblRecent.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;lblTodayAmount.Name" xml:space="preserve">
+    <value>lblTodayAmount</value>
+  </data>
+  <data name="lblBreakdown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTopAccounts.Name" xml:space="preserve">
+    <value>lblTopAccounts</value>
+  </data>
+  <data name="lblPendingAmount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 38</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTrend.Parent" xml:space="preserve">
+    <value>cardPending</value>
+  </data>
+  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cardPending.Name" xml:space="preserve">
+    <value>cardPending</value>
+  </data>
+  <data name="gridRecentTransactions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="lblMonthAmount.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;cardMonthlyChart.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnRefresh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>473, 14</value>
+  </data>
+  <data name="&gt;&gt;cardToday.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblMonthTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cardPieChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 216</value>
+  </data>
+  <data name="&gt;&gt;lblYearAmount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblYearTrend.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTopAccounts.Text" xml:space="preserve">
+    <value>Top Expense Accounts</value>
+  </data>
+  <data name="gridTopAccounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 176</value>
+  </data>
+  <data name="&gt;&gt;lblYearTrend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblMonthTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 73</value>
+  </data>
+  <data name="lblYearTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="gridTopAccounts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;gridTopAccounts.Name" xml:space="preserve">
+    <value>gridTopAccounts</value>
+  </data>
+  <data name="&gt;&gt;lblBreakdown.Name" xml:space="preserve">
+    <value>lblBreakdown</value>
+  </data>
+  <data name="&gt;&gt;cardTopAccounts.Parent" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="&gt;&gt;picMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonthAmount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;picYear.Parent" xml:space="preserve">
+    <value>cardYear</value>
+  </data>
+  <data name="cardPieChart.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="panelContent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 6, 14, 14</value>
+  </data>
+  <data name="lblMonthAmount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonthTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Expense Dashboard</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
+    <value>lblTo</value>
+  </data>
+  <data name="cardMonthlyChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;cmbPeriod.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="cmbPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblPendingTitle.Text" xml:space="preserve">
+    <value>Pending/Unposted</value>
+  </data>
+  <data name="&gt;&gt;cardToday.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;picPending.Name" xml:space="preserve">
+    <value>picPending</value>
+  </data>
+  <data name="lblTodayAmount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;cardMonthlyChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTo.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cardRecent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblYearTrend.Name" xml:space="preserve">
+    <value>lblYearTrend</value>
+  </data>
+  <data name="lblTopAccounts.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTrend.Name" xml:space="preserve">
+    <value>lblPendingTrend</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="cardPieChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTodayTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 73</value>
+  </data>
+  <data name="lblTodayTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="lblMonthAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;picYear.Name" xml:space="preserve">
+    <value>picYear</value>
+  </data>
+  <data name="chartBreakdown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 184</value>
+  </data>
+  <data name="panelFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblMonthTrend.Text" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTodayAmount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 38</value>
+  </data>
+  <data name="gridRecentTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 176</value>
+  </data>
+  <data name="picYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 34</value>
+  </data>
+  <data name="lblFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblYearTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="picMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 14</value>
+  </data>
+  <data name="chartMonthly.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="lblPendingAmount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTitle.Name" xml:space="preserve">
+    <value>lblPendingTitle</value>
+  </data>
+  <data name="lblPendingTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTodayAmount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
+    <value>lblFrom</value>
+  </data>
+  <data name="picPending.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.Parent" xml:space="preserve">
+    <value>panelFilters</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
+  </data>
+  <data name="panelFilters.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;lblMonthTrend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cardRecent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 243</value>
+  </data>
+  <data name="dtpTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 24</value>
+  </data>
+  <data name="&gt;&gt;lblPendingTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblYearTrend.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;chartMonthly.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblBreakdown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardToday.Name" xml:space="preserve">
+    <value>cardToday</value>
+  </data>
+  <data name="&gt;&gt;cardPieChart.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="picYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;chartBreakdown.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonthAmount.Parent" xml:space="preserve">
+    <value>cardMonth</value>
+  </data>
+  <data name="&gt;&gt;lblRecent.Parent" xml:space="preserve">
+    <value>cardRecent</value>
+  </data>
+  <data name="lblMonthlyChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="picMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 19</value>
+  </data>
+  <data name="lblPendingTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYearAmount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblBreakdown.Text" xml:space="preserve">
+    <value>Expense Breakdown by Account</value>
+  </data>
+  <data name="&gt;&gt;lblRecent.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblYearAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblTodayTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Name" xml:space="preserve">
+    <value>dtpFrom</value>
+  </data>
+  <data name="&gt;&gt;chartMonthly.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="lblTodayTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
+  </data>
+  <data name="cardPending.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 101</value>
+  </data>
+  <data name="lblTodayAmount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblPeriod.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="dtpFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 24</value>
+  </data>
+  <data name="gridTopAccounts.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblPendingTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <data name="&gt;&gt;gridRecentTransactions.Name" xml:space="preserve">
+    <value>gridRecentTransactions</value>
+  </data>
+  <data name="lblTodayTrend.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;cardRecent.Parent" xml:space="preserve">
+    <value>panelContent</value>
+  </data>
+  <data name="lblTopAccounts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt, style=Bold</value>
+  </data>
+  <data name="panelContent.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cardRecent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 208</value>
+  </data>
+  <data name="lblTopAccounts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblMonthlyChart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblMonthTrend.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="gridTopAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="chartBreakdown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="gridTopAccounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="lblMonthAmount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblMonthTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-SA</value>
+  </metadata>
 </root>

@@ -44,6 +44,7 @@
             this.txtNarration = new System.Windows.Forms.TextBox();
             this.lblNarration = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
             this.cmbExpenseAccount = new System.Windows.Forms.ComboBox();
             this.lblExpenseAccount = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tslLastSaved = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.grpVoucherInfo.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -73,19 +73,19 @@
             // 
             // pnlHeader
             // 
-            this.pnlHeader.Controls.Add(this.grpVoucherInfo);
             resources.ApplyResources(this.pnlHeader, "pnlHeader");
+            this.pnlHeader.Controls.Add(this.grpVoucherInfo);
             this.pnlHeader.Name = "pnlHeader";
             // 
             // grpVoucherInfo
             // 
+            resources.ApplyResources(this.grpVoucherInfo, "grpVoucherInfo");
             this.grpVoucherInfo.Controls.Add(this.txtReferenceNo);
             this.grpVoucherInfo.Controls.Add(this.lblReferenceNo);
             this.grpVoucherInfo.Controls.Add(this.txtVoucherNo);
             this.grpVoucherInfo.Controls.Add(this.lblVoucherNo);
             this.grpVoucherInfo.Controls.Add(this.dtpVoucherDate);
             this.grpVoucherInfo.Controls.Add(this.lblVoucherDate);
-            resources.ApplyResources(this.grpVoucherInfo, "grpVoucherInfo");
             this.grpVoucherInfo.Name = "grpVoucherInfo";
             this.grpVoucherInfo.TabStop = false;
             // 
@@ -112,8 +112,8 @@
             // 
             // dtpVoucherDate
             // 
-            this.dtpVoucherDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.dtpVoucherDate, "dtpVoucherDate");
+            this.dtpVoucherDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpVoucherDate.Name = "dtpVoucherDate";
             // 
             // lblVoucherDate
@@ -123,14 +123,15 @@
             // 
             // pnlContent
             // 
+            resources.ApplyResources(this.pnlContent, "pnlContent");
             this.pnlContent.Controls.Add(this.grpExpenseDetails);
             this.pnlContent.Controls.Add(this.grpPaymentInfo);
             this.pnlContent.Controls.Add(this.pnlActions);
-            resources.ApplyResources(this.pnlContent, "pnlContent");
             this.pnlContent.Name = "pnlContent";
             // 
             // grpExpenseDetails
             // 
+            resources.ApplyResources(this.grpExpenseDetails, "grpExpenseDetails");
             this.grpExpenseDetails.Controls.Add(this.txtVATNumber);
             this.grpExpenseDetails.Controls.Add(this.txtNetTotal);
             this.grpExpenseDetails.Controls.Add(this.lblNetTotal);
@@ -151,7 +152,6 @@
             this.grpExpenseDetails.Controls.Add(this.lblAmount);
             this.grpExpenseDetails.Controls.Add(this.cmbExpenseAccount);
             this.grpExpenseDetails.Controls.Add(this.lblExpenseAccount);
-            resources.ApplyResources(this.grpExpenseDetails, "grpExpenseDetails");
             this.grpExpenseDetails.Name = "grpExpenseDetails";
             this.grpExpenseDetails.TabStop = false;
             // 
@@ -186,14 +186,15 @@
             // 
             // nudTaxPercent
             // 
-            this.nudTaxPercent.DecimalPlaces = 2;
             resources.ApplyResources(this.nudTaxPercent, "nudTaxPercent");
+            this.nudTaxPercent.DecimalPlaces = 2;
             this.nudTaxPercent.Name = "nudTaxPercent";
             this.nudTaxPercent.TabStop = false;
             this.nudTaxPercent.ValueChanged += new System.EventHandler(this.amountOrTax_ValueChanged);
             // 
             // cmbTax
             // 
+            resources.ApplyResources(this.cmbTax, "cmbTax");
             this.cmbTax.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbTax.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -211,11 +212,11 @@
             // 
             // cmbVatAccount
             // 
+            resources.ApplyResources(this.cmbVatAccount, "cmbVatAccount");
             this.cmbVatAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbVatAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbVatAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVatAccount.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbVatAccount, "cmbVatAccount");
             this.cmbVatAccount.Name = "cmbVatAccount";
             // 
             // lblVatAccount
@@ -254,8 +255,8 @@
             // 
             // nudAmount
             // 
-            this.nudAmount.DecimalPlaces = 2;
             resources.ApplyResources(this.nudAmount, "nudAmount");
+            this.nudAmount.DecimalPlaces = 2;
             this.nudAmount.Maximum = new decimal(new int[] {
             1316134911,
             2328,
@@ -264,6 +265,11 @@
             this.nudAmount.Name = "nudAmount";
             this.nudAmount.ValueChanged += new System.EventHandler(this.amountOrTax_ValueChanged);
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // lblAmount
             // 
             resources.ApplyResources(this.lblAmount, "lblAmount");
@@ -271,11 +277,11 @@
             // 
             // cmbExpenseAccount
             // 
+            resources.ApplyResources(this.cmbExpenseAccount, "cmbExpenseAccount");
             this.cmbExpenseAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbExpenseAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbExpenseAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExpenseAccount.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbExpenseAccount, "cmbExpenseAccount");
             this.cmbExpenseAccount.Name = "cmbExpenseAccount";
             // 
             // lblExpenseAccount
@@ -285,21 +291,21 @@
             // 
             // grpPaymentInfo
             // 
+            resources.ApplyResources(this.grpPaymentInfo, "grpPaymentInfo");
             this.grpPaymentInfo.Controls.Add(this.cmbCreditAccount);
             this.grpPaymentInfo.Controls.Add(this.lblCreditAccount);
             this.grpPaymentInfo.Controls.Add(this.cmbPaymentMode);
             this.grpPaymentInfo.Controls.Add(this.lblPaymentMode);
-            resources.ApplyResources(this.grpPaymentInfo, "grpPaymentInfo");
             this.grpPaymentInfo.Name = "grpPaymentInfo";
             this.grpPaymentInfo.TabStop = false;
             // 
             // cmbCreditAccount
             // 
+            resources.ApplyResources(this.cmbCreditAccount, "cmbCreditAccount");
             this.cmbCreditAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbCreditAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCreditAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCreditAccount.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbCreditAccount, "cmbCreditAccount");
             this.cmbCreditAccount.Name = "cmbCreditAccount";
             // 
             // lblCreditAccount
@@ -309,9 +315,9 @@
             // 
             // cmbPaymentMode
             // 
+            resources.ApplyResources(this.cmbPaymentMode, "cmbPaymentMode");
             this.cmbPaymentMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPaymentMode.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbPaymentMode, "cmbPaymentMode");
             this.cmbPaymentMode.Name = "cmbPaymentMode";
             this.cmbPaymentMode.SelectedIndexChanged += new System.EventHandler(this.cmbPaymentMode_SelectedIndexChanged);
             // 
@@ -322,16 +328,16 @@
             // 
             // pnlActions
             // 
+            resources.ApplyResources(this.pnlActions, "pnlActions");
             this.pnlActions.Controls.Add(this.btnClose);
             this.pnlActions.Controls.Add(this.btnClear);
             this.pnlActions.Controls.Add(this.btnSave);
-            resources.ApplyResources(this.pnlActions, "pnlActions");
             this.pnlActions.Name = "pnlActions";
             // 
             // btnClose
             // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnClose, "btnClose");
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Name = "btnClose";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btn_close_Click);
@@ -352,25 +358,20 @@
             // 
             // statusStrip1
             // 
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslLastSaved});
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
             // tslLastSaved
             // 
-            this.tslLastSaved.Name = "tslLastSaved";
             resources.ApplyResources(this.tslLastSaved, "tslLastSaved");
+            this.tslLastSaved.Name = "tslLastSaved";
             // 
             // openFileDialog1
             // 
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
             // 
             // frm_expenses
             // 
