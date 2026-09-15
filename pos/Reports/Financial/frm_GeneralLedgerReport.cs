@@ -1,8 +1,10 @@
 using DGVPrinterHelper;
 using POS.BLL;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -730,19 +732,83 @@ namespace pos.Reports.Financial
                 return;
             }
 
-            var printer = new DGVPrinter
+            // Save original state
+            bool referenceNoWasVisible = _gridLedger.Columns["ReferenceNo"].Visible;
+            bool statusWasVisible = _gridLedger.Columns["Status"].Visible;
+            DataGridViewAutoSizeColumnsMode originalAutoSizeMode = _gridLedger.AutoSizeColumnsMode;
+            Dictionary<string, int> originalWidths = new Dictionary<string, int>();
+            foreach (DataGridViewColumn col in _gridLedger.Columns)
             {
-                Title = "General Ledger",
-                SubTitle = string.Format("{0} - {1}", _dtFrom.Value.ToString("yyyy-MM-dd"), _dtTo.Value.ToString("yyyy-MM-dd")),
-                SubTitleFormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoClip,
-                PageNumbers = true,
-                PageNumberInHeader = false,
-                PorportionalColumns = true,
-                HeaderCellAlignment = StringAlignment.Near,
-                Footer = "kasbook",
-                FooterSpacing = 10
-            };
-            printer.PrintPreviewDataGridView(_gridLedger);
+                originalWidths[col.Name] = col.Width;
+            }
+
+            try
+            {
+                // Hide unnecessary columns
+                _gridLedger.Columns["VoucherNo"].Visible = false;
+                _gridLedger.Columns["Status"].Visible = false;
+
+                // Set optimal column widths for printing (fit to content)
+                _gridLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+                // Override widths to be compact for printing
+                // Adjust these values based on your data patterns
+                _gridLedger.Columns["Date"].Width = 80;
+                _gridLedger.Columns["ReferenceNo"].Width = 90;
+                _gridLedger.Columns["VoucherType"].Width = 50;
+                _gridLedger.Columns["RefModule"].Width = 70;
+                _gridLedger.Columns["Narration"].Width = 250;  // Wider for narration
+                _gridLedger.Columns["Debit"].Width = 90;
+                _gridLedger.Columns["Credit"].Width = 90;
+                _gridLedger.Columns["RunningBalance"].Width = 110;
+
+                // Create printer instance
+                var printer = new DGVPrinter
+                {
+                    Title = "General Ledger Report",
+                    SubTitle = string.Format("Period: {0} to {1}", 
+                        _dtFrom.Value.ToString("yyyy-MM-dd"), 
+                        _dtTo.Value.ToString("yyyy-MM-dd")),
+                    SubTitleFormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoClip,
+                    PageNumbers = true,
+                    PageNumberInHeader = false,
+                    PorportionalColumns = false,  // Use fixed widths instead of proportional
+                    HeaderCellAlignment = StringAlignment.Center,
+                    CellAlignment = StringAlignment.Far,  // Right-align for numbers
+                    Footer = "kasbook - General Ledger",
+                    FooterSpacing = 3,
+                    KeepRowsTogether = true
+                };
+
+                // Configure for landscape and minimal margins
+                printer.printDocument.DefaultPageSettings.Landscape = true;
+                printer.PrintMargins = new Margins(10, 10, 15, 15);  // Minimal margins: L, R, T, B
+
+                // Set fonts to smaller size for better fit
+                printer.TitleFont = new Font("Tahoma", 14, FontStyle.Bold);
+                printer.SubTitleFont = new Font("Tahoma", 10, FontStyle.Regular);
+                printer.FooterFont = new Font("Tahoma", 8, FontStyle.Regular);
+
+                // Reduce title/subtitle spacing
+                printer.TitleSpacing = 2;
+                printer.SubTitleSpacing = 2;
+
+                // Show print preview
+                printer.PrintPreviewDataGridView(_gridLedger);
+            }
+            finally
+            {
+                // Restore original state
+                _gridLedger.Columns["ReferenceNo"].Visible = referenceNoWasVisible;
+                _gridLedger.Columns["Status"].Visible = statusWasVisible;
+                _gridLedger.AutoSizeColumnsMode = originalAutoSizeMode;
+
+                // Restore original column widths
+                foreach (var kvp in originalWidths)
+                {
+                    _gridLedger.Columns[kvp.Key].Width = kvp.Value;
+                }
+            }
         }
 
         private void BtnExport_Click(object sender, EventArgs e)
