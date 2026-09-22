@@ -221,14 +221,80 @@ namespace pos.Inventory
                         l.ReorderLevel.ToString(qtyFmt),
                         FormatStatus(l.ValuationStatus));
 
-                    // Tag the row with status for CellFormatting
-                    gridValuation.Rows[idx].Tag = l.ValuationStatus;
+                    // Tag the row with the full line object for filtering and formatting
+                    gridValuation.Rows[idx].Tag = l;
                 }
             }
             finally
             {
                 gridValuation.ResumeLayout();
             }
+
+            // Apply filters after binding
+            FilterValuationGrid();
+        }
+
+        /// <summary>
+        /// Filters the valuation grid based on current checkbox states.
+        /// - chkShowZero: when unchecked, hides products with zero cost
+        /// - chkShowNegativeStock: when checked, shows ONLY products with negative qty (exclusive filter)
+        /// </summary>
+        private void FilterValuationGrid()
+        {
+            gridValuation.SuspendLayout();
+            try
+            {
+                bool showZero = chkShowZero.Checked;
+                bool showOnlyNegativeQty = chkShowNegativeStock.Checked;
+
+                foreach (DataGridViewRow row in gridValuation.Rows)
+                {
+                    var line = row.Tag as InventoryValuationLine;
+                    if (line == null)
+                    {
+                        row.Visible = true;
+                        continue;
+                    }
+
+                    bool visible = true;
+
+                    // If "Show Negative Stock" is checked, show ONLY products with negative qty
+                    if (showOnlyNegativeQty)
+                    {
+                        visible = line.CurrentQty < 0;
+                    }
+                    else
+                    {
+                        // Normal filtering: hide products with zero cost if showZero is false
+                        if (!showZero && line.ValuationStatus == "ZeroCost")
+                            visible = false;
+                    }
+
+                    row.Visible = visible;
+                }
+            }
+            finally
+            {
+                gridValuation.ResumeLayout();
+            }
+        }
+
+        /// <summary>
+        /// Event handler for chkShowNegativeStock CheckedChanged.
+        /// Re-filters the grid when the negative stock checkbox is toggled.
+        /// </summary>
+        private void chkShowNegativeStock_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterValuationGrid();
+        }
+
+        /// <summary>
+        /// Event handler for chkShowZero CheckedChanged.
+        /// Re-filters the grid when the zero cost checkbox is toggled.
+        /// </summary>
+        private void chkShowZero_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterValuationGrid();
         }
 
         private void UpdateSummaryPanel(InventoryValuationSummary s)
@@ -327,18 +393,20 @@ namespace pos.Inventory
         {
             if (e.RowIndex < 0) return;
             var row = gridValuation.Rows[e.RowIndex];
-            string status = row.Tag as string ?? "Normal";
+            var line = row.Tag as InventoryValuationLine;
+            if (line == null) return;
 
+            string status = line.ValuationStatus ?? "Normal";
+
+            // Highlight rows with negative quantity with a distinct background
+            if (line.CurrentQty < 0)
+            {
+                row.DefaultCellStyle.BackColor = StatusNegBack;
+            }
+
+            // Apply status-based coloring to status column
             switch (status)
             {
-                case "NegativeStock":
-                    row.DefaultCellStyle.BackColor = StatusNegBack;
-                    if (e.ColumnIndex == colStatus.Index)
-                    {
-                        e.CellStyle.ForeColor = StatusNeg;
-                        e.CellStyle.Font      = AppTheme.FontSemiBold;
-                    }
-                    break;
                 case "ZeroCost":
                     if (e.ColumnIndex == colStatus.Index)
                         e.CellStyle.ForeColor = StatusZero;
@@ -347,6 +415,13 @@ namespace pos.Inventory
                     if (e.ColumnIndex == colStatus.Index)
                         e.CellStyle.ForeColor = StatusHighCost;
                     break;
+            }
+
+            // Highlight negative quantity in the Qty column
+            if (e.ColumnIndex == colQty.Index && line.CurrentQty < 0)
+            {
+                e.CellStyle.ForeColor = StatusNeg;
+                e.CellStyle.Font = AppTheme.FontSemiBold;
             }
         }
 

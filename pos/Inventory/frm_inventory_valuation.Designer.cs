@@ -14,17 +14,17 @@ namespace pos.Inventory
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.lblFormTitle = new System.Windows.Forms.Label();
@@ -97,6 +97,7 @@ namespace pos.Inventory
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.btnCalcCogs = new System.Windows.Forms.Button();
             this.btnPostCogs = new System.Windows.Forms.Button();
+            this.chkShowNegativeStock = new System.Windows.Forms.CheckBox();
             this.panelHeader.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabValuation.SuspendLayout();
@@ -233,8 +234,8 @@ namespace pos.Inventory
             // 
             // colQty
             // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colQty.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colQty.DefaultCellStyle = dataGridViewCellStyle1;
             this.colQty.HeaderText = "Qty on Hand";
             this.colQty.MinimumWidth = 6;
             this.colQty.Name = "colQty";
@@ -243,8 +244,8 @@ namespace pos.Inventory
             // 
             // colUnitCost
             // 
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colUnitCost.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colUnitCost.DefaultCellStyle = dataGridViewCellStyle2;
             this.colUnitCost.HeaderText = "Unit Cost";
             this.colUnitCost.MinimumWidth = 6;
             this.colUnitCost.Name = "colUnitCost";
@@ -253,8 +254,8 @@ namespace pos.Inventory
             // 
             // colTotalValue
             // 
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colTotalValue.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colTotalValue.DefaultCellStyle = dataGridViewCellStyle3;
             this.colTotalValue.HeaderText = "Total Value";
             this.colTotalValue.MinimumWidth = 6;
             this.colTotalValue.Name = "colTotalValue";
@@ -271,8 +272,8 @@ namespace pos.Inventory
             // 
             // colLastPurchCost
             // 
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colLastPurchCost.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colLastPurchCost.DefaultCellStyle = dataGridViewCellStyle4;
             this.colLastPurchCost.HeaderText = "Last P. Cost";
             this.colLastPurchCost.MinimumWidth = 6;
             this.colLastPurchCost.Name = "colLastPurchCost";
@@ -281,8 +282,8 @@ namespace pos.Inventory
             // 
             // colReorderLevel
             // 
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colReorderLevel.DefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colReorderLevel.DefaultCellStyle = dataGridViewCellStyle5;
             this.colReorderLevel.HeaderText = "Reorder Lvl";
             this.colReorderLevel.MinimumWidth = 6;
             this.colReorderLevel.Name = "colReorderLevel";
@@ -462,6 +463,7 @@ namespace pos.Inventory
             this.panelFilters.Controls.Add(this.cmbSupplier);
             this.panelFilters.Controls.Add(this.lblLocation);
             this.panelFilters.Controls.Add(this.cmbLocation);
+            this.panelFilters.Controls.Add(this.chkShowNegativeStock);
             this.panelFilters.Controls.Add(this.chkShowZero);
             this.panelFilters.Controls.Add(this.btnCalculate);
             this.panelFilters.Controls.Add(this.btnSnapshot);
@@ -494,7 +496,7 @@ namespace pos.Inventory
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(198, 16);
+            this.lblCategory.Location = new System.Drawing.Point(190, 16);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(70, 17);
             this.lblCategory.TabIndex = 2;
@@ -503,7 +505,7 @@ namespace pos.Inventory
             // cmbCategory
             // 
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCategory.Location = new System.Drawing.Point(266, 12);
+            this.cmbCategory.Location = new System.Drawing.Point(252, 12);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(160, 24);
             this.cmbCategory.TabIndex = 3;
@@ -511,7 +513,7 @@ namespace pos.Inventory
             // lblBrand
             // 
             this.lblBrand.AutoSize = true;
-            this.lblBrand.Location = new System.Drawing.Point(438, 16);
+            this.lblBrand.Location = new System.Drawing.Point(418, 16);
             this.lblBrand.Name = "lblBrand";
             this.lblBrand.Size = new System.Drawing.Size(49, 17);
             this.lblBrand.TabIndex = 4;
@@ -520,7 +522,7 @@ namespace pos.Inventory
             // cmbBrand
             // 
             this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBrand.Location = new System.Drawing.Point(484, 12);
+            this.cmbBrand.Location = new System.Drawing.Point(463, 12);
             this.cmbBrand.Name = "cmbBrand";
             this.cmbBrand.Size = new System.Drawing.Size(110, 24);
             this.cmbBrand.TabIndex = 5;
@@ -528,16 +530,16 @@ namespace pos.Inventory
             // lblSupplier
             // 
             this.lblSupplier.AutoSize = true;
-            this.lblSupplier.Location = new System.Drawing.Point(600, 16);
+            this.lblSupplier.Location = new System.Drawing.Point(579, 15);
             this.lblSupplier.Name = "lblSupplier";
-            this.lblSupplier.Size = new System.Drawing.Size(63, 17);
+            this.lblSupplier.Size = new System.Drawing.Size(61, 17);
             this.lblSupplier.TabIndex = 6;
             this.lblSupplier.Text = "Supplier:";
             // 
             // cmbSupplier
             // 
             this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSupplier.Location = new System.Drawing.Point(659, 12);
+            this.cmbSupplier.Location = new System.Drawing.Point(639, 12);
             this.cmbSupplier.Name = "cmbSupplier";
             this.cmbSupplier.Size = new System.Drawing.Size(120, 24);
             this.cmbSupplier.TabIndex = 7;
@@ -545,16 +547,16 @@ namespace pos.Inventory
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(785, 16);
+            this.lblLocation.Location = new System.Drawing.Point(765, 15);
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(62, 17);
+            this.lblLocation.Size = new System.Drawing.Size(65, 17);
             this.lblLocation.TabIndex = 8;
             this.lblLocation.Text = "Location:";
             // 
             // cmbLocation
             // 
             this.cmbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLocation.Location = new System.Drawing.Point(844, 12);
+            this.cmbLocation.Location = new System.Drawing.Point(830, 12);
             this.cmbLocation.Name = "cmbLocation";
             this.cmbLocation.Size = new System.Drawing.Size(120, 24);
             this.cmbLocation.TabIndex = 9;
@@ -562,11 +564,12 @@ namespace pos.Inventory
             // chkShowZero
             // 
             this.chkShowZero.AutoSize = true;
-            this.chkShowZero.Location = new System.Drawing.Point(970, 14);
+            this.chkShowZero.Location = new System.Drawing.Point(954, 3);
             this.chkShowZero.Name = "chkShowZero";
             this.chkShowZero.Size = new System.Drawing.Size(135, 21);
             this.chkShowZero.TabIndex = 10;
             this.chkShowZero.Text = "Show Zero Stock";
+            this.chkShowZero.CheckedChanged += new System.EventHandler(this.chkShowZero_CheckedChanged);
             // 
             // btnCalculate
             // 
@@ -611,7 +614,7 @@ namespace pos.Inventory
             this.tabCogs.Controls.Add(this.panelCogsFilters);
             this.tabCogs.Location = new System.Drawing.Point(4, 25);
             this.tabCogs.Name = "tabCogs";
-            this.tabCogs.Size = new System.Drawing.Size(1212, 681);
+            this.tabCogs.Size = new System.Drawing.Size(1212, 697);
             this.tabCogs.TabIndex = 1;
             this.tabCogs.Text = "  COGS Calculation  ";
             // 
@@ -621,7 +624,7 @@ namespace pos.Inventory
             this.panelCogsBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCogsBody.Location = new System.Drawing.Point(0, 52);
             this.panelCogsBody.Name = "panelCogsBody";
-            this.panelCogsBody.Size = new System.Drawing.Size(1212, 569);
+            this.panelCogsBody.Size = new System.Drawing.Size(1212, 585);
             this.panelCogsBody.TabIndex = 0;
             // 
             // gridCogs
@@ -645,7 +648,7 @@ namespace pos.Inventory
             this.gridCogs.RowHeadersVisible = false;
             this.gridCogs.RowHeadersWidth = 51;
             this.gridCogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridCogs.Size = new System.Drawing.Size(1212, 569);
+            this.gridCogs.Size = new System.Drawing.Size(1212, 585);
             this.gridCogs.TabIndex = 0;
             this.gridCogs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridCogs_CellFormatting);
             // 
@@ -675,8 +678,8 @@ namespace pos.Inventory
             // 
             // colSoldQty
             // 
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colSoldQty.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colSoldQty.DefaultCellStyle = dataGridViewCellStyle6;
             this.colSoldQty.HeaderText = "Units Sold";
             this.colSoldQty.MinimumWidth = 6;
             this.colSoldQty.Name = "colSoldQty";
@@ -685,8 +688,8 @@ namespace pos.Inventory
             // 
             // colCostPerUnit
             // 
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colCostPerUnit.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colCostPerUnit.DefaultCellStyle = dataGridViewCellStyle7;
             this.colCostPerUnit.HeaderText = "Cost/Unit";
             this.colCostPerUnit.MinimumWidth = 6;
             this.colCostPerUnit.Name = "colCostPerUnit";
@@ -695,8 +698,8 @@ namespace pos.Inventory
             // 
             // colTotalCogs
             // 
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colTotalCogs.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colTotalCogs.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTotalCogs.HeaderText = "Total COGS";
             this.colTotalCogs.MinimumWidth = 6;
             this.colTotalCogs.Name = "colTotalCogs";
@@ -705,8 +708,8 @@ namespace pos.Inventory
             // 
             // colSalesVal
             // 
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colSalesVal.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colSalesVal.DefaultCellStyle = dataGridViewCellStyle9;
             this.colSalesVal.HeaderText = "Sales Value";
             this.colSalesVal.MinimumWidth = 6;
             this.colSalesVal.Name = "colSalesVal";
@@ -715,8 +718,8 @@ namespace pos.Inventory
             // 
             // colGrossMargin
             // 
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colGrossMargin.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colGrossMargin.DefaultCellStyle = dataGridViewCellStyle10;
             this.colGrossMargin.HeaderText = "Gross Margin";
             this.colGrossMargin.MinimumWidth = 6;
             this.colGrossMargin.Name = "colGrossMargin";
@@ -725,8 +728,8 @@ namespace pos.Inventory
             // 
             // colVariance
             // 
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colVariance.DefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colVariance.DefaultCellStyle = dataGridViewCellStyle11;
             this.colVariance.HeaderText = "Recon. Variance";
             this.colVariance.MinimumWidth = 6;
             this.colVariance.Name = "colVariance";
@@ -744,7 +747,7 @@ namespace pos.Inventory
             this.panelCogsTotals.Controls.Add(this.lblGrossMargin);
             this.panelCogsTotals.Controls.Add(this.lblGrossMarginVal);
             this.panelCogsTotals.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelCogsTotals.Location = new System.Drawing.Point(0, 621);
+            this.panelCogsTotals.Location = new System.Drawing.Point(0, 637);
             this.panelCogsTotals.Name = "panelCogsTotals";
             this.panelCogsTotals.Size = new System.Drawing.Size(1212, 60);
             this.panelCogsTotals.TabIndex = 1;
@@ -879,6 +882,16 @@ namespace pos.Inventory
             this.btnPostCogs.Text = "Post COGS Entry";
             this.btnPostCogs.Click += new System.EventHandler(this.btnPostCogs_Click);
             // 
+            // chkShowNegativeStock
+            // 
+            this.chkShowNegativeStock.AutoSize = true;
+            this.chkShowNegativeStock.Location = new System.Drawing.Point(953, 24);
+            this.chkShowNegativeStock.Name = "chkShowNegativeStock";
+            this.chkShowNegativeStock.Size = new System.Drawing.Size(160, 21);
+            this.chkShowNegativeStock.TabIndex = 10;
+            this.chkShowNegativeStock.Text = "Show Negative Stock";
+            this.chkShowNegativeStock.CheckedChanged += new System.EventHandler(this.chkShowNegativeStock_CheckedChanged);
+            // 
             // frm_inventory_valuation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -987,5 +1000,6 @@ namespace pos.Inventory
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesVal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGrossMargin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVariance;
+        private System.Windows.Forms.CheckBox chkShowNegativeStock;
     }
 }
