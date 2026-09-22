@@ -48,8 +48,8 @@ namespace pos
                     _settings.LoadAll();
                     LoadMonthDropDowns();
                     LoadCountryDropDown();
-                    LoadCompany();
                     LoadCurrencies();
+                    LoadCompany();
                     LoadAccounts();
                     LoadSettingsToControls();
                     LoadWhtGrid();
@@ -159,7 +159,9 @@ namespace pos
             txtRegistrationNo.Text = GetRowString(row, "registration_no");
             txtNtnVat.Text = string.IsNullOrWhiteSpace(GetRowString(row, "ntn")) ? GetRowString(row, "vat_no") : GetRowString(row, "ntn");
             txtStrn.Text = GetRowString(row, "strn");
-            
+            cmbBaseCurrency.SelectedValue = Convert.ToInt32(GetRowString(row, "currency_id"));
+
+
             chk_use_zatca_e_invoice.Checked = (string.IsNullOrEmpty(row["useZatcaEInvoice"].ToString()) ? false : Convert.ToBoolean(row["useZatcaEInvoice"]));
             txt_buildingNumber.Text = row["BuildingNumber"].ToString();
             txt_citySubdivisionName.Text = row["CitySubdivisionName"].ToString();
