@@ -29,11 +29,24 @@ namespace pos
             StyleForm();
             CmbCondition.Items.AddRange(new string[]
             {
-                "Custom", "Today", "Yesterday", "This Week", "Last Week",
-                "This Month", "Last Month", "This Quarter", "Last Quarter",
-                "This Year", "Last Year", "Year to Date (YTD)", "Last 7 Days",
-                "Last 30 Days", "Last 90 Days", "Last 6 Months",
-                "Previous Fiscal Year", "Next Fiscal Year"
+                UiMessages.T("Custom", "مخصص"),
+                UiMessages.T("Today", "اليوم"),
+                UiMessages.T("Yesterday", "أمس"),
+                UiMessages.T("This Week", "هذا الأسبوع"),
+                UiMessages.T("Last Week", "الأسبوع الماضي"),
+                UiMessages.T("This Month", "هذا الشهر"),
+                UiMessages.T("Last Month", "الشهر الماضي"),
+                UiMessages.T("This Quarter", "هذا الربع"),
+                UiMessages.T("Last Quarter", "الربع الماضي"),
+                UiMessages.T("This Year", "هذه السنة"),
+                UiMessages.T("Last Year", "السنة الماضية"),
+                UiMessages.T("Year to Date (YTD)", "من بداية السنة"),
+                UiMessages.T("Last 7 Days", "آخر 7 أيام"),
+                UiMessages.T("Last 30 Days", "آخر 30 يوم"),
+                UiMessages.T("Last 90 Days", "آخر 90 يوم"),
+                UiMessages.T("Last 6 Months", "آخر 6 أشهر"),
+                UiMessages.T("Previous Fiscal Year", "السنة المالية السابقة"),
+                UiMessages.T("Next Fiscal Year", "السنة المالية القادمة")
             });
             CmbCondition.SelectedIndex = 0;
         }
@@ -57,7 +70,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessagesEx.Error(UiMessages.T("Error", "خطأ"), ex.Message);
             }
 
         }
@@ -83,7 +96,7 @@ namespace pos
             // Validate Accounting Equation
             if (totalAssets != totalLiabilitiesAndEquity)
             {
-                MessageBox.Show("The balance sheet is not balanced!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UiMessagesEx.Warning(UiMessages.T("Warning", "تحذير"), UiMessages.T("The balance sheet is not balanced!", "الميزانية العمومية غير متوازنة!"));
             }
 
             // Add Gross Profit

@@ -2,6 +2,7 @@ using POS.BLL;
 using System;
 using System.Data;
 using System.Linq;
+using pos.UI;
 
 namespace pos.Reports.Financial
 {
@@ -90,75 +91,75 @@ namespace pos.Reports.Financial
 
         private static void BuildAssets(BalanceSheetReportModel model, bool detailed, decimal cash, decimal bank, decimal accountsReceivable, decimal inventory, decimal prepaid, decimal totalCurrentAssets, decimal ppe, decimal accumulatedDepreciation, decimal netFixedAssets, decimal totalAssets, decimal comparisonCash, decimal comparisonBank, decimal comparisonAr, decimal comparisonInventory, decimal comparisonPrepaid, decimal comparisonPpe, decimal comparisonAccumDep, DateTime? comparisonDate, decimal comparisonCurrentAssetsTotal, decimal comparisonNetFixed, decimal comparisonTotalAssets)
         {
-            AddHeading(model.Assets, "Current Assets");
+            AddHeading(model.Assets, UiMessages.T("Current Assets", "الأصول المتداولة"));
             if (detailed)
             {
-                AddLine(model.Assets, "Cash in Hand", cash, comparisonDate.HasValue ? comparisonCash : (decimal?)null, "All cash accounts", false, false, 1);
-                AddLine(model.Assets, "Bank Accounts", bank, comparisonDate.HasValue ? comparisonBank : (decimal?)null, "All bank accounts", false, false, 1);
-                AddLine(model.Assets, "Accounts Receivable", accountsReceivable, comparisonDate.HasValue ? comparisonAr : (decimal?)null, "Customer sub-ledger total", false, false, 1);
-                AddLine(model.Assets, "Inventory / Stock", inventory, comparisonDate.HasValue ? comparisonInventory : (decimal?)null, "As-of stock valuation", false, false, 1);
-                AddLine(model.Assets, "Prepaid Expenses", prepaid, comparisonDate.HasValue ? comparisonPrepaid : (decimal?)null, "Deferred expense balances", false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Cash in Hand", "النقد في الصندوق"), cash, comparisonDate.HasValue ? comparisonCash : (decimal?)null, UiMessages.T("All cash accounts", "جميع حسابات النقد"), false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Bank Accounts", "الحسابات البنكية"), bank, comparisonDate.HasValue ? comparisonBank : (decimal?)null, UiMessages.T("All bank accounts", "جميع الحسابات البنكية"), false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Accounts Receivable", "الذمم المدينة"), accountsReceivable, comparisonDate.HasValue ? comparisonAr : (decimal?)null, UiMessages.T("Customer sub-ledger total", "إجمالي دفتر العملاء"), false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Inventory / Stock", "المخزون"), inventory, comparisonDate.HasValue ? comparisonInventory : (decimal?)null, UiMessages.T("As-of stock valuation", "تقييم المخزون"), false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Prepaid Expenses", "المصروفات المقدمة"), prepaid, comparisonDate.HasValue ? comparisonPrepaid : (decimal?)null, UiMessages.T("Deferred expense balances", "أرصدة المصروفات المؤجلة"), false, false, 1);
             }
-            AddLine(model.Assets, "Total Current Assets", totalCurrentAssets, comparisonDate.HasValue ? comparisonCurrentAssetsTotal : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.Assets, UiMessages.T("Total Current Assets", "إجمالي الأصول المتداولة"), totalCurrentAssets, comparisonDate.HasValue ? comparisonCurrentAssetsTotal : (decimal?)null, string.Empty, true, false, 0);
 
-            AddHeading(model.Assets, "Fixed Assets");
+            AddHeading(model.Assets, UiMessages.T("Fixed Assets", "الأصول الثابتة"));
             if (detailed)
             {
-                AddLine(model.Assets, "Property, Plant & Equipment", ppe, comparisonDate.HasValue ? comparisonPpe : (decimal?)null, "Gross PPE balances", false, false, 1);
-                AddLine(model.Assets, "Less: Accumulated Depreciation", accumulatedDepreciation, comparisonDate.HasValue ? comparisonAccumDep : (decimal?)null, "Contra-asset balance", false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Property, Plant & Equipment", "الممتلكات والمنشآت والمعدات"), ppe, comparisonDate.HasValue ? comparisonPpe : (decimal?)null, UiMessages.T("Gross PPE balances", "إجمالي الممتلكات والمنشآت والمعدات"), false, false, 1);
+                AddLine(model.Assets, UiMessages.T("Less: Accumulated Depreciation", "يطرح: الاستهلاك المتراكم"), accumulatedDepreciation, comparisonDate.HasValue ? comparisonAccumDep : (decimal?)null, UiMessages.T("Contra-asset balance", "رصيد الأصل المقابل"), false, false, 1);
             }
-            AddLine(model.Assets, "Net Fixed Assets", netFixedAssets, comparisonDate.HasValue ? comparisonNetFixed : (decimal?)null, string.Empty, true, false, 0);
-            AddLine(model.Assets, "TOTAL ASSETS", totalAssets, comparisonDate.HasValue ? comparisonTotalAssets : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.Assets, UiMessages.T("Net Fixed Assets", "صافي الأصول الثابتة"), netFixedAssets, comparisonDate.HasValue ? comparisonNetFixed : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.Assets, UiMessages.T("TOTAL ASSETS", "إجمالي الأصول"), totalAssets, comparisonDate.HasValue ? comparisonTotalAssets : (decimal?)null, string.Empty, true, false, 0);
         }
 
         private static void BuildLiabilitiesAndEquity(BalanceSheetReportModel model, bool detailed, decimal accountsPayable, decimal shortTermLoans, decimal taxPayable, decimal totalCurrentLiabilities, decimal longTermLiabilities, decimal totalLiabilities, decimal ownerCapital, decimal retainedEarnings, decimal currentPeriodNetProfit, decimal totalEquity, decimal liabilitiesAndEquityTotal, decimal comparisonAp, decimal comparisonShortLoans, decimal comparisonTax, decimal comparisonCurrentLiabilities, decimal comparisonLongTermLiabilities, decimal comparisonTotalLiabilities, decimal comparisonCapital, decimal comparisonRetained, decimal comparisonNetProfit, decimal comparisonTotalEquity, decimal comparisonLiabilitiesAndEquity)
         {
-            AddHeading(model.LiabilitiesAndEquity, "Current Liabilities");
+            AddHeading(model.LiabilitiesAndEquity, UiMessages.T("Current Liabilities", "الخصوم المتداولة"));
             if (detailed)
             {
-                AddLine(model.LiabilitiesAndEquity, "Accounts Payable", accountsPayable, model.ComparisonDate.HasValue ? comparisonAp : (decimal?)null, "Supplier sub-ledger total", false, false, 1);
-                AddLine(model.LiabilitiesAndEquity, "Short-term Loans", shortTermLoans, model.ComparisonDate.HasValue ? comparisonShortLoans : (decimal?)null, "Current portion of borrowings", false, false, 1);
-                AddLine(model.LiabilitiesAndEquity, "Tax Payable", taxPayable, model.ComparisonDate.HasValue ? comparisonTax : (decimal?)null, "Sales/VAT and income tax payables", false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Accounts Payable", "الذمم الدائنة"), accountsPayable, model.ComparisonDate.HasValue ? comparisonAp : (decimal?)null, UiMessages.T("Supplier sub-ledger total", "إجمالي دفتر الموردين"), false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Short-term Loans", "القروض قصيرة الأجل"), shortTermLoans, model.ComparisonDate.HasValue ? comparisonShortLoans : (decimal?)null, UiMessages.T("Current portion of borrowings", "الجزء الحالي من الاقتراض"), false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Tax Payable", "الضرائب المستحقة"), taxPayable, model.ComparisonDate.HasValue ? comparisonTax : (decimal?)null, UiMessages.T("Sales/VAT and income tax payables", "ضريبة المبيعات والضريبة على الدخل المستحقة"), false, false, 1);
             }
-            AddLine(model.LiabilitiesAndEquity, "Total Current Liabilities", totalCurrentLiabilities, model.ComparisonDate.HasValue ? comparisonCurrentLiabilities : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.LiabilitiesAndEquity, UiMessages.T("Total Current Liabilities", "إجمالي الخصوم المتداولة"), totalCurrentLiabilities, model.ComparisonDate.HasValue ? comparisonCurrentLiabilities : (decimal?)null, string.Empty, true, false, 0);
 
-            AddHeading(model.LiabilitiesAndEquity, "Long-term Liabilities");
+            AddHeading(model.LiabilitiesAndEquity, UiMessages.T("Long-term Liabilities", "الخصوم طويلة الأجل"));
             if (detailed)
             {
-                AddLine(model.LiabilitiesAndEquity, "Long-term Liabilities", longTermLiabilities, model.ComparisonDate.HasValue ? comparisonLongTermLiabilities : (decimal?)null, "Loans and obligations due after 12 months", false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Long-term Liabilities", "الخصوم طويلة الأجل"), longTermLiabilities, model.ComparisonDate.HasValue ? comparisonLongTermLiabilities : (decimal?)null, UiMessages.T("Loans and obligations due after 12 months", "القروض والالتزامات المستحقة بعد 12 شهر"), false, false, 1);
             }
-            AddLine(model.LiabilitiesAndEquity, "Total Liabilities", totalLiabilities, model.ComparisonDate.HasValue ? comparisonTotalLiabilities : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.LiabilitiesAndEquity, UiMessages.T("Total Liabilities", "إجمالي الخصوم"), totalLiabilities, model.ComparisonDate.HasValue ? comparisonTotalLiabilities : (decimal?)null, string.Empty, true, false, 0);
 
-            AddHeading(model.LiabilitiesAndEquity, "Equity");
+            AddHeading(model.LiabilitiesAndEquity, UiMessages.T("Equity", "حقوق المالكين"));
             if (detailed)
             {
-                AddLine(model.LiabilitiesAndEquity, "Owner's Capital / Share Capital", ownerCapital, model.ComparisonDate.HasValue ? comparisonCapital : (decimal?)null, "Paid-in capital balances", false, false, 1);
-                AddLine(model.LiabilitiesAndEquity, "Retained Earnings", retainedEarnings, model.ComparisonDate.HasValue ? comparisonRetained : (decimal?)null, "Cumulative historical P&L before current year", false, false, 1);
-                AddLine(model.LiabilitiesAndEquity, "Current Period Net Profit", currentPeriodNetProfit, model.ComparisonDate.HasValue ? comparisonNetProfit : (decimal?)null, "Pulled from Profit & Loss", false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Owner's Capital / Share Capital", "رأس مال المالك / رأس المال"), ownerCapital, model.ComparisonDate.HasValue ? comparisonCapital : (decimal?)null, UiMessages.T("Paid-in capital balances", "أرصدة رأس المال المدفوع"), false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Retained Earnings", "الأرباح المحتفظ بها"), retainedEarnings, model.ComparisonDate.HasValue ? comparisonRetained : (decimal?)null, UiMessages.T("Cumulative historical P&L before current year", "الأرباح والخسائر التراكمية قبل السنة الحالية"), false, false, 1);
+                AddLine(model.LiabilitiesAndEquity, UiMessages.T("Current Period Net Profit", "صافي ربح الفترة الحالية"), currentPeriodNetProfit, model.ComparisonDate.HasValue ? comparisonNetProfit : (decimal?)null, UiMessages.T("Pulled from Profit & Loss", "مسحوب من قائمة الأرباح والخسائر"), false, false, 1);
             }
-            AddLine(model.LiabilitiesAndEquity, "Total Equity", totalEquity, model.ComparisonDate.HasValue ? comparisonTotalEquity : (decimal?)null, string.Empty, true, false, 0);
-            AddLine(model.LiabilitiesAndEquity, "TOTAL LIABILITIES + EQUITY", liabilitiesAndEquityTotal, model.ComparisonDate.HasValue ? comparisonLiabilitiesAndEquity : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.LiabilitiesAndEquity, UiMessages.T("Total Equity", "إجمالي حقوق المالكين"), totalEquity, model.ComparisonDate.HasValue ? comparisonTotalEquity : (decimal?)null, string.Empty, true, false, 0);
+            AddLine(model.LiabilitiesAndEquity, UiMessages.T("TOTAL LIABILITIES + EQUITY", "إجمالي الخصوم + حقوق المالكين"), liabilitiesAndEquityTotal, model.ComparisonDate.HasValue ? comparisonLiabilitiesAndEquity : (decimal?)null, string.Empty, true, false, 0);
         }
 
         private static void BuildNotes(BalanceSheetReportModel model, DateTime asOfDate, DateTime fiscalStart, DateTime priorFiscalEnd, decimal cash, decimal bank, decimal accountsReceivable, decimal inventory, decimal prepaid, decimal ppe, decimal accumulatedDepreciation, decimal accountsPayable, decimal shortTermLoans, decimal taxPayable, decimal longTermLiabilities, decimal ownerCapital, decimal retainedEarnings, decimal currentPeriodNetProfit)
         {
-            model.Notes.Add(new BalanceNote { Title = "As-of Date", Summary = asOfDate.ToString("dd-MMM-yyyy"), Details = { "Balance sheet is a point-in-time statement." } });
-            model.Notes.Add(new BalanceNote { Title = "Inventory Valuation", Summary = inventory.ToString("N2"), Details = { "Fetched from stock tables using item quantities multiplied by average cost.", "Method: pos_inventory joined to pos_products.avg_cost." } });
-            model.Notes.Add(new BalanceNote { Title = "Retained Earnings", Summary = retainedEarnings.ToString("N2"), Details = { "Calculated as cumulative historical P&L before the current fiscal year.", "Historical P&L window: " + DateTime.MinValue.ToString("yyyy") + " to " + priorFiscalEnd.ToString("dd-MMM-yyyy") } });
-            model.Notes.Add(new BalanceNote { Title = "Current Period Net Profit", Summary = currentPeriodNetProfit.ToString("N2"), Details = { "Pulled automatically from Profit & Loss.", "Current fiscal year window: " + fiscalStart.ToString("dd-MMM-yyyy") + " to " + asOfDate.ToString("dd-MMM-yyyy") } });
-            model.Notes.Add(new BalanceNote { Title = "Key Balances", Summary = string.Format("Cash {0:N2} | Bank {1:N2} | AR {2:N2} | AP {3:N2}", cash, bank, accountsReceivable, accountsPayable), Details = { "Prepaid: " + prepaid.ToString("N2"), "PPE: " + ppe.ToString("N2"), "Accumulated Depreciation: " + accumulatedDepreciation.ToString("N2"), "Short-term loans: " + shortTermLoans.ToString("N2"), "Tax payable: " + taxPayable.ToString("N2"), "Long-term liabilities: " + longTermLiabilities.ToString("N2"), "Owner capital: " + ownerCapital.ToString("N2") } });
+            model.Notes.Add(new BalanceNote { Title = UiMessages.T("As-of Date", "تاريخ الإعداد"), Summary = asOfDate.ToString("dd-MMM-yyyy"), Details = { UiMessages.T("Balance sheet is a point-in-time statement.", "الميزانية العمومية بيان لفترة معينة من الزمن.") } });
+            model.Notes.Add(new BalanceNote { Title = UiMessages.T("Inventory Valuation", "تقييم المخزون"), Summary = inventory.ToString("N2"), Details = { UiMessages.T("Fetched from stock tables using item quantities multiplied by average cost.", "تم استخراجها من جداول المخزون باستخدام كميات العناصر مضروبة في متوسط التكلفة."), UiMessages.T("Method: pos_inventory joined to pos_products.avg_cost.", "الطريقة: pos_inventory في pos_products.avg_cost.") } });
+            model.Notes.Add(new BalanceNote { Title = UiMessages.T("Retained Earnings", "الأرباح المحتفظ بها"), Summary = retainedEarnings.ToString("N2"), Details = { UiMessages.T("Calculated as cumulative historical P&L before the current fiscal year.", "محسوب كأرباح وخسائر تراكمية تاريخية قبل السنة المالية الحالية."), UiMessages.T("Historical P&L window: ", "نافذة الأرباح والخسائر التاريخية: ") + DateTime.MinValue.ToString("yyyy") + UiMessages.T(" to ", " إلى ") + priorFiscalEnd.ToString("dd-MMM-yyyy") } });
+            model.Notes.Add(new BalanceNote { Title = UiMessages.T("Current Period Net Profit", "صافي ربح الفترة الحالية"), Summary = currentPeriodNetProfit.ToString("N2"), Details = { UiMessages.T("Pulled automatically from Profit & Loss.", "تم سحبها تلقائياً من قائمة الأرباح والخسائر."), UiMessages.T("Current fiscal year window: ", "نافذة السنة المالية الحالية: ") + fiscalStart.ToString("dd-MMM-yyyy") + UiMessages.T(" to ", " إلى ") + asOfDate.ToString("dd-MMM-yyyy") } });
+            model.Notes.Add(new BalanceNote { Title = UiMessages.T("Key Balances", "الأرصدة الرئيسية"), Summary = string.Format(UiMessages.T("Cash {0:N2} | Bank {1:N2} | AR {2:N2} | AP {3:N2}", "نقد {0:N2} | بنك {1:N2} | ذمم {2:N2} | دائنون {3:N2}"), cash, bank, accountsReceivable, accountsPayable), Details = { UiMessages.T("Prepaid: ", "مقدم: ") + prepaid.ToString("N2"), UiMessages.T("PPE: ", "الممتلكات والمنشآت والمعدات: ") + ppe.ToString("N2"), UiMessages.T("Accumulated Depreciation: ", "الاستهلاك المتراكم: ") + accumulatedDepreciation.ToString("N2"), UiMessages.T("Short-term loans: ", "القروض قصيرة الأجل: ") + shortTermLoans.ToString("N2"), UiMessages.T("Tax payable: ", "الضرائب المستحقة: ") + taxPayable.ToString("N2"), UiMessages.T("Long-term liabilities: ", "الخصوم طويلة الأجل: ") + longTermLiabilities.ToString("N2"), UiMessages.T("Owner capital: ", "رأس مال المالك: ") + ownerCapital.ToString("N2") } });
         }
 
         private static void BuildDiagnostics(BalanceSheetReportModel model, DateTime? comparisonDate, decimal cash, decimal bank, decimal accountsReceivable, decimal inventory, decimal prepaid, decimal totalCurrentAssets, decimal totalAssets, decimal accountsPayable, decimal shortTermLoans, decimal taxPayable, decimal totalCurrentLiabilities, decimal longTermLiabilities, decimal totalLiabilities, decimal ownerCapital, decimal retainedEarnings, decimal currentPeriodNetProfit, decimal totalEquity)
         {
-            AddDiagnostic(model, "Current Assets", totalCurrentAssets, comparisonDate.HasValue ? totalCurrentAssets : 0m, "Asset subtotal check");
-            AddDiagnostic(model, "Total Assets", totalAssets, comparisonDate.HasValue ? totalAssets : 0m, "Final asset total");
-            AddDiagnostic(model, "Current Liabilities", totalCurrentLiabilities, comparisonDate.HasValue ? totalCurrentLiabilities : 0m, "Liability subtotal check");
-            AddDiagnostic(model, "Total Liabilities", totalLiabilities, comparisonDate.HasValue ? totalLiabilities : 0m, "Liability total");
-            AddDiagnostic(model, "Total Equity", totalEquity, comparisonDate.HasValue ? totalEquity : 0m, "Equity total");
-            AddDiagnostic(model, "AR / AP Sanity", accountsReceivable, accountsPayable, "Comparative control accounts");
-            AddDiagnostic(model, "Cash vs Bank", cash, bank, "Liquidity split");
-            AddDiagnostic(model, "Inventory vs Prepaids", inventory, prepaid, "Working capital split");
+            AddDiagnostic(model, UiMessages.T("Current Assets", "الأصول المتداولة"), totalCurrentAssets, comparisonDate.HasValue ? totalCurrentAssets : 0m, UiMessages.T("Asset subtotal check", "فحص إجمالي الأصول الفرعي"));
+            AddDiagnostic(model, UiMessages.T("Total Assets", "إجمالي الأصول"), totalAssets, comparisonDate.HasValue ? totalAssets : 0m, UiMessages.T("Final asset total", "إجمالي الأصول النهائي"));
+            AddDiagnostic(model, UiMessages.T("Current Liabilities", "الخصوم المتداولة"), totalCurrentLiabilities, comparisonDate.HasValue ? totalCurrentLiabilities : 0m, UiMessages.T("Liability subtotal check", "فحص إجمالي الخصوم الفرعي"));
+            AddDiagnostic(model, UiMessages.T("Total Liabilities", "إجمالي الخصوم"), totalLiabilities, comparisonDate.HasValue ? totalLiabilities : 0m, UiMessages.T("Liability total", "إجمالي الخصوم"));
+            AddDiagnostic(model, UiMessages.T("Total Equity", "إجمالي حقوق المالكين"), totalEquity, comparisonDate.HasValue ? totalEquity : 0m, UiMessages.T("Equity total", "إجمالي حقوق المالكين"));
+            AddDiagnostic(model, UiMessages.T("AR / AP Sanity", "معقولية الذمم"), accountsReceivable, accountsPayable, UiMessages.T("Comparative control accounts", "حسابات التحكم المقارنة"));
+            AddDiagnostic(model, UiMessages.T("Cash vs Bank", "نقد مقابل بنك"), cash, bank, UiMessages.T("Liquidity split", "تقسيم السيولة"));
+            AddDiagnostic(model, UiMessages.T("Inventory vs Prepaids", "مخزون مقابل مقدمات"), inventory, prepaid, UiMessages.T("Working capital split", "تقسيم رأس المال العامل"));
         }
 
         private static void AddDiagnostic(BalanceSheetReportModel model, string groupName, decimal currentAmount, decimal comparisonAmount, string note)

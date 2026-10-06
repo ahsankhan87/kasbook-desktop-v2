@@ -48,7 +48,7 @@ namespace pos.Accounts
             // Permission check (Admin only)
             if (UsersModal.logged_in_user_role != "Admin" && UsersModal.logged_in_user_role != "Administrator")
             {
-                UiMessagesEx.Warning("Only administrators can access the import functionality.", "Access Denied");
+                UiMessagesEx.Warning(UiMessages.T("Only administrators can access the import functionality.", "فقط المسؤولون يمكنهم الوصول إلى وظيفة الاستيراد."), UiMessages.T("Access Denied", "تم رفض الوصول"));
                 this.Close();
                 return;
             }
@@ -60,13 +60,15 @@ namespace pos.Accounts
         {
             try
             {
-                using (BusyScope.Show(this, "Generating template..."))
+                using (BusyScope.Show(this, UiMessages.T("Generating template...", "جاري إنشاء القالب...")))
                 {
                     string templatePath = ImportTemplateGenerator.CreateImportTemplate("COA");
 
                     if (MessageBox.Show(
-                        $"Template created successfully!\n\nPath: {templatePath}\n\nDo you want to open it now?",
-                        "Template Ready",
+                        UiMessages.T(
+                            $"Template created successfully!\n\nPath: {templatePath}\n\nDo you want to open it now?",
+                            $"تم إنشاء القالب بنجاح!\n\nالمسار: {templatePath}\n\nهل تريد فتحه الآن؟"),
+                        UiMessages.T("Template Ready", "القالب جاهز"),
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Information) == DialogResult.Yes)
                     {
@@ -76,7 +78,7 @@ namespace pos.Accounts
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Template Error", "Failed to generate template: " + ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Template Error", "خطأ في القالب"), UiMessages.T("Failed to generate template: " + ex.Message, "فشل في إنشاء القالب: " + ex.Message));
             }
         }
 
@@ -85,14 +87,14 @@ namespace pos.Accounts
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Excel Files|*.xls;*.xlsx";
-                ofd.Title = "Select Chart of Accounts Import File";
+                ofd.Title = UiMessages.T("Select Chart of Accounts Import File", "اختر ملف استيراد دفتر الحسابات");
 
                 if (ofd.ShowDialog() != DialogResult.OK)
                     return;
 
                 try
                 {
-                    using (BusyScope.Show(this, "Loading and validating file..."))
+                    using (BusyScope.Show(this, UiMessages.T("Loading and validating file...", "جاري تحميل والتحقق من الملف...")))
                     {
                         _currentFileName = Path.GetFileName(ofd.FileName);
 
@@ -113,16 +115,18 @@ namespace pos.Accounts
                         var validCount = _coaRows.Count(r => r.IsValid);
                         var invalidCount = _coaRows.Count - validCount;
 
-                        UiMessagesEx.Information("Validation Complete",
-                            $"Total rows: {_coaRows.Count}\n" +
-                            $"Valid: {validCount}\n" +
-                            $"Invalid: {invalidCount}\n\n" +
-                            (invalidCount > 0 ? "Invalid rows are highlighted in red." : "All rows are valid!"));
+                        UiMessagesEx.Information(UiMessages.T("Validation Complete", "انتهى التحقق"),
+                                    UiMessages.T(
+                                        $"Total rows: {_coaRows.Count}\nValid: {validCount}\nInvalid: {invalidCount}\n\n" +
+                                        (invalidCount > 0 ? "Invalid rows are highlighted in red." : "All rows are valid!"),
+                                        $"إجمالي الصفوف: {_coaRows.Count}\nصحيح: {validCount}\nغير صحيح: {invalidCount}\n\n" +
+                                        (invalidCount > 0 ? "الصفوف غير الصحيحة مظللة بالأحمر." : "جميع الصفوف صحيحة!")));
+
                     }
                 }
                 catch (Exception ex)
                 {
-                    UiMessagesEx.Error("Upload Error", "Failed to read file: " + ex.Message);
+                    UiMessagesEx.Error(UiMessages.T("Upload Error", "خطأ في التحميل"), UiMessages.T("Failed to read file: " + ex.Message, "فشل في قراءة الملف: " + ex.Message));
                 }
             }
         }
@@ -178,22 +182,26 @@ namespace pos.Accounts
         {
             if (_coaRows == null || !_coaRows.Any())
             {
-                UiMessagesEx.Warning("No Data", "Please upload a file first.");
+                UiMessagesEx.Warning(UiMessages.T("No Data", "لا توجد بيانات"), UiMessages.T("Please upload a file first.", "يرجى تحميل ملف أولاً."));
                 return;
             }
 
             var validRows = _coaRows.Where(r => r.IsValid).ToList();
             if (!validRows.Any())
             {
-                UiMessagesEx.Warning("No Valid Rows", "No valid rows to import.");
+                UiMessagesEx.Warning(UiMessages.T("No Valid Rows", "لا توجد صفوف صحيحة"), UiMessages.T("No valid rows to import.", "لا توجد صفوف صحيحة للاستيراد."));
                 return;
             }
 
             var confirmMessage = chkDryRun.Checked
-                ? $"DRY RUN: Validate {validRows.Count} COA rows (groups/accounts)?\n\nNo data will be imported."
-                : $"Import {validRows.Count} valid COA rows (groups/accounts)?\n\nThis will add groups and leaf accounts to the Chart of Accounts.";
+                ? UiMessages.T(
+                    $"DRY RUN: Validate {validRows.Count} COA rows (groups/accounts)?\n\nNo data will be imported.",
+                    $"عملية تجريبية: التحقق من {validRows.Count} صفوف دفتر الحسابات (مجموعات/حسابات)؟\n\nلن يتم استيراد أي بيانات.")
+                : UiMessages.T(
+                    $"Import {validRows.Count} valid COA rows (groups/accounts)?\n\nThis will add groups and leaf accounts to the Chart of Accounts.",
+                    $"استيراد {validRows.Count} صفوف صحيحة من دفتر الحسابات (مجموعات/حسابات)؟\n\nسيتم إضافة المجموعات والحسابات الفردية إلى دفتر الحسابات.");
 
-            if (MessageBox.Show(confirmMessage, "Confirm Import", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(confirmMessage, UiMessages.T("Confirm Import", "تأكيد الاستيراد"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
             try
@@ -206,7 +214,7 @@ namespace pos.Accounts
                     using (var progressForm = new ImportProgressForm())
                     {
                         progressForm.Show();
-                        progressForm.StartProgress("Importing Chart of Accounts...");
+                        progressForm.StartProgress(UiMessages.T("Importing Chart of Accounts...", "جاري استيراد دفتر الحسابات..."));
 
                         var config = new ImportConfigModal
                         {
@@ -220,7 +228,7 @@ namespace pos.Accounts
                                 progressForm.UpdateProgress(args);
                             });
 
-                        progressForm.CompleteProgress(result.Success, result.Success ? "Import completed!" : "Import failed");
+                        progressForm.CompleteProgress(result.Success, result.Success ? UiMessages.T("Import completed!", "انتهى الاستيراد!") : UiMessages.T("Import failed", "فشل الاستيراد"));
                         System.Threading.Thread.Sleep(500); // Show final status briefly
                     }
                 }
@@ -238,8 +246,8 @@ namespace pos.Accounts
 
                 if (result.Success)
                 {
-                    var message = result.Message + $"\n\nDuration: {result.Duration.TotalSeconds:F1} seconds";
-                    UiMessagesEx.Success("Import Complete", message);
+                    var message = result.Message + $"\n\n{UiMessages.T("Duration", "المدة")}: {result.Duration.TotalSeconds:F1} seconds";
+                    UiMessagesEx.Success(UiMessages.T("Import Complete", "انتهى الاستيراد"), message);
 
                     if (!chkDryRun.Checked)
                     {
@@ -252,18 +260,18 @@ namespace pos.Accounts
                 else
                 {
                     var errorDetails = result.Errors != null && result.Errors.Any()
-                        ? $"\n\nErrors:\n{string.Join("\n", result.Errors.Take(10).Select(err => $"• Row {err.RowNumber}: {err.ErrorMessage}"))}"
+                        ? $"\n\n{UiMessages.T("Errors", "الأخطاء")}:\n{string.Join("\n", result.Errors.Take(10).Select(err => $"• {UiMessages.T("Row", "الصف")} {err.RowNumber}: {err.ErrorMessage}"))}"
                         : "";
 
                     if (result.Errors != null && result.Errors.Count > 10)
                         errorDetails += $"\n... and {result.Errors.Count - 10} more errors";
 
-                    UiMessagesEx.Error("Import Failed", result.Message + errorDetails);
+                    UiMessagesEx.Error(UiMessages.T("Import Failed", "فشل الاستيراد"), result.Message + errorDetails);
                 }
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Import Error", ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Import Error", "خطأ في الاستيراد"), ex.Message);
             }
         }
 
@@ -291,7 +299,7 @@ namespace pos.Accounts
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Template Error", "Failed to generate template: " + ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Template Error", "خطأ في القالب"), UiMessages.T("Failed to generate template: " + ex.Message, "فشل في إنشاء القالب: " + ex.Message));
             }
         }
 
@@ -300,14 +308,14 @@ namespace pos.Accounts
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Excel Files|*.xls;*.xlsx";
-                ofd.Title = "Select Opening Balance Import File";
+                ofd.Title = UiMessages.T("Select Opening Balance Import File", "اختر ملف استيراد رصيد البداية");
 
                 if (ofd.ShowDialog() != DialogResult.OK)
                     return;
 
                 try
                 {
-                    using (BusyScope.Show(this, "Loading and validating file..."))
+                    using (BusyScope.Show(this, UiMessages.T("Loading and validating file...", "جاري تحميل والتحقق من الملف...")))
                     {
                         _currentFileName = Path.GetFileName(ofd.FileName);
 
@@ -327,28 +335,26 @@ namespace pos.Accounts
 
                         if (validationResult.IsValid)
                         {
-                            UiMessagesEx.Information("Validation Complete",
-                                $"Total rows: {_obRows.Count}\n" +
-                                $"Total Debit: {validationResult.TotalDebit:N2}\n" +
-                                $"Total Credit: {validationResult.TotalCredit:N2}\n" +
-                                $"Difference: {validationResult.Difference:N2}\n\n" +
-                                "Trial balance is balanced! Ready to post.");
+                            UiMessagesEx.Information(UiMessages.T("Validation Complete", "انتهى التحقق"),
+                                UiMessages.T(
+                                    $"Total rows: {_obRows.Count}\nTotal Debit: {validationResult.TotalDebit:N2}\nTotal Credit: {validationResult.TotalCredit:N2}\nDifference: {validationResult.Difference:N2}\n\nTrial balance is balanced! Ready to post.",
+                                    $"إجمالي الصفوف: {_obRows.Count}\nإجمالي المدين: {validationResult.TotalDebit:N2}\nإجمالي الدائن: {validationResult.TotalCredit:N2}\nالفرق: {validationResult.Difference:N2}\n\nالميزان التجريبي متوازن! جاهز للترحيل."));
                         }
                         else
                         {
-                            var errorMsg = $"Validation FAILED:\n\n" +
-                                          $"Total Debit: {validationResult.TotalDebit:N2}\n" +
-                                          $"Total Credit: {validationResult.TotalCredit:N2}\n" +
-                                          $"Difference: {validationResult.Difference:N2}\n\n" +
-                                          string.Join("\n", validationResult.Errors.Select(err => $"• {err.ErrorMessage}"));
+                            var errorMsg = UiMessages.T(
+                                $"Validation FAILED:\n\nTotal Debit: {validationResult.TotalDebit:N2}\nTotal Credit: {validationResult.TotalCredit:N2}\nDifference: {validationResult.Difference:N2}\n\n" +
+                                string.Join("\n", validationResult.Errors.Select(err => $"• {err.ErrorMessage}")),
+                                $"فشل التحقق:\n\nإجمالي المدين: {validationResult.TotalDebit:N2}\nإجمالي الدائن: {validationResult.TotalCredit:N2}\nالفرق: {validationResult.Difference:N2}\n\n" +
+                                string.Join("\n", validationResult.Errors.Select(err => $"• {err.ErrorMessage}")));
 
-                            UiMessagesEx.Error("Validation Failed", errorMsg);
+                            UiMessagesEx.Error(UiMessages.T("Validation Failed", "فشل التحقق"), errorMsg);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    UiMessagesEx.Error("Upload Error", "Failed to read file: " + ex.Message);
+                    UiMessagesEx.Error(UiMessages.T("Upload Error", "خطأ في التحميل"), UiMessages.T("Failed to read file: " + ex.Message, "فشل في قراءة الملف: " + ex.Message));
                 }
             }
         }
@@ -409,15 +415,15 @@ namespace pos.Accounts
         {
             if (_obRows == null || !_obRows.Any())
             {
-                UiMessagesEx.Warning("No Data", "Please upload a file first.");
+                UiMessagesEx.Warning(UiMessages.T("No Data", "لا توجد بيانات"), UiMessages.T("Please upload a file first.", "يرجى تحميل ملف أولاً."));
                 return;
             }
 
             var confirmMessage = chkDryRun.Checked
-                ? $"DRY RUN: Validate Opening Balance?\n\nNo voucher will be created."
-                : $"Post Opening Balance as of {dtpOBDate.Value:dd-MMM-yyyy}?\n\nThis will create a journal voucher.";
+                ? UiMessages.T($"DRY RUN: Validate Opening Balance?\n\nNo voucher will be created.", $"محاكاة: التحقق من رصيد البداية؟\n\nلن يتم إنشاء أي قيد.")
+                : UiMessages.T($"Post Opening Balance as of {dtpOBDate.Value:dd-MMM-yyyy}?\n\nThis will create a journal voucher.", $"ترحيل رصيد البداية في {dtpOBDate.Value:dd-MMM-yyyy}؟\n\nسيتم إنشاء قيد يومية.");
 
-            if (MessageBox.Show(confirmMessage, "Confirm Post", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(confirmMessage, UiMessages.T("Confirm Post", "تأكيد الترحيل"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
             try
@@ -462,11 +468,11 @@ namespace pos.Accounts
 
                 if (result.Success)
                 {
-                    var message = result.Message + $"\n\nDuration: {result.Duration.TotalSeconds:F1} seconds";
+                    var message = result.Message + $"\n\n{UiMessages.T("Duration", "المدة")}: {result.Duration.TotalSeconds:F1} seconds";
                     if (result.VouchersCreated > 0)
-                        message += $"\nVouchers created: {result.VouchersCreated}";
+                        message += $"\n{UiMessages.T("Vouchers created", "القيود المنشأة")}: {result.VouchersCreated}";
 
-                    UiMessagesEx.Success("Post Complete", message);
+                    UiMessagesEx.Success(UiMessages.T("Post Complete", "انتهى الترحيل"), message);
 
                     if (!chkDryRun.Checked)
                     {
@@ -480,18 +486,18 @@ namespace pos.Accounts
                 else
                 {
                     var errorDetails = result.Errors != null && result.Errors.Any()
-                        ? $"\n\nErrors:\n{string.Join("\n", result.Errors.Take(10).Select(err => $"• {err.ErrorMessage}"))}"
+                        ? $"\n\n{UiMessages.T("Errors", "الأخطاء")}:\n{string.Join("\n", result.Errors.Take(10).Select(err => $"• {err.ErrorMessage}"))}"
                         : "";
 
                     if (result.Errors != null && result.Errors.Count > 10)
-                        errorDetails += $"\n... and {result.Errors.Count - 10} more errors";
+                        errorDetails += $"\n... {UiMessages.T("and", "و")} {result.Errors.Count - 10} {UiMessages.T("more errors", "أخطاء أخرى")}";
 
-                    UiMessagesEx.Error("Post Failed", result.Message + errorDetails);
+                    UiMessagesEx.Error(UiMessages.T("Post Failed", "فشل الترحيل"), result.Message + errorDetails);
                 }
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Post Error", ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Post Error", "خطأ في الترحيل"), ex.Message);
             }
         }
 
@@ -503,13 +509,15 @@ namespace pos.Accounts
         {
             try
             {
-                using (BusyScope.Show(this, "Generating template..."))
+                using (BusyScope.Show(this, UiMessages.T("Generating template...", "جاري إنشاء القالب...")))
                 {
                     string templatePath = ImportTemplateGenerator.CreateImportTemplate("JOURNAL_HISTORY");
 
                     if (MessageBox.Show(
-                        $"Template created successfully!\n\nPath: {templatePath}\n\nDo you want to open it now?",
-                        "Template Ready",
+                        UiMessages.T(
+                            $"Template created successfully!\n\nPath: {templatePath}\n\nDo you want to open it now?",
+                            $"تم إنشاء القالب بنجاح!\n\nالمسار: {templatePath}\n\nهل تريد فتحه الآن؟"),
+                        UiMessages.T("Template Ready", "القالب جاهز"),
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Information) == DialogResult.Yes)
                     {
@@ -519,7 +527,7 @@ namespace pos.Accounts
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Template Error", "Failed to generate template: " + ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Template Error", "خطأ في القالب"), UiMessages.T("Failed to generate template: " + ex.Message, "فشل في إنشاء القالب: " + ex.Message));
             }
         }
 
@@ -528,14 +536,14 @@ namespace pos.Accounts
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Excel Files|*.xls;*.xlsx";
-                ofd.Title = "Select Historical Journal Import File";
+                ofd.Title = UiMessages.T("Select Historical Journal Import File", "اختر ملف استيراد الدفتر اليومي التاريخي");
 
                 if (ofd.ShowDialog() != DialogResult.OK)
                     return;
 
                 try
                 {
-                    using (BusyScope.Show(this, "Loading and validating file..."))
+                    using (BusyScope.Show(this, UiMessages.T("Loading and validating file...", "جاري تحميل والتحقق من الملف...")))
                     {
                         _currentFileName = Path.GetFileName(ofd.FileName);
 
@@ -557,25 +565,23 @@ namespace pos.Accounts
                         var validEntries = _journalRows.Count(r => r.IsValid);
                         var unbalancedCount = _journalVouchers.Count - balancedCount;
 
-                        var message = $"Total vouchers: {_journalVouchers.Count}\n" +
-                                     $"Balanced: {balancedCount}\n" +
-                                     $"Unbalanced: {unbalancedCount}\n" +
-                                     $"Total entries: {_journalRows.Count}\n" +
-                                     $"Valid entries: {validEntries}";
+                        var message = UiMessages.T(
+                            $"Total vouchers: {_journalVouchers.Count}\nBalanced: {balancedCount}\nUnbalanced: {unbalancedCount}\nTotal entries: {_journalRows.Count}\nValid entries: {validEntries}",
+                            $"إجمالي القيود: {_journalVouchers.Count}\nمتوازن: {balancedCount}\nغير متوازن: {unbalancedCount}\nإجمالي القيود: {_journalRows.Count}\nقيود صحيحة: {validEntries}");
 
                         if (unbalancedCount > 0)
                         {
-                            UiMessagesEx.Warning("Validation Warning", message + "\n\nUnbalanced vouchers are highlighted in red.");
+                            UiMessagesEx.Warning(UiMessages.T("Validation Warning", "تحذير من التحقق"), message + UiMessages.T("\n\nUnbalanced vouchers are highlighted in red.", "\n\nالقيود غير المتوازنة مظللة بالأحمر."));
                         }
                         else
                         {
-                            UiMessagesEx.Information("Validation Complete", message + "\n\nAll vouchers are balanced!");
+                            UiMessagesEx.Information(UiMessages.T("Validation Complete", "انتهى التحقق"), message + UiMessages.T("\n\nAll vouchers are balanced!", "\n\nجميع القيود متوازنة!"));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    UiMessagesEx.Error("Upload Error", "Failed to read file: " + ex.Message);
+                    UiMessagesEx.Error(UiMessages.T("Upload Error", "خطأ في التحميل"), UiMessages.T("Failed to read file: " + ex.Message, "فشل في قراءة الملف: " + ex.Message));
                 }
             }
         }
@@ -646,22 +652,22 @@ namespace pos.Accounts
         {
             if (_journalRows == null || !_journalRows.Any())
             {
-                UiMessagesEx.Warning("No Data", "Please upload a file first.");
+                UiMessagesEx.Warning(UiMessages.T("No Data", "لا توجد بيانات"), UiMessages.T("Please upload a file first.", "يرجى تحميل ملف أولاً."));
                 return;
             }
 
             var balancedCount = _journalVouchers.Count(v => v.IsBalanced);
             if (balancedCount != _journalVouchers.Count)
             {
-                UiMessagesEx.Warning("Unbalanced Vouchers", "All vouchers must be balanced before import.");
+                UiMessagesEx.Warning(UiMessages.T("Unbalanced Vouchers", "قيود غير متوازنة"), UiMessages.T("All vouchers must be balanced before import.", "جميع القيود يجب أن تكون متوازنة قبل الاستيراد."));
                 return;
             }
 
             var confirmMessage = chkDryRun.Checked
-                ? $"DRY RUN: Validate {_journalVouchers.Count} vouchers?\n\nNo data will be imported."
-                : $"Import {_journalVouchers.Count} vouchers with {_journalRows.Count(r => r.IsValid)} entries?\n\nThis will create historical journal entries.";
+                ? UiMessages.T($"DRY RUN: Validate {_journalVouchers.Count} vouchers?\n\nNo data will be imported.", $"محاكاة: التحقق من {_journalVouchers.Count} قيود؟\n\nلن يتم استيراد أي بيانات.")
+                : UiMessages.T($"Import {_journalVouchers.Count} vouchers with {_journalRows.Count(r => r.IsValid)} entries?\n\nThis will create historical journal entries.", $"استيراد {_journalVouchers.Count} قيود مع {_journalRows.Count(r => r.IsValid)} قيود؟\n\nسيتم إنشاء قيود يومية تاريخية.");
 
-            if (MessageBox.Show(confirmMessage, "Confirm Import", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(confirmMessage, UiMessages.T("Confirm Import", "تأكيد الاستيراد"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
             try
@@ -674,7 +680,7 @@ namespace pos.Accounts
                     using (var progressForm = new ImportProgressForm())
                     {
                         progressForm.Show();
-                        progressForm.StartProgress("Importing Historical Journal Entries...");
+                        progressForm.StartProgress(UiMessages.T("Importing Historical Journal Entries...", "جاري استيراد قيود اليومية التاريخية..."));
 
                         var config = new ImportConfigModal
                         {
@@ -716,16 +722,16 @@ namespace pos.Accounts
 
                 if (result.WasCancelled)
                 {
-                    UiMessagesEx.Warning("Import Cancelled", "The import was cancelled by user.\n\nAll changes have been rolled back.");
+                    UiMessagesEx.Warning(UiMessages.T("Import Cancelled", "تم إلغاء الاستيراد"), UiMessages.T("The import was cancelled by user.\n\nAll changes have been rolled back.", "تم إلغاء الاستيراد بواسطة المستخدم.\n\nتم التراجع عن جميع التغييرات."));
                     LoadImportHistory();
                 }
                 else if (result.Success)
                 {
-                    var message = result.Message + $"\n\nDuration: {result.Duration.TotalSeconds:F1} seconds";
+                    var message = result.Message + $"\n\n{UiMessages.T("Duration", "المدة")}: {result.Duration.TotalSeconds:F1} seconds";
                     if (result.VouchersCreated > 0)
-                        message += $"\nVouchers created: {result.VouchersCreated}";
+                        message += $"\n{UiMessages.T("Vouchers created", "القيود المنشأة")}: {result.VouchersCreated}";
 
-                    UiMessagesEx.Success("Import Complete", message);
+                    UiMessagesEx.Success(UiMessages.T("Import Complete", "انتهى الاستيراد"), message);
 
                     if (!chkDryRun.Checked)
                     {
@@ -740,18 +746,18 @@ namespace pos.Accounts
                 else
                 {
                     var errorDetails = result.Errors != null && result.Errors.Any()
-                        ? $"\n\nErrors:\n{string.Join("\n", result.Errors.Take(10).Select(err => $"• {err.ErrorMessage}"))}"
+                        ? $"\n\n{UiMessages.T("Errors", "الأخطاء")}:\n{string.Join("\n", result.Errors.Take(10).Select(err => $"• {err.ErrorMessage}"))}"
                         : "";
 
                     if (result.Errors != null && result.Errors.Count > 10)
-                        errorDetails += $"\n... and {result.Errors.Count - 10} more errors";
+                        errorDetails += $"\n... {UiMessages.T("and", "و")} {result.Errors.Count - 10} {UiMessages.T("more errors", "أخطاء أخرى")}";
 
-                    UiMessagesEx.Error("Import Failed", result.Message + errorDetails);
+                    UiMessagesEx.Error(UiMessages.T("Import Failed", "فشل الاستيراد"), result.Message + errorDetails);
                 }
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Import Error", ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Import Error", "خطأ في الاستيراد"), ex.Message);
             }
         }
 
@@ -807,7 +813,7 @@ namespace pos.Accounts
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Load Error", "Failed to load import history: " + ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Load Error", "خطأ في التحميل"), UiMessages.T("Failed to load import history: " + ex.Message, "فشل في تحميل سجل الاستيراد: " + ex.Message));
             }
         }
 
@@ -820,7 +826,7 @@ namespace pos.Accounts
         {
             if (gridHistory.SelectedRows.Count == 0)
             {
-                UiMessagesEx.Warning("No Selection", "Please select an import session to rollback.");
+                UiMessagesEx.Warning(UiMessages.T("No Selection", "لم يتم التحديد"), UiMessages.T("Please select an import session to rollback.", "يرجى تحديد جلسة استيراد للتراجع."));
                 return;
             }
 
@@ -833,18 +839,15 @@ namespace pos.Accounts
 
             if (!canRollback)
             {
-                UiMessagesEx.Warning("Rollback Not Available", "This import session cannot be rolled back.\n\nReasons:\n• Status is not 'Completed'\n• Rollback time window has expired\n• Already rolled back");
+                UiMessagesEx.Warning(UiMessages.T("Rollback Not Available", "التراجع غير متاح"), UiMessages.T("This import session cannot be rolled back.\n\nReasons:\n• Status is not 'Completed'\n• Rollback time window has expired\n• Already rolled back", "لا يمكن التراجع عن جلسة الاستيراد هذه.\n\nالأسباب:\n• الحالة ليست 'مكتملة'\n• انتهى نافذة التراجع\n• م يتم التراجع بالفعل"));
                 return;
             }
 
             if (MessageBox.Show(
-                $"ROLLBACK IMPORT SESSION?\n\n" +
-                $"Type: {importType}\n" +
-                $"File: {fileName}\n" +
-                $"Status: {status}\n\n" +
-                $"This will DELETE all vouchers and entries created by this import.\n\n" +
-                $"Are you sure?",
-                "Confirm Rollback",
+                UiMessages.T(
+                    $"ROLLBACK IMPORT SESSION?\n\nType: {importType}\nFile: {fileName}\nStatus: {status}\n\nThis will DELETE all vouchers and entries created by this import.\n\nAre you sure?",
+                    $"تراجع جلسة الاستيراد؟\n\nالنوع: {importType}\nالملف: {fileName}\nالحالة: {status}\n\nسيتم حذف جميع القيود والقيود المنشأة بواسطة هذا الاستيراد.\n\nهل أنت متأكد?"),
+                UiMessages.T("Confirm Rollback", "تأكيد التراجع"),
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
@@ -853,24 +856,24 @@ namespace pos.Accounts
             {
                 ImportResultModal result;
 
-                using (BusyScope.Show(this, "Rolling back import..."))
+                using (BusyScope.Show(this, UiMessages.T("Rolling back import...", "جاري التراجع...")));
                 {
                     result = _bll.RollbackImport(sessionId);
                 }
 
                 if (result.Success)
                 {
-                    UiMessagesEx.Success("Rollback Complete", result.Message);
+                    UiMessagesEx.Success(UiMessages.T("Rollback Complete", "اكتمل التراجع"), result.Message);
                     LoadImportHistory();
                 }
                 else
                 {
-                    UiMessagesEx.Error("Rollback Failed", result.Message);
+                    UiMessagesEx.Error(UiMessages.T("Rollback Failed", "فشل التراجع"), result.Message);
                 }
             }
             catch (Exception ex)
             {
-                UiMessagesEx.Error("Rollback Error", ex.Message);
+                UiMessagesEx.Error(UiMessages.T("Rollback Error", "خطأ في التراجع"), ex.Message);
             }
         }
 

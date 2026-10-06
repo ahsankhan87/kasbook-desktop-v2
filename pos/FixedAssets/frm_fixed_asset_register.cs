@@ -665,7 +665,7 @@ namespace pos.FixedAssets
                     );
                 }
 
-                lblCurrentWDV.Text = $"Current Book Value (WDV): {_currentAsset.CurrentWDV:N2}";
+                lblCurrentWDV.Text = $"{UiMessages.T("Current Book Value (WDV):", "القيمة الدفترية الحالية (WDV):")} {_currentAsset.CurrentWDV:N2}";
             }
             catch (Exception ex)
             {
@@ -686,7 +686,15 @@ namespace pos.FixedAssets
             var depreciation = _currentAsset.Cost - _currentAsset.CurrentWDV;
 
             lblAssetNameSummary.Text = _currentAsset.AssetName;
-            lblCostSummary.Text = $"Cost: {_currentAsset.Cost:N2} | Book Value: {_currentAsset.CurrentWDV:N2} | Age: {years} years {months} months | Depreciation to Date: {depreciation:N2}";
+
+            string costLabel = UiMessages.T("Cost", "التكلفة");
+            string bookValueLabel = UiMessages.T("Book Value", "القيمة الدفترية");
+            string ageLabel = UiMessages.T("Age", "العمر");
+            string yearsLabel = UiMessages.T("years", "سنوات");
+            string monthsLabel = UiMessages.T("months", "أشهر");
+            string depreciationLabel = UiMessages.T("Depreciation to Date", "الاستهلاك حتى الآن");
+
+            lblCostSummary.Text = $"{costLabel}: {_currentAsset.Cost:N2} | {bookValueLabel}: {_currentAsset.CurrentWDV:N2} | {ageLabel}: {years} {yearsLabel} {months} {monthsLabel} | {depreciationLabel}: {depreciation:N2}";
         }
 
         private void SelectDropdownByAccountId(ComboBox ddl, int accountId)

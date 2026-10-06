@@ -117,72 +117,240 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Date.HeaderText" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="VoucherNo.HeaderText" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="VoucherType.HeaderText" xml:space="preserve">
+    <value>نوع القيد</value>
+  </data>
+  <data name="RefModule.HeaderText" xml:space="preserve">
+    <value>الوحدة</value>
+  </data>
+  <data name="Narration.HeaderText" xml:space="preserve">
+    <value>الشرح</value>
+  </data>
+  <data name="Debit.HeaderText" xml:space="preserve">
+    <value>مدين</value>
+  </data>
+  <data name="Credit.HeaderText" xml:space="preserve">
+    <value>دائن</value>
+  </data>
+  <data name="RunningBalance.HeaderText" xml:space="preserve">
+    <value>الرصيد المتراكم</value>
+  </data>
+  <data name="ReferenceNo.HeaderText" xml:space="preserve">
+    <value>الرقم المرجعي #</value>
+  </data>
+  <data name="Status.HeaderText" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="_btnLoadMore.Text" xml:space="preserve">
+    <value>تحميل المزيد</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>نوع القيد</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>الوحدة</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>الشرح</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>مدين</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>دائن</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
+    <value>الرصيد</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
+    <value>نوع القيد</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn12.HeaderText" xml:space="preserve">
+    <value>الوحدة</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
+    <value>الشرح</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
+    <value>مدين</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
+    <value>دائن</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
+    <value>الرصيد</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_lblSummaryAccount.Location" type="System.Drawing.Point, System.Drawing">
     <value>191, 0</value>
   </data>
   <data name="_lblSummaryType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 25</value>
+    <value>149, 25</value>
+  </data>
+  <data name="_lblSummaryType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 21</value>
+  </data>
+  <data name="_lblSummaryType.Text" xml:space="preserve">
+    <value>النوع: -</value>
   </data>
   <data name="_lblSummaryNormal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 46</value>
+    <value>100, 46</value>
+  </data>
+  <data name="_lblSummaryNormal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="_lblSummaryNormal.Text" xml:space="preserve">
+    <value>الرصيد الطبيعي: -</value>
   </data>
   <data name="_lblSummaryCurrent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 70</value>
+    <value>82, 70</value>
+  </data>
+  <data name="_lblSummaryCurrent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 37</value>
+  </data>
+  <data name="_lblSummaryCurrent.Text" xml:space="preserve">
+    <value>0.00 مدين</value>
   </data>
   <data name="_lblSummaryTurnover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 114</value>
+    <value>137, 114</value>
+  </data>
+  <data name="_lblSummaryTurnover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 17</value>
+  </data>
+  <data name="_lblSummaryTurnover.Text" xml:space="preserve">
+    <value>حركة الفترة</value>
   </data>
   <data name="_lblSummaryCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 131</value>
+    <value>156, 131</value>
+  </data>
+  <data name="_lblSummaryCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 17</value>
+  </data>
+  <data name="_lblSummaryCount.Text" xml:space="preserve">
+    <value>البنود: 0</value>
   </data>
   <data name="_lblSummaryLastTxn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 148</value>
+    <value>132, 148</value>
+  </data>
+  <data name="_lblSummaryLastTxn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="_lblSummaryLastTxn.Text" xml:space="preserve">
+    <value>آخر عملية: -</value>
   </data>
   <data name="_btnViewFullHistory.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 169</value>
   </data>
+  <data name="_btnViewFullHistory.Text" xml:space="preserve">
+    <value>عرض السجل الكامل</value>
+  </data>
   <data name="_btnPrint.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 214</value>
+  </data>
+  <data name="_btnPrint.Text" xml:space="preserve">
+    <value>طباعة الأستاذ</value>
   </data>
   <data name="_btnExport.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 259</value>
   </data>
+  <data name="_btnExport.Text" xml:space="preserve">
+    <value>تصدير إلى إكسل</value>
+  </data>
   <data name="_lblAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1407, 13</value>
+    <value>1411, 13</value>
+  </data>
+  <data name="_lblAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="_lblAccount.Text" xml:space="preserve">
+    <value>الحساب:</value>
   </data>
   <data name="_cmbAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>998, 4</value>
+    <value>1009, 4</value>
+  </data>
+  <data name="_cmbAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 25</value>
   </data>
   <data name="_btnSearchAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>915, 4</value>
+    <value>911, 4</value>
+  </data>
+  <data name="_btnSearchAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 36</value>
+  </data>
+  <data name="_btnSearchAccount.Text" xml:space="preserve">
+    <value>بحث</value>
   </data>
   <data name="_lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>862, 13</value>
+    <value>872, 13</value>
+  </data>
+  <data name="_lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 17</value>
+  </data>
+  <data name="_lblFrom.Text" xml:space="preserve">
+    <value>من:</value>
   </data>
   <data name="_dtFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>526, 4</value>
+    <value>522, 4</value>
   </data>
   <data name="_lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>438, 13</value>
+    <value>434, 13</value>
+  </data>
+  <data name="_lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 17</value>
+  </data>
+  <data name="_lblTo.Text" xml:space="preserve">
+    <value>إلى:</value>
   </data>
   <data name="_dtTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 4</value>
+    <value>193, 4</value>
   </data>
   <data name="_btnLoad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 4</value>
+    <value>6, 4</value>
+  </data>
+  <data name="_btnLoad.Text" xml:space="preserve">
+    <value>تحميل الأستاذ</value>
   </data>
   <data name="_lblShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1424, 58</value>
+    <value>1428, 58</value>
+  </data>
+  <data name="_lblShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
+  <data name="_lblShow.Text" xml:space="preserve">
+    <value>عرض:</value>
   </data>
   <data name="_cmbShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1264, 48</value>
+    <value>1268, 48</value>
   </data>
   <data name="_lblGroupBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>919, 58</value>
+    <value>911, 58</value>
+  </data>
+  <data name="_lblGroupBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 17</value>
+  </data>
+  <data name="_lblGroupBy.Text" xml:space="preserve">
+    <value>تجميع حسب:</value>
   </data>
   <data name="_cmbGroupBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>767, 48</value>
+    <value>763, 48</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -192,62 +360,7 @@
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <!-- Arabic Text Translations -->
   <data name="$this.Text" xml:space="preserve">
     <value>دفتر الأستاذ العام</value>
-  </data>
-  <data name="_btnLoad.Text" xml:space="preserve">
-    <value>تحميل الأستاذ</value>
-  </data>
-  <data name="_btnLoadMore.Text" xml:space="preserve">
-    <value>تحميل المزيد</value>
-  </data>
-  <data name="_btnSearchAccount.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
-  <data name="_btnPrint.Text" xml:space="preserve">
-    <value>طباعة الأستاذ</value>
-  </data>
-  <data name="_btnExport.Text" xml:space="preserve">
-    <value>تصدير إلى إكسل</value>
-  </data>
-  <data name="_btnViewFullHistory.Text" xml:space="preserve">
-    <value>عرض السجل الكامل</value>
-  </data>
-  <data name="_lblAccount.Text" xml:space="preserve">
-    <value>الحساب:</value>
-  </data>
-  <data name="_lblFrom.Text" xml:space="preserve">
-    <value>من:</value>
-  </data>
-  <data name="_lblTo.Text" xml:space="preserve">
-    <value>إلى:</value>
-  </data>
-  <data name="_lblShow.Text" xml:space="preserve">
-    <value>عرض:</value>
-  </data>
-  <data name="_lblGroupBy.Text" xml:space="preserve">
-    <value>تجميع حسب:</value>
-  </data>
-  <data name="_lblSummaryAccount.Text" xml:space="preserve">
-    <value>-</value>
-  </data>
-  <data name="_lblSummaryCount.Text" xml:space="preserve">
-    <value>البنود: 0</value>
-  </data>
-  <data name="_lblSummaryCurrent.Text" xml:space="preserve">
-    <value>0.00 مدين</value>
-  </data>
-  <data name="_lblSummaryType.Text" xml:space="preserve">
-    <value>النوع: -</value>
-  </data>
-  <data name="_lblSummaryNormal.Text" xml:space="preserve">
-    <value>الرصيد الطبيعي: -</value>
-  </data>
-  <data name="_lblSummaryTurnover.Text" xml:space="preserve">
-    <value>حركة الفترة</value>
-  </data>
-  <data name="_lblSummaryLastTxn.Text" xml:space="preserve">
-    <value>آخر عملية: -</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-using POS.BLL;
+﻿using POS.BLL;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,7 +16,8 @@ namespace pos.Reports.Financial
         {
             InitializeComponent();
             WireEvents();
-            Text = "Balance Sheet";
+            // Text is loaded from .resx based on language selection
+            // Do not set hardcoded Text here - it will be set by AppTheme.Apply()
         }
 
         private void WireEvents()
@@ -65,7 +66,11 @@ namespace pos.Reports.Financial
             _isInitializing = true;
 
             cmbDetailLevel.Items.Clear();
-            cmbDetailLevel.Items.AddRange(new object[] { "Summarized", "Detailed" });
+            // Use bilingual support for combo items
+            cmbDetailLevel.Items.AddRange(new object[] { 
+                UiMessages.T("Summarized", "مختصر"), 
+                UiMessages.T("Detailed", "مفصّل") 
+            });
             cmbDetailLevel.SelectedIndex = 0;
 
             dtpAsOfDate.Value = DateTime.Today;
@@ -135,7 +140,7 @@ namespace pos.Reports.Financial
 
             try
             {
-                using (BusyScope.Show(this, UiMessages.T("Generating balance sheet...", "���� ����� ��������� ��������...")))
+                using (BusyScope.Show(this, UiMessages.T("Generating balance sheet...", "جاري إنشاء الميزانية العمومية...")))
                 {
                     BalanceSheetReportModel report = BalanceSheetGenerator.Build(
                         _accountsBll,
@@ -149,13 +154,20 @@ namespace pos.Reports.Financial
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error generating balance sheet", ex.Message);
+                UiMessages.ShowError(
+                    "Error generating balance sheet",
+                    "خطأ في إنشاء قائمة المركز المالي",
+                    "Error",
+                    "خطأ"
+                );
             }
         }
 
         private bool IsDetailedMode()
         {
-            return string.Equals(Convert.ToString(cmbDetailLevel.SelectedItem), "Detailed", StringComparison.OrdinalIgnoreCase);
+            // Support both English and Arabic values from combo
+            string selected = Convert.ToString(cmbDetailLevel.SelectedItem);
+            return selected.Contains("Detailed") || selected.Contains("مفصّل");
         }
 
         private void BindReport(BalanceSheetReportModel report)
@@ -177,8 +189,11 @@ namespace pos.Reports.Financial
 
             lblBalanceStatus.ForeColor = report.IsBalanced ? Color.DarkGreen : Color.DarkRed;
             lblBalanceStatus.Text = report.IsBalanced
-                ? "Assets = Liabilities + Equity ?"
-                : string.Format("OUT OF BALANCE by {0:N2} ?", Math.Abs(report.Difference));
+                ? UiMessages.T("Assets = Liabilities + Equity ✓", "الأصول = الخصوم + حقوق المالكين ✓")
+                : UiMessages.T(
+                    string.Format("OUT OF BALANCE by {0:N2}", Math.Abs(report.Difference)),
+                    string.Format("غير متوازن بمقدار {0:N2}", Math.Abs(report.Difference))
+                );
 
             btnFindDiscrepancy.Enabled = !report.IsBalanced;
             btnFindDiscrepancy.Tag = report;
@@ -189,7 +204,12 @@ namespace pos.Reports.Financial
             var report = btnFindDiscrepancy.Tag as BalanceSheetReportModel;
             if (report == null || report.IsBalanced)
             {
-                UiMessages.ShowInfo("No discrepancy", "The report is already balanced.");
+                UiMessages.ShowInfo(
+                    "No discrepancy",
+                    "لا توجد اختلافات",
+                    "Info",
+                    "معلومة"
+                );
                 return;
             }
 

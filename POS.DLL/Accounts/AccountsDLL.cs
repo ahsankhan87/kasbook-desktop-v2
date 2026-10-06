@@ -360,65 +360,67 @@ namespace POS.DLL
                 {
                     cn.Open();
                     const string query = @";
-WITH CandidateGroups AS
-(
-    SELECT DISTINCT G.id, G.parent_id
-    FROM acc_groups G
-    INNER JOIN acc_account_type T ON T.id = G.account_type_id
-    WHERE LOWER(ISNULL(T.name, '')) LIKE '%income%'
-       OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%'
-       OR LOWER(ISNULL(T.name, '')) LIKE '%expense%'
-       OR LOWER(ISNULL(T.name, '')) LIKE '%cogs%'
-       OR LOWER(ISNULL(T.name, '')) LIKE '%cost%'
-), RecursiveGroups AS
-(
-    SELECT id, parent_id FROM CandidateGroups
-    UNION ALL
-    SELECT P.id, P.parent_id
-    FROM acc_groups P
-    INNER JOIN RecursiveGroups RG ON RG.parent_id = P.id
-), DistinctGroups AS
-(
-    SELECT DISTINCT id FROM RecursiveGroups
-)
-SELECT 'Group' AS node_kind,
-       G.id AS node_id,
-       G.parent_id,
-       G.id AS group_id,
-       CAST(NULL AS INT) AS account_id,
-       ISNULL(G.code, '') AS code,
-       ISNULL(G.name, '') AS name,
-       ISNULL(T.name, '') AS account_type_name,
-       CASE
-           WHEN LOWER(ISNULL(T.name, '')) LIKE '%income%' OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%' THEN 'Income'
-           WHEN LOWER(ISNULL(T.name, '')) LIKE '%cogs%' OR LOWER(ISNULL(T.name, '')) LIKE '%cost%' OR LOWER(ISNULL(T.name, '')) LIKE '%purchase%' THEN 'COGS'
-           WHEN LOWER(ISNULL(T.name, '')) LIKE '%expense%' THEN 'Expense'
-           ELSE 'Other'
-       END AS section
-FROM acc_groups G
-LEFT JOIN acc_account_type T ON T.id = G.account_type_id
-WHERE G.id IN (SELECT id FROM DistinctGroups)
-UNION ALL
-SELECT 'Account' AS node_kind,
-       A.id AS node_id,
-       A.group_id AS parent_id,
-       A.group_id,
-       A.id AS account_id,
-       ISNULL(A.code, '') AS code,
-       ISNULL(A.name, '') AS name,
-       ISNULL(T.name, '') AS account_type_name,
-       CASE
-           WHEN LOWER(ISNULL(T.name, '')) LIKE '%income%' OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%' THEN 'Income'
-           WHEN LOWER(ISNULL(T.name, '')) LIKE '%cogs%' OR LOWER(ISNULL(T.name, '')) LIKE '%cost%' OR LOWER(ISNULL(T.name, '')) LIKE '%purchase%' THEN 'COGS'
-           WHEN LOWER(ISNULL(T.name, '')) LIKE '%expense%' THEN 'Expense'
-           ELSE 'Other'
-       END AS section
-FROM acc_accounts A
-INNER JOIN acc_groups G ON G.id = A.group_id
-LEFT JOIN acc_account_type T ON T.id = G.account_type_id
-WHERE A.group_id IN (SELECT id FROM DistinctGroups)
-  AND ISNULL(A.is_active, 1) = 1
-ORDER BY node_kind, code, name;";
+                        WITH CandidateGroups AS
+                        (
+                            SELECT DISTINCT G.id, G.parent_id
+                            FROM acc_groups G
+                            INNER JOIN acc_account_type T ON T.id = G.account_type_id
+                            WHERE LOWER(ISNULL(T.name, '')) LIKE '%income%'
+                               OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%'
+                               OR LOWER(ISNULL(T.name, '')) LIKE '%expense%'
+                               OR LOWER(ISNULL(T.name, '')) LIKE '%cogs%'
+                               OR LOWER(ISNULL(T.name, '')) LIKE '%cost%'
+                        ), RecursiveGroups AS
+                        (
+                            SELECT id, parent_id FROM CandidateGroups
+                            UNION ALL
+                            SELECT P.id, P.parent_id
+                            FROM acc_groups P
+                            INNER JOIN RecursiveGroups RG ON RG.parent_id = P.id
+                        ), DistinctGroups AS
+                        (
+                            SELECT DISTINCT id FROM RecursiveGroups
+                        )
+                        SELECT 'Group' AS node_kind,
+                               G.id AS node_id,
+                               G.parent_id,
+                               G.id AS group_id,
+                               CAST(NULL AS INT) AS account_id,
+                               ISNULL(G.code, '') AS code,
+                               ISNULL(G.name, '') AS name,
+                               ISNULL(G.name_2, '') AS name_2,
+                               ISNULL(T.name, '') AS account_type_name,
+                               CASE
+                                   WHEN LOWER(ISNULL(T.name, '')) LIKE '%income%' OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%' THEN 'Income'
+                                   WHEN LOWER(ISNULL(T.name, '')) LIKE '%cogs%' OR LOWER(ISNULL(T.name, '')) LIKE '%cost%' OR LOWER(ISNULL(T.name, '')) LIKE '%purchase%' THEN 'COGS'
+                                   WHEN LOWER(ISNULL(T.name, '')) LIKE '%expense%' THEN 'Expense'
+                                   ELSE 'Other'
+                               END AS section
+                        FROM acc_groups G
+                        LEFT JOIN acc_account_type T ON T.id = G.account_type_id
+                        WHERE G.id IN (SELECT id FROM DistinctGroups)
+                        UNION ALL
+                        SELECT 'Account' AS node_kind,
+                               A.id AS node_id,
+                               A.group_id AS parent_id,
+                               A.group_id,
+                               A.id AS account_id,
+                               ISNULL(A.code, '') AS code,
+                               ISNULL(A.name, '') AS name,
+                               ISNULL(A.name_2, '') AS name_2,
+                               ISNULL(T.name, '') AS account_type_name,
+                               CASE
+                                   WHEN LOWER(ISNULL(T.name, '')) LIKE '%income%' OR LOWER(ISNULL(T.name, '')) LIKE '%revenue%' THEN 'Income'
+                                   WHEN LOWER(ISNULL(T.name, '')) LIKE '%cogs%' OR LOWER(ISNULL(T.name, '')) LIKE '%cost%' OR LOWER(ISNULL(T.name, '')) LIKE '%purchase%' THEN 'COGS'
+                                   WHEN LOWER(ISNULL(T.name, '')) LIKE '%expense%' THEN 'Expense'
+                                   ELSE 'Other'
+                               END AS section
+                        FROM acc_accounts A
+                        INNER JOIN acc_groups G ON G.id = A.group_id
+                        LEFT JOIN acc_account_type T ON T.id = G.account_type_id
+                        WHERE A.group_id IN (SELECT id FROM DistinctGroups)
+                          AND ISNULL(A.is_active, 1) = 1
+                        ORDER BY node_kind, code, name, name_2;";
 
                     using (SqlCommand localCmd = new SqlCommand(query, cn))
                     using (SqlDataAdapter adapter = new SqlDataAdapter(localCmd))
@@ -1111,11 +1113,20 @@ WHERE E.branch_id = @branch_id
                         cmd.Parameters.AddWithValue("@BranchId", (object)branchId ?? DBNull.Value);
                     }
 
-                    da = new SqlDataAdapter(cmd);
-                    dt = new DataTable();
-                    da.Fill(dt);
-                    // Return the second result set (aging summary)
-                    return dt.Rows.Count > 0 ? dt : new DataTable();
+                    // Execute reader to get multiple result sets
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Skip the first result set (ledger transactions)
+                        if (reader.NextResult())
+                        {
+                            // Read the second result set (aging summary)
+                            dt = new DataTable();
+                            dt.Load(reader);
+                            return dt.Rows.Count > 0 ? dt : new DataTable();
+                        }
+                    }
+
+                    return new DataTable();
                 }
                 catch
                 {
@@ -1176,10 +1187,20 @@ WHERE E.branch_id = @branch_id
                         cmd.Parameters.AddWithValue("@BranchId", (object)branchId ?? DBNull.Value);
                     }
 
-                    da = new SqlDataAdapter(cmd);
-                    dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
+                    // Execute reader to get multiple result sets
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Skip the first result set (ledger transactions)
+                        if (reader.NextResult())
+                        {
+                            // Read the second result set (aging summary)
+                            dt = new DataTable();
+                            dt.Load(reader);
+                            return dt.Rows.Count > 0 ? dt : new DataTable();
+                        }
+                    }
+
+                    return new DataTable();
                 }
                 catch
                 {

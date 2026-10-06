@@ -123,13 +123,10 @@
   <data name="&gt;&gt;dtPurchaseDate.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblLocation.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
   <data name="&gt;&gt;pnlMain.Name" xml:space="preserve">
     <value>pnlMain</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnSave.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -179,12 +176,6 @@
   <data name="&gt;&gt;lblCategory.Parent" xml:space="preserve">
     <value>pnlMain</value>
   </data>
-  <data name="txtCost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 30</value>
-  </data>
-  <data name="&gt;&gt;txtReplacementCost.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;txtSalvageValue.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
@@ -198,26 +189,23 @@
     <value>txtSalvageValue</value>
   </data>
   <data name="ddlLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 282</value>
+    <value>175, 284</value>
   </data>
   <data name="ddlLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 31</value>
   </data>
-  <data name="&gt;&gt;lblCost.Name" xml:space="preserve">
-    <value>lblCost</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pnlButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCost.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 23</value>
   </data>
   <data name="&gt;&gt;lblLocation.Parent" xml:space="preserve">
     <value>pnlMain</value>
-  </data>
-  <data name="&gt;&gt;lblPurchaseDate.ZOrder" xml:space="preserve">
-    <value>19</value>
   </data>
   <data name="&gt;&gt;lblUsefulLifeMonths.Parent" xml:space="preserve">
     <value>pnlMain</value>
@@ -228,8 +216,8 @@
   <data name="txtUsefulLifeMonths.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 30</value>
   </data>
-  <data name="&gt;&gt;txtUsefulLifeMonths.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ddlCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 72</value>
   </data>
   <data name="txtSalvageValue.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -339,8 +327,8 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="lblDeprecationMethod.Text" xml:space="preserve">
-    <value>Depreciation Method:</value>
+  <data name="lblCost.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ddlCostCenter.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -358,7 +346,7 @@
     <value>pnlMain</value>
   </data>
   <data name="txtCost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 162</value>
+    <value>175, 163</value>
   </data>
   <data name="&gt;&gt;lblCostCenter.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -378,11 +366,14 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 600</value>
   </data>
-  <data name="lblCost.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;lblDeprecationMethod.Name" xml:space="preserve">
+    <value>lblDeprecationMethod</value>
   </data>
-  <data name="&gt;&gt;txtAssetCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtUsefulLifeMonths.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtPurchaseDate.Name" xml:space="preserve">
+    <value>dtPurchaseDate</value>
   </data>
   <data name="lblLocation.Text" xml:space="preserve">
     <value>Location:</value>
@@ -405,20 +396,17 @@
   <data name="&gt;&gt;lblAssetName.Parent" xml:space="preserve">
     <value>pnlMain</value>
   </data>
-  <data name="txtReplacementCost.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
   <data name="&gt;&gt;lblSalvageValue.Name" xml:space="preserve">
     <value>lblSalvageValue</value>
   </data>
   <data name="ddlCostCenter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 312</value>
+    <value>175, 315</value>
   </data>
   <data name="lblCostCenter.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="txtSalvageValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 252</value>
+    <value>175, 254</value>
   </data>
   <data name="btnSave.Text" xml:space="preserve">
     <value>Save</value>
@@ -435,17 +423,14 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
-  <data name="&gt;&gt;txtSerialNumber.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;lblCategory.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtSalvageValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ddlCostCenter.Parent" xml:space="preserve">
-    <value>pnlMain</value>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 10</value>
   </data>
   <data name="&gt;&gt;lblUsefulLifeMonths.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -465,6 +450,9 @@
   <data name="lblUsefulLifeMonths.Text" xml:space="preserve">
     <value>Useful Life (Months):</value>
   </data>
+  <data name="lblDeprecationMethod.Text" xml:space="preserve">
+    <value>Depreciation Method:</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Add Fixed Asset</value>
   </data>
@@ -474,11 +462,11 @@
   <data name="ddlDeprecationMethod.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="txtSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 132</value>
+  <data name="ddlCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 31</value>
   </data>
-  <data name="&gt;&gt;ddlCategory.Name" xml:space="preserve">
-    <value>ddlCategory</value>
+  <data name="txtSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 133</value>
   </data>
   <data name="ddlDeprecationMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 31</value>
@@ -495,11 +483,14 @@
   <data name="pnlButtons.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 50</value>
   </data>
+  <data name="&gt;&gt;txtAssetCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ddlCategory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 72</value>
+  <data name="lblDeprecationMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 195</value>
   </data>
   <data name="pnlMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 10, 10, 10</value>
@@ -509,6 +500,9 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAssetName.Text" xml:space="preserve">
+    <value>Asset Name:</value>
   </data>
   <data name="&gt;&gt;lblCost.Parent" xml:space="preserve">
     <value>pnlMain</value>
@@ -537,8 +531,8 @@
   <data name="&gt;&gt;pnlMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblDeprecationMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 195</value>
+  <data name="&gt;&gt;lblCost.Name" xml:space="preserve">
+    <value>lblCost</value>
   </data>
   <data name="&gt;&gt;txtCost.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -546,11 +540,8 @@
   <data name="&gt;&gt;lblAssetName.Name" xml:space="preserve">
     <value>lblAssetName</value>
   </data>
-  <data name="lblPurchaseDate.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 10</value>
+  <data name="&gt;&gt;lblDeprecationMethod.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="lblSerialNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 135</value>
@@ -564,17 +555,14 @@
   <data name="lblSalvageValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 255</value>
   </data>
+  <data name="&gt;&gt;txtAssetName.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
   <data name="txtSalvageValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 30</value>
   </data>
   <data name="txtSerialNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 30</value>
-  </data>
-  <data name="txtSalvageValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtUsefulLifeMonths.Parent" xml:space="preserve">
-    <value>pnlMain</value>
   </data>
   <data name="&gt;&gt;lblAssetCode.Name" xml:space="preserve">
     <value>lblAssetCode</value>
@@ -588,14 +576,14 @@
   <data name="&gt;&gt;lblDeprecationMethod.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblDeprecationMethod.Name" xml:space="preserve">
-    <value>lblDeprecationMethod</value>
+  <data name="&gt;&gt;txtReplacementCost.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;dtPurchaseDate.Name" xml:space="preserve">
-    <value>dtPurchaseDate</value>
+  <data name="dtPurchaseDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 30</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 372</value>
+    <value>175, 376</value>
   </data>
   <data name="&gt;&gt;ddlLocation.Name" xml:space="preserve">
     <value>ddlLocation</value>
@@ -606,11 +594,11 @@
   <data name="lblAssetName.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 23</value>
   </data>
-  <data name="&gt;&gt;lblCostCenter.Parent" xml:space="preserve">
-    <value>pnlMain</value>
+  <data name="&gt;&gt;txtSerialNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txtUsefulLifeMonths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 222</value>
+  <data name="lblPurchaseDate.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -624,11 +612,11 @@
   <data name="lblCostCenter.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 315</value>
   </data>
-  <data name="&gt;&gt;txtAssetName.Parent" xml:space="preserve">
-    <value>pnlMain</value>
+  <data name="&gt;&gt;txtAssetName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblCost.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblCostCenter.Parent" xml:space="preserve">
+    <value>pnlMain</value>
   </data>
   <data name="&gt;&gt;pnlButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -639,14 +627,17 @@
   <data name="txtReplacementCost.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 30</value>
   </data>
+  <data name="&gt;&gt;txtUsefulLifeMonths.Parent" xml:space="preserve">
+    <value>pnlMain</value>
+  </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>pnlButtons</value>
   </data>
   <data name="&gt;&gt;lblUsefulLifeMonths.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dtPurchaseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 30</value>
+  <data name="lblLocation.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="&gt;&gt;txtUsefulLifeMonths.Name" xml:space="preserve">
     <value>txtUsefulLifeMonths</value>
@@ -708,8 +699,8 @@
   <data name="&gt;&gt;lblCostCenter.Name" xml:space="preserve">
     <value>lblCostCenter</value>
   </data>
-  <data name="lblCostCenter.Text" xml:space="preserve">
-    <value>Cost Center:</value>
+  <data name="&gt;&gt;lblCost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblAssetCode.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -724,10 +715,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ddlDeprecationMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 192</value>
+    <value>175, 193</value>
   </data>
-  <data name="&gt;&gt;btnSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="txtReplacementCost.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;txtReplacementCost.Parent" xml:space="preserve">
     <value>pnlMain</value>
@@ -738,8 +729,8 @@
   <data name="txtAssetCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>175, 12</value>
   </data>
-  <data name="&gt;&gt;lblDeprecationMethod.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;ddlCostCenter.Parent" xml:space="preserve">
+    <value>pnlMain</value>
   </data>
   <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
     <value>lblNotes</value>
@@ -757,7 +748,10 @@
     <value>195, 10</value>
   </data>
   <data name="txtReplacementCost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 342</value>
+    <value>175, 346</value>
+  </data>
+  <data name="txtUsefulLifeMonths.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 224</value>
   </data>
   <data name="pnlMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 550</value>
@@ -765,16 +759,22 @@
   <data name="&gt;&gt;txtCost.Parent" xml:space="preserve">
     <value>pnlMain</value>
   </data>
+  <data name="lblCostCenter.Text" xml:space="preserve">
+    <value>Cost Center:</value>
+  </data>
   <data name="&gt;&gt;txtSerialNumber.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="&gt;&gt;btnSave.Parent" xml:space="preserve">
     <value>pnlButtons</value>
   </data>
-  <data name="lblAssetName.Text" xml:space="preserve">
-    <value>Asset Name:</value>
+  <data name="&gt;&gt;lblPurchaseDate.ZOrder" xml:space="preserve">
+    <value>19</value>
   </data>
-  <data name="&gt;&gt;txtAssetName.Type" xml:space="preserve">
+  <data name="&gt;&gt;ddlCategory.Name" xml:space="preserve">
+    <value>ddlCategory</value>
+  </data>
+  <data name="&gt;&gt;txtCost.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCost.Text" xml:space="preserve">
@@ -813,14 +813,14 @@
   <data name="&gt;&gt;txtAssetCode.Name" xml:space="preserve">
     <value>txtAssetCode</value>
   </data>
-  <data name="ddlCategory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 31</value>
+  <data name="txtCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 30</value>
   </data>
   <data name="&gt;&gt;lblAssetCode.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
   <data name="dtPurchaseDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 102</value>
+    <value>175, 103</value>
   </data>
   <data name="&gt;&gt;txtAssetCode.ZOrder" xml:space="preserve">
     <value>24</value>
@@ -834,16 +834,13 @@
   <data name="pnlMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;txtCost.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="txtSalvageValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;pnlMain.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ar-SA</value>
   </metadata>
 </root>

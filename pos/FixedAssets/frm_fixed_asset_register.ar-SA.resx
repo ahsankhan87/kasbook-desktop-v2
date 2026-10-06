@@ -124,11 +124,126 @@
   <data name="splitContainer.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <data name="btnAddAsset.Text" xml:space="preserve">
+    <value>إضافة أصل جديد</value>
+  </data>
+  <data name="btnImportAssets.Text" xml:space="preserve">
+    <value>تقارير</value>
+  </data>
+  <data name="btnManageCategories.Text" xml:space="preserve">
+    <value>إدارة التصنيفات</value>
+  </data>
+  <data name="btnManageLocations.Text" xml:space="preserve">
+    <value>إدارة المواقع</value>
+  </data>
+  <data name="btnEditAsset.Text" xml:space="preserve">
+    <value>تعديل الأصول</value>
+  </data>
+  <data name="btnDeleteAsset.Text" xml:space="preserve">
+    <value>حذف الأصل</value>
+  </data>
+  <data name="btnRefreshGrid.Text" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>221, 7</value>
+  </data>
+  <data name="lblCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 28</value>
+  </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>فئة:</value>
+  </data>
+  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>409, 7</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>حالة:</value>
+  </data>
+  <data name="lblLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>631, 7</value>
+  </data>
+  <data name="lblLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 28</value>
+  </data>
+  <data name="lblLocation.Text" xml:space="preserve">
+    <value>موقع:</value>
+  </data>
+  <data name="lblSearch.Text" xml:space="preserve">
+    <value>بحث:</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabControl.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tabAssetInfo.Text" xml:space="preserve">
+    <value>معلومات الأصول</value>
+  </data>
+  <data name="tabDepreciationSetup.Text" xml:space="preserve">
+    <value>إعدادات الاستهلاك</value>
+  </data>
+  <data name="tabDepreciationHistory.Text" xml:space="preserve">
+    <value>سجل الاستهلاك</value>
+  </data>
+  <data name="tabDisposalRevaluation.Text" xml:space="preserve">
+    <value>التصرف / إعادة التقييم</value>
+  </data>
+  <data name="lblCostSummary.Text" xml:space="preserve">
+    <value>التكلفة: 0 | القيمة الدفترية: 0 | العمر: 0 سنوات | الاستهلاك حتى الآن: 0</value>
+  </data>
+  <data name="lblAssetNameSummary.Text" xml:space="preserve">
+    <value>لم يتم اختيار أي أصل</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>شفرة</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>اسم</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>فئة</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>تاريخ الشراء</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
+    <value>104</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>التكلفة</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>القيمة الدفترية</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>121</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>حالة</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.Width" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>سجل الأصول الثابتة</value>
   </data>
 </root>

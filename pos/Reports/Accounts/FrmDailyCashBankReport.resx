@@ -117,4 +117,1042 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblBankVariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>965, 73</value>
+  </data>
+  <data name="&gt;&gt;lblSingleDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtActualCash.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="pnlFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 60</value>
+  </data>
+  <data name="lblActualBankLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>720, 75</value>
+  </data>
+  <data name="pnlTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 60</value>
+  </data>
+  <data name="lblSingleDate.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="dtpToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>520, 45</value>
+  </data>
+  <data name="lblTotalVariance.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblTotalVariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1030, 73</value>
+  </data>
+  <data name="lblCashHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbSingleDay.Name" xml:space="preserve">
+    <value>rbSingleDay</value>
+  </data>
+  <data name="&gt;&gt;dtpToDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbView.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSystemBankLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>537, 75</value>
+  </data>
+  <data name="lblCashVarianceLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;dgvReport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblActualBankLabel.Text" xml:space="preserve">
+    <value>Actual:</value>
+  </data>
+  <data name="&gt;&gt;gbMode.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTotalVarianceLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1030, 45</value>
+  </data>
+  <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 45</value>
+  </data>
+  <data name="&gt;&gt;pnlVariance.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="gbView.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="lblCashHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 45</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashClosing.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSystemBankLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 20</value>
+  </data>
+  <data name="&gt;&gt;lblBankVariance.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;rbDateRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dgvReport.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtActualCash.Name" xml:space="preserve">
+    <value>txtActualCash</value>
+  </data>
+  <data name="lblSystemCashClosing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblCashVarianceLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpToDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 27</value>
+  </data>
+  <data name="&gt;&gt;btnLoad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;rbByAccount.Name" xml:space="preserve">
+    <value>rbByAccount</value>
+  </data>
+  <data name="&gt;&gt;lblSingleDate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnPrint.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankClosing.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="lblSystemBankClosing.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;rbConsolidated.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFromDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="pnlFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblCashVariance.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="dgvReport.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBankVarianceLabel.Name" xml:space="preserve">
+    <value>lblBankVarianceLabel</value>
+  </data>
+  <data name="btnPrint.Text" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="&gt;&gt;rbByAccount.Parent" xml:space="preserve">
+    <value>gbView</value>
+  </data>
+  <data name="&gt;&gt;rbDateRange.Name" xml:space="preserve">
+    <value>rbDateRange</value>
+  </data>
+  <data name="&gt;&gt;lblBankVarianceLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpToDate.Name" xml:space="preserve">
+    <value>dtpToDate</value>
+  </data>
+  <data name="&gt;&gt;rbSingleDay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblActualCashLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblCashVariance.Name" xml:space="preserve">
+    <value>lblCashVariance</value>
+  </data>
+  <data name="&gt;&gt;dtpFromDate.Name" xml:space="preserve">
+    <value>dtpFromDate</value>
+  </data>
+  <data name="&gt;&gt;rbByAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVarianceTitle.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankClosing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTotalVarianceLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbConsolidated.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblBankVariance.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="btnExport.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblTotalVarianceLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;txtActualBank.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;dtpFromDate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="rbSingleDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 24</value>
+  </data>
+  <data name="lblCashVarianceLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 75</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnExport.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;gbMode.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 720</value>
+  </data>
+  <data name="rbByAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 55</value>
+  </data>
+  <data name="pnlVariance.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="lblSystemBankClosing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>655, 73</value>
+  </data>
+  <data name="rbByAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 16pt, style=Bold</value>
+  </data>
+  <data name="lblTotalVariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 28</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVariance.Name" xml:space="preserve">
+    <value>lblTotalVariance</value>
+  </data>
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblBankVarianceLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblVarianceTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 12</value>
+  </data>
+  <data name="lblBankHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="&gt;&gt;gbView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpFromDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="btnLoad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="lblBankVariance.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblCashVariance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;btnLoad.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="dtpToDate.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblCashVariance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSystemBankClosing.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblTotalVarianceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 23</value>
+  </data>
+  <data name="&gt;&gt;lblFromDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblToDate.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblToDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="lblActualCashLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 75</value>
+  </data>
+  <data name="&gt;&gt;lblActualBankLabel.Name" xml:space="preserve">
+    <value>lblActualBankLabel</value>
+  </data>
+  <data name="&gt;&gt;lblActualCashLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblBankVarianceLabel.Text" xml:space="preserve">
+    <value>Variance:</value>
+  </data>
+  <data name="txtActualCash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 27</value>
+  </data>
+  <data name="lblSingleDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashClosing.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="lblSystemCashClosing.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="rbDateRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 24</value>
+  </data>
+  <data name="&gt;&gt;lblActualBankLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.Name" xml:space="preserve">
+    <value>pnlTop</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVariance.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="dgvReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 420</value>
+  </data>
+  <data name="&gt;&gt;lblBankVariance.Name" xml:space="preserve">
+    <value>lblBankVariance</value>
+  </data>
+  <data name="lblCashVarianceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 20</value>
+  </data>
+  <data name="&gt;&gt;pnlVariance.Name" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="lblToDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
+    <value>btnExport</value>
+  </data>
+  <data name="dtpFromDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 27</value>
+  </data>
+  <data name="gbMode.Text" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="dtpFromDate.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashClosing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblToDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 20</value>
+  </data>
+  <data name="&gt;&gt;lblVarianceTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dgvReport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblActualCashLabel.Name" xml:space="preserve">
+    <value>lblActualCashLabel</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankClosing.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblCashVarianceLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtActualBank.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblCashVariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>454, 73</value>
+  </data>
+  <data name="pnlFilters.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="rbByAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="&gt;&gt;rbDateRange.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblFromDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="&gt;&gt;lblBankVarianceLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="gbView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 15</value>
+  </data>
+  <data name="lblCashVarianceLabel.Text" xml:space="preserve">
+    <value>Variance:</value>
+  </data>
+  <data name="&gt;&gt;dtpToDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;gbView.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;txtActualBank.Name" xml:space="preserve">
+    <value>txtActualBank</value>
+  </data>
+  <data name="&gt;&gt;lblCashVariance.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashClosing.Name" xml:space="preserve">
+    <value>lblSystemCashClosing</value>
+  </data>
+  <data name="lblSystemBankLabel.Text" xml:space="preserve">
+    <value>System Closing:</value>
+  </data>
+  <data name="lblTotalVariance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="lblTotalVarianceLabel.Text" xml:space="preserve">
+    <value>Total Variance:</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVarianceLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtActualBank.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="pnlFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 120</value>
+  </data>
+  <data name="lblToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>520, 25</value>
+  </data>
+  <data name="rbDateRange.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FrmDailyCashBankReport</value>
+  </data>
+  <data name="lblSystemCashClosing.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblActualCashLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rbConsolidated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 25</value>
+  </data>
+  <data name="pnlVariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 120</value>
+  </data>
+  <data name="lblBankHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;txtActualCash.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVariance.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;lblFromDate.Name" xml:space="preserve">
+    <value>lblFromDate</value>
+  </data>
+  <data name="dtpFromDate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lblFromDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblActualCashLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Export CSV</value>
+  </data>
+  <data name="&gt;&gt;gbMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSingleDate.Text" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="dgvReport.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="btnLoad.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="lblBankVarianceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 20</value>
+  </data>
+  <data name="lblCashVariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 23</value>
+  </data>
+  <data name="lblVarianceTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblCashHeader.Name" xml:space="preserve">
+    <value>lblCashHeader</value>
+  </data>
+  <data name="lblTotalVariance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbConsolidated.Name" xml:space="preserve">
+    <value>rbConsolidated</value>
+  </data>
+  <data name="lblCashVariance.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="rbDateRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 55</value>
+  </data>
+  <data name="&gt;&gt;lblToDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtActualBank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCashHeader.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="pnlTop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlVariance.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>569, 37</value>
+  </data>
+  <data name="&gt;&gt;lblCashVarianceLabel.Name" xml:space="preserve">
+    <value>lblCashVarianceLabel</value>
+  </data>
+  <data name="dtpToDate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnPrint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>820, 40</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVarianceLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="lblCashHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 23</value>
+  </data>
+  <data name="btnPrint.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblVarianceTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 25</value>
+  </data>
+  <data name="gbView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 90</value>
+  </data>
+  <data name="rbSingleDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 25</value>
+  </data>
+  <data name="&gt;&gt;dtpFromDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pnlVariance.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="lblFromDate.Text" xml:space="preserve">
+    <value>From:</value>
+  </data>
+  <data name="&gt;&gt;lblSingleDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbConsolidated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 24</value>
+  </data>
+  <data name="gbMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 90</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.Name" xml:space="preserve">
+    <value>btnPrint</value>
+  </data>
+  <data name="&gt;&gt;dtpSingleDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;lblBankHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtActualCash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 71</value>
+  </data>
+  <data name="rbByAccount.Text" xml:space="preserve">
+    <value>By Account</value>
+  </data>
+  <data name="lblActualCashLabel.Text" xml:space="preserve">
+    <value>Actual:</value>
+  </data>
+  <data name="gbMode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="dtpSingleDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 45</value>
+  </data>
+  <data name="&gt;&gt;btnLoad.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="lblBankVariance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbDateRange.Parent" xml:space="preserve">
+    <value>gbMode</value>
+  </data>
+  <data name="lblSystemBankClosing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblActualBankLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gbView.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCashHeader.Text" xml:space="preserve">
+    <value>Cash</value>
+  </data>
+  <data name="&gt;&gt;lblSystemCashLabel.Name" xml:space="preserve">
+    <value>lblSystemCashLabel</value>
+  </data>
+  <data name="lblTotalVariance.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblCashHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblVarianceTitle.Text" xml:space="preserve">
+    <value>Daily Tally (Variance Check)</value>
+  </data>
+  <data name="&gt;&gt;dgvReport.Name" xml:space="preserve">
+    <value>dgvReport</value>
+  </data>
+  <data name="lblTotalVarianceLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="btnLoad.Text" xml:space="preserve">
+    <value>Load Report</value>
+  </data>
+  <data name="rbDateRange.Text" xml:space="preserve">
+    <value>Date Range</value>
+  </data>
+  <data name="&gt;&gt;lblCashHeader.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblFromDate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="gbMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 15</value>
+  </data>
+  <data name="&gt;&gt;btnLoad.Name" xml:space="preserve">
+    <value>btnLoad</value>
+  </data>
+  <data name="lblBankVarianceLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>896, 75</value>
+  </data>
+  <data name="&gt;&gt;lblActualBankLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankLabel.Name" xml:space="preserve">
+    <value>lblSystemBankLabel</value>
+  </data>
+  <data name="rbSingleDay.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;gbMode.Name" xml:space="preserve">
+    <value>gbMode</value>
+  </data>
+  <data name="rbConsolidated.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblActualBankLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;rbConsolidated.Parent" xml:space="preserve">
+    <value>gbView</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;btnPrint.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="btnLoad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>700, 40</value>
+  </data>
+  <data name="btnLoad.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="lblCashHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbConsolidated.Text" xml:space="preserve">
+    <value>Consolidated</value>
+  </data>
+  <data name="&gt;&gt;lblBankVariance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblBankHeader.Text" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="lblSystemCashClosing.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="dgvReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 180</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;lblCashVariance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pnlTop.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbByAccount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtActualCash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblToDate.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblActualCashLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVariance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.Name" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankLabel.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblActualBankLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblSingleDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbSingleDay.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbByAccount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblCashHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSystemCashLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 75</value>
+  </data>
+  <data name="txtActualBank.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 27</value>
+  </data>
+  <data name="lblActualBankLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="lblSystemBankClosing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 23</value>
+  </data>
+  <data name="&gt;&gt;dgvReport.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Daily Cash &amp; Bank Report</value>
+  </data>
+  <data name="&gt;&gt;dtpSingleDate.Name" xml:space="preserve">
+    <value>dtpSingleDate</value>
+  </data>
+  <data name="lblBankVariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 23</value>
+  </data>
+  <data name="&gt;&gt;lblBankHeader.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblVarianceTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSystemCashLabel.Text" xml:space="preserve">
+    <value>System Closing:</value>
+  </data>
+  <data name="lblBankHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>537, 45</value>
+  </data>
+  <data name="rbConsolidated.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;pnlVariance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblToDate.Text" xml:space="preserve">
+    <value>To:</value>
+  </data>
+  <data name="lblSystemCashLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 20</value>
+  </data>
+  <data name="&gt;&gt;lblToDate.Name" xml:space="preserve">
+    <value>lblToDate</value>
+  </data>
+  <data name="&gt;&gt;lblSingleDate.Name" xml:space="preserve">
+    <value>lblSingleDate</value>
+  </data>
+  <data name="&gt;&gt;lblCashVariance.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblFromDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtActualBank.Location" type="System.Drawing.Point, System.Drawing">
+    <value>770, 71</value>
+  </data>
+  <data name="lblSingleDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 25</value>
+  </data>
+  <data name="btnExport.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="lblBankHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="btnLoad.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="pnlTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;dtpSingleDate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblBankVariance.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>940, 40</value>
+  </data>
+  <data name="rbDateRange.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblVarianceTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 28</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 15</value>
+  </data>
+  <data name="dtpSingleDate.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblSystemBankClosing.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblSystemCashLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dtpToDate.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankClosing.Name" xml:space="preserve">
+    <value>lblSystemBankClosing</value>
+  </data>
+  <data name="&gt;&gt;lblCashVarianceLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 20</value>
+  </data>
+  <data name="rbSingleDay.Text" xml:space="preserve">
+    <value>Single Day</value>
+  </data>
+  <data name="lblFromDate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtActualCash.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;lblVarianceTitle.Name" xml:space="preserve">
+    <value>lblVarianceTitle</value>
+  </data>
+  <data name="lblSystemBankLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblBankVariance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="pnlFilters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="lblSystemCashLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblBankHeader.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbView.Name" xml:space="preserve">
+    <value>gbView</value>
+  </data>
+  <data name="lblActualCashLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>pnlTop</value>
+  </data>
+  <data name="lblBankVarianceLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblSystemBankLabel.Parent" xml:space="preserve">
+    <value>pnlVariance</value>
+  </data>
+  <data name="lblVarianceTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVarianceLabel.Name" xml:space="preserve">
+    <value>lblTotalVarianceLabel</value>
+  </data>
+  <data name="&gt;&gt;dtpSingleDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnPrint.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="&gt;&gt;pnlVariance.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="lblToDate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;rbSingleDay.Parent" xml:space="preserve">
+    <value>gbMode</value>
+  </data>
+  <data name="dtpSingleDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 27</value>
+  </data>
+  <data name="&gt;&gt;rbSingleDay.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlVariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 600</value>
+  </data>
+  <data name="lblSystemCashClosing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 23</value>
+  </data>
+  <data name="lblSystemBankLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblCashVarianceLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Daily Cash &amp;&amp; Bank Opening/Closing Report</value>
+  </data>
+  <data name="&gt;&gt;lblTotalVarianceLabel.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblBankHeader.Name" xml:space="preserve">
+    <value>lblBankHeader</value>
+  </data>
+  <data name="lblSystemCashClosing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 73</value>
+  </data>
+  <data name="lblBankHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="lblBankVarianceLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

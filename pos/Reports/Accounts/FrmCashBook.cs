@@ -22,8 +22,8 @@ namespace pos.Reports.Accounts
         public FrmCashBook()
         {
             InitializeComponent();
-            lblTitle.Text = "Cash Book";
-            lblEntity.Text = "Cash Account:";
+            lblTitle.Text = UiMessages.T("Cash Book", "دفتر النقدية");
+            lblEntity.Text = UiMessages.T("Cash Account:", "حساب النقدية:");
             btnReceivePayment.Visible = false;
             pnlAging.Visible = false;  // No aging analysis for cash book
         }
@@ -32,7 +32,7 @@ namespace pos.Reports.Accounts
         {
             try
             {
-                using (BusyScope.Show(this, "Loading cash accounts..."))
+                using (BusyScope.Show(this, UiMessages.T("Loading cash accounts...", "جاري تحميل حسابات النقدية...")))
                 {
                     // Load cash accounts from database
                     DataTable dt = _generalBll.GetRecord("id,name", "acc_accounts WHERE name LIKE '%Cash%'");
@@ -41,7 +41,7 @@ namespace pos.Reports.Accounts
                     {
                         DataRow emptyRow = dt.NewRow();
                         emptyRow["id"] = 0;
-                        emptyRow["name"] = "-- All Cash Accounts --";
+                        emptyRow["name"] = UiMessages.T("-- All Cash Accounts --", "-- جميع حسابات النقدية --");
                         dt.Rows.InsertAt(emptyRow, 0);
 
                         cmbEntity.DisplayMember = "name";
@@ -53,7 +53,7 @@ namespace pos.Reports.Accounts
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error loading cash accounts", ex.Message);
+                UiMessages.ShowError(UiMessages.T("Error loading cash accounts", "خطأ في تحميل حسابات النقدية"), ex.Message);
             }
         }
 
@@ -62,20 +62,20 @@ namespace pos.Reports.Accounts
             dgvLedger.Columns.Clear();
 
             // Single column mode by default
-            AddGridColumn("Date", "transaction_date", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
-            AddGridColumn("Type", "transaction_type", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
-            AddGridColumn("Reference", "reference_no", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
-            AddGridColumn("Description", "description", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 150);
-            AddGridColumn("Receipt", "receipt_amount", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 80);
-            AddGridColumn("Payment", "payment_amount", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 80);
-            AddGridColumn("Balance", "running_balance", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 100);
+            AddGridColumn(UiMessages.T("Date", "التاريخ"), "transaction_date", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Type", "النوع"), "transaction_type", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
+            AddGridColumn(UiMessages.T("Reference", "المرجع"), "reference_no", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
+            AddGridColumn(UiMessages.T("Description", "الوصف"), "description", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 150);
+            AddGridColumn(UiMessages.T("Receipt", "الإيصال"), "receipt_amount", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 80);
+            AddGridColumn(UiMessages.T("Payment", "الدفع"), "payment_amount", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 80);
+            AddGridColumn(UiMessages.T("Balance", "الرصيد"), "running_balance", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 100);
         }
 
         protected override void DisplayEntityInfo()
         {
             if (_selectedEntityId == 0)
             {
-                lblEntityInfo.Text = "Displaying all cash account transactions";
+                lblEntityInfo.Text = UiMessages.T("Displaying all cash account transactions", "عرض جميع معاملات حساب النقدية");
             }
             else if (_selectedEntityId > 0)
             {
@@ -158,12 +158,12 @@ namespace pos.Reports.Accounts
 
         protected override string GetPrintTitle()
         {
-            return "Cash Book Report";
+            return UiMessages.T("Cash Book Report", "تقرير دفتر النقدية");
         }
 
         protected override string GetPrintSubtitle()
         {
-            string accountInfo = "All Cash Accounts";
+            string accountInfo = UiMessages.T("All Cash Accounts", "جميع حسابات النقدية");
             if (_selectedEntityId > 0)
             {
                 try
@@ -176,7 +176,12 @@ namespace pos.Reports.Accounts
                 }
                 catch { }
             }
-            return $"{accountInfo} | Period: {dtpFromDate.Value:MMM dd, yyyy} to {dtpToDate.Value:MMM dd, yyyy}";
+            return $"{accountInfo} | {UiMessages.T("Period", "الفترة")}: {dtpFromDate.Value:MMM dd, yyyy} {UiMessages.T("to", "إلى")} {dtpToDate.Value:MMM dd, yyyy}";
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

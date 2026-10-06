@@ -56,6 +56,7 @@ namespace pos.Reports.Financial
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_GeneralLedgerReport));
             this._panelMain = new System.Windows.Forms.Panel();
             this._panelLedgerArea = new System.Windows.Forms.Panel();
             this._panelCenter = new System.Windows.Forms.Panel();
@@ -136,44 +137,30 @@ namespace pos.Reports.Financial
             this._panelMain.Controls.Add(this._panelLedgerArea);
             this._panelMain.Controls.Add(this._panelSummary);
             this._panelMain.Controls.Add(this._panelTop);
-            this._panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._panelMain.Location = new System.Drawing.Point(0, 0);
-            this._panelMain.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelMain, "_panelMain");
             this._panelMain.Name = "_panelMain";
-            this._panelMain.Padding = new System.Windows.Forms.Padding(9, 10, 9, 10);
-            this._panelMain.Size = new System.Drawing.Size(1493, 911);
-            this._panelMain.TabIndex = 0;
             // 
             // _panelLedgerArea
             // 
             this._panelLedgerArea.Controls.Add(this._panelCenter);
             this._panelLedgerArea.Controls.Add(this._panelClosingWrap);
             this._panelLedgerArea.Controls.Add(this._panelOpeningWrap);
-            this._panelLedgerArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._panelLedgerArea.Location = new System.Drawing.Point(9, 106);
-            this._panelLedgerArea.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelLedgerArea, "_panelLedgerArea");
             this._panelLedgerArea.Name = "_panelLedgerArea";
-            this._panelLedgerArea.Padding = new System.Windows.Forms.Padding(0, 0, 9, 0);
-            this._panelLedgerArea.Size = new System.Drawing.Size(1242, 795);
-            this._panelLedgerArea.TabIndex = 0;
             // 
             // _panelCenter
             // 
             this._panelCenter.Controls.Add(this._gridLedger);
             this._panelCenter.Controls.Add(this._btnLoadMore);
-            this._panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._panelCenter.Location = new System.Drawing.Point(0, 54);
-            this._panelCenter.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelCenter, "_panelCenter");
             this._panelCenter.Name = "_panelCenter";
-            this._panelCenter.Size = new System.Drawing.Size(1233, 687);
-            this._panelCenter.TabIndex = 0;
             // 
             // _gridLedger
             // 
             this._gridLedger.AllowUserToAddRows = false;
             this._gridLedger.AllowUserToDeleteRows = false;
             this._gridLedger.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this._gridLedger.ColumnHeadersHeight = 29;
+            resources.ApplyResources(this._gridLedger, "_gridLedger");
             this._gridLedger.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Date,
             this.VoucherNo,
@@ -185,110 +172,84 @@ namespace pos.Reports.Financial
             this.RunningBalance,
             this.ReferenceNo,
             this.Status});
-            this._gridLedger.Dock = System.Windows.Forms.DockStyle.Fill;
             this._gridLedger.EnableHeadersVisualStyles = false;
-            this._gridLedger.Location = new System.Drawing.Point(0, 0);
-            this._gridLedger.Margin = new System.Windows.Forms.Padding(4);
             this._gridLedger.MultiSelect = false;
             this._gridLedger.Name = "_gridLedger";
             this._gridLedger.ReadOnly = true;
             this._gridLedger.RowHeadersVisible = false;
-            this._gridLedger.RowHeadersWidth = 51;
             this._gridLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._gridLedger.Size = new System.Drawing.Size(1233, 648);
-            this._gridLedger.TabIndex = 0;
             // 
             // Date
             // 
-            this.Date.HeaderText = "Date";
-            this.Date.MinimumWidth = 6;
+            resources.ApplyResources(this.Date, "Date");
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
             // 
             // VoucherNo
             // 
-            this.VoucherNo.HeaderText = "Voucher No";
-            this.VoucherNo.MinimumWidth = 6;
+            resources.ApplyResources(this.VoucherNo, "VoucherNo");
             this.VoucherNo.Name = "VoucherNo";
             this.VoucherNo.ReadOnly = true;
             // 
             // VoucherType
             // 
-            this.VoucherType.HeaderText = "Voucher Type";
-            this.VoucherType.MinimumWidth = 6;
+            resources.ApplyResources(this.VoucherType, "VoucherType");
             this.VoucherType.Name = "VoucherType";
             this.VoucherType.ReadOnly = true;
             // 
             // RefModule
             // 
-            this.RefModule.HeaderText = "Module";
-            this.RefModule.MinimumWidth = 6;
+            resources.ApplyResources(this.RefModule, "RefModule");
             this.RefModule.Name = "RefModule";
             this.RefModule.ReadOnly = true;
             // 
             // Narration
             // 
-            this.Narration.HeaderText = "Narration";
-            this.Narration.MinimumWidth = 6;
+            resources.ApplyResources(this.Narration, "Narration");
             this.Narration.Name = "Narration";
             this.Narration.ReadOnly = true;
             // 
             // Debit
             // 
-            this.Debit.HeaderText = "Debit";
-            this.Debit.MinimumWidth = 6;
+            resources.ApplyResources(this.Debit, "Debit");
             this.Debit.Name = "Debit";
             this.Debit.ReadOnly = true;
             // 
             // Credit
             // 
-            this.Credit.HeaderText = "Credit";
-            this.Credit.MinimumWidth = 6;
+            resources.ApplyResources(this.Credit, "Credit");
             this.Credit.Name = "Credit";
             this.Credit.ReadOnly = true;
             // 
             // RunningBalance
             // 
-            this.RunningBalance.HeaderText = "Running Balance";
-            this.RunningBalance.MinimumWidth = 6;
+            resources.ApplyResources(this.RunningBalance, "RunningBalance");
             this.RunningBalance.Name = "RunningBalance";
             this.RunningBalance.ReadOnly = true;
             // 
             // ReferenceNo
             // 
-            this.ReferenceNo.HeaderText = "Reference #";
-            this.ReferenceNo.MinimumWidth = 6;
+            resources.ApplyResources(this.ReferenceNo, "ReferenceNo");
             this.ReferenceNo.Name = "ReferenceNo";
             this.ReferenceNo.ReadOnly = true;
             // 
             // Status
             // 
-            this.Status.HeaderText = "Status";
-            this.Status.MinimumWidth = 6;
+            resources.ApplyResources(this.Status, "Status");
             this.Status.Name = "Status";
             this.Status.ReadOnly = true;
             // 
             // _btnLoadMore
             // 
-            this._btnLoadMore.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._btnLoadMore.Location = new System.Drawing.Point(0, 648);
-            this._btnLoadMore.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._btnLoadMore, "_btnLoadMore");
             this._btnLoadMore.Name = "_btnLoadMore";
-            this._btnLoadMore.Size = new System.Drawing.Size(1233, 39);
-            this._btnLoadMore.TabIndex = 1;
-            this._btnLoadMore.Text = "Load More";
             this._btnLoadMore.UseVisualStyleBackColor = true;
-            this._btnLoadMore.Visible = false;
             // 
             // _panelClosingWrap
             // 
             this._panelClosingWrap.Controls.Add(this._gridClosing);
-            this._panelClosingWrap.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._panelClosingWrap.Location = new System.Drawing.Point(0, 741);
-            this._panelClosingWrap.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelClosingWrap, "_panelClosingWrap");
             this._panelClosingWrap.Name = "_panelClosingWrap";
-            this._panelClosingWrap.Size = new System.Drawing.Size(1233, 54);
-            this._panelClosingWrap.TabIndex = 1;
             // 
             // _gridClosing
             // 
@@ -297,7 +258,7 @@ namespace pos.Reports.Financial
             this._gridClosing.AllowUserToResizeColumns = false;
             this._gridClosing.AllowUserToResizeRows = false;
             this._gridClosing.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this._gridClosing.ColumnHeadersHeight = 29;
+            resources.ApplyResources(this._gridClosing, "_gridClosing");
             this._gridClosing.ColumnHeadersVisible = false;
             this._gridClosing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -308,84 +269,65 @@ namespace pos.Reports.Financial
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
-            this._gridClosing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._gridClosing.Location = new System.Drawing.Point(0, 0);
-            this._gridClosing.Margin = new System.Windows.Forms.Padding(4);
             this._gridClosing.MultiSelect = false;
             this._gridClosing.Name = "_gridClosing";
             this._gridClosing.ReadOnly = true;
             this._gridClosing.RowHeadersVisible = false;
-            this._gridClosing.RowHeadersWidth = 51;
-            this._gridClosing.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this._gridClosing.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._gridClosing.Size = new System.Drawing.Size(1233, 54);
-            this._gridClosing.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Date";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Voucher No";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Voucher Type";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ref Module";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Narration";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Debit";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn7
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Credit";
-            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Balance";
-            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
             // _panelOpeningWrap
             // 
             this._panelOpeningWrap.Controls.Add(this._gridOpening);
-            this._panelOpeningWrap.Dock = System.Windows.Forms.DockStyle.Top;
-            this._panelOpeningWrap.Location = new System.Drawing.Point(0, 0);
-            this._panelOpeningWrap.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelOpeningWrap, "_panelOpeningWrap");
             this._panelOpeningWrap.Name = "_panelOpeningWrap";
-            this._panelOpeningWrap.Size = new System.Drawing.Size(1233, 54);
-            this._panelOpeningWrap.TabIndex = 2;
             // 
             // _gridOpening
             // 
@@ -394,7 +336,7 @@ namespace pos.Reports.Financial
             this._gridOpening.AllowUserToResizeColumns = false;
             this._gridOpening.AllowUserToResizeRows = false;
             this._gridOpening.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this._gridOpening.ColumnHeadersHeight = 29;
+            resources.ApplyResources(this._gridOpening, "_gridOpening");
             this._gridOpening.ColumnHeadersVisible = false;
             this._gridOpening.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn9,
@@ -405,72 +347,57 @@ namespace pos.Reports.Financial
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16});
-            this._gridOpening.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._gridOpening.Location = new System.Drawing.Point(0, 0);
-            this._gridOpening.Margin = new System.Windows.Forms.Padding(4);
             this._gridOpening.MultiSelect = false;
             this._gridOpening.Name = "_gridOpening";
             this._gridOpening.ReadOnly = true;
             this._gridOpening.RowHeadersVisible = false;
-            this._gridOpening.RowHeadersWidth = 51;
-            this._gridOpening.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this._gridOpening.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this._gridOpening.Size = new System.Drawing.Size(1233, 54);
-            this._gridOpening.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn9
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Date";
-            this.dataGridViewTextBoxColumn9.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn10
             // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Voucher No";
-            this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn11
             // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Voucher Type";
-            this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn11, "dataGridViewTextBoxColumn11");
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn12
             // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Ref Module";
-            this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn12, "dataGridViewTextBoxColumn12");
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn13
             // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Narration";
-            this.dataGridViewTextBoxColumn13.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn13, "dataGridViewTextBoxColumn13");
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn14
             // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Debit";
-            this.dataGridViewTextBoxColumn14.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn14, "dataGridViewTextBoxColumn14");
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn15
             // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Credit";
-            this.dataGridViewTextBoxColumn15.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn15, "dataGridViewTextBoxColumn15");
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn16
             // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "Balance";
-            this.dataGridViewTextBoxColumn16.MinimumWidth = 6;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn16, "dataGridViewTextBoxColumn16");
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
             // 
@@ -478,17 +405,12 @@ namespace pos.Reports.Financial
             // 
             this._panelSummary.BackColor = System.Drawing.Color.White;
             this._panelSummary.Controls.Add(this._flowSummary);
-            this._panelSummary.Dock = System.Windows.Forms.DockStyle.Right;
-            this._panelSummary.Location = new System.Drawing.Point(1251, 106);
-            this._panelSummary.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelSummary, "_panelSummary");
             this._panelSummary.Name = "_panelSummary";
-            this._panelSummary.Padding = new System.Windows.Forms.Padding(9, 10, 9, 10);
-            this._panelSummary.Size = new System.Drawing.Size(233, 795);
-            this._panelSummary.TabIndex = 1;
             // 
             // _flowSummary
             // 
-            this._flowSummary.AutoScroll = true;
+            resources.ApplyResources(this._flowSummary, "_flowSummary");
             this._flowSummary.Controls.Add(this._lblSummaryAccount);
             this._flowSummary.Controls.Add(this._lblSummaryType);
             this._flowSummary.Controls.Add(this._lblSummaryNormal);
@@ -499,146 +421,71 @@ namespace pos.Reports.Financial
             this._flowSummary.Controls.Add(this._btnViewFullHistory);
             this._flowSummary.Controls.Add(this._btnPrint);
             this._flowSummary.Controls.Add(this._btnExport);
-            this._flowSummary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._flowSummary.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this._flowSummary.Location = new System.Drawing.Point(9, 10);
-            this._flowSummary.Margin = new System.Windows.Forms.Padding(4);
             this._flowSummary.Name = "_flowSummary";
-            this._flowSummary.Size = new System.Drawing.Size(215, 775);
-            this._flowSummary.TabIndex = 0;
-            this._flowSummary.WrapContents = false;
             // 
             // _lblSummaryAccount
             // 
-            this._lblSummaryAccount.AutoSize = true;
-            this._lblSummaryAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
-            this._lblSummaryAccount.Location = new System.Drawing.Point(4, 0);
-            this._lblSummaryAccount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this._lblSummaryAccount.MaximumSize = new System.Drawing.Size(204, 0);
+            resources.ApplyResources(this._lblSummaryAccount, "_lblSummaryAccount");
             this._lblSummaryAccount.Name = "_lblSummaryAccount";
-            this._lblSummaryAccount.Size = new System.Drawing.Size(20, 25);
-            this._lblSummaryAccount.TabIndex = 0;
-            this._lblSummaryAccount.Text = "-";
             // 
             // _lblSummaryType
             // 
-            this._lblSummaryType.AutoSize = true;
+            resources.ApplyResources(this._lblSummaryType, "_lblSummaryType");
             this._lblSummaryType.BackColor = System.Drawing.Color.Gainsboro;
-            this._lblSummaryType.Location = new System.Drawing.Point(4, 25);
-            this._lblSummaryType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this._lblSummaryType.Name = "_lblSummaryType";
-            this._lblSummaryType.Padding = new System.Windows.Forms.Padding(7, 2, 7, 2);
-            this._lblSummaryType.Size = new System.Drawing.Size(67, 21);
-            this._lblSummaryType.TabIndex = 1;
-            this._lblSummaryType.Text = "Type: -";
             // 
             // _lblSummaryNormal
             // 
-            this._lblSummaryNormal.AutoSize = true;
-            this._lblSummaryNormal.Location = new System.Drawing.Point(4, 46);
-            this._lblSummaryNormal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblSummaryNormal, "_lblSummaryNormal");
             this._lblSummaryNormal.Name = "_lblSummaryNormal";
-            this._lblSummaryNormal.Size = new System.Drawing.Size(115, 17);
-            this._lblSummaryNormal.TabIndex = 2;
-            this._lblSummaryNormal.Text = "Normal Balance: -";
             // 
             // _lblSummaryCurrent
             // 
-            this._lblSummaryCurrent.AutoSize = true;
-            this._lblSummaryCurrent.Font = new System.Drawing.Font("Segoe UI Semibold", 16F);
-            this._lblSummaryCurrent.Location = new System.Drawing.Point(0, 70);
-            this._lblSummaryCurrent.Margin = new System.Windows.Forms.Padding(0, 7, 0, 7);
+            resources.ApplyResources(this._lblSummaryCurrent, "_lblSummaryCurrent");
             this._lblSummaryCurrent.Name = "_lblSummaryCurrent";
-            this._lblSummaryCurrent.Size = new System.Drawing.Size(105, 37);
-            this._lblSummaryCurrent.TabIndex = 3;
-            this._lblSummaryCurrent.Text = "0.00 Dr";
             // 
             // _lblSummaryTurnover
             // 
-            this._lblSummaryTurnover.AutoSize = true;
-            this._lblSummaryTurnover.Location = new System.Drawing.Point(4, 114);
-            this._lblSummaryTurnover.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this._lblSummaryTurnover.MaximumSize = new System.Drawing.Size(204, 0);
+            resources.ApplyResources(this._lblSummaryTurnover, "_lblSummaryTurnover");
             this._lblSummaryTurnover.Name = "_lblSummaryTurnover";
-            this._lblSummaryTurnover.Size = new System.Drawing.Size(107, 17);
-            this._lblSummaryTurnover.TabIndex = 4;
-            this._lblSummaryTurnover.Text = "Period Turnover";
             // 
             // _lblSummaryCount
             // 
-            this._lblSummaryCount.AutoSize = true;
-            this._lblSummaryCount.Location = new System.Drawing.Point(4, 131);
-            this._lblSummaryCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblSummaryCount, "_lblSummaryCount");
             this._lblSummaryCount.Name = "_lblSummaryCount";
-            this._lblSummaryCount.Size = new System.Drawing.Size(66, 17);
-            this._lblSummaryCount.TabIndex = 5;
-            this._lblSummaryCount.Text = "Entries: 0";
             // 
             // _lblSummaryLastTxn
             // 
-            this._lblSummaryLastTxn.AutoSize = true;
-            this._lblSummaryLastTxn.Location = new System.Drawing.Point(4, 148);
-            this._lblSummaryLastTxn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this._lblSummaryLastTxn.MaximumSize = new System.Drawing.Size(204, 0);
+            resources.ApplyResources(this._lblSummaryLastTxn, "_lblSummaryLastTxn");
             this._lblSummaryLastTxn.Name = "_lblSummaryLastTxn";
-            this._lblSummaryLastTxn.Size = new System.Drawing.Size(75, 17);
-            this._lblSummaryLastTxn.TabIndex = 6;
-            this._lblSummaryLastTxn.Text = "Last Txn: -";
             // 
             // _btnViewFullHistory
             // 
-            this._btnViewFullHistory.Location = new System.Drawing.Point(4, 169);
-            this._btnViewFullHistory.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._btnViewFullHistory, "_btnViewFullHistory");
             this._btnViewFullHistory.Name = "_btnViewFullHistory";
-            this._btnViewFullHistory.Size = new System.Drawing.Size(198, 37);
-            this._btnViewFullHistory.TabIndex = 8;
-            this._btnViewFullHistory.Text = "View Full History";
             this._btnViewFullHistory.UseVisualStyleBackColor = true;
             // 
             // _btnPrint
             // 
-            this._btnPrint.Location = new System.Drawing.Point(4, 214);
-            this._btnPrint.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._btnPrint, "_btnPrint");
             this._btnPrint.Name = "_btnPrint";
-            this._btnPrint.Size = new System.Drawing.Size(198, 37);
-            this._btnPrint.TabIndex = 9;
-            this._btnPrint.Text = "Print Ledger";
             this._btnPrint.UseVisualStyleBackColor = true;
             // 
             // _btnExport
             // 
-            this._btnExport.Location = new System.Drawing.Point(4, 259);
-            this._btnExport.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._btnExport, "_btnExport");
             this._btnExport.Name = "_btnExport";
-            this._btnExport.Size = new System.Drawing.Size(198, 37);
-            this._btnExport.TabIndex = 10;
-            this._btnExport.Text = "Export Excel";
             this._btnExport.UseVisualStyleBackColor = true;
             // 
             // _panelTop
             // 
             this._panelTop.Controls.Add(this._tblFilters);
-            this._panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this._panelTop.Location = new System.Drawing.Point(9, 10);
-            this._panelTop.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._panelTop, "_panelTop");
             this._panelTop.Name = "_panelTop";
-            this._panelTop.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this._panelTop.Size = new System.Drawing.Size(1475, 96);
-            this._panelTop.TabIndex = 2;
             // 
             // _tblFilters
             // 
-            this._tblFilters.ColumnCount = 8;
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._tblFilters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            resources.ApplyResources(this._tblFilters, "_tblFilters");
             this._tblFilters.Controls.Add(this._lblAccount, 0, 0);
             this._tblFilters.Controls.Add(this._cmbAccount, 1, 0);
             this._tblFilters.Controls.Add(this._btnSearchAccount, 2, 0);
@@ -651,165 +498,95 @@ namespace pos.Reports.Financial
             this._tblFilters.Controls.Add(this._cmbShow, 1, 1);
             this._tblFilters.Controls.Add(this._lblGroupBy, 2, 1);
             this._tblFilters.Controls.Add(this._cmbGroupBy, 3, 1);
-            this._tblFilters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tblFilters.Location = new System.Drawing.Point(0, 0);
-            this._tblFilters.Margin = new System.Windows.Forms.Padding(4);
             this._tblFilters.Name = "_tblFilters";
-            this._tblFilters.RowCount = 2;
-            this._tblFilters.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this._tblFilters.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this._tblFilters.Size = new System.Drawing.Size(1475, 89);
-            this._tblFilters.TabIndex = 0;
             // 
             // _lblAccount
             // 
-            this._lblAccount.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this._lblAccount.AutoSize = true;
-            this._lblAccount.Location = new System.Drawing.Point(4, 13);
-            this._lblAccount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblAccount, "_lblAccount");
             this._lblAccount.Name = "_lblAccount";
-            this._lblAccount.Size = new System.Drawing.Size(64, 17);
-            this._lblAccount.TabIndex = 0;
-            this._lblAccount.Text = "Account:";
             // 
             // _cmbAccount
             // 
-            this._cmbAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this._cmbAccount, "_cmbAccount");
             this._cmbAccount.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this._cmbAccount.DropDownHeight = 280;
-            this._cmbAccount.IntegralHeight = false;
-            this._cmbAccount.Location = new System.Drawing.Point(76, 4);
-            this._cmbAccount.Margin = new System.Windows.Forms.Padding(4);
             this._cmbAccount.Name = "_cmbAccount";
-            this._cmbAccount.Size = new System.Drawing.Size(401, 25);
-            this._cmbAccount.TabIndex = 1;
             // 
             // _btnSearchAccount
             // 
-            this._btnSearchAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._btnSearchAccount.Location = new System.Drawing.Point(485, 4);
-            this._btnSearchAccount.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._btnSearchAccount, "_btnSearchAccount");
             this._btnSearchAccount.Name = "_btnSearchAccount";
-            this._btnSearchAccount.Size = new System.Drawing.Size(75, 36);
-            this._btnSearchAccount.TabIndex = 2;
-            this._btnSearchAccount.Text = "Search";
             this._btnSearchAccount.UseVisualStyleBackColor = true;
             // 
             // _lblFrom
             // 
-            this._lblFrom.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this._lblFrom.AutoSize = true;
-            this._lblFrom.Location = new System.Drawing.Point(568, 13);
-            this._lblFrom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblFrom, "_lblFrom");
             this._lblFrom.Name = "_lblFrom";
-            this._lblFrom.Size = new System.Drawing.Size(45, 17);
-            this._lblFrom.TabIndex = 2;
-            this._lblFrom.Text = "From:";
             // 
             // _dtFrom
             // 
             this._dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this._dtFrom.Location = new System.Drawing.Point(716, 4);
-            this._dtFrom.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._dtFrom, "_dtFrom");
             this._dtFrom.Name = "_dtFrom";
-            this._dtFrom.Size = new System.Drawing.Size(233, 24);
-            this._dtFrom.TabIndex = 3;
             this._dtFrom.Value = new System.DateTime(2026, 6, 10, 0, 0, 0, 0);
             // 
             // _lblTo
             // 
-            this._lblTo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this._lblTo.AutoSize = true;
-            this._lblTo.Location = new System.Drawing.Point(1008, 13);
-            this._lblTo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblTo, "_lblTo");
             this._lblTo.Name = "_lblTo";
-            this._lblTo.Size = new System.Drawing.Size(29, 17);
-            this._lblTo.TabIndex = 4;
-            this._lblTo.Text = "To:";
             // 
             // _dtTo
             // 
             this._dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this._dtTo.Location = new System.Drawing.Point(1045, 4);
-            this._dtTo.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._dtTo, "_dtTo");
             this._dtTo.Name = "_dtTo";
-            this._dtTo.Size = new System.Drawing.Size(233, 24);
-            this._dtTo.TabIndex = 5;
             this._dtTo.Value = new System.DateTime(2026, 7, 10, 0, 0, 0, 0);
             // 
             // _btnLoad
             // 
-            this._btnLoad.AutoSize = true;
-            this._btnLoad.Location = new System.Drawing.Point(1337, 4);
-            this._btnLoad.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this._btnLoad, "_btnLoad");
             this._btnLoad.Name = "_btnLoad";
-            this._btnLoad.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
-            this._btnLoad.Size = new System.Drawing.Size(133, 33);
-            this._btnLoad.TabIndex = 6;
-            this._btnLoad.Text = "Load Ledger";
             this._btnLoad.UseVisualStyleBackColor = true;
             // 
             // _lblShow
             // 
-            this._lblShow.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this._lblShow.AutoSize = true;
-            this._lblShow.Location = new System.Drawing.Point(4, 58);
-            this._lblShow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblShow, "_lblShow");
             this._lblShow.Name = "_lblShow";
-            this._lblShow.Size = new System.Drawing.Size(47, 17);
-            this._lblShow.TabIndex = 7;
-            this._lblShow.Text = "Show:";
             // 
             // _cmbShow
             // 
             this._cmbShow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cmbShow.FormattingEnabled = true;
             this._cmbShow.Items.AddRange(new object[] {
-            "All Entries",
-            "Debits Only",
-            "Credits Only",
-            "Unposted/Draft Only"});
-            this._cmbShow.Location = new System.Drawing.Point(76, 48);
-            this._cmbShow.Margin = new System.Windows.Forms.Padding(4);
+            resources.GetString("_cmbShow.Items"),
+            resources.GetString("_cmbShow.Items1"),
+            resources.GetString("_cmbShow.Items2"),
+            resources.GetString("_cmbShow.Items3")});
+            resources.ApplyResources(this._cmbShow, "_cmbShow");
             this._cmbShow.Name = "_cmbShow";
-            this._cmbShow.Size = new System.Drawing.Size(135, 24);
-            this._cmbShow.TabIndex = 8;
             // 
             // _lblGroupBy
             // 
-            this._lblGroupBy.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this._lblGroupBy.AutoSize = true;
-            this._lblGroupBy.Location = new System.Drawing.Point(485, 58);
-            this._lblGroupBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this._lblGroupBy, "_lblGroupBy");
             this._lblGroupBy.Name = "_lblGroupBy";
-            this._lblGroupBy.Size = new System.Drawing.Size(71, 17);
-            this._lblGroupBy.TabIndex = 9;
-            this._lblGroupBy.Text = "Group By:";
             // 
             // _cmbGroupBy
             // 
             this._cmbGroupBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cmbGroupBy.FormattingEnabled = true;
             this._cmbGroupBy.Items.AddRange(new object[] {
-            "None",
-            "By Voucher",
-            "By Month"});
-            this._cmbGroupBy.Location = new System.Drawing.Point(568, 48);
-            this._cmbGroupBy.Margin = new System.Windows.Forms.Padding(4);
+            resources.GetString("_cmbGroupBy.Items"),
+            resources.GetString("_cmbGroupBy.Items1"),
+            resources.GetString("_cmbGroupBy.Items2")});
+            resources.ApplyResources(this._cmbGroupBy, "_cmbGroupBy");
             this._cmbGroupBy.Name = "_cmbGroupBy";
-            this._cmbGroupBy.Size = new System.Drawing.Size(140, 24);
-            this._cmbGroupBy.TabIndex = 10;
             // 
             // frm_GeneralLedgerReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1493, 911);
             this.Controls.Add(this._panelMain);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_GeneralLedgerReport";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "General Ledger";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this._panelMain.ResumeLayout(false);
             this._panelLedgerArea.ResumeLayout(false);

@@ -117,4 +117,649 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;rbFifo.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rbActiveOnly.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cmbCogsAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 24</value>
+  </data>
+  <data name="btnSave.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbPurchaseOnly.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbExcludeZero.Text" xml:space="preserve">
+    <value>Exclude Zero-Stock Products</value>
+  </data>
+  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt</value>
+  </data>
+  <data name="chkPostPerProduct.Text" xml:space="preserve">
+    <value>Post individual journal lines per product (unchecked = single summary entry)</value>
+  </data>
+  <data name="&gt;&gt;rbStandard.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="lblInventoryAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 62</value>
+  </data>
+  <data name="lblCogsAccount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;grpAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpInclude.Name" xml:space="preserve">
+    <value>grpInclude</value>
+  </data>
+  <data name="panelBody.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 48</value>
+  </data>
+  <data name="cmbInventoryAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;rbExcludeZero.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grpInclude.Text" xml:space="preserve">
+    <value>Include in Valuation</value>
+  </data>
+  <data name="panelFooter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 52</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.Name" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="rbPurchaseOnly.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbStandard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 21</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAccount.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rbFifo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpInclude.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;grpAccounts.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="&gt;&gt;btnSave.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbStandard.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAccount.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkPostPerProduct.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 21</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbAll.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="grpMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;rbWithLanded.Parent" xml:space="preserve">
+    <value>grpComponents</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panelBody.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 16, 16, 16</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAccount.Name" xml:space="preserve">
+    <value>lblInventoryAccount</value>
+  </data>
+  <data name="chkPostPerProduct.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 24</value>
+  </data>
+  <data name="&gt;&gt;cmbCogsAccount.Parent" xml:space="preserve">
+    <value>grpAccounts</value>
+  </data>
+  <data name="&gt;&gt;rbExcludeZero.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkPostPerProduct.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbStandard.Text" xml:space="preserve">
+    <value>Standard Cost</value>
+  </data>
+  <data name="rbActiveOnly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
+  </data>
+  <data name="rbWithLanded.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 21</value>
+  </data>
+  <data name="rbWithLanded.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 48</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAccount.Parent" xml:space="preserve">
+    <value>grpAccounts</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpComponents.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Inventory Valuation Settings</value>
+  </data>
+  <data name="lblTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="grpPosting.Text" xml:space="preserve">
+    <value>COGS Posting</value>
+  </data>
+  <data name="grpPosting.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpInclude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>519, 90</value>
+  </data>
+  <data name="rbWac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 28</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpInclude.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panelFooter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 562</value>
+  </data>
+  <data name="rbPurchaseOnly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 21</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;chkPostPerProduct.Parent" xml:space="preserve">
+    <value>grpPosting</value>
+  </data>
+  <data name="rbWac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 21</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="rbFifo.Text" xml:space="preserve">
+    <value>FIFO (First-In, First-Out)</value>
+  </data>
+  <data name="panelBody.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="lblCogsAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 26</value>
+  </data>
+  <data name="rbActiveOnly.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 46</value>
+  </data>
+  <data name="rbAll.Text" xml:space="preserve">
+    <value>All Products</value>
+  </data>
+  <data name="&gt;&gt;rbExcludeZero.Name" xml:space="preserve">
+    <value>rbExcludeZero</value>
+  </data>
+  <data name="&gt;&gt;rbWac.Name" xml:space="preserve">
+    <value>rbWac</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>557, 614</value>
+  </data>
+  <data name="rbExcludeZero.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCogsAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 17</value>
+  </data>
+  <data name="grpComponents.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 118</value>
+  </data>
+  <data name="&gt;&gt;rbWac.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_valuation_settings</value>
+  </data>
+  <data name="grpMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>519, 90</value>
+  </data>
+  <data name="rbActiveOnly.Text" xml:space="preserve">
+    <value>Active Only</value>
+  </data>
+  <data name="&gt;&gt;lblCogsAccount.Name" xml:space="preserve">
+    <value>lblCogsAccount</value>
+  </data>
+  <data name="grpMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 32</value>
+  </data>
+  <data name="&gt;&gt;chkPostPerProduct.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Inventory Valuation Settings</value>
+  </data>
+  <data name="&gt;&gt;cmbCogsAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbAll.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbWithLanded.Text" xml:space="preserve">
+    <value>Purchase Cost + Import Duty + Freight + Other (Landed Cost)</value>
+  </data>
+  <data name="&gt;&gt;rbFifo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpAccounts.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmbInventoryAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 24</value>
+  </data>
+  <data name="lblCogsAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbFifo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbAll.Name" xml:space="preserve">
+    <value>rbAll</value>
+  </data>
+  <data name="&gt;&gt;panelBody.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblInventoryAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAccount.Name" xml:space="preserve">
+    <value>cmbInventoryAccount</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
+  </data>
+  <data name="grpMethod.Text" xml:space="preserve">
+    <value>Valuation Method</value>
+  </data>
+  <data name="&gt;&gt;grpPosting.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grpInclude.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grpAccounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>519, 110</value>
+  </data>
+  <data name="&gt;&gt;rbAll.Parent" xml:space="preserve">
+    <value>grpInclude</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.Name" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="panelBody.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbWac.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="grpAccounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 316</value>
+  </data>
+  <data name="cmbInventoryAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 58</value>
+  </data>
+  <data name="panelHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Name" xml:space="preserve">
+    <value>btnSave</value>
+  </data>
+  <data name="lblInventoryAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 17</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbStandard.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCogsAccount.Parent" xml:space="preserve">
+    <value>grpAccounts</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpInclude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 210</value>
+  </data>
+  <data name="&gt;&gt;grpAccounts.Name" xml:space="preserve">
+    <value>grpAccounts</value>
+  </data>
+  <data name="grpAccounts.Text" xml:space="preserve">
+    <value>Accounting Integration</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblCogsAccount.Text" xml:space="preserve">
+    <value>COGS Account (Expense):</value>
+  </data>
+  <data name="panelBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblInventoryAccount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbFifo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>445, 8</value>
+  </data>
+  <data name="&gt;&gt;rbWithLanded.Name" xml:space="preserve">
+    <value>rbWithLanded</value>
+  </data>
+  <data name="&gt;&gt;rbActiveOnly.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblTitle.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 0, 0, 0</value>
+  </data>
+  <data name="cmbCogsAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbFifo.Name" xml:space="preserve">
+    <value>rbFifo</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Name" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAccount.Parent" xml:space="preserve">
+    <value>grpAccounts</value>
+  </data>
+  <data name="&gt;&gt;rbWithLanded.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbExcludeZero.Parent" xml:space="preserve">
+    <value>grpInclude</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>panelHeader</value>
+  </data>
+  <data name="&gt;&gt;chkPostPerProduct.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbExcludeZero.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 68</value>
+  </data>
+  <data name="rbWithLanded.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 50</value>
+  </data>
+  <data name="rbStandard.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbWithLanded.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 32</value>
+  </data>
+  <data name="&gt;&gt;rbPurchaseOnly.Name" xml:space="preserve">
+    <value>rbPurchaseOnly</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Save Settings</value>
+  </data>
+  <data name="grpPosting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 440</value>
+  </data>
+  <data name="panelBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 514</value>
+  </data>
+  <data name="&gt;&gt;rbActiveOnly.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;rbWac.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;rbActiveOnly.Name" xml:space="preserve">
+    <value>rbActiveOnly</value>
+  </data>
+  <data name="rbFifo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 52</value>
+  </data>
+  <data name="&gt;&gt;grpComponents.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;rbPurchaseOnly.Parent" xml:space="preserve">
+    <value>grpComponents</value>
+  </data>
+  <data name="lblInventoryAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbWac.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 24</value>
+  </data>
+  <data name="&gt;&gt;grpPosting.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbWac.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="rbStandard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 28</value>
+  </data>
+  <data name="panelFooter.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>519, 60</value>
+  </data>
+  <data name="rbExcludeZero.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 21</value>
+  </data>
+  <data name="grpComponents.Text" xml:space="preserve">
+    <value>Cost Components</value>
+  </data>
+  <data name="&gt;&gt;panelFooter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="grpAccounts.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbExcludeZero.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbActiveOnly.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbStandard.Name" xml:space="preserve">
+    <value>rbStandard</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;cmbInventoryAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkPostPerProduct.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="grpComponents.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;grpPosting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="panelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>557, 48</value>
+  </data>
+  <data name="grpComponents.Size" type="System.Drawing.Size, System.Drawing">
+    <value>519, 80</value>
+  </data>
+  <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 8</value>
+  </data>
+  <data name="&gt;&gt;lblCogsAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="rbWithLanded.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblCogsAccount.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbPurchaseOnly.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelFooter.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="&gt;&gt;btnSave.Parent" xml:space="preserve">
+    <value>panelFooter</value>
+  </data>
+  <data name="lblInventoryAccount.Text" xml:space="preserve">
+    <value>Inventory Asset Account:</value>
+  </data>
+  <data name="rbAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="&gt;&gt;panelHeader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpComponents.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="cmbCogsAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="rbWac.Text" xml:space="preserve">
+    <value>Weighted Average Cost (WAC)</value>
+  </data>
+  <data name="&gt;&gt;grpPosting.Name" xml:space="preserve">
+    <value>grpPosting</value>
+  </data>
+  <data name="&gt;&gt;rbActiveOnly.Parent" xml:space="preserve">
+    <value>grpInclude</value>
+  </data>
+  <data name="&gt;&gt;grpInclude.Parent" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="&gt;&gt;chkPostPerProduct.Name" xml:space="preserve">
+    <value>chkPostPerProduct</value>
+  </data>
+  <data name="&gt;&gt;cmbCogsAccount.Name" xml:space="preserve">
+    <value>cmbCogsAccount</value>
+  </data>
+  <data name="&gt;&gt;rbStandard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbAll.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rbPurchaseOnly.Text" xml:space="preserve">
+    <value>Purchase Cost Only</value>
+  </data>
+  <data name="&gt;&gt;panelBody.Name" xml:space="preserve">
+    <value>panelBody</value>
+  </data>
+  <data name="rbFifo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 21</value>
+  </data>
+  <data name="rbPurchaseOnly.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 28</value>
+  </data>
+  <data name="&gt;&gt;cmbCogsAccount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpComponents.Name" xml:space="preserve">
+    <value>grpComponents</value>
+  </data>
+  <data name="&gt;&gt;rbPurchaseOnly.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

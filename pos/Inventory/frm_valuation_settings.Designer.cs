@@ -14,6 +14,7 @@ namespace pos.Inventory
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_valuation_settings));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelBody = new System.Windows.Forms.Panel();
@@ -50,253 +51,165 @@ namespace pos.Inventory
             // 
             // panelHeader
             // 
+            resources.ApplyResources(this.panelHeader, "panelHeader");
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(212)))));
             this.panelHeader.Controls.Add(this.lblTitle);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(557, 48);
-            this.panelHeader.TabIndex = 2;
             // 
             // lblTitle
             // 
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.lblTitle.Size = new System.Drawing.Size(557, 48);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Inventory Valuation Settings";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelBody
             // 
-            this.panelBody.AutoScroll = true;
+            resources.ApplyResources(this.panelBody, "panelBody");
             this.panelBody.Controls.Add(this.grpPosting);
             this.panelBody.Controls.Add(this.grpAccounts);
             this.panelBody.Controls.Add(this.grpInclude);
             this.panelBody.Controls.Add(this.grpComponents);
             this.panelBody.Controls.Add(this.grpMethod);
-            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 48);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Padding = new System.Windows.Forms.Padding(16);
-            this.panelBody.Size = new System.Drawing.Size(557, 514);
-            this.panelBody.TabIndex = 0;
             // 
             // grpPosting
             // 
+            resources.ApplyResources(this.grpPosting, "grpPosting");
             this.grpPosting.Controls.Add(this.chkPostPerProduct);
-            this.grpPosting.Location = new System.Drawing.Point(16, 440);
             this.grpPosting.Name = "grpPosting";
-            this.grpPosting.Size = new System.Drawing.Size(519, 60);
-            this.grpPosting.TabIndex = 0;
             this.grpPosting.TabStop = false;
-            this.grpPosting.Text = "COGS Posting";
             // 
             // chkPostPerProduct
             // 
-            this.chkPostPerProduct.AutoSize = true;
-            this.chkPostPerProduct.Location = new System.Drawing.Point(16, 24);
+            resources.ApplyResources(this.chkPostPerProduct, "chkPostPerProduct");
             this.chkPostPerProduct.Name = "chkPostPerProduct";
-            this.chkPostPerProduct.Size = new System.Drawing.Size(499, 21);
-            this.chkPostPerProduct.TabIndex = 0;
-            this.chkPostPerProduct.Text = "Post individual journal lines per product (unchecked = single summary entry)";
             // 
             // grpAccounts
             // 
+            resources.ApplyResources(this.grpAccounts, "grpAccounts");
             this.grpAccounts.Controls.Add(this.lblCogsAccount);
             this.grpAccounts.Controls.Add(this.cmbCogsAccount);
             this.grpAccounts.Controls.Add(this.lblInventoryAccount);
             this.grpAccounts.Controls.Add(this.cmbInventoryAccount);
-            this.grpAccounts.Location = new System.Drawing.Point(16, 316);
             this.grpAccounts.Name = "grpAccounts";
-            this.grpAccounts.Size = new System.Drawing.Size(519, 110);
-            this.grpAccounts.TabIndex = 1;
             this.grpAccounts.TabStop = false;
-            this.grpAccounts.Text = "Accounting Integration";
             // 
             // lblCogsAccount
             // 
-            this.lblCogsAccount.AutoSize = true;
-            this.lblCogsAccount.Location = new System.Drawing.Point(16, 26);
+            resources.ApplyResources(this.lblCogsAccount, "lblCogsAccount");
             this.lblCogsAccount.Name = "lblCogsAccount";
-            this.lblCogsAccount.Size = new System.Drawing.Size(170, 17);
-            this.lblCogsAccount.TabIndex = 0;
-            this.lblCogsAccount.Text = "COGS Account (Expense):";
             // 
             // cmbCogsAccount
             // 
+            resources.ApplyResources(this.cmbCogsAccount, "cmbCogsAccount");
             this.cmbCogsAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbCogsAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCogsAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCogsAccount.Location = new System.Drawing.Point(202, 22);
             this.cmbCogsAccount.Name = "cmbCogsAccount";
-            this.cmbCogsAccount.Size = new System.Drawing.Size(262, 24);
-            this.cmbCogsAccount.TabIndex = 1;
             // 
             // lblInventoryAccount
             // 
-            this.lblInventoryAccount.AutoSize = true;
-            this.lblInventoryAccount.Location = new System.Drawing.Point(16, 62);
+            resources.ApplyResources(this.lblInventoryAccount, "lblInventoryAccount");
             this.lblInventoryAccount.Name = "lblInventoryAccount";
-            this.lblInventoryAccount.Size = new System.Drawing.Size(165, 17);
-            this.lblInventoryAccount.TabIndex = 2;
-            this.lblInventoryAccount.Text = "Inventory Asset Account:";
             // 
             // cmbInventoryAccount
             // 
+            resources.ApplyResources(this.cmbInventoryAccount, "cmbInventoryAccount");
             this.cmbInventoryAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbInventoryAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbInventoryAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInventoryAccount.Location = new System.Drawing.Point(202, 58);
             this.cmbInventoryAccount.Name = "cmbInventoryAccount";
-            this.cmbInventoryAccount.Size = new System.Drawing.Size(262, 24);
-            this.cmbInventoryAccount.TabIndex = 3;
             // 
             // grpInclude
             // 
+            resources.ApplyResources(this.grpInclude, "grpInclude");
             this.grpInclude.Controls.Add(this.rbExcludeZero);
             this.grpInclude.Controls.Add(this.rbActiveOnly);
             this.grpInclude.Controls.Add(this.rbAll);
-            this.grpInclude.Location = new System.Drawing.Point(16, 210);
             this.grpInclude.Name = "grpInclude";
-            this.grpInclude.Size = new System.Drawing.Size(519, 90);
-            this.grpInclude.TabIndex = 2;
             this.grpInclude.TabStop = false;
-            this.grpInclude.Text = "Include in Valuation";
             // 
             // rbExcludeZero
             // 
-            this.rbExcludeZero.AutoSize = true;
-            this.rbExcludeZero.Location = new System.Drawing.Point(16, 68);
+            resources.ApplyResources(this.rbExcludeZero, "rbExcludeZero");
             this.rbExcludeZero.Name = "rbExcludeZero";
-            this.rbExcludeZero.Size = new System.Drawing.Size(208, 21);
-            this.rbExcludeZero.TabIndex = 0;
-            this.rbExcludeZero.Text = "Exclude Zero-Stock Products";
             // 
             // rbActiveOnly
             // 
-            this.rbActiveOnly.AutoSize = true;
-            this.rbActiveOnly.Location = new System.Drawing.Point(16, 46);
+            resources.ApplyResources(this.rbActiveOnly, "rbActiveOnly");
             this.rbActiveOnly.Name = "rbActiveOnly";
-            this.rbActiveOnly.Size = new System.Drawing.Size(98, 21);
-            this.rbActiveOnly.TabIndex = 1;
-            this.rbActiveOnly.Text = "Active Only";
             // 
             // rbAll
             // 
-            this.rbAll.AutoSize = true;
-            this.rbAll.Location = new System.Drawing.Point(16, 24);
+            resources.ApplyResources(this.rbAll, "rbAll");
             this.rbAll.Name = "rbAll";
-            this.rbAll.Size = new System.Drawing.Size(100, 21);
-            this.rbAll.TabIndex = 2;
-            this.rbAll.Text = "All Products";
             // 
             // grpComponents
             // 
+            resources.ApplyResources(this.grpComponents, "grpComponents");
             this.grpComponents.Controls.Add(this.rbWithLanded);
             this.grpComponents.Controls.Add(this.rbPurchaseOnly);
-            this.grpComponents.Location = new System.Drawing.Point(16, 118);
             this.grpComponents.Name = "grpComponents";
-            this.grpComponents.Size = new System.Drawing.Size(519, 80);
-            this.grpComponents.TabIndex = 3;
             this.grpComponents.TabStop = false;
-            this.grpComponents.Text = "Cost Components";
             // 
             // rbWithLanded
             // 
-            this.rbWithLanded.AutoSize = true;
-            this.rbWithLanded.Location = new System.Drawing.Point(16, 50);
+            resources.ApplyResources(this.rbWithLanded, "rbWithLanded");
             this.rbWithLanded.Name = "rbWithLanded";
-            this.rbWithLanded.Size = new System.Drawing.Size(416, 21);
-            this.rbWithLanded.TabIndex = 0;
-            this.rbWithLanded.Text = "Purchase Cost + Import Duty + Freight + Other (Landed Cost)";
             // 
             // rbPurchaseOnly
             // 
-            this.rbPurchaseOnly.AutoSize = true;
-            this.rbPurchaseOnly.Location = new System.Drawing.Point(16, 28);
+            resources.ApplyResources(this.rbPurchaseOnly, "rbPurchaseOnly");
             this.rbPurchaseOnly.Name = "rbPurchaseOnly";
-            this.rbPurchaseOnly.Size = new System.Drawing.Size(149, 21);
-            this.rbPurchaseOnly.TabIndex = 1;
-            this.rbPurchaseOnly.Text = "Purchase Cost Only";
             // 
             // grpMethod
             // 
+            resources.ApplyResources(this.grpMethod, "grpMethod");
             this.grpMethod.Controls.Add(this.rbStandard);
             this.grpMethod.Controls.Add(this.rbFifo);
             this.grpMethod.Controls.Add(this.rbWac);
-            this.grpMethod.Location = new System.Drawing.Point(16, 16);
             this.grpMethod.Name = "grpMethod";
-            this.grpMethod.Size = new System.Drawing.Size(519, 90);
-            this.grpMethod.TabIndex = 4;
             this.grpMethod.TabStop = false;
-            this.grpMethod.Text = "Valuation Method";
             // 
             // rbStandard
             // 
-            this.rbStandard.AutoSize = true;
-            this.rbStandard.Location = new System.Drawing.Point(240, 28);
+            resources.ApplyResources(this.rbStandard, "rbStandard");
             this.rbStandard.Name = "rbStandard";
-            this.rbStandard.Size = new System.Drawing.Size(117, 21);
-            this.rbStandard.TabIndex = 0;
-            this.rbStandard.Text = "Standard Cost";
             // 
             // rbFifo
             // 
-            this.rbFifo.AutoSize = true;
-            this.rbFifo.Location = new System.Drawing.Point(16, 52);
+            resources.ApplyResources(this.rbFifo, "rbFifo");
             this.rbFifo.Name = "rbFifo";
-            this.rbFifo.Size = new System.Drawing.Size(174, 21);
-            this.rbFifo.TabIndex = 1;
-            this.rbFifo.Text = "FIFO (First-In, First-Out)";
             // 
             // rbWac
             // 
-            this.rbWac.AutoSize = true;
-            this.rbWac.Location = new System.Drawing.Point(16, 28);
+            resources.ApplyResources(this.rbWac, "rbWac");
             this.rbWac.Name = "rbWac";
-            this.rbWac.Size = new System.Drawing.Size(219, 21);
-            this.rbWac.TabIndex = 2;
-            this.rbWac.Text = "Weighted Average Cost (WAC)";
             // 
             // panelFooter
             // 
+            resources.ApplyResources(this.panelFooter, "panelFooter");
             this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(242)))), ((int)(((byte)(241)))));
             this.panelFooter.Controls.Add(this.btnCancel);
             this.panelFooter.Controls.Add(this.btnSave);
-            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 562);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(557, 52);
-            this.panelFooter.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(445, 8);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 32);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(307, 8);
+            resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(130, 32);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save Settings";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frm_valuation_settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 614);
             this.Controls.Add(this.panelBody);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelHeader);
@@ -304,8 +217,6 @@ namespace pos.Inventory
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_valuation_settings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Inventory Valuation Settings";
             this.Load += new System.EventHandler(this.frm_valuation_settings_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelBody.ResumeLayout(false);

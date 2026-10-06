@@ -1868,6 +1868,12 @@
     <EmbeddedResource Include="Accounts\Dashboard\frm_accounting_dashboard.resx">
       <DependentUpon>frm_accounting_dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\frm_import_data.ar-SA.resx">
+      <DependentUpon>frm_import_data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\frm_import_data.resx">
+      <DependentUpon>frm_import_data.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Groups\frm_addGroup.ar-SA.resx">
       <DependentUpon>frm_addGroup.cs</DependentUpon>
     </EmbeddedResource>
@@ -1950,9 +1956,6 @@
     <EmbeddedResource Include="Accounts\Reports\frm_account_report.ar-SA.resx">
       <DependentUpon>frm_account_report.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Accounts\Reports\frm_balancesheet_report.ar-SA.resx">
-      <DependentUpon>frm_balancesheet_report.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Reports\frm_balancesheet_report.resx">
       <DependentUpon>frm_balancesheet_report.cs</DependentUpon>
     </EmbeddedResource>
@@ -1983,7 +1986,6 @@
     </EmbeddedResource> -->
     <EmbeddedResource Include="Accounts\Settings\frm_accounting_settings.ar-SA.resx">
       <DependentUpon>frm_accounting_settings.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Settings\frm_accounting_settings.resx">
       <DependentUpon>frm_accounting_settings.cs</DependentUpon>
@@ -2095,11 +2097,21 @@
     <EmbeddedResource Include="Expenses\frm_expense_tracker.resx">
       <DependentUpon>frm_expense_tracker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FixedAssets\frm_addFixedAsset.ar-SA.resx">
+      <DependentUpon>frm_addFixedAsset.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixedAssets\frm_addFixedAsset.resx">
+      <DependentUpon>frm_addFixedAsset.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FixedAssets\frm_fixedAssetCategories.resx">
       <DependentUpon>frm_fixedAssetCategories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixedAssets\frm_fixedAssetLocations.resx">
       <DependentUpon>frm_fixedAssetLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixedAssets\frm_fixed_asset_register.ar-SA.resx">
+      <DependentUpon>frm_fixed_asset_register.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixedAssets\frm_fixed_asset_register.resx">
       <DependentUpon>frm_fixed_asset_register.cs</DependentUpon>
@@ -2110,8 +2122,16 @@
     <EmbeddedResource Include="frm_session_lock.resx">
       <DependentUpon>frm_session_lock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frm_inventory_valuation.ar-SA.resx">
+      <DependentUpon>frm_inventory_valuation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventory\frm_inventory_valuation.resx">
       <DependentUpon>frm_inventory_valuation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frm_valuation_settings.ar-SA.resx">
+      <DependentUpon>frm_valuation_settings.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory\frm_valuation_settings.resx">
       <DependentUpon>frm_valuation_settings.cs</DependentUpon>
@@ -2590,11 +2610,30 @@
     <EmbeddedResource Include="Master\frm_shortcuts.resx">
       <DependentUpon>frm_shortcuts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmCashBook.ar-SA.resx">
+      <DependentUpon>FrmCashBook.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmCashBook.resx">
+      <DependentUpon>FrmCashBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmCustomerSubLedger.ar-SA.resx">
+      <DependentUpon>FrmCustomerSubLedger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Accounts\FrmCustomerSubLedger.resx">
       <DependentUpon>FrmCustomerSubLedger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmDailyCashBankReport.ar-SA.resx">
+      <DependentUpon>FrmDailyCashBankReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Accounts\FrmDailyCashBankReport.resx">
       <DependentUpon>FrmDailyCashBankReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmSupplierSubLedger.ar-SA.resx">
+      <DependentUpon>FrmSupplierSubLedger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Accounts\FrmSupplierSubLedger.resx">
+      <DependentUpon>FrmSupplierSubLedger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Banks\BankLedger.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2616,17 +2655,33 @@
     <EmbeddedResource Include="Reports\Financial\FrmTrialBalanceReport.resx">
       <DependentUpon>FrmTrialBalanceReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_BalanceSheetReport.ar-SA.resx">
+      <DependentUpon>frm_BalanceSheetReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_BalanceSheetReport.resx">
       <DependentUpon>frm_BalanceSheetReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_BankReconciliation.resx">
       <DependentUpon>frm_BankReconciliation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_BudgetVsActualReport.ar-SA.resx">
+      <DependentUpon>frm_BudgetVsActualReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_BudgetVsActualReport.resx">
       <DependentUpon>frm_BudgetVsActualReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_GeneralLedgerReport.ar-SA.resx">
+      <DependentUpon>frm_GeneralLedgerReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_GeneralLedgerReport.resx">
       <DependentUpon>frm_GeneralLedgerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\frm_ProfitAndLossReport.ar-SA.resx">
+      <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\frm_ProfitAndLossReport.resx">
       <DependentUpon>frm_ProfitAndLossReport.cs</DependentUpon>

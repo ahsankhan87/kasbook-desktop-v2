@@ -464,5 +464,10 @@ namespace pos.FixedAssets
             if (!string.IsNullOrWhiteSpace(txtReplacementCost.Text) && decimal.TryParse(txtReplacementCost.Text, out decimal replacement))
                 txtReplacementCost.Text = replacement.ToString("N2");
         }
+
+        private void txtUsefulLifeMonths_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -43,6 +43,11 @@ namespace pos.Inventory
 
         public frm_inventory_valuation()
         {
+            // Set RTL mode based on user language
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+            this.RightToLeft = isArabic ? RightToLeft.Yes : RightToLeft.No;
+            this.RightToLeftLayout = isArabic;
+
             InitializeComponent();
         }
 
@@ -50,14 +55,28 @@ namespace pos.Inventory
         // Form Load
         // ===================================================================
 
+        /// <summary>
+        /// Translates text based on current user language (Arabic/English).
+        /// </summary>
+        private string T(string englishText, string arabicText)
+        {
+            return string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase) 
+                ? arabicText 
+                : englishText;
+        }
+
         private void frm_inventory_valuation_Load(object sender, EventArgs e)
         {
+            // Translate form title
+            this.Text = T("Inventory Valuation", "تقييم المخزون");
+
             AppTheme.Apply(this);
             AppTheme.ApplyListFormStyleLightHeader(panelFilters, null, panelValBody, gridValuation);
             AppTheme.ApplyListFormStyleLightHeader(panelCogsFilters, null, panelCogsBody, gridCogs);
 
             LoadSettings();
             LoadFilterDropdowns();
+            TranslateUI();
         }
 
         private void LoadSettings()
@@ -84,7 +103,7 @@ namespace pos.Inventory
                 DataTable cats = catBll.GetAll();
                 var allCat = cats.NewRow();
                 allCat["code"] = "";
-                allCat["name"] = "(All Categories)";
+                allCat["name"] = T("(All Categories)", "(جميع الفئات)");
                 cats.Rows.InsertAt(allCat, 0);
                 cmbCategory.DataSource    = cats;
                 cmbCategory.DisplayMember = "name";
@@ -95,7 +114,7 @@ namespace pos.Inventory
                 DataTable brands = brandBll.GetAll();
                 var allBrand = brands.NewRow();
                 allBrand["code"] = "";
-                allBrand["name"] = "(All Brands)";
+                allBrand["name"] = T("(All Brands)", "(جميع العلامات التجارية)");
                 brands.Rows.InsertAt(allBrand, 0);
                 cmbBrand.DataSource    = brands;
                 cmbBrand.DisplayMember = "name";
@@ -106,7 +125,7 @@ namespace pos.Inventory
                 DataTable suppliers = suppBll.GetAll();
                 var allSupp = suppliers.NewRow();
                 allSupp["id"] = 0;
-                allSupp["first_name"] = "(All Suppliers)";
+                allSupp["first_name"] = T("(All Suppliers)", "(جميع الموردين)");
                 suppliers.Rows.InsertAt(allSupp, 0);
                 cmbSupplier.DataSource    = suppliers;
                 cmbSupplier.DisplayMember = "first_name";
@@ -117,7 +136,7 @@ namespace pos.Inventory
                 DataTable locations = locBll.GetAll();
                 var allLoc = locations.NewRow();
                 allLoc["code"] = "";
-                allLoc["name"] = "(All Locations)";
+                allLoc["name"] = T("(All Locations)", "(جميع المواقع)");
                 locations.Rows.InsertAt(allLoc, 0);
                 cmbLocation.DataSource    = locations;
                 cmbLocation.DisplayMember = "name";
@@ -127,6 +146,96 @@ namespace pos.Inventory
             {
                 // Dropdowns are optional filters — silently continue
             }
+        }
+
+        private void TranslateUI()
+        {
+            // Translate labels
+            lblFormTitle.Text = T("Inventory Valuation Report", "تقرير تقييم المخزون");
+            lblAsOfDate.Text = T("As Of Date:", "كما في التاريخ:");
+            lblCategory.Text = T("Category:", "الفئة:");
+            lblBrand.Text = T("Brand:", "العلامة التجارية:");
+            lblSupplier.Text = T("Supplier:", "المورد:");
+            lblLocation.Text = T("Location:", "الموقع:");
+            chkShowZero.Text = T("Show Zero Stock", "إظهار المخزون الصفري");
+            chkShowNegativeStock.Text = T("Show Negative Stock", "إظهار المخزون السالب");
+
+            // Translate buttons
+            btnSettings.Text = T("Settings", "الإعدادات");
+            btnCalculate.Text = T("Calculate", "حساب");
+            btnSnapshot.Text = T("Snapshot", "صورة فوتوغرافية");
+            btnExport.Text = T("Export", "تصدير");
+
+            // Translate tab headers
+            tabValuation.Text = T("Valuation", "التقييم");
+            tabCogs.Text = T("COGS Analysis", "تحليل تكلفة المبيعات");
+
+            // Translate summary labels
+            lblTotalValue.Text = T("Total Value:", "الإجمالي:");
+            lblTotalSku.Text = T("Total SKUs:", "إجمالي العناصر:");
+            lblTotalQty.Text = T("Total Qty:", "الكمية الإجمالية:");
+            lblAvgCost.Text = T("Average Cost:", "متوسط التكلفة:");
+
+            // Translate chart labels
+            lblChartTitle.Text = T("Top 10 Items by Value", "أفضل 10 عناصر حسب القيمة");
+            lblChartSupplierTitle.Text = T("Distribution by Supplier", "التوزيع حسب المورد");
+
+            // Translate COGS labels
+            lblTotalCogs.Text = T("Total COGS:", "إجمالي COGS:");
+            lblTotalSales.Text = T("Total Sales:", "إجمالي المبيعات:");
+            lblGrossMargin.Text = T("Gross Margin:", "إجمالي الهامش:");
+
+            // Translate COGS filters
+            lblFromDate.Text = T("From Date:", "من التاريخ:");
+            lblToDate.Text = T("To Date:", "إلى التاريخ:");
+
+            // Translate grid column headers
+            TranslateGridHeaders();
+        }
+
+        private void TranslateGridHeaders()
+        {
+            // Valuation grid headers
+            if (gridValuation.Columns.Contains("colCode"))
+                gridValuation.Columns["colCode"].HeaderText = T("Code", "الرمز");
+            if (gridValuation.Columns.Contains("colName"))
+                gridValuation.Columns["colName"].HeaderText = T("Product Name", "اسم المنتج");
+            if (gridValuation.Columns.Contains("colCategory"))
+                gridValuation.Columns["colCategory"].HeaderText = T("Category", "الفئة");
+            if (gridValuation.Columns.Contains("colQty"))
+                gridValuation.Columns["colQty"].HeaderText = T("Quantity", "الكمية");
+            if (gridValuation.Columns.Contains("colUnitCost"))
+                gridValuation.Columns["colUnitCost"].HeaderText = T("Unit Cost", "تكلفة الوحدة");
+            if (gridValuation.Columns.Contains("colTotalValue"))
+                gridValuation.Columns["colTotalValue"].HeaderText = T("Total Value", "القيمة الإجمالية");
+            if (gridValuation.Columns.Contains("colLastPurchDate"))
+                gridValuation.Columns["colLastPurchDate"].HeaderText = T("Last Purchase", "آخر شراء");
+            if (gridValuation.Columns.Contains("colLastPurchCost"))
+                gridValuation.Columns["colLastPurchCost"].HeaderText = T("Purchase Cost", "تكلفة الشراء");
+            if (gridValuation.Columns.Contains("colReorderLevel"))
+                gridValuation.Columns["colReorderLevel"].HeaderText = T("Reorder Level", "مستوى إعادة الطلب");
+            if (gridValuation.Columns.Contains("colStatus"))
+                gridValuation.Columns["colStatus"].HeaderText = T("Status", "الحالة");
+
+            // COGS grid headers
+            if (gridCogs.Columns.Contains("colCCode"))
+                gridCogs.Columns["colCCode"].HeaderText = T("Code", "الرمز");
+            if (gridCogs.Columns.Contains("colCName"))
+                gridCogs.Columns["colCName"].HeaderText = T("Product Name", "اسم المنتج");
+            if (gridCogs.Columns.Contains("colCCat"))
+                gridCogs.Columns["colCCat"].HeaderText = T("Category", "الفئة");
+            if (gridCogs.Columns.Contains("colSoldQty"))
+                gridCogs.Columns["colSoldQty"].HeaderText = T("Sold Qty", "الكمية المباعة");
+            if (gridCogs.Columns.Contains("colCostPerUnit"))
+                gridCogs.Columns["colCostPerUnit"].HeaderText = T("Cost/Unit", "التكلفة/الوحدة");
+            if (gridCogs.Columns.Contains("colTotalCogs"))
+                gridCogs.Columns["colTotalCogs"].HeaderText = T("Total COGS", "إجمالي COGS");
+            if (gridCogs.Columns.Contains("colSalesVal"))
+                gridCogs.Columns["colSalesVal"].HeaderText = T("Sales Value", "قيمة المبيعات");
+            if (gridCogs.Columns.Contains("colGrossMargin"))
+                gridCogs.Columns["colGrossMargin"].HeaderText = T("Gross Margin", "إجمالي الهامش");
+            if (gridCogs.Columns.Contains("colVariance"))
+                gridCogs.Columns["colVariance"].HeaderText = T("Variance", "الفرق");
         }
 
         // ===================================================================
@@ -230,7 +339,8 @@ namespace pos.Inventory
                 gridValuation.ResumeLayout();
             }
 
-            // Apply filters after binding
+            // Translate grid headers and apply filters after binding
+            TranslateGridHeaders();
             FilterValuationGrid();
         }
 
@@ -579,6 +689,9 @@ namespace pos.Inventory
             {
                 gridCogs.ResumeLayout();
             }
+
+            // Translate grid headers after binding
+            TranslateGridHeaders();
         }
 
         private void UpdateCogsTotals(List<COGSLine> lines)

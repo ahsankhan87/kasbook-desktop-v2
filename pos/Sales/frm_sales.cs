@@ -289,6 +289,101 @@ namespace pos
             return true; // All rows are valid
         }
 
+        /// <summary>
+        /// Refreshes the cost price for a specific grid row by fetching the current cost from the database.
+        /// This ensures the grid reflects any product cost updates that occurred elsewhere.
+        /// </summary>
+        private void RefreshRowCostPrice(int rowIndex)
+        {
+            try
+            {
+                if (rowIndex < 0 || rowIndex >= grid_sales.Rows.Count)
+                    return;
+
+                var itemNumberCell = grid_sales.Rows[rowIndex].Cells["item_number"].Value;
+                if (itemNumberCell == null || string.IsNullOrWhiteSpace(itemNumberCell.ToString()))
+                    return;
+
+                string item_number = itemNumberCell.ToString();
+
+                // Fetch fresh product data from database
+                DataTable dt = productsBLL_obj.GetAllByProductByItemNumber(item_number);
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow myProductView = dt.Rows[0];
+
+                    // Calculate fresh cost price using current database values
+                    double freshCostPrice = Math.Round(
+                        Convert.ToDouble(InventoryValuationHelper.GetEffectiveProductCost(
+                            myProductView, 
+                            UsersModal.logged_in_branch_id, 
+                            item_number)), 
+                        4);
+
+                    // Update the grid cell with current cost price
+                    grid_sales.Rows[rowIndex].Cells["cost_price"].Value = Math.Round(freshCostPrice, 2);
+
+                    // Reset cell styling after updating cost
+                    grid_sales.Rows[rowIndex].Cells["cost_price"].Style.BackColor = Color.White;
+                    grid_sales.Rows[rowIndex].Cells["unit_price"].Style.BackColor = Color.White;
+
+                    // Re-validate the row after cost update
+                    ValidateCostPriceForRow(rowIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't block the user flow - silently log to avoid interrupting user
+                try
+                {
+                    POS.DLL.Log.LogAction($"Error refreshing cost price for row {rowIndex}", ex.Message, UsersModal.logged_in_user_id, UsersModal.logged_in_branch_id);
+                }
+                catch { /* Ignore logging errors */ }
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the cost price for all rows in the sales grid by fetching current costs from the database.
+        /// This ensures the grid reflects any product cost updates that occurred in product master or inventory adjustment.
+        /// Should be called after returning from product update dialogs.
+        /// </summary>
+        public void RefreshAllCostPrices()
+        {
+            try
+            {
+                if (grid_sales.Rows.Count == 0)
+                    return;
+
+                // Use BusyScope to show loading indicator during refresh
+                using (BusyScope.Show(this, "Refreshing product costs..."))
+                {
+                    for (int i = 0; i < grid_sales.Rows.Count; i++)
+                    {
+                        // Skip empty rows
+                        var idCell = grid_sales.Rows[i].Cells["id"].Value;
+                        if (idCell == null || string.IsNullOrWhiteSpace(idCell.ToString()))
+                            continue;
+
+                        RefreshRowCostPrice(i);
+                    }
+
+                    // Recalculate totals after cost refresh
+                    get_total_cost_amount();
+                    txt_total_cost.Text = Math.Round(total_cost_amount, 3).ToString();
+                    txt_cost_price_with_vat.Text = Math.Round(total_cost_amount_e_vat, 3).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    POS.DLL.Log.LogAction($"Error refreshing all cost prices", ex.Message, UsersModal.logged_in_user_id, UsersModal.logged_in_branch_id);
+                }
+                catch { /* Ignore logging errors */ }
+                UiMessages.ShowError($"Error refreshing costs: {ex.Message}", "خطأ في تحديث التكاليف");
+            }
+        }
+
         private void grid_sales_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             string colName = grid_sales.Columns[e.ColumnIndex].Name;
@@ -1850,7 +1945,7 @@ namespace pos
 
         private void grid_sales_SelectionChanged(object sender, EventArgs e)
         {
-            if (grid_sales.Rows.Count > 0 && grid_sales.CurrentRow.Cells["shop_qty"].Value != null && grid_sales.CurrentRow.Cells["shop_qty"].Value.ToString() != "")
+            if (grid_sales.Rows.Count > 0 && grid_sales.CurrentRow != null && grid_sales.CurrentRow.Cells["shop_qty"].Value != null && grid_sales.CurrentRow.Cells["shop_qty"].Value.ToString() != "")
             {
                 string item_number = grid_sales.CurrentRow.Cells["item_number"].Value.ToString();
                 double tax_rate = (grid_sales.CurrentRow.Cells["tax_rate"].Value.ToString() == "" ? 0 : double.Parse(grid_sales.CurrentRow.Cells["tax_rate"].Value.ToString()));
@@ -1936,6 +2031,9 @@ namespace pos
                     frm_addProduct frm_addProduct_obj = new frm_addProduct(null, int.Parse(product_id), "true", null, "", this);
                     frm_addProduct_obj.WindowState = FormWindowState.Maximized;
                     frm_addProduct_obj.ShowDialog();
+
+                    // After product update, refresh cost prices in grid to reflect any changes
+                    RefreshAllCostPrices();
                 }
 
             }
@@ -2599,6 +2697,9 @@ namespace pos
 
                     if (!ValidateSaleGridQuantitiesBeforeSave())
                         return;
+
+                    // Refresh all cost prices from database before validation and save
+                    RefreshAllCostPrices();
 
                     // Validate zero cost price products - check permission before allowing save
                     if (!ValidateAllRowsBeforeSave())

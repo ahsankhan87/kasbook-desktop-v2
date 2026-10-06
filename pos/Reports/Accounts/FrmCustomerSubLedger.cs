@@ -19,23 +19,23 @@ namespace pos.Reports.Accounts
         public FrmCustomerSubLedger()
         {
             InitializeComponent();
-            lblTitle.Text = "Customer Sub-Ledger (AR)";
-            lblEntity.Text = "Customer:";
-            btnReceivePayment.Text = "Receive Payment";
+            lblTitle.Text = UiMessages.T("Customer Sub-Ledger (AR)", "دفتر العملاء الفرعي (الذمم المدينة)");
+            lblEntity.Text = UiMessages.T("Customer:", "العميل:");
+            btnReceivePayment.Text = UiMessages.T("Receive Payment", "استلام الدفع");
         }
 
         protected override void LoadEntitySelector()
         {
             try
             {
-                using (BusyScope.Show(this, "Loading customers..."))
+                using (BusyScope.Show(this, UiMessages.T("Loading customers...", "جاري تحميل العملاء...")))
                 {
                     DataTable dt = _customerBll.GetAll();
                     if (dt != null && dt.Rows.Count > 0)
                     {
                         DataRow emptyRow = dt.NewRow();
                         emptyRow["id"] = 0;
-                        emptyRow["first_name"] = "-- Select Customer --";
+                        emptyRow["first_name"] = UiMessages.T("-- Select Customer --", "-- اختر عميل --");
                         dt.Rows.InsertAt(emptyRow, 0);
 
                         cmbEntity.DisplayMember = "first_name";
@@ -47,26 +47,28 @@ namespace pos.Reports.Accounts
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error loading customers", ex.Message);
+                UiMessages.ShowError(UiMessages.T("Error loading customers", "خطأ في تحميل العملاء"), ex.Message);
             }
         }
 
         protected override void InitializeGrid()
         {
-            base.InitializeGrid();
+            dgvLedger.Columns.Clear();
+            dgvLedger.AllowUserToAddRows = false;
+            dgvLedger.AllowUserToDeleteRows = false;
+            dgvLedger.ReadOnly = false;  // Enable editing
+            dgvLedger.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Clear default columns and add AR-specific columns
-            dgvLedger.Columns.Clear();
-
-            AddGridColumn("Date", "transaction_date", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
-            AddGridColumn("Type", "transaction_type", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
-            AddGridColumn("Invoice", "invoice_no", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 80);
-            AddGridColumn("Reference", "reference_no", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
-            AddGridColumn("Amount", "amount", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 80);
-            AddGridColumn("Running Balance", "running_balance", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 100);
-            AddGridColumn("Due Date", "due_date", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
-            AddGridColumn("Days Overdue", "days_overdue", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
-            AddGridColumn("Status", "invoice_status", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Date", "التاريخ"), "transaction_date", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Type", "النوع"), "transaction_type", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
+            AddGridColumn(UiMessages.T("Invoice", "الفاتورة"), "invoice_no", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 80);
+            AddGridColumn(UiMessages.T("Reference", "المرجع"), "reference_no", System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft, 100);
+            AddGridColumn(UiMessages.T("Amount", "المبلغ"), "amount", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 80);
+            AddGridColumn(UiMessages.T("Running Balance", "الرصيد المتراكم"), "running_balance", System.Windows.Forms.DataGridViewContentAlignment.MiddleRight, 100);
+            AddGridColumn(UiMessages.T("Due Date", "تاريخ الاستحقاق"), "due_date", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Days Overdue", "أيام التأخير"), "days_overdue", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Status", "الحالة"), "invoice_status", System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter, 80);
         }
 
         protected override void DisplayEntityInfo()
@@ -127,24 +129,24 @@ namespace pos.Reports.Accounts
 
         protected override string GetPrintTitle()
         {
-            string customerName = "Unknown";
+            string customerName = UiMessages.T("Unknown", "غير معروف");
             if (cmbEntity.SelectedItem is DataRowView drv)
             {
-                customerName = drv["first_name"]?.ToString() ?? "Unknown";
+                customerName = drv["first_name"]?.ToString() ?? UiMessages.T("Unknown", "غير معروف");
             }
-            return $"Customer Sub-Ledger (AR) - {customerName}";
+            return $"{UiMessages.T("Customer Sub-Ledger (AR)", "دفتر العملاء الفرعي (الذمم المدينة)")} - {customerName}";
         }
 
         protected override string GetPrintSubtitle()
         {
-            return $"Period: {dtpFromDate.Value:MMM dd, yyyy} to {dtpToDate.Value:MMM dd, yyyy}";
+            return $"{UiMessages.T("Period", "الفترة")}: {dtpFromDate.Value:MMM dd, yyyy} {UiMessages.T("to", "إلى")} {dtpToDate.Value:MMM dd, yyyy}";
         }
 
         protected override void OnReceivePaymentClick()
         {
             if (_selectedEntityId <= 0)
             {
-                UiMessages.ShowWarning("Select Customer", "Please select a customer first");
+                UiMessages.ShowWarning(UiMessages.T("Select Customer", "اختر عميل"), UiMessages.T("Please select a customer first", "يرجى اختيار عميل أولاً"));
                 return;
             }
 
@@ -166,7 +168,7 @@ namespace pos.Reports.Accounts
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error", ex.Message);
+                UiMessages.ShowError(UiMessages.T("Error", "خطأ"), ex.Message);
             }
         }
     }

@@ -32,11 +32,11 @@ namespace pos
 
         private void frm_accounting_settings_Load(object sender, EventArgs e)
         {
-            AppTheme.Apply(this);
+           // AppTheme.Apply(this);
 
             if (!EnsureAuthorizedRole())
             {
-                UiMessages.ShowError("Access denied. Only Admin/CFO can open Accounting Settings.", "غير مصرح. فقط المدير/CFO يمكنه فتح إعدادات المحاسبة.");
+                UiMessages.ShowError(UiMessages.T("Access denied. Only Admin/CFO can open Accounting Settings.", "تم رفض الوصول. فقط المسؤول/المدير المالي يمكنه فتح إعدادات المحاسبة."), UiMessages.T("غير مصرح", "غير مصرح"));
                 Close();
                 return;
             }
@@ -60,7 +60,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError(ex.Message, ex.Message);
+                UiMessages.ShowError(UiMessages.T("Error", "خطأ"), ex.Message);
             }
         }
 
@@ -114,29 +114,48 @@ namespace pos
             cmbCountry.Items.Clear();
             cmbCountry.Items.AddRange(new object[]
             {
-                "Saudi Arabia",
-                "Pakistan",
-                "UAE",
-                "Qatar",
-                "Bahrain",
-                "Kuwait",
-                "Oman"
+                UiMessages.T("Saudi Arabia", "المملكة العربية السعودية"),
+                UiMessages.T("Pakistan", "باكستان"),
+                UiMessages.T("UAE", "الإمارات العربية المتحدة"),
+                UiMessages.T("Qatar", "قطر"),
+                UiMessages.T("Bahrain", "البحرين"),
+                UiMessages.T("Kuwait", "الكويت"),
+                UiMessages.T("Oman", "عمان")
             });
 
             cmbTaxMode.Items.Clear();
-            cmbTaxMode.Items.AddRange(new object[] { "Tax Inclusive", "Tax Exclusive" });
+            cmbTaxMode.Items.AddRange(new object[] { 
+                UiMessages.T("Tax Inclusive", "شامل للضريبة"), 
+                UiMessages.T("Tax Exclusive", "غير شامل للضريبة") 
+            });
 
             cmbFilingFrequency.Items.Clear();
-            cmbFilingFrequency.Items.AddRange(new object[] { "Monthly", "Quarterly", "Annually" });
+            cmbFilingFrequency.Items.AddRange(new object[] { 
+                UiMessages.T("Monthly", "شهري"), 
+                UiMessages.T("Quarterly", "ربع سنوي"), 
+                UiMessages.T("Annually", "سنوي") 
+            });
 
             cmbAmountFormat.Items.Clear();
-            cmbAmountFormat.Items.AddRange(new object[] { "PAKISTANI", "INTERNATIONAL" });
+            cmbAmountFormat.Items.AddRange(new object[] { 
+                UiMessages.T("PAKISTANI", "باكستاني"), 
+                UiMessages.T("INTERNATIONAL", "دولي") 
+            });
 
             cmbReportDateFormat.Items.Clear();
-            cmbReportDateFormat.Items.AddRange(new object[] { "dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd" });
+            cmbReportDateFormat.Items.AddRange(new object[] { 
+                "dd/MM/yyyy", 
+                "MM/dd/yyyy", 
+                "yyyy-MM-dd" 
+            });
 
             cmbShowAmountsIn.Items.Clear();
-            cmbShowAmountsIn.Items.AddRange(new object[] { "Actual", "Thousands", "Lakhs", "Crores" });
+            cmbShowAmountsIn.Items.AddRange(new object[] { 
+                UiMessages.T("Actual", "فعلي"), 
+                UiMessages.T("Thousands", "آلاف"), 
+                UiMessages.T("Lakhs", "لاكس"), 
+                UiMessages.T("Crores", "كرور") 
+            });
         }
 
         private void LoadCompany()

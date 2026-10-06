@@ -1,3 +1,5 @@
+using pos.UI;
+
 namespace pos
 {
     partial class frm_accounting_settings

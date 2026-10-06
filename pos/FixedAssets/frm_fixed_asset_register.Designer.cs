@@ -1,3 +1,5 @@
+using pos.UI;
+
 namespace pos.FixedAssets
 {
     partial class frm_fixed_asset_register
@@ -15,17 +17,10 @@ namespace pos.FixedAssets
 
         private void InitializeComponent()
         {
-            this.mainPanel = new System.Windows.Forms.Panel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_fixed_asset_register));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.dgvAssets = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlToolbar = new System.Windows.Forms.Panel();
             this.btnAddAsset = new System.Windows.Forms.Button();
             this.btnImportAssets = new System.Windows.Forms.Button();
@@ -33,9 +28,8 @@ namespace pos.FixedAssets
             this.btnManageLocations = new System.Windows.Forms.Button();
             this.btnEditAsset = new System.Windows.Forms.Button();
             this.btnDeleteAsset = new System.Windows.Forms.Button();
-            this.pnlFilters = new System.Windows.Forms.Panel();
-            this.btnSaveAssetInfo = new System.Windows.Forms.Button();
             this.btnRefreshGrid = new System.Windows.Forms.Button();
+            this.pnlFilters = new System.Windows.Forms.Panel();
             this.lblCategory = new System.Windows.Forms.Label();
             this.ddlCategory = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -50,10 +44,18 @@ namespace pos.FixedAssets
             this.tabDepreciationSetup = new System.Windows.Forms.TabPage();
             this.tabDepreciationHistory = new System.Windows.Forms.TabPage();
             this.tabDisposalRevaluation = new System.Windows.Forms.TabPage();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.pnlSummaryCard = new System.Windows.Forms.Panel();
             this.lblCostSummary = new System.Windows.Forms.Label();
             this.lblAssetNameSummary = new System.Windows.Forms.Label();
-            this.mainPanel.SuspendLayout();
+            this.btnSaveAssetInfo = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -64,60 +66,41 @@ namespace pos.FixedAssets
             this.pnlFilters.SuspendLayout();
             this.rightPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
+            this.mainPanel.SuspendLayout();
             this.pnlSummaryCard.SuspendLayout();
             this.SuspendLayout();
             // 
-            // mainPanel
-            // 
-            this.mainPanel.Controls.Add(this.splitContainer);
-            this.mainPanel.Controls.Add(this.pnlSummaryCard);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.mainPanel.Size = new System.Drawing.Size(1400, 862);
-            this.mainPanel.TabIndex = 0;
-            // 
             // splitContainer
             // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(6, 104);
-            this.splitContainer.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.splitContainer, "splitContainer");
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
             // 
+            resources.ApplyResources(this.splitContainer.Panel1, "splitContainer.Panel1");
             this.splitContainer.Panel1.Controls.Add(this.leftPanel);
             // 
             // splitContainer.Panel2
             // 
+            resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
             this.splitContainer.Panel2.Controls.Add(this.rightPanel);
-            this.splitContainer.Size = new System.Drawing.Size(1388, 752);
-            this.splitContainer.SplitterDistance = 820;
-            this.splitContainer.TabIndex = 0;
             // 
             // leftPanel
             // 
+            resources.ApplyResources(this.leftPanel, "leftPanel");
             this.leftPanel.Controls.Add(this.dgvAssets);
             this.leftPanel.Controls.Add(this.pnlToolbar);
             this.leftPanel.Controls.Add(this.pnlFilters);
             this.leftPanel.Controls.Add(this.txtSearch);
             this.leftPanel.Controls.Add(this.lblSearch);
-            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.leftPanel.Location = new System.Drawing.Point(0, 0);
-            this.leftPanel.Margin = new System.Windows.Forms.Padding(4);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.leftPanel.Size = new System.Drawing.Size(720, 752);
-            this.leftPanel.TabIndex = 0;
             // 
             // dgvAssets
             // 
+            resources.ApplyResources(this.dgvAssets, "dgvAssets");
             this.dgvAssets.AllowUserToAddRows = false;
             this.dgvAssets.AllowUserToDeleteRows = false;
             this.dgvAssets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvAssets.ColumnHeadersHeight = 29;
             this.dgvAssets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
@@ -126,76 +109,15 @@ namespace pos.FixedAssets
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7});
-            this.dgvAssets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAssets.Location = new System.Drawing.Point(6, 92);
-            this.dgvAssets.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAssets.MultiSelect = false;
             this.dgvAssets.Name = "dgvAssets";
             this.dgvAssets.ReadOnly = true;
-            this.dgvAssets.RowHeadersWidth = 51;
             this.dgvAssets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAssets.Size = new System.Drawing.Size(808, 611);
-            this.dgvAssets.TabIndex = 0;
             this.dgvAssets.SelectionChanged += new System.EventHandler(this.DgvAssets_SelectionChanged);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Code";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 69;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Category";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 94;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Purchase Date";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 126;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Cost";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Book Value";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 104;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Status";
-            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 76;
             // 
             // pnlToolbar
             // 
+            resources.ApplyResources(this.pnlToolbar, "pnlToolbar");
             this.pnlToolbar.Controls.Add(this.btnAddAsset);
             this.pnlToolbar.Controls.Add(this.btnImportAssets);
             this.pnlToolbar.Controls.Add(this.btnManageCategories);
@@ -203,288 +125,225 @@ namespace pos.FixedAssets
             this.pnlToolbar.Controls.Add(this.btnEditAsset);
             this.pnlToolbar.Controls.Add(this.btnDeleteAsset);
             this.pnlToolbar.Controls.Add(this.btnRefreshGrid);
-            this.pnlToolbar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlToolbar.Location = new System.Drawing.Point(6, 703);
-            this.pnlToolbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlToolbar.Name = "pnlToolbar";
-            this.pnlToolbar.Size = new System.Drawing.Size(808, 43);
-            this.pnlToolbar.TabIndex = 1;
             // 
             // btnAddAsset
             // 
-            this.btnAddAsset.Location = new System.Drawing.Point(6, 2);
-            this.btnAddAsset.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnAddAsset, "btnAddAsset");
             this.btnAddAsset.Name = "btnAddAsset";
-            this.btnAddAsset.Size = new System.Drawing.Size(140, 37);
-            this.btnAddAsset.TabIndex = 0;
-            this.btnAddAsset.Text = "Add New Asset";
             this.btnAddAsset.Click += new System.EventHandler(this.BtnAddAsset_Click);
             // 
             // btnImportAssets
             // 
-            this.btnImportAssets.Location = new System.Drawing.Point(146, 2);
-            this.btnImportAssets.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnImportAssets, "btnImportAssets");
             this.btnImportAssets.Name = "btnImportAssets";
-            this.btnImportAssets.Size = new System.Drawing.Size(140, 37);
-            this.btnImportAssets.TabIndex = 1;
-            this.btnImportAssets.Text = "Reports";
             // 
             // btnManageCategories
             // 
-            this.btnManageCategories.Location = new System.Drawing.Point(286, 2);
-            this.btnManageCategories.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnManageCategories, "btnManageCategories");
             this.btnManageCategories.Name = "btnManageCategories";
-            this.btnManageCategories.Size = new System.Drawing.Size(149, 37);
-            this.btnManageCategories.TabIndex = 2;
-            this.btnManageCategories.Text = "Manage Categories";
             this.btnManageCategories.Click += new System.EventHandler(this.BtnManageCategories_Click);
             // 
             // btnManageLocations
             // 
-            this.btnManageLocations.Location = new System.Drawing.Point(529, 2);
-            this.btnManageLocations.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnManageLocations, "btnManageLocations");
             this.btnManageLocations.Name = "btnManageLocations";
-            this.btnManageLocations.Size = new System.Drawing.Size(140, 37);
-            this.btnManageLocations.TabIndex = 3;
-            this.btnManageLocations.Text = "Manage Locations";
             this.btnManageLocations.Click += new System.EventHandler(this.BtnManageLocations_Click);
             // 
             // btnEditAsset
             // 
-            this.btnEditAsset.Location = new System.Drawing.Point(435, 2);
-            this.btnEditAsset.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnEditAsset, "btnEditAsset");
             this.btnEditAsset.Name = "btnEditAsset";
-            this.btnEditAsset.Size = new System.Drawing.Size(94, 37);
-            this.btnEditAsset.TabIndex = 4;
-            this.btnEditAsset.Text = "Edit Asset";
             this.btnEditAsset.Click += new System.EventHandler(this.BtnEditAsset_Click);
             // 
             // btnDeleteAsset
             // 
-            this.btnDeleteAsset.Location = new System.Drawing.Point(669, 2);
-            this.btnDeleteAsset.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnDeleteAsset, "btnDeleteAsset");
             this.btnDeleteAsset.Name = "btnDeleteAsset";
-            this.btnDeleteAsset.Size = new System.Drawing.Size(105, 37);
-            this.btnDeleteAsset.TabIndex = 5;
-            this.btnDeleteAsset.Text = "Delete Asset";
             this.btnDeleteAsset.Click += new System.EventHandler(this.BtnDeleteAsset_Click);
             // 
             // btnRefreshGrid
             // 
-            this.btnRefreshGrid.Location = new System.Drawing.Point(774, 2);
-            this.btnRefreshGrid.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnRefreshGrid, "btnRefreshGrid");
             this.btnRefreshGrid.Name = "btnRefreshGrid";
-            this.btnRefreshGrid.Size = new System.Drawing.Size(94, 37);
-            this.btnRefreshGrid.TabIndex = 6;
-            this.btnRefreshGrid.Text = "Refresh";
             this.btnRefreshGrid.Click += new System.EventHandler(this.BtnRefreshGrid_Click);
             // 
             // pnlFilters
             // 
+            resources.ApplyResources(this.pnlFilters, "pnlFilters");
             this.pnlFilters.Controls.Add(this.lblCategory);
             this.pnlFilters.Controls.Add(this.ddlCategory);
             this.pnlFilters.Controls.Add(this.lblStatus);
             this.pnlFilters.Controls.Add(this.ddlStatus);
             this.pnlFilters.Controls.Add(this.lblLocation);
             this.pnlFilters.Controls.Add(this.ddlLocation);
-            this.pnlFilters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilters.Location = new System.Drawing.Point(6, 55);
-            this.pnlFilters.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFilters.Name = "pnlFilters";
-            this.pnlFilters.Size = new System.Drawing.Size(808, 37);
-            this.pnlFilters.TabIndex = 2;
             // 
             // lblCategory
             // 
-            this.lblCategory.Location = new System.Drawing.Point(0, 6);
-            this.lblCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblCategory, "lblCategory");
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(82, 28);
-            this.lblCategory.TabIndex = 0;
-            this.lblCategory.Text = "Category:";
             // 
             // ddlCategory
             // 
+            resources.ApplyResources(this.ddlCategory, "ddlCategory");
             this.ddlCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlCategory.Location = new System.Drawing.Point(88, 4);
-            this.ddlCategory.Margin = new System.Windows.Forms.Padding(4);
             this.ddlCategory.Name = "ddlCategory";
-            this.ddlCategory.Size = new System.Drawing.Size(139, 24);
-            this.ddlCategory.TabIndex = 1;
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(233, 6);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(58, 28);
-            this.lblStatus.TabIndex = 2;
-            this.lblStatus.Text = "Status:";
             // 
             // ddlStatus
             // 
+            resources.ApplyResources(this.ddlStatus, "ddlStatus");
             this.ddlStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlStatus.Items.AddRange(new object[] {
-            "All",
-            "Active",
-            "Disposed",
-            "Under Repair",
-            "Fully Depreciated"});
-            this.ddlStatus.Location = new System.Drawing.Point(298, 4);
-            this.ddlStatus.Margin = new System.Windows.Forms.Padding(4);
+            resources.GetString("ddlStatus.Items"),
+            resources.GetString("ddlStatus.Items1"),
+            resources.GetString("ddlStatus.Items2"),
+            resources.GetString("ddlStatus.Items3"),
+            resources.GetString("ddlStatus.Items4")});
             this.ddlStatus.Name = "ddlStatus";
-            this.ddlStatus.Size = new System.Drawing.Size(116, 24);
-            this.ddlStatus.TabIndex = 3;
             // 
             // lblLocation
             // 
-            this.lblLocation.Location = new System.Drawing.Point(420, 6);
-            this.lblLocation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblLocation, "lblLocation");
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(70, 28);
-            this.lblLocation.TabIndex = 4;
-            this.lblLocation.Text = "Location:";
             // 
             // ddlLocation
             // 
+            resources.ApplyResources(this.ddlLocation, "ddlLocation");
             this.ddlLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlLocation.Location = new System.Drawing.Point(496, 4);
-            this.ddlLocation.Margin = new System.Windows.Forms.Padding(4);
             this.ddlLocation.Name = "ddlLocation";
-            this.ddlLocation.Size = new System.Drawing.Size(139, 24);
-            this.ddlLocation.TabIndex = 5;
             // 
             // txtSearch
             // 
-            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtSearch.Location = new System.Drawing.Point(6, 31);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.txtSearch, "txtSearch");
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(808, 24);
-            this.txtSearch.TabIndex = 3;
             // 
             // lblSearch
             // 
-            this.lblSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSearch.Location = new System.Drawing.Point(6, 6);
-            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblSearch, "lblSearch");
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(808, 25);
-            this.lblSearch.TabIndex = 4;
-            this.lblSearch.Text = "Search:";
             // 
             // rightPanel
             // 
+            resources.ApplyResources(this.rightPanel, "rightPanel");
             this.rightPanel.Controls.Add(this.tabControl);
-            this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rightPanel.Location = new System.Drawing.Point(0, 0);
-            this.rightPanel.Margin = new System.Windows.Forms.Padding(4);
             this.rightPanel.Name = "rightPanel";
-            this.rightPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.rightPanel.Size = new System.Drawing.Size(564, 752);
-            this.rightPanel.TabIndex = 0;
             // 
             // tabControl
             // 
+            resources.ApplyResources(this.tabControl, "tabControl");
             this.tabControl.Controls.Add(this.tabAssetInfo);
             this.tabControl.Controls.Add(this.tabDepreciationSetup);
             this.tabControl.Controls.Add(this.tabDepreciationHistory);
             this.tabControl.Controls.Add(this.tabDisposalRevaluation);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(6, 6);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(552, 740);
-            this.tabControl.TabIndex = 0;
             // 
             // tabAssetInfo
             // 
-            this.tabAssetInfo.Location = new System.Drawing.Point(4, 25);
-            this.tabAssetInfo.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.tabAssetInfo, "tabAssetInfo");
             this.tabAssetInfo.Name = "tabAssetInfo";
-            this.tabAssetInfo.Padding = new System.Windows.Forms.Padding(12);
-            this.tabAssetInfo.Size = new System.Drawing.Size(544, 711);
-            this.tabAssetInfo.TabIndex = 0;
-            this.tabAssetInfo.Text = "Asset Information";
             // 
             // tabDepreciationSetup
             // 
-            this.tabDepreciationSetup.Location = new System.Drawing.Point(4, 25);
-            this.tabDepreciationSetup.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.tabDepreciationSetup, "tabDepreciationSetup");
             this.tabDepreciationSetup.Name = "tabDepreciationSetup";
-            this.tabDepreciationSetup.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDepreciationSetup.Size = new System.Drawing.Size(544, 711);
-            this.tabDepreciationSetup.TabIndex = 1;
-            this.tabDepreciationSetup.Text = "Depreciation Setup";
             // 
             // tabDepreciationHistory
             // 
-            this.tabDepreciationHistory.Location = new System.Drawing.Point(4, 25);
-            this.tabDepreciationHistory.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.tabDepreciationHistory, "tabDepreciationHistory");
             this.tabDepreciationHistory.Name = "tabDepreciationHistory";
-            this.tabDepreciationHistory.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDepreciationHistory.Size = new System.Drawing.Size(544, 711);
-            this.tabDepreciationHistory.TabIndex = 2;
-            this.tabDepreciationHistory.Text = "Depreciation History";
             // 
             // tabDisposalRevaluation
             // 
-            this.tabDisposalRevaluation.Location = new System.Drawing.Point(4, 25);
-            this.tabDisposalRevaluation.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.tabDisposalRevaluation, "tabDisposalRevaluation");
             this.tabDisposalRevaluation.Name = "tabDisposalRevaluation";
-            this.tabDisposalRevaluation.Padding = new System.Windows.Forms.Padding(12);
-            this.tabDisposalRevaluation.Size = new System.Drawing.Size(544, 711);
-            this.tabDisposalRevaluation.TabIndex = 3;
-            this.tabDisposalRevaluation.Text = "Disposal / Revaluation";
+            // 
+            // mainPanel
+            // 
+            resources.ApplyResources(this.mainPanel, "mainPanel");
+            this.mainPanel.Controls.Add(this.splitContainer);
+            this.mainPanel.Controls.Add(this.pnlSummaryCard);
+            this.mainPanel.Name = "mainPanel";
             // 
             // pnlSummaryCard
             // 
+            resources.ApplyResources(this.pnlSummaryCard, "pnlSummaryCard");
             this.pnlSummaryCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.pnlSummaryCard.Controls.Add(this.lblCostSummary);
             this.pnlSummaryCard.Controls.Add(this.lblAssetNameSummary);
-            this.pnlSummaryCard.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSummaryCard.ForeColor = System.Drawing.Color.White;
-            this.pnlSummaryCard.Location = new System.Drawing.Point(6, 6);
-            this.pnlSummaryCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSummaryCard.Name = "pnlSummaryCard";
-            this.pnlSummaryCard.Padding = new System.Windows.Forms.Padding(12);
-            this.pnlSummaryCard.Size = new System.Drawing.Size(1388, 98);
-            this.pnlSummaryCard.TabIndex = 1;
             // 
             // lblCostSummary
             // 
-            this.lblCostSummary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCostSummary.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblCostSummary.Location = new System.Drawing.Point(12, 43);
-            this.lblCostSummary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblCostSummary, "lblCostSummary");
             this.lblCostSummary.Name = "lblCostSummary";
-            this.lblCostSummary.Size = new System.Drawing.Size(1364, 43);
-            this.lblCostSummary.TabIndex = 0;
-            this.lblCostSummary.Text = "Cost: PKR 0 | Book Value: PKR 0 | Age: 0 years | Depreciation to Date: PKR 0";
             // 
             // lblAssetNameSummary
             // 
-            this.lblAssetNameSummary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblAssetNameSummary.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblAssetNameSummary.Location = new System.Drawing.Point(12, 12);
-            this.lblAssetNameSummary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblAssetNameSummary, "lblAssetNameSummary");
             this.lblAssetNameSummary.Name = "lblAssetNameSummary";
-            this.lblAssetNameSummary.Size = new System.Drawing.Size(1364, 31);
-            this.lblAssetNameSummary.TabIndex = 1;
-            this.lblAssetNameSummary.Text = "No Asset Selected";
+            // 
+            // btnSaveAssetInfo
+            // 
+            resources.ApplyResources(this.btnSaveAssetInfo, "btnSaveAssetInfo");
+            this.btnSaveAssetInfo.Name = "btnSaveAssetInfo";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // frm_fixed_asset_register
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 862);
             this.Controls.Add(this.mainPanel);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_fixed_asset_register";
-            this.Text = "Fixed Asset Register";
             this.Load += new System.EventHandler(this.frm_fixed_asset_register_Load);
-            this.mainPanel.ResumeLayout(false);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
@@ -496,6 +355,7 @@ namespace pos.FixedAssets
             this.pnlFilters.ResumeLayout(false);
             this.rightPanel.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
+            this.mainPanel.ResumeLayout(false);
             this.pnlSummaryCard.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -511,73 +371,73 @@ namespace pos.FixedAssets
             int lx = 6, cx = 160, w = 160, h = 24, gap = 32, y = 6;
 
             // Asset Code
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Asset Code:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Asset Code:", "رمز الأصل:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtAssetCode = new System.Windows.Forms.TextBox() { ReadOnly = true, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtAssetCode); y += gap;
 
             // Asset Name
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Asset Name:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Asset Name:", "اسم الأصل:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtAssetName = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtAssetName); y += gap;
 
             // Description
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Description:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Description:", "الوصف:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtDescription = new System.Windows.Forms.TextBox() { Multiline = true, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 52) };
             scroll.Controls.Add(this.txtDescription); y += 58;
 
             // Category
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Category:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Category:", "الفئة:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlAssetCategory = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlAssetCategory); y += gap;
 
             // Purchase Date
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Purchase Date:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Purchase Date:", "تاريخ الشراء:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.dtPurchaseDate = new System.Windows.Forms.DateTimePicker() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.dtPurchaseDate); y += gap;
 
             // Supplier
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Supplier:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Supplier:", "المورد:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlSupplier = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlSupplier); y += gap;
 
             // Invoice No
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Invoice No:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Invoice No:", "رقم الفاتورة:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtInvoiceNo = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtInvoiceNo); y += gap;
 
             // Purchase Cost
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Purchase Cost:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Purchase Cost:", "تكلفة الشراء:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtCost = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtCost); y += gap;
 
             // Location
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Location:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Location:", "الموقع:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlAssetLocation = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlAssetLocation); y += gap;
 
             // Cost Center
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Cost Center:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Cost Center:", "مركز التكلفة:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlAssetCostCenter = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlAssetCostCenter); y += gap;
 
             // Serial Number
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Serial Number:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Serial Number:", "الرقم التسلسلي:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtSerialNumber = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtSerialNumber); y += gap;
 
             // Model Number
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Model Number:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Model Number:", "رقم الموديل:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtModelNumber = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtModelNumber); y += gap;
 
             // Status (display-only; not editable)
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Status:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h), Visible = false });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Status:", "الحالة:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h), Visible = false });
             this.ddlAssetStatus = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h), Visible = false, Enabled = false };
             this.ddlAssetStatus.Items.AddRange(new object[] { "Active", "Under Repair", "Disposed", "Fully Depreciated" });
             scroll.Controls.Add(this.ddlAssetStatus); y += gap;
 
             // Save Asset Info button (inside Asset Info tab)
-            this.btnSaveAssetInfo = new System.Windows.Forms.Button() { Text = "Save Asset Info", Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
+            this.btnSaveAssetInfo = new System.Windows.Forms.Button() { Text = UiMessages.T("Save Asset Info", "حفظ معلومات الأصل"), Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
             scroll.Controls.Add(this.btnSaveAssetInfo);
 
             tab.Controls.Add(scroll);
@@ -593,49 +453,49 @@ namespace pos.FixedAssets
             int lx = 6, cx = 160, w = 160, h = 24, gap = 32, y = 6;
 
             // Depreciation Method
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Dep. Method:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Dep. Method:", "طريقة الاستهلاك:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDepMethod = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             this.ddlDepMethod.Items.AddRange(new object[] { "STRAIGHT_LINE", "REDUCING_BALANCE", "UNITS_OF_PRODUCTION", "NO_DEPRECIATION" });
             scroll.Controls.Add(this.ddlDepMethod); y += gap;
 
             // Useful Life Years
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Useful Life (Years):", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Useful Life (Years):", "العمر الإنتاجي (سنوات):"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.numUsefulLifeYears = new System.Windows.Forms.NumericUpDown() { Minimum = 0, Maximum = 100, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.numUsefulLifeYears); y += gap;
 
             // Useful Life Months
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Useful Life (Months):", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Useful Life (Months):", "العمر الإنتاجي (أشهر):"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.numUsefulLifeMonths = new System.Windows.Forms.NumericUpDown() { Minimum = 0, Maximum = 11, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.numUsefulLifeMonths); y += gap;
 
             // Residual Value
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Residual Value:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Residual Value:", "القيمة الباقية:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtResidualValue = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtResidualValue); y += gap;
 
             // Dep Rate
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Dep. Rate (%):", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Dep. Rate (%):", "معدل الاستهلاك (%):"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtDepRate = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtDepRate); y += gap;
 
             // Dep Account
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Dep. Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Dep. Account:", "حساب الاستهلاك:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDepAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlDepAccount); y += gap;
 
             // Accum Dep Account
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Accum. Dep. Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Accum. Dep. Account:", "حساب مجمع الاستهلاك:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlAccumDepAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlAccumDepAccount); y += gap;
 
             // Start Dep Date
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Start Dep. From:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Start Dep. From:", "بدء الاستهلاك من:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.dtStartDepreciationDate = new System.Windows.Forms.DateTimePicker() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.dtStartDepreciationDate); y += gap + 4;
 
             // Save Dep Setup button
             this.btnSaveDepSetup = new System.Windows.Forms.Button();
-            this.btnSaveDepSetup.Text = "Save Depreciation Setup";
+            this.btnSaveDepSetup.Text = UiMessages.T("Save Depreciation Setup", "حفظ إعدادات الاستهلاك");
             this.btnSaveDepSetup.Location = new System.Drawing.Point(cx, y);
             this.btnSaveDepSetup.Size = new System.Drawing.Size(160, 28);
             this.btnSaveDepSetup.BackColor = System.Drawing.Color.FromArgb(39, 174, 96);
@@ -644,7 +504,7 @@ namespace pos.FixedAssets
             scroll.Controls.Add(this.btnSaveDepSetup); y += 40;
 
             // Schedule label
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Depreciation Schedule Preview:", Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Depreciation Schedule Preview:", "معاينة جدول الاستهلاك:"), Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
             y += gap;
 
             // Schedule grid
@@ -674,7 +534,7 @@ namespace pos.FixedAssets
             pnlWDVDisplay.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
 
             this.lblCurrentWDV = new System.Windows.Forms.Label();
-            this.lblCurrentWDV.Text = "Current Book Value (WDV): PKR 0.00";
+            this.lblCurrentWDV.Text = UiMessages.T("Current Book Value (WDV): PKR 0.00", "القيمة الدفترية الحالية (WDV): درهم 0.00");
             this.lblCurrentWDV.Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
             this.lblCurrentWDV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurrentWDV.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -687,7 +547,7 @@ namespace pos.FixedAssets
             pnlButtons.Padding = new System.Windows.Forms.Padding(4);
 
             this.btnRunDepreciation = new System.Windows.Forms.Button();
-            this.btnRunDepreciation.Text = "Run Depreciation";
+            this.btnRunDepreciation.Text = UiMessages.T("Run Depreciation", "تشغيل الاستهلاك");
             this.btnRunDepreciation.Size = new System.Drawing.Size(150, 28);
             this.btnRunDepreciation.Location = new System.Drawing.Point(4, 4);
             pnlButtons.Controls.Add(this.btnRunDepreciation);
@@ -719,65 +579,65 @@ namespace pos.FixedAssets
             int lx = 6, cx = 160, w = 160, h = 24, gap = 32, y = 6;
 
             // --- DISPOSAL ---
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "── DISPOSAL ──", Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("── DISPOSAL ──", "── الاستبعاد ──"), Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
             y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Disposal Date:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Disposal Date:", "تاريخ الاستبعاد:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.dtDisposalDate = new System.Windows.Forms.DateTimePicker() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.dtDisposalDate); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Disposal Method:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Disposal Method:", "طريقة الاستبعاد:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDisposalMethod = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             this.ddlDisposalMethod.Items.AddRange(new object[] { "Sale", "Write-Off", "Donation", "Scrapped" });
             scroll.Controls.Add(this.ddlDisposalMethod); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Receipt Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Receipt Account:", "حساب التحصيل:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDisposalReceiptAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlDisposalReceiptAccount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Asset Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Asset Account:", "حساب الأصل:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDisposalAssetAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlDisposalAssetAccount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Gain Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Gain Account:", "حساب الأرباح:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDisposalGainAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlDisposalGainAccount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Loss Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Loss Account:", "حساب الخسائر:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlDisposalLossAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlDisposalLossAccount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Proceeds (PKR):", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Proceeds (PKR):", "العائد (درهم):"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtDisposalProceeds = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtDisposalProceeds); y += gap;
 
-            this.lblGainLossDisplay = new System.Windows.Forms.Label() { Text = "Gain / Loss: PKR 0.00", Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) };
+            this.lblGainLossDisplay = new System.Windows.Forms.Label() { Text = UiMessages.T("Gain / Loss: PKR 0.00", "الربح / الخسارة: درهم 0.00"), Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) };
             scroll.Controls.Add(this.lblGainLossDisplay); y += gap;
 
-            this.btnPostDisposal = new System.Windows.Forms.Button() { Text = "Post Disposal", Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
+            this.btnPostDisposal = new System.Windows.Forms.Button() { Text = UiMessages.T("Post Disposal", "تسجيل الاستبعاد"), Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
             scroll.Controls.Add(this.btnPostDisposal); y += 40;
 
             // --- REVALUATION ---
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "── REVALUATION ──", Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("── REVALUATION ──", "── إعادة التقييم ──"), Location = new System.Drawing.Point(lx, y), Size = new System.Drawing.Size(320, h), Font = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold) });
             y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Revaluation Date:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Revaluation Date:", "تاريخ إعادة التقييم:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.dtRevaluationDate = new System.Windows.Forms.DateTimePicker() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.dtRevaluationDate); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "New Revalued Amount:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("New Revalued Amount:", "المبلغ الجديد بعد إعادة التقييم:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.txtNewRevaluedAmount = new System.Windows.Forms.TextBox() { Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.txtNewRevaluedAmount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Asset Account:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Asset Account:", "حساب الأصل:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlRevaluationAssetAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlRevaluationAssetAccount); y += gap;
 
-            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = "Revaluation Reserve:", Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
+            scroll.Controls.Add(new System.Windows.Forms.Label() { Text = UiMessages.T("Revaluation Reserve:", "حساب احتياطي إعادة التقييم:"), Location = new System.Drawing.Point(lx, y + 3), Size = new System.Drawing.Size(148, h) });
             this.ddlRevaluationAccount = new System.Windows.Forms.ComboBox() { DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList, Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, h) };
             scroll.Controls.Add(this.ddlRevaluationAccount); y += gap;
 
-            this.btnPostRevaluation = new System.Windows.Forms.Button() { Text = "Post Revaluation", Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
+            this.btnPostRevaluation = new System.Windows.Forms.Button() { Text = UiMessages.T("Post Revaluation", "تسجيل إعادة التقييم"), Location = new System.Drawing.Point(cx, y), Size = new System.Drawing.Size(w, 28) };
             scroll.Controls.Add(this.btnPostRevaluation);
 
             tab.Controls.Add(scroll);
@@ -858,13 +718,6 @@ namespace pos.FixedAssets
         private System.Windows.Forms.Button btnPostRevaluation;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel leftPanel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.Panel pnlToolbar;
         private System.Windows.Forms.Panel pnlFilters;
         private System.Windows.Forms.Label lblCategory;
@@ -872,5 +725,12 @@ namespace pos.FixedAssets
         private System.Windows.Forms.Label lblLocation;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Panel rightPanel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

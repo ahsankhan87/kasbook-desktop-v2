@@ -1,3 +1,5 @@
+using pos.UI;
+
 namespace pos.Reports.Accounts
 {
     partial class FrmDailyCashBankReport
@@ -28,15 +30,16 @@ namespace pos.Reports.Accounts
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDailyCashBankReport));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlFilters = new System.Windows.Forms.Panel();
             this.gbMode = new System.Windows.Forms.GroupBox();
-            this.rbDateRange = new System.Windows.Forms.RadioButton();
             this.rbSingleDay = new System.Windows.Forms.RadioButton();
+            this.rbDateRange = new System.Windows.Forms.RadioButton();
             this.gbView = new System.Windows.Forms.GroupBox();
-            this.rbByAccount = new System.Windows.Forms.RadioButton();
             this.rbConsolidated = new System.Windows.Forms.RadioButton();
+            this.rbByAccount = new System.Windows.Forms.RadioButton();
             this.lblSingleDate = new System.Windows.Forms.Label();
             this.dtpSingleDate = new System.Windows.Forms.DateTimePicker();
             this.lblFromDate = new System.Windows.Forms.Label();
@@ -75,27 +78,20 @@ namespace pos.Reports.Accounts
             // 
             // pnlTop
             // 
+            resources.ApplyResources(this.pnlTop, "pnlTop");
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.pnlTop.Controls.Add(this.lblTitle);
-            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1200, 60);
-            this.pnlTop.TabIndex = 0;
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(15, 15);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(463, 30);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Daily Cash && Bank Opening/Closing Report";
             // 
             // pnlFilters
             // 
+            resources.ApplyResources(this.pnlFilters, "pnlFilters");
             this.pnlFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.pnlFilters.Controls.Add(this.gbMode);
             this.pnlFilters.Controls.Add(this.gbView);
@@ -108,175 +104,112 @@ namespace pos.Reports.Accounts
             this.pnlFilters.Controls.Add(this.btnLoad);
             this.pnlFilters.Controls.Add(this.btnPrint);
             this.pnlFilters.Controls.Add(this.btnExport);
-            this.pnlFilters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilters.Location = new System.Drawing.Point(0, 60);
             this.pnlFilters.Name = "pnlFilters";
-            this.pnlFilters.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlFilters.Size = new System.Drawing.Size(1200, 120);
-            this.pnlFilters.TabIndex = 1;
             // 
             // gbMode
             // 
+            resources.ApplyResources(this.gbMode, "gbMode");
             this.gbMode.Controls.Add(this.rbSingleDay);
             this.gbMode.Controls.Add(this.rbDateRange);
-            this.gbMode.Location = new System.Drawing.Point(15, 15);
             this.gbMode.Name = "gbMode";
-            this.gbMode.Size = new System.Drawing.Size(150, 90);
-            this.gbMode.TabIndex = 0;
             this.gbMode.TabStop = false;
-            this.gbMode.Text = "Mode";
             // 
             // rbSingleDay
             // 
-            this.rbSingleDay.AutoSize = true;
-            this.rbSingleDay.Location = new System.Drawing.Point(15, 25);
+            resources.ApplyResources(this.rbSingleDay, "rbSingleDay");
             this.rbSingleDay.Name = "rbSingleDay";
-            this.rbSingleDay.Size = new System.Drawing.Size(79, 19);
-            this.rbSingleDay.TabIndex = 0;
             this.rbSingleDay.TabStop = true;
-            this.rbSingleDay.Text = "Single Day";
             this.rbSingleDay.UseVisualStyleBackColor = true;
             // 
             // rbDateRange
             // 
-            this.rbDateRange.AutoSize = true;
-            this.rbDateRange.Location = new System.Drawing.Point(15, 55);
+            resources.ApplyResources(this.rbDateRange, "rbDateRange");
             this.rbDateRange.Name = "rbDateRange";
-            this.rbDateRange.Size = new System.Drawing.Size(86, 19);
-            this.rbDateRange.TabIndex = 1;
             this.rbDateRange.TabStop = true;
-            this.rbDateRange.Text = "Date Range";
             this.rbDateRange.UseVisualStyleBackColor = true;
             // 
             // gbView
             // 
+            resources.ApplyResources(this.gbView, "gbView");
             this.gbView.Controls.Add(this.rbConsolidated);
             this.gbView.Controls.Add(this.rbByAccount);
-            this.gbView.Location = new System.Drawing.Point(180, 15);
             this.gbView.Name = "gbView";
-            this.gbView.Size = new System.Drawing.Size(150, 90);
-            this.gbView.TabIndex = 1;
             this.gbView.TabStop = false;
-            this.gbView.Text = "View";
             // 
             // rbConsolidated
             // 
-            this.rbConsolidated.AutoSize = true;
-            this.rbConsolidated.Location = new System.Drawing.Point(15, 25);
+            resources.ApplyResources(this.rbConsolidated, "rbConsolidated");
             this.rbConsolidated.Name = "rbConsolidated";
-            this.rbConsolidated.Size = new System.Drawing.Size(96, 19);
-            this.rbConsolidated.TabIndex = 0;
             this.rbConsolidated.TabStop = true;
-            this.rbConsolidated.Text = "Consolidated";
             this.rbConsolidated.UseVisualStyleBackColor = true;
             // 
             // rbByAccount
             // 
-            this.rbByAccount.AutoSize = true;
-            this.rbByAccount.Location = new System.Drawing.Point(15, 55);
+            resources.ApplyResources(this.rbByAccount, "rbByAccount");
             this.rbByAccount.Name = "rbByAccount";
-            this.rbByAccount.Size = new System.Drawing.Size(85, 19);
-            this.rbByAccount.TabIndex = 1;
             this.rbByAccount.TabStop = true;
-            this.rbByAccount.Text = "By Account";
             this.rbByAccount.UseVisualStyleBackColor = true;
             // 
             // lblSingleDate
             // 
-            this.lblSingleDate.AutoSize = true;
-            this.lblSingleDate.Location = new System.Drawing.Point(350, 25);
+            resources.ApplyResources(this.lblSingleDate, "lblSingleDate");
             this.lblSingleDate.Name = "lblSingleDate";
-            this.lblSingleDate.Size = new System.Drawing.Size(34, 15);
-            this.lblSingleDate.TabIndex = 2;
-            this.lblSingleDate.Text = "Date:";
             // 
             // dtpSingleDate
             // 
+            resources.ApplyResources(this.dtpSingleDate, "dtpSingleDate");
             this.dtpSingleDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpSingleDate.Location = new System.Drawing.Point(350, 45);
             this.dtpSingleDate.Name = "dtpSingleDate";
-            this.dtpSingleDate.Size = new System.Drawing.Size(150, 23);
-            this.dtpSingleDate.TabIndex = 3;
             // 
             // lblFromDate
             // 
-            this.lblFromDate.AutoSize = true;
-            this.lblFromDate.Location = new System.Drawing.Point(350, 25);
+            resources.ApplyResources(this.lblFromDate, "lblFromDate");
             this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(38, 15);
-            this.lblFromDate.TabIndex = 4;
-            this.lblFromDate.Text = "From:";
-            this.lblFromDate.Visible = false;
             // 
             // dtpFromDate
             // 
+            resources.ApplyResources(this.dtpFromDate, "dtpFromDate");
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(350, 45);
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(150, 23);
-            this.dtpFromDate.TabIndex = 5;
-            this.dtpFromDate.Visible = false;
             // 
             // lblToDate
             // 
-            this.lblToDate.AutoSize = true;
-            this.lblToDate.Location = new System.Drawing.Point(520, 25);
+            resources.ApplyResources(this.lblToDate, "lblToDate");
             this.lblToDate.Name = "lblToDate";
-            this.lblToDate.Size = new System.Drawing.Size(22, 15);
-            this.lblToDate.TabIndex = 6;
-            this.lblToDate.Text = "To:";
-            this.lblToDate.Visible = false;
             // 
             // dtpToDate
             // 
+            resources.ApplyResources(this.dtpToDate, "dtpToDate");
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(520, 45);
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(150, 23);
-            this.dtpToDate.TabIndex = 7;
-            this.dtpToDate.Visible = false;
             // 
             // btnLoad
             // 
+            resources.ApplyResources(this.btnLoad, "btnLoad");
             this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoad.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnLoad.ForeColor = System.Drawing.Color.White;
-            this.btnLoad.Location = new System.Drawing.Point(700, 40);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(100, 32);
-            this.btnLoad.TabIndex = 8;
-            this.btnLoad.Text = "Load Report";
             this.btnLoad.UseVisualStyleBackColor = false;
             // 
             // btnPrint
             // 
+            resources.ApplyResources(this.btnPrint, "btnPrint");
             this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(820, 40);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(100, 32);
-            this.btnPrint.TabIndex = 9;
-            this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
             // btnExport
             // 
+            resources.ApplyResources(this.btnExport, "btnExport");
             this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(940, 40);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(100, 32);
-            this.btnExport.TabIndex = 10;
-            this.btnExport.Text = "Export CSV";
             this.btnExport.UseVisualStyleBackColor = false;
             // 
             // pnlVariance
             // 
+            resources.ApplyResources(this.pnlVariance, "pnlVariance");
             this.pnlVariance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.pnlVariance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlVariance.Controls.Add(this.lblVarianceTitle);
@@ -296,201 +229,116 @@ namespace pos.Reports.Accounts
             this.pnlVariance.Controls.Add(this.lblBankVariance);
             this.pnlVariance.Controls.Add(this.lblTotalVarianceLabel);
             this.pnlVariance.Controls.Add(this.lblTotalVariance);
-            this.pnlVariance.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlVariance.Location = new System.Drawing.Point(0, 600);
             this.pnlVariance.Name = "pnlVariance";
-            this.pnlVariance.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlVariance.Size = new System.Drawing.Size(1200, 120);
-            this.pnlVariance.TabIndex = 3;
             // 
             // lblVarianceTitle
             // 
-            this.lblVarianceTitle.AutoSize = true;
-            this.lblVarianceTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblVarianceTitle.Location = new System.Drawing.Point(15, 12);
+            resources.ApplyResources(this.lblVarianceTitle, "lblVarianceTitle");
             this.lblVarianceTitle.Name = "lblVarianceTitle";
-            this.lblVarianceTitle.Size = new System.Drawing.Size(210, 21);
-            this.lblVarianceTitle.TabIndex = 0;
-            this.lblVarianceTitle.Text = "Daily Tally (Variance Check)";
             // 
             // lblCashHeader
             // 
-            this.lblCashHeader.AutoSize = true;
-            this.lblCashHeader.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblCashHeader.Location = new System.Drawing.Point(15, 45);
+            resources.ApplyResources(this.lblCashHeader, "lblCashHeader");
             this.lblCashHeader.Name = "lblCashHeader";
-            this.lblCashHeader.Size = new System.Drawing.Size(42, 19);
-            this.lblCashHeader.TabIndex = 1;
-            this.lblCashHeader.Text = "Cash";
             // 
             // lblSystemCashLabel
             // 
-            this.lblSystemCashLabel.AutoSize = true;
-            this.lblSystemCashLabel.Location = new System.Drawing.Point(15, 75);
+            resources.ApplyResources(this.lblSystemCashLabel, "lblSystemCashLabel");
             this.lblSystemCashLabel.Name = "lblSystemCashLabel";
-            this.lblSystemCashLabel.Size = new System.Drawing.Size(100, 15);
-            this.lblSystemCashLabel.TabIndex = 2;
-            this.lblSystemCashLabel.Text = "System Closing:";
             // 
             // lblSystemCashClosing
             // 
-            this.lblSystemCashClosing.AutoSize = true;
-            this.lblSystemCashClosing.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.lblSystemCashClosing, "lblSystemCashClosing");
             this.lblSystemCashClosing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblSystemCashClosing.Location = new System.Drawing.Point(120, 73);
             this.lblSystemCashClosing.Name = "lblSystemCashClosing";
-            this.lblSystemCashClosing.Size = new System.Drawing.Size(38, 19);
-            this.lblSystemCashClosing.TabIndex = 3;
-            this.lblSystemCashClosing.Text = "0.00";
             // 
             // lblActualCashLabel
             // 
-            this.lblActualCashLabel.AutoSize = true;
-            this.lblActualCashLabel.Location = new System.Drawing.Point(200, 75);
+            resources.ApplyResources(this.lblActualCashLabel, "lblActualCashLabel");
             this.lblActualCashLabel.Name = "lblActualCashLabel";
-            this.lblActualCashLabel.Size = new System.Drawing.Size(45, 15);
-            this.lblActualCashLabel.TabIndex = 4;
-            this.lblActualCashLabel.Text = "Actual:";
             // 
             // txtActualCash
             // 
-            this.txtActualCash.Location = new System.Drawing.Point(250, 71);
+            resources.ApplyResources(this.txtActualCash, "txtActualCash");
             this.txtActualCash.Name = "txtActualCash";
-            this.txtActualCash.Size = new System.Drawing.Size(120, 23);
-            this.txtActualCash.TabIndex = 5;
             // 
             // lblCashVarianceLabel
             // 
-            this.lblCashVarianceLabel.AutoSize = true;
-            this.lblCashVarianceLabel.Location = new System.Drawing.Point(385, 75);
+            resources.ApplyResources(this.lblCashVarianceLabel, "lblCashVarianceLabel");
             this.lblCashVarianceLabel.Name = "lblCashVarianceLabel";
-            this.lblCashVarianceLabel.Size = new System.Drawing.Size(56, 15);
-            this.lblCashVarianceLabel.TabIndex = 6;
-            this.lblCashVarianceLabel.Text = "Variance:";
             // 
             // lblCashVariance
             // 
-            this.lblCashVariance.AutoSize = true;
-            this.lblCashVariance.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblCashVariance.Location = new System.Drawing.Point(445, 73);
+            resources.ApplyResources(this.lblCashVariance, "lblCashVariance");
             this.lblCashVariance.Name = "lblCashVariance";
-            this.lblCashVariance.Size = new System.Drawing.Size(38, 19);
-            this.lblCashVariance.TabIndex = 7;
-            this.lblCashVariance.Text = "0.00";
             // 
             // lblBankHeader
             // 
-            this.lblBankHeader.AutoSize = true;
-            this.lblBankHeader.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblBankHeader.Location = new System.Drawing.Point(550, 45);
+            resources.ApplyResources(this.lblBankHeader, "lblBankHeader");
             this.lblBankHeader.Name = "lblBankHeader";
-            this.lblBankHeader.Size = new System.Drawing.Size(42, 19);
-            this.lblBankHeader.TabIndex = 8;
-            this.lblBankHeader.Text = "Bank";
             // 
             // lblSystemBankLabel
             // 
-            this.lblSystemBankLabel.AutoSize = true;
-            this.lblSystemBankLabel.Location = new System.Drawing.Point(550, 75);
+            resources.ApplyResources(this.lblSystemBankLabel, "lblSystemBankLabel");
             this.lblSystemBankLabel.Name = "lblSystemBankLabel";
-            this.lblSystemBankLabel.Size = new System.Drawing.Size(100, 15);
-            this.lblSystemBankLabel.TabIndex = 9;
-            this.lblSystemBankLabel.Text = "System Closing:";
             // 
             // lblSystemBankClosing
             // 
-            this.lblSystemBankClosing.AutoSize = true;
-            this.lblSystemBankClosing.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.lblSystemBankClosing, "lblSystemBankClosing");
             this.lblSystemBankClosing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblSystemBankClosing.Location = new System.Drawing.Point(655, 73);
             this.lblSystemBankClosing.Name = "lblSystemBankClosing";
-            this.lblSystemBankClosing.Size = new System.Drawing.Size(38, 19);
-            this.lblSystemBankClosing.TabIndex = 10;
-            this.lblSystemBankClosing.Text = "0.00";
             // 
             // lblActualBankLabel
             // 
-            this.lblActualBankLabel.AutoSize = true;
-            this.lblActualBankLabel.Location = new System.Drawing.Point(720, 75);
+            resources.ApplyResources(this.lblActualBankLabel, "lblActualBankLabel");
             this.lblActualBankLabel.Name = "lblActualBankLabel";
-            this.lblActualBankLabel.Size = new System.Drawing.Size(45, 15);
-            this.lblActualBankLabel.TabIndex = 11;
-            this.lblActualBankLabel.Text = "Actual:";
             // 
             // txtActualBank
             // 
-            this.txtActualBank.Location = new System.Drawing.Point(770, 71);
+            resources.ApplyResources(this.txtActualBank, "txtActualBank");
             this.txtActualBank.Name = "txtActualBank";
-            this.txtActualBank.Size = new System.Drawing.Size(120, 23);
-            this.txtActualBank.TabIndex = 12;
             // 
             // lblBankVarianceLabel
             // 
-            this.lblBankVarianceLabel.AutoSize = true;
-            this.lblBankVarianceLabel.Location = new System.Drawing.Point(905, 75);
+            resources.ApplyResources(this.lblBankVarianceLabel, "lblBankVarianceLabel");
             this.lblBankVarianceLabel.Name = "lblBankVarianceLabel";
-            this.lblBankVarianceLabel.Size = new System.Drawing.Size(56, 15);
-            this.lblBankVarianceLabel.TabIndex = 13;
-            this.lblBankVarianceLabel.Text = "Variance:";
             // 
             // lblBankVariance
             // 
-            this.lblBankVariance.AutoSize = true;
-            this.lblBankVariance.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblBankVariance.Location = new System.Drawing.Point(965, 73);
+            resources.ApplyResources(this.lblBankVariance, "lblBankVariance");
             this.lblBankVariance.Name = "lblBankVariance";
-            this.lblBankVariance.Size = new System.Drawing.Size(38, 19);
-            this.lblBankVariance.TabIndex = 14;
-            this.lblBankVariance.Text = "0.00";
             // 
             // lblTotalVarianceLabel
             // 
-            this.lblTotalVarianceLabel.AutoSize = true;
-            this.lblTotalVarianceLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTotalVarianceLabel.Location = new System.Drawing.Point(1030, 45);
+            resources.ApplyResources(this.lblTotalVarianceLabel, "lblTotalVarianceLabel");
             this.lblTotalVarianceLabel.Name = "lblTotalVarianceLabel";
-            this.lblTotalVarianceLabel.Size = new System.Drawing.Size(112, 19);
-            this.lblTotalVarianceLabel.TabIndex = 15;
-            this.lblTotalVarianceLabel.Text = "Total Variance:";
             // 
             // lblTotalVariance
             // 
-            this.lblTotalVariance.AutoSize = true;
-            this.lblTotalVariance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotalVariance.Location = new System.Drawing.Point(1030, 73);
+            resources.ApplyResources(this.lblTotalVariance, "lblTotalVariance");
             this.lblTotalVariance.Name = "lblTotalVariance";
-            this.lblTotalVariance.Size = new System.Drawing.Size(44, 21);
-            this.lblTotalVariance.TabIndex = 16;
-            this.lblTotalVariance.Text = "0.00";
             // 
             // dgvReport
             // 
+            resources.ApplyResources(this.dgvReport, "dgvReport");
             this.dgvReport.AllowUserToAddRows = false;
             this.dgvReport.AllowUserToDeleteRows = false;
             this.dgvReport.BackgroundColor = System.Drawing.Color.White;
             this.dgvReport.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvReport.Location = new System.Drawing.Point(0, 180);
             this.dgvReport.Name = "dgvReport";
             this.dgvReport.ReadOnly = true;
             this.dgvReport.RowTemplate.Height = 25;
-            this.dgvReport.Size = new System.Drawing.Size(1200, 420);
-            this.dgvReport.TabIndex = 2;
             // 
             // FrmDailyCashBankReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 720);
             this.Controls.Add(this.dgvReport);
             this.Controls.Add(this.pnlVariance);
             this.Controls.Add(this.pnlFilters);
             this.Controls.Add(this.pnlTop);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Name = "FrmDailyCashBankReport";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Daily Cash & Bank Report";
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlFilters.ResumeLayout(false);

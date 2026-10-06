@@ -117,37 +117,97 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="treeReport.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="lblPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>بيان الدخل (الأرباح والخسائر)</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 15</value>
   </data>
   <data name="lblPeriod.Text" xml:space="preserve">
     <value>الفترة:</value>
   </data>
+  <data name="cmbPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 12</value>
+  </data>
+  <data name="lblFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>415, 16</value>
+  </data>
   <data name="lblFrom.Text" xml:space="preserve">
     <value>من</value>
+  </data>
+  <data name="dtpFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 14</value>
+  </data>
+  <data name="lblTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>572, 16</value>
   </data>
   <data name="lblTo.Text" xml:space="preserve">
     <value>إلى</value>
   </data>
+  <data name="dtpTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>474, 15</value>
+  </data>
+  <data name="chkShowComparison.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 43</value>
+  </data>
+  <data name="chkShowComparison.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 21</value>
+  </data>
+  <data name="chkShowComparison.Text" xml:space="preserve">
+    <value>مقارنة مع الفترة السابقة</value>
+  </data>
+  <data name="lblDetailLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblDetailLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>785, 16</value>
+  </data>
   <data name="lblDetailLevel.Text" xml:space="preserve">
     <value>عرض التفاصيل:</value>
+  </data>
+  <data name="cmbDetailLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbDetailLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>604, 14</value>
+  </data>
+  <data name="lblCostCenter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblCostCenter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1027, 16</value>
   </data>
   <data name="lblCostCenter.Text" xml:space="preserve">
     <value>مركز التكلفة:</value>
   </data>
-  <data name="chkShowComparison.Text" xml:space="preserve">
-    <value>مقارنة مع الفترة السابقة</value>
+  <data name="cmbCostCenter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbCostCenter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>891, 15</value>
+  </data>
+  <data name="chkShowPercentage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="chkShowPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 21</value>
   </data>
   <data name="chkShowPercentage.Text" xml:space="preserve">
     <value>عرض نسبة من الدخل</value>
@@ -167,6 +227,12 @@
   <data name="btnEmail.Text" xml:space="preserve">
     <value>البريد الإلكتروني</value>
   </data>
+  <data name="lblColAccount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblColAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1192, 3</value>
+  </data>
   <data name="lblColAccount.Text" xml:space="preserve">
     <value>الحساب / المجموعة</value>
   </data>
@@ -181,5 +247,18 @@
   </data>
   <data name="lblColVariance.Text" xml:space="preserve">
     <value>الفارق</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="treeReport.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>بيان الدخل (الأرباح والخسائر)</value>
   </data>
 </root>

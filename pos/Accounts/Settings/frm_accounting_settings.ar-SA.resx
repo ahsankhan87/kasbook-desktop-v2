@@ -118,14 +118,152 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnTestAutoPostingRules.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1121, 588</value>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 28</value>
   </data>
-  <data name="btnTestAutoPostingRules.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 33</value>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>إعدادات المحاسبة (إداري)</value>
+  </data>
+  <data name="tabCompany.Text" xml:space="preserve">
+    <value>الشركة والسنة المالية</value>
+  </data>
+  <data name="groupCompanyHeader.Text" xml:space="preserve">
+    <value>ملف الشركة</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 27</value>
+  </data>
+  <data name="chk_use_zatca_e_invoice.Text" xml:space="preserve">
+    <value>تفعيل الفواتير الإلكترونية (ZATCA)</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>عنوان بريدي</value>
+  </data>
+  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 23</value>
+  </data>
+  <data name="label22.Text" xml:space="preserve">
+    <value>اسم الشارع</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 23</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>رقم المبنى</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 23</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>اسم قسم المدينة</value>
+  </data>
+  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 23</value>
+  </data>
+  <data name="label25.Text" xml:space="preserve">
+    <value>اسم المدينة</value>
+  </data>
+  <data name="label26.Text" xml:space="preserve">
+    <value>الرمز البريدي</value>
+  </data>
+  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 23</value>
+  </data>
+  <data name="label27.Text" xml:space="preserve">
+    <value>الدولة</value>
+  </data>
+  <data name="lblCurrencyLockNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 23</value>
+  </data>
+  <data name="lblCurrencyLockNote.Text" xml:space="preserve">
+    <value>ملاحظة:</value>
+  </data>
+  <data name="btnBrowseLogo.Text" xml:space="preserve">
+    <value>استعراض</value>
+  </data>
+  <data name="lblCountry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 23</value>
+  </data>
+  <data name="lblCountry.Text" xml:space="preserve">
+    <value>الدولة</value>
+  </data>
+  <data name="lblBaseCurrency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="lblBaseCurrency.Text" xml:space="preserve">
+    <value>العملة الأساسية</value>
+  </data>
+  <data name="lblFyEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 23</value>
+  </data>
+  <data name="lblFyEnd.Text" xml:space="preserve">
+    <value>نهاية السنة المالية</value>
+  </data>
+  <data name="lblFyStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 23</value>
+  </data>
+  <data name="lblFyStart.Text" xml:space="preserve">
+    <value>بداية السنة المالية</value>
+  </data>
+  <data name="lblWebsite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 23</value>
+  </data>
+  <data name="lblWebsite.Text" xml:space="preserve">
+    <value>الموقع الإلكتروني</value>
+  </data>
+  <data name="lblEmail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
+  </data>
+  <data name="lblEmail.Text" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="lblPhone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 23</value>
+  </data>
+  <data name="lblPhone.Text" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="lblAddress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 23</value>
+  </data>
+  <data name="lblAddress.Text" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="lblNtnVat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 23</value>
+  </data>
+  <data name="lblNtnVat.Text" xml:space="preserve">
+    <value>رقم NTN/VAT</value>
+  </data>
+  <data name="lblRegistration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 23</value>
+  </data>
+  <data name="lblRegistration.Text" xml:space="preserve">
+    <value>رقم التسجيل</value>
+  </data>
+  <data name="lblLegalName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 23</value>
+  </data>
+  <data name="lblLegalName.Text" xml:space="preserve">
+    <value>الاسم القانوني</value>
+  </data>
+  <data name="lblCompanyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="lblCompanyName.Text" xml:space="preserve">
+    <value>اسم الشركة</value>
+  </data>
+  <data name="tabDefaults.Text" xml:space="preserve">
+    <value>الحسابات الافتراضية</value>
+  </data>
+  <data name="btnTestAutoPostingRules.Text" xml:space="preserve">
+    <value>اختبار قواعد الترحيل التلقائي</value>
   </data>
   <data name="lblSalesAr.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 0</value>
+  </data>
+  <data name="lblSalesAr.Text" xml:space="preserve">
+    <value>حساب الذمة المدينة</value>
   </data>
   <data name="cmbSalesAr.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 3</value>
@@ -133,11 +271,17 @@
   <data name="lblSalesRevenue.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 0</value>
   </data>
+  <data name="lblSalesRevenue.Text" xml:space="preserve">
+    <value>إيرادات المبيعات</value>
+  </data>
   <data name="cmbSalesRevenue.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="lblSalesTaxOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 40</value>
+  </data>
+  <data name="lblSalesTaxOutput.Text" xml:space="preserve">
+    <value>ضريبة المبيعات الإخراج</value>
   </data>
   <data name="cmbSalesTaxOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 43</value>
@@ -145,11 +289,17 @@
   <data name="lblPurchaseAp.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 40</value>
   </data>
+  <data name="lblPurchaseAp.Text" xml:space="preserve">
+    <value>حساب الذمة الدائنة</value>
+  </data>
   <data name="cmbPurchaseAp.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 43</value>
   </data>
   <data name="lblPurchaseCogs.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 80</value>
+  </data>
+  <data name="lblPurchaseCogs.Text" xml:space="preserve">
+    <value>تكلفة البضائع المباعة/الشراء</value>
   </data>
   <data name="cmbPurchaseCogs.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 83</value>
@@ -157,11 +307,17 @@
   <data name="lblPurchaseTaxInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 80</value>
   </data>
+  <data name="lblPurchaseTaxInput.Text" xml:space="preserve">
+    <value>ضريبة الشراء الإدخال</value>
+  </data>
   <data name="cmbPurchaseTaxInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 83</value>
   </data>
   <data name="lblDefaultExpense.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 120</value>
+  </data>
+  <data name="lblDefaultExpense.Text" xml:space="preserve">
+    <value>مصروف افتراضي</value>
   </data>
   <data name="cmbDefaultExpense.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 123</value>
@@ -169,11 +325,17 @@
   <data name="lblDefaultCash.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 120</value>
   </data>
+  <data name="lblDefaultCash.Text" xml:space="preserve">
+    <value>نقدية افتراضية</value>
+  </data>
   <data name="cmbDefaultCash.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 123</value>
   </data>
   <data name="lblDefaultBank.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 160</value>
+  </data>
+  <data name="lblDefaultBank.Text" xml:space="preserve">
+    <value>بنك افتراضي</value>
   </data>
   <data name="cmbDefaultBank.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 163</value>
@@ -181,11 +343,17 @@
   <data name="lblSalaryExpense.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 160</value>
   </data>
+  <data name="lblSalaryExpense.Text" xml:space="preserve">
+    <value>مصروف الرواتب</value>
+  </data>
   <data name="cmbSalaryExpense.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 163</value>
   </data>
   <data name="lblSalaryPayable.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 200</value>
+  </data>
+  <data name="lblSalaryPayable.Text" xml:space="preserve">
+    <value>رواتب مستحقة</value>
   </data>
   <data name="cmbSalaryPayable.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 203</value>
@@ -193,11 +361,17 @@
   <data name="lblInventoryAsset.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 200</value>
   </data>
+  <data name="lblInventoryAsset.Text" xml:space="preserve">
+    <value>أصل المخزون</value>
+  </data>
   <data name="cmbInventoryAsset.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 203</value>
   </data>
   <data name="lblInventoryCogs.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 240</value>
+  </data>
+  <data name="lblInventoryCogs.Text" xml:space="preserve">
+    <value>تكلفة مبيعات المخزون</value>
   </data>
   <data name="cmbInventoryCogs.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 243</value>
@@ -205,11 +379,17 @@
   <data name="lblInventoryAdjustment.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 240</value>
   </data>
+  <data name="lblInventoryAdjustment.Text" xml:space="preserve">
+    <value>تسوية المخزون</value>
+  </data>
   <data name="cmbInventoryAdjustment.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 243</value>
   </data>
   <data name="lblFaAsset.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 280</value>
+  </data>
+  <data name="lblFaAsset.Text" xml:space="preserve">
+    <value>أصل ثابت</value>
   </data>
   <data name="cmbFaAsset.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 283</value>
@@ -217,11 +397,17 @@
   <data name="lblFaAccumDep.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 280</value>
   </data>
+  <data name="lblFaAccumDep.Text" xml:space="preserve">
+    <value>الاستهلاك المتراكم</value>
+  </data>
   <data name="cmbFaAccumDep.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 283</value>
   </data>
   <data name="lblFaDepExpense.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 320</value>
+  </data>
+  <data name="lblFaDepExpense.Text" xml:space="preserve">
+    <value>مصروف الاستهلاك</value>
   </data>
   <data name="cmbFaDepExpense.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 323</value>
@@ -229,11 +415,17 @@
   <data name="lblInterBranchRec.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 320</value>
   </data>
+  <data name="lblInterBranchRec.Text" xml:space="preserve">
+    <value>ذمة بين الفروع</value>
+  </data>
   <data name="cmbInterBranchRec.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 323</value>
   </data>
   <data name="lblInterBranchPay.Location" type="System.Drawing.Point, System.Drawing">
     <value>1139, 360</value>
+  </data>
+  <data name="lblInterBranchPay.Text" xml:space="preserve">
+    <value>دين بين الفروع</value>
   </data>
   <data name="cmbInterBranchPay.Location" type="System.Drawing.Point, System.Drawing">
     <value>681, 363</value>
@@ -241,30 +433,144 @@
   <data name="lblOpeningEquity.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 360</value>
   </data>
+  <data name="lblOpeningEquity.Text" xml:space="preserve">
+    <value>حقوق الملكية الافتتاحية</value>
+  </data>
   <data name="cmbOpeningEquity.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 363</value>
   </data>
-  <data name="chkRequireNarration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 118</value>
+  <data name="tabVoucher.Text" xml:space="preserve">
+    <value>ترقيم القسائم</value>
   </data>
-  <data name="chkAllowLockedPeriodPosting.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 88</value>
+  <data name="tabTax.Text" xml:space="preserve">
+    <value>إعدادات الضريبة</value>
   </data>
-  <data name="chkAutoPostPurchases.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 58</value>
+  <data name="groupTaxTop.Text" xml:space="preserve">
+    <value>إعدادات الضريبة / FBR-ZATCA</value>
   </data>
-  <data name="chkAutoPostSales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 28</value>
+  <data name="lblFilingFrequency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabMain.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblFilingFrequency.Text" xml:space="preserve">
+    <value>تكرار الملف</value>
+  </data>
+  <data name="lblTaxMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="lblTaxMode.Text" xml:space="preserve">
+    <value>وضع الضريبة الافتراضي</value>
+  </data>
+  <data name="lblSalesTaxRate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 23</value>
+  </data>
+  <data name="lblSalesTaxRate.Text" xml:space="preserve">
+    <value>نسبة ضريبة المبيعات الافتراضية %</value>
+  </data>
+  <data name="tabPosting.Text" xml:space="preserve">
+    <value>قواعد الترحيل</value>
+  </data>
+  <data name="groupPosting.Text" xml:space="preserve">
+    <value>قواعد الترحيل/التحكم</value>
+  </data>
+  <data name="chkRequireNarration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 27</value>
+  </data>
+  <data name="chkRequireNarration.Text" xml:space="preserve">
+    <value>طلب شرح في قيود اليومية</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 27</value>
+  </data>
+  <data name="chkAllowLockedPeriodPosting.Text" xml:space="preserve">
+    <value>السماح بالترحيل إلى فترات مقفلة (إداري)</value>
+  </data>
+  <data name="chkAutoPostPurchases.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 27</value>
+  </data>
+  <data name="chkAutoPostPurchases.Text" xml:space="preserve">
+    <value>ترحيل فواتير الشراء تلقائياً</value>
+  </data>
+  <data name="chkAutoPostSales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 27</value>
+  </data>
+  <data name="chkAutoPostSales.Text" xml:space="preserve">
+    <value>ترحيل الفواتير المباع تلقائياً</value>
+  </data>
+  <data name="lblApprovalThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 23</value>
+  </data>
+  <data name="lblApprovalThreshold.Text" xml:space="preserve">
+    <value>حد التوقيع</value>
+  </data>
+  <data name="lblBackdatingDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
+  </data>
+  <data name="lblBackdatingDays.Text" xml:space="preserve">
+    <value>الحد الأقصى لأيام التأخير</value>
+  </data>
+  <data name="lblBudgetWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 23</value>
+  </data>
+  <data name="lblBudgetWarning.Text" xml:space="preserve">
+    <value>عتبة تحذير الميزانية %</value>
+  </data>
+  <data name="tabReports.Text" xml:space="preserve">
+    <value>إعدادات التقارير</value>
+  </data>
+  <data name="groupReports.Text" xml:space="preserve">
+    <value>عرض التقارير</value>
+  </data>
+  <data name="lblDigitalSignature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 23</value>
+  </data>
+  <data name="lblDigitalSignature.Text" xml:space="preserve">
+    <value>عنصر نائب للتوقيع الرقمي</value>
+  </data>
+  <data name="lblReportFooter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 23</value>
+  </data>
+  <data name="lblReportFooter.Text" xml:space="preserve">
+    <value>تذييل التقرير</value>
+  </data>
+  <data name="lblReportHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 23</value>
+  </data>
+  <data name="lblReportHeader.Text" xml:space="preserve">
+    <value>رأس التقرير</value>
+  </data>
+  <data name="lblShowAmountsIn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 23</value>
+  </data>
+  <data name="lblShowAmountsIn.Text" xml:space="preserve">
+    <value>إظهار المبالغ في</value>
+  </data>
+  <data name="lblDateFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
+  </data>
+  <data name="lblDateFormat.Text" xml:space="preserve">
+    <value>تنسيق التاريخ</value>
+  </data>
+  <data name="lblAmountFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="lblAmountFormat.Text" xml:space="preserve">
+    <value>تنسيق المبلغ</value>
+  </data>
+  <data name="btnResetDefaults.Text" xml:space="preserve">
+    <value>إعادة تعيين الإعدادات الافتراضية</value>
+  </data>
+  <data name="btnSaveSettings.Text" xml:space="preserve">
+    <value>حفظ الإعدادات</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>إعدادات المحاسبة</value>
   </data>
 </root>

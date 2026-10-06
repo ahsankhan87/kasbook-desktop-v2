@@ -14,17 +14,18 @@ namespace pos.Inventory
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_inventory_valuation));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.lblFormTitle = new System.Windows.Forms.Label();
@@ -66,6 +67,7 @@ namespace pos.Inventory
             this.cmbSupplier = new System.Windows.Forms.ComboBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.cmbLocation = new System.Windows.Forms.ComboBox();
+            this.chkShowNegativeStock = new System.Windows.Forms.CheckBox();
             this.chkShowZero = new System.Windows.Forms.CheckBox();
             this.btnCalculate = new System.Windows.Forms.Button();
             this.btnSnapshot = new System.Windows.Forms.Button();
@@ -97,7 +99,6 @@ namespace pos.Inventory
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.btnCalcCogs = new System.Windows.Forms.Button();
             this.btnPostCogs = new System.Windows.Forms.Button();
-            this.chkShowNegativeStock = new System.Windows.Forms.CheckBox();
             this.panelHeader.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabValuation.SuspendLayout();
@@ -117,74 +118,49 @@ namespace pos.Inventory
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(212)))));
             this.panelHeader.Controls.Add(this.btnSettings);
             this.panelHeader.Controls.Add(this.lblFormTitle);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panelHeader, "panelHeader");
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1220, 50);
-            this.panelHeader.TabIndex = 1;
             // 
             // btnSettings
             // 
-            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnSettings, "btnSettings");
             this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSettings.ForeColor = System.Drawing.Color.White;
-            this.btnSettings.Location = new System.Drawing.Point(2110, 10);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(110, 30);
-            this.btnSettings.TabIndex = 0;
-            this.btnSettings.Text = "⚙ Settings";
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // lblFormTitle
             // 
-            this.lblFormTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFormTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 13F);
+            resources.ApplyResources(this.lblFormTitle, "lblFormTitle");
             this.lblFormTitle.ForeColor = System.Drawing.Color.White;
-            this.lblFormTitle.Location = new System.Drawing.Point(0, 0);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.lblFormTitle.Size = new System.Drawing.Size(1220, 50);
-            this.lblFormTitle.TabIndex = 1;
-            this.lblFormTitle.Text = "Inventory Valuation & COGS";
-            this.lblFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabMain
             // 
             this.tabMain.Controls.Add(this.tabValuation);
             this.tabMain.Controls.Add(this.tabCogs);
-            this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMain.Location = new System.Drawing.Point(0, 50);
+            resources.ApplyResources(this.tabMain, "tabMain");
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1220, 726);
-            this.tabMain.TabIndex = 0;
             // 
             // tabValuation
             // 
             this.tabValuation.Controls.Add(this.panelValBody);
             this.tabValuation.Controls.Add(this.panelSummary);
             this.tabValuation.Controls.Add(this.panelFilters);
-            this.tabValuation.Location = new System.Drawing.Point(4, 25);
+            resources.ApplyResources(this.tabValuation, "tabValuation");
             this.tabValuation.Name = "tabValuation";
-            this.tabValuation.Size = new System.Drawing.Size(1212, 697);
-            this.tabValuation.TabIndex = 0;
-            this.tabValuation.Text = "  Inventory Valuation  ";
             // 
             // panelValBody
             // 
             this.panelValBody.Controls.Add(this.gridValuation);
-            this.panelValBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelValBody.Location = new System.Drawing.Point(0, 52);
+            resources.ApplyResources(this.panelValBody, "panelValBody");
             this.panelValBody.Name = "panelValBody";
-            this.panelValBody.Size = new System.Drawing.Size(1212, 441);
-            this.panelValBody.TabIndex = 0;
             // 
             // gridValuation
             // 
             this.gridValuation.AllowUserToAddRows = false;
-            this.gridValuation.ColumnHeadersHeight = 29;
+            resources.ApplyResources(this.gridValuation, "gridValuation");
             this.gridValuation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCode,
             this.colName,
@@ -196,107 +172,82 @@ namespace pos.Inventory
             this.colLastPurchCost,
             this.colReorderLevel,
             this.colStatus});
-            this.gridValuation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridValuation.Location = new System.Drawing.Point(0, 0);
             this.gridValuation.MultiSelect = false;
             this.gridValuation.Name = "gridValuation";
             this.gridValuation.ReadOnly = true;
             this.gridValuation.RowHeadersVisible = false;
-            this.gridValuation.RowHeadersWidth = 51;
             this.gridValuation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridValuation.Size = new System.Drawing.Size(1212, 441);
-            this.gridValuation.TabIndex = 0;
             this.gridValuation.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridValuation_CellFormatting);
             // 
             // colCode
             // 
-            this.colCode.HeaderText = "Code";
-            this.colCode.MinimumWidth = 6;
+            resources.ApplyResources(this.colCode, "colCode");
             this.colCode.Name = "colCode";
             this.colCode.ReadOnly = true;
-            this.colCode.Width = 90;
             // 
             // colName
             // 
-            this.colName.HeaderText = "Product Name";
-            this.colName.MinimumWidth = 6;
+            resources.ApplyResources(this.colName, "colName");
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
-            this.colName.Width = 220;
             // 
             // colCategory
             // 
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.MinimumWidth = 6;
+            resources.ApplyResources(this.colCategory, "colCategory");
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 110;
             // 
             // colQty
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colQty.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colQty.HeaderText = "Qty on Hand";
-            this.colQty.MinimumWidth = 6;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colQty.DefaultCellStyle = dataGridViewCellStyle34;
+            resources.ApplyResources(this.colQty, "colQty");
             this.colQty.Name = "colQty";
             this.colQty.ReadOnly = true;
-            this.colQty.Width = 90;
             // 
             // colUnitCost
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colUnitCost.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colUnitCost.HeaderText = "Unit Cost";
-            this.colUnitCost.MinimumWidth = 6;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colUnitCost.DefaultCellStyle = dataGridViewCellStyle35;
+            resources.ApplyResources(this.colUnitCost, "colUnitCost");
             this.colUnitCost.Name = "colUnitCost";
             this.colUnitCost.ReadOnly = true;
-            this.colUnitCost.Width = 125;
             // 
             // colTotalValue
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colTotalValue.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colTotalValue.HeaderText = "Total Value";
-            this.colTotalValue.MinimumWidth = 6;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colTotalValue.DefaultCellStyle = dataGridViewCellStyle36;
+            resources.ApplyResources(this.colTotalValue, "colTotalValue");
             this.colTotalValue.Name = "colTotalValue";
             this.colTotalValue.ReadOnly = true;
-            this.colTotalValue.Width = 120;
             // 
             // colLastPurchDate
             // 
-            this.colLastPurchDate.HeaderText = "Last Purchase";
-            this.colLastPurchDate.MinimumWidth = 6;
+            resources.ApplyResources(this.colLastPurchDate, "colLastPurchDate");
             this.colLastPurchDate.Name = "colLastPurchDate";
             this.colLastPurchDate.ReadOnly = true;
-            this.colLastPurchDate.Width = 125;
             // 
             // colLastPurchCost
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colLastPurchCost.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colLastPurchCost.HeaderText = "Last P. Cost";
-            this.colLastPurchCost.MinimumWidth = 6;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colLastPurchCost.DefaultCellStyle = dataGridViewCellStyle37;
+            resources.ApplyResources(this.colLastPurchCost, "colLastPurchCost");
             this.colLastPurchCost.Name = "colLastPurchCost";
             this.colLastPurchCost.ReadOnly = true;
-            this.colLastPurchCost.Width = 90;
             // 
             // colReorderLevel
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colReorderLevel.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colReorderLevel.HeaderText = "Reorder Lvl";
-            this.colReorderLevel.MinimumWidth = 6;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colReorderLevel.DefaultCellStyle = dataGridViewCellStyle38;
+            resources.ApplyResources(this.colReorderLevel, "colReorderLevel");
             this.colReorderLevel.Name = "colReorderLevel";
             this.colReorderLevel.ReadOnly = true;
-            this.colReorderLevel.Width = 90;
             // 
             // colStatus
             // 
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 6;
+            resources.ApplyResources(this.colStatus, "colStatus");
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 110;
             // 
             // panelSummary
             // 
@@ -314,140 +265,75 @@ namespace pos.Inventory
             this.panelSummary.Controls.Add(this.lblChartTitle);
             this.panelSummary.Controls.Add(this.panelChartSuppliers);
             this.panelSummary.Controls.Add(this.lblChartSupplierTitle);
-            this.panelSummary.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSummary.Location = new System.Drawing.Point(0, 493);
+            resources.ApplyResources(this.panelSummary, "panelSummary");
             this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(1212, 204);
-            this.panelSummary.TabIndex = 1;
             // 
             // lblTotalValue
             // 
-            this.lblTotalValue.AutoSize = true;
-            this.lblTotalValue.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalValue.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.lblTotalValue, "lblTotalValue");
             this.lblTotalValue.Name = "lblTotalValue";
-            this.lblTotalValue.Size = new System.Drawing.Size(190, 20);
-            this.lblTotalValue.TabIndex = 0;
-            this.lblTotalValue.Text = "Total Inventory Value (PKR):";
             // 
             // lblTotalValueVal
             // 
-            this.lblTotalValueVal.AutoSize = true;
-            this.lblTotalValueVal.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.lblTotalValueVal, "lblTotalValueVal");
             this.lblTotalValueVal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(212)))));
-            this.lblTotalValueVal.Location = new System.Drawing.Point(12, 30);
             this.lblTotalValueVal.Name = "lblTotalValueVal";
-            this.lblTotalValueVal.Size = new System.Drawing.Size(76, 41);
-            this.lblTotalValueVal.TabIndex = 1;
-            this.lblTotalValueVal.Text = "0.00";
             // 
             // lblTotalSku
             // 
-            this.lblTotalSku.AutoSize = true;
-            this.lblTotalSku.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalSku.Location = new System.Drawing.Point(200, 12);
+            resources.ApplyResources(this.lblTotalSku, "lblTotalSku");
             this.lblTotalSku.Name = "lblTotalSku";
-            this.lblTotalSku.Size = new System.Drawing.Size(82, 20);
-            this.lblTotalSku.TabIndex = 2;
-            this.lblTotalSku.Text = "Total SKUs:";
             // 
             // lblTotalSkuVal
             // 
-            this.lblTotalSkuVal.AutoSize = true;
-            this.lblTotalSkuVal.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTotalSkuVal.Location = new System.Drawing.Point(200, 30);
+            resources.ApplyResources(this.lblTotalSkuVal, "lblTotalSkuVal");
             this.lblTotalSkuVal.Name = "lblTotalSkuVal";
-            this.lblTotalSkuVal.Size = new System.Drawing.Size(35, 41);
-            this.lblTotalSkuVal.TabIndex = 3;
-            this.lblTotalSkuVal.Text = "0";
             // 
             // lblTotalQty
             // 
-            this.lblTotalQty.AutoSize = true;
-            this.lblTotalQty.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalQty.Location = new System.Drawing.Point(340, 12);
+            resources.ApplyResources(this.lblTotalQty, "lblTotalQty");
             this.lblTotalQty.Name = "lblTotalQty";
-            this.lblTotalQty.Size = new System.Drawing.Size(72, 20);
-            this.lblTotalQty.TabIndex = 4;
-            this.lblTotalQty.Text = "Total Qty:";
             // 
             // lblTotalQtyVal
             // 
-            this.lblTotalQtyVal.AutoSize = true;
-            this.lblTotalQtyVal.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTotalQtyVal.Location = new System.Drawing.Point(340, 30);
+            resources.ApplyResources(this.lblTotalQtyVal, "lblTotalQtyVal");
             this.lblTotalQtyVal.Name = "lblTotalQtyVal";
-            this.lblTotalQtyVal.Size = new System.Drawing.Size(35, 41);
-            this.lblTotalQtyVal.TabIndex = 5;
-            this.lblTotalQtyVal.Text = "0";
             // 
             // lblAvgCost
             // 
-            this.lblAvgCost.AutoSize = true;
-            this.lblAvgCost.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblAvgCost.Location = new System.Drawing.Point(480, 12);
+            resources.ApplyResources(this.lblAvgCost, "lblAvgCost");
             this.lblAvgCost.Name = "lblAvgCost";
-            this.lblAvgCost.Size = new System.Drawing.Size(104, 20);
-            this.lblAvgCost.TabIndex = 6;
-            this.lblAvgCost.Text = "Avg Cost/Unit:";
             // 
             // lblAvgCostVal
             // 
-            this.lblAvgCostVal.AutoSize = true;
-            this.lblAvgCostVal.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.lblAvgCostVal.Location = new System.Drawing.Point(480, 30);
+            resources.ApplyResources(this.lblAvgCostVal, "lblAvgCostVal");
             this.lblAvgCostVal.Name = "lblAvgCostVal";
-            this.lblAvgCostVal.Size = new System.Drawing.Size(76, 41);
-            this.lblAvgCostVal.TabIndex = 7;
-            this.lblAvgCostVal.Text = "0.00";
             // 
             // panelChart
             // 
-            this.panelChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panelChart, "panelChart");
             this.panelChart.BackColor = System.Drawing.Color.White;
             this.panelChart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChart.Location = new System.Drawing.Point(630, 15);
             this.panelChart.Name = "panelChart";
-            this.panelChart.Size = new System.Drawing.Size(280, 184);
-            this.panelChart.TabIndex = 8;
             this.panelChart.Paint += new System.Windows.Forms.PaintEventHandler(this.panelChart_Paint);
             // 
             // lblChartTitle
             // 
-            this.lblChartTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblChartTitle.AutoSize = true;
-            this.lblChartTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.lblChartTitle.Location = new System.Drawing.Point(655, -1);
+            resources.ApplyResources(this.lblChartTitle, "lblChartTitle");
             this.lblChartTitle.Name = "lblChartTitle";
-            this.lblChartTitle.Size = new System.Drawing.Size(185, 20);
-            this.lblChartTitle.TabIndex = 9;
-            this.lblChartTitle.Text = "Top 5 Categories by Value";
             // 
             // panelChartSuppliers
             // 
-            this.panelChartSuppliers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.panelChartSuppliers, "panelChartSuppliers");
             this.panelChartSuppliers.BackColor = System.Drawing.Color.White;
             this.panelChartSuppliers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChartSuppliers.Location = new System.Drawing.Point(920, 15);
             this.panelChartSuppliers.Name = "panelChartSuppliers";
-            this.panelChartSuppliers.Size = new System.Drawing.Size(280, 184);
-            this.panelChartSuppliers.TabIndex = 10;
             this.panelChartSuppliers.Paint += new System.Windows.Forms.PaintEventHandler(this.panelChartSuppliers_Paint);
             // 
             // lblChartSupplierTitle
             // 
-            this.lblChartSupplierTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblChartSupplierTitle.AutoSize = true;
-            this.lblChartSupplierTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.lblChartSupplierTitle.Location = new System.Drawing.Point(943, -2);
+            resources.ApplyResources(this.lblChartSupplierTitle, "lblChartSupplierTitle");
             this.lblChartSupplierTitle.Name = "lblChartSupplierTitle";
-            this.lblChartSupplierTitle.Size = new System.Drawing.Size(247, 20);
-            this.lblChartSupplierTitle.TabIndex = 11;
-            this.lblChartSupplierTitle.Text = "Top 5 Suppliers by Inventory Value";
             // 
             // panelFilters
             // 
@@ -469,168 +355,118 @@ namespace pos.Inventory
             this.panelFilters.Controls.Add(this.btnSnapshot);
             this.panelFilters.Controls.Add(this.btnExport);
             this.panelFilters.Controls.Add(this.progressBar);
-            this.panelFilters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelFilters.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panelFilters, "panelFilters");
             this.panelFilters.Name = "panelFilters";
-            this.panelFilters.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
-            this.panelFilters.Size = new System.Drawing.Size(1212, 52);
-            this.panelFilters.TabIndex = 2;
             // 
             // lblAsOfDate
             // 
-            this.lblAsOfDate.AutoSize = true;
-            this.lblAsOfDate.Location = new System.Drawing.Point(6, 16);
+            resources.ApplyResources(this.lblAsOfDate, "lblAsOfDate");
             this.lblAsOfDate.Name = "lblAsOfDate";
-            this.lblAsOfDate.Size = new System.Drawing.Size(76, 17);
-            this.lblAsOfDate.TabIndex = 0;
-            this.lblAsOfDate.Text = "As of Date:";
             // 
             // dtpAsOfDate
             // 
             this.dtpAsOfDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpAsOfDate.Location = new System.Drawing.Point(78, 12);
+            resources.ApplyResources(this.dtpAsOfDate, "dtpAsOfDate");
             this.dtpAsOfDate.Name = "dtpAsOfDate";
-            this.dtpAsOfDate.Size = new System.Drawing.Size(110, 24);
-            this.dtpAsOfDate.TabIndex = 1;
             // 
             // lblCategory
             // 
-            this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(190, 16);
+            resources.ApplyResources(this.lblCategory, "lblCategory");
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(70, 17);
-            this.lblCategory.TabIndex = 2;
-            this.lblCategory.Text = "Category:";
             // 
             // cmbCategory
             // 
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCategory.Location = new System.Drawing.Point(252, 12);
+            resources.ApplyResources(this.cmbCategory, "cmbCategory");
             this.cmbCategory.Name = "cmbCategory";
-            this.cmbCategory.Size = new System.Drawing.Size(160, 24);
-            this.cmbCategory.TabIndex = 3;
             // 
             // lblBrand
             // 
-            this.lblBrand.AutoSize = true;
-            this.lblBrand.Location = new System.Drawing.Point(418, 16);
+            resources.ApplyResources(this.lblBrand, "lblBrand");
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(49, 17);
-            this.lblBrand.TabIndex = 4;
-            this.lblBrand.Text = "Brand:";
             // 
             // cmbBrand
             // 
             this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBrand.Location = new System.Drawing.Point(463, 12);
+            resources.ApplyResources(this.cmbBrand, "cmbBrand");
             this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(110, 24);
-            this.cmbBrand.TabIndex = 5;
             // 
             // lblSupplier
             // 
-            this.lblSupplier.AutoSize = true;
-            this.lblSupplier.Location = new System.Drawing.Point(579, 15);
+            resources.ApplyResources(this.lblSupplier, "lblSupplier");
             this.lblSupplier.Name = "lblSupplier";
-            this.lblSupplier.Size = new System.Drawing.Size(61, 17);
-            this.lblSupplier.TabIndex = 6;
-            this.lblSupplier.Text = "Supplier:";
             // 
             // cmbSupplier
             // 
             this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSupplier.Location = new System.Drawing.Point(639, 12);
+            resources.ApplyResources(this.cmbSupplier, "cmbSupplier");
             this.cmbSupplier.Name = "cmbSupplier";
-            this.cmbSupplier.Size = new System.Drawing.Size(120, 24);
-            this.cmbSupplier.TabIndex = 7;
             // 
             // lblLocation
             // 
-            this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(765, 15);
+            resources.ApplyResources(this.lblLocation, "lblLocation");
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(65, 17);
-            this.lblLocation.TabIndex = 8;
-            this.lblLocation.Text = "Location:";
             // 
             // cmbLocation
             // 
             this.cmbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbLocation.Location = new System.Drawing.Point(830, 12);
+            resources.ApplyResources(this.cmbLocation, "cmbLocation");
             this.cmbLocation.Name = "cmbLocation";
-            this.cmbLocation.Size = new System.Drawing.Size(120, 24);
-            this.cmbLocation.TabIndex = 9;
+            // 
+            // chkShowNegativeStock
+            // 
+            resources.ApplyResources(this.chkShowNegativeStock, "chkShowNegativeStock");
+            this.chkShowNegativeStock.Name = "chkShowNegativeStock";
+            this.chkShowNegativeStock.CheckedChanged += new System.EventHandler(this.chkShowNegativeStock_CheckedChanged);
             // 
             // chkShowZero
             // 
-            this.chkShowZero.AutoSize = true;
-            this.chkShowZero.Location = new System.Drawing.Point(954, 3);
+            resources.ApplyResources(this.chkShowZero, "chkShowZero");
             this.chkShowZero.Name = "chkShowZero";
-            this.chkShowZero.Size = new System.Drawing.Size(135, 21);
-            this.chkShowZero.TabIndex = 10;
-            this.chkShowZero.Text = "Show Zero Stock";
             this.chkShowZero.CheckedChanged += new System.EventHandler(this.chkShowZero_CheckedChanged);
             // 
             // btnCalculate
             // 
-            this.btnCalculate.Location = new System.Drawing.Point(1110, 10);
+            resources.ApplyResources(this.btnCalculate, "btnCalculate");
             this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(149, 30);
-            this.btnCalculate.TabIndex = 11;
-            this.btnCalculate.Text = "▶ Calculate Valuation";
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
             // btnSnapshot
             // 
-            this.btnSnapshot.Location = new System.Drawing.Point(1269, 10);
+            resources.ApplyResources(this.btnSnapshot, "btnSnapshot");
             this.btnSnapshot.Name = "btnSnapshot";
-            this.btnSnapshot.Size = new System.Drawing.Size(110, 30);
-            this.btnSnapshot.TabIndex = 12;
-            this.btnSnapshot.Text = "📷 Snapshot";
             this.btnSnapshot.Click += new System.EventHandler(this.btnSnapshot_Click);
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(1389, 10);
+            resources.ApplyResources(this.btnExport, "btnExport");
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(80, 30);
-            this.btnExport.TabIndex = 13;
-            this.btnExport.Text = "Export";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(10, 42);
+            resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(400, 6);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar.TabIndex = 14;
-            this.progressBar.Visible = false;
             // 
             // tabCogs
             // 
             this.tabCogs.Controls.Add(this.panelCogsBody);
             this.tabCogs.Controls.Add(this.panelCogsTotals);
             this.tabCogs.Controls.Add(this.panelCogsFilters);
-            this.tabCogs.Location = new System.Drawing.Point(4, 25);
+            resources.ApplyResources(this.tabCogs, "tabCogs");
             this.tabCogs.Name = "tabCogs";
-            this.tabCogs.Size = new System.Drawing.Size(1212, 697);
-            this.tabCogs.TabIndex = 1;
-            this.tabCogs.Text = "  COGS Calculation  ";
             // 
             // panelCogsBody
             // 
             this.panelCogsBody.Controls.Add(this.gridCogs);
-            this.panelCogsBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCogsBody.Location = new System.Drawing.Point(0, 52);
+            resources.ApplyResources(this.panelCogsBody, "panelCogsBody");
             this.panelCogsBody.Name = "panelCogsBody";
-            this.panelCogsBody.Size = new System.Drawing.Size(1212, 585);
-            this.panelCogsBody.TabIndex = 0;
             // 
             // gridCogs
             // 
             this.gridCogs.AllowUserToAddRows = false;
-            this.gridCogs.ColumnHeadersHeight = 29;
+            resources.ApplyResources(this.gridCogs, "gridCogs");
             this.gridCogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCCode,
             this.colCName,
@@ -641,100 +477,77 @@ namespace pos.Inventory
             this.colSalesVal,
             this.colGrossMargin,
             this.colVariance});
-            this.gridCogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridCogs.Location = new System.Drawing.Point(0, 0);
             this.gridCogs.Name = "gridCogs";
             this.gridCogs.ReadOnly = true;
             this.gridCogs.RowHeadersVisible = false;
-            this.gridCogs.RowHeadersWidth = 51;
             this.gridCogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridCogs.Size = new System.Drawing.Size(1212, 585);
-            this.gridCogs.TabIndex = 0;
             this.gridCogs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridCogs_CellFormatting);
             // 
             // colCCode
             // 
-            this.colCCode.HeaderText = "Code";
-            this.colCCode.MinimumWidth = 6;
+            resources.ApplyResources(this.colCCode, "colCCode");
             this.colCCode.Name = "colCCode";
             this.colCCode.ReadOnly = true;
-            this.colCCode.Width = 90;
             // 
             // colCName
             // 
-            this.colCName.HeaderText = "Product Name";
-            this.colCName.MinimumWidth = 6;
+            resources.ApplyResources(this.colCName, "colCName");
             this.colCName.Name = "colCName";
             this.colCName.ReadOnly = true;
-            this.colCName.Width = 200;
             // 
             // colCCat
             // 
-            this.colCCat.HeaderText = "Category";
-            this.colCCat.MinimumWidth = 6;
+            resources.ApplyResources(this.colCCat, "colCCat");
             this.colCCat.Name = "colCCat";
             this.colCCat.ReadOnly = true;
-            this.colCCat.Width = 125;
             // 
             // colSoldQty
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colSoldQty.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colSoldQty.HeaderText = "Units Sold";
-            this.colSoldQty.MinimumWidth = 6;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colSoldQty.DefaultCellStyle = dataGridViewCellStyle39;
+            resources.ApplyResources(this.colSoldQty, "colSoldQty");
             this.colSoldQty.Name = "colSoldQty";
             this.colSoldQty.ReadOnly = true;
-            this.colSoldQty.Width = 90;
             // 
             // colCostPerUnit
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colCostPerUnit.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colCostPerUnit.HeaderText = "Cost/Unit";
-            this.colCostPerUnit.MinimumWidth = 6;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colCostPerUnit.DefaultCellStyle = dataGridViewCellStyle40;
+            resources.ApplyResources(this.colCostPerUnit, "colCostPerUnit");
             this.colCostPerUnit.Name = "colCostPerUnit";
             this.colCostPerUnit.ReadOnly = true;
-            this.colCostPerUnit.Width = 125;
             // 
             // colTotalCogs
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colTotalCogs.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colTotalCogs.HeaderText = "Total COGS";
-            this.colTotalCogs.MinimumWidth = 6;
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colTotalCogs.DefaultCellStyle = dataGridViewCellStyle41;
+            resources.ApplyResources(this.colTotalCogs, "colTotalCogs");
             this.colTotalCogs.Name = "colTotalCogs";
             this.colTotalCogs.ReadOnly = true;
-            this.colTotalCogs.Width = 120;
             // 
             // colSalesVal
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colSalesVal.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colSalesVal.HeaderText = "Sales Value";
-            this.colSalesVal.MinimumWidth = 6;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colSalesVal.DefaultCellStyle = dataGridViewCellStyle42;
+            resources.ApplyResources(this.colSalesVal, "colSalesVal");
             this.colSalesVal.Name = "colSalesVal";
             this.colSalesVal.ReadOnly = true;
-            this.colSalesVal.Width = 120;
             // 
             // colGrossMargin
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colGrossMargin.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colGrossMargin.HeaderText = "Gross Margin";
-            this.colGrossMargin.MinimumWidth = 6;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colGrossMargin.DefaultCellStyle = dataGridViewCellStyle43;
+            resources.ApplyResources(this.colGrossMargin, "colGrossMargin");
             this.colGrossMargin.Name = "colGrossMargin";
             this.colGrossMargin.ReadOnly = true;
-            this.colGrossMargin.Width = 110;
             // 
             // colVariance
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colVariance.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colVariance.HeaderText = "Recon. Variance";
-            this.colVariance.MinimumWidth = 6;
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colVariance.DefaultCellStyle = dataGridViewCellStyle44;
+            resources.ApplyResources(this.colVariance, "colVariance");
             this.colVariance.Name = "colVariance";
             this.colVariance.ReadOnly = true;
-            this.colVariance.Width = 120;
             // 
             // panelCogsTotals
             // 
@@ -746,71 +559,41 @@ namespace pos.Inventory
             this.panelCogsTotals.Controls.Add(this.lblTotalSalesVal);
             this.panelCogsTotals.Controls.Add(this.lblGrossMargin);
             this.panelCogsTotals.Controls.Add(this.lblGrossMarginVal);
-            this.panelCogsTotals.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelCogsTotals.Location = new System.Drawing.Point(0, 637);
+            resources.ApplyResources(this.panelCogsTotals, "panelCogsTotals");
             this.panelCogsTotals.Name = "panelCogsTotals";
-            this.panelCogsTotals.Size = new System.Drawing.Size(1212, 60);
-            this.panelCogsTotals.TabIndex = 1;
             // 
             // lblTotalCogs
             // 
-            this.lblTotalCogs.AutoSize = true;
-            this.lblTotalCogs.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.lblTotalCogs, "lblTotalCogs");
             this.lblTotalCogs.Name = "lblTotalCogs";
-            this.lblTotalCogs.Size = new System.Drawing.Size(124, 17);
-            this.lblTotalCogs.TabIndex = 0;
-            this.lblTotalCogs.Text = "Grand Total COGS:";
             // 
             // lblTotalCogsVal
             // 
-            this.lblTotalCogsVal.AutoSize = true;
-            this.lblTotalCogsVal.Font = new System.Drawing.Font("Segoe UI Semibold", 13F);
+            resources.ApplyResources(this.lblTotalCogsVal, "lblTotalCogsVal");
             this.lblTotalCogsVal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(52)))), ((int)(((byte)(56)))));
-            this.lblTotalCogsVal.Location = new System.Drawing.Point(140, 8);
             this.lblTotalCogsVal.Name = "lblTotalCogsVal";
-            this.lblTotalCogsVal.Size = new System.Drawing.Size(54, 30);
-            this.lblTotalCogsVal.TabIndex = 1;
-            this.lblTotalCogsVal.Text = "0.00";
             // 
             // lblTotalSales
             // 
-            this.lblTotalSales.AutoSize = true;
-            this.lblTotalSales.Location = new System.Drawing.Point(340, 12);
+            resources.ApplyResources(this.lblTotalSales, "lblTotalSales");
             this.lblTotalSales.Name = "lblTotalSales";
-            this.lblTotalSales.Size = new System.Drawing.Size(135, 17);
-            this.lblTotalSales.TabIndex = 2;
-            this.lblTotalSales.Text = "Total Sales Revenue:";
             // 
             // lblTotalSalesVal
             // 
-            this.lblTotalSalesVal.AutoSize = true;
-            this.lblTotalSalesVal.Font = new System.Drawing.Font("Segoe UI Semibold", 13F);
+            resources.ApplyResources(this.lblTotalSalesVal, "lblTotalSalesVal");
             this.lblTotalSalesVal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(124)))), ((int)(((byte)(16)))));
-            this.lblTotalSalesVal.Location = new System.Drawing.Point(480, 8);
             this.lblTotalSalesVal.Name = "lblTotalSalesVal";
-            this.lblTotalSalesVal.Size = new System.Drawing.Size(54, 30);
-            this.lblTotalSalesVal.TabIndex = 3;
-            this.lblTotalSalesVal.Text = "0.00";
             // 
             // lblGrossMargin
             // 
-            this.lblGrossMargin.AutoSize = true;
-            this.lblGrossMargin.Location = new System.Drawing.Point(680, 12);
+            resources.ApplyResources(this.lblGrossMargin, "lblGrossMargin");
             this.lblGrossMargin.Name = "lblGrossMargin";
-            this.lblGrossMargin.Size = new System.Drawing.Size(91, 17);
-            this.lblGrossMargin.TabIndex = 4;
-            this.lblGrossMargin.Text = "Gross Margin:";
             // 
             // lblGrossMarginVal
             // 
-            this.lblGrossMarginVal.AutoSize = true;
-            this.lblGrossMarginVal.Font = new System.Drawing.Font("Segoe UI Semibold", 13F);
+            resources.ApplyResources(this.lblGrossMarginVal, "lblGrossMarginVal");
             this.lblGrossMarginVal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(212)))));
-            this.lblGrossMarginVal.Location = new System.Drawing.Point(788, 8);
             this.lblGrossMarginVal.Name = "lblGrossMarginVal";
-            this.lblGrossMarginVal.Size = new System.Drawing.Size(104, 30);
-            this.lblGrossMarginVal.TabIndex = 5;
-            this.lblGrossMarginVal.Text = "0.00 (0%)";
             // 
             // panelCogsFilters
             // 
@@ -822,85 +605,52 @@ namespace pos.Inventory
             this.panelCogsFilters.Controls.Add(this.dtpToDate);
             this.panelCogsFilters.Controls.Add(this.btnCalcCogs);
             this.panelCogsFilters.Controls.Add(this.btnPostCogs);
-            this.panelCogsFilters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelCogsFilters.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panelCogsFilters, "panelCogsFilters");
             this.panelCogsFilters.Name = "panelCogsFilters";
-            this.panelCogsFilters.Size = new System.Drawing.Size(1212, 52);
-            this.panelCogsFilters.TabIndex = 2;
             // 
             // lblFromDate
             // 
-            this.lblFromDate.AutoSize = true;
-            this.lblFromDate.Location = new System.Drawing.Point(10, 16);
+            resources.ApplyResources(this.lblFromDate, "lblFromDate");
             this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(45, 17);
-            this.lblFromDate.TabIndex = 0;
-            this.lblFromDate.Text = "From:";
             // 
             // dtpFromDate
             // 
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(48, 12);
+            resources.ApplyResources(this.dtpFromDate, "dtpFromDate");
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(110, 24);
-            this.dtpFromDate.TabIndex = 1;
             this.dtpFromDate.Value = new System.DateTime(2026, 8, 1, 0, 0, 0, 0);
             // 
             // lblToDate
             // 
-            this.lblToDate.AutoSize = true;
-            this.lblToDate.Location = new System.Drawing.Point(170, 16);
+            resources.ApplyResources(this.lblToDate, "lblToDate");
             this.lblToDate.Name = "lblToDate";
-            this.lblToDate.Size = new System.Drawing.Size(29, 17);
-            this.lblToDate.TabIndex = 2;
-            this.lblToDate.Text = "To:";
             // 
             // dtpToDate
             // 
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(192, 12);
+            resources.ApplyResources(this.dtpToDate, "dtpToDate");
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(110, 24);
-            this.dtpToDate.TabIndex = 3;
             // 
             // btnCalcCogs
             // 
-            this.btnCalcCogs.Location = new System.Drawing.Point(316, 10);
+            resources.ApplyResources(this.btnCalcCogs, "btnCalcCogs");
             this.btnCalcCogs.Name = "btnCalcCogs";
-            this.btnCalcCogs.Size = new System.Drawing.Size(130, 30);
-            this.btnCalcCogs.TabIndex = 4;
-            this.btnCalcCogs.Text = "▶ Calculate COGS";
             this.btnCalcCogs.Click += new System.EventHandler(this.btnCalcCogs_Click);
             // 
             // btnPostCogs
             // 
-            this.btnPostCogs.Enabled = false;
-            this.btnPostCogs.Location = new System.Drawing.Point(458, 10);
+            resources.ApplyResources(this.btnPostCogs, "btnPostCogs");
             this.btnPostCogs.Name = "btnPostCogs";
-            this.btnPostCogs.Size = new System.Drawing.Size(130, 30);
-            this.btnPostCogs.TabIndex = 5;
-            this.btnPostCogs.Text = "Post COGS Entry";
             this.btnPostCogs.Click += new System.EventHandler(this.btnPostCogs_Click);
-            // 
-            // chkShowNegativeStock
-            // 
-            this.chkShowNegativeStock.AutoSize = true;
-            this.chkShowNegativeStock.Location = new System.Drawing.Point(953, 24);
-            this.chkShowNegativeStock.Name = "chkShowNegativeStock";
-            this.chkShowNegativeStock.Size = new System.Drawing.Size(160, 21);
-            this.chkShowNegativeStock.TabIndex = 10;
-            this.chkShowNegativeStock.Text = "Show Negative Stock";
-            this.chkShowNegativeStock.CheckedChanged += new System.EventHandler(this.chkShowNegativeStock_CheckedChanged);
             // 
             // frm_inventory_valuation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1220, 776);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.panelHeader);
             this.Name = "frm_inventory_valuation";
-            this.Text = "Inventory Valuation & COGS";
+            this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_inventory_valuation_Load);
             this.panelHeader.ResumeLayout(false);

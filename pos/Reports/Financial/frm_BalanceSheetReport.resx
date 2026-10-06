@@ -117,4 +117,673 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1384, 792</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tvNotes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;dtpComparisonDate.Name" xml:space="preserve">
+    <value>dtpComparisonDate</value>
+  </data>
+  <data name="&gt;&gt;lblAsOfDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;lblDetailLevel.Name" xml:space="preserve">
+    <value>lblDetailLevel</value>
+  </data>
+  <data name="colLiabComparison.HeaderText" xml:space="preserve">
+    <value>Comparison</value>
+  </data>
+  <data name="&gt;&gt;colAssetsItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnFindDiscrepancy.Parent" xml:space="preserve">
+    <value>pnlStatus</value>
+  </data>
+  <data name="grpNotes.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="&gt;&gt;tvNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkShowComparison.Text" xml:space="preserve">
+    <value>Show comparison</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dtpAsOfDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnFindDiscrepancy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 32</value>
+  </data>
+  <data name="&gt;&gt;lblBalanceStatus.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpLiabilitiesEquity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;grpNotes.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblBalanceStatus.Parent" xml:space="preserve">
+    <value>pnlStatus</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="dgvLiabilitiesEquity.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpNotes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="lblAsOfDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 16</value>
+  </data>
+  <data name="splitBody.SplitterDistance" type="System.Int32, mscorlib">
+    <value>691</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Name" xml:space="preserve">
+    <value>splitBody</value>
+  </data>
+  <data name="&gt;&gt;lblComparisonDate.Name" xml:space="preserve">
+    <value>lblComparisonDate</value>
+  </data>
+  <data name="&gt;&gt;colLiabComparison.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvLiabilitiesEquity.Parent" xml:space="preserve">
+    <value>grpLiabilitiesEquity</value>
+  </data>
+  <data name="lblBalanceStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="btnGenerate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1267, 11</value>
+  </data>
+  <data name="pnlStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1384, 48</value>
+  </data>
+  <data name="colLiabItem.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblAsOfDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="grpNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpLiabilitiesEquity.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="colLiabComparison.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="btnGenerate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 27</value>
+  </data>
+  <data name="grpLiabilitiesEquity.Text" xml:space="preserve">
+    <value>Liabilities &amp; Equity</value>
+  </data>
+  <data name="&gt;&gt;colLiabComparison.Name" xml:space="preserve">
+    <value>colLiabComparison</value>
+  </data>
+  <data name="&gt;&gt;grpLiabilitiesEquity.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;colAssetsAmount.Name" xml:space="preserve">
+    <value>colAssetsAmount</value>
+  </data>
+  <data name="&gt;&gt;btnFindDiscrepancy.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblAsOfDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chkShowComparison.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnGenerate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="grpLiabilitiesEquity.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_BalanceSheetReport</value>
+  </data>
+  <data name="splitBody.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="dtpAsOfDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 12</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel1.Name" xml:space="preserve">
+    <value>splitBody.Panel1</value>
+  </data>
+  <data name="grpNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 641</value>
+  </data>
+  <data name="lblBalanceStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 8</value>
+  </data>
+  <data name="lblAsOfDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="dgvAssets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 27</value>
+  </data>
+  <data name="chkShowComparison.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;splitBody.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmbDetailLevel.Name" xml:space="preserve">
+    <value>cmbDetailLevel</value>
+  </data>
+  <data name="grpNotes.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="&gt;&gt;colLiabAmount.Name" xml:space="preserve">
+    <value>colLiabAmount</value>
+  </data>
+  <data name="btnFindDiscrepancy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1245, 8</value>
+  </data>
+  <data name="&gt;&gt;btnGenerate.Name" xml:space="preserve">
+    <value>btnGenerate</value>
+  </data>
+  <data name="dgvAssets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>671, 488</value>
+  </data>
+  <data name="grpLiabilitiesEquity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="btnFindDiscrepancy.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpNotes.Name" xml:space="preserve">
+    <value>grpNotes</value>
+  </data>
+  <data name="lblBalanceStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAsOfDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpComparisonDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="grpNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1384, 151</value>
+  </data>
+  <data name="&gt;&gt;lblDetailLevel.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="dtpAsOfDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 24</value>
+  </data>
+  <data name="&gt;&gt;btnGenerate.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblAsOfDate.Text" xml:space="preserve">
+    <value>As of Date:</value>
+  </data>
+  <data name="&gt;&gt;colLiabItem.Name" xml:space="preserve">
+    <value>colLiabItem</value>
+  </data>
+  <data name="&gt;&gt;pnlStatus.Name" xml:space="preserve">
+    <value>pnlStatus</value>
+  </data>
+  <data name="&gt;&gt;grpAssets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pnlFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1384, 68</value>
+  </data>
+  <data name="splitBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1384, 525</value>
+  </data>
+  <data name="tvNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="colLiabAmount.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="grpAssets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblBalanceStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="chkShowComparison.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colAssetsItem.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnFindDiscrepancy.Name" xml:space="preserve">
+    <value>btnFindDiscrepancy</value>
+  </data>
+  <data name="grpAssets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>691, 525</value>
+  </data>
+  <data name="grpAssets.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dgvLiabilitiesEquity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 27</value>
+  </data>
+  <data name="colAssetsAmount.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="lblBalanceStatus.Text" xml:space="preserve">
+    <value>Assets = Liabilities + Equity ✓</value>
+  </data>
+  <data name="&gt;&gt;grpLiabilitiesEquity.Parent" xml:space="preserve">
+    <value>splitBody.Panel2</value>
+  </data>
+  <data name="lblComparisonDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 17</value>
+  </data>
+  <data name="dgvLiabilitiesEquity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 488</value>
+  </data>
+  <data name="&gt;&gt;dtpComparisonDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tvNotes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dtpAsOfDate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dgvAssets.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dtpComparisonDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="grpAssets.Text" xml:space="preserve">
+    <value>Assets</value>
+  </data>
+  <data name="pnlStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 68</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
+  </data>
+  <data name="pnlFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlStatus.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 8, 12, 8</value>
+  </data>
+  <data name="&gt;&gt;grpLiabilitiesEquity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dgvAssets.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="pnlStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tvNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1364, 114</value>
+  </data>
+  <data name="&gt;&gt;btnFindDiscrepancy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAsOfDate.Name" xml:space="preserve">
+    <value>lblAsOfDate</value>
+  </data>
+  <data name="colAssetsNotes.HeaderText" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="&gt;&gt;grpNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblDetailLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;colLiabItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblComparisonDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlStatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dgvLiabilitiesEquity.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="colLiabItem.HeaderText" xml:space="preserve">
+    <value>Line Item</value>
+  </data>
+  <data name="&gt;&gt;dgvAssets.Parent" xml:space="preserve">
+    <value>grpAssets</value>
+  </data>
+  <data name="&gt;&gt;colLiabAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvAssets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="splitBody.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 116</value>
+  </data>
+  <data name="&gt;&gt;grpAssets.Parent" xml:space="preserve">
+    <value>splitBody.Panel1</value>
+  </data>
+  <data name="colAssetsAmount.HeaderText" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="grpLiabilitiesEquity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>689, 525</value>
+  </data>
+  <data name="&gt;&gt;tvNotes.Parent" xml:space="preserve">
+    <value>grpNotes</value>
+  </data>
+  <data name="dtpComparisonDate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblDetailLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel2.Parent" xml:space="preserve">
+    <value>splitBody</value>
+  </data>
+  <data name="&gt;&gt;dgvAssets.Name" xml:space="preserve">
+    <value>dgvAssets</value>
+  </data>
+  <data name="&gt;&gt;dtpAsOfDate.Name" xml:space="preserve">
+    <value>dtpAsOfDate</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblComparisonDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>389, 16</value>
+  </data>
+  <data name="&gt;&gt;tvNotes.Name" xml:space="preserve">
+    <value>tvNotes</value>
+  </data>
+  <data name="&gt;&gt;lblBalanceStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDetailLevel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dgvAssets.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;colAssetsNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblDetailLevel.Text" xml:space="preserve">
+    <value>Detail level:</value>
+  </data>
+  <data name="lblDetailLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>705, 16</value>
+  </data>
+  <data name="lblComparisonDate.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblAsOfDate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblComparisonDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpNotes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colAssetsComparison.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblComparisonDate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cmbDetailLevel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="colLiabNotes.HeaderText" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpAsOfDate.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="lblComparisonDate.Text" xml:space="preserve">
+    <value>Comparison date:</value>
+  </data>
+  <data name="&gt;&gt;chkShowComparison.Name" xml:space="preserve">
+    <value>chkShowComparison</value>
+  </data>
+  <data name="&gt;&gt;colAssetsItem.Name" xml:space="preserve">
+    <value>colAssetsItem</value>
+  </data>
+  <data name="colAssetsItem.HeaderText" xml:space="preserve">
+    <value>Line Item</value>
+  </data>
+  <data name="btnGenerate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;pnlStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tvNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 27</value>
+  </data>
+  <data name="dgvLiabilitiesEquity.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="colAssetsNotes.Width" type="System.Int32, mscorlib">
+    <value>180</value>
+  </data>
+  <data name="grpAssets.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="lblBalanceStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;colAssetsComparison.Name" xml:space="preserve">
+    <value>colAssetsComparison</value>
+  </data>
+  <data name="colLiabAmount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="colLiabAmount.HeaderText" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="pnlFilters.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.Name" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="lblBalanceStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1233, 32</value>
+  </data>
+  <data name="btnGenerate.Text" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="dgvAssets.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmbDetailLevel.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="colAssetsAmount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpAssets.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnFindDiscrepancy.Text" xml:space="preserve">
+    <value>Find Discrepancy</value>
+  </data>
+  <data name="colAssetsNotes.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblBalanceStatus.Name" xml:space="preserve">
+    <value>lblBalanceStatus</value>
+  </data>
+  <data name="&gt;&gt;pnlFilters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnGenerate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkShowComparison.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 21</value>
+  </data>
+  <data name="colAssetsComparison.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;colAssetsNotes.Name" xml:space="preserve">
+    <value>colAssetsNotes</value>
+  </data>
+  <data name="cmbDetailLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblComparisonDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkShowComparison.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 14</value>
+  </data>
+  <data name="&gt;&gt;dgvLiabilitiesEquity.Name" xml:space="preserve">
+    <value>dgvLiabilitiesEquity</value>
+  </data>
+  <data name="dgvLiabilitiesEquity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="btnGenerate.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;colLiabNotes.Name" xml:space="preserve">
+    <value>colLiabNotes</value>
+  </data>
+  <data name="&gt;&gt;chkShowComparison.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlStatus.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;grpLiabilitiesEquity.Name" xml:space="preserve">
+    <value>grpLiabilitiesEquity</value>
+  </data>
+  <data name="&gt;&gt;colAssetsAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmbDetailLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>784, 12</value>
+  </data>
+  <data name="colAssetsComparison.HeaderText" xml:space="preserve">
+    <value>Comparison</value>
+  </data>
+  <data name="dtpComparisonDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 24</value>
+  </data>
+  <data name="lblDetailLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="colLiabNotes.Width" type="System.Int32, mscorlib">
+    <value>180</value>
+  </data>
+  <data name="pnlFilters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 10, 12, 10</value>
+  </data>
+  <data name="lblDetailLevel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colAssetsComparison.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="btnFindDiscrepancy.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="pnlFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="pnlStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="colLiabComparison.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="splitBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;grpAssets.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dgvLiabilitiesEquity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel2.Name" xml:space="preserve">
+    <value>splitBody.Panel2</value>
+  </data>
+  <data name="&gt;&gt;cmbDetailLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitBody.Panel1.Parent" xml:space="preserve">
+    <value>splitBody</value>
+  </data>
+  <data name="&gt;&gt;chkShowComparison.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
+  </data>
+  <data name="&gt;&gt;colLiabNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAssets.Name" xml:space="preserve">
+    <value>grpAssets</value>
+  </data>
+  <data name="dtpComparisonDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>513, 12</value>
+  </data>
+  <data name="colLiabNotes.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cmbDetailLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 24</value>
+  </data>
+  <data name="&gt;&gt;dtpAsOfDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

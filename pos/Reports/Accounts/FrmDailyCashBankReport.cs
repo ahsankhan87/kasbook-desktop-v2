@@ -45,7 +45,7 @@ namespace pos.Reports.Accounts
         {
             try
             {
-                using (BusyScope.Show(this, "Initializing..."))
+                using (BusyScope.Show(this, UiMessages.T("Initializing...", "جاري التهيئة...")))
                 {
                     AppTheme.Apply(this);
                     InitializeForm();
@@ -54,7 +54,7 @@ namespace pos.Reports.Accounts
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error loading form", ex.Message);
+                UiMessages.ShowError(UiMessages.T("Error loading form", "خطأ في تحميل النموذج"), ex.Message);
             }
         }
 
@@ -119,7 +119,7 @@ namespace pos.Reports.Accounts
         {
             try
             {
-                using (BusyScope.Show(this, "Loading report..."))
+                using (BusyScope.Show(this, UiMessages.T("Loading report...", "جاري تحميل التقرير...")))
                 {
                     DateTime fromDate, toDate;
 
@@ -136,7 +136,7 @@ namespace pos.Reports.Accounts
 
                     if (fromDate > toDate)
                     {
-                        UiMessages.ShowWarning("Invalid Date Range", "From date cannot be after To date");
+                        UiMessages.ShowWarning(UiMessages.T("Invalid Date Range", "نطاق تاريخ غير صالح"), UiMessages.T("From date cannot be after To date", "لا يمكن أن يكون تاريخ البداية بعد تاريخ النهاية"));
                         return;
                     }
 
@@ -145,7 +145,7 @@ namespace pos.Reports.Accounts
 
                     if (_reportData == null || _reportData.Tables.Count == 0)
                     {
-                        UiMessages.ShowInfo("No Data", "No data found for the selected period");
+                        UiMessages.ShowInfo(UiMessages.T("No Data", "لا توجد بيانات"), UiMessages.T("No data found for the selected period", "لم يتم العثور على بيانات للفترة المحددة"));
                         dgvReport.DataSource = null;
                         return;
                     }
@@ -168,7 +168,7 @@ namespace pos.Reports.Accounts
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error loading report", ex.Message);
+                UiMessages.ShowError(UiMessages.T("Error loading report", "خطأ في تحميل التقرير"), ex.Message);
             }
         }
 
@@ -224,11 +224,11 @@ namespace pos.Reports.Accounts
             if (!_isConsolidatedView)
             {
                 if (dgvReport.Columns.Contains("account_code"))
-                    dgvReport.Columns["account_code"].HeaderText = "Account Code";
+                    dgvReport.Columns["account_code"].HeaderText = UiMessages.T("Account Code", "كود الحساب");
                 if (dgvReport.Columns.Contains("account_name"))
-                    dgvReport.Columns["account_name"].HeaderText = "Account Name";
+                    dgvReport.Columns["account_name"].HeaderText = UiMessages.T("Account Name", "اسم الحساب");
                 if (dgvReport.Columns.Contains("account_type"))
-                    dgvReport.Columns["account_type"].HeaderText = "Type";
+                    dgvReport.Columns["account_type"].HeaderText = UiMessages.T("Type", "النوع");
             }
 
             dgvReport.AutoResizeColumns();
@@ -236,7 +236,8 @@ namespace pos.Reports.Accounts
 
         private string FormatColumnHeader(string columnName)
         {
-            return columnName
+            // Use bilingual header translation
+            string header = columnName
                 .Replace("_", " ")
                 .Replace("cash ", "Cash ")
                 .Replace("bank ", "Bank ")
@@ -246,6 +247,37 @@ namespace pos.Reports.Accounts
                 .Replace("receipts", "Receipts")
                 .Replace("payments", "Payments")
                 .Replace("balance", "Balance");
+
+            // Map to bilingual headers
+            string[] parts = header.Split(new[] { " " }, StringSplitOptions.None);
+            string result = header;
+
+            if (header.Contains("Cash Opening Balance"))
+                result = UiMessages.T("Cash Opening Balance", "رصيد النقد الافتتاحي");
+            else if (header.Contains("Cash Receipts"))
+                result = UiMessages.T("Cash Receipts", "إيصالات النقد");
+            else if (header.Contains("Cash Payments"))
+                result = UiMessages.T("Cash Payments", "دفعات النقد");
+            else if (header.Contains("Cash Closing Balance"))
+                result = UiMessages.T("Cash Closing Balance", "رصيد النقد الختامي");
+            else if (header.Contains("Bank Opening Balance"))
+                result = UiMessages.T("Bank Opening Balance", "رصيد البنك الافتتاحي");
+            else if (header.Contains("Bank Receipts"))
+                result = UiMessages.T("Bank Receipts", "إيصالات البنك");
+            else if (header.Contains("Bank Payments"))
+                result = UiMessages.T("Bank Payments", "دفعات البنك");
+            else if (header.Contains("Bank Closing Balance"))
+                result = UiMessages.T("Bank Closing Balance", "رصيد البنك الختامي");
+            else if (header.Contains("Total Opening Balance"))
+                result = UiMessages.T("Total Opening Balance", "إجمالي الرصيد الافتتاحي");
+            else if (header.Contains("Total Receipts"))
+                result = UiMessages.T("Total Receipts", "إجمالي الإيصالات");
+            else if (header.Contains("Total Payments"))
+                result = UiMessages.T("Total Payments", "إجمالي الدفعات");
+            else if (header.Contains("Total Closing Balance"))
+                result = UiMessages.T("Total Closing Balance", "إجمالي الرصيد الختامي");
+
+            return result;
         }
 
         private void UpdateVariancePanel()
@@ -302,22 +334,22 @@ namespace pos.Reports.Accounts
             {
                 if (dgvReport.Rows.Count == 0)
                 {
-                    UiMessages.ShowWarning("No Data", "Please load data first");
+                    UiMessages.ShowWarning(UiMessages.T("No Data", "لا توجد بيانات"), UiMessages.T("Please load data first", "يرجى تحميل البيانات أولاً"));
                     return;
                 }
 
                 // TODO: Implement printing using DGVPrinterHelper
-                UiMessages.ShowInfo("Print", "Print functionality will be implemented");
+                UiMessages.ShowInfo(UiMessages.T("Print", "طباعة"), UiMessages.T("Print functionality will be implemented", "سيتم تنفيذ وظيفة الطباعة"));
 
                 // Log action
-                POS.DLL.Log.LogAction("Print Daily Cash/Bank Report", 
+                POS.DLL.Log.LogAction(UiMessages.T("Print Daily Cash/Bank Report", "طباعة تقرير النقد والبنك اليومي"),
                     $"Mode: {(_isSingleDayMode ? "Single Day" : "Range")}", 
                     UsersModal.logged_in_userid, 
                     UsersModal.logged_in_branch_id);
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Print Error", ex.Message);
+                UiMessages.ShowError(UiMessages.T("Print Error", "خطأ في الطباعة"), ex.Message);
             }
         }
 
@@ -327,7 +359,7 @@ namespace pos.Reports.Accounts
             {
                 if (dgvReport.Rows.Count == 0)
                 {
-                    UiMessages.ShowWarning("No Data", "Please load data first");
+                    UiMessages.ShowWarning(UiMessages.T("No Data", "لا توجد بيانات"), UiMessages.T("Please load data first", "يرجى تحميل البيانات أولاً"));
                     return;
                 }
 
