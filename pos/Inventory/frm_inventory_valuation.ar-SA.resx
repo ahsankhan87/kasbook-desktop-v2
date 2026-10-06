@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2219, 10</value>
+  </data>
+  <data name="btnSettings.Text" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="lblFormTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1329, 50</value>
+  </data>
+  <data name="lblFormTitle.Text" xml:space="preserve">
+    <value>تقرير تقييم المخزون</value>
+  </data>
+  <data name="panelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1329, 50</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabMain.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tabMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1329, 726</value>
+  </data>
+  <data name="tabValuation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 697</value>
+  </data>
+  <data name="tabValuation.Text" xml:space="preserve">
+    <value>التقييم</value>
+  </data>
+  <data name="panelValBody.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 74</value>
+  </data>
+  <data name="panelValBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 419</value>
+  </data>
+  <data name="gridValuation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 419</value>
+  </data>
+  <data name="colCode.HeaderText" xml:space="preserve">
+    <value>الرمز</value>
+  </data>
+  <data name="colName.HeaderText" xml:space="preserve">
+    <value>اسم المنتج</value>
+  </data>
+  <data name="colCategory.HeaderText" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="colQty.HeaderText" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="colUnitCost.HeaderText" xml:space="preserve">
+    <value>تكلفة الوحدة</value>
+  </data>
+  <data name="colTotalValue.HeaderText" xml:space="preserve">
+    <value>القيمة الإجمالية</value>
+  </data>
+  <data name="colLastPurchDate.HeaderText" xml:space="preserve">
+    <value>آخر شراء</value>
+  </data>
+  <data name="colLastPurchCost.HeaderText" xml:space="preserve">
+    <value>تكلفة الشراء</value>
+  </data>
+  <data name="colReorderLevel.HeaderText" xml:space="preserve">
+    <value>مستوى إعادة الطلب</value>
+  </data>
+  <data name="colStatus.HeaderText" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="panelSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 204</value>
+  </data>
+  <data name="lblTotalValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="lblTotalValue.Text" xml:space="preserve">
+    <value>الإجمالي:</value>
+  </data>
+  <data name="lblTotalSku.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 20</value>
+  </data>
+  <data name="lblTotalSku.Text" xml:space="preserve">
+    <value>إجمالي العناصر:</value>
+  </data>
+  <data name="lblTotalQty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 20</value>
+  </data>
+  <data name="lblTotalQty.Text" xml:space="preserve">
+    <value>الكمية الإجمالية:</value>
+  </data>
+  <data name="lblAvgCost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 20</value>
+  </data>
+  <data name="lblAvgCost.Text" xml:space="preserve">
+    <value>متوسط التكلفة:</value>
+  </data>
+  <data name="panelChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>737, 15</value>
+  </data>
+  <data name="panelChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 182</value>
+  </data>
+  <data name="lblChartTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>825, -1</value>
+  </data>
+  <data name="lblChartTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 20</value>
+  </data>
+  <data name="lblChartTitle.Text" xml:space="preserve">
+    <value>أفضل 10 عناصر حسب القيمة</value>
+  </data>
+  <data name="panelChartSuppliers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1027, 15</value>
+  </data>
+  <data name="panelChartSuppliers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 182</value>
+  </data>
+  <data name="lblChartSupplierTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1168, -2</value>
+  </data>
+  <data name="lblChartSupplierTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="lblChartSupplierTitle.Text" xml:space="preserve">
+    <value>التوزيع حسب المورد</value>
+  </data>
+  <data name="panelFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 74</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblAsOfDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblAsOfDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1212, 12</value>
+  </data>
+  <data name="lblAsOfDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 17</value>
+  </data>
+  <data name="lblAsOfDate.Text" xml:space="preserve">
+    <value>كما في التاريخ:</value>
+  </data>
+  <data name="dtpAsOfDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpAsOfDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1103, 8</value>
+  </data>
+  <data name="lblCategory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1050, 12</value>
+  </data>
+  <data name="lblCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 17</value>
+  </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>الفئة:</value>
+  </data>
+  <data name="cmbCategory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>891, 8</value>
+  </data>
+  <data name="lblBrand.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblBrand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>779, 12</value>
+  </data>
+  <data name="lblBrand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
+  </data>
+  <data name="lblBrand.Text" xml:space="preserve">
+    <value>العلامة التجارية:</value>
+  </data>
+  <data name="cmbBrand.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbBrand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>669, 8</value>
+  </data>
+  <data name="lblSupplier.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblSupplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>606, 12</value>
+  </data>
+  <data name="lblSupplier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="lblSupplier.Text" xml:space="preserve">
+    <value>المورد:</value>
+  </data>
+  <data name="cmbSupplier.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbSupplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>486, 8</value>
+  </data>
+  <data name="lblLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>425, 12</value>
+  </data>
+  <data name="lblLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="lblLocation.Text" xml:space="preserve">
+    <value>الموقع:</value>
+  </data>
+  <data name="cmbLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 8</value>
+  </data>
+  <data name="chkShowNegativeStock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 43</value>
+  </data>
+  <data name="chkShowNegativeStock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 21</value>
+  </data>
+  <data name="chkShowNegativeStock.Text" xml:space="preserve">
+    <value>إظهار المخزون السالب</value>
+  </data>
+  <data name="chkShowZero.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 43</value>
+  </data>
+  <data name="chkShowZero.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 21</value>
+  </data>
+  <data name="chkShowZero.Text" xml:space="preserve">
+    <value>إظهار المخزون الصفري</value>
+  </data>
+  <data name="btnCalculate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnCalculate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>154, 4</value>
+  </data>
+  <data name="btnCalculate.Text" xml:space="preserve">
+    <value>حساب</value>
+  </data>
+  <data name="btnSnapshot.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnSnapshot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-48, 4</value>
+  </data>
+  <data name="btnSnapshot.Text" xml:space="preserve">
+    <value>صورة فوتوغرافية</value>
+  </data>
+  <data name="btnExport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 4</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>891, 38</value>
+  </data>
+  <data name="tabCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 697</value>
+  </data>
+  <data name="tabCogs.Text" xml:space="preserve">
+    <value>تحليل تكلفة المبيعات</value>
+  </data>
+  <data name="panelCogsBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 585</value>
+  </data>
+  <data name="gridCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 585</value>
+  </data>
+  <data name="colCCode.HeaderText" xml:space="preserve">
+    <value>الرمز</value>
+  </data>
+  <data name="colCName.HeaderText" xml:space="preserve">
+    <value>اسم المنتج</value>
+  </data>
+  <data name="colCCat.HeaderText" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="colSoldQty.HeaderText" xml:space="preserve">
+    <value>الكمية المباعة</value>
+  </data>
+  <data name="colCostPerUnit.HeaderText" xml:space="preserve">
+    <value>التكلفة/الوحدة</value>
+  </data>
+  <data name="colTotalCogs.HeaderText" xml:space="preserve">
+    <value>إجمالي COGS</value>
+  </data>
+  <data name="colSalesVal.HeaderText" xml:space="preserve">
+    <value>قيمة المبيعات</value>
+  </data>
+  <data name="colGrossMargin.HeaderText" xml:space="preserve">
+    <value>إجمالي الهامش</value>
+  </data>
+  <data name="colVariance.HeaderText" xml:space="preserve">
+    <value>الفرق</value>
+  </data>
+  <data name="panelCogsTotals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 60</value>
+  </data>
+  <data name="lblTotalCogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 17</value>
+  </data>
+  <data name="lblTotalCogs.Text" xml:space="preserve">
+    <value>إجمالي COGS:</value>
+  </data>
+  <data name="lblTotalSales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="lblTotalSales.Text" xml:space="preserve">
+    <value>إجمالي المبيعات:</value>
+  </data>
+  <data name="lblGrossMargin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="lblGrossMargin.Text" xml:space="preserve">
+    <value>إجمالي الهامش:</value>
+  </data>
+  <data name="panelCogsFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1321, 52</value>
+  </data>
+  <data name="lblFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1242, 17</value>
+  </data>
+  <data name="lblFromDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
+  </data>
+  <data name="lblFromDate.Text" xml:space="preserve">
+    <value>من التاريخ:</value>
+  </data>
+  <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1126, 17</value>
+  </data>
+  <data name="lblToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1047, 17</value>
+  </data>
+  <data name="lblToDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="lblToDate.Text" xml:space="preserve">
+    <value>إلى التاريخ:</value>
+  </data>
+  <data name="dtpToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>917, 17</value>
+  </data>
+  <data name="btnCalcCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>748, 11</value>
+  </data>
+  <data name="btnCalcCogs.Text" xml:space="preserve">
+    <value>حساب COGS</value>
+  </data>
+  <data name="btnPostCogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>612, 10</value>
+  </data>
+  <data name="btnPostCogs.Text" xml:space="preserve">
+    <value>ترحيل</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1329, 776</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>تقييم المخزون</value>
+  </data>
+</root>
